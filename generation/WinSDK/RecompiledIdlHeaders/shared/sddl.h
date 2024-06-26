@@ -206,6 +206,8 @@ extern "C" {
 #define SDDL_PROTECTED_USERS                TEXT("AP")      // Members of this group are afforded additional protections against authentication security threats.
 #define SDDL_KEY_ADMINS                     TEXT("KA")      // Members of this group have full control over all key credential objects in the domain
 #define SDDL_ENTERPRISE_KEY_ADMINS          TEXT("EK")      // Members of this group have full control over all key credential objects in the forest
+#define SDDL_USER_MODE_HARDWARE_OPERATORS   TEXT("HO")      // Members of this group may operate hardware from user mode
+#define SDDL_OPENSSH_USERS                  TEXT("SH")      // Members of this group may connect to this computer using SSH
 
 //
 // Note !! While making the above changes check if ScepReplaceNewAcronymsInSDDL

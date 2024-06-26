@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_PHONE_PHONECONTRACT_VERSION)
@@ -353,7 +353,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICoreSelectionChangedEventArgs = _uuidof(ICoreSelectionChangedEventArgs);
+                    MIDL_CONST_ID IID& IID_ICoreSelectionChangedEventArgs = __uuidof(ICoreSelectionChangedEventArgs);
                 } /* Core */
             } /* UI */
         } /* Phone */
@@ -397,7 +397,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICoreTextChangedEventArgs = _uuidof(ICoreTextChangedEventArgs);
+                    MIDL_CONST_ID IID& IID_ICoreTextChangedEventArgs = __uuidof(ICoreTextChangedEventArgs);
                 } /* Core */
             } /* UI */
         } /* Phone */
@@ -442,7 +442,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICoreWindowKeyboardInput = _uuidof(ICoreWindowKeyboardInput);
+                    MIDL_CONST_ID IID& IID_ICoreWindowKeyboardInput = __uuidof(ICoreWindowKeyboardInput);
                 } /* Core */
             } /* UI */
         } /* Phone */
@@ -516,7 +516,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardInputBuffer = _uuidof(IKeyboardInputBuffer);
+                    MIDL_CONST_ID IID& IID_IKeyboardInputBuffer = __uuidof(IKeyboardInputBuffer);
                 } /* Core */
             } /* UI */
         } /* Phone */

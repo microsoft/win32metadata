@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SERVICES_TARGETEDCONTENT_TARGETEDCONTENTCONTRACT_VERSION)
@@ -1941,7 +1941,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentAction = _uuidof(ITargetedContentAction);
+                MIDL_CONST_ID IID& IID_ITargetedContentAction = __uuidof(ITargetedContentAction);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -1977,7 +1977,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentAvailabilityChangedEventArgs = _uuidof(ITargetedContentAvailabilityChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITargetedContentAvailabilityChangedEventArgs = __uuidof(ITargetedContentAvailabilityChangedEventArgs);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2016,7 +2016,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentChangedEventArgs = _uuidof(ITargetedContentChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITargetedContentChangedEventArgs = __uuidof(ITargetedContentChangedEventArgs);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2070,7 +2070,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentCollection = _uuidof(ITargetedContentCollection);
+                MIDL_CONST_ID IID& IID_ITargetedContentCollection = __uuidof(ITargetedContentCollection);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2119,7 +2119,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentContainer = _uuidof(ITargetedContentContainer);
+                MIDL_CONST_ID IID& IID_ITargetedContentContainer = __uuidof(ITargetedContentContainer);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2156,7 +2156,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentContainerStatics = _uuidof(ITargetedContentContainerStatics);
+                MIDL_CONST_ID IID& IID_ITargetedContentContainerStatics = __uuidof(ITargetedContentContainerStatics);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2198,7 +2198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentImage = _uuidof(ITargetedContentImage);
+                MIDL_CONST_ID IID& IID_ITargetedContentImage = __uuidof(ITargetedContentImage);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2249,7 +2249,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentItem = _uuidof(ITargetedContentItem);
+                MIDL_CONST_ID IID& IID_ITargetedContentItem = __uuidof(ITargetedContentItem);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2288,7 +2288,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentItemState = _uuidof(ITargetedContentItemState);
+                MIDL_CONST_ID IID& IID_ITargetedContentItemState = __uuidof(ITargetedContentItemState);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2333,7 +2333,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentObject = _uuidof(ITargetedContentObject);
+                MIDL_CONST_ID IID& IID_ITargetedContentObject = __uuidof(ITargetedContentObject);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2369,7 +2369,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentStateChangedEventArgs = _uuidof(ITargetedContentStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITargetedContentStateChangedEventArgs = __uuidof(ITargetedContentStateChangedEventArgs);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2429,7 +2429,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentSubscription = _uuidof(ITargetedContentSubscription);
+                MIDL_CONST_ID IID& IID_ITargetedContentSubscription = __uuidof(ITargetedContentSubscription);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2478,7 +2478,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Update(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentSubscriptionOptions = _uuidof(ITargetedContentSubscriptionOptions);
+                MIDL_CONST_ID IID& IID_ITargetedContentSubscriptionOptions = __uuidof(ITargetedContentSubscriptionOptions);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2519,7 +2519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentSubscriptionStatics = _uuidof(ITargetedContentSubscriptionStatics);
+                MIDL_CONST_ID IID& IID_ITargetedContentSubscriptionStatics = __uuidof(ITargetedContentSubscriptionStatics);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */
@@ -2600,7 +2600,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetedContentValue = _uuidof(ITargetedContentValue);
+                MIDL_CONST_ID IID& IID_ITargetedContentValue = __uuidof(ITargetedContentValue);
             } /* TargetedContent */
         } /* Services */
     } /* Windows */

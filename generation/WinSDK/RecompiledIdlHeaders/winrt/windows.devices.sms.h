@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2416,7 +2416,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDeviceStatusChangedEventHandler = _uuidof(ISmsDeviceStatusChangedEventHandler);
+                MIDL_CONST_ID IID& IID_ISmsDeviceStatusChangedEventHandler = __uuidof(ISmsDeviceStatusChangedEventHandler);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2456,7 +2456,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageReceivedEventHandler = _uuidof(ISmsMessageReceivedEventHandler);
+                MIDL_CONST_ID IID& IID_ISmsMessageReceivedEventHandler = __uuidof(ISmsMessageReceivedEventHandler);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2558,7 +2558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsAppMessage = _uuidof(ISmsAppMessage);
+                MIDL_CONST_ID IID& IID_ISmsAppMessage = __uuidof(ISmsAppMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2621,7 +2621,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsBinaryMessage = _uuidof(ISmsBinaryMessage);
+                MIDL_CONST_ID IID& IID_ISmsBinaryMessage = __uuidof(ISmsBinaryMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2687,7 +2687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsBroadcastMessage = _uuidof(ISmsBroadcastMessage);
+                MIDL_CONST_ID IID& IID_ISmsBroadcastMessage = __uuidof(ISmsBroadcastMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2785,7 +2785,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDevice = _uuidof(ISmsDevice);
+                MIDL_CONST_ID IID& IID_ISmsDevice = __uuidof(ISmsDevice);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2854,7 +2854,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDevice2 = _uuidof(ISmsDevice2);
+                MIDL_CONST_ID IID& IID_ISmsDevice2 = __uuidof(ISmsDevice2);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2901,7 +2901,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDevice2Statics = _uuidof(ISmsDevice2Statics);
+                MIDL_CONST_ID IID& IID_ISmsDevice2Statics = __uuidof(ISmsDevice2Statics);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -2971,7 +2971,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDeviceMessageStore = _uuidof(ISmsDeviceMessageStore);
+                MIDL_CONST_ID IID& IID_ISmsDeviceMessageStore = __uuidof(ISmsDeviceMessageStore);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3026,7 +3026,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDeviceStatics = _uuidof(ISmsDeviceStatics);
+                MIDL_CONST_ID IID& IID_ISmsDeviceStatics = __uuidof(ISmsDeviceStatics);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3069,7 +3069,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsDeviceStatics2 = _uuidof(ISmsDeviceStatics2);
+                MIDL_CONST_ID IID& IID_ISmsDeviceStatics2 = __uuidof(ISmsDeviceStatics2);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3144,7 +3144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsFilterRule = _uuidof(ISmsFilterRule);
+                MIDL_CONST_ID IID& IID_ISmsFilterRule = __uuidof(ISmsFilterRule);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3181,7 +3181,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsFilterRuleFactory = _uuidof(ISmsFilterRuleFactory);
+                MIDL_CONST_ID IID& IID_ISmsFilterRuleFactory = __uuidof(ISmsFilterRuleFactory);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3220,7 +3220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsFilterRules = _uuidof(ISmsFilterRules);
+                MIDL_CONST_ID IID& IID_ISmsFilterRules = __uuidof(ISmsFilterRules);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3257,7 +3257,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsFilterRulesFactory = _uuidof(ISmsFilterRulesFactory);
+                MIDL_CONST_ID IID& IID_ISmsFilterRulesFactory = __uuidof(ISmsFilterRulesFactory);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3294,7 +3294,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessage = _uuidof(ISmsMessage);
+                MIDL_CONST_ID IID& IID_ISmsMessage = __uuidof(ISmsMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3340,7 +3340,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageBase = _uuidof(ISmsMessageBase);
+                MIDL_CONST_ID IID& IID_ISmsMessageBase = __uuidof(ISmsMessageBase);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3388,7 +3388,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageReceivedEventArgs = _uuidof(ISmsMessageReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_ISmsMessageReceivedEventArgs = __uuidof(ISmsMessageReceivedEventArgs);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3444,7 +3444,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Accept(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageReceivedTriggerDetails = _uuidof(ISmsMessageReceivedTriggerDetails);
+                MIDL_CONST_ID IID& IID_ISmsMessageReceivedTriggerDetails = __uuidof(ISmsMessageReceivedTriggerDetails);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3488,7 +3488,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageRegistration = _uuidof(ISmsMessageRegistration);
+                MIDL_CONST_ID IID& IID_ISmsMessageRegistration = __uuidof(ISmsMessageRegistration);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3529,7 +3529,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsMessageRegistrationStatics = _uuidof(ISmsMessageRegistrationStatics);
+                MIDL_CONST_ID IID& IID_ISmsMessageRegistrationStatics = __uuidof(ISmsMessageRegistrationStatics);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3577,7 +3577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsReceivedEventDetails = _uuidof(ISmsReceivedEventDetails);
+                MIDL_CONST_ID IID& IID_ISmsReceivedEventDetails = __uuidof(ISmsReceivedEventDetails);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3625,7 +3625,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsReceivedEventDetails2 = _uuidof(ISmsReceivedEventDetails2);
+                MIDL_CONST_ID IID& IID_ISmsReceivedEventDetails2 = __uuidof(ISmsReceivedEventDetails2);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3679,7 +3679,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsSendMessageResult = _uuidof(ISmsSendMessageResult);
+                MIDL_CONST_ID IID& IID_ISmsSendMessageResult = __uuidof(ISmsSendMessageResult);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3736,7 +3736,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsStatusMessage = _uuidof(ISmsStatusMessage);
+                MIDL_CONST_ID IID& IID_ISmsStatusMessage = __uuidof(ISmsStatusMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3852,7 +3852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsTextMessage = _uuidof(ISmsTextMessage);
+                MIDL_CONST_ID IID& IID_ISmsTextMessage = __uuidof(ISmsTextMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3936,7 +3936,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsTextMessage2 = _uuidof(ISmsTextMessage2);
+                MIDL_CONST_ID IID& IID_ISmsTextMessage2 = __uuidof(ISmsTextMessage2);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -3988,7 +3988,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsTextMessageStatics = _uuidof(ISmsTextMessageStatics);
+                MIDL_CONST_ID IID& IID_ISmsTextMessageStatics = __uuidof(ISmsTextMessageStatics);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -4036,7 +4036,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsVoicemailMessage = _uuidof(ISmsVoicemailMessage);
+                MIDL_CONST_ID IID& IID_ISmsVoicemailMessage = __uuidof(ISmsVoicemailMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */
@@ -4093,7 +4093,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmsWapMessage = _uuidof(ISmsWapMessage);
+                MIDL_CONST_ID IID& IID_ISmsWapMessage = __uuidof(ISmsWapMessage);
             } /* Sms */
         } /* Devices */
     } /* Windows */

@@ -473,7 +473,7 @@ CLFSUSER_API
 NTSTATUS
 ClfsMgmtSetLogFileSizeAsClient(
     _In_ PLOG_FILE_OBJECT LogFile,
-    _In_opt_ PCLFS_MGMT_CLIENT ClientCookie,
+    _In_opt_ CLFS_MGMT_CLIENT ClientCookie,
     _In_ PULONGLONG NewSizeInContainers,
     _Out_opt_ PULONGLONG ResultingSizeInContainers,
     _In_opt_ PCLFS_SET_LOG_SIZE_COMPLETE_CALLBACK CompletionRoutine,

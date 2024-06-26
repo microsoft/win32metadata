@@ -1210,7 +1210,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
         HRESULT GetActivationNetworkError(
             [out, ref, retval] ULONG *networkError);
     };
-    
+    cpp_quote("#pragma deprecated(IMbnConnection) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
+
     //
     // Interface: IMbnConnectionEvents
     //
@@ -1246,7 +1247,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
         HRESULT OnVoiceCallStateChange(
             [in] IMbnConnection *newConnection);
     };
-    
+    cpp_quote("#pragma deprecated(IMbnConnectionEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
  
     //
     // Interface: IMbnInterface
@@ -1316,6 +1317,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [out, retval] IMbnConnection **mbnConnection);
     
     };
+    cpp_quote("#pragma deprecated(IMbnInterface) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnInterfaceEvents
@@ -1372,6 +1374,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] ULONG requestID,
             [in] HRESULT status);
     };
+    cpp_quote("#pragma deprecated(IMbnInterfaceEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
  
     //
     // Interface: IMbnInterfaceManager
@@ -1394,6 +1397,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
         HRESULT GetInterfaces(
             [out, ref, retval] SAFEARRAY(IMbnInterface*) *mbnInterfaces);
     };
+    cpp_quote("#pragma deprecated(IMbnInterfaceManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnInterfaceManagerEvents
@@ -1416,6 +1420,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] IMbnInterface *oldInterface);
     
     };
+    cpp_quote("#pragma deprecated(IMbnInterfaceManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnRegistration
@@ -1480,6 +1485,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] ULONG dataClass,
             [out] ULONG *requestID);
     };
+    cpp_quote("#pragma deprecated(IMbnRegistration) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnRegistrationEvents
@@ -1513,7 +1519,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] ULONG requestID,
             [in] HRESULT status);
     };
-    
+    cpp_quote("#pragma deprecated(IMbnRegistrationEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
    
     //
     // Interface: IMbnConnectionManager
@@ -1536,6 +1542,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
         HRESULT GetConnections(
             [out, ref, retval] SAFEARRAY(IMbnConnection*) *mbnConnections);
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnConnectionManagerEvents
@@ -1558,6 +1565,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] IMbnConnection *oldConnection);
     
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnPinManager
@@ -1585,6 +1593,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
         HRESULT GetPinState([out] ULONG *requestID);
     
     };
+    cpp_quote("#pragma deprecated(IMbnPinManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnPinManagerEvents
@@ -1609,6 +1618,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] ULONG requestID,  
             [in] HRESULT status);
     };
+    cpp_quote("#pragma deprecated(IMbnPinManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
 	//
 	// Interface: IMbnPin - Present in the library
@@ -1664,13 +1674,13 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] ULONG requestID,
             [in] HRESULT status);
     };
+    cpp_quote("#pragma deprecated(IMbnPinEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+    cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
 
 #pragma region Desktop Family
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
-
     
     //
     // Interface: IMbnSubscriberInformation
@@ -1697,6 +1707,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT TelephoneNumbers(
             [out, ref, retval] SAFEARRAY(BSTR) *TelephoneNumbers);
     };   
+    cpp_quote("#pragma deprecated(IMbnSubscriberInformation) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnSignal
@@ -1718,6 +1729,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT GetSignalError(
             [out, ref, retval] ULONG *signalError);
     };
+    cpp_quote("#pragma deprecated(IMbnSignal) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnSignalEvents
@@ -1734,6 +1746,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT OnSignalStateChange(
             [in] IMbnSignal* newInterface);
     };
+    cpp_quote("#pragma deprecated(IMbnSignalEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
         
     //
     // Interface: IMbnConnectionContext
@@ -1757,6 +1770,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] LPCWSTR providerID,
             [out] ULONG *requestID);
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionContext) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnConnectionContextEvents
@@ -1780,6 +1794,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] ULONG requestID,
             [in] HRESULT status);
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionContextEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnConnectionProfileManager
@@ -1809,6 +1824,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT CreateConnectionProfile(
             [in, string] LPCWSTR xmlProfile);
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionProfileManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnConnectionProfile
@@ -1834,6 +1850,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             helpstring("Delete Profile")]
         HRESULT Delete();
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionProfile) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnConnectionProfileEvents
@@ -1850,6 +1867,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT OnProfileUpdate(
             [in] IMbnConnectionProfile *newProfile);
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionProfileEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnSmsConfiguration
@@ -1892,7 +1910,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT SmsFormat(
             [in] MBN_SMS_FORMAT smsFormat);            
     };
-    
+    cpp_quote("#pragma deprecated(IMbnSmsConfiguration) // Replaced by WinRT API in Windows.Devices.Sms namespace")
     
     //
     // Interface: IMbnSmsReadMsgPdu
@@ -1924,7 +1942,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT Message(
             [out, ref, retval] SAFEARRAY(BYTE) *Message);            
     };
-    
+    cpp_quote("#pragma deprecated(IMbnSmsReadMsgPdu) // Replaced by WinRT API in Windows.Devices.Sms namespace")
     
     //
     // Interface: IMbnSmsReadMsgTextCdma
@@ -1976,6 +1994,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT Message(
             [out, ref, retval] SAFEARRAY(BYTE) *Message);
     };
+    cpp_quote("#pragma deprecated(IMbnSmsReadMsgTextCdma) // Replaced by WinRT API in Windows.Devices.Sms namespace")
     
     //
     // Interface: IMbnSms
@@ -2040,6 +2059,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT GetSmsStatus(
             [out, ref] MBN_SMS_STATUS_INFO *smsStatusInfo);
     };    
+    cpp_quote("#pragma deprecated(IMbnSms) // Replaced by WinRT API in Windows.Devices.Sms namespace")
+
     //
     // Interface: IMbnSmsEvents
     //
@@ -2098,6 +2119,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT OnSmsStatusChange(
             [in] IMbnSms *sms);
     };
+    cpp_quote("#pragma deprecated(IMbnSmsEvents) // Replaced by WinRT API in Windows.Devices.Sms namespace")
     
     //
     // Interface: IMbnServiceActivation
@@ -2115,6 +2137,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] SAFEARRAY(BYTE) vendorSpecificData,
             [out] ULONG *requestID);
     };
+    cpp_quote("#pragma deprecated(IMbnServiceActivation) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
     //
     // Interface: IMbnServiceActivationEvents
@@ -2135,6 +2158,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] HRESULT status,
             [in] ULONG networkError);
     };
+    cpp_quote("#pragma deprecated(IMbnServiceActivationEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
     //
     // Interface: IMbnVendorSpecificOperation
@@ -2152,6 +2176,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in, ref] SAFEARRAY(BYTE) vendorSpecificData,
             [out] ULONG *requestID);
     };
+    cpp_quote("#pragma deprecated(IMbnVendorSpecificOperation) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
     //
     // Interface: IMbnVendorSpecificEvents
@@ -2176,6 +2201,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] SAFEARRAY(BYTE) vendorSpecificData,
             [in] ULONG requestID);
     };
+    cpp_quote("#pragma deprecated(IMbnVendorSpecificEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
         
     //
     // Interface: IMbnConnectionProfileManagerEvents
@@ -2198,6 +2224,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] IMbnConnectionProfile *oldConnectionProfile);
     
     };
+    cpp_quote("#pragma deprecated(IMbnConnectionProfileManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnRadio
@@ -2226,6 +2253,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [out] ULONG *requestID);
             
     };
+    cpp_quote("#pragma deprecated(IMbnRadio) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
     
     //
     // Interface: IMbnRadioEvents
@@ -2247,9 +2275,9 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT OnSetSoftwareRadioStateComplete(
             [in] IMbnRadio *newInterface,
             [in] ULONG requestID,
-            [in] HRESULT status);
-    
+            [in] HRESULT status);    
     };
+    cpp_quote("#pragma deprecated(IMbnRadioEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnMultiCarrier
@@ -2293,6 +2321,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT ScanNetwork([out] ULONG *requestID);
 
     };
+    cpp_quote("#pragma deprecated(IMbnMultiCarrier) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnMultiCarrierEvents
@@ -2333,6 +2362,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT OnInterfaceCapabilityChange(
             [in] IMbnMultiCarrier *mbnInterface);
     };
+    cpp_quote("#pragma deprecated(IMbnMultiCarrierEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
 
     //
     // Interface: IMbnDeviceServiceStateEvents (desktop only)
@@ -2352,6 +2382,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
             [in] MBN_DEVICE_SERVICE_SESSIONS_STATE stateChange
             );
     };
+    cpp_quote("#pragma deprecated(IMbnDeviceServiceStateEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
@@ -2375,7 +2406,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] BSTR networkInterfaceID,
             [out, ref, retval] IMbnDeviceServicesContext **mbnDevicesContext);
     };
-
+    cpp_quote("#pragma deprecated(IMbnDeviceServicesManager) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
     //
     // Interface: IMbnDeviceServicesContext
@@ -2409,7 +2440,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [out, ref, retval]  ULONG *maxDataSize);
 
     };    
-
+    cpp_quote("#pragma deprecated(IMbnDeviceServicesContext) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
 
     //
     // Interface: IMbnDeviceServicesManagerEvents
@@ -2502,8 +2533,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [in] MBN_DEVICE_SERVICES_INTERFACE_STATE stateChange
             );
             
-    };
-    
+    };    
+    cpp_quote("#pragma deprecated(IMbnDeviceServicesEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
     
     //
     // Interface: IMbnDeviceService
@@ -2581,7 +2612,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
             [out, ref, retval] BOOL *value);
 
     };
-
+    cpp_quote("#pragma deprecated(IMbnDeviceService) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
@@ -2746,6 +2777,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
         HRESULT GetPinManager(
             [out, ref, retval] IMbnPinManager **pinManager);
     };
+    cpp_quote("#pragma deprecated(IMbnPin) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces")
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
 

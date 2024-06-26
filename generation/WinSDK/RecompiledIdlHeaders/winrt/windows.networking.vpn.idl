@@ -229,6 +229,8 @@ namespace Windows
 
             interface IVpnPlugInProfile2;
 
+            interface IVpnPlugInReconnectTransport;
+
             interface IVpnProfile;
 
             interface IVpnRoute;
@@ -1079,6 +1081,13 @@ namespace Windows
                 [propget] HRESULT RequireVpnClientAppUI([out] [retval] boolean* value);
                 [propput] HRESULT RequireVpnClientAppUI([in] boolean value);
                 [propget] HRESULT ConnectionStatus([out] [retval] Windows.Networking.Vpn.VpnManagementConnectionStatus* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [uuid(9D5A1092-BB46-4D34-9D88-F217893076F4)]
+            interface IVpnPlugInReconnectTransport : IInspectable
+            {
+                HRESULT ReconnectTransport([in] Windows.Networking.Vpn.VpnChannel* channel, [in] IInspectable* context);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

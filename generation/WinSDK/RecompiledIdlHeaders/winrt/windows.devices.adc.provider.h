@@ -315,7 +315,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAdcControllerProvider = _uuidof(IAdcControllerProvider);
+                    MIDL_CONST_ID IID& IID_IAdcControllerProvider = __uuidof(IAdcControllerProvider);
                 } /* Provider */
             } /* Adc */
         } /* Devices */
@@ -351,7 +351,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAdcProvider = _uuidof(IAdcProvider);
+                    MIDL_CONST_ID IID& IID_IAdcProvider = __uuidof(IAdcProvider);
                 } /* Provider */
             } /* Adc */
         } /* Devices */

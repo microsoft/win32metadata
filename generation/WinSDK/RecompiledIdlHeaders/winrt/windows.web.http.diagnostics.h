@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_WEB_HTTP_DIAGNOSTICS_HTTPDIAGNOSTICSCONTRACT_VERSION)
@@ -722,7 +722,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProvider = _uuidof(IHttpDiagnosticProvider);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProvider = __uuidof(IHttpDiagnosticProvider);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -778,7 +778,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestResponseCompletedEventArgs = _uuidof(IHttpDiagnosticProviderRequestResponseCompletedEventArgs);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestResponseCompletedEventArgs = __uuidof(IHttpDiagnosticProviderRequestResponseCompletedEventArgs);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -840,7 +840,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestResponseTimestamps = _uuidof(IHttpDiagnosticProviderRequestResponseTimestamps);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestResponseTimestamps = __uuidof(IHttpDiagnosticProviderRequestResponseTimestamps);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -896,7 +896,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestSentEventArgs = _uuidof(IHttpDiagnosticProviderRequestSentEventArgs);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderRequestSentEventArgs = __uuidof(IHttpDiagnosticProviderRequestSentEventArgs);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -940,7 +940,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderResponseReceivedEventArgs = _uuidof(IHttpDiagnosticProviderResponseReceivedEventArgs);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderResponseReceivedEventArgs = __uuidof(IHttpDiagnosticProviderResponseReceivedEventArgs);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -979,7 +979,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderStatics = _uuidof(IHttpDiagnosticProviderStatics);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticProviderStatics = __uuidof(IHttpDiagnosticProviderStatics);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */
@@ -1023,7 +1023,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDiagnosticSourceLocation = _uuidof(IHttpDiagnosticSourceLocation);
+                    MIDL_CONST_ID IID& IID_IHttpDiagnosticSourceLocation = __uuidof(IHttpDiagnosticSourceLocation);
                 } /* Diagnostics */
             } /* Http */
         } /* Web */

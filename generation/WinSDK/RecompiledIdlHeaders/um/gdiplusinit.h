@@ -67,6 +67,13 @@ struct GdiplusStartupInput
 #if (GDIPVER >= 0x0110)
 struct GdiplusStartupInputEx : GdiplusStartupInput
 {
+    enum class Version : UINT32
+    {
+        V2 = 2,
+        V3 = 3 // Enables Heif and Avif image codecs.  Unlike other functionalities in Gdiplus,
+               // these two codecs require COM to be initiailized.
+    };
+
     INT StartupParameters;  // Do we not set the FPU rounding mode
 
     GdiplusStartupInputEx(
@@ -81,13 +88,28 @@ struct GdiplusStartupInputEx : GdiplusStartupInput
         SuppressExternalCodecs = suppressExternalCodecs;
         StartupParameters = startupParameters;
     }
+
+    GdiplusStartupInputEx(
+        Version gdiplusVersion,
+        INT startupParameters = 0,
+        DebugEventProc debugEventCallback = NULL,
+        BOOL suppressBackgroundThread = FALSE,
+        BOOL suppressExternalCodecs = FALSE)
+    {
+        GdiplusVersion = static_cast<UINT32>(gdiplusVersion);
+        DebugEventCallback = debugEventCallback;
+        SuppressBackgroundThread = suppressBackgroundThread;
+        SuppressExternalCodecs = suppressExternalCodecs;
+        StartupParameters = startupParameters;
+    }
 };
 
 enum GdiplusStartupParams
 {
-    GdiplusStartupDefault = 0,
-    GdiplusStartupNoSetRound = 1,
-    GdiplusStartupSetPSValue = 2,
+    GdiplusStartupDefault    = 0x00000000,
+    GdiplusStartupNoSetRound = 0x00000001,
+    GdiplusStartupSetPSValue = 0x00000002,
+    GdiplusStartupReserved0  = 0x00000004,
     GdiplusStartupTransparencyMask = 0xFF000000
 };
 

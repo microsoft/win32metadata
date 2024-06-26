@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1594,7 +1594,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationAttribute = _uuidof(ISyndicationAttribute);
+                MIDL_CONST_ID IID& IID_ISyndicationAttribute = __uuidof(ISyndicationAttribute);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1633,7 +1633,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationAttributeFactory = _uuidof(ISyndicationAttributeFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationAttributeFactory = __uuidof(ISyndicationAttributeFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1687,7 +1687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationCategory = _uuidof(ISyndicationCategory);
+                MIDL_CONST_ID IID& IID_ISyndicationCategory = __uuidof(ISyndicationCategory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1730,7 +1730,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationCategoryFactory = _uuidof(ISyndicationCategoryFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationCategoryFactory = __uuidof(ISyndicationCategoryFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1799,7 +1799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationClient = _uuidof(ISyndicationClient);
+                MIDL_CONST_ID IID& IID_ISyndicationClient = __uuidof(ISyndicationClient);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1836,7 +1836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationClientFactory = _uuidof(ISyndicationClientFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationClientFactory = __uuidof(ISyndicationClientFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1879,7 +1879,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationContent = _uuidof(ISyndicationContent);
+                MIDL_CONST_ID IID& IID_ISyndicationContent = __uuidof(ISyndicationContent);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1921,7 +1921,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationContentFactory = _uuidof(ISyndicationContentFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationContentFactory = __uuidof(ISyndicationContentFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationErrorStatics = _uuidof(ISyndicationErrorStatics);
+                MIDL_CONST_ID IID& IID_ISyndicationErrorStatics = __uuidof(ISyndicationErrorStatics);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2078,7 +2078,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationFeed = _uuidof(ISyndicationFeed);
+                MIDL_CONST_ID IID& IID_ISyndicationFeed = __uuidof(ISyndicationFeed);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2117,7 +2117,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationFeedFactory = _uuidof(ISyndicationFeedFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationFeedFactory = __uuidof(ISyndicationFeedFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2168,7 +2168,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationGenerator = _uuidof(ISyndicationGenerator);
+                MIDL_CONST_ID IID& IID_ISyndicationGenerator = __uuidof(ISyndicationGenerator);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2205,7 +2205,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationGeneratorFactory = _uuidof(ISyndicationGeneratorFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationGeneratorFactory = __uuidof(ISyndicationGeneratorFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2325,7 +2325,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationItem = _uuidof(ISyndicationItem);
+                MIDL_CONST_ID IID& IID_ISyndicationItem = __uuidof(ISyndicationItem);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2364,7 +2364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationItemFactory = _uuidof(ISyndicationItemFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationItemFactory = __uuidof(ISyndicationItemFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2436,7 +2436,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationLink = _uuidof(ISyndicationLink);
+                MIDL_CONST_ID IID& IID_ISyndicationLink = __uuidof(ISyndicationLink);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2481,7 +2481,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationLinkFactory = _uuidof(ISyndicationLinkFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationLinkFactory = __uuidof(ISyndicationLinkFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2552,7 +2552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationNode = _uuidof(ISyndicationNode);
+                MIDL_CONST_ID IID& IID_ISyndicationNode = __uuidof(ISyndicationNode);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2591,7 +2591,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationNodeFactory = _uuidof(ISyndicationNodeFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationNodeFactory = __uuidof(ISyndicationNodeFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2645,7 +2645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationPerson = _uuidof(ISyndicationPerson);
+                MIDL_CONST_ID IID& IID_ISyndicationPerson = __uuidof(ISyndicationPerson);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2688,7 +2688,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationPersonFactory = _uuidof(ISyndicationPersonFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationPersonFactory = __uuidof(ISyndicationPersonFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2740,7 +2740,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationText = _uuidof(ISyndicationText);
+                MIDL_CONST_ID IID& IID_ISyndicationText = __uuidof(ISyndicationText);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2782,7 +2782,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISyndicationTextFactory = _uuidof(ISyndicationTextFactory);
+                MIDL_CONST_ID IID& IID_ISyndicationTextFactory = __uuidof(ISyndicationTextFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2824,8 +2824,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationCategoryFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationCategoryFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationCategory ** Default Interface **
@@ -2949,8 +2949,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationGeneratorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationGeneratorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationGenerator ** Default Interface **
@@ -7951,8 +7951,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationCategoryFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationCategoryFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationCategory ** Default Interface **
@@ -8076,8 +8076,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationGeneratorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationGeneratorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationGenerator ** Default Interface **

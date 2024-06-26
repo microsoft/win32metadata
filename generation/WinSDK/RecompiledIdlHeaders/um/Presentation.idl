@@ -93,6 +93,23 @@ interface IPresentationSurface : IPresentationContent
 }
 
 
+// Describes additional methods to extend IPresentationSurface
+[
+    object,
+    local,
+    uuid(95609569-C5F0-47F9-8804-5345F2E2767E),
+    pointer_default(unique)
+]
+interface IPresentationSurface2 : IPresentationSurface
+{
+    // Hint to the system that the application intends this content to be shown at a brightness
+    // that exceeds standard 100 nit SDR brightness levels. This will instruct the system to
+    // try and avoid any backlight optimizations that may impair the intended HDR visible
+    // brightness range.
+    void SetIsHdrContent([in] boolean isHdrContent);
+}
+
+
 // Describes a single entry in the present statistics queue. All statistics interfaces will inherit
 // from this interface. IPresentStatistics can be QI'd to its more specific kind corresponding to
 // GetKind().
@@ -254,6 +271,17 @@ interface IPresentationFactory : IUnknown
     // Create a presentation manager.
     HRESULT CreatePresentationManager(
         [out, retval] IPresentationManager** ppPresentationManager);
+}
+
+// An empty interface exposed by IPresentationFactory that indicates support
+// for awareness of HDR content, provided by IPresentationSurface2::SetIsHdrContent
+[
+    object,
+    local,
+    uuid(2BD0B885-A16F-4BD9-A59A-D073E069D416),
+    pointer_default(unique)
+] interface IPresentationFactory_SupportHdrAware : IUnknown
+{
 }
 
 

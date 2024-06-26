@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1330,7 +1330,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Invoke(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILicenseChangedEventHandler = _uuidof(ILicenseChangedEventHandler);
+                MIDL_CONST_ID IID& IID_ILicenseChangedEventHandler = __uuidof(ILicenseChangedEventHandler);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1394,7 +1394,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentApp = _uuidof(ICurrentApp);
+                MIDL_CONST_ID IID& IID_ICurrentApp = __uuidof(ICurrentApp);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1437,7 +1437,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentApp2Statics = _uuidof(ICurrentApp2Statics);
+                MIDL_CONST_ID IID& IID_ICurrentApp2Statics = __uuidof(ICurrentApp2Statics);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1505,7 +1505,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppSimulator = _uuidof(ICurrentAppSimulator);
+                MIDL_CONST_ID IID& IID_ICurrentAppSimulator = __uuidof(ICurrentAppSimulator);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1546,7 +1546,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppSimulatorStaticsWithFiltering = _uuidof(ICurrentAppSimulatorStaticsWithFiltering);
+                MIDL_CONST_ID IID& IID_ICurrentAppSimulatorStaticsWithFiltering = __uuidof(ICurrentAppSimulatorStaticsWithFiltering);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1582,7 +1582,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppSimulatorWithCampaignId = _uuidof(ICurrentAppSimulatorWithCampaignId);
+                MIDL_CONST_ID IID& IID_ICurrentAppSimulatorWithCampaignId = __uuidof(ICurrentAppSimulatorWithCampaignId);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1633,7 +1633,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppSimulatorWithConsumables = _uuidof(ICurrentAppSimulatorWithConsumables);
+                MIDL_CONST_ID IID& IID_ICurrentAppSimulatorWithConsumables = __uuidof(ICurrentAppSimulatorWithConsumables);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1677,7 +1677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppStaticsWithFiltering = _uuidof(ICurrentAppStaticsWithFiltering);
+                MIDL_CONST_ID IID& IID_ICurrentAppStaticsWithFiltering = __uuidof(ICurrentAppStaticsWithFiltering);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1713,7 +1713,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppWithCampaignId = _uuidof(ICurrentAppWithCampaignId);
+                MIDL_CONST_ID IID& IID_ICurrentAppWithCampaignId = __uuidof(ICurrentAppWithCampaignId);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1764,7 +1764,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentAppWithConsumables = _uuidof(ICurrentAppWithConsumables);
+                MIDL_CONST_ID IID& IID_ICurrentAppWithConsumables = __uuidof(ICurrentAppWithConsumables);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1816,7 +1816,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILicenseInformation = _uuidof(ILicenseInformation);
+                MIDL_CONST_ID IID& IID_ILicenseInformation = __uuidof(ILicenseInformation);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1867,7 +1867,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IListingInformation = _uuidof(IListingInformation);
+                MIDL_CONST_ID IID& IID_IListingInformation = __uuidof(IListingInformation);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1912,7 +1912,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IListingInformation2 = _uuidof(IListingInformation2);
+                MIDL_CONST_ID IID& IID_IListingInformation2 = __uuidof(IListingInformation2);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1954,7 +1954,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductLicense = _uuidof(IProductLicense);
+                MIDL_CONST_ID IID& IID_IProductLicense = __uuidof(IProductLicense);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -1993,7 +1993,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductLicenseWithFulfillment = _uuidof(IProductLicenseWithFulfillment);
+                MIDL_CONST_ID IID& IID_IProductLicenseWithFulfillment = __uuidof(IProductLicenseWithFulfillment);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2035,7 +2035,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductListing = _uuidof(IProductListing);
+                MIDL_CONST_ID IID& IID_IProductListing = __uuidof(IProductListing);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2080,7 +2080,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductListing2 = _uuidof(IProductListing2);
+                MIDL_CONST_ID IID& IID_IProductListing2 = __uuidof(IProductListing2);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2116,7 +2116,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductListingWithConsumables = _uuidof(IProductListingWithConsumables);
+                MIDL_CONST_ID IID& IID_IProductListingWithConsumables = __uuidof(IProductListingWithConsumables);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2167,7 +2167,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductListingWithMetadata = _uuidof(IProductListingWithMetadata);
+                MIDL_CONST_ID IID& IID_IProductListingWithMetadata = __uuidof(IProductListingWithMetadata);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2218,7 +2218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductPurchaseDisplayProperties = _uuidof(IProductPurchaseDisplayProperties);
+                MIDL_CONST_ID IID& IID_IProductPurchaseDisplayProperties = __uuidof(IProductPurchaseDisplayProperties);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2255,7 +2255,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProductPurchaseDisplayPropertiesFactory = _uuidof(IProductPurchaseDisplayPropertiesFactory);
+                MIDL_CONST_ID IID& IID_IProductPurchaseDisplayPropertiesFactory = __uuidof(IProductPurchaseDisplayPropertiesFactory);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2300,7 +2300,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPurchaseResults = _uuidof(IPurchaseResults);
+                MIDL_CONST_ID IID& IID_IPurchaseResults = __uuidof(IPurchaseResults);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2342,7 +2342,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnfulfilledConsumable = _uuidof(IUnfulfilledConsumable);
+                MIDL_CONST_ID IID& IID_IUnfulfilledConsumable = __uuidof(IUnfulfilledConsumable);
             } /* Store */
         } /* ApplicationModel */
     } /* Windows */
@@ -2359,11 +2359,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CIUnfulfilledCo
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppWithConsumables interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp2Statics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2385,8 +2385,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithConsumables interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulator interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -6283,11 +6283,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CIUnfulfilledCo
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppWithConsumables interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp2Statics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentApp interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6309,8 +6309,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorStaticsWithFiltering interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithConsumables interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulatorWithCampaignId interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.ICurrentAppSimulator interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment

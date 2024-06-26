@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GRAPHICS_PRINTING3D_PRINTING3DCONTRACT_VERSION)
@@ -3948,7 +3948,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskSourceRequestedHandler = _uuidof(IPrint3DTaskSourceRequestedHandler);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskSourceRequestedHandler = __uuidof(IPrint3DTaskSourceRequestedHandler);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -3988,7 +3988,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DManager = _uuidof(IPrint3DManager);
+                MIDL_CONST_ID IID& IID_IPrint3DManager = __uuidof(IPrint3DManager);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4027,7 +4027,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DManagerStatics = _uuidof(IPrint3DManagerStatics);
+                MIDL_CONST_ID IID& IID_IPrint3DManagerStatics = __uuidof(IPrint3DManagerStatics);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4084,7 +4084,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTask = _uuidof(IPrint3DTask);
+                MIDL_CONST_ID IID& IID_IPrint3DTask = __uuidof(IPrint3DTask);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4123,7 +4123,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskCompletedEventArgs = _uuidof(IPrint3DTaskCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskCompletedEventArgs = __uuidof(IPrint3DTaskCompletedEventArgs);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4162,7 +4162,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskRequest = _uuidof(IPrint3DTaskRequest);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskRequest = __uuidof(IPrint3DTaskRequest);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4198,7 +4198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskRequestedEventArgs = _uuidof(IPrint3DTaskRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskRequestedEventArgs = __uuidof(IPrint3DTaskRequestedEventArgs);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4234,7 +4234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskSourceChangedEventArgs = _uuidof(IPrint3DTaskSourceChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskSourceChangedEventArgs = __uuidof(IPrint3DTaskSourceChangedEventArgs);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4270,7 +4270,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DTaskSourceRequestedArgs = _uuidof(IPrint3DTaskSourceRequestedArgs);
+                MIDL_CONST_ID IID& IID_IPrint3DTaskSourceRequestedArgs = __uuidof(IPrint3DTaskSourceRequestedArgs);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4335,7 +4335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3D3MFPackage = _uuidof(IPrinting3D3MFPackage);
+                MIDL_CONST_ID IID& IID_IPrinting3D3MFPackage = __uuidof(IPrinting3D3MFPackage);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4374,7 +4374,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3D3MFPackage2 = _uuidof(IPrinting3D3MFPackage2);
+                MIDL_CONST_ID IID& IID_IPrinting3D3MFPackage2 = __uuidof(IPrinting3D3MFPackage2);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4411,7 +4411,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3D3MFPackageStatics = _uuidof(IPrinting3D3MFPackageStatics);
+                MIDL_CONST_ID IID& IID_IPrinting3D3MFPackageStatics = __uuidof(IPrinting3D3MFPackageStatics);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4456,7 +4456,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterial = _uuidof(IPrinting3DBaseMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterial = __uuidof(IPrinting3DBaseMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4495,7 +4495,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialGroup = _uuidof(IPrinting3DBaseMaterialGroup);
+                MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialGroup = __uuidof(IPrinting3DBaseMaterialGroup);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4532,7 +4532,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialGroupFactory = _uuidof(IPrinting3DBaseMaterialGroupFactory);
+                MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialGroupFactory = __uuidof(IPrinting3DBaseMaterialGroupFactory);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4571,7 +4571,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialStatics = _uuidof(IPrinting3DBaseMaterialStatics);
+                MIDL_CONST_ID IID& IID_IPrinting3DBaseMaterialStatics = __uuidof(IPrinting3DBaseMaterialStatics);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4610,7 +4610,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DColorMaterial = _uuidof(IPrinting3DColorMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DColorMaterial = __uuidof(IPrinting3DColorMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4649,7 +4649,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DColorMaterial2 = _uuidof(IPrinting3DColorMaterial2);
+                MIDL_CONST_ID IID& IID_IPrinting3DColorMaterial2 = __uuidof(IPrinting3DColorMaterial2);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4688,7 +4688,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DColorMaterialGroup = _uuidof(IPrinting3DColorMaterialGroup);
+                MIDL_CONST_ID IID& IID_IPrinting3DColorMaterialGroup = __uuidof(IPrinting3DColorMaterialGroup);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4725,7 +4725,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DColorMaterialGroupFactory = _uuidof(IPrinting3DColorMaterialGroupFactory);
+                MIDL_CONST_ID IID& IID_IPrinting3DColorMaterialGroupFactory = __uuidof(IPrinting3DColorMaterialGroupFactory);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4791,7 +4791,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DComponent = _uuidof(IPrinting3DComponent);
+                MIDL_CONST_ID IID& IID_IPrinting3DComponent = __uuidof(IPrinting3DComponent);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4836,7 +4836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DComponentWithMatrix = _uuidof(IPrinting3DComponentWithMatrix);
+                MIDL_CONST_ID IID& IID_IPrinting3DComponentWithMatrix = __uuidof(IPrinting3DComponentWithMatrix);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4872,7 +4872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterial = _uuidof(IPrinting3DCompositeMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterial = __uuidof(IPrinting3DCompositeMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4914,7 +4914,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroup = _uuidof(IPrinting3DCompositeMaterialGroup);
+                MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroup = __uuidof(IPrinting3DCompositeMaterialGroup);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4953,7 +4953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroup2 = _uuidof(IPrinting3DCompositeMaterialGroup2);
+                MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroup2 = __uuidof(IPrinting3DCompositeMaterialGroup2);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -4990,7 +4990,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroupFactory = _uuidof(IPrinting3DCompositeMaterialGroupFactory);
+                MIDL_CONST_ID IID& IID_IPrinting3DCompositeMaterialGroupFactory = __uuidof(IPrinting3DCompositeMaterialGroupFactory);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5041,7 +5041,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DFaceReductionOptions = _uuidof(IPrinting3DFaceReductionOptions);
+                MIDL_CONST_ID IID& IID_IPrinting3DFaceReductionOptions = __uuidof(IPrinting3DFaceReductionOptions);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5089,7 +5089,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMaterial = _uuidof(IPrinting3DMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DMaterial = __uuidof(IPrinting3DMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5192,7 +5192,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMesh = _uuidof(IPrinting3DMesh);
+                MIDL_CONST_ID IID& IID_IPrinting3DMesh = __uuidof(IPrinting3DMesh);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5234,7 +5234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMeshVerificationResult = _uuidof(IPrinting3DMeshVerificationResult);
+                MIDL_CONST_ID IID& IID_IPrinting3DMeshVerificationResult = __uuidof(IPrinting3DMeshVerificationResult);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5312,7 +5312,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DModel = _uuidof(IPrinting3DModel);
+                MIDL_CONST_ID IID& IID_IPrinting3DModel = __uuidof(IPrinting3DModel);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5367,7 +5367,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DModel2 = _uuidof(IPrinting3DModel2);
+                MIDL_CONST_ID IID& IID_IPrinting3DModel2 = __uuidof(IPrinting3DModel2);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5418,7 +5418,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DModelTexture = _uuidof(IPrinting3DModelTexture);
+                MIDL_CONST_ID IID& IID_IPrinting3DModelTexture = __uuidof(IPrinting3DModelTexture);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5454,7 +5454,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterial = _uuidof(IPrinting3DMultiplePropertyMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterial = __uuidof(IPrinting3DMultiplePropertyMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5496,7 +5496,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterialGroup = _uuidof(IPrinting3DMultiplePropertyMaterialGroup);
+                MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterialGroup = __uuidof(IPrinting3DMultiplePropertyMaterialGroup);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5533,7 +5533,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterialGroupFactory = _uuidof(IPrinting3DMultiplePropertyMaterialGroupFactory);
+                MIDL_CONST_ID IID& IID_IPrinting3DMultiplePropertyMaterialGroupFactory = __uuidof(IPrinting3DMultiplePropertyMaterialGroupFactory);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5584,7 +5584,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterial = _uuidof(IPrinting3DTexture2CoordMaterial);
+                MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterial = __uuidof(IPrinting3DTexture2CoordMaterial);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5623,7 +5623,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroup = _uuidof(IPrinting3DTexture2CoordMaterialGroup);
+                MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroup = __uuidof(IPrinting3DTexture2CoordMaterialGroup);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5662,7 +5662,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroup2 = _uuidof(IPrinting3DTexture2CoordMaterialGroup2);
+                MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroup2 = __uuidof(IPrinting3DTexture2CoordMaterialGroup2);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5699,7 +5699,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroupFactory = _uuidof(IPrinting3DTexture2CoordMaterialGroupFactory);
+                MIDL_CONST_ID IID& IID_IPrinting3DTexture2CoordMaterialGroupFactory = __uuidof(IPrinting3DTexture2CoordMaterialGroupFactory);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */
@@ -5744,7 +5744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrinting3DTextureResource = _uuidof(IPrinting3DTextureResource);
+                MIDL_CONST_ID IID& IID_IPrinting3DTextureResource = __uuidof(IPrinting3DTextureResource);
             } /* Printing3D */
         } /* Graphics */
     } /* Windows */

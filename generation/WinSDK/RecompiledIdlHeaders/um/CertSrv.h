@@ -81,7 +81,6 @@
 #define wszREGLDAPFLAGS               TEXT("LDAPFlags")
 #define wszREGCERTSRVDEBUG	      TEXT("Debug")
 
-
 // Default value for wszREGDBSESSIONCOUNT
 #define DBSESSIONCOUNTDEFAULT	     100
 
@@ -443,19 +442,20 @@ typedef struct _CAINFO
 
 //==================================
 // Values for wszREGINTERFACEFLAGS:
-#define IF_LOCKICERTREQUEST		0x00000001
-#define IF_NOREMOTEICERTREQUEST		0x00000002
-#define IF_NOLOCALICERTREQUEST		0x00000004
-#define IF_NORPCICERTREQUEST		0x00000008
-#define IF_NOREMOTEICERTADMIN		0x00000010
-#define IF_NOLOCALICERTADMIN		0x00000020
-#define IF_NOREMOTEICERTADMINBACKUP	0x00000040
-#define IF_NOLOCALICERTADMINBACKUP	0x00000080
-#define IF_NOSNAPSHOTBACKUP		0x00000100
+#define IF_LOCKICERTREQUEST             0x00000001
+#define IF_NOREMOTEICERTREQUEST         0x00000002
+#define IF_NOLOCALICERTREQUEST          0x00000004
+#define IF_NORPCICERTREQUEST            0x00000008
+#define IF_NOREMOTEICERTADMIN           0x00000010
+#define IF_NOLOCALICERTADMIN            0x00000020
+#define IF_NOREMOTEICERTADMINBACKUP     0x00000040
+#define IF_NOLOCALICERTADMINBACKUP      0x00000080
+#define IF_NOSNAPSHOTBACKUP             0x00000100
 #define IF_ENFORCEENCRYPTICERTREQUEST   0x00000200
 #define IF_ENFORCEENCRYPTICERTADMIN     0x00000400
-#define IF_ENABLEEXITKEYRETRIEVAL	0x00000800
-#define IF_ENABLEADMINASAUDITOR		0x00001000
+#define IF_ENABLEEXITKEYRETRIEVAL       0x00000800
+#define IF_ENABLEADMINASAUDITOR         0x00001000
+#define IF_ENABLEPRESIGNSUPPORT         0x00002000
 
 #define IF_DEFAULT                      (IF_NOREMOTEICERTADMINBACKUP | \
                                          IF_LOCKICERTREQUEST | \
@@ -954,6 +954,26 @@ typedef struct _CAINFO
 #define KR_ENABLE_MACHINE	0x00000001
 #define KR_ENABLE_USER		0x00000002
 
+//==========================================================================================
+// (Un)Installation of each ADCS role create a sub key with names (CertificateAuthority, 
+// WebEnrollment, CEP, CES, NDES) and then adds the "ConfigurationStatus" reg value 
+// to indicate whether a particular role has been configured (2), not configured (1) 
+// or failed (0). 
+// If customers require a different EP setting than default value, they should create
+// "EPTokenCheckValue" reg value directly under the ""..\\ADCS" parent key before starting 
+// configuration of the given role. This should be created on the machine where the given 
+// role is being configured and not on the machine where CA role is configured.
+
+#define CONFIGURATION_STATUS_PARENT_REG_PATH    TEXT("Software\\Microsoft\\ADCS")
+#define CONFIGURATION_STATUS_REG_VALUE_NAME     TEXT("ConfigurationStatus")
+
+#define CONFIGURATION_REG_EPTOKENCHECKVALUE     TEXT("EPTokenCheckValue")
+#define EP_TOKENCHECK_DEFAULT_VALUE             2  // Set it to "Always" by default
+
+// Reg value to disable https only fix. Adding this config option mainly for 
+// test code purpose. I expect lot of test code relying on http end point for
+// certsrv and mscep_admin interfaces.
+#define CONFIGURATION_REG_DISABLE_HTTPSONLY     TEXT("DisableHTTPSOnly")
 
 //+--------------------------------------------------------------------------
 // Name properties:

@@ -250,7 +250,9 @@ namespace Windows
                 PrinterCustom = 2,
                 Color         = 3,
                 Grayscale     = 4,
-                Monochrome    = 5
+                Monochrome    = 5,
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+                AutoSelect    = 6
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

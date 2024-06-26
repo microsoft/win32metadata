@@ -235,6 +235,13 @@ cpp_quote( "EXTERN_GUID( MF_SOURCE_READER_ENABLE_TRANSCODE_ONLY_TRANSFORMS, 0xdf
 // adding extra flags.  See the D3D11_BIND_FLAG enumeration for details.
 cpp_quote( "EXTERN_GUID( MF_SOURCE_READER_D3D11_BIND_FLAGS, 0x33f3197b, 0xf73a, 0x4e14, 0x8d, 0x85, 0xe, 0x4c, 0x43, 0x68, 0x78, 0x8d);" )
 
+// MF_SOURCE_READER_PASSTHROUGH_MODE
+// {043FF126-FE2C-4708-A09B-DA2AB435CED9}
+// Data type: UINT32
+// By default, the source reader tries to copy all system memory backed video sampels into DX textures for faster processing.  
+// When this attribute is set to TRUE (1), the source reader will avoid doing that, keeping the video samples in system memory,
+// even if a D3D device manager is present.
+cpp_quote("EXTERN_GUID(MF_SOURCE_READER_PASSTHROUGH_MODE, 0x43ff126, 0xfe2c, 0x4708, 0xa0, 0x9b, 0xda, 0x2a, 0xb4, 0x35, 0xce, 0xd9);")
 
 //
 // MF Source Reader Flags

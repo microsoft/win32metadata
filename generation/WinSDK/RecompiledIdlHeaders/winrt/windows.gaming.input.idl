@@ -232,7 +232,7 @@ namespace Windows
     {
         namespace Input
         {
-            [contractversion(1.0)]
+            [contractversion(2.0)]
             apicontract GamingInputPreviewContract
             {
             }

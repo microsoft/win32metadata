@@ -281,7 +281,7 @@ typedef struct CMINVOKECOMMANDINFOEX_REMOTE
     LPCWSTR lpTitleW;
     POINT   ptInvoke;
 
-    UINT lpVerbInt;         // like lpVerb, but can only contain an intresource.    
+    UINT lpVerbInt;         // like lpVerb, but can only contain an intresource.
     UINT lpVerbWInt;        // like lpVerbW, but can only contain an intresource.
 } CMINVOKECOMMANDINFOEX_REMOTE;
 
@@ -379,7 +379,7 @@ typedef IContextMenu2 * LPCONTEXTMENU2;
     pointer_default(unique),
 ]
 interface IContextMenu3 : IContextMenu2
-{    
+{
     [local]
     HRESULT HandleMenuMsg2(
         [in, annotation("_In_")] UINT uMsg,
@@ -7788,6 +7788,17 @@ interface IObjectWithAppUserModelID : IUnknown
 {
     HRESULT SetAppID([in, string] LPCWSTR pszAppID);
     HRESULT GetAppID([out, string] LPWSTR *ppszAppID);
+}
+
+// Provides access to the PackageFullName associated with an object
+[
+    uuid(ED2AA515-602F-469C-A130-CE69FD0FA878),
+    object,
+    pointer_default(unique)
+]
+interface IObjectWithPackageFullName : IUnknown
+{
+    HRESULT GetPackageFullName([ out, string ] LPWSTR* packageFullName);
 }
 
 // Provides access to the ProgID associated with an object

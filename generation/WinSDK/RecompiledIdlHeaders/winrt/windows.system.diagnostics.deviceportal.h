@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -635,7 +635,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalConnection = _uuidof(IDevicePortalConnection);
+                    MIDL_CONST_ID IID& IID_IDevicePortalConnection = __uuidof(IDevicePortalConnection);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */
@@ -673,7 +673,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalConnectionClosedEventArgs = _uuidof(IDevicePortalConnectionClosedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDevicePortalConnectionClosedEventArgs = __uuidof(IDevicePortalConnectionClosedEventArgs);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */
@@ -714,7 +714,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalConnectionRequestReceivedEventArgs = _uuidof(IDevicePortalConnectionRequestReceivedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDevicePortalConnectionRequestReceivedEventArgs = __uuidof(IDevicePortalConnectionRequestReceivedEventArgs);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */
@@ -753,7 +753,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalConnectionStatics = _uuidof(IDevicePortalConnectionStatics);
+                    MIDL_CONST_ID IID& IID_IDevicePortalConnectionStatics = __uuidof(IDevicePortalConnectionStatics);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */
@@ -818,7 +818,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalWebSocketConnection = _uuidof(IDevicePortalWebSocketConnection);
+                    MIDL_CONST_ID IID& IID_IDevicePortalWebSocketConnection = __uuidof(IDevicePortalWebSocketConnection);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */
@@ -862,7 +862,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDevicePortalWebSocketConnectionRequestReceivedEventArgs = _uuidof(IDevicePortalWebSocketConnectionRequestReceivedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDevicePortalWebSocketConnectionRequestReceivedEventArgs = __uuidof(IDevicePortalWebSocketConnectionRequestReceivedEventArgs);
                 } /* DevicePortal */
             } /* Diagnostics */
         } /* System */

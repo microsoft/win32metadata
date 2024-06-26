@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_PROFILE_SYSTEMMANUFACTURERS_SYSTEMMANUFACTURERSCONTRACT_VERSION)
@@ -277,7 +277,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOemSupportInfo = _uuidof(IOemSupportInfo);
+                    MIDL_CONST_ID IID& IID_IOemSupportInfo = __uuidof(IOemSupportInfo);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -315,7 +315,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISmbiosInformationStatics = _uuidof(ISmbiosInformationStatics);
+                    MIDL_CONST_ID IID& IID_ISmbiosInformationStatics = __uuidof(ISmbiosInformationStatics);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -371,7 +371,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemSupportDeviceInfo = _uuidof(ISystemSupportDeviceInfo);
+                    MIDL_CONST_ID IID& IID_ISystemSupportDeviceInfo = __uuidof(ISystemSupportDeviceInfo);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -412,7 +412,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics = _uuidof(ISystemSupportInfoStatics);
+                    MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics = __uuidof(ISystemSupportInfoStatics);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -450,7 +450,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics2 = _uuidof(ISystemSupportInfoStatics2);
+                    MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics2 = __uuidof(ISystemSupportInfoStatics2);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */

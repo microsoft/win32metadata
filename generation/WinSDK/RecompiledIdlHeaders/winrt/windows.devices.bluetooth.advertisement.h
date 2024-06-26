@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1486,7 +1486,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisement = _uuidof(IBluetoothLEAdvertisement);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisement = __uuidof(IBluetoothLEAdvertisement);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1539,7 +1539,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePattern = _uuidof(IBluetoothLEAdvertisementBytePattern);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePattern = __uuidof(IBluetoothLEAdvertisementBytePattern);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1580,7 +1580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePatternFactory = _uuidof(IBluetoothLEAdvertisementBytePatternFactory);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePatternFactory = __uuidof(IBluetoothLEAdvertisementBytePatternFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1627,7 +1627,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSection = _uuidof(IBluetoothLEAdvertisementDataSection);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSection = __uuidof(IBluetoothLEAdvertisementDataSection);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1667,7 +1667,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSectionFactory = _uuidof(IBluetoothLEAdvertisementDataSectionFactory);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSectionFactory = __uuidof(IBluetoothLEAdvertisementDataSectionFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1768,7 +1768,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataTypesStatics = _uuidof(IBluetoothLEAdvertisementDataTypesStatics);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataTypesStatics = __uuidof(IBluetoothLEAdvertisementDataTypesStatics);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1812,7 +1812,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementFilter = _uuidof(IBluetoothLEAdvertisementFilter);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementFilter = __uuidof(IBluetoothLEAdvertisementFilter);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1862,7 +1862,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher = _uuidof(IBluetoothLEAdvertisementPublisher);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher = __uuidof(IBluetoothLEAdvertisementPublisher);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1921,7 +1921,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher2 = _uuidof(IBluetoothLEAdvertisementPublisher2);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher2 = __uuidof(IBluetoothLEAdvertisementPublisher2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1960,7 +1960,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherFactory = _uuidof(IBluetoothLEAdvertisementPublisherFactory);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherFactory = __uuidof(IBluetoothLEAdvertisementPublisherFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2001,7 +2001,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs = _uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs = __uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2039,7 +2039,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2 = _uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2 = __uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2089,7 +2089,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs = _uuidof(IBluetoothLEAdvertisementReceivedEventArgs);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs = __uuidof(IBluetoothLEAdvertisementReceivedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2145,7 +2145,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs2 = _uuidof(IBluetoothLEAdvertisementReceivedEventArgs2);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs2 = __uuidof(IBluetoothLEAdvertisementReceivedEventArgs2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2229,7 +2229,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher = _uuidof(IBluetoothLEAdvertisementWatcher);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher = __uuidof(IBluetoothLEAdvertisementWatcher);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2270,7 +2270,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher2 = _uuidof(IBluetoothLEAdvertisementWatcher2);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher2 = __uuidof(IBluetoothLEAdvertisementWatcher2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2309,7 +2309,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherFactory = _uuidof(IBluetoothLEAdvertisementWatcherFactory);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherFactory = __uuidof(IBluetoothLEAdvertisementWatcherFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2347,7 +2347,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherStoppedEventArgs = _uuidof(IBluetoothLEAdvertisementWatcherStoppedEventArgs);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherStoppedEventArgs = __uuidof(IBluetoothLEAdvertisementWatcherStoppedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2394,7 +2394,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerData = _uuidof(IBluetoothLEManufacturerData);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerData = __uuidof(IBluetoothLEManufacturerData);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2434,7 +2434,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerDataFactory = _uuidof(IBluetoothLEManufacturerDataFactory);
+                    MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerDataFactory = __uuidof(IBluetoothLEManufacturerDataFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2571,8 +2571,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher ** Default Interface **
@@ -2688,8 +2688,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **
@@ -6584,8 +6584,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher ** Default Interface **
@@ -6701,8 +6701,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **

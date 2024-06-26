@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -956,7 +956,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDtdEntity = _uuidof(IDtdEntity);
+                    MIDL_CONST_ID IID& IID_IDtdEntity = __uuidof(IDtdEntity);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1002,7 +1002,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDtdNotation = _uuidof(IDtdNotation);
+                    MIDL_CONST_ID IID& IID_IDtdNotation = __uuidof(IDtdNotation);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1054,7 +1054,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlAttribute = _uuidof(IXmlAttribute);
+                    MIDL_CONST_ID IID& IID_IXmlAttribute = __uuidof(IXmlAttribute);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1096,7 +1096,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlCDataSection = _uuidof(IXmlCDataSection);
+                    MIDL_CONST_ID IID& IID_IXmlCDataSection = __uuidof(IXmlCDataSection);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1164,7 +1164,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlCharacterData = _uuidof(IXmlCharacterData);
+                    MIDL_CONST_ID IID& IID_IXmlCharacterData = __uuidof(IXmlCharacterData);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1205,7 +1205,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlComment = _uuidof(IXmlComment);
+                    MIDL_CONST_ID IID& IID_IXmlComment = __uuidof(IXmlComment);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1312,7 +1312,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocument = _uuidof(IXmlDocument);
+                    MIDL_CONST_ID IID& IID_IXmlDocument = __uuidof(IXmlDocument);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1352,7 +1352,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocumentFragment = _uuidof(IXmlDocumentFragment);
+                    MIDL_CONST_ID IID& IID_IXmlDocumentFragment = __uuidof(IXmlDocumentFragment);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1398,7 +1398,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocumentIO = _uuidof(IXmlDocumentIO);
+                    MIDL_CONST_ID IID& IID_IXmlDocumentIO = __uuidof(IXmlDocumentIO);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1440,7 +1440,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocumentIO2 = _uuidof(IXmlDocumentIO2);
+                    MIDL_CONST_ID IID& IID_IXmlDocumentIO2 = __uuidof(IXmlDocumentIO2);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1493,7 +1493,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocumentStatics = _uuidof(IXmlDocumentStatics);
+                    MIDL_CONST_ID IID& IID_IXmlDocumentStatics = __uuidof(IXmlDocumentStatics);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1542,7 +1542,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDocumentType = _uuidof(IXmlDocumentType);
+                    MIDL_CONST_ID IID& IID_IXmlDocumentType = __uuidof(IXmlDocumentType);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1582,7 +1582,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlDomImplementation = _uuidof(IXmlDomImplementation);
+                    MIDL_CONST_ID IID& IID_IXmlDomImplementation = __uuidof(IXmlDomImplementation);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1675,7 +1675,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlElement = _uuidof(IXmlElement);
+                    MIDL_CONST_ID IID& IID_IXmlElement = __uuidof(IXmlElement);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1715,7 +1715,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlEntityReference = _uuidof(IXmlEntityReference);
+                    MIDL_CONST_ID IID& IID_IXmlEntityReference = __uuidof(IXmlEntityReference);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1780,7 +1780,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlLoadSettings = _uuidof(IXmlLoadSettings);
+                    MIDL_CONST_ID IID& IID_IXmlLoadSettings = __uuidof(IXmlLoadSettings);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1852,7 +1852,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlNamedNodeMap = _uuidof(IXmlNamedNodeMap);
+                    MIDL_CONST_ID IID& IID_IXmlNamedNodeMap = __uuidof(IXmlNamedNodeMap);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -1963,7 +1963,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlNode = _uuidof(IXmlNode);
+                    MIDL_CONST_ID IID& IID_IXmlNode = __uuidof(IXmlNode);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -2009,7 +2009,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlNodeList = _uuidof(IXmlNodeList);
+                    MIDL_CONST_ID IID& IID_IXmlNodeList = __uuidof(IXmlNodeList);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -2060,7 +2060,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlNodeSelector = _uuidof(IXmlNodeSelector);
+                    MIDL_CONST_ID IID& IID_IXmlNodeSelector = __uuidof(IXmlNodeSelector);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -2102,7 +2102,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlNodeSerializer = _uuidof(IXmlNodeSerializer);
+                    MIDL_CONST_ID IID& IID_IXmlNodeSerializer = __uuidof(IXmlNodeSerializer);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -2151,7 +2151,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlProcessingInstruction = _uuidof(IXmlProcessingInstruction);
+                    MIDL_CONST_ID IID& IID_IXmlProcessingInstruction = __uuidof(IXmlProcessingInstruction);
                 } /* Dom */
             } /* Xml */
         } /* Data */
@@ -2194,7 +2194,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXmlText = _uuidof(IXmlText);
+                    MIDL_CONST_ID IID& IID_IXmlText = __uuidof(IXmlText);
                 } /* Dom */
             } /* Xml */
         } /* Data */

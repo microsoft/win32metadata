@@ -60,12 +60,17 @@ enum _AUDCLNT_BUFFERFLAGS
 //     AUDCLNT_STREAMOPTIONS_AMBISONICS - The client is requesting the audio client to insert
 //                                  Ambisonics renderer and configure the pipeline to match Ambisonics format types
 //
+//     AUDCLNT_STREAMOPTIONS_POST_VOLUME_LOOPBACK - The client is requesting that the loopback stream capture
+//                                  the audio data after volume and/or mute processing has been applied.
 typedef [v1_enum] enum AUDCLNT_STREAMOPTIONS
 {
     AUDCLNT_STREAMOPTIONS_NONE  = 0x00,
     AUDCLNT_STREAMOPTIONS_RAW   = 0x01,
     AUDCLNT_STREAMOPTIONS_MATCH_FORMAT   = 0x02,
-    AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x04
+    AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x04,
+#if(NTDDI_VERSION > NTDDI_WIN11_ZN)
+    AUDCLNT_STREAMOPTIONS_POST_VOLUME_LOOPBACK = 0x08,
+#endif
 } AUDCLNT_STREAMOPTIONS;
 
 cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(AUDCLNT_STREAMOPTIONS);")
@@ -1841,6 +1846,7 @@ cpp_quote("#define AUDCLNT_E_HEADTRACKING_ENABLED         AUDCLNT_ERR(0x030)")
 cpp_quote("#define AUDCLNT_E_HEADTRACKING_UNSUPPORTED     AUDCLNT_ERR(0x040)")
 cpp_quote("#define AUDCLNT_E_EFFECT_NOT_AVAILABLE         AUDCLNT_ERR(0x041)")
 cpp_quote("#define AUDCLNT_E_EFFECT_STATE_READ_ONLY       AUDCLNT_ERR(0x042)")
+cpp_quote("#define AUDCLNT_E_POST_VOLUME_LOOPBACK_UNSUPPORTED AUDCLNT_ERR(0x043)")
 cpp_quote("#define AUDCLNT_S_BUFFER_EMPTY                 AUDCLNT_SUCCESS(0x001)")
 cpp_quote("#define AUDCLNT_S_THREAD_ALREADY_REGISTERED    AUDCLNT_SUCCESS(0x002)")
 cpp_quote("#define AUDCLNT_S_POSITION_STALLED             AUDCLNT_SUCCESS(0x003)")

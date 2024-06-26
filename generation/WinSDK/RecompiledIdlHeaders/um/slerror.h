@@ -2412,6 +2412,60 @@
 #define SL_E_VL_AD_SCHEMA_VERSION_NOT_SUPPORTED ((HRESULT)0xC004F083L)
 
 //
+// MessageId: SL_E_SLP_MSOA_BAD_FORMAT
+//
+// MessageText:
+//
+// The Software Licensing Service reported that the firmware on this device is corrupted. 
+//
+#define SL_E_SLP_MSOA_BAD_FORMAT         ((HRESULT)0xC004F090L)
+
+//
+// MessageId: SL_E_SLP_MSOA_BAD_DATA_HEADER
+//
+// MessageText:
+//
+// The Software Licensing Service reported that the firmware on this device has invalid data
+//
+#define SL_E_SLP_MSOA_BAD_DATA_HEADER    ((HRESULT)0xC004F091L)
+
+//
+// MessageId: SL_E_SLP_MSOA_INVALID_DATA_LENGTH
+//
+// MessageText:
+//
+// The Software Licensing Service reported that the firmware on this device has invalid data length
+//
+#define SL_E_SLP_MSOA_INVALID_DATA_LENGTH ((HRESULT)0xC004F092L)
+
+//
+// MessageId: SL_E_SLP_MSOA_INVALID_PRODUCT_KEY
+//
+// MessageText:
+//
+// The Software Licensing Service reported that the product key in the firmware on this device is invalid
+//
+#define SL_E_SLP_MSOA_INVALID_PRODUCT_KEY ((HRESULT)0xC004F093L)
+
+//
+// MessageId: SL_E_INCOMPLETE_OR_OLD_DISM_BINARIES
+//
+// MessageText:
+//
+// The Software Licensing Service was unable to cross check the edition of the product key using the DISM binaries available
+//
+#define SL_E_INCOMPLETE_OR_OLD_DISM_BINARIES ((HRESULT)0xC004F094L)
+
+//
+// MessageId: SL_E_SLP_MSOA_PRODUCT_KEY_MISMATCH
+//
+// MessageText:
+//
+// The Software Licensing Service was unable to match the edition of the product key
+//
+#define SL_E_SLP_MSOA_PRODUCT_KEY_MISMATCH ((HRESULT)0xC004F095L)
+
+//
 // MessageId: SL_E_NOT_GENUINE
 //
 // MessageText:

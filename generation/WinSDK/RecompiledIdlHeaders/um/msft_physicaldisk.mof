@@ -604,4 +604,48 @@ class MSFT_PhysicalDisk : MSFT_StorageFaultDomain {
         String ExtendedStatus
         );
 
+
+    //
+    // Method: Convert
+    //
+
+    UInt32 Convert(
+
+        [In, Required]
+        UInt16 Format,
+
+        [In, Required]
+        String StoragePoolFriendlyName,
+
+        [In]
+        UInt16 StoragePoolVersion,
+
+        [In, Units("Bytes")]
+        UInt64 StoragePoolMetadataLength,
+
+        [In, Units("Bytes")]
+        UInt64 StoragePoolMinimumAllocationSize,
+
+        [In, Required]
+        String VirtualDiskFriendlyName,
+
+        [In]
+        UInt16 VirtualDiskProvisioningType,
+
+        [In, Units("Bytes")]
+        UInt64 VirtualDiskAllocationUnitSize,
+
+        [In]
+        UInt16 VirtualDiskResiliencySettingName,
+
+        [Out, EmbeddedInstance("MSFT_StorageObject")]
+        String CreatedStorageObject,
+
+        [Out]
+        MSFT_StorageJob REF CreatedStorageJob,
+
+        [Out, EmbeddedInstance("MSFT_StorageExtendedStatus")]
+        String ExtendedStatus
+        );
+
 };

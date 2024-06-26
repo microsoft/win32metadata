@@ -1,3 +1,4 @@
+
 /***
 *sal.h - markers for documenting the semantics of APIs
 *
@@ -580,7 +581,7 @@ enum __SAL_YesNo {_SAL_notpresent, _SAL_no, _SAL_maybe, _SAL_yes, _SAL_default};
 
 // Annotations to allow expressing generalized pre and post conditions.
 // 'cond' may be any valid SAL expression that is considered to be true as a precondition
-// or postcondition (respsectively).
+// or postcondition (respectively).
 #define _Pre_satisfies_(cond)       _SAL2_Source_(_Pre_satisfies_, (cond), _Pre_satisfies_impl_(cond))
 #define _Post_satisfies_(cond)      _SAL2_Source_(_Post_satisfies_, (cond), _Post_satisfies_impl_(cond))
 

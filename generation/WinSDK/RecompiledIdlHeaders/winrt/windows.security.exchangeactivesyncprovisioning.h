@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_EXCHANGEACTIVESYNCPROVISIONING_EASCONTRACT_VERSION)
@@ -699,7 +699,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEasClientDeviceInformation = _uuidof(IEasClientDeviceInformation);
+                MIDL_CONST_ID IID& IID_IEasClientDeviceInformation = __uuidof(IEasClientDeviceInformation);
             } /* ExchangeActiveSyncProvisioning */
         } /* Security */
     } /* Windows */
@@ -741,7 +741,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEasClientDeviceInformation2 = _uuidof(IEasClientDeviceInformation2);
+                MIDL_CONST_ID IID& IID_IEasClientDeviceInformation2 = __uuidof(IEasClientDeviceInformation2);
             } /* ExchangeActiveSyncProvisioning */
         } /* Security */
     } /* Windows */
@@ -828,7 +828,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEasClientSecurityPolicy = _uuidof(IEasClientSecurityPolicy);
+                MIDL_CONST_ID IID& IID_IEasClientSecurityPolicy = __uuidof(IEasClientSecurityPolicy);
             } /* ExchangeActiveSyncProvisioning */
         } /* Security */
     } /* Windows */
@@ -888,7 +888,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEasComplianceResults = _uuidof(IEasComplianceResults);
+                MIDL_CONST_ID IID& IID_IEasComplianceResults = __uuidof(IEasComplianceResults);
             } /* ExchangeActiveSyncProvisioning */
         } /* Security */
     } /* Windows */
@@ -927,7 +927,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEasComplianceResults2 = _uuidof(IEasComplianceResults2);
+                MIDL_CONST_ID IID& IID_IEasComplianceResults2 = __uuidof(IEasComplianceResults2);
             } /* ExchangeActiveSyncProvisioning */
         } /* Security */
     } /* Windows */

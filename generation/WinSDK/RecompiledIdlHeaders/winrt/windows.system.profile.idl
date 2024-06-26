@@ -44,11 +44,15 @@ namespace Windows
     {
         namespace Profile
         {
+            apicontract PlatformAutomaticAppSignInContract;
+
             apicontract ProfileHardwareTokenContract;
 
             apicontract ProfileRetailInfoContract;
 
             apicontract ProfileSharedModeContract;
+
+            typedef enum PlatformAutomaticAppSignInPolicy PlatformAutomaticAppSignInPolicy;
 
             typedef enum PlatformDataCollectionLevel PlatformDataCollectionLevel;
 
@@ -75,6 +79,8 @@ namespace Windows
             interface IHardwareToken;
 
             interface IKnownRetailInfoPropertiesStatics;
+
+            interface IPlatformAutomaticAppSignInManagerStatics;
 
             interface IPlatformDiagnosticsAndUsageDataSettingsStatics;
 
@@ -109,6 +115,8 @@ namespace Windows
             runtimeclass HardwareToken;
 
             runtimeclass KnownRetailInfoProperties;
+
+            runtimeclass PlatformAutomaticAppSignInManager;
 
             runtimeclass PlatformDiagnosticsAndUsageDataSettings;
 
@@ -158,6 +166,11 @@ namespace Windows
         namespace Profile
         {
             [contractversion(1.0)]
+            apicontract PlatformAutomaticAppSignInContract
+            {
+            }
+
+            [contractversion(1.0)]
             apicontract ProfileHardwareTokenContract
             {
             }
@@ -171,6 +184,14 @@ namespace Windows
             apicontract ProfileSharedModeContract
             {
             }
+
+            [contract(Windows.System.Profile.PlatformAutomaticAppSignInContract, 1.0)]
+            enum PlatformAutomaticAppSignInPolicy
+            {
+                Unknown            = 0,
+                PermissionRequired = 1,
+                AlwaysAllowed      = 2
+            };
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             enum PlatformDataCollectionLevel
@@ -302,6 +323,14 @@ namespace Windows
                 [propget] HRESULT HasOpticalDrive([out] [retval] HSTRING* value);
                 [propget] HRESULT IsOfficeInstalled([out] [retval] HSTRING* value);
                 [propget] HRESULT WindowsEdition([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.System.Profile.PlatformAutomaticAppSignInContract, 1.0)]
+            [exclusiveto(Windows.System.Profile.PlatformAutomaticAppSignInManager)]
+            [uuid(1AC9AFCE-8DD5-5C2D-B420-767D1F3B7D03)]
+            interface IPlatformAutomaticAppSignInManagerStatics : IInspectable
+            {
+                [propget] HRESULT Policy([out] [retval] Windows.System.Profile.PlatformAutomaticAppSignInPolicy* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -452,6 +481,14 @@ namespace Windows
             [static(Windows.System.Profile.IKnownRetailInfoPropertiesStatics, Windows.System.Profile.ProfileRetailInfoContract, 1.0)]
             [threading(both)]
             runtimeclass KnownRetailInfoProperties
+            {
+            }
+
+            [contract(Windows.System.Profile.PlatformAutomaticAppSignInContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.System.Profile.IPlatformAutomaticAppSignInManagerStatics, Windows.System.Profile.PlatformAutomaticAppSignInContract, 1.0)]
+            [threading(both)]
+            runtimeclass PlatformAutomaticAppSignInManager
             {
             }
 

@@ -3,8 +3,8 @@
  * Copyright (c) Microsoft Corporation
  *
  *-------------------------------------------------------------------------------------*/
-import "OAIdl.idl";
-import "OCIdl.idl";
+import "oaidl.idl";
+import "ocidl.idl";
 
 import "d3d11.idl";
 import "d3d12.idl";

@@ -61,6 +61,20 @@ typedef interface IProofOfPossessionCookieInfoManager2 IProofOfPossessionCookieI
 #endif 	/* __IProofOfPossessionCookieInfoManager2_FWD_DEFINED__ */
 
 
+#ifndef __IProofOfPossessionCookieInfoManager3_FWD_DEFINED__
+#define __IProofOfPossessionCookieInfoManager3_FWD_DEFINED__
+typedef interface IProofOfPossessionCookieInfoManager3 IProofOfPossessionCookieInfoManager3;
+
+#endif 	/* __IProofOfPossessionCookieInfoManager3_FWD_DEFINED__ */
+
+
+#ifndef __IProofOfPossessionCookieInfoManager4_FWD_DEFINED__
+#define __IProofOfPossessionCookieInfoManager4_FWD_DEFINED__
+typedef interface IProofOfPossessionCookieInfoManager4 IProofOfPossessionCookieInfoManager4;
+
+#endif 	/* __IProofOfPossessionCookieInfoManager4_FWD_DEFINED__ */
+
+
 #ifndef __ProofOfPossessionCookieInfoManager_FWD_DEFINED__
 #define __ProofOfPossessionCookieInfoManager_FWD_DEFINED__
 
@@ -108,6 +122,13 @@ __inline void FreeProofOfPossessionCookieInfoArray(_In_reads_(cookieInfoCount) P
      }                                           
      CoTaskMemFree(cookieInfo);                  
 }                                                
+// Flags that can be passed into GetCookieInfoForUriWithOptions
+// to control the behavior
+typedef enum _PROOF_OF_POSSESSION_FLAGS : DWORD
+{
+    PROOF_OF_POSSESSION_DEFAULT                      = 0x0000000000000000,
+    PROOF_OF_POSSESSION_ALLOW_SILENT_REQUESTS        = 0x0000000000000001,
+} PROOF_OF_POSSESSION_FLAGS;
 
 
 extern RPC_IF_HANDLE __MIDL_itf_proofofpossessioncookieinfo_0000_0000_v0_0_c_ifspec;
@@ -307,6 +328,233 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
 #endif 	/* __IProofOfPossessionCookieInfoManager2_INTERFACE_DEFINED__ */
 
 
+#ifndef __IProofOfPossessionCookieInfoManager3_INTERFACE_DEFINED__
+#define __IProofOfPossessionCookieInfoManager3_INTERFACE_DEFINED__
+
+/* interface IProofOfPossessionCookieInfoManager3 */
+/* [unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager3;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("c8891744-32bd-4a77-b92c-0e79a2823b96")
+    IProofOfPossessionCookieInfoManager3 : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetCookieInfoForUriWithOptions( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  DWORD options,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IProofOfPossessionCookieInfoManager3Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IProofOfPossessionCookieInfoManager3 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IProofOfPossessionCookieInfoManager3 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IProofOfPossessionCookieInfoManager3 * This);
+        
+        DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager3, GetCookieInfoForUriWithOptions)
+        HRESULT ( STDMETHODCALLTYPE *GetCookieInfoForUriWithOptions )( 
+            __RPC__in IProofOfPossessionCookieInfoManager3 * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  DWORD options,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo);
+        
+        END_INTERFACE
+    } IProofOfPossessionCookieInfoManager3Vtbl;
+
+    interface IProofOfPossessionCookieInfoManager3
+    {
+        CONST_VTBL struct IProofOfPossessionCookieInfoManager3Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IProofOfPossessionCookieInfoManager3_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IProofOfPossessionCookieInfoManager3_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IProofOfPossessionCookieInfoManager3_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IProofOfPossessionCookieInfoManager3_GetCookieInfoForUriWithOptions(This,uri,options,cookieInfoCount,cookieInfo)	\
+    ( (This)->lpVtbl -> GetCookieInfoForUriWithOptions(This,uri,options,cookieInfoCount,cookieInfo) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IProofOfPossessionCookieInfoManager3_INTERFACE_DEFINED__ */
+
+
+#ifndef __IProofOfPossessionCookieInfoManager4_INTERFACE_DEFINED__
+#define __IProofOfPossessionCookieInfoManager4_INTERFACE_DEFINED__
+
+/* interface IProofOfPossessionCookieInfoManager4 */
+/* [unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager4;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3B74C75B-6E3F-494E-95EC-13174E12A89F")
+    IProofOfPossessionCookieInfoManager4 : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetCookieInfoForUriWithUserAgentId( 
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uaClientId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetCookieInfoWithUriAndUserAgentIdForAccount( 
+            /* [annotation][in] */ 
+            _In_  IInspectable *webAccount,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uaClientId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IProofOfPossessionCookieInfoManager4Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IProofOfPossessionCookieInfoManager4 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IProofOfPossessionCookieInfoManager4 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IProofOfPossessionCookieInfoManager4 * This);
+        
+        DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager4, GetCookieInfoForUriWithUserAgentId)
+        HRESULT ( STDMETHODCALLTYPE *GetCookieInfoForUriWithUserAgentId )( 
+            __RPC__in IProofOfPossessionCookieInfoManager4 * This,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uaClientId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo);
+        
+        DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager4, GetCookieInfoWithUriAndUserAgentIdForAccount)
+        HRESULT ( STDMETHODCALLTYPE *GetCookieInfoWithUriAndUserAgentIdForAccount )( 
+            __RPC__in IProofOfPossessionCookieInfoManager4 * This,
+            /* [annotation][in] */ 
+            _In_  IInspectable *webAccount,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR uaClientId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *cookieInfoCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo);
+        
+        END_INTERFACE
+    } IProofOfPossessionCookieInfoManager4Vtbl;
+
+    interface IProofOfPossessionCookieInfoManager4
+    {
+        CONST_VTBL struct IProofOfPossessionCookieInfoManager4Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IProofOfPossessionCookieInfoManager4_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IProofOfPossessionCookieInfoManager4_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IProofOfPossessionCookieInfoManager4_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IProofOfPossessionCookieInfoManager4_GetCookieInfoForUriWithUserAgentId(This,uri,uaClientId,cookieInfoCount,cookieInfo)	\
+    ( (This)->lpVtbl -> GetCookieInfoForUriWithUserAgentId(This,uri,uaClientId,cookieInfoCount,cookieInfo) ) 
+
+#define IProofOfPossessionCookieInfoManager4_GetCookieInfoWithUriAndUserAgentIdForAccount(This,webAccount,uri,uaClientId,cookieInfoCount,cookieInfo)	\
+    ( (This)->lpVtbl -> GetCookieInfoWithUriAndUserAgentIdForAccount(This,webAccount,uri,uaClientId,cookieInfoCount,cookieInfo) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IProofOfPossessionCookieInfoManager4_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __ProofOfPossessionCookieInfoManagerLib_LIBRARY_DEFINED__
 #define __ProofOfPossessionCookieInfoManagerLib_LIBRARY_DEFINED__
@@ -326,15 +574,15 @@ ProofOfPossessionCookieInfoManager;
 #endif
 #endif /* __ProofOfPossessionCookieInfoManagerLib_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_proofofpossessioncookieinfo_0000_0003 */
+/* interface __MIDL_itf_proofofpossessioncookieinfo_0000_0005 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_proofofpossessioncookieinfo_0000_0003_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_proofofpossessioncookieinfo_0000_0003_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_proofofpossessioncookieinfo_0000_0005_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_proofofpossessioncookieinfo_0000_0005_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

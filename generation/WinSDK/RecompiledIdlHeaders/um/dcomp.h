@@ -1475,7 +1475,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDeviceDebug, IUnknown, "A1A3C64A-224F-4A81-9
     STDMETHOD(EnableDebugCounters)(THIS_
         ) PURE;
 
-    // Enables debug counters
+    // Disables debug counters
     STDMETHOD(DisableDebugCounters)(THIS_
         ) PURE;
 };

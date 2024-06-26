@@ -13,6 +13,8 @@
            xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
+           xmlns:mc="http://schemas.microsoft.com/appx/manifest/mediacodec/windows10"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -24,7 +26,9 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
-
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/mediacodec/windows10"/>
+  
   <xs:element name="MainPackageDependency" substitutionGroup="f:MainPackageDependencyChoice2">
     <xs:complexType>
       <xs:attribute name="Name" type="t:ST_PackageName" use="required"/>
@@ -89,6 +93,7 @@
         <xs:element name="DevicePortalProvider" type="CT_DevicePortalProvider"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Uap4" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
@@ -158,6 +163,7 @@
     <xs:attribute name="Category" type="ST_MediaCodecCategory" use="required"/>
     <xs:attribute name="AppServiceName" type="t:ST_AppServiceName" use="optional"/>
     <xs:attributeGroup ref="wincap3:InprocMediaCodecAttributes"/>
+    <xs:attribute ref="mc:CodecType" use="optional"/>
   </xs:complexType>
 
   <xs:simpleType name="ST_MediaCodecCategory">

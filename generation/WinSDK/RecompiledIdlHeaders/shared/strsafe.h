@@ -424,6 +424,7 @@ _Success_(1)  // always succeeds, no exit tests needed
 #define __WARNING_DEREF_NULL_PTR 6011
 #define __WARNING_MISSING_ZERO_TERMINATION2 6054
 #define __WARNING_INVALID_PARAM_VALUE_1 6387
+#define __WARNING_UNSAFE_STRING_FUNCTION 25025
 #define __WARNING_INCORRECT_ANNOTATION 26007
 #define __WARNING_POTENTIAL_BUFFER_OVERFLOW_HIGH_PRIORITY 26015
 #define __WARNING_PRECONDITION_NULLTERMINATION_VIOLATION 26035
@@ -10008,6 +10009,7 @@ STRSAFEWORKERAPI
 #else
 #pragma warning(push)
 #pragma warning(disable: __WARNING_BANNED_API_USAGE)// "STRSAFE not included"
+#pragma warning(disable: __WARNING_UNSAFE_STRING_FUNCTION) // call to dangerous string function '_vsnprintf'.
     iRet = _vsnprintf(pszDest, cchMax, pszFormat, argList);
 #pragma warning(pop)
 #endif

@@ -24,7 +24,7 @@ extern "C" {
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-#if NTDDI_VERSION >= NTDDI_WIN8 
+#if NTDDI_VERSION >= NTDDI_WIN8
 
 #ifndef SIPAEV_PREBOOT_CERT
 //----------------------------------TCG-defined PCR Event Types
@@ -98,7 +98,117 @@ extern "C" {
 #define SIPAEV_AMD_SL_SVN (0x00008005)
 #define SIPAEV_AMD_SL_LOAD_1 (0x00008006)
 #define SIPAEV_AMD_SL_SEPARATOR (0x00008007)
-
+//----------------------------------PCR Event Types for AMD HSP/Pluton
+#define SIPAEV_AMD_NO_ACTION (0x00000003)
+#define SIPAEV_AMD_BASE_2 (0x00008200)
+#define SIPAEV_AMD_SPL_TABLE_ROM (0x00008201)
+#define SIPAEV_AMD_PSP_BL_STAGE_1 (0x00008202)
+#define SIPAEV_AMD_PSP_KEYDB (0x00008203)
+#define SIPAEV_AMD_SPL_TABLE_FW (0x00008204)
+#define SIPAEV_AMD_PSP_BL_STAGE_2 (0x00008205)
+#define SIPAEV_AMD_PSP_L0_SEC_POL (0x00008206)
+#define SIPAEV_AMD_PMFW0 (0x00008207)
+#define SIPAEV_AMD_MP2_CONFIG (0x00008208)
+#define SIPAEV_AMD_MP2_FW (0x00008209)
+#define SIPAEV_AMD_ABL_1 (0x0000820A)
+#define SIPAEV_AMD_ABL_2 (0x0000820B)
+#define SIPAEV_AMD_ABL_3 (0x0000820C)
+#define SIPAEV_AMD_ABL_4 (0x0000820D)
+#define SIPAEV_AMD_ABL_5 (0x0000820E)
+#define SIPAEV_AMD_ABL_6 (0x0000820F)
+#define SIPAEV_AMD_ABL_7 (0x00008210)
+#define SIPAEV_AMD_ABL_8 (0x00008211)
+#define SIPAEV_AMD_ABL_9 (0x00008212)
+#define SIPAEV_AMD_ABL_10 (0x00008213)
+#define SIPAEV_AMD_ABL_11 (0x00008214)
+#define SIPAEV_AMD_ABL_12 (0x00008215)
+#define SIPAEV_AMD_ABL_13 (0x00008216)
+#define SIPAEV_AMD_ABL_14 (0x00008217)
+#define SIPAEV_AMD_ABL_15 (0x00008218)
+#define SIPAEV_AMD_ABL_16 (0x00008219)
+#define SIPAEV_AMD_ABL_17 (0x0000821A)
+#define SIPAEV_AMD_ABL_18 (0x0000821B)
+#define SIPAEV_AMD_ABL_19 (0x0000821C)
+#define SIPAEV_AMD_ABL_20 (0x0000821D)
+#define SIPAEV_AMD_ABL_21 (0x0000821E)
+#define SIPAEV_AMD_ABL_22 (0x0000821F)
+#define SIPAEV_AMD_ABL_23 (0x00008220)
+#define SIPAEV_AMD_ABL_24 (0x00008221)
+#define SIPAEV_AMD_ABL_25 (0x00008222)
+#define SIPAEV_AMD_ABL_26 (0x00008223)
+#define SIPAEV_AMD_ABL_27 (0x00008224)
+#define SIPAEV_AMD_ABL_28 (0x00008225)
+#define SIPAEV_AMD_ABL_29 (0x00008226)
+#define SIPAEV_AMD_ABL_30 (0x00008227)
+#define SIPAEV_AMD_ABL_31 (0x00008228)
+#define SIPAEV_AMD_ABL_32 (0x00008229)
+#define SIPAEV_AMD_ABL_33 (0x0000822A)
+#define SIPAEV_AMD_ABL_34 (0x0000822B)
+#define SIPAEV_AMD_ABL_35 (0x0000822C)
+#define SIPAEV_AMD_ABL_36 (0x0000822D)
+#define SIPAEV_AMD_ABL_37 (0x0000822E)
+#define SIPAEV_AMD_ABL_38 (0x0000822F)
+#define SIPAEV_AMD_ABL_39 (0x00008230)
+#define SIPAEV_AMD_ABL_40 (0x00008231)
+#define SIPAEV_AMD_ABL_41 (0x00008232)
+#define SIPAEV_AMD_ABL_42 (0x00008233)
+#define SIPAEV_AMD_ABL_43 (0x00008234)
+#define SIPAEV_AMD_ABL_44 (0x00008235)
+#define SIPAEV_AMD_ABL_45 (0x00008236)
+#define SIPAEV_AMD_ABL_46 (0x00008237)
+#define SIPAEV_AMD_ABL_47 (0x00008238)
+#define SIPAEV_AMD_ABL_48 (0x00008239)
+#define SIPAEV_AMD_MID_SMU (0x0000823A)
+#define SIPAEV_AMD_PM_FW1 (0x0000823B)
+#define SIPAEV_AMD_VBL_1 (0x0000823C)
+#define SIPAEV_AMD_VBL_2 (0x0000823D)
+#define SIPAEV_AMD_VBL_3 (0x0000823E)
+#define SIPAEV_AMD_VBL_4 (0x0000823F)
+#define SIPAEV_AMD_VBL_5 (0x00008240)
+#define SIPAEV_AMD_VBL_6 (0x00008241)
+#define SIPAEV_AMD_VBL_7 (0x00008242)
+#define SIPAEV_AMD_VBL_8 (0x00008243)
+#define SIPAEV_AMD_VBL_9 (0x00008244)
+#define SIPAEV_AMD_VBL_10 (0x00008245)
+#define SIPAEV_AMD_PSP_L1_SEC_POL (0x00008246)
+#define SIPAEV_AMD_IP_DISCOVERY (0x00008247)
+#define SIPAEV_AMD_SYS_DRV (0x00008248)
+#define SIPAEV_AMD_TOS (0x00008249)
+#define SIPAEV_AMD_PSP_TOS_KEYDB (0x0000824A)
+#define SIPAEV_AMD_ABL_TOC (0x0000824B)
+#define SIPAEV_AMD_PMU1_DATA (0x0000824C)
+#define SIPAEV_AMD_PMU2_DATA (0x0000824D)
+#define SIPAEV_AMD_PMU1 (0x0000824E)
+#define SIPAEV_AMD_PMU2 (0x0000824F)
+#define SIPAEV_AMD_MPIO_FW (0x00008250)
+#define SIPAEV_AMD_MP5 (0x00008251)
+#define SIPAEV_AMD_MPCCX (0x00008252)
+#define SIPAEV_AMD_GMI3 (0x00008253)
+#define SIPAEV_AMD_TPMLITE (0x00008254)
+#define SIPAEV_AMD_PSP_SPIROM_CONFIG (0x00008255)
+#define SIPAEV_AMD_PSP_DF_RIB_TOC (0x00008256)
+#define SIPAEV_AMD_PSP_DF_RIB0 (0x00008257)
+#define SIPAEV_AMD_PSP_DF_RIB1 (0x00008258)
+#define SIPAEV_AMD_PSP_DF_RIB2 (0x00008259)
+#define SIPAEV_AMD_PSP_DF_RIB3 (0x0000825A)
+#define SIPAEV_AMD_PSP_DF_RIB4 (0x0000825B)
+#define SIPAEV_AMD_PSP_DF_RIB5 (0x0000825C)
+#define SIPAEV_AMD_PSP_DF_RIB6 (0x0000825D)
+#define SIPAEV_AMD_PSP_DF_RIB7 (0x0000825E)
+#define SIPAEV_AMD_PSP_DF_RIB8 (0x0000825F)
+#define SIPAEV_AMD_PSP_DF_RIB9 (0x00008260)
+#define SIPAEV_AMD_PSP_DF_RIB10 (0x00008261)
+#define SIPAEV_AMD_PSP_DF_RIB11 (0x00008262)
+#define SIPAEV_AMD_PSP_DF_RIB12 (0x00008263)
+#define SIPAEV_AMD_PSP_DF_RIB13 (0x00008264)
+#define SIPAEV_AMD_PSP_DF_RIB14 (0x00008265)
+#define SIPAEV_AMD_PSP_DF_RIB15 (0x00008266)
+#define SIPAEV_AMD_SECURE_DEBUG_UNLOCK (0x00008267)
+#define SIPAEV_AMD_PSP_BL_END (0x000082FF)
+#define SIPAEV_AMD_FTPM_DRV (0x00008300)
+#define SIPAEV_AMD_DRTM_DRV (0x00008301)
+#define SIPAEV_AMD_AGESA_DRV (0x00008302)
+#define SIPAEV_AMD_PSP_END (0x000083FF)
 #endif
 
 //-----------------------------Types of tagged events in WBCL file
@@ -141,7 +251,7 @@ extern "C" {
 #define SIPAEVENT_KSR_AGGREGATION                     (SIPAEVENTTYPE_AGGREGATION + \
                                                        SIPAEVENTTYPE_CONTAINER   + \
                                                        0x0005)
-                                            
+
 #define SIPAEVENT_KSR_SIGNED_MEASUREMENT_AGGREGATION  (SIPAEVENTTYPE_AGGREGATION + \
                                                        SIPAEVENTTYPE_CONTAINER + \
                                                        0x0006)
@@ -180,7 +290,7 @@ extern "C" {
 #define SIPAEVENT_COUNTERID                (SIPAEVENTTYPE_INFORMATION + \
                                             0x0007)
 
-#if NTDDI_VERSION >= NTDDI_THRESHOLD 
+#if NTDDI_VERSION >= NTDDI_THRESHOLD
 
 #define SIPAEVENT_MORBIT_NOT_CANCELABLE    (SIPAEVENTTYPE_INFORMATION + \
                                             0x0008)
@@ -193,10 +303,10 @@ extern "C" {
 #endif
 
 //
-// This event data contains a single DWORD which corresponds 
-// to the NTSTATUS code returned by the (regular, non-secure) MOR bit 
-// setting API. The status code is either a success or the first 
-// failure code encountered by each pre-boot app attempting to manipulate 
+// This event data contains a single DWORD which corresponds
+// to the NTSTATUS code returned by the (regular, non-secure) MOR bit
+// setting API. The status code is either a success or the first
+// failure code encountered by each pre-boot app attempting to manipulate
 // the MOR bit state.
 // This event is available starting with NTDDI_WIN10_RS2.
 //
@@ -207,7 +317,7 @@ extern "C" {
 #define SIPAEVENT_BOOTDEBUGGING            (SIPAEVENTTYPE_PREOSPARAMETER + \
                                             0x0001)
 
-#if NTDDI_VERSION >= NTDDI_THRESHOLD 
+#if NTDDI_VERSION >= NTDDI_THRESHOLD
 
 #define SIPAEVENT_BOOT_REVOCATION_LIST     (SIPAEVENTTYPE_PREOSPARAMETER + \
                                             0x0002)
@@ -245,7 +355,7 @@ extern "C" {
 #define SIPAEVENT_DRIVER_LOAD_POLICY       (SIPAEVENTTYPE_OSPARAMETER + \
                                             0x000E)
 
-#if NTDDI_VERSION >= NTDDI_THRESHOLD 
+#if NTDDI_VERSION >= NTDDI_THRESHOLD
 
 //
 //  SIPAEVENT_SI_POLICY is used to describe the System Integrity (SI) policy
@@ -287,7 +397,7 @@ extern "C" {
 
 #endif
 
-#if NTDDI_VERSION >= NTDDI_WIN10_RS1 
+#if NTDDI_VERSION >= NTDDI_WIN10_RS1
 
 #define SIPAEVENT_FLIGHTSIGNING            (SIPAEVENTTYPE_OSPARAMETER + \
                                             0x0021)
@@ -329,10 +439,10 @@ extern "C" {
 
 #endif
 
-// #if NTDDI_VERSION >= NTDDI_WIN10_RS2 
+// #if NTDDI_VERSION >= NTDDI_WIN10_RS2
 
 //
-// The data portion for this event is a single DWORD carrying the LSA_ISO_* flags 
+// The data portion for this event is a single DWORD carrying the LSA_ISO_* flags
 // as read from the corresponding UEFI variable ("Kernel_Lsa_Cfg_Flags") or from
 // the LsaIso configuration in the registry.
 // This event is only recorded if the LsaIso configuration can be found in at least one
@@ -347,7 +457,7 @@ extern "C" {
 
 //
 // This event contains certain details of the active Secure Boot Custom Policy (SBCP).
-// The data portion for this event is an instance of SIPAEVENT_SBCP_INFO_PAYLOAD_V* 
+// The data portion for this event is an instance of SIPAEVENT_SBCP_INFO_PAYLOAD_V*
 // structure.
 //
 #define SIPAEVENT_SBCP_INFO                 (SIPAEVENTTYPE_OSPARAMETER + \
@@ -366,6 +476,39 @@ extern "C" {
                                                    0x0030)
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+//
+// These event contain details of the signer and allowed update signers of the
+// associated SIPAEVENT_SI_POLICY Application Control policy event.
+//
+#define SIPAEVENT_SI_POLICY_SIGNER          (SIPAEVENTTYPE_OSPARAMETER + \
+                                             0x0031)
+
+#define SIPAEVENT_SI_POLICY_UPDATE_SIGNER   (SIPAEVENTTYPE_OSPARAMETER + \
+                                             0x0032)
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
+
+#if NTDDI_VERSION >= NTDDI_WIN10_GE
+
+#define SIPAEVENT_REFS_VOLUME_CHECKPOINT_RECORD_CHECKSUM                     (SIPAEVENTTYPE_OSPARAMETER + \
+                                                                              0x0033)
+
+#define SIPAEVENT_REFS_ROLLBACK_PROTECTION_FROZEN_VOLUME_CHECKSUM            (SIPAEVENTTYPE_OSPARAMETER + \
+                                                                              0x0034)
+
+#define SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH                 (SIPAEVENTTYPE_OSPARAMETER + \
+                                                                              0x0035)
+
+#define SIPAEVENT_REFS_ROLLBACK_PROTECTION_VERIFICATION_SUCCEEDED            (SIPAEVENTTYPE_OSPARAMETER + \
+                                                                              0x0036)
+
+#define SIPAEVENT_REFS_ROLLBACK_PROTECTION_VOLUME_FIRST_EVER_MOUNT           (SIPAEVENTTYPE_OSPARAMETER + \
+                                                                              0x0037)
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_GE
 
 //SIPAEVENTTYPE_AUHTORITY
 #define SIPAEVENT_NOAUTHORITY              (SIPAEVENTTYPE_AUTHORITY + \
@@ -399,7 +542,7 @@ extern "C" {
 
 #if NTDDI_VERSION >= NTDDI_WIN10_NI
 
-#define SIPAEVENT_MODULE_HSP               (SIPAEVENTTYPE_LOADEDMODULE + \
+#define SIPAEVENT_MODULE_PLUTON            (SIPAEVENTTYPE_LOADEDMODULE + \
                                             0x000c)
 
 #endif //NTDDI_VERSION >= NTDDI_WIN10_NI
@@ -575,7 +718,7 @@ extern "C" {
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS3
 
-#endif //NTDDI_VERSION >= NTDDI_WIN8 
+#endif //NTDDI_VERSION >= NTDDI_WIN8
 
 //---------------------------Logging structures in the TCG log
 #pragma pack(push,1)
@@ -613,7 +756,7 @@ typedef struct _WBCL_Iterator
 {
   // Pointer to the first element of the log.
   PVOID     firstElementPtr;
-  
+
   // Log size in bytes.
   UINT32    logSize;
 
@@ -646,19 +789,19 @@ typedef struct _WBCL_Iterator
 // The maximum allowed length of the binary name.
 //
 
-#define MAX_HSP_UPGRADE_FILENAME_LENGTH (64)
+#define MAX_PLUTON_UPGRADE_FILENAME_LENGTH (64)
 
 #if NTDDI_VERSION >= NTDDI_WIN10_NI
 
-#define WBCL_MAX_HSP_UPGRADE_HASH_LEN   (64)
+#define WBCL_MAX_PLUTON_UPGRADE_HASH_LEN   (64)
 
-typedef struct _HSP_UPGRADE_IMAGEDATA
+typedef struct _PLUTON_UPGRADE_IMAGEDATA
 {
   UINT16    hashAlgID;
   UINT16    digestSize;
-  BYTE      digest[WBCL_MAX_HSP_UPGRADE_HASH_LEN];
-  WCHAR     fileName[MAX_HSP_UPGRADE_FILENAME_LENGTH];
-} HSP_UPGRADE_IMAGEDATA, *PHSP_UPGRADE_IMAGEDATA;
+  BYTE      digest[WBCL_MAX_PLUTON_UPGRADE_HASH_LEN];
+  WCHAR     fileName[MAX_PLUTON_UPGRADE_FILENAME_LENGTH];
+} PLUTON_UPGRADE_IMAGEDATA, *PPLUTON_UPGRADE_IMAGEDATA;
 
 #endif //NTDDI_VERSION >= NTDDI_WIN10_NI
 
@@ -700,7 +843,7 @@ WbclApiMoveToNextElement(
 // =========  SHA-1 legacy WBCL structures =================
 #define WBCL_HASH_LEN_SHA1 20
 
-#if NTDDI_VERSION >= NTDDI_WIN8 
+#if NTDDI_VERSION >= NTDDI_WIN8
 
 typedef struct _TCG_PCClientPCREventStruct
 {
@@ -731,9 +874,9 @@ typedef struct _WBCL_LogHdr
     UINT32 length;
 } WBCL_LogHdr, *PWBCL_LogHdr;
 
-#endif //NTDDI_VERSION >= NTDDI_WIN8 
+#endif //NTDDI_VERSION >= NTDDI_WIN8
 
-#if NTDDI_VERSION >= NTDDI_THRESHOLD 
+#if NTDDI_VERSION >= NTDDI_THRESHOLD
 
 //
 // Describes the VSM/SMART identity public key.
@@ -744,7 +887,7 @@ typedef struct tag_SIPAEVENT_VSM_IDK_RSA_INFO
     // Length of the RSA IDK modulus in bits.
     //
     ULONG32 KeyBitLength;
-    
+
     //
     // Length of the RSA IDK public exponent in bytes.
     //
@@ -782,7 +925,7 @@ typedef struct tag_SIPAEVENT_VSM_IDK_INFO_PAYLOAD
         //
         // Description of the RSA public key.
         //
-        SIPAEVENT_VSM_IDK_RSA_INFO	RsaKeyInfo;	
+        SIPAEVENT_VSM_IDK_RSA_INFO	RsaKeyInfo;
     } DUMMYUNIONNAME;
 
 } SIPAEVENT_VSM_IDK_INFO_PAYLOAD, *PSIPAEVENT_VSM_IDK_INFO_PAYLOAD;
@@ -825,6 +968,103 @@ typedef struct tag_SIPAEVENT_SI_POLICY_PAYLOAD
     BYTE    VarLengthData[ANYSIZE_ARRAY];
 
 } SIPAEVENT_SI_POLICY_PAYLOAD, *PSIPAEVENT_SI_POLICY_PAYLOAD;
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+//
+// Payload structure used to carry certificate information.
+//
+typedef struct tag_SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD
+{
+    //
+    // Indicates the length (in bytes) of the certificate's CN. The CommonName
+    // is stored as part of VarLengthData.
+    //
+    UINT16 PublisherCommonNameLength;
+
+    //
+    // Indicates the length (in bytes) of the certificate issuer's CN. The
+    // CommonName is stored as part of VarLengthData.
+    //
+    UINT16 IssuerCommonNameLength;
+
+    //
+    // Indicates hash algorithm ID used to produce the certificate's ToBeSigned digest
+    // in CAPI ALG_ID format.
+    //
+    UINT32 HashAlgID;
+
+    //
+    // Indicates the hash digest length (in bytes). Digest is stored as part of VarLengthData.
+    //
+    UINT16 DigestLength;
+
+    //
+    // VarLengthData layout is:
+    //
+    // WCHAR PublisherCommonName[PublisherCommonNameLength / sizeof(WCHAR)]
+    // WCHAR IssuerCommonName[IssuerCommonNameLength / sizeof(WCHAR)]
+    // BYTE Digest[DigestLength]
+    //
+    _Field_size_bytes_(PublisherCommonNameLength + IssuerCommonNameLength + DigestLength)
+    BYTE VarLengthData[ANYSIZE_ARRAY];
+
+} SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD, *PSIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD;
+
+//
+// Payload structure used to carry signing information about any policy blob.
+// Although the struct is pack(1), fields are ordered to remain naturally
+// aligned.
+//
+typedef struct tag_SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD
+{
+    //
+    // The root certificate ID. Contains one of the MINCRYPT_KNOWN_ROOT_ID values which
+    // are also documented at https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/operations/event-tag-explanations
+    //
+    UINT32 RootID;
+
+    //
+    // Indicates the length (in bytes) of all SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD
+    // structures.
+    //
+    UINT32 CertificatesLength;
+
+    //
+    // The total number of SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD structures.
+    //
+    UINT16 CertificatesCount;
+
+    //
+    // Indicates the length (in bytes) of the policy name stored as part of VarLengthData.
+    // This is the same name as the corresponding SIPAEVENT_SI_POLICY_PAYLOAD PolicyName.
+    //
+    UINT16 PolicyNameLength;
+
+    //
+    // Indicates the length (in bytes) of the encoded set of EKUs. The format is:
+    // [Single-byte length | EKU[length]], ...
+    //
+    UINT16 EKUsLength;
+
+    //
+    // The number of EKUs.
+    //
+    UINT16 EKUsCount;
+
+    //
+    // VarLengthData layout is:
+    //
+    // WCHAR PolicyName[PolicyNameLength / sizeof(WCHAR)]
+    // BYTE EKUs[EKUsLength]
+    // BYTE Certificates[CertificatesLength]
+    //
+    _Field_size_bytes_(PolicyNameLength + EKUsLength + CertificatesLength)
+    BYTE VarLengthData[ANYSIZE_ARRAY];
+
+} SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD, *PSIPAEVENT_SI_POLICY_SIGNER_PAYLOAD;
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
 
 //
 // Payload structure used to carry information about revocation lists.
@@ -894,7 +1134,7 @@ typedef struct tag_SIPAEVENT_KSR_SIGNATURE_PAYLOAD
 typedef struct tag_SIPAEVENT_SBCP_INFO_PAYLOAD_V1
 {
     //
-    // Version of this structure. 
+    // Version of this structure.
     // For SIPAEVENT_SBCP_INFO_PAYLOAD_V1 this value is going to be set to 1.
     //
     UINT32 PayloadVersion;
@@ -924,7 +1164,7 @@ typedef struct tag_SIPAEVENT_SBCP_INFO_PAYLOAD_V1
 
     //
     // Contains the SignersCount value for the SBCP.
-    // 
+    //
     UINT32  SignersCount;
 
     //

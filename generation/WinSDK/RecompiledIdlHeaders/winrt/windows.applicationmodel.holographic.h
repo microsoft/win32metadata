@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -242,7 +242,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ResetPlacementOverride(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicKeyboard = _uuidof(IHolographicKeyboard);
+                MIDL_CONST_ID IID& IID_IHolographicKeyboard = __uuidof(IHolographicKeyboard);
             } /* Holographic */
         } /* ApplicationModel */
     } /* Windows */
@@ -278,7 +278,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicKeyboardStatics = _uuidof(IHolographicKeyboardStatics);
+                MIDL_CONST_ID IID& IID_IHolographicKeyboardStatics = __uuidof(IHolographicKeyboardStatics);
             } /* Holographic */
         } /* ApplicationModel */
     } /* Windows */

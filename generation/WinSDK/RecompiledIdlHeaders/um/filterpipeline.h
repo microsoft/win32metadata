@@ -268,6 +268,7 @@ extern "C"{
 #define XPS_FP_RESOURCE_DLL_PATHS    L"ResourceDLLPaths"
 #define XPS_FP_JOB_LEVEL_PRINTTICKET    L"JobPrintTicket"
 #define XPS_FP_PRINTDEVICECAPABILITIES    L"PrintDeviceCapabilities"
+#define XPS_FP_FAX_JOB_PROPERTIES    L"JobFaxProperties"
 
 
 

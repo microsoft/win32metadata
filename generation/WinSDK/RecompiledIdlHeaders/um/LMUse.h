@@ -248,6 +248,7 @@ typedef struct _USE_INFO_5 {
 #define USE_OPTION_DEFERRED_CONNECTION_PARAMS 'CfeD'
 #define USE_OPTION_TRANSPORT_PARAMS 'ParT'
 #define USE_OPTION_SMB_COMPRESSION_PARAMS 'PmoC'
+#define USE_OPTION_BLOCK_NTLM_PARAMS 'NolB'
 
 typedef struct _USE_OPTION_GENERIC {
     ULONG  Tag;
@@ -268,10 +269,20 @@ typedef enum _TRANSPORT_TYPE {
    UseTransportType_Quic
 } TRANSPORT_TYPE, *PTRANSPORT_TYPE;
 
+typedef enum _TRANSPORT_INFO_FLAG {
+    NoneFlag               = 0x00000000,
+    TcpPortSetFlag         = 0x00000001,
+    QuicPortSetFlag        = 0x00000002,
+    RdmaPortSetFlag        = 0x00000004
+}  TRANSPORT_INFO_FLAG, *PTRANSPORT_INFO_FLAG;
+
 typedef struct _TRANSPORT_INFO {
     TRANSPORT_TYPE Type;
     BOOLEAN SkipCertificateCheck;
-    // TODO: port number
+    USHORT TcpPort;
+    USHORT QuicPort;
+    USHORT RdmaPort;
+    ULONG Flags; // TRANSPORT_INFO_FLAG
 } TRANSPORT_INFO, *PTRANSPORT_INFO;
 
 typedef struct _USE_OPTION_TRANSPORT_PARAMETERS {
@@ -293,6 +304,19 @@ typedef struct _SMB_USE_OPTION_COMPRESSION_PARAMETERS {
     USHORT Length;
     USHORT Reserved;
 } SMB_USE_OPTION_COMPRESSION_PARAMETERS, *PSMB_USE_OPTION_COMPRESSION_PARAMETERS;
+
+typedef struct _BLOCK_NTLM_INFO {
+    BOOLEAN BlockNTLM;
+    BYTE Reserved1; // 0
+    USHORT Reserved2; // 0
+    ULONG Reserved3; // 0 
+} BLOCK_NTLM_INFO, *PBLOCK_NTLM_INFO;
+
+typedef struct _USE_OPTION_BLOCK_NTLM_PARAMETERS {
+    ULONG Tag;    // 'NolB'
+    USHORT Length;
+    USHORT Reserved;
+} USE_OPTION_BLOCK_NTLM_PARAMETERS, *PUSE_OPTION_BLOCK_NTLM_PARAMETERS;
 
 typedef struct _SMB_TREE_CONNECT_PARAMETERS {
     ULONG EABufferOffset;  // relative offset 

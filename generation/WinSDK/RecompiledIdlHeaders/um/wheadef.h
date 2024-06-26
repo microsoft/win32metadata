@@ -79,6 +79,16 @@ typedef enum _WHEA_ERROR_SOURCE_STATE {
 #define WHEA_ERROR_SOURCE_FLAG_DEFAULTSOURCE             0x80000000
 
 //
+// This flag is added to an error source descriptor to indicate this source
+// is an override, and not a normal error source.
+//
+// Some error sources such as PCI populate the HEST flags into their OS
+// error source flags, so this bit is defined to not conflict with them.
+//
+
+#define WHEA_ERR_SRC_OVERRIDE_FLAG 0x40000000
+
+//
 // The definition of invalid related source comes from the ACPI spec
 //
 
@@ -720,26 +730,28 @@ Return Value:
 // WHEA PFA Policy Type
 //
 
-#define    WHEA_DISABLE_OFFLINE            0
-#define    WHEA_MEM_PERSISTOFFLINE         1
-#define    WHEA_MEM_PFA_DISABLE            2
-#define    WHEA_MEM_PFA_PAGECOUNT          3
-#define    WHEA_MEM_PFA_THRESHOLD          4
-#define    WHEA_MEM_PFA_TIMEOUT            5
-#define    WHEA_DISABLE_DUMMY_WRITE        6
-#define    WHEA_RESTORE_CMCI_ENABLED       7
-#define    WHEA_RESTORE_CMCI_ATTEMPTS      8
-#define    WHEA_RESTORE_CMCI_ERR_LIMIT     9
-#define    WHEA_CMCI_THRESHOLD_COUNT       10
-#define    WHEA_CMCI_THRESHOLD_TIME        11
-#define    WHEA_CMCI_THRESHOLD_POLL_COUNT  12
-#define    WHEA_PENDING_PAGE_LIST_SZ       13
-#define    WHEA_BAD_PAGE_LIST_MAX_SIZE     14
-#define    WHEA_BAD_PAGE_LIST_LOCATION     15
-#define    WHEA_NOTIFY_ALL_OFFLINES        16
-#define    WHEA_ROW_FAIL_CHECK_EXTENT      17
-#define    WHEA_ROW_FAIL_CHECK_ENABLE      18
-#define    WHEA_ROW_FAIL_CHECK_THRESHOLD   19
+#define    WHEA_DISABLE_OFFLINE                 0
+#define    WHEA_MEM_PERSISTOFFLINE              1
+#define    WHEA_MEM_PFA_DISABLE                 2
+#define    WHEA_MEM_PFA_PAGECOUNT               3
+#define    WHEA_MEM_PFA_THRESHOLD               4
+#define    WHEA_MEM_PFA_TIMEOUT                 5
+#define    WHEA_DISABLE_DUMMY_WRITE             6
+#define    WHEA_RESTORE_CMCI_ENABLED            7
+#define    WHEA_RESTORE_CMCI_ATTEMPTS           8
+#define    WHEA_RESTORE_CMCI_ERR_LIMIT          9
+#define    WHEA_CMCI_THRESHOLD_COUNT            10
+#define    WHEA_CMCI_THRESHOLD_TIME             11
+#define    WHEA_CMCI_THRESHOLD_POLL_COUNT       12
+#define    WHEA_PENDING_PAGE_LIST_SZ            13
+#define    WHEA_BAD_PAGE_LIST_MAX_SIZE          14
+#define    WHEA_BAD_PAGE_LIST_LOCATION          15
+#define    WHEA_NOTIFY_ALL_OFFLINES             16
+#define    WHEA_ROW_FAIL_CHECK_EXTENT           17
+#define    WHEA_ROW_FAIL_CHECK_ENABLE           18
+#define    WHEA_ROW_FAIL_CHECK_THRESHOLD        19
+#define    WHEA_DISABLE_PRM_ADDRESS_TRANSLATION 20
+#define    WHEA_ENABLE_BATCHED_ROW_OFFLINE      21
 
 #define IPMI_OS_SEL_RECORD_SIGNATURE 'RSSO'
 #define IPMI_OS_SEL_RECORD_VERSION_1 1
@@ -789,8 +801,6 @@ typedef struct _IPMI_OS_SEL_RECORD {
     UCHAR Data[ANYSIZE_ARRAY];
 } IPMI_OS_SEL_RECORD, *PIPMI_OS_SEL_RECORD;
 
-#include <poppack.h>
-
 #define IPMI_OS_SEL_RECORD_SIGNATURE 'RSSO'
 #define IPMI_OS_SEL_RECORD_VERSION_1 1
 #define IPMI_OS_SEL_RECORD_VERSION IPMI_OS_SEL_RECORD_VERSION_1
@@ -801,6 +811,119 @@ typedef struct _IPMI_OS_SEL_RECORD {
                                                        IPMI_IOCTL_INDEX + 0, \
                                                        METHOD_BUFFERED,      \
                                                        FILE_ANY_ACCESS)
+
+typedef union _DIMM_ADDRESS {
+
+    //
+    // DDR4 Address
+    //
+
+    struct {
+        UINT64 SocketId : 4;            // 16 Sockets
+        UINT64 MemoryControllerId : 2;  // 4 Memory Controllers
+        UINT64 ChannelId : 2;           // 4 Channels
+        UINT64 DimmSlot : 2;            // 3 DIMMs
+        UINT64 DimmRank : 2;            // 4 Ranks
+        UINT64 Device : 5;              // 18 Devices
+        UINT64 ChipSelect : 3;          // 8 Chip IDs
+        UINT64 Bank : 8;                // 16 Banks-includes BankGroup and Bank
+        UINT64 Dq : 4;                  // 16 DQs
+        UINT64 Reserved : 32;
+        UINT32 Row;
+        UINT32 Column;
+        UINT64 Info;
+    } Ddr4;
+
+    //
+    // DDR5 Address
+    //
+
+    struct {
+        UINT64 SocketId : 5;            // Up to 32 Sockets
+        UINT64 MemoryControllerId : 4;  // Up to 16 Memory Controllers/Socket
+        UINT64 ChannelId : 3;           // Up to 8 Channels/Memory Controller
+        UINT64 SubChannelId : 2;        // 4 Subchannels/Channel
+        UINT64 DimmSlot : 2;            // Up to 4 DIMMs/(Subchannel/Channel)
+        UINT64 DimmRank : 4;            // Up to 16 Electrical ranks/DIMM
+        UINT64 Device : 6;              // Up to 64 Devices/Electrical rank
+        UINT64 ChipId : 4;              // Up to 16 Chip IDs/DRAM Device
+        UINT64 Bank : 8;                // 256 Banks-includes BankGroup and Bank
+        UINT64 Dq : 5;                  // 32 DQs
+        UINT64 Reserved : 21;
+        UINT32 Row;                     // Up to 18 Row Bits 
+        UINT32 Column;                  // Up to 11 Column Bits
+        UINT64 Info;
+    } Ddr5;
+} DIMM_ADDRESS, *PDIMM_ADDRESS;
+
+typedef enum _PAGE_OFFLINE_ERROR_TYPES {
+    BitErrorDdr4,
+    RowErrorDdr4,
+    BitErrorDdr5,
+    RowErrorDdr5
+} PAGE_OFFLINE_ERROR_TYPES, *PPAGE_OFFLINE_ERROR_TYPES;
+
+typedef union _PAGE_OFFLINE_VALID_BITS {
+    struct {
+        UINT8 PhysicalAddress: 1;
+        UINT8 MemDefect: 1;
+        UINT8 Reserved: 6;
+    };
+
+    UINT8 AsUINT8;
+} PAGE_OFFLINE_VALID_BITS, *PPAGE_OFFLINE_VALID_BITS;
+
+typedef struct _DIMM_ADDR_VALID_BITS_DDR4 {
+    UINT32 SocketId: 1;
+    UINT32 MemoryControllerId: 1;
+    UINT32 ChannelId: 1;
+    UINT32 DimmSlot: 1;
+    UINT32 DimmRank: 1;
+    UINT32 Device: 1;
+    UINT32 ChipSelect: 1;
+    UINT32 Bank: 1;
+    UINT32 Dq: 1;
+    UINT32 Row: 1;
+    UINT32 Column: 1;
+    UINT32 Info: 1;
+    UINT32 Reserved: 20;
+} DIMM_ADDR_VALID_BITS_DDR4, *PDIMM_ADDR_VALID_BITS_DDR4;
+
+typedef struct _DIMM_ADDR_VALID_BITS_DDR5 {
+    UINT32 SocketId : 1;
+    UINT32 MemoryControllerId : 1;
+    UINT32 ChannelId : 1;
+    UINT32 SubChannelId : 1;
+    UINT32 DimmSlot : 1;
+    UINT32 DimmRank : 1;
+    UINT32 Device : 1;
+    UINT32 ChipId : 1;
+    UINT32 Bank : 1;
+    UINT32 Dq : 1;
+    UINT32 Row : 1;
+    UINT32 Column : 1;
+    UINT32 Info : 1;
+    UINT32 Reserved : 19;
+} DIMM_ADDR_VALID_BITS_DDR5, *PDIMM_ADDR_VALID_BITS_DDR5;
+
+typedef union _DIMM_ADDR_VALID_BITS {
+    DIMM_ADDR_VALID_BITS_DDR4 VB_DDR4;
+    DIMM_ADDR_VALID_BITS_DDR5 VB_DDR5;
+    UINT32 AsUINT32;
+} DIMM_ADDR_VALID_BITS, *PDIMM_ADDR_VALID_BITS;
+
+typedef struct _DIMM_INFO {
+    DIMM_ADDRESS DimmAddress;
+    DIMM_ADDR_VALID_BITS ValidBits;
+} DIMM_INFO, *PDIMM_INFO;
+
+typedef struct _MEMORY_DEFECT {
+    UINT32 Version;
+    DIMM_INFO DimmInfo;
+    PAGE_OFFLINE_ERROR_TYPES ErrType;
+} MEMORY_DEFECT, * PMEMORY_DEFECT;
+
+#include <poppack.h>
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

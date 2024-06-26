@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -6812,7 +6812,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioStreamDescriptor = _uuidof(IAudioStreamDescriptor);
+                MIDL_CONST_ID IID& IID_IAudioStreamDescriptor = __uuidof(IAudioStreamDescriptor);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -6860,7 +6860,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioStreamDescriptor2 = _uuidof(IAudioStreamDescriptor2);
+                MIDL_CONST_ID IID& IID_IAudioStreamDescriptor2 = __uuidof(IAudioStreamDescriptor2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -6896,7 +6896,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioStreamDescriptor3 = _uuidof(IAudioStreamDescriptor3);
+                MIDL_CONST_ID IID& IID_IAudioStreamDescriptor3 = __uuidof(IAudioStreamDescriptor3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -6933,7 +6933,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioStreamDescriptorFactory = _uuidof(IAudioStreamDescriptorFactory);
+                MIDL_CONST_ID IID& IID_IAudioStreamDescriptorFactory = __uuidof(IAudioStreamDescriptorFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -6985,7 +6985,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioTrack = _uuidof(IAudioTrack);
+                MIDL_CONST_ID IID& IID_IAudioTrack = __uuidof(IAudioTrack);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7021,7 +7021,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioTrackOpenFailedEventArgs = _uuidof(IAudioTrackOpenFailedEventArgs);
+                MIDL_CONST_ID IID& IID_IAudioTrackOpenFailedEventArgs = __uuidof(IAudioTrackOpenFailedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7066,7 +7066,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioTrackSupportInfo = _uuidof(IAudioTrackSupportInfo);
+                MIDL_CONST_ID IID& IID_IAudioTrackSupportInfo = __uuidof(IAudioTrackSupportInfo);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7108,7 +7108,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChapterCue = _uuidof(IChapterCue);
+                MIDL_CONST_ID IID& IID_IChapterCue = __uuidof(IChapterCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7156,7 +7156,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICodecInfo = _uuidof(ICodecInfo);
+                MIDL_CONST_ID IID& IID_ICodecInfo = __uuidof(ICodecInfo);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7195,7 +7195,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICodecQuery = _uuidof(ICodecQuery);
+                MIDL_CONST_ID IID& IID_ICodecQuery = __uuidof(ICodecQuery);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7381,7 +7381,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICodecSubtypesStatics = _uuidof(ICodecSubtypesStatics);
+                MIDL_CONST_ID IID& IID_ICodecSubtypesStatics = __uuidof(ICodecSubtypesStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7423,7 +7423,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataCue = _uuidof(IDataCue);
+                MIDL_CONST_ID IID& IID_IDataCue = __uuidof(IDataCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7463,7 +7463,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataCue2 = _uuidof(IDataCue2);
+                MIDL_CONST_ID IID& IID_IDataCue2 = __uuidof(IDataCue2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7499,7 +7499,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFaceDetectedEventArgs = _uuidof(IFaceDetectedEventArgs);
+                MIDL_CONST_ID IID& IID_IFaceDetectedEventArgs = __uuidof(IFaceDetectedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7554,7 +7554,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFaceDetectionEffect = _uuidof(IFaceDetectionEffect);
+                MIDL_CONST_ID IID& IID_IFaceDetectionEffect = __uuidof(IFaceDetectionEffect);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7602,7 +7602,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFaceDetectionEffectDefinition = _uuidof(IFaceDetectionEffectDefinition);
+                MIDL_CONST_ID IID& IID_IFaceDetectionEffectDefinition = __uuidof(IFaceDetectionEffectDefinition);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7642,7 +7642,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFaceDetectionEffectFrame = _uuidof(IFaceDetectionEffectFrame);
+                MIDL_CONST_ID IID& IID_IFaceDetectionEffectFrame = __uuidof(IFaceDetectionEffectFrame);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7681,7 +7681,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHighDynamicRangeControl = _uuidof(IHighDynamicRangeControl);
+                MIDL_CONST_ID IID& IID_IHighDynamicRangeControl = __uuidof(IHighDynamicRangeControl);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7720,7 +7720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHighDynamicRangeOutput = _uuidof(IHighDynamicRangeOutput);
+                MIDL_CONST_ID IID& IID_IHighDynamicRangeOutput = __uuidof(IHighDynamicRangeOutput);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7774,7 +7774,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IImageCue = _uuidof(IImageCue);
+                MIDL_CONST_ID IID& IID_IImageCue = __uuidof(IImageCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7816,7 +7816,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IInitializeMediaStreamSourceRequestedEventArgs = _uuidof(IInitializeMediaStreamSourceRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IInitializeMediaStreamSourceRequestedEventArgs = __uuidof(IInitializeMediaStreamSourceRequestedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7852,7 +7852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILowLightFusionResult = _uuidof(ILowLightFusionResult);
+                MIDL_CONST_ID IID& IID_ILowLightFusionResult = __uuidof(ILowLightFusionResult);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7895,7 +7895,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILowLightFusionStatics = _uuidof(ILowLightFusionStatics);
+                MIDL_CONST_ID IID& IID_ILowLightFusionStatics = __uuidof(ILowLightFusionStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -7944,7 +7944,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBinder = _uuidof(IMediaBinder);
+                MIDL_CONST_ID IID& IID_IMediaBinder = __uuidof(IMediaBinder);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8001,7 +8001,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBindingEventArgs = _uuidof(IMediaBindingEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaBindingEventArgs = __uuidof(IMediaBindingEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8040,7 +8040,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBindingEventArgs2 = _uuidof(IMediaBindingEventArgs2);
+                MIDL_CONST_ID IID& IID_IMediaBindingEventArgs2 = __uuidof(IMediaBindingEventArgs2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8076,7 +8076,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBindingEventArgs3 = _uuidof(IMediaBindingEventArgs3);
+                MIDL_CONST_ID IID& IID_IMediaBindingEventArgs3 = __uuidof(IMediaBindingEventArgs3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8125,7 +8125,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaCue = _uuidof(IMediaCue);
+                MIDL_CONST_ID IID& IID_IMediaCue = __uuidof(IMediaCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8161,7 +8161,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaCueEventArgs = _uuidof(IMediaCueEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaCueEventArgs = __uuidof(IMediaCueEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8192,7 +8192,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSource = _uuidof(IMediaSource);
+                MIDL_CONST_ID IID& IID_IMediaSource = __uuidof(IMediaSource);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8251,7 +8251,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSource2 = _uuidof(IMediaSource2);
+                MIDL_CONST_ID IID& IID_IMediaSource2 = __uuidof(IMediaSource2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8300,7 +8300,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSource3 = _uuidof(IMediaSource3);
+                MIDL_CONST_ID IID& IID_IMediaSource3 = __uuidof(IMediaSource3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8354,7 +8354,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSource4 = _uuidof(IMediaSource4);
+                MIDL_CONST_ID IID& IID_IMediaSource4 = __uuidof(IMediaSource4);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8390,7 +8390,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSource5 = _uuidof(IMediaSource5);
+                MIDL_CONST_ID IID& IID_IMediaSource5 = __uuidof(IMediaSource5);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8431,7 +8431,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceAppServiceConnection = _uuidof(IMediaSourceAppServiceConnection);
+                MIDL_CONST_ID IID& IID_IMediaSourceAppServiceConnection = __uuidof(IMediaSourceAppServiceConnection);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8468,7 +8468,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceAppServiceConnectionFactory = _uuidof(IMediaSourceAppServiceConnectionFactory);
+                MIDL_CONST_ID IID& IID_IMediaSourceAppServiceConnectionFactory = __uuidof(IMediaSourceAppServiceConnectionFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8504,7 +8504,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceError = _uuidof(IMediaSourceError);
+                MIDL_CONST_ID IID& IID_IMediaSourceError = __uuidof(IMediaSourceError);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8540,7 +8540,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceOpenOperationCompletedEventArgs = _uuidof(IMediaSourceOpenOperationCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaSourceOpenOperationCompletedEventArgs = __uuidof(IMediaSourceOpenOperationCompletedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8579,7 +8579,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceStateChangedEventArgs = _uuidof(IMediaSourceStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaSourceStateChangedEventArgs = __uuidof(IMediaSourceStateChangedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8646,7 +8646,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceStatics = _uuidof(IMediaSourceStatics);
+                MIDL_CONST_ID IID& IID_IMediaSourceStatics = __uuidof(IMediaSourceStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8683,7 +8683,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceStatics2 = _uuidof(IMediaSourceStatics2);
+                MIDL_CONST_ID IID& IID_IMediaSourceStatics2 = __uuidof(IMediaSourceStatics2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8720,7 +8720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceStatics3 = _uuidof(IMediaSourceStatics3);
+                MIDL_CONST_ID IID& IID_IMediaSourceStatics3 = __uuidof(IMediaSourceStatics3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8757,7 +8757,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaSourceStatics4 = _uuidof(IMediaSourceStatics4);
+                MIDL_CONST_ID IID& IID_IMediaSourceStatics4 = __uuidof(IMediaSourceStatics4);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8803,7 +8803,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamDescriptor = _uuidof(IMediaStreamDescriptor);
+                MIDL_CONST_ID IID& IID_IMediaStreamDescriptor = __uuidof(IMediaStreamDescriptor);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8843,7 +8843,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamDescriptor2 = _uuidof(IMediaStreamDescriptor2);
+                MIDL_CONST_ID IID& IID_IMediaStreamDescriptor2 = __uuidof(IMediaStreamDescriptor2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8919,7 +8919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSample = _uuidof(IMediaStreamSample);
+                MIDL_CONST_ID IID& IID_IMediaStreamSample = __uuidof(IMediaStreamSample);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -8955,7 +8955,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSample2 = _uuidof(IMediaStreamSample2);
+                MIDL_CONST_ID IID& IID_IMediaStreamSample2 = __uuidof(IMediaStreamSample2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9012,7 +9012,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSampleProtectionProperties = _uuidof(IMediaStreamSampleProtectionProperties);
+                MIDL_CONST_ID IID& IID_IMediaStreamSampleProtectionProperties = __uuidof(IMediaStreamSampleProtectionProperties);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9056,7 +9056,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSampleStatics = _uuidof(IMediaStreamSampleStatics);
+                MIDL_CONST_ID IID& IID_IMediaStreamSampleStatics = __uuidof(IMediaStreamSampleStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9094,7 +9094,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSampleStatics2 = _uuidof(IMediaStreamSampleStatics2);
+                MIDL_CONST_ID IID& IID_IMediaStreamSampleStatics2 = __uuidof(IMediaStreamSampleStatics2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9218,7 +9218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSource = _uuidof(IMediaStreamSource);
+                MIDL_CONST_ID IID& IID_IMediaStreamSource = __uuidof(IMediaStreamSource);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9262,7 +9262,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSource2 = _uuidof(IMediaStreamSource2);
+                MIDL_CONST_ID IID& IID_IMediaStreamSource2 = __uuidof(IMediaStreamSource2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9305,7 +9305,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSource3 = _uuidof(IMediaStreamSource3);
+                MIDL_CONST_ID IID& IID_IMediaStreamSource3 = __uuidof(IMediaStreamSource3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9348,7 +9348,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSource4 = _uuidof(IMediaStreamSource4);
+                MIDL_CONST_ID IID& IID_IMediaStreamSource4 = __uuidof(IMediaStreamSource4);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9384,7 +9384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceClosedEventArgs = _uuidof(IMediaStreamSourceClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceClosedEventArgs = __uuidof(IMediaStreamSourceClosedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9420,7 +9420,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceClosedRequest = _uuidof(IMediaStreamSourceClosedRequest);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceClosedRequest = __uuidof(IMediaStreamSourceClosedRequest);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9462,7 +9462,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceFactory = _uuidof(IMediaStreamSourceFactory);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceFactory = __uuidof(IMediaStreamSourceFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9498,7 +9498,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRenderedEventArgs = _uuidof(IMediaStreamSourceSampleRenderedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRenderedEventArgs = __uuidof(IMediaStreamSourceSampleRenderedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9546,7 +9546,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequest = _uuidof(IMediaStreamSourceSampleRequest);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequest = __uuidof(IMediaStreamSourceSampleRequest);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9580,7 +9580,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequestDeferral = _uuidof(IMediaStreamSourceSampleRequestDeferral);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequestDeferral = __uuidof(IMediaStreamSourceSampleRequestDeferral);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9616,7 +9616,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequestedEventArgs = _uuidof(IMediaStreamSourceSampleRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSampleRequestedEventArgs = __uuidof(IMediaStreamSourceSampleRequestedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9652,7 +9652,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingEventArgs = _uuidof(IMediaStreamSourceStartingEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingEventArgs = __uuidof(IMediaStreamSourceStartingEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9694,7 +9694,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingRequest = _uuidof(IMediaStreamSourceStartingRequest);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingRequest = __uuidof(IMediaStreamSourceStartingRequest);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9728,7 +9728,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingRequestDeferral = _uuidof(IMediaStreamSourceStartingRequestDeferral);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceStartingRequestDeferral = __uuidof(IMediaStreamSourceStartingRequestDeferral);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9770,7 +9770,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequest = _uuidof(IMediaStreamSourceSwitchStreamsRequest);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequest = __uuidof(IMediaStreamSourceSwitchStreamsRequest);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9804,7 +9804,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequestDeferral = _uuidof(IMediaStreamSourceSwitchStreamsRequestDeferral);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequestDeferral = __uuidof(IMediaStreamSourceSwitchStreamsRequestDeferral);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9840,7 +9840,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequestedEventArgs = _uuidof(IMediaStreamSourceSwitchStreamsRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaStreamSourceSwitchStreamsRequestedEventArgs = __uuidof(IMediaStreamSourceSwitchStreamsRequestedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9886,7 +9886,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaTrack = _uuidof(IMediaTrack);
+                MIDL_CONST_ID IID& IID_IMediaTrack = __uuidof(IMediaTrack);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -9999,7 +9999,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMseSourceBuffer = _uuidof(IMseSourceBuffer);
+                MIDL_CONST_ID IID& IID_IMseSourceBuffer = __uuidof(IMseSourceBuffer);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10049,7 +10049,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMseSourceBufferList = _uuidof(IMseSourceBufferList);
+                MIDL_CONST_ID IID& IID_IMseSourceBufferList = __uuidof(IMseSourceBufferList);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10131,7 +10131,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMseStreamSource = _uuidof(IMseStreamSource);
+                MIDL_CONST_ID IID& IID_IMseStreamSource = __uuidof(IMseStreamSource);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10170,7 +10170,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMseStreamSource2 = _uuidof(IMseStreamSource2);
+                MIDL_CONST_ID IID& IID_IMseStreamSource2 = __uuidof(IMseStreamSource2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10207,7 +10207,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMseStreamSourceStatics = _uuidof(IMseStreamSourceStatics);
+                MIDL_CONST_ID IID& IID_IMseStreamSourceStatics = __uuidof(IMseStreamSourceStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10259,7 +10259,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISceneAnalysisEffect = _uuidof(ISceneAnalysisEffect);
+                MIDL_CONST_ID IID& IID_ISceneAnalysisEffect = __uuidof(ISceneAnalysisEffect);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10302,7 +10302,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISceneAnalysisEffectFrame = _uuidof(ISceneAnalysisEffectFrame);
+                MIDL_CONST_ID IID& IID_ISceneAnalysisEffectFrame = __uuidof(ISceneAnalysisEffectFrame);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10342,7 +10342,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISceneAnalysisEffectFrame2 = _uuidof(ISceneAnalysisEffectFrame2);
+                MIDL_CONST_ID IID& IID_ISceneAnalysisEffectFrame2 = __uuidof(ISceneAnalysisEffectFrame2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10378,7 +10378,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISceneAnalyzedEventArgs = _uuidof(ISceneAnalyzedEventArgs);
+                MIDL_CONST_ID IID& IID_ISceneAnalyzedEventArgs = __uuidof(ISceneAnalyzedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10422,7 +10422,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISingleSelectMediaTrackList = _uuidof(ISingleSelectMediaTrackList);
+                MIDL_CONST_ID IID& IID_ISingleSelectMediaTrackList = __uuidof(ISingleSelectMediaTrackList);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10476,7 +10476,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechCue = _uuidof(ISpeechCue);
+                MIDL_CONST_ID IID& IID_ISpeechCue = __uuidof(ISpeechCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10515,7 +10515,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataStreamDescriptor = _uuidof(ITimedMetadataStreamDescriptor);
+                MIDL_CONST_ID IID& IID_ITimedMetadataStreamDescriptor = __uuidof(ITimedMetadataStreamDescriptor);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10552,7 +10552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataStreamDescriptorFactory = _uuidof(ITimedMetadataStreamDescriptorFactory);
+                MIDL_CONST_ID IID& IID_ITimedMetadataStreamDescriptorFactory = __uuidof(ITimedMetadataStreamDescriptorFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10627,7 +10627,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrack = _uuidof(ITimedMetadataTrack);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrack = __uuidof(ITimedMetadataTrack);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10670,7 +10670,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrack2 = _uuidof(ITimedMetadataTrack2);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrack2 = __uuidof(ITimedMetadataTrack2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10709,7 +10709,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrackError = _uuidof(ITimedMetadataTrackError);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrackError = __uuidof(ITimedMetadataTrackError);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10748,7 +10748,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrackFactory = _uuidof(ITimedMetadataTrackFactory);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrackFactory = __uuidof(ITimedMetadataTrackFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10784,7 +10784,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrackFailedEventArgs = _uuidof(ITimedMetadataTrackFailedEventArgs);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrackFailedEventArgs = __uuidof(ITimedMetadataTrackFailedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10818,7 +10818,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataTrackProvider = _uuidof(ITimedMetadataTrackProvider);
+                MIDL_CONST_ID IID& IID_ITimedMetadataTrackProvider = __uuidof(ITimedMetadataTrackProvider);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10869,7 +10869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextBouten = _uuidof(ITimedTextBouten);
+                MIDL_CONST_ID IID& IID_ITimedTextBouten = __uuidof(ITimedTextBouten);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10920,7 +10920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextCue = _uuidof(ITimedTextCue);
+                MIDL_CONST_ID IID& IID_ITimedTextCue = __uuidof(ITimedTextCue);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -10962,7 +10962,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextLine = _uuidof(ITimedTextLine);
+                MIDL_CONST_ID IID& IID_ITimedTextLine = __uuidof(ITimedTextLine);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11067,7 +11067,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextRegion = _uuidof(ITimedTextRegion);
+                MIDL_CONST_ID IID& IID_ITimedTextRegion = __uuidof(ITimedTextRegion);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11124,7 +11124,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextRuby = _uuidof(ITimedTextRuby);
+                MIDL_CONST_ID IID& IID_ITimedTextRuby = __uuidof(ITimedTextRuby);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11164,7 +11164,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextSource = _uuidof(ITimedTextSource);
+                MIDL_CONST_ID IID& IID_ITimedTextSource = __uuidof(ITimedTextSource);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11203,7 +11203,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextSourceResolveResultEventArgs = _uuidof(ITimedTextSourceResolveResultEventArgs);
+                MIDL_CONST_ID IID& IID_ITimedTextSourceResolveResultEventArgs = __uuidof(ITimedTextSourceResolveResultEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11254,7 +11254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextSourceStatics = _uuidof(ITimedTextSourceStatics);
+                MIDL_CONST_ID IID& IID_ITimedTextSourceStatics = __uuidof(ITimedTextSourceStatics);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11309,7 +11309,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextSourceStatics2 = _uuidof(ITimedTextSourceStatics2);
+                MIDL_CONST_ID IID& IID_ITimedTextSourceStatics2 = __uuidof(ITimedTextSourceStatics2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11414,7 +11414,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextStyle = _uuidof(ITimedTextStyle);
+                MIDL_CONST_ID IID& IID_ITimedTextStyle = __uuidof(ITimedTextStyle);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11471,7 +11471,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextStyle2 = _uuidof(ITimedTextStyle2);
+                MIDL_CONST_ID IID& IID_ITimedTextStyle2 = __uuidof(ITimedTextStyle2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11522,7 +11522,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextStyle3 = _uuidof(ITimedTextStyle3);
+                MIDL_CONST_ID IID& IID_ITimedTextStyle3 = __uuidof(ITimedTextStyle3);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11573,7 +11573,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedTextSubformat = _uuidof(ITimedTextSubformat);
+                MIDL_CONST_ID IID& IID_ITimedTextSubformat = __uuidof(ITimedTextSubformat);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11627,7 +11627,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoStabilizationEffect = _uuidof(IVideoStabilizationEffect);
+                MIDL_CONST_ID IID& IID_IVideoStabilizationEffect = __uuidof(IVideoStabilizationEffect);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11663,7 +11663,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoStabilizationEffectEnabledChangedEventArgs = _uuidof(IVideoStabilizationEffectEnabledChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IVideoStabilizationEffectEnabledChangedEventArgs = __uuidof(IVideoStabilizationEffectEnabledChangedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11702,7 +11702,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoStreamDescriptor = _uuidof(IVideoStreamDescriptor);
+                MIDL_CONST_ID IID& IID_IVideoStreamDescriptor = __uuidof(IVideoStreamDescriptor);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11738,7 +11738,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoStreamDescriptor2 = _uuidof(IVideoStreamDescriptor2);
+                MIDL_CONST_ID IID& IID_IVideoStreamDescriptor2 = __uuidof(IVideoStreamDescriptor2);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11775,7 +11775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoStreamDescriptorFactory = _uuidof(IVideoStreamDescriptorFactory);
+                MIDL_CONST_ID IID& IID_IVideoStreamDescriptorFactory = __uuidof(IVideoStreamDescriptorFactory);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11827,7 +11827,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTrack = _uuidof(IVideoTrack);
+                MIDL_CONST_ID IID& IID_IVideoTrack = __uuidof(IVideoTrack);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11863,7 +11863,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTrackOpenFailedEventArgs = _uuidof(IVideoTrackOpenFailedEventArgs);
+                MIDL_CONST_ID IID& IID_IVideoTrackOpenFailedEventArgs = __uuidof(IVideoTrackOpenFailedEventArgs);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -11902,7 +11902,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTrackSupportInfo = _uuidof(IVideoTrackSupportInfo);
+                MIDL_CONST_ID IID& IID_IVideoTrackSupportInfo = __uuidof(IVideoTrackSupportInfo);
             } /* Core */
         } /* Media */
     } /* Windows */
@@ -12418,10 +12418,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaSource2 ** Default Interface **
@@ -30989,10 +30989,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaSource2 ** Default Interface **

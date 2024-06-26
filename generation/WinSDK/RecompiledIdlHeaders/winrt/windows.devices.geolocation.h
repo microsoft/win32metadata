@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1801,7 +1801,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICivicAddress = _uuidof(ICivicAddress);
+                MIDL_CONST_ID IID& IID_ICivicAddress = __uuidof(ICivicAddress);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1852,7 +1852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoboundingBox = _uuidof(IGeoboundingBox);
+                MIDL_CONST_ID IID& IID_IGeoboundingBox = __uuidof(IGeoboundingBox);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1903,7 +1903,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoboundingBoxFactory = _uuidof(IGeoboundingBoxFactory);
+                MIDL_CONST_ID IID& IID_IGeoboundingBoxFactory = __uuidof(IGeoboundingBoxFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1951,7 +1951,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoboundingBoxStatics = _uuidof(IGeoboundingBoxStatics);
+                MIDL_CONST_ID IID& IID_IGeoboundingBoxStatics = __uuidof(IGeoboundingBoxStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1993,7 +1993,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocircle = _uuidof(IGeocircle);
+                MIDL_CONST_ID IID& IID_IGeocircle = __uuidof(IGeocircle);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2044,7 +2044,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocircleFactory = _uuidof(IGeocircleFactory);
+                MIDL_CONST_ID IID& IID_IGeocircleFactory = __uuidof(IGeocircleFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2110,7 +2110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinate = _uuidof(IGeocoordinate);
+                MIDL_CONST_ID IID& IID_IGeocoordinate = __uuidof(IGeocoordinate);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2152,7 +2152,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData = _uuidof(IGeocoordinateSatelliteData);
+                MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData = __uuidof(IGeocoordinateSatelliteData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2191,7 +2191,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData2 = _uuidof(IGeocoordinateSatelliteData2);
+                MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData2 = __uuidof(IGeocoordinateSatelliteData2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2227,7 +2227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPoint = _uuidof(IGeocoordinateWithPoint);
+                MIDL_CONST_ID IID& IID_IGeocoordinateWithPoint = __uuidof(IGeocoordinateWithPoint);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2269,7 +2269,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionData = _uuidof(IGeocoordinateWithPositionData);
+                MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionData = __uuidof(IGeocoordinateWithPositionData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2305,7 +2305,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionSourceTimestamp = _uuidof(IGeocoordinateWithPositionSourceTimestamp);
+                MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionSourceTimestamp = __uuidof(IGeocoordinateWithPositionSourceTimestamp);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2341,7 +2341,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithRemoteSource = _uuidof(IGeocoordinateWithRemoteSource);
+                MIDL_CONST_ID IID& IID_IGeocoordinateWithRemoteSource = __uuidof(IGeocoordinateWithRemoteSource);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2417,7 +2417,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeolocator = _uuidof(IGeolocator);
+                MIDL_CONST_ID IID& IID_IGeolocator = __uuidof(IGeolocator);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2451,7 +2451,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE AllowFallbackToConsentlessPositions(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeolocator2 = _uuidof(IGeolocator2);
+                MIDL_CONST_ID IID& IID_IGeolocator2 = __uuidof(IGeolocator2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2496,7 +2496,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeolocatorStatics = _uuidof(IGeolocatorStatics);
+                MIDL_CONST_ID IID& IID_IGeolocatorStatics = __uuidof(IGeolocatorStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2538,7 +2538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeolocatorStatics2 = _uuidof(IGeolocatorStatics2);
+                MIDL_CONST_ID IID& IID_IGeolocatorStatics2 = __uuidof(IGeolocatorStatics2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2580,7 +2580,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeolocatorWithScalarAccuracy = _uuidof(IGeolocatorWithScalarAccuracy);
+                MIDL_CONST_ID IID& IID_IGeolocatorWithScalarAccuracy = __uuidof(IGeolocatorWithScalarAccuracy);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2619,7 +2619,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeopath = _uuidof(IGeopath);
+                MIDL_CONST_ID IID& IID_IGeopath = __uuidof(IGeopath);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2667,7 +2667,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeopathFactory = _uuidof(IGeopathFactory);
+                MIDL_CONST_ID IID& IID_IGeopathFactory = __uuidof(IGeopathFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2706,7 +2706,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeopoint = _uuidof(IGeopoint);
+                MIDL_CONST_ID IID& IID_IGeopoint = __uuidof(IGeopoint);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2754,7 +2754,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeopointFactory = _uuidof(IGeopointFactory);
+                MIDL_CONST_ID IID& IID_IGeopointFactory = __uuidof(IGeopointFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2793,7 +2793,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoposition = _uuidof(IGeoposition);
+                MIDL_CONST_ID IID& IID_IGeoposition = __uuidof(IGeoposition);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2832,7 +2832,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoposition2 = _uuidof(IGeoposition2);
+                MIDL_CONST_ID IID& IID_IGeoposition2 = __uuidof(IGeoposition2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2872,7 +2872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeoshape = _uuidof(IGeoshape);
+                MIDL_CONST_ID IID& IID_IGeoshape = __uuidof(IGeoshape);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2914,7 +2914,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeovisit = _uuidof(IGeovisit);
+                MIDL_CONST_ID IID& IID_IGeovisit = __uuidof(IGeovisit);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2961,7 +2961,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeovisitMonitor = _uuidof(IGeovisitMonitor);
+                MIDL_CONST_ID IID& IID_IGeovisitMonitor = __uuidof(IGeovisitMonitor);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2997,7 +2997,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeovisitMonitorStatics = _uuidof(IGeovisitMonitorStatics);
+                MIDL_CONST_ID IID& IID_IGeovisitMonitorStatics = __uuidof(IGeovisitMonitorStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3033,7 +3033,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeovisitStateChangedEventArgs = _uuidof(IGeovisitStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IGeovisitStateChangedEventArgs = __uuidof(IGeovisitStateChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3069,7 +3069,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGeovisitTriggerDetails = _uuidof(IGeovisitTriggerDetails);
+                MIDL_CONST_ID IID& IID_IGeovisitTriggerDetails = __uuidof(IGeovisitTriggerDetails);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3105,7 +3105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPositionChangedEventArgs = _uuidof(IPositionChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IPositionChangedEventArgs = __uuidof(IPositionChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3141,7 +3141,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStatusChangedEventArgs = _uuidof(IStatusChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IStatusChangedEventArgs = __uuidof(IStatusChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3180,7 +3180,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVenueData = _uuidof(IVenueData);
+                MIDL_CONST_ID IID& IID_IVenueData = __uuidof(IVenueData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */

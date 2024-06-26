@@ -3642,6 +3642,11 @@ SetupScanFileQueueW(
 
 #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
 
+#if _SETUPAPI_VER >= _WIN32_WINNT_WIN10
+
+#define SPQ_SCAN_USE_OEM_CATALOGS               0x00000800
+
+#endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 
 //
 // Define flags used with Param2 for SPFILENOTIFY_QUEUESCAN
@@ -4633,6 +4638,11 @@ SetupInstallFilesFromInfSectionW(
 // (AddService) don't overwrite failure actions if they already exist
 //
 #define SPSVCINST_NOCLOBBER_FAILUREACTIONS (0x00020000)
+
+//
+// (AddService) don't overwrite boot flags if they already exist
+//
+#define SPSVCINST_NOCLOBBER_BOOTFLAGS (0x00040000)
 
 #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 

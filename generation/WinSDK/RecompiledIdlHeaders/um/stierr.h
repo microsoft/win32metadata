@@ -162,13 +162,6 @@ Revision History:
 #define STIERR_INVALID_HW_TYPE     \
         MAKE_HRESULT(SEVERITY_ERROR,FACILITY_WIN32,ERROR_INVALID_DATA)
 
-
- /*
-  * Device hardware type is not valid
-  */
-#define STIERR_INVALID_HW_TYPE     \
-        MAKE_HRESULT(SEVERITY_ERROR,FACILITY_WIN32,ERROR_INVALID_DATA)
-
  /*
   * No events available
   */

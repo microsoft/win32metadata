@@ -87,8 +87,6 @@ cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpoint_Default_VolumeInDb, 0x1da5d803,
 // vartype = VT_BLOB
 cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEngine_DeviceFormat, 0xf19f064d, 0x82c, 0x4e27, 0xbc, 0x73, 0x68, 0x82, 0xa1, 0xbb, 0x8e, 0x4c, 0); ")
 
-// PKEY_AudioEngine_* Index 0, 1, and 2 are in endpointkeys.h
-
 // PKEY_AudioEngine_OEMFormat:  Specifies the default format that
 // is used for rendering/capturing.  Populated by OEM INF file.
 // vartype = VT_BLOB
@@ -103,7 +101,6 @@ cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpointLogo_IconEffects, 0xf1ab780d, 0x
 // vartype = VT_LPWSTR
 cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpointLogo_IconPath, 0xf1ab780d, 0x2010, 0x4ed3, 0xa3, 0xa6, 0x8b, 0x87, 0xf0, 0xf0, 0xc4, 0x76, 1);")
 
-
 // PKEY_AudioEndpointSettings_xxx
 // GUID for PKEY_AudioEndpointSettings_XXX (WPDDK): 14242002-0320-4de4-9555-a7d82b73c286
 // Location in Registry: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render\{EndpointGUID}\Properties
@@ -115,10 +112,6 @@ cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpointSettings_MenuText, 0x14242002, 0
 // The Windows Action Contract that the OEM settings app is registered to handle.
 // vartype = VT_VECTOR | VT_LPWSTR
 cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpointSettings_LaunchContract, 0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 1);")
-
-// PKEY_AudioEngine_* Index 4, 5, and 6 are in endpointkeys.h
-
-// PKEY_AudioEngine_* index 7 is in endpointkeys.h
 
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 // ----------------------------------------------------------------------
@@ -152,6 +145,12 @@ typedef enum
     ERole_enum_count
 } ERole;
 
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */")
+#pragma endregion
+
+#pragma region Application or Games Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+
 typedef enum
 {
     RemoteNetworkDevice,    // = 0
@@ -170,7 +169,7 @@ typedef enum
 
 cpp_quote("#define HDMI     DigitalAudioDisplayDevice")
 cpp_quote("")
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */")
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 
 #pragma region Application Family

@@ -790,6 +790,7 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
 
 #endif
 
+
 //
 // SHGetSpecialFolderLocation
 //
@@ -955,7 +956,7 @@ typedef enum
 #endif //NTDDI_WIN10_RS3
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
-    // When running in a Centennial process, some file system locations are redirected to 
+    // When running in a Centennial process, some file system locations are redirected to
     // package-specific locations by the file system. Specifying this flag will cause the
     // target of the redirection to be returned for these locations. This is useful in
     // cases where the real location in the file system needs to be known.
@@ -966,12 +967,12 @@ typedef enum
 
     // When running inside an AppContainer process, or when providing an AppContainer token,
     // some folders are redirected to AppContainer-specific locations within the package's location.
-    // Specifying this flag will force this redirection for folders that are not normally 
-    // redirected for centennial processes. Useful for sharing files between between UWA and 
+    // Specifying this flag will force this redirection for folders that are not normally
+    // redirected for centennial processes. Useful for sharing files between between UWA and
     // Centennial apps that are within the same package.
     KF_FLAG_FORCE_PACKAGE_REDIRECTION = 0x00020000,
 
-    // When running inside a packaged process (Centennial,  AppContainer, etc.), or when providing 
+    // When running inside a packaged process (Centennial,  AppContainer, etc.), or when providing
     // a packaged process token, some folders are redirected to package-specific locations.
     // Specifying this flag will disable redirection on locations where it applied,
     // and instead return the non-redirected location.

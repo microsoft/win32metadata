@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION)
-#define WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION 0x40000
+#define WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1761,7 +1761,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentActivator : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentActivator is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentActivator : int
                 {
                     IsolatedWindowsEnvironmentActivator_System = 0,
                     IsolatedWindowsEnvironmentActivator_User = 1,
@@ -1784,7 +1788,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentAllowedClipboardFormats : unsigned int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentAllowedClipboardFormats is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentAllowedClipboardFormats : unsigned int
                 {
                     IsolatedWindowsEnvironmentAllowedClipboardFormats_None = 0,
                     IsolatedWindowsEnvironmentAllowedClipboardFormats_Text = 0x1,
@@ -1813,7 +1821,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentAvailablePrinters : unsigned int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentAvailablePrinters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentAvailablePrinters : unsigned int
                 {
                     IsolatedWindowsEnvironmentAvailablePrinters_None = 0,
                     IsolatedWindowsEnvironmentAvailablePrinters_Local = 0x1,
@@ -1841,7 +1853,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentClipboardCopyPasteDirections : unsigned int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentClipboardCopyPasteDirections is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentClipboardCopyPasteDirections : unsigned int
                 {
                     IsolatedWindowsEnvironmentClipboardCopyPasteDirections_None = 0,
                     IsolatedWindowsEnvironmentClipboardCopyPasteDirections_HostToIsolatedWindowsEnvironment = 0x1,
@@ -1867,7 +1883,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentCreateStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentCreateStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentCreateStatus : int
                 {
                     IsolatedWindowsEnvironmentCreateStatus_Success = 0,
                     IsolatedWindowsEnvironmentCreateStatus_FailureByPolicy = 1,
@@ -1891,7 +1911,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentCreationPriority : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentCreationPriority is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentCreationPriority : int
                 {
                     IsolatedWindowsEnvironmentCreationPriority_Low = 0,
                     IsolatedWindowsEnvironmentCreationPriority_Normal = 1,
@@ -1914,7 +1938,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentHostError : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentHostError is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentHostError : int
                 {
                     IsolatedWindowsEnvironmentHostError_AdminPolicyIsDisabledOrNotPresent = 0,
                     IsolatedWindowsEnvironmentHostError_FeatureNotInstalled = 1,
@@ -1940,7 +1968,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentLaunchFileStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentLaunchFileStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentLaunchFileStatus : int
                 {
                     IsolatedWindowsEnvironmentLaunchFileStatus_Success = 0,
                     IsolatedWindowsEnvironmentLaunchFileStatus_UnknownFailure = 1,
@@ -1969,7 +2001,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentOwnerRegistrationStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentOwnerRegistrationStatus : int
                 {
                     IsolatedWindowsEnvironmentOwnerRegistrationStatus_Success = 0,
                     IsolatedWindowsEnvironmentOwnerRegistrationStatus_InvalidArgument = 1,
@@ -1995,7 +2031,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentPostMessageStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentPostMessageStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentPostMessageStatus : int
                 {
                     IsolatedWindowsEnvironmentPostMessageStatus_Success = 0,
                     IsolatedWindowsEnvironmentPostMessageStatus_UnknownFailure = 1,
@@ -2019,7 +2059,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentProcessState : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentProcessState is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentProcessState : int
                 {
                     IsolatedWindowsEnvironmentProcessState_Running = 1,
                     IsolatedWindowsEnvironmentProcessState_Aborted = 2,
@@ -2043,7 +2087,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentProgressState : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentProgressState is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentProgressState : int
                 {
                     IsolatedWindowsEnvironmentProgressState_Queued = 0,
                     IsolatedWindowsEnvironmentProgressState_Processing = 1,
@@ -2079,7 +2127,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentShareFileStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFileStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentShareFileStatus : int
                 {
                     IsolatedWindowsEnvironmentShareFileStatus_Success = 0,
                     IsolatedWindowsEnvironmentShareFileStatus_UnknownFailure = 1,
@@ -2106,7 +2158,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentShareFolderStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFolderStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentShareFolderStatus : int
                 {
                     IsolatedWindowsEnvironmentShareFolderStatus_Success = 0,
                     IsolatedWindowsEnvironmentShareFolderStatus_UnknownFailure = 1,
@@ -2132,7 +2188,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentSignInProgress : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentSignInProgress is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentSignInProgress : int
                 {
                     IsolatedWindowsEnvironmentSignInProgress_Connecting = 0,
                     IsolatedWindowsEnvironmentSignInProgress_Connected = 1,
@@ -2159,7 +2219,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                enum IsolatedWindowsEnvironmentStartProcessStatus : int
+                enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentStartProcessStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentStartProcessStatus : int
                 {
                     IsolatedWindowsEnvironmentStartProcessStatus_Success = 0,
                     IsolatedWindowsEnvironmentStartProcessStatus_UnknownFailure = 1,
@@ -2185,7 +2249,11 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Isolation {
-                struct IsolatedWindowsEnvironmentCreateProgress
+                struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentCreateProgress is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                IsolatedWindowsEnvironmentCreateProgress
                 {
                     ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentProgressState State;
                     UINT32 PercentComplete;
@@ -2211,16 +2279,22 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("faf26ffa-8ce1-4cc1-b278-322d31a5e4a3")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("HostMessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IHostMessageReceivedCallback : public IUnknown
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("HostMessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE Invoke(
                         GUID receiverId,
                         __FIVectorView_1_IInspectable* message
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHostMessageReceivedCallback = _uuidof(IHostMessageReceivedCallback);
+                MIDL_CONST_ID IID& IID_IHostMessageReceivedCallback = __uuidof(IHostMessageReceivedCallback);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2245,16 +2319,22 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("f5b4c8ff-1d9d-4995-9fea-4d15257c0757")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("MessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IMessageReceivedCallback : public IUnknown
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("MessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE Invoke(
                         GUID receiverId,
                         __FIVectorView_1_IInspectable* message
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMessageReceivedCallback = _uuidof(IMessageReceivedCallback);
+                MIDL_CONST_ID IID& IID_IMessageReceivedCallback = __uuidof(IMessageReceivedCallback);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2282,18 +2362,30 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("41d24597-c328-4467-b37f-4dfc6f60b6bc")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironment : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Id(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE StartProcessSilentlyAsync(
                         HSTRING hostExePath,
                         HSTRING arguments,
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentActivator activator,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentStartProcessResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE StartProcessSilentlyWithTelemetryAsync(
                         HSTRING hostExePath,
                         HSTRING arguments,
@@ -2301,23 +2393,35 @@ namespace ABI {
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentStartProcessResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ShareFolderAsync(
                         HSTRING hostFolder,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentShareFolderRequestOptions* requestOptions,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFolderResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ShareFolderWithTelemetryAsync(
                         HSTRING hostFolder,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentShareFolderRequestOptions* requestOptions,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFolderResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE LaunchFileWithUIAsync(
                         HSTRING appExePath,
                         HSTRING argumentsTemplate,
                         HSTRING filePath,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentLaunchFileResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE LaunchFileWithUIAndTelemetryAsync(
                         HSTRING appExePath,
                         HSTRING argumentsTemplate,
@@ -2325,23 +2429,35 @@ namespace ABI {
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentLaunchFileResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE TerminateAsync(
                         ABI::Windows::Foundation::IAsyncAction** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE TerminateWithTelemetryAsync(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
                         ABI::Windows::Foundation::IAsyncAction** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE RegisterMessageReceiver(
                         GUID receiverId,
                         ABI::Windows::Security::Isolation::IMessageReceivedCallback* messageReceivedCallback
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE UnregisterMessageReceiver(
                         GUID receiverId
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment = _uuidof(IIsolatedWindowsEnvironment);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment = __uuidof(IIsolatedWindowsEnvironment);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2369,14 +2485,23 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("2d365f39-88bd-4ab4-93cf-7e2bcef337c0")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironment2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE PostMessageToReceiverAsync(
                         GUID receiverId,
                         __FIIterable_1_IInspectable* message,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentPostMessageResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE PostMessageToReceiverWithTelemetryAsync(
                         GUID receiverId,
                         __FIIterable_1_IInspectable* message,
@@ -2385,7 +2510,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment2 = _uuidof(IIsolatedWindowsEnvironment2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment2 = __uuidof(IIsolatedWindowsEnvironment2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2413,17 +2538,29 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("cb7fc7d2-d06e-4c26-8ada-dacdaaad03f5")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironment3 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE GetUserInfo(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentUserInfo** result
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ShareFileAsync(
                         HSTRING filePath,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentShareFileRequestOptions* options,
                         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFileResult** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ShareFileWithTelemetryAsync(
                         HSTRING filePath,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentShareFileRequestOptions* options,
@@ -2432,7 +2569,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment3 = _uuidof(IIsolatedWindowsEnvironment3);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment3 = __uuidof(IIsolatedWindowsEnvironment3);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2460,15 +2597,21 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("11e3701a-dd9e-4f1b-812c-4020f307f93c")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironment4 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ChangePriority(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentCreationPriority Priority
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment4 = _uuidof(IIsolatedWindowsEnvironment4);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironment4 = __uuidof(IIsolatedWindowsEnvironment4);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2496,21 +2639,33 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("ef9a5e58-dcd7-45c2-9c85-ab642a715e8e")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentCreateResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentCreateStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Environment(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironment** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentCreateResult = _uuidof(IIsolatedWindowsEnvironmentCreateResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentCreateResult = __uuidof(IIsolatedWindowsEnvironmentCreateResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2538,15 +2693,21 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("a547dbc7-61d4-4fb8-ab5c-edefa3d388ad")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentCreateResult2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ChangeCreationPriority(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentCreationPriority priority
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentCreateResult2 = _uuidof(IIsolatedWindowsEnvironmentCreateResult2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentCreateResult2 = __uuidof(IIsolatedWindowsEnvironmentCreateResult2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2574,29 +2735,44 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("1aca93e7-e804-454d-8466-f9897c20b0f6")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentFactory : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE CreateAsync(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentOptions* options,
                         __FIAsyncOperationWithProgress_2_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateResult_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateProgress** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE CreateWithTelemetryAsync(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentOptions* options,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
                         __FIAsyncOperationWithProgress_2_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateResult_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateProgress** operation
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE GetById(
                         HSTRING environmentId,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironment** result
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE FindByOwnerId(
                         HSTRING environmentOwnerId,
                         __FIVectorView_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironment** result
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFactory = _uuidof(IIsolatedWindowsEnvironmentFactory);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFactory = __uuidof(IIsolatedWindowsEnvironmentFactory);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2624,19 +2800,31 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("4d5ae1ef-029f-4101-8c35-fe91bf9cd5f0")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentFile : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Id(
                         GUID* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_HostPath(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE Close(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFile = _uuidof(IIsolatedWindowsEnvironmentFile);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFile = __uuidof(IIsolatedWindowsEnvironmentFile);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2664,18 +2852,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("4eeb8dec-ad5d-4b0a-b754-f36c3d46d684")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentFile2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_GuestPath(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_IsReadOnly(
                         boolean* value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFile2 = _uuidof(IIsolatedWindowsEnvironmentFile2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentFile2 = __uuidof(IIsolatedWindowsEnvironmentFile2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2703,18 +2900,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("2c0e22c7-05a0-517a-b81c-6ee8790c381f")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentHostStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_IsReady(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_HostErrors(
                         __FIVectorView_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentHostError** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentHostStatics = _uuidof(IIsolatedWindowsEnvironmentHostStatics);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentHostStatics = __uuidof(IIsolatedWindowsEnvironmentHostStatics);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2742,21 +2948,33 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("685d4176-f6e0-4569-b1aa-215c0ff5b257")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentLaunchFileResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentLaunchFileStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_File(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentFile** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentLaunchFileResult = _uuidof(IIsolatedWindowsEnvironmentLaunchFileResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentLaunchFileResult = __uuidof(IIsolatedWindowsEnvironmentLaunchFileResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2784,64 +3002,118 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("b71d98f7-61f0-4008-b207-0bf9eb2d76f2")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOptions : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_EnvironmentOwnerId(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_EnvironmentOwnerId(
                         HSTRING value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowedClipboardFormats(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowedClipboardFormats(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ClipboardCopyPasteDirections(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentClipboardCopyPasteDirections* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_ClipboardCopyPasteDirections(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentClipboardCopyPasteDirections value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AvailablePrinters(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAvailablePrinters* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AvailablePrinters(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAvailablePrinters value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_SharedHostFolderPath(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_SharedFolderNameInEnvironment(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE ShareHostFolderForUntrustedItems(
                         HSTRING SharedHostFolderPath,
                         HSTRING ShareFolderNameInEnvironment
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_PersistUserProfile(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_PersistUserProfile(
                         boolean value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowGraphicsHardwareAcceleration(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowGraphicsHardwareAcceleration(
                         boolean value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowCameraAndMicrophoneAccess(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowCameraAndMicrophoneAccess(
                         boolean value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions = _uuidof(IIsolatedWindowsEnvironmentOptions);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions = __uuidof(IIsolatedWindowsEnvironmentOptions);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2869,18 +3141,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("10d7cc31-8b8f-4b9d-b22c-617103b55b08")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOptions2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_WindowAnnotationOverride(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_WindowAnnotationOverride(
                         HSTRING value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions2 = _uuidof(IIsolatedWindowsEnvironmentOptions2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions2 = __uuidof(IIsolatedWindowsEnvironmentOptions2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2908,30 +3189,51 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("98d5aa23-161f-4cd9-8a9c-269b30122b0d")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOptions3 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowedClipboardFormatsToEnvironment(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowedClipboardFormatsToEnvironment(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowedClipboardFormatsToHost(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowedClipboardFormatsToHost(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentAllowedClipboardFormats value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_CreationPriority(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentCreationPriority* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_CreationPriority(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentCreationPriority value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions3 = _uuidof(IIsolatedWindowsEnvironmentOptions3);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOptions3 = __uuidof(IIsolatedWindowsEnvironmentOptions3);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -2959,24 +3261,39 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("f888ec22-e8cf-56c0-b1df-90af4ad80e84")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOwnerRegistrationData : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ShareableFolders(
                         __FIVector_1_HSTRING** value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ProcessesRunnableAsSystem(
                         __FIVector_1_HSTRING** value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ProcessesRunnableAsUser(
                         __FIVector_1_HSTRING** value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ActivationFileExtensions(
                         __FIVector_1_HSTRING** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationData = _uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationData);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationData = __uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationData);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3004,18 +3321,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("6dab9451-6169-55df-8f51-790e99d7277d")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOwnerRegistrationResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentOwnerRegistrationStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationResult = _uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationResult = __uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3043,20 +3369,29 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("10951754-204b-5ec9-9de3-df792d074a61")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentOwnerRegistrationStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE Register(
                         HSTRING ownerName,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentOwnerRegistrationData* ownerRegistrationData,
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentOwnerRegistrationResult** result
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE Unregister(
                         HSTRING ownerName
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationStatics = _uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationStatics);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentOwnerRegistrationStatics = __uuidof(IIsolatedWindowsEnvironmentOwnerRegistrationStatics);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3084,18 +3419,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("0dfa28fa-2ef0-4d8f-b341-3171b2df93b1")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentPostMessageResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentPostMessageStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentPostMessageResult = _uuidof(IIsolatedWindowsEnvironmentPostMessageResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentPostMessageResult = __uuidof(IIsolatedWindowsEnvironmentPostMessageResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3123,25 +3467,43 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("a858c3ef-8172-4f10-af93-cbe60af88d09")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentProcess : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_State(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentProcessState* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExitCode(
                         UINT32* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE WaitForExit(void) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE WaitForExitWithTimeout(
                         UINT32 timeoutMilliseconds
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE WaitForExitAsync(
                         ABI::Windows::Foundation::IAsyncAction** operation
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentProcess = _uuidof(IIsolatedWindowsEnvironmentProcess);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentProcess = __uuidof(IIsolatedWindowsEnvironmentProcess);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3169,18 +3531,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("c9190ed8-0fd0-4946-bb88-117a60737b61")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentShareFileRequestOptions : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowWrite(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowWrite(
                         boolean value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFileRequestOptions = _uuidof(IIsolatedWindowsEnvironmentShareFileRequestOptions);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFileRequestOptions = __uuidof(IIsolatedWindowsEnvironmentShareFileRequestOptions);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3208,21 +3579,33 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("aec7caa7-9ac6-4bf5-8b91-5c1adf0d7d00")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentShareFileResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentShareFileStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_File(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentFile** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFileResult = _uuidof(IIsolatedWindowsEnvironmentShareFileResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFileResult = __uuidof(IIsolatedWindowsEnvironmentShareFileResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3250,18 +3633,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("c405eb7d-7053-4f6a-9b87-746846ed19b2")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentShareFolderRequestOptions : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_AllowWrite(
                         boolean* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_AllowWrite(
                         boolean value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFolderRequestOptions = _uuidof(IIsolatedWindowsEnvironmentShareFolderRequestOptions);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFolderRequestOptions = __uuidof(IIsolatedWindowsEnvironmentShareFolderRequestOptions);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3289,18 +3681,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("556ba72e-ca9d-4211-b143-1cedc86eb2fe")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentShareFolderResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentShareFolderStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFolderResult = _uuidof(IIsolatedWindowsEnvironmentShareFolderResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentShareFolderResult = __uuidof(IIsolatedWindowsEnvironmentShareFolderResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3328,21 +3729,33 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("8fa1dc2f-57da-4bb5-9c06-fa072d2032e2")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentStartProcessResult : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Status(
                         ABI::Windows::Security::Isolation::IsolatedWindowsEnvironmentStartProcessStatus* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
                         HRESULT* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_Process(
                         ABI::Windows::Security::Isolation::IIsolatedWindowsEnvironmentProcess** value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentStartProcessResult = _uuidof(IIsolatedWindowsEnvironmentStartProcessResult);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentStartProcessResult = __uuidof(IIsolatedWindowsEnvironmentStartProcessResult);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3370,18 +3783,27 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("ebdb3cab-7a3a-4524-a0f4-f96e284d33cd")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentTelemetryParameters : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_CorrelationId(
                         GUID* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE put_CorrelationId(
                         GUID value
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentTelemetryParameters = _uuidof(IIsolatedWindowsEnvironmentTelemetryParameters);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentTelemetryParameters = __uuidof(IIsolatedWindowsEnvironmentTelemetryParameters);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3409,21 +3831,33 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("8a9c75ae-69ba-4001-96fc-19a02703b340")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentUserInfo : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_EnvironmentUserSid(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE get_EnvironmentUserName(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE TryWaitForSignInAsync(
                         __FIAsyncOperation_1_boolean** operation
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentUserInfo = _uuidof(IIsolatedWindowsEnvironmentUserInfo);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentUserInfo = __uuidof(IIsolatedWindowsEnvironmentUserInfo);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3451,15 +3885,21 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("b0bdd5dd-91d7-481e-94f2-2a5a6bdf9383")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsEnvironmentUserInfo2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE TryWaitForSignInWithProgressAsync(
                         __FIAsyncOperationWithProgress_2_boolean_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentSignInProgress** operation
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentUserInfo2 = _uuidof(IIsolatedWindowsEnvironmentUserInfo2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsEnvironmentUserInfo2 = __uuidof(IIsolatedWindowsEnvironmentUserInfo2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3487,20 +3927,29 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("06e444bb-53c0-4889-8fa3-53592e37cf21")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsHostMessengerStatics : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE PostMessageToReceiver(
                         GUID receiverId,
                         __FIVectorView_1_IInspectable* message
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE GetFileId(
                         HSTRING filePath,
                         GUID* result
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsHostMessengerStatics = _uuidof(IIsolatedWindowsHostMessengerStatics);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsHostMessengerStatics = __uuidof(IIsolatedWindowsHostMessengerStatics);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3528,19 +3977,28 @@ namespace ABI {
         namespace Security {
             namespace Isolation {
                 MIDL_INTERFACE("55ef9ebc-0444-42ad-832d-1b89c089d1ca")
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                 IIsolatedWindowsHostMessengerStatics2 : public IInspectable
                 {
                 public:
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE RegisterHostMessageReceiver(
                         GUID receiverId,
                         ABI::Windows::Security::Isolation::IHostMessageReceivedCallback* hostMessageReceivedCallback
                         ) = 0;
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+                    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
                     virtual HRESULT STDMETHODCALLTYPE UnregisterHostMessageReceiver(
                         GUID receiverId
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIsolatedWindowsHostMessengerStatics2 = _uuidof(IIsolatedWindowsHostMessengerStatics2);
+                MIDL_CONST_ID IID& IID_IIsolatedWindowsHostMessengerStatics2 = __uuidof(IIsolatedWindowsHostMessengerStatics2);
             } /* Isolation */
         } /* Security */
     } /* Windows */
@@ -3573,6 +4031,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHo
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironment_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironment_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironment[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironment";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3593,6 +4054,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentCreateResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3613,6 +4077,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentFile";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3634,6 +4101,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentHost";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3653,6 +4123,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentLaunchFileResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3679,6 +4152,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3700,6 +4176,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistration";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3724,6 +4203,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistrationData";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3743,6 +4225,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistrationResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3762,6 +4247,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentPostMessageResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
@@ -3781,6 +4269,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentProcess";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3805,6 +4296,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFileRequestOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -3824,6 +4318,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFileResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -3848,6 +4345,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFolderRequestOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3867,6 +4367,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFolderResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3886,6 +4389,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentStartProcessResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3910,6 +4416,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentTelemetryParameters";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -3930,6 +4439,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentUserInfo";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -3941,8 +4453,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.Isolation.IsolatedWindowsEnvironmentContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics interface starting with version 1.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
+ *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3952,6 +4464,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsHostMessenger_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsHostMessenger_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsHostMessenger[] = L"Windows.Security.Isolation.IsolatedWindowsHostMessenger";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -6352,7 +6867,11 @@ typedef enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentSt
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentActivator
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentActivator is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentActivator
 {
     IsolatedWindowsEnvironmentActivator_System = 0,
     IsolatedWindowsEnvironmentActivator_User = 1,
@@ -6367,7 +6886,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentActivator
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentAllowedClipboardFormats is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats
 {
     IsolatedWindowsEnvironmentAllowedClipboardFormats_None = 0,
     IsolatedWindowsEnvironmentAllowedClipboardFormats_Text = 0x1,
@@ -6386,7 +6909,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedCli
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAvailablePrinters
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentAvailablePrinters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAvailablePrinters
 {
     IsolatedWindowsEnvironmentAvailablePrinters_None = 0,
     IsolatedWindowsEnvironmentAvailablePrinters_Local = 0x1,
@@ -6404,7 +6931,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAvailableP
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentClipboardCopyPasteDirections
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentClipboardCopyPasteDirections is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentClipboardCopyPasteDirections
 {
     IsolatedWindowsEnvironmentClipboardCopyPasteDirections_None = 0,
     IsolatedWindowsEnvironmentClipboardCopyPasteDirections_HostToIsolatedWindowsEnvironment = 0x1,
@@ -6420,7 +6951,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentClipboardC
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateStatus
 {
     IsolatedWindowsEnvironmentCreateStatus_Success = 0,
     IsolatedWindowsEnvironmentCreateStatus_FailureByPolicy = 1,
@@ -6436,7 +6971,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateStat
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x40000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreationPriority is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority
 {
     IsolatedWindowsEnvironmentCreationPriority_Low = 0,
     IsolatedWindowsEnvironmentCreationPriority_Normal = 1,
@@ -6451,7 +6990,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPr
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentHostError
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentHostError is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentHostError
 {
     IsolatedWindowsEnvironmentHostError_AdminPolicyIsDisabledOrNotPresent = 0,
     IsolatedWindowsEnvironmentHostError_FeatureNotInstalled = 1,
@@ -6469,7 +7012,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentHostError
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentLaunchFileStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentLaunchFileStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentLaunchFileStatus
 {
     IsolatedWindowsEnvironmentLaunchFileStatus_Success = 0,
     IsolatedWindowsEnvironmentLaunchFileStatus_UnknownFailure = 1,
@@ -6490,7 +7037,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentLaunchFile
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentOwnerRegistrationStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentOwnerRegistrationStatus
 {
     IsolatedWindowsEnvironmentOwnerRegistrationStatus_Success = 0,
     IsolatedWindowsEnvironmentOwnerRegistrationStatus_InvalidArgument = 1,
@@ -6508,7 +7059,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentOwnerRegis
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentPostMessageStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentPostMessageStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentPostMessageStatus
 {
     IsolatedWindowsEnvironmentPostMessageStatus_Success = 0,
     IsolatedWindowsEnvironmentPostMessageStatus_UnknownFailure = 1,
@@ -6524,7 +7079,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentPostMessag
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProcessState
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentProcessState is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProcessState
 {
     IsolatedWindowsEnvironmentProcessState_Running = 1,
     IsolatedWindowsEnvironmentProcessState_Aborted = 2,
@@ -6540,7 +7099,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProcessSta
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProgressState
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentProgressState is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProgressState
 {
     IsolatedWindowsEnvironmentProgressState_Queued = 0,
     IsolatedWindowsEnvironmentProgressState_Processing = 1,
@@ -6568,7 +7131,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProgressSt
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFileStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFileStatus
 {
     IsolatedWindowsEnvironmentShareFileStatus_Success = 0,
     IsolatedWindowsEnvironmentShareFileStatus_UnknownFailure = 1,
@@ -6587,7 +7154,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFileS
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFolderStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFolderStatus
 {
     IsolatedWindowsEnvironmentShareFolderStatus_Success = 0,
     IsolatedWindowsEnvironmentShareFolderStatus_UnknownFailure = 1,
@@ -6605,7 +7176,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFolde
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x40000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentSignInProgress
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentSignInProgress is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentSignInProgress
 {
     IsolatedWindowsEnvironmentSignInProgress_Connecting = 0,
     IsolatedWindowsEnvironmentSignInProgress_Connected = 1,
@@ -6624,7 +7199,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentSignInProg
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentStartProcessStatus
+enum
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentStartProcessStatus is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentStartProcessStatus
 {
     IsolatedWindowsEnvironmentStartProcessStatus_Success = 0,
     IsolatedWindowsEnvironmentStartProcessStatus_UnknownFailure = 1,
@@ -6642,7 +7221,11 @@ enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentStartProce
  *
  */
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
-struct __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateProgress
+struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateProgress is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateProgress
 {
     enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProgressState State;
     UINT32 PercentComplete;
@@ -6659,7 +7242,11 @@ struct __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreatePr
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback_INTERFACE_DEFINED__
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallbackVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("HostMessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallbackVtbl
 {
     BEGIN_INTERFACE
 
@@ -6668,6 +7255,9 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallba
         void** ppvObject);
     ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback* This);
     ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback* This);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("HostMessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* Invoke)(__x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback* This,
         GUID receiverId,
         __FIVectorView_1_IInspectable* message);
@@ -6691,6 +7281,9 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback_Release(This) \
     ((This)->lpVtbl->Release(This))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("HostMessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback_Invoke(This, receiverId, message) \
     ((This)->lpVtbl->Invoke(This, receiverId, message))
 
@@ -6710,7 +7303,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceiv
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback_INTERFACE_DEFINED__
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallbackVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("MessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallbackVtbl
 {
     BEGIN_INTERFACE
 
@@ -6719,6 +7316,9 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallbackVt
         void** ppvObject);
     ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback* This);
     ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback* This);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("MessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* Invoke)(__x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback* This,
         GUID receiverId,
         __FIVectorView_1_IInspectable* message);
@@ -6742,6 +7342,9 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback_Release(This) \
     ((This)->lpVtbl->Release(This))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("MessageReceivedCallback is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback_Invoke(This, receiverId, message) \
     ((This)->lpVtbl->Invoke(This, receiverId, message))
 
@@ -6764,7 +7367,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCa
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironment[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironment";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentVtbl
 {
     BEGIN_INTERFACE
 
@@ -6780,47 +7387,80 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* StartProcessSilentlyAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING hostExePath,
         HSTRING arguments,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentActivator activator,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentStartProcessResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* StartProcessSilentlyWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING hostExePath,
         HSTRING arguments,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentActivator activator,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentStartProcessResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ShareFolderAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING hostFolder,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions* requestOptions,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFolderResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ShareFolderWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING hostFolder,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions* requestOptions,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFolderResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* LaunchFileWithUIAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING appExePath,
         HSTRING argumentsTemplate,
         HSTRING filePath,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentLaunchFileResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* LaunchFileWithUIAndTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         HSTRING appExePath,
         HSTRING argumentsTemplate,
         HSTRING filePath,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentLaunchFileResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* TerminateAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* TerminateWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
         __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* RegisterMessageReceiver)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         GUID receiverId,
         __x_ABI_CWindows_CSecurity_CIsolation_CIMessageReceivedCallback* messageReceivedCallback);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* UnregisterMessageReceiver)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment* This,
         GUID receiverId);
 
@@ -6852,36 +7492,69 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_get_Id(This, value) \
     ((This)->lpVtbl->get_Id(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_StartProcessSilentlyAsync(This, hostExePath, arguments, activator, operation) \
     ((This)->lpVtbl->StartProcessSilentlyAsync(This, hostExePath, arguments, activator, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_StartProcessSilentlyWithTelemetryAsync(This, hostExePath, arguments, activator, telemetryParameters, operation) \
     ((This)->lpVtbl->StartProcessSilentlyWithTelemetryAsync(This, hostExePath, arguments, activator, telemetryParameters, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_ShareFolderAsync(This, hostFolder, requestOptions, operation) \
     ((This)->lpVtbl->ShareFolderAsync(This, hostFolder, requestOptions, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_ShareFolderWithTelemetryAsync(This, hostFolder, requestOptions, telemetryParameters, operation) \
     ((This)->lpVtbl->ShareFolderWithTelemetryAsync(This, hostFolder, requestOptions, telemetryParameters, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_LaunchFileWithUIAsync(This, appExePath, argumentsTemplate, filePath, operation) \
     ((This)->lpVtbl->LaunchFileWithUIAsync(This, appExePath, argumentsTemplate, filePath, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_LaunchFileWithUIAndTelemetryAsync(This, appExePath, argumentsTemplate, filePath, telemetryParameters, operation) \
     ((This)->lpVtbl->LaunchFileWithUIAndTelemetryAsync(This, appExePath, argumentsTemplate, filePath, telemetryParameters, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_TerminateAsync(This, operation) \
     ((This)->lpVtbl->TerminateAsync(This, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_TerminateWithTelemetryAsync(This, telemetryParameters, operation) \
     ((This)->lpVtbl->TerminateWithTelemetryAsync(This, telemetryParameters, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_RegisterMessageReceiver(This, receiverId, messageReceivedCallback) \
     ((This)->lpVtbl->RegisterMessageReceiver(This, receiverId, messageReceivedCallback))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment_UnregisterMessageReceiver(This, receiverId) \
     ((This)->lpVtbl->UnregisterMessageReceiver(This, receiverId))
 
@@ -6904,7 +7577,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironment2[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironment2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -6920,10 +7597,16 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* PostMessageToReceiverAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2* This,
         GUID receiverId,
         __FIIterable_1_IInspectable* message,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentPostMessageResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* PostMessageToReceiverWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2* This,
         GUID receiverId,
         __FIIterable_1_IInspectable* message,
@@ -6958,9 +7641,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2_PostMessageToReceiverAsync(This, receiverId, message, operation) \
     ((This)->lpVtbl->PostMessageToReceiverAsync(This, receiverId, message, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment2_PostMessageToReceiverWithTelemetryAsync(This, receiverId, message, telemetryParameters, operation) \
     ((This)->lpVtbl->PostMessageToReceiverWithTelemetryAsync(This, receiverId, message, telemetryParameters, operation))
 
@@ -6983,7 +7672,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironment3[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironment3";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3Vtbl
 {
     BEGIN_INTERFACE
 
@@ -6999,12 +7692,21 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* GetUserInfo)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo** result);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ShareFileAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3* This,
         HSTRING filePath,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions* options,
         __FIAsyncOperation_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentShareFileResult** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ShareFileWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3* This,
         HSTRING filePath,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions* options,
@@ -7039,12 +7741,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_GetUserInfo(This, result) \
     ((This)->lpVtbl->GetUserInfo(This, result))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_ShareFileAsync(This, filePath, options, operation) \
     ((This)->lpVtbl->ShareFileAsync(This, filePath, options, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment3_ShareFileWithTelemetryAsync(This, filePath, options, telemetryParameters, operation) \
     ((This)->lpVtbl->ShareFileWithTelemetryAsync(This, filePath, options, telemetryParameters, operation))
 
@@ -7067,7 +7778,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironment4[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironment4";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4Vtbl
 {
     BEGIN_INTERFACE
 
@@ -7083,6 +7798,9 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ChangePriority)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority Priority);
 
@@ -7114,6 +7832,9 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment4_ChangePriority(This, Priority) \
     ((This)->lpVtbl->ChangePriority(This, Priority))
 
@@ -7136,7 +7857,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentCreateResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentCreateResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -7152,10 +7877,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreateStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult* This,
         HRESULT* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Environment)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment** value);
 
@@ -7187,12 +7921,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCrea
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult_get_Environment(This, value) \
     ((This)->lpVtbl->get_Environment(This, value))
 
@@ -7215,7 +7958,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentCreateResult2[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentCreateResult2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -7231,6 +7978,9 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ChangeCreationPriority)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority priority);
 
@@ -7262,6 +8012,9 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCrea
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentCreateResult2_ChangeCreationPriority(This, priority) \
     ((This)->lpVtbl->ChangeCreationPriority(This, priority))
 
@@ -7284,7 +8037,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentFactory[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentFactory";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactoryVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactoryVtbl
 {
     BEGIN_INTERFACE
 
@@ -7300,16 +8057,28 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* CreateAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* options,
         __FIAsyncOperationWithProgress_2_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateResult_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateProgress** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* CreateWithTelemetryAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* options,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* telemetryParameters,
         __FIAsyncOperationWithProgress_2_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateResult_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentCreateProgress** operation);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* GetById)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory* This,
         HSTRING environmentId,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironment** result);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* FindByOwnerId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory* This,
         HSTRING environmentOwnerId,
         __FIVectorView_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironment** result);
@@ -7342,15 +8111,27 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFact
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_CreateAsync(This, options, operation) \
     ((This)->lpVtbl->CreateAsync(This, options, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_CreateWithTelemetryAsync(This, options, telemetryParameters, operation) \
     ((This)->lpVtbl->CreateWithTelemetryAsync(This, options, telemetryParameters, operation))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_GetById(This, environmentId, result) \
     ((This)->lpVtbl->GetById(This, environmentId, result))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFactory_FindByOwnerId(This, environmentOwnerId, result) \
     ((This)->lpVtbl->FindByOwnerId(This, environmentOwnerId, result))
 
@@ -7373,7 +8154,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentFile[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentFile";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFileVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFileVtbl
 {
     BEGIN_INTERFACE
 
@@ -7389,10 +8174,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile* This,
         GUID* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_HostPath)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* Close)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile* This);
 
     END_INTERFACE
@@ -7423,12 +8217,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_get_Id(This, value) \
     ((This)->lpVtbl->get_Id(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_get_HostPath(This, value) \
     ((This)->lpVtbl->get_HostPath(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile_Close(This) \
     ((This)->lpVtbl->Close(This))
 
@@ -7451,7 +8254,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentFile2[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentFile2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -7467,8 +8274,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_GuestPath)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_IsReadOnly)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2* This,
         boolean* value);
 
@@ -7500,9 +8313,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2_get_GuestPath(This, value) \
     ((This)->lpVtbl->get_GuestPath(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile2_get_IsReadOnly(This, value) \
     ((This)->lpVtbl->get_IsReadOnly(This, value))
 
@@ -7525,7 +8344,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentHostStatics[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentHostStatics";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStaticsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -7541,8 +8364,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_IsReady)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_HostErrors)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics* This,
         __FIVectorView_1_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentHostError** value);
 
@@ -7574,9 +8403,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHost
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics_get_IsReady(This, value) \
     ((This)->lpVtbl->get_IsReady(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentHostStatics_get_HostErrors(This, value) \
     ((This)->lpVtbl->get_HostErrors(This, value))
 
@@ -7599,7 +8434,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentLaunchFileResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentLaunchFileResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -7615,10 +8454,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentLaunchFileStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult* This,
         HRESULT* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_File)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile** value);
 
@@ -7650,12 +8498,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaun
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentLaunchFileResult_get_File(This, value) \
     ((This)->lpVtbl->get_File(This, value))
 
@@ -7678,7 +8535,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOptions[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOptions";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptionsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptionsVtbl
 {
     BEGIN_INTERFACE
 
@@ -7694,39 +8555,90 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_EnvironmentOwnerId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_EnvironmentOwnerId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         HSTRING value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowedClipboardFormats)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowedClipboardFormats)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ClipboardCopyPasteDirections)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentClipboardCopyPasteDirections* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_ClipboardCopyPasteDirections)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentClipboardCopyPasteDirections value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AvailablePrinters)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAvailablePrinters* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AvailablePrinters)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAvailablePrinters value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_SharedHostFolderPath)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_SharedFolderNameInEnvironment)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* ShareHostFolderForUntrustedItems)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         HSTRING SharedHostFolderPath,
         HSTRING ShareFolderNameInEnvironment);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_PersistUserProfile)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_PersistUserProfile)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowGraphicsHardwareAcceleration)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowGraphicsHardwareAcceleration)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowCameraAndMicrophoneAccess)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowCameraAndMicrophoneAccess)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions* This,
         boolean value);
 
@@ -7758,54 +8670,105 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOpti
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_EnvironmentOwnerId(This, value) \
     ((This)->lpVtbl->get_EnvironmentOwnerId(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_EnvironmentOwnerId(This, value) \
     ((This)->lpVtbl->put_EnvironmentOwnerId(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_AllowedClipboardFormats(This, value) \
     ((This)->lpVtbl->get_AllowedClipboardFormats(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_AllowedClipboardFormats(This, value) \
     ((This)->lpVtbl->put_AllowedClipboardFormats(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_ClipboardCopyPasteDirections(This, value) \
     ((This)->lpVtbl->get_ClipboardCopyPasteDirections(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_ClipboardCopyPasteDirections(This, value) \
     ((This)->lpVtbl->put_ClipboardCopyPasteDirections(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_AvailablePrinters(This, value) \
     ((This)->lpVtbl->get_AvailablePrinters(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_AvailablePrinters(This, value) \
     ((This)->lpVtbl->put_AvailablePrinters(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_SharedHostFolderPath(This, value) \
     ((This)->lpVtbl->get_SharedHostFolderPath(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_SharedFolderNameInEnvironment(This, value) \
     ((This)->lpVtbl->get_SharedFolderNameInEnvironment(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_ShareHostFolderForUntrustedItems(This, SharedHostFolderPath, ShareFolderNameInEnvironment) \
     ((This)->lpVtbl->ShareHostFolderForUntrustedItems(This, SharedHostFolderPath, ShareFolderNameInEnvironment))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_PersistUserProfile(This, value) \
     ((This)->lpVtbl->get_PersistUserProfile(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_PersistUserProfile(This, value) \
     ((This)->lpVtbl->put_PersistUserProfile(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_AllowGraphicsHardwareAcceleration(This, value) \
     ((This)->lpVtbl->get_AllowGraphicsHardwareAcceleration(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_AllowGraphicsHardwareAcceleration(This, value) \
     ((This)->lpVtbl->put_AllowGraphicsHardwareAcceleration(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_get_AllowCameraAndMicrophoneAccess(This, value) \
     ((This)->lpVtbl->get_AllowCameraAndMicrophoneAccess(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions_put_AllowCameraAndMicrophoneAccess(This, value) \
     ((This)->lpVtbl->put_AllowCameraAndMicrophoneAccess(This, value))
 
@@ -7828,7 +8791,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOptions2[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOptions2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -7844,8 +8811,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_WindowAnnotationOverride)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_WindowAnnotationOverride)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2* This,
         HSTRING value);
 
@@ -7877,9 +8850,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOpti
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2_get_WindowAnnotationOverride(This, value) \
     ((This)->lpVtbl->get_WindowAnnotationOverride(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions2_put_WindowAnnotationOverride(This, value) \
     ((This)->lpVtbl->put_WindowAnnotationOverride(This, value))
 
@@ -7902,7 +8881,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOptions3[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOptions3";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3Vtbl
 {
     BEGIN_INTERFACE
 
@@ -7918,16 +8901,34 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowedClipboardFormatsToEnvironment)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowedClipboardFormatsToEnvironment)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowedClipboardFormatsToHost)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowedClipboardFormatsToHost)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentAllowedClipboardFormats value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_CreationPriority)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_CreationPriority)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentCreationPriority value);
 
@@ -7959,21 +8960,39 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOpti
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_get_AllowedClipboardFormatsToEnvironment(This, value) \
     ((This)->lpVtbl->get_AllowedClipboardFormatsToEnvironment(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_put_AllowedClipboardFormatsToEnvironment(This, value) \
     ((This)->lpVtbl->put_AllowedClipboardFormatsToEnvironment(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_get_AllowedClipboardFormatsToHost(This, value) \
     ((This)->lpVtbl->get_AllowedClipboardFormatsToHost(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_put_AllowedClipboardFormatsToHost(This, value) \
     ((This)->lpVtbl->put_AllowedClipboardFormatsToHost(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_get_CreationPriority(This, value) \
     ((This)->lpVtbl->get_CreationPriority(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOptions3_put_CreationPriority(This, value) \
     ((This)->lpVtbl->put_CreationPriority(This, value))
 
@@ -7996,7 +9015,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOwnerRegistrationData[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOwnerRegistrationData";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl
 {
     BEGIN_INTERFACE
 
@@ -8012,12 +9035,24 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ShareableFolders)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* This,
         __FIVector_1_HSTRING** value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ProcessesRunnableAsSystem)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* This,
         __FIVector_1_HSTRING** value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ProcessesRunnableAsUser)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* This,
         __FIVector_1_HSTRING** value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ActivationFileExtensions)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* This,
         __FIVector_1_HSTRING** value);
 
@@ -8049,15 +9084,27 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwne
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_get_ShareableFolders(This, value) \
     ((This)->lpVtbl->get_ShareableFolders(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_get_ProcessesRunnableAsSystem(This, value) \
     ((This)->lpVtbl->get_ProcessesRunnableAsSystem(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_get_ProcessesRunnableAsUser(This, value) \
     ((This)->lpVtbl->get_ProcessesRunnableAsUser(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData_get_ActivationFileExtensions(This, value) \
     ((This)->lpVtbl->get_ActivationFileExtensions(This, value))
 
@@ -8080,7 +9127,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOwnerRegistrationResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOwnerRegistrationResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -8096,8 +9147,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentOwnerRegistrationStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult* This,
         HRESULT* value);
 
@@ -8129,9 +9186,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwne
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
@@ -8154,7 +9217,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentOwnerRegistrationStatics[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentOwnerRegistrationStatics";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStaticsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8170,10 +9237,16 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* Register)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics* This,
         HSTRING ownerName,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationData* ownerRegistrationData,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationResult** result);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* Unregister)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics* This,
         HSTRING ownerName);
 
@@ -8205,9 +9278,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwne
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics_Register(This, ownerName, ownerRegistrationData, result) \
     ((This)->lpVtbl->Register(This, ownerName, ownerRegistrationData, result))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentOwnerRegistrationStatics_Unregister(This, ownerName) \
     ((This)->lpVtbl->Unregister(This, ownerName))
 
@@ -8230,7 +9309,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentPostMessageResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentPostMessageResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -8246,8 +9329,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentPostMessageStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult* This,
         HRESULT* value);
 
@@ -8279,9 +9368,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPost
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentPostMessageResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
@@ -8304,7 +9399,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentProcess[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentProcess";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcessVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcessVtbl
 {
     BEGIN_INTERFACE
 
@@ -8320,13 +9419,28 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_State)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentProcessState* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExitCode)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This,
         UINT32* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* WaitForExit)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* WaitForExitWithTimeout)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This,
         UINT32 timeoutMilliseconds);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* WaitForExitAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess* This,
         __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
 
@@ -8358,18 +9472,33 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProc
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_get_State(This, value) \
     ((This)->lpVtbl->get_State(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_get_ExitCode(This, value) \
     ((This)->lpVtbl->get_ExitCode(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_WaitForExit(This) \
     ((This)->lpVtbl->WaitForExit(This))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_WaitForExitWithTimeout(This, timeoutMilliseconds) \
     ((This)->lpVtbl->WaitForExitWithTimeout(This, timeoutMilliseconds))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess_WaitForExitAsync(This, operation) \
     ((This)->lpVtbl->WaitForExitAsync(This, operation))
 
@@ -8392,7 +9521,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentShareFileRequestOptions[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentShareFileRequestOptions";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptionsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptionsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8408,8 +9541,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowWrite)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowWrite)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions* This,
         boolean value);
 
@@ -8441,9 +9580,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShar
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions_get_AllowWrite(This, value) \
     ((This)->lpVtbl->get_AllowWrite(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileRequestOptions_put_AllowWrite(This, value) \
     ((This)->lpVtbl->put_AllowWrite(This, value))
 
@@ -8466,7 +9611,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentShareFileResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentShareFileResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -8482,10 +9631,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFileStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult* This,
         HRESULT* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_File)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentFile** value);
 
@@ -8517,12 +9675,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShar
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFileResult_get_File(This, value) \
     ((This)->lpVtbl->get_File(This, value))
 
@@ -8545,7 +9712,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentShareFolderRequestOptions[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentShareFolderRequestOptions";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptionsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptionsVtbl
 {
     BEGIN_INTERFACE
 
@@ -8561,8 +9732,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_AllowWrite)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions* This,
         boolean* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_AllowWrite)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions* This,
         boolean value);
 
@@ -8594,9 +9771,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShar
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions_get_AllowWrite(This, value) \
     ((This)->lpVtbl->get_AllowWrite(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderRequestOptions_put_AllowWrite(This, value) \
     ((This)->lpVtbl->put_AllowWrite(This, value))
 
@@ -8619,7 +9802,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentShareFolderResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentShareFolderResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -8635,8 +9822,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentShareFolderStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult* This,
         HRESULT* value);
 
@@ -8668,9 +9861,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShar
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentShareFolderResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
@@ -8693,7 +9892,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentStartProcessResult[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentStartProcessResult";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResultVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResultVtbl
 {
     BEGIN_INTERFACE
 
@@ -8709,10 +9912,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult* This,
         enum __x_ABI_CWindows_CSecurity_CIsolation_CIsolatedWindowsEnvironmentStartProcessStatus* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult* This,
         HRESULT* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_Process)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult* This,
         __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentProcess** value);
 
@@ -8744,12 +9956,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStar
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_get_Status(This, value) \
     ((This)->lpVtbl->get_Status(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_get_ExtendedError(This, value) \
     ((This)->lpVtbl->get_ExtendedError(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentStartProcessResult_get_Process(This, value) \
     ((This)->lpVtbl->get_Process(This, value))
 
@@ -8772,7 +9993,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentTelemetryParameters[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentTelemetryParameters";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParametersVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParametersVtbl
 {
     BEGIN_INTERFACE
 
@@ -8788,8 +10013,14 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_CorrelationId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* This,
         GUID* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* put_CorrelationId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters* This,
         GUID value);
 
@@ -8821,9 +10052,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTele
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters_get_CorrelationId(This, value) \
     ((This)->lpVtbl->get_CorrelationId(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentTelemetryParameters_put_CorrelationId(This, value) \
     ((This)->lpVtbl->put_CorrelationId(This, value))
 
@@ -8846,7 +10083,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentUserInfo[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentUserInfo";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfoVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfoVtbl
 {
     BEGIN_INTERFACE
 
@@ -8862,10 +10103,19 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_EnvironmentUserSid)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* get_EnvironmentUserName)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo* This,
         HSTRING* value);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* TryWaitForSignInAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo* This,
         __FIAsyncOperation_1_boolean** operation);
 
@@ -8897,12 +10147,21 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUser
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_get_EnvironmentUserSid(This, value) \
     ((This)->lpVtbl->get_EnvironmentUserSid(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_get_EnvironmentUserName(This, value) \
     ((This)->lpVtbl->get_EnvironmentUserName(This, value))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo_TryWaitForSignInAsync(This, operation) \
     ((This)->lpVtbl->TryWaitForSignInAsync(This, operation))
 
@@ -8925,7 +10184,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsEnvironmentUserInfo2[] = L"Windows.Security.Isolation.IIsolatedWindowsEnvironmentUserInfo2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -8941,6 +10204,9 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* TryWaitForSignInWithProgressAsync)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2* This,
         __FIAsyncOperationWithProgress_2_boolean_Windows__CSecurity__CIsolation__CIsolatedWindowsEnvironmentSignInProgress** operation);
 
@@ -8972,6 +10238,9 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUser
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEnvironmentUserInfo2_TryWaitForSignInWithProgressAsync(This, operation) \
     ((This)->lpVtbl->TryWaitForSignInWithProgressAsync(This, operation))
 
@@ -8994,7 +10263,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsEn
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsHostMessengerStatics[] = L"Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStaticsVtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -9010,9 +10283,15 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* PostMessageToReceiver)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics* This,
         GUID receiverId,
         __FIVectorView_1_IInspectable* message);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* GetFileId)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics* This,
         HSTRING filePath,
         GUID* result);
@@ -9045,9 +10324,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerSt
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics_PostMessageToReceiver(This, receiverId, message) \
     ((This)->lpVtbl->PostMessageToReceiver(This, receiverId, message))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics_GetFileId(This, filePath, result) \
     ((This)->lpVtbl->GetFileId(This, filePath, result))
 
@@ -9070,7 +10355,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHo
 #if !defined(____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Isolation_IIsolatedWindowsHostMessengerStatics2[] = L"Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2";
-typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2Vtbl
+typedef struct
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -9086,9 +10375,15 @@ typedef struct __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessen
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* RegisterHostMessageReceiver)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2* This,
         GUID receiverId,
         __x_ABI_CWindows_CSecurity_CIsolation_CIHostMessageReceivedCallback* hostMessageReceivedCallback);
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
     HRESULT (STDMETHODCALLTYPE* UnregisterHostMessageReceiver)(__x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2* This,
         GUID receiverId);
 
@@ -9120,9 +10415,15 @@ interface __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerSt
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2_RegisterHostMessageReceiver(This, receiverId, hostMessageReceivedCallback) \
     ((This)->lpVtbl->RegisterHostMessageReceiver(This, receiverId, hostMessageReceivedCallback))
 
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+    DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 #define __x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHostMessengerStatics2_UnregisterHostMessageReceiver(This, receiverId) \
     ((This)->lpVtbl->UnregisterHostMessageReceiver(This, receiverId))
 
@@ -9155,6 +10456,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CIsolation_CIIsolatedWindowsHo
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironment_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironment_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironment is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironment[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironment";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9175,6 +10479,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentCreateResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentCreateResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentCreateResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9195,6 +10502,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentFile is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentFile[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentFile";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9216,6 +10526,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentHost is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentHost[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentHost";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9235,6 +10548,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentLaunchFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentLaunchFileResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentLaunchFileResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9261,6 +10577,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9282,6 +10601,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistration is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistration[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistration";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9306,6 +10628,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationData is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationData[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistrationData";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9325,6 +10650,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentOwnerRegistrationResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentOwnerRegistrationResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentOwnerRegistrationResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9344,6 +10672,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentPostMessageResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentPostMessageResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentPostMessageResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x20000
@@ -9363,6 +10694,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentProcess is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentProcess[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentProcess";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9387,6 +10721,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileRequestOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFileRequestOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -9406,6 +10743,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFileResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFileResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFileResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -9430,6 +10770,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderRequestOptions is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderRequestOptions[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFolderRequestOptions";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9449,6 +10792,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentShareFolderResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentShareFolderResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentShareFolderResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9468,6 +10814,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentStartProcessResult is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentStartProcessResult[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentStartProcessResult";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9492,6 +10841,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentTelemetryParameters is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentTelemetryParameters[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentTelemetryParameters";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
@@ -9512,6 +10864,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsEnvironmentUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsEnvironmentUserInfo[] = L"Windows.Security.Isolation.IsolatedWindowsEnvironmentUserInfo";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x30000
@@ -9523,8 +10878,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.Isolation.IsolatedWindowsEnvironmentContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics interface starting with version 1.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
+ *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9534,6 +10889,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsHostMessenger_DEFINED
 #define RUNTIMECLASS_Windows_Security_Isolation_IsolatedWindowsHostMessenger_DEFINED
+#if WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
+DEPRECATED("IsolatedWindowsHostMessenger is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x50000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Isolation_IsolatedWindowsHostMessenger[] = L"Windows.Security.Isolation.IsolatedWindowsHostMessenger";
 #endif
 #endif // WINDOWS_SECURITY_ISOLATION_ISOLATEDWINDOWSENVIRONMENTCONTRACT_VERSION >= 0x10000

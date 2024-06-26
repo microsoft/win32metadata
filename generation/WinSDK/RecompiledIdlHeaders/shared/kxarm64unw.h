@@ -22,6 +22,7 @@
 ;   PROLOG_STACK_ALLOC <amount>
 ;   PROLOG_SAVE_REG
 ;   PROLOG_SAVE_REG_PAIR
+;   PROLOG_SAVE_REG_PAIR_NO_FP
 ;   PROLOG_NOP <operation>
 ;   PROLOG_SAVE_NEXT_PAIR <operation>
 ;   PROLOG_PUSH_TRAP_FRAME
@@ -338,7 +339,7 @@ ByteVal SETA 0xdc:OR:(__ParsedOffsetPreinc:SHL:1):OR:((RegNum - 40):SHR:2)
 ByteVal2 SETA (((RegNum - 40):AND:3):SHL:6):OR:__ParsedOffsetShifted3
 __ComputedCodes SETS "0x":CC:((:STR:ByteVal):RIGHT:2):CC:",0x":CC:((:STR:ByteVal2):RIGHT:2)
 
-#if defined(_M_ARM64EC)
+#if defined(_M_ARM64EC) || ENABLE_SAVE_ANY_REG
         ELIF (RegNum < 96)
         ; 11100111 ' 0pxrrrrr ' ffoooooo
         ; p: 0/1 - single/pair
@@ -416,7 +417,7 @@ ByteVal SETA 0xd8:OR:(__ParsedOffsetPreinc:SHL:1):OR:((RegNum1 - 40):SHR:2)
 ByteVal2 SETA (((RegNum1 - 40):AND:3):SHL:6):OR:__ParsedOffsetShifted3
 __ComputedCodes SETS "0x":CC:((:STR:ByteVal):RIGHT:2):CC:",0x":CC:((:STR:ByteVal2):RIGHT:2)
 
-#if defined(_M_ARM64EC)
+#if defined(_M_ARM64EC) || ENABLE_SAVE_ANY_REG
         ELIF (RegNum2 == (RegNum1 + 1))
         ; 11100111 ' 0pxrrrrr ' ffoooooo
         ; p: 0/1 - single/pair
@@ -911,7 +912,16 @@ __Epilog4UnwindString SETS ""
 __EpilogStartNotDefined SETL {true}
 __FuncExceptionHandler SETS ""
         IF "$ExceptHandler" != ""
+__FuncExceptionHandler SETS "$ExceptHandler"
+
+        ;
+        ; Add bars to the exception handler name only when the name does not have bars
+        ;
+
+        IF ("$ExceptHandler":LEFT:1 != "|") && ("$ExceptHandler":RIGHT:1 != "|")
 __FuncExceptionHandler SETS "|$ExceptHandler|"
+        ENDIF
+
         ENDIF
         MEND
 

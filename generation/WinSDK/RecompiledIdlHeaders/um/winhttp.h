@@ -809,7 +809,25 @@ typedef struct _WINHTTP_HTTP2_RECEIVE_WINDOW
 #define WINHTTP_OPTION_USE_SESSION_SCH_CRED             196
 
 
-#define WINHTTP_LAST_OPTION                             WINHTTP_OPTION_USE_SESSION_SCH_CRED
+#define WINHTTP_OPTION_QUIC_STATS_V2                    200
+
+
+#define WINHTTP_OPTION_QUIC_STREAM_STATS                202
+
+#define WINHTTP_OPTION_USE_LOOKASIDE                    203
+
+#define WINHTTP_OPTION_ERROR_LOG_GUID                   204
+
+#define WINHTTP_OPTION_ENABLE_FAST_FORWARDING           205
+#define WINHTTP_OPTION_FAST_FORWARDING_RESPONSE_DATA    206
+
+#define WINHTTP_OPTION_UPGRADE_TO_PROTOCOL              207
+
+#define WINHTTP_OPTION_CONNECTION_STATS_V2              208
+
+#define WINHTTP_OPTION_FAST_FORWARDING_RESPONSE_STATUS  209
+
+#define WINHTTP_LAST_OPTION                             WINHTTP_OPTION_FAST_FORWARDING_RESPONSE_STATUS
 
 #define WINHTTP_OPTION_USERNAME                         0x1000
 #define WINHTTP_OPTION_PASSWORD                         0x1001
@@ -938,6 +956,7 @@ typedef struct tagWINHTTP_CREDS_EX
 #define WINHTTP_HANDLE_TYPE_REQUEST                  3
 #define WINHTTP_HANDLE_TYPE_PROXY_RESOLVER           4
 #define WINHTTP_HANDLE_TYPE_WEBSOCKET                5
+#define WINHTTP_HANDLE_TYPE_PROTOCOL                 6
 
 //
 // values for auth schemes
@@ -1297,24 +1316,24 @@ typedef WINHTTP_STATUS_CALLBACK * LPWINHTTP_STATUS_CALLBACK;
 #define HTTP_STATUS_LAST                HTTP_STATUS_VERSION_NOT_SUP
 
 //
-// flags for CrackUrl() and CombineUrl()
+// Flags for CrackUrl() and CombineUrl()
 //
 
-#define ICU_NO_ENCODE   0x20000000  // Don't convert unsafe characters to escape sequence
-#define ICU_DECODE      0x10000000  // Convert %XX escape sequences to characters
-#define ICU_NO_META     0x08000000  // Don't convert .. etc. meta path sequences
-#define ICU_ENCODE_SPACES_ONLY 0x04000000  // Encode spaces only
-#define ICU_BROWSER_MODE 0x02000000 // Special encode/decode rules for browser
-#define ICU_ENCODE_PERCENT      0x00001000      // Encode any percent (ASCII25)
-
-        // signs encountered, default is to not encode percent.
+#define ICU_NO_ENCODE               0x20000000  // Don't convert unsafe characters to escape sequence
+#define ICU_DECODE                  0x10000000  // Convert %XX escape sequences to characters
+#define ICU_NO_META                 0x08000000  // Don't convert .. etc. meta path sequences
+#define ICU_ENCODE_SPACES_ONLY      0x04000000  // Encode spaces only
+#define ICU_BROWSER_MODE            0x02000000  // Special encode/decode rules for browser
+#define ICU_ENCODE_PERCENT          0x00001000  // Encode any percent (ASCII25) signs encountered, default is to not encode percent.
 
 //
-// flags for WinHttpCrackUrl() and WinHttpCreateUrl()
+// Flags for WinHttpCrackUrl() and WinHttpCreateUrl()
 //
-#define ICU_ESCAPE      0x80000000  // (un)escape URL characters
-#define ICU_ESCAPE_AUTHORITY 0x00002000 //causes InternetCreateUrlA to escape chars in authority components (user, pwd, host)
-#define ICU_REJECT_USERPWD  0x00004000  // rejects usrls whick have username/pwd sections
+
+#define ICU_ESCAPE                  0x80000000  // (Un)escape URL characters
+#define ICU_INCLUDE_DEFAULT_PORT    0x00008000  // Include default port numbers in URLs
+#define ICU_REJECT_USERPWD          0x00004000  // Rejects URLs whick have username/pwd sections
+#define ICU_ESCAPE_AUTHORITY        0x00002000  // Escape chars in authority components (user, pwd, host)
 
 // WinHttpOpen dwAccessType values (also for WINHTTP_PROXY_INFO::dwAccessType)
 #define WINHTTP_ACCESS_TYPE_DEFAULT_PROXY               0
@@ -1333,7 +1352,7 @@ typedef WINHTTP_STATUS_CALLBACK * LPWINHTTP_STATUS_CALLBACK;
 #define WINHTTP_DEFAULT_ACCEPT_TYPES   NULL
 
 //
-// values for dwModifiers parameter of WinHttpAddRequestHeaders()
+// Values for dwModifiers parameter of WinHttpAddRequestHeaders()
 //
 
 #define WINHTTP_ADDREQ_INDEX_MASK      0x0000FFFF
@@ -1529,8 +1548,10 @@ typedef struct _WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
 #define ERROR_WINHTTP_GLOBAL_CALLBACK_FAILED                (WINHTTP_ERROR_BASE + 191)
 #define ERROR_WINHTTP_FEATURE_DISABLED                      (WINHTTP_ERROR_BASE + 192)
 
+#define ERROR_WINHTTP_FAST_FORWARDING_NOT_SUPPORTED         (WINHTTP_ERROR_BASE + 193)
 
-#define WINHTTP_ERROR_LAST                                  ERROR_WINHTTP_FEATURE_DISABLED
+
+#define WINHTTP_ERROR_LAST                                  ERROR_WINHTTP_FAST_FORWARDING_NOT_SUPPORTED
 
 #define WINHTTP_RESET_STATE                     0x00000001
 #define WINHTTP_RESET_SWPAD_CURRENT_NETWORK     0x00000002
@@ -2212,6 +2233,50 @@ WinHttpWebSocketQueryCloseStatus
     _Out_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed
 );
 
+typedef enum _WINHTTP_PROTOCOL_OPERATION
+{
+    WINHTTP_PROTOCOL_SEND_OPERATION                   = 0,
+    WINHTTP_PROTOCOL_RECEIVE_OPERATION                = 1,
+} WINHTTP_PROTOCOL_OPERATION;
+
+typedef struct _WINHTTP_PROTOCOL_ASYNC_RESULT
+{
+    WINHTTP_ASYNC_RESULT AsyncResult;
+    WINHTTP_PROTOCOL_OPERATION Operation;
+} WINHTTP_PROTOCOL_ASYNC_RESULT;
+
+WINHTTPAPI
+HINTERNET
+WINAPI
+WinHttpProtocolCompleteUpgrade
+(
+    _In_ HINTERNET hRequest,
+    _In_opt_ DWORD_PTR dwContext
+);
+
+WINHTTPAPI
+DWORD
+WINAPI
+WinHttpProtocolSend
+(
+    _In_ HINTERNET ProtocolHandle,
+    _In_ ULONGLONG Flags,
+    _In_reads_opt_(dwBufferLength) PVOID pvBuffer,
+    _In_ DWORD dwBufferLength
+);
+
+WINHTTPAPI
+DWORD
+WINAPI
+WinHttpProtocolReceive
+(
+    _In_ HINTERNET ProtocolHandle,
+    _In_ ULONGLONG Flags,
+    _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
+    _In_ DWORD dwBufferLength,
+    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead
+);
+
 
 //
 // Proxy change notification APIs
@@ -2307,6 +2372,22 @@ WinHttpFreeProxySettingsEx(
     _In_ PVOID pProxySettingsEx
 );
 
+typedef enum _WINHTTP_FAST_FORWARDING_STATE
+{
+    WinHttpFastForwardingStateInProgress          = 0,
+    WinHttpFastForwardingStateSucceeded           = 1,
+    WinHttpFastForwardingStateClientSideFailed    = 2,
+    WinHttpFastForwardingStateServerSideFailed    = 3
+} WINHTTP_FAST_FORWARDING_STATE, *PWINHTTP_FAST_FORWARDING_STATE;
+
+typedef struct _WINHTTP_FAST_FORWARDING_STATUS
+{
+    WINHTTP_FAST_FORWARDING_STATE TransferState;
+    LONG NtStatus; // This is NTSTATUS.
+    DWORD dwError;
+    ULONGLONG ullBytesTransferred;
+} WINHTTP_FAST_FORWARDING_STATUS, *PWINHTTP_FAST_FORWARDING_STATUS;
+
 //
 // Feature IDs for WINHTTP_OPTION_FEATURE_SUPPORTED
 //
@@ -2389,6 +2470,20 @@ WinHttpFreeProxySettingsEx(
 #define WINHTTP_FEATURE_REQUEST_ANNOTATION                                   73
 #define WINHTTP_FEATURE_DISABLE_PROXY_AUTH_SCHEMES                           74
 #define WINHTTP_FEATURE_REVERT_IMPERSONATION_SERVER_CERT                     75
+#define WINHTTP_FEATURE_DISABLE_GLOBAL_POOLING                               76
+#define WINHTTP_FEATURE_GET_PROXY_SETTINGS_EX                                77
+#define WINHTTP_FEATURE_SESSION_SCH_CRED                                     78
+#define WINHTTP_FEATURE_QUIC_STATS_V2                                        79
+#define WINHTTP_FEATURE_URL_INCLUDE_DEFAULT_PORT                             80
+#define WINHTTP_FEATURE_QUIC_STREAM_STATS                                    81
+#define WINHTTP_FEATURE_USE_LOOKASIDE                                        82
+#define WINHTTP_FEATURE_ERROR_LOG_GUID                                       83
+
+
+#define WINHTTP_FEATURE_UPGRADE_TO_PROTOCOL                                  88
+
+#define WINHTTP_FEATURE_CONNECTION_STATS_V2                                  89
+#define WINHTTP_FEATURE_FAST_FORWARD_RESPONSE                                90
 
 
 

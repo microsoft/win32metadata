@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -4000,7 +4000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatCapabilities = _uuidof(IChatCapabilities);
+                MIDL_CONST_ID IID& IID_IChatCapabilities = __uuidof(IChatCapabilities);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4041,7 +4041,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatCapabilitiesManagerStatics = _uuidof(IChatCapabilitiesManagerStatics);
+                MIDL_CONST_ID IID& IID_IChatCapabilitiesManagerStatics = __uuidof(IChatCapabilitiesManagerStatics);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4084,7 +4084,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatCapabilitiesManagerStatics2 = _uuidof(IChatCapabilitiesManagerStatics2);
+                MIDL_CONST_ID IID& IID_IChatCapabilitiesManagerStatics2 = __uuidof(IChatCapabilitiesManagerStatics2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4177,7 +4177,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatConversation = _uuidof(IChatConversation);
+                MIDL_CONST_ID IID& IID_IChatConversation = __uuidof(IChatConversation);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4216,7 +4216,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatConversation2 = _uuidof(IChatConversation2);
+                MIDL_CONST_ID IID& IID_IChatConversation2 = __uuidof(IChatConversation2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4256,7 +4256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatConversationReader = _uuidof(IChatConversationReader);
+                MIDL_CONST_ID IID& IID_IChatConversationReader = __uuidof(IChatConversationReader);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4316,7 +4316,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatConversationThreadingInfo = _uuidof(IChatConversationThreadingInfo);
+                MIDL_CONST_ID IID& IID_IChatConversationThreadingInfo = __uuidof(IChatConversationThreadingInfo);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4350,7 +4350,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatItem = _uuidof(IChatItem);
+                MIDL_CONST_ID IID& IID_IChatItem = __uuidof(IChatItem);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4434,7 +4434,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessage = _uuidof(IChatMessage);
+                MIDL_CONST_ID IID& IID_IChatMessage = __uuidof(IChatMessage);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4555,7 +4555,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessage2 = _uuidof(IChatMessage2);
+                MIDL_CONST_ID IID& IID_IChatMessage2 = __uuidof(IChatMessage2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4594,7 +4594,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessage3 = _uuidof(IChatMessage3);
+                MIDL_CONST_ID IID& IID_IChatMessage3 = __uuidof(IChatMessage3);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4636,7 +4636,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessage4 = _uuidof(IChatMessage4);
+                MIDL_CONST_ID IID& IID_IChatMessage4 = __uuidof(IChatMessage4);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4693,7 +4693,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageAttachment = _uuidof(IChatMessageAttachment);
+                MIDL_CONST_ID IID& IID_IChatMessageAttachment = __uuidof(IChatMessageAttachment);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4747,7 +4747,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageAttachment2 = _uuidof(IChatMessageAttachment2);
+                MIDL_CONST_ID IID& IID_IChatMessageAttachment2 = __uuidof(IChatMessageAttachment2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4785,7 +4785,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageAttachmentFactory = _uuidof(IChatMessageAttachmentFactory);
+                MIDL_CONST_ID IID& IID_IChatMessageAttachmentFactory = __uuidof(IChatMessageAttachmentFactory);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4823,7 +4823,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageBlockingStatic = _uuidof(IChatMessageBlockingStatic);
+                MIDL_CONST_ID IID& IID_IChatMessageBlockingStatic = __uuidof(IChatMessageBlockingStatic);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4862,7 +4862,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageChange = _uuidof(IChatMessageChange);
+                MIDL_CONST_ID IID& IID_IChatMessageChange = __uuidof(IChatMessageChange);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4902,7 +4902,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageChangeReader = _uuidof(IChatMessageChangeReader);
+                MIDL_CONST_ID IID& IID_IChatMessageChangeReader = __uuidof(IChatMessageChangeReader);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4940,7 +4940,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageChangeTracker = _uuidof(IChatMessageChangeTracker);
+                MIDL_CONST_ID IID& IID_IChatMessageChangeTracker = __uuidof(IChatMessageChangeTracker);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -4974,7 +4974,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageChangedDeferral = _uuidof(IChatMessageChangedDeferral);
+                MIDL_CONST_ID IID& IID_IChatMessageChangedDeferral = __uuidof(IChatMessageChangedDeferral);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5010,7 +5010,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageChangedEventArgs = _uuidof(IChatMessageChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IChatMessageChangedEventArgs = __uuidof(IChatMessageChangedEventArgs);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5053,7 +5053,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageManager2Statics = _uuidof(IChatMessageManager2Statics);
+                MIDL_CONST_ID IID& IID_IChatMessageManager2Statics = __uuidof(IChatMessageManager2Statics);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5097,7 +5097,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ShowSmsSettings(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageManagerStatic = _uuidof(IChatMessageManagerStatic);
+                MIDL_CONST_ID IID& IID_IChatMessageManagerStatic = __uuidof(IChatMessageManagerStatic);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5136,7 +5136,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageManagerStatics3 = _uuidof(IChatMessageManagerStatics3);
+                MIDL_CONST_ID IID& IID_IChatMessageManagerStatics3 = __uuidof(IChatMessageManagerStatics3);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5172,7 +5172,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageNotificationTriggerDetails = _uuidof(IChatMessageNotificationTriggerDetails);
+                MIDL_CONST_ID IID& IID_IChatMessageNotificationTriggerDetails = __uuidof(IChatMessageNotificationTriggerDetails);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5220,7 +5220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageNotificationTriggerDetails2 = _uuidof(IChatMessageNotificationTriggerDetails2);
+                MIDL_CONST_ID IID& IID_IChatMessageNotificationTriggerDetails2 = __uuidof(IChatMessageNotificationTriggerDetails2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5256,7 +5256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageReader = _uuidof(IChatMessageReader);
+                MIDL_CONST_ID IID& IID_IChatMessageReader = __uuidof(IChatMessageReader);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5293,7 +5293,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageReader2 = _uuidof(IChatMessageReader2);
+                MIDL_CONST_ID IID& IID_IChatMessageReader2 = __uuidof(IChatMessageReader2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5371,7 +5371,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageStore = _uuidof(IChatMessageStore);
+                MIDL_CONST_ID IID& IID_IChatMessageStore = __uuidof(IChatMessageStore);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5474,7 +5474,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageStore2 = _uuidof(IChatMessageStore2);
+                MIDL_CONST_ID IID& IID_IChatMessageStore2 = __uuidof(IChatMessageStore2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5514,7 +5514,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageStore3 = _uuidof(IChatMessageStore3);
+                MIDL_CONST_ID IID& IID_IChatMessageStore3 = __uuidof(IChatMessageStore3);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5553,7 +5553,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageStoreChangedEventArgs = _uuidof(IChatMessageStoreChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IChatMessageStoreChangedEventArgs = __uuidof(IChatMessageStoreChangedEventArgs);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5601,7 +5601,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageTransport = _uuidof(IChatMessageTransport);
+                MIDL_CONST_ID IID& IID_IChatMessageTransport = __uuidof(IChatMessageTransport);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5643,7 +5643,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageTransport2 = _uuidof(IChatMessageTransport2);
+                MIDL_CONST_ID IID& IID_IChatMessageTransport2 = __uuidof(IChatMessageTransport2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5691,7 +5691,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageTransportConfiguration = _uuidof(IChatMessageTransportConfiguration);
+                MIDL_CONST_ID IID& IID_IChatMessageTransportConfiguration = __uuidof(IChatMessageTransportConfiguration);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5736,7 +5736,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatMessageValidationResult = _uuidof(IChatMessageValidationResult);
+                MIDL_CONST_ID IID& IID_IChatMessageValidationResult = __uuidof(IChatMessageValidationResult);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5775,7 +5775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatQueryOptions = _uuidof(IChatQueryOptions);
+                MIDL_CONST_ID IID& IID_IChatQueryOptions = __uuidof(IChatQueryOptions);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5841,7 +5841,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatRecipientDeliveryInfo = _uuidof(IChatRecipientDeliveryInfo);
+                MIDL_CONST_ID IID& IID_IChatRecipientDeliveryInfo = __uuidof(IChatRecipientDeliveryInfo);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5881,7 +5881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatSearchReader = _uuidof(IChatSearchReader);
+                MIDL_CONST_ID IID& IID_IChatSearchReader = __uuidof(IChatSearchReader);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5926,7 +5926,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatSyncConfiguration = _uuidof(IChatSyncConfiguration);
+                MIDL_CONST_ID IID& IID_IChatSyncConfiguration = __uuidof(IChatSyncConfiguration);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -5978,7 +5978,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IChatSyncManager = _uuidof(IChatSyncManager);
+                MIDL_CONST_ID IID& IID_IChatSyncManager = __uuidof(IChatSyncManager);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6035,7 +6035,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsEndUserMessage = _uuidof(IRcsEndUserMessage);
+                MIDL_CONST_ID IID& IID_IRcsEndUserMessage = __uuidof(IRcsEndUserMessage);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6071,7 +6071,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsEndUserMessageAction = _uuidof(IRcsEndUserMessageAction);
+                MIDL_CONST_ID IID& IID_IRcsEndUserMessageAction = __uuidof(IRcsEndUserMessageAction);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6110,7 +6110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsEndUserMessageAvailableEventArgs = _uuidof(IRcsEndUserMessageAvailableEventArgs);
+                MIDL_CONST_ID IID& IID_IRcsEndUserMessageAvailableEventArgs = __uuidof(IRcsEndUserMessageAvailableEventArgs);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6149,7 +6149,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsEndUserMessageAvailableTriggerDetails = _uuidof(IRcsEndUserMessageAvailableTriggerDetails);
+                MIDL_CONST_ID IID& IID_IRcsEndUserMessageAvailableTriggerDetails = __uuidof(IRcsEndUserMessageAvailableTriggerDetails);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6189,7 +6189,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsEndUserMessageManager = _uuidof(IRcsEndUserMessageManager);
+                MIDL_CONST_ID IID& IID_IRcsEndUserMessageManager = __uuidof(IRcsEndUserMessageManager);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6236,7 +6236,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsManagerStatics = _uuidof(IRcsManagerStatics);
+                MIDL_CONST_ID IID& IID_IRcsManagerStatics = __uuidof(IRcsManagerStatics);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6276,7 +6276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsManagerStatics2 = _uuidof(IRcsManagerStatics2);
+                MIDL_CONST_ID IID& IID_IRcsManagerStatics2 = __uuidof(IRcsManagerStatics2);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6312,7 +6312,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsServiceKindSupportedChangedEventArgs = _uuidof(IRcsServiceKindSupportedChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IRcsServiceKindSupportedChangedEventArgs = __uuidof(IRcsServiceKindSupportedChangedEventArgs);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6375,7 +6375,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsTransport = _uuidof(IRcsTransport);
+                MIDL_CONST_ID IID& IID_IRcsTransport = __uuidof(IRcsTransport);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6426,7 +6426,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRcsTransportConfiguration = _uuidof(IRcsTransportConfiguration);
+                MIDL_CONST_ID IID& IID_IRcsTransportConfiguration = __uuidof(IRcsTransportConfiguration);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6468,7 +6468,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRemoteParticipantComposingChangedEventArgs = _uuidof(IRemoteParticipantComposingChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IRemoteParticipantComposingChangedEventArgs = __uuidof(IRemoteParticipantComposingChangedEventArgs);
             } /* Chat */
         } /* ApplicationModel */
     } /* Windows */
@@ -6506,8 +6506,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6775,9 +6775,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManager2Statics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManager2Statics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7166,8 +7166,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -18222,8 +18222,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatCapabilitiesManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -18491,9 +18491,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManager2Statics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManager2Statics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IChatMessageManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -18882,8 +18882,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Chat.IRcsManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

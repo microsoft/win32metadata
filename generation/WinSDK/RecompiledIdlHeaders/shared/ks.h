@@ -240,6 +240,12 @@ enum VARENUM {
 };
 #endif // _NTDDK_ && !__wtypes_h__
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+
 typedef struct {
     ULONG    Size;
     ULONG    Count;
@@ -327,6 +333,12 @@ typedef struct {
 #endif // !_NTDDK_
     KSPROPERTY_BOUNDS_LONGLONG  Bounds;
 } KSPROPERTY_STEPPING_LONGLONG, *PKSPROPERTY_STEPPING_LONGLONG;
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 //===========================================================================
 #if (NTDDI_VERSION >= NTDDI_WINXP)

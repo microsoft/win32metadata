@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -141,6 +141,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    interface IRemoteTextConnection2;
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2 ABI::Windows::System::RemoteDesktop::Input::IRemoteTextConnection2
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
 namespace ABI {
@@ -157,6 +174,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory ABI::Windows::System::RemoteDesktop::Input::IRemoteTextConnectionFactory
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    interface IRemoteTextConnectionFactory2;
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2 ABI::Windows::System::RemoteDesktop::Input::IRemoteTextConnectionFactory2
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -179,12 +213,93 @@ namespace ABI {
         namespace System {
             namespace RemoteDesktop {
                 namespace Input {
+                    typedef enum RemoteKeyEventAttributes : unsigned int RemoteKeyEventAttributes;
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    typedef enum RemoteTextConnectionOptions : unsigned int RemoteTextConnectionOptions;
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
                     class RemoteTextConnection;
                 } /* Input */
             } /* RemoteDesktop */
         } /* System */
     } /* Windows */
 } /* ABI */
+
+/*
+ *
+ * Struct Windows.System.RemoteDesktop.Input.RemoteKeyEventAttributes
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    enum RemoteKeyEventAttributes : unsigned int
+                    {
+                        RemoteKeyEventAttributes_None = 0,
+                        RemoteKeyEventAttributes_KeyUp = 0x1,
+                        RemoteKeyEventAttributes_Repeat = 0x2,
+                        RemoteKeyEventAttributes_Extended = 0x4,
+                        RemoteKeyEventAttributes_Extended1 = 0x8,
+                    };
+
+                    DEFINE_ENUM_FLAG_OPERATORS(RemoteKeyEventAttributes)
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+
+/*
+ *
+ * Struct Windows.System.RemoteDesktop.Input.RemoteTextConnectionOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    enum RemoteTextConnectionOptions : unsigned int
+                    {
+                        RemoteTextConnectionOptions_None = 0,
+                        RemoteTextConnectionOptions_EnablePredictedKeyReporting = 0x1,
+                    };
+
+                    DEFINE_ENUM_FLAG_OPERATORS(RemoteTextConnectionOptions)
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
 
 /*
  *
@@ -212,7 +327,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRemoteTextConnectionDataHandler = _uuidof(IRemoteTextConnectionDataHandler);
+                    MIDL_CONST_ID IID& IID_IRemoteTextConnectionDataHandler = __uuidof(IRemoteTextConnectionDataHandler);
                 } /* Input */
             } /* RemoteDesktop */
         } /* System */
@@ -263,7 +378,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRemoteTextConnection = _uuidof(IRemoteTextConnection);
+                    MIDL_CONST_ID IID& IID_IRemoteTextConnection = __uuidof(IRemoteTextConnection);
                 } /* Input */
             } /* RemoteDesktop */
         } /* System */
@@ -273,6 +388,45 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection;
 #endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.System.RemoteDesktop.Input.IRemoteTextConnection2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Input.RemoteTextConnection
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Input_IRemoteTextConnection2[] = L"Windows.System.RemoteDesktop.Input.IRemoteTextConnection2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    MIDL_INTERFACE("05f99345-84c8-56c5-934f-73ea00f8c2d5")
+                    IRemoteTextConnection2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE ReportPredictedKeyEvent(
+                            UINT16 scanCode,
+                            ABI::Windows::System::RemoteDesktop::Input::RemoteKeyEventAttributes attributes
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IRemoteTextConnection2 = __uuidof(IRemoteTextConnection2);
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
 
 /*
  *
@@ -303,7 +457,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRemoteTextConnectionFactory = _uuidof(IRemoteTextConnectionFactory);
+                    MIDL_CONST_ID IID& IID_IRemoteTextConnectionFactory = __uuidof(IRemoteTextConnectionFactory);
                 } /* Input */
             } /* RemoteDesktop */
         } /* System */
@@ -316,15 +470,58 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTe
 
 /*
  *
+ * Interface Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Input.RemoteTextConnection
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Input_IRemoteTextConnectionFactory2[] = L"Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Input {
+                    MIDL_INTERFACE("9425c7d9-ed9b-5d00-99cc-b0b8dc9e4c60")
+                    IRemoteTextConnectionFactory2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                            GUID connectionId,
+                            ABI::Windows::System::RemoteDesktop::Input::IRemoteTextConnectionDataHandler* pduForwarder,
+                            ABI::Windows::System::RemoteDesktop::Input::RemoteTextConnectionOptions options,
+                            ABI::Windows::System::RemoteDesktop::Input::IRemoteTextConnection** value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IRemoteTextConnectionFactory2 = __uuidof(IRemoteTextConnectionFactory2);
+                } /* Input */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+
+/*
+ *
  * Class Windows.System.RemoteDesktop.Input.RemoteTextConnection
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
  *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2 interface starting with version 16.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteDesktop.Input.IRemoteTextConnection ** Default Interface **
+ *    Windows.System.RemoteDesktop.Input.IRemoteTextConnection2
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -353,11 +550,23 @@ typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextCon
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2 __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2;
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory;
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2 __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2;
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -368,6 +577,43 @@ typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextCon
 typedef interface __x_ABI_CWindows_CFoundation_CIClosable __x_ABI_CWindows_CFoundation_CIClosable;
 
 #endif // ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
+
+typedef enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteKeyEventAttributes __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteKeyEventAttributes;
+
+typedef enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteTextConnectionOptions __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteTextConnectionOptions;
+
+/*
+ *
+ * Struct Windows.System.RemoteDesktop.Input.RemoteKeyEventAttributes
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteKeyEventAttributes
+{
+    RemoteKeyEventAttributes_None = 0,
+    RemoteKeyEventAttributes_KeyUp = 0x1,
+    RemoteKeyEventAttributes_Repeat = 0x2,
+    RemoteKeyEventAttributes_Extended = 0x4,
+    RemoteKeyEventAttributes_Extended1 = 0x8,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+
+/*
+ *
+ * Struct Windows.System.RemoteDesktop.Input.RemoteTextConnectionOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteTextConnectionOptions
+{
+    RemoteTextConnectionOptions_None = 0,
+    RemoteTextConnectionOptions_EnablePredictedKeyReporting = 0x1,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
 
 /*
  *
@@ -513,6 +759,76 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTe
 
 /*
  *
+ * Interface Windows.System.RemoteDesktop.Input.IRemoteTextConnection2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Input.RemoteTextConnection
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Input_IRemoteTextConnection2[] = L"Windows.System.RemoteDesktop.Input.IRemoteTextConnection2";
+typedef struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* ReportPredictedKeyEvent)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2* This,
+        UINT16 scanCode,
+        enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteKeyEventAttributes attributes);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_ReportPredictedKeyEvent(This, scanCode, attributes) \
+    ((This)->lpVtbl->ReportPredictedKeyEvent(This, scanCode, attributes))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+
+/*
+ *
  * Interface Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
@@ -584,15 +900,89 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTe
 
 /*
  *
+ * Interface Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 16.0
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Input.RemoteTextConnection
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Input_IRemoteTextConnectionFactory2[] = L"Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2";
+typedef struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2* This,
+        GUID connectionId,
+        __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionDataHandler* pduForwarder,
+        enum __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CRemoteTextConnectionOptions options,
+        __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnection** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_CreateInstance(This, connectionId, pduForwarder, options, value) \
+    ((This)->lpVtbl->CreateInstance(This, connectionId, pduForwarder, options, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CInput_CIRemoteTextConnectionFactory2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
+
+/*
+ *
  * Class Windows.System.RemoteDesktop.Input.RemoteTextConnection
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
  *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.System.RemoteDesktop.Input.IRemoteTextConnectionFactory2 interface starting with version 16.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteDesktop.Input.IRemoteTextConnection ** Default Interface **
+ *    Windows.System.RemoteDesktop.Input.IRemoteTextConnection2
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment

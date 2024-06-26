@@ -375,7 +375,7 @@ namespace Windows
         namespace Calls
         {
 
-            [contractversion(4.0)]
+            [contractversion(5.0)]
             apicontract CallsVoipContract
             {
             }

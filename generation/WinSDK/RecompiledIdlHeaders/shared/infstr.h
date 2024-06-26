@@ -72,6 +72,8 @@
 #define SZ_KEY_DELPROP               TEXT("DelProperty")
 #define SZ_KEY_FEATURESCORE          TEXT("FeatureScore")
 #define SZ_KEY_ADDEVENTPROVIDER      TEXT("AddEventProvider")
+#define SZ_KEY_ADDCOMSERVER          TEXT("AddComServer")
+#define SZ_KEY_ADDCOMCLASS           TEXT("AddComClass")
 #define SZ_KEY_ADDCHANNEL            TEXT("AddChannel")
 #define SZ_KEY_IMPORTCHANNEL         TEXT("ImportChannel")
 #define SZ_KEY_ADDAUTOLOGGER         TEXT("AddAutoLogger")
@@ -80,6 +82,7 @@
 #define SZ_KEY_ADDFILTER             TEXT("AddFilter")
 #define SZ_KEY_FILTERLEVEL           TEXT("FilterLevel")
 #define SZ_KEY_FILTERPOSITION        TEXT("FilterPosition")
+#define SZ_KEY_ADDCOMPONENT          TEXT("AddComponent")
 
 // These are here for compatability with SetupX
 // They are registry keys, and are not used by SetupAPI
@@ -213,6 +216,7 @@
 #define INFSTR_KEY_DESCRIPTION          TEXT("Description")
 #define INFSTR_KEY_SERVICESIDTYPE       TEXT("ServiceSidType")
 #define INFSTR_KEY_DELAYEDAUTOSTART     TEXT("DelayedAutoStart")
+#define INFSTR_KEY_BOOTFLAGS            TEXT("BootFlags")
 
 //
 // Used for Triggers within a Service section.
@@ -236,6 +240,25 @@
 #define INFSTR_KEY_RESOURCE_FILE        TEXT("ResourceFile")
 #define INFSTR_KEY_MESSAGE_FILE         TEXT("MessageFile")
 #define INFSTR_KEY_PARAMETER_FILE       TEXT("ParameterFile")
+
+//
+// Used in COM server section
+//
+#define INFSTR_KEY_COM_SERVER_TYPE            TEXT("ServerType")
+#define INFSTR_KEY_COM_SERVER_BINARY          TEXT("ServerBinary")
+#define INFSTR_KEY_COM_SERVER_BINARY_WOW64    TEXT("ServerBinaryWow64")
+#define INFSTR_KEY_COM_SERVER_ADD_COM_CLASS   TEXT("AddComClass")
+
+//
+// Used in COM class section
+//
+#define INFSTR_KEY_COM_CLASS_THREADING_MODEL TEXT("ThreadingModel")
+#define INFSTR_KEY_COM_CLASS_DESCRIPTION     TEXT("Description")
+
+//
+// Used in components section
+//
+#define INFSTR_KEY_COMPONENTIDS         TEXT("ComponentIds")
 
 //
 // Used for channel attributes in event channel section
@@ -332,7 +355,9 @@
 #define INFSTR_SUBKEY_LOGCONFIGOVERRIDE TEXT("LogConfigOverride")
 #define INFSTR_SUBKEY_WMI               TEXT("WMI")
 #define INFSTR_SUBKEY_EVENTS            TEXT("Events")
+#define INFSTR_SUBKEY_COM               TEXT("COM")
 #define INFSTR_SUBKEY_FILTERS           TEXT("Filters")
+#define INFSTR_SUBKEY_COMPONENTS        TEXT("Components")
 
 // Control Section
 #define INFSTR_CONTROLFLAGS_SECTION         TEXT("ControlFlags")
@@ -412,4 +437,3 @@
 #pragma endregion
 
 #endif  //_INC_INFSTR
-

@@ -80,9 +80,7 @@
     7.  See XAPOBase.h for an XAPO base class which provides a default
         implementation for most of the interface methods defined below.     */
 
-#ifdef _MSC_VER
 #pragma once
-#endif
 
 #include <sdkddkver.h>
 

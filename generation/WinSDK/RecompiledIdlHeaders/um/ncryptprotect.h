@@ -355,8 +355,9 @@ NCryptCloseProtectionDescriptor(
 //
 #define NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING   0x00000001  // LPWSTR
 
+_Success_(return == 0)
 _When_(dwInfoType == NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING,
-       _At_((LPWSTR*)ppvInfo, _Out_))
+       _At_((LPWSTR*)ppvInfo, _Outptr_result_nullonfailure_))
 SECURITY_STATUS
 WINAPI
 NCryptGetProtectionDescriptorInfo(

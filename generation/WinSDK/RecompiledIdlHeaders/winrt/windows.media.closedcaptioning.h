@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -421,7 +421,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClosedCaptionPropertiesStatics = _uuidof(IClosedCaptionPropertiesStatics);
+                MIDL_CONST_ID IID& IID_IClosedCaptionPropertiesStatics = __uuidof(IClosedCaptionPropertiesStatics);
             } /* ClosedCaptioning */
         } /* Media */
     } /* Windows */
@@ -461,7 +461,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClosedCaptionPropertiesStatics2 = _uuidof(IClosedCaptionPropertiesStatics2);
+                MIDL_CONST_ID IID& IID_IClosedCaptionPropertiesStatics2 = __uuidof(IClosedCaptionPropertiesStatics2);
             } /* ClosedCaptioning */
         } /* Media */
     } /* Windows */
@@ -478,8 +478,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -874,8 +874,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

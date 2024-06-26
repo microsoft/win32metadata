@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1041,7 +1041,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICameraIntrinsics = _uuidof(ICameraIntrinsics);
+                    MIDL_CONST_ID IID& IID_ICameraIntrinsics = __uuidof(ICameraIntrinsics);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1099,7 +1099,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICameraIntrinsics2 = _uuidof(ICameraIntrinsics2);
+                    MIDL_CONST_ID IID& IID_ICameraIntrinsics2 = __uuidof(ICameraIntrinsics2);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1143,7 +1143,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICameraIntrinsicsFactory = _uuidof(ICameraIntrinsicsFactory);
+                    MIDL_CONST_ID IID& IID_ICameraIntrinsicsFactory = __uuidof(ICameraIntrinsicsFactory);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1207,7 +1207,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDepthCorrelatedCoordinateMapper = _uuidof(IDepthCorrelatedCoordinateMapper);
+                    MIDL_CONST_ID IID& IID_IDepthCorrelatedCoordinateMapper = __uuidof(IDepthCorrelatedCoordinateMapper);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1257,7 +1257,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameControlCapabilities = _uuidof(IFrameControlCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameControlCapabilities = __uuidof(IFrameControlCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1295,7 +1295,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameControlCapabilities2 = _uuidof(IFrameControlCapabilities2);
+                    MIDL_CONST_ID IID& IID_IFrameControlCapabilities2 = __uuidof(IFrameControlCapabilities2);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1348,7 +1348,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameController = _uuidof(IFrameController);
+                    MIDL_CONST_ID IID& IID_IFrameController = __uuidof(IFrameController);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1386,7 +1386,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameController2 = _uuidof(IFrameController2);
+                    MIDL_CONST_ID IID& IID_IFrameController2 = __uuidof(IFrameController2);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1433,7 +1433,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameExposureCapabilities = _uuidof(IFrameExposureCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameExposureCapabilities = __uuidof(IFrameExposureCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1480,7 +1480,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameExposureCompensationCapabilities = _uuidof(IFrameExposureCompensationCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameExposureCompensationCapabilities = __uuidof(IFrameExposureCompensationCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1521,7 +1521,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameExposureCompensationControl = _uuidof(IFrameExposureCompensationControl);
+                    MIDL_CONST_ID IID& IID_IFrameExposureCompensationControl = __uuidof(IFrameExposureCompensationControl);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1568,7 +1568,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameExposureControl = _uuidof(IFrameExposureControl);
+                    MIDL_CONST_ID IID& IID_IFrameExposureControl = __uuidof(IFrameExposureControl);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1612,7 +1612,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameFlashCapabilities = _uuidof(IFrameFlashCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameFlashCapabilities = __uuidof(IFrameFlashCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1671,7 +1671,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameFlashControl = _uuidof(IFrameFlashControl);
+                    MIDL_CONST_ID IID& IID_IFrameFlashControl = __uuidof(IFrameFlashControl);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1718,7 +1718,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameFocusCapabilities = _uuidof(IFrameFocusCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameFocusCapabilities = __uuidof(IFrameFocusCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1759,7 +1759,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameFocusControl = _uuidof(IFrameFocusControl);
+                    MIDL_CONST_ID IID& IID_IFrameFocusControl = __uuidof(IFrameFocusControl);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1806,7 +1806,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameIsoSpeedCapabilities = _uuidof(IFrameIsoSpeedCapabilities);
+                    MIDL_CONST_ID IID& IID_IFrameIsoSpeedCapabilities = __uuidof(IFrameIsoSpeedCapabilities);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1853,7 +1853,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameIsoSpeedControl = _uuidof(IFrameIsoSpeedControl);
+                    MIDL_CONST_ID IID& IID_IFrameIsoSpeedControl = __uuidof(IFrameIsoSpeedControl);
                 } /* Core */
             } /* Devices */
         } /* Media */
@@ -1913,7 +1913,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IVariablePhotoSequenceController = _uuidof(IVariablePhotoSequenceController);
+                    MIDL_CONST_ID IID& IID_IVariablePhotoSequenceController = __uuidof(IVariablePhotoSequenceController);
                 } /* Core */
             } /* Devices */
         } /* Media */

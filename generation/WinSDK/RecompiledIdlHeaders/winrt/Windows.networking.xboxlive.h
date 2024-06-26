@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_XBOXLIVE_XBOXLIVESECURESOCKETSCONTRACT_VERSION)
@@ -1439,7 +1439,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveDeviceAddress = _uuidof(IXboxLiveDeviceAddress);
+                MIDL_CONST_ID IID& IID_IXboxLiveDeviceAddress = __uuidof(IXboxLiveDeviceAddress);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1491,7 +1491,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveDeviceAddressStatics = _uuidof(IXboxLiveDeviceAddressStatics);
+                MIDL_CONST_ID IID& IID_IXboxLiveDeviceAddressStatics = __uuidof(IXboxLiveDeviceAddressStatics);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1563,7 +1563,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPair = _uuidof(IXboxLiveEndpointPair);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPair = __uuidof(IXboxLiveEndpointPair);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1608,7 +1608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairCreationResult = _uuidof(IXboxLiveEndpointPairCreationResult);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairCreationResult = __uuidof(IXboxLiveEndpointPairCreationResult);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1647,7 +1647,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairStateChangedEventArgs = _uuidof(IXboxLiveEndpointPairStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairStateChangedEventArgs = __uuidof(IXboxLiveEndpointPairStateChangedEventArgs);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1694,7 +1694,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairStatics = _uuidof(IXboxLiveEndpointPairStatics);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairStatics = __uuidof(IXboxLiveEndpointPairStatics);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1777,7 +1777,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairTemplate = _uuidof(IXboxLiveEndpointPairTemplate);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairTemplate = __uuidof(IXboxLiveEndpointPairTemplate);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1817,7 +1817,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairTemplateStatics = _uuidof(IXboxLiveEndpointPairTemplateStatics);
+                MIDL_CONST_ID IID& IID_IXboxLiveEndpointPairTemplateStatics = __uuidof(IXboxLiveEndpointPairTemplateStatics);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1853,7 +1853,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveInboundEndpointPairCreatedEventArgs = _uuidof(IXboxLiveInboundEndpointPairCreatedEventArgs);
+                MIDL_CONST_ID IID& IID_IXboxLiveInboundEndpointPairCreatedEventArgs = __uuidof(IXboxLiveInboundEndpointPairCreatedEventArgs);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -1939,7 +1939,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMeasurement = _uuidof(IXboxLiveQualityOfServiceMeasurement);
+                MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMeasurement = __uuidof(IXboxLiveQualityOfServiceMeasurement);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -2004,7 +2004,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMeasurementStatics = _uuidof(IXboxLiveQualityOfServiceMeasurementStatics);
+                MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMeasurementStatics = __uuidof(IXboxLiveQualityOfServiceMeasurementStatics);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -2049,7 +2049,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMetricResult = _uuidof(IXboxLiveQualityOfServiceMetricResult);
+                MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServiceMetricResult = __uuidof(IXboxLiveQualityOfServiceMetricResult);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */
@@ -2091,7 +2091,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServicePrivatePayloadResult = _uuidof(IXboxLiveQualityOfServicePrivatePayloadResult);
+                MIDL_CONST_ID IID& IID_IXboxLiveQualityOfServicePrivatePayloadResult = __uuidof(IXboxLiveQualityOfServicePrivatePayloadResult);
             } /* XboxLive */
         } /* Networking */
     } /* Windows */

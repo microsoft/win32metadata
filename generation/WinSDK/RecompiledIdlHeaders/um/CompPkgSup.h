@@ -24,6 +24,8 @@
 #include <hstring.h>
 #include <inspectable.h>
 #include <windows.foundation.h>
+#include <mfcontentdecryptionmodule.h>
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 #if !defined(MIDL_NS_PREFIX) && !defined(____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__)
@@ -47,6 +49,11 @@ STDAPI  GetMediaComponentPackageInfo( _In_ bool trustedOnly, _In_ HSTRING catego
 #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 STDAPI GetSystemNativeProcessorSignature(_Out_ DWORD* processorSignature);
 #endif // NTDDI_VERSION >= NTDDI_WIN11_GA
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+STDAPI GetDefaultContentDecryptionModuleFactory(_In_ PCWSTR keySystem, _Outptr_result_maybenull_ IMFContentDecryptionModuleFactory** contentDecryptionModuleFactory);
+STDAPI RegisterMediaExtensionPackage(_In_ PCWSTR packageFamilyName);
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 //
 // MF behavior GUIDs

@@ -39,3 +39,4 @@ DXCoreCreateAdapterFactory(
 #endif // _DXCOREEXTMODULE_H_
 
 
+

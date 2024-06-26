@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -317,7 +317,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICoreAppWindowPreview = _uuidof(ICoreAppWindowPreview);
+                    MIDL_CONST_ID IID& IID_ICoreAppWindowPreview = __uuidof(ICoreAppWindowPreview);
                 } /* Preview */
             } /* Core */
         } /* UI */
@@ -356,7 +356,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICoreAppWindowPreviewStatics = _uuidof(ICoreAppWindowPreviewStatics);
+                    MIDL_CONST_ID IID& IID_ICoreAppWindowPreviewStatics = __uuidof(ICoreAppWindowPreviewStatics);
                 } /* Preview */
             } /* Core */
         } /* UI */
@@ -400,7 +400,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemNavigationCloseRequestedPreviewEventArgs = _uuidof(ISystemNavigationCloseRequestedPreviewEventArgs);
+                    MIDL_CONST_ID IID& IID_ISystemNavigationCloseRequestedPreviewEventArgs = __uuidof(ISystemNavigationCloseRequestedPreviewEventArgs);
                 } /* Preview */
             } /* Core */
         } /* UI */
@@ -442,7 +442,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemNavigationManagerPreview = _uuidof(ISystemNavigationManagerPreview);
+                    MIDL_CONST_ID IID& IID_ISystemNavigationManagerPreview = __uuidof(ISystemNavigationManagerPreview);
                 } /* Preview */
             } /* Core */
         } /* UI */
@@ -480,7 +480,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISystemNavigationManagerPreviewStatics = _uuidof(ISystemNavigationManagerPreviewStatics);
+                    MIDL_CONST_ID IID& IID_ISystemNavigationManagerPreviewStatics = __uuidof(ISystemNavigationManagerPreviewStatics);
                 } /* Preview */
             } /* Core */
         } /* UI */

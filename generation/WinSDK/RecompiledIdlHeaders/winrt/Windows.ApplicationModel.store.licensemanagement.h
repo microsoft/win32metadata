@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -515,7 +515,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILicenseManagerStatics = _uuidof(ILicenseManagerStatics);
+                    MIDL_CONST_ID IID& IID_ILicenseManagerStatics = __uuidof(ILicenseManagerStatics);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -554,7 +554,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILicenseManagerStatics2 = _uuidof(ILicenseManagerStatics2);
+                    MIDL_CONST_ID IID& IID_ILicenseManagerStatics2 = __uuidof(ILicenseManagerStatics2);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -610,7 +610,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILicenseSatisfactionInfo = _uuidof(ILicenseSatisfactionInfo);
+                    MIDL_CONST_ID IID& IID_ILicenseSatisfactionInfo = __uuidof(ILicenseSatisfactionInfo);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -651,7 +651,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILicenseSatisfactionResult = _uuidof(ILicenseSatisfactionResult);
+                    MIDL_CONST_ID IID& IID_ILicenseSatisfactionResult = __uuidof(ILicenseSatisfactionResult);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -669,8 +669,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CLicenseManagem
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1676,8 +1676,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CLicenseManagem
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Store.LicenseManagement.ILicenseManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

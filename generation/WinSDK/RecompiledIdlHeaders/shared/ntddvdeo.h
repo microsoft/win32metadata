@@ -71,6 +71,14 @@ DEFINE_GUID(GUID_DISPLAY_DEVICE_ARRIVAL, 0x1CA05180, 0xA699, 0x450A, 0x9A, 0x0C,
 
 DEFINE_GUID(GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL, 0x1AD9E4F0, 0xF88D, 0x4360, 0xBA, 0xB9, 0x4C, 0x2D, 0x55, 0xE5, 0x64, 0xCD);
 
+//
+// Display Mux device interface
+// Interface used by anyone listening for arrival of a display mux device
+// {93c33929-3180-46d3-8aab-008c84ad1e6e}
+//
+
+DEFINE_GUID(GUID_DEVINTERFACE_DISPLAYMUX, 0x93c33929, 0x3180, 0x46d3, 0x8a, 0xab, 0x00, 0x8c, 0x84, 0xad, 0x1e, 0x6e);
+
 #ifdef DEFINE_DEVPROPKEY
 
 //
@@ -91,7 +99,19 @@ struct INDIRECT_DISPLAY_INFO
 	ULONG DisplayAdapterTargetBase;
 };
 
-#define INDIRECT_DISPLAY_INFO_FLAGS_CREATED_IDDCX_ADAPTER 0x1  // This indirect display device crated a IddCx adapter
+#define INDIRECT_DISPLAY_INFO_FLAGS_CREATED_IDDCX_ADAPTER 0x1  // This indirect display device created a IddCx adapter
+#define INDIRECT_DISPLAY_INFO_FLAGS_SUPPORT_FP16          0x2  // This indirect display device supports FP16
+
+//
+// Display Mux property keys GUID base
+// {fefa7434-e0fd-4b2a-905a-7d0127a9f01c}
+//
+
+DEFINE_DEVPROPKEY(DEVPKEY_DisplayMux_InitStatus, 0xfefa7434, 0xe0fd, 0x4b2a, 0x90, 0x5a, 0x7d, 0x01, 0x27, 0xa9, 0xf0, 0x1c, 1); //
+DEFINE_DEVPROPKEY(DEVPKEY_DisplayMux_SupportLevel , 0xfefa7434, 0xe0fd, 0x4b2a, 0x90, 0x5a, 0x7d, 0x01, 0x27, 0xa9, 0xf0, 0x1c, 2); // DEVPROP_TYPE_UINT32
+DEFINE_DEVPROPKEY(DEVPKEY_DisplayMux_MuxTarget1, 0xfefa7434, 0xe0fd, 0x4b2a, 0x90, 0x5a, 0x7d, 0x01, 0x27, 0xa9, 0xf0, 0x1c, 3); // DEVPROP_TYPE_BINARY
+DEFINE_DEVPROPKEY(DEVPKEY_DisplayMux_MuxTarget2, 0xfefa7434, 0xe0fd, 0x4b2a, 0x90, 0x5a, 0x7d, 0x01, 0x27, 0xa9, 0xf0, 0x1c, 4); // DEVPROP_TYPE_BINARY
+DEFINE_DEVPROPKEY(DEVPKEY_DisplayMux_CurrentTarget, 0xfefa7434, 0xe0fd, 0x4b2a, 0x90, 0x5a, 0x7d, 0x01, 0x27, 0xa9, 0xf0, 0x1c, 5); // DEVPROP_TYPE_BINARY
 
 #endif
 
@@ -2131,7 +2151,7 @@ typedef struct _PANEL_SET_BRIGHTNESS{
 } PANEL_SET_BRIGHTNESS, *PPANEL_SET_BRIGHTNESS;
 
 //
-// IOCTL_PANEL_SET_BRIGHTNESS_STATE 
+// IOCTL_PANEL_SET_BRIGHTNESS_STATE
 //
 
 typedef struct _PANEL_SET_BRIGHTNESS_STATE{
@@ -2148,7 +2168,7 @@ typedef struct _PANEL_SET_BRIGHTNESS_STATE{
 } PANEL_SET_BRIGHTNESS_STATE, *PPANEL_SET_BRIGHTNESS_STATE;
 
 //
-// IOCTL_PANEL_SET_BACKLIGHT_OPTIMIZATION 
+// IOCTL_PANEL_SET_BACKLIGHT_OPTIMIZATION
 //
 
 typedef enum _BACKLIGHT_OPTIMIZATION_LEVEL
@@ -2544,6 +2564,9 @@ typedef MIPI_DSI_RESET MIPI_DSI_RESET_OUTPUT, *PMIPI_DSI_RESET_OUTPUT;
 
 // {F196C02F-F86F-4F9A-AA15-E9CEBDFE3B96}
 DEFINE_GUID(GUID_MONITOR_OVERRIDE_PSEUDO_SPECIALIZED, 0xf196c02f, 0xf86f, 0x4f9a, 0xaa, 0x15, 0xe9, 0xce, 0xbd, 0xfe, 0x3b, 0x96);
+
+// {0457E531-3CB9-4A07-83C1-A79146C64DB3}
+DEFINE_GUID(GUID_MONITOR_OVERRIDE_TEST_SPECIALIZED, 0x457e531, 0x3cb9, 0x4a07, 0x83, 0xc1, 0xa7, 0x91, 0x46, 0xc6, 0x4d, 0xb3);
 
 #ifdef __cplusplus
 }

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1325,7 +1325,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialApp = _uuidof(IDialApp);
+                MIDL_CONST_ID IID& IID_IDialApp = __uuidof(IDialApp);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1364,7 +1364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialAppStateDetails = _uuidof(IDialAppStateDetails);
+                MIDL_CONST_ID IID& IID_IDialAppStateDetails = __uuidof(IDialAppStateDetails);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1404,7 +1404,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDevice = _uuidof(IDialDevice);
+                MIDL_CONST_ID IID& IID_IDialDevice = __uuidof(IDialDevice);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1443,7 +1443,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDevice2 = _uuidof(IDialDevice2);
+                MIDL_CONST_ID IID& IID_IDialDevice2 = __uuidof(IDialDevice2);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1524,7 +1524,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDevicePicker = _uuidof(IDialDevicePicker);
+                MIDL_CONST_ID IID& IID_IDialDevicePicker = __uuidof(IDialDevicePicker);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1560,7 +1560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDevicePickerFilter = _uuidof(IDialDevicePickerFilter);
+                MIDL_CONST_ID IID& IID_IDialDevicePickerFilter = __uuidof(IDialDevicePickerFilter);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1596,7 +1596,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDeviceSelectedEventArgs = _uuidof(IDialDeviceSelectedEventArgs);
+                MIDL_CONST_ID IID& IID_IDialDeviceSelectedEventArgs = __uuidof(IDialDeviceSelectedEventArgs);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1641,7 +1641,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDeviceStatics = _uuidof(IDialDeviceStatics);
+                MIDL_CONST_ID IID& IID_IDialDeviceStatics = __uuidof(IDialDeviceStatics);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1677,7 +1677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialDisconnectButtonClickedEventArgs = _uuidof(IDialDisconnectButtonClickedEventArgs);
+                MIDL_CONST_ID IID& IID_IDialDisconnectButtonClickedEventArgs = __uuidof(IDialDisconnectButtonClickedEventArgs);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1717,7 +1717,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialReceiverApp = _uuidof(IDialReceiverApp);
+                MIDL_CONST_ID IID& IID_IDialReceiverApp = __uuidof(IDialReceiverApp);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1753,7 +1753,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialReceiverApp2 = _uuidof(IDialReceiverApp2);
+                MIDL_CONST_ID IID& IID_IDialReceiverApp2 = __uuidof(IDialReceiverApp2);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */
@@ -1789,7 +1789,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialReceiverAppStatics = _uuidof(IDialReceiverAppStatics);
+                MIDL_CONST_ID IID& IID_IDialReceiverAppStatics = __uuidof(IDialReceiverAppStatics);
             } /* DialProtocol */
         } /* Media */
     } /* Windows */

@@ -195,6 +195,16 @@ HcsCancelOperation(
     _In_ HCS_OPERATION operation
     );
 
+// Query for information or properties about a specific operation
+
+HRESULT
+WINAPI
+HcsGetOperationProperties(
+    _In_ HCS_OPERATION operation,
+    _In_ PCWSTR options,
+    _Outptr_ PWSTR* resultDocument
+    );
+
 /// Creates a new compute system.
 
 HRESULT
@@ -359,6 +369,46 @@ HcsSetComputeSystemCallback(
     _In_ HCS_EVENT_OPTIONS callbackOptions,
     _In_opt_ const void* context,
     _In_ HCS_EVENT_CALLBACK callback
+    );
+
+/// Initialize live migration on source
+
+HRESULT
+WINAPI
+HcsInitializeLiveMigrationOnSource(
+    _In_ HCS_SYSTEM computeSystem,
+    _In_ HCS_OPERATION operation,
+    _In_opt_ PCWSTR options
+    );
+
+/// Start live migration on source
+
+HRESULT
+WINAPI
+HcsStartLiveMigrationOnSource(
+    _In_ HCS_SYSTEM computeSystem,
+    _In_ HCS_OPERATION operation,
+    _In_opt_ PCWSTR options
+    );
+
+/// Start live migration transfer
+
+HRESULT
+WINAPI
+HcsStartLiveMigrationTransfer(
+    _In_ HCS_SYSTEM computeSystem,
+    _In_ HCS_OPERATION operation,
+    _In_opt_ PCWSTR options
+    );
+
+/// Live migration transitions to final state
+
+HRESULT
+WINAPI
+HcsFinalizeLiveMigration(
+    _In_ HCS_SYSTEM computeSystem,
+    _In_ HCS_OPERATION operation,
+    _In_opt_ PCWSTR options
     );
 
 /// Starts a process in a compute system.
@@ -547,8 +597,8 @@ HcsRevokeVmGroupAccess(
 
 #endif // _HYPERV_COMPUTECORE_H_
 
-#ifndef ext_ms_win_hyperv_compute_l1_2_3_query_routines
-#define ext_ms_win_hyperv_compute_l1_2_3_query_routines
+#ifndef ext_ms_win_hyperv_compute_l1_2_5_query_routines
+#define ext_ms_win_hyperv_compute_l1_2_5_query_routines
 
 //
 //Private Extension API Query Routines
@@ -674,6 +724,12 @@ IsHcsCancelOperationPresent(
 
 BOOLEAN
 __stdcall
+IsHcsGetOperationPropertiesPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
 IsHcsCreateComputeSystemPresent(
     VOID
     );
@@ -765,6 +821,30 @@ IsHcsWaitForComputeSystemExitPresent(
 BOOLEAN
 __stdcall
 IsHcsSetComputeSystemCallbackPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsInitializeLiveMigrationOnSourcePresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsStartLiveMigrationOnSourcePresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsStartLiveMigrationTransferPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsFinalizeLiveMigrationPresent(
     VOID
     );
 

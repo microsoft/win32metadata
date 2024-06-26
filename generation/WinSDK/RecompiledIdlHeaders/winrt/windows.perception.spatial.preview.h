@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -288,7 +288,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISpatialGraphInteropFrameOfReferencePreview = _uuidof(ISpatialGraphInteropFrameOfReferencePreview);
+                    MIDL_CONST_ID IID& IID_ISpatialGraphInteropFrameOfReferencePreview = __uuidof(ISpatialGraphInteropFrameOfReferencePreview);
                 } /* Preview */
             } /* Spatial */
         } /* Perception */
@@ -342,7 +342,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISpatialGraphInteropPreviewStatics = _uuidof(ISpatialGraphInteropPreviewStatics);
+                    MIDL_CONST_ID IID& IID_ISpatialGraphInteropPreviewStatics = __uuidof(ISpatialGraphInteropPreviewStatics);
                 } /* Preview */
             } /* Spatial */
         } /* Perception */
@@ -392,7 +392,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISpatialGraphInteropPreviewStatics2 = _uuidof(ISpatialGraphInteropPreviewStatics2);
+                    MIDL_CONST_ID IID& IID_ISpatialGraphInteropPreviewStatics2 = __uuidof(ISpatialGraphInteropPreviewStatics2);
                 } /* Preview */
             } /* Spatial */
         } /* Perception */
@@ -429,8 +429,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -767,8 +767,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Perception.Spatial.Preview.ISpatialGraphInteropPreviewStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

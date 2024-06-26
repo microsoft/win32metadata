@@ -116,7 +116,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1338,7 +1338,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppListEntry = _uuidof(IAppListEntry);
+                MIDL_CONST_ID IID& IID_IAppListEntry = __uuidof(IAppListEntry);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1374,7 +1374,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppListEntry2 = _uuidof(IAppListEntry2);
+                MIDL_CONST_ID IID& IID_IAppListEntry2 = __uuidof(IAppListEntry2);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1411,7 +1411,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppListEntry3 = _uuidof(IAppListEntry3);
+                MIDL_CONST_ID IID& IID_IAppListEntry3 = __uuidof(IAppListEntry3);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1447,7 +1447,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppListEntry4 = _uuidof(IAppListEntry4);
+                MIDL_CONST_ID IID& IID_IAppListEntry4 = __uuidof(IAppListEntry4);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1509,7 +1509,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplication = _uuidof(ICoreApplication);
+                MIDL_CONST_ID IID& IID_ICoreApplication = __uuidof(ICoreApplication);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1566,7 +1566,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplication2 = _uuidof(ICoreApplication2);
+                MIDL_CONST_ID IID& IID_ICoreApplication2 = __uuidof(ICoreApplication2);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1608,7 +1608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplication3 = _uuidof(ICoreApplication3);
+                MIDL_CONST_ID IID& IID_ICoreApplication3 = __uuidof(ICoreApplication3);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1649,7 +1649,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationExit = _uuidof(ICoreApplicationExit);
+                MIDL_CONST_ID IID& IID_ICoreApplicationExit = __uuidof(ICoreApplicationExit);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1687,7 +1687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationUnhandledError = _uuidof(ICoreApplicationUnhandledError);
+                MIDL_CONST_ID IID& IID_ICoreApplicationUnhandledError = __uuidof(ICoreApplicationUnhandledError);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1722,7 +1722,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE DecrementApplicationUseCount(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationUseCount = _uuidof(ICoreApplicationUseCount);
+                MIDL_CONST_ID IID& IID_ICoreApplicationUseCount = __uuidof(ICoreApplicationUseCount);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1771,7 +1771,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationView = _uuidof(ICoreApplicationView);
+                MIDL_CONST_ID IID& IID_ICoreApplicationView = __uuidof(ICoreApplicationView);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1807,7 +1807,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationView2 = _uuidof(ICoreApplicationView2);
+                MIDL_CONST_ID IID& IID_ICoreApplicationView2 = __uuidof(ICoreApplicationView2);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1853,7 +1853,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationView3 = _uuidof(ICoreApplicationView3);
+                MIDL_CONST_ID IID& IID_ICoreApplicationView3 = __uuidof(ICoreApplicationView3);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1889,7 +1889,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationView5 = _uuidof(ICoreApplicationView5);
+                MIDL_CONST_ID IID& IID_ICoreApplicationView5 = __uuidof(ICoreApplicationView5);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1925,7 +1925,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationView6 = _uuidof(ICoreApplicationView6);
+                MIDL_CONST_ID IID& IID_ICoreApplicationView6 = __uuidof(ICoreApplicationView6);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -1990,7 +1990,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreApplicationViewTitleBar = _uuidof(ICoreApplicationViewTitleBar);
+                MIDL_CONST_ID IID& IID_ICoreApplicationViewTitleBar = __uuidof(ICoreApplicationViewTitleBar);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2034,7 +2034,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreImmersiveApplication = _uuidof(ICoreImmersiveApplication);
+                MIDL_CONST_ID IID& IID_ICoreImmersiveApplication = __uuidof(ICoreImmersiveApplication);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2070,7 +2070,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreImmersiveApplication2 = _uuidof(ICoreImmersiveApplication2);
+                MIDL_CONST_ID IID& IID_ICoreImmersiveApplication2 = __uuidof(ICoreImmersiveApplication2);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2107,7 +2107,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICoreImmersiveApplication3 = _uuidof(ICoreImmersiveApplication3);
+                MIDL_CONST_ID IID& IID_ICoreImmersiveApplication3 = __uuidof(ICoreImmersiveApplication3);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2149,7 +2149,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Uninitialize(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFrameworkView = _uuidof(IFrameworkView);
+                MIDL_CONST_ID IID& IID_IFrameworkView = __uuidof(IFrameworkView);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2183,7 +2183,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFrameworkViewSource = _uuidof(IFrameworkViewSource);
+                MIDL_CONST_ID IID& IID_IFrameworkViewSource = __uuidof(IFrameworkViewSource);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2219,7 +2219,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHostedViewClosingEventArgs = _uuidof(IHostedViewClosingEventArgs);
+                MIDL_CONST_ID IID& IID_IHostedViewClosingEventArgs = __uuidof(IHostedViewClosingEventArgs);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2256,7 +2256,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Propagate(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnhandledError = _uuidof(IUnhandledError);
+                MIDL_CONST_ID IID& IID_IUnhandledError = __uuidof(IUnhandledError);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2292,7 +2292,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnhandledErrorDetectedEventArgs = _uuidof(IUnhandledErrorDetectedEventArgs);
+                MIDL_CONST_ID IID& IID_IUnhandledErrorDetectedEventArgs = __uuidof(IUnhandledErrorDetectedEventArgs);
             } /* Core */
         } /* ApplicationModel */
     } /* Windows */
@@ -2333,15 +2333,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5532,15 +5532,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

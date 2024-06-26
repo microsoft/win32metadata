@@ -12,9 +12,7 @@
   NOTES:
     1.  See XAPO.h for the rules governing XAPO interface behaviour.        */
 
-#ifdef _MSC_VER
 #pragma once
-#endif
 
 //--------------<D-E-F-I-N-I-T-I-O-N-S>-------------------------------------//
 #include "XAPO.h"

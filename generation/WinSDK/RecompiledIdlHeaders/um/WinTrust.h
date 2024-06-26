@@ -113,6 +113,7 @@ typedef struct _WINTRUST_DATA
 #                       define      WTD_CHOICE_BLOB         3
 #                       define      WTD_CHOICE_SIGNER       4
 #                       define      WTD_CHOICE_CERT         5
+#                       define      WTD_CHOICE_DETACHED_SIG 6
     union
     {
         struct WINTRUST_FILE_INFO_      *pFile;         // individual file
@@ -120,6 +121,7 @@ typedef struct _WINTRUST_DATA
         struct WINTRUST_BLOB_INFO_      *pBlob;         // memory blob
         struct WINTRUST_SGNR_INFO_      *pSgnr;         // signer structure only
         struct WINTRUST_CERT_INFO_      *pCert;
+        struct WINTRUST_DETACHED_SIG_INFO_ *pDetachedSig;
     };
 
     DWORD           dwStateAction;                      // optional (Catalog File Processing)
@@ -138,6 +140,7 @@ typedef struct _WINTRUST_DATA
 #       define WTD_USE_IE4_TRUST_FLAG                   0x00000001
 #       define WTD_NO_IE4_CHAIN_FLAG                    0x00000002
 #       define WTD_NO_POLICY_USAGE_FLAG                 0x00000004
+#       define WTD_USE_LOCAL_MACHINE_CERTS              0x00000008
 #       define WTD_REVOCATION_CHECK_NONE                0x00000010
 #       define WTD_REVOCATION_CHECK_END_CERT            0x00000020
 #       define WTD_REVOCATION_CHECK_CHAIN               0x00000040
@@ -224,6 +227,51 @@ typedef struct WINTRUST_FILE_INFO_
     GUID            *pgKnownSubject;            // optional: fill if the subject type is known.
 
 } WINTRUST_FILE_INFO, *PWINTRUST_FILE_INFO;
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// WINTRUST_DETACHED_SIG_INFO Structure and substructures
+//----------------------------------------------------------------------------
+//  Used when calling WinVerifyTrust against a PKCS7 detached signature and its associated content
+//  
+//
+
+//
+// Structure for verification using file handles
+//
+
+typedef struct WINTRUST_DETACHED_SIG_HANDLES_
+{
+    HANDLE hContentFile;
+    HANDLE hSignatureFile;
+} WINTRUST_DETACHED_SIG_FILE_HANDLES, *PWINTRUST_DETACHED_SIG_FILE_HANDLES;
+
+//
+// Structure for verification using in-memory blobs
+//
+
+typedef struct WINTRUST_DETACHED_SIG_BLOBS_
+{
+    LARGE_INTEGER       cbContentObject;
+    BYTE *              pbContentObject;
+    DWORD               cbSignatureObject;
+    BYTE *              pbSignatureObject;
+} WINTRUST_DETACHED_SIG_BLOBS, *PWINTRUST_DETACHED_SIG_BLOBS;
+
+typedef struct WINTRUST_DETACHED_SIG_INFO_
+{
+    DWORD           cbStruct;                   // = sizeof(WINTRUST_DETACHEDSIG_INFO)
+
+    DWORD 	      dwUnionChoice;
+#                       define      WINTRUST_DETACHED_SIG_CHOICE_HANDLE         1
+#                       define      WINTRUST_DETACHED_SIG_CHOICE_BLOB           2
+    union
+    {
+        struct WINTRUST_DETACHED_SIG_HANDLES_ *pDetachedSigHandles;
+        struct WINTRUST_DETACHED_SIG_BLOBS_ *pDetachedSigBlobs;
+    };
+} WINTRUST_DETACHED_SIG_INFO, *PWINTRUST_DETACHED_SIG_INFO;
+
 
 //Typedef to avoid new inclusion of mscat.h
 typedef HANDLE HCATADMIN;
@@ -1194,6 +1242,18 @@ extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(CRYPT_PR
 
 // Used to ensure marker free encrypted digest can be created.
 #define SPC_ENCRYPTED_DIGEST_RETRY_COUNT_OBJID  "1.3.6.1.4.1.311.2.6.2"
+
+// Signed attributes used for adding metadata to signed files
+#define szOID_SIGNED_ATTRIBUTE_INTERNAL_NAME     "1.3.6.1.4.1.311.2.7.1"
+#define szOID_SIGNED_ATTRIBUTE_FILE_VERSION      "1.3.6.1.4.1.311.2.7.2"
+#define szOID_SIGNED_ATTRIBUTE_FILE_DESCRIPTION  "1.3.6.1.4.1.311.2.7.3"
+#define szOID_SIGNED_ATTRIBUTE_PRODUCT           "1.3.6.1.4.1.311.2.7.4"
+#define szOID_SIGNED_ATTRIBUTE_PRODUCT_VERSION   "1.3.6.1.4.1.311.2.7.5"
+#define szOID_SIGNED_ATTRIBUTE_ORIGINAL_FILENAME "1.3.6.1.4.1.311.2.7.6"
+#define szOID_SIGNED_ATTRIBUTE_LANGUAGE          "1.3.6.1.4.1.311.2.7.7"
+#define szOID_SIGNED_ATTRIBUTE_AUTHOR            "1.3.6.1.4.1.311.2.7.8"
+#define szOID_SIGNED_ATTRIBUTE_PUBLISH_TIME      "1.3.6.1.4.1.311.2.7.9"
+#define szOID_SIGNED_ATTRIBUTE_SOURCE_URL        "1.3.6.1.4.1.311.2.7.10"
 
 //Indicates a PKCS9 sequence number as an attribute
 #define szOID_PKCS_9_SEQUENCE_NUMBER         "1.2.840.113549.1.9.25.4"

@@ -881,6 +881,16 @@ typedef struct _HREGREADBATCH *HREGREADBATCH;
 
 typedef struct _HREGREADBATCHREPLY *HREGREADBATCHREPLY;
 
+typedef struct _HKEYVALUEBATCH *HKEYVALUEBATCH;
+
+typedef struct _HKEYVALUEBATCHNOTIFICATION *HKEYVALUEBATCHNOTIFICATION;
+
+typedef struct _HKEYVALUEREADBATCH *HKEYVALUEREADBATCH;
+
+typedef struct _HKEYVALUEREADBATCHREPLY *HKEYVALUEREADBATCHREPLY;
+
+typedef struct _HKEYVALUESTORE *HKEYVALUESTORE;
+
 typedef struct _HNODEENUMEX *HNODEENUMEX;
 
 typedef struct _HCLUSENUMEX *HCLUSENUMEX;
@@ -989,6 +999,10 @@ enum __MIDL___MIDL_itf_msclus_0000_0000_0001
         ClusGroupTypeCrossClusterOrchestrator	= 121,
         ClusGroupTypeInfrastructureFileServer	= 122,
         ClusGroupTypeCoreSddc	= 123,
+        ClusGroupTypeUserManager	= 124,
+        ClusGroupTypeKeyValueStoreManager	= 125,
+        ClusGroupTypeHcsVirtualMachine	= 126,
+        ClusGroupTypeMetaVirtualMachine	= 127,
         ClusGroupTypeUnknown	= 9999
     } 	CLUSGROUP_TYPE;
 
@@ -1051,6 +1065,14 @@ enum __MIDL___MIDL_itf_msclus_0000_0000_0006
         CLUS_AFFINITY_RULE_MIN	= CLUS_AFFINITY_RULE_NONE,
         CLUS_AFFINITY_RULE_MAX	= CLUS_AFFINITY_RULE_DIFFERENT_NODE
     } 	CLUS_AFFINITY_RULE_TYPE;
+
+typedef /* [public] */ 
+enum __MIDL___MIDL_itf_msclus_0000_0000_0007
+    {
+        CLUS_ADAPTER_EXCLUSION_TYPE_IPPREFIX	= 0,
+        CLUS_ADAPTER_EXCLUSION_TYPE_DESCRIPTION	= 1,
+        CLUS_ADAPTER_EXCLUSION_TYPE_FRIENDLYNAME	= 2
+    } 	CLUS_ADAPTER_EXCLUSION_TYPE;
 
 typedef 
 enum CLUSTER_QUORUM_VALUE
@@ -1315,6 +1337,7 @@ enum CLUSTER_ENUM
         CLUSTER_ENUM_GROUP	= 0x8,
         CLUSTER_ENUM_NETWORK	= 0x10,
         CLUSTER_ENUM_NETINTERFACE	= 0x20,
+        CLUSTER_ENUM_CAPACITY_NODE	= 0x10000000,
         CLUSTER_ENUM_SHARED_VOLUME_GROUP	= 0x20000000,
         CLUSTER_ENUM_SHARED_VOLUME_RESOURCE	= 0x40000000,
         CLUSTER_ENUM_INTERNAL_NETWORK	= 0x80000000,
@@ -1373,6 +1396,16 @@ enum CLUSTER_NODE_STATUS
         NodeStatusAvoidPlacement	= 0x20,
         NodeStatusMax	= ( ( ( NodeStatusIsolated | NodeStatusQuarantined )  | NodeStatusDrainFailed )  | NodeStatusAvoidPlacement ) 
     } 	CLUSTER_NODE_STATUS;
+
+typedef 
+enum CLUSTER_NODE_FAILBACK_STATUS
+    {
+        NodeFailbackStatusNotInitiated	= 0,
+        NodeFailbackStatusInProgress	= ( NodeFailbackStatusNotInitiated + 1 ) ,
+        NodeFailbackStatusCompleted	= ( NodeFailbackStatusInProgress + 1 ) ,
+        NodeFailbackStatusFailed	= ( NodeFailbackStatusCompleted + 1 ) ,
+        ClusterNodeFailbackStatusCount	= ( NodeFailbackStatusFailed + 1 ) 
+    } 	CLUSTER_NODE_FAILBACK_STATUS;
 
 typedef 
 enum CLUSTER_GROUP_ENUM
@@ -1759,6 +1792,7 @@ enum CLCTL_CODES
         CTCTL_GET_ROUTESTATUS_EXTENDED	= ( ( ( 0x1 << 0 )  | ( ( 0 + 196 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CTCTL_GET_FAULT_DOMAIN_STATE	= ( ( ( 0x1 << 0 )  | ( ( 0 + 197 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_NETNAME_SET_PWD_INFOEX	= ( ( ( 0x2 << 0 )  | ( ( 0 + 198 )  << 2 )  )  | ( 0 << 22 )  ) ,
+        CLCTL_GET_NODE_NETWORK_CONNECTIVITY	= ( ( ( 0x1 << 0 )  | ( ( 0 + 199 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_STORAGE_GET_AVAILABLE_DISKS_EX2_INT	= ( ( ( 0x1 << 0 )  | ( ( 0 + 2040 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_CLOUD_WITNESS_RESOURCE_TYPE_VALIDATE_CREDENTIALS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 2104 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_CLOUD_WITNESS_RESOURCE_UPDATE_TOKEN	= ( ( ( 0x2 << 0 )  | ( ( 0 + 2105 )  << 2 )  )  | ( 0x1 << 22 )  ) ,
@@ -2016,6 +2050,12 @@ enum CLUSCTL_RESOURCE_TYPE_CODES
         CLUSCTL_RESOURCE_TYPE_CHECK_DRAIN_VETO	= ( ( CLUS_OBJECT_RESOURCE_TYPE << 24 )  | CLCTL_CHECK_DRAIN_VETO ) ,
         CLUSCTL_RESOURCE_TYPE_NOTIFY_DRAIN_COMPLETE	= ( ( CLUS_OBJECT_RESOURCE_TYPE << 24 )  | CLCTL_NOTIFY_DRAIN_COMPLETE ) 
     } 	CLUSCTL_RESOURCE_TYPE_CODES;
+
+typedef struct NodeVFInfo
+    {
+    DWORD VFTotal;
+    DWORD VFUsed;
+    } 	NodeVFInfo;
 
 typedef 
 enum CLUSCTL_GROUP_CODES

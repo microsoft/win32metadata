@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_XAML_CORE_DIRECT_XAMLDIRECTCONTRACT_VERSION)
@@ -2898,7 +2898,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IXamlDirect = _uuidof(IXamlDirect);
+                        MIDL_CONST_ID IID& IID_IXamlDirect = __uuidof(IXamlDirect);
                     } /* Direct */
                 } /* Core */
             } /* Xaml */
@@ -2933,7 +2933,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IXamlDirectObject = _uuidof(IXamlDirectObject);
+                        MIDL_CONST_ID IID& IID_IXamlDirectObject = __uuidof(IXamlDirectObject);
                     } /* Direct */
                 } /* Core */
             } /* Xaml */
@@ -2973,7 +2973,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IXamlDirectStatics = _uuidof(IXamlDirectStatics);
+                        MIDL_CONST_ID IID& IID_IXamlDirectStatics = __uuidof(IXamlDirectStatics);
                     } /* Direct */
                 } /* Core */
             } /* Xaml */

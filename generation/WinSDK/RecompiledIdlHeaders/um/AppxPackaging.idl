@@ -137,9 +137,11 @@ typedef [v1_enum] enum APPX_PACKAGING_CONTEXT_CHANGE_TYPE
 interface IAppxPackageWriter;
 interface IAppxPackageReader;
 interface IAppxFile;
+interface IAppxFile2;
 interface IAppxFilesEnumerator;
 interface IAppxBlockMapReader;
 interface IAppxBlockMapFile;
+interface IAppxBlockMapFile2;
 interface IAppxBlockMapFilesEnumerator;
 interface IAppxBlockMapBlock;
 interface IAppxBlockMapBlocksEnumerator;
@@ -424,6 +426,19 @@ interface IAppxFile : IUnknown
 
 [
     object,
+    uuid(0c830b3c-40e9-11ee-be56-0242ac120002),
+    pointer_default(ref)
+]
+interface IAppxFile2 : IAppxFile
+{
+    HRESULT
+    GetBlockSize(
+        [out, retval]   UINT64 *    blockSize
+    );
+}
+
+[
+    object,
     uuid(f007eeaf-9831-411c-9847-917cdc62d1fe),
     pointer_default(ref)
 ]
@@ -505,6 +520,19 @@ interface IAppxBlockMapFile : IUnknown
     ValidateFileHash(
         [in]            IStream *   fileStream,
         [out, retval]   BOOL *      isValid
+    );
+}
+
+[
+    object,
+    uuid(54785f78-40e9-11ee-be56-0242ac120002),
+    pointer_default(ref)
+]
+interface IAppxBlockMapFile2 : IAppxBlockMapFile
+{
+    HRESULT
+    GetBlockSize(
+        [out, retval]    UINT64 *   blockSize
     );
 }
 
@@ -2191,6 +2219,15 @@ coclass AppxPackagingDiagnosticEventSinkManager
 {
     [default] interface IAppxPackagingDiagnosticEventSinkManager;
 };
+
+[
+    uuid(FB1B3839-09DA-404F-B002-9CBB8DA5CA4F)
+] 
+coclass AppxPackagingServiceProvider
+{
+    [default] interface IServiceProvider;
+};
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
 

@@ -167,7 +167,11 @@ enum _DODownloadProperty
         DODownloadProperty_DisallowOnCellular	= ( DODownloadProperty_TotalSizeBytes + 1 ) ,
         DODownloadProperty_HttpCustomAuthHeaders	= ( DODownloadProperty_DisallowOnCellular + 1 ) ,
         DODownloadProperty_HttpAllowSecureToNonSecureRedirect	= ( DODownloadProperty_HttpCustomAuthHeaders + 1 ) ,
-        DODownloadProperty_NonVolatile	= ( DODownloadProperty_HttpAllowSecureToNonSecureRedirect + 1 ) 
+        DODownloadProperty_NonVolatile	= ( DODownloadProperty_HttpAllowSecureToNonSecureRedirect + 1 ) ,
+        DODownloadProperty_HttpRedirectionTarget	= ( DODownloadProperty_NonVolatile + 1 ) ,
+        DODownloadProperty_HttpResponseHeaders	= ( DODownloadProperty_HttpRedirectionTarget + 1 ) ,
+        DODownloadProperty_HttpServerIPAddress	= ( DODownloadProperty_HttpResponseHeaders + 1 ) ,
+        DODownloadProperty_HttpStatusCode	= ( DODownloadProperty_HttpServerIPAddress + 1 ) 
     } 	DODownloadProperty;
 
 typedef struct _DO_DOWNLOAD_ENUM_CATEGORY

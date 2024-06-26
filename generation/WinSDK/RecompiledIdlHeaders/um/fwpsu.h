@@ -30,6 +30,45 @@
 extern "C" {
 #endif
 
+
+#if defined(_MSC_VER) && !defined(__clang__)
+
+/***********************************************************************************************\
+*                                                                                              *
+*            Windows Filtering Platform (WFP) Driver Callout Annotations                       *
+*                                                                                              *
+*    Version 1.0.0                                                                             *
+*                                                                                              *
+*    Defines annotations to be used in Windows Filtering Callout Drivers to enforce API        *
+*    contracts that can be statically verified through the use of CodeQL queries.              *
+*                                                                                              *
+*    All APIs these annotations check for are present since Vista                              * 
+*                                                                                              *
+\**********************************************************************************************/
+
+#define _Wfp_Annotation_ __declspec("_Wfp_Annotation_")
+#define _Wfp_stream_injection_classify_ __declspec("_Wfp_stream_injection_classify_")
+#define _Wfp_stream_inspection_classify_ __declspec("_Wfp_stream_inspection_classify_")
+#define _Wfp_stream_inspection_notify_ __declspec("_Wfp_stream_inspection_notify_")
+#define _Wfp_flow_inspection_notify_ __declspec("_Wfp_flow_inspection_notify_")
+#define _Wfp_flow_inspection_classify_ __declspec("_Wfp_flow_inspection_classify_")
+#define _Wfp_flow_injection_classify_ __declspec("_Wfp_flow_injection_classify_")
+#define _Wfp_Transport_inspection_classify_ __declspec("_Wfp_Transport_inspection_classify_")
+#define _Wfp_transport_injection_classify_ __declspec("_Wfp_transport_injection_classify_")
+#define _Wfp_transport_injection_classify_inline_ __declspec("_Wfp_transport_injection_classify_inline_")
+#define _Wfp_ale_inspection_notify_ __declspec("_Wfp_ale_inspection_notify_")
+#define _Wfp_ale_inspection_classify_ __declspec("_Wfp_ale_inspection_classify_")
+
+#if (NTDDI_VERSION >= NTDDI_WIN8) 
+
+// Connect Redirect APIs are not availible until Windows 8
+#define _Wfp_connect_redirect_inline_classify_ __declspec("_Wfp_connect_redirect_inline_classify_")
+#define _Wfp_connect_redirect_classify_ __declspec("_Wfp_connect_redirect_classify_")
+
+#endif /// (NTDDI_VERSION >= NTDDI_WIN8)
+
+#endif /// (_MSC_VER) && !defined(__clang__)
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // LUIDs for built-in layers.
@@ -743,6 +782,9 @@ typedef enum FWPS_FIELDS_ALE_RESOURCE_ASSIGNMENT_V4_
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V4_RESERVED_0,
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V4_RESERVED_1,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V4_MAX
 } FWPS_FIELDS_ALE_RESOURCE_ASSIGNMENT_V4;
 
@@ -779,6 +821,9 @@ typedef enum FWPS_FIELDS_ALE_RESOURCE_ASSIGNMENT_V6_
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V6_RESERVED_0,
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V6_RESERVED_1,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_RESOURCE_ASSIGNMENT_V6_MAX
 } FWPS_FIELDS_ALE_RESOURCE_ASSIGNMENT_V6;
 
@@ -803,6 +848,9 @@ typedef enum FWPS_FIELDS_ALE_RESOURCE_RELEASE_V4_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_RESOURCE_RELEASE_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_RESOURCE_RELEASE_V4_MAX
 } FWPS_FIELDS_ALE_RESOURCE_RELEASE_V4;
 
@@ -825,6 +873,9 @@ typedef enum FWPS_FIELDS_ALE_RESOURCE_RELEASE_V6_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_RESOURCE_RELEASE_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_RESOURCE_RELEASE_V6_MAX
 } FWPS_FIELDS_ALE_RESOURCE_RELEASE_V6;
 
@@ -849,6 +900,9 @@ typedef enum FWPS_FIELDS_ALE_ENDPOINT_CLOSURE_V4_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_ENDPOINT_CLOSURE_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_ENDPOINT_CLOSURE_V4_MAX
 } FWPS_FIELDS_ALE_ENDPOINT_CLOSURE_V4;
 
@@ -873,6 +927,9 @@ typedef enum FWPS_FIELDS_ALE_ENDPOINT_CLOSURE_V6_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_ENDPOINT_CLOSURE_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_ENDPOINT_CLOSURE_V6_MAX
 } FWPS_FIELDS_ALE_ENDPOINT_CLOSURE_V6;
 
@@ -902,6 +959,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_LISTEN_V4_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_LISTEN_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_LISTEN_V4_MAX
 } FWPS_FIELDS_ALE_AUTH_LISTEN_V4;
 
@@ -929,6 +989,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_LISTEN_V6_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_LISTEN_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_LISTEN_V6_MAX
 } FWPS_FIELDS_ALE_AUTH_LISTEN_V6;
 
@@ -988,6 +1051,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_RECV_ACCEPT_V4_
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V4_RESERVED_2,
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V4_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V4_MAX
 } FWPS_FIELDS_ALE_AUTH_RECV_ACCEPT_V4;
 
@@ -1074,6 +1140,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_RECV_ACCEPT_V6_
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V6_RESERVED_2,
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V6_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_RECV_ACCEPT_V6_MAX
 } FWPS_FIELDS_ALE_AUTH_RECV_ACCEPT_V6;
 
@@ -1125,6 +1194,9 @@ typedef enum FWPS_FIELDS_ALE_BIND_REDIRECT_V4_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_BIND_REDIRECT_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_BIND_REDIRECT_V4_MAX
 } FWPS_FIELDS_ALE_BIND_REDIRECT_V4;
 
@@ -1146,6 +1218,9 @@ typedef enum FWPS_FIELDS_ALE_BIND_REDIRECT_V6_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_BIND_REDIRECT_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_BIND_REDIRECT_V6_MAX
 } FWPS_FIELDS_ALE_BIND_REDIRECT_V6;
 
@@ -1171,6 +1246,9 @@ typedef enum FWPS_FIELDS_ALE_CONNECT_REDIRECT_V4_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_CONNECT_REDIRECT_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_CONNECT_REDIRECT_V4_MAX
 } FWPS_FIELDS_ALE_CONNECT_REDIRECT_V4;
 
@@ -1202,6 +1280,9 @@ typedef enum FWPS_FIELDS_ALE_CONNECT_REDIRECT_V6_
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_CONNECT_REDIRECT_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_CONNECT_REDIRECT_V6_MAX
 } FWPS_FIELDS_ALE_CONNECT_REDIRECT_V6;
 
@@ -1271,6 +1352,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_CONNECT_V4_
    FWPS_FIELD_ALE_AUTH_CONNECT_V4_RESERVED_2,
    FWPS_FIELD_ALE_AUTH_CONNECT_V4_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_CONNECT_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_CONNECT_V4_MAX
 } FWPS_FIELDS_ALE_AUTH_CONNECT_V4;
 
@@ -1338,6 +1422,9 @@ typedef enum FWPS_FIELDS_ALE_AUTH_CONNECT_V6_
    FWPS_FIELD_ALE_AUTH_CONNECT_V6_RESERVED_2,
    FWPS_FIELD_ALE_AUTH_CONNECT_V6_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_AUTH_CONNECT_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_AUTH_CONNECT_V6_MAX
 } FWPS_FIELDS_ALE_AUTH_CONNECT_V6;
 
@@ -1386,6 +1473,9 @@ typedef enum FWPS_FIELDS_ALE_FLOW_ESTABLISHED_V4_
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V4_RESERVED_2,
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V4_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_FLOW_ESTABLISHED_V4_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V4_MAX
 } FWPS_FIELDS_ALE_FLOW_ESTABLISHED_V4;
 
@@ -1434,6 +1524,9 @@ typedef enum FWPS_FIELDS_ALE_FLOW_ESTABLISHED_V6_
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V6_RESERVED_2,
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V6_RESERVED_3,
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+   FWPS_FIELD_ALE_FLOW_ESTABLISHED_V6_PACKAGE_FAMILY_NAME,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
    FWPS_FIELD_ALE_FLOW_ESTABLISHED_V6_MAX
 } FWPS_FIELDS_ALE_FLOW_ESTABLISHED_V6;
 
@@ -1828,6 +1921,9 @@ typedef enum FWPS_FIELDS_RPC_UM_
    FWPS_FIELD_RPC_UM_PIPE,
    FWPS_FIELD_RPC_UM_REMOTE_ADDR_V4,
    FWPS_FIELD_RPC_UM_REMOTE_ADDR_V6,
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+   FWPS_FIELD_RPC_UM_RPC_OPNUM,
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
    FWPS_FIELD_RPC_UM_MAX
 } FWPS_FIELDS_RPC_UM;
 
@@ -2060,6 +2156,8 @@ typedef enum {
     IpDiscardAdministrativelyProhibited, // Blocked, ICMP should be sent.
     IpDiscardBadChecksum,
     IpDiscardFirstFragmentIncomplete,
+    IpDiscardHeaderNotContiguous,
+    IpDiscardHeaderNotAligned,
 
     IpDiscardReceivePathMax = 127,
 
@@ -2069,6 +2167,7 @@ typedef enum {
     IpDiscardHopLimitExceeded,
     IpDiscardAddressUnreachable,
     IpDiscardRscPacket,
+    IpDiscardSourceViolation,
     IpDiscardForwardPathMax = 255,
 
     //
@@ -2123,6 +2222,7 @@ typedef enum {
     IpDiscardNlClientDiscard,
 
     IpDiscardIpsnpiUroSegmentSizeExceedsMtu,
+    IpDiscardSwUsoFailure,
 
     IpDiscardMax
 } IP_DISCARD_REASON, *PIP_DISCARD_REASON;

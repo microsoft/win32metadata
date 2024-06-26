@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1736,7 +1736,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiver = _uuidof(IMiracastReceiver);
+                MIDL_CONST_ID IID& IID_IMiracastReceiver = __uuidof(IMiracastReceiver);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -1775,7 +1775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverApplySettingsResult = _uuidof(IMiracastReceiverApplySettingsResult);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverApplySettingsResult = __uuidof(IMiracastReceiverApplySettingsResult);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -1835,7 +1835,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverConnection = _uuidof(IMiracastReceiverConnection);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverConnection = __uuidof(IMiracastReceiverConnection);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -1877,7 +1877,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverConnectionCreatedEventArgs = _uuidof(IMiracastReceiverConnectionCreatedEventArgs);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverConnectionCreatedEventArgs = __uuidof(IMiracastReceiverConnectionCreatedEventArgs);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -1936,7 +1936,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverCursorImageChannel = _uuidof(IMiracastReceiverCursorImageChannel);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverCursorImageChannel = __uuidof(IMiracastReceiverCursorImageChannel);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -1981,7 +1981,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverCursorImageChannelSettings = _uuidof(IMiracastReceiverCursorImageChannelSettings);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverCursorImageChannelSettings = __uuidof(IMiracastReceiverCursorImageChannelSettings);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2017,7 +2017,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverDisconnectedEventArgs = _uuidof(IMiracastReceiverDisconnectedEventArgs);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverDisconnectedEventArgs = __uuidof(IMiracastReceiverDisconnectedEventArgs);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2075,7 +2075,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverGameControllerDevice = _uuidof(IMiracastReceiverGameControllerDevice);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverGameControllerDevice = __uuidof(IMiracastReceiverGameControllerDevice);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2114,7 +2114,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverInputDevices = _uuidof(IMiracastReceiverInputDevices);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverInputDevices = __uuidof(IMiracastReceiverInputDevices);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2166,7 +2166,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverKeyboardDevice = _uuidof(IMiracastReceiverKeyboardDevice);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverKeyboardDevice = __uuidof(IMiracastReceiverKeyboardDevice);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2211,7 +2211,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverMediaSourceCreatedEventArgs = _uuidof(IMiracastReceiverMediaSourceCreatedEventArgs);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverMediaSourceCreatedEventArgs = __uuidof(IMiracastReceiverMediaSourceCreatedEventArgs);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2283,7 +2283,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverSession = _uuidof(IMiracastReceiverSession);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverSession = __uuidof(IMiracastReceiverSession);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2322,7 +2322,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverSessionStartResult = _uuidof(IMiracastReceiverSessionStartResult);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverSessionStartResult = __uuidof(IMiracastReceiverSessionStartResult);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2385,7 +2385,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverSettings = _uuidof(IMiracastReceiverSettings);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverSettings = __uuidof(IMiracastReceiverSettings);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2433,7 +2433,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverStatus = _uuidof(IMiracastReceiverStatus);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverStatus = __uuidof(IMiracastReceiverStatus);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2485,7 +2485,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverStreamControl = _uuidof(IMiracastReceiverStreamControl);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverStreamControl = __uuidof(IMiracastReceiverStreamControl);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2530,7 +2530,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastReceiverVideoStreamSettings = _uuidof(IMiracastReceiverVideoStreamSettings);
+                MIDL_CONST_ID IID& IID_IMiracastReceiverVideoStreamSettings = __uuidof(IMiracastReceiverVideoStreamSettings);
             } /* Miracast */
         } /* Media */
     } /* Windows */
@@ -2584,7 +2584,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMiracastTransmitter = _uuidof(IMiracastTransmitter);
+                MIDL_CONST_ID IID& IID_IMiracastTransmitter = __uuidof(IMiracastTransmitter);
             } /* Miracast */
         } /* Media */
     } /* Windows */

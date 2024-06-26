@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -3236,7 +3236,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfiguration = _uuidof(IActivationSignalDetectionConfiguration);
+                MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfiguration = __uuidof(IActivationSignalDetectionConfiguration);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3290,7 +3290,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfiguration2 = _uuidof(IActivationSignalDetectionConfiguration2);
+                MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfiguration2 = __uuidof(IActivationSignalDetectionConfiguration2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3329,7 +3329,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfigurationCreationResult = _uuidof(IActivationSignalDetectionConfigurationCreationResult);
+                MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfigurationCreationResult = __uuidof(IActivationSignalDetectionConfigurationCreationResult);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3424,7 +3424,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivationSignalDetector = _uuidof(IActivationSignalDetector);
+                MIDL_CONST_ID IID& IID_IActivationSignalDetector = __uuidof(IActivationSignalDetector);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3490,7 +3490,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivationSignalDetector2 = _uuidof(IActivationSignalDetector2);
+                MIDL_CONST_ID IID& IID_IActivationSignalDetector2 = __uuidof(IActivationSignalDetector2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3537,7 +3537,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManager = _uuidof(IConversationalAgentDetectorManager);
+                MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManager = __uuidof(IConversationalAgentDetectorManager);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3578,7 +3578,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManager2 = _uuidof(IConversationalAgentDetectorManager2);
+                MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManager2 = __uuidof(IConversationalAgentDetectorManager2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3614,7 +3614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManagerStatics = _uuidof(IConversationalAgentDetectorManagerStatics);
+                MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManagerStatics = __uuidof(IConversationalAgentDetectorManagerStatics);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3760,7 +3760,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSession = _uuidof(IConversationalAgentSession);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSession = __uuidof(IConversationalAgentSession);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3814,7 +3814,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSession2 = _uuidof(IConversationalAgentSession2);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSession2 = __uuidof(IConversationalAgentSession2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3847,7 +3847,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSessionInterruptedEventArgs = _uuidof(IConversationalAgentSessionInterruptedEventArgs);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSessionInterruptedEventArgs = __uuidof(IConversationalAgentSessionInterruptedEventArgs);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3886,7 +3886,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSessionStatics = _uuidof(IConversationalAgentSessionStatics);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSessionStatics = __uuidof(IConversationalAgentSessionStatics);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3955,7 +3955,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSignal = _uuidof(IConversationalAgentSignal);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSignal = __uuidof(IConversationalAgentSignal);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -3994,7 +3994,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSignal2 = _uuidof(IConversationalAgentSignal2);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSignal2 = __uuidof(IConversationalAgentSignal2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -4027,7 +4027,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSignalDetectedEventArgs = _uuidof(IConversationalAgentSignalDetectedEventArgs);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSignalDetectedEventArgs = __uuidof(IConversationalAgentSignalDetectedEventArgs);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -4063,7 +4063,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConversationalAgentSystemStateChangedEventArgs = _uuidof(IConversationalAgentSystemStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IConversationalAgentSystemStateChangedEventArgs = __uuidof(IConversationalAgentSystemStateChangedEventArgs);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -4099,7 +4099,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityChangedEventArgs = _uuidof(IDetectionConfigurationAvailabilityChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityChangedEventArgs = __uuidof(IDetectionConfigurationAvailabilityChangedEventArgs);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -4144,7 +4144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityInfo = _uuidof(IDetectionConfigurationAvailabilityInfo);
+                MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityInfo = __uuidof(IDetectionConfigurationAvailabilityInfo);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -4180,7 +4180,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityInfo2 = _uuidof(IDetectionConfigurationAvailabilityInfo2);
+                MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityInfo2 = __uuidof(IDetectionConfigurationAvailabilityInfo2);
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */

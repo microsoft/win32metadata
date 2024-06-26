@@ -109,7 +109,8 @@ typedef DWORD CLFSSTATUS;
 #define CLFS_FLAG_READ_IN_PROGRESS      0x00000080      // Flag indicating read in progress and not completed.
 #define CLFS_FLAG_MINIFILTER_LEVEL      0x00000100      // Kernel mode create flag indicating mini-filter target.
 #define CLFS_FLAG_HIDDEN_SYSTEM_LOG     0x00000200      // Kernel mode create flag indicating the log and containers should be marked hidden & system.
-
+//      CLFS_FLAG_MAX_VALUE             0x00800000      // Highest value allowed for public flags.
+/* NOTE that the uppper 8 bits of CLFS_FLAG values are reserved for internal use. */
 // 
 // Marshalling Context Flag
 //

@@ -183,15 +183,21 @@ namespace Windows
     {
         namespace Effects
         {
+            typedef enum AudioEffectState AudioEffectState;
+
             typedef enum AudioEffectType AudioEffectType;
 
             typedef enum MediaEffectClosedReason MediaEffectClosedReason;
 
             typedef enum MediaMemoryTypes MediaMemoryTypes;
 
+            interface IAcousticEchoCancellationConfiguration;
+
             interface IAudioCaptureEffectsManager;
 
             interface IAudioEffect;
+
+            interface IAudioEffect2;
 
             interface IAudioEffectDefinition;
 
@@ -228,6 +234,8 @@ namespace Windows
             interface IVideoTransformEffectDefinition2;
 
             interface IVideoTransformSphericalProjection;
+
+            runtimeclass AcousticEchoCancellationConfiguration;
 
             runtimeclass AudioCaptureEffectsManager;
 
@@ -302,6 +310,13 @@ namespace Windows
     {
         namespace Effects
         {
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum AudioEffectState
+            {
+                Off = 0,
+                On  = 1
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum AudioEffectType
             {
@@ -346,6 +361,14 @@ namespace Windows
                 GpuAndCpu = 2
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Media.Effects.AcousticEchoCancellationConfiguration)]
+            [uuid(587E735B-175B-5177-A407-2E33BAFE33A5)]
+            interface IAcousticEchoCancellationConfiguration : IInspectable
+            {
+                HRESULT SetEchoCancellationRenderEndpoint([in] HSTRING deviceId);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Media.Effects.AudioCaptureEffectsManager)]
             [uuid(8F85C271-038D-4393-8298-540110608EEF)]
@@ -362,6 +385,17 @@ namespace Windows
             interface IAudioEffect : IInspectable
             {
                 [propget] HRESULT AudioEffectType([out] [retval] Windows.Media.Effects.AudioEffectType* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Media.Effects.AudioEffect)]
+            [uuid(06703CB0-757E-5757-8AF0-6BA58A8B2990)]
+            interface IAudioEffect2 : IInspectable
+            {
+                [propget] HRESULT AcousticEchoCancellationConfiguration([out] [retval] Windows.Media.Effects.AcousticEchoCancellationConfiguration** value);
+                [propget] HRESULT CanSetState([out] [retval] boolean* value);
+                [propget] HRESULT State([out] [retval] Windows.Media.Effects.AudioEffectState* value);
+                HRESULT SetState([in] Windows.Media.Effects.AudioEffectState newState);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -565,6 +599,13 @@ namespace Windows
                 [propput] HRESULT ViewOrientation([in] Windows.Foundation.Numerics.Quaternion value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass AcousticEchoCancellationConfiguration
+            {
+                [default] interface Windows.Media.Effects.IAcousticEchoCancellationConfiguration;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [threading(mta)]
@@ -579,6 +620,7 @@ namespace Windows
             runtimeclass AudioEffect
             {
                 [default] interface Windows.Media.Effects.IAudioEffect;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Media.Effects.IAudioEffect2;
             }
 
             [activatable(Windows.Media.Effects.IAudioEffectDefinitionFactory, Windows.Foundation.UniversalApiContract, 1.0)]

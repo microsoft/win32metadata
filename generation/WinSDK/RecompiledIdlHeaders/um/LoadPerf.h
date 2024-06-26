@@ -37,11 +37,11 @@ extern "C" {
 #define LOADPERF_FUNCTION   __declspec(dllimport) DWORD __stdcall
 #endif
 
-// flags for dwFlags Argument
-#define LOADPERF_FLAGS_DELETE_MOF_ON_EXIT   ((ULONG_PTR) 1)
-#define LOADPERF_FLAGS_LOAD_REGISTRY_ONLY   ((ULONG_PTR) 2)
-#define LOADPERF_FLAGS_CREATE_MOF_ONLY      ((ULONG_PTR) 4)
-#define LOADPERF_FLAGS_DISPLAY_USER_MSGS    ((ULONG_PTR) 8)
+// Values for dwFlags Argument of InstallPerfDll
+#define LOADPERF_FLAGS_DELETE_MOF_ON_EXIT   ((ULONG_PTR) 1) // Has no effect.
+#define LOADPERF_FLAGS_LOAD_REGISTRY_ONLY   ((ULONG_PTR) 2) // Has no effect.
+#define LOADPERF_FLAGS_CREATE_MOF_ONLY      ((ULONG_PTR) 4) // Has no effect.
+#define LOADPERF_FLAGS_DISPLAY_USER_MSGS    ((ULONG_PTR) 8) // Logs to stdout.
 
 LOADPERF_FUNCTION
 InstallPerfDllW(
@@ -86,7 +86,7 @@ UpdatePerfNameFilesA(
     _In_     LPCSTR    szNewCtrFilePath,
     _In_opt_ LPCSTR    szNewHlpFilePath,
     _In_     LPSTR     szLanguageID,
-    _In_     ULONG_PTR dwFlags
+    _In_     ULONG_PTR dwModes
 );
 
 LOADPERF_FUNCTION
@@ -94,7 +94,7 @@ UpdatePerfNameFilesW(
     _In_     LPCWSTR   szNewCtrFilePath,
     _In_opt_ LPCWSTR   szNewHlpFilePath,
     _In_     LPWSTR    szLanguageID,
-    _In_     ULONG_PTR dwFlags
+    _In_     ULONG_PTR dwModes
 );
 
 LOADPERF_FUNCTION
@@ -109,13 +109,13 @@ SetServiceAsTrustedW(
     _In_     LPCWSTR   szServiceName
 );
 
-DWORD
+LOADPERF_FUNCTION
 BackupPerfRegistryToFileW(
     _In_     LPCWSTR   szFileName,
     _In_opt_ LPCWSTR   szCommentString
 );
 
-DWORD
+LOADPERF_FUNCTION
 RestorePerfRegistryFromFileW(
     _In_opt_ LPCWSTR   szFileName,
     _In_opt_ LPCWSTR   szLangId

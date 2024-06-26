@@ -152,6 +152,13 @@ DEFINE_GUID( GUID_IO_VOLUME_BACKGROUND_FORMAT, 0xa2e5fc86, 0xd5cd, 0x4038, 0xb2,
 DEFINE_GUID( GUID_IO_VOLUME_PHYSICAL_CONFIGURATION_CHANGE, 0x2de97f84, 0x4c06, 0x11d2, 0xa5, 0x32, 0x0, 0x60, 0x97, 0x13, 0x5, 0x5a);
 
 //
+//  Volume being deleted.  This event is signalled when the
+//  volume is in the process of being deleted.
+//
+
+DEFINE_GUID( GUID_IO_VOLUME_PREPARE_DELETE, 0xac0707fb, 0x4a9a, 0x4c81, 0x9e, 0x2e, 0x38, 0x5b, 0x79, 0xa8, 0xfd, 0x28);
+
+//
 //  Volume unique ID change.  This event is signalled when the
 //  unique ID of the volume changes.
 //

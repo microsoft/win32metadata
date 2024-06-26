@@ -36,9 +36,9 @@ _CRT_BEGIN_C_HEADER
         _In_   unsigned       _Line
         );
 
-    #define assert(expression) (void)(                                                       \
-            (!!(expression)) ||                                                              \
-            (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0) \
+    #define assert(expression) ((void)(                                                       \
+            (!!(expression)) ||                                                               \
+            (_wassert(_CRT_WIDE(#expression), _CRT_WIDE(__FILE__), (unsigned)(__LINE__)), 0)) \
         )
 
 #endif

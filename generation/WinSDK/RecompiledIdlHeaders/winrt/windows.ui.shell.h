@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION)
@@ -1246,7 +1246,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAdaptiveCard = _uuidof(IAdaptiveCard);
+                MIDL_CONST_ID IID& IID_IAdaptiveCard = __uuidof(IAdaptiveCard);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1281,7 +1281,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAdaptiveCardBuilderStatics = _uuidof(IAdaptiveCardBuilderStatics);
+                MIDL_CONST_ID IID& IID_IAdaptiveCardBuilderStatics = __uuidof(IAdaptiveCardBuilderStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1318,7 +1318,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE End(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFocusSession = _uuidof(IFocusSession);
+                MIDL_CONST_ID IID& IID_IFocusSession = __uuidof(IFocusSession);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1373,7 +1373,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFocusSessionManager = _uuidof(IFocusSessionManager);
+                MIDL_CONST_ID IID& IID_IFocusSessionManager = __uuidof(IFocusSessionManager);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1412,7 +1412,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFocusSessionManagerStatics = _uuidof(IFocusSessionManagerStatics);
+                MIDL_CONST_ID IID& IID_IFocusSessionManagerStatics = __uuidof(IFocusSessionManagerStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1463,7 +1463,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISecurityAppManager = _uuidof(ISecurityAppManager);
+                MIDL_CONST_ID IID& IID_ISecurityAppManager = __uuidof(ISecurityAppManager);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1505,7 +1505,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareWindowCommandEventArgs = _uuidof(IShareWindowCommandEventArgs);
+                MIDL_CONST_ID IID& IID_IShareWindowCommandEventArgs = __uuidof(IShareWindowCommandEventArgs);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1555,7 +1555,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareWindowCommandSource = _uuidof(IShareWindowCommandSource);
+                MIDL_CONST_ID IID& IID_IShareWindowCommandSource = __uuidof(IShareWindowCommandSource);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1591,7 +1591,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareWindowCommandSourceStatics = _uuidof(IShareWindowCommandSourceStatics);
+                MIDL_CONST_ID IID& IID_IShareWindowCommandSourceStatics = __uuidof(IShareWindowCommandSourceStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1644,7 +1644,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITaskbarManager = _uuidof(ITaskbarManager);
+                MIDL_CONST_ID IID& IID_ITaskbarManager = __uuidof(ITaskbarManager);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1692,7 +1692,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITaskbarManager2 = _uuidof(ITaskbarManager2);
+                MIDL_CONST_ID IID& IID_ITaskbarManager2 = __uuidof(ITaskbarManager2);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1725,7 +1725,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITaskbarManagerDesktopAppSupportStatics = _uuidof(ITaskbarManagerDesktopAppSupportStatics);
+                MIDL_CONST_ID IID& IID_ITaskbarManagerDesktopAppSupportStatics = __uuidof(ITaskbarManagerDesktopAppSupportStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1761,7 +1761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITaskbarManagerStatics = _uuidof(ITaskbarManagerStatics);
+                MIDL_CONST_ID IID& IID_ITaskbarManagerStatics = __uuidof(ITaskbarManagerStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1825,7 +1825,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ReportThumbnailAvailable(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTab = _uuidof(IWindowTab);
+                MIDL_CONST_ID IID& IID_IWindowTab = __uuidof(IWindowTab);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1861,7 +1861,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabCloseRequestedEventArgs = _uuidof(IWindowTabCloseRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowTabCloseRequestedEventArgs = __uuidof(IWindowTabCloseRequestedEventArgs);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1898,7 +1898,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabCollection = _uuidof(IWindowTabCollection);
+                MIDL_CONST_ID IID& IID_IWindowTabCollection = __uuidof(IWindowTabCollection);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1943,7 +1943,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabGroup = _uuidof(IWindowTabGroup);
+                MIDL_CONST_ID IID& IID_IWindowTabGroup = __uuidof(IWindowTabGroup);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -1976,7 +1976,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabIcon = _uuidof(IWindowTabIcon);
+                MIDL_CONST_ID IID& IID_IWindowTabIcon = __uuidof(IWindowTabIcon);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2024,7 +2024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabIconStatics = _uuidof(IWindowTabIconStatics);
+                MIDL_CONST_ID IID& IID_IWindowTabIconStatics = __uuidof(IWindowTabIconStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2091,7 +2091,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabManager = _uuidof(IWindowTabManager);
+                MIDL_CONST_ID IID& IID_IWindowTabManager = __uuidof(IWindowTabManager);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2134,7 +2134,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabManagerStatics = _uuidof(IWindowTabManagerStatics);
+                MIDL_CONST_ID IID& IID_IWindowTabManagerStatics = __uuidof(IWindowTabManagerStatics);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2170,7 +2170,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabSwitchRequestedEventArgs = _uuidof(IWindowTabSwitchRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowTabSwitchRequestedEventArgs = __uuidof(IWindowTabSwitchRequestedEventArgs);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2215,7 +2215,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabTearOutRequestedEventArgs = _uuidof(IWindowTabTearOutRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowTabTearOutRequestedEventArgs = __uuidof(IWindowTabTearOutRequestedEventArgs);
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -2266,7 +2266,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowTabThumbnailRequestedEventArgs = _uuidof(IWindowTabThumbnailRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowTabThumbnailRequestedEventArgs = __uuidof(IWindowTabThumbnailRequestedEventArgs);
             } /* Shell */
         } /* UI */
     } /* Windows */

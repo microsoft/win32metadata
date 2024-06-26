@@ -153,6 +153,14 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
         (_Status) == HRESULT_FROM_NT( STATUS_SMB_GUEST_LOGON_BLOCKED ) || \
         (_Status) == ERROR_SMB_GUEST_LOGON_BLOCKED || \
         (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_LOGON_BLOCKED ) || \
+        (_Status) == STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED || \
+        (_Status) == HRESULT_FROM_NT( STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED ) || \
+        (_Status) == ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED || \
+        (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED ) || \
+        (_Status) == ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED || \
+        (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED ) || \
+        (_Status) == ERROR_NTLM_BLOCKED || \
+        (_Status) == __HRESULT_FROM_WIN32( ERROR_NTLM_BLOCKED ) || \
         (_Status) == ERROR_LOGON_FAILURE || \
         (_Status) == __HRESULT_FROM_WIN32( ERROR_LOGON_FAILURE ) || \
         (_Status) == STATUS_LOGON_FAILURE || \

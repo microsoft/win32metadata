@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -701,6 +701,9 @@ namespace ABI {
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
                         PnpObjectType_DevicePanel = 8,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+                        PnpObjectType_AssociationEndpointProtocol = 9,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
                     };
                 } /* Pnp */
             } /* Enumeration */
@@ -745,7 +748,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPnpObject = _uuidof(IPnpObject);
+                    MIDL_CONST_ID IID& IID_IPnpObject = __uuidof(IPnpObject);
                 } /* Pnp */
             } /* Enumeration */
         } /* Devices */
@@ -808,7 +811,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPnpObjectStatics = _uuidof(IPnpObjectStatics);
+                    MIDL_CONST_ID IID& IID_IPnpObjectStatics = __uuidof(IPnpObjectStatics);
                 } /* Pnp */
             } /* Enumeration */
         } /* Devices */
@@ -852,7 +855,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPnpObjectUpdate = _uuidof(IPnpObjectUpdate);
+                    MIDL_CONST_ID IID& IID_IPnpObjectUpdate = __uuidof(IPnpObjectUpdate);
                 } /* Pnp */
             } /* Enumeration */
         } /* Devices */
@@ -927,7 +930,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPnpObjectWatcher = _uuidof(IPnpObjectWatcher);
+                    MIDL_CONST_ID IID& IID_IPnpObjectWatcher = __uuidof(IPnpObjectWatcher);
                 } /* Pnp */
             } /* Enumeration */
         } /* Devices */
@@ -2137,6 +2140,9 @@ enum __x_ABI_CWindows_CDevices_CEnumeration_CPnp_CPnpObjectType
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
     PnpObjectType_DevicePanel = 8,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+    PnpObjectType_AssociationEndpointProtocol = 9,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 

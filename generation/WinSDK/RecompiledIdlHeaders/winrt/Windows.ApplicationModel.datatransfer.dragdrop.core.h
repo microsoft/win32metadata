@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -622,7 +622,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragDropManager = _uuidof(ICoreDragDropManager);
+                        MIDL_CONST_ID IID& IID_ICoreDragDropManager = __uuidof(ICoreDragDropManager);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -662,7 +662,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragDropManagerStatics = _uuidof(ICoreDragDropManagerStatics);
+                        MIDL_CONST_ID IID& IID_ICoreDragDropManagerStatics = __uuidof(ICoreDragDropManagerStatics);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -708,7 +708,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragInfo = _uuidof(ICoreDragInfo);
+                        MIDL_CONST_ID IID& IID_ICoreDragInfo = __uuidof(ICoreDragInfo);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -751,7 +751,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragInfo2 = _uuidof(ICoreDragInfo2);
+                        MIDL_CONST_ID IID& IID_ICoreDragInfo2 = __uuidof(ICoreDragInfo2);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -810,7 +810,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragOperation = _uuidof(ICoreDragOperation);
+                        MIDL_CONST_ID IID& IID_ICoreDragOperation = __uuidof(ICoreDragOperation);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -856,7 +856,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragOperation2 = _uuidof(ICoreDragOperation2);
+                        MIDL_CONST_ID IID& IID_ICoreDragOperation2 = __uuidof(ICoreDragOperation2);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -925,7 +925,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDragUIOverride = _uuidof(ICoreDragUIOverride);
+                        MIDL_CONST_ID IID& IID_ICoreDragUIOverride = __uuidof(ICoreDragUIOverride);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -978,7 +978,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDropOperationTarget = _uuidof(ICoreDropOperationTarget);
+                        MIDL_CONST_ID IID& IID_ICoreDropOperationTarget = __uuidof(ICoreDropOperationTarget);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */
@@ -1018,7 +1018,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICoreDropOperationTargetRequestedEventArgs = _uuidof(ICoreDropOperationTargetRequestedEventArgs);
+                        MIDL_CONST_ID IID& IID_ICoreDropOperationTargetRequestedEventArgs = __uuidof(ICoreDropOperationTargetRequestedEventArgs);
                     } /* Core */
                 } /* DragDrop */
             } /* DataTransfer */

@@ -80,13 +80,17 @@ typedef enum _DODownloadProperty
     DODownloadProperty_IntegrityCheckInfo,        // [VT_BSTR] PHF [can't be read], serialized json
     DODownloadProperty_IntegrityCheckMandatory,   // [VT_BOOL] PHF boolean
     DODownloadProperty_TotalSizeBytes,            // [VT_UI8] download size
-    // Properties below were added in Fe
+    // Added in 2020-H2 (Iron)
     DODownloadProperty_DisallowOnCellular,        // [VT_BOOL] don't download on cellular, regardless of cost policy
     DODownloadProperty_HttpCustomAuthHeaders,     // [VT_BSTR] custom HTTPS headers used when challenged
-    // Added in Nickel (2107)
+    // Added in 2021-H2 (Nickel)
     DODownloadProperty_HttpAllowSecureToNonSecureRedirect,  // [VT_BOOL] https to http redirection (default: FALSE)
     DODownloadProperty_NonVolatile,               // [VT_BOOL] save download info to registry (default: FALSE)
-
+    // Added in 2023-H2 (Germanium)
+    DODownloadProperty_HttpRedirectionTarget,     // [VT_BSTR] [read-only] URL to which the download was redirected, if any
+    DODownloadProperty_HttpResponseHeaders,       // [VT_BSTR] [read-only] Response headers for the last HTTP response
+    DODownloadProperty_HttpServerIPAddress,       // [VT_BSTR] [read-only] Server IP Address for the last HTTP response
+    DODownloadProperty_HttpStatusCode,            // [VT_UI4] [read-only] Status code for the last HTTP response
 } DODownloadProperty;
 
 typedef struct _DO_DOWNLOAD_ENUM_CATEGORY

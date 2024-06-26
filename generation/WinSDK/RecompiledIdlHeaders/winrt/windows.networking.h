@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
-#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x20000
+#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x30000
 #endif // defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -355,7 +355,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IEndpointPair = _uuidof(IEndpointPair);
+            MIDL_CONST_ID IID& IID_IEndpointPair = __uuidof(IEndpointPair);
         } /* Networking */
     } /* Windows */
 } /* ABI */
@@ -393,7 +393,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IEndpointPairFactory = _uuidof(IEndpointPairFactory);
+            MIDL_CONST_ID IID& IID_IEndpointPairFactory = __uuidof(IEndpointPairFactory);
         } /* Networking */
     } /* Windows */
 } /* ABI */
@@ -443,7 +443,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IHostName = _uuidof(IHostName);
+            MIDL_CONST_ID IID& IID_IHostName = __uuidof(IHostName);
         } /* Networking */
     } /* Windows */
 } /* ABI */
@@ -478,7 +478,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IHostNameFactory = _uuidof(IHostNameFactory);
+            MIDL_CONST_ID IID& IID_IHostNameFactory = __uuidof(IHostNameFactory);
         } /* Networking */
     } /* Windows */
 } /* ABI */
@@ -514,7 +514,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IHostNameStatics = _uuidof(IHostNameStatics);
+            MIDL_CONST_ID IID& IID_IHostNameStatics = __uuidof(IHostNameStatics);
         } /* Networking */
     } /* Windows */
 } /* ABI */

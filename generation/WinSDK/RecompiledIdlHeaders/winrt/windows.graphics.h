@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -249,7 +249,7 @@ namespace ABI {
             public:
             };
 
-            extern MIDL_CONST_ID IID& IID_IGeometrySource2D = _uuidof(IGeometrySource2D);
+            MIDL_CONST_ID IID& IID_IGeometrySource2D = __uuidof(IGeometrySource2D);
         } /* Graphics */
     } /* Windows */
 } /* ABI */

@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -657,7 +657,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWalletItemSystemStore = _uuidof(IWalletItemSystemStore);
+                    MIDL_CONST_ID IID& IID_IWalletItemSystemStore = __uuidof(IWalletItemSystemStore);
                 } /* System */
             } /* Wallet */
         } /* ApplicationModel */
@@ -708,7 +708,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWalletItemSystemStore2 = _uuidof(IWalletItemSystemStore2);
+                    MIDL_CONST_ID IID& IID_IWalletItemSystemStore2 = __uuidof(IWalletItemSystemStore2);
                 } /* System */
             } /* Wallet */
         } /* ApplicationModel */
@@ -752,7 +752,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWalletManagerSystemStatics = _uuidof(IWalletManagerSystemStatics);
+                    MIDL_CONST_ID IID& IID_IWalletManagerSystemStatics = __uuidof(IWalletManagerSystemStatics);
                 } /* System */
             } /* Wallet */
         } /* ApplicationModel */

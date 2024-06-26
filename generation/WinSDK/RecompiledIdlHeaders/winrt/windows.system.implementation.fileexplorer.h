@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION)
@@ -373,7 +373,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISysStorageProviderEventReceivedEventArgs = _uuidof(ISysStorageProviderEventReceivedEventArgs);
+                    MIDL_CONST_ID IID& IID_ISysStorageProviderEventReceivedEventArgs = __uuidof(ISysStorageProviderEventReceivedEventArgs);
                 } /* FileExplorer */
             } /* Implementation */
         } /* System */
@@ -412,7 +412,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISysStorageProviderEventReceivedEventArgsFactory = _uuidof(ISysStorageProviderEventReceivedEventArgsFactory);
+                    MIDL_CONST_ID IID& IID_ISysStorageProviderEventReceivedEventArgsFactory = __uuidof(ISysStorageProviderEventReceivedEventArgsFactory);
                 } /* FileExplorer */
             } /* Implementation */
         } /* System */
@@ -452,7 +452,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISysStorageProviderEventSource = _uuidof(ISysStorageProviderEventSource);
+                    MIDL_CONST_ID IID& IID_ISysStorageProviderEventSource = __uuidof(ISysStorageProviderEventSource);
                 } /* FileExplorer */
             } /* Implementation */
         } /* System */
@@ -494,7 +494,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISysStorageProviderHandlerFactory = _uuidof(ISysStorageProviderHandlerFactory);
+                    MIDL_CONST_ID IID& IID_ISysStorageProviderHandlerFactory = __uuidof(ISysStorageProviderHandlerFactory);
                 } /* FileExplorer */
             } /* Implementation */
         } /* System */
@@ -531,7 +531,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISysStorageProviderHttpRequestProvider = _uuidof(ISysStorageProviderHttpRequestProvider);
+                    MIDL_CONST_ID IID& IID_ISysStorageProviderHttpRequestProvider = __uuidof(ISysStorageProviderHttpRequestProvider);
                 } /* FileExplorer */
             } /* Implementation */
         } /* System */

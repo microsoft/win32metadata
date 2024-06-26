@@ -1955,6 +1955,7 @@ C_ASSERT(DL_ADDRESS_LENGTH_MAXIMUM >= sizeof(DL_TEREDO_ADDRESS));
 
 #include <ifdef.h>
 
+#define NMR_REG_KEY_PATH L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\NMR\\providers"
 
 typedef enum _NPI_MODULEID_TYPE {
     MIT_GUID = 1,

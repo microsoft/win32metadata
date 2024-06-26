@@ -519,7 +519,9 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 Tls12                                      = 8,
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
-                Unspecified                                = 9
+                Unspecified                                = 9,
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+                Tls13                                      = 10
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

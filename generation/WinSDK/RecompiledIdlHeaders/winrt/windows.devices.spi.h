@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -714,7 +714,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiBusInfo = _uuidof(ISpiBusInfo);
+                MIDL_CONST_ID IID& IID_ISpiBusInfo = __uuidof(ISpiBusInfo);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -777,7 +777,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiConnectionSettings = _uuidof(ISpiConnectionSettings);
+                MIDL_CONST_ID IID& IID_ISpiConnectionSettings = __uuidof(ISpiConnectionSettings);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -814,7 +814,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiConnectionSettingsFactory = _uuidof(ISpiConnectionSettingsFactory);
+                MIDL_CONST_ID IID& IID_ISpiConnectionSettingsFactory = __uuidof(ISpiConnectionSettingsFactory);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -851,7 +851,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiController = _uuidof(ISpiController);
+                MIDL_CONST_ID IID& IID_ISpiController = __uuidof(ISpiController);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -891,7 +891,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiControllerStatics = _uuidof(ISpiControllerStatics);
+                MIDL_CONST_ID IID& IID_ISpiControllerStatics = __uuidof(ISpiControllerStatics);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -953,7 +953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiDevice = _uuidof(ISpiDevice);
+                MIDL_CONST_ID IID& IID_ISpiDevice = __uuidof(ISpiDevice);
             } /* Spi */
         } /* Devices */
     } /* Windows */
@@ -1000,7 +1000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpiDeviceStatics = _uuidof(ISpiDeviceStatics);
+                MIDL_CONST_ID IID& IID_ISpiDeviceStatics = __uuidof(ISpiDeviceStatics);
             } /* Spi */
         } /* Devices */
     } /* Windows */

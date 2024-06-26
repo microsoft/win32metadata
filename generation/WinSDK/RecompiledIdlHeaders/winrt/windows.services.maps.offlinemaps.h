@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -671,7 +671,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOfflineMapPackage = _uuidof(IOfflineMapPackage);
+                    MIDL_CONST_ID IID& IID_IOfflineMapPackage = __uuidof(IOfflineMapPackage);
                 } /* OfflineMaps */
             } /* Maps */
         } /* Services */
@@ -712,7 +712,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOfflineMapPackageQueryResult = _uuidof(IOfflineMapPackageQueryResult);
+                    MIDL_CONST_ID IID& IID_IOfflineMapPackageQueryResult = __uuidof(IOfflineMapPackageQueryResult);
                 } /* OfflineMaps */
             } /* Maps */
         } /* Services */
@@ -750,7 +750,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOfflineMapPackageStartDownloadResult = _uuidof(IOfflineMapPackageStartDownloadResult);
+                    MIDL_CONST_ID IID& IID_IOfflineMapPackageStartDownloadResult = __uuidof(IOfflineMapPackageStartDownloadResult);
                 } /* OfflineMaps */
             } /* Maps */
         } /* Services */
@@ -797,7 +797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOfflineMapPackageStatics = _uuidof(IOfflineMapPackageStatics);
+                    MIDL_CONST_ID IID& IID_IOfflineMapPackageStatics = __uuidof(IOfflineMapPackageStatics);
                 } /* OfflineMaps */
             } /* Maps */
         } /* Services */

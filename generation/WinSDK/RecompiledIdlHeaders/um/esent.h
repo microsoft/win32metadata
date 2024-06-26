@@ -51,9 +51,9 @@ extern "C" {
 
 
 #if defined(_WIN64)
-#include <pshpack8.h>
+#pragma pack(push,8)
 #else
-#include <pshpack4.h>
+#pragma pack(push,4)
 #endif
 
 
@@ -64,74 +64,123 @@ extern "C" {
 #define JET_API     __stdcall
 #define JET_NODSAPI __stdcall
 
-#if defined(_WIN64)
-    typedef unsigned __int64 JET_API_PTR;
-#elif !defined(__midl) && (defined(_X86_) || defined(_M_IX86))
-    typedef __w64 unsigned long JET_API_PTR;
+#ifndef _JET_BASE_TYPES_DEFINED
+#define _JET_BASE_TYPES_DEFINED
+// Do we define the basic JET integral types from stdint.h, or do we use the
+// historical definitions?
+#ifdef _JET_API_USE_STDINT
+
+#include <stdint.h>
+
+typedef int8_t                          JET_INT8;
+typedef uint8_t                         JET_UINT8;
+typedef int16_t                         JET_INT16;
+typedef uint16_t                        JET_UINT16;
+typedef int32_t                         JET_INT32;
+typedef uint32_t                        JET_UINT32;
+typedef int64_t                         JET_INT64;
+typedef uint64_t                        JET_UINT64;
+typedef uint8_t                         JET_BYTE;
+
 #else
-    typedef unsigned long JET_API_PTR;
+
+// Note the use of "long" rather than "int" for JET_INT32/JET_UINT32.
+// The JET_API has historically used the base type "long" for 32bit integral
+// types.  While "int" and "long" are both 32bit integral types and coerce
+// back and forth and so may be used interchangably, "int *" and "long *" do
+// not.  If the base type of the 32bit integral types were to change to
+// "int", existing client code could break and require casts for the pointer types.
+typedef char               JET_INT8;
+typedef unsigned char      JET_UINT8;
+typedef short              JET_INT16;
+typedef unsigned short     JET_UINT16;
+typedef long               JET_INT32;
+typedef unsigned long      JET_UINT32;
+typedef long long          JET_INT64;
+typedef unsigned long long JET_UINT64;
+typedef unsigned char      JET_BYTE;
+
 #endif
 
-typedef _Return_type_success_( return >= 0 ) long JET_ERR;
+typedef void               JET_VOID;
+typedef void *             JET_PVOID;
+typedef const void *       JET_PCVOID;
+typedef char               JET_CHAR;
+#if !defined(_NATIVE_WCHAR_T_DEFINED)
+typedef unsigned short     JET_WCHAR;
+#else
+typedef wchar_t            JET_WCHAR;
+#endif
+#endif // _JET_BASE_TYPES_DEFINED
+// After this point, use only JET_type style types.  That is, don't use base types like
+// long, int, short, etc, use JET_INT32, JET_INT16, etc.
 
 
-typedef JET_API_PTR JET_HANDLE; /* backup file handle */
-typedef JET_API_PTR JET_INSTANCE;   /* Instance Identifier */
-typedef JET_API_PTR JET_SESID;      /* Session Identifier */
-typedef JET_API_PTR JET_TABLEID;    /* Table Identifier */
+#if defined(_WIN64)
+    typedef JET_UINT64 JET_API_PTR;
+#else
+    typedef JET_UINT32 JET_API_PTR;
+#endif
+
+typedef _Return_type_success_( return >= 0 ) JET_INT32 JET_ERR;
+
+typedef JET_UINT32         JET_LCID;
+typedef JET_UINT16         JET_LANGID;
+typedef JET_UINT16         JET_CP;
+
+
+typedef JET_API_PTR JET_HANDLE;     // backup file handle
+typedef JET_API_PTR JET_INSTANCE;   // Instance Identifier
+typedef JET_API_PTR JET_SESID;      // Session Identifier
+typedef JET_API_PTR JET_TABLEID;    // Table Identifier
 #if ( JET_VERSION >= 0x0501 )
-typedef JET_API_PTR JET_LS;     /* Local Storage */
+typedef JET_API_PTR JET_LS;         // Local Storage
 #endif // JET_VERSION >= 0x0501
 
-typedef unsigned long JET_COLUMNID; /* Column Identifier */
+typedef JET_UINT32 JET_COLUMNID;    // Column Identifier
 
 typedef struct tagJET_INDEXID
 {
-    unsigned long   cbStruct;
-    unsigned char   rgbIndexId[sizeof(JET_API_PTR)+sizeof(unsigned long)+sizeof(unsigned long)];
+    JET_UINT32      cbStruct;
+    JET_BYTE        rgbIndexId[sizeof(JET_API_PTR)+sizeof(JET_UINT32)+sizeof(JET_UINT32)];
 } JET_INDEXID;
 
-typedef unsigned long JET_DBID;     /* Database Identifier */
-typedef unsigned long JET_OBJTYP;   /* Object Type */
-typedef unsigned long JET_COLTYP;   /* Column Type */
-typedef unsigned long JET_GRBIT;    /* Group of Bits */
+typedef JET_UINT32 JET_DBID;     // Database Identifier
+typedef JET_UINT32 JET_OBJTYP;   // Object Type
+typedef JET_UINT32 JET_COLTYP;   // Column Type
+typedef JET_UINT32 JET_GRBIT;    // Group of Bits
 
-typedef unsigned long JET_SNP;      /* Status Notification Process */
-typedef unsigned long JET_SNT;      /* Status Notification Type */
-typedef double JET_DATESERIAL;      /* JET_coltypDateTime format */
+typedef JET_UINT32 JET_SNP;      // Status Notification Process
+typedef JET_UINT32 JET_SNT;      // Status Notification Type
+typedef double JET_DATESERIAL;   // JET_coltypDateTime format
 #if ( JET_VERSION >= 0x0501 )
-typedef unsigned long JET_CBTYP;    /* Callback Types */
+typedef JET_UINT32 JET_CBTYP;    // Callback Types
 #endif // JET_VERSION >= 0x0501
 
-typedef JET_ERR (JET_API *JET_PFNSTATUS)(
-    _In_ JET_SESID  sesid,
-    _In_ JET_SNP    snp,
-    _In_ JET_SNT    snt,
-    _In_opt_ void * pv );
+typedef JET_ERR (JET_API * JET_PFNSTATUS)(
+    _In_ JET_SESID     sesid,
+    _In_ JET_SNP       snp,
+    _In_ JET_SNT       snt,
+    _In_opt_ JET_PVOID pv );
 
 
-#if !defined(_NATIVE_WCHAR_T_DEFINED)
-typedef unsigned short WCHAR;
-#else
-typedef wchar_t WCHAR;
-#endif
+typedef _Null_terminated_ JET_CHAR *         JET_PSTR;    // ASCII string (char *) null terminated
+typedef _Null_terminated_ const JET_CHAR *   JET_PCSTR;   // const ASCII string (char *) null terminated
+typedef _Null_terminated_ JET_WCHAR *        JET_PWSTR;   // Unicode string (wchar_t *) null terminated
+typedef _Null_terminated_ const JET_WCHAR *  JET_PCWSTR;  // const Unicode string (wchar_t *) null terminated
 
-typedef _Null_terminated_ char *  JET_PSTR;    /* ASCII string (char *) null terminated */
-typedef _Null_terminated_ const char *  JET_PCSTR;   /* const ASCII string (char *) null terminated */
-typedef _Null_terminated_ WCHAR * JET_PWSTR;   /* Unicode string (char *) null terminated */
-typedef _Null_terminated_ const WCHAR * JET_PCWSTR;  /* const Unicode string (char *) null terminated */
 
 typedef struct
 {
-    char            *szDatabaseName;
-    char            *szNewDatabaseName;
-} JET_RSTMAP_A;         /* restore map */
+    JET_PSTR        szDatabaseName;
+    JET_PSTR        szNewDatabaseName;
+} JET_RSTMAP_A;         // restore map
 
 typedef struct
 {
-    WCHAR           *szDatabaseName;
-    WCHAR           *szNewDatabaseName;
-} JET_RSTMAP_W;         /* restore map */
+    JET_PWSTR       szDatabaseName;
+    JET_PWSTR       szNewDatabaseName;
+} JET_RSTMAP_W;         // restore map
 
 #ifdef JET_UNICODE
 #define JET_RSTMAP JET_RSTMAP_W
@@ -144,26 +193,26 @@ typedef struct
 
 typedef struct tagCONVERT_A
 {
-    char                    *szOldDll;
+    JET_PSTR                szOldDll;
     union
     {
-        unsigned long       fFlags;
+        JET_UINT32          fFlags;
         struct
         {
-            unsigned long   fSchemaChangesOnly:1;
+            JET_UINT32      fSchemaChangesOnly:1;
         };
     };
 } JET_CONVERT_A;
 
 typedef struct tagCONVERT_W
 {
-    WCHAR                   *szOldDll;
+    JET_PWSTR               szOldDll;
     union
     {
-        unsigned long       fFlags;
+        JET_UINT32          fFlags;
         struct
         {
-            unsigned long   fSchemaChangesOnly:1;
+            JET_UINT32      fSchemaChangesOnly:1;
         };
     };
 } JET_CONVERT_W;
@@ -224,6 +273,19 @@ typedef struct tagCONVERT_W
 
 
 
+// Special format specifiers here
+#define JET_efvUseEngineDefault             (0x40000001)    //  Instructs the engine to use the maximal default supported Engine Format Version. (default)
+#define JET_efvUsePersistedFormat           (0x40000002)    //  Instructs the engine to use the minimal Engine Format Version of all loaded log and DB files.
+#define JET_efvAllowHigherPersistedFormat   (0x41000000)    //  Can be combined with a specific EngineFormatVersion but will not fail if persisted files are ahead of the specified EngineFormatVersion.  Will still fail if the persisted version is ahead of what the engine actually can read/understand.
+
+#define JET_efvWindows19H1Rtm                   8920        //  Last pre-efv version, shipped in Windows 10 until 19H1 release.
+#define JET_efvWindows10v2004                   9180        //  Efv shipped with Windows "Vibranium", first shipped with Windows 10 version 2004 (and all subsequent Windows 10 releases).
+#define JET_efvWindowsServer2022                9360        //  Efv shipped with Windows Server 2022.
+#define JET_efvWindows11v21H2                   9400        //  Efv shipped with Windows 11 21H2 release.
+#define JET_efvWindows11v22H2                   9480        //  Efv shipped with Windows 11 22H2 release.
+#define JET_efvWindows11v23H2                   9600        //  Efv shipped with Windows 11 23H2 release.
+
+
 //  Online defragmentation (JetDefragment/JetDefragment2) options
 #define JET_bitDefragmentBatchStart             0x00000001
 #define JET_bitDefragmentBatchStop              0x00000002
@@ -257,59 +319,59 @@ typedef struct tagCONVERT_W
 
     /* Callback-function prototype */
 
-typedef JET_ERR (JET_API *JET_CALLBACK)(
-    _In_ JET_SESID      sesid,
-    _In_ JET_DBID       dbid,
-    _In_ JET_TABLEID    tableid,
-    _In_ JET_CBTYP      cbtyp,
-    _Inout_opt_ void *  pvArg1,
-    _Inout_opt_ void *  pvArg2,
-    _In_opt_ void *     pvContext,
-    _In_ JET_API_PTR    ulUnused );
+typedef JET_ERR (JET_API * JET_CALLBACK)(
+    _In_ JET_SESID        sesid,
+    _In_ JET_DBID         dbid,
+    _In_ JET_TABLEID      tableid,
+    _In_ JET_CBTYP        cbtyp,
+    _Inout_opt_ JET_PVOID pvArg1,
+    _Inout_opt_ JET_PVOID pvArg2,
+    _In_opt_ JET_PVOID    pvContext,
+    _In_ JET_API_PTR      ulUnused );
 #endif // JET_VERSION >= 0x0501
 
     /* Status Notification Structures */
 
-typedef struct              /* Status Notification Progress */
+typedef struct              // Status Notification Progress
 {
-    unsigned long   cbStruct;   /* Size of this structure */
-    unsigned long   cunitDone;  /* Number of units of work completed */
-    unsigned long   cunitTotal; /* Total number of units of work */
+    JET_UINT32      cbStruct;   // Size of this structure
+    JET_UINT32      cunitDone;  // Number of units of work completed
+    JET_UINT32      cunitTotal; // Total number of units of work
 } JET_SNPROG;
 
 typedef struct
 {
-    unsigned long           cbStruct;
+    JET_UINT32              cbStruct;
 
-    unsigned long           cbFilesizeLow;          //  file's current size (low DWORD)
-    unsigned long           cbFilesizeHigh;         //  file's current size (high DWORD)
+    JET_UINT32              cbFilesizeLow;          //  file's current size (low DWORD)
+    JET_UINT32              cbFilesizeHigh;         //  file's current size (high DWORD)
 
-    unsigned long           cbFreeSpaceRequiredLow; //  estimate of free disk space required for in-place upgrade (low DWORD)
-    unsigned long           cbFreeSpaceRequiredHigh;//  estimate of free disk space required for in-place upgrade (high DWORD)
+    JET_UINT32              cbFreeSpaceRequiredLow; //  estimate of free disk space required for in-place upgrade (low DWORD)
+    JET_UINT32              cbFreeSpaceRequiredHigh;//  estimate of free disk space required for in-place upgrade (high DWORD)
 
-    unsigned long           csecToUpgrade;          //  estimate of time required, in seconds, for upgrade
+    JET_UINT32              csecToUpgrade;          //  estimate of time required, in seconds, for upgrade
 
     union
     {
-        unsigned long       ulFlags;
+        JET_UINT32          ulFlags;
         struct
         {
-            unsigned long   fUpgradable:1;
-            unsigned long   fAlreadyUpgraded:1;
+            JET_UINT32      fUpgradable:1;
+            JET_UINT32      fAlreadyUpgraded:1;
         };
     };
 } JET_DBINFOUPGRADE;
 
 typedef struct
 {
-    unsigned long       cbStruct;
+    JET_UINT32          cbStruct;
     JET_OBJTYP          objtyp;
     JET_DATESERIAL      dtCreate;   //  Deprecated.
     JET_DATESERIAL      dtUpdate;   //  Deprecated.
     JET_GRBIT           grbit;
-    unsigned long       flags;
-    unsigned long       cRecord;
-    unsigned long       cPage;
+    JET_UINT32          flags;
+    JET_UINT32          cRecord;
+    JET_UINT32          cPage;
 } JET_OBJECTINFO;
 
     /* The following flags appear in the grbit field above */
@@ -330,11 +392,12 @@ typedef struct
                                                                         //    fixed/var columns may be added to the template in the future)
 #endif // JET_VERSION >= 0x0501
 
+
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_TABLEID     tableid;
-    unsigned long   cRecord;
+    JET_UINT32      cRecord;
     JET_COLUMNID    columnidcontainername;
     JET_COLUMNID    columnidobjectname;
     JET_COLUMNID    columnidobjtyp;
@@ -342,17 +405,17 @@ typedef struct
     JET_COLUMNID    columniddtUpdate;   //  XXX -- to be deleted
     JET_COLUMNID    columnidgrbit;
     JET_COLUMNID    columnidflags;
-    JET_COLUMNID    columnidcRecord;    /* Level 2 info */
-    JET_COLUMNID    columnidcPage;      /* Level 2 info */
+    JET_COLUMNID    columnidcRecord;    // Level 2 info
+    JET_COLUMNID    columnidcPage;      // Level 2 info
 } JET_OBJECTLIST;
 
 #define cObjectInfoCols 9
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_TABLEID     tableid;
-    unsigned long   cRecord;
+    JET_UINT32      cRecord;
     JET_COLUMNID    columnidPresentationOrder;
     JET_COLUMNID    columnidcolumnname;
     JET_COLUMNID    columnidcolumnid;
@@ -373,47 +436,47 @@ typedef struct
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_COLUMNID    columnid;
     JET_COLTYP      coltyp;
-    unsigned short  wCountry;           // sepcifies the country/region for the column definition
-    unsigned short  langid;
-    unsigned short  cp;
-    unsigned short  wCollate;       /* Must be 0 */
-    unsigned long   cbMax;
+    JET_UINT16      wCountry;           // sepcifies the country/region for the column definition
+    JET_LANGID      langid;
+    JET_CP          cp;
+    JET_UINT16      wCollate;           // Must be 0
+    JET_UINT32      cbMax;
     JET_GRBIT       grbit;
 } JET_COLUMNDEF;
 
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_COLUMNID    columnid;
     JET_COLTYP      coltyp;
-    unsigned short  wCountry;           // specifies the columnid for the country/region field
-    unsigned short  langid;
-    unsigned short  cp;
-    unsigned short  wFiller;       /* Must be 0 */
-    unsigned long   cbMax;
+    JET_UINT16      wCountry;           // specifies the columnid for the country/region field
+    JET_LANGID      langid;
+    JET_CP          cp;
+    JET_UINT16      wFiller;            // Must be 0
+    JET_UINT32      cbMax;
     JET_GRBIT       grbit;
-    char            szBaseTableName[256];
-    char            szBaseColumnName[256];
+    JET_CHAR        szBaseTableName[256];
+    JET_CHAR        szBaseColumnName[256];
 } JET_COLUMNBASE_A;
 
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_COLUMNID    columnid;
     JET_COLTYP      coltyp;
-    unsigned short  wCountry;           // specifies the columnid for the country/region field
-    unsigned short  langid;
-    unsigned short  cp;
-    unsigned short  wFiller;       /* Must be 0 */
-    unsigned long   cbMax;
+    JET_UINT16      wCountry;           // specifies the columnid for the country/region field
+    JET_LANGID      langid;
+    JET_CP          cp;
+    JET_UINT16      wFiller;            // Must be 0
+    JET_UINT32      cbMax;
     JET_GRBIT       grbit;
-    WCHAR           szBaseTableName[256];
-    WCHAR           szBaseColumnName[256];
+    JET_WCHAR       szBaseTableName[256];
+    JET_WCHAR       szBaseColumnName[256];
 } JET_COLUMNBASE_W;
 
 
@@ -426,9 +489,9 @@ typedef struct
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_TABLEID     tableid;
-    unsigned long   cRecord;
+    JET_UINT32      cRecord;
     JET_COLUMNID    columnidindexname;
     JET_COLUMNID    columnidgrbitIndex;
     JET_COLUMNID    columnidcKey;
@@ -452,28 +515,30 @@ typedef struct
 
 typedef struct tag_JET_COLUMNCREATE_A
 {
-    unsigned long   cbStruct;               // size of this structure (for future expansion)
-    char            *szColumnName;          // column name
+    JET_UINT32      cbStruct;               // size of this structure (for future expansion)
+    JET_PSTR        szColumnName;           // column name
     JET_COLTYP      coltyp;                 // column type
-    unsigned long   cbMax;                  // the maximum length of this column (only relevant for binary and text columns)
+    JET_UINT32      cbMax;                  // the maximum length of this column (only relevant for binary and text columns)
     JET_GRBIT       grbit;                  // column options
-    void            *pvDefault;             // default value (NULL if none)
-    unsigned long   cbDefault;              // length of default value
-    unsigned long   cp;                     // code page (for text columns only)
+    JET_PVOID       pvDefault;              // default value (NULL if none)
+    JET_UINT32      cbDefault;              // length of default value
+    JET_UINT32      cp;                     // code page (for text columns only).  Note that historically we don't use JET_CP for this,
+                                            //     although the value actually is a JET_CP.
     JET_COLUMNID    columnid;               // returned column id
     JET_ERR         err;                    // returned error code
 } JET_COLUMNCREATE_A;
 
 typedef struct tag_JET_COLUMNCREATE_W
 {
-    unsigned long   cbStruct;               // size of this structure (for future expansion)
-    WCHAR           *szColumnName;          // column name
+    JET_UINT32      cbStruct;               // size of this structure (for future expansion)
+    JET_PWSTR       szColumnName;           // column name
     JET_COLTYP      coltyp;                 // column type
-    unsigned long   cbMax;                  // the maximum length of this column (only relevant for binary and text columns)
+    JET_UINT32      cbMax;                  // the maximum length of this column (only relevant for binary and text columns)
     JET_GRBIT       grbit;                  // column options
-    void            *pvDefault;             // default value (NULL if none)
-    unsigned long   cbDefault;              // length of default value
-    unsigned long   cp;                     // code page (for text columns only)
+    JET_PVOID       pvDefault;              // default value (NULL if none)
+    JET_UINT32      cbDefault;              // length of default value
+    JET_UINT32      cp;                     // code page (for text columns only).  Note that historically we don't use JET_CP for this,
+                                            //     although the value actually is a JET_CP.
     JET_COLUMNID    columnid;               // returned column id
     JET_ERR         err;                    // returned error code
 } JET_COLUMNCREATE_W;
@@ -490,18 +555,18 @@ typedef struct tag_JET_COLUMNCREATE_W
 
 typedef struct tag_JET_USERDEFINEDDEFAULT_A
 {
-    char * szCallback;
-    unsigned char * pbUserData;
-    unsigned long cbUserData;
-    char * szDependantColumns;
+    JET_PSTR     szCallback;
+    JET_BYTE *   pbUserData;
+    JET_UINT32   cbUserData;
+    JET_PSTR     szDependantColumns;
 } JET_USERDEFINEDDEFAULT_A;
 
 typedef struct tag_JET_USERDEFINEDDEFAULT_W
 {
-    WCHAR * szCallback;
-    unsigned char * pbUserData;
-    unsigned long cbUserData;
-    WCHAR * szDependantColumns;
+    JET_PWSTR    szCallback;
+    JET_BYTE *   pbUserData;
+    JET_UINT32   cbUserData;
+    JET_PWSTR    szDependantColumns;
 } JET_USERDEFINEDDEFAULT_W;
 
 #ifdef JET_UNICODE
@@ -514,15 +579,15 @@ typedef struct tag_JET_USERDEFINEDDEFAULT_W
 
 typedef struct tagJET_CONDITIONALCOLUMN_A
 {
-    unsigned long   cbStruct;               // size of this structure (for future expansion)
-    char            *szColumnName;          // column that we are conditionally indexed on
+    JET_UINT32      cbStruct;               // size of this structure (for future expansion)
+    JET_PSTR        szColumnName;           // column that we are conditionally indexed on
     JET_GRBIT       grbit;                  // conditional column options
 } JET_CONDITIONALCOLUMN_A;
 
 typedef struct tagJET_CONDITIONALCOLUMN_W
 {
-    unsigned long   cbStruct;               // size of this structure (for future expansion)
-    WCHAR           *szColumnName;          // column that we are conditionally indexed on
+    JET_UINT32      cbStruct;               // size of this structure (for future expansion)
+    JET_PWSTR       szColumnName;           // column that we are conditionally indexed on
     JET_GRBIT       grbit;                  // conditional column options
 } JET_CONDITIONALCOLUMN_W;
 
@@ -534,27 +599,27 @@ typedef struct tagJET_CONDITIONALCOLUMN_W
 
 typedef struct tagJET_UNICODEINDEX
 {
-    unsigned long   lcid;
-    unsigned long   dwMapFlags;
+    JET_LCID        lcid;
+    JET_UINT32      dwMapFlags;
 } JET_UNICODEINDEX;
 
 #if ( JET_VERSION >= 0x0602 )
 typedef struct tagJET_UNICODEINDEX2
 {
-    _Field_z_ WCHAR         *szLocaleName;
-    unsigned long   dwMapFlags;
+    _Field_z_ JET_PWSTR szLocaleName;
+    JET_UINT32          dwMapFlags;
 } JET_UNICODEINDEX2;
 #endif //JET_VERSION >= 0x0602
 
 #if ( JET_VERSION >= 0x0502 )
 typedef struct tagJET_TUPLELIMITS
 {
-    unsigned long   chLengthMin;
-    unsigned long   chLengthMax;
-    unsigned long   chToIndexMax;
+    JET_UINT32      chLengthMin;
+    JET_UINT32      chLengthMax;
+    JET_UINT32      chToIndexMax;
 #if ( JET_VERSION >= 0x0600 )
-    unsigned long   cchIncrement;
-    unsigned long   ichStart;
+    JET_UINT32      cchIncrement;
+    JET_UINT32      ichStart;
 #endif // JET_VERSION >= 0x0600
 } JET_TUPLELIMITS;
 #endif // JET_VERSION >= 0x0502
@@ -564,9 +629,9 @@ typedef struct tagJET_TUPLELIMITS
 //  table, index, or the internal long values tree.
 typedef struct tagJET_SPACEHINTS
 {
-    unsigned long       cbStruct;           //  size of this structure
-    unsigned long       ulInitialDensity;   //  density at (append) layout.
-    unsigned long       cbInitial;          //  initial size (in bytes).
+    JET_UINT32          cbStruct;           //  size of this structure
+    JET_UINT32          ulInitialDensity;   //  density at (append) layout.
+    JET_UINT32          cbInitial;          //  initial size (in bytes).
 
     JET_GRBIT           grbit;              //  Combination of one or more flags from
                                             //      JET_bitSpaceHints* flags
@@ -574,74 +639,74 @@ typedef struct tagJET_SPACEHINTS
                                             //      JET_bitRetrieveHints* flags
                                             //      JET_bitUpdateHints* flags
                                             //      JET_bitDeleteHints* flags
-    unsigned long       ulMaintDensity;     //  density to maintain at.
-    unsigned long       ulGrowth;           //  percent growth from:
+    JET_UINT32          ulMaintDensity;     //  density to maintain at.
+    JET_UINT32          ulGrowth;           //  percent growth from:
                                             //    last growth or initial size (possibly rounded to nearest native JET allocation size).
-    unsigned long       cbMinExtent;        //  This overrides ulGrowth if too small.
-    unsigned long       cbMaxExtent;        //  This caps ulGrowth.
+    JET_UINT32          cbMinExtent;        //  This overrides ulGrowth if too small.
+    JET_UINT32          cbMaxExtent;        //  This caps ulGrowth.
 } JET_SPACEHINTS;
 #endif // JET_VERSION >= 0x0601
 
 
 typedef struct tagJET_INDEXCREATE_A
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    char                    *szIndexName;           // index name
-    char                    *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PSTR                   szIndexName;         // index name
+    JET_PSTR                   szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
 
     union
     {
-        unsigned long       lcid;                   // lcid for the index (if JET_bitIndexUnicode NOT specified)
-        JET_UNICODEINDEX    *pidxunicode;           // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
+        JET_LCID               lcid;                // lcid for the index (if JET_bitIndexUnicode NOT specified)
+        JET_UNICODEINDEX *     pidxunicode;         // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
     };
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
 #if ( JET_VERSION >= 0x0502 )
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
 #endif // ! JET_VERSION >= 0x0502
     };
 
-    JET_CONDITIONALCOLUMN_A *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
+    JET_CONDITIONALCOLUMN_A *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
 #if ( JET_VERSION >= 0x0600 )
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
 #endif // JET_VERSION >= 0x0600
 } JET_INDEXCREATE_A;
 
 typedef struct tagJET_INDEXCREATE_W
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    WCHAR                   *szIndexName;           // index name
-    WCHAR                   *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PWSTR                  szIndexName;         // index name
+    JET_PWSTR                  szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
 
     union
     {
-        unsigned long       lcid;                   // lcid for the index (if JET_bitIndexUnicode NOT specified)
-        JET_UNICODEINDEX    *pidxunicode;           // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
+        JET_LCID               lcid;                // lcid for the index (if JET_bitIndexUnicode NOT specified)
+        JET_UNICODEINDEX *     pidxunicode;         // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
     };
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
 #if ( JET_VERSION >= 0x0502 )
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
 #endif // ! JET_VERSION >= 0x0502
     };
 
-    JET_CONDITIONALCOLUMN_W *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
+    JET_CONDITIONALCOLUMN_W *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
 #if ( JET_VERSION >= 0x0600 )
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
 #endif // JET_VERSION >= 0x0600
 } JET_INDEXCREATE_W;
 
@@ -655,58 +720,58 @@ typedef struct tagJET_INDEXCREATE_W
 
 typedef struct tagJET_INDEXCREATE2_A
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    char                    *szIndexName;           // index name
-    char                    *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PSTR                   szIndexName;         // index name
+    JET_PSTR                   szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
 
     union
     {
-        unsigned long       lcid;                   // lcid for the index (if JET_bitIndexUnicode NOT specified)
-        JET_UNICODEINDEX    *pidxunicode;           // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
+        JET_LCID               lcid;                // lcid for the index (if JET_bitIndexUnicode NOT specified)
+        JET_UNICODEINDEX *     pidxunicode;         // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
     };
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
     };
 
-    JET_CONDITIONALCOLUMN_A *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
-    JET_SPACEHINTS *        pSpacehints;            // space allocation, maintenance, and usage hints
+    JET_CONDITIONALCOLUMN_A *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_SPACEHINTS *           pSpacehints;         // space allocation, maintenance, and usage hints
 } JET_INDEXCREATE2_A;
 
 typedef struct tagJET_INDEXCREATE2_W
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    WCHAR                   *szIndexName;           // index name
-    WCHAR                   *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PWSTR                  szIndexName;         // index name
+    JET_PWSTR                  szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
 
     union
     {
-        unsigned long       lcid;                   // lcid for the index (if JET_bitIndexUnicode NOT specified)
-        JET_UNICODEINDEX    *pidxunicode;           // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
+        JET_LCID               lcid;                // lcid for the index (if JET_bitIndexUnicode NOT specified)
+        JET_UNICODEINDEX *     pidxunicode;         // pointer to JET_UNICODEINDEX struct (if JET_bitIndexUnicode specified)
     };
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
     };
 
-    JET_CONDITIONALCOLUMN_W *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
-    JET_SPACEHINTS *        pSpacehints;            // space allocation, maintenance, and usage hints
+    JET_CONDITIONALCOLUMN_W *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_SPACEHINTS *           pSpacehints;         // space allocation, maintenance, and usage hints
 } JET_INDEXCREATE2_W;
 
 #ifdef JET_UNICODE
@@ -720,48 +785,48 @@ typedef struct tagJET_INDEXCREATE2_W
 
 typedef struct tagJET_INDEXCREATE3_A
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    char                    *szIndexName;           // index name
-    char                    *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
-    JET_UNICODEINDEX2       *pidxunicode;           // pointer to JET_UNICODEINDEX2 struct (if JET_bitIndexUnicode specified)
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PSTR                   szIndexName;         // index name
+    JET_PSTR                   szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
+    JET_UNICODEINDEX2 *        pidxunicode;         // pointer to JET_UNICODEINDEX2 struct (if JET_bitIndexUnicode specified)
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
     };
 
-    JET_CONDITIONALCOLUMN_A *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
-    JET_SPACEHINTS *        pSpacehints;            // space allocation, maintenance, and usage hints
+    JET_CONDITIONALCOLUMN_A *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_SPACEHINTS *           pSpacehints;         // space allocation, maintenance, and usage hints
 } JET_INDEXCREATE3_A;
 
 typedef struct tagJET_INDEXCREATE3_W
 {
-    unsigned long           cbStruct;               // size of this structure (for future expansion)
-    WCHAR                   *szIndexName;           // index name
-    WCHAR                   *szKey;                 // index key definition
-    unsigned long           cbKey;                  // size of key definition in szKey
-    JET_GRBIT               grbit;                  // index options
-    unsigned long           ulDensity;              // index density
-    JET_UNICODEINDEX2       *pidxunicode;           // pointer to JET_UNICODEINDEX2 struct (if JET_bitIndexUnicode specified)
+    JET_UINT32                 cbStruct;            // size of this structure (for future expansion)
+    JET_PWSTR                  szIndexName;         // index name
+    JET_PWSTR                  szKey;               // index key definition
+    JET_UINT32                 cbKey;               // size of key definition in szKey
+    JET_GRBIT                  grbit;               // index options
+    JET_UINT32                 ulDensity;           // index density
+    JET_UNICODEINDEX2 *        pidxunicode;         // pointer to JET_UNICODEINDEX2 struct (if JET_bitIndexUnicode specified)
 
     union
     {
-        unsigned long       cbVarSegMac;            // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
-        JET_TUPLELIMITS     *ptuplelimits;          // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
+        JET_UINT32             cbVarSegMac;         // maximum length of variable length columns in index key (if JET_bitIndexTupleLimits not specified)
+        JET_TUPLELIMITS *      ptuplelimits;        // pointer to JET_TUPLELIMITS struct (if JET_bitIndexTupleLimits specified)
     };
 
-    JET_CONDITIONALCOLUMN_W *rgconditionalcolumn;   // pointer to conditional column structure
-    unsigned long           cConditionalColumn;     // number of conditional columns
-    JET_ERR                 err;                    // returned error code
-    unsigned long           cbKeyMost;              // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
-    JET_SPACEHINTS *        pSpacehints;            // space allocation, maintenance, and usage hints
+    JET_CONDITIONALCOLUMN_W *  rgconditionalcolumn; // pointer to conditional column structure
+    JET_UINT32                 cConditionalColumn;  // number of conditional columns
+    JET_ERR                    err;                 // returned error code
+    JET_UINT32                 cbKeyMost;           // size of key preserved in index, e.g. without truncation (if JET_bitIndexKeyMost specified)
+    JET_SPACEHINTS *           pSpacehints;         // space allocation, maintenance, and usage hints
 } JET_INDEXCREATE3_W;
 
 #ifdef JET_UNICODE
@@ -777,34 +842,34 @@ typedef struct tagJET_INDEXCREATE3_W
 
 typedef struct tagJET_TABLECREATE_A
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    char                *szTableName;           // name of table to create.
-    char                *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_A  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE_A       *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    JET_GRBIT           grbit;
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes).
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PSTR              szTableName;          // name of table to create.
+    JET_PSTR              szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_A *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE_A *   rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_GRBIT             grbit;
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes).
 } JET_TABLECREATE_A;
 
 typedef struct tagJET_TABLECREATE_W
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    WCHAR               *szTableName;           // name of table to create.
-    WCHAR               *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_W  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE_W       *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    JET_GRBIT           grbit;
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes).
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PWSTR             szTableName;          // name of table to create.
+    JET_PWSTR             szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_W *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE_W *   rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_GRBIT             grbit;
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes).
 } JET_TABLECREATE_W;
 
 #ifdef JET_UNICODE
@@ -816,38 +881,38 @@ typedef struct tagJET_TABLECREATE_W
 #if ( JET_VERSION >= 0x0501 )
 typedef struct tagJET_TABLECREATE2_A
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    char                *szTableName;           // name of table to create.
-    char                *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_A  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE_A   *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    char                *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PSTR              szTableName;          // name of table to create.
+    JET_PSTR              szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_A *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE_A *   rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PSTR              szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE2_A;
 
 typedef struct tagJET_TABLECREATE2_W
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    WCHAR               *szTableName;           // name of table to create.
-    WCHAR               *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_W  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE_W   *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    WCHAR               *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PWSTR             szTableName;          // name of table to create.
+    JET_PWSTR             szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_W *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE_W *   rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PWSTR             szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE2_W;
 
 #ifdef JET_UNICODE
@@ -862,45 +927,45 @@ typedef struct tagJET_TABLECREATE2_W
 #if ( JET_VERSION >= 0x0601 )
 typedef struct tagJET_TABLECREATE3_A
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    char                *szTableName;           // name of table to create.
-    char                *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_A  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE2_A  *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    char                *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_SPACEHINTS *    pSeqSpacehints;         // space allocation, maintenance, and usage hints for default sequential index
-    JET_SPACEHINTS *    pLVSpacehints;          // space allocation, maintenance, and usage hints for Separated LV tree.
-    unsigned long       cbSeparateLV;           // heuristic size to separate a intrinsic LV from the primary record
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PSTR              szTableName;          // name of table to create.
+    JET_PSTR              szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_A *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE2_A *  rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PSTR              szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_SPACEHINTS *      pSeqSpacehints;       // space allocation, maintenance, and usage hints for default sequential index
+    JET_SPACEHINTS *      pLVSpacehints;        // space allocation, maintenance, and usage hints for Separated LV tree.
+    JET_UINT32            cbSeparateLV;         // heuristic size to separate a intrinsic LV from the primary record
 
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE3_A;
 
 typedef struct tagJET_TABLECREATE3_W
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    WCHAR               *szTableName;           // name of table to create.
-    WCHAR               *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_W  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE2_W  *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    WCHAR               *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_SPACEHINTS *    pSeqSpacehints;         // space allocation, maintenance, and usage hints for default sequential index
-    JET_SPACEHINTS *    pLVSpacehints;          // space allocation, maintenance, and usage hints for Separated LV tree.
-    unsigned long       cbSeparateLV;           // heuristic size to separate a intrinsic LV from the primary record
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PWSTR             szTableName;          // name of table to create.
+    JET_PWSTR             szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_W *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE2_W *  rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PWSTR             szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_SPACEHINTS *      pSeqSpacehints;       // space allocation, maintenance, and usage hints for default sequential index
+    JET_SPACEHINTS *      pLVSpacehints;        // space allocation, maintenance, and usage hints for Separated LV tree.
+    JET_UINT32            cbSeparateLV;         // heuristic size to separate a intrinsic LV from the primary record
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE3_W;
 
 #ifdef JET_UNICODE
@@ -914,46 +979,46 @@ typedef struct tagJET_TABLECREATE3_W
 #if ( JET_VERSION >= 0x0602 )
 typedef struct tagJET_TABLECREATE4_A
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    char                *szTableName;           // name of table to create.
-    char                *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_A  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE3_A  *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    char                *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_SPACEHINTS *    pSeqSpacehints;         // space allocation, maintenance, and usage hints for default sequential index
-    JET_SPACEHINTS *    pLVSpacehints;          // space allocation, maintenance, and usage hints for Separated LV tree.
-    unsigned long       cbSeparateLV;           // heuristic size to separate a intrinsic LV from the primary record
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PSTR              szTableName;          // name of table to create.
+    JET_PSTR              szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_A *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE3_A *  rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PSTR              szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_SPACEHINTS *      pSeqSpacehints;       // space allocation, maintenance, and usage hints for default sequential index
+    JET_SPACEHINTS *      pLVSpacehints;        // space allocation, maintenance, and usage hints for Separated LV tree.
+    JET_UINT32            cbSeparateLV;         // heuristic size to separate a intrinsic LV from the primary record
 
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE4_A;
 
 typedef struct tagJET_TABLECREATE4_W
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    WCHAR               *szTableName;           // name of table to create.
-    WCHAR               *szTemplateTableName;   // name of table from which to inherit base DDL
-    unsigned long       ulPages;                // initial pages to allocate for table.
-    unsigned long       ulDensity;              // table density.
-    JET_COLUMNCREATE_W  *rgcolumncreate;        // array of column creation info
-    unsigned long       cColumns;               // number of columns to create
-    JET_INDEXCREATE3_W  *rgindexcreate;         // array of index creation info
-    unsigned long       cIndexes;               // number of indexes to create
-    WCHAR               *szCallback;            // callback to use for this table
-    JET_CBTYP           cbtyp;                  // when the callback should be called
-    JET_GRBIT           grbit;
-    JET_SPACEHINTS *    pSeqSpacehints;         // space allocation, maintenance, and usage hints for default sequential index
-    JET_SPACEHINTS *    pLVSpacehints;          // space allocation, maintenance, and usage hints for Separated LV tree.
-    unsigned long       cbSeparateLV;           // heuristic size to separate a intrinsic LV from the primary record
+    JET_UINT32            cbStruct;             // size of this structure (for future expansion)
+    JET_PWSTR             szTableName;          // name of table to create.
+    JET_PWSTR             szTemplateTableName;  // name of table from which to inherit base DDL
+    JET_UINT32            ulPages;              // initial pages to allocate for table.
+    JET_UINT32            ulDensity;            // table density.
+    JET_COLUMNCREATE_W *  rgcolumncreate;       // array of column creation info
+    JET_UINT32            cColumns;             // number of columns to create
+    JET_INDEXCREATE3_W *  rgindexcreate;        // array of index creation info
+    JET_UINT32            cIndexes;             // number of indexes to create
+    JET_PWSTR             szCallback;           // callback to use for this table
+    JET_CBTYP             cbtyp;                // when the callback should be called
+    JET_GRBIT             grbit;
+    JET_SPACEHINTS *      pSeqSpacehints;       // space allocation, maintenance, and usage hints for default sequential index
+    JET_SPACEHINTS *      pLVSpacehints;        // space allocation, maintenance, and usage hints for Separated LV tree.
+    JET_UINT32            cbSeparateLV;         // heuristic size to separate a intrinsic LV from the primary record
 
-    JET_TABLEID         tableid;                // returned tableid.
-    unsigned long       cCreated;               // count of objects created (columns+table+indexes+callbacks).
+    JET_TABLEID           tableid;              // returned tableid.
+    JET_UINT32            cCreated;             // count of objects created (columns+table+indexes+callbacks).
 } JET_TABLECREATE4_W;
 
 #ifdef JET_UNICODE
@@ -968,54 +1033,54 @@ typedef struct tagJET_TABLECREATE4_W
 #if ( JET_VERSION >= 0x0600 )
 typedef struct tagJET_OPENTEMPORARYTABLE
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    const JET_COLUMNDEF *prgcolumndef;
-    unsigned long       ccolumn;
-    JET_UNICODEINDEX    *pidxunicode;
-    JET_GRBIT           grbit;
-    JET_COLUMNID        *prgcolumnid;
-    unsigned long       cbKeyMost;
-    unsigned long       cbVarSegMac;
-    JET_TABLEID         tableid;
+    JET_UINT32             cbStruct;            // size of this structure (for future expansion)
+    const JET_COLUMNDEF *  prgcolumndef;
+    JET_UINT32             ccolumn;
+    JET_UNICODEINDEX *     pidxunicode;
+    JET_GRBIT              grbit;
+    JET_COLUMNID *         prgcolumnid;
+    JET_UINT32             cbKeyMost;
+    JET_UINT32             cbVarSegMac;
+    JET_TABLEID            tableid;
 } JET_OPENTEMPORARYTABLE;
 #endif // JET_VERSION >= 0x0600
 
 #if ( JET_VERSION >= 0x0602 )
 typedef struct tagJET_OPENTEMPORARYTABLE2
 {
-    unsigned long       cbStruct;               // size of this structure (for future expansion)
-    const JET_COLUMNDEF *prgcolumndef;
-    unsigned long       ccolumn;
-    JET_UNICODEINDEX2   *pidxunicode;
-    JET_GRBIT           grbit;
-    JET_COLUMNID        *prgcolumnid;
-    unsigned long       cbKeyMost;
-    unsigned long       cbVarSegMac;
-    JET_TABLEID         tableid;
+    JET_UINT32             cbStruct;            // size of this structure (for future expansion)
+    const JET_COLUMNDEF *  prgcolumndef;
+    JET_UINT32             ccolumn;
+    JET_UNICODEINDEX2 *    pidxunicode;
+    JET_GRBIT              grbit;
+    JET_COLUMNID *         prgcolumnid;
+    JET_UINT32             cbKeyMost;
+    JET_UINT32             cbVarSegMac;
+    JET_TABLEID            tableid;
 } JET_OPENTEMPORARYTABLE2;
 #endif // JET_VERSION >= 0x0602
 
 typedef struct
 {
-    unsigned long   cbStruct;
-    unsigned long   ibLongValue;
-    unsigned long   itagSequence;
+    JET_UINT32      cbStruct;
+    JET_UINT32      ibLongValue;
+    JET_UINT32      itagSequence;
     JET_COLUMNID    columnidNextTagged;
 } JET_RETINFO;
 
 typedef struct
 {
-    unsigned long   cbStruct;
-    unsigned long   ibLongValue;
-    unsigned long   itagSequence;
+    JET_UINT32      cbStruct;
+    JET_UINT32      ibLongValue;
+    JET_UINT32      itagSequence;
 } JET_SETINFO;
 
 typedef struct
 {
-    unsigned long   cbStruct;
-    unsigned long   centriesLT;
-    unsigned long   centriesInRange;
-    unsigned long   centriesTotal;
+    JET_UINT32      cbStruct;
+    JET_UINT32      centriesLT;
+    JET_UINT32      centriesInRange;
+    JET_UINT32      centriesTotal;
 } JET_RECPOS;
 
 // On input to JetGotoPosition, centriesLTDeprecated and centriesTotalDeprecated must be 0.
@@ -1023,25 +1088,25 @@ typedef struct
 // hold potentially truncated versions of centriesLT and centriesTotal.
 typedef struct
 {
-    unsigned long        cbStruct;
-    unsigned long        centriesLTDeprecated;
-    unsigned long        centriesInRangeDeprecated;
-    unsigned long        centriesTotalDeprecated;
-    unsigned long long   centriesLT;
-    unsigned long long   centriesTotal;
+    JET_UINT32           cbStruct;
+    JET_UINT32           centriesLTDeprecated;
+    JET_UINT32           centriesInRangeDeprecated;
+    JET_UINT32           centriesTotalDeprecated;
+    JET_UINT64           centriesLT;
+    JET_UINT64           centriesTotal;
 } JET_RECPOS2;
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_TABLEID     tableid;
-    unsigned long   cRecord;
+    JET_UINT32      cRecord;
     JET_COLUMNID    columnidBookmark;
 } JET_RECORDLIST;
 
 typedef struct
 {
-    unsigned long   cbStruct;
+    JET_UINT32      cbStruct;
     JET_TABLEID     tableid;
     JET_GRBIT       grbit;
 } JET_INDEXRANGE;
@@ -1067,50 +1132,50 @@ typedef struct
 {
     JET_COLUMNID    columnid;   //  columnid of the column
     JET_RELOP       relop;      //  relational operator
-    void *          pv;         //  pointer to the value to use
-    unsigned long   cb;         //  size of the value to use
+    JET_PVOID       pv;         //  pointer to the value to use
+    JET_UINT32      cb;         //  size of the value to use
     JET_GRBIT       grbit;      //  optional grbits
 } JET_INDEX_COLUMN;
 
 typedef struct
 {
     JET_INDEX_COLUMN *  rgStartColumns;
-    unsigned long       cStartColumns;
+    JET_UINT32          cStartColumns;
     JET_INDEX_COLUMN *  rgEndColumns;
-    unsigned long       cEndColumns;
+    JET_UINT32          cEndColumns;
 } JET_INDEX_RANGE;
 #endif  //  JET_VERSION >= 0x0602
 
 
 
-#include <pshpack1.h>
+#pragma pack(push,1)
 #define JET_MAX_COMPUTERNAME_LENGTH 15
 
 typedef struct
 {
-    char        bSeconds;               //  0 - 59
-    char        bMinutes;               //  0 - 59
-    char        bHours;                 //  0 - 23
-    char        bDay;                   //  1 - 31
-    char        bMonth;                 //  1 - 12
-    char        bYear;                  //  current year - 1900
+    JET_INT8    bSeconds;               //  0 - 59
+    JET_INT8    bMinutes;               //  0 - 59
+    JET_INT8    bHours;                 //  0 - 23
+    JET_INT8    bDay;                   //  1 - 31
+    JET_INT8    bMonth;                 //  1 - 12
+    JET_INT8    bYear;                  //  current year - 1900
     union
     {
-        char        bFiller1;
+        JET_BYTE    bFiller1;
         struct
         {
-            unsigned char fTimeIsUTC:1;
-            unsigned char bMillisecondsLow:7;
+            JET_BYTE      fTimeIsUTC:1;
+            JET_BYTE      bMillisecondsLow:7;
         };
     };
     union
     {
-        char        bFiller2;
+        JET_BYTE    bFiller2;
         struct
         {
-            unsigned char fReserved:1;
-            unsigned char bMillisecondsHigh:3;
-            unsigned char fUnused:4;
+            JET_BYTE      fReserved:1;
+            JET_BYTE      bMillisecondsHigh:3;
+            JET_BYTE      fUnused:4;
         };
     };
 } JET_LOGTIME;
@@ -1121,29 +1186,29 @@ typedef struct
 // compatibility reasons
 typedef struct
 {
-    char        bSeconds;               //  0 - 59
-    char        bMinutes;               //  0 - 59
-    char        bHours;                 //  0 - 23
-    char        bDay;                   //  1 - 31
-    char        bMonth;                 //  1 - 12
-    char        bYear;                  //  current year - 1900
+    JET_INT8    bSeconds;               //  0 - 59
+    JET_INT8    bMinutes;               //  0 - 59
+    JET_INT8    bHours;                 //  0 - 23
+    JET_INT8    bDay;                   //  1 - 31
+    JET_INT8    bMonth;                 //  1 - 12
+    JET_INT8    bYear;                  //  current year - 1900
     union
     {
-        char        bFiller1;
+        JET_BYTE    bFiller1;
         struct
         {
-            unsigned char fTimeIsUTC:1;
-            unsigned char bMillisecondsLow:7;
+            JET_BYTE      fTimeIsUTC:1;
+            JET_BYTE      bMillisecondsLow:7;
         };
     };
     union
     {
-        char        bFiller2;
+        JET_BYTE    bFiller2;
         struct
         {
-            unsigned char fOSSnapshot:1;
-            unsigned char bMillisecondsHigh:3;
-            unsigned char fReserved:4;
+            JET_BYTE      fOSSnapshot:1;
+            JET_BYTE      bMillisecondsHigh:3;
+            JET_BYTE      fReserved:4;
         };
     };
 } JET_BKLOGTIME;
@@ -1151,16 +1216,16 @@ typedef struct
 
 typedef struct
 {
-    unsigned short  ib;             // must be the last so that lgpos can
-    unsigned short  isec;           // index of disksec starting logsec
-    long            lGeneration;    // generation of logsec
+    JET_UINT16      ib;             // must be the last so that lgpos can
+    JET_UINT16      isec;           // index of disksec starting logsec
+    JET_INT32       lGeneration;    // generation of logsec
 } JET_LGPOS;                    // be casted to TIME.
 
 typedef struct
 {
-    unsigned long   ulRandom;           //  a random number
+    JET_UINT32      ulRandom;           //  a random number
     JET_LOGTIME     logtimeCreate;      //  time db created, in logtime format
-    char            szComputerName[ JET_MAX_COMPUTERNAME_LENGTH + 1 ];  // where db is created
+    JET_CHAR        szComputerName[ JET_MAX_COMPUTERNAME_LENGTH + 1 ];  // where db is created
 } JET_SIGNATURE;
 
 typedef struct
@@ -1173,19 +1238,19 @@ typedef struct
         JET_BKLOGTIME   bklogtimeMark;
 #endif // JET_VERSION >= 0x0600
     };
-    unsigned long   genLow;
-    unsigned long   genHigh;
+    JET_UINT32      genLow;
+    JET_UINT32      genHigh;
 } JET_BKINFO;
 
-#include <poppack.h>
+#pragma pack(pop)
 
 typedef struct
 {
-    unsigned long   ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
-    unsigned long   ulUpdate;       //  used to track incremental database format "update (major)" version from the
+    JET_UINT32      ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
+    JET_UINT32      ulUpdate;       //  used to track incremental database format "update (major)" version from the
                                     //  last attach/create that is a backward-compatible major update.
     JET_SIGNATURE   signDb;         //  (28 bytes) signature of the db (incl. creation time).
-    unsigned long   dbstate;        //  consistent/inconsistent state
+    JET_UINT32      dbstate;        //  consistent/inconsistent state
 
     JET_LGPOS       lgposConsistent;    //  null if in inconsistent state
     JET_LOGTIME     logtimeConsistent;  // null if in inconsistent state
@@ -1204,29 +1269,29 @@ typedef struct
                                     //  Reset when bkinfoFullPrev is set
     JET_BKINFO      bkinfoFullCur;  //  current backup. Succeed if a
                                     //  corresponding pat file generated.
-    unsigned long   fShadowingDisabled;
-    unsigned long   fUpgradeDb;
+    JET_UINT32      fShadowingDisabled;
+    JET_UINT32      fUpgradeDb;
 
     //  NT version information. This is needed to decide if an index need
     //  be recreated due to sort table changes.
 
-    unsigned long   dwMajorVersion;     /*  OS version info                             */
-    unsigned long   dwMinorVersion;
-    unsigned long   dwBuildNumber;
-    long            lSPNumber;
+    JET_UINT32      dwMajorVersion;     //  OS version info
+    JET_UINT32      dwMinorVersion;
+    JET_UINT32      dwBuildNumber;
+    JET_INT32       lSPNumber;
 
-    unsigned long   cbPageSize;         //  database page size (0 = 4k pages)
+    JET_UINT32      cbPageSize;         //  database page size (0 = 4k pages)
 
 } JET_DBINFOMISC;
 
 #if ( JET_VERSION >= 0x0600 )
 typedef struct
 {
-    unsigned long   ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
-    unsigned long   ulUpdate;       //  used to track incremental database format "update (major)" version from the
+    JET_UINT32      ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
+    JET_UINT32      ulUpdate;       //  used to track incremental database format "update (major)" version from the
                                     //  last attach/create that is a backward-compatible major update.
     JET_SIGNATURE   signDb;         //  (28 bytes) signature of the db (incl. creation time).
-    unsigned long   dbstate;        //  consistent/inconsistent state
+    JET_UINT32      dbstate;        //  consistent/inconsistent state
 
     JET_LGPOS       lgposConsistent;    //  null if in inconsistent state
     JET_LOGTIME     logtimeConsistent;  // null if in inconsistent state
@@ -1245,39 +1310,39 @@ typedef struct
                                     //  Reset when bkinfoFullPrev is set
     JET_BKINFO      bkinfoFullCur;  //  current backup. Succeed if a
                                     //  corresponding pat file generated.
-    unsigned long   fShadowingDisabled;
-    unsigned long   fUpgradeDb;
+    JET_UINT32      fShadowingDisabled;
+    JET_UINT32      fUpgradeDb;
 
     //  NT version information. This is needed to decide if an index need
     //  be recreated due to sort table changes.
 
-    unsigned long   dwMajorVersion;     /*  OS version info                             */
-    unsigned long   dwMinorVersion;
-    unsigned long   dwBuildNumber;
-    long            lSPNumber;
+    JET_UINT32      dwMajorVersion;     //  OS version info                            
+    JET_UINT32      dwMinorVersion;
+    JET_UINT32      dwBuildNumber;
+    JET_INT32       lSPNumber;
 
-    unsigned long   cbPageSize;         //  database page size (0 = 4k pages)
+    JET_UINT32      cbPageSize;         //  database page size (0 = 4k pages)
 
     // new fields added on top of the above JET_DBINFOMISC
-    unsigned long   genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
-    unsigned long   genMaxRequired;         //  the maximum log generation required for replaying the logs.
+    JET_UINT32      genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
+    JET_UINT32      genMaxRequired;         //  the maximum log generation required for replaying the logs.
     JET_LOGTIME     logtimeGenMaxCreate;    //  creation time of the genMax log file
 
-    unsigned long   ulRepairCount;          //  number of times repair has been called on this database
+    JET_UINT32      ulRepairCount;          //  number of times repair has been called on this database
     JET_LOGTIME     logtimeRepair;          //  the date of the last time that repair was run
-    unsigned long   ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
+    JET_UINT32      ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
 
-    unsigned long   ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
+    JET_UINT32      ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
     JET_LOGTIME     logtimeECCFixSuccess;   //  the date of the last time that a one bit error was fixed and resulted in a good page
-    unsigned long   ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
+    JET_UINT32      ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
 
-    unsigned long   ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
+    JET_UINT32      ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
     JET_LOGTIME     logtimeECCFixFail;      //  the date of the last time that a one bit error was fixed and resulted in a bad page
-    unsigned long   ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
+    JET_UINT32      ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
 
-    unsigned long   ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
+    JET_UINT32      ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
     JET_LOGTIME     logtimeBadChecksum;     //  the date of the last time that a non-correctable ECC/checksum error was found
-    unsigned long   ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
+    JET_UINT32      ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
 
 } JET_DBINFOMISC2;
 #endif // JET_VERSION >= 0x0600
@@ -1285,11 +1350,11 @@ typedef struct
 #if ( JET_VERSION >= 0x0601 )
 typedef struct
 {
-    unsigned long   ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
-    unsigned long   ulUpdate;       //  used to track incremental database format "update (major)" version from the
+    JET_UINT32      ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
+    JET_UINT32      ulUpdate;       //  used to track incremental database format "update (major)" version from the
                                     //  last attach/create that is a backward-compatible major update.
     JET_SIGNATURE   signDb;         //  (28 bytes) signature of the db (incl. creation time).
-    unsigned long   dbstate;        //  consistent/inconsistent state
+    JET_UINT32      dbstate;        //  consistent/inconsistent state
 
     JET_LGPOS       lgposConsistent;    //  null if in inconsistent state
     JET_LOGTIME     logtimeConsistent;  // null if in inconsistent state
@@ -1308,52 +1373,52 @@ typedef struct
                                     //  Reset when bkinfoFullPrev is set
     JET_BKINFO      bkinfoFullCur;  //  current backup. Succeed if a
                                     //  corresponding pat file generated.
-    unsigned long   fShadowingDisabled;
-    unsigned long   fUpgradeDb;
+    JET_UINT32      fShadowingDisabled;
+    JET_UINT32      fUpgradeDb;
 
     //  NT version information. This is needed to decide if an index need
     //  be recreated due to sort table changes.
 
-    unsigned long   dwMajorVersion;     /*  OS version info                             */
-    unsigned long   dwMinorVersion;
-    unsigned long   dwBuildNumber;
-    long            lSPNumber;
+    JET_UINT32      dwMajorVersion;     //  OS version info                            
+    JET_UINT32      dwMinorVersion;
+    JET_UINT32      dwBuildNumber;
+    JET_INT32       lSPNumber;
 
-    unsigned long   cbPageSize;         //  database page size (0 = 4k pages)
+    JET_UINT32      cbPageSize;         //  database page size (0 = 4k pages)
 
     // new fields added on top of the above JET_DBINFOMISC
-    unsigned long   genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
-    unsigned long   genMaxRequired;         //  the maximum log generation required for replaying the logs.
+    JET_UINT32      genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
+    JET_UINT32      genMaxRequired;         //  the maximum log generation required for replaying the logs.
     JET_LOGTIME     logtimeGenMaxCreate;    //  creation time of the genMax log file
 
-    unsigned long   ulRepairCount;          //  number of times repair has been called on this database
+    JET_UINT32      ulRepairCount;          //  number of times repair has been called on this database
     JET_LOGTIME     logtimeRepair;          //  the date of the last time that repair was run
-    unsigned long   ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
+    JET_UINT32      ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
 
-    unsigned long   ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
+    JET_UINT32      ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
     JET_LOGTIME     logtimeECCFixSuccess;   //  the date of the last time that a one bit error was fixed and resulted in a good page
-    unsigned long   ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
+    JET_UINT32      ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
 
-    unsigned long   ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
+    JET_UINT32      ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
     JET_LOGTIME     logtimeECCFixFail;      //  the date of the last time that a one bit error was fixed and resulted in a bad page
-    unsigned long   ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
+    JET_UINT32      ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
 
-    unsigned long   ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
+    JET_UINT32      ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
     JET_LOGTIME     logtimeBadChecksum;     //  the date of the last time that a non-correctable ECC/checksum error was found
-    unsigned long   ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
+    JET_UINT32      ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
 
     // new fields added on top of the above JET_DBINFOMISC2
-    unsigned long   genCommitted;           //  the maximum log generation committed to the database. Typically the current log generation
+    JET_UINT32      genCommitted;           //  the maximum log generation committed to the database. Typically the current log generation
 
 } JET_DBINFOMISC3;
 
 typedef struct
 {
-    unsigned long   ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
-    unsigned long   ulUpdate;       //  used to track incremental database format "update (major)" version from the
+    JET_UINT32      ulVersion;      //  the major (incompatible) version of DAE from the last engine attach/create.
+    JET_UINT32      ulUpdate;       //  used to track incremental database format "update (major)" version from the
                                     //  last attach/create that is a backward-compatible major update.
     JET_SIGNATURE   signDb;         //  (28 bytes) signature of the db (incl. creation time).
-    unsigned long   dbstate;        //  consistent/inconsistent state
+    JET_UINT32      dbstate;        //  consistent/inconsistent state
 
     JET_LGPOS       lgposConsistent;    //  null if in inconsistent state
     JET_LOGTIME     logtimeConsistent;  // null if in inconsistent state
@@ -1372,42 +1437,42 @@ typedef struct
                                     //  Reset when bkinfoFullPrev is set
     JET_BKINFO      bkinfoFullCur;  //  current backup. Succeed if a
                                     //  corresponding pat file generated.
-    unsigned long   fShadowingDisabled;
-    unsigned long   fUpgradeDb;
+    JET_UINT32      fShadowingDisabled;
+    JET_UINT32      fUpgradeDb;
 
     //  NT version information. This is needed to decide if an index need
     //  be recreated due to sort table changes.
 
-    unsigned long   dwMajorVersion;     /*  OS version info                             */
-    unsigned long   dwMinorVersion;
-    unsigned long   dwBuildNumber;
-    long            lSPNumber;
+    JET_UINT32      dwMajorVersion;     //  OS version info                            
+    JET_UINT32      dwMinorVersion;
+    JET_UINT32      dwBuildNumber;
+    JET_INT32       lSPNumber;
 
-    unsigned long   cbPageSize;         //  database page size (0 = 4k pages)
+    JET_UINT32      cbPageSize;         //  database page size (0 = 4k pages)
 
     // new fields added on top of the above JET_DBINFOMISC
-    unsigned long   genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
-    unsigned long   genMaxRequired;         //  the maximum log generation required for replaying the logs.
+    JET_UINT32      genMinRequired;         //  the minimum log generation required for replaying the logs. Typically the checkpoint generation
+    JET_UINT32      genMaxRequired;         //  the maximum log generation required for replaying the logs.
     JET_LOGTIME     logtimeGenMaxCreate;    //  creation time of the genMax log file
 
-    unsigned long   ulRepairCount;          //  number of times repair has been called on this database
+    JET_UINT32      ulRepairCount;          //  number of times repair has been called on this database
     JET_LOGTIME     logtimeRepair;          //  the date of the last time that repair was run
-    unsigned long   ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
+    JET_UINT32      ulRepairCountOld;       //  number of times ErrREPAIRAttachForRepair has been called on this database before the last defrag
 
-    unsigned long   ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
+    JET_UINT32      ulECCFixSuccess;        //  number of times a one bit error was fixed and resulted in a good page
     JET_LOGTIME     logtimeECCFixSuccess;   //  the date of the last time that a one bit error was fixed and resulted in a good page
-    unsigned long   ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
+    JET_UINT32      ulECCFixSuccessOld;     //  number of times a one bit error was fixed and resulted in a good page before last repair
 
-    unsigned long   ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
+    JET_UINT32      ulECCFixFail;           //  number of times a one bit error was fixed and resulted in a bad page
     JET_LOGTIME     logtimeECCFixFail;      //  the date of the last time that a one bit error was fixed and resulted in a bad page
-    unsigned long   ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
+    JET_UINT32      ulECCFixFailOld;        //  number of times a one bit error was fixed and resulted in a bad page before last repair
 
-    unsigned long   ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
+    JET_UINT32      ulBadChecksum;          //  number of times a non-correctable ECC/checksum error was found
     JET_LOGTIME     logtimeBadChecksum;     //  the date of the last time that a non-correctable ECC/checksum error was found
-    unsigned long   ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
+    JET_UINT32      ulBadChecksumOld;       //  number of times a non-correctable ECC/checksum error was found before last repair
 
     // new fields added on top of the above JET_DBINFOMISC2
-    unsigned long   genCommitted;           //  the maximum log generation committed to the database. Typically the current log generation
+    JET_UINT32      genCommitted;           //  the maximum log generation committed to the database. Typically the current log generation
 
     // new fields added on top of the above JET_DBINFOMISC3
     JET_BKINFO  bkinfoCopyPrev;         //  Last successful Copy backup
@@ -1420,14 +1485,14 @@ typedef struct
 //
 struct JET_THREADSTATS
 {
-    unsigned long   cbStruct;           //  size of this struct
-    unsigned long   cPageReferenced;    //  pages referenced
-    unsigned long   cPageRead;          //  pages read from disk
-    unsigned long   cPagePreread;       //  pages preread from disk
-    unsigned long   cPageDirtied;       //  clean pages modified
-    unsigned long   cPageRedirtied;     //  dirty pages modified
-    unsigned long   cLogRecord;         //  log records generated
-    unsigned long   cbLogRecord;        //  log record bytes generated
+    JET_UINT32      cbStruct;           //  size of this struct
+    JET_UINT32      cPageReferenced;    //  pages referenced
+    JET_UINT32      cPageRead;          //  pages read from disk
+    JET_UINT32      cPagePreread;       //  pages preread from disk
+    JET_UINT32      cPageDirtied;       //  clean pages modified
+    JET_UINT32      cPageRedirtied;     //  dirty pages modified
+    JET_UINT32      cLogRecord;         //  log records generated
+    JET_UINT32      cbLogRecord;        //  log record bytes generated
 };
 #endif // JET_VERSION >= 0x0600
 
@@ -1436,16 +1501,16 @@ struct JET_THREADSTATS
 //
 struct JET_THREADSTATS2
 {
-    unsigned long       cbStruct;               //  size of this struct
-    unsigned long       cPageReferenced;        //  pages referenced
-    unsigned long       cPageRead;              //  pages read from disk
-    unsigned long       cPagePreread;           //  pages preread from disk
-    unsigned long       cPageDirtied;           //  clean pages modified
-    unsigned long       cPageRedirtied;         //  dirty pages modified
-    unsigned long       cLogRecord;             //  log records generated
-    unsigned long       cbLogRecord;            //  log record bytes generated
-    unsigned __int64    cusecPageCacheMiss;     //  page cache miss latency in microseconds
-    unsigned long       cPageCacheMiss;         //  page cache misses
+    JET_UINT32          cbStruct;               //  size of this struct
+    JET_UINT32          cPageReferenced;        //  pages referenced
+    JET_UINT32          cPageRead;              //  pages read from disk
+    JET_UINT32          cPagePreread;           //  pages preread from disk
+    JET_UINT32          cPageDirtied;           //  clean pages modified
+    JET_UINT32          cPageRedirtied;         //  dirty pages modified
+    JET_UINT32          cLogRecord;             //  log records generated
+    JET_UINT32          cbLogRecord;            //  log record bytes generated
+    JET_UINT64          cusecPageCacheMiss;     //  page cache miss latency in microseconds
+    JET_UINT32          cPageCacheMiss;         //  page cache misses
 };
 #endif // JET_VERSION >= 0x0A00
 
@@ -1454,19 +1519,19 @@ struct JET_THREADSTATS2
 //
 struct JET_THREADSTATS3
 {
-    unsigned long       cbStruct;                       //  size of this struct
-    unsigned long       cPageReferenced;                //  pages referenced
-    unsigned long       cPageRead;                      //  pages read from disk
-    unsigned long       cPagePreread;                   //  pages preread from disk
-    unsigned long       cPageDirtied;                   //  clean pages modified
-    unsigned long       cPageRedirtied;                 //  dirty pages modified
-    unsigned long       cLogRecord;                     //  log records generated
-    unsigned long       cbLogRecord;                    //  log record bytes generated
-    unsigned __int64    cusecPageCacheMiss;             //  page cache miss latency in microseconds
-    unsigned long       cPageCacheMiss;                 //  page cache misses
-    unsigned long       cSeparatedLongValueRead;        //  separated LV reads
-    unsigned __int64    cusecLongValuePageCacheMiss;    //  page cache miss latency in microseconds while reading separated LV data
-    unsigned long       cLongValuePageCacheMiss;        //  page cache misses while reading separated LV data
+    JET_UINT32          cbStruct;                       //  size of this struct
+    JET_UINT32          cPageReferenced;                //  pages referenced
+    JET_UINT32          cPageRead;                      //  pages read from disk
+    JET_UINT32          cPagePreread;                   //  pages preread from disk
+    JET_UINT32          cPageDirtied;                   //  clean pages modified
+    JET_UINT32          cPageRedirtied;                 //  dirty pages modified
+    JET_UINT32          cLogRecord;                     //  log records generated
+    JET_UINT32          cbLogRecord;                    //  log record bytes generated
+    JET_UINT64          cusecPageCacheMiss;             //  page cache miss latency in microseconds
+    JET_UINT32          cPageCacheMiss;                 //  page cache misses
+    JET_UINT32          cSeparatedLongValueRead;        //  separated LV reads
+    JET_UINT64          cusecLongValuePageCacheMiss;    //  page cache miss latency in microseconds while reading separated LV data
+    JET_UINT32          cLongValuePageCacheMiss;        //  page cache misses while reading separated LV data
 };
 #endif // JET_VERSION >= 0x0A01
 
@@ -1474,10 +1539,10 @@ struct JET_THREADSTATS3
 
 typedef struct
 {
-    unsigned long           cbStruct;
+    JET_UINT32              cbStruct;
 
     JET_RSTMAP_A *          rgrstmap;
-    long                    crstmap;
+    JET_INT32               crstmap;
 
     JET_LGPOS               lgposStop;
     JET_LOGTIME             logtimeStop;
@@ -1487,10 +1552,10 @@ typedef struct
 
 typedef struct
 {
-    unsigned long           cbStruct;
+    JET_UINT32              cbStruct;
 
     JET_RSTMAP_W *          rgrstmap;
-    long                    crstmap;
+    JET_INT32               crstmap;
 
     JET_LGPOS               lgposStop;
     JET_LOGTIME             logtimeStop;
@@ -1635,12 +1700,12 @@ typedef enum
 // be populated by all error levels.
 typedef struct
 {
-    unsigned long       cbStruct;
+    JET_UINT32          cbStruct;
     JET_ERR             errValue;                   //  The error value for the requested info level.
     JET_ERRCAT          errcatMostSpecific;         //  The most specific category of the error.
-    unsigned char       rgCategoricalHierarchy[8];  //  Hierarchy of error categories. Position 0 is the highest level in the hierarchy, and the rest are JET_errcatUnknown.
-    unsigned long       lSourceLine;                //  The source file line for the requested info level.
-    WCHAR               rgszSourceFile[64];         //  The source file name for the requested info level.
+    JET_BYTE            rgCategoricalHierarchy[8];  //  Hierarchy of error categories. Position 0 is the highest level in the hierarchy, and the rest are JET_errcatUnknown.
+    JET_UINT32          lSourceLine;                //  The source file line for the requested info level.
+    JET_WCHAR           rgszSourceFile[64];         //  The source file name for the requested info level.
 } JET_ERRINFOBASIC_W;
 
 // grbits for JET_PFNDURABLECOMMITCALLBACK
@@ -1652,18 +1717,18 @@ typedef struct
 typedef struct
 {
     JET_SIGNATURE   signLog;
-    int             reserved; // for packing so int64 below is 8-byte aligned on 32-bits despite the pshpack4 above
-    __int64         commitId;
+    JET_INT32       reserved; // for packing so int64 below is 8-byte aligned on 32-bits despite the pshpack4 above
+    JET_INT64       commitId;
 } JET_COMMIT_ID;
 
 // assert that commit-id is 8-byte aligned so managed interop works correctly
-// C_ASSERT( offsetof( JET_COMMIT_ID, commitId ) % 8 == 0 );
+// static_assert( offsetof( JET_COMMIT_ID, commitId ) % 8 == 0 );
 
 // callback for JET_paramDurableCommitCallback
-typedef JET_ERR (JET_API *JET_PFNDURABLECOMMITCALLBACK)(
-    _In_ JET_INSTANCE   instance,
-    _In_ JET_COMMIT_ID *pCommitIdSeen,
-    _In_ JET_GRBIT      grbit );
+typedef JET_ERR (JET_API * JET_PFNDURABLECOMMITCALLBACK)(
+    _In_ JET_INSTANCE     instance,
+    _In_ JET_COMMIT_ID *  pCommitIdSeen,
+    _In_ JET_GRBIT        grbit );
 
 #endif // JET_VERSION >= 0x0602
 
@@ -2088,7 +2153,6 @@ typedef enum
 
 // Parameters added in Windows 8.
 #if ( JET_VERSION >= 0x0602 )
-// System parameter 185 is reserved.
 #define JET_paramProcessFriendlyName            186 //  Friendly name for this instance of the process (e.g. performance counter global instance name, event logs).
 #define JET_paramDurableCommitCallback          187 //  callback for when log is flushed
 #endif // JET_VERSION >= 0x0602
@@ -2106,6 +2170,7 @@ typedef enum
 
 #endif // JET_VERSION >= 0x0A00
 
+#define JET_paramEngineFormatVersion            194 //  Engine format version - specifies the maximum format version the engine should allow, ensuring no format features are used beyond this (allowing the DB / logs to be forward compatible).
 #if ( JET_VERSION >= 0x0A01 )
 #define JET_paramUseFlushForWriteDurability     214 //  This controls whether ESE uses Flush or FUA to make sure a write to disk is durable.
 
@@ -2114,10 +2179,12 @@ typedef enum
 
 #define JET_paramPerfmonRefreshInterval         217 //  Interval, in units of msec, used by the Permormance Monitor to refresh values for collection.
 
+#define JET_paramEnableBlockCache               218 //  Indicates that the ESE Block Cache is enabled.  This is sufficient to access files previously attached to the ESE Block Cache but not to attach new files.
+
 #endif // JET_VERSION >= 0x0A01
 
-
-#define JET_paramMaxValueInvalid                218 //  This is not a valid parameter. It can change from release to release!
+#define JET_paramTraceFlags                                     223 // Specific flags to include in IO traces indicating various info
+#define JET_paramMaxValueInvalid                                232 //  This is not a valid parameter. It can change from release to release!
 
 
 
@@ -2134,11 +2201,11 @@ typedef enum
 
 typedef struct
 {
-    unsigned long   ulUserID;
-    unsigned char   nOperationID;
-    unsigned char   nOperationType;
-    unsigned char   nClientType;
-    unsigned char   fFlags;
+    JET_UINT32      ulUserID;
+    JET_BYTE        nOperationID;
+    JET_BYTE        nOperationType;
+    JET_BYTE        nClientType;
+    JET_BYTE        fFlags;
 } JET_OPERATIONCONTEXT;
 #endif // JET_VERSION >= 0x0A00
 
@@ -2402,7 +2469,6 @@ typedef struct
 #define JET_bitIndexImmutableStructure  0x00080000  // Do not write to the input structures during a JetCreateIndexN call.
 #endif // JET_VERSION >= 0x0A00
 
-
     /* Flags for index key definition */
 
 #define JET_bitKeyAscending             0x00000000
@@ -2420,23 +2486,23 @@ typedef struct
 #define JET_bitTableOpportuneRead       0x00000080  /*  attempt to opportunely read physically adjacent leaf pages using larger physical IOs */
 #define JET_bitTableSequential          0x00008000  /*  assume the table will be scanned sequentially */
 
-#define JET_bitTableClassMask       0x001F0000  /*  table stats class mask  */
-#define JET_bitTableClassNone       0x00000000  /*  table belongs to no stats class (default)  */
-#define JET_bitTableClass1          0x00010000  /*  table belongs to stats class 1  */
-#define JET_bitTableClass2          0x00020000  /*  table belongs to stats class 2  */
-#define JET_bitTableClass3          0x00030000  /*  table belongs to stats class 3  */
-#define JET_bitTableClass4          0x00040000  /*  table belongs to stats class 4  */
-#define JET_bitTableClass5          0x00050000  /*  table belongs to stats class 5  */
-#define JET_bitTableClass6          0x00060000  /*  table belongs to stats class 6  */
-#define JET_bitTableClass7          0x00070000  /*  table belongs to stats class 7  */
-#define JET_bitTableClass8          0x00080000  /*  table belongs to stats class 8  */
-#define JET_bitTableClass9          0x00090000  /*  table belongs to stats class 9  */
-#define JET_bitTableClass10         0x000A0000  /*  table belongs to stats class 10  */
-#define JET_bitTableClass11         0x000B0000  /*  table belongs to stats class 11  */
-#define JET_bitTableClass12         0x000C0000  /*  table belongs to stats class 12  */
-#define JET_bitTableClass13         0x000D0000  /*  table belongs to stats class 13  */
-#define JET_bitTableClass14         0x000E0000  /*  table belongs to stats class 14  */
-#define JET_bitTableClass15         0x000F0000  /*  table belongs to stats class 15  */
+#define JET_bitTableClassMask       0x001F0000  /*  table stats class mask */
+#define JET_bitTableClassNone       0x00000000  /*  table belongs to no stats class (default) */
+#define JET_bitTableClass1          0x00010000  /*  table belongs to stats class 1 */
+#define JET_bitTableClass2          0x00020000  /*  table belongs to stats class 2 */
+#define JET_bitTableClass3          0x00030000  /*  table belongs to stats class 3 */
+#define JET_bitTableClass4          0x00040000  /*  table belongs to stats class 4 */
+#define JET_bitTableClass5          0x00050000  /*  table belongs to stats class 5 */
+#define JET_bitTableClass6          0x00060000  /*  table belongs to stats class 6 */
+#define JET_bitTableClass7          0x00070000  /*  table belongs to stats class 7 */
+#define JET_bitTableClass8          0x00080000  /*  table belongs to stats class 8 */
+#define JET_bitTableClass9          0x00090000  /*  table belongs to stats class 9 */
+#define JET_bitTableClass10         0x000A0000  /*  table belongs to stats class 10 */
+#define JET_bitTableClass11         0x000B0000  /*  table belongs to stats class 11 */
+#define JET_bitTableClass12         0x000C0000  /*  table belongs to stats class 12 */
+#define JET_bitTableClass13         0x000D0000  /*  table belongs to stats class 13 */
+#define JET_bitTableClass14         0x000E0000  /*  table belongs to stats class 14 */
+#define JET_bitTableClass15         0x000F0000  /*  table belongs to stats class 15 */
 
 
 #if ( JET_VERSION >= 0x0501 )
@@ -2477,7 +2543,11 @@ typedef struct
 #endif // JET_VERSION >= 0x0601
 #if ( JET_VERSION >= 0x0602 )
 #define JET_bitTTDotNetGuid         0x00000100  //  sort all JET_coltypGUID columns according to .Net Guid sort order
-#endif // JET_VERSION >= 0x0601
+#endif // JET_VERSION >= 0x0602
+#if ( JET_VERSION >= 0x0A01 )
+#define JET_bitTTMaterializeBBT     0x00000200  // The temp table uses the Buffered BTree format when it is materialized
+#endif // JET_VERSION >= 0x0A01
+// begin_PubEsent
 
 
     /* Flags for JetSetColumn */
@@ -2503,7 +2573,7 @@ typedef struct
 
 
 #if ( JET_VERSION >= 0x0601 )
-    /*  Space Hint Flags / JET_SPACEHINTS   */
+    /*  Space Hint Flags / JET_SPACEHINTS */
 
 //  Generic
 #define JET_bitSpaceHintsUtilizeParentSpace         0x00000001  //  This changes the internal allocation policy to get space hierarchically from a B-Tree's immediate parent.
@@ -2531,28 +2601,28 @@ typedef struct
 typedef struct
 {
     JET_COLUMNID            columnid;
-    const void              *pvData;
-    unsigned long           cbData;
+    JET_PCVOID              pvData;
+    JET_UINT32              cbData;
     JET_GRBIT               grbit;
-    unsigned long           ibLongValue;
-    unsigned long           itagSequence;
+    JET_UINT32              ibLongValue;
+    JET_UINT32              itagSequence;
     JET_ERR                 err;
 } JET_SETCOLUMN;
 
 #if ( JET_VERSION >= 0x0501 )
 typedef struct
 {
-    unsigned long   paramid;
+    JET_UINT32      paramid;
     JET_API_PTR     lParam;
-    const char      *sz;
+    JET_PCSTR       sz;
     JET_ERR         err;
 } JET_SETSYSPARAM_A;
 
 typedef struct
 {
-    unsigned long   paramid;
+    JET_UINT32      paramid;
     JET_API_PTR     lParam;
-    const WCHAR     *sz;
+    JET_PCWSTR      sz;
     JET_ERR         err;
 } JET_SETSYSPARAM_W;
 
@@ -2616,12 +2686,12 @@ typedef struct
 typedef struct
 {
     JET_COLUMNID        columnid;
-    void                *pvData;
-    unsigned long       cbData;
-    unsigned long       cbActual;
+    JET_PVOID           pvData;
+    JET_UINT32          cbData;
+    JET_UINT32          cbActual;
     JET_GRBIT           grbit;
-    unsigned long       ibLongValue;
-    unsigned long       itagSequence;
+    JET_UINT32          ibLongValue;
+    JET_UINT32          itagSequence;
     JET_COLUMNID        columnidNextTagged;
     JET_ERR             err;
 } JET_RETRIEVECOLUMN;
@@ -2650,16 +2720,16 @@ typedef struct
 typedef struct
 {
     JET_COLUMNID            columnid;
-    unsigned long           ctagSequence;
-    unsigned long*          rgtagSequence;
+    JET_UINT32              ctagSequence;
+    JET_UINT32 *            rgtagSequence;
 } JET_ENUMCOLUMNID;
 
 typedef struct
 {
-    unsigned long           itagSequence;
+    JET_UINT32              itagSequence;
     JET_ERR                 err;
-    unsigned long           cbData;
-    void*                   pvData;
+    JET_UINT32              cbData;
+    JET_PVOID               pvData;
 } JET_ENUMCOLUMNVALUE;
 
 typedef struct
@@ -2668,25 +2738,25 @@ typedef struct
     JET_ERR                 err;
     union
     {
-        struct /* err != JET_wrnColumnSingleValue */
+        struct // err != JET_wrnColumnSingleValue
         {
-            unsigned long           cEnumColumnValue;
+            JET_UINT32              cEnumColumnValue;
             JET_ENUMCOLUMNVALUE*    rgEnumColumnValue;
         };
-        struct /* err == JET_wrnColumnSingleValue */
+        struct // err == JET_wrnColumnSingleValue
         {
-            unsigned long           cbData;
-            void*                   pvData;
+            JET_UINT32              cbData;
+            JET_PVOID               pvData;
         };
     };
 } JET_ENUMCOLUMN;
 
     /* Realloc callback for JetEnumerateColumns */
 
-typedef void* (JET_API *JET_PFNREALLOC)(
-    _In_opt_ void *     pvContext,
-    _In_opt_ void *     pv,
-    _In_ unsigned long  cb );
+typedef JET_PVOID (JET_API * JET_PFNREALLOC)(
+    _In_opt_ JET_PVOID  pvContext,
+    _In_opt_ JET_PVOID  pv,
+    _In_ JET_UINT32     cb );
 
 #endif // JET_VERSION >= 0x0501
 
@@ -2703,14 +2773,14 @@ typedef void* (JET_API *JET_PFNREALLOC)(
 
 typedef struct
 {
-    unsigned __int64    cbData;                 //  user data in record
-    unsigned __int64    cbLongValueData;        //  user data associated with the record but stored in the long-value tree (NOTE: does NOT count intrinsic long-values)
-    unsigned __int64    cbOverhead;             //  record overhead
-    unsigned __int64    cbLongValueOverhead;    //  overhead of long-value data (NOTE: does not count intrinsic long-values)
-    unsigned __int64    cNonTaggedColumns;      //  total number of fixed/variable columns
-    unsigned __int64    cTaggedColumns;         //  total number of tagged columns
-    unsigned __int64    cLongValues;            //  total number of values stored in the long-value tree for this record (NOTE: does NOT count intrinsic long-values)
-    unsigned __int64    cMultiValues;           //  total number of values beyond the first for each column in the record
+    JET_UINT64          cbData;                 //  user data in record
+    JET_UINT64          cbLongValueData;        //  user data associated with the record but stored in the long-value tree (NOTE: does NOT count intrinsic long-values)
+    JET_UINT64          cbOverhead;             //  record overhead
+    JET_UINT64          cbLongValueOverhead;    //  overhead of long-value data (NOTE: does not count intrinsic long-values)
+    JET_UINT64          cNonTaggedColumns;      //  total number of fixed/variable columns
+    JET_UINT64          cTaggedColumns;         //  total number of tagged columns
+    JET_UINT64          cLongValues;            //  total number of values stored in the long-value tree for this record (NOTE: does NOT count intrinsic long-values)
+    JET_UINT64          cMultiValues;           //  total number of values beyond the first for each column in the record
 } JET_RECSIZE;
 #endif // JET_VERSION >= 0x0600
 
@@ -2718,17 +2788,17 @@ typedef struct
 #if ( JET_VERSION >= 0x0601 )
 typedef struct
 {
-    unsigned __int64    cbData;                 //  user data in record
-    unsigned __int64    cbLongValueData;        //  user data associated with the record but stored in the long-value tree (NOTE: does NOT count intrinsic long-values)
-    unsigned __int64    cbOverhead;             //  record overhead
-    unsigned __int64    cbLongValueOverhead;    //  overhead of long-value data (NOTE: does not count intrinsic long-values)
-    unsigned __int64    cNonTaggedColumns;      //  total number of fixed/variable columns
-    unsigned __int64    cTaggedColumns;         //  total number of tagged columns
-    unsigned __int64    cLongValues;            //  total number of values stored in the long-value tree for this record (NOTE: does NOT count intrinsic long-values)
-    unsigned __int64    cMultiValues;           //  total number of values beyond the first for each column in the record
-    unsigned __int64    cCompressedColumns;     //  total number of columns which are compressed
-    unsigned __int64    cbDataCompressed;       //  compressed size of user data in record (same as cbData if no intrinsic long-values are compressed)
-    unsigned __int64    cbLongValueDataCompressed;  // compressed size of user data in the long-value tree (same as cbLongValue data if no separated long values are compressed)
+    JET_UINT64          cbData;                 //  user data in record
+    JET_UINT64          cbLongValueData;        //  user data associated with the record but stored in the long-value tree (NOTE: does NOT count intrinsic long-values)
+    JET_UINT64          cbOverhead;             //  record overhead
+    JET_UINT64          cbLongValueOverhead;    //  overhead of long-value data (NOTE: does not count intrinsic long-values)
+    JET_UINT64          cNonTaggedColumns;      //  total number of fixed/variable columns
+    JET_UINT64          cTaggedColumns;         //  total number of tagged columns
+    JET_UINT64          cLongValues;            //  total number of values stored in the long-value tree for this record (NOTE: does NOT count intrinsic long-values)
+    JET_UINT64          cMultiValues;           //  total number of values beyond the first for each column in the record
+    JET_UINT64          cCompressedColumns;     //  total number of columns which are compressed
+    JET_UINT64          cbDataCompressed;       //  compressed size of user data in record (same as cbData if no intrinsic long-values are compressed)
+    JET_UINT64          cbLongValueDataCompressed;  // compressed size of user data in the long-value tree (same as cbLongValue data if no separated long values are compressed)
 } JET_RECSIZE2;
 #endif // JET_VERSION >= 0x0601
 
@@ -2765,7 +2835,7 @@ typedef struct
 #define JET_bitCopySnapshot             0x00000002  /* bit 1: normal (0) or copy (1) snapshot */
 #define JET_bitContinueAfterThaw        0x00000004  /* bit 2: end on thaw (0) or wait for [truncate +] end snapshot */
 #if ( JET_VERSION >= 0x0601 )
-#define JET_bitExplicitPrepare          0x00000008  /* bit 3: all instaces prepared by default (0) or no instance prepared by default (1)  */
+#define JET_bitExplicitPrepare          0x00000008  /* bit 3: all instaces prepared by default (0) or no instance prepared by default (1) */
 #endif // JET_VERSION >= 0x0601
 
     /* Flags for JetOSSnapshotTruncateLog & JetOSSnapshotTruncateLogInstance */
@@ -2881,7 +2951,7 @@ typedef struct
 
 // Windows 10
 #if ( JET_VERSION >= 0x0A00 )
-#define JET_coltypUnsignedLongLong  18  /* 8-byte unsigned integer */
+#define JET_coltypUnsignedLongLong  18  /* 8-byte unsigned integer     */
 #define JET_coltypMax               19  /* the number of column types  */
                                         /* used for validity tests and */
                                         /* array declarations.         */
@@ -3127,9 +3197,8 @@ typedef struct
 #define JET_errBadLineCount                 -354  /* Number of lines on the page is too few compared to the line being operated on */
 #define JET_errPageTagCorrupted             -357  // A tag / line on page is logically corrupted, offset or size is bad, or tag count on page is bad.
 #define JET_errNodeCorrupted                -358  // A node or prefix node is logically corrupted, the key suffix size is larger than the node or line's size.
-
-/*  RECORD MANAGER errors
-/**/
+#define JET_errBBTNodeCorrupted             -364  /* A property of the BBT node is logically corrupted. Or the BBT node isn't valid. */
+#define JET_errBBTBuffCorrupted             -365  /* A BBT buff is logically corrupted. The nodes are out of sequence or the BBT header is corrupt. */
 #define JET_wrnSeparateLongValue             406  /* Column is a separated long-value */
 #define JET_wrnRecordFoundGreater           JET_wrnSeekNotEqual
 #define JET_wrnRecordFoundLess              JET_wrnSeekNotEqual
@@ -3259,6 +3328,8 @@ typedef struct
 #define JET_errEngineFormatVersionSpecifiedTooLowForLogVersion                      -622 /* The specified JET_ENGINEFORMATVERSION is set too low for this log stream, the log files have already been upgraded to a higher version.  A higher JET_ENGINEFORMATVERSION value must be set in the param. */
 #define JET_errEngineFormatVersionSpecifiedTooLowForDatabaseVersion                 -623 /* The specified JET_ENGINEFORMATVERSION is set too low for this database file, the database file has already been upgraded to a higher version.  A higher JET_ENGINEFORMATVERSION value must be set in the param. */
 #define JET_errDbTimeBeyondMaxRequired      -625  /* dbtime on page greater than or equal to dbtimeAfter in record, but record is outside required range for the database */
+#define JET_errLogOperationInconsistentWithDatabase -626 /* Log record in the log is inconsistent with the current state of the database and cannot be applied */
+#define JET_errInsertKeyOutOfOrder          -627  /* The insert attempted was not placed in correct key order.  Possibly indicates transient memory issues. */
 #define JET_errBackupAbortByServer          -801  /* Backup was aborted by server by calling JetTerm with JET_bitTermStopBackup or by calling JetStopBackup */
 
 #define JET_errInvalidGrbit                 -900  /* Invalid flags parameter */
@@ -3385,9 +3456,6 @@ typedef struct
 #define JET_errCannotDisableVersioning      -1208 /* Cannot disable versioning for this database */
 #define JET_errInvalidDatabaseVersion       -1209 /* Database engine is incompatible with database */
 
-/*  The following error code are for NT clients only. It will return such error during
- *  JetInit if JET_paramCheckFormatWhenOpenFail is set.
- */
 #define JET_errDatabase200Format            -1210 /* The database is in an older (200) format */
 #define JET_errDatabase400Format            -1211 /* The database is in an older (400) format */
 #define JET_errDatabase500Format            -1212 /* The database is in an older (500) format */
@@ -3408,7 +3476,7 @@ typedef struct
 
 
 #define JET_errDatabaseNotReady             -1230 /* Recovery on this database has not yet completed enough to permit access. */
-#define JET_errDatabaseAttachedForRecovery  -1231 /* Database is attached but only for recovery.  It must be explicitly attached before it can be opened.  */
+#define JET_errDatabaseAttachedForRecovery  -1231 /* Database is attached but only for recovery.  It must be explicitly attached before it can be opened. */
 #define JET_errTransactionsNotReadyDuringRecovery -1232  /* Recovery has not seen any Begin0/Commit0 records and so does not know what trxBegin0 to assign to this transaction */
 
 
@@ -3530,6 +3598,8 @@ typedef struct
 #define JET_errUpdateMustVersion            -1621 /* No version updates only for uncommitted tables */
 #define JET_errDecryptionFailed             -1622 /* Data could not be decrypted */
 #define JET_errEncryptionBadItag            -1623 /* Cannot encrypt tagged columns with itag>1 */
+#define JET_errSetAutoIncrementTooHigh      -1624  /* The auto-increment value that the user tried to set explicitly is too high . */
+#define JET_errAutoIncrementNotSet          -1625  /* The user must have explicitly set the auto-increment column for this table. */
 
 /*  Sort Table errors
 /**/
@@ -3586,6 +3656,9 @@ typedef struct
 #define JET_errOSSnapshotInvalidSnapId      -2404 /* invalid JET_OSSNAPID */
 
 
+/** KVP ERRORS
+ **/
+
 #define JET_errLSCallbackNotSpecified       -3000 /* Attempted to use Local Storage without a callback function being specified */
 #define JET_errLSAlreadySet                 -3001 /* Attempted to set Local Storage for an object which already had it set */
 #define JET_errLSNotSet                     -3002 /* Attempted to retrieve Local Storage from an object which didn't have it set */
@@ -3601,6 +3674,14 @@ typedef struct
 #define JET_errFileIORetry                  -4003 /* instructs the JET_ABORTRETRYFAILCALLBACK caller to retry the specified I/O */
 #define JET_errFileIOFail                   -4004 /* instructs the JET_ABORTRETRYFAILCALLBACK caller to fail the specified I/O */
 #define JET_errFileCompressed               -4005 /* read/write access is not supported on compressed files */
+
+/** CLIENT RESERVED ERROR SPACE.
+    An unused errors/warnings section.  JET will never generate values in this space.  Clients may use this space
+        without conflicting with ESE.  Note that the warnings are reserved as well as the errors.  That is, the
+        range from -10,000 to -11,999 is reserved as well as the range from 10,000 to 11,999.
+ **/
+#define JET_errClientSpaceBegin             -10000 /* Begin of the error space reserved for JET client use */
+#define JET_errClientSpaceEnd               -11999 /* End of the error space reserved for JET client use */
 
 /**********************************************************************/
 /***********************     PROTOTYPES      **************************/
@@ -3757,10 +3838,10 @@ JetCreateInstance2W(
 
 JET_ERR JET_API
 JetGetInstanceMiscInfo(
-    _In_ JET_INSTANCE               instance,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_INSTANCE                     instance,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -3860,7 +3941,7 @@ JET_ERR JET_API
 JetSetSystemParameterA(
     _Inout_opt_ JET_INSTANCE *  pinstance,
     _In_opt_ JET_SESID          sesid,
-    _In_ unsigned long          paramid,
+    _In_ JET_UINT32             paramid,
     _In_opt_ JET_API_PTR        lParam,
     _In_opt_ JET_PCSTR          szParam );
 
@@ -3876,7 +3957,7 @@ JET_ERR JET_API
 JetSetSystemParameterW(
     _Inout_opt_ JET_INSTANCE *  pinstance,
     _In_opt_ JET_SESID          sesid,
-    _In_ unsigned long          paramid,
+    _In_ JET_UINT32             paramid,
     _In_opt_ JET_API_PTR        lParam,
     _In_opt_ JET_PCWSTR         szParam );
 
@@ -3901,10 +3982,10 @@ JET_ERR JET_API
 JetGetSystemParameterA(
     _In_ JET_INSTANCE                   instance,
     _In_opt_ JET_SESID                  sesid,
-    _In_ unsigned long                  paramid,
+    _In_ JET_UINT32                     paramid,
     _Out_opt_ JET_API_PTR *             plParam,
     _Out_writes_bytes_opt_( cbMax ) JET_PSTR    szParam,
-    _In_ unsigned long                  cbMax );
+    _In_ JET_UINT32                     cbMax );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -3918,10 +3999,10 @@ JET_ERR JET_API
 JetGetSystemParameterW(
     _In_ JET_INSTANCE                   instance,
     _In_opt_ JET_SESID                  sesid,
-    _In_ unsigned long                  paramid,
+    _In_ JET_UINT32                     paramid,
     _Out_opt_ JET_API_PTR *             plParam,
     _Out_writes_bytes_opt_( cbMax ) JET_PWSTR   szParam,
-    _In_ unsigned long                  cbMax );
+    _In_ JET_UINT32                     cbMax );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -3946,8 +4027,8 @@ JetGetSystemParameterW(
 JET_ERR JET_API
 JetEnableMultiInstanceA(
     _In_reads_opt_( csetsysparam ) JET_SETSYSPARAM_A *  psetsysparam,
-    _In_ unsigned long                                  csetsysparam,
-    _Out_opt_ unsigned long *                           pcsetsucceed );
+    _In_ JET_UINT32                                     csetsysparam,
+    _Out_opt_ JET_UINT32 *                              pcsetsucceed );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -3960,8 +4041,8 @@ JetEnableMultiInstanceA(
 JET_ERR JET_API
 JetEnableMultiInstanceW(
     _In_reads_opt_( csetsysparam ) JET_SETSYSPARAM_W *  psetsysparam,
-    _In_ unsigned long                                  csetsysparam,
-    _Out_opt_ unsigned long *                           pcsetsucceed );
+    _In_ JET_UINT32                                     csetsysparam,
+    _Out_opt_ JET_UINT32 *                              pcsetsucceed );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -3983,8 +4064,8 @@ JetEnableMultiInstanceW(
 
 JET_ERR JET_API
 JetGetThreadStats(
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax );
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4057,7 +4138,7 @@ JetEndSession(
 JET_ERR JET_API
 JetGetVersion(
     _In_ JET_SESID          sesid,
-    _Out_ unsigned long *   pwVersion );
+    _Out_ JET_UINT32 *      pwVersion );
 
 JET_ERR JET_API
 JetIdle(
@@ -4121,7 +4202,7 @@ JET_ERR JET_API
 JetCreateDatabase2A(
     _In_ JET_SESID              sesid,
     _In_ JET_PCSTR              szFilename,
-    _In_ const unsigned long    cpgDatabaseSizeMax,
+    _In_ const JET_UINT32       cpgDatabaseSizeMax,
     _Out_ JET_DBID *            pdbid,
     _In_ JET_GRBIT              grbit );
 
@@ -4136,7 +4217,7 @@ JetCreateDatabase2A(
 JET_ERR JET_API JetCreateDatabase2W(
     _In_ JET_SESID              sesid,
     _In_ JET_PCWSTR             szFilename,
-    _In_ const unsigned long    cpgDatabaseSizeMax,
+    _In_ const JET_UINT32       cpgDatabaseSizeMax,
     _Out_ JET_DBID *            pdbid,
     _In_ JET_GRBIT              grbit );
 
@@ -4199,7 +4280,7 @@ JET_ERR JET_API
 JetAttachDatabase2A(
     _In_ JET_SESID              sesid,
     _In_ JET_PCSTR              szFilename,
-    _In_ const unsigned long    cpgDatabaseSizeMax,
+    _In_ const JET_UINT32       cpgDatabaseSizeMax,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -4214,7 +4295,7 @@ JET_ERR JET_API
 JetAttachDatabase2W(
     _In_ JET_SESID              sesid,
     _In_ JET_PCWSTR             szFilename,
-    _In_ const unsigned long    cpgDatabaseSizeMax,
+    _In_ const JET_UINT32       cpgDatabaseSizeMax,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -4313,14 +4394,14 @@ JetDetachDatabase2W(
 
 JET_ERR JET_API
 JetGetObjectInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_OBJTYP                 objtyp,
-    _In_opt_ JET_PCSTR              szContainerName,
-    _In_opt_ JET_PCSTR              szObjectName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_OBJTYP                       objtyp,
+    _In_opt_ JET_PCSTR                    szContainerName,
+    _In_opt_ JET_PCSTR                    szObjectName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4332,14 +4413,14 @@ JetGetObjectInfoA(
 
 JET_ERR JET_API
 JetGetObjectInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_OBJTYP                 objtyp,
-    _In_opt_ JET_PCWSTR             szContainerName,
-    _In_opt_ JET_PCWSTR             szObjectName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_OBJTYP                       objtyp,
+    _In_opt_ JET_PCWSTR                   szContainerName,
+    _In_opt_ JET_PCWSTR                   szObjectName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4361,11 +4442,11 @@ JetGetObjectInfoW(
 
 JET_ERR JET_API
 JetGetTableInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_TABLEID                      tableid,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4377,11 +4458,11 @@ JetGetTableInfoA(
 
 JET_ERR JET_API
 JetGetTableInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_TABLEID                      tableid,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4403,12 +4484,12 @@ JetGetTableInfoW(
 
 JET_ERR JET_API
 JetCreateTableA(
-    _In_ JET_SESID      sesid,
-    _In_ JET_DBID       dbid,
-    _In_ JET_PCSTR      szTableName,
-    _In_ unsigned long  lPages,
-    _In_ unsigned long  lDensity,
-    _Out_ JET_TABLEID * ptableid );
+    _In_ JET_SESID       sesid,
+    _In_ JET_DBID        dbid,
+    _In_ JET_PCSTR       szTableName,
+    _In_ JET_UINT32      lPages,
+    _In_ JET_UINT32      lDensity,
+    _Out_ JET_TABLEID *  ptableid );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4420,12 +4501,12 @@ JetCreateTableA(
 
 JET_ERR JET_API
 JetCreateTableW(
-    _In_ JET_SESID      sesid,
-    _In_ JET_DBID       dbid,
-    _In_ JET_PCWSTR     szTableName,
-    _In_ unsigned long  lPages,
-    _In_ unsigned long  lDensity,
-    _Out_ JET_TABLEID * ptableid );
+    _In_ JET_SESID       sesid,
+    _In_ JET_DBID        dbid,
+    _In_ JET_PCWSTR      szTableName,
+    _In_ JET_UINT32      lPages,
+    _In_ JET_UINT32      lDensity,
+    _Out_ JET_TABLEID *  ptableid );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4446,9 +4527,9 @@ JetCreateTableW(
 
 JET_ERR JET_API
 JetCreateTableColumnIndexA(
-    _In_ JET_SESID              sesid,
-    _In_ JET_DBID               dbid,
-    _Inout_ JET_TABLECREATE_A * ptablecreate );
+    _In_ JET_SESID               sesid,
+    _In_ JET_DBID                dbid,
+    _Inout_ JET_TABLECREATE_A *  ptablecreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4460,9 +4541,9 @@ JetCreateTableColumnIndexA(
 
 JET_ERR JET_API
 JetCreateTableColumnIndexW(
-    _In_ JET_SESID              sesid,
-    _In_ JET_DBID               dbid,
-    _Inout_ JET_TABLECREATE_W * ptablecreate );
+    _In_ JET_SESID               sesid,
+    _In_ JET_DBID                dbid,
+    _Inout_ JET_TABLECREATE_W *  ptablecreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4659,12 +4740,12 @@ JET_ERR JET_API JetRenameTableW(
 
 JET_ERR JET_API
 JetGetTableColumnInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _In_opt_ JET_PCSTR              szColumnName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_TABLEID                      tableid,
+    _In_opt_ JET_PCSTR                    szColumnName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4675,12 +4756,12 @@ JetGetTableColumnInfoA(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
 
 JET_ERR JET_API JetGetTableColumnInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _In_opt_ JET_PCWSTR             szColumnName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_TABLEID                      tableid,
+    _In_opt_ JET_PCWSTR                   szColumnName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4702,13 +4783,13 @@ JET_ERR JET_API JetGetTableColumnInfoW(
 
 JET_ERR JET_API
 JetGetColumnInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_PCSTR                  szTableName,
-    _In_opt_ JET_PCSTR              pColumnNameOrId,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_PCSTR                        szTableName,
+    _In_opt_ JET_PCSTR                    pColumnNameOrId,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4719,13 +4800,13 @@ JetGetColumnInfoA(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
 
 JET_ERR JET_API JetGetColumnInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_PCWSTR                 szTableName,
-    _In_opt_ JET_PCWSTR             pwColumnNameOrId,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_PCWSTR                       szTableName,
+    _In_opt_ JET_PCWSTR                   pwColumnNameOrId,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4747,13 +4828,13 @@ JET_ERR JET_API JetGetColumnInfoW(
 
 JET_ERR JET_API
 JetAddColumnA(
-    _In_ JET_SESID                              sesid,
-    _In_ JET_TABLEID                            tableid,
-    _In_ JET_PCSTR                              szColumnName,
-    _In_ const JET_COLUMNDEF *                  pcolumndef,
-    _In_reads_bytes_opt_( cbDefault ) const void *  pvDefault,
-    _In_ unsigned long                          cbDefault,
-    _Out_opt_ JET_COLUMNID *                    pcolumnid );
+    _In_ JET_SESID                               sesid,
+    _In_ JET_TABLEID                             tableid,
+    _In_ JET_PCSTR                               szColumnName,
+    _In_ const JET_COLUMNDEF *                   pcolumndef,
+    _In_reads_bytes_opt_( cbDefault ) JET_PCVOID pvDefault,
+    _In_ JET_UINT32                              cbDefault,
+    _Out_opt_ JET_COLUMNID *                     pcolumnid );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4764,13 +4845,13 @@ JetAddColumnA(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
 
 JET_ERR JET_API JetAddColumnW(
-    _In_ JET_SESID                              sesid,
-    _In_ JET_TABLEID                            tableid,
-    _In_ JET_PCWSTR                             szColumnName,
-    _In_ const JET_COLUMNDEF *                  pcolumndef,
-    _In_reads_bytes_opt_( cbDefault ) const void *  pvDefault,
-    _In_ unsigned long                          cbDefault,
-    _Out_opt_ JET_COLUMNID *                    pcolumnid );
+    _In_ JET_SESID                               sesid,
+    _In_ JET_TABLEID                             tableid,
+    _In_ JET_PCWSTR                              szColumnName,
+    _In_ const JET_COLUMNDEF *                   pcolumndef,
+    _In_reads_bytes_opt_( cbDefault ) JET_PCVOID pvDefault,
+    _In_ JET_UINT32                              cbDefault,
+    _Out_opt_ JET_COLUMNID *                     pcolumnid );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4917,13 +4998,13 @@ JetRenameColumnW(
 
 JET_ERR JET_API
 JetSetColumnDefaultValueA(
-    _In_ JET_SESID                      sesid,
-    _In_ JET_DBID                       dbid,
-    _In_ JET_PCSTR                      szTableName,
-    _In_ JET_PCSTR                      szColumnName,
-    _In_reads_bytes_( cbData ) const void * pvData,
-    _In_ const unsigned long            cbData,
-    _In_ const JET_GRBIT                grbit );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_PCSTR                        szTableName,
+    _In_ JET_PCSTR                        szColumnName,
+    _In_reads_bytes_( cbData ) JET_PCVOID pvData,
+    _In_ const JET_UINT32                 cbData,
+    _In_ const JET_GRBIT                  grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4935,13 +5016,13 @@ JetSetColumnDefaultValueA(
 
 JET_ERR JET_API
 JetSetColumnDefaultValueW(
-    _In_ JET_SESID                      sesid,
-    _In_ JET_DBID                       dbid,
-    _In_ JET_PCWSTR                     szTableName,
-    _In_ JET_PCWSTR                     szColumnName,
-    _In_reads_bytes_( cbData ) const void * pvData,
-    _In_ const unsigned long            cbData,
-    _In_ const JET_GRBIT                grbit );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _In_ JET_PCWSTR                       szTableName,
+    _In_ JET_PCWSTR                       szColumnName,
+    _In_reads_bytes_( cbData ) JET_PCVOID pvData,
+    _In_ const JET_UINT32                 cbData,
+    _In_ const JET_GRBIT                  grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4963,12 +5044,12 @@ JetSetColumnDefaultValueW(
 
 JET_ERR JET_API
 JetGetTableIndexInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _In_opt_ JET_PCSTR              szIndexName,
-    _Out_writes_bytes_( cbResult ) void *   pvResult,
-    _In_ unsigned long              cbResult,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                           sesid,
+    _In_ JET_TABLEID                         tableid,
+    _In_opt_ JET_PCSTR                       szIndexName,
+    _Out_writes_bytes_( cbResult ) JET_PVOID pvResult,
+    _In_ JET_UINT32                          cbResult,
+    _In_ JET_UINT32                          InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -4980,12 +5061,12 @@ JetGetTableIndexInfoA(
 
 JET_ERR JET_API
 JetGetTableIndexInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _In_opt_ JET_PCWSTR             szIndexName,
-    _Out_writes_bytes_( cbResult ) void *   pvResult,
-    _In_ unsigned long              cbResult,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                           sesid,
+    _In_ JET_TABLEID                         tableid,
+    _In_opt_ JET_PCWSTR                      szIndexName,
+    _Out_writes_bytes_( cbResult ) JET_PVOID pvResult,
+    _In_ JET_UINT32                          cbResult,
+    _In_ JET_UINT32                          InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5007,13 +5088,13 @@ JetGetTableIndexInfoW(
 
 JET_ERR JET_API
 JetGetIndexInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_PCSTR                  szTableName,
-    _In_opt_ JET_PCSTR              szIndexName,
-    _Out_writes_bytes_( cbResult ) void *   pvResult,
-    _In_ unsigned long              cbResult,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                           sesid,
+    _In_ JET_DBID                            dbid,
+    _In_ JET_PCSTR                           szTableName,
+    _In_opt_ JET_PCSTR                       szIndexName,
+    _Out_writes_bytes_( cbResult ) JET_PVOID pvResult,
+    _In_ JET_UINT32                          cbResult,
+    _In_ JET_UINT32                          InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5025,13 +5106,13 @@ JetGetIndexInfoA(
 
 JET_ERR JET_API
 JetGetIndexInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _In_ JET_PCWSTR                 szTableName,
-    _In_opt_ JET_PCWSTR             szIndexName,
-    _Out_writes_bytes_( cbResult ) void *   pvResult,
-    _In_ unsigned long              cbResult,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                           sesid,
+    _In_ JET_DBID                            dbid,
+    _In_ JET_PCWSTR                          szTableName,
+    _In_opt_ JET_PCWSTR                      szIndexName,
+    _Out_writes_bytes_( cbResult ) JET_PVOID pvResult,
+    _In_ JET_UINT32                          cbResult,
+    _In_ JET_UINT32                          InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5057,9 +5138,9 @@ JetCreateIndexA(
     _In_ JET_TABLEID                    tableid,
     _In_ JET_PCSTR                      szIndexName,
     _In_ JET_GRBIT                      grbit,
-    _In_reads_bytes_( cbKey ) const char *  szKey,
-    _In_ unsigned long                  cbKey,
-    _In_ unsigned long                  lDensity );
+    _In_reads_bytes_( cbKey ) JET_PCSTR szKey,
+    _In_ JET_UINT32                     cbKey,
+    _In_ JET_UINT32                     lDensity );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5071,13 +5152,13 @@ JetCreateIndexA(
 
 JET_ERR JET_API
 JetCreateIndexW(
-    _In_ JET_SESID                      sesid,
-    _In_ JET_TABLEID                    tableid,
-    _In_ JET_PCWSTR                     szIndexName,
-    _In_ JET_GRBIT                      grbit,
-    _In_reads_bytes_( cbKey ) const WCHAR * szKey,
-    _In_ unsigned long                  cbKey,
-    _In_ unsigned long                  lDensity );
+    _In_ JET_SESID                       sesid,
+    _In_ JET_TABLEID                     tableid,
+    _In_ JET_PCWSTR                      szIndexName,
+    _In_ JET_GRBIT                       grbit,
+    _In_reads_bytes_( cbKey ) JET_PCWSTR szKey,
+    _In_ JET_UINT32                      cbKey,
+    _In_ JET_UINT32                      lDensity );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5102,7 +5183,7 @@ JetCreateIndex2A(
     _In_ JET_SESID                                  sesid,
     _In_ JET_TABLEID                                tableid,
     _In_reads_( cIndexCreate ) JET_INDEXCREATE_A *  pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_UINT32                                 cIndexCreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5117,7 +5198,7 @@ JetCreateIndex2W(
     _In_ JET_SESID                                  sesid,
     _In_ JET_TABLEID                                tableid,
     _In_reads_( cIndexCreate ) JET_INDEXCREATE_W *  pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_UINT32                                 cIndexCreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5136,17 +5217,17 @@ JetCreateIndex2W(
 
 JET_ERR JET_API
 JetCreateIndex3A(
-    _In_ JET_SESID                                  sesid,
-    _In_ JET_TABLEID                                tableid,
-    _In_reads_( cIndexCreate ) JET_INDEXCREATE2_A *pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_SESID                                   sesid,
+    _In_ JET_TABLEID                                 tableid,
+    _In_reads_( cIndexCreate ) JET_INDEXCREATE2_A *  pindexcreate,
+    _In_ JET_UINT32                                  cIndexCreate );
 
 JET_ERR JET_API
 JetCreateIndex3W(
-    _In_ JET_SESID                                  sesid,
-    _In_ JET_TABLEID                                tableid,
-    _In_reads_( cIndexCreate ) JET_INDEXCREATE2_W *pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_SESID                                   sesid,
+    _In_ JET_TABLEID                                 tableid,
+    _In_reads_( cIndexCreate ) JET_INDEXCREATE2_W *  pindexcreate,
+    _In_ JET_UINT32                                  cIndexCreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5166,10 +5247,10 @@ JetCreateIndex3W(
 
 JET_ERR JET_API
 JetCreateIndex4A(
-    _In_ JET_SESID                                  sesid,
-    _In_ JET_TABLEID                                tableid,
-    _In_reads_( cIndexCreate ) JET_INDEXCREATE3_A *pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_SESID                                   sesid,
+    _In_ JET_TABLEID                                 tableid,
+    _In_reads_( cIndexCreate ) JET_INDEXCREATE3_A *  pindexcreate,
+    _In_ JET_UINT32                                  cIndexCreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5179,10 +5260,10 @@ JetCreateIndex4A(
 
 JET_ERR JET_API
 JetCreateIndex4W(
-    _In_ JET_SESID                                  sesid,
-    _In_ JET_TABLEID                                tableid,
-    _In_reads_( cIndexCreate ) JET_INDEXCREATE3_W *pindexcreate,
-    _In_ unsigned long                              cIndexCreate );
+    _In_ JET_SESID                                   sesid,
+    _In_ JET_TABLEID                                 tableid,
+    _In_reads_( cIndexCreate ) JET_INDEXCREATE3_W *  pindexcreate,
+    _In_ JET_UINT32                                  cIndexCreate );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5255,7 +5336,7 @@ JetBeginTransaction2(
 JET_ERR JET_API
 JetBeginTransaction3(
     _In_ JET_SESID      sesid,
-    _In_ __int64        trxid,
+    _In_ JET_INT64      trxid,
     _In_ JET_GRBIT      grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -5277,7 +5358,7 @@ JET_ERR JET_API
 JetCommitTransaction2(
     _In_ JET_SESID              sesid,
     _In_ JET_GRBIT              grbit,
-    _In_ unsigned long          cmsecDurableCommit,
+    _In_ JET_UINT32             cmsecDurableCommit,
     _Out_opt_ JET_COMMIT_ID *   pCommitId );
 #endif // JET_VERSION >= 0x0602
 
@@ -5297,11 +5378,11 @@ JetRollback(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
 
 JET_ERR JET_API JetGetDatabaseInfoA(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5313,11 +5394,11 @@ JET_ERR JET_API JetGetDatabaseInfoA(
 
 JET_ERR JET_API
 JetGetDatabaseInfoW(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_DBID                   dbid,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_DBID                         dbid,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5339,10 +5420,10 @@ JetGetDatabaseInfoW(
 
 JET_ERR JET_API
 JetGetDatabaseFileInfoA(
-    _In_ JET_PCSTR                  szDatabaseName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_PCSTR                        szDatabaseName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5354,10 +5435,10 @@ JetGetDatabaseFileInfoA(
 
 JET_ERR JET_API
 JetGetDatabaseFileInfoW(
-    _In_ JET_PCWSTR                 szDatabaseName,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_PCWSTR                       szDatabaseName,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5382,7 +5463,7 @@ JetOpenDatabaseA(
     _In_ JET_SESID      sesid,
     _In_ JET_PCSTR      szFilename,
     _In_opt_ JET_PCSTR  szConnect,
-    _Out_ JET_DBID*     pdbid,
+    _Out_ JET_DBID *    pdbid,
     _In_ JET_GRBIT      grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -5398,7 +5479,7 @@ JetOpenDatabaseW(
     _In_ JET_SESID      sesid,
     _In_ JET_PCWSTR     szFilename,
     _In_opt_ JET_PCWSTR szConnect,
-    _Out_ JET_DBID*     pdbid,
+    _Out_ JET_DBID *    pdbid,
     _In_ JET_GRBIT      grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -5435,8 +5516,8 @@ JetOpenTableA(
     _In_ JET_SESID                                  sesid,
     _In_ JET_DBID                                   dbid,
     _In_ JET_PCSTR                                  szTableName,
-    _In_reads_bytes_opt_( cbParameters ) const void *   pvParameters,
-    _In_ unsigned long                              cbParameters,
+    _In_reads_bytes_opt_( cbParameters ) JET_PCVOID pvParameters,
+    _In_ JET_UINT32                                 cbParameters,
     _In_ JET_GRBIT                                  grbit,
     _Out_ JET_TABLEID *                             ptableid );
 
@@ -5453,8 +5534,8 @@ JetOpenTableW(
     _In_ JET_SESID                                  sesid,
     _In_ JET_DBID                                   dbid,
     _In_ JET_PCWSTR                                 szTableName,
-    _In_reads_bytes_opt_( cbParameters ) const void *   pvParameters,
-    _In_ unsigned long                              cbParameters,
+    _In_reads_bytes_opt_( cbParameters ) JET_PCVOID pvParameters,
+    _In_ JET_UINT32                                 cbParameters,
     _In_ JET_GRBIT                                  grbit,
     _Out_ JET_TABLEID *                             ptableid );
 
@@ -5512,11 +5593,11 @@ JetDelete(
 
 JET_ERR JET_API
 JetUpdate(
-    _In_ JET_SESID                                          sesid,
-    _In_ JET_TABLEID                                        tableid,
-    _Out_writes_bytes_to_opt_( cbBookmark, *pcbActual ) void *  pvBookmark,
-    _In_ unsigned long                                      cbBookmark,
-    _Out_opt_ unsigned long *                               pcbActual );
+    _In_ JET_SESID                                                sesid,
+    _In_ JET_TABLEID                                              tableid,
+    _Out_writes_bytes_to_opt_( cbBookmark, *pcbActual ) JET_PVOID pvBookmark,
+    _In_ JET_UINT32                                               cbBookmark,
+    _Out_opt_ JET_UINT32 *                                        pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5528,12 +5609,12 @@ JetUpdate(
 
 JET_ERR JET_API
 JetUpdate2(
-    _In_ JET_SESID                                          sesid,
-    _In_ JET_TABLEID                                        tableid,
-    _Out_writes_bytes_to_opt_( cbBookmark, *pcbActual ) void *  pvBookmark,
-    _In_ unsigned long                                      cbBookmark,
-    _Out_opt_ unsigned long *                               pcbActual,
-    _In_ const JET_GRBIT                                    grbit );
+    _In_ JET_SESID                                                sesid,
+    _In_ JET_TABLEID                                              tableid,
+    _Out_writes_bytes_to_opt_( cbBookmark, *pcbActual ) JET_PVOID pvBookmark,
+    _In_ JET_UINT32                                               cbBookmark,
+    _Out_opt_ JET_UINT32 *                                        pcbActual,
+    _In_ const JET_GRBIT                                          grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5545,33 +5626,33 @@ JetUpdate2(
 
 JET_ERR JET_API
 JetEscrowUpdate(
-    _In_ JET_SESID                                          sesid,
-    _In_ JET_TABLEID                                        tableid,
-    _In_ JET_COLUMNID                                       columnid,
-    _In_reads_bytes_( cbMax ) void *                        pv,
-    _In_ unsigned long                                      cbMax,
-    _Out_writes_bytes_to_opt_( cbOldMax, *pcbOldActual ) void * pvOld,
-    _In_ unsigned long                                      cbOldMax,
-    _Out_opt_ unsigned long *                               pcbOldActual,
-    _In_ JET_GRBIT                                          grbit );
+    _In_ JET_SESID                                                 sesid,
+    _In_ JET_TABLEID                                               tableid,
+    _In_ JET_COLUMNID                                              columnid,
+    _In_reads_bytes_( cbMax ) JET_PVOID                            pv,
+    _In_ JET_UINT32                                                cbMax,
+    _Out_writes_bytes_to_opt_( cbOldMax, *pcbOldActual ) JET_PVOID pvOld,
+    _In_ JET_UINT32                                                cbOldMax,
+    _Out_opt_ JET_UINT32 *                                         pcbOldActual,
+    _In_ JET_GRBIT                                                 grbit );
 
 JET_ERR JET_API
 JetRetrieveColumn(
-    _In_ JET_SESID                                      sesid,
-    _In_ JET_TABLEID                                    tableid,
-    _In_ JET_COLUMNID                                   columnid,
-    _Out_writes_bytes_to_opt_( cbData, min( cbData, *pcbActual ) ) void *   pvData,
-    _In_ unsigned long                                  cbData,
-    _Out_opt_ unsigned long *                           pcbActual,
-    _In_ JET_GRBIT                                      grbit,
-    _Inout_opt_ JET_RETINFO *                           pretinfo );
+    _In_ JET_SESID                                                           sesid,
+    _In_ JET_TABLEID                                                         tableid,
+    _In_ JET_COLUMNID                                                        columnid,
+    _Out_writes_bytes_to_opt_( cbData, min( cbData, *pcbActual ) ) JET_PVOID pvData,
+    _In_ JET_UINT32                                                          cbData,
+    _Out_opt_ JET_UINT32 *                                                   pcbActual,
+    _In_ JET_GRBIT                                                           grbit,
+    _Inout_opt_ JET_RETINFO *                                                pretinfo );
 
 JET_ERR JET_API
 JetRetrieveColumns(
-    _In_ JET_SESID                                              sesid,
-    _In_ JET_TABLEID                                            tableid,
-    _Inout_updates_opt_( cretrievecolumn ) JET_RETRIEVECOLUMN * pretrievecolumn,
-    _In_ unsigned long                                          cretrievecolumn );
+    _In_ JET_SESID                                               sesid,
+    _In_ JET_TABLEID                                             tableid,
+    _Inout_updates_opt_( cretrievecolumn ) JET_RETRIEVECOLUMN *  pretrievecolumn,
+    _In_ JET_UINT32                                              cretrievecolumn );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5583,16 +5664,16 @@ JetRetrieveColumns(
 
 JET_ERR JET_API
 JetEnumerateColumns(
-    _In_ JET_SESID                                              sesid,
-    _In_ JET_TABLEID                                            tableid,
-    _In_ unsigned long                                          cEnumColumnId,
-    _In_reads_opt_( cEnumColumnId ) JET_ENUMCOLUMNID *          rgEnumColumnId,
-    _Out_ unsigned long *                                       pcEnumColumn,
-    _Outptr_result_buffer_( *pcEnumColumn ) JET_ENUMCOLUMN **   prgEnumColumn,
-    _In_ JET_PFNREALLOC                                         pfnRealloc,
-    _In_opt_ void *                                             pvReallocContext,
-    _In_ unsigned long                                          cbDataMost,
-    _In_ JET_GRBIT                                              grbit );
+    _In_ JET_SESID                                             sesid,
+    _In_ JET_TABLEID                                           tableid,
+    _In_ JET_UINT32                                            cEnumColumnId,
+    _In_reads_opt_( cEnumColumnId ) JET_ENUMCOLUMNID *         rgEnumColumnId,
+    _Out_ JET_UINT32 *                                         pcEnumColumn,
+    _Outptr_result_buffer_( *pcEnumColumn ) JET_ENUMCOLUMN **  prgEnumColumn,
+    _In_ JET_PFNREALLOC                                        pfnRealloc,
+    _In_opt_ JET_PVOID                                         pvReallocContext,
+    _In_ JET_UINT32                                            cbDataMost,
+    _In_ JET_GRBIT                                             grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5639,33 +5720,33 @@ JetGetRecordSize2(
 
 JET_ERR JET_API
 JetSetColumn(
-    _In_ JET_SESID                          sesid,
-    _In_ JET_TABLEID                        tableid,
-    _In_ JET_COLUMNID                       columnid,
-    _In_reads_bytes_opt_( cbData ) const void * pvData,
-    _In_ unsigned long                      cbData,
-    _In_ JET_GRBIT                          grbit,
-    _In_opt_ JET_SETINFO *                  psetinfo );
+    _In_ JET_SESID                            sesid,
+    _In_ JET_TABLEID                          tableid,
+    _In_ JET_COLUMNID                         columnid,
+    _In_reads_bytes_opt_( cbData ) JET_PCVOID pvData,
+    _In_ JET_UINT32                           cbData,
+    _In_ JET_GRBIT                            grbit,
+    _In_opt_ JET_SETINFO *                    psetinfo );
 
 JET_ERR JET_API
 JetSetColumns(
     _In_ JET_SESID                                  sesid,
     _In_ JET_TABLEID                                tableid,
     _In_reads_opt_( csetcolumn ) JET_SETCOLUMN *    psetcolumn,
-    _In_ unsigned long                              csetcolumn );
+    _In_ JET_UINT32                                 csetcolumn );
 
 JET_ERR JET_API
 JetPrepareUpdate(
     _In_ JET_SESID      sesid,
     _In_ JET_TABLEID    tableid,
-    _In_ unsigned long  prep );
+    _In_ JET_UINT32     prep );
 
 JET_ERR JET_API
 JetGetRecordPosition(
-    _In_ JET_SESID                          sesid,
-    _In_ JET_TABLEID                        tableid,
-    _Out_writes_bytes_( cbRecpos ) JET_RECPOS * precpos,
-    _In_ unsigned long                      cbRecpos );
+    _In_ JET_SESID                               sesid,
+    _In_ JET_TABLEID                             tableid,
+    _Out_writes_bytes_( cbRecpos ) JET_RECPOS *  precpos,
+    _In_ JET_UINT32                              cbRecpos );
 
 JET_ERR JET_API
 JetGotoPosition(
@@ -5681,18 +5762,18 @@ JetGotoPosition(
 
 JET_ERR JET_API
 JetGetCursorInfo(
-    _In_ JET_SESID                  sesid,
-    _In_ JET_TABLEID                tableid,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel );
+    _In_ JET_SESID                        sesid,
+    _In_ JET_TABLEID                      tableid,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel );
 
 JET_ERR JET_API
 JetDupCursor(
-    _In_ JET_SESID      sesid,
-    _In_ JET_TABLEID    tableid,
-    _Out_ JET_TABLEID * ptableid,
-    _In_ JET_GRBIT      grbit );
+    _In_ JET_SESID       sesid,
+    _In_ JET_TABLEID     tableid,
+    _Out_ JET_TABLEID *  ptableid,
+    _In_ JET_GRBIT       grbit );
 
 #if ( JET_VERSION < 0x0600 )
 #define JetGetCurrentIndexA JetGetCurrentIndex
@@ -5703,7 +5784,7 @@ JetGetCurrentIndexA(
     _In_ JET_SESID                          sesid,
     _In_ JET_TABLEID                        tableid,
     _Out_writes_bytes_( cbIndexName ) JET_PSTR  szIndexName,
-    _In_ unsigned long                      cbIndexName );
+    _In_ JET_UINT32                         cbIndexName );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5718,7 +5799,7 @@ JetGetCurrentIndexW(
     _In_ JET_SESID                          sesid,
     _In_ JET_TABLEID                        tableid,
     _Out_writes_bytes_( cbIndexName ) JET_PWSTR szIndexName,
-    _In_ unsigned long                      cbIndexName );
+    _In_ JET_UINT32                         cbIndexName );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5821,7 +5902,7 @@ JetSetCurrentIndex3A(
     _In_ JET_TABLEID    tableid,
     _In_opt_ JET_PCSTR  szIndexName,
     _In_ JET_GRBIT      grbit,
-    _In_ unsigned long  itagSequence );
+    _In_ JET_UINT32     itagSequence );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5837,7 +5918,7 @@ JetSetCurrentIndex3W(
     _In_ JET_TABLEID    tableid,
     _In_opt_ JET_PCWSTR szIndexName,
     _In_ JET_GRBIT      grbit,
-    _In_ unsigned long  itagSequence );
+    _In_ JET_UINT32     itagSequence );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5864,7 +5945,7 @@ JetSetCurrentIndex4A(
     _In_opt_ JET_PCSTR      szIndexName,
     _In_opt_ JET_INDEXID *  pindexid,
     _In_ JET_GRBIT          grbit,
-    _In_ unsigned long      itagSequence );
+    _In_ JET_UINT32         itagSequence );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5881,7 +5962,7 @@ JetSetCurrentIndex4W(
     _In_opt_ JET_PCWSTR     szIndexName,
     _In_opt_ JET_INDEXID *  pindexid,
     _In_ JET_GRBIT          grbit,
-    _In_ unsigned long      itagSequence );
+    _In_ JET_UINT32         itagSequence );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -5901,17 +5982,17 @@ JET_ERR JET_API
 JetMove(
     _In_ JET_SESID      sesid,
     _In_ JET_TABLEID    tableid,
-    _In_ long           cRow,
+    _In_ JET_INT32      cRow,
     _In_ JET_GRBIT      grbit );
 
 #if ( JET_VERSION >= 0x0602 )
 JET_ERR JET_API
 JetSetCursorFilter(
-    _In_ JET_SESID          sesid,
-    _In_ JET_TABLEID        tableid,
-    _In_reads_( cColumnFilters ) JET_INDEX_COLUMN *rgColumnFilters,
-    _In_ unsigned long      cColumnFilters,
-    _In_ JET_GRBIT          grbit );
+    _In_ JET_SESID                                   sesid,
+    _In_ JET_TABLEID                                 tableid,
+    _In_reads_( cColumnFilters ) JET_INDEX_COLUMN *  rgColumnFilters,
+    _In_ JET_UINT32                                  cColumnFilters,
+    _In_ JET_GRBIT                                   grbit );
 #endif  //  JET_VERSION >= 0x0602
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -5934,11 +6015,11 @@ JetGetLock(
 
 JET_ERR JET_API
 JetMakeKey(
-    _In_ JET_SESID                          sesid,
-    _In_ JET_TABLEID                        tableid,
-    _In_reads_bytes_opt_( cbData ) const void * pvData,
-    _In_ unsigned long                      cbData,
-    _In_ JET_GRBIT                          grbit );
+    _In_ JET_SESID                            sesid,
+    _In_ JET_TABLEID                          tableid,
+    _In_reads_bytes_opt_( cbData ) JET_PCVOID pvData,
+    _In_ JET_UINT32                           cbData,
+    _In_ JET_GRBIT                            grbit );
 
 JET_ERR JET_API
 JetSeek(
@@ -5954,14 +6035,15 @@ JetSeek(
 #pragma region Application Family or Esent Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
 
+// FOOBY
 JET_ERR JET_API
 JetPrereadKeys(
     _In_ JET_SESID                                      sesid,
     _In_ JET_TABLEID                                    tableid,
-    _In_reads_(ckeys) const void **                 rgpvKeys,
-    _In_reads_(ckeys) const unsigned long *         rgcbKeys,
-    _In_ long                                           ckeys,
-    _Out_opt_ long *                                    pckeysPreread,
+    _In_reads_(ckeys) JET_PCVOID *                      rgpvKeys,
+    _In_reads_(ckeys) const JET_UINT32 *                rgcbKeys,
+    _In_ JET_INT32                                      ckeys,
+    _Out_opt_ JET_INT32 *                               pckeysPreread,
     _In_ JET_GRBIT                                      grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -5979,21 +6061,21 @@ JetPrereadIndexRanges(
     _In_ JET_SESID                                              sesid,
     _In_ JET_TABLEID                                            tableid,
     _In_reads_(cIndexRanges) const JET_INDEX_RANGE * const      rgIndexRanges,
-    _In_ const unsigned long                                    cIndexRanges,
-    _Out_opt_ unsigned long * const                             pcRangesPreread,
+    _In_ const JET_UINT32                                       cIndexRanges,
+    _Out_opt_ JET_UINT32 * const                                pcRangesPreread,
     _In_reads_(ccolumnidPreread) const JET_COLUMNID * const     rgcolumnidPreread,
-    _In_ const unsigned long                                    ccolumnidPreread,
+    _In_ const JET_UINT32                                       ccolumnidPreread,
     _In_ JET_GRBIT                                              grbit ); // JET_bitPrereadForward, JET_bitPrereadBackward
 
 #endif // JET_VERSION >= 0x0602
 
 JET_ERR JET_API
 JetGetBookmark(
-    _In_ JET_SESID                                      sesid,
-    _In_ JET_TABLEID                                    tableid,
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pvBookmark,
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_SESID                                           sesid,
+    _In_ JET_TABLEID                                         tableid,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pvBookmark,
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6005,15 +6087,15 @@ JetGetBookmark(
 
 JET_ERR JET_API
 JetGetSecondaryIndexBookmark(
-    _In_ JET_SESID                                                                  sesid,
-    _In_ JET_TABLEID                                                                tableid,
-    _Out_writes_bytes_to_opt_( cbSecondaryKeyMax, *pcbSecondaryKeyActual ) void *       pvSecondaryKey,
-    _In_ unsigned long                                                              cbSecondaryKeyMax,
-    _Out_opt_ unsigned long *                                                       pcbSecondaryKeyActual,
-    _Out_writes_bytes_to_opt_( cbPrimaryBookmarkMax, *pcbPrimaryBookmarkActual ) void * pvPrimaryBookmark,
-    _In_ unsigned long                                                              cbPrimaryBookmarkMax,
-    _Out_opt_ unsigned long *                                                       pcbPrimaryBookmarkActual,
-    _In_ const JET_GRBIT                                                            grbit );
+    _In_ JET_SESID                                                                         sesid,
+    _In_ JET_TABLEID                                                                       tableid,
+    _Out_writes_bytes_to_opt_( cbSecondaryKeyMax, *pcbSecondaryKeyActual ) JET_PVOID       pvSecondaryKey,
+    _In_ JET_UINT32                                                                        cbSecondaryKeyMax,
+    _Out_opt_ JET_UINT32 *                                                                 pcbSecondaryKeyActual,
+    _Out_writes_bytes_to_opt_( cbPrimaryBookmarkMax, *pcbPrimaryBookmarkActual ) JET_PVOID pvPrimaryBookmark,
+    _In_ JET_UINT32                                                                        cbPrimaryBookmarkMax,
+    _Out_opt_ JET_UINT32 *                                                                 pcbPrimaryBookmarkActual,
+    _In_ const JET_GRBIT                                                                   grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6077,8 +6159,8 @@ JetDefragmentA(
     _In_ JET_SESID              sesid,
     _In_ JET_DBID               dbid,
     _In_opt_ JET_PCSTR          szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -6094,8 +6176,8 @@ JetDefragmentW(
     _In_ JET_SESID              sesid,
     _In_ JET_DBID               dbid,
     _In_opt_ JET_PCWSTR         szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -6122,8 +6204,8 @@ JetDefragment2A(
     _In_ JET_SESID              sesid,
     _In_ JET_DBID               dbid,
     _In_opt_ JET_PCSTR          szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_CALLBACK           callback,
     _In_ JET_GRBIT              grbit );
 
@@ -6140,8 +6222,8 @@ JetDefragment2W(
     _In_ JET_SESID              sesid,
     _In_ JET_DBID               dbid,
     _In_opt_ JET_PCWSTR         szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_CALLBACK           callback,
     _In_ JET_GRBIT              grbit );
 
@@ -6168,10 +6250,10 @@ JetDefragment3A(
     _In_ JET_SESID              sesid,
     _In_ JET_PCSTR              szDatabaseName,
     _In_opt_ JET_PCSTR          szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_CALLBACK           callback,
-    _In_ void *                 pvContext,
+    _In_ JET_PVOID              pvContext,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -6187,10 +6269,10 @@ JetDefragment3W(
     _In_ JET_SESID              sesid,
     _In_ JET_PCWSTR             szDatabaseName,
     _In_opt_ JET_PCWSTR         szTableName,
-    _Inout_opt_ unsigned long * pcPasses,
-    _Inout_opt_ unsigned long * pcSeconds,
+    _Inout_opt_ JET_UINT32 *    pcPasses,
+    _Inout_opt_ JET_UINT32 *    pcSeconds,
     _In_ JET_CALLBACK           callback,
-    _In_ void *                 pvContext,
+    _In_ JET_PVOID              pvContext,
     _In_ JET_GRBIT              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -6216,8 +6298,8 @@ JET_ERR JET_API
 JetSetDatabaseSizeA(
     _In_ JET_SESID          sesid,
     _In_ JET_PCSTR          szDatabaseName,
-    _In_ unsigned long      cpg,
-    _Out_ unsigned long *   pcpgReal );
+    _In_ JET_UINT32         cpg,
+    _Out_ JET_UINT32 *      pcpgReal );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6231,8 +6313,8 @@ JET_ERR JET_API
 JetSetDatabaseSizeW(
     _In_ JET_SESID          sesid,
     _In_ JET_PCWSTR         szDatabaseName,
-    _In_ unsigned long      cpg,
-    _Out_ unsigned long *   pcpgReal );
+    _In_ JET_UINT32         cpg,
+    _Out_ JET_UINT32 *      pcpgReal );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6251,8 +6333,8 @@ JET_ERR JET_API
 JetGrowDatabase(
     _In_ JET_SESID          sesid,
     _In_ JET_DBID           dbid,
-    _In_ unsigned long      cpg,
-    _In_ unsigned long *    pcpgReal );
+    _In_ JET_UINT32         cpg,
+    _In_ JET_UINT32 *       pcpgReal );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6265,8 +6347,8 @@ JET_ERR JET_API
 JetResizeDatabase(
     _In_  JET_SESID         sesid,
     _In_  JET_DBID          dbid,
-    _In_  unsigned long     cpgTarget,
-    _Out_ unsigned long *   pcpgActual,
+    _In_  JET_UINT32        cpgTarget,
+    _Out_ JET_UINT32 *      pcpgActual,
     _In_  const JET_GRBIT   grbit );
 #endif // JET_VERSION >= 0x0602
 
@@ -6288,10 +6370,10 @@ JetResetSessionContext(
 
 JET_ERR JET_API
 JetGotoBookmark(
-    _In_ JET_SESID                      sesid,
-    _In_ JET_TABLEID                    tableid,
-    _In_reads_bytes_( cbBookmark ) void *   pvBookmark,
-    _In_ unsigned long                  cbBookmark );
+    _In_ JET_SESID                           sesid,
+    _In_ JET_TABLEID                         tableid,
+    _In_reads_bytes_( cbBookmark ) JET_PVOID pvBookmark,
+    _In_ JET_UINT32                          cbBookmark );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6303,13 +6385,13 @@ JetGotoBookmark(
 
 JET_ERR JET_API
 JetGotoSecondaryIndexBookmark(
-    _In_ JET_SESID                              sesid,
-    _In_ JET_TABLEID                            tableid,
-    _In_reads_bytes_( cbSecondaryKey ) void *       pvSecondaryKey,
-    _In_ unsigned long                          cbSecondaryKey,
-    _In_reads_bytes_opt_( cbPrimaryBookmark ) void *    pvPrimaryBookmark,
-    _In_ unsigned long                          cbPrimaryBookmark,
-    _In_ const JET_GRBIT                        grbit );
+    _In_ JET_SESID                                      sesid,
+    _In_ JET_TABLEID                                    tableid,
+    _In_reads_bytes_( cbSecondaryKey ) JET_PVOID        pvSecondaryKey,
+    _In_ JET_UINT32                                     cbSecondaryKey,
+    _In_reads_bytes_opt_( cbPrimaryBookmark ) JET_PVOID pvPrimaryBookmark,
+    _In_ JET_UINT32                                     cbPrimaryBookmark,
+    _In_ const JET_GRBIT                                grbit );
 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
@@ -6324,7 +6406,7 @@ JET_ERR JET_API
 JetIntersectIndexes(
     _In_ JET_SESID                              sesid,
     _In_reads_( cindexrange ) JET_INDEXRANGE *  rgindexrange,
-    _In_ unsigned long                          cindexrange,
+    _In_ JET_UINT32                             cindexrange,
     _Inout_ JET_RECORDLIST *                    precordlist,
     _In_ JET_GRBIT                              grbit );
 
@@ -6342,8 +6424,8 @@ JetComputeStats(
 JET_ERR JET_API
 JetOpenTempTable(
     _In_ JET_SESID                                  sesid,
-    _In_reads_( ccolumn ) const JET_COLUMNDEF * prgcolumndef,
-    _In_ unsigned long                              ccolumn,
+    _In_reads_( ccolumn ) const JET_COLUMNDEF *     prgcolumndef,
+    _In_ JET_UINT32                                 ccolumn,
     _In_ JET_GRBIT                                  grbit,
     _Out_ JET_TABLEID *                             ptableid,
     _Out_writes_( ccolumn ) JET_COLUMNID *          prgcolumnid );
@@ -6351,9 +6433,9 @@ JetOpenTempTable(
 JET_ERR JET_API
 JetOpenTempTable2(
     _In_ JET_SESID                                  sesid,
-    _In_reads_( ccolumn ) const JET_COLUMNDEF * prgcolumndef,
-    _In_ unsigned long                              ccolumn,
-    _In_ unsigned long                              lcid,
+    _In_reads_( ccolumn ) const JET_COLUMNDEF *     prgcolumndef,
+    _In_ JET_UINT32                                 ccolumn,
+    _In_ JET_LCID                                   lcid,
     _In_ JET_GRBIT                                  grbit,
     _Out_ JET_TABLEID *                             ptableid,
     _Out_writes_( ccolumn ) JET_COLUMNID *          prgcolumnid );
@@ -6367,8 +6449,8 @@ JetOpenTempTable2(
 JET_ERR JET_API
 JetOpenTempTable3(
     _In_ JET_SESID                                  sesid,
-    _In_reads_( ccolumn ) const JET_COLUMNDEF * prgcolumndef,
-    _In_ unsigned long                              ccolumn,
+    _In_reads_( ccolumn ) const JET_COLUMNDEF *     prgcolumndef,
+    _In_ JET_UINT32                                 ccolumn,
     _In_opt_ JET_UNICODEINDEX *                     pidxunicode,
     _In_ JET_GRBIT                                  grbit,
     _Out_ JET_TABLEID *                             ptableid,
@@ -6617,18 +6699,28 @@ JET_ERR JET_API
 JetIndexRecordCount(
     _In_ JET_SESID          sesid,
     _In_ JET_TABLEID        tableid,
-    _Out_ unsigned long *   pcrec,
-    _In_ unsigned long      crecMax );
+    _Out_ JET_UINT32 *      pcrec,
+    _In_ JET_UINT32         crecMax );
 
+#if ( JET_VERSION >= 0x0A01 )
+
+JET_ERR JET_API
+JetIndexRecordCount2(
+    _In_ JET_SESID              sesid,
+    _In_ JET_TABLEID            tableid,
+    _Out_ JET_UINT64 *          pcrec,
+    _In_ JET_UINT64             crecMax );
+
+#endif // JET_VERSION >= 0x0A01
 
 JET_ERR JET_API
 JetRetrieveKey(
-    _In_ JET_SESID                                      sesid,
-    _In_ JET_TABLEID                                    tableid,
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pvKey,
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual,
-    _In_ JET_GRBIT                                      grbit );
+    _In_ JET_SESID                                           sesid,
+    _In_ JET_TABLEID                                         tableid,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pvKey,
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual,
+    _In_ JET_GRBIT                                           grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6666,12 +6758,12 @@ JET_ERR JET_API JetBeginExternalBackupInstance(
 JET_ERR JET_API
 JetGetAttachInfoA(
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzDatabases,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_UINT32                                     cbMax,
+    _Out_opt_ JET_UINT32 *                              pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6684,8 +6776,8 @@ JetGetAttachInfoA(
 JET_ERR JET_API
 JetGetAttachInfoW(
     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzDatabases,
-    _In_ unsigned long                                      cbMax,
-    _Out_opt_ unsigned long *                               pcbActual );
+    _In_ JET_UINT32                                         cbMax,
+    _Out_opt_ JET_UINT32 *                                  pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6708,14 +6800,14 @@ JetGetAttachInfoW(
 
 JET_ERR JET_API
 JetGetAttachInfoInstanceA(
-    _In_ JET_INSTANCE                                   instance,
+    _In_ JET_INSTANCE                                        instance,
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzDatabases,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR  szzDatabases,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6729,8 +6821,8 @@ JET_ERR JET_API
 JetGetAttachInfoInstanceW(
     _In_ JET_INSTANCE                                       instance,
     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    szzDatabases,
-    _In_ unsigned long                                      cbMax,
-    _Out_opt_ unsigned long *                               pcbActual );
+    _In_ JET_UINT32                                         cbMax,
+    _Out_opt_ JET_UINT32 *                                  pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6756,8 +6848,8 @@ JET_ERR JET_API
 JetOpenFileA(
     _In_ JET_PCSTR          szFileName,
     _Out_ JET_HANDLE *      phfFile,
-    _Out_ unsigned long *   pulFileSizeLow,
-    _Out_ unsigned long *   pulFileSizeHigh );
+    _Out_ JET_UINT32 *      pulFileSizeLow,
+    _Out_ JET_UINT32 *      pulFileSizeHigh );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6771,8 +6863,8 @@ JET_ERR JET_API
 JetOpenFileW(
     _In_ JET_PCWSTR         szFileName,
     _Out_ JET_HANDLE *      phfFile,
-    _Out_ unsigned long *   pulFileSizeLow,
-    _Out_ unsigned long *   pulFileSizeHigh );
+    _Out_ JET_UINT32 *      pulFileSizeLow,
+    _Out_ JET_UINT32 *      pulFileSizeHigh );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6798,8 +6890,8 @@ JetOpenFileInstanceA(
     _In_ JET_INSTANCE       instance,
     _In_ JET_PCSTR          szFileName,
     _Out_ JET_HANDLE *      phfFile,
-    _Out_ unsigned long *   pulFileSizeLow,
-    _Out_ unsigned long *   pulFileSizeHigh );
+    _Out_ JET_UINT32 *      pulFileSizeLow,
+    _Out_ JET_UINT32 *      pulFileSizeHigh );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6814,8 +6906,8 @@ JetOpenFileInstanceW(
     _In_ JET_INSTANCE       instance,
     _In_ JET_PCWSTR         szFileName,
     _Out_ JET_HANDLE *      phfFile,
-    _Out_ unsigned long *   pulFileSizeLow,
-    _Out_ unsigned long *   pulFileSizeHigh );
+    _Out_ JET_UINT32 *      pulFileSizeLow,
+    _Out_ JET_UINT32 *      pulFileSizeHigh );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6835,10 +6927,10 @@ JetOpenFileInstanceW(
 
 JET_ERR JET_API
 JetReadFile(
-    _In_ JET_HANDLE                             hfFile,
-    _Out_writes_bytes_to_( cb, *pcbActual ) void *  pv,
-    _In_ unsigned long                          cb,
-    _Out_opt_ unsigned long *                   pcbActual );
+    _In_ JET_HANDLE                                   hfFile,
+    _Out_writes_bytes_to_( cb, *pcbActual ) JET_PVOID pv,
+    _In_ JET_UINT32                                   cb,
+    _Out_opt_ JET_UINT32 *                            pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6850,11 +6942,11 @@ JetReadFile(
 
 JET_ERR JET_API
 JetReadFileInstance(
-    _In_ JET_INSTANCE                           instance,
-    _In_ JET_HANDLE                             hfFile,
-    _Out_writes_bytes_to_( cb, *pcbActual ) void *  pv,
-    _In_ unsigned long                          cb,
-    _Out_opt_ unsigned long *                   pcbActual );
+    _In_ JET_INSTANCE                                 instance,
+    _In_ JET_HANDLE                                   hfFile,
+    _Out_writes_bytes_to_( cb, *pcbActual ) JET_PVOID pv,
+    _In_ JET_UINT32                                   cb,
+    _Out_opt_ JET_UINT32 *                            pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6896,12 +6988,12 @@ JetCloseFileInstance(
 JET_ERR JET_API
 JetGetLogInfoA(
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzLogs,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR  szzLogs,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6914,8 +7006,8 @@ JetGetLogInfoA(
 JET_ERR JET_API
 JetGetLogInfoW(
         _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    szzLogs,
-        _In_ unsigned long                                      cbMax,
-        _Out_opt_ unsigned long *                               pcbActual );
+        _In_ JET_UINT32                                         cbMax,
+        _Out_opt_ JET_UINT32 *                                  pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6938,14 +7030,14 @@ JetGetLogInfoW(
 
 JET_ERR JET_API
 JetGetLogInfoInstanceA(
-    _In_ JET_INSTANCE                                   instance,
+    _In_ JET_INSTANCE                                        instance,
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzLogs,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR  szzLogs,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6957,10 +7049,10 @@ JetGetLogInfoInstanceA(
 
 JET_ERR JET_API
 JetGetLogInfoInstanceW(
-    _In_ JET_INSTANCE                                       instance,
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzLogs,
-    _In_ unsigned long                                      cbMax,
-    _Out_opt_ unsigned long *                               pcbActual );
+    _In_ JET_INSTANCE                                         instance,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
+    _In_ JET_UINT32                                           cbMax,
+    _Out_opt_ JET_UINT32 *                                    pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -6976,18 +7068,18 @@ JetGetLogInfoInstanceW(
 #define JET_BASE_NAME_LENGTH    3
 typedef struct
 {
-    unsigned long   cbSize;
-    unsigned long   ulGenLow;
-    unsigned long   ulGenHigh;
-    char            szBaseName[ JET_BASE_NAME_LENGTH + 1 ];
+    JET_UINT32      cbSize;
+    JET_UINT32      ulGenLow;
+    JET_UINT32      ulGenHigh;
+    JET_CHAR        szBaseName[ JET_BASE_NAME_LENGTH + 1 ];
 } JET_LOGINFO_A;
 
 typedef struct
 {
-    unsigned long   cbSize;
-    unsigned long   ulGenLow;
-    unsigned long   ulGenHigh;
-    WCHAR           szBaseName[ JET_BASE_NAME_LENGTH + 1 ];
+    JET_UINT32      cbSize;
+    JET_UINT32      ulGenLow;
+    JET_UINT32      ulGenHigh;
+    JET_WCHAR       szBaseName[ JET_BASE_NAME_LENGTH + 1 ];
 } JET_LOGINFO_W;
 
 #ifdef JET_UNICODE
@@ -7005,15 +7097,15 @@ typedef struct
 
 JET_ERR JET_API
 JetGetLogInfoInstance2A(
-    _In_ JET_INSTANCE                                   instance,
+    _In_ JET_INSTANCE                                        instance,
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzLogs,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR  szzLogs,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual,
-    _Inout_opt_ JET_LOGINFO_A *                         pLogInfo );
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual,
+    _Inout_opt_ JET_LOGINFO_A *                              pLogInfo );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7025,11 +7117,11 @@ JetGetLogInfoInstance2A(
 
 JET_ERR JET_API
 JetGetLogInfoInstance2W(
-    _In_ JET_INSTANCE                                       instance,
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzLogs,
-    _In_ unsigned long                                      cbMax,
-    _Out_opt_ unsigned long *                               pcbActual,
-    _Inout_opt_ JET_LOGINFO_W *                             pLogInfo );
+    _In_ JET_INSTANCE                                         instance,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
+    _In_ JET_UINT32                                           cbMax,
+    _Out_opt_ JET_UINT32 *                                    pcbActual,
+    _Inout_opt_ JET_LOGINFO_W *                               pLogInfo );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7051,14 +7143,14 @@ JetGetLogInfoInstance2W(
 
 JET_ERR JET_API
 JetGetTruncateLogInfoInstanceA(
-    _In_ JET_INSTANCE                                   instance,
+    _In_ JET_INSTANCE                                        instance,
 #if ( JET_VERSION < 0x0600 )
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) void *   pv,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 #else
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR szzLogs,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PSTR  szzLogs,
 #endif
-    _In_ unsigned long                                  cbMax,
-    _Out_opt_ unsigned long *                           pcbActual );
+    _In_ JET_UINT32                                          cbMax,
+    _Out_opt_ JET_UINT32 *                                   pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7070,10 +7162,10 @@ JetGetTruncateLogInfoInstanceA(
 
 JET_ERR JET_API
 JetGetTruncateLogInfoInstanceW(
-    _In_ JET_INSTANCE                                       instance,
-    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzLogs,
-    _In_ unsigned long                                      cbMax,
-    _Out_opt_ unsigned long *                               pcbActual );
+    _In_ JET_INSTANCE                                         instance,
+    _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
+    _In_ JET_UINT32                                           cbMax,
+    _Out_opt_ JET_UINT32 *                                    pcbActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7091,7 +7183,7 @@ JetGetTruncateLogInfoInstanceW(
 #pragma region Desktop Family or Esent Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
 
-JET_ERR JET_API JetTruncateLog( void );
+JET_ERR JET_API JetTruncateLog( JET_VOID );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7113,7 +7205,7 @@ JetTruncateLogInstance(
 #pragma region Desktop Family or Esent Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
 
-JET_ERR JET_API JetEndExternalBackup( void );
+JET_ERR JET_API JetEndExternalBackup( JET_VOID );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7150,10 +7242,10 @@ JetExternalRestoreA(
     _In_ JET_PSTR                                   szCheckpointFilePath,
     _In_ JET_PSTR                                   szLogPath,
     _In_reads_opt_( crstfilemap ) JET_RSTMAP_A *    rgrstmap,
-    _In_ long                                       crstfilemap,
+    _In_ JET_INT32                                  crstfilemap,
     _In_ JET_PSTR                                   szBackupLogPath,
-    _In_ long                                       genLow,
-    _In_ long                                       genHigh,
+    _In_ JET_INT32                                  genLow,
+    _In_ JET_INT32                                  genHigh,
     _In_ JET_PFNSTATUS                              pfn );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -7169,10 +7261,10 @@ JetExternalRestoreW(
     _In_ JET_PWSTR                                  szCheckpointFilePath,
     _In_ JET_PWSTR                                  szLogPath,
     _In_reads_opt_( crstfilemap ) JET_RSTMAP_W *    rgrstmap,
-    _In_ long                                       crstfilemap,
+    _In_ JET_INT32                                  crstfilemap,
     _In_ JET_PWSTR                                  szBackupLogPath,
-    _In_ long                                       genLow,
-    _In_ long                                       genHigh,
+    _In_ JET_INT32                                  genLow,
+    _In_ JET_INT32                                  genHigh,
     _In_ JET_PFNSTATUS                              pfn );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
@@ -7199,7 +7291,7 @@ JetExternalRestore2A(
     _In_ JET_PSTR                                   szCheckpointFilePath,
     _In_ JET_PSTR                                   szLogPath,
     _In_reads_opt_( crstfilemap ) JET_RSTMAP_A *    rgrstmap,
-    _In_ long                                       crstfilemap,
+    _In_ JET_INT32                                  crstfilemap,
     _In_ JET_PSTR                                   szBackupLogPath,
     _Inout_ JET_LOGINFO_A *                         pLogInfo,
     _In_opt_ JET_PSTR                               szTargetInstanceName,
@@ -7220,7 +7312,7 @@ JetExternalRestore2W(
     _In_ JET_PWSTR                                  szCheckpointFilePath,
     _In_ JET_PWSTR                                  szLogPath,
     _In_reads_opt_( crstfilemap ) JET_RSTMAP_W *    rgrstmap,
-    _In_ long                                       crstfilemap,
+    _In_ JET_INT32                                  crstfilemap,
     _In_ JET_PWSTR                                  szBackupLogPath,
     _Inout_ JET_LOGINFO_W *                         pLogInfo,
     _In_opt_ JET_PWSTR                              szTargetInstanceName,
@@ -7248,7 +7340,7 @@ JetRegisterCallback(
     _In_ JET_TABLEID    tableid,
     _In_ JET_CBTYP      cbtyp,
     _In_ JET_CALLBACK   pCallback,
-    _In_opt_ void *     pvContext,
+    _In_opt_ JET_PVOID  pvContext,
     _In_ JET_HANDLE *   phCallbackId );
 
 JET_ERR JET_API
@@ -7264,23 +7356,23 @@ JetUnregisterCallback(
 typedef struct _JET_INSTANCE_INFO_A
 {
     JET_INSTANCE        hInstanceId;
-    char *              szInstanceName;
+    JET_PSTR            szInstanceName;
 
     JET_API_PTR         cDatabases;
-    char **             szDatabaseFileName;
-    char **             szDatabaseDisplayName;
-    char **             szDatabaseSLVFileName_Obsolete;
+    JET_PSTR *          szDatabaseFileName;
+    JET_PSTR *          szDatabaseDisplayName;
+    JET_PSTR *          szDatabaseSLVFileName_Obsolete;
 } JET_INSTANCE_INFO_A;
 
 typedef struct _JET_INSTANCE_INFO_W
 {
     JET_INSTANCE        hInstanceId;
-    WCHAR *             szInstanceName;
+    JET_PWSTR           szInstanceName;
 
     JET_API_PTR         cDatabases;
-    WCHAR **            szDatabaseFileName;
-    WCHAR **            szDatabaseDisplayName;
-    WCHAR **            szDatabaseSLVFileName_Obsolete;
+    JET_PWSTR *         szDatabaseFileName;
+    JET_PWSTR *         szDatabaseDisplayName;
+    JET_PWSTR *         szDatabaseSLVFileName_Obsolete;
 } JET_INSTANCE_INFO_W;
 
 #ifdef JET_UNICODE
@@ -7298,8 +7390,8 @@ typedef struct _JET_INSTANCE_INFO_W
 
 JET_ERR JET_API
 JetGetInstanceInfoA(
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **    paInstanceInfo );
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **  paInstanceInfo );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7311,8 +7403,8 @@ JetGetInstanceInfoA(
 
 JET_ERR JET_API
 JetGetInstanceInfoW(
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **    paInstanceInfo );
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **  paInstanceInfo );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7329,7 +7421,7 @@ JetGetInstanceInfoW(
 
 JET_ERR JET_API
 JetFreeBuffer(
-    _Pre_notnull_ char *    pbBuf );
+    _Pre_notnull_ JET_CHAR *  pbBuf );
 
 JET_ERR JET_API
 JetSetLS(
@@ -7352,7 +7444,7 @@ JetGetLS(
 #pragma region Desktop Family or Esent Package
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
 
-typedef JET_API_PTR JET_OSSNAPID;   /* Snapshot Session Identifier */
+typedef JET_API_PTR JET_OSSNAPID;   // Snapshot Session Identifier
 
 JET_ERR JET_API
 JetOSSnapshotPrepare(
@@ -7373,19 +7465,19 @@ JetOSSnapshotPrepareInstance(
 
 JET_ERR JET_API
 JetOSSnapshotFreezeA(
-    _In_ const JET_OSSNAPID                                         snapId,
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **    paInstanceInfo,
-    _In_ const JET_GRBIT                                            grbit );
+    _In_ const JET_OSSNAPID                                           snapId,
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **  paInstanceInfo,
+    _In_ const JET_GRBIT                                              grbit );
 
 #if ( JET_VERSION >= 0x0600 )
 
 JET_ERR JET_API
 JetOSSnapshotFreezeW(
-    _In_ const JET_OSSNAPID                                         snapId,
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **    paInstanceInfo,
-    _In_ const JET_GRBIT                                            grbit );
+    _In_ const JET_OSSNAPID                                           snapId,
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **  paInstanceInfo,
+    _In_ const JET_GRBIT                                              grbit );
 
 #ifdef JET_UNICODE
 #define JetOSSnapshotFreeze JetOSSnapshotFreezeW
@@ -7441,10 +7533,10 @@ JetOSSnapshotTruncateLogInstance(
 
 JET_ERR JET_API
 JetOSSnapshotGetFreezeInfoA(
-    _In_ const JET_OSSNAPID                                         snapId,
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **    paInstanceInfo,
-    _In_ const JET_GRBIT                                            grbit );
+    _In_ const JET_OSSNAPID                                           snapId,
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **  paInstanceInfo,
+    _In_ const JET_GRBIT                                              grbit );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7454,10 +7546,10 @@ JetOSSnapshotGetFreezeInfoA(
 
 JET_ERR JET_API
 JetOSSnapshotGetFreezeInfoW(
-    _In_ const JET_OSSNAPID                                         snapId,
-    _Out_ unsigned long *                                           pcInstanceInfo,
-    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **    paInstanceInfo,
-    _In_ const JET_GRBIT                                            grbit );
+    _In_ const JET_OSSNAPID                                           snapId,
+    _Out_ JET_UINT32 *                                                pcInstanceInfo,
+    _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **  paInstanceInfo,
+    _In_ const JET_GRBIT                                              grbit );
 
 #ifdef JET_UNICODE
 #define JetOSSnapshotGetFreezeInfo JetOSSnapshotGetFreezeInfoW
@@ -7527,11 +7619,11 @@ JetConfigureProcessForCrashDump(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
 
 JET_ERR JET_API JetGetErrorInfoW(
-    _In_opt_ void *                 pvContext,
-    _Out_writes_bytes_( cbMax ) void *  pvResult,
-    _In_ unsigned long              cbMax,
-    _In_ unsigned long              InfoLevel,
-    _In_ JET_GRBIT                  grbit );
+    _In_opt_ JET_PVOID                    pvContext,
+    _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
+    _In_ JET_UINT32                       cbMax,
+    _In_ JET_UINT32                       InfoLevel,
+    _In_ JET_GRBIT                        grbit );
 
 #ifdef JET_UNICODE
 #define JetGetErrorInfo JetGetErrorInfoW
@@ -7542,17 +7634,17 @@ JET_ERR JET_API JetGetErrorInfoW(
 JET_ERR JET_API
 JetSetSessionParameter(
     _In_opt_ JET_SESID                                          sesid,
-    _In_ unsigned long                                          sesparamid,
-    _In_reads_bytes_opt_( cbParam ) void *                      pvParam,
-    _In_ unsigned long                                          cbParam );
+    _In_ JET_UINT32                                             sesparamid,
+    _In_reads_bytes_opt_( cbParam ) JET_PVOID                   pvParam,
+    _In_ JET_UINT32                                             cbParam );
 
 JET_ERR JET_API
 JetGetSessionParameter(
     _In_opt_ JET_SESID                                          sesid,
-    _In_ unsigned long                                          sesparamid,
-    _Out_cap_post_count_(cbParamMax, *pcbParamActual) void *    pvParam,
-    _In_ unsigned long                                          cbParamMax,
-    _Out_opt_ unsigned long *                                   pcbParamActual );
+    _In_ JET_UINT32                                             sesparamid,
+    _Out_cap_post_count_(cbParamMax, *pcbParamActual) JET_PVOID pvParam,
+    _In_ JET_UINT32                                             cbParamMax,
+    _Out_opt_ JET_UINT32 *                                      pcbParamActual );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT) */
 #pragma endregion
@@ -7567,7 +7659,7 @@ JetGetSessionParameter(
 
 #endif  /* _JET_NOPROTOTYPES */
 
-#include <poppack.h>
+#pragma pack(pop)
 
 #ifdef  __cplusplus
 } // extern "C"

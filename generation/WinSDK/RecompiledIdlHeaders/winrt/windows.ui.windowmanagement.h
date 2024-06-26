@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1761,7 +1761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindow = _uuidof(IAppWindow);
+                MIDL_CONST_ID IID& IID_IAppWindow = __uuidof(IAppWindow);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -1818,7 +1818,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowChangedEventArgs = _uuidof(IAppWindowChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppWindowChangedEventArgs = __uuidof(IAppWindowChangedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -1860,7 +1860,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowCloseRequestedEventArgs = _uuidof(IAppWindowCloseRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppWindowCloseRequestedEventArgs = __uuidof(IAppWindowCloseRequestedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -1896,7 +1896,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowClosedEventArgs = _uuidof(IAppWindowClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppWindowClosedEventArgs = __uuidof(IAppWindowClosedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -1932,7 +1932,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowFrame = _uuidof(IAppWindowFrame);
+                MIDL_CONST_ID IID& IID_IAppWindowFrame = __uuidof(IAppWindowFrame);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -1971,7 +1971,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowFrameStyle = _uuidof(IAppWindowFrameStyle);
+                MIDL_CONST_ID IID& IID_IAppWindowFrameStyle = __uuidof(IAppWindowFrameStyle);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2013,7 +2013,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowPlacement = _uuidof(IAppWindowPlacement);
+                MIDL_CONST_ID IID& IID_IAppWindowPlacement = __uuidof(IAppWindowPlacement);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2049,7 +2049,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowPresentationConfiguration = _uuidof(IAppWindowPresentationConfiguration);
+                MIDL_CONST_ID IID& IID_IAppWindowPresentationConfiguration = __uuidof(IAppWindowPresentationConfiguration);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2082,7 +2082,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowPresentationConfigurationFactory = _uuidof(IAppWindowPresentationConfigurationFactory);
+                MIDL_CONST_ID IID& IID_IAppWindowPresentationConfigurationFactory = __uuidof(IAppWindowPresentationConfigurationFactory);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2130,7 +2130,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowPresenter = _uuidof(IAppWindowPresenter);
+                MIDL_CONST_ID IID& IID_IAppWindowPresenter = __uuidof(IAppWindowPresenter);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2170,7 +2170,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowStatics = _uuidof(IAppWindowStatics);
+                MIDL_CONST_ID IID& IID_IAppWindowStatics = __uuidof(IAppWindowStatics);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2287,7 +2287,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowTitleBar = _uuidof(IAppWindowTitleBar);
+                MIDL_CONST_ID IID& IID_IAppWindowTitleBar = __uuidof(IAppWindowTitleBar);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2323,7 +2323,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowTitleBarOcclusion = _uuidof(IAppWindowTitleBarOcclusion);
+                MIDL_CONST_ID IID& IID_IAppWindowTitleBarOcclusion = __uuidof(IAppWindowTitleBarOcclusion);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2362,7 +2362,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppWindowTitleBarVisibility = _uuidof(IAppWindowTitleBarVisibility);
+                MIDL_CONST_ID IID& IID_IAppWindowTitleBarVisibility = __uuidof(IAppWindowTitleBarVisibility);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2395,7 +2395,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICompactOverlayPresentationConfiguration = _uuidof(ICompactOverlayPresentationConfiguration);
+                MIDL_CONST_ID IID& IID_ICompactOverlayPresentationConfiguration = __uuidof(ICompactOverlayPresentationConfiguration);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2428,7 +2428,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDefaultPresentationConfiguration = _uuidof(IDefaultPresentationConfiguration);
+                MIDL_CONST_ID IID& IID_IDefaultPresentationConfiguration = __uuidof(IDefaultPresentationConfiguration);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2483,7 +2483,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDisplayRegion = _uuidof(IDisplayRegion);
+                MIDL_CONST_ID IID& IID_IDisplayRegion = __uuidof(IDisplayRegion);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2522,7 +2522,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFullScreenPresentationConfiguration = _uuidof(IFullScreenPresentationConfiguration);
+                MIDL_CONST_ID IID& IID_IFullScreenPresentationConfiguration = __uuidof(IFullScreenPresentationConfiguration);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2558,7 +2558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowServicesStatics = _uuidof(IWindowServicesStatics);
+                MIDL_CONST_ID IID& IID_IWindowServicesStatics = __uuidof(IWindowServicesStatics);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2607,7 +2607,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowingEnvironment = _uuidof(IWindowingEnvironment);
+                MIDL_CONST_ID IID& IID_IWindowingEnvironment = __uuidof(IWindowingEnvironment);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2643,7 +2643,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowingEnvironmentAddedEventArgs = _uuidof(IWindowingEnvironmentAddedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowingEnvironmentAddedEventArgs = __uuidof(IWindowingEnvironmentAddedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2676,7 +2676,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowingEnvironmentChangedEventArgs = _uuidof(IWindowingEnvironmentChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowingEnvironmentChangedEventArgs = __uuidof(IWindowingEnvironmentChangedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2712,7 +2712,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowingEnvironmentRemovedEventArgs = _uuidof(IWindowingEnvironmentRemovedEventArgs);
+                MIDL_CONST_ID IID& IID_IWindowingEnvironmentRemovedEventArgs = __uuidof(IWindowingEnvironmentRemovedEventArgs);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */
@@ -2752,7 +2752,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWindowingEnvironmentStatics = _uuidof(IWindowingEnvironmentStatics);
+                MIDL_CONST_ID IID& IID_IWindowingEnvironmentStatics = __uuidof(IWindowingEnvironmentStatics);
             } /* WindowManagement */
         } /* UI */
     } /* Windows */

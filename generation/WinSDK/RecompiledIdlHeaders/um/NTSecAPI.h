@@ -4238,6 +4238,8 @@ RtlDecryptMemory(
 #define KERB_ETYPE_DES_CBC_MD5      3
 #define KERB_ETYPE_AES128_CTS_HMAC_SHA1_96    17
 #define KERB_ETYPE_AES256_CTS_HMAC_SHA1_96    18
+#define KERB_ETYPE_AES128_CTS_HMAC_SHA256     19
+#define KERB_ETYPE_AES256_CTS_HMAC_SHA384     20
 
 
 #define KERB_ETYPE_RC4_MD4          -128    // FFFFFF80
@@ -4712,6 +4714,8 @@ typedef enum _KERB_PROTOCOL_MESSAGE_TYPE {
     KerbRetrieveKeyTabMessage,
     KerbRefreshPolicyMessage,
     KerbPrintCloudKerberosDebugMessage,
+    KerbNetworkTicketLogonMessage,
+    KerbNlChangeMachinePasswordMessage,
 #endif
 } KERB_PROTOCOL_MESSAGE_TYPE, *PKERB_PROTOCOL_MESSAGE_TYPE;
 
@@ -5172,6 +5176,21 @@ typedef struct _KERB_SETPASSWORD_EX_REQUEST {
     UNICODE_STRING KdcAddress;
     ULONG          KdcAddressType;
  } KERB_SETPASSWORD_EX_REQUEST, *PKERB_SETPASSWORD_EX_REQUEST;
+
+
+//
+// KerbNlChangeMachinePassword
+//
+// KerbNlChangeMachinePassword creates a password bound by CredGuard
+//  and changes the password on the KDC machine account plus
+//  the password cache and logon credentials if applicable.
+//
+//
+
+typedef struct _KERB_CHANGEMACHINEPASSWORD_REQUEST {
+    KERB_PROTOCOL_MESSAGE_TYPE MessageType;
+    BOOLEAN        Impersonating;
+} KERB_CHANGEMACHINEPASSWORD_REQUEST, *PKERB_CHANGEMACHINEPASSWORD_REQUEST;
 
                                                                    
 #define DS_UNKNOWN_ADDRESS_TYPE         0 // anything *but* IP

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -2011,7 +2011,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionCompletedEventArgs = _uuidof(ISpeechContinuousRecognitionCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionCompletedEventArgs = __uuidof(ISpeechContinuousRecognitionCompletedEventArgs);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2047,7 +2047,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionResultGeneratedEventArgs = _uuidof(ISpeechContinuousRecognitionResultGeneratedEventArgs);
+                MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionResultGeneratedEventArgs = __uuidof(ISpeechContinuousRecognitionResultGeneratedEventArgs);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2117,7 +2117,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionSession = _uuidof(ISpeechContinuousRecognitionSession);
+                MIDL_CONST_ID IID& IID_ISpeechContinuousRecognitionSession = __uuidof(ISpeechContinuousRecognitionSession);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2153,7 +2153,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionCompilationResult = _uuidof(ISpeechRecognitionCompilationResult);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionCompilationResult = __uuidof(ISpeechRecognitionCompilationResult);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2205,7 +2205,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionConstraint = _uuidof(ISpeechRecognitionConstraint);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionConstraint = __uuidof(ISpeechRecognitionConstraint);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2244,7 +2244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionGrammarFileConstraint = _uuidof(ISpeechRecognitionGrammarFileConstraint);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionGrammarFileConstraint = __uuidof(ISpeechRecognitionGrammarFileConstraint);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2286,7 +2286,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionGrammarFileConstraintFactory = _uuidof(ISpeechRecognitionGrammarFileConstraintFactory);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionGrammarFileConstraintFactory = __uuidof(ISpeechRecognitionGrammarFileConstraintFactory);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2322,7 +2322,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionHypothesis = _uuidof(ISpeechRecognitionHypothesis);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionHypothesis = __uuidof(ISpeechRecognitionHypothesis);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2358,7 +2358,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionHypothesisGeneratedEventArgs = _uuidof(ISpeechRecognitionHypothesisGeneratedEventArgs);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionHypothesisGeneratedEventArgs = __uuidof(ISpeechRecognitionHypothesisGeneratedEventArgs);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2397,7 +2397,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionListConstraint = _uuidof(ISpeechRecognitionListConstraint);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionListConstraint = __uuidof(ISpeechRecognitionListConstraint);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2439,7 +2439,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionListConstraintFactory = _uuidof(ISpeechRecognitionListConstraintFactory);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionListConstraintFactory = __uuidof(ISpeechRecognitionListConstraintFactory);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2475,7 +2475,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionQualityDegradingEventArgs = _uuidof(ISpeechRecognitionQualityDegradingEventArgs);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionQualityDegradingEventArgs = __uuidof(ISpeechRecognitionQualityDegradingEventArgs);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2533,7 +2533,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionResult = _uuidof(ISpeechRecognitionResult);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionResult = __uuidof(ISpeechRecognitionResult);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2572,7 +2572,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionResult2 = _uuidof(ISpeechRecognitionResult2);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionResult2 = __uuidof(ISpeechRecognitionResult2);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2608,7 +2608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionSemanticInterpretation = _uuidof(ISpeechRecognitionSemanticInterpretation);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionSemanticInterpretation = __uuidof(ISpeechRecognitionSemanticInterpretation);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2650,7 +2650,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionTopicConstraint = _uuidof(ISpeechRecognitionTopicConstraint);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionTopicConstraint = __uuidof(ISpeechRecognitionTopicConstraint);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2694,7 +2694,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionTopicConstraintFactory = _uuidof(ISpeechRecognitionTopicConstraintFactory);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionTopicConstraintFactory = __uuidof(ISpeechRecognitionTopicConstraintFactory);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2730,7 +2730,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognitionVoiceCommandDefinitionConstraint = _uuidof(ISpeechRecognitionVoiceCommandDefinitionConstraint);
+                MIDL_CONST_ID IID& IID_ISpeechRecognitionVoiceCommandDefinitionConstraint = __uuidof(ISpeechRecognitionVoiceCommandDefinitionConstraint);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2801,7 +2801,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizer = _uuidof(ISpeechRecognizer);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizer = __uuidof(ISpeechRecognizer);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2850,7 +2850,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizer2 = _uuidof(ISpeechRecognizer2);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizer2 = __uuidof(ISpeechRecognizer2);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2887,7 +2887,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerFactory = _uuidof(ISpeechRecognizerFactory);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerFactory = __uuidof(ISpeechRecognizerFactory);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2923,7 +2923,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerStateChangedEventArgs = _uuidof(ISpeechRecognizerStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerStateChangedEventArgs = __uuidof(ISpeechRecognizerStateChangedEventArgs);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -2965,7 +2965,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerStatics = _uuidof(ISpeechRecognizerStatics);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerStatics = __uuidof(ISpeechRecognizerStatics);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3002,7 +3002,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerStatics2 = _uuidof(ISpeechRecognizerStatics2);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerStatics2 = __uuidof(ISpeechRecognizerStatics2);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3053,7 +3053,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerTimeouts = _uuidof(ISpeechRecognizerTimeouts);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerTimeouts = __uuidof(ISpeechRecognizerTimeouts);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3110,7 +3110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISpeechRecognizerUIOptions = _uuidof(ISpeechRecognizerUIOptions);
+                MIDL_CONST_ID IID& IID_ISpeechRecognizerUIOptions = __uuidof(ISpeechRecognizerUIOptions);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3159,7 +3159,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandManager = _uuidof(IVoiceCommandManager);
+                MIDL_CONST_ID IID& IID_IVoiceCommandManager = __uuidof(IVoiceCommandManager);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3215,7 +3215,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandSet = _uuidof(IVoiceCommandSet);
+                MIDL_CONST_ID IID& IID_IVoiceCommandSet = __uuidof(IVoiceCommandSet);
             } /* SpeechRecognition */
         } /* Media */
     } /* Windows */
@@ -3507,8 +3507,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.SpeechRecognition.ISpeechRecognizer ** Default Interface **
@@ -8963,8 +8963,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.SpeechRecognition.ISpeechRecognizerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.SpeechRecognition.ISpeechRecognizer ** Default Interface **

@@ -45,7 +45,8 @@ Abstract:
 #define WLDP_CANEXECUTEBUFFER_FN                    "WldpCanExecuteBuffer"
 #define WLDP_CANEXECUTEFILE_FN                      "WldpCanExecuteFile"
 #define WLDP_CANEXECUTEBUFFER_FN                    "WldpCanExecuteBuffer"
-
+#define WLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_FN "WldpCanExecuteFileFromDetachedSignature"
+#define WLDP_QUERYSECURITYPOLICY_FN                 "WldpQuerySecurityPolicy"
 //
 //  Policy state bits.
 //
@@ -362,6 +363,47 @@ WldpIsClassInApprovedList(
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN8 */
 
+#if NTTDI_VERSION >= NTTDI_WIN10_RS1
+
+//
+// This routine queries secure setting of active Device Guard policies.
+//
+
+typedef struct _UNICODE_STRING  UNICODE_STRING, *PUNICODE_STRING;
+
+//
+// Secure setting types.
+//
+
+typedef enum WLDP_SECURE_SETTING_VALUE_TYPE
+{
+    WLDP_SECURE_SETTING_VALUE_TYPE_BOOLEAN = 0,
+    WLDP_SECURE_SETTING_VALUE_TYPE_ULONG,
+    WLDP_SECURE_SETTING_VALUE_TYPE_BINARY,
+    WLDP_SECURE_SETTING_VALUE_TYPE_STRING
+} WLDP_SECURE_SETTING_VALUE_TYPE, *PWLDP_SECURE_SETTING_VALUE_TYPE;
+
+STDAPI
+WldpQuerySecurityPolicy(
+    _In_ const UNICODE_STRING * providerName,
+    _In_ const UNICODE_STRING * keyName,
+    _In_ const UNICODE_STRING * valueName,
+    _Out_ PWLDP_SECURE_SETTING_VALUE_TYPE valueType,
+    _Out_writes_bytes_opt_(*valueSize) PVOID valueAddress,
+    _Inout_ PULONG valueSize
+    );
+
+typedef HRESULT(WINAPI *PWLDP_QUERYSECURITYPOLICY_API)(
+    _In_ const UNICODE_STRING * providerName,
+    _In_ const UNICODE_STRING * keyName,
+    _In_ const UNICODE_STRING * valueName,
+    _Out_ PWLDP_SECURE_SETTING_VALUE_TYPE valueType,
+    _Out_writes_bytes_opt_(*valueSize) PVOID valueAddress,
+    _Inout_ PULONG valueSize
+    );
+
+#endif /* NTTDI_VERSION >= NTTDI_WIN10_RS1 */
+
 #if NTDDI_VERSION >= NTDDI_WIN10_RS4
 
 //
@@ -607,6 +649,80 @@ typedef HRESULT(WINAPI *PWLDP_CANEXECUTESTREAM_API)(
 );
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_NI */
+
+#if NTDDI_VERSION >= NTDDI_WIN10_CU
+
+STDAPI
+WldpCanExecuteFileFromDetachedSignature(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ HANDLE contentFileHandle,
+    _In_ HANDLE signatureFileHandle,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY* result
+);
+
+typedef HRESULT(WINAPI *PWLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_API)(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ HANDLE contentFileHandle,
+    _In_ HANDLE signatureFileHandle,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY* result
+);
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN10_CU */
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+STDAPI
+WldpGetApplicationSettingBoolean(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _Out_ BOOL *result
+    );
+
+typedef HRESULT(WINAPI *PWLDP_GETAPPLICATIONSETTINGBOOLEAN_API)(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _Out_ BOOL *result
+    );
+
+STDAPI
+WldpGetApplicationSettingStringList(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _In_ SIZE_T dataCount,
+    _Out_ SIZE_T *requiredCount,
+    _Out_writes_to_opt_(dataCount, *requiredCount) PZZWSTR result
+    );
+
+typedef HRESULT(WINAPI *PWLDP_GETAPPLICATIONSETTINGSTRINGLIST_API)(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _In_ SIZE_T dataCount,
+    _Out_ SIZE_T *requiredCount,
+    _Out_writes_to_opt_(dataCount, *requiredCount) PZZWSTR result
+    );
+
+STDAPI
+WldpGetApplicationSettingStringSet(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _In_ SIZE_T dataCount,
+    _Out_ SIZE_T *requiredCount,
+    _Out_writes_to_opt_(dataCount, *requiredCount) PZZWSTR result
+    );
+
+typedef HRESULT(WINAPI *PWLDP_GETAPPLICATIONSETTINGSTRINGSET_API)(
+    _In_ PCWSTR id,
+    _In_ PCWSTR setting,
+    _In_ SIZE_T dataCount,
+    _Out_ SIZE_T *requiredCount,
+    _Out_writes_to_opt_(dataCount, *requiredCount) PZZWSTR result
+    );
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GA */
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

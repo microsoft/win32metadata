@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -4173,7 +4173,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Shutdown(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBackgroundMediaPlayerStatics = _uuidof(IBackgroundMediaPlayerStatics);
+                MIDL_CONST_ID IID& IID_IBackgroundMediaPlayerStatics = __uuidof(IBackgroundMediaPlayerStatics);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4212,7 +4212,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentMediaPlaybackItemChangedEventArgs = _uuidof(ICurrentMediaPlaybackItemChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ICurrentMediaPlaybackItemChangedEventArgs = __uuidof(ICurrentMediaPlaybackItemChangedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4251,7 +4251,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentMediaPlaybackItemChangedEventArgs2 = _uuidof(ICurrentMediaPlaybackItemChangedEventArgs2);
+                MIDL_CONST_ID IID& IID_ICurrentMediaPlaybackItemChangedEventArgs2 = __uuidof(ICurrentMediaPlaybackItemChangedEventArgs2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4302,7 +4302,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreak = _uuidof(IMediaBreak);
+                MIDL_CONST_ID IID& IID_IMediaBreak = __uuidof(IMediaBreak);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4338,7 +4338,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakEndedEventArgs = _uuidof(IMediaBreakEndedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaBreakEndedEventArgs = __uuidof(IMediaBreakEndedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4380,7 +4380,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakFactory = _uuidof(IMediaBreakFactory);
+                MIDL_CONST_ID IID& IID_IMediaBreakFactory = __uuidof(IMediaBreakFactory);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4451,7 +4451,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE SkipCurrentBreak(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakManager = _uuidof(IMediaBreakManager);
+                MIDL_CONST_ID IID& IID_IMediaBreakManager = __uuidof(IMediaBreakManager);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4515,7 +4515,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakSchedule = _uuidof(IMediaBreakSchedule);
+                MIDL_CONST_ID IID& IID_IMediaBreakSchedule = __uuidof(IMediaBreakSchedule);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4557,7 +4557,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakSeekedOverEventArgs = _uuidof(IMediaBreakSeekedOverEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaBreakSeekedOverEventArgs = __uuidof(IMediaBreakSeekedOverEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4593,7 +4593,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakSkippedEventArgs = _uuidof(IMediaBreakSkippedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaBreakSkippedEventArgs = __uuidof(IMediaBreakSkippedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4629,7 +4629,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaBreakStartedEventArgs = _uuidof(IMediaBreakStartedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaBreakStartedEventArgs = __uuidof(IMediaBreakStartedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4675,7 +4675,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaEnginePlaybackSource = _uuidof(IMediaEnginePlaybackSource);
+                MIDL_CONST_ID IID& IID_IMediaEnginePlaybackSource = __uuidof(IMediaEnginePlaybackSource);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4727,7 +4727,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ClearAll(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaItemDisplayProperties = _uuidof(IMediaItemDisplayProperties);
+                MIDL_CONST_ID IID& IID_IMediaItemDisplayProperties = __uuidof(IMediaItemDisplayProperties);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4869,7 +4869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManager = _uuidof(IMediaPlaybackCommandManager);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManager = __uuidof(IMediaPlaybackCommandManager);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4914,7 +4914,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -4966,7 +4966,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerCommandBehavior = _uuidof(IMediaPlaybackCommandManagerCommandBehavior);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerCommandBehavior = __uuidof(IMediaPlaybackCommandManagerCommandBehavior);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5008,7 +5008,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerFastForwardReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerFastForwardReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerFastForwardReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerFastForwardReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5050,7 +5050,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerNextReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerNextReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerNextReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerNextReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5092,7 +5092,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPauseReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerPauseReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPauseReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerPauseReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5134,7 +5134,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPlayReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerPlayReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPlayReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerPlayReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5179,7 +5179,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPositionReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerPositionReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPositionReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerPositionReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5221,7 +5221,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPreviousReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerPreviousReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerPreviousReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerPreviousReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5266,7 +5266,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerRateReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerRateReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerRateReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerRateReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5308,7 +5308,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerRewindReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerRewindReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerRewindReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerRewindReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5353,7 +5353,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerShuffleReceivedEventArgs = _uuidof(IMediaPlaybackCommandManagerShuffleReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackCommandManagerShuffleReceivedEventArgs = __uuidof(IMediaPlaybackCommandManagerShuffleReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5422,7 +5422,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItem = _uuidof(IMediaPlaybackItem);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItem = __uuidof(IMediaPlaybackItem);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5480,7 +5480,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItem2 = _uuidof(IMediaPlaybackItem2);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItem2 = __uuidof(IMediaPlaybackItem2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5533,7 +5533,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItem3 = _uuidof(IMediaPlaybackItem3);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItem3 = __uuidof(IMediaPlaybackItem3);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5572,7 +5572,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemError = _uuidof(IMediaPlaybackItemError);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemError = __uuidof(IMediaPlaybackItemError);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5609,7 +5609,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemFactory = _uuidof(IMediaPlaybackItemFactory);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemFactory = __uuidof(IMediaPlaybackItemFactory);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5656,7 +5656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemFactory2 = _uuidof(IMediaPlaybackItemFactory2);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemFactory2 = __uuidof(IMediaPlaybackItemFactory2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5695,7 +5695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemFailedEventArgs = _uuidof(IMediaPlaybackItemFailedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemFailedEventArgs = __uuidof(IMediaPlaybackItemFailedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5731,7 +5731,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemOpenedEventArgs = _uuidof(IMediaPlaybackItemOpenedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemOpenedEventArgs = __uuidof(IMediaPlaybackItemOpenedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5768,7 +5768,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackItemStatics = _uuidof(IMediaPlaybackItemStatics);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackItemStatics = __uuidof(IMediaPlaybackItemStatics);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5856,7 +5856,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackList = _uuidof(IMediaPlaybackList);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackList = __uuidof(IMediaPlaybackList);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5911,7 +5911,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackList2 = _uuidof(IMediaPlaybackList2);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackList2 = __uuidof(IMediaPlaybackList2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -5955,7 +5955,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackList3 = _uuidof(IMediaPlaybackList3);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackList3 = __uuidof(IMediaPlaybackList3);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6112,7 +6112,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSession = _uuidof(IMediaPlaybackSession);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSession = __uuidof(IMediaPlaybackSession);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6196,7 +6196,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSession2 = _uuidof(IMediaPlaybackSession2);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSession2 = __uuidof(IMediaPlaybackSession2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6238,7 +6238,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSession3 = _uuidof(IMediaPlaybackSession3);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSession3 = __uuidof(IMediaPlaybackSession3);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6274,7 +6274,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSessionBufferingStartedEventArgs = _uuidof(IMediaPlaybackSessionBufferingStartedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSessionBufferingStartedEventArgs = __uuidof(IMediaPlaybackSessionBufferingStartedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6310,7 +6310,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSessionOutputDegradationPolicyState = _uuidof(IMediaPlaybackSessionOutputDegradationPolicyState);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSessionOutputDegradationPolicyState = __uuidof(IMediaPlaybackSessionOutputDegradationPolicyState);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6341,7 +6341,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSource = _uuidof(IMediaPlaybackSource);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSource = __uuidof(IMediaPlaybackSource);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6404,7 +6404,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackSphericalVideoProjection = _uuidof(IMediaPlaybackSphericalVideoProjection);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackSphericalVideoProjection = __uuidof(IMediaPlaybackSphericalVideoProjection);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6452,7 +6452,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlaybackTimedMetadataTrackList = _uuidof(IMediaPlaybackTimedMetadataTrackList);
+                MIDL_CONST_ID IID& IID_IMediaPlaybackTimedMetadataTrackList = __uuidof(IMediaPlaybackTimedMetadataTrackList);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6689,7 +6689,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer = _uuidof(IMediaPlayer);
+                MIDL_CONST_ID IID& IID_IMediaPlayer = __uuidof(IMediaPlayer);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6737,7 +6737,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer2 = _uuidof(IMediaPlayer2);
+                MIDL_CONST_ID IID& IID_IMediaPlayer2 = __uuidof(IMediaPlayer2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6834,7 +6834,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer3 = _uuidof(IMediaPlayer3);
+                MIDL_CONST_ID IID& IID_IMediaPlayer3 = __uuidof(IMediaPlayer3);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6874,7 +6874,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer4 = _uuidof(IMediaPlayer4);
+                MIDL_CONST_ID IID& IID_IMediaPlayer4 = __uuidof(IMediaPlayer4);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6931,7 +6931,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer5 = _uuidof(IMediaPlayer5);
+                MIDL_CONST_ID IID& IID_IMediaPlayer5 = __uuidof(IMediaPlayer5);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -6980,7 +6980,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer6 = _uuidof(IMediaPlayer6);
+                MIDL_CONST_ID IID& IID_IMediaPlayer6 = __uuidof(IMediaPlayer6);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7016,7 +7016,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayer7 = _uuidof(IMediaPlayer7);
+                MIDL_CONST_ID IID& IID_IMediaPlayer7 = __uuidof(IMediaPlayer7);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7052,7 +7052,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerDataReceivedEventArgs = _uuidof(IMediaPlayerDataReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlayerDataReceivedEventArgs = __uuidof(IMediaPlayerDataReceivedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7091,7 +7091,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE RemoveAllEffects(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerEffects = _uuidof(IMediaPlayerEffects);
+                MIDL_CONST_ID IID& IID_IMediaPlayerEffects = __uuidof(IMediaPlayerEffects);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7129,7 +7129,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerEffects2 = _uuidof(IMediaPlayerEffects2);
+                MIDL_CONST_ID IID& IID_IMediaPlayerEffects2 = __uuidof(IMediaPlayerEffects2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7171,7 +7171,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerFailedEventArgs = _uuidof(IMediaPlayerFailedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlayerFailedEventArgs = __uuidof(IMediaPlayerFailedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7207,7 +7207,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerRateChangedEventArgs = _uuidof(IMediaPlayerRateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPlayerRateChangedEventArgs = __uuidof(IMediaPlayerRateChangedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7264,7 +7264,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerSource = _uuidof(IMediaPlayerSource);
+                MIDL_CONST_ID IID& IID_IMediaPlayerSource = __uuidof(IMediaPlayerSource);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7303,7 +7303,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerSource2 = _uuidof(IMediaPlayerSource2);
+                MIDL_CONST_ID IID& IID_IMediaPlayerSource2 = __uuidof(IMediaPlayerSource2);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7345,7 +7345,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPlayerSurface = _uuidof(IMediaPlayerSurface);
+                MIDL_CONST_ID IID& IID_IMediaPlayerSurface = __uuidof(IMediaPlayerSurface);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7387,7 +7387,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaybackMediaMarker = _uuidof(IPlaybackMediaMarker);
+                MIDL_CONST_ID IID& IID_IPlaybackMediaMarker = __uuidof(IPlaybackMediaMarker);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7430,7 +7430,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerFactory = _uuidof(IPlaybackMediaMarkerFactory);
+                MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerFactory = __uuidof(IPlaybackMediaMarkerFactory);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7466,7 +7466,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerReachedEventArgs = _uuidof(IPlaybackMediaMarkerReachedEventArgs);
+                MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerReachedEventArgs = __uuidof(IPlaybackMediaMarkerReachedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7509,7 +7509,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerSequence = _uuidof(IPlaybackMediaMarkerSequence);
+                MIDL_CONST_ID IID& IID_IPlaybackMediaMarkerSequence = __uuidof(IPlaybackMediaMarkerSequence);
             } /* Playback */
         } /* Media */
     } /* Windows */
@@ -7551,7 +7551,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimedMetadataPresentationModeChangedEventArgs = _uuidof(ITimedMetadataPresentationModeChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITimedMetadataPresentationModeChangedEventArgs = __uuidof(ITimedMetadataPresentationModeChangedEventArgs);
             } /* Playback */
         } /* Media */
     } /* Windows */

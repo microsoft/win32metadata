@@ -36,6 +36,8 @@ namespace Windows
     {
         runtimeclass Deferral;
 
+        interface IAsyncAction;
+
         interface IClosable;
     }
 }
@@ -156,15 +158,23 @@ namespace Windows
 
                 interface IDisplayAdapter;
 
+                interface IDisplayAdapter2;
+
                 interface IDisplayAdapterStatics;
 
                 interface IDisplayDevice;
 
                 interface IDisplayDevice2;
 
+                interface IDisplayDeviceRenderAdapter;
+
                 interface IDisplayFence;
 
                 interface IDisplayManager;
+
+                interface IDisplayManager2;
+
+                interface IDisplayManager3;
 
                 interface IDisplayManagerChangedEventArgs;
 
@@ -181,6 +191,10 @@ namespace Windows
                 interface IDisplayModeInfo;
 
                 interface IDisplayModeInfo2;
+
+                interface IDisplayMuxDevice;
+
+                interface IDisplayMuxDeviceStatics;
 
                 interface IDisplayPath;
 
@@ -243,6 +257,8 @@ namespace Windows
                 runtimeclass DisplayManagerResultWithState;
 
                 runtimeclass DisplayModeInfo;
+
+                runtimeclass DisplayMuxDevice;
 
                 runtimeclass DisplayPath;
 
@@ -315,6 +331,8 @@ namespace Windows
 
                     interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Display.Core.DisplayView*>;
 
+                    interface Windows.Foundation.IAsyncOperation<Windows.Devices.Display.Core.DisplayMuxDevice*>;
+
                     interface Windows.Foundation.IReference<Windows.Devices.Display.Core.DisplayPresentationRate>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplayManager*, Windows.Devices.Display.Core.DisplayManagerChangedEventArgs*>;
@@ -324,6 +342,8 @@ namespace Windows
                     interface Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplayManager*, Windows.Devices.Display.Core.DisplayManagerEnabledEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplayManager*, Windows.Devices.Display.Core.DisplayManagerPathsFailedOrInvalidatedEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplayMuxDevice*, IInspectable*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplaySource*, IInspectable*>;
                 }
@@ -554,6 +574,15 @@ namespace Windows
                     [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<GUID, IInspectable*>** value);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayAdapter)]
+                [uuid(9AB49B18-B3C7-5546-8374-A9127111EDD8)]
+                interface IDisplayAdapter2 : IInspectable
+                {
+                    [propget] HRESULT IsIndirectDisplayDevice([out] [retval] boolean* value);
+                    [propget] HRESULT PreferredRenderAdapter([out] [retval] Windows.Devices.Display.Core.DisplayAdapter** value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
                 [exclusiveto(Windows.Devices.Display.Core.DisplayAdapter)]
                 [uuid(1DAC3CDA-481F-5469-8470-82C4BA680A28)]
@@ -582,6 +611,14 @@ namespace Windows
                 interface IDisplayDevice2 : IInspectable
                 {
                     HRESULT CreateSimpleScanoutWithDirtyRectsAndOptions([in] Windows.Devices.Display.Core.DisplaySource* source, [in] Windows.Devices.Display.Core.DisplaySurface* surface, [in] UINT32 subresourceIndex, [in] UINT32 syncInterval, [in] Windows.Foundation.Collections.IIterable<Windows.Graphics.RectInt32>* dirtyRects, [in] Windows.Devices.Display.Core.DisplayScanoutOptions options, [out] [retval] Windows.Devices.Display.Core.DisplayScanout** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayDevice)]
+                [uuid(41C86CE5-B18F-573F-9D59-70463115E4CC)]
+                interface IDisplayDeviceRenderAdapter : IInspectable
+                {
+                    [propget] HRESULT RenderAdapterId([out] [retval] Windows.Graphics.DisplayAdapterId* value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -615,6 +652,22 @@ namespace Windows
                     [eventremove] HRESULT PathsFailedOrInvalidated([in] EventRegistrationToken token);
                     HRESULT Start();
                     HRESULT Stop();
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayManager)]
+                [uuid(E001EC1E-7EB1-597F-9A30-14D3FE3714CD)]
+                interface IDisplayManager2 : IInspectable
+                {
+                    HRESULT TryReadCurrentStateForModeQuery([out] [retval] Windows.Devices.Display.Core.DisplayManagerResultWithState** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayManager)]
+                [uuid(6F14CB89-7F49-587D-93CE-77487CBCB530)]
+                interface IDisplayManager3 : IInspectable
+                {
+                    HRESULT CreateDisplayDeviceForIndirectAdapter([in] Windows.Devices.Display.Core.DisplayAdapter* indirectAdapter, [in] Windows.Devices.Display.Core.DisplayAdapter* renderAdapter, [out] [retval] Windows.Devices.Display.Core.DisplayDevice** result);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -697,6 +750,32 @@ namespace Windows
                 interface IDisplayModeInfo2 : IInspectable
                 {
                     [propget] HRESULT PhysicalPresentationRate([out] [retval] Windows.Devices.Display.Core.DisplayPresentationRate* value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayMuxDevice)]
+                [uuid(D81C4925-83DD-52C9-AB4E-E0833FC75068)]
+                interface IDisplayMuxDevice : IInspectable
+                {
+                    [propget] HRESULT Id([out] [retval] HSTRING* value);
+                    [propget] HRESULT IsActive([out] [retval] boolean* value);
+                    HRESULT GetAvailableMuxTargets([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.Display.Core.DisplayTarget*>** result);
+                    [propget] HRESULT CurrentTarget([out] [retval] Windows.Devices.Display.Core.DisplayTarget** value);
+                    [propget] HRESULT PreferredTarget([out] [retval] Windows.Devices.Display.Core.DisplayTarget** value);
+                    [propget] HRESULT IsAutomaticTargetSwitchingEnabled([out] [retval] boolean* value);
+                    HRESULT SetPreferredTarget([in] Windows.Devices.Display.Core.DisplayTarget* target, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                    HRESULT SetAutomaticTargetSwitching([out] [retval] Windows.Foundation.IAsyncAction** operation);
+                    [eventadd] HRESULT Changed([in] Windows.Foundation.TypedEventHandler<Windows.Devices.Display.Core.DisplayMuxDevice*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT Changed([in] EventRegistrationToken token);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Display.Core.DisplayMuxDevice)]
+                [uuid(7B37A64A-0465-53DA-BAEE-70028480CED0)]
+                interface IDisplayMuxDeviceStatics : IInspectable
+                {
+                    HRESULT GetDeviceSelector([out] [retval] HSTRING* result);
+                    HRESULT FromIdAsync([in] HSTRING deviceInterfaceId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Display.Core.DisplayMuxDevice*>** operation);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -946,6 +1025,7 @@ namespace Windows
                 runtimeclass DisplayAdapter
                 {
                     [default] interface Windows.Devices.Display.Core.IDisplayAdapter;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Display.Core.IDisplayAdapter2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -954,6 +1034,7 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Display.Core.IDisplayDevice;
                     [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.Devices.Display.Core.IDisplayDevice2;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -970,6 +1051,8 @@ namespace Windows
                 runtimeclass DisplayManager
                 {
                     [default] interface Windows.Devices.Display.Core.IDisplayManager;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Display.Core.IDisplayManager2;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Display.Core.IDisplayManager3;
                     interface Windows.Foundation.IClosable;
                 }
 
@@ -1014,6 +1097,16 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Display.Core.IDisplayModeInfo;
                     [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.Devices.Display.Core.IDisplayModeInfo2;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [marshaling_behavior(agile)]
+                [static(Windows.Devices.Display.Core.IDisplayMuxDeviceStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+                [threading(both)]
+                runtimeclass DisplayMuxDevice
+                {
+                    [default] interface Windows.Devices.Display.Core.IDisplayMuxDevice;
+                    interface Windows.Foundation.IClosable;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]

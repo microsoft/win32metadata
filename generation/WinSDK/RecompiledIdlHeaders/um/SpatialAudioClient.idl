@@ -48,6 +48,8 @@ typedef[v1_enum] enum AudioObjectType
     AudioObjectType_BottomBackLeft   = 1 << 15,
     AudioObjectType_BottomBackRight  = 1 << 16,
     AudioObjectType_BackCenter       = 1 << 17,
+    AudioObjectType_StereoLeft       = 1 << 18, // Equivalent to SPEAKER_FRONT_LEFT without any virtualization
+    AudioObjectType_StereoRight      = 1 << 19, // Equivalent to SPEAKER_FRONT_RIGHT without any virtualization
 } AudioObjectType;
 
 cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(AudioObjectType);")

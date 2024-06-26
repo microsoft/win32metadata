@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1625,7 +1625,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequest = _uuidof(IBarcodeScannerDisableScannerRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequest = __uuidof(IBarcodeScannerDisableScannerRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1669,7 +1669,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequest2 = _uuidof(IBarcodeScannerDisableScannerRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequest2 = __uuidof(IBarcodeScannerDisableScannerRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1710,7 +1710,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequestEventArgs = _uuidof(IBarcodeScannerDisableScannerRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerDisableScannerRequestEventArgs = __uuidof(IBarcodeScannerDisableScannerRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1751,7 +1751,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequest = _uuidof(IBarcodeScannerEnableScannerRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequest = __uuidof(IBarcodeScannerEnableScannerRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1795,7 +1795,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequest2 = _uuidof(IBarcodeScannerEnableScannerRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequest2 = __uuidof(IBarcodeScannerEnableScannerRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1836,7 +1836,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequestEventArgs = _uuidof(IBarcodeScannerEnableScannerRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerEnableScannerRequestEventArgs = __uuidof(IBarcodeScannerEnableScannerRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1890,7 +1890,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerFrameReader = _uuidof(IBarcodeScannerFrameReader);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerFrameReader = __uuidof(IBarcodeScannerFrameReader);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1928,7 +1928,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerFrameReaderFrameArrivedEventArgs = _uuidof(IBarcodeScannerFrameReaderFrameArrivedEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerFrameReaderFrameArrivedEventArgs = __uuidof(IBarcodeScannerFrameReaderFrameArrivedEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -1973,7 +1973,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequest = _uuidof(IBarcodeScannerGetSymbologyAttributesRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequest = __uuidof(IBarcodeScannerGetSymbologyAttributesRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2017,7 +2017,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequest2 = _uuidof(IBarcodeScannerGetSymbologyAttributesRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequest2 = __uuidof(IBarcodeScannerGetSymbologyAttributesRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2058,7 +2058,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequestEventArgs = _uuidof(IBarcodeScannerGetSymbologyAttributesRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerGetSymbologyAttributesRequestEventArgs = __uuidof(IBarcodeScannerGetSymbologyAttributesRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2099,7 +2099,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequest = _uuidof(IBarcodeScannerHideVideoPreviewRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequest = __uuidof(IBarcodeScannerHideVideoPreviewRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2143,7 +2143,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequest2 = _uuidof(IBarcodeScannerHideVideoPreviewRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequest2 = __uuidof(IBarcodeScannerHideVideoPreviewRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2184,7 +2184,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequestEventArgs = _uuidof(IBarcodeScannerHideVideoPreviewRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerHideVideoPreviewRequestEventArgs = __uuidof(IBarcodeScannerHideVideoPreviewRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2321,7 +2321,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerProviderConnection = _uuidof(IBarcodeScannerProviderConnection);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerProviderConnection = __uuidof(IBarcodeScannerProviderConnection);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2368,7 +2368,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerProviderConnection2 = _uuidof(IBarcodeScannerProviderConnection2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerProviderConnection2 = __uuidof(IBarcodeScannerProviderConnection2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2406,7 +2406,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerProviderTriggerDetails = _uuidof(IBarcodeScannerProviderTriggerDetails);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerProviderTriggerDetails = __uuidof(IBarcodeScannerProviderTriggerDetails);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2450,7 +2450,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequest = _uuidof(IBarcodeScannerSetActiveSymbologiesRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequest = __uuidof(IBarcodeScannerSetActiveSymbologiesRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2494,7 +2494,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequest2 = _uuidof(IBarcodeScannerSetActiveSymbologiesRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequest2 = __uuidof(IBarcodeScannerSetActiveSymbologiesRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2535,7 +2535,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequestEventArgs = _uuidof(IBarcodeScannerSetActiveSymbologiesRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetActiveSymbologiesRequestEventArgs = __uuidof(IBarcodeScannerSetActiveSymbologiesRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2582,7 +2582,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequest = _uuidof(IBarcodeScannerSetSymbologyAttributesRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequest = __uuidof(IBarcodeScannerSetSymbologyAttributesRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2626,7 +2626,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequest2 = _uuidof(IBarcodeScannerSetSymbologyAttributesRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequest2 = __uuidof(IBarcodeScannerSetSymbologyAttributesRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2667,7 +2667,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequestEventArgs = _uuidof(IBarcodeScannerSetSymbologyAttributesRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerSetSymbologyAttributesRequestEventArgs = __uuidof(IBarcodeScannerSetSymbologyAttributesRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2708,7 +2708,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequest = _uuidof(IBarcodeScannerStartSoftwareTriggerRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequest = __uuidof(IBarcodeScannerStartSoftwareTriggerRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2752,7 +2752,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequest2 = _uuidof(IBarcodeScannerStartSoftwareTriggerRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequest2 = __uuidof(IBarcodeScannerStartSoftwareTriggerRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2793,7 +2793,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequestEventArgs = _uuidof(IBarcodeScannerStartSoftwareTriggerRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStartSoftwareTriggerRequestEventArgs = __uuidof(IBarcodeScannerStartSoftwareTriggerRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2834,7 +2834,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequest = _uuidof(IBarcodeScannerStopSoftwareTriggerRequest);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequest = __uuidof(IBarcodeScannerStopSoftwareTriggerRequest);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2878,7 +2878,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequest2 = _uuidof(IBarcodeScannerStopSoftwareTriggerRequest2);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequest2 = __uuidof(IBarcodeScannerStopSoftwareTriggerRequest2);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2919,7 +2919,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequestEventArgs = _uuidof(IBarcodeScannerStopSoftwareTriggerRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerStopSoftwareTriggerRequestEventArgs = __uuidof(IBarcodeScannerStopSoftwareTriggerRequestEventArgs);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -2966,7 +2966,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeScannerVideoFrame = _uuidof(IBarcodeScannerVideoFrame);
+                    MIDL_CONST_ID IID& IID_IBarcodeScannerVideoFrame = __uuidof(IBarcodeScannerVideoFrame);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */
@@ -3022,7 +3022,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IBarcodeSymbologyAttributesBuilder = _uuidof(IBarcodeSymbologyAttributesBuilder);
+                    MIDL_CONST_ID IID& IID_IBarcodeSymbologyAttributesBuilder = __uuidof(IBarcodeSymbologyAttributesBuilder);
                 } /* Provider */
             } /* PointOfService */
         } /* Devices */

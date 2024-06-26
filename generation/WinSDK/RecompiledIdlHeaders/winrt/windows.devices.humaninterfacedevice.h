@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1109,7 +1109,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidBooleanControl = _uuidof(IHidBooleanControl);
+                MIDL_CONST_ID IID& IID_IHidBooleanControl = __uuidof(IHidBooleanControl);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1160,7 +1160,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidBooleanControlDescription = _uuidof(IHidBooleanControlDescription);
+                MIDL_CONST_ID IID& IID_IHidBooleanControlDescription = __uuidof(IHidBooleanControlDescription);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1196,7 +1196,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidBooleanControlDescription2 = _uuidof(IHidBooleanControlDescription2);
+                MIDL_CONST_ID IID& IID_IHidBooleanControlDescription2 = __uuidof(IHidBooleanControlDescription2);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1241,7 +1241,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidCollection = _uuidof(IHidCollection);
+                MIDL_CONST_ID IID& IID_IHidCollection = __uuidof(IHidCollection);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1347,7 +1347,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidDevice = _uuidof(IHidDevice);
+                MIDL_CONST_ID IID& IID_IHidDevice = __uuidof(IHidDevice);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1397,7 +1397,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidDeviceStatics = _uuidof(IHidDeviceStatics);
+                MIDL_CONST_ID IID& IID_IHidDeviceStatics = __uuidof(IHidDeviceStatics);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1457,7 +1457,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidFeatureReport = _uuidof(IHidFeatureReport);
+                MIDL_CONST_ID IID& IID_IHidFeatureReport = __uuidof(IHidFeatureReport);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1520,7 +1520,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidInputReport = _uuidof(IHidInputReport);
+                MIDL_CONST_ID IID& IID_IHidInputReport = __uuidof(IHidInputReport);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1556,7 +1556,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidInputReportReceivedEventArgs = _uuidof(IHidInputReportReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IHidInputReportReceivedEventArgs = __uuidof(IHidInputReportReceivedEventArgs);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1616,7 +1616,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidNumericControl = _uuidof(IHidNumericControl);
+                MIDL_CONST_ID IID& IID_IHidNumericControl = __uuidof(IHidNumericControl);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1697,7 +1697,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidNumericControlDescription = _uuidof(IHidNumericControlDescription);
+                MIDL_CONST_ID IID& IID_IHidNumericControlDescription = __uuidof(IHidNumericControlDescription);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */
@@ -1757,7 +1757,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHidOutputReport = _uuidof(IHidOutputReport);
+                MIDL_CONST_ID IID& IID_IHidOutputReport = __uuidof(IHidOutputReport);
             } /* HumanInterfaceDevice */
         } /* Devices */
     } /* Windows */

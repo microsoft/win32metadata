@@ -9,6 +9,7 @@
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:desktop8="http://schemas.microsoft.com/appx/manifest/desktop/windows10/8"
            xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -17,6 +18,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/8"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
 
   <xs:element name="Extension" substitutionGroup="f:ExtensionChoice">
     <xs:complexType>
@@ -26,6 +28,7 @@
         <xs:element name="CustomInstall" type="CT_CustomInstall"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ExtensionCategory_Desktop6" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>

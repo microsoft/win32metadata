@@ -1788,7 +1788,7 @@ interface DX_DECLARE_INTERFACE("bdc2bdd3-b96c-4de6-bdf7-99d4745454de") ID2D1Fact
 
 
 #endif
-#if NTDDI_VERSION >= NTDDI_WIN10_NI
+#if NTDDI_VERSION >= NTDDI_WIN10_CU
 enum DWRITE_PAINT_FEATURE_LEVEL : INT32;
 
 interface DX_DECLARE_INTERFACE("ec891cf7-9b69-4851-9def-4e0915771e62") ID2D1DeviceContext7  : public ID2D1DeviceContext6
@@ -1889,7 +1889,7 @@ interface DX_DECLARE_INTERFACE("677c9311-f36d-4b1f-ae86-86d1223ffd3a") ID2D1Fact
 }; // interface ID2D1Factory8
 
 
-#endif // #if NTDDI_VERSION >= NTDDI_WIN10_NI
+#endif // #if NTDDI_VERSION >= NTDDI_WIN10_CU
 
 #endif
 

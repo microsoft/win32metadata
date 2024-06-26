@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -307,7 +307,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE DismissUI(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAddAppointmentOperation = _uuidof(IAddAppointmentOperation);
+                    MIDL_CONST_ID IID& IID_IAddAppointmentOperation = __uuidof(IAddAppointmentOperation);
                 } /* AppointmentsProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -354,7 +354,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentsProviderLaunchActionVerbsStatics = _uuidof(IAppointmentsProviderLaunchActionVerbsStatics);
+                    MIDL_CONST_ID IID& IID_IAppointmentsProviderLaunchActionVerbsStatics = __uuidof(IAppointmentsProviderLaunchActionVerbsStatics);
                 } /* AppointmentsProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -392,7 +392,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentsProviderLaunchActionVerbsStatics2 = _uuidof(IAppointmentsProviderLaunchActionVerbsStatics2);
+                    MIDL_CONST_ID IID& IID_IAppointmentsProviderLaunchActionVerbsStatics2 = __uuidof(IAppointmentsProviderLaunchActionVerbsStatics2);
                 } /* AppointmentsProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -442,7 +442,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE DismissUI(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRemoveAppointmentOperation = _uuidof(IRemoveAppointmentOperation);
+                    MIDL_CONST_ID IID& IID_IRemoveAppointmentOperation = __uuidof(IRemoveAppointmentOperation);
                 } /* AppointmentsProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -497,7 +497,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE DismissUI(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IReplaceAppointmentOperation = _uuidof(IReplaceAppointmentOperation);
+                    MIDL_CONST_ID IID& IID_IReplaceAppointmentOperation = __uuidof(IReplaceAppointmentOperation);
                 } /* AppointmentsProvider */
             } /* Appointments */
         } /* ApplicationModel */

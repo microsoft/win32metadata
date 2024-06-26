@@ -1432,6 +1432,23 @@ GetThreadDescription(
     _Outptr_result_z_ PWSTR* ppszThreadDescription
     );
 
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+
+WINBASEAPI
+LPVOID
+WINAPI
+TlsGetValue2(
+    _In_ DWORD dwTlsIndex
+    );
+
+#endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN10 */
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
 #ifdef __cplusplus
 }
 #endif

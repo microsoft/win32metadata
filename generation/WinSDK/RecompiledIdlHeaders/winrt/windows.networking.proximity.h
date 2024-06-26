@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -1077,7 +1077,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDeviceArrivedEventHandler = _uuidof(IDeviceArrivedEventHandler);
+                MIDL_CONST_ID IID& IID_IDeviceArrivedEventHandler = __uuidof(IDeviceArrivedEventHandler);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1110,7 +1110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDeviceDepartedEventHandler = _uuidof(IDeviceDepartedEventHandler);
+                MIDL_CONST_ID IID& IID_IDeviceDepartedEventHandler = __uuidof(IDeviceDepartedEventHandler);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1144,7 +1144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMessageReceivedHandler = _uuidof(IMessageReceivedHandler);
+                MIDL_CONST_ID IID& IID_IMessageReceivedHandler = __uuidof(IMessageReceivedHandler);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1178,7 +1178,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMessageTransmittedHandler = _uuidof(IMessageTransmittedHandler);
+                MIDL_CONST_ID IID& IID_IMessageTransmittedHandler = __uuidof(IMessageTransmittedHandler);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1214,7 +1214,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IConnectionRequestedEventArgs = _uuidof(IConnectionRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IConnectionRequestedEventArgs = __uuidof(IConnectionRequestedEventArgs);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1303,7 +1303,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerFinderStatics = _uuidof(IPeerFinderStatics);
+                MIDL_CONST_ID IID& IID_IPeerFinderStatics = __uuidof(IPeerFinderStatics);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1351,7 +1351,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerFinderStatics2 = _uuidof(IPeerFinderStatics2);
+                MIDL_CONST_ID IID& IID_IPeerFinderStatics2 = __uuidof(IPeerFinderStatics2);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1387,7 +1387,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerInformation = _uuidof(IPeerInformation);
+                MIDL_CONST_ID IID& IID_IPeerInformation = __uuidof(IPeerInformation);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1426,7 +1426,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerInformation3 = _uuidof(IPeerInformation3);
+                MIDL_CONST_ID IID& IID_IPeerInformation3 = __uuidof(IPeerInformation3);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1465,7 +1465,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerInformationWithHostAndService = _uuidof(IPeerInformationWithHostAndService);
+                MIDL_CONST_ID IID& IID_IPeerInformationWithHostAndService = __uuidof(IPeerInformationWithHostAndService);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1538,7 +1538,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPeerWatcher = _uuidof(IPeerWatcher);
+                MIDL_CONST_ID IID& IID_IPeerWatcher = __uuidof(IPeerWatcher);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1636,7 +1636,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProximityDevice = _uuidof(IProximityDevice);
+                MIDL_CONST_ID IID& IID_IProximityDevice = __uuidof(IProximityDevice);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1679,7 +1679,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProximityDeviceStatics = _uuidof(IProximityDeviceStatics);
+                MIDL_CONST_ID IID& IID_IProximityDeviceStatics = __uuidof(IProximityDeviceStatics);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1724,7 +1724,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProximityMessage = _uuidof(IProximityMessage);
+                MIDL_CONST_ID IID& IID_IProximityMessage = __uuidof(IProximityMessage);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1766,7 +1766,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITriggeredConnectionStateChangedEventArgs = _uuidof(ITriggeredConnectionStateChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITriggeredConnectionStateChangedEventArgs = __uuidof(ITriggeredConnectionStateChangedEventArgs);
             } /* Proximity */
         } /* Networking */
     } /* Windows */
@@ -1802,8 +1802,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4481,8 +4481,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.Proximity.IPeerFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

@@ -791,6 +791,11 @@ WinBioGetDomainLogonSetting(
     _Out_ PWINBIO_SETTING_SOURCE_TYPE Source
     );
 
+HRESULT WINAPI
+WinBioIsESSCapable(
+    _Out_ BOOLEAN* Value
+    );
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Focus tracking management

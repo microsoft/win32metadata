@@ -283,7 +283,7 @@ extern RPC_IF_HANDLE __MIDL_itf_locationapi_0000_0000_v0_0_s_ifspec;
 #define __ILocationReport_INTERFACE_DEFINED__
 
 /* interface ILocationReport */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ILocationReport;
@@ -294,13 +294,13 @@ EXTERN_C const IID IID_ILocationReport;
     ILocationReport : public IUnknown
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSensorID( 
+        virtual HRESULT STDMETHODCALLTYPE GetSensorID( 
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTimestamp( 
+        virtual HRESULT STDMETHODCALLTYPE GetTimestamp( 
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetValue( 
+        virtual HRESULT STDMETHODCALLTYPE GetValue( 
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue) = 0;
         
@@ -329,17 +329,17 @@ EXTERN_C const IID IID_ILocationReport;
             __RPC__in ILocationReport * This);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
+        HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ILocationReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
+        HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ILocationReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetValue)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
+        HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ILocationReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue);
@@ -391,7 +391,7 @@ EXTERN_C const IID IID_ILocationReport;
 #define __ILatLongReport_INTERFACE_DEFINED__
 
 /* interface ILatLongReport */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ILatLongReport;
@@ -402,19 +402,19 @@ EXTERN_C const IID IID_ILatLongReport;
     ILatLongReport : public ILocationReport
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLatitude( 
+        virtual HRESULT STDMETHODCALLTYPE GetLatitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pLatitude) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLongitude( 
+        virtual HRESULT STDMETHODCALLTYPE GetLongitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pLongitude) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetErrorRadius( 
+        virtual HRESULT STDMETHODCALLTYPE GetErrorRadius( 
             /* [retval][out] */ __RPC__out DOUBLE *pErrorRadius) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAltitude( 
+        virtual HRESULT STDMETHODCALLTYPE GetAltitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pAltitude) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAltitudeError( 
+        virtual HRESULT STDMETHODCALLTYPE GetAltitudeError( 
             /* [retval][out] */ __RPC__out DOUBLE *pAltitudeError) = 0;
         
     };
@@ -442,43 +442,43 @@ EXTERN_C const IID IID_ILatLongReport;
             __RPC__in ILatLongReport * This);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
+        HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
+        HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetValue)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
+        HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ILatLongReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ILatLongReport, GetLatitude)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLatitude )( 
+        HRESULT ( STDMETHODCALLTYPE *GetLatitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pLatitude);
         
         DECLSPEC_XFGVIRT(ILatLongReport, GetLongitude)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLongitude )( 
+        HRESULT ( STDMETHODCALLTYPE *GetLongitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pLongitude);
         
         DECLSPEC_XFGVIRT(ILatLongReport, GetErrorRadius)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetErrorRadius )( 
+        HRESULT ( STDMETHODCALLTYPE *GetErrorRadius )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pErrorRadius);
         
         DECLSPEC_XFGVIRT(ILatLongReport, GetAltitude)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAltitude )( 
+        HRESULT ( STDMETHODCALLTYPE *GetAltitude )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pAltitude);
         
         DECLSPEC_XFGVIRT(ILatLongReport, GetAltitudeError)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAltitudeError )( 
+        HRESULT ( STDMETHODCALLTYPE *GetAltitudeError )( 
             __RPC__in ILatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pAltitudeError);
         
@@ -545,7 +545,7 @@ EXTERN_C const IID IID_ILatLongReport;
 #define __ICivicAddressReport_INTERFACE_DEFINED__
 
 /* interface ICivicAddressReport */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ICivicAddressReport;
@@ -556,25 +556,25 @@ EXTERN_C const IID IID_ICivicAddressReport;
     ICivicAddressReport : public ILocationReport
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAddressLine1( 
+        virtual HRESULT STDMETHODCALLTYPE GetAddressLine1( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress1) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAddressLine2( 
+        virtual HRESULT STDMETHODCALLTYPE GetAddressLine2( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress2) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetCity( 
+        virtual HRESULT STDMETHODCALLTYPE GetCity( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetStateProvince( 
+        virtual HRESULT STDMETHODCALLTYPE GetStateProvince( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStateProvince) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPostalCode( 
+        virtual HRESULT STDMETHODCALLTYPE GetPostalCode( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostalCode) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetCountryRegion( 
+        virtual HRESULT STDMETHODCALLTYPE GetCountryRegion( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountryRegion) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDetailLevel( 
+        virtual HRESULT STDMETHODCALLTYPE GetDetailLevel( 
             /* [retval][out] */ __RPC__out DWORD *pDetailLevel) = 0;
         
     };
@@ -602,53 +602,53 @@ EXTERN_C const IID IID_ICivicAddressReport;
             __RPC__in ICivicAddressReport * This);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetSensorID)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
+        HRESULT ( STDMETHODCALLTYPE *GetSensorID )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out SENSOR_ID *pSensorID);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetTimestamp)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
+        HRESULT ( STDMETHODCALLTYPE *GetTimestamp )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out SYSTEMTIME *pCreationTime);
         
         DECLSPEC_XFGVIRT(ILocationReport, GetValue)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
+        HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ICivicAddressReport * This,
             /* [in] */ __RPC__in REFPROPERTYKEY pKey,
             /* [retval][out] */ __RPC__out PROPVARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetAddressLine1)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAddressLine1 )( 
+        HRESULT ( STDMETHODCALLTYPE *GetAddressLine1 )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress1);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetAddressLine2)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAddressLine2 )( 
+        HRESULT ( STDMETHODCALLTYPE *GetAddressLine2 )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress2);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetCity)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCity )( 
+        HRESULT ( STDMETHODCALLTYPE *GetCity )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetStateProvince)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStateProvince )( 
+        HRESULT ( STDMETHODCALLTYPE *GetStateProvince )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStateProvince);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetPostalCode)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPostalCode )( 
+        HRESULT ( STDMETHODCALLTYPE *GetPostalCode )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostalCode);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetCountryRegion)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCountryRegion )( 
+        HRESULT ( STDMETHODCALLTYPE *GetCountryRegion )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountryRegion);
         
         DECLSPEC_XFGVIRT(ICivicAddressReport, GetDetailLevel)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDetailLevel )( 
+        HRESULT ( STDMETHODCALLTYPE *GetDetailLevel )( 
             __RPC__in ICivicAddressReport * This,
             /* [retval][out] */ __RPC__out DWORD *pDetailLevel);
         
@@ -721,7 +721,7 @@ EXTERN_C const IID IID_ICivicAddressReport;
 #define __ILocation_INTERFACE_DEFINED__
 
 /* interface ILocation */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 
@@ -733,39 +733,39 @@ EXTERN_C const IID IID_ILocation;
     ILocation : public IUnknown
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterForReport( 
+        virtual HRESULT STDMETHODCALLTYPE RegisterForReport( 
             /* [in] */ __RPC__in_opt ILocationEvents *pEvents,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD dwRequestedReportInterval) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UnregisterForReport( 
+        virtual HRESULT STDMETHODCALLTYPE UnregisterForReport( 
             /* [in] */ __RPC__in REFIID reportType) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetReport( 
+        virtual HRESULT STDMETHODCALLTYPE GetReport( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__deref_out_opt ILocationReport **ppLocationReport) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetReportStatus( 
+        virtual HRESULT STDMETHODCALLTYPE GetReportStatus( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_REPORT_STATUS *pStatus) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetReportInterval( 
+        virtual HRESULT STDMETHODCALLTYPE GetReportInterval( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out DWORD *pMilliseconds) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetReportInterval( 
+        virtual HRESULT STDMETHODCALLTYPE SetReportInterval( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD millisecondsRequested) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDesiredAccuracy( 
+        virtual HRESULT STDMETHODCALLTYPE GetDesiredAccuracy( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_DESIRED_ACCURACY *pDesiredAccuracy) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetDesiredAccuracy( 
+        virtual HRESULT STDMETHODCALLTYPE SetDesiredAccuracy( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ enum LOCATION_DESIRED_ACCURACY desiredAccuracy) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RequestPermissions( 
+        virtual HRESULT STDMETHODCALLTYPE RequestPermissions( 
             /* [unique][in] */ __RPC__in_opt HWND hParent,
             /* [size_is][in] */ __RPC__in_ecount_full(count) IID *pReportTypes,
             /* [in] */ ULONG count,
@@ -796,55 +796,55 @@ EXTERN_C const IID IID_ILocation;
             __RPC__in ILocation * This);
         
         DECLSPEC_XFGVIRT(ILocation, RegisterForReport)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterForReport )( 
+        HRESULT ( STDMETHODCALLTYPE *RegisterForReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in_opt ILocationEvents *pEvents,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD dwRequestedReportInterval);
         
         DECLSPEC_XFGVIRT(ILocation, UnregisterForReport)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterForReport )( 
+        HRESULT ( STDMETHODCALLTYPE *UnregisterForReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType);
         
         DECLSPEC_XFGVIRT(ILocation, GetReport)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReport )( 
+        HRESULT ( STDMETHODCALLTYPE *GetReport )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__deref_out_opt ILocationReport **ppLocationReport);
         
         DECLSPEC_XFGVIRT(ILocation, GetReportStatus)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReportStatus )( 
+        HRESULT ( STDMETHODCALLTYPE *GetReportStatus )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_REPORT_STATUS *pStatus);
         
         DECLSPEC_XFGVIRT(ILocation, GetReportInterval)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReportInterval )( 
+        HRESULT ( STDMETHODCALLTYPE *GetReportInterval )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out DWORD *pMilliseconds);
         
         DECLSPEC_XFGVIRT(ILocation, SetReportInterval)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetReportInterval )( 
+        HRESULT ( STDMETHODCALLTYPE *SetReportInterval )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ DWORD millisecondsRequested);
         
         DECLSPEC_XFGVIRT(ILocation, GetDesiredAccuracy)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDesiredAccuracy )( 
+        HRESULT ( STDMETHODCALLTYPE *GetDesiredAccuracy )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__out enum LOCATION_DESIRED_ACCURACY *pDesiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocation, SetDesiredAccuracy)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetDesiredAccuracy )( 
+        HRESULT ( STDMETHODCALLTYPE *SetDesiredAccuracy )( 
             __RPC__in ILocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ enum LOCATION_DESIRED_ACCURACY desiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocation, RequestPermissions)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
+        HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILocation * This,
             /* [unique][in] */ __RPC__in_opt HWND hParent,
             /* [size_is][in] */ __RPC__in_ecount_full(count) IID *pReportTypes,
@@ -916,7 +916,7 @@ EXTERN_C const IID IID_ILocation;
 #define __ILocationPower_INTERFACE_DEFINED__
 
 /* interface ILocationPower */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ILocationPower;
@@ -927,9 +927,9 @@ EXTERN_C const IID IID_ILocationPower;
     ILocationPower : public IUnknown
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Connect( void) = 0;
+        virtual HRESULT STDMETHODCALLTYPE Connect( void) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Disconnect( void) = 0;
+        virtual HRESULT STDMETHODCALLTYPE Disconnect( void) = 0;
         
     };
     
@@ -956,11 +956,11 @@ EXTERN_C const IID IID_ILocationPower;
             __RPC__in ILocationPower * This);
         
         DECLSPEC_XFGVIRT(ILocationPower, Connect)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
+        HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ILocationPower * This);
         
         DECLSPEC_XFGVIRT(ILocationPower, Disconnect)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
+        HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ILocationPower * This);
         
         END_INTERFACE
@@ -1007,7 +1007,7 @@ EXTERN_C const IID IID_ILocationPower;
 #define __IDefaultLocation_INTERFACE_DEFINED__
 
 /* interface IDefaultLocation */
-/* [unique][helpstring][uuid][object] */ 
+/* [unique][uuid][object] */ 
 
 
 EXTERN_C const IID IID_IDefaultLocation;
@@ -1018,11 +1018,11 @@ EXTERN_C const IID IID_IDefaultLocation;
     IDefaultLocation : public IUnknown
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetReport( 
+        virtual HRESULT STDMETHODCALLTYPE SetReport( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetReport( 
+        virtual HRESULT STDMETHODCALLTYPE GetReport( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__deref_out_opt ILocationReport **ppLocationReport) = 0;
         
@@ -1051,13 +1051,13 @@ EXTERN_C const IID IID_IDefaultLocation;
             __RPC__in IDefaultLocation * This);
         
         DECLSPEC_XFGVIRT(IDefaultLocation, SetReport)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetReport )( 
+        HRESULT ( STDMETHODCALLTYPE *SetReport )( 
             __RPC__in IDefaultLocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport);
         
         DECLSPEC_XFGVIRT(IDefaultLocation, GetReport)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetReport )( 
+        HRESULT ( STDMETHODCALLTYPE *GetReport )( 
             __RPC__in IDefaultLocation * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [retval][out] */ __RPC__deref_out_opt ILocationReport **ppLocationReport);
@@ -1106,7 +1106,7 @@ EXTERN_C const IID IID_IDefaultLocation;
 #define __ILocationEvents_INTERFACE_DEFINED__
 
 /* interface ILocationEvents */
-/* [object][helpstring][uuid] */ 
+/* [object][uuid] */ 
 
 
 EXTERN_C const IID IID_ILocationEvents;
@@ -1117,11 +1117,11 @@ EXTERN_C const IID IID_ILocationEvents;
     ILocationEvents : public IUnknown
     {
     public:
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnLocationChanged( 
+        virtual HRESULT STDMETHODCALLTYPE OnLocationChanged( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport) = 0;
         
-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnStatusChanged( 
+        virtual HRESULT STDMETHODCALLTYPE OnStatusChanged( 
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ LOCATION_REPORT_STATUS newStatus) = 0;
         
@@ -1150,13 +1150,13 @@ EXTERN_C const IID IID_ILocationEvents;
             __RPC__in ILocationEvents * This);
         
         DECLSPEC_XFGVIRT(ILocationEvents, OnLocationChanged)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnLocationChanged )( 
+        HRESULT ( STDMETHODCALLTYPE *OnLocationChanged )( 
             __RPC__in ILocationEvents * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ __RPC__in_opt ILocationReport *pLocationReport);
         
         DECLSPEC_XFGVIRT(ILocationEvents, OnStatusChanged)
-        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnStatusChanged )( 
+        HRESULT ( STDMETHODCALLTYPE *OnStatusChanged )( 
             __RPC__in ILocationEvents * This,
             /* [in] */ __RPC__in REFIID reportType,
             /* [in] */ LOCATION_REPORT_STATUS newStatus);
@@ -1205,7 +1205,7 @@ EXTERN_C const IID IID_ILocationEvents;
 #define __IDispLatLongReport_INTERFACE_DEFINED__
 
 /* interface IDispLatLongReport */
-/* [unique][helpstring][nonextensible][dual][uuid][object] */ 
+/* [unique][nonextensible][dual][uuid][object] */ 
 
 
 EXTERN_C const IID IID_IDispLatLongReport;
@@ -1216,22 +1216,22 @@ EXTERN_C const IID IID_IDispLatLongReport;
     IDispLatLongReport : public IDispatch
     {
     public:
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Latitude( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Latitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Longitude( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Longitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ErrorRadius( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ErrorRadius( 
             /* [retval][out] */ __RPC__out DOUBLE *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Altitude( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Altitude( 
             /* [retval][out] */ __RPC__out DOUBLE *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AltitudeError( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AltitudeError( 
             /* [retval][out] */ __RPC__out DOUBLE *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
             /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
     };
@@ -1300,32 +1300,32 @@ EXTERN_C const IID IID_IDispLatLongReport;
             _Out_opt_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_Latitude)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Latitude )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Latitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_Longitude)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Longitude )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Longitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_ErrorRadius)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorRadius )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorRadius )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_Altitude)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Altitude )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Altitude )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_AltitudeError)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AltitudeError )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AltitudeError )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DOUBLE *pVal);
         
         DECLSPEC_XFGVIRT(IDispLatLongReport, get_Timestamp)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IDispLatLongReport * This,
             /* [retval][out] */ __RPC__out DATE *pVal);
         
@@ -1398,7 +1398,7 @@ EXTERN_C const IID IID_IDispLatLongReport;
 #define __IDispCivicAddressReport_INTERFACE_DEFINED__
 
 /* interface IDispCivicAddressReport */
-/* [unique][helpstring][nonextensible][dual][uuid][object] */ 
+/* [unique][nonextensible][dual][uuid][object] */ 
 
 
 EXTERN_C const IID IID_IDispCivicAddressReport;
@@ -1409,28 +1409,28 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
     IDispCivicAddressReport : public IDispatch
     {
     public:
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine1( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine1( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress1) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine2( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine2( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress2) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_City( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_City( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCity) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StateProvince( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StateProvince( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pStateProvince) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalCode( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalCode( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPostalCode) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryRegion( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryRegion( 
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCountryRegion) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DetailLevel( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DetailLevel( 
             /* [retval][out] */ __RPC__out ULONG *pDetailLevel) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
             /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
     };
@@ -1499,42 +1499,42 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
             _Out_opt_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_AddressLine1)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine1 )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine1 )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress1);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_AddressLine2)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine2 )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressLine2 )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress2);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_City)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_City )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_City )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCity);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_StateProvince)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StateProvince )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StateProvince )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pStateProvince);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_PostalCode)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostalCode )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostalCode )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPostalCode);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_CountryRegion)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryRegion )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryRegion )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pCountryRegion);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_DetailLevel)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DetailLevel )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DetailLevel )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__out ULONG *pDetailLevel);
         
         DECLSPEC_XFGVIRT(IDispCivicAddressReport, get_Timestamp)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IDispCivicAddressReport * This,
             /* [retval][out] */ __RPC__out DATE *pVal);
         
@@ -1613,7 +1613,7 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
 #define __ILocationReportFactory_INTERFACE_DEFINED__
 
 /* interface ILocationReportFactory */
-/* [unique][helpstring][nonextensible][dual][uuid][object] */ 
+/* [unique][nonextensible][dual][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ILocationReportFactory;
@@ -1624,27 +1624,27 @@ EXTERN_C const IID IID_ILocationReportFactory;
     ILocationReportFactory : public IDispatch
     {
     public:
-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ListenForReports( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ListenForReports( 
             /* [defaultvalue][in] */ ULONG requestedReportInterval = 0) = 0;
         
-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StopListeningForReports( void) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE StopListeningForReports( void) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
             /* [retval][out] */ __RPC__out ULONG *pVal) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportInterval( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportInterval( 
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds) = 0;
         
-        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ReportInterval( 
+        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ReportInterval( 
             /* [in] */ ULONG millisecondsRequested) = 0;
         
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DesiredAccuracy( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DesiredAccuracy( 
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy) = 0;
         
-        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DesiredAccuracy( 
+        virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DesiredAccuracy( 
             /* [in] */ ULONG desiredAccuracy) = 0;
         
-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RequestPermissions( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RequestPermissions( 
             /* [in] */ __RPC__in ULONG *hWnd) = 0;
         
     };
@@ -1713,41 +1713,41 @@ EXTERN_C const IID IID_ILocationReportFactory;
             _Out_opt_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ILocationReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ILocationReportFactory * This);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ILocationReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILocationReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
         
@@ -1826,7 +1826,7 @@ EXTERN_C const IID IID_ILocationReportFactory;
 #define __ILatLongReportFactory_INTERFACE_DEFINED__
 
 /* interface ILatLongReportFactory */
-/* [unique][helpstring][nonextensible][dual][uuid][object] */ 
+/* [unique][nonextensible][dual][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ILatLongReportFactory;
@@ -1837,7 +1837,7 @@ EXTERN_C const IID IID_ILatLongReportFactory;
     ILatLongReportFactory : public ILocationReportFactory
     {
     public:
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LatLongReport( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LatLongReport( 
             /* [retval][out] */ __RPC__deref_out_opt IDispLatLongReport **pVal) = 0;
         
     };
@@ -1906,46 +1906,46 @@ EXTERN_C const IID IID_ILatLongReportFactory;
             _Out_opt_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ILatLongReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ILatLongReportFactory * This);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ILatLongReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
         
         DECLSPEC_XFGVIRT(ILatLongReportFactory, get_LatLongReport)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatLongReport )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatLongReport )( 
             __RPC__in ILatLongReportFactory * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispLatLongReport **pVal);
         
@@ -2028,7 +2028,7 @@ EXTERN_C const IID IID_ILatLongReportFactory;
 #define __ICivicAddressReportFactory_INTERFACE_DEFINED__
 
 /* interface ICivicAddressReportFactory */
-/* [unique][helpstring][nonextensible][dual][uuid][object] */ 
+/* [unique][nonextensible][dual][uuid][object] */ 
 
 
 EXTERN_C const IID IID_ICivicAddressReportFactory;
@@ -2039,7 +2039,7 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
     ICivicAddressReportFactory : public ILocationReportFactory
     {
     public:
-        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CivicAddressReport( 
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CivicAddressReport( 
             /* [retval][out] */ __RPC__deref_out_opt IDispCivicAddressReport **pVal) = 0;
         
     };
@@ -2108,46 +2108,46 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
             _Out_opt_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, ListenForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ListenForReports )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [defaultvalue][in] */ ULONG requestedReportInterval);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, StopListeningForReports)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *StopListeningForReports )( 
             __RPC__in ICivicAddressReportFactory * This);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_Status)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pVal);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_ReportInterval)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportInterval )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pMilliseconds);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_ReportInterval)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportInterval )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ ULONG millisecondsRequested);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, get_DesiredAccuracy)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredAccuracy )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__out ULONG *pDesiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, put_DesiredAccuracy)
-        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
+        /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredAccuracy )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ ULONG desiredAccuracy);
         
         DECLSPEC_XFGVIRT(ILocationReportFactory, RequestPermissions)
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RequestPermissions )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [in] */ __RPC__in ULONG *hWnd);
         
         DECLSPEC_XFGVIRT(ICivicAddressReportFactory, get_CivicAddressReport)
-        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CivicAddressReport )( 
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CivicAddressReport )( 
             __RPC__in ICivicAddressReportFactory * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispCivicAddressReport **pVal);
         
@@ -2231,7 +2231,7 @@ EXTERN_C const IID IID_ICivicAddressReportFactory;
 #define __LocationApiLib_LIBRARY_DEFINED__
 
 /* library LocationApiLib */
-/* [helpstring][version][uuid] */ 
+/* [version][uuid] */ 
 
 
 EXTERN_C const IID LIBID_LocationApiLib;
@@ -2272,7 +2272,7 @@ CivicAddressReport;
 #define ___ILatLongReportFactoryEvents_DISPINTERFACE_DEFINED__
 
 /* dispinterface _ILatLongReportFactoryEvents */
-/* [helpstring][uuid] */ 
+/* [uuid] */ 
 
 
 EXTERN_C const IID DIID__ILatLongReportFactoryEvents;
@@ -2394,7 +2394,7 @@ EXTERN_C const IID DIID__ILatLongReportFactoryEvents;
 #define ___ICivicAddressReportFactoryEvents_DISPINTERFACE_DEFINED__
 
 /* dispinterface _ICivicAddressReportFactoryEvents */
-/* [helpstring][uuid] */ 
+/* [uuid] */ 
 
 
 EXTERN_C const IID DIID__ICivicAddressReportFactoryEvents;

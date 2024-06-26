@@ -806,7 +806,7 @@ typedef struct _MIDL_STUB_MESSAGE
 
     void *                             ContextHandleHash;
     void *                             pUserMarshalList;
-    INT_PTR                         Reserved51_3;
+    unsigned char *                    pFullPtrFormat;
     INT_PTR                         Reserved51_4;
     INT_PTR                         Reserved51_5;
 

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -609,7 +609,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILoadCompletedEventHandler = _uuidof(ILoadCompletedEventHandler);
+                    MIDL_CONST_ID IID& IID_ILoadCompletedEventHandler = __uuidof(ILoadCompletedEventHandler);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -645,7 +645,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigatedEventHandler = _uuidof(INavigatedEventHandler);
+                    MIDL_CONST_ID IID& IID_INavigatedEventHandler = __uuidof(INavigatedEventHandler);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -681,7 +681,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigatingCancelEventHandler = _uuidof(INavigatingCancelEventHandler);
+                    MIDL_CONST_ID IID& IID_INavigatingCancelEventHandler = __uuidof(INavigatingCancelEventHandler);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -717,7 +717,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigationFailedEventHandler = _uuidof(INavigationFailedEventHandler);
+                    MIDL_CONST_ID IID& IID_INavigationFailedEventHandler = __uuidof(INavigationFailedEventHandler);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -753,7 +753,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigationStoppedEventHandler = _uuidof(INavigationStoppedEventHandler);
+                    MIDL_CONST_ID IID& IID_INavigationStoppedEventHandler = __uuidof(INavigationStoppedEventHandler);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -800,7 +800,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameNavigationOptions = _uuidof(IFrameNavigationOptions);
+                    MIDL_CONST_ID IID& IID_IFrameNavigationOptions = __uuidof(IFrameNavigationOptions);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -840,7 +840,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFrameNavigationOptionsFactory = _uuidof(IFrameNavigationOptionsFactory);
+                    MIDL_CONST_ID IID& IID_IFrameNavigationOptionsFactory = __uuidof(IFrameNavigationOptionsFactory);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -887,7 +887,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigatingCancelEventArgs = _uuidof(INavigatingCancelEventArgs);
+                    MIDL_CONST_ID IID& IID_INavigatingCancelEventArgs = __uuidof(INavigatingCancelEventArgs);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -928,7 +928,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigatingCancelEventArgs2 = _uuidof(INavigatingCancelEventArgs2);
+                    MIDL_CONST_ID IID& IID_INavigatingCancelEventArgs2 = __uuidof(INavigatingCancelEventArgs2);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -981,7 +981,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigationEventArgs = _uuidof(INavigationEventArgs);
+                    MIDL_CONST_ID IID& IID_INavigationEventArgs = __uuidof(INavigationEventArgs);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -1019,7 +1019,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigationEventArgs2 = _uuidof(INavigationEventArgs2);
+                    MIDL_CONST_ID IID& IID_INavigationEventArgs2 = __uuidof(INavigationEventArgs2);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -1066,7 +1066,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INavigationFailedEventArgs = _uuidof(INavigationFailedEventArgs);
+                    MIDL_CONST_ID IID& IID_INavigationFailedEventArgs = __uuidof(INavigationFailedEventArgs);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -1110,7 +1110,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPageStackEntry = _uuidof(IPageStackEntry);
+                    MIDL_CONST_ID IID& IID_IPageStackEntry = __uuidof(IPageStackEntry);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -1151,7 +1151,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPageStackEntryFactory = _uuidof(IPageStackEntryFactory);
+                    MIDL_CONST_ID IID& IID_IPageStackEntryFactory = __uuidof(IPageStackEntryFactory);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */
@@ -1189,7 +1189,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPageStackEntryStatics = _uuidof(IPageStackEntryStatics);
+                    MIDL_CONST_ID IID& IID_IPageStackEntryStatics = __uuidof(IPageStackEntryStatics);
                 } /* Navigation */
             } /* Xaml */
         } /* UI */

@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -439,7 +439,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INotePlacementChangedPreviewEventArgs = _uuidof(INotePlacementChangedPreviewEventArgs);
+                    MIDL_CONST_ID IID& IID_INotePlacementChangedPreviewEventArgs = __uuidof(INotePlacementChangedPreviewEventArgs);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */
@@ -480,7 +480,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INoteVisibilityChangedPreviewEventArgs = _uuidof(INoteVisibilityChangedPreviewEventArgs);
+                    MIDL_CONST_ID IID& IID_INoteVisibilityChangedPreviewEventArgs = __uuidof(INoteVisibilityChangedPreviewEventArgs);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */
@@ -567,7 +567,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INotesWindowManagerPreview = _uuidof(INotesWindowManagerPreview);
+                    MIDL_CONST_ID IID& IID_INotesWindowManagerPreview = __uuidof(INotesWindowManagerPreview);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */
@@ -617,7 +617,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INotesWindowManagerPreview2 = _uuidof(INotesWindowManagerPreview2);
+                    MIDL_CONST_ID IID& IID_INotesWindowManagerPreview2 = __uuidof(INotesWindowManagerPreview2);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */
@@ -658,7 +658,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INotesWindowManagerPreviewShowNoteOptions = _uuidof(INotesWindowManagerPreviewShowNoteOptions);
+                    MIDL_CONST_ID IID& IID_INotesWindowManagerPreviewShowNoteOptions = __uuidof(INotesWindowManagerPreviewShowNoteOptions);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */
@@ -696,7 +696,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INotesWindowManagerPreviewStatics = _uuidof(INotesWindowManagerPreviewStatics);
+                    MIDL_CONST_ID IID& IID_INotesWindowManagerPreviewStatics = __uuidof(INotesWindowManagerPreviewStatics);
                 } /* Notes */
             } /* Preview */
         } /* ApplicationModel */

@@ -17,6 +17,10 @@ namespace Windows
 {
     namespace Foundation
     {
+        typedef struct DateTime DateTime;
+
+        typedef struct TimeSpan TimeSpan;
+
         apicontract UniversalApiContract;
     }
 }
@@ -36,15 +40,27 @@ namespace Windows
     {
         namespace Power
         {
+            apicontract PowerGridApiContract;
+
             interface IBattery;
 
             interface IBatteryReport;
 
             interface IBatteryStatics;
 
+            interface IPowerGridData;
+
+            interface IPowerGridForecast;
+
+            interface IPowerGridForecastStatics;
+
             runtimeclass Battery;
 
             runtimeclass BatteryReport;
+
+            runtimeclass PowerGridData;
+
+            runtimeclass PowerGridForecast;
         }
     }
 }
@@ -58,6 +74,12 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Power.PowerGridData*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Power.PowerGridData*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Power.PowerGridData*>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.Devices.Power.Battery*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.Power.Battery*, IInspectable*>;
@@ -73,6 +95,11 @@ namespace Windows
     {
         namespace Power
         {
+            [contractversion(1.0)]
+            apicontract PowerGridApiContract
+            {
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Power.Battery)]
             [uuid(BC894FC6-0072-47C8-8B5D-614AAA7A437E)]
@@ -106,6 +133,35 @@ namespace Windows
                 HRESULT GetDeviceSelector([out] [retval] HSTRING* result);
             }
 
+            [contract(Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [exclusiveto(Windows.Devices.Power.PowerGridData)]
+            [uuid(C360FB17-FC92-5F6E-999D-16A4CF9D6C40)]
+            interface IPowerGridData : IInspectable
+            {
+                [propget] HRESULT Severity([out] [retval] DOUBLE* value);
+                [propget] HRESULT IsLowUserExperienceImpact([out] [retval] boolean* value);
+            }
+
+            [contract(Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [exclusiveto(Windows.Devices.Power.PowerGridForecast)]
+            [uuid(077E4DE9-ED60-58BB-A850-003C6A138685)]
+            interface IPowerGridForecast : IInspectable
+            {
+                [propget] HRESULT StartTime([out] [retval] Windows.Foundation.DateTime* value);
+                [propget] HRESULT BlockDuration([out] [retval] Windows.Foundation.TimeSpan* value);
+                [propget] HRESULT Forecast([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.Power.PowerGridData*>** value);
+            }
+
+            [contract(Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [exclusiveto(Windows.Devices.Power.PowerGridForecast)]
+            [uuid(5B78C806-2E4E-5BCC-BB34-CB81C60F9E12)]
+            interface IPowerGridForecastStatics : IInspectable
+            {
+                HRESULT GetForecast([out] [retval] Windows.Devices.Power.PowerGridForecast** result);
+                [eventadd] HRESULT ForecastUpdated([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT ForecastUpdated([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Devices.Power.IBatteryStatics, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -121,6 +177,22 @@ namespace Windows
             runtimeclass BatteryReport
             {
                 [default] interface Windows.Devices.Power.IBatteryReport;
+            }
+
+            [contract(Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PowerGridData
+            {
+                [default] interface Windows.Devices.Power.IPowerGridData;
+            }
+
+            [contract(Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Devices.Power.IPowerGridForecastStatics, Windows.Devices.Power.PowerGridApiContract, 1.0)]
+            [threading(both)]
+            runtimeclass PowerGridForecast
+            {
+                [default] interface Windows.Devices.Power.IPowerGridForecast;
             }
         }
     }

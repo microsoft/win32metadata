@@ -197,6 +197,9 @@ DEFINE_GUID(BTH_LE_ATT_BLUETOOTH_BASE_GUID,                 0x00000000, 0x0000, 
 #define BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITAL_PEN   0x07
 #define BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_BARCODE_SCANNER \
                                                             0x08
+#define BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_TOUCHPAD      0x09
+#define BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_PRESENTATION_REMOTE \
+                                                            0x0A
 
 #define BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_IN_SHOE \
                                                             0x01

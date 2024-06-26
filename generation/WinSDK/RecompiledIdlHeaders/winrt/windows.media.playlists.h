@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_PLAYLISTS_PLAYLISTSCONTRACT_VERSION)
@@ -504,7 +504,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaylist = _uuidof(IPlaylist);
+                MIDL_CONST_ID IID& IID_IPlaylist = __uuidof(IPlaylist);
             } /* Playlists */
         } /* Media */
     } /* Windows */
@@ -541,7 +541,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaylistStatics = _uuidof(IPlaylistStatics);
+                MIDL_CONST_ID IID& IID_IPlaylistStatics = __uuidof(IPlaylistStatics);
             } /* Playlists */
         } /* Media */
     } /* Windows */

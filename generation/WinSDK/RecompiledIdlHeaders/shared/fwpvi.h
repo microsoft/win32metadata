@@ -666,17 +666,18 @@
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
-
 #define IPSEC_SA_CONTEXT_SUBSCRIPTION IPSEC_SA_CONTEXT_SUBSCRIPTION0
 #define IPSEC_SA_CONTEXT_EVENT_TYPE IPSEC_SA_CONTEXT_EVENT_TYPE0
 #define IPSEC_SA_CONTEXT_CHANGE IPSEC_SA_CONTEXT_CHANGE0
 #define IPsecSaContextSubscribe IPsecSaContextSubscribe0
 #define IPsecSaContextUnsubscribe IPsecSaContextUnsubscribe0
 #define IPsecSaContextSubscriptionsGet IPsecSaContextSubscriptionsGet0
-
 #endif
 
-
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#define FwpmConnectionPolicyAdd FwpmConnectionPolicyAdd0
+#define FwpmConnectionPolicyDeleteByKey FwpmConnectionPolicyDeleteByKey0
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -765,6 +766,7 @@
 #define FwpsAcquireWritableLayerDataPointer FwpsAcquireWritableLayerDataPointer0
 #define FwpsApplyModifiedLayerData FwpsApplyModifiedLayerData0
 #define FWPS_CONNECT_REQUEST FWPS_CONNECT_REQUEST0
+#define FWPS_CONNECTION_POLICY FWPS_CONNECTION_POLICY0
 #define FWPS_BIND_REQUEST FWPS_BIND_REQUEST0
 #define FWPS_NET_BUFFER_LIST_EVENT_TYPE FWPS_NET_BUFFER_LIST_EVENT_TYPE0
 #if (NTDDI_VERSION >= NTDDI_WIN8)

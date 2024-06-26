@@ -8,18 +8,28 @@
 //
 // Versioning:
 //
-// Capabilities must be trailed by a version marker such as: OVRDCAP_AMD64_V1_CAPSET
-// If the OS supports querying for the all capabilities that come prior to
-// this marker, the OS will set this version marker as being "supported".
-// It is not allowed for the OS to only support querying some capabilities
-// that come prior to a version marker, it's all or nothing.
+// Any time new capabilities are introduced in an OS release, a new capability set
+// or "CAPSET" is introduced. For example, AMD64 SV2 has the
+// OVRDCAP_AMD64_V1_CAPSET capability associated with it (which will be enabled
+// on that OS and later OS's). We may also add multiple capability sets in a release
+// in certain situations.
+//
+// The OVRDCAP_AMD64_V1_CAPSET capability indicates "this OS is aware of all
+// capabilities" defined with the OVRDCAP_AMD64_V1_CAPSET (i.e. anything noted
+// as a SV2 Capability).
+//
 // This allows an application to determine if a capability is
 // "not supported" due to the OS not even knowing about the capability
 // (such as the case where an app is being run on an older OS) or because
 // the capability was queried for by the OS but is not supported.
-// When new capabilities are added they MUST be followed by a version marker.
+// All capabilities must have a version marker associated with them.
 // Applications must not make assumptions about which OS's support querying
-// capabilities as we may choose to backport capabilities at our discretion.
+// capabilities as we may choose to backport capabilities at our discretion
+// (so applications should always just use the presence of the capability set
+// to know if the OS supports any particular capability).
+//
+// Note that if a capability set is indicated as supported the OS must support
+// all capabilities provided by that capability set.
 //
 
 //
@@ -28,6 +38,7 @@
 //
 
 // AMD64
+// SV2 Capabilities (OVRDCAP_AMD64_V1_CAPSET)
 #define OVRDCAP_AMD64_FIRST                               0x00000000
 #define OVRDCAP_AMD64_ERMSB                               0x00000000
 #define OVRDCAP_AMD64_FAST_SHORT_REPMOV                   0x00000001
@@ -346,20 +357,95 @@
 #define OVRDCAP_AMD64_CPU_EXTENDED_FAMILY_255             0x0000013A
 #define OVRDCAP_AMD64_V1_CAPSET                           0x0000013B
 
+// SV2 AVX Capabilities (OVRDCAP_AMD64_V2_CAPSET)
 #define OVRDCAP_AMD64_AVX                                 0x0000013C
 #define OVRDCAP_AMD64_AVX2                                0x0000013D
 #define OVRDCAP_AMD64_AVX512F                             0x0000013E
 #define OVRDCAP_AMD64_V2_CAPSET                           0x0000013F
 
-#define OVRDCAP_AMD64_MAX                                 0x00000140
+// SV3 Capabilities (OVRDCAP_AMD64_V3_CAPSET)
+#define OVRDCAP_AMD64_V3_CAPSET                           0x00000140
+#define OVRDCAP_AMD64_CFG_CHECK_OPT                       0x00000141 // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_AMD64_CFG_DISPATCH_OPT                    0x00000142 // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_AMD64_XFG_DISPATCH_OPT                    0x00000143 // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_AMD64_SSE41                               0x00000144
+#define OVRDCAP_AMD64_SMEP                                0x00000145
+#define OVRDCAP_AMD64_KCFG_DISPATCH_KSCP                  0x00000146
+#define OVRDCAP_AMD64_NOT_LIVE_MIGRATEABLE                0x00000147
+
+#define OVRDCAP_AMD64_MAX                                 0x00000148
 
 // ARM64
+// SV2 Capabilities (OVRDCAP_ARM64_V1_CAPSET)
 #define OVRDCAP_ARM64_FIRST                               0x00010000
 #define OVRDCAP_ARM64_USERMODE                            0x00010001
 #define OVRDCAP_ARM64_KERNELMODE                          0x00010002
 #define OVRDCAP_ARM64_V1_CAPSET                           0x00010003
-#define OVRDCAP_ARM64_MAX                                 0x00010004
 
+// SV3 Capabilities (OVRDCAP_ARM64_V2_CAPSET)
+#define OVRDCAP_ARM64_SHA256                              0x00010004
+#define OVRDCAP_ARM64_SHA512                              0x00010005
+#define OVRDCAP_ARM64_SHA3                                0x00010006
+#define OVRDCAP_ARM64_LSE                                 0x00010007
+#define OVRDCAP_ARM64_LSE2                                0x00010008
+#define OVRDCAP_ARM64_RDM                                 0x00010009
+#define OVRDCAP_ARM64_SM3                                 0x0001000A
+#define OVRDCAP_ARM64_SM4                                 0x0001000B
+#define OVRDCAP_ARM64_DP                                  0x0001000C
+#define OVRDCAP_ARM64_FHM                                 0x0001000D
+#define OVRDCAP_ARM64_FLAGM                               0x0001000E
+#define OVRDCAP_ARM64_FLAGM2                              0x0001000F
+#define OVRDCAP_ARM64_FCMA                                0x00010010
+#define OVRDCAP_ARM64_LRCPC                               0x00010011
+#define OVRDCAP_ARM64_LRCPC2                              0x00010012
+#define OVRDCAP_ARM64_BF16                                0x00010013
+#define OVRDCAP_ARM64_I8MM                                0x00010014
+#define OVRDCAP_ARM64_FP16                                0x00010015
+#define OVRDCAP_ARM64_SVE                                 0x00010016
+#define OVRDCAP_ARM64_SVE2                                0x00010017
+#define OVRDCAP_ARM64_F32MM                               0x00010018
+#define OVRDCAP_ARM64_F64MM                               0x00010019
+#define OVRDCAP_ARM64_V2_CAPSET                           0x0001001A
+#define OVRDCAP_ARM64_CFG_CHECK_OPT                       0x0001001B // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_ARM64_CFG_DISPATCH_OPT                    0x0001001C // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_ARM64_EC_CFG_CHECK_OPT                    0x0001001D // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_ARM64_EC_ICALL_CHECK_OPT                  0x0001001E // MUST NOT CHANGE, hard coded in compiler
+#define OVRDCAP_ARM64_EC_CALL_CHECK_OPT                   0x0001001F // MUST NOT CHANGE, hard coded in compiler
+
+// Ga Capabilities
+#define OVRDCAP_ARM64_V3_CAPSET                           0x00010020
+#define OVRDCAP_ARM64_UNALIGNED_CRT_STRESS_TEST           0x00010021
+#define OVRDCAP_ARM64_UNALIGNED_CRT                       0x00010022 // MUST NOT CHANGE, hard coded in vcruntime140.dll
+#define OVRDCAP_ARM64_DCZVA                               0x00010023
+#define OVRDCAP_ARM64_DCZVA_STRIDE_64BYTES                0x00010024
+#define OVRDCAP_ARM64_HYPERVISOR_VENDOR_MICROSOFT         0x00010025
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_ARM                 0x00010026
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_BROADCOM            0x00010027
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_CAVIUM              0x00010028
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_DEC                 0x00010029
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_FUJITSU             0x0001002A
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_INFINEON            0x0001002B
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_MOTOROLA_OR_FREESCALE 0x0001002C
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_NVIDIA              0x0001002D
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_APPLIED_MICRO_CIRCUITS 0x0001002E
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_QUALCOMM            0x0001002F
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_MARVELL             0x00010030
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_INTEL               0x00010031
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_AMPERE              0x00010032
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_MICROSOFT           0x00010033
+#define OVRDCAP_ARM64_CPU_IMPLEMENTER_APPLE               0x00010034
+#define OVRDCAP_ARM64_KCFG_CHECK_KSCP                     0x00010035 // Just for use by NT.
+#define OVRDCAP_ARM64_NO_DEVICE_MEMORY_ALLOCATION         0x00010036 // Allocated (PAGE_NOCACHE) memory is not device memory.
+#define OVRDCAP_ARM64_NOT_LIVE_MIGRATEABLE                0x00010037
+#define OVRDCAP_ARM64_QC_CHIPSET_850                      0x00010038
+#define OVRDCAP_ARM64_QC_CHIPSET_850_OR_8180              0x00010039
+#define OVRDCAP_ARM64_QC_CHIPSET_8180                     0x0001003A
+#define OVRDCAP_ARM64_QC_CHIPSET_8280                     0x0001003B
+#define OVRDCAP_ARM64_QC_CHIPSET_8380                     0x0001003C
+
+#define OVRDCAP_ARM64_MAX                                 0x0001003D
+
+#define OVRDCAP_ALWAYS_OFF                                0x7FFFFFFF
 
 //
 // SPECIAL OS FUNCTIONS:

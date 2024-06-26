@@ -2058,59 +2058,6 @@ NetErrorLogWrite (
      * More information can be found in the following log file '%SystemRoot%\debug\netlogon.log' and, potentially, in the log file
      * '%SystemRoot%\debug\netlogon.bak' created if the former log becomes full. For steps in enabling the log, please visit
      *  https://go.microsoft.com/fwlink/?linkid=2163327
-     */ 
-
-#define NETLOG_NetlogonRpcSigningClient    (ERRLOG2_BASE + 138)
-    /*
-     * The Netlogon service encountered a client using RPC signing instead of RPC sealing.
-     *
-     * %n%n Machine SamAccountName: %1
-     * %n Domain: %2
-     * %n Account Type: %3
-     * %n Machine Operating System: %4
-     * %n Machine Operating System Build: %5
-     * %n Machine Operating System Service Pack: %6
-     * %n Client IP Address: %7%n
-     *
-     * %n%nFor more information about the impact of this, please visit  https://go.microsoft.com/fwlink/?linkid=2209514.
-     */
-
-#define NETLOG_NetlogonRpcSigningTrust    (ERRLOG2_BASE + 139)
-    /*
-     * The Netlogon service encountered a trust using RPC signing instead of RPC sealing.
-     *
-     * %n%n Account Type: %1
-     * %n Trust Name: %2
-     * %n Trust Target: %3
-     * %n Client IP Address: %4
-     *
-     * %n%nFor more information about the impact of this, please visit  https://go.microsoft.com/fwlink/?linkid=2209514.
-     */
-
-#define NETLOG_NetlogonRc4Allowed    (ERRLOG2_BASE + 140)
-    /*
-     * The Netlogon service created a secure channel with a client with RC4.
-     *
-     * %n%n Account Name: %1
-     * %n Domain: %2
-     * %n Account Type: %3
-     * %n Client IP Address: %4
-     * %n Negotiated Flags: %5
-     *
-     * %n%nFor more information about why this was logged, please visit  https://go.microsoft.com/fwlink/?linkid=2209514.
-     */
-
-#define NETLOG_NetlogonRc4Denied    (ERRLOG2_BASE + 141)
-    /*
-     * The Netlogon service denied a client using RC4 due to the 'RejectMd5Clients' setting.
-     *
-     * %n%n Account Name: %1
-     * %n Domain: %2
-     * %n Account Type: %3
-     * %n Client IP Address: %4
-     * %n Negotiated Flags: %5
-     *
-     * %n%nFor more information about why this was denied, please visit  https://go.microsoft.com/fwlink/?linkid=2209514.
      */
 
 #ifdef __cplusplus

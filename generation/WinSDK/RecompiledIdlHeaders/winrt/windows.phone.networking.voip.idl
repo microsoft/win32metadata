@@ -51,6 +51,8 @@ namespace Windows
 
                 interface ICallAnswerEventArgs;
 
+                interface ICallAnswerEventArgs2;
+
                 interface ICallRejectEventArgs;
 
                 interface ICallStateChangeEventArgs;
@@ -80,6 +82,8 @@ namespace Windows
                 interface IVoipPhoneCall2;
 
                 interface IVoipPhoneCall3;
+
+                interface IVoipPhoneCall4;
 
                 interface IVoipPhoneCallReady;
 
@@ -186,6 +190,16 @@ namespace Windows
                 }
 
                 [contract(Windows.Phone.PhoneInternalContract, 1.0)]
+                [exclusiveto(Windows.Phone.Networking.Voip.CallAnswerEventArgs)]
+                [uuid(EC5DCBBE-3C84-4DE4-8817-FC788173406E)]
+                interface ICallAnswerEventArgs2 : IInspectable
+                    requires
+                        Windows.Phone.Networking.Voip.ICallAnswerEventArgs
+                {
+                    [propget] HRESULT SourceDeviceId([out] [retval] HSTRING* value);
+                }
+
+                [contract(Windows.Phone.PhoneInternalContract, 1.0)]
                 [exclusiveto(Windows.Phone.Networking.Voip.CallRejectEventArgs)]
                 [uuid(3E04061A-CE7D-49C2-A2B8-7F49B6EAEBC5)]
                 interface ICallRejectEventArgs : IInspectable
@@ -230,7 +244,7 @@ namespace Windows
                     [eventadd] HRESULT UnmuteRequested([in] Windows.Foundation.TypedEventHandler<Windows.Phone.Networking.Voip.VoipCallCoordinator*, Windows.Phone.Networking.Voip.MuteChangeEventArgs*>* muteChangeHandler, [out] [retval] EventRegistrationToken* token);
                     [eventremove] HRESULT UnmuteRequested([in] EventRegistrationToken token);
                     HRESULT RequestNewIncomingCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] Windows.Foundation.Uri* contactImage, [in] HSTRING serviceName, [in] Windows.Foundation.Uri* brandingImage, [in] HSTRING callDetails, [in] Windows.Foundation.Uri* ringtone, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.TimeSpan ringTimeout, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
-                    HRESULT RequestNewOutgoingCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
+                    HRESULT RequestNewOutgoingCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.Collections.IVector<HSTRING>* pAssociatedDeviceIds, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
                     HRESULT NotifyMuted();
                     HRESULT NotifyUnmuted();
                 }
@@ -242,7 +256,7 @@ namespace Windows
                     requires
                         Windows.Phone.Networking.Voip.IVoipCallCoordinator
                 {
-                    HRESULT SetupNewAcceptedCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
+                    HRESULT SetupNewAcceptedCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.Collections.IVector<HSTRING>* pAssociatedDeviceIds, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
                 }
 
                 [contract(Windows.Phone.PhoneInternalContract, 1.0)]
@@ -252,8 +266,8 @@ namespace Windows
                     requires
                         Windows.Phone.Networking.Voip.IVoipCallCoordinator
                 {
-                    [overload("RequestNewIncomingCall")] HRESULT RequestNewIncomingCallWithContactRemoteId([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] Windows.Foundation.Uri* contactImage, [in] HSTRING serviceName, [in] Windows.Foundation.Uri* brandingImage, [in] HSTRING callDetails, [in] Windows.Foundation.Uri* ringtone, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.TimeSpan ringTimeout, [in] HSTRING contactRemoteId, [out] [retval] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
-                    HRESULT RequestNewAppInitiatedCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
+                    [overload("RequestNewIncomingCall")] HRESULT RequestNewIncomingCallWithContactRemoteId([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] Windows.Foundation.Uri* contactImage, [in] HSTRING serviceName, [in] Windows.Foundation.Uri* brandingImage, [in] HSTRING callDetails, [in] Windows.Foundation.Uri* ringtone, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.TimeSpan ringTimeout, [in] HSTRING contactRemoteId, [in] Windows.Foundation.Collections.IVector<HSTRING>* pAssociatedDeviceIds, [out] [retval] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
+                    HRESULT RequestNewAppInitiatedCall([in] HSTRING context, [in] HSTRING contactName, [in] HSTRING contactNumber, [in] HSTRING serviceName, [in] Windows.Phone.Networking.Voip.VoipCallMedia media, [in] Windows.Foundation.Collections.IVector<HSTRING>* pAssociatedDeviceIds, [out] Windows.Phone.Networking.Voip.VoipPhoneCall** call);
                 }
 
                 [contract(Windows.Phone.PhoneInternalContract, 1.0)]
@@ -347,6 +361,19 @@ namespace Windows
 
                 [contract(Windows.Phone.PhoneInternalContract, 1.0)]
                 [exclusiveto(Windows.Phone.Networking.Voip.VoipPhoneCall)]
+                [uuid(5F593D10-24EF-5006-B846-276132294A37)]
+                interface IVoipPhoneCall4 : IInspectable
+                {
+                    [propget] HRESULT IsUsingAssociatedDevicesList([out] [retval] boolean* value);
+                    [overload("NotifyCallActive")] HRESULT NotifyCallActiveOnDevices([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds);
+                    HRESULT AddAssociatedCallControlDevice([in] HSTRING deviceId);
+                    HRESULT RemoveAssociatedCallControlDevice([in] HSTRING deviceId);
+                    HRESULT SetAssociatedCallControlDevices([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds);
+                    HRESULT GetAssociatedCallControlDevices([out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** result);
+                }
+
+                [contract(Windows.Phone.PhoneInternalContract, 1.0)]
+                [exclusiveto(Windows.Phone.Networking.Voip.VoipPhoneCall)]
                 [uuid(B3F5AC79-F40F-4E52-A8EE-E8A9A71F511A)]
                 interface IVoipPhoneCallReady : IInspectable
                 {
@@ -410,6 +437,7 @@ namespace Windows
                     [contract(Windows.Phone.PhoneInternalContract, 1.0)] interface Windows.Phone.Networking.Voip.IVoipPhoneCallReady;
                     [contract(Windows.Phone.PhoneInternalContract, 1.0)] interface Windows.Phone.Networking.Voip.IVoipPhoneCall2;
                     [contract(Windows.Phone.PhoneInternalContract, 1.0)] interface Windows.Phone.Networking.Voip.IVoipPhoneCall3;
+                    [contract(Windows.Phone.PhoneInternalContract, 1.0)] interface Windows.Phone.Networking.Voip.IVoipPhoneCall4;
                 }
             }
         }

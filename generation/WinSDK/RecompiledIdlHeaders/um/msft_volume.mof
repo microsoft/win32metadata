@@ -2,6 +2,19 @@
 // Copyright (C) Microsoft Corporation, All rights reserved.
 //============================================================================
 //
+// NOTE: WMI has a known issue where adding parameters (though optional) to
+// existing methods in a *provider* MOF can mess up WMI repository, if the
+// change is serviced downlevel.  And that could break unrelated things. For
+// example, adding an optional boolean param to Format method broke WSP_VOLUME
+// association schemas and we couldn't find WSP_PARTITION object from WSP_VOLUME
+// object.  Rebooting the machine won't address the issue.  If we ever hit this
+// again, uninstall and reinstall the MOF to recover the machine.
+//
+// C:\Windows\System32\wbem> mofcomp.exe mispace_uninstall.mof
+// C:\Windows\System32\wbem> mofcomp.exe mispace.mof
+//
+// NOTE: The above issue won't show up in build to build upgrades as the WMI
+// repository is fully rebuilt.
 
 
 [ClassVersion ( "1.0" ),
@@ -117,6 +130,12 @@ class MSFT_Volume : MSFT_StorageObject {
     ]
     UInt32 DedupMode;
 
+    [Description ("Indicates the ReFS deduplication mode of the volume."),
+        ValueMap {"0", "1", "2", "3", "4"},
+        Values { "Disabled", "Dedup", "DedupAndCompress", "Compress", "NotAvailable" }
+    ]
+    UInt32 ReFSDedupMode;
+
     [Read, Description ("The allocation unit size of the volume."),
         Units("Bytes")]
     UInt32 AllocationUnitSize;
@@ -176,6 +195,9 @@ class MSFT_Volume : MSFT_StorageObject {
         [In]
         Boolean NoTrim,
 
+        [In]
+        Boolean SHA256Checksums,
+
         [Out, EmbeddedInstance("MSFT_Volume")]
         String FormattedVolume,
 
@@ -226,6 +248,9 @@ class MSFT_Volume : MSFT_StorageObject {
 
         [In]
         Boolean NoTrim,
+
+        [In]
+        Boolean SHA256Checksums,
 
         [In]
         Boolean DevDrive,

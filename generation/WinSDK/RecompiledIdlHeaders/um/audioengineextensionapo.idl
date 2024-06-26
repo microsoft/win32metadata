@@ -10,6 +10,21 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 import "audioenginebaseapo.idl";
 import "endpointvolume.idl";
 
+import "propsys.idl";
+
+// public property keys
+
+cpp_quote("#ifdef DEFINE_PROPERTYKEY")
+cpp_quote("#undef DEFINE_PROPERTYKEY")
+cpp_quote("#endif")
+
+cpp_quote("#ifdef INITGUID")
+cpp_quote("#define DEFINE_PROPERTYKEY(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8, pid) EXTERN_C const PROPERTYKEY DECLSPEC_SELECTANY name = { { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }, pid }")
+cpp_quote("#else")
+cpp_quote("#define DEFINE_PROPERTYKEY(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8, pid) EXTERN_C const PROPERTYKEY name")
+cpp_quote("#endif // INITGUID")
+
+
 typedef [v1_enum] enum AUDIO_SYSTEMEFFECT_STATE
 {
     AUDIO_SYSTEMEFFECT_STATE_OFF = 0,
@@ -54,6 +69,16 @@ typedef struct APOInitSystemEffects3
     GUID                AudioProcessingMode;
     BOOL                InitializeForDiscoveryOnly;
 } APOInitSystemEffects3;
+
+//-----------------------------------------------------------------------------
+// Description: This structure contains expanded information pertaining to the
+// configuration of the loopback provided to the AEC.
+//
+typedef struct AcousticEchoCanceller_Reference_Input
+{
+    APOInitSystemEffects3 apoInitSystemEffects;
+    APO_REFERENCE_STREAM_PROPERTIES streamProperties;
+} AcousticEchoCanceller_Reference_Input;
 
 //
 // Interface used by the threading framework to get the work queue id.
@@ -119,7 +144,10 @@ typedef enum APO_NOTIFICATION_TYPE
     APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION = 5,
 
     // Microphone boost notifications
-    APO_NOTIFICATION_TYPE_MICROPHONE_BOOST = 6
+    APO_NOTIFICATION_TYPE_MICROPHONE_BOOST = 6,
+
+    // Audio environement state changed
+    APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE = 7
 
 } APO_NOTIFICATION_TYPE;
 
@@ -242,6 +270,23 @@ typedef struct AUDIO_MICROPHONE_BOOST_NOTIFICATION
     BOOL mute;
 } AUDIO_MICROPHONE_BOOST_NOTIFICATION;
 
+// PKEY_AudioEnvironment_xxx
+// GUID for PKEY_AudioEnvironment_XXX (public): 4AFB7B88-A653-44A5-99DB-687FD74AF0BB
+
+// PKEY_AudioEnvironment_SpatialStreams_Active: Boolean that when TRUE indicates that spatial audio is in use, FALSE otherwise.
+// vartype = VT_BOOL
+cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEnvironment_SpatialAudioActive, 0x4AFB7B88, 0xA653, 0x44A5, 0x99, 0xDB, 0x68, 0x7F, 0xD7, 0x4A, 0xF0, 0xBB, 2);")
+
+
+typedef struct AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION 
+{
+    // The property store that the change occurred on. Use this to query the new value of propertyKey below. 
+    IPropertyStore* propertyStore; 
+
+    // The PROPERTYKEY that has a new value. 
+    PROPERTYKEY propertyKey; 
+} AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION; 
+
 // This structure is used to describe the type of notification that is sent from the OS to the APO using IAudioProcessingObjectNotifications::HandleNotification.
 typedef struct APO_NOTIFICATION
 {
@@ -265,6 +310,9 @@ typedef struct APO_NOTIFICATION
 
         // Used when type is APO_NOTIFICATION_TYPE_MICROPHONE_BOOST.
         AUDIO_MICROPHONE_BOOST_NOTIFICATION audioMicrophoneBoostChange;
+
+        // Used when type is APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE. 
+        AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION audioEnvironmentChange;
     } DUMMYUNIONNAME;
 } APO_NOTIFICATION;
 
@@ -311,6 +359,21 @@ typedef struct APO_NOTIFICATION_DESCRIPTOR
         AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR audioMicrophoneBoost;
     } DUMMYUNIONNAME;
 } APO_NOTIFICATION_DESCRIPTOR;
+
+//
+// Interface to be implemented by an APO that wishes to report its preferred audio input format
+//
+[
+    object,
+    uuid(51CBD3C4-F1F3-4D2F-A0E1-7E9C4DD0FEB3),
+    pointer_default(unique),
+    local
+]
+interface IAudioProcessingObjectPreferredFormatSupport : IUnknown
+{
+    HRESULT GetPreferredInputFormat([in] IAudioMediaType* outputFormat, [out] IAudioMediaType** preferredFormat);
+    HRESULT GetPreferredOutputFormat([in] IAudioMediaType* inputFormat, [out] IAudioMediaType** preferredFormat);
+};
 
 //
 // Interface to be implemented by an APO that wishes to use the notification service provided by the OS.

@@ -21,5 +21,8 @@ namespace Windows.Win32.Security.Cryptography
         [DllImport("BCryptPrimitives.dll", CallingConvention = CallingConvention.StdCall, ExactSpelling = true)]
         [return: NativeTypeName("BOOL")]
         public static extern int ProcessPrng([NativeTypeName("PBYTE")][MemorySize(BytesParamIndex=1)][Out] byte* pbData, [NativeTypeName("SIZE_T")] nuint cbData);
+
+        // Has to be int so it can be used in a shift
+        public const int CERT_COMPARE_SHIFT = 16;
     }
 }

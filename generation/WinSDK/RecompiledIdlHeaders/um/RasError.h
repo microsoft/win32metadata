@@ -1757,7 +1757,12 @@ Abstract:
 * The connection requires an input state from the user.
 */
 
-#define RASBASEEND                                 (RASBASE+277)
+#define ERROR_WINHTTP_AUTO_PROXY_SERVICE           (RASBASE+278)
+/*
+* Couldn't connect because the call to the WinHttp Auto Proxy Service failed. This is usually the result of Web Proxy Auto-Discovery (WPAD) being disabled. Please enable it to allow the VPN connection to proceed, or contact your network administrator.
+*/
+
+#define RASBASEEND                                 (RASBASE+278)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

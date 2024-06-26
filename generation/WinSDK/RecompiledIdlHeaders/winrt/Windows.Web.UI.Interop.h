@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -770,7 +770,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlAcceleratorKeyPressedEventArgs = _uuidof(IWebViewControlAcceleratorKeyPressedEventArgs);
+                    MIDL_CONST_ID IID& IID_IWebViewControlAcceleratorKeyPressedEventArgs = __uuidof(IWebViewControlAcceleratorKeyPressedEventArgs);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -808,7 +808,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlMoveFocusRequestedEventArgs = _uuidof(IWebViewControlMoveFocusRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_IWebViewControlMoveFocusRequestedEventArgs = __uuidof(IWebViewControlMoveFocusRequestedEventArgs);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -868,7 +868,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcess = _uuidof(IWebViewControlProcess);
+                    MIDL_CONST_ID IID& IID_IWebViewControlProcess = __uuidof(IWebViewControlProcess);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -907,7 +907,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcessFactory = _uuidof(IWebViewControlProcessFactory);
+                    MIDL_CONST_ID IID& IID_IWebViewControlProcessFactory = __uuidof(IWebViewControlProcessFactory);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -954,7 +954,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcessOptions = _uuidof(IWebViewControlProcessOptions);
+                    MIDL_CONST_ID IID& IID_IWebViewControlProcessOptions = __uuidof(IWebViewControlProcessOptions);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -1028,7 +1028,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlSite = _uuidof(IWebViewControlSite);
+                    MIDL_CONST_ID IID& IID_IWebViewControlSite = __uuidof(IWebViewControlSite);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -1077,7 +1077,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWebViewControlSite2 = _uuidof(IWebViewControlSite2);
+                    MIDL_CONST_ID IID& IID_IWebViewControlSite2 = __uuidof(IWebViewControlSite2);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -1155,8 +1155,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 6.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.UI.Interop.IWebViewControlProcessFactory interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.UI.Interop.IWebViewControlProcessFactory interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.UI.Interop.IWebViewControlProcess ** Default Interface **
@@ -2575,8 +2575,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 6.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.UI.Interop.IWebViewControlProcessFactory interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.UI.Interop.IWebViewControlProcessFactory interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.UI.Interop.IWebViewControlProcess ** Default Interface **

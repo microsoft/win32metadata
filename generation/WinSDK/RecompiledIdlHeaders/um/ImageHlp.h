@@ -1393,6 +1393,11 @@ GetTimestampForLoadedLibrary(
     _In_ HMODULE Module
     );
 
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+#pragma endregion
+
+#pragma region Desktop Family or Games Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS  | WINAPI_PARTITION_GAMES)
 //
 // typedefs for function pointers
 //
@@ -1518,6 +1523,11 @@ typedef BOOL
 
 #endif
 
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 
 // values found in SYMBOL_INFO.Tag
 //
@@ -1608,6 +1618,7 @@ enum SymTagEnum
 #define SYMFLAG_REGREL_ALIASINDIR   0x00800000
 #define SYMFLAG_FIXUP_ARM64X        0x01000000
 #define SYMFLAG_GLOBAL              0x02000000
+#define SYMFLAG_COMPLEX             0x04000000
 
 // this resets SymNext/Prev to the beginning
 // of the module passed in the address field
@@ -1879,12 +1890,6 @@ typedef struct _IMAGEHLP_LINEW {
 } IMAGEHLP_LINEW, *PIMAGEHLP_LINEW;
 #endif
 
-#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
-
 //
 // source file structure
 //
@@ -1898,6 +1903,12 @@ typedef struct _SOURCEFILEW {
     DWORD64  ModBase;                // base address of loaded module
     PWSTR    FileName;               // full filename of source
 } SOURCEFILEW, *PSOURCEFILEW;
+
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 
 //
 // data structures used for registered symbol callbacks
@@ -2034,6 +2045,12 @@ SymSetParentWindow(
     _In_ HWND hwnd
     );
 
+BOOL
+IMAGEAPI
+SymGetParentWindow(
+    _Out_ HWND * pHwnd
+    );
+
 PCHAR
 IMAGEAPI
 SymSetHomeDirectory(
@@ -2163,17 +2180,17 @@ SymGetOptions(
     VOID
     );
 
-#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
-
 BOOL
 IMAGEAPI
 SymCleanup(
     _In_ HANDLE hProcess
     );
+
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 
 // Returns the value of the extended option
 BOOL
@@ -2184,6 +2201,12 @@ SymGetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option);
 BOOL
 IMAGEAPI
 SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
+
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+#pragma endregion
+
+#pragma region Desktop Family or Games Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
 
 BOOL
 IMAGEAPI
@@ -2315,12 +2338,6 @@ EnumerateLoadedModules(
     _In_opt_ PVOID UserContext
     );
 #endif
-
-#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
-#pragma endregion
-
-#pragma region Desktop Family or Games Family
-#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
 
 PVOID
 IMAGEAPI
@@ -3141,6 +3158,12 @@ typedef struct _MODULE_TYPE_INFO { // AKA TYPTYP
     BYTE        data[1];
 } MODULE_TYPE_INFO, *PMODULE_TYPE_INFO;
 
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+#pragma endregion
+
+#pragma region Desktop Family or Games Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
+
 typedef struct _SYMBOL_INFO {
     ULONG       SizeOfStruct;
     ULONG       TypeIndex;        // Type Index of symbol
@@ -3186,6 +3209,12 @@ typedef struct _SYMBOL_INFO_PACKAGEW {
     SYMBOL_INFOW si;
     WCHAR        name[MAX_SYM_NAME + 1];
 } SYMBOL_INFO_PACKAGEW, *PSYMBOL_INFO_PACKAGEW;
+
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 
 typedef struct _IMAGEHLP_STACK_FRAME
 {
@@ -3248,6 +3277,12 @@ SymEnumProcesses(
     _In_ PVOID UserContext
     );
 
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+#pragma endregion
+
+#pragma region Desktop Family or Games Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
+
 BOOL
 IMAGEAPI
 SymFromAddr(
@@ -3265,6 +3300,12 @@ SymFromAddrW(
     _Out_opt_ PDWORD64 Displacement,
     _Inout_ PSYMBOL_INFOW Symbol
     );
+
+#endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 
 BOOL
 IMAGEAPI
@@ -3536,6 +3577,10 @@ typedef enum _IMAGEHLP_SYMBOL_TYPE_INFO {
     TI_GET_INDIRECTVIRTUALBASECLASS,
     TI_GET_VIRTUALBASETABLETYPE,
     TI_GET_OBJECTPOINTERTYPE,
+    TI_GET_DISCRIMINATEDUNION_TAG_TYPEID,
+    TI_GET_DISCRIMINATEDUNION_TAG_OFFSET,
+    TI_GET_DISCRIMINATEDUNION_TAG_RANGESCOUNT,
+    TI_GET_DISCRIMINATEDUNION_TAG_RANGES,
     IMAGEHLP_SYMBOL_TYPE_INFO_MAX,
 } IMAGEHLP_SYMBOL_TYPE_INFO;
 
@@ -3544,6 +3589,17 @@ typedef struct _TI_FINDCHILDREN_PARAMS {
     ULONG Start;
     ULONG ChildId[1];
 } TI_FINDCHILDREN_PARAMS;
+
+typedef struct _DISCRIMINATEDUNION_TAG_VALUE {
+    BYTE value[16];
+    BYTE valueSizeBytes;
+} DISCRIMINATEDUNION_TAG_VALUE;
+
+typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
+    ULONG Count;
+    ULONG Start;
+    DISCRIMINATEDUNION_TAG_VALUE Range[1];
+} TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS;
 
 BOOL
 IMAGEAPI

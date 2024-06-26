@@ -57,7 +57,11 @@ namespace Windows
 
             interface IAppExtension2;
 
+            interface IAppExtension3;
+
             interface IAppExtensionCatalog;
+
+            interface IAppExtensionCatalog2;
 
             interface IAppExtensionCatalogStatics;
 
@@ -148,6 +152,16 @@ namespace Windows
                 [propget] HRESULT AppUserModelId([out] [retval] HSTRING* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [exclusiveto(Windows.ApplicationModel.AppExtensions.AppExtension)]
+            [uuid(5923C101-AA38-4009-84D9-5B54A0DF30AE)]
+            interface IAppExtension3 : IInspectable
+            {
+                HRESULT GetExtensionProperties([out] [retval] Windows.Foundation.Collections.IPropertySet** result);
+                HRESULT GetPublicPath([out] [retval] HSTRING* result);
+                HRESULT GetPublicFolder([out] [retval] Windows.Storage.StorageFolder** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
             [exclusiveto(Windows.ApplicationModel.AppExtensions.AppExtensionCatalog)]
             [uuid(97872032-8426-4AD1-9084-92E88C2DA200)]
@@ -165,6 +179,14 @@ namespace Windows
                 [eventremove] HRESULT PackageUninstalling([in] EventRegistrationToken token);
                 [eventadd] HRESULT PackageStatusChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.AppExtensions.AppExtensionCatalog*, Windows.ApplicationModel.AppExtensions.AppExtensionPackageStatusChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
                 [eventremove] HRESULT PackageStatusChanged([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [exclusiveto(Windows.ApplicationModel.AppExtensions.AppExtensionCatalog)]
+            [uuid(50056EBA-58B6-4147-B5A5-8FECA6DFB49D)]
+            interface IAppExtensionCatalog2 : IInspectable
+            {
+                HRESULT FindAll([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.AppExtensions.AppExtension*>** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -229,6 +251,7 @@ namespace Windows
             {
                 [default] interface Windows.ApplicationModel.AppExtensions.IAppExtension;
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.ApplicationModel.AppExtensions.IAppExtension2;
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.ApplicationModel.AppExtensions.IAppExtension3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -236,6 +259,7 @@ namespace Windows
             runtimeclass AppExtensionCatalog
             {
                 [default] interface Windows.ApplicationModel.AppExtensions.IAppExtensionCatalog;
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.ApplicationModel.AppExtensions.IAppExtensionCatalog2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]

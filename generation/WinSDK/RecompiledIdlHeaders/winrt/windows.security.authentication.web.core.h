@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1345,7 +1345,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFindAllAccountsResult = _uuidof(IFindAllAccountsResult);
+                        MIDL_CONST_ID IID& IID_IFindAllAccountsResult = __uuidof(IFindAllAccountsResult);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1385,7 +1385,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountEventArgs = _uuidof(IWebAccountEventArgs);
+                        MIDL_CONST_ID IID& IID_IWebAccountEventArgs = __uuidof(IWebAccountEventArgs);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1443,7 +1443,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountMonitor = _uuidof(IWebAccountMonitor);
+                        MIDL_CONST_ID IID& IID_IWebAccountMonitor = __uuidof(IWebAccountMonitor);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1487,7 +1487,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountMonitor2 = _uuidof(IWebAccountMonitor2);
+                        MIDL_CONST_ID IID& IID_IWebAccountMonitor2 = __uuidof(IWebAccountMonitor2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1556,7 +1556,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics = _uuidof(IWebAuthenticationCoreManagerStatics);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics = __uuidof(IWebAuthenticationCoreManagerStatics);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1602,7 +1602,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics2 = _uuidof(IWebAuthenticationCoreManagerStatics2);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics2 = __uuidof(IWebAuthenticationCoreManagerStatics2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1646,7 +1646,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics3 = _uuidof(IWebAuthenticationCoreManagerStatics3);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics3 = __uuidof(IWebAuthenticationCoreManagerStatics3);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1710,7 +1710,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics4 = _uuidof(IWebAuthenticationCoreManagerStatics4);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics4 = __uuidof(IWebAuthenticationCoreManagerStatics4);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1756,7 +1756,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebProviderError = _uuidof(IWebProviderError);
+                        MIDL_CONST_ID IID& IID_IWebProviderError = __uuidof(IWebProviderError);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1798,7 +1798,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebProviderErrorFactory = _uuidof(IWebProviderErrorFactory);
+                        MIDL_CONST_ID IID& IID_IWebProviderErrorFactory = __uuidof(IWebProviderErrorFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1850,7 +1850,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest = _uuidof(IWebTokenRequest);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest = __uuidof(IWebTokenRequest);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1890,7 +1890,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest2 = _uuidof(IWebTokenRequest2);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest2 = __uuidof(IWebTokenRequest2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1933,7 +1933,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest3 = _uuidof(IWebTokenRequest3);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest3 = __uuidof(IWebTokenRequest3);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1992,7 +1992,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequestFactory = _uuidof(IWebTokenRequestFactory);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequestFactory = __uuidof(IWebTokenRequestFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2041,7 +2041,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequestResult = _uuidof(IWebTokenRequestResult);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequestResult = __uuidof(IWebTokenRequestResult);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2090,7 +2090,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenResponse = _uuidof(IWebTokenResponse);
+                        MIDL_CONST_ID IID& IID_IWebTokenResponse = __uuidof(IWebTokenResponse);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2142,7 +2142,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenResponseFactory = _uuidof(IWebTokenResponseFactory);
+                        MIDL_CONST_ID IID& IID_IWebTokenResponseFactory = __uuidof(IWebTokenResponseFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2220,8 +2220,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -2310,8 +2310,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebTokenResponseFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Authentication.Web.Core.IWebTokenResponse ** Default Interface **
@@ -5436,8 +5436,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -5526,8 +5526,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebTokenResponseFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Authentication.Web.Core.IWebTokenResponse ** Default Interface **

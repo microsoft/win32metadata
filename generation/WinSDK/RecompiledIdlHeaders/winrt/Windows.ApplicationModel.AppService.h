@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1200,7 +1200,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceCatalogStatics = _uuidof(IAppServiceCatalogStatics);
+                MIDL_CONST_ID IID& IID_IAppServiceCatalogStatics = __uuidof(IAppServiceCatalogStatics);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1236,7 +1236,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceClosedEventArgs = _uuidof(IAppServiceClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppServiceClosedEventArgs = __uuidof(IAppServiceClosedEventArgs);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1302,7 +1302,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceConnection = _uuidof(IAppServiceConnection);
+                MIDL_CONST_ID IID& IID_IAppServiceConnection = __uuidof(IAppServiceConnection);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1345,7 +1345,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceConnection2 = _uuidof(IAppServiceConnection2);
+                MIDL_CONST_ID IID& IID_IAppServiceConnection2 = __uuidof(IAppServiceConnection2);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1384,7 +1384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceConnectionStatics = _uuidof(IAppServiceConnectionStatics);
+                MIDL_CONST_ID IID& IID_IAppServiceConnectionStatics = __uuidof(IAppServiceConnectionStatics);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1418,7 +1418,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceDeferral = _uuidof(IAppServiceDeferral);
+                MIDL_CONST_ID IID& IID_IAppServiceDeferral = __uuidof(IAppServiceDeferral);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1458,7 +1458,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceRequest = _uuidof(IAppServiceRequest);
+                MIDL_CONST_ID IID& IID_IAppServiceRequest = __uuidof(IAppServiceRequest);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1497,7 +1497,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceRequestReceivedEventArgs = _uuidof(IAppServiceRequestReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppServiceRequestReceivedEventArgs = __uuidof(IAppServiceRequestReceivedEventArgs);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1536,7 +1536,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceResponse = _uuidof(IAppServiceResponse);
+                MIDL_CONST_ID IID& IID_IAppServiceResponse = __uuidof(IAppServiceResponse);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1578,7 +1578,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails = _uuidof(IAppServiceTriggerDetails);
+                MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails = __uuidof(IAppServiceTriggerDetails);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1614,7 +1614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails2 = _uuidof(IAppServiceTriggerDetails2);
+                MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails2 = __uuidof(IAppServiceTriggerDetails2);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1651,7 +1651,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails3 = _uuidof(IAppServiceTriggerDetails3);
+                MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails3 = __uuidof(IAppServiceTriggerDetails3);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1687,7 +1687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails4 = _uuidof(IAppServiceTriggerDetails4);
+                MIDL_CONST_ID IID& IID_IAppServiceTriggerDetails4 = __uuidof(IAppServiceTriggerDetails4);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */
@@ -1726,7 +1726,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStatelessAppServiceResponse = _uuidof(IStatelessAppServiceResponse);
+                MIDL_CONST_ID IID& IID_IStatelessAppServiceResponse = __uuidof(IStatelessAppServiceResponse);
             } /* AppService */
         } /* ApplicationModel */
     } /* Windows */

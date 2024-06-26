@@ -806,6 +806,12 @@ information can be used to calculate bandwidthusage.
                                     METHOD_BUFFERED,  \
                                     FILE_ANY_ACCESS)
 
+#define IOCTL_USB_GET_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION  \
+                                CTL_CODE(FILE_DEVICE_USB,  \
+                                    USB_GET_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION,  \
+                                    METHOD_BUFFERED,  \
+                                    FILE_ANY_ACCESS)
+
 #endif
 
 #ifndef USB_KERNEL_IOCTL
@@ -1865,6 +1871,26 @@ typedef struct _USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION {
 } USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION, *PUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION;
 
 #endif
+
+typedef struct _USB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION {
+    // one based port number
+    ULONG  ConnectionIndex;
+
+    // length of the structure
+    ULONG  Length;
+
+    // Current Operating Speed for RX Lane
+    USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED RxSuperSpeedPlus;
+
+    // Note: For 'actual' LaneCount, add 1.
+    ULONG RxLaneCount;
+
+    // Current Operating Speed for TX Lane
+    USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED TxSuperSpeedPlus;
+
+    // Note: For 'actual' LaneCount, add 1.
+    ULONG TxLaneCount;
+} USB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION, *PUSB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION;
 
 
 #include <poppack.h>

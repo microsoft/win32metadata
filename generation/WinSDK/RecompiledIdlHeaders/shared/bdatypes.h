@@ -786,6 +786,8 @@ ENUM MPEG2StreamType {
     USER_PRIVATE                    = 0x10, // standard says 0x80, retaining for backwards compatibility
     HEVC_VIDEO_OR_TEMPORAL_VIDEO    = 0x24,
     HEVC_TEMPORAL_VIDEO_SUBSET      = 0x25,
+    MPEG_H_AUDIO                    = 0x2D, // used for single-stream delivery or for the main stream in case of multi-stream delivery.
+    MPEG_H_AUDIO_MS                 = 0x2E, // used for additional (auxiliary) stream in case of MPEG-H multi-stream delivery.
     ISO_IEC_USER_PRIVATE            = 0x80,
     DOLBY_AC3_AUDIO                 = 0x81,
     DOLBY_DIGITAL_PLUS_AUDIO_ATSC   = 0X87

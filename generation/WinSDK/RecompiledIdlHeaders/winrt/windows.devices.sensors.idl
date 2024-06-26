@@ -162,6 +162,8 @@ namespace Windows
 
             interface ICompassStatics2;
 
+            interface IDetectedPerson;
+
             interface IGyrometer;
 
             interface IGyrometer2;
@@ -184,6 +186,10 @@ namespace Windows
 
             interface IGyrometerStatics2;
 
+            interface IHeadOrientation;
+
+            interface IHeadPosition;
+
             interface IHingeAngleReading;
 
             interface IHingeAngleSensor;
@@ -200,11 +206,15 @@ namespace Windows
 
             interface IHumanPresenceSensor2;
 
+            interface IHumanPresenceSensor3;
+
             interface IHumanPresenceSensorExtension;
 
             interface IHumanPresenceSensorReading;
 
             interface IHumanPresenceSensorReading2;
+
+            interface IHumanPresenceSensorReading3;
 
             interface IHumanPresenceSensorReadingChangedEventArgs;
 
@@ -408,6 +418,8 @@ namespace Windows
 
             runtimeclass CompassReadingChangedEventArgs;
 
+            runtimeclass DetectedPerson;
+
             runtimeclass Gyrometer;
 
             runtimeclass GyrometerDataThreshold;
@@ -415,6 +427,10 @@ namespace Windows
             runtimeclass GyrometerReading;
 
             runtimeclass GyrometerReadingChangedEventArgs;
+
+            runtimeclass HeadOrientation;
+
+            runtimeclass HeadPosition;
 
             runtimeclass HingeAngleReading;
 
@@ -514,6 +530,8 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Devices.Sensors.ActivityType>;
 
+                interface Windows.Foundation.Collections.IIterable<Windows.Devices.Sensors.DetectedPerson*>;
+
                 interface Windows.Foundation.Collections.IIterable<Windows.Devices.Sensors.PedometerReading*>;
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Devices.Sensors.ProximitySensorReading*>;
@@ -525,6 +543,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IIterator<Windows.Devices.Sensors.ActivitySensorReadingChangeReport*>;
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Devices.Sensors.ActivityType>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Devices.Sensors.DetectedPerson*>;
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Devices.Sensors.PedometerReading*>;
 
@@ -541,6 +561,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Sensors.ActivitySensorReadingChangeReport*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Sensors.ActivityType>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Sensors.DetectedPerson*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Devices.Sensors.PedometerReading*>;
 
@@ -1191,6 +1213,18 @@ namespace Windows
                 HRESULT FromIdAsync([in] HSTRING deviceId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Sensors.Compass*>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.DetectedPerson)]
+            [uuid(168CC0D9-3F05-5029-A0BF-CDCAB4BE3F9E)]
+            interface IDetectedPerson : IInspectable
+            {
+                [propget] HRESULT Engagement([out] [retval] Windows.Devices.Sensors.HumanEngagement* value);
+                [propget] HRESULT DistanceInMillimeters([out] [retval] Windows.Foundation.IReference<UINT32>** value);
+                [propget] HRESULT HeadOrientation([out] [retval] Windows.Devices.Sensors.HeadOrientation** value);
+                [propget] HRESULT HeadPosition([out] [retval] Windows.Devices.Sensors.HeadPosition** value);
+                [propget] HRESULT PersonId([out] [retval] Windows.Foundation.IReference<INT32>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Sensors.Gyrometer)]
             [uuid(FDB9A9C4-84B1-4CA2-9763-9B589506C70C)]
@@ -1297,6 +1331,25 @@ namespace Windows
                 HRESULT FromIdAsync([in] HSTRING deviceId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Sensors.Gyrometer*>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HeadOrientation)]
+            [uuid(519F54A9-513E-55E8-9C35-3E8DA21DEE69)]
+            interface IHeadOrientation : IInspectable
+            {
+                [propget] HRESULT RollInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT PitchInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT YawInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HeadPosition)]
+            [uuid(585AEB65-CF35-5E6D-A76A-37DB131E17DE)]
+            interface IHeadPosition : IInspectable
+            {
+                [propget] HRESULT AzimuthInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT AltitudeInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
             [exclusiveto(Windows.Devices.Sensors.HingeAngleReading)]
             [uuid(A3CD45B9-1BF1-4F65-A704-E2DA04F182C0)]
@@ -1382,6 +1435,18 @@ namespace Windows
                 [propget] HRESULT IsEngagementSupported([out] [retval] boolean* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HumanPresenceSensor)]
+            [uuid(963F006D-090D-532C-9EAF-803A9F69285B)]
+            interface IHumanPresenceSensor3 : IInspectable
+            {
+                [propget] HRESULT MaxDetectablePersons([out] [retval] INT32* value);
+                [propget] HRESULT MinDetectableAzimuthInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT MaxDetectableAzimuthInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT MinDetectableAltitudeInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT MaxDetectableAltitudeInDegrees([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
             [uuid(3E526A71-2D1D-5D43-8A8E-A434A8242EF0)]
             interface IHumanPresenceSensorExtension : IInspectable
@@ -1412,6 +1477,15 @@ namespace Windows
             interface IHumanPresenceSensorReading2 : IInspectable
             {
                 [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HumanPresenceSensorReading)]
+            [uuid(B876D918-F069-586F-90E3-7C6FA5C5D33A)]
+            interface IHumanPresenceSensorReading3 : IInspectable
+            {
+                [propget] HRESULT OnlookerPresence([out] [retval] Windows.Devices.Sensors.HumanPresence* value);
+                [propget] HRESULT DetectedPersons([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.Sensors.DetectedPerson*>** value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -2384,6 +2458,13 @@ namespace Windows
                 [default] interface Windows.Devices.Sensors.ICompassReadingChangedEventArgs;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass DetectedPerson
+            {
+                [default] interface Windows.Devices.Sensors.IDetectedPerson;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Devices.Sensors.IGyrometerStatics, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2420,6 +2501,20 @@ namespace Windows
             runtimeclass GyrometerReadingChangedEventArgs
             {
                 [default] interface Windows.Devices.Sensors.IGyrometerReadingChangedEventArgs;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass HeadOrientation
+            {
+                [default] interface Windows.Devices.Sensors.IHeadOrientation;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass HeadPosition
+            {
+                [default] interface Windows.Devices.Sensors.IHeadPosition;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -2464,6 +2559,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Sensors.IHumanPresenceSensor;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Sensors.IHumanPresenceSensor2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.IHumanPresenceSensor3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -2472,6 +2568,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Sensors.IHumanPresenceSensorReading;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Sensors.IHumanPresenceSensorReading2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.IHumanPresenceSensorReading3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]

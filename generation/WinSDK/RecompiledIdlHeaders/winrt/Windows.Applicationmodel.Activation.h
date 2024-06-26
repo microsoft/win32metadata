@@ -112,7 +112,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x40000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_LOCKSCREENCALLCONTRACT_VERSION)
@@ -136,7 +136,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION)
@@ -2508,7 +2508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedEventArgs = _uuidof(IActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IActivatedEventArgs = __uuidof(IActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2545,7 +2545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedEventArgsWithUser = _uuidof(IActivatedEventArgsWithUser);
+                MIDL_CONST_ID IID& IID_IActivatedEventArgsWithUser = __uuidof(IActivatedEventArgsWithUser);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2582,7 +2582,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IApplicationViewActivatedEventArgs = _uuidof(IApplicationViewActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IApplicationViewActivatedEventArgs = __uuidof(IApplicationViewActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2619,7 +2619,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderActivatedEventArgs = _uuidof(IAppointmentsProviderActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderActivatedEventArgs = __uuidof(IAppointmentsProviderActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2657,7 +2657,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderAddAppointmentActivatedEventArgs = _uuidof(IAppointmentsProviderAddAppointmentActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderAddAppointmentActivatedEventArgs = __uuidof(IAppointmentsProviderAddAppointmentActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2695,7 +2695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderRemoveAppointmentActivatedEventArgs = _uuidof(IAppointmentsProviderRemoveAppointmentActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderRemoveAppointmentActivatedEventArgs = __uuidof(IAppointmentsProviderRemoveAppointmentActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2733,7 +2733,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderReplaceAppointmentActivatedEventArgs = _uuidof(IAppointmentsProviderReplaceAppointmentActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderReplaceAppointmentActivatedEventArgs = __uuidof(IAppointmentsProviderReplaceAppointmentActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2777,7 +2777,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs = _uuidof(IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs = __uuidof(IAppointmentsProviderShowAppointmentDetailsActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2818,7 +2818,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentsProviderShowTimeFrameActivatedEventArgs = _uuidof(IAppointmentsProviderShowTimeFrameActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentsProviderShowTimeFrameActivatedEventArgs = __uuidof(IAppointmentsProviderShowTimeFrameActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2852,7 +2852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBackgroundActivatedEventArgs = _uuidof(IBackgroundActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IBackgroundActivatedEventArgs = __uuidof(IBackgroundActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2889,7 +2889,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerPreviewActivatedEventArgs = _uuidof(IBarcodeScannerPreviewActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerPreviewActivatedEventArgs = __uuidof(IBarcodeScannerPreviewActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2926,7 +2926,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICachedFileUpdaterActivatedEventArgs = _uuidof(ICachedFileUpdaterActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ICachedFileUpdaterActivatedEventArgs = __uuidof(ICachedFileUpdaterActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -2966,7 +2966,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICameraSettingsActivatedEventArgs = _uuidof(ICameraSettingsActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ICameraSettingsActivatedEventArgs = __uuidof(ICameraSettingsActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3003,7 +3003,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICommandLineActivatedEventArgs = _uuidof(ICommandLineActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ICommandLineActivatedEventArgs = __uuidof(ICommandLineActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3051,7 +3051,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICommandLineActivationOperation = _uuidof(ICommandLineActivationOperation);
+                MIDL_CONST_ID IID& IID_ICommandLineActivationOperation = __uuidof(ICommandLineActivationOperation);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3088,7 +3088,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactActivatedEventArgs = _uuidof(IContactActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactActivatedEventArgs = __uuidof(IContactActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3132,7 +3132,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactCallActivatedEventArgs = _uuidof(IContactCallActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactCallActivatedEventArgs = __uuidof(IContactCallActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3173,7 +3173,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactMapActivatedEventArgs = _uuidof(IContactMapActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactMapActivatedEventArgs = __uuidof(IContactMapActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3217,7 +3217,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactMessageActivatedEventArgs = _uuidof(IContactMessageActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactMessageActivatedEventArgs = __uuidof(IContactMessageActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3254,7 +3254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactPanelActivatedEventArgs = _uuidof(IContactPanelActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactPanelActivatedEventArgs = __uuidof(IContactPanelActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3291,7 +3291,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactPickerActivatedEventArgs = _uuidof(IContactPickerActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactPickerActivatedEventArgs = __uuidof(IContactPickerActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3335,7 +3335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactPostActivatedEventArgs = _uuidof(IContactPostActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactPostActivatedEventArgs = __uuidof(IContactPostActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3379,7 +3379,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactVideoCallActivatedEventArgs = _uuidof(IContactVideoCallActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactVideoCallActivatedEventArgs = __uuidof(IContactVideoCallActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3416,7 +3416,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContactsProviderActivatedEventArgs = _uuidof(IContactsProviderActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContactsProviderActivatedEventArgs = __uuidof(IContactsProviderActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3453,7 +3453,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IContinuationActivatedEventArgs = _uuidof(IContinuationActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IContinuationActivatedEventArgs = __uuidof(IContinuationActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3493,7 +3493,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDeviceActivatedEventArgs = _uuidof(IDeviceActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IDeviceActivatedEventArgs = __uuidof(IDeviceActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3530,7 +3530,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDevicePairingActivatedEventArgs = _uuidof(IDevicePairingActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IDevicePairingActivatedEventArgs = __uuidof(IDevicePairingActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3568,7 +3568,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDialReceiverActivatedEventArgs = _uuidof(IDialReceiverActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IDialReceiverActivatedEventArgs = __uuidof(IDialReceiverActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3608,7 +3608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileActivatedEventArgs = _uuidof(IFileActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IFileActivatedEventArgs = __uuidof(IFileActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3645,7 +3645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileActivatedEventArgsWithCallerPackageFamilyName = _uuidof(IFileActivatedEventArgsWithCallerPackageFamilyName);
+                MIDL_CONST_ID IID& IID_IFileActivatedEventArgsWithCallerPackageFamilyName = __uuidof(IFileActivatedEventArgsWithCallerPackageFamilyName);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3683,7 +3683,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileActivatedEventArgsWithNeighboringFiles = _uuidof(IFileActivatedEventArgsWithNeighboringFiles);
+                MIDL_CONST_ID IID& IID_IFileActivatedEventArgsWithNeighboringFiles = __uuidof(IFileActivatedEventArgsWithNeighboringFiles);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3720,7 +3720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileOpenPickerActivatedEventArgs = _uuidof(IFileOpenPickerActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IFileOpenPickerActivatedEventArgs = __uuidof(IFileOpenPickerActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3754,7 +3754,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileOpenPickerActivatedEventArgs2 = _uuidof(IFileOpenPickerActivatedEventArgs2);
+                MIDL_CONST_ID IID& IID_IFileOpenPickerActivatedEventArgs2 = __uuidof(IFileOpenPickerActivatedEventArgs2);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3798,7 +3798,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileOpenPickerContinuationEventArgs = _uuidof(IFileOpenPickerContinuationEventArgs);
+                MIDL_CONST_ID IID& IID_IFileOpenPickerContinuationEventArgs = __uuidof(IFileOpenPickerContinuationEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3835,7 +3835,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileSavePickerActivatedEventArgs = _uuidof(IFileSavePickerActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IFileSavePickerActivatedEventArgs = __uuidof(IFileSavePickerActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3872,7 +3872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileSavePickerActivatedEventArgs2 = _uuidof(IFileSavePickerActivatedEventArgs2);
+                MIDL_CONST_ID IID& IID_IFileSavePickerActivatedEventArgs2 = __uuidof(IFileSavePickerActivatedEventArgs2);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3916,7 +3916,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileSavePickerContinuationEventArgs = _uuidof(IFileSavePickerContinuationEventArgs);
+                MIDL_CONST_ID IID& IID_IFileSavePickerContinuationEventArgs = __uuidof(IFileSavePickerContinuationEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -3960,7 +3960,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFolderPickerContinuationEventArgs = _uuidof(IFolderPickerContinuationEventArgs);
+                MIDL_CONST_ID IID& IID_IFolderPickerContinuationEventArgs = __uuidof(IFolderPickerContinuationEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4000,7 +4000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILaunchActivatedEventArgs = _uuidof(ILaunchActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ILaunchActivatedEventArgs = __uuidof(ILaunchActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4038,7 +4038,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILaunchActivatedEventArgs2 = _uuidof(ILaunchActivatedEventArgs2);
+                MIDL_CONST_ID IID& IID_ILaunchActivatedEventArgs2 = __uuidof(ILaunchActivatedEventArgs2);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4075,7 +4075,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenActivatedEventArgs = _uuidof(ILockScreenActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ILockScreenActivatedEventArgs = __uuidof(ILockScreenActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4113,7 +4113,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallActivatedEventArgs = _uuidof(ILockScreenCallActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ILockScreenCallActivatedEventArgs = __uuidof(ILockScreenCallActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4150,7 +4150,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallActivatedEventArgs = _uuidof(IPhoneCallActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPhoneCallActivatedEventArgs = __uuidof(IPhoneCallActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4187,7 +4187,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPickerReturnedActivatedEventArgs = _uuidof(IPickerReturnedActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPickerReturnedActivatedEventArgs = __uuidof(IPickerReturnedActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4224,7 +4224,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrelaunchActivatedEventArgs = _uuidof(IPrelaunchActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrelaunchActivatedEventArgs = __uuidof(IPrelaunchActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4261,7 +4261,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DWorkflowActivatedEventArgs = _uuidof(IPrint3DWorkflowActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrint3DWorkflowActivatedEventArgs = __uuidof(IPrint3DWorkflowActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4298,7 +4298,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrintTaskSettingsActivatedEventArgs = _uuidof(IPrintTaskSettingsActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPrintTaskSettingsActivatedEventArgs = __uuidof(IPrintTaskSettingsActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4335,7 +4335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProtocolActivatedEventArgs = _uuidof(IProtocolActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IProtocolActivatedEventArgs = __uuidof(IProtocolActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4375,7 +4375,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData = _uuidof(IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData);
+                MIDL_CONST_ID IID& IID_IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData = __uuidof(IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4412,7 +4412,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProtocolForResultsActivatedEventArgs = _uuidof(IProtocolForResultsActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IProtocolForResultsActivatedEventArgs = __uuidof(IProtocolForResultsActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4449,7 +4449,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRestrictedLaunchActivatedEventArgs = _uuidof(IRestrictedLaunchActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IRestrictedLaunchActivatedEventArgs = __uuidof(IRestrictedLaunchActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4489,7 +4489,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISearchActivatedEventArgs = _uuidof(ISearchActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ISearchActivatedEventArgs = __uuidof(ISearchActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4523,7 +4523,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISearchActivatedEventArgsWithLinguisticDetails = _uuidof(ISearchActivatedEventArgsWithLinguisticDetails);
+                MIDL_CONST_ID IID& IID_ISearchActivatedEventArgsWithLinguisticDetails = __uuidof(ISearchActivatedEventArgsWithLinguisticDetails);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4560,7 +4560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareTargetActivatedEventArgs = _uuidof(IShareTargetActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IShareTargetActivatedEventArgs = __uuidof(IShareTargetActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4603,7 +4603,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISplashScreen = _uuidof(ISplashScreen);
+                MIDL_CONST_ID IID& IID_ISplashScreen = __uuidof(ISplashScreen);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4640,7 +4640,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStartupTaskActivatedEventArgs = _uuidof(IStartupTaskActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IStartupTaskActivatedEventArgs = __uuidof(IStartupTaskActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4676,7 +4676,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITileActivatedInfo = _uuidof(ITileActivatedInfo);
+                MIDL_CONST_ID IID& IID_ITileActivatedInfo = __uuidof(ITileActivatedInfo);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4716,7 +4716,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IToastNotificationActivatedEventArgs = _uuidof(IToastNotificationActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IToastNotificationActivatedEventArgs = __uuidof(IToastNotificationActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4753,7 +4753,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUserDataAccountProviderActivatedEventArgs = _uuidof(IUserDataAccountProviderActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IUserDataAccountProviderActivatedEventArgs = __uuidof(IUserDataAccountProviderActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4790,7 +4790,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IViewSwitcherProvider = _uuidof(IViewSwitcherProvider);
+                MIDL_CONST_ID IID& IID_IViewSwitcherProvider = __uuidof(IViewSwitcherProvider);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4827,7 +4827,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandActivatedEventArgs = _uuidof(IVoiceCommandActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IVoiceCommandActivatedEventArgs = __uuidof(IVoiceCommandActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4882,7 +4882,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWalletActionActivatedEventArgs = _uuidof(IWalletActionActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IWalletActionActivatedEventArgs = __uuidof(IWalletActionActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4919,7 +4919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProviderActivatedEventArgs = _uuidof(IWebAccountProviderActivatedEventArgs);
+                MIDL_CONST_ID IID& IID_IWebAccountProviderActivatedEventArgs = __uuidof(IWebAccountProviderActivatedEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */
@@ -4957,7 +4957,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAuthenticationBrokerContinuationEventArgs = _uuidof(IWebAuthenticationBrokerContinuationEventArgs);
+                MIDL_CONST_ID IID& IID_IWebAuthenticationBrokerContinuationEventArgs = __uuidof(IWebAuthenticationBrokerContinuationEventArgs);
             } /* Activation */
         } /* ApplicationModel */
     } /* Windows */

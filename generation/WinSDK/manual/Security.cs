@@ -8,7 +8,7 @@ namespace Windows.Win32.Security
     {
         [NativeTypeName("BOOLEAN")]
         public const byte SECURITY_DYNAMIC_TRACKING = 1;
-        
+
         [NativeTypeName("BOOLEAN")]
         public const byte SECURITY_STATIC_TRACKING = 0;
 
@@ -86,11 +86,7 @@ namespace Windows.Win32.Security.Credentials
     }
 }
 
-namespace Windows.Win32.Security.Cryptography
+namespace Windows.Win32.Security.EnterpriseData
 {
-    public static unsafe partial class Apis
-    {
-        // Has to be int so it can be used in a shift
-        public const int CERT_COMPARE_SHIFT = 16;
-    }
+    public struct _SRP_REQUEST;
 }

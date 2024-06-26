@@ -1066,6 +1066,102 @@ CPER_FIELD_CHECK(WHEA_MEMORY_ERROR_SECTION, ResponderId,         56, 8);
 CPER_FIELD_CHECK(WHEA_MEMORY_ERROR_SECTION, TargetId,            64, 8);
 CPER_FIELD_CHECK(WHEA_MEMORY_ERROR_SECTION, ErrorType,           72, 1);
 
+//----------------------------------------------- WHEA_MEMORY_ERROR_EXT_SECTION
+
+typedef enum _WHEA_MEMORY_DEFINITION {
+    WheaMemoryUndefined = 0,
+    WheaMemoryFm,
+    WheaMemoryNm,
+    WheaMemoryHbm,
+    WheaMemoryMax
+} WHEA_MEMORY_DEFINITION, *PWHEA_MEMORY_DEFINITION;
+
+typedef union _WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS {
+    struct {
+        UINT64 AddressTranslationByPrmSuccess : 1;
+        UINT64 AddressTranslationByPrmFailed : 1;
+        UINT64 AddressTranslationByPrmNotSupported : 1;
+        UINT64 AddressTranslationByPluginSuccess : 1;
+        UINT64 AddressTranslationByPluginFailed : 1;
+        UINT64 AddressTranslationByPluginNotSupported : 1;
+        UINT64 Reserved : 58;
+    } DUMMYSTRUCTNAME;
+
+    UINT64 AsUINT64;
+} WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS, *PWHEA_MEMORY_ERROR_EXT_SECTION_FLAGS;
+
+typedef union _WHEA_MEMORY_ERROR_EXT_SECTION_INTEL_VALIDBITS {
+    struct {
+        UINT64 MemDef : 1;
+        UINT64 SystemAddress : 1;
+        UINT64 SpareSystemAddress : 1;
+        UINT64 DevicePhysicalAddress : 1;
+        UINT64 ChannelAddress : 1;
+        UINT64 RankAddress : 1;
+        UINT64 ProcessorSocketId : 1;
+        UINT64 MemoryControllerId : 1;
+        UINT64 TargetId : 1;
+        UINT64 LogicalChannelId : 1;
+        UINT64 ChannelId : 1;
+        UINT64 SubChannelId : 1;
+        UINT64 PhysicalRankId : 1;
+        UINT64 DimmSlotId : 1;
+        UINT64 DimmRankId : 1;
+        UINT64 Bank : 1;
+        UINT64 BankGroup : 1;
+        UINT64 Row : 1;
+        UINT64 Column : 1;
+        UINT64 LockStepRank : 1;
+        UINT64 LockStepPhysicalRank : 1;
+        UINT64 LockStepBank : 1;
+        UINT64 LockStepBankGroup : 1;
+        UINT64 ChipSelect : 1;
+        UINT64 Node : 1;
+        UINT64 ChipId : 1;
+        UINT64 Reserved : 38;
+    } DUMMYSTRUCTNAME;
+
+    UINT64 ValidBits;
+} WHEA_MEMORY_ERROR_EXT_SECTION_INTEL_VALIDBITS,
+  *PWHEA_MEMORY_ERROR_EXT_SECTION_INTEL_VALIDBITS;
+
+typedef struct _WHEA_MEMORY_HARDWARE_ADDRESS_INTEL {
+    WHEA_MEMORY_DEFINITION MemDef;
+    UINT64 SystemAddress;
+    UINT64 SpareSystemAddress;
+    UINT64 DevicePhysicalAddress;
+    UINT64 ChannelAddress;
+    UINT64 RankAddress;
+    UINT8 ProcessorSocketId;
+    UINT8 MemoryControllerId;
+    UINT8 TargetId;
+    UINT8 LogicalChannelId;
+    UINT8 ChannelId;
+    UINT8 SubChannelId;
+    UINT8 PhysicalRankId;
+    UINT8 DimmSlotId;
+    UINT8 DimmRankId;
+    UINT8 Bank;
+    UINT8 BankGroup;
+    UINT32 Row;
+    UINT32 Column;
+    UINT8 LockStepRank;
+    UINT8 LockStepPhysicalRank;
+    UINT8 LockStepBank;
+    UINT8 LockStepBankGroup;
+    UINT8 ChipSelect;
+    UINT8 Node;
+    UINT8 ChipId;
+    UINT8 Reserved[40];
+} WHEA_MEMORY_HARDWARE_ADDRESS_INTEL, *PWHEA_MEMORY_HARDWARE_ADDRESS_INTEL;
+
+typedef struct _WHEA_MEMORY_ERROR_EXT_SECTION_INTEL {
+    WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS Flags;
+    WHEA_MEMORY_ERROR_EXT_SECTION_INTEL_VALIDBITS ValidBits;
+    WHEA_MEMORY_HARDWARE_ADDRESS_INTEL HardwareAddress;
+    UINT8 Reserved[40];
+} WHEA_MEMORY_ERROR_EXT_SECTION_INTEL, *PWHEA_MEMORY_ERROR_EXT_SECTION_INTEL;
+
 //----------------------------------------------------- WHEA_PMEM_ERROR_SECTION
 
 #define WHEA_PMEM_ERROR_SECTION_LOCATION_INFO_SIZE 64
@@ -1585,8 +1681,10 @@ typedef enum _WHEA_CPU_VENDOR {
 #define WHEA_XPF_MCA_EXTREG_MAX_COUNT            24
 #define WHEA_XPF_MCA_SECTION_VERSION_2           2
 #define WHEA_XPF_MCA_SECTION_VERSION_3           3
-#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_3
+#define WHEA_XPF_MCA_SECTION_VERSION_4           4
+#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_4
 #define WHEA_AMD_EXT_REG_NUM                     10
+#define WHEA_XPF_MCA_EXBANK_COUNT                32
 
 //
 // NOTE: You must update WHEA_AMD_EXT_REG_NUM if you add additional registers
@@ -1662,6 +1760,16 @@ typedef struct _WHEA_XPF_MCA_SECTION {
     //
 
     XPF_RECOVERY_INFO RecoveryInfo;
+
+    //
+    // Version 4 Fields follow.
+    //
+
+    ULONG ExBankCount;
+    ULONG BankNumberEx[WHEA_XPF_MCA_EXBANK_COUNT];
+    MCI_STATUS StatusEx[WHEA_XPF_MCA_EXBANK_COUNT];
+    ULONGLONG AddressEx[WHEA_XPF_MCA_EXBANK_COUNT];
+    ULONGLONG MiscEx[WHEA_XPF_MCA_EXBANK_COUNT];
 } WHEA_XPF_MCA_SECTION, *PWHEA_XPF_MCA_SECTION;
 
 //------------------------------------------------------ WHEA_NMI_ERROR_SECTION
@@ -1748,15 +1856,15 @@ typedef enum _WHEA_RECOVERY_TYPE {
 
 typedef union _WHEA_RECOVERY_ACTION {
     struct {
-        ULONG NoneAttempted : 1;
-        ULONG TerminateProcess : 1;
-        ULONG ForwardedToVm : 1;
-        ULONG MarkPageBad : 1;
-        ULONG PoisonNotPresent :1;
-        ULONG Reserved : 28;
+        UINT64 NoneAttempted : 1;
+        UINT64 TerminateProcess : 1;
+        UINT64 ForwardedToVm : 1;
+        UINT64 MarkPageBad : 1;
+        UINT64 PoisonNotPresent :1;
+        UINT64 Reserved : 59;
     } DUMMYSTRUCTNAME;
 
-    ULONG AsULONG;
+    UINT64 AsUINT64;
 } WHEA_RECOVERY_ACTION, *PWHEA_RECOVERY_ACTION;
 
 typedef enum _WHEA_RECOVERY_FAILURE_REASON {
@@ -2108,6 +2216,7 @@ CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, Version,  
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterContextType,   2,    2);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterArraySize,     4,    4);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterArray,         8,    1);
+
 // ----------------------------------------------------------------- SEA Section
 
 typedef struct _WHEA_SEA_SECTION {
@@ -2121,6 +2230,45 @@ typedef struct _WHEA_SEI_SECTION {
     ULONG Esr;
     ULONG64 Far;
 } WHEA_SEI_SECTION, *PWHEA_SEI_SECTION;
+
+// -------------------------------------------------------- Arm RAS Node Section
+
+typedef struct _WHEA_ARM_RAS_NODE_SECTION {
+    UINT32 NodeFieldCount;
+    UINT32 NodeIndex;
+    UINT8 InterfaceType;
+    UINT8 AestNodeType;
+    UINT8 Reserved[6];
+    // Fields as defined in the Arm RAS extensions version 8.6  (ARM DDI 0587)
+    UINT64 ErrFr;
+    UINT64 ErrCtlr;
+    UINT64 ErrStatus;
+    UINT64 ErrAddr;
+    UINT64 ErrMisc0;
+    UINT64 ErrMisc1;
+    UINT64 ErrMisc2;
+    UINT64 ErrMisc3;
+} WHEA_ARM_RAS_NODE_SECTION, *PWHEA_ARM_RAS_NODE_SECTION;
+
+//
+// To make ensure backwards compatability in the future the number of node field's
+// is recorded. This allows expanding the section on new machines without breaking
+// parsing for older generations.
+//
+
+#define WHEA_ARM_RAS_NODE_FIELD_COUNT 8
+
+//
+// Interface types possible for Arm Ras Nodes, as defined in the AEST ACPI table
+// definition in "ACPI for the Armv8 RAS Extenstions"  (Document Number DEN0085)
+//
+
+typedef enum _WHEA_ARM_RAS_NODE_INTERFACES {
+    WheaArmRasNodeInterfaceSystemRegister = 0,
+    WheaArmRasNodeInterfaceMmio = 1
+} WHEA_ARM_RAS_NODE_INTERFACES, *PWHEA_ARM_RAS_NODE_INTERFACES;
+
+// -------------------------------------------------------- PCI Recovery Section
 
 typedef enum _WHEA_PCI_RECOVERY_SIGNAL {
     WheaPciRecoverySignalUnknown = 0,
@@ -2136,6 +2284,9 @@ typedef enum _WHEA_PCI_RECOVERY_STATUS {
     WheaPciRecoveryStatusRpBusyTimeout,
     WheaPciRecoveryStatusComplexTree,
     WheaPciRecoveryStatusBusNotFound,
+    WheaPciRecoveryStatusDeviceNotFound,
+    WheaPciRecoveryStatusDdaAerNotRecoverable,
+    WheaPciRecoveryStatusFailedRecovery,
 }WHEA_PCI_RECOVERY_STATUS,  *PWHEA_PCI_RECOVERY_STATUS;
 
 typedef struct _WHEA_PCI_RECOVERY_SECTION {

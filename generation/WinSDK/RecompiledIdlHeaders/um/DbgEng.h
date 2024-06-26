@@ -89,6 +89,9 @@ DEFINE_GUID(IID_IDebugClient7, 0x13586be3, 0x542e, 0x481e,
 /* CEC43ADD-6375-469e-83D5-414E4033C19A */
 DEFINE_GUID(IID_IDebugClient8, 0xcec43add, 0x6375, 0x469e,
             0x83, 0xd5, 0x41, 0x4e, 0x40, 0x33, 0xc1, 0x9a);
+/* 2C24CD5B-4D9E-4DF4-8A70-3D37440D119F */
+DEFINE_GUID(IID_IDebugClient9, 0x2c24cd5b, 0x4d9e, 0x4df4,
+            0x8a, 0x70, 0x3d, 0x37, 0x44, 0x0d, 0x11, 0x9f);
 /* a02b66c4-aea3-4234-a9f7-fe4c383d4e29 */
 DEFINE_GUID(IID_IDebugPlmClient, 0xa02b66c4, 0xaea3, 0x4234,
             0xa9, 0xf7, 0xfe, 0x4c, 0x38, 0x3d, 0x4e, 0x29);
@@ -225,6 +228,8 @@ typedef interface DECLSPEC_UUID("13586be3-542e-481e-b1f2-8497ba74f9a9")
     IDebugClient7* PDEBUG_CLIENT7;
 typedef interface DECLSPEC_UUID("CEC43ADD-6375-469e-83D5-414E4033C19A")
     IDebugClient8* PDEBUG_CLIENT8;
+typedef interface DECLSPEC_UUID("2C24CD5B-4D9E-4DF4-8A70-3D37440D119F")
+    IDebugClient9* PDEBUG_CLIENT9;
 typedef interface DECLSPEC_UUID("a02b66c4-aea3-4234-a9f7-fe4c383d4e29")
     IDebugPlmClient* PIDEBUG_PLMCLIENT;
 typedef interface DECLSPEC_UUID("597c980d-e7bd-4309-962c-9d9b69a7372c")
@@ -620,6 +625,10 @@ typedef struct _PROCESS_NAME_ENTRY
 // InBuffer - ULONG64 for process server identification and PWSTR as module path
 // OutBuffer - ULONG for architecture
 #define DEBUG_REQUEST_GET_IMAGE_ARCHITECTURE 39
+
+// InBuffer - HWND for the new parent
+// OutBuffer - HWND for the old parent window
+#define DEBUG_REQUEST_SET_PARENT_HWND 40
 
 //
 // GetSourceFileInformation requests.
@@ -6918,6 +6927,770 @@ DECLARE_INTERFACE_(IDebugClient8, IUnknown)
         _In_opt_ PCWSTR FileName,
         _In_ ULONG64 FileHandle,
         _In_ ULONG AlternateArch
+        ) PURE;
+};
+
+#undef INTERFACE
+#define INTERFACE IDebugClient9
+DECLARE_INTERFACE_(IDebugClient9, IUnknown)
+{
+    // IUnknown.
+    STDMETHOD(QueryInterface)(
+        THIS_
+        _In_ REFIID InterfaceId,
+        _Out_ PVOID* Interface
+        ) PURE;
+    STDMETHOD_(ULONG, AddRef)(
+        THIS
+        ) PURE;
+    STDMETHOD_(ULONG, Release)(
+        THIS
+        ) PURE;
+
+    // IDebugClient.
+
+    // The following set of methods start
+    // the different kinds of debuggees.
+
+    // Begins a debug session using the kernel
+    // debugging protocol.  This method selects
+    // the protocol as the debuggee communication
+    // mechanism but does not initiate the communication
+    // itself.
+    STDMETHOD(AttachKernel)(
+        THIS_
+        _In_ ULONG Flags,
+        _In_opt_ PCSTR ConnectOptions
+        ) PURE;
+    STDMETHOD(GetKernelConnectionOptions)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG OptionsSize
+        ) PURE;
+    // Updates the connection options for a live
+    // kernel connection.  This can only be used
+    // to modify parameters for the connection, not
+    // to switch to a completely different kind of
+    // connection.
+    // This method is reentrant.
+    STDMETHOD(SetKernelConnectionOptions)(
+        THIS_
+        _In_ PCSTR Options
+        ) PURE;
+
+    // Starts a process server for remote
+    // user-mode process control.
+    // The local process server is server zero.
+    STDMETHOD(StartProcessServer)(
+        THIS_
+        _In_ ULONG Flags,
+        _In_ PCSTR Options,
+        _In_opt_ _Reserved_ PVOID Reserved
+        ) PURE;
+    STDMETHOD(ConnectProcessServer)(
+        THIS_
+        _In_ PCSTR RemoteOptions,
+        _Out_ PULONG64 Server
+        ) PURE;
+    STDMETHOD(DisconnectProcessServer)(
+        THIS_
+        _In_ ULONG64 Server
+        ) PURE;
+
+    // Enumerates and describes processes
+    // accessible through the given process server.
+    STDMETHOD(GetRunningProcessSystemIds)(
+        THIS_
+        _In_ ULONG64 Server,
+        _Out_writes_opt_(Count) PULONG Ids,
+        _In_ ULONG Count,
+        _Out_opt_ PULONG ActualCount
+        ) PURE;
+    STDMETHOD(GetRunningProcessSystemIdByExecutableName)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PCSTR ExeName,
+        _In_ ULONG Flags,
+        _Out_ PULONG Id
+        ) PURE;
+    STDMETHOD(GetRunningProcessDescription)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ ULONG SystemId,
+        _In_ ULONG Flags,
+        _Out_writes_opt_(ExeNameSize) PSTR ExeName,
+        _In_ ULONG ExeNameSize,
+        _Out_opt_ PULONG ActualExeNameSize,
+        _Out_writes_opt_(DescriptionSize) PSTR Description,
+        _In_ ULONG DescriptionSize,
+        _Out_opt_ PULONG ActualDescriptionSize
+        ) PURE;
+
+    // Attaches to a running user-mode process.
+    STDMETHOD(AttachProcess)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ ULONG ProcessId,
+        _In_ ULONG AttachFlags
+        ) PURE;
+    // Creates a new user-mode process for debugging.
+    // CreateFlags are as given to Win32s CreateProcess.
+    // One of DEBUG_PROCESS or DEBUG_ONLY_THIS_PROCESS
+    // must be specified.
+    STDMETHOD(CreateProcess)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PSTR CommandLine,
+        _In_ ULONG CreateFlags
+        ) PURE;
+    // Creates or attaches to a user-mode process, or both.
+    // If CommandLine is NULL this method operates as
+    // AttachProcess does.  If ProcessId is zero it
+    // operates as CreateProcess does.  If CommandLine is
+    // non-NULL and ProcessId is non-zero the method first
+    // starts a process with the given information but
+    // in a suspended state.  The engine then attaches to
+    // the indicated process.  Once the attach is successful
+    // the suspended process is resumed.  This provides
+    // synchronization between the new process and the
+    // attachment.
+    STDMETHOD(CreateProcessAndAttach)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_opt_ PSTR CommandLine,
+        _In_ ULONG CreateFlags,
+        _In_ ULONG ProcessId,
+        _In_ ULONG AttachFlags
+        ) PURE;
+    // Gets and sets process control flags.
+    STDMETHOD(GetProcessOptions)(
+        THIS_
+        _Out_ PULONG Options
+        ) PURE;
+    STDMETHOD(AddProcessOptions)(
+        THIS_
+        _In_ ULONG Options
+        ) PURE;
+    STDMETHOD(RemoveProcessOptions)(
+        THIS_
+        _In_ ULONG Options
+        ) PURE;
+    STDMETHOD(SetProcessOptions)(
+        THIS_
+        _In_ ULONG Options
+        ) PURE;
+
+    // Opens any kind of user- or kernel-mode dump file
+    // and begins a debug session with the information
+    // contained within it.
+    STDMETHOD(OpenDumpFile)(
+        THIS_
+        _In_ PCSTR DumpFile
+        ) PURE;
+    // Writes a dump file from the current session information.
+    // The kind of dump file written is determined by the
+    // kind of session and the type qualifier given.
+    // For example, if the current session is a kernel
+    // debug session (DEBUG_CLASS_KERNEL) and the qualifier
+    // is DEBUG_DUMP_SMALL a small kernel dump will be written.
+    STDMETHOD(WriteDumpFile)(
+        THIS_
+        _In_ PCSTR DumpFile,
+        _In_ ULONG Qualifier
+        ) PURE;
+
+    // Indicates that a remote client is ready to
+    // begin participating in the current session.
+    // HistoryLimit gives a character limit on
+    // the amount of output history to be sent.
+    STDMETHOD(ConnectSession)(
+        THIS_
+        _In_ ULONG Flags,
+        _In_ ULONG HistoryLimit
+        ) PURE;
+    // Indicates that the engine should start accepting
+    // remote connections. Options specifies connection types
+    // and their parameters.  Supported strings are:
+    //    npipe:Pipe=<Pipe name>
+    //    tcp:Port=<IP port>
+    STDMETHOD(StartServer)(
+        THIS_
+        _In_ PCSTR Options
+        ) PURE;
+    // List the servers running on the given machine.
+    // Uses the line prefix.
+    STDMETHOD(OutputServers)(
+        THIS_
+        _In_ ULONG OutputControl,
+        _In_ PCSTR Machine,
+        _In_ ULONG Flags
+        ) PURE;
+
+    // Attempts to terminate all processes in the debuggers list.
+    STDMETHOD(TerminateProcesses)(
+        THIS
+        ) PURE;
+    // Attempts to detach from all processes in the debuggers list.
+    // This requires OS support for debugger detach.
+    STDMETHOD(DetachProcesses)(
+        THIS
+        ) PURE;
+    // Stops the current debug session.  If a process
+    // was created or attached an active EndSession can
+    // terminate or detach from it.
+    // If a kernel connection was opened it will be closed but the
+    // target machine is otherwise unaffected.
+    STDMETHOD(EndSession)(
+        THIS_
+        _In_ ULONG Flags
+        ) PURE;
+    // If a process was started and ran to completion
+    // this method can be used to retrieve its exit code.
+    STDMETHOD(GetExitCode)(
+        THIS_
+        _Out_ PULONG Code
+        ) PURE;
+
+    // Client event callbacks are called on the thread
+    // of the client.  In order to give thread
+    // execution to the engine for callbacks all
+    // client threads should call DispatchCallbacks
+    // when they are idle.  Callbacks are only
+    // received when a thread calls DispatchCallbacks
+    // or WaitForEvent.  WaitForEvent can only be
+    // called by the thread that started the debug
+    // session so all other client threads should
+    // call DispatchCallbacks when possible.
+    // DispatchCallbacks returns when ExitDispatch is used
+    // to interrupt dispatch or when the timeout expires.
+    // DispatchCallbacks dispatches callbacks for all
+    // clients associated with the thread calling
+    // DispatchCallbacks.
+    // DispatchCallbacks returns S_FALSE when the
+    // timeout expires.
+    STDMETHOD(DispatchCallbacks)(
+        THIS_
+        _In_ ULONG Timeout
+        ) PURE;
+    // ExitDispatch can be used to interrupt callback
+    // dispatch when a client thread is needed by the
+    // client.  This method is reentrant and can
+    // be called from any thread.
+    STDMETHOD(ExitDispatch)(
+        THIS_
+        _In_ PDEBUG_CLIENT Client
+        ) PURE;
+
+    // Clients are specific to the thread that
+    // created them.  Calls from other threads
+    // fail immediately.  The CreateClient method
+    // is a notable exception; it allows creation
+    // of a new client for a new thread.
+    STDMETHOD(CreateClient)(
+        THIS_
+        _Out_ PDEBUG_CLIENT* Client
+        ) PURE;
+
+    STDMETHOD(GetInputCallbacks)(
+        THIS_
+        _Out_ PDEBUG_INPUT_CALLBACKS* Callbacks
+        ) PURE;
+    STDMETHOD(SetInputCallbacks)(
+        THIS_
+        _In_opt_ PDEBUG_INPUT_CALLBACKS Callbacks
+        ) PURE;
+
+    // Output callback interfaces are described separately.
+    STDMETHOD(GetOutputCallbacks)(
+        THIS_
+        _Out_ PDEBUG_OUTPUT_CALLBACKS* Callbacks
+        ) PURE;
+    STDMETHOD(SetOutputCallbacks)(
+        THIS_
+        _In_opt_ PDEBUG_OUTPUT_CALLBACKS Callbacks
+        ) PURE;
+    // Output flags provide control over
+    // the distribution of output among clients.
+    // Output masks select which output streams
+    // should be sent to the output callbacks.
+    // Only Output calls with a mask that
+    // contains one of the output mask bits
+    // will be sent to the output callbacks.
+    // These methods are reentrant.
+    // If such access is not synchronized
+    // disruptions in output may occur.
+    STDMETHOD(GetOutputMask)(
+        THIS_
+        _Out_ PULONG Mask
+        ) PURE;
+    STDMETHOD(SetOutputMask)(
+        THIS_
+        _In_ ULONG Mask
+        ) PURE;
+    // These methods allow access to another clients
+    // output mask.  They are necessary for changing
+    // a clients output mask when it is
+    // waiting for events.  These methods are reentrant
+    // and can be called from any thread.
+    STDMETHOD(GetOtherOutputMask)(
+        THIS_
+        _In_ PDEBUG_CLIENT Client,
+        _Out_ PULONG Mask
+        ) PURE;
+    STDMETHOD(SetOtherOutputMask)(
+        THIS_
+        _In_ PDEBUG_CLIENT Client,
+        _In_ ULONG Mask
+        ) PURE;
+    // Control the width of an output line for
+    // commands which produce formatted output.
+    // This setting is just a suggestion.
+    STDMETHOD(GetOutputWidth)(
+        THIS_
+        _Out_ PULONG Columns
+        ) PURE;
+    STDMETHOD(SetOutputWidth)(
+        THIS_
+        _In_ ULONG Columns
+        ) PURE;
+    // Some of the engines output commands produce
+    // multiple lines of output.  A prefix can be
+    // set that the engine will automatically output
+    // for each line in that case, allowing a caller
+    // to control indentation or identifying marks.
+    // This is not a general setting for any output
+    // with a newline in it.  Methods which use
+    // the line prefix are marked in their documentation.
+    STDMETHOD(GetOutputLinePrefix)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG PrefixSize
+        ) PURE;
+    STDMETHOD(SetOutputLinePrefix)(
+        THIS_
+        _In_opt_ PCSTR Prefix
+        ) PURE;
+
+    // Returns a string describing the machine
+    // and user this client represents.  The
+    // specific content of the string varies
+    // with operating system.  If the client is
+    // remotely connected some network information
+    // may also be present.
+    STDMETHOD(GetIdentity)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG IdentitySize
+        ) PURE;
+    // Format is a printf-like format string
+    // with one %s where the identity string should go.
+    STDMETHOD(OutputIdentity)(
+        THIS_
+        _In_ ULONG OutputControl,
+        _In_ ULONG Flags,
+        _In_ PCSTR Format
+        ) PURE;
+
+    // Event callbacks allow a client to
+    // receive notification about changes
+    // during the debug session.
+    STDMETHOD(GetEventCallbacks)(
+        THIS_
+        _Out_ PDEBUG_EVENT_CALLBACKS* Callbacks
+        ) PURE;
+    STDMETHOD(SetEventCallbacks)(
+        THIS_
+        _In_opt_ PDEBUG_EVENT_CALLBACKS Callbacks
+        ) PURE;
+
+    // The engine sometimes merges compatible callback
+    // requests to reduce callback overhead.  This is
+    // most noticeable with output as small pieces of
+    // output are collected into larger groups to
+    // reduce the overall number of output callback calls.
+    // A client can use this method to force all pending
+    // callbacks to be delivered.  This is rarely necessary.
+    STDMETHOD(FlushCallbacks)(
+        THIS
+        ) PURE;
+
+    // IDebugClient2.
+
+    // Functions similarly to WriteDumpFile with
+    // the addition of the ability to specify
+    // per-dump-format write control flags.
+    // Comment is not supported in all formats.
+    STDMETHOD(WriteDumpFile2)(
+        THIS_
+        _In_ PCSTR DumpFile,
+        _In_ ULONG Qualifier,
+        _In_ ULONG FormatFlags,
+        _In_opt_ PCSTR Comment
+        ) PURE;
+    // Registers additional files of supporting information
+    // for a dump file open.  This method must be called
+    // before OpenDumpFile is called.
+    // The files registered may be opened at the time
+    // this method is called but generally will not
+    // be used until OpenDumpFile is called.
+    STDMETHOD(AddDumpInformationFile)(
+        THIS_
+        _In_ PCSTR InfoFile,
+        _In_ ULONG Type
+        ) PURE;
+
+    // Requests that the remote process server shut down.
+    STDMETHOD(EndProcessServer)(
+        THIS_
+        _In_ ULONG64 Server
+        ) PURE;
+    // Waits for a started process server to
+    // exit.  Allows an application running a
+    // process server to monitor the process
+    // server so that it can tell when a remote
+    // client has asked for it to exit.
+    // Returns S_OK if the process server has
+    // shut down and S_FALSE for a timeout.
+    STDMETHOD(WaitForProcessServerEnd)(
+        THIS_
+        _In_ ULONG Timeout
+        ) PURE;
+
+    // Returns S_OK if the system is configured
+    // to allow kernel debugging.
+    STDMETHOD(IsKernelDebuggerEnabled)(
+        THIS
+        ) PURE;
+
+    // Attempts to terminate the current process.
+    // Exit process events for the process may be generated.
+    STDMETHOD(TerminateCurrentProcess)(
+        THIS
+        ) PURE;
+    // Attempts to detach from the current process.
+    // This requires OS support for debugger detach.
+    STDMETHOD(DetachCurrentProcess)(
+        THIS
+        ) PURE;
+    // Removes the process from the debuggers process
+    // list without making any other changes.  The process
+    // will still be marked as being debugged and will
+    // not run.  This allows a debugger to be shut down
+    // and a new debugger attached without taking the
+    // process out of the debugged state.
+    // This is only supported on some system versions.
+    STDMETHOD(AbandonCurrentProcess)(
+        THIS
+        ) PURE;
+
+    // IDebugClient3.
+
+    STDMETHOD(GetRunningProcessSystemIdByExecutableNameWide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PCWSTR ExeName,
+        _In_ ULONG Flags,
+        _Out_ PULONG Id
+        ) PURE;
+    STDMETHOD(GetRunningProcessDescriptionWide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ ULONG SystemId,
+        _In_ ULONG Flags,
+        _Out_writes_opt_(ExeNameSize) PWSTR ExeName,
+        _In_ ULONG ExeNameSize,
+        _Out_opt_ PULONG ActualExeNameSize,
+        _Out_writes_opt_(DescriptionSize) PWSTR Description,
+        _In_ ULONG DescriptionSize,
+        _Out_opt_ PULONG ActualDescriptionSize
+        ) PURE;
+
+    STDMETHOD(CreateProcessWide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PWSTR CommandLine,
+        _In_ ULONG CreateFlags
+        ) PURE;
+    STDMETHOD(CreateProcessAndAttachWide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_opt_ PWSTR CommandLine,
+        _In_ ULONG CreateFlags,
+        _In_ ULONG ProcessId,
+        _In_ ULONG AttachFlags
+        ) PURE;
+
+    // IDebugClient4.
+
+    // In the following methods both a filename and a file
+    // handle can be passed in.  If a file handle is given
+    // the filename may be omitted, although providing it
+    // allows the debugger to properly report the name when
+    // queried.
+    // File handles cannot be used in remote calls.
+    STDMETHOD(OpenDumpFileWide)(
+        THIS_
+        _In_opt_ PCWSTR FileName,
+        _In_ ULONG64 FileHandle
+        ) PURE;
+    STDMETHOD(WriteDumpFileWide)(
+        THIS_
+        _In_opt_ PCWSTR FileName,
+        _In_ ULONG64 FileHandle,
+        _In_ ULONG Qualifier,
+        _In_ ULONG FormatFlags,
+        _In_opt_ PCWSTR Comment
+        ) PURE;
+    STDMETHOD(AddDumpInformationFileWide)(
+        THIS_
+        _In_opt_ PCWSTR FileName,
+        _In_ ULONG64 FileHandle,
+        _In_ ULONG Type
+        ) PURE;
+    // These methods can be used to retrieve
+    // file information for all targets that
+    // involve files.
+    STDMETHOD(GetNumberDumpFiles)(
+        THIS_
+        _Out_ PULONG Number
+        ) PURE;
+    STDMETHOD(GetDumpFile)(
+        THIS_
+        _In_ ULONG Index,
+        _Out_writes_opt_(BufferSize) PSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG NameSize,
+        _Out_opt_ PULONG64 Handle,
+        _Out_ PULONG Type
+        ) PURE;
+    STDMETHOD(GetDumpFileWide)(
+        THIS_
+        _In_ ULONG Index,
+        _Out_writes_opt_(BufferSize) PWSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG NameSize,
+        _Out_opt_ PULONG64 Handle,
+        _Out_ PULONG Type
+        ) PURE;
+
+    // IDebugClient5.
+
+    STDMETHOD(AttachKernelWide)(
+        THIS_
+        _In_ ULONG Flags,
+        _In_opt_ PCWSTR ConnectOptions
+        ) PURE;
+    STDMETHOD(GetKernelConnectionOptionsWide)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PWSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG OptionsSize
+        ) PURE;
+    STDMETHOD(SetKernelConnectionOptionsWide)(
+        THIS_
+        _In_ PCWSTR Options
+        ) PURE;
+
+    STDMETHOD(StartProcessServerWide)(
+        THIS_
+        _In_ ULONG Flags,
+        _In_ PCWSTR Options,
+        _In_opt_ _Reserved_ PVOID Reserved
+        ) PURE;
+    STDMETHOD(ConnectProcessServerWide)(
+        THIS_
+        _In_ PCWSTR RemoteOptions,
+        _Out_ PULONG64 Server
+        ) PURE;
+
+    STDMETHOD(StartServerWide)(
+        THIS_
+        _In_ PCWSTR Options
+        ) PURE;
+    STDMETHOD(OutputServersWide)(
+        THIS_
+        _In_ ULONG OutputControl,
+        _In_ PCWSTR Machine,
+        _In_ ULONG Flags
+        ) PURE;
+
+    STDMETHOD(GetOutputCallbacksWide)(
+        THIS_
+        _Out_ PDEBUG_OUTPUT_CALLBACKS_WIDE* Callbacks
+        ) PURE;
+    STDMETHOD(SetOutputCallbacksWide)(
+        THIS_
+        _In_ PDEBUG_OUTPUT_CALLBACKS_WIDE Callbacks
+        ) PURE;
+    STDMETHOD(GetOutputLinePrefixWide)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PWSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG PrefixSize
+        ) PURE;
+    STDMETHOD(SetOutputLinePrefixWide)(
+        THIS_
+        _In_opt_ PCWSTR Prefix
+        ) PURE;
+
+    STDMETHOD(GetIdentityWide)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PWSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG IdentitySize
+        ) PURE;
+    STDMETHOD(OutputIdentityWide)(
+        THIS_
+        _In_ ULONG OutputControl,
+        _In_ ULONG Flags,
+        _In_ PCWSTR Format
+        ) PURE;
+
+    STDMETHOD(GetEventCallbacksWide)(
+        THIS_
+        _Out_ PDEBUG_EVENT_CALLBACKS_WIDE* Callbacks
+        ) PURE;
+    STDMETHOD(SetEventCallbacksWide)(
+        THIS_
+        _In_ PDEBUG_EVENT_CALLBACKS_WIDE Callbacks
+        ) PURE;
+
+    STDMETHOD(CreateProcess2)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PSTR CommandLine,
+        _In_reads_bytes_(OptionsBufferSize) PVOID OptionsBuffer,
+        _In_ ULONG OptionsBufferSize,
+        _In_opt_ PCSTR InitialDirectory,
+        _In_opt_ PCSTR Environment
+        ) PURE;
+    STDMETHOD(CreateProcess2Wide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_ PWSTR CommandLine,
+        _In_reads_bytes_(OptionsBufferSize) PVOID OptionsBuffer,
+        _In_ ULONG OptionsBufferSize,
+        _In_opt_ PCWSTR InitialDirectory,
+        _In_opt_ PCWSTR Environment
+        ) PURE;
+    STDMETHOD(CreateProcessAndAttach2)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_opt_ PSTR CommandLine,
+        _In_reads_bytes_(OptionsBufferSize) PVOID OptionsBuffer,
+        _In_ ULONG OptionsBufferSize,
+        _In_opt_ PCSTR InitialDirectory,
+        _In_opt_ PCSTR Environment,
+        _In_ ULONG ProcessId,
+        _In_ ULONG AttachFlags
+        ) PURE;
+    STDMETHOD(CreateProcessAndAttach2Wide)(
+        THIS_
+        _In_ ULONG64 Server,
+        _In_opt_ PWSTR CommandLine,
+        _In_reads_bytes_(OptionsBufferSize) PVOID OptionsBuffer,
+        _In_ ULONG OptionsBufferSize,
+        _In_opt_ PCWSTR InitialDirectory,
+        _In_opt_ PCWSTR Environment,
+        _In_ ULONG ProcessId,
+        _In_ ULONG AttachFlags
+        ) PURE;
+
+    // Helpers for saving and restoring the
+    // current output line prefix.
+    STDMETHOD(PushOutputLinePrefix)(
+        THIS_
+        _In_opt_ PCSTR NewPrefix,
+        _Out_ PULONG64 Handle
+        ) PURE;
+    STDMETHOD(PushOutputLinePrefixWide)(
+        THIS_
+        _In_opt_ PCWSTR NewPrefix,
+        _Out_ PULONG64 Handle
+        ) PURE;
+    STDMETHOD(PopOutputLinePrefix)(
+        THIS_
+        _In_ ULONG64 Handle
+        ) PURE;
+
+    // Queries to determine if any clients
+    // could potentially respond to the given callback.
+    STDMETHOD(GetNumberInputCallbacks)(
+        THIS_
+        _Out_ PULONG Count
+        ) PURE;
+    STDMETHOD(GetNumberOutputCallbacks)(
+        THIS_
+        _Out_ PULONG Count
+        ) PURE;
+    STDMETHOD(GetNumberEventCallbacks)(
+        THIS_
+        _In_ ULONG EventFlags,
+        _Out_ PULONG Count
+        ) PURE;
+
+    // Control over locking the session against
+    // undesired quits.  The quit lock string
+    // cannot be retrieved from a secure session.
+    STDMETHOD(GetQuitLockString)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG StringSize
+        ) PURE;
+    STDMETHOD(SetQuitLockString)(
+        THIS_
+        _In_ PCSTR String
+        ) PURE;
+    STDMETHOD(GetQuitLockStringWide)(
+        THIS_
+        _Out_writes_opt_(BufferSize) PWSTR Buffer,
+        _In_ ULONG BufferSize,
+        _Out_opt_ PULONG StringSize
+        ) PURE;
+    STDMETHOD(SetQuitLockStringWide)(
+        THIS_
+        _In_ PCWSTR String
+        ) PURE;
+
+    // IDebugClient6
+
+    STDMETHOD(SetEventContextCallbacks)(
+        THIS_
+        _In_opt_ PDEBUG_EVENT_CONTEXT_CALLBACKS Callbacks
+        ) PURE;
+
+    // IDebugClient7
+
+    STDMETHOD(SetClientContext)(
+        THIS_
+        _In_reads_bytes_(ContextSize) PVOID Context,
+        _In_ ULONG ContextSize
+        ) PURE;
+
+    // IDebugClient8
+
+    STDMETHOD(OpenDumpFileWide2)(
+        THIS_
+        _In_opt_ PCWSTR FileName,
+        _In_ ULONG64 FileHandle,
+        _In_ ULONG AlternateArch
+        ) PURE;
+
+    // IDebugClient9
+
+    STDMETHOD(OpenDumpDirectoryWide)(
+        THIS_
+        _In_opt_ PCWSTR DirName,
+        _In_ ULONG AlternateArch
+        ) PURE;
+    STDMETHOD(OpenDumpDirectory)(
+        THIS_
+        _In_ PCSTR DumpDir,
+        _In_ ULONG AlternativeArch
         ) PURE;
 };
 

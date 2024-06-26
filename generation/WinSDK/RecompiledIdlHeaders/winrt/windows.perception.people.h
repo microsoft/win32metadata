@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -624,7 +624,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEyesPose = _uuidof(IEyesPose);
+                MIDL_CONST_ID IID& IID_IEyesPose = __uuidof(IEyesPose);
             } /* People */
         } /* Perception */
     } /* Windows */
@@ -663,7 +663,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEyesPoseStatics = _uuidof(IEyesPoseStatics);
+                MIDL_CONST_ID IID& IID_IEyesPoseStatics = __uuidof(IEyesPoseStatics);
             } /* People */
         } /* Perception */
     } /* Windows */
@@ -722,7 +722,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHandMeshObserver = _uuidof(IHandMeshObserver);
+                MIDL_CONST_ID IID& IID_IHandMeshObserver = __uuidof(IHandMeshObserver);
             } /* People */
         } /* Perception */
     } /* Windows */
@@ -765,7 +765,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHandMeshVertexState = _uuidof(IHandMeshVertexState);
+                MIDL_CONST_ID IID& IID_IHandMeshVertexState = __uuidof(IHandMeshVertexState);
             } /* People */
         } /* Perception */
     } /* Windows */
@@ -825,7 +825,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHandPose = _uuidof(IHandPose);
+                MIDL_CONST_ID IID& IID_IHandPose = __uuidof(IHandPose);
             } /* People */
         } /* Perception */
     } /* Windows */
@@ -867,7 +867,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHeadPose = _uuidof(IHeadPose);
+                MIDL_CONST_ID IID& IID_IHeadPose = __uuidof(IHeadPose);
             } /* People */
         } /* Perception */
     } /* Windows */

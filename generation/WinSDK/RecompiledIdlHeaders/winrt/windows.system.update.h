@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -628,7 +628,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemUpdateItem = _uuidof(ISystemUpdateItem);
+                MIDL_CONST_ID IID& IID_ISystemUpdateItem = __uuidof(ISystemUpdateItem);
             } /* Update */
         } /* System */
     } /* Windows */
@@ -670,7 +670,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemUpdateLastErrorInfo = _uuidof(ISystemUpdateLastErrorInfo);
+                MIDL_CONST_ID IID& IID_ISystemUpdateLastErrorInfo = __uuidof(ISystemUpdateLastErrorInfo);
             } /* Update */
         } /* System */
     } /* Windows */
@@ -777,7 +777,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE StartCancelUpdates(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemUpdateManagerStatics = _uuidof(ISystemUpdateManagerStatics);
+                MIDL_CONST_ID IID& IID_ISystemUpdateManagerStatics = __uuidof(ISystemUpdateManagerStatics);
             } /* Update */
         } /* System */
     } /* Windows */

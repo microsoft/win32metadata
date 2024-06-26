@@ -68,6 +68,13 @@ typedef interface IAudioProcessingObjectLoggingService IAudioProcessingObjectLog
 #endif 	/* __IAudioProcessingObjectLoggingService_FWD_DEFINED__ */
 
 
+#ifndef __IAudioProcessingObjectPreferredFormatSupport_FWD_DEFINED__
+#define __IAudioProcessingObjectPreferredFormatSupport_FWD_DEFINED__
+typedef interface IAudioProcessingObjectPreferredFormatSupport IAudioProcessingObjectPreferredFormatSupport;
+
+#endif 	/* __IAudioProcessingObjectPreferredFormatSupport_FWD_DEFINED__ */
+
+
 #ifndef __IAudioProcessingObjectNotifications_FWD_DEFINED__
 #define __IAudioProcessingObjectNotifications_FWD_DEFINED__
 typedef interface IAudioProcessingObjectNotifications IAudioProcessingObjectNotifications;
@@ -97,6 +104,14 @@ extern "C"{
 #include <winapifamily.h>
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#ifdef DEFINE_PROPERTYKEY
+#undef DEFINE_PROPERTYKEY
+#endif
+#ifdef INITGUID
+#define DEFINE_PROPERTYKEY(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8, pid) EXTERN_C const PROPERTYKEY DECLSPEC_SELECTANY name = { { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }, pid }
+#else
+#define DEFINE_PROPERTYKEY(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8, pid) EXTERN_C const PROPERTYKEY name
+#endif // INITGUID
 typedef /* [v1_enum] */ 
 enum AUDIO_SYSTEMEFFECT_STATE
     {
@@ -257,6 +272,12 @@ typedef struct APOInitSystemEffects3
     GUID AudioProcessingMode;
     BOOL InitializeForDiscoveryOnly;
     } 	APOInitSystemEffects3;
+
+typedef struct AcousticEchoCanceller_Reference_Input
+    {
+    APOInitSystemEffects3 apoInitSystemEffects;
+    APO_REFERENCE_STREAM_PROPERTIES streamProperties;
+    } 	AcousticEchoCanceller_Reference_Input;
 
 
 
@@ -474,7 +495,8 @@ enum APO_NOTIFICATION_TYPE
         APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE	= 3,
         APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2	= 4,
         APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION	= 5,
-        APO_NOTIFICATION_TYPE_MICROPHONE_BOOST	= 6
+        APO_NOTIFICATION_TYPE_MICROPHONE_BOOST	= 6,
+        APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE	= 7
     } 	APO_NOTIFICATION_TYPE;
 
 typedef struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION
@@ -541,6 +563,13 @@ typedef struct AUDIO_MICROPHONE_BOOST_NOTIFICATION
     BOOL mute;
     } 	AUDIO_MICROPHONE_BOOST_NOTIFICATION;
 
+DEFINE_PROPERTYKEY(PKEY_AudioEnvironment_SpatialAudioActive, 0x4AFB7B88, 0xA653, 0x44A5, 0x99, 0xDB, 0x68, 0x7F, 0xD7, 0x4A, 0xF0, 0xBB, 2);
+typedef struct AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION
+    {
+    IPropertyStore *propertyStore;
+    PROPERTYKEY propertyKey;
+    } 	AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION;
+
 typedef struct APO_NOTIFICATION
     {
     APO_NOTIFICATION_TYPE type;
@@ -552,6 +581,7 @@ typedef struct APO_NOTIFICATION
         AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 audioEndpointVolumeChange2;
         DEVICE_ORIENTATION_TYPE deviceOrientation;
         AUDIO_MICROPHONE_BOOST_NOTIFICATION audioMicrophoneBoostChange;
+        AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION audioEnvironmentChange;
         } 	DUMMYUNIONNAME;
     } 	APO_NOTIFICATION;
 
@@ -592,6 +622,114 @@ typedef struct APO_NOTIFICATION_DESCRIPTOR
 
 extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0003_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0003_v0_0_s_ifspec;
+
+#ifndef __IAudioProcessingObjectPreferredFormatSupport_INTERFACE_DEFINED__
+#define __IAudioProcessingObjectPreferredFormatSupport_INTERFACE_DEFINED__
+
+/* interface IAudioProcessingObjectPreferredFormatSupport */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAudioProcessingObjectPreferredFormatSupport;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("51CBD3C4-F1F3-4D2F-A0E1-7E9C4DD0FEB3")
+    IAudioProcessingObjectPreferredFormatSupport : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetPreferredInputFormat( 
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *outputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **preferredFormat) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetPreferredOutputFormat( 
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *inputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **preferredFormat) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IAudioProcessingObjectPreferredFormatSupportVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAudioProcessingObjectPreferredFormatSupport * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAudioProcessingObjectPreferredFormatSupport * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAudioProcessingObjectPreferredFormatSupport * This);
+        
+        DECLSPEC_XFGVIRT(IAudioProcessingObjectPreferredFormatSupport, GetPreferredInputFormat)
+        HRESULT ( STDMETHODCALLTYPE *GetPreferredInputFormat )( 
+            IAudioProcessingObjectPreferredFormatSupport * This,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *outputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **preferredFormat);
+        
+        DECLSPEC_XFGVIRT(IAudioProcessingObjectPreferredFormatSupport, GetPreferredOutputFormat)
+        HRESULT ( STDMETHODCALLTYPE *GetPreferredOutputFormat )( 
+            IAudioProcessingObjectPreferredFormatSupport * This,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *inputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **preferredFormat);
+        
+        END_INTERFACE
+    } IAudioProcessingObjectPreferredFormatSupportVtbl;
+
+    interface IAudioProcessingObjectPreferredFormatSupport
+    {
+        CONST_VTBL struct IAudioProcessingObjectPreferredFormatSupportVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAudioProcessingObjectPreferredFormatSupport_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IAudioProcessingObjectPreferredFormatSupport_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IAudioProcessingObjectPreferredFormatSupport_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IAudioProcessingObjectPreferredFormatSupport_GetPreferredInputFormat(This,outputFormat,preferredFormat)	\
+    ( (This)->lpVtbl -> GetPreferredInputFormat(This,outputFormat,preferredFormat) ) 
+
+#define IAudioProcessingObjectPreferredFormatSupport_GetPreferredOutputFormat(This,inputFormat,preferredFormat)	\
+    ( (This)->lpVtbl -> GetPreferredOutputFormat(This,inputFormat,preferredFormat) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IAudioProcessingObjectPreferredFormatSupport_INTERFACE_DEFINED__ */
+
 
 #ifndef __IAudioProcessingObjectNotifications_INTERFACE_DEFINED__
 #define __IAudioProcessingObjectNotifications_INTERFACE_DEFINED__
@@ -811,15 +949,15 @@ EXTERN_C const IID IID_IAudioProcessingObjectNotifications2;
 #endif 	/* __IAudioProcessingObjectNotifications2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_audioengineextensionapo_0000_0005 */
+/* interface __MIDL_itf_audioengineextensionapo_0000_0006 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0005_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0005_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0006_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioengineextensionapo_0000_0006_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

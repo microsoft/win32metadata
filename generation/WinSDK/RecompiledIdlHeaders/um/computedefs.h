@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) Microsoft Corporation.  All rights reserved.
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -10,8 +10,11 @@ Abstract:
 
     Contains the public types and definitions used by the Host Compute APIs.
 
---*/
+Environment:
 
+    User mode.
+
+--*/
 #ifndef _HYPERV_COMPUTEDEFS_H_
 #define _HYPERV_COMPUTEDEFS_H_
 
@@ -50,7 +53,11 @@ typedef enum HCS_OPERATION_TYPE
     HcsOperationTypeGetProcessInfo = 12,
     HcsOperationTypeGetProcessProperties = 13,
     HcsOperationTypeModifyProcess = 14,
-    HcsOperationTypeCrash = 15
+    HcsOperationTypeCrash = 15,
+    HcsOperationTypeLiveMigration = 19,
+    HcsOperationTypeReserved1 = 16,
+    HcsOperationTypeReserved2 = 17,
+    HcsOperationTypeReserved3 = 18,
 } HCS_OPERATION_TYPE;
 
 #define HCS_INVALID_OPERATION_ID (UINT64)(-1)
@@ -85,6 +92,9 @@ typedef enum HCS_EVENT_TYPE
     // Event groups, enabled by HCS_EVENT_OPTIONS set by clients
     HcsEventGroupVmLifecycle = 0x80000002,
 
+    // A group of live migration events
+    HcsEventGroupLiveMigration = 0x80000003,
+
     // Events for HCS_OPERATION
     HcsEventGroupOperationInfo = 0xC0000001,
 
@@ -110,6 +120,7 @@ typedef enum HCS_EVENT_OPTIONS
     HcsEventOptionNone = 0x00000000,
     HcsEventOptionEnableOperationCallbacks = 0x00000001,
     HcsEventOptionEnableVmLifecycle = 0x00000002,
+    HcsEventOptionEnableLiveMigrationEvents = 0x00000004,
 } HCS_EVENT_OPTIONS;
 
 DEFINE_ENUM_FLAG_OPERATORS(HCS_EVENT_OPTIONS);
@@ -119,6 +130,7 @@ typedef enum HCS_OPERATION_OPTIONS
 {
     HcsOperationOptionNone = 0x00000000,
     HcsOperationOptionProgressUpdate = 0x00000001,
+    HcsOperationOptionReserved1 = 0x00000002,
 } HCS_OPERATION_OPTIONS;
 
 DEFINE_ENUM_FLAG_OPERATORS(HCS_OPERATION_OPTIONS);
@@ -134,7 +146,9 @@ typedef enum HCS_RESOURCE_TYPE
 {
     HcsResourceTypeNone = 0,
     HcsResourceTypeFile = 1,
-    HcsResourceTypeJob = 2
+    HcsResourceTypeJob = 2,
+    HcsResourceTypeComObject = 3,
+    HcsResourceTypeSocket = 4
 } HCS_RESOURCE_TYPE;
 
 // Flags applicable to HCS_NOTIFICATIONS
@@ -219,5 +233,4 @@ typedef struct
     HCS_EVENT_CALLBACK      Callback;
 } HCS_CREATE_OPTIONS_1;
 
-
-#endif // _HYPERV_COMPUTEDEFS_H_
+#endif
