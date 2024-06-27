@@ -93,7 +93,7 @@ stages:
         workingDirectory: ${{parameters.RepoDirectory}}
         script: |
           Write-Host "Saving Source Commit ID for github release pipeline"
-          $(CommitId) | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
+          "$(CommitId)" | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
 - stage: build_winmd
   displayName: "Build WinMD"
