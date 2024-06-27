@@ -67,6 +67,7 @@ stages:
           $commitMessage = git log --format=%B -n 1 $commitId
           Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
           Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
+          Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
 
     # Set the pipeline build number
     - task: onebranch.pipeline.version@1
@@ -92,7 +93,7 @@ stages:
         workingDirectory: ${{parameters.RepoDirectory}}
         script: |
           Write-Host "Saving Source Commit ID for github release pipeline"
-          $commitId | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
+          $(CommitId) | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
 - stage: build_winmd
   displayName: "Build WinMD"
