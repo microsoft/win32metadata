@@ -37352,6 +37352,24 @@
       "header": "powrprof.h;winnt.h"
     },
     "uses": []
+  },
+  {
+    "name": "DISPLAY_DEVICE_STATE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DISPLAY_DEVICE_",
+      "header": "wingdi.h"
+    },
+    "uses": [
+      {
+        "struct": "DISPLAY_DEVICEA",
+        "field": "StateFlags"
+      },
+      {
+        "struct": "DISPLAY_DEVICEW",
+        "field": "StateFlags"
+      }
+    ]
   }
 ]
 }
