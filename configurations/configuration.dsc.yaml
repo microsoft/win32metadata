@@ -13,7 +13,7 @@ properties:
       dependsOn:
         - vsPackage
       directives:
-        description: Install Visual Studio Components
+        description: Install Visual Studio 2022 Community Components
         allowPrerelease: true
       settings:
         productId: Microsoft.VisualStudio.Product.Community
@@ -34,14 +34,14 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
-        description: .NET 8
+        description: Install .NET 8 SDK
         allowPrerelease: true
       settings:
         id: Microsoft.DotNet.SDK.8
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
-        description: ILSpy
+        description: Install ILSpy
         allowPrerelease: true
       settings:
         id: icsharpcode.ILSpy
