@@ -49,3 +49,5 @@ Windows.Win32.Graphics.Gdi.DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_UNSAFE_MODE
 Windows.Win32.Graphics.Gdi.DISPLAY_DEVICE_STATE_FLAGS.DISPLAY_DEVICE_VGA_COMPATIBLE added
 Windows.Win32.Graphics.Gdi.DISPLAY_DEVICEA.StateFlags...System.UInt32 => Windows.Win32.Graphics.Gdi.DISPLAY_DEVICE_STATE_FLAGS
 Windows.Win32.Graphics.Gdi.DISPLAY_DEVICEW.StateFlags...System.UInt32 => Windows.Win32.Graphics.Gdi.DISPLAY_DEVICE_STATE_FLAGS
+# Fixed #1940.
+Windows.Win32.System.Diagnostics.Etw.Apis.EventRegister : RegHandle...UInt64* => REGHANDLE*
