@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/shared/nfpdev.h
+--namespace
+Windows.Win32.Devices.Nfp

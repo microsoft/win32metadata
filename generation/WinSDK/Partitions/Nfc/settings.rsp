@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/shared/nfcdtadev.h
+<IncludeRoot>/shared/nfcradiodev.h
+<IncludeRoot>/shared/nfcsedev.h
+--namespace
+Windows.Win32.Devices.Nfc
