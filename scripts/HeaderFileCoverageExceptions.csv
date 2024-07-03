@@ -32,10 +32,6 @@ File,Skipping,Reason
 /shared/lamp.h,false,Need lamp partition
 /shared/math3dhelper.h,true,Math stuff that doesn't scrape
 /shared/mprapidef.h,true,Max constants we don't need
-/shared/nfcdtadev.h,false,Need NFC partition
-/shared/nfcradiodev.h,false,Need NFC partition
-/shared/nfcsedev.h,false,Need NFC partition
-/shared/nfpdev.h,false,Need NFP partition
 /shared/no_sal2.h,true,SAL annotations
 /shared/ntdd1394.h,false,Need 1394 partition
 /shared/ntddbeep.h,false,Need beep partition or put somewhere else
