@@ -256,3 +256,5 @@ Windows.Win32.Devices.Nfp.Apis.IOCTL_NFP_GET_NEXT_SUBSCRIBED_MESSAGE added
 Windows.Win32.Devices.Nfp.Apis.IOCTL_NFP_GET_NEXT_TRANSMITTED_MESSAGE added
 Windows.Win32.Devices.Nfp.Apis.IOCTL_NFP_SET_PAYLOAD added
 Windows.Win32.Devices.Nfp.SUBSCRIBED_MESSAGE added
+# Add return attribute on IPropertyStoreCapabilities::IsPropertyWritable
+Windows.Win32.UI.Shell.PropertiesSystem.IPropertyStoreCapabilities.IsPropertyWritable : [Documentation(https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-ipropertystorecapabilities-ispropertywritable)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-ipropertystorecapabilities-ispropertywritable)]
