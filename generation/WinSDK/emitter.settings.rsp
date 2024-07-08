@@ -1080,15 +1080,15 @@ SetLogFileSizeWithPolicy::pDesiredSize=[In]
 SetLogFileSizeWithPolicy::pResultingSize=[Out]
 FlushLogBuffers::pvMarshal=[In]
 FlushLogBuffers::pOverlapped=[In][Out][Optional][Retained]
-GetMessageA=[CanReturnMultipleSuccessValuesAttribute]
-GetMessageW=[CanReturnMultipleSuccessValuesAttribute]
+GetMessageA=[CanReturnMultipleSuccessValues]
+GetMessageW=[CanReturnMultipleSuccessValues]
 GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
 GetPhysicalMonitorsFromHMONITOR::return=BOOL
 DestroyPhysicalMonitor::return=BOOL
 DestroyPhysicalMonitors::return=BOOL
 IAudioProcessingObjectConfiguration::LockForProcess::ppInputConnections=[NativeArrayInfo(CountParamIndex = 0)]
 IAudioProcessingObjectConfiguration::LockForProcess::ppOutputConnections=[NativeArrayInfo(CountParamIndex = 2)]
-IUnknown::QueryInterface=[CanReturnErrorsAsSuccessAttribute]
+IUnknown::QueryInterface=[CanReturnErrorsAsSuccess]
 GetPrivateProfileIntW::return=int
 OleCreatePictureIndirect::lplpvObj=[ComOutPtr]
 ContinueDebugEvent::dwContinueStatus=NTSTATUS
@@ -1855,4 +1855,4 @@ WSAEventSelect::hEventObject=WSAEVENT
 ScriptStringAnalyse::piDx=[-NativeArrayInfo]
 LoadIconMetric::hinst=[In][Optional]
 LoadIconWithScaleDown::hinst=[In][Optional]
-IPropertyStoreCapabilities::IsPropertyWritable=[CanReturnMultipleSuccessValuesAttribute]
+IPropertyStoreCapabilities::IsPropertyWritable=[CanReturnMultipleSuccessValues]
