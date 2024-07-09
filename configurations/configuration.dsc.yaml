@@ -27,17 +27,17 @@ properties:
         includeRecommended: true
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
-        description: Install Visual Studio Code
-        allowPrerelease: true
-      settings:
-        id: Microsoft.VisualStudioCode
-        source: winget
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      directives:
         description: Install .NET 8 SDK
         allowPrerelease: true
       settings:
         id: Microsoft.DotNet.SDK.8
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install PowerShell
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerShell
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
