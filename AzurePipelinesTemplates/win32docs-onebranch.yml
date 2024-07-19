@@ -76,7 +76,7 @@ stages:
       displayName: 📢 Stage package for publishing
       inputs:
         Contents: |
-          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/**
+          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/*.nupkg
         TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsNuGetPackages'
 
     - task: CopyFiles@2
