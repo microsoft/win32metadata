@@ -75,15 +75,17 @@ stages:
     - task: CopyFiles@2
       displayName: 📢 Stage package for publishing
       inputs:
+        SourceFolder: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/
         Contents: |
-          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/*.nupkg
+          *.nupkg
         TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsNuGetPackages'
 
     - task: CopyFiles@2
       displayName: 📢 Stage metadata for publishing
       inputs:
+        SourceFolder: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0/
         Contents: |
-          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0/documentationMappings.rsp
+          documentationMappings.rsp
         TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsMetadata'
 
     #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
