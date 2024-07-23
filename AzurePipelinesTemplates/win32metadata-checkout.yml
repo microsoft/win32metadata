@@ -1,0 +1,12 @@
+parameters:
+- name: "RepoDirectory"
+  type: string
+  default: "win32metadata"
+
+steps:
+- script: git config --global core.longpaths true
+- checkout: win32metadata
+  path: s/${{ parameters.RepoDirectory }}
+  lfs: false
+  displayName: Checkout win32metadata from github
+  submodules: recursive

@@ -1,0 +1,236 @@
+parameters:
+- name: "PipelineType"
+  type: string
+  default: "PullRequest"
+- name: "RepoDirectory"
+  type: string
+  default: "s" # Shortened repo directory name to keep paths under 260 characters. OneBranch issue where longpath setting doesn't get pushed down to submodules. 
+- name: OfficialBuild
+  type: boolean
+  default: false
+
+stages:
+- stage: scrape
+  displayName: "Scrape"
+  jobs:
+  - job: scrape
+    strategy:
+      matrix:
+        x86:
+          arch: 'x86'
+          generateMetadataArgs: '-scrapeConstants'
+        x64:
+          arch: 'x64'
+        arm64:
+          arch: 'arm64'
+    displayName: "Scrape headers"
+    timeoutInMinutes: 60
+    variables:
+      ob_outputDirectory: '${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+      ob_artifactBaseName: 'generated'
+      ob_artifactSuffix: '_$(arch)'
+      ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+    pool:
+      type: windows
+    steps:
+    - template: win32metadata-checkout.yml
+      parameters:
+        RepoDirectory: ${{ parameters.RepoDirectory }}
+
+    - task: UseDotNet@2
+      displayName: ⚙ Install .NET SDK
+      inputs:
+        packageType: sdk
+        useGlobalJson: true
+
+    - task: PowerShell@2
+      displayName: Set build version
+      condition: eq(variables.arch, 'x64') # Only needed for x64
+      inputs:
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: |
+          .\scripts\Install-DotNetTool.ps1 -Name nbgv
+          nbgv cloud --common-vars
+
+    # Generate the Azure Devops pipeline build number, since nbgv cannot do it for OneBranch pipelines
+    - task: PowerShell@2
+      displayName: Get pipeline run name
+      condition: eq(variables.arch, 'x64')
+      inputs:
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: |
+          $jsonString = nbgv get-version -f json
+          $nbgvData = $jsonString | ConvertFrom-Json
+          $commitId = $nbgvData.GitCommitId
+          $commitMessage = git log --format=%B -n 1 $commitId
+          Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
+          Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
+          Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
+
+    # Set the pipeline build number
+    - task: onebranch.pipeline.version@1
+      condition: eq(variables.arch, 'x64')
+      inputs:
+        system: 'Custom'
+        customVersion: '$(GitBuildVersionSimple) • $(CommitMessage)'
+
+    - task: PowerShell@2
+      displayName: GenerateMetadataSource.ps1
+      inputs:
+        filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
+        arguments: '-arch $(arch) $(generateMetadataArgs)'
+        errorActionPreference: 'continue'
+        pwsh: true 
+
+    # Save commit hash for use by the release pipeline    
+    - task: PowerShell@2
+      displayName: Save Source Commit
+      condition: eq(variables.arch, 'x64')
+      inputs:
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: |
+          Write-Host "Saving Source Commit ID for github release pipeline"
+          "$(CommitId)" | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
+
+- stage: build_winmd
+  displayName: "Build WinMD"
+  dependsOn: 'scrape'
+  jobs:
+  - job: build_winmd
+    displayName: Build, test, sign, package winmd
+    workspace:
+      clean: all
+    variables:
+      OutputPackagesDir: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\bin\Packages\Release\NuGet
+      ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
+      ob_artifactBaseName: 'NuGetPackages'
+      ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+      ob_sdl_codeSignValidation_excludes: -|**\Humanizer.dll;-|**\Newtonsoft.Json.dll;-|**\System.IO.Abstractions.dll;-|**\TestableIO.System.IO.Abstractions.dll;-|**\TestableIO.System.IO.Abstractions.Wrappers.dll
+    pool:
+      type: windows
+    steps:
+    - template: win32metadata-checkout.yml
+      parameters:
+        RepoDirectory: ${{ parameters.RepoDirectory }}
+
+    - task: PowerShell@2
+      displayName: Set up VS environment
+      inputs:
+        targetType: 'inline'
+        script: |
+          & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+
+    - task: UseDotNet@2
+      displayName: ⚙ Install .NET SDK
+      inputs:
+        packageType: sdk
+        useGlobalJson: true
+
+      # ESRP Authenticode sign package DLLs
+    - task: UseDotNet@2
+      displayName: Install DotNet 2.1.x for signing tasks
+      inputs:
+        packageType: runtime
+        version: 2.1.x
+
+    - script: dotnet --info
+      displayName: Display .NET SDK/runtime info
+
+    - task: DownloadPipelineArtifact@2
+      displayName: Download x64 generated assets
+      inputs:
+        artifact: 'generated_x64'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: Download x86 generated assets
+      inputs:
+        artifact: 'generated_x86'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+
+    - task: DownloadPipelineArtifact@2
+      displayName: Download arm64 generated assets
+      inputs:
+        artifact: 'generated_arm64'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+
+    - task: PowerShell@2
+      displayName: Build metadata binary
+      inputs:
+        filePath: '${{ parameters.RepoDirectory }}\scripts\BuildMetadataBin.ps1'
+        arguments: '-assetsScrapedSeparately'
+        pwsh: true
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: |
+          bin/Release/net8.0/ClangSharpSourceToWinmd.dll;
+          bin/Release/net8.0/ConstantsScraper.dll;
+          bin/Release/net8.0/CsvHelper.dll;
+          bin/Release/net8.0/ICSharpCode.Decompiler.dll;
+          bin/Release/net8.0/MetadataTasks.dll;
+          bin/Release/net8.0/MetadataUtils.dll;
+          bin/Release/net8.0/WinmdUtils.dll;
+          bin/Windows.Win32.winmd;
+          scripts/*.ps1;
+        search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
+
+    - task: PowerShell@2
+      displayName: Do packages
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoPackages.ps1
+        pwsh: true
+        arguments: -SkipInstallTools
+
+    - task: PowerShell@2
+      displayName: Do samples
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoSamples.ps1
+        pwsh: true
+
+    - task: PowerShell@2
+      displayName: Do tests
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1
+        pwsh: true
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '**/*.nupkg'
+        search_root: $(OutputPackagesDir)
+
+    # Copy build logs to artifact staging directory
+    - task: CopyFiles@2
+      displayName: 📢 Copy build logs to pipeline artifact staging directory 
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/logs'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    # Copy nuget package to artifact staging directory
+    - task: CopyFiles@2
+      displayName: 📢 Copy NuGet packages to pipeline artifact staging directory
+      inputs:
+        SourceFolder: '$(OutputPackagesDir)'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+    #   # Don't publish if we're using pre-generated source
+    # - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+    #   displayName: 'NuGet push'
+    #   inputs:
+    #     command: push
+    #     packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
+    #     publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
+    #     allowPackageConflicts: true
+    #   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))

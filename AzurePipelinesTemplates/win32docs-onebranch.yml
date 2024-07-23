@@ -1,0 +1,100 @@
+parameters:
+- name: "PipelineType"
+  type: string
+  default: "PullRequest"
+- name: "RepoDirectory"
+  type: string
+  default: "s"
+- name: BuildConfiguration
+  type: string
+  default: Release
+- name: OfficialBuild
+  type: boolean
+  default: false
+
+stages:
+- stage: build_docs
+  displayName: "Build API docs"
+  jobs:
+  - job: build_docs
+    displayName: Build API docs
+    variables:
+      ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
+      ob_artifactBaseName: 'ApiDocs'
+      ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+    pool:
+      type: windows
+    steps:
+    - template: win32metadata-checkout.yml
+      parameters:
+        RepoDirectory: ${{ parameters.RepoDirectory }}
+    - task: UseDotNet@2
+      displayName: ⚙ Install .NET SDK
+      inputs:
+        packageType: sdk
+        useGlobalJson: true
+
+    # ESRP Authenticode sign package DLLs
+    - task: UseDotNet@2
+      displayName: ⚙ Install .NET Core 2.1.x
+      inputs:
+        packageType: runtime
+        version: 2.1.x
+    - powershell: dotnet tool update --global nbgv
+      displayName: ⚙ Install nbgv
+    - task: PowerShell@2
+      displayName: 🏭 dotnet build
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\BuildDocs.ps1
+        pwsh: true
+      
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '*.dll'
+        search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
+
+    - task: PowerShell@2
+      displayName: 📦 dotnet pack
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\PackDocs.ps1
+        pwsh: true
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: 'sign'
+        signing_profile: external_distribution
+        files_to_sign: '*.nupkg'
+        search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet
+
+    - task: CopyFiles@2
+      displayName: 📢 Stage package for publishing
+      inputs:
+        SourceFolder: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/
+        Contents: |
+          *.nupkg
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsNuGetPackages'
+
+    - task: CopyFiles@2
+      displayName: 📢 Stage metadata for publishing
+      inputs:
+        SourceFolder: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0/
+        Contents: |
+          documentationMappings.rsp
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsMetadata'
+
+    #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+    #   # Don't publish if we're using pre-generated source
+    # - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+    #   displayName: 📤 NuGet push
+    #   inputs:
+    #     command: push
+    #     packagesToPush: $(System.DefaultWorkingDirectory)/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/*.nupkg
+    #     publishVstsFeed: c1408dcb-1833-4ae4-9af5-1a891a12cc3c
+    #     allowPackageConflicts: true
+    #   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
