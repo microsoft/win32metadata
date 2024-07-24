@@ -65,6 +65,10 @@ stages:
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
           $commitMessage = git log --format=%B -n 1 $commitId
+          # Truncate commit message and remove characters that are not allowed in the pipeline name
+          $commitMessage = $commitMessage.subString(0, [System.Math]::Min(200, $commitMessage.Length)) 
+          $commitMessage = $commitMessage -replace '[\"\/:<>\\|?@*]', ''
+          $commitMessage = $commitMessage -replace '\.+$', ''
           Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
           Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
