@@ -64,21 +64,15 @@ stages:
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
-          $commitMessage = git log --format=%B -n 1 $commitId
-          # Truncate commit message and remove characters that are not allowed in the pipeline name
-          $commitMessage = $commitMessage.subString(0, [System.Math]::Min(200, $commitMessage.Length)) 
-          $commitMessage = $commitMessage -replace '[\"\/:<>\\|?@*]', ''
-          $commitMessage = $commitMessage -replace '\.+$', ''
-          Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
-          Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
-          Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
+          Write-Host "Saving Source Commit ID $commitId for github release pipeline"
+          "$commitId" | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
     # Set the pipeline build number
     - task: onebranch.pipeline.version@1
       condition: eq(variables.arch, 'x64')
       inputs:
         system: 'Custom'
-        customVersion: '$(GitBuildVersionSimple) • $(CommitMessage)'
+        customVersion: '$(GitBuildVersionSimple)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
@@ -87,17 +81,6 @@ stages:
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
         pwsh: true 
-
-    # Save commit hash for use by the release pipeline    
-    - task: PowerShell@2
-      displayName: Save Source Commit
-      condition: eq(variables.arch, 'x64')
-      inputs:
-        targetType: inline
-        workingDirectory: ${{parameters.RepoDirectory}}
-        script: |
-          Write-Host "Saving Source Commit ID for github release pipeline"
-          "$(CommitId)" | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
 - stage: build_winmd
   displayName: "Build WinMD"
