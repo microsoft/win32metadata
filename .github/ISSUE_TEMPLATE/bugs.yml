@@ -1,0 +1,45 @@
+name: Bug Report
+about: This template is intended to be used for bug report of win32metadata.
+description: Create a bug report to help improve win32metadata
+title: Bug: 
+labels: [bug]
+body:
+
+- type: dropdown
+  id: Issue type
+  attributes:
+    label: What type of issue did you encounter?
+    options:
+      - Missing metadata (e.g. missing an enum)
+      - Generated wrong definitions (e.g. generated a wring return type)
+      - Generated in an improper namespace
+      - Non-specific type definition (e.g. a parameter is definied as uint while should be an enum)
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Description
+    description: A clear and concise description of what the issue is.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Expected behavior
+    description: A clear description of the expected behavior. If left blank, the issue will likely be closed without discussion.
+    value: |
+      - e.g. Use an explict type WINDOW_STYLE instead of uint for 3rd parameter of a function.
+      - e.g. Return HRESULT for a function
+      - e.g. Define WINDOW_STYLE for relevant constants to avoid hard-coded magic numbers
+  validations:
+    required: true
+
+- type: input
+  id: win32metadata_version
+  attributes:
+    label: win32metadata Version
+    description: Which version of win32metadata are you using?
+    placeholder: "e.g. v61.0.15-preview"
+  validations:
+    required: true
