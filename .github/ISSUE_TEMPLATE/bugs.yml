@@ -1,4 +1,4 @@
-name: Bug Report
+name: Bug report
 description: Create a bug report to help improve win32metadata
 title: 'Bug: '
 labels: [bug]
