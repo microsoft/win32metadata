@@ -5,4 +5,4 @@
 ## Checklist
 
 - [ ] Closes #xxx
-- [ ] Built to validate chnages
+- [ ] Built to validate changes
