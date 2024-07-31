@@ -1,7 +1,7 @@
 name: Bug Report
 about: This template is intended to be used for bug report of win32metadata.
 description: Create a bug report to help improve win32metadata
-title: Bug: 
+title: 'Bug: '
 labels: [bug]
 body:
 
@@ -10,7 +10,8 @@ body:
   attributes:
     label: What type of issue did you encounter?
     options:
-      - Missing metadata (e.g. missing an enum)
+      - Missing metadata (e.g. missing a enum)
+      - Broken API (e.g. causing a runtime failure)
       - Generated wrong definitions (e.g. generated a wring return type)
       - Generated in an improper namespace
       - Non-specific type definition (e.g. a parameter is definied as uint while should be an enum)
