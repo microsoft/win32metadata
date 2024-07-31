@@ -10,8 +10,8 @@ body:
     options:
       - Missing metadata (e.g. missing a enum)
       - Broken API (e.g. causing a runtime failure)
-      - Generated wrong definitions (e.g. generated a wring return type)
-      - Generated in an improper namespace
+      - Wrong definitions (e.g. generated a wring return type)
+      - Improper namespace
       - Less usability and discoverability (e.g. a parameter is definied as uint while should be an enum)
   validations:
     required: true
