@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Issue with CsWin32
+    url: https://github.com/microsoft/CsWin32/issues/new
+    about: If you find a CsWin32-specific issue, please report it in that repo.
+  - name: Issue with windows-rs
+    url: https://github.com/microsoft/windows-rs/issues/new/choose
+    about: If you find a windows-rs-specific issue, please report it in that repo.
