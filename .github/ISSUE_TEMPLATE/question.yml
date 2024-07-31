@@ -1,0 +1,25 @@
+name: Question
+description: Ask a question for win32metadata
+title: 'Question: '
+labels: [question]
+body:
+
+- type: checkboxes
+  attributes:
+    label: Please check things below before asking a question
+    options:
+      - label: Did you read https://github.com/microsoft/win32metadata/blob/main/docs/faq.md already?
+        required: true
+
+- type: textarea
+  attributes:
+    label: Description
+    description: A clear and concise description of what the question is.
+  validations:
+    required: true
+
+- type: input
+  attributes:
+    label: win32metadata Version
+    description: Which version of win32metadata are you using?
+    placeholder: "e.g. v61.0.15-preview"
