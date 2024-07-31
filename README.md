@@ -1,5 +1,5 @@
 <h1 align="center">
-  CsWin32
+  win32metadata
 </h1>
 
 <p align="center">
