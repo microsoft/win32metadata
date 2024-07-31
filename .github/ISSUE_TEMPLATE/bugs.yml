@@ -8,7 +8,7 @@ body:
   attributes:
     label: What type of issue did you encounter?
     options:
-      - Missing metadata<br/>(e.g. missing a enum)
+      - Missing metadata (e.g. missing a enum)
       - Broken API (e.g. causing a runtime failure)
       - Generated wrong definitions (e.g. generated a wring return type)
       - Generated in an improper namespace
