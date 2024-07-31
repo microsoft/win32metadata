@@ -1,12 +1,10 @@
 name: Bug Report
-about: This template is intended to be used for bug report of win32metadata.
 description: Create a bug report to help improve win32metadata
 title: 'Bug: '
 labels: [bug]
 body:
 
 - type: dropdown
-  id: Issue type
   attributes:
     label: What type of issue did you encounter?
     options:
@@ -37,7 +35,6 @@ body:
     required: true
 
 - type: input
-  id: win32metadata_version
   attributes:
     label: win32metadata Version
     description: Which version of win32metadata are you using?
