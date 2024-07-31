@@ -6,7 +6,8 @@ body:
 
 - type: checkboxes
   attributes:
-    label: Please check things below before asking a question
+    label: Check lists
+    description: Please check things below before asking a question
     options:
       - label: Did you read https://github.com/microsoft/win32metadata/blob/main/docs/faq.md already?
         required: true
