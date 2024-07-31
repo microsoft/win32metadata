@@ -12,7 +12,7 @@ body:
       - Broken API (e.g. causing a runtime failure)
       - Generated wrong definitions (e.g. generated a wring return type)
       - Generated in an improper namespace
-      - Non-specific type definition (e.g. a parameter is definied as uint while should be an enum)
+      - Less usability and discoverability (e.g. a parameter is definied as uint while should be an enum)
   validations:
     required: true
 
