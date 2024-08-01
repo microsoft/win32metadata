@@ -17,9 +17,9 @@ Win32 API provides functionality that not all languages and frameworks support t
 
 Historically, this has required manually [redefining the API](http://pinvoke.net/) to make them accessible, which is fragile and error-prone. Community projects like [pinvoke](https://github.com/dotnet/pinvoke) (.NET) and [winapi-rs](https://github.com/retep998/winapi-rs) (Rust) have taken on the burden of providing strongly-typed and validated API signatures for their frameworks, but the projects are manually maintained, which is hard to sustain and makes it challenging to provide thorough API coverage.
 
-This project aims to provide metadata for Win32 APIs such that idiomatic [projections](./docs/projections.md) and projects like the ones above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
+This project aims to provide metadata for Win32 APIs such that idiomatic [projections](../docs/projections.md) and projects like the ones above can be generated for all languages and frameworks in a more automated way and with more complete API coverage.
 
-See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
+See the [roadmap](../docs/roadmap.md) and [FAQ](../docs/faq.md) for more details.
 
 ## Contributing
 
@@ -27,13 +27,11 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) to know how to build the project and st
 
 ## Architecture
 
-See [ARCHITECTURE.md](docs/architecture.md) to know how C definitions are scraped, emitted and converted into winmd.
+See [ARCHITECTURE.md](../docs/architecture.md) to know how C definitions are scraped, emitted and converted into winmd.
 
 ## Projections
 
-See [PROJECTIONS.md](docs/projections.md) to know how to use this metadata in your language.
-
-To call Win32 APIs from the language of your choice based off of this metadata, use the following [language projections](./docs/projections.md):
+See [PROJECTIONS.md](../docs/projections.md) to know how to use this metadata in your language.
 
 Language|Repository|Maintained by
 ---|---|---
@@ -56,10 +54,12 @@ If you'd like to browse the metadata to see what the generator emits, extract `W
 ## Licenses
 
 **MIT**
+
 * All metadata assemblies (e.g. `Windows.Win32.winmd`)
 * All tooling in this repository and in the [Microsoft.Windows.SDK.Win32Metadata NuGet package](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/)
 
 **Windows SDK**
+
 * All Windows headers (e.g. RecompiledIdlHeaders) and Interface Definition Language (IDL) files in this repository and in the aforementioned NuGet package.
 
 ## Trademarks
