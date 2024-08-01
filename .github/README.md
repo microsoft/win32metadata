@@ -49,7 +49,7 @@ Zig|[marlersoft/zigwin32](https://github.com/marlersoft/zigwin32)|Community
 
 If you'd like to browse the metadata to see what the generator emits, extract `Windows.Win32.winmd` from the [Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata) NuGet package and load `Windows.Win32.winmd` in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest). Download the package and rename it to .zip to browse and extract its content.
 
-![ILSpy with winmd](./images/ILSpyWithWinmd.png)
+![ILSpy with winmd](../images/ILSpyWithWinmd.png)
 
 ## Licenses
 
