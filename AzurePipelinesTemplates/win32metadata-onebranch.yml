@@ -64,9 +64,6 @@ stages:
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
-          $commitMessage = git log --format=%B -n 1 $commitId
-          Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
-          Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
 
     # Set the pipeline build number
@@ -74,7 +71,7 @@ stages:
       condition: eq(variables.arch, 'x64')
       inputs:
         system: 'Custom'
-        customVersion: '$(GitBuildVersionSimple) • $(CommitMessage)'
+        customVersion: '$(GitBuildVersionSimple)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
@@ -83,7 +80,7 @@ stages:
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
         pwsh: true 
-
+    
     # Save commit hash for use by the release pipeline    
     - task: PowerShell@2
       displayName: Save Source Commit
