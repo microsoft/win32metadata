@@ -1217,3 +1217,6 @@ Windows.Win32.Globalization.Apis.utrans_transIncremental : [DllImport(icu.dll,Ca
 Windows.Win32.Globalization.Apis.utrans_transIncrementalUChars : [DllImport(icu.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)] => [DllImport(icuin.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)]
 Windows.Win32.Globalization.Apis.utrans_transUChars : [DllImport(icu.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)] => [DllImport(icuin.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)]
 Windows.Win32.Globalization.Apis.utrans_unregisterID : [DllImport(icu.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)] => [DllImport(icuin.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)]
++# Fixed #1960.
++Windows.Win32.Networking.WinSock.Apis.WSAResetEvent : hEvent...HANDLE => WSAEVENT
++Windows.Win32.Networking.WinSock.Apis.WSASetEvent : hEvent...HANDLE => WSAEVENT
