@@ -2755,5 +2755,23 @@
     "ValueType": "long",
     "CloseApi": "EventUnregister",
     "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Performance",
+    "Name": "PDH_HCOUNTER",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Name": "PDH_HLOG",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "PdhCloseLog",
+    "NativeTypedef": true
+  },
+  {
+    "Name": "PDH_HQUERY",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "PdhCloseQuery",
+    "NativeTypedef": true
   }
-  ]
+]
