@@ -1296,3 +1296,6 @@ Windows.Win32.System.Performance.PDH_BROWSE_DLG_CONFIG_HW.hDataSource...System.I
 Windows.Win32.System.Performance.PDH_HCOUNTER added
 Windows.Win32.System.Performance.PDH_HLOG added
 Windows.Win32.System.Performance.PDH_HQUERY added
+# Missing CryptCATCDFEnumMembersByCDFTagEx and CryptCATCDFEnumAttributesWithCDFTag #1950
+Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATCDFEnumAttributesWithCDFTag added
+Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATCDFEnumMembersByCDFTagEx added
