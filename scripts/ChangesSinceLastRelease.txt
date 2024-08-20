@@ -1299,3 +1299,6 @@ Windows.Win32.System.Performance.PDH_HQUERY added
 # Missing CryptCATCDFEnumMembersByCDFTagEx and CryptCATCDFEnumAttributesWithCDFTag #1950
 Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATCDFEnumAttributesWithCDFTag added
 Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATCDFEnumMembersByCDFTagEx added
+# Added NativeArrayInfo for #1945.
+Windows.Win32.System.Services.Apis.StartServiceCtrlDispatcherA : lpServiceStartTable : [Const,In] => [Const,In,NativeArrayInfo]
+Windows.Win32.System.Services.Apis.StartServiceCtrlDispatcherW : lpServiceStartTable : [Const,In] => [Const,In,NativeArrayInfo]
