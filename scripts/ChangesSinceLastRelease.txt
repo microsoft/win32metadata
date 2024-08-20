@@ -1222,3 +1222,5 @@ Windows.Win32.Networking.WinSock.Apis.WSAResetEvent : hEvent...HANDLE => WSAEVEN
 Windows.Win32.Networking.WinSock.Apis.WSASetEvent : hEvent...HANDLE => WSAEVENT
 # Fixed #1955.
 Windows.Win32.Media.MediaFoundation.Apis.MFCreateAttributes : ppMFAttributes : [Out] => [ComOutPtr,Out]
+# Move FILE_CASE_SENSITIVE_INFO to Windows.Win32.Storage.FileSystem #1943
+Windows.Win32.System.WindowsProgramming.FILE_CASE_SENSITIVE_INFO => Windows.Win32.Storage.FileSystem.FILE_CASE_SENSITIVE_INFO

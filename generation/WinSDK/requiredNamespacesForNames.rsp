@@ -909,6 +909,7 @@ FILE_ALIGNMENT_INFO=Windows.Win32.Storage.FileSystem
 FILE_ALLOCATION_INFO=Windows.Win32.Storage.FileSystem
 FILE_ATTRIBUTE_TAG_INFO=Windows.Win32.Storage.FileSystem
 FILE_BASIC_INFO=Windows.Win32.Storage.FileSystem
+FILE_CASE_SENSITIVE_INFO=Windows.Win32.Storage.FileSystem
 FILE_COMPRESSION_INFO=Windows.Win32.Storage.FileSystem
 FILE_DISPOSITION_INFO_EX=Windows.Win32.Storage.FileSystem
 FILE_DISPOSITION_INFO=Windows.Win32.Storage.FileSystem
