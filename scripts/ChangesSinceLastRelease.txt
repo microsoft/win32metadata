@@ -1302,3 +1302,12 @@ Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATCDFEnumMembersByCDFTagE
 # Added NativeArrayInfo for #1945.
 Windows.Win32.System.Services.Apis.StartServiceCtrlDispatcherA : lpServiceStartTable : [Const,In] => [Const,In,NativeArrayInfo]
 Windows.Win32.System.Services.Apis.StartServiceCtrlDispatcherW : lpServiceStartTable : [Const,In] => [Const,In,NativeArrayInfo]
+# wincrypt.h metadata issues #1963
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.dwRevocationFreshnessTime added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.dwStrongSignFlags added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.dwUrlRetrievalTimeout added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.fCheckRevocationFreshnessTime added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.pftCacheResync added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.pStrongSignPara added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_PARA.RequestedIssuancePolicy added
+Windows.Win32.Security.Cryptography.HCERTCHAINENGINE.Value...System.IntPtr => System.Void*

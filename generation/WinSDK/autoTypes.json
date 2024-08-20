@@ -499,7 +499,7 @@
   },
   {
     "Name": "HCERTCHAINENGINE",
-    "ValueType": "IntPtr",
+    "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CertFreeCertificateChainEngine",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
