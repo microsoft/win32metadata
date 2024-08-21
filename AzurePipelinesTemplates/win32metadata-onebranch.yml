@@ -84,7 +84,7 @@ stages:
           Write-Host "GitVersion: $(GitVersion)"
 
     # Set the pipeline build number
-    - ${{ if eq(parameters.PRBuilds, '') }}
+    - ${{ if eq(parameters.PRBuilds, '') }}:
       - task: onebranch.pipeline.version@1
         condition: eq(variables.arch, 'x64')
         inputs:
@@ -93,7 +93,7 @@ stages:
     # Add the PR Branch to the build version for clarity if this is a PR build
     # The Pipeline Version is used as part of the Github release in the Offical builds,
     # so we don't set it in Offical pipeline runs
-    - ${{ if ne(parameters.PRBuilds, '') }}
+    - ${{ if ne(parameters.PRBuilds, '') }}:
       - task: onebranch.pipeline.version@1
         condition: eq(variables.arch, 'x64')
         inputs:
