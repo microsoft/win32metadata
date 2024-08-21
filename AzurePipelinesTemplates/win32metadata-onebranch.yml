@@ -21,8 +21,10 @@ stages:
           generateMetadataArgs: '-scrapeConstants'
         x64:
           arch: 'x64'
+          generateMetadataArgs: ''
         arm64:
           arch: 'arm64'
+          generateMetadataArgs: ''
     displayName: "Scrape headers"
     timeoutInMinutes: 60
     variables:
@@ -65,6 +67,20 @@ stages:
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
+
+    - task: PowerShell@2
+      displayName: Print some variables
+      condition: eq(variables.arch, 'x64') # Only needed for x64
+      inputs:
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: |
+          Write-Host GitBuildVersion: $(GitBuildVersion)
+          Write-Host GitBuildVersionSimple: $(GitBuildVersionSimple)
+          Write-Host GitSimpleVersion: $(GitSimpleVersion)
+          Write-Host GitPrereleaseVersion: $(GitPrereleaseVersion)
+          Write-Host GitPrereleaseVersionNoLeadingHypher: $(GitPrereleaseVersionNoLeadingHypher)
+          Write-Host GitVersion: $(GitVersion)
 
     # Set the pipeline build number
     - task: onebranch.pipeline.version@1
