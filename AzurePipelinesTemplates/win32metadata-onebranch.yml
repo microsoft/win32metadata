@@ -1,13 +1,14 @@
 parameters:
-- name: "PipelineType"
-  type: string
-  default: "PullRequest"
 - name: "RepoDirectory"
   type: string
   default: "s" # Shortened repo directory name to keep paths under 260 characters. OneBranch issue where longpath setting doesn't get pushed down to submodules. 
 - name: OfficialBuild
   type: boolean
   default: false
+- name: 'PRBranch' # Used to name pipeline runs for PR builds
+  displayName: 'PR branch'
+  type: string
+  default: ''
 
 stages:
 - stage: scrape
@@ -75,19 +76,29 @@ stages:
         targetType: inline
         workingDirectory: ${{parameters.RepoDirectory}}
         script: |
-          Write-Host GitBuildVersion: $(GitBuildVersion)
-          Write-Host GitBuildVersionSimple: $(GitBuildVersionSimple)
-          Write-Host GitSimpleVersion: $(GitSimpleVersion)
-          Write-Host GitPrereleaseVersion: $(GitPrereleaseVersion)
-          Write-Host GitPrereleaseVersionNoLeadingHypher: $(GitPrereleaseVersionNoLeadingHypher)
-          Write-Host GitVersion: $(GitVersion)
+          Write-Host "GitBuildVersion: $(GitBuildVersion)"
+          Write-Host "GitBuildVersionSimple: $(GitBuildVersionSimple)"
+          Write-Host "GitSimpleVersion: $(GitSimpleVersion)"
+          Write-Host "GitPrereleaseVersion: $(GitPrereleaseVersion)"
+          Write-Host "GitPrereleaseVersionNoLeadingHypher: $(GitPrereleaseVersionNoLeadingHypher)"
+          Write-Host "GitVersion: $(GitVersion)"
 
     # Set the pipeline build number
-    - task: onebranch.pipeline.version@1
-      condition: eq(variables.arch, 'x64')
-      inputs:
-        system: 'Custom'
-        customVersion: '$(GitBuildVersionSimple)'
+    - ${{ if eq(parameters.PRBuilds, '') }}
+      - task: onebranch.pipeline.version@1
+        condition: eq(variables.arch, 'x64')
+        inputs:
+          system: 'Custom'
+          customVersion: '$(GitBuildVersionSimple)'
+    # Add the PR Branch to the build version for clarity if this is a PR build
+    # The Pipeline Version is used as part of the Github release in the Offical builds,
+    # so we don't set it in Offical pipeline runs
+    - ${{ if ne(parameters.PRBuilds, '') }}
+      - task: onebranch.pipeline.version@1
+        condition: eq(variables.arch, 'x64')
+        inputs:
+          system: 'Custom'
+          customVersion: '$(GitBuildVersionSimple) • ${{ parameters.OfficialBuild }}'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
