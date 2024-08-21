@@ -3,7 +3,7 @@ parameters:
   type: string
   default: "win32metadata"
 - name: "Submodules"
-  type: bool
+  type: boolean
   default: false
 
 steps:
