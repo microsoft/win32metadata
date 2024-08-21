@@ -28,6 +28,7 @@ stages:
     - template: win32metadata-checkout.yml
       parameters:
         RepoDirectory: ${{ parameters.RepoDirectory }}
+        Submodules: true
     - task: UseDotNet@2
       displayName: ⚙ Install .NET SDK
       inputs:

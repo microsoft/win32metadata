@@ -2,6 +2,9 @@ parameters:
 - name: "RepoDirectory"
   type: string
   default: "win32metadata"
+- name: "Submodules"
+  type: bool
+  default: false
 
 steps:
 - script: git config --global core.longpaths true
@@ -9,4 +12,5 @@ steps:
   path: s/${{ parameters.RepoDirectory }}
   lfs: false
   displayName: Checkout win32metadata from github
-  submodules: recursive
+  ${{ if parameters.Submodules }}:
+    submodules: recursive
