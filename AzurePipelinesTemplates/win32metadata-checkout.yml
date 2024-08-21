@@ -14,3 +14,5 @@ steps:
   displayName: Checkout win32metadata from github
   ${{ if parameters.Submodules }}:
     submodules: recursive
+  ${{ if not(parameters.Submodules) }}:
+    submodules: false
