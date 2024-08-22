@@ -1,7 +1,4 @@
 parameters:
-- name: "PipelineType"
-  type: string
-  default: "PullRequest"
 - name: "RepoDirectory"
   type: string
   default: "s"
