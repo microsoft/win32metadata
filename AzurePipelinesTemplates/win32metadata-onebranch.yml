@@ -67,8 +67,9 @@ stages:
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
+          $version = $nbgvData.CloudBuildNumber
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
-          Write-Host $jsonString
+          Write-Host "##vso[task.setvariable variable=Version;]$version"
 
     # Set the pipeline build number
     - ${{ if eq(parameters.PRBranch, '') }}:
@@ -76,7 +77,8 @@ stages:
         condition: eq(variables.arch, 'x64')
         inputs:
           system: 'Custom'
-          customVersion: '$(GitBuildVersionSimple)'
+          customVersion: '$(Version)'
+          
     # Add the PR Branch to the build version for clarity if this is a PR build
     # The Pipeline Version is used as part of the Github release in the Offical builds,
     # so we don't set it in Offical pipeline runs
