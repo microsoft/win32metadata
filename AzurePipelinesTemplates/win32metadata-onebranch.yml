@@ -76,12 +76,12 @@ stages:
         targetType: inline
         workingDirectory: ${{parameters.RepoDirectory}}
         script: |
-          Write-Host "GitBuildVersion: $(GitBuildVersion)"
-          Write-Host "GitBuildVersionSimple: $(GitBuildVersionSimple)"
-          Write-Host "GitSimpleVersion: $(GitSimpleVersion)"
-          Write-Host "GitPrereleaseVersion: $(GitPrereleaseVersion)"
-          Write-Host "GitPrereleaseVersionNoLeadingHypher: $(GitPrereleaseVersionNoLeadingHypher)"
-          Write-Host "GitVersion: $(GitVersion)"
+          Write-Host "GitBuildVersion: $env:GitBuildVersion"
+          Write-Host "GitBuildVersionSimple: $env:GitBuildVersionSimple"
+          Write-Host "GitSimpleVersion: $env:GitSimpleVersion"
+          Write-Host "GitPrereleaseVersion: $env:GitPrereleaseVersion"
+          Write-Host "GitPrereleaseVersionNoLeadingHypher: $env:GitPrereleaseVersionNoLeadingHypher"
+          Write-Host "GitVersion: $env:GitVersion"
 
     # Set the pipeline build number
     - ${{ if eq(parameters.PRBranch, '') }}:
