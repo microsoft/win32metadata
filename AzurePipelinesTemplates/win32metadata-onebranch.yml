@@ -68,20 +68,7 @@ stages:
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
-
-    - task: PowerShell@2
-      displayName: Print some variables
-      condition: eq(variables.arch, 'x64') # Only needed for x64
-      inputs:
-        targetType: inline
-        workingDirectory: ${{parameters.RepoDirectory}}
-        script: |
-          Write-Host "GitBuildVersion: $env:GitBuildVersion"
-          Write-Host "GitBuildVersionSimple: $env:GitBuildVersionSimple"
-          Write-Host "GitSimpleVersion: $env:GitSimpleVersion"
-          Write-Host "GitPrereleaseVersion: $env:GitPrereleaseVersion"
-          Write-Host "GitPrereleaseVersionNoLeadingHypher: $env:GitPrereleaseVersionNoLeadingHypher"
-          Write-Host "GitVersion: $env:GitVersion"
+          Write-Host $jsonString
 
     # Set the pipeline build number
     - ${{ if eq(parameters.PRBranch, '') }}:
