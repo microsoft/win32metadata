@@ -68,8 +68,9 @@ stages:
           $nbgvData = $jsonString | ConvertFrom-Json
           Write-Host $jsonString
           $commitId = $nbgvData.GitCommitId
+          $version = $nbgvData.CloudBuildNumber
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
-          Write-Host "##vso[task.setvariable variable=Version;]$nbgvData.CloudBuildNumber"
+          Write-Host "##vso[task.setvariable variable=Version;]$version"
 
           $commitMessage = git log --format=%B -n 1 $commitId
           $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
@@ -78,6 +79,10 @@ stages:
               $pipeline_message = $pipeline_message.Substring(0, 200) + '...'
           }
           Write-Host "##vso[task.setvariable variable=PipelineMessage;]$pipeline_message"
+
+          Write-Host "Setting Version to $version"
+          Write-Host "Setting CommitId to $commitId"
+          Write-Host "Setting PipelineMessage to $pipeline_message"
 
     # Set the pipeline build number
     - ${{ if eq(parameters.PRBranch, '') }}:
