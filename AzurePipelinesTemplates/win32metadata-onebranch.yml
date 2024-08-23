@@ -1,13 +1,14 @@
 parameters:
-- name: "PipelineType"
-  type: string
-  default: "PullRequest"
 - name: "RepoDirectory"
   type: string
   default: "s" # Shortened repo directory name to keep paths under 260 characters. OneBranch issue where longpath setting doesn't get pushed down to submodules. 
 - name: OfficialBuild
   type: boolean
   default: false
+- name: 'PRBranch' # Used to name pipeline runs for PR builds
+  displayName: 'PR branch'
+  type: string
+  default: ''
 
 stages:
 - stage: scrape
@@ -21,8 +22,10 @@ stages:
           generateMetadataArgs: '-scrapeConstants'
         x64:
           arch: 'x64'
+          generateMetadataArgs: ''
         arm64:
           arch: 'arm64'
+          generateMetadataArgs: ''
     displayName: "Scrape headers"
     timeoutInMinutes: 60
     variables:
@@ -63,15 +66,41 @@ stages:
         script: |
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
+          Write-Host $jsonString
           $commitId = $nbgvData.GitCommitId
+          $version = $nbgvData.CloudBuildNumber
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
+          Write-Host "##vso[task.setvariable variable=Version;]$version"
+
+          $commitMessage = git log --format=%B -n 1 $commitId
+          $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
+          $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
+          if ($pipeline_message.Length -gt 200) {
+              $pipeline_message = $pipeline_message.Substring(0, 200) + '...'
+          }
+          Write-Host "##vso[task.setvariable variable=PipelineMessage;]$pipeline_message"
+
+          Write-Host "Setting Version to $version"
+          Write-Host "Setting CommitId to $commitId"
+          Write-Host "Setting PipelineMessage to $pipeline_message"
 
     # Set the pipeline build number
-    - task: onebranch.pipeline.version@1
-      condition: eq(variables.arch, 'x64')
-      inputs:
-        system: 'Custom'
-        customVersion: '$(GitBuildVersionSimple)'
+    - ${{ if eq(parameters.PRBranch, '') }}:
+      - task: onebranch.pipeline.version@1
+        condition: eq(variables.arch, 'x64')
+        inputs:
+          system: 'Custom'
+          customVersion: '$(Version)'
+
+    # Add the PR Branch to the build version for clarity if this is a PR build
+    # The Pipeline Version is used as part of the Github release in the Offical builds,
+    # so we don't set it in Offical pipeline runs
+    - ${{ if ne(parameters.PRBranch, '') }}:
+      - task: onebranch.pipeline.version@1
+        condition: eq(variables.arch, 'x64')
+        inputs:
+          system: 'Custom'
+          customVersion: '$(Version) • $(PipelineMessage)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
