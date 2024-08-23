@@ -68,9 +68,8 @@ stages:
           $nbgvData = $jsonString | ConvertFrom-Json
           Write-Host $jsonString
           $commitId = $nbgvData.GitCommitId
-          $version = $nbgvData.CloudBuildNumber
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
-          Write-Host "##vso[task.setvariable variable=Version;]$version"
+          Write-Host "##vso[task.setvariable variable=Version;]$nbgvData.CloudBuildNumber"
 
           $commitMessage = git log --format=%B -n 1 $commitId
           $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
@@ -96,7 +95,7 @@ stages:
         condition: eq(variables.arch, 'x64')
         inputs:
           system: 'Custom'
-          customVersion: '$(GitBuildVersionSimple) • $(PipelineMessage)'
+          customVersion: '$(Version) • $(PipelineMessage)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
