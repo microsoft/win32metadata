@@ -72,6 +72,14 @@ stages:
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
           Write-Host "##vso[task.setvariable variable=Version;]$version"
 
+          $commitMessage = git log --format=%B -n 1 $commitId
+          $pipeline_message = ${{ parameters.PRBranch }} + ' • ' + $commitMessage
+          $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
+          if ($pipeline_message.Length -gt 200) {
+              $pipeline_message = $pipeline_message.Substring(0, 200) + '...'
+          }
+          Write-Host "##vso[task.setvariable variable=PipelineMessage;]$pipeline_message"
+
     # Set the pipeline build number
     - ${{ if eq(parameters.PRBranch, '') }}:
       - task: onebranch.pipeline.version@1
@@ -88,7 +96,7 @@ stages:
         condition: eq(variables.arch, 'x64')
         inputs:
           system: 'Custom'
-          customVersion: '$(GitBuildVersionSimple) • ${{ parameters.PRBranch }}'
+          customVersion: '$(GitBuildVersionSimple) • $(PipelineMessage)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
