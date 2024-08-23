@@ -73,7 +73,7 @@ stages:
           Write-Host "##vso[task.setvariable variable=Version;]$version"
 
           $commitMessage = git log --format=%B -n 1 $commitId
-          $pipeline_message = ${{ parameters.PRBranch }} + ' • ' + $commitMessage
+          $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
           $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
           if ($pipeline_message.Length -gt 200) {
               $pipeline_message = $pipeline_message.Substring(0, 200) + '...'
