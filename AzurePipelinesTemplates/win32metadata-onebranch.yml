@@ -78,7 +78,7 @@ stages:
         inputs:
           system: 'Custom'
           customVersion: '$(Version)'
-          
+
     # Add the PR Branch to the build version for clarity if this is a PR build
     # The Pipeline Version is used as part of the Github release in the Offical builds,
     # so we don't set it in Offical pipeline runs
@@ -87,7 +87,7 @@ stages:
         condition: eq(variables.arch, 'x64')
         inputs:
           system: 'Custom'
-          customVersion: '$(GitBuildVersionSimple) • ${{ parameters.OfficialBuild }}'
+          customVersion: '$(GitBuildVersionSimple) • ${{ parameters.PRBranch }}'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
