@@ -66,6 +66,7 @@ stages:
         script: |
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
+          Write-Host $jsonString
           $commitId = $nbgvData.GitCommitId
           $version = $nbgvData.CloudBuildNumber
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
