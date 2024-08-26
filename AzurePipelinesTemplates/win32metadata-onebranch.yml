@@ -72,11 +72,18 @@ stages:
           Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
           Write-Host "##vso[task.setvariable variable=Version;]$version"
 
+          # Add the branch name and commit message to PR Pipeline build names 
           $commitMessage = git log --format=%B -n 1 $commitId
           $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
           $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
+          $pipeline_message = $pipeline_message.trim()
+          # Pipeline versions cannot end in a '.'
+          if $pipeline_message[$pipeline_message.length-1] == '.' {
+              $pipeline_message = $pipeline_message + '0'
+          }
+          if $pipeline_message[$pipeline]
           if ($pipeline_message.Length -gt 200) {
-              $pipeline_message = $pipeline_message.Substring(0, 200) + '...'
+              $pipeline_message = $pipeline_message.Substring(0, 200) + '...(cont)'
           }
           Write-Host "##vso[task.setvariable variable=PipelineMessage;]$pipeline_message"
 
