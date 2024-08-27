@@ -78,7 +78,7 @@ stages:
           $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
           $pipeline_message = $pipeline_message.trim()
           # Pipeline versions cannot end in a '.'
-          if ($pipeline_message[$pipeline_message.length-1] == '.') {
+          if ($pipeline_message[$pipeline_message.length-1] -eq '.') {
               $pipeline_message = $pipeline_message + '0'
           }
           if ($pipeline_message.Length -gt 200) {
