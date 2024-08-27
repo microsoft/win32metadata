@@ -1,0 +1,8 @@
+# Annotate ComOutPtr in CompositionSwapchain and DirectComposition
+Windows.Win32.Graphics.CompositionSwapchain.Apis.CreatePresentationFactory : presentationFactory : [Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.CompositionSwapchain.IPresentationManager.GetPresentRetiringFence : fence : [Out,RetVal] => [ComOutPtr,Out,RetVal]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetStatistics : frameStats : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetTargetStatistics : targetStats : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.DirectComposition.IDCompositionDevice.GetFrameStatistics : statistics : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.DirectComposition.IDCompositionDevice2.GetFrameStatistics : statistics : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.DirectComposition.IDCompositionTexture.GetAvailableFence : availableFence : [Out] => [ComOutPtr,Out]
