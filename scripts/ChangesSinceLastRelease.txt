@@ -26,3 +26,7 @@ Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_PRIMARY added
 Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_UNSPECIFIED added
 # Add QueryOptionalDelayLoadedAPI
 Windows.Win32.System.LibraryLoader.Apis.QueryOptionalDelayLoadedAPI added
+# Correct AviStream documentation links
+Windows.Win32.Media.DirectShow.AVIStreamHeader : [Documentation(https://learn.microsoft.com/windows/win32/api/avifmt/ns-avifmt-avistreamheader)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/avifmt/ns-avifmt-avistreamheader)]
+Windows.Win32.Media.DirectShow.AVISTREAMHEADER : [Documentation(https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avistreamheader),StructLayout(0,Pack=2)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avistreamheader),StructLayout(0,Pack=2)]
+Windows.Win32.Media.DirectShow.AVISUPERINDEX : [Documentation(https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avisuperindex),StructLayout(0,Pack=2)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avisuperindex),StructLayout(0,Pack=2)]
