@@ -8,3 +8,16 @@ Windows.Win32.Graphics.DirectComposition.IDCompositionDevice2.GetFrameStatistics
 Windows.Win32.Graphics.DirectComposition.IDCompositionTexture.GetAvailableFence : availableFence : [Out] => [ComOutPtr,Out]
 # Mark ID3D12GraphicsCommandList::ClearDepthStencilView pRects as Optional
 Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearDepthStencilView : pRects : [Const,In,NativeArrayInfo(CountParamIndex=4)] => [Const,In,NativeArrayInfo(CountParamIndex=4),Optional]
+# Add NET_IF_COMPARTMENT_ID typedef and adjust relevant APIs
+Windows.Win32.NetworkManagement.IpHelper.Apis.ConvertCompartmentIdToGuid : CompartmentId...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetCurrentThreadCompartmentId : return...WIN32_ERROR => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetDefaultCompartmentId : return...WIN32_ERROR => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetJobCompartmentId : return...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetSessionCompartmentId : return...WIN32_ERROR => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.SetCurrentThreadCompartmentId : CompartmentId...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.SetJobCompartmentId : CompartmentId...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.SetNetworkInformation : CompartmentId...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.Apis.SetSessionCompartmentId : CompartmentId...UInt32 => NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ADDRESSES_LH.CompartmentId...System.UInt32 => Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.Ndis.NDIS_INTERFACE_INFORMATION.CompartmentId...System.UInt32 => Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID
+Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID added

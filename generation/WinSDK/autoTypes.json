@@ -2773,5 +2773,11 @@
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "PdhCloseQuery",
     "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.Ndis",
+    "Name": "NET_IF_COMPARTMENT_ID",
+    "ValueType": "uint",
+    "NativeTypedef": true
   }
 ]
