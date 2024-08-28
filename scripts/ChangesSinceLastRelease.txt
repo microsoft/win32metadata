@@ -8,3 +8,5 @@ Windows.Win32.Graphics.DirectComposition.IDCompositionDevice2.GetFrameStatistics
 Windows.Win32.Graphics.DirectComposition.IDCompositionTexture.GetAvailableFence : availableFence : [Out] => [ComOutPtr,Out]
 # Mark ID3D12GraphicsCommandList::ClearDepthStencilView pRects as Optional
 Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearDepthStencilView : pRects : [Const,In,NativeArrayInfo(CountParamIndex=4)] => [Const,In,NativeArrayInfo(CountParamIndex=4),Optional]
+# Add QueryOptionalDelayLoadedAPI
+Windows.Win32.System.LibraryLoader.Apis.QueryOptionalDelayLoadedAPI added

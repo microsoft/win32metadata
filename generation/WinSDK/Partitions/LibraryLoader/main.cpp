@@ -4,3 +4,5 @@
 
 #include "windows.fixed.h"
 #include <sdkddkver.h>
+#include <libloaderapi.h>
+#include <libloaderapi2.h>
