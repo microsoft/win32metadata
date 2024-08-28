@@ -21,3 +21,6 @@ Windows.Win32.NetworkManagement.IpHelper.Apis.SetSessionCompartmentId : Compartm
 Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ADDRESSES_LH.CompartmentId...System.UInt32 => Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID
 Windows.Win32.NetworkManagement.Ndis.NDIS_INTERFACE_INFORMATION.CompartmentId...System.UInt32 => Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID
 Windows.Win32.NetworkManagement.Ndis.NET_IF_COMPARTMENT_ID added
+# Add NET_IF_COMPARTMENT_ID constants
+Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_PRIMARY added
+Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_UNSPECIFIED added
