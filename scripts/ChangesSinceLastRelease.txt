@@ -26,3 +26,6 @@ Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_PRIMARY added
 Windows.Win32.NetworkManagement.Ndis.Apis.NET_IF_COMPARTMENT_ID_UNSPECIFIED added
 # Add QueryOptionalDelayLoadedAPI
 Windows.Win32.System.LibraryLoader.Apis.QueryOptionalDelayLoadedAPI added
+# Correct PMPRADMINCONNECTIONHANGUPNOTIFICATION3 parameter 4
+Windows.Win32.NetworkManagement.Rras.PMPRADMINCONNECTIONHANGUPNOTIFICATION3.Invoke : param3 : [In] => [In,Out]
+Windows.Win32.NetworkManagement.Rras.PMPRADMINCONNECTIONHANGUPNOTIFICATION3.Invoke : param3...RAS_CONNECTION_3 => RAS_CONNECTION_3*
