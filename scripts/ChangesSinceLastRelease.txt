@@ -2589,3 +2589,6 @@ Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_Portable...Windows.Win32.Devices
 Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_Removable_Media...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
 Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_System_Critical...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
 Windows.Win32.System.Power.Apis.PROCESSOR_NUMBER_PKEY...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
+# Correct GdiPlus Bitmap, Image documentation links
+Windows.Win32.Graphics.GdiPlus.Bitmap : [Documentation(https://learn.microsoft.com/windows/win32/tablet/bitmap-element),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/api/gdiplusheaders/nl-gdiplusheaders-bitmap),NativeTypedef]
+Windows.Win32.Graphics.GdiPlus.Image : [Documentation(https://learn.microsoft.com/windows/win32/windowsribbon/windowsribbon-element-image),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/api/gdiplusheaders/nl-gdiplusheaders-image),NativeTypedef]
