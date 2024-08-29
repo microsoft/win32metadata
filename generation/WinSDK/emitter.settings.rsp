@@ -1871,3 +1871,5 @@ StartServiceCtrlDispatcherA::lpServiceStartTable=[NativeArrayInfo]
 StartServiceCtrlDispatcherW::lpServiceStartTable=[NativeArrayInfo]
 PMPRADMINCONNECTIONHANGUPNOTIFICATION3::param3=RAS_CONNECTION_3*
 DEVPROPKEY=[AlsoUsableFor("PROPERTYKEY")]
+BLOB=[-StructSizeField]
+BSTRBLOB=[-StructSizeField]
