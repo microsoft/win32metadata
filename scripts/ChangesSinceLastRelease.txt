@@ -2589,3 +2589,6 @@ Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_Portable...Windows.Win32.Devices
 Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_Removable_Media...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
 Windows.Win32.System.Ioctl.Apis.DEVPKEY_Storage_System_Critical...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
 Windows.Win32.System.Power.Apis.PROCESSOR_NUMBER_PKEY...Windows.Win32.Devices.Properties.DEVPROPKEY => Windows.Win32.Foundation.DEVPROPKEY
+# Remove StructSizeField from BLOB, BSTRBLOB
+Windows.Win32.System.Com.BLOB : [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob),StructSizeField(cbSize)] => [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob)]
+Windows.Win32.System.Com.StructuredStorage.BSTRBLOB : [StructSizeField(cbSize)] => 
