@@ -148,3 +148,28 @@ Windows.Win32.Graphics.Dxgi.IDXGISwapChain.ResizeBuffers : SwapChainFlags : [Ass
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain.ResizeBuffers : SwapChainFlags...UInt32 => DXGI_SWAP_CHAIN_FLAG
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.ResizeBuffers1 : SwapChainFlags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG),In] => [In]
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.ResizeBuffers1 : SwapChainFlags...UInt32 => DXGI_SWAP_CHAIN_FLAG
+# dxgi: Replace all flags enums/types with uint type
+Windows.Win32.Graphics.Dxgi.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_CURSOR_STRETCHED value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_FULLSCREEN value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_WINDOWED value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OFFER_RESOURCE_FLAGS.DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OFFER_RESOURCE_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG.DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_SUPPORT_FLAG.DXGI_OVERLAY_SUPPORT_FLAG_DIRECT value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_SUPPORT_FLAG.DXGI_OVERLAY_SUPPORT_FLAG_SCALING value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_SUPPORT_FLAG.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT value init changed Int32->UInt32
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Dxgi.IDXGIDevice4.OfferResources1 : Flags : [AssociatedEnum(DXGI_OFFER_RESOURCE_FLAGS),In] => [In]
+Windows.Win32.Graphics.Dxgi.IDXGIDevice4.OfferResources1 : Flags...UInt32 => DXGI_OFFER_RESOURCE_FLAGS
+Windows.Win32.Graphics.Dxgi.IDXGIOutput3.CheckOverlaySupport : pFlags : [AssociatedEnum(DXGI_OVERLAY_SUPPORT_FLAG),Out] => [Out]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput3.CheckOverlaySupport : pFlags...UInt32* => DXGI_OVERLAY_SUPPORT_FLAG*
+Windows.Win32.Graphics.Dxgi.IDXGIOutput4.CheckOverlayColorSpaceSupport : pFlags : [AssociatedEnum(DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG),Out] => [Out]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput4.CheckOverlayColorSpaceSupport : pFlags...UInt32* => DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG*
+Windows.Win32.Graphics.Dxgi.IDXGIOutput6.CheckHardwareCompositionSupport : pFlags : [AssociatedEnum(DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS),Out] => [Out]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput6.CheckHardwareCompositionSupport : pFlags...UInt32* => DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS*
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.CheckColorSpaceSupport : pColorSpaceSupport : [AssociatedEnum(DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG),Out] => [Out]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.CheckColorSpaceSupport : pColorSpaceSupport...UInt32* => DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG*
