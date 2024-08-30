@@ -28759,20 +28759,6 @@
       "filter": "DXC_CP_",
       "header": "dxcapi.h"
     },
-    "members": [
-      {
-        "name": "DXC_CP_ACP",
-        "value": "0"
-      },
-      {
-        "name": "DXC_CP_UTF16",
-        "value": "1200"
-      },
-      {
-        "name": "DXC_CP_UTF8",
-        "value": "65001"
-      }
-    ],
     "uses": [
       {
         "interface": "IDxcBlobEncoding",
@@ -28818,6 +28804,85 @@
         "interface": "IDxcUtils",
         "method": "LoadFile",
         "parameter": "pCodePage"
+      },
+      {
+        "struct": "DxcBuffer",
+        "field": "Encoding"
+      }
+    ]
+  },
+  {
+    "name": "DxcValidatorFlags",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DxcValidatorFlags_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDxcValidator",
+        "method": "Validate",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "IDxcValidator2",
+        "method": "ValidateWithDebug",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DxcVersionInfoFlags",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DxcValidatorFlags_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDxcVersionInfo",
+        "method": "GetFlags",
+        "parameter": "pFlags"
+      }
+    ]
+  },
+  {
+    "name": "DXC_HASHFLAG",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXC_HASHFLAG_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "struct": "DxcShaderHash",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DXC_PART",
+    "flags": false,
+    "autoPopulate": {
+      "filter": "DXC_PART_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDxcUtils",
+        "method": "GetDxilContainerPart",
+        "parameter": "DxcPart"
+        // TODO: GetPartKind, FindFirstPartKind? DXC_OUT_KIND?
+      },
+      {
+        "interface": "IDxcContainerBuilder",
+        "method": "AddPart",
+        "parameter": "fourCC"
+      },
+      {
+        "interface": "IDxcContainerBuilder",
+        "method": "RemovePart",
+        "parameter": "fourCC"
       }
     ]
   },
