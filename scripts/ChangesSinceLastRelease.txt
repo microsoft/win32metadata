@@ -2592,3 +2592,5 @@ Windows.Win32.System.Power.Apis.PROCESSOR_NUMBER_PKEY...Windows.Win32.Devices.Pr
 # Remove StructSizeField from BLOB, BSTRBLOB
 Windows.Win32.System.Com.BLOB : [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob),StructSizeField(cbSize)] => [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob)]
 Windows.Win32.System.Com.StructuredStorage.BSTRBLOB : [StructSizeField(cbSize)] => 
+# Remove RAIIFree attribute from PSID
+Windows.Win32.Security.PSID : [NativeTypedef,RAIIFree(FreeSid)] => [NativeTypedef]
