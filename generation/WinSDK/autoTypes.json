@@ -2779,5 +2779,11 @@
     "Name": "NET_IF_COMPARTMENT_ID",
     "ValueType": "uint",
     "NativeTypedef": true
+  },
+  {
+    "Name": "PRINTER_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "ClosePrinter",
+    "NativeTypedef": false
   }
 ]
