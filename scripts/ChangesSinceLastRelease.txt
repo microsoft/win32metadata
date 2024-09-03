@@ -2698,3 +2698,5 @@ Windows.Win32.Graphics.Printing.IPrintOemUIMXDC.AdjustImageCompression : hPrinte
 Windows.Win32.Graphics.Printing.IPrintTicketProvider.BindPrinter : hPrinter...HANDLE => PRINTER_HANDLE
 Windows.Win32.Graphics.Printing.IPrintTicketProvider.GetSupportedVersions : hPrinter...HANDLE => PRINTER_HANDLE
 Windows.Win32.Graphics.Printing.PRINTER_HANDLE added
+# Remove RAIIFree attribute from PSID
+Windows.Win32.Security.PSID : [NativeTypedef,RAIIFree(FreeSid)] => [NativeTypedef]
