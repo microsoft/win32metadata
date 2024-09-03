@@ -94,7 +94,7 @@ namespace MetadataTasks
 
             if (!string.IsNullOrEmpty(this.ExcludeFromCrossarch))
             {
-                foreach (var part in this.ExcludeFromCrossarch.Split(';', System.StringSplitOptions.RemoveEmptyEntries))
+                foreach (var part in this.ExcludeFromCrossarch.Split(';', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries))
                 {
                     this.partitionsToExcludeFromCrossarch.Add(part);
                 }
@@ -201,7 +201,7 @@ namespace MetadataTasks
             if (!string.IsNullOrEmpty(this.PartitionFilter))
             {
                 partitionFilter = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var partName in this.PartitionFilter.Split(new char[] { ',', ';' }, System.StringSplitOptions.RemoveEmptyEntries))
+                foreach (var partName in this.PartitionFilter.Split(new char[] { ',', ';' }, System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries))
                 {
                     partitionFilter.Add(partName);
                 }
@@ -278,7 +278,7 @@ namespace MetadataTasks
 
             if (this.AdditionalIncludes != null)
             {
-                string[] dirs = this.AdditionalIncludes.Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+                string[] dirs = this.AdditionalIncludes.Split(';', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries);
                 foreach (var dir in dirs)
                 {
                     if (!includeDirHash.Contains(dir))
@@ -465,17 +465,17 @@ $@"--file
 
         private string[] GetExclusions(ITaskItem item)
         {
-            return item.GetMetadata("Exclude").Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+            return item.GetMetadata("Exclude").Split(';', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries);
         }
 
         private string[] GetRemaps(ITaskItem item)
         {
-            return item.GetMetadata("Remap").Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+            return item.GetMetadata("Remap").Split(';', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries);
         }
 
         private string[] GetFilesFromMetadata(ITaskItem item, string name)
         {
-            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries);
+            string[] items = item.GetMetadata(name).Split(';', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries);
             for (int i = 0; i < items.Length; i++)
             {
                 if (!Path.IsPathRooted(items[i]))
