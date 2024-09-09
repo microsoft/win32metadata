@@ -2700,3 +2700,5 @@ Windows.Win32.Graphics.Printing.IPrintTicketProvider.GetSupportedVersions : hPri
 Windows.Win32.Graphics.Printing.PRINTER_HANDLE added
 # Remove RAIIFree attribute from PSID
 Windows.Win32.Security.PSID : [NativeTypedef,RAIIFree(FreeSid)] => [NativeTypedef]
+# Correct `CountFieldName` on `DCompositionGetStatistics()`
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetStatistics : targetIds : [Optional,Out] => [NativeArrayInfo(CountFieldName=targetIdCount),Optional,Out]
