@@ -74,7 +74,7 @@ function Install-BuildTools
         & dotnet clean "$rootDir\buildtools"
     }
 
-    & dotnet restore .\BuildTools\ --verbosity detailed
+    & dotnet restore "$rootDir\buildtools" --verbosity detailed
     & dotnet build "$rootDir\buildtools" -c Release "-bl:$PSScriptRoot\..\bin\logs\buildtools.binlog"
     ThrowOnNativeProcessError
 
@@ -230,17 +230,6 @@ function Get-OutputWinmdFileName
     }
 
     return $path
-}
-
-function Download-Nupkg
-{
-    Param ([string] $name, [string] $version, [string] $outputDir)
-
-    $url = "https://www.nuget.org/api/v2/package/$name/$version"
-    $output = "$outputDir\$name.$version.nupkg"
-
-    $wc = New-Object System.Net.WebClient
-    $wc.DownloadFile($url, $output)
 }
 
 function Get-ExcludedItems
