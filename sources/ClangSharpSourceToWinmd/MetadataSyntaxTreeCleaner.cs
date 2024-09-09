@@ -219,21 +219,6 @@ namespace ClangSharpSourceToWinmd
                     node = node.AddAttributeLists(attributeList);
                 }
 
-                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, null, out _, out string newName))
-                {
-                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
-                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
-
-                    if (newName != null)
-                    {
-                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
-                    }
-                }
-                else
-                {
-                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
-                }
-
                 foreach (var member in node.Members)
                 {
                     if (!(member is FieldDeclarationSyntax))
@@ -252,6 +237,21 @@ namespace ClangSharpSourceToWinmd
 
                         node = node.AddAttributeLists(attributeList);
                     }
+                }
+
+                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, null, out _, out string newName))
+                {
+                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+
+                    if (newName != null)
+                    {
+                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
+                    }
+                }
+                else
+                {
+                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
                 }
 
                 return node;

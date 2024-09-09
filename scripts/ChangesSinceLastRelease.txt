@@ -1,7 +1,6 @@
 # Annotate ComOutPtr in CompositionSwapchain and DirectComposition
 Windows.Win32.Graphics.CompositionSwapchain.Apis.CreatePresentationFactory : presentationFactory : [Out] => [ComOutPtr,Out]
 Windows.Win32.Graphics.CompositionSwapchain.IPresentationManager.GetPresentRetiringFence : fence : [Out,RetVal] => [ComOutPtr,Out,RetVal]
-Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetStatistics : frameStats : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetTargetStatistics : targetStats : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.DirectComposition.IDCompositionDevice.GetFrameStatistics : statistics : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.DirectComposition.IDCompositionDevice2.GetFrameStatistics : statistics : [Out] => [Out,RetVal]
@@ -29,6 +28,10 @@ Windows.Win32.System.LibraryLoader.Apis.QueryOptionalDelayLoadedAPI added
 # Correct PMPRADMINCONNECTIONHANGUPNOTIFICATION3 parameter 4
 Windows.Win32.NetworkManagement.Rras.PMPRADMINCONNECTIONHANGUPNOTIFICATION3.Invoke : param3 : [In] => [In,Out]
 Windows.Win32.NetworkManagement.Rras.PMPRADMINCONNECTIONHANGUPNOTIFICATION3.Invoke : param3...RAS_CONNECTION_3 => RAS_CONNECTION_3*
+# Correct AviStream documentation links
+Windows.Win32.Media.DirectShow.AVIStreamHeader : [Documentation(https://learn.microsoft.com/windows/win32/api/avifmt/ns-avifmt-avistreamheader)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/avifmt/ns-avifmt-avistreamheader)]
+Windows.Win32.Media.DirectShow.AVISTREAMHEADER : [Documentation(https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avistreamheader),StructLayout(0,Pack=2)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avistreamheader),StructLayout(0,Pack=2)]
+Windows.Win32.Media.DirectShow.AVISUPERINDEX : [Documentation(https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avisuperindex),StructLayout(0,Pack=2)] => [Documentation(https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avisuperindex),StructLayout(0,Pack=2)]
 # Fixed #1922.
 Windows.Win32.Devices.FunctionDiscovery.Apis.PKEY_Device_AdditionalSoftwareRequested...Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY => Windows.Win32.Foundation.PROPERTYKEY
 Windows.Win32.Devices.FunctionDiscovery.Apis.PKEY_Device_Address...Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY => Windows.Win32.Foundation.PROPERTYKEY
@@ -2592,3 +2595,116 @@ Windows.Win32.System.Power.Apis.PROCESSOR_NUMBER_PKEY...Windows.Win32.Devices.Pr
 # Correct GdiPlus Bitmap, Image documentation links
 Windows.Win32.Graphics.GdiPlus.Bitmap : [Documentation(https://learn.microsoft.com/windows/win32/tablet/bitmap-element),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/api/gdiplusheaders/nl-gdiplusheaders-bitmap),NativeTypedef]
 Windows.Win32.Graphics.GdiPlus.Image : [Documentation(https://learn.microsoft.com/windows/win32/windowsribbon/windowsribbon-element-image),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/api/gdiplusheaders/nl-gdiplusheaders-image),NativeTypedef]
+# Remove StructSizeField from BLOB, BSTRBLOB
+Windows.Win32.System.Com.BLOB : [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob),StructSizeField(cbSize)] => [Documentation(https://learn.microsoft.com/windows/win32/api/nspapi/ns-nspapi-blob)]
+Windows.Win32.System.Com.StructuredStorage.BSTRBLOB : [StructSizeField(cbSize)] => 
+# Add PRINTER_HANDLE type
+Windows.Win32.Graphics.Printing.Apis.AbortPrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddFormA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddFormW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddJobA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddJobW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddPrintDeviceObject : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AdvancedDocumentPropertiesA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AdvancedDocumentPropertiesW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ClosePrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.CloseSpoolFileHandle : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.CommitSpoolData : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.CreatePrinterIC : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeleteFormA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeleteFormW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeleteJobNamedProperty : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterDataA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterDataExA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterDataExW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterDataW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterKeyA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DeletePrinterKeyW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DevQueryPrint : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DocumentPropertiesA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.DocumentPropertiesW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EndDocPrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EndPagePrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumFormsA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumFormsW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumJobNamedProperties : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumJobsA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumJobsW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDataA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDataExA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDataExW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDataW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterKeyA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterKeyW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FindFirstPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FlushPrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetFormA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetFormW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetJobA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetJobNamedPropertyValue : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetJobW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDataA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDataExA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDataExW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDataW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDriver2A : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDriver2W : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDriverA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterDriverW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetPrinterW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.GetSpoolFileHandle : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.OpenPrinter2A : phPrinter...HANDLE* => PRINTER_HANDLE*
+Windows.Win32.Graphics.Printing.Apis.OpenPrinter2W : phPrinter...HANDLE* => PRINTER_HANDLE*
+Windows.Win32.Graphics.Printing.Apis.OpenPrinterA : phPrinter...HANDLE* => PRINTER_HANDLE*
+Windows.Win32.Graphics.Printing.Apis.OpenPrinterW : phPrinter...HANDLE* => PRINTER_HANDLE*
+Windows.Win32.Graphics.Printing.Apis.PartialReplyPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.PrinterMessageBoxA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.PrinterMessageBoxW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.PrinterProperties : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ProvidorFindClosePrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ProvidorFindFirstPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ReadPrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ReplyPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ResetPrinterA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ResetPrinterW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.ScheduleJob : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetFormA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetFormW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetJobA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetJobNamedProperty : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetJobW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterDataA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterDataExA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterDataExW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterDataW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SetPrinterW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SplIsSessionZero : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SplPromptUIInUsersSession : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SpoolerFindClosePrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SpoolerFindFirstPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SpoolerFindNextPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.SpoolerRefreshPrinterChangeNotification : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.StartDocPrinterA : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.StartDocPrinterW : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.StartPagePrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.UpdatePrintDeviceObject : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.WaitForPrinterChange : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.WritePrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrinterQueue.get_Handle : phPrinter...HANDLE* => PRINTER_HANDLE*
+Windows.Win32.Graphics.Printing.IPrintOemUI.QueryColorProfile : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUI.UpdateExternalFonts : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUI2.DocumentEvent : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUI2.QueryJobAttributes : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUIMXDC.AdjustDPI : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUIMXDC.AdjustImageableArea : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintOemUIMXDC.AdjustImageCompression : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintTicketProvider.BindPrinter : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.IPrintTicketProvider.GetSupportedVersions : hPrinter...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.PRINTER_HANDLE added
+# Remove RAIIFree attribute from PSID
+Windows.Win32.Security.PSID : [NativeTypedef,RAIIFree(FreeSid)] => [NativeTypedef]
+# Correct `CountFieldName` on `DCompositionGetStatistics()`
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetStatistics : targetIds : [Optional,Out] => [NativeArrayInfo(CountFieldName=targetIdCount),Optional,Out]
