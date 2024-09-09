@@ -142,6 +142,9 @@ IKsJackDescription2=Windows.Win32.Media.KernelStreaming
 IKsJackDescription3=Windows.Win32.Media.KernelStreaming
 IKsJackSinkInformation=Windows.Win32.Media.KernelStreaming
 # endregion devicetopology.h
+# region devpropdef.h
+DEVPROPKEY=Windows.Win32.Foundation
+# endregion
 # region dshowasf.h
 _AM_ASFWRITERCONFIG_PARAM=Windows.Win32.Media.WindowsMediaFormat
 IAMWMBufferPass=Windows.Win32.Media.DirectShow
@@ -2623,7 +2626,7 @@ Wow64SetThreadContext=Windows.Win32.System.Diagnostics.Debug
 uCLSSPEC=Windows.Win32.System.Com
 CSPLATFORM=Windows.Win32.System.Com
 DVASPECT=Windows.Win32.System.Com
-PROPERTYKEY=Windows.Win32.UI.Shell.PropertiesSystem
+PROPERTYKEY=Windows.Win32.Foundation
 QUERYCONTEXT=Windows.Win32.System.Com
 STATFLAG=Windows.Win32.System.Com
 STGC=Windows.Win32.System.Com
