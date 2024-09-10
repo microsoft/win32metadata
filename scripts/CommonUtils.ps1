@@ -75,6 +75,12 @@ function Install-BuildTools
     }
 
     & dotnet restore "$rootDir\buildtools" --verbosity detailed 
+
+    Get-ChildItem -Path "$rootDir\buildtools" -Recurse |
+    ForEach-Object {    
+        Write-Host $_
+    }
+
     & dotnet build "$rootDir\buildtools" -c Release "-bl:$PSScriptRoot\..\bin\logs\buildtools.binlog"
     ThrowOnNativeProcessError
 

@@ -109,6 +109,15 @@ stages:
           customVersion: '$(Version) • $(PipelineMessage)'
 
     - task: PowerShell@2
+      - displayName: Install Build Tools
+        inputs:
+          targetType: inline
+          workingDirectory: ${{ parameters.RepoDirectory }}
+          script: |
+            . "${{ parameters.RepoDirectory }}\scripts\\CommonUtils.ps1"
+            Install-BuildTools
+
+    - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
       inputs:
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
