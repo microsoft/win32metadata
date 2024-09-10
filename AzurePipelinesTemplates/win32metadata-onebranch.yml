@@ -114,7 +114,7 @@ stages:
         targetType: inline
         workingDirectory: ${{ parameters.RepoDirectory }}
         script: |
-          .\${{ parameters.RepoDirectory }}\scripts\\CommonUtils.ps1
+          . scripts\CommonUtils.ps1
           Install-BuildTools
 
     - task: PowerShell@2
