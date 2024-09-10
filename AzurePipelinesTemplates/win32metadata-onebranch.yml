@@ -118,6 +118,17 @@ stages:
           Install-BuildTools
 
     - task: PowerShell@2
+      displayName: Dump tools directory
+      inputs:
+        targetType: inline
+        workingDirectory: ${{ parameters.RepoDirectory }}
+        script: |
+          Get-ChildItem -Path "buildtools" -Recurse |
+          ForEach-Object {    
+              Write-Host $_
+          }
+
+    - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
       inputs:
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
