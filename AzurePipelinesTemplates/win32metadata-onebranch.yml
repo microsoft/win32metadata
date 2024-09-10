@@ -109,13 +109,13 @@ stages:
           customVersion: '$(Version) • $(PipelineMessage)'
 
     - task: PowerShell@2
-      - displayName: Install Build Tools
-        inputs:
-          targetType: inline
-          workingDirectory: ${{ parameters.RepoDirectory }}
-          script: |
-            . "${{ parameters.RepoDirectory }}\scripts\\CommonUtils.ps1"
-            Install-BuildTools
+      displayName: Install Build Tools
+      inputs:
+        targetType: inline
+        workingDirectory: ${{ parameters.RepoDirectory }}
+        script: |
+          . "${{ parameters.RepoDirectory }}\scripts\\CommonUtils.ps1"
+          Install-BuildTools
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
@@ -123,7 +123,7 @@ stages:
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
-        pwsh: true 
+        pwsh: true
     
     # Save commit hash for use by the release pipeline    
     - task: PowerShell@2
