@@ -131,6 +131,7 @@ stages:
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
       inputs:
+        workingDirectory: ${{ parameters.RepoDirectory }}
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
