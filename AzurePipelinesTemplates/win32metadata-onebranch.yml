@@ -118,12 +118,12 @@ stages:
           Install-BuildTools
 
     - task: PowerShell@2
-      displayName: Dump tools directory
+      displayName: Dump obj directory
       inputs:
         targetType: inline
         workingDirectory: ${{ parameters.RepoDirectory }}
         script: |
-          Get-ChildItem -Path "buildtools" -Recurse |
+          Get-ChildItem -Path "obj" -Recurse |
           ForEach-Object {    
               Write-Host $_
           }
