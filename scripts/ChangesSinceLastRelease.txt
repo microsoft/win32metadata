@@ -2708,3 +2708,15 @@ Windows.Win32.Graphics.Printing.PRINTER_HANDLE added
 Windows.Win32.Security.PSID : [NativeTypedef,RAIIFree(FreeSid)] => [NativeTypedef]
 # Correct `CountFieldName` on `DCompositionGetStatistics()`
 Windows.Win32.Graphics.DirectComposition.Apis.DCompositionGetStatistics : targetIds : [Optional,Out] => [NativeArrayInfo(CountFieldName=targetIdCount),Optional,Out]
+# Add additional BCrypt APIs
+Windows.Win32.Security.Cryptography.Apis.BCryptAddContextFunctionProvider added
+Windows.Win32.Security.Cryptography.Apis.BCryptRegisterProvider added
+Windows.Win32.Security.Cryptography.Apis.BCryptRemoveContextFunctionProvider added
+Windows.Win32.Security.Cryptography.Apis.BCryptUnregisterProvider added
+Windows.Win32.Security.Cryptography.Apis.GetAsymmetricEncryptionInterface added
+Windows.Win32.Security.Cryptography.Apis.GetCipherInterface added
+Windows.Win32.Security.Cryptography.Apis.GetHashInterface added
+Windows.Win32.Security.Cryptography.Apis.GetKeyDerivationInterface added
+Windows.Win32.Security.Cryptography.Apis.GetRngInterface added
+Windows.Win32.Security.Cryptography.Apis.GetSecretAgreementInterface added
+Windows.Win32.Security.Cryptography.Apis.GetSignatureInterface added
