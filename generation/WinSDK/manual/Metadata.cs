@@ -157,6 +157,14 @@ public class MetadataTypedefAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
+public class NativeAnnotationAttribute : Attribute
+{
+    public NativeAnnotationAttribute(string annotation)
+    {
+    }
+}
+
 public class NativeArrayInfoAttribute : Attribute
 {
     //
