@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MessagePack" Version="2.2.85" />
+    <PackageReference Include="MessagePack" Version="2.5.187" />
     <PackageReference Include="YamlDotNet" Version="11.1.1" />
   </ItemGroup>
 
