@@ -11,6 +11,7 @@
     <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
     <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
     <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
+    <NuGetConfigFile>$(RepoRootPath)nuget.config</NuGetConfigFile>
   </PropertyGroup>
 
   <Import Project="..\..\sdk\sdk.props" />

@@ -72,6 +72,9 @@ namespace MetadataTasks
         [Required]
         public string ScriptsDir { get; set; }
 
+        [Required]
+        public string NuGetConfigFile { get; set; }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -183,7 +186,7 @@ namespace MetadataTasks
         private bool EnsureClangSharpInstalled()
         {
             string scriptPath = Path.Combine(this.ScriptsDir, "Install-DotNetTool.ps1");
-            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion}";
+            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion} -NuGetConfigFile {this.NuGetConfigFile}";
             return TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _);
         }
 
