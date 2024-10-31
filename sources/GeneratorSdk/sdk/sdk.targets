@@ -211,7 +211,7 @@
       ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
       PartitionFilter="$(PartitionFilter)"
-      NuGetConfigFile="$(NuGetConfigFile)"/>
+      NuGetPackageSource="$(NuGetPackageSource)"/>
 
   </Target>
 
