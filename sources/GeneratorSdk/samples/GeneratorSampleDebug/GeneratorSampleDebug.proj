@@ -11,6 +11,7 @@
     <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
     <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
     <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
+    <NuGetPackageSource>https://pkgs.dev.azure.com/shine-oss/Win32Metadata/_packaging/Win32Metadata-Dependencies/nuget/v3/index.json</NuGetPackageSource>
   </PropertyGroup>
 
   <Import Project="..\..\sdk\sdk.props" />

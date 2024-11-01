@@ -161,12 +161,6 @@ namespace MetadataTasks
             return true;
         }
 
-        public static bool EnsureClangSharpInstalled(string scriptsDir, TaskLoggingHelper log)
-        {
-            string scriptPath = Path.Combine(scriptsDir, "InstallTools.ps1");
-            return CallPowershellScript(scriptPath, string.Empty, log, out _);
-        }
-
         public static string GetVcDirPath(string scriptsDir, TaskLoggingHelper log)
         {
             string scriptPath = Path.Combine(scriptsDir, "GetVcDirPath.ps1");

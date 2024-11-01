@@ -67,7 +67,7 @@ function Install-BuildTools
 {
     Param([switch]$Clean)
 
-    & "$PSScriptRoot\Install-DotNetTool" -Name nbgv
+    & "$PSScriptRoot\Install-DotNetTool" -Name nbgv -NuGetConfigFile "$rootDir\nuget.Config"
 
     if ($Clean.IsPresent)
     {
