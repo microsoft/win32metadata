@@ -228,6 +228,8 @@ Run a [full build](#full-builds), fix any metadata issues that surface, then upd
 
 To update the ClangSharp dependency, modify the version number in [ScrapeHeaders.cs](https://github.com/microsoft/win32metadata/blob/fca56d40752c1e8beee7c616e89f06c409fe09b7/sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs#L15).
 
+To override the default NuGet feed source for ClangSharp add a `<NuGetPackageSource>` PropertyItem to your proj file file with the URL of the NuGet feed source.
+
 Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ## Validating changes
