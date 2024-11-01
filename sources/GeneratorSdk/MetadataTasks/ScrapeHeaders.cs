@@ -193,8 +193,8 @@ namespace MetadataTasks
 
             try
             {
-                // try and delete the file
-                // File.Delete(nugetConfigFile);
+                // try and delete the file generated nuget.config file.
+                File.Delete(nugetConfigFile);
             }
             catch(Exception e)
             {
