@@ -210,7 +210,8 @@
       Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
       ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
-      PartitionFilter="$(PartitionFilter)"/>
+      PartitionFilter="$(PartitionFilter)"
+      NuGetPackageSource="$(NuGetPackageSource)"/>
 
   </Target>
 

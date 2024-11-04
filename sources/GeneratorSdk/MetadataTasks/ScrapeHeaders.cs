@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -71,6 +72,9 @@ namespace MetadataTasks
 
         [Required]
         public string ScriptsDir { get; set; }
+
+        [Required]
+        public string NuGetPackageSource { get; set; }
 
         public override bool Execute()
         {
@@ -182,9 +186,21 @@ namespace MetadataTasks
 
         private bool EnsureClangSharpInstalled()
         {
+            string nugetConfigFile = this.GenerateNuGetConfig(this.NuGetPackageSource);
             string scriptPath = Path.Combine(this.ScriptsDir, "Install-DotNetTool.ps1");
-            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion}";
-            return TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _);
+            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion} -NuGetConfigFile {nugetConfigFile}";
+            bool installResult = TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _);
+
+            try
+            {
+                // try and delete the file generated nuget.config file.
+                File.Delete(nugetConfigFile);
+            }
+            catch(Exception e)
+            {
+                this.Log.LogWarningFromException(e);
+            }
+            return installResult;
         }
 
         private bool AreNonPartitionFilesUpToDate()
@@ -485,6 +501,27 @@ $@"--file
             }
 
             return items;
+        }
+
+        private string GenerateNuGetConfig(string url)
+        {
+            var config = new XElement("configuration",
+                new XElement("packageSources",
+                    new XElement("clear"),
+                    new XElement("add",
+                        new XAttribute("key", "Win32Metadata-Dependencies"),
+                        new XAttribute("value", url),
+                        new XAttribute("protocolVersion", "3")
+                    )
+                ),
+                new XElement("disabledPackageSources",
+                    new XElement("clear")
+                )
+            );
+
+            string filePath = Path.Combine(this.ScriptsDir, "NuGet.config");
+            config.Save(filePath);
+            return filePath;
         }
     }
 }

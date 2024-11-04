@@ -29,6 +29,7 @@
     <ObjDir Condition="'$(ObjDir)' == ''">$(MSBuildProjectDirectory)\obj</ObjDir>
     <CompiledHeadersDir Condition="'$(CompiledHeadersDir)' == ''">$(ObjDir)\CompiledHeaders</CompiledHeadersDir>
     <SdkIncRoot>$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
+    <NuGetPackageSource Condition="'$(NuGetPackageSource)' == ''">https://pkgs.dev.azure.com/shine-oss/Win32Metadata/_packaging/Win32Metadata-Dependencies/nuget/v3/index.json</NuGetPackageSource>
 
     <Win32MetadataAssetsDir Condition="'$(Win32MetadataAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataAssetsDir>
     <WinSDKAssets Condition="'$(WinSDKAssets)' == ''">$(Win32MetadataAssetsDir)\WinSDK</WinSDKAssets>
