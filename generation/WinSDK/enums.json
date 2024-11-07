@@ -37370,6 +37370,20 @@
         "field": "StateFlags"
       }
     ]
+  },
+  {
+    "name": "CRYPTCATATTRIBUTE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CRYPTCAT_ATTR_",
+      "header": "mscat.h"
+    },
+    "uses": [
+      {
+        "struct": "CRYPTCATATTRIBUTE",
+        "field": "dwAttrTypeAndAction"
+      }
+    ]
   }
 ]
 }

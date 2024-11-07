@@ -2722,3 +2722,22 @@ Windows.Win32.Security.Cryptography.Apis.GetSecretAgreementInterface added
 Windows.Win32.Security.Cryptography.Apis.GetSignatureInterface added
 # Fixed #2011.
 Windows.Win32.UI.Shell.IContextMenu.QueryContextMenu : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-icontextmenu-querycontextmenu)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-icontextmenu-querycontextmenu)]
+# Fixed #2010.
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_AUTHENTICATED removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_DATAASCII removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_DATABASE64 removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_DATAREPLACE removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_NAMEASCII removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_NAMEOBJID removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY removed
+Windows.Win32.Security.Cryptography.Catalog.Apis.CRYPTCAT_ATTR_UNAUTHENTICATED removed
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_AUTHENTICATED added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_DATAASCII added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_DATABASE64 added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_DATAREPLACE added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_NAMEASCII added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_NAMEOBJID added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_UNAUTHENTICATED added
+Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE.dwAttrTypeAndAction...System.UInt32 => Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS
