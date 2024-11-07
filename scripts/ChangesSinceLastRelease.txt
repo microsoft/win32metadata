@@ -2741,3 +2741,12 @@ Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATT
 Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY added
 Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS.CRYPTCAT_ATTR_UNAUTHENTICATED added
 Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE.dwAttrTypeAndAction...System.UInt32 => Windows.Win32.Security.Cryptography.Catalog.CRYPTCATATTRIBUTE_FLAGS
+# Support for enum types in CreateFont method instead of casting to uint #2009.
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iCharSet : [In] => [AssociatedEnum(FONT_CHARSET),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iClipPrecision : [In] => [AssociatedEnum(FONT_CLIP_PRECISION),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iOutPrecision : [In] => [AssociatedEnum(FONT_OUTPUT_PRECISION),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iQuality : [In] => [AssociatedEnum(FONT_QUALITY),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iCharSet : [In] => [AssociatedEnum(FONT_CHARSET),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iClipPrecision : [In] => [AssociatedEnum(FONT_CLIP_PRECISION),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iOutPrecision : [In] => [AssociatedEnum(FONT_OUTPUT_PRECISION),In]
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iQuality : [In] => [AssociatedEnum(FONT_QUALITY),In]
