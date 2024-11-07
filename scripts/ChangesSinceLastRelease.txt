@@ -2750,3 +2750,8 @@ Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iCharSet : [In] => [AssociatedEnum
 Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iClipPrecision : [In] => [AssociatedEnum(FONT_CLIP_PRECISION),In]
 Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iOutPrecision : [In] => [AssociatedEnum(FONT_OUTPUT_PRECISION),In]
 Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iQuality : [In] => [AssociatedEnum(FONT_QUALITY),In]
+# IExplorerCommand: Methods could return flag type instead of u32 and flag types should be marked as flags #2007.
+Windows.Win32.UI.Shell._EXPCMDFLAGS :  => [Flags]
+Windows.Win32.UI.Shell._EXPCMDSTATE : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_expcmdstate)] => [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_expcmdstate),Flags]
+Windows.Win32.UI.Shell.IExplorerCommand.GetFlags : pFlags : [Out] => [AssociatedEnum(_EXPCMDFLAGS),Out]
+Windows.Win32.UI.Shell.IExplorerCommand.GetState : pCmdState : [Out] => [AssociatedEnum(_EXPCMDSTATE),Out]

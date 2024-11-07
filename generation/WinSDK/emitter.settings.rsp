@@ -27,6 +27,8 @@ IPPROTO::IPPROTO_IP=0
 IPPROTO::IPPROTO_RM=113
 MENUPARTS::MENU_POPUPSUBMENU_HCHOT=21
 --enumMakeFlags
+_EXPCMDSTATE
+_EXPCMDFLAGS
 ADVISE_TYPE
 AMMSF_MMS_INIT_FLAGS
 AMMSF_MS_FLAGS
@@ -2006,3 +2008,5 @@ CreateFontW::iCharSet=[AssociatedEnum("FONT_CHARSET")]
 CreateFontW::iOutPrecision=[AssociatedEnum("FONT_OUTPUT_PRECISION")]
 CreateFontW::iClipPrecision=[AssociatedEnum("FONT_CLIP_PRECISION")]
 CreateFontW::iQuality=[AssociatedEnum("FONT_QUALITY")]
+IExplorerCommand::GetState::pCmdState=[AssociatedEnum("_EXPCMDSTATE")]
+IExplorerCommand::GetFlags::pFlags=[AssociatedEnum("_EXPCMDFLAGS")]
