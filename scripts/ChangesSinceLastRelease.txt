@@ -2720,3 +2720,5 @@ Windows.Win32.Security.Cryptography.Apis.GetKeyDerivationInterface added
 Windows.Win32.Security.Cryptography.Apis.GetRngInterface added
 Windows.Win32.Security.Cryptography.Apis.GetSecretAgreementInterface added
 Windows.Win32.Security.Cryptography.Apis.GetSignatureInterface added
+# Fixed #2011.
+Windows.Win32.UI.Shell.IContextMenu.QueryContextMenu : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-icontextmenu-querycontextmenu)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-icontextmenu-querycontextmenu)]

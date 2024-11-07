@@ -1997,3 +1997,4 @@ StartPagePrinter::hPrinter=PRINTER_HANDLE
 UpdatePrintDeviceObject::hPrinter=PRINTER_HANDLE
 WaitForPrinterChange::hPrinter=PRINTER_HANDLE
 WritePrinter::hPrinter=PRINTER_HANDLE
+IContextMenu::QueryContextMenu=[CanReturnMultipleSuccessValues]
