@@ -2755,3 +2755,68 @@ Windows.Win32.UI.Shell._EXPCMDFLAGS :  => [Flags]
 Windows.Win32.UI.Shell._EXPCMDSTATE : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_expcmdstate)] => [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_expcmdstate),Flags]
 Windows.Win32.UI.Shell.IExplorerCommand.GetFlags : pFlags : [Out] => [AssociatedEnum(_EXPCMDFLAGS),Out]
 Windows.Win32.UI.Shell.IExplorerCommand.GetState : pCmdState : [Out] => [AssociatedEnum(_EXPCMDSTATE),Out]
+# CopyFile* constants should be in the Windows.Win32.Storage.FileSystem namespace #2004
+Windows.Win32.Storage.FileSystem.Apis.CopyFileExA : dwCopyFlags...UInt32 => COPYFILE_FLAGS
+Windows.Win32.Storage.FileSystem.Apis.CopyFileExW : dwCopyFlags...UInt32 => COPYFILE_FLAGS
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_ALLOW_DECRYPTED_DESTINATION added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_COPY_SYMLINK added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_DIRECTORY added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_DISABLE_PRE_ALLOCATION added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_DONT_REQUEST_DEST_WRITE_DAC added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_ENABLE_LOW_FREE_SPACE_MODE added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_ENABLE_SPARSE_COPY added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_FAIL_IF_EXISTS added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_IGNORE_EDP_BLOCK added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_IGNORE_SOURCE_ENCRYPTION added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_NO_BUFFERING added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_NO_OFFLOAD added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_OPEN_AND_COPY_REPARSE_POINT added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_OPEN_SOURCE_FOR_WRITE added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_REQUEST_COMPRESSED_TRAFFIC added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_REQUEST_SECURITY_PRIVILEGES added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_RESTARTABLE added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_RESUME_FROM_PAUSE added
+Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS.COPY_FILE_SKIP_ALTERNATE_STREAMS added
+Windows.Win32.Storage.FileSystem.COPYFILE2_EXTENDED_PARAMETERS_V2.dwCopyFlags...System.UInt32 => Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS
+Windows.Win32.Storage.FileSystem.COPYFILE2_EXTENDED_PARAMETERS_V2.dwCopyFlagsV2...System.UInt32 => Windows.Win32.Storage.FileSystem.COPYFILE2_V2_FLAGS
+Windows.Win32.Storage.FileSystem.COPYFILE2_EXTENDED_PARAMETERS.dwCopyFlags...System.UInt32 => Windows.Win32.Storage.FileSystem.COPYFILE_FLAGS
+Windows.Win32.Storage.FileSystem.COPYFILE2_V2_FLAGS added
+Windows.Win32.Storage.FileSystem.COPYFILE2_V2_FLAGS.COPY_FILE2_V2_DONT_COPY_JUNCTIONS added
+Windows.Win32.Storage.FileSystem.COPYFILE2_V2_FLAGS.COPY_FILE2_V2_VALID_FLAGS added
+Windows.Win32.Storage.FileSystem.COPYPROGRESSROUTINE_PROGRESS added
+Windows.Win32.Storage.FileSystem.COPYPROGRESSROUTINE_PROGRESS.PROGRESS_CANCEL added
+Windows.Win32.Storage.FileSystem.COPYPROGRESSROUTINE_PROGRESS.PROGRESS_CONTINUE added
+Windows.Win32.Storage.FileSystem.COPYPROGRESSROUTINE_PROGRESS.PROGRESS_QUIET added
+Windows.Win32.Storage.FileSystem.COPYPROGRESSROUTINE_PROGRESS.PROGRESS_STOP added
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_ALLOW_DECRYPTED_DESTINATION removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_COPY_SYMLINK removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_DIRECTORY removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_DISABLE_PRE_ALLOCATION removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_DONT_REQUEST_DEST_WRITE_DAC removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_ENABLE_LOW_FREE_SPACE_MODE removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_ENABLE_SPARSE_COPY removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_FAIL_IF_EXISTS removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_IGNORE_EDP_BLOCK removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_IGNORE_SOURCE_ENCRYPTION removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_NO_BUFFERING removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_NO_OFFLOAD removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_OPEN_AND_COPY_REPARSE_POINT removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_OPEN_SOURCE_FOR_WRITE removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_REQUEST_COMPRESSED_TRAFFIC removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_REQUEST_SECURITY_PRIVILEGES removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_RESTARTABLE removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_RESUME_FROM_PAUSE removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE_SKIP_ALTERNATE_STREAMS removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE2_V2_DONT_COPY_JUNCTIONS removed
+Windows.Win32.System.WindowsProgramming.Apis.COPY_FILE2_V2_VALID_FLAGS removed
+Windows.Win32.System.WindowsProgramming.Apis.COPYFILE2_IO_CYCLE_SIZE_MAX => Windows.Win32.Storage.FileSystem.Apis.COPYFILE2_IO_CYCLE_SIZE_MAX
+Windows.Win32.System.WindowsProgramming.Apis.COPYFILE2_IO_CYCLE_SIZE_MIN => Windows.Win32.Storage.FileSystem.Apis.COPYFILE2_IO_CYCLE_SIZE_MIN
+Windows.Win32.System.WindowsProgramming.Apis.COPYFILE2_IO_RATE_MIN => Windows.Win32.Storage.FileSystem.Apis.COPYFILE2_IO_RATE_MIN
+Windows.Win32.System.WindowsProgramming.Apis.COPYFILE2_MESSAGE_COPY_OFFLOAD => Windows.Win32.Storage.FileSystem.Apis.COPYFILE2_MESSAGE_COPY_OFFLOAD
+Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_CANCEL removed
+Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_CONTINUE removed
+Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_QUIET removed
+Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_STOP removed
+# CopyFile* constants should be in the Windows.Win32.Storage.FileSystem namespace #2004
+Windows.Win32.Storage.FileSystem.LPPROGRESS_ROUTINE.Invoke : return...UInt32 => COPYPROGRESSROUTINE_PROGRESS

@@ -37384,6 +37384,60 @@
         "field": "dwAttrTypeAndAction"
       }
     ]
+  },
+  {
+    "name": "COPYFILE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "COPY_FILE_",
+      "header": "winbase.h"
+    },
+    "uses": [
+      {
+        "method": "CopyFileExA",
+        "parameter": "dwCopyFlags"
+      },
+      {
+        "method": "CopyFileExW",
+        "parameter": "dwCopyFlags"
+      },
+      {
+        "struct": "COPYFILE2_EXTENDED_PARAMETERS",
+        "field": "dwCopyFlags"
+      },
+      {
+        "struct": "COPYFILE2_EXTENDED_PARAMETERS_V2",
+        "field": "dwCopyFlags"
+      }
+    ]
+  },
+  {
+    "name": "COPYFILE2_V2_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "COPY_FILE2_V2_",
+      "header": "winbase.h"
+    },
+    "uses": [
+      {
+        "struct": "COPYFILE2_EXTENDED_PARAMETERS_V2",
+        "field": "dwCopyFlagsV2"
+      }
+    ]
+  },
+  {
+    "name": "COPYPROGRESSROUTINE_PROGRESS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PROGRESS_",
+      "header": "winbase.h"
+    },
+    "uses": [
+      {
+        "method": "LPPROGRESS_ROUTINE",
+        "parameter": "return"
+      }
+    ]
   }
 ]
 }
