@@ -2820,3 +2820,6 @@ Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_QUIET removed
 Windows.Win32.System.WindowsProgramming.Apis.PROGRESS_STOP removed
 # CopyFile* constants should be in the Windows.Win32.Storage.FileSystem namespace #2004
 Windows.Win32.Storage.FileSystem.LPPROGRESS_ROUTINE.Invoke : return...UInt32 => COPYPROGRESSROUTINE_PROGRESS
+# More Retained functions #1994
+Windows.Win32.Storage.FileSystem.Apis.ReadFileEx : lpOverlapped : [In,Out] => [In,Out,Retained]
+Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpOverlapped : [In,Out] => [In,Out,Retained]
