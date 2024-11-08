@@ -2823,3 +2823,27 @@ Windows.Win32.Storage.FileSystem.LPPROGRESS_ROUTINE.Invoke : return...UInt32 => 
 # More Retained functions #1994
 Windows.Win32.Storage.FileSystem.Apis.ReadFileEx : lpOverlapped : [In,Out] => [In,Out,Retained]
 Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpOverlapped : [In,Out] => [In,Out,Retained]
+# Added OBJECT_ATTRIBUTE_FLAGS.
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_CASE_INSENSITIVE added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_DONT_REPARSE added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_EXCLUSIVE added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_FORCE_ACCESS_CHECK added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_IGNORE_IMPERSONATED_DEVICEMAP added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_INHERIT added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_KERNEL_HANDLE added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_OPENIF added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_OPENLINK added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_PERMANENT added
+Windows.Win32.Foundation.OBJECT_ATTRIBUTE_FLAGS.OBJ_VALID_ATTRIBUTES added
+Windows.Win32.System.Kernel.Apis.OBJ_CASE_INSENSITIVE removed
+Windows.Win32.System.Kernel.Apis.OBJ_DONT_REPARSE removed
+Windows.Win32.System.Kernel.Apis.OBJ_EXCLUSIVE removed
+Windows.Win32.System.Kernel.Apis.OBJ_FORCE_ACCESS_CHECK removed
+Windows.Win32.System.Kernel.Apis.OBJ_IGNORE_IMPERSONATED_DEVICEMAP removed
+Windows.Win32.System.Kernel.Apis.OBJ_INHERIT removed
+Windows.Win32.System.Kernel.Apis.OBJ_KERNEL_HANDLE removed
+Windows.Win32.System.Kernel.Apis.OBJ_OPENIF removed
+Windows.Win32.System.Kernel.Apis.OBJ_OPENLINK removed
+Windows.Win32.System.Kernel.Apis.OBJ_PERMANENT removed
+Windows.Win32.System.Kernel.Apis.OBJ_VALID_ATTRIBUTES removed

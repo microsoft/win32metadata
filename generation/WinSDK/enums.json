@@ -37438,6 +37438,17 @@
         "parameter": "return"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "name": "OBJECT_ATTRIBUTE_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "OBJ_(?!HANDLE_TAGBITS)",
+      "header": "ntdef.h"
+    },
+    "uses": []
   }
 ]
 }
