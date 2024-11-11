@@ -45,3 +45,5 @@
 <IncludeRoot>/um/xprtdefs.h
 --namespace
 Windows.Win32.Media.DirectShow
+--exclude
+_DVD_REGION
