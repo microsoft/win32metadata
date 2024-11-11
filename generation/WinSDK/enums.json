@@ -22835,6 +22835,7 @@
   },
   {
     "name": "WINTRUST_SIGNATURE_SETTINGS_FLAGS",
+    "flags": true,
     "members": [
       {
         "name": "WSS_VERIFY_SPECIFIC",

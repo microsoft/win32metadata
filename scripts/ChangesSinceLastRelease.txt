@@ -2847,3 +2847,5 @@ Windows.Win32.System.Kernel.Apis.OBJ_OPENIF removed
 Windows.Win32.System.Kernel.Apis.OBJ_OPENLINK removed
 Windows.Win32.System.Kernel.Apis.OBJ_PERMANENT removed
 Windows.Win32.System.Kernel.Apis.OBJ_VALID_ATTRIBUTES removed
+# WINTRUST_SIGNATURE_SETTINGS_FLAGS should be a flagged enum #2008
+Windows.Win32.Security.WinTrust.WINTRUST_SIGNATURE_SETTINGS_FLAGS :  => [Flags]
