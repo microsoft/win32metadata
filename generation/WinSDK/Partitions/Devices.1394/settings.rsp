@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/shared/ntdd1394.h
+--namespace
+Windows.Win32.Devices.1394
+--remap
+_IEEE1394_VDEV_PNP_REQUEST=IEEE1394_VDEV_PNP_REQUEST
+_IEEE1394_API_REQUEST=IEEE1394_API_REQUEST

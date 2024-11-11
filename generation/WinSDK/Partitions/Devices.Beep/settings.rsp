@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/shared/ntddbeep.h
+--namespace
+Windows.Win32.Devices.Beep
+--remap
+_BEEP_SET_PARAMETERS=BEEP_SET_PARAMETERS
