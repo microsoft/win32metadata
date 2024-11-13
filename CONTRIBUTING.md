@@ -2,7 +2,7 @@
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+the rights to use your contribution. For details, visit [https://cla.opensource.microsoft.com](https://cla.opensource.microsoft.com).
 
 When you submit a pull request, a CLA bot will automatically determine whether you need to provide
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
@@ -12,21 +12,21 @@ You can contribute to this project by contributing to:
 
 * [Issues](https://github.com/microsoft/win32metadata/issues)
 * [Discussions](https://github.com/microsoft/win32metadata/discussions)
-* [Namespaces](#Namespaces)
-* [Enums](#Enums)
-* [Constants](#Constants)
-* [Typedefs](#Typedefs)
-* [Attributes](#Attributes)
-* [Dependencies](#Dependencies)
+* [Namespaces](#namespaces)
+* [Enums](#enums)
+* [Constants](#constants)
+* [Typedefs](#typedefs)
+* [Attributes](#attributes)
+* [Dependencies](#dependencies)
 * [Projections](docs/projections.md)
 
-If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
+If you intend to contribute code changes, learn how to [set up your development environment](#set-up-your-development-environment).
 
-When contributing code changes, [validate](#Validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
+When contributing code changes, [validate](#validating-changes) your changes by rebuilding the winmd and then inspecting the reported winmd diff to ensure all changes were intentional:
 
-* [Full builds](#Full-builds)
-* [Incremental builds](#Incremental-builds)
-* [Comparing against the last release](#Comparing-against-the-last-release)
+* [Full builds](#full-builds)
+* [Incremental builds](#incremental-builds)
+* [Comparing against the last release](#comparing-against-the-last-release)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
@@ -36,7 +36,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run `winget configure configurations\configuration.dsc.yaml` from the repo root
-* Run a [full build](#Full-builds)
+* Run a [full build](#full-builds)
 
 ## Namespaces
 
@@ -51,6 +51,7 @@ Our tooling organizes Win32 APIs into namespaces. This provides an alternative w
 The simplest way to assign an API to a namespace is to associate the API's header file with a [partition](generation/scraper/Partitions). A header file can only be associated with one partition, and by default all APIs included in the header file will be added to the partition's target namespace.
 
 Partitions are defined as [folders](generation/WinSDK/Partitions) with [main.cpp](generation/WinSDK/Partitions/Registry/main.cpp) and [settings.rsp](generation/WinSDK/Partitions/Registry/settings.rsp) files.
+
 * [main.cpp](generation/WinSDK/Partitions/Registry/main.cpp) contains `#include` statements like you would use to call the APIs directly. This typically includes the header files to be associated with the partition as well as any other dependent headers, included in the proper order.
 * [settings.rsp](generation/WinSDK/Partitions/Registry/settings.rsp) associates a list of header files to a namespace. Reference existing [partitions](generation/WinSDK/Partitions) to understand the template for this file. The important sections are `--traverse`, which lists the header files to include, and `--namespace` which lists the namespace to associate with the content of those header files. Note that headers should be listed alphabetically by convention, and the casing needs to match the casing of the filenames.
 
@@ -90,7 +91,7 @@ Enums are defined in [enums.json](generation/WinSDK/enums.json). This file provi
 * `members` - For manually defined members, a list of members
   * `name` - The name of the enum member
   * `value` - The value of the enum member
-  * Note: If you omit `value`, it will be autopopulated if detected by the [ConstantsScraper](#Constants)
+  * Note: If you omit `value`, it will be autopopulated if detected by the [ConstantsScraper](#constants)
   * Note: You can use `members` and `autoPopulate` in the same enum
 * `uses` - A list of APIs where this enum is used
   * `interface` - The COM interface name
@@ -131,6 +132,7 @@ In the example below, a flags enum called `WNDCLASS_STYLES` is created with all 
   ]
 }
 ```
+
 You can add new enums, modify existing enums, or apply enums to more APIs by modifying [enums.json](generation/WinSDK/enums.json).
 
 ## Constants
@@ -143,7 +145,7 @@ The behavior of the ConstantsScraper can be adjusted by modifying [ConstantsScra
 * The `--with-type` section declares constant types that cannot be detected automatically (e.g. `SOCK_STREAM=ushort`)
 * The `--exclude` section declares constants to exclude from the metadata
 
-Constants can be assigned to different namespaces than their header files by adding them to [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp) as described in [Split a header file among multiple namespaces](#Split-a-header-file-among-multiple-namespaces). Wildcards can be used (e.g. `DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi`).
+Constants can be assigned to different namespaces than their header files by adding them to [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp) as described in [Split a header file among multiple namespaces](#split-a-header-file-among-multiple-namespaces). Wildcards can be used (e.g. `DXGI_ERROR_*=Windows.Win32.Graphics.Dxgi`).
 
 The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/ConstantsScraper.cs) on the header files to automatically extract constants. If a constant is not being detected, either a regular expression needs to be added or a regular expression would be insufficient. For cases where regular expressions would be insufficient, you can manually define constants in `.cs` files within [manual](generation/WinSDK/manual) (e.g. [RestartManager.cs](generation/WinSDK/manual/RestartManager.cs)).
 
@@ -240,6 +242,10 @@ Run `./DoAll.ps1 -Clean` in [PowerShell 7](https://aka.ms/powershell-release?tag
 
 If CI builds pass but local builds of the same commit fail with cryptic error messages, clearing the local NuGet cache with `dotnet nuget locals -c all` often helps.
 
+### Updating NuGet Package Version
+
+To [Safeguard against malicious public packages](https://learn.microsoft.com/azure/devops/artifacts/concepts/upstream-behavior) an ADO Artifact feed is used as this projects package source. Updating NuGet package version that this project depends on might require saving the new package version to the package source [https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies](https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies) following the directions here: [Save packages](https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages).
+
 ### Incremental builds
 
 Run `./DoAll.ps1 -ExcludePackages -ExcludeSamples` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes. Building NuGet packages and WinmdGenerator samples isn't usually necessary for local builds, so excluding them with `ExcludePackages` and `ExcludeSamples` will provide the fastest build times.
@@ -262,6 +268,8 @@ Once all the changes are validated, update the list of known changes since the l
 
 ## Releasing
 
-The main branch must have a clean build to publish a new release. Run the [release pipeline](https://dev.azure.com/microsoft/Dart/_build?definitionId=62263) to publish new packages to nuget.org and create a new draft release on GitHub autopopulated with the list of resolved issues. Once the packages are live on nuget.org, publish the GitHub release.
+The main branch must have a clean build to publish a new release. Run the [release pipeline](https://dev.azure.com/microsoft/Dart/_build?definitionId=62263) to publish new packages to nuget.org and create a new draft release on GitHub autopopulated with the list of resolved issues. Once the packages are live on nuget.org.
+
+After the package is live on nuget.org. Manually save the new package version to the ADO Artifact feed: [https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies](https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies) following the directions outlined here: [Save packages](https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages), once the new packages are saved to the ADO Artifact feed publish the GitHub release.
 
 After a release is published, run [Set-LastReleaseVersion.ps1](scripts/Set-LastReleaseVersion.ps1) with the metadata package version published to nuget.org, and run [Set-MajorVersion.ps1](scripts/Set-MajorVersion.ps1) to increment the version number in the build for the next release.
