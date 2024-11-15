@@ -6446,7 +6446,6 @@ Windows.Win32.System.UpdateAgent.IUpdateDownloaderEx added
 Windows.Win32.System.UpdateAgent.IUpdateEx added
 Windows.Win32.System.WindowsProgramming.Apis.EnableProcessOptionalXStateFeatures added
 Windows.Win32.System.WindowsProgramming.Apis.EnableProcessOptionalXStateFeatures(X86, X64) removed
-Windows.Win32.System.WindowsProgramming.Apis.GetFileInformationByName added
 Windows.Win32.System.WindowsProgramming.Apis.GetThreadEnabledXStateFeatures added
 Windows.Win32.System.WindowsProgramming.Apis.GetThreadEnabledXStateFeatures(X86, X64) removed
 Windows.Win32.System.WindowsProgramming.Apis.WLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_FN added
@@ -7071,3 +7070,5 @@ Windows.Win32.UI.Input.GameInput.IGameInputDispatcher added
 Windows.Win32.UI.Input.GameInput.IGameInputForceFeedbackEffect added
 Windows.Win32.UI.Input.GameInput.IGameInputRawDeviceReport added
 Windows.Win32.UI.Input.GameInput.IGameInputReading added
+# Fixed namespace for GetFileInformationByHandle.
+Windows.Win32.Storage.FileSystem.Apis.GetFileInformationByName added

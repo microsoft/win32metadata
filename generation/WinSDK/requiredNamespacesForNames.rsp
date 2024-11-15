@@ -990,6 +990,7 @@ GetFileAttributesTransactedA=Windows.Win32.Storage.FileSystem
 GetFileAttributesTransactedW=Windows.Win32.Storage.FileSystem
 GetFileBandwidthReservation=Windows.Win32.Storage.FileSystem
 GetFileInformationByHandleEx=Windows.Win32.Storage.FileSystem
+GetFileInformationByName=Windows.Win32.Storage.FileSystem
 GetFileSecurityA=Windows.Win32.Security
 GetFirmwareType=Windows.Win32.System.SystemInformation
 GetFullPathNameTransactedA=Windows.Win32.Storage.FileSystem
