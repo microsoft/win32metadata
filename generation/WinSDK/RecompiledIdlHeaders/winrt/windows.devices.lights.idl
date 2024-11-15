@@ -146,7 +146,11 @@ namespace Windows
                 Furniture      = 9,
                 Art            = 10,
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
-                Headset        = 11
+                Headset        = 11,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                Microphone     = 12,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                Speaker        = 13
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]

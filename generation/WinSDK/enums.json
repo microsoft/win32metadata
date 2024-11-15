@@ -29799,6 +29799,14 @@
       {
         "name": "ISC_REQ_NO_POST_HANDSHAKE_AUTH",
         "value": "0x0000000400000000"
+      },
+      {
+        "name": "ISC_REQ_REUSE_SESSION_TICKETS",
+        "value": "0x0000000800000000"
+      },
+      {
+        "name": "ISC_REQ_EXPLICIT_SESSION",
+        "value": "0x0000001000000000"
       }
     ]
   },
@@ -29806,7 +29814,7 @@
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH)",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH|REUSE_SESSION_TICKETS|EXPLICIT_SESSION)",
       "header": "sspi.h"
     },
     "members": [],
@@ -29838,6 +29846,10 @@
       {
         "name": "ASC_REQ_MESSAGES",
         "value": "0x0000000100000000"
+      },
+      {
+        "name": "ASC_REQ_EXPLICIT_SESSION",
+        "value": "0x0000001000000000"
       }
     ]
   },
@@ -29845,7 +29857,7 @@
     "name": "ASC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ASC_REQ_(?!MESSAGES)",
+      "filter": "ASC_REQ_(?!MESSAGES|EXPLICIT_SESSION)",
       "header": "sspi.h"
     },
     "members": [],
@@ -34695,6 +34707,12 @@
       "header": "windns.h",
       "filter": "DNS_QUERY_"
     },
+    "members": [
+      {
+        "name": "DNS_QUERY_PARSE_ALL_RECORDS",
+        "value": "unchecked((uint)0x0400000000000000)"
+      }
+    ],
     "uses": [
       {
         "method": "DnsQuery_A",

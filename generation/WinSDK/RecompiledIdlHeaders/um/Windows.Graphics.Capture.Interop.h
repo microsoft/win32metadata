@@ -27,3 +27,21 @@ DECLARE_INTERFACE_IID_(IGraphicsCaptureItemInterop, IUnknown, "3628E81B-3CAC-4C6
         ) PURE;
 
 };
+
+#undef INTERFACE
+#define INTERFACE IWindowGraphicsCaptureItemInterop
+DECLARE_INTERFACE_IID_(IWindowGraphicsCaptureItemInterop, IUnknown, "38E4C48B-94E6-4C44-9CFA-968193316C0C")
+{
+    IFACEMETHOD(GetWindow)(
+        HWND* window
+        ) PURE;
+};
+
+#undef INTERFACE
+#define INTERFACE IMonitorGraphicsCaptureItemInterop
+DECLARE_INTERFACE_IID_(IMonitorGraphicsCaptureItemInterop, IUnknown, "33274D14-A076-4048-8416-747E9B04DB7B")
+{
+    IFACEMETHOD(GetMonitor)(
+        HMONITOR* monitor
+        ) PURE;
+};

@@ -23,12 +23,6 @@
 #include "mmreg.h"
 
 #include <avrt.h>
-#ifndef AVRT_DATA
-#define AVRT_DATA
-#endif
-#ifndef AVRT_BSS
-#define AVRT_BSS
-#endif
 
 #if !defined(MF_VERSION)
 
@@ -546,6 +540,18 @@ MFCreateDXGISurfaceBuffer(
     _Outptr_ IMFMediaBuffer** ppBuffer
     );
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+STDAPI MFCreateDXGICrossAdapterBuffer(
+    _In_ REFIID riid,
+    _In_ IUnknown            *punkDevice,
+    _In_ IMFMediaType        *pMediaType,
+    _In_ UINT                uSubresource,
+    _COM_Outptr_ IMFMediaBuffer     **ppBuffer
+    );
+
+#endif /*(NTDDI_VERSION >= NTDDI_WIN11_GE)*/
+
 STDAPI MFCreateVideoSampleAllocatorEx(
     _In_   REFIID riid,
     _Outptr_  void** ppSampleAllocator
@@ -556,6 +562,18 @@ MFCreateDXGIDeviceManager(
     _Out_ UINT* resetToken,
     _Outptr_ IMFDXGIDeviceManager** ppDeviceManager
     );
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+//
+// Get the D3D Device version in DXGIDeviceManager
+//
+STDAPI
+MFGetDXGIDeviceManageMode(
+    _In_ IUnknown* pDeviceManager,
+    _Out_ MF_DXGI_DEVICE_MANAGER_MODE* mode
+);
+#endif /*(NTDDI_VERSION >= NTDDI_WIN11_GE)*/
 
 #define MF_E_DXGI_DEVICE_NOT_INITIALIZED ((HRESULT)0x80041000L)  // DXVA2_E_NOT_INITIALIZED     
 #define MF_E_DXGI_NEW_VIDEO_DEVICE       ((HRESULT)0x80041001L)  // DXVA2_E_NEW_VIDEO_DEVICE    
@@ -1394,6 +1412,18 @@ DEFINE_GUID(MFSampleExtension_FeatureMap,
 // Set to 1 if the input sample is a chroma-only frame
 DEFINE_GUID(MFSampleExtension_ChromaOnly,
 0x1eb9179c, 0xa01f, 0x4845, 0x8c, 0x04, 0x0e, 0x65, 0xa2, 0x6e, 0xb0, 0x4f);
+
+// MFSampleExtension_SpatialLayerId {B7AABC7B-2396-457a-879E-623BFAB6E0AC}
+// Type: UINT32
+// The exact spatial layer id of a sample emitted by a decoder
+DEFINE_GUID(MFSampleExtension_SpatialLayerId, 
+0xb7aabc7b, 0x2396, 0x457a, 0x87, 0x9e, 0x62, 0x3b, 0xfa, 0xb6, 0xe0, 0xac);
+
+// MFSampleExtension_TemporalLayerId {B3C1FCD2-B331-4376-B974-AD647769B2B0}
+// Type: UINT32
+// The exact temporal layer id of a sample emitted by a decoder
+DEFINE_GUID(MFSampleExtension_TemporalLayerId, 
+0xb3c1fcd2, 0xb331, 0x4376, 0xb9, 0x74, 0xad, 0x64, 0x77, 0x69, 0xb2, 0xb0);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// These are the attribute GUIDs that need to be used by MFT0 to provide
@@ -2356,6 +2386,17 @@ DEFINE_GUID(MFAudioFormat_Dolby_AC4_V1_ES,
 DEFINE_GUID(MFAudioFormat_Dolby_AC4_V2_ES,
 0x7e58c9f9, 0xb070, 0x45f4, 0x8c, 0xcd, 0xa9, 0x9a, 0x04, 0x17, 0xc1, 0xac);
 
+// {7c13c441-ebf8-4931-b678-800b19242236}
+// This format is used for MPEG-H MHAS bitstreams where each IMFSample is aligned with the start of a MHAS packet.
+DEFINE_GUID(MFAudioFormat_MPEGH,
+0x7c13c441, 0xebf8, 0x4931, 0xb6, 0x78, 0x80, 0x0b, 0x19, 0x24, 0x22, 0x36);
+
+// {19ee97fe-1be0-4255-a876-e99f53a42ae3}
+// This format is used for MPEG-H MHAS elementary bitstreams where each IMFSample may not be aligned with the start of a 
+// MHAS packet.
+DEFINE_GUID(MFAudioFormat_MPEGH_ES,
+0x19ee97fe, 0x1be0, 0x4255, 0xa8, 0x76, 0xe9, 0x9f, 0x53, 0xa4, 0x2a, 0xe3);
+
 DEFINE_GUID(MFAudioFormat_Vorbis,      // {8D2FD10B-5841-4a6b-8905-588FEC1ADED9}
 0x8D2FD10B, 0x5841, 0x4a6b, 0x89, 0x05, 0x58, 0x8F, 0xEC, 0x1A, 0xDE, 0xD9);
 DEFINE_GUID(MFAudioFormat_DTS_RAW, // == MEDIASUBTYPE_DTS defined in ksuuids.h
@@ -2934,6 +2975,14 @@ DEFINE_GUID( MF_MT_SPATIAL_AUDIO_MIN_METADATA_ITEM_OFFSET_SPACING,
 // {6842F6E7-D43E-4EBB-9C9C-C96F41784863} MF_MT_SPATIAL_AUDIO_DATA_PRESENT {UINT32 (BOOL)}
 DEFINE_GUID( MF_MT_SPATIAL_AUDIO_DATA_PRESENT, 
     0x6842f6e7, 0xd43e, 0x4ebb, 0x9c, 0x9c, 0xc9, 0x6f, 0x41, 0x78, 0x48, 0x63 );
+
+// {4EACAB51-FFE5-421A-A2A7-8B7409A1CAC4} MF_MT_SPATIAL_AUDIO_IS_PREVIRTUALIZED {UINT32 (BOOL)}
+DEFINE_GUID(MF_MT_SPATIAL_AUDIO_IS_PREVIRTUALIZED,
+    0x4eacab51, 0xffe5, 0x421a, 0xa2, 0xa7, 0x8b, 0x74, 0x09, 0xa1, 0xca, 0xc4 );
+
+// {51267a39-dd0c-4bb9-a7bd-9173ad4b131c}
+DEFINE_GUID(MF_MT_MPEGH_AUDIO_PROFILE_LEVEL_INDICATION,
+0x51267a39, 0xdd0c, 0x4bb9, 0xa7, 0xbd, 0x91, 0x73, 0xad, 0x4b, 0x13, 0x1c);
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
@@ -3723,6 +3772,7 @@ MFCreateWaveFormatExFromMFMediaType(
     _Out_opt_   UINT32*         pcbSize,
     _In_        UINT32          Flags = MFWaveFormatExConvertFlag_Normal
     );
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
@@ -3840,8 +3890,8 @@ MFCalculateBitmapImageSize(
 
 #endif /* cplusplus */
 
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
 
 STDAPI
 MFCalculateImageSize(
@@ -3866,18 +3916,6 @@ MFAverageTimePerFrameToFrameRate(
     );
 
 STDAPI
-MFInitMediaTypeFromMFVideoFormat(
-    _In_                    IMFMediaType*           pMFType,
-    _In_reads_bytes_(cbBufSize)  const MFVIDEOFORMAT*    pMFVF,
-    _In_                    UINT32                  cbBufSize
-    );
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-#pragma region Application Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
-STDAPI
 MFInitMediaTypeFromWaveFormatEx(
     _In_                    IMFMediaType*           pMFType,
     _In_reads_bytes_(cbBufSize)  const WAVEFORMATEX*     pWaveFormat,
@@ -3888,6 +3926,13 @@ MFInitMediaTypeFromWaveFormatEx(
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+STDAPI
+MFInitMediaTypeFromMFVideoFormat(
+    _In_                    IMFMediaType*           pMFType,
+    _In_reads_bytes_(cbBufSize)  const MFVIDEOFORMAT*    pMFVF,
+    _In_                    UINT32                  cbBufSize
+    );
+
 STDAPI
 MFInitMediaTypeFromAMMediaType(
     _In_    IMFMediaType*           pMFType,
@@ -3950,6 +3995,12 @@ STDAPI
 MFUnwrapMediaType(
     _In_    IMFMediaType*    pWrap,
     _Out_   IMFMediaType **  ppOrig
+    );
+
+STDAPI MFGetStrideForBitmapInfoHeader(
+    DWORD format,
+    DWORD dwWidth,
+    _Out_ LONG* pStride
     );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
@@ -4015,12 +4066,6 @@ STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeader(
     _Out_ IMFVideoMediaType** ppIVideoMediaType
     );
 #endif // NOBITMAP
-
-STDAPI MFGetStrideForBitmapInfoHeader(
-    DWORD format,
-    DWORD dwWidth,
-    _Out_ LONG* pStride
-    );
 
 STDAPI MFGetPlaneSize(
     DWORD format,

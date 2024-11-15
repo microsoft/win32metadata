@@ -489,7 +489,7 @@ typedef enum _USBD_ENDPOINT_OFFLOAD_MODE {
 #pragma pack(push)
 #pragma pack(1)
 
-typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
+typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION_V1 {
 
     ULONG Size;
 
@@ -498,7 +498,8 @@ typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
     //
 
     USHORT EndpointAddress;
-    ULONG ResourceId;
+
+    ULONG ResourceId; // Valid only in hardware assisted offload mode.
 
     //
     // Output fields returned by the USB host controller driver if the specified
@@ -508,7 +509,9 @@ typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
     USBD_ENDPOINT_OFFLOAD_MODE Mode;
 
     //
-    // Fields from SLOT_CONTEXT describing the device
+    // Fields from SLOT_CONTEXT describing the device.
+    // Valid for both hardware and software assisted endpoint
+    // offload modes.
     //
 
     ULONG RootHubPortNumber:8;
@@ -523,7 +526,8 @@ typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
     ULONG Reserved0:14;
 
     //
-    // Transfer ring information
+    // OUTPUT - Transfer ring information.
+    // Valid only in software assisted offload mode.
     //
 
     PHYSICAL_ADDRESS TransferSegmentLA;
@@ -532,7 +536,8 @@ typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
     ULONG TransferRingInitialCycleBit;
 
     //
-    // Secondary event ring information
+    // OUTPUT - Secondary event ring information
+    // Valid only in software assisted offload mode.
     //
 
     ULONG MessageNumber;
@@ -541,7 +546,105 @@ typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
     size_t EventRingSize;
     ULONG EventRingInitialCycleBit;
 
-} USBD_ENDPOINT_OFFLOAD_INFORMATION, *PUSBD_ENDPOINT_OFFLOAD_INFORMATION;
+} USBD_ENDPOINT_OFFLOAD_INFORMATION_V1, *PUSBD_ENDPOINT_OFFLOAD_INFORMATION_V1;
+
+typedef struct _USBD_ENDPOINT_OFFLOAD_INFORMATION {
+
+    ULONG Size;
+
+    //
+    // Input field to be filled in by USB client driver
+    //
+
+    USHORT EndpointAddress;
+
+    ULONG ResourceId; // Valid only in hardware assisted offload mode.
+
+    //
+    // Output fields returned by the USB host controller driver if the specified
+    // endpoint (in EndpointAddress) was successfully setup for offload mode.
+    //
+
+    USBD_ENDPOINT_OFFLOAD_MODE Mode;
+
+    //
+    // Fields from SLOT_CONTEXT describing the device.
+    // Valid for both hardware and software assisted endpoint
+    // offload modes.
+    //
+
+    ULONG RootHubPortNumber:8;
+    ULONG RouteString:20;
+    ULONG Speed:4;
+
+    ULONG UsbDeviceAddress:8;
+    ULONG SlotId:8;
+    ULONG MultiTT:1;
+
+    ULONG LSOrFSDeviceConnectedToTTHub:1;
+    ULONG Reserved0:14;
+
+    //
+    // OUTPUT - Transfer ring information.
+    // Valid only in software assisted offload mode.
+    //
+
+    PHYSICAL_ADDRESS TransferSegmentLA;
+    PVOID TransferSegmentVA;
+    size_t TransferRingSize;
+    ULONG TransferRingInitialCycleBit;
+
+    //
+    // OUTPUT - Secondary event ring information
+    // Valid only in software assisted offload mode.
+    //
+
+    ULONG MessageNumber;
+    PHYSICAL_ADDRESS EventRingSegmentLA;
+    PVOID EventRingSegmentVA;
+    size_t EventRingSize;
+    ULONG EventRingInitialCycleBit;
+
+    //
+    // +++
+    // New fields added in _V2 version follow here.
+    // ---
+    //
+
+    //
+    // INPUT - Transfer ring segments provided by the sideband component.
+    // Output remains in the "Transfer Ring Information" above".
+    // Valid only in software assisted endpoint offload mode and
+    // must belong to the IO/device address space. It should be page
+    // aligned and size must be a multiple of PAGE_SIZE.
+    //
+
+    PHYSICAL_ADDRESS ClientTransferRingSegmentPAIn;
+    size_t ClientTransferRingSizeIn;
+
+    //
+    // INPUT - Data buffers provided by the sideband component.
+    // Valid only in software assisted endpoint offload mode and
+    // must belong to the IO/device address space. It should be page
+    // aligned and size must be a multiple of PAGE_SIZE.
+    //
+
+    PHYSICAL_ADDRESS ClientDataBufferPAIn;
+    size_t ClientDataBufferSizeIn;
+
+    //
+    // OUTPUT - fields describing mapped data buffer
+    // Valid only in software assisted offload mode.
+    //
+
+    PHYSICAL_ADDRESS ClientDataBufferLAOut;
+    PVOID ClientDataBufferVAOut;
+
+} USBD_ENDPOINT_OFFLOAD_INFORMATION, *PUSBD_ENDPOINT_OFFLOAD_INFORMATION,
+  USBD_ENDPOINT_OFFLOAD_INFORMATION_V2, *PUSBD_ENDPOINT_OFFLOAD_INFORMATION_V2;
+
+C_ASSERT(sizeof(USBD_ENDPOINT_OFFLOAD_INFORMATION_V2) > sizeof(USBD_ENDPOINT_OFFLOAD_INFORMATION_V1));
+C_ASSERT(sizeof(USBD_ENDPOINT_OFFLOAD_INFORMATION) > sizeof(USBD_ENDPOINT_OFFLOAD_INFORMATION_V1));
 
 #pragma pack(pop)
 

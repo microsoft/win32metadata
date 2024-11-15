@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -520,7 +520,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_II2cControllerProvider = _uuidof(II2cControllerProvider);
+                    MIDL_CONST_ID IID& IID_II2cControllerProvider = __uuidof(II2cControllerProvider);
                 } /* Provider */
             } /* I2c */
         } /* Devices */
@@ -590,7 +590,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_II2cDeviceProvider = _uuidof(II2cDeviceProvider);
+                    MIDL_CONST_ID IID& IID_II2cDeviceProvider = __uuidof(II2cDeviceProvider);
                 } /* Provider */
             } /* I2c */
         } /* Devices */
@@ -626,7 +626,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_II2cProvider = _uuidof(II2cProvider);
+                    MIDL_CONST_ID IID& IID_II2cProvider = __uuidof(II2cProvider);
                 } /* Provider */
             } /* I2c */
         } /* Devices */
@@ -679,7 +679,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IProviderI2cConnectionSettings = _uuidof(IProviderI2cConnectionSettings);
+                    MIDL_CONST_ID IID& IID_IProviderI2cConnectionSettings = __uuidof(IProviderI2cConnectionSettings);
                 } /* Provider */
             } /* I2c */
         } /* Devices */

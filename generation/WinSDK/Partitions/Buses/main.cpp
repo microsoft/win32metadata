@@ -12,6 +12,7 @@
 #include <usbfnbase.h>
 #include <usbiodef.h>
 #include <usbioctl.h>
+#include <usb4dbgioctl.h>
 #include <usbscan.h>
 
 #include <winusb.h>

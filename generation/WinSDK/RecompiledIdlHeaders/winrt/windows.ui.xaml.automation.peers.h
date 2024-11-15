@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -8461,7 +8461,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarAutomationPeer = _uuidof(IAppBarAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IAppBarAutomationPeer = __uuidof(IAppBarAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8504,7 +8504,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarAutomationPeerFactory = _uuidof(IAppBarAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IAppBarAutomationPeerFactory = __uuidof(IAppBarAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8541,7 +8541,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarButtonAutomationPeer = _uuidof(IAppBarButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IAppBarButtonAutomationPeer = __uuidof(IAppBarButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8584,7 +8584,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarButtonAutomationPeerFactory = _uuidof(IAppBarButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IAppBarButtonAutomationPeerFactory = __uuidof(IAppBarButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8621,7 +8621,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarToggleButtonAutomationPeer = _uuidof(IAppBarToggleButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IAppBarToggleButtonAutomationPeer = __uuidof(IAppBarToggleButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8664,7 +8664,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarToggleButtonAutomationPeerFactory = _uuidof(IAppBarToggleButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IAppBarToggleButtonAutomationPeerFactory = __uuidof(IAppBarToggleButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8701,7 +8701,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutoSuggestBoxAutomationPeer = _uuidof(IAutoSuggestBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IAutoSuggestBoxAutomationPeer = __uuidof(IAutoSuggestBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8742,7 +8742,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutoSuggestBoxAutomationPeerFactory = _uuidof(IAutoSuggestBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IAutoSuggestBoxAutomationPeerFactory = __uuidof(IAutoSuggestBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8884,7 +8884,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer = _uuidof(IAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer = __uuidof(IAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8921,7 +8921,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer2 = _uuidof(IAutomationPeer2);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer2 = __uuidof(IAutomationPeer2);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -8996,7 +8996,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer3 = _uuidof(IAutomationPeer3);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer3 = __uuidof(IAutomationPeer3);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9039,7 +9039,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer4 = _uuidof(IAutomationPeer4);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer4 = __uuidof(IAutomationPeer4);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9085,7 +9085,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer5 = _uuidof(IAutomationPeer5);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer5 = __uuidof(IAutomationPeer5);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9125,7 +9125,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer6 = _uuidof(IAutomationPeer6);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer6 = __uuidof(IAutomationPeer6);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9168,7 +9168,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer7 = _uuidof(IAutomationPeer7);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer7 = __uuidof(IAutomationPeer7);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9208,7 +9208,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer8 = _uuidof(IAutomationPeer8);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer8 = __uuidof(IAutomationPeer8);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9248,7 +9248,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeer9 = _uuidof(IAutomationPeer9);
+                        MIDL_CONST_ID IID& IID_IAutomationPeer9 = __uuidof(IAutomationPeer9);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9297,7 +9297,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerAnnotation = _uuidof(IAutomationPeerAnnotation);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerAnnotation = __uuidof(IAutomationPeerAnnotation);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9343,7 +9343,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerAnnotationFactory = _uuidof(IAutomationPeerAnnotationFactory);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerAnnotationFactory = __uuidof(IAutomationPeerAnnotationFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9386,7 +9386,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerAnnotationStatics = _uuidof(IAutomationPeerAnnotationStatics);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerAnnotationStatics = __uuidof(IAutomationPeerAnnotationStatics);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9428,7 +9428,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerFactory = _uuidof(IAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerFactory = __uuidof(IAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9546,7 +9546,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides = _uuidof(IAutomationPeerOverrides);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides = __uuidof(IAutomationPeerOverrides);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9587,7 +9587,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides2 = _uuidof(IAutomationPeerOverrides2);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides2 = __uuidof(IAutomationPeerOverrides2);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9647,7 +9647,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides3 = _uuidof(IAutomationPeerOverrides3);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides3 = __uuidof(IAutomationPeerOverrides3);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9690,7 +9690,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides4 = _uuidof(IAutomationPeerOverrides4);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides4 = __uuidof(IAutomationPeerOverrides4);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9745,7 +9745,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides5 = _uuidof(IAutomationPeerOverrides5);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides5 = __uuidof(IAutomationPeerOverrides5);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9785,7 +9785,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides6 = _uuidof(IAutomationPeerOverrides6);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides6 = __uuidof(IAutomationPeerOverrides6);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9825,7 +9825,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides8 = _uuidof(IAutomationPeerOverrides8);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides8 = __uuidof(IAutomationPeerOverrides8);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9865,7 +9865,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerOverrides9 = _uuidof(IAutomationPeerOverrides9);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerOverrides9 = __uuidof(IAutomationPeerOverrides9);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9910,7 +9910,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerProtected = _uuidof(IAutomationPeerProtected);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerProtected = __uuidof(IAutomationPeerProtected);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9951,7 +9951,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerStatics = _uuidof(IAutomationPeerStatics);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerStatics = __uuidof(IAutomationPeerStatics);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -9991,7 +9991,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAutomationPeerStatics3 = _uuidof(IAutomationPeerStatics3);
+                        MIDL_CONST_ID IID& IID_IAutomationPeerStatics3 = __uuidof(IAutomationPeerStatics3);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10028,7 +10028,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonAutomationPeer = _uuidof(IButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IButtonAutomationPeer = __uuidof(IButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10071,7 +10071,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonAutomationPeerFactory = _uuidof(IButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IButtonAutomationPeerFactory = __uuidof(IButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10108,7 +10108,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonBaseAutomationPeer = _uuidof(IButtonBaseAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IButtonBaseAutomationPeer = __uuidof(IButtonBaseAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10151,7 +10151,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonBaseAutomationPeerFactory = _uuidof(IButtonBaseAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IButtonBaseAutomationPeerFactory = __uuidof(IButtonBaseAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10188,7 +10188,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICalendarDatePickerAutomationPeer = _uuidof(ICalendarDatePickerAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ICalendarDatePickerAutomationPeer = __uuidof(ICalendarDatePickerAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10231,7 +10231,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICalendarDatePickerAutomationPeerFactory = _uuidof(ICalendarDatePickerAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ICalendarDatePickerAutomationPeerFactory = __uuidof(ICalendarDatePickerAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10268,7 +10268,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICaptureElementAutomationPeer = _uuidof(ICaptureElementAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ICaptureElementAutomationPeer = __uuidof(ICaptureElementAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10311,7 +10311,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICaptureElementAutomationPeerFactory = _uuidof(ICaptureElementAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ICaptureElementAutomationPeerFactory = __uuidof(ICaptureElementAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10348,7 +10348,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICheckBoxAutomationPeer = _uuidof(ICheckBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ICheckBoxAutomationPeer = __uuidof(ICheckBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10391,7 +10391,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICheckBoxAutomationPeerFactory = _uuidof(ICheckBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ICheckBoxAutomationPeerFactory = __uuidof(ICheckBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10428,7 +10428,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorPickerSliderAutomationPeer = _uuidof(IColorPickerSliderAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IColorPickerSliderAutomationPeer = __uuidof(IColorPickerSliderAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10471,7 +10471,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorPickerSliderAutomationPeerFactory = _uuidof(IColorPickerSliderAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IColorPickerSliderAutomationPeerFactory = __uuidof(IColorPickerSliderAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10508,7 +10508,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorSpectrumAutomationPeer = _uuidof(IColorSpectrumAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IColorSpectrumAutomationPeer = __uuidof(IColorSpectrumAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10551,7 +10551,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorSpectrumAutomationPeerFactory = _uuidof(IColorSpectrumAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IColorSpectrumAutomationPeerFactory = __uuidof(IColorSpectrumAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10588,7 +10588,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxAutomationPeer = _uuidof(IComboBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IComboBoxAutomationPeer = __uuidof(IComboBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10631,7 +10631,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxAutomationPeerFactory = _uuidof(IComboBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IComboBoxAutomationPeerFactory = __uuidof(IComboBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10668,7 +10668,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxItemAutomationPeer = _uuidof(IComboBoxItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IComboBoxItemAutomationPeer = __uuidof(IComboBoxItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10711,7 +10711,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxItemAutomationPeerFactory = _uuidof(IComboBoxItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IComboBoxItemAutomationPeerFactory = __uuidof(IComboBoxItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10748,7 +10748,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxItemDataAutomationPeer = _uuidof(IComboBoxItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IComboBoxItemDataAutomationPeer = __uuidof(IComboBoxItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10792,7 +10792,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxItemDataAutomationPeerFactory = _uuidof(IComboBoxItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IComboBoxItemDataAutomationPeerFactory = __uuidof(IComboBoxItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10829,7 +10829,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDatePickerAutomationPeer = _uuidof(IDatePickerAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IDatePickerAutomationPeer = __uuidof(IDatePickerAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10872,7 +10872,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDatePickerAutomationPeerFactory = _uuidof(IDatePickerAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IDatePickerAutomationPeerFactory = __uuidof(IDatePickerAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10909,7 +10909,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDatePickerFlyoutPresenterAutomationPeer = _uuidof(IDatePickerFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IDatePickerFlyoutPresenterAutomationPeer = __uuidof(IDatePickerFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10946,7 +10946,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewAutomationPeer = _uuidof(IFlipViewAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IFlipViewAutomationPeer = __uuidof(IFlipViewAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -10989,7 +10989,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewAutomationPeerFactory = _uuidof(IFlipViewAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IFlipViewAutomationPeerFactory = __uuidof(IFlipViewAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11026,7 +11026,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewItemAutomationPeer = _uuidof(IFlipViewItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IFlipViewItemAutomationPeer = __uuidof(IFlipViewItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11069,7 +11069,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewItemAutomationPeerFactory = _uuidof(IFlipViewItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IFlipViewItemAutomationPeerFactory = __uuidof(IFlipViewItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11106,7 +11106,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewItemDataAutomationPeer = _uuidof(IFlipViewItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IFlipViewItemDataAutomationPeer = __uuidof(IFlipViewItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11150,7 +11150,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlipViewItemDataAutomationPeerFactory = _uuidof(IFlipViewItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IFlipViewItemDataAutomationPeerFactory = __uuidof(IFlipViewItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11187,7 +11187,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutPresenterAutomationPeer = _uuidof(IFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IFlyoutPresenterAutomationPeer = __uuidof(IFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11230,7 +11230,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutPresenterAutomationPeerFactory = _uuidof(IFlyoutPresenterAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IFlyoutPresenterAutomationPeerFactory = __uuidof(IFlyoutPresenterAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11270,7 +11270,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeer = _uuidof(IFrameworkElementAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeer = __uuidof(IFrameworkElementAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11313,7 +11313,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeerFactory = _uuidof(IFrameworkElementAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeerFactory = __uuidof(IFrameworkElementAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11358,7 +11358,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeerStatics = _uuidof(IFrameworkElementAutomationPeerStatics);
+                        MIDL_CONST_ID IID& IID_IFrameworkElementAutomationPeerStatics = __uuidof(IFrameworkElementAutomationPeerStatics);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11395,7 +11395,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewAutomationPeer = _uuidof(IGridViewAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IGridViewAutomationPeer = __uuidof(IGridViewAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11438,7 +11438,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewAutomationPeerFactory = _uuidof(IGridViewAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IGridViewAutomationPeerFactory = __uuidof(IGridViewAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11475,7 +11475,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewHeaderItemAutomationPeer = _uuidof(IGridViewHeaderItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IGridViewHeaderItemAutomationPeer = __uuidof(IGridViewHeaderItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11518,7 +11518,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewHeaderItemAutomationPeerFactory = _uuidof(IGridViewHeaderItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IGridViewHeaderItemAutomationPeerFactory = __uuidof(IGridViewHeaderItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11555,7 +11555,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemAutomationPeer = _uuidof(IGridViewItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IGridViewItemAutomationPeer = __uuidof(IGridViewItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11598,7 +11598,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemAutomationPeerFactory = _uuidof(IGridViewItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IGridViewItemAutomationPeerFactory = __uuidof(IGridViewItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11635,7 +11635,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemDataAutomationPeer = _uuidof(IGridViewItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IGridViewItemDataAutomationPeer = __uuidof(IGridViewItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11679,7 +11679,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemDataAutomationPeerFactory = _uuidof(IGridViewItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IGridViewItemDataAutomationPeerFactory = __uuidof(IGridViewItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11716,7 +11716,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGroupItemAutomationPeer = _uuidof(IGroupItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IGroupItemAutomationPeer = __uuidof(IGroupItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11759,7 +11759,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGroupItemAutomationPeerFactory = _uuidof(IGroupItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IGroupItemAutomationPeerFactory = __uuidof(IGroupItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11796,7 +11796,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHubAutomationPeer = _uuidof(IHubAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IHubAutomationPeer = __uuidof(IHubAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11839,7 +11839,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHubAutomationPeerFactory = _uuidof(IHubAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IHubAutomationPeerFactory = __uuidof(IHubAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11876,7 +11876,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHubSectionAutomationPeer = _uuidof(IHubSectionAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IHubSectionAutomationPeer = __uuidof(IHubSectionAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11919,7 +11919,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHubSectionAutomationPeerFactory = _uuidof(IHubSectionAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IHubSectionAutomationPeerFactory = __uuidof(IHubSectionAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11956,7 +11956,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHyperlinkButtonAutomationPeer = _uuidof(IHyperlinkButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IHyperlinkButtonAutomationPeer = __uuidof(IHyperlinkButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -11999,7 +11999,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IHyperlinkButtonAutomationPeerFactory = _uuidof(IHyperlinkButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IHyperlinkButtonAutomationPeerFactory = __uuidof(IHyperlinkButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12036,7 +12036,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IImageAutomationPeer = _uuidof(IImageAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IImageAutomationPeer = __uuidof(IImageAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12079,7 +12079,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IImageAutomationPeerFactory = _uuidof(IImageAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IImageAutomationPeerFactory = __uuidof(IImageAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12116,7 +12116,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInkToolbarAutomationPeer = _uuidof(IInkToolbarAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IInkToolbarAutomationPeer = __uuidof(IInkToolbarAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12159,7 +12159,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemAutomationPeer = _uuidof(IItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IItemAutomationPeer = __uuidof(IItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12203,7 +12203,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemAutomationPeerFactory = _uuidof(IItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IItemAutomationPeerFactory = __uuidof(IItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12240,7 +12240,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsControlAutomationPeer = _uuidof(IItemsControlAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IItemsControlAutomationPeer = __uuidof(IItemsControlAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12281,7 +12281,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsControlAutomationPeer2 = _uuidof(IItemsControlAutomationPeer2);
+                        MIDL_CONST_ID IID& IID_IItemsControlAutomationPeer2 = __uuidof(IItemsControlAutomationPeer2);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12324,7 +12324,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsControlAutomationPeerFactory = _uuidof(IItemsControlAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IItemsControlAutomationPeerFactory = __uuidof(IItemsControlAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12365,7 +12365,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsControlAutomationPeerOverrides2 = _uuidof(IItemsControlAutomationPeerOverrides2);
+                        MIDL_CONST_ID IID& IID_IItemsControlAutomationPeerOverrides2 = __uuidof(IItemsControlAutomationPeerOverrides2);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12402,7 +12402,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxAutomationPeer = _uuidof(IListBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListBoxAutomationPeer = __uuidof(IListBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12445,7 +12445,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxAutomationPeerFactory = _uuidof(IListBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListBoxAutomationPeerFactory = __uuidof(IListBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12482,7 +12482,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxItemAutomationPeer = _uuidof(IListBoxItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListBoxItemAutomationPeer = __uuidof(IListBoxItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12525,7 +12525,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxItemAutomationPeerFactory = _uuidof(IListBoxItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListBoxItemAutomationPeerFactory = __uuidof(IListBoxItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12562,7 +12562,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxItemDataAutomationPeer = _uuidof(IListBoxItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListBoxItemDataAutomationPeer = __uuidof(IListBoxItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12606,7 +12606,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListBoxItemDataAutomationPeerFactory = _uuidof(IListBoxItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListBoxItemDataAutomationPeerFactory = __uuidof(IListBoxItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12643,7 +12643,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListPickerFlyoutPresenterAutomationPeer = _uuidof(IListPickerFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListPickerFlyoutPresenterAutomationPeer = __uuidof(IListPickerFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12680,7 +12680,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewAutomationPeer = _uuidof(IListViewAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewAutomationPeer = __uuidof(IListViewAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12723,7 +12723,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewAutomationPeerFactory = _uuidof(IListViewAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewAutomationPeerFactory = __uuidof(IListViewAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12760,7 +12760,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewBaseAutomationPeer = _uuidof(IListViewBaseAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewBaseAutomationPeer = __uuidof(IListViewBaseAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12803,7 +12803,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewBaseAutomationPeerFactory = _uuidof(IListViewBaseAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewBaseAutomationPeerFactory = __uuidof(IListViewBaseAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12840,7 +12840,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewBaseHeaderItemAutomationPeer = _uuidof(IListViewBaseHeaderItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewBaseHeaderItemAutomationPeer = __uuidof(IListViewBaseHeaderItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12883,7 +12883,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewBaseHeaderItemAutomationPeerFactory = _uuidof(IListViewBaseHeaderItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewBaseHeaderItemAutomationPeerFactory = __uuidof(IListViewBaseHeaderItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12920,7 +12920,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewHeaderItemAutomationPeer = _uuidof(IListViewHeaderItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewHeaderItemAutomationPeer = __uuidof(IListViewHeaderItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -12963,7 +12963,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewHeaderItemAutomationPeerFactory = _uuidof(IListViewHeaderItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewHeaderItemAutomationPeerFactory = __uuidof(IListViewHeaderItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13000,7 +13000,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemAutomationPeer = _uuidof(IListViewItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewItemAutomationPeer = __uuidof(IListViewItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13043,7 +13043,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemAutomationPeerFactory = _uuidof(IListViewItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewItemAutomationPeerFactory = __uuidof(IListViewItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13080,7 +13080,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemDataAutomationPeer = _uuidof(IListViewItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IListViewItemDataAutomationPeer = __uuidof(IListViewItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13124,7 +13124,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemDataAutomationPeerFactory = _uuidof(IListViewItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IListViewItemDataAutomationPeerFactory = __uuidof(IListViewItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13161,7 +13161,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorAutomationPeer = _uuidof(ILoopingSelectorAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorAutomationPeer = __uuidof(ILoopingSelectorAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13198,7 +13198,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorItemAutomationPeer = _uuidof(ILoopingSelectorItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorItemAutomationPeer = __uuidof(ILoopingSelectorItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13235,7 +13235,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorItemDataAutomationPeer = _uuidof(ILoopingSelectorItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorItemDataAutomationPeer = __uuidof(ILoopingSelectorItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13272,7 +13272,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMapControlAutomationPeer = _uuidof(IMapControlAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMapControlAutomationPeer = __uuidof(IMapControlAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13309,7 +13309,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaElementAutomationPeer = _uuidof(IMediaElementAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMediaElementAutomationPeer = __uuidof(IMediaElementAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13352,7 +13352,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaElementAutomationPeerFactory = _uuidof(IMediaElementAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMediaElementAutomationPeerFactory = __uuidof(IMediaElementAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13389,7 +13389,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaPlayerElementAutomationPeer = _uuidof(IMediaPlayerElementAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMediaPlayerElementAutomationPeer = __uuidof(IMediaPlayerElementAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13432,7 +13432,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaPlayerElementAutomationPeerFactory = _uuidof(IMediaPlayerElementAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMediaPlayerElementAutomationPeerFactory = __uuidof(IMediaPlayerElementAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13469,7 +13469,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaTransportControlsAutomationPeer = _uuidof(IMediaTransportControlsAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMediaTransportControlsAutomationPeer = __uuidof(IMediaTransportControlsAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13512,7 +13512,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMediaTransportControlsAutomationPeerFactory = _uuidof(IMediaTransportControlsAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMediaTransportControlsAutomationPeerFactory = __uuidof(IMediaTransportControlsAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13549,7 +13549,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuBarAutomationPeer = _uuidof(IMenuBarAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMenuBarAutomationPeer = __uuidof(IMenuBarAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13592,7 +13592,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuBarAutomationPeerFactory = _uuidof(IMenuBarAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMenuBarAutomationPeerFactory = __uuidof(IMenuBarAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13629,7 +13629,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuBarItemAutomationPeer = _uuidof(IMenuBarItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMenuBarItemAutomationPeer = __uuidof(IMenuBarItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13672,7 +13672,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuBarItemAutomationPeerFactory = _uuidof(IMenuBarItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMenuBarItemAutomationPeerFactory = __uuidof(IMenuBarItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13709,7 +13709,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutItemAutomationPeer = _uuidof(IMenuFlyoutItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutItemAutomationPeer = __uuidof(IMenuFlyoutItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13752,7 +13752,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutItemAutomationPeerFactory = _uuidof(IMenuFlyoutItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutItemAutomationPeerFactory = __uuidof(IMenuFlyoutItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13789,7 +13789,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterAutomationPeer = _uuidof(IMenuFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterAutomationPeer = __uuidof(IMenuFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13832,7 +13832,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterAutomationPeerFactory = _uuidof(IMenuFlyoutPresenterAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterAutomationPeerFactory = __uuidof(IMenuFlyoutPresenterAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13869,7 +13869,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_INavigationViewItemAutomationPeer = _uuidof(INavigationViewItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_INavigationViewItemAutomationPeer = __uuidof(INavigationViewItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13912,7 +13912,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_INavigationViewItemAutomationPeerFactory = _uuidof(INavigationViewItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_INavigationViewItemAutomationPeerFactory = __uuidof(INavigationViewItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13949,7 +13949,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPasswordBoxAutomationPeer = _uuidof(IPasswordBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPasswordBoxAutomationPeer = __uuidof(IPasswordBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -13992,7 +13992,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPasswordBoxAutomationPeerFactory = _uuidof(IPasswordBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IPasswordBoxAutomationPeerFactory = __uuidof(IPasswordBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14029,7 +14029,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPersonPictureAutomationPeer = _uuidof(IPersonPictureAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPersonPictureAutomationPeer = __uuidof(IPersonPictureAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14072,7 +14072,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPersonPictureAutomationPeerFactory = _uuidof(IPersonPictureAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IPersonPictureAutomationPeerFactory = __uuidof(IPersonPictureAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14109,7 +14109,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPickerFlyoutPresenterAutomationPeer = _uuidof(IPickerFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPickerFlyoutPresenterAutomationPeer = __uuidof(IPickerFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14146,7 +14146,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotAutomationPeer = _uuidof(IPivotAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPivotAutomationPeer = __uuidof(IPivotAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14187,7 +14187,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotAutomationPeerFactory = _uuidof(IPivotAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IPivotAutomationPeerFactory = __uuidof(IPivotAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14224,7 +14224,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotItemAutomationPeer = _uuidof(IPivotItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPivotItemAutomationPeer = __uuidof(IPivotItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14265,7 +14265,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotItemAutomationPeerFactory = _uuidof(IPivotItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IPivotItemAutomationPeerFactory = __uuidof(IPivotItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14302,7 +14302,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotItemDataAutomationPeer = _uuidof(IPivotItemDataAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IPivotItemDataAutomationPeer = __uuidof(IPivotItemDataAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14344,7 +14344,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotItemDataAutomationPeerFactory = _uuidof(IPivotItemDataAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IPivotItemDataAutomationPeerFactory = __uuidof(IPivotItemDataAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14381,7 +14381,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressBarAutomationPeer = _uuidof(IProgressBarAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IProgressBarAutomationPeer = __uuidof(IProgressBarAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14424,7 +14424,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressBarAutomationPeerFactory = _uuidof(IProgressBarAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IProgressBarAutomationPeerFactory = __uuidof(IProgressBarAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14461,7 +14461,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressRingAutomationPeer = _uuidof(IProgressRingAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IProgressRingAutomationPeer = __uuidof(IProgressRingAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14504,7 +14504,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressRingAutomationPeerFactory = _uuidof(IProgressRingAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IProgressRingAutomationPeerFactory = __uuidof(IProgressRingAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14541,7 +14541,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRadioButtonAutomationPeer = _uuidof(IRadioButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRadioButtonAutomationPeer = __uuidof(IRadioButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14584,7 +14584,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRadioButtonAutomationPeerFactory = _uuidof(IRadioButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRadioButtonAutomationPeerFactory = __uuidof(IRadioButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14621,7 +14621,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseAutomationPeer = _uuidof(IRangeBaseAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRangeBaseAutomationPeer = __uuidof(IRangeBaseAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14664,7 +14664,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseAutomationPeerFactory = _uuidof(IRangeBaseAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRangeBaseAutomationPeerFactory = __uuidof(IRangeBaseAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14701,7 +14701,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRatingControlAutomationPeer = _uuidof(IRatingControlAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRatingControlAutomationPeer = __uuidof(IRatingControlAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14744,7 +14744,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRatingControlAutomationPeerFactory = _uuidof(IRatingControlAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRatingControlAutomationPeerFactory = __uuidof(IRatingControlAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14781,7 +14781,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRepeatButtonAutomationPeer = _uuidof(IRepeatButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRepeatButtonAutomationPeer = __uuidof(IRepeatButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14824,7 +14824,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRepeatButtonAutomationPeerFactory = _uuidof(IRepeatButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRepeatButtonAutomationPeerFactory = __uuidof(IRepeatButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14861,7 +14861,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichEditBoxAutomationPeer = _uuidof(IRichEditBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRichEditBoxAutomationPeer = __uuidof(IRichEditBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14904,7 +14904,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichEditBoxAutomationPeerFactory = _uuidof(IRichEditBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRichEditBoxAutomationPeerFactory = __uuidof(IRichEditBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14941,7 +14941,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichTextBlockAutomationPeer = _uuidof(IRichTextBlockAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRichTextBlockAutomationPeer = __uuidof(IRichTextBlockAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -14984,7 +14984,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichTextBlockAutomationPeerFactory = _uuidof(IRichTextBlockAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRichTextBlockAutomationPeerFactory = __uuidof(IRichTextBlockAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15021,7 +15021,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichTextBlockOverflowAutomationPeer = _uuidof(IRichTextBlockOverflowAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IRichTextBlockOverflowAutomationPeer = __uuidof(IRichTextBlockOverflowAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15064,7 +15064,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRichTextBlockOverflowAutomationPeerFactory = _uuidof(IRichTextBlockOverflowAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IRichTextBlockOverflowAutomationPeerFactory = __uuidof(IRichTextBlockOverflowAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15101,7 +15101,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollBarAutomationPeer = _uuidof(IScrollBarAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IScrollBarAutomationPeer = __uuidof(IScrollBarAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15144,7 +15144,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollBarAutomationPeerFactory = _uuidof(IScrollBarAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IScrollBarAutomationPeerFactory = __uuidof(IScrollBarAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15181,7 +15181,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollViewerAutomationPeer = _uuidof(IScrollViewerAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IScrollViewerAutomationPeer = __uuidof(IScrollViewerAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15224,7 +15224,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollViewerAutomationPeerFactory = _uuidof(IScrollViewerAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IScrollViewerAutomationPeerFactory = __uuidof(IScrollViewerAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15261,7 +15261,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISearchBoxAutomationPeer = _uuidof(ISearchBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISearchBoxAutomationPeer = __uuidof(ISearchBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15304,7 +15304,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISearchBoxAutomationPeerFactory = _uuidof(ISearchBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISearchBoxAutomationPeerFactory = __uuidof(ISearchBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15341,7 +15341,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorAutomationPeer = _uuidof(ISelectorAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISelectorAutomationPeer = __uuidof(ISelectorAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15384,7 +15384,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorAutomationPeerFactory = _uuidof(ISelectorAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISelectorAutomationPeerFactory = __uuidof(ISelectorAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15421,7 +15421,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorItemAutomationPeer = _uuidof(ISelectorItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISelectorItemAutomationPeer = __uuidof(ISelectorItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15465,7 +15465,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorItemAutomationPeerFactory = _uuidof(ISelectorItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISelectorItemAutomationPeerFactory = __uuidof(ISelectorItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15502,7 +15502,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISemanticZoomAutomationPeer = _uuidof(ISemanticZoomAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISemanticZoomAutomationPeer = __uuidof(ISemanticZoomAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15545,7 +15545,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISemanticZoomAutomationPeerFactory = _uuidof(ISemanticZoomAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISemanticZoomAutomationPeerFactory = __uuidof(ISemanticZoomAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15582,7 +15582,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISettingsFlyoutAutomationPeer = _uuidof(ISettingsFlyoutAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISettingsFlyoutAutomationPeer = __uuidof(ISettingsFlyoutAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15625,7 +15625,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISettingsFlyoutAutomationPeerFactory = _uuidof(ISettingsFlyoutAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISettingsFlyoutAutomationPeerFactory = __uuidof(ISettingsFlyoutAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15662,7 +15662,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISliderAutomationPeer = _uuidof(ISliderAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ISliderAutomationPeer = __uuidof(ISliderAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15705,7 +15705,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISliderAutomationPeerFactory = _uuidof(ISliderAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ISliderAutomationPeerFactory = __uuidof(ISliderAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15742,7 +15742,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITextBlockAutomationPeer = _uuidof(ITextBlockAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITextBlockAutomationPeer = __uuidof(ITextBlockAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15785,7 +15785,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITextBlockAutomationPeerFactory = _uuidof(ITextBlockAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ITextBlockAutomationPeerFactory = __uuidof(ITextBlockAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15822,7 +15822,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITextBoxAutomationPeer = _uuidof(ITextBoxAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITextBoxAutomationPeer = __uuidof(ITextBoxAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15865,7 +15865,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITextBoxAutomationPeerFactory = _uuidof(ITextBoxAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ITextBoxAutomationPeerFactory = __uuidof(ITextBoxAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15902,7 +15902,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IThumbAutomationPeer = _uuidof(IThumbAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IThumbAutomationPeer = __uuidof(IThumbAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15945,7 +15945,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IThumbAutomationPeerFactory = _uuidof(IThumbAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IThumbAutomationPeerFactory = __uuidof(IThumbAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -15982,7 +15982,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITimePickerAutomationPeer = _uuidof(ITimePickerAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITimePickerAutomationPeer = __uuidof(ITimePickerAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16025,7 +16025,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITimePickerAutomationPeerFactory = _uuidof(ITimePickerAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ITimePickerAutomationPeerFactory = __uuidof(ITimePickerAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16062,7 +16062,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITimePickerFlyoutPresenterAutomationPeer = _uuidof(ITimePickerFlyoutPresenterAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITimePickerFlyoutPresenterAutomationPeer = __uuidof(ITimePickerFlyoutPresenterAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16099,7 +16099,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButtonAutomationPeer = _uuidof(IToggleButtonAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IToggleButtonAutomationPeer = __uuidof(IToggleButtonAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16142,7 +16142,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButtonAutomationPeerFactory = _uuidof(IToggleButtonAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IToggleButtonAutomationPeerFactory = __uuidof(IToggleButtonAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16179,7 +16179,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleMenuFlyoutItemAutomationPeer = _uuidof(IToggleMenuFlyoutItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IToggleMenuFlyoutItemAutomationPeer = __uuidof(IToggleMenuFlyoutItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16222,7 +16222,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleMenuFlyoutItemAutomationPeerFactory = _uuidof(IToggleMenuFlyoutItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IToggleMenuFlyoutItemAutomationPeerFactory = __uuidof(IToggleMenuFlyoutItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16259,7 +16259,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleSwitchAutomationPeer = _uuidof(IToggleSwitchAutomationPeer);
+                        MIDL_CONST_ID IID& IID_IToggleSwitchAutomationPeer = __uuidof(IToggleSwitchAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16302,7 +16302,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleSwitchAutomationPeerFactory = _uuidof(IToggleSwitchAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_IToggleSwitchAutomationPeerFactory = __uuidof(IToggleSwitchAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16339,7 +16339,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITreeViewItemAutomationPeer = _uuidof(ITreeViewItemAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITreeViewItemAutomationPeer = __uuidof(ITreeViewItemAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16382,7 +16382,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITreeViewItemAutomationPeerFactory = _uuidof(ITreeViewItemAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ITreeViewItemAutomationPeerFactory = __uuidof(ITreeViewItemAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16419,7 +16419,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITreeViewListAutomationPeer = _uuidof(ITreeViewListAutomationPeer);
+                        MIDL_CONST_ID IID& IID_ITreeViewListAutomationPeer = __uuidof(ITreeViewListAutomationPeer);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16462,7 +16462,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITreeViewListAutomationPeerFactory = _uuidof(ITreeViewListAutomationPeerFactory);
+                        MIDL_CONST_ID IID& IID_ITreeViewListAutomationPeerFactory = __uuidof(ITreeViewListAutomationPeerFactory);
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -16573,8 +16573,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.Peers.IAutomationPeer ** Default Interface **
@@ -35279,8 +35279,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.Peers.IAutomationPeerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.Peers.IAutomationPeer ** Default Interface **

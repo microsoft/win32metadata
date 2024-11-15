@@ -195,6 +195,7 @@ typedef LPDRAGINFOA LPDRAGINFO;
 #define ABN_FULLSCREENAPP  0x0000002
 #define ABN_WINDOWARRANGE  0x0000003 // lParam == TRUE means hide
 
+
 // flags for get state
 #define ABS_AUTOHIDE    0x0000001
 #define ABS_ALWAYSONTOP 0x0000002

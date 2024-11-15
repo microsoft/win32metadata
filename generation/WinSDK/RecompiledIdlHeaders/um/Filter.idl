@@ -87,7 +87,9 @@ interface IFilter : IUnknown
     {
         CHUNK_TEXT               = 0x1,
         CHUNK_VALUE              = 0x2,
-        CHUNK_FILTER_OWNED_VALUE = 0x4
+        CHUNK_FILTER_OWNED_VALUE = 0x4,
+        CHUNK_IMAGE              = 0x8
+
     } CHUNKSTATE;
     cpp_quote("#define _tagCHUNKSTATE_DEFINED")
     cpp_quote("#define _CHUNKSTATE_DEFINED")
@@ -153,6 +155,28 @@ interface IFilter : IUnknown
 
 }
 
+[
+    object,
+    uuid(3d7df9a7-8da6-4fbf-a45b-7592f06d93a9),
+    pointer_default(unique)
+]
+interface IPixelFilter : IFilter
+{
+    typedef enum IMAGE_PIXELFORMAT
+    {
+        FILTER_PIXELFORMAT_BGRA8 = 0,
+        FILTER_PIXELFORMAT_PBGRA8 = 1,
+        FILTER_PIXELFORMAT_BGR8 = 2
+    } IMAGE_PIXELFORMAT;
+    typedef struct IMAGE_INFO
+    {
+        UINT Width;
+        UINT Height;
+        IMAGE_PIXELFORMAT Format;
+    } IMAGE_INFO;
+    HRESULT GetImageInfo([out] IMAGE_INFO* imageInfo);
+    HRESULT GetPixelsForImage([out] ULONG* pixelBufferLength, [out, size_is(, *pixelBufferLength)] BYTE** pixelBuffer);
+}
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

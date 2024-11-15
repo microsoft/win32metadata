@@ -7,6 +7,7 @@
            xmlns:f="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
            xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:cloudfiles2="http://schemas.microsoft.com/appx/manifest/cloudfiles/windows10/2"
@@ -15,6 +16,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/cloudfiles/windows10/2"/>
@@ -26,6 +28,7 @@
         <xs:element name="AutoPlayHandler" type="CT_AutoPlayHandler"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Desktop3" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>

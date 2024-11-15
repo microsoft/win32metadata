@@ -1402,7 +1402,7 @@ Notes:
 // available, the string represents a cluster device name.
 // 
 //
-#define EVENT_NBT_CREATE_DEVICE          0xC00010D7L
+#define EVENT_NBT_CREATE_DEVICE          0x400010D7L
 
 //
 // MessageId: EVENT_NBT_NO_DEVICES
@@ -2746,6 +2746,42 @@ Notes:
 // The browser has failed to start because of an error in the DirectHostBinding parameter to the browser.
 //
 #define EVENT_BROWSER_NOT_STARTED_IPX_CONFIG_MISMATCH 0xC0001F64L
+
+//
+// MessageId: EVENT_BROWSER_REMOTE_MAILSLOTS_ENABLED
+//
+// MessageText:
+//
+// An administrator has enabled remote mailslots, which are off by default. Microsoft does not recommend enabling remote mailslots. To disable remote mailslots, run the PowerShell command: Set-SmbServerConfiguration -EnableMailslots $FALSE.
+//
+#define EVENT_BROWSER_REMOTE_MAILSLOTS_ENABLED 0x80001F65L
+
+//
+// MessageId: EVENT_BROWSER_REMOTE_MAILSLOTS_DISABLED
+//
+// MessageText:
+//
+// An administrator has disabled remote mailslots.
+//
+#define EVENT_BROWSER_REMOTE_MAILSLOTS_DISABLED 0x40001F66L
+
+//
+// MessageId: EVENT_BROWSER_REMOTE_MAILSLOTS_ENABLED_BY_POLICY
+//
+// MessageText:
+//
+// An administrator has enabled remote mailslots by policy. Microsoft does not recommend enabling remote mailslots.
+//
+#define EVENT_BROWSER_REMOTE_MAILSLOTS_ENABLED_BY_POLICY 0x80001F67L
+
+//
+// MessageId: EVENT_BROWSER_REMOTE_MAILSLOTS_DISABLED_BY_POLICY
+//
+// MessageText:
+//
+// An administrator has disabled remote mailslots by policy.
+//
+#define EVENT_BROWSER_REMOTE_MAILSLOTS_DISABLED_BY_POLICY 0x40001F68L
 
 
 /////////////////////////////////////////////////////////////////////////

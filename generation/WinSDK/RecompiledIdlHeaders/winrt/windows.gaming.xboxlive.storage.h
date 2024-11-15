@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GAMING_XBOXLIVE_STORAGEAPICONTRACT_VERSION)
@@ -1313,7 +1313,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveBlobGetResult = _uuidof(IGameSaveBlobGetResult);
+                    MIDL_CONST_ID IID& IID_IGameSaveBlobGetResult = __uuidof(IGameSaveBlobGetResult);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1354,7 +1354,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveBlobInfo = _uuidof(IGameSaveBlobInfo);
+                    MIDL_CONST_ID IID& IID_IGameSaveBlobInfo = __uuidof(IGameSaveBlobInfo);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1395,7 +1395,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveBlobInfoGetResult = _uuidof(IGameSaveBlobInfoGetResult);
+                    MIDL_CONST_ID IID& IID_IGameSaveBlobInfoGetResult = __uuidof(IGameSaveBlobInfoGetResult);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1441,7 +1441,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveBlobInfoQuery = _uuidof(IGameSaveBlobInfoQuery);
+                    MIDL_CONST_ID IID& IID_IGameSaveBlobInfoQuery = __uuidof(IGameSaveBlobInfoQuery);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1506,7 +1506,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveContainer = _uuidof(IGameSaveContainer);
+                    MIDL_CONST_ID IID& IID_IGameSaveContainer = __uuidof(IGameSaveContainer);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1556,7 +1556,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveContainerInfo = _uuidof(IGameSaveContainerInfo);
+                    MIDL_CONST_ID IID& IID_IGameSaveContainerInfo = __uuidof(IGameSaveContainerInfo);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1597,7 +1597,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveContainerInfoGetResult = _uuidof(IGameSaveContainerInfoGetResult);
+                    MIDL_CONST_ID IID& IID_IGameSaveContainerInfoGetResult = __uuidof(IGameSaveContainerInfoGetResult);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1643,7 +1643,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveContainerInfoQuery = _uuidof(IGameSaveContainerInfoQuery);
+                    MIDL_CONST_ID IID& IID_IGameSaveContainerInfoQuery = __uuidof(IGameSaveContainerInfoQuery);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1681,7 +1681,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveOperationResult = _uuidof(IGameSaveOperationResult);
+                    MIDL_CONST_ID IID& IID_IGameSaveOperationResult = __uuidof(IGameSaveOperationResult);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1740,7 +1740,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveProvider = _uuidof(IGameSaveProvider);
+                    MIDL_CONST_ID IID& IID_IGameSaveProvider = __uuidof(IGameSaveProvider);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1781,7 +1781,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveProviderGetResult = _uuidof(IGameSaveProviderGetResult);
+                    MIDL_CONST_ID IID& IID_IGameSaveProviderGetResult = __uuidof(IGameSaveProviderGetResult);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */
@@ -1826,7 +1826,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameSaveProviderStatics = _uuidof(IGameSaveProviderStatics);
+                    MIDL_CONST_ID IID& IID_IGameSaveProviderStatics = __uuidof(IGameSaveProviderStatics);
                 } /* Storage */
             } /* XboxLive */
         } /* Gaming */

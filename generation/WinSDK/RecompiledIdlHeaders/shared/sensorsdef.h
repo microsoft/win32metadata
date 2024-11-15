@@ -200,6 +200,8 @@ DEFINE_PROPERTYKEY(DEVPKEY_Sensor_HumanPresenceDetectionType,
     0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 81); //[VT_UI4]
 DEFINE_PROPERTYKEY(PKEY_Sensor_Proximity_SensorCapabilities,
     0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 82); //[VT_UI4]
+DEFINE_PROPERTYKEY(DEVPKEY_Sensor_HumanPresence_MaxDetectablePersonsCount,
+    0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 83); //[VT_UI4]
 
 //////////////////////////////////////////////////////////////
 // Data-Fields
@@ -291,6 +293,16 @@ DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_DetectionDistance_Threshold,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 92); //[VT_R4]
 DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_AttentionDetection,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 93); //[VT_BOOL]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadAzimuth,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 94); //[VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadAltitude,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 95); //[VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadRoll,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 96); //[VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadPitch,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 97); //[VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadYaw,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 98); //[VT_R4]
 
 // Environmental Sensor Data-Fields (100-109)
 DEFINE_PROPERTYKEY(PKEY_SensorData_AtmosphericPressure_Bars,
@@ -402,6 +414,26 @@ DEFINE_PROPERTYKEY(PKEY_SensorData_VerticalSpeed_MetersPerSecond,
 DEFINE_PROPERTYKEY(PKEY_SensorData_ElevationChangeFloorCount,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 206); //[VT_UI4]
 
+// Human Presence Sensor Multi-Person Detection Data-Fields (210-230)
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_DetectedPersonsCount,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 210); //[VT_UI4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_DistanceMillimetersVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 211); //[VT_VECTOR|VT_UI4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_AttentionVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 212); //[VT_VECTOR|VT_BOOL]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadAzimuthVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 213); //[VT_VECTOR|VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadAltitudeVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 214); //[VT_VECTOR|VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadRollVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 215); //[VT_VECTOR|VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadPitchVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 216); //[VT_VECTOR|VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_HeadYawVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 217); //[VT_VECTOR|VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_PersonIdVector,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 218); //[VT_VECTOR|VT_UI4]
+
 // Hinge Angle Sensor Data Fields
 DEFINE_PROPERTYKEY(PKEY_SensorData_HingeAngle,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 300); //[VT_R4]
@@ -489,9 +521,16 @@ typedef enum HUMAN_PRESENCE_DETECTION_TYPE
 // and Proximity_Sensor_Supported_Capabilities must advertise this accordingly.
 typedef enum PROXIMITY_SENSOR_CAPABILITIES
 {
-    Proximity_Sensor_Human_Presence_Capable     = 0x01,
-    Proximity_Sensor_Human_Engagement_Capable   = 0x02,
-    Proximity_Sensor_Supported_Capabilities     = 0x03
+    Proximity_Sensor_Human_Presence_Capable         = 0x0001,
+    Proximity_Sensor_Human_Engagement_Capable       = 0x0002,
+    Proximity_Sensor_Human_Head_Azimuth_Capable     = 0x0004,
+    Proximity_Sensor_Human_Head_Altitude_Capable    = 0x0008,
+    Proximity_Sensor_Human_Head_Roll_Capable        = 0x0010,
+    Proximity_Sensor_Human_Head_Pitch_Capable       = 0x0020,
+    Proximity_Sensor_Human_Head_Yaw_Capable         = 0x0040,
+    Proximity_Sensor_Human_Identification_Capable   = 0x0080,
+    Proximity_Sensor_Multi_Person_Detection_Capable = 0x0100,
+    Proximity_Sensor_Supported_Capabilities         = 0x01FF
 } PROXIMITY_SENSOR_CAPABILITIES;
 
 typedef enum SIMPLE_DEVICE_ORIENTATION

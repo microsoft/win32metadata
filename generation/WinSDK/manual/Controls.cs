@@ -56,9 +56,4 @@ namespace Windows.Win32.UI.Controls
 
         public const uint HOTKEYF_EXT = 0x08;
     }
-
-    public enum POPUPSUBMENUHCHOTSTATES
-    {
-        MSMHC_HOT = 1,
-    }
 }

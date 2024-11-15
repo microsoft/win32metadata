@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -6147,7 +6147,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScanner = _uuidof(IBarcodeScanner);
+                MIDL_CONST_ID IID& IID_IBarcodeScanner = __uuidof(IBarcodeScanner);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6183,7 +6183,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScanner2 = _uuidof(IBarcodeScanner2);
+                MIDL_CONST_ID IID& IID_IBarcodeScanner2 = __uuidof(IBarcodeScanner2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6228,7 +6228,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities = _uuidof(IBarcodeScannerCapabilities);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities = __uuidof(IBarcodeScannerCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6264,7 +6264,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities1 = _uuidof(IBarcodeScannerCapabilities1);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities1 = __uuidof(IBarcodeScannerCapabilities1);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6300,7 +6300,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities2 = _uuidof(IBarcodeScannerCapabilities2);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerCapabilities2 = __uuidof(IBarcodeScannerCapabilities2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6336,7 +6336,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerDataReceivedEventArgs = _uuidof(IBarcodeScannerDataReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerDataReceivedEventArgs = __uuidof(IBarcodeScannerDataReceivedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6378,7 +6378,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerErrorOccurredEventArgs = _uuidof(IBarcodeScannerErrorOccurredEventArgs);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerErrorOccurredEventArgs = __uuidof(IBarcodeScannerErrorOccurredEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6414,7 +6414,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerImagePreviewReceivedEventArgs = _uuidof(IBarcodeScannerImagePreviewReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerImagePreviewReceivedEventArgs = __uuidof(IBarcodeScannerImagePreviewReceivedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6456,7 +6456,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerReport = _uuidof(IBarcodeScannerReport);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerReport = __uuidof(IBarcodeScannerReport);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6495,7 +6495,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerReportFactory = _uuidof(IBarcodeScannerReportFactory);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerReportFactory = __uuidof(IBarcodeScannerReportFactory);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6538,7 +6538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerStatics = _uuidof(IBarcodeScannerStatics);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerStatics = __uuidof(IBarcodeScannerStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6575,7 +6575,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerStatics2 = _uuidof(IBarcodeScannerStatics2);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerStatics2 = __uuidof(IBarcodeScannerStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6614,7 +6614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeScannerStatusUpdatedEventArgs = _uuidof(IBarcodeScannerStatusUpdatedEventArgs);
+                MIDL_CONST_ID IID& IID_IBarcodeScannerStatusUpdatedEventArgs = __uuidof(IBarcodeScannerStatusUpdatedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6930,7 +6930,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeSymbologiesStatics = _uuidof(IBarcodeSymbologiesStatics);
+                MIDL_CONST_ID IID& IID_IBarcodeSymbologiesStatics = __uuidof(IBarcodeSymbologiesStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -6966,7 +6966,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeSymbologiesStatics2 = _uuidof(IBarcodeSymbologiesStatics2);
+                MIDL_CONST_ID IID& IID_IBarcodeSymbologiesStatics2 = __uuidof(IBarcodeSymbologiesStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7038,7 +7038,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBarcodeSymbologyAttributes = _uuidof(IBarcodeSymbologyAttributes);
+                MIDL_CONST_ID IID& IID_IBarcodeSymbologyAttributes = __uuidof(IBarcodeSymbologyAttributes);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7104,7 +7104,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawer = _uuidof(ICashDrawer);
+                MIDL_CONST_ID IID& IID_ICashDrawer = __uuidof(ICashDrawer);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7155,7 +7155,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerCapabilities = _uuidof(ICashDrawerCapabilities);
+                MIDL_CONST_ID IID& IID_ICashDrawerCapabilities = __uuidof(ICashDrawerCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7222,7 +7222,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerCloseAlarm = _uuidof(ICashDrawerCloseAlarm);
+                MIDL_CONST_ID IID& IID_ICashDrawerCloseAlarm = __uuidof(ICashDrawerCloseAlarm);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7269,7 +7269,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerEventSource = _uuidof(ICashDrawerEventSource);
+                MIDL_CONST_ID IID& IID_ICashDrawerEventSource = __uuidof(ICashDrawerEventSource);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7303,7 +7303,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerEventSourceEventArgs = _uuidof(ICashDrawerEventSourceEventArgs);
+                MIDL_CONST_ID IID& IID_ICashDrawerEventSourceEventArgs = __uuidof(ICashDrawerEventSourceEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7346,7 +7346,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerStatics = _uuidof(ICashDrawerStatics);
+                MIDL_CONST_ID IID& IID_ICashDrawerStatics = __uuidof(ICashDrawerStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7383,7 +7383,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerStatics2 = _uuidof(ICashDrawerStatics2);
+                MIDL_CONST_ID IID& IID_ICashDrawerStatics2 = __uuidof(ICashDrawerStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7422,7 +7422,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerStatus = _uuidof(ICashDrawerStatus);
+                MIDL_CONST_ID IID& IID_ICashDrawerStatus = __uuidof(ICashDrawerStatus);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7458,7 +7458,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICashDrawerStatusUpdatedEventArgs = _uuidof(ICashDrawerStatusUpdatedEventArgs);
+                MIDL_CONST_ID IID& IID_ICashDrawerStatusUpdatedEventArgs = __uuidof(ICashDrawerStatusUpdatedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7574,7 +7574,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner = _uuidof(IClaimedBarcodeScanner);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner = __uuidof(IClaimedBarcodeScanner);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7613,7 +7613,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner1 = _uuidof(IClaimedBarcodeScanner1);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner1 = __uuidof(IClaimedBarcodeScanner1);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7655,7 +7655,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner2 = _uuidof(IClaimedBarcodeScanner2);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner2 = __uuidof(IClaimedBarcodeScanner2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7698,7 +7698,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner3 = _uuidof(IClaimedBarcodeScanner3);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner3 = __uuidof(IClaimedBarcodeScanner3);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7738,7 +7738,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner4 = _uuidof(IClaimedBarcodeScanner4);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScanner4 = __uuidof(IClaimedBarcodeScanner4);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7771,7 +7771,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedBarcodeScannerClosedEventArgs = _uuidof(IClaimedBarcodeScannerClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IClaimedBarcodeScannerClosedEventArgs = __uuidof(IClaimedBarcodeScannerClosedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7843,7 +7843,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedCashDrawer = _uuidof(IClaimedCashDrawer);
+                MIDL_CONST_ID IID& IID_IClaimedCashDrawer = __uuidof(IClaimedCashDrawer);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7883,7 +7883,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedCashDrawer2 = _uuidof(IClaimedCashDrawer2);
+                MIDL_CONST_ID IID& IID_IClaimedCashDrawer2 = __uuidof(IClaimedCashDrawer2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7916,7 +7916,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedCashDrawerClosedEventArgs = _uuidof(IClaimedCashDrawerClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IClaimedCashDrawerClosedEventArgs = __uuidof(IClaimedCashDrawerClosedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -7952,7 +7952,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedJournalPrinter = _uuidof(IClaimedJournalPrinter);
+                MIDL_CONST_ID IID& IID_IClaimedJournalPrinter = __uuidof(IClaimedJournalPrinter);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8017,7 +8017,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedLineDisplay = _uuidof(IClaimedLineDisplay);
+                MIDL_CONST_ID IID& IID_IClaimedLineDisplay = __uuidof(IClaimedLineDisplay);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8117,7 +8117,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedLineDisplay2 = _uuidof(IClaimedLineDisplay2);
+                MIDL_CONST_ID IID& IID_IClaimedLineDisplay2 = __uuidof(IClaimedLineDisplay2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8157,7 +8157,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedLineDisplay3 = _uuidof(IClaimedLineDisplay3);
+                MIDL_CONST_ID IID& IID_IClaimedLineDisplay3 = __uuidof(IClaimedLineDisplay3);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8190,7 +8190,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedLineDisplayClosedEventArgs = _uuidof(IClaimedLineDisplayClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IClaimedLineDisplayClosedEventArgs = __uuidof(IClaimedLineDisplayClosedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8234,7 +8234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedLineDisplayStatics = _uuidof(IClaimedLineDisplayStatics);
+                MIDL_CONST_ID IID& IID_IClaimedLineDisplayStatics = __uuidof(IClaimedLineDisplayStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8377,7 +8377,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReader = _uuidof(IClaimedMagneticStripeReader);
+                MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReader = __uuidof(IClaimedMagneticStripeReader);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8417,7 +8417,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReader2 = _uuidof(IClaimedMagneticStripeReader2);
+                MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReader2 = __uuidof(IClaimedMagneticStripeReader2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8450,7 +8450,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReaderClosedEventArgs = _uuidof(IClaimedMagneticStripeReaderClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IClaimedMagneticStripeReaderClosedEventArgs = __uuidof(IClaimedMagneticStripeReaderClosedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8543,7 +8543,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedPosPrinter = _uuidof(IClaimedPosPrinter);
+                MIDL_CONST_ID IID& IID_IClaimedPosPrinter = __uuidof(IClaimedPosPrinter);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8583,7 +8583,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedPosPrinter2 = _uuidof(IClaimedPosPrinter2);
+                MIDL_CONST_ID IID& IID_IClaimedPosPrinter2 = __uuidof(IClaimedPosPrinter2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8616,7 +8616,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedPosPrinterClosedEventArgs = _uuidof(IClaimedPosPrinterClosedEventArgs);
+                MIDL_CONST_ID IID& IID_IClaimedPosPrinterClosedEventArgs = __uuidof(IClaimedPosPrinterClosedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8667,7 +8667,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedReceiptPrinter = _uuidof(IClaimedReceiptPrinter);
+                MIDL_CONST_ID IID& IID_IClaimedReceiptPrinter = __uuidof(IClaimedReceiptPrinter);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8737,7 +8737,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClaimedSlipPrinter = _uuidof(IClaimedSlipPrinter);
+                MIDL_CONST_ID IID& IID_IClaimedSlipPrinter = __uuidof(IClaimedSlipPrinter);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8826,7 +8826,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICommonClaimedPosPrinterStation = _uuidof(ICommonClaimedPosPrinterStation);
+                MIDL_CONST_ID IID& IID_ICommonClaimedPosPrinterStation = __uuidof(ICommonClaimedPosPrinterStation);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8896,7 +8896,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICommonPosPrintStationCapabilities = _uuidof(ICommonPosPrintStationCapabilities);
+                MIDL_CONST_ID IID& IID_ICommonPosPrintStationCapabilities = __uuidof(ICommonPosPrintStationCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -8957,7 +8957,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICommonReceiptSlipCapabilities = _uuidof(ICommonReceiptSlipCapabilities);
+                MIDL_CONST_ID IID& IID_ICommonReceiptSlipCapabilities = __uuidof(ICommonReceiptSlipCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9000,7 +9000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IJournalPrintJob = _uuidof(IJournalPrintJob);
+                MIDL_CONST_ID IID& IID_IJournalPrintJob = __uuidof(IJournalPrintJob);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9033,7 +9033,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IJournalPrinterCapabilities = _uuidof(IJournalPrinterCapabilities);
+                MIDL_CONST_ID IID& IID_IJournalPrinterCapabilities = __uuidof(IJournalPrinterCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9084,7 +9084,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IJournalPrinterCapabilities2 = _uuidof(IJournalPrinterCapabilities2);
+                MIDL_CONST_ID IID& IID_IJournalPrinterCapabilities2 = __uuidof(IJournalPrinterCapabilities2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9141,7 +9141,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplay = _uuidof(ILineDisplay);
+                MIDL_CONST_ID IID& IID_ILineDisplay = __uuidof(ILineDisplay);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9177,7 +9177,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplay2 = _uuidof(ILineDisplay2);
+                MIDL_CONST_ID IID& IID_ILineDisplay2 = __uuidof(ILineDisplay2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9252,7 +9252,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayAttributes = _uuidof(ILineDisplayAttributes);
+                MIDL_CONST_ID IID& IID_ILineDisplayAttributes = __uuidof(ILineDisplayAttributes);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9339,7 +9339,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayCapabilities = _uuidof(ILineDisplayCapabilities);
+                MIDL_CONST_ID IID& IID_ILineDisplayCapabilities = __uuidof(ILineDisplayCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9400,7 +9400,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayCursor = _uuidof(ILineDisplayCursor);
+                MIDL_CONST_ID IID& IID_ILineDisplayCursor = __uuidof(ILineDisplayCursor);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9457,7 +9457,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayCursorAttributes = _uuidof(ILineDisplayCursorAttributes);
+                MIDL_CONST_ID IID& IID_ILineDisplayCursorAttributes = __uuidof(ILineDisplayCursorAttributes);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9501,7 +9501,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayCustomGlyphs = _uuidof(ILineDisplayCustomGlyphs);
+                MIDL_CONST_ID IID& IID_ILineDisplayCustomGlyphs = __uuidof(ILineDisplayCustomGlyphs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9559,7 +9559,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayMarquee = _uuidof(ILineDisplayMarquee);
+                MIDL_CONST_ID IID& IID_ILineDisplayMarquee = __uuidof(ILineDisplayMarquee);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9606,7 +9606,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayStatics = _uuidof(ILineDisplayStatics);
+                MIDL_CONST_ID IID& IID_ILineDisplayStatics = __uuidof(ILineDisplayStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9642,7 +9642,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayStatics2 = _uuidof(ILineDisplayStatics2);
+                MIDL_CONST_ID IID& IID_ILineDisplayStatics2 = __uuidof(ILineDisplayStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9684,7 +9684,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayStatisticsCategorySelector = _uuidof(ILineDisplayStatisticsCategorySelector);
+                MIDL_CONST_ID IID& IID_ILineDisplayStatisticsCategorySelector = __uuidof(ILineDisplayStatisticsCategorySelector);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9720,7 +9720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayStatusUpdatedEventArgs = _uuidof(ILineDisplayStatusUpdatedEventArgs);
+                MIDL_CONST_ID IID& IID_ILineDisplayStatusUpdatedEventArgs = __uuidof(ILineDisplayStatusUpdatedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9759,7 +9759,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayStoredBitmap = _uuidof(ILineDisplayStoredBitmap);
+                MIDL_CONST_ID IID& IID_ILineDisplayStoredBitmap = __uuidof(ILineDisplayStoredBitmap);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9827,7 +9827,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayWindow = _uuidof(ILineDisplayWindow);
+                MIDL_CONST_ID IID& IID_ILineDisplayWindow = __uuidof(ILineDisplayWindow);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9901,7 +9901,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILineDisplayWindow2 = _uuidof(ILineDisplayWindow2);
+                MIDL_CONST_ID IID& IID_ILineDisplayWindow2 = __uuidof(ILineDisplayWindow2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -9968,7 +9968,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReader = _uuidof(IMagneticStripeReader);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReader = __uuidof(IMagneticStripeReader);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10058,7 +10058,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderAamvaCardDataReceivedEventArgs = _uuidof(IMagneticStripeReaderAamvaCardDataReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderAamvaCardDataReceivedEventArgs = __uuidof(IMagneticStripeReaderAamvaCardDataReceivedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10118,7 +10118,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderBankCardDataReceivedEventArgs = _uuidof(IMagneticStripeReaderBankCardDataReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderBankCardDataReceivedEventArgs = __uuidof(IMagneticStripeReaderBankCardDataReceivedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10184,7 +10184,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderCapabilities = _uuidof(IMagneticStripeReaderCapabilities);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderCapabilities = __uuidof(IMagneticStripeReaderCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10229,7 +10229,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderCardTypesStatics = _uuidof(IMagneticStripeReaderCardTypesStatics);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderCardTypesStatics = __uuidof(IMagneticStripeReaderCardTypesStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10271,7 +10271,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderEncryptionAlgorithmsStatics = _uuidof(IMagneticStripeReaderEncryptionAlgorithmsStatics);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderEncryptionAlgorithmsStatics = __uuidof(IMagneticStripeReaderEncryptionAlgorithmsStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10322,7 +10322,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderErrorOccurredEventArgs = _uuidof(IMagneticStripeReaderErrorOccurredEventArgs);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderErrorOccurredEventArgs = __uuidof(IMagneticStripeReaderErrorOccurredEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10382,7 +10382,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderReport = _uuidof(IMagneticStripeReaderReport);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderReport = __uuidof(IMagneticStripeReaderReport);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10425,7 +10425,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatics = _uuidof(IMagneticStripeReaderStatics);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatics = __uuidof(IMagneticStripeReaderStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10462,7 +10462,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatics2 = _uuidof(IMagneticStripeReaderStatics2);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatics2 = __uuidof(IMagneticStripeReaderStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10501,7 +10501,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatusUpdatedEventArgs = _uuidof(IMagneticStripeReaderStatusUpdatedEventArgs);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderStatusUpdatedEventArgs = __uuidof(IMagneticStripeReaderStatusUpdatedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10543,7 +10543,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderTrackData = _uuidof(IMagneticStripeReaderTrackData);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderTrackData = __uuidof(IMagneticStripeReaderTrackData);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10579,7 +10579,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs = _uuidof(IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs = __uuidof(IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10645,7 +10645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinter = _uuidof(IPosPrinter);
+                MIDL_CONST_ID IID& IID_IPosPrinter = __uuidof(IPosPrinter);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10685,7 +10685,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinter2 = _uuidof(IPosPrinter2);
+                MIDL_CONST_ID IID& IID_IPosPrinter2 = __uuidof(IPosPrinter2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10748,7 +10748,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterCapabilities = _uuidof(IPosPrinterCapabilities);
+                MIDL_CONST_ID IID& IID_IPosPrinterCapabilities = __uuidof(IPosPrinterCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10790,7 +10790,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterCharacterSetIdsStatics = _uuidof(IPosPrinterCharacterSetIdsStatics);
+                MIDL_CONST_ID IID& IID_IPosPrinterCharacterSetIdsStatics = __uuidof(IPosPrinterCharacterSetIdsStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10832,7 +10832,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterFontProperty = _uuidof(IPosPrinterFontProperty);
+                MIDL_CONST_ID IID& IID_IPosPrinterFontProperty = __uuidof(IPosPrinterFontProperty);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10873,7 +10873,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterJob = _uuidof(IPosPrinterJob);
+                MIDL_CONST_ID IID& IID_IPosPrinterJob = __uuidof(IPosPrinterJob);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -10984,7 +10984,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterPrintOptions = _uuidof(IPosPrinterPrintOptions);
+                MIDL_CONST_ID IID& IID_IPosPrinterPrintOptions = __uuidof(IPosPrinterPrintOptions);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11017,7 +11017,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterReleaseDeviceRequestedEventArgs = _uuidof(IPosPrinterReleaseDeviceRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IPosPrinterReleaseDeviceRequestedEventArgs = __uuidof(IPosPrinterReleaseDeviceRequestedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11060,7 +11060,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterStatics = _uuidof(IPosPrinterStatics);
+                MIDL_CONST_ID IID& IID_IPosPrinterStatics = __uuidof(IPosPrinterStatics);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11097,7 +11097,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterStatics2 = _uuidof(IPosPrinterStatics2);
+                MIDL_CONST_ID IID& IID_IPosPrinterStatics2 = __uuidof(IPosPrinterStatics2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11136,7 +11136,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterStatus = _uuidof(IPosPrinterStatus);
+                MIDL_CONST_ID IID& IID_IPosPrinterStatus = __uuidof(IPosPrinterStatus);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11172,7 +11172,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPosPrinterStatusUpdatedEventArgs = _uuidof(IPosPrinterStatusUpdatedEventArgs);
+                MIDL_CONST_ID IID& IID_IPosPrinterStatusUpdatedEventArgs = __uuidof(IPosPrinterStatusUpdatedEventArgs);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11282,7 +11282,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IReceiptOrSlipJob = _uuidof(IReceiptOrSlipJob);
+                MIDL_CONST_ID IID& IID_IReceiptOrSlipJob = __uuidof(IReceiptOrSlipJob);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11322,7 +11322,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE CutPaperDefault(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IReceiptPrintJob = _uuidof(IReceiptPrintJob);
+                MIDL_CONST_ID IID& IID_IReceiptPrintJob = __uuidof(IReceiptPrintJob);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11366,7 +11366,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IReceiptPrintJob2 = _uuidof(IReceiptPrintJob2);
+                MIDL_CONST_ID IID& IID_IReceiptPrintJob2 = __uuidof(IReceiptPrintJob2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11408,7 +11408,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IReceiptPrinterCapabilities = _uuidof(IReceiptPrinterCapabilities);
+                MIDL_CONST_ID IID& IID_IReceiptPrinterCapabilities = __uuidof(IReceiptPrinterCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11459,7 +11459,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IReceiptPrinterCapabilities2 = _uuidof(IReceiptPrinterCapabilities2);
+                MIDL_CONST_ID IID& IID_IReceiptPrinterCapabilities2 = __uuidof(IReceiptPrinterCapabilities2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11502,7 +11502,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISlipPrintJob = _uuidof(ISlipPrintJob);
+                MIDL_CONST_ID IID& IID_ISlipPrintJob = __uuidof(ISlipPrintJob);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11541,7 +11541,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISlipPrinterCapabilities = _uuidof(ISlipPrinterCapabilities);
+                MIDL_CONST_ID IID& IID_ISlipPrinterCapabilities = __uuidof(ISlipPrinterCapabilities);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11592,7 +11592,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISlipPrinterCapabilities2 = _uuidof(ISlipPrinterCapabilities2);
+                MIDL_CONST_ID IID& IID_ISlipPrinterCapabilities2 = __uuidof(ISlipPrinterCapabilities2);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11637,7 +11637,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnifiedPosErrorData = _uuidof(IUnifiedPosErrorData);
+                MIDL_CONST_ID IID& IID_IUnifiedPosErrorData = __uuidof(IUnifiedPosErrorData);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11677,7 +11677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnifiedPosErrorDataFactory = _uuidof(IUnifiedPosErrorDataFactory);
+                MIDL_CONST_ID IID& IID_IUnifiedPosErrorDataFactory = __uuidof(IUnifiedPosErrorDataFactory);
             } /* PointOfService */
         } /* Devices */
     } /* Windows */
@@ -11842,8 +11842,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -11883,8 +11883,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ICashDrawer ** Default Interface **
@@ -12352,8 +12352,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ILineDisplay ** Default Interface **
@@ -12791,8 +12791,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.IPosPrinter ** Default Interface **
@@ -30095,8 +30095,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeSymbologiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -30136,8 +30136,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ICashDrawer ** Default Interface **
@@ -30605,8 +30605,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ILineDisplayStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ILineDisplay ** Default Interface **
@@ -31044,8 +31044,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IPosPrinterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.IPosPrinter ** Default Interface **

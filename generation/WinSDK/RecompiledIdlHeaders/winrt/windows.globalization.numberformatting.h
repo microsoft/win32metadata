@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -708,7 +708,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrencyFormatter = _uuidof(ICurrencyFormatter);
+                MIDL_CONST_ID IID& IID_ICurrencyFormatter = __uuidof(ICurrencyFormatter);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -750,7 +750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrencyFormatter2 = _uuidof(ICurrencyFormatter2);
+                MIDL_CONST_ID IID& IID_ICurrencyFormatter2 = __uuidof(ICurrencyFormatter2);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -793,7 +793,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrencyFormatterFactory = _uuidof(ICurrencyFormatterFactory);
+                MIDL_CONST_ID IID& IID_ICurrencyFormatterFactory = __uuidof(ICurrencyFormatterFactory);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -831,7 +831,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDecimalFormatterFactory = _uuidof(IDecimalFormatterFactory);
+                MIDL_CONST_ID IID& IID_IDecimalFormatterFactory = __uuidof(IDecimalFormatterFactory);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -876,7 +876,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIncrementNumberRounder = _uuidof(IIncrementNumberRounder);
+                MIDL_CONST_ID IID& IID_IIncrementNumberRounder = __uuidof(IIncrementNumberRounder);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -919,7 +919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberFormatter = _uuidof(INumberFormatter);
+                MIDL_CONST_ID IID& IID_INumberFormatter = __uuidof(INumberFormatter);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -962,7 +962,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberFormatter2 = _uuidof(INumberFormatter2);
+                MIDL_CONST_ID IID& IID_INumberFormatter2 = __uuidof(INumberFormatter2);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1035,7 +1035,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberFormatterOptions = _uuidof(INumberFormatterOptions);
+                MIDL_CONST_ID IID& IID_INumberFormatterOptions = __uuidof(INumberFormatterOptions);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1078,7 +1078,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberParser = _uuidof(INumberParser);
+                MIDL_CONST_ID IID& IID_INumberParser = __uuidof(INumberParser);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1133,7 +1133,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberRounder = _uuidof(INumberRounder);
+                MIDL_CONST_ID IID& IID_INumberRounder = __uuidof(INumberRounder);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1170,7 +1170,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumberRounderOption = _uuidof(INumberRounderOption);
+                MIDL_CONST_ID IID& IID_INumberRounderOption = __uuidof(INumberRounderOption);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1219,7 +1219,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumeralSystemTranslator = _uuidof(INumeralSystemTranslator);
+                MIDL_CONST_ID IID& IID_INumeralSystemTranslator = __uuidof(INumeralSystemTranslator);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1256,7 +1256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INumeralSystemTranslatorFactory = _uuidof(INumeralSystemTranslatorFactory);
+                MIDL_CONST_ID IID& IID_INumeralSystemTranslatorFactory = __uuidof(INumeralSystemTranslatorFactory);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1294,7 +1294,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPercentFormatterFactory = _uuidof(IPercentFormatterFactory);
+                MIDL_CONST_ID IID& IID_IPercentFormatterFactory = __uuidof(IPercentFormatterFactory);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1332,7 +1332,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPermilleFormatterFactory = _uuidof(IPermilleFormatterFactory);
+                MIDL_CONST_ID IID& IID_IPermilleFormatterFactory = __uuidof(IPermilleFormatterFactory);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1369,7 +1369,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISignedZeroOption = _uuidof(ISignedZeroOption);
+                MIDL_CONST_ID IID& IID_ISignedZeroOption = __uuidof(ISignedZeroOption);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1414,7 +1414,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISignificantDigitsNumberRounder = _uuidof(ISignificantDigitsNumberRounder);
+                MIDL_CONST_ID IID& IID_ISignificantDigitsNumberRounder = __uuidof(ISignificantDigitsNumberRounder);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1451,7 +1451,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISignificantDigitsOption = _uuidof(ISignificantDigitsOption);
+                MIDL_CONST_ID IID& IID_ISignificantDigitsOption = __uuidof(ISignificantDigitsOption);
             } /* NumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -1500,8 +1500,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.IDecimalFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.IDecimalFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumberFormatterOptions
@@ -1556,8 +1556,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumeralSystemTranslator ** Default Interface **
@@ -1612,8 +1612,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.IPermilleFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.IPermilleFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumberFormatterOptions
@@ -3743,8 +3743,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.IDecimalFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.IDecimalFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumberFormatterOptions
@@ -3799,8 +3799,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumeralSystemTranslator ** Default Interface **
@@ -3855,8 +3855,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Globalization.NumberFormatting.IPermilleFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Globalization.NumberFormatting.IPermilleFormatterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Globalization.NumberFormatting.INumberFormatterOptions

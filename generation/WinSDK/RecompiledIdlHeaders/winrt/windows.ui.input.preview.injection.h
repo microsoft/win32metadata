@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GAMING_INPUT_GAMINGINPUTPREVIEWCONTRACT_VERSION)
-#define WINDOWS_GAMING_INPUT_GAMINGINPUTPREVIEWCONTRACT_VERSION 0x10000
+#define WINDOWS_GAMING_INPUT_GAMINGINPUTPREVIEWCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_GAMING_INPUT_GAMINGINPUTPREVIEWCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1180,7 +1180,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputGamepadInfo = _uuidof(IInjectedInputGamepadInfo);
+                        MIDL_CONST_ID IID& IID_IInjectedInputGamepadInfo = __uuidof(IInjectedInputGamepadInfo);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1221,7 +1221,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputGamepadInfoFactory = _uuidof(IInjectedInputGamepadInfoFactory);
+                        MIDL_CONST_ID IID& IID_IInjectedInputGamepadInfoFactory = __uuidof(IInjectedInputGamepadInfoFactory);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1276,7 +1276,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputKeyboardInfo = _uuidof(IInjectedInputKeyboardInfo);
+                        MIDL_CONST_ID IID& IID_IInjectedInputKeyboardInfo = __uuidof(IInjectedInputKeyboardInfo);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1343,7 +1343,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputMouseInfo = _uuidof(IInjectedInputMouseInfo);
+                        MIDL_CONST_ID IID& IID_IInjectedInputMouseInfo = __uuidof(IInjectedInputMouseInfo);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1422,7 +1422,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputPenInfo = _uuidof(IInjectedInputPenInfo);
+                        MIDL_CONST_ID IID& IID_IInjectedInputPenInfo = __uuidof(IInjectedInputPenInfo);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1489,7 +1489,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInjectedInputTouchInfo = _uuidof(IInjectedInputTouchInfo);
+                        MIDL_CONST_ID IID& IID_IInjectedInputTouchInfo = __uuidof(IInjectedInputTouchInfo);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1549,7 +1549,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInputInjector = _uuidof(IInputInjector);
+                        MIDL_CONST_ID IID& IID_IInputInjector = __uuidof(IInputInjector);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1594,7 +1594,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE UninitializeGamepadInjection(void) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInputInjector2 = _uuidof(IInputInjector2);
+                        MIDL_CONST_ID IID& IID_IInputInjector2 = __uuidof(IInputInjector2);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1634,7 +1634,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInputInjectorStatics = _uuidof(IInputInjectorStatics);
+                        MIDL_CONST_ID IID& IID_IInputInjectorStatics = __uuidof(IInputInjectorStatics);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1677,7 +1677,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IInputInjectorStatics2 = _uuidof(IInputInjectorStatics2);
+                        MIDL_CONST_ID IID& IID_IInputInjectorStatics2 = __uuidof(IInputInjectorStatics2);
                     } /* Injection */
                 } /* Preview */
             } /* Input */
@@ -1797,8 +1797,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Preview.Injection.IInputInjector ** Default Interface **
@@ -3665,8 +3665,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.Preview.Injection.IInputInjectorStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Preview.Injection.IInputInjector ** Default Interface **

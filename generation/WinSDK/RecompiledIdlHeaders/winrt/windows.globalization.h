@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -860,7 +860,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationLanguagesStatics = _uuidof(IApplicationLanguagesStatics);
+            MIDL_CONST_ID IID& IID_IApplicationLanguagesStatics = __uuidof(IApplicationLanguagesStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -895,7 +895,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationLanguagesStatics2 = _uuidof(IApplicationLanguagesStatics2);
+            MIDL_CONST_ID IID& IID_IApplicationLanguagesStatics2 = __uuidof(IApplicationLanguagesStatics2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1230,7 +1230,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendar = _uuidof(ICalendar);
+            MIDL_CONST_ID IID& IID_ICalendar = __uuidof(ICalendar);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1271,7 +1271,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendarFactory = _uuidof(ICalendarFactory);
+            MIDL_CONST_ID IID& IID_ICalendarFactory = __uuidof(ICalendarFactory);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1309,7 +1309,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendarFactory2 = _uuidof(ICalendarFactory2);
+            MIDL_CONST_ID IID& IID_ICalendarFactory2 = __uuidof(ICalendarFactory2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1367,7 +1367,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics = _uuidof(ICalendarIdentifiersStatics);
+            MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics = __uuidof(ICalendarIdentifiersStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1401,7 +1401,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics2 = _uuidof(ICalendarIdentifiersStatics2);
+            MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics2 = __uuidof(ICalendarIdentifiersStatics2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1447,7 +1447,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics3 = _uuidof(ICalendarIdentifiersStatics3);
+            MIDL_CONST_ID IID& IID_ICalendarIdentifiersStatics3 = __uuidof(ICalendarIdentifiersStatics3);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1484,7 +1484,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IClockIdentifiersStatics = _uuidof(IClockIdentifiersStatics);
+            MIDL_CONST_ID IID& IID_IClockIdentifiersStatics = __uuidof(IClockIdentifiersStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1521,7 +1521,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICurrencyAmount = _uuidof(ICurrencyAmount);
+            MIDL_CONST_ID IID& IID_ICurrencyAmount = __uuidof(ICurrencyAmount);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -1557,7 +1557,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICurrencyAmountFactory = _uuidof(ICurrencyAmountFactory);
+            MIDL_CONST_ID IID& IID_ICurrencyAmountFactory = __uuidof(ICurrencyAmountFactory);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2059,7 +2059,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics = _uuidof(ICurrencyIdentifiersStatics);
+            MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics = __uuidof(ICurrencyIdentifiersStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2093,7 +2093,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics2 = _uuidof(ICurrencyIdentifiersStatics2);
+            MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics2 = __uuidof(ICurrencyIdentifiersStatics2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2136,7 +2136,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics3 = _uuidof(ICurrencyIdentifiersStatics3);
+            MIDL_CONST_ID IID& IID_ICurrencyIdentifiersStatics3 = __uuidof(ICurrencyIdentifiersStatics3);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2188,7 +2188,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IGeographicRegion = _uuidof(IGeographicRegion);
+            MIDL_CONST_ID IID& IID_IGeographicRegion = __uuidof(IGeographicRegion);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2223,7 +2223,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IGeographicRegionFactory = _uuidof(IGeographicRegionFactory);
+            MIDL_CONST_ID IID& IID_IGeographicRegionFactory = __uuidof(IGeographicRegionFactory);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2258,7 +2258,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IGeographicRegionStatics = _uuidof(IGeographicRegionStatics);
+            MIDL_CONST_ID IID& IID_IGeographicRegionStatics = __uuidof(IGeographicRegionStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2298,7 +2298,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IJapanesePhoneme = _uuidof(IJapanesePhoneme);
+            MIDL_CONST_ID IID& IID_IJapanesePhoneme = __uuidof(IJapanesePhoneme);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2338,7 +2338,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IJapanesePhoneticAnalyzerStatics = _uuidof(IJapanesePhoneticAnalyzerStatics);
+            MIDL_CONST_ID IID& IID_IJapanesePhoneticAnalyzerStatics = __uuidof(IJapanesePhoneticAnalyzerStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2381,7 +2381,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguage = _uuidof(ILanguage);
+            MIDL_CONST_ID IID& IID_ILanguage = __uuidof(ILanguage);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2415,7 +2415,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguage2 = _uuidof(ILanguage2);
+            MIDL_CONST_ID IID& IID_ILanguage2 = __uuidof(ILanguage2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2449,7 +2449,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguage3 = _uuidof(ILanguage3);
+            MIDL_CONST_ID IID& IID_ILanguage3 = __uuidof(ILanguage3);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2484,7 +2484,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguageExtensionSubtags = _uuidof(ILanguageExtensionSubtags);
+            MIDL_CONST_ID IID& IID_ILanguageExtensionSubtags = __uuidof(ILanguageExtensionSubtags);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2519,7 +2519,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguageFactory = _uuidof(ILanguageFactory);
+            MIDL_CONST_ID IID& IID_ILanguageFactory = __uuidof(ILanguageFactory);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2557,7 +2557,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguageStatics = _uuidof(ILanguageStatics);
+            MIDL_CONST_ID IID& IID_ILanguageStatics = __uuidof(ILanguageStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2592,7 +2592,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguageStatics2 = _uuidof(ILanguageStatics2);
+            MIDL_CONST_ID IID& IID_ILanguageStatics2 = __uuidof(ILanguageStatics2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2627,7 +2627,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILanguageStatics3 = _uuidof(ILanguageStatics3);
+            MIDL_CONST_ID IID& IID_ILanguageStatics3 = __uuidof(ILanguageStatics3);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2766,7 +2766,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_INumeralSystemIdentifiersStatics = _uuidof(INumeralSystemIdentifiersStatics);
+            MIDL_CONST_ID IID& IID_INumeralSystemIdentifiersStatics = __uuidof(INumeralSystemIdentifiersStatics);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2833,7 +2833,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_INumeralSystemIdentifiersStatics2 = _uuidof(INumeralSystemIdentifiersStatics2);
+            MIDL_CONST_ID IID& IID_INumeralSystemIdentifiersStatics2 = __uuidof(INumeralSystemIdentifiersStatics2);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -2877,7 +2877,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ITimeZoneOnCalendar = _uuidof(ITimeZoneOnCalendar);
+            MIDL_CONST_ID IID& IID_ITimeZoneOnCalendar = __uuidof(ITimeZoneOnCalendar);
         } /* Globalization */
     } /* Windows */
 } /* ABI */
@@ -3011,8 +3011,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics3 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7873,8 +7873,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics3 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Globalization.ICurrencyIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

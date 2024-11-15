@@ -4785,6 +4785,15 @@
 //
 #define PRTH_S_TRY_IMPERSONATING         0x00041225L
 
+//
+// MessageId: PRTH_E_TRANSACTION_FAILED
+//
+// MessageText:
+//
+// Transaction failed. Requeue the item for transaction.
+//
+#define PRTH_E_TRANSACTION_FAILED        0x80041226L
+
 //uebug "unexpected error is jargon we should avoid, if possible.
 //
 // MessageId: CMDLINE_E_UNEXPECTED
@@ -8209,6 +8218,15 @@
 // The document format is not recognized by the filter.
 //
 #define FILTER_E_UNKNOWNFORMAT           ((HRESULT)0x8004170CL)
+
+//
+// MessageId: FILTER_E_NO_IMAGE_FRAMES
+//
+// MessageText:
+//
+// No image frames in current chunk.
+//
+#define FILTER_E_NO_IMAGE_FRAMES         ((HRESULT)0x8004170EL)
 
 #endif // _FILTERR_H_
 /*++ BUILD Version: 0001    // Increment this if a change has global effects

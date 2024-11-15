@@ -168,9 +168,11 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum PointerDeviceType
             {
-                Touch = 0,
-                Pen   = 1,
-                Mouse = 2
+                Touch    = 0,
+                Pen      = 1,
+                Mouse    = 2,
+                [contract(Windows.Foundation.UniversalApiContract, 8.0)]
+                Touchpad = 3
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

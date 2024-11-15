@@ -482,6 +482,7 @@ typedef struct FWPM_FILTER_CONDITION0_
 #define FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE   (0x00000800)
 #define FWPM_FILTER_FLAG_RESERVED0   (0x00001000)
 #define FWPM_FILTER_FLAG_RESERVED1   (0x00002000)
+#define FWPM_FILTER_FLAG_RESERVED2   (0x00004000)
 typedef struct FWPM_FILTER0_
     {
     GUID filterKey;
@@ -541,6 +542,17 @@ typedef struct FWPM_LAYER_STATISTICS0_
     UINT32 numCacheEntries;
     } 	FWPM_LAYER_STATISTICS0;
 
+typedef struct FWPM_LAYER_STATISTICS1_
+    {
+    GUID layerId;
+    UINT32 classifyPermitCount;
+    UINT32 classifyBlockCount;
+    UINT32 classifyVetoCount;
+    UINT32 numCacheEntries;
+    UINT32 filterCount;
+    UINT32 totalFilterSize;
+    } 	FWPM_LAYER_STATISTICS1;
+
 typedef struct FWPM_STATISTICS0_
     {
     UINT32 numLayerStatistics;
@@ -580,6 +592,46 @@ typedef struct FWPM_STATISTICS0_
     UINT64 reauthReasonEDPPolicyChanged;
     UINT64 reauthReasonProxyHandleChanged;
     } 	FWPM_STATISTICS0;
+
+typedef struct FWPM_STATISTICS1_
+    {
+    UINT32 numLayerStatistics;
+    /* [ref][size_is] */ FWPM_LAYER_STATISTICS1 *layerStatistics;
+    UINT32 inboundAllowedConnectionsV4;
+    UINT32 inboundBlockedConnectionsV4;
+    UINT32 outboundAllowedConnectionsV4;
+    UINT32 outboundBlockedConnectionsV4;
+    UINT32 inboundAllowedConnectionsV6;
+    UINT32 inboundBlockedConnectionsV6;
+    UINT32 outboundAllowedConnectionsV6;
+    UINT32 outboundBlockedConnectionsV6;
+    UINT32 inboundActiveConnectionsV4;
+    UINT32 outboundActiveConnectionsV4;
+    UINT32 inboundActiveConnectionsV6;
+    UINT32 outboundActiveConnectionsV6;
+    UINT64 reauthDirInbound;
+    UINT64 reauthDirOutbound;
+    UINT64 reauthFamilyV4;
+    UINT64 reauthFamilyV6;
+    UINT64 reauthProtoOther;
+    UINT64 reauthProtoIPv4;
+    UINT64 reauthProtoIPv6;
+    UINT64 reauthProtoICMP;
+    UINT64 reauthProtoICMP6;
+    UINT64 reauthProtoUDP;
+    UINT64 reauthProtoTCP;
+    UINT64 reauthReasonPolicyChange;
+    UINT64 reauthReasonNewArrivalInterface;
+    UINT64 reauthReasonNewNextHopInterface;
+    UINT64 reauthReasonProfileCrossing;
+    UINT64 reauthReasonClassifyCompletion;
+    UINT64 reauthReasonIPSecPropertiesChanged;
+    UINT64 reauthReasonMidStreamInspection;
+    UINT64 reauthReasonSocketPropertyChanged;
+    UINT64 reauthReasonNewInboundMCastBCastPacket;
+    UINT64 reauthReasonEDPPolicyChanged;
+    UINT64 reauthReasonProxyHandleChanged;
+    } 	FWPM_STATISTICS1;
 
 #define FWPM_NET_EVENT_FLAG_IP_PROTOCOL_SET (0x00000001)
 #define FWPM_NET_EVENT_FLAG_LOCAL_ADDR_SET  (0x00000002)

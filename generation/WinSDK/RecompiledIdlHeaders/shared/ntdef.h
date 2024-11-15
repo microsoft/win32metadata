@@ -369,6 +369,29 @@ Abstract:
 
 // begin_winnt begin_ntminiport begin_ntndis begin_ntminitape
 
+// begin_ntoshvp
+
+//
+// When DECLSPEC_NOSANITIZEADDRESS is set, the compiler may not inline
+// functions marked with __forceinline. This may result in warning 4714:
+//
+//     function 'xxx' marked as __forceinline not inlined
+//
+// Provide a way to disable this warning.
+//
+
+#ifndef DECLSPEC_NOSANITIZEADDRESS
+#if defined(__SANITIZE_ADDRESS__)
+#define DECLSPEC_NOSANITIZEADDRESS      __declspec(no_sanitize_address)
+#define ASAN_WARNING_DISABLE_4714_PUSH  __pragma(warning(push)) __pragma(warning(disable:4714))
+#define ASAN_WARNING_DISABLE_4714_POP   __pragma(warning(pop))
+#else
+#define DECLSPEC_NOSANITIZEADDRESS
+#define ASAN_WARNING_DISABLE_4714_PUSH
+#define ASAN_WARNING_DISABLE_4714_POP
+#endif
+#endif
+
 #ifndef DECLSPEC_GUARDNOCF
 #if (_MSC_FULL_VER >= 170065501) || defined(_D1VERSIONLKG171_)
 #define DECLSPEC_GUARDNOCF  __declspec(guard(nocf))
@@ -394,14 +417,16 @@ Abstract:
 #endif
 
 #ifndef DECLSPEC_CHPE_PATCHABLE
-#if defined (_M_HYBRID) || defined(_M_ARM64EC)
+#if !defined(SORTPP_PASS)
+#if defined (_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC)
 #define DECLSPEC_CHPE_PATCHABLE  __declspec(hybrid_patchable)
+#else
+#define DECLSPEC_CHPE_PATCHABLE  DECLSPEC_NOINLINE
+#endif
 #else
 #define DECLSPEC_CHPE_PATCHABLE
 #endif
 #endif
-
-// begin_ntoshvp
 
 #ifndef FORCEINLINE
 #if (_MSC_VER >= 1200)
@@ -485,9 +510,7 @@ typedef void * POINTER_64 PVOID64;
 #endif
 
 // end_wudfwdm
-// end_ntminiport end_ntndis end_ntminitape
-
-// begin_winnt begin_ntndis
+// begin_winnt
 
 #if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED)
 #define NTAPI __stdcall
@@ -497,11 +520,15 @@ typedef void * POINTER_64 PVOID64;
 #define NTAPI
 #endif
 
+// end_ntminiport end_ntminitape
+
 #if !defined(_M_CEE_PURE)
 #define NTAPI_INLINE    NTAPI
 #else
 #define NTAPI_INLINE
 #endif
+
+// begin_ntminiport begin_ntminitape
 
 //
 // Define API decoration for direct importing system DLL references.
@@ -517,12 +544,7 @@ typedef void * POINTER_64 PVOID64;
 #else
 #define NTSYSCALLAPI DECLSPEC_ADDRSAFE
 #endif
-
 #endif
-
-// end_winnt end_ntndis
-
-// begin_winnt begin_ntminiport begin_ntndis begin_ntminitape
 
 //
 // Basics
@@ -781,6 +803,8 @@ typedef struct _PROCESSOR_NUMBER {
     UCHAR Reserved;
 } PROCESSOR_NUMBER, *PPROCESSOR_NUMBER;
 
+// begin_ntoshvp
+
 //
 // Structure to represent a group-specific affinity, such as that of a
 // thread.  Specifies the group number and the affinity within that group.
@@ -791,6 +815,20 @@ typedef struct _GROUP_AFFINITY {
     USHORT Group;
     USHORT Reserved[3];
 } GROUP_AFFINITY, *PGROUP_AFFINITY;
+
+typedef struct _GROUP_AFFINITY32 {
+    ULONG Mask;
+    USHORT Group;
+    USHORT Reserved[3];
+} GROUP_AFFINITY32, *PGROUP_AFFINITY32;
+
+typedef struct _GROUP_AFFINITY64 {
+    unsigned __int64 Mask;
+    USHORT Group;
+    USHORT Reserved[3];
+} GROUP_AFFINITY64, *PGROUP_AFFINITY64;
+
+// end_ntoshvp
 
 #if defined(_WIN64)
 
@@ -899,7 +937,13 @@ typedef _Return_type_success_(return >= 0) long HRESULT;
 
 
 #define STDAPI                  EXTERN_C HRESULT STDAPICALLTYPE
+#define STDAPI_CHPE_PATCHABLE   EXTERN_C DECLSPEC_CHPE_PATCHABLE HRESULT STDAPICALLTYPE
 #define STDAPI_(type)           EXTERN_C type STDAPICALLTYPE
+#define STDAPI_CHPE_PATCHABLE_(type)           EXTERN_C DECLSPEC_CHPE_PATCHABLE type STDAPICALLTYPE
+#define DEPRECATED_STDAPI(message) EXTERN_C __declspec(deprecated(message)) HRESULT STDAPICALLTYPE
+#define DEPRECATED_NO_MESSAGE_STDAPI EXTERN_C __declspec(deprecated) HRESULT STDAPICALLTYPE
+#define DEPRECATED_STDAPI_(type, message) EXTERN_C __declspec(deprecated(message)) type STDAPICALLTYPE
+#define DEPRECATED_NO_MESSAGE_STDAPI_(type) EXTERN_C __declspec(deprecated) type STDAPICALLTYPE
 
 #define STDMETHODIMP            HRESULT STDMETHODCALLTYPE
 #define STDMETHODIMP_(type)     type STDMETHODCALLTYPE
@@ -914,6 +958,11 @@ typedef _Return_type_success_(return >= 0) long HRESULT;
 
 #define STDAPIV                 EXTERN_C HRESULT STDAPIVCALLTYPE
 #define STDAPIV_(type)          EXTERN_C type STDAPIVCALLTYPE
+
+#define DEPRECATED_STDAPIV(message) EXTERN_C __declspec(deprecated(message)) HRESULT STDAPIVCALLTYPE
+#define DEPRECATED_NO_MESSAGE_STDAPIV EXTERN_C __declspec(deprecated) HRESULT STDAPIVCALLTYPE
+#define DEPRECATED_STDAPIV_(type, message) EXTERN_C __declspec(deprecated(message)) type STDAPIVCALLTYPE
+#define DEPRECATED_NO_MESSAGE_STDAPIV_(type) EXTERN_C __declspec(deprecated) type STDAPIVCALLTYPE
 
 #define STDMETHODIMPV           HRESULT STDMETHODVCALLTYPE
 #define STDMETHODIMPV_(type)    type STDMETHODVCALLTYPE
@@ -2157,8 +2206,8 @@ char (*RtlpNumberOf( UNALIGNED T (&)[N] ))[N];
 #ifdef __cplusplus
 extern "C++"
 {
-char _RTL_CONSTANT_STRING_type_check(const char *s);
-char _RTL_CONSTANT_STRING_type_check(const WCHAR *s);
+template <size_t N> char _RTL_CONSTANT_STRING_type_check(const char  (&s)[N]);
+template <size_t N> char _RTL_CONSTANT_STRING_type_check(const WCHAR (&s)[N]);
 // __typeof would be desirable here instead of sizeof.
 template <size_t N> class _RTL_CONSTANT_STRING_remove_const_template_class;
 template <> class _RTL_CONSTANT_STRING_remove_const_template_class<sizeof(char)>  {public: typedef  char T; };
@@ -2491,6 +2540,13 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 #define PRODUCT_AZURE_SERVER_CLOUDMOS               0x000000C8
 #define PRODUCT_CLOUDEDITIONN                       0x000000CA
 #define PRODUCT_CLOUDEDITION                        0x000000CB
+#define PRODUCT_VALIDATION                          0x000000CC
+#define PRODUCT_IOTENTERPRISESK                     0x000000CD
+#define PRODUCT_IOTENTERPRISEK                      0x000000CE
+#define PRODUCT_IOTENTERPRISESEVAL                  0x000000CF
+#define PRODUCT_AZURE_SERVER_AGENTBRIDGE            0x000000D0
+#define PRODUCT_AZURE_SERVER_NANOHOST               0x000000D1
+#define PRODUCT_WNC                                 0x000000D2
 #define PRODUCT_AZURESTACKHCI_SERVER_CORE           0x00000196
 #define PRODUCT_DATACENTER_SERVER_AZURE_EDITION     0x00000197
 #define PRODUCT_DATACENTER_SERVER_CORE_AZURE_EDITION 0x00000198

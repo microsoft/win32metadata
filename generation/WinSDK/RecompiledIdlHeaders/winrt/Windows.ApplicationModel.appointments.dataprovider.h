@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1035,7 +1035,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarCancelMeetingRequest = _uuidof(IAppointmentCalendarCancelMeetingRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarCancelMeetingRequest = __uuidof(IAppointmentCalendarCancelMeetingRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1076,7 +1076,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarCancelMeetingRequestEventArgs = _uuidof(IAppointmentCalendarCancelMeetingRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarCancelMeetingRequestEventArgs = __uuidof(IAppointmentCalendarCancelMeetingRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1130,7 +1130,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarCreateOrUpdateAppointmentRequest = _uuidof(IAppointmentCalendarCreateOrUpdateAppointmentRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarCreateOrUpdateAppointmentRequest = __uuidof(IAppointmentCalendarCreateOrUpdateAppointmentRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1171,7 +1171,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs = _uuidof(IAppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs = __uuidof(IAppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1233,7 +1233,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarForwardMeetingRequest = _uuidof(IAppointmentCalendarForwardMeetingRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarForwardMeetingRequest = __uuidof(IAppointmentCalendarForwardMeetingRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1274,7 +1274,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarForwardMeetingRequestEventArgs = _uuidof(IAppointmentCalendarForwardMeetingRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarForwardMeetingRequestEventArgs = __uuidof(IAppointmentCalendarForwardMeetingRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1336,7 +1336,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarProposeNewTimeForMeetingRequest = _uuidof(IAppointmentCalendarProposeNewTimeForMeetingRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarProposeNewTimeForMeetingRequest = __uuidof(IAppointmentCalendarProposeNewTimeForMeetingRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1377,7 +1377,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarProposeNewTimeForMeetingRequestEventArgs = _uuidof(IAppointmentCalendarProposeNewTimeForMeetingRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarProposeNewTimeForMeetingRequestEventArgs = __uuidof(IAppointmentCalendarProposeNewTimeForMeetingRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1421,7 +1421,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManagerSyncRequest = _uuidof(IAppointmentCalendarSyncManagerSyncRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManagerSyncRequest = __uuidof(IAppointmentCalendarSyncManagerSyncRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1462,7 +1462,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManagerSyncRequestEventArgs = _uuidof(IAppointmentCalendarSyncManagerSyncRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManagerSyncRequestEventArgs = __uuidof(IAppointmentCalendarSyncManagerSyncRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1524,7 +1524,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarUpdateMeetingResponseRequest = _uuidof(IAppointmentCalendarUpdateMeetingResponseRequest);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarUpdateMeetingResponseRequest = __uuidof(IAppointmentCalendarUpdateMeetingResponseRequest);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1565,7 +1565,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentCalendarUpdateMeetingResponseRequestEventArgs = _uuidof(IAppointmentCalendarUpdateMeetingResponseRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IAppointmentCalendarUpdateMeetingResponseRequestEventArgs = __uuidof(IAppointmentCalendarUpdateMeetingResponseRequestEventArgs);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1643,7 +1643,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentDataProviderConnection = _uuidof(IAppointmentDataProviderConnection);
+                    MIDL_CONST_ID IID& IID_IAppointmentDataProviderConnection = __uuidof(IAppointmentDataProviderConnection);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */
@@ -1681,7 +1681,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAppointmentDataProviderTriggerDetails = _uuidof(IAppointmentDataProviderTriggerDetails);
+                    MIDL_CONST_ID IID& IID_IAppointmentDataProviderTriggerDetails = __uuidof(IAppointmentDataProviderTriggerDetails);
                 } /* DataProvider */
             } /* Appointments */
         } /* ApplicationModel */

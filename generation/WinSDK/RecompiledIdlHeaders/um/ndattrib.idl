@@ -1,24 +1,10 @@
-
-
-//+-------------------------------------------------------------------------
+// Copyright (C) Microsoft Corporation. All rights reserved.
 //
-//  Microsoft Windows
-//  Copyright (C) Microsoft Corporation, 1992-2004.
-//
-//  NDAttrib.idl : IDL source for Network Diagnostics Helper Attribute
-//                 and Repair Info structures.
-//
-// This file will be processed by the MIDL tool to
-// produce the .h file for C++ COM client.
-// type library and marshaling code are registered by the .NET serviced component
-//
-//
-//--------------------------------------------------------------------------
+// IDL source for Network Diagnostics Helper Attribute and Repair Info structures.
 
 cpp_quote("//+--------------------------------------------------------------------------")
 cpp_quote("//")
-cpp_quote("//  Microsoft Windows")
-cpp_quote("//  Copyright (C) Microsoft Corporation, 1992-2004.")
+cpp_quote("// Copyright (C) Microsoft Corporation. All rights reserved.")
 cpp_quote("//")
 cpp_quote("//---------------------------------------------------------------------------")
 
@@ -66,7 +52,7 @@ cpp_quote("// MessageText:")
 cpp_quote("//")
 cpp_quote("// Inavlid parameter.")
 cpp_quote("//")
-cpp_quote("#define NDF_E_BAD_PARAM						MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 5)")
+cpp_quote("#define NDF_E_BAD_PARAM                     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 5)")
 
 cpp_quote("//")
 cpp_quote("// MessageId: NDF_E_VALIDATION")
@@ -75,7 +61,7 @@ cpp_quote("// MessageText:")
 cpp_quote("//")
 cpp_quote("// Diagnosis failed to resolve the problems.")
 cpp_quote("//")
-cpp_quote("#define NDF_E_VALIDATION					MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 6)")
+cpp_quote("#define NDF_E_VALIDATION                    MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 6)")
 
 cpp_quote("//")
 cpp_quote("// MessageId: NDF_E_UNKNOWN")
@@ -249,7 +235,7 @@ cpp_quote("#define RF_UI_ONLY             0x1000000")
 cpp_quote("#define RF_SHOW_EVENTS         0x800000")
 cpp_quote("#define RF_VALIDATE_HELPTOPIC  0x400000")
 cpp_quote("#define RF_REPRO               0x200000")
-cpp_quote("#define RF_CONTACT_ADMIN    	  0x20000")
+cpp_quote("#define RF_CONTACT_ADMIN       0x20000")
 cpp_quote("#define RF_RESERVED            0x40000000")
 cpp_quote("#define RF_RESERVED_CA         0x80000000")
 cpp_quote("#define RF_RESERVED_LNI        0x10000")
@@ -270,8 +256,8 @@ typedef struct tagRepairInfo
 
 typedef struct tagRepairInfoEx
 {
-	RepairInfo repair;
-	USHORT repairRank;
+    RepairInfo repair;
+    USHORT repairRank;
 } RepairInfoEx, *PRepairInfoEx;
 
 cpp_quote("#define RCF_ISLEAF         0x1")
@@ -280,12 +266,12 @@ cpp_quote("#define RCF_ISTHIRDPARTY   0x4")
 
 typedef struct tagRootCauseInfo
 {
-	[string] LPWSTR pwszDescription;
-	GUID rootCauseID;
-	DWORD rootCauseFlags; 
-	GUID networkInterfaceID;
-	[size_is(repairCount)] RepairInfoEx *pRepairs;
-	USHORT repairCount;
+    [string] LPWSTR pwszDescription;
+    GUID rootCauseID;
+    DWORD rootCauseFlags; 
+    GUID networkInterfaceID;
+    [size_is(repairCount)] RepairInfoEx *pRepairs;
+    USHORT repairCount;
 } RootCauseInfo, *PRootCauseInfo;
 
 

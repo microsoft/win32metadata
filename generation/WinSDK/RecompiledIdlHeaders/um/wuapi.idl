@@ -106,6 +106,9 @@ cpp_quote("")
 cpp_quote("// {C1C2F21A-D2F4-4902-B5C6-8A081C19A890}")
 cpp_quote("DEFINE_GUID(IID_IUpdate5,0xc1c2f21a,0xd2f4,0x4902,0xb5, 0xc6, 0x8a, 0x08, 0x1c, 0x19, 0xa8, 0x90);")
 cpp_quote("")
+cpp_quote("// {769355A3-C5A0-497C-A606-560A36D2121C}")
+cpp_quote("DEFINE_GUID(IID_IUpdateEx,0x769355a3,0xc5a0,0x497c,0xa6,0x06,0x56,0x0a,0x36,0xd2,0x12,0x1c);")
+cpp_quote("")
 cpp_quote("// {B383CD1A-5CE9-4504-9F63-764B1236F191}")
 cpp_quote("DEFINE_GUID(IID_IWindowsDriverUpdate,0xb383cd1a,0x5ce9,0x4504,0x9f,0x63,0x76,0x4b,0x12,0x36,0xf1,0x91);")
 cpp_quote("")
@@ -195,6 +198,9 @@ cpp_quote("DEFINE_GUID(IID_IDownloadProgressChangedCallback,0x8c3f1cdd,0x6173,0x
 cpp_quote("")
 cpp_quote("// {68F1C6F9-7ECC-4666-A464-247FE12496C3}")
 cpp_quote("DEFINE_GUID(IID_IUpdateDownloader,0x68f1c6f9,0x7ecc,0x4666,0xa4,0x64,0x24,0x7f,0xe1,0x24,0x96,0xc3);")
+cpp_quote("")
+cpp_quote("// {94726306-F12A-482A-A774-FB4F870D98C0}")
+cpp_quote("DEFINE_GUID(IID_IUpdateDownloaderEx,0x94726306,0xf12a,0x482a,0xa7,0x74,0xfb,0x4f,0x87,0x0d,0x98,0xc0);")
 cpp_quote("")
 cpp_quote("// {D940F0F8-3CBB-4FD0-993F-471E7F2328AD}")
 cpp_quote("DEFINE_GUID(IID_IUpdateInstallationResult,0xd940f0f8,0x3cbb,0x4fd0,0x99,0x3f,0x47,0x1e,0x7f,0x23,0x28,0xad);")
@@ -536,6 +542,16 @@ typedef [public] enum tagSearchScope
     [helpstring("Machine updates and per-user updates applicable to any user")] searchScopeMachineAndAllUsers = 4,
     [helpstring("Per-user updates applicable to any user")] searchScopeAllUsers = 5
 }SearchScope;
+
+[
+    helpstring("Defines possible download types for a download call via IUpdateDownloaderEx"),
+    v1_enum
+]
+typedef [public] enum tagDownloadType
+{
+    [helpstring("Full download")]                 downloadTypeFull = 0,
+    [helpstring("Update bootstrapper download")]  downloadTypeUpdateBootstrapper = 1
+} DownloadType;
 
 // Deprecated. Use UpdateLockdownOption.uloForWebsiteAccess instead.
 const LONG UPDATE_LOCKDOWN_WEBSITE_ACCESS = 0x00000001;
@@ -2166,6 +2182,43 @@ interface IUpdate5 : IUpdate4
 
 }
 
+cpp_quote("__declspec(selectany) extern LPCWSTR c_szUpdatePropertyName_ContainsUpdateBootstrapper = L\"ContainsUpdateBootstrapper\";")
+cpp_quote("__declspec(selectany) extern LPCWSTR c_szUpdatePropertyName_DoesUpdateRequireReboot = L\"DoesUpdateRequireReboot\";")
+
+// This interface is registered by the WindowsUpdateClient-Aux manifest.
+[
+    helpstring("IUpdateEx Interface"),
+    object,
+    oleautomation,
+    dual,
+    nonextensible,
+    uuid(769355A3-C5A0-497C-A606-560A36D2121C),
+    pointer_default(unique),
+]
+interface IUpdateEx : IUpdate5
+{
+// properties
+
+    [
+        id(0x60080001),
+        propget,
+        helpstring("Queries for a static attribute value")
+    ]
+    HRESULT ExtendedStaticProperty(
+                [in] BSTR propertyName,
+                [out, retval] VARIANT* retval);
+
+// methods
+
+    [
+        id(0x60080002),
+        helpstring("Evaluates a dynamic property value")
+    ]
+    HRESULT EvaluateExtendedDynamicProperty(
+                [in] BSTR propertyName,
+                [out, retval] VARIANT* retval);
+}
+
 // This interface is registered by the WindowsUpdateClient-Aux manifest.
 [
     helpstring("IWindowsDriverUpdate2 Interface"),
@@ -3669,6 +3722,45 @@ interface IUpdateDownloader : IDispatch
 
 // This interface is registered by the WindowsUpdateClient-Aux manifest.
 [
+    helpstring("IUpdateDownloaderEx Interface"),
+    object,
+    oleautomation,
+    dual,
+    nonextensible,
+    uuid(94726306-f12a-482a-a774-fb4f870d98c0),
+    pointer_default(unique),
+    hidden  // already exposed by a class
+]
+interface IUpdateDownloaderEx : IUpdateDownloader
+{
+// methods
+
+    [
+        id(0x60090001),
+        helpstring(
+            "Begins an asynchronous operation to download the content file(s) "
+            "associated with the updates.")
+    ]
+    HRESULT BeginDownload2(
+                [in] DownloadType downloadType,
+                [in] IUnknown* onProgressChanged,
+                [in] IUnknown* onCompleted,
+                [in] VARIANT state,
+                [out, retval] IDownloadJob** retval);
+
+    [
+        id(0x60090002),
+        helpstring(
+            "Synchronously downloads the content file(s) of the update(s) "
+            "to the local cache on the target computer.")
+    ]
+    HRESULT Download2(
+                [in] DownloadType downloadType,
+                [out, retval] IDownloadResult** retval);
+}
+
+// This interface is registered by the WindowsUpdateClient-Aux manifest.
+[
     helpstring("IUpdateInstallationResult Interface"),
     object,
     oleautomation,
@@ -4844,6 +4936,7 @@ library WUApiLib
     interface IWindowsDriverUpdateEntryCollection;
     interface IUpdate4;
     interface IUpdate5;
+    interface IUpdateEx;
     interface IWindowsDriverUpdate;
     interface IWindowsDriverUpdate2;
     interface IWindowsDriverUpdate3;
@@ -4934,6 +5027,7 @@ library WUApiLib
     ]
     coclass UpdateDownloader
     {
+        interface IUpdateDownloaderEx;
         [default]   interface IUpdateDownloader;
     };
 

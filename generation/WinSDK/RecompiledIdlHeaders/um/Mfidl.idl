@@ -107,10 +107,22 @@ typedef enum MFPMPSESSION_CREATION_FLAGS
 /// </summary>
 typedef unsigned __int64 TOPOID;
 
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN11_ZN) ")
+/// <summary>
+/// Use this service GUID to retrieve the IAcousticEchoCancellationControl interface through the capture MFMediaSource's
+/// IMFGetService::GetService
+/// </summary>
+cpp_quote( "EXTERN_GUID( MF_ACOUSTIC_ECHO_CANCELLATION_CONTROL_SERVICE, 0x7f6c3b29, 0x2d12, 0x4f6f, 0xac, 0x5, 0xc1, 0xa8, 0x9b, 0x8d, 0x52, 0x88);" )
+
+/// <summary>
+/// Use this service GUID to retrieve the IAudioEffectsManager interface through the capture MFMediaSource's
+/// IMFGetService::GetService
+/// </summary>
+cpp_quote( "EXTERN_GUID( MF_AUDIO_EFFECTS_MANAGER_SERVICE, 0x1f541943, 0xd5df, 0x455e, 0xa2, 0xe5, 0x7d, 0x64, 0xd3, 0xbb, 0xbd, 0xb5);" )
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN) ")
+
 
 interface IMFTopology;
-
-
 
 
 
@@ -4388,6 +4400,12 @@ cpp_quote( "EXTERN_GUID(MF_SD_STREAM_NAME, 0x4f1b099d, 0xd314, 0x41e5, 0xa7, 0x8
 // {023EF79C-388D-487f-AC17-696CD6E3C6F5}
 cpp_quote( "EXTERN_GUID(MF_SD_MUTUALLY_EXCLUSIVE, 0x23ef79c, 0x388d, 0x487f, 0xac, 0x17, 0x69, 0x6c, 0xd6, 0xe3, 0xc6, 0xf5);" )
 
+// MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH
+// Data type: UINT32 (treat as BOOL)
+// {8fb6b117-862e-4b31-8dab-5e0a434caef0}
+// Indicates that the media processor can do a codec switch in response to MEStreamFormatChanged
+// even if the content is protected.
+cpp_quote("DEFINE_GUID( MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH, 0x8fb6b117, 0x862e, 0x4b31, 0x8d, 0xab, 0x5e, 0x0a, 0x43, 0x4c, 0xae, 0xf0);")
 
 [
     object,
@@ -14382,6 +14400,119 @@ interface IMFCameraConfigurationManager : IUnknown
 };
 
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN11_ZN) ")
+
+typedef struct
+{
+    DWORD       sizeInBytes;           // Size in bytes to next DetectedFaceBound
+    float       normalizedXPosition;   // Normalized between 0.0 - 1.0
+    float       normalizedYPosition;   // Normalized between 0.0 - 1.0
+    float       normalizedWidth;       // Normalized between 0.0 - 1.0
+    float       normalizedHeight;      // Normalized between 0.0 - 1.0
+    LONG        confidenceValue;       // Normalized between 0 - 100
+    ULONGLONG   flags;
+} DetectedFaceBound;
+
+[
+    object,
+    uuid(0BFD1ADE-0421-4909-ACB7-7A7125416881),
+    helpstring("IMFFaceDetectionTransformCallback"),
+    local
+]
+interface IMFFaceDetectionTransformCallback  : IUnknown
+{
+    void OnFaceDetectionResult(
+        [in, annotation("_In_")] ULONG countOfBounds,
+        [in, annotation("_In_reads_(countOfBounds)")] DetectedFaceBound* detectedFaceBounds
+        );
+};
+
+[
+    object,
+    uuid(DDD59578-D0E7-46E2-BE8C-1CE76AD147C0),
+    helpstring("IMFFaceDetectionTransform"),
+    local
+]
+interface IMFFaceDetectionTransform  : IUnknown
+{
+    HRESULT SetDetectionCallback(
+        [in, annotation("_In_")] IMFFaceDetectionTransformCallback* callback,
+        [out, annotation("_Out_")] void** callbackToken
+        );
+
+    HRESULT ClearDetectionCallback(
+        [in, annotation("_In_")] void* callbackToken
+        );
+};
+
+/// CLSID_FaceDetectionMFT  
+///   
+/// Data type: GUID CLSID for creating Face Detection  
+/// IMFTransform.  Also implements the IMFFaceDetectionTransform  
+/// interface.  
+///   
+/// {C1E565E2-F2DE-4537-9612-2F30A160EB5C} 
+cpp_quote("EXTERN_GUID(CLSID_FaceDetectionMFT,  0xc1e565e2, 0xf2de, 0x4537, 0x96, 0x12, 0x2f, 0x30, 0xa1, 0x60, 0xeb, 0x5c);") 
+
+/// CLSID_FrameServerClassFactory 
+///  
+/// Data type: GUID CLSID for creating the 
+/// IMFActivate from the Frame Server.
+///
+/// NOTE:  This CLSID may only be CoCreated from
+/// Frame Server service process.  Any attempts to
+/// instantiate this CLSID from a non-Frame Server
+/// service process will fail with access denied.
+///
+/// It is recommended that applications use 
+/// MFCreateDeviceSource or MFEnumDeviceSources to
+/// create an IMFMediaSource for the camera.
+///  
+/// {9A93092C-9CDC-49B8-8349-CBCF3145FE0A}
+cpp_quote( "EXTERN_GUID(CLSID_FrameServerClassFactory, 0x9A93092C, 0x9CDC, 0x49B8, 0x83, 0x49, 0xCB, 0xCF, 0x31, 0x45, 0xFE, 0x0A);")
+
+/// MF_CAMERASOURCE_PROVIDE_SELECTED_PROFILE_ON_START 
+///   
+/// Data type: UINT32 - Set to non-zero to have pipeline provide 
+/// the selected camera profile on the first stream start 
+/// on the source. Setting the value to 0 will be treatd as if 
+/// the attribute was not set: the selected profile is sent during 
+/// client initialization.  Multiple clients may initialize the 
+/// same source so the selected profile may be issued independent 
+/// of the start operation. 
+/// 
+/// Setting this attribute enables an optimization 
+/// (reducing the number of profile changes), but the KsEvent 
+/// and KsProperty methods handling  still need to handle the case where 
+/// the optimization is not available. If the new 
+/// PROFILE_ON_START property is honored, then the KsEvent and 
+/// KsProperty methods are called less often, avoiding 
+/// unnecessary profile changes. 
+///  
+/// {A9B46058-82F2-4E5C-BF6E-25B4B09F22ED}
+cpp_quote( "EXTERN_GUID(MF_CAMERASOURCE_PROVIDE_SELECTED_PROFILE_ON_START, 0xA9B46058, 0x82F2, 0x4E5C, 0xBF, 0x6E, 0x25, 0xB4, 0xB0, 0x9F, 0x22, 0xED);")
+
+/// MF_DEVSOURCE_ATTRIBUTE_FRAMESERVER_SHARE_MODE 
+///  
+/// Attribute used during MFCreateDeviceSource or 
+/// IMFActivate::ActivateObject to create an instance of 
+/// IMFMediaSource in shared mode. 
+///  
+/// Shared mode allows multiple shared mode applications to 
+/// stream from the same camera without the ability to change 
+/// the extended camera controls nor change media types. 
+///  
+/// Data type: UINT32 
+///  
+/// 0 or not set - Default non-shared mdoe instance. 
+///  
+/// 1 - Shared mode instance. 
+///  
+/// {44d1a9bc-2999-4238-ae43-0730ceb2ab1b}
+cpp_quote("EXTERN_GUID(MF_DEVSOURCE_ATTRIBUTE_FRAMESERVER_SHARE_MODE, 0x44d1a9bc, 0x2999, 0x4238, 0xae, 0x43, 0x07, 0x30, 0xce, 0xb2, 0xab, 0x1b);")
+
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN) ")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion // Application Family

@@ -49,7 +49,7 @@ DEFINE_GUID( GUID_DEVICE_APPLICATIONLAUNCH_BUTTON, 0x629758eel, 0x986e, 0x4d9e, 
 DEFINE_GUID( GUID_DEVICE_SYS_BUTTON,        0x4AFA3D53L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
 DEFINE_GUID( GUID_DEVICE_LID,               0x4AFA3D52L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
 DEFINE_GUID( GUID_DEVICE_THERMAL_ZONE,      0x4AFA3D51L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
-DEFINE_GUID(GUID_DEVICE_FAN,                0x05ecd13dL, 0x81da, 0x4a2a, 0x8a, 0x4c, 0x52, 0x4f, 0x23, 0xdd, 0x4d, 0xc9 );
+DEFINE_GUID( GUID_DEVICE_FAN,               0x05ecd13dL, 0x81da, 0x4a2a, 0x8a, 0x4c, 0x52, 0x4f, 0x23, 0xdd, 0x4d, 0xc9 );
 DEFINE_GUID( GUID_DEVICE_PROCESSOR,         0x97fadb10L, 0x4e33, 0x40ae, 0x35, 0x9c, 0x8b, 0xef, 0x02, 0x9d, 0xbd, 0xd0 );
 DEFINE_GUID( GUID_DEVICE_MEMORY,            0x3fd0f03dL, 0x92e0, 0x45fb, 0xb7, 0x5c, 0x5e, 0xd8, 0xff, 0xb0, 0x10, 0x21 );
 DEFINE_GUID( GUID_DEVICE_ACPI_TIME,         0x97f99bf6L, 0x4497, 0x4f18, 0xbb, 0x22, 0x4b, 0x9f, 0xb2, 0xfb, 0xef, 0x9c );
@@ -65,6 +65,10 @@ DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_COOLING,
 // {927EC093-69A4-4bc0-BD02-711664714463}
 DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_MANAGER,
 0x927ec093, 0x69a4, 0x4bc0, 0xbd, 0x2, 0x71, 0x16, 0x64, 0x71, 0x44, 0x63);
+
+// {8f366301-091e-4056-b92f-958b27625fce}
+DEFINE_GUID(GUID_DEVINTERFACE_POWER_LIMIT,
+0x8f366301, 0x091e, 0x4056, 0xb9, 0x2f, 0x95, 0x8b, 0x27, 0x62, 0x5f, 0xce);
 
 #ifndef _POCLASS_
 #define _POCLASS_
@@ -563,6 +567,72 @@ typedef enum _THERMAL_DEVICE_INTERFACE_FLAGS {
     ThermalDeviceFlagActiveCooling = 1,
     ThermalDeviceFlagPassiveCooling = 2
 } THERMAL_DEVICE_INTERFACE_FLAGS, *PTHERMAL_DEVICE_INTERFACE_FLAGS;
+
+//
+// Power limit types.
+//
+
+typedef
+_Function_class_(QUERY_POWER_LIMIT_ATTRIBUTES)
+NTSTATUS
+QUERY_POWER_LIMIT_ATTRIBUTES (
+    _Inout_opt_ PVOID Context,
+    _In_ ULONG BufferCount,
+    _Inout_opt_ PVOID Buffer,
+    _Out_ PULONG AttributeCount
+    );
+
+typedef QUERY_POWER_LIMIT_ATTRIBUTES *PQUERY_POWER_LIMIT_ATTRIBUTES;
+
+typedef
+_Function_class_(SET_POWER_LIMIT)
+NTSTATUS
+SET_POWER_LIMIT (
+    _Inout_opt_ PVOID Context,
+    _In_ ULONG ValueCount,
+    _In_ PVOID Values
+    );
+
+typedef SET_POWER_LIMIT *PSET_POWER_LIMIT;
+
+typedef
+_Function_class_(QUERY_POWER_LIMIT)
+NTSTATUS
+QUERY_POWER_LIMIT (
+    _Inout_opt_ PVOID Context,
+    _In_ ULONG ValueCount,
+    _Inout_ PVOID Values
+    );
+
+typedef QUERY_POWER_LIMIT *PQUERY_POWER_LIMIT;
+
+//
+// Power limit client interface (devices implementing GUID_POWER_LIMIT_INTERFACE)
+//
+
+typedef struct _POWER_LIMIT_INTERFACE {
+
+    //
+    // Generic interface header
+    //
+
+    USHORT Size;
+    USHORT Version;
+    PVOID Context;
+    PINTERFACE_REFERENCE    InterfaceReference;
+    PINTERFACE_DEREFERENCE  InterfaceDereference;
+
+    //
+    // Power limit interface
+    //
+
+    ULONG DomainCount;
+    PQUERY_POWER_LIMIT_ATTRIBUTES QueryAttributes;
+    PSET_POWER_LIMIT              SetPowerLimit;
+    PQUERY_POWER_LIMIT            QueryPowerLimit;
+} POWER_LIMIT_INTERFACE, *PPOWER_LIMIT_INTERFACE;
+
+#define POWER_LIMIT_INTERFACE_VERSION 1
 
 #endif // _WINDOWS_
 

@@ -13,6 +13,7 @@ import "Windows.Foundation.idl";
 import "Windows.Devices.Enumeration.idl";
 import "Windows.Media.Capture.idl";
 import "Windows.Media.Devices.Core.idl";
+import "Windows.Media.Effects.idl";
 import "Windows.Media.MediaProperties.idl";
 import "Windows.Storage.Streams.idl";
 
@@ -64,6 +65,16 @@ namespace Windows
             {
                 runtimeclass VariablePhotoSequenceController;
             }
+        }
+    }
+}
+namespace Windows
+{
+    namespace Media
+    {
+        namespace Effects
+        {
+            runtimeclass AudioCaptureEffectsManager;
         }
     }
 }
@@ -188,6 +199,8 @@ namespace Windows
             interface IAdvancedVideoCaptureDeviceController9;
 
             interface IAudioDeviceController;
+
+            interface IAudioDeviceController2;
 
             interface IAudioDeviceModule;
 
@@ -939,6 +952,14 @@ namespace Windows
                 [propget] HRESULT VolumePercent([out] [retval] FLOAT* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Media.Devices.AudioDeviceController)]
+            [uuid(85326599-4C24-48B0-81DD-0C5CC79DDF05)]
+            interface IAudioDeviceController2 : IInspectable
+            {
+                [propget] HRESULT AudioCaptureEffectsManager([out] [retval] Windows.Media.Effects.AudioCaptureEffectsManager** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [exclusiveto(Windows.Media.Devices.AudioDeviceModule)]
             [uuid(86CFAC36-47C1-4B33-9852-8773EC4BE123)]
@@ -1598,6 +1619,7 @@ namespace Windows
             {
                 [default] interface Windows.Media.Devices.IAudioDeviceController;
                 interface Windows.Media.Devices.IMediaDeviceController;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Media.Devices.IAudioDeviceController2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]

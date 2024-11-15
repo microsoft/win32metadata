@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -454,7 +454,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICompositeTransform3D = _uuidof(ICompositeTransform3D);
+                        MIDL_CONST_ID IID& IID_ICompositeTransform3D = __uuidof(ICompositeTransform3D);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -527,7 +527,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICompositeTransform3DStatics = _uuidof(ICompositeTransform3DStatics);
+                        MIDL_CONST_ID IID& IID_ICompositeTransform3DStatics = __uuidof(ICompositeTransform3DStatics);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -564,7 +564,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMatrix3DHelper = _uuidof(IMatrix3DHelper);
+                        MIDL_CONST_ID IID& IID_IMatrix3DHelper = __uuidof(IMatrix3DHelper);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -640,7 +640,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMatrix3DHelperStatics = _uuidof(IMatrix3DHelperStatics);
+                        MIDL_CONST_ID IID& IID_IMatrix3DHelperStatics = __uuidof(IMatrix3DHelperStatics);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -695,7 +695,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPerspectiveTransform3D = _uuidof(IPerspectiveTransform3D);
+                        MIDL_CONST_ID IID& IID_IPerspectiveTransform3D = __uuidof(IPerspectiveTransform3D);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -741,7 +741,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPerspectiveTransform3DStatics = _uuidof(IPerspectiveTransform3DStatics);
+                        MIDL_CONST_ID IID& IID_IPerspectiveTransform3DStatics = __uuidof(IPerspectiveTransform3DStatics);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -778,7 +778,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITransform3D = _uuidof(ITransform3D);
+                        MIDL_CONST_ID IID& IID_ITransform3D = __uuidof(ITransform3D);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */
@@ -820,7 +820,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITransform3DFactory = _uuidof(ITransform3DFactory);
+                        MIDL_CONST_ID IID& IID_ITransform3DFactory = __uuidof(ITransform3DFactory);
                     } /* Media3D */
                 } /* Media */
             } /* Xaml */

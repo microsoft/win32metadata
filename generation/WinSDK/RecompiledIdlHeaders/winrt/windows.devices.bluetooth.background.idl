@@ -61,6 +61,8 @@ namespace Windows
 
                 runtimeclass GattLocalService;
 
+                runtimeclass GattServiceProviderAdvertisingParameters;
+
                 runtimeclass GattValueChangedEventArgs;
             }
         }
@@ -127,6 +129,8 @@ namespace Windows
                 interface IGattCharacteristicNotificationTriggerDetails2;
 
                 interface IGattServiceProviderConnection;
+
+                interface IGattServiceProviderConnection2;
 
                 interface IGattServiceProviderConnectionStatics;
 
@@ -255,6 +259,15 @@ namespace Windows
                     HRESULT Start();
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Devices.Bluetooth.Background.GattServiceProviderConnection)]
+                [experimental]
+                [uuid(90D12BE0-EBC0-484F-AE0A-7EB8B6266BAC)]
+                interface IGattServiceProviderConnection2 : IInspectable
+                {
+                    HRESULT UpdateAdvertisingParameters([in] Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProviderAdvertisingParameters* parameters);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.Background.GattServiceProviderConnection)]
                 [uuid(3D509F4B-0B0E-4466-B8CD-6EBDDA1FA17D)]
@@ -336,6 +349,7 @@ namespace Windows
                 runtimeclass GattServiceProviderConnection
                 {
                     [default] interface Windows.Devices.Bluetooth.Background.IGattServiceProviderConnection;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Bluetooth.Background.IGattServiceProviderConnection2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]

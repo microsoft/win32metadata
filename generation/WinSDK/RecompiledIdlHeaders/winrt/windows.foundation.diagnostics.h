@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1219,7 +1219,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAsyncCausalityTracerStatics = _uuidof(IAsyncCausalityTracerStatics);
+                MIDL_CONST_ID IID& IID_IAsyncCausalityTracerStatics = __uuidof(IAsyncCausalityTracerStatics);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1261,7 +1261,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IErrorDetails = _uuidof(IErrorDetails);
+                MIDL_CONST_ID IID& IID_IErrorDetails = __uuidof(IErrorDetails);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1298,7 +1298,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IErrorDetailsStatics = _uuidof(IErrorDetailsStatics);
+                MIDL_CONST_ID IID& IID_IErrorDetailsStatics = __uuidof(IErrorDetailsStatics);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1335,7 +1335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IErrorReportingSettings = _uuidof(IErrorReportingSettings);
+                MIDL_CONST_ID IID& IID_IErrorReportingSettings = __uuidof(IErrorReportingSettings);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1392,7 +1392,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileLoggingSession = _uuidof(IFileLoggingSession);
+                MIDL_CONST_ID IID& IID_IFileLoggingSession = __uuidof(IFileLoggingSession);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1429,7 +1429,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFileLoggingSessionFactory = _uuidof(IFileLoggingSessionFactory);
+                MIDL_CONST_ID IID& IID_IFileLoggingSessionFactory = __uuidof(IFileLoggingSessionFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1465,7 +1465,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILogFileGeneratedEventArgs = _uuidof(ILogFileGeneratedEventArgs);
+                MIDL_CONST_ID IID& IID_ILogFileGeneratedEventArgs = __uuidof(ILogFileGeneratedEventArgs);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1507,7 +1507,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingActivity = _uuidof(ILoggingActivity);
+                MIDL_CONST_ID IID& IID_ILoggingActivity = __uuidof(ILoggingActivity);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1560,7 +1560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingActivity2 = _uuidof(ILoggingActivity2);
+                MIDL_CONST_ID IID& IID_ILoggingActivity2 = __uuidof(ILoggingActivity2);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1604,7 +1604,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingActivityFactory = _uuidof(ILoggingActivityFactory);
+                MIDL_CONST_ID IID& IID_ILoggingActivityFactory = __uuidof(ILoggingActivityFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1670,7 +1670,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannel = _uuidof(ILoggingChannel);
+                MIDL_CONST_ID IID& IID_ILoggingChannel = __uuidof(ILoggingChannel);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1711,7 +1711,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannel2 = _uuidof(ILoggingChannel2);
+                MIDL_CONST_ID IID& IID_ILoggingChannel2 = __uuidof(ILoggingChannel2);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1751,7 +1751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannelFactory = _uuidof(ILoggingChannelFactory);
+                MIDL_CONST_ID IID& IID_ILoggingChannelFactory = __uuidof(ILoggingChannelFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1795,7 +1795,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannelFactory2 = _uuidof(ILoggingChannelFactory2);
+                MIDL_CONST_ID IID& IID_ILoggingChannelFactory2 = __uuidof(ILoggingChannelFactory2);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1834,7 +1834,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannelOptions = _uuidof(ILoggingChannelOptions);
+                MIDL_CONST_ID IID& IID_ILoggingChannelOptions = __uuidof(ILoggingChannelOptions);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -1871,7 +1871,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingChannelOptionsFactory = _uuidof(ILoggingChannelOptionsFactory);
+                MIDL_CONST_ID IID& IID_ILoggingChannelOptionsFactory = __uuidof(ILoggingChannelOptionsFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2519,7 +2519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingFields = _uuidof(ILoggingFields);
+                MIDL_CONST_ID IID& IID_ILoggingFields = __uuidof(ILoggingFields);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2588,7 +2588,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingOptions = _uuidof(ILoggingOptions);
+                MIDL_CONST_ID IID& IID_ILoggingOptions = __uuidof(ILoggingOptions);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2625,7 +2625,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingOptionsFactory = _uuidof(ILoggingOptionsFactory);
+                MIDL_CONST_ID IID& IID_ILoggingOptionsFactory = __uuidof(ILoggingOptionsFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2677,7 +2677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingSession = _uuidof(ILoggingSession);
+                MIDL_CONST_ID IID& IID_ILoggingSession = __uuidof(ILoggingSession);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2714,7 +2714,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingSessionFactory = _uuidof(ILoggingSessionFactory);
+                MIDL_CONST_ID IID& IID_ILoggingSessionFactory = __uuidof(ILoggingSessionFactory);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2797,7 +2797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILoggingTarget = _uuidof(ILoggingTarget);
+                MIDL_CONST_ID IID& IID_ILoggingTarget = __uuidof(ILoggingTarget);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2836,7 +2836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITracingStatusChangedEventArgs = _uuidof(ITracingStatusChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITracingStatusChangedEventArgs = __uuidof(ITracingStatusChangedEventArgs);
             } /* Diagnostics */
         } /* Foundation */
     } /* Windows */
@@ -2969,8 +2969,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Foundation.Diagnostics.ILoggingChannel ** Default Interface **
@@ -6797,8 +6797,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Foundation.Diagnostics.ILoggingChannelFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Foundation.Diagnostics.ILoggingChannel ** Default Interface **

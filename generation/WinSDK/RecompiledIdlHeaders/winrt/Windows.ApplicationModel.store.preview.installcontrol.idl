@@ -100,6 +100,8 @@ namespace Windows
 
                     interface IGetEntitlementResult;
 
+                    interface IGetEntitlementResult2;
+
                     runtimeclass AppInstallItem;
 
                     runtimeclass AppInstallManager;
@@ -489,6 +491,17 @@ namespace Windows
                         [propget] HRESULT Status([out] [retval] Windows.ApplicationModel.Store.Preview.InstallControl.GetEntitlementStatus* value);
                     }
 
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                    [exclusiveto(Windows.ApplicationModel.Store.Preview.InstallControl.GetEntitlementResult)]
+                    [uuid(E3906641-A981-4302-8C68-FF836666BB3B)]
+                    interface IGetEntitlementResult2 : IInspectable
+                    {
+                        [propget] HRESULT IsAlreadyOwned([out] [retval] boolean* value);
+                        [propget] HRESULT OrderId([out] [retval] HSTRING* value);
+                        [propget] HRESULT SkuId([out] [retval] HSTRING* value);
+                        [propget] HRESULT AvailabilityId([out] [retval] HSTRING* value);
+                    }
+
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     [marshaling_behavior(agile)]
                     runtimeclass AppInstallItem
@@ -555,6 +568,7 @@ namespace Windows
                     runtimeclass GetEntitlementResult
                     {
                         [default] interface Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult;
+                        [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2;
                     }
                 }
             }

@@ -206,6 +206,10 @@ enum __MIDL___MIDL_itf_mmdeviceapi_0000_0000_0002
         ERole_enum_count	= ( eCommunications + 1 ) 
     } 	ERole;
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+#pragma region Application or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
 typedef /* [public] */ 
 enum __MIDL___MIDL_itf_mmdeviceapi_0000_0000_0003
     {
@@ -225,7 +229,7 @@ enum __MIDL___MIDL_itf_mmdeviceapi_0000_0000_0003
 
 #define HDMI     DigitalAudioDisplayDevice
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)

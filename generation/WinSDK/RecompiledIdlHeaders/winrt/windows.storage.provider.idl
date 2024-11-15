@@ -88,6 +88,8 @@ namespace Windows
 
             typedef enum StorageProviderProtectionMode StorageProviderProtectionMode;
 
+            typedef enum StorageProviderShareLinkState StorageProviderShareLinkState;
+
             typedef enum StorageProviderState StorageProviderState;
 
             typedef enum StorageProviderUICommandState StorageProviderUICommandState;
@@ -145,6 +147,8 @@ namespace Windows
             interface IStorageProviderPropertyCapabilities;
 
             interface IStorageProviderQuotaUI;
+
+            interface IStorageProviderShareLinkSource;
 
             interface IStorageProviderStatusUI;
 
@@ -259,6 +263,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IVector<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>;
 
                 interface Windows.Foundation.IAsyncOperation<Windows.Storage.Provider.FileUpdateStatus>;
+
+                interface Windows.Foundation.IAsyncOperation<Windows.Storage.Provider.StorageProviderShareLinkState>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.CachedFileUpdaterUI*, IInspectable*>;
 
@@ -387,6 +393,14 @@ namespace Windows
             {
                 Unknown  = 0,
                 Personal = 1
+            };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            enum StorageProviderShareLinkState
+            {
+                Enabled  = 0,
+                Disabled = 1
             };
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 5.0)]
@@ -671,6 +685,16 @@ namespace Windows
                 [propput] HRESULT QuotaUsedLabel([in] HSTRING value);
                 [propget] HRESULT QuotaUsedColor([out] [retval] Windows.Foundation.IReference<Windows.UI.Color>** value);
                 [propput] HRESULT QuotaUsedColor([in] Windows.Foundation.IReference<Windows.UI.Color>* value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            [uuid(4C6055E2-029C-5539-8E51-A1AFC838B5CB)]
+            interface IStorageProviderShareLinkSource : IInspectable
+            {
+                HRESULT CreateLinkAsync([in] Windows.Foundation.Collections.IVectorView<Windows.Storage.IStorageItem*>* storageItemList, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Uri*>** operation);
+                HRESULT GetDefaultAccessControlStringAsync([in] Windows.Foundation.Collections.IVectorView<Windows.Storage.IStorageItem*>* storageItemList, [out] [retval] Windows.Foundation.IAsyncOperation<HSTRING>** operation);
+                HRESULT GetState([in] Windows.Foundation.Collections.IVectorView<Windows.Storage.IStorageItem*>* storageItemList, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Provider.StorageProviderShareLinkState>** operation);
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -655,7 +655,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactDataProviderConnection = _uuidof(IContactDataProviderConnection);
+                    MIDL_CONST_ID IID& IID_IContactDataProviderConnection = __uuidof(IContactDataProviderConnection);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -704,7 +704,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactDataProviderConnection2 = _uuidof(IContactDataProviderConnection2);
+                    MIDL_CONST_ID IID& IID_IContactDataProviderConnection2 = __uuidof(IContactDataProviderConnection2);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -742,7 +742,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactDataProviderTriggerDetails = _uuidof(IContactDataProviderTriggerDetails);
+                    MIDL_CONST_ID IID& IID_IContactDataProviderTriggerDetails = __uuidof(IContactDataProviderTriggerDetails);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -790,7 +790,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListCreateOrUpdateContactRequest = _uuidof(IContactListCreateOrUpdateContactRequest);
+                    MIDL_CONST_ID IID& IID_IContactListCreateOrUpdateContactRequest = __uuidof(IContactListCreateOrUpdateContactRequest);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -831,7 +831,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListCreateOrUpdateContactRequestEventArgs = _uuidof(IContactListCreateOrUpdateContactRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IContactListCreateOrUpdateContactRequestEventArgs = __uuidof(IContactListCreateOrUpdateContactRequestEventArgs);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -878,7 +878,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListDeleteContactRequest = _uuidof(IContactListDeleteContactRequest);
+                    MIDL_CONST_ID IID& IID_IContactListDeleteContactRequest = __uuidof(IContactListDeleteContactRequest);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -919,7 +919,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListDeleteContactRequestEventArgs = _uuidof(IContactListDeleteContactRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IContactListDeleteContactRequestEventArgs = __uuidof(IContactListDeleteContactRequestEventArgs);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -977,7 +977,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListServerSearchReadBatchRequest = _uuidof(IContactListServerSearchReadBatchRequest);
+                    MIDL_CONST_ID IID& IID_IContactListServerSearchReadBatchRequest = __uuidof(IContactListServerSearchReadBatchRequest);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -1018,7 +1018,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListServerSearchReadBatchRequestEventArgs = _uuidof(IContactListServerSearchReadBatchRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IContactListServerSearchReadBatchRequestEventArgs = __uuidof(IContactListServerSearchReadBatchRequestEventArgs);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -1062,7 +1062,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListSyncManagerSyncRequest = _uuidof(IContactListSyncManagerSyncRequest);
+                    MIDL_CONST_ID IID& IID_IContactListSyncManagerSyncRequest = __uuidof(IContactListSyncManagerSyncRequest);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -1103,7 +1103,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContactListSyncManagerSyncRequestEventArgs = _uuidof(IContactListSyncManagerSyncRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IContactListSyncManagerSyncRequestEventArgs = __uuidof(IContactListSyncManagerSyncRequestEventArgs);
                 } /* DataProvider */
             } /* Contacts */
         } /* ApplicationModel */

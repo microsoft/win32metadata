@@ -167,6 +167,7 @@
 #define __STRUCT__ struct
 #define interface __STRUCT__
 #define STDMETHOD(method)        virtual COM_DECLSPEC_NOTHROW HRESULT STDMETHODCALLTYPE method
+#define STDMETHOD_CHPE_PATCHABLE(method)        virtual COM_DECLSPEC_NOTHROW DECLSPEC_CHPE_PATCHABLE HRESULT STDMETHODCALLTYPE method
 #define STDMETHOD_(type,method)  virtual COM_DECLSPEC_NOTHROW type STDMETHODCALLTYPE method
 #define STDMETHODV(method)       virtual COM_DECLSPEC_NOTHROW HRESULT STDMETHODVCALLTYPE method
 #define STDMETHODV_(type,method) virtual COM_DECLSPEC_NOTHROW type STDMETHODVCALLTYPE method
@@ -783,7 +784,7 @@ _Check_return_
 WINOLEAPI
 CoGetStandardMarshal(
     _In_ REFIID riid,
-    _In_ LPUNKNOWN pUnk,
+    _In_opt_ LPUNKNOWN pUnk,
     _In_ DWORD dwDestContext,
     _In_opt_ LPVOID pvDestContext,
     _In_ DWORD mshlflags,

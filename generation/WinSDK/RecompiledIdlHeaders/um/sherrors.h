@@ -31,6 +31,8 @@
 #define COPYENGINE_S_PROGRESS_PAUSE              _HRESULT_TYPEDEF_(0x0027000FL)
 #define COPYENGINE_S_PENDING_DELETE              _HRESULT_TYPEDEF_(0x00270010L) // Returned by initiating async delete operation. It's different
                                                                                 // from COPYENGINE_S_PENDING which is used for operation queued due to error.
+#define COPYENGINE_S_PENDING_BATCH_COPY          _HRESULT_TYPEDEF_(0x00270011L) // Returned by initiating batch copy operation. Like COPYENGINE_S_PENDING_DELETE,
+                                                                                // it indicates a non-error queued retry of the operation.
 
 // Failure/Error codes
 #define COPYENGINE_E_USER_CANCELLED      _HRESULT_TYPEDEF_(0x80270000L)  // User wants to canceled entire job

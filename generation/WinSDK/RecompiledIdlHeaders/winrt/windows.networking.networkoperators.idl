@@ -154,7 +154,11 @@ namespace Windows
 
             typedef enum TetheringOperationalState TetheringOperationalState;
 
+            typedef enum TetheringWiFiAuthenticationKind TetheringWiFiAuthenticationKind;
+
             typedef enum TetheringWiFiBand TetheringWiFiBand;
+
+            typedef enum TetheringWiFiPerformancePriority TetheringWiFiPerformancePriority;
 
             typedef enum UiccAccessCondition UiccAccessCondition;
 
@@ -268,9 +272,13 @@ namespace Windows
 
             interface IMobileBroadbandDeviceService;
 
+            interface IMobileBroadbandDeviceServiceCommandEventArgs;
+
             interface IMobileBroadbandDeviceServiceCommandResult;
 
             interface IMobileBroadbandDeviceServiceCommandSession;
+
+            interface IMobileBroadbandDeviceServiceCommandSession2;
 
             interface IMobileBroadbandDeviceServiceDataReceivedEventArgs;
 
@@ -358,6 +366,8 @@ namespace Windows
 
             interface INetworkOperatorTetheringAccessPointConfiguration2;
 
+            interface INetworkOperatorTetheringAccessPointConfiguration3;
+
             interface INetworkOperatorTetheringClient;
 
             interface INetworkOperatorTetheringClientManager;
@@ -365,6 +375,8 @@ namespace Windows
             interface INetworkOperatorTetheringEntitlementCheck;
 
             interface INetworkOperatorTetheringManager;
+
+            interface INetworkOperatorTetheringManager2;
 
             interface INetworkOperatorTetheringManagerStatics;
 
@@ -375,6 +387,8 @@ namespace Windows
             interface INetworkOperatorTetheringManagerStatics4;
 
             interface INetworkOperatorTetheringOperationResult;
+
+            interface INetworkOperatorTetheringSessionAccessPointConfiguration;
 
             interface IProvisionFromXmlDocumentResults;
 
@@ -472,6 +486,8 @@ namespace Windows
 
             runtimeclass MobileBroadbandDeviceService;
 
+            runtimeclass MobileBroadbandDeviceServiceCommandEventArgs;
+
             runtimeclass MobileBroadbandDeviceServiceCommandResult;
 
             runtimeclass MobileBroadbandDeviceServiceCommandSession;
@@ -545,6 +561,8 @@ namespace Windows
             runtimeclass NetworkOperatorTetheringManager;
 
             runtimeclass NetworkOperatorTetheringOperationResult;
+
+            runtimeclass NetworkOperatorTetheringSessionAccessPointConfiguration;
 
             runtimeclass ProvisionFromXmlDocumentResults;
 
@@ -725,6 +743,8 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandAccountWatcher*, Windows.Networking.NetworkOperators.MobileBroadbandAccountEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandAccountWatcher*, Windows.Networking.NetworkOperators.MobileBroadbandAccountUpdatedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandSession*, Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceDataSession*, Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceDataReceivedEventArgs*>;
 
@@ -1087,7 +1107,13 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)]
                 BluetoothDeviceOff         = 7,
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)]
-                NetworkLimitedConnectivity = 8
+                NetworkLimitedConnectivity = 8,
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                AlreadyOn                  = 9,
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                RadioRestriction           = 10,
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                BandInterference           = 11
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1099,12 +1125,29 @@ namespace Windows
                 InTransition = 3
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+            enum TetheringWiFiAuthenticationKind
+            {
+                Wpa2               = 0,
+                Wpa3TransitionMode = 1,
+                Wpa3               = 2
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             enum TetheringWiFiBand
             {
                 Auto                  = 0,
                 TwoPointFourGigahertz = 1,
-                FiveGigahertz         = 2
+                FiveGigahertz         = 2,
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+                SixGigahertz          = 3
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            enum TetheringWiFiPerformancePriority
+            {
+                Default              = 0,
+                TetheringOverStation = 1
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1738,6 +1781,17 @@ namespace Windows
                 HRESULT OpenCommandSession([out] [retval] Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandSession** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandEventArgs)]
+            [uuid(28E4338F-CCA4-5047-A20C-0A6D79ACECBA)]
+            interface IMobileBroadbandDeviceServiceCommandEventArgs : IInspectable
+            {
+                [propget] HRESULT DeviceId([out] [retval] HSTRING* value);
+                [propget] HRESULT DeviceServiceId([out] [retval] GUID* value);
+                [propget] HRESULT EventId([out] [retval] UINT32* value);
+                [propget] HRESULT ReceivedData([out] [retval] Windows.Storage.Streams.IBuffer** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandResult)]
             [uuid(B0F46ABB-94D6-44B9-A538-F0810B645389)]
@@ -1755,6 +1809,15 @@ namespace Windows
                 HRESULT SendQueryCommandAsync([in] UINT32 commandId, [in] Windows.Storage.Streams.IBuffer* data, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandResult*>** asyncInfo);
                 HRESULT SendSetCommandAsync([in] UINT32 commandId, [in] Windows.Storage.Streams.IBuffer* data, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandResult*>** asyncInfo);
                 HRESULT CloseSession();
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandSession)]
+            [uuid(EF004861-2546-5739-86E7-0FDC0E62411C)]
+            interface IMobileBroadbandDeviceServiceCommandSession2 : IInspectable
+            {
+                [eventadd] HRESULT CommandReceived([in] Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandSession*, Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceCommandEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT CommandReceived([in] EventRegistrationToken token);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2204,6 +2267,17 @@ namespace Windows
                 [propput] HRESULT Band([in] Windows.Networking.NetworkOperators.TetheringWiFiBand value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.NetworkOperatorTetheringAccessPointConfiguration)]
+            [uuid(A9BB0081-9EED-5D18-B676-24B74A182B8C)]
+            interface INetworkOperatorTetheringAccessPointConfiguration3 : IInspectable
+            {
+                HRESULT IsAuthenticationKindSupported([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind authenticationKind, [out] [retval] boolean* result);
+                HRESULT IsAuthenticationKindSupportedAsync([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind authenticationKind, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                [propget] HRESULT AuthenticationKind([out] [retval] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind* value);
+                [propput] HRESULT AuthenticationKind([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Networking.NetworkOperators.NetworkOperatorTetheringClient)]
             [uuid(709D254C-595F-4847-BB30-646935542918)]
@@ -2241,6 +2315,14 @@ namespace Windows
                 HRESULT ConfigureAccessPointAsync([in] Windows.Networking.NetworkOperators.NetworkOperatorTetheringAccessPointConfiguration* configuration, [out] [retval] Windows.Foundation.IAsyncAction** asyncInfo);
                 HRESULT StartTetheringAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.NetworkOperatorTetheringOperationResult*>** asyncInfo);
                 HRESULT StopTetheringAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.NetworkOperatorTetheringOperationResult*>** asyncInfo);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager)]
+            [uuid(7C1A4DF2-B789-4FEA-BC4E-1F2B9E76C1F7)]
+            interface INetworkOperatorTetheringManager2 : IInspectable
+            {
+                HRESULT StartTetheringAsync([in] Windows.Networking.NetworkOperators.NetworkOperatorTetheringSessionAccessPointConfiguration* configuration, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.NetworkOperatorTetheringOperationResult*>** asyncInfo);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2288,6 +2370,27 @@ namespace Windows
             {
                 [propget] HRESULT Status([out] [retval] Windows.Networking.NetworkOperators.TetheringOperationStatus* value);
                 [propget] HRESULT AdditionalErrorMessage([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.NetworkOperatorTetheringSessionAccessPointConfiguration)]
+            [uuid(0BCC1104-34B7-5212-858C-59D97404920A)]
+            interface INetworkOperatorTetheringSessionAccessPointConfiguration : IInspectable
+            {
+                [propget] HRESULT Ssid([out] [retval] HSTRING* value);
+                [propput] HRESULT Ssid([in] HSTRING value);
+                [propget] HRESULT Passphrase([out] [retval] HSTRING* value);
+                [propput] HRESULT Passphrase([in] HSTRING value);
+                HRESULT IsBandSupported([in] Windows.Networking.NetworkOperators.TetheringWiFiBand band, [out] [retval] boolean* result);
+                HRESULT IsBandSupportedAsync([in] Windows.Networking.NetworkOperators.TetheringWiFiBand band, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                [propget] HRESULT Band([out] [retval] Windows.Networking.NetworkOperators.TetheringWiFiBand* value);
+                [propput] HRESULT Band([in] Windows.Networking.NetworkOperators.TetheringWiFiBand value);
+                HRESULT IsAuthenticationKindSupported([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind authenticationKind, [out] [retval] boolean* result);
+                HRESULT IsAuthenticationKindSupportedAsync([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind authenticationKind, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                [propget] HRESULT AuthenticationKind([out] [retval] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind* value);
+                [propput] HRESULT AuthenticationKind([in] Windows.Networking.NetworkOperators.TetheringWiFiAuthenticationKind value);
+                [propget] HRESULT PerformancePriority([out] [retval] Windows.Networking.NetworkOperators.TetheringWiFiPerformancePriority* value);
+                [propput] HRESULT PerformancePriority([in] Windows.Networking.NetworkOperators.TetheringWiFiPerformancePriority value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2661,6 +2764,13 @@ namespace Windows
                 [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceService;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass MobileBroadbandDeviceServiceCommandEventArgs
+            {
+                [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceCommandEventArgs;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             runtimeclass MobileBroadbandDeviceServiceCommandResult
@@ -2673,6 +2783,7 @@ namespace Windows
             runtimeclass MobileBroadbandDeviceServiceCommandSession
             {
                 [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceCommandSession;
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceCommandSession2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2910,6 +3021,7 @@ namespace Windows
             {
                 [default] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringAccessPointConfiguration;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringAccessPointConfiguration2;
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringAccessPointConfiguration3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2929,12 +3041,22 @@ namespace Windows
             {
                 [default] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager;
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringClientManager;
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             runtimeclass NetworkOperatorTetheringOperationResult
             {
                 [default] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringOperationResult;
+            }
+
+            [activatable(Windows.Foundation.UniversalApiContract, 17.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass NetworkOperatorTetheringSessionAccessPointConfiguration
+            {
+                [default] interface Windows.Networking.NetworkOperators.INetworkOperatorTetheringSessionAccessPointConfiguration;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

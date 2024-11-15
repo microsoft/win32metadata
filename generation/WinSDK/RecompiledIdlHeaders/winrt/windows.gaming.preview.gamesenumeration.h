@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GAMING_PREVIEW_GAMESENUMERATIONCONTRACT_VERSION)
@@ -941,7 +941,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListChangedEventHandler = _uuidof(IGameListChangedEventHandler);
+                    MIDL_CONST_ID IID& IID_IGameListChangedEventHandler = __uuidof(IGameListChangedEventHandler);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -976,7 +976,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListRemovedEventHandler = _uuidof(IGameListRemovedEventHandler);
+                    MIDL_CONST_ID IID& IID_IGameListRemovedEventHandler = __uuidof(IGameListRemovedEventHandler);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1025,7 +1025,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListEntry = _uuidof(IGameListEntry);
+                    MIDL_CONST_ID IID& IID_IGameListEntry = __uuidof(IGameListEntry);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1091,7 +1091,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListEntry2 = _uuidof(IGameListEntry2);
+                    MIDL_CONST_ID IID& IID_IGameListEntry2 = __uuidof(IGameListEntry2);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1154,7 +1154,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListStatics = _uuidof(IGameListStatics);
+                    MIDL_CONST_ID IID& IID_IGameListStatics = __uuidof(IGameListStatics);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1198,7 +1198,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameListStatics2 = _uuidof(IGameListStatics2);
+                    MIDL_CONST_ID IID& IID_IGameListStatics2 = __uuidof(IGameListStatics2);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1287,7 +1287,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameModeConfiguration = _uuidof(IGameModeConfiguration);
+                    MIDL_CONST_ID IID& IID_IGameModeConfiguration = __uuidof(IGameModeConfiguration);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1328,7 +1328,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameModeUserConfiguration = _uuidof(IGameModeUserConfiguration);
+                    MIDL_CONST_ID IID& IID_IGameModeUserConfiguration = __uuidof(IGameModeUserConfiguration);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */
@@ -1366,7 +1366,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGameModeUserConfigurationStatics = _uuidof(IGameModeUserConfigurationStatics);
+                    MIDL_CONST_ID IID& IID_IGameModeUserConfigurationStatics = __uuidof(IGameModeUserConfigurationStatics);
                 } /* GamesEnumeration */
             } /* Preview */
         } /* Gaming */

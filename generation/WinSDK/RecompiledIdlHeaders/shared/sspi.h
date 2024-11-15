@@ -375,6 +375,8 @@ typedef struct _SecBufferDesc {
 #define SECBUFFER_TRAFFIC_SECRETS               28  // Message sequence lengths and corresponding traffic secrets.
 #define SECBUFFER_CERTIFICATE_REQUEST_CONTEXT   29  // TLS 1.3 certificate request context.
 #define SECBUFFER_CHANNEL_BINDINGS_RESULT       30  // Output buffer for Channel Bindings Audit
+#define SECBUFFER_APP_SESSION_STATE             31  // Application state associated with the TLS 1.3+ session ticket. Server only.
+#define SECBUFFER_SESSION_TICKET                32  // TLS 1.3+ session ticket. Client only.
 
 #define SECBUFFER_ATTRMASK                      0xF0000000
 #define SECBUFFER_READONLY                      0x80000000  // Buffer is read-only, no checksum
@@ -498,6 +500,16 @@ typedef struct _SEC_CERTIFICATE_REQUEST_CONTEXT {
     unsigned char rgCertificateRequestContext[ANYSIZE_ARRAY]; // The TLS 1.3 certificate request context.
 } SEC_CERTIFICATE_REQUEST_CONTEXT, *PSEC_CERTIFICATE_REQUEST_CONTEXT;
 
+typedef struct _SEC_APP_SESSION_STATE {
+    unsigned short AppSessionStateSize; // Size in bytes of the application state, up to 2048 bytes.
+    unsigned char  AppSessionState[ANYSIZE_ARRAY]; // Application state to be associated with the session ticket.
+} SEC_APP_SESSION_STATE, *PSEC_APP_SESSION_STATE;
+
+typedef struct _SEC_SESSION_TICKET {
+    unsigned short SessionTicketSize; // Size in bytes of the session ticket.
+    unsigned char  SessionTicket[ANYSIZE_ARRAY]; // TLS 1.3+ session ticket.
+} SEC_SESSION_TICKET, *PSEC_SESSION_TICKET;
+
 
 //
 //  Traffic secret types:
@@ -557,6 +569,10 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 
 #define SECPKG_CRED_PROCESS_POLICY_ONLY     0x00000020
 
+// Enables configuring Kerberos to only request tickets from a specific DC version
+
+#define SECPKG_CRED_KERB_ANCHOR_DS_VERSION  0x00000040
+
 
 //
 //  InitializeSecurityContext Requirement and return flags:
@@ -596,6 +612,11 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ISC_REQ_DEFERRED_CRED_VALIDATION 0x0000000200000000
 // Prevents the client sending the post_handshake_auth extension in the TLS 1.3 Client Hello.
 #define ISC_REQ_NO_POST_HANDSHAKE_AUTH   0x0000000400000000
+// Request TLS 1.3+ session ticket reuse. Passive observers may be able to track the TLS client across networks.
+#define ISC_REQ_REUSE_SESSION_TICKETS    0x0000000800000000
+// Request explicit TLS 1.3+ session management. Received TLS 1.3+ session tickets will be returned to the SSPI caller.
+// The SSPI caller will specify the session ticket to send in each resumption attempt.
+#define ISC_REQ_EXPLICIT_SESSION         0x0000001000000000
 
 #define ISC_RET_DELEGATE                0x00000001
 #define ISC_RET_MUTUAL_AUTH             0x00000002
@@ -629,6 +650,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ISC_RET_MESSAGES                 0x0000000100000000 // Indicates that the TLS 1.3+ record layer is disabled, and the security context consumes and produces cleartext TLS messages, rather than records.
 #define ISC_RET_DEFERRED_CRED_VALIDATION 0x0000000200000000 // Indicates that SCH_CRED_DEFERRED_CRED_VALIDATION/ISC_REQ_DEFERRED_CRED_VALIDATION request will be honored.
 #define ISC_RET_NO_POST_HANDSHAKE_AUTH   0x0000000400000000 // Indicates that the TLS 1.3 Client Hello will not contain the post_handshake_auth extension.
+#define ISC_RET_REUSE_SESSION_TICKETS    0x0000000800000000 // Indicates that the TLS 1.3+ client may reuse session tickets.
+#define ISC_RET_EXPLICIT_SESSION         0x0000001000000000 // Indicates that explicit TLS 1.3+ session management is enabled.
 
 #define ASC_REQ_DELEGATE                0x00000001
 #define ASC_REQ_MUTUAL_AUTH             0x00000002
@@ -658,6 +681,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 //      SSP_RET_REAUTHENTICATION        0x08000000  // *INTERNAL*
 #define ASC_REQ_ALLOW_MISSING_BINDINGS  0x10000000
 #define ASC_REQ_MESSAGES                0x0000000100000000 // Disables the TLS 1.3+ record layer and causes the security context to consume and produce cleartext TLS messages, rather than records.
+// Request explicit TLS 1.3+ session management. TLS 1.3+ session ticket will only be generated when requested by the SSPI caller.
+#define ASC_REQ_EXPLICIT_SESSION        0x0000001000000000
 
 #define ASC_RET_DELEGATE                0x00000001
 #define ASC_RET_MUTUAL_AUTH             0x00000002
@@ -685,6 +710,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ASC_RET_NO_ADDITIONAL_TOKEN     0x02000000  // *INTERNAL*
 //      SSP_RET_REAUTHENTICATION        0x08000000  // *INTERNAL*
 #define ASC_RET_MESSAGES                0x0000000100000000 // Indicates that the TLS 1.3+ record layer is disabled, and the security context consumes and produces cleartext TLS messages, rather than records.
+#define ASC_RET_REUSE_SESSION_TICKETS   0x0000000800000000 // Indicates that the TLS 1.3+ server will allow session ticket reuse.
+#define ASC_RET_EXPLICIT_SESSION        0x0000001000000000 // Indicates that explicit TLS 1.3+ session management is enabled.
 
 //
 //  Security Credentials Attributes:
@@ -692,7 +719,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 
 #define SECPKG_CRED_ATTR_NAMES        1
 #define SECPKG_CRED_ATTR_SSI_PROVIDER 2
-#define SECPKG_CRED_ATTR_KDC_PROXY_SETTINGS 3
+#define SECPKG_CRED_ATTR_KDC_PROXY_SETTINGS     3 // aliases SECPKG_CRED_ATTR_KDC_NETWORK_SETTINGS
+#define SECPKG_CRED_ATTR_KDC_NETWORK_SETTINGS   3 // aliases SECPKG_CRED_ATTR_KDC_PROXY_SETTINGS
 #define SECPKG_CRED_ATTR_CERT         4
 #define SECPKG_CRED_ATTR_PAC_BYPASS   5
 
@@ -754,7 +782,15 @@ typedef struct _SecPkgCredentials_SSIProviderA
 // begin_ntifs
 
 #define KDC_PROXY_SETTINGS_V1                 1
-#define KDC_PROXY_SETTINGS_FLAGS_FORCEPROXY 0x1
+#define KDC_NETWORK_SETTINGS_V2               2
+
+#define KDC_PROXY_SETTINGS_FLAGS_FORCEPROXY     0x1
+
+#define KDC_NETWORK_SETTINGS_FLAGS_FORCEPROXY             0x1
+#define KDC_NETWORK_SETTINGS_FLAGS_CONFIGURE_PROXY        0x80000000
+#define KDC_NETWORK_SETTINGS_FLAGS_CONFIGURE_DISCOVERY    0x40000000
+
+#define KDC_NETWORK_DISCOVERY_FLAGS_DS13_REQUIRED      0x80000000
 
 typedef struct _SecPkgCredentials_KdcProxySettingsW
 {
@@ -765,6 +801,17 @@ typedef struct _SecPkgCredentials_KdcProxySettingsW
     USHORT ClientTlsCredOffset; // ClientTlsCred, optional
     USHORT ClientTlsCredLength;
 } SecPkgCredentials_KdcProxySettingsW, *PSecPkgCredentials_KdcProxySettingsW;
+
+typedef struct _SecPkgCredentials_KdcNetworkSettingsW
+{
+    ULONG   Version;             // KDC_NETWORK_SETTINGS_V2
+    ULONG   Flags;               // KDC_NETWORK_SETTINGS_FLAGS_*
+    USHORT  ProxyServerOffset;   // ProxyServer, optional
+    USHORT  ProxyServerLength;
+    USHORT  ClientTlsCredOffset; // ClientTlsCred, optional
+    USHORT  ClientTlsCredLength;
+    ULONG   DcDiscoveryFlags;    // KDC_NETWORK_DISCOVERY_*
+} SecPkgCredentials_KdcNetworkSettingsW, *PSecPkgCredentials_KdcNetworkSettingsW;
 
 // end_ntifs
 
@@ -2079,6 +2126,29 @@ FreeContextBuffer(
 typedef SECURITY_STATUS
 (SEC_ENTRY * FREE_CONTEXT_BUFFER_FN)(
     _Inout_ PVOID
+    );
+    
+SECURITY_STATUS
+SEC_ENTRY
+SecAllocateAndSetIPAddress(
+    _In_reads_bytes_(cchIpAddress)  PUCHAR lpIpAddress,
+    _In_  ULONG  cchIpAddress,
+    _Out_ int* FreeCallContext // Avoid creating a dependence on minwindef.h by replacing PBOOL with its definition int*
+    );
+
+SECURITY_STATUS
+SEC_ENTRY
+SecAllocateAndSetCallTarget(
+    _In_reads_bytes_opt_(cchIpAddress)  PUCHAR lpIpAddress,
+    _In_  ULONG  cchIpAddress,
+    _In_opt_ LPWSTR TargetName,
+    _Out_ int* FreeCallContext // Avoid creating a dependence on minwindef.h by replacing PBOOL with its definition int*
+    );
+
+VOID
+SEC_ENTRY
+SecFreeCallContext(
+    VOID
     );
 
 // end_ntifs

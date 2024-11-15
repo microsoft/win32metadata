@@ -124,7 +124,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1875,7 +1875,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedEventHandler = _uuidof(IActivatedEventHandler);
+                MIDL_CONST_ID IID& IID_IActivatedEventHandler = __uuidof(IActivatedEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -1909,7 +1909,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBackgroundActivatedEventHandler = _uuidof(IBackgroundActivatedEventHandler);
+                MIDL_CONST_ID IID& IID_IBackgroundActivatedEventHandler = __uuidof(IBackgroundActivatedEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -1943,7 +1943,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEnteredBackgroundEventHandler = _uuidof(IEnteredBackgroundEventHandler);
+                MIDL_CONST_ID IID& IID_IEnteredBackgroundEventHandler = __uuidof(IEnteredBackgroundEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -1977,7 +1977,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILeavingBackgroundEventHandler = _uuidof(ILeavingBackgroundEventHandler);
+                MIDL_CONST_ID IID& IID_ILeavingBackgroundEventHandler = __uuidof(ILeavingBackgroundEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2011,7 +2011,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INavigatedEventHandler = _uuidof(INavigatedEventHandler);
+                MIDL_CONST_ID IID& IID_INavigatedEventHandler = __uuidof(INavigatedEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2044,7 +2044,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IResumingEventHandler = _uuidof(IResumingEventHandler);
+                MIDL_CONST_ID IID& IID_IResumingEventHandler = __uuidof(IResumingEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2078,7 +2078,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISuspendingEventHandler = _uuidof(ISuspendingEventHandler);
+                MIDL_CONST_ID IID& IID_ISuspendingEventHandler = __uuidof(ISuspendingEventHandler);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2112,7 +2112,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedDeferral = _uuidof(IActivatedDeferral);
+                MIDL_CONST_ID IID& IID_IActivatedDeferral = __uuidof(IActivatedDeferral);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2146,7 +2146,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedEventArgsDeferral = _uuidof(IActivatedEventArgsDeferral);
+                MIDL_CONST_ID IID& IID_IActivatedEventArgsDeferral = __uuidof(IActivatedEventArgsDeferral);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2182,7 +2182,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IActivatedOperation = _uuidof(IActivatedOperation);
+                MIDL_CONST_ID IID& IID_IActivatedOperation = __uuidof(IActivatedOperation);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2273,7 +2273,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHtmlPrintDocumentSource = _uuidof(IHtmlPrintDocumentSource);
+                MIDL_CONST_ID IID& IID_IHtmlPrintDocumentSource = __uuidof(IHtmlPrintDocumentSource);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2318,7 +2318,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_INewWebUIViewCreatedEventArgs = _uuidof(INewWebUIViewCreatedEventArgs);
+                MIDL_CONST_ID IID& IID_INewWebUIViewCreatedEventArgs = __uuidof(INewWebUIViewCreatedEventArgs);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2379,7 +2379,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIActivationStatics = _uuidof(IWebUIActivationStatics);
+                MIDL_CONST_ID IID& IID_IWebUIActivationStatics = __uuidof(IWebUIActivationStatics);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2429,7 +2429,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIActivationStatics2 = _uuidof(IWebUIActivationStatics2);
+                MIDL_CONST_ID IID& IID_IWebUIActivationStatics2 = __uuidof(IWebUIActivationStatics2);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2471,7 +2471,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIActivationStatics3 = _uuidof(IWebUIActivationStatics3);
+                MIDL_CONST_ID IID& IID_IWebUIActivationStatics3 = __uuidof(IWebUIActivationStatics3);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2518,7 +2518,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIActivationStatics4 = _uuidof(IWebUIActivationStatics4);
+                MIDL_CONST_ID IID& IID_IWebUIActivationStatics4 = __uuidof(IWebUIActivationStatics4);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2555,7 +2555,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIBackgroundTaskInstance = _uuidof(IWebUIBackgroundTaskInstance);
+                MIDL_CONST_ID IID& IID_IWebUIBackgroundTaskInstance = __uuidof(IWebUIBackgroundTaskInstance);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2591,7 +2591,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIBackgroundTaskInstanceStatics = _uuidof(IWebUIBackgroundTaskInstanceStatics);
+                MIDL_CONST_ID IID& IID_IWebUIBackgroundTaskInstanceStatics = __uuidof(IWebUIBackgroundTaskInstanceStatics);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2625,7 +2625,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUINavigatedDeferral = _uuidof(IWebUINavigatedDeferral);
+                MIDL_CONST_ID IID& IID_IWebUINavigatedDeferral = __uuidof(IWebUINavigatedDeferral);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2659,7 +2659,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUINavigatedEventArgs = _uuidof(IWebUINavigatedEventArgs);
+                MIDL_CONST_ID IID& IID_IWebUINavigatedEventArgs = __uuidof(IWebUINavigatedEventArgs);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2695,7 +2695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUINavigatedOperation = _uuidof(IWebUINavigatedOperation);
+                MIDL_CONST_ID IID& IID_IWebUINavigatedOperation = __uuidof(IWebUINavigatedOperation);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2751,7 +2751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIView = _uuidof(IWebUIView);
+                MIDL_CONST_ID IID& IID_IWebUIView = __uuidof(IWebUIView);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -2791,7 +2791,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebUIViewStatics = _uuidof(IWebUIViewStatics);
+                MIDL_CONST_ID IID& IID_IWebUIViewStatics = __uuidof(IWebUIViewStatics);
             } /* WebUI */
         } /* UI */
     } /* Windows */
@@ -3000,10 +3000,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics4 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics4 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Standard - Class marshals using the standard marshaler
  *
@@ -7021,10 +7021,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics4 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.WebUI.IWebUIActivationStatics4 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Standard - Class marshals using the standard marshaler
  *

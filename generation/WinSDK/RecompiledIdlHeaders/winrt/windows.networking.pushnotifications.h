@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -751,7 +751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannel = _uuidof(IPushNotificationChannel);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannel = __uuidof(IPushNotificationChannel);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -798,7 +798,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerForUser = _uuidof(IPushNotificationChannelManagerForUser);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerForUser = __uuidof(IPushNotificationChannelManagerForUser);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -842,7 +842,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerForUser2 = _uuidof(IPushNotificationChannelManagerForUser2);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerForUser2 = __uuidof(IPushNotificationChannelManagerForUser2);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -886,7 +886,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics = _uuidof(IPushNotificationChannelManagerStatics);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics = __uuidof(IPushNotificationChannelManagerStatics);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -923,7 +923,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics2 = _uuidof(IPushNotificationChannelManagerStatics2);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics2 = __uuidof(IPushNotificationChannelManagerStatics2);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -959,7 +959,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics3 = _uuidof(IPushNotificationChannelManagerStatics3);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics3 = __uuidof(IPushNotificationChannelManagerStatics3);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -999,7 +999,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics4 = _uuidof(IPushNotificationChannelManagerStatics4);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelManagerStatics4 = __uuidof(IPushNotificationChannelManagerStatics4);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1032,7 +1032,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationChannelsRevokedEventArgs = _uuidof(IPushNotificationChannelsRevokedEventArgs);
+                MIDL_CONST_ID IID& IID_IPushNotificationChannelsRevokedEventArgs = __uuidof(IPushNotificationChannelsRevokedEventArgs);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1086,7 +1086,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPushNotificationReceivedEventArgs = _uuidof(IPushNotificationReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IPushNotificationReceivedEventArgs = __uuidof(IPushNotificationReceivedEventArgs);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1122,7 +1122,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRawNotification = _uuidof(IRawNotification);
+                MIDL_CONST_ID IID& IID_IRawNotification = __uuidof(IRawNotification);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1161,7 +1161,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRawNotification2 = _uuidof(IRawNotification2);
+                MIDL_CONST_ID IID& IID_IRawNotification2 = __uuidof(IRawNotification2);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1197,7 +1197,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRawNotification3 = _uuidof(IRawNotification3);
+                MIDL_CONST_ID IID& IID_IRawNotification3 = __uuidof(IRawNotification3);
             } /* PushNotifications */
         } /* Networking */
     } /* Windows */
@@ -1233,8 +1233,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -2924,8 +2924,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.PushNotifications.IPushNotificationChannelManagerStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *

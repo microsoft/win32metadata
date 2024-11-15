@@ -961,6 +961,10 @@ private:
         UNREFERENCED_PARAMETER(Parameter);
         UNREFERENCED_PARAMETER(Context);
 
+        __WRL_ASSERT__(!Context);
+        _Analysis_assume_(!Context);
+
+
 #ifdef _NO_CAUSALITY_DOWNLEVEL_
         // do not attempt to trace causality on OS versions less than 6.2 (Windows 8)
         OSVERSIONINFOEX osvi;

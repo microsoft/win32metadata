@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -2846,7 +2846,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointment = _uuidof(IAppointment);
+                MIDL_CONST_ID IID& IID_IAppointment = __uuidof(IAppointment);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -2942,7 +2942,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointment2 = _uuidof(IAppointment2);
+                MIDL_CONST_ID IID& IID_IAppointment2 = __uuidof(IAppointment2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -2994,7 +2994,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointment3 = _uuidof(IAppointment3);
+                MIDL_CONST_ID IID& IID_IAppointment3 = __uuidof(IAppointment3);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3126,7 +3126,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentCalendar = _uuidof(IAppointmentCalendar);
+                MIDL_CONST_ID IID& IID_IAppointmentCalendar = __uuidof(IAppointmentCalendar);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3258,7 +3258,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentCalendar2 = _uuidof(IAppointmentCalendar2);
+                MIDL_CONST_ID IID& IID_IAppointmentCalendar2 = __uuidof(IAppointmentCalendar2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3294,7 +3294,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentCalendar3 = _uuidof(IAppointmentCalendar3);
+                MIDL_CONST_ID IID& IID_IAppointmentCalendar3 = __uuidof(IAppointmentCalendar3);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3346,7 +3346,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManager = _uuidof(IAppointmentCalendarSyncManager);
+                MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManager = __uuidof(IAppointmentCalendarSyncManager);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3388,7 +3388,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManager2 = _uuidof(IAppointmentCalendarSyncManager2);
+                MIDL_CONST_ID IID& IID_IAppointmentCalendarSyncManager2 = __uuidof(IAppointmentCalendarSyncManager2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3427,7 +3427,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentConflictResult = _uuidof(IAppointmentConflictResult);
+                MIDL_CONST_ID IID& IID_IAppointmentConflictResult = __uuidof(IAppointmentConflictResult);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3469,7 +3469,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentException = _uuidof(IAppointmentException);
+                MIDL_CONST_ID IID& IID_IAppointmentException = __uuidof(IAppointmentException);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3517,7 +3517,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentInvitee = _uuidof(IAppointmentInvitee);
+                MIDL_CONST_ID IID& IID_IAppointmentInvitee = __uuidof(IAppointmentInvitee);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3625,7 +3625,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentManagerForUser = _uuidof(IAppointmentManagerForUser);
+                MIDL_CONST_ID IID& IID_IAppointmentManagerForUser = __uuidof(IAppointmentManagerForUser);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3713,7 +3713,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentManagerStatics = _uuidof(IAppointmentManagerStatics);
+                MIDL_CONST_ID IID& IID_IAppointmentManagerStatics = __uuidof(IAppointmentManagerStatics);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3763,7 +3763,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentManagerStatics2 = _uuidof(IAppointmentManagerStatics2);
+                MIDL_CONST_ID IID& IID_IAppointmentManagerStatics2 = __uuidof(IAppointmentManagerStatics2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3800,7 +3800,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentManagerStatics3 = _uuidof(IAppointmentManagerStatics3);
+                MIDL_CONST_ID IID& IID_IAppointmentManagerStatics3 = __uuidof(IAppointmentManagerStatics3);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3843,7 +3843,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentParticipant = _uuidof(IAppointmentParticipant);
+                MIDL_CONST_ID IID& IID_IAppointmentParticipant = __uuidof(IAppointmentParticipant);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3945,7 +3945,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentPropertiesStatics = _uuidof(IAppointmentPropertiesStatics);
+                MIDL_CONST_ID IID& IID_IAppointmentPropertiesStatics = __uuidof(IAppointmentPropertiesStatics);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -3990,7 +3990,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentPropertiesStatics2 = _uuidof(IAppointmentPropertiesStatics2);
+                MIDL_CONST_ID IID& IID_IAppointmentPropertiesStatics2 = __uuidof(IAppointmentPropertiesStatics2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4071,7 +4071,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentRecurrence = _uuidof(IAppointmentRecurrence);
+                MIDL_CONST_ID IID& IID_IAppointmentRecurrence = __uuidof(IAppointmentRecurrence);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4116,7 +4116,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentRecurrence2 = _uuidof(IAppointmentRecurrence2);
+                MIDL_CONST_ID IID& IID_IAppointmentRecurrence2 = __uuidof(IAppointmentRecurrence2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4156,7 +4156,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentRecurrence3 = _uuidof(IAppointmentRecurrence3);
+                MIDL_CONST_ID IID& IID_IAppointmentRecurrence3 = __uuidof(IAppointmentRecurrence3);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4289,7 +4289,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStore = _uuidof(IAppointmentStore);
+                MIDL_CONST_ID IID& IID_IAppointmentStore = __uuidof(IAppointmentStore);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4337,7 +4337,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStore2 = _uuidof(IAppointmentStore2);
+                MIDL_CONST_ID IID& IID_IAppointmentStore2 = __uuidof(IAppointmentStore2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4374,7 +4374,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStore3 = _uuidof(IAppointmentStore3);
+                MIDL_CONST_ID IID& IID_IAppointmentStore3 = __uuidof(IAppointmentStore3);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4413,7 +4413,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChange = _uuidof(IAppointmentStoreChange);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChange = __uuidof(IAppointmentStoreChange);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4452,7 +4452,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChange2 = _uuidof(IAppointmentStoreChange2);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChange2 = __uuidof(IAppointmentStoreChange2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4492,7 +4492,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChangeReader = _uuidof(IAppointmentStoreChangeReader);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChangeReader = __uuidof(IAppointmentStoreChangeReader);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4530,7 +4530,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChangeTracker = _uuidof(IAppointmentStoreChangeTracker);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChangeTracker = __uuidof(IAppointmentStoreChangeTracker);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4566,7 +4566,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChangeTracker2 = _uuidof(IAppointmentStoreChangeTracker2);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChangeTracker2 = __uuidof(IAppointmentStoreChangeTracker2);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4600,7 +4600,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChangedDeferral = _uuidof(IAppointmentStoreChangedDeferral);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChangedDeferral = __uuidof(IAppointmentStoreChangedDeferral);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4636,7 +4636,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreChangedEventArgs = _uuidof(IAppointmentStoreChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreChangedEventArgs = __uuidof(IAppointmentStoreChangedEventArgs);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4669,7 +4669,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppointmentStoreNotificationTriggerDetails = _uuidof(IAppointmentStoreNotificationTriggerDetails);
+                MIDL_CONST_ID IID& IID_IAppointmentStoreNotificationTriggerDetails = __uuidof(IAppointmentStoreNotificationTriggerDetails);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4720,7 +4720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFindAppointmentsOptions = _uuidof(IFindAppointmentsOptions);
+                MIDL_CONST_ID IID& IID_IFindAppointmentsOptions = __uuidof(IFindAppointmentsOptions);
             } /* Appointments */
         } /* ApplicationModel */
     } /* Windows */
@@ -4871,9 +4871,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -4933,8 +4933,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -12633,9 +12633,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -12695,8 +12695,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Appointments.IAppointmentPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

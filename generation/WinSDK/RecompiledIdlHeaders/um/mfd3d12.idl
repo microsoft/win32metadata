@@ -128,7 +128,6 @@ typedef enum MF_MT_D3D_RESOURCE_VERSION_ENUM
     MF_D3D12_RESOURCE
 }MF_MT_D3D_RESOURCE_VERSION_ENUM;
 
-
 //
 //
 //
@@ -220,6 +219,12 @@ cpp_quote("EXTERN_GUID( MF_MT_D3D12_RESOURCE_FLAG_ALLOW_CROSS_ADAPTER, 0xa6a1e43
 // {a4940b2-cfd6-4738-9d02-98-11-37-34-01-5a}
 cpp_quote("EXTERN_GUID( MF_MT_D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS, 0xa4940b2, 0xcfd6, 0x4738, 0x9d, 0x2, 0x98, 0x11, 0x37, 0x34, 0x1, 0x5a );")
 
+// MF_MT_D3D12_RESOURCE_DIMENSION
+// Data type: UINT32 (treat as enum of D3D12_RESOURCE_DIMENSION)
+// This attribute is set on mediatype to advertise D3D12_RESOURCE_DIMENSION
+// {5F772624-16CA-4B89-9651-5DDF769F8AB8}
+cpp_quote("EXTERN_GUID( MF_MT_D3D12_RESOURCE_DIMENSION,     0x5f772624, 0x16ca, 0x4b89, 0x96, 0x51, 0x5d, 0xdf, 0x76, 0x9f, 0x8a, 0xb8);")
+
 // MF_SA_D3D12_HEAP_FLAGS
 // Data type: UINT32
 // This attribute contains the value with the heap options used for the D3D12 resources in the stream.  The attribute
@@ -240,6 +245,12 @@ cpp_quote("EXTERN_GUID( MF_SA_D3D12_HEAP_TYPE, 0x56f26a76, 0xbbc1, 0x4ce0, 0xbb,
 // in the stream.  The blob contains an instance of the D3D12_CLEAR_VALUE structure.
 // {86ba9a39-0526-495d-9ab5-54-ec-9f-ad-6f-c3}
 cpp_quote("EXTERN_GUID( MF_SA_D3D12_CLEAR_VALUE, 0x86ba9a39, 0x526, 0x495d, 0x9a, 0xb5, 0x54, 0xec, 0x9f, 0xad, 0x6f, 0xc3 );") 
+
+// MF_SA_D3D12_AWARE
+// Data type: UINT32 (treat as Boolean)
+// This attribute indicates whether the media source, media foundation transform supports Dx12 resource.
+// {77f0bacb-17a8-4a50-9a7d-a5-cc-09-d3-9d-44}
+cpp_quote("EXTERN_GUID ( MF_SA_D3D12_AWARE,     0x77f0bacb, 0x17a8, 0x4a50, 0x9a, 0x7d, 0xa5, 0xcc, 0x9, 0xd3, 0x9d, 0x44);")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion

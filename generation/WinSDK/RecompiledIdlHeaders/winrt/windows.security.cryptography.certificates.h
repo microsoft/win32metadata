@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2223,7 +2223,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificate = _uuidof(ICertificate);
+                    MIDL_CONST_ID IID& IID_ICertificate = __uuidof(ICertificate);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2276,7 +2276,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificate2 = _uuidof(ICertificate2);
+                    MIDL_CONST_ID IID& IID_ICertificate2 = __uuidof(ICertificate2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2320,7 +2320,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificate3 = _uuidof(ICertificate3);
+                    MIDL_CONST_ID IID& IID_ICertificate3 = __uuidof(ICertificate3);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2366,7 +2366,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateChain = _uuidof(ICertificateChain);
+                    MIDL_CONST_ID IID& IID_ICertificateChain = __uuidof(ICertificateChain);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2419,7 +2419,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics = _uuidof(ICertificateEnrollmentManagerStatics);
+                    MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics = __uuidof(ICertificateEnrollmentManagerStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2467,7 +2467,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics2 = _uuidof(ICertificateEnrollmentManagerStatics2);
+                    MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics2 = __uuidof(ICertificateEnrollmentManagerStatics2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2508,7 +2508,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics3 = _uuidof(ICertificateEnrollmentManagerStatics3);
+                    MIDL_CONST_ID IID& IID_ICertificateEnrollmentManagerStatics3 = __uuidof(ICertificateEnrollmentManagerStatics3);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2566,7 +2566,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateExtension = _uuidof(ICertificateExtension);
+                    MIDL_CONST_ID IID& IID_ICertificateExtension = __uuidof(ICertificateExtension);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2605,7 +2605,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateFactory = _uuidof(ICertificateFactory);
+                    MIDL_CONST_ID IID& IID_ICertificateFactory = __uuidof(ICertificateFactory);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2688,7 +2688,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateKeyUsages = _uuidof(ICertificateKeyUsages);
+                    MIDL_CONST_ID IID& IID_ICertificateKeyUsages = __uuidof(ICertificateKeyUsages);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2752,7 +2752,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateQuery = _uuidof(ICertificateQuery);
+                    MIDL_CONST_ID IID& IID_ICertificateQuery = __uuidof(ICertificateQuery);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2805,7 +2805,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateQuery2 = _uuidof(ICertificateQuery2);
+                    MIDL_CONST_ID IID& IID_ICertificateQuery2 = __uuidof(ICertificateQuery2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2894,7 +2894,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateRequestProperties = _uuidof(ICertificateRequestProperties);
+                    MIDL_CONST_ID IID& IID_ICertificateRequestProperties = __uuidof(ICertificateRequestProperties);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -2947,7 +2947,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateRequestProperties2 = _uuidof(ICertificateRequestProperties2);
+                    MIDL_CONST_ID IID& IID_ICertificateRequestProperties2 = __uuidof(ICertificateRequestProperties2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3014,7 +3014,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateRequestProperties3 = _uuidof(ICertificateRequestProperties3);
+                    MIDL_CONST_ID IID& IID_ICertificateRequestProperties3 = __uuidof(ICertificateRequestProperties3);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3058,7 +3058,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateRequestProperties4 = _uuidof(ICertificateRequestProperties4);
+                    MIDL_CONST_ID IID& IID_ICertificateRequestProperties4 = __uuidof(ICertificateRequestProperties4);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3099,7 +3099,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateStore = _uuidof(ICertificateStore);
+                    MIDL_CONST_ID IID& IID_ICertificateStore = __uuidof(ICertificateStore);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3137,7 +3137,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateStore2 = _uuidof(ICertificateStore2);
+                    MIDL_CONST_ID IID& IID_ICertificateStore2 = __uuidof(ICertificateStore2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3189,7 +3189,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateStoresStatics = _uuidof(ICertificateStoresStatics);
+                    MIDL_CONST_ID IID& IID_ICertificateStoresStatics = __uuidof(ICertificateStoresStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3228,7 +3228,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICertificateStoresStatics2 = _uuidof(ICertificateStoresStatics2);
+                    MIDL_CONST_ID IID& IID_ICertificateStoresStatics2 = __uuidof(ICertificateStoresStatics2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3299,7 +3299,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IChainBuildingParameters = _uuidof(IChainBuildingParameters);
+                    MIDL_CONST_ID IID& IID_IChainBuildingParameters = __uuidof(IChainBuildingParameters);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3346,7 +3346,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IChainValidationParameters = _uuidof(IChainValidationParameters);
+                    MIDL_CONST_ID IID& IID_IChainValidationParameters = __uuidof(IChainValidationParameters);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3394,7 +3394,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsAttachedSignature = _uuidof(ICmsAttachedSignature);
+                    MIDL_CONST_ID IID& IID_ICmsAttachedSignature = __uuidof(ICmsAttachedSignature);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3433,7 +3433,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsAttachedSignatureFactory = _uuidof(ICmsAttachedSignatureFactory);
+                    MIDL_CONST_ID IID& IID_ICmsAttachedSignatureFactory = __uuidof(ICmsAttachedSignatureFactory);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3474,7 +3474,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsAttachedSignatureStatics = _uuidof(ICmsAttachedSignatureStatics);
+                    MIDL_CONST_ID IID& IID_ICmsAttachedSignatureStatics = __uuidof(ICmsAttachedSignatureStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3519,7 +3519,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsDetachedSignature = _uuidof(ICmsDetachedSignature);
+                    MIDL_CONST_ID IID& IID_ICmsDetachedSignature = __uuidof(ICmsDetachedSignature);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3558,7 +3558,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsDetachedSignatureFactory = _uuidof(ICmsDetachedSignatureFactory);
+                    MIDL_CONST_ID IID& IID_ICmsDetachedSignatureFactory = __uuidof(ICmsDetachedSignatureFactory);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3599,7 +3599,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsDetachedSignatureStatics = _uuidof(ICmsDetachedSignatureStatics);
+                    MIDL_CONST_ID IID& IID_ICmsDetachedSignatureStatics = __uuidof(ICmsDetachedSignatureStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3649,7 +3649,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsSignerInfo = _uuidof(ICmsSignerInfo);
+                    MIDL_CONST_ID IID& IID_ICmsSignerInfo = __uuidof(ICmsSignerInfo);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3693,7 +3693,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICmsTimestampInfo = _uuidof(ICmsTimestampInfo);
+                    MIDL_CONST_ID IID& IID_ICmsTimestampInfo = __uuidof(ICmsTimestampInfo);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3752,7 +3752,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyAlgorithmNamesStatics = _uuidof(IKeyAlgorithmNamesStatics);
+                    MIDL_CONST_ID IID& IID_IKeyAlgorithmNamesStatics = __uuidof(IKeyAlgorithmNamesStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3793,7 +3793,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyAlgorithmNamesStatics2 = _uuidof(IKeyAlgorithmNamesStatics2);
+                    MIDL_CONST_ID IID& IID_IKeyAlgorithmNamesStatics2 = __uuidof(IKeyAlgorithmNamesStatics2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3836,7 +3836,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyAttestationHelperStatics = _uuidof(IKeyAttestationHelperStatics);
+                    MIDL_CONST_ID IID& IID_IKeyAttestationHelperStatics = __uuidof(IKeyAttestationHelperStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3876,7 +3876,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyAttestationHelperStatics2 = _uuidof(IKeyAttestationHelperStatics2);
+                    MIDL_CONST_ID IID& IID_IKeyAttestationHelperStatics2 = __uuidof(IKeyAttestationHelperStatics2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3920,7 +3920,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyStorageProviderNamesStatics = _uuidof(IKeyStorageProviderNamesStatics);
+                    MIDL_CONST_ID IID& IID_IKeyStorageProviderNamesStatics = __uuidof(IKeyStorageProviderNamesStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -3958,7 +3958,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyStorageProviderNamesStatics2 = _uuidof(IKeyStorageProviderNamesStatics2);
+                    MIDL_CONST_ID IID& IID_IKeyStorageProviderNamesStatics2 = __uuidof(IKeyStorageProviderNamesStatics2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4035,7 +4035,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPfxImportParameters = _uuidof(IPfxImportParameters);
+                    MIDL_CONST_ID IID& IID_IPfxImportParameters = __uuidof(IPfxImportParameters);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4079,7 +4079,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStandardCertificateStoreNamesStatics = _uuidof(IStandardCertificateStoreNamesStatics);
+                    MIDL_CONST_ID IID& IID_IStandardCertificateStoreNamesStatics = __uuidof(IStandardCertificateStoreNamesStatics);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4132,7 +4132,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISubjectAlternativeNameInfo = _uuidof(ISubjectAlternativeNameInfo);
+                    MIDL_CONST_ID IID& IID_ISubjectAlternativeNameInfo = __uuidof(ISubjectAlternativeNameInfo);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4188,7 +4188,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISubjectAlternativeNameInfo2 = _uuidof(ISubjectAlternativeNameInfo2);
+                    MIDL_CONST_ID IID& IID_ISubjectAlternativeNameInfo2 = __uuidof(ISubjectAlternativeNameInfo2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4251,7 +4251,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IUserCertificateEnrollmentManager = _uuidof(IUserCertificateEnrollmentManager);
+                    MIDL_CONST_ID IID& IID_IUserCertificateEnrollmentManager = __uuidof(IUserCertificateEnrollmentManager);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4292,7 +4292,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IUserCertificateEnrollmentManager2 = _uuidof(IUserCertificateEnrollmentManager2);
+                    MIDL_CONST_ID IID& IID_IUserCertificateEnrollmentManager2 = __uuidof(IUserCertificateEnrollmentManager2);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */
@@ -4338,7 +4338,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IUserCertificateStore = _uuidof(IUserCertificateStore);
+                    MIDL_CONST_ID IID& IID_IUserCertificateStore = __uuidof(IUserCertificateStore);
                 } /* Certificates */
             } /* Cryptography */
         } /* Security */

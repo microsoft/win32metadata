@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_COREWINDOWDIALOGSCONTRACT_VERSION)
@@ -2290,7 +2290,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera = _uuidof(IHolographicCamera);
+                MIDL_CONST_ID IID& IID_IHolographicCamera = __uuidof(IHolographicCamera);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2335,7 +2335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera2 = _uuidof(IHolographicCamera2);
+                MIDL_CONST_ID IID& IID_IHolographicCamera2 = __uuidof(IHolographicCamera2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2384,7 +2384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera3 = _uuidof(IHolographicCamera3);
+                MIDL_CONST_ID IID& IID_IHolographicCamera3 = __uuidof(IHolographicCamera3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2420,7 +2420,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera4 = _uuidof(IHolographicCamera4);
+                MIDL_CONST_ID IID& IID_IHolographicCamera4 = __uuidof(IHolographicCamera4);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2462,7 +2462,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera5 = _uuidof(IHolographicCamera5);
+                MIDL_CONST_ID IID& IID_IHolographicCamera5 = __uuidof(IHolographicCamera5);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2498,7 +2498,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCamera6 = _uuidof(IHolographicCamera6);
+                MIDL_CONST_ID IID& IID_IHolographicCamera6 = __uuidof(IHolographicCamera6);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2558,7 +2558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraPose = _uuidof(IHolographicCameraPose);
+                MIDL_CONST_ID IID& IID_IHolographicCameraPose = __uuidof(IHolographicCameraPose);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2602,7 +2602,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraPose2 = _uuidof(IHolographicCameraPose2);
+                MIDL_CONST_ID IID& IID_IHolographicCameraPose2 = __uuidof(IHolographicCameraPose2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2656,7 +2656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters = _uuidof(IHolographicCameraRenderingParameters);
+                MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters = __uuidof(IHolographicCameraRenderingParameters);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2701,7 +2701,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters2 = _uuidof(IHolographicCameraRenderingParameters2);
+                MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters2 = __uuidof(IHolographicCameraRenderingParameters2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2744,7 +2744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters3 = _uuidof(IHolographicCameraRenderingParameters3);
+                MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters3 = __uuidof(IHolographicCameraRenderingParameters3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2783,7 +2783,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters4 = _uuidof(IHolographicCameraRenderingParameters4);
+                MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters4 = __uuidof(IHolographicCameraRenderingParameters4);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2824,7 +2824,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicCameraViewportParameters = _uuidof(IHolographicCameraViewportParameters);
+                MIDL_CONST_ID IID& IID_IHolographicCameraViewportParameters = __uuidof(IHolographicCameraViewportParameters);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2875,7 +2875,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicDisplay = _uuidof(IHolographicDisplay);
+                MIDL_CONST_ID IID& IID_IHolographicDisplay = __uuidof(IHolographicDisplay);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2911,7 +2911,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicDisplay2 = _uuidof(IHolographicDisplay2);
+                MIDL_CONST_ID IID& IID_IHolographicDisplay2 = __uuidof(IHolographicDisplay2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2948,7 +2948,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicDisplay3 = _uuidof(IHolographicDisplay3);
+                MIDL_CONST_ID IID& IID_IHolographicDisplay3 = __uuidof(IHolographicDisplay3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -2984,7 +2984,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicDisplayStatics = _uuidof(IHolographicDisplayStatics);
+                MIDL_CONST_ID IID& IID_IHolographicDisplayStatics = __uuidof(IHolographicDisplayStatics);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3042,7 +3042,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE WaitForFrameToFinish(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrame = _uuidof(IHolographicFrame);
+                MIDL_CONST_ID IID& IID_IHolographicFrame = __uuidof(IHolographicFrame);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3082,7 +3082,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrame2 = _uuidof(IHolographicFrame2);
+                MIDL_CONST_ID IID& IID_IHolographicFrame2 = __uuidof(IHolographicFrame2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3118,7 +3118,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrame3 = _uuidof(IHolographicFrame3);
+                MIDL_CONST_ID IID& IID_IHolographicFrame3 = __uuidof(IHolographicFrame3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3157,7 +3157,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFramePrediction = _uuidof(IHolographicFramePrediction);
+                MIDL_CONST_ID IID& IID_IHolographicFramePrediction = __uuidof(IHolographicFramePrediction);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3202,7 +3202,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFramePresentationMonitor = _uuidof(IHolographicFramePresentationMonitor);
+                MIDL_CONST_ID IID& IID_IHolographicFramePresentationMonitor = __uuidof(IHolographicFramePresentationMonitor);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3268,7 +3268,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFramePresentationReport = _uuidof(IHolographicFramePresentationReport);
+                MIDL_CONST_ID IID& IID_IHolographicFramePresentationReport = __uuidof(IHolographicFramePresentationReport);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3316,7 +3316,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrameRenderingReport = _uuidof(IHolographicFrameRenderingReport);
+                MIDL_CONST_ID IID& IID_IHolographicFrameRenderingReport = __uuidof(IHolographicFrameRenderingReport);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3355,7 +3355,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrameScanoutMonitor = _uuidof(IHolographicFrameScanoutMonitor);
+                MIDL_CONST_ID IID& IID_IHolographicFrameScanoutMonitor = __uuidof(IHolographicFrameScanoutMonitor);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3403,7 +3403,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicFrameScanoutReport = _uuidof(IHolographicFrameScanoutReport);
+                MIDL_CONST_ID IID& IID_IHolographicFrameScanoutReport = __uuidof(IHolographicFrameScanoutReport);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3442,7 +3442,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicQuadLayer = _uuidof(IHolographicQuadLayer);
+                MIDL_CONST_ID IID& IID_IHolographicQuadLayer = __uuidof(IHolographicQuadLayer);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3484,7 +3484,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicQuadLayerFactory = _uuidof(IHolographicQuadLayerFactory);
+                MIDL_CONST_ID IID& IID_IHolographicQuadLayerFactory = __uuidof(IHolographicQuadLayerFactory);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3538,7 +3538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicQuadLayerUpdateParameters = _uuidof(IHolographicQuadLayerUpdateParameters);
+                MIDL_CONST_ID IID& IID_IHolographicQuadLayerUpdateParameters = __uuidof(IHolographicQuadLayerUpdateParameters);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3577,7 +3577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicQuadLayerUpdateParameters2 = _uuidof(IHolographicQuadLayerUpdateParameters2);
+                MIDL_CONST_ID IID& IID_IHolographicQuadLayerUpdateParameters2 = __uuidof(IHolographicQuadLayerUpdateParameters2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3633,7 +3633,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpace = _uuidof(IHolographicSpace);
+                MIDL_CONST_ID IID& IID_IHolographicSpace = __uuidof(IHolographicSpace);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3687,7 +3687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpace2 = _uuidof(IHolographicSpace2);
+                MIDL_CONST_ID IID& IID_IHolographicSpace2 = __uuidof(IHolographicSpace2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3724,7 +3724,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpace3 = _uuidof(IHolographicSpace3);
+                MIDL_CONST_ID IID& IID_IHolographicSpace3 = __uuidof(IHolographicSpace3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3763,7 +3763,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpaceCameraAddedEventArgs = _uuidof(IHolographicSpaceCameraAddedEventArgs);
+                MIDL_CONST_ID IID& IID_IHolographicSpaceCameraAddedEventArgs = __uuidof(IHolographicSpaceCameraAddedEventArgs);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3799,7 +3799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpaceCameraRemovedEventArgs = _uuidof(IHolographicSpaceCameraRemovedEventArgs);
+                MIDL_CONST_ID IID& IID_IHolographicSpaceCameraRemovedEventArgs = __uuidof(IHolographicSpaceCameraRemovedEventArgs);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3836,7 +3836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpaceStatics = _uuidof(IHolographicSpaceStatics);
+                MIDL_CONST_ID IID& IID_IHolographicSpaceStatics = __uuidof(IHolographicSpaceStatics);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3882,7 +3882,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpaceStatics2 = _uuidof(IHolographicSpaceStatics2);
+                MIDL_CONST_ID IID& IID_IHolographicSpaceStatics2 = __uuidof(IHolographicSpaceStatics2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3918,7 +3918,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicSpaceStatics3 = _uuidof(IHolographicSpaceStatics3);
+                MIDL_CONST_ID IID& IID_IHolographicSpaceStatics3 = __uuidof(IHolographicSpaceStatics3);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -3988,7 +3988,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicViewConfiguration = _uuidof(IHolographicViewConfiguration);
+                MIDL_CONST_ID IID& IID_IHolographicViewConfiguration = __uuidof(IHolographicViewConfiguration);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -4024,7 +4024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHolographicViewConfiguration2 = _uuidof(IHolographicViewConfiguration2);
+                MIDL_CONST_ID IID& IID_IHolographicViewConfiguration2 = __uuidof(IHolographicViewConfiguration2);
             } /* Holographic */
         } /* Graphics */
     } /* Windows */
@@ -4355,8 +4355,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicSpace ** Default Interface **
@@ -10734,8 +10734,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicSpace ** Default Interface **

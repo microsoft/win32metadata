@@ -1127,16 +1127,27 @@ typedef struct _FIRMWARE_REQUEST_BLOCK {
 #define FIRMWARE_REQUEST_FLAG_FIRST_SEGMENT                 0x00000004
 
 //
+// Indicate that the existing firmware in slot should be activated immediately without
+// controller reset.
+//
+#define FIRMWARE_REQUEST_FLAG_SWITCH_TO_FIRMWARE_WITHOUT_RESET   0x10000000
+
+//
+// Indicate that any existing firmware in slot should be replaced with the downloaded image,
+// and activated with controller reset.
+//
+#define FIRMWARE_REQUEST_FLAG_REPLACE_AND_SWITCH_UPON_RESET      0x20000000
+
+//
 // Indicate that any existing firmware in slot should be replaced with the downloaded image.
 //
-#define FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE        0x40000000
+#define FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE             0x40000000
 
 //
 // Indicate that the existing firmware in slot should be activated. 
 // This flag is only valid for fimrware_activate request. It's ignored for other requests.
 //
-#define FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE   0x80000000
-
+#define FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE        0x80000000
 
 //
 // Parameter for FIRMWARE_FUNCTION_GET_INFO

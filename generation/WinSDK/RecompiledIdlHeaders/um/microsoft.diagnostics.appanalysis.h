@@ -58,7 +58,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -1090,7 +1090,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwEvent=_uuidof(IEtwEvent);
+                MIDL_CONST_ID IID & IID_IEtwEvent=__uuidof(IEtwEvent);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1130,7 +1130,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwEventFactory=_uuidof(IEtwEventFactory);
+                MIDL_CONST_ID IID & IID_IEtwEventFactory=__uuidof(IEtwEventFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1176,7 +1176,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwProvider=_uuidof(IEtwProvider);
+                MIDL_CONST_ID IID & IID_IEtwProvider=__uuidof(IEtwProvider);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1220,7 +1220,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwProviderStatics=_uuidof(IEtwProviderStatics);
+                MIDL_CONST_ID IID & IID_IEtwProviderStatics=__uuidof(IEtwProviderStatics);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1253,7 +1253,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwEventRecordCallback=_uuidof(IEtwEventRecordCallback);
+                MIDL_CONST_ID IID & IID_IEtwEventRecordCallback=__uuidof(IEtwEventRecordCallback);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1291,7 +1291,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwEventWatcher=_uuidof(IEtwEventWatcher);
+                MIDL_CONST_ID IID & IID_IEtwEventWatcher=__uuidof(IEtwEventWatcher);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1333,7 +1333,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwRule=_uuidof(IEtwRule);
+                MIDL_CONST_ID IID & IID_IEtwRule=__uuidof(IEtwRule);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1372,7 +1372,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwRuleFactory=_uuidof(IEtwRuleFactory);
+                MIDL_CONST_ID IID & IID_IEtwRuleFactory=__uuidof(IEtwRuleFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1410,7 +1410,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IResourceStringFactory=_uuidof(IResourceStringFactory);
+                MIDL_CONST_ID IID & IID_IResourceStringFactory=__uuidof(IResourceStringFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1458,7 +1458,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IResourceString=_uuidof(IResourceString);
+                MIDL_CONST_ID IID & IID_IResourceString=__uuidof(IResourceString);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1497,7 +1497,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IResourceStringView=_uuidof(IResourceStringView);
+                MIDL_CONST_ID IID & IID_IResourceStringView=__uuidof(IResourceStringView);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1557,7 +1557,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IRule=_uuidof(IRule);
+                MIDL_CONST_ID IID & IID_IRule=__uuidof(IRule);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1638,7 +1638,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IEtwEventRecord=_uuidof(IEtwEventRecord);
+                MIDL_CONST_ID IID & IID_IEtwEventRecord=__uuidof(IEtwEventRecord);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1705,7 +1705,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgs=_uuidof(IRuleTriggeredEventArgs);
+                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgs=__uuidof(IRuleTriggeredEventArgs);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1747,7 +1747,7 @@ namespace ABI {
                     
                 };
 
-                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgsFactory=_uuidof(IRuleTriggeredEventArgsFactory);
+                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgsFactory=__uuidof(IRuleTriggeredEventArgsFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */

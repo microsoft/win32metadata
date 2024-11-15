@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -773,7 +773,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFileOpenPickerUI = _uuidof(IFileOpenPickerUI);
+                    MIDL_CONST_ID IID& IID_IFileOpenPickerUI = __uuidof(IFileOpenPickerUI);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -817,7 +817,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFileRemovedEventArgs = _uuidof(IFileRemovedEventArgs);
+                    MIDL_CONST_ID IID& IID_IFileRemovedEventArgs = __uuidof(IFileRemovedEventArgs);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -885,7 +885,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFileSavePickerUI = _uuidof(IFileSavePickerUI);
+                    MIDL_CONST_ID IID& IID_IFileSavePickerUI = __uuidof(IFileSavePickerUI);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -921,7 +921,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPickerClosingDeferral = _uuidof(IPickerClosingDeferral);
+                    MIDL_CONST_ID IID& IID_IPickerClosingDeferral = __uuidof(IPickerClosingDeferral);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -962,7 +962,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPickerClosingEventArgs = _uuidof(IPickerClosingEventArgs);
+                    MIDL_CONST_ID IID& IID_IPickerClosingEventArgs = __uuidof(IPickerClosingEventArgs);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -1003,7 +1003,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPickerClosingOperation = _uuidof(IPickerClosingOperation);
+                    MIDL_CONST_ID IID& IID_IPickerClosingOperation = __uuidof(IPickerClosingOperation);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -1047,7 +1047,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITargetFileRequest = _uuidof(ITargetFileRequest);
+                    MIDL_CONST_ID IID& IID_ITargetFileRequest = __uuidof(ITargetFileRequest);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -1083,7 +1083,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITargetFileRequestDeferral = _uuidof(ITargetFileRequestDeferral);
+                    MIDL_CONST_ID IID& IID_ITargetFileRequestDeferral = __uuidof(ITargetFileRequestDeferral);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */
@@ -1121,7 +1121,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITargetFileRequestedEventArgs = _uuidof(ITargetFileRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_ITargetFileRequestedEventArgs = __uuidof(ITargetFileRequestedEventArgs);
                 } /* Provider */
             } /* Pickers */
         } /* Storage */

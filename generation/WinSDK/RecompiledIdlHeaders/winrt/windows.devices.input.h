@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1008,6 +1008,9 @@ namespace ABI {
                     PointerDeviceType_Touch = 0,
                     PointerDeviceType_Pen = 1,
                     PointerDeviceType_Mouse = 2,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+                    PointerDeviceType_Touchpad = 3,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
                 };
             } /* Input */
         } /* Devices */
@@ -1093,7 +1096,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyboardCapabilities = _uuidof(IKeyboardCapabilities);
+                MIDL_CONST_ID IID& IID_IKeyboardCapabilities = __uuidof(IKeyboardCapabilities);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1141,7 +1144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMouseCapabilities = _uuidof(IMouseCapabilities);
+                MIDL_CONST_ID IID& IID_IMouseCapabilities = __uuidof(IMouseCapabilities);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1181,7 +1184,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMouseDevice = _uuidof(IMouseDevice);
+                MIDL_CONST_ID IID& IID_IMouseDevice = __uuidof(IMouseDevice);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1217,7 +1220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMouseDeviceStatics = _uuidof(IMouseDeviceStatics);
+                MIDL_CONST_ID IID& IID_IMouseDeviceStatics = __uuidof(IMouseDeviceStatics);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1253,7 +1256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMouseEventArgs = _uuidof(IMouseEventArgs);
+                MIDL_CONST_ID IID& IID_IMouseEventArgs = __uuidof(IMouseEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1317,7 +1320,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenButtonListener = _uuidof(IPenButtonListener);
+                MIDL_CONST_ID IID& IID_IPenButtonListener = __uuidof(IPenButtonListener);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1353,7 +1356,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenButtonListenerStatics = _uuidof(IPenButtonListenerStatics);
+                MIDL_CONST_ID IID& IID_IPenButtonListenerStatics = __uuidof(IPenButtonListenerStatics);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1389,7 +1392,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDevice = _uuidof(IPenDevice);
+                MIDL_CONST_ID IID& IID_IPenDevice = __uuidof(IPenDevice);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1425,7 +1428,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDevice2 = _uuidof(IPenDevice2);
+                MIDL_CONST_ID IID& IID_IPenDevice2 = __uuidof(IPenDevice2);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1462,7 +1465,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDeviceStatics = _uuidof(IPenDeviceStatics);
+                MIDL_CONST_ID IID& IID_IPenDeviceStatics = __uuidof(IPenDeviceStatics);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1519,7 +1522,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDockListener = _uuidof(IPenDockListener);
+                MIDL_CONST_ID IID& IID_IPenDockListener = __uuidof(IPenDockListener);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1555,7 +1558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDockListenerStatics = _uuidof(IPenDockListenerStatics);
+                MIDL_CONST_ID IID& IID_IPenDockListenerStatics = __uuidof(IPenDockListenerStatics);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1588,7 +1591,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenDockedEventArgs = _uuidof(IPenDockedEventArgs);
+                MIDL_CONST_ID IID& IID_IPenDockedEventArgs = __uuidof(IPenDockedEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1621,7 +1624,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenTailButtonClickedEventArgs = _uuidof(IPenTailButtonClickedEventArgs);
+                MIDL_CONST_ID IID& IID_IPenTailButtonClickedEventArgs = __uuidof(IPenTailButtonClickedEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1654,7 +1657,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenTailButtonDoubleClickedEventArgs = _uuidof(IPenTailButtonDoubleClickedEventArgs);
+                MIDL_CONST_ID IID& IID_IPenTailButtonDoubleClickedEventArgs = __uuidof(IPenTailButtonDoubleClickedEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1687,7 +1690,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenTailButtonLongPressedEventArgs = _uuidof(IPenTailButtonLongPressedEventArgs);
+                MIDL_CONST_ID IID& IID_IPenTailButtonLongPressedEventArgs = __uuidof(IPenTailButtonLongPressedEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1720,7 +1723,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPenUndockedEventArgs = _uuidof(IPenUndockedEventArgs);
+                MIDL_CONST_ID IID& IID_IPenUndockedEventArgs = __uuidof(IPenUndockedEventArgs);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1771,7 +1774,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPointerDevice = _uuidof(IPointerDevice);
+                MIDL_CONST_ID IID& IID_IPointerDevice = __uuidof(IPointerDevice);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1807,7 +1810,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPointerDevice2 = _uuidof(IPointerDevice2);
+                MIDL_CONST_ID IID& IID_IPointerDevice2 = __uuidof(IPointerDevice2);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1847,7 +1850,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPointerDeviceStatics = _uuidof(IPointerDeviceStatics);
+                MIDL_CONST_ID IID& IID_IPointerDeviceStatics = __uuidof(IPointerDeviceStatics);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -1886,7 +1889,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITouchCapabilities = _uuidof(ITouchCapabilities);
+                MIDL_CONST_ID IID& IID_ITouchCapabilities = __uuidof(ITouchCapabilities);
             } /* Input */
         } /* Devices */
     } /* Windows */
@@ -3217,6 +3220,9 @@ enum __x_ABI_CWindows_CDevices_CInput_CPointerDeviceType
     PointerDeviceType_Touch = 0,
     PointerDeviceType_Pen = 1,
     PointerDeviceType_Mouse = 2,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+    PointerDeviceType_Touchpad = 3,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 

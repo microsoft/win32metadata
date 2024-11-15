@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1399,7 +1399,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISelectableWordSegmentsTokenizingHandler = _uuidof(ISelectableWordSegmentsTokenizingHandler);
+                MIDL_CONST_ID IID& IID_ISelectableWordSegmentsTokenizingHandler = __uuidof(ISelectableWordSegmentsTokenizingHandler);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1433,7 +1433,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWordSegmentsTokenizingHandler = _uuidof(IWordSegmentsTokenizingHandler);
+                MIDL_CONST_ID IID& IID_IWordSegmentsTokenizingHandler = __uuidof(IWordSegmentsTokenizingHandler);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1475,7 +1475,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAlternateWordForm = _uuidof(IAlternateWordForm);
+                MIDL_CONST_ID IID& IID_IAlternateWordForm = __uuidof(IAlternateWordForm);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1514,7 +1514,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISelectableWordSegment = _uuidof(ISelectableWordSegment);
+                MIDL_CONST_ID IID& IID_ISelectableWordSegment = __uuidof(ISelectableWordSegment);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1564,7 +1564,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISelectableWordsSegmenter = _uuidof(ISelectableWordsSegmenter);
+                MIDL_CONST_ID IID& IID_ISelectableWordsSegmenter = __uuidof(ISelectableWordsSegmenter);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1601,7 +1601,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISelectableWordsSegmenterFactory = _uuidof(ISelectableWordsSegmenterFactory);
+                MIDL_CONST_ID IID& IID_ISelectableWordsSegmenterFactory = __uuidof(ISelectableWordsSegmenterFactory);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1643,7 +1643,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISemanticTextQuery = _uuidof(ISemanticTextQuery);
+                MIDL_CONST_ID IID& IID_ISemanticTextQuery = __uuidof(ISemanticTextQuery);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1685,7 +1685,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISemanticTextQueryFactory = _uuidof(ISemanticTextQueryFactory);
+                MIDL_CONST_ID IID& IID_ISemanticTextQueryFactory = __uuidof(ISemanticTextQueryFactory);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1733,7 +1733,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextConversionGenerator = _uuidof(ITextConversionGenerator);
+                MIDL_CONST_ID IID& IID_ITextConversionGenerator = __uuidof(ITextConversionGenerator);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1770,7 +1770,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextConversionGeneratorFactory = _uuidof(ITextConversionGeneratorFactory);
+                MIDL_CONST_ID IID& IID_ITextConversionGeneratorFactory = __uuidof(ITextConversionGeneratorFactory);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1809,7 +1809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextPhoneme = _uuidof(ITextPhoneme);
+                MIDL_CONST_ID IID& IID_ITextPhoneme = __uuidof(ITextPhoneme);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1857,7 +1857,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextPredictionGenerator = _uuidof(ITextPredictionGenerator);
+                MIDL_CONST_ID IID& IID_ITextPredictionGenerator = __uuidof(ITextPredictionGenerator);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1908,7 +1908,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextPredictionGenerator2 = _uuidof(ITextPredictionGenerator2);
+                MIDL_CONST_ID IID& IID_ITextPredictionGenerator2 = __uuidof(ITextPredictionGenerator2);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1945,7 +1945,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextPredictionGeneratorFactory = _uuidof(ITextPredictionGeneratorFactory);
+                MIDL_CONST_ID IID& IID_ITextPredictionGeneratorFactory = __uuidof(ITextPredictionGeneratorFactory);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -1988,7 +1988,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextReverseConversionGenerator = _uuidof(ITextReverseConversionGenerator);
+                MIDL_CONST_ID IID& IID_ITextReverseConversionGenerator = __uuidof(ITextReverseConversionGenerator);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2025,7 +2025,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextReverseConversionGenerator2 = _uuidof(ITextReverseConversionGenerator2);
+                MIDL_CONST_ID IID& IID_ITextReverseConversionGenerator2 = __uuidof(ITextReverseConversionGenerator2);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2062,7 +2062,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITextReverseConversionGeneratorFactory = _uuidof(ITextReverseConversionGeneratorFactory);
+                MIDL_CONST_ID IID& IID_ITextReverseConversionGeneratorFactory = __uuidof(ITextReverseConversionGeneratorFactory);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2165,7 +2165,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUnicodeCharactersStatics = _uuidof(IUnicodeCharactersStatics);
+                MIDL_CONST_ID IID& IID_IUnicodeCharactersStatics = __uuidof(IUnicodeCharactersStatics);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2207,7 +2207,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWordSegment = _uuidof(IWordSegment);
+                MIDL_CONST_ID IID& IID_IWordSegment = __uuidof(IWordSegment);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2257,7 +2257,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWordsSegmenter = _uuidof(IWordsSegmenter);
+                MIDL_CONST_ID IID& IID_IWordsSegmenter = __uuidof(IWordsSegmenter);
             } /* Text */
         } /* Data */
     } /* Windows */
@@ -2294,7 +2294,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWordsSegmenterFactory = _uuidof(IWordsSegmenterFactory);
+                MIDL_CONST_ID IID& IID_IWordsSegmenterFactory = __uuidof(IWordsSegmenterFactory);
             } /* Text */
         } /* Data */
     } /* Windows */

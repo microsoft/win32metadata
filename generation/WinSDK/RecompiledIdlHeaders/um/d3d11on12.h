@@ -69,8 +69,8 @@ typedef interface ID3D11On12Device2 ID3D11On12Device2;
 
 
 /* header files for imported files */
-#include "OAIdl.h"
-#include "OCIdl.h"
+#include "oaidl.h"
+#include "ocidl.h"
 #include "d3d11.h"
 #include "d3d12.h"
 

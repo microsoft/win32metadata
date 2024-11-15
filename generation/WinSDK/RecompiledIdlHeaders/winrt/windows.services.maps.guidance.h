@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SERVICES_MAPS_GUIDANCECONTRACT_VERSION)
@@ -1453,7 +1453,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceAudioNotificationRequestedEventArgs = _uuidof(IGuidanceAudioNotificationRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_IGuidanceAudioNotificationRequestedEventArgs = __uuidof(IGuidanceAudioNotificationRequestedEventArgs);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1494,7 +1494,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceLaneInfo = _uuidof(IGuidanceLaneInfo);
+                    MIDL_CONST_ID IID& IID_IGuidanceLaneInfo = __uuidof(IGuidanceLaneInfo);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1565,7 +1565,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceManeuver = _uuidof(IGuidanceManeuver);
+                    MIDL_CONST_ID IID& IID_IGuidanceManeuver = __uuidof(IGuidanceManeuver);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1615,7 +1615,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceMapMatchedCoordinate = _uuidof(IGuidanceMapMatchedCoordinate);
+                    MIDL_CONST_ID IID& IID_IGuidanceMapMatchedCoordinate = __uuidof(IGuidanceMapMatchedCoordinate);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1734,7 +1734,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceNavigator = _uuidof(IGuidanceNavigator);
+                    MIDL_CONST_ID IID& IID_IGuidanceNavigator = __uuidof(IGuidanceNavigator);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1782,7 +1782,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceNavigator2 = _uuidof(IGuidanceNavigator2);
+                    MIDL_CONST_ID IID& IID_IGuidanceNavigator2 = __uuidof(IGuidanceNavigator2);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1820,7 +1820,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceNavigatorStatics = _uuidof(IGuidanceNavigatorStatics);
+                    MIDL_CONST_ID IID& IID_IGuidanceNavigatorStatics = __uuidof(IGuidanceNavigatorStatics);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1858,7 +1858,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceNavigatorStatics2 = _uuidof(IGuidanceNavigatorStatics2);
+                    MIDL_CONST_ID IID& IID_IGuidanceNavigatorStatics2 = __uuidof(IGuidanceNavigatorStatics2);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1896,7 +1896,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceReroutedEventArgs = _uuidof(IGuidanceReroutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IGuidanceReroutedEventArgs = __uuidof(IGuidanceReroutedEventArgs);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1958,7 +1958,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceRoadSegment = _uuidof(IGuidanceRoadSegment);
+                    MIDL_CONST_ID IID& IID_IGuidanceRoadSegment = __uuidof(IGuidanceRoadSegment);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -1996,7 +1996,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceRoadSegment2 = _uuidof(IGuidanceRoadSegment2);
+                    MIDL_CONST_ID IID& IID_IGuidanceRoadSegment2 = __uuidof(IGuidanceRoadSegment2);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2046,7 +2046,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceRoadSignpost = _uuidof(IGuidanceRoadSignpost);
+                    MIDL_CONST_ID IID& IID_IGuidanceRoadSignpost = __uuidof(IGuidanceRoadSignpost);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2102,7 +2102,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceRoute = _uuidof(IGuidanceRoute);
+                    MIDL_CONST_ID IID& IID_IGuidanceRoute = __uuidof(IGuidanceRoute);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2145,7 +2145,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceRouteStatics = _uuidof(IGuidanceRouteStatics);
+                    MIDL_CONST_ID IID& IID_IGuidanceRouteStatics = __uuidof(IGuidanceRouteStatics);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2199,7 +2199,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceTelemetryCollector = _uuidof(IGuidanceTelemetryCollector);
+                    MIDL_CONST_ID IID& IID_IGuidanceTelemetryCollector = __uuidof(IGuidanceTelemetryCollector);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2237,7 +2237,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceTelemetryCollectorStatics = _uuidof(IGuidanceTelemetryCollectorStatics);
+                    MIDL_CONST_ID IID& IID_IGuidanceTelemetryCollectorStatics = __uuidof(IGuidanceTelemetryCollectorStatics);
                 } /* Guidance */
             } /* Maps */
         } /* Services */
@@ -2314,7 +2314,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGuidanceUpdatedEventArgs = _uuidof(IGuidanceUpdatedEventArgs);
+                    MIDL_CONST_ID IID& IID_IGuidanceUpdatedEventArgs = __uuidof(IGuidanceUpdatedEventArgs);
                 } /* Guidance */
             } /* Maps */
         } /* Services */

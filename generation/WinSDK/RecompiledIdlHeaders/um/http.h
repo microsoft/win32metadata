@@ -170,6 +170,12 @@ typedef enum _HTTP_SERVER_PROPERTY
     HttpServerDelegationProperty = 16,
 
 
+    //
+    // Used to configure fast forwarding support.
+    //
+
+    HttpServerFastForwardingProperty = 18
+
 } HTTP_SERVER_PROPERTY, *PHTTP_SERVER_PROPERTY;
 
 
@@ -392,6 +398,12 @@ typedef struct _HTTP_LISTEN_ENDPOINT_INFO
 } HTTP_LISTEN_ENDPOINT_INFO, *PHTTP_LISTEN_ENDPOINT_INFO;
 
 
+typedef struct _HTTP_FAST_FORWARD_INFO
+{
+    HTTP_PROPERTY_FLAGS Flags;
+    BOOLEAN EnableFastForwarding;
+} HTTP_FAST_FORWARD_INFO, *PHTTP_FAST_FORWARD_INFO;
+
 typedef struct _HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS
 {
     USHORT              DomainNameLength;
@@ -598,6 +610,8 @@ typedef struct _HTTP_REQUEST_TOKEN_BINDING_INFO
 #define HTTP_LOG_FIELD_QUEUE_NAME           0x04000000
 #define HTTP_LOG_FIELD_CORRELATION_ID       0x40000000
 #define HTTP_LOG_FIELD_FAULT_CODE           0x80000000
+
+#define HTTP_LOG_FIELD_EXT_FAULT_CODE_EXT   0x0000000000000001
 
 //
 // Defines the logging type.
@@ -889,6 +903,11 @@ typedef struct _HTTP_PROTECTION_LEVEL_INFO
 // sending a GOAWAY frame and will cause the client to move to a different
 // connection.
 //
+// HTTP_SEND_RESPONSE_FLAG_AUTOMATIC_CHUNKING - This flag instructs the
+// http.sys to add chunk encoding automatically.
+// HTTP_SEND_RESPONSE_FLAG_MORE_DATA must be specified as well. The caller
+// must not add Transfer-Encoding: Chunked header.
+//
 
 #define HTTP_SEND_RESPONSE_FLAG_DISCONNECT          0x00000001
 #define HTTP_SEND_RESPONSE_FLAG_MORE_DATA           0x00000002
@@ -897,6 +916,7 @@ typedef struct _HTTP_PROTECTION_LEVEL_INFO
 #define HTTP_SEND_RESPONSE_FLAG_PROCESS_RANGES      0x00000020
 #define HTTP_SEND_RESPONSE_FLAG_OPAQUE              0x00000040
 #define HTTP_SEND_RESPONSE_FLAG_GOAWAY              0x00000100
+#define HTTP_SEND_RESPONSE_FLAG_AUTOMATIC_CHUNKING  0x00000200
 
 
 //
@@ -928,6 +948,7 @@ typedef HTTP_OPAQUE_ID HTTP_SERVER_SESSION_ID, *PHTTP_SERVER_SESSION_ID;
 typedef HTTP_OPAQUE_ID HTTP_CLIENT_REQUEST_ID, *PHTTP_CLIENT_REQUEST_ID;
 typedef HTTP_OPAQUE_ID HTTP_CLIENT_CONNECTION_ID, *PHTTP_CLIENT_CONNECTION_ID;
 typedef HTTP_OPAQUE_ID HTTP_CLIENT_STREAM_ID, *PHTTP_CLIENT_STREAM_ID;
+typedef HTTP_OPAQUE_ID HTTP_CLIENT_CREDENTIAL_ID, *PHTTP_CLIENT_CREDENTIAL_ID;
 
 #endif // _WIN32_WINNT >= 0x0600
 
@@ -1228,6 +1249,13 @@ typedef struct _HTTP_LOG_FIELDS_DATA
 
 #endif // _WIN32_WINNT >= 0x0600
 
+
+typedef struct _HTTP_WINHTTP_FAST_FORWARDING_DATA
+{
+    UCHAR Reserved[16];
+} HTTP_WINHTTP_FAST_FORWARDING_DATA, *PHTTP_WINHTTP_FAST_FORWARDING_DATA;
+
+
 //
 // This enum defines a data source for a particular chunk of data.
 //
@@ -1239,11 +1267,11 @@ typedef enum _HTTP_DATA_CHUNK_TYPE
     HttpDataChunkFromFragmentCache,
     HttpDataChunkFromFragmentCacheEx,
     HttpDataChunkTrailers,
+    HttpDataChunkFromWinHttpFastForwarding,
 
     HttpDataChunkMaximum
 
 } HTTP_DATA_CHUNK_TYPE, *PHTTP_DATA_CHUNK_TYPE;
-
 
 //
 // This structure describes an individual data chunk.
@@ -1317,6 +1345,11 @@ typedef struct _HTTP_DATA_CHUNK
             PHTTP_UNKNOWN_HEADER pTrailers;
 
         } Trailers;
+
+        struct
+        {
+            HTTP_WINHTTP_FAST_FORWARDING_DATA WhFastForwardingData;
+        } FromWinHttpFastForwarding;
     };
 
 } HTTP_DATA_CHUNK, *PHTTP_DATA_CHUNK;
@@ -1683,8 +1716,9 @@ typedef enum _HTTP_REQUEST_INFO_TYPE
     HttpRequestInfoTypeTcpInfoV0,
     HttpRequestInfoTypeRequestSizing,
     HttpRequestInfoTypeQuicStats,
-    HttpRequestInfoTypeTcpInfoV1
-
+    HttpRequestInfoTypeTcpInfoV1,
+    HttpRequestInfoTypeQuicStatsV2,
+    HttpRequestInfoTypeTcpInfoV2
 } HTTP_REQUEST_INFO_TYPE, *PHTTP_REQUEST_INFO_TYPE;
 
 typedef struct _HTTP_REQUEST_INFO
@@ -1921,12 +1955,23 @@ typedef HTTP_REQUEST * PHTTP_REQUEST;
 // request if any.
 // HTTP_REQUEST_FLAG_HTTP2 - Indicates the request was received over HTTP/2.
 // HTTP_REQUEST_FLAG_HTTP3 - Indicates the request was received over HTTP/3.
+// HTTP_REQUEST_FLAG_FAST_FORWARDING_RESPONSE_ALLOWED - Indicates the response
+//                                                      is eligible for
+//                                                      fast-forwarding.
+// HTTP_REQUEST_FLAG_FAST_FORWARDING_ALLOWED - This should not be used, it is
+//                                             the old flag.
+//                                             It has been used first, but the flag
+//                                             was split into request and response
+//                                             side. This old flag has the same
+//                                             value as the response-side flag.
 //
 
-#define HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS   0x00000001
-#define HTTP_REQUEST_FLAG_IP_ROUTED                 0x00000002
-#define HTTP_REQUEST_FLAG_HTTP2                     0x00000004
-#define HTTP_REQUEST_FLAG_HTTP3                     0x00000008
+#define HTTP_REQUEST_FLAG_MORE_ENTITY_BODY_EXISTS            0x00000001
+#define HTTP_REQUEST_FLAG_IP_ROUTED                          0x00000002
+#define HTTP_REQUEST_FLAG_HTTP2                              0x00000004
+#define HTTP_REQUEST_FLAG_HTTP3                              0x00000008
+#define HTTP_REQUEST_FLAG_FAST_FORWARDING_ALLOWED            0x00000010
+#define HTTP_REQUEST_FLAG_FAST_FORWARDING_RESPONSE_ALLOWED   HTTP_REQUEST_FLAG_FAST_FORWARDING_ALLOWED
 
 
 //
@@ -2003,7 +2048,7 @@ typedef enum _HTTP_RESPONSE_INFO_TYPE
     HttpResponseInfoTypeQoSProperty,
     HttpResponseInfoTypeChannelBind
 
-} HTTP_RESPONSE_INFO_TYPE, PHTTP_RESPONSE_INFO_TYPE;
+} HTTP_RESPONSE_INFO_TYPE, *PHTTP_RESPONSE_INFO_TYPE;
 
 typedef struct _HTTP_RESPONSE_INFO
 {
@@ -2320,6 +2365,7 @@ typedef enum _HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
     ExParamTypeTlsRestrictions,
     ExParamTypeErrorHeaders,
     ExParamTypeTlsSessionTicketKeys,
+    ExParamTypeCertConfig,
     ExParamTypeMax
 } HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE, *PHTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE;
 
@@ -2385,6 +2431,25 @@ typedef struct _HTTP_TLS_SESSION_TICKET_KEYS_PARAM
 } HTTP_TLS_SESSION_TICKET_KEYS_PARAM, *PHTTP_TLS_SESSION_TICKET_KEYS_PARAM;
 
 //
+// This should really be defined by one of the security header files.
+//
+
+#define HTTP_SSL_CERT_SHA_HASH_LENGTH 20
+#define HTTP_SSL_CERT_STORE_NAME_LENGTH 128
+
+typedef struct _HTTP_CERT_CONFIG_ENTRY
+{
+    BYTE CertHash[HTTP_SSL_CERT_SHA_HASH_LENGTH];
+    WCHAR CertStoreName[HTTP_SSL_CERT_STORE_NAME_LENGTH];
+} HTTP_CERT_CONFIG_ENTRY, *PHTTP_CERT_CONFIG_ENTRY;
+
+typedef struct _HTTP_CERT_CONFIG_PARAM
+{
+    ULONG CertConfigCount;
+    PHTTP_CERT_CONFIG_ENTRY CertConfigs;
+} HTTP_CERT_CONFIG_PARAM, *PHTTP_CERT_CONFIG_PARAM;
+
+//
 // This defines the extended params for the ssl config record.
 //
 
@@ -2414,6 +2479,7 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM_EX
         HTTP_TLS_RESTRICTIONS_PARAM HttpTlsRestrictionsParam;
         HTTP_ERROR_HEADERS_PARAM HttpErrorHeadersParam;
         HTTP_TLS_SESSION_TICKET_KEYS_PARAM HttpTlsSessionTicketKeysParam;
+        HTTP_CERT_CONFIG_PARAM HttpCertConfigParam;
     };
 } HTTP_SERVICE_CONFIG_SSL_PARAM_EX, *PHTTP_SERVICE_CONFIG_SSL_PARAM_EX;
 
@@ -2440,6 +2506,7 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM_EX
 #define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS12              0x00001000
 #define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_CLIENT_CORRELATION  0x00002000
 #define HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_SESSION_ID         0x00004000
+#define HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_CACHE_CLIENT_HELLO  0x00008000
 
 
 //
@@ -2691,7 +2758,11 @@ typedef enum _HTTP_REQUEST_PROPERTY
     HttpRequestPropertySni,
     HttpRequestPropertyStreamError,
     HttpRequestPropertyWskApiTimings,
-    HttpRequestPropertyQuicApiTimings
+    HttpRequestPropertyQuicApiTimings,
+    HttpRequestPropertyQuicStatsV2,
+    HttpRequestPropertyQuicStreamStats,
+    HttpRequestPropertyTcpInfoV2,
+    HttpRequestPropertyTlsClientHello
 } HTTP_REQUEST_PROPERTY, *PHTTP_REQUEST_PROPERTY;
 
 typedef struct _HTTP_QUERY_REQUEST_QUALIFIER_TCP
@@ -2828,12 +2899,19 @@ typedef struct _HTTP_QUIC_STREAM_REQUEST_STATS
 
 typedef enum _HTTP_FEATURE_ID
 {
-    HttpFeatureUnknown          = 0,
-    HttpFeatureResponseTrailers = 1,
-    HttpFeatureApiTimings       = 2,
-    HttpFeatureDelegateEx       = 3,
-    HttpFeatureHttp3            = 4,
-    HttpFeatureLast             = 5,
+    HttpFeatureUnknown                         = 0,
+    HttpFeatureResponseTrailers                = 1,
+    HttpFeatureApiTimings                      = 2,
+    HttpFeatureDelegateEx                      = 3,
+    HttpFeatureHttp3                           = 4,
+    HttpFeatureTlsSessionTickets               = 5,
+    HttpFeatureDisableTlsSessionId             = 6,
+    HttpFeatureTlsDualCerts                    = 7,
+    HttpFeatureAutomaticChunkedEncoding        = 8,
+    HttpFeatureDedicatedReqQueueDelegationType = 9,
+    HttpFeatureFastForwardResponse             = 10,
+    HttpFeatureCacheTlsClientHello             = 11,
+    HttpFeatureLast                            = 12,
 
 
     HttpFeaturemax              = 0xFFFFFFFF,

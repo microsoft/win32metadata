@@ -68,6 +68,13 @@ typedef interface IPresentationSurface IPresentationSurface;
 #endif 	/* __IPresentationSurface_FWD_DEFINED__ */
 
 
+#ifndef __IPresentationSurface2_FWD_DEFINED__
+#define __IPresentationSurface2_FWD_DEFINED__
+typedef interface IPresentationSurface2 IPresentationSurface2;
+
+#endif 	/* __IPresentationSurface2_FWD_DEFINED__ */
+
+
 #ifndef __IPresentStatistics_FWD_DEFINED__
 #define __IPresentStatistics_FWD_DEFINED__
 typedef interface IPresentStatistics IPresentStatistics;
@@ -87,6 +94,13 @@ typedef interface IPresentationManager IPresentationManager;
 typedef interface IPresentationFactory IPresentationFactory;
 
 #endif 	/* __IPresentationFactory_FWD_DEFINED__ */
+
+
+#ifndef __IPresentationFactory_SupportHdrAware_FWD_DEFINED__
+#define __IPresentationFactory_SupportHdrAware_FWD_DEFINED__
+typedef interface IPresentationFactory_SupportHdrAware IPresentationFactory_SupportHdrAware;
+
+#endif 	/* __IPresentationFactory_SupportHdrAware_FWD_DEFINED__ */
 
 
 #ifndef __IPresentStatusPresentStatistics_FWD_DEFINED__
@@ -503,6 +517,182 @@ EXTERN_C const IID IID_IPresentationSurface;
 
 
 #endif 	/* __IPresentationSurface_INTERFACE_DEFINED__ */
+
+
+#ifndef __IPresentationSurface2_INTERFACE_DEFINED__
+#define __IPresentationSurface2_INTERFACE_DEFINED__
+
+/* interface IPresentationSurface2 */
+/* [unique][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_IPresentationSurface2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("95609569-C5F0-47F9-8804-5345F2E2767E")
+    IPresentationSurface2 : public IPresentationSurface
+    {
+    public:
+        virtual void STDMETHODCALLTYPE SetIsHdrContent( 
+            /* [annotation][in] */ 
+            _In_  boolean isHdrContent) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IPresentationSurface2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IPresentationSurface2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IPresentationSurface2 * This);
+        
+        DECLSPEC_XFGVIRT(IPresentationContent, SetTag)
+        void ( STDMETHODCALLTYPE *SetTag )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT_PTR tag);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetBuffer)
+        HRESULT ( STDMETHODCALLTYPE *SetBuffer )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  IPresentationBuffer *presentationBuffer);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetColorSpace)
+        HRESULT ( STDMETHODCALLTYPE *SetColorSpace )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  DXGI_COLOR_SPACE_TYPE colorSpace);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetAlphaMode)
+        HRESULT ( STDMETHODCALLTYPE *SetAlphaMode )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  DXGI_ALPHA_MODE alphaMode);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetSourceRect)
+        HRESULT ( STDMETHODCALLTYPE *SetSourceRect )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  const RECT *sourceRect);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetTransform)
+        HRESULT ( STDMETHODCALLTYPE *SetTransform )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  PresentationTransform *transform);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, RestrictToOutput)
+        HRESULT ( STDMETHODCALLTYPE *RestrictToOutput )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  IUnknown *output);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetDisableReadback)
+        HRESULT ( STDMETHODCALLTYPE *SetDisableReadback )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  boolean value);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface, SetLetterboxingMargins)
+        HRESULT ( STDMETHODCALLTYPE *SetLetterboxingMargins )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  float leftLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float topLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float rightLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float bottomLetterboxSize);
+        
+        DECLSPEC_XFGVIRT(IPresentationSurface2, SetIsHdrContent)
+        void ( STDMETHODCALLTYPE *SetIsHdrContent )( 
+            IPresentationSurface2 * This,
+            /* [annotation][in] */ 
+            _In_  boolean isHdrContent);
+        
+        END_INTERFACE
+    } IPresentationSurface2Vtbl;
+
+    interface IPresentationSurface2
+    {
+        CONST_VTBL struct IPresentationSurface2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPresentationSurface2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IPresentationSurface2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IPresentationSurface2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IPresentationSurface2_SetTag(This,tag)	\
+    ( (This)->lpVtbl -> SetTag(This,tag) ) 
+
+
+#define IPresentationSurface2_SetBuffer(This,presentationBuffer)	\
+    ( (This)->lpVtbl -> SetBuffer(This,presentationBuffer) ) 
+
+#define IPresentationSurface2_SetColorSpace(This,colorSpace)	\
+    ( (This)->lpVtbl -> SetColorSpace(This,colorSpace) ) 
+
+#define IPresentationSurface2_SetAlphaMode(This,alphaMode)	\
+    ( (This)->lpVtbl -> SetAlphaMode(This,alphaMode) ) 
+
+#define IPresentationSurface2_SetSourceRect(This,sourceRect)	\
+    ( (This)->lpVtbl -> SetSourceRect(This,sourceRect) ) 
+
+#define IPresentationSurface2_SetTransform(This,transform)	\
+    ( (This)->lpVtbl -> SetTransform(This,transform) ) 
+
+#define IPresentationSurface2_RestrictToOutput(This,output)	\
+    ( (This)->lpVtbl -> RestrictToOutput(This,output) ) 
+
+#define IPresentationSurface2_SetDisableReadback(This,value)	\
+    ( (This)->lpVtbl -> SetDisableReadback(This,value) ) 
+
+#define IPresentationSurface2_SetLetterboxingMargins(This,leftLetterboxSize,topLetterboxSize,rightLetterboxSize,bottomLetterboxSize)	\
+    ( (This)->lpVtbl -> SetLetterboxingMargins(This,leftLetterboxSize,topLetterboxSize,rightLetterboxSize,bottomLetterboxSize) ) 
+
+
+#define IPresentationSurface2_SetIsHdrContent(This,isHdrContent)	\
+    ( (This)->lpVtbl -> SetIsHdrContent(This,isHdrContent) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IPresentationSurface2_INTERFACE_DEFINED__ */
 
 
 #ifndef __IPresentStatistics_INTERFACE_DEFINED__
@@ -957,7 +1147,81 @@ EXTERN_C const IID IID_IPresentationFactory;
 #endif 	/* __IPresentationFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_presentation_0000_0006 */
+#ifndef __IPresentationFactory_SupportHdrAware_INTERFACE_DEFINED__
+#define __IPresentationFactory_SupportHdrAware_INTERFACE_DEFINED__
+
+/* interface IPresentationFactory_SupportHdrAware */
+/* [unique][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_IPresentationFactory_SupportHdrAware;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2BD0B885-A16F-4BD9-A59A-D073E069D416")
+    IPresentationFactory_SupportHdrAware : public IUnknown
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IPresentationFactory_SupportHdrAwareVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IPresentationFactory_SupportHdrAware * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IPresentationFactory_SupportHdrAware * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IPresentationFactory_SupportHdrAware * This);
+        
+        END_INTERFACE
+    } IPresentationFactory_SupportHdrAwareVtbl;
+
+    interface IPresentationFactory_SupportHdrAware
+    {
+        CONST_VTBL struct IPresentationFactory_SupportHdrAwareVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPresentationFactory_SupportHdrAware_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IPresentationFactory_SupportHdrAware_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IPresentationFactory_SupportHdrAware_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IPresentationFactory_SupportHdrAware_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_presentation_0000_0008 */
 /* [local] */ 
 
 typedef 
@@ -970,8 +1234,8 @@ enum PresentStatus
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0006_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0006_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0008_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0008_v0_0_s_ifspec;
 
 #ifndef __IPresentStatusPresentStatistics_INTERFACE_DEFINED__
 #define __IPresentStatusPresentStatistics_INTERFACE_DEFINED__
@@ -1080,7 +1344,7 @@ EXTERN_C const IID IID_IPresentStatusPresentStatistics;
 #endif 	/* __IPresentStatusPresentStatistics_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_presentation_0000_0007 */
+/* interface __MIDL_itf_presentation_0000_0009 */
 /* [local] */ 
 
 typedef 
@@ -1105,8 +1369,8 @@ typedef struct CompositionFrameDisplayInstance
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0007_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0007_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_s_ifspec;
 
 #ifndef __ICompositionFramePresentStatistics_INTERFACE_DEFINED__
 #define __ICompositionFramePresentStatistics_INTERFACE_DEFINED__
@@ -1399,7 +1663,7 @@ void __RPC_STUB IIndependentFlipFramePresentStatistics_GetPresentDuration_Stub(
 #endif 	/* __IIndependentFlipFramePresentStatistics_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_presentation_0000_0009 */
+/* interface __MIDL_itf_presentation_0000_0011 */
 /* [local] */ 
 
 //
@@ -1412,8 +1676,8 @@ STDAPI CreatePresentationFactory(
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0011_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0011_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

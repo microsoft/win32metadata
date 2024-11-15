@@ -37,3 +37,4 @@
 #include <ntioring_x.h>
 #include <winioctl.h>
 #include <ntddstor.h>
+#include <bindlink.h>

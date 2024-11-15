@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -1165,7 +1165,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerForUser = _uuidof(IAdvertisingManagerForUser);
+                MIDL_CONST_ID IID& IID_IAdvertisingManagerForUser = __uuidof(IAdvertisingManagerForUser);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1201,7 +1201,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics = _uuidof(IAdvertisingManagerStatics);
+                MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics = __uuidof(IAdvertisingManagerStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1238,7 +1238,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics2 = _uuidof(IAdvertisingManagerStatics2);
+                MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics2 = __uuidof(IAdvertisingManagerStatics2);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1280,7 +1280,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAssignedAccessSettings = _uuidof(IAssignedAccessSettings);
+                MIDL_CONST_ID IID& IID_IAssignedAccessSettings = __uuidof(IAssignedAccessSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1320,7 +1320,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAssignedAccessSettingsStatics = _uuidof(IAssignedAccessSettingsStatics);
+                MIDL_CONST_ID IID& IID_IAssignedAccessSettingsStatics = __uuidof(IAssignedAccessSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1359,7 +1359,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticsSettings = _uuidof(IDiagnosticsSettings);
+                MIDL_CONST_ID IID& IID_IDiagnosticsSettings = __uuidof(IDiagnosticsSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1399,7 +1399,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticsSettingsStatics = _uuidof(IDiagnosticsSettingsStatics);
+                MIDL_CONST_ID IID& IID_IDiagnosticsSettingsStatics = __uuidof(IDiagnosticsSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1436,7 +1436,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFirstSignInSettings = _uuidof(IFirstSignInSettings);
+                MIDL_CONST_ID IID& IID_IFirstSignInSettings = __uuidof(IFirstSignInSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1472,7 +1472,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IFirstSignInSettingsStatics = _uuidof(IFirstSignInSettingsStatics);
+                MIDL_CONST_ID IID& IID_IFirstSignInSettingsStatics = __uuidof(IFirstSignInSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1526,7 +1526,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesForUser = _uuidof(IGlobalizationPreferencesForUser);
+                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesForUser = __uuidof(IGlobalizationPreferencesForUser);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1577,7 +1577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics = _uuidof(IGlobalizationPreferencesStatics);
+                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics = __uuidof(IGlobalizationPreferencesStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1618,7 +1618,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics2 = _uuidof(IGlobalizationPreferencesStatics2);
+                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics2 = __uuidof(IGlobalizationPreferencesStatics2);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1655,7 +1655,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics3 = _uuidof(IGlobalizationPreferencesStatics3);
+                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics3 = __uuidof(IGlobalizationPreferencesStatics3);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1695,7 +1695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenImageFeedStatics = _uuidof(ILockScreenImageFeedStatics);
+                MIDL_CONST_ID IID& IID_ILockScreenImageFeedStatics = __uuidof(ILockScreenImageFeedStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1742,7 +1742,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenStatics = _uuidof(ILockScreenStatics);
+                MIDL_CONST_ID IID& IID_ILockScreenStatics = __uuidof(ILockScreenStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1878,7 +1878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUserInformationStatics = _uuidof(IUserInformationStatics);
+                MIDL_CONST_ID IID& IID_IUserInformationStatics = __uuidof(IUserInformationStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1919,7 +1919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettings = _uuidof(IUserProfilePersonalizationSettings);
+                MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettings = __uuidof(IUserProfilePersonalizationSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettingsStatics = _uuidof(IUserProfilePersonalizationSettingsStatics);
+                MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettingsStatics = __uuidof(IUserProfilePersonalizationSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */

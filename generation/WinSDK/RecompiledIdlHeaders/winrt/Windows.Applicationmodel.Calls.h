@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x40000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_LOCKSCREENCALLCONTRACT_VERSION)
@@ -104,7 +104,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -129,6 +129,66 @@
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IAcceptedVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions ABI::Windows::ApplicationModel::Calls::IAcceptedVoipPhoneCallOptions
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IAcceptedVoipPhoneCallOptionsFactory;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory ABI::Windows::ApplicationModel::Calls::IAcceptedVoipPhoneCallOptionsFactory
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IAppInitiatedVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions ABI::Windows::ApplicationModel::Calls::IAppInitiatedVoipPhoneCallOptions
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IAppInitiatedVoipPhoneCallOptionsFactory;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory ABI::Windows::ApplicationModel::Calls::IAppInitiatedVoipPhoneCallOptionsFactory
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -143,6 +203,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs ABI::Windows::ApplicationModel::Calls::ICallAnswerEventArgs
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface ICallAnswerEventArgs2;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2 ABI::Windows::ApplicationModel::Calls::ICallAnswerEventArgs2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallRejectEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallRejectEventArgs_FWD_DEFINED__
@@ -173,6 +248,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs ABI::Windows::ApplicationModel::Calls::ICallStateChangeEventArgs
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IIncomingVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions ABI::Windows::ApplicationModel::Calls::IIncomingVoipPhoneCallOptions
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IIncomingVoipPhoneCallOptionsFactory;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory ABI::Windows::ApplicationModel::Calls::IIncomingVoipPhoneCallOptionsFactory
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CILockScreenCallEndCallDeferral_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CILockScreenCallEndCallDeferral_FWD_DEFINED__
@@ -233,6 +338,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs ABI::Windows::ApplicationModel::Calls::IMuteChangeEventArgs
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IOutgoingVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions ABI::Windows::ApplicationModel::Calls::IOutgoingVoipPhoneCallOptions
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IOutgoingVoipPhoneCallOptionsFactory;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory ABI::Windows::ApplicationModel::Calls::IOutgoingVoipPhoneCallOptionsFactory
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIPhoneCall_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIPhoneCall_FWD_DEFINED__
@@ -789,6 +924,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IVoipCallCoordinator5;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5 ABI::Windows::ApplicationModel::Calls::IVoipCallCoordinator5
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
 namespace ABI {
@@ -803,6 +953,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics ABI::Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IVoipCallCoordinatorStatics2;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2 ABI::Windows::ApplicationModel::Calls::IVoipCallCoordinatorStatics2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall_FWD_DEFINED__
@@ -848,6 +1013,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall3 ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall3
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                interface IVoipPhoneCall4;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4 ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall4
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -2959,6 +3139,16 @@ namespace ABI {
     namespace Windows {
         namespace ApplicationModel {
             namespace Calls {
+                typedef enum VoipCallControlDeviceKind : int VoipCallControlDeviceKind;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
                 typedef enum VoipPhoneCallMedia : unsigned int VoipPhoneCallMedia;
             } /* Calls */
         } /* ApplicationModel */
@@ -2989,7 +3179,47 @@ namespace ABI {
     namespace Windows {
         namespace ApplicationModel {
             namespace Calls {
+                class AcceptedVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                class AppInitiatedVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                class IncomingVoipPhoneCallOptions;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
                 class LockScreenCallEndCallDeferral;
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                class OutgoingVoipPhoneCallOptions;
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3658,6 +3888,33 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.ApplicationModel.Calls.VoipCallControlDeviceKind
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                enum VoipCallControlDeviceKind : int
+                {
+                    VoipCallControlDeviceKind_Bluetooth = 0,
+                    VoipCallControlDeviceKind_Usb = 1,
+                };
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Struct Windows.ApplicationModel.Calls.VoipPhoneCallMedia
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
@@ -3759,6 +4016,228 @@ namespace ABI {
 
 /*
  *
+ * Interface Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("e519c726-b86f-5add-8ae2-0f46acd9232d")
+                IAcceptedVoipPhoneCallOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Context(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Context(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactNumber(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactNumber(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ServiceName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ServiceName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AssociatedDeviceIds(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAcceptedVoipPhoneCallOptions = __uuidof(IAcceptedVoipPhoneCallOptions);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAcceptedVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("6cf8a79b-acc1-54ce-a75d-cc78d17690c8")
+                IAcceptedVoipPhoneCallOptionsFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        __FIIterable_1_HSTRING* associatedDeviceIds,
+                        ABI::Windows::ApplicationModel::Calls::IAcceptedVoipPhoneCallOptions** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAcceptedVoipPhoneCallOptionsFactory = __uuidof(IAcceptedVoipPhoneCallOptionsFactory);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("86bebf63-ff5a-57fd-84c6-2d2cf18302f8")
+                IAppInitiatedVoipPhoneCallOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Context(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Context(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactNumber(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactNumber(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ServiceName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ServiceName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AssociatedDeviceIds(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAppInitiatedVoipPhoneCallOptions = __uuidof(IAppInitiatedVoipPhoneCallOptions);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAppInitiatedVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("ca46c30c-f779-5f3b-8ebc-a635e7f652b5")
+                IAppInitiatedVoipPhoneCallOptionsFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        __FIIterable_1_HSTRING* associatedDeviceIds,
+                        ABI::Windows::ApplicationModel::Calls::IAppInitiatedVoipPhoneCallOptions** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAppInitiatedVoipPhoneCallOptionsFactory = __uuidof(IAppInitiatedVoipPhoneCallOptionsFactory);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.ApplicationModel.Calls.ICallAnswerEventArgs
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
@@ -3783,7 +4262,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = _uuidof(ICallAnswerEventArgs);
+                MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = __uuidof(ICallAnswerEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3792,6 +4271,46 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.ICallAnswerEventArgs2
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.CallAnswerEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_ICallAnswerEventArgs2[] = L"Windows.ApplicationModel.Calls.ICallAnswerEventArgs2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("408208f7-c3f7-579a-800d-541082cba051")
+                ICallAnswerEventArgs2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_SourceDeviceId(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ICallAnswerEventArgs2 = __uuidof(ICallAnswerEventArgs2);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3819,7 +4338,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallRejectEventArgs = _uuidof(ICallRejectEventArgs);
+                MIDL_CONST_ID IID& IID_ICallRejectEventArgs = __uuidof(ICallRejectEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3855,7 +4374,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = _uuidof(ICallStateChangeEventArgs);
+                MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = __uuidof(ICallStateChangeEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3864,6 +4383,153 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IIncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("4379fcd6-ddd0-5e9b-81d8-5110495764ae")
+                IIncomingVoipPhoneCallOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Context(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Context(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactNumber(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactNumber(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactImage(
+                        ABI::Windows::Foundation::IUriRuntimeClass** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactImage(
+                        ABI::Windows::Foundation::IUriRuntimeClass* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ServiceName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ServiceName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_BrandingImage(
+                        ABI::Windows::Foundation::IUriRuntimeClass** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_BrandingImage(
+                        ABI::Windows::Foundation::IUriRuntimeClass* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CallDetails(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_CallDetails(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Ringtone(
+                        ABI::Windows::Foundation::IUriRuntimeClass** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Ringtone(
+                        ABI::Windows::Foundation::IUriRuntimeClass* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RingTimeout(
+                        ABI::Windows::Foundation::TimeSpan* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_RingTimeout(
+                        ABI::Windows::Foundation::TimeSpan value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactRemoteId(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactRemoteId(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AssociatedDeviceIds(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIncomingVoipPhoneCallOptions = __uuidof(IIncomingVoipPhoneCallOptions);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IIncomingVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("74062de4-08f0-5649-bd80-89ea87185c78")
+                IIncomingVoipPhoneCallOptionsFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        __FIIterable_1_HSTRING* associatedDeviceIds,
+                        ABI::Windows::ApplicationModel::Calls::IIncomingVoipPhoneCallOptions** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIncomingVoipPhoneCallOptionsFactory = __uuidof(IIncomingVoipPhoneCallOptionsFactory);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3889,7 +4555,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallEndCallDeferral = _uuidof(ILockScreenCallEndCallDeferral);
+                MIDL_CONST_ID IID& IID_ILockScreenCallEndCallDeferral = __uuidof(ILockScreenCallEndCallDeferral);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3928,7 +4594,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallEndRequestedEventArgs = _uuidof(ILockScreenCallEndRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_ILockScreenCallEndRequestedEventArgs = __uuidof(ILockScreenCallEndRequestedEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3982,7 +4648,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallUI = _uuidof(ILockScreenCallUI);
+                MIDL_CONST_ID IID& IID_ILockScreenCallUI = __uuidof(ILockScreenCallUI);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4018,7 +4684,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = _uuidof(IMuteChangeEventArgs);
+                MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = __uuidof(IMuteChangeEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4027,6 +4693,111 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IOutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("d6c59b57-57be-524f-9dc1-f2c12e5d1bcc")
+                IOutgoingVoipPhoneCallOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Context(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Context(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ContactName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ContactName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ServiceName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_ServiceName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Media(
+                        ABI::Windows::ApplicationModel::Calls::VoipPhoneCallMedia value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AssociatedDeviceIds(
+                        __FIVector_1_HSTRING** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IOutgoingVoipPhoneCallOptions = __uuidof(IOutgoingVoipPhoneCallOptions);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IOutgoingVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("2ea2c6f4-0b7a-5789-9d33-fe3271fdefa8")
+                IOutgoingVoipPhoneCallOptionsFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        __FIIterable_1_HSTRING* associatedDeviceIds,
+                        ABI::Windows::ApplicationModel::Calls::IOutgoingVoipPhoneCallOptions** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IOutgoingVoipPhoneCallOptionsFactory = __uuidof(IOutgoingVoipPhoneCallOptionsFactory);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4150,7 +4921,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCall = _uuidof(IPhoneCall);
+                MIDL_CONST_ID IID& IID_IPhoneCall = __uuidof(IPhoneCall);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4199,7 +4970,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallBlockingStatics = _uuidof(IPhoneCallBlockingStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallBlockingStatics = __uuidof(IPhoneCallBlockingStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4334,7 +5105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntry = _uuidof(IPhoneCallHistoryEntry);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntry = __uuidof(IPhoneCallHistoryEntry);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4391,7 +5162,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddress = _uuidof(IPhoneCallHistoryEntryAddress);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddress = __uuidof(IPhoneCallHistoryEntryAddress);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4429,7 +5200,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddressFactory = _uuidof(IPhoneCallHistoryEntryAddressFactory);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddressFactory = __uuidof(IPhoneCallHistoryEntryAddressFactory);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4471,7 +5242,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryQueryOptions = _uuidof(IPhoneCallHistoryEntryQueryOptions);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryQueryOptions = __uuidof(IPhoneCallHistoryEntryQueryOptions);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4507,7 +5278,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryReader = _uuidof(IPhoneCallHistoryEntryReader);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryReader = __uuidof(IPhoneCallHistoryEntryReader);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4547,7 +5318,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerForUser = _uuidof(IPhoneCallHistoryManagerForUser);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerForUser = __uuidof(IPhoneCallHistoryManagerForUser);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4584,7 +5355,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics = _uuidof(IPhoneCallHistoryManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics = __uuidof(IPhoneCallHistoryManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4621,7 +5392,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics2 = _uuidof(IPhoneCallHistoryManagerStatics2);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics2 = __uuidof(IPhoneCallHistoryManagerStatics2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4699,7 +5470,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryStore = _uuidof(IPhoneCallHistoryStore);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryStore = __uuidof(IPhoneCallHistoryStore);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4750,7 +5521,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallInfo = _uuidof(IPhoneCallInfo);
+                MIDL_CONST_ID IID& IID_IPhoneCallInfo = __uuidof(IPhoneCallInfo);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4787,7 +5558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics = _uuidof(IPhoneCallManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics = __uuidof(IPhoneCallManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4837,7 +5608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics2 = _uuidof(IPhoneCallManagerStatics2);
+                MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics2 = __uuidof(IPhoneCallManagerStatics2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4874,7 +5645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallStatics = _uuidof(IPhoneCallStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallStatics = __uuidof(IPhoneCallStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4917,7 +5688,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallStore = _uuidof(IPhoneCallStore);
+                MIDL_CONST_ID IID& IID_IPhoneCallStore = __uuidof(IPhoneCallStore);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4953,7 +5724,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilities = _uuidof(IPhoneCallVideoCapabilities);
+                MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilities = __uuidof(IPhoneCallVideoCapabilities);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4990,7 +5761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilitiesManagerStatics = _uuidof(IPhoneCallVideoCapabilitiesManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilitiesManagerStatics = __uuidof(IPhoneCallVideoCapabilitiesManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5029,7 +5800,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallsResult = _uuidof(IPhoneCallsResult);
+                MIDL_CONST_ID IID& IID_IPhoneCallsResult = __uuidof(IPhoneCallsResult);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5098,7 +5869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneDialOptions = _uuidof(IPhoneDialOptions);
+                MIDL_CONST_ID IID& IID_IPhoneDialOptions = __uuidof(IPhoneDialOptions);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5185,7 +5956,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine = _uuidof(IPhoneLine);
+                MIDL_CONST_ID IID& IID_IPhoneLine = __uuidof(IPhoneLine);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5227,7 +5998,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine2 = _uuidof(IPhoneLine2);
+                MIDL_CONST_ID IID& IID_IPhoneLine2 = __uuidof(IPhoneLine2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5276,7 +6047,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine3 = _uuidof(IPhoneLine3);
+                MIDL_CONST_ID IID& IID_IPhoneLine3 = __uuidof(IPhoneLine3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5325,7 +6096,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineCellularDetails = _uuidof(IPhoneLineCellularDetails);
+                MIDL_CONST_ID IID& IID_IPhoneLineCellularDetails = __uuidof(IPhoneLineCellularDetails);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5364,7 +6135,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineConfiguration = _uuidof(IPhoneLineConfiguration);
+                MIDL_CONST_ID IID& IID_IPhoneLineConfiguration = __uuidof(IPhoneLineConfiguration);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5403,7 +6174,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineDialResult = _uuidof(IPhoneLineDialResult);
+                MIDL_CONST_ID IID& IID_IPhoneLineDialResult = __uuidof(IPhoneLineDialResult);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5440,7 +6211,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineStatics = _uuidof(IPhoneLineStatics);
+                MIDL_CONST_ID IID& IID_IPhoneLineStatics = __uuidof(IPhoneLineStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5499,7 +6270,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice = _uuidof(IPhoneLineTransportDevice);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice = __uuidof(IPhoneLineTransportDevice);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5552,7 +6323,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice2 = _uuidof(IPhoneLineTransportDevice2);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice2 = __uuidof(IPhoneLineTransportDevice2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5596,7 +6367,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDeviceStatics = _uuidof(IPhoneLineTransportDeviceStatics);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDeviceStatics = __uuidof(IPhoneLineTransportDeviceStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5669,7 +6440,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineWatcher = _uuidof(IPhoneLineWatcher);
+                MIDL_CONST_ID IID& IID_IPhoneLineWatcher = __uuidof(IPhoneLineWatcher);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5705,7 +6476,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineWatcherEventArgs = _uuidof(IPhoneLineWatcherEventArgs);
+                MIDL_CONST_ID IID& IID_IPhoneLineWatcherEventArgs = __uuidof(IPhoneLineWatcherEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5750,7 +6521,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneVoicemail = _uuidof(IPhoneVoicemail);
+                MIDL_CONST_ID IID& IID_IPhoneVoicemail = __uuidof(IPhoneVoicemail);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5841,7 +6612,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator = _uuidof(IVoipCallCoordinator);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator = __uuidof(IVoipCallCoordinator);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5885,7 +6656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = _uuidof(IVoipCallCoordinator2);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = __uuidof(IVoipCallCoordinator2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5943,7 +6714,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = _uuidof(IVoipCallCoordinator3);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = __uuidof(IVoipCallCoordinator3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5982,7 +6753,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator4 = _uuidof(IVoipCallCoordinator4);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator4 = __uuidof(IVoipCallCoordinator4);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5991,6 +6762,59 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator4;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IVoipCallCoordinator5
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipCallCoordinator5[] = L"Windows.ApplicationModel.Calls.IVoipCallCoordinator5";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("d4f79017-d1c1-5820-955e-7a1676355d00")
+                IVoipCallCoordinator5 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE RequestNewIncomingCallWithOptions(
+                        ABI::Windows::ApplicationModel::Calls::IIncomingVoipPhoneCallOptions* callOptions,
+                        ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RequestNewOutgoingCallWithOptions(
+                        ABI::Windows::ApplicationModel::Calls::IOutgoingVoipPhoneCallOptions* callOptions,
+                        ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetupNewAcceptedCallWithOptions(
+                        ABI::Windows::ApplicationModel::Calls::IAcceptedVoipPhoneCallOptions* callOptions,
+                        ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RequestNewAppInitiatedCallWithOptions(
+                        ABI::Windows::ApplicationModel::Calls::IAppInitiatedVoipPhoneCallOptions* callOptions,
+                        ABI::Windows::ApplicationModel::Calls::IVoipPhoneCall** result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator5 = __uuidof(IVoipCallCoordinator5);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6018,7 +6842,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = _uuidof(IVoipCallCoordinatorStatics);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = __uuidof(IVoipCallCoordinatorStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6027,6 +6851,50 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipCallCoordinatorStatics2[] = L"Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("b8d0288b-01ea-5478-8404-a1fb06f2b83b")
+                IVoipCallCoordinatorStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE IsCallControlDeviceKindSupportedForAssociation(
+                        ABI::Windows::ApplicationModel::Calls::VoipCallControlDeviceKind kind,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetDeviceSelectorForCallControl(
+                        HSTRING* result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics2 = __uuidof(IVoipCallCoordinatorStatics2);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6108,7 +6976,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE NotifyCallReady(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall = _uuidof(IVoipPhoneCall);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall = __uuidof(IVoipPhoneCall);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6145,7 +7013,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE TryShowAppUI(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = _uuidof(IVoipPhoneCall2);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = __uuidof(IVoipPhoneCall2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6185,7 +7053,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = _uuidof(IVoipPhoneCall3);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = __uuidof(IVoipPhoneCall3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6197,12 +7065,126 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
 
 /*
  *
+ * Interface Windows.ApplicationModel.Calls.IVoipPhoneCall4
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipPhoneCall
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipPhoneCall4[] = L"Windows.ApplicationModel.Calls.IVoipPhoneCall4";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Calls {
+                MIDL_INTERFACE("eba66290-ad6d-5899-bdda-81bfe9f999a1")
+                IVoipPhoneCall4 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsUsingAssociatedDevicesList(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE NotifyCallActiveOnDevices(
+                        __FIIterable_1_HSTRING* associatedDeviceIds
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE AddAssociatedCallControlDevice(
+                        HSTRING deviceId
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RemoveAssociatedCallControlDevice(
+                        HSTRING deviceId
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetAssociatedCallControlDevices(
+                        __FIIterable_1_HSTRING* associatedDeviceIds
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetAssociatedCallControlDevices(
+                        __FIVectorView_1_HSTRING** result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall4 = __uuidof(IVoipPhoneCall4);
+            } /* Calls */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.Calls.CallAnswerEventArgs
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.ICallAnswerEventArgs ** Default Interface **
+ *    Windows.ApplicationModel.Calls.ICallAnswerEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -6251,6 +7233,35 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_CallStateChangeEventArgs[] = L"Windows.ApplicationModel.Calls.CallStateChangeEventArgs";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6330,6 +7341,35 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.Calls.PhoneCall
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 6.0
@@ -6404,8 +7444,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **
@@ -6859,12 +7899,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator ** Default Interface **
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator2
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator3
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator4
+ *    Windows.ApplicationModel.Calls.IVoipCallCoordinator5
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -6886,6 +7928,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall ** Default Interface **
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall2
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall3
+ *    Windows.ApplicationModel.Calls.IVoipPhoneCall4
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -6899,11 +7942,41 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2 __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CICallRejectEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallRejectEventArgs_FWD_DEFINED__
@@ -6916,6 +7989,18 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallRejectEventArg
 typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs __x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CILockScreenCallEndCallDeferral_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CILockScreenCallEndCallDeferral_FWD_DEFINED__
@@ -6940,6 +8025,18 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CILockScreenCallUI _
 typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs __x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIPhoneCall_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIPhoneCall_FWD_DEFINED__
@@ -7163,11 +8260,23 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinato
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5 __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2 __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall_FWD_DEFINED__
@@ -7186,6 +8295,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall2 __x
 typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall3 __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall3;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4 __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -10904,6 +12019,8 @@ typedef enum __x_ABI_CWindows_CApplicationModel_CCalls_CPhoneVoicemailType __x_A
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CCalls_CTransportDeviceAudioRoutingStatus __x_ABI_CWindows_CApplicationModel_CCalls_CTransportDeviceAudioRoutingStatus;
 
+typedef enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind;
+
 typedef enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallRejectReason __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallRejectReason;
@@ -11307,6 +12424,25 @@ enum __x_ABI_CWindows_CApplicationModel_CCalls_CTransportDeviceAudioRoutingStatu
 
 /*
  *
+ * Struct Windows.ApplicationModel.Calls.VoipCallControlDeviceKind
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind
+{
+    VoipCallControlDeviceKind_Bluetooth = 0,
+    VoipCallControlDeviceKind_Usb = 1,
+};
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Struct Windows.ApplicationModel.Calls.VoipPhoneCallMedia
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
@@ -11371,6 +12507,400 @@ enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallState
     VoipPhoneCallState_Outgoing = 4,
 };
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia* value);
+    HRESULT (STDMETHODCALLTYPE* put_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia value);
+    HRESULT (STDMETHODCALLTYPE* get_AssociatedDeviceIds)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* This,
+        __FIVector_1_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_Context(This, value) \
+    ((This)->lpVtbl->get_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_put_Context(This, value) \
+    ((This)->lpVtbl->put_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_ContactName(This, value) \
+    ((This)->lpVtbl->get_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_put_ContactName(This, value) \
+    ((This)->lpVtbl->put_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_ContactNumber(This, value) \
+    ((This)->lpVtbl->get_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_put_ContactNumber(This, value) \
+    ((This)->lpVtbl->put_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_ServiceName(This, value) \
+    ((This)->lpVtbl->get_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_put_ServiceName(This, value) \
+    ((This)->lpVtbl->put_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_Media(This, value) \
+    ((This)->lpVtbl->get_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_put_Media(This, value) \
+    ((This)->lpVtbl->put_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_get_AssociatedDeviceIds(This, value) \
+    ((This)->lpVtbl->get_AssociatedDeviceIds(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAcceptedVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactoryVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_CreateInstance(This, associatedDeviceIds, value) \
+    ((This)->lpVtbl->CreateInstance(This, associatedDeviceIds, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia* value);
+    HRESULT (STDMETHODCALLTYPE* put_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia value);
+    HRESULT (STDMETHODCALLTYPE* get_AssociatedDeviceIds)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* This,
+        __FIVector_1_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_Context(This, value) \
+    ((This)->lpVtbl->get_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_put_Context(This, value) \
+    ((This)->lpVtbl->put_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_ContactName(This, value) \
+    ((This)->lpVtbl->get_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_put_ContactName(This, value) \
+    ((This)->lpVtbl->put_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_ContactNumber(This, value) \
+    ((This)->lpVtbl->get_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_put_ContactNumber(This, value) \
+    ((This)->lpVtbl->put_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_ServiceName(This, value) \
+    ((This)->lpVtbl->get_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_put_ServiceName(This, value) \
+    ((This)->lpVtbl->put_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_Media(This, value) \
+    ((This)->lpVtbl->get_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_put_Media(This, value) \
+    ((This)->lpVtbl->put_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_get_AssociatedDeviceIds(This, value) \
+    ((This)->lpVtbl->get_AssociatedDeviceIds(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IAppInitiatedVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactoryVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_CreateInstance(This, associatedDeviceIds, value) \
+    ((This)->lpVtbl->CreateInstance(This, associatedDeviceIds, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -11440,6 +12970,79 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.ICallAnswerEventArgs2
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.CallAnswerEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_ICallAnswerEventArgs2[] = L"Windows.ApplicationModel.Calls.ICallAnswerEventArgs2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_SourceDeviceId)(__x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_get_SourceDeviceId(This, value) \
+    ((This)->lpVtbl->get_SourceDeviceId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -11578,6 +13181,263 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChangeEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IIncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactNumber)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactImage)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactImage)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* value);
+    HRESULT (STDMETHODCALLTYPE* get_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_BrandingImage)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+    HRESULT (STDMETHODCALLTYPE* put_BrandingImage)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* value);
+    HRESULT (STDMETHODCALLTYPE* get_CallDetails)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_CallDetails)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Ringtone)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass** value);
+    HRESULT (STDMETHODCALLTYPE* put_Ringtone)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* value);
+    HRESULT (STDMETHODCALLTYPE* get_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia* value);
+    HRESULT (STDMETHODCALLTYPE* put_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia value);
+    HRESULT (STDMETHODCALLTYPE* get_RingTimeout)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan* value);
+    HRESULT (STDMETHODCALLTYPE* put_RingTimeout)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactRemoteId)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactRemoteId)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_AssociatedDeviceIds)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* This,
+        __FIVector_1_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_Context(This, value) \
+    ((This)->lpVtbl->get_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_Context(This, value) \
+    ((This)->lpVtbl->put_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_ContactName(This, value) \
+    ((This)->lpVtbl->get_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_ContactName(This, value) \
+    ((This)->lpVtbl->put_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_ContactNumber(This, value) \
+    ((This)->lpVtbl->get_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_ContactNumber(This, value) \
+    ((This)->lpVtbl->put_ContactNumber(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_ContactImage(This, value) \
+    ((This)->lpVtbl->get_ContactImage(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_ContactImage(This, value) \
+    ((This)->lpVtbl->put_ContactImage(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_ServiceName(This, value) \
+    ((This)->lpVtbl->get_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_ServiceName(This, value) \
+    ((This)->lpVtbl->put_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_BrandingImage(This, value) \
+    ((This)->lpVtbl->get_BrandingImage(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_BrandingImage(This, value) \
+    ((This)->lpVtbl->put_BrandingImage(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_CallDetails(This, value) \
+    ((This)->lpVtbl->get_CallDetails(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_CallDetails(This, value) \
+    ((This)->lpVtbl->put_CallDetails(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_Ringtone(This, value) \
+    ((This)->lpVtbl->get_Ringtone(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_Ringtone(This, value) \
+    ((This)->lpVtbl->put_Ringtone(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_Media(This, value) \
+    ((This)->lpVtbl->get_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_Media(This, value) \
+    ((This)->lpVtbl->put_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_RingTimeout(This, value) \
+    ((This)->lpVtbl->get_RingTimeout(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_RingTimeout(This, value) \
+    ((This)->lpVtbl->put_RingTimeout(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_ContactRemoteId(This, value) \
+    ((This)->lpVtbl->get_ContactRemoteId(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_put_ContactRemoteId(This, value) \
+    ((This)->lpVtbl->put_ContactRemoteId(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_get_AssociatedDeviceIds(This, value) \
+    ((This)->lpVtbl->get_AssociatedDeviceIds(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IIncomingVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactoryVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_CreateInstance(This, associatedDeviceIds, value) \
+    ((This)->lpVtbl->CreateInstance(This, associatedDeviceIds, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -11889,6 +13749,193 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IOutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Context)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ContactName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_ServiceName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia* value);
+    HRESULT (STDMETHODCALLTYPE* put_Media)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallMedia value);
+    HRESULT (STDMETHODCALLTYPE* get_AssociatedDeviceIds)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* This,
+        __FIVector_1_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_get_Context(This, value) \
+    ((This)->lpVtbl->get_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_put_Context(This, value) \
+    ((This)->lpVtbl->put_Context(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_get_ContactName(This, value) \
+    ((This)->lpVtbl->get_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_put_ContactName(This, value) \
+    ((This)->lpVtbl->put_ContactName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_get_ServiceName(This, value) \
+    ((This)->lpVtbl->get_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_put_ServiceName(This, value) \
+    ((This)->lpVtbl->put_ServiceName(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_get_Media(This, value) \
+    ((This)->lpVtbl->get_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_put_Media(This, value) \
+    ((This)->lpVtbl->put_Media(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_get_AssociatedDeviceIds(This, value) \
+    ((This)->lpVtbl->get_AssociatedDeviceIds(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IOutgoingVoipPhoneCallOptionsFactory[] = L"Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactoryVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_CreateInstance(This, associatedDeviceIds, value) \
+    ((This)->lpVtbl->CreateInstance(This, associatedDeviceIds, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -15445,6 +17492,98 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoord
 
 /*
  *
+ * Interface Windows.ApplicationModel.Calls.IVoipCallCoordinator5
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipCallCoordinator5[] = L"Windows.ApplicationModel.Calls.IVoipCallCoordinator5";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* RequestNewIncomingCallWithOptions)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions* callOptions,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall** result);
+    HRESULT (STDMETHODCALLTYPE* RequestNewOutgoingCallWithOptions)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions* callOptions,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall** result);
+    HRESULT (STDMETHODCALLTYPE* SetupNewAcceptedCallWithOptions)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions* callOptions,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall** result);
+    HRESULT (STDMETHODCALLTYPE* RequestNewAppInitiatedCallWithOptions)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5* This,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions* callOptions,
+        __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_RequestNewIncomingCallWithOptions(This, callOptions, result) \
+    ((This)->lpVtbl->RequestNewIncomingCallWithOptions(This, callOptions, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_RequestNewOutgoingCallWithOptions(This, callOptions, result) \
+    ((This)->lpVtbl->RequestNewOutgoingCallWithOptions(This, callOptions, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_SetupNewAcceptedCallWithOptions(This, callOptions, result) \
+    ((This)->lpVtbl->SetupNewAcceptedCallWithOptions(This, callOptions, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_RequestNewAppInitiatedCallWithOptions(This, callOptions, result) \
+    ((This)->lpVtbl->RequestNewAppInitiatedCallWithOptions(This, callOptions, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
@@ -15511,6 +17650,85 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipCallCoordinatorStatics2[] = L"Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* IsCallControlDeviceKindSupportedForAssociation)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind kind,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetDeviceSelectorForCallControl)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2* This,
+        HSTRING* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_IsCallControlDeviceKindSupportedForAssociation(This, kind, result) \
+    ((This)->lpVtbl->IsCallControlDeviceKindSupportedForAssociation(This, kind, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_GetDeviceSelectorForCallControl(This, result) \
+    ((This)->lpVtbl->GetDeviceSelectorForCallControl(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -15823,12 +18041,169 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
 
 /*
  *
+ * Interface Windows.ApplicationModel.Calls.IVoipPhoneCall4
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipPhoneCall
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_IVoipPhoneCall4[] = L"Windows.ApplicationModel.Calls.IVoipPhoneCall4";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsUsingAssociatedDevicesList)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* NotifyCallActiveOnDevices)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds);
+    HRESULT (STDMETHODCALLTYPE* AddAssociatedCallControlDevice)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        HSTRING deviceId);
+    HRESULT (STDMETHODCALLTYPE* RemoveAssociatedCallControlDevice)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        HSTRING deviceId);
+    HRESULT (STDMETHODCALLTYPE* SetAssociatedCallControlDevices)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        __FIIterable_1_HSTRING* associatedDeviceIds);
+    HRESULT (STDMETHODCALLTYPE* GetAssociatedCallControlDevices)(__x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4* This,
+        __FIVectorView_1_HSTRING** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_get_IsUsingAssociatedDevicesList(This, value) \
+    ((This)->lpVtbl->get_IsUsingAssociatedDevicesList(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_NotifyCallActiveOnDevices(This, associatedDeviceIds) \
+    ((This)->lpVtbl->NotifyCallActiveOnDevices(This, associatedDeviceIds))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_AddAssociatedCallControlDevice(This, deviceId) \
+    ((This)->lpVtbl->AddAssociatedCallControlDevice(This, deviceId))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_RemoveAssociatedCallControlDevice(This, deviceId) \
+    ((This)->lpVtbl->RemoveAssociatedCallControlDevice(This, deviceId))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_SetAssociatedCallControlDevices(This, associatedDeviceIds) \
+    ((This)->lpVtbl->SetAssociatedCallControlDevices(This, associatedDeviceIds))
+
+#define __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_GetAssociatedCallControlDevices(This, result) \
+    ((This)->lpVtbl->GetAssociatedCallControlDevices(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.Calls.CallAnswerEventArgs
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.ICallAnswerEventArgs ** Default Interface **
+ *    Windows.ApplicationModel.Calls.ICallAnswerEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -15877,6 +18252,35 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_CallStateChangeEventArgs[] = L"Windows.ApplicationModel.Calls.CallStateChangeEventArgs";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -15956,6 +18360,35 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
+ *
+ * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions";
+#endif
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.Calls.PhoneCall
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 6.0
@@ -16030,8 +18463,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **
@@ -16485,12 +18918,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator ** Default Interface **
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator2
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator3
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator4
+ *    Windows.ApplicationModel.Calls.IVoipCallCoordinator5
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -16512,6 +18947,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall ** Default Interface **
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall2
  *    Windows.ApplicationModel.Calls.IVoipPhoneCall3
+ *    Windows.ApplicationModel.Calls.IVoipPhoneCall4
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

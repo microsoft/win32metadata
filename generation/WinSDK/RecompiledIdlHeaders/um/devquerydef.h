@@ -42,6 +42,7 @@ _DEV_OBJECT_TYPE
     DevObjectTypeDeviceContainerDisplay,
     DevObjectTypeAEPService,
     DevObjectTypeDevicePanel,
+    DevObjectTypeAEPProtocol,
 } DEV_OBJECT_TYPE, *PDEV_OBJECT_TYPE;
 
 typedef 

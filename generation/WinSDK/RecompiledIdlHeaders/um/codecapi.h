@@ -398,6 +398,8 @@ Abstract:
     #define STATIC_CODECAPI_AVEncVideoMaxNumRefFrameForLayer    0x3141C639, 0x6329, 0x40d1, 0xB7, 0xE7, 0x2F, 0x0E, 0x3A, 0xC1, 0x8E, 0x02
     #define STATIC_CODECAPI_AVEncTileRows                   0xFBC650FC, 0x41AB, 0x4f9b, 0x84, 0xB5, 0x06, 0x5B, 0xE9, 0xCD, 0x99, 0xEE
     #define STATIC_CODECAPI_AVEncTileColumns                0xB4B31205, 0x01E8, 0x452c, 0xB8, 0x76, 0x8C, 0x65, 0x06, 0x54, 0x59, 0x25
+    #define STATIC_CODECAPI_FeatureMapFlagsUsed             0x8bfda3b8, 0x7387, 0x4c07, 0x92, 0x4f, 0xfe, 0x63, 0x0, 0x6c, 0xf2, 0x2b
+
 // end of static definitions }
 
 //
@@ -1336,7 +1338,10 @@ enum eAVEncH264VLevel
     eAVEncH264VLevel4_2       = 42,
     eAVEncH264VLevel5         = 50,
     eAVEncH264VLevel5_1       = 51,
-    eAVEncH264VLevel5_2       = 52
+    eAVEncH264VLevel5_2       = 52,
+    eAVEncH264VLevel6         = 60,
+    eAVEncH264VLevel6_1       = 61,
+    eAVEncH264VLevel6_2       = 62
 };
 
 enum eAVEncH265VLevel  
@@ -2089,6 +2094,11 @@ DEFINE_CODECAPI_GUID( AVPriorityControl,"54ba3dc8-bdde-4329-b187-2018bc5c2ba1", 
 //   1 - realtime 
 DEFINE_CODECAPI_GUID( AVRealtimeControl,"6f440632-c4ad-4bf7-9e52-456942b454b0", 0x6f440632, 0xc4ad, 0x4bf7, 0x9e, 0x52, 0x45, 0x69, 0x42, 0xb4, 0x54, 0xb0 ) 
 
+// FeatureMapFlagsUsed (UINT32) 
+// Indicates which flags may and won't be present in the per-frame FeatureMap data for the sequence.
+// The value is a bitwise OR of the MACROBLOCK_FLAG_* fields specified in mfapi.h
+DEFINE_CODECAPI_GUID( FeatureMapFlagsUsed,"8BFDA3B8-7387-4c07-924F-FE63006CF22B", 0x8bfda3b8, 0x7387, 0x4c07, 0x92, 0x4f, 0xfe, 0x63, 0x0, 0x6c, 0xf2, 0x2b ) 
+
 // AVEncNoInputCopy (UINT32)
 // Enables the encoder to avoid copying the input buffer
 // 0 - default behavior (copy input buffer to encoder internal buffer)
@@ -2472,6 +2482,8 @@ DEFINE_CODECAPI_GUID( AVEncTileColumns, "B4B31205-01E8-452c-B876-8C6506545925", 
     #define CODECAPI_AVPriorityControl              DEFINE_CODECAPI_GUIDNAMED( AVPriorityControl )
     #define CODECAPI_AVRealtimeControl              DEFINE_CODECAPI_GUIDNAMED( AVRealtimeControl )
     #define CODECAPI_AVEncMaxFrameRate              DEFINE_CODECAPI_GUIDNAMED( AVEncMaxFrameRate)
+    
+    #define CODECAPI_FeatureMapFlagsUsed            DEFINE_CODECAPI_GUIDNAMED( FeatureMapFlagsUsed )
 
     #define CODECAPI_AVEncNoInputCopy               DEFINE_CODECAPI_GUIDNAMED( AVEncNoInputCopy )
 

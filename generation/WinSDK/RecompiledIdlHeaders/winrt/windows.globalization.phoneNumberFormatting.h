@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -411,7 +411,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneNumberFormatter = _uuidof(IPhoneNumberFormatter);
+                MIDL_CONST_ID IID& IID_IPhoneNumberFormatter = __uuidof(IPhoneNumberFormatter);
             } /* PhoneNumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -461,7 +461,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneNumberFormatterStatics = _uuidof(IPhoneNumberFormatterStatics);
+                MIDL_CONST_ID IID& IID_IPhoneNumberFormatterStatics = __uuidof(IPhoneNumberFormatterStatics);
             } /* PhoneNumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -519,7 +519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneNumberInfo = _uuidof(IPhoneNumberInfo);
+                MIDL_CONST_ID IID& IID_IPhoneNumberInfo = __uuidof(IPhoneNumberInfo);
             } /* PhoneNumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -556,7 +556,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneNumberInfoFactory = _uuidof(IPhoneNumberInfoFactory);
+                MIDL_CONST_ID IID& IID_IPhoneNumberInfoFactory = __uuidof(IPhoneNumberInfoFactory);
             } /* PhoneNumberFormatting */
         } /* Globalization */
     } /* Windows */
@@ -600,7 +600,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneNumberInfoStatics = _uuidof(IPhoneNumberInfoStatics);
+                MIDL_CONST_ID IID& IID_IPhoneNumberInfoStatics = __uuidof(IPhoneNumberInfoStatics);
             } /* PhoneNumberFormatting */
         } /* Globalization */
     } /* Windows */

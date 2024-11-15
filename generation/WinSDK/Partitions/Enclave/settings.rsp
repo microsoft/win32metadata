@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/enclaveapi.h
+<IncludeRoot>/um/enclaveium.h
 <IncludeRoot>/um/ntenclv.h
 <IncludeRoot>/um/winenclave.h
 <IncludeRoot>/um/winenclaveapi.h

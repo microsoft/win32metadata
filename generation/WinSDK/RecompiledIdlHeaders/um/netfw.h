@@ -400,6 +400,7 @@ extern "C"{
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 HRESULT
+WINAPI
 NetworkIsolationSetupAppContainerBinaries (
     _In_ PSID applicationContainerSid,
     _In_ LPCWSTR packageFullName,
@@ -485,6 +486,7 @@ typedef void (CALLBACK *PAC_CHANGES_CALLBACK_FN) (
     );
 
 DWORD
+WINAPI
 NetworkIsolationRegisterForAppContainerChanges(
     _In_ DWORD flags,
     _In_ PAC_CHANGES_CALLBACK_FN callback,
@@ -492,31 +494,37 @@ NetworkIsolationRegisterForAppContainerChanges(
     _Out_ HANDLE *registrationObject
     );
 DWORD
+WINAPI
 NetworkIsolationUnregisterForAppContainerChanges(
     _In_ HANDLE registrationObject 
     );
 HRESULT
+WINAPI
 NetworkIsolationEnumerateAppContainerRules(
     _Outptr_ IEnumVARIANT ** newEnum
     );
 
 DWORD
+WINAPI
 NetworkIsolationFreeAppContainers(
     _In_ PINET_FIREWALL_APP_CONTAINER pPublicAppCs 
     );
 
 DWORD
+WINAPI
 NetworkIsolationEnumAppContainers(
     _In_  DWORD Flags,
     _Out_ DWORD *pdwNumPublicAppCs,
     _Outptr_result_buffer_(*pdwNumPublicAppCs) PINET_FIREWALL_APP_CONTAINER *ppPublicAppCs 
     );
 DWORD
+WINAPI
 NetworkIsolationGetAppContainerConfig(
     _Out_ DWORD *pdwNumPublicAppCs,
     _Outptr_result_buffer_(*pdwNumPublicAppCs) PSID_AND_ATTRIBUTES *appContainerSids
     );
 DWORD
+WINAPI
 NetworkIsolationSetAppContainerConfig(
     _In_ DWORD dwNumPublicAppCs,
     _In_reads_(dwNumPublicAppCs) PSID_AND_ATTRIBUTES appContainerSids
@@ -533,6 +541,7 @@ typedef enum _NETISO_ERROR_TYPE
 } NETISO_ERROR_TYPE;
 #endif //__NET_ISOLATION_DIAG_TYPES__
 DWORD
+WINAPI
 NetworkIsolationDiagnoseConnectFailureAndGetInfo(
     _In_ LPCWSTR wszServerName,
     _Out_ NETISO_ERROR_TYPE  *netIsoError
@@ -547,6 +556,7 @@ typedef void (CALLBACK *PNETISO_EDP_ID_CALLBACK_FN) (
 #define NETISO_GEID_FOR_WDAG 0x01
 #define NETISO_GEID_FOR_NEUTRAL_AWARE 0x02
 DWORD
+WINAPI
 NetworkIsolationGetEnterpriseIdAsync(
     _In_z_ LPCWSTR wszServerName,
     _In_   DWORD   dwFlags,
@@ -555,6 +565,7 @@ NetworkIsolationGetEnterpriseIdAsync(
     _Out_  HANDLE *hOperation 
     );
 DWORD
+WINAPI
 NetworkIsolationGetEnterpriseIdClose(
     _In_ HANDLE hOperation,
     _In_ BOOL   bWaitForOperation

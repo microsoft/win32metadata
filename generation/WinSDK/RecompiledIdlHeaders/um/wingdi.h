@@ -1638,15 +1638,15 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
 #endif /* WINVER >= 0x0400 */
 
 /* Font Families */
-#define FF_DONTCARE         (0<<4)  /* Don't care or don't know. */
-#define FF_ROMAN            (1<<4)  /* Variable stroke width, serifed. */
+#define FF_DONTCARE         0x00    /* Don't care or don't know. */
+#define FF_ROMAN            0x10    /* Variable stroke width, serifed. */
                                     /* Times Roman, Century Schoolbook, etc. */
-#define FF_SWISS            (2<<4)  /* Variable stroke width, sans-serifed. */
+#define FF_SWISS            0x20    /* Variable stroke width, sans-serifed. */
                                     /* Helvetica, Swiss, etc. */
-#define FF_MODERN           (3<<4)  /* Constant stroke width, serifed or sans-serifed. */
+#define FF_MODERN           0x30    /* Constant stroke width, serifed or sans-serifed. */
                                     /* Pica, Elite, Courier, etc. */
-#define FF_SCRIPT           (4<<4)  /* Cursive, etc. */
-#define FF_DECORATIVE       (5<<4)  /* Old English, etc. */
+#define FF_SCRIPT           0x40    /* Cursive, etc. */
+#define FF_DECORATIVE       0x50    /* Old English, etc. */
 
 /* Font Weights */
 #define FW_DONTCARE         0
@@ -3016,36 +3016,41 @@ typedef struct DISPLAYCONFIG_PATH_INFO
 #define DISPLAYCONFIG_PATH_ACTIVE               0x00000001
 #define DISPLAYCONFIG_PATH_PREFERRED_UNSCALED   0x00000004 // Not implemented
 #define DISPLAYCONFIG_PATH_SUPPORT_VIRTUAL_MODE 0x00000008
+#define DISPLAYCONFIG_PATH_BOOST_REFRESH_RATE   0x00000010
 #define DISPLAYCONFIG_PATH_VALID_FLAGS          0x0000001D
 
 typedef enum DISPLAYCONFIG_TOPOLOGY_ID
 {
-      DISPLAYCONFIG_TOPOLOGY_INTERNAL       = 0x00000001,
-      DISPLAYCONFIG_TOPOLOGY_CLONE          = 0x00000002,
-      DISPLAYCONFIG_TOPOLOGY_EXTEND         = 0x00000004,
-      DISPLAYCONFIG_TOPOLOGY_EXTERNAL       = 0x00000008,
-      DISPLAYCONFIG_TOPOLOGY_FORCE_UINT32   = 0xFFFFFFFF
+    DISPLAYCONFIG_TOPOLOGY_INTERNAL       = 0x00000001,
+    DISPLAYCONFIG_TOPOLOGY_CLONE          = 0x00000002,
+    DISPLAYCONFIG_TOPOLOGY_EXTEND         = 0x00000004,
+    DISPLAYCONFIG_TOPOLOGY_EXTERNAL       = 0x00000008,
+    DISPLAYCONFIG_TOPOLOGY_FORCE_UINT32   = 0xFFFFFFFF
 } DISPLAYCONFIG_TOPOLOGY_ID;
 
 
 typedef enum
 {
-      DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME                 = 1,
-      DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME                 = 2,
-      DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE       = 3,
-      DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME                = 4,
-      DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE          = 5,
-      DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE            = 6,
-      DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION  = 7,
-      DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION  = 8,
-      DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO         = 9,
-      DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE        = 10,
-      DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL             = 11,
-      DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION      = 12,
-      DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION      = 13,
+    DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME                 = 1,
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME                 = 2,
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE       = 3,
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME                = 4,
+    DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE          = 5,
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE            = 6,
+    DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION  = 7,
+    DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION  = 8,
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO         = 9,
+    DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE        = 10,
+    DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL             = 11,
+    DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION      = 12,
+    DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION      = 13,
+    DISPLAYCONFIG_DEVICE_INFO_SET_RESERVED1                   = 14,
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO_2       = 15,
+    DISPLAYCONFIG_DEVICE_INFO_SET_HDR_STATE                   = 16,
+    DISPLAYCONFIG_DEVICE_INFO_SET_WCG_STATE                   = 17,
+
       DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32                = 0xFFFFFFFF
 } DISPLAYCONFIG_DEVICE_INFO_TYPE;
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -3194,6 +3199,79 @@ typedef struct _DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE
         UINT32 value;
     }DUMMYUNIONNAME;
 } DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE;
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+typedef enum _DISPLAYCONFIG_ADVANCED_COLOR_MODE
+{
+    DISPLAYCONFIG_ADVANCED_COLOR_MODE_SDR,          // RGB888 composition, display-referred color, display-referred luminance
+    DISPLAYCONFIG_ADVANCED_COLOR_MODE_WCG,          // Advanced color (FP16 scRGB composition), scene-referred color, display-referred luminance
+    DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR,          // Advanced color (FP16 scRGB composition), scene-referred color, scene-referred luminance
+} DISPLAYCONFIG_ADVANCED_COLOR_MODE;
+
+typedef struct _DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2
+{
+    DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+    union
+    {
+        struct
+        {
+          UINT32 advancedColorSupported        :1;    // A type of advanced color is supported
+          UINT32 advancedColorActive           :1;    // A type of advanced color is active (see currentColorMode for the specific advanced color mode)
+          UINT32 reserved1                     :1;
+          UINT32 advancedColorLimitedByPolicy  :1;    // System/OS policy is limiting advanced color options (see currentColorMode for the current mode)
+
+          UINT32 highDynamicRangeSupported     :1;    // HDR is supported
+          UINT32 highDynamicRangeUserEnabled   :1;    // HDR is enabled by the user (but may not be active)
+
+          UINT32 wideColorSupported            :1;    // Wide color gamut is supported
+          UINT32 wideColorUserEnabled          :1;    // Wide color gamut is enabled by the user (but may not be active)
+
+          UINT32 reserved                      :24;
+        } DUMMYSTRUCTNAME;
+
+        UINT32 value;
+    } DUMMYUNIONNAME;
+
+    DISPLAYCONFIG_COLOR_ENCODING colorEncoding;
+    UINT32 bitsPerColorChannel;
+
+    DISPLAYCONFIG_ADVANCED_COLOR_MODE activeColorMode; // The active color mode for this monitor
+
+} DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2;
+
+typedef struct _DISPLAYCONFIG_SET_HDR_STATE
+{
+    DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+    union
+    {
+        struct
+        {
+          UINT32 enableHdr  :1;
+          UINT32 reserved  :31;
+        } DUMMYSTRUCTNAME;
+
+        UINT32 value;
+    }DUMMYUNIONNAME;
+} DISPLAYCONFIG_SET_HDR_STATE;
+
+typedef struct _DISPLAYCONFIG_SET_WCG_STATE
+{
+    DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+    union
+    {
+        struct
+        {
+          UINT32 enableWcg  :1;
+          UINT32 reserved  :31;
+        } DUMMYSTRUCTNAME;
+
+        UINT32 value;
+    }DUMMYUNIONNAME;
+} DISPLAYCONFIG_SET_WCG_STATE;
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
 
 typedef struct _DISPLAYCONFIG_SDR_WHITE_LEVEL
 {

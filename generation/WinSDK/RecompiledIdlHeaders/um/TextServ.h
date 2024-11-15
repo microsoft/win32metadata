@@ -457,7 +457,7 @@ interface IRawElementProviderSimple;
  *
  *	@base	public | IUnknown 
  */
-interface IRicheditWindowlessAccessibility : public IUnknown
+interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
 {
 	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
 		IRawElementProviderWindowlessSite *pSite, 
@@ -473,7 +473,7 @@ struct UiaRect;
  *
  *	@base	public | IUnknown 
  */
-interface IRichEditUiaInformation : public IUnknown
+interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
 {
 	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
 

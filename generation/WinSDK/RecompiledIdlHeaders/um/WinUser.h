@@ -358,6 +358,7 @@ wsprintfW(
 /*
  * Scroll Bar Constants
  */
+#define SB_MIN              0
 #define SB_HORZ             0
 #define SB_VERT             1
 #define SB_CTL              2
@@ -783,8 +784,8 @@ wsprintfW(
  */
 #define WH_MIN              (-1)
 #define WH_MSGFILTER        (-1)
-#define WH_JOURNALRECORD    0
-#define WH_JOURNALPLAYBACK  1
+#define WH_JOURNALRECORD    0   // OBSOLETE: discontinued
+#define WH_JOURNALPLAYBACK  1   // OBSOLETE: discontinued
 #define WH_KEYBOARD         2
 #define WH_GETMESSAGE       3
 #define WH_CALLWNDPROC      4
@@ -2397,6 +2398,7 @@ typedef struct {
 #define WM_POINTERDEVICEOUTOFRANGE      0x23A
 #endif /* WINVER >= 0x0602 */
 
+// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
 
 #if(WINVER >= 0x0601)
 #define WM_TOUCH                        0x0240
@@ -3039,10 +3041,10 @@ WINUSERAPI
 BOOL
 WINAPI
 DrawFrameControl(
-    _In_ HDC,
-    _Inout_ LPRECT,
-    _In_ UINT,
-    _In_ UINT);
+    HDC hdc,
+    _Inout_ LPRECT lprc,
+    UINT uType,
+    UINT uState);
 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -4865,6 +4867,7 @@ IsZoomed(
 /*
  * SetWindowPos Flags
  */
+#define SWP_NONE            0x0000
 #define SWP_NOSIZE          0x0001
 #define SWP_NOMOVE          0x0002
 #define SWP_NOZORDER        0x0004
@@ -6613,6 +6616,7 @@ GetPointerFramePenInfoHistory(
     _Inout_ UINT32 *pointerCount,
     _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_PEN_INFO *penInfo);
 
+// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
 
 WINUSERAPI
 BOOL
@@ -6674,6 +6678,7 @@ DestroySyntheticPointerDevice(
     _In_ HSYNTHETICPOINTERDEVICE device);
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
+// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
 
 WINUSERAPI
 BOOL
@@ -6842,6 +6847,8 @@ GetPointerInputTransform(
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -7407,6 +7414,41 @@ GetSystemMetricsForDpi(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 #ifndef NOMENUS
+/*
+ * Menu-specific access flags
+ */
+#define MENU_GET_ITEM_INFO      (0x0001) // GetMenuInfo, GetMenuItemInfo
+#define MENU_GET_ITEM_DATA      (0x0002) // Get dwMenuData
+#define MENU_GET_SUBMENU        (0x0004) // Get Sub Menu
+#define MENU_INSERT_MENU        (0x0008) // InsertMenu
+#define MENU_INSERT_ITEM        (0x0010) // InsertMenuItem
+#define MENU_DELETE_MENU        (0x0020) // DeleteMenu, RemoveMenu
+#define MENU_SET_ITEM_INFO      (0x0040) // SetMenuItemInfo, ModifyMenu
+#define MENU_ENABLE_ITEM        (0x0080) // EnableMenuItem
+#define MENU_CHECK_ITEM         (0x0100) // CheckMenuItem
+#define MENU_SET_DEFAULT_ITEM   (0x0200) // SetMenuDefaultItem
+#define MENU_SET_ITEM_DATA      (0x0400) // Set dwMenuData
+#define MENU_SET_SUBMENU        (0x0800) // Set Sub Menu
+
+#define MENU_READ_ACCESS       (STANDARD_RIGHTS_READ   |\
+                                MENU_GET_ITEM_INFO     |\
+                                MENU_GET_ITEM_DATA     |\
+                                MENU_GET_SUBMENU)
+
+#define MENU_WRITE_ACCESS      (STANDARD_RIGHTS_WRITE  |\
+                                MENU_INSERT_MENU            |\
+                                MENU_INSERT_ITEM       |\
+                                MENU_DELETE_MENU            |\
+                                MENU_SET_ITEM_INFO     |\
+                                MENU_ENABLE_ITEM |\
+                                MENU_CHECK_ITEM |\
+                                MENU_SET_DEFAULT_ITEM  |\
+                                MENU_SET_ITEM_DATA     |\
+                                MENU_SET_SUBMENU)
+
+#define MENU_EXECUTE_ACCESS   (STANDARD_RIGHTS_EXECUTE)
+
+#define MENU_ALL_ACCESS (STANDARD_RIGHTS_ALL | MENU_READ_ACCESS | MENU_WRITE_ACCESS | MENU_EXECUTE_ACCESS)
 
 WINUSERAPI
 HMENU
@@ -12585,12 +12627,17 @@ typedef struct tagTouchPredictionParameters
 #endif /* WINVER >= 0x0602 */
 
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
-#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define SPI_GETTOUCHPADPARAMETERS    0x00AE
+#define SPI_SETTOUCHPADPARAMETERS    0x00AF
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_CO)
 /* constants for SPI_{GET|SET}WAKEONINPUTDEVICETYPES */
 #endif // NTDDI_VERSION >= NTDDI_WIN10_CO
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
+#endif // NTDDI_VERSION >= NTDDI_WIN10_CU
 
 
 #if(WINVER >= 0x0500)
@@ -15029,6 +15076,7 @@ typedef struct tagRAWMOUSE {
 #if(WINVER >= 0x0600)
 #define MOUSE_MOVE_NOCOALESCE    0x08  // do not coalesce mouse moves
 #endif /* WINVER >= 0x0600 */
+// NOTE: 0x100 is already claimed by MOUSE_TERMSRV_SRC_SHADOW in ntddmou.w
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -15442,6 +15490,76 @@ GetRawPointerDeviceData(
     _In_reads_(propertiesCount) POINTER_DEVICE_PROPERTY* pProperties,
     _Out_writes_(historyCount * propertiesCount) LONG* pValues);
 
+
+// Support for SPI_GETTOUCHPADPARAMETERS/SPI_SETTOUCHPADPARAMETERS
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+typedef enum LEGACY_TOUCHPAD_FEATURES {
+    LEGACY_TOUCHPAD_FEATURE_NONE                     = 0x00000000,
+    LEGACY_TOUCHPAD_FEATURE_ENABLE_DISABLE           = 0x00000001,
+    LEGACY_TOUCHPAD_FEATURE_REVERSE_SCROLL_DIRECTION = 0x00000004,
+} LEGACY_TOUCHPAD_FEATURES;
+
+#ifndef MIDL_PASS
+// Don't define this for MIDL compiler passes over winuser.h. Some of them
+// don't include winnt.h (where DEFINE_ENUM_FLAG_OPERATORS is defined) and
+// get compile errors.
+DEFINE_ENUM_FLAG_OPERATORS(LEGACY_TOUCHPAD_FEATURES)
+#endif
+
+typedef enum TOUCHPAD_SENSITIVITY_LEVEL {
+    TOUCHPAD_SENSITIVITY_LEVEL_MOST_SENSITIVE     = 0x00000000,
+    TOUCHPAD_SENSITIVITY_LEVEL_HIGH_SENSITIVITY   = 0x00000001,
+    TOUCHPAD_SENSITIVITY_LEVEL_MEDIUM_SENSITIVITY = 0x00000002,
+    TOUCHPAD_SENSITIVITY_LEVEL_LOW_SENSITIVITY    = 0x00000003,
+    TOUCHPAD_SENSITIVITY_LEVEL_LEAST_SENSITIVE    = 0x00000004,
+} TOUCHPAD_SENSITIVITY_LEVEL;
+
+// TOUCHPAD_PARAMETERS_LATEST_VERSION will be updated if changes are made to the TOUCHPAD_PARAMETERS struct.
+// For a stable struct, use a numbered variant such as TOUCHPAD_PARAMETERS_VERSION_1 + TOUCHPAD_PARAMETERS_V1.
+#define TOUCHPAD_PARAMETERS_LATEST_VERSION 1
+#define TOUCHPAD_PARAMETERS_VERSION_1 1
+
+typedef struct TOUCHPAD_PARAMETERS {
+    UINT versionNumber;
+
+    // These are status fields calculated dynamically, rather than user settings.
+    // Their values are ignored in SPI_SETTOUCHPADPARAMETERS.
+    UINT maxSupportedContacts;
+    LEGACY_TOUCHPAD_FEATURES legacyTouchpadFeatures;
+    BOOL touchpadPresent             : 1;
+    BOOL legacyTouchpadPresent       : 1;
+    BOOL externalMousePresent        : 1;
+    BOOL touchpadEnabled             : 1;
+    BOOL touchpadActive              : 1;
+    BOOL feedbackSupported           : 1;
+    BOOL clickForceSupported         : 1;
+    BOOL Reserved1                   : 25;
+
+    // These correspond to user settings and can be changed via SPI_SETTOUCHPADPARAMETERS.
+    BOOL allowActiveWhenMousePresent : 1;
+    BOOL feedbackEnabled             : 1;
+    BOOL tapEnabled                  : 1;
+    BOOL tapAndDragEnabled           : 1;
+    BOOL twoFingerTapEnabled         : 1;
+    BOOL rightClickZoneEnabled       : 1;
+    BOOL mouseAccelSettingHonored    : 1;
+    BOOL panEnabled                  : 1;
+    BOOL zoomEnabled                 : 1;
+    BOOL scrollDirectionReversed     : 1;
+    BOOL Reserved2                   : 22;
+    TOUCHPAD_SENSITIVITY_LEVEL sensitivityLevel;
+    UINT cursorSpeed;
+    UINT feedbackIntensity;
+    UINT clickForceSensitivity;
+    UINT rightClickZoneWidth;
+    UINT rightClickZoneHeight;
+} TOUCHPAD_PARAMETERS, *PTOUCH_PAD_PARAMETERS,
+  TOUCHPAD_PARAMETERS_V1, *PTOUCHPAD_PARAMETERS_V1;
+
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+
+// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -16006,6 +16124,27 @@ RegisterForTooltipDismissNotification(HWND hWnd,
 
 #endif /* WINVER >= 0x0607 */
 
+
+#if(WINVER >= 0x0604)
+
+WINUSERAPI
+BOOL
+WINAPI
+IsWindowArranged(
+    _In_ HWND hwnd);
+
+#endif /* WINVER >= 0x0604 */
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+#define INVALID_MONITOR_TOPOLOGY_ID 0
+
+WINUSERAPI
+UINT
+WINAPI
+GetCurrentMonitorTopologyId();
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)

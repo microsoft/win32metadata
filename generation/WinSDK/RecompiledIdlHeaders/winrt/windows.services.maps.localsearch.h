@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -797,7 +797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalCategoriesStatics = _uuidof(ILocalCategoriesStatics);
+                    MIDL_CONST_ID IID& IID_ILocalCategoriesStatics = __uuidof(ILocalCategoriesStatics);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -853,7 +853,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocation = _uuidof(ILocalLocation);
+                    MIDL_CONST_ID IID& IID_ILocalLocation = __uuidof(ILocalLocation);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -897,7 +897,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocation2 = _uuidof(ILocalLocation2);
+                    MIDL_CONST_ID IID& IID_ILocalLocation2 = __uuidof(ILocalLocation2);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -938,7 +938,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocationFinderResult = _uuidof(ILocalLocationFinderResult);
+                    MIDL_CONST_ID IID& IID_ILocalLocationFinderResult = __uuidof(ILocalLocationFinderResult);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -980,7 +980,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocationFinderStatics = _uuidof(ILocalLocationFinderStatics);
+                    MIDL_CONST_ID IID& IID_ILocalLocationFinderStatics = __uuidof(ILocalLocationFinderStatics);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -1024,7 +1024,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocationHoursOfOperationItem = _uuidof(ILocalLocationHoursOfOperationItem);
+                    MIDL_CONST_ID IID& IID_ILocalLocationHoursOfOperationItem = __uuidof(ILocalLocationHoursOfOperationItem);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -1068,7 +1068,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILocalLocationRatingInfo = _uuidof(ILocalLocationRatingInfo);
+                    MIDL_CONST_ID IID& IID_ILocalLocationRatingInfo = __uuidof(ILocalLocationRatingInfo);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */
@@ -1107,7 +1107,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPlaceInfoHelperStatics = _uuidof(IPlaceInfoHelperStatics);
+                    MIDL_CONST_ID IID& IID_IPlaceInfoHelperStatics = __uuidof(IPlaceInfoHelperStatics);
                 } /* LocalSearch */
             } /* Maps */
         } /* Services */

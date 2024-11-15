@@ -79,6 +79,7 @@ typedef void VOID;
 #define DS_BEHAVIOR_WIN2012                            5
 #define DS_BEHAVIOR_WIN2012R2                          6
 #define DS_BEHAVIOR_WIN2016                            7
+#define DS_BEHAVIOR_WIN2025                            10 // Note: WS2019 and WS2022 did not have native functional levels
 
 // Deprecated constants
 #define DS_BEHAVIOR_LONGHORN        DS_BEHAVIOR_WIN2008
@@ -3258,6 +3259,11 @@ DsInheritSecurityIdentityA(
 #define GUID_PRIVILEGED_ACCESS_MANAGEMENT_OPTIONAL_FEATURE_A    "73e843ece8cc4046b4ab07ffe4ab5bcd"
 #define GUID_PRIVILEGED_ACCESS_MANAGEMENT_OPTIONAL_FEATURE_W   L"73e843ece8cc4046b4ab07ffe4ab5bcd"
 #define GUID_PRIVILEGED_ACCESS_MANAGEMENT_OPTIONAL_FEATURE_BYTE "\x73\xe8\x43\xec\xe8\xcc\x40\x46\xb4\xab\x07\xff\xe4\xab\x5b\xcd"
+
+// GUID for Database 32k Pages Feature {52982AC6-1E73-754F-AE24-73AE2775AAB8}
+#define GUID_DATABASE_32K_PAGES_OPTIONAL_FEATURE_A       "c62a9852731e4f75ae2473ae2775aab8"
+#define GUID_DATABASE_32K_PAGES_OPTIONAL_FEATURE_W       L"c62a9852731e4f75ae2473ae2775aab8"
+#define GUID_DATABASE_32K_PAGES_OPTIONAL_FEATURE_BYTE    "\xc6\x2a\x98\x52\x73\x1e\x4f\x75\xae\x24\x73\xae\x27\x75\xaa\xb8"
 
 #ifdef __cplusplus
 }

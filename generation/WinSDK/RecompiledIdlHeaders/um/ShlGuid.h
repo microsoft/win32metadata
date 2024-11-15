@@ -822,6 +822,9 @@ DEFINE_GUID(FOLDERTYPEID_StorageProviderMusic,     0x672ECD7E, 0xAF04, 0x4399, 0
 // FOLDERTYPEID_StorageProviderVideos:    {51294DA1-D7B1-485b-9E9A-17CFFE33E187}
 DEFINE_GUID(FOLDERTYPEID_StorageProviderVideos,    0x51294DA1, 0xD7B1, 0x485b, 0x9E, 0x9A, 0x17, 0xCF, 0xFE, 0x33, 0xE1, 0x87);
 
+// FOLDERTYPEID_VersionControl: {69F1E26B-EC64-4280-BC83-F1EB887EC35A}
+DEFINE_GUID(FOLDERTYPEID_VersionControl, 0x69f1e26b, 0xec64, 0x4280, 0xbc, 0x83, 0xf1, 0xeb, 0x88, 0x7e, 0xc3, 0x5a);
+
 
 //
 // Sync Manager object IDs.  These are GUIDs used in calls to the GetObject()
@@ -888,7 +891,7 @@ DEFINE_GUID(CATID_LocationFactory, 0x965c4d51, 0x8b76, 0x4e57, 0x80, 0xb7, 0x56,
 // {1b3ca474-2614-414b-b813-1aceca3e3dd8}
 DEFINE_GUID(CATID_LocationProvider,0x1b3ca474, 0x2614, 0x414b, 0xb8, 0x13, 0x1a, 0xce, 0xca, 0x3e, 0x3d, 0xd8);
 
-// ItemsView 
+// ItemsView
 // {ABBF5C45-5CCC-47b7-BB4E-87CB87BBD162}
 DEFINE_GUID(ItemCount_Property_GUID, 0xabbf5c45, 0x5ccc, 0x47b7, 0xbb, 0x4e, 0x87, 0xcb, 0x87, 0xbb, 0xd1, 0x62);
 // {8FE316D2-0E52-460a-9C1E-48F273D470A3}

@@ -6,4 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#include <windnsdef.h>
 #include <windns.h>

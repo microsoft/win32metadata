@@ -1020,6 +1020,20 @@ typedef interface IMFCameraConfigurationManager IMFCameraConfigurationManager;
 #endif 	/* __IMFCameraConfigurationManager_FWD_DEFINED__ */
 
 
+#ifndef __IMFFaceDetectionTransformCallback_FWD_DEFINED__
+#define __IMFFaceDetectionTransformCallback_FWD_DEFINED__
+typedef interface IMFFaceDetectionTransformCallback IMFFaceDetectionTransformCallback;
+
+#endif 	/* __IMFFaceDetectionTransformCallback_FWD_DEFINED__ */
+
+
+#ifndef __IMFFaceDetectionTransform_FWD_DEFINED__
+#define __IMFFaceDetectionTransform_FWD_DEFINED__
+typedef interface IMFFaceDetectionTransform IMFFaceDetectionTransform;
+
+#endif 	/* __IMFFaceDetectionTransform_FWD_DEFINED__ */
+
+
 /* header files for imported files */
 #include "mfobjects.h"
 #include "mftransform.h"
@@ -1059,6 +1073,10 @@ enum MFPMPSESSION_CREATION_FLAGS
 
 typedef unsigned __int64 TOPOID;
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN) 
+EXTERN_GUID( MF_ACOUSTIC_ECHO_CANCELLATION_CONTROL_SERVICE, 0x7f6c3b29, 0x2d12, 0x4f6f, 0xac, 0x5, 0xc1, 0xa8, 0x9b, 0x8d, 0x52, 0x88);
+EXTERN_GUID( MF_AUDIO_EFFECTS_MANAGER_SERVICE, 0x1f541943, 0xd5df, 0x455e, 0xa2, 0xe5, 0x7d, 0x64, 0xd3, 0xbb, 0xbd, 0xb5);
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN) 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -7091,6 +7109,7 @@ EXTERN_GUID(MF_SD_LANGUAGE, 0xaf2180, 0xbdc2, 0x423c, 0xab, 0xca, 0xf5, 0x3, 0x5
 EXTERN_GUID(MF_SD_PROTECTED, 0xaf2181, 0xbdc2, 0x423c, 0xab, 0xca, 0xf5, 0x3, 0x59, 0x3b, 0xc1, 0x21);
 EXTERN_GUID(MF_SD_STREAM_NAME, 0x4f1b099d, 0xd314, 0x41e5, 0xa7, 0x81, 0x7f, 0xef, 0xaa, 0x4c, 0x50, 0x1f);
 EXTERN_GUID(MF_SD_MUTUALLY_EXCLUSIVE, 0x23ef79c, 0x388d, 0x487f, 0xac, 0x17, 0x69, 0x6c, 0xd6, 0xe3, 0xc6, 0xf5);
+DEFINE_GUID( MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH, 0x8fb6b117, 0x862e, 0x4b31, 0x8d, 0xab, 0x5e, 0x0a, 0x43, 0x4c, 0xae, 0xf0);
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0026_v0_0_c_ifspec;
@@ -25624,12 +25643,232 @@ EXTERN_C const IID IID_IMFCameraConfigurationManager;
 /* [local] */ 
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-#pragma endregion 
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN) 
+typedef /* [public][public] */ struct __MIDL___MIDL_itf_mfidl_0000_0139_0001
+    {
+    DWORD sizeInBytes;
+    float normalizedXPosition;
+    float normalizedYPosition;
+    float normalizedWidth;
+    float normalizedHeight;
+    LONG confidenceValue;
+    ULONGLONG flags;
+    } 	DetectedFaceBound;
+
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0139_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0139_v0_0_s_ifspec;
+
+#ifndef __IMFFaceDetectionTransformCallback_INTERFACE_DEFINED__
+#define __IMFFaceDetectionTransformCallback_INTERFACE_DEFINED__
+
+/* interface IMFFaceDetectionTransformCallback */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFFaceDetectionTransformCallback;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("0BFD1ADE-0421-4909-ACB7-7A7125416881")
+    IMFFaceDetectionTransformCallback : public IUnknown
+    {
+    public:
+        virtual void STDMETHODCALLTYPE OnFaceDetectionResult( 
+            /* [annotation][in] */ 
+            _In_  ULONG countOfBounds,
+            /* [annotation][in] */ 
+            _In_reads_(countOfBounds)  DetectedFaceBound *detectedFaceBounds) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFFaceDetectionTransformCallbackVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFFaceDetectionTransformCallback * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFFaceDetectionTransformCallback * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFFaceDetectionTransformCallback * This);
+        
+        DECLSPEC_XFGVIRT(IMFFaceDetectionTransformCallback, OnFaceDetectionResult)
+        void ( STDMETHODCALLTYPE *OnFaceDetectionResult )( 
+            IMFFaceDetectionTransformCallback * This,
+            /* [annotation][in] */ 
+            _In_  ULONG countOfBounds,
+            /* [annotation][in] */ 
+            _In_reads_(countOfBounds)  DetectedFaceBound *detectedFaceBounds);
+        
+        END_INTERFACE
+    } IMFFaceDetectionTransformCallbackVtbl;
+
+    interface IMFFaceDetectionTransformCallback
+    {
+        CONST_VTBL struct IMFFaceDetectionTransformCallbackVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFFaceDetectionTransformCallback_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFFaceDetectionTransformCallback_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFFaceDetectionTransformCallback_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFFaceDetectionTransformCallback_OnFaceDetectionResult(This,countOfBounds,detectedFaceBounds)	\
+    ( (This)->lpVtbl -> OnFaceDetectionResult(This,countOfBounds,detectedFaceBounds) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFFaceDetectionTransformCallback_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMFFaceDetectionTransform_INTERFACE_DEFINED__
+#define __IMFFaceDetectionTransform_INTERFACE_DEFINED__
+
+/* interface IMFFaceDetectionTransform */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFFaceDetectionTransform;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("DDD59578-D0E7-46E2-BE8C-1CE76AD147C0")
+    IMFFaceDetectionTransform : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetDetectionCallback( 
+            /* [annotation][in] */ 
+            _In_  IMFFaceDetectionTransformCallback *callback,
+            /* [annotation][out] */ 
+            _Out_  void **callbackToken) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE ClearDetectionCallback( 
+            /* [annotation][in] */ 
+            _In_  void *callbackToken) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFFaceDetectionTransformVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFFaceDetectionTransform * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFFaceDetectionTransform * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFFaceDetectionTransform * This);
+        
+        DECLSPEC_XFGVIRT(IMFFaceDetectionTransform, SetDetectionCallback)
+        HRESULT ( STDMETHODCALLTYPE *SetDetectionCallback )( 
+            IMFFaceDetectionTransform * This,
+            /* [annotation][in] */ 
+            _In_  IMFFaceDetectionTransformCallback *callback,
+            /* [annotation][out] */ 
+            _Out_  void **callbackToken);
+        
+        DECLSPEC_XFGVIRT(IMFFaceDetectionTransform, ClearDetectionCallback)
+        HRESULT ( STDMETHODCALLTYPE *ClearDetectionCallback )( 
+            IMFFaceDetectionTransform * This,
+            /* [annotation][in] */ 
+            _In_  void *callbackToken);
+        
+        END_INTERFACE
+    } IMFFaceDetectionTransformVtbl;
+
+    interface IMFFaceDetectionTransform
+    {
+        CONST_VTBL struct IMFFaceDetectionTransformVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFFaceDetectionTransform_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFFaceDetectionTransform_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFFaceDetectionTransform_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFFaceDetectionTransform_SetDetectionCallback(This,callback,callbackToken)	\
+    ( (This)->lpVtbl -> SetDetectionCallback(This,callback,callbackToken) ) 
+
+#define IMFFaceDetectionTransform_ClearDetectionCallback(This,callbackToken)	\
+    ( (This)->lpVtbl -> ClearDetectionCallback(This,callbackToken) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFFaceDetectionTransform_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0141 */
+/* [local] */ 
+
+EXTERN_GUID(CLSID_FaceDetectionMFT,  0xc1e565e2, 0xf2de, 0x4537, 0x96, 0x12, 0x2f, 0x30, 0xa1, 0x60, 0xeb, 0x5c);
+EXTERN_GUID(CLSID_FrameServerClassFactory, 0x9A93092C, 0x9CDC, 0x49B8, 0x83, 0x49, 0xCB, 0xCF, 0x31, 0x45, 0xFE, 0x0A);
+EXTERN_GUID(MF_CAMERASOURCE_PROVIDE_SELECTED_PROFILE_ON_START, 0xA9B46058, 0x82F2, 0x4E5C, 0xBF, 0x6E, 0x25, 0xB4, 0xB0, 0x9F, 0x22, 0xED);
+EXTERN_GUID(MF_DEVSOURCE_ATTRIBUTE_FRAMESERVER_SHARE_MODE, 0x44d1a9bc, 0x2999, 0x4238, 0xae, 0x43, 0x07, 0x30, 0xce, 0xb2, 0xab, 0x1b);
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion 
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0141_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0141_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

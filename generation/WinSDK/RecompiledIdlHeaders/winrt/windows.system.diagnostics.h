@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1034,7 +1034,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticActionResult = _uuidof(IDiagnosticActionResult);
+                MIDL_CONST_ID IID& IID_IDiagnosticActionResult = __uuidof(IDiagnosticActionResult);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1071,7 +1071,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticInvoker = _uuidof(IDiagnosticInvoker);
+                MIDL_CONST_ID IID& IID_IDiagnosticInvoker = __uuidof(IDiagnosticInvoker);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1108,7 +1108,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticInvoker2 = _uuidof(IDiagnosticInvoker2);
+                MIDL_CONST_ID IID& IID_IDiagnosticInvoker2 = __uuidof(IDiagnosticInvoker2);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1151,7 +1151,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDiagnosticInvokerStatics = _uuidof(IDiagnosticInvokerStatics);
+                MIDL_CONST_ID IID& IID_IDiagnosticInvokerStatics = __uuidof(IDiagnosticInvokerStatics);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1187,7 +1187,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessCpuUsage = _uuidof(IProcessCpuUsage);
+                MIDL_CONST_ID IID& IID_IProcessCpuUsage = __uuidof(IProcessCpuUsage);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1226,7 +1226,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessCpuUsageReport = _uuidof(IProcessCpuUsageReport);
+                MIDL_CONST_ID IID& IID_IProcessCpuUsageReport = __uuidof(IProcessCpuUsageReport);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1280,7 +1280,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiagnosticInfo = _uuidof(IProcessDiagnosticInfo);
+                MIDL_CONST_ID IID& IID_IProcessDiagnosticInfo = __uuidof(IProcessDiagnosticInfo);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1319,7 +1319,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiagnosticInfo2 = _uuidof(IProcessDiagnosticInfo2);
+                MIDL_CONST_ID IID& IID_IProcessDiagnosticInfo2 = __uuidof(IProcessDiagnosticInfo2);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1358,7 +1358,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiagnosticInfoStatics = _uuidof(IProcessDiagnosticInfoStatics);
+                MIDL_CONST_ID IID& IID_IProcessDiagnosticInfoStatics = __uuidof(IProcessDiagnosticInfoStatics);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1395,7 +1395,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiagnosticInfoStatics2 = _uuidof(IProcessDiagnosticInfoStatics2);
+                MIDL_CONST_ID IID& IID_IProcessDiagnosticInfoStatics2 = __uuidof(IProcessDiagnosticInfoStatics2);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1431,7 +1431,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiskUsage = _uuidof(IProcessDiskUsage);
+                MIDL_CONST_ID IID& IID_IProcessDiskUsage = __uuidof(IProcessDiskUsage);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1482,7 +1482,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessDiskUsageReport = _uuidof(IProcessDiskUsageReport);
+                MIDL_CONST_ID IID& IID_IProcessDiskUsageReport = __uuidof(IProcessDiskUsageReport);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1518,7 +1518,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessMemoryUsage = _uuidof(IProcessMemoryUsage);
+                MIDL_CONST_ID IID& IID_IProcessMemoryUsage = __uuidof(IProcessMemoryUsage);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1587,7 +1587,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessMemoryUsageReport = _uuidof(IProcessMemoryUsageReport);
+                MIDL_CONST_ID IID& IID_IProcessMemoryUsageReport = __uuidof(IProcessMemoryUsageReport);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1623,7 +1623,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemCpuUsage = _uuidof(ISystemCpuUsage);
+                MIDL_CONST_ID IID& IID_ISystemCpuUsage = __uuidof(ISystemCpuUsage);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1665,7 +1665,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemCpuUsageReport = _uuidof(ISystemCpuUsageReport);
+                MIDL_CONST_ID IID& IID_ISystemCpuUsageReport = __uuidof(ISystemCpuUsageReport);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1704,7 +1704,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemDiagnosticInfo = _uuidof(ISystemDiagnosticInfo);
+                MIDL_CONST_ID IID& IID_ISystemDiagnosticInfo = __uuidof(ISystemDiagnosticInfo);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1740,7 +1740,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemDiagnosticInfoStatics = _uuidof(ISystemDiagnosticInfoStatics);
+                MIDL_CONST_ID IID& IID_ISystemDiagnosticInfoStatics = __uuidof(ISystemDiagnosticInfoStatics);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1780,7 +1780,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemDiagnosticInfoStatics2 = _uuidof(ISystemDiagnosticInfoStatics2);
+                MIDL_CONST_ID IID& IID_ISystemDiagnosticInfoStatics2 = __uuidof(ISystemDiagnosticInfoStatics2);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1816,7 +1816,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemMemoryUsage = _uuidof(ISystemMemoryUsage);
+                MIDL_CONST_ID IID& IID_ISystemMemoryUsage = __uuidof(ISystemMemoryUsage);
             } /* Diagnostics */
         } /* System */
     } /* Windows */
@@ -1858,7 +1858,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISystemMemoryUsageReport = _uuidof(ISystemMemoryUsageReport);
+                MIDL_CONST_ID IID& IID_ISystemMemoryUsageReport = __uuidof(ISystemMemoryUsageReport);
             } /* Diagnostics */
         } /* System */
     } /* Windows */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -185,7 +185,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IApplicationDataManager = _uuidof(IApplicationDataManager);
+                MIDL_CONST_ID IID& IID_IApplicationDataManager = __uuidof(IApplicationDataManager);
             } /* Core */
         } /* Management */
     } /* Windows */
@@ -222,7 +222,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IApplicationDataManagerStatics = _uuidof(IApplicationDataManagerStatics);
+                MIDL_CONST_ID IID& IID_IApplicationDataManagerStatics = __uuidof(IApplicationDataManagerStatics);
             } /* Core */
         } /* Management */
     } /* Windows */

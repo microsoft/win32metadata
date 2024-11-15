@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1402,7 +1402,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICredentialFactory = _uuidof(ICredentialFactory);
+                MIDL_CONST_ID IID& IID_ICredentialFactory = __uuidof(ICredentialFactory);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1452,7 +1452,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyCredential = _uuidof(IKeyCredential);
+                MIDL_CONST_ID IID& IID_IKeyCredential = __uuidof(IKeyCredential);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1494,7 +1494,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyCredentialAttestationResult = _uuidof(IKeyCredentialAttestationResult);
+                MIDL_CONST_ID IID& IID_IKeyCredentialAttestationResult = __uuidof(IKeyCredentialAttestationResult);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1546,7 +1546,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyCredentialManagerStatics = _uuidof(IKeyCredentialManagerStatics);
+                MIDL_CONST_ID IID& IID_IKeyCredentialManagerStatics = __uuidof(IKeyCredentialManagerStatics);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1585,7 +1585,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyCredentialOperationResult = _uuidof(IKeyCredentialOperationResult);
+                MIDL_CONST_ID IID& IID_IKeyCredentialOperationResult = __uuidof(IKeyCredentialOperationResult);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1624,7 +1624,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKeyCredentialRetrievalResult = _uuidof(IKeyCredentialRetrievalResult);
+                MIDL_CONST_ID IID& IID_IKeyCredentialRetrievalResult = __uuidof(IKeyCredentialRetrievalResult);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1679,7 +1679,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPasswordCredential = _uuidof(IPasswordCredential);
+                MIDL_CONST_ID IID& IID_IPasswordCredential = __uuidof(IPasswordCredential);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1734,7 +1734,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPasswordVault = _uuidof(IPasswordVault);
+                MIDL_CONST_ID IID& IID_IPasswordVault = __uuidof(IPasswordVault);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1774,7 +1774,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccount = _uuidof(IWebAccount);
+                MIDL_CONST_ID IID& IID_IWebAccount = __uuidof(IWebAccount);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1827,7 +1827,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccount2 = _uuidof(IWebAccount2);
+                MIDL_CONST_ID IID& IID_IWebAccount2 = __uuidof(IWebAccount2);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1866,7 +1866,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountFactory = _uuidof(IWebAccountFactory);
+                MIDL_CONST_ID IID& IID_IWebAccountFactory = __uuidof(IWebAccountFactory);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1911,7 +1911,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProvider = _uuidof(IWebAccountProvider);
+                MIDL_CONST_ID IID& IID_IWebAccountProvider = __uuidof(IWebAccountProvider);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1953,7 +1953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProvider2 = _uuidof(IWebAccountProvider2);
+                MIDL_CONST_ID IID& IID_IWebAccountProvider2 = __uuidof(IWebAccountProvider2);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -1993,7 +1993,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProvider3 = _uuidof(IWebAccountProvider3);
+                MIDL_CONST_ID IID& IID_IWebAccountProvider3 = __uuidof(IWebAccountProvider3);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -2029,7 +2029,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProvider4 = _uuidof(IWebAccountProvider4);
+                MIDL_CONST_ID IID& IID_IWebAccountProvider4 = __uuidof(IWebAccountProvider4);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -2068,7 +2068,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWebAccountProviderFactory = _uuidof(IWebAccountProviderFactory);
+                MIDL_CONST_ID IID& IID_IWebAccountProviderFactory = __uuidof(IWebAccountProviderFactory);
             } /* Credentials */
         } /* Security */
     } /* Windows */
@@ -2182,8 +2182,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Credentials.ICredentialFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Credentials.IPasswordCredential ** Default Interface **
@@ -5657,8 +5657,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Credentials.ICredentialFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Credentials.IPasswordCredential ** Default Interface **

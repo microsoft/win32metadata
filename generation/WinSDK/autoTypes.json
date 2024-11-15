@@ -1947,6 +1947,12 @@
   },
   {
     "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNumberRangeFormatter",
+    "ValueType": "typedef struct UNumberRangeFormatter",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
     "Name": "UNumberingSystem",
     "ValueType": "typedef struct UNumberingSystem",
     "NativeTypedef": true
@@ -2784,5 +2790,47 @@
     "ValueType": "void*",
     "CloseApi": "ClosePrinter",
     "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.Security.EnterpriseData",
+    "Name": "_SRP_REQUEST",
+    "ValueType": "typedef struct _SRP_REQUEST",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "ISvcProcess",
+    "ValueType": "typedef struct ISvcProcess",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "ISvcThread",
+    "ValueType": "typedef struct ISvcThread",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "ISvcExecutionUnit",
+    "ValueType": "typedef struct ISvcExecutionUnit",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "IDebugServiceManager",
+    "ValueType": "typedef struct IDebugServiceManager",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "ISvcModule",
+    "ValueType": "typedef struct ISvcModule",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Debug.Extensions",
+    "Name": "ISvcSymbolType",
+    "ValueType": "typedef struct ISvcSymbolType",
+    "NativeTypedef": true
   }
 ]

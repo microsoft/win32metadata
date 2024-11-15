@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -896,7 +896,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayBitmapEffect = _uuidof(ILampArrayBitmapEffect);
+                    MIDL_CONST_ID IID& IID_ILampArrayBitmapEffect = __uuidof(ILampArrayBitmapEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -937,7 +937,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayBitmapEffectFactory = _uuidof(ILampArrayBitmapEffectFactory);
+                    MIDL_CONST_ID IID& IID_ILampArrayBitmapEffectFactory = __uuidof(ILampArrayBitmapEffectFactory);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -978,7 +978,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayBitmapRequestedEventArgs = _uuidof(ILampArrayBitmapRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_ILampArrayBitmapRequestedEventArgs = __uuidof(ILampArrayBitmapRequestedEventArgs);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1061,7 +1061,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayBlinkEffect = _uuidof(ILampArrayBlinkEffect);
+                    MIDL_CONST_ID IID& IID_ILampArrayBlinkEffect = __uuidof(ILampArrayBlinkEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1102,7 +1102,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayBlinkEffectFactory = _uuidof(ILampArrayBlinkEffectFactory);
+                    MIDL_CONST_ID IID& IID_ILampArrayBlinkEffectFactory = __uuidof(ILampArrayBlinkEffectFactory);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1161,7 +1161,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayColorRampEffect = _uuidof(ILampArrayColorRampEffect);
+                    MIDL_CONST_ID IID& IID_ILampArrayColorRampEffect = __uuidof(ILampArrayColorRampEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1202,7 +1202,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayColorRampEffectFactory = _uuidof(ILampArrayColorRampEffectFactory);
+                    MIDL_CONST_ID IID& IID_ILampArrayColorRampEffectFactory = __uuidof(ILampArrayColorRampEffectFactory);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1256,7 +1256,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayCustomEffect = _uuidof(ILampArrayCustomEffect);
+                    MIDL_CONST_ID IID& IID_ILampArrayCustomEffect = __uuidof(ILampArrayCustomEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1297,7 +1297,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayCustomEffectFactory = _uuidof(ILampArrayCustomEffectFactory);
+                    MIDL_CONST_ID IID& IID_ILampArrayCustomEffectFactory = __uuidof(ILampArrayCustomEffectFactory);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1336,7 +1336,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayEffect = _uuidof(ILampArrayEffect);
+                    MIDL_CONST_ID IID& IID_ILampArrayEffect = __uuidof(ILampArrayEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1398,7 +1398,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayEffectPlaylist = _uuidof(ILampArrayEffectPlaylist);
+                    MIDL_CONST_ID IID& IID_ILampArrayEffectPlaylist = __uuidof(ILampArrayEffectPlaylist);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1442,7 +1442,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayEffectPlaylistStatics = _uuidof(ILampArrayEffectPlaylistStatics);
+                    MIDL_CONST_ID IID& IID_ILampArrayEffectPlaylistStatics = __uuidof(ILampArrayEffectPlaylistStatics);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1501,7 +1501,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArraySolidEffect = _uuidof(ILampArraySolidEffect);
+                    MIDL_CONST_ID IID& IID_ILampArraySolidEffect = __uuidof(ILampArraySolidEffect);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1542,7 +1542,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArraySolidEffectFactory = _uuidof(ILampArraySolidEffectFactory);
+                    MIDL_CONST_ID IID& IID_ILampArraySolidEffectFactory = __uuidof(ILampArraySolidEffectFactory);
                 } /* Effects */
             } /* Lights */
         } /* Devices */
@@ -1598,7 +1598,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILampArrayUpdateRequestedEventArgs = _uuidof(ILampArrayUpdateRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_ILampArrayUpdateRequestedEventArgs = __uuidof(ILampArrayUpdateRequestedEventArgs);
                 } /* Effects */
             } /* Lights */
         } /* Devices */

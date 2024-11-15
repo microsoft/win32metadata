@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -644,6 +644,12 @@ namespace ABI {
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
                     LampArrayKind_Headset = 11,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+                    LampArrayKind_Microphone = 12,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+                    LampArrayKind_Speaker = 13,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
                 };
             } /* Lights */
         } /* Devices */
@@ -738,7 +744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILamp = _uuidof(ILamp);
+                MIDL_CONST_ID IID& IID_ILamp = __uuidof(ILamp);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -868,7 +874,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampArray = _uuidof(ILampArray);
+                MIDL_CONST_ID IID& IID_ILampArray = __uuidof(ILampArray);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -911,7 +917,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampArray2 = _uuidof(ILampArray2);
+                MIDL_CONST_ID IID& IID_ILampArray2 = __uuidof(ILampArray2);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -951,7 +957,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampArrayStatics = _uuidof(ILampArrayStatics);
+                MIDL_CONST_ID IID& IID_ILampArrayStatics = __uuidof(ILampArrayStatics);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -987,7 +993,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampAvailabilityChangedEventArgs = _uuidof(ILampAvailabilityChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ILampAvailabilityChangedEventArgs = __uuidof(ILampAvailabilityChangedEventArgs);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -1051,7 +1057,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampInfo = _uuidof(ILampInfo);
+                MIDL_CONST_ID IID& IID_ILampInfo = __uuidof(ILampInfo);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -1094,7 +1100,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILampStatics = _uuidof(ILampStatics);
+                MIDL_CONST_ID IID& IID_ILampStatics = __uuidof(ILampStatics);
             } /* Lights */
         } /* Devices */
     } /* Windows */
@@ -1841,6 +1847,12 @@ enum __x_ABI_CWindows_CDevices_CLights_CLampArrayKind
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
     LampArrayKind_Headset = 11,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+    LampArrayKind_Microphone = 12,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+    LampArrayKind_Speaker = 13,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 

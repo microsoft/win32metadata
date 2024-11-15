@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MANAGEMENT_WORKPLACE_WORKPLACESETTINGSCONTRACT_VERSION)
@@ -228,7 +228,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMdmAllowPolicyStatics = _uuidof(IMdmAllowPolicyStatics);
+                MIDL_CONST_ID IID& IID_IMdmAllowPolicyStatics = __uuidof(IMdmAllowPolicyStatics);
             } /* Workplace */
         } /* Management */
     } /* Windows */
@@ -264,7 +264,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMdmPolicyStatics2 = _uuidof(IMdmPolicyStatics2);
+                MIDL_CONST_ID IID& IID_IMdmPolicyStatics2 = __uuidof(IMdmPolicyStatics2);
             } /* Workplace */
         } /* Management */
     } /* Windows */
@@ -300,7 +300,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWorkplaceSettingsStatics = _uuidof(IWorkplaceSettingsStatics);
+                MIDL_CONST_ID IID& IID_IWorkplaceSettingsStatics = __uuidof(IWorkplaceSettingsStatics);
             } /* Workplace */
         } /* Management */
     } /* Windows */
@@ -317,8 +317,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CWorkplace_CIWorkplaceSettin
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Management.Workplace.IMdmPolicyStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Management.Workplace.IMdmAllowPolicyStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Management.Workplace.IMdmPolicyStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -624,8 +624,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CWorkplace_CIWorkplaceSettin
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Management.Workplace.IMdmPolicyStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Management.Workplace.IMdmAllowPolicyStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Management.Workplace.IMdmPolicyStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

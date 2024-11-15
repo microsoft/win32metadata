@@ -44,6 +44,7 @@ InitializeSRWLock(
 
 WINBASEAPI
 _Releases_exclusive_lock_(*SRWLock)
+_Releases_nonreentrant_lock_(*SRWLock)
 VOID
 WINAPI
 ReleaseSRWLockExclusive(
@@ -52,6 +53,7 @@ ReleaseSRWLockExclusive(
 
 WINBASEAPI
 _Releases_shared_lock_(*SRWLock)
+_Releases_nonreentrant_lock_(*SRWLock)
 VOID
 WINAPI
 ReleaseSRWLockShared(
@@ -60,6 +62,7 @@ ReleaseSRWLockShared(
 
 WINBASEAPI
 _Acquires_exclusive_lock_(*SRWLock)
+_Acquires_nonreentrant_lock_(*SRWLock)
 VOID
 WINAPI
 AcquireSRWLockExclusive(
@@ -68,6 +71,7 @@ AcquireSRWLockExclusive(
 
 WINBASEAPI
 _Acquires_shared_lock_(*SRWLock)
+_Acquires_nonreentrant_lock_(*SRWLock)
 VOID
 WINAPI
 AcquireSRWLockShared(
@@ -76,6 +80,7 @@ AcquireSRWLockShared(
 
 WINBASEAPI
 _When_(return!=0, _Acquires_exclusive_lock_(*SRWLock))
+_When_(return!=0, _Acquires_nonreentrant_lock_(*SRWLock))
 BOOLEAN
 WINAPI
 TryAcquireSRWLockExclusive(
@@ -84,6 +89,7 @@ TryAcquireSRWLockExclusive(
 
 WINBASEAPI
 _When_(return!=0, _Acquires_shared_lock_(*SRWLock))
+_When_(return!=0, _Acquires_nonreentrant_lock_(*SRWLock))
 BOOLEAN
 WINAPI
 TryAcquireSRWLockShared(

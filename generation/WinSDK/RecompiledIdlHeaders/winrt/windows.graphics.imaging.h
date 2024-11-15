@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1864,7 +1864,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapBuffer = _uuidof(IBitmapBuffer);
+                MIDL_CONST_ID IID& IID_IBitmapBuffer = __uuidof(IBitmapBuffer);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -1909,7 +1909,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapCodecInformation = _uuidof(IBitmapCodecInformation);
+                MIDL_CONST_ID IID& IID_IBitmapCodecInformation = __uuidof(IBitmapCodecInformation);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapDecoder = _uuidof(IBitmapDecoder);
+                MIDL_CONST_ID IID& IID_IBitmapDecoder = __uuidof(IBitmapDecoder);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2024,7 +2024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapDecoderStatics = _uuidof(IBitmapDecoderStatics);
+                MIDL_CONST_ID IID& IID_IBitmapDecoderStatics = __uuidof(IBitmapDecoderStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2063,7 +2063,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapDecoderStatics2 = _uuidof(IBitmapDecoderStatics2);
+                MIDL_CONST_ID IID& IID_IBitmapDecoderStatics2 = __uuidof(IBitmapDecoderStatics2);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2146,7 +2146,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapEncoder = _uuidof(IBitmapEncoder);
+                MIDL_CONST_ID IID& IID_IBitmapEncoder = __uuidof(IBitmapEncoder);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2220,7 +2220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapEncoderStatics = _uuidof(IBitmapEncoderStatics);
+                MIDL_CONST_ID IID& IID_IBitmapEncoderStatics = __uuidof(IBitmapEncoderStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2256,7 +2256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapEncoderStatics2 = _uuidof(IBitmapEncoderStatics2);
+                MIDL_CONST_ID IID& IID_IBitmapEncoderStatics2 = __uuidof(IBitmapEncoderStatics2);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2292,7 +2292,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapEncoderWithSoftwareBitmap = _uuidof(IBitmapEncoderWithSoftwareBitmap);
+                MIDL_CONST_ID IID& IID_IBitmapEncoderWithSoftwareBitmap = __uuidof(IBitmapEncoderWithSoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2364,7 +2364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapFrame = _uuidof(IBitmapFrame);
+                MIDL_CONST_ID IID& IID_IBitmapFrame = __uuidof(IBitmapFrame);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2414,7 +2414,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapFrameWithSoftwareBitmap = _uuidof(IBitmapFrameWithSoftwareBitmap);
+                MIDL_CONST_ID IID& IID_IBitmapFrameWithSoftwareBitmap = __uuidof(IBitmapFrameWithSoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2454,7 +2454,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapProperties = _uuidof(IBitmapProperties);
+                MIDL_CONST_ID IID& IID_IBitmapProperties = __uuidof(IBitmapProperties);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2489,7 +2489,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapPropertiesView = _uuidof(IBitmapPropertiesView);
+                MIDL_CONST_ID IID& IID_IBitmapPropertiesView = __uuidof(IBitmapPropertiesView);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2558,7 +2558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapTransform = _uuidof(IBitmapTransform);
+                MIDL_CONST_ID IID& IID_IBitmapTransform = __uuidof(IBitmapTransform);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2597,7 +2597,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapTypedValue = _uuidof(IBitmapTypedValue);
+                MIDL_CONST_ID IID& IID_IBitmapTypedValue = __uuidof(IBitmapTypedValue);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2635,7 +2635,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBitmapTypedValueFactory = _uuidof(IBitmapTypedValueFactory);
+                MIDL_CONST_ID IID& IID_IBitmapTypedValueFactory = __uuidof(IBitmapTypedValueFactory);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2672,7 +2672,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPixelDataProvider = _uuidof(IPixelDataProvider);
+                MIDL_CONST_ID IID& IID_IPixelDataProvider = __uuidof(IPixelDataProvider);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2751,7 +2751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISoftwareBitmap = _uuidof(ISoftwareBitmap);
+                MIDL_CONST_ID IID& IID_ISoftwareBitmap = __uuidof(ISoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2797,7 +2797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISoftwareBitmapFactory = _uuidof(ISoftwareBitmapFactory);
+                MIDL_CONST_ID IID& IID_ISoftwareBitmapFactory = __uuidof(ISoftwareBitmapFactory);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2869,7 +2869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISoftwareBitmapStatics = _uuidof(ISoftwareBitmapStatics);
+                MIDL_CONST_ID IID& IID_ISoftwareBitmapStatics = __uuidof(ISoftwareBitmapStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2928,8 +2928,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Imaging.IBitmapDecoder ** Default Interface **
@@ -7284,8 +7284,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Imaging.IBitmapDecoderStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Imaging.IBitmapDecoder ** Default Interface **

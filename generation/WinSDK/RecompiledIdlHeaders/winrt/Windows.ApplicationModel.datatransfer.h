@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_ENTERPRISEDATA_ENTERPRISEDATACONTRACT_VERSION)
@@ -2759,7 +2759,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataProviderHandler = _uuidof(IDataProviderHandler);
+                MIDL_CONST_ID IID& IID_IDataProviderHandler = __uuidof(IDataProviderHandler);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -2792,7 +2792,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareProviderHandler = _uuidof(IShareProviderHandler);
+                MIDL_CONST_ID IID& IID_IShareProviderHandler = __uuidof(IShareProviderHandler);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -2843,7 +2843,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardContentOptions = _uuidof(IClipboardContentOptions);
+                MIDL_CONST_ID IID& IID_IClipboardContentOptions = __uuidof(IClipboardContentOptions);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -2876,7 +2876,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardHistoryChangedEventArgs = _uuidof(IClipboardHistoryChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IClipboardHistoryChangedEventArgs = __uuidof(IClipboardHistoryChangedEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -2918,7 +2918,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardHistoryItem = _uuidof(IClipboardHistoryItem);
+                MIDL_CONST_ID IID& IID_IClipboardHistoryItem = __uuidof(IClipboardHistoryItem);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -2957,7 +2957,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardHistoryItemsResult = _uuidof(IClipboardHistoryItemsResult);
+                MIDL_CONST_ID IID& IID_IClipboardHistoryItemsResult = __uuidof(IClipboardHistoryItemsResult);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3005,7 +3005,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardStatics = _uuidof(IClipboardStatics);
+                MIDL_CONST_ID IID& IID_IClipboardStatics = __uuidof(IClipboardStatics);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3084,7 +3084,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IClipboardStatics2 = _uuidof(IClipboardStatics2);
+                MIDL_CONST_ID IID& IID_IClipboardStatics2 = __uuidof(IClipboardStatics2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3179,7 +3179,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackage = _uuidof(IDataPackage);
+                MIDL_CONST_ID IID& IID_IDataPackage = __uuidof(IDataPackage);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3218,7 +3218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackage2 = _uuidof(IDataPackage2);
+                MIDL_CONST_ID IID& IID_IDataPackage2 = __uuidof(IDataPackage2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3258,7 +3258,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackage3 = _uuidof(IDataPackage3);
+                MIDL_CONST_ID IID& IID_IDataPackage3 = __uuidof(IDataPackage3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3298,7 +3298,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackage4 = _uuidof(IDataPackage4);
+                MIDL_CONST_ID IID& IID_IDataPackage4 = __uuidof(IDataPackage4);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3368,7 +3368,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySet = _uuidof(IDataPackagePropertySet);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySet = __uuidof(IDataPackagePropertySet);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3431,7 +3431,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySet2 = _uuidof(IDataPackagePropertySet2);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySet2 = __uuidof(IDataPackagePropertySet2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3470,7 +3470,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySet3 = _uuidof(IDataPackagePropertySet3);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySet3 = __uuidof(IDataPackagePropertySet3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3509,7 +3509,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySet4 = _uuidof(IDataPackagePropertySet4);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySet4 = __uuidof(IDataPackagePropertySet4);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3560,7 +3560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySetView = _uuidof(IDataPackagePropertySetView);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySetView = __uuidof(IDataPackagePropertySetView);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3608,7 +3608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySetView2 = _uuidof(IDataPackagePropertySetView2);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySetView2 = __uuidof(IDataPackagePropertySetView2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3644,7 +3644,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySetView3 = _uuidof(IDataPackagePropertySetView3);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySetView3 = __uuidof(IDataPackagePropertySetView3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3680,7 +3680,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySetView4 = _uuidof(IDataPackagePropertySetView4);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySetView4 = __uuidof(IDataPackagePropertySetView4);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3716,7 +3716,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackagePropertySetView5 = _uuidof(IDataPackagePropertySetView5);
+                MIDL_CONST_ID IID& IID_IDataPackagePropertySetView5 = __uuidof(IDataPackagePropertySetView5);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3797,7 +3797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackageView = _uuidof(IDataPackageView);
+                MIDL_CONST_ID IID& IID_IDataPackageView = __uuidof(IDataPackageView);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3836,7 +3836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackageView2 = _uuidof(IDataPackageView2);
+                MIDL_CONST_ID IID& IID_IDataPackageView2 = __uuidof(IDataPackageView2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3879,7 +3879,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackageView3 = _uuidof(IDataPackageView3);
+                MIDL_CONST_ID IID& IID_IDataPackageView3 = __uuidof(IDataPackageView3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3915,7 +3915,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataPackageView4 = _uuidof(IDataPackageView4);
+                MIDL_CONST_ID IID& IID_IDataPackageView4 = __uuidof(IDataPackageView4);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3949,7 +3949,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataProviderDeferral = _uuidof(IDataProviderDeferral);
+                MIDL_CONST_ID IID& IID_IDataProviderDeferral = __uuidof(IDataProviderDeferral);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -3994,7 +3994,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataProviderRequest = _uuidof(IDataProviderRequest);
+                MIDL_CONST_ID IID& IID_IDataProviderRequest = __uuidof(IDataProviderRequest);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4042,7 +4042,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataRequest = _uuidof(IDataRequest);
+                MIDL_CONST_ID IID& IID_IDataRequest = __uuidof(IDataRequest);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4076,7 +4076,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataRequestDeferral = _uuidof(IDataRequestDeferral);
+                MIDL_CONST_ID IID& IID_IDataRequestDeferral = __uuidof(IDataRequestDeferral);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4112,7 +4112,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataRequestedEventArgs = _uuidof(IDataRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IDataRequestedEventArgs = __uuidof(IDataRequestedEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4159,7 +4159,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataTransferManager = _uuidof(IDataTransferManager);
+                MIDL_CONST_ID IID& IID_IDataTransferManager = __uuidof(IDataTransferManager);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4199,7 +4199,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataTransferManager2 = _uuidof(IDataTransferManager2);
+                MIDL_CONST_ID IID& IID_IDataTransferManager2 = __uuidof(IDataTransferManager2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4236,7 +4236,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataTransferManagerStatics = _uuidof(IDataTransferManagerStatics);
+                MIDL_CONST_ID IID& IID_IDataTransferManagerStatics = __uuidof(IDataTransferManagerStatics);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4272,7 +4272,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataTransferManagerStatics2 = _uuidof(IDataTransferManagerStatics2);
+                MIDL_CONST_ID IID& IID_IDataTransferManagerStatics2 = __uuidof(IDataTransferManagerStatics2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4308,7 +4308,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IDataTransferManagerStatics3 = _uuidof(IDataTransferManagerStatics3);
+                MIDL_CONST_ID IID& IID_IDataTransferManagerStatics3 = __uuidof(IDataTransferManagerStatics3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4349,7 +4349,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHtmlFormatHelperStatics = _uuidof(IHtmlFormatHelperStatics);
+                MIDL_CONST_ID IID& IID_IHtmlFormatHelperStatics = __uuidof(IHtmlFormatHelperStatics);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4385,7 +4385,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IOperationCompletedEventArgs = _uuidof(IOperationCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_IOperationCompletedEventArgs = __uuidof(IOperationCompletedEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4421,7 +4421,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IOperationCompletedEventArgs2 = _uuidof(IOperationCompletedEventArgs2);
+                MIDL_CONST_ID IID& IID_IOperationCompletedEventArgs2 = __uuidof(IOperationCompletedEventArgs2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4457,7 +4457,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareCompletedEventArgs = _uuidof(IShareCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_IShareCompletedEventArgs = __uuidof(IShareCompletedEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4505,7 +4505,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareProvider = _uuidof(IShareProvider);
+                MIDL_CONST_ID IID& IID_IShareProvider = __uuidof(IShareProvider);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4545,7 +4545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareProviderFactory = _uuidof(IShareProviderFactory);
+                MIDL_CONST_ID IID& IID_IShareProviderFactory = __uuidof(IShareProviderFactory);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4585,7 +4585,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ReportCompleted(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareProviderOperation = _uuidof(IShareProviderOperation);
+                MIDL_CONST_ID IID& IID_IShareProviderOperation = __uuidof(IShareProviderOperation);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4627,7 +4627,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareProvidersRequestedEventArgs = _uuidof(IShareProvidersRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IShareProvidersRequestedEventArgs = __uuidof(IShareProvidersRequestedEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4666,7 +4666,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareTargetInfo = _uuidof(IShareTargetInfo);
+                MIDL_CONST_ID IID& IID_IShareTargetInfo = __uuidof(IShareTargetInfo);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4711,7 +4711,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IShareUIOptions = _uuidof(IShareUIOptions);
+                MIDL_CONST_ID IID& IID_IShareUIOptions = __uuidof(IShareUIOptions);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4755,7 +4755,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISharedStorageAccessManagerStatics = _uuidof(ISharedStorageAccessManagerStatics);
+                MIDL_CONST_ID IID& IID_ISharedStorageAccessManagerStatics = __uuidof(ISharedStorageAccessManagerStatics);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4809,7 +4809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics = _uuidof(IStandardDataFormatsStatics);
+                MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics = __uuidof(IStandardDataFormatsStatics);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4848,7 +4848,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics2 = _uuidof(IStandardDataFormatsStatics2);
+                MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics2 = __uuidof(IStandardDataFormatsStatics2);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4884,7 +4884,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics3 = _uuidof(IStandardDataFormatsStatics3);
+                MIDL_CONST_ID IID& IID_IStandardDataFormatsStatics3 = __uuidof(IStandardDataFormatsStatics3);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4920,7 +4920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITargetApplicationChosenEventArgs = _uuidof(ITargetApplicationChosenEventArgs);
+                MIDL_CONST_ID IID& IID_ITargetApplicationChosenEventArgs = __uuidof(ITargetApplicationChosenEventArgs);
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4937,8 +4937,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITarget
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5233,9 +5233,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
@@ -5438,9 +5438,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -13499,8 +13499,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITarget
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -13795,9 +13795,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
@@ -14000,9 +14000,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

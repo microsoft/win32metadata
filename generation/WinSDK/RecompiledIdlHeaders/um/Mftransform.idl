@@ -611,6 +611,20 @@ cpp_quote(" EXTERN_C const DECLSPEC_SELECTANY GUID MFT_AUDIO_DECODER_SPATIAL_MET
 
 #endif //(NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
+// MFT_AUDIO_DECODER_AUDIO_ENDPOINT_FORMFACTOR
+// Data Type: UINT32 (treat as a value from the EndpointFormFactor enumeration in mmdeviceapi.h.)
+// This attribute is set on components via the attribute store obtained from IMFTransform::GetAttributes
+// The default value is UnknownFormFactor (10)
+cpp_quote( "EXTERN_C const DECLSPEC_SELECTANY GUID MFT_AUDIO_DECODER_AUDIO_ENDPOINT_FORMFACTOR = { 0x8d574310, 0x909a, 0x433a, { 0xac, 0xe7, 0xee, 0xe7, 0x47, 0x19, 0xf9, 0x01 } };" )
+
+// MFT_AUDIO_DECODER_AUDIO_ENDPOINT_IS_DIGITAL_STEREO_ONLY
+// Data type: UINT32 (treat as BOOL)
+// This attribute is set on components via the attribute store obtained from IMFTransform::GetAttributes
+// When the value is TRUE, it indicates that the audio renderer endpoint is a digital audio display device that only supports
+// uncompressed stereo signals.
+// The default value is FALSE.
+cpp_quote( "EXTERN_C const DECLSPEC_SELECTANY GUID MFT_AUDIO_DECODER_AUDIO_ENDPOINT_IS_DIGITAL_STEREO_ONLY = { 0x26e5a90d, 0x4ad1, 0x4f8c, { 0xb8, 0xaf, 0xad, 0xf1, 0x4d, 0x21, 0x78, 0xf1 } };" )
+
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
@@ -734,13 +748,23 @@ interface IMFDeviceTransform : IUnknown
         [in, annotation("_In_")] DWORD dwStreamIndex,
         [in, annotation("_In_")] DWORD dwFlags
         );
+};
 
-
+[
+    object,
+    uuid(F5980FED-B521-488F-909F-1A5FCECEDB14),
+    local
+]
+interface IMFDeviceTransform2 : IMFDeviceTransform
+{
+    HRESULT GetTransformAttributes(
+        [out, annotation("_COM_Outptr_")] IMFAttributes** ppAttributes
+    );
 };
 
 cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD ) ")
 
-cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN10) ")
+cpp_quote("#if (NTDDI_VERSION >= _WIN32_WINNT_WIN10) ")
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -888,7 +912,17 @@ cpp_quote("EXTERN_C const DECLSPEC_SELECTANY GUID MFT_DECODER_QUALITY_MANAGEMENT
 // 
 cpp_quote("EXTERN_C const DECLSPEC_SELECTANY GUID MFT_DECODER_QUALITY_MANAGEMENT_RECOVERY_WITHOUT_ARTIFACTS =  { 0xd8980deb, 0xa48, 0x425f, { 0x86, 0x23, 0x61, 0x1d, 0xb4, 0x1d, 0x38, 0x10 } };")
 
+// MFT_DECODER_OPERATING_POINT
+// Data Type: UINT32
+// Specifies the operating point (spatial or temporal layer) that the decoder should emit frames up to.
+//  All lower operating points are included.  
+cpp_quote("EXTERN_C const DECLSPEC_SELECTANY GUID MFT_DECODER_OPERATING_POINT = { 0xa1230334, 0x55d4, 0x4d97, { 0x82, 0xa7, 0x26, 0xd3, 0xe6, 0x45, 0x67, 0x25 } };")
 
+// MFT_DECODER_AUTOMATIC_SOFTWARE_FALLBACK
+// Data Type: UINT32 (treat as BOOL)
+// Specifies weather the decoder mft should automatically switch to software decoding when 
+//  hardware does not support the input bitstream.
+cpp_quote("EXTERN_C const DECLSPEC_SELECTANY GUID MFT_DECODER_AUTOMATIC_SOFTWARE_FALLBACK = { 0x41f34f53, 0x1bf6, 0x49ed, { 0xb9, 0x5d, 0x2, 0xd2, 0xa1, 0xd7, 0x11, 0x5a } };")
 
 // MFT_REMUX_MARK_I_PICTURE_AS_CLEAN_POINT
 // Data Type: UINT32 (treat as BOOL)

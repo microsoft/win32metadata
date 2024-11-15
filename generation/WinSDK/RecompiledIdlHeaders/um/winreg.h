@@ -222,7 +222,9 @@ typedef PVALENTA PVALENT;
 //
 // RegConnectRegistryEx supported flags
 //
-#define REG_SECURE_CONNECTION   1
+#define REG_SECURE_CONNECTION         0x1
+#define REG_ALLOW_TRANSPORT_FALLBACK  0x2
+#define REG_ALLOW_UNSECURE_CONNECTION 0x4
 
 #endif /* WINVER >= 0x0400 */
 

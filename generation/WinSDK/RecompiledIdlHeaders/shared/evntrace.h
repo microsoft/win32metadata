@@ -266,6 +266,14 @@ DEFINE_GUID( /* 4f061568-e215-499f-ab2e-eda0ae890a5b */
     0xab, 0x2e, 0xed, 0xa0, 0xae, 0x89, 0x0a, 0x5b
     );
 
+DEFINE_GUID( /* 99134383-5248-43fc-834b-529454e75df3 */
+    LastBranchRecordProviderGuid,
+    0x99134383,
+    0x5248,
+    0x43fc,
+    0x83, 0x4b, 0x52, 0x94, 0x54, 0xe7, 0x5d, 0xf3
+    );
+
 #define KERNEL_LOGGER_NAMEW         L"NT Kernel Logger"
 #define GLOBAL_LOGGER_NAMEW         L"GlobalLogger"
 #define EVENT_LOGGER_NAMEW          L"EventLog"
@@ -280,8 +288,23 @@ DEFINE_GUID( /* 4f061568-e215-499f-ab2e-eda0ae890a5b */
 
 #ifndef _TRACEHANDLE_DEFINED
 #define _TRACEHANDLE_DEFINED
+// Obsolete - prefer PROCESSTRACE_HANDLE or CONTROLTRACE_ID.
 typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 #endif
+
+// Used to read the events from a trace file or real-time trace session (via
+// ProcessTrace). The handle is invalid if it contains the value
+// INVALID_PROCESSTRACE_HANDLE. Obtain the handle by calling an OpenTrace
+// function (e.g.  OpenTrace, OpenTraceFromFile, OpenTraceFromRealTimeLogger).
+// Close the handle by calling CloseTrace.
+typedef ULONG64 PROCESSTRACE_HANDLE;
+
+// Used to identify a trace collection session. The id is invalid if it
+// contains the value (CONTROLTRACE_ID)0. Obtain the id from StartTrace or from
+// the Wnode.HistoricalContext field of the EVENT_TRACE_PROPERTIES returned by
+// ControlTrace(0, sessionName, ...). The id is valid until the trace stops and
+// does not need to be closed by the user.
+typedef ULONG64 CONTROLTRACE_ID;
 
  //types for event data going to System Event Logger
 #define SYSTEM_EVENT_TYPE                        1
@@ -701,6 +724,7 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 #define SYSTEM_CPU_KW_CONFIG           0x0000000000000001
 #define SYSTEM_CPU_KW_CACHE_FLUSH      0x0000000000000002
 #define SYSTEM_CPU_KW_SPEC_CONTROL     0x0000000000000004
+#define SYSTEM_CPU_KW_DOMAIN_CHANGE    0x0000000000000008
 
 //
 // Keywords to be used for the System Hypervisor Provider.
@@ -736,6 +760,8 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 #define SYSTEM_IO_KW_DRIVERS         0x0000000000000080
 #define SYSTEM_IO_KW_CC              0x0000000000000100
 #define SYSTEM_IO_KW_NETWORK         0x0000000000000200
+#define SYSTEM_IO_KW_FILE_INIT       0x0000000000000400
+#define SYSTEM_IO_KW_TIMER           0x0000000000000800
 
 //
 // Keywords to be used for the System IoFilter Provider.
@@ -829,17 +855,23 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 // Keywords to be used for the System Scheduler Provider.
 //
 
-#define SYSTEM_SCHEDULER_KW_XSCHEDULER      0x0000000000000001
-#define SYSTEM_SCHEDULER_KW_DISPATCHER      0x0000000000000002
-#define SYSTEM_SCHEDULER_KW_KERNEL_QUEUE    0x0000000000000004
-#define SYSTEM_SCHEDULER_KW_SHOULD_YIELD    0x0000000000000008
-#define SYSTEM_SCHEDULER_KW_ANTI_STARVATION 0x0000000000000010
-#define SYSTEM_SCHEDULER_KW_LOAD_BALANCER   0x0000000000000020
-#define SYSTEM_SCHEDULER_KW_AFFINITY        0x0000000000000040
-#define SYSTEM_SCHEDULER_KW_PRIORITY        0x0000000000000080
-#define SYSTEM_SCHEDULER_KW_IDEAL_PROCESSOR 0x0000000000000100
-#define SYSTEM_SCHEDULER_KW_CONTEXT_SWITCH  0x0000000000000200
-#define SYSTEM_SCHEDULER_KW_COMPACT_CSWITCH 0x0000000000000400
+#define SYSTEM_SCHEDULER_KW_XSCHEDULER              0x0000000000000001
+#define SYSTEM_SCHEDULER_KW_DISPATCHER              0x0000000000000002
+#define SYSTEM_SCHEDULER_KW_KERNEL_QUEUE            0x0000000000000004
+#define SYSTEM_SCHEDULER_KW_SHOULD_YIELD            0x0000000000000008
+#define SYSTEM_SCHEDULER_KW_ANTI_STARVATION         0x0000000000000010
+#define SYSTEM_SCHEDULER_KW_LOAD_BALANCER           0x0000000000000020
+#define SYSTEM_SCHEDULER_KW_AFFINITY                0x0000000000000040
+#define SYSTEM_SCHEDULER_KW_PRIORITY                0x0000000000000080
+#define SYSTEM_SCHEDULER_KW_IDEAL_PROCESSOR         0x0000000000000100
+#define SYSTEM_SCHEDULER_KW_CONTEXT_SWITCH          0x0000000000000200
+#define SYSTEM_SCHEDULER_KW_COMPACT_CSWITCH         0x0000000000000400
+#define SYSTEM_SCHEDULER_KW_SCHEDULE_THREAD         0x0000000000000800
+#define SYSTEM_SCHEDULER_KW_READY_QUEUE             0x0000000000001000
+#define SYSTEM_SCHEDULER_KW_CPU_PARTITION           0x0000000000002000
+#define SYSTEM_SCHEDULER_KW_THREAD_FEEDBACK_READ    0x0000000000004000
+#define SYSTEM_SCHEDULER_KW_WORKLOAD_CLASS_UPDATE   0x0000000000008000
+#define SYSTEM_SCHEDULER_KW_AUTOBOOST               0x0000000000010000
 
 //
 // Keywords to be used for the System Syscall Provider.
@@ -865,6 +897,16 @@ typedef enum {
     EtwCompressionModeNoDisable = 1,
     EtwCompressionModeNoRestart = 2
 } ETW_COMPRESSION_RESUMPTION_MODE;
+
+#ifndef _typedef_TRACELOGGER_HANDLE
+#define _typedef_TRACELOGGER_HANDLE 1
+// Used by RegisterTraceGuids-based ("Classic") ETW providers. The handle is
+// invalid if it contains the value (TRACELOGGER_HANDLE)INVALID_HANDLE_VALUE.
+// Obtain the handle by calling GetTraceLoggerHandle during the provider
+// notification callback. The handle is valid until the subsequent notification
+// callback and does not need to be closed by the user.
+typedef ULONG64 TRACELOGGER_HANDLE;
+#endif // _typedef_TRACELOGGER_HANDLE
 
 #if _MSC_VER >= 1200
 #pragma warning(push)
@@ -1402,6 +1444,32 @@ typedef struct {
     // USHORT HookIds[]; // Count indicated by HookIdCount
 } ETW_PMC_SESSION_INFO;
 
+typedef enum ETW_CONTEXT_REGISTER_TYPES {
+    EtwContextRegisterTypeNone = 0,
+    EtwContextRegisterTypeControl = 0x1,
+    EtwContextRegisterTypeInteger = 0x2
+} ETW_CONTEXT_REGISTER_TYPES;
+DEFINE_ENUM_FLAG_OPERATORS(ETW_CONTEXT_REGISTER_TYPES)
+
+#define TRACE_LBR_EVENT_OPCODE 0x20
+#define TRACE_LBR_MAXIMUM_EVENTS 4
+
+typedef enum TRACE_LBR_CONFIGURATION {
+    TRACE_LBR_CONFIGURATION_NONE                  = 0x0,   // do not exclude any branches
+    TRACE_LBR_CONFIGURATION_EXCLUDE_KERNEL        = 0x1,   // exclude branches in kernel privilege
+    TRACE_LBR_CONFIGURATION_EXCLUDE_USER          = 0x2,   // exclude branches in user privilege
+    TRACE_LBR_CONFIGURATION_EXCLUDE_JCC           = 0x4,   // exclude conditional branches
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_CALL = 0x8,   // exclude near relative calls
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_CALL = 0x10,  // exclude near indirect calls
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_RET      = 0x20,  // exclude near returns
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_JMP  = 0x40,  // exclude near indirect jumps
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_JMP  = 0x80,  // exclude near relative jumps
+    TRACE_LBR_CONFIGURATION_EXCLUDE_FAR_BRANCH    = 0x100, // exclude far ("other") branches
+    TRACE_LBR_CONFIGURATION_CALLSTACK_ENABLE      = 0x200, // record branches in callstack (LIFO) mode
+    TRACE_LBR_CONFIGURATION_SAMPLED               = 0x400, // record sample-based LBR (ARM64 only)
+} TRACE_LBR_CONFIGURATION;
+DEFINE_ENUM_FLAG_OPERATORS(TRACE_LBR_CONFIGURATION)
+
 //
 // An EVENT_TRACE consists of a fixed header (EVENT_TRACE_HEADER) and
 // optionally a variable portion pointed to by MofData. The datablock
@@ -1473,7 +1541,7 @@ typedef struct ETW_BUFFER_HEADER {
 // Structure passed to the BufferCallback containing information on the
 // current state of the processing session.
 typedef struct ETW_BUFFER_CALLBACK_INFORMATION {
-    TRACEHANDLE TraceHandle;
+    PROCESSTRACE_HANDLE TraceHandle;
     const TRACE_LOGFILE_HEADER* LogfileHeader;
     ULONG BuffersRead;
 } ETW_BUFFER_CALLBACK_INFORMATION;
@@ -1657,19 +1725,11 @@ extern "C" {
 // Use the routine below to start an event trace session
 //
 
-// ULONG
-// StartTrace(
-//      _Out_ PTRACEHANDLE TraceHandle,
-//      _In_ LPTSTR InstanceName,
-//      _Inout_ PEVENT_TRACE_PROPERTIES Properties
-//      );
-
-
 EXTERN_C
 ULONG
 WMIAPI
 StartTraceW (
-    _Out_ PTRACEHANDLE TraceHandle,
+    _Out_ CONTROLTRACE_ID* TraceId,
     _In_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1684,7 +1744,7 @@ EXTERN_C
 ULONG
 WMIAPI
 StartTraceA (
-    _Out_ PTRACEHANDLE TraceHandle,
+    _Out_ CONTROLTRACE_ID* TraceId,
     _In_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1699,19 +1759,11 @@ StartTraceA (
 // Use the routine below to stop an event trace session
 //
 
-//
-// ULONG
-// StopTrace(
-//      _In_ TRACEHANDLE TraceHandle,
-//      _In_opt_ LPTSTR InstanceName,
-//      _Inout_ PEVENT_TRACE_PROPERTIES Properties
-//      );
-
 EXTERN_C
 ULONG
 WMIAPI
 StopTraceW (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1726,7 +1778,7 @@ EXTERN_C
 ULONG
 WMIAPI
 StopTraceA (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1741,18 +1793,11 @@ StopTraceA (
 // Use the routine below to query the properties of an event trace session
 //
 
-// ULONG
-// QueryTrace(
-//      _In_ TRACEHANDLE TraceHandle,
-//      _In_opt_ LPTSTR InstanceName,
-//      _Inout_ PEVENT_TRACE_PROPERTIES Properties
-//      );
-
 EXTERN_C
 ULONG
 WMIAPI
 QueryTraceW (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1767,7 +1812,7 @@ EXTERN_C
 ULONG
 WMIAPI
 QueryTraceA (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1776,18 +1821,11 @@ QueryTraceA (
 // Use the routine below to update certain properties of an event trace session
 //
 
-// ULONG
-// UpdateTrace(
-//      _In_ PTRACEHANDLE TraceHandle,
-//      _In_opt_ LPTSTR InstanceName,
-//      _Inout_ PEVENT_TRACE_PROPERTIES Properties
-//      );
-
 EXTERN_C
 ULONG
 WMIAPI
 UpdateTraceW (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1796,7 +1834,7 @@ EXTERN_C
 ULONG
 WMIAPI
 UpdateTraceA (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1812,19 +1850,12 @@ UpdateTraceA (
 #pragma region Application Family or OneCore Family or GameCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-// ULONG
-// FlushTrace(
-//      _In_ TRACEHANDLE TraceHandle,
-//      _In_opt_ LPTSTR InstanceName,
-//      _Inout_ PEVENT_TRACE_PROPERTIES Properties
-//      );
-
 #if (WINVER >= _WIN32_WINNT_WINXP)
 EXTERN_C
 ULONG
 WMIAPI
 FlushTraceW (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1841,7 +1872,7 @@ EXTERN_C
 ULONG
 WMIAPI
 FlushTraceA (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties
     );
@@ -1860,7 +1891,7 @@ EXTERN_C
 ULONG
 WMIAPI
 ControlTraceW (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCWSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties,
     _In_ ULONG ControlCode
@@ -1876,20 +1907,12 @@ EXTERN_C
 ULONG
 WMIAPI
 ControlTraceA (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_opt_ LPCSTR InstanceName,
     _Inout_ PEVENT_TRACE_PROPERTIES Properties,
     _In_ ULONG ControlCode
     );
 
-//
-// ULONG
-// QueryAllTraces(
-//  _Out_writes_(PropertyArrayCount) PEVENT_TRACE_PROPERTIES *PropertyArray,
-//  _In_ ULONG PropertyArrayCount,
-//  _Out_ PULONG LoggerCount
-//  );
-//
 EXTERN_C
 ULONG
 WMIAPI
@@ -1926,7 +1949,7 @@ EnableTrace (
     _In_ ULONG EnableFlag,
     _In_ ULONG EnableLevel,
     _In_ LPCGUID ControlGuid,
-    _In_ TRACEHANDLE TraceHandle
+    _In_ CONTROLTRACE_ID TraceId
     );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -1946,7 +1969,7 @@ WMIAPI
 EnableTraceEx (
     _In_ LPCGUID ProviderId,
     _In_opt_ LPCGUID SourceId,
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_ ULONG IsEnabled,
     _In_ UCHAR Level,
     _In_ ULONGLONG MatchAnyKeyword,
@@ -1991,7 +2014,7 @@ EXTERN_C
 ULONG
 WMIAPI
 EnableTraceEx2 (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_ LPCGUID ProviderId,
     _In_ ULONG ControlCode,
     _In_ UCHAR Level,
@@ -2088,13 +2111,13 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TraceSampledProfileIntervalInfo:
     // - TraceSetInformation
     //      Sets the Sample Profile interval for the system.
-    //      Expects NULL SessionHandle parameter.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Input Format: TRACE_PROFILE_INTERVAL
     //
     // - TraceQueryInformation
     //      Queries the current Sample Profile Interval for the system.
-    //      Expects NULL SessionHandle parameter.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Output Format: TRACE_PROFILE_INTERVAL
     //
@@ -2104,7 +2127,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TraceProfileSourceConfigInfo:
     // - TraceSetInformation
     //      Sets a list of sources to be used for PMC Profiling system-wide.
-    //      Expects NULL SessionHandle parameter.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Input Format: An array of ULONGs specifying the IDs of the sources.
     //
@@ -2114,7 +2137,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TraceProfileSourceListInfo:
     // - TraceQueryInformation
     //      Queries the list of PMC Profiling sources available on the system.
-    //      Expects NULL SessionHandle parameter.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Output Format: An array of PROFILE_SOURCE_INFO structs.
     //
@@ -2159,6 +2182,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TraceVersionInfo:
     // - TraceQueryInformation
     //      Queries the version number of the trace processing code.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Output Format: TRACE_VERSION_INFO
     //
@@ -2211,7 +2235,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //
     // TracePeriodicCaptureStateListInfo:
     // - TraceSetInformation
-    //      Sets the list of providers for which capture stat should be collected
+    //      Sets the list of providers for which capture state should be collected
     //      at periodic time intervals for the specified logging session.
     //      If a NULL input buffer is specified, then the current periodic capture state
     //      settings are cleared.
@@ -2227,6 +2251,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //      Queries the limits of periodic capture settings on this system, including
     //      the minimum time frequency and the maximum number of providers that can be
     //      enabled for periodic capture state.
+    //      Does not use the TraceId parameter.
     //
     //      Output Format: TRACE_PERIODIC_CAPTURE_STATE_INFO
     //
@@ -2261,6 +2286,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // - TraceQueryInformation
     //      Queries the maximum number of system-wide loggers that can be running at a time
     //      on this system.
+    //      Does not use the TraceId parameter.
     //
     //      Output Format: ULONG
     //
@@ -2289,6 +2315,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TraceMaxPmcCounterQuery:
     // - TraceQueryInformation
     //      Queries the maximum number of PMC counters supported on this platform.
+    //      Does not use the TraceId parameter.
     //
     //      Output Format: ULONG
     //
@@ -2318,7 +2345,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TracePmcCounterOwners:
     // - TraceQueryInformation
     //      Queries ownership information for active PMC counters.
-    //      Expects NULL SessionHandle.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Input Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with ProcessorNumber set to an
     //                    appropriate processor index. The input buffer must be of size at least
@@ -2346,6 +2373,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     // TracePmcSessionInformation:
     //    TraceQueryInformation
     //      Queries information about enabled PMC counters for all sessions.
+    //      Expects 0 for the TraceId parameter.
     //
     //      Output Format: The supplied output buffer will be set to a blob of filled out ETW_PMC_SESSION_INFO.
     //                     The NextEntryOffset member of each item will be set to the offset from the start of
@@ -2354,6 +2382,17 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //                     exist in the ProfileSources array and HookIds arrays, respectively.
     //
     TracePmcSessionInformation = 27,
+
+    //
+    // TraceContextRegisterInfo:
+    // - TraceSetInformation.
+    //      Turns on context register tracing for the specified System Trace Provider events for the specified logger.
+    //      It also turns off context register tracing for all kernel events not on this list, regardless of prior status.
+    //
+    //      Input Format: A TRACE_CONTEXT_REGISTER_INFO structure, followed by an array of up to
+    //                    ETW_MAX_CONTEXT_REGISTER_EVENTS number of CLASSIC_EVENT_ID structures.
+    //
+    TraceContextRegisterInfo = 28,
 
     MaxTraceSetInfoClass
 } TRACE_QUERY_INFO_CLASS, TRACE_INFO_CLASS;
@@ -2410,6 +2449,11 @@ typedef struct _TRACE_PERIODIC_CAPTURE_STATE_INFO {
     USHORT Reserved;
 } TRACE_PERIODIC_CAPTURE_STATE_INFO, *PTRACE_PERIODIC_CAPTURE_STATE_INFO;
 
+typedef struct TRACE_CONTEXT_REGISTER_INFO {
+    ETW_CONTEXT_REGISTER_TYPES RegisterTypes;
+    ULONG Reserved;
+} TRACE_CONTEXT_REGISTER_INFO;
+
 #ifndef _APISET_EVENTING
 
 #pragma region Desktop Family or OneCore Family or GameCore Family
@@ -2420,7 +2464,7 @@ EXTERN_C
 ULONG
 WMIAPI
 TraceSetInformation (
-    _In_ TRACEHANDLE SessionHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_ TRACE_INFO_CLASS InformationClass,
     _In_reads_bytes_(InformationLength) PVOID TraceInformation,
     _In_ ULONG InformationLength
@@ -2432,13 +2476,23 @@ EXTERN_C
 ULONG
 WMIAPI
 TraceQueryInformation (
-    _In_ TRACEHANDLE SessionHandle,
+    _In_ CONTROLTRACE_ID TraceId,
     _In_ TRACE_INFO_CLASS InformationClass,
     _Out_writes_bytes_(InformationLength) PVOID TraceInformation,
     _In_ ULONG InformationLength,
     _Out_opt_ PULONG ReturnLength
     );
 #endif
+
+EXTERN_C
+_Success_(return == ERROR_SUCCESS)
+ULONG
+TraceConfigureLastBranchRecord (
+    _In_ CONTROLTRACE_ID TraceId,
+    _In_ TRACE_LBR_CONFIGURATION LbrConfiguration,
+    _In_reads_(EventCount) CLASSIC_EVENT_ID const* Events,
+    _In_ ULONG EventCount
+    );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -2461,6 +2515,18 @@ CreateTraceInstanceId (
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
+#pragma region Application Family or OneCore Family or GameCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+// Used by RegisterTraceGuids-based ("Classic") ETW providers. The handle is
+// invalid if it contains the value (TRACEGUID_HANDLE)0. Obtain the handle by
+// calling RegisterTraceGuids. Close the handle by calling
+// UnregisterTraceGuids.
+typedef ULONG64 TRACEGUID_HANDLE;
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
 #pragma region Desktop Family or OneCore Family or GameCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
@@ -2472,7 +2538,7 @@ EXTERN_C
 ULONG
 WMIAPI
 TraceEvent (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ TRACELOGGER_HANDLE TraceHandle,
     _In_ PEVENT_TRACE_HEADER EventTrace
     );
 
@@ -2486,7 +2552,7 @@ EXTERN_C
 ULONG
 WMIAPI
 TraceEventInstance (
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ TRACELOGGER_HANDLE TraceHandle,
     _In_ PEVENT_INSTANCE_HEADER EventTrace,
     _In_ PEVENT_INSTANCE_INFO InstInfo,
     _In_opt_ PEVENT_INSTANCE_INFO ParentInstInfo
@@ -2502,20 +2568,6 @@ TraceEventInstance (
 // Use the routine below to register a guid for tracing.
 //
 
-//
-// ULONG
-// RegisterTraceGuids(
-//  _In_ WMIDPREQUEST RequestAddress,
-//  _In_opt_ PVOID RequestContext,
-//  _In_ LPCGUID ControlGuid,
-//  _In_ ULONG GuidCount,
-//  _In_reads_opt_(GuidCount) PTRACE_GUID_REGISTRATION TraceGuidReg,
-//  _In_opt_ LPCTSTR MofImagePath,
-//  _In_opt_ LPCTSTR MofResourceName,
-//  _Out_ PTRACEHANDLE RegistrationHandle
-//  );
-//
-
 EXTERN_C
 ULONG
 WMIAPI
@@ -2527,7 +2579,7 @@ RegisterTraceGuidsW (
     _In_reads_opt_(GuidCount) PTRACE_GUID_REGISTRATION TraceGuidReg,
     _In_opt_ LPCWSTR MofImagePath,
     _In_opt_ LPCWSTR MofResourceName,
-    _Out_ PTRACEHANDLE RegistrationHandle
+    _Out_ TRACEGUID_HANDLE* RegistrationHandle
     );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -2547,7 +2599,7 @@ RegisterTraceGuidsA (
     _In_reads_opt_(GuidCount) PTRACE_GUID_REGISTRATION TraceGuidReg,
     _In_opt_ LPCSTR MofImagePath,
     _In_opt_ LPCSTR MofResourceName,
-    _Out_ PTRACEHANDLE RegistrationHandle
+    _Out_ TRACEGUID_HANDLE* RegistrationHandle
     );
 
 #if (WINVER >= _WIN32_WINNT_WINXP)
@@ -2571,11 +2623,11 @@ EXTERN_C
 ULONG
 WMIAPI
 UnregisterTraceGuids (
-    _In_ TRACEHANDLE RegistrationHandle
+    _In_ TRACEGUID_HANDLE RegistrationHandle
     );
 
 EXTERN_C
-TRACEHANDLE
+TRACELOGGER_HANDLE
 WMIAPI
 GetTraceLoggerHandle (
     _In_ PVOID Buffer
@@ -2585,36 +2637,29 @@ EXTERN_C
 UCHAR
 WMIAPI
 GetTraceEnableLevel (
-    _In_ TRACEHANDLE TraceHandle
+    _In_ TRACELOGGER_HANDLE TraceHandle
     );
 
 EXTERN_C
 ULONG
 WMIAPI
 GetTraceEnableFlags (
-    _In_ TRACEHANDLE TraceHandle
+    _In_ TRACELOGGER_HANDLE TraceHandle
     );
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
 
 //
 // Data Consumer APIs and structures start here
 //
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
 #pragma region Application Family or OneCore Family or GameCore family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-//
-// TRACEHANDLE
-// OpenTrace(
-//  _Inout_ PEVENT_TRACE_LOGFILE Logfile
-//  );
-//
-
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceW (
     _Inout_ PEVENT_TRACE_LOGFILEW Logfile
@@ -2625,7 +2670,7 @@ ETW_APP_DECLSPEC_DEPRECATED
 ULONG
 WMIAPI
 ProcessTrace (
-    _In_reads_(HandleCount) PTRACEHANDLE HandleArray,
+    _In_reads_(HandleCount) PROCESSTRACE_HANDLE* HandleArray,
     _In_ ULONG HandleCount,
     _In_opt_ LPFILETIME StartTime,
     _In_opt_ LPFILETIME EndTime
@@ -2636,13 +2681,13 @@ ETW_APP_DECLSPEC_DEPRECATED
 ULONG
 WMIAPI
 CloseTrace (
-    _In_ TRACEHANDLE TraceHandle
+    _In_ PROCESSTRACE_HANDLE TraceHandle
     );
 
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceFromBufferStream(
     _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
@@ -2653,7 +2698,7 @@ OpenTraceFromBufferStream(
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceFromRealTimeLogger(
     _In_ PCWSTR LoggerName,
@@ -2664,7 +2709,7 @@ OpenTraceFromRealTimeLogger(
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceFromRealTimeLoggerWithAllocationOptions(
     _In_ PCWSTR LoggerName,
@@ -2677,7 +2722,7 @@ OpenTraceFromRealTimeLoggerWithAllocationOptions(
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceFromFile(
     _In_ PCWSTR LogFileName,
@@ -2691,7 +2736,7 @@ _Success_(return == ERROR_SUCCESS)
 ULONG
 WMIAPI
 ProcessTraceBufferIncrementReference(
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ PROCESSTRACE_HANDLE TraceHandle,
     _In_ const ETW_BUFFER_HEADER* Buffer
     );
 
@@ -2710,7 +2755,7 @@ _Success_(return == ERROR_SUCCESS)
 ULONG
 WMIAPI
 ProcessTraceAddBufferToBufferStream(
-    _In_ TRACEHANDLE TraceHandle,
+    _In_ PROCESSTRACE_HANDLE TraceHandle,
     _In_reads_bytes_(BufferSize) const ETW_BUFFER_HEADER* Buffer,
     _In_ ULONG BufferSize
     );
@@ -2747,7 +2792,7 @@ ETW_APP_DECLSPEC_DEPRECATED
 ULONG
 WMIAPI
 QueryTraceProcessingHandle (
-    _In_ TRACEHANDLE ProcessingHandle,
+    _In_ PROCESSTRACE_HANDLE ProcessingHandle,
     _In_ ETW_PROCESS_HANDLE_INFO_TYPE InformationClass,
     _In_opt_ PVOID InBuffer,
     _In_ ULONG InBufferSize,
@@ -2766,15 +2811,8 @@ QueryTraceProcessingHandle (
 // Data Consumer APIs and structures start here
 //
 
-//
-// TRACEHANDLE
-// OpenTrace(
-//  _Inout_ PEVENT_TRACE_LOGFILE Logfile
-//  );
-//
-
 EXTERN_C
-TRACEHANDLE
+PROCESSTRACE_HANDLE
 WMIAPI
 OpenTraceA (
     _Inout_ PEVENT_TRACE_LOGFILEA Logfile
@@ -2809,7 +2847,7 @@ EXTERN_C
 ULONG
 __cdecl
 TraceMessage (
-    _In_ TRACEHANDLE LoggerHandle,
+    _In_ TRACELOGGER_HANDLE LoggerHandle,
     _In_ ULONG MessageFlags,
     _In_ LPCGUID MessageGuid,
     _In_ USHORT MessageNumber,
@@ -2825,7 +2863,7 @@ TraceMessage (
 EXTERN_C
 ULONG
 TraceMessageVa (
-    _In_ TRACEHANDLE LoggerHandle,
+    _In_ TRACELOGGER_HANDLE LoggerHandle,
     _In_ ULONG MessageFlags,
     _In_ LPCGUID MessageGuid,
     _In_ USHORT MessageNumber,
@@ -2844,14 +2882,13 @@ TraceMessageVa (
 #pragma region Application Family or OneCore Family or GameCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-#define INVALID_PROCESSTRACE_HANDLE ((TRACEHANDLE)INVALID_HANDLE_VALUE)
+#define INVALID_PROCESSTRACE_HANDLE ((PROCESSTRACE_HANDLE)INVALID_HANDLE_VALUE)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
 #ifndef _APISET_EVENTING
 
-//
 //
 // Define the encoding independent routines
 //

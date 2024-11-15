@@ -1085,6 +1085,51 @@
 #define WU_E_INSTALL_USERCONTEXT_ACCESSDENIED _HRESULT_TYPEDEF_(0x80240066L)
 
 //
+// MessageId: WU_E_STANDBY_ACTIVITY_NOT_ALLOWED
+//
+// MessageText:
+//
+// Operation is not allowed because the device is in DC (Direct Current) and DS (Disconnected Standby).
+//
+#define WU_E_STANDBY_ACTIVITY_NOT_ALLOWED _HRESULT_TYPEDEF_(0x80240067L)
+
+//
+// MessageId: WU_E_COULD_NOT_EVALUATE_PROPERTY
+//
+// MessageText:
+//
+// The property could not be evaluated.
+//
+#define WU_E_COULD_NOT_EVALUATE_PROPERTY _HRESULT_TYPEDEF_(0x80240068L)
+
+//
+// MessageId: WU_E_SERVICE_UNEXPECTED_EXIT
+//
+// MessageText:
+//
+// Operation did not complete because the service process exited unexpectedly with a non-successful exit code.
+//
+#define WU_E_SERVICE_UNEXPECTED_EXIT     _HRESULT_TYPEDEF_(0x80240069L)
+
+//
+// MessageId: WU_E_ACCESS_DENIED_CALLER_IDENTITY
+//
+// MessageText:
+//
+// Access was denied because the caller identity does not fit the requirements for this call.
+//
+#define WU_E_ACCESS_DENIED_CALLER_IDENTITY _HRESULT_TYPEDEF_(0x8024006AL)
+
+//
+// MessageId: WU_E_SERVICE_REENABLE_ACCESS_DENIED
+//
+// MessageText:
+//
+// Operation did not complete because the service is disabled and re-enabling it has failed as the access was denied.
+//
+#define WU_E_SERVICE_REENABLE_ACCESS_DENIED _HRESULT_TYPEDEF_(0x8024006BL)
+
+//
 // MessageId: WU_E_UNEXPECTED
 //
 // MessageText:
@@ -1573,6 +1618,15 @@
 #define WU_E_PT_LOAD_SHEDDING            _HRESULT_TYPEDEF_(0x8024402DL)
 
 //
+// MessageId: WU_E_PT_CLIENT_ENFORCED_LOAD_SHEDDING
+//
+// MessageText:
+//
+// Windows Update Agent is enforcing honoring the service load shedding interval.
+//
+#define WU_E_PT_CLIENT_ENFORCED_LOAD_SHEDDING _HRESULT_TYPEDEF_(0x8024402EL)
+
+//
 // MessageId: WU_E_PT_SAME_REDIR_ID
 //
 // MessageText:
@@ -1875,7 +1929,7 @@
 //
 // MessageText:
 //
-// The client hit an error in retrievingg AAD device ticket.
+// The client hit an error in retrieving AAD device ticket.
 //
 #define WU_E_PT_GENERAL_AAD_CLIENT_ERROR _HRESULT_TYPEDEF_(0x80244101L)
 
@@ -3146,6 +3200,24 @@
 #define WU_E_UH_APPX_SYSTEM_VOLUME_NOT_FOUND _HRESULT_TYPEDEF_(0x80242024L)
 
 //
+// MessageId: WU_E_UH_UA_SESSION_INFO_VERSION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// UA does not support the version of OptionalSessionInfo.
+//
+#define WU_E_UH_UA_SESSION_INFO_VERSION_NOT_SUPPORTED _HRESULT_TYPEDEF_(0x80242025L)
+
+//
+// MessageId: WU_E_UH_RESERVICING_REQUIRED_BASELINE
+//
+// MessageText:
+//
+// This operation cannot be completed. You must install the baseline update(s) before you can install this update.
+//
+#define WU_E_UH_RESERVICING_REQUIRED_BASELINE _HRESULT_TYPEDEF_(0x80242026L)
+
+//
 // MessageId: WU_E_UH_UNEXPECTED
 //
 // MessageText:
@@ -3408,6 +3480,15 @@
 // The update has to be downloaded via DO.
 //
 #define WU_E_DM_DOSVC_REQUIRED           _HRESULT_TYPEDEF_(0x8024601EL)
+
+//
+// MessageId: WU_E_DM_DOWNLOADTYPE_CONFLICT
+//
+// MessageText:
+//
+// Windows Update only supports one download type per update at one time. The download failure is by design here since the same update with different download type is operating. Please try again later.
+//
+#define WU_E_DM_DOWNLOADTYPE_CONFLICT    _HRESULT_TYPEDEF_(0x8024601FL)
 
 //
 // MessageId: WU_E_DM_UNEXPECTED

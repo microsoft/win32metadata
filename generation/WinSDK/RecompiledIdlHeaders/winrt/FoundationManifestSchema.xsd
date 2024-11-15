@@ -17,6 +17,8 @@
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:uap13="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"
            xmlns:uap15="http://schemas.microsoft.com/appx/manifest/uap/windows10/15"
+           xmlns:uap16="http://schemas.microsoft.com/appx/manifest/uap/windows10/16"
+           xmlns:uap17="http://schemas.microsoft.com/appx/manifest/uap/windows10/17"
            xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities"
            xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
            xmlns:rescap6="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"
@@ -29,8 +31,12 @@
            xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
            xmlns:previewsecurity="http://schemas.microsoft.com/appx/manifest/preview/windows10/security"
+           xmlns:heap="http://schemas.microsoft.com/appx/manifest/heap/windows10"
+           xmlns:previewsecurity2="http://schemas.microsoft.com/appx/manifest/preview/windows10/security/2"
+           xmlns:deployment2="http://schemas.microsoft.com/appx/manifest/deployment/windows10/2"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -46,13 +52,19 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/15"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/16"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/17"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/security"/>
-  
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/heap/windows10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/security/2"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/deployment/windows10/2"/>
+
   <xs:element name="Package">
     <xs:complexType>
       <xs:all>
@@ -188,7 +200,11 @@
       <xs:element ref="uap10:AllowExternalContent" minOccurs="0"/>
       <xs:element ref="uap10:PackageIntegrity" minOccurs="0"/>
       <xs:element ref="uap13:AutoUpdate" minOccurs="0"/>
-      <xs:element ref="uap15:DependencyTarget" minOccurs="0"/>  
+      <xs:element ref="uap15:DependencyTarget" minOccurs="0"/>
+      <xs:element ref="uap16:UpdateWhileInUse" minOccurs="0"/>
+      <xs:element ref="uap17:UpdateWhileInUse" minOccurs="0"/>
+      <xs:element ref="heap:HeapPolicy" minOccurs="0"/>
+      <xs:element ref="deployment2:StageWhileInUse" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
 
@@ -214,16 +230,9 @@
         </xs:complexType>
       </xs:element>
       <xs:choice minOccurs="0" maxOccurs="129">
-        <xs:element name="PackageDependency">
-          <xs:complexType>
-            <xs:attribute name="Name" type="t:ST_PackageName" use="required"/>
-            <xs:attribute name="Publisher" type="t:ST_Publisher_2010_v2" use="required"/>
-            <xs:attribute name="MinVersion" type="t:ST_VersionQuad" use="required"/>
-            <xs:attribute name="MaxMajorVersionTested" type="xs:unsignedShort" use="optional"/>
-            <xs:attribute ref="uap6:Optional" use="optional"/>
-          </xs:complexType>
-        </xs:element>
+        <xs:element name="PackageDependency" type="CT_PackageDependency"/>
         <xs:element ref="uap13:HostRuntimeDependency"/>
+        <xs:element ref="uap17:PackageDependency"/>
       </xs:choice>
       <xs:element ref="MainPackageDependencyChoice" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="MainPackageDependencyChoice2" minOccurs="0" maxOccurs="1000"/>
@@ -288,6 +297,7 @@
             <xs:element name="PublisherCacheFolders" type="CT_PublisherCacheFolders"/>
           </xs:choice>
           <xs:attribute name="Category" type="t:ST_PackageExtensionCategory_Foundation" use="required"/>
+          <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
           <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
           <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
         </xs:complexType>
@@ -380,6 +390,10 @@
           <xs:attribute ref="uap11:Parameters" use="optional"/>
           <xs:attribute ref="previewsecurity:TrustLevel" use="optional"/>
           <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+          <xs:attribute ref="previewsecurity2:RuntimeBehavior" use="optional"/>
+          <xs:attribute ref="uap16:BaseNamedObjectsIsolation" use="optional"/>
+          <xs:attribute ref="uap17:BaseNamedObjectsIsolation" use="optional"/>
+          <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
         </xs:complexType>
         <xs:unique name="ApplicationContentUrisRule_Match">
           <xs:selector xpath="uap:ApplicationContentUriRules/uap:Rule"/>
@@ -458,6 +472,7 @@
         <xs:element name="BackgroundTasks" type="CT_BackgroundTasks"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Foundation" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
@@ -483,5 +498,12 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:complexType name="CT_PackageDependency">
+    <xs:attribute name="Name" type="t:ST_PackageName" use="required"/>
+    <xs:attribute name="Publisher" type="t:ST_Publisher_2010_v2" use="required"/>
+    <xs:attribute name="MinVersion" type="t:ST_VersionQuad" use="required"/>
+    <xs:attribute name="MaxMajorVersionTested" type="xs:unsignedShort" use="optional"/>
+    <xs:attribute ref="uap6:Optional" use="optional"/>
+  </xs:complexType>
 </xs:schema>
 

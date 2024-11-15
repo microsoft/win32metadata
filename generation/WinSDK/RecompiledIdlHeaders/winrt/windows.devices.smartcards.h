@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -4577,7 +4577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardPinResetHandler = _uuidof(ISmartCardPinResetHandler);
+                MIDL_CONST_ID IID& IID_ISmartCardPinResetHandler = __uuidof(ISmartCardPinResetHandler);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4613,7 +4613,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICardAddedEventArgs = _uuidof(ICardAddedEventArgs);
+                MIDL_CONST_ID IID& IID_ICardAddedEventArgs = __uuidof(ICardAddedEventArgs);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4649,7 +4649,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICardRemovedEventArgs = _uuidof(ICardRemovedEventArgs);
+                MIDL_CONST_ID IID& IID_ICardRemovedEventArgs = __uuidof(ICardRemovedEventArgs);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4688,7 +4688,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKnownSmartCardAppletIds = _uuidof(IKnownSmartCardAppletIds);
+                MIDL_CONST_ID IID& IID_IKnownSmartCardAppletIds = __uuidof(IKnownSmartCardAppletIds);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4730,7 +4730,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCard = _uuidof(ISmartCard);
+                MIDL_CONST_ID IID& IID_ISmartCard = __uuidof(ISmartCard);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4790,7 +4790,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroup = _uuidof(ISmartCardAppletIdGroup);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroup = __uuidof(ISmartCardAppletIdGroup);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4844,7 +4844,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroup2 = _uuidof(ISmartCardAppletIdGroup2);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroup2 = __uuidof(ISmartCardAppletIdGroup2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4884,7 +4884,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupFactory = _uuidof(ISmartCardAppletIdGroupFactory);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupFactory = __uuidof(ISmartCardAppletIdGroupFactory);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4934,7 +4934,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupRegistration = _uuidof(ISmartCardAppletIdGroupRegistration);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupRegistration = __uuidof(ISmartCardAppletIdGroupRegistration);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -4974,7 +4974,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupRegistration2 = _uuidof(ISmartCardAppletIdGroupRegistration2);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupRegistration2 = __uuidof(ISmartCardAppletIdGroupRegistration2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5010,7 +5010,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupStatics = _uuidof(ISmartCardAppletIdGroupStatics);
+                MIDL_CONST_ID IID& IID_ISmartCardAppletIdGroupStatics = __uuidof(ISmartCardAppletIdGroupStatics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5073,7 +5073,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu = _uuidof(ISmartCardAutomaticResponseApdu);
+                MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu = __uuidof(ISmartCardAutomaticResponseApdu);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5118,7 +5118,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu2 = _uuidof(ISmartCardAutomaticResponseApdu2);
+                MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu2 = __uuidof(ISmartCardAutomaticResponseApdu2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5157,7 +5157,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu3 = _uuidof(ISmartCardAutomaticResponseApdu3);
+                MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApdu3 = __uuidof(ISmartCardAutomaticResponseApdu3);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5195,7 +5195,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApduFactory = _uuidof(ISmartCardAutomaticResponseApduFactory);
+                MIDL_CONST_ID IID& IID_ISmartCardAutomaticResponseApduFactory = __uuidof(ISmartCardAutomaticResponseApduFactory);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5254,7 +5254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardChallengeContext = _uuidof(ISmartCardChallengeContext);
+                MIDL_CONST_ID IID& IID_ISmartCardChallengeContext = __uuidof(ISmartCardChallengeContext);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5290,7 +5290,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardConnect = _uuidof(ISmartCardConnect);
+                MIDL_CONST_ID IID& IID_ISmartCardConnect = __uuidof(ISmartCardConnect);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5330,7 +5330,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardConnection = _uuidof(ISmartCardConnection);
+                MIDL_CONST_ID IID& IID_ISmartCardConnection = __uuidof(ISmartCardConnection);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5418,7 +5418,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGenerator = _uuidof(ISmartCardCryptogramGenerator);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGenerator = __uuidof(ISmartCardCryptogramGenerator);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5472,7 +5472,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGenerator2 = _uuidof(ISmartCardCryptogramGenerator2);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGenerator2 = __uuidof(ISmartCardCryptogramGenerator2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5508,7 +5508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGeneratorStatics = _uuidof(ISmartCardCryptogramGeneratorStatics);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGeneratorStatics = __uuidof(ISmartCardCryptogramGeneratorStatics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5544,7 +5544,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGeneratorStatics2 = _uuidof(ISmartCardCryptogramGeneratorStatics2);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGeneratorStatics2 = __uuidof(ISmartCardCryptogramGeneratorStatics2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5583,7 +5583,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult = _uuidof(ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult = __uuidof(ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5622,7 +5622,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResult = _uuidof(ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResult);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResult = __uuidof(ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResult);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5661,7 +5661,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult = _uuidof(ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult = __uuidof(ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5718,7 +5718,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialCharacteristics = _uuidof(ISmartCardCryptogramMaterialCharacteristics);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialCharacteristics = __uuidof(ISmartCardCryptogramMaterialCharacteristics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5763,7 +5763,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialPackageCharacteristics = _uuidof(ISmartCardCryptogramMaterialPackageCharacteristics);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialPackageCharacteristics = __uuidof(ISmartCardCryptogramMaterialPackageCharacteristics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5802,7 +5802,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialPossessionProof = _uuidof(ISmartCardCryptogramMaterialPossessionProof);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramMaterialPossessionProof = __uuidof(ISmartCardCryptogramMaterialPossessionProof);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5889,7 +5889,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramPlacementStep = _uuidof(ISmartCardCryptogramPlacementStep);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramPlacementStep = __uuidof(ISmartCardCryptogramPlacementStep);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5934,7 +5934,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyCharacteristics = _uuidof(ISmartCardCryptogramStorageKeyCharacteristics);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyCharacteristics = __uuidof(ISmartCardCryptogramStorageKeyCharacteristics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -5988,7 +5988,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyInfo = _uuidof(ISmartCardCryptogramStorageKeyInfo);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyInfo = __uuidof(ISmartCardCryptogramStorageKeyInfo);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6024,7 +6024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyInfo2 = _uuidof(ISmartCardCryptogramStorageKeyInfo2);
+                MIDL_CONST_ID IID& IID_ISmartCardCryptogramStorageKeyInfo2 = __uuidof(ISmartCardCryptogramStorageKeyInfo2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6060,7 +6060,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulator = _uuidof(ISmartCardEmulator);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulator = __uuidof(ISmartCardEmulator);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6111,7 +6111,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulator2 = _uuidof(ISmartCardEmulator2);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulator2 = __uuidof(ISmartCardEmulator2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6157,7 +6157,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgs = _uuidof(ISmartCardEmulatorApduReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgs = __uuidof(ISmartCardEmulatorApduReceivedEventArgs);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6198,7 +6198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgs2 = _uuidof(ISmartCardEmulatorApduReceivedEventArgs2);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgs2 = __uuidof(ISmartCardEmulatorApduReceivedEventArgs2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6242,7 +6242,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgsWithCryptograms = _uuidof(ISmartCardEmulatorApduReceivedEventArgsWithCryptograms);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorApduReceivedEventArgsWithCryptograms = __uuidof(ISmartCardEmulatorApduReceivedEventArgsWithCryptograms);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6281,7 +6281,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorConnectionDeactivatedEventArgs = _uuidof(ISmartCardEmulatorConnectionDeactivatedEventArgs);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorConnectionDeactivatedEventArgs = __uuidof(ISmartCardEmulatorConnectionDeactivatedEventArgs);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6320,7 +6320,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorConnectionProperties = _uuidof(ISmartCardEmulatorConnectionProperties);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorConnectionProperties = __uuidof(ISmartCardEmulatorConnectionProperties);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6356,7 +6356,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics = _uuidof(ISmartCardEmulatorStatics);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics = __uuidof(ISmartCardEmulatorStatics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6403,7 +6403,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics2 = _uuidof(ISmartCardEmulatorStatics2);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics2 = __uuidof(ISmartCardEmulatorStatics2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6439,7 +6439,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics3 = _uuidof(ISmartCardEmulatorStatics3);
+                MIDL_CONST_ID IID& IID_ISmartCardEmulatorStatics3 = __uuidof(ISmartCardEmulatorStatics3);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6508,7 +6508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardPinPolicy = _uuidof(ISmartCardPinPolicy);
+                MIDL_CONST_ID IID& IID_ISmartCardPinPolicy = __uuidof(ISmartCardPinPolicy);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6542,7 +6542,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardPinResetDeferral = _uuidof(ISmartCardPinResetDeferral);
+                MIDL_CONST_ID IID& IID_ISmartCardPinResetDeferral = __uuidof(ISmartCardPinResetDeferral);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6587,7 +6587,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardPinResetRequest = _uuidof(ISmartCardPinResetRequest);
+                MIDL_CONST_ID IID& IID_ISmartCardPinResetRequest = __uuidof(ISmartCardPinResetRequest);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6639,7 +6639,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardProvisioning = _uuidof(ISmartCardProvisioning);
+                MIDL_CONST_ID IID& IID_ISmartCardProvisioning = __uuidof(ISmartCardProvisioning);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6675,7 +6675,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardProvisioning2 = _uuidof(ISmartCardProvisioning2);
+                MIDL_CONST_ID IID& IID_ISmartCardProvisioning2 = __uuidof(ISmartCardProvisioning2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6729,7 +6729,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardProvisioningStatics = _uuidof(ISmartCardProvisioningStatics);
+                MIDL_CONST_ID IID& IID_ISmartCardProvisioningStatics = __uuidof(ISmartCardProvisioningStatics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6775,7 +6775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardProvisioningStatics2 = _uuidof(ISmartCardProvisioningStatics2);
+                MIDL_CONST_ID IID& IID_ISmartCardProvisioningStatics2 = __uuidof(ISmartCardProvisioningStatics2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6837,7 +6837,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardReader = _uuidof(ISmartCardReader);
+                MIDL_CONST_ID IID& IID_ISmartCardReader = __uuidof(ISmartCardReader);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6881,7 +6881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardReaderStatics = _uuidof(ISmartCardReaderStatics);
+                MIDL_CONST_ID IID& IID_ISmartCardReaderStatics = __uuidof(ISmartCardReaderStatics);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6923,7 +6923,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails = _uuidof(ISmartCardTriggerDetails);
+                MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails = __uuidof(ISmartCardTriggerDetails);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -6968,7 +6968,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails2 = _uuidof(ISmartCardTriggerDetails2);
+                MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails2 = __uuidof(ISmartCardTriggerDetails2);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -7004,7 +7004,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails3 = _uuidof(ISmartCardTriggerDetails3);
+                MIDL_CONST_ID IID& IID_ISmartCardTriggerDetails3 = __uuidof(ISmartCardTriggerDetails3);
             } /* SmartCards */
         } /* Devices */
     } /* Windows */
@@ -7223,8 +7223,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Devices.SmartCards.SmartCardEmulatorContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics interface starting with version 2.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
  *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics2 interface starting with version 5.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
+ *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics interface starting with version 2.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.SmartCards.ISmartCardCryptogramGenerator ** Default Interface **
@@ -7618,8 +7618,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.SmartCards.ISmartCardProvisioning ** Default Interface **
@@ -19224,8 +19224,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Devices.SmartCards.SmartCardEmulatorContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics interface starting with version 2.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
  *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics2 interface starting with version 5.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
+ *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardCryptogramGeneratorStatics interface starting with version 2.0 of the Windows.Devices.SmartCards.SmartCardEmulatorContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.SmartCards.ISmartCardCryptogramGenerator ** Default Interface **
@@ -19619,8 +19619,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.SmartCards.ISmartCardProvisioningStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.SmartCards.ISmartCardProvisioning ** Default Interface **

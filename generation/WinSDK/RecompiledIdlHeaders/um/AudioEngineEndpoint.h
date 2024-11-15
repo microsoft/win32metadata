@@ -157,7 +157,8 @@ enum __MIDL___MIDL_itf_audioengineendpoint_0000_0000_0001
         eOffloadConnector	= ( eHostProcessConnector + 1 ) ,
         eLoopbackConnector	= ( eOffloadConnector + 1 ) ,
         eKeywordDetectorConnector	= ( eLoopbackConnector + 1 ) ,
-        eConnectorCount	= ( eKeywordDetectorConnector + 1 ) 
+        eLoopbackConnectorPostVolume	= ( eKeywordDetectorConnector + 1 ) ,
+        eConnectorCount	= ( eLoopbackConnectorPostVolume + 1 ) 
     } 	EndpointConnectorType;
 
 typedef struct AUDIO_ENDPOINT_SHARED_CREATE_PARAMS

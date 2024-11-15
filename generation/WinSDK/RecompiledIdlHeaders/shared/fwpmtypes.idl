@@ -88,7 +88,7 @@ cpp_quote("#define FWPM_NET_EVENT_KEYWORD_CAPABILITY_ALLOW   (0x00000008)")
 cpp_quote("#define FWPM_NET_EVENT_KEYWORD_CLASSIFY_ALLOW     (0x00000010)")
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 cpp_quote("#define FWPM_NET_EVENT_KEYWORD_PORT_SCANNING_DROP (0x00000020)")
-cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)")  
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 
 cpp_quote("#define FWPM_ENGINE_OPTION_PACKET_QUEUE_NONE (0x00000000)")
 cpp_quote("#define FWPM_ENGINE_OPTION_PACKET_QUEUE_INBOUND (0x00000001)")
@@ -268,7 +268,7 @@ typedef struct FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0_
 
 // Types of provider contexts that may be stored in BFE.
 // FWPM_NETWORK_CONNECTION_POLICY_CONTEXT was added in NTDDI_WIN10_NI, but cpp_quote doesn't
-// work in the middle of structs.   
+// work in the middle of structs.
 typedef [v1_enum] enum FWPM_PROVIDER_CONTEXT_TYPE_
 {
    FWPM_IPSEC_KEYING_CONTEXT,
@@ -843,13 +843,15 @@ cpp_quote("#define FWPM_FILTER_FLAG_SYSTEMOS_ONLY (0x00000100)")
 cpp_quote("#define FWPM_FILTER_FLAG_GAMEOS_ONLY (0x00000200)")
 // The filter is in silent mode
 cpp_quote("#define FWPM_FILTER_FLAG_SILENT_MODE (0x00000400)")
-// (used for s2s IPsec tunnel policies) 
+// (used for s2s IPsec tunnel policies)
 // Do not initiate IPsec acquire, if packet matches a IPsec policy from a filter with this flag
 cpp_quote("#define FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE   (0x00000800)")
 // The flag is reserved
 cpp_quote("#define FWPM_FILTER_FLAG_RESERVED0   (0x00001000)")
 // The flag is reserved
 cpp_quote("#define FWPM_FILTER_FLAG_RESERVED1   (0x00002000)")
+// The flag is reserved
+cpp_quote("#define FWPM_FILTER_FLAG_RESERVED2   (0x00004000)")
 
 
 
@@ -986,6 +988,24 @@ typedef struct FWPM_LAYER_STATISTICS0_
    UINT32 numCacheEntries;
 } FWPM_LAYER_STATISTICS0;
 
+typedef struct FWPM_LAYER_STATISTICS1_
+{
+   // layerId for the statistics
+   GUID layerId;
+   // number of classifications that returned permit
+   UINT32 classifyPermitCount;
+   // number of classifications that returned block
+   UINT32 classifyBlockCount;
+   // number of classifications that returned block via veto
+   UINT32 classifyVetoCount;
+   // number of cache entries
+   UINT32 numCacheEntries;
+   // number of filters
+   UINT32 filterCount;
+   // size of filters
+   UINT32 totalFilterSize;
+} FWPM_LAYER_STATISTICS1;
+
 typedef struct FWPM_STATISTICS0_
 {
    UINT32 numLayerStatistics;
@@ -1025,6 +1045,46 @@ typedef struct FWPM_STATISTICS0_
    UINT64 reauthReasonEDPPolicyChanged;
    UINT64 reauthReasonProxyHandleChanged;
 } FWPM_STATISTICS0;
+
+typedef struct FWPM_STATISTICS1_
+{
+   UINT32 numLayerStatistics;
+   [size_is(numLayerStatistics), ref] FWPM_LAYER_STATISTICS1* layerStatistics;
+   UINT32 inboundAllowedConnectionsV4;
+   UINT32 inboundBlockedConnectionsV4;
+   UINT32 outboundAllowedConnectionsV4;
+   UINT32 outboundBlockedConnectionsV4;
+   UINT32 inboundAllowedConnectionsV6;
+   UINT32 inboundBlockedConnectionsV6;
+   UINT32 outboundAllowedConnectionsV6;
+   UINT32 outboundBlockedConnectionsV6;
+   UINT32 inboundActiveConnectionsV4;
+   UINT32 outboundActiveConnectionsV4;
+   UINT32 inboundActiveConnectionsV6;
+   UINT32 outboundActiveConnectionsV6;
+   UINT64 reauthDirInbound;
+   UINT64 reauthDirOutbound;
+   UINT64 reauthFamilyV4;
+   UINT64 reauthFamilyV6;
+   UINT64 reauthProtoOther;
+   UINT64 reauthProtoIPv4;
+   UINT64 reauthProtoIPv6;
+   UINT64 reauthProtoICMP;
+   UINT64 reauthProtoICMP6;
+   UINT64 reauthProtoUDP;
+   UINT64 reauthProtoTCP;
+   UINT64 reauthReasonPolicyChange;
+   UINT64 reauthReasonNewArrivalInterface;
+   UINT64 reauthReasonNewNextHopInterface;
+   UINT64 reauthReasonProfileCrossing;
+   UINT64 reauthReasonClassifyCompletion;
+   UINT64 reauthReasonIPSecPropertiesChanged;
+   UINT64 reauthReasonMidStreamInspection;
+   UINT64 reauthReasonSocketPropertyChanged;
+   UINT64 reauthReasonNewInboundMCastBCastPacket;
+   UINT64 reauthReasonEDPPolicyChanged;
+   UINT64 reauthReasonProxyHandleChanged;
+} FWPM_STATISTICS1;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1366,7 +1426,7 @@ typedef struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE1_
       LPWSTR* remotePrincipalGroupSids;
 } FWPM_NET_EVENT_IKEEXT_MM_FAILURE1;
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)") 
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)")
 // Version-2 of event specific data for FWPM_NET_EVENT_TYPE_IKEEXT_MM_FAILURE.
 typedef struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_
 {
@@ -1445,7 +1505,7 @@ typedef struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_
    // Quick mode filter ID
    UINT64 qmFilterId;
 } FWPM_NET_EVENT_IKEEXT_QM_FAILURE0;
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)")  
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)")
 // Version-1 Event-specific data for FWPM_NET_EVENT_TYPE_IKEEXT_QM_FAILURE.
 typedef struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_
 {
@@ -1482,7 +1542,7 @@ typedef struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_
    UINT64 mmSaLuid;
    GUID mmProviderContextKey;
 } FWPM_NET_EVENT_IKEEXT_QM_FAILURE1;
-cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_RS4)")  
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_RS4)")
 // Flag indicating that multiple IKE EM failure events have been reported that
 // should be correlated using the mmId field.
 cpp_quote("#define FWPM_NET_EVENT_IKEEXT_EM_FAILURE_FLAG_MULTIPLE (0x00000001)")
@@ -1835,7 +1895,7 @@ typedef struct FWPM_NET_EVENT3_
 } FWPM_NET_EVENT3;
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)")
 
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)")  
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS4)")
 // Version-4 of consolidated event struct for all event types.
 typedef struct FWPM_NET_EVENT4_
 {
@@ -1869,9 +1929,9 @@ typedef struct FWPM_NET_EVENT4_
          [unique] FWPM_NET_EVENT_CLASSIFY_DROP_MAC0* classifyDropMac;
    };
 } FWPM_NET_EVENT4;
-cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WIN10_RS4)")  
+cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WIN10_RS4)")
 
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)") //NTDDI_WIN10_RS5 
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)") //NTDDI_WIN10_RS5
 // NOTE: If FWPM_NET_EVENT is being updated, you MUST update FWPM_NET_EVENT_INTERNAL in fwpptypes.idl
 // so that the first part of the _INTERNAL struct exactly matches the current FWPM_NET_EVENT
 // Version-4 of consolidated event struct for all event types.
@@ -1909,7 +1969,7 @@ typedef struct FWPM_NET_EVENT5_
          [unique] FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0* lpmPacketArrival;
    };
 } FWPM_NET_EVENT5;
-cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WIN10_RS5)") //NTDDI_WIN10_RS5 
+cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WIN10_RS5)") //NTDDI_WIN10_RS5
 
 // Template for filtering events. Supported filter conditions are:
 //    FWPM_CONDITION_IP_PROTOCOL

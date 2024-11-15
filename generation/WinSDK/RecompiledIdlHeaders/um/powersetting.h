@@ -140,12 +140,14 @@ PowerSettingUnregisterNotification(
 
 typedef enum EFFECTIVE_POWER_MODE {
     EffectivePowerModeBatterySaver,
+    EffectivePowerModeEnergySaverHighSavings = EffectivePowerModeBatterySaver,
     EffectivePowerModeBetterBattery,
+    EffectivePowerModeEnergySaverStandard = EffectivePowerModeBetterBattery,
     EffectivePowerModeBalanced,
     EffectivePowerModeHighPerformance,
-    EffectivePowerModeMaxPerformance, // v1 last supported
+    EffectivePowerModeMaxPerformance,   // v1 last supported
     EffectivePowerModeGameMode,
-    EffectivePowerModeMixedReality, // v2 last supported
+    EffectivePowerModeMixedReality      // v2 last supported
 } EFFECTIVE_POWER_MODE;
 
 #define EFFECTIVE_POWER_MODE_V1 (0x00000001)
@@ -156,7 +158,7 @@ VOID
 WINAPI
 EFFECTIVE_POWER_MODE_CALLBACK (
     _In_ EFFECTIVE_POWER_MODE Mode,
-    _In_opt_ VOID *Context
+    _In_opt_ VOID* Context
     );
 #endif
 
@@ -168,8 +170,8 @@ WINAPI
 PowerRegisterForEffectivePowerModeNotifications(
     _In_ ULONG Version,
     _In_ EFFECTIVE_POWER_MODE_CALLBACK* Callback,
-    _In_opt_ VOID* Context,
-    _Outptr_ VOID** RegistrationHandle
+    _In_opt_ PVOID Context,
+    _Outptr_ PVOID* RegistrationHandle
     );
 #endif
 
@@ -178,7 +180,7 @@ PowerRegisterForEffectivePowerModeNotifications(
 HRESULT
 WINAPI
 PowerUnregisterFromEffectivePowerModeNotifications(
-    _In_ VOID* RegistrationHandle
+    _In_ PVOID RegistrationHandle
     );
 #endif
 

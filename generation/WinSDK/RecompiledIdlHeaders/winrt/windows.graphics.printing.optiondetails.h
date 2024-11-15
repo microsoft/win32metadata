@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1079,7 +1079,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintBindingOptionDetails = _uuidof(IPrintBindingOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintBindingOptionDetails = __uuidof(IPrintBindingOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1126,7 +1126,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintBorderingOptionDetails = _uuidof(IPrintBorderingOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintBorderingOptionDetails = __uuidof(IPrintBorderingOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1173,7 +1173,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCollationOptionDetails = _uuidof(IPrintCollationOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCollationOptionDetails = __uuidof(IPrintCollationOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1220,7 +1220,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintColorModeOptionDetails = _uuidof(IPrintColorModeOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintColorModeOptionDetails = __uuidof(IPrintColorModeOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1267,7 +1267,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCopiesOptionDetails = _uuidof(IPrintCopiesOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCopiesOptionDetails = __uuidof(IPrintCopiesOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1311,7 +1311,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomItemDetails = _uuidof(IPrintCustomItemDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCustomItemDetails = __uuidof(IPrintCustomItemDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1355,7 +1355,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails = _uuidof(IPrintCustomItemListOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails = __uuidof(IPrintCustomItemListOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1396,7 +1396,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails2 = _uuidof(IPrintCustomItemListOptionDetails2);
+                    MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails2 = __uuidof(IPrintCustomItemListOptionDetails2);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1443,7 +1443,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails3 = _uuidof(IPrintCustomItemListOptionDetails3);
+                    MIDL_CONST_ID IID& IID_IPrintCustomItemListOptionDetails3 = __uuidof(IPrintCustomItemListOptionDetails3);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1485,7 +1485,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomOptionDetails = _uuidof(IPrintCustomOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCustomOptionDetails = __uuidof(IPrintCustomOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1530,7 +1530,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomTextOptionDetails = _uuidof(IPrintCustomTextOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCustomTextOptionDetails = __uuidof(IPrintCustomTextOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1577,7 +1577,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomTextOptionDetails2 = _uuidof(IPrintCustomTextOptionDetails2);
+                    MIDL_CONST_ID IID& IID_IPrintCustomTextOptionDetails2 = __uuidof(IPrintCustomTextOptionDetails2);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1624,7 +1624,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintCustomToggleOptionDetails = _uuidof(IPrintCustomToggleOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintCustomToggleOptionDetails = __uuidof(IPrintCustomToggleOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1671,7 +1671,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintDuplexOptionDetails = _uuidof(IPrintDuplexOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintDuplexOptionDetails = __uuidof(IPrintDuplexOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1718,7 +1718,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintHolePunchOptionDetails = _uuidof(IPrintHolePunchOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintHolePunchOptionDetails = __uuidof(IPrintHolePunchOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1757,7 +1757,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintItemListOptionDetails = _uuidof(IPrintItemListOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintItemListOptionDetails = __uuidof(IPrintItemListOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1804,7 +1804,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintMediaSizeOptionDetails = _uuidof(IPrintMediaSizeOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintMediaSizeOptionDetails = __uuidof(IPrintMediaSizeOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1851,7 +1851,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintMediaTypeOptionDetails = _uuidof(IPrintMediaTypeOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintMediaTypeOptionDetails = __uuidof(IPrintMediaTypeOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1893,7 +1893,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintNumberOptionDetails = _uuidof(IPrintNumberOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintNumberOptionDetails = __uuidof(IPrintNumberOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1951,7 +1951,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintOptionDetails = _uuidof(IPrintOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintOptionDetails = __uuidof(IPrintOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -1998,7 +1998,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintOrientationOptionDetails = _uuidof(IPrintOrientationOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintOrientationOptionDetails = __uuidof(IPrintOrientationOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2045,7 +2045,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintPageRangeOptionDetails = _uuidof(IPrintPageRangeOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintPageRangeOptionDetails = __uuidof(IPrintPageRangeOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2092,7 +2092,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintQualityOptionDetails = _uuidof(IPrintQualityOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintQualityOptionDetails = __uuidof(IPrintQualityOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2139,7 +2139,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintStapleOptionDetails = _uuidof(IPrintStapleOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintStapleOptionDetails = __uuidof(IPrintStapleOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2177,7 +2177,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintTaskOptionChangedEventArgs = _uuidof(IPrintTaskOptionChangedEventArgs);
+                    MIDL_CONST_ID IID& IID_IPrintTaskOptionChangedEventArgs = __uuidof(IPrintTaskOptionChangedEventArgs);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2239,7 +2239,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintTaskOptionDetails = _uuidof(IPrintTaskOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintTaskOptionDetails = __uuidof(IPrintTaskOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2279,7 +2279,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintTaskOptionDetails2 = _uuidof(IPrintTaskOptionDetails2);
+                    MIDL_CONST_ID IID& IID_IPrintTaskOptionDetails2 = __uuidof(IPrintTaskOptionDetails2);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2318,7 +2318,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintTaskOptionDetailsStatic = _uuidof(IPrintTaskOptionDetailsStatic);
+                    MIDL_CONST_ID IID& IID_IPrintTaskOptionDetailsStatic = __uuidof(IPrintTaskOptionDetailsStatic);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */
@@ -2357,7 +2357,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPrintTextOptionDetails = _uuidof(IPrintTextOptionDetails);
+                    MIDL_CONST_ID IID& IID_IPrintTextOptionDetails = __uuidof(IPrintTextOptionDetails);
                 } /* OptionDetails */
             } /* Printing */
         } /* Graphics */

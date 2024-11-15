@@ -5,6 +5,7 @@
 <IncludeRoot>/shared/usbiodef.h
 <IncludeRoot>/shared/usbspec.h
 <IncludeRoot>/shared/usb.h
+<IncludeRoot>/shared/usb4dbgioctl.h
 <IncludeRoot>/um/usb.h
 <IncludeRoot>/um/winusb.h
 <IncludeRoot>/shared/usbfnbase.h

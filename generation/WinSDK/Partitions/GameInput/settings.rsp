@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/GameInput.h
+--namespace
+Windows.Win32.UI.Input.GameInput

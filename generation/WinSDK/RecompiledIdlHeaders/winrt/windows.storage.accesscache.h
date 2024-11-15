@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -726,7 +726,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IItemRemovedEventArgs = _uuidof(IItemRemovedEventArgs);
+                MIDL_CONST_ID IID& IID_IItemRemovedEventArgs = __uuidof(IItemRemovedEventArgs);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */
@@ -765,7 +765,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStorageApplicationPermissionsStatics = _uuidof(IStorageApplicationPermissionsStatics);
+                MIDL_CONST_ID IID& IID_IStorageApplicationPermissionsStatics = __uuidof(IStorageApplicationPermissionsStatics);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */
@@ -806,7 +806,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStorageApplicationPermissionsStatics2 = _uuidof(IStorageApplicationPermissionsStatics2);
+                MIDL_CONST_ID IID& IID_IStorageApplicationPermissionsStatics2 = __uuidof(IStorageApplicationPermissionsStatics2);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */
@@ -900,7 +900,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStorageItemAccessList = _uuidof(IStorageItemAccessList);
+                MIDL_CONST_ID IID& IID_IStorageItemAccessList = __uuidof(IStorageItemAccessList);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */
@@ -943,7 +943,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStorageItemMostRecentlyUsedList = _uuidof(IStorageItemMostRecentlyUsedList);
+                MIDL_CONST_ID IID& IID_IStorageItemMostRecentlyUsedList = __uuidof(IStorageItemMostRecentlyUsedList);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */
@@ -992,7 +992,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IStorageItemMostRecentlyUsedList2 = _uuidof(IStorageItemMostRecentlyUsedList2);
+                MIDL_CONST_ID IID& IID_IStorageItemMostRecentlyUsedList2 = __uuidof(IStorageItemMostRecentlyUsedList2);
             } /* AccessCache */
         } /* Storage */
     } /* Windows */

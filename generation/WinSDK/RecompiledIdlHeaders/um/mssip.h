@@ -109,6 +109,7 @@ typedef struct SIP_SUBJECTINFO_
 #   define                          MSSIP_ADDINFO_FLAT          1
 #   define                          MSSIP_ADDINFO_CATMEMBER     2
 #   define                          MSSIP_ADDINFO_BLOB          3
+#   define                          MSSIP_ADDINFO_DETACHEDSIG   4
 #   define                          MSSIP_ADDINFO_NONMSSIP      500 // everything < is reserved by MS.
 
     union
@@ -116,6 +117,7 @@ typedef struct SIP_SUBJECTINFO_
         struct MS_ADDINFO_FLAT_             *psFlat;
         struct MS_ADDINFO_CATALOGMEMBER_    *psCatMember;
         struct MS_ADDINFO_BLOB_             *psBlob;
+        struct MS_ADDINFO_DETACHEDSIG_      *psDetachedSig;
     };
 
     LPVOID                      pClientData;    // data pased in from client to SIP
@@ -166,6 +168,21 @@ typedef struct MS_ADDINFO_BLOB_
 
 } MS_ADDINFO_BLOB, *PMS_ADDINFO_BLOB;
 
+//////////////////////////////////////////////////////////////////////////////
+//
+// MS_ADDINFO_DETACHEDSIG
+//----------------------------------------------------------------------------
+//  PKCS7 detached signed data option
+//
+typedef struct MS_ADDINFO_DETACHEDSIG_
+{
+    DWORD                       cbStruct;
+    HANDLE                      hSignatureFile;
+
+    DWORD                       cbSignatureObject;
+    BYTE                        *pbSignatureObject;
+
+} MS_ADDINFO_DETACHEDSIG, *PMS_ADDINFO_DETACHEDSIG;
 
 
 //////////////////////////////////////////////////////////////////////////////

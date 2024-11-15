@@ -3188,25 +3188,51 @@ Return Value:
 #define DNS_SETTING_DOH_PROFILE                   0x2000
 #define DNS_SETTING_ENCRYPTED_DNS_ADAPTER_FLAGS   0x4000
 #define DNS_SETTING_DDR                           0x8000
+#define DNS_SETTING_DOT                           0x10000
+#define DNS_SETTING_DOT_PROFILE                   0x20000
 
 #define DNS_ENABLE_DOH                            0x0001
+
 #define DNS_DOH_POLICY_NOT_CONFIGURED             0x0004
 #define DNS_DOH_POLICY_DISABLE                    0x0008
 #define DNS_DOH_POLICY_AUTO                       0x0010
 #define DNS_DOH_POLICY_REQUIRED                   0x0020
+
+//
+//  For backwards compatibility reasons, we need to keep the old names as well.
+//
+
+#define DNS_ENCRYPTION_POLICY_NOT_CONFIGURED      DNS_DOH_POLICY_NOT_CONFIGURED
+#define DNS_ENCRYPTION_POLICY_DISABLE             DNS_DOH_POLICY_DISABLE
+#define DNS_ENCRYPTION_POLICY_AUTO                DNS_DOH_POLICY_AUTO
+#define DNS_ENCRYPTION_POLICY_REQUIRED            DNS_DOH_POLICY_REQUIRED
+
 #define DNS_ENABLE_DDR                            0x0040
+#define DNS_ENABLE_DOT                            0x0080
+#define DNS_DOT_POLICY_BLOCK                      0x0100
+#define DNS_DOH_POLICY_BLOCK                      0x0200
+#define DNS_ENABLE_DNR                            0x0400
 
 #define DNS_SERVER_PROPERTY_VERSION1              0x0001
 
-#define DNS_DOH_SERVER_SETTINGS_ENABLE_AUTO       0x0001
-#define DNS_DOH_SERVER_SETTINGS_ENABLE            0x0002
-#define DNS_DOH_SERVER_SETTINGS_FALLBACK_TO_UDP   0x0004
+#define DNS_DOH_SERVER_SETTINGS_ENABLE_AUTO                         0x0001
+#define DNS_DOH_SERVER_SETTINGS_ENABLE                              0x0002
+#define DNS_DOH_SERVER_SETTINGS_FALLBACK_TO_UDP                     0x0004
+#define DNS_DOH_AUTO_UPGRADE_SERVER                                 0x0008
+#define DNS_DOH_SERVER_SETTINGS_ENABLE_DDR                          0x0010
+#define DNS_DOH_SERVER_SETTINGS_MAKE_DDR_NON_BLOCKING               0x0020
 
-#define DNS_DOH_AUTO_UPGRADE_SERVER               0x0008
-#define DNS_DOH_SERVER_SETTINGS_ENABLE_DDR        0x0010
+#define DNS_DOT_SERVER_SETTINGS_ENABLE                              0x0001
+#define DNS_DOT_SERVER_SETTINGS_FALLBACK_TO_UDP                     0x0002
+#define DNS_DOT_AUTO_UPGRADE_SERVER                                 0x0004
+#define DNS_DOT_SERVER_SETTINGS_ENABLE_AUTO                         0x0008
+#define DNS_DOT_SERVER_SETTINGS_ENABLE_DDR                          0x0010
+#define DNS_DOT_SERVER_SETTINGS_MAKE_DDR_NON_BLOCKING               0x0020
 
 #define DNS_DDR_ADAPTER_ENABLE_DOH                0x0001
+#define DNS_DDR_ADAPTER_ENABLE                    DNS_DDR_ADAPTER_ENABLE_DOH
 #define DNS_DDR_ADAPTER_ENABLE_UDP_FALLBACK       0x0002
+#define DNS_DDR_ADAPTER_MAKE_DDR_NON_BLOCKING     0x0004
 
 typedef struct _DNS_SETTINGS
 {
@@ -3237,21 +3263,36 @@ typedef struct _DNS_DOH_SERVER_SETTINGS
     ULONG64 Flags;
 } DNS_DOH_SERVER_SETTINGS;
 
+typedef struct _DNS_DOT_SERVER_SETTINGS
+{
+#ifdef MIDL_PASS
+    [unique, string] PWSTR Hostname;
+#else
+    PWSTR Hostname;
+#endif
+
+    ULONG64 Flags;
+    USHORT Port;
+} DNS_DOT_SERVER_SETTINGS;
+
 typedef enum _DNS_SERVER_PROPERTY_TYPE
 {
     DnsServerInvalidProperty = 0,
     DnsServerDohProperty,
+    DnsServerDotProperty
 } DNS_SERVER_PROPERTY_TYPE;
 
 #ifdef MIDL_PASS
 typedef [switch_type(DNS_SERVER_PROPERTY_TYPE)] union _DNS_SERVER_PROPERTY_TYPES
 {
     [case(DnsServerDohProperty)] [unique] DNS_DOH_SERVER_SETTINGS *DohSettings;
+    [case(DnsServerDotProperty)] [unique] DNS_DOT_SERVER_SETTINGS *DotSettings;
 } DNS_SERVER_PROPERTY_TYPES;
 #else
 typedef union _DNS_SERVER_PROPERTY_TYPES
 {
     DNS_DOH_SERVER_SETTINGS *DohSettings;
+    DNS_DOT_SERVER_SETTINGS *DotSettings;
 } DNS_SERVER_PROPERTY_TYPES;
 #endif
 
@@ -3584,6 +3625,291 @@ Notes:
     2. Use CancelMibChangeNotify2 to deregister for change notifications.
 
 --*/
+
+#ifdef _WS2DEF_
+
+//
+// FL virtual interface routines.
+//
+
+typedef enum _NET_FL_VIRTUAL_INTERFACE_ORIGIN {
+    NetFlVirtualInterfaceOriginOid,
+    NetFlVirtualInterfaceOriginApi,
+    NetFlVirtualInterfaceOriginDefault,
+} NET_FL_VIRTUAL_INTERFACE_ORIGIN;
+
+typedef enum _NET_FL_ISOLATION_MODE {
+    NetFlIsolationModeNone,
+    NetFlIsolationModeVlan,
+    NetFlIsolationModeVsid,
+} NET_FL_ISOLATION_MODE;
+
+typedef struct _MIB_FL_VIRTUAL_INTERFACE_ROW {
+    //
+    // Key fields.
+    //
+
+    ADDRESS_FAMILY Family;
+    IF_LUID IfLuid;
+    ULONG VirtualIfId;
+
+    //
+    // Mandatory fields for create, read-only for existing entries.
+    //
+    GUID CompartmentGuid;
+    NET_FL_ISOLATION_MODE IsolationMode;
+
+    //
+    // Read-only fields.
+    //
+
+    NET_FL_VIRTUAL_INTERFACE_ORIGIN Origin;
+    IF_LUID VirtualIfLuid;
+    IF_INDEX VirtualIfIndex;
+
+    //
+    // Read-Write fields.
+    //
+
+    BOOLEAN AllowLocalNd;
+
+    //
+    // Statistics.
+    //
+    ULONG AttachedFlsnpiClients;
+    ULONG FlsnpiClientConfigErrors;
+    ULONG64 FlsnpiClientInjectErrors;
+    ULONG64 FlsnpiClientCloneErrors;
+    ULONG64 InFlsnpiIndicatedPackets;
+    ULONG64 InFlsnpiClientReturnedPackets;
+    ULONG64 InFlsnpiClientSilentlyDroppedPackets;
+    ULONG64 InFlsnpiClientDroppedPackets;
+    ULONG64 InFlsnpiClientInjectedPackets;
+    ULONG64 InFlsnpiClientClonedPackets;
+    ULONG64 OutFlsnpiIndicatedPackets;
+    ULONG64 OutFlsnpiClientReturnedPackets;
+    ULONG64 OutFlsnpiClientDroppedPackets;
+    ULONG64 OutFlsnpiClientSilentlyDroppedPackets;
+    ULONG64 OutFlsnpiClientInjectedPackets;
+    ULONG64 OutFlsnpiClientClonedPackets;
+    ULONG64 OutFlsnpiClientClonedPacketsForNbSplit;
+} MIB_FL_VIRTUAL_INTERFACE_ROW, *PMIB_FL_VIRTUAL_INTERFACE_ROW;
+
+typedef struct _MIB_FL_VIRTUAL_INTERFACE_TABLE {
+    ULONG NumEntries;
+    MIB_FL_VIRTUAL_INTERFACE_ROW Table[ANY_SIZE];
+} MIB_FL_VIRTUAL_INTERFACE_TABLE, *PMIB_FL_VIRTUAL_INTERFACE_TABLE;
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+CreateFlVirtualInterface(
+    _In_ CONST MIB_FL_VIRTUAL_INTERFACE_ROW *Row
+    );
+/*++
+
+Routine Description:
+
+    Create an FL virtual interface on the local computer.
+
+Arguments:
+
+    Row - Supplies a MIB_FL_VIRTUAL_INTERFACE_ROW structure.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+Notes:
+
+    InitializeFlVirtualInterfaceEntry must be used to initialize the fields of
+    MIB_FL_VIRTUAL_INTERFACE_ROW with default values.
+
+    On input, the following fields of Row must be set:
+
+    1. Family.
+    2. IfLuid.
+    3. VirtualIfId.
+    4. CompartmentGuid.
+    5. IsolationMode.
+
+    Optionally, any read/write field may also be set.
+
+--*/
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+DeleteFlVirtualInterface(
+    _In_ CONST MIB_FL_VIRTUAL_INTERFACE_ROW *Row
+    );
+/*++
+
+Routine Description:
+
+    Delete an FL virtual interface on the local computer.
+
+Arguments:
+
+    Row - Supplies a MIB_FL_VIRTUAL_INTERFACE_ROW structure.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+Notes:
+
+    On input, the following key fields of Row must be initialized:
+    1. Family.
+    2. IfLuid.
+    3. VirtualIfId.
+
+--*/
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+VOID
+InitializeFlVirtualInterfaceEntry(
+    _Out_ PMIB_FL_VIRTUAL_INTERFACE_ROW Row
+    );
+/*++
+
+Routine Description:
+
+    Initialize an MIB_FL_VIRTUAL_INTERFACE_ROW entry.
+
+Arguments:
+
+    Row - The MIB_FL_VIRTUAL_INTERFACE_ROW entry to initialize.
+
+Return Value:
+
+    None.
+
+--*/
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+SetFlVirtualInterface(
+    _In_ CONST MIB_FL_VIRTUAL_INTERFACE_ROW *Row
+    );
+/*++
+
+Routine Description:
+
+    Sets information for the specified FL virtual interface on the local
+    computer.
+
+Arguments:
+
+    Row - Supplies a PMIB_FL_VIRTUAL_INTERFACE_ROW structure.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+Notes:
+
+    InitializeFlVirtualInterfaceEntry must be used to initialize the fields of
+    MIB_FL_VIRTUAL_INTERFACE_ROW with default values.  The caller can then
+    update the fields it wishes to modify and invoke SetFlVirtualInterface.
+
+    On input, the following key fields of Row must be initialized:
+    1. Family.
+    2. IfLuid.
+    3. VirtualIfId.
+
+    The FL virtual interface is updated the with value of any modified
+    read-write field.
+
+--*/
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+GetFlVirtualInterface(
+    _Inout_ PMIB_FL_VIRTUAL_INTERFACE_ROW Row
+    );
+/*++
+
+Routine Description:
+
+    Retrieves information for the specified FL virtual interface on the local
+    computer.
+
+Arguments:
+
+    Row - Supplies a PMIB_FL_VIRTUAL_INTERFACE_ROW structure.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+Notes:
+
+    On input, the following key fields of Row must be initialized:
+    1. Family.
+    2. IfLuid.
+    3. VirtualIfId.
+
+    On output, the remaining fields of Row are filled in.
+
+--*/
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+GetFlVirtualInterfaceTable(
+    _In_ ADDRESS_FAMILY Family,
+    _Outptr_ PMIB_FL_VIRTUAL_INTERFACE_TABLE *Table
+    );
+/*++
+
+Routine Description:
+
+    Retrieves the FL virtual interface table on a local computer.
+
+Arguments:
+
+    Family - Supplies the address family.
+
+        AF_INET: Only returns IPv4 FL virtual interfaces.
+
+        AF_INET6: Only returns IPv6 FL virtual interfaces.
+
+        AF_UNSPEC: Returns both IPv4 and IPv6 FL virtual interfaces.
+
+    Table - Returns the table of FL virtual interfaces in a
+        PMIB_FL_VIRTUAL_INTERFACE_TABLE structure.  Use FreeMibTable to free this
+        buffer.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+Notes:
+
+    The API allocates the buffer for Table. Use FreeMibTable to free it.
+
+--*/
+
+#endif // _WS2DEF_
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

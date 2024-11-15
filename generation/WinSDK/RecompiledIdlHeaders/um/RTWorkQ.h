@@ -25,7 +25,7 @@
 typedef void (__stdcall *RTWQPERIODICCALLBACK)(IUnknown* context);
 typedef unsigned __int64 RTWQWORKITEM_KEY;
 
-#define RTWQ_E_ERROR(x)            ((HRESULT)(0xc000d0000L+x))
+#define RTWQ_E_ERROR(x)            ((HRESULT)(0xc00d0000L+x))
 
 #define RTWQ_E_BUFFERTOOSMALL      RTWQ_E_ERROR(14001)
 #define RTWQ_E_NOT_INITIALIZED     RTWQ_E_ERROR(14006)

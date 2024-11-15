@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x40000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_LOCKSCREENCALLCONTRACT_VERSION)
@@ -104,7 +104,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -372,7 +372,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOrigin = _uuidof(IPhoneCallOrigin);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOrigin = __uuidof(IPhoneCallOrigin);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -425,7 +425,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOrigin2 = _uuidof(IPhoneCallOrigin2);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOrigin2 = __uuidof(IPhoneCallOrigin2);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -479,7 +479,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOrigin3 = _uuidof(IPhoneCallOrigin3);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOrigin3 = __uuidof(IPhoneCallOrigin3);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -534,7 +534,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics = _uuidof(IPhoneCallOriginManagerStatics);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics = __uuidof(IPhoneCallOriginManagerStatics);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -581,7 +581,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics2 = _uuidof(IPhoneCallOriginManagerStatics2);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics2 = __uuidof(IPhoneCallOriginManagerStatics2);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -625,7 +625,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics3 = _uuidof(IPhoneCallOriginManagerStatics3);
+                    MIDL_CONST_ID IID& IID_IPhoneCallOriginManagerStatics3 = __uuidof(IPhoneCallOriginManagerStatics3);
                 } /* Provider */
             } /* Calls */
         } /* ApplicationModel */
@@ -673,8 +673,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1480,8 +1480,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

@@ -61,6 +61,8 @@ namespace Windows
     {
         typedef struct DisplayId DisplayId;
 
+        typedef struct RectInt32 RectInt32;
+
         typedef struct SizeInt32 SizeInt32;
     }
 }
@@ -109,7 +111,11 @@ namespace Windows
         {
             typedef enum GraphicsCaptureAccessKind GraphicsCaptureAccessKind;
 
+            typedef enum GraphicsCaptureDirtyRegionMode GraphicsCaptureDirtyRegionMode;
+
             interface IDirect3D11CaptureFrame;
+
+            interface IDirect3D11CaptureFrame2;
 
             interface IDirect3D11CaptureFramePool;
 
@@ -132,6 +138,12 @@ namespace Windows
             interface IGraphicsCaptureSession2;
 
             interface IGraphicsCaptureSession3;
+
+            interface IGraphicsCaptureSession4;
+
+            interface IGraphicsCaptureSession5;
+
+            interface IGraphicsCaptureSession6;
 
             interface IGraphicsCaptureSessionStatics;
 
@@ -183,6 +195,13 @@ namespace Windows
                 Programmatic = 1
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum GraphicsCaptureDirtyRegionMode
+            {
+                ReportOnly      = 0,
+                ReportAndRender = 1
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
             [exclusiveto(Windows.Graphics.Capture.Direct3D11CaptureFrame)]
             [uuid(FA50C623-38DA-4B32-ACF3-FA9734AD800E)]
@@ -191,6 +210,15 @@ namespace Windows
                 [propget] HRESULT Surface([out] [retval] Windows.Graphics.DirectX.Direct3D11.IDirect3DSurface** value);
                 [propget] HRESULT SystemRelativeTime([out] [retval] Windows.Foundation.TimeSpan* value);
                 [propget] HRESULT ContentSize([out] [retval] Windows.Graphics.SizeInt32* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Graphics.Capture.Direct3D11CaptureFrame)]
+            [uuid(37869CFA-2B48-5EBF-9AFB-DFFD805DEFDB)]
+            interface IDirect3D11CaptureFrame2 : IInspectable
+            {
+                [propget] HRESULT DirtyRegions([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Graphics.RectInt32>** value);
+                [propget] HRESULT DirtyRegionMode([out] [retval] Windows.Graphics.Capture.GraphicsCaptureDirtyRegionMode* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -292,6 +320,33 @@ namespace Windows
                 [propput] HRESULT IsBorderRequired([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Graphics.Capture.GraphicsCaptureSession)]
+            [uuid(AE99813C-C257-5759-8ED0-668C9B557ED4)]
+            interface IGraphicsCaptureSession4 : IInspectable
+            {
+                [propget] HRESULT DirtyRegionMode([out] [retval] Windows.Graphics.Capture.GraphicsCaptureDirtyRegionMode* value);
+                [propput] HRESULT DirtyRegionMode([in] Windows.Graphics.Capture.GraphicsCaptureDirtyRegionMode value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Graphics.Capture.GraphicsCaptureSession)]
+            [uuid(67C0EA62-1F85-5061-925A-239BE0AC09CB)]
+            interface IGraphicsCaptureSession5 : IInspectable
+            {
+                [propget] HRESULT MinUpdateInterval([out] [retval] Windows.Foundation.TimeSpan* value);
+                [propput] HRESULT MinUpdateInterval([in] Windows.Foundation.TimeSpan value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Graphics.Capture.GraphicsCaptureSession)]
+            [uuid(D7419236-BE20-5E9F-BCD6-C4E98FD6AFDC)]
+            interface IGraphicsCaptureSession6 : IInspectable
+            {
+                [propget] HRESULT IncludeSecondaryWindows([out] [retval] boolean* value);
+                [propput] HRESULT IncludeSecondaryWindows([in] boolean value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
             [exclusiveto(Windows.Graphics.Capture.GraphicsCaptureSession)]
             [uuid(2224A540-5974-49AA-B232-0882536F4CB5)]
@@ -305,6 +360,7 @@ namespace Windows
             runtimeclass Direct3D11CaptureFrame
             {
                 [default] interface Windows.Graphics.Capture.IDirect3D11CaptureFrame;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Capture.IDirect3D11CaptureFrame2;
                 interface Windows.Foundation.IClosable;
             }
 
@@ -355,6 +411,9 @@ namespace Windows
                 [default] interface Windows.Graphics.Capture.IGraphicsCaptureSession;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Graphics.Capture.IGraphicsCaptureSession2;
                 [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.Graphics.Capture.IGraphicsCaptureSession3;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Capture.IGraphicsCaptureSession4;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Capture.IGraphicsCaptureSession5;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Capture.IGraphicsCaptureSession6;
                 interface Windows.Foundation.IClosable;
             }
         }

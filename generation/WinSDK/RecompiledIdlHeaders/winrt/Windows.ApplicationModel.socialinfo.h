@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -649,7 +649,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialFeedChildItem = _uuidof(ISocialFeedChildItem);
+                MIDL_CONST_ID IID& IID_ISocialFeedChildItem = __uuidof(ISocialFeedChildItem);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */
@@ -721,7 +721,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialFeedContent = _uuidof(ISocialFeedContent);
+                MIDL_CONST_ID IID& IID_ISocialFeedContent = __uuidof(ISocialFeedContent);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */
@@ -877,7 +877,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialFeedItem = _uuidof(ISocialFeedItem);
+                MIDL_CONST_ID IID& IID_ISocialFeedItem = __uuidof(ISocialFeedItem);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */
@@ -967,7 +967,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialFeedSharedItem = _uuidof(ISocialFeedSharedItem);
+                MIDL_CONST_ID IID& IID_ISocialFeedSharedItem = __uuidof(ISocialFeedSharedItem);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */
@@ -1046,7 +1046,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialItemThumbnail = _uuidof(ISocialItemThumbnail);
+                MIDL_CONST_ID IID& IID_ISocialItemThumbnail = __uuidof(ISocialItemThumbnail);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */
@@ -1130,7 +1130,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISocialUserInfo = _uuidof(ISocialUserInfo);
+                MIDL_CONST_ID IID& IID_ISocialUserInfo = __uuidof(ISocialUserInfo);
             } /* SocialInfo */
         } /* ApplicationModel */
     } /* Windows */

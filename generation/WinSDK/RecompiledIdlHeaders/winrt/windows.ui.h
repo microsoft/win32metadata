@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -282,7 +282,7 @@ namespace ABI {
             public:
             };
 
-            extern MIDL_CONST_ID IID& IID_IColorHelper = _uuidof(IColorHelper);
+            MIDL_CONST_ID IID& IID_IColorHelper = __uuidof(IColorHelper);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -320,7 +320,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IColorHelperStatics = _uuidof(IColorHelperStatics);
+            MIDL_CONST_ID IID& IID_IColorHelperStatics = __uuidof(IColorHelperStatics);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -355,7 +355,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IColorHelperStatics2 = _uuidof(IColorHelperStatics2);
+            MIDL_CONST_ID IID& IID_IColorHelperStatics2 = __uuidof(IColorHelperStatics2);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -386,7 +386,7 @@ namespace ABI {
             public:
             };
 
-            extern MIDL_CONST_ID IID& IID_IColors = _uuidof(IColors);
+            MIDL_CONST_ID IID& IID_IColors = __uuidof(IColors);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -840,7 +840,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IColorsStatics = _uuidof(IColorsStatics);
+            MIDL_CONST_ID IID& IID_IColorsStatics = __uuidof(IColorsStatics);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -874,7 +874,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUIContentRoot = _uuidof(IUIContentRoot);
+            MIDL_CONST_ID IID& IID_IUIContentRoot = __uuidof(IUIContentRoot);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -905,7 +905,7 @@ namespace ABI {
             public:
             };
 
-            extern MIDL_CONST_ID IID& IID_IUIContext = _uuidof(IUIContext);
+            MIDL_CONST_ID IID& IID_IUIContext = __uuidof(IUIContext);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -921,8 +921,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CIUIContext;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.IColorHelper ** Default Interface **
@@ -2266,8 +2266,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CIUIContext;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.IColorHelper ** Default Interface **

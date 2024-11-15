@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <!-- These are here to support CommonUtils.ps1, which parses the .props file that nuget restore generates based on these. -->
-    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.22621.2428" GeneratePathProperty="true"/>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.22621.2428" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.26100.2161" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.26100.2161" GeneratePathProperty="true"/>
     <!-- Used by CommonUtils.ps1 to get the path to the last release .winmd -->
     <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="$(LastWin32MetadataReleaseVersion)" GeneratePathProperty="True">
       <PrivateAssets>all</PrivateAssets>

@@ -287,12 +287,12 @@ typedef struct _TRANSMIT_PACKETS_ELEMENT {
 typedef
 BOOL
 (PASCAL FAR * LPFN_TRANSMITPACKETS) (
-    _In_ SOCKET hSocket,      
-    _In_opt_ LPTRANSMIT_PACKETS_ELEMENT lpPacketArray,        
+    _In_ SOCKET hSocket,
+    _In_opt_ LPTRANSMIT_PACKETS_ELEMENT lpPacketArray,
     _In_ DWORD nElementCount,
     _In_ DWORD nSendSize,
     _Inout_opt_ LPOVERLAPPED lpOverlapped,
-    _In_ DWORD dwFlags        
+    _In_ DWORD dwFlags
     );
 
 #define WSAID_TRANSMITPACKETS \
@@ -540,7 +540,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIORECEIVE)(
     _In_reads_(DataBufferCount) PRIO_BUF pData,
     _In_ ULONG DataBufferCount,
     _In_ DWORD Flags,
-    _In_ PVOID RequestContext
+    _In_opt_ PVOID RequestContext
     );
 
 typedef int (PASCAL FAR * LPFN_RIORECEIVEEX)(
@@ -552,7 +552,7 @@ typedef int (PASCAL FAR * LPFN_RIORECEIVEEX)(
     _In_opt_ PRIO_BUF pControlContext,
     _In_opt_ PRIO_BUF pFlags,
     _In_ DWORD Flags,
-    _In_ PVOID RequestContext
+    _In_opt_ PVOID RequestContext
 );
 
 typedef BOOL (PASCAL FAR * LPFN_RIOSEND)(
@@ -560,7 +560,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIOSEND)(
     _In_reads_(DataBufferCount) PRIO_BUF pData,
     _In_ ULONG DataBufferCount,
     _In_ DWORD Flags,
-    _In_ PVOID RequestContext
+    _In_opt_ PVOID RequestContext
 );
 
 typedef BOOL (PASCAL FAR * LPFN_RIOSENDEX)(
@@ -572,7 +572,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIOSENDEX)(
     _In_opt_ PRIO_BUF pControlContext,
     _In_opt_ PRIO_BUF pFlags,
     _In_ DWORD Flags,
-    _In_ PVOID RequestContext
+    _In_opt_ PVOID RequestContext
 );
 
 typedef VOID (PASCAL FAR * LPFN_RIOCLOSECOMPLETIONQUEUE)(
@@ -617,7 +617,7 @@ typedef RIO_RQ (PASCAL FAR * LPFN_RIOCREATEREQUESTQUEUE)(
     _In_ ULONG MaxSendDataBuffers,
     _In_ RIO_CQ ReceiveCQ,
     _In_ RIO_CQ SendCQ,
-    _In_ PVOID SocketContext
+    _In_opt_ PVOID SocketContext
 );
 
 typedef ULONG (PASCAL FAR * LPFN_RIODEQUEUECOMPLETION)(

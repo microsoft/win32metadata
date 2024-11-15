@@ -80,6 +80,8 @@ namespace Windows
         namespace Core
         {
             runtimeclass KeyEventArgs;
+
+            runtimeclass PointerEventArgs;
         }
     }
 }
@@ -108,6 +110,10 @@ namespace Windows
             typedef enum RadialControllerMenuKnownIcon RadialControllerMenuKnownIcon;
 
             typedef enum RadialControllerSystemMenuItemKind RadialControllerSystemMenuItemKind;
+
+            typedef enum TouchpadGlobalAction TouchpadGlobalAction;
+
+            typedef enum TouchpadGlobalGestureKinds TouchpadGlobalGestureKinds;
 
             typedef struct CrossSlideThresholds CrossSlideThresholds;
 
@@ -167,7 +173,11 @@ namespace Windows
 
             interface IMouseWheelParameters;
 
+            interface IPhysicalGestureRecognizer;
+
             interface IPointerPoint;
+
+            interface IPointerPointPhysicalPosition;
 
             interface IPointerPointProperties;
 
@@ -251,6 +261,12 @@ namespace Windows
 
             interface ITappedEventArgs2;
 
+            interface ITouchpadGesturesController;
+
+            interface ITouchpadGesturesControllerStatics;
+
+            interface ITouchpadGlobalActionEventArgs;
+
             runtimeclass AttachableInputObject;
 
             runtimeclass CrossSlidingEventArgs;
@@ -280,6 +296,8 @@ namespace Windows
             runtimeclass ManipulationUpdatedEventArgs;
 
             runtimeclass MouseWheelParameters;
+
+            runtimeclass PhysicalGestureRecognizer;
 
             runtimeclass PointerPoint;
 
@@ -326,6 +344,10 @@ namespace Windows
             runtimeclass SystemFunctionLockIndicatorChangedEventArgs;
 
             runtimeclass TappedEventArgs;
+
+            runtimeclass TouchpadGesturesController;
+
+            runtimeclass TouchpadGlobalActionEventArgs;
         }
     }
 }
@@ -383,6 +405,16 @@ namespace Windows
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.InputActivationListener*, Windows.UI.Input.InputActivationListenerActivationChangedEventArgs*>;
 
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.HoldingEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationCompletedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationStartedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationUpdatedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.TappedEventArgs*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.RadialController*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.RadialController*, Windows.UI.Input.RadialControllerButtonClickedEventArgs*>;
@@ -408,6 +440,8 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.SystemButtonEventController*, Windows.UI.Input.SystemFunctionLockChangedEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.SystemButtonEventController*, Windows.UI.Input.SystemFunctionLockIndicatorChangedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Input.TouchpadGlobalActionEventArgs*>;
             }
         }
     }
@@ -537,6 +571,35 @@ namespace Windows
                 UndoRedo          = 2,
                 Volume            = 3,
                 NextPreviousTrack = 4
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            enum TouchpadGlobalAction
+            {
+                ThreeFingerTap       = 0,
+                FourFingerTap        = 1,
+                FiveFingerTap        = 2,
+                ThreeFingerPressDown = 3,
+                FourFingerPressDown  = 4,
+                FiveFingerPressDown  = 5,
+                ThreeFingerPressUp   = 6,
+                FourFingerPressUp    = 7,
+                FiveFingerPressUp    = 8
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [flags]
+            enum TouchpadGlobalGestureKinds
+            {
+                None                     = 0x0,
+                ThreeFingerManipulations = 0x1,
+                FourFingerManipulations  = 0x2,
+                FiveFingerManipulations  = 0x4,
+                ThreeFingerActions       = 0x8,
+                FourFingerActions        = 0x10,
+                FiveFingerActions        = 0x20
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -884,6 +947,47 @@ namespace Windows
                 [propput] HRESULT PageTranslation([in] Windows.Foundation.Point value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.PhysicalGestureRecognizer)]
+            [experimental]
+            [uuid(79A29F4D-32A6-5AA5-A999-42B0B420C66D)]
+            interface IPhysicalGestureRecognizer : IInspectable
+            {
+                [propget] HRESULT IsActive([out] [retval] boolean* value);
+                [propget] HRESULT GestureSettings([out] [retval] Windows.UI.Input.GestureSettings* value);
+                [propput] HRESULT GestureSettings([in] Windows.UI.Input.GestureSettings value);
+                [propget] HRESULT TapMinContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT TapMinContactCount([in] UINT32 value);
+                [propget] HRESULT TapMaxContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT TapMaxContactCount([in] UINT32 value);
+                [propget] HRESULT HoldMinContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT HoldMinContactCount([in] UINT32 value);
+                [propget] HRESULT HoldMaxContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT HoldMaxContactCount([in] UINT32 value);
+                [propget] HRESULT HoldRadius([out] [retval] FLOAT* value);
+                [propput] HRESULT HoldRadius([in] FLOAT value);
+                [propget] HRESULT HoldStartDelay([out] [retval] Windows.Foundation.TimeSpan* value);
+                [propput] HRESULT HoldStartDelay([in] Windows.Foundation.TimeSpan value);
+                [propget] HRESULT TranslationMinContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT TranslationMinContactCount([in] UINT32 value);
+                [propget] HRESULT TranslationMaxContactCount([out] [retval] UINT32* value);
+                [propput] HRESULT TranslationMaxContactCount([in] UINT32 value);
+                HRESULT ProcessDownEvent([in] Windows.UI.Input.PointerPoint* value);
+                HRESULT ProcessMoveEvents([in] Windows.Foundation.Collections.IVector<Windows.UI.Input.PointerPoint*>* value);
+                HRESULT ProcessUpEvent([in] Windows.UI.Input.PointerPoint* value);
+                HRESULT CompleteGesture();
+                [eventadd] HRESULT ManipulationStarted([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationStartedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT ManipulationStarted([in] EventRegistrationToken token);
+                [eventadd] HRESULT ManipulationUpdated([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationUpdatedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT ManipulationUpdated([in] EventRegistrationToken token);
+                [eventadd] HRESULT ManipulationCompleted([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.ManipulationCompletedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT ManipulationCompleted([in] EventRegistrationToken token);
+                [eventadd] HRESULT Tapped([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.TappedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Tapped([in] EventRegistrationToken token);
+                [eventadd] HRESULT Holding([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.PhysicalGestureRecognizer*, Windows.UI.Input.HoldingEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Holding([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.UI.Input.PointerPoint)]
             [uuid(E995317D-7296-42D9-8233-C5BE73B74A4A)]
@@ -897,6 +1001,15 @@ namespace Windows
                 [propget] HRESULT Timestamp([out] [retval] UINT64* value);
                 [propget] HRESULT IsInContact([out] [retval] boolean* value);
                 [propget] HRESULT Properties([out] [retval] Windows.UI.Input.PointerPointProperties** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.PointerPoint)]
+            [uuid(003185A3-A5E7-4859-9C0B-89340204806C)]
+            interface IPointerPointPhysicalPosition : IInspectable
+            {
+                [propget] HRESULT IsPhysicalPositionSupported([out] [retval] boolean* value);
+                [propget] HRESULT PhysicalPosition([out] [retval] Windows.Foundation.Point* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1328,6 +1441,46 @@ namespace Windows
                 [propget] HRESULT ContactCount([out] [retval] UINT32* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.TouchpadGesturesController)]
+            [experimental]
+            [uuid(28C13CDD-E068-549F-89C6-1A440C6FC327)]
+            interface ITouchpadGesturesController : IInspectable
+            {
+                [propget] HRESULT Enabled([out] [retval] boolean* value);
+                [propput] HRESULT Enabled([in] boolean value);
+                [propget] HRESULT SupportedGestures([out] [retval] Windows.UI.Input.TouchpadGlobalGestureKinds* value);
+                [propput] HRESULT SupportedGestures([in] Windows.UI.Input.TouchpadGlobalGestureKinds value);
+                [eventadd] HRESULT PointerPressed([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Core.PointerEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PointerPressed([in] EventRegistrationToken token);
+                [eventadd] HRESULT PointerMoved([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Core.PointerEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PointerMoved([in] EventRegistrationToken token);
+                [eventadd] HRESULT PointerReleased([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Core.PointerEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PointerReleased([in] EventRegistrationToken token);
+                [eventadd] HRESULT GlobalActionPerformed([in] Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Input.TouchpadGlobalActionEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT GlobalActionPerformed([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.TouchpadGesturesController)]
+            [experimental]
+            [uuid(207EF171-1A73-51CD-A694-8840E09DBAFA)]
+            interface ITouchpadGesturesControllerStatics : IInspectable
+            {
+                HRESULT IsSupported([out] [retval] boolean* result);
+                HRESULT CreateForProcess([out] [retval] Windows.UI.Input.TouchpadGesturesController** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.TouchpadGlobalActionEventArgs)]
+            [experimental]
+            [uuid(6EDAD206-E4E3-5F39-9D13-8575E8E2A12B)]
+            interface ITouchpadGlobalActionEventArgs : IInspectable
+            {
+                [propget] HRESULT Action([out] [retval] Windows.UI.Input.TouchpadGlobalAction* value);
+                [propget] HRESULT PointerDevice([out] [retval] Windows.Devices.Input.PointerDevice** value);
+            }
+
             [composable(Windows.UI.Input.IAttachableInputObjectFactory, public, Windows.Foundation.UniversalApiContract, 8.0)]
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]
             [marshaling_behavior(agile)]
@@ -1450,12 +1603,23 @@ namespace Windows
                 [default] interface Windows.UI.Input.IMouseWheelParameters;
             }
 
+            [activatable(Windows.Foundation.UniversalApiContract, 19.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(none)]
+            [threading(both)]
+            runtimeclass PhysicalGestureRecognizer
+            {
+                [default] [experimental] interface Windows.UI.Input.IPhysicalGestureRecognizer;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(none)]
             [static(Windows.UI.Input.IPointerPointStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             runtimeclass PointerPoint
             {
                 [default] interface Windows.UI.Input.IPointerPoint;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.UI.Input.IPointerPointPhysicalPosition;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1628,6 +1792,24 @@ namespace Windows
             {
                 [default] interface Windows.UI.Input.ITappedEventArgs;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.UI.Input.ITappedEventArgs2;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Input.ITouchpadGesturesControllerStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+            [threading(both)]
+            runtimeclass TouchpadGesturesController
+            {
+                [default] [experimental] interface Windows.UI.Input.ITouchpadGesturesController;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            runtimeclass TouchpadGlobalActionEventArgs
+            {
+                [default] [experimental] interface Windows.UI.Input.ITouchpadGlobalActionEventArgs;
             }
         }
     }

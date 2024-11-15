@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -1091,7 +1091,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICurrentSessionChangedEventArgs = _uuidof(ICurrentSessionChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ICurrentSessionChangedEventArgs = __uuidof(ICurrentSessionChangedEventArgs);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1206,7 +1206,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSession = _uuidof(IGlobalSystemMediaTransportControlsSession);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSession = __uuidof(IGlobalSystemMediaTransportControlsSession);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1259,7 +1259,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionManager = _uuidof(IGlobalSystemMediaTransportControlsSessionManager);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionManager = __uuidof(IGlobalSystemMediaTransportControlsSessionManager);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1295,7 +1295,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionManagerStatics = _uuidof(IGlobalSystemMediaTransportControlsSessionManagerStatics);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionManagerStatics = __uuidof(IGlobalSystemMediaTransportControlsSessionManagerStatics);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1358,7 +1358,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionMediaProperties = _uuidof(IGlobalSystemMediaTransportControlsSessionMediaProperties);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionMediaProperties = __uuidof(IGlobalSystemMediaTransportControlsSessionMediaProperties);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1436,7 +1436,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionPlaybackControls = _uuidof(IGlobalSystemMediaTransportControlsSessionPlaybackControls);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionPlaybackControls = __uuidof(IGlobalSystemMediaTransportControlsSessionPlaybackControls);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1487,7 +1487,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionPlaybackInfo = _uuidof(IGlobalSystemMediaTransportControlsSessionPlaybackInfo);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionPlaybackInfo = __uuidof(IGlobalSystemMediaTransportControlsSessionPlaybackInfo);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1538,7 +1538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionTimelineProperties = _uuidof(IGlobalSystemMediaTransportControlsSessionTimelineProperties);
+                MIDL_CONST_ID IID& IID_IGlobalSystemMediaTransportControlsSessionTimelineProperties = __uuidof(IGlobalSystemMediaTransportControlsSessionTimelineProperties);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1571,7 +1571,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaPropertiesChangedEventArgs = _uuidof(IMediaPropertiesChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IMediaPropertiesChangedEventArgs = __uuidof(IMediaPropertiesChangedEventArgs);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1604,7 +1604,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaybackInfoChangedEventArgs = _uuidof(IPlaybackInfoChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IPlaybackInfoChangedEventArgs = __uuidof(IPlaybackInfoChangedEventArgs);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1637,7 +1637,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISessionsChangedEventArgs = _uuidof(ISessionsChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ISessionsChangedEventArgs = __uuidof(ISessionsChangedEventArgs);
             } /* Control */
         } /* Media */
     } /* Windows */
@@ -1670,7 +1670,7 @@ namespace ABI {
                 public:
                 };
 
-                extern MIDL_CONST_ID IID& IID_ITimelinePropertiesChangedEventArgs = _uuidof(ITimelinePropertiesChangedEventArgs);
+                MIDL_CONST_ID IID& IID_ITimelinePropertiesChangedEventArgs = __uuidof(ITimelinePropertiesChangedEventArgs);
             } /* Control */
         } /* Media */
     } /* Windows */

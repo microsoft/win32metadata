@@ -563,7 +563,7 @@ typedef NTSTATUS (*PSAM_CREDENTIAL_UPDATE_NOTIFY_ROUTINE) (
     _In_reads_bytes_(OldCredentialSize)         PVOID OldCredentials,
     _In_                                   ULONG OldCredentialSize,
     _In_                                   ULONG UserAccountControl,
-    _In_opt_                               PUNICODE_STRING UPN,  
+    _In_opt_                               PUNICODE_STRING UPN,
     _In_                                   PUNICODE_STRING UserName,
     _In_                                   PUNICODE_STRING NetbiosDomainName,
     _In_                                   PUNICODE_STRING DnsDomainName,
@@ -1194,6 +1194,7 @@ typedef LSA_REDIRECTED_LOGON_CALLBACK *PLSA_REDIRECTED_LOGON_CALLBACK;
 typedef LSA_REDIRECTED_LOGON_GET_LOGON_CREDS *PLSA_REDIRECTED_LOGON_GET_LOGON_CREDS;
 typedef LSA_REDIRECTED_LOGON_GET_SUPP_CREDS *PLSA_REDIRECTED_LOGON_GET_SUPP_CREDS;
 typedef LSA_REDIRECTED_LOGON_CLEANUP_CALLBACK *PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK;
+
 typedef LSA_REDIRECTED_LOGON_GET_SID *PLSA_REDIRECTED_LOGON_GET_SID;
 
 #define SECPKG_REDIRECTED_LOGON_GUID_INITIALIZER { 0xc2be5457, 0x82eb, 0x483e, { 0xae, 0x4e, 0x74, 0x68, 0xef, 0x14, 0xd5, 0x9 } }
@@ -1421,7 +1422,6 @@ typedef NTSTATUS
     _In_opt_  PSecBuffer UserData,
     _In_opt_  BOOLEAN    ReturnToLsa
     );
-
 
 //
 // Account Access
@@ -1661,7 +1661,7 @@ typedef LSA_DUPLICATE_HANDLE * PLSA_DUPLICATE_HANDLE;
 typedef LSA_SAVE_SUPPLEMENTAL_CREDENTIALS * PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS;
 typedef LSA_CREATE_THREAD * PLSA_CREATE_THREAD;
 typedef LSA_GET_CLIENT_INFO * PLSA_GET_CLIENT_INFO;
-typedef LSA_GET_CLIENT_INFO_EX* PLSA_GET_CLIENT_INFO_EX;
+typedef LSA_GET_CLIENT_INFO_EX * PLSA_GET_CLIENT_INFO_EX;
 typedef LSA_REGISTER_NOTIFICATION * PLSA_REGISTER_NOTIFICATION;
 typedef LSA_CANCEL_NOTIFICATION * PLSA_CANCEL_NOTIFICATION;
 typedef LSA_MAP_BUFFER * PLSA_MAP_BUFFER;

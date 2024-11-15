@@ -25,6 +25,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <vcruntime_string.h>
+#if !defined(_M_CEE)
+#include <intrin.h>
+#if defined(__clang__) && (defined(_M_ARM64) || defined(_M_ARM64EC))
+#include <arm_neon.h>
+#endif
+#endif
 
 #pragma warning(push)
 #pragma warning(disable: _UCRT_DISABLED_WARNINGS)
@@ -197,17 +203,139 @@ typedef wchar_t _Wint_t;
         return _P == NULL || _P->_Wchar == 0;
     }
 
+    #if !defined(_M_CEE)
+    #if (defined(_M_IX86) && !defined(_M_HYBRID_X86_ARM64)) || (defined(_M_X64) && !defined(_M_ARM64EC))
+    extern int _Avx2WmemEnabled;
+    __declspec(selectany) int _Avx2WmemEnabledWeakValue = 0;
+    #if defined(_M_IX86)
+    #pragma comment(linker, "/alternatename:__Avx2WmemEnabled=__Avx2WmemEnabledWeakValue")
+    #else
+    #pragma comment(linker, "/alternatename:_Avx2WmemEnabled=_Avx2WmemEnabledWeakValue")
+    #endif
+    #endif
+    #endif
+
     __inline wchar_t _CONST_RETURN* __CRTDECL wmemchr(
         _In_reads_(_N) wchar_t const* _S,
         _In_           wchar_t        _C,
         _In_           size_t         _N
         )
     {
-        for (; 0 < _N; ++_S, --_N)
-            if (*_S == _C)
-                return (wchar_t _CONST_RETURN*)_S;
+        size_t Count = 0;
 
-        return 0;
+    #if !defined(_M_CEE)
+
+        unsigned long Index = 0;
+        wchar_t const* S = _S;
+
+    #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
+        if (_N >= 4)
+        {
+            uint16x8_t V2 = vdupq_n_u16(_C);
+
+            while (Count + 8 <= _N)
+            {
+                uint16x8_t V1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S));
+                V1 = vceqq_u16(V1, V2);
+                unsigned __int64 Mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(V1, 4)), 0);
+                if (Mask != 0)
+                {
+                    _BitScanForward64(&Index, Mask);
+                    Index >>= 3;
+                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                }
+
+                Count += 8;
+                S += 8;
+            }
+
+            if (Count + 4 <= _N)
+            {
+                uint16x8_t V1 = vdupq_lane_u64(vreinterpret_u16_u8(vld1_u8((unsigned char const *)S)), 0);
+                V1 = vceqq_u16(V1, V2);
+                unsigned int Mask = vget_lane_u32(vreinterpret_u32_u8(vshrn_n_u16(V1, 4)), 0);
+                if (Mask != 0)
+                {
+                    _BitScanForward(&Index, Mask);
+                    Index >>= 3;
+                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                }
+
+                Count += 4;
+            }
+        }
+
+    #elif defined(_M_IX86) || defined(_M_X64) 
+
+    #if !defined(__clang__) || defined(__AVX2__)
+        if (_Avx2WmemEnabled && _N >= 16)
+        {
+            __m256i V2 = _mm256_broadcastw_epi16(_mm_cvtsi32_si128(_C));
+
+            do
+            {
+                __m256i V1 = _mm256_loadu_si256((__m256i const*)S);
+                V1 = _mm256_cmpeq_epi16(V1, V2);
+                unsigned int Mask = (unsigned int)_mm256_movemask_epi8(V1);
+                if (Mask != 0)
+                {
+                    _BitScanForward(&Index, Mask);
+                    Index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                }
+                Count += 16;
+                S += 16;
+            } while (Count + 16 <= _N);
+        }
+    #endif
+
+        if (Count + 4 <= _N)
+        {
+            __m128i V2 = _mm_set1_epi16((short)_C);
+
+            while (Count + 8 <= _N)
+            {
+                __m128i V1 = _mm_loadu_si128((__m128i const*)S);
+                V1 = _mm_cmpeq_epi16(V1, V2);
+                unsigned short Mask = (unsigned short)_mm_movemask_epi8(V1);
+                if (Mask != 0)
+                {
+                    _BitScanForward(&Index, Mask);
+                    Index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                }
+                Count += 8;
+                S += 8;
+            }
+
+            if (Count + 4 <= _N)
+            {
+                __m128i V1 = _mm_loadu_si64(S);
+                V1 = _mm_cmpeq_epi16(V1, V2);
+                unsigned char Mask = (unsigned char)_mm_movemask_epi8(V1);
+                if (Mask != 0)
+                {
+                    _BitScanForward(&Index, Mask);
+                    Index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                }
+
+                Count += 4;
+            }
+        }
+
+    #endif // defined(_M_IX86) || defined(_M_X64)
+    #endif // !defined(_M_CEE)
+
+        for (; Count < _N; ++Count)
+        {
+            if (_S[Count] == _C)
+            {
+                return (wchar_t _CONST_RETURN*)&_S[Count];
+            }
+        }
+
+        return NULL;
     }
 
     __inline int __CRTDECL wmemcmp(
@@ -216,9 +344,133 @@ typedef wchar_t _Wint_t;
         _In_           size_t         _N
         )
     {
-        for (; 0 < _N; ++_S1, ++_S2, --_N)
-            if (*_S1 != *_S2)
-                return *_S1 < *_S2 ? -1 : 1;
+        size_t Count = 0;
+
+    #if !defined(_M_CEE)
+
+        unsigned long Index = 0;
+        wchar_t const* S1 = _S1;
+        wchar_t const* S2 = _S2;
+
+    #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
+
+        while (Count + 8 <= _N)
+        {
+            uint16x8_t V1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S1));
+            uint16x8_t V2 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S2));
+            V1 = vceqq_u16(V1, V2);
+            unsigned __int64 Mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(V1, 4)), 0);
+            Mask = ~Mask;
+            if (Mask != 0)
+            {
+                _BitScanForward64(&Index, Mask);
+                Index >>= 3;
+                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+            }
+
+            Count += 8;
+            S1 += 8;
+            S2 += 8;
+        }
+
+        if (Count + 4 <= _N)
+        {
+            uint16x4_t V1 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)S1));
+            uint16x4_t V2 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)S2));
+            V1 = veor_u16(V1, V2);
+            unsigned __int64 Mask = vget_lane_u64(V1, 0);
+            if (Mask != 0)
+            {
+                _BitScanForward64(&Index, Mask);
+                Index >>= 4;
+                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+            }
+
+            Count += 4;
+        }
+
+    #elif defined(_M_IX86) || defined(_M_X64)
+
+    #if !defined(__clang__) || defined(__AVX2__)
+        if (_Avx2WmemEnabled)
+        {
+            while (Count + 16 <= _N)
+            {
+                __m256i V1 = _mm256_loadu_si256((__m256i const*)S1);
+                __m256i V2 = _mm256_loadu_si256((__m256i const*)S2);
+                V1 = _mm256_cmpeq_epi16(V1, V2);
+                unsigned int Mask = (unsigned int)_mm256_movemask_epi8(V1);
+                if (Mask != 0xffffffff)
+                {
+                    _BitScanForward(&Index, ~Mask);
+                    Index >>= 1;
+                    return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                }
+                Count += 16;
+                S1 += 16;
+                S2 += 16;
+            }
+        }
+    #endif
+
+        while (Count + 8 <= _N)
+        {
+            __m128i V1 = _mm_loadu_si128((__m128i const*)S1);
+            __m128i V2 = _mm_loadu_si128((__m128i const*)S2);
+            V1 = _mm_cmpeq_epi16(V1, V2);
+            unsigned short Mask = (unsigned short)_mm_movemask_epi8(V1);
+            if (Mask != 0xffff)
+            {
+                _BitScanForward(&Index, (unsigned long)~Mask);
+                Index >>= 1;
+                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+            }
+            Count += 8;
+            S1 += 8;
+            S2 += 8;
+        }
+
+    #if defined(_M_IX86)
+        if (Count + 4 <= _N)
+        {
+            __m128i V1 = _mm_loadu_si64(S1);
+            __m128i V2 = _mm_loadu_si64(S2);
+            V1 = _mm_cmpeq_epi16(V1, V2);
+            unsigned char Mask = (unsigned char)_mm_movemask_epi8(V1);
+            if (Mask != 0xff)
+            {
+                _BitScanForward(&Index, (unsigned long)~Mask);
+                Index >>= 1;
+                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+            }
+
+            Count += 4;
+        }
+    #else
+        if (Count + 4 <= _N)
+        {
+            unsigned __int64 V1 = *(unsigned __int64*)S1;
+            unsigned __int64 V2 = *(unsigned __int64*)S2;
+            if (V1 != V2)
+            {
+                _BitScanForward64(&Index, (V1 ^ V2));
+                Index >>= 4;
+                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+            }
+
+            Count += 4;
+        }
+    #endif // defined(_M_IX86)
+    #endif // defined(_M_IX86) || defined(_M_X64)
+    #endif // !defined(_M_CEE)
+
+        for (; Count < _N; ++Count)
+        {
+            if (_S1[Count] != _S2[Count])
+            {
+                return _S1[Count] < _S2[Count] ? -1 : 1;
+            }
+        }
 
         return 0;
     }

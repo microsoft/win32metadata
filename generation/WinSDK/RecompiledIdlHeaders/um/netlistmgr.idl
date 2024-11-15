@@ -1,8 +1,6 @@
-//
 // Copyright (C) Microsoft Corporation. All rights reserved.
-//
-//  Abstract: Interface definitions for Network List Manager.
-//
+
+// Interface definitions for Network List Manager.
 
 cpp_quote("#include <winapifamily.h>")
 
@@ -82,11 +80,11 @@ const UINT NLM_MAX_ADDRESS_LIST_SIZE = 10;
 // default value for unavailable field in data plan status structure
 const UINT32 NLM_UNKNOWN_DATAPLAN_STATUS = 0xFFFFFFFF;
 
+// NLM Supported Connection Cost Level and Cost Flags
 typedef
 [
     version(1.0),
-    v1_enum,
-    helpstring("NLM Supported Connection Cost Level and Cost Flags")
+    v1_enum
 ]
 enum NLM_CONNECTION_COST
 {
@@ -105,10 +103,10 @@ enum NLM_CONNECTION_COST
 //
 //---------------------------------------------------
 //
+
 typedef
 [
-    version(1.0),
-    helpstring("NLM Plan Usage Data Structure")
+    version(1.0)
 ]
 struct NLM_USAGE_DATA
 {
@@ -118,8 +116,7 @@ struct NLM_USAGE_DATA
 
 typedef
 [
-    version(1.0),
-    helpstring("NLM Data Plan Status structure")
+    version(1.0)
 ]
 struct NLM_DATAPLAN_STATUS
 {
@@ -135,8 +132,7 @@ struct NLM_DATAPLAN_STATUS
 
 typedef
 [
-    version(1.0),
-    helpstring("NLM Socket Address Storage")
+    version(1.0)
 ]
 struct NLM_SOCKADDR
 {
@@ -155,10 +151,10 @@ typedef [v1_enum] enum NLM_NETWORK_CLASS
 
 #define MAX_PROFILENAME_LENGTH 256
 
+// NetworkInformation Simulator Data structure
 typedef
 [
-    version(1.0),
-    helpstring("NetworkInformation Simulator Data structure")
+    version(1.0)
 ]
 struct NLM_SIMULATED_PROFILE_INFO
 {
@@ -211,9 +207,9 @@ typedef enum NLM_DOMAIN_AUTHENTICATION_KIND
 //
 //---------------------------------------------------
 //
+
 [
     uuid(DCB00000-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network List Manager"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -228,40 +224,48 @@ interface INetworkListManager : IDispatch
         NLM_ENUM_NETWORK_ALL          = 0x03
     } NLM_ENUM_NETWORK;
 
-    [id(1), helpstring("Enumerate the list of networks in your compartment.")]
-    HRESULT GetNetworks ([in] NLM_ENUM_NETWORK Flags,
+    // Enumerate the list of networks in your compartment.
+    [id(1)]
+    HRESULT GetNetworks([in] NLM_ENUM_NETWORK Flags,
                          [out, retval] IEnumNetworks **ppEnumNetwork);
 
-    [id(2), helpstring("Get a network given a Network ID.")]
-    HRESULT GetNetwork   ([in] GUID gdNetworkId,
-                          [out, retval] INetwork **ppNetwork);
+    // Get a network given a Network ID.
+    [id(2)]
+    HRESULT GetNetwork([in] GUID gdNetworkId,
+                       [out, retval] INetwork **ppNetwork);
 
-    [id(3), helpstring("Enumerate the complete list of all connections in your compartment.")]
+    // Enumerate the complete list of all connections in your compartment.
+    [id(3)]
     HRESULT GetNetworkConnections ([out, retval] IEnumNetworkConnections **ppEnum);
 
-    [id(4), helpstring("Get a network connection by a Network Connection ID.")]
+    // Get a network connection by a Network Connection ID.
+    [id(4)]
     HRESULT GetNetworkConnection ([in] GUID gdNetworkConnectionId,
                                   [out, retval] INetworkConnection **ppNetworkConnection);
 
-    [propget, id(5), helpstring("Returns whether this machine has Internet connectivity.")]
+    // Returns whether this machine has Internet connectivity.
+    [propget, id(5)]
     HRESULT IsConnectedToInternet([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [propget, id(6), helpstring("Returns whether this machine has any network connectivity.")]
+    // Returns whether this machine has any network connectivity.
+    [propget, id(6)]
     HRESULT IsConnected([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [id(7), helpstring("Returns the aggregated connectivity state of all networks on this machine.")]
+    // Returns the aggregated connectivity state of all networks on this machine.
+    [id(7)]
     HRESULT GetConnectivity([out, retval] NLM_CONNECTIVITY* pConnectivity);
 
-    [id(8), helpstring("Sets simulated connection profile information.")]
+    // Sets simulated connection profile information.
+    [id(8)]
     HRESULT SetSimulatedProfileInfo([in] NLM_SIMULATED_PROFILE_INFO *pSimulatedInfo);
 
-    [id(9), helpstring("Clear simulated cost data, if it has been set.")]
+    // Clear simulated cost data, if it has been set.
+    [id(9)]
     HRESULT ClearSimulatedProfileInfo();
 }
 
 [
     uuid(DCB00001-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network List Manager Event Sink"),
     object,
     oleautomation,
     pointer_default(unique)
@@ -277,7 +281,6 @@ interface INetworkListManagerEvents : IUnknown
 //
 [
     uuid(DCB00002-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -292,52 +295,64 @@ interface INetwork : IDispatch
         NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED   = 0x02
     } NLM_NETWORK_CATEGORY;
 
-    [id(1), helpstring("Get the name of this network.")]
+    // Get the name of this network.
+    [id(1)]
     HRESULT GetName ([out, string, retval] BSTR *pszNetworkName);
 
-    [id(2), helpstring("Rename this network. This change takes effect immediately.")]
+    // Rename this network. This change takes effect immediately.
+    [id(2)]
     HRESULT SetName ([in, string] BSTR szNetworkNewName);
 
-    [id(3), helpstring("Get the network description.")]
+    // Get the network description.
+    [id(3)]
     HRESULT GetDescription ([out, string, retval] BSTR *pszDescription);
 
-    [id(4), helpstring("Set the network description. This change takes effect immediately.")]
+    // Set the network description. This change takes effect immediately.
+    [id(4)]
     HRESULT SetDescription ([in, string] BSTR szDescription);
 
-    [id(5), helpstring("Get the network ID.")]
+    // Get the network ID.
+    [id(5)]
     HRESULT GetNetworkId ([out, retval] GUID *pgdGuidNetworkId);
 
-    [id(6), helpstring("Get the domain type.")]
+    // Get the domain type.
+    [id(6)]
     HRESULT GetDomainType ([out, retval] NLM_DOMAIN_TYPE *pNetworkType);
 
-    [id(7), helpstring("Get the list of network connections for this network.")]
+    // Get the list of network connections for this network.
+    [id(7)]
     HRESULT GetNetworkConnections([out, retval] IEnumNetworkConnections **ppEnumNetworkConnection);
 
-    [id(8), helpstring("Get the time and date this network was created.")]
+    // Get the time and date this network was created.
+    [id(8)]
     HRESULT GetTimeCreatedAndConnected ([out] DWORD *pdwLowDateTimeCreated,
                                         [out] DWORD *pdwHighDateTimeCreated,
                                         [out] DWORD *pdwLowDateTimeConnected,
                                         [out] DWORD *pdwHighDateTimeConnected);
 
-    [propget, id(9), helpstring("Returns whether this network has Internet connectivity.")]
+    // Returns whether this network has Internet connectivity.
+    [propget, id(9)]
     HRESULT IsConnectedToInternet([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [propget, id(10), helpstring("Returns whether this network has any network connectivy.")]
+    // Returns whether this network has any network connectivy.
+    [propget, id(10)]
     HRESULT IsConnected([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [id(11), helpstring("Returns the connectivity state of this network.")]
+    // Returns the connectivity state of this network.
+    [id(11)]
     HRESULT GetConnectivity([out, retval] NLM_CONNECTIVITY* pConnectivity);
 
-    [id(12), helpstring("Returns the category of this network.")]
+    // Returns the category of this network.
+    [id(12)]
     HRESULT GetCategory ([out, retval] NLM_NETWORK_CATEGORY *pCategory);
 
-    [id(13), helpstring("Sets the category of this network. This change takes effect immediately.")]
+    // Sets the category of this network. This change takes effect immediately.
+    [id(13)]
     HRESULT SetCategory ([in] NLM_NETWORK_CATEGORY NewCategory);
 }
 
 [
     uuid(B5550ABB-3391-4310-804F-25DCC325ED81),
-    helpstring("Network2"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -345,7 +360,8 @@ interface INetwork : IDispatch
 ]
 interface INetwork2 : INetwork
 {
-    [id(14), helpstring("Returns a boolean value indicating whether the network is domain authenticated by the particular kind.")]
+    // Returns a boolean value indicating whether the network is domain authenticated by the particular kind.
+    [id(14)]
     HRESULT IsDomainAuthenticatedBy([in] NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind, [out, retval] BOOL* pValue);
 }
 
@@ -354,7 +370,6 @@ interface INetwork2 : INetwork
 //
 [
     uuid(DCB00003-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Enumerator"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -365,18 +380,22 @@ interface IEnumNetworks : IDispatch
     [id(DISPID_NEWENUM), propget, hidden, restricted]
     HRESULT _NewEnum([out, retval] IEnumVARIANT** ppEnumVar);
 
-    [id(1), helpstring("Get the next network in this enumeration.")]
+    // Get the next network in this enumeration.
+    [id(1)]
     HRESULT Next([in] ULONG celt,
                  [out, size_is(celt), length_is(*pceltFetched)] INetwork **rgelt,
                  [in, out, ptr] ULONG *pceltFetched);
 
-    [id(2), helpstring("Skip over a network.")]
+    // Skip over a network.
+    [id(2)]
     HRESULT Skip([in] ULONG celt);
 
-    [id(3), helpstring("Restart this enumeration.")]
+    // Restart this enumeration.
+    [id(3)]
     HRESULT Reset();
 
-    [id(4), helpstring("Clone this enumeration.")]
+    // Clone this enumeration.
+    [id(4)]
     HRESULT Clone([out, retval] IEnumNetworks **ppEnumNetwork);
 }
 
@@ -385,7 +404,6 @@ interface IEnumNetworks : IDispatch
 //
 [
     uuid(DCB00004-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Event Sink"),
     object,
     oleautomation,
     pointer_default(unique)
@@ -414,7 +432,6 @@ interface INetworkEvents : IUnknown
 //
 [
     uuid(DCB00005-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Connection"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -422,31 +439,37 @@ interface INetworkEvents : IUnknown
 ]
 interface INetworkConnection : IDispatch
 {
-    [id(1), helpstring("Returns the associated network of this connection.")]
+    // Returns the associated network of this connection.
+    [id(1)]
     HRESULT GetNetwork ([out, retval] INetwork **ppNetwork);
 
-    [propget, id(2), helpstring("Returns whether this network connection has Internet connectivity.")]
+    // Returns whether this network connection has Internet connectivity.
+    [propget, id(2)]
     HRESULT IsConnectedToInternet([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [propget, id(3), helpstring("Returns whether this network connection has any network connectivity.")]
+    // Returns whether this network connection has any network connectivity.
+    [propget, id(3)]
     HRESULT IsConnected([out, retval] VARIANT_BOOL* pbIsConnected);
 
-    [id(4), helpstring("Returns the connectivity state of this network connection.")]
+    // Returns the connectivity state of this network connection.
+    [id(4)]
     HRESULT GetConnectivity([out, retval] NLM_CONNECTIVITY* pConnectivity);
 
-    [id(5), helpstring("Returns a unique identifer for this connection.")]
+    // Returns a unique identifer for this connection.
+    [id(5)]
     HRESULT GetConnectionId ([out, retval] GUID *pgdConnectionId);
 
-    [id(6), helpstring("Returns the network adapter used by this connection. There might be multiple connections using the same AdapterId.")]
+    // Returns the network adapter used by this connection. There might be multiple connections using the same AdapterId.
+    [id(6)]
     HRESULT GetAdapterId ([out, retval] GUID *pgdAdapterId);
 
-    [id(7), helpstring("Returns the domain type of this network connection.")]
+    // Returns the domain type of this network connection.
+    [id(7)]
     HRESULT GetDomainType ([out, retval] NLM_DOMAIN_TYPE *pDomainType);
 }
 
 [
     uuid(00E676ED-5A35-4738-92EB-8581738D0F0A),
-    helpstring("Network Connection2"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -454,7 +477,8 @@ interface INetworkConnection : IDispatch
 ]
 interface INetworkConnection2 : INetworkConnection
 {
-    [id(8), helpstring("Returns a boolean value indicating whether the network connection is domain authenticated by the particular kind.")]
+    // Returns a boolean value indicating whether the network connection is domain authenticated by the particular kind.
+    [id(8)]
     HRESULT IsDomainAuthenticatedBy([in] NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind, [ out, retval ] BOOL * pValue);
 }
 
@@ -463,7 +487,6 @@ interface INetworkConnection2 : INetworkConnection
 //
 [
     uuid(DCB00006-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Connection Enumerator"),
     object,
     oleautomation,
     pointer_default(unique),
@@ -474,18 +497,22 @@ interface IEnumNetworkConnections : IDispatch
     [id(DISPID_NEWENUM), propget, hidden, restricted]
     HRESULT _NewEnum([out, retval] IEnumVARIANT** ppEnumVar);
 
-    [id(1), helpstring("Get the next network connection in this enumeration.")]
+    // Get the next network connection in this enumeration.
+    [id(1)]
     HRESULT Next([in] ULONG celt,
                  [out, size_is(celt), length_is(*pceltFetched)] INetworkConnection **rgelt,
                  [in, out, ptr] ULONG *pceltFetched);
 
-    [id(2), helpstring("Skip over a network connection.")]
+    // Skip over a network connection.
+    [id(2)]
     HRESULT Skip([in] ULONG celt);
 
-    [id(3), helpstring("Restart this enumeration.")]
+    // Restart this enumeration.
+    [id(3)]
     HRESULT Reset();
 
-    [id(4), helpstring("Clone this enumeration.")]
+    // Clone this enumeration.
+    [id(4)]
     HRESULT Clone([out, retval] IEnumNetworkConnections **ppEnumNetwork);
 }
 
@@ -494,7 +521,6 @@ interface IEnumNetworkConnections : IDispatch
 //
 [
     uuid(DCB00007-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Connection Event Sink"),
     object,
     oleautomation,
     pointer_default(unique)
@@ -518,21 +544,23 @@ interface INetworkConnectionEvents : IUnknown
 //
 [
     uuid(DCB00008-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Cost Manager"),
     object,
     pointer_default(unique)
 ]
 interface INetworkCostManager : IUnknown
 {
-    [id(1), helpstring("Returns the cost of routing to a destination.")]
+    // Returns the cost of routing to a destination.
+    [id(1)]
     HRESULT GetCost([out] DWORD *pCost, [in, unique] NLM_SOCKADDR *pDestIPAddr);
 
-    [id(2), helpstring("Returns the data plan status of a connection used to route to a destination.")]
+    // Returns the data plan status of a connection used to route to a destination.
+    [id(2)]
     HRESULT GetDataPlanStatus([out] NLM_DATAPLAN_STATUS *pDataPlanStatus,
                              [in, unique] NLM_SOCKADDR *pDestIPAddr
                              );
 
-    [id(3), helpstring("Set a list of destination addresses to receive notifications.")]
+    // Set a list of destination addresses to receive notifications.
+    [id(3)]
     HRESULT SetDestinationAddresses([in, range(0, NLM_MAX_ADDRESS_LIST_SIZE)] UINT32 length,
                                     [in, size_is(length), unique] NLM_SOCKADDR *pDestIPAddrList,
                                     [in] VARIANT_BOOL bAppend);
@@ -543,7 +571,6 @@ interface INetworkCostManager : IUnknown
 //
 [
     uuid(DCB00009-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Cost Manager Event Sink"),
     object,
     pointer_default(unique)
     // Event interface - do not make dual
@@ -560,16 +587,17 @@ interface INetworkCostManagerEvents : IUnknown
 //
 [
     uuid(DCB0000a-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Connection Cost"),
     object,
     pointer_default(unique)
 ]
 interface INetworkConnectionCost : IUnknown
 {
-    [id(1), helpstring("Returns the cost of this network connection.")]
+    // Returns the cost of this network connection.
+    [id(1)]
     HRESULT GetCost([out] DWORD *pCost);
 
-    [id(2), helpstring("Returns the data plan status of this network connection.")]
+    // Returns the data plan status of this network connection.
+    [id(2)]
     HRESULT GetDataPlanStatus([out] NLM_DATAPLAN_STATUS *pDataPlanStatus);
 }
 
@@ -578,7 +606,6 @@ interface INetworkConnectionCost : IUnknown
 //
 [
     uuid(DCB0000b-570F-4A9B-8D69-199FDBA5723B),
-    helpstring("Network Connection Cost Event Sink"),
     object,
     pointer_default(unique)
     // Event interface - do not make dual
@@ -595,8 +622,7 @@ interface INetworkConnectionCostEvents : IUnknown
 //
 [
     uuid(DCB00D01-570F-4A9B-8D69-199FDBA5723B),
-    version(1.0),
-    helpstring("Network List 1.0 Type Library")
+    version(1.0)
 ]
 library NETWORKLIST
 {
@@ -604,8 +630,7 @@ library NETWORKLIST
     interface INetworkConnectionCost;
 
     [
-        uuid(DCB00C01-570F-4A9B-8D69-199FDBA5723B),
-        helpstring("Network List Manager")
+        uuid(DCB00C01-570F-4A9B-8D69-199FDBA5723B)
     ]
     coclass NetworkListManager
     {

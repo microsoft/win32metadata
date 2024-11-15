@@ -130,6 +130,8 @@ namespace Windows
 
             interface IBluetoothAdapter3;
 
+            interface IBluetoothAdapter4;
+
             interface IBluetoothAdapterStatics;
 
             interface IBluetoothClassOfDevice;
@@ -445,6 +447,16 @@ namespace Windows
             {
                 [propget] HRESULT IsExtendedAdvertisingSupported([out] [retval] boolean* value);
                 [propget] HRESULT MaxAdvertisementDataLength([out] [retval] UINT32* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Bluetooth.BluetoothAdapter)]
+            [experimental]
+            [uuid(F875F3E1-6D9A-5D5E-AEE5-A17248E5F6DD)]
+            interface IBluetoothAdapter4 : IInspectable
+            {
+                [propget] HRESULT IsLowEnergyUncoded2MPhySupported([out] [retval] boolean* value);
+                [propget] HRESULT IsLowEnergyCodedPhySupported([out] [retval] boolean* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -846,6 +858,7 @@ namespace Windows
                 [default] interface Windows.Devices.Bluetooth.IBluetoothAdapter;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Devices.Bluetooth.IBluetoothAdapter2;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Devices.Bluetooth.IBluetoothAdapter3;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Bluetooth.IBluetoothAdapter4;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

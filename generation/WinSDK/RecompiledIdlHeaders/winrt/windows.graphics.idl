@@ -48,6 +48,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IIterator<Windows.Graphics.RectInt32>;
 
+            interface Windows.Foundation.Collections.IVectorView<Windows.Graphics.RectInt32>;
+
             interface Windows.Foundation.IReference<Windows.Graphics.SizeInt32>;
         }
     }

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_APPBROADCASTING_APPBROADCASTINGCONTRACT_VERSION)
@@ -315,7 +315,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppBroadcastingMonitor = _uuidof(IAppBroadcastingMonitor);
+                MIDL_CONST_ID IID& IID_IAppBroadcastingMonitor = __uuidof(IAppBroadcastingMonitor);
             } /* AppBroadcasting */
         } /* Media */
     } /* Windows */
@@ -354,7 +354,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppBroadcastingStatus = _uuidof(IAppBroadcastingStatus);
+                MIDL_CONST_ID IID& IID_IAppBroadcastingStatus = __uuidof(IAppBroadcastingStatus);
             } /* AppBroadcasting */
         } /* Media */
     } /* Windows */
@@ -411,7 +411,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppBroadcastingStatusDetails = _uuidof(IAppBroadcastingStatusDetails);
+                MIDL_CONST_ID IID& IID_IAppBroadcastingStatusDetails = __uuidof(IAppBroadcastingStatusDetails);
             } /* AppBroadcasting */
         } /* Media */
     } /* Windows */
@@ -448,7 +448,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ShowBroadcastUI(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppBroadcastingUI = _uuidof(IAppBroadcastingUI);
+                MIDL_CONST_ID IID& IID_IAppBroadcastingUI = __uuidof(IAppBroadcastingUI);
             } /* AppBroadcasting */
         } /* Media */
     } /* Windows */
@@ -488,7 +488,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAppBroadcastingUIStatics = _uuidof(IAppBroadcastingUIStatics);
+                MIDL_CONST_ID IID& IID_IAppBroadcastingUIStatics = __uuidof(IAppBroadcastingUIStatics);
             } /* AppBroadcasting */
         } /* Media */
     } /* Windows */

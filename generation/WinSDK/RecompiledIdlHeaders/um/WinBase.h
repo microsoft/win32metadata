@@ -117,6 +117,16 @@ extern "C" {
 #define SecureZeroMemory RtlSecureZeroMemory
 #define CaptureStackBackTrace RtlCaptureStackBackTrace
 
+#define CopyVolatileMemory RtlCopyVolatileMemory
+#define MoveVolatileMemory RtlMoveVolatileMemory
+#define FillVolatileMemory RtlFillVolatileMemory
+#define SecureZeroMemory2 RtlSecureZeroMemory2
+#define ZeroVolatileMemory RtlZeroVolatileMemory
+
+#define CopyDeviceMemory RtlCopyDeviceMemory
+#define FillDeviceMemory RtlFillDeviceMemory
+#define ZeroDeviceMemory RtlZeroDeviceMemory
+
 //
 // File creation flags must start at the high end since they
 // are combined with the attributes
@@ -152,7 +162,7 @@ extern "C" {
 
 #define FILE_FLAG_OPEN_REQUIRING_OPLOCK 0x00040000
 
-#if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#if defined(NTDDI_WIN10_CU) && (NTDDI_VERSION >= NTDDI_WIN10_CU)
 #define FILE_FLAG_IGNORE_IMPERSONATED_DEVICEMAP 0x00020000
 #endif
 
@@ -263,12 +273,25 @@ typedef enum FILE_FLUSH_MODE
 #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 //
-//  CopyFile flag to retain sparse state during copying.
+//  CopyFile flag to explicitly enable retaining sparse state 
+//  during copying.
 //
 
 #define COPY_FILE_ENABLE_SPARSE_COPY             0x20000000
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+
+//
+//  CopyFile flag to explicitly disable retaining sparse state 
+//  during copying. COPY_FILE_DISABLE_SPARSE_COPY overrides
+//  COPY_FILE_ENABLE_SPARSE_COPY
+//
+
+#define COPY_FILE_DISABLE_SPARSE_COPY            0x80000000
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 #endif /* _WIN32_WINNT >= 0x0400 */
 
@@ -3053,6 +3076,7 @@ BackupWrite(
     _Inout_ LPVOID *lpContext
     );
 
+
 //
 //  Stream id structure
 //
@@ -3529,6 +3553,9 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
     ProcThreadAttributeTrustedApp                   = 29,
 #endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+    ProcThreadAttributeSveVectorLength              = 30,
+#endif
 } PROC_THREAD_ATTRIBUTE_NUM;
 #endif
 
@@ -3582,6 +3609,21 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #define PROC_THREAD_ATTRIBUTE_ENABLE_OPTIONAL_XSTATE_FEATURES \
     ProcThreadAttributeValue (ProcThreadAttributeEnableOptionalXStateFeatures, TRUE, TRUE, FALSE)
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+#define PROC_THREAD_ATTRIBUTE_SVE_VECTOR_LENGTH \
+    ProcThreadAttributeValue (ProcThreadAttributeSveVectorLength, FALSE, TRUE, FALSE)
+
+typedef union _PROCESS_CREATION_SVE_VECTOR_LENGTH {
+    ULONG Data;
+    struct {
+        ULONG VectorLength  : 24;
+        ULONG FlagsReserved : 8;
+    };
+} PROCESS_CREATION_SVE_VECTOR_LENGTH, *PPROCESS_CREATION_SVE_VECTOR_LENGTH;
+
 #endif
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
@@ -5900,6 +5942,28 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS {
 // (constrains COPYFILE2_EXTENDED_PARAMETERS_V2 ioDesiredRate field).
 #define COPYFILE2_IO_RATE_MIN   512
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_GE)
+
+typedef struct _COPYFILE2_CREATE_OPLOCK_KEYS {
+
+    //
+    //  Parent oplock key.
+    //  All-zero if not set.
+    //
+
+    GUID ParentOplockKey;
+
+    //
+    //  Target oplock key.
+    //  All-zero if not set.
+    //
+
+    GUID TargetOplockKey;
+
+} COPYFILE2_CREATE_OPLOCK_KEYS, *PCOPYFILE2_CREATE_OPLOCK_KEYS;
+
+#endif
+
 typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
 
   DWORD                         dwSize;
@@ -5925,8 +5989,34 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
   // if zero: use a suitable default (usually as fast as possible).
   ULONG                         ioDesiredRate;
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+  // Callers may request to use the old-style progress routine,
+  // which reports more callback message types than the CopyFile2
+  // progress routine does. This routine takes precedence over the
+  // CopyFile2 progress routine.
+  LPPROGRESS_ROUTINE            pProgressRoutineOld;
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_GE)
+
+  // optional oplock keys for opening the source file.
+  PCOPYFILE2_CREATE_OPLOCK_KEYS SourceOplockKeys;
+
+  // reserved for future use; must be set to zero.
+  PVOID                         reserved[6];
+
+#else // (NTDDI_VERSION >= NTDDI_WIN10_GE)
+
+  // reserved for future use; must be set to zero
+  PVOID                         reserved[7];
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_GE)
+#else // (NTDDI_VERSION < NTDDI_WIN11_GA)
+
   // reserved for future use; must be set to zero
   PVOID                         reserved[8];
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 } COPYFILE2_EXTENDED_PARAMETERS_V2;
 
@@ -5938,8 +6028,24 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
 
 #define COPY_FILE2_V2_DONT_COPY_JUNCTIONS        0x00000001
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+//
+//  Disable attempting block cloning during copy
+//
+
+#define COPY_FILE2_V2_DISABLE_BLOCK_CLONING      0x00000002
+
 #define COPY_FILE2_V2_VALID_FLAGS               \
     (COPY_FILE2_V2_DONT_COPY_JUNCTIONS)         \
+ |  (COPY_FILE2_V2_DISABLE_BLOCK_CLONING)       \
+
+#else // (NTDDI_VERSION < NTDDI_WIN11_GA)
+
+#define COPY_FILE2_V2_VALID_FLAGS               \
+    (COPY_FILE2_V2_DONT_COPY_JUNCTIONS)         \
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
@@ -6462,9 +6568,10 @@ GetFileBandwidthReservation(
 #endif // (_WIN32_WINNT >= 0x0600)
 
 //
-// Event logging APIs
+// Legacy Event logging APIs
 //
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6472,6 +6579,7 @@ ClearEventLogA (
     _In_     HANDLE hEventLog,
     _In_opt_ LPCSTR lpBackupFileName
     );
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6485,6 +6593,7 @@ ClearEventLogW (
 #define ClearEventLog  ClearEventLogA
 #endif // !UNICODE
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6492,6 +6601,7 @@ BackupEventLogA (
     _In_ HANDLE hEventLog,
     _In_ LPCSTR lpBackupFileName
     );
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6505,6 +6615,7 @@ BackupEventLogW (
 #define BackupEventLog  BackupEventLogA
 #endif // !UNICODE
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6518,6 +6629,7 @@ CloseEventLog (
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6531,6 +6643,7 @@ DeregisterEventSource (
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6539,6 +6652,7 @@ NotifyChangeEventLog(
     _In_ HANDLE  hEvent
     );
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6547,6 +6661,7 @@ GetNumberOfEventLogRecords (
     _Out_ PDWORD NumberOfRecords
     );
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6555,6 +6670,7 @@ GetOldestEventLogRecord (
     _Out_ PDWORD OldestRecord
     );
 
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6562,6 +6678,7 @@ OpenEventLogA (
     _In_opt_ LPCSTR lpUNCServerName,
     _In_     LPCSTR lpSourceName
     );
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6581,6 +6698,7 @@ OpenEventLogW (
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6588,6 +6706,7 @@ RegisterEventSourceA (
     _In_opt_ LPCSTR lpUNCServerName,
     _In_     LPCSTR lpSourceName
     );
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6606,6 +6725,8 @@ RegisterEventSourceW (
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6613,6 +6734,7 @@ OpenBackupEventLogA (
     _In_opt_ LPCSTR lpUNCServerName,
     _In_     LPCSTR lpFileName
     );
+_Success_(return != FALSE)
 WINADVAPI
 HANDLE
 WINAPI
@@ -6626,6 +6748,7 @@ OpenBackupEventLogW (
 #define OpenBackupEventLog  OpenBackupEventLogA
 #endif // !UNICODE
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6638,6 +6761,7 @@ ReadEventLogA (
     _Out_ DWORD      *pnBytesRead,
     _Out_ DWORD      *pnMinNumberOfBytesNeeded
     );
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6662,6 +6786,7 @@ ReadEventLogW (
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6676,6 +6801,7 @@ ReportEventA (
     _In_reads_opt_(wNumStrings) LPCSTR *lpStrings,
     _In_reads_bytes_opt_(dwDataSize) LPVOID lpRawData
     );
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -6710,6 +6836,7 @@ typedef struct _EVENTLOG_FULL_INFORMATION
 }
 EVENTLOG_FULL_INFORMATION, *LPEVENTLOG_FULL_INFORMATION;
 
+_Success_(return != FALSE)
 WINADVAPI
 BOOL
 WINAPI
@@ -8087,21 +8214,21 @@ SetSystemPowerState(
 // Power Management APIs
 //
 
-#define AC_LINE_OFFLINE                 0x00
-#define AC_LINE_ONLINE                  0x01
-#define AC_LINE_BACKUP_POWER            0x02
-#define AC_LINE_UNKNOWN                 0xFF
+#define AC_LINE_OFFLINE             0x00
+#define AC_LINE_ONLINE              0x01
+#define AC_LINE_BACKUP_POWER        0x02    // Deprecated value; Not used on any NT based version of Windows
+#define AC_LINE_UNKNOWN             0xFF
 
-#define BATTERY_FLAG_HIGH               0x01
-#define BATTERY_FLAG_LOW                0x02
-#define BATTERY_FLAG_CRITICAL           0x04
-#define BATTERY_FLAG_CHARGING           0x08
-#define BATTERY_FLAG_NO_BATTERY         0x80
-#define BATTERY_FLAG_UNKNOWN            0xFF
+#define BATTERY_FLAG_HIGH           0x01
+#define BATTERY_FLAG_LOW            0x02
+#define BATTERY_FLAG_CRITICAL       0x04
+#define BATTERY_FLAG_CHARGING       0x08
+#define BATTERY_FLAG_NO_BATTERY     0x80
+#define BATTERY_FLAG_UNKNOWN        0xFF
 
-#define BATTERY_PERCENTAGE_UNKNOWN      0xFF
+#define BATTERY_PERCENTAGE_UNKNOWN  0xFF
 
-#define SYSTEM_STATUS_FLAG_POWER_SAVING_ON      0x01
+#define SYSTEM_STATUS_FLAG_POWER_SAVING_ON  0x01
 
 #define BATTERY_LIFE_UNKNOWN        0xFFFFFFFF
 
@@ -9260,6 +9387,19 @@ GetFileInformationByHandleEx(
     _In_  DWORD dwBufferSize
 );
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+
+BOOL
+WINAPI
+GetFileInformationByName(
+    _In_ PCWSTR FileName,
+    _In_ FILE_INFO_BY_NAME_CLASS FileInformationClass,
+    _Out_writes_bytes_(FileInfoBufferSize) PVOID FileInfoBuffer,
+    _In_ ULONG FileInfoBufferSize
+    );
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
@@ -9493,7 +9633,7 @@ InitializeContext2(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#if defined(_AMD64_) || defined(_X86_)
+#if defined(_AMD64_) || defined(_X86_) || defined(_ARM64_)
 
 #pragma region Application Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -9555,7 +9695,7 @@ EnableProcessOptionalXStateFeatures(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#endif /* defined(_AMD64_) || defined(_X86_) */
+#endif /* defined(_AMD64_) || defined(_X86_) || defined(_ARM64_) */
 
 #endif /* (NTDDI_VERSION >= NTDDI_WIN7SP1) */
 

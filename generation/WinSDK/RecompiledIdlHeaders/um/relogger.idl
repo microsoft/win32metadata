@@ -49,7 +49,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
               ULONG       KernelTime;             // Kernel Mode CPU ticks
               ULONG       UserTime;               // User mode CPU ticks
           } DUMMYSTRUCTNAME;
-          ULONG64         ProcessorTime;          // Processor Clock 
+          ULONG64         ProcessorTime;          // Processor Clock
                                                   // for private session events
       } DUMMYUNIONNAME;
       GUID                ActivityId;             // Activity Id
@@ -72,14 +72,14 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
   } ETW_BUFFER_CONTEXT, *PETW_BUFFER_CONTEXT;
   cpp_quote("#endif")
   #pragma warning(pop)
-  
+
   cpp_quote("#ifndef EVENT_HEADER_EXTENDED_DATA_ITEM_DEF")
   cpp_quote("#define EVENT_HEADER_EXTENDED_DATA_ITEM_DEF")
   typedef struct _EVENT_HEADER_EXTENDED_DATA_ITEM {
 
       USHORT      Reserved1;                      // Reserved for internal use
-      USHORT      ExtType;                        // Extended info type 
-      USHORT      Linkage;                        // Indicates additional extended 
+      USHORT      ExtType;                        // Extended info type
+      USHORT      Linkage;                        // Indicates additional extended
       USHORT      DataSize;                       // Size of extended info data
       ULONGLONG   DataPtr;                        // Pointer to extended info data
 
@@ -95,18 +95,18 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
       USHORT              ExtendedDataCount;      // Number of extended
                                                   // data items
       USHORT              UserDataLength;         // User data length
-      PEVENT_HEADER_EXTENDED_DATA_ITEM            // Pointer to an array of 
-                          ExtendedData;           // extended data items                                               
+      PEVENT_HEADER_EXTENDED_DATA_ITEM            // Pointer to an array of
+                          ExtendedData;           // extended data items
       PVOID               UserData;               // Pointer to user data
       PVOID               UserContext;            // Context from OpenTrace
   } EVENT_RECORD, *PEVENT_RECORD;
   typedef const EVENT_RECORD *PCEVENT_RECORD;
   cpp_quote("#endif")
 
-cpp_quote("#ifndef _TRACEHANDLE_DEFINED")
-cpp_quote("#define _TRACEHANDLE_DEFINED")
-typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
-cpp_quote("#endif")
+// Used by ITraceRelogger. Obtain the stream ID from AddLogfileTraceStream or
+// AddRealtimeTraceStream. The stream ID is valid only with the ITraceRelogger
+// object from which it was obtained.
+typedef ULONG64 RELOGSTREAM_ID;
 
 interface ITraceRelogger;
 
@@ -204,13 +204,13 @@ interface ITraceRelogger : IUnknown
     HRESULT AddLogfileTraceStream (
         [in] BSTR LogfileName,
         [in] void* UserContext,
-        [out, retval] TRACEHANDLE* TraceHandle
+        [out, retval] RELOGSTREAM_ID* TraceStreamId
         );
 
     HRESULT AddRealtimeTraceStream (
         [in] BSTR LoggerName,
         [in] void* UserContext,
-        [out, retval] TRACEHANDLE* TraceHandle
+        [out, retval] RELOGSTREAM_ID* TraceStreamId
         );
 
     HRESULT RegisterCallback (
@@ -222,7 +222,7 @@ interface ITraceRelogger : IUnknown
         );
 
     HRESULT CreateEventInstance(
-        [in] TRACEHANDLE TraceHandle,
+        [in] RELOGSTREAM_ID TraceStreamId,
         [in] ULONG Flags,
         [out, retval] ITraceEvent** Event
         );
@@ -254,14 +254,14 @@ library TraceReloggerLib
     interface ITraceEvent;
     interface ITraceEventCallback;
     interface ITraceRelogger;
-    
+
     [
         uuid(7b40792d-05ff-44c4-9058-f440c71f17d4)
     ]
     coclass CTraceRelogger
     {
         [default] interface ITraceRelogger;
-    }    
+    }
 }
 
 cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WIN8)")

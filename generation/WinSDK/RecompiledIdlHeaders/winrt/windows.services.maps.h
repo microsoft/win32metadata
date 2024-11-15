@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SERVICES_MAPS_GUIDANCECONTRACT_VERSION)
@@ -2083,7 +2083,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEnhancedWaypoint = _uuidof(IEnhancedWaypoint);
+                MIDL_CONST_ID IID& IID_IEnhancedWaypoint = __uuidof(IEnhancedWaypoint);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2121,7 +2121,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IEnhancedWaypointFactory = _uuidof(IEnhancedWaypointFactory);
+                MIDL_CONST_ID IID& IID_IEnhancedWaypointFactory = __uuidof(IEnhancedWaypointFactory);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2160,7 +2160,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IManeuverWarning = _uuidof(IManeuverWarning);
+                MIDL_CONST_ID IID& IID_IManeuverWarning = __uuidof(IManeuverWarning);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2238,7 +2238,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapAddress = _uuidof(IMapAddress);
+                MIDL_CONST_ID IID& IID_IMapAddress = __uuidof(IMapAddress);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2274,7 +2274,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapAddress2 = _uuidof(IMapAddress2);
+                MIDL_CONST_ID IID& IID_IMapAddress2 = __uuidof(IMapAddress2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2319,7 +2319,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapLocation = _uuidof(IMapLocation);
+                MIDL_CONST_ID IID& IID_IMapLocation = __uuidof(IMapLocation);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2358,7 +2358,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapLocationFinderResult = _uuidof(IMapLocationFinderResult);
+                MIDL_CONST_ID IID& IID_IMapLocationFinderResult = __uuidof(IMapLocationFinderResult);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2406,7 +2406,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapLocationFinderStatics = _uuidof(IMapLocationFinderStatics);
+                MIDL_CONST_ID IID& IID_IMapLocationFinderStatics = __uuidof(IMapLocationFinderStatics);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2444,7 +2444,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapLocationFinderStatics2 = _uuidof(IMapLocationFinderStatics2);
+                MIDL_CONST_ID IID& IID_IMapLocationFinderStatics2 = __uuidof(IMapLocationFinderStatics2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2479,7 +2479,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ShowMapsUpdateUI(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapManagerStatics = _uuidof(IMapManagerStatics);
+                MIDL_CONST_ID IID& IID_IMapManagerStatics = __uuidof(IMapManagerStatics);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2530,7 +2530,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRoute = _uuidof(IMapRoute);
+                MIDL_CONST_ID IID& IID_IMapRoute = __uuidof(IMapRoute);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2569,7 +2569,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRoute2 = _uuidof(IMapRoute2);
+                MIDL_CONST_ID IID& IID_IMapRoute2 = __uuidof(IMapRoute2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2608,7 +2608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRoute3 = _uuidof(IMapRoute3);
+                MIDL_CONST_ID IID& IID_IMapRoute3 = __uuidof(IMapRoute3);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2644,7 +2644,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRoute4 = _uuidof(IMapRoute4);
+                MIDL_CONST_ID IID& IID_IMapRoute4 = __uuidof(IMapRoute4);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2701,7 +2701,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteDrivingOptions = _uuidof(IMapRouteDrivingOptions);
+                MIDL_CONST_ID IID& IID_IMapRouteDrivingOptions = __uuidof(IMapRouteDrivingOptions);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2740,7 +2740,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteDrivingOptions2 = _uuidof(IMapRouteDrivingOptions2);
+                MIDL_CONST_ID IID& IID_IMapRouteDrivingOptions2 = __uuidof(IMapRouteDrivingOptions2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2779,7 +2779,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteFinderResult = _uuidof(IMapRouteFinderResult);
+                MIDL_CONST_ID IID& IID_IMapRouteFinderResult = __uuidof(IMapRouteFinderResult);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2815,7 +2815,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteFinderResult2 = _uuidof(IMapRouteFinderResult2);
+                MIDL_CONST_ID IID& IID_IMapRouteFinderResult2 = __uuidof(IMapRouteFinderResult2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2905,7 +2905,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteFinderStatics = _uuidof(IMapRouteFinderStatics);
+                MIDL_CONST_ID IID& IID_IMapRouteFinderStatics = __uuidof(IMapRouteFinderStatics);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2944,7 +2944,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteFinderStatics2 = _uuidof(IMapRouteFinderStatics2);
+                MIDL_CONST_ID IID& IID_IMapRouteFinderStatics2 = __uuidof(IMapRouteFinderStatics2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -2986,7 +2986,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteFinderStatics3 = _uuidof(IMapRouteFinderStatics3);
+                MIDL_CONST_ID IID& IID_IMapRouteFinderStatics3 = __uuidof(IMapRouteFinderStatics3);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3034,7 +3034,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteLeg = _uuidof(IMapRouteLeg);
+                MIDL_CONST_ID IID& IID_IMapRouteLeg = __uuidof(IMapRouteLeg);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3073,7 +3073,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteLeg2 = _uuidof(IMapRouteLeg2);
+                MIDL_CONST_ID IID& IID_IMapRouteLeg2 = __uuidof(IMapRouteLeg2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3124,7 +3124,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteManeuver = _uuidof(IMapRouteManeuver);
+                MIDL_CONST_ID IID& IID_IMapRouteManeuver = __uuidof(IMapRouteManeuver);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3166,7 +3166,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteManeuver2 = _uuidof(IMapRouteManeuver2);
+                MIDL_CONST_ID IID& IID_IMapRouteManeuver2 = __uuidof(IMapRouteManeuver2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3202,7 +3202,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapRouteManeuver3 = _uuidof(IMapRouteManeuver3);
+                MIDL_CONST_ID IID& IID_IMapRouteManeuver3 = __uuidof(IMapRouteManeuver3);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3241,7 +3241,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapServiceStatics = _uuidof(IMapServiceStatics);
+                MIDL_CONST_ID IID& IID_IMapServiceStatics = __uuidof(IMapServiceStatics);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3277,7 +3277,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapServiceStatics2 = _uuidof(IMapServiceStatics2);
+                MIDL_CONST_ID IID& IID_IMapServiceStatics2 = __uuidof(IMapServiceStatics2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3313,7 +3313,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapServiceStatics3 = _uuidof(IMapServiceStatics3);
+                MIDL_CONST_ID IID& IID_IMapServiceStatics3 = __uuidof(IMapServiceStatics3);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3352,7 +3352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMapServiceStatics4 = _uuidof(IMapServiceStatics4);
+                MIDL_CONST_ID IID& IID_IMapServiceStatics4 = __uuidof(IMapServiceStatics4);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3404,7 +3404,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaceInfo = _uuidof(IPlaceInfo);
+                MIDL_CONST_ID IID& IID_IPlaceInfo = __uuidof(IPlaceInfo);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3449,7 +3449,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaceInfoCreateOptions = _uuidof(IPlaceInfoCreateOptions);
+                MIDL_CONST_ID IID& IID_IPlaceInfoCreateOptions = __uuidof(IPlaceInfoCreateOptions);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3508,7 +3508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaceInfoStatics = _uuidof(IPlaceInfoStatics);
+                MIDL_CONST_ID IID& IID_IPlaceInfoStatics = __uuidof(IPlaceInfoStatics);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3550,7 +3550,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPlaceInfoStatics2 = _uuidof(IPlaceInfoStatics2);
+                MIDL_CONST_ID IID& IID_IPlaceInfoStatics2 = __uuidof(IPlaceInfoStatics2);
             } /* Maps */
         } /* Services */
     } /* Windows */
@@ -3655,8 +3655,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3768,9 +3768,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3858,10 +3858,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics4 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3882,8 +3882,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Services.Maps.IPlaceInfo ** Default Interface **
@@ -9163,8 +9163,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapLocationFinderStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9276,9 +9276,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapRouteFinderStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9366,10 +9366,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics4 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IMapServiceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9390,8 +9390,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Services.Maps.IPlaceInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Services.Maps.IPlaceInfo ** Default Interface **

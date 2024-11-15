@@ -894,10 +894,101 @@ typedef struct _MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION {
     ULONG64 SharedCommittedPages;
 } MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION, *PMINIDUMP_SYSTEM_PERFORMANCE_INFORMATION;
 
-#define MINIDUMP_SYSMEMINFO1_FILECACHE_TRANSITIONREPURPOSECOUNT_FLAGS      0x0001
-#define MINIDUMP_SYSMEMINFO1_BASICPERF                                     0x0002
-#define MINIDUMP_SYSMEMINFO1_PERF_CCTOTALDIRTYPAGES_CCDIRTYPAGETHRESHOLD   0x0004
-#define MINIDUMP_SYSMEMINFO1_PERF_RESIDENTAVAILABLEPAGES_SHAREDCOMMITPAGES 0x0008
+typedef struct _MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 {
+    ULONG64 IdleProcessTime;
+    ULONG64 IoReadTransferCount;
+    ULONG64 IoWriteTransferCount;
+    ULONG64 IoOtherTransferCount;
+    ULONG IoReadOperationCount;
+    ULONG IoWriteOperationCount;
+    ULONG IoOtherOperationCount;
+    ULONG AvailablePages;
+    ULONG CommittedPages;
+    ULONG CommitLimit;
+    ULONG PeakCommitment;
+    ULONG PageFaultCount;
+    ULONG CopyOnWriteCount;
+    ULONG TransitionCount;
+    ULONG CacheTransitionCount;
+    ULONG DemandZeroCount;
+    ULONG PageReadCount;
+    ULONG PageReadIoCount;
+    ULONG CacheReadCount;
+    ULONG CacheIoCount;
+    ULONG DirtyPagesWriteCount;
+    ULONG DirtyWriteIoCount;
+    ULONG MappedPagesWriteCount;
+    ULONG MappedWriteIoCount;
+    ULONG PagedPoolPages;
+    ULONG NonPagedPoolPages;
+    ULONG PagedPoolAllocs;
+    ULONG PagedPoolFrees;
+    ULONG NonPagedPoolAllocs;
+    ULONG NonPagedPoolFrees;
+    ULONG FreeSystemPtes;
+    ULONG ResidentSystemCodePage;
+    ULONG TotalSystemDriverPages;
+    ULONG TotalSystemCodePages;
+    ULONG NonPagedPoolLookasideHits;
+    ULONG PagedPoolLookasideHits;
+    ULONG AvailablePagedPoolPages;
+    ULONG ResidentSystemCachePage;
+    ULONG ResidentPagedPoolPage;
+    ULONG ResidentSystemDriverPage;
+    ULONG CcFastReadNoWait;
+    ULONG CcFastReadWait;
+    ULONG CcFastReadResourceMiss;
+    ULONG CcFastReadNotPossible;
+    ULONG CcFastMdlReadNoWait;
+    ULONG CcFastMdlReadWait;
+    ULONG CcFastMdlReadResourceMiss;
+    ULONG CcFastMdlReadNotPossible;
+    ULONG CcMapDataNoWait;
+    ULONG CcMapDataWait;
+    ULONG CcMapDataNoWaitMiss;
+    ULONG CcMapDataWaitMiss;
+    ULONG CcPinMappedDataCount;
+    ULONG CcPinReadNoWait;
+    ULONG CcPinReadWait;
+    ULONG CcPinReadNoWaitMiss;
+    ULONG CcPinReadWaitMiss;
+    ULONG CcCopyReadNoWait;
+    ULONG CcCopyReadWait;
+    ULONG CcCopyReadNoWaitMiss;
+    ULONG CcCopyReadWaitMiss;
+    ULONG CcMdlReadNoWait;
+    ULONG CcMdlReadWait;
+    ULONG CcMdlReadNoWaitMiss;
+    ULONG CcMdlReadWaitMiss;
+    ULONG CcReadAheadIos;
+    ULONG CcLazyWriteIos;
+    ULONG CcLazyWritePages;
+    ULONG CcDataFlushes;
+    ULONG CcDataPages;
+    ULONG ContextSwitches;
+    ULONG FirstLevelTbFills;
+    ULONG SecondLevelTbFills;
+    ULONG SystemCalls;
+
+    ULONG64 CcTotalDirtyPages;
+    ULONG64 CcDirtyPageThreshold;
+
+    LONG64 ResidentAvailablePages;
+    ULONG64 SharedCommittedPages;
+
+    ULONGLONG MdlPagesAllocated;
+    ULONGLONG PfnDatabaseCommittedPages;
+
+    ULONGLONG SystemPageTableCommittedPages;
+    ULONGLONG ContiguousPagesAllocated;
+} MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2, *PMINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2;
+
+#define MINIDUMP_SYSMEMINFO1_FILECACHE_TRANSITIONREPURPOSECOUNT_FLAGS                       0x0001
+#define MINIDUMP_SYSMEMINFO1_BASICPERF                                                      0x0002
+#define MINIDUMP_SYSMEMINFO1_PERF_CCTOTALDIRTYPAGES_CCDIRTYPAGETHRESHOLD                    0x0004
+#define MINIDUMP_SYSMEMINFO1_PERF_RESIDENTAVAILABLEPAGES_SHAREDCOMMITPAGES                  0x0008
+#define MINIDUMP_SYSMEMINFO1_PERF_MDLPAGESALLOCATED_PFNDATABASECOMMITTEDPAGES               0x0010
+#define MINIDUMP_SYSMEMINFO1_PERF_SYSTEMPAGETABLECOMMITTEDPAGES_CONTIGUOUSPAGESALLOCATED    0x0020
 
 typedef struct _MINIDUMP_SYSTEM_MEMORY_INFO_1 {
     USHORT Revision;
@@ -909,7 +1000,17 @@ typedef struct _MINIDUMP_SYSTEM_MEMORY_INFO_1 {
     MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION PerfInfo;
 } MINIDUMP_SYSTEM_MEMORY_INFO_1, *PMINIDUMP_SYSTEM_MEMORY_INFO_1;
 
-typedef MINIDUMP_SYSTEM_MEMORY_INFO_1 MINIDUMP_SYSTEM_MEMORY_INFO_N;
+typedef struct _MINIDUMP_SYSTEM_MEMORY_INFO_2 {
+    USHORT Revision;
+    USHORT Flags;
+
+    MINIDUMP_SYSTEM_BASIC_INFORMATION BasicInfo;
+    MINIDUMP_SYSTEM_FILECACHE_INFORMATION FileCacheInfo;
+    MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION BasicPerfInfo;
+    MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 PerfInfo;
+} MINIDUMP_SYSTEM_MEMORY_INFO_2, *PMINIDUMP_SYSTEM_MEMORY_INFO_2;
+
+typedef MINIDUMP_SYSTEM_MEMORY_INFO_2 MINIDUMP_SYSTEM_MEMORY_INFO_N;
 typedef MINIDUMP_SYSTEM_MEMORY_INFO_N *PMINIDUMP_SYSTEM_MEMORY_INFO_N;
 
 //

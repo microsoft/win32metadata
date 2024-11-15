@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -191,6 +191,63 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationAddAccountResponse;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResponse
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationAddAccountResponseFactory;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResponseFactory
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationAddAccountResult;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResult
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics_FWD_DEFINED__
 namespace ABI {
@@ -266,6 +323,63 @@ namespace ABI {
 #define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4 ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationCoreManagerStatics4
 
 #endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationCoreManagerStatics5;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5 ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationCoreManagerStatics5
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationTransferTokenRequest;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationTransferTokenRequest
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        interface IWebAuthenticationTransferTokenRequestFactory;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationTransferTokenRequestFactory
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebProviderError_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebProviderError_FWD_DEFINED__
@@ -508,6 +622,74 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::Security::Authentication::
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CFindAllAccountsResult_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        class WebAuthenticationAddAccountResult;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("63824a59-b4fa-5e89-ba3c-d44e532a29d8"))
+IAsyncOperation<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*, ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*> __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_t;
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("fe15f0e6-6520-5b5e-ae26-b52a506b980d"))
+IAsyncOperationCompletedHandler<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*, ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountResult*> __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 namespace ABI {
     namespace Windows {
@@ -1174,6 +1356,20 @@ namespace ABI {
             namespace Authentication {
                 namespace Web {
                     namespace Core {
+                        typedef enum WebAuthenticationAddAccountStatus : int WebAuthenticationAddAccountStatus;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
                         typedef enum WebTokenRequestPromptType : int WebTokenRequestPromptType;
                     } /* Core */
                 } /* Web */
@@ -1189,6 +1385,34 @@ namespace ABI {
                 namespace Web {
                     namespace Core {
                         typedef enum WebTokenRequestStatus : int WebTokenRequestStatus;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        class WebAuthenticationAddAccountResponse;
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        class WebAuthenticationTransferTokenRequest;
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1252,6 +1476,36 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Struct Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        enum WebAuthenticationAddAccountStatus : int
+                        {
+                            WebAuthenticationAddAccountStatus_Success = 0,
+                            WebAuthenticationAddAccountStatus_Error = 1,
+                            WebAuthenticationAddAccountStatus_NotSupportedByProvider = 2,
+                            WebAuthenticationAddAccountStatus_ServiceConnectionError = 3,
+                            WebAuthenticationAddAccountStatus_ProviderError = 4,
+                        };
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -1345,7 +1599,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFindAllAccountsResult = _uuidof(IFindAllAccountsResult);
+                        MIDL_CONST_ID IID& IID_IFindAllAccountsResult = __uuidof(IFindAllAccountsResult);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1385,7 +1639,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountEventArgs = _uuidof(IWebAccountEventArgs);
+                        MIDL_CONST_ID IID& IID_IWebAccountEventArgs = __uuidof(IWebAccountEventArgs);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1443,7 +1697,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountMonitor = _uuidof(IWebAccountMonitor);
+                        MIDL_CONST_ID IID& IID_IWebAccountMonitor = __uuidof(IWebAccountMonitor);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1487,7 +1741,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAccountMonitor2 = _uuidof(IWebAccountMonitor2);
+                        MIDL_CONST_ID IID& IID_IWebAccountMonitor2 = __uuidof(IWebAccountMonitor2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1498,6 +1752,136 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResponse[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("7fb013e8-0bd8-542b-b486-8323163a4b85")
+                        IWebAuthenticationAddAccountResponse : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE get_WebAccount(
+                                ABI::Windows::Security::Credentials::IWebAccount** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_Properties(
+                                __FIMap_2_HSTRING_HSTRING** value
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationAddAccountResponse = __uuidof(IWebAuthenticationAddAccountResponse);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResponseFactory[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("325f903e-77be-5365-81d9-0321cdd82195")
+                        IWebAuthenticationAddAccountResponseFactory : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE CreateWithAccount(
+                                ABI::Windows::Security::Credentials::IWebAccount* webAccount,
+                                ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResponse** value
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationAddAccountResponseFactory = __uuidof(IWebAuthenticationAddAccountResponseFactory);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResult[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("88fad03c-901d-5ffa-9259-701d3ca08ef2")
+                        IWebAuthenticationAddAccountResult : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE get_ResponseData(
+                                ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationAddAccountResponse** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_ResponseStatus(
+                                ABI::Windows::Security::Authentication::Web::Core::WebAuthenticationAddAccountStatus* value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_ResponseError(
+                                ABI::Windows::Security::Authentication::Web::Core::IWebProviderError** value
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationAddAccountResult = __uuidof(IWebAuthenticationAddAccountResult);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -1556,7 +1940,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics = _uuidof(IWebAuthenticationCoreManagerStatics);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics = __uuidof(IWebAuthenticationCoreManagerStatics);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1602,7 +1986,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics2 = _uuidof(IWebAuthenticationCoreManagerStatics2);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics2 = __uuidof(IWebAuthenticationCoreManagerStatics2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1646,7 +2030,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics3 = _uuidof(IWebAuthenticationCoreManagerStatics3);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics3 = __uuidof(IWebAuthenticationCoreManagerStatics3);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1710,7 +2094,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics4 = _uuidof(IWebAuthenticationCoreManagerStatics4);
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics4 = __uuidof(IWebAuthenticationCoreManagerStatics4);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1721,6 +2105,150 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationCoreManagerStatics5[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("d07c1ded-270f-4554-9966-27b7df05b965")
+                        IWebAuthenticationCoreManagerStatics5 : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE AddAccountWithTransferTokenAsync(
+                                ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationTransferTokenRequest* request,
+                                __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult** operation
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationCoreManagerStatics5 = __uuidof(IWebAuthenticationCoreManagerStatics5);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationTransferTokenRequest[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("7acfa5b6-529d-5e76-9846-f3fd999304d0")
+                        IWebAuthenticationTransferTokenRequest : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE get_WebAccountProvider(
+                                ABI::Windows::Security::Credentials::IWebAccountProvider** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_TransferToken(
+                                HSTRING* value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE put_TransferToken(
+                                HSTRING value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_Properties(
+                                __FIMap_2_HSTRING_HSTRING** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE get_CorrelationId(
+                                HSTRING* value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE put_CorrelationId(
+                                HSTRING value
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationTransferTokenRequest = __uuidof(IWebAuthenticationTransferTokenRequest);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationTransferTokenRequestFactory[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Authentication {
+                namespace Web {
+                    namespace Core {
+                        MIDL_INTERFACE("5f16b627-04c4-5f0b-8683-8bab58965656")
+                        IWebAuthenticationTransferTokenRequestFactory : public IInspectable
+                        {
+                        public:
+                            virtual HRESULT STDMETHODCALLTYPE Create(
+                                ABI::Windows::Security::Credentials::IWebAccountProvider* provider,
+                                HSTRING transferToken,
+                                ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationTransferTokenRequest** value
+                                ) = 0;
+                            virtual HRESULT STDMETHODCALLTYPE CreateWithCorrelationId(
+                                ABI::Windows::Security::Credentials::IWebAccountProvider* provider,
+                                HSTRING transferToken,
+                                HSTRING correlationId,
+                                ABI::Windows::Security::Authentication::Web::Core::IWebAuthenticationTransferTokenRequest** value
+                                ) = 0;
+                        };
+
+                        MIDL_CONST_ID IID& IID_IWebAuthenticationTransferTokenRequestFactory = __uuidof(IWebAuthenticationTransferTokenRequestFactory);
+                    } /* Core */
+                } /* Web */
+            } /* Authentication */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -1756,7 +2284,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebProviderError = _uuidof(IWebProviderError);
+                        MIDL_CONST_ID IID& IID_IWebProviderError = __uuidof(IWebProviderError);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1798,7 +2326,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebProviderErrorFactory = _uuidof(IWebProviderErrorFactory);
+                        MIDL_CONST_ID IID& IID_IWebProviderErrorFactory = __uuidof(IWebProviderErrorFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1850,7 +2378,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest = _uuidof(IWebTokenRequest);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest = __uuidof(IWebTokenRequest);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1890,7 +2418,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest2 = _uuidof(IWebTokenRequest2);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest2 = __uuidof(IWebTokenRequest2);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1933,7 +2461,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequest3 = _uuidof(IWebTokenRequest3);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequest3 = __uuidof(IWebTokenRequest3);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -1992,7 +2520,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequestFactory = _uuidof(IWebTokenRequestFactory);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequestFactory = __uuidof(IWebTokenRequestFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2041,7 +2569,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenRequestResult = _uuidof(IWebTokenRequestResult);
+                        MIDL_CONST_ID IID& IID_IWebTokenRequestResult = __uuidof(IWebTokenRequestResult);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2090,7 +2618,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenResponse = _uuidof(IWebTokenResponse);
+                        MIDL_CONST_ID IID& IID_IWebTokenResponse = __uuidof(IWebTokenResponse);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2142,7 +2670,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IWebTokenResponseFactory = _uuidof(IWebTokenResponseFactory);
+                        MIDL_CONST_ID IID& IID_IWebTokenResponseFactory = __uuidof(IWebTokenResponseFactory);
                     } /* Core */
                 } /* Web */
             } /* Authentication */
@@ -2214,6 +2742,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -2223,6 +2794,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2235,6 +2807,30 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationCoreManager[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -2310,8 +2906,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebTokenResponseFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Authentication.Web.Core.IWebTokenResponse ** Default Interface **
@@ -2354,6 +2950,24 @@ typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAcc
 
 #endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics;
@@ -2377,6 +2991,24 @@ typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAut
 typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4 __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4;
 
 #endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5 __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory;
+
+#endif // ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebProviderError_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebProviderError_FWD_DEFINED__
@@ -2560,6 +3192,131 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthenticati
 
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CFindAllAccountsResult_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* This,
+        __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebTokenRequestResult __FIAsyncOperationCompletedHandler_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebTokenRequestResult;
 
@@ -3907,6 +4664,8 @@ typedef interface __x_ABI_CWindows_CSystem_CIUser __x_ABI_CWindows_CSystem_CIUse
 
 typedef enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CFindAllWebAccountsStatus __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CFindAllWebAccountsStatus;
 
+typedef enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebAuthenticationAddAccountStatus __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebAuthenticationAddAccountStatus;
+
 typedef enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebTokenRequestPromptType __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebTokenRequestPromptType;
 
 typedef enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebTokenRequestStatus __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebTokenRequestStatus;
@@ -3927,6 +4686,24 @@ enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CFindAllWebAccountsSt
     FindAllWebAccountsStatus_ProviderError = 3,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Struct Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebAuthenticationAddAccountStatus
+{
+    WebAuthenticationAddAccountStatus_Success = 0,
+    WebAuthenticationAddAccountStatus_Error = 1,
+    WebAuthenticationAddAccountStatus_NotSupportedByProvider = 2,
+    WebAuthenticationAddAccountStatus_ServiceConnectionError = 3,
+    WebAuthenticationAddAccountStatus_ProviderError = 4,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -4281,6 +5058,229 @@ interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMoni
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAccountMonitor2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResponse[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_WebAccount)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIWebAccount** value);
+    HRESULT (STDMETHODCALLTYPE* get_Properties)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse* This,
+        __FIMap_2_HSTRING_HSTRING** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseVtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_get_WebAccount(This, value) \
+    ((This)->lpVtbl->get_WebAccount(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_get_Properties(This, value) \
+    ((This)->lpVtbl->get_Properties(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResponseFactory[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateWithAccount)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIWebAccount* webAccount,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactoryVtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_CreateWithAccount(This, webAccount, value) \
+    ((This)->lpVtbl->CreateWithAccount(This, webAccount, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponseFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationAddAccountResult[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_ResponseData)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResponse** value);
+    HRESULT (STDMETHODCALLTYPE* get_ResponseStatus)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        enum __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CWebAuthenticationAddAccountStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_ResponseError)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult* This,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebProviderError** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResultVtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_get_ResponseData(This, value) \
+    ((This)->lpVtbl->get_ResponseData(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_get_ResponseStatus(This, value) \
+    ((This)->lpVtbl->get_ResponseStatus(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_get_ResponseError(This, value) \
+    ((This)->lpVtbl->get_ResponseError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationAddAccountResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -4640,6 +5640,249 @@ interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticat
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationCoreManagerStatics5[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* AddAccountWithTransferTokenAsync)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5* This,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* request,
+        __FIAsyncOperation_1_Windows__CSecurity__CAuthentication__CWeb__CCore__CWebAuthenticationAddAccountResult** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5Vtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_AddAccountWithTransferTokenAsync(This, request, operation) \
+    ((This)->lpVtbl->AddAccountWithTransferTokenAsync(This, request, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationCoreManagerStatics5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationTransferTokenRequest[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_WebAccountProvider)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIWebAccountProvider** value);
+    HRESULT (STDMETHODCALLTYPE* get_TransferToken)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_TransferToken)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Properties)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        __FIMap_2_HSTRING_HSTRING** value);
+    HRESULT (STDMETHODCALLTYPE* get_CorrelationId)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_CorrelationId)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest* This,
+        HSTRING value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestVtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_get_WebAccountProvider(This, value) \
+    ((This)->lpVtbl->get_WebAccountProvider(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_get_TransferToken(This, value) \
+    ((This)->lpVtbl->get_TransferToken(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_put_TransferToken(This, value) \
+    ((This)->lpVtbl->put_TransferToken(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_get_Properties(This, value) \
+    ((This)->lpVtbl->get_Properties(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_get_CorrelationId(This, value) \
+    ((This)->lpVtbl->get_CorrelationId(This, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_put_CorrelationId(This, value) \
+    ((This)->lpVtbl->put_CorrelationId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Authentication_Web_Core_IWebAuthenticationTransferTokenRequestFactory[] = L"Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory";
+typedef struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* Create)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIWebAccountProvider* provider,
+        HSTRING transferToken,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest** value);
+    HRESULT (STDMETHODCALLTYPE* CreateWithCorrelationId)(__x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIWebAccountProvider* provider,
+        HSTRING transferToken,
+        HSTRING correlationId,
+        __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequest** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactoryVtbl;
+
+interface __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_Create(This, provider, transferToken, value) \
+    ((This)->lpVtbl->Create(This, provider, transferToken, value))
+
+#define __x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_CreateWithCorrelationId(This, provider, transferToken, correlationId, value) \
+    ((This)->lpVtbl->CreateWithCorrelationId(This, provider, transferToken, correlationId, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CAuthentication_CWeb_CCore_CIWebAuthenticationTransferTokenRequestFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -5430,6 +6673,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponseFactory interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResponse ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResponse[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResponse";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationAddAccountResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationAddAccountResult[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationAddAccountResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5439,6 +6725,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Core.IWebAuthenticationCoreManagerStatics5 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5451,6 +6738,30 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationCoreManager[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationCoreManager";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequestFactory interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Security.Authentication.Web.Core.IWebAuthenticationTransferTokenRequest ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest_DEFINED
+#define RUNTIMECLASS_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Security_Authentication_Web_Core_WebAuthenticationTransferTokenRequest[] = L"Windows.Security.Authentication.Web.Core.WebAuthenticationTransferTokenRequest";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -5526,8 +6837,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Authentication.Web.Core.IWebTokenResponseFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Authentication.Web.Core.IWebTokenResponse ** Default Interface **

@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -5282,7 +5282,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Invoke(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueHandler = _uuidof(IDispatcherQueueHandler);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueHandler = __uuidof(IDispatcherQueueHandler);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5319,7 +5319,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppActivationResult = _uuidof(IAppActivationResult);
+            MIDL_CONST_ID IID& IID_IAppActivationResult = __uuidof(IAppActivationResult);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5353,7 +5353,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfo = _uuidof(IAppDiagnosticInfo);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfo = __uuidof(IAppDiagnosticInfo);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5390,7 +5390,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfo2 = _uuidof(IAppDiagnosticInfo2);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfo2 = __uuidof(IAppDiagnosticInfo2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5424,7 +5424,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfo3 = _uuidof(IAppDiagnosticInfo3);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfo3 = __uuidof(IAppDiagnosticInfo3);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5458,7 +5458,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfoStatics = _uuidof(IAppDiagnosticInfoStatics);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfoStatics = __uuidof(IAppDiagnosticInfoStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5506,7 +5506,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfoStatics2 = _uuidof(IAppDiagnosticInfoStatics2);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfoStatics2 = __uuidof(IAppDiagnosticInfoStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5570,7 +5570,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfoWatcher = _uuidof(IAppDiagnosticInfoWatcher);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfoWatcher = __uuidof(IAppDiagnosticInfoWatcher);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5604,7 +5604,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDiagnosticInfoWatcherEventArgs = _uuidof(IAppDiagnosticInfoWatcherEventArgs);
+            MIDL_CONST_ID IID& IID_IAppDiagnosticInfoWatcherEventArgs = __uuidof(IAppDiagnosticInfoWatcherEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5638,7 +5638,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppExecutionStateChangeResult = _uuidof(IAppExecutionStateChangeResult);
+            MIDL_CONST_ID IID& IID_IAppExecutionStateChangeResult = __uuidof(IAppExecutionStateChangeResult);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5681,7 +5681,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppMemoryReport = _uuidof(IAppMemoryReport);
+            MIDL_CONST_ID IID& IID_IAppMemoryReport = __uuidof(IAppMemoryReport);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5715,7 +5715,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppMemoryReport2 = _uuidof(IAppMemoryReport2);
+            MIDL_CONST_ID IID& IID_IAppMemoryReport2 = __uuidof(IAppMemoryReport2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5752,7 +5752,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppMemoryUsageLimitChangingEventArgs = _uuidof(IAppMemoryUsageLimitChangingEventArgs);
+            MIDL_CONST_ID IID& IID_IAppMemoryUsageLimitChangingEventArgs = __uuidof(IAppMemoryUsageLimitChangingEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5795,7 +5795,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupBackgroundTaskReport = _uuidof(IAppResourceGroupBackgroundTaskReport);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupBackgroundTaskReport = __uuidof(IAppResourceGroupBackgroundTaskReport);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5844,7 +5844,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupInfo = _uuidof(IAppResourceGroupInfo);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupInfo = __uuidof(IAppResourceGroupInfo);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5884,7 +5884,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupInfo2 = _uuidof(IAppResourceGroupInfo2);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupInfo2 = __uuidof(IAppResourceGroupInfo2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5955,7 +5955,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcher = _uuidof(IAppResourceGroupInfoWatcher);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcher = __uuidof(IAppResourceGroupInfoWatcher);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -5992,7 +5992,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcherEventArgs = _uuidof(IAppResourceGroupInfoWatcherEventArgs);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcherEventArgs = __uuidof(IAppResourceGroupInfoWatcherEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6029,7 +6029,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs = _uuidof(IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs = __uuidof(IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6072,7 +6072,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupMemoryReport = _uuidof(IAppResourceGroupMemoryReport);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupMemoryReport = __uuidof(IAppResourceGroupMemoryReport);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6109,7 +6109,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppResourceGroupStateReport = _uuidof(IAppResourceGroupStateReport);
+            MIDL_CONST_ID IID& IID_IAppResourceGroupStateReport = __uuidof(IAppResourceGroupStateReport);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6146,7 +6146,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerHost = _uuidof(IAppUriHandlerHost);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerHost = __uuidof(IAppUriHandlerHost);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6183,7 +6183,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerHost2 = _uuidof(IAppUriHandlerHost2);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerHost2 = __uuidof(IAppUriHandlerHost2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6218,7 +6218,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerHostFactory = _uuidof(IAppUriHandlerHostFactory);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerHostFactory = __uuidof(IAppUriHandlerHostFactory);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6262,7 +6262,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistration = _uuidof(IAppUriHandlerRegistration);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistration = __uuidof(IAppUriHandlerRegistration);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6302,7 +6302,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistration2 = _uuidof(IAppUriHandlerRegistration2);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistration2 = __uuidof(IAppUriHandlerRegistration2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6340,7 +6340,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManager = _uuidof(IAppUriHandlerRegistrationManager);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManager = __uuidof(IAppUriHandlerRegistrationManager);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6374,7 +6374,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManager2 = _uuidof(IAppUriHandlerRegistrationManager2);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManager2 = __uuidof(IAppUriHandlerRegistrationManager2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6412,7 +6412,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManagerStatics = _uuidof(IAppUriHandlerRegistrationManagerStatics);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManagerStatics = __uuidof(IAppUriHandlerRegistrationManagerStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6452,7 +6452,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManagerStatics2 = _uuidof(IAppUriHandlerRegistrationManagerStatics2);
+            MIDL_CONST_ID IID& IID_IAppUriHandlerRegistrationManagerStatics2 = __uuidof(IAppUriHandlerRegistrationManagerStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6486,7 +6486,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDateTimeSettingsStatics = _uuidof(IDateTimeSettingsStatics);
+            MIDL_CONST_ID IID& IID_IDateTimeSettingsStatics = __uuidof(IDateTimeSettingsStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6543,7 +6543,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueue = _uuidof(IDispatcherQueue);
+            MIDL_CONST_ID IID& IID_IDispatcherQueue = __uuidof(IDispatcherQueue);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6577,7 +6577,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueue2 = _uuidof(IDispatcherQueue2);
+            MIDL_CONST_ID IID& IID_IDispatcherQueue2 = __uuidof(IDispatcherQueue2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6614,7 +6614,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueController = _uuidof(IDispatcherQueueController);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueController = __uuidof(IDispatcherQueueController);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6648,7 +6648,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueControllerStatics = _uuidof(IDispatcherQueueControllerStatics);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueControllerStatics = __uuidof(IDispatcherQueueControllerStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6682,7 +6682,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueShutdownStartingEventArgs = _uuidof(IDispatcherQueueShutdownStartingEventArgs);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueShutdownStartingEventArgs = __uuidof(IDispatcherQueueShutdownStartingEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6716,7 +6716,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueStatics = _uuidof(IDispatcherQueueStatics);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueStatics = __uuidof(IDispatcherQueueStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6771,7 +6771,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDispatcherQueueTimer = _uuidof(IDispatcherQueueTimer);
+            MIDL_CONST_ID IID& IID_IDispatcherQueueTimer = __uuidof(IDispatcherQueueTimer);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6805,7 +6805,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IFolderLauncherOptions = _uuidof(IFolderLauncherOptions);
+            MIDL_CONST_ID IID& IID_IFolderLauncherOptions = __uuidof(IFolderLauncherOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6863,7 +6863,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownUserPropertiesStatics = _uuidof(IKnownUserPropertiesStatics);
+            MIDL_CONST_ID IID& IID_IKnownUserPropertiesStatics = __uuidof(IKnownUserPropertiesStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6897,7 +6897,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownUserPropertiesStatics2 = _uuidof(IKnownUserPropertiesStatics2);
+            MIDL_CONST_ID IID& IID_IKnownUserPropertiesStatics2 = __uuidof(IKnownUserPropertiesStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -6934,7 +6934,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILaunchUriResult = _uuidof(ILaunchUriResult);
+            MIDL_CONST_ID IID& IID_ILaunchUriResult = __uuidof(ILaunchUriResult);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7004,7 +7004,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherOptions = _uuidof(ILauncherOptions);
+            MIDL_CONST_ID IID& IID_ILauncherOptions = __uuidof(ILauncherOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7047,7 +7047,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherOptions2 = _uuidof(ILauncherOptions2);
+            MIDL_CONST_ID IID& IID_ILauncherOptions2 = __uuidof(ILauncherOptions2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7084,7 +7084,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherOptions3 = _uuidof(ILauncherOptions3);
+            MIDL_CONST_ID IID& IID_ILauncherOptions3 = __uuidof(ILauncherOptions3);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7121,7 +7121,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherOptions4 = _uuidof(ILauncherOptions4);
+            MIDL_CONST_ID IID& IID_ILauncherOptions4 = __uuidof(ILauncherOptions4);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7170,7 +7170,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherStatics = _uuidof(ILauncherStatics);
+            MIDL_CONST_ID IID& IID_ILauncherStatics = __uuidof(ILauncherStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7251,7 +7251,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherStatics2 = _uuidof(ILauncherStatics2);
+            MIDL_CONST_ID IID& IID_ILauncherStatics2 = __uuidof(ILauncherStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7291,7 +7291,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherStatics3 = _uuidof(ILauncherStatics3);
+            MIDL_CONST_ID IID& IID_ILauncherStatics3 = __uuidof(ILauncherStatics3);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7366,7 +7366,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherStatics4 = _uuidof(ILauncherStatics4);
+            MIDL_CONST_ID IID& IID_ILauncherStatics4 = __uuidof(ILauncherStatics4);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7417,7 +7417,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherStatics5 = _uuidof(ILauncherStatics5);
+            MIDL_CONST_ID IID& IID_ILauncherStatics5 = __uuidof(ILauncherStatics5);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7466,7 +7466,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherUIOptions = _uuidof(ILauncherUIOptions);
+            MIDL_CONST_ID IID& IID_ILauncherUIOptions = __uuidof(ILauncherUIOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7501,7 +7501,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ILauncherViewOptions = _uuidof(ILauncherViewOptions);
+            MIDL_CONST_ID IID& IID_ILauncherViewOptions = __uuidof(ILauncherViewOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7562,7 +7562,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IMemoryManagerStatics = _uuidof(IMemoryManagerStatics);
+            MIDL_CONST_ID IID& IID_IMemoryManagerStatics = __uuidof(IMemoryManagerStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7599,7 +7599,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IMemoryManagerStatics2 = _uuidof(IMemoryManagerStatics2);
+            MIDL_CONST_ID IID& IID_IMemoryManagerStatics2 = __uuidof(IMemoryManagerStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7634,7 +7634,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IMemoryManagerStatics3 = _uuidof(IMemoryManagerStatics3);
+            MIDL_CONST_ID IID& IID_IMemoryManagerStatics3 = __uuidof(IMemoryManagerStatics3);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7668,7 +7668,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IMemoryManagerStatics4 = _uuidof(IMemoryManagerStatics4);
+            MIDL_CONST_ID IID& IID_IMemoryManagerStatics4 = __uuidof(IMemoryManagerStatics4);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7723,7 +7723,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IProcessLauncherOptions = _uuidof(IProcessLauncherOptions);
+            MIDL_CONST_ID IID& IID_IProcessLauncherOptions = __uuidof(IProcessLauncherOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7757,7 +7757,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IProcessLauncherResult = _uuidof(IProcessLauncherResult);
+            MIDL_CONST_ID IID& IID_IProcessLauncherResult = __uuidof(IProcessLauncherResult);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7799,7 +7799,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IProcessLauncherStatics = _uuidof(IProcessLauncherStatics);
+            MIDL_CONST_ID IID& IID_IProcessLauncherStatics = __uuidof(IProcessLauncherStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7836,7 +7836,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IProcessMemoryReport = _uuidof(IProcessMemoryReport);
+            MIDL_CONST_ID IID& IID_IProcessMemoryReport = __uuidof(IProcessMemoryReport);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7870,7 +7870,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IProtocolForResultsOperation = _uuidof(IProtocolForResultsOperation);
+            MIDL_CONST_ID IID& IID_IProtocolForResultsOperation = __uuidof(IProtocolForResultsOperation);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7910,7 +7910,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IRemoteLauncherOptions = _uuidof(IRemoteLauncherOptions);
+            MIDL_CONST_ID IID& IID_IRemoteLauncherOptions = __uuidof(IRemoteLauncherOptions);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7959,7 +7959,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IRemoteLauncherStatics = _uuidof(IRemoteLauncherStatics);
+            MIDL_CONST_ID IID& IID_IRemoteLauncherStatics = __uuidof(IRemoteLauncherStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -7995,7 +7995,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE CancelShutdown(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IShutdownManagerStatics = _uuidof(IShutdownManagerStatics);
+            MIDL_CONST_ID IID& IID_IShutdownManagerStatics = __uuidof(IShutdownManagerStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8040,7 +8040,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IShutdownManagerStatics2 = _uuidof(IShutdownManagerStatics2);
+            MIDL_CONST_ID IID& IID_IShutdownManagerStatics2 = __uuidof(IShutdownManagerStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8083,7 +8083,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ITimeZoneSettingsStatics = _uuidof(ITimeZoneSettingsStatics);
+            MIDL_CONST_ID IID& IID_ITimeZoneSettingsStatics = __uuidof(ITimeZoneSettingsStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8118,7 +8118,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ITimeZoneSettingsStatics2 = _uuidof(ITimeZoneSettingsStatics2);
+            MIDL_CONST_ID IID& IID_ITimeZoneSettingsStatics2 = __uuidof(ITimeZoneSettingsStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8170,7 +8170,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUser = _uuidof(IUser);
+            MIDL_CONST_ID IID& IID_IUser = __uuidof(IUser);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8205,7 +8205,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUser2 = _uuidof(IUser2);
+            MIDL_CONST_ID IID& IID_IUser2 = __uuidof(IUser2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8237,7 +8237,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserAuthenticationStatusChangeDeferral = _uuidof(IUserAuthenticationStatusChangeDeferral);
+            MIDL_CONST_ID IID& IID_IUserAuthenticationStatusChangeDeferral = __uuidof(IUserAuthenticationStatusChangeDeferral);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8280,7 +8280,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserAuthenticationStatusChangingEventArgs = _uuidof(IUserAuthenticationStatusChangingEventArgs);
+            MIDL_CONST_ID IID& IID_IUserAuthenticationStatusChangingEventArgs = __uuidof(IUserAuthenticationStatusChangingEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8314,7 +8314,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserChangedEventArgs = _uuidof(IUserChangedEventArgs);
+            MIDL_CONST_ID IID& IID_IUserChangedEventArgs = __uuidof(IUserChangedEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8348,7 +8348,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserChangedEventArgs2 = _uuidof(IUserChangedEventArgs2);
+            MIDL_CONST_ID IID& IID_IUserChangedEventArgs2 = __uuidof(IUserChangedEventArgs2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8388,7 +8388,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserDeviceAssociationChangedEventArgs = _uuidof(IUserDeviceAssociationChangedEventArgs);
+            MIDL_CONST_ID IID& IID_IUserDeviceAssociationChangedEventArgs = __uuidof(IUserDeviceAssociationChangedEventArgs);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8430,7 +8430,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserDeviceAssociationStatics = _uuidof(IUserDeviceAssociationStatics);
+            MIDL_CONST_ID IID& IID_IUserDeviceAssociationStatics = __uuidof(IUserDeviceAssociationStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8476,7 +8476,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserPicker = _uuidof(IUserPicker);
+            MIDL_CONST_ID IID& IID_IUserPicker = __uuidof(IUserPicker);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8510,7 +8510,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserPickerStatics = _uuidof(IUserPickerStatics);
+            MIDL_CONST_ID IID& IID_IUserPickerStatics = __uuidof(IUserPickerStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8566,7 +8566,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserStatics = _uuidof(IUserStatics);
+            MIDL_CONST_ID IID& IID_IUserStatics = __uuidof(IUserStatics);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8600,7 +8600,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserStatics2 = _uuidof(IUserStatics2);
+            MIDL_CONST_ID IID& IID_IUserStatics2 = __uuidof(IUserStatics2);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8685,7 +8685,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserWatcher = _uuidof(IUserWatcher);
+            MIDL_CONST_ID IID& IID_IUserWatcher = __uuidof(IUserWatcher);
         } /* System */
     } /* Windows */
 } /* ABI */
@@ -8722,8 +8722,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppDiagnosticInfo ** Default Interface **
@@ -8999,8 +8999,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.System.IAppUriHandlerHostFactory interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerHost ** Default Interface **
@@ -9045,8 +9045,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistrationManager ** Default Interface **
@@ -9245,11 +9245,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9486,8 +9486,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.IShutdownManagerStatics2 interface starting with version 3.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9506,8 +9506,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -9526,8 +9526,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IUserStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IUser ** Default Interface **
@@ -24061,8 +24061,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppDiagnosticInfo ** Default Interface **
@@ -24338,8 +24338,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.System.IAppUriHandlerHostFactory interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerHost ** Default Interface **
@@ -24384,8 +24384,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IAppUriHandlerRegistrationManagerStatics2 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IAppUriHandlerRegistrationManager ** Default Interface **
@@ -24584,11 +24584,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.ILauncherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.ILauncherStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -24825,8 +24825,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.IShutdownManagerStatics2 interface starting with version 3.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.IShutdownManagerStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -24845,8 +24845,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.SystemManagementContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics interface starting with version 1.0 of the Windows.System.SystemManagementContract API contract
+ *   Static Methods exist on the Windows.System.ITimeZoneSettingsStatics2 interface starting with version 5.0 of the Windows.System.SystemManagementContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -24865,8 +24865,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.IUserStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.IUserStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.IUser ** Default Interface **

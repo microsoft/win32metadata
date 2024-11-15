@@ -271,6 +271,22 @@ typedef struct _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
 #define BCRYPT_AES_WRAP_KEY_BLOB    L"Rfc3565KeyWrapBlob"
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+#define BCRYPT_PKCS11_RSA_AES_WRAP_KEY_BLOB L"PKCS11RsaAesWrapBlob"
+
+#define BCRYPT_PKCS11_RSA_AES_WRAP_BLOB_MAGIC 0x57504152  // 'RAPW' for RSA-AES-PAD-WRAP (PKCS11-RSA-AES-WRAP)
+typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
+    ULONG dwMagic;         // BCRYPT_PKCS11_RSA_AES_WRAP_BLOB_MAGIC
+    ULONG cbKey;           // Number of bytes in the binary PKCS#11 wrapped key blob
+    ULONG cbPaddingAlgId;  // Number of bytes in OAEP Padding algorithm per OAEPParams in PKCS#11 specification
+    ULONG cbPaddingLabel;  // Number of bytes in OAEP Padding label per OAEPParams in PKCS#11 specification
+    // UCHAR Key[cbKey];                   -- PKCS#11 binary blob
+    // UCHAR PaddingAlgId[cbPaddingAlgId]; -- OAEP Padding information for PKCS#11 unwrapping
+    // UCHAR PaddingLabel[cbPaddingLabel]; -- OAEP Padding information for PKCS#11 unwrapping
+} BCRYPT_PKCS11_RSA_AES_WRAP_BLOB, *PBCRYPT_PKCS11_RSA_AES_WRAP_BLOB;
+
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 // BCryptGetProperty strings
 #define BCRYPT_OBJECT_LENGTH        L"ObjectLength"
 #define BCRYPT_ALGORITHM_NAME       L"AlgorithmName"
@@ -289,6 +305,11 @@ typedef struct _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
 #define BCRYPT_SIGNATURE_LENGTH     L"SignatureLength"
 #define BCRYPT_HASH_BLOCK_LENGTH    L"HashBlockLength"
 #define BCRYPT_AUTH_TAG_LENGTH      L"AuthTagLength"
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#define BCRYPT_FUNCTION_NAME_STRING L"FunctionNameString"
+#define BCRYPT_CUSTOMIZATION_STRING L"CustomizationString"
+#endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN7)
 #define BCRYPT_PRIMITIVE_TYPE       L"PrimitiveType"
@@ -361,6 +382,9 @@ typedef struct _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
 #define BCRYPT_CHAIN_MODE_CFB       L"ChainingModeCFB"
 #define BCRYPT_CHAIN_MODE_CCM       L"ChainingModeCCM"
 #define BCRYPT_CHAIN_MODE_GCM       L"ChainingModeGCM"
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#define BCRYPT_CHAIN_MODE_KWP       L"ChainingModeKWP"
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 // Supported RSA Padding Types
 #define BCRYPT_SUPPORTED_PAD_ROUTER     0x00000001
@@ -484,6 +508,7 @@ typedef struct _BCRYPT_RSAKEY_BLOB
 #define BCRYPT_ECCFULLPRIVATE_BLOB      L"ECCFULLPRIVATEBLOB"
 #define SSL_ECCPUBLIC_BLOB              L"SSLECCPUBLICBLOB"
 #endif
+#define TLS_13_PRE_SHARED_KEY           L"TLS13PRESHAREDKEY"
 
 #define BCRYPT_ECDH_PUBLIC_P256_MAGIC   0x314B4345  // ECK1
 #define BCRYPT_ECDH_PRIVATE_P256_MAGIC  0x324B4345  // ECK2
@@ -853,6 +878,16 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_CHACHA20_POLY1305_ALGORITHM      L"CHACHA20_POLY1305"
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#define BCRYPT_SHA3_256_ALGORITHM               L"SHA3-256"
+#define BCRYPT_SHA3_384_ALGORITHM               L"SHA3-384"
+#define BCRYPT_SHA3_512_ALGORITHM               L"SHA3-512"
+#define BCRYPT_CSHAKE128_ALGORITHM              L"CSHAKE128"
+#define BCRYPT_CSHAKE256_ALGORITHM              L"CSHAKE256"
+#define BCRYPT_KMAC128_ALGORITHM                L"KMAC128"
+#define BCRYPT_KMAC256_ALGORITHM                L"KMAC256"
+#endif
+
 //
 // Interfaces
 //
@@ -947,6 +982,23 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_CHACHA20_POLY1305_ALG_HANDLE     ((BCRYPT_ALG_HANDLE) 0x000003A1)
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#define BCRYPT_SHA3_256_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x000003B1)
+#define BCRYPT_SHA3_384_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x000003C1)
+#define BCRYPT_SHA3_512_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x000003D1)
+#define BCRYPT_HMAC_SHA3_256_ALG_HANDLE         ((BCRYPT_ALG_HANDLE) 0x000003E1)
+#define BCRYPT_HMAC_SHA3_384_ALG_HANDLE         ((BCRYPT_ALG_HANDLE) 0x000003F1)
+#define BCRYPT_HMAC_SHA3_512_ALG_HANDLE         ((BCRYPT_ALG_HANDLE) 0x00000401)
+#define BCRYPT_CSHAKE128_ALG_HANDLE             ((BCRYPT_ALG_HANDLE) 0x00000411)
+#define BCRYPT_CSHAKE256_ALG_HANDLE             ((BCRYPT_ALG_HANDLE) 0x00000421)
+#define BCRYPT_KMAC128_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000431)
+#define BCRYPT_KMAC256_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000441)
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#define BCRYPT_AES_KWP_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000451)
+#endif
+
 //
 // Primitive algorithm provider functions.
 //
@@ -960,6 +1012,17 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 #if (NTDDI_VERSION > NTDDI_WINBLUE || (NTDDI_VERSION == NTDDI_WINBLUE && defined(WINBLUE_KBSPRING14)))
 #define BCRYPT_MULTI_FLAG                       0x00000040
+#endif
+
+//
+// Extendable-output functions (XOFs) allow generating output multiple times from their
+// state. BCRYPT_HASH_DONT_RESET_FLAG allows to override the default behavior of BCryptFinishHash,
+// which is to reset the hash state. If this flag is set, the hash state is not reset and
+// users may invoke BCryptFinishHash to generate more data out of the hash/XOF state, until
+// after a BCryptFinishHash call where this flag is unset.
+//
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#define BCRYPT_HASH_DONT_RESET_FLAG            0x00000001
 #endif
 
 //

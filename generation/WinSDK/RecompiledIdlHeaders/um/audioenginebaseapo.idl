@@ -1217,6 +1217,32 @@ interface IApoAcousticEchoCancellation : IUnknown
 {
 };
 
+//-------------------------------------------------------------------------
+// Description: Flags describing the desired characteristics of a refrence
+//              stream.
+//
+//    APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK -
+//         If the device endpoint supports it, use the post volume tap point
+//         for the loopback stream.
+typedef [v1_enum] enum APO_REFERENCE_STREAM_PROPERTIES
+{
+    APO_REFERENCE_STREAM_PROPERTIES_NONE                  = 0x00,
+    APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK  = 0x01
+} APO_REFERENCE_STREAM_PROPERTIES;
+
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(APO_REFERENCE_STREAM_PROPERTIES);")
+
+// This interface is used to identify APOs that implement Acoustic Echo Cancellation
+// and wish to use post-volume processing loopback streams.
+[
+    object,
+    uuid(F235855F-F06D-45B3-A63F-EE4B71509DC2),
+    pointer_default(unique)
+]
+interface IApoAcousticEchoCancellation2 : IApoAcousticEchoCancellation
+{
+    HRESULT GetDesiredReferenceStreamProperties ([out] APO_REFERENCE_STREAM_PROPERTIES* pProperties);
+};
 
 //
 // This is the structure that gets passed to the system effects APO for
@@ -1431,6 +1457,22 @@ cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToRender, 0xD04E05A6, 0x594B, 0x4fb6
 // vartype = VT_I4
 // {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},33
 cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToCapture, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 33);")
+
+// PKEY_FX_RequestSetAsDefault:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},34
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_RequestSetAsDefault, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 34);")
+
+// PKEY_FX_RequestSetAsDefaultPriority:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},35
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_RequestSetAsDefaultPriority, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 35);")
+
+// PKEY_FX_OEM_Preferred_EffectPack_Id:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},36
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_OEM_Preferred_EffectPack_Id, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 36);")
+
 
 // PKEY_SFX_ProcessingModes_Supported_For_Streaming:
 // vartype = VT_VECTOR | VT_LPWSTR

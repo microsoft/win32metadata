@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -767,7 +767,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdAuthenticator = _uuidof(IOnlineIdAuthenticator);
+                    MIDL_CONST_ID IID& IID_IOnlineIdAuthenticator = __uuidof(IOnlineIdAuthenticator);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -811,7 +811,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdServiceTicket = _uuidof(IOnlineIdServiceTicket);
+                    MIDL_CONST_ID IID& IID_IOnlineIdServiceTicket = __uuidof(IOnlineIdServiceTicket);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -852,7 +852,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdServiceTicketRequest = _uuidof(IOnlineIdServiceTicketRequest);
+                    MIDL_CONST_ID IID& IID_IOnlineIdServiceTicketRequest = __uuidof(IOnlineIdServiceTicketRequest);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -896,7 +896,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdServiceTicketRequestFactory = _uuidof(IOnlineIdServiceTicketRequestFactory);
+                    MIDL_CONST_ID IID& IID_IOnlineIdServiceTicketRequestFactory = __uuidof(IOnlineIdServiceTicketRequestFactory);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -944,7 +944,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdSystemAuthenticatorForUser = _uuidof(IOnlineIdSystemAuthenticatorForUser);
+                    MIDL_CONST_ID IID& IID_IOnlineIdSystemAuthenticatorForUser = __uuidof(IOnlineIdSystemAuthenticatorForUser);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -986,7 +986,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdSystemAuthenticatorStatics = _uuidof(IOnlineIdSystemAuthenticatorStatics);
+                    MIDL_CONST_ID IID& IID_IOnlineIdSystemAuthenticatorStatics = __uuidof(IOnlineIdSystemAuthenticatorStatics);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -1027,7 +1027,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdSystemIdentity = _uuidof(IOnlineIdSystemIdentity);
+                    MIDL_CONST_ID IID& IID_IOnlineIdSystemIdentity = __uuidof(IOnlineIdSystemIdentity);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -1071,7 +1071,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IOnlineIdSystemTicketResult = _uuidof(IOnlineIdSystemTicketResult);
+                    MIDL_CONST_ID IID& IID_IOnlineIdSystemTicketResult = __uuidof(IOnlineIdSystemTicketResult);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */
@@ -1130,7 +1130,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IUserIdentity = _uuidof(IUserIdentity);
+                    MIDL_CONST_ID IID& IID_IUserIdentity = __uuidof(IUserIdentity);
                 } /* OnlineId */
             } /* Authentication */
         } /* Security */

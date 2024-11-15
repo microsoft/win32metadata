@@ -209,6 +209,9 @@
 #define FACILITY_SYNCENGINE              2050
 #define FACILITY_XBOX                    2339
 #define FACILITY_GAME                    2340
+#define FACILITY_USERMODE_UNIONFS        2341
+#define FACILITY_USERMODE_PRM            2342
+#define FACILITY_USERMODE_WIN_ACCEL      2343
 #define FACILITY_PIX                     2748
 
 
@@ -3036,7 +3039,8 @@
 //
 // MessageText:
 //
-// The Windows Subsystem for Linux has not been enabled.
+// The Windows Subsystem for Linux is not installed. You can install by running 'wsl.exe --install'.
+// For more information please visit https://aka.ms/wslinstall
 //
 #define ERROR_LINUX_SUBSYSTEM_NOT_PRESENT 414L
 
@@ -3306,7 +3310,8 @@
 //
 // MessageText:
 //
-// WSL 2 requires an update to its kernel component. For information please visit https://aka.ms/wsl2kernel
+// Windows Subsystem for Linux must be updated to the latest version to proceed. You can update by running 'wsl.exe --update'.
+// For more information please visit https://aka.ms/wslinstall
 //
 #define ERROR_LINUX_SUBSYSTEM_UPDATE_REQUIRED 444L
 
@@ -3545,14 +3550,17 @@
 #define ERROR_CANT_ATTACH_TO_DEV_VOLUME  478L
 
 //
-// MessageId: ERROR_INVALID_CONFIG_VALUE
+// MessageId: ERROR_MEMORY_DECOMPRESSION_FAILURE
 //
 // MessageText:
 //
-// The configured value is not valid.
+// The data stored in compressed memory falied to be decompressed.
 //
-#define ERROR_INVALID_CONFIG_VALUE       479L
+#define ERROR_MEMORY_DECOMPRESSION_FAILURE 479L
 
+//
+// **** Available SYSTEM error codes ****
+//
 //
 // MessageId: ERROR_PNP_QUERY_REMOVE_DEVICE_TIMEOUT
 //
@@ -3876,6 +3884,33 @@
 // Volume upgrade is disabled until Windows OS downgrade period has expired.
 //
 #define ERROR_VOLUME_UPGRADE_DISABLED_TILL_OS_DOWNGRADE_EXPIRED 518L
+
+//
+// MessageId: ERROR_INVALID_CONFIG_VALUE
+//
+// MessageText:
+//
+// The configured value is not valid.
+//
+#define ERROR_INVALID_CONFIG_VALUE       519L
+
+//
+// MessageId: ERROR_MEMORY_DECOMPRESSION_HW_ERROR
+//
+// MessageText:
+//
+// The data stored in compressed memory falied to be decompressed due to encountering an uncorrectable hardware memory error.
+//
+#define ERROR_MEMORY_DECOMPRESSION_HW_ERROR 520L
+
+//
+// MessageId: ERROR_VOLUME_ROLLBACK_DETECTED
+//
+// MessageText:
+//
+// The operation was aborted because the observed volume identity or current state was not expected.
+//
+#define ERROR_VOLUME_ROLLBACK_DETECTED   521L
 
 //
 // **** Available SYSTEM error codes ****
@@ -8750,7 +8785,7 @@
 //
 // MessageText:
 //
-// Unable to update the password. The value provided for the new password does not meet the length, complexity, or history requirements of the domain.
+// Unable to update the password. The value provided for the new password does not meet the length, complexity, or history requirements of the machine or domain. Try increasing the length of your password, along with including upper and lowercase characters, numbers, and symbols.
 //
 #define ERROR_PASSWORD_RESTRICTION       1325L
 
@@ -12804,9 +12839,18 @@
 //
 // MessageText:
 //
-// The user canceled the authentication prompt to a remote server. 
+// The user canceled the authentication prompt to a remote server.
 //
 #define ERROR_NETWORK_AUTHENTICATION_PROMPT_CANCELED 3024L
+
+//
+// MessageId: ERROR_REMOTE_MAILSLOTS_DEPRECATED
+//
+// MessageText:
+//
+// The requested operation failed. Remote mailslots have been deprecated.
+//
+#define ERROR_REMOTE_MAILSLOTS_DEPRECATED 3025L
 
 
 ///////////////////////////////////////////////////
@@ -13028,6 +13072,42 @@
 // Volatile verification settings cannot be changed when verification is enabled from boot or DIF volatile verification is enabled.
 //
 #define ERROR_VRF_VOLATILE_SETTINGS_CONFLICT 3087L
+
+//
+// MessageId: ERROR_CAR_LKD_IN_PROGRESS
+//
+// MessageText:
+//
+// Live memory dump generation is in progress.
+//
+#define ERROR_CAR_LKD_IN_PROGRESS        3088L
+
+//
+// MessageId: ERROR_DIF_ZERO_SIZE_INFORMATION
+//
+// MessageText:
+//
+// There is no captured information.
+//
+#define ERROR_DIF_ZERO_SIZE_INFORMATION  3187L
+
+//
+// MessageId: ERROR_DIF_DRIVER_PLUGIN_MISMATCH
+//
+// MessageText:
+//
+// The given rule class ID is not registered by the caller.
+//
+#define ERROR_DIF_DRIVER_PLUGIN_MISMATCH 3188L
+
+//
+// MessageId: ERROR_DIF_DRIVER_THUNKS_NOT_ALLOWED
+//
+// MessageText:
+//
+// Driver thunks are not added when kernel verification is in effect.
+//
+#define ERROR_DIF_DRIVER_THUNKS_NOT_ALLOWED 3189L
 
 //
 // MessageId: ERROR_DIF_IOCALLBACK_NOT_REPLACED
@@ -14413,7 +14493,7 @@
 //
 // MessageText:
 //
-// System Integrity detected that policy rollback has been attempted.
+// Application Control detected that policy rollback has been attempted.
 //
 #define ERROR_SYSTEM_INTEGRITY_ROLLBACK_DETECTED 4550L
 
@@ -14422,7 +14502,7 @@
 //
 // MessageText:
 //
-// Your organization used Device Guard to block this app. Contact your support person for more info.
+// An Application Control policy has blocked this file.
 //
 #define ERROR_SYSTEM_INTEGRITY_POLICY_VIOLATION 4551L
 
@@ -14431,7 +14511,7 @@
 //
 // MessageText:
 //
-// The System Integrity policy is invalid.
+// The Application Control policy is invalid.
 //
 #define ERROR_SYSTEM_INTEGRITY_INVALID_POLICY 4552L
 
@@ -14440,7 +14520,7 @@
 //
 // MessageText:
 //
-// The System Integrity policy is either not signed or is signed by a non-trusted signer.
+// The Application Control policy is either not signed or is signed by a non-trusted signer.
 //
 #define ERROR_SYSTEM_INTEGRITY_POLICY_NOT_SIGNED 4553L
 
@@ -14449,7 +14529,7 @@
 //
 // MessageText:
 //
-// The number of System Integrity policies is out of limit.
+// The number of Application Control policies is out of limit.
 //
 #define ERROR_SYSTEM_INTEGRITY_TOO_MANY_POLICIES 4554L
 
@@ -14458,7 +14538,7 @@
 //
 // MessageText:
 //
-// The Code Integrity supplemental policy is not authorized by a Code Integrity base policy.
+// The Application Control supplemental policy is not authorized by an Application Control base policy.
 //
 #define ERROR_SYSTEM_INTEGRITY_SUPPLEMENTAL_POLICY_NOT_AUTHORIZED 4555L
 
@@ -14467,7 +14547,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Malicious binary reputation.
+// An Application Control policy has blocked this file.  Malicious binary reputation.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_MALICIOUS 4556L
 
@@ -14476,7 +14556,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Potentially unwanted application.
+// An Application Control policy has blocked this file.  Potentially unwanted application.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_PUA 4557L
 
@@ -14485,7 +14565,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Dangerous file extension from the web.
+// An Application Control policy has blocked this file.  Dangerous file extension from the web.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_DANGEROUS_EXT 4558L
 
@@ -14494,7 +14574,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Unable to contact reputation service for unknown file.
+// An Application Control policy has blocked this file.  Unable to contact reputation service for unknown file.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_OFFLINE 4559L
 
@@ -14606,7 +14686,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Unfriendly file.
+// An Application Control policy has blocked this file.  Unfriendly file.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE 4580L
 
@@ -14615,7 +14695,7 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Failed to obtain file reputation because an infrastructure issue occurred. Try again later.
+// An Application Control policy has blocked this file.  Failed to obtain file reputation because an infrastructure issue occurred. Try again later.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE 4581L
 
@@ -14624,9 +14704,18 @@
 //
 // MessageText:
 //
-// System Integrity policy has been violated.  Explicit denied file.
+// An Application Control policy has blocked this file.  Explicit denied file.
 //
 #define ERROR_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE 4582L
+
+//
+// MessageId: ERROR_SYSTEM_INTEGRITY_WHQL_NOT_SATISFIED
+//
+// MessageText:
+//
+// An Application Control policy has blocked this file.  File did not pass WHQL-only requirements.
+//
+#define ERROR_SYSTEM_INTEGRITY_WHQL_NOT_SATISFIED 4583L
 
 ///////////////////////////////////////////////////
 //                                               //
@@ -16713,6 +16802,33 @@
 //
 #define ERROR_WIP_ENCRYPTION_FAILED      6023L
 
+//
+// MessageId: ERROR_PDE_ENCRYPTION_UNAVAILABLE_FAILURE
+//
+// MessageText:
+//
+// Personal Data Encryption keys to encrypt data are currently unavailable due to a failure.
+//
+#define ERROR_PDE_ENCRYPTION_UNAVAILABLE_FAILURE 6024L
+
+//
+// MessageId: ERROR_PDE_DECRYPTION_UNAVAILABLE_FAILURE
+//
+// MessageText:
+//
+// Personal Data Encryption keys to decrypt data are currently unavailable due to a failure.
+//
+#define ERROR_PDE_DECRYPTION_UNAVAILABLE_FAILURE 6025L
+
+//
+// MessageId: ERROR_PDE_DECRYPTION_UNAVAILABLE
+//
+// MessageText:
+//
+// Personal Data Encryption keys to decrypt data are currently unavailable as the user's session is locked.
+//
+#define ERROR_PDE_DECRYPTION_UNAVAILABLE 6026L
+
 
 ///////////////////////////////////////////////////
 //                                               //
@@ -16766,6 +16882,61 @@
 // The object cannot be deleted from the local cluster because it is registered with the cluster set.
 //
 #define ERROR_CLUSTER_OBJECT_IS_CLUSTER_SET_VM 6250L
+
+// Cluster native update specific error codes
+//
+// MessageId: ERROR_CNU_TEMPLATE_ALREADY_EXISTS
+//
+// MessageText:
+//
+// A cluster native update template with that name already exists.
+//
+#define ERROR_CNU_TEMPLATE_ALREADY_EXISTS 6251L
+
+//
+// MessageId: ERROR_CNU_TEMPLATE_NAME_NOT_FOUND
+//
+// MessageText:
+//
+// A cluster native update template with that name was not found.
+//
+#define ERROR_CNU_TEMPLATE_NAME_NOT_FOUND 6252L
+
+//
+// MessageId: ERROR_CNU_RUN_NAME_NOT_FOUND
+//
+// MessageText:
+//
+// A cluster native update run with the specified name was not found.
+//
+#define ERROR_CNU_RUN_NAME_NOT_FOUND     6253L
+
+//
+// MessageId: ERROR_CNU_RUN_ALREADY_IN_PROGRESS
+//
+// MessageText:
+//
+// A cluster native update run is already in progress on the cluster.
+//
+#define ERROR_CNU_RUN_ALREADY_IN_PROGRESS 6254L
+
+//
+// MessageId: ERROR_CNU_RUN_NOT_IN_PROGRESS
+//
+// MessageText:
+//
+// There is currently no ongoing cluster native update run on the cluster.
+//
+#define ERROR_CNU_RUN_NOT_IN_PROGRESS    6255L
+
+//
+// MessageId: ERROR_CNU_NOT_READY
+//
+// MessageText:
+//
+// Cluster native update not ready - run Enable-ClusterNativeUpdate to load.
+//
+#define ERROR_CNU_NOT_READY              6256L
 
 
 ///////////////////////////////////////////////////
@@ -18014,6 +18185,15 @@
 // The specified operation could not be performed because the resource manager is not enlisted in the transaction.
 //
 #define ERROR_TRANSACTION_NOT_ENLISTED   6855L
+
+//
+// MessageId: ERROR_ENLISTMENT_NOT_INITIALIZED
+//
+// MessageText:
+//
+// The transaction is linked to an enlistment that is not fully initialized yet.
+//
+#define ERROR_ENLISTMENT_NOT_INITIALIZED 6856L
 
 
 ///////////////////////////////////////////////////
@@ -22316,7 +22496,7 @@
 //
 // MessageText:
 //
-// The functional level of the domain (or forest) cannot be lowered to the requested value.
+// The functional level of the domain (or forest) cannot be set to the requested value.
 //
 #define ERROR_DS_HIGH_DSA_VERSION        8642L
 
@@ -22454,6 +22634,33 @@
 // The Local Administrator Password Solution encrypted password update operation failed because Active Directory is not yet running at the minimum required domain functional level (2016).
 //
 #define ERROR_LAPS_ENCRYPTION_REQUIRES_2016_DFL 8657L
+
+//
+// MessageId: ERROR_LAPS_PROCESS_TERMINATED
+//
+// MessageText:
+//
+// The process was terminated by Windows Local Administrator Password Solution per the configured post-authentication-action policy.
+//
+#define ERROR_LAPS_PROCESS_TERMINATED    8658L
+
+//
+// MessageId: ERROR_DS_JET_RECORD_TOO_BIG
+//
+// MessageText:
+//
+// The Active Directory JET database page size limit for this request was exceeded.
+//
+#define ERROR_DS_JET_RECORD_TOO_BIG      8659L
+
+//
+// MessageId: ERROR_DS_REPLICA_PAGE_SIZE_MISMATCH
+//
+// MessageText:
+//
+// The Active Directory JET database page size does not match on all Domain Controllers in this forest.
+//
+#define ERROR_DS_REPLICA_PAGE_SIZE_MISMATCH 8660L
 
 
 ///////////////////////////////////////////////////
@@ -29500,6 +29707,42 @@
 //
 #define ERROR_APPINSTALLER_IS_MANAGED_BY_SYSTEM 15672L
 
+//
+// MessageId: ERROR_SERVICE_BLOCKED_BY_SYSPREP_IN_PROGRESS
+//
+// MessageText:
+//
+// Service is not available while sysprep is running.
+//
+#define ERROR_SERVICE_BLOCKED_BY_SYSPREP_IN_PROGRESS 15673L
+
+//
+// MessageId: ERROR_UNSUPPORTED_ARM32_PACKAGE_REQUIRES_REMEDIAITON
+//
+// MessageText:
+//
+// The activation failed because the package targets the arm32 architecture, which is no longer supported. Try repairing or reinstalling the application to fix the problem.
+//
+#define ERROR_UNSUPPORTED_ARM32_PACKAGE_REQUIRES_REMEDIAITON 15674L
+
+//
+// MessageId: ERROR_UUP_PRODUCT_NOT_APPLICABLE
+//
+// MessageText:
+//
+// The product is not applicable or cannot be found.
+//
+#define ERROR_UUP_PRODUCT_NOT_APPLICABLE 15675L
+
+//
+// MessageId: ERROR_BLOCKED_BY_PENDING_PACKAGE_REMOVAL
+//
+// MessageText:
+//
+// The deployment operation on this package is blocked because it or a package in the same family is pending removal. Please log off and log on again to finish the deferred package removal and try again.
+//
+#define ERROR_BLOCKED_BY_PENDING_PACKAGE_REMOVAL 15676L
+
 //////////////////////////
 //                      //
 // AppModel Error Codes //
@@ -36403,6 +36646,24 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define NTE_NOT_ACTIVE_CONSOLE           _HRESULT_TYPEDEF_(0x80090038L)
 
 //
+// MessageId: NTE_VBS_UNAVAILABLE
+//
+// MessageText:
+//
+// VBS key isolation is not available.
+//
+#define NTE_VBS_UNAVAILABLE              _HRESULT_TYPEDEF_(0x80090039L)
+
+//
+// MessageId: NTE_VBS_CANNOT_DECRYPT_KEY
+//
+// MessageText:
+//
+// Cannot decrypt a VBS-isolated key.
+//
+#define NTE_VBS_CANNOT_DECRYPT_KEY       _HRESULT_TYPEDEF_(0x8009003AL)
+
+//
 // MessageId: SEC_E_INSUFFICIENT_MEMORY
 //
 // MessageText:
@@ -37230,6 +37491,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // Not enough secbuffers were supplied to generate a token.
 //
 #define SEC_E_INSUFFICIENT_BUFFERS       _HRESULT_TYPEDEF_(0x8009036BL)
+
+//
+// MessageId: SEC_I_INVALID_SESSION_STATE
+//
+// MessageText:
+//
+// The TLS session cannot be resumed.
+//
+#define SEC_I_INVALID_SESSION_STATE      _HRESULT_TYPEDEF_(0x8009036CL)
 
 //
 // Provided for backwards compatibility
@@ -43249,6 +43519,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define ERROR_GRAPHICS_MPO_ALLOCATION_UNPINNED _HRESULT_TYPEDEF_(0xC0262018L)
 
 //
+// MessageId: ERROR_GRAPHICS_SETDISPLAYMODE_REQUIRED
+//
+// MessageText:
+//
+// SetDisplayMode is required before present can succeed.
+//
+#define ERROR_GRAPHICS_SETDISPLAYMODE_REQUIRED _HRESULT_TYPEDEF_(0xC0262019L)
+
+//
 // Video Memory Manager (VidMM) subsystem errors {0x2100..0x21ff}
 //
 //
@@ -44897,6 +45176,27 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // The function failed because the current session is changing its type. This function cannot be called when the current session is changing its type. There are currently three types of sessions: console, disconnected and remote.
 //
 #define ERROR_GRAPHICS_SESSION_TYPE_CHANGE_IN_PROGRESS _HRESULT_TYPEDEF_(0xC02605E8L)
+
+//
+//   Basic Display Driver shared error codes {0x2600..0x26DF}
+//
+//
+// MessageId: ERROR_GRAPHICS_UNKNOWN_BIOS_FRAME_BUFFER_NOT_FOUND
+//
+// MessageText:
+//
+// The Basic Display Driver cannot start because there is no frame buffer found, and the system cannot determine if the system is BIOS-compatible.
+//
+#define ERROR_GRAPHICS_UNKNOWN_BIOS_FRAME_BUFFER_NOT_FOUND _HRESULT_TYPEDEF_(0xC0262600L)
+
+//
+// MessageId: ERROR_GRAPHICS_UEFI_FRAME_BUFFER_NOT_FOUND
+//
+// MessageText:
+//
+// The Basic Display Driver cannot start because there is no frame buffer found from UEFI or from a previously running graphics driver.
+//
+#define ERROR_GRAPHICS_UEFI_FRAME_BUFFER_NOT_FOUND _HRESULT_TYPEDEF_(0xC0262601L)
 
 
 // FACILITY_NAP
@@ -47456,6 +47756,51 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define TPMAPI_E_INVALID_POLICYAUTH_BLOB_TYPE _HRESULT_TYPEDEF_(0x8029012EL)
 
 //
+// MessageId: TPMAPI_E_INVALID_TAG
+//
+// MessageText:
+//
+// The structure tag is invalid.
+//
+#define TPMAPI_E_INVALID_TAG             _HRESULT_TYPEDEF_(0x80290130L)
+
+//
+// MessageId: TPMAPI_E_INVALID_STRUCT_SIZE
+//
+// MessageText:
+//
+// The structure size parameter is invalid.
+//
+#define TPMAPI_E_INVALID_STRUCT_SIZE     _HRESULT_TYPEDEF_(0x80290131L)
+
+//
+// MessageId: TPMAPI_E_AUTH_CHAIN_ERROR
+//
+// MessageText:
+//
+// The authorization chain is malformed.
+//
+#define TPMAPI_E_AUTH_CHAIN_ERROR        _HRESULT_TYPEDEF_(0x80290132L)
+
+//
+// MessageId: TPMAPI_E_COUNTER_CORRUPTED
+//
+// MessageText:
+//
+// The counter is corrupted. The TPM may have gone into Failure Mode.
+//
+#define TPMAPI_E_COUNTER_CORRUPTED       _HRESULT_TYPEDEF_(0x80290133L)
+
+//
+// MessageId: TPMAPI_E_INVALID_ALGORITHM
+//
+// MessageText:
+//
+// The specified algorithm is not supported.
+//
+#define TPMAPI_E_INVALID_ALGORITHM       _HRESULT_TYPEDEF_(0x80290134L)
+
+//
 // TBS implementation error codes {0x0200..0x02ff}
 //
 //
@@ -48114,6 +48459,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // TPM related network operations are blocked as Zero Exhaust mode is enabled on client.
 //
 #define TPM_E_ZERO_EXHAUST_ENABLED       _HRESULT_TYPEDEF_(0x80290500L)
+
+//
+// MessageId: DRTM_E_ENVIRONMENT_UNSAFE
+//
+// MessageText:
+//
+// The current environment is unsafe for DRTM to run in.
+//
+#define DRTM_E_ENVIRONMENT_UNSAFE        _HRESULT_TYPEDEF_(0x80290501L)
+
+//
+// MessageId: DRTM_E_NO_DIRECT_AUTH_FOR_CURRENT_MLE
+//
+// MessageText:
+//
+// There are no authorizations for the current running MLE. The current state is not authorized.
+//
+#define DRTM_E_NO_DIRECT_AUTH_FOR_CURRENT_MLE _HRESULT_TYPEDEF_(0x80290502L)
 
 //
 // Error codes in TPM task and core provisioning code {0x0600..0x06ff}
@@ -50517,6 +50880,204 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define FVE_E_METADATA_FULL              _HRESULT_TYPEDEF_(0x803100ECL)
 
 //
+// MessageId: FVE_E_DISCOVERY_VOLUME_NOT_SUPPORTED
+//
+// MessageText:
+//
+// BitLocker Drive Encryption no longer supports discovery volumes.
+//
+#define FVE_E_DISCOVERY_VOLUME_NOT_SUPPORTED _HRESULT_TYPEDEF_(0x803100EDL)
+
+//
+// MessageId: FVE_E_EXCEED_LIMIT_RP
+//
+// MessageText:
+//
+// BitLocker Drive Encryption cannot add another recovery password because the maximum number of recovery passwords for this volume has been reached. Consider removing unnecessary recovery passwords for this volume.
+//
+#define FVE_E_EXCEED_LIMIT_RP            _HRESULT_TYPEDEF_(0x803100EEL)
+
+//
+// MessageId: FVE_E_NO_BACKUP_ACCOUNT
+//
+// MessageText:
+//
+// There is no backup account information available for the specified recovery password.
+//
+#define FVE_E_NO_BACKUP_ACCOUNT          _HRESULT_TYPEDEF_(0x803100EFL)
+
+//
+// MessageId: FVE_E_SUSPEND_PROTECTION_NOT_ALLOWED
+//
+// MessageText:
+//
+// The operation failed because BitLocker Drive Encryption cannot suspend protection due to policy.
+//
+#define FVE_E_SUSPEND_PROTECTION_NOT_ALLOWED _HRESULT_TYPEDEF_(0x803100F0L)
+
+//
+// MessageId: FVE_E_CANNOT_PREDICT_PCR7
+//
+// MessageText:
+//
+// BitLocker Drive Encryption cannot predictively seal TPM protector to PCR7.
+//
+#define FVE_E_CANNOT_PREDICT_PCR7        _HRESULT_TYPEDEF_(0x803100F1L)
+
+//
+// MessageId: FVE_E_ENTRY_ALREADY_EXISTS
+//
+// MessageText:
+//
+// The operation failed because an entry with the given ID already exists.
+//
+#define FVE_E_ENTRY_ALREADY_EXISTS       _HRESULT_TYPEDEF_(0x803100F2L)
+
+//
+// MessageId: FVE_E_ENTRY_NOT_FOUND
+//
+// MessageText:
+//
+// The operation failed because an entry with the given ID was not found.
+//
+#define FVE_E_ENTRY_NOT_FOUND            _HRESULT_TYPEDEF_(0x803100F3L)
+
+//
+// MessageId: FVE_E_DATUM_PARTIALLY_INVALID
+//
+// MessageText:
+//
+// The datum is invalid in its current state, but may be fixed so that it is valid.
+//
+#define FVE_E_DATUM_PARTIALLY_INVALID    _HRESULT_TYPEDEF_(0x803100F4L)
+
+//
+// MessageId: FVE_E_DATASET_TPM_DATUMS_INCONSISTENT
+//
+// MessageText:
+//
+// The dataset contains TPM datums that are inconsistent.
+//
+#define FVE_E_DATASET_TPM_DATUMS_INCONSISTENT _HRESULT_TYPEDEF_(0x803100F5L)
+
+//
+// MessageId: FVE_E_SECURE_BOOT_BINDINGS_OUT_OF_SYNC
+//
+// MessageText:
+//
+// The TPM protector contains conflicting information about whether the binding is a Secure Boot binding.
+//
+#define FVE_E_SECURE_BOOT_BINDINGS_OUT_OF_SYNC _HRESULT_TYPEDEF_(0x803100F6L)
+
+//
+// MessageId: FVE_E_SECURE_BOOT_BINDING_DATA_OUT_OF_SYNC
+//
+// MessageText:
+//
+// The dataset contains conflicting information about whether the TPM protector binding is a Secure Boot binding.
+//
+#define FVE_E_SECURE_BOOT_BINDING_DATA_OUT_OF_SYNC _HRESULT_TYPEDEF_(0x803100F7L)
+
+//
+// MessageId: FVE_E_ORPHANED_TPM_BINDING_DATUM
+//
+// MessageText:
+//
+// The dataset contains a TPM binding without associated binding information. Try removing and re-adding the TPM protector.
+//
+#define FVE_E_ORPHANED_TPM_BINDING_DATUM _HRESULT_TYPEDEF_(0x803100F8L)
+
+//
+// MessageId: FVE_E_BAD_TPM_DATUM_ASSOCIATION
+//
+// MessageText:
+//
+// The dataset contains TPM binding information incorrectly associated to multiple TPM bindings. Try re-enabling BitLocker.
+//
+#define FVE_E_BAD_TPM_DATUM_ASSOCIATION  _HRESULT_TYPEDEF_(0x803100F9L)
+
+//
+// MessageId: FVE_E_FINAL_TPM_PCR_VALUES_MATCH
+//
+// MessageText:
+//
+// The compared final TPM PCR values match.
+//
+#define FVE_E_FINAL_TPM_PCR_VALUES_MATCH _HRESULT_TYPEDEF_(0x803100FAL)
+
+//
+// MessageId: FVE_E_MATCHING_PCRS_TPM_FAILURE
+//
+// MessageText:
+//
+// BitLocker failed to obtain the key from the TPM due to an unforseen TPM failure.
+//
+#define FVE_E_MATCHING_PCRS_TPM_FAILURE  _HRESULT_TYPEDEF_(0x803100FBL)
+
+//
+// MessageId: FVE_E_BACKUP_CACHE_NOT_ALLOCATED
+//
+// MessageText:
+//
+// No backup cache was allocated for Device Encryption. At least one backup cache needs to be allocated.
+//
+#define FVE_E_BACKUP_CACHE_NOT_ALLOCATED _HRESULT_TYPEDEF_(0x803100FCL)
+
+//
+// MessageId: FVE_E_MSA_BACKUP_CACHE_NOT_ALLOCATED
+//
+// MessageText:
+//
+// MSA backup cache is not allocated for Device Encryption.
+//
+#define FVE_E_MSA_BACKUP_CACHE_NOT_ALLOCATED _HRESULT_TYPEDEF_(0x803100FDL)
+
+//
+// MessageId: FVE_E_AD_BACKUP_CACHE_NOT_ALLOCATED
+//
+// MessageText:
+//
+// AD backup cache is not allocated for Device Encryption.
+//
+#define FVE_E_AD_BACKUP_CACHE_NOT_ALLOCATED _HRESULT_TYPEDEF_(0x803100FEL)
+
+//
+// MessageId: FVE_E_GENERAL_TPM_FAILURE
+//
+// MessageText:
+//
+// BitLocker encountered a problem communicating with the TPM at boot.
+//
+#define FVE_E_GENERAL_TPM_FAILURE        _HRESULT_TYPEDEF_(0x803100FFL)
+
+//
+// MessageId: FVE_E_TPM_NONEXISTENT
+//
+// MessageText:
+//
+// A TPM was not available for BitLocker at boot.
+//
+#define FVE_E_TPM_NONEXISTENT            _HRESULT_TYPEDEF_(0x80310100L)
+
+//
+// MessageId: FVE_E_NO_PCR_BOOT_LOCK_BOUNDARY
+//
+// MessageText:
+//
+// BitLocker could not enforce the PCR 11 cap event boundary.
+//
+#define FVE_E_NO_PCR_BOOT_LOCK_BOUNDARY  _HRESULT_TYPEDEF_(0xC0310101L)
+
+//
+// MessageId: FVE_E_PCR_BOOT_LOCK_BOUNDARY
+//
+// MessageText:
+//
+// BitLocker prevented an attempt to create a TPM binding for a PCR that contains events extended into the TPM after the BitLocker boot lock event.
+//
+#define FVE_E_PCR_BOOT_LOCK_BOUNDARY     _HRESULT_TYPEDEF_(0xC0310102L)
+
+//
 // =======================================================
 // Windows Filtering Platform Error Messages
 // =======================================================
@@ -51914,6 +52475,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define ERROR_NDIS_DOT11_AP_BAND_NOT_ALLOWED _NDIS_ERROR_TYPEDEF_(0x80342008L)
 
 //
+// MessageId: ERROR_NDIS_DOT11_AP_RADIO_RESTRICTION
+//
+// MessageText:
+//
+// The wireless local area network interface cannot start an AP because the minimum radio hardware required for this operation is not present.
+//
+#define ERROR_NDIS_DOT11_AP_RADIO_RESTRICTION _NDIS_ERROR_TYPEDEF_(0x80342009L)
+
+//
 // NDIS informational code (ndis.sys)
 //
 
@@ -52464,6 +53034,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // There is not enough contiguous memory in the root partition's pool to complete the mirroring operation.
 //
 #define ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY_MIRRORING _NDIS_ERROR_TYPEDEF_(0xC0350085L)
+
+//
+// MessageId: ERROR_HV_VTL_ALREADY_ENABLED
+//
+// MessageText:
+//
+// The VTL specified for the operation is already in an enabled state.
+//
+#define ERROR_HV_VTL_ALREADY_ENABLED     _NDIS_ERROR_TYPEDEF_(0xC0350086L)
+
+//
+// MessageId: ERROR_HV_SPDM_REQUEST
+//
+// MessageText:
+//
+// The device security operation was interrupted due to a required SPDM request.
+//
+#define ERROR_HV_SPDM_REQUEST            _NDIS_ERROR_TYPEDEF_(0xC0350088L)
 
 //
 // MessageId: ERROR_HV_NOT_PRESENT
@@ -53624,6 +54212,143 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // The attempted DM / resize operation exceeds the supported size.
 //
 #define ERROR_DM_OPERATION_LIMIT_EXCEEDED _HRESULT_TYPEDEF_(0xC0370600L)
+
+
+//
+// VMMS related error code (0x0700-0x07ff)
+//
+
+//
+// MessageId: VM_E_CLIENT_NAME_REQUIRED
+//
+// MessageText:
+//
+// Required WMI metadata 'ClientName' was not provided.
+//
+#define VM_E_CLIENT_NAME_REQUIRED        _HRESULT_TYPEDEF_(0xC0370700L)
+
+//
+// MessageId: VM_E_MODIFY_VTL2_SETTINGS_CONFLICT
+//
+// MessageText:
+//
+// VTL2 settings were not modified because another client modified them. Requery the settings and try again.
+//
+#define VM_E_MODIFY_VTL2_SETTINGS_CONFLICT _HRESULT_TYPEDEF_(0xC0370701L)
+
+//
+// MessageId: VM_E_VTL2_NOT_AVAILABLE
+//
+// MessageText:
+//
+// Management VTL settings are not available because the virtual machine does not have the correct GuestStateIsolationType.
+//
+#define VM_E_VTL2_NOT_AVAILABLE          _HRESULT_TYPEDEF_(0xC0370702L)
+
+
+ //
+ // Management VTL related error codes (0x0800 - 0x08ff)
+ //
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_IN_PROGRESS
+//
+// MessageText:
+//
+// Reload of the management VTL was already in progress.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_IN_PROGRESS _HRESULT_TYPEDEF_(0xC0370800L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_INVALID_PROTOCOL_RESPONSE
+//
+// MessageText:
+//
+// Received an invalid protocol response.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_INVALID_PROTOCOL_RESPONSE _HRESULT_TYPEDEF_(0xC0370801L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_SAVE_FAILURE
+//
+// MessageText:
+//
+// Management VTL failed to save itself.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_SAVE_FAILURE _HRESULT_TYPEDEF_(0xC0370802L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_RESTORE_FAILURE
+//
+// MessageText:
+//
+// Management VTL failed to restore itself.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_RESTORE_FAILURE _HRESULT_TYPEDEF_(0xC0370803L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_NO_SAVED_STATE
+//
+// MessageText:
+//
+// There is no saved state for the management VTL.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_NO_SAVED_STATE _HRESULT_TYPEDEF_(0xC0370804L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_INVALID_SAVE_NOTIFICATION_RECEIVED
+//
+// MessageText:
+//
+// Received an invalid or unexpected management VTL save notification.
+// 
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_INVALID_SAVE_NOTIFICATION_RECEIVED _HRESULT_TYPEDEF_(0xC0370805L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_INVALID_RESTORE_REQUEST_RECEIVED
+//
+// MessageText:
+//
+// Received an invalid or unexpected request to restore management VTL.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_INVALID_RESTORE_REQUEST_RECEIVED _HRESULT_TYPEDEF_(0xC0370806L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_INVALID_RESTORE_NOTIFICATION_RECEIVED
+//
+// MessageText:
+//
+// Received an invalid or unexpected notification to restore management VTL.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_INVALID_RESTORE_NOTIFICATION_RECEIVED _HRESULT_TYPEDEF_(0xC0370807L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_NO_IGVM_FILE
+//
+// MessageText:
+//
+// The virtual machine was not booted from an IGVM file. There is no management VTL.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_NO_IGVM_FILE _HRESULT_TYPEDEF_(0xC0370808L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_RELOAD_UNSUPPORTED
+//
+// MessageText:
+//
+// Reloading the management VTL environment is not supported for this VM.
+//
+#define VM_E_MANAGEMENT_VTL_RELOAD_UNSUPPORTED _HRESULT_TYPEDEF_(0xC0370809L)
+
+//
+// MessageId: VM_E_MANAGEMENT_VTL_PROTOCOL_ESTABLISHMENT_TIMEOUT
+//
+// MessageText:
+//
+// The management VTL environment failed to negotiate protocol with the host within the allowed time limit.
+//
+#define VM_E_MANAGEMENT_VTL_PROTOCOL_ESTABLISHMENT_TIMEOUT _HRESULT_TYPEDEF_(0xC037080AL)
 
 
 //
@@ -57386,6 +58111,33 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define E_HDAUDIO_NULL_LINKED_LIST_ENTRY _HRESULT_TYPEDEF_(0x80660005L)
 
 //
+// MessageId: E_SOUNDWIRE_COMMAND_ABORTED
+//
+// MessageText:
+//
+// SoundWire command aborted.
+//
+#define E_SOUNDWIRE_COMMAND_ABORTED      _HRESULT_TYPEDEF_(0x80660006L)
+
+//
+// MessageId: E_SOUNDWIRE_COMMAND_IGNORED
+//
+// MessageText:
+//
+// SoundWire command ignored.
+//
+#define E_SOUNDWIRE_COMMAND_IGNORED      _HRESULT_TYPEDEF_(0x80660007L)
+
+//
+// MessageId: E_SOUNDWIRE_COMMAND_FAILED
+//
+// MessageText:
+//
+// SoundWire command failed.
+//
+#define E_SOUNDWIRE_COMMAND_FAILED       _HRESULT_TYPEDEF_(0x80660008L)
+
+//
 // StateRepository errors
 //
 //
@@ -58592,6 +59344,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // The allocation of the MPO plane has been unpinned
 //
 #define DXGI_ERROR_MPO_UNPINNED          _HRESULT_TYPEDEF_(0x887A0064L)
+
+//
+// MessageId: DXGI_ERROR_SETDISPLAYMODE_REQUIRED
+//
+// MessageText:
+//
+// SetDisplayMode is required before present can succeed.
+//
+#define DXGI_ERROR_SETDISPLAYMODE_REQUIRED _HRESULT_TYPEDEF_(0x887A0065L)
 
 
 //
@@ -62614,6 +63375,51 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define ERROR_SMB_NO_SIGNING_ALGORITHM_OVERLAP _HRESULT_TYPEDEF_(0xC05D0002L)
 
 //
+// MessageId: ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED
+//
+// MessageText:
+//
+// You can't access this shared folder because your computer is configured to require SMB signing. These policies help protect your PC from unsafe or malicious devices on the network.
+//
+#define ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED _HRESULT_TYPEDEF_(0xC05D0003L)
+
+//
+// MessageId: ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The requested operation failed. Encryption is not supported for guest access.
+//
+#define ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED _HRESULT_TYPEDEF_(0xC05D0004L)
+
+//
+// MessageId: ERROR_SMB_ENCRYPTION_NOT_SUPPORTED_BY_PEER
+//
+// MessageText:
+//
+// The requested operation failed. Encryption is not supported on SMB server.
+//
+#define ERROR_SMB_ENCRYPTION_NOT_SUPPORTED_BY_PEER _HRESULT_TYPEDEF_(0xC05D0005L)
+
+//
+// MessageId: ERROR_SMB_CERT_NO_PRIVATE_KEY
+//
+// MessageText:
+//
+// The certificate does not have a private key.
+//
+#define ERROR_SMB_CERT_NO_PRIVATE_KEY    _HRESULT_TYPEDEF_(0xC05D0006L)
+
+//
+// MessageId: ERROR_SMB_TLS_ACCESS_DENIED
+//
+// MessageText:
+//
+// The SMB client was denied access to the SMB server during mutual authentication.
+//
+#define ERROR_SMB_TLS_ACCESS_DENIED      _HRESULT_TYPEDEF_(0xC05D0007L)
+
+//
 // WININET.DLL errors - propagated as HRESULT's using FACILITY=WIN32
 //
 //
@@ -64972,6 +65778,146 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 //
 #define ERROR_QUIC_ALPN_NEG_FAILURE      _HRESULT_TYPEDEF_(0x80410007L)
 
+//
+// MessageId: ERROR_QUIC_STREAM_LIMIT_REACHED
+//
+// MessageText:
+//
+// The QUIC connection failed because there are not enough streams available.
+//
+#define ERROR_QUIC_STREAM_LIMIT_REACHED  _HRESULT_TYPEDEF_(0x80410008L)
+
+//
+// MessageId: ERROR_QUIC_ALPN_IN_USE
+//
+// MessageText:
+//
+// The QUIC connection failed because the ALPN is in use.
+//
+#define ERROR_QUIC_ALPN_IN_USE           _HRESULT_TYPEDEF_(0x80410009L)
+
+
+//
+// QUIC TLS
+//
+
+//
+// MessageId: ERROR_QUIC_TLS_UNEXPECTED_MESSAGE
+//
+// MessageText:
+//
+// The QUIC connection encountered an unexpected message during TLS.
+//
+#define ERROR_QUIC_TLS_UNEXPECTED_MESSAGE _HRESULT_TYPEDEF_(0x8041010AL)
+
+//
+// MessageId: ERROR_QUIC_TLS_BAD_CERTIFICATE
+//
+// MessageText:
+//
+// The QUIC connection encountered a bad certificate during TLS.
+//
+#define ERROR_QUIC_TLS_BAD_CERTIFICATE   _HRESULT_TYPEDEF_(0x8041012AL)
+
+//
+// MessageId: ERROR_QUIC_TLS_UNSUPPORTED_CERTIFICATE
+//
+// MessageText:
+//
+// The QUIC connection encountered an unsupported certificate during TLS.
+//
+#define ERROR_QUIC_TLS_UNSUPPORTED_CERTIFICATE _HRESULT_TYPEDEF_(0x8041012BL)
+
+//
+// MessageId: ERROR_QUIC_TLS_CERTIFICATE_REVOKED
+//
+// MessageText:
+//
+// The QUIC connection encountered a revoked certificate during TLS.
+//
+#define ERROR_QUIC_TLS_CERTIFICATE_REVOKED _HRESULT_TYPEDEF_(0x8041012CL)
+
+//
+// MessageId: ERROR_QUIC_TLS_CERTIFICATE_EXPIRED
+//
+// MessageText:
+//
+// The QUIC connection encountered an expired certificate during TLS.
+//
+#define ERROR_QUIC_TLS_CERTIFICATE_EXPIRED _HRESULT_TYPEDEF_(0x8041012DL)
+
+//
+// MessageId: ERROR_QUIC_TLS_CERTIFICATE_UNKNOWN
+//
+// MessageText:
+//
+// The QUIC connection encountered an unknown certificate during TLS.
+//
+#define ERROR_QUIC_TLS_CERTIFICATE_UNKNOWN _HRESULT_TYPEDEF_(0x8041012EL)
+
+//
+// MessageId: ERROR_QUIC_TLS_ILLEGAL_PARAMETER
+//
+// MessageText:
+//
+// The QUIC connection encountered an illegal parameter during TLS.
+//
+#define ERROR_QUIC_TLS_ILLEGAL_PARAMETER _HRESULT_TYPEDEF_(0x8041012FL)
+
+//
+// MessageId: ERROR_QUIC_TLS_UNKNOWN_CA
+//
+// MessageText:
+//
+// The QUIC connection encountered a certificate with an unkown certificate authority during TLS.
+//
+#define ERROR_QUIC_TLS_UNKNOWN_CA        _HRESULT_TYPEDEF_(0x80410130L)
+
+//
+// MessageId: ERROR_QUIC_TLS_ACCESS_DENIED
+//
+// MessageText:
+//
+// The QUIC connection attempt was denied by the peer during TLS.
+//
+#define ERROR_QUIC_TLS_ACCESS_DENIED     _HRESULT_TYPEDEF_(0x80410131L)
+
+//
+// MessageId: ERROR_QUIC_TLS_INSUFFICIENT_SECURITY
+//
+// MessageText:
+//
+// The QUIC connection security was insufficient during TLS.
+//
+#define ERROR_QUIC_TLS_INSUFFICIENT_SECURITY _HRESULT_TYPEDEF_(0x80410147L)
+
+//
+// MessageId: ERROR_QUIC_TLS_INTERNAL_ERROR
+//
+// MessageText:
+//
+// The QUIC connection encountered an internal error during TLS.
+//
+#define ERROR_QUIC_TLS_INTERNAL_ERROR    _HRESULT_TYPEDEF_(0x80410150L)
+
+//
+// MessageId: ERROR_QUIC_TLS_USER_CANCELED
+//
+// MessageText:
+//
+// The QUIC connection was canceled by the user during TLS.
+//
+#define ERROR_QUIC_TLS_USER_CANCELED     _HRESULT_TYPEDEF_(0x8041015AL)
+
+//
+// MessageId: ERROR_QUIC_TLS_CERTIFICATE_REQUIRED
+//
+// MessageText:
+//
+// The QUIC connection required a certificate during TLS.
+//
+#define ERROR_QUIC_TLS_CERTIFICATE_REQUIRED _HRESULT_TYPEDEF_(0x80410174L)
+
 
 //
 // IORING Error codes
@@ -65048,5 +65994,254 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // The completion queue does not have enough free space, to post completions, for all entries being submitted.
 //
 #define IORING_E_COMPLETION_QUEUE_TOO_FULL _HRESULT_TYPEDEF_(0x80460008L)
+
+
+//
+// UnionFS Error codes
+//
+
+//
+// MessageId: UNIONFS_E_CANNOT_CROSS_UNION
+//
+// MessageText:
+//
+// This operation is not allowed across unions.
+//
+#define UNIONFS_E_CANNOT_CROSS_UNION     _HRESULT_TYPEDEF_(0x89250001L)
+
+//
+// MessageId: UNIONFS_E_CANNOT_EXIT_UNION
+//
+// MessageText:
+//
+// This operation is not allowed to have a destination outside of a union.
+//
+#define UNIONFS_E_CANNOT_EXIT_UNION      _HRESULT_TYPEDEF_(0x89250002L)
+
+//
+// MessageId: UNIONFS_E_CANNOT_PRESERVE_LINK
+//
+// MessageText:
+//
+// This file has one or more hard links in the scratch layer.
+//
+#define UNIONFS_E_CANNOT_PRESERVE_LINK   _HRESULT_TYPEDEF_(0x89250003L)
+
+//
+// MessageId: UNIONFS_E_INVALID_TOMBSTONE_STATE
+//
+// MessageText:
+//
+// The tombstone cannot be created in or transitioned to the given state.
+//
+#define UNIONFS_E_INVALID_TOMBSTONE_STATE _HRESULT_TYPEDEF_(0x89250004L)
+
+//
+// MessageId: UNIONFS_E_LAYERS_PRESENT
+//
+// MessageText:
+//
+// This union has attached layers preventing this operation.
+//
+#define UNIONFS_E_LAYERS_PRESENT         _HRESULT_TYPEDEF_(0x89250005L)
+
+//
+// MessageId: UNIONFS_E_NESTED_LAYER
+//
+// MessageText:
+//
+// A union layer root cannot be a descendant of another layer root.
+//
+#define UNIONFS_E_NESTED_LAYER           _HRESULT_TYPEDEF_(0x89250006L)
+
+//
+// MessageId: UNIONFS_E_UNION_DUPLICATE_ID
+//
+// MessageText:
+//
+// A union with this union ID already exists.
+//
+#define UNIONFS_E_UNION_DUPLICATE_ID     _HRESULT_TYPEDEF_(0x89250007L)
+
+//
+// MessageId: UNIONFS_E_INACTIVE_UNION
+//
+// MessageText:
+//
+// The union this operation is being performed on is inactive.
+//
+#define UNIONFS_E_INACTIVE_UNION         _HRESULT_TYPEDEF_(0x89250008L)
+
+//
+// MessageId: UNIONFS_E_TOO_MANY_LAYERS
+//
+// MessageText:
+//
+// There are too many layers to construct this union.
+//
+#define UNIONFS_E_TOO_MANY_LAYERS        _HRESULT_TYPEDEF_(0x89250009L)
+
+//
+// MessageId: UNIONFS_E_TOO_LATE
+//
+// MessageText:
+//
+// The UnionFS service is not available.
+//
+#define UNIONFS_E_TOO_LATE               _HRESULT_TYPEDEF_(0x8925000AL)
+
+//
+// MessageId: UNIONFS_E_NESTED_UNION
+//
+// MessageText:
+//
+// The operation cannot be supported because of a nested union.
+//
+#define UNIONFS_E_NESTED_UNION           _HRESULT_TYPEDEF_(0x8925000BL)
+
+//
+// MessageId: UNIONFS_E_NESTED_UNION_NOT_ALLOWED
+//
+// MessageText:
+//
+// An attempt was made to create a new union root as an ancestor or descendant of an existing union root, but the new union is not configured to allow nesting.
+//
+#define UNIONFS_E_NESTED_UNION_NOT_ALLOWED _HRESULT_TYPEDEF_(0x8925000CL)
+
+
+//
+// PRM Error codes
+//
+
+//
+// MessageId: ERROR_PRM_HANDLER_NOT_FOUND
+//
+// MessageText:
+//
+// The specified PRM handler was not found.
+//
+#define ERROR_PRM_HANDLER_NOT_FOUND      _HRESULT_TYPEDEF_(0xC9260200L)
+
+//
+// MessageId: ERROR_PRM_CONCURRENT_OPERATION
+//
+// MessageText:
+//
+// The PRM call cannot be serviced due to a concurrent PRM operation.
+//
+#define ERROR_PRM_CONCURRENT_OPERATION   _HRESULT_TYPEDEF_(0xC9260202L)
+
+//
+// MessageId: ERROR_PRM_MODULE_UPDATE_PENDING
+//
+// MessageText:
+//
+// The PRM call failed due to a pending module update.
+//
+#define ERROR_PRM_MODULE_UPDATE_PENDING  _HRESULT_TYPEDEF_(0xC9260203L)
+
+//
+// MessageId: ERROR_PRM_MODULE_LOCKED
+//
+// MessageText:
+//
+// The PRM lock operation failed because the module is already locked.
+//
+#define ERROR_PRM_MODULE_LOCKED          _HRESULT_TYPEDEF_(0xC9260204L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_INCOMPATIBLE_VERSION
+//
+// MessageText:
+//
+// The PRM update module version number is too small to be applied.
+//
+#define ERROR_PRM_UPDATE_INCOMPATIBLE_VERSION _HRESULT_TYPEDEF_(0xC9260205L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_MODULE_MISMATCH
+//
+// MessageText:
+//
+// The PRM update module does not match the current version.
+//
+#define ERROR_PRM_UPDATE_MODULE_MISMATCH _HRESULT_TYPEDEF_(0xC9260206L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_MODULE_NOT_FOUND
+//
+// MessageText:
+//
+// The PRM update is not applicable to the base PRM implementation.
+//
+#define ERROR_PRM_UPDATE_MODULE_NOT_FOUND _HRESULT_TYPEDEF_(0xC9260207L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_MISSING_EXPORT
+//
+// MessageText:
+//
+// A handler export from the PRM update module cannot be found.
+//
+#define ERROR_PRM_UPDATE_MISSING_EXPORT  _HRESULT_TYPEDEF_(0xC9260208L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_MODULE_LOCKED
+//
+// MessageText:
+//
+// The PRM update cannot be applied due to an outstanding PRM transaction.
+//
+#define ERROR_PRM_UPDATE_MODULE_LOCKED   _HRESULT_TYPEDEF_(0xC9260209L)
+
+//
+// MessageId: ERROR_PRM_UPDATE_BAD_SIGNATURE
+//
+// MessageText:
+//
+// The PRM update cannot be applied due to a bad PRM module signature.
+//
+#define ERROR_PRM_UPDATE_BAD_SIGNATURE   _HRESULT_TYPEDEF_(0xC926020AL)
+
+//
+// MessageId: ERROR_PRM_UPDATE_VERSION_MISMATCH
+//
+// MessageText:
+//
+// The PRM update service provided module version does not match that present in the actual update module header.
+//
+#define ERROR_PRM_UPDATE_VERSION_MISMATCH _HRESULT_TYPEDEF_(0xC926020BL)
+
+//
+// MessageId: ERROR_PRM_MODULE_UNLOCKED
+//
+// MessageText:
+//
+// The PRM unlock operation failed because the module is already unlocked.
+//
+#define ERROR_PRM_MODULE_UNLOCKED        _HRESULT_TYPEDEF_(0xC926020CL)
+
+//
+// MessageId: ERROR_PRM_INTERFACE_INACCESSIBLE
+//
+// MessageText:
+//
+// The PRM driver interface is currently not accessible.
+//
+#define ERROR_PRM_INTERFACE_INACCESSIBLE _HRESULT_TYPEDEF_(0xC926020DL)
+
+
+//
+// WinAccel Error codes
+//
+
+//
+// MessageId: ERROR_ACCELERATOR_SUBMISSION_QUEUE_FULL
+//
+// MessageText:
+//
+// The accelerator submission queue is full.
+//
+#define ERROR_ACCELERATOR_SUBMISSION_QUEUE_FULL _HRESULT_TYPEDEF_(0xC9270000L)
 
 #endif//_WINERROR_
