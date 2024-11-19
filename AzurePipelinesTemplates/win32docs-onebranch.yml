@@ -38,7 +38,7 @@ stages:
       inputs:
         packageType: runtime
         version: 2.1.x
-    - powershell: dotnet tool update --global nbgv
+    - powershell: dotnet tool update --global nbgv --configfile  $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\nuget.config
       displayName: ⚙ Install nbgv
     - task: PowerShell@2
       displayName: 🏭 dotnet build
