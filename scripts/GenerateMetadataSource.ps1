@@ -26,7 +26,7 @@ else
 $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 
 # Explicitly restore the Win32Metadata project to avoid issues restore happening during build
-& dotnet restore "$wdkProjectRoot" --configfile "$rootDir\nuget.Config"
+& dotnet restore "$windowsWin32ProjectRoot" --configfile "$rootDir\nuget.Config"
 
 # Create a unique log file for the build
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
