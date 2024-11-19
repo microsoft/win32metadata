@@ -50,5 +50,12 @@ else
     $configuration = "Release"
 }
 
-dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping "-bl:$PSScriptRoot\..\bin\logs\BuildMetadataBin.binlog"
+$rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
+
+# Explicitly restore the Win32Metadata project to avoid issues restore happening during build
+& dotnet restore "$windowsWin32ProjectRoot" --configfile "$rootDir\nuget.Config"
+
+$timestamp = Get-Date -Format "yyyyMMddHHmmss"
+$logFile = "$PSScriptRoot\..\bin\logs\BuildMetadataBin_$timestamp.binlog"
+& dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping "-bl:$logFile" --no-restore
 ThrowOnNativeProcessError

@@ -11,7 +11,7 @@ if (-not (Test-Path -Path $NuGetConfigFile -PathType Leaf)) {
 if ($Version -ne '')
 {
     $installed = & dotnet tool list -g | select-string -Pattern "$Name\s+$Version"
-    if ($installed -eq $null)
+    if ($null -eq $installed)
     {
         & dotnet tool update --global $Name --version $Version --configfile $NuGetConfigFile
     }
@@ -19,7 +19,7 @@ if ($Version -ne '')
 else
 {
     $installed = & dotnet tool list -g | select-string -Pattern "$Name"
-    if ($installed -eq $null)
+    if ($null -eq $installed)
     {
         & dotnet tool update --global $Name --configfile $NuGetConfigFile
     }
