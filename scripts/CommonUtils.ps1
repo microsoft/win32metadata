@@ -74,7 +74,19 @@ function Install-BuildTools
         & dotnet clean "$rootDir\buildtools"
     }
 
-    & dotnet build "$rootDir\buildtools" -c Release "-bl:$PSScriptRoot\..\bin\logs\buildtools.binlog"
+    Write-Output "Restoring buildtools project..."
+
+    # Explicitly restore the buildtools project using the nuget.config file
+    & dotnet restore "$rootDir\buildtools" --configfile "$rootDir\nuget.Config"
+
+    Write-Output "Building buildtools project..."
+
+    # Create a unique log file for the build
+    $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+    $logFile = "$PSScriptRoot\..\bin\logs\buildtools_$timestamp.binlog"
+
+    # Build the buildtools project and skip restoring the dependencies
+    & dotnet build "$rootDir\buildtools" -c Release "-bl:$logFile" --no-restore
     ThrowOnNativeProcessError
 
     Install-VsDevShell
@@ -108,6 +120,8 @@ function Get-ChangesSinceLastReleaseFile
 function Get-NugetPropsProperty
 {
     Param ([string] $name, [string]$projectName)
+
+    Write-Host "Getting NuGet Props for property $name from $projectName"
 
     $projNameOnly = Split-Path -Path $projectName -LeafBase
 

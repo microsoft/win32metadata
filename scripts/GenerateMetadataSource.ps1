@@ -23,5 +23,15 @@ else
     $target = "ScrapeHeaders"
 }
 
-dotnet build "$windowsWin32ProjectRoot" -c Release -p:ScanArch=$arch -t:$target "-bl:$PSScriptRoot\..\bin\logs\GenerateMetadataSources.binlog"
+$rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
+
+# Explicitly restore the Win32Metadata project to avoid issues restore happening during build
+& dotnet restore "$windowsWin32ProjectRoot" --configfile "$rootDir\nuget.Config"
+
+# Create a unique log file for the build
+$timestamp = Get-Date -Format "yyyyMMddHHmmss"
+$logFile = "$PSScriptRoot\..\bin\logs\GenerateMetadataSources_$timestamp.binlog"
+
+# Build the Win32Metadata Project
+& dotnet build "$windowsWin32ProjectRoot" -c Release -p:ScanArch=$arch -t:$target --no-restore "-bl:$logFile"
 ThrowOnNativeProcessError
