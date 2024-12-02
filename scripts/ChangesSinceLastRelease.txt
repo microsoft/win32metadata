@@ -6358,7 +6358,6 @@ Windows.Win32.System.SystemServices.ENERGY_SAVER_STATUS.ENERGY_SAVER_HIGH_SAVING
 Windows.Win32.System.SystemServices.ENERGY_SAVER_STATUS.ENERGY_SAVER_OFF added
 Windows.Win32.System.SystemServices.ENERGY_SAVER_STATUS.ENERGY_SAVER_STANDARD added
 Windows.Win32.System.SystemServices.FILE_CASE_SENSITIVE_INFORMATION added
-Windows.Win32.System.SystemServices.FILE_STAT_BASIC_INFORMATION added
 Windows.Win32.System.SystemServices.FILE_STAT_INFORMATION added
 Windows.Win32.System.SystemServices.FILE_STAT_LX_INFORMATION added
 Windows.Win32.System.SystemServices.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE added
@@ -7072,3 +7071,48 @@ Windows.Win32.UI.Input.GameInput.IGameInputRawDeviceReport added
 Windows.Win32.UI.Input.GameInput.IGameInputReading added
 # Fixed namespace for GetFileInformationByHandle.
 Windows.Win32.Storage.FileSystem.Apis.GetFileInformationByName added
+# Fixed some namespace cycles.
+Windows.Win32.Media.HTASK => Windows.Win32.Foundation.HTASK
+Windows.Win32.Media.Multimedia.MMIOINFO.htask...Windows.Win32.Media.HTASK => Windows.Win32.Foundation.HTASK
+Windows.Win32.Storage.FileSystem.FILE_STAT_BASIC_INFORMATION added
+Windows.Win32.System.Ole.OLEUIBUSYA.hTask...Windows.Win32.Media.HTASK => Windows.Win32.Foundation.HTASK
+Windows.Win32.System.Ole.OLEUIBUSYW.hTask...Windows.Win32.Media.HTASK => Windows.Win32.Foundation.HTASK
+Windows.Win32.UI.Controls.Apis.DestroySyntheticPointerDevice => Windows.Win32.UI.Input.Pointer.Apis.DestroySyntheticPointerDevice
+Windows.Win32.UI.Controls.HSYNTHETICPOINTERDEVICE => Windows.Win32.UI.Input.Pointer.HSYNTHETICPOINTERDEVICE
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_INFO removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_TYPE removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_ERASER removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_MAX removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_TIP removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_UNKNOWN removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_INFO removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_PROPERTY => Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_PROPERTY
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_EXTERNAL_PEN removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_INTEGRATED_PEN removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_MAX removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_TOUCH removed
+Windows.Win32.UI.Controls.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_TOUCH_PAD removed
+Windows.Win32.UI.Controls.POINTER_FEEDBACK_MODE removed
+Windows.Win32.UI.Controls.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_DEFAULT removed
+Windows.Win32.UI.Controls.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_INDIRECT removed
+Windows.Win32.UI.Controls.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_NONE removed
+Windows.Win32.UI.Controls.POINTER_TYPE_INFO removed
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_INFO added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_TYPE added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_ERASER added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_MAX added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_TIP added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_CURSOR_TYPE.POINTER_DEVICE_CURSOR_TYPE_UNKNOWN added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_INFO added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_EXTERNAL_PEN added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_INTEGRATED_PEN added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_MAX added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_TOUCH added
+Windows.Win32.UI.Input.Pointer.POINTER_DEVICE_TYPE.POINTER_DEVICE_TYPE_TOUCH_PAD added
+Windows.Win32.UI.Input.Pointer.POINTER_FEEDBACK_MODE added
+Windows.Win32.UI.Input.Pointer.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_DEFAULT added
+Windows.Win32.UI.Input.Pointer.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_INDIRECT added
+Windows.Win32.UI.Input.Pointer.POINTER_FEEDBACK_MODE.POINTER_FEEDBACK_NONE added
+Windows.Win32.UI.Input.Pointer.POINTER_TYPE_INFO added
