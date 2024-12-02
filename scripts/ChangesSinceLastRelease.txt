@@ -7072,3 +7072,5 @@ Windows.Win32.UI.Input.GameInput.IGameInputRawDeviceReport added
 Windows.Win32.UI.Input.GameInput.IGameInputReading added
 # Fixed namespace for GetFileInformationByHandle.
 Windows.Win32.Storage.FileSystem.Apis.GetFileInformationByName added
+# Namespace of IsCharLowerW seems wrong #2030
+Windows.Win32.UI.Controls.Apis.IsCharLowerW => Windows.Win32.UI.WindowsAndMessaging.Apis.IsCharLowerW
