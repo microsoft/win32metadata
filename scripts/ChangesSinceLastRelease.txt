@@ -7074,3 +7074,9 @@ Windows.Win32.UI.Input.GameInput.IGameInputReading added
 Windows.Win32.Storage.FileSystem.Apis.GetFileInformationByName added
 # Namespace of IsCharLowerW seems wrong #2030
 Windows.Win32.UI.Controls.Apis.IsCharLowerW => Windows.Win32.UI.WindowsAndMessaging.Apis.IsCharLowerW
+# Problem with the dwreadflags parameter of the ReadEventLog function #2028
+Windows.Win32.System.EventLog.READ_EVENT_LOG_READ_FLAGS :  => [Flags]
+Windows.Win32.System.EventLog.READ_EVENT_LOG_READ_FLAGS.EVENTLOG_BACKWARDS_READ added
+Windows.Win32.System.EventLog.READ_EVENT_LOG_READ_FLAGS.EVENTLOG_FORWARDS_READ added
+Windows.Win32.System.SystemServices.Apis.EVENTLOG_BACKWARDS_READ removed
+Windows.Win32.System.SystemServices.Apis.EVENTLOG_FORWARDS_READ removed
