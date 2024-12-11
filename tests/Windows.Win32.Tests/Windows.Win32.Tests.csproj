@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="C:\Sources\win32metadata\images/windows.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ICSharpCode.Decompiler" Version="7.2.1.6856" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
