@@ -2419,7 +2419,6 @@ IntersectRect=Windows.Win32.Graphics.Gdi
 InvalidateRect=Windows.Win32.Graphics.Gdi
 InvalidateRgn=Windows.Win32.Graphics.Gdi
 InvertRect=Windows.Win32.Graphics.Gdi
-IsCharLowerW=Windows.Win32.UI.Controls
 IsClipboardFormatAvailable=Windows.Win32.System.DataExchange
 IsDlgButtonChecked=Windows.Win32.UI.Controls
 IsImmersiveProcess=Windows.Win32.System.Threading
