@@ -7093,3 +7093,6 @@ Windows.Win32.UI.TabletPC.Apis.GetPreferredPacketDescription added
 Windows.Win32.UI.TabletPC.Apis.ResetContext added
 Windows.Win32.UI.TabletPC.Apis.SetCACMode added
 Windows.Win32.UI.TabletPC.Apis.SetContextPropertyValue added
+# Added [Optional]. Fixed #2036. Fixed #2038.
+Windows.Win32.Graphics.Direct3D11.Apis.D3D11CreateDevice : Software : [In] => [Optional]
+Windows.Win32.System.Com.StructuredStorage.Apis.CreateStreamOnHGlobal : hGlobal : [In] => [Optional]
