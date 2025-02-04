@@ -7081,3 +7081,15 @@ Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : IsolationLevel : [In] 
 Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : lpTransactionAttributes : [In,Out] => [In,Optional]
 Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : Timeout : [In] => [In,Optional]
 Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : UOW : [In,Out] => [In,Optional]
+# Added missing TabletPC APIs for #2041.
+Windows.Win32.UI.TabletPC.Apis.CloneContext added
+Windows.Win32.UI.TabletPC.Apis.DestroyAlternate added
+Windows.Win32.UI.TabletPC.Apis.GetContextPreferenceFlags added
+Windows.Win32.UI.TabletPC.Apis.GetContextPropertyList added
+Windows.Win32.UI.TabletPC.Apis.GetContextPropertyValue added
+Windows.Win32.UI.TabletPC.Apis.GetEnabledUnicodeRanges added
+Windows.Win32.UI.TabletPC.Apis.GetGuide added
+Windows.Win32.UI.TabletPC.Apis.GetPreferredPacketDescription added
+Windows.Win32.UI.TabletPC.Apis.ResetContext added
+Windows.Win32.UI.TabletPC.Apis.SetCACMode added
+Windows.Win32.UI.TabletPC.Apis.SetContextPropertyValue added
