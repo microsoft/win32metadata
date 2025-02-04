@@ -7074,3 +7074,10 @@ Windows.Win32.UI.Input.GameInput.IGameInputReading added
 Windows.Win32.Storage.FileSystem.Apis.GetFileInformationByName added
 # Namespace of IsCharLowerW seems wrong #2030
 Windows.Win32.UI.Controls.Apis.IsCharLowerW => Windows.Win32.UI.WindowsAndMessaging.Apis.IsCharLowerW
+# CreateTransaction parameters are incorrectly attributed #2050
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : CreateOptions : [In] => [In,Optional]
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : IsolationFlags : [In] => [In,Optional]
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : IsolationLevel : [In] => [In,Optional]
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : lpTransactionAttributes : [In,Out] => [In,Optional]
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : Timeout : [In] => [In,Optional]
+Windows.Win32.Storage.FileSystem.Apis.CreateTransaction : UOW : [In,Out] => [In,Optional]
