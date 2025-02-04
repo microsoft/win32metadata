@@ -806,14 +806,6 @@
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.QoS",
-    "Name": "LPM_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "LPM_Deinitialize",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypedef": true
-  },
-  {
-    "Namespace": "Windows.Win32.NetworkManagement.QoS",
     "Name": "RHANDLE",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],

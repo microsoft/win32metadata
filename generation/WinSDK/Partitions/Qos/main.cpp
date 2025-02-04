@@ -6,7 +6,6 @@
 #include <winsock2.h>
 #include <ntddndis.h>
 
-#include <lpmapi.h>
 #include <qos2.h>
 #include <traffic.h>
 #include <qossp.h>
