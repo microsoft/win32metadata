@@ -1148,6 +1148,7 @@ WTSVirtualChannelOpen::hServer=[Optional][Reserved]
 WTSWaitSystemEvent::hServer=[Optional]
 ID3D12GraphicsCommandList::ClearDepthStencilView::pRects=[Optional]
 ID3D12GraphicsCommandList::ClearRenderTargetView::pRects=[Optional]
+ID3D12PageableTools::GetAllocation::pAllocation=[RetVal]
 IWbemClassObject::Get::pType=[Out][Optional]
 IWbemClassObject::Get::plFlavor=[Out][Optional]
 ReadFile::lpBuffer=byte*
