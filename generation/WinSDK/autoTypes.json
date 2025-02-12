@@ -1032,7 +1032,7 @@
     "Namespace": "Windows.Win32.UI.HiDpi",
     "Name": "DPI_AWARENESS_CONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ],
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
