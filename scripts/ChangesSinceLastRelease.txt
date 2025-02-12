@@ -6706,3 +6706,5 @@ Windows.Win32.System.WindowsProgramming.Apis.PROCESS_CREATION_MITIGATION_POLICY_
 Windows.Win32.System.WindowsProgramming.Apis.PROCESS_CREATION_MITIGATION_POLICY_SEHOP_ENABLE => Windows.Win32.System.Threading.Apis.PROCESS_CREATION_MITIGATION_POLICY_SEHOP_ENABLE
 # DPI_AWARENESS_CONTEXT value -1 is valid but metadata indicates otherwise #2060
 Windows.Win32.UI.HiDpi.DPI_AWARENESS_CONTEXT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef]
+# CldApi Handles generate invalid SafeFileHandle overloads #2058
+Windows.Win32.Storage.CloudFilters.Apis.CfOpenFileWithOplock : ProtectedHandle : [Out] => [Out,RAIIFree(CfCloseHandle)]
