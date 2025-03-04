@@ -17813,14 +17813,19 @@
   },
   {
     "name": "READ_EVENT_LOG_READ_FLAGS",
+    "flags": true,
     "members": [
       {
-        "name": "EVENTLOG_SEEK_READ",
-        "value": "2"
+        "name": "EVENTLOG_SEEK_READ"
       },
       {
-        "name": "EVENTLOG_SEQUENTIAL_READ",
-        "value": "1"
+        "name": "EVENTLOG_SEQUENTIAL_READ"
+      },
+      {
+        "name": "EVENTLOG_FORWARDS_READ"
+      },
+      {
+        "name": "EVENTLOG_BACKWARDS_READ"
       }
     ],
     "uses": [

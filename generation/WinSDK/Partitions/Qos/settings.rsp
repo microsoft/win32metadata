@@ -1,7 +1,6 @@
 --traverse
 <IncludeRoot>/shared/qosobjs.h
 <IncludeRoot>/shared/qos.h
-<IncludeRoot>/um/LpmApi.h
 <IncludeRoot>/shared/traffic.h
 <IncludeRoot>/um/qos2.h
 <IncludeRoot>/shared/qossp.h
