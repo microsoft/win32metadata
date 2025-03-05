@@ -97,7 +97,7 @@ $"        public const {type} {name} = {valueText};");
         {
             if (valueText.Length > 0 && (char.IsLetter(valueText[0]) || valueText[0] == '_'))
             {
-                // This means our value is probably using an enum or some other expresssion,
+                // This means our value is probably using an enum or some other expression,
                 // so don't mess with the valueText
 
                 // Set the type to something
