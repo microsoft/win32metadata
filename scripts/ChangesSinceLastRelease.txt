@@ -6708,3 +6708,10 @@ Windows.Win32.System.WindowsProgramming.Apis.PROCESS_CREATION_MITIGATION_POLICY_
 Windows.Win32.UI.HiDpi.DPI_AWARENESS_CONTEXT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef]
 # CldApi Handles generate invalid SafeFileHandle overloads #2058
 Windows.Win32.Storage.CloudFilters.Apis.CfOpenFileWithOplock : ProtectedHandle : [Out] => [Out,RAIIFree(CfCloseHandle)]
+# Generate dxdiag.h bindings in DirectX.Diagnostics namespace
+Windows.Win32.Graphics.DirectX.Diagnostics._DXDIAG_INIT_PARAMS added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.CLSID_DxDiagProvider added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_DX9_SDK_VERSION added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_E_INSUFFICIENT_BUFFER added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagContainer added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagProvider added
