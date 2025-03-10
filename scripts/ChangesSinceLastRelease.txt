@@ -6706,3 +6706,10 @@ Windows.Win32.System.WindowsProgramming.Apis.PROCESS_CREATION_MITIGATION_POLICY_
 Windows.Win32.System.WindowsProgramming.Apis.PROCESS_CREATION_MITIGATION_POLICY_SEHOP_ENABLE => Windows.Win32.System.Threading.Apis.PROCESS_CREATION_MITIGATION_POLICY_SEHOP_ENABLE
 # DPI_AWARENESS_CONTEXT value -1 is valid but metadata indicates otherwise #2060
 Windows.Win32.UI.HiDpi.DPI_AWARENESS_CONTEXT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef]
+# Generate dxdiag.h bindings in DirectX.Diagnostics namespace
+Windows.Win32.Graphics.DirectX.Diagnostics._DXDIAG_INIT_PARAMS added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.CLSID_DxDiagProvider added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_DX9_SDK_VERSION added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_E_INSUFFICIENT_BUFFER added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagContainer added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagProvider added
