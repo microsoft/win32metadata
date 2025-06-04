@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/dxdiag.h
+--namespace
+Windows.Win32.Graphics.DirectX.Diagnostics

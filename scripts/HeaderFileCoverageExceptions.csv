@@ -148,7 +148,6 @@ File,Skipping,Reason
 /um/dpx1.h,false,Need DPX section
 /um/dshow.h,true,Includes only
 /um/dx95type.h,true,Ignoring kernel stuff
-/um/dxdiag.h,true,Not intended to be used in user code
 /um/dxgiddi.h,true,Ignoring kernel stuff
 /um/dxtmpl.h,true,Inlines and templates
 /um/easencryptprov.h,false,Need EAS
