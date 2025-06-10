@@ -7,13 +7,14 @@
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <Description>Microsoft Windows API documentation</Description>
     <PackageTags>Win32 Metadata</PackageTags>
-    <PackageLicenseUrl>https://aka.ms/WinSDKLicenseURL</PackageLicenseUrl>
+    <PackageLicenseFile>sdk_license.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <DocOutputPath Include="$(OutputPath)apidocs.msgpack" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(RepoRootPath)licenses\sdk_license.txt" Pack="true" PackagePath="" />
     <None Include="@(DocOutputPath)" Pack="true" PackagePath="" />
     <None Include="buildTransitive/**" Pack="true" PackagePath="buildTransitive" />
   </ItemGroup>
