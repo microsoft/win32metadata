@@ -1590,6 +1590,7 @@
     "Name": "PROCESSTRACE_HANDLE",
     "ValueType": "ulong",
     "CloseApi": "CloseTrace",
+    "InvalidHandleValues": [ -1 ],
     "NativeTypedef": false
   },
   {
@@ -2750,6 +2751,7 @@
     "Name": "REGHANDLE",
     "ValueType": "long",
     "CloseApi": "EventUnregister",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2762,12 +2764,14 @@
     "Name": "PDH_HLOG",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "PdhCloseLog",
+    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
     "Name": "PDH_HQUERY",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "PdhCloseQuery",
+    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
@@ -2780,6 +2784,7 @@
     "Name": "PRINTER_HANDLE",
     "ValueType": "void*",
     "CloseApi": "ClosePrinter",
+    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": false
   },
   {
