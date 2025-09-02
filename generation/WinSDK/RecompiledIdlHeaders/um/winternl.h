@@ -450,10 +450,7 @@ NtClose (
     IN HANDLE Handle
     );
 
-//
-// use the Win32 API instead
-//     CreateFile
-//
+
 __kernel_entry NTSTATUS
 NTAPI
 NtCreateFile (
