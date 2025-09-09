@@ -28765,20 +28765,6 @@
       "filter": "DXC_CP_",
       "header": "dxcapi.h"
     },
-    "members": [
-      {
-        "name": "DXC_CP_ACP",
-        "value": "0"
-      },
-      {
-        "name": "DXC_CP_UTF16",
-        "value": "1200"
-      },
-      {
-        "name": "DXC_CP_UTF8",
-        "value": "65001"
-      }
-    ],
     "uses": [
       {
         "interface": "IDxcBlobEncoding",
@@ -28824,6 +28810,132 @@
         "interface": "IDxcUtils",
         "method": "LoadFile",
         "parameter": "pCodePage"
+      },
+      {
+        "struct": "DxcBuffer",
+        "field": "Encoding"
+      }
+    ]
+  },
+  {
+    "name": "DxcValidatorFlags",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DxcValidatorFlags_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDxcValidator",
+        "method": "Validate",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "IDxcValidator2",
+        "method": "ValidateWithDebug",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DxcVersionInfoFlags",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DxcVersionInfoFlags_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDxcVersionInfo",
+        "method": "GetFlags",
+        "parameter": "pFlags"
+      }
+    ]
+  },
+  {
+    "name": "DXC_HASHFLAG",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXC_HASHFLAG_",
+      "header": "dxcapi.h"
+    },
+    "uses": [
+      {
+        "struct": "DxcShaderHash",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DXC_PART",
+    "flags": false,
+    "members": [
+        {
+          "name": "DXC_PART_PDB",
+          "value": "('I' | ('L' << 8) | ('D' << 16) | ('B' << 24))"
+        },
+        {
+          "name": "DXC_PART_PDB_NAME",
+          "value": "('I' | ('L' << 8) | ('D' << 16) | ('N' << 24))"
+        },
+        {
+          "name": "DXC_PART_PRIVATE_DATA",
+          "value": "('P' | ('R' << 8) | ('I' << 16) | ('V' << 24))"
+        },
+        {
+          "name": "DXC_PART_ROOT_SIGNATURE",
+          "value": "('R' | ('T' << 8) | ('S' << 16) | ('0' << 24))"
+        },
+        {
+          "name": "DXC_PART_DXIL",
+          "value": "('D' | ('X' << 8) | ('I' << 16) | ('L' << 24))"
+        },
+        {
+          "name": "DXC_PART_REFLECTION_DATA",
+          "value": "('S' | ('T' << 8) | ('A' << 16) | ('T' << 24))"
+        },
+        {
+          "name": "DXC_PART_SHADER_HASH",
+          "value": "('H' | ('A' << 8) | ('S' << 16) | ('H' << 24))"
+        },
+        {
+          "name": "DXC_PART_INPUT_SIGNATURE",
+          "value": "('I' | ('S' << 8) | ('G' << 16) | ('1' << 24))"
+        },
+        {
+          "name": "DXC_PART_OUTPUT_SIGNATURE",
+          "value": "('O' | ('S' << 8) | ('G' << 16) | ('1' << 24))"
+        },
+        {
+          "name": "DXC_PART_PATCH_CONSTANT_SIGNATURE",
+          "value": "('P' | ('S' << 8) | ('G' << 16) | ('1' << 24))"
+        }
+    ],
+    "uses": [
+      {
+        "interface": "IDxcUtils",
+        "method": "GetDxilContainerPart",
+        "parameter": "DxcPart"
+      },
+      {
+        "interface": "IDxcContainerBuilder",
+        "method": "AddPart",
+        "parameter": "fourCC"
+      },
+      {
+        "interface": "IDxcContainerBuilder",
+        "method": "RemovePart",
+        "parameter": "fourCC"
+      },
+      {
+        "interface": "IDxcContainerReflection",
+        "method": "GetPartKind",
+        "parameter": "pResult"
+      },
+      {
+        "interface": "IDxcContainerReflection",
+        "method": "FindFirstPartKind",
+        "parameter": "kind"
       }
     ]
   },
