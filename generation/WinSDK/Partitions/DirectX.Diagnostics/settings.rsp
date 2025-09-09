@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/um/dxdiag.h
+--namespace
+Windows.Win32.Graphics.DirectX.Diagnostics
+--remap
+_DXDIAG_INIT_PARAMS=DXDIAG_INIT_PARAMS

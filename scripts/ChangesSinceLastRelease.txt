@@ -6770,3 +6770,10 @@ Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_VALIDATION_FLAGS.D3D12_V
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 714, winmd2 = 717
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 614, winmd2 = 616
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1421, winmd2 = 1426
+# Generate dxdiag.h bindings in DirectX.Diagnostics namespace
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.CLSID_DxDiagProvider added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_DX9_SDK_VERSION added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_E_INSUFFICIENT_BUFFER added
+Windows.Win32.Graphics.DirectX.Diagnostics.DXDIAG_INIT_PARAMS added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagContainer added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagProvider added
