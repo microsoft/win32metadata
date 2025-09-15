@@ -6770,3 +6770,20 @@ Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_VALIDATION_FLAGS.D3D12_V
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 714, winmd2 = 717
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 614, winmd2 = 616
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1421, winmd2 = 1426
+# Adding WLDP and SPOOLSS APIs that are extern C but not marked as such in the SDK headers
+Windows.Win32.Graphics.Printing.Apis.RouterCreatePrintAsyncNotificationChannel added
+Windows.Win32.Graphics.Printing.Apis.RouterGetPrintClassObject added
+Windows.Win32.Graphics.Printing.Apis.RouterUnregisterForPrintAsyncNotifications added
+Windows.Win32.System.WindowsProgramming.Apis.WldpGetApplicationSettingBoolean added
+Windows.Win32.System.WindowsProgramming.Apis.WldpGetApplicationSettingStringList added
+Windows.Win32.System.WindowsProgramming.Apis.WldpGetApplicationSettingStringSet added
+Windows.Win32.System.WindowsProgramming.Apis.WldpIsAppApprovedByPolicy added
+Windows.Win32.System.WindowsProgramming.Apis.WldpIsProductionConfiguration added
+Windows.Win32.System.WindowsProgramming.Apis.WldpIsWcosProductionConfiguration added
+Windows.Win32.System.WindowsProgramming.Apis.WldpQueryPolicySettingEnabled added
+Windows.Win32.System.WindowsProgramming.Apis.WldpQueryPolicySettingEnabled2 added
+Windows.Win32.System.WindowsProgramming.Apis.WldpQueryWindowsLockdownMode added
+Windows.Win32.System.WindowsProgramming.Apis.WldpQueryWindowsLockdownRestriction added
+Windows.Win32.System.WindowsProgramming.Apis.WldpResetProductionConfiguration added
+Windows.Win32.System.WindowsProgramming.Apis.WldpResetWcosProductionConfiguration added
+Windows.Win32.System.WindowsProgramming.Apis.WldpSetWindowsLockdownRestriction added

@@ -47,7 +47,11 @@ extern "C" {
 #include <tdiinfo.h>
 #include <appcompatapi.h>
 #include <dsound.h>
+
+// Many APIs in wldp.h are not defined as extern C but they are exported as un-mangled names.
+extern "C" {
 #include <wldp.h>
+}
 
 #include <defaultbrowsersyncsettings.h>
 #include <delayloadhandler.h>
