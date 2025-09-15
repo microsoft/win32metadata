@@ -24,7 +24,9 @@
 #include <prdrvcom.h>
 #include <PrinterExtension.h>
 #include <prnasnot.h>
+extern "C" {
 #include <prnasntp.h>
+}
 #include <prntfont.h>
 #include <tcpxcv.h>
 #include <usbprint.h>
