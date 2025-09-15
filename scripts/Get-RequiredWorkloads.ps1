@@ -6,4 +6,4 @@
 'Microsoft.NetCore.Component.SDK'
 'Microsoft.VisualStudio.Component.VC.Tools.ARM64'
 'Microsoft.VisualStudio.Component.VC.Tools.x86.x64'
-'Microsoft.VisualStudio.Component.Windows11SDK.22000'
+'Microsoft.VisualStudio.Component.Windows11SDK.26100'
