@@ -1,0 +1,16 @@
+# Adding *PROC, IP6_ADDRESS, EapHostPeerGetDataToUnplumbCredentials back to arch-specific
+Windows.Win32.Foundation.FARPROC removed
+Windows.Win32.Foundation.FARPROC(X64, Arm64) added
+Windows.Win32.Foundation.FARPROC(X86) added
+Windows.Win32.Foundation.NEARPROC removed
+Windows.Win32.Foundation.NEARPROC(X64, Arm64) added
+Windows.Win32.Foundation.NEARPROC(X86) added
+Windows.Win32.Foundation.PROC removed
+Windows.Win32.Foundation.PROC(X64, Arm64) added
+Windows.Win32.Foundation.PROC(X86) added
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS removed
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS(X64, Arm64) added
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS(X86) added
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials removed
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials(X64, Arm64) added
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials(X86) added
