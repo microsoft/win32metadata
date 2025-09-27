@@ -1,0 +1,3 @@
+# Fixing return type of ShellExecute
+Windows.Win32.UI.Shell.Apis.ShellExecuteA : return :  => [DoNotRelease]
+Windows.Win32.UI.Shell.Apis.ShellExecuteW : return :  => [DoNotRelease]
