@@ -1,3 +1,7 @@
 # Fixing return type of ShellExecute
 Windows.Win32.UI.Shell.Apis.ShellExecuteA : return :  => [DoNotRelease]
 Windows.Win32.UI.Shell.Apis.ShellExecuteW : return :  => [DoNotRelease]
+# Removing Dns from ExcludeFromCrossArch to get IP6_ADDRESS back in per-arch
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS removed
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS(X64, Arm64) added
+Windows.Win32.NetworkManagement.Dns.IP6_ADDRESS(X86) added
