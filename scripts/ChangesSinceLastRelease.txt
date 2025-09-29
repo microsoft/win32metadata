@@ -1,3 +1,6 @@
+# Fixing return type of ShellExecute
+Windows.Win32.UI.Shell.Apis.ShellExecuteA : return :  => [DoNotRelease]
+Windows.Win32.UI.Shell.Apis.ShellExecuteW : return :  => [DoNotRelease]
 # Add additional console APIs/types
 Windows.Win32.Devices.Display.Apis.CHAR_TYPE_LEADING => Windows.Win32.System.Console.Apis.CHAR_TYPE_LEADING
 Windows.Win32.Devices.Display.Apis.CHAR_TYPE_SBCS => Windows.Win32.System.Console.Apis.CHAR_TYPE_SBCS
