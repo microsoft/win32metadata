@@ -21,7 +21,6 @@ Windows.Win32.System.Console.Apis.CONSOLE_MODIFIER_CONTROL added
 Windows.Win32.System.Console.Apis.CONSOLE_MODIFIER_SHIFT added
 Windows.Win32.System.Console.Apis.CONSOLE_NOSHORTCUTKEY added
 Windows.Win32.System.Console.Apis.CONSOLE_OUTPUT_STRING added
-Windows.Win32.System.Console.Apis.CONSOLE_PROGMAN_HANDLE_MESSAGE added
 Windows.Win32.System.Console.Apis.CONSOLE_PRTSC added
 Windows.Win32.System.Console.Apis.CONSOLE_REGISTER_VDM added
 Windows.Win32.System.Console.Apis.CONSOLE_REGISTER_WOW added
@@ -90,8 +89,6 @@ Windows.Win32.System.Console.Apis.WriteConsoleInputVDMA added
 Windows.Win32.System.Console.Apis.WriteConsoleInputVDMW added
 Windows.Win32.System.Console.APPKEY added
 Windows.Win32.System.Console.CONSOLE_GRAPHICS_BUFFER_INFO added
-Windows.Win32.System.Console.CONSOLE_STATE_INFO added
 Windows.Win32.System.Console.ExtKeyDef added
 Windows.Win32.System.Console.ExtKeyDefBuf added
 Windows.Win32.System.Console.ExtKeySubst added
-Windows.Win32.System.Console.TTFONTLIST added

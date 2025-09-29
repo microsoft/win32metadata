@@ -54,14 +54,6 @@ GetConsoleKeyboardLayoutNameW(
 // doesn't available bold when add BOLD_MARK on first of face name.
 #define BOLD_MARK    (L'*')
 
-typedef struct _TT_FONT_LIST {
-    SINGLE_LIST_ENTRY List;
-    UINT  CodePage;
-    BOOL  fDisableBold;
-    TCHAR FaceName1[LF_FACESIZE];
-    TCHAR FaceName2[LF_FACESIZE];
-} TTFONTLIST, *LPTTFONTLIST;
-
 // ...
 
 #ifndef NOGDI
@@ -374,13 +366,7 @@ UnregisterConsoleIME(
 #define CONSOLE_OUTPUT_STRING L"CONOUT$"
 #define CONSOLE_GENERIC       L"CON"
 
-//
-// this string is used to call RegisterWindowMessage to get
-// progman's handle.
-//
-
-#define CONSOLE_PROGMAN_HANDLE_MESSAGE "ConsoleProgmanHandle"
-
+// ...
 
 //
 // stream API definitions.  these API are only supposed to be used by
@@ -420,63 +406,7 @@ APIENTRY
 GetConsoleInputWaitHandle(
     VOID);
 
-typedef struct _CONSOLE_STATE_INFO {
-    /* BEGIN V1 CONSOLE_STATE_INFO */
-    COORD ScreenBufferSize;
-    COORD WindowSize;
-    INT WindowPosX;
-    INT WindowPosY;
-    COORD FontSize;
-    UINT FontFamily;
-    UINT FontWeight;
-    WCHAR FaceName[LF_FACESIZE];
-    UINT CursorSize;
-    UINT FullScreen : 1;
-    UINT QuickEdit : 1;
-    UINT AutoPosition : 1;
-    UINT InsertMode : 1;
-    UINT HistoryNoDup : 1;
-    UINT FullScreenSupported : 1;
-    UINT UpdateValues : 1;
-    UINT Defaults : 1;
-    WORD ScreenAttributes;
-    WORD PopupAttributes;
-    UINT HistoryBufferSize;
-    UINT NumberOfHistoryBuffers;
-    COLORREF ColorTable[16];
-    HWND hWnd;
-    HICON hIcon;
-    LPWSTR OriginalTitle;
-    LPWSTR LinkTitle;
-
-    /*
-     * Starting code page
-     */
-    UINT CodePage;
-
-    /* END V1 CONSOLE_STATE_INFO */
-
-    /* BEGIN V2 CONSOLE_STATE_INFO */
-    BOOL fIsV2Console;
-    BOOL fWrapText;
-    BOOL fFilterOnPaste;
-    BOOL fCtrlKeyShortcutsDisabled;
-    BOOL fLineSelection;
-    BYTE bWindowTransparency;
-    BOOL fWindowMaximized;
-
-    unsigned int CursorType;
-    COLORREF CursorColor;
-
-    BOOL InterceptCopyPaste;
-
-    COLORREF DefaultForeground;
-    COLORREF DefaultBackground;
-    BOOL TerminalScrolling;
-    /* END V2 CONSOLE_STATE_INFO */
-
-} CONSOLE_STATE_INFO, *PCONSOLE_STATE_INFO;
-
+// ...
 
 #ifdef DEFINE_CONSOLEV2_PROPERTIES
 #define PID_CONSOLE_FORCEV2                 1
