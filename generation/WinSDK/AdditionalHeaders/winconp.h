@@ -1,4 +1,4 @@
-// https://github.com/microsoft/terminal/blob/main/dep/Console/winconp.h
+// Partially sourced from https://github.com/microsoft/terminal/blob/main/dep/Console/winconp.h
 
 #ifndef _WINCONP_
 #define _WINCONP_
@@ -16,11 +16,7 @@ extern "C" {
 
 #include <wincontypes.h>
 
-//
-// History flags (internal)
-//
-
-#define CHI_VALID_FLAGS (HISTORY_NO_DUP_FLAG)
+// ...
 
 //
 // Selection flags (internal)
@@ -49,91 +45,7 @@ GetConsoleKeyboardLayoutNameW(
 #define GetConsoleKeyboardLayoutName  GetConsoleKeyboardLayoutNameA
 #endif // !UNICODE
 
-//
-// Registry strings
-//
-
-#define CONSOLE_REGISTRY_STRING                         L"Console"
-#define CONSOLE_REGISTRY_FONTSIZE                       L"FontSize"
-#define CONSOLE_REGISTRY_FONTFAMILY                     L"FontFamily"
-#define CONSOLE_REGISTRY_BUFFERSIZE                     L"ScreenBufferSize"
-#define CONSOLE_REGISTRY_CURSORSIZE                     L"CursorSize"
-#define CONSOLE_REGISTRY_WINDOWMAXIMIZED                L"WindowMaximized"
-#define CONSOLE_REGISTRY_WINDOWSIZE                     L"WindowSize"
-#define CONSOLE_REGISTRY_WINDOWPOS                      L"WindowPosition"
-#define CONSOLE_REGISTRY_WINDOWALPHA                    L"WindowAlpha"
-#define CONSOLE_REGISTRY_FILLATTR                       L"ScreenColors"
-#define CONSOLE_REGISTRY_POPUPATTR                      L"PopupColors"
-#define CONSOLE_REGISTRY_FULLSCR                        L"FullScreen"
-#define CONSOLE_REGISTRY_QUICKEDIT                      L"QuickEdit"
-#define CONSOLE_REGISTRY_FACENAME                       L"FaceName"
-#define CONSOLE_REGISTRY_FONTWEIGHT                     L"FontWeight"
-#define CONSOLE_REGISTRY_INSERTMODE                     L"InsertMode"
-#define CONSOLE_REGISTRY_HISTORYSIZE                    L"HistoryBufferSize"
-#define CONSOLE_REGISTRY_HISTORYBUFS                    L"NumberOfHistoryBuffers"
-#define CONSOLE_REGISTRY_HISTORYNODUP                   L"HistoryNoDup"
-#define CONSOLE_REGISTRY_COLORTABLE                     L"ColorTable%02u"
-#define CONSOLE_REGISTRY_EXTENDEDEDITKEY                L"ExtendedEditKey"
-#define CONSOLE_REGISTRY_EXTENDEDEDITKEY_CUSTOM         L"ExtendedEditkeyCustom"
-#define CONSOLE_REGISTRY_WORD_DELIM                     L"WordDelimiters"
-#define CONSOLE_REGISTRY_TRIMZEROHEADINGS               L"TrimLeadingZeros"
-#define CONSOLE_REGISTRY_LOAD_CONIME                    L"LoadConIme"
-#define CONSOLE_REGISTRY_ENABLE_COLOR_SELECTION         L"EnableColorSelection"
-#define CONSOLE_REGISTRY_SCROLLSCALE                    L"ScrollScale"
-
-// V2 console settings
-#define CONSOLE_REGISTRY_FORCEV2                        L"ForceV2"
-#define CONSOLE_REGISTRY_LINESELECTION                  L"LineSelection"
-#define CONSOLE_REGISTRY_FILTERONPASTE                  L"FilterOnPaste"
-#define CONSOLE_REGISTRY_LINEWRAP                       L"LineWrap"
-#define CONSOLE_REGISTRY_CTRLKEYSHORTCUTS_DISABLED      L"CtrlKeyShortcutsDisabled"
-#define CONSOLE_REGISTRY_ALLOW_ALTF4_CLOSE              L"AllowAltF4Close"
-#define CONSOLE_REGISTRY_VIRTTERM_LEVEL                 L"VirtualTerminalLevel"
-
-#define CONSOLE_REGISTRY_CURSORTYPE                     L"CursorType"
-#define CONSOLE_REGISTRY_CURSORCOLOR                    L"CursorColor"
-
-#define CONSOLE_REGISTRY_INTERCEPTCOPYPASTE             L"InterceptCopyPaste"
-
-#define CONSOLE_REGISTRY_COPYCOLOR                      L"CopyColor"
-#define CONSOLE_REGISTRY_USEDX                          L"UseDx"
-
-#define CONSOLE_REGISTRY_DEFAULTFOREGROUND             L"DefaultForeground"
-#define CONSOLE_REGISTRY_DEFAULTBACKGROUND             L"DefaultBackground"
-#define CONSOLE_REGISTRY_TERMINALSCROLLING             L"TerminalScrolling"
-#define CONSOLE_REGISTRY_ANSWERBACKMESSAGE             L"AnswerbackMessage"
-// end V2 console settings
-
-    /*
-     * Starting code page
-     */
-#define CONSOLE_REGISTRY_CODEPAGE    (L"CodePage")
-
-//
-// registry strings on HKEY_LOCAL_MACHINE
-//
-#define MACHINE_REGISTRY_CONSOLE        (L"\\Registry\\Machine\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Console")
-#define MACHINE_REGISTRY_CONSOLEIME     (L"ConsoleIME")
-#define MACHINE_REGISTRY_ENABLE_CONIME_ON_SYSTEM_PROCESS     (L"EnableConImeOnSystemProcess")
-
-
-#define MACHINE_REGISTRY_CONSOLE_TTFONT (L"\\Registry\\Machine\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Console\\TrueTypeFont")
-#define MACHINE_REGISTRY_CONSOLE_TTFONT_WIN32_PATH (L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Console\\TrueTypeFont")
-
-
-#define MACHINE_REGISTRY_CONSOLE_NLS    (L"\\Registry\\Machine\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Console\\Nls")
-
-
-#define MACHINE_REGISTRY_CONSOLE_FULLSCREEN (L"\\Registry\\Machine\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Console\\FullScreen")
-#define MACHINE_REGISTRY_INITIAL_PALETTE           (L"InitialPalette")
-#define MACHINE_REGISTRY_COLOR_BUFFER              (L"ColorBuffer")
-#define MACHINE_REGISTRY_COLOR_BUFFER_NO_TRANSLATE (L"ColorBufferNoTranslate")
-#define MACHINE_REGISTRY_MODE_FONT_PAIRS           (L"ModeFontPairs")
-#define MACHINE_REGISTRY_FS_CODEPAGE               (L"CodePage")
-
-
-#define MACHINE_REGISTRY_EUDC    (L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Nls\\CodePage\\EUDCCodeRange")
-
+// ...
 
 //
 // TrueType font list
@@ -150,16 +62,7 @@ typedef struct _TT_FONT_LIST {
     TCHAR FaceName2[LF_FACESIZE];
 } TTFONTLIST, *LPTTFONTLIST;
 
-//
-// registry strings on HKEY_CURRENT_USER
-//
-#define PRELOAD_REGISTRY_STRING      (L"Keyboard Layout\\Preload")
-
-
-//
-// Special key for previous word erase
-//
-#define EXTKEY_ERASE_PREV_WORD  (0x7f)
+// ...
 
 #ifndef NOGDI
 
@@ -205,10 +108,7 @@ WINAPI
 SetConsoleIcon(
     _In_ HICON hIcon);
 
-//
-// These console font APIs don't appear to be used anywhere. Maybe they
-// should be removed.
-//
+// ...
 
 BOOL
 WINAPI
@@ -440,11 +340,7 @@ APIENTRY
 SetConsoleOS2OemFormat(
     _In_ BOOL fOs2OemFormat);
 
-BOOL
-IsConsoleFullWidth(
-    _In_ HDC hDC,
-    _In_ DWORD CodePage,
-    _In_ WCHAR wch);
+// ...
 
 #if defined(FE_IME)
 BOOL
@@ -507,18 +403,7 @@ DuplicateConsoleHandle(
     _In_ BOOL bInheritHandle,
     _In_ DWORD dwOptions);
 
-BOOL
-APIENTRY
-GetConsoleHandleInformation(
-    _In_ HANDLE hObject,
-    _Out_ LPDWORD lpdwFlags);
-
-BOOL
-APIENTRY
-SetConsoleHandleInformation(
-    _In_ HANDLE hObject,
-    _In_ DWORD dwMask,
-    _In_ DWORD dwFlags);
+// ...
 
 BOOL
 APIENTRY
