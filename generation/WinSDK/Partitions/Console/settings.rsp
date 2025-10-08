@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/wincon.h
+<IncludeRoot>/um/winconp.h
 <IncludeRoot>/um/consoleapi.h
 <IncludeRoot>/um/consoleapi2.h
 <IncludeRoot>/um/consoleapi3.h
@@ -7,3 +8,6 @@
 <IncludeRoot>/um/wincontypes.h
 --namespace
 Windows.Win32.System.Console
+--remap
+_APPKEY=APPKEY
+_CONSOLE_GRAPHICS_BUFFER_INFO=CONSOLE_GRAPHICS_BUFFER_INFO
