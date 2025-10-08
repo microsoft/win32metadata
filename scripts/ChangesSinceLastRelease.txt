@@ -115,7 +115,9 @@ Windows.Win32.Graphics.Direct3D.ID3DShaderCacheInstallerClient added
 Windows.Win32.Graphics.Direct3D.ID3DShaderCacheInstallerFactory added
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_RAYTRACING_OPACITY_MICROMAP_ARRAY_BYTE_ALIGNMENT added
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_RAYTRACING_OPACITY_MICROMAP_OC1_MAX_SUBDIVISION_LEVEL added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D12_TIGHT_ALIGNMENT_MIN_COMMITTED_RESOURCE_ALIGNEMNT removed
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_TIGHT_ALIGNMENT_MIN_COMMITTED_RESOURCE_ALIGNMENT added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D12_TIGHT_ALIGNMENT_MIN_PLACED_RESOURCE_ALIGNEMNT removed
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_TIGHT_ALIGNMENT_MIN_PLACED_RESOURCE_ALIGNMENT added
 Windows.Win32.Graphics.Direct3D12.D3D12_ADAPTER_FAMILY added
 Windows.Win32.Graphics.Direct3D12.D3D12_APPLICATION_DESC added
@@ -256,6 +258,7 @@ Windows.Win32.Graphics.Direct3D12.ID3D12PipelineState1 added
 Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectProperties2 added
 Windows.Win32.Graphics.Direct3D12.PFN_D3D12_COMPILER_CREATE_FACTORY added
 Windows.Win32.Graphics.Direct3D12.PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE added
+Windows.Win32.Graphics.Printing.PRINTER_HANDLE : [MetadataTypedef,RAIIFree(ClosePrinter)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(ClosePrinter)]
 Windows.Win32.Media.MediaFoundation.D3D12_FEATURE_DATA_VIDEO_ENCODER_DIRTY_REGIONS added
 Windows.Win32.Media.MediaFoundation.D3D12_FEATURE_DATA_VIDEO_ENCODER_HEAP_SIZE1 added
 Windows.Win32.Media.MediaFoundation.D3D12_FEATURE_DATA_VIDEO_ENCODER_MOTION_SEARCH added
@@ -386,7 +389,12 @@ Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_SCALE_SUPPORT_FLAGS.D3D12_VIDEO_
 Windows.Win32.Media.MediaFoundation.ID3D12VideoDevice4 added
 Windows.Win32.Media.MediaFoundation.ID3D12VideoEncodeCommandList4 added
 Windows.Win32.Media.MediaFoundation.ID3D12VideoEncoderHeap1 added
-winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 614, winmd2 = 618
-winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1421, winmd2 = 1442
+Windows.Win32.System.Diagnostics.Etw.PROCESSTRACE_HANDLE : [MetadataTypedef,RAIIFree(CloseTrace)] => [InvalidHandleValue(-1),MetadataTypedef,RAIIFree(CloseTrace)]
+Windows.Win32.System.Diagnostics.Etw.REGHANDLE : [NativeTypedef,RAIIFree(EventUnregister)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(EventUnregister)]
+Windows.Win32.System.Performance.PDH_HLOG : [NativeTypedef,RAIIFree(PdhCloseLog)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PdhCloseLog)]
+Windows.Win32.System.Performance.PDH_HQUERY : [NativeTypedef,RAIIFree(PdhCloseQuery)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PdhCloseQuery)]
+winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 616, winmd2 = 618
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1426, winmd2 = 1442
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_NON_COMMON_RESOURCE_IN_COPY_QUEUE = 1425, winmd2 = 1431
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE_MAX_VALID = 29, winmd2 = 30
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 31, winmd2 = 34
