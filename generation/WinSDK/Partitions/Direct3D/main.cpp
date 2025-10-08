@@ -9,3 +9,4 @@
 #define D3D11_NO_HELPERS
 
 #include <d3dcommon.h>
+#include <d3dshadercacheregistration.h>

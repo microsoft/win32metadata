@@ -1,0 +1,301 @@
+/*-------------------------------------------------------------------------------------
+ *
+ * Copyright (c) Microsoft Corporation
+ * Licensed under the MIT license
+ *
+ *-------------------------------------------------------------------------------------*/
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "dxgicommon.idl";
+import "d3d12.idl";
+
+cpp_quote("#include <winapifamily.h>")
+
+#pragma region App Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+
+
+// TODO: Refactor to d3d12.h
+typedef struct D3D12_APPLICATION_DESC
+{
+    LPCWSTR pExeFilename;
+    LPCWSTR pName;
+    D3D12_VERSION_NUMBER Version;
+    LPCWSTR pEngineName;
+    D3D12_VERSION_NUMBER EngineVersion;
+} D3D12_APPLICATION_DESC;
+
+typedef struct D3D12_ADAPTER_FAMILY
+{
+    WCHAR szAdapterFamily[128];
+} D3D12_ADAPTER_FAMILY;
+
+cpp_quote("typedef HRESULT (WINAPI* PFN_D3D12_COMPILER_CREATE_FACTORY)( ")
+cpp_quote("    _In_ LPCWSTR pPluginCompilerDllPath,")
+cpp_quote("    _In_ REFIID riid,")
+cpp_quote("    _COM_Outptr_opt_ void** ppFactory );")
+cpp_quote("")
+cpp_quote("HRESULT WINAPI D3D12CompilerCreateFactory(")
+cpp_quote("    _In_ LPCWSTR pPluginCompilerDllPath,")
+cpp_quote("    _In_ REFIID riid, // Expected: ID3D12CompilerFactory")
+cpp_quote("    _COM_Outptr_opt_ void** ppFactory );")
+cpp_quote("")
+cpp_quote("typedef HRESULT (WINAPI* PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE)(")
+cpp_quote("                            _In_ const D3D12_VERSIONED_ROOT_SIGNATURE_DESC* pRootSignature,")
+cpp_quote("                            _Out_ ID3DBlob** ppBlob,")
+cpp_quote("                            _Always_(_Outptr_opt_result_maybenull_) ID3DBlob** ppErrorBlob);")
+cpp_quote("")
+cpp_quote("HRESULT WINAPI D3D12CompilerSerializeVersionedRootSignature(")
+cpp_quote("                            _In_ const D3D12_VERSIONED_ROOT_SIGNATURE_DESC* pRootSignature,")
+cpp_quote("                            _Out_ ID3DBlob** ppBlob,")
+cpp_quote("                            _Always_(_Outptr_opt_result_maybenull_) ID3DBlob** ppErrorBlob);")
+cpp_quote("")
+
+[uuid(e0d06420-9f31-47e8-ae9a-dd2ba25ac0bc), object, local, pointer_default(unique)]
+interface ID3D12CompilerFactoryChild
+    : IUnknown
+{
+    HRESULT GetFactory(
+        [annotation("_In_")] REFIID riid, // ID3D12CompilerFactory
+        [annotation("_COM_Outptr_")] void** ppCompilerFactory
+        );
+};
+
+typedef enum D3D12_COMPILER_VALUE_TYPE
+{
+    D3D12_COMPILER_VALUE_TYPE_OBJECT_CODE       = 0,
+    D3D12_COMPILER_VALUE_TYPE_METADATA          = 1,
+    D3D12_COMPILER_VALUE_TYPE_DEBUG_PDB         = 2,
+    D3D12_COMPILER_VALUE_TYPE_PERFORMANCE_DATA  = 3,
+
+} D3D12_COMPILER_VALUE_TYPE;
+
+typedef enum D3D12_COMPILER_VALUE_TYPE_FLAGS
+{
+    D3D12_COMPILER_VALUE_TYPE_FLAGS_NONE                = 0x00000000,
+    D3D12_COMPILER_VALUE_TYPE_FLAGS_OBJECT_CODE         = (1 << D3D12_COMPILER_VALUE_TYPE_OBJECT_CODE),
+    D3D12_COMPILER_VALUE_TYPE_FLAGS_METADATA            = (1 << D3D12_COMPILER_VALUE_TYPE_METADATA),
+    D3D12_COMPILER_VALUE_TYPE_FLAGS_DEBUG_PDB           = (1 << D3D12_COMPILER_VALUE_TYPE_DEBUG_PDB),
+    D3D12_COMPILER_VALUE_TYPE_FLAGS_PERFORMANCE_DATA    = (1 << D3D12_COMPILER_VALUE_TYPE_PERFORMANCE_DATA),
+
+
+} D3D12_COMPILER_VALUE_TYPE_FLAGS;
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS( D3D12_COMPILER_VALUE_TYPE_FLAGS )")
+
+typedef struct D3D12_COMPILER_DATABASE_PATH
+{
+    D3D12_COMPILER_VALUE_TYPE_FLAGS Types;
+    LPCWSTR pPath;
+} D3D12_COMPILER_DATABASE_PATH;
+
+typedef struct D3D12_COMPILER_CACHE_GROUP_KEY
+{
+    [annotation("_Field_size_bytes_full_(KeySize)")] const void* pKey;
+    UINT KeySize;
+} D3D12_COMPILER_CACHE_GROUP_KEY;
+
+typedef struct D3D12_COMPILER_CACHE_VALUE_KEY
+{
+    [annotation("_Field_size_bytes_full_(KeySize)")] const void* pKey;
+    UINT KeySize;
+} D3D12_COMPILER_CACHE_VALUE_KEY;
+
+typedef struct D3D12_COMPILER_CACHE_VALUE
+{
+    [annotation("_Field_size_bytes_full_(ValueSize)")] void* pValue;
+    UINT ValueSize;
+} D3D12_COMPILER_CACHE_VALUE;
+
+typedef struct D3D12_COMPILER_CACHE_TYPED_VALUE
+{
+    D3D12_COMPILER_VALUE_TYPE Type;
+    D3D12_COMPILER_CACHE_VALUE Value;
+} D3D12_COMPILER_CACHE_TYPED_VALUE;
+
+typedef struct D3D12_COMPILER_CACHE_CONST_VALUE
+{
+    [annotation("_Field_size_bytes_full_(ValueSize)")] const void* pValue;
+    UINT ValueSize;
+} D3D12_COMPILER_CACHE_CONST_VALUE;
+
+typedef struct D3D12_COMPILER_CACHE_TYPED_CONST_VALUE
+{
+    D3D12_COMPILER_VALUE_TYPE Type;
+    D3D12_COMPILER_CACHE_CONST_VALUE Value;
+} D3D12_COMPILER_CACHE_TYPED_CONST_VALUE;
+
+typedef struct D3D12_COMPILER_TARGET
+{
+    UINT AdapterFamilyIndex;
+    UINT64 ABIVersion;
+} D3D12_COMPILER_TARGET;
+
+typedef void* (__stdcall* D3D12CompilerCacheSessionAllocationFunc) (
+    SIZE_T SizeInBytes,
+    [annotation("_Inout_opt_")] void* pContext
+    );
+
+typedef void(__stdcall* D3D12CompilerCacheSessionGroupValueKeysFunc) (
+    [annotation("_In_")] const D3D12_COMPILER_CACHE_VALUE_KEY* pValueKey,
+    [annotation("_Inout_opt_")] void* pContext
+    );
+
+typedef void(__stdcall* D3D12CompilerCacheSessionGroupValuesFunc) (
+    UINT ValueKeyIndex,
+    [annotation("_In_")] const D3D12_COMPILER_CACHE_TYPED_CONST_VALUE* pTypedValue,
+    [annotation("_Inout_opt_")] void* pContext
+    );
+
+[uuid(5704e5e6-054b-4738-b661-7b0d68d8dde2), object, local, pointer_default(unique)]
+interface ID3D12CompilerCacheSession
+    : ID3D12CompilerFactoryChild
+{
+    HRESULT FindGroup(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        [annotation("_Out_opt_")] UINT* pGroupVersion
+        );
+
+    HRESULT FindGroupValueKeys(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        [annotation("_In_opt_")] const UINT* pExpectedGroupVersion,
+        [annotation("_In_")] D3D12CompilerCacheSessionGroupValueKeysFunc CallbackFunc,
+        [annotation("_Inout_opt_")] void* pContext
+        );
+
+    HRESULT FindGroupValues(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        [annotation("_In_opt_")] const UINT* pExpectedGroupVersion,
+        D3D12_COMPILER_VALUE_TYPE_FLAGS ValueTypeFlags,
+        [annotation("_In_opt_")] D3D12CompilerCacheSessionGroupValuesFunc CallbackFunc,
+        [annotation("_Inout_opt_")] void* pContext
+        );
+
+    HRESULT FindValue(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_VALUE_KEY* pValueKey,
+        [annotation("_Inout_count_(NumTypedValues)")] D3D12_COMPILER_CACHE_TYPED_VALUE* pTypedValues,
+        UINT NumTypedValues,
+        [annotation("_In_opt_")] D3D12CompilerCacheSessionAllocationFunc pCallbackFunc,
+        [annotation("_Inout_opt_")] void* pContext
+        );
+
+    const D3D12_APPLICATION_DESC* GetApplicationDesc();
+
+    D3D12_COMPILER_TARGET GetCompilerTarget();
+
+    D3D12_COMPILER_VALUE_TYPE_FLAGS GetValueTypes();
+
+    HRESULT StoreGroupValueKeys(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        UINT GroupVersion,
+        [annotation("_In_reads_(NumValueKeys)")] const D3D12_COMPILER_CACHE_VALUE_KEY* pValueKeys,
+        UINT NumValueKeys
+        );
+
+    HRESULT StoreValue(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_VALUE_KEY* pValueKey,
+        [annotation("_In_reads_(NumTypedValues)")] const D3D12_COMPILER_CACHE_TYPED_CONST_VALUE* pTypedValues,
+        UINT NumTypedValues
+        );
+};
+
+[uuid(5981cca4-e8ae-44ca-9b92-4fa86f5a3a3a), object, local, pointer_default(unique)]
+interface ID3D12CompilerStateObject
+    : IUnknown
+{
+    HRESULT GetCompiler(
+        [annotation("_In_")] REFIID riid, // ID3D12Compiler
+        [annotation("_COM_Outptr_")] void** ppCompiler
+    );
+};
+
+typedef struct D3D12_COMPILER_EXISTING_COLLECTION_DESC
+{
+    ID3D12CompilerStateObject* pExistingCollection;
+    UINT NumExports; // Optional, if 0 all exports in the library/collection will be surfaced
+    [annotation("_In_reads_(NumExports)")] const D3D12_EXPORT_DESC* pExports;
+} D3D12_COMPILER_EXISTING_COLLECTION_DESC;
+
+[uuid(8c403c12-993b-4583-80f1-6824138fa68e), object, local, pointer_default(unique)]
+interface ID3D12Compiler
+    : ID3D12CompilerFactoryChild
+{
+    HRESULT CompilePipelineState(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        UINT GroupVersion,
+        [annotation("_In_")] const D3D12_PIPELINE_STATE_STREAM_DESC* pDesc
+        );
+
+    HRESULT CompileStateObject(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        UINT GroupVersion,
+        [annotation("_In_")] const D3D12_STATE_OBJECT_DESC* pDesc,
+        [annotation("_In_")] REFIID riid, // ID3D12CompilerStateObject
+        [annotation("_COM_Outptr_")] void** ppCompilerStateObject
+        );
+
+    HRESULT CompileAddToStateObject(
+        [annotation("_In_")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKey,
+        UINT GroupVersion,
+        [annotation("_In_")] const D3D12_STATE_OBJECT_DESC* pAddition,
+        [annotation("_In_")] ID3D12CompilerStateObject* pCompilerStateObjectToGrowFrom,
+        [annotation("_In_")] REFIID riid, // ID3D12CompilerStateObject
+        [annotation("_COM_Outptr_")] void** ppNewCompilerStateObject
+        );
+
+    HRESULT GetCacheSession(
+        [annotation("_In_")] REFIID riid, // ID3D12CompilerCacheSession
+        [annotation("_COM_Outptr_")] void** ppCompilerCacheSession
+        );
+};
+
+[uuid(c1ee4b59-3f59-47a5-9b4e-a855c858a878), object, local, pointer_default(unique)]
+interface ID3D12CompilerFactory
+    : IUnknown
+{
+    HRESULT EnumerateAdapterFamilies(
+        UINT AdapterFamilyIndex,
+        [annotation("_Out_")] D3D12_ADAPTER_FAMILY* pAdapterFamily
+        );
+
+    HRESULT EnumerateAdapterFamilyABIVersions(
+        UINT AdapterFamilyIndex,
+        [annotation("_Inout_")] UINT32* pNumABIVersions,
+        [annotation("_Out_writes_opt_(*pNumABIVersions)")] UINT64 * pABIVersions
+        );
+
+    HRESULT EnumerateAdapterFamilyCompilerVersion(
+        UINT AdapterFamilyIndex,
+        [annotation("_Out_")] D3D12_VERSION_NUMBER* pCompilerVersion
+        );
+
+    HRESULT GetApplicationProfileVersion(
+        [annotation("_In_")] const D3D12_COMPILER_TARGET* pTarget,
+        [annotation("_In_")] const D3D12_APPLICATION_DESC* pApplicationDesc,
+        [annotation("_Out_")] D3D12_VERSION_NUMBER* pApplicationProfileVersion
+        );
+
+    HRESULT CreateCompilerCacheSession(
+        [annotation("_In_reads_(NumPaths)")] const D3D12_COMPILER_DATABASE_PATH* pPaths,
+        UINT NumPaths,
+        [annotation("_In_opt_")] const D3D12_COMPILER_TARGET* pTarget,
+        [annotation("_In_opt_")] const D3D12_APPLICATION_DESC* pApplicationDesc,
+        [annotation("_In_")] REFIID riid, // ID3D12CompilerCacheSession
+        [annotation("_COM_Outptr_")] void** ppCompilerCacheSession
+        );
+
+    HRESULT CreateCompiler(
+        [annotation("_In_")] ID3D12CompilerCacheSession* pCompilerCacheSession,
+        [annotation("_In_")] REFIID riid, // ID3D12Compiler
+        [annotation("_COM_Outptr_")] void** ppCompiler
+        );
+};
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
+#pragma endregion
+
+cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerFactoryChild,0xe0d06420,0x9f31,0x47e8,0xae,0x9a,0xdd,0x2b,0xa2,0x5a,0xc0,0xbc);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerCacheSession,0x5704e5e6,0x054b,0x4738,0xb6,0x61,0x7b,0x0d,0x68,0xd8,0xdd,0xe2);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerStateObject,0x5981cca4,0xe8ae,0x44ca,0x9b,0x92,0x4f,0xa8,0x6f,0x5a,0x3a,0x3a);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12Compiler,0x8c403c12,0x993b,0x4583,0x80,0xf1,0x68,0x24,0x13,0x8f,0xa6,0x8e);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerFactory,0xc1ee4b59,0x3f59,0x47a5,0x9b,0x4e,0xa8,0x55,0xc8,0x58,0xa8,0x78);" )
