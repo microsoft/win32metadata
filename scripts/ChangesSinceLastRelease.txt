@@ -1,0 +1,3 @@
+# Fix AddPrinter return value
+Windows.Win32.Graphics.Printing.Apis.AddPrinterA : return...HANDLE => PRINTER_HANDLE
+Windows.Win32.Graphics.Printing.Apis.AddPrinterW : return...HANDLE => PRINTER_HANDLE
