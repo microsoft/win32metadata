@@ -2024,3 +2024,5 @@ D3D11CreateDevice::Software=[Optional]
 CfOpenFileWithOplock::ProtectedHandle=[RAIIFree("CfCloseHandle")]
 ShellExecuteA::return=[DoNotRelease]
 ShellExecuteW::return=[DoNotRelease]
+AddPrinterW::return=PRINTER_HANDLE
+AddPrinterA::return=PRINTER_HANDLE
