@@ -488,6 +488,13 @@ typedef interface ID3D12Device14 ID3D12Device14;
 #endif 	/* __ID3D12Device14_FWD_DEFINED__ */
 
 
+#ifndef __ID3D12StateObjectDatabase_FWD_DEFINED__
+#define __ID3D12StateObjectDatabase_FWD_DEFINED__
+typedef interface ID3D12StateObjectDatabase ID3D12StateObjectDatabase;
+
+#endif 	/* __ID3D12StateObjectDatabase_FWD_DEFINED__ */
+
+
 #ifndef __ID3D12VirtualizationGuestDevice_FWD_DEFINED__
 #define __ID3D12VirtualizationGuestDevice_FWD_DEFINED__
 typedef interface ID3D12VirtualizationGuestDevice ID3D12VirtualizationGuestDevice;
@@ -570,6 +577,13 @@ typedef interface ID3D12DeviceConfiguration ID3D12DeviceConfiguration;
 typedef interface ID3D12DeviceConfiguration1 ID3D12DeviceConfiguration1;
 
 #endif 	/* __ID3D12DeviceConfiguration1_FWD_DEFINED__ */
+
+
+#ifndef __ID3D12StateObjectDatabaseFactory_FWD_DEFINED__
+#define __ID3D12StateObjectDatabaseFactory_FWD_DEFINED__
+typedef interface ID3D12StateObjectDatabaseFactory ID3D12StateObjectDatabaseFactory;
+
+#endif 	/* __ID3D12StateObjectDatabaseFactory_FWD_DEFINED__ */
 
 
 #ifndef __ID3D12GraphicsCommandList5_FWD_DEFINED__
@@ -16757,7 +16771,8 @@ enum D3D12_STATE_SUBOBJECT_TYPE
         D3D12_STATE_SUBOBJECT_TYPE_GLOBAL_SERIALIZED_ROOT_SIGNATURE	= 31,
         D3D12_STATE_SUBOBJECT_TYPE_LOCAL_SERIALIZED_ROOT_SIGNATURE	= 32,
         D3D12_STATE_SUBOBJECT_TYPE_COMPILER_EXISITING_COLLECTION	= 33,
-        D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID	= ( D3D12_STATE_SUBOBJECT_TYPE_COMPILER_EXISITING_COLLECTION + 1 ) 
+        D3D12_STATE_SUBOBJECT_TYPE_EXISTING_COLLECTION_BY_KEY	= 36,
+        D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID	= ( D3D12_STATE_SUBOBJECT_TYPE_EXISTING_COLLECTION_BY_KEY + 1 ) 
     } 	D3D12_STATE_SUBOBJECT_TYPE;
 
 typedef struct D3D12_STATE_SUBOBJECT
@@ -33306,10 +33321,271 @@ typedef struct D3D12_FEATURE_DATA_SHADERCACHE_ABI_SUPPORT
     D3D12_VERSION_NUMBER ApplicationProfileVersion;
     } 	D3D12_FEATURE_DATA_SHADERCACHE_ABI_SUPPORT;
 
+typedef void ( __stdcall *D3D12PipelineStateFunc )( 
+    /* [annotation] */ 
+    _In_reads_bytes_(KeySize)  const void *pKey,
+    UINT KeySize,
+    UINT Version,
+    const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc,
+    /* [annotation] */ 
+    _Inout_opt_  void *pContext);
+
+typedef void ( __stdcall *D3D12StateObjectFunc )( 
+    /* [annotation] */ 
+    _In_reads_bytes_(KeySize)  const void *pKey,
+    UINT KeySize,
+    UINT Version,
+    const D3D12_STATE_OBJECT_DESC *pDesc,
+    /* [annotation] */ 
+    _In_reads_bytes_(ParentKeySize)  const void *pParentKey,
+    UINT ParentKeySize,
+    /* [annotation] */ 
+    _Inout_opt_  void *pContext);
+
+typedef struct D3D12_APPLICATION_DESC
+    {
+    LPCWSTR pExeFilename;
+    LPCWSTR pName;
+    D3D12_VERSION_NUMBER Version;
+    LPCWSTR pEngineName;
+    D3D12_VERSION_NUMBER EngineVersion;
+    } 	D3D12_APPLICATION_DESC;
+
+typedef void ( __stdcall *D3D12ApplicationDescFunc )( 
+    /* [annotation] */ 
+    _In_  const D3D12_APPLICATION_DESC *pApplicationDesc,
+    /* [annotation] */ 
+    _Inout_opt_  void *pContext);
+
+typedef struct D3D12_EXISTING_COLLECTION_BY_KEY_DESC
+    {
+    /* [annotation] */ 
+    _Field_size_bytes_full_(KeySize)  const void *pKey;
+    UINT KeySize;
+    UINT NumExports;
+    /* [annotation] */ 
+    _In_reads_(NumExports)  const D3D12_EXPORT_DESC *pExports;
+    } 	D3D12_EXISTING_COLLECTION_BY_KEY_DESC;
+
 
 
 extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0063_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0063_v0_0_s_ifspec;
+
+#ifndef __ID3D12StateObjectDatabase_INTERFACE_DEFINED__
+#define __ID3D12StateObjectDatabase_INTERFACE_DEFINED__
+
+/* interface ID3D12StateObjectDatabase */
+/* [unique][local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ID3D12StateObjectDatabase;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("c56060b7-b5fc-4135-98e0-a1e9997eace0")
+    ID3D12StateObjectDatabase : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetApplicationDesc( 
+            /* [annotation] */ 
+            _In_  const D3D12_APPLICATION_DESC *pApplicationDesc) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetApplicationDesc( 
+            /* [annotation] */ 
+            _In_  D3D12ApplicationDescFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE StorePipelineStateDesc( 
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            UINT Version,
+            /* [annotation] */ 
+            _In_  const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindPipelineStateDesc( 
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            /* [annotation] */ 
+            _In_  D3D12PipelineStateFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE StoreStateObjectDesc( 
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            UINT Version,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pDesc,
+            /* [annotation] */ 
+            _In_reads_opt_(StateObjectToGrowFromKeySize)  const void *pStateObjectToGrowFromKey,
+            UINT StateObjectToGrowFromKeySize) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindStateObjectDesc( 
+            /* [annotation] */ 
+            _In_reads_(keySize)  const void *pKey,
+            UINT KeySize,
+            D3D12StateObjectFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE FindObjectVersion( 
+            /* [annotation] */ 
+            _In_reads_(keySize)  const void *pKey,
+            UINT KeySize,
+            /* [annotation] */ 
+            _Out_  UINT *pVersion) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ID3D12StateObjectDatabaseVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ID3D12StateObjectDatabase * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ID3D12StateObjectDatabase * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, SetApplicationDesc)
+        HRESULT ( STDMETHODCALLTYPE *SetApplicationDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_  const D3D12_APPLICATION_DESC *pApplicationDesc);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, GetApplicationDesc)
+        HRESULT ( STDMETHODCALLTYPE *GetApplicationDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_  D3D12ApplicationDescFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, StorePipelineStateDesc)
+        HRESULT ( STDMETHODCALLTYPE *StorePipelineStateDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            UINT Version,
+            /* [annotation] */ 
+            _In_  const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, FindPipelineStateDesc)
+        HRESULT ( STDMETHODCALLTYPE *FindPipelineStateDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            /* [annotation] */ 
+            _In_  D3D12PipelineStateFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, StoreStateObjectDesc)
+        HRESULT ( STDMETHODCALLTYPE *StoreStateObjectDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_reads_(KeySize)  const void *pKey,
+            UINT KeySize,
+            UINT Version,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pDesc,
+            /* [annotation] */ 
+            _In_reads_opt_(StateObjectToGrowFromKeySize)  const void *pStateObjectToGrowFromKey,
+            UINT StateObjectToGrowFromKeySize);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, FindStateObjectDesc)
+        HRESULT ( STDMETHODCALLTYPE *FindStateObjectDesc )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_reads_(keySize)  const void *pKey,
+            UINT KeySize,
+            D3D12StateObjectFunc CallbackFunc,
+            /* [annotation] */ 
+            _Inout_opt_  void *pContext);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabase, FindObjectVersion)
+        HRESULT ( STDMETHODCALLTYPE *FindObjectVersion )( 
+            ID3D12StateObjectDatabase * This,
+            /* [annotation] */ 
+            _In_reads_(keySize)  const void *pKey,
+            UINT KeySize,
+            /* [annotation] */ 
+            _Out_  UINT *pVersion);
+        
+        END_INTERFACE
+    } ID3D12StateObjectDatabaseVtbl;
+
+    interface ID3D12StateObjectDatabase
+    {
+        CONST_VTBL struct ID3D12StateObjectDatabaseVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ID3D12StateObjectDatabase_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ID3D12StateObjectDatabase_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ID3D12StateObjectDatabase_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ID3D12StateObjectDatabase_SetApplicationDesc(This,pApplicationDesc)	\
+    ( (This)->lpVtbl -> SetApplicationDesc(This,pApplicationDesc) ) 
+
+#define ID3D12StateObjectDatabase_GetApplicationDesc(This,CallbackFunc,pContext)	\
+    ( (This)->lpVtbl -> GetApplicationDesc(This,CallbackFunc,pContext) ) 
+
+#define ID3D12StateObjectDatabase_StorePipelineStateDesc(This,pKey,KeySize,Version,pDesc)	\
+    ( (This)->lpVtbl -> StorePipelineStateDesc(This,pKey,KeySize,Version,pDesc) ) 
+
+#define ID3D12StateObjectDatabase_FindPipelineStateDesc(This,pKey,KeySize,CallbackFunc,pContext)	\
+    ( (This)->lpVtbl -> FindPipelineStateDesc(This,pKey,KeySize,CallbackFunc,pContext) ) 
+
+#define ID3D12StateObjectDatabase_StoreStateObjectDesc(This,pKey,KeySize,Version,pDesc,pStateObjectToGrowFromKey,StateObjectToGrowFromKeySize)	\
+    ( (This)->lpVtbl -> StoreStateObjectDesc(This,pKey,KeySize,Version,pDesc,pStateObjectToGrowFromKey,StateObjectToGrowFromKeySize) ) 
+
+#define ID3D12StateObjectDatabase_FindStateObjectDesc(This,pKey,KeySize,CallbackFunc,pContext)	\
+    ( (This)->lpVtbl -> FindStateObjectDesc(This,pKey,KeySize,CallbackFunc,pContext) ) 
+
+#define ID3D12StateObjectDatabase_FindObjectVersion(This,pKey,KeySize,pVersion)	\
+    ( (This)->lpVtbl -> FindObjectVersion(This,pKey,KeySize,pVersion) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ID3D12StateObjectDatabase_INTERFACE_DEFINED__ */
+
 
 #ifndef __ID3D12VirtualizationGuestDevice_INTERFACE_DEFINED__
 #define __ID3D12VirtualizationGuestDevice_INTERFACE_DEFINED__
@@ -33931,7 +34207,7 @@ EXTERN_C const IID IID_ID3D12DeviceTools;
 #endif 	/* __ID3D12DeviceTools_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0069 */
+/* interface __MIDL_itf_d3d12_0000_0070 */
 /* [local] */ 
 
 typedef 
@@ -33945,8 +34221,8 @@ enum D3D12_APPLICATION_SPECIFIC_DRIVER_BLOB_STATUS
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0069_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0069_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0070_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0070_v0_0_s_ifspec;
 
 #ifndef __ID3D12DeviceTools1_INTERFACE_DEFINED__
 #define __ID3D12DeviceTools1_INTERFACE_DEFINED__
@@ -34054,7 +34330,7 @@ EXTERN_C const IID IID_ID3D12DeviceTools1;
 #endif 	/* __ID3D12DeviceTools1_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0070 */
+/* interface __MIDL_itf_d3d12_0000_0071 */
 /* [local] */ 
 
 typedef struct D3D12_SUBRESOURCE_DATA
@@ -34198,6 +34474,7 @@ DEFINE_GUID(CLSID_D3D12DeviceRemovedExtendedData,    0x4a75bbc4, 0x9ff4, 0x4ad8,
 DEFINE_GUID(CLSID_D3D12SDKConfiguration,             0x7cda6aca, 0xa03e, 0x49c8, 0x94, 0x58, 0x03, 0x34, 0xd2, 0x0e, 0x07, 0xce);
 DEFINE_GUID(CLSID_D3D12DeviceFactory,                0x114863bf, 0xc386, 0x4aee, 0xb3, 0x9d, 0x8f, 0x0b, 0xbb, 0x06, 0x29, 0x55);
 DEFINE_GUID(CLSID_D3D12DSRDeviceFactory,             0xbb6dd27e, 0x94a9, 0x41a6, 0x9f, 0x1b, 0x13, 0x37, 0x72, 0x17, 0x24, 0x28);
+DEFINE_GUID(CLSID_D3D12StateObjectFactory,           0x54e1c9f3, 0x1303, 0x4112, 0xbf, 0x8e, 0x7b, 0xf2, 0xbb, 0x60, 0x6a, 0x73);
 
 typedef HRESULT (WINAPI* PFN_D3D12_GET_INTERFACE)( _In_ REFCLSID, _In_ REFIID, _COM_Outptr_opt_ void** );
 
@@ -34205,8 +34482,8 @@ HRESULT WINAPI D3D12GetInterface( _In_ REFCLSID rclsid, _In_ REFIID riid, _COM_O
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0070_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0070_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0071_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0071_v0_0_s_ifspec;
 
 #ifndef __ID3D12SDKConfiguration_INTERFACE_DEFINED__
 #define __ID3D12SDKConfiguration_INTERFACE_DEFINED__
@@ -34412,7 +34689,7 @@ EXTERN_C const IID IID_ID3D12SDKConfiguration1;
 #endif 	/* __ID3D12SDKConfiguration1_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0072 */
+/* interface __MIDL_itf_d3d12_0000_0073 */
 /* [local] */ 
 
 typedef 
@@ -34427,8 +34704,8 @@ enum D3D12_DEVICE_FACTORY_FLAGS
 DEFINE_ENUM_FLAG_OPERATORS( D3D12_DEVICE_FACTORY_FLAGS )
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0072_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0072_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0073_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0073_v0_0_s_ifspec;
 
 #ifndef __ID3D12DeviceFactory_INTERFACE_DEFINED__
 #define __ID3D12DeviceFactory_INTERFACE_DEFINED__
@@ -34603,7 +34880,7 @@ EXTERN_C const IID IID_ID3D12DeviceFactory;
 #endif 	/* __ID3D12DeviceFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0073 */
+/* interface __MIDL_itf_d3d12_0000_0074 */
 /* [local] */ 
 
 typedef 
@@ -34634,8 +34911,8 @@ typedef struct D3D12_DEVICE_CONFIGURATION_DESC
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0073_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0073_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0074_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0074_v0_0_s_ifspec;
 
 #ifndef __ID3D12DeviceConfiguration_INTERFACE_DEFINED__
 #define __ID3D12DeviceConfiguration_INTERFACE_DEFINED__
@@ -34929,7 +35206,116 @@ EXTERN_C const IID IID_ID3D12DeviceConfiguration1;
 #endif 	/* __ID3D12DeviceConfiguration1_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0075 */
+/* interface __MIDL_itf_d3d12_0000_0076 */
+/* [local] */ 
+
+typedef 
+enum D3D12_STATE_OBJECT_DATABASE_FLAGS
+    {
+        D3D12_STATE_OBJECT_DATABASE_FLAG_NONE	= 0,
+        D3D12_STATE_OBJECT_DATABASE_FLAG_READ_ONLY	= 0x1
+    } 	D3D12_STATE_OBJECT_DATABASE_FLAGS;
+
+DEFINE_ENUM_FLAG_OPERATORS( D3D12_STATE_OBJECT_DATABASE_FLAGS )
+
+
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0076_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0076_v0_0_s_ifspec;
+
+#ifndef __ID3D12StateObjectDatabaseFactory_INTERFACE_DEFINED__
+#define __ID3D12StateObjectDatabaseFactory_INTERFACE_DEFINED__
+
+/* interface ID3D12StateObjectDatabaseFactory */
+/* [unique][local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ID3D12StateObjectDatabaseFactory;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("f5b066f0-648a-4611-bd41-27fd0948b9eb")
+    ID3D12StateObjectDatabaseFactory : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE CreateStateObjectDatabaseFromFile( 
+            LPCWSTR pDatabaseFile,
+            D3D12_STATE_OBJECT_DATABASE_FLAGS flags,
+            REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvStateObjectDatabase) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ID3D12StateObjectDatabaseFactoryVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ID3D12StateObjectDatabaseFactory * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ID3D12StateObjectDatabaseFactory * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ID3D12StateObjectDatabaseFactory * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12StateObjectDatabaseFactory, CreateStateObjectDatabaseFromFile)
+        HRESULT ( STDMETHODCALLTYPE *CreateStateObjectDatabaseFromFile )( 
+            ID3D12StateObjectDatabaseFactory * This,
+            LPCWSTR pDatabaseFile,
+            D3D12_STATE_OBJECT_DATABASE_FLAGS flags,
+            REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvStateObjectDatabase);
+        
+        END_INTERFACE
+    } ID3D12StateObjectDatabaseFactoryVtbl;
+
+    interface ID3D12StateObjectDatabaseFactory
+    {
+        CONST_VTBL struct ID3D12StateObjectDatabaseFactoryVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ID3D12StateObjectDatabaseFactory_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ID3D12StateObjectDatabaseFactory_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ID3D12StateObjectDatabaseFactory_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ID3D12StateObjectDatabaseFactory_CreateStateObjectDatabaseFromFile(This,pDatabaseFile,flags,riid,ppvStateObjectDatabase)	\
+    ( (This)->lpVtbl -> CreateStateObjectDatabaseFromFile(This,pDatabaseFile,flags,riid,ppvStateObjectDatabase) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ID3D12StateObjectDatabaseFactory_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_d3d12_0000_0077 */
 /* [local] */ 
 
 typedef 
@@ -34969,8 +35355,8 @@ enum D3D12_SHADING_RATE_COMBINER
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0075_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0075_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0077_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0077_v0_0_s_ifspec;
 
 #ifndef __ID3D12GraphicsCommandList5_INTERFACE_DEFINED__
 #define __ID3D12GraphicsCommandList5_INTERFACE_DEFINED__
@@ -36004,7 +36390,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList5;
 #endif 	/* __ID3D12GraphicsCommandList5_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0076 */
+/* interface __MIDL_itf_d3d12_0000_0078 */
 /* [local] */ 
 
 typedef struct D3D12_DISPATCH_MESH_ARGUMENTS
@@ -36016,8 +36402,8 @@ typedef struct D3D12_DISPATCH_MESH_ARGUMENTS
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0076_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0076_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0078_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0078_v0_0_s_ifspec;
 
 #ifndef __ID3D12GraphicsCommandList6_INTERFACE_DEFINED__
 #define __ID3D12GraphicsCommandList6_INTERFACE_DEFINED__
@@ -41654,7 +42040,7 @@ EXTERN_C const IID IID_ID3D12GBVDiagnostics;
 #endif 	/* __ID3D12GBVDiagnostics_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12_0000_0083 */
+/* interface __MIDL_itf_d3d12_0000_0085 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
@@ -41722,6 +42108,7 @@ DEFINE_GUID(IID_ID3D12Device11,0x5405c344,0xd457,0x444e,0xb4,0xdd,0x23,0x66,0xe4
 DEFINE_GUID(IID_ID3D12Device12,0x5af5c532,0x4c91,0x4cd0,0xb5,0x41,0x15,0xa4,0x05,0x39,0x5f,0xc5);
 DEFINE_GUID(IID_ID3D12Device13,0x14eecffc,0x4df8,0x40f7,0xa1,0x18,0x5c,0x81,0x6f,0x45,0x69,0x5e);
 DEFINE_GUID(IID_ID3D12Device14,0x5f6e592d,0xd895,0x44c2,0x8e,0x4a,0x88,0xad,0x49,0x26,0xd3,0x23);
+DEFINE_GUID(IID_ID3D12StateObjectDatabase,0xc56060b7,0xb5fc,0x4135,0x98,0xe0,0xa1,0xe9,0x99,0x7e,0xac,0xe0);
 DEFINE_GUID(IID_ID3D12VirtualizationGuestDevice,0xbc66d368,0x7373,0x4943,0x87,0x57,0xfc,0x87,0xdc,0x79,0xe4,0x76);
 DEFINE_GUID(IID_ID3D12Tools,0x7071e1f0,0xe84b,0x4b33,0x97,0x4f,0x12,0xfa,0x49,0xde,0x65,0xc5);
 DEFINE_GUID(IID_ID3D12Tools1,0xe4fbc019,0xdd3c,0x43e1,0x8f,0x32,0x7f,0x64,0x95,0x75,0xf0,0xa0);
@@ -41734,6 +42121,7 @@ DEFINE_GUID(IID_ID3D12SDKConfiguration1,0x8aaf9303,0xad25,0x48b9,0x9a,0x57,0xd9,
 DEFINE_GUID(IID_ID3D12DeviceFactory,0x61f307d3,0xd34e,0x4e7c,0x83,0x74,0x3b,0xa4,0xde,0x23,0xcc,0xcb);
 DEFINE_GUID(IID_ID3D12DeviceConfiguration,0x78dbf87b,0xf766,0x422b,0xa6,0x1c,0xc8,0xc4,0x46,0xbd,0xb9,0xad);
 DEFINE_GUID(IID_ID3D12DeviceConfiguration1,0xed342442,0x6343,0x4e16,0xbb,0x82,0xa3,0xa5,0x77,0x87,0x4e,0x56);
+DEFINE_GUID(IID_ID3D12StateObjectDatabaseFactory,0xf5b066f0,0x648a,0x4611,0xbd,0x41,0x27,0xfd,0x09,0x48,0xb9,0xeb);
 DEFINE_GUID(IID_ID3D12GraphicsCommandList5,0x55050859,0x4024,0x474c,0x87,0xf5,0x64,0x72,0xea,0xee,0x44,0xea);
 DEFINE_GUID(IID_ID3D12GraphicsCommandList6,0xc3827890,0xe548,0x4cfa,0x96,0xcf,0x56,0x89,0xa9,0x37,0x0f,0x80);
 DEFINE_GUID(IID_ID3D12GraphicsCommandList7,0xdd171223,0x8b61,0x4769,0x90,0xe3,0x16,0x0c,0xcd,0xe4,0xe2,0xc1);
@@ -41744,8 +42132,8 @@ DEFINE_GUID(IID_ID3D12DSRDeviceFactory,0xf343d1a0,0xafe3,0x439f,0xb1,0x3d,0xcd,0
 DEFINE_GUID(IID_ID3D12GBVDiagnostics,0x597985ab,0x9b75,0x4dbb,0xbe,0x23,0x07,0x61,0x19,0x5b,0xeb,0xee);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0083_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0083_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0085_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12_0000_0085_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
