@@ -94,3 +94,16 @@ Windows.Win32.Graphics.Printing.Apis.SetFormA : pFormName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetFormW : pFormName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetPrinterDataA : pValueName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetPrinterDataW : pValueName : [In] => [Const,In]
+# Upgrade D3D12 Agility SDK to 1.618.2
+Windows.Win32.Graphics.Direct3D12.Apis.CLSID_D3D12StateObjectFactory added
+Windows.Win32.Graphics.Direct3D12.D3D12_EXISTING_COLLECTION_BY_KEY_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_OBJECT_DATABASE_FLAGS added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_OBJECT_DATABASE_FLAGS.D3D12_STATE_OBJECT_DATABASE_FLAG_NONE added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_OBJECT_DATABASE_FLAGS.D3D12_STATE_OBJECT_DATABASE_FLAG_READ_ONLY added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_EXISTING_COLLECTION_BY_KEY added
+Windows.Win32.Graphics.Direct3D12.D3D12ApplicationDescFunc added
+Windows.Win32.Graphics.Direct3D12.D3D12PipelineStateFunc added
+Windows.Win32.Graphics.Direct3D12.D3D12StateObjectFunc added
+Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectDatabase added
+Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectDatabaseFactory added
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 34, winmd2 = 37
