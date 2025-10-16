@@ -2118,3 +2118,6 @@ SetFormA::pFormName=[Const]
 SetFormW::pFormName=[Const]
 SetPrinterDataA::pValueName=[Const]
 SetPrinterDataW::pValueName=[Const]
+FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
+FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
+FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE

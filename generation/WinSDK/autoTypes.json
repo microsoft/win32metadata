@@ -2788,6 +2788,13 @@
     "NativeTypedef": false
   },
   {
+    "Name": "FINDPRINTERCHANGENOTIFICATION_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FindClosePrinterChangeNotification",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
     "Namespace": "Windows.Win32.Security.EnterpriseData",
     "Name": "_SRP_REQUEST",
     "ValueType": "typedef struct _SRP_REQUEST",
