@@ -1,0 +1,2 @@
+# dxgi: Add DXGI_OUTDUPL_FLAG enum annotation to DuplicateOutput1()
+Windows.Win32.Graphics.Dxgi.IDXGIOutput5.DuplicateOutput1 : Flags : [In] => [AssociatedEnum(DXGI_OUTDUPL_FLAG),In]
