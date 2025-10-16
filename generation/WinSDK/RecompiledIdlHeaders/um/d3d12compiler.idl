@@ -16,16 +16,6 @@ cpp_quote("#include <winapifamily.h>")
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
 
 
-// TODO: Refactor to d3d12.h
-typedef struct D3D12_APPLICATION_DESC
-{
-    LPCWSTR pExeFilename;
-    LPCWSTR pName;
-    D3D12_VERSION_NUMBER Version;
-    LPCWSTR pEngineName;
-    D3D12_VERSION_NUMBER EngineVersion;
-} D3D12_APPLICATION_DESC;
-
 typedef struct D3D12_ADAPTER_FAMILY
 {
     WCHAR szAdapterFamily[128];

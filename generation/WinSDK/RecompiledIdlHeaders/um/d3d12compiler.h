@@ -99,15 +99,6 @@ extern "C"{
 #include <winapifamily.h>
 #pragma region App Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
-typedef struct D3D12_APPLICATION_DESC
-    {
-    LPCWSTR pExeFilename;
-    LPCWSTR pName;
-    D3D12_VERSION_NUMBER Version;
-    LPCWSTR pEngineName;
-    D3D12_VERSION_NUMBER EngineVersion;
-    } 	D3D12_APPLICATION_DESC;
-
 typedef struct D3D12_ADAPTER_FAMILY
     {
     WCHAR szAdapterFamily[ 128 ];
