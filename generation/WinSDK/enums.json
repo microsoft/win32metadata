@@ -28820,10 +28820,28 @@
   {
     "name": "DxcValidatorFlags",
     "flags": true,
-    "autoPopulate": {
-      "filter": "DxcValidatorFlags_",
-      "header": "dxcapi.h"
-    },
+    "members": [
+      {
+        "name": "Default",
+        "value": "0"
+      },
+      {
+        "name": "InPlaceEdit",
+        "value": "1"
+      },
+      {
+        "name": "RootSignatureOnly",
+        "value": "2"
+      },
+      {
+        "name": "ModuleOnly",
+        "value": "4"
+      },
+      {
+        "name": "ValidMask",
+        "value": "0x7"
+      }
+    ],
     "uses": [
       {
         "interface": "IDxcValidator",
@@ -28840,10 +28858,20 @@
   {
     "name": "DxcVersionInfoFlags",
     "flags": true,
-    "autoPopulate": {
-      "filter": "DxcVersionInfoFlags_",
-      "header": "dxcapi.h"
-    },
+    "members": [
+      {
+        "name": "None",
+        "value": "0"
+      },
+      {
+        "name": "Debug",
+        "value": "1"
+      },
+      {
+        "name": "Internal",
+        "value": "2"
+      }
+    ],
     "uses": [
       {
         "interface": "IDxcVersionInfo",
