@@ -94,3 +94,8 @@ Windows.Win32.Graphics.Printing.Apis.SetFormA : pFormName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetFormW : pFormName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetPrinterDataA : pValueName : [In] => [Const,In]
 Windows.Win32.Graphics.Printing.Apis.SetPrinterDataW : pValueName : [In] => [Const,In]
+# Printer API handle improvement
+Windows.Win32.Graphics.Printing.Apis.FindClosePrinterChangeNotification : hChange...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FindFirstPrinterChangeNotification : return...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FindNextPrinterChangeNotification : hChange...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.FINDPRINTERCHANGENOTIFICATION_HANDLE added
