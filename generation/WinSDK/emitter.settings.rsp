@@ -2121,3 +2121,9 @@ SetPrinterDataW::pValueName=[Const]
 FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
+IDxDiagProvider::Initialize::pParams=[Const]
+IDxDiagContainer::GetNumberOfChildContainers::pdwCount=[Out]
+IDxDiagContainer::EnumChildContainerNames::pwszContainer=[Out][NativeArrayInfo(CountParamIndex = 2)]
+IDxDiagContainer::EnumPropNames::pwszPropName=[Out][NativeArrayInfo(CountParamIndex = 2)]
+IDxDiagContainer::GetNumberOfProps::pdwCount=[Out]
+IDxDiagContainer::GetProp::pvarProp=[Out]

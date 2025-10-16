@@ -1,0 +1,7 @@
+# Generate dxdiag.h bindings in DirectX.Diagnostics namespace
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.CLSID_DxDiagProvider added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_DX9_SDK_VERSION added
+Windows.Win32.Graphics.DirectX.Diagnostics.Apis.DXDIAG_E_INSUFFICIENT_BUFFER added
+Windows.Win32.Graphics.DirectX.Diagnostics.DXDIAG_INIT_PARAMS added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagContainer added
+Windows.Win32.Graphics.DirectX.Diagnostics.IDxDiagProvider added
