@@ -107,3 +107,8 @@ Windows.Win32.Graphics.Direct3D12.D3D12StateObjectFunc added
 Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectDatabase added
 Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectDatabaseFactory added
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 34, winmd2 = 37
+# Printer API handle improvement
+Windows.Win32.Graphics.Printing.Apis.FindClosePrinterChangeNotification : hChange...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FindFirstPrinterChangeNotification : return...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.Apis.FindNextPrinterChangeNotification : hChange...HANDLE => FINDPRINTERCHANGENOTIFICATION_HANDLE
+Windows.Win32.Graphics.Printing.FINDPRINTERCHANGENOTIFICATION_HANDLE added
