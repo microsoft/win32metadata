@@ -46,6 +46,7 @@ using Windows.Win32.Graphics.DirectComposition;
 using Windows.Win32.Graphics.DirectDraw;
 using Windows.Win32.Graphics.DirectManipulation;
 using Windows.Win32.Graphics.DirectWrite;
+using Windows.Win32.Graphics.DirectX.Diagnostics;
 using Windows.Win32.Graphics.Dwm;
 using Windows.Win32.Graphics.DXCore;
 using Windows.Win32.Graphics.Dxgi;
