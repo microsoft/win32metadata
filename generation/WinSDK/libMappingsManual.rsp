@@ -1,7 +1,5 @@
 --with-librarypath
-// Documented as "This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions."
 pSetupModifyGlobalFlags=SETUPAPI.dll
-// Removed from SDK, kept in Win32Metadata for completeness
 BCryptRegisterProvider=bcrypt.dll
 BCryptUnregisterProvider=bcrypt.dll
 BCryptAddContextFunctionProvider=bcrypt.dll
@@ -214,15 +212,9 @@ PeerGraphUnregisterEvent=P2PGRAPH.dll
 PeerGraphUpdateRecord=P2PGRAPH.dll
 PeerGraphValidateDeferredRecords=P2PGRAPH.dll
 SRRemoveRestorePoint=SrClient.dll
-AssocGetDetailsOfPropKey=SHELL32.dll
-SHAssocEnumHandlers=SHELL32.dll
-SHAssocEnumHandlersForProtocolByApplication=SHELL32.dll
-SHCreateFileExtractIconW=SHELL32.dll
 RouterCreatePrintAsyncNotificationChannel=SPOOLSS.dll
 RouterGetPrintClassObject=SPOOLSS.dll
 RouterUnregisterForPrintAsyncNotifications=SPOOLSS.dll
-CreateCursor=USER32.dll
-GetIconInfoExW=USER32.dll
 WcmEnterConnectedStandby=wcmapi.dll
 WcmEnterNetQuiet=wcmapi.dll
 WcmExitConnectedStandby=wcmapi.dll
@@ -249,7 +241,6 @@ WldpResetProductionConfiguration=Wldp.dll
 WldpResetWcosProductionConfiguration=Wldp.dll
 WldpSetDynamicCodeTrust2=Wldp.dll
 WldpSetWindowsLockdownRestriction=Wldp.dll
-// Manually added APIs not in the SDK
 HtmlHelpA=hhctrl.ocx
 HtmlHelpW=hhctrl.ocx
 IEAssociateThreadWithTab=Ieframe.dll
