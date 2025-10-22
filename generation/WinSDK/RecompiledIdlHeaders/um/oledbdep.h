@@ -801,8 +801,7 @@ EXTERN_C const IID IID_IRowsetKeys;
         virtual HRESULT STDMETHODCALLTYPE ListKeys( 
             /* [annotation][out][in] */ 
             _Inout_  DBORDINAL *pcColumns,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns) = 0;
+            /* [size_is][size_is][out] */ DBORDINAL **prgColumns) = 0;
         
     };
     
@@ -834,8 +833,7 @@ EXTERN_C const IID IID_IRowsetKeys;
             IRowsetKeys * This,
             /* [annotation][out][in] */ 
             _Inout_  DBORDINAL *pcColumns,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns);
+            /* [size_is][size_is][out] */ DBORDINAL **prgColumns);
         
         END_INTERFACE
     } IRowsetKeysVtbl;
@@ -1405,8 +1403,7 @@ EXTERN_C const IID IID_IRowsetCopyRows;
             _In_  HCHAPTER hReserved,
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRows)  const HROW rghRows[  ],
+            /* [size_is][in] */ const HROW rghRows[  ],
             /* [annotation][in] */ 
             _In_  ULONG bFlags) = 0;
         
@@ -1427,10 +1424,8 @@ EXTERN_C const IID IID_IRowsetCopyRows;
             _In_  const IRowset *pRowsetSource,
             /* [annotation][in] */ 
             _In_  const DBORDINAL cColIds,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cColIds)  const DB_LORDINAL rgSourceColumns[  ],
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cColIds)  const DB_LORDINAL rgTargetColumns[  ],
+            /* [size_is][in] */ const DB_LORDINAL rgSourceColumns[  ],
+            /* [size_is][in] */ const DB_LORDINAL rgTargetColumns[  ],
             /* [annotation][out] */ 
             _Out_  HSOURCE *phSourceID) = 0;
         
@@ -1474,8 +1469,7 @@ EXTERN_C const IID IID_IRowsetCopyRows;
             _In_  HCHAPTER hReserved,
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRows)  const HROW rghRows[  ],
+            /* [size_is][in] */ const HROW rghRows[  ],
             /* [annotation][in] */ 
             _In_  ULONG bFlags);
         
@@ -1500,10 +1494,8 @@ EXTERN_C const IID IID_IRowsetCopyRows;
             _In_  const IRowset *pRowsetSource,
             /* [annotation][in] */ 
             _In_  const DBORDINAL cColIds,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cColIds)  const DB_LORDINAL rgSourceColumns[  ],
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cColIds)  const DB_LORDINAL rgTargetColumns[  ],
+            /* [size_is][in] */ const DB_LORDINAL rgSourceColumns[  ],
+            /* [size_is][in] */ const DB_LORDINAL rgTargetColumns[  ],
             /* [annotation][out] */ 
             _Out_  HSOURCE *phSourceID);
         
@@ -1586,8 +1578,7 @@ EXTERN_C const IID IID_IReadData;
             _In_  HCHAPTER hChapter,
             /* [annotation][in] */ 
             _In_  DBBKMARK cbBookmark,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbBookmark)  const BYTE *pBookmark,
+            /* [size_is][in] */ const BYTE *pBookmark,
             /* [annotation][in] */ 
             _In_  DBROWOFFSET lRowsOffset,
             /* [annotation][in] */ 
@@ -1639,8 +1630,7 @@ EXTERN_C const IID IID_IReadData;
             _In_  HCHAPTER hChapter,
             /* [annotation][in] */ 
             _In_  DBBKMARK cbBookmark,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbBookmark)  const BYTE *pBookmark,
+            /* [size_is][in] */ const BYTE *pBookmark,
             /* [annotation][in] */ 
             _In_  DBROWOFFSET lRowsOffset,
             /* [annotation][in] */ 
