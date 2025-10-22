@@ -82,4 +82,71 @@ $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System
     }
 }
 
+# Restore headers which have been removed from the SDK but that we still include for compatibility.
+$deprecatedHeaders = @(
+    # Old ARM headers
+    "shared\ksarm.h",
+    "shared\kxarm.h",
+    "shared\kxarmunw.h",
+    # AllJoyn headers
+    "um\MSAJTransport.h",
+    "um\alljoyn_c\AboutData.h",
+    "um\alljoyn_c\AboutDataListener.h",
+    "um\alljoyn_c\AboutIcon.h",
+    "um\alljoyn_c\AboutIconObj.h",
+    "um\alljoyn_c\AboutIconProxy.h",
+    "um\alljoyn_c\AboutListener.h",
+    "um\alljoyn_c\AboutObj.h",
+    "um\alljoyn_c\AboutObjectDescription.h",
+    "um\alljoyn_c\AboutProxy.h",
+    "um\alljoyn_c\AjAPI.h",
+    "um\alljoyn_c\ApplicationStateListener.h",
+    "um\alljoyn_c\AuthListener.h",
+    "um\alljoyn_c\AutoPinger.h",
+    "um\alljoyn_c\BusAttachment.h",
+    "um\alljoyn_c\BusListener.h",
+    "um\alljoyn_c\BusObject.h",
+    "um\alljoyn_c\DBusStdDefines.h",
+    "um\alljoyn_c\Init.h",
+    "um\alljoyn_c\InterfaceDescription.h",
+    "um\alljoyn_c\KeyStoreListener.h",
+    "um\alljoyn_c\Message.h",
+    "um\alljoyn_c\MessageReceiver.h",
+    "um\alljoyn_c\MsgArg.h",
+    "um\alljoyn_c\Observer.h",
+    "um\alljoyn_c\PasswordManager.h",
+    "um\alljoyn_c\PermissionConfigurationListener.h",
+    "um\alljoyn_c\PermissionConfigurator.h",
+    "um\alljoyn_c\ProxyBusObject.h",
+    "um\alljoyn_c\SecurityApplicationProxy.h",
+    "um\alljoyn_c\Session.h",
+    "um\alljoyn_c\SessionListener.h",
+    "um\alljoyn_c\SessionPortListener.h",
+    "um\alljoyn_c\Status.h",
+    "um\alljoyn_c\TransportMask.h",
+    "um\alljoyn_c\version.h",
+    "um\p2p.h",
+    "um\qcc\platform.h",
+    "um\qcc\windows\mapping.h",
+    "um\qcc\windows\platform_types.h",
+    "um\windows.devices.alljoyn.interop.h",
+    "um\windows.devices.alljoyn.interop.idl",
+    "winrt\windows.devices.alljoyn.h",
+    "winrt\windows.devices.alljoyn.idl"
+)
+
+Write-Host "Restoring deprecated headers that may have been removed from the SDK..."
+foreach ($deprecatedHeader in $deprecatedHeaders) {
+    $fullPath = Join-Path $recompiledIdlHeadersDir $deprecatedHeader
+    if (!(Test-Path $fullPath)) {
+        Write-Host "Restoring missing header: $deprecatedHeader"
+        $directory = Split-Path $fullPath -Parent
+        if (!(Test-Path $directory)) {
+            New-Item -ItemType Directory -Path $directory -Force | Out-Null
+        }
+        
+        git restore $fullPath
+    }
+}
+
 $ErrorActionPreference = "Stop"
