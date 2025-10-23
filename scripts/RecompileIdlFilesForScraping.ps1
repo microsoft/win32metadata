@@ -149,4 +149,18 @@ foreach ($deprecatedHeader in $deprecatedHeaders) {
     }
 }
 
+# Also the WinMDGenerator tooling fails on the WinHv headers because of their AMD64-only defines in the latest SDK. For now, just stick with the older versions.
+$winHvHeadersToRestore = @(
+    "um\WinHvEmulation.h",
+    "um\WinHvPlatform.h",
+    "um\WinHvPlatformDefs.h"
+)
+
+Write-Host "Restoring WinHv headers to older versions..."
+foreach ($winHvHeader in $winHvHeadersToRestore) {
+    $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
+    Write-Host "Restoring WinHv header: $winHvHeader"
+    git restore $fullPath
+}
+
 $ErrorActionPreference = "Stop"
