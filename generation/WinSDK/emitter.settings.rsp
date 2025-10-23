@@ -2121,3 +2121,15 @@ SetPrinterDataW::pValueName=[Const]
 FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
+# oledb.h
+IColumnsInfo::GetColumnInfo::pcColumns=[-Optional]
+IMDFind::FindCell::rgpwszMember=[-Out][NativeArrayInfo(CountParamIndex=1)]
+IMDFind::FindTuple::rgpwszMember=[-Out][NativeArrayInfo(CountParamIndex=2)]
+IReadData::ReadData::pBookmark=[NativeArrayInfo(CountParamIndex=1)]
+IRowsetCopyRows::CopyByHROWS::rghRows=[NativeArrayInfo(CountParamIndex=2)]
+IRowsetCopyRows::DefineSource::rgSourceColumns=[NativeArrayInfo(CountParamIndex=1)]
+IRowsetCopyRows::DefineSource::rgTargetColumns=[NativeArrayInfo(CountParamIndex=1)]
+IRowsetKeys::ListKeys::prgColumns=[-In][NativeArrayInfo(CountParamIndex=0)]
+IScopedOperations::Copy::pAuthenticate=[-Optional]
+IScopedOperations::Move::pAuthenticate=[-Optional]
+ITableDefinitionWithConstraints::CreateTableWithConstraints::rgColumnDescs=[NativeArrayInfo(CountParamIndex=2)]

@@ -29,8 +29,6 @@ Abstract:
 
 #include <WinHvPlatformDefs.h>
 
-#if defined(_AMD64_) || defined(_ARM64_)
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -212,7 +210,6 @@ WHvSetVirtualProcessorRegisters(
     _In_reads_(RegisterCount) const WHV_REGISTER_VALUE* RegisterValues
     );
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_VB)
 #pragma deprecated("WHvGetVirtualProcessorInterruptControllerState is deprecated; use WHvGetVirtualProcessorInterruptControllerState2")
 #endif
@@ -226,9 +223,7 @@ WHvGetVirtualProcessorInterruptControllerState(
     _In_ UINT32 StateSize,
     _Out_opt_ UINT32* WrittenSize
     );
-#endif
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_VB)
 #pragma deprecated("WHvSetVirtualProcessorInterruptControllerState is deprecated; use WHvSetVirtualProcessorInterruptControllerState2")
 #endif
@@ -241,7 +236,6 @@ WHvSetVirtualProcessorInterruptControllerState(
     _In_reads_bytes_(StateSize) const VOID* State,
     _In_ UINT32 StateSize
     );
-#endif
 
 HRESULT
 WINAPI
@@ -251,7 +245,6 @@ WHvRequestInterrupt(
     _In_ UINT32 InterruptControlSize
     );
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #pragma deprecated("WHvGetVirtualProcessorXsaveState is deprecated; use WHvGetVirtualProcessorState")
 #endif
@@ -265,9 +258,7 @@ WHvGetVirtualProcessorXsaveState(
     _In_ UINT32 BufferSizeInBytes,
     _Out_ UINT32* BytesWritten
     );
-#endif
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #pragma deprecated("WHvSetVirtualProcessorXsaveState is deprecated; use WHvSetVirtualProcessorState")
 #endif
@@ -280,7 +271,6 @@ WHvSetVirtualProcessorXsaveState(
     _In_reads_bytes_(BufferSizeInBytes) const VOID* Buffer,
     _In_ UINT32 BufferSizeInBytes
     );
-#endif
 
 HRESULT
 WINAPI
@@ -313,7 +303,6 @@ WHvGetVirtualProcessorCounters(
     _Out_opt_ UINT32* BytesWritten
     );
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #pragma deprecated("WHvGetVirtualProcessorInterruptControllerState2 is deprecated; use WHvGetVirtualProcessorState")
 #endif
@@ -327,9 +316,7 @@ WHvGetVirtualProcessorInterruptControllerState2(
     _In_ UINT32 StateSize,
     _Out_opt_ UINT32* WrittenSize
     );
-#endif
 
-#if defined(_AMD64_)
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #pragma deprecated("WHvSetVirtualProcessorInterruptControllerState2 is deprecated; use WHvSetVirtualProcessorState")
 #endif
@@ -342,7 +329,6 @@ WHvSetVirtualProcessorInterruptControllerState2(
     _In_reads_bytes_(StateSize) const VOID* State,
     _In_ UINT32 StateSize
     );
-#endif
 
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 #pragma deprecated("WHvRegisterPartitionDoorbellEvent is deprecated; use WHvCreateNotificationPort")
@@ -640,8 +626,6 @@ WHvPostVirtualProcessorSynicMessage(
     _In_ UINT32 MessageSizeInBytes
     );
 
-#if defined(_AMD64_)
-
 HRESULT
 WINAPI
 WHvGetVirtualProcessorCpuidOutput(
@@ -651,9 +635,6 @@ WHvGetVirtualProcessorCpuidOutput(
     _In_ UINT32 Ecx,
     _Out_ WHV_CPUID_OUTPUT* CpuidOutput
     );
-#endif
-
-#if defined(_AMD64_)
 
 HRESULT
 WINAPI
@@ -665,7 +646,6 @@ WHvGetInterruptTargetVpSet(
     _In_ UINT32 VpCount,
     _Out_ UINT32* TargetVpCount
     );
-#endif
 
 HRESULT
 WINAPI
@@ -695,8 +675,6 @@ WHvAcceptPartitionMigration(
 }
 #endif
 
-#endif // defined(_AMD64_) || defined(_ARM64_)
-
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
 
@@ -712,8 +690,6 @@ WHvAcceptPartitionMigration(
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#if defined(_AMD64_) || defined(_ARM64_)
 
 BOOLEAN
 __stdcall
@@ -835,8 +811,6 @@ IsWHvSetVirtualProcessorRegistersPresent(
     VOID
     );
 
-#if defined(_AMD64_)
-
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
 #endif
@@ -846,10 +820,6 @@ __stdcall
 IsWHvGetVirtualProcessorInterruptControllerStatePresent(
     VOID
     );
-
-#endif
-
-#if defined(_AMD64_)
 
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
@@ -861,15 +831,11 @@ IsWHvSetVirtualProcessorInterruptControllerStatePresent(
     VOID
     );
 
-#endif
-
 BOOLEAN
 __stdcall
 IsWHvRequestInterruptPresent(
     VOID
     );
-
-#if defined(_AMD64_)
 
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
@@ -881,10 +847,6 @@ IsWHvGetVirtualProcessorXsaveStatePresent(
     VOID
     );
 
-#endif
-
-#if defined(_AMD64_)
-
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 #endif
@@ -894,8 +856,6 @@ __stdcall
 IsWHvSetVirtualProcessorXsaveStatePresent(
     VOID
     );
-
-#endif
 
 BOOLEAN
 __stdcall
@@ -915,8 +875,6 @@ IsWHvGetVirtualProcessorCountersPresent(
     VOID
     );
 
-#if defined(_AMD64_)
-
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 #endif
@@ -927,10 +885,6 @@ IsWHvGetVirtualProcessorInterruptControllerState2Present(
     VOID
     );
 
-#endif
-
-#if defined(_AMD64_)
-
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 #endif
@@ -940,8 +894,6 @@ __stdcall
 IsWHvSetVirtualProcessorInterruptControllerState2Present(
     VOID
     );
-
-#endif
 
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
@@ -1131,25 +1083,17 @@ IsWHvPostVirtualProcessorSynicMessagePresent(
     VOID
     );
 
-#if defined(_AMD64_)
-
 BOOLEAN
 __stdcall
 IsWHvGetVirtualProcessorCpuidOutputPresent(
     VOID
     );
 
-#endif
-
-#if defined(_AMD64_)
-
 BOOLEAN
 __stdcall
 IsWHvGetInterruptTargetVpSetPresent(
     VOID
     );
-
-#endif
 
 BOOLEAN
 __stdcall
@@ -1174,8 +1118,6 @@ __stdcall
 IsWHvAcceptPartitionMigrationPresent(
     VOID
     );
-
-#endif // defined(_AMD64_) || defined(_ARM64_)
 
 #ifdef __cplusplus
 }

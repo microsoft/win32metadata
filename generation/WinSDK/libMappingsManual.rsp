@@ -1,4 +1,5 @@
 --with-librarypath
+# Documentation says ...
 pSetupModifyGlobalFlags=SETUPAPI.dll
 BCryptRegisterProvider=bcrypt.dll
 BCryptUnregisterProvider=bcrypt.dll
