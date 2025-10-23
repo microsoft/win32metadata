@@ -21,5 +21,5 @@ Install-BuildTools
 
 dotnet clean "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 
-dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
+dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release "-bl:$PSScriptRoot\..\bin\logs\samples_diasdk_pack.binlog"
 ThrowOnNativeProcessError

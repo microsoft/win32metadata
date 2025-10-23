@@ -36,7 +36,8 @@
 
   <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
-      <NuspecProperties>$(NuspecProperties);OutputWinmd=$(OutputWinmd);Version=$(Version)</NuspecProperties>
+      <Win32MetadataVersion>$([System.IO.Path]::GetFileName('$(PkgMicrosoft_Windows_SDK_Win32Metadata)'))</Win32MetadataVersion>
+      <NuspecProperties>$(NuspecProperties);OutputWinmd=$(OutputWinmd);Version=$(Version);Win32MetadataVersion=$(Win32MetadataVersion)</NuspecProperties>
     </PropertyGroup>
   </Target>
 
