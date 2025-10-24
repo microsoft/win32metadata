@@ -21,7 +21,6 @@ extern "C" {
 #endif
 
 // Enumerates existing compute systems.
-
 HRESULT
 WINAPI
 HcsEnumerateComputeSystems(
@@ -30,7 +29,6 @@ HcsEnumerateComputeSystems(
     );
 
 // Enumerates existing compute systems in a given namespace.
-
 HRESULT
 WINAPI
 HcsEnumerateComputeSystemsInNamespace(
@@ -40,7 +38,6 @@ HcsEnumerateComputeSystemsInNamespace(
     );
 
 // Creates a new operation.
-
 HCS_OPERATION
 WINAPI
 HcsCreateOperation(
@@ -49,7 +46,6 @@ HcsCreateOperation(
     );
 
 // Creates a new operation that allows registration for event notifications
-
 HCS_OPERATION
 WINAPI
 HcsCreateOperationWithNotifications(
@@ -59,7 +55,6 @@ HcsCreateOperationWithNotifications(
     );
 
 // Closes an operation.
-
 void
 WINAPI
 HcsCloseOperation(
@@ -67,7 +62,6 @@ HcsCloseOperation(
     );
 
 // Returns the context pointer of an operation.
-
 void*
 WINAPI
 HcsGetOperationContext(
@@ -75,7 +69,6 @@ HcsGetOperationContext(
     );
 
 // Sets the context pointer for an operation.
-
 HRESULT
 WINAPI
 HcsSetOperationContext(
@@ -84,7 +77,6 @@ HcsSetOperationContext(
     );
 
 // Returns the handle to compute system associated with an operation.
-
 HCS_SYSTEM
 WINAPI
 HcsGetComputeSystemFromOperation(
@@ -92,7 +84,6 @@ HcsGetComputeSystemFromOperation(
     );
 
 // Returns the handle to the process associated with an operation
-
 HCS_PROCESS
 WINAPI
 HcsGetProcessFromOperation(
@@ -100,7 +91,6 @@ HcsGetProcessFromOperation(
     );
 
 // Returns the type of an operation.
-
 HCS_OPERATION_TYPE
 WINAPI
 HcsGetOperationType(
@@ -108,7 +98,6 @@ HcsGetOperationType(
     );
 
 // Returns the ID that uniquely identifies an operation.
-
 UINT64
 WINAPI
 HcsGetOperationId(
@@ -116,7 +105,6 @@ HcsGetOperationId(
     );
 
 // Returns the result of an operation.
-
 HRESULT
 WINAPI
 HcsGetOperationResult(
@@ -126,7 +114,6 @@ HcsGetOperationResult(
 
 // Returns the result of an operation, including the process information for HcsCreateProcess
 // and HcsGetProcessInfo.
-
 HRESULT
 WINAPI
 HcsGetOperationResultAndProcessInfo(
@@ -136,7 +123,6 @@ HcsGetOperationResultAndProcessInfo(
     );
 
 // Adds a resource to an HCS_OPERATION.
-
 HRESULT
 WINAPI
 HcsAddResourceToOperation(
@@ -147,7 +133,6 @@ HcsAddResourceToOperation(
     );
 
 // Returns processor compatibility fields in JSON string format
-
 HRESULT
 WINAPI
 HcsGetProcessorCompatibilityFromSavedState(
@@ -156,7 +141,6 @@ HcsGetProcessorCompatibilityFromSavedState(
     );
 
 // Waits for the completion of an operation and returns the result.
-
 HRESULT
 WINAPI
 HcsWaitForOperationResult(
@@ -167,7 +151,6 @@ HcsWaitForOperationResult(
 
 // Waits for the completion of an operation and returns the result, including the process information
 // for HcsCreateProcess and HcsGetProcessInfo.
-
 HRESULT
 WINAPI
 HcsWaitForOperationResultAndProcessInfo(
@@ -178,7 +161,6 @@ HcsWaitForOperationResultAndProcessInfo(
     );
 
 // Sets a callback that is invoked on completion of an operation.
-
 HRESULT
 WINAPI
 HcsSetOperationCallback(
@@ -188,7 +170,6 @@ HcsSetOperationCallback(
     );
 
 // Cancels an operation
-
 HRESULT
 WINAPI
 HcsCancelOperation(
@@ -196,7 +177,6 @@ HcsCancelOperation(
     );
 
 // Query for information or properties about a specific operation
-
 HRESULT
 WINAPI
 HcsGetOperationProperties(
@@ -206,7 +186,6 @@ HcsGetOperationProperties(
     );
 
 /// Creates a new compute system.
-
 HRESULT
 WINAPI
 HcsCreateComputeSystem(
@@ -218,7 +197,6 @@ HcsCreateComputeSystem(
     );
 
 /// Creates a new compute system in a given namespace.
-
 HRESULT
 WINAPI
 HcsCreateComputeSystemInNamespace(
@@ -231,7 +209,6 @@ HcsCreateComputeSystemInNamespace(
     );
 
 /// Opens a handle to an existing compute system.
-
 HRESULT
 WINAPI
 HcsOpenComputeSystem(
@@ -241,7 +218,6 @@ HcsOpenComputeSystem(
     );
 
 /// Opens a handle to an existing compute system in a given namespace.
-
 HRESULT
 WINAPI
 HcsOpenComputeSystemInNamespace(
@@ -252,7 +228,6 @@ HcsOpenComputeSystemInNamespace(
     );
 
 /// Closes a handle to a compute system.
-
 void
 WINAPI
 HcsCloseComputeSystem(
@@ -260,7 +235,6 @@ HcsCloseComputeSystem(
     );
 
 /// Starts a compute system.
-
 HRESULT
 WINAPI
 HcsStartComputeSystem(
@@ -270,7 +244,6 @@ HcsStartComputeSystem(
     );
 
 /// Cleanly shuts down a compute system.
-
 HRESULT
 WINAPI
 HcsShutDownComputeSystem(
@@ -280,7 +253,6 @@ HcsShutDownComputeSystem(
     );
 
 /// Forcefully terminates a compute system.
-
 HRESULT
 WINAPI
 HcsTerminateComputeSystem(
@@ -290,7 +262,6 @@ HcsTerminateComputeSystem(
     );
 
 /// Forcefully terminates a compute system.
-
 HRESULT
 WINAPI
 HcsCrashComputeSystem(
@@ -300,7 +271,6 @@ HcsCrashComputeSystem(
     );
 
 /// Pauses the execution of a compute system.
-
 HRESULT
 WINAPI
 HcsPauseComputeSystem(
@@ -310,7 +280,6 @@ HcsPauseComputeSystem(
     );
 
 /// Resumes the execution of a compute system.
-
 HRESULT
 WINAPI
 HcsResumeComputeSystem(
@@ -320,7 +289,6 @@ HcsResumeComputeSystem(
     );
 
 /// Saves the state of a compute system.
-
 HRESULT
 WINAPI
 HcsSaveComputeSystem(
@@ -330,7 +298,6 @@ HcsSaveComputeSystem(
     );
 
 /// Returns properties of a compute system.
-
 HRESULT
 WINAPI
 HcsGetComputeSystemProperties(
@@ -340,7 +307,6 @@ HcsGetComputeSystemProperties(
     );
 
 /// Modifies settings of a compute system.
-
 HRESULT
 WINAPI
 HcsModifyComputeSystem(
@@ -351,7 +317,6 @@ HcsModifyComputeSystem(
     );
 
 // Waits for a compute system to exit.
-
 HRESULT
 WINAPI
 HcsWaitForComputeSystemExit(
@@ -361,7 +326,6 @@ HcsWaitForComputeSystemExit(
     );
 
 /// Registers a callback function to receive notifications for the compute system.
-
 HRESULT
 WINAPI
 HcsSetComputeSystemCallback(
@@ -372,7 +336,6 @@ HcsSetComputeSystemCallback(
     );
 
 /// Initialize live migration on source
-
 HRESULT
 WINAPI
 HcsInitializeLiveMigrationOnSource(
@@ -382,7 +345,6 @@ HcsInitializeLiveMigrationOnSource(
     );
 
 /// Start live migration on source
-
 HRESULT
 WINAPI
 HcsStartLiveMigrationOnSource(
@@ -392,7 +354,6 @@ HcsStartLiveMigrationOnSource(
     );
 
 /// Start live migration transfer
-
 HRESULT
 WINAPI
 HcsStartLiveMigrationTransfer(
@@ -402,7 +363,6 @@ HcsStartLiveMigrationTransfer(
     );
 
 /// Live migration transitions to final state
-
 HRESULT
 WINAPI
 HcsFinalizeLiveMigration(
@@ -412,7 +372,6 @@ HcsFinalizeLiveMigration(
     );
 
 /// Starts a process in a compute system.
-
 HRESULT
 WINAPI
 HcsCreateProcess(
@@ -424,7 +383,6 @@ HcsCreateProcess(
     );
 
 /// Opens an existing process in a compute system
-
 HRESULT
 WINAPI
 HcsOpenProcess(
@@ -435,7 +393,6 @@ HcsOpenProcess(
     );
 
 /// Closes the handle to a process in a compute system
-
 void
 WINAPI
 HcsCloseProcess(
@@ -443,7 +400,6 @@ HcsCloseProcess(
     );
 
 /// Terminates a process in a compute system
-
 HRESULT
 WINAPI
 HcsTerminateProcess(
@@ -453,7 +409,6 @@ HcsTerminateProcess(
     );
 
 /// Sends a signal to a process in a compute system
-
 HRESULT
 WINAPI
 HcsSignalProcess(
@@ -463,7 +418,6 @@ HcsSignalProcess(
     );
 
 /// Returns the initial startup info of a process in a compute system
-
 HRESULT
 WINAPI
 HcsGetProcessInfo(
@@ -472,7 +426,6 @@ HcsGetProcessInfo(
     );
 
 /// Returns the properties of a process in a compute system
-
 HRESULT
 WINAPI
 HcsGetProcessProperties(
@@ -482,7 +435,6 @@ HcsGetProcessProperties(
     );
 
 /// Modifies the parameters of a process in a compute system
-
 HRESULT
 WINAPI
 HcsModifyProcess(
@@ -492,7 +444,6 @@ HcsModifyProcess(
     );
 
 /// Registers a callback function to receive notifications for a process in a compute system
-
 HRESULT
 WINAPI
 HcsSetProcessCallback(
@@ -503,7 +454,6 @@ HcsSetProcessCallback(
     );
 
 // Waits for a process in a compute system to exit.
-
 HRESULT
 WINAPI
 HcsWaitForProcessExit(
@@ -513,7 +463,6 @@ HcsWaitForProcessExit(
     );
 
 /// Returns properties of the Host Compute Service
-
 HRESULT
 WINAPI
 HcsGetServiceProperties(
@@ -522,7 +471,6 @@ HcsGetServiceProperties(
     );
 
 /// Modifies settings of the Host Compute Service
-
 HRESULT
 WINAPI
 HcsModifyServiceSettings(
@@ -531,7 +479,6 @@ HcsModifyServiceSettings(
     );
 
 /// Submits a WER report
-
 HRESULT
 WINAPI
 HcsSubmitWerReport(
@@ -539,7 +486,6 @@ HcsSubmitWerReport(
     );
 
 // Creates an empty guest-state file (.vmgs) for a VM.
-
 HRESULT
 WINAPI
 HcsCreateEmptyGuestStateFile(
@@ -547,7 +493,6 @@ HcsCreateEmptyGuestStateFile(
     );
 
 // Creates an empty runtime-state file (.vmrs) for a VM.
-
 HRESULT
 WINAPI
 HcsCreateEmptyRuntimeStateFile(
@@ -555,7 +500,6 @@ HcsCreateEmptyRuntimeStateFile(
     );
 
 // Adds an entry to a file's ACL that grants access for a VM.
-
 HRESULT
 WINAPI
 HcsGrantVmAccess(
@@ -564,7 +508,6 @@ HcsGrantVmAccess(
     );
 
 // Removes an entry to a file's ACL that granted access for a VM.
-
 HRESULT
 WINAPI
 HcsRevokeVmAccess(
@@ -573,7 +516,6 @@ HcsRevokeVmAccess(
     );
 
 // Grants VM group access (R/O) to the specified file.
-
 HRESULT
 WINAPI
 HcsGrantVmGroupAccess(
@@ -581,7 +523,6 @@ HcsGrantVmGroupAccess(
     );
 
 // Removes VM group access for the specified file.
-
 HRESULT
 WINAPI
 HcsRevokeVmGroupAccess(

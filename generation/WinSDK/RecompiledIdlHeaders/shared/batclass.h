@@ -125,12 +125,81 @@ NTSTATUS
 
 typedef BCLASS_QUERY_STATUS_CALLBACK *PBCLASS_QUERY_STATUS_CALLBACK;
 
+_Function_class_(ACLASS_QUERY_STATUS_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(ACLASS_QUERY_STATUS_CALLBACK)(
+    _In_ PVOID Context,
+    _Out_ PPOWER_ADAPTER_STATUS AdapterStatus
+    );
+
+typedef ACLASS_QUERY_STATUS_CALLBACK *PACLASS_QUERY_STATUS_CALLBACK;
+typedef PACLASS_QUERY_STATUS_CALLBACK ACLASS_QUERY_STATUS;
+
+_Function_class_(ACLASS_SET_STATUS_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(ACLASS_SET_STATUS_CALLBACK)(
+    _In_ PVOID Context,
+    _In_ PPOWER_ADAPTER_SET_STATUS_BUFFER AdapterStatus
+    );
+
+typedef ACLASS_SET_STATUS_CALLBACK *PACLASS_SET_STATUS_CALLBACK;
+typedef PACLASS_SET_STATUS_CALLBACK ACLASS_SET_STATUS;
+
+typedef struct _ADAPTER_NOTIFY {
+    UCHAR Version;
+    UCHAR Reserved[3];
+    ULONG PeakPowerThreshold;
+} ADAPTER_NOTIFY, *PADAPTER_NOTIFY;
+
+_Function_class_(ACLASS_SET_STATUS_NOTIFY_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(ACLASS_SET_STATUS_NOTIFY_CALLBACK)(
+    _In_ PVOID Context,
+    _In_ PADAPTER_NOTIFY AdapterNotify
+    );
+
+typedef ACLASS_SET_STATUS_NOTIFY_CALLBACK *PACLASS_SET_STATUS_NOTIFY_CALLBACK;
+typedef PACLASS_SET_STATUS_NOTIFY_CALLBACK ACLASS_SET_STATUS_NOTIFY;
+
+_Function_class_(ACLASS_DISABLE_STATUS_NOTIFY_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(ACLASS_DISABLE_STATUS_NOTIFY_CALLBACK) (
+    _In_ PVOID Context
+    );
+
+typedef ACLASS_DISABLE_STATUS_NOTIFY_CALLBACK *PACLASS_DISABLE_STATUS_NOTIFY_CALLBACK;
+typedef PACLASS_DISABLE_STATUS_NOTIFY_CALLBACK ACLASS_DISABLE_STATUS_NOTIFY;
 
 typedef struct {
     ULONG                   PowerState;
     ULONG                   LowCapacity;
     ULONG                   HighCapacity;
 } BATTERY_NOTIFY, *PBATTERY_NOTIFY;
+
+typedef struct _BATTERY_NOTIFY_V2 {
+    ULONG                   PowerState;
+    ULONG                   LowCapacity;
+    ULONG                   HighCapacity;
+    UCHAR                   Version;
+    UCHAR                   Reserved[3];
+    ULONG                   BatteryPresentRateThreshold;
+} BATTERY_NOTIFY_V2, *PBATTERY_NOTIFY_V2;
 
 _Function_class_(BCLASS_SET_STATUS_NOTIFY_CALLBACK)
 _IRQL_requires_same_
@@ -146,6 +215,8 @@ NTSTATUS
 
 typedef BCLASS_SET_STATUS_NOTIFY_CALLBACK *PBCLASS_SET_STATUS_NOTIFY_CALLBACK;
 
+#define BATTERY_NOTIFY_VERSION_1                    1
+#define BATTERY_NOTIFY_VERSION_2                    2
 
 _Function_class_(BCLASS_SET_INFORMATION_CALLBACK)
 _IRQL_requires_same_
@@ -173,8 +244,66 @@ NTSTATUS
     _In_ PVOID Context
     );
 
-typedef BCLASS_DISABLE_STATUS_NOTIFY_CALLBACK 
+typedef BCLASS_DISABLE_STATUS_NOTIFY_CALLBACK
     *PBCLASS_DISABLE_STATUS_NOTIFY_CALLBACK;
+
+typedef struct _BATTERY_PEAK_POWER {
+    UCHAR Version;
+    UCHAR Reserved[3];
+    ULONG InstantaneousPeakPower;
+    ULONG InstantaneousPeakPeriod;
+    ULONG SustainablePeakPower;
+    ULONG SustainablePeakPeriod;
+} BATTERY_PEAK_POWER, *PBATTERY_PEAK_POWER;
+
+_Function_class_(BCLASS_QUERY_PEAK_POWER_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(BCLASS_QUERY_PEAK_POWER_CALLBACK) (
+    _In_ PVOID Context,
+    _In_ ULONG BatteryTag,
+    _Inout_ PBATTERY_PEAK_POWER PeakPower
+    );
+
+typedef BCLASS_QUERY_PEAK_POWER_CALLBACK *PBCLASS_QUERY_PEAK_POWER_CALLBACK;
+
+typedef struct _BATTERY_PEAK_POWER_THRESHOLDS {
+    UCHAR Version;
+    UCHAR Reserved[3];
+    ULONG InstantaneousPeakPowerThreshold;
+    ULONG SustainablePeakPowerThreshold;
+} BATTERY_PEAK_POWER_THRESHOLDS, *PBATTERY_PEAK_POWER_THRESHOLDS;
+
+_Function_class_(BCLASS_SET_PEAK_POWER_NOTIFY_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(BCLASS_SET_PEAK_POWER_NOTIFY_CALLBACK) (
+    _In_ PVOID Context,
+    _In_ ULONG BatteryTag,
+    _In_ PBATTERY_PEAK_POWER_THRESHOLDS PeakPowerThresholds
+    );
+
+typedef BCLASS_SET_PEAK_POWER_NOTIFY_CALLBACK
+    *PBCLASS_SET_PEAK_POWER_NOTIFY_CALLBACK;
+
+_Function_class_(BCLASS_DISABLE_PEAK_POWER_NOTIFY_CALLBACK)
+_IRQL_requires_same_
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+typedef
+NTSTATUS
+(BCLASS_DISABLE_PEAK_POWER_NOTIFY_CALLBACK) (
+    _In_ PVOID Context
+    );
+
+typedef BCLASS_DISABLE_PEAK_POWER_NOTIFY_CALLBACK
+    *PBCLASS_DISABLE_PEAK_POWER_NOTIFY_CALLBACK;
 
 typedef PBCLASS_QUERY_TAG_CALLBACK BCLASS_QUERY_TAG;
 typedef PBCLASS_QUERY_INFORMATION_CALLBACK BCLASS_QUERY_INFORMATION;
@@ -182,6 +311,9 @@ typedef PBCLASS_QUERY_STATUS_CALLBACK BCLASS_QUERY_STATUS;
 typedef PBCLASS_SET_STATUS_NOTIFY_CALLBACK BCLASS_SET_STATUS_NOTIFY;
 typedef PBCLASS_SET_INFORMATION_CALLBACK BCLASS_SET_INFORMATION;
 typedef PBCLASS_DISABLE_STATUS_NOTIFY_CALLBACK BCLASS_DISABLE_STATUS_NOTIFY;
+typedef PBCLASS_QUERY_PEAK_POWER_CALLBACK BCLASS_QUERY_PEAK_POWER;
+typedef PBCLASS_SET_PEAK_POWER_NOTIFY_CALLBACK BCLASS_SET_PEAK_POWER_NOTIFY;
+typedef PBCLASS_DISABLE_PEAK_POWER_NOTIFY_CALLBACK BCLASS_DISABLE_PEAK_POWER_NOTIFY;
 
 typedef struct {
     USHORT                          MajorVersion;
@@ -215,6 +347,71 @@ typedef struct {
     PUNICODE_STRING                 DeviceName;
     PDEVICE_OBJECT                  Fdo;
 } BATTERY_MINIPORT_INFO_V1_1, *PBATTERY_MINIPORT_INFO_V1_1;
+
+typedef union _BATTERY_CLASS_DRIVER_CAPABILITIES {
+    struct {
+        ULONG PeakPower                     : 1;
+        ULONG BatteryPresentRateThreshold   : 1;
+        ULONG Reserved                      : 30;
+    } Bits;
+
+    ULONG AsUlong;
+} BATTERY_CLASS_DRIVER_CAPABILITIES, *PBATTERY_CLASS_DRIVER_CAPABILITIES;
+
+typedef struct {
+    USHORT                              MajorVersion;
+    USHORT                              MinorVersion;
+
+    PVOID                               Context;        // Miniport context
+
+    BCLASS_QUERY_TAG                    QueryTag;
+    BCLASS_QUERY_INFORMATION            QueryInformation;
+    BCLASS_SET_INFORMATION              SetInformation;
+    BCLASS_QUERY_STATUS                 QueryStatus;
+    BCLASS_SET_STATUS_NOTIFY            SetStatusNotify;
+    BCLASS_DISABLE_STATUS_NOTIFY        DisableStatusNotify;
+    PDEVICE_OBJECT                      Pdo;
+    PUNICODE_STRING                     DeviceName;
+    PDEVICE_OBJECT                      Fdo;
+
+    //
+    // This field is set by the class driver to expose its capabilities, this helps
+    // newer miniport driver to be compatiable with older class drivers. For V1.0
+    // and V1.1 class driver, this field won't be updated.
+    //
+
+    BATTERY_CLASS_DRIVER_CAPABILITIES   ClassDriverCapabilities;
+
+    //
+    // Callbacks for peak power related status.
+    //
+
+    BCLASS_QUERY_PEAK_POWER             QueryPeakPower;
+    BCLASS_SET_PEAK_POWER_NOTIFY        SetPeakPowerNotify;
+    BCLASS_DISABLE_PEAK_POWER_NOTIFY    DisablePeakPowerNotify;
+} BATTERY_MINIPORT_INFO_V1_2, *PBATTERY_MINIPORT_INFO_V1_2;
+
+#define CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES 2
+
+typedef struct _ADAPTER_INFORMATION {
+    ULONG                               AcAdapterCount;
+    BOOLEAN                             RecSupported;
+    POWER_ADAPTER_CHARGE_REQUIREMENT    ChargeRequirement[CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES];
+} ADAPTER_INFORMATION, *PADAPTER_INFORMATION;
+
+typedef struct _ADAPTER_MINIPORT_INFO {
+    USHORT                       MajorVersion;
+    USHORT                       MinorVersion;
+    PVOID                        Context;
+    PDEVICE_OBJECT               Pdo;
+    PDEVICE_OBJECT               Fdo;
+    PUNICODE_STRING              Description;
+    ADAPTER_INFORMATION          AdapterInformation;
+    ACLASS_QUERY_STATUS          QueryStatus;
+    ACLASS_SET_STATUS            SetStatus;
+    ACLASS_SET_STATUS_NOTIFY     SetStatusNotify;
+    ACLASS_DISABLE_STATUS_NOTIFY DisableStatusNotify;
+} ADAPTER_MINIPORT_INFO, *PADAPTER_MINIPORT_INFO;
 
 typedef enum BATTERY_CHARGING_STATE {
     BatteryNoPowerSupply = 0,
@@ -255,6 +452,10 @@ typedef PBATTERY_MINIPORT_UPDATE_DATA PBATTERY_MINIPORT_UPDATE_DATA_V2;
 #define BATTERY_CLASS_MAJOR_VERSION     0x0001
 #define BATTERY_CLASS_MINOR_VERSION     0x0000
 #define BATTERY_CLASS_MINOR_VERSION_1   0x0001
+#define BATTERY_CLASS_MINOR_VERSION_2   0x0002
+
+#define ADAPTER_CLASS_MAJOR_VERSION     0x0001
+#define ADAPTER_CLASS_MINOR_VERSION     0x0000
 
 #if (NTDDI_VERSION >= NTDDI_WINXP)
 
@@ -410,6 +611,13 @@ BatteryClassStatusNotify (
     _In_ PVOID ClassData
     );
 
+_IRQL_requires_max_(DISPATCH_LEVEL)
+NTSTATUS
+BATTERYCLASSAPI
+BatteryClassPeakPowerNotify (
+    _In_ PVOID ClassData
+    );
+
 _IRQL_requires_max_(PASSIVE_LEVEL)
 _Check_return_
 NTSTATUS
@@ -417,6 +625,29 @@ BATTERYCLASSAPI
 BatteryClassUpdateData (
     _In_ PVOID ClassData,
     _In_ PBATTERY_MINIPORT_UPDATE_DATA UpdateData
+    );
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+_Check_return_
+NTSTATUS
+BATTERYCLASSAPI
+AdapterClassInitializeDevice (
+    _In_ PADAPTER_MINIPORT_INFO MiniportInfo,
+    _Out_ PVOID *ClassData
+    );
+
+_IRQL_requires_max_(DISPATCH_LEVEL)
+NTSTATUS
+BATTERYCLASSAPI
+AdapterClassStatusNotify (
+    _In_ PVOID ClassData
+    );
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+NTSTATUS
+BATTERYCLASSAPI
+AdapterClassUnload (
+    _In_ PVOID ClassData
     );
 
 #endif // _WINDOWS_

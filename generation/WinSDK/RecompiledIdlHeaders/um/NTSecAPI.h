@@ -750,6 +750,18 @@ Audit_ObjectAccess_Registry and Audit_ObjectAccess_Handle must be enabled
     #endif
 #endif
 
+/* 0cce924b-69ae-11d9-bed3-505054503030 */
+#if !defined(INITGUID) || !defined(Audit_Logon_AccessRights_defined)
+    DEFINE_GUID(
+        Audit_Logon_AccessRights,
+        0x0cce924b,
+        0x69ae, 0x11d9, 0xbe, 0xd3, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30
+        );
+    #ifdef INITGUID
+    #define Audit_Logon_AccessRights_defined
+    #endif
+#endif
+
 #endif // DEFINE_GUID
 
 
@@ -2513,6 +2525,7 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
 #define TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION 0x00000200  // do not forward TGT to the other side of the trust which is not part of this enterprise
 #define TRUST_ATTRIBUTE_PIM_TRUST                     0x00000400  // Outgoing trust to a PIM forest.
 #endif
+
 #if (_WIN32_WINNT >= 0x0603)
 // Forward the TGT to the other side of the trust which is not part of this enterprise
 // This flag has the opposite meaning of TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION which is now deprecated.

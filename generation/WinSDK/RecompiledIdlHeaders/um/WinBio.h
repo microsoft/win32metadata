@@ -812,12 +812,26 @@ WinBioReleaseFocus(
     void
     );
 
+# if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// ESS biometrics state query
+//
+///////////////////////////////////////////////////////////////////////////////
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioGetEssState(
+    _Out_ EXPERIMENTAL_PWINBIO_ESS_STATE EssState
+    );
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN7)
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

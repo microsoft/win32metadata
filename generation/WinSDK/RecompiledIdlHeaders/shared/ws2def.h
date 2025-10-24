@@ -214,11 +214,17 @@ typedef USHORT ADDRESS_FAMILY;
 #define SO_REUSE_UNICASTPORT 0x3007 // defer ephemeral port allocation for
                                     // outbound connections
 #define SO_REUSE_MULTICASTPORT 0x3008 // enable port reuse and disable unicast
-                                    //reception.
+                                      //reception.
 #define SO_ORIGINAL_DST 0x300F      // Query the original destination address
                                     // of a redirected connection.
 #define IP6T_SO_ORIGINAL_DST SO_ORIGINAL_DST
 #endif //(_WIN32_WINNT >= 0x0600)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define SO_RECEIVED_HOPLIMIT 0x3010
+#define SO_RECEIVED_PROCESSOR 0x3011 // Receive the processor number packets
+                                     // have been processed by
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 //
 // Base constant used for defining WSK-specific options.

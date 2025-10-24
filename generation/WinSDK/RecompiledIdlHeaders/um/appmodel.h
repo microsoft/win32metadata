@@ -136,7 +136,6 @@ GetPackageFullName(
     );
 
 //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
-
 WINBASEAPI
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
@@ -159,7 +158,6 @@ GetPackageFamilyName(
     );
 
 //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
-
 WINBASEAPI
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
@@ -259,6 +257,7 @@ GetCurrentPackagePath2(
     _Inout_ UINT32* pathLength,
     _Out_writes_opt_(*pathLength) PWSTR path
     );
+
 #endif // NTDDI_VERSION >= NTDDI_WIN10_19H1
 
 /* ---------------------------------------------------------------- */
@@ -285,7 +284,6 @@ GetApplicationUserModelId(
     );
 
 //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
-
 WINBASEAPI
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
@@ -302,7 +300,6 @@ GetApplicationUserModelIdFromToken(
 // Verification Functions
 
 //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
-
 WINBASEAPI
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
@@ -569,7 +566,6 @@ OpenPackageInfoByFullName(
     );
 
 //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
-
 WINBASEAPI
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
@@ -614,7 +610,6 @@ GetPackageApplicationIds(
     );
 
 #if NTDDI_VERSION >= NTDDI_WIN10_19H1
-
 WINBASEAPI
 _Success_(return == ERROR_SUCCESS)
 LONG
@@ -627,6 +622,7 @@ GetPackageInfo2(
     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
     _Out_opt_ UINT32* count
     );
+
 #endif // NTDDI_VERSION >= NTDDI_WIN10_19H1
 
 WINBASEAPI
@@ -743,7 +739,6 @@ DECLARE_HANDLE(PACKAGEDEPENDENCY_CONTEXT);
 ///       for installers running as user contexts other than the target user (e.g. installers
 ///       running as LocalSystem).
 /// @see TryCreatePackageDependency2
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -793,7 +788,6 @@ TryCreatePackageDependency(
 ///       for installers running as user contexts other than the target user (e.g. installers
 ///       running as LocalSystem).
 /// @see TryCreatePackageDependency
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -817,7 +811,6 @@ TryCreatePackageDependency2(
 ///
 /// @warn DeletePackageDependency() requires the caller have administrative privileges
 ///       if the package dependency was pinned with CreatePackageDependencyOptions_ScopeIsSystem.
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -865,7 +858,6 @@ DeletePackageDependency(
 /// @param packageDependencyContext valid until passed to RemovePackageDependency()
 /// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate
 /// @see AddPackageDependency2()
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -919,7 +911,6 @@ AddPackageDependency(
 /// @param packageDependencyContext valid until passed to RemovePackageDependency()
 /// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate
 /// @see AddPackageDependency()
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -941,7 +932,6 @@ AddPackageDependency2(
 ///        a package dependency any files loaded from the package can continue
 ///        to be used; future file resolution will fail to see the removed
 ///        package dependency.
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -957,7 +947,6 @@ RemovePackageDependency(
 ///                        If the package dependency cannot be resolved the function
 ///                        succeeds but packageFullName is NULL.
 /// @see GetResolvedPackageFullNameForPackageDependency2
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -975,7 +964,6 @@ GetResolvedPackageFullNameForPackageDependency(
 /// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate.
 /// @return E_INVALIDARG if packageDependencyId is not a valid package dependency.
 /// @see GetResolvedPackageFullNameForPackageDependency
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -991,7 +979,6 @@ GetResolvedPackageFullNameForPackageDependency2(
 /// @param packageDependencyId allocated via HeapAlloc; use HeapFree to deallocate.
 ///                            If the package dependency context cannot be resolved
 ///                            the function succeeds but packageDependencyId is NULL.
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -1005,7 +992,6 @@ GetIdForPackageDependencyContext(
 #if NTDDI_VERSION >= NTDDI_WIN10_NI
 
 /// Returns the package graph's current revision ID.
-
 WINBASEAPI
 UINT32
 WINAPI
@@ -1038,7 +1024,6 @@ typedef struct FindPackageDependencyCriteria {
 ///
 /// @see FindPackageDependencyCriteria
 /// @see TryCreatePackageDependency2
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -1056,7 +1041,6 @@ FindPackageDependency(
 /// @param lifetimeExpiration if specified, the value is zero if expiration date is not set.
 /// @note Admin privilege is required the package dependency was created with CreatePackageDependencyOptions_ScopeIsSystem or user is not NULL and not the current user.
 /// @see FindPackageDependency
-
 WINBASEAPI
 HRESULT
 WINAPI
@@ -1080,7 +1064,6 @@ GetPackageDependencyInformation(
 /// @param processIds allocated via HeapAlloc; use HeapFree to deallocate
 /// @note Admin privilege is required if scopeIsSystem=TRUE or user is not NULL and not the current user.
 /// @see FindPackageDependency
-
 WINBASEAPI
 HRESULT
 WINAPI

@@ -408,6 +408,7 @@ CreateMutexW(
     _In_ BOOL bInitialOwner,
     _In_opt_ LPCWSTR lpName
     );
+
 #ifdef UNICODE
 #define CreateMutex  CreateMutexW
 #else
@@ -449,6 +450,7 @@ CreateEventW(
     _In_ BOOL bInitialState,
     _In_opt_ LPCWSTR lpName
     );
+
 #ifdef UNICODE
 #define CreateEvent  CreateEventW
 #else
@@ -474,6 +476,7 @@ OpenEventW(
     _In_ BOOL bInheritHandle,
     _In_ LPCWSTR lpName
     );
+
 #ifdef UNICODE
 #define OpenEvent  OpenEventW
 #else
@@ -578,6 +581,7 @@ CreateMutexExW(
     _In_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
+
 #ifdef UNICODE
 #define CreateMutexEx  CreateMutexExW
 #else
@@ -608,6 +612,7 @@ CreateEventExW(
     _In_ DWORD dwFlags,
     _In_ DWORD dwDesiredAccess
     );
+
 #ifdef UNICODE
 #define CreateEventEx  CreateEventExW
 #else

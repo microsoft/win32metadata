@@ -6,7 +6,7 @@
 #ifndef __DELIVERYOPTIMIZATION_ERROR_H__
 #define __DELIVERYOPTIMIZATION_ERROR_H__
 
-#if defined (_MSC_VER) && (_MSC_VER >= 1020)
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
 
@@ -14,15 +14,16 @@
 //
 // See winerror.h for more info on the layout of HRESULT values.
 
-#define DO_ZONE_MASK               0xF000
-#define DO_TRANSIENT_ZONE_MASK     0xF800
-#define DO_TRANSIENT_ZONE          0x3800
+#define DO_ZONE_MASK 0xF000
+#define DO_TRANSIENT_ZONE_MASK 0xF800
+#define DO_TRANSIENT_ZONE 0x3800
 
 #ifdef FACILITY_DELIVERY_OPTIMIZATION
 FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 {
-    return (FAILED(hr) && (HRESULT_FACILITY(hr) == FACILITY_DELIVERY_OPTIMIZATION)
-        && ((HRESULT_CODE(hr) & DO_TRANSIENT_ZONE_MASK) == DO_TRANSIENT_ZONE));
+    return (
+        FAILED(hr) && (HRESULT_FACILITY(hr) == FACILITY_DELIVERY_OPTIMIZATION) &&
+        ((HRESULT_CODE(hr) & DO_TRANSIENT_ZONE_MASK) == DO_TRANSIENT_ZONE));
 }
 #endif
 
@@ -33,6 +34,8 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define _HRESULT_TYPEDEF_(_sc) ((HRESULT)_sc)
 #endif // RC_INVOKED
 #endif // _HRESULT_TYPEDEF_
+
+// clang-format off
 
 #define DO_E_NO_SERVICE                             _HRESULT_TYPEDEF_(0x80D01001L) // Delivery Optimization was unable to provide the service
 
@@ -133,5 +136,7 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_METAINFO_PARSE_PIECEHASHES             _HRESULT_TYPEDEF_(0x80D06820L) // Failed to parse array of piece hashes
 #define DO_E_METAINFO_PARSE_ONE_PIECEHASH           _HRESULT_TYPEDEF_(0x80D06821L) // Failed to parse an individual piece hash digest
 #define DO_E_METAINFO_FILE_SIZE                     _HRESULT_TYPEDEF_(0x80D06822L) // Failed to get PHF file's size or size is bad
+
+// clang-format on
 
 #endif // __DELIVERYOPTIMIZATION_ERROR_H__

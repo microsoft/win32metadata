@@ -570,7 +570,7 @@
 #define ThStackBase 0x38
 #define ThLegoData 0x2f0
 #define KernelThreadObjectLength 0x4a0
-#define ExecutiveThreadObjectLength 0x768
+#define ExecutiveThreadObjectLength 0x778
 
 
 //
@@ -866,6 +866,7 @@
 #define PCR_BTI_MITIGATION_VBAR_MASK 0xe
 #define PCR_BTI_MITIGATION_CSWAP_HVC 0x10
 #define PCR_BTI_MITIGATION_CSWAP_SMC 0x20
+#define PCR_BTI_MITIGATION_TRAP_HVC 0x2
 #define PCR_BTI_MITIGATION_CSWAP_HVC_BIT 0x4
 #define PCR_BTI_MITIGATION_CSWAP_SMC_BIT 0x5
 #define ARM64_ASID_KVA_SHADOW 0x8000

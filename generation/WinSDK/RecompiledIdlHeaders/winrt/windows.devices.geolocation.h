@@ -2485,10 +2485,16 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE RequestAccessAsync(
                         __FIAsyncOperation_1_Windows__CDevices__CGeolocation__CGeolocationAccessStatus** result
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+                    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE GetGeopositionHistoryAsync(
                         ABI::Windows::Foundation::DateTime startTime,
                         __FIAsyncOperation_1___FIVectorView_1_Windows__CDevices__CGeolocation__CGeoposition** result
                         ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+                    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE GetGeopositionHistoryWithDurationAsync(
                         ABI::Windows::Foundation::DateTime startTime,
                         ABI::Windows::Foundation::TimeSpan duration,
@@ -6844,9 +6850,15 @@ typedef struct __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStaticsVtbl
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* RequestAccessAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         __FIAsyncOperation_1_Windows__CDevices__CGeolocation__CGeolocationAccessStatus** result);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* GetGeopositionHistoryAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         struct __x_ABI_CWindows_CFoundation_CDateTime startTime,
         __FIAsyncOperation_1___FIVectorView_1_Windows__CDevices__CGeolocation__CGeoposition** result);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* GetGeopositionHistoryWithDurationAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         struct __x_ABI_CWindows_CFoundation_CDateTime startTime,
         struct __x_ABI_CWindows_CFoundation_CTimeSpan duration,
@@ -6883,9 +6895,15 @@ interface __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_RequestAccessAsync(This, result) \
     ((This)->lpVtbl->RequestAccessAsync(This, result))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_GetGeopositionHistoryAsync(This, startTime, result) \
     ((This)->lpVtbl->GetGeopositionHistoryAsync(This, startTime, result))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_GetGeopositionHistoryWithDurationAsync(This, startTime, duration, result) \
     ((This)->lpVtbl->GetGeopositionHistoryWithDurationAsync(This, startTime, duration, result))
 

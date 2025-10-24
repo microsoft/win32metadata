@@ -447,6 +447,8 @@ typedef struct _CAINFO
 // When the flag is set, the CRLs of partition zero will exclusively contain
 // entries related to certificates assigned specifically to partition zero. 
 #define CRLF_PARTITION_ZERO_EXCLUSIVE           0x00800000
+#define CRLF_CONTAINS_ONLY_CACERTS              0x01000000
+#define CRLF_CONTAINS_ONLY_USERCERTS            0x02000000
 
 //==================================
 // Values for wszREGKRAFLAGS:
@@ -1072,6 +1074,7 @@ typedef struct _CAINFO
 #define wszPROPENDORSEMENTCERTIFICATEHASH       TEXT("EndorsementCertificateHash")
 #define wszPROPRAWPRECERTIFICATE                TEXT("RawPrecertificate")
 #define wszPROPCRLPARTITIONINDEX                TEXT("CRLPartitionIndex")
+#define wszPROPLINTERCERTIFICATE                TEXT("LinterCertificate")
 
 //+--------------------------------------------------------------------------
 // Request attribute properties:
@@ -1123,6 +1126,7 @@ typedef struct _CAINFO
 #define wszAT_EKCERTINF			TEXT("@EKCert")
 #define wszAT_TESTROOT			TEXT("@TestRoot")
 
+#define wszPROPLINTCERTIFICATE	TEXT("LintCertificate")
 
 //+--------------------------------------------------------------------------
 // "System" properties

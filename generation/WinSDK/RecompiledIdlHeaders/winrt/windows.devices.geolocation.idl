@@ -473,8 +473,8 @@ namespace Windows
             interface IGeolocatorStatics : IInspectable
             {
                 HRESULT RequestAccessAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Geolocation.GeolocationAccessStatus>** result);
-                [overload("GetGeopositionHistoryAsync")] HRESULT GetGeopositionHistoryAsync([in] Windows.Foundation.DateTime startTime, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.Geolocation.Geoposition*>*>** result);
-                [overload("GetGeopositionHistoryAsync")] HRESULT GetGeopositionHistoryWithDurationAsync([in] Windows.Foundation.DateTime startTime, [in] Windows.Foundation.TimeSpan duration, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.Geolocation.Geoposition*>*>** result);
+                [deprecated("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 2.0)] [overload("GetGeopositionHistoryAsync")] HRESULT GetGeopositionHistoryAsync([in] Windows.Foundation.DateTime startTime, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.Geolocation.Geoposition*>*>** result);
+                [deprecated("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 2.0)] [overload("GetGeopositionHistoryAsync")] HRESULT GetGeopositionHistoryWithDurationAsync([in] Windows.Foundation.DateTime startTime, [in] Windows.Foundation.TimeSpan duration, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.Geolocation.Geoposition*>*>** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]

@@ -261,7 +261,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.Background.GattServiceProviderConnection)]
-                [experimental]
                 [uuid(90D12BE0-EBC0-484F-AE0A-7EB8B6266BAC)]
                 interface IGattServiceProviderConnection2 : IInspectable
                 {
@@ -349,7 +348,7 @@ namespace Windows
                 runtimeclass GattServiceProviderConnection
                 {
                     [default] interface Windows.Devices.Bluetooth.Background.IGattServiceProviderConnection;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Bluetooth.Background.IGattServiceProviderConnection2;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.Background.IGattServiceProviderConnection2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]

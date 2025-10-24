@@ -4753,6 +4753,15 @@ Notes:
 #define INVALID_EXTENSION_STATE          ((ULONG)0x00000203L)
 
 //
+// MessageId: STORAGE_DRIVER_LIVEDUMP
+//
+// MessageText:
+//
+//  STORAGE_DRIVER_LIVEDUMP
+//
+#define STORAGE_DRIVER_LIVEDUMP          ((ULONG)0x00000207L)
+
+//
 // MessageId: XBOX_VMCTRL_CS_TIMEOUT
 //
 // MessageText:

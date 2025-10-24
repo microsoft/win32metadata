@@ -3123,7 +3123,7 @@ NdrOleFree (
 
 typedef struct _NDR_USER_MARSHAL_INFO_LEVEL1
 {
-    void *                      Buffer;
+    _Field_size_bytes_(BufferSize) void* Buffer;
     unsigned long               BufferSize;
     void *(__RPC_API * pfnAllocate)(size_t);
     void (__RPC_API * pfnFree)(void *);

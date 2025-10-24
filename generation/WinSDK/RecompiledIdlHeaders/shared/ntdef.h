@@ -1104,31 +1104,19 @@ typedef CONST NTSTATUS *PCNTSTATUS;
 // Generic test for information on any status value.
 //
 
-#ifdef _PREFAST_
-#define NT_INFORMATION(Status) (((NTSTATUS)(Status)) >= (long)0x40000000)
-#else
 #define NT_INFORMATION(Status) ((((ULONG)(Status)) >> 30) == 1)
-#endif
 
 //
 // Generic test for warning on any status value.
 //
 
-#ifdef _PREFAST_
-#define NT_WARNING(Status) (((NTSTATUS)(Status) < (long)0xc0000000))
-#else
 #define NT_WARNING(Status) ((((ULONG)(Status)) >> 30) == 2)
-#endif
 
 //
 // Generic test for error on any status value.
 //
 
-#ifdef _PREFAST_
-#define NT_ERROR(Status) (((NTSTATUS)(Status)) >= (unsigned long)0xc0000000)
-#else
 #define NT_ERROR(Status) ((((ULONG)(Status)) >> 30) == 3)
-#endif
 
 // end_sdfwdm
 // end_wudfwdm
@@ -2550,6 +2538,7 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 #define PRODUCT_AZURESTACKHCI_SERVER_CORE           0x00000196
 #define PRODUCT_DATACENTER_SERVER_AZURE_EDITION     0x00000197
 #define PRODUCT_DATACENTER_SERVER_CORE_AZURE_EDITION 0x00000198
+#define PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION 0x00000199
 
 #define PRODUCT_UNLICENSED                          0xABCDABCD
 

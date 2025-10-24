@@ -917,6 +917,7 @@ typedef struct tagWTSSESSION_NOTIFICATION
 #define WTS_SESSION_REMOTE_CONTROL         0x9
 #define WTS_SESSION_CREATE                 0xa
 #define WTS_SESSION_TERMINATE              0xb
+#define WTS_SESSION_DESKTOP_READY          0xf
 
 #endif /* _WIN32_WINNT >= 0x0501 */
 
@@ -960,6 +961,8 @@ typedef struct tagWTSSESSION_NOTIFICATION
 
 #if(_WIN32_WINNT >= 0x0602)
 #define HSHELL_MONITORCHANGED            16
+
+// Deprecated by Feature_NoMoreSwpIamNotifyPosChanged
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS3
 
@@ -1564,6 +1567,7 @@ GetThreadDesktop(
  * Windowstation creation flags.
  */
 #define CWF_CREATE_ONLY          0x00000001
+// Remove when Feature_MarkWinstaIOForAgentic is removed.
 
 /*
  * Windowstation-specific attribute flags
@@ -2398,7 +2402,7 @@ typedef struct {
 #define WM_POINTERDEVICEOUTOFRANGE      0x23A
 #endif /* WINVER >= 0x0602 */
 
-// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 #if(WINVER >= 0x0601)
 #define WM_TOUCH                        0x0240
@@ -4647,6 +4651,18 @@ SetLayeredWindowAttributes(
 #define ULW_EX_NORESIZE        0x00000008
 
 #endif /* _WIN32_WINNT >= 0x0500 */
+/*
+ * FRAME_MARGIN
+ * A distance from each edge of a rect. Positive values are inside, negative
+ * are outside.
+ */
+typedef struct
+{
+    short left;
+    short right;
+    short top;
+    short bottom;
+} FRAME_MARGIN;
 
 
 #pragma region Desktop Family
@@ -6492,12 +6508,13 @@ typedef struct tagUSAGE_PROPERTIES {
 }USAGE_PROPERTIES, *PUSAGE_PROPERTIES;
 
 typedef struct tagPOINTER_TYPE_INFO {
-    POINTER_INPUT_TYPE  type;
+    POINTER_INPUT_TYPE type;
     union{
+        POINTER_INFO       pointerInfo;
         POINTER_TOUCH_INFO touchInfo;
         POINTER_PEN_INFO   penInfo;
     } DUMMYUNIONNAME;
-}POINTER_TYPE_INFO, *PPOINTER_TYPE_INFO;
+} POINTER_TYPE_INFO, *PPOINTER_TYPE_INFO;
 
 typedef struct tagINPUT_INJECTION_VALUE {
     USHORT page;
@@ -6616,7 +6633,7 @@ GetPointerFramePenInfoHistory(
     _Inout_ UINT32 *pointerCount,
     _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_PEN_INFO *penInfo);
 
-// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 WINUSERAPI
 BOOL
@@ -6678,7 +6695,7 @@ DestroySyntheticPointerDevice(
     _In_ HSYNTHETICPOINTERDEVICE device);
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
-// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 WINUSERAPI
 BOOL
@@ -6848,7 +6865,7 @@ GetPointerInputTransform(
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -14633,6 +14650,7 @@ typedef struct tagCURSORINFO
     POINT   ptScreenPos;
 } CURSORINFO, *PCURSORINFO, *LPCURSORINFO;
 
+#define CURSOR_INVISIBLE   0x00000000
 #define CURSOR_SHOWING     0x00000001
 #if(WINVER >= 0x0602)
 #define CURSOR_SUPPRESSED  0x00000002
@@ -15559,7 +15577,7 @@ typedef struct TOUCHPAD_PARAMETERS {
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-// TODO(47499024): Make public when Feature_EnhancedTouchpadStreaming is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -16069,6 +16087,240 @@ SetProcessRestrictionExemption(
 #endif /* WINVER >= 0x0601 */
 
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+WINUSERAPI
+BOOL
+WINAPI
+ConvertToInterceptWindow(
+    HWND topLevelWindow);
+
+WINUSERAPI
+BOOL
+WINAPI
+IsInterceptWindow(
+    HWND topLevelWindow,
+    _Out_ BOOL* isIntercept);
+
+#define WM_INTERCEPTED_WINDOW_ACTION     0x0346
+
+/*
+ * A WINDOW_ACTION defines one or more changes to make to a top-level window.
+ * This is used by WM_INTERCEPTED_WINDOW_ACTION and ApplyWindowAction.
+ */
+
+typedef enum _WINDOW_PLACEMENT_STATE {
+    WPS_NORMAL                  = 0,
+    WPS_MAXIMIZED               = 1,
+    WPS_MINIMIZED               = 2,
+    WPS_ARRANGED                = 3,
+} WINDOW_PLACEMENT_STATE;
+
+typedef enum _WINDOW_ACTION_KINDS {
+    WAK_NONE                    = 0x0000,
+
+    // The action shows or hides the window, depending on the visible field.
+    WAK_VISIBILITY              = 0x0001,
+
+    // The action moves the window (sets top/left corner position in screen
+    // coordinates) to the value in the position field.
+    WAK_POSITION                = 0x0002,
+
+    // The action sets the size of the window to the value in the size field.
+    WAK_SIZE                    = 0x0004,
+
+    // The action moves the window in z-order, making the window after (below)
+    // the window specified by the insertAfter field.
+    WAK_INSERT_AFTER            = 0x0008,
+
+    // The action activates the window.
+    WAK_ACTIVATE                = 0x0010,
+
+    // The action sets the placement state of the window, Maximize, Minimize,
+    // Arranged or Restored, depending on the placementState field.
+    WAK_PLACEMENT_STATE         = 0x0020,
+
+    // The action sets the normal position. This is the restore position for
+    // Maximized/Minimized/Arranged windows. For normal (restored) windows, the
+    // normal rect is the same as the position and size.
+    WAK_NORMAL_RECT             = 0x0040,
+
+    // The action moves the window to a monitor, using the nearest monitor to
+    // the point in the pointOnMonitor field.
+    WAK_MOVE_TO_MONITOR         = 0x0080,
+
+    // The action adjusts the final window position (normal position) to keep
+    // it entirely within the bounds of the work area of the monitor.
+    WAK_FIT_TO_MONITOR          = 0x0100,
+
+    // Used only by Intercept windows. The intercepted window action was
+    // generated by a display change (the window is being moved because the
+    // window's monitor changed in some way). The monitorTopologyId field is
+    // the ID of the monitor topology (GetCurrentMonitorTopologyId) at the
+    // time the action was generated.
+    //
+    // When the intercept window applies the action, it should set the display
+    // change flag and monitor topology ID to these same values. This is used
+    // to know if the window needs additional actions (if the monitors change
+    // while the window processes the first display change action the window
+    // may need to move again).
+    WAK_DISPLAY_CHANGE          = 0x0200,
+
+    // Used only by Intercept windows. The intercepted window action has some
+    // internal work that needs to happen after the action is completed. The
+    // intercept window is expected to set this flag when it applies the action,
+    // in order for the window to behave properly in all cases.
+    WAK_SYSTEM_OPERATION        = 0x0400,
+
+    // Actions with only the coalescable flags can be combined (coalesced).
+    // If a window has multiple actions to process that are coalescable, the
+    // actions can be combined into a single action, using the latest value
+    // of each of each field.
+    WAK_COALESCEABLE            = WAK_POSITION |
+                                    WAK_SIZE |
+                                    WAK_ACTIVATE |
+                                    WAK_VISIBILITY |
+                                    WAK_INSERT_AFTER,
+
+} WINDOW_ACTION_KINDS;
+DEFINE_ENUM_FLAG_OPERATORS(WINDOW_ACTION_KINDS)
+
+typedef enum _WINDOW_ACTION_MODIFIERS {
+    WAM_NONE                    = 0x0000,
+
+    // The provided position and size are the visible bounds of the window.
+    // The final rect is expanded by the size of the window's invisible resize
+    // borders.
+    WAM_FRAME_BOUNDS            = 0x0001,
+
+    // Used by Intercept windows only. ApplyWindowAction ignores this modifier.
+    // The intercepted action is activating a window on the foreground thread,
+    // which will set the foreground window.
+    WAM_ACTIVATE_FOREGROUND     = 0x0002,
+
+    // Used by Intercept windows only. ApplyWindowAction ignores this modifier.
+    // The intercepted action was generated by input (like a mouse click).
+    WAM_ACTIVATE_INPUT          = 0x0004,
+
+    // The action is activating the window, but should not change the window's
+    // z-order. By default, activating raises the window to top of z-order.
+    WAM_ACTIVATE_NO_ZORDER      = 0x0008,
+
+    // The action is moving the window in z-order, but should not move windows
+    // owned to this window. By default, moving a window in z-order also moves
+    // owned windows.
+    WAM_INSERT_AFTER_NO_OWNER   = 0x0010,
+
+    // The action is minimizing the window, and overriding the restore state.
+    // By default, minimized windows restore to their previous state.
+    // For WAM_RESTORE_TO_ARRANGED, the position and size must also be set,
+    // which are interpretted as the restore to arranged position.
+    WAM_RESTORE_TO_NORMAL       = 0x0020,
+    WAM_RESTORE_TO_MAXIMIZED    = 0x0040,
+    WAM_RESTORE_TO_ARRANGED     = 0x0080,
+
+    // The workArea field is set to the previous monitor work area. By default,
+    // the provided position and size are assumed fit to the current monitor
+    // topology. Providing a previous work area causes the position to be
+    // adjusted as needed to the work area of the window's monitor.
+    WAM_WORK_AREA               = 0x0100,
+
+    // The dpi field has the DPI (base 96 scale factor) for the provided size.
+    // By default, the provided size is scaled to the window's DPI
+    // (GetDpiForWindow), and is scaled as needed to the DPI of the monitor the
+    // window is moving to.
+    WAM_DPI                     = 0x0200,
+
+    // The pointOnMonitor field specifies the monitor that the provided
+    // position and size are scaled to. This overrides the monitor that the
+    // window will be associated with (scaling to) after applying the action.
+    // By default, the window is scaling to the monitor the position/size is
+    // mostly on.
+    WAM_SCALED_TO_MONITOR       = 0x0400,
+} WINDOW_ACTION_MODIFIERS;
+DEFINE_ENUM_FLAG_OPERATORS(WINDOW_ACTION_MODIFIERS)
+
+typedef struct _WINDOW_ACTION
+{
+    WINDOW_ACTION_KINDS kinds;
+    WINDOW_ACTION_MODIFIERS modifiers;
+
+    // Valid if WAK_VISIBILITY.
+    // Showing if true, hiding if false.
+    BOOL visible;
+
+    // Valid if WAK_POSITION.
+    // This sets the window position, top/left coordinates.
+    POINT position;
+
+    // Valid if WAK_SIZE.
+    // This sets the window size, width/height.
+    SIZE size;
+
+    // Valid if WAK_INSERT_AFTER,
+    // Insert after window, the window this window should be after/below in
+    // zorder. This can be a sentinal value like HWND_TOP.
+    HWND insertAfter;
+
+    // Valid if WAK_PLACEMENT_STATE
+    // This is the new placement state of the window (maximized, minimized,
+    // arranged, normal).
+    WINDOW_PLACEMENT_STATE placementState;
+
+    // Valid if WAK_NORMAL_RECT.
+    // This sets a the normal rect. This is the restore position for a window
+    // in a non-normal state (maximized, minimized, arranged).
+    RECT normalRect;
+
+    // Valid if WAM_WORK_AREA.
+    // This is the previous work area for the provided position and size.
+    // Without specifying the work area, the current or specified position
+    // and size are assumed fit to the current monitors.
+    RECT workArea;
+
+    // Valid if WAM_DPI.
+    // This is the DPI scale of the provided size.
+    // Without specifying the DPI, the provided size is assumed assumed to be
+    // scaled to the window's current DPI.
+    UINT dpi;
+
+    // Valid if WAK_MOVE_TO_MONITOR or WAM_SCALED_TO_MONITOR.
+    // This point is used to pick a monitor (default to nearest).
+    //
+    // WAK_MOVE_TO_MONITOR
+    // The window is moved to this monitor. The current or provided window
+    // position, size, and state, and the previous and selected monitor work
+    // area, are used to pick a 'good' position for the window on this monitor.
+    //
+    // WAM_SCALED_TO_MONITOR
+    // The provided position and size are already scaled to the specified
+    // monitor. The size should not be scaled to the monitor DPI and the
+    // window should end up scaling to this monitor. (Note: This allows a
+    // window to be scaling to, GetDpiForMonitor, a monitor it is not mostly
+    // on, MonitorFromRect.)
+    POINT pointOnMonitor;
+
+    // Valid if WAK_DISPLAY_CHANGE.
+    // The ID of the current monitor topology, see GetCurrentMonitorTopologyId.
+    // The WAK_DISPLAY_CHANGE kind is used by intercepting windows when they are
+    // moved in response to the monitors changing. The window must provide the
+    // same ID when applying these changes, allowing the system to handle cases
+    // where the monitors change multiple times very quickly.
+    UINT monitorTopologyId;
+} WINDOW_ACTION, *PWINDOW_ACTION;
+
+typedef WINDOW_ACTION const * PCWINDOW_ACTION;
+
+WINUSERAPI
+BOOL
+WINAPI
+ApplyWindowAction(
+    HWND hwnd,
+    WINDOW_ACTION *pAction);
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+
+
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
@@ -16126,7 +16378,6 @@ RegisterForTooltipDismissNotification(HWND hWnd,
 
 
 #if(WINVER >= 0x0604)
-
 WINUSERAPI
 BOOL
 WINAPI
@@ -16142,7 +16393,45 @@ IsWindowArranged(
 WINUSERAPI
 UINT
 WINAPI
-GetCurrentMonitorTopologyId();
+GetCurrentMonitorTopologyId(VOID);
+
+// Send to the window registered with NtUserRegisterCloakedNotification
+// when cloak state of the window has changed
+// wParam - if window cloak state changed contains cloaking value
+//          which can be one/all of the below
+//          DWM_CLOAKED_APP(0x0000001).The window was cloaked by its owner application.
+//          DWM_CLOAKED_SHELL(0x0000002).The window was cloaked by the Shell.
+//          0 - window is not cloaked
+//
+// lParam - 0 (unused)
+//
+#define WM_CLOAKED_STATE_CHANGED 0x0347
+
+WINUSERAPI
+BOOL
+WINAPI
+RegisterCloakedNotification(HWND hwnd, BOOL fRegister);
+
+typedef enum _MOVESIZE_OPERATION
+{
+    MSO_SIZE_LEFT =             1,
+    MSO_SIZE_RIGHT =            2,
+    MSO_SIZE_TOP =              3,
+    MSO_SIZE_TOPLEFT =          4,
+    MSO_SIZE_TOPRIGHT =         5,
+    MSO_SIZE_BOTTOM =           6,
+    MSO_SIZE_BOTTOMLEFT =       7,
+    MSO_SIZE_BOTTOMRIGHT =      8,
+    MSO_MOVE =                  9,
+} MOVESIZE_OPERATION;
+
+WINUSERAPI
+BOOL
+WINAPI
+EnterMoveSizeLoop(
+    HWND hwnd,
+    POINT ptCursor,
+    MOVESIZE_OPERATION moveSizeCode);
 
 #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 

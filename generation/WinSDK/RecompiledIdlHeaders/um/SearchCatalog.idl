@@ -364,7 +364,18 @@ interface ISearchCatalogManager2 : ISearchCatalogManager
     HRESULT PrioritizeMatchingURLs([in, string] LPCWSTR pszPattern, [in] PRIORITIZE_FLAGS dwPrioritizeFlags);
 };
 
-
+[
+    object,
+    uuid(DE837E8F-634F-4AB0-BDFC-9FC3A1FC50DC),
+    pointer_default(unique)
+]
+interface ISearchCatalogManager3 : ISearchCatalogManager2
+{
+    //
+    // Allows clients to query if Semantic Search is supported on the device
+    // 
+    HRESULT IsContainsSemanticSupported([out, retval] BOOL *isContainsSemanticSupported);
+};
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

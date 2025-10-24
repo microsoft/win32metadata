@@ -368,8 +368,12 @@ typedef enum tagCLSCTX
     CLSCTX_RESERVED6 = 0x1000000, // reserved
     CLSCTX_ACTIVATE_ARM32_SERVER  = 0x2000000, // Pick ARM32 server only
     CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION = 0x4000000, // allow activations of servers configured in insufficiently trusted locations.
+    CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE = 0x8000000, // do not activate the server unless it has privilege equal to the caller or greater
+    CLSCTX_DO_NOT_ELEVATE_SERVER = 0x10000000, // do not propagate the caller’s elevated privilege to the server
     CLSCTX_PS_DLL = 0x80000000, // Internal CLSCTX used for loading Proxy/Stub DLLs
  } CLSCTX;
+
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(CLSCTX);")
 
 cpp_quote("#define CLSCTX_VALID_MASK \\")
 cpp_quote("   (CLSCTX_INPROC_SERVER | \\")
@@ -392,6 +396,8 @@ cpp_quote("    CLSCTX_ACTIVATE_AAA_AS_IU | \\")
 cpp_quote("    CLSCTX_RESERVED6 | \\")
 cpp_quote("    CLSCTX_ACTIVATE_ARM32_SERVER | \\")
 cpp_quote("    CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION | \\")
+cpp_quote("    CLSCTX_DO_NOT_ELEVATE_SERVER | \\")
+cpp_quote("    CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE | \\")
 cpp_quote("    CLSCTX_PS_DLL)")
 
 // marshaling flags; passed to CoMarshalInterface

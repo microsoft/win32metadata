@@ -56,6 +56,10 @@ namespace Windows
 
             typedef enum MagnetometerAccuracy MagnetometerAccuracy;
 
+            typedef enum OnlookerDetectionAction OnlookerDetectionAction;
+
+            typedef enum OnlookerDetectionBackOnMode OnlookerDetectionBackOnMode;
+
             typedef enum PedometerStepKind PedometerStepKind;
 
             typedef enum SensorOptimizationGoal SensorOptimizationGoal;
@@ -65,6 +69,8 @@ namespace Windows
             typedef enum SensorType SensorType;
 
             typedef enum SimpleOrientation SimpleOrientation;
+
+            typedef struct LightSensorChromaticity LightSensorChromaticity;
 
             interface IAccelerometer;
 
@@ -202,6 +208,8 @@ namespace Windows
 
             interface IHumanPresenceFeatures2;
 
+            interface IHumanPresenceFeatures3;
+
             interface IHumanPresenceSensor;
 
             interface IHumanPresenceSensor2;
@@ -229,6 +237,8 @@ namespace Windows
             interface IHumanPresenceSettings;
 
             interface IHumanPresenceSettings2;
+
+            interface IHumanPresenceSettings3;
 
             interface IHumanPresenceSettingsStatics;
 
@@ -266,13 +276,19 @@ namespace Windows
 
             interface ILightSensor3;
 
+            interface ILightSensor4;
+
             interface ILightSensorDataThreshold;
+
+            interface ILightSensorDataThreshold2;
 
             interface ILightSensorDeviceId;
 
             interface ILightSensorReading;
 
             interface ILightSensorReading2;
+
+            interface ILightSensorReading3;
 
             interface ILightSensorReadingChangedEventArgs;
 
@@ -303,6 +319,8 @@ namespace Windows
             interface IMagnetometerStatics;
 
             interface IMagnetometerStatics2;
+
+            interface IOnlookerDetectionOptions;
 
             interface IOrientationSensor;
 
@@ -477,6 +495,8 @@ namespace Windows
             runtimeclass MagnetometerReading;
 
             runtimeclass MagnetometerReadingChangedEventArgs;
+
+            runtimeclass OnlookerDetectionOptions;
 
             runtimeclass OrientationSensor;
 
@@ -710,6 +730,23 @@ namespace Windows
                 High        = 3
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum OnlookerDetectionAction
+            {
+                Dim          = 0,
+                Notify       = 1,
+                DimAndNotify = 2
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum OnlookerDetectionBackOnMode
+            {
+                Manually  = 0,
+                OneHour   = 1,
+                FourHours = 2,
+                OneDay    = 3
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum PedometerStepKind
             {
@@ -760,6 +797,13 @@ namespace Windows
                 Rotated270DegreesCounterclockwise = 3,
                 Faceup                            = 4,
                 Facedown                          = 5
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            struct LightSensorChromaticity
+            {
+                DOUBLE X;
+                DOUBLE Y;
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1415,6 +1459,14 @@ namespace Windows
                 [propget] HRESULT IsAdaptiveDimmingSupported([out] [retval] boolean* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HumanPresenceFeatures)]
+            [uuid(ED4E03AA-5CA2-5C02-B783-262E91295619)]
+            interface IHumanPresenceFeatures3 : IInspectable
+            {
+                [propget] HRESULT IsOnlookerDetectionSupported([out] [retval] boolean* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
             [exclusiveto(Windows.Devices.Sensors.HumanPresenceSensor)]
             [uuid(2116788B-E389-5CC3-9A97-CB17BE1008BD)]
@@ -1515,7 +1567,6 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
             [exclusiveto(Windows.Devices.Sensors.HumanPresenceSensorReadingUpdate)]
-            [experimental]
             [uuid(BB95A033-C688-546A-8E2D-B12642E7EFEB)]
             interface IHumanPresenceSensorReadingUpdate2 : IInspectable
             {
@@ -1573,6 +1624,16 @@ namespace Windows
                 [propget] HRESULT WakeOptions([out] [retval] Windows.Devices.Sensors.WakeOnApproachOptions** value);
                 [propget] HRESULT DimmingOptions([out] [retval] Windows.Devices.Sensors.AdaptiveDimmingOptions** value);
                 [propget] HRESULT LockOptions([out] [retval] Windows.Devices.Sensors.LockOnLeaveOptions** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.HumanPresenceSettings)]
+            [uuid(89757226-ACC1-4F58-81DF-47F1D69537F2)]
+            interface IHumanPresenceSettings3 : IInspectable
+            {
+                [propget] HRESULT IsOnlookerDetectionEnabled([out] [retval] boolean* value);
+                [propput] HRESULT IsOnlookerDetectionEnabled([in] boolean value);
+                [propget] HRESULT OnlookerDetectionOptions([out] [retval] Windows.Devices.Sensors.OnlookerDetectionOptions** value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -1753,6 +1814,14 @@ namespace Windows
                 [propget] HRESULT ReportThreshold([out] [retval] Windows.Devices.Sensors.LightSensorDataThreshold** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.LightSensor)]
+            [uuid(6167BE97-6390-404C-9C19-445311C6A1D3)]
+            interface ILightSensor4 : IInspectable
+            {
+                HRESULT IsChromaticitySupported([out] [retval] boolean* supported);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             [exclusiveto(Windows.Devices.Sensors.LightSensorDataThreshold)]
             [uuid(B160AFD1-878F-5492-9F2C-33DC3AE584A3)]
@@ -1762,6 +1831,15 @@ namespace Windows
                 [propput] HRESULT LuxPercentage([in] FLOAT value);
                 [propget] HRESULT AbsoluteLux([out] [retval] FLOAT* value);
                 [propput] HRESULT AbsoluteLux([in] FLOAT value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.LightSensorDataThreshold)]
+            [uuid(6F040FBD-E08B-5B97-8F61-DD4EE66B1733)]
+            interface ILightSensorDataThreshold2 : IInspectable
+            {
+                [propget] HRESULT Chromaticity([out] [retval] Windows.Devices.Sensors.LightSensorChromaticity* value);
+                [propput] HRESULT Chromaticity([in] Windows.Devices.Sensors.LightSensorChromaticity value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1788,6 +1866,14 @@ namespace Windows
             {
                 [propget] HRESULT PerformanceCount([out] [retval] Windows.Foundation.IReference<Windows.Foundation.TimeSpan>** value);
                 [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.LightSensorReading)]
+            [uuid(F338EE06-96AF-4029-B530-61ACC05B7CFE)]
+            interface ILightSensorReading3 : IInspectable
+            {
+                [propget] HRESULT Chromaticity([out] [retval] Windows.Devices.Sensors.LightSensorChromaticity* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1929,6 +2015,17 @@ namespace Windows
             {
                 HRESULT GetDeviceSelector([out] [retval] HSTRING* result);
                 HRESULT FromIdAsync([in] HSTRING deviceId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Sensors.Magnetometer*>** operation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Sensors.OnlookerDetectionOptions)]
+            [uuid(0412B36F-36E6-51E2-876E-65197CC53C12)]
+            interface IOnlookerDetectionOptions : IInspectable
+            {
+                [propget] HRESULT Action([out] [retval] Windows.Devices.Sensors.OnlookerDetectionAction* value);
+                [propput] HRESULT Action([in] Windows.Devices.Sensors.OnlookerDetectionAction value);
+                [propget] HRESULT BackOnMode([out] [retval] Windows.Devices.Sensors.OnlookerDetectionBackOnMode* value);
+                [propput] HRESULT BackOnMode([in] Windows.Devices.Sensors.OnlookerDetectionBackOnMode value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2560,6 +2657,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Sensors.IHumanPresenceFeatures;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Sensors.IHumanPresenceFeatures2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.IHumanPresenceFeatures3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -2597,7 +2695,7 @@ namespace Windows
             runtimeclass HumanPresenceSensorReadingUpdate
             {
                 [default] interface Windows.Devices.Sensors.IHumanPresenceSensorReadingUpdate;
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Sensors.IHumanPresenceSensorReadingUpdate2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.IHumanPresenceSensorReadingUpdate2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -2608,6 +2706,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Sensors.IHumanPresenceSettings;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Sensors.IHumanPresenceSettings2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.IHumanPresenceSettings3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2662,6 +2761,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Devices.Sensors.ILightSensorDeviceId;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.Devices.Sensors.ILightSensor2;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Devices.Sensors.ILightSensor3;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.ILightSensor4;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
@@ -2669,6 +2769,7 @@ namespace Windows
             runtimeclass LightSensorDataThreshold
             {
                 [default] interface Windows.Devices.Sensors.ILightSensorDataThreshold;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.ILightSensorDataThreshold2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2678,6 +2779,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Sensors.ILightSensorReading;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.Devices.Sensors.ILightSensorReading2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Sensors.ILightSensorReading3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2731,6 +2833,13 @@ namespace Windows
             runtimeclass MagnetometerReadingChangedEventArgs
             {
                 [default] interface Windows.Devices.Sensors.IMagnetometerReadingChangedEventArgs;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass OnlookerDetectionOptions
+            {
+                [default] interface Windows.Devices.Sensors.IOnlookerDetectionOptions;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

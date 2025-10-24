@@ -85,21 +85,21 @@ _ACRTIMP void* __cdecl _lfind(
 
 _Check_return_
 _ACRTIMP void* __cdecl _lsearch_s(
-    _In_                                                        void const*   _Key,
-    _Inout_updates_bytes_((*_NumOfElements ) * _SizeOfElements) void*         _Base,
-    _Inout_                                                     unsigned int* _NumOfElements,
-    _In_                                                        size_t        _SizeOfElements,
-    _In_                              _CoreCrtSecureSearchSortCompareFunction _CompareFunction,
-    _In_                                                        void*         _Context
+    _In_reads_bytes_(_SizeOfElements)                              void const*   _Key,
+    _Inout_updates_bytes_((*_NumOfElements + 1) * _SizeOfElements) void*         _Base,
+    _Inout_                                                        unsigned int* _NumOfElements,
+    _In_                                                           size_t        _SizeOfElements,
+    _In_                                 _CoreCrtSecureSearchSortCompareFunction _CompareFunction,
+    _In_                                                           void*         _Context
     );
 
 _Check_return_
 _ACRTIMP void* __cdecl _lsearch(
-    _In_                                                        void const*   _Key,
-    _Inout_updates_bytes_((*_NumOfElements ) * _SizeOfElements) void*         _Base,
-    _Inout_                                                     unsigned int* _NumOfElements,
-    _In_                                                        unsigned int  _SizeOfElements,
-    _In_                           _CoreCrtNonSecureSearchSortCompareFunction _CompareFunction
+    _In_reads_bytes_(_SizeOfElements)                              void const*   _Key,
+    _Inout_updates_bytes_((*_NumOfElements + 1) * _SizeOfElements) void*         _Base,
+    _Inout_                                                        unsigned int* _NumOfElements,
+    _In_                                                           unsigned int  _SizeOfElements,
+    _In_                              _CoreCrtNonSecureSearchSortCompareFunction _CompareFunction
     );
 
 

@@ -927,8 +927,8 @@ getsourcefilter(
 // ioctls
 //
 
-WS2TCPIP_INLINE 
-int  
+WS2TCPIP_INLINE
+int
 idealsendbacklogquery(
     _In_ SOCKET s,
     _Out_ ULONG *pISB
@@ -936,13 +936,13 @@ idealsendbacklogquery(
 {
     DWORD bytes;
 
-    return WSAIoctl(s, SIO_IDEAL_SEND_BACKLOG_QUERY, 
+    return WSAIoctl(s, SIO_IDEAL_SEND_BACKLOG_QUERY,
                     NULL, 0, pISB, sizeof(*pISB), &bytes, NULL, NULL);
 }
 
 
-WS2TCPIP_INLINE 
-int  
+WS2TCPIP_INLINE
+int
 idealsendbacklognotify(
     _In_ SOCKET s,
     _In_opt_ LPWSAOVERLAPPED lpOverlapped,
@@ -951,8 +951,8 @@ idealsendbacklognotify(
 {
     DWORD bytes;
 
-    return WSAIoctl(s, SIO_IDEAL_SEND_BACKLOG_CHANGE, 
-                    NULL, 0, NULL, 0, &bytes, 
+    return WSAIoctl(s, SIO_IDEAL_SEND_BACKLOG_CHANGE,
+                    NULL, 0, NULL, 0, &bytes,
                     lpOverlapped, lpCompletionRoutine);
 }
 
@@ -1192,6 +1192,33 @@ WSASetRecvIPEcn(
     return Error;
 }
 #endif // NTDDI_VERSION >= NTDDI_WIN10_FE
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+//
+// Wrapper functions for the SO_RECEIVED_PROCESSOR socket option.
+//
+
+WS2TCPIP_INLINE
+INT
+WSAGetReceivedProcessorOption(
+    _In_ SOCKET Socket,
+    _Out_ BOOLEAN *Enabled
+    )
+{
+    INT OptSize = sizeof(*Enabled);
+    return getsockopt(Socket, SOL_SOCKET, SO_RECEIVED_PROCESSOR, (PCHAR)Enabled, &OptSize);
+}
+
+WS2TCPIP_INLINE
+INT
+WSASetReceivedProcessorOption(
+    _In_ SOCKET Socket,
+    _In_ BOOLEAN Enabled
+    )
+{
+    return setsockopt(Socket, SOL_SOCKET, SO_RECEIVED_PROCESSOR, (PCHAR)&Enabled, sizeof(Enabled));
+}
+#endif // NTDDI_VERSION >= NTDDI_WIN10_GE
 
 #if (_WIN32_WINNT >= 0x0600)
 #ifdef _SECURE_SOCKET_TYPES_DEFINED_

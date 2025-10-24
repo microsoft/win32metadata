@@ -40,7 +40,6 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
 #endif // _HPOWERNOTIFY_DEF_
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerReadACValue(
@@ -52,10 +51,10 @@ PowerReadACValue(
     _Out_writes_bytes_opt_(*BufferSize) LPBYTE Buffer,
     _Inout_opt_ LPDWORD BufferSize
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerReadDCValue(
@@ -67,10 +66,10 @@ PowerReadDCValue(
     _Out_writes_bytes_opt_(*BufferSize) PUCHAR Buffer,
     _Inout_ LPDWORD BufferSize
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerWriteACValueIndex(
@@ -80,10 +79,10 @@ PowerWriteACValueIndex(
     _In_opt_ CONST GUID* PowerSettingGuid,
     _In_ DWORD AcValueIndex
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerWriteDCValueIndex(
@@ -93,30 +92,30 @@ PowerWriteDCValueIndex(
     _In_opt_ CONST GUID* PowerSettingGuid,
     _In_ DWORD DcValueIndex
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerGetActiveScheme(
     _In_opt_ HKEY UserRootPowerKey,
     _Outptr_ GUID** ActivePolicyGuid
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-
 DWORD
 WINAPI
 PowerSetActiveScheme(
     _In_opt_ HKEY UserRootPowerKey,
     _In_opt_ CONST GUID* SchemeGuid
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN7)
-
 DWORD
 WINAPI
 PowerSettingRegisterNotification(
@@ -125,15 +124,16 @@ PowerSettingRegisterNotification(
     _In_ HANDLE Recipient,
     _Out_ PHPOWERNOTIFY RegistrationHandle
     );
+
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN7)
-
 DWORD
 WINAPI
 PowerSettingUnregisterNotification(
     _Inout_ HPOWERNOTIFY RegistrationHandle
     );
+
 #endif
 
 #if NTDDI_VERSION >= NTDDI_WIN10_RS5
@@ -163,7 +163,6 @@ EFFECTIVE_POWER_MODE_CALLBACK (
 #endif
 
 #if NTDDI_VERSION >= NTDDI_WIN10_RS5
-
 _Must_inspect_result_
 HRESULT
 WINAPI
@@ -173,15 +172,16 @@ PowerRegisterForEffectivePowerModeNotifications(
     _In_opt_ PVOID Context,
     _Outptr_ PVOID* RegistrationHandle
     );
+
 #endif
 
 #if NTDDI_VERSION >= NTDDI_WIN10_RS5
-
 HRESULT
 WINAPI
 PowerUnregisterFromEffectivePowerModeNotifications(
     _In_ PVOID RegistrationHandle
     );
+
 #endif
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
