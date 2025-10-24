@@ -1,6 +1,7 @@
 --with-librarypath
-# Documentation says ...
+# Documentation says This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions.
 pSetupModifyGlobalFlags=SETUPAPI.dll
+# APIs that have been removed from the SDK but that we include for completeness.
 BCryptRegisterProvider=bcrypt.dll
 BCryptUnregisterProvider=bcrypt.dll
 BCryptAddContextFunctionProvider=bcrypt.dll
