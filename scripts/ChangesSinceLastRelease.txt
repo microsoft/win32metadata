@@ -1,0 +1,4 @@
+
+# Fix headers that have gotten out of sync with SDK
+Windows.Win32.System.Search.IRowsetKeys.ListKeys : prgColumns : [NativeArrayInfo(CountParamIndex=0),Out] => [In,NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.System.Search.IColumnsInfo.GetColumnInfo : pcColumns : [Out] => [Optional,Out]

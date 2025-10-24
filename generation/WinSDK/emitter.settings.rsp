@@ -2122,7 +2122,6 @@ FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 # Changes to make oledb.h functions consistent with old annotations
-IColumnsInfo::GetColumnInfo::pcColumns=[-Optional]
 IRowsetKeys::ListKeys::prgColumns=[-In][NativeArrayInfo(CountParamIndex=0)]
-IScopedOperations::Copy::pAuthenticate=[-Optional]
-IScopedOperations::Move::pAuthenticate=[-Optional]
+IScopedOperations::Copy::pAuthenticate=[Optional]
+IScopedOperations::Move::pAuthenticate=[Optional]
