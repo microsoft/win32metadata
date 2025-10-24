@@ -61,15 +61,29 @@ Get-ChildItem "$recompiledIdlHeadersDir\um\*.idl", "$recompiledIdlHeadersDir\sha
 $ErrorActionPreference = "Continue"
 
 Write-Host "Recompiling MIDL headers with SAL annotations into $recompiledIdlHeadersDir..."
+Write-Host "Midl path: $midl"
+$errorsEncountered = [System.Collections.Concurrent.ConcurrentBag[int]]::new()
 $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System.Environment]::ProcessorCount / 2, 2)) -Parallel {
     $inputFileName = (Join-Path $using:recompiledIdlHeadersScratchDir $_.Name).ToLowerInvariant()
     $outputHeader = [System.IO.Path]::ChangeExtension($inputFileName, "h")
     $outputLog = [System.IO.Path]::ChangeExtension($inputFileName, "txt")
+    $midlRsp = [System.IO.Path]::ChangeExtension($inputFileName, "rsp")
 
-    & $using:midl $inputFileName /out $using:recompiledIdlHeadersScratchDir /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /win32 /target NT100 /Zp8 /I$using:recompiledIdlHeadersScratchDir /I$using:recompiledIdlHeadersDir\um /I$using:recompiledIdlHeadersDir\shared /I$using:recompiledIdlHeadersDir\winrt /I"$using:PSScriptRoot\inc" 3>&1 2>&1 > $outputLog
+    Write-Verbose "MidlRsp: $midlRsp"
+
+    # Write the params as an rsp so we can run later
+    Set-Content -Path $midlRsp "$inputFileName /out $($using:recompiledIdlHeadersScratchDir) /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /D_AMD64_ /D_WIN64 /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /amd64 /target NT100 /Zp8 /I$($using:recompiledIdlHeadersScratchDir) /I$($using:recompiledIdlHeadersDir)\um /I$($using:recompiledIdlHeadersDir)\shared /I$($using:recompiledIdlHeadersDir)\winrt /I""$($using:PSScriptRoot)\inc"""
+
+    & $using:midl `@$midlRsp 3>&1 2>&1 > $outputLog
+
+    # Grab the midl output because when midl compile fails, it doesn't return 0.
+    $midlOutput = Get-Content $outputLog -Raw
     
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed for $($_.FullName)`n$(Get-Content $outputLog -Raw)"
+    if (($LASTEXITCODE -ne 0) -or $midlOutput.Contains("midl : error")) {
+        $midlErrors = $midlOutput -match "midl : error"
+        Write-Error "Failed for $($_.FullName)`n$midlErrors"
+        Write-Error "Compile manually with '$($using:midl) @$midlRsp'"
+        ($using:errorsEncountered).Add($inputFullName)
     } else {
         Write-Host "Compiled $($_.Name)"
 
@@ -80,6 +94,12 @@ $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System
 
         Copy-Item $outputHeader ([System.IO.Path]::ChangeExtension($_.FullName, "h"))
     }
+}
+
+if ($errorsEncountered.Count -gt 0)
+{
+    Write-Error "MIDL compile errors encountered. Scroll up to see which IDL files failed to compile."
+    Exit 1
 }
 
 # Restore headers which have been removed from the SDK but that we still include for compatibility.
@@ -135,7 +155,7 @@ $deprecatedHeaders = @(
     "winrt\windows.devices.alljoyn.idl"
 )
 
-Write-Host "Restoring deprecated headers that may have been removed from the SDK..."
+Write-Host "Restoring deprecated headers that are no longer in the SDK..."
 foreach ($deprecatedHeader in $deprecatedHeaders) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $deprecatedHeader
     if (!(Test-Path $fullPath)) {

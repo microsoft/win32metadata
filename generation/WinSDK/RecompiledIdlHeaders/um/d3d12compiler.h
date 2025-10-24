@@ -563,17 +563,6 @@ EXTERN_C const IID IID_ID3D12CompilerCacheSession;
 
 
 
-D3D12_COMPILER_TARGET STDMETHODCALLTYPE ID3D12CompilerCacheSession_GetCompilerTarget_Proxy( 
-    ID3D12CompilerCacheSession * This);
-
-
-void __RPC_STUB ID3D12CompilerCacheSession_GetCompilerTarget_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
 
 #endif 	/* __ID3D12CompilerCacheSession_INTERFACE_DEFINED__ */
 

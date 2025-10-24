@@ -641,17 +641,6 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
 
 
 
-D3D12_VIDEO_DECODER_HEAP_DESC STDMETHODCALLTYPE ID3D12VideoDecoderHeap_GetDesc_Proxy( 
-    ID3D12VideoDecoderHeap * This);
-
-
-void __RPC_STUB ID3D12VideoDecoderHeap_GetDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
 
 #endif 	/* __ID3D12VideoDecoderHeap_INTERFACE_DEFINED__ */
 
@@ -955,17 +944,6 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
 
 #endif 	/* C style interface */
 
-
-
-D3D12_VIDEO_DECODER_DESC STDMETHODCALLTYPE ID3D12VideoDecoder_GetDesc_Proxy( 
-    ID3D12VideoDecoder * This);
-
-
-void __RPC_STUB ID3D12VideoDecoder_GetDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -1396,17 +1374,6 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
 
 #endif 	/* C style interface */
 
-
-
-D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC STDMETHODCALLTYPE ID3D12VideoProcessor_GetOutputStreamDesc_Proxy( 
-    ID3D12VideoProcessor * This);
-
-
-void __RPC_STUB ID3D12VideoProcessor_GetOutputStreamDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3280,17 +3247,6 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
 
 
 
-D3D12_VIDEO_MOTION_ESTIMATOR_DESC STDMETHODCALLTYPE ID3D12VideoMotionEstimator_GetDesc_Proxy( 
-    ID3D12VideoMotionEstimator * This);
-
-
-void __RPC_STUB ID3D12VideoMotionEstimator_GetDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
 
 #endif 	/* __ID3D12VideoMotionEstimator_INTERFACE_DEFINED__ */
 
@@ -3466,17 +3422,6 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
 
 #endif 	/* C style interface */
 
-
-
-D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC STDMETHODCALLTYPE ID3D12VideoMotionVectorHeap_GetDesc_Proxy( 
-    ID3D12VideoMotionVectorHeap * This);
-
-
-void __RPC_STUB ID3D12VideoMotionVectorHeap_GetDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -4936,17 +4881,6 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
 
 #endif 	/* C style interface */
 
-
-
-D3D12_VIDEO_EXTENSION_COMMAND_DESC STDMETHODCALLTYPE ID3D12VideoExtensionCommand_GetDesc_Proxy( 
-    ID3D12VideoExtensionCommand * This);
-
-
-void __RPC_STUB ID3D12VideoExtensionCommand_GetDesc_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 

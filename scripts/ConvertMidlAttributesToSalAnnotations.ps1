@@ -18,8 +18,11 @@ if (Test-Path $outputFileName) {
     Remove-Item $outputFileName
 }
 
-$attributeListPattern = [Regex]::new('\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|iid_is\([^\)]+\)|length_is\([^\)]+\)))+)\]')
-$attributePattern = [Regex]::new('(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|iid_is\([^\)]+\)|length_is\([^\)]+\))')
+# Some SAL annotations can have parens in them like size_is((ULONG)cMembers). We take advantage of the attribute syntax to
+# just grab everything from one paren to the next greedily, stopping only at a comma or ].
+$parenBlob = "\([^,\]]+\)"
+$attributeListPattern = [Regex]::new("\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob))+)\]")
+$attributePattern = [Regex]::new("(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob)")
 
 $stream = [System.IO.StreamWriter] $outputFileName
 
@@ -51,6 +54,8 @@ foreach ($line in (Get-Content $inputFileName)) {
         $size_is = $null
         $length_is = $null
         $parameters = $null
+
+        Write-Verbose "Found attribute: $attributeList"
 
         # Process each attribute.
         foreach ($match in $attributePattern.Matches($attributeList)) {

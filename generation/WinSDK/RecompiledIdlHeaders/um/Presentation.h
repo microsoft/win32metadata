@@ -1626,39 +1626,6 @@ EXTERN_C const IID IID_IIndependentFlipFramePresentStatistics;
 
 
 
-LUID STDMETHODCALLTYPE IIndependentFlipFramePresentStatistics_GetOutputAdapterLUID_Proxy( 
-    IIndependentFlipFramePresentStatistics * This);
-
-
-void __RPC_STUB IIndependentFlipFramePresentStatistics_GetOutputAdapterLUID_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-SystemInterruptTime STDMETHODCALLTYPE IIndependentFlipFramePresentStatistics_GetDisplayedTime_Proxy( 
-    IIndependentFlipFramePresentStatistics * This);
-
-
-void __RPC_STUB IIndependentFlipFramePresentStatistics_GetDisplayedTime_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-SystemInterruptTime STDMETHODCALLTYPE IIndependentFlipFramePresentStatistics_GetPresentDuration_Proxy( 
-    IIndependentFlipFramePresentStatistics * This);
-
-
-void __RPC_STUB IIndependentFlipFramePresentStatistics_GetPresentDuration_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
 
 #endif 	/* __IIndependentFlipFramePresentStatistics_INTERFACE_DEFINED__ */
 
