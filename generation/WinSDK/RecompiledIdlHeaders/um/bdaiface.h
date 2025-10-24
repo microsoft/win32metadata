@@ -4431,7 +4431,7 @@ EXTERN_C const IID IID_IFrequencyMap;
             /* [annotation][out] */ 
             _Out_  ULONG *ulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *ulCount)  ULONG **ppulList) = 0;
+            _Out_  ULONG **ppulList) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE put_FrequencyMapping( 
             /* [annotation][in] */ 
@@ -4453,13 +4453,13 @@ EXTERN_C const IID IID_IFrequencyMap;
             /* [annotation][out] */ 
             _Out_  ULONG *pulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList) = 0;
+            _Out_  ULONG **ppulList) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_CountryCodeList( 
             /* [annotation][out] */ 
             _Out_  ULONG *pulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList) = 0;
+            _Out_  ULONG **ppulList) = 0;
         
     };
     
@@ -4492,7 +4492,7 @@ EXTERN_C const IID IID_IFrequencyMap;
             /* [annotation][out] */ 
             _Out_  ULONG *ulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *ulCount)  ULONG **ppulList);
+            _Out_  ULONG **ppulList);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, put_FrequencyMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -4522,7 +4522,7 @@ EXTERN_C const IID IID_IFrequencyMap;
             /* [annotation][out] */ 
             _Out_  ULONG *pulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList);
+            _Out_  ULONG **ppulList);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, get_CountryCodeList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCodeList )( 
@@ -4530,7 +4530,7 @@ EXTERN_C const IID IID_IFrequencyMap;
             /* [annotation][out] */ 
             _Out_  ULONG *pulCount,
             /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList);
+            _Out_  ULONG **ppulList);
         
         END_INTERFACE
     } IFrequencyMapVtbl;

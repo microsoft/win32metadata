@@ -281,7 +281,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
         virtual HRESULT STDMETHODCALLTYPE Next( 
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBackgroundCopyFile **rgelt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_  IBackgroundCopyFile **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched) = 0;
         
@@ -329,7 +330,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
             __RPC__in IEnumBackgroundCopyFiles * This,
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBackgroundCopyFile **rgelt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_  IBackgroundCopyFile **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched);
         
@@ -1132,7 +1134,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs;
         virtual HRESULT STDMETHODCALLTYPE Next( 
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBackgroundCopyJob **rgelt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_  IBackgroundCopyJob **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched) = 0;
         
@@ -1180,7 +1183,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs;
             __RPC__in IEnumBackgroundCopyJobs * This,
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBackgroundCopyJob **rgelt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_  IBackgroundCopyJob **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched);
         
