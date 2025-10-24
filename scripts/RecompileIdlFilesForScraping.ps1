@@ -155,7 +155,7 @@ $deprecatedHeaders = @(
     "winrt\windows.devices.alljoyn.idl"
 )
 
-Write-Host "Restoring deprecated headers that are no longer in the SDK..."
+Write-Host "Restoring headers that are no longer in the SDK..."
 foreach ($deprecatedHeader in $deprecatedHeaders) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $deprecatedHeader
     if (!(Test-Path $fullPath)) {

@@ -1,5 +1,0 @@
-# Getting OLE headers in sync with the SDK again after fixing MIDL issue
-Windows.Win32.System.Search.IColumnsInfo.GetColumnInfo : pcColumns : [Out] => [Optional,Out]
-Windows.Win32.System.Search.IRowsetKeys.ListKeys : prgColumns : [NativeArrayInfo(CountParamIndex=0),Out] => [In,Out]
-Windows.Win32.System.Search.IScopedOperations.Copy : pAuthenticate : [In,Optional] => [In]
-Windows.Win32.System.Search.IScopedOperations.Move : pAuthenticate : [In,Optional] => [In]
