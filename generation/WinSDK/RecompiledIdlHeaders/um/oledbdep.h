@@ -801,8 +801,7 @@ EXTERN_C const IID IID_IRowsetKeys;
         virtual HRESULT STDMETHODCALLTYPE ListKeys( 
             /* [annotation][out][in] */ 
             _Inout_  DBORDINAL *pcColumns,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns) = 0;
+            /* [size_is][size_is][out] */ DBORDINAL **prgColumns) = 0;
         
     };
     
@@ -834,8 +833,7 @@ EXTERN_C const IID IID_IRowsetKeys;
             IRowsetKeys * This,
             /* [annotation][out][in] */ 
             _Inout_  DBORDINAL *pcColumns,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns);
+            /* [size_is][size_is][out] */ DBORDINAL **prgColumns);
         
         END_INTERFACE
     } IRowsetKeysVtbl;

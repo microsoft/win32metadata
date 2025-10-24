@@ -9,6 +9,8 @@ param
     $outputFileName
 )
 
+$ErrorActionPreference = "Stop"
+
 if (!(Test-Path $inputFileName)) {
     Write-Error "Couldn't find $inputFileName."
     exit -1
@@ -46,7 +48,7 @@ function SALParseSize {
 }
 
 # Some SAL annotations can have parens in them like size_is((ULONG)cMembers). Allow strings like "(...)" or "((type)...)"
-$parenBlob = "\((?:[^()]*\([^()]*\)[^()]*|[^()]*)\)"
+$parenBlob = "\((?:\([^()]*\)[^()]*|[^()]*)\)"
 $attributeListPattern = [Regex]::new("\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob))+)\]")
 $attributePattern = [Regex]::new("(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob)")
 

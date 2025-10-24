@@ -366,8 +366,7 @@ EXTERN_C const IID IID_IEnumBitsPeerCacheRecords;
         virtual HRESULT STDMETHODCALLTYPE Next( 
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_  IBitsPeerCacheRecord **rgelt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBitsPeerCacheRecord **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched) = 0;
         
@@ -415,8 +414,7 @@ EXTERN_C const IID IID_IEnumBitsPeerCacheRecords;
             __RPC__in IEnumBitsPeerCacheRecords * This,
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_  IBitsPeerCacheRecord **rgelt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBitsPeerCacheRecord **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched);
         
@@ -616,8 +614,7 @@ EXTERN_C const IID IID_IEnumBitsPeers;
         virtual HRESULT STDMETHODCALLTYPE Next( 
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_  IBitsPeer **rgelt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBitsPeer **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched) = 0;
         
@@ -665,8 +662,7 @@ EXTERN_C const IID IID_IEnumBitsPeers;
             __RPC__in IEnumBitsPeers * This,
             /* [annotation][in] */ 
             _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_  IBitsPeer **rgelt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, pceltFetched ? *pceltFetched : celt) IBitsPeer **rgelt,
             /* [annotation][unique][out][in] */ 
             _Inout_  ULONG *pceltFetched);
         

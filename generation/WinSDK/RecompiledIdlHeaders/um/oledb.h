@@ -3162,8 +3162,7 @@ void __RPC_STUB IAccessor_RemoteCreateAccessor_Stub(
     _Out_  DBACCESSORFLAGS *pdwAccessorFlags,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcBindings,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcBindings)  DBBINDING **prgBindings,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcBindings) DBBINDING **prgBindings,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -5488,10 +5487,8 @@ EXTERN_C const IID IID_IViewSort;
     __RPC__in IViewSort * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcValues,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcValues)  DBORDINAL **prgColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcValues)  DBSORT **prgOrders,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcValues) DBORDINAL **prgColumns,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcValues) DBSORT **prgOrders,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -5680,8 +5677,7 @@ EXTERN_C const IID IID_IViewFilter;
     __RPC__in IViewFilter * This,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcBindings,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcBindings)  DBBINDING **prgBindings,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcBindings) DBBINDING **prgBindings,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -8367,14 +8363,11 @@ EXTERN_C const IID IID_ICommandWithParameters;
     __RPC__in ICommandWithParameters * This,
     /* [annotation][out][in] */ 
     _Inout_  DB_UPARAMS *pcParams,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcParams)  DBPARAMINFO **prgParamInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcParams)  DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcParams) DBPARAMINFO **prgParamInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcParams) DBBYTEOFFSET **prgNameOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbNamesBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbNamesBuffer)  OLECHAR **ppNamesBuffer,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbNamesBuffer) OLECHAR **ppNamesBuffer,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -8569,8 +8562,7 @@ EXTERN_C const IID IID_IColumnsRowset;
     __RPC__in IColumnsRowset * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcOptColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcOptColumns)  DBID **prgOptColumns,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcOptColumns) DBID **prgOptColumns,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -8746,16 +8738,12 @@ EXTERN_C const IID IID_IColumnsInfo;
     __RPC__in IColumnsInfo * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBCOLUMNINFO **prgInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgNameOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgcolumnidOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBCOLUMNINFO **prgInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgcolumnidOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbStringsBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbStringsBuffer)  OLECHAR **ppStringsBuffer,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbStringsBuffer) OLECHAR **ppStringsBuffer,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -10034,8 +10022,7 @@ void __RPC_STUB IDBDataSourceAdmin_RemoteDestroyDataSource_Stub(
     _Out_writes_(*pcPropertyInfoSets)  DBPROPINFOSET **prgPropertyInfoSets,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcOffsets)  DBBYTEOFFSET **prgDescOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcOffsets) DBBYTEOFFSET **prgDescOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbDescBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -16575,8 +16562,7 @@ EXTERN_C const IID IID_IScopedOperations;
     _In_  IAuthenticate *pAuthenticate,
     /* [annotation][size_is][out] */ 
     _Out_writes_(cRows)  DBSTATUS *rgdwStatus,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(cRows)  DBBYTEOFFSET **prgulNewURLOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )cRows) DBBYTEOFFSET **prgulNewURLOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbStringsBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -16604,8 +16590,7 @@ void __RPC_STUB IScopedOperations_RemoteCopy_Stub(
     _In_  IAuthenticate *pAuthenticate,
     /* [annotation][size_is][out] */ 
     _Out_writes_(cRows)  DBSTATUS *rgdwStatus,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(cRows)  DBBYTEOFFSET **prgulNewURLOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )cRows) DBBYTEOFFSET **prgulNewURLOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbStringsBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -17152,18 +17137,13 @@ EXTERN_C const IID IID_IColumnsInfo2;
     _In_  DWORD dwFlags,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcColumns,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcColumns)  DBID **prgColumnIDs,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcColumns)  DBCOLUMNINFO **prgColumnInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgNameOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgcolumnidOffsets,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcColumns) DBID **prgColumnIDs,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcColumns) DBCOLUMNINFO **prgColumnInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgcolumnidOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbStringsBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbStringsBuffer)  OLECHAR **ppStringsBuffer);
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbStringsBuffer) OLECHAR **ppStringsBuffer);
 
 
 void __RPC_STUB IColumnsInfo2_RemoteGetRestrictedColumnInfo_Stub(
@@ -18186,8 +18166,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     _Out_  DBACCESSORFLAGS *pdwAccessorFlags,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcBindings,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcBindings)  DBBINDING **prgBindings,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcBindings) DBBINDING **prgBindings,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -18493,10 +18472,8 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     __RPC__in IViewSort * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcValues,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcValues)  DBORDINAL **prgColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcValues)  DBSORT **prgOrders,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcValues) DBORDINAL **prgColumns,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcValues) DBSORT **prgOrders,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -18533,8 +18510,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     __RPC__in IViewFilter * This,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcBindings,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcBindings)  DBBINDING **prgBindings,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcBindings) DBBINDING **prgBindings,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -18925,14 +18901,11 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     __RPC__in ICommandWithParameters * This,
     /* [annotation][out][in] */ 
     _Inout_  DB_UPARAMS *pcParams,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcParams)  DBPARAMINFO **prgParamInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcParams)  DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcParams) DBPARAMINFO **prgParamInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcParams) DBBYTEOFFSET **prgNameOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbNamesBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbNamesBuffer)  OLECHAR **ppNamesBuffer,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbNamesBuffer) OLECHAR **ppNamesBuffer,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -18990,8 +18963,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     __RPC__in IColumnsRowset * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcOptColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcOptColumns)  DBID **prgOptColumns,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcOptColumns) DBID **prgOptColumns,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -19050,16 +19022,12 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     __RPC__in IColumnsInfo * This,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcColumns,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBCOLUMNINFO **prgInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgNameOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgcolumnidOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBCOLUMNINFO **prgInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgcolumnidOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbStringsBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbStringsBuffer)  OLECHAR **ppStringsBuffer,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbStringsBuffer) OLECHAR **ppStringsBuffer,
     /* [annotation][out] */ 
     _Out_  IErrorInfo **ppErrorInfoRem);
 
@@ -19376,8 +19344,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     _Out_writes_(*pcPropertyInfoSets)  DBPROPINFOSET **prgPropertyInfoSets,
     /* [annotation][out][in] */ 
     _Inout_  DBCOUNTITEM *pcOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcOffsets)  DBBYTEOFFSET **prgDescOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcOffsets) DBBYTEOFFSET **prgDescOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbDescBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -20235,8 +20202,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     _In_  IAuthenticate *pAuthenticate,
     /* [annotation][size_is][out] */ 
     _Out_writes_(cRows)  DBSTATUS *rgdwStatus,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(cRows)  DBBYTEOFFSET **prgulNewURLOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )cRows) DBBYTEOFFSET **prgulNewURLOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbStringsBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -20276,8 +20242,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     _In_  IAuthenticate *pAuthenticate,
     /* [annotation][size_is][out] */ 
     _Out_writes_(cRows)  DBSTATUS *rgdwStatus,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(cRows)  DBBYTEOFFSET **prgulNewURLOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )cRows) DBBYTEOFFSET **prgulNewURLOffsets,
     /* [annotation][out][in] */ 
     _Inout_  ULONG *pcbStringsBuffer,
     /* [annotation][size_is][size_is][unique][out][in] */ 
@@ -20424,18 +20389,13 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
     _In_  DWORD dwFlags,
     /* [annotation][out][in] */ 
     _Inout_  DBORDINAL *pcColumns,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcColumns)  DBID **prgColumnIDs,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcColumns)  DBCOLUMNINFO **prgColumnInfo,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgNameOffsets,
-    /* [annotation][size_is][size_is][out] */ 
-    _Out_writes_(*pcColumns)  DBBYTEOFFSET **prgcolumnidOffsets,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcColumns) DBID **prgColumnIDs,
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcColumns) DBCOLUMNINFO **prgColumnInfo,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgNameOffsets,
+    /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( ULONG  )*pcColumns) DBBYTEOFFSET **prgcolumnidOffsets,
     /* [annotation][out][in] */ 
     _Inout_  DBLENGTH *pcbStringsBuffer,
-    /* [annotation][size_is][size_is][unique][out][in] */ 
-    _Inout_updates_(*pcbStringsBuffer)  OLECHAR **ppStringsBuffer);
+    /* [size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_full_opt(( ULONG  )*pcbStringsBuffer) OLECHAR **ppStringsBuffer);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IRegisterProvider_GetURLMapping_Proxy( 
     IRegisterProvider * This,
