@@ -61,15 +61,29 @@ Get-ChildItem "$recompiledIdlHeadersDir\um\*.idl", "$recompiledIdlHeadersDir\sha
 $ErrorActionPreference = "Continue"
 
 Write-Host "Recompiling MIDL headers with SAL annotations into $recompiledIdlHeadersDir..."
+Write-Host "Midl path: $midl"
+$errorsEncountered = [System.Collections.Concurrent.ConcurrentBag[int]]::new()
 $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System.Environment]::ProcessorCount / 2, 2)) -Parallel {
     $inputFileName = (Join-Path $using:recompiledIdlHeadersScratchDir $_.Name).ToLowerInvariant()
     $outputHeader = [System.IO.Path]::ChangeExtension($inputFileName, "h")
     $outputLog = [System.IO.Path]::ChangeExtension($inputFileName, "txt")
+    $midlRsp = [System.IO.Path]::ChangeExtension($inputFileName, "rsp")
 
-    & $using:midl $inputFileName /out $using:recompiledIdlHeadersScratchDir /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /win32 /target NT100 /Zp8 /I$using:recompiledIdlHeadersScratchDir /I$using:recompiledIdlHeadersDir\um /I$using:recompiledIdlHeadersDir\shared /I$using:recompiledIdlHeadersDir\winrt /I"$using:PSScriptRoot\inc" 3>&1 2>&1 > $outputLog
+    Write-Verbose "MidlRsp: $midlRsp"
+
+    # Write the params as an rsp so we can run later
+    Set-Content -Path $midlRsp "$inputFileName /out $($using:recompiledIdlHeadersScratchDir) /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /D_AMD64_ /D_WIN64 /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /amd64 /target NT100 /Zp8 /I$($using:recompiledIdlHeadersScratchDir) /I$($using:recompiledIdlHeadersDir)\um /I$($using:recompiledIdlHeadersDir)\shared /I$($using:recompiledIdlHeadersDir)\winrt /I""$($using:PSScriptRoot)\inc"""
+
+    & $using:midl `@$midlRsp 3>&1 2>&1 > $outputLog
+
+    # Grab the midl output because when midl compile fails, it doesn't return 0.
+    $midlOutput = Get-Content $outputLog -Raw
     
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed for $($_.FullName)`n$(Get-Content $outputLog -Raw)"
+    if (($LASTEXITCODE -ne 0) -or $midlOutput.Contains("midl : error")) {
+        $midlErrors = $midlOutput -match "midl : error"
+        Write-Error "Failed for $($_.FullName)`n$midlErrors"
+        Write-Error "Compile manually with '$($using:midl) @$midlRsp'"
+        ($using:errorsEncountered).Add($inputFullName)
     } else {
         Write-Host "Compiled $($_.Name)"
 
@@ -80,6 +94,93 @@ $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System
 
         Copy-Item $outputHeader ([System.IO.Path]::ChangeExtension($_.FullName, "h"))
     }
+}
+
+if ($errorsEncountered.Count -gt 0)
+{
+    Write-Error "MIDL compile errors encountered. Scroll up to see which IDL files failed to compile."
+    Exit 1
+}
+
+# Restore headers which have been removed from the SDK but that we still include for compatibility.
+$deprecatedHeaders = @(
+    # Old ARM headers
+    "shared\ksarm.h",
+    "shared\kxarm.h",
+    "shared\kxarmunw.h",
+    # AllJoyn headers
+    "um\MSAJTransport.h",
+    "um\alljoyn_c\AboutData.h",
+    "um\alljoyn_c\AboutDataListener.h",
+    "um\alljoyn_c\AboutIcon.h",
+    "um\alljoyn_c\AboutIconObj.h",
+    "um\alljoyn_c\AboutIconProxy.h",
+    "um\alljoyn_c\AboutListener.h",
+    "um\alljoyn_c\AboutObj.h",
+    "um\alljoyn_c\AboutObjectDescription.h",
+    "um\alljoyn_c\AboutProxy.h",
+    "um\alljoyn_c\AjAPI.h",
+    "um\alljoyn_c\ApplicationStateListener.h",
+    "um\alljoyn_c\AuthListener.h",
+    "um\alljoyn_c\AutoPinger.h",
+    "um\alljoyn_c\BusAttachment.h",
+    "um\alljoyn_c\BusListener.h",
+    "um\alljoyn_c\BusObject.h",
+    "um\alljoyn_c\DBusStdDefines.h",
+    "um\alljoyn_c\Init.h",
+    "um\alljoyn_c\InterfaceDescription.h",
+    "um\alljoyn_c\KeyStoreListener.h",
+    "um\alljoyn_c\Message.h",
+    "um\alljoyn_c\MessageReceiver.h",
+    "um\alljoyn_c\MsgArg.h",
+    "um\alljoyn_c\Observer.h",
+    "um\alljoyn_c\PasswordManager.h",
+    "um\alljoyn_c\PermissionConfigurationListener.h",
+    "um\alljoyn_c\PermissionConfigurator.h",
+    "um\alljoyn_c\ProxyBusObject.h",
+    "um\alljoyn_c\SecurityApplicationProxy.h",
+    "um\alljoyn_c\Session.h",
+    "um\alljoyn_c\SessionListener.h",
+    "um\alljoyn_c\SessionPortListener.h",
+    "um\alljoyn_c\Status.h",
+    "um\alljoyn_c\TransportMask.h",
+    "um\alljoyn_c\version.h",
+    "um\p2p.h",
+    "um\qcc\platform.h",
+    "um\qcc\windows\mapping.h",
+    "um\qcc\windows\platform_types.h",
+    "um\windows.devices.alljoyn.interop.h",
+    "um\windows.devices.alljoyn.interop.idl",
+    "winrt\windows.devices.alljoyn.h",
+    "winrt\windows.devices.alljoyn.idl"
+)
+
+Write-Host "Restoring headers that are no longer in the SDK..."
+foreach ($deprecatedHeader in $deprecatedHeaders) {
+    $fullPath = Join-Path $recompiledIdlHeadersDir $deprecatedHeader
+    if (!(Test-Path $fullPath)) {
+        Write-Host "Restoring missing header: $deprecatedHeader"
+        $directory = Split-Path $fullPath -Parent
+        if (!(Test-Path $directory)) {
+            New-Item -ItemType Directory -Path $directory -Force | Out-Null
+        }
+        
+        git restore $fullPath
+    }
+}
+
+# Also the WinMDGenerator tooling fails on the WinHv headers because of their AMD64-only defines in the latest SDK. For now, just stick with the older versions.
+$winHvHeadersToRestore = @(
+    "um\WinHvEmulation.h",
+    "um\WinHvPlatform.h",
+    "um\WinHvPlatformDefs.h"
+)
+
+Write-Host "Restoring WinHv headers to older versions..."
+foreach ($winHvHeader in $winHvHeadersToRestore) {
+    $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
+    Write-Host "Restoring WinHv header: $winHvHeader"
+    git restore $fullPath
 }
 
 $ErrorActionPreference = "Stop"

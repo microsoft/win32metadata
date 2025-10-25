@@ -1343,6 +1343,7 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.System.Hypervisor",
     "Name": "WHV_PARTITION_HANDLE",
     "ValueType": "IntPtr",
     "CloseApi": "WHvDeletePartition",

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ScraperRsp Include="scraper.settings.rsp"/>
     <ScraperRsp Include="libMappings.rsp"/>
+    <ScraperRsp Include="libMappingsManual.rsp"/>
     <ScraperRsp Include="supportedOS.rsp"/>
     <ScraperRsp Include="WithSetLastError.rsp"/>
   </ItemGroup>

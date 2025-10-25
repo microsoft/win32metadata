@@ -1066,7 +1066,7 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         virtual HRESULT STDMETHODCALLTYPE SetFuncAndParamNames( 
             /* [annotation][in] */ 
             _In_  UINT index,
-            /* [annotation][in][size_is][in] */ 
+            /* [annotation][in][annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
             /* [annotation][in] */ 
             _In_  UINT cNames) = 0;
@@ -1239,7 +1239,7 @@ EXTERN_C const IID IID_ICreateTypeInfo;
             ICreateTypeInfo * This,
             /* [annotation][in] */ 
             _In_  UINT index,
-            /* [annotation][in][size_is][in] */ 
+            /* [annotation][in][annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
             /* [annotation][in] */ 
             _In_  UINT cNames);
@@ -1636,7 +1636,7 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
             ICreateTypeInfo2 * This,
             /* [annotation][in] */ 
             _In_  UINT index,
-            /* [annotation][in][size_is][in] */ 
+            /* [annotation][in][annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
             /* [annotation][in] */ 
             _In_  UINT cNames);

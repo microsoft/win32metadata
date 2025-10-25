@@ -646,7 +646,7 @@ extern "C"{
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 #if 0
-typedef long TAPIHWND;
+typedef LONGLONG TAPIHWND;
 
 #endif
 #ifdef _X86_

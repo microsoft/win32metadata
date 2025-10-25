@@ -9,6 +9,8 @@ param
     $outputFileName
 )
 
+$ErrorActionPreference = "Stop"
+
 if (!(Test-Path $inputFileName)) {
     Write-Error "Couldn't find $inputFileName."
     exit -1
@@ -18,8 +20,37 @@ if (Test-Path $outputFileName) {
     Remove-Item $outputFileName
 }
 
-$attributeListPattern = [Regex]::new('\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|iid_is\([^\)]+\)|length_is\([^\)]+\)))+)\]')
-$attributePattern = [Regex]::new('(in|out|string|retval|unique|defaultvalue\([^\)]+\)|size_is\([^\)]+\)|iid_is\([^\)]+\)|length_is\([^\)]+\))')
+# Function to parse and validate size/length expressions from MIDL attributes
+function SALParseSize {
+    param(
+        [string]$attribute,
+        [string]$prefix
+    )
+    
+    $extracted = $attribute.Substring("${prefix}(".Length);
+    $extracted = $extracted.Substring(0, $extracted.Length - 1);
+    $extracted = $extracted.Trim(", ")
+    
+    # If the string still has an internal comma, that means it's more complex than SAL can handle, omit it.
+    # Also if there are parens but they're not at the front, that's someone using a macro inside the annotation
+    # which the winmd tooling cannot currently handle. Skip.
+    if ($extracted.Contains(",")) { 
+        return $null 
+    } elseif ($extracted.IndexOf("(") -gt 0) {
+        return $null
+    } elseif ($extracted.IndexOf("(") -eq 0) {
+        # Strip any cast prefix like (ULONG) off the front since the tooling can't parse that.
+        $castPrefixEnd = $extracted.IndexOf(")") + 1
+        $extracted = $extracted.Substring($castPrefixEnd)
+    }
+    
+    return $extracted
+}
+
+# Some SAL annotations can have parens in them like size_is((ULONG)cMembers). Allow strings like "(...)" or "((type)...)"
+$parenBlob = "\((?:\([^()]*\)[^()]*|[^()]*)\)"
+$attributeListPattern = [Regex]::new("\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob))+)\]")
+$attributePattern = [Regex]::new("(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob)")
 
 $stream = [System.IO.StreamWriter] $outputFileName
 
@@ -52,6 +83,8 @@ foreach ($line in (Get-Content $inputFileName)) {
         $length_is = $null
         $parameters = $null
 
+        Write-Verbose "Found attribute: $attributeList"
+
         # Process each attribute.
         foreach ($match in $attributePattern.Matches($attributeList)) {
             $attribute = $match.Groups[1].Value
@@ -66,13 +99,9 @@ foreach ($line in (Get-Content $inputFileName)) {
             } elseif ($attribute -eq "optional") {
                 $optional = $true
             } elseif ($attribute.StartsWith("size_is")) {
-                $size_is = $attribute.Substring("size_is(".Length);
-                $size_is = $size_is.Substring(0, $size_is.Length - 1);
-                $size_is = $size_is.Replace(",", "").Trim()
+                $size_is = SALParseSize $attribute "size_is"
             } elseif ($attribute.StartsWith("length_is")) {
-                $length_is = $attribute.Substring("length_is(".Length);
-                $length_is = $length_is.Substring(0, $length_is.Length - 1);
-                $length_is = $length_is.Replace(",", "").Trim()
+                $length_is = SALParseSize $attribute "length_is"
             }
         }
 
