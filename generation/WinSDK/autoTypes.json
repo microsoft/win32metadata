@@ -2836,5 +2836,13 @@
     "Name": "ISvcSymbolType",
     "ValueType": "typedef struct ISvcSymbolType",
     "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteDesktop",
+    "Name": "WTS_CLOUD_AUTH_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WtsCloudAuthClose",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   }
 ]
