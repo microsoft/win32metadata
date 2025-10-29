@@ -910,7 +910,6 @@ Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_THROTTLE_MINIMUM_2 added
 Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_WPS_MIN_EFFICIENCY_THRESHOLD added
 Windows.Win32.System.SystemServices.Apis.IMAGE_ENCLAVE_POLICY_STRICT_MEMORY added
 Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UILIMIT_INJECTION added
-Windows.Win32.System.SystemServices.Apis.PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION added
 Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType1 added
 Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType2 added
 Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType3 added
@@ -1026,3 +1025,5 @@ winmd1: Windows.Win32.System.SystemInformation.DEVICEFAMILYDEVICEFORM.DEVICEFAMI
 winmd1: Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UI_VALID_FLAGS = 511, winmd2 = 1023
 winmd1: Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UILIMIT_ALL = 511, winmd2 = 1023
 winmd1: Windows.Win32.System.SystemServices.Apis.POLICY_AUDIT_SUBCATEGORY_COUNT = 59, winmd2 = 60
+# Add OS_PRODUCT_TYPE enums from latest sdk
+Windows.Win32.System.SystemInformation.OS_PRODUCT_TYPE.PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION added
