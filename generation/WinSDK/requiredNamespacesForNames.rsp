@@ -1254,6 +1254,7 @@ ZombifyActCtx=Windows.Win32.System.ApplicationInstallationAndServicing
 # Breaks a cyle between Graphics.D2D and Graphics.Imaging
 IWICImageEncoder=Windows.Win32.Graphics.Imaging.D2D
 IWICImagingFactory2=Windows.Win32.Graphics.Imaging.D2D
+IWICImagingFactory3=Windows.Win32.Graphics.Imaging.D2D
 # endregion wincodec.h
 # region winddi.h
 BLENDOBJ=Windows.Win32.Devices.Display
