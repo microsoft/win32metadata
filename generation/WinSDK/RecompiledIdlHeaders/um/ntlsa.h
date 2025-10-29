@@ -168,7 +168,7 @@ typedef enum _SECURITY_LOGON_TYPE {
 // type values in SECURITY_LOGON_TYPE.
 //
 // IF YOU ADD A NEW LOGON TYPE HERE, ALSO ADD IT TO THE POLICY_MODE_xxx
-// data definitions.
+// data definitions, AND increment POLICY_MODE_COUNT.
 //
 
 #define SECURITY_ACCESS_INTERACTIVE_LOGON             ((ULONG) 0x00000001L)
@@ -895,6 +895,7 @@ typedef enum _POLICY_AUDIT_EVENT_TYPE_EX {
     iLogon_NPS,
     iLogon_Claims,
     iLogon_Groups,
+    iLogon_AccessRights,
 
     iObjectAccess_FileSystem,
     iObjectAccess_Registry,
@@ -1202,6 +1203,12 @@ typedef NTSTATUS
     _Out_ PLSA_OPERATIONAL_MODE SecurityMode
     );
 
+typedef NTSTATUS
+(NTAPI *PFN_LSA_LOGON_SMA) (
+    _In_ LUID LogonId,
+    _Out_ PHANDLE Token
+    );
+
 typedef struct _LSA_AUTH_CALLBACKS {
     PFN_LSA_CALL_AUTH_PKG       LsaCallAuthPkgFn;
     PFN_LSA_DEREGISTER_PROC     LsaDeregisterProcFn;
@@ -1209,6 +1216,7 @@ typedef struct _LSA_AUTH_CALLBACKS {
     PFN_LSA_LOGON_USER          LsaLogonUserFn;
     PFN_LOOKUP_AUTH_PKG         LsaLookupAuthPkgFn;
     PFN_LSA_REGISTER_PROC       LsaRegisterProcFn;
+    PFN_LSA_LOGON_SMA           LsaLogonSystemManagedAdminFn;
 } LSA_AUTH_CALLBACKS, *PLSA_AUTH_CALLBACKS;
 
 typedef CONST LSA_AUTH_CALLBACKS *PCLSA_AUTH_CALLBACKS;
@@ -1853,6 +1861,7 @@ typedef struct _LSA_TRANSLATED_SID {
 //     Service - The user or alias may be activated as a service on the
 //         system.
 //
+// Keep these definitions in sync with the SECURITY_ACCESS_* definitions,
 
 typedef ULONG POLICY_SYSTEM_ACCESS_MODE, *PPOLICY_SYSTEM_ACCESS_MODE;
 
@@ -1879,6 +1888,9 @@ typedef ULONG POLICY_SYSTEM_ACCESS_MODE, *PPOLICY_SYSTEM_ACCESS_MODE;
                                              SECURITY_ACCESS_DENY_SERVICE_LOGON | \
                                              POLICY_MODE_REMOTE_INTERACTIVE     | \
                                              POLICY_MODE_DENY_REMOTE_INTERACTIVE )
+
+// The number of POLICY_MODE_* bits defined above.
+#define POLICY_MODE_COUNT  11
 
 //
 // The following is the bits allowed in NT4.0
@@ -1999,7 +2011,7 @@ typedef struct _POLICY_PRIVILEGE_DEFINITION {
 //
 
 //
-// This flag controls LsaLookupSids2 such that for internet SIDs
+// This flag controls LsaLookupSids2 such that for internet SIDs 
 // from identity providers for connected accounts are disallowed
 // connected accounts are those accounts which have a corresponding
 // shadow account in the local SAM database connected to
@@ -2010,9 +2022,9 @@ typedef struct _POLICY_PRIVILEGE_DEFINITION {
 
 // This flag returns the internet names. Otherwise the NT4 style name eg. domain\username
 // will be returned. The exception is if the MSA internet SID is specified
-// then the internet name will be returned unless LSA_LOOKUP_DISALLOW_NON_WINDOWS_INTERNET_SID
+// then the internet name will be returned unless LSA_LOOKUP_DISALLOW_NON_WINDOWS_INTERNET_SID  
 // is specified
-#define LSA_LOOKUP_PREFER_INTERNET_NAMES  0x40000000
+#define LSA_LOOKUP_PREFER_INTERNET_NAMES  0x40000000 
 
 // begin_ntsecapi
 
@@ -2702,6 +2714,7 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
 #define TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION 0x00000200  // do not forward TGT to the other side of the trust which is not part of this enterprise
 #define TRUST_ATTRIBUTE_PIM_TRUST                     0x00000400  // Outgoing trust to a PIM forest.
 #endif
+
 #if (_WIN32_WINNT >= 0x0603)
 // Forward the TGT to the other side of the trust which is not part of this enterprise
 // This flag has the opposite meaning of TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION which is now deprecated.
@@ -3609,6 +3622,54 @@ LsaSetSystemAccessAccount(
     _In_ LSA_HANDLE AccountHandle,
     _In_ ULONG SystemAccess
     );
+
+#define MAX_LOCAL_ACCESSRIGHT_ASSIGNMENTS ( 128 * 1024 )
+
+typedef struct _LSA_LOCAL_ACCESSRIGHT_ASSIGNMENT
+{
+#ifdef MIDL_PASS
+    PISID AccountSid;
+#else
+    PSID AccountSid;
+#endif
+    ULONG LocalSystemAccess;
+} LSA_LOCAL_ACCESSRIGHT_ASSIGNMENT, *PLSA_LOCAL_ACCESSRIGHT_ASSIGNMENT;
+
+typedef struct _LSA_LOCAL_ACCESSRIGHT_ASSIGNMENTS
+{
+#ifdef MIDL_PASS
+    [range(0, MAX_LOCAL_ACCESSRIGHT_ASSIGNMENTS)]
+#endif
+    ULONG cLocalAccessRightAssignments;
+
+#ifdef MIDL_PASS
+    [size_is(cLocalAccessRightAssignments)]
+#endif
+    PLSA_LOCAL_ACCESSRIGHT_ASSIGNMENT pLocalAccessRightAssignments;
+} LSA_LOCAL_ACCESSRIGHT_ASSIGNMENTS, *PLSA_LOCAL_ACCESSRIGHT_ASSIGNMENTS;
+
+NTSTATUS
+NTAPI
+LsaSetLocalSystemAccess(
+    _In_ PLSA_LOCAL_ACCESSRIGHT_ASSIGNMENTS pLocalAccessRightAssignments
+    );
+
+NTSTATUS
+NTAPI
+LsaQueryLocalSystemAccess(
+    _In_ PSID AccountSid,
+    _Out_ PULONG SystemAccessLocal
+    );
+
+NTSTATUS
+NTAPI
+LsaQueryLocalSystemAccessAll(
+    _Outptr_result_nullonfailure_ PLSA_LOCAL_ACCESSRIGHT_ASSIGNMENTS* ppLocalAccessRightAssignments
+    );
+
+NTSTATUS
+NTAPI
+LsaPurgeLocalSystemAccessTable();
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //

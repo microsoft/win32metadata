@@ -93,6 +93,30 @@ EnclaveUsesAttestedKeys(
     VOID
     );
 
+STDAPI
+EnclaveRestrictContainingProcessAccess(
+    _In_ BOOL RestrictAccess,
+    _Out_opt_ PBOOL PreviouslyRestricted
+    );
+
+//
+// Routines to copy data in and out of an enclave.
+//
+
+STDAPI
+EnclaveCopyIntoEnclave(
+    _Out_writes_bytes_(NumberOfBytes) VOID *EnclaveAddress,
+    _In_reads_bytes_(NumberOfBytes) const VOID *UnsecureAddress,
+    _In_ SIZE_T NumberOfBytes
+    );
+
+STDAPI
+EnclaveCopyOutOfEnclave(
+    _Out_writes_bytes_(NumberOfBytes) VOID *UnsecureAddress,
+    _In_reads_bytes_(NumberOfBytes) const VOID *EnclaveAddress,
+    _In_ SIZE_T NumberOfBytes
+    );
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 

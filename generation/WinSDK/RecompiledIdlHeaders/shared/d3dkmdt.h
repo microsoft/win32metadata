@@ -2488,7 +2488,8 @@ typedef struct _D3DKMT_DISPLAY_CAPS
         struct
         {
             UINT64 PreferPhysicallyContiguous : 1;
-            UINT64 Reserved : 63;
+            UINT64 CursorScaledWithMultiPlaneOverlayPlane0 : 1;
+            UINT64 Reserved : 62;
         };
         UINT64 Value;
     };

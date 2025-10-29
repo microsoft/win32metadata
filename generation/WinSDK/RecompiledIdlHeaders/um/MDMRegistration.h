@@ -116,6 +116,11 @@ extern "C" {
 #define MENROLL_E_CUSTOMSERVERERROR                     MAKE_HRESULT(SEVERITY_ERROR, DEVICE_ENROLLER_FACILITY_CODE, 50)
 #endif
 
+// The server told us to come back later, see DeviceManagement-Enterprise-Diagnostics for details
+#ifndef MENROLL_E_SERVER429
+#define MENROLL_E_SERVER429                             MAKE_HRESULT(SEVERITY_ERROR, DEVICE_ENROLLER_FACILITY_CODE, 51)
+#endif
+
 // The user canceled the operation
 #define MENROLL_E_USER_CANCELED                         MAKE_HRESULT(SEVERITY_ERROR, DEVICE_ENROLLER_FACILITY_CODE, 42)
 

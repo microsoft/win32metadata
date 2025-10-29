@@ -821,6 +821,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                interface IUIViewSettingsPreferredInteractionMode;
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode ABI::Windows::UI::ViewManagement::IUIViewSettingsPreferredInteractionMode
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 namespace ABI {
@@ -1465,6 +1480,43 @@ typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::UISettings*, ABI::W
 
 namespace ABI {
     namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                class UIViewSettings;
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE
+#define DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("bf3e2a14-6fce-5bb3-838e-de9a00e11aad"))
+ITypedEventHandler<ABI::Windows::UI::ViewManagement::UIViewSettings*, IInspectable*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::UIViewSettings*, ABI::Windows::UI::ViewManagement::IUIViewSettings*>, IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.ViewManagement.UIViewSettings, Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::UIViewSettings*, IInspectable*> __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_t;
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
         namespace Devices {
             namespace Enumeration {
                 class DeviceInformation;
@@ -1736,16 +1788,6 @@ namespace ABI {
         namespace UI {
             namespace ViewManagement {
                 class StatusBarProgressIndicator;
-            } /* ViewManagement */
-        } /* UI */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace UI {
-            namespace ViewManagement {
-                class UIViewSettings;
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4266,6 +4308,51 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 
 /*
  *
+ * Interface Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.UIViewSettings
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_IUIViewSettingsPreferredInteractionMode[] = L"Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                MIDL_INTERFACE("426de261-82ec-5f61-bad4-19b2d0d3cf35")
+                IUIViewSettingsPreferredInteractionMode : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetPreferredInteractionMode(
+                        UINT32 supportedModesLength,
+                        ABI::Windows::UI::ViewManagement::UserInteractionMode* supportedModes,
+                        ABI::Windows::UI::ViewManagement::UserInteractionMode* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_PreferredInteractionModeChanged(
+                        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_PreferredInteractionModeChanged(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IUIViewSettingsPreferredInteractionMode = __uuidof(IUIViewSettingsPreferredInteractionMode);
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.UI.ViewManagement.IUIViewSettingsStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -4286,7 +4373,7 @@ namespace ABI {
                 {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
-                        ABI::Windows::UI::ViewManagement::IUIViewSettings** current
+                        ABI::Windows::UI::ViewManagement::IUIViewSettings** result
                         ) = 0;
                 };
 
@@ -4430,12 +4517,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IApplicationView ** Default Interface **
@@ -4505,8 +4592,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -4570,8 +4657,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IInputPane ** Default Interface **
@@ -4614,8 +4701,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4765,6 +4852,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IUIViewSettings ** Default Interface **
+ *    Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5073,6 +5163,12 @@ typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUISettingsMessageDurati
 typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
+
+#endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
@@ -6077,6 +6173,55 @@ interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUISettings_Win
 
 #endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUISettings_Windows__CUI__CViewManagement__CUISettingsMessageDurationChangedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+#if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable;
+
+typedef struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This,
+        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl;
+
+interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef ____x_ABI_CWindows_CDevices_CEnumeration_CIDeviceInformation_FWD_DEFINED__
@@ -10345,6 +10490,88 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 
 /*
  *
+ * Interface Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.ViewManagement.UIViewSettings
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_IUIViewSettingsPreferredInteractionMode[] = L"Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode";
+typedef struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetPreferredInteractionMode)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        UINT32 supportedModesLength,
+        enum __x_ABI_CWindows_CUI_CViewManagement_CUserInteractionMode* supportedModes,
+        enum __x_ABI_CWindows_CUI_CViewManagement_CUserInteractionMode* result);
+    HRESULT (STDMETHODCALLTYPE* add_PreferredInteractionModeChanged)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_PreferredInteractionModeChanged)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl;
+
+interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetPreferredInteractionMode(This, supportedModesLength, supportedModes, result) \
+    ((This)->lpVtbl->GetPreferredInteractionMode(This, supportedModesLength, supportedModes, result))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_add_PreferredInteractionModeChanged(This, handler, token) \
+    ((This)->lpVtbl->add_PreferredInteractionModeChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_remove_PreferredInteractionModeChanged(This, token) \
+    ((This)->lpVtbl->remove_PreferredInteractionModeChanged(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
+#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.UI.ViewManagement.IUIViewSettingsStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -10373,7 +10600,7 @@ typedef struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStaticsVtbl
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics* This,
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics* This,
-        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings** current);
+        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings** result);
 
     END_INTERFACE
 } __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStaticsVtbl;
@@ -10403,8 +10630,8 @@ interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics
 #define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetForCurrentView(This, current) \
-    ((This)->lpVtbl->GetForCurrentView(This, current))
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetForCurrentView(This, result) \
+    ((This)->lpVtbl->GetForCurrentView(This, result))
 
 #endif /* COBJMACROS */
 
@@ -10614,12 +10841,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IApplicationView ** Default Interface **
@@ -10689,8 +10916,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -10754,8 +10981,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IInputPane ** Default Interface **
@@ -10798,8 +11025,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IProjectionManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -10949,6 +11176,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IUIViewSettings ** Default Interface **
+ *    Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

@@ -67,7 +67,7 @@ STDAPI LoadIFilterEx( PCWSTR pwcsPath,
                       DWORD dwFlags,
                       REFIID riid,
                       _Outptr_ void ** ppIUnk );
-                      
+
 STDAPI BindIFilterFromStorage(_In_ IStorage * pStg,
                               _In_ IUnknown * pUnkOuter,
                               _Outptr_ void ** ppIUnk );
@@ -140,6 +140,8 @@ STDAPI BindIFilterFromStream(_In_ IStream * pStm,
 #define DBPROP_IGNORESBRI                    14
 #define DBPROP_DONOTCOMPUTEEXPENSIVEPROPS    15
 #define DBPROP_ENABLEROWSETEVENTS            16
+#define DBPROP_SESSION_ID                    17
+#define DBPROP_QUERY_ID                      18
 
 // Content Index Framework Core property set
 

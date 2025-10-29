@@ -522,6 +522,47 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_GE
 
+//TODO:: need to talk to someone about what this is for
+//and if we need it
+#if NTDDI_VERSION >= NTDDI_WIN11_DT
+
+//
+// This event contains the details of the sealed SI policy - namely what the
+//  sealed package will contain. (In other words, what the minimum values going
+//  forward will be.)
+//
+
+#define SIPAEVENT_VSM_SEALED_SI_POLICY                  (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x003A)
+
+#define SIPAEVENT_VSM_DRTM_KEYROLL_DETECTED             (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x003B)
+//
+// This event is used in Hope Chest SRTM scenarios. It contains the anti-rollback UnsesalPolicy
+// associated with sealed protector.
+//
+#define SIPAEVENT_VSM_SRTM_UNSEAL_POLICY                (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x003C)
+
+//
+// This event is used in Hope Chest SRTM scenarios. To enable attestation
+// services to verify if VSM master key is bound to the correct policy and
+// counter value, we need to make sure the counter value is included in the
+// TCG log.
+//
+#define SIPAEVENT_VSM_SRTM_ANTI_ROLLBACK_COUNTER        (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x003D)
+
+//
+// Note: 0x3D...0x39 are currently unused; new events can be added in this range
+//
+
+#define SIPAEVENT_VTL1_DUMP_CONFIG                      (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x0040)
+
+
+#endif// NTDDI_VERSION >= NTDDI_WIN11_DT
+
 //SIPAEVENTTYPE_AUHTORITY
 #define SIPAEVENT_NOAUTHORITY              (SIPAEVENTTYPE_AUTHORITY + \
                                             0x0001)

@@ -116,6 +116,7 @@ Notes:
 #define FACILITY_FILTER_MANAGER          0x1C
 #define FACILITY_MONITOR                 0x1D
 #define FACILITY_GRAPHICS_KERNEL         0x1E
+#define FACILITY_CAMERA                  0x1F
 #define FACILITY_DRIVER_FRAMEWORK        0x20
 #define FACILITY_FVE_ERROR_CODE          0x21
 #define FACILITY_FWP_ERROR_CODE          0x22
@@ -12336,6 +12337,20 @@ Notes:
 
 /*++
 
+ MessageId's 0xa161 - 0xa180 (inclusive) are for API Set support.
+
+--*/
+//
+// MessageId: STATUS_APISET_COMPOSE_FAILURE
+//
+// MessageText:
+//
+// An API Set schema extension failed to compose.
+//
+#define STATUS_APISET_COMPOSE_FAILURE    ((NTSTATUS)0xC000A161L)
+
+/*++
+
  MessageId's 0xa200 - 0xa280 (inclusive) are reserved for app container specific messages.
 
 --*/
@@ -12881,6 +12896,15 @@ Notes:
 // The cloud provider failed to acknowledge a message before the time-out expired.
 //
 #define STATUS_CLOUD_FILE_US_MESSAGE_TIMEOUT ((NTSTATUS)0xC000CF21L)
+
+//
+// MessageId: STATUS_CLOUD_FILE_HYDRATION_NOT_AVAILABLE
+//
+// MessageText:
+//
+// Cloud file cannot be retrieved from your cloud provider. Try again after responding to your cloud provider's request for action.
+//
+#define STATUS_CLOUD_FILE_HYDRATION_NOT_AVAILABLE ((NTSTATUS)0xC000CF22L)
 
 /*++
 
@@ -18970,6 +18994,35 @@ Notes:
 
 
 //
+// Camera Error messages (ks.sys, usbvideo.sys)
+// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode, 
+// which has 1:1 mapping for Error code in WinError.mc file.
+//
+// The remaining NTSTATUS in camera category may not have mapping with System Error code.
+//
+
+#define IS_CAMERA_NTSTATUS(x) ( ((x) & 0x0FFF0000) == (FACILITY_CAMERA << 16) )
+
+//
+// MessageId: STATUS_CAMERA_INVALID_CONFIGURATION
+//
+// MessageText:
+//
+// A camera's configuration contains some invalid settings.
+//
+#define STATUS_CAMERA_INVALID_CONFIGURATION ((NTSTATUS)0xC01F0000L)
+
+//
+// MessageId: STATUS_CAMERA_INSUFFICIENT_BANDWIDTH
+//
+// MessageText:
+//
+// A camera interface doesn't have the desired bandwidth for data transfer.
+//
+#define STATUS_CAMERA_INSUFFICIENT_BANDWIDTH ((NTSTATUS)0xC01F0001L)
+
+
+//
 // Full Volume Encryption Error codes (fvevol.sys and fvevollib.lib)
 //
 
@@ -19665,6 +19718,132 @@ Notes:
 // BitLocker prevented an attempt to create a TPM binding for a PCR that contains events extended into the TPM after the BitLocker boot lock event.
 //
 #define STATUS_FVE_PCR_BOOT_LOCK_BOUNDARY ((NTSTATUS)0xC0210051L)
+
+//
+// MessageId: STATUS_FVE_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED
+//
+// MessageText:
+//
+// The firmware update was not applied because BitLocker TPM bindings do not include the latest measurements. Restart your computer to retry.
+//
+#define STATUS_FVE_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED ((NTSTATUS)0xC0210052L)
+
+//
+// MessageId: STATUS_FVE_INVALID_TPM_BINDING_CONFIGURATION
+//
+// MessageText:
+//
+// The BitLocker TPM binding configuration is invalid.
+//
+#define STATUS_FVE_INVALID_TPM_BINDING_CONFIGURATION ((NTSTATUS)0xC0210053L)
+
+//
+// MessageId: STATUS_FVE_TOO_MANY_TPM_BINDINGS
+//
+// MessageText:
+//
+// The BitLocker TPM protector cannot fit all the necessary TPM bindings.
+//
+#define STATUS_FVE_TOO_MANY_TPM_BINDINGS ((NTSTATUS)0xC0210054L)
+
+//
+// MessageId: STATUS_FVE_TPM_BINDING_ASSOCIATION_FAILURE
+//
+// MessageText:
+//
+// A BitLocker TPM protector binding is badly formatted.
+//
+#define STATUS_FVE_TPM_BINDING_ASSOCIATION_FAILURE ((NTSTATUS)0xC0210055L)
+
+//
+// MessageId: STATUS_FVE_ORPHANED_PCR_DIGEST_DATUM
+//
+// MessageText:
+//
+// The dataset contains binding information without an associated TPM binding. Try re-enabling BitLocker.
+//
+#define STATUS_FVE_ORPHANED_PCR_DIGEST_DATUM ((NTSTATUS)0xC0210056L)
+
+//
+// MessageId: STATUS_FVE_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED
+//
+// MessageText:
+//
+// BitLocker is prevented from using hardware accelerated encryption.
+//
+#define STATUS_FVE_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED ((NTSTATUS)0xC0210057L)
+
+//
+// MessageId: STATUS_FVE_NO_MATCHING_TPM_BINDINGS
+//
+// MessageText:
+//
+// BitLocker failed to find a TPM binding that can be used to unlock the drive.
+//
+#define STATUS_FVE_NO_MATCHING_TPM_BINDINGS ((NTSTATUS)0xC0210058L)
+
+//
+// MessageId: STATUS_FVE_TPMPV2_USED_FAILURE
+//
+// MessageText:
+//
+// BitLocker failed to unlock the drive using a V2 TPM protector.
+//
+#define STATUS_FVE_TPMPV2_USED_FAILURE   ((NTSTATUS)0xC0210059L)
+
+//
+// MessageId: STATUS_FVE_NO_TPM_BINDINGS
+//
+// MessageText:
+//
+// BitLocker failed to find any TPM bindings that can be used to unlock the drive.
+//
+#define STATUS_FVE_NO_TPM_BINDINGS       ((NTSTATUS)0xC021005AL)
+
+//
+// MessageId: STATUS_FVE_FW_UPDATE_PCRS_BLOCK
+//
+// MessageText:
+//
+// The firmware update was not applied. To finish installation of the firmware, please suspend BitLocker and restart your device.
+//
+#define STATUS_FVE_FW_UPDATE_PCRS_BLOCK  ((NTSTATUS)0xC021005CL)
+
+//
+// MessageId: STATUS_FVE_FW_UPDATE_PCRS_NOT_EXCLUDED
+//
+// MessageText:
+//
+// The firmware update was not applied because TPM PCRs affected by the firmware installation were not excluded by BitLocker's TPM protector. Restart your computer to retry.
+//
+#define STATUS_FVE_FW_UPDATE_PCRS_NOT_EXCLUDED ((NTSTATUS)0xC021005DL)
+
+//
+// MessageId: STATUS_FVE_FAILED_TO_UNWRAP_HW_WRAPPED_KEY
+//
+// MessageText:
+//
+// The hardware crypto key manager failed to unwrap a hardware wrapped key.
+//
+#define STATUS_FVE_FAILED_TO_UNWRAP_HW_WRAPPED_KEY ((NTSTATUS)0xC021005EL)
+
+//
+// MessageId: STATUS_FVE_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT
+//
+// MessageText:
+//
+// FIPS compliance is required, but the hardware crypto accelerator does not report compliance with this standard.
+//
+#define STATUS_FVE_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC021005FL)
+
+//
+// MessageId: STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT
+//
+// MessageText:
+//
+// FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
+//
+#define STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC0210060L)
 
 
 //
@@ -22447,6 +22626,24 @@ Notes:
 // The Physical Presence Interface of this firmware does not support the requested method.
 //
 #define STATUS_TPM_PPI_FUNCTION_UNSUPPORTED ((NTSTATUS)0xC0291006L)
+
+//
+// MessageId: STATUS_TPM_IN_EXCLUSIVE_MODE
+//
+// MessageText:
+//
+// The caller is trying to request an operation while the TPM driver has an exclusive context open.
+//
+#define STATUS_TPM_IN_EXCLUSIVE_MODE     ((NTSTATUS)0xC0291007L)
+
+//
+// MessageId: STATUS_TPM_REBOOT_REQUIRED
+//
+// MessageText:
+//
+// The TPM driver was previously in exclusive mode and now requires a reboot to resume normal functionality.
+//
+#define STATUS_TPM_REBOOT_REQUIRED       ((NTSTATUS)0xC0291008L)
 
 
 //
@@ -26792,6 +26989,42 @@ Notes:
 #define STATUS_VSM_DMA_PROTECTION_NOT_IN_USE ((NTSTATUS)0xC0450001L)
 
 //
+// MessageId: STATUS_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED
+//
+// MessageText:
+//
+// The VSM encryption key could not be released because the minimum Code Integrity policy version was not met.
+//
+#define STATUS_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED ((NTSTATUS)0xC0450002L)
+
+//
+// MessageId: STATUS_VSMIDK_KEYGEN_FAILURE
+//
+// MessageText:
+//
+// RSA identity key generation failed.
+//
+#define STATUS_VSMIDK_KEYGEN_FAILURE     ((NTSTATUS)0xC0450003L)
+
+//
+// MessageId: STATUS_VSMIDK_EXPORT_FAILURE
+//
+// MessageText:
+//
+// Exporting RSA key components failed.
+//
+#define STATUS_VSMIDK_EXPORT_FAILURE     ((NTSTATUS)0xC0450004L)
+
+//
+// MessageId: STATUS_VSMIDK_MODULUS_MISMATCH
+//
+// MessageText:
+//
+// Exported modulus size did not match expected key size.
+//
+#define STATUS_VSMIDK_MODULUS_MISMATCH   ((NTSTATUS)0xC0450005L)
+
+//
 // Application Execution (AppExec)
 //
 //
@@ -27340,6 +27573,108 @@ Notes:
 // The accelerator submission queue is full.
 //
 #define STATUS_ACCELERATOR_SUBMISSION_QUEUE_FULL ((NTSTATUS)0xC0EF0001L)
+
+
+///////////////////////////////////////////////////
+//                                               //
+// CloudAP Remote Desktop Error codes            //
+//                                               //
+///////////////////////////////////////////////////
+
+/*++
+
+ Cloud authentication Remote Desktop specific messages.
+
+--*/
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_APNONCE_INVALID
+//
+// MessageText:
+//
+// The server nonce has expired.
+//
+#define STATUS_AAD_CLOUDAP_E_APNONCE_INVALID ((NTSTATUS)0xC0048550L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_BAD_DEVICE_ACCESS_TOKEN_FORMAT
+//
+// MessageText:
+//
+// The format of the access token is invalid.
+//
+#define STATUS_AAD_CLOUDAP_E_BAD_DEVICE_ACCESS_TOKEN_FORMAT ((NTSTATUS)0xC0048551L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_ASSERTION_MALFORMED
+//
+// MessageText:
+//
+// The format of the assertion is invalid.
+//
+#define STATUS_AAD_CLOUDAP_E_ASSERTION_MALFORMED ((NTSTATUS)0xC0048552L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_TENANT
+//
+// MessageText:
+//
+// The Entra ID tenant specified in the server nonce or the assertion is invalid.
+//
+#define STATUS_AAD_CLOUDAP_E_INVALID_TENANT ((NTSTATUS)0xC0048553L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_DEVICE
+//
+// MessageText:
+//
+// The target device specified in the server nonce or the assertion is invalid.
+//
+#define STATUS_AAD_CLOUDAP_E_INVALID_DEVICE ((NTSTATUS)0xC0048554L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_ACCESS_TOKEN
+//
+// MessageText:
+//
+// The access token is invalid.
+//
+#define STATUS_AAD_CLOUDAP_E_INVALID_ACCESS_TOKEN ((NTSTATUS)0xC0048556L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_BINDING_KEY_ID
+//
+// MessageText:
+//
+// The binding key specified in the assertion does not match the binding key specified in the access token.
+//
+#define STATUS_AAD_CLOUDAP_E_INVALID_BINDING_KEY_ID ((NTSTATUS)0xC0048557L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_CANT_FIND_ROOT_CERT
+//
+// MessageText:
+//
+// The root certificate associated with the access token's signature cannot be found.
+//
+#define STATUS_AAD_CLOUDAP_E_CANT_FIND_ROOT_CERT ((NTSTATUS)0xC0048559L)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_ASSERTION_INVALID
+//
+// MessageText:
+//
+// The resource URL in the assertion does not match the audience specified in the access token.
+//
+#define STATUS_AAD_CLOUDAP_E_ASSERTION_INVALID ((NTSTATUS)0xC004855AL)
+
+//
+// MessageId: STATUS_AAD_CLOUDAP_E_CALLER_MISMATCH
+//
+// MessageText:
+//
+// The specified resource ID does not match the audience specified in the access token.
+//
+#define STATUS_AAD_CLOUDAP_E_CALLER_MISMATCH ((NTSTATUS)0xC004855BL)
 
 //
 // Map a WIN32 error value into an NTSTATUS

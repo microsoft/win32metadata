@@ -1527,11 +1527,6 @@ interface IMFDXGIBuffer :  IUnknown
         );
 };
 
-/// <summary>
-///     The IMFMediaBufferInternal is used by MF's circular sample allocator to set the parent sample on the buffer. This is needed for properly determining when a
-///     sample can be returned to the allocator (since the application can take reference to the buffers and release the sample, we need to avoid returning the sample
-///     to the allocator while there are external references to the buffer.
-/// </summary>
 [
     object,
         uuid(B25D03FB-D148-45EF-BFED-F778B7566C07),

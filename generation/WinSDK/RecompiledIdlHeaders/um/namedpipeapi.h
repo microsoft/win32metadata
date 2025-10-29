@@ -179,6 +179,7 @@ GetNamedPipeHandleStateW(
     _Out_writes_opt_(nMaxUserNameSize) LPWSTR lpUserName,
     _In_ DWORD nMaxUserNameSize
     );
+
 #ifdef UNICODE
 #define GetNamedPipeHandleState  GetNamedPipeHandleStateW
 #endif

@@ -152,6 +152,40 @@
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    interface IPrintSupportAppInfo;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportAppInfo
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    interface IPrintSupportAppInfoStatics;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportAppInfoStatics
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -168,6 +202,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportCommunicationErrorDetectedEventArgs
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    interface IPrintSupportEnterpriseManagementUIEventArgs;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportEnterpriseManagementUIEventArgs
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportExtensionSession_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportExtensionSession_FWD_DEFINED__
@@ -424,6 +475,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    interface IPrintSupportPrintTicketValidationRequestedEventArgs2;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2 ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportPrintTicketValidationRequestedEventArgs2
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrinterSelectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrinterSelectedEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -627,6 +695,31 @@ typedef IIterable<ABI::Windows::Graphics::Printing::PrintSupport::PrintSupportPr
 #endif /* DEF___FIIterable_1_Windows__CGraphics__CPrinting__CPrintSupport__CPrintSupportPrintTicketElement_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+
+#ifndef DEF___FIReference_1_boolean_USE
+#define DEF___FIReference_1_boolean_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("3c00fd60-2950-5939-a21a-2d12c5a01b8a"))
+IReference<bool> : IReference_impl<ABI::Windows::Foundation::Internal::AggregateType<bool, boolean>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IReference`1<Boolean>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IReference<bool> __FIReference_1_boolean_t;
+#define __FIReference_1_boolean ABI::Windows::Foundation::__FIReference_1_boolean_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIReference_1_boolean_USE */
+
 
 namespace ABI {
     namespace Windows {
@@ -930,6 +1023,19 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CFoundation_CIDeferral_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            interface IPropertyValue;
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CIPropertyValue ABI::Windows::Foundation::IPropertyValue
+
+#endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+
 namespace ABI {
     namespace Windows {
         namespace Foundation {
@@ -1019,6 +1125,18 @@ namespace ABI {
         namespace Graphics {
             namespace Printing {
                 namespace PrintSupport {
+                    typedef enum PrintSupportAppContracts : unsigned int PrintSupportAppContracts;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
                     typedef enum SettingsLaunchKind : int SettingsLaunchKind;
                 } /* PrintSupport */
             } /* Printing */
@@ -1044,6 +1162,18 @@ namespace ABI {
             namespace Printing {
                 namespace PrintSupport {
                     typedef enum XpsImageQuality : int XpsImageQuality;
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    class PrintSupportAppInfo;
                 } /* PrintSupport */
             } /* Printing */
         } /* Graphics */
@@ -1181,6 +1311,42 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Graphics.Printing.PrintSupport.PrintSupportAppContracts
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    enum PrintSupportAppContracts : unsigned int
+                    {
+                        PrintSupportAppContracts_None = 0,
+                        PrintSupportAppContracts_JobBackgroundSession = 0x1,
+                        PrintSupportAppContracts_SettingsUI = 0x2,
+                        PrintSupportAppContracts_Extension = 0x4,
+                        PrintSupportAppContracts_JobUI = 0x8,
+                        PrintSupportAppContracts_VirtualPrinterBackgroundSession = 0x10,
+                        PrintSupportAppContracts_EnterpriseManagementUI = 0x20,
+                    };
+
+                    DEFINE_ENUM_FLAG_OPERATORS(PrintSupportAppContracts)
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Struct Windows.Graphics.Printing.PrintSupport.SettingsLaunchKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
@@ -1259,6 +1425,99 @@ namespace ABI {
 
 /*
  *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportAppInfo[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    MIDL_INTERFACE("913cd9e0-cb44-5ae4-b984-f6e80e872320")
+                    IPrintSupportAppInfo : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_AppInfo(
+                            ABI::Windows::ApplicationModel::IAppInfo** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_SupportedContracts(
+                            ABI::Windows::Graphics::Printing::PrintSupport::PrintSupportAppContracts* value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IPrintSupportAppInfo = __uuidof(IPrintSupportAppInfo);
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportAppInfoStatics[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    MIDL_INTERFACE("3246a41d-2757-544d-aafa-b38461896270")
+                    IPrintSupportAppInfoStatics : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE GetPrintJobShowsUI(
+                            HSTRING printerName,
+                            ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket* printTicket,
+                            __FIReference_1_boolean** result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE FromPrinterName(
+                            HSTRING printerName,
+                            ABI::Windows::Graphics::Printing::PrintSupport::IPrintSupportAppInfo** result
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IPrintSupportAppInfoStatics = __uuidof(IPrintSupportAppInfoStatics);
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportCommunicationErrorDetectedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 17.0
@@ -1303,6 +1562,48 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportEnterpriseManagementUIEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    MIDL_INTERFACE("6b1c2850-4bf7-5894-89fa-e89d9ea4eb2e")
+                    IPrintSupportEnterpriseManagementUIEventArgs : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_Printer(
+                            ABI::Windows::Devices::Printers::IIppPrintDevice** value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IPrintSupportEnterpriseManagementUIEventArgs = __uuidof(IPrintSupportEnterpriseManagementUIEventArgs);
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -1997,6 +2298,48 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 
 /*
  *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketValidationRequestedEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportPrintTicketValidationRequestedEventArgs2[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintSupport {
+                    MIDL_INTERFACE("39749075-d02d-5fd1-9c4b-46bb8db7316b")
+                    IPrintSupportPrintTicketValidationRequestedEventArgs2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE SetPrintJobShowsUI(
+                            boolean showsUI
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IPrintSupportPrintTicketValidationRequestedEventArgs2 = __uuidof(IPrintSupportPrintTicketValidationRequestedEventArgs2);
+                } /* PrintSupport */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrinterSelectedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -2226,6 +2569,34 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 
 /*
  *
+ * Class Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo_DEFINED
+#define RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.Graphics.Printing.PrintSupport.PrintSupportCommunicationErrorDetectedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 17.0
@@ -2242,6 +2613,29 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportCommunicationErrorDetectedEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportCommunicationErrorDetectedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Class Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -2418,6 +2812,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs ** Default Interface **
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2510,11 +2905,29 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs;
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportExtensionSession_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportExtensionSession_FWD_DEFINED__
@@ -2605,6 +3018,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupp
 typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs;
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2 __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrinterSelectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrinterSelectedEventArgs_FWD_DEFINED__
@@ -2926,6 +3345,68 @@ interface __FIIterable_1_Windows__CGraphics__CPrinting__CPrintSupport__CPrintSup
 #endif // ____FIIterable_1_Windows__CGraphics__CPrinting__CPrintSupport__CPrintSupportPrintTicketElement_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
+#if !defined(____FIReference_1_boolean_INTERFACE_DEFINED__)
+#define ____FIReference_1_boolean_INTERFACE_DEFINED__
+
+typedef interface __FIReference_1_boolean __FIReference_1_boolean;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIReference_1_boolean;
+
+typedef struct __FIReference_1_booleanVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIReference_1_boolean* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIReference_1_boolean* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIReference_1_boolean* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIReference_1_boolean* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIReference_1_boolean* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIReference_1_boolean* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Value)(__FIReference_1_boolean* This,
+        boolean* result);
+
+    END_INTERFACE
+} __FIReference_1_booleanVtbl;
+
+interface __FIReference_1_boolean
+{
+    CONST_VTBL struct __FIReference_1_booleanVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIReference_1_boolean_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIReference_1_boolean_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIReference_1_boolean_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIReference_1_boolean_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIReference_1_boolean_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIReference_1_boolean_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIReference_1_boolean_get_Value(This, result) \
+    ((This)->lpVtbl->get_Value(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIReference_1_boolean_INTERFACE_DEFINED__
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
 #if !defined(____FITypedEventHandler_2_Windows__CGraphics__CPrinting__CPrintSupport__CPrintSupportExtensionSession_Windows__CGraphics__CPrinting__CPrintSupport__CPrintSupportCommunicationErrorDetectedEventArgs_INTERFACE_DEFINED__)
@@ -3166,6 +3647,12 @@ typedef interface __x_ABI_CWindows_CFoundation_CIDeferral __x_ABI_CWindows_CFoun
 
 #endif // ____x_ABI_CWindows_CFoundation_CIDeferral_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CIPropertyValue __x_ABI_CWindows_CFoundation_CIPropertyValue;
+
+#endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+
 typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
@@ -3185,6 +3672,8 @@ typedef struct __x_ABI_CWindows_CUI_CWindowId __x_ABI_CWindows_CUI_CWindowId;
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIppCommunicationErrorKind __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIppCommunicationErrorKind;
 
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIppPrinterCommunicationKind __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIppPrinterCommunicationKind;
+
+typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CPrintSupportAppContracts __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CPrintSupportAppContracts;
 
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CSettingsLaunchKind __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CSettingsLaunchKind;
 
@@ -3228,6 +3717,30 @@ enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIppPrinterCommunication
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Struct Windows.Graphics.Printing.PrintSupport.PrintSupportAppContracts
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CPrintSupportAppContracts
+{
+    PrintSupportAppContracts_None = 0,
+    PrintSupportAppContracts_JobBackgroundSession = 0x1,
+    PrintSupportAppContracts_SettingsUI = 0x2,
+    PrintSupportAppContracts_Extension = 0x4,
+    PrintSupportAppContracts_JobUI = 0x8,
+    PrintSupportAppContracts_VirtualPrinterBackgroundSession = 0x10,
+    PrintSupportAppContracts_EnterpriseManagementUI = 0x20,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3276,6 +3789,165 @@ enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CXpsImageQuality
     XpsImageQuality_Png = 3,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportAppInfo[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AppInfo)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        __x_ABI_CWindows_CApplicationModel_CIAppInfo** value);
+    HRESULT (STDMETHODCALLTYPE* get_SupportedContracts)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo* This,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CPrintSupportAppContracts* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoVtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_get_AppInfo(This, value) \
+    ((This)->lpVtbl->get_AppInfo(This, value))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_get_SupportedContracts(This, value) \
+    ((This)->lpVtbl->get_SupportedContracts(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportAppInfoStatics[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetPrintJobShowsUI)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        HSTRING printerName,
+        __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket* printTicket,
+        __FIReference_1_boolean** result);
+    HRESULT (STDMETHODCALLTYPE* FromPrinterName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics* This,
+        HSTRING printerName,
+        __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfo** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStaticsVtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_GetPrintJobShowsUI(This, printerName, printTicket, result) \
+    ((This)->lpVtbl->GetPrintJobShowsUI(This, printerName, printTicket, result))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_FromPrinterName(This, printerName, result) \
+    ((This)->lpVtbl->FromPrinterName(This, printerName, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportAppInfoStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3360,6 +4032,79 @@ interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommu
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportCommunicationErrorDetectedEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportEnterpriseManagementUIEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Printer)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs* This,
+        __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgsVtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_get_Printer(This, value) \
+    ((This)->lpVtbl->get_Printer(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportEnterpriseManagementUIEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4598,6 +5343,79 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 
 /*
  *
+ * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketValidationRequestedEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintSupport_IPrintSupportPrintTicketValidationRequestedEventArgs2[] = L"Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* SetPrintJobShowsUI)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2* This,
+        boolean showsUI);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2Vtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_SetPrintJobShowsUI(This, showsUI) \
+    ((This)->lpVtbl->SetPrintJobShowsUI(This, showsUI))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrintSupportPrintTicketValidationRequestedEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrinterSelectedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -5008,6 +5826,34 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 
 /*
  *
+ * Class Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo_DEFINED
+#define RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportAppInfo[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.Graphics.Printing.PrintSupport.PrintSupportCommunicationErrorDetectedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 17.0
@@ -5024,6 +5870,29 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintSupport_CIPrin
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportCommunicationErrorDetectedEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportCommunicationErrorDetectedEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Class Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Graphics_Printing_PrintSupport_PrintSupportEnterpriseManagementUIEventArgs[] = L"Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -5200,6 +6069,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs ** Default Interface **
+ *    Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

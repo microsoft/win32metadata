@@ -165,7 +165,7 @@ foreach ($deprecatedHeader in $deprecatedHeaders) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
         
-        git restore $fullPath
+        git checkout origin/main $fullPath
     }
 }
 
@@ -180,7 +180,7 @@ Write-Host "Restoring WinHv headers to older versions..."
 foreach ($winHvHeader in $winHvHeadersToRestore) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
     Write-Host "Restoring WinHv header: $winHvHeader"
-    git restore $fullPath
+    git checkout origin/main $fullPath
 }
 
 $ErrorActionPreference = "Stop"

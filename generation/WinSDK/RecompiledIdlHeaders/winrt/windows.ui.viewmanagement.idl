@@ -220,6 +220,8 @@ namespace Windows
 
             interface IUIViewSettings;
 
+            interface IUIViewSettingsPreferredInteractionMode;
+
             interface IUIViewSettingsStatics;
 
             interface IViewModePreferences;
@@ -295,6 +297,8 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.UISettings*, Windows.UI.ViewManagement.UISettingsAutoHideScrollBarsChangedEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.UISettings*, Windows.UI.ViewManagement.UISettingsMessageDurationChangedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.UIViewSettings*, IInspectable*>;
             }
         }
     }
@@ -963,12 +967,22 @@ namespace Windows
                 [propget] HRESULT UserInteractionMode([out] [retval] Windows.UI.ViewManagement.UserInteractionMode* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.ViewManagement.UIViewSettings)]
+            [uuid(426DE261-82EC-5F61-BAD4-19B2D0D3CF35)]
+            interface IUIViewSettingsPreferredInteractionMode : IInspectable
+            {
+                HRESULT GetPreferredInteractionMode([in] UINT32 __supportedModesSize, [in] [size_is(__supportedModesSize)] Windows.UI.ViewManagement.UserInteractionMode* supportedModes, [out] [retval] Windows.UI.ViewManagement.UserInteractionMode* result);
+                [eventadd] HRESULT PreferredInteractionModeChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.ViewManagement.UIViewSettings*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PreferredInteractionModeChanged([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.UI.ViewManagement.UIViewSettings)]
             [uuid(595C97A5-F8F6-41CF-B0FB-AACDB81FD5F6)]
             interface IUIViewSettingsStatics : IInspectable
             {
-                HRESULT GetForCurrentView([out] [retval] Windows.UI.ViewManagement.UIViewSettings** current);
+                HRESULT GetForCurrentView([out] [retval] Windows.UI.ViewManagement.UIViewSettings** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1144,9 +1158,11 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.UI.ViewManagement.IUIViewSettingsStatics, Windows.Foundation.UniversalApiContract, 1.0)]
+            [threading(both)]
             runtimeclass UIViewSettings
             {
                 [default] interface Windows.UI.ViewManagement.IUIViewSettings;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]

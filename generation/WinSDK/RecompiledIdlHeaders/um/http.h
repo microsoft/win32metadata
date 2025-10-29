@@ -1699,6 +1699,23 @@ typedef struct _HTTP_REQUEST_TIMING_INFO
 
 } HTTP_REQUEST_TIMING_INFO, *PHTTP_REQUEST_TIMING_INFO;
 
+typedef struct _HTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO
+{
+    USHORT TransportIdleConnectionTimeout;
+
+} HTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO, *PHTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO;
+
+typedef struct _HTTP_REQUEST_DSCP_INFO
+{
+    BYTE DscpTag;
+
+} HTTP_REQUEST_DSCP_INFO, *PHTTP_REQUEST_DSCP_INFO;
+
+typedef struct _HTTP_REQUEST_INITIAL_PACKET_TTL_INFO
+{
+    BYTE InitialPacketTtl;
+} HTTP_REQUEST_INITIAL_PACKET_TTL_INFO, *PHTTP_REQUEST_INITIAL_PACKET_TTL_INFO;
+
 #if _WIN32_WINNT >= 0x0600
 
 //
@@ -1718,7 +1735,11 @@ typedef enum _HTTP_REQUEST_INFO_TYPE
     HttpRequestInfoTypeQuicStats,
     HttpRequestInfoTypeTcpInfoV1,
     HttpRequestInfoTypeQuicStatsV2,
-    HttpRequestInfoTypeTcpInfoV2
+    HttpRequestInfoTypeTcpInfoV2,
+    HttpRequestInfoTypeTransportIdleConnectionTimeout,
+    HttpRequestInfoTypeDscpTag,
+    HttpRequestInfoTypeInitialPacketTtl,
+
 } HTTP_REQUEST_INFO_TYPE, *PHTTP_REQUEST_INFO_TYPE;
 
 typedef struct _HTTP_REQUEST_INFO
@@ -2288,6 +2309,17 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_CCS_KEY
 #endif
 
 //
+// Define various certificate check mode flags used by DefaultCertCheckMode.
+//
+
+#define HTTP_CERT_CHECK_MODE_NO_REVOCATION            0x00001
+#define HTTP_CERT_CHECK_MODE_CACHED_REVOCATION        0x00002
+#define HTTP_CERT_CHECK_MODE_USE_REVOCATION_FRESHNESS 0x00004
+#define HTTP_CERT_CHECK_MODE_CACHED_URLS              0x00008
+#define HTTP_CERT_CHECK_MODE_NO_AIA                   0x00010
+#define HTTP_CERT_CHECK_MODE_NO_USAGE_CHECK           0x10000
+
+//
 // This defines a record for the SSL config store.
 //
 
@@ -2311,6 +2343,8 @@ typedef struct _HTTP_SERVICE_CONFIG_SSL_PARAM
     //  0x1     - Client certificate will not be verified for revocation
     //  0x2     - Only cached certificate revocation will be used.
     //  0x4     - Enable use of the DefaultRevocationFreshnessTime setting
+    //  0x8     - Disable network URL retrieval.
+    //  0x10    - Disable AIA checks.
     //  0x10000 - No usage check.
 
     DWORD DefaultCertCheckMode;
@@ -2762,7 +2796,10 @@ typedef enum _HTTP_REQUEST_PROPERTY
     HttpRequestPropertyQuicStatsV2,
     HttpRequestPropertyQuicStreamStats,
     HttpRequestPropertyTcpInfoV2,
-    HttpRequestPropertyTlsClientHello
+    HttpRequestPropertyTlsClientHello,
+    HttpRequestPropertyTransportIdleConnectionTimeout,
+    HttpRequestPropertyDscpTag,
+    HttpRequestPropertyTlsCipherInfo,
 } HTTP_REQUEST_PROPERTY, *PHTTP_REQUEST_PROPERTY;
 
 typedef struct _HTTP_QUERY_REQUEST_QUALIFIER_TCP
@@ -2899,19 +2936,24 @@ typedef struct _HTTP_QUIC_STREAM_REQUEST_STATS
 
 typedef enum _HTTP_FEATURE_ID
 {
-    HttpFeatureUnknown                         = 0,
-    HttpFeatureResponseTrailers                = 1,
-    HttpFeatureApiTimings                      = 2,
-    HttpFeatureDelegateEx                      = 3,
-    HttpFeatureHttp3                           = 4,
-    HttpFeatureTlsSessionTickets               = 5,
-    HttpFeatureDisableTlsSessionId             = 6,
-    HttpFeatureTlsDualCerts                    = 7,
-    HttpFeatureAutomaticChunkedEncoding        = 8,
-    HttpFeatureDedicatedReqQueueDelegationType = 9,
-    HttpFeatureFastForwardResponse             = 10,
-    HttpFeatureCacheTlsClientHello             = 11,
-    HttpFeatureLast                            = 12,
+    HttpFeatureUnknown                              = 0,
+    HttpFeatureResponseTrailers                     = 1,
+    HttpFeatureApiTimings                           = 2,
+    HttpFeatureDelegateEx                           = 3,
+    HttpFeatureHttp3                                = 4,
+    HttpFeatureTlsSessionTickets                    = 5,
+    HttpFeatureDisableTlsSessionId                  = 6,
+    HttpFeatureTlsDualCerts                         = 7,
+    HttpFeatureAutomaticChunkedEncoding             = 8,
+    HttpFeatureDedicatedReqQueueDelegationType      = 9,
+    HttpFeatureFastForwardResponse                  = 10,
+    HttpFeatureCacheTlsClientHello                  = 11,
+    HttpFeatureIdleConnectionTimeoutRequestProperty = 12,
+    HttpFeatureDisableAiaFlag                       = 13,
+    HttpFeatureDscp                                 = 14,
+    HttpFeatureQueryCipherInfo                      = 15,
+    HttpFeatureQueryInitialPacketTtl                = 16,
+    HttpFeatureLast                                 = 17,
 
 
     HttpFeaturemax              = 0xFFFFFFFF,
@@ -3034,6 +3076,21 @@ HttpSetRequestProperty(
     _In_reads_bytes_opt_(InputPropertySize) PVOID Input,
     _In_ ULONG InputPropertySize,
     _In_ LPOVERLAPPED Overlapped
+    );
+
+HTTPAPI_LINKAGE
+ULONG
+WINAPI
+HttpQueryRequestProperty(
+    _In_ HANDLE RequestQueueHandle,
+    _In_ HTTP_OPAQUE_ID Id,
+    _In_ HTTP_REQUEST_PROPERTY PropertyId,
+    _In_reads_bytes_opt_(QualifierSize) const VOID *Qualifier,
+    _In_ ULONG QualifierSize,
+    _Out_writes_bytes_to_opt_(OutputBufferSize, *BytesReturned) PVOID Output,
+    _In_ ULONG OutputBufferSize,
+    _Out_opt_ PULONG BytesReturned,
+    _In_opt_ LPOVERLAPPED Overlapped
     );
 
 HTTPAPI_LINKAGE

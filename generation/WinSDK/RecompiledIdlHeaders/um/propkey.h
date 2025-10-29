@@ -2957,6 +2957,14 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderFileChecksum, 0xB2F9B9D6, 0xFEC4, 0x4DD5,
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileCreatedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 10);
 #define INIT_PKEY_StorageProviderFileCreatedBy { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 10 }
 
+//  Name:     System.StorageProviderFileDateShared -- PKEY_StorageProviderFileDateShared
+//  Type:     DateTime -- VT_FILETIME  (For variants: VT_DATE)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 14
+//
+//  The most recent date and time the file or folder was shared by any user, specified by the storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFileDateShared, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 14);
+#define INIT_PKEY_StorageProviderFileDateShared { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 14 }
+
 //  Name:     System.StorageProviderFileFlags -- PKEY_StorageProviderFileFlags
 //  Type:     UInt32 -- VT_UI4
 //  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 8
@@ -2989,6 +2997,16 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderFileIdentifier, 0xB2F9B9D6, 0xFEC4, 0x4DD
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileModifiedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 11);
 #define INIT_PKEY_StorageProviderFileModifiedBy { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 11 }
 
+//  Name:     System.StorageProviderFileRemoteLocation -- PKEY_StorageProviderFileRemoteLocation
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 16
+//  
+//  The user-friendly display name of the remote location where the file or folder is stored, specified by the storage provider.
+//  It should not represent a full path to the item, rather a concise name of where the item is stored remotely.
+//  For example, "John Doe's Contoso Drive".
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFileRemoteLocation, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 16);
+#define INIT_PKEY_StorageProviderFileRemoteLocation { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 16 }
+
 //  Name:     System.StorageProviderFileRemoteUri -- PKEY_StorageProviderFileRemoteUri
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
 //  FormatID: {FCEFF153-E839-4CF3-A9E7-EA22832094B8}, 112
@@ -2996,6 +3014,14 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderFileModifiedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD
 //  The storage provider's remote Uri for this file.
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileRemoteUri, 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8, 112);
 #define INIT_PKEY_StorageProviderFileRemoteUri { { 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8 }, 112 }
+
+//  Name:     System.StorageProviderFileSharedBy -- PKEY_StorageProviderFileSharedBy
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 15
+//
+//  The display name of the user who last shared the file or folder, specified by the storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFileSharedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 15);
+#define INIT_PKEY_StorageProviderFileSharedBy { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 15 }
 
 //  Name:     System.StorageProviderFileVersion -- PKEY_StorageProviderFileVersion
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -3012,6 +3038,15 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderFileVersion, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 
 //  The storage provider computed file version waterline for this file. This value is used to detect if a file has changed.
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileVersionWaterline, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 6);
 #define INIT_PKEY_StorageProviderFileVersionWaterline { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 6 }
+
+//  Name:     System.StorageProviderFullyQualifiedId -- PKEY_StorageProviderFullyQualifiedId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {FCEFF153-E839-4CF3-A9E7-EA22832094B8}, 119
+//  
+//  This property represents the entire fully-qualified provider identifier
+//  "[Storage Provider ID]![Windows SID]![Account ID]".
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFullyQualifiedId, 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8, 119);
+#define INIT_PKEY_StorageProviderFullyQualifiedId { { 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8 }, 119 }
 
 //  Name:     System.StorageProviderId -- PKEY_StorageProviderId
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -3064,6 +3099,14 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderSharingStatus, 0xFCEFF153, 0xE839, 0x4CF3
 //  FormatID: {FCEFF153-E839-4CF3-A9E7-EA22832094B8}, 110
 DEFINE_PROPERTYKEY(PKEY_StorageProviderStatus, 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8, 110);
 #define INIT_PKEY_StorageProviderStatus { { 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8 }, 110 }
+
+//  Name:     System.StorageProviderUserId -- PKEY_StorageProviderUserId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 13
+//
+//  The unique identifier for the user who is authenticated with this storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderUserId, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 13);
+#define INIT_PKEY_StorageProviderUserId { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 13 }
 
 //  Name:     System.Subject -- PKEY_Subject
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -8063,6 +8106,14 @@ DEFINE_PROPERTYKEY(PKEY_RecordedTV_StationName, 0x1B5439E7, 0xEBA1, 0x4AF8, 0xBD
 DEFINE_PROPERTYKEY(PKEY_LocationEmptyString, 0x62D2D9AB, 0x8B64, 0x498D, 0xB8, 0x65, 0x40, 0x2D, 0x47, 0x96, 0xF8, 0x65, 3);
 #define INIT_PKEY_LocationEmptyString { { 0x62D2D9AB, 0x8B64, 0x498D, 0xB8, 0x65, 0x40, 0x2D, 0x47, 0x96, 0xF8, 0x65 }, 3 }
 
+//  Name:     System.Search.AutoCategory -- PKEY_Search_AutoCategory
+//  Type:     Multivalue String -- VT_VECTOR | VT_LPWSTR  (For variants: VT_ARRAY | VT_BSTR)
+//  FormatID: (FMTID_Storage) {B725F130-47EF-101A-A5F1-02608C9EEBAC}, 31
+//
+//  This is a multi-valued property to store categories auto generated by a AI Model.
+DEFINE_PROPERTYKEY(PKEY_Search_AutoCategory, 0xB725F130, 0x47EF, 0x101A, 0xA5, 0xF1, 0x02, 0x60, 0x8C, 0x9E, 0xEB, 0xAC, 31);
+#define INIT_PKEY_Search_AutoCategory { { 0xB725F130, 0x47EF, 0x101A, 0xA5, 0xF1, 0x02, 0x60, 0x8C, 0x9E, 0xEB, 0xAC }, 31 }
+
 //  Name:     System.Search.AutoSummary -- PKEY_Search_AutoSummary
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
 //  FormatID: {560C36C0-503A-11CF-BAA1-00004C752A9A}, 2
@@ -8147,6 +8198,23 @@ DEFINE_PROPERTYKEY(PKEY_Search_MatchKind, 0x49691C90, 0x7E17, 0x101A, 0xA9, 0x1C
 // Possible discrete values for PKEY_Search_MatchKind are:
 #define MATCH_KIND_LEXICAL                  1l
 #define MATCH_KIND_SEMANTIC                 2l
+
+//  Name:     System.Search.MatchTags -- PKEY_Search_MatchTags
+//  Type:     Multivalue String -- VT_VECTOR | VT_LPWSTR  (For variants: VT_ARRAY | VT_BSTR)
+//  FormatID: (FMTID_Query) {49691C90-7E17-101A-A91C-08002B2ECDA9}, 30
+//
+//  This multi-valued string indicates the type of result matched for the query results.
+DEFINE_PROPERTYKEY(PKEY_Search_MatchTags, 0x49691C90, 0x7E17, 0x101A, 0xA9, 0x1C, 0x08, 0x00, 0x2B, 0x2E, 0xCD, 0xA9, 30);
+#define INIT_PKEY_Search_MatchTags { { 0x49691C90, 0x7E17, 0x101A, 0xA9, 0x1C, 0x08, 0x00, 0x2B, 0x2E, 0xCD, 0xA9 }, 30 }
+
+//  Name:     System.Search.OcrContent -- PKEY_Search_OcrContent
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: (FMTID_Storage) {B725F130-47EF-101A-A5F1-02608C9EEBAC}, 28
+//  
+//  The OCR contents of the Images. This property is for query restrictions only; it cannot be retrieved in a 
+//  query result.
+DEFINE_PROPERTYKEY(PKEY_Search_OcrContent, 0xB725F130, 0x47EF, 0x101A, 0xA5, 0xF1, 0x02, 0x60, 0x8C, 0x9E, 0xEB, 0xAC, 28);
+#define INIT_PKEY_Search_OcrContent { { 0xB725F130, 0x47EF, 0x101A, 0xA5, 0xF1, 0x02, 0x60, 0x8C, 0x9E, 0xEB, 0xAC }, 28 }
 
 //  Name:     System.Search.QueryFocusedSummary -- PKEY_Search_QueryFocusedSummary
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -8256,11 +8324,32 @@ DEFINE_PROPERTYKEY(PKEY_Supplemental_Tag, 0x0C73B141, 0x39D6, 0x4653, 0xA6, 0x83
 //-----------------------------------------------------------------------------
 // Shell properties
 
+//  Name:     System.ActivityDate -- PKEY_ActivityDate
+//  Type:     DateTime -- VT_FILETIME  (For variants: VT_DATE)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 23
+//  
+//  The date and time of when the activity described in System.ActivityInfo took place for this item.
+//  If System.ActivityInfo is VT_EMPTY, then this property should be too.
+DEFINE_PROPERTYKEY(PKEY_ActivityDate, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 23);
+#define INIT_PKEY_ActivityDate { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 23 }
+
+//  Name:     System.ActivityIcon -- PKEY_ActivityIcon
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 24
+//  
+//  The string corresponding to a glyph in the Segoe Fluent Icons font that represents the activity described in System.ActivityInfo.
+//  For example, "\xE70F" for a file that was recently edited, or "\xE716" for a file that was recently shared.
+//  If System.ActivityInfo is VT_EMPTY, then this property should be too.
+DEFINE_PROPERTYKEY(PKEY_ActivityIcon, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 24);
+#define INIT_PKEY_ActivityIcon { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 24 }
+
 //  Name:     System.ActivityInfo -- PKEY_ActivityInfo
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
 //  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 17
-//
-//  What is the activity that made the graph item show. For example, recently used or shared
+//  
+//  A user-friendly description of activity that took place on this file or folder.
+//  This can be used to provide context as to why an item has been recommended to the user, or to describe a recent action taken on the item.
+//  For example, "You edited this" for a file the user recently edited, or "John Doe shared this with you" for a file that was recently shared.
 DEFINE_PROPERTYKEY(PKEY_ActivityInfo, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 17);
 #define INIT_PKEY_ActivityInfo { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 17 }
 
@@ -8301,6 +8390,30 @@ DEFINE_PROPERTYKEY(PKEY_Home_IsPinned, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0
 //  Friendly name used for the folder path when displayed on File Explorer Home"
 DEFINE_PROPERTYKEY(PKEY_Home_ItemFolderPathDisplay, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 6);
 #define INIT_PKEY_Home_ItemFolderPathDisplay { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 6 }
+
+//  Name:     System.Home.RecommendationActivityDate -- PKEY_Home_RecommendationActivityDate
+//  Type:     DateTime -- VT_FILETIME  (For variants: VT_DATE)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 22
+//
+//  A timestamp representative of when the relevant activity took place for a given recommendation
+DEFINE_PROPERTYKEY(PKEY_Home_RecommendationActivityDate, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 22);
+#define INIT_PKEY_Home_RecommendationActivityDate { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 22 }
+
+//  Name:     System.Home.RecommendationProviderSource -- PKEY_Home_RecommendationProviderSource
+//  Type:     UInt32 -- VT_UI4
+//  FormatID: {5CA9B1CB-C69F-404B-ABC6-FD336793A6A7}, 22
+//
+//  The provider source property for items in the recommended section on FE home
+DEFINE_PROPERTYKEY(PKEY_Home_RecommendationProviderSource, 0x5CA9B1CB, 0xC69F, 0x404B, 0xAB, 0xC6, 0xFD, 0x33, 0x67, 0x93, 0xA6, 0xA7, 22);
+#define INIT_PKEY_Home_RecommendationProviderSource { { 0x5CA9B1CB, 0xC69F, 0x404B, 0xAB, 0xC6, 0xFD, 0x33, 0x67, 0x93, 0xA6, 0xA7 }, 22 }
+
+//  Name:     System.Home.RecommendationReasonIcon -- PKEY_Home_RecommendationReasonIcon
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 21
+//
+//  The string corresponding to a glyph for the recommended section in FE home
+DEFINE_PROPERTYKEY(PKEY_Home_RecommendationReasonIcon, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 21);
+#define INIT_PKEY_Home_RecommendationReasonIcon { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 21 }
 
 //  Name:     System.Home.Recommended -- PKEY_Home_Recommended
 //  Type:     Boolean -- VT_BOOL
@@ -8346,6 +8459,14 @@ DEFINE_PROPERTYKEY(PKEY_Link_TargetUrl, 0x5CBF2787, 0x48CF, 0x4208, 0xB9, 0x0E, 
 //  The CLSID of the name space extension for an item, the object that implements IShellFolder for this item
 DEFINE_PROPERTYKEY(PKEY_NamespaceCLSID, 0x28636AA6, 0x953D, 0x11D2, 0xB5, 0xD6, 0x00, 0xC0, 0x4F, 0xD9, 0x18, 0xD0, 6);
 #define INIT_PKEY_NamespaceCLSID { { 0x28636AA6, 0x953D, 0x11D2, 0xB5, 0xD6, 0x00, 0xC0, 0x4F, 0xD9, 0x18, 0xD0 }, 6 }
+
+//  Name:     System.Shell.CopilotKeyProviderFastPathMessage -- PKEY_Shell_CopilotKeyProviderFastPathMessage
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {38652BCA-4329-4E74-86F9-39CF29345EEA}, 2
+//  
+//  Property for Copilot Key Provider application to opt in to fastpath activation
+DEFINE_PROPERTYKEY(PKEY_Shell_CopilotKeyProviderFastPathMessage, 0x38652BCA, 0x4329, 0x4E74, 0x86, 0xF9, 0x39, 0xCF, 0x29, 0x34, 0x5E, 0xEA, 2);
+#define INIT_PKEY_Shell_CopilotKeyProviderFastPathMessage { { 0x38652BCA, 0x4329, 0x4E74, 0x86, 0xF9, 0x39, 0xCF, 0x29, 0x34, 0x5E, 0xEA }, 2 }
 
 //  Name:     System.Shell.SFGAOFlagsStrings -- PKEY_Shell_SFGAOFlagsStrings
 //  Type:     Multivalue String -- VT_VECTOR | VT_LPWSTR  (For variants: VT_ARRAY | VT_BSTR)

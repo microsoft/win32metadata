@@ -3892,10 +3892,7 @@ namespace ABI {
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 namespace ABI {
     namespace Windows {
@@ -3911,7 +3908,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4020,12 +4016,9 @@ namespace ABI {
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -4082,7 +4075,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4090,12 +4082,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -4123,7 +4112,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4131,12 +4119,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -4193,7 +4178,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4201,12 +4185,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedV
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -4234,7 +4215,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4278,12 +4258,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEve
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.CallAnswerEventArgs
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__
@@ -4310,7 +4287,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4390,12 +4366,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChan
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -4488,7 +4461,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4496,12 +4468,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -4529,7 +4498,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4700,12 +4668,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEve
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -4756,7 +4721,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4764,12 +4728,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -4797,7 +4758,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6769,12 +6729,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoord
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__
@@ -6814,7 +6771,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6858,12 +6814,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoord
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__
@@ -6894,7 +6847,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7069,12 +7021,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipPhoneCall
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__
@@ -7116,15 +7065,12 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
  * Class Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
  *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -7138,14 +7084,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7153,11 +7097,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
@@ -7167,14 +7109,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7240,8 +7180,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -7254,14 +7192,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7345,8 +7281,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -7359,14 +7293,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7444,8 +7376,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **
@@ -7514,8 +7446,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7898,8 +7830,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator ** Default Interface **
@@ -12428,10 +12360,7 @@ enum __x_ABI_CWindows_CApplicationModel_CCalls_CTransportDeviceAudioRoutingStatu
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind
 {
@@ -12439,7 +12368,6 @@ enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipCallControlDeviceKind
     VoipCallControlDeviceKind_Usb = 1,
 };
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12514,12 +12442,9 @@ enum __x_ABI_CWindows_CApplicationModel_CCalls_CVoipPhoneCallState
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -12629,7 +12554,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12637,12 +12561,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -12703,7 +12624,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12711,12 +12631,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAcceptedVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -12826,7 +12743,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallO
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12834,12 +12750,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedV
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -12900,7 +12813,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallO
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIAppInitiatedVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12977,12 +12889,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEve
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.CallAnswerEventArgs
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__
@@ -13042,7 +12951,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13188,12 +13096,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CICallStateChan
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -13363,7 +13268,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13371,12 +13275,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -13437,7 +13338,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIIncomingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13756,12 +13656,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIMuteChangeEve
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__
@@ -13861,7 +13758,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13869,12 +13765,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipP
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__
@@ -13935,7 +13828,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptio
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIOutgoingVoipPhoneCallOptionsFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17496,12 +17388,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoord
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__
@@ -17580,7 +17469,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinator5_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17657,12 +17545,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoord
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipCallCoordinator
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__
@@ -17728,7 +17613,6 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipCallCoordinatorStatics2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18045,12 +17929,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.ApplicationModel.Calls.VoipPhoneCall
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__
@@ -18135,15 +18016,12 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
  * Class Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
  *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -18157,14 +18035,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AcceptedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18172,11 +18048,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
@@ -18186,14 +18060,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_AppInitiatedVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18259,8 +18131,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -18273,14 +18143,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_IncomingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18364,8 +18232,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
@@ -18378,14 +18244,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_OutgoingVoipPhoneCallOptions[] = L"Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION >= 0x50000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18463,8 +18327,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **
@@ -18533,8 +18397,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallHistoryManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -18917,8 +18781,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IVoipCallCoordinator ** Default Interface **

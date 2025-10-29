@@ -170,7 +170,9 @@ namespace Windows
                     [contract(Windows.Foundation.UniversalApiContract, 11.0)]
                     Clipboard   = 5,
                     [contract(Windows.Foundation.UniversalApiContract, 13.0)]
-                    Dictation   = 6
+                    Dictation   = 6,
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                    Gamepad     = 7
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]

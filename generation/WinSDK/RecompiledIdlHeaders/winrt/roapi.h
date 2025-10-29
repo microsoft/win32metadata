@@ -54,7 +54,6 @@ typedef HRESULT (STDAPICALLTYPE * PFNGETACTIVATIONFACTORY)(HSTRING, IActivationF
 
 // forward declarations of the dllexport'd versions
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -63,14 +62,12 @@ RoInitialize(
     );
 
 ROAPI
-
 void
 WINAPI
 RoUninitialize(
     );
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -80,7 +77,6 @@ RoActivateInstance(
     );
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -92,7 +88,6 @@ RoRegisterActivationFactories(
     );
 
 ROAPI
-
 void
 WINAPI
 RoRevokeActivationFactories(
@@ -100,7 +95,6 @@ RoRevokeActivationFactories(
     );
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -114,7 +108,6 @@ typedef interface IApartmentShutdown IApartmentShutdown;
 DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -125,7 +118,6 @@ RoRegisterForApartmentShutdown(
     );
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -134,7 +126,6 @@ RoUnregisterForApartmentShutdown(
     );
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI

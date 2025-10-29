@@ -114,13 +114,21 @@ namespace Windows
 
                 typedef enum IppPrinterCommunicationKind IppPrinterCommunicationKind;
 
+                typedef enum PrintSupportAppContracts PrintSupportAppContracts;
+
                 typedef enum SettingsLaunchKind SettingsLaunchKind;
 
                 typedef enum WorkflowPrintTicketValidationStatus WorkflowPrintTicketValidationStatus;
 
                 typedef enum XpsImageQuality XpsImageQuality;
 
+                interface IPrintSupportAppInfo;
+
+                interface IPrintSupportAppInfoStatics;
+
                 interface IPrintSupportCommunicationErrorDetectedEventArgs;
+
+                interface IPrintSupportEnterpriseManagementUIEventArgs;
 
                 interface IPrintSupportExtensionSession;
 
@@ -152,6 +160,8 @@ namespace Windows
 
                 interface IPrintSupportPrintTicketValidationRequestedEventArgs;
 
+                interface IPrintSupportPrintTicketValidationRequestedEventArgs2;
+
                 interface IPrintSupportPrinterSelectedEventArgs;
 
                 interface IPrintSupportSessionInfo;
@@ -162,7 +172,11 @@ namespace Windows
 
                 interface IPrintSupportSettingsUISession;
 
+                runtimeclass PrintSupportAppInfo;
+
                 runtimeclass PrintSupportCommunicationErrorDetectedEventArgs;
+
+                runtimeclass PrintSupportEnterpriseManagementUIEventArgs;
 
                 runtimeclass PrintSupportExtensionSession;
 
@@ -251,6 +265,20 @@ namespace Windows
                     VirtualPrinter    = 4
                 };
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [experimental]
+                [flags]
+                enum PrintSupportAppContracts
+                {
+                    None                            = 0x0,
+                    JobBackgroundSession            = 0x1,
+                    SettingsUI                      = 0x2,
+                    Extension                       = 0x4,
+                    JobUI                           = 0x8,
+                    VirtualPrinterBackgroundSession = 0x10,
+                    EnterpriseManagementUI          = 0x20
+                };
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 enum SettingsLaunchKind
                 {
@@ -275,6 +303,26 @@ namespace Windows
                     Png                   = 3
                 };
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo)]
+                [experimental]
+                [uuid(913CD9E0-CB44-5AE4-B984-F6E80E872320)]
+                interface IPrintSupportAppInfo : IInspectable
+                {
+                    [propget] HRESULT AppInfo([out] [retval] Windows.ApplicationModel.AppInfo** value);
+                    [propget] HRESULT SupportedContracts([out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportAppContracts* value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo)]
+                [experimental]
+                [uuid(3246A41D-2757-544D-AAFA-B38461896270)]
+                interface IPrintSupportAppInfoStatics : IInspectable
+                {
+                    HRESULT GetPrintJobShowsUI([in] HSTRING printerName, [in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* printTicket, [out] [retval] Windows.Foundation.IReference<boolean>** result);
+                    HRESULT FromPrinterName([in] HSTRING printerName, [out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportAppInfo** result);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 17.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportCommunicationErrorDetectedEventArgs)]
                 [uuid(9C90151E-AD1B-5081-A491-4A2D94244F2D)]
@@ -284,6 +332,15 @@ namespace Windows
                     [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
                     [propget] HRESULT CommunicationConfiguration([out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportIppCommunicationConfiguration** value);
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportEnterpriseManagementUIEventArgs)]
+                [experimental]
+                [uuid(6B1C2850-4BF7-5894-89FA-E89D9EA4EB2E)]
+                interface IPrintSupportEnterpriseManagementUIEventArgs : IInspectable
+                {
+                    [propget] HRESULT Printer([out] [retval] Windows.Devices.Printers.IppPrintDevice** value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -445,6 +502,15 @@ namespace Windows
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketValidationRequestedEventArgs)]
+                [experimental]
+                [uuid(39749075-D02D-5FD1-9C4B-46BB8DB7316B)]
+                interface IPrintSupportPrintTicketValidationRequestedEventArgs2 : IInspectable
+                {
+                    HRESULT SetPrintJobShowsUI([in] boolean showsUI);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrinterSelectedEventArgs)]
                 [uuid(7B1CB7D9-A8A4-5C09-ADB2-66165F817977)]
@@ -498,11 +564,29 @@ namespace Windows
                     [propget] HRESULT SessionInfo([out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportSessionInfo** value);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [experimental]
+                [marshaling_behavior(agile)]
+                [static(Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfoStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+                [threading(both)]
+                runtimeclass PrintSupportAppInfo
+                {
+                    [default] [experimental] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportAppInfo;
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 17.0)]
                 [marshaling_behavior(agile)]
                 runtimeclass PrintSupportCommunicationErrorDetectedEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportCommunicationErrorDetectedEventArgs;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [experimental]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintSupportEnterpriseManagementUIEventArgs
+                {
+                    [default] [experimental] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportEnterpriseManagementUIEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -575,6 +659,7 @@ namespace Windows
                 runtimeclass PrintSupportPrintTicketValidationRequestedEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]

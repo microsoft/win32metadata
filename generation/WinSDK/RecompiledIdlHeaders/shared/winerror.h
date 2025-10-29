@@ -212,6 +212,7 @@
 #define FACILITY_USERMODE_UNIONFS        2341
 #define FACILITY_USERMODE_PRM            2342
 #define FACILITY_USERMODE_WIN_ACCEL      2343
+#define FACILITY_PPF                     2344
 #define FACILITY_PIX                     2748
 
 
@@ -3911,6 +3912,15 @@
 // The operation was aborted because the observed volume identity or current state was not expected.
 //
 #define ERROR_VOLUME_ROLLBACK_DETECTED   521L
+
+//
+// MessageId: ERROR_CLOUD_FILE_HYDRATION_NOT_AVAILABLE
+//
+// MessageText:
+//
+// Cloud file cannot be retrieved from your cloud provider. Try again after responding to your cloud provider's request for action.
+//
+#define ERROR_CLOUD_FILE_HYDRATION_NOT_AVAILABLE 523L
 
 //
 // **** Available SYSTEM error codes ****
@@ -14604,6 +14614,42 @@
 //
 #define ERROR_VSM_DMA_PROTECTION_NOT_IN_USE 4561L
 
+//
+// MessageId: ERROR_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED
+//
+// MessageText:
+//
+// The Virtual Secure Mode (VSM) master encryption key was not provisioned due to an inadequate CI policy.
+//
+#define ERROR_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED 4562L
+
+//
+// MessageId: ERROR_VSMIDK_KEYGEN_FAILURE
+//
+// MessageText:
+//
+// RSA identity key generation failed.
+//
+#define ERROR_VSMIDK_KEYGEN_FAILURE      4563L
+
+//
+// MessageId: ERROR_VSMIDK_EXPORT_FAILURE
+//
+// MessageText:
+//
+// Exporting RSA key components failed.
+//
+#define ERROR_VSMIDK_EXPORT_FAILURE      4564L
+
+//
+// MessageId: ERROR_VSMIDK_MODULUS_MISMATCH
+//
+// MessageText:
+//
+// Exported modulus size did not match expected key size.
+//
+#define ERROR_VSMIDK_MODULUS_MISMATCH    4565L
+
 ///////////////////////////////////////////////////
 //                                               //
 //         Platform Manifest Error Codes         //
@@ -16941,9 +16987,38 @@
 
 ///////////////////////////////////////////////////
 //                                               //
+//             Camera Error codes                //
+//                                               //
+//                 6350 to 6399                  //
+///////////////////////////////////////////////////
+
+#define E_CAMERA_ERROR_MIN HRESULT_FROM_WIN32(6350)
+#define E_CAMERA_ERROR_MAX HRESULT_FROM_WIN32(6399)
+#define IS_CAMERA_ERROR_CODE(xhr)  ((xhr) >= E_CAMERA_ERROR_MIN && (xhr) <= E_CAMERA_ERROR_MAX)
+//
+// MessageId: ERROR_CAMERA_INVALID_CONFIGURATION
+//
+// MessageText:
+//
+// A camera's configuration contains some invalid settings.
+//
+#define ERROR_CAMERA_INVALID_CONFIGURATION 6350L
+
+//
+// MessageId: ERROR_CAMERA_INSUFFICIENT_BANDWIDTH
+//
+// MessageText:
+//
+// A camera interface doesn't have the desired bandwidth for data transfer.
+//
+#define ERROR_CAMERA_INSUFFICIENT_BANDWIDTH 6351L
+
+
+///////////////////////////////////////////////////
+//                                               //
 //                  Available                    //
 //                                               //
-//                 6350 to 6599                  //
+//                 6400 to 6599                  //
 ///////////////////////////////////////////////////
 
 
@@ -28967,6 +29042,22 @@
 
 //////////////////////////////////////////////////
 //                                              //
+//         Start of API Set error codes         //
+//                15380 - 15399                 //
+//                                              //
+//////////////////////////////////////////////////
+
+//
+// MessageId: ERROR_CANNOT_COMPOSE_APISET_EXTENSION
+//
+// MessageText:
+//
+// An API Set schema extension failed to compose.
+//
+#define ERROR_CANNOT_COMPOSE_APISET_EXTENSION 15380L
+
+//////////////////////////////////////////////////
+//                                              //
 //         Start of Run Level error codes       //
 //                15400 - 15500                 //
 //                                              //
@@ -29742,6 +29833,33 @@
 // The deployment operation on this package is blocked because it or a package in the same family is pending removal. Please log off and log on again to finish the deferred package removal and try again.
 //
 #define ERROR_BLOCKED_BY_PENDING_PACKAGE_REMOVAL 15676L
+
+//
+// MessageId: ERROR_PACKAGE_REPOSITORY_ROOT_CORRUPTED
+//
+// MessageText:
+//
+// The package repository root is corrupted.
+//
+#define ERROR_PACKAGE_REPOSITORY_ROOT_CORRUPTED 15677L
+
+//
+// MessageId: ERROR_PACKAGE_MANIFEST_NOT_FOUND
+//
+// MessageText:
+//
+// The package manifest is not found.
+//
+#define ERROR_PACKAGE_MANIFEST_NOT_FOUND 15678L
+
+//
+// MessageId: ERROR_DEPLOYMENT_BLOCKED_BY_REMOVEDEFAULTPACKAGES_POLICY
+//
+// MessageText:
+//
+// The deployment operation on this package is blocked because the package family name is in RemoveDefaultMicrosoftStorePackages policy override.
+//
+#define ERROR_DEPLOYMENT_BLOCKED_BY_REMOVEDEFAULTPACKAGES_POLICY 15679L
 
 //////////////////////////
 //                      //
@@ -36077,6 +36195,24 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // Call Cancellation is disabled
 //
 #define CO_E_CANCEL_DISABLED             _HRESULT_TYPEDEF_(0x80010140L)
+
+//
+// MessageId: CO_E_SERVER_CANNOT_BE_EQUAL_OR_GREATER_PRIVILEGE
+//
+// MessageText:
+//
+// The server was not activated because it cannot support running with privilege equal to the client or greater
+//
+#define CO_E_SERVER_CANNOT_BE_EQUAL_OR_GREATER_PRIVILEGE _HRESULT_TYPEDEF_(0x80010141L)
+
+//
+// MessageId: CO_E_CANNOT_ACTIVATE_CROSS_PACKAGE_IN_SESSION_0
+//
+// MessageText:
+//
+// An Activate As Activator Packaged server class cannot be activated from outside its package in session 0
+//
+#define CO_E_CANNOT_ACTIVATE_CROSS_PACKAGE_IN_SESSION_0 _HRESULT_TYPEDEF_(0x80010142L)
 
 //
 // MessageId: RPC_E_UNEXPECTED
@@ -42593,6 +42729,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define MENROLL_E_CUSTOMSERVERERROR      _HRESULT_TYPEDEF_(0x80180032L)
 
 //
+// MessageId: MENROLL_E_SERVER429
+//
+// MessageText:
+//
+// The server requested that the device try again later.
+//
+#define MENROLL_E_SERVER429              _HRESULT_TYPEDEF_(0x80180033L)
+
+//
 // FACILITY_WER
 //
 //
@@ -47330,6 +47475,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define TBS_E_PROVISIONING_INCOMPLETE    _HRESULT_TYPEDEF_(0x80284016L)
 
 //
+// MessageId: TBS_E_TPM_IN_EXCLUSIVE_MODE
+//
+// MessageText:
+//
+// The caller is trying to request an operation while the TPM driver has an exclusive context open.
+//
+#define TBS_E_TPM_IN_EXCLUSIVE_MODE      _HRESULT_TYPEDEF_(0x80284017L)
+
+//
+// MessageId: TBS_E_TPM_REBOOT_REQUIRED
+//
+// MessageText:
+//
+// The TPM driver was previously in exclusive mode and now requires a reboot to resume normal functionality.
+//
+#define TBS_E_TPM_REBOOT_REQUIRED        _HRESULT_TYPEDEF_(0x80284018L)
+
+//
 // TPM API error codes {0x0100..0x01ff}
 //
 //
@@ -50763,13 +50926,13 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define FVE_E_KEY_ROTATION_NOT_ENABLED   _HRESULT_TYPEDEF_(0x803100DFL)
 
 //
-// MessageId: FVE_E_DEVICE_NOT_JOINED
+// MessageId: FVE_E_DEVICE_NOT_JOINED_AAD
 //
 // MessageText:
 //
 // BitLocker recovery password key rotation could not be performed because the device is neither Azure AD joined nor Hybrid Azure AD joined.
 //
-#define FVE_E_DEVICE_NOT_JOINED          _HRESULT_TYPEDEF_(0x803100E0L)
+#define FVE_E_DEVICE_NOT_JOINED_AAD      _HRESULT_TYPEDEF_(0x803100E0L)
 
 //
 // MessageId: FVE_E_AAD_ENDPOINT_BUSY
@@ -50844,22 +51007,22 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define FVE_E_UPDATE_INVALID_CONFIG      _HRESULT_TYPEDEF_(0x803100E8L)
 
 //
-// MessageId: FVE_E_AAD_SERVER_FAIL_RETRY_AFTER
+// MessageId: FVE_E_AAD_SERVER_FAIL_RETRY_AFTER_AAD
 //
 // MessageText:
 //
 // The AAD request has failed and it has been advised to backoff to prevent throttling. Device will retry soon.
 //
-#define FVE_E_AAD_SERVER_FAIL_RETRY_AFTER _HRESULT_TYPEDEF_(0x803100E9L)
+#define FVE_E_AAD_SERVER_FAIL_RETRY_AFTER_AAD _HRESULT_TYPEDEF_(0x803100E9L)
 
 //
-// MessageId: FVE_E_AAD_SERVER_FAIL_BACKOFF
+// MessageId: FVE_E_AAD_SERVER_FAIL_BACKOFF_AAD
 //
 // MessageText:
 //
 // The AAD request has failed due to server issues and it has been advised to backoff to prevent throttling. Device will retry soon.
 //
-#define FVE_E_AAD_SERVER_FAIL_BACKOFF    _HRESULT_TYPEDEF_(0x803100EAL)
+#define FVE_E_AAD_SERVER_FAIL_BACKOFF_AAD _HRESULT_TYPEDEF_(0x803100EAL)
 
 //
 // MessageId: FVE_E_DATASET_FULL
@@ -51076,6 +51239,168 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // BitLocker prevented an attempt to create a TPM binding for a PCR that contains events extended into the TPM after the BitLocker boot lock event.
 //
 #define FVE_E_PCR_BOOT_LOCK_BOUNDARY     _HRESULT_TYPEDEF_(0xC0310102L)
+
+//
+// MessageId: FVE_E_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED
+//
+// MessageText:
+//
+// The firmware update was not applied because BitLocker TPM bindings do not include the latest measurements. Restart your computer to retry.
+//
+#define FVE_E_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED _HRESULT_TYPEDEF_(0xC0310103L)
+
+//
+// MessageId: FVE_E_EXCEED_MAX_LIMIT_RP_IN_MEID
+//
+// MessageText:
+//
+// We couldn't save your BitLocker recovery information to your Microsoft Entra ID because the maximum number of recovery passwords have already been saved for this device. Please try again later.
+//
+#define FVE_E_EXCEED_MAX_LIMIT_RP_IN_MEID _HRESULT_TYPEDEF_(0xC0310104L)
+
+//
+// MessageId: FVE_E_INVALID_TPM_BINDING_CONFIGURATION
+//
+// MessageText:
+//
+// The BitLocker TPM binding configuration is invalid.
+//
+#define FVE_E_INVALID_TPM_BINDING_CONFIGURATION _HRESULT_TYPEDEF_(0xC0310105L)
+
+//
+// MessageId: FVE_E_TOO_MANY_TPM_BINDINGS
+//
+// MessageText:
+//
+// The BitLocker TPM protector cannot fit all the necessary TPM bindings.
+//
+#define FVE_E_TOO_MANY_TPM_BINDINGS      _HRESULT_TYPEDEF_(0xC0310106L)
+
+//
+// MessageId: FVE_E_TPM_BINDING_ASSOCIATION_FAILURE
+//
+// MessageText:
+//
+// A BitLocker TPM protector binding is badly formatted.
+//
+#define FVE_E_TPM_BINDING_ASSOCIATION_FAILURE _HRESULT_TYPEDEF_(0xC0310107L)
+
+//
+// MessageId: FVE_E_ORPHANED_PCR_DIGEST_DATUM
+//
+// MessageText:
+//
+// The dataset contains binding information without an associated TPM binding. Try re-enabling BitLocker.
+//
+#define FVE_E_ORPHANED_PCR_DIGEST_DATUM  _HRESULT_TYPEDEF_(0xC0310108L)
+
+//
+// MessageId: FVE_E_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED
+//
+// MessageText:
+//
+// BitLocker is prevented from using hardware accelerated encryption.
+//
+#define FVE_E_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED _HRESULT_TYPEDEF_(0xC0310109L)
+
+//
+// MessageId: FVE_E_NO_MATCHING_TPM_BINDINGS
+//
+// MessageText:
+//
+// BitLocker failed to find a TPM binding that can be used to unlock the drive.
+//
+#define FVE_E_NO_MATCHING_TPM_BINDINGS   _HRESULT_TYPEDEF_(0xC031010AL)
+
+//
+// MessageId: FVE_E_TPMPV2_USED_FAILURE
+//
+// MessageText:
+//
+// BitLocker failed to unlock the drive using a V2 TPM protector.
+//
+#define FVE_E_TPMPV2_USED_FAILURE        _HRESULT_TYPEDEF_(0xC031010BL)
+
+//
+// MessageId: FVE_E_NO_TPM_BINDINGS
+//
+// MessageText:
+//
+// BitLocker failed to find any TPM bindings that can be used to unlock the drive.
+//
+#define FVE_E_NO_TPM_BINDINGS            _HRESULT_TYPEDEF_(0xC031010CL)
+
+//
+// MessageId: FVE_E_FW_UPDATE_PCRS_BLOCK
+//
+// MessageText:
+//
+// The firmware update was not applied. To finish installation of the firmware, please suspend BitLocker and restart your device.
+//
+#define FVE_E_FW_UPDATE_PCRS_BLOCK       _HRESULT_TYPEDEF_(0xC031010EL)
+
+//
+// MessageId: FVE_E_FW_UPDATE_PCRS_NOT_EXCLUDED
+//
+// MessageText:
+//
+// The firmware update was not applied because TPM PCRs affected by the firmware installation were not excluded by BitLocker's TPM protector. Restart your computer to retry.
+//
+#define FVE_E_FW_UPDATE_PCRS_NOT_EXCLUDED _HRESULT_TYPEDEF_(0xC031010FL)
+
+//
+// MessageId: FVE_E_DEVICE_NOT_JOINED
+//
+// MessageText:
+//
+// BitLocker recovery password key rotation could not be performed because the device is neither Entra ID joined nor Hybrid Entra ID joined.
+//
+#define FVE_E_DEVICE_NOT_JOINED          _HRESULT_TYPEDEF_(0x80310110L)
+
+//
+// MessageId: FVE_E_AAD_SERVER_FAIL_RETRY_AFTER
+//
+// MessageText:
+//
+// The Entra ID request has failed and it has been advised to backoff to prevent throttling. Device will retry soon.
+//
+#define FVE_E_AAD_SERVER_FAIL_RETRY_AFTER _HRESULT_TYPEDEF_(0x80310111L)
+
+//
+// MessageId: FVE_E_AAD_SERVER_FAIL_BACKOFF
+//
+// MessageText:
+//
+// The Entra ID request has failed due to server issues and it has been advised to backoff to prevent throttling. Device will retry soon.
+//
+#define FVE_E_AAD_SERVER_FAIL_BACKOFF    _HRESULT_TYPEDEF_(0x80310112L)
+
+//
+// MessageId: FVE_E_FAILED_TO_UNWRAP_HW_WRAPPED_KEY
+//
+// MessageText:
+//
+// The hardware crypto key manager failed to unwrap a hardware wrapped key.
+//
+#define FVE_E_FAILED_TO_UNWRAP_HW_WRAPPED_KEY _HRESULT_TYPEDEF_(0xC0310113L)
+
+//
+// MessageId: FVE_E_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT
+//
+// MessageText:
+//
+// FIPS compliance is required, but the hardware crypto accelerator does not report compliance with this standard.
+//
+#define FVE_E_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT _HRESULT_TYPEDEF_(0xC0310114L)
+
+//
+// MessageId: FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT
+//
+// MessageText:
+//
+// FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
+//
+#define FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT _HRESULT_TYPEDEF_(0xC0310115L)
 
 //
 // =======================================================
@@ -60436,6 +60761,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 //
 #define WINCODEC_ERR_INVALIDJPEGSCANINDEX _HRESULT_TYPEDEF_(0x88982F96L)
 
+//
+// MessageId: WINCODEC_ERR_UNSUPPORTEDTONEMAPPING
+//
+// MessageText:
+//
+// The tone mapping mode is not supported.
+//
+#define WINCODEC_ERR_UNSUPPORTEDTONEMAPPING _HRESULT_TYPEDEF_(0x88982F97L)
+
 
 //
 // MIL/DWM
@@ -60801,6 +61135,159 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // Access is denied to the requested bitmap for the specified display id.
 //
 #define MILERR_DISPLAYID_ACCESS_DENIED   _HRESULT_TYPEDEF_(0x889800A1L)
+
+//
+// MessageId: MILERR_DEVICE_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create a graphics device.
+//
+#define MILERR_DEVICE_CREATION_FAILURE   _HRESULT_TYPEDEF_(0x889800B0L)
+
+//
+// MessageId: MILERR_INTEL_DEVICE_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an Intel graphics device.
+//
+#define MILERR_INTEL_DEVICE_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800B1L)
+
+//
+// MessageId: MILERR_AMD_DEVICE_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an AMD graphics device.
+//
+#define MILERR_AMD_DEVICE_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800B2L)
+
+//
+// MessageId: MILERR_NVIDIA_DEVICE_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an nVidia graphics device.
+//
+#define MILERR_NVIDIA_DEVICE_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800B3L)
+
+//
+// MessageId: MILERR_QC_DEVICE_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an Qualcomm graphics device.
+//
+#define MILERR_QC_DEVICE_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800B4L)
+
+//
+// MessageId: MILERR_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create a display swap chain.
+//
+#define MILERR_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C0L)
+
+//
+// MessageId: MILERR_INTEL_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an Intel display swap chain.
+//
+#define MILERR_INTEL_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C1L)
+
+//
+// MessageId: MILERR_AMD_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an AMD display swap chain.
+//
+#define MILERR_AMD_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C2L)
+
+//
+// MessageId: MILERR_NVIDIA_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an nVidia display swap chain.
+//
+#define MILERR_NVIDIA_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C3L)
+
+//
+// MessageId: MILERR_QC_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create a Qualcomm display swap chain.
+//
+#define MILERR_QC_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C4L)
+
+//
+// MessageId: MILERR_IDD_SWAPCHAIN_CREATION_FAILURE
+//
+// MessageText:
+//
+// DWM failed to create an indirect display swap chain.
+//
+#define MILERR_IDD_SWAPCHAIN_CREATION_FAILURE _HRESULT_TYPEDEF_(0x889800C5L)
+
+//
+// MessageId: MILERR_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed during present.
+//
+#define MILERR_PRESENT_FAILURE           _HRESULT_TYPEDEF_(0x889800D0L)
+
+//
+// MessageId: MILERR_INTEL_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed an Intel present.
+//
+#define MILERR_INTEL_PRESENT_FAILURE     _HRESULT_TYPEDEF_(0x889800D1L)
+
+//
+// MessageId: MILERR_AMD_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed an AMD present.
+//
+#define MILERR_AMD_PRESENT_FAILURE       _HRESULT_TYPEDEF_(0x889800D2L)
+
+//
+// MessageId: MILERR_NVIDIA_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed an nVidia present.
+//
+#define MILERR_NVIDIA_PRESENT_FAILURE    _HRESULT_TYPEDEF_(0x889800D3L)
+
+//
+// MessageId: MILERR_QC_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed a Qualcomm present.
+//
+#define MILERR_QC_PRESENT_FAILURE        _HRESULT_TYPEDEF_(0x889800D4L)
+
+//
+// MessageId: MILERR_IDD_PRESENT_FAILURE
+//
+// MessageText:
+//
+// DWM failed an indirect display present.
+//
+#define MILERR_IDD_PRESENT_FAILURE       _HRESULT_TYPEDEF_(0x889800D5L)
 
 // Composition engine errors
 //
@@ -64640,7 +65127,7 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 //
 // SQLITE_IOERR_VNODE
 //
-#define SQLITE_E_IOERR_VNODE             _HRESULT_TYPEDEF_(0x87AF1A02L)
+#define SQLITE_E_IOERR_VNODE             _HRESULT_TYPEDEF_(0x87AF1B0AL)
 
 //
 // MessageId: SQLITE_E_IOERR_AUTH
@@ -64649,7 +65136,61 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 //
 // SQLITE_IOERR_AUTH
 //
-#define SQLITE_E_IOERR_AUTH              _HRESULT_TYPEDEF_(0x87AF1A03L)
+#define SQLITE_E_IOERR_AUTH              _HRESULT_TYPEDEF_(0x87AF1C0AL)
+
+//
+// MessageId: SQLITE_E_IOERR_BEGIN_ATOMIC
+//
+// MessageText:
+//
+// SQLITE_IOERR_BEGIN_ATOMIC
+//
+#define SQLITE_E_IOERR_BEGIN_ATOMIC      _HRESULT_TYPEDEF_(0x87AF1D0AL)
+
+//
+// MessageId: SQLITE_E_IOERR_COMMIT_ATOMIC
+//
+// MessageText:
+//
+// SQLITE_IOERR_COMMIT_ATOMIC
+//
+#define SQLITE_E_IOERR_COMMIT_ATOMIC     _HRESULT_TYPEDEF_(0x87AF1E0AL)
+
+//
+// MessageId: SQLITE_E_IOERR_ROLLBACK_ATOMIC
+//
+// MessageText:
+//
+// SQLITE_IOERR_ROLLBACK_ATOMIC
+//
+#define SQLITE_E_IOERR_ROLLBACK_ATOMIC   _HRESULT_TYPEDEF_(0x87AF1F0AL)
+
+//
+// MessageId: SQLITE_E_IOERR_DATA
+//
+// MessageText:
+//
+// SQLITE_IOERR_DATA
+//
+#define SQLITE_E_IOERR_DATA              _HRESULT_TYPEDEF_(0x87AF200AL)
+
+//
+// MessageId: SQLITE_E_IOERR_CORRUPTFS
+//
+// MessageText:
+//
+// SQLITE_IOERR_CORRUPTFS
+//
+#define SQLITE_E_IOERR_CORRUPTFS         _HRESULT_TYPEDEF_(0x87AF210AL)
+
+//
+// MessageId: SQLITE_E_IOERR_IN_PAGE
+//
+// MessageText:
+//
+// SQLITE_IOERR_IN_PAGE
+//
+#define SQLITE_E_IOERR_IN_PAGE           _HRESULT_TYPEDEF_(0x87AF220AL)
 
 //
 // MessageId: SQLITE_E_LOCKED_SHAREDCACHE
@@ -64659,6 +65200,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // SQLITE_LOCKED_SHAREDCACHE
 //
 #define SQLITE_E_LOCKED_SHAREDCACHE      _HRESULT_TYPEDEF_(0x87AF0106L)
+
+//
+// MessageId: SQLITE_E_LOCKED_VTAB
+//
+// MessageText:
+//
+// SQLITE_LOCKED_VTAB
+//
+#define SQLITE_E_LOCKED_VTAB             _HRESULT_TYPEDEF_(0x87AF0206L)
 
 //
 // MessageId: SQLITE_E_BUSY_RECOVERY
@@ -64677,6 +65227,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // SQLITE_BUSY_SNAPSHOT
 //
 #define SQLITE_E_BUSY_SNAPSHOT           _HRESULT_TYPEDEF_(0x87AF0205L)
+
+//
+// MessageId: SQLITE_E_BUSY_TIMEOUT
+//
+// MessageText:
+//
+// SQLITE_BUSY_TIMEOUT
+//
+#define SQLITE_E_BUSY_TIMEOUT            _HRESULT_TYPEDEF_(0x87AF0305L)
 
 //
 // MessageId: SQLITE_E_CANTOPEN_NOTEMPDIR
@@ -64715,6 +65274,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define SQLITE_E_CANTOPEN_CONVPATH       _HRESULT_TYPEDEF_(0x87AF040EL)
 
 //
+// MessageId: SQLITE_E_CANTOPEN_DIRTYWAL
+//
+// MessageText:
+//
+// SQLITE_E_CANTOPEN_DIRTYWAL
+//
+#define SQLITE_E_CANTOPEN_DIRTYWAL       _HRESULT_TYPEDEF_(0x87AF050EL)
+
+//
+// MessageId: SQLITE_E_CANTOPEN_SYMLINK
+//
+// MessageText:
+//
+// SQLITE_E_CANTOPEN_SYMLINK
+//
+#define SQLITE_E_CANTOPEN_SYMLINK        _HRESULT_TYPEDEF_(0x87AF060EL)
+
+//
 // MessageId: SQLITE_E_CORRUPT_VTAB
 //
 // MessageText:
@@ -64722,6 +65299,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // SQLITE_CORRUPT_VTAB
 //
 #define SQLITE_E_CORRUPT_VTAB            _HRESULT_TYPEDEF_(0x87AF010BL)
+
+//
+// MessageId: SQLITE_E_CORRUPT_SEQUENCE
+//
+// MessageText:
+//
+// SQLITE_E_CORRUPT_SEQUENCE
+//
+#define SQLITE_E_CORRUPT_SEQUENCE        _HRESULT_TYPEDEF_(0x87AF020BL)
+
+//
+// MessageId: SQLITE_E_CORRUPT_INDEX
+//
+// MessageText:
+//
+// SQLITE_E_CORRUPT_INDEX
+//
+#define SQLITE_E_CORRUPT_INDEX           _HRESULT_TYPEDEF_(0x87AF030BL)
 
 //
 // MessageId: SQLITE_E_READONLY_RECOVERY
@@ -64758,6 +65353,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // SQLITE_READONLY_DBMOVED
 //
 #define SQLITE_E_READONLY_DBMOVED        _HRESULT_TYPEDEF_(0x87AF0408L)
+
+//
+// MessageId: SQLITE_E_READONLY_CANTINIT
+//
+// MessageText:
+//
+// SQLITE_E_READONLY_CANTINIT
+//
+#define SQLITE_E_READONLY_CANTINIT       _HRESULT_TYPEDEF_(0x87AF0508L)
+
+//
+// MessageId: SQLITE_E_READONLY_DIRECTORY
+//
+// MessageText:
+//
+// SQLITE_E_READONLY_DIRECTORY
+//
+#define SQLITE_E_READONLY_DIRECTORY      _HRESULT_TYPEDEF_(0x87AF0608L)
 
 //
 // MessageId: SQLITE_E_ABORT_ROLLBACK
@@ -64859,6 +65472,24 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define SQLITE_E_CONSTRAINT_ROWID        _HRESULT_TYPEDEF_(0x87AF0A13L)
 
 //
+// MessageId: SQLITE_E_CONSTRAINT_PINNED
+//
+// MessageText:
+//
+// SQLITE_CONSTRAINT_PINNED
+//
+#define SQLITE_E_CONSTRAINT_PINNED       _HRESULT_TYPEDEF_(0x87AF0B13L)
+
+//
+// MessageId: SQLITE_E_CONSTRAINT_DATATYPE
+//
+// MessageText:
+//
+// SQLITE_CONSTRAINT_DATATYPE
+//
+#define SQLITE_E_CONSTRAINT_DATATYPE     _HRESULT_TYPEDEF_(0x87AF0C13L)
+
+//
 // MessageId: SQLITE_E_NOTICE_RECOVER_WAL
 //
 // MessageText:
@@ -64877,6 +65508,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define SQLITE_E_NOTICE_RECOVER_ROLLBACK _HRESULT_TYPEDEF_(0x87AF021BL)
 
 //
+// MessageId: SQLITE_E_NOTICE_RECOVER_RBU
+//
+// MessageText:
+//
+// SQLITE_NOTICE_RECOVER_RBU
+//
+#define SQLITE_E_NOTICE_RECOVER_RBU      _HRESULT_TYPEDEF_(0x87AF031BL)
+
+//
 // MessageId: SQLITE_E_WARNING_AUTOINDEX
 //
 // MessageText:
@@ -64884,6 +65524,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // SQLITE_WARNING_AUTOINDEX
 //
 #define SQLITE_E_WARNING_AUTOINDEX       _HRESULT_TYPEDEF_(0x87AF011CL)
+
+//
+// MessageId: SQLITE_E_AUTH_USER
+//
+// MessageText:
+//
+// SQLITE_AUTH_USER
+//
+#define SQLITE_E_AUTH_USER               _HRESULT_TYPEDEF_(0x87AF0117L)
 
 //
 // FACILITY_UTC
@@ -66243,5 +66892,57 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // The accelerator submission queue is full.
 //
 #define ERROR_ACCELERATOR_SUBMISSION_QUEUE_FULL _HRESULT_TYPEDEF_(0xC9270000L)
+
+
+///////////////////////////////////////////////////
+//                                               //
+// PCR Prediction Framework (PPF) Error codes    //
+//                                               //
+///////////////////////////////////////////////////
+
+//
+// MessageId: PPF_E_TRANSFORM_DIGEST_ALGO_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The transform does not support the digest algorithm selected in the system.
+//
+#define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_SUPPORTED _HRESULT_TYPEDEF_(0xC9280000L)
+
+//
+// MessageId: PPF_E_TRANSFORM_CONFLICT
+//
+// MessageText:
+//
+// The transform being added conflicts with an existing transform in the system.
+//
+#define PPF_E_TRANSFORM_CONFLICT         _HRESULT_TYPEDEF_(0xC9280001L)
+
+//
+// MessageId: PPF_E_TRANSFORM_CLEANED_UP_NA
+//
+// MessageText:
+//
+// The transform was cleaned up because it is no longer applicable.
+//
+#define PPF_E_TRANSFORM_CLEANED_UP_NA    _HRESULT_TYPEDEF_(0xC9280002L)
+
+//
+// MessageId: PPF_E_TRANSFORM_CLEANED_UP_STATE_CHANGE
+//
+// MessageText:
+//
+// The transform was cleaned up because the system state changed unexpectedly.
+//
+#define PPF_E_TRANSFORM_CLEANED_UP_STATE_CHANGE _HRESULT_TYPEDEF_(0xC9280003L)
+
+//
+// MessageId: PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT
+//
+// MessageText:
+//
+// An event in the transform does not have a digest for the algorithm selected in the system.
+//
+#define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
 
 #endif//_WINERROR_

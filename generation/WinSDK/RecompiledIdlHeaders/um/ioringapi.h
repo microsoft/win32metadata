@@ -221,11 +221,9 @@ STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
 // Submission Queue entry builders
 
 // Builds a submission queue entry for IORING_OP_CANCEL
-
 STDAPI BuildIoRingCancelRequest(_In_ HIORING ioRing, _In_ IORING_HANDLE_REF file, UINT_PTR opToCancel, UINT_PTR userData);
 
 // Builds a submission queue entry for IORING_OP_READ
-
 STDAPI
 BuildIoRingReadFile(
     _In_ HIORING ioRing,
@@ -238,7 +236,6 @@ BuildIoRingReadFile(
     );
 
 // Builds a submission queue entry for IORING_OP_REGISTER_FILES
-
 STDAPI
 BuildIoRingRegisterFileHandles(
     _In_ HIORING ioRing,
@@ -248,7 +245,6 @@ BuildIoRingRegisterFileHandles(
     );
 
 // Builds a submission queue entry for IORING_OP_REGISTER_BUFFERS
-
 STDAPI
 BuildIoRingRegisterBuffers(
     _In_ HIORING ioRing,
@@ -258,7 +254,6 @@ BuildIoRingRegisterBuffers(
     );
 
 #pragma region api-ms-win-core-ioring-l1-1-1
-
 STDAPI
 BuildIoRingWriteFile(
     _In_ HIORING ioRing,
@@ -279,10 +274,10 @@ BuildIoRingFlushFile(
     UINT_PTR userData,
     IORING_SQE_FLAGS sqeFlags
     );
+
 #pragma endregion // api-ms-win-core-ioring-l1-1-1
 
 #pragma region api-ms-win-core-ioring-l1-1-2
-
 STDAPI
 BuildIoRingReadFileScatter(
     _In_ HIORING ioRing,
@@ -307,6 +302,7 @@ BuildIoRingWriteFileGather(
     UINT_PTR userData,
     IORING_SQE_FLAGS sqeFlags
     );
+
 #pragma endregion // api-ms-win-core-ioring-l1-1-2
 
 #ifdef __cplusplus

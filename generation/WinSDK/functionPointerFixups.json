@@ -699,5 +699,13 @@
   {
     "name": "DUMP_DEVICE_POWERON_ROUTINE",
     "pointerType": "PDUMP_DEVICE_POWERON_ROUTINE"
+  },
+  {
+    "name": "LSA_GET_SECPKG_FAILURE_REASON",
+    "pointerType": "PLSA_GET_SECPKG_FAILURE_REASON"
+  },
+  {
+    "name": "LSA_SET_SECPKG_FAILURE_REASON",
+    "pointerType": "PLSA_SET_SECPKG_FAILURE_REASON"
   }
 ]

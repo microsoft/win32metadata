@@ -83,6 +83,7 @@
 // Header files for imported files
 #include "Inspectable.h"
 #include "Windows.Foundation.h"
+#include "WindowsContracts.h"
 // Importing Collections header
 #include <windows.foundation.collections.h>
 
@@ -281,26 +282,32 @@ typedef IMapView<HSTRING,IInspectable*> __FIMapView_2_HSTRING_IInspectable_t;
 #pragma once 
 #pragma warning (pop)
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef TrustLevel RegisteredTrustLevel;
             
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.RegistrationScope
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum RegistrationScope : int
             {
@@ -312,17 +319,22 @@ namespace ABI {
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ActivationType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum ActivationType : int
             {
@@ -334,17 +346,22 @@ namespace ABI {
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ThreadingType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum ThreadingType : int
             {
@@ -356,17 +373,22 @@ namespace ABI {
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.IdentityType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum IdentityType : int
             {
@@ -376,22 +398,32 @@ namespace ABI {
                 IdentityType_SessionVirtual,
                 IdentityType_SessionUser,
                 IdentityType_ActivateAsActivatingUser,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+                
+                IdentityType_ActivateAsActivatorPackaged,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+                
             } IdentityType;
             
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.InstancingType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum InstancingType : int
             {
@@ -402,17 +434,22 @@ namespace ABI {
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ActivateAsUser
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [version] */
+            /* [contract, version] */
             typedef /* [v1_enum] */
             enum ActivateAsUser : int
             {
@@ -423,20 +460,25 @@ namespace ABI {
         } /* Foundation */
     } /* Windows */
 } /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IActivatableClassRegistration[] = L"Windows.Foundation.IActivatableClassRegistration";
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [pointer_default(unique), uuid("9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67"), object, version] */
+            /* [contract, pointer_default(unique), uuid("9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67"), object, version] */
             MIDL_INTERFACE("9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67")
             IActivatableClassRegistration : public IInspectable
             {
@@ -467,20 +509,25 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IDllServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IDllServerActivatableClassRegistration[] = L"Windows.Foundation.IDllServerActivatableClassRegistration";
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [pointer_default(ref), uuid("C8AA04F6-66C6-46A3-8FE6-F56BE7DDC091"), object, version] */
+            /* [contract, pointer_default(ref), uuid("C8AA04F6-66C6-46A3-8FE6-F56BE7DDC091"), object, version] */
             MIDL_INTERFACE("C8AA04F6-66C6-46A3-8FE6-F56BE7DDC091")
             IDllServerActivatableClassRegistration : public IInspectable
             {
@@ -502,20 +549,25 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IExeServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IExeServerActivatableClassRegistration[] = L"Windows.Foundation.IExeServerActivatableClassRegistration";
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [pointer_default(ref), uuid("9308C3C5-C2AC-49D1-A024-660A2BB5D5AC"), object, version] */
+            /* [contract, pointer_default(ref), uuid("9308C3C5-C2AC-49D1-A024-660A2BB5D5AC"), object, version] */
             MIDL_INTERFACE("9308C3C5-C2AC-49D1-A024-660A2BB5D5AC")
             IExeServerActivatableClassRegistration : public IInspectable
             {
@@ -534,20 +586,25 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IExeServerRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IExeServerRegistration[] = L"Windows.Foundation.IExeServerRegistration";
 namespace ABI {
     namespace Windows {
         namespace Foundation {
-            /* [pointer_default(unique), uuid("EC734A06-0401-4317-BAC1-3B7E207242E3"), object, version] */
+            /* [contract, pointer_default(unique), uuid("EC734A06-0401-4317-BAC1-3B7E207242E3"), object, version] */
             MIDL_INTERFACE("EC734A06-0401-4317-BAC1-3B7E207242E3")
             IExeServerRegistration : public IInspectable
             {
@@ -587,6 +644,7 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIExeServerRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 namespace ABI {
     namespace Windows {
@@ -602,16 +660,21 @@ namespace ABI {
  *
  * Class Windows.Foundation.DllServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IActivatableClassRegistration ** Default Interface **
  *    Windows.Foundation.IDllServerActivatableClassRegistration
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_DllServerActivatableClassRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_DllServerActivatableClassRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_DllServerActivatableClassRegistration[] = L"Windows.Foundation.DllServerActivatableClassRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 namespace ABI {
     namespace Windows {
@@ -627,16 +690,21 @@ namespace ABI {
  *
  * Class Windows.Foundation.ExeServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IActivatableClassRegistration ** Default Interface **
  *    Windows.Foundation.IExeServerActivatableClassRegistration
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_ExeServerActivatableClassRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_ExeServerActivatableClassRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_ExeServerActivatableClassRegistration[] = L"Windows.Foundation.ExeServerActivatableClassRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 namespace ABI {
     namespace Windows {
@@ -652,15 +720,20 @@ namespace ABI {
  *
  * Class Windows.Foundation.ExeServerRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IExeServerRegistration ** Default Interface **
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_ExeServerRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_ExeServerRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_ExeServerRegistration[] = L"Windows.Foundation.ExeServerRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 #else // !defined(__cplusplus)
@@ -1006,16 +1079,22 @@ interface __FIMapView_2_HSTRING_IInspectable
 #pragma once 
 #pragma warning (pop)
 
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef TrustLevel __x_ABI_CWindows_CFoundation_CRegisteredTrustLevel;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.RegistrationScope
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CRegistrationScope
 {
@@ -1023,14 +1102,19 @@ enum __x_ABI_CWindows_CFoundation_CRegistrationScope
     RegistrationScope_PerUser,
     RegistrationScope_InboxApp,
 } __x_ABI_CWindows_CFoundation_CRegistrationScope;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ActivationType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CActivationType
 {
@@ -1038,14 +1122,19 @@ enum __x_ABI_CWindows_CFoundation_CActivationType
     ActivationType_OutOfProcess,
     ActivationType_RemoteProcess,
 } __x_ABI_CWindows_CFoundation_CActivationType;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ThreadingType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CThreadingType
 {
@@ -1053,14 +1142,19 @@ enum __x_ABI_CWindows_CFoundation_CThreadingType
     ThreadingType_STA,
     ThreadingType_MTA,
 } __x_ABI_CWindows_CFoundation_CThreadingType;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.IdentityType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CIdentityType
 {
@@ -1070,46 +1164,66 @@ enum __x_ABI_CWindows_CFoundation_CIdentityType
     IdentityType_SessionVirtual,
     IdentityType_SessionUser,
     IdentityType_ActivateAsActivatingUser,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+    
+    IdentityType_ActivateAsActivatorPackaged,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+    
 } __x_ABI_CWindows_CFoundation_CIdentityType;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.InstancingType
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CInstancingType
 {
     InstancingType_SingleInstance,
     InstancingType_MultipleInstances,
 } __x_ABI_CWindows_CFoundation_CInstancingType;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Typedef of Windows.Foundation.ActivateAsUser
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
-/* [version] */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+/* [contract, version] */
 typedef /* [v1_enum] */
 enum __x_ABI_CWindows_CFoundation_CActivateAsUser
 {
     ActivateAsUser_NotSupported,
     ActivateAsUser_Supported,
 } __x_ABI_CWindows_CFoundation_CActivateAsUser;
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IActivatableClassRegistration[] = L"Windows.Foundation.IActivatableClassRegistration";
-/* [pointer_default(unique), uuid("9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67"), object, version] */
+/* [contract, pointer_default(unique), uuid("9BBCAE23-3DD6-49C3-B63C-1C587E7A6A67"), object, version] */
 typedef struct __x_ABI_CWindows_CFoundation_CIActivatableClassRegistrationVtbl
 {
     BEGIN_INTERFACE
@@ -1212,17 +1326,22 @@ interface __x_ABI_CWindows_CFoundation_CIActivatableClassRegistration
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IDllServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IDllServerActivatableClassRegistration[] = L"Windows.Foundation.IDllServerActivatableClassRegistration";
-/* [pointer_default(ref), uuid("C8AA04F6-66C6-46A3-8FE6-F56BE7DDC091"), object, version] */
+/* [contract, pointer_default(ref), uuid("C8AA04F6-66C6-46A3-8FE6-F56BE7DDC091"), object, version] */
 typedef struct __x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistrationVtbl
 {
     BEGIN_INTERFACE
@@ -1304,17 +1423,22 @@ interface __x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIDllServerActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IExeServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IExeServerActivatableClassRegistration[] = L"Windows.Foundation.IExeServerActivatableClassRegistration";
-/* [pointer_default(ref), uuid("9308C3C5-C2AC-49D1-A024-660A2BB5D5AC"), object, version] */
+/* [contract, pointer_default(ref), uuid("9308C3C5-C2AC-49D1-A024-660A2BB5D5AC"), object, version] */
 typedef struct __x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistrationVtbl
 {
     BEGIN_INTERFACE
@@ -1389,17 +1513,22 @@ interface __x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIExeServerActivatableClassRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 /*
  *
  * Interface Windows.Foundation.IExeServerRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Foundation_IExeServerRegistration[] = L"Windows.Foundation.IExeServerRegistration";
-/* [pointer_default(unique), uuid("EC734A06-0401-4317-BAC1-3B7E207242E3"), object, version] */
+/* [contract, pointer_default(unique), uuid("EC734A06-0401-4317-BAC1-3B7E207242E3"), object, version] */
 typedef struct __x_ABI_CWindows_CFoundation_CIExeServerRegistrationVtbl
 {
     BEGIN_INTERFACE
@@ -1523,6 +1652,7 @@ interface __x_ABI_CWindows_CFoundation_CIExeServerRegistration
 
 EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIExeServerRegistration;
 #endif /* !defined(____x_ABI_CWindows_CFoundation_CIExeServerRegistration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 
@@ -1530,16 +1660,21 @@ EXTERN_C const IID IID___x_ABI_CWindows_CFoundation_CIExeServerRegistration;
  *
  * Class Windows.Foundation.DllServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IActivatableClassRegistration ** Default Interface **
  *    Windows.Foundation.IDllServerActivatableClassRegistration
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_DllServerActivatableClassRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_DllServerActivatableClassRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_DllServerActivatableClassRegistration[] = L"Windows.Foundation.DllServerActivatableClassRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 
@@ -1547,16 +1682,21 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class Windows.Foundation.ExeServerActivatableClassRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IActivatableClassRegistration ** Default Interface **
  *    Windows.Foundation.IExeServerActivatableClassRegistration
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_ExeServerActivatableClassRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_ExeServerActivatableClassRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_ExeServerActivatableClassRegistration[] = L"Windows.Foundation.ExeServerActivatableClassRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 
@@ -1564,15 +1704,20 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class Windows.Foundation.ExeServerRegistration
  *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
+ *
+ *
  * Class implements the following interfaces:
  *    Windows.Foundation.IExeServerRegistration ** Default Interface **
  *
  */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef RUNTIMECLASS_Windows_Foundation_ExeServerRegistration_DEFINED
 #define RUNTIMECLASS_Windows_Foundation_ExeServerRegistration_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Foundation_ExeServerRegistration[] = L"Windows.Foundation.ExeServerRegistration";
 #endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 
 #endif // defined(__cplusplus)

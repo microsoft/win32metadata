@@ -1127,7 +1127,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProvider)]
-                [experimental]
                 [uuid(9EF531A9-CF12-59A3-A81C-362F4AABAACF)]
                 interface IGattServiceProvider2 : IInspectable
                 {
@@ -1165,7 +1164,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProviderAdvertisingParameters)]
-                [experimental]
                 [uuid(A23546B2-B216-5929-9055-F1313DD53E2A)]
                 interface IGattServiceProviderAdvertisingParameters3 : IInspectable
                 {
@@ -1534,7 +1532,7 @@ namespace Windows
                 runtimeclass GattServiceProvider
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1552,7 +1550,7 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters;
                     [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]

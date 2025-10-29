@@ -169,6 +169,7 @@ ReadConsoleInputW(
     _In_ DWORD nLength,
     _Out_ _Deref_out_range_(<=, nLength) LPDWORD lpNumberOfEventsRead
     );
+
 #ifdef UNICODE
 #define ReadConsoleInput  ReadConsoleInputW
 #else
@@ -202,6 +203,7 @@ PeekConsoleInputW(
     _In_ DWORD nLength,
     _Out_ LPDWORD lpNumberOfEventsRead
     );
+
 #ifdef UNICODE
 #define PeekConsoleInput  PeekConsoleInputW
 #else
@@ -238,6 +240,7 @@ ReadConsoleW(
     _Out_ _Deref_out_range_(<=, nNumberOfCharsToRead) LPDWORD lpNumberOfCharsRead,
     _In_opt_ PCONSOLE_READCONSOLE_CONTROL pInputControl
     );
+
 #ifdef UNICODE
 #define ReadConsole  ReadConsoleW
 #else
@@ -265,6 +268,7 @@ WriteConsoleW(
     _Out_opt_ LPDWORD lpNumberOfCharsWritten,
     _Reserved_ LPVOID lpReserved
     );
+
 #ifdef UNICODE
 #define WriteConsole  WriteConsoleW
 #else

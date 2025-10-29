@@ -216,9 +216,13 @@ Win32 Metadata depends on the following:
 
 To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.22621.2428).
 
-Once the script completes, modify [libMappings.rsp](generation/WinSDK/libMappings.rsp) to undo removal of any manually added changes (typically at the end of the file).
+Run a [full build](#full-builds), fix any metadata issues that surface, address failures from tests, then update the baseline.
 
-Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
+Manual fixups may be required:
+* If the tests report namespace cycle, look at [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp) for other examples of how to fix move types around to break cycles. Potentially introduce a new namespace.
+* If test reports missing entries in suggestedRemappingsAllowList.rsp, they should probably be added to scraper.settings.rsp. MIDL generates random names for enums and the tooling needs to know the mapping from that name to the typedef'd name.
+* If test reports missing entries in emptyDelegatesAllowList.rsp, those entries probably need to be added to functionPointerFixups.json (unless they really are empty delegates). Function pointers are expressed as typedefs which the tooling doesn't see the mapping from the declared name to the typedef'd name so you need to connect the dots this way.
+* Additional entries for entrypoints not present in import libs should be added to [libMappingsManual.rsp](generation/WinSDK/libMappingsManual.rsp). You probably won't know you need to add things here until someone reports a bug that an API isn't present because it's a LoadLibrary + GetProcAddress only API.
 
 ### Direct3D Agility SDK
 

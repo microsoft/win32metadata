@@ -154,7 +154,6 @@ typedef struct _EVT_RPC_LOGIN
 
 
 // Timeout and Flags must currently be 0
-
 EVT_HANDLE
 WINAPI
 EvtOpenSession(
@@ -246,7 +245,6 @@ EvtNext(
     );
 
 // Timeout must currently be 0
-
 BOOL
 WINAPI
 EvtSeek(
@@ -384,7 +382,6 @@ typedef enum _EVT_FORMAT_MESSAGE_FLAGS
 
 
 // PublisherMetadata is NULL for forwarded events
-
 _Success_(return != 0)
 BOOL
 WINAPI
@@ -425,7 +422,6 @@ typedef enum _EVT_LOG_PROPERTY_ID
     EvtLogFull,                         // EvtVarTypeBoolean
 
 } EVT_LOG_PROPERTY_ID;
-
 
 EVT_HANDLE
 WINAPI
@@ -567,7 +563,6 @@ EvtNextChannelPath(
     _Out_ PDWORD ChannelPathBufferUsed
     );
 
-
 EVT_HANDLE
 WINAPI
 EvtOpenChannelConfig(
@@ -592,7 +587,6 @@ EvtSetChannelConfigProperty(
     DWORD Flags,
     _In_ PEVT_VARIANT PropertyValue
     );
-
 
 _Success_(return != 0)
 BOOL
@@ -677,7 +671,6 @@ EvtNextPublisherId(
     _Out_ PDWORD PublisherIdBufferUsed
     );
 
-
 EVT_HANDLE
 WINAPI
 EvtOpenPublisherMetadata(
@@ -687,7 +680,6 @@ EvtOpenPublisherMetadata(
     LCID Locale,
     DWORD Flags
     );
-
 
 _Success_(return != 0)
 BOOL

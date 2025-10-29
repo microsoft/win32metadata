@@ -100,6 +100,7 @@ LoadEnclaveImageW(
     _In_ LPVOID lpEnclaveAddress,
     _In_ LPCWSTR lpImageName
     );
+
 #ifdef UNICODE
 #define LoadEnclaveImage  LoadEnclaveImageW
 #else

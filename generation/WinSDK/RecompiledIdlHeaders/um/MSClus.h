@@ -2051,11 +2051,13 @@ enum CLUSCTL_RESOURCE_TYPE_CODES
         CLUSCTL_RESOURCE_TYPE_NOTIFY_DRAIN_COMPLETE	= ( ( CLUS_OBJECT_RESOURCE_TYPE << 24 )  | CLCTL_NOTIFY_DRAIN_COMPLETE ) 
     } 	CLUSCTL_RESOURCE_TYPE_CODES;
 
-typedef struct NodeVFInfo
+typedef struct NodeSriovInfo
     {
     DWORD VFTotal;
     DWORD VFUsed;
-    } 	NodeVFInfo;
+    DWORD QPTotal;
+    DWORD QPUsed;
+    } 	NodeSriovInfo;
 
 typedef 
 enum CLUSCTL_GROUP_CODES

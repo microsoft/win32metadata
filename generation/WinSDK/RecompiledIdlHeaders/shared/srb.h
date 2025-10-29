@@ -735,14 +735,12 @@ typedef struct _SCSI_PNP_REQUEST_BLOCK {
 //
 #define SRB_FUNCTION_STORAGE_REQUEST_BLOCK  0x28
 
-// end_storport
-
 #define SRB_FUNCTION_GET_DUMP_INFO          0x2a
 #define SRB_FUNCTION_FREE_DUMP_INFO         0x2b
 
-// begin_storport
-
 #define SRB_FUNCTION_NVMEOF_OPERATION       0x2c
+
+#define SRB_FUNCTION_MINIPORT_PASSTHROUGH_REQUEST     0x2d
 
 //
 // SRB Status
@@ -888,6 +886,34 @@ typedef struct _SCSI_PNP_REQUEST_BLOCK {
 #define POINTER_ALIGN
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+//
+// This is the STOR_ADDRESS type used by StorMQ.
+// The Controller field will contain the StorMQ controller extension known to the miniport.
+//
+
+//
+// N.B. The other legacy STOR_ADDRESS_TYPE_xxx values and structs are defined in scsi.h.
+// Any updates to STOR_ADDRESS should be put here to not introduce new dependencies on legacy
+// SCSI infrastructure.
+//
+#define STOR_ADDRESS_TYPE_NVME      0x2
+
+#define STOR_ADDR_NVME_ADDRESS_LENGTH    16
+typedef struct STOR_ADDRESS_ALIGN _STOR_ADDR_NVME {
+    _Field_range_(STOR_ADDRESS_TYPE_NVME, STOR_ADDRESS_TYPE_NVME)
+    USHORT Type;
+    USHORT Port;
+    _Field_range_(STOR_ADDR_NVME_ADDRESS_LENGTH, STOR_ADDR_NVME_ADDRESS_LENGTH)
+    ULONG AddressLength;
+    PVOID Controller;
+    ULONG NamespaceId;
+    ULONG Reserved;
+} STOR_ADDR_NVME, *PSTOR_ADDR_NVME;
+
+#endif
+
 // SRB extended data types.
 
 
@@ -899,6 +925,7 @@ typedef enum _SRBEXDATATYPE {
     SrbExDataTypeScsiCdbVar,
     SrbExDataTypeNvmeCommand,
     SrbExDataTypeNvmeofOperation,
+    SrbExDataTypeMiniportPassthrough,
     SrbExDataTypeWmi = 0x60,
     SrbExDataTypePower,
     SrbExDataTypePnP,
@@ -1042,6 +1069,20 @@ typedef struct SRB_ALIGN _SRBEX_DATA_PNP {
     ULONG Reserved1;
 } SRBEX_DATA_PNP, *PSRBEX_DATA_PNP;
 
+// Used by SRB_FUNCTION_MINIPORT_PASSTHROUGH_REQUEST
+#define SRBEX_DATA_MINIPORT_PASSTHROUGH_LENGTH ((4 * sizeof(ULONG)))
+
+typedef struct SRB_ALIGN _SRBEX_DATA_MINIPORT_PASSTHROUGH {
+    _Field_range_(SrbExDataTypeMiniportPassthrough, SrbExDataTypeMiniportPassthrough)
+    SRBEXDATATYPE Type;
+    _Field_range_(SRBEX_DATA_MINIPORT_PASSTHROUGH_LENGTH, SRBEX_DATA_MINIPORT_PASSTHROUGH_LENGTH)
+    ULONG Length;
+    ULONG InputBufferLength;
+    ULONG OutputBufferLength;
+    ULONG OutputBufferWritten;
+    ULONG Reserved;
+} SRBEX_DATA_MINIPORT_PASSTHROUGH, *PSRBEX_DATA_MINIPORT_PASSTHROUGH;
+
 // Use in read/write requests to provide additional info about the IO.
 #define SRBEX_DATA_IO_INFO_LENGTH ((5 * sizeof(ULONG)) + (4 * sizeof(UCHAR)))
 
@@ -1061,6 +1102,7 @@ typedef struct SRB_ALIGN _SRBEX_DATA_PNP {
 
 #endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 
+#define REQUEST_INFO_CRYPTO_FLAG                    0x00000200
 #define REQUEST_INFO_VALID_CACHEPRIORITY_FLAG       0x80000000
 
 typedef struct SRB_ALIGN _SRBEX_DATA_IO_INFO {
@@ -1073,7 +1115,12 @@ typedef struct SRB_ALIGN _SRBEX_DATA_IO_INFO {
     ULONG RWLength;
     BOOLEAN IsWriteRequest;
     UCHAR CachePriority;
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+    UCHAR IoPriorityLevel;
+    UCHAR Reserved;
+#else
     UCHAR Reserved[2];
+#endif //(NTDDI_VERSION >= NTDDI_WIN11_GE)
     ULONG Reserved1[2];
 } SRBEX_DATA_IO_INFO, *PSRBEX_DATA_IO_INFO;
 

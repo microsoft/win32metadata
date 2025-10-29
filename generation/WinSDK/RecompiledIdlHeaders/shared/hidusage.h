@@ -8,7 +8,7 @@ Module Name:
 
 Abstract:
 
-   Public Definitions of HID USAGES for HID Usage Tables 1.4
+   Public Definitions of HID USAGES for HID Usage Tables 1.6
 
 Environment:
 
@@ -544,6 +544,7 @@ typedef LONG USAGE_VALUE, *PUSAGE_VALUE;
 #define HID_USAGE_CONSUMER_MICROPHONE                                    ((USAGE) 0x0004)
 #define HID_USAGE_CONSUMER_HEADPHONE                                     ((USAGE) 0x0005)
 #define HID_USAGE_CONSUMER_GRAPHIC_EQUALIZER                             ((USAGE) 0x0006)
+#define HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT                            ((USAGE) 0x0007)
 #define HID_USAGE_CONSUMER_10                                            ((USAGE) 0x0020)
 #define HID_USAGE_CONSUMER_100                                           ((USAGE) 0x0021)
 #define HID_USAGE_CONSUMER_AMPM                                          ((USAGE) 0x0022)
@@ -988,6 +989,9 @@ typedef LONG USAGE_VALUE, *PUSAGE_VALUE;
 #define HID_USAGE_CONSUMER_CONTACT_SPEED_DIAL_NUMBER                     ((USAGE) 0x0512)
 #define HID_USAGE_CONSUMER_CONTACT_STATUS_FLAG                           ((USAGE) 0x0513)
 #define HID_USAGE_CONSUMER_CONTACT_MISC                                  ((USAGE) 0x0514)
+#define HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_NEXT                      ((USAGE) 0x0515)
+#define HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_PREVIOUS                  ((USAGE) 0x0516)
+#define HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_LEVEL_SUGGESTION           ((USAGE) 0x0517)
 
 #define HID_VALUE_CONSUMER_KEYBOARD_FORM_FACTOR_UNKNOWN                 ((USAGE_VALUE) 0x0000)
 #define HID_VALUE_CONSUMER_KEYBOARD_FORM_FACTOR_FULL_SIZE               ((USAGE_VALUE) 0x0001)

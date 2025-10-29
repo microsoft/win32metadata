@@ -385,11 +385,11 @@ struct sqlite3_api_routines {
   /* Version 3.40.0 and later */
   int (SQLITE_APICALL *value_encoding)(sqlite3_value*);
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_ZN */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
   int (SQLITE_APICALL *is_interrupted)(sqlite3*);
   /* Version 3.43.0 and later */
   int (SQLITE_APICALL *stmt_explain)(sqlite3_stmt*,int);
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 };
 
 #if NTDDI_VERSION >= NTDDI_WIN10_RS2
@@ -738,12 +738,12 @@ typedef int (SQLITE_APICALL *sqlite3_loadext_entry)(
 /* Version 3.40.0 and later */
 #define sqlite3_value_encoding         sqlite3_api->value_encoding
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_ZN */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 /* Version 3.41.0 and later */
 #define sqlite3_is_interrupted         sqlite3_api->is_interrupted
 /* Version 3.43.0 and later */
 #define sqlite3_stmt_explain           sqlite3_api->stmt_explain
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 #endif /* !defined(SQLITE_CORE) && !defined(SQLITE_OMIT_LOAD_EXTENSION) */
 
 #if !defined(SQLITE_CORE) && !defined(SQLITE_OMIT_LOAD_EXTENSION)

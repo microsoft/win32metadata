@@ -2892,6 +2892,7 @@ typedef enum CLUSTER_NODE_RESUME_FAILBACK_TYPE
 #define CLUSAPI_NODE_RESUME_FAILBACK_STORAGE                   0x00000001
 #define CLUSAPI_NODE_RESUME_FAILBACK_VMS                       0x00000002
 #define CLUSAPI_NODE_RESUME_FAILBACK_PINNED_VMS_ONLY           0x00000004
+#define CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY            0x00000008
 
 
 DWORD
@@ -5558,11 +5559,13 @@ typedef enum CLUSCTL_RESOURCE_TYPE_CODES {
 } CLUSCTL_RESOURCE_TYPE_CODES;
 
 
-    // To be used with Control Code CLUSCTL_RESOURCE_TYPE_GET_LOCAL_NODE_VF_INFO Only:
-    typedef struct NodeVFInfo {
+    // To be used with Control Code CLUSCTL_RESOURCE_TYPE_GET_LOCAL_NODE_SRIOV_INFO Only:
+    typedef struct NodeSriovInfo {
         DWORD VFTotal;
         DWORD VFUsed;
-    } NodeVFInfo;
+        DWORD QPTotal;
+        DWORD QPUsed;
+    } NodeSriovInfo;
 
 
 //
@@ -8499,30 +8502,31 @@ typedef DWORD
 // Node common property names
 //
 
-#define CLUSREG_NAME_NODE_NAME              L"NodeName"
-#define CLUSREG_NAME_NODE_HIGHEST_VERSION   L"NodeHighestVersion"
-#define CLUSREG_NAME_NODE_LOWEST_VERSION    L"NodeLowestVersion"
-#define CLUSREG_NAME_NODE_DESC              L"Description"
-#define CLUSREG_NAME_NODE_MAJOR_VERSION     L"MajorVersion"
-#define CLUSREG_NAME_NODE_MINOR_VERSION     L"MinorVersion"
-#define CLUSREG_NAME_NODE_BUILD_NUMBER      L"BuildNumber"
-#define CLUSREG_NAME_NODE_CSDVERSION        L"CSDVersion"
-#define CLUSREG_NAME_NODE_WEIGHT            L"NodeWeight"
-#define CLUSREG_NAME_NODE_DYNAMIC_WEIGHT    L"DynamicWeight"
-#define CLUSREG_NAME_NODE_IS_PRIMARY        L"IsPrimary"
-#define CLUSREG_NAME_NODE_DRAIN_STATUS      L"NodeDrainStatus"
-#define CLUSREG_NAME_NODE_DRAIN_TARGET      L"NodeDrainTarget"
-#define CLUSREG_NAME_NODE_NEEDS_PQ          L"NeedsPreventQuorum"
-#define CLUSREG_NAME_NODE_FDID              L"FaultDomainId"
-#define CLUSREG_NAME_NODE_STATUS_INFO       L"StatusInformation"
-#define CLUSREG_NAME_NODE_FAULT_DOMAIN      L"FaultDomain"
-#define CLUSREG_NAME_NODE_MODEL             L"Model"
-#define CLUSREG_NAME_NODE_SERIALNUMBER      L"SerialNumber"
-#define CLUSREG_NAME_NODE_MANUFACTURER      L"Manufacturer"
-#define CLUSREG_NAME_NODE_UNIQUEID          L"UniqueID"
-#define CLUSREG_NAME_NODE_DRAIN_ERROR_CODE  L"DrainErrorCode"
-#define CLUSREG_NAME_NODE_FAILBACK_STATUS   L"NodeFailbackStatus"
-#define CLUSREG_NAME_NODE_HYPERTHREADING_ENABLED L"HyperthreadingEnabled"
+#define CLUSREG_NAME_NODE_NAME                      L"NodeName"
+#define CLUSREG_NAME_NODE_HIGHEST_VERSION           L"NodeHighestVersion"
+#define CLUSREG_NAME_NODE_LOWEST_VERSION            L"NodeLowestVersion"
+#define CLUSREG_NAME_NODE_DESC                      L"Description"
+#define CLUSREG_NAME_NODE_MAJOR_VERSION             L"MajorVersion"
+#define CLUSREG_NAME_NODE_MINOR_VERSION             L"MinorVersion"
+#define CLUSREG_NAME_NODE_BUILD_NUMBER              L"BuildNumber"
+#define CLUSREG_NAME_NODE_CSDVERSION                L"CSDVersion"
+#define CLUSREG_NAME_NODE_WEIGHT                    L"NodeWeight"
+#define CLUSREG_NAME_NODE_DYNAMIC_WEIGHT            L"DynamicWeight"
+#define CLUSREG_NAME_NODE_IS_PRIMARY                L"IsPrimary"
+#define CLUSREG_NAME_NODE_DRAIN_STATUS              L"NodeDrainStatus"
+#define CLUSREG_NAME_NODE_DRAIN_TARGET              L"NodeDrainTarget"
+#define CLUSREG_NAME_NODE_NEEDS_PQ                  L"NeedsPreventQuorum"
+#define CLUSREG_NAME_NODE_FDID                      L"FaultDomainId"
+#define CLUSREG_NAME_NODE_STATUS_INFO               L"StatusInformation"
+#define CLUSREG_NAME_NODE_FAULT_DOMAIN              L"FaultDomain"
+#define CLUSREG_NAME_NODE_MODEL                     L"Model"
+#define CLUSREG_NAME_NODE_SERIALNUMBER              L"SerialNumber"
+#define CLUSREG_NAME_NODE_MANUFACTURER              L"Manufacturer"
+#define CLUSREG_NAME_NODE_UNIQUEID                  L"UniqueID"
+#define CLUSREG_NAME_NODE_DRAIN_ERROR_CODE          L"DrainErrorCode"
+#define CLUSREG_NAME_NODE_FAILBACK_STATUS           L"NodeFailbackStatus"
+#define CLUSREG_NAME_NODE_FAILBACK_ERROR_CODE       L"FailbackErrorCode"
+#define CLUSREG_NAME_NODE_HYPERTHREADING_ENABLED    L"HyperthreadingEnabled"
 
 //
 // Group common property names
@@ -8892,6 +8896,7 @@ typedef DWORD
 #define CLUSREG_NAME_CLOUDWITNESS_ACCOUNT_NAME          L"AccountName"
 #define CLUSREG_NAME_CLOUDWITNESS_ENDPOINT_INFO         L"EndpointInfo"
 #define CLUSREG_NAME_CLOUDWITNESS_CONTAINER_NAME        L"ContainerName"
+#define CLUSREG_NAME_CLOUDWITNESS_MANAGED_IDENTITY      L"IsManagedIdentity"
 #define CLOUD_WITNESS_CONTAINER_NAME                    L"msft-cloud-witness"
 
 // Storage Replica

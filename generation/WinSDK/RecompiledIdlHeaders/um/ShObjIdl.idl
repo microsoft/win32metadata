@@ -1354,7 +1354,7 @@ library ShellObjects
     [ uuid(E6442437-6C68-4f52-94DD-2CFED267EFB9) ] coclass TrayDeskBand { interface ITrayDeskBand; }
 
     // CLSID_AttachmentServices
-    [ uuid(4125dd96-e03a-4103-8f70-e0597d803b9c) ] coclass AttachmentServices { interface IAttachmentExecute; }
+    [ uuid(4125dd96-e03a-4103-8f70-e0597d803b9c) ] coclass AttachmentServices { interface IAttachmentExecute2; }
 
     // CLSID_DocPropShellExtension
     [ uuid(883373C3-BF89-11D1-BE35-080036B11A03) ] coclass DocPropShellExtension { interface IShellExtInit; }

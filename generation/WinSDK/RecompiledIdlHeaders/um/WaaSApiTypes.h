@@ -113,6 +113,12 @@ typedef struct tagOSUpdateAssessment
     FILETIME upToDateOSReleaseTime;
     } 	OSUpdateAssessment;
 
+typedef struct tagCloudCampaignSpec
+    {
+    LPWSTR name;
+    LPWSTR tool;
+    } 	CloudCampaignAssessment;
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 

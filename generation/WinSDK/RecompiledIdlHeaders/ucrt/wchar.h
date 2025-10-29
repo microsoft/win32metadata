@@ -221,117 +221,120 @@ typedef wchar_t _Wint_t;
         _In_           size_t         _N
         )
     {
-        size_t Count = 0;
+        size_t __count = 0;
 
     #if !defined(_M_CEE)
-
-        unsigned long Index = 0;
-        wchar_t const* S = _S;
-
     #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
+
+        unsigned long __index = 0;
+        wchar_t const* __s = _S;
+
         if (_N >= 4)
         {
-            uint16x8_t V2 = vdupq_n_u16(_C);
+            uint16x8_t __v2 = vdupq_n_u16(_C);
 
-            while (Count + 8 <= _N)
+            while (__count + 8 <= _N)
             {
-                uint16x8_t V1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S));
-                V1 = vceqq_u16(V1, V2);
-                unsigned __int64 Mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(V1, 4)), 0);
-                if (Mask != 0)
+                uint16x8_t __v1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)__s));
+                __v1 = vceqq_u16(__v1, __v2);
+                unsigned __int64 __mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(__v1, 4)), 0);
+                if (__mask != 0)
                 {
-                    _BitScanForward64(&Index, Mask);
-                    Index >>= 3;
-                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                    _BitScanForward64(&__index, __mask);
+                    __index >>= 3;
+                    return (wchar_t _CONST_RETURN*)&_S[__count + __index];
                 }
 
-                Count += 8;
-                S += 8;
+                __count += 8;
+                __s += 8;
             }
 
-            if (Count + 4 <= _N)
+            if (__count + 4 <= _N)
             {
-                uint16x8_t V1 = vdupq_lane_u64(vreinterpret_u16_u8(vld1_u8((unsigned char const *)S)), 0);
-                V1 = vceqq_u16(V1, V2);
-                unsigned int Mask = vget_lane_u32(vreinterpret_u32_u8(vshrn_n_u16(V1, 4)), 0);
-                if (Mask != 0)
+                uint16x8_t __v1 = vreinterpretq_u16_u64(vdupq_lane_u64(vreinterpret_u64_u8(vld1_u8((unsigned char const *)__s)), 0));
+                __v1 = vceqq_u16(__v1, __v2);
+                unsigned int __mask = vget_lane_u32(vreinterpret_u32_u8(vshrn_n_u16(__v1, 4)), 0);
+                if (__mask != 0)
                 {
-                    _BitScanForward(&Index, Mask);
-                    Index >>= 3;
-                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                    _BitScanForward(&__index, __mask);
+                    __index >>= 3;
+                    return (wchar_t _CONST_RETURN*)&_S[__count + __index];
                 }
 
-                Count += 4;
+                __count += 4;
             }
         }
 
-    #elif defined(_M_IX86) || defined(_M_X64) 
+    #elif (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
+
+        unsigned long __index = 0;
+        wchar_t const* __s = _S;
 
     #if !defined(__clang__) || defined(__AVX2__)
         if (_Avx2WmemEnabled && _N >= 16)
         {
-            __m256i V2 = _mm256_broadcastw_epi16(_mm_cvtsi32_si128(_C));
+            __m256i __v2 = _mm256_broadcastw_epi16(_mm_cvtsi32_si128(_C));
 
             do
             {
-                __m256i V1 = _mm256_loadu_si256((__m256i const*)S);
-                V1 = _mm256_cmpeq_epi16(V1, V2);
-                unsigned int Mask = (unsigned int)_mm256_movemask_epi8(V1);
-                if (Mask != 0)
+                __m256i __v1 = _mm256_loadu_si256((__m256i const*)__s);
+                __v1 = _mm256_cmpeq_epi16(__v1, __v2);
+                unsigned int __mask = (unsigned int)_mm256_movemask_epi8(__v1);
+                if (__mask != 0)
                 {
-                    _BitScanForward(&Index, Mask);
-                    Index >>= 1;
-                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                    _BitScanForward(&__index, __mask);
+                    __index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[__count + __index];
                 }
-                Count += 16;
-                S += 16;
-            } while (Count + 16 <= _N);
+                __count += 16;
+                __s += 16;
+            } while (__count + 16 <= _N);
         }
     #endif
 
-        if (Count + 4 <= _N)
+        if (__count + 4 <= _N)
         {
-            __m128i V2 = _mm_set1_epi16((short)_C);
+            __m128i __v2 = _mm_set1_epi16((short)_C);
 
-            while (Count + 8 <= _N)
+            while (__count + 8 <= _N)
             {
-                __m128i V1 = _mm_loadu_si128((__m128i const*)S);
-                V1 = _mm_cmpeq_epi16(V1, V2);
-                unsigned short Mask = (unsigned short)_mm_movemask_epi8(V1);
-                if (Mask != 0)
+                __m128i __v1 = _mm_loadu_si128((__m128i const*)__s);
+                __v1 = _mm_cmpeq_epi16(__v1, __v2);
+                unsigned short __mask = (unsigned short)_mm_movemask_epi8(__v1);
+                if (__mask != 0)
                 {
-                    _BitScanForward(&Index, Mask);
-                    Index >>= 1;
-                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                    _BitScanForward(&__index, __mask);
+                    __index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[__count + __index];
                 }
-                Count += 8;
-                S += 8;
+                __count += 8;
+                __s += 8;
             }
 
-            if (Count + 4 <= _N)
+            if (__count + 4 <= _N)
             {
-                __m128i V1 = _mm_loadu_si64(S);
-                V1 = _mm_cmpeq_epi16(V1, V2);
-                unsigned char Mask = (unsigned char)_mm_movemask_epi8(V1);
-                if (Mask != 0)
+                __m128i __v1 = _mm_loadu_si64(__s);
+                __v1 = _mm_cmpeq_epi16(__v1, __v2);
+                unsigned char __mask = (unsigned char)_mm_movemask_epi8(__v1);
+                if (__mask != 0)
                 {
-                    _BitScanForward(&Index, Mask);
-                    Index >>= 1;
-                    return (wchar_t _CONST_RETURN*)&_S[Count + Index];
+                    _BitScanForward(&__index, __mask);
+                    __index >>= 1;
+                    return (wchar_t _CONST_RETURN*)&_S[__count + __index];
                 }
 
-                Count += 4;
+                __count += 4;
             }
         }
 
-    #endif // defined(_M_IX86) || defined(_M_X64)
+    #endif // (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
     #endif // !defined(_M_CEE)
 
-        for (; Count < _N; ++Count)
+        for (; __count < _N; ++__count)
         {
-            if (_S[Count] == _C)
+            if (_S[__count] == _C)
             {
-                return (wchar_t _CONST_RETURN*)&_S[Count];
+                return (wchar_t _CONST_RETURN*)&_S[__count];
             }
         }
 
@@ -344,131 +347,134 @@ typedef wchar_t _Wint_t;
         _In_           size_t         _N
         )
     {
-        size_t Count = 0;
+        size_t __count = 0;
 
     #if !defined(_M_CEE)
-
-        unsigned long Index = 0;
-        wchar_t const* S1 = _S1;
-        wchar_t const* S2 = _S2;
-
     #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
 
-        while (Count + 8 <= _N)
+        unsigned long __index = 0;
+        wchar_t const* __s1 = _S1;
+        wchar_t const* __s2 = _S2;
+
+        while (__count + 8 <= _N)
         {
-            uint16x8_t V1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S1));
-            uint16x8_t V2 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)S2));
-            V1 = vceqq_u16(V1, V2);
-            unsigned __int64 Mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(V1, 4)), 0);
-            Mask = ~Mask;
-            if (Mask != 0)
+            uint16x8_t __v1 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)__s1));
+            uint16x8_t __v2 = vreinterpretq_u16_u8(vld1q_u8((unsigned char const *)__s2));
+            __v1 = vceqq_u16(__v1, __v2);
+            unsigned __int64 __mask = vget_lane_u64(vreinterpret_u64_u8(vshrn_n_u16(__v1, 4)), 0);
+            __mask = ~__mask;
+            if (__mask != 0)
             {
-                _BitScanForward64(&Index, Mask);
-                Index >>= 3;
-                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                _BitScanForward64(&__index, __mask);
+                __index >>= 3;
+                return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
             }
 
-            Count += 8;
-            S1 += 8;
-            S2 += 8;
+            __count += 8;
+            __s1 += 8;
+            __s2 += 8;
         }
 
-        if (Count + 4 <= _N)
+        if (__count + 4 <= _N)
         {
-            uint16x4_t V1 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)S1));
-            uint16x4_t V2 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)S2));
-            V1 = veor_u16(V1, V2);
-            unsigned __int64 Mask = vget_lane_u64(V1, 0);
-            if (Mask != 0)
+            uint16x4_t __v1 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)__s1));
+            uint16x4_t __v2 = vreinterpret_u16_u8(vld1_u8((unsigned char const *)__s2));
+            __v1 = veor_u16(__v1, __v2);
+            unsigned __int64 __mask = vget_lane_u64(vreinterpret_u64_u16(__v1), 0);
+            if (__mask != 0)
             {
-                _BitScanForward64(&Index, Mask);
-                Index >>= 4;
-                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                _BitScanForward64(&__index, __mask);
+                __index >>= 4;
+                return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
             }
 
-            Count += 4;
+            __count += 4;
         }
 
-    #elif defined(_M_IX86) || defined(_M_X64)
+    #elif (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
+
+        unsigned long __index = 0;
+        wchar_t const* __s1 = _S1;
+        wchar_t const* __s2 = _S2;
 
     #if !defined(__clang__) || defined(__AVX2__)
         if (_Avx2WmemEnabled)
         {
-            while (Count + 16 <= _N)
+            while (__count + 16 <= _N)
             {
-                __m256i V1 = _mm256_loadu_si256((__m256i const*)S1);
-                __m256i V2 = _mm256_loadu_si256((__m256i const*)S2);
-                V1 = _mm256_cmpeq_epi16(V1, V2);
-                unsigned int Mask = (unsigned int)_mm256_movemask_epi8(V1);
-                if (Mask != 0xffffffff)
+                __m256i __v1 = _mm256_loadu_si256((__m256i const*)__s1);
+                __m256i __v2 = _mm256_loadu_si256((__m256i const*)__s2);
+                __v1 = _mm256_cmpeq_epi16(__v1, __v2);
+                unsigned int __mask = (unsigned int)_mm256_movemask_epi8(__v1);
+                if (__mask != 0xffffffff)
                 {
-                    _BitScanForward(&Index, ~Mask);
-                    Index >>= 1;
-                    return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                    _BitScanForward(&__index, ~__mask);
+                    __index >>= 1;
+                    return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
                 }
-                Count += 16;
-                S1 += 16;
-                S2 += 16;
+                __count += 16;
+                __s1 += 16;
+                __s2 += 16;
             }
         }
     #endif
 
-        while (Count + 8 <= _N)
+        while (__count + 8 <= _N)
         {
-            __m128i V1 = _mm_loadu_si128((__m128i const*)S1);
-            __m128i V2 = _mm_loadu_si128((__m128i const*)S2);
-            V1 = _mm_cmpeq_epi16(V1, V2);
-            unsigned short Mask = (unsigned short)_mm_movemask_epi8(V1);
-            if (Mask != 0xffff)
+            __m128i __v1 = _mm_loadu_si128((__m128i const*)__s1);
+            __m128i __v2 = _mm_loadu_si128((__m128i const*)__s2);
+            __v1 = _mm_cmpeq_epi16(__v1, __v2);
+            unsigned short __mask = (unsigned short)_mm_movemask_epi8(__v1);
+            if (__mask != 0xffff)
             {
-                _BitScanForward(&Index, (unsigned long)~Mask);
-                Index >>= 1;
-                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                _BitScanForward(&__index, (unsigned long)~__mask);
+                __index >>= 1;
+                return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
             }
-            Count += 8;
-            S1 += 8;
-            S2 += 8;
+            __count += 8;
+            __s1 += 8;
+            __s2 += 8;
         }
 
     #if defined(_M_IX86)
-        if (Count + 4 <= _N)
+        if (__count + 4 <= _N)
         {
-            __m128i V1 = _mm_loadu_si64(S1);
-            __m128i V2 = _mm_loadu_si64(S2);
-            V1 = _mm_cmpeq_epi16(V1, V2);
-            unsigned char Mask = (unsigned char)_mm_movemask_epi8(V1);
-            if (Mask != 0xff)
+            __m128i __v1 = _mm_loadu_si64(__s1);
+            __m128i __v2 = _mm_loadu_si64(__s2);
+            __v1 = _mm_cmpeq_epi16(__v1, __v2);
+            unsigned char __mask = (unsigned char)_mm_movemask_epi8(__v1);
+            if (__mask != 0xff)
             {
-                _BitScanForward(&Index, (unsigned long)~Mask);
-                Index >>= 1;
-                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                _BitScanForward(&__index, (unsigned long)~__mask);
+                __index >>= 1;
+                return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
             }
 
-            Count += 4;
+            __count += 4;
         }
     #else
-        if (Count + 4 <= _N)
+        if (__count + 4 <= _N)
         {
-            unsigned __int64 V1 = *(unsigned __int64*)S1;
-            unsigned __int64 V2 = *(unsigned __int64*)S2;
-            if (V1 != V2)
+            unsigned __int64 __v1 = *(unsigned __int64*)__s1;
+            unsigned __int64 __v2 = *(unsigned __int64*)__s2;
+            if (__v1 != __v2)
             {
-                _BitScanForward64(&Index, (V1 ^ V2));
-                Index >>= 4;
-                return _S1[Count + Index] < _S2[Count + Index] ? -1 : 1;
+                _BitScanForward64(&__index, (__v1 ^ __v2));
+                __index >>= 4;
+                return _S1[__count + __index] < _S2[__count + __index] ? -1 : 1;
             }
 
-            Count += 4;
+            __count += 4;
         }
     #endif // defined(_M_IX86)
-    #endif // defined(_M_IX86) || defined(_M_X64)
+    #endif // (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
     #endif // !defined(_M_CEE)
 
-        for (; Count < _N; ++Count)
+        for (; __count < _N; ++__count)
         {
-            if (_S1[Count] != _S2[Count])
+            if (_S1[__count] != _S2[__count])
             {
-                return _S1[Count] < _S2[Count] ? -1 : 1;
+                return _S1[__count] < _S2[__count] ? -1 : 1;
             }
         }
 

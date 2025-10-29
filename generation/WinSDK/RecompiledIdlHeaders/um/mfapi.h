@@ -1425,6 +1425,36 @@ DEFINE_GUID(MFSampleExtension_SpatialLayerId,
 DEFINE_GUID(MFSampleExtension_TemporalLayerId, 
 0xb3c1fcd2, 0xb331, 0x4376, 0xb9, 0x74, 0xad, 0x64, 0x77, 0x69, 0xb2, 0xb0);
 
+typedef struct _MFSampleExtensionPsnrYuv { 
+    FLOAT psnrY; // PSNR for Y plane
+    FLOAT psnrU; // PSNR for U plane
+    FLOAT psnrV; // PSNR for V plane
+} MFSampleExtensionPsnrYuv;
+
+// MFSampleExtension_FramePsnrYuv {1C633A3D-566F-4752-833B-2907DF5415E1}
+// Type: IMFMediaBuffer
+// A MFSampleExtensionPsnrYuv structure that specifies the PSNR data of YUV planes of an encoded video frame.
+DEFINE_GUID(MFSampleExtension_FramePsnrYuv, 
+0x1c633a3d, 0x566f, 0x4752, 0x83, 0x3b, 0x29, 0x07, 0xdf, 0x54, 0x15, 0xe1);
+
+// MFSampleExtension_VideoEncodeQPMap {2C68A331-B712-49CA-860A-3A1D58237D88} 
+// Type: IMFMediaBuffer
+// The QP map of an encoded video frame.
+DEFINE_GUID(MFSampleExtension_VideoEncodeQPMap, 
+0x2c68a331, 0xb712, 0x49ca, 0x86, 0x0a, 0x3a, 0x1d, 0x58, 0x23, 0x7d, 0x88);
+
+// MFSampleExtension_VideoEncodeBitsUsedMap {6894263D-E6E2-4BCC-849D-8570365F5114}
+// Type: IMFMediaBuffer
+// The bits used map of an encoded video frame.
+DEFINE_GUID(MFSampleExtension_VideoEncodeBitsUsedMap, 
+0x6894263d, 0xe6e2, 0x4bcc, 0x84, 0x9d, 0x85, 0x70, 0x36, 0x5f, 0x51, 0x14);
+
+// MFSampleExtension_VideoEncodeSatdMap {ADF61D96-C2D3-4B57-A138-DDE4D351EAA9} 
+// Type: IMFMediaBuffer 
+// The SATD map of an encoded video frame. 
+DEFINE_GUID(MFSampleExtension_VideoEncodeSatdMap,  
+0xadf61d96, 0xc2d3, 0x4b57, 0xa1, 0x38, 0xdd, 0xe4, 0xd3, 0x51, 0xea, 0xa9); 
+ 
 ///////////////////////////////////////////////////////////////////////////////
 /// These are the attribute GUIDs that need to be used by MFT0 to provide
 /// thumbnail support.  We are declaring these in our internal idl first and
@@ -2197,6 +2227,8 @@ DEFINE_MEDIATYPE_GUID( MFVideoFormat_NV12,      FCC('NV12') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_NV21,      FCC('NV21') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_YV12,      FCC('YV12') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_I420,      FCC('I420') );
+DEFINE_MEDIATYPE_GUID( MFVideoFormat_I422,      FCC('I422') );
+DEFINE_MEDIATYPE_GUID( MFVideoFormat_I444,      FCC('I444') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_IYUV,      FCC('IYUV') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_Y210,      FCC('Y210') );
 DEFINE_MEDIATYPE_GUID( MFVideoFormat_Y216,      FCC('Y216') );

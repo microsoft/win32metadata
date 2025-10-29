@@ -3266,7 +3266,7 @@ static const IPSEC_CIPHER_TRANSFORM_ID0 IPSEC_CIPHER_TRANSFORM_ID_GCM_AES_256 =
 
 // Contexts used in the RPC audit sublayer
 #define FWPM_CONTEXT_RPC_AUDIT_ENABLED (0x1ui64)
-
+#define FWPM_CONTEXT_RPC_AUDIT_BUFFER_ENABLED (0x2ui64)
 
 ///////////////////////////////////////////////////////////////////////////////
 //

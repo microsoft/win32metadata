@@ -1541,6 +1541,7 @@ typedef struct _SET_PARTITION_ATTRIBUTES {
 #define DISK_ATTRIBUTE_MAINTENANCE          0x0000000000000008
 #define DISK_ATTRIBUTE_SPACES_BYPASS        0x0000000000000010
 #define DISK_ATTRIBUTE_IGNORE_CONFLICTS     0x0000000000000020
+#define DISK_ATTRIBUTE_PASSTHROUGH          0x0000000000000040
 
 // begin_winioctl
 //
@@ -1715,6 +1716,7 @@ typedef enum _DISK_SAN_POLICY {
     DiskSanPolicyOfflineShared,
     DiskSanPolicyOffline,
     DiskSanPolicyOfflineInternal,
+    DiskSanPolicyPassthrough,
     DiskSanPolicyMax
 
 } DISK_SAN_POLICY, *PDISK_SAN_POLICY;

@@ -175,3 +175,817 @@ Windows.Win32.System.SystemServices.Apis.PRODUCT_XBOX_GAMEOS removed
 Windows.Win32.System.SystemServices.Apis.PRODUCT_XBOX_KEYSTONE removed
 Windows.Win32.System.SystemServices.Apis.PRODUCT_XBOX_SCARLETTHOSTOS removed
 Windows.Win32.System.SystemServices.Apis.PRODUCT_XBOX_SYSTEMOS removed
+# Update to 10.0.26100.6584 SDK
+Windows.Win32.AI.MachineLearning.DirectML.DML_CONSTANT_DATA_GRAPH_NODE_DESC removed
+Windows.Win32.AI.MachineLearning.DirectML.DML_FEATURE_LEVEL.DML_FEATURE_LEVEL_6_3 added
+Windows.Win32.AI.MachineLearning.DirectML.DML_FEATURE_LEVEL.DML_FEATURE_LEVEL_6_4 added
+Windows.Win32.AI.MachineLearning.DirectML.DML_GRAPH_NODE_TYPE.DML_GRAPH_NODE_TYPE_CONSTANT removed
+Windows.Win32.Devices.BiometricFramework.Apis.EXPERIMENTAL_WinBioGetEssState added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_CAMERA added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_FPR added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_MANAGED_BY_POLICY added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_ENABLEMENT added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_FACE_SENSOR added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_FPR_SENSOR added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_ISOLATED_PROCESS added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_NON_VBS_BIOMETRIC_ENROLLMENT_ABSENCE added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_NON_VBS_WINDOWS_HELLO_ABSENCE added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_TPM2 added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_BIOMETRIC_ENROLLMENT added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_CAPABLE added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_ENCRYPTION_KEY added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_RUNNING added
+Windows.Win32.Devices.BiometricFramework.EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS.EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_WINDOWS_HELLO added
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.GUID_DEVCLASS_THERMAL added
+Windows.Win32.Devices.Display.Apis.IOCTL_GET_SCALAR_MULTIPLIER_CAPS added
+Windows.Win32.Devices.Display.Apis.IOCTL_SET_SCALAR_MULTIPLIER added
+Windows.Win32.Devices.Display.COLORSPACE_SCALAR_MULTIPLIER_CAPS added
+Windows.Win32.Devices.Display.INDIRECT_DISPLAY_INFO.DriverVersionMajor added
+Windows.Win32.Devices.Display.INDIRECT_DISPLAY_INFO.DriverVersionMinor added
+Windows.Win32.Devices.Display.VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE.VideoForceCompositionRender added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_LEVEL_SUGGESTION added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_NEXT added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_PREVIOUS added
+Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_ContainerCategories added
+Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_ContainerIcon added
+Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_ContainerManufacturer added
+Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_ContainerModelName added
+Windows.Win32.Devices.Usb.Apis.EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR_TYPE added
+Windows.Win32.Devices.Usb.Apis.USB_HIGHSPEED_EUSB2_ISOCHRONOUS_MAX_BYTESPERINTERVAL added
+Windows.Win32.Devices.Usb.Apis.USB_HIGHSPEED_EUSB2_ISOCHRONOUS_MIN_BYTESPERINTERVAL added
+Windows.Win32.Devices.Usb.EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR added
+Windows.Win32.Devices.Usb.USB4_STATUS.PollingSkipped added
+Windows.Win32.Foundation.Apis.CO_E_CANNOT_ACTIVATE_CROSS_PACKAGE_IN_SESSION_0 added
+Windows.Win32.Foundation.Apis.CO_E_SERVER_CANNOT_BE_EQUAL_OR_GREATER_PRIVILEGE added
+Windows.Win32.Foundation.Apis.FVE_E_AAD_SERVER_FAIL_BACKOFF_AAD added
+Windows.Win32.Foundation.Apis.FVE_E_AAD_SERVER_FAIL_RETRY_AFTER_AAD added
+Windows.Win32.Foundation.Apis.FVE_E_DEVICE_NOT_JOINED_AAD added
+Windows.Win32.Foundation.Apis.FVE_E_EXCEED_MAX_LIMIT_RP_IN_MEID added
+Windows.Win32.Foundation.Apis.FVE_E_FAILED_TO_UNWRAP_HW_WRAPPED_KEY added
+Windows.Win32.Foundation.Apis.FVE_E_FW_UPDATE_PCRS_BLOCK added
+Windows.Win32.Foundation.Apis.FVE_E_FW_UPDATE_PCRS_NOT_EXCLUDED added
+Windows.Win32.Foundation.Apis.FVE_E_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED added
+Windows.Win32.Foundation.Apis.FVE_E_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT added
+Windows.Win32.Foundation.Apis.FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT added
+Windows.Win32.Foundation.Apis.FVE_E_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED added
+Windows.Win32.Foundation.Apis.FVE_E_INVALID_TPM_BINDING_CONFIGURATION added
+Windows.Win32.Foundation.Apis.FVE_E_NO_MATCHING_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.FVE_E_NO_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.FVE_E_ORPHANED_PCR_DIGEST_DATUM added
+Windows.Win32.Foundation.Apis.FVE_E_TOO_MANY_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.FVE_E_TPM_BINDING_ASSOCIATION_FAILURE added
+Windows.Win32.Foundation.Apis.FVE_E_TPMPV2_USED_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_AMD_DEVICE_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_AMD_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_AMD_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_DEVICE_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_IDD_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_IDD_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_INTEL_DEVICE_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_INTEL_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_INTEL_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_NVIDIA_DEVICE_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_NVIDIA_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_NVIDIA_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_QC_DEVICE_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_QC_PRESENT_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_QC_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.MILERR_SWAPCHAIN_CREATION_FAILURE added
+Windows.Win32.Foundation.Apis.PPF_E_TRANSFORM_CLEANED_UP_NA added
+Windows.Win32.Foundation.Apis.PPF_E_TRANSFORM_CLEANED_UP_STATE_CHANGE added
+Windows.Win32.Foundation.Apis.PPF_E_TRANSFORM_CONFLICT added
+Windows.Win32.Foundation.Apis.PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT added
+Windows.Win32.Foundation.Apis.PPF_E_TRANSFORM_DIGEST_ALGO_NOT_SUPPORTED added
+Windows.Win32.Foundation.Apis.SQLITE_E_AUTH_USER added
+Windows.Win32.Foundation.Apis.SQLITE_E_BUSY_TIMEOUT added
+Windows.Win32.Foundation.Apis.SQLITE_E_CANTOPEN_DIRTYWAL added
+Windows.Win32.Foundation.Apis.SQLITE_E_CANTOPEN_SYMLINK added
+Windows.Win32.Foundation.Apis.SQLITE_E_CONSTRAINT_DATATYPE added
+Windows.Win32.Foundation.Apis.SQLITE_E_CONSTRAINT_PINNED added
+Windows.Win32.Foundation.Apis.SQLITE_E_CORRUPT_INDEX added
+Windows.Win32.Foundation.Apis.SQLITE_E_CORRUPT_SEQUENCE added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_BEGIN_ATOMIC added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_COMMIT_ATOMIC added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_CORRUPTFS added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_DATA added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_IN_PAGE added
+Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_ROLLBACK_ATOMIC added
+Windows.Win32.Foundation.Apis.SQLITE_E_LOCKED_VTAB added
+Windows.Win32.Foundation.Apis.SQLITE_E_NOTICE_RECOVER_RBU added
+Windows.Win32.Foundation.Apis.SQLITE_E_READONLY_CANTINIT added
+Windows.Win32.Foundation.Apis.SQLITE_E_READONLY_DIRECTORY added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_APNONCE_INVALID added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_ASSERTION_INVALID added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_ASSERTION_MALFORMED added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_BAD_DEVICE_ACCESS_TOKEN_FORMAT added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_CALLER_MISMATCH added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_CANT_FIND_ROOT_CERT added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_INVALID_ACCESS_TOKEN added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_INVALID_BINDING_KEY_ID added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_INVALID_DEVICE added
+Windows.Win32.Foundation.Apis.STATUS_AAD_CLOUDAP_E_INVALID_TENANT added
+Windows.Win32.Foundation.Apis.STATUS_APISET_COMPOSE_FAILURE added
+Windows.Win32.Foundation.Apis.STATUS_CAMERA_INSUFFICIENT_BANDWIDTH added
+Windows.Win32.Foundation.Apis.STATUS_CAMERA_INVALID_CONFIGURATION added
+Windows.Win32.Foundation.Apis.STATUS_CLOUD_FILE_HYDRATION_NOT_AVAILABLE added
+Windows.Win32.Foundation.Apis.STATUS_FVE_FAILED_TO_UNWRAP_HW_WRAPPED_KEY added
+Windows.Win32.Foundation.Apis.STATUS_FVE_FW_UPDATE_PCRS_BLOCK added
+Windows.Win32.Foundation.Apis.STATUS_FVE_FW_UPDATE_PCRS_NOT_EXCLUDED added
+Windows.Win32.Foundation.Apis.STATUS_FVE_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED added
+Windows.Win32.Foundation.Apis.STATUS_FVE_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT added
+Windows.Win32.Foundation.Apis.STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT added
+Windows.Win32.Foundation.Apis.STATUS_FVE_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED added
+Windows.Win32.Foundation.Apis.STATUS_FVE_INVALID_TPM_BINDING_CONFIGURATION added
+Windows.Win32.Foundation.Apis.STATUS_FVE_NO_MATCHING_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.STATUS_FVE_NO_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.STATUS_FVE_ORPHANED_PCR_DIGEST_DATUM added
+Windows.Win32.Foundation.Apis.STATUS_FVE_TOO_MANY_TPM_BINDINGS added
+Windows.Win32.Foundation.Apis.STATUS_FVE_TPM_BINDING_ASSOCIATION_FAILURE added
+Windows.Win32.Foundation.Apis.STATUS_FVE_TPMPV2_USED_FAILURE added
+Windows.Win32.Foundation.Apis.STATUS_TPM_IN_EXCLUSIVE_MODE added
+Windows.Win32.Foundation.Apis.STATUS_TPM_REBOOT_REQUIRED added
+Windows.Win32.Foundation.Apis.STATUS_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED added
+Windows.Win32.Foundation.Apis.STATUS_VSMIDK_EXPORT_FAILURE added
+Windows.Win32.Foundation.Apis.STATUS_VSMIDK_KEYGEN_FAILURE added
+Windows.Win32.Foundation.Apis.STATUS_VSMIDK_MODULUS_MISMATCH added
+Windows.Win32.Foundation.Apis.TBS_E_TPM_IN_EXCLUSIVE_MODE added
+Windows.Win32.Foundation.Apis.TBS_E_TPM_REBOOT_REQUIRED added
+Windows.Win32.Foundation.Apis.WINCODEC_ERR_UNSUPPORTEDTONEMAPPING added
+Windows.Win32.Foundation.NTSTATUS_FACILITY_CODE.FACILITY_CAMERA added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_CAMERA_INSUFFICIENT_BANDWIDTH added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_CAMERA_INVALID_CONFIGURATION added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_CANNOT_COMPOSE_APISET_EXTENSION added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_CLOUD_FILE_HYDRATION_NOT_AVAILABLE added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_DEPLOYMENT_BLOCKED_BY_REMOVEDEFAULTPACKAGES_POLICY added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_PACKAGE_MANIFEST_NOT_FOUND added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_PACKAGE_REPOSITORY_ROOT_CORRUPTED added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_VSMIDK_EXPORT_FAILURE added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_VSMIDK_KEYGEN_FAILURE added
+Windows.Win32.Foundation.WIN32_ERROR.ERROR_VSMIDK_MODULUS_MISMATCH added
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcResult.GetOutput : ppOutputName : [ComOutPtr,Out] => [ComOutPtr,Optional,Out]
+Windows.Win32.Graphics.DirectComposition.IDCompositionDevice5 added
+Windows.Win32.Graphics.DirectComposition.IDCompositionDynamicTexture added
+Windows.Win32.Graphics.Dwm.DWMWINDOWATTRIBUTE.DWMWA_BORDER_MARGINS added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupReserved1 added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupReserved2 added
+Windows.Win32.Graphics.Imaging.Apis.CLSID_WICGainMapMetadataReader added
+Windows.Win32.Graphics.Imaging.Apis.CLSID_WICGainMapMetadataWriter added
+Windows.Win32.Graphics.Imaging.Apis.GUID_MetadataFormatGainMap added
+Windows.Win32.Graphics.Imaging.Apis.GUID_WICPixelFormat24bppRGBGain added
+Windows.Win32.Graphics.Imaging.Apis.GUID_WICPixelFormat32bppBGRGain added
+Windows.Win32.Graphics.Imaging.D2D.IWICImagingFactory3 added
+Windows.Win32.Graphics.Imaging.IWICBitmapFrameChainReader added
+Windows.Win32.Graphics.Imaging.IWICBitmapFrameChainWriter added
+Windows.Win32.Graphics.Imaging.IWICBitmapToneMapper added
+Windows.Win32.Graphics.Imaging.IWICD3DTextureSource added
+Windows.Win32.Graphics.Imaging.IWICDisplayAdaptationControl2 added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_AlphaMap added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_Alternate added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_DepthMap added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_GainMap added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_Layer added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_Preview added
+Windows.Win32.Graphics.Imaging.WICBitmapChainType.WICBitmapChainType_Thumbnail added
+Windows.Win32.Graphics.Imaging.WICBitmapToneMappingMode added
+Windows.Win32.Graphics.Imaging.WICBitmapToneMappingMode.WICBitmapToneMappingMode_D2D added
+Windows.Win32.Graphics.Imaging.WICBitmapToneMappingMode.WICBitmapToneMappingMode_Default added
+Windows.Win32.Graphics.Imaging.WICBitmapToneMappingMode.WICBitmapToneMappingMode_GainMap added
+Windows.Win32.Graphics.Imaging.WICBitmapToneMappingMode.WICBitmapToneMappingMode_None added
+Windows.Win32.Graphics.Imaging.WICGainMapProperties added
+Windows.Win32.Graphics.Imaging.WICGainMapProperties.WICGainMapMetadata added
+Windows.Win32.Graphics.Imaging.WICHeifCompressionOption.WICHeifCompressionBrotli added
+Windows.Win32.Graphics.Imaging.WICHeifCompressionOption.WICHeifCompressionDeflate added
+Windows.Win32.Graphics.Imaging.WICHeifCompressionOption.WICHeifCompressionJpegXL added
+Windows.Win32.Graphics.Imaging.WICHeifProperties.WICHeifLayeredImageCanvasColor added
+Windows.Win32.Graphics.Imaging.WICHeifProperties.WICHeifLayeredImageLayerPositions added
+Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.MENROLL_E_SERVER429 added
+Windows.Win32.Media.KernelStreaming.KSATTRIBUTEID_VIDEOFORMAT_DX12 added
+Windows.Win32.Media.KernelStreaming.KSEVENT_PINCAPS_CHANGENOTIFICATIONS.KSEVENT_PINCAPS_INVALIDATECLIENTS added
+Windows.Win32.Media.KernelStreaming.VIDEOFORMAT_DX12 added
+Windows.Win32.Media.MediaFoundation.Apis.MF_E_CAMERA_FSPROFILE_INVALID added
+Windows.Win32.Media.MediaFoundation.Apis.MFSampleExtension_FramePsnrYuv added
+Windows.Win32.Media.MediaFoundation.Apis.MFSampleExtension_VideoEncodeBitsUsedMap added
+Windows.Win32.Media.MediaFoundation.Apis.MFSampleExtension_VideoEncodeQPMap added
+Windows.Win32.Media.MediaFoundation.Apis.MFSampleExtension_VideoEncodeSatdMap added
+Windows.Win32.Media.MediaFoundation.Apis.MFVideoFormat_I422 added
+Windows.Win32.Media.MediaFoundation.Apis.MFVideoFormat_I444 added
+Windows.Win32.Media.MediaFoundation.CODECAPI_AVEncVideoEnableFramePsnrYuv added
+Windows.Win32.Media.MediaFoundation.CODECAPI_AVEncVideoEnableSpatialAdaptiveQuantization added
+Windows.Win32.Media.MediaFoundation.CODECAPI_AVEncVideoOutputBitsUsedMapBlockSize added
+Windows.Win32.Media.MediaFoundation.CODECAPI_AVEncVideoOutputQPMapBlockSize added
+Windows.Win32.Media.MediaFoundation.CODECAPI_AVEncVideoSatdMapBlockSize added
+Windows.Win32.Media.MediaFoundation.MFSampleExtensionPsnrYuv added
+Windows.Win32.Networking.Clustering.Apis.CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY added
+Windows.Win32.Networking.Clustering.Apis.CLUSREG_NAME_CLOUDWITNESS_MANAGED_IDENTITY added
+Windows.Win32.Networking.Clustering.Apis.CLUSREG_NAME_NODE_FAILBACK_ERROR_CODE added
+Windows.Win32.Networking.Clustering.NodeSriovInfo added
+Windows.Win32.Networking.Clustering.NodeVFInfo removed
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_CACHED_REVOCATION added
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_CACHED_URLS added
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_NO_AIA added
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_NO_REVOCATION added
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_NO_USAGE_CHECK added
+Windows.Win32.Networking.HttpServer.Apis.HTTP_CERT_CHECK_MODE_USE_REVOCATION_FRESHNESS added
+Windows.Win32.Networking.HttpServer.Apis.HttpQueryRequestProperty added
+Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureDisableAiaFlag added
+Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureDscp added
+Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureIdleConnectionTimeoutRequestProperty added
+Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureQueryCipherInfo added
+Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureQueryInitialPacketTtl added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_DSCP_INFO added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeDscpTag added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeInitialPacketTtl added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeTransportIdleConnectionTimeout added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_INITIAL_PACKET_TTL_INFO added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_PROPERTY.HttpRequestPropertyDscpTag added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_PROPERTY.HttpRequestPropertyTlsCipherInfo added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_PROPERTY.HttpRequestPropertyTransportIdleConnectionTimeout added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO added
+Windows.Win32.Networking.Ldap.Apis.LDAP_OPT_MAX_VAL_RANGE added
+Windows.Win32.Networking.Ldap.LDAP.ld_maxvalrange added
+Windows.Win32.Networking.WindowsWebServices.Apis.EXPERIMENTAL_WEBAUTHN_API_VERSION_8 removed
+Windows.Win32.Networking.WindowsWebServices.Apis.EXPERIMENTAL_WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_8 removed
+Windows.Win32.Networking.WindowsWebServices.Apis.EXPERIMENTAL_WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_7 removed
+Windows.Win32.Networking.WindowsWebServices.Apis.EXPERIMENTAL_WEBAUTHN_CREDENTIAL_DETAILS_VERSION_3 removed
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_8 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_9 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_VERSION_8 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_8 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_7 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_8 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_VERSION_3 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_VERSION_4 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_HINT_CLIENT_DEVICE added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_HINT_HYBRID added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_HINT_SECURITY_KEY added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_BLE_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_HYBRID_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_INTERNAL_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_NFC_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_SMART_CARD added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_SMART_CARD_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_USB_STRING added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_RP_ENTITY_INFORMATION_VERSION_1 added
+Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_USER_ENTITY_INFORMATION_VERSION_1 added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS.cbPluginIdKey removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS.pbPluginIdKey removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST.cbNonce removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST.cbSignature removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST.pbNonce removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST.pbSignature removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_REMOVE_AUTHENTICATOR_OPTIONS removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.cbNonce removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.cbPluginIdKey removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.cbSignature removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.pbNonce removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.pbPluginIdKey removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS.pbSignature removed
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL_WebAuthNPluginStatusChangeCallback added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_PLUGIN_AUTHENTICATOR_STATE added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_PLUGIN_AUTHENTICATOR_STATE.PluginAuthenticatorState_Disabled_2 added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_PLUGIN_AUTHENTICATOR_STATE.PluginAuthenticatorState_Enabled_2 added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS added
+Windows.Win32.Networking.WindowsWebServices.EXPERIMENTAL2_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.cCredentialHints added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.ppwszCredentialHints added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.bThirdPartyPayment added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.cCredentialHints added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.EXPERIMENTAL_pPRFGlobalEval removed
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.pPRFGlobalEval added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.ppwszCredentialHints added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.bThirdPartyPayment added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.dwTransports added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.EXPERIMENTAL_pHmacSecret removed
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.pHmacSecret added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.bThirdPartyPayment added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.cbAuthenticatorLogo added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.dwTransports added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.EXPERIMENTAL_cbAuthenticatorLogo removed
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.EXPERIMENTAL_pbAuthenticatorLogo removed
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.EXPERIMENTAL_pwszAuthenticatorName removed
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.pbAuthenticatorLogo added
+Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.pwszAuthenticatorName added
+Windows.Win32.Networking.WindowsWebServices.WS_SERVICE_ENDPOINT_PROPERTY_ID.WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS_PER_IP added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_FEATURE_DISABLE_AIA_FLAG added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_FEATURE_DSCP_TAG added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_FEATURE_HTTP11_DOWNGRADE_TTL added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_FEATURE_SESSION_ERROR_LOG_GUID added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_OPTION_DSCP_TAG added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_OPTION_HTTP11_DOWNGRADE_TTL added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_OPTION_SERVER_CERT_CHAIN_BUILD_CACHE_ONLY added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_OPTION_SERVER_CERT_CHAIN_BUILD_FLAGS added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_OPTION_SESSION_ERROR_LOG_GUID added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_SERVER_CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_SERVER_CERT_CHAIN_DISABLE_AIA added
+Windows.Win32.Networking.WinHttp.Apis.WINHTTP_SERVER_CERT_CHAIN_REVOCATION_CHECK_CACHE_ONLY added
+Windows.Win32.Networking.WinSock.Apis.SO_RECEIVED_HOPLIMIT added
+Windows.Win32.Networking.WinSock.Apis.SO_RECEIVED_PROCESSOR added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_32 added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_40 added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_48 added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_56 added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_64 added
+Windows.Win32.Networking.WinSock.ND_OPT_PREF64_PREFIX_LENGTH_CODE.ND_OPT_PREF64_PREFIX_LENGTH_96 added
+Windows.Win32.Networking.WinSock.ND_OPTION_PREF64 added
+Windows.Win32.Networking.WinSock.ND_OPTION_TYPE.ND_OPT_PREF64 added
+Windows.Win32.NetworkManagement.NetManagement.Apis.LM_DNS_MAX_NAME_LENGTH added
+Windows.Win32.NetworkManagement.QoS.Apis.SIPAEVENT_VSM_DRTM_KEYROLL_DETECTED added
+Windows.Win32.NetworkManagement.QoS.Apis.SIPAEVENT_VSM_SEALED_SI_POLICY added
+Windows.Win32.NetworkManagement.QoS.Apis.SIPAEVENT_VSM_SRTM_ANTI_ROLLBACK_COUNTER added
+Windows.Win32.NetworkManagement.QoS.Apis.SIPAEVENT_VSM_SRTM_UNSEAL_POLICY added
+Windows.Win32.NetworkManagement.QoS.Apis.SIPAEVENT_VTL1_DUMP_CONFIG added
+Windows.Win32.Security.Authentication.Identity.Apis.Audit_Logon_AccessRights added
+Windows.Win32.Security.Authentication.Identity.Apis.POLICY_MODE_COUNT added
+Windows.Win32.Security.Authentication.Identity.Apis.PRIMARY_CRED_LOCAL_USER added
+Windows.Win32.Security.Authentication.Identity.LSA_SECPKG_FUNCTION_TABLE.GetSecpkgFailureReason added
+Windows.Win32.Security.Authentication.Identity.LSA_SECPKG_FUNCTION_TABLE.SetSecpkgFailureReason added
+Windows.Win32.Security.Authentication.Identity.PLSA_GET_SECPKG_FAILURE_REASON added
+Windows.Win32.Security.Authentication.Identity.PLSA_SET_SECPKG_FAILURE_REASON added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_REASON added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_CloudAccount added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_DomainAccount added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_DupTarget added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_IpAddress added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_LocalAccount added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_Loopback added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_NoFailure added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_NoLineOfSight added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_NullSession added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_NullTarget added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_Unknown added
+Windows.Win32.Security.Authentication.Identity.SECPKG_FAILURE_SPECIAL_REASON.SecpkgFailureReason_UnknownTarget added
+Windows.Win32.Security.Cryptography.Apis.MS_PLUTON_CRYPTO_PROVIDER added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_ECC_EKCERT_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_ECC_EKPUB_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_EKCERT_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_EKPUB_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_KDF_PARAMS_BUFFER_DESC_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_KDF_PARENT_KEY_UNIQUE_NAME_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_RSA_EKCERT_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_RSA_EKPUB_PROPERTY added
+Windows.Win32.Security.Cryptography.Apis.NCRYPT_PLUTON_SESSION_ID_PROPERTY added
+Windows.Win32.Security.Cryptography.Certificates.Apis.CRLF_CONTAINS_ONLY_CACERTS added
+Windows.Win32.Security.Cryptography.Certificates.Apis.CRLF_CONTAINS_ONLY_USERCERTS added
+Windows.Win32.Security.Cryptography.Certificates.Apis.wszOCSPREVPROP_ALLOWCAONLYCRLS added
+Windows.Win32.Security.Cryptography.Certificates.Apis.wszOCSPREVPROP_ALLOWUSERONLYCRLS added
+Windows.Win32.Security.Cryptography.Certificates.Apis.wszPROPLINTCERTIFICATE added
+Windows.Win32.Security.Cryptography.Certificates.Apis.wszPROPLINTERCERTIFICATE added
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : func : [In] => [In,Optional]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : pConnectionData : [Const,In] => [Const,In,NativeArrayInfo(CountParamIndex=4)]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : pConnectionId : [Const,In] => [Const,In,Optional]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : pContextData : [In,Out] => [In,Optional]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : pSessionId : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerBeginSession : pUserData : [Const,In] => [Const,In,NativeArrayInfo(CountParamIndex=6)]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerClearConnection : pConnectionId : [In,Out] => [In]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerClearConnection : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerConfigBlob2Xml : ppConfigDoc : [Out] => [ComOutPtr,Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerConfigBlob2Xml : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerConfigXml2Blob : pdwSizeOfConfigOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerConfigXml2Blob : pEapMethodType : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerConfigXml2Blob : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerCredentialsXml2Blob : pdwSizeOfCredentialsOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerCredentialsXml2Blob : pEapMethodType : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerCredentialsXml2Blob : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerEndSession : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerFreeEapError : pEapError : [In,Out] => [In]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerFreeRuntimeMemory : pData : [In,Out] => [In]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetAuthStatus : pcbAuthData : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetAuthStatus : ppAuthData : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetAuthStatus : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials : fSaveToCredMan : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials : pConnectionIdThatLastSavedCreds : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials : phCredentialImpersonationToken : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetDataToUnplumbCredentials : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetIdentity : pdwSizeOfUserDataOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetIdentity : pfInvokeUI : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetIdentity : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetMethodProperties : pMethodPropertyArray : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetMethodProperties : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetMethods : pEapMethodInfoArray : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetMethods : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetResponseAttributes : pAttribs : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetResponseAttributes : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetResult : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetResult : ppResult : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetSendPacket : pcbSendPacket : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetSendPacket : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetSendPacket : ppSendPacket : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetUIContext : pdwSizeOfUIContextData : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetUIContext : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerGetUIContext : ppUIContextData : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeConfigUI : pdwSizeOfConfigOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeConfigUI : ppConfigOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeConfigUI : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeIdentityUI : pdwSizeOfUserDataOut : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeIdentityUI : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeInteractiveUI : pdwSizeOfDataFromInteractiveUI : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerInvokeInteractiveUI : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerProcessReceivedPacket : pEapOutput : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerProcessReceivedPacket : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerProcessReceivedPacket : pReceivePacket : [Const,In] => [Const,In,NativeArrayInfo(CountParamIndex=1)]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryCredentialInputFields : pEapConfigInputFieldArray : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryCredentialInputFields : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryInteractiveUIInputFields : pEapInteractiveUIData : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryInteractiveUIInputFields : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryUIBlobFromInteractiveUIInputFields : pdwSizeOfDataFromInteractiveUI : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryUIBlobFromInteractiveUIInputFields : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerQueryUserBlobFromCredentialInputFields : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerSetResponseAttributes : pEapOutput : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerSetResponseAttributes : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerSetUIContext : pEapOutput : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerSetUIContext : ppEapError : [In,Out] => [Out]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.Apis.EapHostPeerSetUIContext : pUIContextData : [Const,In] => [Const,In,NativeArrayInfo(CountParamIndex=1)]
+Windows.Win32.Security.ExtensibleAuthenticationProtocol.NotificationHandler.Invoke : pContextData : [In,Out] => [In]
+Windows.Win32.Security.TOKEN_INFORMATION_CLASS.TokenLearningMode added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_ActivityDate added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_ActivityIcon added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_RecommendationActivityDate added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_RecommendationProviderSource added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_RecommendationReasonIcon added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Search_AutoCategory added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Search_MatchTags added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Search_OcrContent added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Shell_CopilotKeyProviderFastPathMessage added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileDateShared added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileRemoteLocation added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileSharedBy added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFullyQualifiedId added
+Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderUserId added
+Windows.Win32.Storage.FileSystem.Apis.CreateDirectory2A added
+Windows.Win32.Storage.FileSystem.Apis.CreateDirectory2W added
+Windows.Win32.Storage.FileSystem.Apis.CreateFile3 added
+Windows.Win32.Storage.FileSystem.Apis.DeleteFile2A added
+Windows.Win32.Storage.FileSystem.Apis.DeleteFile2W added
+Windows.Win32.Storage.FileSystem.Apis.RemoveDirectory2A added
+Windows.Win32.Storage.FileSystem.Apis.RemoveDirectory2W added
+Windows.Win32.Storage.FileSystem.CREATEFILE3_EXTENDED_PARAMETERS added
+Windows.Win32.Storage.FileSystem.DIRECTORY_FLAGS added
+Windows.Win32.Storage.FileSystem.DIRECTORY_FLAGS.DIRECTORY_FLAGS_DISALLOW_PATH_REDIRECTS added
+Windows.Win32.Storage.FileSystem.DIRECTORY_FLAGS.DIRECTORY_FLAGS_NONE added
+Windows.Win32.Storage.IndexServer.Apis.DBPROP_QUERY_ID added
+Windows.Win32.Storage.IndexServer.Apis.DBPROP_SESSION_ID added
+Windows.Win32.Storage.IndexServer.IPixelFilter.GetPixelsForImage(pixelBufferLength,pixelBuffer) removed
+Windows.Win32.Storage.IndexServer.IPixelFilter.GetPixelsForImage(scalingFactor,sourceRect,pixelBufferSize,pixelBuffer) added
+Windows.Win32.Storage.Nvme.Apis.NVME_CONTROLLER_ID_STAT_PERSIST added
+Windows.Win32.Storage.Nvme.Apis.NVME_DISCOVERY_INFO_MGMT_EKTYPE_PORTID added
+Windows.Win32.Storage.Nvme.Apis.NVME_DISCOVERY_INFO_MGMT_EKTYPE_TRADDR added
+Windows.Win32.Storage.Nvme.Apis.NVME_FABRICS_COMMAND removed
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_PREFIX_V1 added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_PROTOCOL_ID added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_REPLY_CVAL_NOTVALID added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_REPLY_CVAL_VALID added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_SUCCESS1_RVAL_NOTVALID added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_DHCHAP_SUCCESS1_RVAL_VALID added
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_NUM_AEN_DISC_CTRL removed
+Windows.Win32.Storage.Nvme.Apis.NVMEOF_NUM_AEN_IO_CTRL removed
+Windows.Win32.Storage.Nvme.NVME_ADMIN_COMMANDS.NVME_ADMIN_COMMAND_DISCOVERY_INFO_MGMT added
+Windows.Win32.Storage.Nvme.NVME_ADMIN_COMMANDS.NVME_ADMIN_COMMAND_FABRICS added
+Windows.Win32.Storage.Nvme.NVME_ASYNC_EVENT_ERROR_STATUS_CODES.NVME_ASYNC_ERROR_INVALID_SUBMISSION_QUEUE removed
+Windows.Win32.Storage.Nvme.NVME_ASYNC_EVENT_ERROR_STATUS_CODES.NVME_ASYNC_ERROR_WRITE_TO_INVALID_DOORBELL_REGISTER added
+Windows.Win32.Storage.Nvme.NVME_CDW10_DELETE_IO_QUEUE added
+Windows.Win32.Storage.Nvme.NVME_CDW10_DISCOVERY_INFO_MGMT added
+Windows.Win32.Storage.Nvme.NVME_CDW12_VERIFYCOMMAND added
+Windows.Win32.Storage.Nvme.NVME_CDW15_VERIFY_COMMAND added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union._DELETEIOQUEUE_e__Struct added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union._DISCOVERYINFOMGMT_e__Struct added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union._VERIFYCOMMAND_e__Struct added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union.DELETEIOQUEUE added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union.DISCOVERYINFOMGMT added
+Windows.Win32.Storage.Nvme.NVME_COMMAND._u_e__Union.VERIFYCOMMAND added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE.NvmeDiscCtrlTypeCDC added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE.NvmeDiscCtrlTypeDDC added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE.NvmeDiscCtrlTypeReserved1 added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE.NvmeDiscCtrlTypeReservedMax added
+Windows.Win32.Storage.Nvme.NVME_DISC_CTRL_TYPE.NvmeDiscCtrlTypeUnspecified added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_ENTRY added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_HEADER added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTITY_TYPES added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTITY_TYPES.NVME_DISCOVERY_INFO_ENTITY_TYPE_CDC added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTITY_TYPES.NVME_DISCOVERY_INFO_ENTITY_TYPE_DDC added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTITY_TYPES.NVME_DISCOVERY_INFO_ENTITY_TYPE_HOST added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTITY_TYPES.NVME_DISCOVERY_INFO_ENTITY_TYPE_RESERVED added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTRY_FORMATS added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTRY_FORMATS.NVME_DISCOVERY_INFO_ENTRY_FORMAT_BASIC added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTRY_FORMATS.NVME_DISCOVERY_INFO_ENTRY_FORMAT_EXTENDED added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_ENTRY_FORMATS.NVME_DISCOVERY_INFO_ENTRY_FORMAT_RESERVED added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_MGMT_HEADER added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_MGMT_TASK added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_MGMT_TASK.NVME_DISCOVERY_INFO_MGMT_TASK_DEREGISTER added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_MGMT_TASK.NVME_DISCOVERY_INFO_MGMT_TASK_REGISTER added
+Windows.Win32.Storage.Nvme.NVME_DISCOVERY_INFO_MGMT_TASK.NVME_DISCOVERY_INFO_MGMT_TASK_UPDATE added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrAdminLabelAscii added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrAdminLabelUtf8 added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrHostId added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrReserved0 added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrReservedEnd added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrReservedStart added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrVendorEnd added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_ATTR_TYPE.NvmeExtAttrVendorStart added
+Windows.Win32.Storage.Nvme.NVME_EXTENDED_DISCOVERY_ENTRY added
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA._CMIC_e__Struct._bitfield : [NativeBitfield(MultiPCIePorts,0,1),NativeBitfield(MultiControllers,1,1),NativeBitfield(SRIOV,2,1),NativeBitfield(ANAR,3,1),NativeBitfield(Reserved,4,4)] => [NativeBitfield(MultiPorts,0,1),NativeBitfield(MultiControllers,1,1),NativeBitfield(SRIOV,2,1),NativeBitfield(ANAR,3,1),NativeBitfield(Reserved,4,4)]
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA.CQT added
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA.DCTYPE added
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA.Reserved3...System.Byte[] => System.Byte
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA.Reserved4 added
+Windows.Win32.Storage.Nvme.NVME_IDENTIFY_CONTROLLER_DATA.TMPTHHA added
+Windows.Win32.Storage.Nvme.NVME_RDMA_KEYED_SGL_DESC_SUBTYPE added
+Windows.Win32.Storage.Nvme.NVME_RDMA_KEYED_SGL_DESC_SUBTYPE.NvmeRdmaKeyedSglDescSubtypeInvalidate added
+Windows.Win32.Storage.Nvme.NVME_STATUS_COMMAND_SPECIFIC_CODES.NVME_STATUS_INSUFFICIENT_DISCOVERY_RESOURCES added
+Windows.Win32.Storage.Nvme.NVME_STATUS_COMMAND_SPECIFIC_CODES.NVME_STATUS_INVALID_DISCOVERY_INFORMATION added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_CHALLENGE added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_DESCRIPTOR added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroup2048 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroup3072 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroup4096 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroup6144 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroup8192 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroupMax added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_GROUP_ID.NvmeofAuthDHCHAPGroupNull added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID.NvmeofAuthDHCHAPHashMax added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID.NvmeofAuthDHCHAPHashReserved added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID.NvmeofAuthDHCHAPHashSha256 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID.NvmeofAuthDHCHAPHashSha384 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_HASH_ID.NvmeofAuthDHCHAPHashSha512 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_REPLY added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_SUCCESS1 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_DHCHAP_SUCCESS2 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_CODE added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_CODE.NvmeofAuthFailureReasonFailed added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthDHGroupNotUsable added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthFailed added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthHashFunctionNotUsable added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthIncorrectPayload added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthIncorrectProtocolMessage added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthProtocolNotUsable added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAIL_REASON_EXPLANATION.NvmeofAuthSecureChannelConcatMismatch added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_FAILURE added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdChallenge added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdFailure1 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdFailure2 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdNegotiate added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdReply added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdSuccess1 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_ID.NvmeofAuthIdSuccess2 added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_NEGOTIATE added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_PROTOCOL added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_PROTOCOL.NvmeofAuthProtocolDHCHAP added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_SECURE_CHANNEL added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_SECURE_CHANNEL.NvmeofAuthSCAuthConcatSCRequired added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_SECURE_CHANNEL.NvmeofAuthSCAuthRequired added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_SECURE_CHANNEL.NvmeofAuthSCReserved added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_SECURE_CHANNEL.NvmeofAuthSCUnspecified added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_TYPE added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_TYPE.NvmeofAuthTypeCommonMessages added
+Windows.Win32.Storage.Nvme.NVMEOF_AUTH_TYPE.NvmeofAuthTypeDHCHAPMessages added
+Windows.Win32.Storage.Nvme.NVMEOF_DISC_LOGPAGE removed
+Windows.Win32.Storage.Nvme.NVMEOF_DISC_LPE removed
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL_PROTOCOL added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL_PROTOCOL.NvmeofSecureChannelConcatNone added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL_PROTOCOL.NvmeofSecureChannelConcatWithTLS added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL_PROTOCOL.NvmeofSecureChannelNewTLSPSK added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL_PROTOCOL.NvmeofSecureChannelReplaceTLSPSK added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofFSCNotRequired removed
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofFSCRequired removed
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofFSCReserved removed
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofFSCUnspecified removed
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofSCNotRequired added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofSCRequired added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofSCReserved added
+Windows.Win32.Storage.Nvme.NVMEOF_SECURE_CHANNEL.NvmeofSCUnspecified added
+Windows.Win32.Storage.Nvme.NVMEOF_SUBSYSTEM_TYPE.NvmeofSubsysTypeDiscCurrent added
+Windows.Win32.Storage.Nvme.NVMEOF_SUBSYSTEM_TYPE.NvmeofSubsysTypeDiscovery removed
+Windows.Win32.Storage.Nvme.NVMEOF_SUBSYSTEM_TYPE.NvmeofSubsysTypeDiscReferral added
+Windows.Win32.System.Com.CLSCTX.CLSCTX_DO_NOT_ELEVATE_SERVER added
+Windows.Win32.System.Com.CLSCTX.CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE added
+Windows.Win32.System.Com.IPackagedComSyntaxSupport added
+Windows.Win32.System.Com.ISupportActivateAsActivatorPackaged added
+Windows.Win32.System.Com.ISupportActivationFromPackage added
+Windows.Win32.System.Com.ISupportCoAddComDependencyOnPackage added
+Windows.Win32.System.Com.ISupportDoNotElevateServerActivation added
+Windows.Win32.System.Com.ISupportPackagedComElevationEnabledClasses added
+Windows.Win32.System.Com.ISupportPackagedComRegistrationVisibility added
+Windows.Win32.System.Com.ISupportServerMustBeEqualOrGreaterPrivilegeActivation added
+Windows.Win32.System.Diagnostics.Debug.BUGCHECK_ERROR.STORAGE_DRIVER_LIVEDUMP added
+Windows.Win32.System.Diagnostics.Debug.Extensions.Apis.DEBUG_FORMAT_USER_SMALL_NO_IGNORE_INACCESSIBLE_MEM added
+Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE.FACILITY_PPF added
+Windows.Win32.System.Diagnostics.Debug.IMAGE_LOAD_CONFIG_DIRECTORY32.UmaFunctionPointers added
+Windows.Win32.System.Diagnostics.Debug.IMAGE_LOAD_CONFIG_DIRECTORY64.UmaFunctionPointers added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TYPE.MiniDumpNoIgnoreInaccessibleMemory added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TYPE.MiniDumpValidTypeFlagsEx added
+Windows.Win32.System.Environment.Apis.EnclaveCopyIntoEnclave added
+Windows.Win32.System.Environment.Apis.EnclaveCopyOutOfEnclave added
+Windows.Win32.System.Environment.Apis.EnclaveRestrictContainingProcessAccess added
+Windows.Win32.System.Ioctl.Apis.IOCTL_STORAGE_GET_SYSTEM_FEATURE_SUPPORT added
+Windows.Win32.System.Ioctl.Apis.IOCTL_STORAGE_MINIPORT_PASSTHROUGH_REQUEST added
+Windows.Win32.System.Ioctl.Apis.STORAGE_FEATURE_SUPPORT_V1 added
+Windows.Win32.System.Ioctl.Apis.STORAGE_HW_CRYPTO_CAPABILITY_VERSION_1 added
+Windows.Win32.System.Ioctl.Apis.STORAGE_HW_CRYPTO_DESCRIPTOR_VERSION_1 added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_ALGORITHM_ID.StorCryptoAlgorithmAESECB added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_ALGORITHM_ID.StorCryptoAlgorithmBitlockerAESCBC added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_ALGORITHM_ID.StorCryptoAlgorithmESSIVAESCBC added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_ALGORITHM_ID.StorCryptoAlgorithmUnknown added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_ALGORITHM_ID.StorCryptoAlgorithmXTSAES added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_CAPABILITY_V2._SecurityComplianceBitmask_e__Union removed
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_CAPABILITY_V2.SecurityComplianceBitmask...Windows.Win32.System.Ioctl.STORAGE_CRYPTO_CAPABILITY_V2+_SecurityComplianceBitmask_e__Union => Windows.Win32.System.Ioctl.STORAGE_SECURITY_COMPLIANCE_BITMASK
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_DESCRIPTOR_V2._SecurityComplianceBitmask_e__Union removed
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_DESCRIPTOR_V2.KeyTypeBitmask added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_DESCRIPTOR_V2.SecurityComplianceBitmask...Windows.Win32.System.Ioctl.STORAGE_CRYPTO_DESCRIPTOR_V2+_SecurityComplianceBitmask_e__Union => Windows.Win32.System.Ioctl.STORAGE_SECURITY_COMPLIANCE_BITMASK
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorageCryptoKeySizeMax added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorCryptoKeySize128Bits added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorCryptoKeySize192Bits added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorCryptoKeySize256Bits added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorCryptoKeySize512Bits added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_SIZE.StorCryptoKeySizeUnknown added
+Windows.Win32.System.Ioctl.STORAGE_CRYPTO_KEY_TYPE added
+Windows.Win32.System.Ioctl.STORAGE_FEATURE_SUPPORT added
+Windows.Win32.System.Ioctl.STORAGE_HW_CRYPTO_CAPABILITY added
+Windows.Win32.System.Ioctl.STORAGE_HW_CRYPTO_DESCRIPTOR added
+Windows.Win32.System.Ioctl.STORAGE_PROPERTY_ID.StorageHwCryptoProperty added
+Windows.Win32.System.Ioctl.STORAGE_SECURITY_COMPLIANCE_BITMASK added
+Windows.Win32.System.Power.Apis.ADAPTER_CLASS_MAJOR_VERSION added
+Windows.Win32.System.Power.Apis.ADAPTER_CLASS_MINOR_VERSION added
+Windows.Win32.System.Power.Apis.BATTERY_CLASS_MINOR_VERSION_2 added
+Windows.Win32.System.Power.Apis.BATTERY_NOTIFY_VERSION_1 added
+Windows.Win32.System.Power.Apis.BATTERY_NOTIFY_VERSION_2 added
+Windows.Win32.System.Power.Apis.CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES added
+Windows.Win32.System.Power.Apis.GUID_DEVICE_POWER_ADAPTER added
+Windows.Win32.System.Power.Apis.GUID_DEVINTERFACE_CUSTOMIZED_IO added
+Windows.Win32.System.Power.Apis.GUID_DEVINTERFACE_TEMPERATURE_SENSOR added
+Windows.Win32.System.Power.Apis.IOCTL_QUERY_CUSTOMIZED_INPUT_FROM_PLATFORM added
+Windows.Win32.System.Power.Apis.IOCTL_QUERY_CUSTOMIZED_IO_CAPABILITIES added
+Windows.Win32.System.Power.Apis.IOCTL_SEND_CUSTOMIZED_OUTPUT_TO_PLATFORM added
+Windows.Win32.System.Power.Apis.THERMAL_WAIT_READ_TIMEOUT_IMMEDIATE added
+Windows.Win32.System.Power.Apis.THERMAL_WAIT_READ_TIMEOUT_NONE added
+Windows.Win32.System.Power.CUSTOMIZED_IO_CAPABILITIES added
+Windows.Win32.System.Power.CUSTOMIZED_IO_QUERY_INPUT_RETURN added
+Windows.Win32.System.Power.CUSTOMIZED_IO_SEND_OUTPUT_BUFFER added
+Windows.Win32.System.Power.POWER_ADAPTER_CHARGE_REQUIREMENT added
+Windows.Win32.System.Power.POWER_ADAPTER_POWER_STATES added
+Windows.Win32.System.Power.POWER_ADAPTER_SET_STATUS_BUFFER added
+Windows.Win32.System.Power.POWER_ADAPTER_STATUS added
+Windows.Win32.System.Power.POWER_INFORMATION_LEVEL.SystemPowerSourceState added
+Windows.Win32.System.RemoteDesktop.Apis.WTSActiveSessionExists added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthClose added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthConvertAssertionToSerializedUserCredential added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthDuplicateSerializedUserCredential added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthGetServerNonce added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthNetworkLogonWithSerializedCredential added
+Windows.Win32.System.RemoteDesktop.Apis.WTSCloudAuthOpen added
+Windows.Win32.System.RemoteDesktop.IWRdsProtocolConnection2 added
+Windows.Win32.System.RemoteDesktop.WTS_CLOUD_AUTH_HANDLE added
+Windows.Win32.System.RemoteDesktop.WTS_INFO_CLASS.WTSSessionActivityId added
+Windows.Win32.System.RemoteDesktop.WTS_SERIALIZED_USER_CREDENTIAL added
+Windows.Win32.System.RemoteDesktop.WTS_TYPE_CLASS.WTSTypeCloudAuthServerNonce added
+Windows.Win32.System.RemoteDesktop.WTS_TYPE_CLASS.WTSTypeSerializedUserCredential added
+Windows.Win32.System.Search.Apis.CI_DATABASE_DECRYPTION_FAILED added
+Windows.Win32.System.Search.Apis.CI_DATABASE_ENCRYPTION_FAILED added
+Windows.Win32.System.Search.ISearchCatalogManager3 added
+Windows.Win32.System.SystemInformation.DEVICEFAMILYDEVICEFORM.DEVICEFAMILYDEVICEFORM_GAMING_CONSOLE added
+Windows.Win32.System.SystemInformation.DEVICEFAMILYDEVICEFORM.DEVICEFAMILYDEVICEFORM_GAMING_HANDHELD added
+Windows.Win32.System.SystemInformation.OS_PRODUCT_TYPE.PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION added
+Windows.Win32.System.SystemServices.Apis.FAST_FAIL_KERNEL_POINTER_EXPECTED added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_FREQUENCY_LIMIT_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_HETERO_CONTAINMENT_EFFICIENCY_IMP_UTIL_THRESHOLD added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_HETERO_CONTAINMENT_HYBRID_IMP_UTIL_THRESHOLD added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_PERF_ENERGY_PERFORMANCE_PREFERENCE_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_PERF_LATENCY_HINT_EPP_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_PERF_LATENCY_HINT_PERF_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_RESOURCE_PRIORITY_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_THROTTLE_MAXIMUM_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_THROTTLE_MINIMUM_2 added
+Windows.Win32.System.SystemServices.Apis.GUID_PROCESSOR_WPS_MIN_EFFICIENCY_THRESHOLD added
+Windows.Win32.System.SystemServices.Apis.IMAGE_ENCLAVE_POLICY_STRICT_MEMORY added
+Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UILIMIT_INJECTION added
+Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType1 added
+Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType2 added
+Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType3 added
+Windows.Win32.System.SystemServices.POWER_LIMIT_TYPES.PowerLimitType4 added
+Windows.Win32.System.SystemServices.SYSTEM_POWER_SOURCE_STATE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_LSE2_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_SME2_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE added
+Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID.PF_RESERVED_FEATURE added
+Windows.Win32.System.TpmBaseServices.Apis.Tbsi_Tpm_Vendor_Maintenance_Mode added
+Windows.Win32.System.UpdateAssessment.CloudCampaignAssessment added
+Windows.Win32.System.WindowsProgramming.Apis.FILE_FLAG_DISALLOW_PATH_REDIRECTS added
+Windows.Win32.System.WindowsProgramming.SYSTEM_BASICPROCESS_INFORMATION added
+Windows.Win32.System.WindowsProgramming.SYSTEM_HANDLECOUNT_INFORMATION added
+Windows.Win32.UI.Accessibility.NotificationProcessing.NotificationProcessing_ImportantCurrentThenMostRecent added
+Windows.Win32.UI.Input.Pointer.POINTER_TYPE_INFO._Anonymous_e__Union.pointerInfo added
+Windows.Win32.UI.Shell.Apis.COPYENGINE_E_SUPPRESS_DIALOG added
+Windows.Win32.UI.Shell.IAttachmentExecute2 added
+Windows.Win32.UI.Shell.IStaticVerbProvider added
+Windows.Win32.UI.WindowsAndMessaging.Apis.ApplyWindowAction added
+Windows.Win32.UI.WindowsAndMessaging.Apis.ConvertToInterceptWindow added
+Windows.Win32.UI.WindowsAndMessaging.Apis.CURSOR_INVISIBLE added
+Windows.Win32.UI.WindowsAndMessaging.Apis.EnterMoveSizeLoop added
+Windows.Win32.UI.WindowsAndMessaging.Apis.IsInterceptWindow added
+Windows.Win32.UI.WindowsAndMessaging.Apis.RegisterCloakedNotification added
+Windows.Win32.UI.WindowsAndMessaging.Apis.WM_CLOAKED_STATE_CHANGED added
+Windows.Win32.UI.WindowsAndMessaging.Apis.WM_INTERCEPTED_WINDOW_ACTION added
+Windows.Win32.UI.WindowsAndMessaging.Apis.WTS_SESSION_DESKTOP_READY added
+Windows.Win32.UI.WindowsAndMessaging.FRAME_MARGIN added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_MOVE added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_BOTTOM added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_BOTTOMLEFT added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_BOTTOMRIGHT added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_LEFT added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_RIGHT added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_TOP added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_TOPLEFT added
+Windows.Win32.UI.WindowsAndMessaging.MOVESIZE_OPERATION.MSO_SIZE_TOPRIGHT added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_ACTIVATE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_COALESCEABLE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_DISPLAY_CHANGE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_FIT_TO_MONITOR added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_INSERT_AFTER added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_MOVE_TO_MONITOR added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_NONE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_NORMAL_RECT added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_PLACEMENT_STATE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_POSITION added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_SIZE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_SYSTEM_OPERATION added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_KINDS.WAK_VISIBILITY added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_ACTIVATE_FOREGROUND added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_ACTIVATE_INPUT added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_ACTIVATE_NO_ZORDER added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_DPI added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_FRAME_BOUNDS added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_INSERT_AFTER_NO_OWNER added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_NONE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_RESTORE_TO_ARRANGED added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_RESTORE_TO_MAXIMIZED added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_RESTORE_TO_NORMAL added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_SCALED_TO_MONITOR added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_ACTION_MODIFIERS.WAM_WORK_AREA added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_PLACEMENT_STATE added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_PLACEMENT_STATE.WPS_ARRANGED added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_PLACEMENT_STATE.WPS_MAXIMIZED added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_PLACEMENT_STATE.WPS_MINIMIZED added
+Windows.Win32.UI.WindowsAndMessaging.WINDOW_PLACEMENT_STATE.WPS_NORMAL added
+winmd1: Windows.Win32.AI.MachineLearning.DirectML.Apis.DML_TARGET_VERSION = 25088, winmd2 = 25600
+winmd1: Windows.Win32.Foundation.Apis.FVE_E_AAD_SERVER_FAIL_BACKOFF = -2144272150, winmd2 = -2144272110
+winmd1: Windows.Win32.Foundation.Apis.FVE_E_AAD_SERVER_FAIL_RETRY_AFTER = -2144272151, winmd2 = -2144272111
+winmd1: Windows.Win32.Foundation.Apis.FVE_E_DEVICE_NOT_JOINED = -2144272160, winmd2 = -2144272112
+winmd1: Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_AUTH = -2018567677, winmd2 = -2018567158
+winmd1: Windows.Win32.Foundation.Apis.SQLITE_E_IOERR_VNODE = -2018567678, winmd2 = -2018567414
+winmd1: Windows.Win32.Graphics.Dwm.DWMWINDOWATTRIBUTE.DWMWA_LAST = 40, winmd2 = 41
+winmd1: Windows.Win32.Networking.HttpServer.HTTP_FEATURE_ID.HttpFeatureLast = 12, winmd2 = 17
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_CURRENT_VERSION = 7, winmd2 = 9
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_CURRENT_VERSION = 7, winmd2 = 8
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_CURRENT_VERSION = 7, winmd2 = 8
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_CURRENT_VERSION = 6, winmd2 = 8
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_CURRENT_VERSION = 2, winmd2 = 4
+winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_FLAGS_MASK = 63, winmd2 = 127
+winmd1: Windows.Win32.Networking.WinHttp.Apis.WINHTTP_LAST_OPTION = 209, winmd2 = 212
+winmd1: Windows.Win32.Security.TOKEN_INFORMATION_CLASS.MaxTokenInfoClass = 50, winmd2 = 51
+winmd1: Windows.Win32.System.Power.POWER_INFORMATION_LEVEL.PowerInformationLevelMaximum = 98, winmd2 = 99
+winmd1: Windows.Win32.System.SystemInformation.DEVICEFAMILYDEVICEFORM.DEVICEFAMILYDEVICEFORM_MAX = 45, winmd2 = 47
+winmd1: Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UI_VALID_FLAGS = 511, winmd2 = 1023
+winmd1: Windows.Win32.System.SystemServices.Apis.JOB_OBJECT_UILIMIT_ALL = 511, winmd2 = 1023
+winmd1: Windows.Win32.System.SystemServices.Apis.POLICY_AUDIT_SUBCATEGORY_COUNT = 59, winmd2 = 60

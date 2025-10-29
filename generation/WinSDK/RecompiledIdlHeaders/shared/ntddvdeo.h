@@ -97,6 +97,8 @@ struct INDIRECT_DISPLAY_INFO
 	ULONG Flags;
 	ULONG NumMonitors;
 	ULONG DisplayAdapterTargetBase;
+    ULONG DriverVersionMajor;
+    ULONG DriverVersionMinor;
 };
 
 #define INDIRECT_DISPLAY_INFO_FLAGS_CREATED_IDDCX_ADAPTER 0x1  // This indirect display device created a IddCx adapter
@@ -366,6 +368,12 @@ extern "C" {
 #define IOCTL_SET_ACTIVE_COLOR_PROFILE_NAME \
     CTL_CODE(FILE_DEVICE_VIDEO, 0x402, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
+#define IOCTL_GET_SCALAR_MULTIPLIER_CAPS \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x403, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_SET_SCALAR_MULTIPLIER \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x404, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 
 //
 // Mipi DCS IOCLTs must/can be handled by the monitor, oem-panel, port/miniport
@@ -546,6 +554,7 @@ typedef enum _VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE {
     VideoDisableMultiPlaneOverlay = 14,
     VideoDesktopDuplicationChange = 15,
     VideoBlackScreenDiagnostics = 16,
+    VideoForceCompositionRender = 17,
 } VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE;
 
 enum BlackScreenDiagnosticsCalloutParam
@@ -2267,6 +2276,13 @@ typedef enum _COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION
     COLORSPACE_TRANSFORM_VERSION_1             = 1,
     COLORSPACE_TRANSFORM_VERSION_NOT_SUPPORTED = COLORSPACE_TRANSFORM_VERSION_DEFAULT,
 }COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION;
+
+typedef struct _COLORSPACE_SCALAR_MULTIPLIER_CAPS
+{
+    BOOLEAN Valid;
+    float NumericRangeMin;
+    float NumericRangeMax;
+}COLORSPACE_SCALAR_MULTIPLIER_CAPS;
 
 typedef struct _COLORSPACE_TRANSFORM_TARGET_CAPS
 {
