@@ -251,6 +251,51 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IIppPrintDevice5;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5 ABI::Windows::Devices::Printers::IIppPrintDevice5
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IIppPrintDeviceInstallationResult;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult ABI::Windows::Devices::Printers::IIppPrintDeviceInstallationResult
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IIppPrintDeviceManagerStatics;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics ABI::Windows::Devices::Printers::IIppPrintDeviceManagerStatics
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 namespace ABI {
@@ -431,6 +476,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IReplaceDevicePropertiesResult;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult ABI::Windows::Devices::Printers::IReplaceDevicePropertiesResult
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIVirtualPrinterInstallationParameters_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIVirtualPrinterInstallationParameters_FWD_DEFINED__
 namespace ABI {
@@ -558,6 +618,74 @@ typedef IAsyncOperationCompletedHandler<bool> __FIAsyncOperationCompletedHandler
 #endif // !defined(RO_NO_TEMPLATE_NAME)
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_boolean_USE */
 
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                class IppPrintDeviceInstallationResult;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("18c9429b-0c8d-565c-b2c5-d61ebde63f31"))
+IAsyncOperation<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*, ABI::Windows::Devices::Printers::IIppPrintDeviceInstallationResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Devices.Printers.IppPrintDeviceInstallationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*> __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_t;
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("d76c8c10-cd9f-5f12-be2b-d4dd5da045c0"))
+IAsyncOperationCompletedHandler<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*, ABI::Windows::Devices::Printers::IIppPrintDeviceInstallationResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Devices.Printers.IppPrintDeviceInstallationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::Devices::Printers::IppPrintDeviceInstallationResult*> __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 namespace ABI {
     namespace Windows {
@@ -1368,6 +1496,81 @@ typedef IIterable<__FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__C
 #endif /* DEF___FIIterable_1___FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+
+#ifndef DEF___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#define DEF___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("09335560-6c6b-5a26-9348-97b781132b20"))
+IKeyValuePair<HSTRING, IInspectable*> : IKeyValuePair_impl<HSTRING, IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IKeyValuePair`2<String, Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IKeyValuePair<HSTRING, IInspectable*> __FIKeyValuePair_2_HSTRING_IInspectable_t;
+#define __FIKeyValuePair_2_HSTRING_IInspectable ABI::Windows::Foundation::Collections::__FIKeyValuePair_2_HSTRING_IInspectable_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIKeyValuePair_2_HSTRING_IInspectable_USE */
+
+
+
+#ifndef DEF___FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#define DEF___FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("5db5fa32-707c-5849-a06b-91c8eb9d10e8"))
+IIterator<__FIKeyValuePair_2_HSTRING_IInspectable*> : IIterator_impl<__FIKeyValuePair_2_HSTRING_IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.Foundation.Collections.IKeyValuePair`2<String, Object>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<__FIKeyValuePair_2_HSTRING_IInspectable*> __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_t;
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable ABI::Windows::Foundation::Collections::__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_USE */
+
+
+
+#ifndef DEF___FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#define DEF___FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("fe2f3d47-5d47-5499-8374-430c7cda0204"))
+IIterable<__FIKeyValuePair_2_HSTRING_IInspectable*> : IIterable_impl<__FIKeyValuePair_2_HSTRING_IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.Foundation.Collections.IKeyValuePair`2<String, Object>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<__FIKeyValuePair_2_HSTRING_IInspectable*> __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_t;
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable ABI::Windows::Foundation::Collections::__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_USE */
+
 
 namespace ABI {
     namespace Windows {
@@ -2414,6 +2617,31 @@ typedef IVector<ABI::Windows::Storage::Streams::IBuffer*> __FIVector_1_Windows__
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            namespace Collections {
+                class ValueSet;
+            } /* Collections */
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            namespace Collections {
+                interface IPropertySet;
+            } /* Collections */
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet ABI::Windows::Foundation::Collections::IPropertySet
+
+#endif // ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 namespace ABI {
@@ -2535,6 +2763,16 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace Printers {
+                typedef enum IppPrintDeviceInstallationStatus : int IppPrintDeviceInstallationStatus;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
                 typedef enum IppPrintDeviceKind : int IppPrintDeviceKind;
             } /* Printers */
         } /* Devices */
@@ -2556,6 +2794,16 @@ namespace ABI {
         namespace Devices {
             namespace Printers {
                 typedef enum PageConfigurationSource : int PageConfigurationSource;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                typedef enum ReplaceDevicePropertiesStatus : int ReplaceDevicePropertiesStatus;
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2645,6 +2893,16 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace Printers {
+                class ReplaceDevicePropertiesResult;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
                 class VirtualPrinterInstallationParameters;
             } /* Printers */
         } /* Devices */
@@ -2721,6 +2979,35 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Devices.Printers.IppPrintDeviceInstallationStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                enum IppPrintDeviceInstallationStatus : int
+                {
+                    IppPrintDeviceInstallationStatus_InstallationSucceeded = 0,
+                    IppPrintDeviceInstallationStatus_PrinterAlreadyInstalled = 1,
+                    IppPrintDeviceInstallationStatus_CommunicationError = 2,
+                    IppPrintDeviceInstallationStatus_OtherFailure = 3,
+                };
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Struct Windows.Devices.Printers.IppPrintDeviceKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
@@ -2788,6 +3075,34 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.Printers.ReplaceDevicePropertiesStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                enum ReplaceDevicePropertiesStatus : int
+                {
+                    ReplaceDevicePropertiesStatus_Succeeded = 0,
+                    ReplaceDevicePropertiesStatus_AccessDenied = 1,
+                    ReplaceDevicePropertiesStatus_OtherFailure = 2,
+                };
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3429,6 +3744,141 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4;
 
 /*
  *
+ * Interface Windows.Devices.Printers.IIppPrintDevice5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice5[] = L"Windows.Devices.Printers.IIppPrintDevice5";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("ea927fca-e073-5db4-9aee-13df714e853a")
+                IIppPrintDevice5 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetDeviceProperties(
+                        ABI::Windows::Foundation::Collections::IPropertySet** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ReplaceDeviceProperties(
+                        __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* deviceProperties,
+                        ABI::Windows::Devices::Printers::IReplaceDevicePropertiesResult** result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIppPrintDevice5 = __uuidof(IIppPrintDevice5);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDeviceInstallationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDeviceInstallationResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDeviceInstallationResult[] = L"Windows.Devices.Printers.IIppPrintDeviceInstallationResult";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("fb102fcc-87be-57ff-a086-92272148a256")
+                IIppPrintDeviceInstallationResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Devices::Printers::IppPrintDeviceInstallationStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_InstalledPrinterName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIppPrintDeviceInstallationResult = __uuidof(IIppPrintDeviceInstallationResult);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDeviceManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDeviceManager
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDeviceManagerStatics[] = L"Windows.Devices.Printers.IIppPrintDeviceManagerStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("8f711a45-c1b9-51bb-80c8-38969c81f800")
+                IIppPrintDeviceManagerStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CanInstallIppPrintDevice(
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE InstallIppPrintDeviceAsync(
+                        ABI::Windows::Foundation::IUriRuntimeClass* printerUri,
+                        HSTRING printerName,
+                        __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult** operation
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIppPrintDeviceManagerStatics = __uuidof(IIppPrintDeviceManagerStatics);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Devices.Printers.IIppPrintDeviceStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -3929,6 +4379,49 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema;
 
 /*
  *
+ * Interface Windows.Devices.Printers.IReplaceDevicePropertiesResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.ReplaceDevicePropertiesResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IReplaceDevicePropertiesResult[] = L"Windows.Devices.Printers.IReplaceDevicePropertiesResult";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("12feca4b-d973-57e1-826b-f75b9518a9f1")
+                IReplaceDevicePropertiesResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Devices::Printers::ReplaceDevicePropertiesStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IReplaceDevicePropertiesResult = __uuidof(IReplaceDevicePropertiesResult);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Devices.Printers.IVirtualPrinterInstallationParameters
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
@@ -4291,6 +4784,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Devices.Printers.IIppPrintDevice2
  *    Windows.Devices.Printers.IIppPrintDevice3
  *    Windows.Devices.Printers.IIppPrintDevice4
+ *    Windows.Devices.Printers.IIppPrintDevice5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4303,6 +4797,54 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDevice[] = L"Windows.Devices.Printers.IppPrintDevice";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Devices.Printers.IppPrintDeviceInstallationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Printers.IIppPrintDeviceInstallationResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceInstallationResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceInstallationResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDeviceInstallationResult[] = L"Windows.Devices.Printers.IppPrintDeviceInstallationResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.Devices.Printers.IppPrintDeviceManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Printers.IIppPrintDeviceManagerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceManager_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDeviceManager[] = L"Windows.Devices.Printers.IppPrintDeviceManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4481,6 +5023,29 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Devices.Printers.ReplaceDevicePropertiesResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Printers.IReplaceDevicePropertiesResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_ReplaceDevicePropertiesResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_ReplaceDevicePropertiesResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_ReplaceDevicePropertiesResult[] = L"Windows.Devices.Printers.ReplaceDevicePropertiesResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.Devices.Printers.VirtualPrinterInstallationParameters
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
@@ -4639,6 +5204,24 @@ typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4 __x_ABI_
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5 __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics;
@@ -4710,6 +5293,12 @@ typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIPrint3DDeviceStatics __x
 typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema __x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema;
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIVirtualPrinterInstallationParameters_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIVirtualPrinterInstallationParameters_FWD_DEFINED__
@@ -4865,6 +5454,135 @@ interface __FIAsyncOperationCompletedHandler_1_boolean
 #endif /* COBJMACROS */
 
 #endif // ____FIAsyncOperationCompletedHandler_1_boolean_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult;
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* This,
+        __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CPrint3DDevice __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPrinters__CPrint3DDevice;
 
@@ -6761,6 +7479,214 @@ interface __FIIterable_1___FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDev
 
 #endif // ____FIIterable_1___FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if !defined(____FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__)
+#define ____FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FIKeyValuePair_2_HSTRING_IInspectable __FIKeyValuePair_2_HSTRING_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIKeyValuePair_2_HSTRING_IInspectable;
+
+typedef struct __FIKeyValuePair_2_HSTRING_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIKeyValuePair_2_HSTRING_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIKeyValuePair_2_HSTRING_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Key)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        HSTRING* result);
+    HRESULT (STDMETHODCALLTYPE* get_Value)(__FIKeyValuePair_2_HSTRING_IInspectable* This,
+        IInspectable** result);
+
+    END_INTERFACE
+} __FIKeyValuePair_2_HSTRING_IInspectableVtbl;
+
+interface __FIKeyValuePair_2_HSTRING_IInspectable
+{
+    CONST_VTBL struct __FIKeyValuePair_2_HSTRING_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_get_Key(This, result) \
+    ((This)->lpVtbl->get_Key(This, result))
+
+#define __FIKeyValuePair_2_HSTRING_IInspectable_get_Value(This, result) \
+    ((This)->lpVtbl->get_Value(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
+
+#if !defined(____FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__)
+#define ____FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable;
+
+typedef struct __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        __FIKeyValuePair_2_HSTRING_IInspectable** result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        UINT32 itemsLength,
+        __FIKeyValuePair_2_HSTRING_IInspectable** items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl;
+
+interface __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable
+{
+    CONST_VTBL struct __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
+
+#if !defined(____FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__)
+#define ____FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable;
+
+typedef struct __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* This,
+        __FIIterator_1___FIKeyValuePair_2_HSTRING_IInspectable** result);
+
+    END_INTERFACE
+} __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl;
+
+interface __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable
+{
+    CONST_VTBL struct __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable_INTERFACE_DEFINED__
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 #if !defined(____FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeError_INTERFACE_DEFINED__)
@@ -10233,6 +11159,12 @@ interface __FIVector_1_Windows__CStorage__CStreams__CIBuffer
 #endif // ____FIVector_1_Windows__CStorage__CStreams__CIBuffer_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet;
+
+#endif // ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CFoundation_CIClosable __x_ABI_CWindows_CFoundation_CIClosable;
@@ -10267,11 +11199,15 @@ typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeErrorReason __x_AB
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind;
 
+typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceInstallationStatus __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceInstallationStatus;
+
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind;
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppResolutionUnit __x_ABI_CWindows_CDevices_CPrinters_CIppResolutionUnit;
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CPageConfigurationSource __x_ABI_CWindows_CDevices_CPrinters_CPageConfigurationSource;
+
+typedef enum __x_ABI_CWindows_CDevices_CPrinters_CReplaceDevicePropertiesStatus __x_ABI_CWindows_CDevices_CPrinters_CReplaceDevicePropertiesStatus;
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CVirtualPrinterInstallationStatus __x_ABI_CWindows_CDevices_CPrinters_CVirtualPrinterInstallationStatus;
 
@@ -10331,6 +11267,27 @@ enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind
 
 /*
  *
+ * Struct Windows.Devices.Printers.IppPrintDeviceInstallationStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceInstallationStatus
+{
+    IppPrintDeviceInstallationStatus_InstallationSucceeded = 0,
+    IppPrintDeviceInstallationStatus_PrinterAlreadyInstalled = 1,
+    IppPrintDeviceInstallationStatus_CommunicationError = 2,
+    IppPrintDeviceInstallationStatus_OtherFailure = 3,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Struct Windows.Devices.Printers.IppPrintDeviceKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
@@ -10374,6 +11331,26 @@ enum __x_ABI_CWindows_CDevices_CPrinters_CPageConfigurationSource
     PageConfigurationSource_PdlContent = 1,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.Printers.ReplaceDevicePropertiesStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CDevices_CPrinters_CReplaceDevicePropertiesStatus
+{
+    ReplaceDevicePropertiesStatus_Succeeded = 0,
+    ReplaceDevicePropertiesStatus_AccessDenied = 1,
+    ReplaceDevicePropertiesStatus_OtherFailure = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -11441,6 +12418,248 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4;
 
 /*
  *
+ * Interface Windows.Devices.Printers.IIppPrintDevice5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice5[] = L"Windows.Devices.Printers.IIppPrintDevice5";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetDeviceProperties)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet** result);
+    HRESULT (STDMETHODCALLTYPE* ReplaceDeviceProperties)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5* This,
+        __FIIterable_1___FIKeyValuePair_2_HSTRING_IInspectable* deviceProperties,
+        __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_GetDeviceProperties(This, result) \
+    ((This)->lpVtbl->GetDeviceProperties(This, result))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_ReplaceDeviceProperties(This, deviceProperties, result) \
+    ((This)->lpVtbl->ReplaceDeviceProperties(This, deviceProperties, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDeviceInstallationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDeviceInstallationResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDeviceInstallationResult[] = L"Windows.Devices.Printers.IIppPrintDeviceInstallationResult";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceInstallationStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_InstalledPrinterName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResultVtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_get_InstalledPrinterName(This, value) \
+    ((This)->lpVtbl->get_InstalledPrinterName(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceInstallationResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDeviceManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDeviceManager
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDeviceManagerStatics[] = L"Windows.Devices.Printers.IIppPrintDeviceManagerStatics";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CanInstallIppPrintDevice)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* InstallIppPrintDeviceAsync)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics* This,
+        __x_ABI_CWindows_CFoundation_CIUriRuntimeClass* printerUri,
+        HSTRING printerName,
+        __FIAsyncOperation_1_Windows__CDevices__CPrinters__CIppPrintDeviceInstallationResult** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStaticsVtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_CanInstallIppPrintDevice(This, result) \
+    ((This)->lpVtbl->CanInstallIppPrintDevice(This, result))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_InstallIppPrintDeviceAsync(This, printerUri, printerName, operation) \
+    ((This)->lpVtbl->InstallIppPrintDeviceAsync(This, printerUri, printerName, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Devices.Printers.IIppPrintDeviceStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -12372,6 +13591,84 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIPrintSchema;
 
 /*
  *
+ * Interface Windows.Devices.Printers.IReplaceDevicePropertiesResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.ReplaceDevicePropertiesResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IReplaceDevicePropertiesResult[] = L"Windows.Devices.Printers.IReplaceDevicePropertiesResult";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        enum __x_ABI_CWindows_CDevices_CPrinters_CReplaceDevicePropertiesStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResultVtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIReplaceDevicePropertiesResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Devices.Printers.IVirtualPrinterInstallationParameters
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
@@ -12947,6 +14244,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Devices.Printers.IIppPrintDevice2
  *    Windows.Devices.Printers.IIppPrintDevice3
  *    Windows.Devices.Printers.IIppPrintDevice4
+ *    Windows.Devices.Printers.IIppPrintDevice5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -12959,6 +14257,54 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDevice[] = L"Windows.Devices.Printers.IppPrintDevice";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.Devices.Printers.IppPrintDeviceInstallationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Printers.IIppPrintDeviceInstallationResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceInstallationResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceInstallationResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDeviceInstallationResult[] = L"Windows.Devices.Printers.IppPrintDeviceInstallationResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.Devices.Printers.IppPrintDeviceManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Printers.IIppPrintDeviceManagerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceManager_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_IppPrintDeviceManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_IppPrintDeviceManager[] = L"Windows.Devices.Printers.IppPrintDeviceManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13134,6 +14480,29 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_PrintSchema[] = L"Windows.Devices.Printers.PrintSchema";
 #endif
 #endif // WINDOWS_DEVICES_PRINTERS_PRINTERSCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Devices.Printers.ReplaceDevicePropertiesResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Printers.IReplaceDevicePropertiesResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Printers_ReplaceDevicePropertiesResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Printers_ReplaceDevicePropertiesResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Printers_ReplaceDevicePropertiesResult[] = L"Windows.Devices.Printers.ReplaceDevicePropertiesResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *

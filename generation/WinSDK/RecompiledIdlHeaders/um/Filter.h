@@ -381,10 +381,14 @@ EXTERN_C const IID IID_IPixelFilter;
             _Out_  IMAGE_INFO *imageInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPixelsForImage( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pixelBufferLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pixelBufferLength)  BYTE **pixelBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  FLOAT scalingFactor,
+            /* [annotation][unique][in] */ 
+            _In_  const RECT *sourceRect,
+            /* [annotation][in] */ 
+            _In_  ULONG pixelBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(pixelBufferSize)  BYTE *pixelBuffer) = 0;
         
     };
     
@@ -462,10 +466,14 @@ EXTERN_C const IID IID_IPixelFilter;
         DECLSPEC_XFGVIRT(IPixelFilter, GetPixelsForImage)
         HRESULT ( STDMETHODCALLTYPE *GetPixelsForImage )( 
             __RPC__in IPixelFilter * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pixelBufferLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pixelBufferLength)  BYTE **pixelBuffer);
+            /* [annotation][in] */ 
+            _In_  FLOAT scalingFactor,
+            /* [annotation][unique][in] */ 
+            _In_  const RECT *sourceRect,
+            /* [annotation][in] */ 
+            _In_  ULONG pixelBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(pixelBufferSize)  BYTE *pixelBuffer);
         
         END_INTERFACE
     } IPixelFilterVtbl;
@@ -509,8 +517,8 @@ EXTERN_C const IID IID_IPixelFilter;
 #define IPixelFilter_GetImageInfo(This,imageInfo)	\
     ( (This)->lpVtbl -> GetImageInfo(This,imageInfo) ) 
 
-#define IPixelFilter_GetPixelsForImage(This,pixelBufferLength,pixelBuffer)	\
-    ( (This)->lpVtbl -> GetPixelsForImage(This,pixelBufferLength,pixelBuffer) ) 
+#define IPixelFilter_GetPixelsForImage(This,scalingFactor,sourceRect,pixelBufferSize,pixelBuffer)	\
+    ( (This)->lpVtbl -> GetPixelsForImage(This,scalingFactor,sourceRect,pixelBufferSize,pixelBuffer) ) 
 
 #endif /* COBJMACROS */
 

@@ -74,6 +74,7 @@ typedef enum {
     // the HRD to the DRD when completing requests.
     //
 
+    PollingSkipped = 252,
     PollingTimeout = 253,
     StatusSuccess = 254, // Nominal success
     StatusUnknown = 255  // Nominal failure

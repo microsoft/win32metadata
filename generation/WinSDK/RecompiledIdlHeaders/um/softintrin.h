@@ -1140,6 +1140,135 @@ unsigned char _subborrow_u64(
 }
 
 __forceinline
+unsigned int __andn_u32(
+    unsigned int _Source1,
+    unsigned int _Source2
+)
+{
+    return (~_Source1) & _Source2;
+}
+
+__forceinline
+unsigned __int64 __andn_u64(
+    unsigned __int64 _Source1,
+    unsigned __int64 _Source2
+)
+{
+    return (~_Source1) & _Source2;
+}
+
+#define _andn_u32(_Source1, _Source2) __andn_u32(_Source1, _Source2)
+#define _andn_u64(_Source1, _Source2) __andn_u64(_Source1, _Source2)
+
+__forceinline
+unsigned int __bextr_u32(
+    unsigned int _Source,
+    unsigned int _Start,
+    unsigned int _Len
+)
+{
+    return (_Source >> _Start) & ~(~0U << _Len);
+}
+
+__forceinline
+unsigned __int64 __bextr_u64(
+    unsigned __int64 _Source,
+    unsigned __int64 _Start,
+    unsigned __int64 _Len
+)
+{
+    return (_Source >> _Start) & ~(~0ULL << _Len);
+}
+
+#define _bextr_u32(_Source, _Start, _Len) __bextr_u32(_Source, _Start, _Len)
+#define _bextr_u64(_Source, _Start, _Len) __bextr_u64(_Source, _Start, _Len)
+
+__forceinline
+unsigned int __bextr2_u32(
+    unsigned int _Source,
+    unsigned int _Control
+)
+{
+    unsigned int _Start = _Control & 0xFF;
+    unsigned int _Len = (_Control >> 8) & 0xFF;
+    return __bextr_u32(_Source, _Start, _Len);
+}
+
+__forceinline
+unsigned __int64 __bextr2_u64(
+    unsigned __int64 _Source,
+    unsigned __int64 _Control
+)
+{
+    unsigned int _Start = _Control & 0xFF;
+    unsigned int _Len = (_Control >> 8) & 0xFF;
+    return __bextr_u64(_Source, _Start, _Len);
+}
+
+#define _bextr2_u32(_Source, _Control) __bextr2_u32(_Source, _Control)
+#define _bextr2_u64(_Source, _Control) __bextr2_u64(_Source, _Control)
+
+__forceinline
+unsigned int __blsi_u32(
+    unsigned int _Source
+)
+{
+    return (0U - _Source) & _Source;
+}
+
+__forceinline
+unsigned __int64 __blsi_u64(
+    unsigned __int64 _Source
+)
+{
+    return (0ULL - _Source) & _Source;
+}
+
+#define _blsi_u32(x) __blsi_u32(x)
+#define _blsi_u64(x) __blsi_u64(x)
+
+__forceinline
+unsigned int __blsmsk_u32(
+    unsigned int _Source
+)
+{
+    return (_Source - 1) ^ _Source;
+}
+
+__forceinline
+unsigned __int64 __blsmsk_u64(
+    unsigned __int64 _Source
+)
+{
+    return (_Source - 1) ^ _Source;
+}
+
+#define _blsmsk_u32(x) __blsmsk_u32(x)
+#define _blsmsk_u64(x) __blsmsk_u64(x)
+
+__forceinline
+unsigned int __blsr_u32(
+    unsigned int _Source
+)
+{
+    return (_Source - 1) & _Source;
+}
+
+__forceinline
+unsigned __int64 __blsr_u64(
+    unsigned __int64 _Source
+)
+{
+    return (_Source - 1) & _Source;
+}
+
+#define _blsr_u32(x) __blsr_u32(x)
+#define _blsr_u64(x) __blsr_u64(x)
+
+// __lzcnt __lzcnt16 __lzcnt64 are builtin to clang and providing them here errors.
+#if !defined(__clang__)
+
+__forceinline
 unsigned int __lzcnt(
    unsigned int Source
 )
@@ -1167,8 +1296,71 @@ unsigned __int64 __lzcnt64(
     return Source ? Bit ^ 63 : 64;
 }
 
-#define _lzcnt_u32 __lzcnt
-#define _lzcnt_u64 __lzcnt64
+#endif
+
+#define _lzcnt_u32(x) __lzcnt(x)
+#define _lzcnt_u64(x) __lzcnt64(x)
+
+#if defined(__clang__)
+__forceinline
+unsigned __int16 __tzcnt_u16(
+    unsigned __int16 Source
+)
+{
+    unsigned __int16 Result = Source ? (unsigned __int16) __builtin_ctz(Source) : (unsigned __int16) 16;
+    return Result <= (unsigned __int16) 16 ? Result : (unsigned __int16) 16;
+}
+
+__forceinline
+unsigned int __tzcnt_u32(
+    unsigned int Source
+)
+{
+    return Source ? __builtin_ctz(Source) : 32;
+}
+
+__forceinline
+unsigned __int64 __tzcnt_u64(
+    unsigned __int64 Source
+)
+{
+    return Source ? (unsigned __int64) __builtin_ctzll(Source) : (unsigned __int64) 64;
+}
+
+#else // defined(__clang__)
+// The MSVC implementations for _CountTrailingZeros() with 0 parameters are defined on ARM64,
+// so we don't need to do the same check like clang does.
+
+__forceinline
+unsigned __int16 __tzcnt_u16(
+    unsigned __int16 Source
+)
+{
+    unsigned __int16 Result = (unsigned __int16) _CountTrailingZeros(Source);
+    return Result <= (unsigned __int16) 16 ? Result : (unsigned __int16) 16;
+}
+
+__forceinline
+unsigned int __tzcnt_u32(
+    unsigned int Source
+)
+{
+    return _CountTrailingZeros((unsigned long)Source);
+}
+
+__forceinline
+unsigned __int64 __tzcnt_u64(
+    unsigned __int64 Source
+)
+{
+    return (unsigned __int64) _CountTrailingZeros64(Source);
+}
+
+#endif // !defined(__clang__)
+
+#define _tzcnt_u16(x) __tzcnt_u16(x)
+#define _tzcnt_u32(x) __tzcnt_u32(x)
+#define _tzcnt_u64(x) __tzcnt_u64(x)
 
 //
 // __movs* and __stos* while similar to memcpy and memset intrinsics do not map 1-to-1

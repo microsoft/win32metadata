@@ -1,4 +1,5 @@
-
+#ifndef SAL_INCLUDED
+#define SAL_INCLUDED 1
 /***
 *sal.h - markers for documenting the semantics of APIs
 *
@@ -2973,3 +2974,4 @@ __PRIMOP(int, _In_function_class_(__In_impl_ char*);)
 #endif // ]
 
 #include <concurrencysal.h>
+#endif

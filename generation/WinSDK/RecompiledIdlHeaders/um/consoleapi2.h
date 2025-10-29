@@ -71,6 +71,7 @@ FillConsoleOutputCharacterW(
     _In_ COORD dwWriteCoord,
     _Out_ LPDWORD lpNumberOfCharsWritten
     );
+
 #ifdef UNICODE
 #define FillConsoleOutputCharacter  FillConsoleOutputCharacterW
 #else
@@ -261,6 +262,7 @@ WriteConsoleOutputCharacterW(
     _In_ COORD dwWriteCoord,
     _Out_ LPDWORD lpNumberOfCharsWritten
     );
+
 #ifdef UNICODE
 #define WriteConsoleOutputCharacter  WriteConsoleOutputCharacterW
 #else
@@ -299,6 +301,7 @@ ReadConsoleOutputCharacterW(
     _In_ COORD dwReadCoord,
     _Out_ LPDWORD lpNumberOfCharsRead
     );
+
 #ifdef UNICODE
 #define ReadConsoleOutputCharacter  ReadConsoleOutputCharacterW
 #else
@@ -335,6 +338,7 @@ WriteConsoleInputW(
     _In_ DWORD nLength,
     _Out_ LPDWORD lpNumberOfEventsWritten
     );
+
 #ifdef UNICODE
 #define WriteConsoleInput  WriteConsoleInputW
 #else
@@ -362,6 +366,7 @@ ScrollConsoleScreenBufferW(
     _In_ COORD dwDestinationOrigin,
     _In_ CONST CHAR_INFO* lpFill
     );
+
 #ifdef UNICODE
 #define ScrollConsoleScreenBuffer  ScrollConsoleScreenBufferW
 #else
@@ -389,6 +394,7 @@ WriteConsoleOutputW(
     _In_ COORD dwBufferCoord,
     _Inout_ PSMALL_RECT lpWriteRegion
     );
+
 #ifdef UNICODE
 #define WriteConsoleOutput  WriteConsoleOutputW
 #else
@@ -416,6 +422,7 @@ ReadConsoleOutputW(
     _In_ COORD dwBufferCoord,
     _Inout_ PSMALL_RECT lpReadRegion
     );
+
 #ifdef UNICODE
 #define ReadConsoleOutput  ReadConsoleOutputW
 #else
@@ -437,6 +444,7 @@ GetConsoleTitleW(
     _Out_writes_(nSize) LPWSTR lpConsoleTitle,
     _In_ DWORD nSize
     );
+
 #ifdef UNICODE
 #define GetConsoleTitle  GetConsoleTitleW
 #else
@@ -460,6 +468,7 @@ GetConsoleOriginalTitleW(
     _Out_writes_(nSize) LPWSTR lpConsoleTitle,
     _In_ DWORD nSize
     );
+
 #ifdef UNICODE
 #define GetConsoleOriginalTitle  GetConsoleOriginalTitleW
 #else
@@ -481,6 +490,7 @@ WINAPI
 SetConsoleTitleW(
     _In_ LPCWSTR lpConsoleTitle
     );
+
 #ifdef UNICODE
 #define SetConsoleTitle  SetConsoleTitleW
 #else

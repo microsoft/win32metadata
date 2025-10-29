@@ -146,7 +146,6 @@ typedef struct _WTS_USER_CREDENTIAL {
     WCHAR   Domain[ WTS_DOMAIN_LENGTH + 1 ];
 } _WTS_USER_CREDENTIAL, WTS_USER_CREDENTIAL, *PWTS_USER_CREDENTIAL;
 
-
 /* -------------------------------------------------------------------
  * Structures used to query connectoin specific data from the protocol
  * ------------------------------------------------------------------*/
@@ -1324,6 +1323,17 @@ typedef struct _WRDS_SETTINGS {
     WRDS_SETTING                                WRdsSetting;
 } WRDS_SETTINGS, *PWRDS_SETTINGS;
 
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#ifdef __midl
+typedef struct _WTS_SERIALIZED_USER_CREDENTIAL {
+    ULONG SerializationLength;
+    [size_is(SerializationLength)] BYTE* Serialization;
+} WTS_SERIALIZED_USER_CREDENTIAL, * PWTS_SERIALIZED_USER_CREDENTIAL, WRDS_SERIALIZED_USER_CREDENTIAL, * PWRDS_SERIALIZED_USER_CREDENTIAL;
+#else
+typedef struct _WTS_SERIALIZED_USER_CREDENTIAL WRDS_SERIALIZED_USER_CREDENTIAL;
+#endif
 #endif
 
 #ifdef __cplusplus

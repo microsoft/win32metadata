@@ -100,6 +100,11 @@ Tbsi_Context_Create(
     _Out_ PTBS_HCONTEXT phContext);
 
 TBS_RESULT WINAPI
+Tbsi_Tpm_Vendor_Maintenance_Mode(
+    _In_ PCTBS_CONTEXT_PARAMS pContextParams,
+    _Out_ PTBS_HCONTEXT phContext);
+
+TBS_RESULT WINAPI
 Tbsip_Context_Close(
     _In_ TBS_HCONTEXT   hContext);
 

@@ -49,6 +49,7 @@ sndPlaySoundW(
     _In_opt_ LPCWSTR pszSound,
     _In_ UINT fuSound
     );
+
 #ifdef UNICODE
 #define sndPlaySound  sndPlaySoundW
 #else
@@ -114,6 +115,7 @@ PlaySoundW(
     _In_opt_ HMODULE hmod,
     _In_ DWORD fdwSound
     );
+
 #ifdef UNICODE
 #define PlaySound  PlaySoundW
 #else

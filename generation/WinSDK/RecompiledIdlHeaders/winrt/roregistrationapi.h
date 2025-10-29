@@ -53,7 +53,6 @@ extern "C" {
 #endif
 
 ROAPI
-
 _Check_return_
 HRESULT
 WINAPI
@@ -63,7 +62,6 @@ RoGetActivatableClassRegistration(
     );
 
 ROAPI
-
 _On_failure_(_At_(*activatableClassIds, _Post_ _Null_))
 _Check_return_
 HRESULT

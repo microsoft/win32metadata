@@ -1390,6 +1390,8 @@ typedef enum _MINIDUMP_TYPE {
     MiniDumpScanInaccessiblePartialPages   = 0x00800000,
     MiniDumpFilterWriteCombinedMemory      = 0x01000000,
     MiniDumpValidTypeFlags                 = 0x01ffffff,
+    MiniDumpNoIgnoreInaccessibleMemory     = 0x02000000,
+    MiniDumpValidTypeFlagsEx               = 0x03ffffff,
 } MINIDUMP_TYPE;
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */

@@ -1660,7 +1660,7 @@ typedef struct _NETLOGON_INFO_2 {
         //
         NET_API_STATUS netlog2_pdc_connection_status;
 #ifdef MIDL_PASS
-        [string] wchar_t * netlog2_trusted_dc_name;
+        [string,range(0,LM_DNS_MAX_NAME_LENGTH+1)] wchar_t * netlog2_trusted_dc_name;
 #else
         LPWSTR netlog2_trusted_dc_name;
 #endif // MIDL_PASS
@@ -1679,8 +1679,8 @@ typedef struct _NETLOGON_INFO_3 {
 
 typedef struct _NETLOGON_INFO_4 {
 #ifdef MIDL_PASS
-        [string] wchar_t * netlog4_trusted_dc_name;
-        [string] wchar_t * netlog4_trusted_domain_name;
+        [string,range(0,LM_DNS_MAX_NAME_LENGTH+1)] wchar_t * netlog4_trusted_dc_name;
+        [string,range(0,LM_DNS_MAX_NAME_LENGTH+1)] wchar_t * netlog4_trusted_domain_name;
 #else
         LPWSTR netlog4_trusted_dc_name;
         LPWSTR netlog4_trusted_domain_name;

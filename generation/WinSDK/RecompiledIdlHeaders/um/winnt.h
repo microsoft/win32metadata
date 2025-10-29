@@ -1723,6 +1723,7 @@ typedef EXCEPTION_ROUTINE *PEXCEPTION_ROUTINE;
 #define PRODUCT_AZURESTACKHCI_SERVER_CORE           0x00000196
 #define PRODUCT_DATACENTER_SERVER_AZURE_EDITION     0x00000197
 #define PRODUCT_DATACENTER_SERVER_CORE_AZURE_EDITION 0x00000198
+#define PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION 0x00000199
 
 #define PRODUCT_UNLICENSED                          0xABCDABCD
 
@@ -10311,11 +10312,17 @@ typedef struct _SID_IDENTIFIER_AUTHORITY {
 } SID_IDENTIFIER_AUTHORITY, *PSID_IDENTIFIER_AUTHORITY;
 #endif
 
+#define SID_REVISION                     (1)    // Current revision level
+#define SID_MAX_SUB_AUTHORITIES          (15)
+#define SID_RECOMMENDED_SUB_AUTHORITIES  (1)    // Will change to around 6 in a future release.
 
 #ifndef SID_DEFINED
 #define SID_DEFINED
 typedef struct _SID {
    BYTE  Revision;
+#ifdef MIDL_PASS
+   [range(0,SID_MAX_SUB_AUTHORITIES)]
+#endif
    BYTE  SubAuthorityCount;
    SID_IDENTIFIER_AUTHORITY IdentifierAuthority;
 #ifdef MIDL_PASS
@@ -10326,11 +10333,6 @@ typedef struct _SID {
 } SID, *PISID;
 #endif
 
-#define SID_REVISION                     (1)    // Current revision level
-#define SID_MAX_SUB_AUTHORITIES          (15)
-#define SID_RECOMMENDED_SUB_AUTHORITIES  (1)    // Will change to around 6
-
-                                                // in a future release.
 #ifndef MIDL_PASS
 #define SECURITY_MAX_SID_SIZE  \
       (sizeof(SID) - sizeof(DWORD) + (SID_MAX_SUB_AUTHORITIES * sizeof(DWORD)))
@@ -10605,7 +10607,7 @@ typedef struct _ATTRIBUTES_AND_SID {
 
 // Note: This is because the App Capability Rid is S-1-15-3-1024-...
 //       whereas the service group rid is          S-1-5-32-...
-//	The number of RIDs from hash (8) are the same for both
+//  The number of RIDs from hash (8) are the same for both
 #define SECURITY_INSTALLER_CAPABILITY_RID_COUNT (10)
 
 //
@@ -10721,7 +10723,7 @@ typedef struct _ATTRIBUTES_AND_SID {
 // Built-in Packages.
 //
 
-#define SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE        	(0x00000001L)
+#define SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE            (0x00000001L)
 #define SECURITY_BUILTIN_PACKAGE_ANY_RESTRICTED_PACKAGE (0x00000002L)
 
 //
@@ -12080,6 +12082,7 @@ typedef enum _TOKEN_INFORMATION_CLASS {
     TokenIsSandboxed,
     TokenIsAppSilo,
     TokenLoggingInformation,
+    TokenLearningMode,
     MaxTokenInfoClass  // MaxTokenInfoClass should always be the last enum
 } TOKEN_INFORMATION_CLASS, *PTOKEN_INFORMATION_CLASS;
 
@@ -12229,7 +12232,7 @@ typedef struct _TOKEN_LOGGING_INFORMATION {
 // Valid bits for each TOKEN_AUDIT_POLICY policy mask field.
 //
 
-#define POLICY_AUDIT_SUBCATEGORY_COUNT (59)
+#define POLICY_AUDIT_SUBCATEGORY_COUNT (60)
 
 typedef struct _TOKEN_AUDIT_POLICY {
     BYTE  PerUserPolicy[((POLICY_AUDIT_SUBCATEGORY_COUNT) >> 1) + 1];
@@ -13748,9 +13751,13 @@ typedef struct _JOBOBJECT_IO_ATTRIBUTION_INFORMATION {
 #define JOB_OBJECT_UILIMIT_EXITWINDOWS      0x00000080
 #define JOB_OBJECT_UILIMIT_IME              0x00000100
 
-#define JOB_OBJECT_UILIMIT_ALL              0x000001FF
+// TODO: New Additions
+#define JOB_OBJECT_UILIMIT_INJECTION        0x00000200
 
-#define JOB_OBJECT_UI_VALID_FLAGS           0x000001FF
+
+#define JOB_OBJECT_UILIMIT_ALL              0x000003FF
+
+#define JOB_OBJECT_UI_VALID_FLAGS           0x000003FF
 
 #define JOB_OBJECT_SECURITY_NO_ADMIN            0x00000001
 #define JOB_OBJECT_SECURITY_RESTRICTED_TOKEN    0x00000002
@@ -14220,6 +14227,33 @@ typedef struct _SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION {
 #define PF_ARM_SVE_F64MM_INSTRUCTIONS_AVAILABLE     59   
 #define PF_BMI2_INSTRUCTIONS_AVAILABLE              60   
 #define PF_MOVDIR64B_INSTRUCTION_AVAILABLE          61   
+#define PF_ARM_LSE2_AVAILABLE                       62   
+#define PF_RESERVED_FEATURE                         63   
+#define PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE          64   
+#define PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE        65   
+#define PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE      66   
+#define PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE      67   
+#define PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE      68   
+#define PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE     69   
+#define PF_ARM_SME_INSTRUCTIONS_AVAILABLE           70   
+#define PF_ARM_SME2_INSTRUCTIONS_AVAILABLE          71   
+#define PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE        72   
+#define PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE        73   
+#define PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE       74   
+#define PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE  75   
+#define PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE    76   
+#define PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE    77   
+#define PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE    78   
+#define PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE    79   
+#define PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE    80   
+#define PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE     81   
+#define PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE     82   
+#define PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE    83   
+#define PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE    84   
+#define PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE    85   
+#define PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE    86   
+#define PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE     87   
+#define PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE      88   
 //
 
 //
@@ -14515,7 +14549,7 @@ typedef struct DECLSPEC_ALIGN(16) _MEMORY_BASIC_INFORMATION64 {
 // invalid.  Input flag.
 //
 
-#define CFG_CALL_TARGET_VALID                               (0x00000001) 
+#define CFG_CALL_TARGET_VALID                               (0x00000001)
 
 //
 // Call target has been successfully processed.  Used to report to the caller
@@ -16539,10 +16573,10 @@ DEFINE_GUID( GUID_ALLOW_SYSTEM_REQUIRED, 0xA4B195F5, 0x8225, 0x47D8, 0x80, 0x12,
 // Energy Saver Settings (deprecated in Germanium)
 // ---------------------
 //
-// ***Use GUID_ENERGY_SAVER_STATUS instead*** This power setting represents the 
+// ***Use GUID_ENERGY_SAVER_STATUS instead*** This power setting represents the
 // state for battery saver and remains here for backwards compatibility.
-// 
-// Indicates if Energy Saver is ON or OFF. 
+//
+// Indicates if Energy Saver is ON or OFF.
 //
 // {E00958C0-C213-4ACE-AC77-FECCED2EEEA5}
 //
@@ -16551,7 +16585,7 @@ DEFINE_GUID( GUID_POWER_SAVING_STATUS, 0xe00958c0, 0xc213, 0x4ace, 0xac, 0x77, 0
 //
 // Energy Saver Settings
 // ---------------------
-// 
+//
 // Defines a guid to indicate energy saver status (Off, Standard, or High Savings)
 // from the ENERGY_SAVER_STATUS structure.
 //
@@ -16723,6 +16757,14 @@ DEFINE_GUID( GUID_PROCESSOR_THROTTLE_MAXIMUM_1, 0xBC5038F7, 0x23E0, 0x4960, 0x96
 
 //
 // Specifies a percentage (between 0 and 100) that the processor frequency
+// should never go above for Processor Power Efficiency Class 2.
+//
+// {bc5038f7-23e0-4960-96da-33abaf5935ee}
+//
+DEFINE_GUID( GUID_PROCESSOR_THROTTLE_MAXIMUM_2, 0xBC5038F7, 0x23E0, 0x4960, 0x96, 0xDA, 0x33, 0xAB, 0xAF, 0x59, 0x35, 0xEE );
+
+//
+// Specifies a percentage (between 0 and 100) that the processor frequency
 // should not drop below.  For example, if this value is set to 50, then the
 // processor frequency will never be throttled below 50 percent of its
 // maximum frequency by the system.
@@ -16742,6 +16784,14 @@ DEFINE_GUID( GUID_PROCESSOR_THROTTLE_MINIMUM, 0x893DEE8E, 0x2BEF, 0x41E0, 0x89, 
 DEFINE_GUID( GUID_PROCESSOR_THROTTLE_MINIMUM_1, 0x893DEE8E, 0x2BEF, 0x41E0, 0x89, 0xC6, 0xB5, 0x5D, 0x09, 0x29, 0x96, 0x4D );
 
 //
+// Specifies a percentage (between 0 and 100) that the processor frequency
+// should not drop below for Processor Power Efficiency Class 2.
+//
+// {893dee8e-2bef-41e0-89c6-b55d0929964e}
+//
+DEFINE_GUID( GUID_PROCESSOR_THROTTLE_MINIMUM_2, 0x893DEE8E, 0x2BEF, 0x41E0, 0x89, 0xC6, 0xB5, 0x5D, 0x09, 0x29, 0x96, 0x4E );
+
+//
 // Specifies the maximum processor frequency (expresssed in MHz).
 //
 
@@ -16752,6 +16802,10 @@ DEFINE_GUID(GUID_PROCESSOR_FREQUENCY_LIMIT,
 // {75B0AE3F-BCE0-45a7-8C89-C9611C25E101}
 DEFINE_GUID(GUID_PROCESSOR_FREQUENCY_LIMIT_1,
 0x75b0ae3f, 0xbce0, 0x45a7, 0x8c, 0x89, 0xc9, 0x61, 0x1c, 0x25, 0xe1, 0x01);
+
+// {75B0AE3F-BCE0-45a7-8C89-C9611C25E102}
+DEFINE_GUID(GUID_PROCESSOR_FREQUENCY_LIMIT_2,
+0x75b0ae3f, 0xbce0, 0x45a7, 0x8c, 0x89, 0xc9, 0x61, 0x1c, 0x25, 0xe1, 0x02);
 
 //
 // Specifies whether throttle states are allowed to be used even when
@@ -16946,6 +17000,14 @@ DEFINE_GUID(GUID_PROCESSOR_PERF_ENERGY_PERFORMANCE_PREFERENCE,
 // {36687F9E-E3A5-4dbf-B1DC-15EB381C6864}
 DEFINE_GUID(GUID_PROCESSOR_PERF_ENERGY_PERFORMANCE_PREFERENCE_1,
 0x36687f9e, 0xe3a5, 0x4dbf, 0xb1, 0xdc, 0x15, 0xeb, 0x38, 0x1c, 0x68, 0x64);
+
+//
+// Specifies the tradeoff between performance and energy the processor should
+// make when operating in autonomous mode for class 2 processors.
+//
+// {36687F9E-E3A5-4dbf-B1DC-15EB381C6865}
+DEFINE_GUID(GUID_PROCESSOR_PERF_ENERGY_PERFORMANCE_PREFERENCE_2,
+0x36687f9e, 0xe3a5, 0x4dbf, 0xb1, 0xdc, 0x15, 0xeb, 0x38, 0x1c, 0x68, 0x65);
 
 #define PROCESSOR_PERF_PERFORMANCE_PREFERENCE 0xff
 #define PROCESSOR_PERF_ENERGY_PREFERENCE         0
@@ -17280,6 +17342,14 @@ DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_PERF, 0x619b7505, 0x3b, 0x4e82, 0x
 DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_PERF_1, 0x619b7505, 0x3b, 0x4e82, 0xb7, 0xa6, 0x4d, 0xd2, 0x9c, 0x30, 0x9, 0x72);
 
 //
+// Specifies the processor performance state in response to latency sensitivity
+// hints for Processor Power Efficiency Class 2.
+//
+// {619b7505-003b-4e82-b7a6-4dd29c300973}
+//
+DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_PERF_2, 0x619b7505, 0x3b, 0x4e82, 0xb7, 0xa6, 0x4d, 0xd2, 0x9c, 0x30, 0x9, 0x73);
+
+//
 // Specifies the energy/performance preference to use in response to latency
 // sensitivity hints.
 //
@@ -17289,11 +17359,19 @@ DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_EPP, 0x4b70f900, 0xcdd9, 0x4e66, 0
 
 //
 // Specifies the energy/performance preference to use in response to latency
-// sensitivity hintsfor Processor Power Efficiency Class 1.
+// sensitivity hints for Processor Power Efficiency Class 1.
 //
 // {4B70F900-CDD9-4e66-AA26-AE8417F98174}
 //
 DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_EPP_1, 0x4b70f900, 0xcdd9, 0x4e66, 0xaa, 0x26, 0xae, 0x84, 0x17, 0xf9, 0x81, 0x74);
+
+//
+// Specifies the energy/performance preference to use in response to latency
+// sensitivity hints for Processor Power Efficiency Class 2.
+//
+// {4B70F900-CDD9-4e66-AA26-AE8417F98175}
+//
+DEFINE_GUID( GUID_PROCESSOR_PERF_LATENCY_HINT_EPP_2, 0x4b70f900, 0xcdd9, 0x4e66, 0xaa, 0x26, 0xae, 0x84, 0x17, 0xf9, 0x81, 0x75);
 
 //
 // Specifies the minimum unparked processors when a latency hint is active
@@ -17370,11 +17448,18 @@ DEFINE_GUID( GUID_PROCESSOR_DISTRIBUTE_UTILITY, 0xe0007330, 0xf589, 0x42ed, 0xa4
 DEFINE_GUID( GUID_PROCESSOR_RESOURCE_PRIORITY, 0x603fe9ce, 0x8d01, 0x4b48, 0xa9, 0x68, 0x1d, 0x70, 0x6c, 0x28, 0xfd, 0x5c);
 
 //
-// Specifies the processor resource riority for Processor Power Efficiency Class 1.
+// Specifies the processor resource priority for Processor Power Efficiency Class 1.
 //
 // {603fe9ce-8d01-4b48-a968-1d706c28df5d}
 //
 DEFINE_GUID( GUID_PROCESSOR_RESOURCE_PRIORITY_1, 0x603fe9ce, 0x8d01, 0x4b48, 0xa9, 0x68, 0x1d, 0x70, 0x6c, 0x28, 0xfd, 0x5d);
+
+//
+// Specifies the processor resource priority for Processor Power Efficiency Class 2.
+//
+// {603fe9ce-8d01-4b48-a968-1d706c28df5e}
+//
+DEFINE_GUID( GUID_PROCESSOR_RESOURCE_PRIORITY_2, 0x603fe9ce, 0x8d01, 0x4b48, 0xa9, 0x68, 0x1d, 0x70, 0x6c, 0x28, 0xfd, 0x5e);
 
 //
 // GUIDS to control PPM settings on computer system with more than one
@@ -17440,6 +17525,25 @@ DEFINE_GUID(GUID_PROCESSOR_HETERO_CONTAINMENT_HYBRID_THRESHOLD, 0x6788488b, 0x1b
 //
 // {60FBE21B-EFD9-49F2-B066-8674D8E9F423}
 DEFINE_GUID(GUID_PROCESSOR_HETERO_CONTAINMENT_POLICY, 0x60fbe21b, 0xefd9, 0x49f2, 0xb0, 0x66, 0x86, 0x74, 0xd8, 0xe9, 0xf4, 0x23);
+
+//
+// Specify the important utility percentage that once met, allow workload to move to hybrid containment zone.
+//
+// {6ece9e1f-b6dd-42bf-b1b7-5a512b10c092}
+DEFINE_GUID(GUID_PROCESSOR_HETERO_CONTAINMENT_EFFICIENCY_IMP_UTIL_THRESHOLD, 0x6ece9e1f, 0xb6dd, 0x42bf, 0xb1, 0xb7, 0x5a, 0x51, 0x2b, 0x10, 0xc0, 0x92);
+
+//
+// Specify the important utility percentage that once met, allow workload to move to no containment zone.
+//
+// {12fd031f-53d2-4bf4-ac6d-c699fc9538c7}
+DEFINE_GUID(GUID_PROCESSOR_HETERO_CONTAINMENT_HYBRID_IMP_UTIL_THRESHOLD, 0x12fd031f, 0x53d2, 0x4bf4, 0xac, 0x6d, 0xc6, 0x99, 0xfc, 0x95, 0x38, 0xc7);
+
+//
+// Specifies the minimum efficiency score for a core to be considered efficient
+// or "small" for WPS systems. A value of 0 disables the policy.
+//
+// {5BA7419A-295C-4B02-841B-66799388D6DA}
+DEFINE_GUID(GUID_PROCESSOR_WPS_MIN_EFFICIENCY_THRESHOLD, 0x5ba7419a, 0x295c, 0x4b02, 0x84, 0x1b, 0x66, 0x79, 0x93, 0x88, 0xd6, 0xda);
 
 //
 // Specifies the performance level (in units of Processor Power Efficiency
@@ -18143,6 +18247,7 @@ typedef enum {
     SessionAllowExternalDmaDevices,
     SendSuspendResumeNotification,
     BlackBoxRecorderDirectAccessBuffer,
+    SystemPowerSourceState,
     PowerInformationLevelMaximum
 } POWER_INFORMATION_LEVEL;
 
@@ -18296,9 +18401,13 @@ typedef struct _POWER_MONITOR_INVOCATION {
 
 typedef enum _POWER_LIMIT_TYPES {
     PowerLimitContinuous = 0,
+    PowerLimitType1 = PowerLimitContinuous,
     PowerLimitBurst,
+    PowerLimitType2 = PowerLimitBurst,
     PowerLimitRapid,
+    PowerLimitType3 = PowerLimitRapid,
     PowerLimitPreemptive,
+    PowerLimitType4 = PowerLimitPreemptive,
     PowerLimitPreemptiveOffset,
     PowerLimitTypeMax
 } POWER_LIMIT_TYPES, *PPOWER_LIMIT_TYPES;
@@ -19125,6 +19234,34 @@ typedef struct {
     DWORD               DefaultAlert1;
     DWORD               DefaultAlert2;
 } SYSTEM_BATTERY_STATE, *PSYSTEM_BATTERY_STATE;
+
+typedef struct _SYSTEM_POWER_SOURCE_STATE {
+    SYSTEM_BATTERY_STATE BatteryState;
+    DWORD                InstantaneousPeakPower;
+    DWORD                InstantaneousPeakPeriod;
+    DWORD                SustainablePeakPower;
+    DWORD                SustainablePeakPeriod;
+    DWORD                PeakPower;
+    DWORD                MaxOutputPower;
+    DWORD                MaxInputPower;
+    LONG                 BatteryRateInCurrent;
+    DWORD                BatteryVoltage;
+} SYSTEM_POWER_SOURCE_STATE, *PSYSTEM_POWER_SOURCE_STATE;
+
+//
+// N.B. SYSTEM_POWER_SOURCE_STATE extends SYSTEM_BATTERY_STATE, with BatteryState
+//      positioned at the beginning of the structure. This layout ensures that unions
+//      or structures referencing SYSTEM_BATTERY_STATE will correctly interpret
+//      BatteryState when accessing SYSTEM_POWER_SOURCE_STATE. The assertion ensures
+//      that the BatteryState field has a zero offset, confirming its position at the
+//      start of SYSTEM_POWER_SOURCE_STATE.
+//
+
+#ifndef MIDL_PASS
+
+C_ASSERT(FIELD_OFFSET(SYSTEM_POWER_SOURCE_STATE, BatteryState) == 0);
+
+#endif
 
 
 
@@ -21003,6 +21140,7 @@ typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY32 {
     DWORD   GuardXFGTableDispatchFunctionPointer; // VA
     DWORD   CastGuardOsDeterminedFailureMode; // VA
     DWORD   GuardMemcpyFunctionPointer;     // VA
+    DWORD   UmaFunctionPointers;            // VA
 } IMAGE_LOAD_CONFIG_DIRECTORY32, *PIMAGE_LOAD_CONFIG_DIRECTORY32;
 
 typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64 {
@@ -21055,6 +21193,7 @@ typedef struct _IMAGE_LOAD_CONFIG_DIRECTORY64 {
     ULONGLONG  GuardXFGTableDispatchFunctionPointer; // VA
     ULONGLONG  CastGuardOsDeterminedFailureMode; // VA
     ULONGLONG  GuardMemcpyFunctionPointer;     // VA
+    ULONGLONG  UmaFunctionPointers;            // VA
 } IMAGE_LOAD_CONFIG_DIRECTORY64, *PIMAGE_LOAD_CONFIG_DIRECTORY64;
 
 // end_ntoshvp
@@ -21369,6 +21508,7 @@ typedef PIMAGE_ENCLAVE_CONFIG32         PIMAGE_ENCLAVE_CONFIG;
 #define IMAGE_ENCLAVE_MINIMUM_CONFIG_SIZE   FIELD_OFFSET(IMAGE_ENCLAVE_CONFIG, EnclaveFlags)
 
 #define IMAGE_ENCLAVE_POLICY_DEBUGGABLE     0x00000001
+#define IMAGE_ENCLAVE_POLICY_STRICT_MEMORY  0x00000002
 
 #define IMAGE_ENCLAVE_FLAG_PRIMARY_IMAGE    0x00000001
 
@@ -22608,6 +22748,7 @@ typedef struct _RTL_BARRIER {
 #define FAST_FAIL_INVALID_THREAD_STATE              74
 #define FAST_FAIL_CORRUPT_WOW64_STATE               75
 #define FAST_FAIL_INVALID_EXTENDED_STATE            76
+#define FAST_FAIL_KERNEL_POINTER_EXPECTED           77
 #define FAST_FAIL_INVALID_FAST_FAIL_CODE            0xFFFFFFFF
 
 #if _MSC_VER >= 1610
@@ -24225,7 +24366,10 @@ typedef struct _PERFORMANCE_DATA {
 #define DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_08         0x0000002C
 #define DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_09         0x0000002D
 
-#define DEVICEFAMILYDEVICEFORM_MAX                      0x0000002D
+#define DEVICEFAMILYDEVICEFORM_GAMING_HANDHELD          0x0000002E
+#define DEVICEFAMILYDEVICEFORM_GAMING_CONSOLE           0x0000002F
+
+#define DEVICEFAMILYDEVICEFORM_MAX                      0x0000002F
 
 VOID
 NTAPI

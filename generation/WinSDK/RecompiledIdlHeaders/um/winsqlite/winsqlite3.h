@@ -569,9 +569,9 @@ SQLITE_API int SQLITE_APICALL sqlite3_exec(
 #define SQLITE_IOERR_DATA              (SQLITE_IOERR | (32<<8))
 #define SQLITE_IOERR_CORRUPTFS         (SQLITE_IOERR | (33<<8))
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_CO */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_IOERR_IN_PAGE           (SQLITE_IOERR | (34<<8))
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 #define SQLITE_LOCKED_SHAREDCACHE      (SQLITE_LOCKED |  (1<<8))
 #if NTDDI_VERSION >= NTDDI_WIN10_19H1
 #define SQLITE_LOCKED_VTAB             (SQLITE_LOCKED |  (2<<8))
@@ -625,9 +625,9 @@ SQLITE_API int SQLITE_APICALL sqlite3_exec(
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_ZN */
 #define SQLITE_NOTICE_RECOVER_WAL      (SQLITE_NOTICE | (1<<8))
 #define SQLITE_NOTICE_RECOVER_ROLLBACK (SQLITE_NOTICE | (2<<8))
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_NOTICE_RBU              (SQLITE_NOTICE | (3<<8))
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 #define SQLITE_WARNING_AUTOINDEX       (SQLITE_WARNING | (1<<8))
 #define SQLITE_AUTH_USER               (SQLITE_AUTH | (1<<8))
 #if NTDDI_VERSION >= NTDDI_WIN10_RS2
@@ -2646,13 +2646,13 @@ struct sqlite3_mem_methods {
 #define SQLITE_DBCONFIG_LEGACY_FILE_FORMAT    1016 /* int int* */
 #define SQLITE_DBCONFIG_TRUSTED_SCHEMA        1017 /* int int* */
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_CO */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_DBCONFIG_STMT_SCANSTATUS       1018 /* int int* */
 #define SQLITE_DBCONFIG_REVERSE_SCANORDER     1019 /* int int* */
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 // MAX value was only defined from RS5 forward.
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_DBCONFIG_MAX                   1019 /* Largest DBCONFIG */
 #elif NTDDI_VERSION >= NTDDI_WIN10_CO
 #define SQLITE_DBCONFIG_MAX                   1017 /* Largest DBCONFIG */
@@ -2899,9 +2899,9 @@ SQLITE_API sqlite3_int64 SQLITE_APICALL sqlite3_total_changes64(sqlite3*);
 ** It returns 1 if an interrupt is currently in effect, or 0 otherwise.
 */
 SQLITE_API void SQLITE_APICALL sqlite3_interrupt(sqlite3*);
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 SQLITE_API int SQLITE_APICALL sqlite3_is_interrupted(sqlite3*);
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Determine If An SQL Statement Is Complete
@@ -4636,9 +4636,9 @@ SQLITE_API int SQLITE_APICALL sqlite3_stmt_isexplain(sqlite3_stmt *pStmt);
 ** Hence, it is good practice to call [sqlite3_reset(S)]
 ** immediately prior to calling sqlite3_stmt_explain(S,E).
 */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 SQLITE_API int SQLITE_APICALL sqlite3_stmt_explain(sqlite3_stmt *pStmt, int eMode);
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Determine If A Prepared Statement Has Been Reset
@@ -8460,11 +8460,11 @@ SQLITE_API int SQLITE_CDECL sqlite3_test_control(int op, ...);
 #define SQLITE_TESTCTRL_TUNE                    32
 #define SQLITE_TESTCTRL_LOGEST                  33
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_ZN */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_TESTCTRL_USELONGDOUBLE           34
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_TESTCTRL_LAST                    34  /* Largest TESTCTRL */
 #elif NTDDI_VERSION >= NTDDI_WIN11_ZN
 #define SQLITE_TESTCTRL_LAST                    33  /* Largest TESTCTRL */
@@ -9987,9 +9987,9 @@ SQLITE_API int SQLITE_CDECL sqlite3_vtab_config(sqlite3*, int op, ...);
 #define SQLITE_VTAB_INNOCUOUS          2
 #define SQLITE_VTAB_DIRECTONLY         3
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_CO */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_VTAB_USES_ALL_SCHEMAS   4
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Determine The Virtual Table Conflict Policy
@@ -10391,10 +10391,10 @@ SQLITE_API int SQLITE_APICALL sqlite3_vtab_rhs_value(sqlite3_index_info*, int, s
 #define SQLITE_SCANSTAT_NAME     3
 #define SQLITE_SCANSTAT_EXPLAIN  4
 #define SQLITE_SCANSTAT_SELECTID 5
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_SCANSTAT_PARENTID 6
 #define SQLITE_SCANSTAT_NCYCLE   7
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Prepared Statement Scan Status
@@ -10440,7 +10440,7 @@ SQLITE_API int SQLITE_APICALL sqlite3_stmt_scanstatus(
   void *pOut                /* Result written here */
 );
 
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 SQLITE_API int SQLITE_APICALL sqlite3_stmt_scanstatus_v2(
   sqlite3_stmt *pStmt,      /* Prepared statement for which info desired */
   int idx,                  /* Index of loop to report on */
@@ -10448,15 +10448,15 @@ SQLITE_API int SQLITE_APICALL sqlite3_stmt_scanstatus_v2(
   int flags,                /* Mask of flags defined below */
   void *pOut                /* Result written here */
 );
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Prepared Statement Scan Status
 ** KEYWORDS: {scan status flags}
 */
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_SCANSTAT_COMPLEX 0x0001
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Zero Scan-Status Counters
@@ -11239,9 +11239,9 @@ SQLITE_API int SQLITE_APICALL sqlite3session_object_config(sqlite3_session*, int
 **   the first table has been attached to the session object.
 */
 #define SQLITE_SESSION_OBJCONFIG_SIZE  1
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_SESSION_OBJCONFIG_ROWID 2
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 
 /*
@@ -12391,9 +12391,9 @@ SQLITE_API int SQLITE_APICALL sqlite3changeset_apply_v2(
 */
 #define SQLITE_CHANGESETAPPLY_NOSAVEPOINT   0x0001
 #define SQLITE_CHANGESETAPPLY_INVERT        0x0002
-#if NTDDI_VERSION >= NTDDI_WIN11_DT
+#if NTDDI_VERSION >= NTDDI_WIN11_GE
 #define SQLITE_CHANGESETAPPLY_IGNORENOOP    0x0004
-#endif /* NTDDI_VERSION >= NTDDI_WIN11_DT */
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 
 /*
 ** CAPI3REF: Constants Passed To The Conflict Handler

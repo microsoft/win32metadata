@@ -168,6 +168,8 @@ extern "C" {
 
 #endif
 
+#define FILE_FLAG_DISALLOW_PATH_REDIRECTS               0x00010000
+
 #if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 typedef enum FILE_WRITE_FLAGS

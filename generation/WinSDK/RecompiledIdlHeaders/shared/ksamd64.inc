@@ -577,7 +577,7 @@ ThWin32Thread equ 001C8H
 ThStackBase equ 00038H
 ThLegoData equ 002D0H
 KernelThreadObjectLength equ 004C0H
-ExecutiveThreadObjectLength equ 00788H
+ExecutiveThreadObjectLength equ 00798H
 
 
 ;

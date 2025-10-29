@@ -277,6 +277,12 @@ cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppDepth, 0x4c9c9f45, 0x1d89, 0x4e31,
 /* a884022a-af13-4c16-b746-619bf618b878 */
 cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppGain, 0xa884022a, 0xaf13, 0x4c16, 0xb7, 0x46, 0x61, 0x9b, 0xf6, 0x18, 0xb8, 0x78);")
 
+/* a5022b24-7109-443b-9948-25b6ed8f39fd */
+cpp_quote("DEFINE_GUID(GUID_WICPixelFormat24bppRGBGain, 0xa5022b24, 0x7109, 0x443b, 0x99, 0x48, 0x25, 0xb6, 0xed, 0x8f, 0x39, 0xfd);")
+
+/* 837d6738-208a-43e0-8995-79ab74407402 */
+cpp_quote("DEFINE_GUID(GUID_WICPixelFormat32bppBGRGain, 0x837d6738, 0x208a, 0x43e0, 0x89, 0x95, 0x79, 0xab, 0x74, 0x40, 0x74, 0x02);")
+
 /* sRGB formats (gamma is approx. 2.2) */
 /* For a full definition, see the sRGB spec */
 
@@ -716,6 +722,37 @@ typedef [public] enum WICComponentSigning
 
 
 /*=========================================================================*\
+    WICBitmapToneMappingModes
+\*=========================================================================*/
+
+typedef [public] enum WICBitmapToneMappingMode
+{
+    WICBitmapToneMappingMode_None           = 0x00000000,
+    WICBitmapToneMappingMode_Default        = 0x00000001,
+    WICBitmapToneMappingMode_D2D            = 0x00000002,
+    WICBitmapToneMappingMode_GainMap        = 0x00000003,
+    WICBITMAPTONEMAPPINGMODE_FORCE_DWORD    = CODEC_FORCE_DWORD
+} WICBitmapToneMappingMode;
+
+
+/*=========================================================================*\
+    WICBitmapChainType
+\*=========================================================================*/
+
+typedef [public] enum WICBitmapChainType
+{
+    WICBitmapChainType_Alternate            = 0x00000001,
+    WICBitmapChainType_Layer                = 0x00000002,
+    WICBitmapChainType_Preview              = 0x00000003,
+    WICBitmapChainType_Thumbnail            = 0x00000004,
+    WICBitmapChainType_AlphaMap             = 0x00000005,
+    WICBitmapChainType_DepthMap             = 0x00000006,
+    WICBitmapChainType_GainMap              = 0x00000007,
+    WICBITMAPCHAINTYPE_FORCE_DWORD          = CODEC_FORCE_DWORD
+} WICBitmapChainType;
+
+
+/*=========================================================================*\
     WICGifLogicalScreenDescriptorProperties 
 \*=========================================================================*/
 
@@ -973,6 +1010,14 @@ typedef [public] enum WICPngTimeProperties
 typedef [public] enum WICHeifProperties
 {
     WICHeifOrientation                  = 0x00000001,
+
+    // WICColor (VT_UI4).
+    // The image is an layered image if this property is present and not VT_EMPTY.
+    WICHeifLayeredImageCanvasColor      = 0x00000002,
+
+    // Array of POINT structures, specifying the coordinates of each layer image
+    // in the canvas (VT_VECTOR | VT_UI8)
+    WICHeifLayeredImageLayerPositions   = 0x00000003,
     WICHeifProperties_FORCE_DWORD = CODEC_FORCE_DWORD
 } WICHeifProperties;
 
@@ -1032,6 +1077,16 @@ typedef [public] enum WICJpegXLAnimFrameProperties
     WICJpegXLAnimFrameName                       = 0x00000002,
     WICJpegXLAnimFrameProperties_FORCE_DWORD     = CODEC_FORCE_DWORD
 } WICJpegXLAnimFrameProperties;
+
+
+/*=========================================================================*\
+    WICGainMapProperties
+\*=========================================================================*/
+typedef [public] enum WICGainMapProperties
+{
+    WICGainMapMetadata = 0x00000001,                        // In ISO 21496-1 format
+    WICGainMapProperties_FORCE_DWORD = CODEC_FORCE_DWORD
+} WICGainMapProperties;
 
 
 /*=========================================================================*\
@@ -1393,6 +1448,32 @@ interface IWICBitmapFlipRotator : IWICBitmapSource
 
 
 /*=========================================================================*\
+    IWICBitmapToneMapper
+\*=========================================================================*/
+
+[
+    object,
+    uuid(44728ded-1edf-4fe9-b50b-c89a264c9439)
+]
+interface IWICBitmapToneMapper : IWICBitmapSource
+{
+    HRESULT InitializeForHdrTarget(
+        [in] IWICBitmapSource *pISource,
+        [in] REFWICPixelFormatGUID guidDstFormat,
+        [in] FLOAT fLuminanceInNits,
+        [in] FLOAT fWhiteLevelInNits,
+        [in] WICBitmapToneMappingMode mode
+        );
+
+    HRESULT InitializeForSdrTarget(
+        [in] IWICBitmapSource *pISource,
+        [in] REFWICPixelFormatGUID guidDstFormat,
+        [in] WICBitmapToneMappingMode mode
+        );
+}
+
+
+/*=========================================================================*\
     IWICBitmapLock - WIC Lock object for bitmaps.
 \*=========================================================================*/
 
@@ -1434,7 +1515,7 @@ interface IWICBitmap : IWICBitmapSource
 {
     HRESULT Lock(
         [in, unique] const WICRect *prcLock,
-        [in] DWORD flags,
+        [in] DWORD flags, // WICBitmapLockFlags
         [out] IWICBitmapLock **ppILock
         );
 
@@ -1983,6 +2064,54 @@ interface IWICBitmapFrameDecode : IWICBitmapSource
 
 
 /*=========================================================================*\
+    IWICBitmapFrameChainReader -  Provides access to frames that are linked
+    to the current frame through chains of different types.
+\*=========================================================================*/
+
+[
+    object,
+    uuid(0c599495-a120-4222-9130-a8c29410bd0b)
+]
+interface IWICBitmapFrameChainReader : IUnknown
+{
+    HRESULT GetChainedFrameCount(
+        [in] WICBitmapChainType chainType,
+        [out] UINT* pCount
+    );
+
+    HRESULT GetChainedFrame(
+        [in] WICBitmapChainType chainType,
+        [in] UINT index,
+        [out] IWICBitmapFrameDecode** ppIBitmapFrame
+    );
+}
+
+
+/*=========================================================================*\
+    IWICBitmapFrameChainWriter -  Link frames together in chains of different
+    types.
+\*=========================================================================*/
+
+[
+    object,
+    uuid(40d9ea28-4768-47b3-8c12-558a48e98e38)
+]
+interface IWICBitmapFrameChainWriter : IUnknown
+{
+    HRESULT AppendFrameToChain(
+        [in] WICBitmapChainType chainType,
+        [out] IWICBitmapFrameEncode** ppIFrameEncode,
+        [in, out, unique] IPropertyBag2** ppIEncoderOptions
+        );
+
+    HRESULT DoesSupportChainType(
+        [in] WICBitmapChainType chainType,
+        [out] BOOL* pfIsSupported
+        );
+}
+
+
+/*=========================================================================*\
     IWICProgressiveLevelControl -  Progressive Decoding
 \*=========================================================================*/
 
@@ -2028,6 +2157,84 @@ interface IWICDisplayAdaptationControl : IUnknown
 
     HRESULT GetDisplayMaxLuminance(
         [out, retval] FLOAT* pfLuminanceInNits
+        );
+}
+
+/*=========================================================================*\
+    IWICDisplayAdaptationControl2 -
+    For adapting decoding to capabilities of the display.
+    Extends IWICDisplayAdaptationControl with additional methods.
+\*=========================================================================*/
+
+[
+    object,
+    uuid(d7508d29-3ab7-447e-a676-4d80d7de726b)
+]
+interface IWICDisplayAdaptationControl2 : IWICDisplayAdaptationControl
+{
+    HRESULT SetSdrWhiteLevel(
+        [in] FLOAT fWhiteLevelInNits
+        );
+
+    HRESULT GetSdrWhiteLevel(
+        [out, retval] FLOAT* pfWhiteLevelInNits
+        );
+
+    HRESULT SetToneMappingMode(
+        [in] WICBitmapToneMappingMode mode
+        );
+
+    HRESULT GetToneMappingMode(
+        [out, retval] WICBitmapToneMappingMode* mode
+        );
+
+    HRESULT DoesSupportToneMappingMode(
+        [in] WICBitmapToneMappingMode mode,
+        [out] BOOL* pfIsSupported
+        );
+}
+
+
+/*=========================================================================*\
+    IWICD3DTextureSource -
+    For decoding a bitmap using a Direct3D Device, such as ID3D11Device.
+    Returns the decoded bitmap as ID3D11Texture2D, or similar (depending on
+    the type of Direct3D device.)
+\*=========================================================================*/
+
+[
+    object,
+    uuid(caf65cc4-8ebe-4718-a21f-8dbf40bb7e25),
+    local
+]
+interface IWICD3DTextureSource : IUnknown
+{
+    HRESULT GetTexture(
+        [annotation("_In_")] IUnknown* pD3DDevice,
+        [annotation("_In_opt_")] IPropertyBag2* pID3DTextureOptions,
+        REFIID riid,
+        [annotation("_Outptr_")] void** ppTexture
+        );
+
+    HRESULT GetTransformedTexture(
+        [annotation("_In_opt_")] const WICRect* prc,
+        UINT uiWidth,
+        UINT uiHeight,
+        [annotation("_In_opt_")] const WICPixelFormatGUID* pguidDstFormat,
+        WICBitmapTransformOptions dstTransform,
+        [annotation("_In_")] IUnknown* pD3DDevice,
+        [annotation("_In_opt_")] IPropertyBag2* pID3DTextureOptions,
+        REFIID riid,
+        [annotation("_Outptr_")] void** ppTexture
+        );
+
+    HRESULT DoesSupportD3DDeviceType(
+        REFIID riid,
+        [annotation("_Out_")] BOOL* pfIsSupported
+        );
+
+    HRESULT GetD3DTextureOptions(
+        [annotation("_COM_Outptr_")] IPropertyBag2** ppID3DTextureOptions
         );
 }
 
@@ -2505,6 +2712,20 @@ interface IWICImagingFactory2 : IWICImagingFactory
         [out] IWICImageEncoder **ppWICImageEncoder
         );
 };
+
+/*=========================================================================*\
+    IWICImagingFactory3
+\*=========================================================================*/
+[
+    object,
+    uuid(489b3d8b-624a-4258-b678-7eece70f299d)
+]
+interface IWICImagingFactory3 : IWICImagingFactory2
+{
+    HRESULT CreateBitmapToneMapper(
+        [out] IWICBitmapToneMapper **ppToneMapper
+        );
+}
 cpp_quote("#endif")
 
 /*=========================================================================*\
@@ -2644,6 +2865,9 @@ typedef [public] enum WICHeifCompressionOption
     WICHeifCompressionNone          = 0x00000001,
     WICHeifCompressionHEVC          = 0x00000002,
     WICHeifCompressionAV1           = 0x00000003,
+    WICHeifCompressionJpegXL        = 0x00000004,
+    WICHeifCompressionBrotli        = 0x00000005,
+    WICHeifCompressionDeflate       = 0x00000006,
     WICHEIFCOMPRESSIONOPTION_FORCE_DWORD = CODEC_FORCE_DWORD
 } WICHeifCompressionOption;
 

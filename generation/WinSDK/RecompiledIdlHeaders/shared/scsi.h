@@ -5748,6 +5748,15 @@ typedef struct STOR_ADDRESS_ALIGN _STOR_ADDRESS {
 // Define different storage address types
 #define STOR_ADDRESS_TYPE_UNKNOWN   0x0
 #define STOR_ADDRESS_TYPE_BTL8      0x1
+
+//
+// The following address types are defined in srb.h to avoid introducing new
+// dependencies on the legacy SCSI infrastructure.  If there are any future updates
+// to scsi.h the following values should be treated as reserved.
+//
+// STOR_ADDRESS_TYPE_NVME           0x2
+//
+
 #define STOR_ADDRESS_TYPE_MAX       0xffff
 
 // Define 8 bit bus, target and LUN address scheme

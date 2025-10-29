@@ -11,6 +11,7 @@ import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.Storage.idl";
+import "Windows.Storage.Search.idl";
 import "Windows.Storage.Streams.idl";
 import "Windows.UI.idl";
 
@@ -19,7 +20,19 @@ namespace Windows
 {
     namespace Foundation
     {
+        namespace Collections
+        {
+            runtimeclass PropertySet;
+        }
+    }
+}
+namespace Windows
+{
+    namespace Foundation
+    {
         interface IAsyncAction;
+
+        typedef struct TimeSpan TimeSpan;
 
         apicontract UniversalApiContract;
 
@@ -35,7 +48,22 @@ namespace Windows
         interface IStorageFolder;
 
         interface IStorageItem;
-
+    }
+}
+namespace Windows
+{
+    namespace Storage
+    {
+        namespace Search
+        {
+            typedef struct SortEntry SortEntry;
+        }
+    }
+}
+namespace Windows
+{
+    namespace Storage
+    {
         runtimeclass StorageFile;
 
         runtimeclass StorageFolder;
@@ -87,6 +115,14 @@ namespace Windows
             typedef enum StorageProviderPopulationPolicy StorageProviderPopulationPolicy;
 
             typedef enum StorageProviderProtectionMode StorageProviderProtectionMode;
+
+            typedef enum StorageProviderResultKind StorageProviderResultKind;
+
+            typedef enum StorageProviderResultUsageKind StorageProviderResultUsageKind;
+
+            typedef enum StorageProviderSearchMatchKind StorageProviderSearchMatchKind;
+
+            typedef enum StorageProviderSearchQueryStatus StorageProviderSearchQueryStatus;
 
             typedef enum StorageProviderShareLinkState StorageProviderShareLinkState;
 
@@ -146,7 +182,21 @@ namespace Windows
 
             interface IStorageProviderPropertyCapabilities;
 
+            interface IStorageProviderQueryResult;
+
+            interface IStorageProviderQueryResultSet;
+
+            interface IStorageProviderQueryResultSetFactory;
+
             interface IStorageProviderQuotaUI;
+
+            interface IStorageProviderSearchHandler;
+
+            interface IStorageProviderSearchHandlerFactory;
+
+            interface IStorageProviderSearchQueryOptions;
+
+            interface IStorageProviderSearchResult;
 
             interface IStorageProviderShareLinkSource;
 
@@ -155,6 +205,12 @@ namespace Windows
             interface IStorageProviderStatusUISource;
 
             interface IStorageProviderStatusUISourceFactory;
+
+            interface IStorageProviderSuggestionsHandler;
+
+            interface IStorageProviderSuggestionsHandlerFactory;
+
+            interface IStorageProviderSuggestionsQueryOptions;
 
             interface IStorageProviderSyncRootInfo;
 
@@ -200,9 +256,19 @@ namespace Windows
 
             runtimeclass StorageProviderMoreInfoUI;
 
+            runtimeclass StorageProviderQueryResultSet;
+
             runtimeclass StorageProviderQuotaUI;
 
+            runtimeclass StorageProviderSearchQueryOptions;
+
+            runtimeclass StorageProviderSearchResult;
+
             runtimeclass StorageProviderStatusUI;
+
+            runtimeclass StorageProviderSuggestionResult;
+
+            runtimeclass StorageProviderSuggestionsQueryOptions;
 
             runtimeclass StorageProviderSyncRootInfo;
 
@@ -393,6 +459,46 @@ namespace Windows
             {
                 Unknown  = 0,
                 Personal = 1
+            };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            enum StorageProviderResultKind
+            {
+                Search               = 0,
+                Recommended          = 1,
+                Favorites            = 2,
+                Recent               = 3,
+                Shared               = 4,
+                RelatedFiles         = 5,
+                RelatedConversations = 6
+            };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            enum StorageProviderResultUsageKind
+            {
+                Rendered                   = 0,
+                Opened                     = 1,
+                SuggestionResponseReceived = 2
+            };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            enum StorageProviderSearchMatchKind
+            {
+                Lexical  = 0,
+                Semantic = 1
+            };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            enum StorageProviderSearchQueryStatus
+            {
+                Success               = 0,
+                Error                 = 1,
+                Timeout               = 2,
+                NoNetwork             = 3,
+                NetworkError          = 4,
+                NotSignedIn           = 5,
+                QueryNotSupported     = 6,
+                SortOrderNotSupported = 7
             };
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
@@ -673,6 +779,41 @@ namespace Windows
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(F1CD00AE-B4A9-5D20-A598-3EB4DD8FF8F4)]
+            interface IStorageProviderQueryResult : IInspectable
+            {
+                [propget] HRESULT Kind([out] [retval] Windows.Storage.Provider.StorageProviderResultKind* value);
+                [propput] HRESULT Kind([in] Windows.Storage.Provider.StorageProviderResultKind value);
+                [propget] HRESULT ResultId([out] [retval] HSTRING* value);
+                [propput] HRESULT ResultId([in] HSTRING value);
+                [propget] HRESULT RemoteFileId([out] [retval] HSTRING* value);
+                [propput] HRESULT RemoteFileId([in] HSTRING value);
+                [propget] HRESULT FilePath([out] [retval] HSTRING* value);
+                [propput] HRESULT FilePath([in] HSTRING value);
+                [propget] HRESULT RequestedProperties([out] [retval] Windows.Foundation.Collections.PropertySet** value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderQueryResultSet)]
+            [uuid(57C28407-7D21-5F98-AC52-0926A97F3259)]
+            interface IStorageProviderQueryResultSet : IInspectable
+            {
+                HRESULT GetResults([out] UINT32* __resultSize, [out] [retval] [size_is(, *__resultSize)] Windows.Storage.Provider.IStorageProviderQueryResult*** result);
+                [propget] HRESULT QueryResultId([out] [retval] HSTRING* value);
+                [propput] HRESULT QueryResultId([in] HSTRING value);
+                [propget] HRESULT Status([out] [retval] Windows.Storage.Provider.StorageProviderSearchQueryStatus* value);
+                [propput] HRESULT Status([in] Windows.Storage.Provider.StorageProviderSearchQueryStatus value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderQueryResultSet)]
+            [uuid(301974C2-9B0A-51D1-84B5-32578EE3083D)]
+            interface IStorageProviderQueryResultSetFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] UINT32 __resultsSize, [in] [size_is(__resultsSize)] Windows.Storage.Provider.IStorageProviderQueryResult** results, [out] [retval] Windows.Storage.Provider.StorageProviderQueryResultSet** value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [exclusiveto(Windows.Storage.Provider.StorageProviderQuotaUI)]
             [uuid(BA6295C3-312E-544F-9FD5-1F81B21F3649)]
             interface IStorageProviderQuotaUI : IInspectable
@@ -685,6 +826,49 @@ namespace Windows
                 [propput] HRESULT QuotaUsedLabel([in] HSTRING value);
                 [propget] HRESULT QuotaUsedColor([out] [retval] Windows.Foundation.IReference<Windows.UI.Color>** value);
                 [propput] HRESULT QuotaUsedColor([in] Windows.Foundation.IReference<Windows.UI.Color>* value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(69CC977D-ADAD-59C9-8FD1-F30B6FAE0FD9)]
+            interface IStorageProviderSearchHandler : IInspectable
+            {
+                HRESULT Find([in] Windows.Storage.Provider.StorageProviderSearchQueryOptions* options, [out] [retval] Windows.Storage.Provider.StorageProviderQueryResultSet** result);
+                HRESULT ReportUsage([in] Windows.Storage.Provider.StorageProviderResultUsageKind resultUsageKind, [in] HSTRING remoteFileId, [in] HSTRING resultId, [in] Windows.Foundation.TimeSpan latency);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(B0DCAD80-F3F5-516B-8ACE-4E77022C9598)]
+            interface IStorageProviderSearchHandlerFactory : IInspectable
+            {
+                HRESULT CreateSearchHandler([in] HSTRING cloudProviderId, [out] [retval] Windows.Storage.Provider.IStorageProviderSearchHandler** result);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderSearchQueryOptions)]
+            [uuid(93D854EB-1007-563C-B213-CC44BD88FEF2)]
+            interface IStorageProviderSearchQueryOptions : IInspectable
+            {
+                [propget] HRESULT UserQuery([out] [retval] HSTRING* value);
+                [propget] HRESULT Language([out] [retval] HSTRING* value);
+                [propget] HRESULT SortOrder([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Storage.Search.SortEntry>** value);
+                [propget] HRESULT ProgrammaticQuery([out] [retval] HSTRING* value);
+                [propget] HRESULT MaxResults([out] [retval] UINT32* value);
+                [propget] HRESULT FolderScope([out] [retval] HSTRING* value);
+                [propget] HRESULT QueryId([out] [retval] HSTRING* value);
+                [propget] HRESULT PropertiesToFetch([out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderSearchResult)]
+            [uuid(FC161049-0995-535F-99B7-FE292CBABAF5)]
+            interface IStorageProviderSearchResult : IInspectable
+            {
+                [propget] HRESULT MatchScore([out] [retval] DOUBLE* value);
+                [propput] HRESULT MatchScore([in] DOUBLE value);
+                [propget] HRESULT MatchKind([out] [retval] Windows.Storage.Provider.StorageProviderSearchMatchKind* value);
+                [propput] HRESULT MatchKind([in] Windows.Storage.Provider.StorageProviderSearchMatchKind value);
+                [propget] HRESULT MatchedPropertyName([out] [retval] HSTRING* value);
+                [propput] HRESULT MatchedPropertyName([in] HSTRING value);
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
@@ -734,6 +918,39 @@ namespace Windows
             interface IStorageProviderStatusUISourceFactory : IInspectable
             {
                 HRESULT GetStatusUISource([in] HSTRING syncRootId, [out] [retval] Windows.Storage.Provider.IStorageProviderStatusUISource** result);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            [uuid(AFF493F6-E1FD-5D03-B480-F1849C83EF4A)]
+            interface IStorageProviderSuggestionsHandler : IInspectable
+            {
+                HRESULT GetSuggestions([in] Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions* options, [out] [retval] Windows.Storage.Provider.StorageProviderQueryResultSet** result);
+                HRESULT Add([in] Windows.Storage.Provider.StorageProviderResultKind kind, [in] HSTRING remoteFileId);
+                HRESULT Remove([in] Windows.Storage.Provider.StorageProviderResultKind kind, [in] HSTRING remoteFileId);
+                HRESULT GetDetails([in] HSTRING remoteFileId, [in] UINT32 __propertiesToFetchSize, [in] [size_is(__propertiesToFetchSize)] HSTRING* propertiesToFetch, [in] HSTRING queryId, [out] [retval] Windows.Storage.Provider.StorageProviderSuggestionResult** result);
+                HRESULT ReportUsage([in] Windows.Storage.Provider.StorageProviderResultUsageKind resultUsageKind, [in] HSTRING remoteFileId, [in] HSTRING resultId, [in] Windows.Foundation.TimeSpan latency);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            [uuid(DC7B35D8-A25B-58A3-ACE7-B3543106A2AA)]
+            interface IStorageProviderSuggestionsHandlerFactory : IInspectable
+            {
+                HRESULT CreateSuggestionsHandler([in] HSTRING cloudProviderId, [out] [retval] Windows.Storage.Provider.IStorageProviderSuggestionsHandler** result);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions)]
+            [experimental]
+            [uuid(EFB8B74D-0D84-579C-B137-EA730635D9BB)]
+            interface IStorageProviderSuggestionsQueryOptions : IInspectable
+            {
+                [propget] HRESULT SuggestionsKind([out] [retval] Windows.Storage.Provider.StorageProviderResultKind* value);
+                [propget] HRESULT RemoteFileId([out] [retval] HSTRING* value);
+                [propget] HRESULT MaxResults([out] [retval] UINT32* value);
+                [propget] HRESULT QueryId([out] [retval] HSTRING* value);
+                [propget] HRESULT PropertiesToFetch([out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** value);
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 1.0)]
@@ -950,6 +1167,15 @@ namespace Windows
                 [default] interface Windows.Storage.Provider.IStorageProviderMoreInfoUI;
             }
 
+            [activatable(Windows.Storage.Provider.IStorageProviderQueryResultSetFactory, Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass StorageProviderQueryResultSet
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderQueryResultSet;
+            }
+
             [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [marshaling_behavior(agile)]
@@ -959,6 +1185,23 @@ namespace Windows
                 [default] interface Windows.Storage.Provider.IStorageProviderQuotaUI;
             }
 
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass StorageProviderSearchQueryOptions
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderSearchQueryOptions;
+            }
+
+            [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass StorageProviderSearchResult
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderSearchResult;
+                interface Windows.Storage.Provider.IStorageProviderQueryResult;
+            }
+
             [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [marshaling_behavior(agile)]
@@ -966,6 +1209,24 @@ namespace Windows
             runtimeclass StorageProviderStatusUI
             {
                 [default] interface Windows.Storage.Provider.IStorageProviderStatusUI;
+            }
+
+            [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass StorageProviderSuggestionResult
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderQueryResult;
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            runtimeclass StorageProviderSuggestionsQueryOptions
+            {
+                [default] [experimental] interface Windows.Storage.Provider.IStorageProviderSuggestionsQueryOptions;
             }
 
             [activatable(Windows.Storage.Provider.CloudFilesContract, 1.0)]

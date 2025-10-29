@@ -338,7 +338,6 @@ typedef struct tWAVEFORMATEX
 typedef const WAVEFORMATEX FAR *LPCWAVEFORMATEX;
 
 /* waveform audio function prototypes */
-
 WINMMAPI
 UINT
 WINAPI
@@ -365,6 +364,7 @@ waveOutGetDevCapsW(
     _Out_ LPWAVEOUTCAPSW pwoc,
     _In_ UINT cbwoc
     );
+
 #ifdef UNICODE
 #define waveOutGetDevCaps  waveOutGetDevCapsW
 #else
@@ -376,7 +376,6 @@ WINMMAPI MMRESULT WINAPI waveOutGetDevCaps( UINT uDeviceID, LPWAVEOUTCAPS pwoc, 
 #endif
 
 #if (WINVER >= 0x0400)
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -392,6 +391,7 @@ waveOutSetVolume(
     _In_opt_ HWAVEOUT hwo,
     _In_ DWORD dwVolume
     );
+
 #else
 WINMMAPI MMRESULT WINAPI waveOutGetVolume(UINT uId, LPDWORD pdwVolume);
 WINMMAPI MMRESULT WINAPI waveOutSetVolume(UINT uId, DWORD dwVolume);
@@ -416,6 +416,7 @@ waveOutGetErrorTextW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
+
 #ifdef UNICODE
 #define waveOutGetErrorText  waveOutGetErrorTextW
 #else
@@ -551,7 +552,6 @@ waveOutGetID(
 
 #if (WINVER >= 0x030a)
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -561,6 +561,7 @@ waveOutMessage(
     _In_ DWORD_PTR dw1,
     _In_ DWORD_PTR dw2
     );
+
 #else
 DWORD WINAPI waveOutMessage(HWAVEOUT hwo, UINT uMsg, DWORD dw1, DWORD dw2);
 #endif
@@ -592,6 +593,7 @@ waveInGetDevCapsW(
     _Out_writes_bytes_(cbwic) LPWAVEINCAPSW pwic,
     _In_ UINT cbwic
     );
+
 #ifdef UNICODE
 #define waveInGetDevCaps  waveInGetDevCapsW
 #else
@@ -621,6 +623,7 @@ waveInGetErrorTextW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
+
 #ifdef UNICODE
 #define waveInGetErrorText  waveInGetErrorTextW
 #else
@@ -717,7 +720,6 @@ waveInGetID(
 
 #if (WINVER >= 0x030a)
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -727,6 +729,7 @@ waveInMessage(
     _In_opt_ DWORD_PTR dw1,
     _In_opt_ DWORD_PTR dw2
     );
+
 #else
 DWORD WINAPI waveInMessage(HWAVEIN hwi, UINT uMsg, DWORD dw1, DWORD dw2);
 #endif
@@ -1084,15 +1087,14 @@ typedef struct midiproptempo_tag
 #endif /* WINVER >= 0x0400 */
 
 /* MIDI function prototypes */
-
 WINMMAPI
 UINT
 WINAPI
 midiOutGetNumDevs(
     void
     );
-#if (WINVER >= 0x0400)
 
+#if (WINVER >= 0x0400)
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1161,7 +1163,6 @@ midiStreamStop(
     );
 
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1179,6 +1180,7 @@ midiDisconnect(
     _In_ HMIDIOUT hmo,
     _In_opt_ LPVOID pReserved
     );
+
 #endif
 #endif /* WINVER >= 0x0400 */
 
@@ -1201,6 +1203,7 @@ midiOutGetDevCapsW(
     _Out_writes_bytes_(cbmoc) LPMIDIOUTCAPSW pmoc,
     _In_ UINT cbmoc
     );
+
 #ifdef UNICODE
 #define midiOutGetDevCaps  midiOutGetDevCapsW
 #else
@@ -1212,7 +1215,6 @@ MMRESULT WINAPI midiOutGetDevCaps(UINT uDeviceID, LPMIDIOUTCAPS pmoc, UINT cbmoc
 #endif
 
 #if (WINVER >= 0x0400)
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1228,6 +1230,7 @@ midiOutSetVolume(
     _In_opt_ HMIDIOUT hmo,
     _In_ DWORD dwVolume
     );
+
 #else
 WINMMAPI MMRESULT WINAPI midiOutGetVolume(UINT uId, LPDWORD pdwVolume);
 WINMMAPI MMRESULT WINAPI midiOutSetVolume(UINT uId, DWORD dwVolume);
@@ -1252,6 +1255,7 @@ midiOutGetErrorTextW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
+
 #ifdef UNICODE
 #define midiOutGetErrorText  midiOutGetErrorTextW
 #else
@@ -1352,7 +1356,6 @@ midiOutGetID(
 
 #if (WINVER >= 0x030a)
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1362,6 +1365,7 @@ midiOutMessage(
     _In_opt_ DWORD_PTR dw1,
     _In_opt_ DWORD_PTR dw2
     );
+
 #else
 DWORD WINAPI midiOutMessage(HMIDIOUT hmo, UINT uMsg, DWORD dw1, DWORD dw2);
 #endif
@@ -1393,12 +1397,12 @@ midiInGetDevCapsW(
     _Out_writes_bytes_(cbmic) LPMIDIINCAPSW pmic,
     _In_ UINT cbmic
     );
+
 #ifdef UNICODE
 #define midiInGetDevCaps  midiInGetDevCapsW
 #else
 #define midiInGetDevCaps  midiInGetDevCapsA
 #endif // !UNICODE
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1416,6 +1420,7 @@ midiInGetErrorTextW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
+
 #ifdef UNICODE
 #define midiInGetErrorText  midiInGetErrorTextW
 #else
@@ -1503,7 +1508,6 @@ midiInGetID(
 
 #if (WINVER >= 0x030a)
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1513,6 +1517,7 @@ midiInMessage(
     _In_opt_ DWORD_PTR dw1,
     _In_opt_ DWORD_PTR dw2
     );
+
 #else
 DWORD WINAPI midiInMessage(HMIDIIN hmi, UINT uMsg, DWORD dw1, DWORD dw2);
 #endif
@@ -1618,13 +1623,13 @@ typedef struct auxcaps_tag {
 #define AUXCAPS_LRVOLUME        0x0002  /* separate left-right volume control */
 
 /* auxiliary audio function prototypes */
-
 WINMMAPI
 UINT
 WINAPI
 auxGetNumDevs(
     void
     );
+
 #ifdef _WIN32
 
 WINMMAPI
@@ -1644,6 +1649,7 @@ auxGetDevCapsW(
     _Out_writes_bytes_(cbac) LPAUXCAPSW pac,
     _In_ UINT cbac
     );
+
 #ifdef UNICODE
 #define auxGetDevCaps  auxGetDevCapsW
 #else
@@ -1653,7 +1659,6 @@ auxGetDevCapsW(
 #else
 MMRESULT WINAPI auxGetDevCaps(UINT uDeviceID, LPAUXCAPS pac, UINT cbac);
 #endif
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1672,7 +1677,6 @@ auxGetVolume(
 
 #if (WINVER >= 0x030a)
 #ifdef _WIN32
-
 WINMMAPI
 MMRESULT
 WINAPI
@@ -1682,6 +1686,7 @@ auxOutMessage(
     _In_opt_ DWORD_PTR dw1,
     _In_opt_ DWORD_PTR dw2
     );
+
 #else
 DWORD WINAPI auxOutMessage(UINT uDeviceID, UINT uMsg, DWORD dw1, DWORD dw2);
 #endif
@@ -1823,6 +1828,7 @@ mixerGetDevCapsW(
     _Out_writes_bytes_(cbmxcaps) LPMIXERCAPSW pmxcaps,
     _In_ UINT cbmxcaps
     );
+
 #ifdef UNICODE
 #define mixerGetDevCaps  mixerGetDevCapsW
 #else
@@ -2012,6 +2018,7 @@ mixerGetLineInfoW(
     _Inout_ LPMIXERLINEW pmxl,
     _In_ DWORD fdwInfo
     );
+
 #ifdef UNICODE
 #define mixerGetLineInfo  mixerGetLineInfoW
 #else
@@ -2285,6 +2292,7 @@ mixerGetLineControlsW(
     _Inout_ LPMIXERLINECONTROLSW pmxlc,
     _In_ DWORD fdwControls
     );
+
 #ifdef UNICODE
 #define mixerGetLineControls  mixerGetLineControlsW
 #else
@@ -2388,6 +2396,7 @@ mixerGetControlDetailsW(
     _Inout_ LPMIXERCONTROLDETAILS pmxcd,
     _In_ DWORD fdwDetails
     );
+
 #ifdef UNICODE
 #define mixerGetControlDetails  mixerGetControlDetailsW
 #else

@@ -81,17 +81,10 @@ _CRT_BEGIN_C_HEADER
     #endif
 #endif
 
-#if !defined __cplusplus && !defined __midl 
-inline float __ucrt_int_to_float(int i)
-{
-    union {
-        int i;
-        float f;
-    } __my_int_to_float;
-
-    __my_int_to_float.i = i;
-    return __my_int_to_float.f;
-}
+#ifdef __has_builtin
+#define _UCRT_HAS_BUILTIN(x) __has_builtin(x)
+#else
+#define _UCRT_HAS_BUILTIN(x) 0
 #endif
 
 #ifndef _HUGE_ENUF
@@ -106,12 +99,10 @@ inline float __ucrt_int_to_float(int i)
 #define HUGE_VALF  ((float)INFINITY)
 #define HUGE_VALL  ((long double)INFINITY)
 
-#if defined _UCRT_NOISY_NAN || defined __midl
+#if defined _UCRT_NOISY_NAN || defined __midl || !(defined __cplusplus || _UCRT_HAS_BUILTIN(__builtin_nanf))
 #define _UCRT_NAN (-(float)(((float)(_HUGE_ENUF * _HUGE_ENUF)) * 0.0F))
-#elif defined __cplusplus
-#define _UCRT_NAN (__builtin_nanf("0"))
 #else
-#define _UCRT_NAN (__ucrt_int_to_float(0x7FC00000))
+#define _UCRT_NAN (__builtin_nanf("0"))
 #endif
 
 #ifdef _UCRT_NEGATIVE_NAN

@@ -76,10 +76,11 @@ typedef struct NCRYPT_ALLOC_PARA {
 // Microsoft built-in providers.
 //
 
-#define MS_KEY_STORAGE_PROVIDER         L"Microsoft Software Key Storage Provider"
-#define MS_SMART_CARD_KEY_STORAGE_PROVIDER L"Microsoft Smart Card Key Storage Provider"
-#define MS_PLATFORM_KEY_STORAGE_PROVIDER   L"Microsoft Platform Crypto Provider"
-#define MS_NGC_KEY_STORAGE_PROVIDER        L"Microsoft Passport Key Storage Provider"
+#define MS_KEY_STORAGE_PROVIDER             L"Microsoft Software Key Storage Provider"
+#define MS_SMART_CARD_KEY_STORAGE_PROVIDER  L"Microsoft Smart Card Key Storage Provider"
+#define MS_PLATFORM_KEY_STORAGE_PROVIDER    L"Microsoft Platform Crypto Provider"
+#define MS_NGC_KEY_STORAGE_PROVIDER         L"Microsoft Passport Key Storage Provider"
+#define MS_PLUTON_CRYPTO_PROVIDER           L"Microsoft Pluton Cryptographic Provider"
 
 //
 // Key name for sealing
@@ -999,6 +1000,19 @@ NCryptCreatePersistedKey(
 #if (NTDDI_VERSION >= NTDDI_WIN10)
 #define NCRYPT_SCARD_NGC_KEY_NAME       L"SmartCardNgcKeyName"
 #endif // (NTDDI_VERSION >= NTDDI_WIN10)
+
+//
+// Additional property strings specific to the Pluton Cryptographic Provider
+//
+#define NCRYPT_PLUTON_EKCERT_PROPERTY                       L"PLUTON_EKCERT"
+#define NCRYPT_PLUTON_EKPUB_PROPERTY                        L"PLUTON_EKPUB"
+#define NCRYPT_PLUTON_RSA_EKCERT_PROPERTY                   L"PLUTON_RSA_EKCERT"
+#define NCRYPT_PLUTON_RSA_EKPUB_PROPERTY                    L"PLUTON_RSA_EKPUB"
+#define NCRYPT_PLUTON_ECC_EKCERT_PROPERTY                   L"PLUTON_ECC_EKCERT"
+#define NCRYPT_PLUTON_ECC_EKPUB_PROPERTY                    L"PLUTON_ECC_EKPUB"
+#define NCRYPT_PLUTON_SESSION_ID_PROPERTY                   L"PLUTON_SESSION_ID"
+#define NCRYPT_PLUTON_KDF_PARENT_KEY_UNIQUE_NAME_PROPERTY   L"PlutonKdfParentKeyUniqueName"
+#define NCRYPT_PLUTON_KDF_PARAMS_BUFFER_DESC_PROPERTY       L"PlutonKdfParamsBufferDesc"
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 //

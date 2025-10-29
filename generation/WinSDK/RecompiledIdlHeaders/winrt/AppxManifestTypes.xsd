@@ -506,6 +506,12 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ST_Capability_SystemAI">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="systemAIModels"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="ST_DeviceFunction">
     <xs:restriction base="ST_NonEmptyString">
       <xs:maxLength value="100"/>
@@ -1015,6 +1021,14 @@
     <xs:restriction base="xs:string">
         <!-- Application Extensions -->
         <xs:enumeration value="windows.printSupportVirtualPrinterWorkflow"/>
+        <!-- Package Extensions -->
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_ExtensionCategory_PrintSupport3">
+    <xs:restriction base="xs:string">
+        <!-- Application Extensions -->
+        <xs:enumeration value="windows.printSupportEnterpriseManagementUI"/>
         <!-- Package Extensions -->
     </xs:restriction>
   </xs:simpleType>

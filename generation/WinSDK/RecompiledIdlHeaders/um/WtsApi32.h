@@ -349,7 +349,8 @@ typedef enum _WTS_INFO_CLASS {
     WTSConfigInfo,
     WTSValidationInfo,   // Info Class value used to fetch Validation Information through the WTSQuerySessionInformation
     WTSSessionAddressV4,
-    WTSIsRemoteSession
+    WTSIsRemoteSession,
+    WTSSessionActivityId
 } WTS_INFO_CLASS;
 
 /*=====================================================================
@@ -1339,6 +1340,10 @@ typedef enum _WTS_TYPE_CLASS {
     WTSTypeProcessInfoLevel0,
     WTSTypeProcessInfoLevel1,
     WTSTypeSessionInfoLevel1,
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+    WTSTypeCloudAuthServerNonce,
+    WTSTypeSerializedUserCredential
+#endif
 } WTS_TYPE_CLASS;
 
 BOOL WINAPI
@@ -1586,6 +1591,44 @@ BOOL WINAPI WTSGetListenerSecurityA(
   _In_          DWORD nLength,
   _Out_         LPDWORD lpnLengthNeeded);
 
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
+
+WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
+    _In_ const GUID* activityId);
+
+void WINAPI WTSCloudAuthClose(
+    _In_ WTS_CLOUD_AUTH_HANDLE cloudAuthHandle);
+
+BOOL WINAPI WTSCloudAuthGetServerNonce(
+    _In_ WTS_CLOUD_AUTH_HANDLE cloudAuthHandle,
+    _Outptr_result_z_ PWSTR* serverNonce);
+
+typedef struct _WTS_SERIALIZED_USER_CREDENTIAL {
+    ULONG SerializationLength;
+    BYTE* Serialization;
+} WTS_SERIALIZED_USER_CREDENTIAL, * PWTS_SERIALIZED_USER_CREDENTIAL, WRDS_SERIALIZED_USER_CREDENTIAL, * PWRDS_SERIALIZED_USER_CREDENTIAL;
+
+BOOL WINAPI WTSCloudAuthConvertAssertionToSerializedUserCredential(
+    _In_ WTS_CLOUD_AUTH_HANDLE cloudAuthHandle,
+    _In_reads_bytes_(assertionLength) PCSTR assertion,
+    _In_ ULONG assertionLength,
+    _In_z_ PCWSTR resourceId,
+    _Out_ WTS_SERIALIZED_USER_CREDENTIAL** userCredential);
+
+BOOL WINAPI WTSCloudAuthNetworkLogonWithSerializedCredential(
+    _In_ WTS_CLOUD_AUTH_HANDLE cloudAuthHandle,
+    _In_ WTS_SERIALIZED_USER_CREDENTIAL* userCredential,
+    _Out_ HANDLE* token);
+
+BOOL WINAPI WTSCloudAuthDuplicateSerializedUserCredential(
+    _In_ const WTS_SERIALIZED_USER_CREDENTIAL* userCredential,
+    _Out_ WTS_SERIALIZED_USER_CREDENTIAL** duplicatedUserCredential);
+
+#endif
+
 #ifdef UNICODE
 #define WTSLISTENERCONFIG WTSLISTENERCONFIGW
 #define PWTSLISTENERCONFIG PWTSLISTENERCONFIGW
@@ -1617,6 +1660,11 @@ WTSGetChildSessionId(
     _Out_ PULONG pSessionId
     );
 
+BOOL
+WINAPI
+WTSActiveSessionExists(
+    _Out_ PBOOL pbActiveSessionExists
+    );
 #ifdef __cplusplus
 }
 #endif

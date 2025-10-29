@@ -175,7 +175,7 @@ interface IPixelFilter : IFilter
         IMAGE_PIXELFORMAT Format;
     } IMAGE_INFO;
     HRESULT GetImageInfo([out] IMAGE_INFO* imageInfo);
-    HRESULT GetPixelsForImage([out] ULONG* pixelBufferLength, [out, size_is(, *pixelBufferLength)] BYTE** pixelBuffer);
+    HRESULT GetPixelsForImage([in] FLOAT scalingFactor, [in, unique] const RECT* sourceRect, [in] ULONG pixelBufferSize, [out, size_is(pixelBufferSize)] BYTE* pixelBuffer);
 }
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
