@@ -309,6 +309,13 @@ extern "C" {
 
 #endif
 
+// This event contains the IDK caching status for VsmProvisionIdk
+// The definitions for these events are contained in VsmConstants.h
+//     - IDK_PROVISIONING_TYPE_HW (0) - Uses Cached IDKS if available
+//     - IDK_PROVISIONING_TYPE_VTPM (1) - Skips caching logic and generates new IDKS on boot
+#define SIPAEVENT_IDK_GENERATION_STATUS    (SIPAEVENTTYPE_INFORMATION + \
+                                            0x000C)
+
 //
 // This event data contains a single DWORD which corresponds
 // to the NTSTATUS code returned by the (regular, non-secure) MOR bit

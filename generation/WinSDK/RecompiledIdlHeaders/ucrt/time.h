@@ -373,7 +373,7 @@ _ACRTIMP int __cdecl _timespec64_get(
     #ifdef _USE_32BIT_TIME_T
 
         _Check_return_ _CRT_INSECURE_DEPRECATE(ctime_s)
-        static __inline char* __CRTDECL ctime(
+        _CRT_NONSTANDARD_STATIC __inline char* __CRTDECL ctime(
             _In_ time_t const* const _Time
             )
         {
@@ -381,7 +381,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline double __CRTDECL difftime(
+        _CRT_NONSTANDARD_STATIC __inline double __CRTDECL difftime(
             _In_ time_t const _Time1,
             _In_ time_t const _Time2
             )
@@ -390,7 +390,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_ _CRT_INSECURE_DEPRECATE(gmtime_s)
-        static __inline struct tm* __CRTDECL gmtime(
+        _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL gmtime(
             _In_ time_t const* const _Time
             )
         {
@@ -398,7 +398,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_ _CRT_INSECURE_DEPRECATE(localtime_s)
-        static __inline struct tm* __CRTDECL localtime(
+        _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL localtime(
             _In_ time_t const* const _Time
             )
         {
@@ -406,7 +406,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline time_t __CRTDECL _mkgmtime(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL _mkgmtime(
             _Inout_ struct tm* const _Tm
             )
         {
@@ -414,14 +414,14 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_opt_
-        static __inline time_t __CRTDECL mktime(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL mktime(
             _Inout_ struct tm* const _Tm
             )
         {
             return _mktime32(_Tm);
         }
 
-        static __inline time_t __CRTDECL time(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL time(
             _Out_opt_ time_t* const _Time
             )
         {
@@ -429,7 +429,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline int __CRTDECL timespec_get(
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL timespec_get(
             _Out_ struct timespec* const _Ts,
             _In_  int              const _Base
             )
@@ -439,7 +439,7 @@ _ACRTIMP int __cdecl _timespec64_get(
 
         #if __STDC_WANT_SECURE_LIB__
             _Check_return_wat_
-            static __inline errno_t __CRTDECL ctime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL ctime_s(
                 _Out_writes_(_SizeInBytes) _Post_readable_size_(26) char*         const _Buffer,
                 _In_range_(>=,26)                                   size_t        const _SizeInBytes,
                 _In_                                                time_t const* const _Time
@@ -450,7 +450,7 @@ _ACRTIMP int __cdecl _timespec64_get(
 
         #if _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
-            static __inline struct tm* __CRTDECL gmtime_s(
+            _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL gmtime_s(
                 _In_  time_t const* const _Time,
                 _Out_ struct tm*    const _Tm
                 )
@@ -463,7 +463,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
 
             _Check_return_wat_
-            static __inline struct tm* __CRTDECL localtime_s(
+            _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL localtime_s(
                 _In_  time_t const* const _Time,
                 _Out_ struct tm*    const _Tm
                 )
@@ -476,7 +476,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
         #else // _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
-            static __inline errno_t __CRTDECL gmtime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL gmtime_s(
                     _Out_ struct tm*    const _Tm,
                     _In_  time_t const* const _Time
                 )
@@ -485,7 +485,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
 
             _Check_return_wat_
-                static __inline errno_t __CRTDECL localtime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL localtime_s(
                     _Out_ struct tm*    const _Tm,
                     _In_  time_t const* const _Time
                 )
@@ -498,7 +498,7 @@ _ACRTIMP int __cdecl _timespec64_get(
     #else // ^^^ _USE_32BIT_TIME_T ^^^ // vvv !_USE_32BIT_TIME_T vvv
 
         _Check_return_ _CRT_INSECURE_DEPRECATE(ctime_s)
-        static __inline char* __CRTDECL ctime(
+        _CRT_NONSTANDARD_STATIC __inline char* __CRTDECL ctime(
             _In_ time_t const* const _Time
             )
         {
@@ -506,7 +506,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline double __CRTDECL difftime(
+        _CRT_NONSTANDARD_STATIC __inline double __CRTDECL difftime(
             _In_ time_t const _Time1,
             _In_ time_t const _Time2
             )
@@ -515,14 +515,14 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_ _CRT_INSECURE_DEPRECATE(gmtime_s)
-        static __inline struct tm* __CRTDECL gmtime(
+        _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL gmtime(
             _In_ time_t const* const _Time)
         {
             return _gmtime64(_Time);
         }
 
         _CRT_INSECURE_DEPRECATE(localtime_s)
-        static __inline struct tm* __CRTDECL localtime(
+        _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL localtime(
             _In_ time_t const* const _Time
             )
         {
@@ -530,7 +530,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline time_t __CRTDECL _mkgmtime(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL _mkgmtime(
             _Inout_ struct tm* const _Tm
             )
         {
@@ -538,14 +538,14 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_opt_
-        static __inline time_t __CRTDECL mktime(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL mktime(
             _Inout_ struct tm* const _Tm
             )
         {
             return _mktime64(_Tm);
         }
 
-        static __inline time_t __CRTDECL time(
+        _CRT_NONSTANDARD_STATIC __inline time_t __CRTDECL time(
             _Out_opt_ time_t* const _Time
             )
         {
@@ -553,7 +553,7 @@ _ACRTIMP int __cdecl _timespec64_get(
         }
 
         _Check_return_
-        static __inline int __CRTDECL timespec_get(
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL timespec_get(
             _Out_ struct timespec* const _Ts,
             _In_  int              const _Base
             )
@@ -563,7 +563,7 @@ _ACRTIMP int __cdecl _timespec64_get(
 
         #if __STDC_WANT_SECURE_LIB__
             _Check_return_wat_
-            static __inline errno_t __CRTDECL ctime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL ctime_s(
                 _Out_writes_(_SizeInBytes) _Post_readable_size_(26) char*         const _Buffer,
                 _In_range_(>=,26)                                   size_t        const _SizeInBytes,
                 _In_                                                time_t const* const _Time
@@ -574,7 +574,7 @@ _ACRTIMP int __cdecl _timespec64_get(
 
         #if _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
-            static __inline struct tm* __CRTDECL gmtime_s(
+            _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL gmtime_s(
                 _In_  time_t const* const _Time,
                 _Out_ struct tm*    const _Tm
                 )
@@ -587,7 +587,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
 
             _Check_return_wat_
-            static __inline struct tm* __CRTDECL localtime_s(
+            _CRT_NONSTANDARD_STATIC __inline struct tm* __CRTDECL localtime_s(
                 _In_  time_t const* const _Time,
                 _Out_ struct tm*    const _Tm
                 )
@@ -600,7 +600,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
         #else // _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
-            static __inline errno_t __CRTDECL gmtime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL gmtime_s(
                     _Out_ struct tm*    const _Tm,
                     _In_  time_t const* const _Time
                 )
@@ -609,7 +609,7 @@ _ACRTIMP int __cdecl _timespec64_get(
             }
 
             _Check_return_wat_
-                static __inline errno_t __CRTDECL localtime_s(
+            _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL localtime_s(
                     _Out_ struct tm*    const _Tm,
                     _In_  time_t const* const _Time
                 )

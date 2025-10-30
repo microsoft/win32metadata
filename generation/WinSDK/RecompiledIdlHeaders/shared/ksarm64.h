@@ -2531,6 +2531,7 @@
 #define EcAMD64_LastExceptionToRip 0x4c0
 #define EcAMD64_LastExceptionFromRip 0x4c8
 #define ARM64EC_CONTEXT_LENGTH 0x4d0
+#define AMD64_CONTEXT_XSTATE 0x100040
 
 //
 // Dispatcher Context Structure Offset Definitions

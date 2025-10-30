@@ -1665,6 +1665,13 @@ WINAPI
 WTSActiveSessionExists(
     _Out_ PBOOL pbActiveSessionExists
     );
+
+BOOL
+WINAPI
+WTSIsIsolationSession(
+    _Out_ PBOOL pbIsolationSession
+    );
+
 #ifdef __cplusplus
 }
 #endif

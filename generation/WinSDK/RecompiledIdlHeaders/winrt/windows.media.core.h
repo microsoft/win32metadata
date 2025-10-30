@@ -325,6 +325,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                interface ICodecSubtypesStatics2;
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2 ABI::Windows::Media::Core::ICodecSubtypesStatics2
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CIDataCue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CIDataCue_FWD_DEFINED__
 namespace ABI {
@@ -7393,6 +7408,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics;
 
 /*
  *
+ * Interface Windows.Media.Core.ICodecSubtypesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.CodecSubtypes
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ICodecSubtypesStatics2[] = L"Windows.Media.Core.ICodecSubtypesStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Core {
+                MIDL_INTERFACE("363b0930-de26-582e-8014-f546d0753887")
+                ICodecSubtypesStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_VideoFormatAv1(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ICodecSubtypesStatics2 = __uuidof(ICodecSubtypesStatics2);
+            } /* Core */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Media.Core.IDataCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -12082,6 +12133,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Core.ICodecSubtypesStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.ICodecSubtypesStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -12420,8 +12472,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaSource2 ** Default Interface **
@@ -12533,8 +12585,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaStreamSample ** Default Interface **
@@ -13586,6 +13638,12 @@ typedef interface __x_ABI_CWindows_CMedia_CCore_CICodecQuery __x_ABI_CWindows_CM
 typedef interface __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics;
 
 #endif // ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2 __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2;
+
+#endif // ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCore_CIDataCue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCore_CIDataCue_FWD_DEFINED__
@@ -22175,6 +22233,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics;
 
 /*
  *
+ * Interface Windows.Media.Core.ICodecSubtypesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Core.CodecSubtypes
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Core_ICodecSubtypesStatics2[] = L"Windows.Media.Core.ICodecSubtypesStatics2";
+typedef struct __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_VideoFormatAv1)(__x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_get_VideoFormatAv1(This, value) \
+    ((This)->lpVtbl->get_VideoFormatAv1(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCore_CICodecSubtypesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Media.Core.IDataCue
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -30653,6 +30780,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Core.ICodecSubtypesStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.ICodecSubtypesStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -30991,8 +31119,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaSourceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaSource2 ** Default Interface **
@@ -31104,8 +31232,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Media.Core.IMediaStreamSampleStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Core.IMediaStreamSample ** Default Interface **

@@ -825,6 +825,38 @@ EXPERIMENTAL_WinBioGetEssState(
     _Out_ EXPERIMENTAL_PWINBIO_ESS_STATE EssState
     );
 
+HRESULT WINAPI
+EXPERIMENTAL_WinBioIsDeviceEnhancedSignInSecurityCapable(
+    _Out_ BOOL* IsCapable
+    );
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioGetEnhancedSignInSecurityStateSource(
+    _Out_ WINBIO_POLICY_SOURCE* Source
+    );
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioIsDeviceEnhancedSignInSecurityEnabled(
+    _Out_ BOOL* IsEnabled
+    );
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioAreEnhancedSignInSecurityRequirementsMet(
+    _Out_ BOOL* AreRequirementsMet
+    );
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioGetConnectedSensors(
+    _Out_ SIZE_T* SensorCount,
+    _Out_ EXPERIMENTAL_WINBIO_CONNECTED_SENSOR** ConnectedSensors
+    );
+
+HRESULT WINAPI
+EXPERIMENTAL_WinBioGetEnhancedSignInSecurityEnrolledFactors(
+    _In_ WINBIO_IDENTITY* Identity,
+    _Out_ WINBIO_BIOMETRIC_TYPE* EnhancedSignInSecurityEnrolledFactors
+    );
+
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 #ifdef __cplusplus

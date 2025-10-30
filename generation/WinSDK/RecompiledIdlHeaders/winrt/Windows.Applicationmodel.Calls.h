@@ -7073,8 +7073,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions ** Default Interface **
@@ -7098,8 +7098,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
@@ -7282,8 +7282,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions ** Default Interface **
@@ -7527,8 +7527,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics2 interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics2 interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -18024,8 +18024,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CIVoipPhoneCall
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions ** Default Interface **
@@ -18049,8 +18049,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions ** Default Interface **
@@ -18233,8 +18233,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsVoipContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsVoipContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions ** Default Interface **
@@ -18478,8 +18478,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics2 interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.IPhoneCallManagerStatics2 interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

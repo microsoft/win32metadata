@@ -2402,7 +2402,7 @@ typedef struct {
 #define WM_POINTERDEVICEOUTOFRANGE      0x23A
 #endif /* WINVER >= 0x0602 */
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis2 is enabled
 
 #if(WINVER >= 0x0601)
 #define WM_TOUCH                        0x0240
@@ -6633,7 +6633,7 @@ GetPointerFramePenInfoHistory(
     _Inout_ UINT32 *pointerCount,
     _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_PEN_INFO *penInfo);
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis2 is enabled
 
 WINUSERAPI
 BOOL
@@ -6695,7 +6695,7 @@ DestroySyntheticPointerDevice(
     _In_ HSYNTHETICPOINTERDEVICE device);
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis2 is enabled
 
 WINUSERAPI
 BOOL
@@ -6865,7 +6865,7 @@ GetPointerInputTransform(
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis2 is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -15532,12 +15532,10 @@ typedef enum TOUCHPAD_SENSITIVITY_LEVEL {
     TOUCHPAD_SENSITIVITY_LEVEL_LEAST_SENSITIVE    = 0x00000004,
 } TOUCHPAD_SENSITIVITY_LEVEL;
 
-// TOUCHPAD_PARAMETERS_LATEST_VERSION will be updated if changes are made to the TOUCHPAD_PARAMETERS struct.
 // For a stable struct, use a numbered variant such as TOUCHPAD_PARAMETERS_VERSION_1 + TOUCHPAD_PARAMETERS_V1.
-#define TOUCHPAD_PARAMETERS_LATEST_VERSION 1
 #define TOUCHPAD_PARAMETERS_VERSION_1 1
 
-typedef struct TOUCHPAD_PARAMETERS {
+typedef struct TOUCHPAD_PARAMETERS_V1 {
     UINT versionNumber;
 
     // These are status fields calculated dynamically, rather than user settings.
@@ -15571,13 +15569,35 @@ typedef struct TOUCHPAD_PARAMETERS {
     UINT clickForceSensitivity;
     UINT rightClickZoneWidth;
     UINT rightClickZoneHeight;
-} TOUCHPAD_PARAMETERS, *PTOUCH_PAD_PARAMETERS,
-  TOUCHPAD_PARAMETERS_V1, *PTOUCHPAD_PARAMETERS_V1;
+} TOUCHPAD_PARAMETERS_V1, *PTOUCHPAD_PARAMETERS_V1;
+
+#if _MSC_VER >= 1200
+#pragma warning(push)
+#endif
+#pragma warning( disable : 4201 )   // nonstandard extension used : nameless struct/union
+
+#define TOUCHPAD_PARAMETERS_VERSION_2 0x2
+
+#if defined(__cplusplus) && !defined(SORTPP_PASS)
+typedef struct tagTOUCHPAD_PARAMETERS_V2 : public TOUCHPAD_PARAMETERS_V1 {
+#else
+typedef struct tagTOUCHPAD_PARAMETERS_V2 {
+    TOUCHPAD_PARAMETERS_V1;
+#endif
+    BOOL button1Supported            : 1;
+    BOOL button2Supported            : 1;
+    BOOL button3Supported            : 1;
+    BOOL Reserved3                   : 29;
+} TOUCHPAD_PARAMETERS_V2, *PTOUCHPAD_PARAMETERS_V2;
+
+#if _MSC_VER >= 1200
+#pragma warning(pop)
+#endif
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
+// TODO(47499024): Make public when Feature_TouchpadPublicApis2 is enabled
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

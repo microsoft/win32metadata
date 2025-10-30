@@ -914,8 +914,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2459,8 +2459,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

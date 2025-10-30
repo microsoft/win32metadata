@@ -216,13 +216,13 @@ _ACRTIMP int __cdecl _wstat64(
 #if !defined RC_INVOKED && !defined __midl && defined(_CRT_INTERNAL_NONSTDC_NAMES) && _CRT_INTERNAL_NONSTDC_NAMES && !defined _CRT_NO_TIME_T
     #ifdef _USE_32BIT_TIME_T
 
-        static __inline int __CRTDECL fstat(int const _FileHandle, struct stat* const _Stat)
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL fstat(int const _FileHandle, struct stat* const _Stat)
         {
             _STATIC_ASSERT(sizeof(struct stat) == sizeof(struct _stat32));
             return _fstat32(_FileHandle, (struct _stat32*)_Stat);
         }
 
-        static __inline int __CRTDECL stat(char const* const _FileName, struct stat* const _Stat)
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL stat(char const* const _FileName, struct stat* const _Stat)
         {
             _STATIC_ASSERT(sizeof(struct stat) == sizeof(struct _stat32));
             return _stat32(_FileName, (struct _stat32*)_Stat);
@@ -230,12 +230,12 @@ _ACRTIMP int __cdecl _wstat64(
 
     #else
 
-        static __inline int __CRTDECL fstat(int const _FileHandle, struct stat* const _Stat)
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL fstat(int const _FileHandle, struct stat* const _Stat)
         {
             _STATIC_ASSERT(sizeof(struct stat) == sizeof(struct _stat64i32));
             return _fstat64i32(_FileHandle, (struct _stat64i32*)_Stat);
         }
-        static __inline int __CRTDECL stat(char const* const _FileName, struct stat* const _Stat)
+        _CRT_NONSTANDARD_STATIC __inline int __CRTDECL stat(char const* const _FileName, struct stat* const _Stat)
         {
             _STATIC_ASSERT(sizeof(struct stat) == sizeof(struct _stat64i32));
             return _stat64i32(_FileName, (struct _stat64i32*)_Stat);

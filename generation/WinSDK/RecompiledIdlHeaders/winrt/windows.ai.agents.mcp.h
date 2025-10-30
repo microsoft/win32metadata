@@ -141,40 +141,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    interface IMcpMessageFilter;
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter ABI::Windows::AI::Agents::Mcp::IMcpMessageFilter
-
-#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    interface IMcpMessageFilterResponse;
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse ABI::Windows::AI::Agents::Mcp::IMcpMessageFilterResponse
-
-#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult_FWD_DEFINED__
 namespace ABI {
@@ -453,43 +419,7 @@ namespace ABI {
         namespace AI {
             namespace Agents {
                 namespace Mcp {
-                    typedef enum McpMessageAction : int McpMessageAction;
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    typedef enum McpMessageDirection : int McpMessageDirection;
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
                     class McpHttpConnectionResult;
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    class McpMessageFilterResponse;
                 } /* Mcp */
             } /* Agents */
         } /* AI */
@@ -587,64 +517,6 @@ namespace ABI {
 
 /*
  *
- * Struct Windows.AI.Agents.Mcp.McpMessageAction
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    enum McpMessageAction : int
-                    {
-                        McpMessageAction_Allow = 0,
-                        McpMessageAction_Block = 1,
-                    };
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Struct Windows.AI.Agents.Mcp.McpMessageDirection
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    enum McpMessageDirection : int
-                    {
-                        McpMessageDirection_Request = 0,
-                        McpMessageDirection_Response = 1,
-                    };
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
  * Interface Windows.AI.Agents.Mcp.IMcpHttpConnectionResult
  *
  * Introduced to Windows.AI.Agents.AgentsContract in version 1.0
@@ -689,98 +561,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult;
 #endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult_INTERFACE_DEFINED__) */
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x10000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Interface Windows.AI.Agents.Mcp.IMcpMessageFilter
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilter[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilter";
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    MIDL_INTERFACE("8ee681f8-f858-56f7-a0c7-45f928845f9b")
-                    IMcpMessageFilter : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE Initialize(
-                            HSTRING clientAppUserModelId,
-                            HSTRING serverPackageFamilyName,
-                            HSTRING serverId
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE OnMessage(
-                            HSTRING message,
-                            ABI::Windows::AI::Agents::Mcp::McpMessageDirection direction,
-                            ABI::Windows::AI::Agents::Mcp::IMcpMessageFilterResponse* filterResponse
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IMcpMessageFilter = __uuidof(IMcpMessageFilter);
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter;
-#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__) */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Interface Windows.AI.Agents.Mcp.IMcpMessageFilterResponse
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Interface is a part of the implementation of type Windows.AI.Agents.Mcp.McpMessageFilterResponse
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilterResponse[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilterResponse";
-namespace ABI {
-    namespace Windows {
-        namespace AI {
-            namespace Agents {
-                namespace Mcp {
-                    MIDL_INTERFACE("bcfc9710-e1d8-5ed4-9dab-03269635d83b")
-                    IMcpMessageFilterResponse : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_MessageAction(
-                            ABI::Windows::AI::Agents::Mcp::McpMessageAction* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_MessageAction(
-                            ABI::Windows::AI::Agents::Mcp::McpMessageAction value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IMcpMessageFilterResponse = __uuidof(IMcpMessageFilterResponse);
-                } /* Mcp */
-            } /* Agents */
-        } /* AI */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse;
-#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__) */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
@@ -1279,29 +1059,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
- * Class Windows.AI.Agents.Mcp.McpMessageFilterResponse
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Class implements the following interfaces:
- *    Windows.AI.Agents.Mcp.IMcpMessageFilterResponse ** Default Interface **
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#ifndef RUNTIMECLASS_Windows_AI_Agents_Mcp_McpMessageFilterResponse_DEFINED
-#define RUNTIMECLASS_Windows_AI_Agents_Mcp_McpMessageFilterResponse_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_AI_Agents_Mcp_McpMessageFilterResponse[] = L"Windows.AI.Agents.Mcp.McpMessageFilterResponse";
-#endif
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
  * Class Windows.AI.Agents.Mcp.McpNamedPipeConnectionResult
  *
  * Introduced to Windows.AI.Agents.AgentsContract in version 1.0
@@ -1459,18 +1216,6 @@ typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult __
 
 #endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter;
-
-#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse;
-
-#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpNamedPipeConnectionResult;
@@ -1563,10 +1308,6 @@ typedef struct __x_ABI_CWindows_CUI_CWindowId __x_ABI_CWindows_CUI_CWindowId;
 
 typedef enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpAuthorizationResponse __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpAuthorizationResponse;
 
-typedef enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageAction __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageAction;
-
-typedef enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageDirection __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageDirection;
-
 /*
  *
  * Struct Windows.AI.Agents.Mcp.McpAuthorizationResponse
@@ -1584,44 +1325,6 @@ enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpAuthorizationResponse
     McpAuthorizationResponse_Approved = 1,
 };
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x10000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Struct Windows.AI.Agents.Mcp.McpMessageAction
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageAction
-{
-    McpMessageAction_Allow = 0,
-    McpMessageAction_Block = 1,
-};
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Struct Windows.AI.Agents.Mcp.McpMessageDirection
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageDirection
-{
-    McpMessageDirection_Request = 0,
-    McpMessageDirection_Response = 1,
-};
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
@@ -1705,164 +1408,6 @@ interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult
 EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult;
 #endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpHttpConnectionResult_INTERFACE_DEFINED__) */
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x10000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Interface Windows.AI.Agents.Mcp.IMcpMessageFilter
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilter[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilter";
-typedef struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* Initialize)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        HSTRING clientAppUserModelId,
-        HSTRING serverPackageFamilyName,
-        HSTRING serverId);
-    HRESULT (STDMETHODCALLTYPE* OnMessage)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter* This,
-        HSTRING message,
-        enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageDirection direction,
-        __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* filterResponse);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterVtbl;
-
-interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter
-{
-    CONST_VTBL struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_Initialize(This, clientAppUserModelId, serverPackageFamilyName, serverId) \
-    ((This)->lpVtbl->Initialize(This, clientAppUserModelId, serverPackageFamilyName, serverId))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_OnMessage(This, message, direction, filterResponse) \
-    ((This)->lpVtbl->OnMessage(This, message, direction, filterResponse))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter;
-#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilter_INTERFACE_DEFINED__) */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Interface Windows.AI.Agents.Mcp.IMcpMessageFilterResponse
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Interface is a part of the implementation of type Windows.AI.Agents.Mcp.McpMessageFilterResponse
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilterResponse[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilterResponse";
-typedef struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponseVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_MessageAction)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageAction* value);
-    HRESULT (STDMETHODCALLTYPE* put_MessageAction)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* This,
-        enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageAction value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponseVtbl;
-
-interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse
-{
-    CONST_VTBL struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponseVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_get_MessageAction(This, value) \
-    ((This)->lpVtbl->get_MessageAction(This, value))
-
-#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_put_MessageAction(This, value) \
-    ((This)->lpVtbl->put_MessageAction(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse;
-#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_INTERFACE_DEFINED__) */
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
@@ -2697,29 +2242,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpStdioConnectionInf
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_AI_Agents_Mcp_McpHttpConnectionResult[] = L"Windows.AI.Agents.Mcp.McpHttpConnectionResult";
 #endif
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x10000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
- * Class Windows.AI.Agents.Mcp.McpMessageFilterResponse
- *
- * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Class implements the following interfaces:
- *    Windows.AI.Agents.Mcp.IMcpMessageFilterResponse ** Default Interface **
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
-#ifndef RUNTIMECLASS_Windows_AI_Agents_Mcp_McpMessageFilterResponse_DEFINED
-#define RUNTIMECLASS_Windows_AI_Agents_Mcp_McpMessageFilterResponse_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_AI_Agents_Mcp_McpMessageFilterResponse[] = L"Windows.AI.Agents.Mcp.McpMessageFilterResponse";
-#endif
-#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*

@@ -51403,6 +51403,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 #define FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT _HRESULT_TYPEDEF_(0xC0310115L)
 
 //
+// MessageId: FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG
+//
+// MessageText:
+//
+// The TPM PCR values did not match what was calculated from the TCG log.
+//
+#define FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG  _HRESULT_TYPEDEF_(0xC0310116L)
+
+//
 // =======================================================
 // Windows Filtering Platform Error Messages
 // =======================================================
