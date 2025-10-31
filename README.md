@@ -16,6 +16,7 @@ To call Win32 APIs from the language of your choice based off of this metadata, 
 * Dart - https://github.com/halildurmus/win32 (Community)
 * Python - https://github.com/ynkdir/py-win32more (Community)
 * Zig - https://github.com/marlersoft/zigwin32 (Community)
+* V - https://github.com/revosw/winmd.v (Community)
 
 Note: Community projects are listed here to help with discovery but are not officially validated by Microsoft.
 
