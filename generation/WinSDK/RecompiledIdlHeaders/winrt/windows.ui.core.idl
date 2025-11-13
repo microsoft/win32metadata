@@ -109,8 +109,6 @@ namespace Windows
             runtimeclass KeyboardDeliveryInterceptor;
 
             runtimeclass PointerPoint;
-
-            runtimeclass TouchpadGesturesController;
         }
     }
 }
@@ -394,8 +392,6 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.Inking.InkUnprocessedInput*, Windows.UI.Core.PointerEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.KeyboardDeliveryInterceptor*, Windows.UI.Core.KeyEventArgs*>;
-
-                interface Windows.Foundation.TypedEventHandler<Windows.UI.Input.TouchpadGesturesController*, Windows.UI.Core.PointerEventArgs*>;
             }
         }
     }

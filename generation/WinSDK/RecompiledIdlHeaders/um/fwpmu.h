@@ -1106,18 +1106,6 @@ DEFINE_GUID(
 // GUIDs for built-in conditions.
 //
 ///////////////////////////////////////////////////////////////////////////////
-#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
-
-// 81BC78FB-F28D-4886-A604-6ACC261F261B
-DEFINE_GUID(
-   FWPM_CONDITION_ALE_PACKAGE_FAMILY_NAME,
-   0x81bc78fb,
-   0xf28d,
-   0x4886,
-   0xa6, 0x4, 0x6a, 0xcc, 0x26, 0x1f, 0x26, 0x1B
-);
-
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_CU)
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 
@@ -2104,15 +2092,6 @@ DEFINE_GUID(
    0x8bee,
    0x4018,
    0x9b, 0x98, 0x31, 0xd4, 0x58, 0x2f, 0x33, 0x61
-);
-
-// d58efb76-aab7-4148-a87e-9581134129b9
-DEFINE_GUID(
-   FWPM_CONDITION_RPC_OPNUM, 
-   0xd58efb76,
-   0xaab7,
-   0x4148,
-   0xa8, 0x7e, 0x95, 0x81, 0x13, 0x41, 0x29, 0xb9
 );
 
 // e31180a8-bbbd-4d14-a65e-7157b06233bb
@@ -3266,7 +3245,7 @@ static const IPSEC_CIPHER_TRANSFORM_ID0 IPSEC_CIPHER_TRANSFORM_ID_GCM_AES_256 =
 
 // Contexts used in the RPC audit sublayer
 #define FWPM_CONTEXT_RPC_AUDIT_ENABLED (0x1ui64)
-#define FWPM_CONTEXT_RPC_AUDIT_BUFFER_ENABLED (0x2ui64)
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -5369,34 +5348,6 @@ FwpmvSwitchEventsSetSecurityInfo0(
    _In_opt_ const ACL* sacl
    );
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
-
-////////////////////////////////////////////////////////////////
-//
-// Functions for managing connection policy.
-//
-////////////////////////////////////////////////////////////////
-
-#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-DWORD
-WINAPI
-FwpmConnectionPolicyAdd0(
-   _In_ HANDLE engineHandle,
-   _In_ const FWPM_PROVIDER_CONTEXT3* connectionPolicy,
-   _In_ FWP_IP_VERSION ipVersion,
-   _In_ UINT64 weight,
-   _In_ UINT32 numFilterConditions,
-   _In_reads_(numFilterConditions)
-      const FWPM_FILTER_CONDITION0* filterConditions,
-   _In_opt_ PSECURITY_DESCRIPTOR sd
-   );
-
-DWORD
-WINAPI
-FwpmConnectionPolicyDeleteByKey0(
-   _In_ HANDLE engineHandle,
-   _In_ const GUID* key
-   );
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 #ifdef __cplusplus
 }

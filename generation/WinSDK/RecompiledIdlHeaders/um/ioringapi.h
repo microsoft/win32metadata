@@ -51,15 +51,6 @@ DEFINE_ENUM_FLAG_OPERATORS( IORING_CREATE_REQUIRED_FLAGS )
 typedef enum IORING_CREATE_ADVISORY_FLAGS
 {
     IORING_CREATE_ADVISORY_FLAGS_NONE = 0,
-
-    // Requests the IORING implementation to skip parameter checks in the builder APIs.
-    // Ordinarily the builder APIs perform checks to catch programming errors as early as possible.
-    // This flag is used to disable that if the implementation understands it (as an advisory flag
-    // it has no effect on an implementation that doesn't understand it so it is safe to use on all
-    // versions). Normally, this is used in RELEASE builds to eliminate the redundant checks. Errors
-    // from invalid parameters are still checked in the kernel and any errors appear in the completion
-    // queue entries for the operation.
-    IORING_CREATE_SKIP_BUILDER_PARAM_CHECKS = 0x00000001,
 } IORING_CREATE_ADVISORY_FLAGS;
 DEFINE_ENUM_FLAG_OPERATORS( IORING_CREATE_ADVISORY_FLAGS )
 
@@ -221,9 +212,11 @@ STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
 // Submission Queue entry builders
 
 // Builds a submission queue entry for IORING_OP_CANCEL
+
 STDAPI BuildIoRingCancelRequest(_In_ HIORING ioRing, _In_ IORING_HANDLE_REF file, UINT_PTR opToCancel, UINT_PTR userData);
 
 // Builds a submission queue entry for IORING_OP_READ
+
 STDAPI
 BuildIoRingReadFile(
     _In_ HIORING ioRing,
@@ -236,6 +229,7 @@ BuildIoRingReadFile(
     );
 
 // Builds a submission queue entry for IORING_OP_REGISTER_FILES
+
 STDAPI
 BuildIoRingRegisterFileHandles(
     _In_ HIORING ioRing,
@@ -245,6 +239,7 @@ BuildIoRingRegisterFileHandles(
     );
 
 // Builds a submission queue entry for IORING_OP_REGISTER_BUFFERS
+
 STDAPI
 BuildIoRingRegisterBuffers(
     _In_ HIORING ioRing,
@@ -254,6 +249,7 @@ BuildIoRingRegisterBuffers(
     );
 
 #pragma region api-ms-win-core-ioring-l1-1-1
+
 STDAPI
 BuildIoRingWriteFile(
     _In_ HIORING ioRing,
@@ -274,36 +270,7 @@ BuildIoRingFlushFile(
     UINT_PTR userData,
     IORING_SQE_FLAGS sqeFlags
     );
-
 #pragma endregion // api-ms-win-core-ioring-l1-1-1
-
-#pragma region api-ms-win-core-ioring-l1-1-2
-STDAPI
-BuildIoRingReadFileScatter(
-    _In_ HIORING ioRing,
-    IORING_HANDLE_REF fileRef,
-    UINT32 segmentCount,
-    _In_reads_(segmentCount) FILE_SEGMENT_ELEMENT segmentArray[],
-    UINT32 numberOfBytesToRead,
-    UINT64 fileOffset,
-    UINT_PTR userData,
-    IORING_SQE_FLAGS sqeFlags
-    );
-
-STDAPI
-BuildIoRingWriteFileGather(
-    _In_ HIORING ioRing,
-    IORING_HANDLE_REF fileRef,
-    UINT32 segmentCount,
-    _In_reads_(segmentCount) FILE_SEGMENT_ELEMENT segmentArray[],
-    UINT32 numberOfBytesToWrite,
-    UINT64 fileOffset,
-    FILE_WRITE_FLAGS writeFlags,
-    UINT_PTR userData,
-    IORING_SQE_FLAGS sqeFlags
-    );
-
-#pragma endregion // api-ms-win-core-ioring-l1-1-2
 
 #ifdef __cplusplus
 } //extern "C"

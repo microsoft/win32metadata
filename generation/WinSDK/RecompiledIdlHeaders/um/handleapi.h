@@ -32,6 +32,7 @@ extern "C" {
 //
 // Prototypes
 //
+
 WINBASEAPI
 BOOL
 WINAPI

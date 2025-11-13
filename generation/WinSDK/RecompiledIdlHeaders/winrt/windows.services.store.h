@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION)
@@ -3495,7 +3495,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreAcquireLicenseResult = __uuidof(IStoreAcquireLicenseResult);
+                extern MIDL_CONST_ID IID& IID_IStoreAcquireLicenseResult = _uuidof(IStoreAcquireLicenseResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3555,7 +3555,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreAppLicense = __uuidof(IStoreAppLicense);
+                extern MIDL_CONST_ID IID& IID_IStoreAppLicense = _uuidof(IStoreAppLicense);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3591,7 +3591,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreAppLicense2 = __uuidof(IStoreAppLicense2);
+                extern MIDL_CONST_ID IID& IID_IStoreAppLicense2 = _uuidof(IStoreAppLicense2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3643,7 +3643,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreAvailability = __uuidof(IStoreAvailability);
+                extern MIDL_CONST_ID IID& IID_IStoreAvailability = _uuidof(IStoreAvailability);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3685,7 +3685,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreCanAcquireLicenseResult = __uuidof(IStoreCanAcquireLicenseResult);
+                extern MIDL_CONST_ID IID& IID_IStoreCanAcquireLicenseResult = _uuidof(IStoreCanAcquireLicenseResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3742,7 +3742,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreCollectionData = __uuidof(IStoreCollectionData);
+                extern MIDL_CONST_ID IID& IID_IStoreCollectionData = _uuidof(IStoreCollectionData);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3787,7 +3787,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreConsumableResult = __uuidof(IStoreConsumableResult);
+                extern MIDL_CONST_ID IID& IID_IStoreConsumableResult = _uuidof(IStoreConsumableResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3907,7 +3907,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContext = __uuidof(IStoreContext);
+                extern MIDL_CONST_ID IID& IID_IStoreContext = _uuidof(IStoreContext);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -3945,7 +3945,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContext2 = __uuidof(IStoreContext2);
+                extern MIDL_CONST_ID IID& IID_IStoreContext2 = _uuidof(IStoreContext2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4035,7 +4035,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContext3 = __uuidof(IStoreContext3);
+                extern MIDL_CONST_ID IID& IID_IStoreContext3 = _uuidof(IStoreContext3);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4075,7 +4075,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContext4 = __uuidof(IStoreContext4);
+                extern MIDL_CONST_ID IID& IID_IStoreContext4 = _uuidof(IStoreContext4);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4120,7 +4120,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContext5 = __uuidof(IStoreContext5);
+                extern MIDL_CONST_ID IID& IID_IStoreContext5 = _uuidof(IStoreContext5);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4160,7 +4160,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreContextStatics = __uuidof(IStoreContextStatics);
+                extern MIDL_CONST_ID IID& IID_IStoreContextStatics = _uuidof(IStoreContextStatics);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4208,7 +4208,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreImage = __uuidof(IStoreImage);
+                extern MIDL_CONST_ID IID& IID_IStoreImage = _uuidof(IStoreImage);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4256,7 +4256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreLicense = __uuidof(IStoreLicense);
+                extern MIDL_CONST_ID IID& IID_IStoreLicense = _uuidof(IStoreLicense);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4295,7 +4295,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePackageInstallOptions = __uuidof(IStorePackageInstallOptions);
+                extern MIDL_CONST_ID IID& IID_IStorePackageInstallOptions = _uuidof(IStorePackageInstallOptions);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4345,7 +4345,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ReleaseLicense(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePackageLicense = __uuidof(IStorePackageLicense);
+                extern MIDL_CONST_ID IID& IID_IStorePackageLicense = _uuidof(IStorePackageLicense);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4384,7 +4384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePackageUpdate = __uuidof(IStorePackageUpdate);
+                extern MIDL_CONST_ID IID& IID_IStorePackageUpdate = _uuidof(IStorePackageUpdate);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4423,7 +4423,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePackageUpdateResult = __uuidof(IStorePackageUpdateResult);
+                extern MIDL_CONST_ID IID& IID_IStorePackageUpdateResult = _uuidof(IStorePackageUpdateResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4459,7 +4459,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePackageUpdateResult2 = __uuidof(IStorePackageUpdateResult2);
+                extern MIDL_CONST_ID IID& IID_IStorePackageUpdateResult2 = _uuidof(IStorePackageUpdateResult2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4510,7 +4510,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePrice = __uuidof(IStorePrice);
+                extern MIDL_CONST_ID IID& IID_IStorePrice = _uuidof(IStorePrice);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4552,7 +4552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePrice2 = __uuidof(IStorePrice2);
+                extern MIDL_CONST_ID IID& IID_IStorePrice2 = _uuidof(IStorePrice2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4640,7 +4640,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreProduct = __uuidof(IStoreProduct);
+                extern MIDL_CONST_ID IID& IID_IStoreProduct = _uuidof(IStoreProduct);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4676,7 +4676,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreProductOptions = __uuidof(IStoreProductOptions);
+                extern MIDL_CONST_ID IID& IID_IStoreProductOptions = _uuidof(IStoreProductOptions);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4721,7 +4721,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreProductPagedQueryResult = __uuidof(IStoreProductPagedQueryResult);
+                extern MIDL_CONST_ID IID& IID_IStoreProductPagedQueryResult = _uuidof(IStoreProductPagedQueryResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4760,7 +4760,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreProductQueryResult = __uuidof(IStoreProductQueryResult);
+                extern MIDL_CONST_ID IID& IID_IStoreProductQueryResult = _uuidof(IStoreProductQueryResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4799,7 +4799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreProductResult = __uuidof(IStoreProductResult);
+                extern MIDL_CONST_ID IID& IID_IStoreProductResult = _uuidof(IStoreProductResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4844,7 +4844,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePurchaseProperties = __uuidof(IStorePurchaseProperties);
+                extern MIDL_CONST_ID IID& IID_IStorePurchaseProperties = _uuidof(IStorePurchaseProperties);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4881,7 +4881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePurchasePropertiesFactory = __uuidof(IStorePurchasePropertiesFactory);
+                extern MIDL_CONST_ID IID& IID_IStorePurchasePropertiesFactory = _uuidof(IStorePurchasePropertiesFactory);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4920,7 +4920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorePurchaseResult = __uuidof(IStorePurchaseResult);
+                extern MIDL_CONST_ID IID& IID_IStorePurchaseResult = _uuidof(IStorePurchaseResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -4979,7 +4979,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreQueueItem = __uuidof(IStoreQueueItem);
+                extern MIDL_CONST_ID IID& IID_IStoreQueueItem = _uuidof(IStoreQueueItem);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5021,7 +5021,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreQueueItem2 = __uuidof(IStoreQueueItem2);
+                extern MIDL_CONST_ID IID& IID_IStoreQueueItem2 = _uuidof(IStoreQueueItem2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5057,7 +5057,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreQueueItemCompletedEventArgs = __uuidof(IStoreQueueItemCompletedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IStoreQueueItemCompletedEventArgs = _uuidof(IStoreQueueItemCompletedEventArgs);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5102,7 +5102,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreQueueItemStatus = __uuidof(IStoreQueueItemStatus);
+                extern MIDL_CONST_ID IID& IID_IStoreQueueItemStatus = _uuidof(IStoreQueueItemStatus);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5147,7 +5147,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreRateAndReviewResult = __uuidof(IStoreRateAndReviewResult);
+                extern MIDL_CONST_ID IID& IID_IStoreRateAndReviewResult = _uuidof(IStoreRateAndReviewResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5186,7 +5186,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreRequestHelperStatics = __uuidof(IStoreRequestHelperStatics);
+                extern MIDL_CONST_ID IID& IID_IStoreRequestHelperStatics = _uuidof(IStoreRequestHelperStatics);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5225,7 +5225,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreSendRequestResult = __uuidof(IStoreSendRequestResult);
+                extern MIDL_CONST_ID IID& IID_IStoreSendRequestResult = _uuidof(IStoreSendRequestResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5261,7 +5261,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreSendRequestResult2 = __uuidof(IStoreSendRequestResult2);
+                extern MIDL_CONST_ID IID& IID_IStoreSendRequestResult2 = _uuidof(IStoreSendRequestResult2);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5352,7 +5352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreSku = __uuidof(IStoreSku);
+                extern MIDL_CONST_ID IID& IID_IStoreSku = _uuidof(IStoreSku);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5400,7 +5400,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreSubscriptionInfo = __uuidof(IStoreSubscriptionInfo);
+                extern MIDL_CONST_ID IID& IID_IStoreSubscriptionInfo = _uuidof(IStoreSubscriptionInfo);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5439,7 +5439,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreUninstallStorePackageResult = __uuidof(IStoreUninstallStorePackageResult);
+                extern MIDL_CONST_ID IID& IID_IStoreUninstallStorePackageResult = _uuidof(IStoreUninstallStorePackageResult);
             } /* Store */
         } /* Services */
     } /* Windows */
@@ -5490,7 +5490,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStoreVideo = __uuidof(IStoreVideo);
+                extern MIDL_CONST_ID IID& IID_IStoreVideo = _uuidof(IStoreVideo);
             } /* Store */
         } /* Services */
     } /* Windows */

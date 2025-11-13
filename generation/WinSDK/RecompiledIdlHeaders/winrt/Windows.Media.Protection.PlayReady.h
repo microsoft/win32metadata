@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_PROTECTION_PROTECTIONRENEWALCONTRACT_VERSION)
@@ -2873,7 +2873,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Close(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDClient = __uuidof(INDClient);
+                    extern MIDL_CONST_ID IID& IID_INDClient = _uuidof(INDClient);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -2920,7 +2920,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDClientFactory = __uuidof(INDClientFactory);
+                    extern MIDL_CONST_ID IID& IID_INDClientFactory = _uuidof(INDClientFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -2975,7 +2975,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDClosedCaptionDataReceivedEventArgs = __uuidof(INDClosedCaptionDataReceivedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_INDClosedCaptionDataReceivedEventArgs = _uuidof(INDClosedCaptionDataReceivedEventArgs);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3025,7 +3025,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDCustomData = __uuidof(INDCustomData);
+                    extern MIDL_CONST_ID IID& IID_INDCustomData = _uuidof(INDCustomData);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3073,7 +3073,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDCustomDataFactory = __uuidof(INDCustomDataFactory);
+                    extern MIDL_CONST_ID IID& IID_INDCustomDataFactory = _uuidof(INDCustomDataFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3159,7 +3159,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDDownloadEngine = __uuidof(INDDownloadEngine);
+                    extern MIDL_CONST_ID IID& IID_INDDownloadEngine = _uuidof(INDDownloadEngine);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3228,7 +3228,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE OnNetworkError(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDDownloadEngineNotifier = __uuidof(INDDownloadEngineNotifier);
+                    extern MIDL_CONST_ID IID& IID_INDDownloadEngineNotifier = _uuidof(INDDownloadEngineNotifier);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3270,7 +3270,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDLicenseFetchCompletedEventArgs = __uuidof(INDLicenseFetchCompletedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_INDLicenseFetchCompletedEventArgs = _uuidof(INDLicenseFetchCompletedEventArgs);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3331,7 +3331,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDLicenseFetchDescriptor = __uuidof(INDLicenseFetchDescriptor);
+                    extern MIDL_CONST_ID IID& IID_INDLicenseFetchDescriptor = _uuidof(INDLicenseFetchDescriptor);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3379,7 +3379,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDLicenseFetchDescriptorFactory = __uuidof(INDLicenseFetchDescriptorFactory);
+                    extern MIDL_CONST_ID IID& IID_INDLicenseFetchDescriptorFactory = _uuidof(INDLicenseFetchDescriptorFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3421,7 +3421,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDLicenseFetchResult = __uuidof(INDLicenseFetchResult);
+                    extern MIDL_CONST_ID IID& IID_INDLicenseFetchResult = _uuidof(INDLicenseFetchResult);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3503,7 +3503,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDMessenger = __uuidof(INDMessenger);
+                    extern MIDL_CONST_ID IID& IID_INDMessenger = _uuidof(INDMessenger);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3545,7 +3545,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDProximityDetectionCompletedEventArgs = __uuidof(INDProximityDetectionCompletedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_INDProximityDetectionCompletedEventArgs = _uuidof(INDProximityDetectionCompletedEventArgs);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3605,7 +3605,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDRegistrationCompletedEventArgs = __uuidof(INDRegistrationCompletedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_INDRegistrationCompletedEventArgs = _uuidof(INDRegistrationCompletedEventArgs);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3648,7 +3648,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDSendResult = __uuidof(INDSendResult);
+                    extern MIDL_CONST_ID IID& IID_INDSendResult = _uuidof(INDSendResult);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3690,7 +3690,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDStartResult = __uuidof(INDStartResult);
+                    extern MIDL_CONST_ID IID& IID_INDStartResult = _uuidof(INDStartResult);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3733,7 +3733,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDStorageFileHelper = __uuidof(INDStorageFileHelper);
+                    extern MIDL_CONST_ID IID& IID_INDStorageFileHelper = _uuidof(INDStorageFileHelper);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3798,7 +3798,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDStreamParser = __uuidof(INDStreamParser);
+                    extern MIDL_CONST_ID IID& IID_INDStreamParser = _uuidof(INDStreamParser);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3868,7 +3868,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDStreamParserNotifier = __uuidof(INDStreamParserNotifier);
+                    extern MIDL_CONST_ID IID& IID_INDStreamParserNotifier = _uuidof(INDStreamParserNotifier);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -3914,7 +3914,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDTCPMessengerFactory = __uuidof(INDTCPMessengerFactory);
+                    extern MIDL_CONST_ID IID& IID_INDTCPMessengerFactory = _uuidof(INDTCPMessengerFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4019,7 +4019,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INDTransmitterProperties = __uuidof(INDTransmitterProperties);
+                    extern MIDL_CONST_ID IID& IID_INDTransmitterProperties = _uuidof(INDTransmitterProperties);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4085,7 +4085,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyContentHeader = __uuidof(IPlayReadyContentHeader);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyContentHeader = _uuidof(IPlayReadyContentHeader);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4131,7 +4131,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyContentHeader2 = __uuidof(IPlayReadyContentHeader2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyContentHeader2 = _uuidof(IPlayReadyContentHeader2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4190,7 +4190,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyContentHeaderFactory = __uuidof(IPlayReadyContentHeaderFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyContentHeaderFactory = _uuidof(IPlayReadyContentHeaderFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4238,7 +4238,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyContentHeaderFactory2 = __uuidof(IPlayReadyContentHeaderFactory2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyContentHeaderFactory2 = _uuidof(IPlayReadyContentHeaderFactory2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4277,7 +4277,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyContentResolver = __uuidof(IPlayReadyContentResolver);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyContentResolver = _uuidof(IPlayReadyContentResolver);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4325,7 +4325,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyDomain = __uuidof(IPlayReadyDomain);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyDomain = _uuidof(IPlayReadyDomain);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4364,7 +4364,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyDomainIterableFactory = __uuidof(IPlayReadyDomainIterableFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyDomainIterableFactory = _uuidof(IPlayReadyDomainIterableFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4421,7 +4421,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyDomainJoinServiceRequest = __uuidof(IPlayReadyDomainJoinServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyDomainJoinServiceRequest = _uuidof(IPlayReadyDomainJoinServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4472,7 +4472,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyDomainLeaveServiceRequest = __uuidof(IPlayReadyDomainLeaveServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyDomainLeaveServiceRequest = _uuidof(IPlayReadyDomainLeaveServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4515,7 +4515,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyITADataGenerator = __uuidof(IPlayReadyITADataGenerator);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyITADataGenerator = _uuidof(IPlayReadyITADataGenerator);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4554,7 +4554,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyIndividualizationServiceRequest = __uuidof(IPlayReadyIndividualizationServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyIndividualizationServiceRequest = _uuidof(IPlayReadyIndividualizationServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4609,7 +4609,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicense = __uuidof(IPlayReadyLicense);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicense = _uuidof(IPlayReadyLicense);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4659,7 +4659,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicense2 = __uuidof(IPlayReadyLicense2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicense2 = _uuidof(IPlayReadyLicense2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4708,7 +4708,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest = __uuidof(IPlayReadyLicenseAcquisitionServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest = _uuidof(IPlayReadyLicenseAcquisitionServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4751,7 +4751,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest2 = __uuidof(IPlayReadyLicenseAcquisitionServiceRequest2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest2 = _uuidof(IPlayReadyLicenseAcquisitionServiceRequest2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4797,7 +4797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest3 = __uuidof(IPlayReadyLicenseAcquisitionServiceRequest3);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseAcquisitionServiceRequest3 = _uuidof(IPlayReadyLicenseAcquisitionServiceRequest3);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4837,7 +4837,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseIterableFactory = __uuidof(IPlayReadyLicenseIterableFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseIterableFactory = _uuidof(IPlayReadyLicenseIterableFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4876,7 +4876,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseManagement = __uuidof(IPlayReadyLicenseManagement);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseManagement = _uuidof(IPlayReadyLicenseManagement);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4915,7 +4915,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseSession = __uuidof(IPlayReadyLicenseSession);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseSession = _uuidof(IPlayReadyLicenseSession);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4956,7 +4956,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseSession2 = __uuidof(IPlayReadyLicenseSession2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseSession2 = _uuidof(IPlayReadyLicenseSession2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -4995,7 +4995,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyLicenseSessionFactory = __uuidof(IPlayReadyLicenseSessionFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyLicenseSessionFactory = _uuidof(IPlayReadyLicenseSessionFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5042,7 +5042,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyMeteringReportServiceRequest = __uuidof(IPlayReadyMeteringReportServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyMeteringReportServiceRequest = _uuidof(IPlayReadyMeteringReportServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5081,7 +5081,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyRevocationServiceRequest = __uuidof(IPlayReadyRevocationServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyRevocationServiceRequest = _uuidof(IPlayReadyRevocationServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5121,7 +5121,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadySecureStopIterableFactory = __uuidof(IPlayReadySecureStopIterableFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadySecureStopIterableFactory = _uuidof(IPlayReadySecureStopIterableFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5174,7 +5174,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadySecureStopServiceRequest = __uuidof(IPlayReadySecureStopServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadySecureStopServiceRequest = _uuidof(IPlayReadySecureStopServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5220,7 +5220,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadySecureStopServiceRequestFactory = __uuidof(IPlayReadySecureStopServiceRequestFactory);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadySecureStopServiceRequestFactory = _uuidof(IPlayReadySecureStopServiceRequestFactory);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5285,7 +5285,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyServiceRequest = __uuidof(IPlayReadyServiceRequest);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyServiceRequest = _uuidof(IPlayReadyServiceRequest);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5330,7 +5330,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadySoapMessage = __uuidof(IPlayReadySoapMessage);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadySoapMessage = _uuidof(IPlayReadySoapMessage);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5389,7 +5389,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyStatics = __uuidof(IPlayReadyStatics);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyStatics = _uuidof(IPlayReadyStatics);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5430,7 +5430,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyStatics2 = __uuidof(IPlayReadyStatics2);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyStatics2 = _uuidof(IPlayReadyStatics2);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5476,7 +5476,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyStatics3 = __uuidof(IPlayReadyStatics3);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyStatics3 = _uuidof(IPlayReadyStatics3);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5522,7 +5522,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyStatics4 = __uuidof(IPlayReadyStatics4);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyStatics4 = _uuidof(IPlayReadyStatics4);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5570,7 +5570,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE ResetHardwareDRMDisabled(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlayReadyStatics5 = __uuidof(IPlayReadyStatics5);
+                    extern MIDL_CONST_ID IID& IID_IPlayReadyStatics5 = _uuidof(IPlayReadyStatics5);
                 } /* PlayReady */
             } /* Protection */
         } /* Media */
@@ -5749,8 +5749,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Protection.PlayReady.IPlayReadyContentHeader ** Default Interface **
@@ -5970,8 +5970,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyLicenseIterableFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyLicenseIterableFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Foundation.Collections.IIterable`1<Windows.Media.Protection.PlayReady.IPlayReadyLicense> ** Default Interface **
@@ -6166,10 +6166,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  */
@@ -14210,8 +14210,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyContentHeaderFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.Protection.PlayReady.IPlayReadyContentHeader ** Default Interface **
@@ -14431,8 +14431,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyLicenseIterableFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Protection.PlayReady.IPlayReadyLicenseIterableFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Foundation.Collections.IIterable`1<Windows.Media.Protection.PlayReady.IPlayReadyLicense> ** Default Interface **
@@ -14627,10 +14627,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Protection.PlayReady.IPlayReadyStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  */

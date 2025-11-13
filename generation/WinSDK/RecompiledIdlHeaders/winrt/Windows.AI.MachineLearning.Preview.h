@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1115,7 +1115,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IImageVariableDescriptorPreview = __uuidof(IImageVariableDescriptorPreview);
+                    extern MIDL_CONST_ID IID& IID_IImageVariableDescriptorPreview = _uuidof(IImageVariableDescriptorPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1213,7 +1213,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInferencingOptionsPreview = __uuidof(IInferencingOptionsPreview);
+                    extern MIDL_CONST_ID IID& IID_IInferencingOptionsPreview = _uuidof(IInferencingOptionsPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1274,7 +1274,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelBindingPreview = __uuidof(ILearningModelBindingPreview);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelBindingPreview = _uuidof(ILearningModelBindingPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1319,7 +1319,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelBindingPreviewFactory = __uuidof(ILearningModelBindingPreviewFactory);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelBindingPreviewFactory = _uuidof(ILearningModelBindingPreviewFactory);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1405,7 +1405,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelDescriptionPreview = __uuidof(ILearningModelDescriptionPreview);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelDescriptionPreview = _uuidof(ILearningModelDescriptionPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1455,7 +1455,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelEvaluationResultPreview = __uuidof(ILearningModelEvaluationResultPreview);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelEvaluationResultPreview = _uuidof(ILearningModelEvaluationResultPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1527,7 +1527,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelPreview = __uuidof(ILearningModelPreview);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelPreview = _uuidof(ILearningModelPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1579,7 +1579,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelPreviewStatics = __uuidof(ILearningModelPreviewStatics);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelPreviewStatics = _uuidof(ILearningModelPreviewStatics);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1639,7 +1639,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILearningModelVariableDescriptorPreview = __uuidof(ILearningModelVariableDescriptorPreview);
+                    extern MIDL_CONST_ID IID& IID_ILearningModelVariableDescriptorPreview = _uuidof(ILearningModelVariableDescriptorPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1704,7 +1704,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMapVariableDescriptorPreview = __uuidof(IMapVariableDescriptorPreview);
+                    extern MIDL_CONST_ID IID& IID_IMapVariableDescriptorPreview = _uuidof(IMapVariableDescriptorPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1751,7 +1751,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISequenceVariableDescriptorPreview = __uuidof(ISequenceVariableDescriptorPreview);
+                    extern MIDL_CONST_ID IID& IID_ISequenceVariableDescriptorPreview = _uuidof(ISequenceVariableDescriptorPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */
@@ -1804,7 +1804,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ITensorVariableDescriptorPreview = __uuidof(ITensorVariableDescriptorPreview);
+                    extern MIDL_CONST_ID IID& IID_ITensorVariableDescriptorPreview = _uuidof(ITensorVariableDescriptorPreview);
                 } /* Preview */
             } /* MachineLearning */
         } /* AI */

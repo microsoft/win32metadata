@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -1508,7 +1508,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectService = __uuidof(IWiFiDirectService);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectService = _uuidof(IWiFiDirectService);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1626,7 +1626,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceAdvertiser = __uuidof(IWiFiDirectServiceAdvertiser);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceAdvertiser = _uuidof(IWiFiDirectServiceAdvertiser);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1665,7 +1665,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceAdvertiserFactory = __uuidof(IWiFiDirectServiceAdvertiserFactory);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceAdvertiserFactory = _uuidof(IWiFiDirectServiceAdvertiserFactory);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1706,7 +1706,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceAutoAcceptSessionConnectedEventArgs = __uuidof(IWiFiDirectServiceAutoAcceptSessionConnectedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceAutoAcceptSessionConnectedEventArgs = _uuidof(IWiFiDirectServiceAutoAcceptSessionConnectedEventArgs);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1747,7 +1747,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceProvisioningInfo = __uuidof(IWiFiDirectServiceProvisioningInfo);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceProvisioningInfo = _uuidof(IWiFiDirectServiceProvisioningInfo);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1788,7 +1788,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceRemotePortAddedEventArgs = __uuidof(IWiFiDirectServiceRemotePortAddedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceRemotePortAddedEventArgs = _uuidof(IWiFiDirectServiceRemotePortAddedEventArgs);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1872,7 +1872,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceSession = __uuidof(IWiFiDirectServiceSession);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceSession = _uuidof(IWiFiDirectServiceSession);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1910,7 +1910,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionDeferredEventArgs = __uuidof(IWiFiDirectServiceSessionDeferredEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionDeferredEventArgs = _uuidof(IWiFiDirectServiceSessionDeferredEventArgs);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1957,7 +1957,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionRequest = __uuidof(IWiFiDirectServiceSessionRequest);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionRequest = _uuidof(IWiFiDirectServiceSessionRequest);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -1995,7 +1995,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionRequestedEventArgs = __uuidof(IWiFiDirectServiceSessionRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceSessionRequestedEventArgs = _uuidof(IWiFiDirectServiceSessionRequestedEventArgs);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */
@@ -2043,7 +2043,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWiFiDirectServiceStatics = __uuidof(IWiFiDirectServiceStatics);
+                    extern MIDL_CONST_ID IID& IID_IWiFiDirectServiceStatics = _uuidof(IWiFiDirectServiceStatics);
                 } /* Services */
             } /* WiFiDirect */
         } /* Devices */

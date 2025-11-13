@@ -1527,35 +1527,6 @@ interface IMFDXGIBuffer :  IUnknown
         );
 };
 
-[
-    object,
-        uuid(B25D03FB-D148-45EF-BFED-F778B7566C07),
-        local
-]
-interface IMFDXGICrossAdapterBuffer : IUnknown
-{
-    HRESULT GetResourceForDevice(
-        [in, annotation("_In_")] IUnknown* pUnkDevice,
-        [in, annotation("_In_")] REFIID riid,
-        [out, annotation("_COM_Outptr_")] LPVOID* ppvObject
-    );
-    HRESULT GetSubresourceIndexForDevice(
-        [in, annotation("_In_")] IUnknown* pUnkDevice,
-        [out, annotation("_Out_")] UINT* puSubresource
-    );
-    HRESULT GetUnknownForDevice(
-        [in, annotation("_In_")] IUnknown* pUnkDevice,
-        [in, annotation("_In_")] REFIID guid,
-        [in, annotation("_In_")] REFIID riid,
-        [out, annotation("_COM_Outptr_")] LPVOID* ppvObject
-    );
-    HRESULT SetUnknownForDevice(
-        [in, annotation("_In_")] IUnknown* pUnkDevice,
-        [in, annotation("_In_")] REFIID guid,
-        [in, annotation("_In_opt_")] IUnknown* pUnkData
-    );
-};
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1758,33 +1729,31 @@ typedef enum _MFVideoTransferFunction
     MFVideoTransFunc_18 = 2,
     MFVideoTransFunc_20 = 3,
     MFVideoTransFunc_22 = 4,
-    MFVideoTransFunc_709  = 5, // BT.1361
+    MFVideoTransFunc_709  = 5, // 1361
     MFVideoTransFunc_240M = 6,
     MFVideoTransFunc_sRGB = 7,
     MFVideoTransFunc_28 = 8,
 #if (WINVER >= _WIN32_WINNT_WIN7)
     MFVideoTransFunc_Log_100 = 9,
     MFVideoTransFunc_Log_316 = 10,
-    MFVideoTransFunc_709_sym = 11, // symmetric 709 (IEC 61966-2-4)
+    MFVideoTransFunc_709_sym = 11, // symmetric 709
 #endif // (WINVER >= _WIN32_WINNT_WIN7)
 
 #if (WINVER >= _WIN32_WINNT_WINBLUE)
-    MFVideoTransFunc_2020_const = 12,  // Constant luminance BT.2020. Also: BT.2246
-    MFVideoTransFunc_2020 = 13,        // Non-constant luminance BT.2020.
+    MFVideoTransFunc_2020_const = 12,  // also: BT2246
+    MFVideoTransFunc_2020 = 13,
     MFVideoTransFunc_26 = 14,
 #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
 
+    // TODO: switch to RS define once it exists (see: 5312604)
 #if (WINVER >= _WIN32_WINNT_WIN10)
-    MFVideoTransFunc_2084 = 15, // SMPTE ST 2084
+    MFVideoTransFunc_2084 = 15, // SMPTE ST.2084
     MFVideoTransFunc_HLG = 16,  // Hybrid Log-Gamma, ARIB STD-B67
 #endif // (WINVER > _WIN32_WINNT_WIN10)
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS4) 
     MFVideoTransFunc_10_rel = 17, // No gamma, display referred (relative) 
-#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS4) */
-
-    MFVideoTransFunc_BT1361_ECG = 18, // BT.1361 Extended Color Gamut
-    MFVideoTransFunc_SMPTE428 = 19, // SMPTE ST 428-1
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS4) */ 
 
     MFVideoTransFunc_Last,
     MFVideoTransFunc_ForceDWORD         = 0x7FFFFFFF
@@ -1797,22 +1766,21 @@ typedef enum _MFVideoPrimaries
     MFVideoPrimaries_BT709 = 2,
     MFVideoPrimaries_BT470_2_SysM = 3,
     MFVideoPrimaries_BT470_2_SysBG = 4,
-    MFVideoPrimaries_SMPTE170M = 5,      // includes BT.601-5
+    MFVideoPrimaries_SMPTE170M = 5,      // includes BT. 601-5
     MFVideoPrimaries_SMPTE240M = 6,
     MFVideoPrimaries_EBU3213 = 7,
     MFVideoPrimaries_SMPTE_C = 8,
 
 #if (WINVER >= _WIN32_WINNT_WINBLUE)
     MFVideoPrimaries_BT2020 = 9,
-    MFVideoPrimaries_XYZ = 10, // SMPTE ST 428-1
+    MFVideoPrimaries_XYZ = 10,
 #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
 
+    // TODO: switch to RS define once it exists (see: 5312604)
 #if (WINVER >= _WIN32_WINNT_WIN10)
-    MFVideoPrimaries_DCI_P3 = 11, // SMPTE RP 431-2
+    MFVideoPrimaries_DCI_P3 = 11,
     MFVideoPrimaries_ACES = 12,
 #endif // (WINVER > _WIN32_WINNT_WIN10)
-
-    MFVideoPrimaries_Display_P3 = 13, // SMPTE EG 432-1
 
     MFVideoPrimaries_Last,
     MFVideoPrimaries_ForceDWORD         = 0x7FFFFFFF
@@ -1841,14 +1809,6 @@ typedef enum _MFVideoTransferMatrix
     MFVideoTransferMatrix_BT2020_10 = 4,
     MFVideoTransferMatrix_BT2020_12 = 5,
 #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
-
-    MFVideoTransferMatrix_Identity = 6,
-    MFVideoTransferMatrix_FCC47 = 7, // FCC Title 47
-    MFVideoTransferMatrix_YCgCo = 8, // IEC 23091-2
-    MFVideoTransferMatrix_SMPTE2085 = 9, // SMPTE ST 2085
-    MFVideoTransferMatrix_Chroma = 10, // Chromacity-derived, non-constant luminance, IEC 23091-2
-    MFVideoTransferMatrix_Chroma_const = 11, // Chromacity-derived, constant luminance, IEC 23091-2
-    MFVideoTransferMatrix_ICtCp = 12, // BT.2100 ICtCp
 
     MFVideoTransferMatrix_Last,
     MFVideoTransferMatrix_ForceDWORD            = 0x7FFFFFFF
@@ -4624,12 +4584,6 @@ interface IMFDXGIDeviceManager : IUnknown
     );
 }
 
-typedef enum MF_DXGI_DEVICE_MANAGER_MODE
-{
-    MF_DXGI_DEVICE_MANAGER_MODE_INVALID = 0,
-    MF_DXGI_DEVICE_MANAGER_MODE_D3D11,
-    MF_DXGI_DEVICE_MANAGER_MODE_D3D12
-} MF_DXGI_DEVICE_MANAGER_MODE;
 
 typedef enum _MF_STREAM_STATE
 {

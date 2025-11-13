@@ -37,34 +37,33 @@ public:
                          DWORD dwDataLen);
        HRESULT MACFinal(HMAC hMAC,
                         BYTE abData[SAC_MAC_LEN]);
-       HRESULT GetAppSec(DWORD *pdwLocalAppSec, DWORD *pdwRemoteAppSec);
-       HRESULT SetSessionKey(BYTE *pbSPSessionKey);
-       HRESULT GetSessionKey(BYTE *pbSPSessionKey);
+	   HRESULT GetAppSec(DWORD *pdwLocalAppSec, DWORD *pdwRemoteAppSec);
+	   HRESULT SetSessionKey(BYTE *pbSPSessionKey);
+	   HRESULT GetSessionKey(BYTE *pbSPSessionKey);
        HRESULT GetRemoteAppCert(
             _Out_writes_to_opt_(*pdwCertLen, *pdwCertLen) BYTE *pbAppCert,
             _Out_                                           DWORD* pdwCertLen);
-       BOOL fIsAuthenticated();
+	   BOOL fIsAuthenticated();
 private:
        BOOL m_fAuthenticated;
        BYTE *m_pbAppCert;
        DWORD m_dwCertLen;
-       BYTE *m_pbRemoteCert;
-       DWORD m_dwRemoteCertLen;
+	   BYTE *m_pbRemoteCert;
+	   DWORD m_dwRemoteCertLen;
        BYTE *m_pbAppPVK;
        DWORD m_dwPVKLen; 
        BYTE *m_pbSessionKey;
        DWORD m_dwSessionKeyLen;
-       BOOL m_TableInit;
-       unsigned long m_OldDesTable[32];
+	   BOOL m_TableInit;
+       unsigned long m_DesTable[32];
        IComponentAuthenticate *m_pAuth;
-       DWORD m_dwCertFlags;
-       MACINFO aMacInfo[20];
-       BYTE m_abMacKey[64];
-       BOOL m_fMacKeyInit;
+	   DWORD m_dwCertFlags;
+	   MACINFO aMacInfo[20];
+	   BYTE m_abMacKey[64];
+	   BOOL m_fMacKeyInit;
        CRITICAL_SECTION m_CS;
        HRESULT Protocol1();
-       HRESULT Protocol2();
-       BYTE m_DesTable[400];
+	   HRESULT Protocol2();
 };
 
 

@@ -81,6 +81,7 @@
 #define wszREGLDAPFLAGS               TEXT("LDAPFlags")
 #define wszREGCERTSRVDEBUG	      TEXT("Debug")
 
+
 // Default value for wszREGDBSESSIONCOUNT
 #define DBSESSIONCOUNTDEFAULT	     100
 
@@ -159,11 +160,6 @@
 #define CSVER_EXTRACT_MINOR(version) ((version)&0xffff)
 #define CSVER_BUILD_VERSION(major, minor) (((major)<<16)|(minor))
 
-// propertyId manipulation to pass partition index and key index
-#define CRL_BUILD_PROPID(partIndex, keyIndex) ((partIndex << 16) | keyIndex)
-#define CRL_EXTRACT_KEY_INDEX(propId) ((propId) & 0xFFFF)
-#define CRL_EXTRACT_PARTITION_INDEX(propId) ((propId) >> 16)
-
 // Keys Under "CertSvc\Configuration":
 #define wszREGKEYRESTOREINPROGRESS   TEXT("RestoreInProgress")
 #define wszREGKEYDBPARAMETERS	     TEXT("DBParameters")
@@ -197,10 +193,6 @@
 
 #define wszREGCRLPUBLICATIONURLS     TEXT("CRLPublicationURLs")
 #define wszREGCACERTPUBLICATIONURLS  TEXT("CACertPublicationURLs")
-
-#define wszREGCRLMAXPARTITIONS       TEXT("CRLMaxPartitions")
-#define wszREGCRLSUSPENDEDPARTITIONS TEXT("CRLSuspendedPartitions")
-#define wszREGCRLCURRENTPARTITION    TEXT("CRLCurrentPartition")
 
 #define wszREGCAXCHGVALIDITYPERIODSTRING  TEXT("CAXchgValidityPeriod")
 #define wszREGCAXCHGVALIDITYPERIODCOUNT   TEXT("CAXchgValidityPeriodUnits")
@@ -331,7 +323,7 @@ typedef struct _CAINFO
     LONG    lRoleSeparationEnabled;
     DWORD   cKRACertUsedCount;
     DWORD   cKRACertCount;
-    DWORD   fAdvancedServer;
+    DWORD   fAdvancedServer;   
 } CAINFO;
 
 #endif // __ENUM_CATYPES__
@@ -420,35 +412,27 @@ typedef struct _CAINFO
 #define CRLF_DELTA_USE_OLDEST_UNEXPIRED_BASE	0x00000001 // use oldest base:
 // else use newest base CRL that satisfies base CRL propagation delay
 
-#define CRLF_DELETE_EXPIRED_CRLS                0x00000002
-#define CRLF_CRLNUMBER_CRITICAL                 0x00000004
-#define CRLF_REVCHECK_IGNORE_OFFLINE            0x00000008
-#define CRLF_IGNORE_INVALID_POLICIES            0x00000010
-#define CRLF_REBUILD_MODIFIED_SUBJECT_ONLY      0x00000020
-#define CRLF_SAVE_FAILED_CERTS                  0x00000040
-#define CRLF_IGNORE_UNKNOWN_CMC_ATTRIBUTES      0x00000080
-#define CRLF_IGNORE_CROSS_CERT_TRUST_ERROR      0x00000100
-#define CRLF_PUBLISH_EXPIRED_CERT_CRLS          0x00000200
-#define CRLF_ENFORCE_ENROLLMENT_AGENT           0x00000400
-#define CRLF_DISABLE_RDN_REORDER                0x00000800
-#define CRLF_DISABLE_ROOT_CROSS_CERTS           0x00001000
-#define CRLF_LOG_FULL_RESPONSE                  0x00002000 // hex dump response to console
+#define CRLF_DELETE_EXPIRED_CRLS		0x00000002
+#define CRLF_CRLNUMBER_CRITICAL			0x00000004
+#define CRLF_REVCHECK_IGNORE_OFFLINE		0x00000008
+#define CRLF_IGNORE_INVALID_POLICIES		0x00000010
+#define CRLF_REBUILD_MODIFIED_SUBJECT_ONLY	0x00000020
+#define CRLF_SAVE_FAILED_CERTS			0x00000040
+#define CRLF_IGNORE_UNKNOWN_CMC_ATTRIBUTES	0x00000080
+#define CRLF_IGNORE_CROSS_CERT_TRUST_ERROR	0x00000100
+#define CRLF_PUBLISH_EXPIRED_CERT_CRLS		0x00000200
+#define CRLF_ENFORCE_ENROLLMENT_AGENT		0x00000400
+#define CRLF_DISABLE_RDN_REORDER		0x00000800
+#define CRLF_DISABLE_ROOT_CROSS_CERTS		0x00001000
+#define CRLF_LOG_FULL_RESPONSE	                0x00002000 // hex dump response to console
 #define CRLF_USE_XCHG_CERT_TEMPLATE             0x00004000 // enforce xchg template access
 #define CRLF_USE_CROSS_CERT_TEMPLATE            0x00008000 // enforce cross template access
-#define CRLF_ALLOW_REQUEST_ATTRIBUTE_SUBJECT    0x00010000
-#define CRLF_REVCHECK_IGNORE_NOREVCHECK         0x00020000
-#define CRLF_PRESERVE_EXPIRED_CA_CERTS          0x00040000
-#define CRLF_PRESERVE_REVOKED_CA_CERTS          0x00080000
-#define CRLF_DISABLE_CHAIN_VERIFICATION         0x00100000
+#define CRLF_ALLOW_REQUEST_ATTRIBUTE_SUBJECT	0x00010000
+#define CRLF_REVCHECK_IGNORE_NOREVCHECK		0x00020000
+#define CRLF_PRESERVE_EXPIRED_CA_CERTS		0x00040000
+#define CRLF_PRESERVE_REVOKED_CA_CERTS		0x00080000
+#define CRLF_DISABLE_CHAIN_VERIFICATION		0x00100000
 #define CRLF_BUILD_ROOTCA_CRLENTRIES_BASEDONKEY 0x00200000
-// Flag to enable CRL partition feature
-#define CRLF_ENABLE_CRL_PARTITION               0x00400000
-// Flag to make the partition zero CRLs exclusive.
-// When the flag is set, the CRLs of partition zero will exclusively contain
-// entries related to certificates assigned specifically to partition zero. 
-#define CRLF_PARTITION_ZERO_EXCLUSIVE           0x00800000
-#define CRLF_CONTAINS_ONLY_CACERTS              0x01000000
-#define CRLF_CONTAINS_ONLY_USERCERTS            0x02000000
 
 //==================================
 // Values for wszREGKRAFLAGS:
@@ -459,20 +443,19 @@ typedef struct _CAINFO
 
 //==================================
 // Values for wszREGINTERFACEFLAGS:
-#define IF_LOCKICERTREQUEST             0x00000001
-#define IF_NOREMOTEICERTREQUEST         0x00000002
-#define IF_NOLOCALICERTREQUEST          0x00000004
-#define IF_NORPCICERTREQUEST            0x00000008
-#define IF_NOREMOTEICERTADMIN           0x00000010
-#define IF_NOLOCALICERTADMIN            0x00000020
-#define IF_NOREMOTEICERTADMINBACKUP     0x00000040
-#define IF_NOLOCALICERTADMINBACKUP      0x00000080
-#define IF_NOSNAPSHOTBACKUP             0x00000100
+#define IF_LOCKICERTREQUEST		0x00000001
+#define IF_NOREMOTEICERTREQUEST		0x00000002
+#define IF_NOLOCALICERTREQUEST		0x00000004
+#define IF_NORPCICERTREQUEST		0x00000008
+#define IF_NOREMOTEICERTADMIN		0x00000010
+#define IF_NOLOCALICERTADMIN		0x00000020
+#define IF_NOREMOTEICERTADMINBACKUP	0x00000040
+#define IF_NOLOCALICERTADMINBACKUP	0x00000080
+#define IF_NOSNAPSHOTBACKUP		0x00000100
 #define IF_ENFORCEENCRYPTICERTREQUEST   0x00000200
 #define IF_ENFORCEENCRYPTICERTADMIN     0x00000400
-#define IF_ENABLEEXITKEYRETRIEVAL       0x00000800
-#define IF_ENABLEADMINASAUDITOR         0x00001000
-#define IF_ENABLEPRESIGNSUPPORT         0x00002000
+#define IF_ENABLEEXITKEYRETRIEVAL	0x00000800
+#define IF_ENABLEADMINASAUDITOR		0x00001000
 
 #define IF_DEFAULT                      (IF_NOREMOTEICERTADMINBACKUP | \
                                          IF_LOCKICERTREQUEST | \
@@ -971,26 +954,6 @@ typedef struct _CAINFO
 #define KR_ENABLE_MACHINE	0x00000001
 #define KR_ENABLE_USER		0x00000002
 
-//==========================================================================================
-// (Un)Installation of each ADCS role create a sub key with names (CertificateAuthority, 
-// WebEnrollment, CEP, CES, NDES) and then adds the "ConfigurationStatus" reg value 
-// to indicate whether a particular role has been configured (2), not configured (1) 
-// or failed (0). 
-// If customers require a different EP setting than default value, they should create
-// "EPTokenCheckValue" reg value directly under the ""..\\ADCS" parent key before starting 
-// configuration of the given role. This should be created on the machine where the given 
-// role is being configured and not on the machine where CA role is configured.
-
-#define CONFIGURATION_STATUS_PARENT_REG_PATH    TEXT("Software\\Microsoft\\ADCS")
-#define CONFIGURATION_STATUS_REG_VALUE_NAME     TEXT("ConfigurationStatus")
-
-#define CONFIGURATION_REG_EPTOKENCHECKVALUE     TEXT("EPTokenCheckValue")
-#define EP_TOKENCHECK_DEFAULT_VALUE             2  // Set it to "Always" by default
-
-// Reg value to disable https only fix. Adding this config option mainly for 
-// test code purpose. I expect lot of test code relying on http end point for
-// certsrv and mscep_admin interfaces.
-#define CONFIGURATION_REG_DISABLE_HTTPSONLY     TEXT("DisableHTTPSOnly")
 
 //+--------------------------------------------------------------------------
 // Name properties:
@@ -1073,8 +1036,6 @@ typedef struct _CAINFO
 #define wszPROPENDORSEMENTKEYHASH               TEXT("EndorsementKeyHash")
 #define wszPROPENDORSEMENTCERTIFICATEHASH       TEXT("EndorsementCertificateHash")
 #define wszPROPRAWPRECERTIFICATE                TEXT("RawPrecertificate")
-#define wszPROPCRLPARTITIONINDEX                TEXT("CRLPartitionIndex")
-#define wszPROPLINTERCERTIFICATE                TEXT("LinterCertificate")
 
 //+--------------------------------------------------------------------------
 // Request attribute properties:
@@ -1126,7 +1087,6 @@ typedef struct _CAINFO
 #define wszAT_EKCERTINF			TEXT("@EKCert")
 #define wszAT_TESTROOT			TEXT("@TestRoot")
 
-#define wszPROPLINTCERTIFICATE	TEXT("LintCertificate")
 
 //+--------------------------------------------------------------------------
 // "System" properties

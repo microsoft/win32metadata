@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -557,7 +557,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockApplicationHost = __uuidof(ILockApplicationHost);
+                extern MIDL_CONST_ID IID& IID_ILockApplicationHost = _uuidof(ILockApplicationHost);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */
@@ -593,7 +593,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockApplicationHostStatics = __uuidof(ILockApplicationHostStatics);
+                extern MIDL_CONST_ID IID& IID_ILockApplicationHostStatics = _uuidof(ILockApplicationHostStatics);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */
@@ -639,7 +639,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE LaunchApp(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenBadge = __uuidof(ILockScreenBadge);
+                extern MIDL_CONST_ID IID& IID_ILockScreenBadge = _uuidof(ILockScreenBadge);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */
@@ -712,7 +712,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenInfo = __uuidof(ILockScreenInfo);
+                extern MIDL_CONST_ID IID& IID_ILockScreenInfo = _uuidof(ILockScreenInfo);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */
@@ -746,7 +746,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenUnlockingDeferral = __uuidof(ILockScreenUnlockingDeferral);
+                extern MIDL_CONST_ID IID& IID_ILockScreenUnlockingDeferral = _uuidof(ILockScreenUnlockingDeferral);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */
@@ -785,7 +785,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenUnlockingEventArgs = __uuidof(ILockScreenUnlockingEventArgs);
+                extern MIDL_CONST_ID IID& IID_ILockScreenUnlockingEventArgs = _uuidof(ILockScreenUnlockingEventArgs);
             } /* LockScreen */
         } /* ApplicationModel */
     } /* Windows */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -986,7 +986,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceService = __uuidof(IRfcommDeviceService);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceService = _uuidof(IRfcommDeviceService);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1027,7 +1027,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceService2 = __uuidof(IRfcommDeviceService2);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceService2 = _uuidof(IRfcommDeviceService2);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1072,7 +1072,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceService3 = __uuidof(IRfcommDeviceService3);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceService3 = _uuidof(IRfcommDeviceService3);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1115,7 +1115,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceServiceStatics = __uuidof(IRfcommDeviceServiceStatics);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceServiceStatics = _uuidof(IRfcommDeviceServiceStatics);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1173,7 +1173,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceServiceStatics2 = __uuidof(IRfcommDeviceServiceStatics2);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceServiceStatics2 = _uuidof(IRfcommDeviceServiceStatics2);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1214,7 +1214,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommDeviceServicesResult = __uuidof(IRfcommDeviceServicesResult);
+                    extern MIDL_CONST_ID IID& IID_IRfcommDeviceServicesResult = _uuidof(IRfcommDeviceServicesResult);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1258,7 +1258,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommServiceId = __uuidof(IRfcommServiceId);
+                    extern MIDL_CONST_ID IID& IID_IRfcommServiceId = _uuidof(IRfcommServiceId);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1319,7 +1319,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommServiceIdStatics = __uuidof(IRfcommServiceIdStatics);
+                    extern MIDL_CONST_ID IID& IID_IRfcommServiceIdStatics = _uuidof(IRfcommServiceIdStatics);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1364,7 +1364,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE StopAdvertising(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommServiceProvider = __uuidof(IRfcommServiceProvider);
+                    extern MIDL_CONST_ID IID& IID_IRfcommServiceProvider = _uuidof(IRfcommServiceProvider);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1406,7 +1406,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommServiceProvider2 = __uuidof(IRfcommServiceProvider2);
+                    extern MIDL_CONST_ID IID& IID_IRfcommServiceProvider2 = _uuidof(IRfcommServiceProvider2);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1445,7 +1445,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRfcommServiceProviderStatics = __uuidof(IRfcommServiceProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IRfcommServiceProviderStatics = _uuidof(IRfcommServiceProviderStatics);
                 } /* Rfcomm */
             } /* Bluetooth */
         } /* Devices */
@@ -1463,8 +1463,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CRfcomm_CIRfcommServ
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceService ** Default Interface **
@@ -3708,8 +3708,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CRfcomm_CIRfcommServ
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceService ** Default Interface **

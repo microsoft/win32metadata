@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -711,7 +711,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskDataProviderConnection = __uuidof(IUserDataTaskDataProviderConnection);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskDataProviderConnection = _uuidof(IUserDataTaskDataProviderConnection);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -749,7 +749,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskDataProviderTriggerDetails = __uuidof(IUserDataTaskDataProviderTriggerDetails);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskDataProviderTriggerDetails = _uuidof(IUserDataTaskDataProviderTriggerDetails);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -797,7 +797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListCompleteTaskRequest = __uuidof(IUserDataTaskListCompleteTaskRequest);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListCompleteTaskRequest = _uuidof(IUserDataTaskListCompleteTaskRequest);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -838,7 +838,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListCompleteTaskRequestEventArgs = __uuidof(IUserDataTaskListCompleteTaskRequestEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListCompleteTaskRequestEventArgs = _uuidof(IUserDataTaskListCompleteTaskRequestEventArgs);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -886,7 +886,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListCreateOrUpdateTaskRequest = __uuidof(IUserDataTaskListCreateOrUpdateTaskRequest);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListCreateOrUpdateTaskRequest = _uuidof(IUserDataTaskListCreateOrUpdateTaskRequest);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -927,7 +927,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListCreateOrUpdateTaskRequestEventArgs = __uuidof(IUserDataTaskListCreateOrUpdateTaskRequestEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListCreateOrUpdateTaskRequestEventArgs = _uuidof(IUserDataTaskListCreateOrUpdateTaskRequestEventArgs);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -974,7 +974,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListDeleteTaskRequest = __uuidof(IUserDataTaskListDeleteTaskRequest);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListDeleteTaskRequest = _uuidof(IUserDataTaskListDeleteTaskRequest);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -1015,7 +1015,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListDeleteTaskRequestEventArgs = __uuidof(IUserDataTaskListDeleteTaskRequestEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListDeleteTaskRequestEventArgs = _uuidof(IUserDataTaskListDeleteTaskRequestEventArgs);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -1062,7 +1062,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListSkipOccurrenceRequest = __uuidof(IUserDataTaskListSkipOccurrenceRequest);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListSkipOccurrenceRequest = _uuidof(IUserDataTaskListSkipOccurrenceRequest);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -1103,7 +1103,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListSkipOccurrenceRequestEventArgs = __uuidof(IUserDataTaskListSkipOccurrenceRequestEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListSkipOccurrenceRequestEventArgs = _uuidof(IUserDataTaskListSkipOccurrenceRequestEventArgs);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -1147,7 +1147,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManagerSyncRequest = __uuidof(IUserDataTaskListSyncManagerSyncRequest);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManagerSyncRequest = _uuidof(IUserDataTaskListSyncManagerSyncRequest);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */
@@ -1188,7 +1188,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManagerSyncRequestEventArgs = __uuidof(IUserDataTaskListSyncManagerSyncRequestEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManagerSyncRequestEventArgs = _uuidof(IUserDataTaskListSyncManagerSyncRequestEventArgs);
                 } /* DataProvider */
             } /* UserDataTasks */
         } /* ApplicationModel */

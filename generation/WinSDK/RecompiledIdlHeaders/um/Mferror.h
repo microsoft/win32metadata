@@ -65,8 +65,6 @@ Notes:
 
  46000 - 46999 = MediaExtensions via AppService errors
 
- 47000 - 47999 = Frameserver errors
-
 **************************** READ ME ******************************************
 
 --*/
@@ -3408,41 +3406,6 @@ Notes:
 // License check for app failed.%0
 //
 #define MF_E_MEDIA_EXTENSION_PACKAGE_LICENSE_INVALID _HRESULT_TYPEDEF_(0xC00DB3B3L)
-
-//
-// MessageId: MF_E_MEDIA_EXTENSION_PACKAGE_BAD_STATUS
-//
-// MessageText:
-//
-// Package status for app not ok.%0
-//
-#define MF_E_MEDIA_EXTENSION_PACKAGE_BAD_STATUS _HRESULT_TYPEDEF_(0xC00DB3B4L)
-
-
-//////////////////////////////////////////////////////////////////////////////
-//
-// Frameserver errors
-//
-//////////////////////////////////////////////////////////////////////////////
-
-//
-// MessageId: MF_E_CAMERA_PRIVACY_NOT_ALLOWED
-//
-// MessageText:
-//
-// Camera access is not allowed by Privacy Settings.%0
-//
-#define MF_E_CAMERA_PRIVACY_NOT_ALLOWED  _HRESULT_TYPEDEF_(0xC00DB798L)
-
-// 47001 is MF_E_CAMERA_NOT_DSHOW_BRIDGED
-//
-// MessageId: MF_E_CAMERA_FSPROFILE_INVALID
-//
-// MessageText:
-//
-// Camera profile is invalid.%0
-//
-#define MF_E_CAMERA_FSPROFILE_INVALID    _HRESULT_TYPEDEF_(0xC00DB79AL)
 
 
 //////////////////////////////////////////////////////////////////////////////

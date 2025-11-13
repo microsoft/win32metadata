@@ -194,13 +194,6 @@ typedef interface ISearchCatalogManager2 ISearchCatalogManager2;
 #endif 	/* __ISearchCatalogManager2_FWD_DEFINED__ */
 
 
-#ifndef __ISearchCatalogManager3_FWD_DEFINED__
-#define __ISearchCatalogManager3_FWD_DEFINED__
-typedef interface ISearchCatalogManager3 ISearchCatalogManager3;
-
-#endif 	/* __ISearchCatalogManager3_FWD_DEFINED__ */
-
-
 #ifndef __ISearchQueryHelper_FWD_DEFINED__
 #define __ISearchQueryHelper_FWD_DEFINED__
 typedef interface ISearchQueryHelper ISearchQueryHelper;
@@ -255,13 +248,6 @@ typedef interface ISearchCatalogManager ISearchCatalogManager;
 typedef interface ISearchCatalogManager2 ISearchCatalogManager2;
 
 #endif 	/* __ISearchCatalogManager2_FWD_DEFINED__ */
-
-
-#ifndef __ISearchCatalogManager3_FWD_DEFINED__
-#define __ISearchCatalogManager3_FWD_DEFINED__
-typedef interface ISearchCatalogManager3 ISearchCatalogManager3;
-
-#endif 	/* __ISearchCatalogManager3_FWD_DEFINED__ */
 
 
 #ifndef __ISearchQueryHelper_FWD_DEFINED__
@@ -4998,365 +4984,7 @@ EXTERN_C const IID IID_ISearchCatalogManager2;
 #endif 	/* __ISearchCatalogManager2_INTERFACE_DEFINED__ */
 
 
-#ifndef __ISearchCatalogManager3_INTERFACE_DEFINED__
-#define __ISearchCatalogManager3_INTERFACE_DEFINED__
-
-/* interface ISearchCatalogManager3 */
-/* [unique][uuid][object] */ 
-
-
-EXTERN_C const IID IID_ISearchCatalogManager3;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("DE837E8F-634F-4AB0-BDFC-9FC3A1FC50DC")
-    ISearchCatalogManager3 : public ISearchCatalogManager2
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE IsContainsSemanticSupported( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isContainsSemanticSupported) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISearchCatalogManager3Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in ISearchCatalogManager3 * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in ISearchCatalogManager3 * This);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_Name)
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  LPWSTR *pszName);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetParameter)
-        HRESULT ( STDMETHODCALLTYPE *GetParameter )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  PROPVARIANT **ppValue);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetParameter)
-        HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszName,
-            /* [annotation][in] */ 
-            _In_  PROPVARIANT *pValue);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCatalogStatus)
-        HRESULT ( STDMETHODCALLTYPE *GetCatalogStatus )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][out] */ 
-            _Out_  CatalogStatus *pStatus,
-            /* [annotation][out] */ 
-            _Out_  CatalogPausedReason *pPausedReason);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reset)
-        HRESULT ( STDMETHODCALLTYPE *Reset )( 
-            __RPC__in ISearchCatalogManager3 * This);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, Reindex)
-        HRESULT ( STDMETHODCALLTYPE *Reindex )( 
-            __RPC__in ISearchCatalogManager3 * This);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexMatchingURLs)
-        HRESULT ( STDMETHODCALLTYPE *ReindexMatchingURLs )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszPattern);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, ReindexSearchRoot)
-        HRESULT ( STDMETHODCALLTYPE *ReindexSearchRoot )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszRootURL);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_ConnectTimeout)
-        /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectTimeout )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwConnectTimeout);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_ConnectTimeout)
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectTimeout )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwConnectTimeout);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DataTimeout)
-        /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataTimeout )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDataTimeout);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DataTimeout)
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataTimeout )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwDataTimeout);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItems)
-        HRESULT ( STDMETHODCALLTYPE *NumberOfItems )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plCount);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, NumberOfItemsToIndex)
-        HRESULT ( STDMETHODCALLTYPE *NumberOfItemsToIndex )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][out] */ 
-            _Out_  LONG *plIncrementalCount,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNotificationQueue,
-            /* [annotation][out] */ 
-            _Out_  LONG *plHighPriorityQueue);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, URLBeingIndexed)
-        HRESULT ( STDMETHODCALLTYPE *URLBeingIndexed )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  LPWSTR *pszUrl);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetURLIndexingState)
-        HRESULT ( STDMETHODCALLTYPE *GetURLIndexingState )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszURL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwState);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetPersistentItemsChangedSink)
-        HRESULT ( STDMETHODCALLTYPE *GetPersistentItemsChangedSink )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISearchPersistentItemsChangedSink **ppISearchPersistentItemsChangedSink);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, RegisterViewForNotification)
-        HRESULT ( STDMETHODCALLTYPE *RegisterViewForNotification )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszView,
-            /* [annotation][in] */ 
-            _In_  ISearchViewChangedSink *pViewChangedSink,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetItemsChangedSink)
-        HRESULT ( STDMETHODCALLTYPE *GetItemsChangedSink )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  ISearchNotifyInlineSite *pISearchNotifyInlineSite,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv,
-            /* [annotation][out] */ 
-            _Out_  GUID *pGUIDCatalogResetSignature,
-            /* [annotation][out] */ 
-            _Out_  GUID *pGUIDCheckPointSignature,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwLastCheckPointNumber);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, UnregisterViewForNotification)
-        HRESULT ( STDMETHODCALLTYPE *UnregisterViewForNotification )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, SetExtensionClusion)
-        HRESULT ( STDMETHODCALLTYPE *SetExtensionClusion )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszExtension,
-            /* [annotation][in] */ 
-            _In_  BOOL fExclude);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, EnumerateExcludedExtensions)
-        HRESULT ( STDMETHODCALLTYPE *EnumerateExcludedExtensions )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumString **ppExtensions);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetQueryHelper)
-        HRESULT ( STDMETHODCALLTYPE *GetQueryHelper )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISearchQueryHelper **ppSearchQueryHelper);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, put_DiacriticSensitivity)
-        /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiacriticSensitivity )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fDiacriticSensitive);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, get_DiacriticSensitivity)
-        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiacriticSensitivity )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfDiacriticSensitive);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager, GetCrawlScopeManager)
-        HRESULT ( STDMETHODCALLTYPE *GetCrawlScopeManager )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISearchCrawlScopeManager **ppCrawlScopeManager);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager2, PrioritizeMatchingURLs)
-        HRESULT ( STDMETHODCALLTYPE *PrioritizeMatchingURLs )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszPattern,
-            /* [annotation][in] */ 
-            _In_  PRIORITIZE_FLAGS dwPrioritizeFlags);
-        
-        DECLSPEC_XFGVIRT(ISearchCatalogManager3, IsContainsSemanticSupported)
-        HRESULT ( STDMETHODCALLTYPE *IsContainsSemanticSupported )( 
-            __RPC__in ISearchCatalogManager3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isContainsSemanticSupported);
-        
-        END_INTERFACE
-    } ISearchCatalogManager3Vtbl;
-
-    interface ISearchCatalogManager3
-    {
-        CONST_VTBL struct ISearchCatalogManager3Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISearchCatalogManager3_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISearchCatalogManager3_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISearchCatalogManager3_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define ISearchCatalogManager3_get_Name(This,pszName)	\
-    ( (This)->lpVtbl -> get_Name(This,pszName) ) 
-
-#define ISearchCatalogManager3_GetParameter(This,pszName,ppValue)	\
-    ( (This)->lpVtbl -> GetParameter(This,pszName,ppValue) ) 
-
-#define ISearchCatalogManager3_SetParameter(This,pszName,pValue)	\
-    ( (This)->lpVtbl -> SetParameter(This,pszName,pValue) ) 
-
-#define ISearchCatalogManager3_GetCatalogStatus(This,pStatus,pPausedReason)	\
-    ( (This)->lpVtbl -> GetCatalogStatus(This,pStatus,pPausedReason) ) 
-
-#define ISearchCatalogManager3_Reset(This)	\
-    ( (This)->lpVtbl -> Reset(This) ) 
-
-#define ISearchCatalogManager3_Reindex(This)	\
-    ( (This)->lpVtbl -> Reindex(This) ) 
-
-#define ISearchCatalogManager3_ReindexMatchingURLs(This,pszPattern)	\
-    ( (This)->lpVtbl -> ReindexMatchingURLs(This,pszPattern) ) 
-
-#define ISearchCatalogManager3_ReindexSearchRoot(This,pszRootURL)	\
-    ( (This)->lpVtbl -> ReindexSearchRoot(This,pszRootURL) ) 
-
-#define ISearchCatalogManager3_put_ConnectTimeout(This,dwConnectTimeout)	\
-    ( (This)->lpVtbl -> put_ConnectTimeout(This,dwConnectTimeout) ) 
-
-#define ISearchCatalogManager3_get_ConnectTimeout(This,pdwConnectTimeout)	\
-    ( (This)->lpVtbl -> get_ConnectTimeout(This,pdwConnectTimeout) ) 
-
-#define ISearchCatalogManager3_put_DataTimeout(This,dwDataTimeout)	\
-    ( (This)->lpVtbl -> put_DataTimeout(This,dwDataTimeout) ) 
-
-#define ISearchCatalogManager3_get_DataTimeout(This,pdwDataTimeout)	\
-    ( (This)->lpVtbl -> get_DataTimeout(This,pdwDataTimeout) ) 
-
-#define ISearchCatalogManager3_NumberOfItems(This,plCount)	\
-    ( (This)->lpVtbl -> NumberOfItems(This,plCount) ) 
-
-#define ISearchCatalogManager3_NumberOfItemsToIndex(This,plIncrementalCount,plNotificationQueue,plHighPriorityQueue)	\
-    ( (This)->lpVtbl -> NumberOfItemsToIndex(This,plIncrementalCount,plNotificationQueue,plHighPriorityQueue) ) 
-
-#define ISearchCatalogManager3_URLBeingIndexed(This,pszUrl)	\
-    ( (This)->lpVtbl -> URLBeingIndexed(This,pszUrl) ) 
-
-#define ISearchCatalogManager3_GetURLIndexingState(This,pszURL,pdwState)	\
-    ( (This)->lpVtbl -> GetURLIndexingState(This,pszURL,pdwState) ) 
-
-#define ISearchCatalogManager3_GetPersistentItemsChangedSink(This,ppISearchPersistentItemsChangedSink)	\
-    ( (This)->lpVtbl -> GetPersistentItemsChangedSink(This,ppISearchPersistentItemsChangedSink) ) 
-
-#define ISearchCatalogManager3_RegisterViewForNotification(This,pszView,pViewChangedSink,pdwCookie)	\
-    ( (This)->lpVtbl -> RegisterViewForNotification(This,pszView,pViewChangedSink,pdwCookie) ) 
-
-#define ISearchCatalogManager3_GetItemsChangedSink(This,pISearchNotifyInlineSite,riid,ppv,pGUIDCatalogResetSignature,pGUIDCheckPointSignature,pdwLastCheckPointNumber)	\
-    ( (This)->lpVtbl -> GetItemsChangedSink(This,pISearchNotifyInlineSite,riid,ppv,pGUIDCatalogResetSignature,pGUIDCheckPointSignature,pdwLastCheckPointNumber) ) 
-
-#define ISearchCatalogManager3_UnregisterViewForNotification(This,dwCookie)	\
-    ( (This)->lpVtbl -> UnregisterViewForNotification(This,dwCookie) ) 
-
-#define ISearchCatalogManager3_SetExtensionClusion(This,pszExtension,fExclude)	\
-    ( (This)->lpVtbl -> SetExtensionClusion(This,pszExtension,fExclude) ) 
-
-#define ISearchCatalogManager3_EnumerateExcludedExtensions(This,ppExtensions)	\
-    ( (This)->lpVtbl -> EnumerateExcludedExtensions(This,ppExtensions) ) 
-
-#define ISearchCatalogManager3_GetQueryHelper(This,ppSearchQueryHelper)	\
-    ( (This)->lpVtbl -> GetQueryHelper(This,ppSearchQueryHelper) ) 
-
-#define ISearchCatalogManager3_put_DiacriticSensitivity(This,fDiacriticSensitive)	\
-    ( (This)->lpVtbl -> put_DiacriticSensitivity(This,fDiacriticSensitive) ) 
-
-#define ISearchCatalogManager3_get_DiacriticSensitivity(This,pfDiacriticSensitive)	\
-    ( (This)->lpVtbl -> get_DiacriticSensitivity(This,pfDiacriticSensitive) ) 
-
-#define ISearchCatalogManager3_GetCrawlScopeManager(This,ppCrawlScopeManager)	\
-    ( (This)->lpVtbl -> GetCrawlScopeManager(This,ppCrawlScopeManager) ) 
-
-
-#define ISearchCatalogManager3_PrioritizeMatchingURLs(This,pszPattern,dwPrioritizeFlags)	\
-    ( (This)->lpVtbl -> PrioritizeMatchingURLs(This,pszPattern,dwPrioritizeFlags) ) 
-
-
-#define ISearchCatalogManager3_IsContainsSemanticSupported(This,isContainsSemanticSupported)	\
-    ( (This)->lpVtbl -> IsContainsSemanticSupported(This,isContainsSemanticSupported) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISearchCatalogManager3_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_searchapi_0000_0022 */
+/* interface __MIDL_itf_searchapi_0000_0021 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -5366,8 +4994,8 @@ EXTERN_C const IID IID_ISearchCatalogManager3;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0022_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0022_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0021_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0021_v0_0_s_ifspec;
 
 #ifndef __ISearchQueryHelper_INTERFACE_DEFINED__
 #define __ISearchQueryHelper_INTERFACE_DEFINED__
@@ -5758,11 +5386,11 @@ EXTERN_C const IID IID_ISearchQueryHelper;
 #endif 	/* __ISearchQueryHelper_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_searchapi_0000_0023 */
+/* interface __MIDL_itf_searchapi_0000_0022 */
 /* [local] */ 
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_searchapi_0000_0023_0001
+enum __MIDL___MIDL_itf_searchapi_0000_0022_0001
     {
         PRIORITY_LEVEL_FOREGROUND	= 0,
         PRIORITY_LEVEL_HIGH	= 1,
@@ -5772,8 +5400,8 @@ enum __MIDL___MIDL_itf_searchapi_0000_0023_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0023_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0023_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0022_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0022_v0_0_s_ifspec;
 
 #ifndef __IRowsetPrioritization_INTERFACE_DEFINED__
 #define __IRowsetPrioritization_INTERFACE_DEFINED__
@@ -5904,11 +5532,11 @@ EXTERN_C const IID IID_IRowsetPrioritization;
 #endif 	/* __IRowsetPrioritization_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_searchapi_0000_0024 */
+/* interface __MIDL_itf_searchapi_0000_0023 */
 /* [local] */ 
 
 typedef /* [public][public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_searchapi_0000_0024_0001
+enum __MIDL___MIDL_itf_searchapi_0000_0023_0001
     {
         ROWSETEVENT_ITEMSTATE_NOTINROWSET	= 0,
         ROWSETEVENT_ITEMSTATE_INROWSET	= 1,
@@ -5916,7 +5544,7 @@ enum __MIDL___MIDL_itf_searchapi_0000_0024_0001
     } 	ROWSETEVENT_ITEMSTATE;
 
 typedef /* [public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_searchapi_0000_0024_0002
+enum __MIDL___MIDL_itf_searchapi_0000_0023_0002
     {
         ROWSETEVENT_TYPE_DATAEXPIRED	= 0,
         ROWSETEVENT_TYPE_FOREGROUNDLOST	= 1,
@@ -5925,8 +5553,8 @@ enum __MIDL___MIDL_itf_searchapi_0000_0024_0002
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0024_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0024_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0023_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0023_v0_0_s_ifspec;
 
 #ifndef __IRowsetEvents_INTERFACE_DEFINED__
 #define __IRowsetEvents_INTERFACE_DEFINED__
@@ -6074,7 +5702,7 @@ EXTERN_C const IID IID_IRowsetEvents;
 #endif 	/* __IRowsetEvents_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_searchapi_0000_0025 */
+/* interface __MIDL_itf_searchapi_0000_0024 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -6084,8 +5712,8 @@ EXTERN_C const IID IID_IRowsetEvents;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0025_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0025_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0024_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0024_v0_0_s_ifspec;
 
 #ifndef __ISearchManager_INTERFACE_DEFINED__
 #define __ISearchManager_INTERFACE_DEFINED__
@@ -6600,7 +6228,7 @@ EXTERN_C const IID IID_ISearchManager2;
 #endif 	/* __ISearchManager2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_searchapi_0000_0027 */
+/* interface __MIDL_itf_searchapi_0000_0026 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -6615,8 +6243,8 @@ CSearchLanguageSupport;
 #endif
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0027_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0027_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0026_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0026_v0_0_s_ifspec;
 
 #ifndef __ISearchLanguageSupport_INTERFACE_DEFINED__
 #define __ISearchLanguageSupport_INTERFACE_DEFINED__
@@ -6797,15 +6425,15 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
 #endif 	/* __ISearchLanguageSupport_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_searchapi_0000_0028 */
+/* interface __MIDL_itf_searchapi_0000_0027 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0028_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0028_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0027_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0027_v0_0_s_ifspec;
 
 
 #ifndef __SearchAPILib_LIBRARY_DEFINED__
@@ -6813,7 +6441,6 @@ extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0028_v0_0_s_ifspec;
 
 /* library SearchAPILib */
 /* [version][uuid] */ 
-
 
 
 
@@ -6858,15 +6485,15 @@ FilterRegistration;
 #endif
 #endif /* __SearchAPILib_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_searchapi_0000_0029 */
+/* interface __MIDL_itf_searchapi_0000_0028 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0029_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0029_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0028_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_searchapi_0000_0028_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

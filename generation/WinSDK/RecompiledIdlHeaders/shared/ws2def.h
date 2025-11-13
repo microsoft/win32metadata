@@ -214,17 +214,11 @@ typedef USHORT ADDRESS_FAMILY;
 #define SO_REUSE_UNICASTPORT 0x3007 // defer ephemeral port allocation for
                                     // outbound connections
 #define SO_REUSE_MULTICASTPORT 0x3008 // enable port reuse and disable unicast
-                                      //reception.
+                                    //reception.
 #define SO_ORIGINAL_DST 0x300F      // Query the original destination address
                                     // of a redirected connection.
 #define IP6T_SO_ORIGINAL_DST SO_ORIGINAL_DST
 #endif //(_WIN32_WINNT >= 0x0600)
-
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-#define SO_RECEIVED_HOPLIMIT 0x3010
-#define SO_RECEIVED_PROCESSOR 0x3011 // Receive the processor number packets
-                                     // have been processed by
-#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 //
 // Base constant used for defining WSK-specific options.
@@ -984,7 +978,6 @@ typedef struct addrinfoexW
 #define ADDRINFOEX_VERSION_4    4
 #define ADDRINFOEX_VERSION_5    5
 #define ADDRINFOEX_VERSION_6    6
-#define ADDRINFOEX_VERSION_7    7
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1089,7 +1082,6 @@ typedef struct addrinfoex5
 
 #define AI_DNS_SERVER_TYPE_UDP 0x1
 #define AI_DNS_SERVER_TYPE_DOH 0x2
-#define AI_DNS_SERVER_TYPE_DOT 0x3
 
 
 //
@@ -1109,7 +1101,6 @@ typedef struct addrinfo_dns_server
     union
     {
         PWSTR ai_template;
-        PWSTR ai_hostname;
     };
 } ADDRINFO_DNS_SERVER;
 
@@ -1143,36 +1134,6 @@ typedef struct addrinfoex6
     ADDRINFO_DNS_SERVER  *ai_servers;
     ULONG64              ai_responseflags;
 } ADDRINFOEX6, *PADDRINFOEX6;
-
-//
-//  Flags for ai_extraflags
-//
-
-#define AI_EXTRA_DNSSEC_REQUIRED    0x0000000000000001 // Set DO and AD bits in request, returns IP address info IF DNSSEC authenticated, NOTE: only the IP address will be returned not the DNSSEC specific records
-
-typedef struct addrinfoex7
-{
-    int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
-    int                  ai_family;      // PF_xxx
-    int                  ai_socktype;    // SOCK_xxx
-    int                  ai_protocol;    // 0 or IPPROTO_xxx for IPv4 and IPv6
-    size_t               ai_addrlen;     // Length of ai_addr
-    PWSTR                ai_canonname;   // Canonical name for nodename
-    _Field_size_bytes_(ai_addrlen) struct sockaddr    *ai_addr;        // Binary address
-    _Field_size_(ai_bloblen) void               *ai_blob;
-    size_t               ai_bloblen;
-    GUID                 *ai_provider;
-    struct addrinfoex7   *ai_next;        // Next structure in linked list
-    int                  ai_version;
-    PWSTR                ai_fqdn;
-    int                  ai_interfaceindex;
-    HANDLE               ai_resolutionhandle;
-    unsigned int         ai_ttl;          // Number of seconds for which this DNS record is valid
-    unsigned int         ai_numservers;
-    ADDRINFO_DNS_SERVER  *ai_servers;
-    ULONG64              ai_responseflags;
-    ULONG64              ai_extraflags;   // additional dns options
-} ADDRINFOEX7, *PADDRINFOEX7;
 
 #endif
 

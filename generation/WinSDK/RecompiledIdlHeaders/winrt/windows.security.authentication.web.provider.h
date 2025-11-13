@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1926,7 +1926,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountClientView = __uuidof(IWebAccountClientView);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountClientView = _uuidof(IWebAccountClientView);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -1974,7 +1974,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountClientViewFactory = __uuidof(IWebAccountClientViewFactory);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountClientViewFactory = _uuidof(IWebAccountClientViewFactory);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2058,7 +2058,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountManagerStatics = __uuidof(IWebAccountManagerStatics);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountManagerStatics = _uuidof(IWebAccountManagerStatics);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2100,7 +2100,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountManagerStatics2 = __uuidof(IWebAccountManagerStatics2);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountManagerStatics2 = _uuidof(IWebAccountManagerStatics2);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2165,7 +2165,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountManagerStatics3 = __uuidof(IWebAccountManagerStatics3);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountManagerStatics3 = _uuidof(IWebAccountManagerStatics3);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2209,7 +2209,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountManagerStatics4 = __uuidof(IWebAccountManagerStatics4);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountManagerStatics4 = _uuidof(IWebAccountManagerStatics4);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2267,7 +2267,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountMapManagerStatics = __uuidof(IWebAccountMapManagerStatics);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountMapManagerStatics = _uuidof(IWebAccountMapManagerStatics);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2308,7 +2308,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE ReportCompleted(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderAddAccountOperation = __uuidof(IWebAccountProviderAddAccountOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderAddAccountOperation = _uuidof(IWebAccountProviderAddAccountOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2347,7 +2347,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderBaseReportOperation = __uuidof(IWebAccountProviderBaseReportOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderBaseReportOperation = _uuidof(IWebAccountProviderBaseReportOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2390,7 +2390,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderDeleteAccountOperation = __uuidof(IWebAccountProviderDeleteAccountOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderDeleteAccountOperation = _uuidof(IWebAccountProviderDeleteAccountOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2434,7 +2434,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE ReportCompleted(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderManageAccountOperation = __uuidof(IWebAccountProviderManageAccountOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderManageAccountOperation = _uuidof(IWebAccountProviderManageAccountOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2472,7 +2472,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderOperation = __uuidof(IWebAccountProviderOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderOperation = _uuidof(IWebAccountProviderOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2527,7 +2527,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderRetrieveCookiesOperation = __uuidof(IWebAccountProviderRetrieveCookiesOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderRetrieveCookiesOperation = _uuidof(IWebAccountProviderRetrieveCookiesOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2576,7 +2576,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderSignOutAccountOperation = __uuidof(IWebAccountProviderSignOutAccountOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderSignOutAccountOperation = _uuidof(IWebAccountProviderSignOutAccountOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2618,7 +2618,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderSilentReportOperation = __uuidof(IWebAccountProviderSilentReportOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderSilentReportOperation = _uuidof(IWebAccountProviderSilentReportOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2656,7 +2656,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderTokenObjects = __uuidof(IWebAccountProviderTokenObjects);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderTokenObjects = _uuidof(IWebAccountProviderTokenObjects);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2697,7 +2697,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderTokenObjects2 = __uuidof(IWebAccountProviderTokenObjects2);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderTokenObjects2 = _uuidof(IWebAccountProviderTokenObjects2);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2747,7 +2747,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderTokenOperation = __uuidof(IWebAccountProviderTokenOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderTokenOperation = _uuidof(IWebAccountProviderTokenOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2786,7 +2786,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE ReportUserCanceled(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountProviderUIReportOperation = __uuidof(IWebAccountProviderUIReportOperation);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountProviderUIReportOperation = _uuidof(IWebAccountProviderUIReportOperation);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2839,7 +2839,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebAccountScopeManagerStatics = __uuidof(IWebAccountScopeManagerStatics);
+                        extern MIDL_CONST_ID IID& IID_IWebAccountScopeManagerStatics = _uuidof(IWebAccountScopeManagerStatics);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2893,7 +2893,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebProviderTokenRequest = __uuidof(IWebProviderTokenRequest);
+                        extern MIDL_CONST_ID IID& IID_IWebProviderTokenRequest = _uuidof(IWebProviderTokenRequest);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2935,7 +2935,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebProviderTokenRequest2 = __uuidof(IWebProviderTokenRequest2);
+                        extern MIDL_CONST_ID IID& IID_IWebProviderTokenRequest2 = _uuidof(IWebProviderTokenRequest2);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -2982,7 +2982,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebProviderTokenRequest3 = __uuidof(IWebProviderTokenRequest3);
+                        extern MIDL_CONST_ID IID& IID_IWebProviderTokenRequest3 = _uuidof(IWebProviderTokenRequest3);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -3022,7 +3022,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebProviderTokenResponse = __uuidof(IWebProviderTokenResponse);
+                        extern MIDL_CONST_ID IID& IID_IWebProviderTokenResponse = _uuidof(IWebProviderTokenResponse);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -3063,7 +3063,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWebProviderTokenResponseFactory = __uuidof(IWebProviderTokenResponseFactory);
+                        extern MIDL_CONST_ID IID& IID_IWebProviderTokenResponseFactory = _uuidof(IWebProviderTokenResponseFactory);
                     } /* Provider */
                 } /* Web */
             } /* Authentication */
@@ -3106,12 +3106,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountMapManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountScopeManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountMapManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountScopeManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -7866,12 +7866,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountMapManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountScopeManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics4 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountManagerStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountMapManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Authentication.Web.Provider.IWebAccountScopeManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

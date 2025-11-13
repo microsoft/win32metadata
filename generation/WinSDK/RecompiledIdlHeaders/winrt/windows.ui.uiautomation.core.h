@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_UIAUTOMATION_UIAUTOMATIONCONTRACT_VERSION)
@@ -761,7 +761,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAutomationRemoteOperationResult = __uuidof(IAutomationRemoteOperationResult);
+                    extern MIDL_CONST_ID IID& IID_IAutomationRemoteOperationResult = _uuidof(IAutomationRemoteOperationResult);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -797,7 +797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationConnectionBoundObjectProvider = __uuidof(ICoreAutomationConnectionBoundObjectProvider);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationConnectionBoundObjectProvider = _uuidof(ICoreAutomationConnectionBoundObjectProvider);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -839,7 +839,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationRegistrarStatics = __uuidof(ICoreAutomationRegistrarStatics);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationRegistrarStatics = _uuidof(ICoreAutomationRegistrarStatics);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -894,7 +894,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperation = __uuidof(ICoreAutomationRemoteOperation);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperation = _uuidof(ICoreAutomationRemoteOperation);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -933,7 +933,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperation2 = __uuidof(ICoreAutomationRemoteOperation2);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperation2 = _uuidof(ICoreAutomationRemoteOperation2);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -981,7 +981,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperationContext = __uuidof(ICoreAutomationRemoteOperationContext);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperationContext = _uuidof(ICoreAutomationRemoteOperationContext);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1024,7 +1024,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperationExtensionProvider = __uuidof(ICoreAutomationRemoteOperationExtensionProvider);
+                    extern MIDL_CONST_ID IID& IID_ICoreAutomationRemoteOperationExtensionProvider = _uuidof(ICoreAutomationRemoteOperationExtensionProvider);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1084,7 +1084,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationClientSession = __uuidof(IRemoteAutomationClientSession);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationClientSession = _uuidof(IRemoteAutomationClientSession);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1128,7 +1128,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationClientSessionFactory = __uuidof(IRemoteAutomationClientSessionFactory);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationClientSessionFactory = _uuidof(IRemoteAutomationClientSessionFactory);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1169,7 +1169,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationConnectionRequestedEventArgs = __uuidof(IRemoteAutomationConnectionRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationConnectionRequestedEventArgs = _uuidof(IRemoteAutomationConnectionRequestedEventArgs);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1207,7 +1207,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationDisconnectedEventArgs = __uuidof(IRemoteAutomationDisconnectedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationDisconnectedEventArgs = _uuidof(IRemoteAutomationDisconnectedEventArgs);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1245,7 +1245,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationServerStatics = __uuidof(IRemoteAutomationServerStatics);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationServerStatics = _uuidof(IRemoteAutomationServerStatics);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */
@@ -1286,7 +1286,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRemoteAutomationWindow = __uuidof(IRemoteAutomationWindow);
+                    extern MIDL_CONST_ID IID& IID_IRemoteAutomationWindow = _uuidof(IRemoteAutomationWindow);
                 } /* Core */
             } /* UIAutomation */
         } /* UI */

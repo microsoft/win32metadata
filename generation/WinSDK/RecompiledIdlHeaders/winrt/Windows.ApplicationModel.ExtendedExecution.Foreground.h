@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -390,7 +390,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IExtendedExecutionForegroundRevokedEventArgs = __uuidof(IExtendedExecutionForegroundRevokedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IExtendedExecutionForegroundRevokedEventArgs = _uuidof(IExtendedExecutionForegroundRevokedEventArgs);
                 } /* Foreground */
             } /* ExtendedExecution */
         } /* ApplicationModel */
@@ -450,7 +450,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IExtendedExecutionForegroundSession = __uuidof(IExtendedExecutionForegroundSession);
+                    extern MIDL_CONST_ID IID& IID_IExtendedExecutionForegroundSession = _uuidof(IExtendedExecutionForegroundSession);
                 } /* Foreground */
             } /* ExtendedExecution */
         } /* ApplicationModel */

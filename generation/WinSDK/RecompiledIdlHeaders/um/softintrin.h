@@ -22,7 +22,7 @@ Environment:
 
 #pragma once
 
-#if defined(_M_ARM64EC) || ((defined(_M_IX86) || defined(_M_AMD64) || defined(_M_ARM64)) && defined(USE_SOFT_INTRINSICS))
+#if defined(_M_ARM64EC) || ((defined(_M_IX86) || defined(_M_AMD64)) && defined(USE_SOFT_INTRINSICS))
 
 #include <widemath.h>                // 64-bit and 128-bit math helper functions
 
@@ -37,111 +37,57 @@ extern "C"
 //  Re-map intrinsic names to inline functions that use WideMath.
 //
 
-__forceinline uint64_t __U64(const __m64 V) { uint64_t *T = (uint64_t *)&V; return *T; }
+static __forceinline uint64_t __U64(const __m64 V) { uint64_t *T = (uint64_t *)&V; return *T; }
 
-__forceinline __m64 __MI64(const uint64_t U) { __m64 *T = (__m64 *)&U; return *T; }
+static __forceinline __m64 __MI64(const uint64_t U) { __m64 *T = (__m64 *)&U; return *T; }
 
-__forceinline
-uint128_t __S128(const __m128  V)
-{
-    uint128_t T;
-    T.Q[0] = V.m128_u64[0];
-    T.Q[1] = V.m128_u64[1];
-    return T;
-}
+static __forceinline uint128_t __S128(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *T; }
+static __forceinline uint128_t __U128(const __m128i V) { uint128_t *T = (uint128_t *)&V; return *T; }
+static __forceinline uint128_t __D128(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *T; }
 
-__forceinline
-uint128_t __U128(const __m128i V)
-{
-    uint128_t T;
-    T.Q[0] = V.m128i_u64[0];
-    T.Q[1] = V.m128i_u64[1];
-    return T;
-}
+static __forceinline uint32_t  __S128D0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
+static __forceinline uint32_t  __S128D1(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[1]; }
+static __forceinline uint32_t  __S128D2(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[2]; }
+static __forceinline uint32_t  __S128D3(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[3]; }
 
-__forceinline
-uint128_t __D128(const __m128d V)
-{
-    uint128_t T;
-    T.F64[0] = V.m128d_f64[0];
-    T.F64[1] = V.m128d_f64[1];
-    return T;
-}
+static __forceinline uint32_t  __U128W0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->W[0]; }
+static __forceinline uint32_t  __U128D0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
+static __forceinline uint64_t __U128Q0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __U128Q1(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
 
-__forceinline uint32_t  __S128D0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
-__forceinline uint32_t  __S128D1(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[1]; }
-__forceinline uint32_t  __S128D2(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[2]; }
-__forceinline uint32_t  __S128D3(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[3]; }
+static __forceinline uint64_t __D128Q0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __D128Q1(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline uint64_t __S128Q0(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __S128Q1(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
 
-__forceinline uint32_t  __U128W0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->W[0]; }
-__forceinline uint32_t  __U128D0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
-__forceinline uint64_t __U128Q0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-__forceinline uint64_t __U128Q1(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline double __D128F0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *(double *)&T->Q[0]; }
+static __forceinline float  __S128F0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *(float *)&T->D[0]; }
 
-__forceinline uint64_t __D128Q0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-__forceinline uint64_t __D128Q1(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
-__forceinline uint64_t __S128Q0(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-__forceinline uint64_t __S128Q1(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline uint128_t __IMM8_128(const uint64_t C) { uint128_t T; T.Q[0] = C & 0xff; T.Q[1] = 0; return T; }
 
-__forceinline double __D128F0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *(double *)&T->Q[0]; }
-__forceinline float  __S128F0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *(float *)&T->D[0]; }
+static __forceinline __m128  __MM128(const uint128_t U) { __m128  *T = (__m128  *)&U; return *T; }
+static __forceinline __m128i __MI128(const uint128_t U) { __m128i *T = (__m128i *)&U; return *T; }
+static __forceinline __m128d __MD128(const uint128_t U) { __m128d *T = (__m128d *)&U; return *T; }
 
-__forceinline uint128_t __IMM8_128(const uint64_t C) { uint128_t T; T.Q[0] = C & 0xff; T.Q[1] = 0; return T; }
-
-__forceinline
-__m128  __MM128(const uint128_t U)
-{
-    __m128  T;
-    T.m128_u64[0] = U.Q[0];
-    T.m128_u64[1] = U.Q[1];
-    return T;
-}
-
-__forceinline
-__m128i __MI128(const uint128_t U)
-{
-    __m128i T;
-    T.m128i_u64[0] = U.Q[0];
-    T.m128i_u64[1] = U.Q[1];
-    return T;
-}
-
-__forceinline
-__m128d __MD128(const uint128_t U)
-{
-    __m128d T;
-    T.m128d_f64[0] = U.F64[0];
-    T.m128d_f64[1] = U.F64[1];
-    return T;
-}
-
-__forceinline uint128_t __MAKEU8_U128(const uint8_t A, const uint8_t B, const uint8_t C, const uint8_t D, const uint8_t E, const uint8_t F, const uint8_t G, const uint8_t H, const uint8_t I, const uint8_t J, const uint8_t K, const uint8_t L, const uint8_t M, const uint8_t N, const uint8_t O, const uint8_t P)
+static __forceinline uint128_t __MAKEU8_U128(const uint8_t A, const uint8_t B, const uint8_t C, const uint8_t D, const uint8_t E, const uint8_t F, const uint8_t G, const uint8_t H, const uint8_t I, const uint8_t J, const uint8_t K, const uint8_t L, const uint8_t M, const uint8_t N, const uint8_t O, const uint8_t P)
 { uint128_t T; T.B[0] = A; T.B[1] = B; T.B[2] = C; T.B[3] = D; T.B[4] = E; T.B[5] = F; T.B[6] = G; T.B[7] = H; T.B[8] = I; T.B[9] = J; T.B[10] = K; T.B[11] = L; T.B[12] = M; T.B[13] = N; T.B[14] = O; T.B[15] = P; return T; }
-__forceinline uint128_t __MAKEU8X16_U128(const uint8_t A)
-{ uint128_t T; T.B[0] = A; T.B[1] = A; T.B[2] = A; T.B[3] = A; T.B[4] = A; T.B[5] = A; T.B[6] = A; T.B[7] = A; T.B[8] = A; T.B[9] = A; T.B[10] = A; T.B[11] = A; T.B[12] = A; T.B[13] = A; T.B[14] = A; T.B[15] = A; return T; }
-__forceinline uint128_t __MAKEU16_U128(const uint16_t A, const uint16_t B, const uint16_t C, const uint16_t D, const uint16_t E, const uint16_t F, const uint16_t G, const uint16_t H)
+static __forceinline uint128_t __MAKEU16_U128(const uint16_t A, const uint16_t B, const uint16_t C, const uint16_t D, const uint16_t E, const uint16_t F, const uint16_t G, const uint16_t H)
 { uint128_t T; T.W[0] = A; T.W[1] = B; T.W[2] = C; T.W[3] = D; T.W[4] = E; T.W[5] = F; T.W[6] = G; T.W[7] = H; return T; }
-__forceinline uint128_t __MAKEU16X8_U128(const uint16_t A)
-{ uint128_t T; T.W[0] = A; T.W[1] = A; T.W[2] = A; T.W[3] = A; T.W[4] = A; T.W[5] = A; T.W[6] = A; T.W[7] = A; return T; }
-__forceinline uint128_t __MAKEU32_U128(const uint32_t A, const uint32_t B, const uint32_t C, const uint32_t D)
-{ uint128_t T; T.Q[0] = A | ((uint64_t)B << 32); T.Q[1] = C | ((uint64_t)D << 32); return T; }
-__forceinline uint128_t __MAKEU32X4_U128(const uint32_t A)
-{ return __MAKEU32_U128(A, A, A, A); }
-__forceinline uint128_t __MAKEU64_U128(const uint64_t A, const uint64_t B)
+static __forceinline uint128_t __MAKEU32_U128(const uint32_t A, const uint32_t B, const uint32_t C, const uint32_t D)
+{ uint128_t T; T.D[0] = A; T.D[1] = B; T.D[2] = C; T.D[3] = D; return T; }
+static __forceinline uint128_t __MAKEU64_U128(const uint64_t A, const uint64_t B)
 { uint128_t T; T.Q[0] = A; T.Q[1] = B; return T; }
-__forceinline uint128_t __MAKEU64X2_U128(const uint64_t A)
-{ uint128_t T; T.Q[0] = A; T.Q[1] = A; return T; }
-__forceinline uint128_t __MAKEF32_U128(const float A, const float B, const float C, const float D)
+static __forceinline uint128_t __MAKEF32_U128(const float A, const float B, const float C, const float D)
 { uint128_t T; T.D[0] = *(uint32_t *)&A; T.D[1] = *(uint32_t *)&B; T.D[2] = *(uint32_t *)&C; T.D[3] = *(uint32_t *)&D ; return T; }
-__forceinline uint128_t __MAKEF64_U128(const double A, const double B)
+static __forceinline uint128_t __MAKEF64_U128(const double A, const double B)
 { uint128_t T; T.Q[0] = *(uint64_t *)&A; T.Q[1] = *(uint64_t *)&B; return T; }
 
-__forceinline uint128_t __INSERT8_U128(const uint128_t A, const uint8_t B, const int C) { uint128_t T = A; T.B[C & 0b1111] = B; return T; }
-__forceinline uint128_t __INSERT16_U128(const uint128_t A, const uint16_t B, const int C) { uint128_t T = A; T.W[C & 0b111] = B; return T; }
-__forceinline uint128_t __INSERT32_U128(const uint128_t A, const uint32_t B, const int C) { uint128_t T = A; T.D[C & 0b011] = B; return T; }
-__forceinline uint128_t __INSERT64_U128(const uint128_t A, const uint64_t B, const int C) { uint128_t T = A; T.Q[C & 0b001] = B; return T; }
+static __forceinline uint128_t __INSERT8_U128(const uint128_t A, const uint8_t B, const int C) { uint128_t T = A; T.B[C & 0b1111] = B; return T; }
+static __forceinline uint128_t __INSERT16_U128(const uint128_t A, const uint16_t B, const int C) { uint128_t T = A; T.W[C & 0b111] = B; return T; }
+static __forceinline uint128_t __INSERT32_U128(const uint128_t A, const uint32_t B, const int C) { uint128_t T = A; T.D[C & 0b011] = B; return T; }
+static __forceinline uint128_t __INSERT64_U128(const uint128_t A, const uint64_t B, const int C) { uint128_t T = A; T.Q[C & 0b001] = B; return T; }
 
-__forceinline void __MASKMOVEU128(const  uint128_t A, const uint128_t M, char *Mem)
+static __forceinline void __MASKMOVEU128(const  uint128_t A, const uint128_t M, char *Mem)
 {
     for (unsigned i = 0; i < 16; i++)
     {
@@ -152,7 +98,7 @@ __forceinline void __MASKMOVEU128(const  uint128_t A, const uint128_t M, char *M
     }
 }
 
-__forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1 : 0; }
+static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1 : 0; }
 
 //
 // For a complete list of X64 intrinsics, see:
@@ -161,7 +107,7 @@ __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1
 
 // Misc. integer intrinsics not already defined in winnt.h
 
-#if defined(_M_ARM64) || defined(_M_ARM64EC)
+#if defined(_M_ARM64EC)
 
 #define _udiv128(h,l,d,r)               UDIV128((h),(l),(d),(r))
 #define _div128(h,l,d,r)                SDIV128((h),(l),(d),(r))
@@ -232,7 +178,7 @@ __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1
 
 // AES
 
-#if defined(_M_ARM64) || defined(_M_ARM64EC)
+#if defined(_M_ARM64EC)
 
 #define _mm_aesdec_si128(a,b)           __MI128(AESDEC128(__U128(a),__U128(b)))
 #define _mm_aesenc_si128(a,b)           __MI128(AESENC128(__U128(a),__U128(b)))
@@ -376,23 +322,23 @@ __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1
 
 // CVTPD2DQ CVTPS2DQ
 
-#define _mm_cvtps_epi32(a)              __MI128(CVTPS2DQ128(__S128(a), _MM_FROUND_TO_NEAREST_INT))
-#define _mm_cvttps_epi32(a)             __MI128(CVTPS2DQ128(__S128(a), _MM_FROUND_TO_ZERO))
-#define _mm_cvtpd_epi32(a)              __MI128(CVTPD2DQ128(__D128(a), _MM_FROUND_TO_NEAREST_INT))
-#define _mm_cvttpd_epi32(a)             __MI128(CVTPD2DQ128(__D128(a), _MM_FROUND_TO_ZERO))
+#define _mm_cvtps_epi32(a)              __MI128(CVTPS2DQ128(__S128(a), _MM_ROUND_MODE_NEAREST))
+#define _mm_cvttps_epi32(a)             __MI128(CVTPS2DQ128(__S128(a), _MM_ROUND_MODE_TOWARD_ZERO))
+#define _mm_cvtpd_epi32(a)              __MI128(CVTPD2DQ128(__D128(a), _MM_ROUND_MODE_NEAREST))
+#define _mm_cvttpd_epi32(a)             __MI128(CVTPD2DQ128(__D128(a), _MM_ROUND_MODE_TOWARD_ZERO))
 
 // CVTSI2SS CVTSS2SI CVTTSS2SI CVTSD2SI CVTTSD2SI
 
-#define _mm_cvt_ss2si(a)                (int)_CVTSS2SI32(__S128D0(a), _MM_FROUND_TO_NEAREST_INT)
-#define _mm_cvtt_ss2si(a)               (int)_CVTSS2SI32(__S128D0(a), _MM_FROUND_TO_ZERO)
+#define _mm_cvt_ss2si(a)                (int)_CVTSS2SI32(__S128D0(a), _MM_ROUND_MODE_NEAREST)
+#define _mm_cvtt_ss2si(a)               (int)_CVTSS2SI32(__S128D0(a), _MM_ROUND_MODE_TOWARD_ZERO)
 #define _mm_cvt_si2ss(s,a)              __MM128(CVTSI2SS128(__S128(s),(int32_t)(a)))
 #define _mm_cvti64_ss(s,a)              __MM128(CVTSI2SS128(__S128(s),(int64_t)(a)))
-#define _mm_cvtsd_si32(a)               (int)_CVTSD2SI32(__D128Q0(a), _MM_FROUND_TO_NEAREST_INT)
-#define _mm_cvttsd_si32(a)              (int)_CVTSD2SI32(__D128Q0(a), _MM_FROUND_TO_ZERO)
-#define _mm_cvtss_si64x(a)              (int64_t)_CVTSD2SI64(CVTSS2SD64(__S128D0(a)), _MM_FROUND_TO_NEAREST_INT)
-#define _mm_cvttss_si64x(a)             (int64_t)_CVTSD2SI64(CVTSS2SD64(__S128D0(a)), _MM_FROUND_TO_ZERO)
-#define _mm_cvtsd_si64x(a)              (int64_t)_CVTSD2SI64(__D128Q0(a), _MM_FROUND_TO_NEAREST_INT)
-#define _mm_cvttsd_si64x(a)             (int64_t)_CVTSD2SI64(__D128Q0(a), _MM_FROUND_TO_ZERO)
+#define _mm_cvtsd_si32(a)               (int)_CVTSD2SI32(__D128Q0(a), _MM_ROUND_MODE_NEAREST)
+#define _mm_cvttsd_si32(a)              (int)_CVTSD2SI32(__D128Q0(a), _MM_ROUND_MODE_TOWARD_ZERO)
+#define _mm_cvtss_si64x(a)              (int64_t)_CVTSD2SI64(CVTSS2SD64(__S128D0(a)), _MM_ROUND_MODE_NEAREST)
+#define _mm_cvttss_si64x(a)             (int64_t)_CVTSD2SI64(CVTSS2SD64(__S128D0(a)), _MM_ROUND_MODE_TOWARD_ZERO)
+#define _mm_cvtsd_si64x(a)              (int64_t)_CVTSD2SI64(__D128Q0(a), _MM_ROUND_MODE_NEAREST)
+#define _mm_cvttsd_si64x(a)             (int64_t)_CVTSD2SI64(__D128Q0(a), _MM_ROUND_MODE_TOWARD_ZERO)
 
 // CVT other...
 
@@ -953,10 +899,10 @@ __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1
 #define _mm_set_sd(a)                   __MD128(__MAKEF64_U128((a),0))
 #define _mm_set_ss(a)                   __MM128(__MAKEF32_U128((a),0,0,0))
 
-#define _mm_set1_epi8(a)                __MI128(__MAKEU8X16_U128((uint8_t)(a)))
-#define _mm_set1_epi16(a)               __MI128(__MAKEU16X8_U128((uint16_t)(a)))
-#define _mm_set1_epi32(a)               __MI128(__MAKEU32X4_U128((uint32_t)(a)))
-#define _mm_set1_epi64x(a)              __MI128(__MAKEU64X2_U128((uint64_t)(a)))
+#define _mm_set1_epi8(a)                __MI128(BROADCAST128((uint8_t)(a), _BITS_PER_BYTE))
+#define _mm_set1_epi16(a)               __MI128(BROADCAST128((uint16_t)(a), _BITS_PER_WORD))
+#define _mm_set1_epi32(a)               __MI128(BROADCAST128((uint32_t)(a), _BITS_PER_LONG))
+#define _mm_set1_epi64x(a)              __MI128(BROADCAST128((uint64_t)(a), _BITS_PER_QUAD))
 
 #if !defined(_mm_set1_pd)
 #define _mm_set1_pd(a)                  __MD128(__MAKEF64_U128((a),(a)))
@@ -990,9 +936,9 @@ __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1))) ? 1
 // X64 non-SIMD operations
 //
 
-#if defined(_M_ARM64) || defined(_M_ARM64EC)
+#if defined(_M_ARM64EC)
 
-__forceinline
+static __forceinline
 void __aa64_pause(void)
 {
     __dmb(_ARM64_BARRIER_ISHST);
@@ -1139,229 +1085,6 @@ unsigned char _subborrow_u64(
     return CarryVector >> 63;
 }
 
-__forceinline
-unsigned int __andn_u32(
-    unsigned int _Source1,
-    unsigned int _Source2
-)
-{
-    return (~_Source1) & _Source2;
-}
-
-__forceinline
-unsigned __int64 __andn_u64(
-    unsigned __int64 _Source1,
-    unsigned __int64 _Source2
-)
-{
-    return (~_Source1) & _Source2;
-}
-
-#define _andn_u32(_Source1, _Source2) __andn_u32(_Source1, _Source2)
-#define _andn_u64(_Source1, _Source2) __andn_u64(_Source1, _Source2)
-
-__forceinline
-unsigned int __bextr_u32(
-    unsigned int _Source,
-    unsigned int _Start,
-    unsigned int _Len
-)
-{
-    return (_Source >> _Start) & ~(~0U << _Len);
-}
-
-__forceinline
-unsigned __int64 __bextr_u64(
-    unsigned __int64 _Source,
-    unsigned __int64 _Start,
-    unsigned __int64 _Len
-)
-{
-    return (_Source >> _Start) & ~(~0ULL << _Len);
-}
-
-#define _bextr_u32(_Source, _Start, _Len) __bextr_u32(_Source, _Start, _Len)
-#define _bextr_u64(_Source, _Start, _Len) __bextr_u64(_Source, _Start, _Len)
-
-__forceinline
-unsigned int __bextr2_u32(
-    unsigned int _Source,
-    unsigned int _Control
-)
-{
-    unsigned int _Start = _Control & 0xFF;
-    unsigned int _Len = (_Control >> 8) & 0xFF;
-    return __bextr_u32(_Source, _Start, _Len);
-}
-
-__forceinline
-unsigned __int64 __bextr2_u64(
-    unsigned __int64 _Source,
-    unsigned __int64 _Control
-)
-{
-    unsigned int _Start = _Control & 0xFF;
-    unsigned int _Len = (_Control >> 8) & 0xFF;
-    return __bextr_u64(_Source, _Start, _Len);
-}
-
-#define _bextr2_u32(_Source, _Control) __bextr2_u32(_Source, _Control)
-#define _bextr2_u64(_Source, _Control) __bextr2_u64(_Source, _Control)
-
-__forceinline
-unsigned int __blsi_u32(
-    unsigned int _Source
-)
-{
-    return (0U - _Source) & _Source;
-}
-
-__forceinline
-unsigned __int64 __blsi_u64(
-    unsigned __int64 _Source
-)
-{
-    return (0ULL - _Source) & _Source;
-}
-
-#define _blsi_u32(x) __blsi_u32(x)
-#define _blsi_u64(x) __blsi_u64(x)
-
-__forceinline
-unsigned int __blsmsk_u32(
-    unsigned int _Source
-)
-{
-    return (_Source - 1) ^ _Source;
-}
-
-__forceinline
-unsigned __int64 __blsmsk_u64(
-    unsigned __int64 _Source
-)
-{
-    return (_Source - 1) ^ _Source;
-}
-
-#define _blsmsk_u32(x) __blsmsk_u32(x)
-#define _blsmsk_u64(x) __blsmsk_u64(x)
-
-__forceinline
-unsigned int __blsr_u32(
-    unsigned int _Source
-)
-{
-    return (_Source - 1) & _Source;
-}
-
-__forceinline
-unsigned __int64 __blsr_u64(
-    unsigned __int64 _Source
-)
-{
-    return (_Source - 1) & _Source;
-}
-
-#define _blsr_u32(x) __blsr_u32(x)
-#define _blsr_u64(x) __blsr_u64(x)
-
-// __lzcnt __lzcnt16 __lzcnt64 are builtin to clang and providing them here errors.
-#if !defined(__clang__)
-
-__forceinline
-unsigned int __lzcnt(
-   unsigned int Source
-)
-{
-    unsigned long Bit = 0;
-    _BitScanReverse(&Bit, Source);
-    return Source ? Bit ^ 31 : 32;
-}
-
-__forceinline
-unsigned short __lzcnt16(
-   unsigned short Source
-)
-{
-    return (unsigned short)(__lzcnt(Source) - 16u);
-}
-
-__forceinline
-unsigned __int64 __lzcnt64(
-   unsigned __int64 Source
-)
-{
-    unsigned long Bit = 0;
-    _BitScanReverse64(&Bit, Source);
-    return Source ? Bit ^ 63 : 64;
-}
-
-#endif
-
-#define _lzcnt_u32(x) __lzcnt(x)
-#define _lzcnt_u64(x) __lzcnt64(x)
-
-#if defined(__clang__)
-__forceinline
-unsigned __int16 __tzcnt_u16(
-    unsigned __int16 Source
-)
-{
-    unsigned __int16 Result = Source ? (unsigned __int16) __builtin_ctz(Source) : (unsigned __int16) 16;
-    return Result <= (unsigned __int16) 16 ? Result : (unsigned __int16) 16;
-}
-
-__forceinline
-unsigned int __tzcnt_u32(
-    unsigned int Source
-)
-{
-    return Source ? __builtin_ctz(Source) : 32;
-}
-
-__forceinline
-unsigned __int64 __tzcnt_u64(
-    unsigned __int64 Source
-)
-{
-    return Source ? (unsigned __int64) __builtin_ctzll(Source) : (unsigned __int64) 64;
-}
-
-#else // defined(__clang__)
-// The MSVC implementations for _CountTrailingZeros() with 0 parameters are defined on ARM64,
-// so we don't need to do the same check like clang does.
-
-__forceinline
-unsigned __int16 __tzcnt_u16(
-    unsigned __int16 Source
-)
-{
-    unsigned __int16 Result = (unsigned __int16) _CountTrailingZeros(Source);
-    return Result <= (unsigned __int16) 16 ? Result : (unsigned __int16) 16;
-}
-
-__forceinline
-unsigned int __tzcnt_u32(
-    unsigned int Source
-)
-{
-    return _CountTrailingZeros((unsigned long)Source);
-}
-
-__forceinline
-unsigned __int64 __tzcnt_u64(
-    unsigned __int64 Source
-)
-{
-    return (unsigned __int64) _CountTrailingZeros64(Source);
-}
-
-#endif // !defined(__clang__)
-
-#define _tzcnt_u16(x) __tzcnt_u16(x)
-#define _tzcnt_u32(x) __tzcnt_u32(x)
-#define _tzcnt_u64(x) __tzcnt_u64(x)
-
 //
 // __movs* and __stos* while similar to memcpy and memset intrinsics do not map 1-to-1
 // for the word, long, and quad cases.  As it turns out implementing them as inline
@@ -1470,14 +1193,6 @@ void __stosq(
     {
         *Destination++ = Data;
     }
-}
-
-__forceinline
-void __ud2(
-    void
-)
-{
-    __emit(0);
 }
 
 #define _udiv64(n,d,r)                  _UDIV64((n),(d),(r))

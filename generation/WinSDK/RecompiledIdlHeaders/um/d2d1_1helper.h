@@ -615,9 +615,7 @@ namespace D2D1
         _In_opt_ ID2D1ColorContext *colorContext = NULL
         )
     {
-        D2D1_BITMAP_PROPERTIES1 bitmapProperties;
-        memset(&bitmapProperties, 0, sizeof(bitmapProperties));
-        bitmapProperties =
+        D2D1_BITMAP_PROPERTIES1 bitmapProperties =
         {
             pixelFormat,
             dpiX, dpiY,

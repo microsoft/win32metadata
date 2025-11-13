@@ -116,7 +116,6 @@ Notes:
 #define FACILITY_FILTER_MANAGER          0x1C
 #define FACILITY_MONITOR                 0x1D
 #define FACILITY_GRAPHICS_KERNEL         0x1E
-#define FACILITY_CAMERA                  0x1F
 #define FACILITY_DRIVER_FRAMEWORK        0x20
 #define FACILITY_FVE_ERROR_CODE          0x21
 #define FACILITY_FWP_ERROR_CODE          0x22
@@ -150,10 +149,7 @@ Notes:
 #define FACILITY_LICENSING               0xEA
 #define FACILITY_PLATFORM_MANIFEST       0xEB
 #define FACILITY_APP_EXEC                0xEC
-#define FACILITY_UNIONFS                 0xED
-#define FACILITY_PLATFORM_RUNTIME_MECHANISM 0xEE
-#define FACILITY_WIN_ACCEL               0xEF
-#define FACILITY_MAXIMUM_VALUE           0xF0
+#define FACILITY_MAXIMUM_VALUE           0xED
 
 
 //
@@ -1327,15 +1323,6 @@ Notes:
 #define STATUS_EMULATION_SYSCALL         ((NTSTATUS)0x40000039L)
 
 //
-// MessageId: STATUS_EMULATION_FLOAT_EXCEPTION
-//
-// MessageText:
-//
-// Exception status code used by ARM64EC emulation subsystem.
-//
-#define STATUS_EMULATION_FLOAT_EXCEPTION ((NTSTATUS)0x4000003AL)
-
-//
 // MessageId: DBG_REPLY_LATER
 //
 // MessageText:
@@ -1925,15 +1912,6 @@ Notes:
 // A bugcheck was re-raised as an exception.
 //
 #define STATUS_RECOVERABLE_BUGCHECK      ((NTSTATUS)0x80000034L)
-
-//
-// MessageId: STATUS_PTE_CHANGE_NOT_COMPLETED
-//
-// MessageText:
-//
-// The secure page table update could not be completed due to a temporary address exclusion.
-//
-#define STATUS_PTE_CHANGE_NOT_COMPLETED  ((NTSTATUS)0x80000035L)
 
 //
 // MessageId: DBG_EXCEPTION_NOT_HANDLED
@@ -3066,7 +3044,7 @@ Notes:
 //
 // MessageText:
 //
-// When trying to update a password, this status indicates that the password does not meet the length, complexity, or history requirements of the machine or domain. Try increasing the length of your password, along with including upper and lowercase characters, numbers, and symbols.
+// When trying to update a password, this status indicates that some password update rule has been violated. For example, the password may not meet length criteria.
 //
 #define STATUS_PASSWORD_RESTRICTION      ((NTSTATUS)0xC000006CL)     // ntsubauth
 
@@ -10556,40 +10534,13 @@ Notes:
 #define STATUS_NOT_SUPPORTED_WITH_CACHED_HANDLE ((NTSTATUS)0xC00004D5L)
 
 //
-// MessageId: STATUS_PDE_ENCRYPTION_UNAVAILABLE_FAILURE
-//
-// MessageText:
-//
-// Personal Data Encryption keys to encrypt data are currently unavailable due to a failure.
-//
-#define STATUS_PDE_ENCRYPTION_UNAVAILABLE_FAILURE ((NTSTATUS)0xC00004D6L)
-
-//
-// MessageId: STATUS_PDE_DECRYPTION_UNAVAILABLE_FAILURE
-//
-// MessageText:
-//
-// Personal Data Encryption keys to decrypt data are currently unavailable due to a failure.
-//
-#define STATUS_PDE_DECRYPTION_UNAVAILABLE_FAILURE ((NTSTATUS)0xC00004D7L)
-
-//
-// MessageId: STATUS_PDE_DECRYPTION_UNAVAILABLE
-//
-// MessageText:
-//
-// Personal Data Encryption keys to decrypt data are currently unavailable.
-//
-#define STATUS_PDE_DECRYPTION_UNAVAILABLE ((NTSTATUS)0xC00004D8L)
-
-//
 // MessageId: STATUS_VOLUME_UPGRADE_NOT_NEEDED
 //
 // MessageText:
 //
 // Volume format is up to date already.
 //
-#define STATUS_VOLUME_UPGRADE_NOT_NEEDED ((NTSTATUS)0x400004D9L)
+#define STATUS_VOLUME_UPGRADE_NOT_NEEDED ((NTSTATUS)0xC00004D9L)
 
 //
 // MessageId: STATUS_VOLUME_UPGRADE_PENDING
@@ -10598,7 +10549,7 @@ Notes:
 //
 // Volume upgrade is pending.  A reboot or re-mount of the volume is required.
 //
-#define STATUS_VOLUME_UPGRADE_PENDING    ((NTSTATUS)0x400004DAL)
+#define STATUS_VOLUME_UPGRADE_PENDING    ((NTSTATUS)0xC00004DAL)
 
 //
 // MessageId: STATUS_VOLUME_UPGRADE_DISABLED
@@ -10646,40 +10597,13 @@ Notes:
 #define STATUS_CANT_ATTACH_TO_DEV_VOLUME ((NTSTATUS)0xC00004DFL)
 
 //
-// MessageId: STATUS_MEMORY_DECOMPRESSION_FAILURE
-//
-// MessageText:
-//
-// The data stored in compressed memory falied to be decompressed.
-//
-#define STATUS_MEMORY_DECOMPRESSION_FAILURE ((NTSTATUS)0xC00004E0L)
-
-//
 // MessageId: STATUS_INVALID_CONFIG_VALUE
 //
 // MessageText:
 //
 // The configured value is not valid.
 //
-#define STATUS_INVALID_CONFIG_VALUE      ((NTSTATUS)0xC00004E1L)
-
-//
-// MessageId: STATUS_MEMORY_DECOMPRESSION_HW_ERROR
-//
-// MessageText:
-//
-// The data stored in compressed memory falied to be decompressed due to encountering an uncorrectable hardware memory error.
-//
-#define STATUS_MEMORY_DECOMPRESSION_HW_ERROR ((NTSTATUS)0xC00004E2L)
-
-//
-// MessageId: STATUS_VOLUME_ROLLBACK_DETECTED
-//
-// MessageText:
-//
-// The operation was aborted because the observed volume identity or current state was not expected.
-//
-#define STATUS_VOLUME_ROLLBACK_DETECTED  ((NTSTATUS)0xC00004E3L)
+#define STATUS_INVALID_CONFIG_VALUE      ((NTSTATUS)0xC00004E0L)
 
 
 //     **** New SYSTEM error codes can be inserted here ****
@@ -11743,42 +11667,6 @@ Notes:
 #define STATUS_VRF_VOLATILE_SETTINGS_CONFLICT ((NTSTATUS)0xC0000C0FL)
 
 //
-// MessageId: STATUS_CAR_LKD_IN_PROGRESS
-//
-// MessageText:
-//
-// Live memory dump generation is in progress.
-//
-#define STATUS_CAR_LKD_IN_PROGRESS       ((NTSTATUS)0xC0000C10L)
-
-//
-// MessageId: STATUS_DIF_ZERO_SIZE_INFORMATION
-//
-// MessageText:
-//
-// There is no captured information.
-//
-#define STATUS_DIF_ZERO_SIZE_INFORMATION ((NTSTATUS)0xC0000C73L)
-
-//
-// MessageId: STATUS_DIF_DRIVER_PLUGIN_MISMATCH
-//
-// MessageText:
-//
-// The given rule class ID is not registered by the caller.
-//
-#define STATUS_DIF_DRIVER_PLUGIN_MISMATCH ((NTSTATUS)0xC0000C74L)
-
-//
-// MessageId: STATUS_DIF_DRIVER_THUNKS_NOT_ALLOWED
-//
-// MessageText:
-//
-// Driver thunks are not added when kernel verification is in effect.
-//
-#define STATUS_DIF_DRIVER_THUNKS_NOT_ALLOWED ((NTSTATUS)0xC0000C75L)
-
-//
 // MessageId: STATUS_DIF_IOCALLBACK_NOT_REPLACED
 //
 // MessageText:
@@ -12155,33 +12043,6 @@ Notes:
 //
 #define STATUS_LAPS_ENCRYPTION_REQUIRES_2016_DFL ((NTSTATUS)0xC000A08EL)
 
-//
-// MessageId: STATUS_LAPS_PROCESS_TERMINATED
-//
-// MessageText:
-//
-// The process was terminated by Windows Local Administrator Password Solution per the configured post-authentication-action policy.
-//
-#define STATUS_LAPS_PROCESS_TERMINATED   ((NTSTATUS)0x8000A08FL)
-
-//
-// MessageId: STATUS_DS_JET_RECORD_TOO_BIG
-//
-// MessageText:
-//
-// The Active Directory JET database page size limit for this request was exceeded.
-//
-#define STATUS_DS_JET_RECORD_TOO_BIG     ((NTSTATUS)0xC000A090L)
-
-//
-// MessageId: STATUS_DS_REPLICA_PAGE_SIZE_MISMATCH
-//
-// MessageText:
-//
-// The Active Directory JET database page size does not match on all Domain Controllers in this forest.
-//
-#define STATUS_DS_REPLICA_PAGE_SIZE_MISMATCH ((NTSTATUS)0xC000A091L)
-
 /*++
 
  MessageId's 0xa100 - 0xa120 (inclusive) are for the SMB Hash Generation Service.
@@ -12334,20 +12195,6 @@ Notes:
 // A run level switch is currently in progress.
 //
 #define STATUS_RUNLEVEL_SWITCH_IN_PROGRESS ((NTSTATUS)0xC000A146L)
-
-/*++
-
- MessageId's 0xa161 - 0xa180 (inclusive) are for API Set support.
-
---*/
-//
-// MessageId: STATUS_APISET_COMPOSE_FAILURE
-//
-// MessageText:
-//
-// An API Set schema extension failed to compose.
-//
-#define STATUS_APISET_COMPOSE_FAILURE    ((NTSTATUS)0xC000A161L)
 
 /*++
 
@@ -12897,15 +12744,6 @@ Notes:
 //
 #define STATUS_CLOUD_FILE_US_MESSAGE_TIMEOUT ((NTSTATUS)0xC000CF21L)
 
-//
-// MessageId: STATUS_CLOUD_FILE_HYDRATION_NOT_AVAILABLE
-//
-// MessageText:
-//
-// Cloud file cannot be retrieved from your cloud provider. Try again after responding to your cloud provider's request for action.
-//
-#define STATUS_CLOUD_FILE_HYDRATION_NOT_AVAILABLE ((NTSTATUS)0xC000CF22L)
-
 /*++
 
  End of Cloud Files specific messages.
@@ -12975,119 +12813,6 @@ Notes:
  End of File Snap specific messages.
 
 --*/
-
-//
-//  UnionFS error values
-//
-
-//
-// MessageId: STATUS_UNIONFS_CANNOT_CROSS_UNION
-//
-// MessageText:
-//
-// This operation is not allowed across unions.
-//
-#define STATUS_UNIONFS_CANNOT_CROSS_UNION ((NTSTATUS)0xC0ED0001L)
-
-//
-// MessageId: STATUS_UNIONFS_CANNOT_EXIT_UNION
-//
-// MessageText:
-//
-// This operation is not allowed to have a destination outside of a union.
-//
-#define STATUS_UNIONFS_CANNOT_EXIT_UNION ((NTSTATUS)0xC0ED0002L)
-
-//
-// MessageId: STATUS_UNIONFS_CANNOT_PRESERVE_LINK
-//
-// MessageText:
-//
-// This file has one or more hard links in the scratch layer.
-//
-#define STATUS_UNIONFS_CANNOT_PRESERVE_LINK ((NTSTATUS)0xC0ED0003L)
-
-//
-// MessageId: STATUS_UNIONFS_INVALID_TOMBSTONE_STATE
-//
-// MessageText:
-//
-// The tombstone cannot be created in or transitioned to the given state.
-//
-#define STATUS_UNIONFS_INVALID_TOMBSTONE_STATE ((NTSTATUS)0xC0ED0004L)
-
-//
-// MessageId: STATUS_UNIONFS_LAYERS_PRESENT
-//
-// MessageText:
-//
-// This union has attached layers preventing this operation.
-//
-#define STATUS_UNIONFS_LAYERS_PRESENT    ((NTSTATUS)0xC0ED0005L)
-
-//
-// MessageId: STATUS_UNIONFS_NESTED_LAYER
-//
-// MessageText:
-//
-// A union layer root cannot be a descendant of another layer root.
-//
-#define STATUS_UNIONFS_NESTED_LAYER      ((NTSTATUS)0xC0ED0006L)
-
-//
-// MessageId: STATUS_UNIONFS_UNION_DUPLICATE_ID
-//
-// MessageText:
-//
-// A union with this union ID already exists.
-//
-#define STATUS_UNIONFS_UNION_DUPLICATE_ID ((NTSTATUS)0xC0ED0007L)
-
-//
-// MessageId: STATUS_UNIONFS_INACTIVE_UNION
-//
-// MessageText:
-//
-// The union this operation is being performed on is inactive.
-//
-#define STATUS_UNIONFS_INACTIVE_UNION    ((NTSTATUS)0xC0ED0008L)
-
-//
-// MessageId: STATUS_UNIONFS_TOO_MANY_LAYERS
-//
-// MessageText:
-//
-// There are too many layers to construct this union.
-//
-#define STATUS_UNIONFS_TOO_MANY_LAYERS   ((NTSTATUS)0xC0ED0009L)
-
-//
-// MessageId: STATUS_UNIONFS_TOO_LATE
-//
-// MessageText:
-//
-// The UnionFS service is not available.
-//
-#define STATUS_UNIONFS_TOO_LATE          ((NTSTATUS)0xC0ED000AL)
-
-//
-// MessageId: STATUS_UNIONFS_NESTED_UNION
-//
-// MessageText:
-//
-// The operation cannot be supported because of a nested union.
-//
-#define STATUS_UNIONFS_NESTED_UNION      ((NTSTATUS)0xC0ED000BL)
-
-//
-// MessageId: STATUS_UNIONFS_NESTED_UNION_NOT_ALLOWED
-//
-// MessageText:
-//
-// An attempt was made to create a new union root as an ancestor or descendant of an existing union root, but the new union is not configured to allow nesting.
-//
-#define STATUS_UNIONFS_NESTED_UNION_NOT_ALLOWED ((NTSTATUS)0xC0ED000CL)
-
 
 //     **** New SYSTEM error codes can be inserted here ****
 
@@ -16611,15 +16336,6 @@ Notes:
 //
 #define STATUS_TRANSACTION_NOT_ENLISTED  ((NTSTATUS)0xC0190061L)
 
-//
-// MessageId: STATUS_ENLISTMENT_NOT_INITIALIZED
-//
-// MessageText:
-//
-// The transaction is linked to an enlistment that is not fully initialized yet.
-//
-#define STATUS_ENLISTMENT_NOT_INITIALIZED ((NTSTATUS)0xC0190062L)
-
 
 //
 //  CLFS (common log file system) error values
@@ -17383,15 +17099,6 @@ Notes:
 // The allocation for the MPO has been unpinned.
 //
 #define STATUS_GRAPHICS_MPO_ALLOCATION_UNPINNED ((NTSTATUS)0xC01E0018L)
-
-//
-// MessageId: STATUS_GRAPHICS_SETDISPLAYMODE_REQUIRED
-//
-// MessageText:
-//
-// SetDisplayMode is required before present can succeed.
-//
-#define STATUS_GRAPHICS_SETDISPLAYMODE_REQUIRED ((NTSTATUS)0xC01E0019L)
 
 //
 //   Video Memory Manager (VidMM) specific status codes {0x0100..0x01ff}
@@ -18971,59 +18678,9 @@ Notes:
 //
 #define STATUS_GRAPHICS_SESSION_TYPE_CHANGE_IN_PROGRESS ((NTSTATUS)0xC01E05E8L)
 
-//
-//   Basic Display Driver shared status codes {0x0600..0x06DF}
-//
-//
-// MessageId: STATUS_GRAPHICS_UNKNOWN_BIOS_FRAME_BUFFER_NOT_FOUND
-//
-// MessageText:
-//
-// The Basic Display Driver cannot start because there is no frame buffer found, and the system cannot determine if the system is BIOS-compatible.
-//
-#define STATUS_GRAPHICS_UNKNOWN_BIOS_FRAME_BUFFER_NOT_FOUND ((NTSTATUS)0xC01E0600L)
 
 //
-// MessageId: STATUS_GRAPHICS_UEFI_FRAME_BUFFER_NOT_FOUND
-//
-// MessageText:
-//
-// The Basic Display Driver cannot start because there is no frame buffer found from UEFI or from a previously running graphics driver.
-//
-#define STATUS_GRAPHICS_UEFI_FRAME_BUFFER_NOT_FOUND ((NTSTATUS)0xC01E0601L)
-
-
-//
-// Camera Error messages (ks.sys, usbvideo.sys)
-// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode, 
-// which has 1:1 mapping for Error code in WinError.mc file.
-//
-// The remaining NTSTATUS in camera category may not have mapping with System Error code.
-//
-
-#define IS_CAMERA_NTSTATUS(x) ( ((x) & 0x0FFF0000) == (FACILITY_CAMERA << 16) )
-
-//
-// MessageId: STATUS_CAMERA_INVALID_CONFIGURATION
-//
-// MessageText:
-//
-// A camera's configuration contains some invalid settings.
-//
-#define STATUS_CAMERA_INVALID_CONFIGURATION ((NTSTATUS)0xC01F0000L)
-
-//
-// MessageId: STATUS_CAMERA_INSUFFICIENT_BANDWIDTH
-//
-// MessageText:
-//
-// A camera interface doesn't have the desired bandwidth for data transfer.
-//
-#define STATUS_CAMERA_INSUFFICIENT_BANDWIDTH ((NTSTATUS)0xC01F0001L)
-
-
-//
-// Full Volume Encryption Error codes (fvevol.sys and fvevollib.lib)
+// Full Volume Encryption Error codes (fvevol.sys)
 //
 
 //
@@ -19601,249 +19258,6 @@ Notes:
 // This operation cannot be completed because BitLocker Drive Encryption metadata area is full. Consider removing unnecessary key protectors for this drive.
 //
 #define STATUS_FVE_METADATA_FULL         ((NTSTATUS)0xC0210044L)
-
-//
-// MessageId: STATUS_FVE_SUSPEND_PROTECTION_NOT_ALLOWED
-//
-// MessageText:
-//
-// The operation failed because BitLocker Drive Encryption cannot suspend protection due to policy.
-//
-#define STATUS_FVE_SUSPEND_PROTECTION_NOT_ALLOWED ((NTSTATUS)0xC0210045L)
-
-//
-// MessageId: STATUS_FVE_DATUM_PARTIALLY_INVALID
-//
-// MessageText:
-//
-// The datum is invalid in its current state, but may be fixed so that it is valid.
-//
-#define STATUS_FVE_DATUM_PARTIALLY_INVALID ((NTSTATUS)0xC0210046L)
-
-//
-// MessageId: STATUS_FVE_DATASET_TPM_DATUMS_INCONSISTENT
-//
-// MessageText:
-//
-// The dataset contains TPM datums that are inconsistent.
-//
-#define STATUS_FVE_DATASET_TPM_DATUMS_INCONSISTENT ((NTSTATUS)0xC0210047L)
-
-//
-// MessageId: STATUS_FVE_SECURE_BOOT_BINDINGS_OUT_OF_SYNC
-//
-// MessageText:
-//
-// The TPM protector contains conflicting information about whether the binding is a Secure Boot binding.
-//
-#define STATUS_FVE_SECURE_BOOT_BINDINGS_OUT_OF_SYNC ((NTSTATUS)0xC0210048L)
-
-//
-// MessageId: STATUS_FVE_SECURE_BOOT_BINDING_DATA_OUT_OF_SYNC
-//
-// MessageText:
-//
-// The dataset contains conflicting information about whether the TPM protector binding is a Secure Boot binding.
-//
-#define STATUS_FVE_SECURE_BOOT_BINDING_DATA_OUT_OF_SYNC ((NTSTATUS)0xC0210049L)
-
-//
-// MessageId: STATUS_FVE_ORPHANED_TPM_BINDING_DATUM
-//
-// MessageText:
-//
-// The dataset contains a TPM binding without associated binding information. Try removing and re-adding the TPM protector.
-//
-#define STATUS_FVE_ORPHANED_TPM_BINDING_DATUM ((NTSTATUS)0xC021004AL)
-
-//
-// MessageId: STATUS_FVE_BAD_TPM_DATUM_ASSOCIATION
-//
-// MessageText:
-//
-// The dataset contains TPM binding information incorrectly associated to multiple TPM bindings. Try re-enabling BitLocker.
-//
-#define STATUS_FVE_BAD_TPM_DATUM_ASSOCIATION ((NTSTATUS)0xC021004BL)
-
-//
-// MessageId: STATUS_FVE_FINAL_TPM_PCR_VALUES_MATCH
-//
-// MessageText:
-//
-// The compared final TPM PCR values match.
-//
-#define STATUS_FVE_FINAL_TPM_PCR_VALUES_MATCH ((NTSTATUS)0xC021004CL)
-
-//
-// MessageId: STATUS_FVE_MATCHING_PCRS_TPM_FAILURE
-//
-// MessageText:
-//
-// BitLocker failed to obtain the key from the TPM due to an unforseen TPM failure.
-//
-#define STATUS_FVE_MATCHING_PCRS_TPM_FAILURE ((NTSTATUS)0xC021004DL)
-
-//
-// MessageId: STATUS_FVE_GENERAL_TPM_FAILURE
-//
-// MessageText:
-//
-// BitLocker encountered a problem communicating with the TPM at boot.
-//
-#define STATUS_FVE_GENERAL_TPM_FAILURE   ((NTSTATUS)0xC021004EL)
-
-//
-// MessageId: STATUS_FVE_TPM_NONEXISTENT
-//
-// MessageText:
-//
-// A TPM was not available for BitLocker at boot.
-//
-#define STATUS_FVE_TPM_NONEXISTENT       ((NTSTATUS)0xC021004FL)
-
-//
-// MessageId: STATUS_FVE_NO_PCR_BOOT_LOCK_BOUNDARY
-//
-// MessageText:
-//
-// BitLocker could not enforce the PCR 11 cap event boundary.
-//
-#define STATUS_FVE_NO_PCR_BOOT_LOCK_BOUNDARY ((NTSTATUS)0xC0210050L)
-
-//
-// MessageId: STATUS_FVE_PCR_BOOT_LOCK_BOUNDARY
-//
-// MessageText:
-//
-// BitLocker prevented an attempt to create a TPM binding for a PCR that contains events extended into the TPM after the BitLocker boot lock event.
-//
-#define STATUS_FVE_PCR_BOOT_LOCK_BOUNDARY ((NTSTATUS)0xC0210051L)
-
-//
-// MessageId: STATUS_FVE_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED
-//
-// MessageText:
-//
-// The firmware update was not applied because BitLocker TPM bindings do not include the latest measurements. Restart your computer to retry.
-//
-#define STATUS_FVE_FW_UPDATE_TPM_BINDINGS_NOT_REFRESHED ((NTSTATUS)0xC0210052L)
-
-//
-// MessageId: STATUS_FVE_INVALID_TPM_BINDING_CONFIGURATION
-//
-// MessageText:
-//
-// The BitLocker TPM binding configuration is invalid.
-//
-#define STATUS_FVE_INVALID_TPM_BINDING_CONFIGURATION ((NTSTATUS)0xC0210053L)
-
-//
-// MessageId: STATUS_FVE_TOO_MANY_TPM_BINDINGS
-//
-// MessageText:
-//
-// The BitLocker TPM protector cannot fit all the necessary TPM bindings.
-//
-#define STATUS_FVE_TOO_MANY_TPM_BINDINGS ((NTSTATUS)0xC0210054L)
-
-//
-// MessageId: STATUS_FVE_TPM_BINDING_ASSOCIATION_FAILURE
-//
-// MessageText:
-//
-// A BitLocker TPM protector binding is badly formatted.
-//
-#define STATUS_FVE_TPM_BINDING_ASSOCIATION_FAILURE ((NTSTATUS)0xC0210055L)
-
-//
-// MessageId: STATUS_FVE_ORPHANED_PCR_DIGEST_DATUM
-//
-// MessageText:
-//
-// The dataset contains binding information without an associated TPM binding. Try re-enabling BitLocker.
-//
-#define STATUS_FVE_ORPHANED_PCR_DIGEST_DATUM ((NTSTATUS)0xC0210056L)
-
-//
-// MessageId: STATUS_FVE_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED
-//
-// MessageText:
-//
-// BitLocker is prevented from using hardware accelerated encryption.
-//
-#define STATUS_FVE_HW_ACCELERATED_ENCRYPTION_NOT_ALLOWED ((NTSTATUS)0xC0210057L)
-
-//
-// MessageId: STATUS_FVE_NO_MATCHING_TPM_BINDINGS
-//
-// MessageText:
-//
-// BitLocker failed to find a TPM binding that can be used to unlock the drive.
-//
-#define STATUS_FVE_NO_MATCHING_TPM_BINDINGS ((NTSTATUS)0xC0210058L)
-
-//
-// MessageId: STATUS_FVE_TPMPV2_USED_FAILURE
-//
-// MessageText:
-//
-// BitLocker failed to unlock the drive using a V2 TPM protector.
-//
-#define STATUS_FVE_TPMPV2_USED_FAILURE   ((NTSTATUS)0xC0210059L)
-
-//
-// MessageId: STATUS_FVE_NO_TPM_BINDINGS
-//
-// MessageText:
-//
-// BitLocker failed to find any TPM bindings that can be used to unlock the drive.
-//
-#define STATUS_FVE_NO_TPM_BINDINGS       ((NTSTATUS)0xC021005AL)
-
-//
-// MessageId: STATUS_FVE_FW_UPDATE_PCRS_BLOCK
-//
-// MessageText:
-//
-// The firmware update was not applied. To finish installation of the firmware, please suspend BitLocker and restart your device.
-//
-#define STATUS_FVE_FW_UPDATE_PCRS_BLOCK  ((NTSTATUS)0xC021005CL)
-
-//
-// MessageId: STATUS_FVE_FW_UPDATE_PCRS_NOT_EXCLUDED
-//
-// MessageText:
-//
-// The firmware update was not applied because TPM PCRs affected by the firmware installation were not excluded by BitLocker's TPM protector. Restart your computer to retry.
-//
-#define STATUS_FVE_FW_UPDATE_PCRS_NOT_EXCLUDED ((NTSTATUS)0xC021005DL)
-
-//
-// MessageId: STATUS_FVE_FAILED_TO_UNWRAP_HW_WRAPPED_KEY
-//
-// MessageText:
-//
-// The hardware crypto key manager failed to unwrap a hardware wrapped key.
-//
-#define STATUS_FVE_FAILED_TO_UNWRAP_HW_WRAPPED_KEY ((NTSTATUS)0xC021005EL)
-
-//
-// MessageId: STATUS_FVE_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT
-//
-// MessageText:
-//
-// FIPS compliance is required, but the hardware crypto accelerator does not report compliance with this standard.
-//
-#define STATUS_FVE_HARDWARE_CRYPTO_ACCELERATOR_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC021005FL)
-
-//
-// MessageId: STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT
-//
-// MessageText:
-//
-// FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
-//
-#define STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC0210060L)
 
 
 //
@@ -20921,15 +20335,6 @@ Notes:
 // The wireless local area network interface cannot start an AP on this band due to regulatory reasons.
 //
 #define STATUS_NDIS_DOT11_AP_BAND_NOT_ALLOWED ((NTSTATUS)0xC0232008L)
-
-//
-// MessageId: STATUS_NDIS_DOT11_AP_RADIO_RESTRICTION
-//
-// MessageText:
-//
-// The wireless local area network interface cannot start an AP because the minimum radio hardware required for this operation is not present.
-//
-#define STATUS_NDIS_DOT11_AP_RADIO_RESTRICTION ((NTSTATUS)0xC0232009L)
 
 //
 // NDIS informational codes(ndis.sys)
@@ -22627,24 +22032,6 @@ Notes:
 //
 #define STATUS_TPM_PPI_FUNCTION_UNSUPPORTED ((NTSTATUS)0xC0291006L)
 
-//
-// MessageId: STATUS_TPM_IN_EXCLUSIVE_MODE
-//
-// MessageText:
-//
-// The caller is trying to request an operation while the TPM driver has an exclusive context open.
-//
-#define STATUS_TPM_IN_EXCLUSIVE_MODE     ((NTSTATUS)0xC0291007L)
-
-//
-// MessageId: STATUS_TPM_REBOOT_REQUIRED
-//
-// MessageText:
-//
-// The TPM driver was previously in exclusive mode and now requires a reboot to resume normal functionality.
-//
-#define STATUS_TPM_REBOOT_REQUIRED       ((NTSTATUS)0xC0291008L)
-
 
 //
 // Platform Crypto Provider Error Codes (PCPKSP.dll and future platform crypto providers)
@@ -23046,29 +22433,6 @@ Notes:
 // TPM related network operations are blocked as Zero Exhaust mode is enabled on client.
 //
 #define STATUS_TPM_ZERO_EXHAUST_ENABLED  ((NTSTATUS)0xC0294000L)
-
-
-//
-// DRTM Error Codes
-//
-
-//
-// MessageId: STATUS_DRTM_ENVIRONMENT_UNSAFE
-//
-// MessageText:
-//
-// The current environment is unsafe for DRTM to run in.
-//
-#define STATUS_DRTM_ENVIRONMENT_UNSAFE   ((NTSTATUS)0xC0295000L)
-
-//
-// MessageId: STATUS_DRTM_NO_DIRECT_AUTH_FOR_CURRENT_MLE
-//
-// MessageText:
-//
-// There are no authorizations for the current running MLE. The current state is not authorized.
-//
-#define STATUS_DRTM_NO_DIRECT_AUTH_FOR_CURRENT_MLE ((NTSTATUS)0xC0295001L)
 
 //
 // Hypervisor error codes - changes to these codes must be reflected in HvStatus.h
@@ -23586,24 +22950,6 @@ Notes:
 // There is not enough contiguous memory in the root partition's pool to complete the mirroring operation.
 //
 #define STATUS_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY_MIRRORING ((NTSTATUS)0xC0350085L)
-
-//
-// MessageId: STATUS_HV_VTL_ALREADY_ENABLED
-//
-// MessageText:
-//
-// The VTL specified for the operation is already in an enabled state.
-//
-#define STATUS_HV_VTL_ALREADY_ENABLED    ((NTSTATUS)0xC0350086L)
-
-//
-// MessageId: STATUS_HV_SPDM_REQUEST
-//
-// MessageText:
-//
-// The device security operation was interrupted due to a required SPDM request.
-//
-#define STATUS_HV_SPDM_REQUEST           ((NTSTATUS)0xC0350088L)
 
 //
 // MessageId: STATUS_HV_NOT_PRESENT
@@ -26033,7 +25379,7 @@ Notes:
 //
 // MessageText:
 //
-// Application Control detected that policy rollback has been attempted.
+// System Integrity detected that policy rollback has been attempted.
 //
 #define STATUS_SYSTEM_INTEGRITY_ROLLBACK_DETECTED ((NTSTATUS)0xC0E90001L)
 
@@ -26042,7 +25388,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.
+// System Integrity policy has been violated.
 //
 #define STATUS_SYSTEM_INTEGRITY_POLICY_VIOLATION ((NTSTATUS)0xC0E90002L)
 
@@ -26051,7 +25397,7 @@ Notes:
 //
 // MessageText:
 //
-// The Application Control policy is invalid.
+// The System Integrity policy is invalid.
 //
 #define STATUS_SYSTEM_INTEGRITY_INVALID_POLICY ((NTSTATUS)0xC0E90003L)
 
@@ -26060,7 +25406,7 @@ Notes:
 //
 // MessageText:
 //
-// The Application Control policy is either not signed or is signed by a non-trusted signer.
+// The System Integrity policy is either not signed or is signed by a non-trusted signer.
 //
 #define STATUS_SYSTEM_INTEGRITY_POLICY_NOT_SIGNED ((NTSTATUS)0xC0E90004L)
 
@@ -26069,7 +25415,7 @@ Notes:
 //
 // MessageText:
 //
-// The number of Application Control policies is out of limit.
+// The number of System Integrity policies is out of limit.
 //
 #define STATUS_SYSTEM_INTEGRITY_TOO_MANY_POLICIES ((NTSTATUS)0xC0E90005L)
 
@@ -26078,7 +25424,7 @@ Notes:
 //
 // MessageText:
 //
-// The Application Control supplemental policy is not authorized by an Application Control base policy.
+// The Code Integrity supplemental policy is not authorized by a Code Integrity base policy.
 //
 #define STATUS_SYSTEM_INTEGRITY_SUPPLEMENTAL_POLICY_NOT_AUTHORIZED ((NTSTATUS)0xC0E90006L)
 
@@ -26087,7 +25433,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Malicious binary reputation.
+// System Integrity policy has been violated.  Malicious binary reputation.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_MALICIOUS ((NTSTATUS)0xC0E90007L)
 
@@ -26096,7 +25442,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Potentially unwanted application.
+// System Integrity policy has been violated.  Potentially unwanted application.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_PUA ((NTSTATUS)0xC0E90008L)
 
@@ -26105,7 +25451,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Dangerous file extension from the web.
+// System Integrity policy has been violated.  Dangerous file extension from the web.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_DANGEROUS_EXT ((NTSTATUS)0xC0E90009L)
 
@@ -26114,7 +25460,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Unable to contact reputation service for unknown file.
+// System Integrity policy has been violated.  Unable to contact reputation service for unknown file.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_OFFLINE ((NTSTATUS)0xC0E9000AL)
 
@@ -26123,7 +25469,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Unfriendly file.
+// System Integrity policy has been violated.  Unfriendly file.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE ((NTSTATUS)0xC0E9000BL)
 
@@ -26132,7 +25478,7 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Failed to obtain file reputation because an infrastructure issue occurred. Try again later.
+// System Integrity policy has been violated.  Failed to obtain file reputation because an infrastructure issue occurred. Try again later.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE ((NTSTATUS)0xC0E9000CL)
 
@@ -26141,18 +25487,9 @@ Notes:
 //
 // MessageText:
 //
-// An Application Control policy has blocked this file.  Explicitly denied file.
+// System Integrity policy has been violated.  Explicitly denied file.
 //
 #define STATUS_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE ((NTSTATUS)0xC0E9000DL)
-
-//
-// MessageId: STATUS_SYSTEM_INTEGRITY_WHQL_NOT_SATISFIED
-//
-// MessageText:
-//
-// An Application Control policy has blocked this file.  File did not pass WHQL-only requirements.
-//
-#define STATUS_SYSTEM_INTEGRITY_WHQL_NOT_SATISFIED ((NTSTATUS)0xC0E9000EL)
 
 //
 // Clip modern app and windows licensing error messages.
@@ -26294,33 +25631,6 @@ Notes:
 // An unexpected NULL pointer was encountered in a linked list.
 //
 #define STATUS_HDAUDIO_NULL_LINKED_LIST_ENTRY ((NTSTATUS)0xC0440005L)
-
-//
-// MessageId: STATUS_SOUNDWIRE_COMMAND_ABORTED
-//
-// MessageText:
-//
-// SoundWire command aborted.
-//
-#define STATUS_SOUNDWIRE_COMMAND_ABORTED ((NTSTATUS)0xC0440006L)
-
-//
-// MessageId: STATUS_SOUNDWIRE_COMMAND_IGNORED
-//
-// MessageText:
-//
-// SoundWire command ignored.
-//
-#define STATUS_SOUNDWIRE_COMMAND_IGNORED ((NTSTATUS)0xC0440007L)
-
-//
-// MessageId: STATUS_SOUNDWIRE_COMMAND_FAILED
-//
-// MessageText:
-//
-// SoundWire command failed.
-//
-#define STATUS_SOUNDWIRE_COMMAND_FAILED  ((NTSTATUS)0xC0440008L)
 
 //
 // Spaceport success codes (spaceport.sys)
@@ -26903,54 +26213,9 @@ Notes:
 //
 // MessageText:
 //
-// The user canceled the authentication prompt to a remote server.
+// The user canceled the authentication prompt to a remote server. 
 //
 #define STATUS_NETWORK_AUTHENTICATION_PROMPT_CANCELED ((NTSTATUS)0xC05D0004L)
-
-//
-// MessageId: STATUS_REMOTE_MAILSLOTS_DEPRECATED
-//
-// MessageText:
-//
-// The requested operation failed. The Remote Mailslot Protocol has been disabled.
-//
-#define STATUS_REMOTE_MAILSLOTS_DEPRECATED ((NTSTATUS)0xC05D0005L)
-
-//
-// MessageId: STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED
-//
-// MessageText:
-//
-// You can't access this shared folder because your computer is configured to require SMB signing. These policies help protect your PC from unsafe or malicious devices on the network.
-//
-#define STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED ((NTSTATUS)0xC05D0006L)
-
-//
-// MessageId: STATUS_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED
-//
-// MessageText:
-//
-// The requested operation failed. Encryption is not supported for guest access.
-//
-#define STATUS_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED ((NTSTATUS)0xC05D0007L)
-
-//
-// MessageId: STATUS_SMB_ENCRYPTION_NOT_SUPPORTED_BY_PEER
-//
-// MessageText:
-//
-// The requested operation failed. Encryption is not supported on SMB server.
-//
-#define STATUS_SMB_ENCRYPTION_NOT_SUPPORTED_BY_PEER ((NTSTATUS)0xC05D0008L)
-
-//
-// MessageId: STATUS_SMB_TLS_ACCESS_DENIED
-//
-// MessageText:
-//
-// The SMB client was denied access to the SMB server during mutual authentication.
-//
-#define STATUS_SMB_TLS_ACCESS_DENIED     ((NTSTATUS)0xC05D0009L)
 
 //
 // Embedded Security Core
@@ -26987,42 +26252,6 @@ Notes:
 // The hypervisor is not protecting DMA because an IOMMU is not present or not enabled in the BIOS.
 //
 #define STATUS_VSM_DMA_PROTECTION_NOT_IN_USE ((NTSTATUS)0xC0450001L)
-
-//
-// MessageId: STATUS_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED
-//
-// MessageText:
-//
-// The VSM encryption key could not be released because the minimum Code Integrity policy version was not met.
-//
-#define STATUS_VSM_KEY_CI_POLICY_ROLLBACK_DETECTED ((NTSTATUS)0xC0450002L)
-
-//
-// MessageId: STATUS_VSMIDK_KEYGEN_FAILURE
-//
-// MessageText:
-//
-// RSA identity key generation failed.
-//
-#define STATUS_VSMIDK_KEYGEN_FAILURE     ((NTSTATUS)0xC0450003L)
-
-//
-// MessageId: STATUS_VSMIDK_EXPORT_FAILURE
-//
-// MessageText:
-//
-// Exporting RSA key components failed.
-//
-#define STATUS_VSMIDK_EXPORT_FAILURE     ((NTSTATUS)0xC0450004L)
-
-//
-// MessageId: STATUS_VSMIDK_MODULUS_MISMATCH
-//
-// MessageText:
-//
-// Exported modulus size did not match expected key size.
-//
-#define STATUS_VSMIDK_MODULUS_MISMATCH   ((NTSTATUS)0xC0450005L)
 
 //
 // Application Execution (AppExec)
@@ -27221,146 +26450,6 @@ Notes:
 //
 #define STATUS_QUIC_ALPN_NEG_FAILURE     ((NTSTATUS)0xC0240007L)
 
-//
-// MessageId: STATUS_QUIC_STREAM_LIMIT_REACHED
-//
-// MessageText:
-//
-// The QUIC connection failed because there are not enough streams available.
-//
-#define STATUS_QUIC_STREAM_LIMIT_REACHED ((NTSTATUS)0xC0240008L)
-
-//
-// MessageId: STATUS_QUIC_ALPN_IN_USE
-//
-// MessageText:
-//
-// The QUIC connection failed because the ALPN is in use.
-//
-#define STATUS_QUIC_ALPN_IN_USE          ((NTSTATUS)0xC0240009L)
-
-
-//
-// QUIC TLS
-//
-
-//
-// MessageId: STATUS_QUIC_TLS_UNEXPECTED_MESSAGE
-//
-// MessageText:
-//
-// The QUIC connection encountered an unexpected message during TLS.
-//
-#define STATUS_QUIC_TLS_UNEXPECTED_MESSAGE ((NTSTATUS)0xC024010AL)
-
-//
-// MessageId: STATUS_QUIC_TLS_BAD_CERTIFICATE
-//
-// MessageText:
-//
-// The QUIC connection encountered a bad certificate during TLS.
-//
-#define STATUS_QUIC_TLS_BAD_CERTIFICATE  ((NTSTATUS)0xC024012AL)
-
-//
-// MessageId: STATUS_QUIC_TLS_UNSUPPORTED_CERTIFICATE
-//
-// MessageText:
-//
-// The QUIC connection encountered an unsupported certificate during TLS.
-//
-#define STATUS_QUIC_TLS_UNSUPPORTED_CERTIFICATE ((NTSTATUS)0xC024012BL)
-
-//
-// MessageId: STATUS_QUIC_TLS_CERTIFICATE_REVOKED
-//
-// MessageText:
-//
-// The QUIC connection encountered a revoked certificate during TLS.
-//
-#define STATUS_QUIC_TLS_CERTIFICATE_REVOKED ((NTSTATUS)0xC024012CL)
-
-//
-// MessageId: STATUS_QUIC_TLS_CERTIFICATE_EXPIRED
-//
-// MessageText:
-//
-// The QUIC connection encountered an expired certificate during TLS.
-//
-#define STATUS_QUIC_TLS_CERTIFICATE_EXPIRED ((NTSTATUS)0xC024012DL)
-
-//
-// MessageId: STATUS_QUIC_TLS_CERTIFICATE_UNKNOWN
-//
-// MessageText:
-//
-// The QUIC connection encountered an unknown certificate during TLS.
-//
-#define STATUS_QUIC_TLS_CERTIFICATE_UNKNOWN ((NTSTATUS)0xC024012EL)
-
-//
-// MessageId: STATUS_QUIC_TLS_ILLEGAL_PARAMETER
-//
-// MessageText:
-//
-// The QUIC connection encountered an illegal parameter during TLS.
-//
-#define STATUS_QUIC_TLS_ILLEGAL_PARAMETER ((NTSTATUS)0xC024012FL)
-
-//
-// MessageId: STATUS_QUIC_TLS_UNKNOWN_CA
-//
-// MessageText:
-//
-// The QUIC connection encountered a certificate with an unkown certificate authority during TLS.
-//
-#define STATUS_QUIC_TLS_UNKNOWN_CA       ((NTSTATUS)0xC0240130L)
-
-//
-// MessageId: STATUS_QUIC_TLS_ACCESS_DENIED
-//
-// MessageText:
-//
-// The QUIC connection attempt was denied by the peer during TLS.
-//
-#define STATUS_QUIC_TLS_ACCESS_DENIED    ((NTSTATUS)0xC0240131L)
-
-//
-// MessageId: STATUS_QUIC_TLS_INSUFFICIENT_SECURITY
-//
-// MessageText:
-//
-// The QUIC connection security was insufficient during TLS.
-//
-#define STATUS_QUIC_TLS_INSUFFICIENT_SECURITY ((NTSTATUS)0xC0240147L)
-
-//
-// MessageId: STATUS_QUIC_TLS_INTERNAL_ERROR
-//
-// MessageText:
-//
-// The QUIC connection encountered an internal error during TLS.
-//
-#define STATUS_QUIC_TLS_INTERNAL_ERROR   ((NTSTATUS)0xC0240150L)
-
-//
-// MessageId: STATUS_QUIC_TLS_USER_CANCELED
-//
-// MessageText:
-//
-// The QUIC connection was canceled by the user during TLS.
-//
-#define STATUS_QUIC_TLS_USER_CANCELED    ((NTSTATUS)0xC024015AL)
-
-//
-// MessageId: STATUS_QUIC_TLS_CERTIFICATE_REQUIRED
-//
-// MessageText:
-//
-// The QUIC connection required a certificate during TLS.
-//
-#define STATUS_QUIC_TLS_CERTIFICATE_REQUIRED ((NTSTATUS)0xC0240174L)
-
 
 //
 // IORING NTSTATUS codes
@@ -27437,244 +26526,6 @@ Notes:
 // The completion queue does not have enough free space, to post completions, for all entries being submitted.
 //
 #define STATUS_IORING_COMPLETION_QUEUE_TOO_FULL ((NTSTATUS)0xC0460008L)
-
-/*++
-
- PRM specific messages.
-
---*/
-//
-// MessageId: STATUS_PRM_HANDLER_NOT_FOUND
-//
-// MessageText:
-//
-// The specified PRM handler was not found.
-//
-#define STATUS_PRM_HANDLER_NOT_FOUND     ((NTSTATUS)0xC0EE0200L)
-
-//
-// MessageId: STATUS_PRM_CONCURRENT_OPERATION
-//
-// MessageText:
-//
-// The PRM call cannot be serviced due to a concurrent PRM operation.
-//
-#define STATUS_PRM_CONCURRENT_OPERATION  ((NTSTATUS)0xC0EE0202L)
-
-//
-// MessageId: STATUS_PRM_MODULE_UPDATE_PENDING
-//
-// MessageText:
-//
-// The PRM call failed due to a pending module update.
-//
-#define STATUS_PRM_MODULE_UPDATE_PENDING ((NTSTATUS)0xC0EE0203L)
-
-//
-// MessageId: STATUS_PRM_MODULE_LOCKED
-//
-// MessageText:
-//
-// The PRM lock operation failed because the module is already locked.
-//
-#define STATUS_PRM_MODULE_LOCKED         ((NTSTATUS)0xC0EE0204L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_INCOMPATIBLE_VERSION
-//
-// MessageText:
-//
-// The PRM update module version number is too small to be applied.
-//
-#define STATUS_PRM_UPDATE_INCOMPATIBLE_VERSION ((NTSTATUS)0xC0EE0205L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_MODULE_MISMATCH
-//
-// MessageText:
-//
-// The PRM update module does not match the current version.
-//
-#define STATUS_PRM_UPDATE_MODULE_MISMATCH ((NTSTATUS)0xC0EE0206L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_MODULE_NOT_FOUND
-//
-// MessageText:
-//
-// The PRM update is not applicable to the base PRM implementation.
-//
-#define STATUS_PRM_UPDATE_MODULE_NOT_FOUND ((NTSTATUS)0xC0EE0207L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_MISSING_EXPORT
-//
-// MessageText:
-//
-// A handler export from the PRM update module cannot be found.
-//
-#define STATUS_PRM_UPDATE_MISSING_EXPORT ((NTSTATUS)0xC0EE0208L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_MODULE_LOCKED
-//
-// MessageText:
-//
-// The PRM update cannot be applied due to an outstanding PRM transaction.
-//
-#define STATUS_PRM_UPDATE_MODULE_LOCKED  ((NTSTATUS)0xC0EE0209L)
-
-//
-// MessageId: STATUS_PRM_UPDATE_BAD_SIGNATURE
-//
-// MessageText:
-//
-// The PRM update cannot be applied due to a bad PRM module signature.
-//
-#define STATUS_PRM_UPDATE_BAD_SIGNATURE  ((NTSTATUS)0xC0EE020AL)
-
-//
-// MessageId: STATUS_PRM_UPDATE_VERSION_MISMATCH
-//
-// MessageText:
-//
-// The PRM update service provided module version does not match that present in the actual update module header.
-//
-#define STATUS_PRM_UPDATE_VERSION_MISMATCH ((NTSTATUS)0xC0EE020BL)
-
-//
-// MessageId: STATUS_PRM_MODULE_UNLOCKED
-//
-// MessageText:
-//
-// The PRM unlock operation failed because the module is already unlocked.
-//
-#define STATUS_PRM_MODULE_UNLOCKED       ((NTSTATUS)0xC0EE020CL)
-
-//
-// MessageId: STATUS_PRM_INTERFACE_INACCESSIBLE
-//
-// MessageText:
-//
-// The PRM driver interface is currently not accessible.
-//
-#define STATUS_PRM_INTERFACE_INACCESSIBLE ((NTSTATUS)0xC0EE020DL)
-
-/*++
-
- Accelerator specific messages.
-
---*/
-//
-// MessageId: STATUS_ACCELERATOR_SUBMISSION_QUEUE_FULL
-//
-// MessageText:
-//
-// The accelerator submission queue is full.
-//
-#define STATUS_ACCELERATOR_SUBMISSION_QUEUE_FULL ((NTSTATUS)0xC0EF0001L)
-
-
-///////////////////////////////////////////////////
-//                                               //
-// CloudAP Remote Desktop Error codes            //
-//                                               //
-///////////////////////////////////////////////////
-
-/*++
-
- Cloud authentication Remote Desktop specific messages.
-
---*/
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_APNONCE_INVALID
-//
-// MessageText:
-//
-// The server nonce has expired.
-//
-#define STATUS_AAD_CLOUDAP_E_APNONCE_INVALID ((NTSTATUS)0xC0048550L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_BAD_DEVICE_ACCESS_TOKEN_FORMAT
-//
-// MessageText:
-//
-// The format of the access token is invalid.
-//
-#define STATUS_AAD_CLOUDAP_E_BAD_DEVICE_ACCESS_TOKEN_FORMAT ((NTSTATUS)0xC0048551L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_ASSERTION_MALFORMED
-//
-// MessageText:
-//
-// The format of the assertion is invalid.
-//
-#define STATUS_AAD_CLOUDAP_E_ASSERTION_MALFORMED ((NTSTATUS)0xC0048552L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_TENANT
-//
-// MessageText:
-//
-// The Entra ID tenant specified in the server nonce or the assertion is invalid.
-//
-#define STATUS_AAD_CLOUDAP_E_INVALID_TENANT ((NTSTATUS)0xC0048553L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_DEVICE
-//
-// MessageText:
-//
-// The target device specified in the server nonce or the assertion is invalid.
-//
-#define STATUS_AAD_CLOUDAP_E_INVALID_DEVICE ((NTSTATUS)0xC0048554L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_ACCESS_TOKEN
-//
-// MessageText:
-//
-// The access token is invalid.
-//
-#define STATUS_AAD_CLOUDAP_E_INVALID_ACCESS_TOKEN ((NTSTATUS)0xC0048556L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_INVALID_BINDING_KEY_ID
-//
-// MessageText:
-//
-// The binding key specified in the assertion does not match the binding key specified in the access token.
-//
-#define STATUS_AAD_CLOUDAP_E_INVALID_BINDING_KEY_ID ((NTSTATUS)0xC0048557L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_CANT_FIND_ROOT_CERT
-//
-// MessageText:
-//
-// The root certificate associated with the access token's signature cannot be found.
-//
-#define STATUS_AAD_CLOUDAP_E_CANT_FIND_ROOT_CERT ((NTSTATUS)0xC0048559L)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_ASSERTION_INVALID
-//
-// MessageText:
-//
-// The resource URL in the assertion does not match the audience specified in the access token.
-//
-#define STATUS_AAD_CLOUDAP_E_ASSERTION_INVALID ((NTSTATUS)0xC004855AL)
-
-//
-// MessageId: STATUS_AAD_CLOUDAP_E_CALLER_MISMATCH
-//
-// MessageText:
-//
-// The specified resource ID does not match the audience specified in the access token.
-//
-#define STATUS_AAD_CLOUDAP_E_CALLER_MISMATCH ((NTSTATUS)0xC004855BL)
 
 //
 // Map a WIN32 error value into an NTSTATUS

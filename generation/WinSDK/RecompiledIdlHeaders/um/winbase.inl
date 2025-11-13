@@ -1,4 +1,4 @@
-/* Copyright (c) 2001-2025, Microsoft Corp. All rights reserved. */
+/* Copyright (c) 2001-2024, Microsoft Corp. All rights reserved. */
 
 #if _MSC_VER > 1000
 #pragma once
@@ -413,7 +413,7 @@ Do not use it.
     if (!IsolationAwareQueryActCtxW(
         QUERY_ACTCTX_FLAG_ACTCTX_IS_ADDRESS
         | QUERY_ACTCTX_FLAG_NO_ADDREF,
-        (HANDLE)&WinbaseIsolationAwarePrivateT_UnPgpgk,
+        &WinbaseIsolationAwarePrivateT_UnPgpgk,
         NULL,
         ActivationContextBasicInformation,
         &actCtxBasicInfo,

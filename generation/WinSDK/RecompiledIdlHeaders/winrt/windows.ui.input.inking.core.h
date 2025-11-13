@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_COREWINDOWDIALOGSCONTRACT_VERSION)
@@ -805,7 +805,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreIncrementalInkStroke = __uuidof(ICoreIncrementalInkStroke);
+                        extern MIDL_CONST_ID IID& IID_ICoreIncrementalInkStroke = _uuidof(ICoreIncrementalInkStroke);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -847,7 +847,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreIncrementalInkStrokeFactory = __uuidof(ICoreIncrementalInkStrokeFactory);
+                        extern MIDL_CONST_ID IID& IID_ICoreIncrementalInkStrokeFactory = _uuidof(ICoreIncrementalInkStrokeFactory);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -936,7 +936,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSource = __uuidof(ICoreInkIndependentInputSource);
+                        extern MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSource = _uuidof(ICoreInkIndependentInputSource);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -979,7 +979,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSource2 = __uuidof(ICoreInkIndependentInputSource2);
+                        extern MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSource2 = _uuidof(ICoreInkIndependentInputSource2);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -1020,7 +1020,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSourceStatics = __uuidof(ICoreInkIndependentInputSourceStatics);
+                        extern MIDL_CONST_ID IID& IID_ICoreInkIndependentInputSourceStatics = _uuidof(ICoreInkIndependentInputSourceStatics);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -1066,7 +1066,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreInkPresenterHost = __uuidof(ICoreInkPresenterHost);
+                        extern MIDL_CONST_ID IID& IID_ICoreInkPresenterHost = _uuidof(ICoreInkPresenterHost);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -1115,7 +1115,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateEventArgs = __uuidof(ICoreWetStrokeUpdateEventArgs);
+                        extern MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateEventArgs = _uuidof(ICoreWetStrokeUpdateEventArgs);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -1190,7 +1190,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateSource = __uuidof(ICoreWetStrokeUpdateSource);
+                        extern MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateSource = _uuidof(ICoreWetStrokeUpdateSource);
                     } /* Core */
                 } /* Inking */
             } /* Input */
@@ -1231,7 +1231,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateSourceStatics = __uuidof(ICoreWetStrokeUpdateSourceStatics);
+                        extern MIDL_CONST_ID IID& IID_ICoreWetStrokeUpdateSourceStatics = _uuidof(ICoreWetStrokeUpdateSourceStatics);
                     } /* Core */
                 } /* Inking */
             } /* Input */

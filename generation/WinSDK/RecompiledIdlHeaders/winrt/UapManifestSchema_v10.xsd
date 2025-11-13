@@ -11,7 +11,6 @@
            xmlns:wincap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities/3"
            xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"
            xmlns:previewappcompat="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport"
-           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -21,7 +20,6 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
-  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
 
   <xs:attributeGroup name="TrustLevelGroup">
     <xs:attribute name="TrustLevel" type="ST_TrustLevel" use="optional" form="qualified"/>
@@ -57,7 +55,6 @@
         <xs:element name="Protocol" type="CT_Protocol"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ExtensionCategory_Uap10" use="required"/>
-      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>

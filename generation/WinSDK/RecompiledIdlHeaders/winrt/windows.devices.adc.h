@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -485,7 +485,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdcChannel = __uuidof(IAdcChannel);
+                extern MIDL_CONST_ID IID& IID_IAdcChannel = _uuidof(IAdcChannel);
             } /* Adc */
         } /* Devices */
     } /* Windows */
@@ -544,7 +544,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdcController = __uuidof(IAdcController);
+                extern MIDL_CONST_ID IID& IID_IAdcController = _uuidof(IAdcController);
             } /* Adc */
         } /* Devices */
     } /* Windows */
@@ -581,7 +581,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdcControllerStatics = __uuidof(IAdcControllerStatics);
+                extern MIDL_CONST_ID IID& IID_IAdcControllerStatics = _uuidof(IAdcControllerStatics);
             } /* Adc */
         } /* Devices */
     } /* Windows */
@@ -617,7 +617,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdcControllerStatics2 = __uuidof(IAdcControllerStatics2);
+                extern MIDL_CONST_ID IID& IID_IAdcControllerStatics2 = _uuidof(IAdcControllerStatics2);
             } /* Adc */
         } /* Devices */
     } /* Windows */
@@ -654,8 +654,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Devices.DevicesLowLevelContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics2 interface starting with version 2.0 of the Windows.Devices.DevicesLowLevelContract API contract
+ *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Adc.IAdcController ** Default Interface **
@@ -1563,8 +1563,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Devices.DevicesLowLevelContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics2 interface starting with version 2.0 of the Windows.Devices.DevicesLowLevelContract API contract
+ *   Static Methods exist on the Windows.Devices.Adc.IAdcControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Adc.IAdcController ** Default Interface **

@@ -1227,7 +1227,6 @@ SetFileSecurityW(
     _In_ SECURITY_INFORMATION SecurityInformation,
     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
     );
-
 #ifdef UNICODE
 #define SetFileSecurity  SetFileSecurityW
 #endif

@@ -252,7 +252,7 @@ typedef ULONG WINBIO_CAPABILITIES, *PWINBIO_CAPABILITIES;
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS4)
 
-// Secure Connection Protocol (SCP) V1 --> Secure Fingerprints
+// Secure Connection Protocol (SCP) V1
 #define WINBIO_CAPABILITY_SCP_V1            ((WINBIO_CAPABILITIES)0x00000200)
 
 // Modern standby support
@@ -2306,7 +2306,6 @@ typedef ULONG32 WINBIO_SETTING_SOURCE_TYPE, *PWINBIO_SETTING_SOURCE_TYPE;
 typedef ULONG32 WINBIO_SETTING_TYPE, *PWINBIO_SETTING_TYPE;
 
 #define WINBIO_SETTING_TYPE_PERIPHERALS_WITH_ESS ((WINBIO_SETTING_TYPE)0)
-#define WINBIO_SETTING_TYPE_ESS_ENABLED ((WINBIO_SETTING_TYPE)1)
 
 typedef struct _WINBIO_EXTENDED_ENROLLMENT_PARAMETERS {
     SIZE_T Size;
@@ -2364,7 +2363,6 @@ typedef ULONG32 WINBIO_TELEMETRY_TYPE, *PWINBIO_TELEMETRY_TYPE;
 #define WINBIO_TELEMETRY_AUTH                         ((WINBIO_TELEMETRY_TYPE)1)
 #define WINBIO_TELEMETRY_ENROLLMENT                   ((WINBIO_TELEMETRY_TYPE)2)
 
-
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -2383,70 +2381,6 @@ const ULONG WINBIO_MAX_PRIVATE_SENSOR_TYPE_INFO_BUFFER_SIZE = 0x1000;
 #endif // MIDL_PASS
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-
-# if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Ess state query
-//
-///////////////////////////////////////////////////////////////////////////////
-
-typedef ULONG64 EXPERIMENTAL_WINBIO_ESS_STATE, *EXPERIMENTAL_PWINBIO_ESS_STATE;
-
-enum EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS
-{
-    // This PC does not have TPM 2.0
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_TPM2                            = 0x00000001,
-
-    // This PC is not VBS capable.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_CAPABLE                     = 0x00000002,
-
-    // This PC has a Windows Hello container not backed by VBS.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_NON_VBS_WINDOWS_HELLO_ABSENCE   = 0x00000004,
-
-    // This PC does not have a Windows Hello container backed by VBS.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_WINDOWS_HELLO               = 0x00000008,
-
-    // This PC does not have VBS running.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_RUNNING                     = 0x00000010,
-
-    // This PC is missing VBS encryption keys.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_ENCRYPTION_KEY              = 0x00000020,
-
-    // On this PC, ESS is disabled either using a "Enhanced Sign-in Security" toggle in Accounts -> Sign-in options under "Additional settings" or
-    // using a policy.
-    // By default following flag will not be set.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_ENABLEMENT                      = 0x00000040,
-
-    // On this PC, ESS is managed using a policy available through group policy or MDM policy.
-    // MDM policy: ./Device/Vendor/MSFT/PassportForWork/Biometrics/EnableESSwithSupportedPeripherals
-    // Group policy: Computer Configuration\Administrative Templates\Windows Components\Windows Hello for Business\Enable ESS with Supported Peripherals
-    EXPERIMENTAL_WINBIO_ESS_MANAGED_BY_POLICY                        = 0x00000080,
-
-    // This PC contains enrollments performed using biometric sensors that are not ESS-capable.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_NON_VBS_BIOMETRIC_ENROLLMENT_ABSENCE = 0x00000100,
-
-    // This PC does not have enrollments performed using ESS capable biometric sensors.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_VBS_BIOMETRIC_ENROLLMENT        = 0x00000200,
-
-    // This PC does not have a ESS capable face camera sensor. 
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_FACE_SENSOR                     = 0x00000400,
-
-    // This PC does not have a ESS FPR sensor.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_FPR_SENSOR                      = 0x00000800,
-
-    // This PC could not start biometrics trustlet needed for ESS.
-    EXPERIMENTAL_WINBIO_ESS_REQUIRES_ISOLATED_PROCESS                = 0x00001000,
-
-    // This PC blocked non-ESS capable fingerprint sensor.
-    EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_FPR                      = 0x00002000,
-
-    // This PC blocked non-ESS capable face camera sensor.
-    EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_CAMERA                   = 0x00004000
-};
-
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 #ifdef __cplusplus
 } // extern "C"

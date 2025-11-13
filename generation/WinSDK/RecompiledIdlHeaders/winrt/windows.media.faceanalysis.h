@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -676,7 +676,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDetectedFace = __uuidof(IDetectedFace);
+                extern MIDL_CONST_ID IID& IID_IDetectedFace = _uuidof(IDetectedFace);
             } /* FaceAnalysis */
         } /* Media */
     } /* Windows */
@@ -730,7 +730,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFaceDetector = __uuidof(IFaceDetector);
+                extern MIDL_CONST_ID IID& IID_IFaceDetector = _uuidof(IFaceDetector);
             } /* FaceAnalysis */
         } /* Media */
     } /* Windows */
@@ -776,7 +776,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFaceDetectorStatics = __uuidof(IFaceDetectorStatics);
+                extern MIDL_CONST_ID IID& IID_IFaceDetectorStatics = _uuidof(IFaceDetectorStatics);
             } /* FaceAnalysis */
         } /* Media */
     } /* Windows */
@@ -825,7 +825,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFaceTracker = __uuidof(IFaceTracker);
+                extern MIDL_CONST_ID IID& IID_IFaceTracker = _uuidof(IFaceTracker);
             } /* FaceAnalysis */
         } /* Media */
     } /* Windows */
@@ -871,7 +871,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFaceTrackerStatics = __uuidof(IFaceTrackerStatics);
+                extern MIDL_CONST_ID IID& IID_IFaceTrackerStatics = _uuidof(IFaceTrackerStatics);
             } /* FaceAnalysis */
         } /* Media */
     } /* Windows */

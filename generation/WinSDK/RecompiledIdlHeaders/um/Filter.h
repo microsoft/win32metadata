@@ -54,13 +54,6 @@ typedef interface IFilter IFilter;
 #endif 	/* __IFilter_FWD_DEFINED__ */
 
 
-#ifndef __IPixelFilter_FWD_DEFINED__
-#define __IPixelFilter_FWD_DEFINED__
-typedef interface IPixelFilter IPixelFilter;
-
-#endif 	/* __IPixelFilter_FWD_DEFINED__ */
-
-
 /* header files for imported files */
 #include "unknwn.h"
 #include "objidl.h"
@@ -141,8 +134,7 @@ enum tagCHUNKSTATE
     {
         CHUNK_TEXT	= 0x1,
         CHUNK_VALUE	= 0x2,
-        CHUNK_FILTER_OWNED_VALUE	= 0x4,
-        CHUNK_IMAGE	= 0x8
+        CHUNK_FILTER_OWNED_VALUE	= 0x4
     } 	CHUNKSTATE;
 
 #define _tagCHUNKSTATE_DEFINED
@@ -346,200 +338,15 @@ EXTERN_C const IID IID_IFilter;
 #endif 	/* __IFilter_INTERFACE_DEFINED__ */
 
 
-#ifndef __IPixelFilter_INTERFACE_DEFINED__
-#define __IPixelFilter_INTERFACE_DEFINED__
-
-/* interface IPixelFilter */
-/* [unique][uuid][object] */ 
-
-typedef 
-enum IMAGE_PIXELFORMAT
-    {
-        FILTER_PIXELFORMAT_BGRA8	= 0,
-        FILTER_PIXELFORMAT_PBGRA8	= 1,
-        FILTER_PIXELFORMAT_BGR8	= 2
-    } 	IMAGE_PIXELFORMAT;
-
-typedef struct IMAGE_INFO
-    {
-    UINT Width;
-    UINT Height;
-    IMAGE_PIXELFORMAT Format;
-    } 	IMAGE_INFO;
-
-
-EXTERN_C const IID IID_IPixelFilter;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("3d7df9a7-8da6-4fbf-a45b-7592f06d93a9")
-    IPixelFilter : public IFilter
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE GetImageInfo( 
-            /* [annotation][out] */ 
-            _Out_  IMAGE_INFO *imageInfo) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE GetPixelsForImage( 
-            /* [annotation][in] */ 
-            _In_  FLOAT scalingFactor,
-            /* [annotation][unique][in] */ 
-            _In_  const RECT *sourceRect,
-            /* [annotation][in] */ 
-            _In_  ULONG pixelBufferSize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(pixelBufferSize)  BYTE *pixelBuffer) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IPixelFilterVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in IPixelFilter * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in IPixelFilter * This);
-        
-        DECLSPEC_XFGVIRT(IFilter, Init)
-        SCODE ( STDMETHODCALLTYPE *Init )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG grfFlags,
-            /* [annotation][in] */ 
-            _In_  ULONG cAttributes,
-            /* [annotation][unique][size_is][in] */ 
-            _In_reads_(cAttributes)  const FULLPROPSPEC *aAttributes,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pFlags);
-        
-        DECLSPEC_XFGVIRT(IFilter, GetChunk)
-        SCODE ( STDMETHODCALLTYPE *GetChunk )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][out] */ 
-            _Out_  STAT_CHUNK *pStat);
-        
-        DECLSPEC_XFGVIRT(IFilter, GetText)
-        SCODE ( STDMETHODCALLTYPE *GetText )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcwcBuffer,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pcwcBuffer)  WCHAR *awcBuffer);
-        
-        DECLSPEC_XFGVIRT(IFilter, GetValue)
-        SCODE ( STDMETHODCALLTYPE *GetValue )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][out] */ 
-            _Out_  PROPVARIANT **ppPropValue);
-        
-        DECLSPEC_XFGVIRT(IFilter, BindRegion)
-        /* [local] */ SCODE ( STDMETHODCALLTYPE *BindRegion )( 
-            IPixelFilter * This,
-            /* [annotation][in] */ 
-            _In_  FILTERREGION origPos,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  void **ppunk);
-        
-        DECLSPEC_XFGVIRT(IPixelFilter, GetImageInfo)
-        HRESULT ( STDMETHODCALLTYPE *GetImageInfo )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][out] */ 
-            _Out_  IMAGE_INFO *imageInfo);
-        
-        DECLSPEC_XFGVIRT(IPixelFilter, GetPixelsForImage)
-        HRESULT ( STDMETHODCALLTYPE *GetPixelsForImage )( 
-            __RPC__in IPixelFilter * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT scalingFactor,
-            /* [annotation][unique][in] */ 
-            _In_  const RECT *sourceRect,
-            /* [annotation][in] */ 
-            _In_  ULONG pixelBufferSize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(pixelBufferSize)  BYTE *pixelBuffer);
-        
-        END_INTERFACE
-    } IPixelFilterVtbl;
-
-    interface IPixelFilter
-    {
-        CONST_VTBL struct IPixelFilterVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IPixelFilter_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IPixelFilter_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IPixelFilter_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IPixelFilter_Init(This,grfFlags,cAttributes,aAttributes,pFlags)	\
-    ( (This)->lpVtbl -> Init(This,grfFlags,cAttributes,aAttributes,pFlags) ) 
-
-#define IPixelFilter_GetChunk(This,pStat)	\
-    ( (This)->lpVtbl -> GetChunk(This,pStat) ) 
-
-#define IPixelFilter_GetText(This,pcwcBuffer,awcBuffer)	\
-    ( (This)->lpVtbl -> GetText(This,pcwcBuffer,awcBuffer) ) 
-
-#define IPixelFilter_GetValue(This,ppPropValue)	\
-    ( (This)->lpVtbl -> GetValue(This,ppPropValue) ) 
-
-#define IPixelFilter_BindRegion(This,origPos,riid,ppunk)	\
-    ( (This)->lpVtbl -> BindRegion(This,origPos,riid,ppunk) ) 
-
-
-#define IPixelFilter_GetImageInfo(This,imageInfo)	\
-    ( (This)->lpVtbl -> GetImageInfo(This,imageInfo) ) 
-
-#define IPixelFilter_GetPixelsForImage(This,scalingFactor,sourceRect,pixelBufferSize,pixelBuffer)	\
-    ( (This)->lpVtbl -> GetPixelsForImage(This,scalingFactor,sourceRect,pixelBufferSize,pixelBuffer) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IPixelFilter_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_filter_0000_0002 */
+/* interface __MIDL_itf_filter_0000_0001 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0002_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0002_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0001_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0001_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

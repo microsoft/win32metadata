@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2182,7 +2182,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbBulkInEndpointDescriptor = __uuidof(IUsbBulkInEndpointDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbBulkInEndpointDescriptor = _uuidof(IUsbBulkInEndpointDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2234,7 +2234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbBulkInPipe = __uuidof(IUsbBulkInPipe);
+                extern MIDL_CONST_ID IID& IID_IUsbBulkInPipe = _uuidof(IUsbBulkInPipe);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2276,7 +2276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbBulkOutEndpointDescriptor = __uuidof(IUsbBulkOutEndpointDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbBulkOutEndpointDescriptor = _uuidof(IUsbBulkOutEndpointDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2324,7 +2324,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbBulkOutPipe = __uuidof(IUsbBulkOutPipe);
+                extern MIDL_CONST_ID IID& IID_IUsbBulkOutPipe = _uuidof(IUsbBulkOutPipe);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2366,7 +2366,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbConfiguration = __uuidof(IUsbConfiguration);
+                extern MIDL_CONST_ID IID& IID_IUsbConfiguration = _uuidof(IUsbConfiguration);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2411,7 +2411,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbConfigurationDescriptor = __uuidof(IUsbConfigurationDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbConfigurationDescriptor = _uuidof(IUsbConfigurationDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2453,7 +2453,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbConfigurationDescriptorStatics = __uuidof(IUsbConfigurationDescriptorStatics);
+                extern MIDL_CONST_ID IID& IID_IUsbConfigurationDescriptorStatics = _uuidof(IUsbConfigurationDescriptorStatics);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2510,7 +2510,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbControlRequestType = __uuidof(IUsbControlRequestType);
+                extern MIDL_CONST_ID IID& IID_IUsbControlRequestType = _uuidof(IUsbControlRequestType);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2552,7 +2552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDescriptor = __uuidof(IUsbDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbDescriptor = _uuidof(IUsbDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2615,7 +2615,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDevice = __uuidof(IUsbDevice);
+                extern MIDL_CONST_ID IID& IID_IUsbDevice = _uuidof(IUsbDevice);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2666,7 +2666,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDeviceClass = __uuidof(IUsbDeviceClass);
+                extern MIDL_CONST_ID IID& IID_IUsbDeviceClass = _uuidof(IUsbDeviceClass);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2699,7 +2699,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDeviceClasses = __uuidof(IUsbDeviceClasses);
+                extern MIDL_CONST_ID IID& IID_IUsbDeviceClasses = _uuidof(IUsbDeviceClasses);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2759,7 +2759,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDeviceClassesStatics = __uuidof(IUsbDeviceClassesStatics);
+                extern MIDL_CONST_ID IID& IID_IUsbDeviceClassesStatics = _uuidof(IUsbDeviceClassesStatics);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2810,7 +2810,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDeviceDescriptor = __uuidof(IUsbDeviceDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbDeviceDescriptor = _uuidof(IUsbDeviceDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2866,7 +2866,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbDeviceStatics = __uuidof(IUsbDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_IUsbDeviceStatics = _uuidof(IUsbDeviceStatics);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2920,7 +2920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbEndpointDescriptor = __uuidof(IUsbEndpointDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbEndpointDescriptor = _uuidof(IUsbEndpointDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -2962,7 +2962,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbEndpointDescriptorStatics = __uuidof(IUsbEndpointDescriptorStatics);
+                extern MIDL_CONST_ID IID& IID_IUsbEndpointDescriptorStatics = _uuidof(IUsbEndpointDescriptorStatics);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3016,7 +3016,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterface = __uuidof(IUsbInterface);
+                extern MIDL_CONST_ID IID& IID_IUsbInterface = _uuidof(IUsbInterface);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3064,7 +3064,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterfaceDescriptor = __uuidof(IUsbInterfaceDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbInterfaceDescriptor = _uuidof(IUsbInterfaceDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3106,7 +3106,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterfaceDescriptorStatics = __uuidof(IUsbInterfaceDescriptorStatics);
+                extern MIDL_CONST_ID IID& IID_IUsbInterfaceDescriptorStatics = _uuidof(IUsbInterfaceDescriptorStatics);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3163,7 +3163,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterfaceSetting = __uuidof(IUsbInterfaceSetting);
+                extern MIDL_CONST_ID IID& IID_IUsbInterfaceSetting = _uuidof(IUsbInterfaceSetting);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3208,7 +3208,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterruptInEndpointDescriptor = __uuidof(IUsbInterruptInEndpointDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbInterruptInEndpointDescriptor = _uuidof(IUsbInterruptInEndpointDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3244,7 +3244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterruptInEventArgs = __uuidof(IUsbInterruptInEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUsbInterruptInEventArgs = _uuidof(IUsbInterruptInEventArgs);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3290,7 +3290,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterruptInPipe = __uuidof(IUsbInterruptInPipe);
+                extern MIDL_CONST_ID IID& IID_IUsbInterruptInPipe = _uuidof(IUsbInterruptInPipe);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3335,7 +3335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterruptOutEndpointDescriptor = __uuidof(IUsbInterruptOutEndpointDescriptor);
+                extern MIDL_CONST_ID IID& IID_IUsbInterruptOutEndpointDescriptor = _uuidof(IUsbInterruptOutEndpointDescriptor);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3383,7 +3383,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbInterruptOutPipe = __uuidof(IUsbInterruptOutPipe);
+                extern MIDL_CONST_ID IID& IID_IUsbInterruptOutPipe = _uuidof(IUsbInterruptOutPipe);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3446,7 +3446,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbSetupPacket = __uuidof(IUsbSetupPacket);
+                extern MIDL_CONST_ID IID& IID_IUsbSetupPacket = _uuidof(IUsbSetupPacket);
             } /* Usb */
         } /* Devices */
     } /* Windows */
@@ -3483,7 +3483,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUsbSetupPacketFactory = __uuidof(IUsbSetupPacketFactory);
+                extern MIDL_CONST_ID IID& IID_IUsbSetupPacketFactory = _uuidof(IUsbSetupPacketFactory);
             } /* Usb */
         } /* Devices */
     } /* Windows */

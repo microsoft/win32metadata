@@ -453,62 +453,6 @@ typedef interface ISupportAllowLowerTrustActivation ISupportAllowLowerTrustActiv
 #endif 	/* __ISupportAllowLowerTrustActivation_FWD_DEFINED__ */
 
 
-#ifndef __ISupportActivationFromPackage_FWD_DEFINED__
-#define __ISupportActivationFromPackage_FWD_DEFINED__
-typedef interface ISupportActivationFromPackage ISupportActivationFromPackage;
-
-#endif 	/* __ISupportActivationFromPackage_FWD_DEFINED__ */
-
-
-#ifndef __ISupportCoAddComDependencyOnPackage_FWD_DEFINED__
-#define __ISupportCoAddComDependencyOnPackage_FWD_DEFINED__
-typedef interface ISupportCoAddComDependencyOnPackage ISupportCoAddComDependencyOnPackage;
-
-#endif 	/* __ISupportCoAddComDependencyOnPackage_FWD_DEFINED__ */
-
-
-#ifndef __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_FWD_DEFINED__
-#define __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_FWD_DEFINED__
-typedef interface ISupportServerMustBeEqualOrGreaterPrivilegeActivation ISupportServerMustBeEqualOrGreaterPrivilegeActivation;
-
-#endif 	/* __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_FWD_DEFINED__ */
-
-
-#ifndef __ISupportDoNotElevateServerActivation_FWD_DEFINED__
-#define __ISupportDoNotElevateServerActivation_FWD_DEFINED__
-typedef interface ISupportDoNotElevateServerActivation ISupportDoNotElevateServerActivation;
-
-#endif 	/* __ISupportDoNotElevateServerActivation_FWD_DEFINED__ */
-
-
-#ifndef __ISupportActivateAsActivatorPackaged_FWD_DEFINED__
-#define __ISupportActivateAsActivatorPackaged_FWD_DEFINED__
-typedef interface ISupportActivateAsActivatorPackaged ISupportActivateAsActivatorPackaged;
-
-#endif 	/* __ISupportActivateAsActivatorPackaged_FWD_DEFINED__ */
-
-
-#ifndef __ISupportPackagedComRegistrationVisibility_FWD_DEFINED__
-#define __ISupportPackagedComRegistrationVisibility_FWD_DEFINED__
-typedef interface ISupportPackagedComRegistrationVisibility ISupportPackagedComRegistrationVisibility;
-
-#endif 	/* __ISupportPackagedComRegistrationVisibility_FWD_DEFINED__ */
-
-
-#ifndef __ISupportPackagedComElevationEnabledClasses_FWD_DEFINED__
-#define __ISupportPackagedComElevationEnabledClasses_FWD_DEFINED__
-typedef interface ISupportPackagedComElevationEnabledClasses ISupportPackagedComElevationEnabledClasses;
-
-#endif 	/* __ISupportPackagedComElevationEnabledClasses_FWD_DEFINED__ */
-
-
-#ifndef __IPackagedComSyntaxSupport_FWD_DEFINED__
-#define __IPackagedComSyntaxSupport_FWD_DEFINED__
-typedef interface IPackagedComSyntaxSupport IPackagedComSyntaxSupport;
-
-#endif 	/* __IPackagedComSyntaxSupport_FWD_DEFINED__ */
-
-
 #ifndef __IMallocSpy_FWD_DEFINED__
 #define __IMallocSpy_FWD_DEFINED__
 typedef interface IMallocSpy IMallocSpy;
@@ -8827,612 +8771,7 @@ EXTERN_C const IID IID_ISupportAllowLowerTrustActivation;
 #endif 	/* __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__ */
 
 
-#ifndef __ISupportActivationFromPackage_INTERFACE_DEFINED__
-#define __ISupportActivationFromPackage_INTERFACE_DEFINED__
-
-/* interface ISupportActivationFromPackage */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportActivationFromPackage;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("0a18aae5-5caa-48c5-a9f4-6e46dcd58ad5")
-    ISupportActivationFromPackage : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportActivationFromPackageVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportActivationFromPackage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportActivationFromPackage * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportActivationFromPackage * This);
-        
-        END_INTERFACE
-    } ISupportActivationFromPackageVtbl;
-
-    interface ISupportActivationFromPackage
-    {
-        CONST_VTBL struct ISupportActivationFromPackageVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportActivationFromPackage_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportActivationFromPackage_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportActivationFromPackage_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportActivationFromPackage_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportCoAddComDependencyOnPackage_INTERFACE_DEFINED__
-#define __ISupportCoAddComDependencyOnPackage_INTERFACE_DEFINED__
-
-/* interface ISupportCoAddComDependencyOnPackage */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportCoAddComDependencyOnPackage;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("c8059efc-4e98-4fd0-bfc6-44190b80b823")
-    ISupportCoAddComDependencyOnPackage : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportCoAddComDependencyOnPackageVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportCoAddComDependencyOnPackage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportCoAddComDependencyOnPackage * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportCoAddComDependencyOnPackage * This);
-        
-        END_INTERFACE
-    } ISupportCoAddComDependencyOnPackageVtbl;
-
-    interface ISupportCoAddComDependencyOnPackage
-    {
-        CONST_VTBL struct ISupportCoAddComDependencyOnPackageVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportCoAddComDependencyOnPackage_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportCoAddComDependencyOnPackage_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportCoAddComDependencyOnPackage_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportCoAddComDependencyOnPackage_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_INTERFACE_DEFINED__
-#define __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_INTERFACE_DEFINED__
-
-/* interface ISupportServerMustBeEqualOrGreaterPrivilegeActivation */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportServerMustBeEqualOrGreaterPrivilegeActivation;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("5bdb3ee2-46bc-4313-b5fb-801c360ba5f9")
-    ISupportServerMustBeEqualOrGreaterPrivilegeActivation : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportServerMustBeEqualOrGreaterPrivilegeActivation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportServerMustBeEqualOrGreaterPrivilegeActivation * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportServerMustBeEqualOrGreaterPrivilegeActivation * This);
-        
-        END_INTERFACE
-    } ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl;
-
-    interface ISupportServerMustBeEqualOrGreaterPrivilegeActivation
-    {
-        CONST_VTBL struct ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportServerMustBeEqualOrGreaterPrivilegeActivation_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportServerMustBeEqualOrGreaterPrivilegeActivation_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportServerMustBeEqualOrGreaterPrivilegeActivation_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportServerMustBeEqualOrGreaterPrivilegeActivation_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportDoNotElevateServerActivation_INTERFACE_DEFINED__
-#define __ISupportDoNotElevateServerActivation_INTERFACE_DEFINED__
-
-/* interface ISupportDoNotElevateServerActivation */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportDoNotElevateServerActivation;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("40aefe22-3ff6-43dc-8108-c8c402d57b5c")
-    ISupportDoNotElevateServerActivation : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportDoNotElevateServerActivationVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportDoNotElevateServerActivation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportDoNotElevateServerActivation * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportDoNotElevateServerActivation * This);
-        
-        END_INTERFACE
-    } ISupportDoNotElevateServerActivationVtbl;
-
-    interface ISupportDoNotElevateServerActivation
-    {
-        CONST_VTBL struct ISupportDoNotElevateServerActivationVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportDoNotElevateServerActivation_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportDoNotElevateServerActivation_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportDoNotElevateServerActivation_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportDoNotElevateServerActivation_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportActivateAsActivatorPackaged_INTERFACE_DEFINED__
-#define __ISupportActivateAsActivatorPackaged_INTERFACE_DEFINED__
-
-/* interface ISupportActivateAsActivatorPackaged */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportActivateAsActivatorPackaged;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("765d1df2-f0af-4ef8-aa50-84789ca330ed")
-    ISupportActivateAsActivatorPackaged : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportActivateAsActivatorPackagedVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportActivateAsActivatorPackaged * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportActivateAsActivatorPackaged * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportActivateAsActivatorPackaged * This);
-        
-        END_INTERFACE
-    } ISupportActivateAsActivatorPackagedVtbl;
-
-    interface ISupportActivateAsActivatorPackaged
-    {
-        CONST_VTBL struct ISupportActivateAsActivatorPackagedVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportActivateAsActivatorPackaged_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportActivateAsActivatorPackaged_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportActivateAsActivatorPackaged_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportActivateAsActivatorPackaged_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportPackagedComRegistrationVisibility_INTERFACE_DEFINED__
-#define __ISupportPackagedComRegistrationVisibility_INTERFACE_DEFINED__
-
-/* interface ISupportPackagedComRegistrationVisibility */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportPackagedComRegistrationVisibility;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("8dc3444e-c7ee-449a-9fb8-b9173988d66a")
-    ISupportPackagedComRegistrationVisibility : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportPackagedComRegistrationVisibilityVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportPackagedComRegistrationVisibility * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportPackagedComRegistrationVisibility * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportPackagedComRegistrationVisibility * This);
-        
-        END_INTERFACE
-    } ISupportPackagedComRegistrationVisibilityVtbl;
-
-    interface ISupportPackagedComRegistrationVisibility
-    {
-        CONST_VTBL struct ISupportPackagedComRegistrationVisibilityVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportPackagedComRegistrationVisibility_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportPackagedComRegistrationVisibility_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportPackagedComRegistrationVisibility_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportPackagedComRegistrationVisibility_INTERFACE_DEFINED__ */
-
-
-#ifndef __ISupportPackagedComElevationEnabledClasses_INTERFACE_DEFINED__
-#define __ISupportPackagedComElevationEnabledClasses_INTERFACE_DEFINED__
-
-/* interface ISupportPackagedComElevationEnabledClasses */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_ISupportPackagedComElevationEnabledClasses;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("b4219019-f712-4d4f-ade7-f468276af0b8")
-    ISupportPackagedComElevationEnabledClasses : public IUnknown
-    {
-    public:
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct ISupportPackagedComElevationEnabledClassesVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ISupportPackagedComElevationEnabledClasses * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ISupportPackagedComElevationEnabledClasses * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ISupportPackagedComElevationEnabledClasses * This);
-        
-        END_INTERFACE
-    } ISupportPackagedComElevationEnabledClassesVtbl;
-
-    interface ISupportPackagedComElevationEnabledClasses
-    {
-        CONST_VTBL struct ISupportPackagedComElevationEnabledClassesVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ISupportPackagedComElevationEnabledClasses_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define ISupportPackagedComElevationEnabledClasses_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define ISupportPackagedComElevationEnabledClasses_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ISupportPackagedComElevationEnabledClasses_INTERFACE_DEFINED__ */
-
-
-#ifndef __IPackagedComSyntaxSupport_INTERFACE_DEFINED__
-#define __IPackagedComSyntaxSupport_INTERFACE_DEFINED__
-
-/* interface IPackagedComSyntaxSupport */
-/* [uuid][object][local] */ 
-
-
-EXTERN_C const IID IID_IPackagedComSyntaxSupport;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("8f146474-b228-48fb-a58c-105ebb273abc")
-    IPackagedComSyntaxSupport : public IUnknown
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE GetSupportedVersion( 
-            /* [annotation][out] */ 
-            _Out_  UINT32 *supportedVersion) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IPackagedComSyntaxSupportVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IPackagedComSyntaxSupport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IPackagedComSyntaxSupport * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IPackagedComSyntaxSupport * This);
-        
-        DECLSPEC_XFGVIRT(IPackagedComSyntaxSupport, GetSupportedVersion)
-        HRESULT ( STDMETHODCALLTYPE *GetSupportedVersion )( 
-            IPackagedComSyntaxSupport * This,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *supportedVersion);
-        
-        END_INTERFACE
-    } IPackagedComSyntaxSupportVtbl;
-
-    interface IPackagedComSyntaxSupport
-    {
-        CONST_VTBL struct IPackagedComSyntaxSupportVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IPackagedComSyntaxSupport_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IPackagedComSyntaxSupport_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IPackagedComSyntaxSupport_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IPackagedComSyntaxSupport_GetSupportedVersion(This,supportedVersion)	\
-    ( (This)->lpVtbl -> GetSupportedVersion(This,supportedVersion) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IPackagedComSyntaxSupport_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_objidl_0000_0062 */
+/* interface __MIDL_itf_objidl_0000_0054 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -9459,8 +8798,8 @@ EXTERN_C const IID IID_IPackagedComSyntaxSupport;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_s_ifspec;
 
 #ifndef __IMallocSpy_INTERFACE_DEFINED__
 #define __IMallocSpy_INTERFACE_DEFINED__
@@ -9726,7 +9065,7 @@ EXTERN_C const IID IID_IMallocSpy;
 #endif 	/* __IMallocSpy_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0063 */
+/* interface __MIDL_itf_objidl_0000_0055 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -9735,8 +9074,8 @@ EXTERN_C const IID IID_IMallocSpy;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0055_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0055_v0_0_s_ifspec;
 
 #ifndef __IBindCtx_INTERFACE_DEFINED__
 #define __IBindCtx_INTERFACE_DEFINED__
@@ -10196,7 +9535,7 @@ void __RPC_STUB IEnumMoniker_RemoteNext_Stub(
 #endif 	/* __IEnumMoniker_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0065 */
+/* interface __MIDL_itf_objidl_0000_0057 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -10205,8 +9544,8 @@ void __RPC_STUB IEnumMoniker_RemoteNext_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0065_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0065_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0057_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0057_v0_0_s_ifspec;
 
 #ifndef __IRunnableObject_INTERFACE_DEFINED__
 #define __IRunnableObject_INTERFACE_DEFINED__
@@ -10551,7 +9890,7 @@ EXTERN_C const IID IID_IRunningObjectTable;
 #endif 	/* __IRunningObjectTable_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0067 */
+/* interface __MIDL_itf_objidl_0000_0059 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -10560,8 +9899,8 @@ EXTERN_C const IID IID_IRunningObjectTable;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0067_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0067_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0059_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0059_v0_0_s_ifspec;
 
 #ifndef __IPersist_INTERFACE_DEFINED__
 #define __IPersist_INTERFACE_DEFINED__
@@ -11266,7 +10605,7 @@ void __RPC_STUB IMoniker_RemoteBindToStorage_Stub(
 #endif 	/* __IMoniker_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0070 */
+/* interface __MIDL_itf_objidl_0000_0062 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -11275,8 +10614,8 @@ void __RPC_STUB IMoniker_RemoteBindToStorage_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0070_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0070_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_s_ifspec;
 
 #ifndef __IROTData_INTERFACE_DEFINED__
 #define __IROTData_INTERFACE_DEFINED__
@@ -11373,7 +10712,7 @@ EXTERN_C const IID IID_IROTData;
 #endif 	/* __IROTData_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0071 */
+/* interface __MIDL_itf_objidl_0000_0063 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -11382,8 +10721,8 @@ EXTERN_C const IID IID_IROTData;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0071_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0071_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_s_ifspec;
 
 #ifndef __IEnumSTATSTG_INTERFACE_DEFINED__
 #define __IEnumSTATSTG_INTERFACE_DEFINED__
@@ -12004,7 +11343,7 @@ void __RPC_STUB IStorage_RemoteEnumElements_Stub(
 #endif 	/* __IStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0073 */
+/* interface __MIDL_itf_objidl_0000_0065 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -12013,8 +11352,8 @@ void __RPC_STUB IStorage_RemoteEnumElements_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0065_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0065_v0_0_s_ifspec;
 
 #ifndef __IPersistFile_INTERFACE_DEFINED__
 #define __IPersistFile_INTERFACE_DEFINED__
@@ -12331,7 +11670,7 @@ EXTERN_C const IID IID_IPersistStorage;
 #endif 	/* __IPersistStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0075 */
+/* interface __MIDL_itf_objidl_0000_0067 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -12340,8 +11679,8 @@ EXTERN_C const IID IID_IPersistStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0067_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0067_v0_0_s_ifspec;
 
 #ifndef __ILockBytes_INTERFACE_DEFINED__
 #define __ILockBytes_INTERFACE_DEFINED__
@@ -13658,7 +12997,7 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnClose_Stub(
 #endif 	/* __AsyncIAdviseSink_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0080 */
+/* interface __MIDL_itf_objidl_0000_0072 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -13667,8 +13006,8 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnClose_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0072_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0072_v0_0_s_ifspec;
 
 #ifndef __IAdviseSink2_INTERFACE_DEFINED__
 #define __IAdviseSink2_INTERFACE_DEFINED__
@@ -14019,7 +13358,7 @@ void __RPC_STUB AsyncIAdviseSink2_Finish_RemoteOnLinkSrcChange_Stub(
 #endif 	/* __AsyncIAdviseSink2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0081 */
+/* interface __MIDL_itf_objidl_0000_0073 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -14028,8 +13367,8 @@ void __RPC_STUB AsyncIAdviseSink2_Finish_RemoteOnLinkSrcChange_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0081_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0081_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_s_ifspec;
 
 #ifndef __IDataObject_INTERFACE_DEFINED__
 #define __IDataObject_INTERFACE_DEFINED__
@@ -14314,7 +13653,7 @@ void __RPC_STUB IDataObject_RemoteSetData_Stub(
 #endif 	/* __IDataObject_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0082 */
+/* interface __MIDL_itf_objidl_0000_0074 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -14323,8 +13662,8 @@ void __RPC_STUB IDataObject_RemoteSetData_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0082_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0082_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0074_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0074_v0_0_s_ifspec;
 
 #ifndef __IDataAdviseHolder_INTERFACE_DEFINED__
 #define __IDataAdviseHolder_INTERFACE_DEFINED__
@@ -14663,7 +14002,7 @@ EXTERN_C const IID IID_IMessageFilter;
 #endif 	/* __IMessageFilter_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0084 */
+/* interface __MIDL_itf_objidl_0000_0076 */
 /* [local] */ 
 
 
@@ -14686,8 +14025,8 @@ extern const FMTID FMTID_MediaFileSummaryInformation;
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0076_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0076_v0_0_s_ifspec;
 
 #ifndef __IClassActivator_INTERFACE_DEFINED__
 #define __IClassActivator_INTERFACE_DEFINED__
@@ -14792,7 +14131,7 @@ EXTERN_C const IID IID_IClassActivator;
 #endif 	/* __IClassActivator_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0085 */
+/* interface __MIDL_itf_objidl_0000_0077 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -14801,8 +14140,8 @@ EXTERN_C const IID IID_IClassActivator;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0085_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0085_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_s_ifspec;
 
 #ifndef __IFillLockBytes_INTERFACE_DEFINED__
 #define __IFillLockBytes_INTERFACE_DEFINED__
@@ -14986,7 +14325,7 @@ void __RPC_STUB IFillLockBytes_RemoteFillAt_Stub(
 #endif 	/* __IFillLockBytes_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0086 */
+/* interface __MIDL_itf_objidl_0000_0078 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -14995,8 +14334,8 @@ void __RPC_STUB IFillLockBytes_RemoteFillAt_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0086_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0086_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_s_ifspec;
 
 #ifndef __IProgressNotify_INTERFACE_DEFINED__
 #define __IProgressNotify_INTERFACE_DEFINED__
@@ -15097,7 +14436,7 @@ EXTERN_C const IID IID_IProgressNotify;
 #endif 	/* __IProgressNotify_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0087 */
+/* interface __MIDL_itf_objidl_0000_0079 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -15106,8 +14445,8 @@ EXTERN_C const IID IID_IProgressNotify;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0087_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0087_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_s_ifspec;
 
 #ifndef __ILayoutStorage_INTERFACE_DEFINED__
 #define __ILayoutStorage_INTERFACE_DEFINED__
@@ -15256,7 +14595,7 @@ EXTERN_C const IID IID_ILayoutStorage;
 #endif 	/* __ILayoutStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0088 */
+/* interface __MIDL_itf_objidl_0000_0080 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -15265,8 +14604,8 @@ EXTERN_C const IID IID_ILayoutStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0088_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0088_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_s_ifspec;
 
 #ifndef __IBlockingLock_INTERFACE_DEFINED__
 #define __IBlockingLock_INTERFACE_DEFINED__
@@ -15595,7 +14934,7 @@ EXTERN_C const IID IID_IOplockStorage;
 #endif 	/* __IOplockStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0091 */
+/* interface __MIDL_itf_objidl_0000_0083 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -15604,8 +14943,8 @@ EXTERN_C const IID IID_IOplockStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0083_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0083_v0_0_s_ifspec;
 
 #ifndef __IDirectWriterLock_INTERFACE_DEFINED__
 #define __IDirectWriterLock_INTERFACE_DEFINED__
@@ -15712,7 +15051,7 @@ EXTERN_C const IID IID_IDirectWriterLock;
 #endif 	/* __IDirectWriterLock_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0092 */
+/* interface __MIDL_itf_objidl_0000_0084 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -15721,8 +15060,8 @@ EXTERN_C const IID IID_IDirectWriterLock;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_s_ifspec;
 
 #ifndef __IUrlMon_INTERFACE_DEFINED__
 #define __IUrlMon_INTERFACE_DEFINED__
@@ -16145,7 +15484,7 @@ EXTERN_C const IID IID_IDummyHICONIncluder;
 #endif 	/* __IDummyHICONIncluder_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0096 */
+/* interface __MIDL_itf_objidl_0000_0088 */
 /* [local] */ 
 
 typedef 
@@ -16164,8 +15503,8 @@ enum tagShutdownType
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0096_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0096_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0088_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0088_v0_0_s_ifspec;
 
 #ifndef __IProcessLock_INTERFACE_DEFINED__
 #define __IProcessLock_INTERFACE_DEFINED__
@@ -16410,14 +15749,14 @@ EXTERN_C const IID IID_ISurrogateService;
 #endif 	/* __ISurrogateService_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0098 */
+/* interface __MIDL_itf_objidl_0000_0090 */
 /* [local] */ 
 
 #if  (_WIN32_WINNT >= 0x0501 )
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0098_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0098_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0090_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0090_v0_0_s_ifspec;
 
 #ifndef __IInitializeSpy_INTERFACE_DEFINED__
 #define __IInitializeSpy_INTERFACE_DEFINED__
@@ -16559,7 +15898,7 @@ EXTERN_C const IID IID_IInitializeSpy;
 #endif 	/* __IInitializeSpy_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0099 */
+/* interface __MIDL_itf_objidl_0000_0091 */
 /* [local] */ 
 
 #endif
@@ -16569,8 +15908,8 @@ EXTERN_C const IID IID_IInitializeSpy;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0099_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0099_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_s_ifspec;
 
 #ifndef __IApartmentShutdown_INTERFACE_DEFINED__
 #define __IApartmentShutdown_INTERFACE_DEFINED__
@@ -16659,7 +15998,7 @@ EXTERN_C const IID IID_IApartmentShutdown;
 #endif 	/* __IApartmentShutdown_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0100 */
+/* interface __MIDL_itf_objidl_0000_0092 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -16673,8 +16012,8 @@ EXTERN_C const IID IID_IApartmentShutdown;
 #endif
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0100_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0100_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

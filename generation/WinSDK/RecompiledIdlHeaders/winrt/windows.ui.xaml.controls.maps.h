@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SERVICES_MAPS_GUIDANCECONTRACT_VERSION)
@@ -5996,7 +5996,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICustomMapTileDataSource = __uuidof(ICustomMapTileDataSource);
+                        extern MIDL_CONST_ID IID& IID_ICustomMapTileDataSource = _uuidof(ICustomMapTileDataSource);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6038,7 +6038,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ICustomMapTileDataSourceFactory = __uuidof(ICustomMapTileDataSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_ICustomMapTileDataSourceFactory = _uuidof(ICustomMapTileDataSourceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6097,7 +6097,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IHttpMapTileDataSource = __uuidof(IHttpMapTileDataSource);
+                        extern MIDL_CONST_ID IID& IID_IHttpMapTileDataSource = _uuidof(IHttpMapTileDataSource);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6145,7 +6145,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IHttpMapTileDataSourceFactory = __uuidof(IHttpMapTileDataSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_IHttpMapTileDataSourceFactory = _uuidof(IHttpMapTileDataSourceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6195,7 +6195,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ILocalMapTileDataSource = __uuidof(ILocalMapTileDataSource);
+                        extern MIDL_CONST_ID IID& IID_ILocalMapTileDataSource = _uuidof(ILocalMapTileDataSource);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6243,7 +6243,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ILocalMapTileDataSourceFactory = __uuidof(ILocalMapTileDataSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_ILocalMapTileDataSourceFactory = _uuidof(ILocalMapTileDataSourceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6283,7 +6283,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapActualCameraChangedEventArgs = __uuidof(IMapActualCameraChangedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapActualCameraChangedEventArgs = _uuidof(IMapActualCameraChangedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6323,7 +6323,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapActualCameraChangedEventArgs2 = __uuidof(IMapActualCameraChangedEventArgs2);
+                        extern MIDL_CONST_ID IID& IID_IMapActualCameraChangedEventArgs2 = _uuidof(IMapActualCameraChangedEventArgs2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6363,7 +6363,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapActualCameraChangingEventArgs = __uuidof(IMapActualCameraChangingEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapActualCameraChangingEventArgs = _uuidof(IMapActualCameraChangingEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6403,7 +6403,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapActualCameraChangingEventArgs2 = __uuidof(IMapActualCameraChangingEventArgs2);
+                        extern MIDL_CONST_ID IID& IID_IMapActualCameraChangingEventArgs2 = _uuidof(IMapActualCameraChangingEventArgs2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6467,7 +6467,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapBillboard = __uuidof(IMapBillboard);
+                        extern MIDL_CONST_ID IID& IID_IMapBillboard = _uuidof(IMapBillboard);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6508,7 +6508,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapBillboardFactory = __uuidof(IMapBillboardFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapBillboardFactory = _uuidof(IMapBillboardFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6554,7 +6554,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapBillboardStatics = __uuidof(IMapBillboardStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapBillboardStatics = _uuidof(IMapBillboardStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6621,7 +6621,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapCamera = __uuidof(IMapCamera);
+                        extern MIDL_CONST_ID IID& IID_IMapCamera = _uuidof(IMapCamera);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6681,7 +6681,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapCameraFactory = __uuidof(IMapCameraFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapCameraFactory = _uuidof(IMapCameraFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6727,7 +6727,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapContextRequestedEventArgs = __uuidof(IMapContextRequestedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapContextRequestedEventArgs = _uuidof(IMapContextRequestedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -6969,7 +6969,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl = __uuidof(IMapControl);
+                        extern MIDL_CONST_ID IID& IID_IMapControl = _uuidof(IMapControl);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7162,7 +7162,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl2 = __uuidof(IMapControl2);
+                        extern MIDL_CONST_ID IID& IID_IMapControl2 = _uuidof(IMapControl2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7206,7 +7206,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl3 = __uuidof(IMapControl3);
+                        extern MIDL_CONST_ID IID& IID_IMapControl3 = _uuidof(IMapControl3);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7259,7 +7259,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl4 = __uuidof(IMapControl4);
+                        extern MIDL_CONST_ID IID& IID_IMapControl4 = _uuidof(IMapControl4);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7345,7 +7345,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl5 = __uuidof(IMapControl5);
+                        extern MIDL_CONST_ID IID& IID_IMapControl5 = _uuidof(IMapControl5);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7399,7 +7399,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl6 = __uuidof(IMapControl6);
+                        extern MIDL_CONST_ID IID& IID_IMapControl6 = _uuidof(IMapControl6);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7442,7 +7442,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl7 = __uuidof(IMapControl7);
+                        extern MIDL_CONST_ID IID& IID_IMapControl7 = _uuidof(IMapControl7);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7491,7 +7491,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControl8 = __uuidof(IMapControl8);
+                        extern MIDL_CONST_ID IID& IID_IMapControl8 = _uuidof(IMapControl8);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7531,7 +7531,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkClickEventArgs = __uuidof(IMapControlBusinessLandmarkClickEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkClickEventArgs = _uuidof(IMapControlBusinessLandmarkClickEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7571,7 +7571,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkPointerEnteredEventArgs = __uuidof(IMapControlBusinessLandmarkPointerEnteredEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkPointerEnteredEventArgs = _uuidof(IMapControlBusinessLandmarkPointerEnteredEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7611,7 +7611,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkPointerExitedEventArgs = __uuidof(IMapControlBusinessLandmarkPointerExitedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkPointerExitedEventArgs = _uuidof(IMapControlBusinessLandmarkPointerExitedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7651,7 +7651,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkRightTappedEventArgs = __uuidof(IMapControlBusinessLandmarkRightTappedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlBusinessLandmarkRightTappedEventArgs = _uuidof(IMapControlBusinessLandmarkRightTappedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7716,7 +7716,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlDataHelper = __uuidof(IMapControlDataHelper);
+                        extern MIDL_CONST_ID IID& IID_IMapControlDataHelper = _uuidof(IMapControlDataHelper);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7781,7 +7781,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlDataHelper2 = __uuidof(IMapControlDataHelper2);
+                        extern MIDL_CONST_ID IID& IID_IMapControlDataHelper2 = _uuidof(IMapControlDataHelper2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7822,7 +7822,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlDataHelperFactory = __uuidof(IMapControlDataHelperFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapControlDataHelperFactory = _uuidof(IMapControlDataHelperFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7863,7 +7863,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlDataHelperStatics = __uuidof(IMapControlDataHelperStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapControlDataHelperStatics = _uuidof(IMapControlDataHelperStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -7976,7 +7976,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics = __uuidof(IMapControlStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics = _uuidof(IMapControlStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8040,7 +8040,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics2 = __uuidof(IMapControlStatics2);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics2 = _uuidof(IMapControlStatics2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8083,7 +8083,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics4 = __uuidof(IMapControlStatics4);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics4 = _uuidof(IMapControlStatics4);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8129,7 +8129,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics5 = __uuidof(IMapControlStatics5);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics5 = _uuidof(IMapControlStatics5);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8169,7 +8169,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics6 = __uuidof(IMapControlStatics6);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics6 = _uuidof(IMapControlStatics6);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8209,7 +8209,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics7 = __uuidof(IMapControlStatics7);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics7 = _uuidof(IMapControlStatics7);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8258,7 +8258,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlStatics8 = __uuidof(IMapControlStatics8);
+                        extern MIDL_CONST_ID IID& IID_IMapControlStatics8 = _uuidof(IMapControlStatics8);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8304,7 +8304,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlTransitFeatureClickEventArgs = __uuidof(IMapControlTransitFeatureClickEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlTransitFeatureClickEventArgs = _uuidof(IMapControlTransitFeatureClickEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8350,7 +8350,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlTransitFeaturePointerEnteredEventArgs = __uuidof(IMapControlTransitFeaturePointerEnteredEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlTransitFeaturePointerEnteredEventArgs = _uuidof(IMapControlTransitFeaturePointerEnteredEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8396,7 +8396,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlTransitFeaturePointerExitedEventArgs = __uuidof(IMapControlTransitFeaturePointerExitedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlTransitFeaturePointerExitedEventArgs = _uuidof(IMapControlTransitFeaturePointerExitedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8442,7 +8442,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapControlTransitFeatureRightTappedEventArgs = __uuidof(IMapControlTransitFeatureRightTappedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapControlTransitFeatureRightTappedEventArgs = _uuidof(IMapControlTransitFeatureRightTappedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8479,7 +8479,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapCustomExperience = __uuidof(IMapCustomExperience);
+                        extern MIDL_CONST_ID IID& IID_IMapCustomExperience = _uuidof(IMapCustomExperience);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8516,7 +8516,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapCustomExperienceChangedEventArgs = __uuidof(IMapCustomExperienceChangedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapCustomExperienceChangedEventArgs = _uuidof(IMapCustomExperienceChangedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8558,7 +8558,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapCustomExperienceFactory = __uuidof(IMapCustomExperienceFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapCustomExperienceFactory = _uuidof(IMapCustomExperienceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8607,7 +8607,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement = __uuidof(IMapElement);
+                        extern MIDL_CONST_ID IID& IID_IMapElement = _uuidof(IMapElement);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8650,7 +8650,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement2 = __uuidof(IMapElement2);
+                        extern MIDL_CONST_ID IID& IID_IMapElement2 = _uuidof(IMapElement2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8705,7 +8705,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement3 = __uuidof(IMapElement3);
+                        extern MIDL_CONST_ID IID& IID_IMapElement3 = _uuidof(IMapElement3);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8778,7 +8778,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement3D = __uuidof(IMapElement3D);
+                        extern MIDL_CONST_ID IID& IID_IMapElement3D = _uuidof(IMapElement3D);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8830,7 +8830,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement3DStatics = __uuidof(IMapElement3DStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapElement3DStatics = _uuidof(IMapElement3DStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8873,7 +8873,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElement4 = __uuidof(IMapElement4);
+                        extern MIDL_CONST_ID IID& IID_IMapElement4 = _uuidof(IMapElement4);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8919,7 +8919,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementClickEventArgs = __uuidof(IMapElementClickEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementClickEventArgs = _uuidof(IMapElementClickEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -8961,7 +8961,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementFactory = __uuidof(IMapElementFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapElementFactory = _uuidof(IMapElementFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9007,7 +9007,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementPointerEnteredEventArgs = __uuidof(IMapElementPointerEnteredEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementPointerEnteredEventArgs = _uuidof(IMapElementPointerEnteredEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9053,7 +9053,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementPointerExitedEventArgs = __uuidof(IMapElementPointerExitedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementPointerExitedEventArgs = _uuidof(IMapElementPointerExitedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9096,7 +9096,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementStatics = __uuidof(IMapElementStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapElementStatics = _uuidof(IMapElementStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9136,7 +9136,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementStatics2 = __uuidof(IMapElementStatics2);
+                        extern MIDL_CONST_ID IID& IID_IMapElementStatics2 = _uuidof(IMapElementStatics2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9182,7 +9182,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementStatics3 = __uuidof(IMapElementStatics3);
+                        extern MIDL_CONST_ID IID& IID_IMapElementStatics3 = _uuidof(IMapElementStatics3);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9222,7 +9222,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementStatics4 = __uuidof(IMapElementStatics4);
+                        extern MIDL_CONST_ID IID& IID_IMapElementStatics4 = _uuidof(IMapElementStatics4);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9293,7 +9293,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayer = __uuidof(IMapElementsLayer);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayer = _uuidof(IMapElementsLayer);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9339,7 +9339,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayerClickEventArgs = __uuidof(IMapElementsLayerClickEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayerClickEventArgs = _uuidof(IMapElementsLayerClickEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9385,7 +9385,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayerContextRequestedEventArgs = __uuidof(IMapElementsLayerContextRequestedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayerContextRequestedEventArgs = _uuidof(IMapElementsLayerContextRequestedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9431,7 +9431,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayerPointerEnteredEventArgs = __uuidof(IMapElementsLayerPointerEnteredEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayerPointerEnteredEventArgs = _uuidof(IMapElementsLayerPointerEnteredEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9477,7 +9477,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayerPointerExitedEventArgs = __uuidof(IMapElementsLayerPointerExitedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayerPointerExitedEventArgs = _uuidof(IMapElementsLayerPointerExitedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9517,7 +9517,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapElementsLayerStatics = __uuidof(IMapElementsLayerStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapElementsLayerStatics = _uuidof(IMapElementsLayerStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9578,7 +9578,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapIcon = __uuidof(IMapIcon);
+                        extern MIDL_CONST_ID IID& IID_IMapIcon = _uuidof(IMapIcon);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9621,7 +9621,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapIcon2 = __uuidof(IMapIcon2);
+                        extern MIDL_CONST_ID IID& IID_IMapIcon2 = _uuidof(IMapIcon2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9667,7 +9667,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapIconStatics = __uuidof(IMapIconStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapIconStatics = _uuidof(IMapIconStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9707,7 +9707,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapIconStatics2 = __uuidof(IMapIconStatics2);
+                        extern MIDL_CONST_ID IID& IID_IMapIconStatics2 = _uuidof(IMapIconStatics2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9750,7 +9750,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapInputEventArgs = __uuidof(IMapInputEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapInputEventArgs = _uuidof(IMapInputEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9802,7 +9802,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapItemsControl = __uuidof(IMapItemsControl);
+                        extern MIDL_CONST_ID IID& IID_IMapItemsControl = _uuidof(IMapItemsControl);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9848,7 +9848,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapItemsControlStatics = __uuidof(IMapItemsControlStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapItemsControlStatics = _uuidof(IMapItemsControlStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9903,7 +9903,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapLayer = __uuidof(IMapLayer);
+                        extern MIDL_CONST_ID IID& IID_IMapLayer = _uuidof(IMapLayer);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9945,7 +9945,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapLayerFactory = __uuidof(IMapLayerFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapLayerFactory = _uuidof(IMapLayerFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -9991,7 +9991,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapLayerStatics = __uuidof(IMapLayerStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapLayerStatics = _uuidof(IMapLayerStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10028,7 +10028,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapModel3D = __uuidof(IMapModel3D);
+                        extern MIDL_CONST_ID IID& IID_IMapModel3D = _uuidof(IMapModel3D);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10070,7 +10070,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapModel3DFactory = __uuidof(IMapModel3DFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapModel3DFactory = _uuidof(IMapModel3DFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10116,7 +10116,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapModel3DStatics = __uuidof(IMapModel3DStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapModel3DStatics = _uuidof(IMapModel3DStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10183,7 +10183,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapPolygon = __uuidof(IMapPolygon);
+                        extern MIDL_CONST_ID IID& IID_IMapPolygon = _uuidof(IMapPolygon);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10223,7 +10223,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapPolygon2 = __uuidof(IMapPolygon2);
+                        extern MIDL_CONST_ID IID& IID_IMapPolygon2 = _uuidof(IMapPolygon2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10269,7 +10269,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapPolygonStatics = __uuidof(IMapPolygonStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapPolygonStatics = _uuidof(IMapPolygonStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10330,7 +10330,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapPolyline = __uuidof(IMapPolyline);
+                        extern MIDL_CONST_ID IID& IID_IMapPolyline = _uuidof(IMapPolyline);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10373,7 +10373,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapPolylineStatics = __uuidof(IMapPolylineStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapPolylineStatics = _uuidof(IMapPolylineStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10416,7 +10416,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapRightTappedEventArgs = __uuidof(IMapRightTappedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapRightTappedEventArgs = _uuidof(IMapRightTappedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10468,7 +10468,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapRouteView = __uuidof(IMapRouteView);
+                        extern MIDL_CONST_ID IID& IID_IMapRouteView = _uuidof(IMapRouteView);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10511,7 +10511,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapRouteViewFactory = __uuidof(IMapRouteViewFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapRouteViewFactory = _uuidof(IMapRouteViewFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10558,7 +10558,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapScene = __uuidof(IMapScene);
+                        extern MIDL_CONST_ID IID& IID_IMapScene = _uuidof(IMapScene);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10641,7 +10641,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapSceneStatics = __uuidof(IMapSceneStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapSceneStatics = _uuidof(IMapSceneStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10678,7 +10678,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapStyleSheet = __uuidof(IMapStyleSheet);
+                        extern MIDL_CONST_ID IID& IID_IMapStyleSheet = _uuidof(IMapStyleSheet);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10907,7 +10907,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapStyleSheetEntriesStatics = __uuidof(IMapStyleSheetEntriesStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapStyleSheetEntriesStatics = _uuidof(IMapStyleSheetEntriesStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -10953,7 +10953,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapStyleSheetEntryStatesStatics = __uuidof(IMapStyleSheetEntryStatesStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapStyleSheetEntryStatesStatics = _uuidof(IMapStyleSheetEntryStatesStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11021,7 +11021,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapStyleSheetStatics = __uuidof(IMapStyleSheetStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapStyleSheetStatics = _uuidof(IMapStyleSheetStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11061,7 +11061,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTargetCameraChangedEventArgs = __uuidof(IMapTargetCameraChangedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapTargetCameraChangedEventArgs = _uuidof(IMapTargetCameraChangedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11101,7 +11101,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTargetCameraChangedEventArgs2 = __uuidof(IMapTargetCameraChangedEventArgs2);
+                        extern MIDL_CONST_ID IID& IID_IMapTargetCameraChangedEventArgs2 = _uuidof(IMapTargetCameraChangedEventArgs2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11147,7 +11147,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileBitmapRequest = __uuidof(IMapTileBitmapRequest);
+                        extern MIDL_CONST_ID IID& IID_IMapTileBitmapRequest = _uuidof(IMapTileBitmapRequest);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11185,7 +11185,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileBitmapRequestDeferral = __uuidof(IMapTileBitmapRequestDeferral);
+                        extern MIDL_CONST_ID IID& IID_IMapTileBitmapRequestDeferral = _uuidof(IMapTileBitmapRequestDeferral);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11234,7 +11234,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileBitmapRequestedEventArgs = __uuidof(IMapTileBitmapRequestedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapTileBitmapRequestedEventArgs = _uuidof(IMapTileBitmapRequestedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11274,7 +11274,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileBitmapRequestedEventArgs2 = __uuidof(IMapTileBitmapRequestedEventArgs2);
+                        extern MIDL_CONST_ID IID& IID_IMapTileBitmapRequestedEventArgs2 = _uuidof(IMapTileBitmapRequestedEventArgs2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11311,7 +11311,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileDataSource = __uuidof(IMapTileDataSource);
+                        extern MIDL_CONST_ID IID& IID_IMapTileDataSource = _uuidof(IMapTileDataSource);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11353,7 +11353,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileDataSourceFactory = __uuidof(IMapTileDataSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapTileDataSourceFactory = _uuidof(IMapTileDataSourceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11456,7 +11456,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileSource = __uuidof(IMapTileSource);
+                        extern MIDL_CONST_ID IID& IID_IMapTileSource = _uuidof(IMapTileSource);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11517,7 +11517,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileSource2 = __uuidof(IMapTileSource2);
+                        extern MIDL_CONST_ID IID& IID_IMapTileSource2 = _uuidof(IMapTileSource2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11589,7 +11589,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileSourceFactory = __uuidof(IMapTileSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_IMapTileSourceFactory = _uuidof(IMapTileSourceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11659,7 +11659,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileSourceStatics = __uuidof(IMapTileSourceStatics);
+                        extern MIDL_CONST_ID IID& IID_IMapTileSourceStatics = _uuidof(IMapTileSourceStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11708,7 +11708,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileSourceStatics2 = __uuidof(IMapTileSourceStatics2);
+                        extern MIDL_CONST_ID IID& IID_IMapTileSourceStatics2 = _uuidof(IMapTileSourceStatics2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11754,7 +11754,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileUriRequest = __uuidof(IMapTileUriRequest);
+                        extern MIDL_CONST_ID IID& IID_IMapTileUriRequest = _uuidof(IMapTileUriRequest);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11792,7 +11792,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileUriRequestDeferral = __uuidof(IMapTileUriRequestDeferral);
+                        extern MIDL_CONST_ID IID& IID_IMapTileUriRequestDeferral = _uuidof(IMapTileUriRequestDeferral);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11841,7 +11841,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileUriRequestedEventArgs = __uuidof(IMapTileUriRequestedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IMapTileUriRequestedEventArgs = _uuidof(IMapTileUriRequestedEventArgs);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11881,7 +11881,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IMapTileUriRequestedEventArgs2 = __uuidof(IMapTileUriRequestedEventArgs2);
+                        extern MIDL_CONST_ID IID& IID_IMapTileUriRequestedEventArgs2 = _uuidof(IMapTileUriRequestedEventArgs2);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -11954,7 +11954,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IStreetsideExperience = __uuidof(IStreetsideExperience);
+                        extern MIDL_CONST_ID IID& IID_IStreetsideExperience = _uuidof(IStreetsideExperience);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -12002,7 +12002,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IStreetsideExperienceFactory = __uuidof(IStreetsideExperienceFactory);
+                        extern MIDL_CONST_ID IID& IID_IStreetsideExperienceFactory = _uuidof(IStreetsideExperienceFactory);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -12042,7 +12042,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IStreetsidePanorama = __uuidof(IStreetsidePanorama);
+                        extern MIDL_CONST_ID IID& IID_IStreetsidePanorama = _uuidof(IStreetsidePanorama);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -12088,7 +12088,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IStreetsidePanoramaStatics = __uuidof(IStreetsidePanoramaStatics);
+                        extern MIDL_CONST_ID IID& IID_IStreetsidePanoramaStatics = _uuidof(IStreetsidePanoramaStatics);
                     } /* Maps */
                 } /* Controls */
             } /* Xaml */
@@ -12298,13 +12298,13 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics8 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapControl ** Default Interface **
@@ -12600,10 +12600,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapElement ** Default Interface **
@@ -13289,8 +13289,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapTileSource ** Default Interface **
@@ -30290,13 +30290,13 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics8 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapControl ** Default Interface **
@@ -30592,10 +30592,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapElement ** Default Interface **
@@ -31281,8 +31281,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapTileSource ** Default Interface **

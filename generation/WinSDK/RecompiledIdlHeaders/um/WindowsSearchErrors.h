@@ -4785,15 +4785,6 @@
 //
 #define PRTH_S_TRY_IMPERSONATING         0x00041225L
 
-//
-// MessageId: PRTH_E_TRANSACTION_FAILED
-//
-// MessageText:
-//
-// Transaction failed. Requeue the item for transaction.
-//
-#define PRTH_E_TRANSACTION_FAILED        0x80041226L
-
 //uebug "unexpected error is jargon we should avoid, if possible.
 //
 // MessageId: CMDLINE_E_UNEXPECTED
@@ -8083,24 +8074,6 @@
 //
 #define CI_E_PROTECTED_CATALOG_NON_INTERACTIVE_USER ((HRESULT)0xC0041837L)
 
-//
-// MessageId: CI_DATABASE_DECRYPTION_FAILED
-//
-// MessageText:
-//
-// Failed to decrypt an encrypted database file.
-//
-#define CI_DATABASE_DECRYPTION_FAILED    ((HRESULT)0xC0041838L)
-
-//
-// MessageId: CI_DATABASE_ENCRYPTION_FAILED
-//
-// MessageText:
-//
-// Failed to encrypt an existing database file during first encryption upgrade for the device.
-//
-#define CI_DATABASE_ENCRYPTION_FAILED    ((HRESULT)0xC0041839L)
-
 #endif // _CIERROR_H_
 #ifndef _FILTERR_H_
 #define _FILTERR_H_
@@ -8236,15 +8209,6 @@
 // The document format is not recognized by the filter.
 //
 #define FILTER_E_UNKNOWNFORMAT           ((HRESULT)0x8004170CL)
-
-//
-// MessageId: FILTER_E_NO_IMAGE_FRAMES
-//
-// MessageText:
-//
-// No image frames in current chunk.
-//
-#define FILTER_E_NO_IMAGE_FRAMES         ((HRESULT)0x8004170EL)
 
 #endif // _FILTERR_H_
 /*++ BUILD Version: 0001    // Increment this if a change has global effects

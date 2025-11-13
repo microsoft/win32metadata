@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -2859,7 +2859,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpBufferContentFactory = __uuidof(IHttpBufferContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpBufferContentFactory = _uuidof(IHttpBufferContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -2939,7 +2939,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpClient = __uuidof(IHttpClient);
+                extern MIDL_CONST_ID IID& IID_IHttpClient = _uuidof(IHttpClient);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3016,7 +3016,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpClient2 = __uuidof(IHttpClient2);
+                extern MIDL_CONST_ID IID& IID_IHttpClient2 = _uuidof(IHttpClient2);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3055,7 +3055,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpClient3 = __uuidof(IHttpClient3);
+                extern MIDL_CONST_ID IID& IID_IHttpClient3 = _uuidof(IHttpClient3);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3092,7 +3092,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpClientFactory = __uuidof(IHttpClientFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpClientFactory = _uuidof(IHttpClientFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3149,7 +3149,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpContent = __uuidof(IHttpContent);
+                extern MIDL_CONST_ID IID& IID_IHttpContent = _uuidof(IHttpContent);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3215,7 +3215,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpCookie = __uuidof(IHttpCookie);
+                extern MIDL_CONST_ID IID& IID_IHttpCookie = _uuidof(IHttpCookie);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3254,7 +3254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpCookieFactory = __uuidof(IHttpCookieFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpCookieFactory = _uuidof(IHttpCookieFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3303,7 +3303,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpCookieManager = __uuidof(IHttpCookieManager);
+                extern MIDL_CONST_ID IID& IID_IHttpCookieManager = _uuidof(IHttpCookieManager);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3340,7 +3340,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpFormUrlEncodedContentFactory = __uuidof(IHttpFormUrlEncodedContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpFormUrlEncodedContentFactory = _uuidof(IHttpFormUrlEncodedContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3388,7 +3388,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpGetBufferResult = __uuidof(IHttpGetBufferResult);
+                extern MIDL_CONST_ID IID& IID_IHttpGetBufferResult = _uuidof(IHttpGetBufferResult);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3436,7 +3436,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpGetInputStreamResult = __uuidof(IHttpGetInputStreamResult);
+                extern MIDL_CONST_ID IID& IID_IHttpGetInputStreamResult = _uuidof(IHttpGetInputStreamResult);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3484,7 +3484,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpGetStringResult = __uuidof(IHttpGetStringResult);
+                extern MIDL_CONST_ID IID& IID_IHttpGetStringResult = _uuidof(IHttpGetStringResult);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3520,7 +3520,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMethod = __uuidof(IHttpMethod);
+                extern MIDL_CONST_ID IID& IID_IHttpMethod = _uuidof(IHttpMethod);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3557,7 +3557,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMethodFactory = __uuidof(IHttpMethodFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpMethodFactory = _uuidof(IHttpMethodFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3611,7 +3611,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMethodStatics = __uuidof(IHttpMethodStatics);
+                extern MIDL_CONST_ID IID& IID_IHttpMethodStatics = _uuidof(IHttpMethodStatics);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3647,7 +3647,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMultipartContent = __uuidof(IHttpMultipartContent);
+                extern MIDL_CONST_ID IID& IID_IHttpMultipartContent = _uuidof(IHttpMultipartContent);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3689,7 +3689,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMultipartContentFactory = __uuidof(IHttpMultipartContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpMultipartContentFactory = _uuidof(IHttpMultipartContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3734,7 +3734,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMultipartFormDataContent = __uuidof(IHttpMultipartFormDataContent);
+                extern MIDL_CONST_ID IID& IID_IHttpMultipartFormDataContent = _uuidof(IHttpMultipartFormDataContent);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3771,7 +3771,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpMultipartFormDataContentFactory = __uuidof(IHttpMultipartFormDataContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpMultipartFormDataContentFactory = _uuidof(IHttpMultipartFormDataContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3831,7 +3831,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpRequestMessage = __uuidof(IHttpRequestMessage);
+                extern MIDL_CONST_ID IID& IID_IHttpRequestMessage = _uuidof(IHttpRequestMessage);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3870,7 +3870,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpRequestMessage2 = __uuidof(IHttpRequestMessage2);
+                extern MIDL_CONST_ID IID& IID_IHttpRequestMessage2 = _uuidof(IHttpRequestMessage2);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3908,7 +3908,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpRequestMessageFactory = __uuidof(IHttpRequestMessageFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpRequestMessageFactory = _uuidof(IHttpRequestMessageFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -3953,7 +3953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpRequestResult = __uuidof(IHttpRequestResult);
+                extern MIDL_CONST_ID IID& IID_IHttpRequestResult = _uuidof(IHttpRequestResult);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4031,7 +4031,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpResponseMessage = __uuidof(IHttpResponseMessage);
+                extern MIDL_CONST_ID IID& IID_IHttpResponseMessage = _uuidof(IHttpResponseMessage);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4068,7 +4068,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpResponseMessageFactory = __uuidof(IHttpResponseMessageFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpResponseMessageFactory = _uuidof(IHttpResponseMessageFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4105,7 +4105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpStreamContentFactory = __uuidof(IHttpStreamContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpStreamContentFactory = _uuidof(IHttpStreamContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4153,7 +4153,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpStringContentFactory = __uuidof(IHttpStringContentFactory);
+                extern MIDL_CONST_ID IID& IID_IHttpStringContentFactory = _uuidof(IHttpStringContentFactory);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4198,7 +4198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHttpTransportInformation = __uuidof(IHttpTransportInformation);
+                extern MIDL_CONST_ID IID& IID_IHttpTransportInformation = _uuidof(IHttpTransportInformation);
             } /* Http */
         } /* Web */
     } /* Windows */
@@ -4451,8 +4451,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpMultipartContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartContent
@@ -4480,8 +4480,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartFormDataContent
@@ -4509,8 +4509,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpRequestMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpRequestMessage ** Default Interface **
@@ -4558,8 +4558,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpResponseMessage ** Default Interface **
@@ -11667,8 +11667,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpMultipartContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartContent
@@ -11696,8 +11696,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartFormDataContent
@@ -11725,8 +11725,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpRequestMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpRequestMessage ** Default Interface **
@@ -11774,8 +11774,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpResponseMessage ** Default Interface **

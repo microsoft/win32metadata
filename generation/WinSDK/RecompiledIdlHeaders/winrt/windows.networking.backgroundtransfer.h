@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2461,7 +2461,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloader = __uuidof(IBackgroundDownloader);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloader = _uuidof(IBackgroundDownloader);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2524,7 +2524,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloader2 = __uuidof(IBackgroundDownloader2);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloader2 = _uuidof(IBackgroundDownloader2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2560,7 +2560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloader3 = __uuidof(IBackgroundDownloader3);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloader3 = _uuidof(IBackgroundDownloader3);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2597,7 +2597,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloaderFactory = __uuidof(IBackgroundDownloaderFactory);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloaderFactory = _uuidof(IBackgroundDownloaderFactory);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2640,7 +2640,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloaderStaticMethods = __uuidof(IBackgroundDownloaderStaticMethods);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloaderStaticMethods = _uuidof(IBackgroundDownloaderStaticMethods);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2677,7 +2677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloaderStaticMethods2 = __uuidof(IBackgroundDownloaderStaticMethods2);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloaderStaticMethods2 = _uuidof(IBackgroundDownloaderStaticMethods2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2720,7 +2720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundDownloaderUserConsent = __uuidof(IBackgroundDownloaderUserConsent);
+                extern MIDL_CONST_ID IID& IID_IBackgroundDownloaderUserConsent = _uuidof(IBackgroundDownloaderUserConsent);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2791,7 +2791,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferBase = __uuidof(IBackgroundTransferBase);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferBase = _uuidof(IBackgroundTransferBase);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2831,7 +2831,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Enable(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferCompletionGroup = __uuidof(IBackgroundTransferCompletionGroup);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferCompletionGroup = _uuidof(IBackgroundTransferCompletionGroup);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2870,7 +2870,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferCompletionGroupTriggerDetails = __uuidof(IBackgroundTransferCompletionGroupTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferCompletionGroupTriggerDetails = _uuidof(IBackgroundTransferCompletionGroupTriggerDetails);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2913,7 +2913,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferContentPart = __uuidof(IBackgroundTransferContentPart);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferContentPart = _uuidof(IBackgroundTransferContentPart);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2953,7 +2953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferContentPartFactory = __uuidof(IBackgroundTransferContentPartFactory);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferContentPartFactory = _uuidof(IBackgroundTransferContentPartFactory);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -2990,7 +2990,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferErrorStaticMethods = __uuidof(IBackgroundTransferErrorStaticMethods);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferErrorStaticMethods = _uuidof(IBackgroundTransferErrorStaticMethods);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3032,7 +3032,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferGroup = __uuidof(IBackgroundTransferGroup);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferGroup = _uuidof(IBackgroundTransferGroup);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3069,7 +3069,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferGroupStatics = __uuidof(IBackgroundTransferGroupStatics);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferGroupStatics = _uuidof(IBackgroundTransferGroupStatics);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3128,7 +3128,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferOperation = __uuidof(IBackgroundTransferOperation);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferOperation = _uuidof(IBackgroundTransferOperation);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3165,7 +3165,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferOperationPriority = __uuidof(IBackgroundTransferOperationPriority);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferOperationPriority = _uuidof(IBackgroundTransferOperationPriority);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3207,7 +3207,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundTransferRangesDownloadedEventArgs = __uuidof(IBackgroundTransferRangesDownloadedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IBackgroundTransferRangesDownloadedEventArgs = _uuidof(IBackgroundTransferRangesDownloadedEventArgs);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3271,7 +3271,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploader = __uuidof(IBackgroundUploader);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploader = _uuidof(IBackgroundUploader);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3334,7 +3334,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploader2 = __uuidof(IBackgroundUploader2);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploader2 = _uuidof(IBackgroundUploader2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3370,7 +3370,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploader3 = __uuidof(IBackgroundUploader3);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploader3 = _uuidof(IBackgroundUploader3);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3407,7 +3407,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploaderFactory = __uuidof(IBackgroundUploaderFactory);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploaderFactory = _uuidof(IBackgroundUploaderFactory);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3450,7 +3450,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploaderStaticMethods = __uuidof(IBackgroundUploaderStaticMethods);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploaderStaticMethods = _uuidof(IBackgroundUploaderStaticMethods);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3487,7 +3487,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploaderStaticMethods2 = __uuidof(IBackgroundUploaderStaticMethods2);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploaderStaticMethods2 = _uuidof(IBackgroundUploaderStaticMethods2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3530,7 +3530,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBackgroundUploaderUserConsent = __uuidof(IBackgroundUploaderUserConsent);
+                extern MIDL_CONST_ID IID& IID_IBackgroundUploaderUserConsent = _uuidof(IBackgroundUploaderUserConsent);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3572,7 +3572,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentPrefetcher = __uuidof(IContentPrefetcher);
+                extern MIDL_CONST_ID IID& IID_IContentPrefetcher = _uuidof(IContentPrefetcher);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3608,7 +3608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentPrefetcherTime = __uuidof(IContentPrefetcherTime);
+                extern MIDL_CONST_ID IID& IID_IContentPrefetcherTime = _uuidof(IContentPrefetcherTime);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3658,7 +3658,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Resume(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDownloadOperation = __uuidof(IDownloadOperation);
+                extern MIDL_CONST_ID IID& IID_IDownloadOperation = _uuidof(IDownloadOperation);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3694,7 +3694,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDownloadOperation2 = __uuidof(IDownloadOperation2);
+                extern MIDL_CONST_ID IID& IID_IDownloadOperation2 = _uuidof(IDownloadOperation2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3755,7 +3755,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDownloadOperation3 = __uuidof(IDownloadOperation3);
+                extern MIDL_CONST_ID IID& IID_IDownloadOperation3 = _uuidof(IDownloadOperation3);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3789,7 +3789,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE MakeCurrentInTransferGroup(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDownloadOperation4 = __uuidof(IDownloadOperation4);
+                extern MIDL_CONST_ID IID& IID_IDownloadOperation4 = _uuidof(IDownloadOperation4);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3829,7 +3829,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDownloadOperation5 = __uuidof(IDownloadOperation5);
+                extern MIDL_CONST_ID IID& IID_IDownloadOperation5 = _uuidof(IDownloadOperation5);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3874,7 +3874,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IResponseInformation = __uuidof(IResponseInformation);
+                extern MIDL_CONST_ID IID& IID_IResponseInformation = _uuidof(IResponseInformation);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3916,7 +3916,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUnconstrainedTransferRequestResult = __uuidof(IUnconstrainedTransferRequestResult);
+                extern MIDL_CONST_ID IID& IID_IUnconstrainedTransferRequestResult = _uuidof(IUnconstrainedTransferRequestResult);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -3964,7 +3964,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUploadOperation = __uuidof(IUploadOperation);
+                extern MIDL_CONST_ID IID& IID_IUploadOperation = _uuidof(IUploadOperation);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -4000,7 +4000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUploadOperation2 = __uuidof(IUploadOperation2);
+                extern MIDL_CONST_ID IID& IID_IUploadOperation2 = _uuidof(IUploadOperation2);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -4034,7 +4034,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE MakeCurrentInTransferGroup(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUploadOperation3 = __uuidof(IUploadOperation3);
+                extern MIDL_CONST_ID IID& IID_IUploadOperation3 = _uuidof(IUploadOperation3);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -4074,7 +4074,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUploadOperation4 = __uuidof(IUploadOperation4);
+                extern MIDL_CONST_ID IID& IID_IUploadOperation4 = _uuidof(IUploadOperation4);
             } /* BackgroundTransfer */
         } /* Networking */
     } /* Windows */
@@ -4091,13 +4091,13 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CBackgroundTransfer_CIUpload
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderUserConsent interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundDownloader ** Default Interface **
@@ -4169,8 +4169,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPartFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPartFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPart ** Default Interface **
@@ -4262,9 +4262,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderUserConsent interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundUploader ** Default Interface **
@@ -4291,8 +4291,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcherTime interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcher interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcherTime interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -11103,13 +11103,13 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CBackgroundTransfer_CIUpload
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderUserConsent interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundDownloaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundDownloader ** Default Interface **
@@ -11181,8 +11181,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPartFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPartFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundTransferContentPart ** Default Interface **
@@ -11274,9 +11274,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderUserConsent interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IBackgroundUploaderStaticMethods2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.BackgroundTransfer.IBackgroundUploader ** Default Interface **
@@ -11303,8 +11303,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcherTime interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcher interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.BackgroundTransfer.IContentPrefetcherTime interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

@@ -61,7 +61,6 @@ CreateDirectoryW(
     _In_ LPCWSTR lpPathName,
     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
     );
-
 #ifdef UNICODE
 #define CreateDirectory  CreateDirectoryW
 #else
@@ -99,7 +98,6 @@ CreateFileW(
     _In_ DWORD dwFlagsAndAttributes,
     _In_opt_ HANDLE hTemplateFile
     );
-
 #ifdef UNICODE
 #define CreateFile  CreateFileW
 #else
@@ -144,7 +142,6 @@ WINAPI
 DeleteFileW(
     _In_ LPCWSTR lpFileName
     );
-
 #ifdef UNICODE
 #define DeleteFile  DeleteFileW
 #else
@@ -225,7 +222,6 @@ FindFirstChangeNotificationW(
     _In_ BOOL bWatchSubtree,
     _In_ DWORD dwNotifyFilter
     );
-
 #ifdef UNICODE
 #define FindFirstChangeNotification  FindFirstChangeNotificationW
 #else
@@ -253,7 +249,6 @@ FindFirstFileW(
     _In_ LPCWSTR lpFileName,
     _Out_ LPWIN32_FIND_DATAW lpFindFileData
     );
-
 #ifdef UNICODE
 #define FindFirstFile  FindFirstFileW
 #else
@@ -285,7 +280,6 @@ FindFirstFileExW(
     _Reserved_ LPVOID lpSearchFilter,
     _In_ DWORD dwAdditionalFlags
     );
-
 #ifdef UNICODE
 #define FindFirstFileEx  FindFirstFileExW
 #else
@@ -340,7 +334,6 @@ FindNextFileW(
     _In_ HANDLE hFindFile,
     _Out_ LPWIN32_FIND_DATAW lpFindFileData
     );
-
 #ifdef UNICODE
 #define FindNextFile  FindNextFileW
 #else
@@ -407,7 +400,6 @@ GetDiskFreeSpaceW(
     _Out_opt_ LPDWORD lpNumberOfFreeClusters,
     _Out_opt_ LPDWORD lpTotalNumberOfClusters
     );
-
 #ifdef UNICODE
 #define GetDiskFreeSpace  GetDiskFreeSpaceW
 #else
@@ -433,7 +425,6 @@ GetDiskFreeSpaceExW(
     _Out_opt_ PULARGE_INTEGER lpTotalNumberOfBytes,
     _Out_opt_ PULARGE_INTEGER lpTotalNumberOfFreeBytes
     );
-
 #ifdef UNICODE
 #define GetDiskFreeSpaceEx  GetDiskFreeSpaceExW
 #else
@@ -552,7 +543,6 @@ GetDiskSpaceInformationW(
     _In_opt_ LPCWSTR rootPath,
     _Out_ DISK_SPACE_INFORMATION* diskSpaceInfo
     );
-
 #ifdef UNICODE
 #define GetDiskSpaceInformation  GetDiskSpaceInformationW
 #else
@@ -578,7 +568,6 @@ WINAPI
 GetDriveTypeW(
     _In_opt_ LPCWSTR lpRootPathName
     );
-
 #ifdef UNICODE
 #define GetDriveType  GetDriveTypeW
 #else
@@ -607,7 +596,6 @@ WINAPI
 GetFileAttributesW(
     _In_ LPCWSTR lpFileName
     );
-
 #ifdef UNICODE
 #define GetFileAttributes  GetFileAttributesW
 #else
@@ -631,7 +619,6 @@ GetFileAttributesExW(
     _In_ GET_FILEEX_INFO_LEVELS fInfoLevelId,
     _Out_writes_bytes_(sizeof(WIN32_FILE_ATTRIBUTE_DATA)) LPVOID lpFileInformation
     );
-
 #ifdef UNICODE
 #define GetFileAttributesEx  GetFileAttributesExW
 #else
@@ -715,7 +702,6 @@ GetFinalPathNameByHandleW(
     _In_ DWORD cchFilePath,
     _In_ DWORD dwFlags
     );
-
 #ifdef UNICODE
 #define GetFinalPathNameByHandle  GetFinalPathNameByHandleW
 #else
@@ -1035,7 +1021,6 @@ WINAPI
 RemoveDirectoryW(
     _In_ LPCWSTR lpPathName
     );
-
 #ifdef UNICODE
 #define RemoveDirectory  RemoveDirectoryW
 #else
@@ -1064,7 +1049,6 @@ SetFileAttributesW(
     _In_ LPCWSTR lpFileName,
     _In_ DWORD dwFileAttributes
     );
-
 #ifdef UNICODE
 #define SetFileAttributes  SetFileAttributesW
 #else
@@ -1303,7 +1287,6 @@ GetCompressedFileSizeW(
     _In_ LPCWSTR lpFileName,
     _Out_opt_ LPDWORD lpFileSizeHigh
     );
-
 #ifdef UNICODE
 #define GetCompressedFileSize  GetCompressedFileSizeW
 #else
@@ -1477,7 +1460,8 @@ SetFileApisToANSI(
 #pragma region Application Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+
 WINBASEAPI
 _Success_(return > 0 && return < BufferLength)
 DWORD
@@ -1504,116 +1488,7 @@ GetTempPath2A(
 #define GetTempPath2  GetTempPath2A
 #endif
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-typedef struct _CREATEFILE3_EXTENDED_PARAMETERS {
-    DWORD dwSize;
-    DWORD dwFileAttributes;
-    DWORD dwFileFlags;
-    DWORD dwSecurityQosFlags;
-    LPSECURITY_ATTRIBUTES lpSecurityAttributes;
-    HANDLE hTemplateFile;
-} CREATEFILE3_EXTENDED_PARAMETERS, *PCREATEFILE3_EXTENDED_PARAMETERS, *LPCREATEFILE3_EXTENDED_PARAMETERS;
-
-typedef enum DIRECTORY_FLAGS
-{
-    DIRECTORY_FLAGS_NONE = 0,
-    DIRECTORY_FLAGS_DISALLOW_PATH_REDIRECTS = 0x000000001,
-} DIRECTORY_FLAGS;
-DEFINE_ENUM_FLAG_OPERATORS(DIRECTORY_FLAGS)
-
-#pragma region Application Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-
-#if defined(NTDDI_WIN11_GE) && (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
-WINBASEAPI
-HANDLE
-WINAPI
-CreateFile3(
-    _In_z_ LPCWSTR lpFileName,
-    _In_ DWORD dwDesiredAccess,
-    _In_ DWORD dwShareMode,
-    _In_ DWORD dwCreationDisposition,
-    _In_opt_ LPCREATEFILE3_EXTENDED_PARAMETERS pCreateExParams
-    );
-
-WINBASEAPI
-HANDLE
-WINAPI
-CreateDirectory2A(
-    _In_z_ LPCSTR lpPathName,
-    _In_ DWORD dwDesiredAccess,
-    _In_ DWORD dwShareMode,
-    _In_ DIRECTORY_FLAGS DirectoryFlags,
-    _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
-    );
-
-WINBASEAPI
-HANDLE
-WINAPI
-CreateDirectory2W(
-    _In_z_ LPCWSTR lpPathName,
-    _In_ DWORD dwDesiredAccess,
-    _In_ DWORD dwShareMode,
-    _In_ DIRECTORY_FLAGS DirectoryFlags,
-    _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
-    );
-
-#ifdef UNICODE
-#define CreateDirectory2  CreateDirectory2W
-#else
-#define CreateDirectory2  CreateDirectory2A
-#endif // !UNICODE
-
-WINBASEAPI
-BOOL
-WINAPI
-RemoveDirectory2A(
-    _In_z_ LPCSTR lpPathName,
-    _In_ DIRECTORY_FLAGS DirectoryFlags
-    );
-
-WINBASEAPI
-BOOL
-WINAPI
-RemoveDirectory2W(
-    _In_z_ LPCWSTR lpPathName,
-    _In_ DIRECTORY_FLAGS DirectoryFlags
-    );
-
-#ifdef UNICODE
-#define RemoveDirectory2  RemoveDirectory2W
-#else
-#define RemoveDirectory2  RemoveDirectory2A
-#endif // !UNICODE
-
-WINBASEAPI
-BOOL
-WINAPI
-DeleteFile2A(
-    _In_z_ LPCSTR lpFileName,
-    _In_ DWORD Flags
-    );
-
-WINBASEAPI
-BOOL
-WINAPI
-DeleteFile2W(
-    _In_z_ LPCWSTR lpFileName,
-    _In_ DWORD Flags
-    );
-
-#ifdef UNICODE
-#define DeleteFile2  DeleteFile2W
-#else
-#define DeleteFile2  DeleteFile2A
-#endif // !UNICODE
-
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

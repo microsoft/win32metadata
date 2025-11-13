@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -684,7 +684,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaActionableInsights = __uuidof(ICortanaActionableInsights);
+                extern MIDL_CONST_ID IID& IID_ICortanaActionableInsights = _uuidof(ICortanaActionableInsights);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -744,7 +744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaActionableInsightsOptions = __uuidof(ICortanaActionableInsightsOptions);
+                extern MIDL_CONST_ID IID& IID_ICortanaActionableInsightsOptions = _uuidof(ICortanaActionableInsightsOptions);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -793,7 +793,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaActionableInsightsStatics = __uuidof(ICortanaActionableInsightsStatics);
+                extern MIDL_CONST_ID IID& IID_ICortanaActionableInsightsStatics = _uuidof(ICortanaActionableInsightsStatics);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -856,7 +856,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaPermissionsManager = __uuidof(ICortanaPermissionsManager);
+                extern MIDL_CONST_ID IID& IID_ICortanaPermissionsManager = _uuidof(ICortanaPermissionsManager);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -898,7 +898,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaPermissionsManagerStatics = __uuidof(ICortanaPermissionsManagerStatics);
+                extern MIDL_CONST_ID IID& IID_ICortanaPermissionsManagerStatics = _uuidof(ICortanaPermissionsManagerStatics);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -952,7 +952,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaSettings = __uuidof(ICortanaSettings);
+                extern MIDL_CONST_ID IID& IID_ICortanaSettings = _uuidof(ICortanaSettings);
             } /* Cortana */
         } /* Services */
     } /* Windows */
@@ -1000,7 +1000,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICortanaSettingsStatics = __uuidof(ICortanaSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_ICortanaSettingsStatics = _uuidof(ICortanaSettingsStatics);
             } /* Cortana */
         } /* Services */
     } /* Windows */

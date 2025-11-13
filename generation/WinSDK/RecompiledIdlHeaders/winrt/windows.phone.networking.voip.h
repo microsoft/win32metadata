@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_PHONE_PHONECONTRACT_VERSION)
@@ -113,8 +113,6 @@
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
 #include "Windows.Phone.h"
-// Importing Collections header
-#include <windows.foundation.collections.h>
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
@@ -134,23 +132,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs ABI::Windows::Phone::Networking::Voip::ICallAnswerEventArgs
 
 #endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Phone {
-            namespace Networking {
-                namespace Voip {
-                    interface ICallAnswerEventArgs2;
-                } /* Voip */
-            } /* Networking */
-        } /* Phone */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2 ABI::Windows::Phone::Networking::Voip::ICallAnswerEventArgs2
-
-#endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallRejectEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallRejectEventArgs_FWD_DEFINED__
@@ -407,23 +388,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall3_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Phone {
-            namespace Networking {
-                namespace Voip {
-                    interface IVoipPhoneCall4;
-                } /* Voip */
-            } /* Networking */
-        } /* Phone */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4 ABI::Windows::Phone::Networking::Voip::IVoipPhoneCall4
-
-#endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady_FWD_DEFINED__
 #define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady_FWD_DEFINED__
 namespace ABI {
@@ -444,106 +408,6 @@ namespace ABI {
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
-
-#ifndef DEF___FIIterator_1_HSTRING_USE
-#define DEF___FIIterator_1_HSTRING_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236"))
-IIterator<HSTRING> : IIterator_impl<HSTRING>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IIterator`1<String>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IIterator<HSTRING> __FIIterator_1_HSTRING_t;
-#define __FIIterator_1_HSTRING ABI::Windows::Foundation::Collections::__FIIterator_1_HSTRING_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIIterator_1_HSTRING_USE */
-
-
-
-#ifndef DEF___FIIterable_1_HSTRING_USE
-#define DEF___FIIterable_1_HSTRING_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e"))
-IIterable<HSTRING> : IIterable_impl<HSTRING>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IIterable`1<String>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IIterable<HSTRING> __FIIterable_1_HSTRING_t;
-#define __FIIterable_1_HSTRING ABI::Windows::Foundation::Collections::__FIIterable_1_HSTRING_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIIterable_1_HSTRING_USE */
-
-
-
-#ifndef DEF___FIVectorView_1_HSTRING_USE
-#define DEF___FIVectorView_1_HSTRING_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e"))
-IVectorView<HSTRING> : IVectorView_impl<HSTRING>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IVectorView`1<String>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IVectorView<HSTRING> __FIVectorView_1_HSTRING_t;
-#define __FIVectorView_1_HSTRING ABI::Windows::Foundation::Collections::__FIVectorView_1_HSTRING_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIVectorView_1_HSTRING_USE */
-
-
-
-#ifndef DEF___FIVector_1_HSTRING_USE
-#define DEF___FIVector_1_HSTRING_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90"))
-IVector<HSTRING> : IVector_impl<HSTRING>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IVector`1<String>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IVector<HSTRING> __FIVector_1_HSTRING_t;
-#define __FIVector_1_HSTRING ABI::Windows::Foundation::Collections::__FIVector_1_HSTRING_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIVector_1_HSTRING_USE */
-
-
 namespace ABI {
     namespace Windows {
         namespace Phone {
@@ -990,7 +854,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = __uuidof(ICallAnswerEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = _uuidof(ICallAnswerEventArgs);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -999,47 +863,6 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs_INTERFACE_DEFINED__) */
-#endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Phone.Networking.Voip.ICallAnswerEventArgs2
- *
- * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Phone.Networking.Voip.CallAnswerEventArgs
- *
- * Any object which implements this interface must also implement the following interfaces:
- *     Windows.Phone.Networking.Voip.ICallAnswerEventArgs
- *
- */
-#if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Phone_Networking_Voip_ICallAnswerEventArgs2[] = L"Windows.Phone.Networking.Voip.ICallAnswerEventArgs2";
-namespace ABI {
-    namespace Windows {
-        namespace Phone {
-            namespace Networking {
-                namespace Voip {
-                    MIDL_INTERFACE("ec5dcbbe-3c84-4de4-8817-fc788173406e")
-                    ICallAnswerEventArgs2 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_SourceDeviceId(
-                            HSTRING* value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_ICallAnswerEventArgs2 = __uuidof(ICallAnswerEventArgs2);
-                } /* Voip */
-            } /* Networking */
-        } /* Phone */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2;
-#endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
 
 /*
@@ -1069,7 +892,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICallRejectEventArgs = __uuidof(ICallRejectEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICallRejectEventArgs = _uuidof(ICallRejectEventArgs);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1107,7 +930,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = __uuidof(ICallStateChangeEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = _uuidof(ICallStateChangeEventArgs);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1145,7 +968,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = __uuidof(IMuteChangeEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = _uuidof(IMuteChangeEventArgs);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1190,7 +1013,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IQuerySeamlessUpgradeSupportOperation = __uuidof(IQuerySeamlessUpgradeSupportOperation);
+                    extern MIDL_CONST_ID IID& IID_IQuerySeamlessUpgradeSupportOperation = _uuidof(IQuerySeamlessUpgradeSupportOperation);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1255,14 +1078,13 @@ namespace ABI {
                             HSTRING contactName,
                             HSTRING serviceName,
                             ABI::Windows::Phone::Networking::Voip::VoipCallMedia media,
-                            __FIVector_1_HSTRING* pAssociatedDeviceIds,
                             ABI::Windows::Phone::Networking::Voip::IVoipPhoneCall** call
                             ) = 0;
                         virtual HRESULT STDMETHODCALLTYPE NotifyMuted(void) = 0;
                         virtual HRESULT STDMETHODCALLTYPE NotifyUnmuted(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinator = __uuidof(IVoipCallCoordinator);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator = _uuidof(IVoipCallCoordinator);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1304,12 +1126,11 @@ namespace ABI {
                             HSTRING contactNumber,
                             HSTRING serviceName,
                             ABI::Windows::Phone::Networking::Voip::VoipCallMedia media,
-                            __FIVector_1_HSTRING* pAssociatedDeviceIds,
                             ABI::Windows::Phone::Networking::Voip::IVoipPhoneCall** call
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = __uuidof(IVoipCallCoordinator2);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = _uuidof(IVoipCallCoordinator2);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1357,7 +1178,6 @@ namespace ABI {
                             ABI::Windows::Phone::Networking::Voip::VoipCallMedia media,
                             ABI::Windows::Foundation::TimeSpan ringTimeout,
                             HSTRING contactRemoteId,
-                            __FIVector_1_HSTRING* pAssociatedDeviceIds,
                             ABI::Windows::Phone::Networking::Voip::IVoipPhoneCall** call
                             ) = 0;
                         virtual HRESULT STDMETHODCALLTYPE RequestNewAppInitiatedCall(
@@ -1366,12 +1186,11 @@ namespace ABI {
                             HSTRING contactNumber,
                             HSTRING serviceName,
                             ABI::Windows::Phone::Networking::Voip::VoipCallMedia media,
-                            __FIVector_1_HSTRING* pAssociatedDeviceIds,
                             ABI::Windows::Phone::Networking::Voip::IVoipPhoneCall** call
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = __uuidof(IVoipCallCoordinator3);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = _uuidof(IVoipCallCoordinator3);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1409,7 +1228,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = __uuidof(IVoipCallCoordinatorStatics);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = _uuidof(IVoipCallCoordinatorStatics);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1450,7 +1269,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinatorWithAppDeterminedUpgrade = __uuidof(IVoipCallCoordinatorWithAppDeterminedUpgrade);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinatorWithAppDeterminedUpgrade = _uuidof(IVoipCallCoordinatorWithAppDeterminedUpgrade);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1504,7 +1323,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipCallCoordinatorWithUpgrade = __uuidof(IVoipCallCoordinatorWithUpgrade);
+                    extern MIDL_CONST_ID IID& IID_IVoipCallCoordinatorWithUpgrade = _uuidof(IVoipCallCoordinatorWithUpgrade);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1543,7 +1362,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipOperation = __uuidof(IVoipOperation);
+                    extern MIDL_CONST_ID IID& IID_IVoipOperation = _uuidof(IVoipOperation);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1581,7 +1400,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipOperationsManager = __uuidof(IVoipOperationsManager);
+                    extern MIDL_CONST_ID IID& IID_IVoipOperationsManager = _uuidof(IVoipOperationsManager);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1672,7 +1491,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipPhoneCall = __uuidof(IVoipPhoneCall);
+                    extern MIDL_CONST_ID IID& IID_IVoipPhoneCall = _uuidof(IVoipPhoneCall);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1711,7 +1530,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE TryShowAppUI(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = __uuidof(IVoipPhoneCall2);
+                    extern MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = _uuidof(IVoipPhoneCall2);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1753,7 +1572,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = __uuidof(IVoipPhoneCall3);
+                    extern MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = _uuidof(IVoipPhoneCall3);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1762,59 +1581,6 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall3;
 #endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Phone.Networking.Voip.IVoipPhoneCall4
- *
- * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Phone.Networking.Voip.VoipPhoneCall
- *
- */
-#if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Phone_Networking_Voip_IVoipPhoneCall4[] = L"Windows.Phone.Networking.Voip.IVoipPhoneCall4";
-namespace ABI {
-    namespace Windows {
-        namespace Phone {
-            namespace Networking {
-                namespace Voip {
-                    MIDL_INTERFACE("5f593d10-24ef-5006-b846-276132294a37")
-                    IVoipPhoneCall4 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_IsUsingAssociatedDevicesList(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE NotifyCallActiveOnDevices(
-                            __FIIterable_1_HSTRING* associatedDeviceIds
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE AddAssociatedCallControlDevice(
-                            HSTRING deviceId
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE RemoveAssociatedCallControlDevice(
-                            HSTRING deviceId
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE SetAssociatedCallControlDevices(
-                            __FIIterable_1_HSTRING* associatedDeviceIds
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE GetAssociatedCallControlDevices(
-                            __FIVectorView_1_HSTRING** result
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IVoipPhoneCall4 = __uuidof(IVoipPhoneCall4);
-                } /* Voip */
-            } /* Networking */
-        } /* Phone */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4;
-#endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
 #endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
 
 /*
@@ -1842,7 +1608,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE NotifyCallReady(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVoipPhoneCallReady = __uuidof(IVoipPhoneCallReady);
+                    extern MIDL_CONST_ID IID& IID_IVoipPhoneCallReady = _uuidof(IVoipPhoneCallReady);
                 } /* Voip */
             } /* Networking */
         } /* Phone */
@@ -1987,7 +1753,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Phone.Networking.Voip.IVoipPhoneCallReady
  *    Windows.Phone.Networking.Voip.IVoipPhoneCall2
  *    Windows.Phone.Networking.Voip.IVoipPhoneCall3
- *    Windows.Phone.Networking.Voip.IVoipPhoneCall4
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2006,12 +1771,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs;
 
 #endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2 __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2;
-
-#endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallRejectEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallRejectEventArgs_FWD_DEFINED__
@@ -2103,12 +1862,6 @@ typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall3 __x
 
 #endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall3_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4 __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4;
-
-#endif // ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady_FWD_DEFINED__
 #define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady;
@@ -2118,354 +1871,6 @@ typedef interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCallReady
 // Parameterized interface forward declarations (C)
 
 // Collection interface definitions
-
-#if !defined(____FIIterator_1_HSTRING_INTERFACE_DEFINED__)
-#define ____FIIterator_1_HSTRING_INTERFACE_DEFINED__
-
-typedef interface __FIIterator_1_HSTRING __FIIterator_1_HSTRING;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIIterator_1_HSTRING;
-
-typedef struct __FIIterator_1_HSTRINGVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_HSTRING* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_HSTRING* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_HSTRING* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_HSTRING* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_HSTRING* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_HSTRING* This,
-        HSTRING* result);
-    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_HSTRING* This,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_HSTRING* This,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_HSTRING* This,
-        UINT32 itemsLength,
-        HSTRING* items,
-        UINT32* result);
-
-    END_INTERFACE
-} __FIIterator_1_HSTRINGVtbl;
-
-interface __FIIterator_1_HSTRING
-{
-    CONST_VTBL struct __FIIterator_1_HSTRINGVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIIterator_1_HSTRING_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIIterator_1_HSTRING_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIIterator_1_HSTRING_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIIterator_1_HSTRING_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIIterator_1_HSTRING_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIIterator_1_HSTRING_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIIterator_1_HSTRING_get_Current(This, result) \
-    ((This)->lpVtbl->get_Current(This, result))
-
-#define __FIIterator_1_HSTRING_get_HasCurrent(This, result) \
-    ((This)->lpVtbl->get_HasCurrent(This, result))
-
-#define __FIIterator_1_HSTRING_MoveNext(This, result) \
-    ((This)->lpVtbl->MoveNext(This, result))
-
-#define __FIIterator_1_HSTRING_GetMany(This, itemsLength, items, result) \
-    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIIterator_1_HSTRING_INTERFACE_DEFINED__
-
-#if !defined(____FIIterable_1_HSTRING_INTERFACE_DEFINED__)
-#define ____FIIterable_1_HSTRING_INTERFACE_DEFINED__
-
-typedef interface __FIIterable_1_HSTRING __FIIterable_1_HSTRING;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIIterable_1_HSTRING;
-
-typedef struct __FIIterable_1_HSTRINGVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_HSTRING* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_HSTRING* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_HSTRING* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_HSTRING* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_HSTRING* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_HSTRING* This,
-        __FIIterator_1_HSTRING** result);
-
-    END_INTERFACE
-} __FIIterable_1_HSTRINGVtbl;
-
-interface __FIIterable_1_HSTRING
-{
-    CONST_VTBL struct __FIIterable_1_HSTRINGVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIIterable_1_HSTRING_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIIterable_1_HSTRING_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIIterable_1_HSTRING_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIIterable_1_HSTRING_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIIterable_1_HSTRING_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIIterable_1_HSTRING_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIIterable_1_HSTRING_First(This, result) \
-    ((This)->lpVtbl->First(This, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIIterable_1_HSTRING_INTERFACE_DEFINED__
-
-#if !defined(____FIVectorView_1_HSTRING_INTERFACE_DEFINED__)
-#define ____FIVectorView_1_HSTRING_INTERFACE_DEFINED__
-
-typedef interface __FIVectorView_1_HSTRING __FIVectorView_1_HSTRING;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIVectorView_1_HSTRING;
-
-typedef struct __FIVectorView_1_HSTRINGVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_HSTRING* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_HSTRING* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_HSTRING* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_HSTRING* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_HSTRING* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_HSTRING* This,
-        UINT32 index,
-        HSTRING* result);
-    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_HSTRING* This,
-        UINT32* result);
-    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_HSTRING* This,
-        HSTRING value,
-        UINT32* index,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_HSTRING* This,
-        UINT32 startIndex,
-        UINT32 itemsLength,
-        HSTRING* items,
-        UINT32* result);
-
-    END_INTERFACE
-} __FIVectorView_1_HSTRINGVtbl;
-
-interface __FIVectorView_1_HSTRING
-{
-    CONST_VTBL struct __FIVectorView_1_HSTRINGVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIVectorView_1_HSTRING_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIVectorView_1_HSTRING_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIVectorView_1_HSTRING_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIVectorView_1_HSTRING_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIVectorView_1_HSTRING_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIVectorView_1_HSTRING_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIVectorView_1_HSTRING_GetAt(This, index, result) \
-    ((This)->lpVtbl->GetAt(This, index, result))
-
-#define __FIVectorView_1_HSTRING_get_Size(This, result) \
-    ((This)->lpVtbl->get_Size(This, result))
-
-#define __FIVectorView_1_HSTRING_IndexOf(This, value, index, result) \
-    ((This)->lpVtbl->IndexOf(This, value, index, result))
-
-#define __FIVectorView_1_HSTRING_GetMany(This, startIndex, itemsLength, items, result) \
-    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIVectorView_1_HSTRING_INTERFACE_DEFINED__
-
-#if !defined(____FIVector_1_HSTRING_INTERFACE_DEFINED__)
-#define ____FIVector_1_HSTRING_INTERFACE_DEFINED__
-
-typedef interface __FIVector_1_HSTRING __FIVector_1_HSTRING;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIVector_1_HSTRING;
-
-typedef struct __FIVector_1_HSTRINGVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVector_1_HSTRING* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVector_1_HSTRING* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIVector_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVector_1_HSTRING* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVector_1_HSTRING* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVector_1_HSTRING* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVector_1_HSTRING* This,
-        UINT32 index,
-        HSTRING* result);
-    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVector_1_HSTRING* This,
-        UINT32* result);
-    HRESULT (STDMETHODCALLTYPE* GetView)(__FIVector_1_HSTRING* This,
-        __FIVectorView_1_HSTRING** result);
-    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVector_1_HSTRING* This,
-        HSTRING value,
-        UINT32* index,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* SetAt)(__FIVector_1_HSTRING* This,
-        UINT32 index,
-        HSTRING value);
-    HRESULT (STDMETHODCALLTYPE* InsertAt)(__FIVector_1_HSTRING* This,
-        UINT32 index,
-        HSTRING value);
-    HRESULT (STDMETHODCALLTYPE* RemoveAt)(__FIVector_1_HSTRING* This,
-        UINT32 index);
-    HRESULT (STDMETHODCALLTYPE* Append)(__FIVector_1_HSTRING* This,
-        HSTRING value);
-    HRESULT (STDMETHODCALLTYPE* RemoveAtEnd)(__FIVector_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* Clear)(__FIVector_1_HSTRING* This);
-    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVector_1_HSTRING* This,
-        UINT32 startIndex,
-        UINT32 itemsLength,
-        HSTRING* items,
-        UINT32* result);
-    HRESULT (STDMETHODCALLTYPE* ReplaceAll)(__FIVector_1_HSTRING* This,
-        UINT32 itemsLength,
-        HSTRING* items);
-
-    END_INTERFACE
-} __FIVector_1_HSTRINGVtbl;
-
-interface __FIVector_1_HSTRING
-{
-    CONST_VTBL struct __FIVector_1_HSTRINGVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIVector_1_HSTRING_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIVector_1_HSTRING_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIVector_1_HSTRING_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIVector_1_HSTRING_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIVector_1_HSTRING_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIVector_1_HSTRING_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIVector_1_HSTRING_GetAt(This, index, result) \
-    ((This)->lpVtbl->GetAt(This, index, result))
-
-#define __FIVector_1_HSTRING_get_Size(This, result) \
-    ((This)->lpVtbl->get_Size(This, result))
-
-#define __FIVector_1_HSTRING_GetView(This, result) \
-    ((This)->lpVtbl->GetView(This, result))
-
-#define __FIVector_1_HSTRING_IndexOf(This, value, index, result) \
-    ((This)->lpVtbl->IndexOf(This, value, index, result))
-
-#define __FIVector_1_HSTRING_SetAt(This, index, value) \
-    ((This)->lpVtbl->SetAt(This, index, value))
-
-#define __FIVector_1_HSTRING_InsertAt(This, index, value) \
-    ((This)->lpVtbl->InsertAt(This, index, value))
-
-#define __FIVector_1_HSTRING_RemoveAt(This, index) \
-    ((This)->lpVtbl->RemoveAt(This, index))
-
-#define __FIVector_1_HSTRING_Append(This, value) \
-    ((This)->lpVtbl->Append(This, value))
-
-#define __FIVector_1_HSTRING_RemoveAtEnd(This) \
-    ((This)->lpVtbl->RemoveAtEnd(This))
-
-#define __FIVector_1_HSTRING_Clear(This) \
-    ((This)->lpVtbl->Clear(This))
-
-#define __FIVector_1_HSTRING_GetMany(This, startIndex, itemsLength, items, result) \
-    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
-
-#define __FIVector_1_HSTRING_ReplaceAll(This, itemsLength, items) \
-    ((This)->lpVtbl->ReplaceAll(This, itemsLength, items))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIVector_1_HSTRING_INTERFACE_DEFINED__
 
 #if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
 #if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
@@ -2844,78 +2249,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEve
 
 /*
  *
- * Interface Windows.Phone.Networking.Voip.ICallAnswerEventArgs2
- *
- * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Phone.Networking.Voip.CallAnswerEventArgs
- *
- * Any object which implements this interface must also implement the following interfaces:
- *     Windows.Phone.Networking.Voip.ICallAnswerEventArgs
- *
- */
-#if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Phone_Networking_Voip_ICallAnswerEventArgs2[] = L"Windows.Phone.Networking.Voip.ICallAnswerEventArgs2";
-typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_SourceDeviceId)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2* This,
-        HSTRING* value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2Vtbl;
-
-interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2
-{
-    CONST_VTBL struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_get_SourceDeviceId(This, value) \
-    ((This)->lpVtbl->get_SourceDeviceId(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2;
-#endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CICallAnswerEventArgs2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-
-/*
- *
  * Interface Windows.Phone.Networking.Voip.ICallRejectEventArgs
  *
  * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
@@ -3255,7 +2588,6 @@ typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinatorVt
         HSTRING contactName,
         HSTRING serviceName,
         enum __x_ABI_CWindows_CPhone_CNetworking_CVoip_CVoipCallMedia media,
-        __FIVector_1_HSTRING* pAssociatedDeviceIds,
         __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall** call);
     HRESULT (STDMETHODCALLTYPE* NotifyMuted)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator* This);
     HRESULT (STDMETHODCALLTYPE* NotifyUnmuted)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator* This);
@@ -3303,8 +2635,8 @@ interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator
 #define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator_RequestNewIncomingCall(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, call) \
     ((This)->lpVtbl->RequestNewIncomingCall(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, call))
 
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator_RequestNewOutgoingCall(This, context, contactName, serviceName, media, pAssociatedDeviceIds, call) \
-    ((This)->lpVtbl->RequestNewOutgoingCall(This, context, contactName, serviceName, media, pAssociatedDeviceIds, call))
+#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator_RequestNewOutgoingCall(This, context, contactName, serviceName, media, call) \
+    ((This)->lpVtbl->RequestNewOutgoingCall(This, context, contactName, serviceName, media, call))
 
 #define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator_NotifyMuted(This) \
     ((This)->lpVtbl->NotifyMuted(This))
@@ -3356,7 +2688,6 @@ typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator2V
         HSTRING contactNumber,
         HSTRING serviceName,
         enum __x_ABI_CWindows_CPhone_CNetworking_CVoip_CVoipCallMedia media,
-        __FIVector_1_HSTRING* pAssociatedDeviceIds,
         __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall** call);
 
     END_INTERFACE
@@ -3387,8 +2718,8 @@ interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator2
 #define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator2_SetupNewAcceptedCall(This, context, contactName, contactNumber, serviceName, media, pAssociatedDeviceIds, call) \
-    ((This)->lpVtbl->SetupNewAcceptedCall(This, context, contactName, contactNumber, serviceName, media, pAssociatedDeviceIds, call))
+#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator2_SetupNewAcceptedCall(This, context, contactName, contactNumber, serviceName, media, call) \
+    ((This)->lpVtbl->SetupNewAcceptedCall(This, context, contactName, contactNumber, serviceName, media, call))
 
 #endif /* COBJMACROS */
 
@@ -3440,7 +2771,6 @@ typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3V
         enum __x_ABI_CWindows_CPhone_CNetworking_CVoip_CVoipCallMedia media,
         struct __x_ABI_CWindows_CFoundation_CTimeSpan ringTimeout,
         HSTRING contactRemoteId,
-        __FIVector_1_HSTRING* pAssociatedDeviceIds,
         __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall** call);
     HRESULT (STDMETHODCALLTYPE* RequestNewAppInitiatedCall)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3* This,
         HSTRING context,
@@ -3448,7 +2778,6 @@ typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3V
         HSTRING contactNumber,
         HSTRING serviceName,
         enum __x_ABI_CWindows_CPhone_CNetworking_CVoip_CVoipCallMedia media,
-        __FIVector_1_HSTRING* pAssociatedDeviceIds,
         __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall** call);
 
     END_INTERFACE
@@ -3479,11 +2808,11 @@ interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3
 #define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3_RequestNewIncomingCallWithContactRemoteId(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, contactRemoteId, pAssociatedDeviceIds, call) \
-    ((This)->lpVtbl->RequestNewIncomingCallWithContactRemoteId(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, contactRemoteId, pAssociatedDeviceIds, call))
+#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3_RequestNewIncomingCallWithContactRemoteId(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, contactRemoteId, call) \
+    ((This)->lpVtbl->RequestNewIncomingCallWithContactRemoteId(This, context, contactName, contactNumber, contactImage, serviceName, brandingImage, callDetails, ringtone, media, ringTimeout, contactRemoteId, call))
 
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3_RequestNewAppInitiatedCall(This, context, contactName, contactNumber, serviceName, media, pAssociatedDeviceIds, call) \
-    ((This)->lpVtbl->RequestNewAppInitiatedCall(This, context, contactName, contactNumber, serviceName, media, pAssociatedDeviceIds, call))
+#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipCallCoordinator3_RequestNewAppInitiatedCall(This, context, contactName, contactNumber, serviceName, media, call) \
+    ((This)->lpVtbl->RequestNewAppInitiatedCall(This, context, contactName, contactNumber, serviceName, media, call))
 
 #endif /* COBJMACROS */
 
@@ -4169,100 +3498,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall
 
 /*
  *
- * Interface Windows.Phone.Networking.Voip.IVoipPhoneCall4
- *
- * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Phone.Networking.Voip.VoipPhoneCall
- *
- */
-#if WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Phone_Networking_Voip_IVoipPhoneCall4[] = L"Windows.Phone.Networking.Voip.IVoipPhoneCall4";
-typedef struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_IsUsingAssociatedDevicesList)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* NotifyCallActiveOnDevices)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        __FIIterable_1_HSTRING* associatedDeviceIds);
-    HRESULT (STDMETHODCALLTYPE* AddAssociatedCallControlDevice)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        HSTRING deviceId);
-    HRESULT (STDMETHODCALLTYPE* RemoveAssociatedCallControlDevice)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        HSTRING deviceId);
-    HRESULT (STDMETHODCALLTYPE* SetAssociatedCallControlDevices)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        __FIIterable_1_HSTRING* associatedDeviceIds);
-    HRESULT (STDMETHODCALLTYPE* GetAssociatedCallControlDevices)(__x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4* This,
-        __FIVectorView_1_HSTRING** result);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4Vtbl;
-
-interface __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4
-{
-    CONST_VTBL struct __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_get_IsUsingAssociatedDevicesList(This, value) \
-    ((This)->lpVtbl->get_IsUsingAssociatedDevicesList(This, value))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_NotifyCallActiveOnDevices(This, associatedDeviceIds) \
-    ((This)->lpVtbl->NotifyCallActiveOnDevices(This, associatedDeviceIds))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_AddAssociatedCallControlDevice(This, deviceId) \
-    ((This)->lpVtbl->AddAssociatedCallControlDevice(This, deviceId))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_RemoveAssociatedCallControlDevice(This, deviceId) \
-    ((This)->lpVtbl->RemoveAssociatedCallControlDevice(This, deviceId))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_SetAssociatedCallControlDevices(This, associatedDeviceIds) \
-    ((This)->lpVtbl->SetAssociatedCallControlDevices(This, associatedDeviceIds))
-
-#define __x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_GetAssociatedCallControlDevices(This, result) \
-    ((This)->lpVtbl->GetAssociatedCallControlDevices(This, result))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4;
-#endif /* !defined(____x_ABI_CWindows_CPhone_CNetworking_CVoip_CIVoipPhoneCall4_INTERFACE_DEFINED__) */
-#endif // WINDOWS_PHONE_PHONEINTERNALCONTRACT_VERSION >= 0x10000
-
-/*
- *
  * Interface Windows.Phone.Networking.Voip.IVoipPhoneCallReady
  *
  * Introduced to Windows.Phone.PhoneInternalContract in version 1.0
@@ -4463,7 +3698,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Phone.Networking.Voip.IVoipPhoneCallReady
  *    Windows.Phone.Networking.Voip.IVoipPhoneCall2
  *    Windows.Phone.Networking.Voip.IVoipPhoneCall3
- *    Windows.Phone.Networking.Voip.IVoipPhoneCall4
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

@@ -4,8 +4,6 @@
 //
 
 
-import "ocidl.idl";
-
 typedef struct DXGI_RATIONAL
 {
     UINT Numerator;

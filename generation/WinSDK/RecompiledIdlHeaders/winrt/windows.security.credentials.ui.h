@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -626,7 +626,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICredentialPickerOptions = __uuidof(ICredentialPickerOptions);
+                    extern MIDL_CONST_ID IID& IID_ICredentialPickerOptions = _uuidof(ICredentialPickerOptions);
                 } /* UI */
             } /* Credentials */
         } /* Security */
@@ -682,7 +682,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICredentialPickerResults = __uuidof(ICredentialPickerResults);
+                    extern MIDL_CONST_ID IID& IID_ICredentialPickerResults = _uuidof(ICredentialPickerResults);
                 } /* UI */
             } /* Credentials */
         } /* Security */
@@ -732,7 +732,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICredentialPickerStatics = __uuidof(ICredentialPickerStatics);
+                    extern MIDL_CONST_ID IID& IID_ICredentialPickerStatics = _uuidof(ICredentialPickerStatics);
                 } /* UI */
             } /* Credentials */
         } /* Security */
@@ -774,7 +774,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserConsentVerifierStatics = __uuidof(IUserConsentVerifierStatics);
+                    extern MIDL_CONST_ID IID& IID_IUserConsentVerifierStatics = _uuidof(IUserConsentVerifierStatics);
                 } /* UI */
             } /* Credentials */
         } /* Security */

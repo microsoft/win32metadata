@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -674,7 +674,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataAvailabilityStateChangedEventArgs = __uuidof(IUserDataAvailabilityStateChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUserDataAvailabilityStateChangedEventArgs = _uuidof(IUserDataAvailabilityStateChangedEventArgs);
             } /* DataProtection */
         } /* Security */
     } /* Windows */
@@ -713,7 +713,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataBufferUnprotectResult = __uuidof(IUserDataBufferUnprotectResult);
+                extern MIDL_CONST_ID IID& IID_IUserDataBufferUnprotectResult = _uuidof(IUserDataBufferUnprotectResult);
             } /* DataProtection */
         } /* Security */
     } /* Windows */
@@ -775,7 +775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataProtectionManager = __uuidof(IUserDataProtectionManager);
+                extern MIDL_CONST_ID IID& IID_IUserDataProtectionManager = _uuidof(IUserDataProtectionManager);
             } /* DataProtection */
         } /* Security */
     } /* Windows */
@@ -815,7 +815,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataProtectionManagerStatics = __uuidof(IUserDataProtectionManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IUserDataProtectionManagerStatics = _uuidof(IUserDataProtectionManagerStatics);
             } /* DataProtection */
         } /* Security */
     } /* Windows */
@@ -851,7 +851,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataStorageItemProtectionInfo = __uuidof(IUserDataStorageItemProtectionInfo);
+                extern MIDL_CONST_ID IID& IID_IUserDataStorageItemProtectionInfo = _uuidof(IUserDataStorageItemProtectionInfo);
             } /* DataProtection */
         } /* Security */
     } /* Windows */

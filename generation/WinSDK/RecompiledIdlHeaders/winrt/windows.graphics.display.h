@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1251,7 +1251,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayPropertiesEventHandler = __uuidof(IDisplayPropertiesEventHandler);
+                extern MIDL_CONST_ID IID& IID_IDisplayPropertiesEventHandler = _uuidof(IDisplayPropertiesEventHandler);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1319,7 +1319,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedColorInfo = __uuidof(IAdvancedColorInfo);
+                extern MIDL_CONST_ID IID& IID_IAdvancedColorInfo = _uuidof(IAdvancedColorInfo);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1396,7 +1396,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBrightnessOverride = __uuidof(IBrightnessOverride);
+                extern MIDL_CONST_ID IID& IID_IBrightnessOverride = _uuidof(IBrightnessOverride);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1435,7 +1435,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBrightnessOverrideSettings = __uuidof(IBrightnessOverrideSettings);
+                extern MIDL_CONST_ID IID& IID_IBrightnessOverrideSettings = _uuidof(IBrightnessOverrideSettings);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1480,7 +1480,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBrightnessOverrideSettingsStatics = __uuidof(IBrightnessOverrideSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IBrightnessOverrideSettingsStatics = _uuidof(IBrightnessOverrideSettingsStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1523,7 +1523,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBrightnessOverrideStatics = __uuidof(IBrightnessOverrideStatics);
+                extern MIDL_CONST_ID IID& IID_IBrightnessOverrideStatics = _uuidof(IBrightnessOverrideStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1559,7 +1559,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IColorOverrideSettings = __uuidof(IColorOverrideSettings);
+                extern MIDL_CONST_ID IID& IID_IColorOverrideSettings = _uuidof(IColorOverrideSettings);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1596,7 +1596,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IColorOverrideSettingsStatics = __uuidof(IColorOverrideSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IColorOverrideSettingsStatics = _uuidof(IColorOverrideSettingsStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1673,7 +1673,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayEnhancementOverride = __uuidof(IDisplayEnhancementOverride);
+                extern MIDL_CONST_ID IID& IID_IDisplayEnhancementOverride = _uuidof(IDisplayEnhancementOverride);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1715,7 +1715,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideCapabilities = __uuidof(IDisplayEnhancementOverrideCapabilities);
+                extern MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideCapabilities = _uuidof(IDisplayEnhancementOverrideCapabilities);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1751,7 +1751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideCapabilitiesChangedEventArgs = __uuidof(IDisplayEnhancementOverrideCapabilitiesChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideCapabilitiesChangedEventArgs = _uuidof(IDisplayEnhancementOverrideCapabilitiesChangedEventArgs);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1787,7 +1787,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideStatics = __uuidof(IDisplayEnhancementOverrideStatics);
+                extern MIDL_CONST_ID IID& IID_IDisplayEnhancementOverrideStatics = _uuidof(IDisplayEnhancementOverrideStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1872,7 +1872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformation = __uuidof(IDisplayInformation);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformation = _uuidof(IDisplayInformation);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1911,7 +1911,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformation2 = __uuidof(IDisplayInformation2);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformation2 = _uuidof(IDisplayInformation2);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1947,7 +1947,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformation3 = __uuidof(IDisplayInformation3);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformation3 = _uuidof(IDisplayInformation3);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -1986,7 +1986,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformation4 = __uuidof(IDisplayInformation4);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformation4 = _uuidof(IDisplayInformation4);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -2029,7 +2029,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformation5 = __uuidof(IDisplayInformation5);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformation5 = _uuidof(IDisplayInformation5);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -2078,7 +2078,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayInformationStatics = __uuidof(IDisplayInformationStatics);
+                extern MIDL_CONST_ID IID& IID_IDisplayInformationStatics = _uuidof(IDisplayInformationStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -2227,7 +2227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayPropertiesStatics = __uuidof(IDisplayPropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IDisplayPropertiesStatics = _uuidof(IDisplayPropertiesStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -2260,7 +2260,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayServices = __uuidof(IDisplayServices);
+                extern MIDL_CONST_ID IID& IID_IDisplayServices = _uuidof(IDisplayServices);
             } /* Display */
         } /* Graphics */
     } /* Windows */
@@ -2297,7 +2297,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDisplayServicesStatics = __uuidof(IDisplayServicesStatics);
+                extern MIDL_CONST_ID IID& IID_IDisplayServicesStatics = _uuidof(IDisplayServicesStatics);
             } /* Display */
         } /* Graphics */
     } /* Windows */

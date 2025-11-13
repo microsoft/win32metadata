@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -465,7 +465,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAddPagesEventHandler = __uuidof(IAddPagesEventHandler);
+                    extern MIDL_CONST_ID IID& IID_IAddPagesEventHandler = _uuidof(IAddPagesEventHandler);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -501,7 +501,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGetPreviewPageEventHandler = __uuidof(IGetPreviewPageEventHandler);
+                    extern MIDL_CONST_ID IID& IID_IGetPreviewPageEventHandler = _uuidof(IGetPreviewPageEventHandler);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -537,7 +537,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaginateEventHandler = __uuidof(IPaginateEventHandler);
+                    extern MIDL_CONST_ID IID& IID_IPaginateEventHandler = _uuidof(IPaginateEventHandler);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -575,7 +575,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAddPagesEventArgs = __uuidof(IAddPagesEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAddPagesEventArgs = _uuidof(IAddPagesEventArgs);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -613,7 +613,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGetPreviewPageEventArgs = __uuidof(IGetPreviewPageEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGetPreviewPageEventArgs = _uuidof(IGetPreviewPageEventArgs);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -654,7 +654,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaginateEventArgs = __uuidof(IPaginateEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IPaginateEventArgs = _uuidof(IPaginateEventArgs);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -726,7 +726,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE InvalidatePreview(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintDocument = __uuidof(IPrintDocument);
+                    extern MIDL_CONST_ID IID& IID_IPrintDocument = _uuidof(IPrintDocument);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -766,7 +766,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintDocumentFactory = __uuidof(IPrintDocumentFactory);
+                    extern MIDL_CONST_ID IID& IID_IPrintDocumentFactory = _uuidof(IPrintDocumentFactory);
                 } /* Printing */
             } /* Xaml */
         } /* UI */
@@ -804,7 +804,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintDocumentStatics = __uuidof(IPrintDocumentStatics);
+                    extern MIDL_CONST_ID IID& IID_IPrintDocumentStatics = _uuidof(IPrintDocumentStatics);
                 } /* Printing */
             } /* Xaml */
         } /* UI */

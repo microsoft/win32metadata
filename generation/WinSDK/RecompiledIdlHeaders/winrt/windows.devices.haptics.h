@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -637,7 +637,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics = __uuidof(IKnownSimpleHapticsControllerWaveformsStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics = _uuidof(IKnownSimpleHapticsControllerWaveformsStatics);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -700,7 +700,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics2 = __uuidof(IKnownSimpleHapticsControllerWaveformsStatics2);
+                extern MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics2 = _uuidof(IKnownSimpleHapticsControllerWaveformsStatics2);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -770,7 +770,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISimpleHapticsController = __uuidof(ISimpleHapticsController);
+                extern MIDL_CONST_ID IID& IID_ISimpleHapticsController = _uuidof(ISimpleHapticsController);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -809,7 +809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISimpleHapticsControllerFeedback = __uuidof(ISimpleHapticsControllerFeedback);
+                extern MIDL_CONST_ID IID& IID_ISimpleHapticsControllerFeedback = _uuidof(ISimpleHapticsControllerFeedback);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -848,7 +848,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVibrationDevice = __uuidof(IVibrationDevice);
+                extern MIDL_CONST_ID IID& IID_IVibrationDevice = _uuidof(IVibrationDevice);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -897,7 +897,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVibrationDeviceStatics = __uuidof(IVibrationDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_IVibrationDeviceStatics = _uuidof(IVibrationDeviceStatics);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -914,8 +914,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2459,8 +2459,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

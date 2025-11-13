@@ -124,14 +124,6 @@ SrpDoesPolicyAllowAppExecution(
     _Out_ BOOL* isAllowed
     );
 
-struct _SRP_REQUEST;
-typedef struct _SRP_REQUEST *PSRP_REQUEST;
-
-NTSTATUS
-SrpIsAllowed(
-    _In_ PSRP_REQUEST FileInfo
-    );
-
 #endif /* _WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD */
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
@@ -236,12 +228,6 @@ IsSrpIsTokenServicePresent(
 BOOLEAN
 __stdcall
 IsSrpDoesPolicyAllowAppExecutionPresent(
-    VOID
-    );
-
-BOOLEAN
-__stdcall
-IsSrpIsAllowedPresent(
     VOID
     );
 

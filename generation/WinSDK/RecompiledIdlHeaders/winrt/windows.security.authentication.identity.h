@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -361,7 +361,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationInfo = __uuidof(IEnterpriseKeyCredentialRegistrationInfo);
+                    extern MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationInfo = _uuidof(IEnterpriseKeyCredentialRegistrationInfo);
                 } /* Identity */
             } /* Authentication */
         } /* Security */
@@ -399,7 +399,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationManager = __uuidof(IEnterpriseKeyCredentialRegistrationManager);
+                    extern MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationManager = _uuidof(IEnterpriseKeyCredentialRegistrationManager);
                 } /* Identity */
             } /* Authentication */
         } /* Security */
@@ -437,7 +437,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationManagerStatics = __uuidof(IEnterpriseKeyCredentialRegistrationManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IEnterpriseKeyCredentialRegistrationManagerStatics = _uuidof(IEnterpriseKeyCredentialRegistrationManagerStatics);
                 } /* Identity */
             } /* Authentication */
         } /* Security */

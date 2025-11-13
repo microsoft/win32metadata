@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_PHONE_PHONECONTRACT_VERSION)
@@ -821,21 +821,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
-#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace UI {
-            namespace ViewManagement {
-                interface IUIViewSettingsPreferredInteractionMode;
-            } /* ViewManagement */
-        } /* UI */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode ABI::Windows::UI::ViewManagement::IUIViewSettingsPreferredInteractionMode
-
-#endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 namespace ABI {
@@ -1480,43 +1465,6 @@ typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::UISettings*, ABI::W
 
 namespace ABI {
     namespace Windows {
-        namespace UI {
-            namespace ViewManagement {
-                class UIViewSettings;
-            } /* ViewManagement */
-        } /* UI */
-    } /* Windows */
-} /* ABI */
-
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE
-#define DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation {
-template <>
-struct __declspec(uuid("bf3e2a14-6fce-5bb3-838e-de9a00e11aad"))
-ITypedEventHandler<ABI::Windows::UI::ViewManagement::UIViewSettings*, IInspectable*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::ViewManagement::UIViewSettings*, ABI::Windows::UI::ViewManagement::IUIViewSettings*>, IInspectable*>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.ViewManagement.UIViewSettings, Object>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef ITypedEventHandler<ABI::Windows::UI::ViewManagement::UIViewSettings*, IInspectable*> __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_t;
-#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_t
-/* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_USE */
-
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-namespace ABI {
-    namespace Windows {
         namespace Devices {
             namespace Enumeration {
                 class DeviceInformation;
@@ -1788,6 +1736,16 @@ namespace ABI {
         namespace UI {
             namespace ViewManagement {
                 class StatusBarProgressIndicator;
+            } /* ViewManagement */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace ViewManagement {
+                class UIViewSettings;
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2219,7 +2177,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccessibilitySettings = __uuidof(IAccessibilitySettings);
+                extern MIDL_CONST_ID IID& IID_IAccessibilitySettings = _uuidof(IAccessibilitySettings);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2265,7 +2223,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IActivationViewSwitcher = __uuidof(IActivationViewSwitcher);
+                extern MIDL_CONST_ID IID& IID_IActivationViewSwitcher = _uuidof(IActivationViewSwitcher);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2338,7 +2296,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView = __uuidof(IApplicationView);
+                extern MIDL_CONST_ID IID& IID_IApplicationView = _uuidof(IApplicationView);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2400,7 +2358,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView2 = __uuidof(IApplicationView2);
+                extern MIDL_CONST_ID IID& IID_IApplicationView2 = _uuidof(IApplicationView2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2457,7 +2415,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView3 = __uuidof(IApplicationView3);
+                extern MIDL_CONST_ID IID& IID_IApplicationView3 = _uuidof(IApplicationView3);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2509,7 +2467,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView4 = __uuidof(IApplicationView4);
+                extern MIDL_CONST_ID IID& IID_IApplicationView4 = _uuidof(IApplicationView4);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2548,7 +2506,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView7 = __uuidof(IApplicationView7);
+                extern MIDL_CONST_ID IID& IID_IApplicationView7 = _uuidof(IApplicationView7);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2587,7 +2545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationView9 = __uuidof(IApplicationView9);
+                extern MIDL_CONST_ID IID& IID_IApplicationView9 = _uuidof(IApplicationView9);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2623,7 +2581,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewConsolidatedEventArgs = __uuidof(IApplicationViewConsolidatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewConsolidatedEventArgs = _uuidof(IApplicationViewConsolidatedEventArgs);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2659,7 +2617,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewConsolidatedEventArgs2 = __uuidof(IApplicationViewConsolidatedEventArgs2);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewConsolidatedEventArgs2 = _uuidof(IApplicationViewConsolidatedEventArgs2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2701,7 +2659,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewFullscreenStatics = __uuidof(IApplicationViewFullscreenStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewFullscreenStatics = _uuidof(IApplicationViewFullscreenStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2738,7 +2696,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewInteropStatics = __uuidof(IApplicationViewInteropStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewInteropStatics = _uuidof(IApplicationViewInteropStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2771,7 +2729,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewScaling = __uuidof(IApplicationViewScaling);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewScaling = _uuidof(IApplicationViewScaling);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2811,7 +2769,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewScalingStatics = __uuidof(IApplicationViewScalingStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewScalingStatics = _uuidof(IApplicationViewScalingStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2859,7 +2817,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewStatics = __uuidof(IApplicationViewStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewStatics = _uuidof(IApplicationViewStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2901,7 +2859,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewStatics2 = __uuidof(IApplicationViewStatics2);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewStatics2 = _uuidof(IApplicationViewStatics2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2946,7 +2904,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewStatics3 = __uuidof(IApplicationViewStatics3);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewStatics3 = _uuidof(IApplicationViewStatics3);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -2983,7 +2941,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewStatics4 = __uuidof(IApplicationViewStatics4);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewStatics4 = _uuidof(IApplicationViewStatics4);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3054,7 +3012,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics = __uuidof(IApplicationViewSwitcherStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics = _uuidof(IApplicationViewSwitcherStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3088,7 +3046,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE DisableSystemViewActivationPolicy(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics2 = __uuidof(IApplicationViewSwitcherStatics2);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics2 = _uuidof(IApplicationViewSwitcherStatics2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3132,7 +3090,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics3 = __uuidof(IApplicationViewSwitcherStatics3);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewSwitcherStatics3 = _uuidof(IApplicationViewSwitcherStatics3);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3237,7 +3195,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewTitleBar = __uuidof(IApplicationViewTitleBar);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewTitleBar = _uuidof(IApplicationViewTitleBar);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3276,7 +3234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewTransferContext = __uuidof(IApplicationViewTransferContext);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewTransferContext = _uuidof(IApplicationViewTransferContext);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3312,7 +3270,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewTransferContextStatics = __uuidof(IApplicationViewTransferContextStatics);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewTransferContextStatics = _uuidof(IApplicationViewTransferContextStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3348,7 +3306,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IApplicationViewWithContext = __uuidof(IApplicationViewWithContext);
+                extern MIDL_CONST_ID IID& IID_IApplicationViewWithContext = _uuidof(IApplicationViewWithContext);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3398,7 +3356,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPane = __uuidof(IInputPane);
+                extern MIDL_CONST_ID IID& IID_IInputPane = _uuidof(IInputPane);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3437,7 +3395,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPane2 = __uuidof(IInputPane2);
+                extern MIDL_CONST_ID IID& IID_IInputPane2 = _uuidof(IInputPane2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3476,7 +3434,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPaneControl = __uuidof(IInputPaneControl);
+                extern MIDL_CONST_ID IID& IID_IInputPaneControl = _uuidof(IInputPaneControl);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3512,7 +3470,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPaneStatics = __uuidof(IInputPaneStatics);
+                extern MIDL_CONST_ID IID& IID_IInputPaneStatics = _uuidof(IInputPaneStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3549,7 +3507,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPaneStatics2 = __uuidof(IInputPaneStatics2);
+                extern MIDL_CONST_ID IID& IID_IInputPaneStatics2 = _uuidof(IInputPaneStatics2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3591,7 +3549,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInputPaneVisibilityEventArgs = __uuidof(IInputPaneVisibilityEventArgs);
+                extern MIDL_CONST_ID IID& IID_IInputPaneVisibilityEventArgs = _uuidof(IInputPaneVisibilityEventArgs);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3649,7 +3607,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProjectionManagerStatics = __uuidof(IProjectionManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IProjectionManagerStatics = _uuidof(IProjectionManagerStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3704,7 +3662,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProjectionManagerStatics2 = __uuidof(IProjectionManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IProjectionManagerStatics2 = _uuidof(IProjectionManagerStatics2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3781,7 +3739,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStatusBar = __uuidof(IStatusBar);
+                extern MIDL_CONST_ID IID& IID_IStatusBar = _uuidof(IStatusBar);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3832,7 +3790,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStatusBarProgressIndicator = __uuidof(IStatusBarProgressIndicator);
+                extern MIDL_CONST_ID IID& IID_IStatusBarProgressIndicator = _uuidof(IStatusBarProgressIndicator);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3868,7 +3826,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStatusBarStatics = __uuidof(IStatusBarStatics);
+                extern MIDL_CONST_ID IID& IID_IStatusBarStatics = _uuidof(IStatusBarStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3941,7 +3899,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings = __uuidof(IUISettings);
+                extern MIDL_CONST_ID IID& IID_IUISettings = _uuidof(IUISettings);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -3984,7 +3942,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings2 = __uuidof(IUISettings2);
+                extern MIDL_CONST_ID IID& IID_IUISettings2 = _uuidof(IUISettings2);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4028,7 +3986,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings3 = __uuidof(IUISettings3);
+                extern MIDL_CONST_ID IID& IID_IUISettings3 = _uuidof(IUISettings3);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4071,7 +4029,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings4 = __uuidof(IUISettings4);
+                extern MIDL_CONST_ID IID& IID_IUISettings4 = _uuidof(IUISettings4);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4114,7 +4072,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings5 = __uuidof(IUISettings5);
+                extern MIDL_CONST_ID IID& IID_IUISettings5 = _uuidof(IUISettings5);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4161,7 +4119,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettings6 = __uuidof(IUISettings6);
+                extern MIDL_CONST_ID IID& IID_IUISettings6 = _uuidof(IUISettings6);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4194,7 +4152,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettingsAnimationsEnabledChangedEventArgs = __uuidof(IUISettingsAnimationsEnabledChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUISettingsAnimationsEnabledChangedEventArgs = _uuidof(IUISettingsAnimationsEnabledChangedEventArgs);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4227,7 +4185,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettingsAutoHideScrollBarsChangedEventArgs = __uuidof(IUISettingsAutoHideScrollBarsChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUISettingsAutoHideScrollBarsChangedEventArgs = _uuidof(IUISettingsAutoHideScrollBarsChangedEventArgs);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4260,7 +4218,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IUISettingsMessageDurationChangedEventArgs = __uuidof(IUISettingsMessageDurationChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUISettingsMessageDurationChangedEventArgs = _uuidof(IUISettingsMessageDurationChangedEventArgs);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4296,7 +4254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUIViewSettings = __uuidof(IUIViewSettings);
+                extern MIDL_CONST_ID IID& IID_IUIViewSettings = _uuidof(IUIViewSettings);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4305,51 +4263,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 #endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.UI.ViewManagement.UIViewSettings
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_IUIViewSettingsPreferredInteractionMode[] = L"Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode";
-namespace ABI {
-    namespace Windows {
-        namespace UI {
-            namespace ViewManagement {
-                MIDL_INTERFACE("426de261-82ec-5f61-bad4-19b2d0d3cf35")
-                IUIViewSettingsPreferredInteractionMode : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE GetPreferredInteractionMode(
-                        UINT32 supportedModesLength,
-                        ABI::Windows::UI::ViewManagement::UserInteractionMode* supportedModes,
-                        ABI::Windows::UI::ViewManagement::UserInteractionMode* result
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE add_PreferredInteractionModeChanged(
-                        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* handler,
-                        EventRegistrationToken* token
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE remove_PreferredInteractionModeChanged(
-                        EventRegistrationToken token
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IUIViewSettingsPreferredInteractionMode = __uuidof(IUIViewSettingsPreferredInteractionMode);
-            } /* ViewManagement */
-        } /* UI */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
-#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -4373,11 +4286,11 @@ namespace ABI {
                 {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
-                        ABI::Windows::UI::ViewManagement::IUIViewSettings** result
+                        ABI::Windows::UI::ViewManagement::IUIViewSettings** current
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUIViewSettingsStatics = __uuidof(IUIViewSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IUIViewSettingsStatics = _uuidof(IUIViewSettingsStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4422,7 +4335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IViewModePreferences = __uuidof(IViewModePreferences);
+                extern MIDL_CONST_ID IID& IID_IViewModePreferences = _uuidof(IViewModePreferences);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4459,7 +4372,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IViewModePreferencesStatics = __uuidof(IViewModePreferencesStatics);
+                extern MIDL_CONST_ID IID& IID_IViewModePreferencesStatics = _uuidof(IViewModePreferencesStatics);
             } /* ViewManagement */
         } /* UI */
     } /* Windows */
@@ -4517,12 +4430,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IApplicationView ** Default Interface **
@@ -4592,8 +4505,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -4657,8 +4570,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IInputPane ** Default Interface **
@@ -4852,9 +4765,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IUIViewSettings ** Default Interface **
- *    Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5163,12 +5073,6 @@ typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUISettingsMessageDurati
 typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 
 #endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
-#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
-
-#endif // ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_FWD_DEFINED__
@@ -6173,55 +6077,6 @@ interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUISettings_Win
 
 #endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUISettings_Windows__CUI__CViewManagement__CUISettingsMessageDurationChangedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-#if !defined(____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__)
-#define ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__
-
-typedef interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable;
-
-typedef struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This);
-    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* This,
-        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings* sender,
-        IInspectable* args);
-
-    END_INTERFACE
-} __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl;
-
-interface __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable
-{
-    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectableVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_Invoke(This, sender, args) \
-    ((This)->lpVtbl->Invoke(This, sender, args))
-
-#endif /* COBJMACROS */
-
-#endif // ____FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef ____x_ABI_CWindows_CDevices_CEnumeration_CIDeviceInformation_FWD_DEFINED__
@@ -10490,88 +10345,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings;
 
 /*
  *
- * Interface Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.UI.ViewManagement.UIViewSettings
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_ViewManagement_IUIViewSettingsPreferredInteractionMode[] = L"Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode";
-typedef struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* GetPreferredInteractionMode)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        UINT32 supportedModesLength,
-        enum __x_ABI_CWindows_CUI_CViewManagement_CUserInteractionMode* supportedModes,
-        enum __x_ABI_CWindows_CUI_CViewManagement_CUserInteractionMode* result);
-    HRESULT (STDMETHODCALLTYPE* add_PreferredInteractionModeChanged)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        __FITypedEventHandler_2_Windows__CUI__CViewManagement__CUIViewSettings_IInspectable* handler,
-        EventRegistrationToken* token);
-    HRESULT (STDMETHODCALLTYPE* remove_PreferredInteractionModeChanged)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode* This,
-        EventRegistrationToken token);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl;
-
-interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode
-{
-    CONST_VTBL struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionModeVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_GetPreferredInteractionMode(This, supportedModesLength, supportedModes, result) \
-    ((This)->lpVtbl->GetPreferredInteractionMode(This, supportedModesLength, supportedModes, result))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_add_PreferredInteractionModeChanged(This, handler, token) \
-    ((This)->lpVtbl->add_PreferredInteractionModeChanged(This, handler, token))
-
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_remove_PreferredInteractionModeChanged(This, token) \
-    ((This)->lpVtbl->remove_PreferredInteractionModeChanged(This, token))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode;
-#endif /* !defined(____x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsPreferredInteractionMode_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.UI.ViewManagement.IUIViewSettingsStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -10600,7 +10373,7 @@ typedef struct __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStaticsVtbl
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics* This,
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics* This,
-        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings** result);
+        __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettings** current);
 
     END_INTERFACE
 } __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStaticsVtbl;
@@ -10630,8 +10403,8 @@ interface __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics
 #define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetForCurrentView(This, result) \
-    ((This)->lpVtbl->GetForCurrentView(This, result))
+#define __x_ABI_CWindows_CUI_CViewManagement_CIUIViewSettingsStatics_GetForCurrentView(This, current) \
+    ((This)->lpVtbl->GetForCurrentView(This, current))
 
 #endif /* COBJMACROS */
 
@@ -10841,12 +10614,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics4 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewFullscreenStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewInteropStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IApplicationView ** Default Interface **
@@ -10916,8 +10689,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -10981,8 +10754,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.ViewManagement.IInputPaneStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IInputPane ** Default Interface **
@@ -11176,9 +10949,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.UI.ViewManagement.IUIViewSettings ** Default Interface **
- *    Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

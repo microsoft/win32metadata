@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -676,7 +676,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISocialDashboardItemUpdater = __uuidof(ISocialDashboardItemUpdater);
+                    extern MIDL_CONST_ID IID& IID_ISocialDashboardItemUpdater = _uuidof(ISocialDashboardItemUpdater);
                 } /* Provider */
             } /* SocialInfo */
         } /* ApplicationModel */
@@ -738,7 +738,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISocialFeedUpdater = __uuidof(ISocialFeedUpdater);
+                    extern MIDL_CONST_ID IID& IID_ISocialFeedUpdater = _uuidof(ISocialFeedUpdater);
                 } /* Provider */
             } /* SocialInfo */
         } /* ApplicationModel */
@@ -818,7 +818,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISocialInfoProviderManagerStatics = __uuidof(ISocialInfoProviderManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_ISocialInfoProviderManagerStatics = _uuidof(ISocialInfoProviderManagerStatics);
                 } /* Provider */
             } /* SocialInfo */
         } /* ApplicationModel */

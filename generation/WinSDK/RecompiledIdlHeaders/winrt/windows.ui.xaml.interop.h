@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -420,7 +420,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableVectorChangedEventHandler = __uuidof(IBindableVectorChangedEventHandler);
+                    extern MIDL_CONST_ID IID& IID_IBindableVectorChangedEventHandler = _uuidof(IBindableVectorChangedEventHandler);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -456,7 +456,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventHandler = __uuidof(INotifyCollectionChangedEventHandler);
+                    extern MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventHandler = _uuidof(INotifyCollectionChangedEventHandler);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -492,7 +492,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableIterable = __uuidof(IBindableIterable);
+                    extern MIDL_CONST_ID IID& IID_IBindableIterable = _uuidof(IBindableIterable);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -534,7 +534,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableIterator = __uuidof(IBindableIterator);
+                    extern MIDL_CONST_ID IID& IID_IBindableIterator = _uuidof(IBindableIterator);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -578,7 +578,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableObservableVector = __uuidof(IBindableObservableVector);
+                    extern MIDL_CONST_ID IID& IID_IBindableObservableVector = _uuidof(IBindableObservableVector);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -645,7 +645,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableVector = __uuidof(IBindableVector);
+                    extern MIDL_CONST_ID IID& IID_IBindableVector = _uuidof(IBindableVector);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -693,7 +693,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBindableVectorView = __uuidof(IBindableVectorView);
+                    extern MIDL_CONST_ID IID& IID_IBindableVectorView = _uuidof(IBindableVectorView);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -733,7 +733,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INotifyCollectionChanged = __uuidof(INotifyCollectionChanged);
+                    extern MIDL_CONST_ID IID& IID_INotifyCollectionChanged = _uuidof(INotifyCollectionChanged);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -783,7 +783,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventArgs = __uuidof(INotifyCollectionChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventArgs = _uuidof(INotifyCollectionChangedEventArgs);
                 } /* Interop */
             } /* Xaml */
         } /* UI */
@@ -828,7 +828,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventArgsFactory = __uuidof(INotifyCollectionChangedEventArgsFactory);
+                    extern MIDL_CONST_ID IID& IID_INotifyCollectionChangedEventArgsFactory = _uuidof(INotifyCollectionChangedEventArgsFactory);
                 } /* Interop */
             } /* Xaml */
         } /* UI */

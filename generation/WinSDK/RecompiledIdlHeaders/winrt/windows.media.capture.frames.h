@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -2484,7 +2484,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAudioMediaFrame = __uuidof(IAudioMediaFrame);
+                    extern MIDL_CONST_ID IID& IID_IAudioMediaFrame = _uuidof(IAudioMediaFrame);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2525,7 +2525,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBufferMediaFrame = __uuidof(IBufferMediaFrame);
+                    extern MIDL_CONST_ID IID& IID_IBufferMediaFrame = _uuidof(IBufferMediaFrame);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2574,7 +2574,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDepthMediaFrame = __uuidof(IDepthMediaFrame);
+                    extern MIDL_CONST_ID IID& IID_IDepthMediaFrame = _uuidof(IDepthMediaFrame);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2615,7 +2615,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDepthMediaFrame2 = __uuidof(IDepthMediaFrame2);
+                    extern MIDL_CONST_ID IID& IID_IDepthMediaFrame2 = _uuidof(IDepthMediaFrame2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2656,7 +2656,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDepthMediaFrameFormat = __uuidof(IDepthMediaFrameFormat);
+                    extern MIDL_CONST_ID IID& IID_IDepthMediaFrameFormat = _uuidof(IDepthMediaFrameFormat);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2700,7 +2700,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInfraredMediaFrame = __uuidof(IInfraredMediaFrame);
+                    extern MIDL_CONST_ID IID& IID_IInfraredMediaFrame = _uuidof(IInfraredMediaFrame);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2735,7 +2735,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameArrivedEventArgs = __uuidof(IMediaFrameArrivedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameArrivedEventArgs = _uuidof(IMediaFrameArrivedEventArgs);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2785,7 +2785,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameFormat = __uuidof(IMediaFrameFormat);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameFormat = _uuidof(IMediaFrameFormat);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2823,7 +2823,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameFormat2 = __uuidof(IMediaFrameFormat2);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameFormat2 = _uuidof(IMediaFrameFormat2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2877,7 +2877,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameReader = __uuidof(IMediaFrameReader);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameReader = _uuidof(IMediaFrameReader);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2918,7 +2918,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameReader2 = __uuidof(IMediaFrameReader2);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameReader2 = _uuidof(IMediaFrameReader2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -2980,7 +2980,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameReference = __uuidof(IMediaFrameReference);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameReference = _uuidof(IMediaFrameReference);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3018,7 +3018,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameReference2 = __uuidof(IMediaFrameReference2);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameReference2 = _uuidof(IMediaFrameReference2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3080,7 +3080,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSource = __uuidof(IMediaFrameSource);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSource = _uuidof(IMediaFrameSource);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3127,7 +3127,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceController = __uuidof(IMediaFrameSourceController);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceController = _uuidof(IMediaFrameSourceController);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3175,7 +3175,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceController2 = __uuidof(IMediaFrameSourceController2);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceController2 = _uuidof(IMediaFrameSourceController2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3213,7 +3213,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceController3 = __uuidof(IMediaFrameSourceController3);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceController3 = _uuidof(IMediaFrameSourceController3);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3254,7 +3254,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceGetPropertyResult = __uuidof(IMediaFrameSourceGetPropertyResult);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceGetPropertyResult = _uuidof(IMediaFrameSourceGetPropertyResult);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3298,7 +3298,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceGroup = __uuidof(IMediaFrameSourceGroup);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceGroup = _uuidof(IMediaFrameSourceGroup);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3343,7 +3343,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceGroupStatics = __uuidof(IMediaFrameSourceGroupStatics);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceGroupStatics = _uuidof(IMediaFrameSourceGroupStatics);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3399,7 +3399,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo = __uuidof(IMediaFrameSourceInfo);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo = _uuidof(IMediaFrameSourceInfo);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3440,7 +3440,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo2 = __uuidof(IMediaFrameSourceInfo2);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo2 = _uuidof(IMediaFrameSourceInfo2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3479,7 +3479,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo3 = __uuidof(IMediaFrameSourceInfo3);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo3 = _uuidof(IMediaFrameSourceInfo3);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3517,7 +3517,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo4 = __uuidof(IMediaFrameSourceInfo4);
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo4 = _uuidof(IMediaFrameSourceInfo4);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3552,7 +3552,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameArrivedEventArgs = __uuidof(IMultiSourceMediaFrameArrivedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameArrivedEventArgs = _uuidof(IMultiSourceMediaFrameArrivedEventArgs);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3606,7 +3606,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReader = __uuidof(IMultiSourceMediaFrameReader);
+                    extern MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReader = _uuidof(IMultiSourceMediaFrameReader);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3647,7 +3647,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReader2 = __uuidof(IMultiSourceMediaFrameReader2);
+                    extern MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReader2 = _uuidof(IMultiSourceMediaFrameReader2);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3689,7 +3689,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReference = __uuidof(IMultiSourceMediaFrameReference);
+                    extern MIDL_CONST_ID IID& IID_IMultiSourceMediaFrameReference = _uuidof(IMultiSourceMediaFrameReference);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3748,7 +3748,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVideoMediaFrame = __uuidof(IVideoMediaFrame);
+                    extern MIDL_CONST_ID IID& IID_IVideoMediaFrame = _uuidof(IVideoMediaFrame);
                 } /* Frames */
             } /* Capture */
         } /* Media */
@@ -3795,7 +3795,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IVideoMediaFrameFormat = __uuidof(IVideoMediaFrameFormat);
+                    extern MIDL_CONST_ID IID& IID_IVideoMediaFrameFormat = _uuidof(IVideoMediaFrameFormat);
                 } /* Frames */
             } /* Capture */
         } /* Media */

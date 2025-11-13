@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -214,7 +214,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomXamlResourceLoader = __uuidof(ICustomXamlResourceLoader);
+                    extern MIDL_CONST_ID IID& IID_ICustomXamlResourceLoader = _uuidof(ICustomXamlResourceLoader);
                 } /* Resources */
             } /* Xaml */
         } /* UI */
@@ -254,7 +254,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderFactory = __uuidof(ICustomXamlResourceLoaderFactory);
+                    extern MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderFactory = _uuidof(ICustomXamlResourceLoaderFactory);
                 } /* Resources */
             } /* Xaml */
         } /* UI */
@@ -296,7 +296,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderOverrides = __uuidof(ICustomXamlResourceLoaderOverrides);
+                    extern MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderOverrides = _uuidof(ICustomXamlResourceLoaderOverrides);
                 } /* Resources */
             } /* Xaml */
         } /* UI */
@@ -337,7 +337,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderStatics = __uuidof(ICustomXamlResourceLoaderStatics);
+                    extern MIDL_CONST_ID IID& IID_ICustomXamlResourceLoaderStatics = _uuidof(ICustomXamlResourceLoaderStatics);
                 } /* Resources */
             } /* Xaml */
         } /* UI */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -652,7 +652,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOcrEngine = __uuidof(IOcrEngine);
+                extern MIDL_CONST_ID IID& IID_IOcrEngine = _uuidof(IOcrEngine);
             } /* Ocr */
         } /* Media */
     } /* Windows */
@@ -702,7 +702,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOcrEngineStatics = __uuidof(IOcrEngineStatics);
+                extern MIDL_CONST_ID IID& IID_IOcrEngineStatics = _uuidof(IOcrEngineStatics);
             } /* Ocr */
         } /* Media */
     } /* Windows */
@@ -741,7 +741,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOcrLine = __uuidof(IOcrLine);
+                extern MIDL_CONST_ID IID& IID_IOcrLine = _uuidof(IOcrLine);
             } /* Ocr */
         } /* Media */
     } /* Windows */
@@ -783,7 +783,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOcrResult = __uuidof(IOcrResult);
+                extern MIDL_CONST_ID IID& IID_IOcrResult = _uuidof(IOcrResult);
             } /* Ocr */
         } /* Media */
     } /* Windows */
@@ -822,7 +822,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOcrWord = __uuidof(IOcrWord);
+                extern MIDL_CONST_ID IID& IID_IOcrWord = _uuidof(IOcrWord);
             } /* Ocr */
         } /* Media */
     } /* Windows */

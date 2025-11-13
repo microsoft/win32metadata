@@ -1160,7 +1160,7 @@ public:
         return S_OK;
     }
     // IActivationFactory method
-    STDMETHOD_CHPE_PATCHABLE(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
+    STDMETHOD(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
     {
         *ppvObject = nullptr;
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
@@ -1216,7 +1216,7 @@ class SimpleActivationFactory : public ActivationFactory<Details::Nil, Details::
 {
 public:
     // IActivationFactory method
-    STDMETHOD_CHPE_PATCHABLE(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
+    STDMETHOD(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
     {
 #ifdef __WRL_STRICT__
         static_assert(__is_base_of(Details::RuntimeClassBase, Base), "SimpleActivationFactory can only instantiate 'Base' that derive from RuntimeClass");
@@ -1238,7 +1238,7 @@ template<typename Base, FactoryCacheFlags cacheFlagValue = FactoryCacheDefault>
 class SimpleAgileActivationFactory : public AgileActivationFactory<Details::Nil, Details::Nil, Details::Nil, cacheFlagValue>
 {
 public:
-    STDMETHOD_CHPE_PATCHABLE(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
+    STDMETHOD(ActivateInstance)(_Outptr_result_nullonfailure_ IInspectable **ppvObject)
     {
 #ifdef __WRL_STRICT__
         static_assert(__is_base_of(Details::RuntimeClassBase, Base), "SimpleAgileActivationFactory can only instantiate 'Base' that derive from RuntimeClass");

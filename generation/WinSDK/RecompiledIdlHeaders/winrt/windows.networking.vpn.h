@@ -108,7 +108,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -854,21 +854,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2 ABI::Windows::Networking::Vpn::IVpnPlugInProfile2
 
 #endif // ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
-#define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Networking {
-            namespace Vpn {
-                interface IVpnPlugInReconnectTransport;
-            } /* Vpn */
-        } /* Networking */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport ABI::Windows::Networking::Vpn::IVpnPlugInReconnectTransport
-
-#endif // ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CVpn_CIVpnProfile_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnProfile_FWD_DEFINED__
@@ -3332,7 +3317,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnAppId = __uuidof(IVpnAppId);
+                extern MIDL_CONST_ID IID& IID_IVpnAppId = _uuidof(IVpnAppId);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3370,7 +3355,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnAppIdFactory = __uuidof(IVpnAppIdFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnAppIdFactory = _uuidof(IVpnAppIdFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3466,7 +3451,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannel = __uuidof(IVpnChannel);
+                extern MIDL_CONST_ID IID& IID_IVpnChannel = _uuidof(IVpnChannel);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3568,7 +3553,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannel2 = __uuidof(IVpnChannel2);
+                extern MIDL_CONST_ID IID& IID_IVpnChannel2 = _uuidof(IVpnChannel2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3632,7 +3617,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannel4 = __uuidof(IVpnChannel4);
+                extern MIDL_CONST_ID IID& IID_IVpnChannel4 = _uuidof(IVpnChannel4);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3673,7 +3658,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE FlushVpnSendPacketBuffers(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannel5 = __uuidof(IVpnChannel5);
+                extern MIDL_CONST_ID IID& IID_IVpnChannel5 = _uuidof(IVpnChannel5);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3711,7 +3696,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannel6 = __uuidof(IVpnChannel6);
+                extern MIDL_CONST_ID IID& IID_IVpnChannel6 = _uuidof(IVpnChannel6);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3747,7 +3732,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannelActivityEventArgs = __uuidof(IVpnChannelActivityEventArgs);
+                extern MIDL_CONST_ID IID& IID_IVpnChannelActivityEventArgs = _uuidof(IVpnChannelActivityEventArgs);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3783,7 +3768,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannelActivityStateChangedArgs = __uuidof(IVpnChannelActivityStateChangedArgs);
+                extern MIDL_CONST_ID IID& IID_IVpnChannelActivityStateChangedArgs = _uuidof(IVpnChannelActivityStateChangedArgs);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3825,7 +3810,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannelConfiguration = __uuidof(IVpnChannelConfiguration);
+                extern MIDL_CONST_ID IID& IID_IVpnChannelConfiguration = _uuidof(IVpnChannelConfiguration);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3861,7 +3846,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannelConfiguration2 = __uuidof(IVpnChannelConfiguration2);
+                extern MIDL_CONST_ID IID& IID_IVpnChannelConfiguration2 = _uuidof(IVpnChannelConfiguration2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3896,7 +3881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnChannelStatics = __uuidof(IVpnChannelStatics);
+                extern MIDL_CONST_ID IID& IID_IVpnChannelStatics = _uuidof(IVpnChannelStatics);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3939,7 +3924,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCredential = __uuidof(IVpnCredential);
+                extern MIDL_CONST_ID IID& IID_IVpnCredential = _uuidof(IVpnCredential);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -3984,7 +3969,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomCheckBox = __uuidof(IVpnCustomCheckBox);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomCheckBox = _uuidof(IVpnCustomCheckBox);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4029,7 +4014,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomComboBox = __uuidof(IVpnCustomComboBox);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomComboBox = _uuidof(IVpnCustomComboBox);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4080,7 +4065,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomEditBox = __uuidof(IVpnCustomEditBox);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomEditBox = _uuidof(IVpnCustomEditBox);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4116,7 +4101,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomErrorBox = __uuidof(IVpnCustomErrorBox);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomErrorBox = _uuidof(IVpnCustomErrorBox);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4165,7 +4150,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPrompt = __uuidof(IVpnCustomPrompt);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPrompt = _uuidof(IVpnCustomPrompt);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4210,7 +4195,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPromptBooleanInput = __uuidof(IVpnCustomPromptBooleanInput);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPromptBooleanInput = _uuidof(IVpnCustomPromptBooleanInput);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4259,7 +4244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPromptElement = __uuidof(IVpnCustomPromptElement);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPromptElement = _uuidof(IVpnCustomPromptElement);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4301,7 +4286,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPromptOptionSelector = __uuidof(IVpnCustomPromptOptionSelector);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPromptOptionSelector = _uuidof(IVpnCustomPromptOptionSelector);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4343,7 +4328,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPromptText = __uuidof(IVpnCustomPromptText);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPromptText = _uuidof(IVpnCustomPromptText);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4394,7 +4379,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomPromptTextInput = __uuidof(IVpnCustomPromptTextInput);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomPromptTextInput = _uuidof(IVpnCustomPromptTextInput);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4436,7 +4421,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnCustomTextBox = __uuidof(IVpnCustomTextBox);
+                extern MIDL_CONST_ID IID& IID_IVpnCustomTextBox = _uuidof(IVpnCustomTextBox);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4478,7 +4463,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnDomainNameAssignment = __uuidof(IVpnDomainNameAssignment);
+                extern MIDL_CONST_ID IID& IID_IVpnDomainNameAssignment = _uuidof(IVpnDomainNameAssignment);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4529,7 +4514,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnDomainNameInfo = __uuidof(IVpnDomainNameInfo);
+                extern MIDL_CONST_ID IID& IID_IVpnDomainNameInfo = _uuidof(IVpnDomainNameInfo);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4565,7 +4550,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnDomainNameInfo2 = __uuidof(IVpnDomainNameInfo2);
+                extern MIDL_CONST_ID IID& IID_IVpnDomainNameInfo2 = _uuidof(IVpnDomainNameInfo2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4603,7 +4588,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnDomainNameInfoFactory = __uuidof(IVpnDomainNameInfoFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnDomainNameInfoFactory = _uuidof(IVpnDomainNameInfoFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4645,7 +4630,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnForegroundActivatedEventArgs = __uuidof(IVpnForegroundActivatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IVpnForegroundActivatedEventArgs = _uuidof(IVpnForegroundActivatedEventArgs);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4681,7 +4666,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnForegroundActivationOperation = __uuidof(IVpnForegroundActivationOperation);
+                extern MIDL_CONST_ID IID& IID_IVpnForegroundActivationOperation = _uuidof(IVpnForegroundActivationOperation);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4718,7 +4703,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnInterfaceId = __uuidof(IVpnInterfaceId);
+                extern MIDL_CONST_ID IID& IID_IVpnInterfaceId = _uuidof(IVpnInterfaceId);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4754,7 +4739,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnInterfaceIdFactory = __uuidof(IVpnInterfaceIdFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnInterfaceIdFactory = _uuidof(IVpnInterfaceIdFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4823,7 +4808,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnManagementAgent = __uuidof(IVpnManagementAgent);
+                extern MIDL_CONST_ID IID& IID_IVpnManagementAgent = _uuidof(IVpnManagementAgent);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4868,7 +4853,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnNamespaceAssignment = __uuidof(IVpnNamespaceAssignment);
+                extern MIDL_CONST_ID IID& IID_IVpnNamespaceAssignment = _uuidof(IVpnNamespaceAssignment);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4919,7 +4904,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnNamespaceInfo = __uuidof(IVpnNamespaceInfo);
+                extern MIDL_CONST_ID IID& IID_IVpnNamespaceInfo = _uuidof(IVpnNamespaceInfo);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -4956,7 +4941,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnNamespaceInfoFactory = __uuidof(IVpnNamespaceInfoFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnNamespaceInfoFactory = _uuidof(IVpnNamespaceInfoFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5025,7 +5010,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnNativeProfile = __uuidof(IVpnNativeProfile);
+                extern MIDL_CONST_ID IID& IID_IVpnNativeProfile = _uuidof(IVpnNativeProfile);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5067,7 +5052,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnNativeProfile2 = __uuidof(IVpnNativeProfile2);
+                extern MIDL_CONST_ID IID& IID_IVpnNativeProfile2 = _uuidof(IVpnNativeProfile2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5115,7 +5100,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBuffer = __uuidof(IVpnPacketBuffer);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBuffer = _uuidof(IVpnPacketBuffer);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5151,7 +5136,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBuffer2 = __uuidof(IVpnPacketBuffer2);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBuffer2 = _uuidof(IVpnPacketBuffer2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5190,7 +5175,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBuffer3 = __uuidof(IVpnPacketBuffer3);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBuffer3 = _uuidof(IVpnPacketBuffer3);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5227,7 +5212,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBufferFactory = __uuidof(IVpnPacketBufferFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBufferFactory = _uuidof(IVpnPacketBufferFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5285,7 +5270,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBufferList = __uuidof(IVpnPacketBufferList);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBufferList = _uuidof(IVpnPacketBufferList);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5333,7 +5318,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPacketBufferList2 = __uuidof(IVpnPacketBufferList2);
+                extern MIDL_CONST_ID IID& IID_IVpnPacketBufferList2 = _uuidof(IVpnPacketBufferList2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5375,7 +5360,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPickedCredential = __uuidof(IVpnPickedCredential);
+                extern MIDL_CONST_ID IID& IID_IVpnPickedCredential = _uuidof(IVpnPickedCredential);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5427,7 +5412,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPlugIn = __uuidof(IVpnPlugIn);
+                extern MIDL_CONST_ID IID& IID_IVpnPlugIn = _uuidof(IVpnPlugIn);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5478,7 +5463,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPlugInProfile = __uuidof(IVpnPlugInProfile);
+                extern MIDL_CONST_ID IID& IID_IVpnPlugInProfile = _uuidof(IVpnPlugInProfile);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5523,7 +5508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnPlugInProfile2 = __uuidof(IVpnPlugInProfile2);
+                extern MIDL_CONST_ID IID& IID_IVpnPlugInProfile2 = _uuidof(IVpnPlugInProfile2);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5532,41 +5517,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
-
-/*
- *
- * Interface Windows.Networking.Vpn.IVpnPlugInReconnectTransport
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
-#if !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_Vpn_IVpnPlugInReconnectTransport[] = L"Windows.Networking.Vpn.IVpnPlugInReconnectTransport";
-namespace ABI {
-    namespace Windows {
-        namespace Networking {
-            namespace Vpn {
-                MIDL_INTERFACE("9d5a1092-bb46-4d34-9d88-f217893076f4")
-                IVpnPlugInReconnectTransport : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE ReconnectTransport(
-                        ABI::Windows::Networking::Vpn::IVpnChannel* channel,
-                        IInspectable* context
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IVpnPlugInReconnectTransport = __uuidof(IVpnPlugInReconnectTransport);
-            } /* Vpn */
-        } /* Networking */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport;
-#endif /* !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -5619,7 +5569,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnProfile = __uuidof(IVpnProfile);
+                extern MIDL_CONST_ID IID& IID_IVpnProfile = _uuidof(IVpnProfile);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5664,7 +5614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnRoute = __uuidof(IVpnRoute);
+                extern MIDL_CONST_ID IID& IID_IVpnRoute = _uuidof(IVpnRoute);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5727,7 +5677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnRouteAssignment = __uuidof(IVpnRouteAssignment);
+                extern MIDL_CONST_ID IID& IID_IVpnRouteAssignment = _uuidof(IVpnRouteAssignment);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5763,7 +5713,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnRouteFactory = __uuidof(IVpnRouteFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnRouteFactory = _uuidof(IVpnRouteFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5799,7 +5749,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnSystemHealth = __uuidof(IVpnSystemHealth);
+                extern MIDL_CONST_ID IID& IID_IVpnSystemHealth = _uuidof(IVpnSystemHealth);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5865,7 +5815,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnTrafficFilter = __uuidof(IVpnTrafficFilter);
+                extern MIDL_CONST_ID IID& IID_IVpnTrafficFilter = _uuidof(IVpnTrafficFilter);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5913,7 +5863,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnTrafficFilterAssignment = __uuidof(IVpnTrafficFilterAssignment);
+                extern MIDL_CONST_ID IID& IID_IVpnTrafficFilterAssignment = _uuidof(IVpnTrafficFilterAssignment);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -5950,7 +5900,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVpnTrafficFilterFactory = __uuidof(IVpnTrafficFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IVpnTrafficFilterFactory = _uuidof(IVpnTrafficFilterFactory);
             } /* Vpn */
         } /* Networking */
     } /* Windows */
@@ -7034,12 +6984,6 @@ typedef interface __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile __x_ABI_C
 typedef interface __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2 __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2;
 
 #endif // ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
-#define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport;
-
-#endif // ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CVpn_CIVpnProfile_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnProfile_FWD_DEFINED__
@@ -15809,74 +15753,6 @@ interface __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInProfile2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
-
-/*
- *
- * Interface Windows.Networking.Vpn.IVpnPlugInReconnectTransport
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
-#if !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_Vpn_IVpnPlugInReconnectTransport[] = L"Windows.Networking.Vpn.IVpnPlugInReconnectTransport";
-typedef struct __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransportVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* ReconnectTransport)(__x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport* This,
-        __x_ABI_CWindows_CNetworking_CVpn_CIVpnChannel* channel,
-        IInspectable* context);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransportVtbl;
-
-interface __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport
-{
-    CONST_VTBL struct __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransportVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_ReconnectTransport(This, channel, context) \
-    ((This)->lpVtbl->ReconnectTransport(This, channel, context))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport;
-#endif /* !defined(____x_ABI_CWindows_CNetworking_CVpn_CIVpnPlugInReconnectTransport_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *

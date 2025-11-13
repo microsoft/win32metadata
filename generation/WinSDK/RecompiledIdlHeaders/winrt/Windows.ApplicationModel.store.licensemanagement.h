@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -515,7 +515,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILicenseManagerStatics = __uuidof(ILicenseManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_ILicenseManagerStatics = _uuidof(ILicenseManagerStatics);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -554,7 +554,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILicenseManagerStatics2 = __uuidof(ILicenseManagerStatics2);
+                    extern MIDL_CONST_ID IID& IID_ILicenseManagerStatics2 = _uuidof(ILicenseManagerStatics2);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -610,7 +610,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILicenseSatisfactionInfo = __uuidof(ILicenseSatisfactionInfo);
+                    extern MIDL_CONST_ID IID& IID_ILicenseSatisfactionInfo = _uuidof(ILicenseSatisfactionInfo);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */
@@ -651,7 +651,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILicenseSatisfactionResult = __uuidof(ILicenseSatisfactionResult);
+                    extern MIDL_CONST_ID IID& IID_ILicenseSatisfactionResult = _uuidof(ILicenseSatisfactionResult);
                 } /* LicenseManagement */
             } /* Store */
         } /* ApplicationModel */

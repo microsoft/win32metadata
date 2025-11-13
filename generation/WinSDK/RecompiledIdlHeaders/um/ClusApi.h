@@ -53,15 +53,10 @@ Revision History:
 #define NINETEEN_H2_UPGRADE_VERSION  2
 #define MN_UPGRADE_VERSION           3
 #define FE_UPGRADE_VERSION           4
-#define FE_22H2_UPGRADE_VERSION      5
 
 // NT13 upgrade versions
 #define CA_UPGRADE_VERSION           1
 #define NI_UPGRADE_VERSION           2
-#define CU_UPGRADE_VERSION           3
-#define ZN_UPGRADE_VERSION           4
-#define GA_UPGRADE_VERSION           5
-#define GE_UPGRADE_VERSION           6
 
 #define HCI_UPGRADE_BIT 0x8000
 
@@ -91,21 +86,10 @@ Revision History:
 #define CLUSAPI_VERSION_WINTHRESHOLD 0x00000703
 #define CLUSAPI_VERSION_RS3          0x00000A00
 #define CLUSAPI_VERSION_NI           0x00000A0C
-// starting with CU use convention of 0x0000 + 2 digit major version + 2 digit minor version
-// ie NT13_MAJOR_VERSION = 12 = 0x0C, CU_UPGRADE_VERSION = 3 = 0x03
-#define CLUSAPI_VERSION_CU           0x00000C03
-#define CLUSAPI_VERSION_ZN           0x00000C04
-#define CLUSAPI_VERSION_GA           0x00000C05
 
 
 #if (!defined(CLUSAPI_VERSION))
-#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_GA))
-#define CLUSAPI_VERSION  CLUSAPI_VERSION_GA
-#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_ZN))
-#define CLUSAPI_VERSION  CLUSAPI_VERSION_ZN
-#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_CU))
-#define CLUSAPI_VERSION CLUSAPI_VERSION_CU
-#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_NI))
+#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_NI))
 #define CLUSAPI_VERSION CLUSAPI_VERSION_NI
 #elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_RS3))
 #define CLUSAPI_VERSION CLUSAPI_VERSION_RS3
@@ -164,11 +148,6 @@ typedef struct _HREGBATCHPORT *HREGBATCHPORT;
 typedef struct _HREGBATCHNOTIFICATION *HREGBATCHNOTIFICATION;
 typedef struct _HREGREADBATCH *HREGREADBATCH;
 typedef struct _HREGREADBATCHREPLY *HREGREADBATCHREPLY;
-typedef struct _HKEYVALUEBATCH *HKEYVALUEBATCH;
-typedef struct _HKEYVALUEBATCHNOTIFICATION *HKEYVALUEBATCHNOTIFICATION;
-typedef struct _HKEYVALUEREADBATCH *HKEYVALUEREADBATCH;
-typedef struct _HKEYVALUEREADBATCHREPLY *HKEYVALUEREADBATCHREPLY;
-typedef struct _HKEYVALUESTORE *HKEYVALUESTORE;
 
 #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
 typedef struct _HNODEENUMEX *HNODEENUMEX;
@@ -413,10 +392,6 @@ typedef enum {
     ClusGroupTypeCrossClusterOrchestrator = 121,
     ClusGroupTypeInfrastructureFileServer = 122,
     ClusGroupTypeCoreSddc           = 123,
-    ClusGroupTypeUserManager        = 124,
-    ClusGroupTypeKeyValueStoreManager = 125,
-    ClusGroupTypeHcsVirtualMachine    = 126,
-    ClusGroupTypeMetaVirtualMachine   = 127,
     ClusGroupTypeUnknown            = 9999
 } CLUSGROUP_TYPE, *PCLUSGROUP_TYPE;
 
@@ -483,13 +458,6 @@ typedef enum
     CLUS_AFFINITY_RULE_MIN = CLUS_AFFINITY_RULE_NONE,
     CLUS_AFFINITY_RULE_MAX = CLUS_AFFINITY_RULE_DIFFERENT_NODE,
 } CLUS_AFFINITY_RULE_TYPE;
-
-typedef enum
-{
-    CLUS_ADAPTER_EXCLUSION_TYPE_IPPREFIX = 0,
-    CLUS_ADAPTER_EXCLUSION_TYPE_DESCRIPTION = 1,
-    CLUS_ADAPTER_EXCLUSION_TYPE_FRIENDLYNAME = 2,
-} CLUS_ADAPTER_EXCLUSION_TYPE;
 
 #define CLUS_GRP_MOVE_ALLOWED 0
 #define CLUS_GRP_MOVE_LOCKED  1
@@ -582,11 +550,8 @@ typedef struct _CREATE_CLUSTER_CONFIG
     DWORD                       cIpEntries;
     PCLUSTER_IP_ENTRY           pIpEntries;
     BOOLEAN                     fEmptyCluster;
-    CLUSTER_MGMT_POINT_TYPE     managementPointType;        // CLUSAPI Version >= CLUSAPI_VERSION_WINDOWSBLUE
-    CLUSTER_MGMT_POINT_RESTYPE  managementPointResType;     // CLUSAPI Version >= CLUSAPI_VERSION_RS3
-    PCWSTR                      pszUserName;                // CLUSAPU Version >= CLUSAPI_VERSION_GA
-    PCWSTR                      pszPassword;                // CLUSAPU Version >= CLUSAPI_VERSION_GA
-    PCWSTR                      pszDomain;                  // CLUSAPU Version >= CLUSAPI_VERSION_GA
+    CLUSTER_MGMT_POINT_TYPE     managementPointType;    // CLUSAPI Version >= CLUSAPI_VERSION_WINDOWSBLUE
+    CLUSTER_MGMT_POINT_RESTYPE  managementPointResType;        // CLUSAPI Version >= CLUSAPI_VERSION_RS3
 } CREATE_CLUSTER_CONFIG, *PCREATE_CLUSTER_CONFIG;
 
 // CLUSAPI Version >= CLUSAPI_VERSION_WINTHRESHOLD
@@ -602,19 +567,6 @@ typedef struct _CREATE_CLUSTER_NAME_ACCOUNT
     CLUSTER_MGMT_POINT_RESTYPE  managementPointResType;        // CLUSAPI Version >= CLUSAPI_VERSION_RS3
     BOOLEAN                     bUpgradeVCOs;           // CLUSAPI Version >= CLUSAPI_VERSION_RS3, managementPointType==CLUSTER_MGMT_POINT_TYPE_CNO
 } CREATE_CLUSTER_NAME_ACCOUNT, *PCREATE_CLUSTER_NAME_ACCOUNT;
-
-// Cluster Version >= NT13.CU_UPGRADE_VERSION
-// CLUSAPI >= CLUSAPI_VERSION_CU
-typedef struct _REPAIR_CLUSTER_NAME_ACCOUNT_CONFIG
-{
-    DWORD                       dwVersion;
-    DWORD                       dwFlags;
-    PCWSTR                      pszUserName;
-    PCWSTR                      pszPassword;
-    PCWSTR                      pszDomain;
-} REPAIR_CLUSTER_NAME_ACCOUNT_CONFIG, *PREPAIR_CLUSTER_NAME_ACCOUNT_CONFIG;
-
-
 
 #endif // _CLUSTER_API_TYPES_
 
@@ -1481,9 +1433,6 @@ typedef enum CLUSTER_ENUM {
     CLUSTER_ENUM_GROUP                  = 0x00000008,
     CLUSTER_ENUM_NETWORK                = 0x00000010,
     CLUSTER_ENUM_NETINTERFACE           = 0x00000020,
-    #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_ZN)
-    CLUSTER_ENUM_CAPACITY_NODE          = 0x10000000,
-    #endif
     CLUSTER_ENUM_SHARED_VOLUME_GROUP    = 0x20000000,
     CLUSTER_ENUM_SHARED_VOLUME_RESOURCE = 0x40000000,
     CLUSTER_ENUM_INTERNAL_NETWORK       = 0x80000000,
@@ -2352,18 +2301,6 @@ typedef enum CLUSTER_NODE_STATUS
 
 #endif //CLUSAPI_VERSION >= CLUSAPI_VERSION_WINTHRESHOLD
 
-#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
-
-typedef enum CLUSTER_NODE_FAILBACK_STATUS {
-    NodeFailbackStatusNotInitiated = 0,
-    NodeFailbackStatusInProgress,
-    NodeFailbackStatusCompleted,
-    NodeFailbackStatusFailed,
-    ClusterNodeFailbackStatusCount
-} CLUSTER_NODE_FAILBACK_STATUS;
-
-#endif //CLUSAPI_VERSION >= CLUSAPI_VERSION_NI
-
 #endif // _CLUSTER_API_TYPES_
 
 //
@@ -2892,7 +2829,6 @@ typedef enum CLUSTER_NODE_RESUME_FAILBACK_TYPE
 #define CLUSAPI_NODE_RESUME_FAILBACK_STORAGE                   0x00000001
 #define CLUSAPI_NODE_RESUME_FAILBACK_VMS                       0x00000002
 #define CLUSAPI_NODE_RESUME_FAILBACK_PINNED_VMS_ONLY           0x00000004
-#define CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY            0x00000008
 
 
 DWORD
@@ -4818,10 +4754,8 @@ typedef enum CLCTL_CODES {
 
     CTCTL_GET_FAULT_DOMAIN_STATE            = CLCTL_EXTERNAL_CODE( 197, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 
+
     CLCTL_NETNAME_SET_PWD_INFOEX            = CLCTL_EXTERNAL_CODE( 198, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY ),
-
-    CLCTL_GET_NODE_NETWORK_CONNECTIVITY     = CLCTL_EXTERNAL_CODE( 199, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-
 
     // Control codes 2000 to 2999 are reserved.
 
@@ -4870,11 +4804,11 @@ typedef enum CLCTL_CODES {
     // 2906 is free and can be reused
     CLCTL_SET_CLUSTER_S2D_CACHE_METADATA_RESERVE_BYTES = CLCTL_EXTERNAL_CODE( 2907, CLUS_ACCESS_WRITE, CLUS_MODIFY ),
 #endif
-    CLCTL_GROUPSET_GET_GROUPS                       = CLCTL_EXTERNAL_CODE( 2908, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-    CLCTL_GROUPSET_GET_PROVIDER_GROUPS              = CLCTL_EXTERNAL_CODE( 2909, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-    CLCTL_GROUPSET_GET_PROVIDER_GROUPSETS           = CLCTL_EXTERNAL_CODE( 2910, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-    CLCTL_GROUP_GET_PROVIDER_GROUPS                 = CLCTL_EXTERNAL_CODE( 2911, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-    CLCTL_GROUP_GET_PROVIDER_GROUPSETS              = CLCTL_EXTERNAL_CODE( 2912, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+    CLCTL_GROUPSET_GET_GROUPS                         = CLCTL_EXTERNAL_CODE(2908, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
+    CLCTL_GROUPSET_GET_PROVIDER_GROUPS                = CLCTL_EXTERNAL_CODE(2909, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
+    CLCTL_GROUPSET_GET_PROVIDER_GROUPSETS           = CLCTL_EXTERNAL_CODE(2910, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
+    CLCTL_GROUP_GET_PROVIDER_GROUPS                     = CLCTL_EXTERNAL_CODE(2911, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
+    CLCTL_GROUP_GET_PROVIDER_GROUPSETS                = CLCTL_EXTERNAL_CODE(2912, CLUS_ACCESS_READ, CLUS_NO_MODIFY),
     CLCTL_GROUP_SET_CCF_FROM_MASTER                 = CLCTL_EXTERNAL_CODE( 2913, CLUS_ACCESS_WRITE, CLUS_MODIFY ),
     CLCTL_GET_INFRASTRUCTURE_SOFS_BUFFER            = CLCTL_EXTERNAL_CODE( 2914, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
     CLCTL_SET_INFRASTRUCTURE_SOFS_BUFFER            = CLCTL_EXTERNAL_CODE( 2915, CLUS_ACCESS_WRITE, CLUS_MODIFY ),
@@ -4940,8 +4874,9 @@ typedef enum CLCTL_CODES {
     CLCTL_VALIDATE_CHANGE_GROUP             = CLCTL_INTERNAL_CODE( 2121, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 #endif
 
-    CLCTL_CHECK_DRAIN_VETO                  = CLCTL_INTERNAL_CODE( 2123, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
-    CLCTL_NOTIFY_DRAIN_COMPLETE             = CLCTL_INTERNAL_CODE( 2124, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+
+        CLCTL_CHECK_DRAIN_VETO                  = CLCTL_INTERNAL_CODE( 2123, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+        CLCTL_NOTIFY_DRAIN_COMPLETE             = CLCTL_INTERNAL_CODE( 2124, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 
 } CLCTL_CODES;
 
@@ -5213,7 +5148,6 @@ typedef enum CLUSCTL_RESOURCE_CODES {
 
     CLUSCTL_RESOURCE_RLUA_SET_PWD_INFOEX =
         CLUSCTL_RESOURCE_CODE( CLCTL_NETNAME_SET_PWD_INFOEX ),
-
 
     //
     // Internal resource codes
@@ -5558,16 +5492,6 @@ typedef enum CLUSCTL_RESOURCE_TYPE_CODES {
 
 } CLUSCTL_RESOURCE_TYPE_CODES;
 
-
-    // To be used with Control Code CLUSCTL_RESOURCE_TYPE_GET_LOCAL_NODE_SRIOV_INFO Only:
-    typedef struct NodeSriovInfo {
-        DWORD VFTotal;
-        DWORD VFUsed;
-        DWORD QPTotal;
-        DWORD QPUsed;
-    } NodeSriovInfo;
-
-
 //
 // Cluster Control Codes for Groups
 //
@@ -5723,6 +5647,7 @@ typedef enum CLUSCTL_NODE_CODES {
 
     CLUSCTL_NODE_GET_GEMID_VECTOR =
         CLUSCTL_NODE_CODE(CLCTL_GET_GEMID_VECTOR),
+
 } CLUSCTL_NODE_CODES;
 
 //
@@ -5967,19 +5892,19 @@ typedef enum CLUSCTL_CLUSTER_CODES {
         CLUSCTL_CLUSTER_CODE( CLCTL_ENUM_AFFINITY_RULE_NAMES ),
 
     CLUSCTL_CLUSTER_GET_NODES_IN_FD =
-        CLUSCTL_CLUSTER_CODE( CLCTL_GET_NODES_IN_FD ),
+            CLUSCTL_CLUSTER_CODE( CLCTL_GET_NODES_IN_FD ),
 
-    CLUSCTL_CLUSTER_FORCE_FLUSH_DB =
-        CLUSCTL_CLUSTER_CODE( CLCTL_FORCE_DB_FLUSH ),
+        CLUSCTL_CLUSTER_FORCE_FLUSH_DB =
+            CLUSCTL_CLUSTER_CODE( CLCTL_FORCE_DB_FLUSH ),
 
-    CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN =
-        CLUSCTL_CLUSTER_CODE( CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ),
+       CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN =
+               CLUSCTL_CLUSTER_CODE( CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ),
 
 
-    CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS =
+    CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS=
         CLUSCTL_CLUSTER_CODE( CLCTL_CHECK_VOTER_EVICT_WITNESS ),
 
-    CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS =
+    CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS=
         CLUSCTL_CLUSTER_CODE( CLCTL_CHECK_VOTER_DOWN_WITNESS ),
 
 } CLUSCTL_CLUSTER_CODES;
@@ -7381,17 +7306,6 @@ GetClusterNetInterface(
     _Inout_ LPDWORD lpcchInterfaceName
     );
 
-_Success_(return == ERROR_SUCCESS)
-DWORD
-WINAPI
-GetClusterNetInterfaceEx(
-    _In_ HCLUSTER hCluster,
-    _In_ LPCWSTR lpszNodeName,
-    _In_ LPCWSTR lpszNetworkName,
-    _Out_writes_to_(*lpcbInterfaceListBufSize, *lpcbInterfaceListBufSize) LPWSTR lpmszInterfaceNameList,
-    _Inout_ LPDWORD lpcbInterfaceListBufSize
-);
-
 typedef DWORD
 (WINAPI * PCLUSAPI_GET_CLUSTER_NET_INTERFACE)(
     _In_ HCLUSTER hCluster,
@@ -8114,7 +8028,6 @@ typedef enum _CLUSTER_SETUP_PHASE {
     ClusterSetupPhaseGettingCurrentMembership       = 300,
     ClusterSetupPhaseAddNodeToCluster               = 301,
     ClusterSetupPhaseNodeUp                         = 302,
-    ClusterSetupPhaseApplyNetworkATCIntents         = 303,
 
     ClusterSetupPhaseMoveGroup                      = 400,
     ClusterSetupPhaseDeleteGroup                    = 401,
@@ -8123,9 +8036,6 @@ typedef enum _CLUSTER_SETUP_PHASE {
     ClusterSetupPhaseEvictNode                      = 404,
     ClusterSetupPhaseCleanupNode                    = 405,
     ClusterSetupPhaseCoreGroupCleanup               = 406,
-
-    ClusterSetupPhaseRepairCNOAccount               = 500,
-    ClusterSetupPhaseRepairDNSPermissions           = 501,
 
     ClusterSetupPhaseFailureCleanup                 = 999
 
@@ -8214,19 +8124,6 @@ RemoveClusterNameAccount(
     _In_ HCLUSTER    hCluster,
     _In_ BOOL        bDeleteComputerObjects
 );
-
-DWORD
-WINAPI
-RepairClusterNameAccount(
-    _In_ HCLUSTER hCluster,
-    _In_ PREPAIR_CLUSTER_NAME_ACCOUNT_CONFIG pConfig,
-    _In_opt_ PCLUSTER_SETUP_PROGRESS_CALLBACK pfnProgressCallback,
-    _In_opt_ PVOID              pvCallbackArg);
-
-typedef DWORD
-(WINAPI * PCLUSAPI_REPAIR_CLUSTER_NAME_ACCOUNT)(
-    _In_ HCLUSTER    hCluster
-    );
 
 DWORD
 WINAPI
@@ -8419,9 +8316,6 @@ typedef DWORD
 #define CLUS_RES_NAME_SCALEOUT_MASTER           L"Scaleout Master"
 #define CLUS_RES_NAME_SCALEOUT_WORKER           L"Scaleout Worker"
 
-#define CLUS_RESTYPE_NAME_KEY_VALUE_STORE       L"Key Value Store"
-
-
 //
 // Cluster common property names
 //
@@ -8482,9 +8376,6 @@ typedef DWORD
 #define CLUSREG_NAME_GROUP_DEPENDENCY_TIMEOUT      L"GroupDependencyTimeout"
 #define CLUSREG_NAME_PLACEMENT_OPTIONS             L"PlacementOptions"
 #define CLUSREG_NAME_ENABLED_EVENT_LOGS            L"EnabledEventLogs"
-#define CLUSREG_NAME_MAX_PARALLEL_MIGRATIONS       L"MaximumParallelMigrations"
-#define CLUSREG_NAME_ACCELERATED_NETWORKING_ENABLED      L"AcceleratedNetworkingEnabled"
-#define CLUSREG_NAME_ACCELERATED_NETWORKING_NODE_RESERVE L"AcceleratedNetworkingNodeReserve"
 
 //
 // Properties and defaults for single and multi subnet delays and thresholds.
@@ -8502,31 +8393,28 @@ typedef DWORD
 // Node common property names
 //
 
-#define CLUSREG_NAME_NODE_NAME                      L"NodeName"
-#define CLUSREG_NAME_NODE_HIGHEST_VERSION           L"NodeHighestVersion"
-#define CLUSREG_NAME_NODE_LOWEST_VERSION            L"NodeLowestVersion"
-#define CLUSREG_NAME_NODE_DESC                      L"Description"
-#define CLUSREG_NAME_NODE_MAJOR_VERSION             L"MajorVersion"
-#define CLUSREG_NAME_NODE_MINOR_VERSION             L"MinorVersion"
-#define CLUSREG_NAME_NODE_BUILD_NUMBER              L"BuildNumber"
-#define CLUSREG_NAME_NODE_CSDVERSION                L"CSDVersion"
-#define CLUSREG_NAME_NODE_WEIGHT                    L"NodeWeight"
-#define CLUSREG_NAME_NODE_DYNAMIC_WEIGHT            L"DynamicWeight"
-#define CLUSREG_NAME_NODE_IS_PRIMARY                L"IsPrimary"
-#define CLUSREG_NAME_NODE_DRAIN_STATUS              L"NodeDrainStatus"
-#define CLUSREG_NAME_NODE_DRAIN_TARGET              L"NodeDrainTarget"
-#define CLUSREG_NAME_NODE_NEEDS_PQ                  L"NeedsPreventQuorum"
-#define CLUSREG_NAME_NODE_FDID                      L"FaultDomainId"
-#define CLUSREG_NAME_NODE_STATUS_INFO               L"StatusInformation"
-#define CLUSREG_NAME_NODE_FAULT_DOMAIN              L"FaultDomain"
-#define CLUSREG_NAME_NODE_MODEL                     L"Model"
-#define CLUSREG_NAME_NODE_SERIALNUMBER              L"SerialNumber"
-#define CLUSREG_NAME_NODE_MANUFACTURER              L"Manufacturer"
-#define CLUSREG_NAME_NODE_UNIQUEID                  L"UniqueID"
-#define CLUSREG_NAME_NODE_DRAIN_ERROR_CODE          L"DrainErrorCode"
-#define CLUSREG_NAME_NODE_FAILBACK_STATUS           L"NodeFailbackStatus"
-#define CLUSREG_NAME_NODE_FAILBACK_ERROR_CODE       L"FailbackErrorCode"
-#define CLUSREG_NAME_NODE_HYPERTHREADING_ENABLED    L"HyperthreadingEnabled"
+#define CLUSREG_NAME_NODE_NAME              L"NodeName"
+#define CLUSREG_NAME_NODE_HIGHEST_VERSION   L"NodeHighestVersion"
+#define CLUSREG_NAME_NODE_LOWEST_VERSION    L"NodeLowestVersion"
+#define CLUSREG_NAME_NODE_DESC              L"Description"
+#define CLUSREG_NAME_NODE_MAJOR_VERSION     L"MajorVersion"
+#define CLUSREG_NAME_NODE_MINOR_VERSION     L"MinorVersion"
+#define CLUSREG_NAME_NODE_BUILD_NUMBER      L"BuildNumber"
+#define CLUSREG_NAME_NODE_CSDVERSION        L"CSDVersion"
+#define CLUSREG_NAME_NODE_WEIGHT            L"NodeWeight"
+#define CLUSREG_NAME_NODE_DYNAMIC_WEIGHT    L"DynamicWeight"
+#define CLUSREG_NAME_NODE_IS_PRIMARY        L"IsPrimary"
+#define CLUSREG_NAME_NODE_DRAIN_STATUS      L"NodeDrainStatus"
+#define CLUSREG_NAME_NODE_DRAIN_TARGET      L"NodeDrainTarget"
+#define CLUSREG_NAME_NODE_NEEDS_PQ          L"NeedsPreventQuorum"
+#define CLUSREG_NAME_NODE_FDID              L"FaultDomainId"
+#define CLUSREG_NAME_NODE_STATUS_INFO       L"StatusInformation"
+#define CLUSREG_NAME_NODE_FAULT_DOMAIN      L"FaultDomain"
+#define CLUSREG_NAME_NODE_MODEL             L"Model"
+#define CLUSREG_NAME_NODE_SERIALNUMBER      L"SerialNumber"
+#define CLUSREG_NAME_NODE_MANUFACTURER      L"Manufacturer"
+#define CLUSREG_NAME_NODE_UNIQUEID          L"UniqueID"
+
 
 //
 // Group common property names
@@ -8661,7 +8549,6 @@ typedef DWORD
 #define CLUSREG_NAME_AFFINITYRULE_TYPE              L"RuleType"
 #define CLUSREG_NAME_AFFINITYRULE_GROUPS            L"Groups"
 #define CLUSREG_NAME_AFFINITYRULE_ENABLED           L"Enabled"
-#define CLUSREG_NAME_AFFINITYRULE_SOFTANTIAFFINITY  L"SoftAntiAffinity"
 
 //
 // Resource private property names
@@ -8896,7 +8783,6 @@ typedef DWORD
 #define CLUSREG_NAME_CLOUDWITNESS_ACCOUNT_NAME          L"AccountName"
 #define CLUSREG_NAME_CLOUDWITNESS_ENDPOINT_INFO         L"EndpointInfo"
 #define CLUSREG_NAME_CLOUDWITNESS_CONTAINER_NAME        L"ContainerName"
-#define CLUSREG_NAME_CLOUDWITNESS_MANAGED_IDENTITY      L"IsManagedIdentity"
 #define CLOUD_WITNESS_CONTAINER_NAME                    L"msft-cloud-witness"
 
 // Storage Replica
@@ -8913,12 +8799,6 @@ typedef DWORD
 #define CLUS_NAME_RES_TYPE_MINIMUM_LOG_SIZE             L"MinimumLogSizeInBytes"
 #define CLUS_NAME_RES_TYPE_UNIT_LOG_SIZE_CHANGE         L"UnitOfLogSizeChangeInBytes"
 #define CLUS_NAME_RES_TYPE_LOG_MULTIPLE                 L"LogSizeMultiple"
-
-// Key Value Store
-#define CLUSREG_NAME_KEYVALUESTORE_NAME                 L"KeyValueStores"
-#define CLUSREG_NAME_KEYVALUESTORE_MANAGERNAME          L"ManagerName"
-#define CLUSREG_NAME_KEYVALUESTORE_MANAGERPATH          L"ManagerPath"
-
 
 typedef enum PLACEMENT_OPTIONS {
     PLACEMENT_OPTIONS_MIN_VALUE                     = 0x00000000,

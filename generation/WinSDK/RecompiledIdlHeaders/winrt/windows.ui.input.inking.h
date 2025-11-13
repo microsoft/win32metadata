@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_COREWINDOWDIALOGSCONTRACT_VERSION)
@@ -2752,7 +2752,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributes = __uuidof(IInkDrawingAttributes);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributes = _uuidof(IInkDrawingAttributes);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2799,7 +2799,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributes2 = __uuidof(IInkDrawingAttributes2);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributes2 = _uuidof(IInkDrawingAttributes2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2840,7 +2840,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributes3 = __uuidof(IInkDrawingAttributes3);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributes3 = _uuidof(IInkDrawingAttributes3);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2881,7 +2881,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributes4 = __uuidof(IInkDrawingAttributes4);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributes4 = _uuidof(IInkDrawingAttributes4);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2919,7 +2919,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributes5 = __uuidof(IInkDrawingAttributes5);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributes5 = _uuidof(IInkDrawingAttributes5);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2960,7 +2960,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributesPencilProperties = __uuidof(IInkDrawingAttributesPencilProperties);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributesPencilProperties = _uuidof(IInkDrawingAttributesPencilProperties);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -2998,7 +2998,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkDrawingAttributesStatics = __uuidof(IInkDrawingAttributesStatics);
+                    extern MIDL_CONST_ID IID& IID_IInkDrawingAttributesStatics = _uuidof(IInkDrawingAttributesStatics);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3045,7 +3045,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkInputConfiguration = __uuidof(IInkInputConfiguration);
+                    extern MIDL_CONST_ID IID& IID_IInkInputConfiguration = _uuidof(IInkInputConfiguration);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3086,7 +3086,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkInputConfiguration2 = __uuidof(IInkInputConfiguration2);
+                    extern MIDL_CONST_ID IID& IID_IInkInputConfiguration2 = _uuidof(IInkInputConfiguration2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3133,7 +3133,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkInputProcessingConfiguration = __uuidof(IInkInputProcessingConfiguration);
+                    extern MIDL_CONST_ID IID& IID_IInkInputProcessingConfiguration = _uuidof(IInkInputProcessingConfiguration);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3196,7 +3196,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkManager = __uuidof(IInkManager);
+                    extern MIDL_CONST_ID IID& IID_IInkManager = _uuidof(IInkManager);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3243,7 +3243,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkModelerAttributes = __uuidof(IInkModelerAttributes);
+                    extern MIDL_CONST_ID IID& IID_IInkModelerAttributes = _uuidof(IInkModelerAttributes);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3284,7 +3284,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkModelerAttributes2 = __uuidof(IInkModelerAttributes2);
+                    extern MIDL_CONST_ID IID& IID_IInkModelerAttributes2 = _uuidof(IInkModelerAttributes2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3325,7 +3325,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPoint = __uuidof(IInkPoint);
+                    extern MIDL_CONST_ID IID& IID_IInkPoint = _uuidof(IInkPoint);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3369,7 +3369,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPoint2 = __uuidof(IInkPoint2);
+                    extern MIDL_CONST_ID IID& IID_IInkPoint2 = _uuidof(IInkPoint2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3407,7 +3407,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPointFactory = __uuidof(IInkPointFactory);
+                    extern MIDL_CONST_ID IID& IID_IInkPointFactory = _uuidof(IInkPointFactory);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3450,7 +3450,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPointFactory2 = __uuidof(IInkPointFactory2);
+                    extern MIDL_CONST_ID IID& IID_IInkPointFactory2 = _uuidof(IInkPointFactory2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3538,7 +3538,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenter = __uuidof(IInkPresenter);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenter = _uuidof(IInkPresenter);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3582,7 +3582,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenter2 = __uuidof(IInkPresenter2);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenter2 = _uuidof(IInkPresenter2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3620,7 +3620,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenter3 = __uuidof(IInkPresenter3);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenter3 = _uuidof(IInkPresenter3);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3700,7 +3700,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterProtractor = __uuidof(IInkPresenterProtractor);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterProtractor = _uuidof(IInkPresenterProtractor);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3739,7 +3739,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterProtractorFactory = __uuidof(IInkPresenterProtractorFactory);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterProtractorFactory = _uuidof(IInkPresenterProtractorFactory);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3789,7 +3789,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterRuler = __uuidof(IInkPresenterRuler);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterRuler = _uuidof(IInkPresenterRuler);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3836,7 +3836,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterRuler2 = __uuidof(IInkPresenterRuler2);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterRuler2 = _uuidof(IInkPresenterRuler2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3873,7 +3873,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterRulerFactory = __uuidof(IInkPresenterRulerFactory);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterRulerFactory = _uuidof(IInkPresenterRulerFactory);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3933,7 +3933,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkPresenterStencil = __uuidof(IInkPresenterStencil);
+                    extern MIDL_CONST_ID IID& IID_IInkPresenterStencil = _uuidof(IInkPresenterStencil);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -3977,7 +3977,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkRecognitionResult = __uuidof(IInkRecognitionResult);
+                    extern MIDL_CONST_ID IID& IID_IInkRecognitionResult = _uuidof(IInkRecognitionResult);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4015,7 +4015,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkRecognizer = __uuidof(IInkRecognizer);
+                    extern MIDL_CONST_ID IID& IID_IInkRecognizer = _uuidof(IInkRecognizer);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4059,7 +4059,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkRecognizerContainer = __uuidof(IInkRecognizerContainer);
+                    extern MIDL_CONST_ID IID& IID_IInkRecognizerContainer = _uuidof(IInkRecognizerContainer);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4118,7 +4118,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStroke = __uuidof(IInkStroke);
+                    extern MIDL_CONST_ID IID& IID_IInkStroke = _uuidof(IInkStroke);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4162,7 +4162,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStroke2 = __uuidof(IInkStroke2);
+                    extern MIDL_CONST_ID IID& IID_IInkStroke2 = _uuidof(IInkStroke2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4212,7 +4212,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStroke3 = __uuidof(IInkStroke3);
+                    extern MIDL_CONST_ID IID& IID_IInkStroke3 = _uuidof(IInkStroke3);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4250,7 +4250,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStroke4 = __uuidof(IInkStroke4);
+                    extern MIDL_CONST_ID IID& IID_IInkStroke4 = _uuidof(IInkStroke4);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4303,7 +4303,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeBuilder = __uuidof(IInkStrokeBuilder);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeBuilder = _uuidof(IInkStrokeBuilder);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4343,7 +4343,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeBuilder2 = __uuidof(IInkStrokeBuilder2);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeBuilder2 = _uuidof(IInkStrokeBuilder2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4385,7 +4385,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeBuilder3 = __uuidof(IInkStrokeBuilder3);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeBuilder3 = _uuidof(IInkStrokeBuilder3);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4465,7 +4465,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeContainer = __uuidof(IInkStrokeContainer);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeContainer = _uuidof(IInkStrokeContainer);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4504,7 +4504,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeContainer2 = __uuidof(IInkStrokeContainer2);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeContainer2 = _uuidof(IInkStrokeContainer2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4548,7 +4548,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeContainer3 = __uuidof(IInkStrokeContainer3);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeContainer3 = _uuidof(IInkStrokeContainer3);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4614,7 +4614,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeInput = __uuidof(IInkStrokeInput);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeInput = _uuidof(IInkStrokeInput);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4670,7 +4670,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokeRenderingSegment = __uuidof(IInkStrokeRenderingSegment);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokeRenderingSegment = _uuidof(IInkStrokeRenderingSegment);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4708,7 +4708,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokesCollectedEventArgs = __uuidof(IInkStrokesCollectedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokesCollectedEventArgs = _uuidof(IInkStrokesCollectedEventArgs);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4746,7 +4746,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkStrokesErasedEventArgs = __uuidof(IInkStrokesErasedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IInkStrokesErasedEventArgs = _uuidof(IInkStrokesErasedEventArgs);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4785,7 +4785,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE EndDry(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkSynchronizer = __uuidof(IInkSynchronizer);
+                    extern MIDL_CONST_ID IID& IID_IInkSynchronizer = _uuidof(IInkSynchronizer);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4872,7 +4872,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkUnprocessedInput = __uuidof(IInkUnprocessedInput);
+                    extern MIDL_CONST_ID IID& IID_IInkUnprocessedInput = _uuidof(IInkUnprocessedInput);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4925,7 +4925,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPenAndInkSettings = __uuidof(IPenAndInkSettings);
+                    extern MIDL_CONST_ID IID& IID_IPenAndInkSettings = _uuidof(IPenAndInkSettings);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -4963,7 +4963,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPenAndInkSettings2 = __uuidof(IPenAndInkSettings2);
+                    extern MIDL_CONST_ID IID& IID_IPenAndInkSettings2 = _uuidof(IPenAndInkSettings2);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -5001,7 +5001,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPenAndInkSettingsStatics = __uuidof(IPenAndInkSettingsStatics);
+                    extern MIDL_CONST_ID IID& IID_IPenAndInkSettingsStatics = _uuidof(IPenAndInkSettingsStatics);
                 } /* Inking */
             } /* Input */
         } /* UI */
@@ -5156,8 +5156,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Inking.IInkPoint ** Default Interface **
@@ -12650,8 +12650,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Input.Inking.IInkPointFactory2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.Inking.IInkPoint ** Default Interface **

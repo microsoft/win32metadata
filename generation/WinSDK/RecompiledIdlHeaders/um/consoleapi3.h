@@ -189,7 +189,6 @@ AddConsoleAliasW(
     _In_ LPWSTR Target,
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define AddConsoleAlias  AddConsoleAliasW
 #else
@@ -215,7 +214,6 @@ GetConsoleAliasW(
     _In_ DWORD TargetBufferLength,
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define GetConsoleAlias  GetConsoleAliasW
 #else
@@ -235,7 +233,6 @@ APIENTRY
 GetConsoleAliasesLengthW(
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define GetConsoleAliasesLength  GetConsoleAliasesLengthW
 #else
@@ -255,7 +252,6 @@ APIENTRY
 GetConsoleAliasExesLengthW(
     VOID
     );
-
 #ifdef UNICODE
 #define GetConsoleAliasExesLength  GetConsoleAliasExesLengthW
 #else
@@ -279,7 +275,6 @@ GetConsoleAliasesW(
     _In_ DWORD AliasBufferLength,
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define GetConsoleAliases  GetConsoleAliasesW
 #else
@@ -301,7 +296,6 @@ GetConsoleAliasExesW(
     _Out_writes_(ExeNameBufferLength) LPWSTR ExeNameBuffer,
     _In_ DWORD ExeNameBufferLength
     );
-
 #ifdef UNICODE
 #define GetConsoleAliasExes  GetConsoleAliasExesW
 #else
@@ -323,7 +317,6 @@ APIENTRY
 ExpungeConsoleCommandHistoryW(
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define ExpungeConsoleCommandHistory  ExpungeConsoleCommandHistoryW
 #else
@@ -345,7 +338,6 @@ SetConsoleNumberOfCommandsW(
     _In_ DWORD Number,
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define SetConsoleNumberOfCommands  SetConsoleNumberOfCommandsW
 #else
@@ -365,7 +357,6 @@ APIENTRY
 GetConsoleCommandHistoryLengthW(
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define GetConsoleCommandHistoryLength  GetConsoleCommandHistoryLengthW
 #else
@@ -389,7 +380,6 @@ GetConsoleCommandHistoryW(
     _In_ DWORD CommandBufferLength,
     _In_ LPWSTR ExeName
     );
-
 #ifdef UNICODE
 #define GetConsoleCommandHistory  GetConsoleCommandHistoryW
 #else

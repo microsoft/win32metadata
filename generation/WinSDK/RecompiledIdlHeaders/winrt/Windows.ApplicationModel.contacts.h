@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -5569,11 +5569,6 @@ namespace ABI {
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
                     ContactAnnotationOperations_Share = 0x20,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-                    ContactAnnotationOperations_Activity = 0x40,
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
                 };
 
                 DEFINE_ENUM_FLAG_OPERATORS(ContactAnnotationOperations)
@@ -6239,7 +6234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAggregateContactManager = __uuidof(IAggregateContactManager);
+                extern MIDL_CONST_ID IID& IID_IAggregateContactManager = _uuidof(IAggregateContactManager);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6278,7 +6273,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAggregateContactManager2 = __uuidof(IAggregateContactManager2);
+                extern MIDL_CONST_ID IID& IID_IAggregateContactManager2 = _uuidof(IAggregateContactManager2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6326,7 +6321,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContact = __uuidof(IContact);
+                extern MIDL_CONST_ID IID& IID_IContact = _uuidof(IContact);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6404,7 +6399,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContact2 = __uuidof(IContact2);
+                extern MIDL_CONST_ID IID& IID_IContact2 = _uuidof(IContact2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6510,7 +6505,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContact3 = __uuidof(IContact3);
+                extern MIDL_CONST_ID IID& IID_IContact3 = _uuidof(IContact3);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6585,7 +6580,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAddress = __uuidof(IContactAddress);
+                extern MIDL_CONST_ID IID& IID_IContactAddress = _uuidof(IContactAddress);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6648,7 +6643,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAnnotation = __uuidof(IContactAnnotation);
+                extern MIDL_CONST_ID IID& IID_IContactAnnotation = _uuidof(IContactAnnotation);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6687,7 +6682,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAnnotation2 = __uuidof(IContactAnnotation2);
+                extern MIDL_CONST_ID IID& IID_IContactAnnotation2 = _uuidof(IContactAnnotation2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6751,7 +6746,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAnnotationList = __uuidof(IContactAnnotationList);
+                extern MIDL_CONST_ID IID& IID_IContactAnnotationList = _uuidof(IContactAnnotationList);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6814,7 +6809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAnnotationStore = __uuidof(IContactAnnotationStore);
+                extern MIDL_CONST_ID IID& IID_IContactAnnotationStore = _uuidof(IContactAnnotationStore);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6851,7 +6846,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactAnnotationStore2 = __uuidof(IContactAnnotationStore2);
+                extern MIDL_CONST_ID IID& IID_IContactAnnotationStore2 = _uuidof(IContactAnnotationStore2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6890,7 +6885,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactBatch = __uuidof(IContactBatch);
+                extern MIDL_CONST_ID IID& IID_IContactBatch = _uuidof(IContactBatch);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6929,7 +6924,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactCardDelayedDataLoader = __uuidof(IContactCardDelayedDataLoader);
+                extern MIDL_CONST_ID IID& IID_IContactCardDelayedDataLoader = _uuidof(IContactCardDelayedDataLoader);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -6974,7 +6969,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactCardOptions = __uuidof(IContactCardOptions);
+                extern MIDL_CONST_ID IID& IID_IContactCardOptions = _uuidof(IContactCardOptions);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7013,7 +7008,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactCardOptions2 = __uuidof(IContactCardOptions2);
+                extern MIDL_CONST_ID IID& IID_IContactCardOptions2 = _uuidof(IContactCardOptions2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7052,7 +7047,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChange = __uuidof(IContactChange);
+                extern MIDL_CONST_ID IID& IID_IContactChange = _uuidof(IContactChange);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7092,7 +7087,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChangeReader = __uuidof(IContactChangeReader);
+                extern MIDL_CONST_ID IID& IID_IContactChangeReader = _uuidof(IContactChangeReader);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7130,7 +7125,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChangeTracker = __uuidof(IContactChangeTracker);
+                extern MIDL_CONST_ID IID& IID_IContactChangeTracker = _uuidof(IContactChangeTracker);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7166,7 +7161,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChangeTracker2 = __uuidof(IContactChangeTracker2);
+                extern MIDL_CONST_ID IID& IID_IContactChangeTracker2 = _uuidof(IContactChangeTracker2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7200,7 +7195,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChangedDeferral = __uuidof(IContactChangedDeferral);
+                extern MIDL_CONST_ID IID& IID_IContactChangedDeferral = _uuidof(IContactChangedDeferral);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7236,7 +7231,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactChangedEventArgs = __uuidof(IContactChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IContactChangedEventArgs = _uuidof(IContactChangedEventArgs);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7281,7 +7276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactConnectedServiceAccount = __uuidof(IContactConnectedServiceAccount);
+                extern MIDL_CONST_ID IID& IID_IContactConnectedServiceAccount = _uuidof(IContactConnectedServiceAccount);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7344,7 +7339,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactDate = __uuidof(IContactDate);
+                extern MIDL_CONST_ID IID& IID_IContactDate = _uuidof(IContactDate);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7395,7 +7390,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactEmail = __uuidof(IContactEmail);
+                extern MIDL_CONST_ID IID& IID_IContactEmail = _uuidof(IContactEmail);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7438,7 +7433,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactField = __uuidof(IContactField);
+                extern MIDL_CONST_ID IID& IID_IContactField = _uuidof(IContactField);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7487,7 +7482,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactFieldFactory = __uuidof(IContactFieldFactory);
+                extern MIDL_CONST_ID IID& IID_IContactFieldFactory = _uuidof(IContactFieldFactory);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7520,7 +7515,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IContactGroup = __uuidof(IContactGroup);
+                extern MIDL_CONST_ID IID& IID_IContactGroup = _uuidof(IContactGroup);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7578,7 +7573,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactInformation = __uuidof(IContactInformation);
+                extern MIDL_CONST_ID IID& IID_IContactInformation = _uuidof(IContactInformation);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7626,7 +7621,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactInstantMessageField = __uuidof(IContactInstantMessageField);
+                extern MIDL_CONST_ID IID& IID_IContactInstantMessageField = _uuidof(IContactInstantMessageField);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7674,7 +7669,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactInstantMessageFieldFactory = __uuidof(IContactInstantMessageFieldFactory);
+                extern MIDL_CONST_ID IID& IID_IContactInstantMessageFieldFactory = _uuidof(IContactInstantMessageFieldFactory);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7755,7 +7750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactJobInfo = __uuidof(IContactJobInfo);
+                extern MIDL_CONST_ID IID& IID_IContactJobInfo = _uuidof(IContactJobInfo);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7803,7 +7798,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactLaunchActionVerbsStatics = __uuidof(IContactLaunchActionVerbsStatics);
+                extern MIDL_CONST_ID IID& IID_IContactLaunchActionVerbsStatics = _uuidof(IContactLaunchActionVerbsStatics);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7917,7 +7912,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactList = __uuidof(IContactList);
+                extern MIDL_CONST_ID IID& IID_IContactList = _uuidof(IContactList);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7959,7 +7954,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactList2 = __uuidof(IContactList2);
+                extern MIDL_CONST_ID IID& IID_IContactList2 = _uuidof(IContactList2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -7999,7 +7994,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactList3 = __uuidof(IContactList3);
+                extern MIDL_CONST_ID IID& IID_IContactList3 = _uuidof(IContactList3);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8040,7 +8035,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactListLimitedWriteOperations = __uuidof(IContactListLimitedWriteOperations);
+                extern MIDL_CONST_ID IID& IID_IContactListLimitedWriteOperations = _uuidof(IContactListLimitedWriteOperations);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8241,7 +8236,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactListSyncConstraints = __uuidof(IContactListSyncConstraints);
+                extern MIDL_CONST_ID IID& IID_IContactListSyncConstraints = _uuidof(IContactListSyncConstraints);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8293,7 +8288,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactListSyncManager = __uuidof(IContactListSyncManager);
+                extern MIDL_CONST_ID IID& IID_IContactListSyncManager = _uuidof(IContactListSyncManager);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8335,7 +8330,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactListSyncManager2 = __uuidof(IContactListSyncManager2);
+                extern MIDL_CONST_ID IID& IID_IContactListSyncManager2 = _uuidof(IContactListSyncManager2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8389,7 +8384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactLocationField = __uuidof(IContactLocationField);
+                extern MIDL_CONST_ID IID& IID_IContactLocationField = _uuidof(IContactLocationField);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8439,7 +8434,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactLocationFieldFactory = __uuidof(IContactLocationFieldFactory);
+                extern MIDL_CONST_ID IID& IID_IContactLocationFieldFactory = _uuidof(IContactLocationFieldFactory);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8508,7 +8503,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerForUser = __uuidof(IContactManagerForUser);
+                extern MIDL_CONST_ID IID& IID_IContactManagerForUser = _uuidof(IContactManagerForUser);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8545,7 +8540,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerForUser2 = __uuidof(IContactManagerForUser2);
+                extern MIDL_CONST_ID IID& IID_IContactManagerForUser2 = _uuidof(IContactManagerForUser2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8593,7 +8588,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerStatics = __uuidof(IContactManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IContactManagerStatics = _uuidof(IContactManagerStatics);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8632,7 +8627,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerStatics2 = __uuidof(IContactManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IContactManagerStatics2 = _uuidof(IContactManagerStatics2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8725,7 +8720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerStatics3 = __uuidof(IContactManagerStatics3);
+                extern MIDL_CONST_ID IID& IID_IContactManagerStatics3 = _uuidof(IContactManagerStatics3);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8762,7 +8757,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerStatics4 = __uuidof(IContactManagerStatics4);
+                extern MIDL_CONST_ID IID& IID_IContactManagerStatics4 = _uuidof(IContactManagerStatics4);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8804,7 +8799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactManagerStatics5 = __uuidof(IContactManagerStatics5);
+                extern MIDL_CONST_ID IID& IID_IContactManagerStatics5 = _uuidof(IContactManagerStatics5);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8846,7 +8841,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactMatchReason = __uuidof(IContactMatchReason);
+                extern MIDL_CONST_ID IID& IID_IContactMatchReason = _uuidof(IContactMatchReason);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8927,7 +8922,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactName = __uuidof(IContactName);
+                extern MIDL_CONST_ID IID& IID_IContactName = _uuidof(IContactName);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -8981,7 +8976,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPanel = __uuidof(IContactPanel);
+                extern MIDL_CONST_ID IID& IID_IContactPanel = _uuidof(IContactPanel);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9017,7 +9012,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPanelClosingEventArgs = __uuidof(IContactPanelClosingEventArgs);
+                extern MIDL_CONST_ID IID& IID_IContactPanelClosingEventArgs = _uuidof(IContactPanelClosingEventArgs);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9056,7 +9051,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPanelLaunchFullAppRequestedEventArgs = __uuidof(IContactPanelLaunchFullAppRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IContactPanelLaunchFullAppRequestedEventArgs = _uuidof(IContactPanelLaunchFullAppRequestedEventArgs);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9107,7 +9102,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPhone = __uuidof(IContactPhone);
+                extern MIDL_CONST_ID IID& IID_IContactPhone = _uuidof(IContactPhone);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9161,7 +9156,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPicker = __uuidof(IContactPicker);
+                extern MIDL_CONST_ID IID& IID_IContactPicker = _uuidof(IContactPicker);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9203,7 +9198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPicker2 = __uuidof(IContactPicker2);
+                extern MIDL_CONST_ID IID& IID_IContactPicker2 = _uuidof(IContactPicker2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9239,7 +9234,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPicker3 = __uuidof(IContactPicker3);
+                extern MIDL_CONST_ID IID& IID_IContactPicker3 = _uuidof(IContactPicker3);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9279,7 +9274,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactPickerStatics = __uuidof(IContactPickerStatics);
+                extern MIDL_CONST_ID IID& IID_IContactPickerStatics = _uuidof(IContactPickerStatics);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9339,7 +9334,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactQueryOptions = __uuidof(IContactQueryOptions);
+                extern MIDL_CONST_ID IID& IID_IContactQueryOptions = _uuidof(IContactQueryOptions);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9381,7 +9376,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactQueryOptionsFactory = __uuidof(IContactQueryOptionsFactory);
+                extern MIDL_CONST_ID IID& IID_IContactQueryOptionsFactory = _uuidof(IContactQueryOptionsFactory);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9432,7 +9427,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactQueryTextSearch = __uuidof(IContactQueryTextSearch);
+                extern MIDL_CONST_ID IID& IID_IContactQueryTextSearch = _uuidof(IContactQueryTextSearch);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9472,7 +9467,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactReader = __uuidof(IContactReader);
+                extern MIDL_CONST_ID IID& IID_IContactReader = _uuidof(IContactReader);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9517,7 +9512,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactSignificantOther = __uuidof(IContactSignificantOther);
+                extern MIDL_CONST_ID IID& IID_IContactSignificantOther = _uuidof(IContactSignificantOther);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9559,7 +9554,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactSignificantOther2 = __uuidof(IContactSignificantOther2);
+                extern MIDL_CONST_ID IID& IID_IContactSignificantOther2 = _uuidof(IContactSignificantOther2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9603,7 +9598,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactStore = __uuidof(IContactStore);
+                extern MIDL_CONST_ID IID& IID_IContactStore = _uuidof(IContactStore);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9678,7 +9673,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactStore2 = __uuidof(IContactStore2);
+                extern MIDL_CONST_ID IID& IID_IContactStore2 = _uuidof(IContactStore2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9715,7 +9710,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactStore3 = __uuidof(IContactStore3);
+                extern MIDL_CONST_ID IID& IID_IContactStore3 = _uuidof(IContactStore3);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9748,7 +9743,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IContactStoreNotificationTriggerDetails = __uuidof(IContactStoreNotificationTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IContactStoreNotificationTriggerDetails = _uuidof(IContactStoreNotificationTriggerDetails);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9793,7 +9788,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactWebsite = __uuidof(IContactWebsite);
+                extern MIDL_CONST_ID IID& IID_IContactWebsite = _uuidof(IContactWebsite);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9835,7 +9830,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContactWebsite2 = __uuidof(IContactWebsite2);
+                extern MIDL_CONST_ID IID& IID_IContactWebsite2 = _uuidof(IContactWebsite2);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9874,7 +9869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFullContactCardOptions = __uuidof(IFullContactCardOptions);
+                extern MIDL_CONST_ID IID& IID_IFullContactCardOptions = _uuidof(IFullContactCardOptions);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9948,7 +9943,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownContactFieldStatics = __uuidof(IKnownContactFieldStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownContactFieldStatics = _uuidof(IKnownContactFieldStatics);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -9984,7 +9979,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPinnedContactIdsQueryResult = __uuidof(IPinnedContactIdsQueryResult);
+                extern MIDL_CONST_ID IID& IID_IPinnedContactIdsQueryResult = _uuidof(IPinnedContactIdsQueryResult);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -10050,7 +10045,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPinnedContactManager = __uuidof(IPinnedContactManager);
+                extern MIDL_CONST_ID IID& IID_IPinnedContactManager = _uuidof(IPinnedContactManager);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -10093,7 +10088,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPinnedContactManagerStatics = __uuidof(IPinnedContactManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IPinnedContactManagerStatics = _uuidof(IPinnedContactManagerStatics);
             } /* Contacts */
         } /* ApplicationModel */
     } /* Windows */
@@ -10728,8 +10723,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -21230,11 +21225,6 @@ enum __x_ABI_CWindows_CApplicationModel_CContacts_CContactAnnotationOperations
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
     ContactAnnotationOperations_Share = 0x20,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-    ContactAnnotationOperations_Activity = 0x40,
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -29404,8 +29394,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Contacts.IContactManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *

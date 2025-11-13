@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -3329,7 +3329,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownRemoteSystemCapabilitiesStatics = __uuidof(IKnownRemoteSystemCapabilitiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownRemoteSystemCapabilitiesStatics = _uuidof(IKnownRemoteSystemCapabilitiesStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3377,7 +3377,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem = __uuidof(IRemoteSystem);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem = _uuidof(IRemoteSystem);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3417,7 +3417,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem2 = __uuidof(IRemoteSystem2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem2 = _uuidof(IRemoteSystem2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3456,7 +3456,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem3 = __uuidof(IRemoteSystem3);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem3 = _uuidof(IRemoteSystem3);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3492,7 +3492,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem4 = __uuidof(IRemoteSystem4);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem4 = _uuidof(IRemoteSystem4);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3528,7 +3528,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem5 = __uuidof(IRemoteSystem5);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem5 = _uuidof(IRemoteSystem5);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3564,7 +3564,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystem6 = __uuidof(IRemoteSystem6);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystem6 = _uuidof(IRemoteSystem6);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3600,7 +3600,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemAddedEventArgs = __uuidof(IRemoteSystemAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemAddedEventArgs = _uuidof(IRemoteSystemAddedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3648,7 +3648,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemApp = __uuidof(IRemoteSystemApp);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemApp = _uuidof(IRemoteSystemApp);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3687,7 +3687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemApp2 = __uuidof(IRemoteSystemApp2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemApp2 = _uuidof(IRemoteSystemApp2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3729,7 +3729,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemAppRegistration = __uuidof(IRemoteSystemAppRegistration);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemAppRegistration = _uuidof(IRemoteSystemAppRegistration);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3769,7 +3769,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemAppRegistrationStatics = __uuidof(IRemoteSystemAppRegistrationStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemAppRegistrationStatics = _uuidof(IRemoteSystemAppRegistrationStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3805,7 +3805,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemAuthorizationKindFilter = __uuidof(IRemoteSystemAuthorizationKindFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemAuthorizationKindFilter = _uuidof(IRemoteSystemAuthorizationKindFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3842,7 +3842,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemAuthorizationKindFilterFactory = __uuidof(IRemoteSystemAuthorizationKindFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemAuthorizationKindFilterFactory = _uuidof(IRemoteSystemAuthorizationKindFilterFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3878,7 +3878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionInfo = __uuidof(IRemoteSystemConnectionInfo);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionInfo = _uuidof(IRemoteSystemConnectionInfo);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3915,7 +3915,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionInfoStatics = __uuidof(IRemoteSystemConnectionInfoStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionInfoStatics = _uuidof(IRemoteSystemConnectionInfoStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3951,7 +3951,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest = __uuidof(IRemoteSystemConnectionRequest);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest = _uuidof(IRemoteSystemConnectionRequest);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -3987,7 +3987,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest2 = __uuidof(IRemoteSystemConnectionRequest2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest2 = _uuidof(IRemoteSystemConnectionRequest2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4023,7 +4023,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest3 = __uuidof(IRemoteSystemConnectionRequest3);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequest3 = _uuidof(IRemoteSystemConnectionRequest3);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4060,7 +4060,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestFactory = __uuidof(IRemoteSystemConnectionRequestFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestFactory = _uuidof(IRemoteSystemConnectionRequestFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4097,7 +4097,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestStatics = __uuidof(IRemoteSystemConnectionRequestStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestStatics = _uuidof(IRemoteSystemConnectionRequestStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4139,7 +4139,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestStatics2 = __uuidof(IRemoteSystemConnectionRequestStatics2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemConnectionRequestStatics2 = _uuidof(IRemoteSystemConnectionRequestStatics2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4175,7 +4175,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemDiscoveryTypeFilter = __uuidof(IRemoteSystemDiscoveryTypeFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemDiscoveryTypeFilter = _uuidof(IRemoteSystemDiscoveryTypeFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4212,7 +4212,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemDiscoveryTypeFilterFactory = __uuidof(IRemoteSystemDiscoveryTypeFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemDiscoveryTypeFilterFactory = _uuidof(IRemoteSystemDiscoveryTypeFilterFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4245,7 +4245,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemEnumerationCompletedEventArgs = __uuidof(IRemoteSystemEnumerationCompletedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemEnumerationCompletedEventArgs = _uuidof(IRemoteSystemEnumerationCompletedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4276,7 +4276,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemFilter = __uuidof(IRemoteSystemFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemFilter = _uuidof(IRemoteSystemFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4312,7 +4312,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemKindFilter = __uuidof(IRemoteSystemKindFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemKindFilter = _uuidof(IRemoteSystemKindFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4349,7 +4349,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemKindFilterFactory = __uuidof(IRemoteSystemKindFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemKindFilterFactory = _uuidof(IRemoteSystemKindFilterFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4397,7 +4397,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemKindStatics = __uuidof(IRemoteSystemKindStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemKindStatics = _uuidof(IRemoteSystemKindStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4439,7 +4439,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemKindStatics2 = __uuidof(IRemoteSystemKindStatics2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemKindStatics2 = _uuidof(IRemoteSystemKindStatics2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4475,7 +4475,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemRemovedEventArgs = __uuidof(IRemoteSystemRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemRemovedEventArgs = _uuidof(IRemoteSystemRemovedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4531,7 +4531,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSession = __uuidof(IRemoteSystemSession);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSession = _uuidof(IRemoteSystemSession);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4567,7 +4567,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionAddedEventArgs = __uuidof(IRemoteSystemSessionAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionAddedEventArgs = _uuidof(IRemoteSystemSessionAddedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4614,7 +4614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionController = __uuidof(IRemoteSystemSessionController);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionController = _uuidof(IRemoteSystemSessionController);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4656,7 +4656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionControllerFactory = __uuidof(IRemoteSystemSessionControllerFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionControllerFactory = _uuidof(IRemoteSystemSessionControllerFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4695,7 +4695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionCreationResult = __uuidof(IRemoteSystemSessionCreationResult);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionCreationResult = _uuidof(IRemoteSystemSessionCreationResult);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4731,7 +4731,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionDisconnectedEventArgs = __uuidof(IRemoteSystemSessionDisconnectedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionDisconnectedEventArgs = _uuidof(IRemoteSystemSessionDisconnectedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4773,7 +4773,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionInfo = __uuidof(IRemoteSystemSessionInfo);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionInfo = _uuidof(IRemoteSystemSessionInfo);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4812,7 +4812,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitation = __uuidof(IRemoteSystemSessionInvitation);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitation = _uuidof(IRemoteSystemSessionInvitation);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4852,7 +4852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitationListener = __uuidof(IRemoteSystemSessionInvitationListener);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitationListener = _uuidof(IRemoteSystemSessionInvitationListener);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4888,7 +4888,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitationReceivedEventArgs = __uuidof(IRemoteSystemSessionInvitationReceivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionInvitationReceivedEventArgs = _uuidof(IRemoteSystemSessionInvitationReceivedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4925,7 +4925,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Accept(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinRequest = __uuidof(IRemoteSystemSessionJoinRequest);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinRequest = _uuidof(IRemoteSystemSessionJoinRequest);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -4964,7 +4964,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinRequestedEventArgs = __uuidof(IRemoteSystemSessionJoinRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinRequestedEventArgs = _uuidof(IRemoteSystemSessionJoinRequestedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5003,7 +5003,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinResult = __uuidof(IRemoteSystemSessionJoinResult);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionJoinResult = _uuidof(IRemoteSystemSessionJoinResult);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5060,7 +5060,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionMessageChannel = __uuidof(IRemoteSystemSessionMessageChannel);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionMessageChannel = _uuidof(IRemoteSystemSessionMessageChannel);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5104,7 +5104,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionMessageChannelFactory = __uuidof(IRemoteSystemSessionMessageChannelFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionMessageChannelFactory = _uuidof(IRemoteSystemSessionMessageChannelFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5143,7 +5143,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionOptions = __uuidof(IRemoteSystemSessionOptions);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionOptions = _uuidof(IRemoteSystemSessionOptions);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5182,7 +5182,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipant = __uuidof(IRemoteSystemSessionParticipant);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipant = _uuidof(IRemoteSystemSessionParticipant);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5218,7 +5218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantAddedEventArgs = __uuidof(IRemoteSystemSessionParticipantAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantAddedEventArgs = _uuidof(IRemoteSystemSessionParticipantAddedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5254,7 +5254,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantRemovedEventArgs = __uuidof(IRemoteSystemSessionParticipantRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantRemovedEventArgs = _uuidof(IRemoteSystemSessionParticipantRemovedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5313,7 +5313,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantWatcher = __uuidof(IRemoteSystemSessionParticipantWatcher);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionParticipantWatcher = _uuidof(IRemoteSystemSessionParticipantWatcher);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5349,7 +5349,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionRemovedEventArgs = __uuidof(IRemoteSystemSessionRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionRemovedEventArgs = _uuidof(IRemoteSystemSessionRemovedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5385,7 +5385,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionStatics = __uuidof(IRemoteSystemSessionStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionStatics = _uuidof(IRemoteSystemSessionStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5421,7 +5421,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionUpdatedEventArgs = __uuidof(IRemoteSystemSessionUpdatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionUpdatedEventArgs = _uuidof(IRemoteSystemSessionUpdatedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5460,7 +5460,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionValueSetReceivedEventArgs = __uuidof(IRemoteSystemSessionValueSetReceivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionValueSetReceivedEventArgs = _uuidof(IRemoteSystemSessionValueSetReceivedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5519,7 +5519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemSessionWatcher = __uuidof(IRemoteSystemSessionWatcher);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemSessionWatcher = _uuidof(IRemoteSystemSessionWatcher);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5566,7 +5566,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemStatics = __uuidof(IRemoteSystemStatics);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemStatics = _uuidof(IRemoteSystemStatics);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5603,7 +5603,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemStatics2 = __uuidof(IRemoteSystemStatics2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemStatics2 = _uuidof(IRemoteSystemStatics2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5645,7 +5645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemStatics3 = __uuidof(IRemoteSystemStatics3);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemStatics3 = _uuidof(IRemoteSystemStatics3);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5681,7 +5681,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemStatusTypeFilter = __uuidof(IRemoteSystemStatusTypeFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemStatusTypeFilter = _uuidof(IRemoteSystemStatusTypeFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5718,7 +5718,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemStatusTypeFilterFactory = __uuidof(IRemoteSystemStatusTypeFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemStatusTypeFilterFactory = _uuidof(IRemoteSystemStatusTypeFilterFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5754,7 +5754,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemUpdatedEventArgs = __uuidof(IRemoteSystemUpdatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemUpdatedEventArgs = _uuidof(IRemoteSystemUpdatedEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5810,7 +5810,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWatcher = __uuidof(IRemoteSystemWatcher);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWatcher = _uuidof(IRemoteSystemWatcher);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5857,7 +5857,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWatcher2 = __uuidof(IRemoteSystemWatcher2);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWatcher2 = _uuidof(IRemoteSystemWatcher2);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5893,7 +5893,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWatcher3 = __uuidof(IRemoteSystemWatcher3);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWatcher3 = _uuidof(IRemoteSystemWatcher3);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5929,7 +5929,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWatcherErrorOccurredEventArgs = __uuidof(IRemoteSystemWatcherErrorOccurredEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWatcherErrorOccurredEventArgs = _uuidof(IRemoteSystemWatcherErrorOccurredEventArgs);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -5965,7 +5965,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWebAccountFilter = __uuidof(IRemoteSystemWebAccountFilter);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWebAccountFilter = _uuidof(IRemoteSystemWebAccountFilter);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -6002,7 +6002,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRemoteSystemWebAccountFilterFactory = __uuidof(IRemoteSystemWebAccountFilterFactory);
+                extern MIDL_CONST_ID IID& IID_IRemoteSystemWebAccountFilterFactory = _uuidof(IRemoteSystemWebAccountFilterFactory);
             } /* RemoteSystems */
         } /* System */
     } /* Windows */
@@ -6041,8 +6041,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteSystems.IRemoteSystem ** Default Interface **
@@ -6186,8 +6186,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestFactory interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteSystems.IRemoteSystemConnectionRequest ** Default Interface **
@@ -6282,8 +6282,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -15470,8 +15470,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteSystems.IRemoteSystem ** Default Interface **
@@ -15615,8 +15615,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestFactory interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemConnectionRequestStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.RemoteSystems.IRemoteSystemConnectionRequest ** Default Interface **
@@ -15711,8 +15711,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteSystems.IRemoteSystemKindStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

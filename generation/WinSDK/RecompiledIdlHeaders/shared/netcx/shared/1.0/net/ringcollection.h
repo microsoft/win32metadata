@@ -55,24 +55,6 @@ NetRingCollectionGetDataBufferRing(
     return Rings->Rings[NetRingTypeDataBuffer];
 }
 
-#pragma warning(push)
-#pragma warning(disable:4201) // 'nonstandard extension used: nameless struct/union'
-
-typedef union _NET_RING_INDICES
-{
-    LONG64 AsLONG64;
-
-    struct
-    {
-        UINT32 Packet;
-        UINT32 Fragment;
-    } DUMMYSTRUCTNAME;
-} NET_RING_INDICES;
-
-C_ASSERT(sizeof(NET_RING_INDICES) == sizeof(LONG64));
-
-#pragma warning(pop)
-
 EXTERN_C_END
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

@@ -208,7 +208,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAutomationConnection = __uuidof(IAutomationConnection);
+                extern MIDL_CONST_ID IID& IID_IAutomationConnection = _uuidof(IAutomationConnection);
             } /* UIAutomation */
         } /* UI */
     } /* Windows */
@@ -244,7 +244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAutomationConnectionBoundObject = __uuidof(IAutomationConnectionBoundObject);
+                extern MIDL_CONST_ID IID& IID_IAutomationConnectionBoundObject = _uuidof(IAutomationConnectionBoundObject);
             } /* UIAutomation */
         } /* UI */
     } /* Windows */
@@ -286,7 +286,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAutomationElement = __uuidof(IAutomationElement);
+                extern MIDL_CONST_ID IID& IID_IAutomationElement = _uuidof(IAutomationElement);
             } /* UIAutomation */
         } /* UI */
     } /* Windows */
@@ -319,7 +319,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IAutomationTextRange = __uuidof(IAutomationTextRange);
+                extern MIDL_CONST_ID IID& IID_IAutomationTextRange = _uuidof(IAutomationTextRange);
             } /* UIAutomation */
         } /* UI */
     } /* Windows */

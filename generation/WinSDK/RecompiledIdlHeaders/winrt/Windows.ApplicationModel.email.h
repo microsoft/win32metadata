@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -4770,7 +4770,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailAttachment = __uuidof(IEmailAttachment);
+                extern MIDL_CONST_ID IID& IID_IEmailAttachment = _uuidof(IEmailAttachment);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -4845,7 +4845,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailAttachment2 = __uuidof(IEmailAttachment2);
+                extern MIDL_CONST_ID IID& IID_IEmailAttachment2 = _uuidof(IEmailAttachment2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -4883,7 +4883,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailAttachmentFactory = __uuidof(IEmailAttachmentFactory);
+                extern MIDL_CONST_ID IID& IID_IEmailAttachmentFactory = _uuidof(IEmailAttachmentFactory);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -4922,7 +4922,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailAttachmentFactory2 = __uuidof(IEmailAttachmentFactory2);
+                extern MIDL_CONST_ID IID& IID_IEmailAttachmentFactory2 = _uuidof(IEmailAttachmentFactory2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5001,7 +5001,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailConversation = __uuidof(IEmailConversation);
+                extern MIDL_CONST_ID IID& IID_IEmailConversation = _uuidof(IEmailConversation);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5040,7 +5040,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailConversationBatch = __uuidof(IEmailConversationBatch);
+                extern MIDL_CONST_ID IID& IID_IEmailConversationBatch = _uuidof(IEmailConversationBatch);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5076,7 +5076,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailConversationReader = __uuidof(IEmailConversationReader);
+                extern MIDL_CONST_ID IID& IID_IEmailConversationReader = _uuidof(IEmailConversationReader);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5192,7 +5192,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailFolder = __uuidof(IEmailFolder);
+                extern MIDL_CONST_ID IID& IID_IEmailFolder = _uuidof(IEmailFolder);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5297,7 +5297,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailIrmInfo = __uuidof(IEmailIrmInfo);
+                extern MIDL_CONST_ID IID& IID_IEmailIrmInfo = _uuidof(IEmailIrmInfo);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5335,7 +5335,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailIrmInfoFactory = __uuidof(IEmailIrmInfoFactory);
+                extern MIDL_CONST_ID IID& IID_IEmailIrmInfoFactory = _uuidof(IEmailIrmInfoFactory);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5386,7 +5386,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailIrmTemplate = __uuidof(IEmailIrmTemplate);
+                extern MIDL_CONST_ID IID& IID_IEmailIrmTemplate = _uuidof(IEmailIrmTemplate);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5425,7 +5425,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailIrmTemplateFactory = __uuidof(IEmailIrmTemplateFactory);
+                extern MIDL_CONST_ID IID& IID_IEmailIrmTemplateFactory = _uuidof(IEmailIrmTemplateFactory);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5470,7 +5470,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailItemCounts = __uuidof(IEmailItemCounts);
+                extern MIDL_CONST_ID IID& IID_IEmailItemCounts = _uuidof(IEmailItemCounts);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5705,7 +5705,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailbox = __uuidof(IEmailMailbox);
+                extern MIDL_CONST_ID IID& IID_IEmailMailbox = _uuidof(IEmailMailbox);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5750,7 +5750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailbox2 = __uuidof(IEmailMailbox2);
+                extern MIDL_CONST_ID IID& IID_IEmailMailbox2 = _uuidof(IEmailMailbox2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5808,7 +5808,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailbox3 = __uuidof(IEmailMailbox3);
+                extern MIDL_CONST_ID IID& IID_IEmailMailbox3 = _uuidof(IEmailMailbox3);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5844,7 +5844,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailbox4 = __uuidof(IEmailMailbox4);
+                extern MIDL_CONST_ID IID& IID_IEmailMailbox4 = _uuidof(IEmailMailbox4);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5881,7 +5881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailbox5 = __uuidof(IEmailMailbox5);
+                extern MIDL_CONST_ID IID& IID_IEmailMailbox5 = _uuidof(IEmailMailbox5);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5920,7 +5920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxAction = __uuidof(IEmailMailboxAction);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxAction = _uuidof(IEmailMailboxAction);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -5965,7 +5965,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxAutoReply = __uuidof(IEmailMailboxAutoReply);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxAutoReply = _uuidof(IEmailMailboxAutoReply);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6031,7 +6031,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxAutoReplySettings = __uuidof(IEmailMailboxAutoReplySettings);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxAutoReplySettings = _uuidof(IEmailMailboxAutoReplySettings);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6088,7 +6088,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities = __uuidof(IEmailMailboxCapabilities);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities = _uuidof(IEmailMailboxCapabilities);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6139,7 +6139,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities2 = __uuidof(IEmailMailboxCapabilities2);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities2 = _uuidof(IEmailMailboxCapabilities2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6214,7 +6214,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities3 = __uuidof(IEmailMailboxCapabilities3);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxCapabilities3 = _uuidof(IEmailMailboxCapabilities3);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6259,7 +6259,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxChange = __uuidof(IEmailMailboxChange);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxChange = _uuidof(IEmailMailboxChange);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6299,7 +6299,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxChangeReader = __uuidof(IEmailMailboxChangeReader);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxChangeReader = _uuidof(IEmailMailboxChangeReader);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6340,7 +6340,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxChangeTracker = __uuidof(IEmailMailboxChangeTracker);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxChangeTracker = _uuidof(IEmailMailboxChangeTracker);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6374,7 +6374,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxChangedDeferral = __uuidof(IEmailMailboxChangedDeferral);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxChangedDeferral = _uuidof(IEmailMailboxChangedDeferral);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6410,7 +6410,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxChangedEventArgs = __uuidof(IEmailMailboxChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxChangedEventArgs = _uuidof(IEmailMailboxChangedEventArgs);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6449,7 +6449,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderResult = __uuidof(IEmailMailboxCreateFolderResult);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderResult = _uuidof(IEmailMailboxCreateFolderResult);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6494,7 +6494,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxPolicies = __uuidof(IEmailMailboxPolicies);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxPolicies = _uuidof(IEmailMailboxPolicies);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6533,7 +6533,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxPolicies2 = __uuidof(IEmailMailboxPolicies2);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxPolicies2 = _uuidof(IEmailMailboxPolicies2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6584,7 +6584,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxPolicies3 = __uuidof(IEmailMailboxPolicies3);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxPolicies3 = _uuidof(IEmailMailboxPolicies3);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6636,7 +6636,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxSyncManager = __uuidof(IEmailMailboxSyncManager);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxSyncManager = _uuidof(IEmailMailboxSyncManager);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6678,7 +6678,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMailboxSyncManager2 = __uuidof(IEmailMailboxSyncManager2);
+                extern MIDL_CONST_ID IID& IID_IEmailMailboxSyncManager2 = _uuidof(IEmailMailboxSyncManager2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6722,7 +6722,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailManagerForUser = __uuidof(IEmailManagerForUser);
+                extern MIDL_CONST_ID IID& IID_IEmailManagerForUser = _uuidof(IEmailManagerForUser);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6759,7 +6759,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailManagerStatics = __uuidof(IEmailManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IEmailManagerStatics = _uuidof(IEmailManagerStatics);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6796,7 +6796,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailManagerStatics2 = __uuidof(IEmailManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IEmailManagerStatics2 = _uuidof(IEmailManagerStatics2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6833,7 +6833,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailManagerStatics3 = __uuidof(IEmailManagerStatics3);
+                extern MIDL_CONST_ID IID& IID_IEmailManagerStatics3 = _uuidof(IEmailManagerStatics3);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6944,7 +6944,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMeetingInfo = __uuidof(IEmailMeetingInfo);
+                extern MIDL_CONST_ID IID& IID_IEmailMeetingInfo = _uuidof(IEmailMeetingInfo);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -6980,7 +6980,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMeetingInfo2 = __uuidof(IEmailMeetingInfo2);
+                extern MIDL_CONST_ID IID& IID_IEmailMeetingInfo2 = _uuidof(IEmailMeetingInfo2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7037,7 +7037,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessage = __uuidof(IEmailMessage);
+                extern MIDL_CONST_ID IID& IID_IEmailMessage = _uuidof(IEmailMessage);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7207,7 +7207,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessage2 = __uuidof(IEmailMessage2);
+                extern MIDL_CONST_ID IID& IID_IEmailMessage2 = _uuidof(IEmailMessage2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7252,7 +7252,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessage3 = __uuidof(IEmailMessage3);
+                extern MIDL_CONST_ID IID& IID_IEmailMessage3 = _uuidof(IEmailMessage3);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7294,7 +7294,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessage4 = __uuidof(IEmailMessage4);
+                extern MIDL_CONST_ID IID& IID_IEmailMessage4 = _uuidof(IEmailMessage4);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7333,7 +7333,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessageBatch = __uuidof(IEmailMessageBatch);
+                extern MIDL_CONST_ID IID& IID_IEmailMessageBatch = _uuidof(IEmailMessageBatch);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7369,7 +7369,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailMessageReader = __uuidof(IEmailMessageReader);
+                extern MIDL_CONST_ID IID& IID_IEmailMessageReader = _uuidof(IEmailMessageReader);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7426,7 +7426,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailQueryOptions = __uuidof(IEmailQueryOptions);
+                extern MIDL_CONST_ID IID& IID_IEmailQueryOptions = _uuidof(IEmailQueryOptions);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7468,7 +7468,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailQueryOptionsFactory = __uuidof(IEmailQueryOptionsFactory);
+                extern MIDL_CONST_ID IID& IID_IEmailQueryOptionsFactory = _uuidof(IEmailQueryOptionsFactory);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7519,7 +7519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailQueryTextSearch = __uuidof(IEmailQueryTextSearch);
+                extern MIDL_CONST_ID IID& IID_IEmailQueryTextSearch = _uuidof(IEmailQueryTextSearch);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7564,7 +7564,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailRecipient = __uuidof(IEmailRecipient);
+                extern MIDL_CONST_ID IID& IID_IEmailRecipient = _uuidof(IEmailRecipient);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7606,7 +7606,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailRecipientFactory = __uuidof(IEmailRecipientFactory);
+                extern MIDL_CONST_ID IID& IID_IEmailRecipientFactory = _uuidof(IEmailRecipientFactory);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7645,7 +7645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailRecipientResolutionResult = __uuidof(IEmailRecipientResolutionResult);
+                extern MIDL_CONST_ID IID& IID_IEmailRecipientResolutionResult = _uuidof(IEmailRecipientResolutionResult);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7684,7 +7684,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailRecipientResolutionResult2 = __uuidof(IEmailRecipientResolutionResult2);
+                extern MIDL_CONST_ID IID& IID_IEmailRecipientResolutionResult2 = _uuidof(IEmailRecipientResolutionResult2);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7761,7 +7761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailStore = __uuidof(IEmailStore);
+                extern MIDL_CONST_ID IID& IID_IEmailStore = _uuidof(IEmailStore);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7794,7 +7794,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IEmailStoreNotificationTriggerDetails = __uuidof(IEmailStoreNotificationTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IEmailStoreNotificationTriggerDetails = _uuidof(IEmailStoreNotificationTriggerDetails);
             } /* Email */
         } /* ApplicationModel */
     } /* Windows */
@@ -7811,8 +7811,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CEmail_CIEmailStoreNot
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -8278,8 +8278,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -8414,8 +8414,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Email.IEmailQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Email.IEmailQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Email.IEmailQueryOptions ** Default Interface **
@@ -8460,8 +8460,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Email.IEmailRecipientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Email.IEmailRecipient ** Default Interface **
@@ -21065,8 +21065,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CEmail_CIEmailStoreNot
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Email.IEmailAttachmentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -21532,8 +21532,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Email.IEmailManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -21668,8 +21668,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.ApplicationModel.Email.IEmailQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.ApplicationModel.Email.IEmailQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Email.IEmailQueryOptions ** Default Interface **
@@ -21714,8 +21714,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Email.IEmailRecipientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Email.IEmailRecipient ** Default Interface **

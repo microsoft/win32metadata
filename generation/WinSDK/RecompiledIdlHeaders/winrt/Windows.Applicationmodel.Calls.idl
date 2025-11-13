@@ -125,8 +125,6 @@ namespace Windows
 
             typedef enum TransportDeviceAudioRoutingStatus TransportDeviceAudioRoutingStatus;
 
-            typedef enum VoipCallControlDeviceKind VoipCallControlDeviceKind;
-
             typedef enum VoipPhoneCallMedia VoipPhoneCallMedia;
 
             typedef enum VoipPhoneCallRejectReason VoipPhoneCallRejectReason;
@@ -135,25 +133,11 @@ namespace Windows
 
             typedef enum VoipPhoneCallState VoipPhoneCallState;
 
-            interface IAcceptedVoipPhoneCallOptions;
-
-            interface IAcceptedVoipPhoneCallOptionsFactory;
-
-            interface IAppInitiatedVoipPhoneCallOptions;
-
-            interface IAppInitiatedVoipPhoneCallOptionsFactory;
-
             interface ICallAnswerEventArgs;
-
-            interface ICallAnswerEventArgs2;
 
             interface ICallRejectEventArgs;
 
             interface ICallStateChangeEventArgs;
-
-            interface IIncomingVoipPhoneCallOptions;
-
-            interface IIncomingVoipPhoneCallOptionsFactory;
 
             interface ILockScreenCallEndCallDeferral;
 
@@ -162,10 +146,6 @@ namespace Windows
             interface ILockScreenCallUI;
 
             interface IMuteChangeEventArgs;
-
-            interface IOutgoingVoipPhoneCallOptions;
-
-            interface IOutgoingVoipPhoneCallOptionsFactory;
 
             interface IPhoneCall;
 
@@ -241,11 +221,7 @@ namespace Windows
 
             interface IVoipCallCoordinator4;
 
-            interface IVoipCallCoordinator5;
-
             interface IVoipCallCoordinatorStatics;
-
-            interface IVoipCallCoordinatorStatics2;
 
             interface IVoipPhoneCall;
 
@@ -253,19 +229,11 @@ namespace Windows
 
             interface IVoipPhoneCall3;
 
-            interface IVoipPhoneCall4;
-
-            runtimeclass AcceptedVoipPhoneCallOptions;
-
-            runtimeclass AppInitiatedVoipPhoneCallOptions;
-
             runtimeclass CallAnswerEventArgs;
 
             runtimeclass CallRejectEventArgs;
 
             runtimeclass CallStateChangeEventArgs;
-
-            runtimeclass IncomingVoipPhoneCallOptions;
 
             runtimeclass LockScreenCallEndCallDeferral;
 
@@ -274,8 +242,6 @@ namespace Windows
             runtimeclass LockScreenCallUI;
 
             runtimeclass MuteChangeEventArgs;
-
-            runtimeclass OutgoingVoipPhoneCallOptions;
 
             runtimeclass PhoneCall;
 
@@ -409,7 +375,7 @@ namespace Windows
         namespace Calls
         {
 
-            [contractversion(5.0)]
+            [contractversion(4.0)]
             apicontract CallsVoipContract
             {
             }
@@ -629,13 +595,6 @@ namespace Windows
                 CannotRouteToLocalDevice = 2
             };
 
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            enum VoipCallControlDeviceKind
-            {
-                Bluetooth = 0,
-                Usb       = 1
-            };
-
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
             [flags]
             enum VoipPhoneCallMedia
@@ -672,72 +631,12 @@ namespace Windows
                 Outgoing = 4
             };
 
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions)]
-            [uuid(E519C726-B86F-5ADD-8AE2-0F46ACD9232D)]
-            interface IAcceptedVoipPhoneCallOptions : IInspectable
-            {
-                [propget] HRESULT Context([out] [retval] HSTRING* value);
-                [propput] HRESULT Context([in] HSTRING value);
-                [propget] HRESULT ContactName([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactName([in] HSTRING value);
-                [propget] HRESULT ContactNumber([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactNumber([in] HSTRING value);
-                [propget] HRESULT ServiceName([out] [retval] HSTRING* value);
-                [propput] HRESULT ServiceName([in] HSTRING value);
-                [propget] HRESULT Media([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallMedia* value);
-                [propput] HRESULT Media([in] Windows.ApplicationModel.Calls.VoipPhoneCallMedia value);
-                [propget] HRESULT AssociatedDeviceIds([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions)]
-            [uuid(6CF8A79B-ACC1-54CE-A75D-CC78D17690C8)]
-            interface IAcceptedVoipPhoneCallOptionsFactory : IInspectable
-            {
-                HRESULT CreateInstance([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds, [out] [retval] Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions** value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions)]
-            [uuid(86BEBF63-FF5A-57FD-84C6-2D2CF18302F8)]
-            interface IAppInitiatedVoipPhoneCallOptions : IInspectable
-            {
-                [propget] HRESULT Context([out] [retval] HSTRING* value);
-                [propput] HRESULT Context([in] HSTRING value);
-                [propget] HRESULT ContactName([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactName([in] HSTRING value);
-                [propget] HRESULT ContactNumber([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactNumber([in] HSTRING value);
-                [propget] HRESULT ServiceName([out] [retval] HSTRING* value);
-                [propput] HRESULT ServiceName([in] HSTRING value);
-                [propget] HRESULT Media([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallMedia* value);
-                [propput] HRESULT Media([in] Windows.ApplicationModel.Calls.VoipPhoneCallMedia value);
-                [propget] HRESULT AssociatedDeviceIds([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions)]
-            [uuid(CA46C30C-F779-5F3B-8EBC-A635E7F652B5)]
-            interface IAppInitiatedVoipPhoneCallOptionsFactory : IInspectable
-            {
-                HRESULT CreateInstance([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds, [out] [retval] Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions** value);
-            }
-
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Calls.CallAnswerEventArgs)]
             [uuid(FD789617-2DD7-4C8C-B2BD-95D17A5BB733)]
             interface ICallAnswerEventArgs : IInspectable
             {
                 [propget] HRESULT AcceptedMedia([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallMedia* value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.CallAnswerEventArgs)]
-            [uuid(408208F7-C3F7-579A-800D-541082CBA051)]
-            interface ICallAnswerEventArgs2 : IInspectable
-            {
-                [propget] HRESULT SourceDeviceId([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
@@ -754,44 +653,6 @@ namespace Windows
             interface ICallStateChangeEventArgs : IInspectable
             {
                 [propget] HRESULT State([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallState* value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions)]
-            [uuid(4379FCD6-DDD0-5E9B-81D8-5110495764AE)]
-            interface IIncomingVoipPhoneCallOptions : IInspectable
-            {
-                [propget] HRESULT Context([out] [retval] HSTRING* value);
-                [propput] HRESULT Context([in] HSTRING value);
-                [propget] HRESULT ContactName([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactName([in] HSTRING value);
-                [propget] HRESULT ContactNumber([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactNumber([in] HSTRING value);
-                [propget] HRESULT ContactImage([out] [retval] Windows.Foundation.Uri** value);
-                [propput] HRESULT ContactImage([in] Windows.Foundation.Uri* value);
-                [propget] HRESULT ServiceName([out] [retval] HSTRING* value);
-                [propput] HRESULT ServiceName([in] HSTRING value);
-                [propget] HRESULT BrandingImage([out] [retval] Windows.Foundation.Uri** value);
-                [propput] HRESULT BrandingImage([in] Windows.Foundation.Uri* value);
-                [propget] HRESULT CallDetails([out] [retval] HSTRING* value);
-                [propput] HRESULT CallDetails([in] HSTRING value);
-                [propget] HRESULT Ringtone([out] [retval] Windows.Foundation.Uri** value);
-                [propput] HRESULT Ringtone([in] Windows.Foundation.Uri* value);
-                [propget] HRESULT Media([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallMedia* value);
-                [propput] HRESULT Media([in] Windows.ApplicationModel.Calls.VoipPhoneCallMedia value);
-                [propget] HRESULT RingTimeout([out] [retval] Windows.Foundation.TimeSpan* value);
-                [propput] HRESULT RingTimeout([in] Windows.Foundation.TimeSpan value);
-                [propget] HRESULT ContactRemoteId([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactRemoteId([in] HSTRING value);
-                [propget] HRESULT AssociatedDeviceIds([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions)]
-            [uuid(74062DE4-08F0-5649-BD80-89EA87185C78)]
-            interface IIncomingVoipPhoneCallOptionsFactory : IInspectable
-            {
-                HRESULT CreateInstance([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds, [out] [retval] Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions** value);
             }
 
             [contract(Windows.ApplicationModel.Calls.LockScreenCallContract, 1.0)]
@@ -831,30 +692,6 @@ namespace Windows
             interface IMuteChangeEventArgs : IInspectable
             {
                 [propget] HRESULT Muted([out] [retval] boolean* value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions)]
-            [uuid(D6C59B57-57BE-524F-9DC1-F2C12E5D1BCC)]
-            interface IOutgoingVoipPhoneCallOptions : IInspectable
-            {
-                [propget] HRESULT Context([out] [retval] HSTRING* value);
-                [propput] HRESULT Context([in] HSTRING value);
-                [propget] HRESULT ContactName([out] [retval] HSTRING* value);
-                [propput] HRESULT ContactName([in] HSTRING value);
-                [propget] HRESULT ServiceName([out] [retval] HSTRING* value);
-                [propput] HRESULT ServiceName([in] HSTRING value);
-                [propget] HRESULT Media([out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCallMedia* value);
-                [propput] HRESULT Media([in] Windows.ApplicationModel.Calls.VoipPhoneCallMedia value);
-                [propget] HRESULT AssociatedDeviceIds([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions)]
-            [uuid(2EA2C6F4-0B7A-5789-9D33-FE3271FDEFA8)]
-            interface IOutgoingVoipPhoneCallOptionsFactory : IInspectable
-            {
-                HRESULT CreateInstance([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds, [out] [retval] Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions** value);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
@@ -1338,32 +1175,12 @@ namespace Windows
                 [overload("ReserveCallResourcesAsync")] HRESULT ReserveOneProcessCallResourcesAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Calls.VoipPhoneCallResourceReservationStatus>** operation);
             }
 
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.VoipCallCoordinator)]
-            [uuid(D4F79017-D1C1-5820-955E-7A1676355D00)]
-            interface IVoipCallCoordinator5 : IInspectable
-            {
-                HRESULT RequestNewIncomingCallWithOptions([in] Windows.ApplicationModel.Calls.IncomingVoipPhoneCallOptions* callOptions, [out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCall** result);
-                HRESULT RequestNewOutgoingCallWithOptions([in] Windows.ApplicationModel.Calls.OutgoingVoipPhoneCallOptions* callOptions, [out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCall** result);
-                HRESULT SetupNewAcceptedCallWithOptions([in] Windows.ApplicationModel.Calls.AcceptedVoipPhoneCallOptions* callOptions, [out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCall** result);
-                HRESULT RequestNewAppInitiatedCallWithOptions([in] Windows.ApplicationModel.Calls.AppInitiatedVoipPhoneCallOptions* callOptions, [out] [retval] Windows.ApplicationModel.Calls.VoipPhoneCall** result);
-            }
-
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Calls.VoipCallCoordinator)]
             [uuid(7F5D1F2B-E04A-4D10-B31A-A55C922CC2FB)]
             interface IVoipCallCoordinatorStatics : IInspectable
             {
                 HRESULT GetDefault([out] [retval] Windows.ApplicationModel.Calls.VoipCallCoordinator** coordinator);
-            }
-
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.VoipCallCoordinator)]
-            [uuid(B8D0288B-01EA-5478-8404-A1FB06F2B83B)]
-            interface IVoipCallCoordinatorStatics2 : IInspectable
-            {
-                HRESULT IsCallControlDeviceKindSupportedForAssociation([in] Windows.ApplicationModel.Calls.VoipCallControlDeviceKind kind, [out] [retval] boolean* result);
-                HRESULT GetDeviceSelectorForCallControl([out] [retval] HSTRING* result);
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
@@ -1414,45 +1231,11 @@ namespace Windows
                 HRESULT NotifyCallAccepted([in] Windows.ApplicationModel.Calls.VoipPhoneCallMedia media);
             }
 
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [exclusiveto(Windows.ApplicationModel.Calls.VoipPhoneCall)]
-            [uuid(EBA66290-AD6D-5899-BDDA-81BFE9F999A1)]
-            interface IVoipPhoneCall4 : IInspectable
-            {
-                [propget] HRESULT IsUsingAssociatedDevicesList([out] [retval] boolean* value);
-                [overload("NotifyCallActive")] HRESULT NotifyCallActiveOnDevices([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds);
-                HRESULT AddAssociatedCallControlDevice([in] HSTRING deviceId);
-                HRESULT RemoveAssociatedCallControlDevice([in] HSTRING deviceId);
-                HRESULT SetAssociatedCallControlDevices([in] Windows.Foundation.Collections.IIterable<HSTRING>* associatedDeviceIds);
-                HRESULT GetAssociatedCallControlDevices([out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** result);
-            }
-
-            [activatable(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [activatable(Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptionsFactory, Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [marshaling_behavior(agile)]
-            [threading(both)]
-            runtimeclass AcceptedVoipPhoneCallOptions
-            {
-                [default] interface Windows.ApplicationModel.Calls.IAcceptedVoipPhoneCallOptions;
-            }
-
-            [activatable(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [activatable(Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptionsFactory, Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [marshaling_behavior(agile)]
-            [threading(both)]
-            runtimeclass AppInitiatedVoipPhoneCallOptions
-            {
-                [default] interface Windows.ApplicationModel.Calls.IAppInitiatedVoipPhoneCallOptions;
-            }
-
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
             [marshaling_behavior(agile)]
             runtimeclass CallAnswerEventArgs
             {
                 [default] interface Windows.ApplicationModel.Calls.ICallAnswerEventArgs;
-                [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)] interface Windows.ApplicationModel.Calls.ICallAnswerEventArgs2;
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
@@ -1467,16 +1250,6 @@ namespace Windows
             runtimeclass CallStateChangeEventArgs
             {
                 [default] interface Windows.ApplicationModel.Calls.ICallStateChangeEventArgs;
-            }
-
-            [activatable(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [activatable(Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptionsFactory, Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [marshaling_behavior(agile)]
-            [threading(both)]
-            runtimeclass IncomingVoipPhoneCallOptions
-            {
-                [default] interface Windows.ApplicationModel.Calls.IIncomingVoipPhoneCallOptions;
             }
 
             [contract(Windows.ApplicationModel.Calls.LockScreenCallContract, 1.0)]
@@ -1505,16 +1278,6 @@ namespace Windows
             runtimeclass MuteChangeEventArgs
             {
                 [default] interface Windows.ApplicationModel.Calls.IMuteChangeEventArgs;
-            }
-
-            [activatable(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [activatable(Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptionsFactory, Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
-            [marshaling_behavior(agile)]
-            [threading(both)]
-            runtimeclass OutgoingVoipPhoneCallOptions
-            {
-                [default] interface Windows.ApplicationModel.Calls.IOutgoingVoipPhoneCallOptions;
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 6.0)]
@@ -1721,14 +1484,12 @@ namespace Windows
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics, Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
-            [static(Windows.ApplicationModel.Calls.IVoipCallCoordinatorStatics2, Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)]
             runtimeclass VoipCallCoordinator
             {
                 [default] interface Windows.ApplicationModel.Calls.IVoipCallCoordinator;
                 [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 2.0)] interface Windows.ApplicationModel.Calls.IVoipCallCoordinator2;
                 [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 3.0)] interface Windows.ApplicationModel.Calls.IVoipCallCoordinator3;
                 [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 4.0)] interface Windows.ApplicationModel.Calls.IVoipCallCoordinator4;
-                [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)] interface Windows.ApplicationModel.Calls.IVoipCallCoordinator5;
             }
 
             [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 1.0)]
@@ -1738,7 +1499,6 @@ namespace Windows
                 [default] interface Windows.ApplicationModel.Calls.IVoipPhoneCall;
                 [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 2.0)] interface Windows.ApplicationModel.Calls.IVoipPhoneCall2;
                 [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 3.0)] interface Windows.ApplicationModel.Calls.IVoipPhoneCall3;
-                [contract(Windows.ApplicationModel.Calls.CallsVoipContract, 5.0)] interface Windows.ApplicationModel.Calls.IVoipPhoneCall4;
             }
         }
     }

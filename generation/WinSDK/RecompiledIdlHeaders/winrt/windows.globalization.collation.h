@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -287,7 +287,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICharacterGrouping = __uuidof(ICharacterGrouping);
+                extern MIDL_CONST_ID IID& IID_ICharacterGrouping = _uuidof(ICharacterGrouping);
             } /* Collation */
         } /* Globalization */
     } /* Windows */
@@ -328,7 +328,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICharacterGroupings = __uuidof(ICharacterGroupings);
+                extern MIDL_CONST_ID IID& IID_ICharacterGroupings = _uuidof(ICharacterGroupings);
             } /* Collation */
         } /* Globalization */
     } /* Windows */
@@ -365,7 +365,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICharacterGroupingsFactory = __uuidof(ICharacterGroupingsFactory);
+                extern MIDL_CONST_ID IID& IID_ICharacterGroupingsFactory = _uuidof(ICharacterGroupingsFactory);
             } /* Collation */
         } /* Globalization */
     } /* Windows */

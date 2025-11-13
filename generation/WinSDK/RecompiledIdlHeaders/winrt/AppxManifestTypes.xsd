@@ -103,7 +103,7 @@
       <xs:maxLength value="64"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="ST_FileTypeOrStar">
     <xs:restriction base="ST_NonEmptyString">
       <xs:pattern value="(\*|(\.[^.\\]+))"/>
@@ -367,7 +367,7 @@
       <xs:enumeration value="x86a64"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="ST_ArchitectureUnrestricted">
     <xs:restriction base="ST_AsciiIdentifier">
       <xs:maxLength value="7"/>
@@ -506,12 +506,6 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="ST_Capability_SystemAI">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="systemAIModels"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="ST_DeviceFunction">
     <xs:restriction base="ST_NonEmptyString">
       <xs:maxLength value="100"/>
@@ -640,7 +634,7 @@
       <xs:enumeration value="windows.comInterface"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="ST_PackageExtensionCategory_Foundation">
     <xs:restriction base="xs:string">
       <xs:enumeration value="windows.activatableClass.inProcessServer"/>
@@ -835,15 +829,6 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="ST_ExtensionCategory_Uap17">
-    <xs:restriction base="xs:string">
-      <!-- Package Extensions -->
-      <xs:enumeration value="windows.packageExtensionHost"/>
-      <xs:enumeration value="windows.packageExtension"/>
-      <!-- Package Extensions -->
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="ST_ExtensionCategory_Com">
     <xs:restriction base="xs:string">
       <xs:enumeration value="windows.comServer"/>
@@ -871,16 +856,7 @@
       <xs:enumeration value="windows.deploymentExtensionHandler"/>
     </xs:restriction>
   </xs:simpleType>
-
-  <xs:simpleType name="ST_ExtensionCategory_Deployment3">
-    <xs:restriction base="xs:string">
-      <!-- Package Extensions -->
-      <xs:enumeration value="windows.deploymentStateHandler"/>
-      <xs:enumeration value="windows.packagingExtension"/>
-      <xs:enumeration value="windows.sipExtension"/>
-    </xs:restriction>
-  </xs:simpleType>
-
+    
   <xs:simpleType name="ST_ApplicationExtensionCategory_Mobile">
     <xs:restriction base="xs:string">
       <xs:enumeration value="windows.aowApp"/>
@@ -918,7 +894,7 @@
       <xs:enumeration value="windows.autoPlayHandler"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="ST_ApplicationExtensionCategory_Desktop4">
     <xs:restriction base="xs:string">
       <xs:enumeration value="windows.fileExplorerContextMenus"/>
@@ -977,7 +953,7 @@
       <xs:enumeration value="windows.customDesktopEventLog"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <xs:simpleType name="ST_ExtensionCategory_PreviewAppCompat2">
     <xs:restriction base="xs:string">
       <!-- Application Extensions -->
@@ -1013,22 +989,6 @@
         <xs:enumeration value="windows.printSupportExtension"/>
         <xs:enumeration value="windows.printSupportWorkflow"/>
         <xs:enumeration value="windows.printSupportJobUI"/>
-        <!-- Package Extensions -->
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_ExtensionCategory_PrintSupport2">
-    <xs:restriction base="xs:string">
-        <!-- Application Extensions -->
-        <xs:enumeration value="windows.printSupportVirtualPrinterWorkflow"/>
-        <!-- Package Extensions -->
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_ExtensionCategory_PrintSupport3">
-    <xs:restriction base="xs:string">
-        <!-- Application Extensions -->
-        <xs:enumeration value="windows.printSupportEnterpriseManagementUI"/>
         <!-- Package Extensions -->
     </xs:restriction>
   </xs:simpleType>
@@ -1600,7 +1560,7 @@
       <xs:enumeration value="REG_EXPAND_SZ"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <!-- CERTIFICATES EXTENSION SCHEMA TYPES -->
   <xs:simpleType name="ST_CertificateStoreName">
     <xs:restriction base="ST_FileNameCharSet">
@@ -1674,7 +1634,7 @@
       <xs:maxLength value="39"/>
     </xs:restriction>
   </xs:simpleType>
-
+  
   <!-- In 19H1 was needed update the max length for AppExentesion Name-->
   <!-- This is the same type of ST_AppServiceName but with maxLength equals to 255 -->
   <xs:simpleType name="ST_AppServiceNameLonger">
@@ -1692,7 +1652,7 @@
       <xs:enumeration value="resource" />
     </xs:restriction>
   </xs:simpleType>
-
+  
   <!-- Mutable directory target type enforces that the directory must be of form $(string)\subpath -->
   <!-- where string is semantically validated and interpreted by calling code, and subpath is a directory subpath  -->
   <xs:simpleType name="ST_MutableDirectoryTarget">
@@ -1732,41 +1692,5 @@
     <xs:union memberTypes="xs:unsignedLong ST_HexInt64"/>
   </xs:simpleType>
 
-  <xs:simpleType name="ST_RuntimeBehavior_2022">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="windowsApp"/>
-      <xs:enumeration value="packagedClassicApp"/>
-      <xs:enumeration value="win32App"/>
-      <xs:enumeration value="appSilo"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_BaseNamedObjectsIsolation">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="none"/>
-      <xs:enumeration value="package"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_AppLifecycleBehavior">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="systemManaged"></xs:enumeration>
-      <xs:enumeration value="unmanaged"></xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_UpdateWhileInUse">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="allow"/>
-      <xs:enumeration value="defer"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_PackageDependencyType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="install"/>
-      <xs:enumeration value="installAndRuntime"/>
-    </xs:restriction>
-  </xs:simpleType>
 </xs:schema>
 

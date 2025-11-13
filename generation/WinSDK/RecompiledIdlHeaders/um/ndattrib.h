@@ -57,7 +57,8 @@ extern "C"{
 
 //+--------------------------------------------------------------------------
 //
-// Copyright (C) Microsoft Corporation. All rights reserved.
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992-2004.
 //
 //---------------------------------------------------------------------------
 #include <winapifamily.h>
@@ -88,7 +89,7 @@ extern "C"{
 //
 // Inavlid parameter.
 //
-#define NDF_E_BAD_PARAM                     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 5)
+#define NDF_E_BAD_PARAM						MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 5)
 //
 // MessageId: NDF_E_VALIDATION
 //
@@ -96,7 +97,7 @@ extern "C"{
 //
 // Diagnosis failed to resolve the problems.
 //
-#define NDF_E_VALIDATION                    MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 6)
+#define NDF_E_VALIDATION					MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 6)
 //
 // MessageId: NDF_E_UNKNOWN
 //
@@ -245,7 +246,7 @@ typedef struct tagUiInfo *PUiInfo;
 #define RF_SHOW_EVENTS         0x800000
 #define RF_VALIDATE_HELPTOPIC  0x400000
 #define RF_REPRO               0x200000
-#define RF_CONTACT_ADMIN       0x20000
+#define RF_CONTACT_ADMIN    	  0x20000
 #define RF_RESERVED            0x40000000
 #define RF_RESERVED_CA         0x80000000
 #define RF_RESERVED_LNI        0x10000

@@ -35,36 +35,6 @@ AllocConsole(
     VOID
     );
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
-typedef enum ALLOC_CONSOLE_MODE {
-    ALLOC_CONSOLE_MODE_DEFAULT    = 0,
-    ALLOC_CONSOLE_MODE_NEW_WINDOW = 1,
-    ALLOC_CONSOLE_MODE_NO_WINDOW  = 2
-} ALLOC_CONSOLE_MODE;
-
-typedef struct ALLOC_CONSOLE_OPTIONS {
-    ALLOC_CONSOLE_MODE mode;
-    BOOL  useShowWindow;
-    WORD  showWindow;
-} ALLOC_CONSOLE_OPTIONS, *PALLOC_CONSOLE_OPTIONS;
-
-typedef enum ALLOC_CONSOLE_RESULT {
-    ALLOC_CONSOLE_RESULT_NO_CONSOLE       = 0,
-    ALLOC_CONSOLE_RESULT_NEW_CONSOLE      = 1,
-    ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE = 2
-} ALLOC_CONSOLE_RESULT, *PALLOC_CONSOLE_RESULT;
-
-WINBASEAPI
-HRESULT
-WINAPI
-AllocConsoleWithOptions(
-    _In_opt_ PALLOC_CONSOLE_OPTIONS options,
-    _Out_opt_ PALLOC_CONSOLE_RESULT result
-    );
-
-#endif
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -169,7 +139,6 @@ ReadConsoleInputW(
     _In_ DWORD nLength,
     _Out_ _Deref_out_range_(<=, nLength) LPDWORD lpNumberOfEventsRead
     );
-
 #ifdef UNICODE
 #define ReadConsoleInput  ReadConsoleInputW
 #else
@@ -203,7 +172,6 @@ PeekConsoleInputW(
     _In_ DWORD nLength,
     _Out_ LPDWORD lpNumberOfEventsRead
     );
-
 #ifdef UNICODE
 #define PeekConsoleInput  PeekConsoleInputW
 #else
@@ -240,7 +208,6 @@ ReadConsoleW(
     _Out_ _Deref_out_range_(<=, nNumberOfCharsToRead) LPDWORD lpNumberOfCharsRead,
     _In_opt_ PCONSOLE_READCONSOLE_CONTROL pInputControl
     );
-
 #ifdef UNICODE
 #define ReadConsole  ReadConsoleW
 #else
@@ -268,7 +235,6 @@ WriteConsoleW(
     _Out_opt_ LPDWORD lpNumberOfCharsWritten,
     _Reserved_ LPVOID lpReserved
     );
-
 #ifdef UNICODE
 #define WriteConsole  WriteConsoleW
 #else
@@ -339,17 +305,6 @@ WINBASEAPI
 VOID
 WINAPI
 ClosePseudoConsole(
-    _In_ HPCON hPC
-    );
-
-#endif
-
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
-WINBASEAPI
-HRESULT
-WINAPI
-ReleasePseudoConsole(
     _In_ HPCON hPC
     );
 

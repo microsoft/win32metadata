@@ -713,7 +713,6 @@ Revision History:
 #define WM_POINTERDEVICEOUTOFRANGE      0x23A
 #endif /* WINVER >= 0x0602 */
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis is enabled
 
 #if(WINVER >= 0x0601)
 #define WM_TOUCH                        0x0240

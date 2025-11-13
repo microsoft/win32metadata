@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -587,7 +587,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICustomDevice = __uuidof(ICustomDevice);
+                extern MIDL_CONST_ID IID& IID_ICustomDevice = _uuidof(ICustomDevice);
             } /* Custom */
         } /* Devices */
     } /* Windows */
@@ -630,7 +630,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICustomDeviceStatics = __uuidof(ICustomDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_ICustomDeviceStatics = _uuidof(ICustomDeviceStatics);
             } /* Custom */
         } /* Devices */
     } /* Windows */
@@ -676,7 +676,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIOControlCode = __uuidof(IIOControlCode);
+                extern MIDL_CONST_ID IID& IID_IIOControlCode = _uuidof(IIOControlCode);
             } /* Custom */
         } /* Devices */
     } /* Windows */
@@ -716,7 +716,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIOControlCodeFactory = __uuidof(IIOControlCodeFactory);
+                extern MIDL_CONST_ID IID& IID_IIOControlCodeFactory = _uuidof(IIOControlCodeFactory);
             } /* Custom */
         } /* Devices */
     } /* Windows */
@@ -752,7 +752,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownDeviceTypesStatics = __uuidof(IKnownDeviceTypesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownDeviceTypesStatics = _uuidof(IKnownDeviceTypesStatics);
             } /* Custom */
         } /* Devices */
     } /* Windows */

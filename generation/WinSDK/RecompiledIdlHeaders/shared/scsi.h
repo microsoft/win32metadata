@@ -62,7 +62,7 @@ Revision History:
 
 // begin_ntminitape
 
-// begin_storport begin_privstorport
+// begin_storport begin_storportp
 
 //
 // Calculate the byte offset of a field in a structure of type type.
@@ -2745,7 +2745,6 @@ typedef struct _SCSI_EXTENDED_MESSAGE {
 #define SCSISTAT_RESERVATION_CONFLICT  0x18
 #define SCSISTAT_COMMAND_TERMINATED    0x22
 #define SCSISTAT_QUEUE_FULL            0x28
-#define SCSISTAT_TASK_ABORTED          0x40
 
 //
 // Enable Vital Product Data Flag (EVPD)
@@ -2782,13 +2781,6 @@ typedef struct _SCSI_EXTENDED_MESSAGE {
 
 typedef USHORT VERSION_DESCRIPTOR, *PVERSION_DESCRIPTOR;
 
-#define HOT_PLUGGABLE_NO_INFORMATION_PROVIDED      0x0
-#define HOT_PLUGGABLE_REMOVE_AS_SINGLE_OBJECT      0x1 
-#define HOT_PLUGGABLE_NOT_REMOVE_FROM_SCSI_DOMAIN  0x2
-#define HOT_PLUGGABLE_RESERVED                     0x3
-
-#define HOT_PLUGGABLE_FIELD_SHIFT  0x4
-
 #if (NTDDI_VERSION < NTDDI_WINXP)
 typedef struct _INQUIRYDATA {
     UCHAR DeviceType : 5;
@@ -2824,18 +2816,8 @@ typedef struct _INQUIRYDATA {
 typedef struct _INQUIRYDATA {
     UCHAR DeviceType : 5;
     UCHAR DeviceTypeQualifier : 3;
-    union {
-        struct {
-            UCHAR DeviceTypeModifier : 7;
-            UCHAR ReservedField1 : 1;
-        };
-        struct {
-            UCHAR ReservedField2 : 4;
-            UCHAR HotPluggable : 2;
-            UCHAR LU_CONG: 1;
-            UCHAR RemovableMedia : 1;
-        };
-    };
+    UCHAR DeviceTypeModifier : 7;
+    UCHAR RemovableMedia : 1;
     union {
         UCHAR Versions;
         struct {
@@ -4107,7 +4089,6 @@ typedef union _SENSE_DATA_EX {
 #define SCSI_ADSENSE_WARNING                               0x0B
 #define SCSI_ADSENSE_WRITE_ERROR                           0x0C
 #define SCSI_ADSENSE_COPY_TARGET_DEVICE_ERROR              0x0D
-#define SCSI_ADSENSE_CRC_OR_ECC_ERROR                      0x10
 #define SCSI_ADSENSE_UNRECOVERED_ERROR                     0x11
 #define SCSI_ADSENSE_TRACK_ERROR                           0x14
 #define SCSI_ADSENSE_SEEK_ERROR                            0x15
@@ -4127,10 +4108,8 @@ typedef union _SENSE_DATA_EX {
 #define SCSI_ADSENSE_MEDIUM_CHANGED                        0x28
 #define SCSI_ADSENSE_BUS_RESET                             0x29
 #define SCSI_ADSENSE_PARAMETERS_CHANGED                    0x2A
-#define SCSI_ADSENSE_COMMAND_SEQUENCE_ERROR                0x2C
 #define SCSI_ADSENSE_INSUFFICIENT_TIME_FOR_OPERATION       0x2E
 #define SCSI_ADSENSE_INVALID_MEDIA                         0x30
-#define SCSI_ADSENSE_MEDIUM_FORMAT_CORRUPTED               0x31
 #define SCSI_ADSENSE_DEFECT_LIST                           0x32
 #define SCSI_ADSENSE_LB_PROVISIONING                       0x38
 #define SCSI_ADSENSE_NO_MEDIA_IN_DEVICE                    0x3a
@@ -4224,19 +4203,10 @@ typedef union _SENSE_DATA_EX {
 #define SCSI_SENSEQ_DATA_UNDERRUN                0x04
 
 //
-// SCSI_ADSENSE_CRC_OR_ECC_ERROR (0x10) qualifiers
-//
-
-#define SCSI_SENSEQ_LOGICAL_BLOCK_GUARD_CHECK_FAILED     0x01
-#define SCSI_SENSEQ_LOGICAL_BLOCK_TAG_CHECK_FAILED       0x02
-#define SCSI_SENSEQ_LOGICAL_BLOCK_REF_TAG_CHECK_FAILED   0x03
-
-//
 // SCSI_ADSENSE_UNRECOVERED_ERROR (0x11) qualifiers
 //
 
 #define SCSI_SENSEQ_UNRECOVERED_READ_ERROR       0x00
-#define SCSI_SENSEQ_ERROR_TOO_LONG_TO_CORRECT    0x02
 
 //
 // SCSI_ADSENSE_SEEK_ERROR (0x15) qualifiers
@@ -4267,7 +4237,6 @@ typedef union _SENSE_DATA_EX {
 //
 
 #define SCSI_SENSEQ_NO_ACCESS_RIGHTS             0x02
-#define SCSI_SENSEQ_INVALID_LU_ID                0x09
 
 //
 // SCSI_ADSENSE_ILLEGAL_BLOCK (0x21) qualifiers
@@ -4303,12 +4272,6 @@ typedef union _SENSE_DATA_EX {
 #define SCSI_SENSEQ_CAPACITY_DATA_CHANGED        0x09
 
 //
-// SCSI_ADSENSE_COMMAND_SEQUENCE_ERROR (0x2C) qualifiers
-//
-
-#define SCSI_SENSEQ_PREVIOUS_RESERVATION_CONFLICT    0x09
-
-//
 // SCSI_ADSENSE_POSITION_ERROR (0x3b) qualifiers
 //
 
@@ -4323,12 +4286,6 @@ typedef union _SENSE_DATA_EX {
 #define SCSI_SENSEQ_UNKNOWN_FORMAT 0x01
 #define SCSI_SENSEQ_INCOMPATIBLE_FORMAT 0x02
 #define SCSI_SENSEQ_CLEANING_CARTRIDGE_INSTALLED 0x03
-
-//
-// SCSI_ADSENSE_MEDIUM_FORMAT_CORRUPTED (0x31) qualifiers
-//
-
-#define SCSI_SENSEQ_FORMAT_COMMAND_FAILED        0x01
 
 //
 // SCSI_ADSENSE_DEFECT_LIST (0x32) qualifiers
@@ -5748,15 +5705,6 @@ typedef struct STOR_ADDRESS_ALIGN _STOR_ADDRESS {
 // Define different storage address types
 #define STOR_ADDRESS_TYPE_UNKNOWN   0x0
 #define STOR_ADDRESS_TYPE_BTL8      0x1
-
-//
-// The following address types are defined in srb.h to avoid introducing new
-// dependencies on the legacy SCSI infrastructure.  If there are any future updates
-// to scsi.h the following values should be treated as reserved.
-//
-// STOR_ADDRESS_TYPE_NVME           0x2
-//
-
 #define STOR_ADDRESS_TYPE_MAX       0xffff
 
 // Define 8 bit bus, target and LUN address scheme
@@ -7341,7 +7289,7 @@ Returns:
 // [END] Collections of SCSI utiltiy functions
 //
 
-// end_storport end_privstorport
+// end_storport end_storportp
 
 // end_ntminitape
 

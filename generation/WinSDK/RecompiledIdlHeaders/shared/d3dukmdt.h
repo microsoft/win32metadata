@@ -51,7 +51,6 @@
 #define DXGKDDI_INTERFACE_VERSION_WDDM2_9    0xE003
 #define DXGKDDI_INTERFACE_VERSION_WDDM3_0    0xF003
 #define DXGKDDI_INTERFACE_VERSION_WDDM3_1   0x10004
-#define DXGKDDI_INTERFACE_VERSION_WDDM3_2   0x11007
 
 
 #define IS_OFFICIAL_DDI_INTERFACE_VERSION(version)                 \
@@ -74,12 +73,11 @@
              ((version) == DXGKDDI_INTERFACE_VERSION_WDDM2_8) ||   \
              ((version) == DXGKDDI_INTERFACE_VERSION_WDDM2_9) ||   \
              ((version) == DXGKDDI_INTERFACE_VERSION_WDDM3_0) ||   \
-             ((version) == DXGKDDI_INTERFACE_VERSION_WDDM3_1) ||   \
-             ((version) == DXGKDDI_INTERFACE_VERSION_WDDM3_2)      \
+             ((version) == DXGKDDI_INTERFACE_VERSION_WDDM3_1)      \
             )
 
 #if !defined(DXGKDDI_INTERFACE_VERSION)
-#define DXGKDDI_INTERFACE_VERSION           DXGKDDI_INTERFACE_VERSION_WDDM3_2
+#define DXGKDDI_INTERFACE_VERSION           DXGKDDI_INTERFACE_VERSION_WDDM3_1
 #endif // !defined(DXGKDDI_INTERFACE_VERSION)
 
 #define D3D_UMD_INTERFACE_VERSION_VISTA      0x000C
@@ -140,14 +138,11 @@
 #define D3D_UMD_INTERFACE_VERSION_WDDM3_1_1     0x10000
 #define D3D_UMD_INTERFACE_VERSION_WDDM3_1       D3D_UMD_INTERFACE_VERSION_WDDM3_1_1
 
-#define D3D_UMD_INTERFACE_VERSION_WDDM3_2_1     0x11000
-#define D3D_UMD_INTERFACE_VERSION_WDDM3_2       D3D_UMD_INTERFACE_VERSION_WDDM3_2_1
-
 // Components which depend on D3D_UMD_INTERFACE_VERSION need to be updated, static assert validation present.
 // Search for D3D_UMD_INTERFACE_VERSION across all depots to ensure all dependencies are updated.
 
 #if !defined(D3D_UMD_INTERFACE_VERSION)
-#define D3D_UMD_INTERFACE_VERSION           D3D_UMD_INTERFACE_VERSION_WDDM3_2
+#define D3D_UMD_INTERFACE_VERSION           D3D_UMD_INTERFACE_VERSION_WDDM3_1
 #endif // !defined(D3D_UMD_INTERFACE_VERSION)
 
 //
@@ -637,9 +632,6 @@ typedef enum _D3DDDI_DRIVERESCAPETYPE
 #if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_0)
     D3DDDI_DRIVERESCAPETYPE_CPUEVENTUSAGE               = 2,
 #endif
-#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
-    D3DDDI_DRIVERESCAPETYPE_BUILDTESTCOMMANDBUFFER      = 3,
-#endif
     D3DDDI_DRIVERESCAPETYPE_MAX,
 } D3DDDI_DRIVERESCAPETYPE;
 
@@ -685,8 +677,7 @@ typedef struct _D3DDDI_CREATECONTEXTFLAGS
      (D3D_UMD_INTERFACE_VERSION >= D3D_UMD_INTERFACE_VERSION_WDDM2_3_1))
             UINT    HwQueueSupported    : 1;      // 0x00000010
             UINT    NoKmdAccess         : 1;      // 0x00000020
-            UINT    TestContext         : 1;      // 0x00000040
-            UINT    Reserved            :25;      // 0xFFFFFF80
+            UINT    Reserved            :26;      // 0xFFFFFFC0
 #else
             UINT    Reserved            :28;      // 0xFFFFFFF0
 #endif // DXGKDDI_INTERFACE_VERSION
@@ -725,9 +716,7 @@ typedef struct _D3DDDI_CREATEHWQUEUEFLAGS
             UINT    NoBroadcastWait     : 1;      // 0x00000004
             UINT    NoKmdAccess         : 1;      // 0x00000008
             UINT    UserModeSubmission  : 1;      // 0x00000010
-            UINT    NativeProgressFence : 1;      // 0x00000020
-            UINT    TestQueue           : 1;      // 0x00000040
-            UINT    Reserved            :25;      // 0xFFFFFF80
+            UINT    Reserved            :27;      // 0xFFFFFFE0
         };
         UINT Value;
     };
@@ -1398,10 +1387,6 @@ typedef enum _D3DDDI_SYNCHRONIZATIONOBJECT_TYPE
     D3DDDI_PERIODIC_MONITORED_FENCE = 6,
 #endif // DXGKDDI_INTERFACE_VERSION
 
-#if ((DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_1) || \
-     (D3D_UMD_INTERFACE_VERSION >= D3D_UMD_INTERFACE_VERSION_WDDM3_1))
-    D3DDDI_NATIVE_FENCE             = 7,
-#endif
     D3DDDI_SYNCHRONIZATION_TYPE_LIMIT
 
 } D3DDDI_SYNCHRONIZATIONOBJECT_TYPE;
@@ -1798,19 +1783,10 @@ typedef struct _D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS
             UINT SignalByKmd                                    :  1;
 
 #if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_1)
-            UINT Unused                                         :  1;
 
-#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
-            // When set, the waiters for a shared sync object on CPU will be unblocked
-            // only when the shared sync object is finally destroyed. By default, CPU
-            // waiters are unblocked when a local sync object is destroyed, but the main
-            // shared sync object is still opened by another local sync object.
-            UINT UnwaitCpuWaitersOnlyOnDestroy                  :  1;
-            UINT Reserved                                       : 20;
-#else
+            // When set, indicates that the fence should be placed in GPU local memory if possible.
+            UINT LocalMemoryPreferred                           :  1;
             UINT Reserved                                       : 21;
-#endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
-
 #else
 
             UINT Reserved                                       : 22;
@@ -1902,81 +1878,28 @@ typedef struct _D3DDDI_SYNCHRONIZATIONOBJECTINFO2
 #if ((DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_1) || \
      (D3D_UMD_INTERFACE_VERSION >= D3D_UMD_INTERFACE_VERSION_WDDM3_1))
 
-#define D3DDDI_NATIVE_FENCE_PDD_SIZE 64
-
-typedef enum _D3DDDI_NATIVEFENCE_TYPE
-{
-    D3DDDI_NATIVEFENCE_TYPE_DEFAULT = 0,   // Full CPU and GPU interoperability.
-    D3DDDI_NATIVEFENCE_TYPE_INTRA_GPU = 1, // Special fence type for engine-engine synchronization, which
-                                           // does not support any CPU access or CPU wait/signal operations
-} D3DDDI_NATIVEFENCE_TYPE;
-
 typedef struct _D3DDDI_NATIVEFENCEMAPPING
 {
-    D3DKMT_PTR(VOID*,                       CurrentValueCpuVa);  // Read-only mapping of the current value for the CPU
-    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS   CurrentValueGpuVa;   // Read/write mapping of the current value for the GPU in the current process address space
-    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS   MonitoredValueGpuVa; // Read/write mapping of the monitored value for the GPU in the current process address space
-    D3DKMT_ALIGN64 BYTE                     Reserved[32];
+    D3DKMT_PTR(VOID*,                       CurrentValueCpuVa);     // Read-only mapping of the current value for the CPU
+    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS   CurrentValueGpuVa;      // Read/write mapping of the current value for the GPU in the current process address space
+    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS   MonitoredValueGpuVa;    // Read/write mapping of the monitored value for the GPU in the current process address space
 } D3DDDI_NATIVEFENCEMAPPING;
 
-typedef struct _D3DDDI_NATIVEFENCEINFO
+typedef struct _D3DDDI_CREATENATIVEFENCEINFO
 {
-    D3DKMT_ALIGN64 UINT64                   InitialFenceValue;  // in: initial fence value.
-    UINT                                    EngineAffinity;     // in: Defines physical adapters where the GPU VA is mapped
-    D3DDDI_NATIVEFENCE_TYPE                 Type;               // in: Type of the fence
-    D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS      Flags;              // in: Flags.
-    D3DDDI_NATIVEFENCEMAPPING               NativeFenceMapping; // out: process mapping information for the native fence
-    D3DKMT_ALIGN64 BYTE                     Reserved[28];
-} D3DDDI_NATIVEFENCEINFO;
+    D3DKMT_ALIGN64 UINT64                   InitialFenceValue;      // in: initial fence value.
 
-typedef enum _DXGK_NATIVE_FENCE_LOG_TYPE
-{
-    DXGK_NATIVE_FENCE_LOG_TYPE_WAITS   = 1,
-    DXGK_NATIVE_FENCE_LOG_TYPE_SIGNALS = 2
-} DXGK_NATIVE_FENCE_LOG_TYPE;
+    D3DKMT_PTR(_Field_size_bytes_(PrivateDriverDataSize)
+    PVOID,                                  pPrivateDriverData);    // in: Private driver data to pass to KMD CreateNativeFence call
+    UINT                                    PrivateDriverDataSize;  // in: size of pPrivateDriverData array in bytes
 
-typedef struct _DXGK_NATIVE_FENCE_LOG_HEADER
-{
-    union
-    {
-        struct
-        {
-            UINT32 FirstFreeEntryIndex; // same as LowPart of AtomicWraparoundAndEntryIndex
-            UINT32 WraparoundCount;     // same as HighPart of AtomicWraparoundAndEntryIndex
-        };
+    UINT                                    EngineAffinity;         // in: Defines physical adapters where the GPU VA is mapped
+    D3DDDI_SYNCHRONIZATIONOBJECT_FLAGS      Flags;                  // in: Flags.
 
-        ULARGE_INTEGER AtomicWraparoundAndEntryIndex;
-    };
+    D3DKMT_HANDLE                           hSyncObject;            // out: Handle to sync object in this process.
 
-    DXGK_NATIVE_FENCE_LOG_TYPE Type;
-    UINT64 NumberOfEntries;
-    UINT64 Reserved[2];
-}DXGK_NATIVE_FENCE_LOG_HEADER;
-
-typedef enum _DXGK_NATIVE_FENCE_LOG_OPERATION
-{
-    DXGK_NATIVE_FENCE_LOG_OPERATION_SIGNAL_EXECUTED = 0,
-    DXGK_NATIVE_FENCE_LOG_OPERATION_WAIT_UNBLOCKED = 1
-}DXGK_NATIVE_FENCE_LOG_OPERATION;
-
-typedef struct _DXGK_NATIVE_FENCE_LOG_ENTRY
-{
-    UINT64 FenceValue;                // UMD payload: Newly signaled/unblocked fence value 
-    D3DKMT_HANDLE hNativeFence;       // UMD payload: user mode D3DKMT_HANDLE of native fence to which this operation belongs
-    UINT OperationType;               // UMD payload: DXGK_FENCE_LOG_OPERATION type
-    UINT64 Reserved0;                 // Reserved for alignment
-    UINT64 FenceObservedGpuTimestamp; // GPU Payload: OPERATION_WAIT_UNBLOCKED only: GPU Time at which an unresolved wait command was seen by engine and stalled the HWQueue
-    UINT64 Reserved1;                 // Reserved for alignment
-    UINT64 FenceEndGpuTimestamp;      // GPU Payload: GPU Time at which the fence operation completed on GPU
-}DXGK_NATIVE_FENCE_LOG_ENTRY;
-
-typedef struct _DXGK_NATIVE_FENCE_LOG_BUFFER
-{
-    DXGK_NATIVE_FENCE_LOG_HEADER Header;
-
-    _Field_size_(Header.NumberOfEntries)
-    DXGK_NATIVE_FENCE_LOG_ENTRY Entries[1];
-}DXGK_NATIVE_FENCE_LOG_BUFFER;
+    D3DDDI_NATIVEFENCEMAPPING               NativeFenceMapping;     // out: process mapping information for the native fence
+} D3DDDI_CREATENATIVEFENCEINFO;
 
 #define D3DDDI_DOORBELL_PRIVATEDATA_MAX_BYTES_WDDM3_1 16
 
@@ -2092,231 +2015,6 @@ typedef struct _D3DDDI_QUERYREGISTRY_INFO
 #define D3DKMT_CROSS_ADAPTER_RESOURCE_HEIGHT_ALIGNMENT 4
 
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM1_3)
-
-#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_6)
-
-typedef enum _DXGK_FEATURE_CATEGORY
-{
-    DXGK_FEATURE_CATEGORY_DRIVER     = 0,
-    DXGK_FEATURE_CATEGORY_OS         = 1,
-    DXGK_FEATURE_CATEGORY_BUGFIX     = 2,
-    DXGK_FEATURE_CATEGORY_TEST       = 3,
-    DXGK_FEATURE_CATEGORY_RESERVED4  = 4,
-    DXGK_FEATURE_CATEGORY_RESERVED5  = 5,
-    DXGK_FEATURE_CATEGORY_RESERVED6  = 6,
-    DXGK_FEATURE_CATEGORY_RESERVED7  = 7,
-    DXGK_FEATURE_CATEGORY_RESERVED8  = 8,
-    DXGK_FEATURE_CATEGORY_RESERVED9  = 9,
-    DXGK_FEATURE_CATEGORY_RESERVED10 = 10,
-    DXGK_FEATURE_CATEGORY_RESERVED11 = 11,
-    DXGK_FEATURE_CATEGORY_RESERVED12 = 12,
-    DXGK_FEATURE_CATEGORY_RESERVED13 = 13,
-    DXGK_FEATURE_CATEGORY_RESERVED14 = 14,
-    DXGK_FEATURE_CATEGORY_RESERVED15 = 15,
-    DXGK_FEATURE_CATEGORY_MAX        = 16
-} DXGK_FEATURE_CATEGORY;
-
-#define DXGK_FEATURE_ID_CATEGORY_BITS 4
-#define DXGK_FEATURE_ID_FEATURE_BITS  (32 - DXGK_FEATURE_ID_CATEGORY_BITS)
-#define DXGK_FEATURE_ID_CATEGORY_SHIFT (32 - DXGK_FEATURE_ID_CATEGORY_BITS)
-#define DXGK_FEATURE_ID_MASK ((1 << DXGK_FEATURE_ID_CATEGORY_SHIFT) - 1)
-
-#define DXGK_DEFINE_FEATURE_ID(Category, IdValue) \
-    (((Category) << DXGK_FEATURE_ID_CATEGORY_SHIFT) | (IdValue))
-
-typedef enum _DXGK_DRIVER_FEATURE
-{
-    DXGK_DRIVER_FEATURE_HWSCH                               = 0, // Hardware accelerated GPU scheduling
-    DXGK_DRIVER_FEATURE_HWFLIPQUEUE                         = 1, // Hardware flip queue
-    DXGK_DRIVER_FEATURE_LDA_GPUPV                           = 2, // Support for LDA in GPU-PV
-    DXGK_DRIVER_FEATURE_KMD_SIGNAL_CPU_EVENT                = 3, // Support for signaling CPU event by KMD
-    DXGK_DRIVER_FEATURE_USER_MODE_SUBMISSION                = 4,
-    DXGK_DRIVER_FEATURE_SHARE_BACKING_STORE_WITH_KMD        = 5,
-    DXGK_DRIVER_FEATURE_RESERVED_1                          = 6,
-    DXGK_DRIVER_FEATURE_RESERVED_2                          = 7,
-    DXGK_DRIVER_FEATURE_RESERVED_3                          = 8,
-    DXGK_DRIVER_FEATURE_RESERVED_4                          = 9,
-    DXGK_DRIVER_FEATURE_RESERVED_5                          = 10,
-    DXGK_DRIVER_FEATURE_RESERVED_6                          = 11,
-    DXGK_DRIVER_FEATURE_RESERVED_7                          = 12,
-    DXGK_DRIVER_FEATURE_RESERVED_8                          = 13,
-    DXGK_DRIVER_FEATURE_RESERVED_9                          = 14,
-    DXGK_DRIVER_FEATURE_RESERVED_10                         = 15,
-    DXGK_DRIVER_FEATURE_RESERVED_11                         = 16,
-    DXGK_DRIVER_FEATURE_RESERVED_12                         = 17,
-    DXGK_DRIVER_FEATURE_RESERVED_13                         = 18,
-    DXGK_DRIVER_FEATURE_RESERVED_14                         = 19,
-    DXGK_DRIVER_FEATURE_RESERVED_15                         = 20,
-    DXGK_DRIVER_FEATURE_RESERVED_16                         = 21,
-    DXGK_DRIVER_FEATURE_RESERVED_17                         = 22,
-    DXGK_DRIVER_FEATURE_RESERVED_18                         = 23,
-    DXGK_DRIVER_FEATURE_RESERVED_19                         = 24,
-    DXGK_DRIVER_FEATURE_RESERVED_20                         = 25,
-    DXGK_DRIVER_FEATURE_RESERVED_21                         = 26,
-    DXGK_DRIVER_FEATURE_RESERVED_22                         = 27,
-    DXGK_DRIVER_FEATURE_RESERVED_23                         = 28,
-    DXGK_DRIVER_FEATURE_RESERVED_24                         = 29,
-    DXGK_DRIVER_FEATURE_RESERVED_25                         = 30,
-    DXGK_DRIVER_FEATURE_SAMPLE                              = 31,
-    DXGK_DRIVER_FEATURE_PAGE_BASED_MEMORY_MANAGER           = 32,
-    DXGK_DRIVER_FEATURE_KERNEL_MODE_TESTING                 = 33,
-    DXGK_DRIVER_FEATURE_64K_PT_DEMOTION_FIX                 = 34,
-    DXGK_DRIVER_FEATURE_GPUPV_PRESENT_HWQUEUE               = 35,
-    DXGK_DRIVER_FEATURE_GPUVAIOMMU                          = 36,
-    DXGK_DRIVER_FEATURE_NATIVE_FENCE                        = 37,
-
-    DXGK_DRIVER_FEATURE_MAX
-
-} DXGK_DRIVER_FEATURE;
-
-typedef enum _DXGK_OS_FEATURE
-{
-    DXGK_OS_FEATURE_QUERYSTATISTICS_EXTENSIONS              = 0,
-    DXGK_OS_FEATURE_RESERVE_GPUVA_ZERO_BASE_ADDRESS         = 1,
-    DXGK_OS_FEATURE_PER_PTE_PAGE_SIZE                       = 2,
-    DXGK_OS_FEATURE_FENCE_SIGNAL_FROM_SWS_NODE              = 3,
-    DXGK_OS_FEATURE_SUPPRESSVSYNC_INTERRUPTS                = 4,
-
-    DXGK_OS_FEATURE_MAX
-
-} DXGK_OS_FEATURE;
-
-
-//
-// For each feature in this enumeration, if the driver supports it,
-// it must invoke the OS QueryFeatureSupport callback
-// to report the level of support (experimental, stable, always on),
-// and only enable the feature if the OS returned Enabled=TRUE.
-// Drivers that don't support the feature don't have to call the OS to query its status.
-//
-typedef enum _DXGK_FEATURE_ID
-{
-    //
-    // Driver features
-    //
-    DXGK_FEATURE_HWSCH                          = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_HWSCH),
-    DXGK_FEATURE_HWFLIPQUEUE                    = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_HWFLIPQUEUE),
-    DXGK_FEATURE_LDA_GPUPV                      = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_LDA_GPUPV),
-    DXGK_FEATURE_KMD_SIGNAL_CPU_EVENT           = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_KMD_SIGNAL_CPU_EVENT),
-    DXGK_FEATURE_USER_MODE_SUBMISSION           = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_USER_MODE_SUBMISSION),
-    DXGK_FEATURE_SHARE_BACKING_STORE_WITH_KMD   = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_SHARE_BACKING_STORE_WITH_KMD),
-    DXGK_FEATURE_SAMPLE                         = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_SAMPLE),
-    DXGK_FEATURE_PAGE_BASED_MEMORY_MANAGER      = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_PAGE_BASED_MEMORY_MANAGER),
-    DXGK_FEATURE_KERNEL_MODE_TESTING            = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_KERNEL_MODE_TESTING),
-    DXGK_FEATURE_64K_PT_DEMOTION_FIX            = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_64K_PT_DEMOTION_FIX),
-    DXGK_FEATURE_GPUPV_PRESENT_HWQUEUE          = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_GPUPV_PRESENT_HWQUEUE),
-    DXGK_FEATURE_GPUVAIOMMU                     = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_GPUVAIOMMU),
-    DXGK_FEATURE_NATIVE_FENCE                   = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_DRIVER, DXGK_DRIVER_FEATURE_NATIVE_FENCE),
-
-    //
-    // OS features
-    //
-    DXGK_FEATURE_QUERYSTATISTICS_EXTENSIONS     = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_OS, DXGK_OS_FEATURE_QUERYSTATISTICS_EXTENSIONS),
-    DXGK_FEATURE_RESERVE_GPUVA_ZERO_BASE_ADDRESS = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_OS, DXGK_OS_FEATURE_RESERVE_GPUVA_ZERO_BASE_ADDRESS),
-    DXGK_FEATURE_PER_PTE_PAGE_SIZE              = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_OS, DXGK_OS_FEATURE_PER_PTE_PAGE_SIZE),
-    DXGK_FEATURE_FENCE_SIGNAL_FROM_SWS_NODE     = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_OS, DXGK_OS_FEATURE_FENCE_SIGNAL_FROM_SWS_NODE),
-    DXGK_FEATURE_SUPPRESSVSYNC_INTERRUPTS       = DXGK_DEFINE_FEATURE_ID(DXGK_FEATURE_CATEGORY_OS, DXGK_OS_FEATURE_SUPPRESSVSYNC_INTERRUPTS),
-
-
-} DXGK_FEATURE_ID;
-
-
-#define DXGK_FEATURE_MAX DXGK_DRIVER_FEATURE_MAX
-
-#endif // DXGKDDI_INTERFACE_VERSION_WDDM2_6
-
-#if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
-
-typedef UINT16 DXGK_FEATURE_VERSION;
-
-typedef struct _DXGK_ISFEATUREENABLED_RESULT
-{
-    UINT16 Version;
-    union
-    {
-        struct
-        {
-            UINT16 Enabled                  :  1;
-            UINT16 KnownFeature             :  1;
-            UINT16 SupportedByDriver        :  1;
-            UINT16 SupportedOnCurrentConfig :  1;
-            UINT16 Reserved                 : 12;
-        };
-        DXGK_FEATURE_VERSION Value;
-    };
-} DXGK_ISFEATUREENABLED_RESULT;
-
-typedef enum _D3DDDI_TESTCOMMANDBUFFEROP
-{
-    D3DDDI_TESTCOMMANDBUFFEROP_INVALID                      = 0,
-    D3DDDI_TESTCOMMANDBUFFEROP_COPY                         = 1,
-    D3DDDI_TESTCOMMANDBUFFEROP_FILL                         = 2,
-    D3DDDI_TESTCOMMANDBUFFEROP_INFINITE_LOOP                = 3,
-    D3DDDI_TESTCOMMANDBUFFEROP_INFINITE_PREEMPTABLE_LOOP    = 4,
-    D3DDDI_TESTCOMMANDBUFFEROP_MAX,
-} D3DDDI_TESTCOMMANDBUFFEROP;
-
-typedef struct _D3DDDI_TESTCOMMANDBUFFER_COPY
-{
-    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS  SrcAddress;
-    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS  DstAddress;
-    UINT                    NumBytes;  // Multiple of 4 bytes
-} D3DDDI_TESTCOMMANDBUFFER_COPY;
-
-typedef struct _D3DDDI_TESTCOMMANDBUFFER_FILL
-{
-    D3DKMT_ALIGN64 D3DGPU_VIRTUAL_ADDRESS  DstAddress;
-    UINT                    NumBytes; // Multiple of 4 bytes
-    UINT                    Pattern;
-} D3DDDI_TESTCOMMANDBUFFER_FILL;
-
-typedef struct _D3DDDI_TESTCOMMANDBUFFER
-{
-    union 
-    {
-        D3DDDI_TESTCOMMANDBUFFER_COPY  Copy;
-        D3DDDI_TESTCOMMANDBUFFER_FILL  Fill;
-        char                           Reserved[64];    // Reserved for future extensions
-    };
-    D3DDDI_TESTCOMMANDBUFFEROP  Operation;
-    UINT                        Reserved1;
-} D3DDDI_TESTCOMMANDBUFFER;
-#if defined(__cplusplus) && !defined(SORTPP_PASS)
-static_assert(sizeof(D3DDDI_TESTCOMMANDBUFFER) == 72, "D3DDDI_TESTCOMMANDBUFFER must be 72 bytes");
-#endif
-
-typedef struct _D3DDDI_BUILDTESTCOMMANDBUFFERFLAGS
-{
-    union
-    {
-        struct
-        {
-            UINT  HardwareQueue : 1;
-            UINT  Reserved      : 31;
-        };
-        UINT Value;
-    };
-} D3DDDI_BUILDTESTCOMMANDBUFFERFLAGS;
-
-#define D3DDDI_MAXTESTBUFFERSIZE 4096
-#define D3DDDI_MAXTESTBUFFERPRIVATEDRIVERDATASIZE 1024
-
-typedef struct _D3DDDI_DRIVERESCAPE_BUILDTESTCOMMANDBUFFER
-{
-    D3DDDI_DRIVERESCAPETYPE             EscapeType;
-    D3DKMT_HANDLE                       hDevice;
-    D3DKMT_HANDLE                       hContext;
-    D3DDDI_BUILDTESTCOMMANDBUFFERFLAGS  Flags;
-    D3DDDI_TESTCOMMANDBUFFER            Command;
-    D3DKMT_PTR(_Field_size_bytes_(DmaBufferSize)
-    PVOID,                              pDmaBuffer);
-    D3DKMT_PTR(_Field_size_bytes_(DmaBufferPrivateDataSize)
-    PVOID,                              pDmaBufferPrivateData);
-    UINT                                DmaBufferSize;
-    UINT                                DmaBufferPrivateDataSize;
-} D3DDDI_DRIVERESCAPE_BUILDTESTCOMMANDBUFFER;
-
-#endif // DXGKDDI_INTERFACE_VERSION_WDDM3_2
 
 #endif // (NTDDI_VERSION >= NTDDI_LONGHORN) || defined(D3DKMDT_SPECIAL_MULTIPLATFORM_TOOL)
 

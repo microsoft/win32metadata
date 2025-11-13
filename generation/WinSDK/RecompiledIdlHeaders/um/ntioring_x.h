@@ -40,9 +40,6 @@ typedef enum IORING_VERSION {
     /// <summary>Major update; Adds write, FLUSH and DRAIN support</summary>
     IORING_VERSION_3 = 300,
 #endif
-
-    /// <summary>Major update; Adds scatter-gather support</summary>
-    IORING_VERSION_4 = 400,
 } IORING_VERSION;
 
 /// <summary>
@@ -139,12 +136,6 @@ typedef enum IORING_OP_CODE {
     /// <summary>Flush buffers for a file</summary>
     IORING_OP_FLUSH,
 #endif
-
-    /// <summary>Read from a file to buffer segments</summary>
-    IORING_OP_READ_SCATTER,
-
-    /// <summary>Write to a file from buffer segments</summary>
-    IORING_OP_WRITE_GATHER,
 } IORING_OP_CODE;
 
 /// <summary>Buffer data for registering buffers with an IoRing</summary>

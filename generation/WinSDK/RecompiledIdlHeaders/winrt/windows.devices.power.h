@@ -87,16 +87,12 @@
 
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
-#if !defined(WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION)
-#define WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION 0x10000
-#endif // defined(WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION)
-
 #if !defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 #define WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION 0x40000
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -109,8 +105,6 @@
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
 #include "Windows.System.Power.h"
-// Importing Collections header
-#include <windows.foundation.collections.h>
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
@@ -158,51 +152,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CPower_CIBatteryStatics ABI::Windows::Devices::Power::IBatteryStatics
 
 #endif // ____x_ABI_CWindows_CDevices_CPower_CIBatteryStatics_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                interface IPowerGridData;
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData ABI::Windows::Devices::Power::IPowerGridData
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                interface IPowerGridForecast;
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast ABI::Windows::Devices::Power::IPowerGridForecast
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                interface IPowerGridForecastStatics;
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics ABI::Windows::Devices::Power::IPowerGridForecastStatics
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -271,122 +220,6 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::Devices::Power::Battery*> 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                class PowerGridData;
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#ifndef DEF___FIIterator_1_Windows__CDevices__CPower__CPowerGridData_USE
-#define DEF___FIIterator_1_Windows__CDevices__CPower__CPowerGridData_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("96f5ff4c-64f3-5eab-b36a-48283ddda59f"))
-IIterator<ABI::Windows::Devices::Power::PowerGridData*> : IIterator_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Power::PowerGridData*, ABI::Windows::Devices::Power::IPowerGridData*>>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IIterator`1<Windows.Devices.Power.PowerGridData>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IIterator<ABI::Windows::Devices::Power::PowerGridData*> __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_t;
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CDevices__CPower__CPowerGridData_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIIterator_1_Windows__CDevices__CPower__CPowerGridData_USE */
-
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#ifndef DEF___FIIterable_1_Windows__CDevices__CPower__CPowerGridData_USE
-#define DEF___FIIterable_1_Windows__CDevices__CPower__CPowerGridData_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("ad396c1e-0752-5eab-b2e8-f4da8f31d9ba"))
-IIterable<ABI::Windows::Devices::Power::PowerGridData*> : IIterable_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Power::PowerGridData*, ABI::Windows::Devices::Power::IPowerGridData*>>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IIterable`1<Windows.Devices.Power.PowerGridData>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IIterable<ABI::Windows::Devices::Power::PowerGridData*> __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_t;
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CDevices__CPower__CPowerGridData_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIIterable_1_Windows__CDevices__CPower__CPowerGridData_USE */
-
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#ifndef DEF___FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_USE
-#define DEF___FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
-template <>
-struct __declspec(uuid("e204ee85-7062-5207-ba91-7103384d5b97"))
-IVectorView<ABI::Windows::Devices::Power::PowerGridData*> : IVectorView_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Power::PowerGridData*, ABI::Windows::Devices::Power::IPowerGridData*>>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.Collections.IVectorView`1<Windows.Devices.Power.PowerGridData>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IVectorView<ABI::Windows::Devices::Power::PowerGridData*> __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_t;
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_t
-/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_USE */
-
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-
-#ifndef DEF___FIEventHandler_1_IInspectable_USE
-#define DEF___FIEventHandler_1_IInspectable_USE
-#if !defined(RO_NO_TEMPLATE_NAME)
-namespace ABI { namespace Windows { namespace Foundation {
-template <>
-struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b"))
-IEventHandler<IInspectable*> : IEventHandler_impl<IInspectable*>
-{
-    static const wchar_t* z_get_rc_name_impl()
-    {
-        return L"Windows.Foundation.EventHandler`1<Object>";
-    }
-};
-// Define a typedef for the parameterized interface specialization's mangled name.
-// This allows code which uses the mangled name for the parameterized interface to access the
-// correct parameterized interface specialization.
-typedef IEventHandler<IInspectable*> __FIEventHandler_1_IInspectable_t;
-#define __FIEventHandler_1_IInspectable ABI::Windows::Foundation::__FIEventHandler_1_IInspectable_t
-/* Foundation */ } /* Windows */ } /* ABI */ }
-
-#endif // !defined(RO_NO_TEMPLATE_NAME)
-#endif /* DEF___FIEventHandler_1_IInspectable_USE */
-
-
 
 #ifndef DEF___FIReference_1_int_USE
 #define DEF___FIReference_1_int_USE
@@ -439,14 +272,6 @@ typedef ITypedEventHandler<ABI::Windows::Devices::Power::Battery*, IInspectable*
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-namespace ABI {
-    namespace Windows {
-        namespace Foundation {
-            typedef struct DateTime DateTime;
-        } /* Foundation */
-    } /* Windows */
-} /* ABI */
-
 #ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 namespace ABI {
@@ -459,14 +284,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CFoundation_CIPropertyValue ABI::Windows::Foundation::IPropertyValue
 
 #endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
-
-namespace ABI {
-    namespace Windows {
-        namespace Foundation {
-            typedef struct TimeSpan TimeSpan;
-        } /* Foundation */
-    } /* Windows */
-} /* ABI */
 
 namespace ABI {
     namespace Windows {
@@ -483,16 +300,6 @@ namespace ABI {
         namespace Devices {
             namespace Power {
                 class BatteryReport;
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                class PowerGridForecast;
             } /* Power */
         } /* Devices */
     } /* Windows */
@@ -534,7 +341,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBattery = __uuidof(IBattery);
+                extern MIDL_CONST_ID IID& IID_IBattery = _uuidof(IBattery);
             } /* Power */
         } /* Devices */
     } /* Windows */
@@ -582,7 +389,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBatteryReport = __uuidof(IBatteryReport);
+                extern MIDL_CONST_ID IID& IID_IBatteryReport = _uuidof(IBatteryReport);
             } /* Power */
         } /* Devices */
     } /* Windows */
@@ -625,7 +432,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBatteryStatics = __uuidof(IBatteryStatics);
+                extern MIDL_CONST_ID IID& IID_IBatteryStatics = _uuidof(IBatteryStatics);
             } /* Power */
         } /* Devices */
     } /* Windows */
@@ -634,130 +441,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIBatteryStatics;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIBatteryStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Devices.Power.IPowerGridData
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridData
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridData[] = L"Windows.Devices.Power.IPowerGridData";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                MIDL_INTERFACE("c360fb17-fc92-5f6e-999d-16a4cf9d6c40")
-                IPowerGridData : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE get_Severity(
-                        DOUBLE* value
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE get_IsLowUserExperienceImpact(
-                        boolean* value
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IPowerGridData = __uuidof(IPowerGridData);
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridData;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Devices.Power.IPowerGridForecast
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridForecast
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridForecast[] = L"Windows.Devices.Power.IPowerGridForecast";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                MIDL_INTERFACE("077e4de9-ed60-58bb-a850-003c6a138685")
-                IPowerGridForecast : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE get_StartTime(
-                        ABI::Windows::Foundation::DateTime* value
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE get_BlockDuration(
-                        ABI::Windows::Foundation::TimeSpan* value
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE get_Forecast(
-                        __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData** value
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IPowerGridForecast = __uuidof(IPowerGridForecast);
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Devices.Power.IPowerGridForecastStatics
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridForecast
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridForecastStatics[] = L"Windows.Devices.Power.IPowerGridForecastStatics";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Power {
-                MIDL_INTERFACE("5b78c806-2e4e-5bcc-bb34-cb81c60f9e12")
-                IPowerGridForecastStatics : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE GetForecast(
-                        ABI::Windows::Devices::Power::IPowerGridForecast** result
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE add_ForecastUpdated(
-                        __FIEventHandler_1_IInspectable* handler,
-                        EventRegistrationToken* token
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE remove_ForecastUpdated(
-                        EventRegistrationToken token
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IPowerGridForecastStatics = __uuidof(IPowerGridForecastStatics);
-            } /* Power */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
 
 /*
  *
@@ -804,49 +487,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-/*
- *
- * Class Windows.Devices.Power.PowerGridData
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Power.IPowerGridData ** Default Interface **
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#ifndef RUNTIMECLASS_Windows_Devices_Power_PowerGridData_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Power_PowerGridData_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Power_PowerGridData[] = L"Windows.Devices.Power.PowerGridData";
-#endif
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Class Windows.Devices.Power.PowerGridForecast
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Power.IPowerGridForecastStatics interface starting with version 1.0 of the Windows.Devices.Power.PowerGridApiContract API contract
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Power.IPowerGridForecast ** Default Interface **
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#ifndef RUNTIMECLASS_Windows_Devices_Power_PowerGridForecast_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Power_PowerGridForecast_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Power_PowerGridForecast[] = L"Windows.Devices.Power.PowerGridForecast";
-#endif
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
 #else // !defined(__cplusplus)
 /* Forward Declarations */
 #ifndef ____x_ABI_CWindows_CDevices_CPower_CIBattery_FWD_DEFINED__
@@ -866,24 +506,6 @@ typedef interface __x_ABI_CWindows_CDevices_CPower_CIBatteryReport __x_ABI_CWind
 typedef interface __x_ABI_CWindows_CDevices_CPower_CIBatteryStatics __x_ABI_CWindows_CDevices_CPower_CIBatteryStatics;
 
 #endif // ____x_ABI_CWindows_CDevices_CPower_CIBatteryStatics_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridData __x_ABI_CWindows_CDevices_CPower_CIPowerGridData;
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast;
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics;
-
-#endif // ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -1014,283 +636,6 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPower__CBatte
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CPower__CBattery_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____FIIterator_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__)
-#define ____FIIterator_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-
-typedef interface __FIIterator_1_Windows__CDevices__CPower__CPowerGridData __FIIterator_1_Windows__CDevices__CPower__CPowerGridData;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIIterator_1_Windows__CDevices__CPower__CPowerGridData;
-
-typedef struct __FIIterator_1_Windows__CDevices__CPower__CPowerGridDataVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridData** result);
-    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CDevices__CPower__CPowerGridData* This,
-        UINT32 itemsLength,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridData** items,
-        UINT32* result);
-
-    END_INTERFACE
-} __FIIterator_1_Windows__CDevices__CPower__CPowerGridDataVtbl;
-
-interface __FIIterator_1_Windows__CDevices__CPower__CPowerGridData
-{
-    CONST_VTBL struct __FIIterator_1_Windows__CDevices__CPower__CPowerGridDataVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_get_Current(This, result) \
-    ((This)->lpVtbl->get_Current(This, result))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_get_HasCurrent(This, result) \
-    ((This)->lpVtbl->get_HasCurrent(This, result))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_MoveNext(This, result) \
-    ((This)->lpVtbl->MoveNext(This, result))
-
-#define __FIIterator_1_Windows__CDevices__CPower__CPowerGridData_GetMany(This, itemsLength, items, result) \
-    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIIterator_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____FIIterable_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__)
-#define ____FIIterable_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-
-typedef interface __FIIterable_1_Windows__CDevices__CPower__CPowerGridData __FIIterable_1_Windows__CDevices__CPower__CPowerGridData;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIIterable_1_Windows__CDevices__CPower__CPowerGridData;
-
-typedef struct __FIIterable_1_Windows__CDevices__CPower__CPowerGridDataVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CDevices__CPower__CPowerGridData* This,
-        __FIIterator_1_Windows__CDevices__CPower__CPowerGridData** result);
-
-    END_INTERFACE
-} __FIIterable_1_Windows__CDevices__CPower__CPowerGridDataVtbl;
-
-interface __FIIterable_1_Windows__CDevices__CPower__CPowerGridData
-{
-    CONST_VTBL struct __FIIterable_1_Windows__CDevices__CPower__CPowerGridDataVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIIterable_1_Windows__CDevices__CPower__CPowerGridData_First(This, result) \
-    ((This)->lpVtbl->First(This, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIIterable_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__)
-#define ____FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-
-typedef interface __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIVectorView_1_Windows__CDevices__CPower__CPowerGridData;
-
-typedef struct __FIVectorView_1_Windows__CDevices__CPower__CPowerGridDataVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        UINT32 index,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridData** result);
-    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        UINT32* result);
-    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridData* value,
-        UINT32* index,
-        boolean* result);
-    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CDevices__CPower__CPowerGridData* This,
-        UINT32 startIndex,
-        UINT32 itemsLength,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridData** items,
-        UINT32* result);
-
-    END_INTERFACE
-} __FIVectorView_1_Windows__CDevices__CPower__CPowerGridDataVtbl;
-
-interface __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData
-{
-    CONST_VTBL struct __FIVectorView_1_Windows__CDevices__CPower__CPowerGridDataVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_GetAt(This, index, result) \
-    ((This)->lpVtbl->GetAt(This, index, result))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_get_Size(This, result) \
-    ((This)->lpVtbl->get_Size(This, result))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_IndexOf(This, value, index, result) \
-    ((This)->lpVtbl->IndexOf(This, value, index, result))
-
-#define __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_GetMany(This, startIndex, itemsLength, items, result) \
-    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIVectorView_1_Windows__CDevices__CPower__CPowerGridData_INTERFACE_DEFINED__
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-#if !defined(____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__)
-#define ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
-
-typedef interface __FIEventHandler_1_IInspectable __FIEventHandler_1_IInspectable;
-
-//  Declare the parameterized interface IID.
-EXTERN_C const IID IID___FIEventHandler_1_IInspectable;
-
-typedef struct __FIEventHandler_1_IInspectableVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIEventHandler_1_IInspectable* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__FIEventHandler_1_IInspectable* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__FIEventHandler_1_IInspectable* This);
-    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIEventHandler_1_IInspectable* This,
-        IInspectable* sender,
-        IInspectable* args);
-
-    END_INTERFACE
-} __FIEventHandler_1_IInspectableVtbl;
-
-interface __FIEventHandler_1_IInspectable
-{
-    CONST_VTBL struct __FIEventHandler_1_IInspectableVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __FIEventHandler_1_IInspectable_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __FIEventHandler_1_IInspectable_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __FIEventHandler_1_IInspectable_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __FIEventHandler_1_IInspectable_Invoke(This, sender, args) \
-    ((This)->lpVtbl->Invoke(This, sender, args))
-
-#endif /* COBJMACROS */
-
-#endif // ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
-
 #if !defined(____FIReference_1_int_INTERFACE_DEFINED__)
 #define ____FIReference_1_int_INTERFACE_DEFINED__
 
@@ -1402,15 +747,11 @@ interface __FITypedEventHandler_2_Windows__CDevices__CPower__CBattery_IInspectab
 #endif // ____FITypedEventHandler_2_Windows__CDevices__CPower__CBattery_IInspectable_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-typedef struct __x_ABI_CWindows_CFoundation_CDateTime __x_ABI_CWindows_CFoundation_CDateTime;
-
 #ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CFoundation_CIPropertyValue __x_ABI_CWindows_CFoundation_CIPropertyValue;
 
 #endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
-
-typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
 typedef enum __x_ABI_CWindows_CSystem_CPower_CBatteryStatus __x_ABI_CWindows_CSystem_CPower_CBatteryStatus;
 
@@ -1670,239 +1011,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIBatteryStatics;
 
 /*
  *
- * Interface Windows.Devices.Power.IPowerGridData
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridData
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridData[] = L"Windows.Devices.Power.IPowerGridData";
-typedef struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridDataVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_Severity)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        DOUBLE* value);
-    HRESULT (STDMETHODCALLTYPE* get_IsLowUserExperienceImpact)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridData* This,
-        boolean* value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CPower_CIPowerGridDataVtbl;
-
-interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridData
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridDataVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_get_Severity(This, value) \
-    ((This)->lpVtbl->get_Severity(This, value))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridData_get_IsLowUserExperienceImpact(This, value) \
-    ((This)->lpVtbl->get_IsLowUserExperienceImpact(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridData;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridData_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Devices.Power.IPowerGridForecast
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridForecast
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridForecast[] = L"Windows.Devices.Power.IPowerGridForecast";
-typedef struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_StartTime)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        struct __x_ABI_CWindows_CFoundation_CDateTime* value);
-    HRESULT (STDMETHODCALLTYPE* get_BlockDuration)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        struct __x_ABI_CWindows_CFoundation_CTimeSpan* value);
-    HRESULT (STDMETHODCALLTYPE* get_Forecast)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast* This,
-        __FIVectorView_1_Windows__CDevices__CPower__CPowerGridData** value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastVtbl;
-
-interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_get_StartTime(This, value) \
-    ((This)->lpVtbl->get_StartTime(This, value))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_get_BlockDuration(This, value) \
-    ((This)->lpVtbl->get_BlockDuration(This, value))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_get_Forecast(This, value) \
-    ((This)->lpVtbl->get_Forecast(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Devices.Power.IPowerGridForecastStatics
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Power.PowerGridForecast
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#if !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Power_IPowerGridForecastStatics[] = L"Windows.Devices.Power.IPowerGridForecastStatics";
-typedef struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStaticsVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* GetForecast)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecast** result);
-    HRESULT (STDMETHODCALLTYPE* add_ForecastUpdated)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        __FIEventHandler_1_IInspectable* handler,
-        EventRegistrationToken* token);
-    HRESULT (STDMETHODCALLTYPE* remove_ForecastUpdated)(__x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics* This,
-        EventRegistrationToken token);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStaticsVtbl;
-
-interface __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStaticsVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_GetForecast(This, result) \
-    ((This)->lpVtbl->GetForecast(This, result))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_add_ForecastUpdated(This, handler, token) \
-    ((This)->lpVtbl->add_ForecastUpdated(This, handler, token))
-
-#define __x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_remove_ForecastUpdated(This, token) \
-    ((This)->lpVtbl->remove_ForecastUpdated(This, token))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CPower_CIPowerGridForecastStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
  * Class Windows.Devices.Power.Battery
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1945,49 +1053,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Power_BatteryReport[] = L"Windows.Devices.Power.BatteryReport";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Class Windows.Devices.Power.PowerGridData
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Power.IPowerGridData ** Default Interface **
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#ifndef RUNTIMECLASS_Windows_Devices_Power_PowerGridData_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Power_PowerGridData_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Power_PowerGridData[] = L"Windows.Devices.Power.PowerGridData";
-#endif
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Class Windows.Devices.Power.PowerGridForecast
- *
- * Introduced to Windows.Devices.Power.PowerGridApiContract in version 1.0
- *
- * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Power.IPowerGridForecastStatics interface starting with version 1.0 of the Windows.Devices.Power.PowerGridApiContract API contract
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Power.IPowerGridForecast ** Default Interface **
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
-#ifndef RUNTIMECLASS_Windows_Devices_Power_PowerGridForecast_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Power_PowerGridForecast_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Power_PowerGridForecast[] = L"Windows.Devices.Power.PowerGridForecast";
-#endif
-#endif // WINDOWS_DEVICES_POWER_POWERGRIDAPICONTRACT_VERSION >= 0x10000
 
 #endif // defined(__cplusplus)
 #pragma pop_macro("MIDL_CONST_ID")

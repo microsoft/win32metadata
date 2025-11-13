@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -658,7 +658,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentRestrictionsBrowsePolicy = __uuidof(IContentRestrictionsBrowsePolicy);
+                extern MIDL_CONST_ID IID& IID_IContentRestrictionsBrowsePolicy = _uuidof(IContentRestrictionsBrowsePolicy);
             } /* ContentRestrictions */
         } /* Media */
     } /* Windows */
@@ -721,7 +721,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRatedContentDescription = __uuidof(IRatedContentDescription);
+                extern MIDL_CONST_ID IID& IID_IRatedContentDescription = _uuidof(IRatedContentDescription);
             } /* ContentRestrictions */
         } /* Media */
     } /* Windows */
@@ -760,7 +760,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRatedContentDescriptionFactory = __uuidof(IRatedContentDescriptionFactory);
+                extern MIDL_CONST_ID IID& IID_IRatedContentDescriptionFactory = _uuidof(IRatedContentDescriptionFactory);
             } /* ContentRestrictions */
         } /* Media */
     } /* Windows */
@@ -811,7 +811,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRatedContentRestrictions = __uuidof(IRatedContentRestrictions);
+                extern MIDL_CONST_ID IID& IID_IRatedContentRestrictions = _uuidof(IRatedContentRestrictions);
             } /* ContentRestrictions */
         } /* Media */
     } /* Windows */
@@ -848,7 +848,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRatedContentRestrictionsFactory = __uuidof(IRatedContentRestrictionsFactory);
+                extern MIDL_CONST_ID IID& IID_IRatedContentRestrictionsFactory = _uuidof(IRatedContentRestrictionsFactory);
             } /* ContentRestrictions */
         } /* Media */
     } /* Windows */
@@ -910,8 +910,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.ContentRestrictions.IRatedContentRestrictionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.ContentRestrictions.IRatedContentRestrictionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.ContentRestrictions.IRatedContentRestrictions ** Default Interface **
@@ -2323,8 +2323,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.ContentRestrictions.IRatedContentRestrictionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.ContentRestrictions.IRatedContentRestrictionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Media.ContentRestrictions.IRatedContentRestrictions ** Default Interface **

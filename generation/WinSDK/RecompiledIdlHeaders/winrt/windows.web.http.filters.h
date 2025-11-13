@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -1041,7 +1041,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter = __uuidof(IHttpBaseProtocolFilter);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter = _uuidof(IHttpBaseProtocolFilter);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1082,7 +1082,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter2 = __uuidof(IHttpBaseProtocolFilter2);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter2 = _uuidof(IHttpBaseProtocolFilter2);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1123,7 +1123,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter3 = __uuidof(IHttpBaseProtocolFilter3);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter3 = _uuidof(IHttpBaseProtocolFilter3);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1166,7 +1166,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE ClearAuthenticationCache(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter4 = __uuidof(IHttpBaseProtocolFilter4);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter4 = _uuidof(IHttpBaseProtocolFilter4);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1204,7 +1204,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter5 = __uuidof(IHttpBaseProtocolFilter5);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilter5 = _uuidof(IHttpBaseProtocolFilter5);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1243,7 +1243,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilterStatics = __uuidof(IHttpBaseProtocolFilterStatics);
+                    extern MIDL_CONST_ID IID& IID_IHttpBaseProtocolFilterStatics = _uuidof(IHttpBaseProtocolFilterStatics);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1290,7 +1290,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpCacheControl = __uuidof(IHttpCacheControl);
+                    extern MIDL_CONST_ID IID& IID_IHttpCacheControl = _uuidof(IHttpCacheControl);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1330,7 +1330,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpFilter = __uuidof(IHttpFilter);
+                    extern MIDL_CONST_ID IID& IID_IHttpFilter = _uuidof(IHttpFilter);
                 } /* Filters */
             } /* Http */
         } /* Web */
@@ -1384,7 +1384,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHttpServerCustomValidationRequestedEventArgs = __uuidof(IHttpServerCustomValidationRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IHttpServerCustomValidationRequestedEventArgs = _uuidof(IHttpServerCustomValidationRequestedEventArgs);
                 } /* Filters */
             } /* Http */
         } /* Web */

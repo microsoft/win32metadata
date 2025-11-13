@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -535,7 +535,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaTranscoder = __uuidof(IMediaTranscoder);
+                extern MIDL_CONST_ID IID& IID_IMediaTranscoder = _uuidof(IMediaTranscoder);
             } /* Transcoding */
         } /* Media */
     } /* Windows */
@@ -580,7 +580,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaTranscoder2 = __uuidof(IMediaTranscoder2);
+                extern MIDL_CONST_ID IID& IID_IMediaTranscoder2 = _uuidof(IMediaTranscoder2);
             } /* Transcoding */
         } /* Media */
     } /* Windows */
@@ -622,7 +622,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrepareTranscodeResult = __uuidof(IPrepareTranscodeResult);
+                extern MIDL_CONST_ID IID& IID_IPrepareTranscodeResult = _uuidof(IPrepareTranscodeResult);
             } /* Transcoding */
         } /* Media */
     } /* Windows */

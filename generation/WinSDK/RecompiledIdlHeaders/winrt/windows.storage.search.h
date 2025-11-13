@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2281,7 +2281,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentIndexer = __uuidof(IContentIndexer);
+                extern MIDL_CONST_ID IID& IID_IContentIndexer = _uuidof(IContentIndexer);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2336,7 +2336,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentIndexerQuery = __uuidof(IContentIndexerQuery);
+                extern MIDL_CONST_ID IID& IID_IContentIndexerQuery = _uuidof(IContentIndexerQuery);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2387,7 +2387,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentIndexerQueryOperations = __uuidof(IContentIndexerQueryOperations);
+                extern MIDL_CONST_ID IID& IID_IContentIndexerQueryOperations = _uuidof(IContentIndexerQueryOperations);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2427,7 +2427,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentIndexerStatics = __uuidof(IContentIndexerStatics);
+                extern MIDL_CONST_ID IID& IID_IContentIndexerStatics = _uuidof(IContentIndexerStatics);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2479,7 +2479,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIndexableContent = __uuidof(IIndexableContent);
+                extern MIDL_CONST_ID IID& IID_IIndexableContent = _uuidof(IIndexableContent);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2569,7 +2569,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IQueryOptions = __uuidof(IQueryOptions);
+                extern MIDL_CONST_ID IID& IID_IQueryOptions = _uuidof(IQueryOptions);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2611,7 +2611,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IQueryOptionsFactory = __uuidof(IQueryOptionsFactory);
+                extern MIDL_CONST_ID IID& IID_IQueryOptionsFactory = _uuidof(IQueryOptionsFactory);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2647,7 +2647,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IQueryOptionsWithProviderFilter = __uuidof(IQueryOptionsWithProviderFilter);
+                extern MIDL_CONST_ID IID& IID_IQueryOptionsWithProviderFilter = _uuidof(IQueryOptionsWithProviderFilter);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2691,7 +2691,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageFileQueryResult = __uuidof(IStorageFileQueryResult);
+                extern MIDL_CONST_ID IID& IID_IStorageFileQueryResult = _uuidof(IStorageFileQueryResult);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2731,7 +2731,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageFileQueryResult2 = __uuidof(IStorageFileQueryResult2);
+                extern MIDL_CONST_ID IID& IID_IStorageFileQueryResult2 = _uuidof(IStorageFileQueryResult2);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2831,7 +2831,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageFolderQueryOperations = __uuidof(IStorageFolderQueryOperations);
+                extern MIDL_CONST_ID IID& IID_IStorageFolderQueryOperations = _uuidof(IStorageFolderQueryOperations);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2875,7 +2875,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageFolderQueryResult = __uuidof(IStorageFolderQueryResult);
+                extern MIDL_CONST_ID IID& IID_IStorageFolderQueryResult = _uuidof(IStorageFolderQueryResult);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2919,7 +2919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageItemQueryResult = __uuidof(IStorageItemQueryResult);
+                extern MIDL_CONST_ID IID& IID_IStorageItemQueryResult = _uuidof(IStorageItemQueryResult);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2958,7 +2958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageLibraryChangeTrackerTriggerDetails = __uuidof(IStorageLibraryChangeTrackerTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeTrackerTriggerDetails = _uuidof(IStorageLibraryChangeTrackerTriggerDetails);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -2998,7 +2998,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageLibraryContentChangedTriggerDetails = __uuidof(IStorageLibraryContentChangedTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IStorageLibraryContentChangedTriggerDetails = _uuidof(IStorageLibraryContentChangedTriggerDetails);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -3059,7 +3059,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageQueryResultBase = __uuidof(IStorageQueryResultBase);
+                extern MIDL_CONST_ID IID& IID_IStorageQueryResultBase = _uuidof(IStorageQueryResultBase);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -3104,7 +3104,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IValueAndLanguage = __uuidof(IValueAndLanguage);
+                extern MIDL_CONST_ID IID& IID_IValueAndLanguage = _uuidof(IValueAndLanguage);
             } /* Search */
         } /* Storage */
     } /* Windows */
@@ -3185,8 +3185,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Storage.Search.IQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Search.IQueryOptions ** Default Interface **
@@ -9176,8 +9176,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Storage.Search.IQueryOptionsFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Search.IQueryOptions ** Default Interface **

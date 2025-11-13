@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -629,7 +629,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IConditionForceEffect = __uuidof(IConditionForceEffect);
+                    extern MIDL_CONST_ID IID& IID_IConditionForceEffect = _uuidof(IConditionForceEffect);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -668,7 +668,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IConditionForceEffectFactory = __uuidof(IConditionForceEffectFactory);
+                    extern MIDL_CONST_ID IID& IID_IConditionForceEffectFactory = _uuidof(IConditionForceEffectFactory);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -721,7 +721,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IConstantForceEffect = __uuidof(IConstantForceEffect);
+                    extern MIDL_CONST_ID IID& IID_IConstantForceEffect = _uuidof(IConstantForceEffect);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -765,7 +765,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IForceFeedbackEffect = __uuidof(IForceFeedbackEffect);
+                    extern MIDL_CONST_ID IID& IID_IForceFeedbackEffect = _uuidof(IForceFeedbackEffect);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -835,7 +835,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IForceFeedbackMotor = __uuidof(IForceFeedbackMotor);
+                    extern MIDL_CONST_ID IID& IID_IForceFeedbackMotor = _uuidof(IForceFeedbackMotor);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -897,7 +897,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPeriodicForceEffect = __uuidof(IPeriodicForceEffect);
+                    extern MIDL_CONST_ID IID& IID_IPeriodicForceEffect = _uuidof(IPeriodicForceEffect);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -936,7 +936,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPeriodicForceEffectFactory = __uuidof(IPeriodicForceEffectFactory);
+                    extern MIDL_CONST_ID IID& IID_IPeriodicForceEffectFactory = _uuidof(IPeriodicForceEffectFactory);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */
@@ -991,7 +991,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRampForceEffect = __uuidof(IRampForceEffect);
+                    extern MIDL_CONST_ID IID& IID_IRampForceEffect = _uuidof(IRampForceEffect);
                 } /* ForceFeedback */
             } /* Input */
         } /* Gaming */

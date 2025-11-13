@@ -356,6 +356,17 @@ typedef struct _TOUCH_MAX_INPUTS
 
 
 //
+// Device usages that are defined in Hid.h (available in windows source tree),
+// but not in HidUsage.h (variable in phone source tree).
+//
+
+#define HID_USAGE_DIGITIZER_XTILT              0x3d
+#define HID_USAGE_DIGITIZER_YTILT              0x3e
+#define HID_USAGE_DIGITIZER_WIDTH              0x48
+#define HID_USAGE_DIGITIZER_HEIGHT             0x49
+
+
+//
 // Device name and the symbolic link for the virtual driver device that user-mode applications
 // can retrieve touch device usages from.
 //

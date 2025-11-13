@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1441,7 +1441,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneBoundingBox = __uuidof(ISceneBoundingBox);
+                    extern MIDL_CONST_ID IID& IID_ISceneBoundingBox = _uuidof(ISceneBoundingBox);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1479,7 +1479,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneComponent = __uuidof(ISceneComponent);
+                    extern MIDL_CONST_ID IID& IID_ISceneComponent = _uuidof(ISceneComponent);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1514,7 +1514,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneComponentCollection = __uuidof(ISceneComponentCollection);
+                    extern MIDL_CONST_ID IID& IID_ISceneComponentCollection = _uuidof(ISceneComponentCollection);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1549,7 +1549,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneComponentFactory = __uuidof(ISceneComponentFactory);
+                    extern MIDL_CONST_ID IID& IID_ISceneComponentFactory = _uuidof(ISceneComponentFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1584,7 +1584,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMaterial = __uuidof(ISceneMaterial);
+                    extern MIDL_CONST_ID IID& IID_ISceneMaterial = _uuidof(ISceneMaterial);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1619,7 +1619,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMaterialFactory = __uuidof(ISceneMaterialFactory);
+                    extern MIDL_CONST_ID IID& IID_ISceneMaterialFactory = _uuidof(ISceneMaterialFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1654,7 +1654,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMaterialInput = __uuidof(ISceneMaterialInput);
+                    extern MIDL_CONST_ID IID& IID_ISceneMaterialInput = _uuidof(ISceneMaterialInput);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1689,7 +1689,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMaterialInputFactory = __uuidof(ISceneMaterialInputFactory);
+                    extern MIDL_CONST_ID IID& IID_ISceneMaterialInputFactory = _uuidof(ISceneMaterialInputFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1738,7 +1738,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMesh = __uuidof(ISceneMesh);
+                    extern MIDL_CONST_ID IID& IID_ISceneMesh = _uuidof(ISceneMesh);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1773,7 +1773,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMeshMaterialAttributeMap = __uuidof(ISceneMeshMaterialAttributeMap);
+                    extern MIDL_CONST_ID IID& IID_ISceneMeshMaterialAttributeMap = _uuidof(ISceneMeshMaterialAttributeMap);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1823,7 +1823,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMeshRendererComponent = __uuidof(ISceneMeshRendererComponent);
+                    extern MIDL_CONST_ID IID& IID_ISceneMeshRendererComponent = _uuidof(ISceneMeshRendererComponent);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1862,7 +1862,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMeshRendererComponentStatics = __uuidof(ISceneMeshRendererComponentStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneMeshRendererComponentStatics = _uuidof(ISceneMeshRendererComponentStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1901,7 +1901,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMeshStatics = __uuidof(ISceneMeshStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneMeshStatics = _uuidof(ISceneMeshStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -1966,7 +1966,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMetallicRoughnessMaterial = __uuidof(ISceneMetallicRoughnessMaterial);
+                    extern MIDL_CONST_ID IID& IID_ISceneMetallicRoughnessMaterial = _uuidof(ISceneMetallicRoughnessMaterial);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2005,7 +2005,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneMetallicRoughnessMaterialStatics = __uuidof(ISceneMetallicRoughnessMaterialStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneMetallicRoughnessMaterialStatics = _uuidof(ISceneMetallicRoughnessMaterialStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2076,7 +2076,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneModelTransform = __uuidof(ISceneModelTransform);
+                    extern MIDL_CONST_ID IID& IID_ISceneModelTransform = _uuidof(ISceneModelTransform);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2127,7 +2127,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneNode = __uuidof(ISceneNode);
+                    extern MIDL_CONST_ID IID& IID_ISceneNode = _uuidof(ISceneNode);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2162,7 +2162,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneNodeCollection = __uuidof(ISceneNodeCollection);
+                    extern MIDL_CONST_ID IID& IID_ISceneNodeCollection = _uuidof(ISceneNodeCollection);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2201,7 +2201,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneNodeStatics = __uuidof(ISceneNodeStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneNodeStatics = _uuidof(ISceneNodeStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2236,7 +2236,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneObject = __uuidof(ISceneObject);
+                    extern MIDL_CONST_ID IID& IID_ISceneObject = _uuidof(ISceneObject);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2271,7 +2271,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneObjectFactory = __uuidof(ISceneObjectFactory);
+                    extern MIDL_CONST_ID IID& IID_ISceneObjectFactory = _uuidof(ISceneObjectFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2360,7 +2360,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IScenePbrMaterial = __uuidof(IScenePbrMaterial);
+                    extern MIDL_CONST_ID IID& IID_IScenePbrMaterial = _uuidof(IScenePbrMaterial);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2395,7 +2395,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IScenePbrMaterialFactory = __uuidof(IScenePbrMaterialFactory);
+                    extern MIDL_CONST_ID IID& IID_IScenePbrMaterialFactory = _uuidof(IScenePbrMaterialFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2430,7 +2430,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneRendererComponent = __uuidof(ISceneRendererComponent);
+                    extern MIDL_CONST_ID IID& IID_ISceneRendererComponent = _uuidof(ISceneRendererComponent);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2465,7 +2465,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneRendererComponentFactory = __uuidof(ISceneRendererComponentFactory);
+                    extern MIDL_CONST_ID IID& IID_ISceneRendererComponentFactory = _uuidof(ISceneRendererComponentFactory);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2524,7 +2524,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneSurfaceMaterialInput = __uuidof(ISceneSurfaceMaterialInput);
+                    extern MIDL_CONST_ID IID& IID_ISceneSurfaceMaterialInput = _uuidof(ISceneSurfaceMaterialInput);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2563,7 +2563,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneSurfaceMaterialInputStatics = __uuidof(ISceneSurfaceMaterialInputStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneSurfaceMaterialInputStatics = _uuidof(ISceneSurfaceMaterialInputStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2604,7 +2604,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneVisual = __uuidof(ISceneVisual);
+                    extern MIDL_CONST_ID IID& IID_ISceneVisual = _uuidof(ISceneVisual);
                 } /* Scenes */
             } /* Composition */
         } /* UI */
@@ -2643,7 +2643,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISceneVisualStatics = __uuidof(ISceneVisualStatics);
+                    extern MIDL_CONST_ID IID& IID_ISceneVisualStatics = _uuidof(ISceneVisualStatics);
                 } /* Scenes */
             } /* Composition */
         } /* UI */

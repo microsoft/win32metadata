@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1325,9 +1325,6 @@ namespace ABI {
                     PrintColorMode_Color = 3,
                     PrintColorMode_Grayscale = 4,
                     PrintColorMode_Monochrome = 5,
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
-                    PrintColorMode_AutoSelect = 6,
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
                 };
             } /* Printing */
         } /* Graphics */
@@ -1804,7 +1801,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedHandler = __uuidof(IPrintTaskSourceRequestedHandler);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedHandler = _uuidof(IPrintTaskSourceRequestedHandler);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -1835,7 +1832,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintDocumentSource = __uuidof(IPrintDocumentSource);
+                extern MIDL_CONST_ID IID& IID_IPrintDocumentSource = _uuidof(IPrintDocumentSource);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -1875,7 +1872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintManager = __uuidof(IPrintManager);
+                extern MIDL_CONST_ID IID& IID_IPrintManager = _uuidof(IPrintManager);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -1914,7 +1911,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintManagerStatic = __uuidof(IPrintManagerStatic);
+                extern MIDL_CONST_ID IID& IID_IPrintManagerStatic = _uuidof(IPrintManagerStatic);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -1950,7 +1947,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintManagerStatic2 = __uuidof(IPrintManagerStatic2);
+                extern MIDL_CONST_ID IID& IID_IPrintManagerStatic2 = _uuidof(IPrintManagerStatic2);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2013,7 +2010,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintPageInfo = __uuidof(IPrintPageInfo);
+                extern MIDL_CONST_ID IID& IID_IPrintPageInfo = _uuidof(IPrintPageInfo);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2052,7 +2049,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintPageRange = __uuidof(IPrintPageRange);
+                extern MIDL_CONST_ID IID& IID_IPrintPageRange = _uuidof(IPrintPageRange);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2094,7 +2091,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintPageRangeFactory = __uuidof(IPrintPageRangeFactory);
+                extern MIDL_CONST_ID IID& IID_IPrintPageRangeFactory = _uuidof(IPrintPageRangeFactory);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2145,7 +2142,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintPageRangeOptions = __uuidof(IPrintPageRangeOptions);
+                extern MIDL_CONST_ID IID& IID_IPrintPageRangeOptions = _uuidof(IPrintPageRangeOptions);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2215,7 +2212,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTask = __uuidof(IPrintTask);
+                extern MIDL_CONST_ID IID& IID_IPrintTask = _uuidof(IPrintTask);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2254,7 +2251,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTask2 = __uuidof(IPrintTask2);
+                extern MIDL_CONST_ID IID& IID_IPrintTask2 = _uuidof(IPrintTask2);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2290,7 +2287,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskCompletedEventArgs = __uuidof(IPrintTaskCompletedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskCompletedEventArgs = _uuidof(IPrintTaskCompletedEventArgs);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2333,7 +2330,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskOptions = __uuidof(IPrintTaskOptions);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskOptions = _uuidof(IPrintTaskOptions);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2372,7 +2369,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskOptions2 = __uuidof(IPrintTaskOptions2);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskOptions2 = _uuidof(IPrintTaskOptions2);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2407,7 +2404,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskOptionsCore = __uuidof(IPrintTaskOptionsCore);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskOptionsCore = _uuidof(IPrintTaskOptionsCore);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2510,7 +2507,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskOptionsCoreProperties = __uuidof(IPrintTaskOptionsCoreProperties);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskOptionsCoreProperties = _uuidof(IPrintTaskOptionsCoreProperties);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2544,7 +2541,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskOptionsCoreUIConfiguration = __uuidof(IPrintTaskOptionsCoreUIConfiguration);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskOptionsCoreUIConfiguration = _uuidof(IPrintTaskOptionsCoreUIConfiguration);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2580,7 +2577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskProgressingEventArgs = __uuidof(IPrintTaskProgressingEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskProgressingEventArgs = _uuidof(IPrintTaskProgressingEventArgs);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2624,7 +2621,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskRequest = __uuidof(IPrintTaskRequest);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskRequest = _uuidof(IPrintTaskRequest);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2658,7 +2655,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskRequestedDeferral = __uuidof(IPrintTaskRequestedDeferral);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskRequestedDeferral = _uuidof(IPrintTaskRequestedDeferral);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2694,7 +2691,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskRequestedEventArgs = __uuidof(IPrintTaskRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskRequestedEventArgs = _uuidof(IPrintTaskRequestedEventArgs);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2736,7 +2733,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedArgs = __uuidof(IPrintTaskSourceRequestedArgs);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedArgs = _uuidof(IPrintTaskSourceRequestedArgs);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2770,7 +2767,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedDeferral = __uuidof(IPrintTaskSourceRequestedDeferral);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskSourceRequestedDeferral = _uuidof(IPrintTaskSourceRequestedDeferral);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2815,7 +2812,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPrintTaskTargetDeviceSupport = __uuidof(IPrintTaskTargetDeviceSupport);
+                extern MIDL_CONST_ID IID& IID_IPrintTaskTargetDeviceSupport = _uuidof(IPrintTaskTargetDeviceSupport);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2887,7 +2884,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic = __uuidof(IStandardPrintTaskOptionsStatic);
+                extern MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic = _uuidof(IStandardPrintTaskOptionsStatic);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2923,7 +2920,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic2 = __uuidof(IStandardPrintTaskOptionsStatic2);
+                extern MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic2 = _uuidof(IStandardPrintTaskOptionsStatic2);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2959,7 +2956,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic3 = __uuidof(IStandardPrintTaskOptionsStatic3);
+                extern MIDL_CONST_ID IID& IID_IStandardPrintTaskOptionsStatic3 = _uuidof(IStandardPrintTaskOptionsStatic3);
             } /* Printing */
         } /* Graphics */
     } /* Windows */
@@ -2976,8 +2973,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CIStandardPrintTaskO
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.IPrintManager ** Default Interface **
@@ -3243,9 +3240,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -4578,9 +4575,6 @@ enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintColorMode
     PrintColorMode_Color = 3,
     PrintColorMode_Grayscale = 4,
     PrintColorMode_Monochrome = 5,
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
-    PrintColorMode_AutoSelect = 6,
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x100000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -7176,8 +7170,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CIStandardPrintTaskO
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Printing.IPrintManagerStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.IPrintManager ** Default Interface **
@@ -7443,9 +7437,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Graphics.Printing.IStandardPrintTaskOptionsStatic2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

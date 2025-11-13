@@ -7,7 +7,7 @@ namespace Windows
         [contractversion(4)]
         apicontract FoundationContract{};
 
-        [contractversion(19)]
+        [contractversion(15)]
         apicontract UniversalApiContract{};
     }
 

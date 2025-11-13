@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1276,7 +1276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBasicProperties = __uuidof(IBasicProperties);
+                extern MIDL_CONST_ID IID& IID_IBasicProperties = _uuidof(IBasicProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1330,7 +1330,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDocumentProperties = __uuidof(IDocumentProperties);
+                extern MIDL_CONST_ID IID& IID_IDocumentProperties = _uuidof(IDocumentProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1377,7 +1377,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeotagHelperStatics = __uuidof(IGeotagHelperStatics);
+                extern MIDL_CONST_ID IID& IID_IGeotagHelperStatics = _uuidof(IGeotagHelperStatics);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1464,7 +1464,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageProperties = __uuidof(IImageProperties);
+                extern MIDL_CONST_ID IID& IID_IImageProperties = _uuidof(IImageProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1575,7 +1575,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMusicProperties = __uuidof(IMusicProperties);
+                extern MIDL_CONST_ID IID& IID_IMusicProperties = _uuidof(IMusicProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1623,7 +1623,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageItemContentProperties = __uuidof(IStorageItemContentProperties);
+                extern MIDL_CONST_ID IID& IID_IStorageItemContentProperties = _uuidof(IStorageItemContentProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1665,7 +1665,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageItemExtraProperties = __uuidof(IStorageItemExtraProperties);
+                extern MIDL_CONST_ID IID& IID_IStorageItemExtraProperties = _uuidof(IStorageItemExtraProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1710,7 +1710,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IThumbnailProperties = __uuidof(IThumbnailProperties);
+                extern MIDL_CONST_ID IID& IID_IThumbnailProperties = _uuidof(IThumbnailProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */
@@ -1809,7 +1809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVideoProperties = __uuidof(IVideoProperties);
+                extern MIDL_CONST_ID IID& IID_IVideoProperties = _uuidof(IVideoProperties);
             } /* FileProperties */
         } /* Storage */
     } /* Windows */

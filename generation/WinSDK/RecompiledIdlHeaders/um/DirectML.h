@@ -4,10 +4,8 @@
 #define DIRECTML_H
 #pragma once
 
-#ifdef _GAMING_XBOX_SCARLETT
+#ifdef _GAMING_XBOX
 #include "d3d12_xs.h"
-#elif _GAMING_XBOX_XBOXONE
-#include "d3d12_x.h"
 #else
 #include "d3d12.h"
 #endif
@@ -21,10 +19,6 @@
 #ifndef DML_TARGET_VERSION
 
 #if !defined(NTDDI_VERSION) || defined(DML_TARGET_VERSION_USE_LATEST) // Use the latest if using redist or no Windows target set.
-#define DML_TARGET_VERSION 0x6400
-#elif defined(NTDDI_WIN10_ZN) && NTDDI_VERSION >= NTDDI_WIN10_ZN
-#define DML_TARGET_VERSION 0x6000
-#elif defined(NTDDI_WIN10_NI) && NTDDI_VERSION >= NTDDI_WIN10_NI
 #define DML_TARGET_VERSION 0x5000
 #elif defined(NTDDI_WIN10_CO) && NTDDI_VERSION >= NTDDI_WIN10_CO
 #define DML_TARGET_VERSION 0x4000
@@ -32,7 +26,7 @@
 #define DML_TARGET_VERSION 0x3000
 #elif defined(NTDDI_WIN10_VB) && NTDDI_VERSION >= NTDDI_WIN10_VB // Windows 10 2004 Update
 #define DML_TARGET_VERSION 0x2000
-#else // defined(NTDDI_WIN10_19H1) && NTDDI_VERSION >= NTDDI_WIN10_19H1 // Windows 10 1903 Update
+#else defined(NTDDI_WIN10_19H1) && NTDDI_VERSION >= NTDDI_WIN10_19H1 // Windows 10 1903 Update
 #define DML_TARGET_VERSION 0x1000
 #endif
 
@@ -87,10 +81,6 @@ enum DML_TENSOR_DATA_TYPE
     DML_TENSOR_DATA_TYPE_FLOAT64,
     DML_TENSOR_DATA_TYPE_UINT64,
     DML_TENSOR_DATA_TYPE_INT64,
-#if DML_TARGET_VERSION >= 0x6300
-    DML_TENSOR_DATA_TYPE_UINT4,
-    DML_TENSOR_DATA_TYPE_INT4,
-#endif // DML_TARGET_VERSION >= 0x6300
 };
 
 enum DML_TENSOR_TYPE
@@ -106,7 +96,7 @@ enum DML_TENSOR_FLAGS
     DML_TENSOR_FLAG_OWNED_BY_DML = 0x1,
 };
 
-DEFINE_ENUM_FLAG_OPERATORS(DML_TENSOR_FLAGS)
+DEFINE_ENUM_FLAG_OPERATORS(DML_TENSOR_FLAGS);
 
 struct DML_BUFFER_TENSOR_DESC
 {
@@ -312,42 +302,6 @@ enum DML_OPERATOR_TYPE
     DML_OPERATOR_PADDING1,
     DML_OPERATOR_ELEMENT_WISE_NEGATE,
 #endif // DML_TARGET_VERSION >= 0x5000
-
-#if DML_TARGET_VERSION >= 0x5100
-    DML_OPERATOR_ACTIVATION_GELU,
-    DML_OPERATOR_ACTIVATION_SOFTMAX1,
-    DML_OPERATOR_ACTIVATION_LOG_SOFTMAX1,
-    DML_OPERATOR_ACTIVATION_HARDMAX1,
-    DML_OPERATOR_RESAMPLE2,
-    DML_OPERATOR_RESAMPLE_GRAD1,
-    DML_OPERATOR_DIAGONAL_MATRIX1,
-#endif // DML_TARGET_VERSION >= 0x5100
-
-#if DML_TARGET_VERSION >= 0x6100
-    DML_OPERATOR_MULTIHEAD_ATTENTION,
-#endif // DML_TARGET_VERSION >= 0x6100
-
-#if DML_TARGET_VERSION >= 0x6200
-    DML_OPERATOR_LP_POOLING1,
-    DML_OPERATOR_AVERAGE_POOLING1,
-    DML_OPERATOR_ACTIVATION_SWISH,
-    DML_OPERATOR_ACTIVATION_HARD_SWISH,
-    DML_OPERATOR_QUANTIZED_LINEAR_AVERAGE_POOLING,
-    DML_OPERATOR_MATRIX_MULTIPLY_INTEGER_TO_FLOAT,
-#endif // DML_TARGET_VERSION >= 0x6200
-
-#if DML_TARGET_VERSION >= 0x6300
-    DML_OPERATOR_MEAN_VARIANCE_NORMALIZATION2,
-    DML_OPERATOR_MULTIHEAD_ATTENTION1,
-    DML_OPERATOR_QUANTIZE,
-    DML_OPERATOR_DEQUANTIZE,
-#endif // DML_TARGET_VERSION >= 0x6300
-
-#if DML_TARGET_VERSION >= 0x6400
-    DML_OPERATOR_RESAMPLE3,
-    DML_OPERATOR_FOLD,
-    DML_OPERATOR_UNFOLD,
-#endif // DML_TARGET_VERSION >= 0x6400
 };
 
 // ===================================================================================================================
@@ -396,10 +350,6 @@ enum DML_PADDING_MODE
 
 #if DML_TARGET_VERSION >= 0x3000
     DML_PADDING_MODE_SYMMETRIC,
-#endif
-
-#if DML_TARGET_VERSION >= 0x6400
-    DML_PADDING_MODE_WRAP,
 #endif
 };
 
@@ -481,30 +431,6 @@ enum DML_RANDOM_GENERATOR_TYPE
 };
 
 #endif // DML_TARGET_VERSION >= 0x3000
-
-#if DML_TARGET_VERSION >= 0x6100
-
-enum DML_MULTIHEAD_ATTENTION_MASK_TYPE
-{
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE_NONE,
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE_KEY_SEQUENCE_LENGTH,
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE_KEY_SEQUENCE_END_START,
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE_KEY_QUERY_SEQUENCE_LENGTH_START_END,
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE_BOOLEAN,
-};
-
-#endif // DML_TARGET_VERSION >= 0x6100
-
-#if DML_TARGET_VERSION >= 0x6300
-
-enum DML_QUANTIZATION_TYPE
-{
-    DML_QUANTIZATION_TYPE_NONE,
-    DML_QUANTIZATION_TYPE_SCALE,
-    DML_QUANTIZATION_TYPE_SCALE_ZERO_POINT,
-};
-
-#endif // DML_TARGET_VERSION >= 0x6300
 
 // ===================================================================================================================
 //   Operator descriptions
@@ -756,7 +682,7 @@ struct DML_ELEMENT_WISE_QUANTIZE_LINEAR_OPERATOR_DESC
 {
     const DML_TENSOR_DESC* InputTensor;
     const DML_TENSOR_DESC* ScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* ZeroPointTensor;
+    const DML_TENSOR_DESC* ZeroPointTensor;
     const DML_TENSOR_DESC* OutputTensor;
 };
 
@@ -764,7 +690,7 @@ struct DML_ELEMENT_WISE_DEQUANTIZE_LINEAR_OPERATOR_DESC
 {
     const DML_TENSOR_DESC* InputTensor;
     const DML_TENSOR_DESC* ScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* ZeroPointTensor;
+    const DML_TENSOR_DESC* ZeroPointTensor;
     const DML_TENSOR_DESC* OutputTensor;
 };
 
@@ -1924,275 +1850,6 @@ struct DML_ELEMENT_WISE_NEGATE_OPERATOR_DESC
 
 #endif // DML_TARGET_VERSION >= 0x5000
 
-#if DML_TARGET_VERSION >= 0x5100
-
-struct DML_ACTIVATION_GELU_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-};
-
-struct DML_ACTIVATION_SOFTMAX1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT AxisCount;
-    _Field_size_(AxisCount) const UINT* Axes;
-};
-
-struct DML_ACTIVATION_LOG_SOFTMAX1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT AxisCount;
-    _Field_size_(AxisCount) const UINT* Axes;
-};
-
-struct DML_ACTIVATION_HARDMAX1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT AxisCount;
-    _Field_size_(AxisCount) const UINT* Axes;
-};
-
-struct DML_RESAMPLE2_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    DML_INTERPOLATION_MODE InterpolationMode;
-    DML_AXIS_DIRECTION RoundingDirection;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const FLOAT* Scales;
-    _Field_size_(DimensionCount) const FLOAT* InputPixelOffsets;
-    _Field_size_(DimensionCount) const FLOAT* OutputPixelOffsets;
-};
-
-struct DML_RESAMPLE_GRAD1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputGradientTensor;
-    const DML_TENSOR_DESC* OutputGradientTensor;
-    DML_INTERPOLATION_MODE InterpolationMode;
-    DML_AXIS_DIRECTION RoundingDirection;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const FLOAT* Scales;
-    _Field_size_(DimensionCount) const FLOAT* InputPixelOffsets;
-    _Field_size_(DimensionCount) const FLOAT* OutputPixelOffsets;
-};
-
-struct DML_DIAGONAL_MATRIX1_OPERATOR_DESC
-{
-    _Maybenull_ const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    DML_TENSOR_DATA_TYPE ValueDataType;
-    DML_SCALAR_UNION Value;
-    INT DiagonalFillBegin;
-    INT DiagonalFillEnd;
-};
-
-#endif // DML_TARGET_VERSION >= 0x5100
-
-#if DML_TARGET_VERSION >= 0x6100
-
-struct DML_MULTIHEAD_ATTENTION_OPERATOR_DESC
-{
-    _Maybenull_ const DML_TENSOR_DESC* QueryTensor;
-    _Maybenull_ const DML_TENSOR_DESC* KeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* ValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedQueryKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedKeyValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedQueryKeyValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
-    _Maybenull_ const DML_TENSOR_DESC* MaskTensor;
-    _Maybenull_ const DML_TENSOR_DESC* RelativePositionBiasTensor;
-    _Maybenull_ const DML_TENSOR_DESC* PastKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* PastValueTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputPresentKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputPresentValueTensor;
-    FLOAT Scale;
-    FLOAT MaskFilterValue;
-    UINT HeadCount;
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE MaskType;
-};
-
-#endif // DML_TARGET_VERSION >= 0x6100
-
-#if DML_TARGET_VERSION >= 0x6200
-
-struct DML_LP_POOLING1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* Strides;
-    _Field_size_(DimensionCount) const UINT* WindowSize;
-    _Field_size_(DimensionCount) const UINT* StartPadding;
-    _Field_size_(DimensionCount) const UINT* EndPadding;
-    _Field_size_(DimensionCount) const UINT* Dilations;
-    UINT P;
-};
-
-struct DML_AVERAGE_POOLING1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* Strides;
-    _Field_size_(DimensionCount) const UINT* WindowSize;
-    _Field_size_(DimensionCount) const UINT* StartPadding;
-    _Field_size_(DimensionCount) const UINT* EndPadding;
-    _Field_size_(DimensionCount) const UINT* Dilations;
-    BOOL IncludePadding;
-};
-
-struct DML_ACTIVATION_SWISH_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    FLOAT SigmoidInputScale;
-};
-
-struct DML_ACTIVATION_HARD_SWISH_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    FLOAT Alpha;
-    FLOAT Beta;
-};
-
-struct DML_QUANTIZED_LINEAR_AVERAGE_POOLING_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* InputScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* InputZeroPointTensor;
-    const DML_TENSOR_DESC* OutputScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputZeroPointTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* Strides;
-    _Field_size_(DimensionCount) const UINT* WindowSize;
-    _Field_size_(DimensionCount) const UINT* StartPadding;
-    _Field_size_(DimensionCount) const UINT* EndPadding;
-    _Field_size_(DimensionCount) const UINT* Dilations;
-    BOOL IncludePadding;
-};
-
-struct DML_MATRIX_MULTIPLY_INTEGER_TO_FLOAT_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* ATensor;
-    const DML_TENSOR_DESC* AScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* AZeroPointTensor;
-    const DML_TENSOR_DESC* BTensor;
-    const DML_TENSOR_DESC* BScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* BZeroPointTensor;
-    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-};
-
-#endif // DML_TARGET_VERSION >= 0x6200
-
-#if DML_TARGET_VERSION >= 0x6300
-
-struct DML_MEAN_VARIANCE_NORMALIZATION2_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    _Maybenull_ const DML_TENSOR_DESC* ScaleTensor;
-    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT AxisCount;
-    _Field_size_(AxisCount) const UINT* Axes;
-    BOOL UseMean;
-    BOOL UseVariance;
-    FLOAT Epsilon;
-    _Maybenull_ const DML_OPERATOR_DESC* FusedActivation;
-};
-
-struct DML_MULTIHEAD_ATTENTION1_OPERATOR_DESC
-{
-    _Maybenull_ const DML_TENSOR_DESC* QueryTensor;
-    _Maybenull_ const DML_TENSOR_DESC* KeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* ValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedQueryKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedKeyValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* StackedQueryKeyValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
-    _Maybenull_ const DML_TENSOR_DESC* MaskTensor;
-    _Maybenull_ const DML_TENSOR_DESC* RelativePositionBiasTensor;
-    _Maybenull_ const DML_TENSOR_DESC* PastKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* PastValueTensor;
-    _Maybenull_ const DML_TENSOR_DESC* PastSequenceLengthsTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputPresentKeyTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputPresentValueTensor;
-    FLOAT Scale;
-    FLOAT MaskFilterValue;
-    UINT QueryHeadCount;
-    UINT KeyValueHeadCount;
-    DML_MULTIHEAD_ATTENTION_MASK_TYPE MaskType;
-};
-
-struct DML_QUANTIZE_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    DML_QUANTIZATION_TYPE QuantizationType;
-    UINT QuantizationTensorCount;
-    _Field_size_(QuantizationTensorCount) const DML_TENSOR_DESC* QuantizationTensors;
-    const DML_TENSOR_DESC* OutputTensor;
-};
-
-struct DML_DEQUANTIZE_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    DML_QUANTIZATION_TYPE QuantizationType;
-    UINT QuantizationTensorCount;
-    _Field_size_(QuantizationTensorCount) const DML_TENSOR_DESC* QuantizationTensors;
-    const DML_TENSOR_DESC* OutputTensor;
-};
-
-#endif // DML_TARGET_VERSION >= 0x6300
-
-#if DML_TARGET_VERSION >= 0x6400
-
-struct DML_RESAMPLE3_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    DML_INTERPOLATION_MODE InterpolationMode;
-    DML_AXIS_DIRECTION RoundingDirection;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const FLOAT* Scales;
-    _Field_size_(DimensionCount) const FLOAT* InputPixelOffsets;
-    _Field_size_(DimensionCount) const FLOAT* OutputPixelOffsets;
-    BOOL Antialiased;
-};
-
-struct DML_FOLD_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* WindowSizes; // Size of the extracted patch
-    _Field_size_(DimensionCount) const UINT* Strides; // Step size of the extracted patches
-    _Field_size_(DimensionCount) const UINT* Dilations; // Dialations of the extracted patch
-    _Field_size_(DimensionCount) const UINT* StartPadding; // Start padding of the "source tensor"
-    _Field_size_(DimensionCount) const UINT* EndPadding; // End padding of the "source tensor"
-};
-
-struct DML_UNFOLD_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* WindowSizes; // Size of the extracted patch
-    _Field_size_(DimensionCount) const UINT* Strides; // Step size of the extracted patches
-    _Field_size_(DimensionCount) const UINT* Dilations; // Dialations of the extracted patch
-    _Field_size_(DimensionCount) const UINT* StartPadding; // Start padding of the "source tensor"
-    _Field_size_(DimensionCount) const UINT* EndPadding; // End padding of the "source tensor"
-};
-
-#endif // DML_TARGET_VERSION >= 0x6400
-
 // ===================================================================================================================
 //   DML feature support queries
 // ===================================================================================================================
@@ -2209,13 +1866,6 @@ enum DML_FEATURE_LEVEL
     DML_FEATURE_LEVEL_4_0 = 0x4000,
     DML_FEATURE_LEVEL_4_1 = 0x4100,
     DML_FEATURE_LEVEL_5_0 = 0x5000,
-    DML_FEATURE_LEVEL_5_1 = 0x5100,
-    DML_FEATURE_LEVEL_5_2 = 0x5200,
-    DML_FEATURE_LEVEL_6_0 = 0x6000,
-    DML_FEATURE_LEVEL_6_1 = 0x6100,
-    DML_FEATURE_LEVEL_6_2 = 0x6200,
-    DML_FEATURE_LEVEL_6_3 = 0x6300,
-    DML_FEATURE_LEVEL_6_4 = 0x6400,
 };
 
 #endif // DML_TARGET_VERSION >= 0x2000
@@ -2274,7 +1924,7 @@ enum DML_EXECUTION_FLAGS
     DML_EXECUTION_FLAG_DESCRIPTORS_VOLATILE = 0x4,
 };
 
-DEFINE_ENUM_FLAG_OPERATORS(DML_EXECUTION_FLAGS)
+DEFINE_ENUM_FLAG_OPERATORS(DML_EXECUTION_FLAGS);
 
 enum DML_CREATE_DEVICE_FLAGS
 {
@@ -2282,7 +1932,7 @@ enum DML_CREATE_DEVICE_FLAGS
     DML_CREATE_DEVICE_FLAG_DEBUG = 0x1,
 };
 
-DEFINE_ENUM_FLAG_OPERATORS(DML_CREATE_DEVICE_FLAGS)
+DEFINE_ENUM_FLAG_OPERATORS(DML_CREATE_DEVICE_FLAGS);
 
 STDAPI DMLCreateDevice(
     ID3D12Device* d3d12Device,
@@ -2590,10 +2240,7 @@ struct DML_INTERMEDIATE_GRAPH_EDGE_DESC
 enum DML_GRAPH_NODE_TYPE 
 { 
     DML_GRAPH_NODE_TYPE_INVALID, 
-    DML_GRAPH_NODE_TYPE_OPERATOR,
-#if DML_TARGET_VERSION >= 0x6200
-    DML_GRAPH_NODE_TYPE_CONSTANT
-#endif // DML_TARGET_VERSION >= 0x6200
+    DML_GRAPH_NODE_TYPE_OPERATOR, 
 }; 
 
 struct DML_GRAPH_NODE_DESC 
@@ -2607,15 +2254,6 @@ struct DML_OPERATOR_GRAPH_NODE_DESC
     IDMLOperator* Operator; 
     _Field_z_ _Maybenull_ const char* Name; 
 }; 
-
-#if DML_TARGET_VERSION >= 0x6200
-struct DML_CONSTANT_DATA_GRAPH_NODE_DESC 
-{ 
-    _Field_size_bytes_(DataSize) const void* Data;
-    SIZE_T DataSize;
-    _Field_z_ _Maybenull_ const char* Name; 
-}; 
-#endif // DML_TARGET_VERSION >= 0x6200
 
 struct DML_GRAPH_DESC 
 { 

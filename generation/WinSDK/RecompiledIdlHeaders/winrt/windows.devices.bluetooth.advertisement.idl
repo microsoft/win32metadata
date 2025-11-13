@@ -59,8 +59,6 @@ namespace Windows
             {
                 typedef enum BluetoothLEAdvertisementFlags BluetoothLEAdvertisementFlags;
 
-                typedef enum BluetoothLEAdvertisementPhyType BluetoothLEAdvertisementPhyType;
-
                 typedef enum BluetoothLEAdvertisementPublisherStatus BluetoothLEAdvertisementPublisherStatus;
 
                 typedef enum BluetoothLEAdvertisementType BluetoothLEAdvertisementType;
@@ -87,8 +85,6 @@ namespace Windows
 
                 interface IBluetoothLEAdvertisementPublisher2;
 
-                interface IBluetoothLEAdvertisementPublisher3;
-
                 interface IBluetoothLEAdvertisementPublisherFactory;
 
                 interface IBluetoothLEAdvertisementPublisherStatusChangedEventArgs;
@@ -99,17 +95,9 @@ namespace Windows
 
                 interface IBluetoothLEAdvertisementReceivedEventArgs2;
 
-                interface IBluetoothLEAdvertisementReceivedEventArgs3;
-
-                interface IBluetoothLEAdvertisementScanParameters;
-
-                interface IBluetoothLEAdvertisementScanParametersStatics;
-
                 interface IBluetoothLEAdvertisementWatcher;
 
                 interface IBluetoothLEAdvertisementWatcher2;
-
-                interface IBluetoothLEAdvertisementWatcher3;
 
                 interface IBluetoothLEAdvertisementWatcherFactory;
 
@@ -134,8 +122,6 @@ namespace Windows
                 runtimeclass BluetoothLEAdvertisementPublisherStatusChangedEventArgs;
 
                 runtimeclass BluetoothLEAdvertisementReceivedEventArgs;
-
-                runtimeclass BluetoothLEAdvertisementScanParameters;
 
                 runtimeclass BluetoothLEAdvertisementWatcher;
 
@@ -220,15 +206,6 @@ namespace Windows
                     ClassicNotSupported       = 0x4,
                     DualModeControllerCapable = 0x8,
                     DualModeHostCapable       = 0x10
-                };
-
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                enum BluetoothLEAdvertisementPhyType
-                {
-                    Unspecified  = 0,
-                    Uncoded1MPhy = 1,
-                    Uncoded2MPhy = 2,
-                    CodedPhy     = 3
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -396,17 +373,6 @@ namespace Windows
                     [propput] HRESULT IncludeTransmitPowerLevel([in] boolean value);
                 }
 
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPublisher)]
-                [uuid(1CFF3902-61EC-5776-AB86-9B41F94B1E66)]
-                interface IBluetoothLEAdvertisementPublisher3 : IInspectable
-                {
-                    [propget] HRESULT PrimaryPhy([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType* value);
-                    [propput] HRESULT PrimaryPhy([in] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType value);
-                    [propget] HRESULT SecondaryPhy([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType* value);
-                    [propput] HRESULT SecondaryPhy([in] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType value);
-                }
-
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPublisher)]
                 [uuid(5C5F065E-B863-4981-A1AF-1C544D8B0C0D)]
@@ -458,33 +424,6 @@ namespace Windows
                     [propget] HRESULT IsScanResponse([out] [retval] boolean* value);
                 }
 
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementReceivedEventArgs)]
-                [uuid(8D204B54-FF86-5D84-A25A-137DCCD96F7A)]
-                interface IBluetoothLEAdvertisementReceivedEventArgs3 : IInspectable
-                {
-                    [propget] HRESULT PrimaryPhy([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType* value);
-                    [propget] HRESULT SecondaryPhy([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType* value);
-                }
-
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters)]
-                [uuid(94F91413-63D9-53BD-AF4C-E6B1A6514595)]
-                interface IBluetoothLEAdvertisementScanParameters : IInspectable
-                {
-                    [propget] HRESULT ScanWindow([out] [retval] UINT16* value);
-                    [propget] HRESULT ScanInterval([out] [retval] UINT16* value);
-                }
-
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters)]
-                [uuid(548E39CD-3C9E-5F8D-B5E1-ADEBED5C357C)]
-                interface IBluetoothLEAdvertisementScanParametersStatics : IInspectable
-                {
-                    HRESULT CoexistenceOptimized([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters** parameters);
-                    HRESULT LowLatency([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters** parameters);
-                }
-
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher)]
                 [uuid(A6AC336F-F3D3-4297-8D6C-C81EA6623F40)]
@@ -516,21 +455,6 @@ namespace Windows
                 {
                     [propget] HRESULT AllowExtendedAdvertisements([out] [retval] boolean* value);
                     [propput] HRESULT AllowExtendedAdvertisements([in] boolean value);
-                }
-
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher)]
-                [uuid(14D980BE-4002-5DBE-8519-FFCA6CA389F0)]
-                interface IBluetoothLEAdvertisementWatcher3 : IInspectable
-                {
-                    [propget] HRESULT UseUncoded1MPhy([out] [retval] boolean* value);
-                    [propput] HRESULT UseUncoded1MPhy([in] boolean value);
-                    [propget] HRESULT UseCodedPhy([out] [retval] boolean* value);
-                    [propput] HRESULT UseCodedPhy([in] boolean value);
-                    [propget] HRESULT ScanParameters([out] [retval] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters** value);
-                    [propput] HRESULT ScanParameters([in] Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters* value);
-                    [propget] HRESULT UseHardwareFilter([out] [retval] boolean* value);
-                    [propput] HRESULT UseHardwareFilter([in] boolean value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -623,7 +547,6 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher;
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -642,16 +565,6 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs;
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3;
-                }
-
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [marshaling_behavior(agile)]
-                [static(Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics, Windows.Foundation.UniversalApiContract, 19.0)]
-                [threading(both)]
-                runtimeclass BluetoothLEAdvertisementScanParameters
-                {
-                    [default] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters;
                 }
 
                 [activatable(Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcherFactory, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -663,7 +576,6 @@ namespace Windows
                 {
                     [default] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher;
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]

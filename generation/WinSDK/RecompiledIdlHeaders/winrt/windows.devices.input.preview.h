@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1153,7 +1153,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeDevicePreview = __uuidof(IGazeDevicePreview);
+                    extern MIDL_CONST_ID IID& IID_IGazeDevicePreview = _uuidof(IGazeDevicePreview);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1191,7 +1191,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeDeviceWatcherAddedPreviewEventArgs = __uuidof(IGazeDeviceWatcherAddedPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeDeviceWatcherAddedPreviewEventArgs = _uuidof(IGazeDeviceWatcherAddedPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1256,7 +1256,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeDeviceWatcherPreview = __uuidof(IGazeDeviceWatcherPreview);
+                    extern MIDL_CONST_ID IID& IID_IGazeDeviceWatcherPreview = _uuidof(IGazeDeviceWatcherPreview);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1294,7 +1294,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeDeviceWatcherRemovedPreviewEventArgs = __uuidof(IGazeDeviceWatcherRemovedPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeDeviceWatcherRemovedPreviewEventArgs = _uuidof(IGazeDeviceWatcherRemovedPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1332,7 +1332,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeDeviceWatcherUpdatedPreviewEventArgs = __uuidof(IGazeDeviceWatcherUpdatedPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeDeviceWatcherUpdatedPreviewEventArgs = _uuidof(IGazeDeviceWatcherUpdatedPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1376,7 +1376,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeEnteredPreviewEventArgs = __uuidof(IGazeEnteredPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeEnteredPreviewEventArgs = _uuidof(IGazeEnteredPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1420,7 +1420,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeExitedPreviewEventArgs = __uuidof(IGazeExitedPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeExitedPreviewEventArgs = _uuidof(IGazeExitedPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1476,7 +1476,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeInputSourcePreview = __uuidof(IGazeInputSourcePreview);
+                    extern MIDL_CONST_ID IID& IID_IGazeInputSourcePreview = _uuidof(IGazeInputSourcePreview);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1517,7 +1517,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeInputSourcePreviewStatics = __uuidof(IGazeInputSourcePreviewStatics);
+                    extern MIDL_CONST_ID IID& IID_IGazeInputSourcePreviewStatics = _uuidof(IGazeInputSourcePreviewStatics);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1564,7 +1564,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazeMovedPreviewEventArgs = __uuidof(IGazeMovedPreviewEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGazeMovedPreviewEventArgs = _uuidof(IGazeMovedPreviewEventArgs);
                 } /* Preview */
             } /* Input */
         } /* Devices */
@@ -1614,7 +1614,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGazePointPreview = __uuidof(IGazePointPreview);
+                    extern MIDL_CONST_ID IID& IID_IGazePointPreview = _uuidof(IGazePointPreview);
                 } /* Preview */
             } /* Input */
         } /* Devices */

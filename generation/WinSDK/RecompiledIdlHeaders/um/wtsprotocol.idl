@@ -1372,25 +1372,5 @@ interface IWRdsEnhancedFastReconnectArbitrator : IUnknown
 
 };
 
-// The following interfaces are for Windows 11 GE.
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN11_GE)")
-
-interface IWRdsProtocolConnection2;
-
-// Optionally implemented by the RDP protocol stack, QIed from IWRdsProtocolConnection
-[
-    object,
-    uuid(C2BD9B66-4A76-4701-B6A3-BFAFC1482169),
-    pointer_default(unique)
-]
-interface IWRdsProtocolConnection2 : IWRdsProtocolConnection
-{
-    HRESULT GetSerializedUserCredential(
-        [out] WRDS_SERIALIZED_USER_CREDENTIAL** userCredential
-        );
-};
-
-cpp_quote("#endif")
-
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_XAML_HOSTING_HOSTINGCONTRACT_VERSION)
@@ -1133,7 +1133,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesignerAppExitedEventArgs = __uuidof(IDesignerAppExitedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IDesignerAppExitedEventArgs = _uuidof(IDesignerAppExitedEventArgs);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1189,7 +1189,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesignerAppManager = __uuidof(IDesignerAppManager);
+                    extern MIDL_CONST_ID IID& IID_IDesignerAppManager = _uuidof(IDesignerAppManager);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1228,7 +1228,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesignerAppManagerFactory = __uuidof(IDesignerAppManagerFactory);
+                    extern MIDL_CONST_ID IID& IID_IDesignerAppManagerFactory = _uuidof(IDesignerAppManagerFactory);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1280,7 +1280,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesignerAppView = __uuidof(IDesignerAppView);
+                    extern MIDL_CONST_ID IID& IID_IDesignerAppView = _uuidof(IDesignerAppView);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1342,7 +1342,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesktopWindowXamlSource = __uuidof(IDesktopWindowXamlSource);
+                    extern MIDL_CONST_ID IID& IID_IDesktopWindowXamlSource = _uuidof(IDesktopWindowXamlSource);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1382,7 +1382,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceFactory = __uuidof(IDesktopWindowXamlSourceFactory);
+                    extern MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceFactory = _uuidof(IDesktopWindowXamlSourceFactory);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1420,7 +1420,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceGotFocusEventArgs = __uuidof(IDesktopWindowXamlSourceGotFocusEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceGotFocusEventArgs = _uuidof(IDesktopWindowXamlSourceGotFocusEventArgs);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1458,7 +1458,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceTakeFocusRequestedEventArgs = __uuidof(IDesktopWindowXamlSourceTakeFocusRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IDesktopWindowXamlSourceTakeFocusRequestedEventArgs = _uuidof(IDesktopWindowXamlSourceTakeFocusRequestedEventArgs);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1493,7 +1493,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IElementCompositionPreview = __uuidof(IElementCompositionPreview);
+                    extern MIDL_CONST_ID IID& IID_IElementCompositionPreview = _uuidof(IElementCompositionPreview);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1544,7 +1544,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics = __uuidof(IElementCompositionPreviewStatics);
+                    extern MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics = _uuidof(IElementCompositionPreviewStatics);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1595,7 +1595,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics2 = __uuidof(IElementCompositionPreviewStatics2);
+                    extern MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics2 = _uuidof(IElementCompositionPreviewStatics2);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1638,7 +1638,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics3 = __uuidof(IElementCompositionPreviewStatics3);
+                    extern MIDL_CONST_ID IID& IID_IElementCompositionPreviewStatics3 = _uuidof(IElementCompositionPreviewStatics3);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1673,7 +1673,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IWindowsXamlManager = __uuidof(IWindowsXamlManager);
+                    extern MIDL_CONST_ID IID& IID_IWindowsXamlManager = _uuidof(IWindowsXamlManager);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1711,7 +1711,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWindowsXamlManagerStatics = __uuidof(IWindowsXamlManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IWindowsXamlManagerStatics = _uuidof(IWindowsXamlManagerStatics);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1755,7 +1755,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationRequest = __uuidof(IXamlSourceFocusNavigationRequest);
+                    extern MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationRequest = _uuidof(IXamlSourceFocusNavigationRequest);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1805,7 +1805,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationRequestFactory = __uuidof(IXamlSourceFocusNavigationRequestFactory);
+                    extern MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationRequestFactory = _uuidof(IXamlSourceFocusNavigationRequestFactory);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1843,7 +1843,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationResult = __uuidof(IXamlSourceFocusNavigationResult);
+                    extern MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationResult = _uuidof(IXamlSourceFocusNavigationResult);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1882,7 +1882,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationResultFactory = __uuidof(IXamlSourceFocusNavigationResultFactory);
+                    extern MIDL_CONST_ID IID& IID_IXamlSourceFocusNavigationResultFactory = _uuidof(IXamlSourceFocusNavigationResultFactory);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1941,7 +1941,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Present(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenter = __uuidof(IXamlUIPresenter);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenter = _uuidof(IXamlUIPresenter);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -1978,7 +1978,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenterHost = __uuidof(IXamlUIPresenterHost);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenterHost = _uuidof(IXamlUIPresenterHost);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -2014,7 +2014,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenterHost2 = __uuidof(IXamlUIPresenterHost2);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenterHost2 = _uuidof(IXamlUIPresenterHost2);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -2053,7 +2053,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenterHost3 = __uuidof(IXamlUIPresenterHost3);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenterHost3 = _uuidof(IXamlUIPresenterHost3);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -2098,7 +2098,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE NotifyWindowSizeChanged(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenterStatics = __uuidof(IXamlUIPresenterStatics);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenterStatics = _uuidof(IXamlUIPresenterStatics);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -2150,7 +2150,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IXamlUIPresenterStatics2 = __uuidof(IXamlUIPresenterStatics2);
+                    extern MIDL_CONST_ID IID& IID_IXamlUIPresenterStatics2 = _uuidof(IXamlUIPresenterStatics2);
                 } /* Hosting */
             } /* Xaml */
         } /* UI */
@@ -2292,8 +2292,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
@@ -4948,8 +4948,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:

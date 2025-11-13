@@ -489,7 +489,6 @@ DEFINE_GUIDSTRUCT("45AAB42E-CAEB-4052-8AA9-B38CB5109619", KSNODETYPE_AUDIO_MODUL
 #define KSNODETYPE_AUDIO_MODULE DEFINE_GUIDNAMED(KSNODETYPE_AUDIO_MODULE)
 #endif
 
-
 // USB MIDI Nodes
 #define STATIC_KSNODETYPE_MIDI_JACK\
     0x265e0c3f, 0xfa39, 0x4df3, 0xab, 0x04, 0xbe, 0x01, 0xb9, 0x1e, 0x29, 0x9a
@@ -943,7 +942,7 @@ typedef struct {
 
 // Convenient wrapper structure for the case in which the WaveFormatExt is
 // known not to contain extra data.
-typedef struct
+typedef struct 
 {
     KSDATAFORMAT            DataFormat;
     WAVEFORMATEXTENSIBLE    WaveFormatExt;
@@ -995,11 +994,11 @@ typedef struct {
 //The KSAUDIO_PRESENTATION_POSITION structure specifies the current positions of audio data being rendered to the KS pin instance.
 typedef struct
 {
-  UINT64 u64PositionInBlocks; // The block offset from the start of the stream to the current post-decoded uncompressed
-                              // position in the stream, where a block is the group of channels in the same sample; for a PCM stream,
-                  // a block is same as a frame. For compressed formats, a block is a single sample within a frame
-                              // (eg. each MP3 frame has 1152 samples or 1152 blocks)
-  UINT64 u64QPCPosition;      // The value of the performance counter at the time that the audio endpoint device read the device
+  UINT64 u64PositionInBlocks; // The block offset from the start of the stream to the current post-decoded uncompressed 
+                              // position in the stream, where a block is the group of channels in the same sample; for a PCM stream, 
+                  // a block is same as a frame. For compressed formats, a block is a single sample within a frame 
+                              // (eg. each MP3 frame has 1152 samples or 1152 blocks) 
+  UINT64 u64QPCPosition;      // The value of the performance counter at the time that the audio endpoint device read the device 
                               // position (*pu64Position) in response to the KSAUDIO_PRESENTATION_POSITION call.
 } KSAUDIO_PRESENTATION_POSITION, *PKSAUDIO_PRESENTATION_POSITION;
 
@@ -1102,12 +1101,12 @@ typedef struct {
         SHORT  wHorizontalAngleEnd;   // Work Volume HorizontalAngle End
         USHORT usFrequencyBandLo;     // Low end of Freq Range
         USHORT usFrequencyBandHi;     // High end of Freq Range
-
-        USHORT usNumberOfMicrophones;  // Count of microphone
-                                   // coordinate structures
+        
+        USHORT usNumberOfMicrophones;  // Count of microphone 
+                                   // coordinate structures 
                                    // to follow.
 
-        KSAUDIO_MICROPHONE_COORDINATES KsMicCoord[1]; // Array of Microphone
+        KSAUDIO_MICROPHONE_COORDINATES KsMicCoord[1]; // Array of Microphone 
                                                   // Coordinate structures
 } KSAUDIO_MIC_ARRAY_GEOMETRY, *PKSAUDIO_MIC_ARRAY_GEOMETRY;
 
@@ -1714,7 +1713,7 @@ typedef enum {
     , KSPROPERTY_AUDIO_ALGORITHM_INSTANCE
     , KSPROPERTY_AUDIO_FILTER_STATE
     , KSPROPERTY_AUDIO_PREFERRED_STATUS
-
+    
 #endif // (NTDDI_VERSION >= NTDDI_WINXP)
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -1740,7 +1739,7 @@ typedef enum {
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
     , KSPROPERTY_AUDIO_WAVERT_CURRENT_WRITE_LASTBUFFER_POSITION
-    , KSPROPERTY_AUDIO_VOLUMELIMIT_ENGAGED
+    , KSPROPERTY_AUDIO_VOLUMELIMIT_ENGAGED 
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
@@ -1957,7 +1956,7 @@ typedef struct _tagKSTELEPHONY_PROVIDERCHANGE
 } KSTELEPHONY_PROVIDERCHANGE, *PKSTELEPHONY_PROVIDERCHANGE;
 
 typedef enum {
-    TELEPHONY_CALLSTATE_DISABLED = 0,
+    TELEPHONY_CALLSTATE_DISABLED = 0, 
     TELEPHONY_CALLSTATE_ENABLED,
     TELEPHONY_CALLSTATE_HOLD,
     TELEPHONY_CALLSTATE_PROVIDERTRANSITION
@@ -1983,7 +1982,7 @@ typedef enum
 typedef struct _tagKSTOPOLOGY_ENDPOINTID
 {
     WCHAR TopologyName[MAX_PATH];  // Reference string for topology filter of an endpoint
-    ULONG  PinId;                  // Topology filter pin id to which endpoint is connected
+    ULONG  PinId;                  // Topology filter pin id to which endpoint is connected 
 } KSTOPOLOGY_ENDPOINTID, *PKSTOPOLOGY_ENDPOINTID;
 
 typedef struct _tagKSTOPOLOGY_ENDPOINTIDPAIR
@@ -3008,52 +3007,6 @@ DEFINE_GUIDSTRUCT("2CA15FA0-6CFE-11CF-A5D6-28DB04C10000", KSDATAFORMAT_SUBTYPE_M
 DEFINE_GUIDSTRUCT("4995DAF0-9EE6-11D0-A40E-00A0C9223196", KSDATAFORMAT_SUBTYPE_RIFFMIDI);
 #define KSDATAFORMAT_SUBTYPE_RIFFMIDI DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_RIFFMIDI)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-#define STATIC_KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET\
-    0xfbffd49e, 0xce26, 0x464a, 0x9d, 0xfc, 0xfe, 0xe4, 0x24, 0x56, 0xc8, 0x1c
-DEFINE_GUIDSTRUCT("FBFFD49E-CE26-464A-9DFC-FEE42456C81C", KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET);
-#define KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET)
-
-#define STATIC_KSPROPSETID_MidiLoopedStreaming\
-            0x1f306ba6, 0xfd9b, 0x427a, 0xbc, 0xb3, 0x27, 0xcb, 0xcf, 0xe, 0xf, 0x19
-        DEFINE_GUIDSTRUCT("1F306BA6-FD9B-427A-BCB3-27CBCF0E0F19", KSPROPSETID_MidiLoopedStreaming);
-#define KSPROPSETID_MidiLoopedStreaming DEFINE_GUIDNAMED(KSPROPSETID_MidiLoopedStreaming)
-
-typedef enum {
-    KSPROPERTY_MIDILOOPEDSTREAMING_BUFFER,
-    KSPROPERTY_MIDILOOPEDSTREAMING_REGISTERS,
-    KSPROPERTY_MIDILOOPEDSTREAMING_NOTIFICATION_EVENT,
-} KSPROPERTY_MIDILOOPEDSTREAMING;
-
-typedef struct {
-    PVOID   BufferAddress;
-    ULONG   ActualBufferSize;
-} KSMIDILOOPED_BUFFER, *PKSMIDILOOPED_BUFFER;
-
-typedef struct {
-    PVOID WritePosition;
-    PVOID ReadPosition;
-} KSMIDILOOPED_REGISTERS, *PKSMIDILOOPED_REGISTERS;
-
-typedef struct {
-    HANDLE WriteEvent;
-} KSMIDILOOPED_EVENT, *PKSMIDILOOPED_EVENT;
-
-typedef struct {
-    KSPROPERTY  Property;
-    ULONG       RequestedBufferSize;
-} KSMIDILOOPED_BUFFER_PROPERTY, *PKSMIDILOOPED_BUFFER_PROPERTY;
-
-// Data format for KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET
-typedef struct {
-    LONGLONG Position;
-    ULONG   ByteCount;
-} UMPDATAFORMAT, *PUMPDATAFORMAT;
-
-#define LOOPEDDATAFORMAT UMPDATAFORMAT
-#define PLOOPEDDATAFORMAT PUMPDATAFORMAT
-#endif //  (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
 /*
     KSDATAFORMAT_SUBTYPE_DIRECTMUSIC
     see DMusicKS.h
@@ -3547,65 +3500,11 @@ DEFINE_GUIDSTRUCT("0000010c-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_I
 DEFINE_GUIDSTRUCT("0000030c-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21);
 #define KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21 DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21)
 
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21_PROFILE4 \
-    0x0000070cL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("0000070c-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21_PROFILE4);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21_PROFILE4 DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21_PROFILE4)
-
 #define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_DST \
     0x0000000dL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
 DEFINE_GUIDSTRUCT("0000000d-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_DST);
 #define KSDATAFORMAT_SUBTYPE_IEC61937_DST DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_DST)
 
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_LC \
-    0x000110bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000110bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_LC);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_LC DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_LC)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_LC \
-    0x000120bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000120bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_LC);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_LC DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_LC)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_LC \
-    0x000130bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000130bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_LC);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_LC DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_LC)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_LC \
-    0x000140bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000140bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_LC);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_LC DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_LC)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_LC \
-    0x000150bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000150bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_LC);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_LC DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_LC)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_BL \
-    0x000210bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000210bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_BL);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_BL DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_BL)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_BL \
-    0x000220bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000220bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_BL);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_BL DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_BL)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_BL \
-    0x000230bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000230bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_BL);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_BL DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_BL)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_BL \
-    0x000240bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000240bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_BL);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_BL DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_BL)
-
-#define STATIC_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_BL \
-    0x000250bfL, 0x0cea, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71
-DEFINE_GUIDSTRUCT("000250bf-0cea-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_BL);
-#define KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_BL DEFINE_GUIDNAMED(KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_BL)
 
 //MP3
 #define STATIC_KSDATAFORMAT_SUBTYPE_MPEGLAYER3 \
@@ -5051,12 +4950,12 @@ typedef enum {
 DEFINE_GUIDSTRUCT("E73FACE3-2880-4902-B799-88D0CD634E0F", KSPROPSETID_VramCapture);
 #define KSPROPSETID_VramCapture DEFINE_GUIDNAMED(KSPROPSETID_VramCapture)
 
-typedef enum {
+typedef enum { 
     //
-    // enum value '0' means an invalid KSPROPERTY request.
+    // enum value '0' means an invalid KSPROPERTY request. 
     // Drivers should return an error.
     //
-    KSPROPERTY_DISPLAY_ADAPTER_GUID = 1,                        //Returns the Adapter GUID.
+    KSPROPERTY_DISPLAY_ADAPTER_GUID = 1,                        //Returns the Adapter GUID. 
     KSPROPERTY_PREFERRED_CAPTURE_SURFACE,                       //Returns the memory surface preferred by that pin
     KSPROPERTY_CURRENT_CAPTURE_SURFACE,                         //Sets/Gets currently selected capture surface
     KSPROPERTY_MAP_CAPTURE_HANDLE_TO_VRAM_ADDRESS       //Maps VRAM surface handle to VRAM physical address
@@ -5096,16 +4995,16 @@ typedef enum {
         NULL, 0, NULL, NULL, 0)
 
 //
-//Surface info passed on to the mini driver.
+//Surface info passed on to the mini driver. 
 //
 typedef struct {
     UINT_PTR hSurface;
     LONGLONG VramPhysicalAddress;
     DWORD cbCaptured;
-    DWORD dwWidth;
+    DWORD dwWidth; 
     DWORD dwHeight;
     DWORD dwLinearSize;
-    LONG  lPitch;
+    LONG  lPitch;  
     ULONGLONG ullReserved[16];
 } VRAM_SURFACE_INFO, *PVRAM_SURFACE_INFO;
 
@@ -5115,7 +5014,7 @@ typedef struct {
 }VRAM_SURFACE_INFO_PROPERTY_S, *PVRAM_SURFACE_INFO_PROPERTY_S;
 
 //
-//Secure buffer info passed on to the mini driver.
+//Secure buffer info passed on to the mini driver. 
 //
 typedef struct {
     GUID guidBufferIdentifier;
@@ -5147,20 +5046,6 @@ DEFINE_GUIDSTRUCT("162AC456-83D7-4239-96DF-C75FFA138BC6", KSEVENTSETID_DynamicFo
 typedef enum {
     KSEVENT_DYNAMIC_FORMAT_CHANGE = 0
 } KSEVENT_DYNAMICFORMATCHANGE;
-
-// {FC9D87B5-0B02-438E-89B0-E241FCE889AD}
-#define STATIC_KSATTRIBUTEID_VIDEOFORMAT_DX12 \
-    0xfc9d87b5, 0x0b02, 0x438e, 0x89, 0xb0, 0xe2, 0x41, 0xfc, 0xe8, 0x89, 0xad
-DEFINE_GUIDSTRUCT("FC9D87B5-0B02-438E-89B0-E241FCE889AD", KSATTRIBUTEID_VIDEOFORMAT_DX12);
-#define KSATTRIBUTEID_VIDEOFORMAT_DX12 DEFINE_GUIDNAMED(KSATTRIBUTEID_VIDEOFORMAT_DX12)
-
-typedef struct _VideoDXFormat
-{
-    KSATTRIBUTE Header;
-    ULONG resourceLayout;     // D3D12_TEXTURE_LAYOUT
-    ULONG resourceFlags;      // D3D12_RESOURCE_FLAGS
-    GUID customLayout;
-} VIDEOFORMAT_DX12, *PVIDEOFORMAT_DX12;
 
 //===========================================================================
 // KSSTREAM_HEADER extensions for digital video
@@ -5199,7 +5084,7 @@ typedef struct tagKS_FRAME_INFO {
     DWORD                   Reserved2;
 
     union {
-        struct {
+        struct { 
             DWORD       Reserved3;
             DWORD       Reserved4;
         };
@@ -5238,7 +5123,7 @@ typedef struct tagKS_VBI_FRAME_INFO {
     //
     //The following are for VRAM surface transport to support LDDM Capture
     //
-        //VRAM_SURFACE_INFO             VramSurfaceInfo;
+        //VRAM_SURFACE_INFO             VramSurfaceInfo;    
 } KS_VBI_FRAME_INFO, *PKS_VBI_FRAME_INFO;
 
 
@@ -5314,7 +5199,7 @@ typedef enum {
     // W I (informn a capture driver whether interleave capture is possible or
     //      not - a value of 1 means that interleaved capture is supported)
     , KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS
-
+ 
     // R O (if value == 1, then the ovmixer will turn on the DDVP_INTERLEAVE
     //      flag thus allowing interleaved capture of the video)
     , KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE
@@ -5329,14 +5214,14 @@ typedef struct {
     //KSPROPERTY Property;
     ULONG       CX;
         ULONG   CY;
-} KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S, *PKSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S;
-
+} KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S, *PKSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S; 
+ 
 typedef struct {
     //KSPROPERTY Property;
     ULONG       InterleavedCapSupported;
 } KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS_S, *PKSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS_S;
 
-
+ 
 typedef struct {
     //KSPROPERTY Property;
     ULONG       InterleavedCapPossible;
@@ -5377,7 +5262,7 @@ typedef enum {
     , KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER        // RW O
     , KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER_LIMIT  // RW O
     , KSPROPERTY_VIDEOPROCAMP_WHITEBALANCE_COMPONENT    // RW O
-    , KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY       // RW O
+    , KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY       // RW O    
 
 #endif // XP SP2 and later (chronologically)
 
@@ -5444,8 +5329,8 @@ typedef enum {
 typedef struct {
     KSPROPERTY Property;
     LONG  Value;                        // Value to set or get
-    ULONG Flags;
-    ULONG Capabilities;
+    ULONG Flags;                        
+    ULONG Capabilities;                 
 } KSPROPERTY_SELECTOR_S, *PKSPROPERTY_SELECTOR_S;
 
 typedef struct {
@@ -5608,7 +5493,7 @@ typedef struct {
     ULONG  FineTuneSensingRange;        // R -max range (Hz) in which tuner can detect actual frequency of a signal
 }TUNER_ANALOG_CAPS_S, *PTUNER_ANALOG_CAPS_S;
 
-// ...
+// ... 
 // More to come if new structures are needed for different network types.
 
 #define STATIC_EVENTSETID_TUNER\
@@ -5618,7 +5503,7 @@ DEFINE_GUIDSTRUCT("6a2e0606-28e4-11d0-a18c-00a0c9118956", EVENTSETID_TUNER);
 
 typedef enum {
     KSEVENT_TUNER_CHANGED,
-    KSEVENT_TUNER_INITIATE_SCAN    // initiate frequency scan
+    KSEVENT_TUNER_INITIATE_SCAN    // initiate frequency scan 
 } KSEVENT_TUNER;
 
 
@@ -5627,16 +5512,16 @@ typedef enum {
 // Determine if ES is possible with device
 typedef struct {
     KSPROPERTY Property;
-    BOOL fSupportsHardwareAssistedScanning; // R
-    ULONG SupportedBroadcastStandards;      // R
+    BOOL fSupportsHardwareAssistedScanning; // R 
+    ULONG SupportedBroadcastStandards;      // R 
     PVOID GUIDBucket;                       // RW
-    ULONG lengthofBucket;                   // R
+    ULONG lengthofBucket;                   // R   
 } KSPROPERTY_TUNER_SCAN_CAPS_S, *PKSPROPERTY_TUNER_SCAN_CAPS_S;
 
 // Get specific network type capabilities structure (such as TUNER_ANALOG_CAPS_S for example)
 typedef struct {
     KSPROPERTY Property;
-    GUID   NetworkType;               // R  -one of the interested GUIDs returned in KSPROPERTY_TUNER_SCAN_CAPS_S
+    GUID   NetworkType;               // R  -one of the interested GUIDs returned in KSPROPERTY_TUNER_SCAN_CAPS_S 
     ULONG  BufferSize;                // R  -size of the buffer;
     PVOID  NetworkTunerCapabilities;  // RW -Buffer
 }KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS_S, *PKSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS_S;
@@ -5667,7 +5552,7 @@ typedef struct {
 // USB Video Class Definitions
 
 #define STATIC_KSNODETYPE_VIDEO_STREAMING \
-    0xDFF229E1L, 0xF70F, 0x11D0, 0xB9, 0x17, 0x00, 0xA0, 0xC9, 0x22, 0x31, 0x96
+    0xDFF229E1L, 0xF70F, 0x11D0, 0xB9, 0x17, 0x00, 0xA0, 0xC9, 0x22, 0x31, 0x96 
 DEFINE_GUIDSTRUCT("DFF229E1-F70F-11D0-B917-00A0C9223196", KSNODETYPE_VIDEO_STREAMING);
 #define KSNODETYPE_VIDEO_STREAMING DEFINE_GUIDNAMED(KSNODETYPE_VIDEO_STREAMING)
 
@@ -5834,7 +5719,7 @@ typedef enum {
     , KSPROPERTY_CAMERACONTROL_IRIS_RELATIVE            // RW O
     , KSPROPERTY_CAMERACONTROL_FOCUS_RELATIVE           // RW O
     , KSPROPERTY_CAMERACONTROL_PANTILT_RELATIVE         // RW O
-    , KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH             // R  O
+    , KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH             // R  O    
     , KSPROPERTY_CAMERACONTROL_AUTO_EXPOSURE_PRIORITY   // RW O
 
 #endif // XP SP2 and later (chronologically)
@@ -5989,7 +5874,7 @@ DEFINE_GUIDSTRUCT("2FDFFC5D-C732-4BA6-B5DF-6B4D7FC88B8B", EVENTSETID_VIDCAP_CAME
 #define EVENTSETID_VIDCAP_CAMERACONTROL_REGION_OF_INTEREST DEFINE_GUIDNAMED(EVENTSETID_VIDCAP_CAMERACONTROL_REGION_OF_INTEREST)
 
 typedef struct {
-  RECT      FocusRect;
+  RECT      FocusRect; 
   BOOL      AutoFocusLock;
   BOOL      AutoExposureLock;
   BOOL      AutoWhitebalanceLock;
@@ -6055,7 +5940,7 @@ typedef enum {
     KSPROPERTY_CAMERACONTROL_EXTENDED_ZOOM,                                 // 24
     KSPROPERTY_CAMERACONTROL_EXTENDED_MCC,                                  // 25
     KSPROPERTY_CAMERACONTROL_EXTENDED_ISO_ADVANCED,                         // 26
-#endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
+#endif // (NTDDI_VERSION >= NTDDI_WINBLUE)  
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
     KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOSTABILIZATION,                   // 27
@@ -6096,12 +5981,6 @@ typedef enum {
     KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW,                        // 43
 #endif //  (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-    KSPROPERTY_CAMERACONTROL_EXTENDED_FRAMERATE_THROTTLE,                   // 44
-    KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2_CONFIGCAPS,              // 45
-    KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2,                         // 46
-#endif //  (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-
     KSPROPERTY_CAMERACONTROL_EXTENDED_END,                                  // All new controls must be before this!
     KSPROPERTY_CAMERACONTROL_EXTENDED_END2 = KSPROPERTY_CAMERACONTROL_EXTENDED_END
 } KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY;
@@ -6121,26 +6000,19 @@ DEFINE_GUIDSTRUCT("571C92C9-13A2-47E3-A649-D2A778166384", KSEVENTSETID_ExtendedC
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
 
-#define KSCAMERA_EXTENDEDPROP_CAPS_RESERVED                             0xFF00000000000000
+#define KSCAMERA_EXTENDEDPROP_CAPS_RESERVED                             0xFF00000000000000 
 
 #define STATIC_KSEVENTSETID_CameraEvent \
     0x7899b2e0, 0x6b43, 0x4964, 0x9d, 0x2a, 0xa2, 0x1f, 0x40, 0x61, 0xf5, 0x76
 DEFINE_GUIDSTRUCT("7899B2E0-6B43-4964-9D2A-A21F4061F576", KSEVENTSETID_CameraEvent);
 #define KSEVENTSETID_CameraEvent DEFINE_GUIDNAMED(KSEVENTSETID_CameraEvent)
 
-typedef enum {
-    KSEVENT_PHOTO_SAMPLE_SCANNED,
-} KSEVENT_CAMERAEVENT;
-
+typedef enum {  
+    KSEVENT_PHOTO_SAMPLE_SCANNED,  
+} KSEVENT_CAMERAEVENT;  
+  
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
 
-// Property set implemented exclusively by Windows Studio camera effect pack (also known as MEP)
-#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-#define STATIC_KSPROPERTYSETID_WindowsCameraEffect \
-     0x1666d655, 0x21a6, 0x4982, 0x97, 0x28, 0x52, 0xc3, 0x9e, 0x86, 0x9f, 0x90
-    DEFINE_GUIDSTRUCT("1666D655-21A6-4982-9728-52C39E869F90", KSPROPERTYSETID_WindowsCameraEffect);
-#define KSPROPERTYSETID_WindowsCameraEffect DEFINE_GUIDNAMED(KSPROPERTYSETID_WindowsCameraEffect)
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 
 #define KSCAMERA_EXTENDEDPROP_CAPS_ASYNCCONTROL                         0x8000000000000000
@@ -6210,10 +6082,10 @@ typedef enum {
 
 #define KSCAMERA_EXTENDEDPROP_OPTIMIZATION_PERF_MASK                    (KSCAMERA_EXTENDEDPROP_OPTIMIZATION_QUALITY| \
                                                                          KSCAMERA_EXTENDEDPROP_OPTIMIZATION_LATENCY| \
-                                                                         KSCAMERA_EXTENDEDPROP_OPTIMIZATION_POWER)
+                                                                         KSCAMERA_EXTENDEDPROP_OPTIMIZATION_POWER)                                      
 
 #define KSCAMERA_EXTENDEDPROP_OPTIMIZATION_PRIMARYUSE_MASK              (KSCAMERA_EXTENDEDPROP_OPTIMIZATION_PHOTO|   \
-                                                                         KSCAMERA_EXTENDEDPROP_OPTIMIZATION_VIDEO)
+                                                                         KSCAMERA_EXTENDEDPROP_OPTIMIZATION_VIDEO)                                      
 
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 
@@ -6244,7 +6116,7 @@ typedef enum {
 
 // Focus control extends the generic video proc mask by adding the continous flag.
 #define KSCAMERA_EXTENDEDPROP_FOCUS_MODE_MASK                           (KSCAMERA_EXTENDEDPROP_VIDEOPROCFLAG_MASK|      \
-                                                                         KSCAMERA_EXTENDEDPROP_FOCUS_CONTINUOUS)
+                                                                         KSCAMERA_EXTENDEDPROP_FOCUS_CONTINUOUS)        
 
 #define KSCAMERA_EXTENDEDPROP_FOCUS_RANGE_MACRO                         0x0000000000010000
 #define KSCAMERA_EXTENDEDPROP_FOCUS_RANGE_NORMAL                        0x0000000000020000
@@ -6305,7 +6177,7 @@ typedef enum {
 #define KSCAMERA_EXTENDEDPROP_FLASH_ASSISTANT_MASK                      (KSCAMERA_EXTENDEDPROP_FLASH_ASSISTANT_ON|\
                                                                          KSCAMERA_EXTENDEDPROP_FLASH_ASSISTANT_AUTO)
 
-#endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
+#endif // (NTDDI_VERSION >= NTDDI_WINBLUE)     
 
 
 #define KSCAMERA_EXTENDEDPROP_EVCOMP_SIXTHSTEP                          0x0000000000000001
@@ -6406,8 +6278,8 @@ typedef struct tagKSCAMERA_EXTENDEDPROP_CAMERAOFFSET {
 
 // Metadata
 typedef struct tagKSCAMERA_EXTENDEDPROP_METADATAINFO {
-    LONG    BufferAlignment;         // Required alignment for metadata buffer
-    ULONG   MaxMetadataBufferSize;   // Required metadata buffer size
+    LONG    BufferAlignment;         // Required alignment for metadata buffer  
+    ULONG   MaxMetadataBufferSize;   // Required metadata buffer size  
 } KSCAMERA_EXTENDEDPROP_METADATAINFO, *PKSCAMERA_EXTENDEDPROP_METADATAINFO;
 
 typedef enum {
@@ -6420,7 +6292,7 @@ typedef enum {
     KSCAMERA_EXTENDEDPROP_MetadataAlignment_1024,
     KSCAMERA_EXTENDEDPROP_MetadataAlignment_2048,
     KSCAMERA_EXTENDEDPROP_MetadataAlignment_4096,
-    KSCAMERA_EXTENDEDPROP_MetadataAlignment_8192
+    KSCAMERA_EXTENDEDPROP_MetadataAlignment_8192  
 } KSCAMERA_EXTENDEDPROP_MetadataAlignment;
 
 #define KSCAMERA_EXTENDEDPROP_METADATA_MEMORYTYPE_MASK                  0x00000000000000FF
@@ -6443,13 +6315,13 @@ typedef enum {
 } KSCAMERA_MetadataId;
 
 typedef struct tagKSCAMERA_METADATA_ITEMHEADER {
-    ULONG   MetadataId;
+    ULONG   MetadataId;     
     ULONG   Size;         // Size of this header + metadata payload following
 } KSCAMERA_METADATA_ITEMHEADER, *PKSCAMERA_METADATA_ITEMHEADER;
 
 typedef struct tagKSCAMERA_METADATA_PHOTOCONFIRMATION {
     KSCAMERA_METADATA_ITEMHEADER   Header;
-    ULONG                          PhotoConfirmationIndex;
+    ULONG                          PhotoConfirmationIndex;  
     ULONG                          Reserved;
 }KSCAMERA_METADATA_PHOTOCONFIRMATION, *PKSCAMERA_METADATA_PHOTOCONFIRMATION;
 
@@ -6499,24 +6371,24 @@ typedef struct tagKSCAMERA_METADATA_CAPTURESTATS {
 // Focus State
 typedef enum
 {
-    KSCAMERA_EXTENDEDPROP_FOCUSSTATE_UNINITIALIZED = 0,
+    KSCAMERA_EXTENDEDPROP_FOCUSSTATE_UNINITIALIZED = 0, 
     KSCAMERA_EXTENDEDPROP_FOCUSSTATE_LOST,
-    KSCAMERA_EXTENDEDPROP_FOCUSSTATE_SEARCHING,
+    KSCAMERA_EXTENDEDPROP_FOCUSSTATE_SEARCHING, 
     KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FOCUSED,
     KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FAILED,
 } KSCAMERA_EXTENDEDPROP_FOCUSSTATE;
 
 // Extended ROI
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPSHEADER {
-    ULONG       Size;                   // Size of this header + all _CONFIGCAPS structures followed
-    ULONG       ConfigCapCount;         // Number of _CONFIGCAPS structures followed
+    ULONG       Size;                   // Size of this header + all _CONFIGCAPS structures followed 
+    ULONG       ConfigCapCount;         // Number of _CONFIGCAPS structures followed 
     ULONGLONG   Reserved;
 } KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPSHEADER, *PKSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPSHEADER;
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPS {
     ULONG       ControlId;              // ISP control ID (focus, exposure, or white balance)
     ULONG       MaxNumberOfROIs;        // Max ROIs supported for this ISP control
-    ULONGLONG   Capability;             // Caps for this ISP control
+    ULONGLONG   Capability;             // Caps for this ISP control   
 } KSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPS, *PKSCAMERA_EXTENDEDPROP_ROI_CONFIGCAPS;
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER {
@@ -6526,7 +6398,7 @@ typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER {
 } KSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER, *PKSCAMERA_EXTENDEDPROP_ROI_ISPCONTROLHEADER;
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_ISPCONTROL {
-    ULONG       ControlId;              // ISP control ID (focus, exposure, or white balance)
+    ULONG       ControlId;              // ISP control ID (focus, exposure, or white balance) 
     ULONG       ROICount;               // Number of ROIs associated with this ISP control
     ULONG       Result;                 // Error results of the last SET operation for this ISP control
     ULONG       Reserved;
@@ -6535,11 +6407,11 @@ typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_ISPCONTROL {
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_INFO {
     RECT        Region;                 // Relative coordinates on the frame that face detection is running (Q31 format)
     ULONGLONG   Flags;                  // VIDEOPROCFLAG flags indicating the op mode for the ISP control. Default is 0 for focus
-    LONG        Weight;                 // Weight of the region   (0 -100)
+    LONG        Weight;                 // Weight of the region   (0 -100)  
     LONG        RegionOfInterestType;   // KSCAMERA_EXTENDEDPROP_ROITYPE_FACE, if the region is a face; Unknown otherwise
 } KSCAMERA_EXTENDEDPROP_ROI_INFO, *PKSCAMERA_EXTENDEDPROP_ROI_INFO;
 
-typedef enum
+typedef enum 
 {
     KSCAMERA_EXTENDEDPROP_ROITYPE_UNKNOWN = 0,
     KSCAMERA_EXTENDEDPROP_ROITYPE_FACE,
@@ -6547,17 +6419,17 @@ typedef enum
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE {
     KSCAMERA_EXTENDEDPROP_ROI_INFO   ROIInfo;   // Must be the first field
-    ULONGLONG                        Reserved;
+    ULONGLONG                        Reserved;     
 } KSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE, *PKSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE;
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_EXPOSURE {
     KSCAMERA_EXTENDEDPROP_ROI_INFO   ROIInfo;   // Must be the first field
-    ULONGLONG                        Reserved;
+    ULONGLONG                        Reserved;     
 } KSCAMERA_EXTENDEDPROP_ROI_EXPOSURE, *PKSCAMERA_EXTENDEDPROP_ROI_EXPOSURE;
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_ROI_FOCUS {
     KSCAMERA_EXTENDEDPROP_ROI_INFO   ROIInfo;   // Must be the first field
-    ULONGLONG                        Reserved;
+    ULONGLONG                        Reserved;     
 } KSCAMERA_EXTENDEDPROP_ROI_FOCUS, *PKSCAMERA_EXTENDEDPROP_ROI_FOCUS;
 
 // Photo confirmation (aka still confirmation)
@@ -6640,7 +6512,7 @@ typedef struct {
 #define KSCAMERA_EXTENDEDPROP_VIDEOSTABILIZATION_AUTO                       0x0000000000000002
 
 #define KSCAMERA_EXTENDEDPROP_VFR_OFF                                       0x0000000000000000
-#define KSCAMERA_EXTENDEDPROP_VFR_ON                                        0x0000000000000001
+#define KSCAMERA_EXTENDEDPROP_VFR_ON                                        0x0000000000000001 
 
 #define KSCAMERA_EXTENDEDPROP_FACEDETECTION_OFF                             0x0000000000000000
 #define KSCAMERA_EXTENDEDPROP_FACEDETECTION_ON                              0x0000000000000001
@@ -6658,7 +6530,7 @@ typedef struct {
                                                                              KSCAMERA_EXTENDEDPROP_FACEDETECTION_SMILE)
 
 #define KSCAMERA_EXTENDEDPROP_VIDEOHDR_OFF                                  0x0000000000000000
-#define KSCAMERA_EXTENDEDPROP_VIDEOHDR_ON                                   0x0000000000000001
+#define KSCAMERA_EXTENDEDPROP_VIDEOHDR_ON                                   0x0000000000000001 
 #define KSCAMERA_EXTENDEDPROP_VIDEOHDR_AUTO                                 0x0000000000000002
 
 #define KSCAMERA_EXTENDEDPROP_HISTOGRAM_OFF                                 0x0000000000000000
@@ -6686,7 +6558,7 @@ typedef struct {
 #define KSCAMERA_EXTENDEDPROP_SECUREMODE_ENABLED                            0x0000000000000002
 
 #define KSCAMERA_EXTENDEDPROP_VIDEOTEMPORALDENOISING_AUTO                   0x0000000000000001
-#define KSCAMERA_EXTENDEDPROP_VIDEOTEMPORALDENOISING_OFF                    0x0000000000000002
+#define KSCAMERA_EXTENDEDPROP_VIDEOTEMPORALDENOISING_OFF                    0x0000000000000002 
 #define KSCAMERA_EXTENDEDPROP_VIDEOTEMPORALDENOISING_ON                     0x0000000000000004
 
 #define KSCAMERA_EXTENDEDPROP_IRTORCHMODE_OFF                               0x0000000000000001
@@ -6720,14 +6592,6 @@ typedef struct {
 #define KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_MASK                           (KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_MANUAL | \
                                                                             KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_AUTOFACEFRAMING)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-
-// Dynamic Framerate Throttle Flags
-#define KSCAMERA_EXTENDEDPROP_FRAMERATE_THROTTLE_OFF                       0x0000000000000000
-#define KSCAMERA_EXTENDEDPROP_FRAMERATE_THROTTLE_ON                        0x0000000000000001
-
-#endif //  (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-
 // Digital Window Region
 typedef struct tagKSCAMERA_EXTENDEDPROP_DIGITALWINDOW_SETTING {
     LONG        OriginX;                // in Q24
@@ -6743,7 +6607,7 @@ typedef struct tagKSCAMERA_METADATA_DIGITALWINDOW {
 
 // Digital Window Capabilities
 typedef struct tagKSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPSHEADER {
-    ULONG       Size;                   // Size of this header + all _CONFIGCAPS structures followed
+    ULONG       Size;                   // Size of this header + all _CONFIGCAPS structures followed 
     ULONG       Count;                  // Number of _CONFIGCAPS structures followed
 } KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPSHEADER, *PKSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPSHEADER;
 
@@ -6760,41 +6624,29 @@ typedef struct tagKSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPS {
     LONG        Reserved;               // Reserved
 } KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPS, *PKSCAMERA_EXTENDEDPROP_DIGITALWINDOW_CONFIGCAPS;
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-
-
-typedef struct tagKSCAMERA_EXTENDEDPROP_FIELDOFVIEW2_CONFIGCAPS {
-    WORD        DefaultDiagonalFieldOfViewInDegrees;    // This is the default Field of View value in degrees.
-    WORD        DiscreteFoVStopsCount;                  // Count of used entries in DiscreteFoVStops array.
-    WORD        DiscreteFoVStops[360];                  // Descending list of FoV Stops in degrees.
-    ULONG       Reserved;                               // For 8-byte size align
-} KSCAMERA_EXTENDEDPROP_FIELDOFVIEW2_CONFIGCAPS, *PKSCAMERA_EXTENDEDPROP_FIELDOFVIEW2_CONFIGCAPS;
-
-#endif //  (NTDDI_VERSION >= NTDDI_WIN11_ZN)
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 typedef struct tagKSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS {
     // Output width and height in pixels
     SIZE Resolution;
 
-    // The maximum frame rate the driver can accommodate  for achieving
+    // The maximum frame rate the driver can accommodate  for achieving 
     // background segmentation for each frame corresponding to Resolution
     struct
     {
-        LONG Numerator;
+        LONG Numerator; 
         LONG Denominator;
     } MaxFrameRate;
-
+    
     // The width and height of the mask produced when streaming
     // with a MediaType corresponding to Resolution and MaxFrameRate
     SIZE MaskResolution;
 
-    // Optional subtype for which this configuration capability applies. If left
-    // to zero, all streams conforming the Resolution and MaxFrameRate will support
+    // Optional subtype for which this configuration capability applies. If left 
+    // to zero, all streams conforming the Resolution and MaxFrameRate will support 
     // background segmentation with the specified MaskResolution.
     GUID SubType;
-
+ 
 } KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS, *PKSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS;
 
 typedef struct tagKSCAMERA_METADATA_BACKGROUNDSEGMENTATIONMASK {
@@ -6903,7 +6755,7 @@ DEFINE_GUIDSTRUCT("0E34CDC1-27AD-437F-ABDE-02B629F37B44", KSCAMERAPROFILE_Compre
 
 typedef struct _KSCAMERA_PROFILE_MEDIAINFO
 {
-    struct
+    struct 
     {
         UINT32  X;
         UINT32  Y;
@@ -6924,31 +6776,31 @@ typedef struct _KSCAMERA_PROFILE_MEDIAINFO
 typedef struct _KSCAMERA_PROFILE_PININFO
 {
     GUID                         PinCategory;
-    union
+    union  
     {
         struct
-        {
+        {   
             USHORT PinIndex;
             USHORT ProfileSensorType;
         };
         UINT32                       Reserved;
     };
     UINT32                       MediaInfoCount;
-    PKSCAMERA_PROFILE_MEDIAINFO  MediaInfos;
+    PKSCAMERA_PROFILE_MEDIAINFO  MediaInfos; 
 } KSCAMERA_PROFILE_PININFO, *PKSCAMERA_PROFILE_PININFO;
 
 typedef struct _KSCAMERA_PROFILE_INFO
 {
     GUID                        ProfileId;
     UINT32                      Index;
-    UINT32                      PinCount;
+    UINT32                      PinCount;                          
     PKSCAMERA_PROFILE_PININFO   Pins;
 } KSCAMERA_PROFILE_INFO, *PKSCAMERA_PROFILE_INFO;
 
 typedef struct _KSCAMERA_PROFILE_CONCURRENCYINFO
 {
-    GUID                    ReferenceGuid;
-    UINT32                  Reserved;
+    GUID                    ReferenceGuid;    
+    UINT32                  Reserved;           
     UINT32                  ProfileCount;
     PKSCAMERA_PROFILE_INFO  Profiles;
 } KSCAMERA_PROFILE_CONCURRENCYINFO,*PKSCAMERA_PROFILE_CONCURRENCYINFO;
@@ -7008,14 +6860,14 @@ typedef struct _WNF_KSCAMERA_STREAMSTATE_INFO
 //
 // Network Camera related definitions
 //
-typedef enum
-{
-    KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_DISABLE = 0,
-    KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_HOSTNTP,
-    KSPROPERYT_NETWORKCAMERACONTROL_NTPINFO_TYPE_CUSTOM,
-} KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE;
+typedef enum 
+{ 
+    KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_DISABLE = 0, 
+    KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_HOSTNTP, 
+    KSPROPERYT_NETWORKCAMERACONTROL_NTPINFO_TYPE_CUSTOM, 
+} KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE; 
 
-typedef struct
+typedef struct 
 {
     ULONG      Size;
     KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE Type;
@@ -7027,20 +6879,20 @@ KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_HEADER, *PKSPROPERTY_NETWORKCAMERACONTRO
 DEFINE_GUIDSTRUCT("0E780F09-5745-4E3A-BC9F-F226EA43A6EC", KSPROPERTYSETID_NetworkCameraControl);
 #define KSPROPERTYSETID_NetworkCameraControl DEFINE_GUIDNAMED(KSPROPERTYSETID_NetworkCameraControl)
 
-typedef enum
+typedef enum 
 {
   KSPROPERTY_NETWORKCAMERACONTROL_NTP,
   KSPROPERTY_NETWORKCAMERACONTROL_URI,
-#if(NTDDI_VERSION >= NTDDI_WIN10_FE)
-  KSPROPERTY_NETWORKCAMERACONTROL_METADATA,
-  KSPROPERTY_NETWORKCAMERACONTROL_EVENTTOPICS_XML,
+#if(NTDDI_VERSION >= NTDDI_WIN10_FE)  
+  KSPROPERTY_NETWORKCAMERACONTROL_METADATA, 
+  KSPROPERTY_NETWORKCAMERACONTROL_EVENTTOPICS_XML, 
 #endif
 } KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY;
 
 #if(NTDDI_VERSION >= NTDDI_WIN10_FE)
-typedef enum
-{
-    KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE_EVENTSINFO,
+typedef enum 
+{ 
+    KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE_EVENTSINFO, 
 } KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE;
 
 typedef struct _KSPROPERTY_NETWORKCAMERACONTROL_METADATA_INFO
@@ -7110,7 +6962,7 @@ typedef struct tagDEVCAPS{
     LONG AudioIn;
     LONG Calibrate;
     LONG SeekType;
-    LONG SimulatedHardware;
+    LONG SimulatedHardware;        
 } DEVCAPS, *PDEVCAPS;
 
 typedef struct {
@@ -7132,7 +6984,7 @@ DEFINE_GUIDSTRUCT("A03CD5F0-3045-11cf-8C44-00AA006B6814", PROPSETID_EXT_TRANSPOR
 #define PROPSETID_EXT_TRANSPORT DEFINE_GUIDNAMED(PROPSETID_EXT_TRANSPORT)
 
 typedef enum {
-    KSPROPERTY_EXTXPORT_CAPABILITIES,       // (R)  Transport specific capability
+    KSPROPERTY_EXTXPORT_CAPABILITIES,       // (R)  Transport specific capability 
     KSPROPERTY_EXTXPORT_INPUT_SIGNAL_MODE,  // (RW) Input signal: e.g. dvsd/NTSC/PAL, dvsl/NTSC/PAL, MPEG2-TS etc
     KSPROPERTY_EXTXPORT_OUTPUT_SIGNAL_MODE, // (RW) Output signal: e.g. dvsd/NTSC/PAL, dvsl/NTSC/PAL, MPEG2-TS etc
     KSPROPERTY_EXTXPORT_LOAD_MEDIUM,        // (RW) Eject, open tray, close tray
@@ -7208,62 +7060,62 @@ typedef struct tagTRANSPORTAUDIOPARMS{
 } TRANSPORTAUDIOPARMS, *PTRANSPORTAUDIOPARMS;
 
 typedef struct {
-    BOOL  MediaPresent;
-    ULONG MediaType;
-    BOOL  RecordInhibit;
+    BOOL  MediaPresent;      
+    ULONG MediaType;         
+    BOOL  RecordInhibit;    
 } MEDIUM_INFO, *PMEDIUM_INFO;
 
 typedef struct {
-    ULONG Mode;
+    ULONG Mode;              
     ULONG State;
 } TRANSPORT_STATE, *PTRANSPORT_STATE;
 
 typedef struct {
     KSPROPERTY Property;
-    union {
+    union {    
         ULONG      Capabilities;
         ULONG      SignalMode;
         ULONG      LoadMedium;
         MEDIUM_INFO MediumInfo;
         TRANSPORT_STATE XPrtState;
         struct {
-          BYTE frame;
+          BYTE frame;        
           BYTE second;
           BYTE minute;
           BYTE hour;
         } Timecode;
-        DWORD dwTimecode;
-        DWORD dwAbsTrackNumber;
+        DWORD dwTimecode;            
+        DWORD dwAbsTrackNumber;      
         struct {
             ULONG   PayloadSize;
-            BYTE    Payload[512];
-        } RawAVC;
+            BYTE    Payload[512];  
+        } RawAVC;                    
     } u;
-
+     
 } KSPROPERTY_EXTXPORT_S, *PKSPROPERTY_EXTXPORT_S;
 
 typedef struct {
     KSP_NODE NodeProperty;
-    union {
+    union {    
         ULONG      Capabilities;
         ULONG      SignalMode;
         ULONG      LoadMedium;
         MEDIUM_INFO MediumInfo;
         TRANSPORT_STATE XPrtState;
         struct {
-          BYTE frame;
+          BYTE frame;        
           BYTE second;
           BYTE minute;
           BYTE hour;
         } Timecode;
-        DWORD dwTimecode;
-        DWORD dwAbsTrackNumber;
+        DWORD dwTimecode;            
+        DWORD dwAbsTrackNumber;      
         struct {
             ULONG   PayloadSize;
-            BYTE    Payload[512];
-        } RawAVC;
+            BYTE    Payload[512];  
+        } RawAVC;                    
     } u;
-
+     
 } KSPROPERTY_EXTXPORT_NODE_S, *PKSPROPERTY_EXTXPORT_NODE_S;
 
 //===========================================================================
@@ -7320,7 +7172,7 @@ DEFINE_GUIDSTRUCT("109c7988-b3cb-11d2-b48e-006097b3391b", KSEVENTSETID_EXTDEV_Co
 #define KSEVENTSETID_EXTDEV_Command DEFINE_GUIDNAMED(KSEVENTSETID_EXTDEV_Command)
 
 typedef enum {
-    KSEVENT_EXTDEV_COMMAND_NOTIFY_INTERIM_READY,     // Final response is ready for notify command
+    KSEVENT_EXTDEV_COMMAND_NOTIFY_INTERIM_READY,     // Final response is ready for notify command 
     KSEVENT_EXTDEV_COMMAND_CONTROL_INTERIM_READY,    // Final response is ready for control command.
     KSEVENT_EXTDEV_COMMAND_BUSRESET,                 // A bus reset has occured.
     KSEVENT_EXTDEV_TIMECODE_UPDATE,                  // Timecode has changed.
@@ -7967,8 +7819,8 @@ typedef enum {
 //
 typedef enum {
     KSPROPERTY_EXTENSION_UNIT_INFO,                  // (R)
-    KSPROPERTY_EXTENSION_UNIT_CONTROL,               // (RW)
-    KSPROPERTY_EXTENSION_UNIT_PASS_THROUGH = 0xffff  // (RW)
+    KSPROPERTY_EXTENSION_UNIT_CONTROL,               // (RW) 
+    KSPROPERTY_EXTENSION_UNIT_PASS_THROUGH = 0xffff  // (RW) 
 } KSPROPERTY_EXTENSION_UNIT, *PKSPROPERTY_EXTENSION_UNIT;
 
 #endif // XP SP2 and later (chronologically)
@@ -8119,12 +7971,12 @@ DEFINE_GUIDSTRUCT("6A577E92-83E1-4113-ADC2-4FCEC32F83A1", CODECAPI_ALLSETTINGS )
 #define CODECAPI_ALLSETTINGS DEFINE_GUIDNAMED(CODECAPI_ALLSETTINGS )
 
 #define STATIC_CODECAPI_SUPPORTSEVENTS \
-    0x0581af97, 0x7693, 0x4dbd, 0x9d, 0xca, 0x3f, 0x9e, 0xbd, 0x65, 0x85, 0xa1
+    0x0581af97, 0x7693, 0x4dbd, 0x9d, 0xca, 0x3f, 0x9e, 0xbd, 0x65, 0x85, 0xa1 
 DEFINE_GUIDSTRUCT("0581AF97-7693-4DBD-9DCA-3F9EBD6585A1", CODECAPI_SUPPORTSEVENTS );
 #define CODECAPI_SUPPORTSEVENTS DEFINE_GUIDNAMED(CODECAPI_SUPPORTSEVENTS )
 
 #define STATIC_CODECAPI_CURRENTCHANGELIST \
-    0x1cb14e83, 0x7d72, 0x4657, 0x83, 0xfd, 0x47, 0xa2, 0xc5, 0xb9, 0xd1, 0x3d
+    0x1cb14e83, 0x7d72, 0x4657, 0x83, 0xfd, 0x47, 0xa2, 0xc5, 0xb9, 0xd1, 0x3d 
 DEFINE_GUIDSTRUCT("1CB14E83-7D72-4657-83FD-47A2C5B9D13D", CODECAPI_CURRENTCHANGELIST );
 #define CODECAPI_CURRENTCHANGELIST DEFINE_GUIDNAMED(CODECAPI_CURRENTCHANGELIST )
 
@@ -8144,15 +7996,15 @@ typedef enum {
 
     //
     // Bit rate used for encoding is variable with the specified bitrate used
-    // as a guaranteed average over a specified window.  The default window
+    // as a guaranteed average over a specified window.  The default window 
     // size is considered to be 5 minutes.
     //
     VariableBitRateAverage,
 
     //
     // Bit rate used for encoding is variable with the specified bitrate used
-    // as an average with a peak not to exceed the specified peak bitrate over
-    // a specified window.  The default window size is considered to be 500ms
+    // as an average with a peak not to exceed the specified peak bitrate over 
+    // a specified window.  The default window size is considered to be 500ms 
     // (classically one GOP).
     //
     VariableBitRatePeak
@@ -8169,7 +8021,7 @@ typedef enum {
 DEFINE_GUIDSTRUCT("4509F757-2D46-4637-8E62-CE7DB944F57B", KSPROPSETID_Jack);
 #define KSPROPSETID_Jack DEFINE_GUIDNAMED(KSPROPSETID_Jack)
 
-// define new property id
+// define new property id 
 typedef enum {
     KSPROPERTY_JACK_DESCRIPTION = 1,
     KSPROPERTY_JACK_DESCRIPTION2,
@@ -8237,7 +8089,7 @@ typedef enum
 } EPxcPortConnection;
 
 // structure for KSPROPERTY_JACK_DESCRIPTION pin property
-typedef struct
+typedef struct 
 {
     DWORD                 ChannelMapping;
     DWORD                 Color;   // 0x00rrggbb; (NOT a COLORREF)
@@ -8248,7 +8100,7 @@ typedef struct
     BOOL                  IsConnected;
 } KSJACK_DESCRIPTION, *PKSJACK_DESCRIPTION;
 
-typedef enum
+typedef enum 
 {
     KSJACK_SINK_CONNECTIONTYPE_HDMI = 0,            // HDMI
     KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT,         // DisplayPort
@@ -8268,15 +8120,15 @@ typedef struct _tagKSJACK_SINK_INFORMATION
   LUID  PortId;                                     // Video port identifier
 }  KSJACK_SINK_INFORMATION, *PKSJACK_SINK_INFORMATION;
 
-#define JACKDESC2_PRESENCE_DETECT_CAPABILITY       0x00000001
+#define JACKDESC2_PRESENCE_DETECT_CAPABILITY       0x00000001 
 #define JACKDESC2_DYNAMIC_FORMAT_CHANGE_CAPABILITY 0x00000002
 
 typedef struct _tagKSJACK_DESCRIPTION2
 {
   DWORD              DeviceStateInfo; // Top 16 bits: Report current device state, active, streaming, idle, or hardware not ready
                                       // Bottom 16 bits: detailed reason to further explain state in top 16 bits
-  DWORD              JackCapabilities; // Report jack capabilities such as jack presence detection capability
-                                       // or dynamic format changing capability
+  DWORD              JackCapabilities; // Report jack capabilities such as jack presence detection capability 
+                                       // or dynamic format changing capability         
 } KSJACK_DESCRIPTION2, *PKSJACK_DESCRIPTION2;
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
@@ -8316,11 +8168,11 @@ typedef enum
 //===========================================================================
 // Audio Buffer Duration
 #define STATIC_KSPROPSETID_AudioBufferDuration\
-    0x4e73c07f, 0x23cc, 0x4955, 0xa7, 0xea, 0x3d, 0xa5, 0x2, 0x49, 0x62, 0x90
+    0x4e73c07f, 0x23cc, 0x4955, 0xa7, 0xea, 0x3d, 0xa5, 0x2, 0x49, 0x62, 0x90 
 DEFINE_GUIDSTRUCT("4E73C07F-23CC-4955-A7EA-3DA502496290", KSPROPSETID_AudioBufferDuration);
 #define KSPROPSETID_AudioBufferDuration DEFINE_GUIDNAMED(KSPROPSETID_AudioBufferDuration)
 
-// define new property id
+// define new property id 
 #define KSPROPERTY_AUDIO_BUFFER_DURATION 1
 
 //===========================================================================
@@ -8335,7 +8187,7 @@ typedef enum {
     KSPROPERTY_AUDIOENGINE_LFXENABLE = 0,
     KSPROPERTY_AUDIOENGINE_GFXENABLE = 1,
     KSPROPERTY_AUDIOENGINE_MIXFORMAT = 2,
-    // constant "3" was skipped on purpose for backward compatibility
+    // constant "3" was skipped on purpose for backward compatibility 
     // from the removal of unused KSPROPERTY_AUDIOENGINE_PROCESSINGPERIOD
     KSPROPERTY_AUDIOENGINE_DEVICEFORMAT = 4,
     KSPROPERTY_AUDIOENGINE_SUPPORTEDDEVICEFORMATS = 5,
@@ -8423,40 +8275,6 @@ DEFINE_GUIDSTRUCT("C18E2F7E-933D-4965-B7D1-1EEF228D2AF3", AUDIO_SIGNALPROCESSING
 DEFINE_GUIDSTRUCT("9E90EA20-B493-4FD1-A1A8-7E1361A956CF", AUDIO_SIGNALPROCESSINGMODE_RAW);
 #define AUDIO_SIGNALPROCESSINGMODE_RAW DEFINE_GUIDNAMED(AUDIO_SIGNALPROCESSINGMODE_RAW)
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
-//===========================================================================
-// AUDIO LOOPBACK DEFINITIONS
-//===========================================================================
-
-#define STATIC_KSPROPSETID_AudioLoopback 0xb3648bc8, 0x5b91, 0x468a, 0xb9, 0x4d, 0xf4, 0x64, 0x12, 0x50, 0x91, 0x7c
-DEFINE_GUIDSTRUCT("B3648BC8-5B91-468A-B94D-F4641250917C", KSPROPSETID_AudioLoopback);
-#define KSPROPSETID_AudioLoopback DEFINE_GUIDNAMED(KSPROPSETID_AudioLoopback)
-
-typedef enum {
-    KSPROPERTY_AUDIOLOOPBACK_TAPPOINT_CAPS,
-} KSPROPERTY_AUDIOLOOPBACK;
-
-#define AUDIOLOOPBACK_TAPPOINT_CAPS_PREVOLUMEMUTE      (0x1)
-#define AUDIOLOOPBACK_TAPPOINT_CAPS_POSTVOLUMEMUTE     (0x2)
-
-#define STATIC_KSATTRIBUTEID_AUDIOLOOPBACK_TAPPOINT 0x2795a0f7, 0x1688, 0x44fe, 0xbc, 0x14, 0xbf, 0x82, 0x73, 0x99, 0x21, 0x41
-DEFINE_GUIDSTRUCT("2795A0F7-1688-44FE-BC14-BF8273992141", KSATTRIBUTEID_AUDIOLOOPBACK_TAPPOINT);
-#define KSATTRIBUTEID_AUDIOLOOPBACK_TAPPOINT DEFINE_GUIDNAMED(KSATTRIBUTEID_AUDIOLOOPBACK_TAPPOINT)
-
-typedef enum tagAUDIOLOOPBACK_TAPPOINT_TYPE
-{
-    AUDIOLOOPBACK_TAPPOINT_PREVOLUMEMUTE,
-    AUDIOLOOPBACK_TAPPOINT_POSTVOLUMEMUTE,
-} AUDIOLOOPBACK_TAPPOINT_TYPE;
-
-// Define structure of the KSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT attribute
-typedef struct tagKSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT
-{
-    KSATTRIBUTE                     AttributeHeader;
-    AUDIOLOOPBACK_TAPPOINT_TYPE     TapPoint;
-} KSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT, *PKSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT;
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_CU)
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_CO)
 //===========================================================================
 // AUDIO RESOURCE MANAGEMENT DEFINITIONS
@@ -8464,7 +8282,7 @@ typedef struct tagKSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT
 // {D0B305E1-B2CC-484C-8F23-E5D28AD9CF88}
 #define STATIC_KSPROPSETID_AudioResourceManagement\
     0xd0b305e1, 0xb2cc, 0x484c, 0x8f, 0x23, 0xe5, 0xd2, 0x8a, 0xd9, 0xcf, 0x88
-DEFINE_GUIDSTRUCT("D0B305E1-B2CC-484C-8F23-E5D28AD9CF88", KSPROPSETID_AudioResourceManagement);
+DEFINE_GUIDSTRUCT("D0B305E1-B2CC-484C-8F23-E5D28AD9CF88", KSPROPSETID_AudioResourceManagement); 
 #define KSPROPSETID_AudioResourceManagement DEFINE_GUIDNAMED(KSPROPSETID_AudioResourceManagement)
 
 // define new property id
@@ -8532,7 +8350,7 @@ DEFINE_GUIDSTRUCT("98951333-B9CD-48B1-A0A3-FF40682D73F7", AUDIO_SIGNALPROCESSING
 DEFINE_GUIDSTRUCT("FC1CFC9B-B9D6-4CFA-B5E0-4BB2166878B2", AUDIO_SIGNALPROCESSINGMODE_SPEECH);
 #define AUDIO_SIGNALPROCESSINGMODE_SPEECH DEFINE_GUIDNAMED(AUDIO_SIGNALPROCESSINGMODE_SPEECH)
 
-// Notification Mode
+// Notification Mode 
 // For both render and capture.
 #define STATIC_AUDIO_SIGNALPROCESSINGMODE_NOTIFICATION 0x9cf2a70b, 0xf377, 0x403b, 0xbd, 0x6b, 0x36, 0x8, 0x63, 0xe0, 0x35, 0x5c
 DEFINE_GUIDSTRUCT("9CF2A70B-F377-403B-BD6B-360863E0355C", AUDIO_SIGNALPROCESSINGMODE_NOTIFICATION);
@@ -8654,14 +8472,14 @@ typedef enum {
     KSPROPERTY_AUDIOMODULE_DESCRIPTORS            = 1,
     KSPROPERTY_AUDIOMODULE_COMMAND                = 2,
     KSPROPERTY_AUDIOMODULE_NOTIFICATION_DEVICE_ID = 3,
-} KSPROPERTY_AUDIOMODULE;
+} KSPROPERTY_AUDIOMODULE; 
 
-#define AUDIOMODULE_MAX_DATA_SIZE 64000
+#define AUDIOMODULE_MAX_DATA_SIZE 64000 
 #define AUDIOMODULE_MAX_NAME_CCH_SIZE 128
 
 typedef struct _KSAUDIOMODULE_DESCRIPTOR
 {
-    GUID        ClassId;
+    GUID        ClassId; 
     ULONG       InstanceId;
     ULONG       VersionMajor;
     ULONG       VersionMinor;
@@ -8671,7 +8489,7 @@ typedef struct _KSAUDIOMODULE_DESCRIPTOR
 typedef struct _KSAUDIOMODULE_PROPERTY
 {
     KSPROPERTY  Property;
-    GUID        ClassId;
+    GUID        ClassId; 
     ULONG       InstanceId;
 } KSAUDIOMODULE_PROPERTY, *PKSAUDIOMODULE_PROPERTY;
 

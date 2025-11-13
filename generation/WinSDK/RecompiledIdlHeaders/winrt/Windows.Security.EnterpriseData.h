@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SECURITY_ENTERPRISEDATA_ENTERPRISEDATACONTRACT_VERSION)
@@ -1913,7 +1913,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBufferProtectUnprotectResult = __uuidof(IBufferProtectUnprotectResult);
+                extern MIDL_CONST_ID IID& IID_IBufferProtectUnprotectResult = _uuidof(IBufferProtectUnprotectResult);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -1952,7 +1952,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDataProtectionInfo = __uuidof(IDataProtectionInfo);
+                extern MIDL_CONST_ID IID& IID_IDataProtectionInfo = _uuidof(IDataProtectionInfo);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2013,7 +2013,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDataProtectionManagerStatics = __uuidof(IDataProtectionManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IDataProtectionManagerStatics = _uuidof(IDataProtectionManagerStatics);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2055,7 +2055,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileProtectionInfo = __uuidof(IFileProtectionInfo);
+                extern MIDL_CONST_ID IID& IID_IFileProtectionInfo = _uuidof(IFileProtectionInfo);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2091,7 +2091,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileProtectionInfo2 = __uuidof(IFileProtectionInfo2);
+                extern MIDL_CONST_ID IID& IID_IFileProtectionInfo2 = _uuidof(IFileProtectionInfo2);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2158,7 +2158,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics = __uuidof(IFileProtectionManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics = _uuidof(IFileProtectionManagerStatics);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2206,7 +2206,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics2 = __uuidof(IFileProtectionManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics2 = _uuidof(IFileProtectionManagerStatics2);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2248,7 +2248,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics3 = __uuidof(IFileProtectionManagerStatics3);
+                extern MIDL_CONST_ID IID& IID_IFileProtectionManagerStatics3 = _uuidof(IFileProtectionManagerStatics3);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2313,7 +2313,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileRevocationManagerStatics = __uuidof(IFileRevocationManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IFileRevocationManagerStatics = _uuidof(IFileRevocationManagerStatics);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2352,7 +2352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileUnprotectOptions = __uuidof(IFileUnprotectOptions);
+                extern MIDL_CONST_ID IID& IID_IFileUnprotectOptions = _uuidof(IFileUnprotectOptions);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2389,7 +2389,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileUnprotectOptionsFactory = __uuidof(IFileUnprotectOptionsFactory);
+                extern MIDL_CONST_ID IID& IID_IFileUnprotectOptionsFactory = _uuidof(IFileUnprotectOptionsFactory);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2425,7 +2425,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedAccessResumedEventArgs = __uuidof(IProtectedAccessResumedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IProtectedAccessResumedEventArgs = _uuidof(IProtectedAccessResumedEventArgs);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2467,7 +2467,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedAccessSuspendingEventArgs = __uuidof(IProtectedAccessSuspendingEventArgs);
+                extern MIDL_CONST_ID IID& IID_IProtectedAccessSuspendingEventArgs = _uuidof(IProtectedAccessSuspendingEventArgs);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2506,7 +2506,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedContainerExportResult = __uuidof(IProtectedContainerExportResult);
+                extern MIDL_CONST_ID IID& IID_IProtectedContainerExportResult = _uuidof(IProtectedContainerExportResult);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2545,7 +2545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedContainerImportResult = __uuidof(IProtectedContainerImportResult);
+                extern MIDL_CONST_ID IID& IID_IProtectedContainerImportResult = _uuidof(IProtectedContainerImportResult);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2581,7 +2581,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedContentRevokedEventArgs = __uuidof(IProtectedContentRevokedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IProtectedContentRevokedEventArgs = _uuidof(IProtectedContentRevokedEventArgs);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2623,7 +2623,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectedFileCreateResult = __uuidof(IProtectedFileCreateResult);
+                extern MIDL_CONST_ID IID& IID_IProtectedFileCreateResult = _uuidof(IProtectedFileCreateResult);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2680,7 +2680,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyAuditInfo = __uuidof(IProtectionPolicyAuditInfo);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyAuditInfo = _uuidof(IProtectionPolicyAuditInfo);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2725,7 +2725,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyAuditInfoFactory = __uuidof(IProtectionPolicyAuditInfoFactory);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyAuditInfoFactory = _uuidof(IProtectionPolicyAuditInfoFactory);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2764,7 +2764,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManager = __uuidof(IProtectionPolicyManager);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManager = _uuidof(IProtectionPolicyManager);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2803,7 +2803,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManager2 = __uuidof(IProtectionPolicyManager2);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManager2 = _uuidof(IProtectionPolicyManager2);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2890,7 +2890,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics = __uuidof(IProtectionPolicyManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics = _uuidof(IProtectionPolicyManagerStatics);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -2960,7 +2960,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics2 = __uuidof(IProtectionPolicyManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics2 = _uuidof(IProtectionPolicyManagerStatics2);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -3024,7 +3024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics3 = __uuidof(IProtectionPolicyManagerStatics3);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics3 = _uuidof(IProtectionPolicyManagerStatics3);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -3123,7 +3123,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics4 = __uuidof(IProtectionPolicyManagerStatics4);
+                extern MIDL_CONST_ID IID& IID_IProtectionPolicyManagerStatics4 = _uuidof(IProtectionPolicyManagerStatics4);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -3156,7 +3156,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IThreadNetworkContext = __uuidof(IThreadNetworkContext);
+                extern MIDL_CONST_ID IID& IID_IThreadNetworkContext = _uuidof(IThreadNetworkContext);
             } /* EnterpriseData */
         } /* Security */
     } /* Windows */
@@ -3258,9 +3258,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3476,9 +3476,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.EnterpriseData.IProtectionPolicyManager ** Default Interface **
@@ -8123,9 +8123,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8341,9 +8341,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.EnterpriseData.IProtectionPolicyManager ** Default Interface **

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -538,7 +538,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IContactPickerUI = __uuidof(IContactPickerUI);
+                    extern MIDL_CONST_ID IID& IID_IContactPickerUI = _uuidof(IContactPickerUI);
                 } /* Provider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -580,7 +580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IContactPickerUI2 = __uuidof(IContactPickerUI2);
+                    extern MIDL_CONST_ID IID& IID_IContactPickerUI2 = _uuidof(IContactPickerUI2);
                 } /* Provider */
             } /* Contacts */
         } /* ApplicationModel */
@@ -618,7 +618,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IContactRemovedEventArgs = __uuidof(IContactRemovedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IContactRemovedEventArgs = _uuidof(IContactRemovedEventArgs);
                 } /* Provider */
             } /* Contacts */
         } /* ApplicationModel */

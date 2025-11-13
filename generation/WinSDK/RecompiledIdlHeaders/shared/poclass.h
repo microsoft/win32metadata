@@ -49,12 +49,11 @@ DEFINE_GUID( GUID_DEVICE_APPLICATIONLAUNCH_BUTTON, 0x629758eel, 0x986e, 0x4d9e, 
 DEFINE_GUID( GUID_DEVICE_SYS_BUTTON,        0x4AFA3D53L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
 DEFINE_GUID( GUID_DEVICE_LID,               0x4AFA3D52L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
 DEFINE_GUID( GUID_DEVICE_THERMAL_ZONE,      0x4AFA3D51L, 0x74A7, 0x11d0, 0xbe, 0x5e, 0x00, 0xA0, 0xC9, 0x06, 0x28, 0x57 );
-DEFINE_GUID( GUID_DEVICE_FAN,               0x05ecd13dL, 0x81da, 0x4a2a, 0x8a, 0x4c, 0x52, 0x4f, 0x23, 0xdd, 0x4d, 0xc9 );
+DEFINE_GUID(GUID_DEVICE_FAN,                0x05ecd13dL, 0x81da, 0x4a2a, 0x8a, 0x4c, 0x52, 0x4f, 0x23, 0xdd, 0x4d, 0xc9 );
 DEFINE_GUID( GUID_DEVICE_PROCESSOR,         0x97fadb10L, 0x4e33, 0x40ae, 0x35, 0x9c, 0x8b, 0xef, 0x02, 0x9d, 0xbd, 0xd0 );
 DEFINE_GUID( GUID_DEVICE_MEMORY,            0x3fd0f03dL, 0x92e0, 0x45fb, 0xb7, 0x5c, 0x5e, 0xd8, 0xff, 0xb0, 0x10, 0x21 );
 DEFINE_GUID( GUID_DEVICE_ACPI_TIME,         0x97f99bf6L, 0x4497, 0x4f18, 0xbb, 0x22, 0x4b, 0x9f, 0xb2, 0xfb, 0xef, 0x9c );
 DEFINE_GUID( GUID_DEVICE_MESSAGE_INDICATOR, 0XCD48A365L, 0xfa94, 0x4ce2, 0xa2, 0x32, 0xa1, 0xb7, 0x64, 0xe5, 0xd8, 0xb4 );
-DEFINE_GUID( GUID_DEVICE_POWER_ADAPTER,     0xf76c6c62L, 0x7dea, 0x43cd, 0x86, 0x89, 0xd9, 0xa4, 0xaf, 0x3d, 0x85, 0x57 );
 
 // copied from hidclass.h
 DEFINE_GUID( GUID_CLASS_INPUT,              0x4D1E55B2L, 0xF16F, 0x11CF, 0x88, 0xCB, 0x00, 0x11, 0x11, 0x00, 0x00, 0x30 );
@@ -66,18 +65,6 @@ DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_COOLING,
 // {927EC093-69A4-4bc0-BD02-711664714463}
 DEFINE_GUID(GUID_DEVINTERFACE_THERMAL_MANAGER,
 0x927ec093, 0x69a4, 0x4bc0, 0xbd, 0x2, 0x71, 0x16, 0x64, 0x71, 0x44, 0x63);
-
-// {8f366301-091e-4056-b92f-958b27625fce}
-DEFINE_GUID(GUID_DEVINTERFACE_POWER_LIMIT,
-0x8f366301, 0x091e, 0x4056, 0xb9, 0x2f, 0x95, 0x8b, 0x27, 0x62, 0x5f, 0xce);
-
-// {2a6c8538-7895-4d56-8567-795d3844858a}
-DEFINE_GUID(GUID_DEVINTERFACE_TEMPERATURE_SENSOR,
-0x2a6c8538, 0x7895, 0x4d56, 0x85, 0x67, 0x79, 0x5d, 0x38, 0x44, 0x85, 0x8a);
-
-// {2ed8544a-8eef-4033-b2a0-04aaa507cecb}
-DEFINE_GUID(GUID_DEVINTERFACE_CUSTOMIZED_IO,
-0x2ed8544a, 0x8eef, 0x4033, 0xb2, 0xa0, 0x04, 0xaa, 0xa5, 0x07, 0xce, 0xcb);
 
 #ifndef _POCLASS_
 #define _POCLASS_
@@ -332,56 +319,6 @@ typedef struct _BATTERY_STATUS {
     LONG        Rate;
 } BATTERY_STATUS, *PBATTERY_STATUS;
 
-typedef union _POWER_ADAPTER_POWER_STATES {
-    struct {
-        ULONG Online : 1;
-        ULONG RecState : 2;
-        ULONG Reserved : 29;
-    } States;
-
-    ULONG AsUlong;
-} POWER_ADAPTER_POWER_STATES, *PPOWER_ADAPTER_POWER_STATES;
-
-typedef struct _POWER_ADAPTER_STATUS {
-    UCHAR                      Version;
-    UCHAR                      Reserved[3];
-    POWER_ADAPTER_POWER_STATES PowerState;
-
-    //
-    // All power members are in mW.
-    //
-
-    ULONG                      PeakPower;
-    ULONG                      MaxOutputPower;
-    ULONG                      MaxInputPower;
-    ULONG64                    RecStartTime;
-    ULONG64                    RecEndTime;
-} POWER_ADAPTER_STATUS, *PPOWER_ADAPTER_STATUS;
-
-#define POWER_ADAPTER_REC_TIME_NOT_AVAILABLE 0xFFFFFFFFFFFFFFFFULL
-
-typedef struct _POWER_ADAPTER_SET_STATUS_BUFFER {
-    UCHAR Version;
-    BOOLEAN RecOverride;
-    UCHAR Reserved[2];
-} POWER_ADAPTER_SET_STATUS_BUFFER, *PPOWER_ADAPTER_SET_STATUS_BUFFER;
-
-//
-// Power adapter charge requirements.
-// - Type: 1 for USB-C, 0 for others.
-// - If an adapter that delivers less than MinimumPower it will not charge the device.
-// - If between MinimumPower and NominalPower will charge slowly.
-// - MaximumPower should always charge the device.
-// - MinimumPower, NominalPower and MinimumPower should be in mW.
-//
-
-typedef struct _POWER_ADAPTER_CHARGE_REQUIREMENT {
-    ULONG       AcAdapterType;
-    ULONG       MinimumPower;
-    ULONG       NominalPower;
-    ULONG       MaximumPower;
-} POWER_ADAPTER_CHARGE_REQUIREMENT, *PPOWER_ADAPTER_CHARGE_REQUIREMENT;
-
 // Battery Status Constants
 #define BATTERY_UNKNOWN_VOLTAGE 0xFFFFFFFF
 #define BATTERY_UNKNOWN_RATE    0x80000000
@@ -428,35 +365,6 @@ typedef struct _BATTERY_MANUFACTURE_DATE
 #define BATTERY_TAG_INVALID     0
 
 //
-// Customized I/O
-//
-
-#define IOCTL_QUERY_CUSTOMIZED_IO_CAPABILITIES      \
-        CTL_CODE(FILE_DEVICE_BATTERY, 0xA0, METHOD_BUFFERED, FILE_READ_ACCESS)
-
-#define IOCTL_QUERY_CUSTOMIZED_INPUT_FROM_PLATFORM  \
-        CTL_CODE(FILE_DEVICE_BATTERY, 0xA1, METHOD_BUFFERED, FILE_READ_ACCESS)
-
-#define IOCTL_SEND_CUSTOMIZED_OUTPUT_TO_PLATFORM    \
-        CTL_CODE(FILE_DEVICE_BATTERY, 0xA2, METHOD_BUFFERED, FILE_WRITE_ACCESS)
-
-typedef struct _CUSTOMIZED_IO_CAPABILITIES {
-    ULONG SupportedInputs;
-    ULONG SupportedOutputs;
-} CUSTOMIZED_IO_CAPABILITIES, *PCUSTOMIZED_IO_CAPABILITIES;
-
-typedef struct _CUSTOMIZED_IO_QUERY_INPUT_RETURN {
-    ULONG FunctionId;
-    ULONG ErrorCode;
-    ULONG Value;
-} CUSTOMIZED_IO_QUERY_INPUT_RETURN, *PCUSTOMIZED_IO_QUERY_INPUT_RETURN;
-
-typedef struct _CUSTOMIZED_IO_SEND_OUTPUT_BUFFER {
-    ULONG FunctionId;
-    ULONG Value;
-} CUSTOMIZED_IO_SEND_OUTPUT_BUFFER, *PCUSTOMIZED_IO_SEND_OUTPUT_BUFFER;
-
-//
 // Thermal Zone driver interface (devices of registrying as GUID_DEVICE_THERMAL_ZONE)
 //
 
@@ -488,9 +396,6 @@ typedef struct _THERMAL_WAIT_READ {
     ULONG LowTemperature;
     ULONG HighTemperature;
 } THERMAL_WAIT_READ, *PTHERMAL_WAIT_READ;
-
-#define THERMAL_WAIT_READ_TIMEOUT_IMMEDIATE         0
-#define THERMAL_WAIT_READ_TIMEOUT_NONE              0xFFFFFFFFul
 
 #define TZ_ACTIVATION_REASON_THERMAL      0x00000001
 #define TZ_ACTIVATION_REASON_CURRENT      0x00000002
@@ -658,72 +563,6 @@ typedef enum _THERMAL_DEVICE_INTERFACE_FLAGS {
     ThermalDeviceFlagActiveCooling = 1,
     ThermalDeviceFlagPassiveCooling = 2
 } THERMAL_DEVICE_INTERFACE_FLAGS, *PTHERMAL_DEVICE_INTERFACE_FLAGS;
-
-//
-// Power limit types.
-//
-
-typedef
-_Function_class_(QUERY_POWER_LIMIT_ATTRIBUTES)
-NTSTATUS
-QUERY_POWER_LIMIT_ATTRIBUTES (
-    _Inout_opt_ PVOID Context,
-    _In_ ULONG BufferCount,
-    _Inout_opt_ PVOID Buffer,
-    _Out_ PULONG AttributeCount
-    );
-
-typedef QUERY_POWER_LIMIT_ATTRIBUTES *PQUERY_POWER_LIMIT_ATTRIBUTES;
-
-typedef
-_Function_class_(SET_POWER_LIMIT)
-NTSTATUS
-SET_POWER_LIMIT (
-    _Inout_opt_ PVOID Context,
-    _In_ ULONG ValueCount,
-    _In_ PVOID Values
-    );
-
-typedef SET_POWER_LIMIT *PSET_POWER_LIMIT;
-
-typedef
-_Function_class_(QUERY_POWER_LIMIT)
-NTSTATUS
-QUERY_POWER_LIMIT (
-    _Inout_opt_ PVOID Context,
-    _In_ ULONG ValueCount,
-    _Inout_ PVOID Values
-    );
-
-typedef QUERY_POWER_LIMIT *PQUERY_POWER_LIMIT;
-
-//
-// Power limit client interface (devices implementing GUID_POWER_LIMIT_INTERFACE)
-//
-
-typedef struct _POWER_LIMIT_INTERFACE {
-
-    //
-    // Generic interface header
-    //
-
-    USHORT Size;
-    USHORT Version;
-    PVOID Context;
-    PINTERFACE_REFERENCE    InterfaceReference;
-    PINTERFACE_DEREFERENCE  InterfaceDereference;
-
-    //
-    // Power limit interface
-    //
-
-    ULONG DomainCount;
-    PQUERY_POWER_LIMIT_ATTRIBUTES QueryAttributes;
-    PSET_POWER_LIMIT              SetPowerLimit;
-    PQUERY_POWER_LIMIT            QueryPowerLimit;
-} POWER_LIMIT_INTERFACE, *PPOWER_LIMIT_INTERFACE;
-
-#define POWER_LIMIT_INTERFACE_VERSION 1
 
 #endif // _WINDOWS_
 

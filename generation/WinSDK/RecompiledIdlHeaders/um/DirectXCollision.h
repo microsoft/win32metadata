@@ -185,8 +185,8 @@ namespace DirectX
         BoundingOrientedBox(BoundingOrientedBox&&) = default;
         BoundingOrientedBox& operator=(BoundingOrientedBox&&) = default;
 
-        constexpr BoundingOrientedBox(_In_ const XMFLOAT3& center, _In_ const XMFLOAT3& extents, _In_ const XMFLOAT4& orientation) noexcept
-            : Center(center), Extents(extents), Orientation(orientation) {}
+        constexpr BoundingOrientedBox(_In_ const XMFLOAT3& _Center, _In_ const XMFLOAT3& _Extents, _In_ const XMFLOAT4& _Orientation) noexcept
+            : Center(_Center), Extents(_Extents), Orientation(_Orientation) {}
 
         // Methods
         void    XM_CALLCONV     Transform(_Out_ BoundingOrientedBox& Out, _In_ FXMMATRIX M) const noexcept;
@@ -254,12 +254,12 @@ namespace DirectX
         BoundingFrustum(BoundingFrustum&&) = default;
         BoundingFrustum& operator=(BoundingFrustum&&) = default;
 
-        constexpr BoundingFrustum(_In_ const XMFLOAT3& origin, _In_ const XMFLOAT4& orientation,
-            _In_ float rightSlope, _In_ float leftSlope, _In_ float topSlope, _In_ float bottomSlope,
-            _In_ float nearPlane, _In_ float farPlane) noexcept
-            : Origin(origin), Orientation(orientation),
-            RightSlope(rightSlope), LeftSlope(leftSlope), TopSlope(topSlope), BottomSlope(bottomSlope),
-            Near(nearPlane), Far(farPlane) {}
+        constexpr BoundingFrustum(_In_ const XMFLOAT3& _Origin, _In_ const XMFLOAT4& _Orientation,
+            _In_ float _RightSlope, _In_ float _LeftSlope, _In_ float _TopSlope, _In_ float _BottomSlope,
+            _In_ float _Near, _In_ float _Far) noexcept
+            : Origin(_Origin), Orientation(_Orientation),
+            RightSlope(_RightSlope), LeftSlope(_LeftSlope), TopSlope(_TopSlope), BottomSlope(_BottomSlope),
+            Near(_Near), Far(_Far) {}
         BoundingFrustum(_In_ CXMMATRIX Projection, bool rhcoords = false) noexcept;
 
         // Methods
@@ -340,25 +340,14 @@ namespace DirectX
      // C4365: Off by default noise
      // C6001: False positives
 #endif
-
 #ifdef _PREFAST_
 #pragma prefast(push)
 #pragma prefast(disable : 25000, "FXMVECTOR is 16 bytes")
 #pragma prefast(disable : 26495, "Union initialization confuses /analyze")
 #endif
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfloat-equal"
-#pragma clang diagnostic ignored "-Wunknown-warning-option"
-#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
-#endif
-
 #include "DirectXCollision.inl"
 
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 #ifdef _PREFAST_
 #pragma prefast(pop)
 #endif

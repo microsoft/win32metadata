@@ -211,7 +211,6 @@ typedef enum _WER_FILE_TYPE
     WerFileTypeCustomDump = 7,
     WerFileTypeAuxiliaryDump = 8,
     WerFileTypeEtlTrace = 9,
-    WerFileTypeAuxiliaryHeapDump = 10,
     WerFileTypeMax
 } WER_FILE_TYPE;
 
@@ -498,7 +497,6 @@ WerReportSubmit(
 //
 #define WER_DUMP_NOHEAP_ONQUEUE 1
 #define WER_DUMP_AUXILIARY      2
-#define WER_DUMP_AUX_PROMOTE    4
 
 //
 // WER dump types
@@ -614,6 +612,12 @@ WerUnregisterFile(
     _In_ PCWSTR pwzFilePath
     );
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+
 HRESULT
 WINAPI
 WerRegisterMemoryBlock(
@@ -648,13 +652,7 @@ STDAPI
 WerUnregisterCustomMetadata(
     _In_ PCWSTR key
     );
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-#pragma region Application Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-
+    
 STDAPI
 WerRegisterAdditionalProcess(
     _In_ DWORD processId,

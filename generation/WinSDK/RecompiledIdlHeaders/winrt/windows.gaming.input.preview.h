@@ -785,7 +785,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGameControllerProviderInfoStatics = __uuidof(IGameControllerProviderInfoStatics);
+                    extern MIDL_CONST_ID IID& IID_IGameControllerProviderInfoStatics = _uuidof(IGameControllerProviderInfoStatics);
                 } /* Preview */
             } /* Input */
         } /* Gaming */
@@ -878,7 +878,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILegacyGipGameControllerProvider = __uuidof(ILegacyGipGameControllerProvider);
+                    extern MIDL_CONST_ID IID& IID_ILegacyGipGameControllerProvider = _uuidof(ILegacyGipGameControllerProvider);
                 } /* Preview */
             } /* Input */
         } /* Gaming */
@@ -940,7 +940,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ILegacyGipGameControllerProviderStatics = __uuidof(ILegacyGipGameControllerProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_ILegacyGipGameControllerProviderStatics = _uuidof(ILegacyGipGameControllerProviderStatics);
                 } /* Preview */
             } /* Input */
         } /* Gaming */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -885,7 +885,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionStartFaceAuthenticationHandler = __uuidof(IPerceptionStartFaceAuthenticationHandler);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionStartFaceAuthenticationHandler = _uuidof(IPerceptionStartFaceAuthenticationHandler);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -926,7 +926,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionStopFaceAuthenticationHandler = __uuidof(IPerceptionStopFaceAuthenticationHandler);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionStopFaceAuthenticationHandler = _uuidof(IPerceptionStopFaceAuthenticationHandler);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -982,7 +982,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKnownPerceptionFrameKindStatics = __uuidof(IKnownPerceptionFrameKindStatics);
+                    extern MIDL_CONST_ID IID& IID_IKnownPerceptionFrameKindStatics = _uuidof(IKnownPerceptionFrameKindStatics);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1026,7 +1026,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionControlGroup = __uuidof(IPerceptionControlGroup);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionControlGroup = _uuidof(IPerceptionControlGroup);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1071,7 +1071,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionControlGroupFactory = __uuidof(IPerceptionControlGroupFactory);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionControlGroupFactory = _uuidof(IPerceptionControlGroupFactory);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1127,7 +1127,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionCorrelation = __uuidof(IPerceptionCorrelation);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionCorrelation = _uuidof(IPerceptionCorrelation);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1174,7 +1174,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionCorrelationFactory = __uuidof(IPerceptionCorrelationFactory);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionCorrelationFactory = _uuidof(IPerceptionCorrelationFactory);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1218,7 +1218,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionCorrelationGroup = __uuidof(IPerceptionCorrelationGroup);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionCorrelationGroup = _uuidof(IPerceptionCorrelationGroup);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1263,7 +1263,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionCorrelationGroupFactory = __uuidof(IPerceptionCorrelationGroupFactory);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionCorrelationGroupFactory = _uuidof(IPerceptionCorrelationGroupFactory);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1307,7 +1307,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFaceAuthenticationGroup = __uuidof(IPerceptionFaceAuthenticationGroup);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFaceAuthenticationGroup = _uuidof(IPerceptionFaceAuthenticationGroup);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1354,7 +1354,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFaceAuthenticationGroupFactory = __uuidof(IPerceptionFaceAuthenticationGroupFactory);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFaceAuthenticationGroupFactory = _uuidof(IPerceptionFaceAuthenticationGroupFactory);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1416,7 +1416,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFrame = __uuidof(IPerceptionFrame);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFrame = _uuidof(IPerceptionFrame);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1487,7 +1487,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFrameProvider = __uuidof(IPerceptionFrameProvider);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFrameProvider = _uuidof(IPerceptionFrameProvider);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1585,7 +1585,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFrameProviderInfo = __uuidof(IPerceptionFrameProviderInfo);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFrameProviderInfo = _uuidof(IPerceptionFrameProviderInfo);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1631,7 +1631,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFrameProviderManager = __uuidof(IPerceptionFrameProviderManager);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFrameProviderManager = _uuidof(IPerceptionFrameProviderManager);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1739,7 +1739,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionFrameProviderManagerServiceStatics = __uuidof(IPerceptionFrameProviderManagerServiceStatics);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionFrameProviderManagerServiceStatics = _uuidof(IPerceptionFrameProviderManagerServiceStatics);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1807,7 +1807,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionPropertyChangeRequest = __uuidof(IPerceptionPropertyChangeRequest);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionPropertyChangeRequest = _uuidof(IPerceptionPropertyChangeRequest);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1861,7 +1861,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionVideoFrameAllocator = __uuidof(IPerceptionVideoFrameAllocator);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionVideoFrameAllocator = _uuidof(IPerceptionVideoFrameAllocator);
                 } /* Provider */
             } /* Perception */
         } /* Devices */
@@ -1909,7 +1909,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPerceptionVideoFrameAllocatorFactory = __uuidof(IPerceptionVideoFrameAllocatorFactory);
+                    extern MIDL_CONST_ID IID& IID_IPerceptionVideoFrameAllocatorFactory = _uuidof(IPerceptionVideoFrameAllocatorFactory);
                 } /* Provider */
             } /* Perception */
         } /* Devices */

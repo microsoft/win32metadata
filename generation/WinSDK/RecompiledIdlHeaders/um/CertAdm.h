@@ -2229,8 +2229,6 @@ enum OCSPRequestFlag
 #define wszOCSPREVPROP_DELTACRL			L"DeltaCrl"
 #define wszOCSPREVPROP_REFRESHTIMEOUT	L"RefreshTimeOut"
 #define wszOCSPREVPROP_ERRORCODE			L"RevocationErrorCode"
-#define wszOCSPREVPROP_ALLOWUSERONLYCRLS	L"AllowUserOnlyCrls"
-#define wszOCSPREVPROP_ALLOWCAONLYCRLS	L"AllowCAOnlyCrls"
 
 EXTERN_C const IID LIBID_CERTADMINLib;
 

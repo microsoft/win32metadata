@@ -21,13 +21,6 @@ typedef struct _NET_PACKET_RSC
             UINT16
                 DuplicateAckCount;
         } TCP;
-        struct {
-            UINT16
-                CoalescedSegmentCount;
-
-            UINT16
-                CoalescedSegmentSize;
-        } UDP;
     } DUMMYUNIONNAME;
 } NET_PACKET_RSC;
 
@@ -52,7 +45,6 @@ EXTERN_C_END
 
 #define NET_PACKET_EXTENSION_RSC_NAME L"ms_packet_rsc"
 #define NET_PACKET_EXTENSION_RSC_VERSION_1 1U
-#define NET_PACKET_EXTENSION_RSC_VERSION_2 2U
 
 #define NET_PACKET_EXTENSION_RSC_TIMESTAMP_NAME L"ms_packet_rsc_timestamp"
 #define NET_PACKET_EXTENSION_RSC_TIMESTAMP_VERSION_1 1U

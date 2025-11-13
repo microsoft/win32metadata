@@ -151,6 +151,7 @@ GetSystemLeapSecondInformation(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 NOT_BUILD_WINDOWS_DEPRECATE
+
 WINBASEAPI
 __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
 DWORD
@@ -246,7 +247,6 @@ GetSystemDirectoryW(
     _Out_writes_to_opt_(uSize,return + 1) LPWSTR lpBuffer,
     _In_ UINT uSize
     );
-
 #ifdef UNICODE
 #define GetSystemDirectory  GetSystemDirectoryW
 #else
@@ -278,7 +278,6 @@ GetWindowsDirectoryW(
     _Out_writes_to_opt_(uSize,return + 1) LPWSTR lpBuffer,
     _In_ UINT uSize
     );
-
 #ifdef UNICODE
 #define GetWindowsDirectory  GetWindowsDirectoryW
 #else
@@ -308,7 +307,6 @@ GetSystemWindowsDirectoryW(
     _Out_writes_to_opt_(uSize,return + 1) LPWSTR lpBuffer,
     _In_ UINT uSize
     );
-
 #ifdef UNICODE
 #define GetSystemWindowsDirectory  GetSystemWindowsDirectoryW
 #else
@@ -352,7 +350,6 @@ GetComputerNameExW(
     _Out_writes_to_opt_(*nSize,*nSize + 1) LPWSTR lpBuffer,
     _Inout_ LPDWORD nSize
     );
-
 #ifdef UNICODE
 #define GetComputerNameEx  GetComputerNameExW
 #else
@@ -391,6 +388,7 @@ SetSystemTime(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 NOT_BUILD_WINDOWS_DEPRECATE
+
 WINBASEAPI
 __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
 BOOL
@@ -398,8 +396,8 @@ WINAPI
 GetVersionExA(
     _Inout_ LPOSVERSIONINFOA lpVersionInformation
     );
-
 NOT_BUILD_WINDOWS_DEPRECATE
+
 WINBASEAPI
 __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
 BOOL
@@ -407,7 +405,6 @@ WINAPI
 GetVersionExW(
     _Inout_ LPOSVERSIONINFOW lpVersionInformation
     );
-
 #ifdef UNICODE
 #define GetVersionEx  GetVersionExW
 #else
@@ -624,7 +621,6 @@ WINAPI
 GetOsManufacturingMode(
     _Out_ PBOOL pbEnabled
     );
-
 #endif // (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -663,7 +659,6 @@ WINAPI
 SetComputerNameW(
     _In_ LPCWSTR lpComputerName
     );
-
 #ifdef UNICODE
 #define SetComputerName  SetComputerNameW
 #else
@@ -695,7 +690,7 @@ typedef enum DEVELOPER_DRIVE_ENABLEMENT_STATE {
     DeveloperDriveDisabledByGroupPolicy
 } DEVELOPER_DRIVE_ENABLEMENT_STATE;
 
-#if defined(NTDDI_WIN11_GA) && (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#if (NTDDI_VERSION >= NTDDI_WIN11_NI)
 
 WINBASEAPI
 DEVELOPER_DRIVE_ENABLEMENT_STATE

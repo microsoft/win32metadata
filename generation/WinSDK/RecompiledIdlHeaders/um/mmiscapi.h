@@ -147,7 +147,6 @@ DefDriverProc(
     _In_ LPARAM lParam1,
     _In_ LPARAM lParam2
     );
-
 #else
 LRESULT   WINAPI DrvClose(HDRVR hdrvr, LPARAM lParam1, LPARAM lParam2);
 HDRVR     WINAPI DrvOpen(LPCSTR szDriverName, LPCSTR szSectionName, LPARAM lParam2);
@@ -175,6 +174,7 @@ LRESULT   WINAPI DrvDefDriverProc(DWORD dwDriverIdentifier, HDRVR hdrvr, UINT uM
                       Driver Helper function moved from mmddk.h
 
 ***************************************************************************/
+
 BOOL
 APIENTRY
 DriverCallback(
@@ -191,7 +191,8 @@ DriverCallback(
 
   Sound schemes
 
-****************************************************************************/LONG
+****************************************************************************/
+LONG
 WINAPI
 sndOpenSound(
     _In_ LPCWSTR EventName,
@@ -199,7 +200,6 @@ sndOpenSound(
     _In_ INT32 Flags,
     _Outptr_ PHANDLE FileHandle
     );
-
 //
 // removed from winmmi.h
 
@@ -397,12 +397,12 @@ mmioStringToFOURCCW(
     LPCWSTR sz,
     _In_ UINT uFlags
     );
-
 #ifdef UNICODE
 #define mmioStringToFOURCC  mmioStringToFOURCCW
 #else
 #define mmioStringToFOURCC  mmioStringToFOURCCA
 #endif // !UNICODE
+
 WINMMAPI
 LPMMIOPROC
 WINAPI
@@ -420,12 +420,12 @@ mmioInstallIOProcW(
     _In_opt_ LPMMIOPROC pIOProc,
     _In_ DWORD dwFlags
     );
-
 #ifdef UNICODE
 #define mmioInstallIOProc  mmioInstallIOProcW
 #else
 #define mmioInstallIOProc  mmioInstallIOProcA
 #endif // !UNICODE
+
 WINMMAPI
 HMMIO
 WINAPI
@@ -443,12 +443,12 @@ mmioOpenW(
     _Inout_opt_ LPMMIOINFO pmmioinfo,
     _In_ DWORD fdwOpen
     );
-
 #ifdef UNICODE
 #define mmioOpen  mmioOpenW
 #else
 #define mmioOpen  mmioOpenA
 #endif // !UNICODE
+
 WINMMAPI
 MMRESULT
 WINAPI
@@ -468,7 +468,6 @@ mmioRenameW(
     _In_opt_ LPCMMIOINFO pmmioinfo,
     _In_ DWORD fdwRename
     );
-
 #ifdef UNICODE
 #define mmioRename  mmioRenameW
 #else

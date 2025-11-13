@@ -283,20 +283,6 @@ typedef struct _SYSTEM_PROCESS_INFORMATION {
     LARGE_INTEGER Reserved7[6];
 } SYSTEM_PROCESS_INFORMATION, *PSYSTEM_PROCESS_INFORMATION;
 
-typedef struct _SYSTEM_BASICPROCESS_INFORMATION {
-    ULONG NextEntryOffset;
-    HANDLE UniqueProcessId;
-    HANDLE InheritedFromUniqueProcessId;
-    ULONG64 SequenceNumber;
-    UNICODE_STRING ImageName;
-} SYSTEM_BASICPROCESS_INFORMATION, *PSYSTEM_BASICPROCESS_INFORMATION;
-
-typedef struct _SYSTEM_HANDLECOUNT_INFORMATION {
-    ULONG ProcessCount;
-    ULONG ThreadCount;
-    ULONG HandleCount;
-} SYSTEM_HANDLECOUNT_INFORMATION, *PSYSTEM_HANDLECOUNT_INFORMATION;
-
 typedef struct _SYSTEM_THREAD_INFORMATION {
     LARGE_INTEGER Reserved1[3];
     ULONG Reserved2;
@@ -400,8 +386,6 @@ typedef enum _SYSTEM_INFORMATION_CLASS {
     SystemLookasideInformation = 45,
     SystemCodeIntegrityInformation = 103,
     SystemPolicyInformation = 134,
-    SystemBasicProcessInformation = 252,
-    SystemHandleCountInformation = 253,
 } SYSTEM_INFORMATION_CLASS;
 
 //

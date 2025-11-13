@@ -50,7 +50,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MANAGEMENT_DEPLOYMENT_SHAREDPACKAGECONTAINERCONTRACT_VERSION)
@@ -475,25 +475,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult ABI::Windows::ApplicationModel::Store::Preview::InstallControl::IGetEntitlementResult
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace ApplicationModel {
-            namespace Store {
-                namespace Preview {
-                    namespace InstallControl {
-                        interface IGetEntitlementResult2;
-                    } /* InstallControl */
-                } /* Preview */
-            } /* Store */
-        } /* ApplicationModel */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2 ABI::Windows::ApplicationModel::Store::Preview::InstallControl::IGetEntitlementResult2
-
-#endif // ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -1272,7 +1253,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallItem = __uuidof(IAppInstallItem);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallItem = _uuidof(IAppInstallItem);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1318,7 +1299,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallItem2 = __uuidof(IAppInstallItem2);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallItem2 = _uuidof(IAppInstallItem2);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1361,7 +1342,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallItem3 = __uuidof(IAppInstallItem3);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallItem3 = _uuidof(IAppInstallItem3);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1404,7 +1385,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallItem4 = __uuidof(IAppInstallItem4);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallItem4 = _uuidof(IAppInstallItem4);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1471,7 +1452,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallItem5 = __uuidof(IAppInstallItem5);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallItem5 = _uuidof(IAppInstallItem5);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1579,7 +1560,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager = __uuidof(IAppInstallManager);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager = _uuidof(IAppInstallManager);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1661,7 +1642,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager2 = __uuidof(IAppInstallManager2);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager2 = _uuidof(IAppInstallManager2);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1758,7 +1739,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager3 = __uuidof(IAppInstallManager3);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager3 = _uuidof(IAppInstallManager3);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1814,7 +1795,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager4 = __uuidof(IAppInstallManager4);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager4 = _uuidof(IAppInstallManager4);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1854,7 +1835,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager5 = __uuidof(IAppInstallManager5);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager5 = _uuidof(IAppInstallManager5);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1951,7 +1932,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager6 = __uuidof(IAppInstallManager6);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager6 = _uuidof(IAppInstallManager6);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -1991,7 +1972,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManager7 = __uuidof(IAppInstallManager7);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManager7 = _uuidof(IAppInstallManager7);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2031,7 +2012,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallManagerItemEventArgs = __uuidof(IAppInstallManagerItemEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallManagerItemEventArgs = _uuidof(IAppInstallManagerItemEventArgs);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2104,7 +2085,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallOptions = __uuidof(IAppInstallOptions);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallOptions = _uuidof(IAppInstallOptions);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2195,7 +2176,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallOptions2 = __uuidof(IAppInstallOptions2);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallOptions2 = _uuidof(IAppInstallOptions2);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2247,7 +2228,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallStatus = __uuidof(IAppInstallStatus);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallStatus = _uuidof(IAppInstallStatus);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2290,7 +2271,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallStatus2 = __uuidof(IAppInstallStatus2);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallStatus2 = _uuidof(IAppInstallStatus2);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2330,7 +2311,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppInstallStatus3 = __uuidof(IAppInstallStatus3);
+                        extern MIDL_CONST_ID IID& IID_IAppInstallStatus3 = _uuidof(IAppInstallStatus3);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2379,7 +2360,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppUpdateOptions = __uuidof(IAppUpdateOptions);
+                        extern MIDL_CONST_ID IID& IID_IAppUpdateOptions = _uuidof(IAppUpdateOptions);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2422,7 +2403,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IAppUpdateOptions2 = __uuidof(IAppUpdateOptions2);
+                        extern MIDL_CONST_ID IID& IID_IAppUpdateOptions2 = _uuidof(IAppUpdateOptions2);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2462,7 +2443,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IGetEntitlementResult = __uuidof(IGetEntitlementResult);
+                        extern MIDL_CONST_ID IID& IID_IGetEntitlementResult = _uuidof(IGetEntitlementResult);
                     } /* InstallControl */
                 } /* Preview */
             } /* Store */
@@ -2473,55 +2454,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
-
-/*
- *
- * Interface Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.ApplicationModel.Store.Preview.InstallControl.GetEntitlementResult
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Store_Preview_InstallControl_IGetEntitlementResult2[] = L"Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2";
-namespace ABI {
-    namespace Windows {
-        namespace ApplicationModel {
-            namespace Store {
-                namespace Preview {
-                    namespace InstallControl {
-                        MIDL_INTERFACE("e3906641-a981-4302-8c68-ff836666bb3b")
-                        IGetEntitlementResult2 : public IInspectable
-                        {
-                        public:
-                            virtual HRESULT STDMETHODCALLTYPE get_IsAlreadyOwned(
-                                boolean* value
-                                ) = 0;
-                            virtual HRESULT STDMETHODCALLTYPE get_OrderId(
-                                HSTRING* value
-                                ) = 0;
-                            virtual HRESULT STDMETHODCALLTYPE get_SkuId(
-                                HSTRING* value
-                                ) = 0;
-                            virtual HRESULT STDMETHODCALLTYPE get_AvailabilityId(
-                                HSTRING* value
-                                ) = 0;
-                        };
-
-                        MIDL_CONST_ID IID& IID_IGetEntitlementResult2 = __uuidof(IGetEntitlementResult2);
-                    } /* InstallControl */
-                } /* Preview */
-            } /* Store */
-        } /* ApplicationModel */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2;
-#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2672,7 +2604,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult ** Default Interface **
- *    Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2811,12 +2742,6 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallCon
 typedef interface __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2 __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2;
-
-#endif // ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -5841,90 +5766,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInsta
 
 /*
  *
- * Interface Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.ApplicationModel.Store.Preview.InstallControl.GetEntitlementResult
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Store_Preview_InstallControl_IGetEntitlementResult2[] = L"Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2";
-typedef struct __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_IsAlreadyOwned)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* get_OrderId)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        HSTRING* value);
-    HRESULT (STDMETHODCALLTYPE* get_SkuId)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        HSTRING* value);
-    HRESULT (STDMETHODCALLTYPE* get_AvailabilityId)(__x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2* This,
-        HSTRING* value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2Vtbl;
-
-interface __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2
-{
-    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_get_IsAlreadyOwned(This, value) \
-    ((This)->lpVtbl->get_IsAlreadyOwned(This, value))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_get_OrderId(This, value) \
-    ((This)->lpVtbl->get_OrderId(This, value))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_get_SkuId(This, value) \
-    ((This)->lpVtbl->get_SkuId(This, value))
-
-#define __x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_get_AvailabilityId(This, value) \
-    ((This)->lpVtbl->get_AvailabilityId(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2;
-#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CStore_CPreview_CInstallControl_CIGetEntitlementResult2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Class Windows.ApplicationModel.Store.Preview.InstallControl.AppInstallItem
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -6072,7 +5913,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult ** Default Interface **
- *    Windows.ApplicationModel.Store.Preview.InstallControl.IGetEntitlementResult2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

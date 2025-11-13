@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -826,23 +826,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace GenericAttributeProfile {
-                    interface IGattServiceProvider2;
-                } /* GenericAttributeProfile */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2 ABI::Windows::Devices::Bluetooth::GenericAttributeProfile::IGattServiceProvider2
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -893,23 +876,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2 ABI::Windows::Devices::Bluetooth::GenericAttributeProfile::IGattServiceProviderAdvertisingParameters2
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace GenericAttributeProfile {
-                    interface IGattServiceProviderAdvertisingParameters3;
-                } /* GenericAttributeProfile */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3 ABI::Windows::Devices::Bluetooth::GenericAttributeProfile::IGattServiceProviderAdvertisingParameters3
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderResult_FWD_DEFINED__
@@ -4163,7 +4129,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristic = __uuidof(IGattCharacteristic);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristic = _uuidof(IGattCharacteristic);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4210,7 +4176,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristic2 = __uuidof(IGattCharacteristic2);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristic2 = _uuidof(IGattCharacteristic2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4274,7 +4240,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristic3 = __uuidof(IGattCharacteristic3);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristic3 = _uuidof(IGattCharacteristic3);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4316,7 +4282,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristicStatics = __uuidof(IGattCharacteristicStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristicStatics = _uuidof(IGattCharacteristicStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4414,7 +4380,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristicUuidsStatics = __uuidof(IGattCharacteristicUuidsStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristicUuidsStatics = _uuidof(IGattCharacteristicUuidsStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4629,7 +4595,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristicUuidsStatics2 = __uuidof(IGattCharacteristicUuidsStatics2);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristicUuidsStatics2 = _uuidof(IGattCharacteristicUuidsStatics2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4673,7 +4639,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattCharacteristicsResult = __uuidof(IGattCharacteristicsResult);
+                    extern MIDL_CONST_ID IID& IID_IGattCharacteristicsResult = _uuidof(IGattCharacteristicsResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4717,7 +4683,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattClientNotificationResult = __uuidof(IGattClientNotificationResult);
+                    extern MIDL_CONST_ID IID& IID_IGattClientNotificationResult = _uuidof(IGattClientNotificationResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4755,7 +4721,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattClientNotificationResult2 = __uuidof(IGattClientNotificationResult2);
+                    extern MIDL_CONST_ID IID& IID_IGattClientNotificationResult2 = _uuidof(IGattClientNotificationResult2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4813,7 +4779,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDescriptor = __uuidof(IGattDescriptor);
+                    extern MIDL_CONST_ID IID& IID_IGattDescriptor = _uuidof(IGattDescriptor);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4852,7 +4818,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDescriptor2 = __uuidof(IGattDescriptor2);
+                    extern MIDL_CONST_ID IID& IID_IGattDescriptor2 = _uuidof(IGattDescriptor2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4894,7 +4860,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDescriptorStatics = __uuidof(IGattDescriptorStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattDescriptorStatics = _uuidof(IGattDescriptorStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4947,7 +4913,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDescriptorUuidsStatics = __uuidof(IGattDescriptorUuidsStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattDescriptorUuidsStatics = _uuidof(IGattDescriptorUuidsStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -4991,7 +4957,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDescriptorsResult = __uuidof(IGattDescriptorsResult);
+                    extern MIDL_CONST_ID IID& IID_IGattDescriptorsResult = _uuidof(IGattDescriptorsResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5052,7 +5018,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceService = __uuidof(IGattDeviceService);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceService = _uuidof(IGattDeviceService);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5115,7 +5081,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceService2 = __uuidof(IGattDeviceService2);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceService2 = _uuidof(IGattDeviceService2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5198,7 +5164,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceService3 = __uuidof(IGattDeviceService3);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceService3 = _uuidof(IGattDeviceService3);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5255,7 +5221,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceServiceStatics = __uuidof(IGattDeviceServiceStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceServiceStatics = _uuidof(IGattDeviceServiceStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5315,7 +5281,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceServiceStatics2 = __uuidof(IGattDeviceServiceStatics2);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceServiceStatics2 = _uuidof(IGattDeviceServiceStatics2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5359,7 +5325,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattDeviceServicesResult = __uuidof(IGattDeviceServicesResult);
+                    extern MIDL_CONST_ID IID& IID_IGattDeviceServicesResult = _uuidof(IGattDeviceServicesResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5456,7 +5422,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalCharacteristic = __uuidof(IGattLocalCharacteristic);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalCharacteristic = _uuidof(IGattLocalCharacteristic);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5524,7 +5490,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalCharacteristicParameters = __uuidof(IGattLocalCharacteristicParameters);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalCharacteristicParameters = _uuidof(IGattLocalCharacteristicParameters);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5565,7 +5531,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalCharacteristicResult = __uuidof(IGattLocalCharacteristicResult);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalCharacteristicResult = _uuidof(IGattLocalCharacteristicResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5626,7 +5592,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalDescriptor = __uuidof(IGattLocalDescriptor);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalDescriptor = _uuidof(IGattLocalDescriptor);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5679,7 +5645,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalDescriptorParameters = __uuidof(IGattLocalDescriptorParameters);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalDescriptorParameters = _uuidof(IGattLocalDescriptorParameters);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5720,7 +5686,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalDescriptorResult = __uuidof(IGattLocalDescriptorResult);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalDescriptorResult = _uuidof(IGattLocalDescriptorResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5766,7 +5732,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattLocalService = __uuidof(IGattLocalService);
+                    extern MIDL_CONST_ID IID& IID_IGattLocalService = _uuidof(IGattLocalService);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5816,7 +5782,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattPresentationFormat = __uuidof(IGattPresentationFormat);
+                    extern MIDL_CONST_ID IID& IID_IGattPresentationFormat = _uuidof(IGattPresentationFormat);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5854,7 +5820,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattPresentationFormatStatics = __uuidof(IGattPresentationFormatStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattPresentationFormatStatics = _uuidof(IGattPresentationFormatStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -5900,7 +5866,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattPresentationFormatStatics2 = __uuidof(IGattPresentationFormatStatics2);
+                    extern MIDL_CONST_ID IID& IID_IGattPresentationFormatStatics2 = _uuidof(IGattPresentationFormatStatics2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6016,7 +5982,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattPresentationFormatTypesStatics = __uuidof(IGattPresentationFormatTypesStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattPresentationFormatTypesStatics = _uuidof(IGattPresentationFormatTypesStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6102,7 +6068,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattProtocolErrorStatics = __uuidof(IGattProtocolErrorStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattProtocolErrorStatics = _uuidof(IGattProtocolErrorStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6143,7 +6109,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadClientCharacteristicConfigurationDescriptorResult = __uuidof(IGattReadClientCharacteristicConfigurationDescriptorResult);
+                    extern MIDL_CONST_ID IID& IID_IGattReadClientCharacteristicConfigurationDescriptorResult = _uuidof(IGattReadClientCharacteristicConfigurationDescriptorResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6181,7 +6147,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadClientCharacteristicConfigurationDescriptorResult2 = __uuidof(IGattReadClientCharacteristicConfigurationDescriptorResult2);
+                    extern MIDL_CONST_ID IID& IID_IGattReadClientCharacteristicConfigurationDescriptorResult2 = _uuidof(IGattReadClientCharacteristicConfigurationDescriptorResult2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6238,7 +6204,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadRequest = __uuidof(IGattReadRequest);
+                    extern MIDL_CONST_ID IID& IID_IGattReadRequest = _uuidof(IGattReadRequest);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6282,7 +6248,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadRequestedEventArgs = __uuidof(IGattReadRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattReadRequestedEventArgs = _uuidof(IGattReadRequestedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6323,7 +6289,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadResult = __uuidof(IGattReadResult);
+                    extern MIDL_CONST_ID IID& IID_IGattReadResult = _uuidof(IGattReadResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6361,7 +6327,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReadResult2 = __uuidof(IGattReadResult2);
+                    extern MIDL_CONST_ID IID& IID_IGattReadResult2 = _uuidof(IGattReadResult2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6403,7 +6369,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReliableWriteTransaction = __uuidof(IGattReliableWriteTransaction);
+                    extern MIDL_CONST_ID IID& IID_IGattReliableWriteTransaction = _uuidof(IGattReliableWriteTransaction);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6441,7 +6407,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattReliableWriteTransaction2 = __uuidof(IGattReliableWriteTransaction2);
+                    extern MIDL_CONST_ID IID& IID_IGattReliableWriteTransaction2 = _uuidof(IGattReliableWriteTransaction2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6482,7 +6448,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattRequestStateChangedEventArgs = __uuidof(IGattRequestStateChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattRequestStateChangedEventArgs = _uuidof(IGattRequestStateChangedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6535,7 +6501,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE StopAdvertising(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProvider = __uuidof(IGattServiceProvider);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProvider = _uuidof(IGattServiceProvider);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6545,44 +6511,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProvider
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_GenericAttributeProfile_IGattServiceProvider2[] = L"Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace GenericAttributeProfile {
-                    MIDL_INTERFACE("9ef531a9-cf12-59a3-a81c-362f4aabaacf")
-                    IGattServiceProvider2 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE UpdateAdvertisingParameters(
-                            ABI::Windows::Devices::Bluetooth::GenericAttributeProfile::IGattServiceProviderAdvertisingParameters* parameters
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IGattServiceProvider2 = __uuidof(IGattServiceProvider2);
-                } /* GenericAttributeProfile */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -6614,7 +6542,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisementStatusChangedEventArgs = __uuidof(IGattServiceProviderAdvertisementStatusChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisementStatusChangedEventArgs = _uuidof(IGattServiceProviderAdvertisementStatusChangedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6661,7 +6589,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisingParameters = __uuidof(IGattServiceProviderAdvertisingParameters);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisingParameters = _uuidof(IGattServiceProviderAdvertisingParameters);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6702,7 +6630,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisingParameters2 = __uuidof(IGattServiceProviderAdvertisingParameters2);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisingParameters2 = _uuidof(IGattServiceProviderAdvertisingParameters2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6712,53 +6640,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProviderAdvertisingParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_GenericAttributeProfile_IGattServiceProviderAdvertisingParameters3[] = L"Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace GenericAttributeProfile {
-                    MIDL_INTERFACE("a23546b2-b216-5929-9055-f1313dd53e2a")
-                    IGattServiceProviderAdvertisingParameters3 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_UseLowEnergyUncoded1MPhyAsSecondaryPhy(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_UseLowEnergyUncoded1MPhyAsSecondaryPhy(
-                            boolean value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_UseLowEnergyUncoded2MPhyAsSecondaryPhy(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_UseLowEnergyUncoded2MPhyAsSecondaryPhy(
-                            boolean value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderAdvertisingParameters3 = __uuidof(IGattServiceProviderAdvertisingParameters3);
-                } /* GenericAttributeProfile */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -6790,7 +6671,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderResult = __uuidof(IGattServiceProviderResult);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProviderResult = _uuidof(IGattServiceProviderResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6829,7 +6710,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceProviderStatics = __uuidof(IGattServiceProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceProviderStatics = _uuidof(IGattServiceProviderStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6891,7 +6772,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceUuidsStatics = __uuidof(IGattServiceUuidsStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceUuidsStatics = _uuidof(IGattServiceUuidsStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -6965,7 +6846,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattServiceUuidsStatics2 = __uuidof(IGattServiceUuidsStatics2);
+                    extern MIDL_CONST_ID IID& IID_IGattServiceUuidsStatics2 = _uuidof(IGattServiceUuidsStatics2);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7032,7 +6913,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattSession = __uuidof(IGattSession);
+                    extern MIDL_CONST_ID IID& IID_IGattSession = _uuidof(IGattSession);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7071,7 +6952,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattSessionStatics = __uuidof(IGattSessionStatics);
+                    extern MIDL_CONST_ID IID& IID_IGattSessionStatics = _uuidof(IGattSessionStatics);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7112,7 +6993,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattSessionStatusChangedEventArgs = __uuidof(IGattSessionStatusChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattSessionStatusChangedEventArgs = _uuidof(IGattSessionStatusChangedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7160,7 +7041,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattSubscribedClient = __uuidof(IGattSubscribedClient);
+                    extern MIDL_CONST_ID IID& IID_IGattSubscribedClient = _uuidof(IGattSubscribedClient);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7201,7 +7082,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattValueChangedEventArgs = __uuidof(IGattValueChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattValueChangedEventArgs = _uuidof(IGattValueChangedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7259,7 +7140,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattWriteRequest = __uuidof(IGattWriteRequest);
+                    extern MIDL_CONST_ID IID& IID_IGattWriteRequest = _uuidof(IGattWriteRequest);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7303,7 +7184,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattWriteRequestedEventArgs = __uuidof(IGattWriteRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IGattWriteRequestedEventArgs = _uuidof(IGattWriteRequestedEventArgs);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7344,7 +7225,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGattWriteResult = __uuidof(IGattWriteResult);
+                    extern MIDL_CONST_ID IID& IID_IGattWriteResult = _uuidof(IGattWriteResult);
                 } /* GenericAttributeProfile */
             } /* Bluetooth */
         } /* Devices */
@@ -7518,8 +7399,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceService ** Default Interface **
@@ -7710,8 +7591,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormat ** Default Interface **
@@ -7907,7 +7788,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider ** Default Interface **
- *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7952,7 +7832,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters ** Default Interface **
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters2
- *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7992,8 +7871,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8406,12 +8285,6 @@ typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2 __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisementStatusChangedEventArgs;
@@ -8429,12 +8302,6 @@ typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_
 typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2 __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2;
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3 __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderResult_FWD_DEFINED__
@@ -17959,75 +17826,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributePro
 
 /*
  *
- * Interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProvider
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_GenericAttributeProfile_IGattServiceProvider2[] = L"Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* UpdateAdvertisingParameters)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2* This,
-        __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters* parameters);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2Vtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_UpdateAdvertisingParameters(This, parameters) \
-    ((This)->lpVtbl->UpdateAdvertisingParameters(This, parameters))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProvider2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisementStatusChangedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -18257,90 +18055,6 @@ interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattSe
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.GenericAttributeProfile.GattServiceProviderAdvertisingParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_GenericAttributeProfile_IGattServiceProviderAdvertisingParameters3[] = L"Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_UseLowEnergyUncoded1MPhyAsSecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* put_UseLowEnergyUncoded1MPhyAsSecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        boolean value);
-    HRESULT (STDMETHODCALLTYPE* get_UseLowEnergyUncoded2MPhyAsSecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* put_UseLowEnergyUncoded2MPhyAsSecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3* This,
-        boolean value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3Vtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_get_UseLowEnergyUncoded1MPhyAsSecondaryPhy(This, value) \
-    ((This)->lpVtbl->get_UseLowEnergyUncoded1MPhyAsSecondaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_put_UseLowEnergyUncoded1MPhyAsSecondaryPhy(This, value) \
-    ((This)->lpVtbl->put_UseLowEnergyUncoded1MPhyAsSecondaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_get_UseLowEnergyUncoded2MPhyAsSecondaryPhy(This, value) \
-    ((This)->lpVtbl->get_UseLowEnergyUncoded2MPhyAsSecondaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_put_UseLowEnergyUncoded2MPhyAsSecondaryPhy(This, value) \
-    ((This)->lpVtbl->put_UseLowEnergyUncoded2MPhyAsSecondaryPhy(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CGenericAttributeProfile_CIGattServiceProviderAdvertisingParameters3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -19563,8 +19277,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceServiceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattDeviceService ** Default Interface **
@@ -19755,8 +19469,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormatStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattPresentationFormat ** Default Interface **
@@ -19952,7 +19666,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider ** Default Interface **
- *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProvider2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -19997,7 +19710,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters ** Default Interface **
  *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters2
- *    Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisingParameters3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -20037,8 +19749,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceUuidsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

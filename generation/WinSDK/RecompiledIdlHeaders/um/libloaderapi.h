@@ -221,7 +221,6 @@ GetModuleFileNameW(
     _Out_writes_to_(nSize,((return < nSize) ? (return + 1) : nSize)) LPWSTR lpFilename,
     _In_ DWORD nSize
     );
-
 #ifdef UNICODE
 #define GetModuleFileName  GetModuleFileNameW
 #else
@@ -245,7 +244,6 @@ WINAPI
 GetModuleHandleW(
     _In_opt_ LPCWSTR lpModuleName
     );
-
 #ifdef UNICODE
 #define GetModuleHandle  GetModuleHandleW
 #else
@@ -297,7 +295,6 @@ GetModuleHandleExW(
     _In_opt_ LPCWSTR lpModuleName,
     _Out_ HMODULE* phModule
     );
-
 #ifdef UNICODE
 #define GetModuleHandleEx  GetModuleHandleExW
 #else
@@ -351,7 +348,6 @@ LoadLibraryExW(
     _Reserved_ HANDLE hFile,
     _In_ DWORD dwFlags
     );
-
 #ifdef UNICODE
 #define LoadLibraryEx  LoadLibraryExW
 #else
@@ -423,7 +419,6 @@ LoadStringW(
     _Out_writes_to_(cchBufferMax,return + 1) LPWSTR lpBuffer,
     _In_ int cchBufferMax
     );
-
 #ifdef UNICODE
 #define LoadString  LoadStringW
 #else
@@ -507,7 +502,6 @@ EnumResourceLanguagesExW(
     DWORD dwFlags,
     LANGID LangId
     );
-
 #ifdef UNICODE
 #define EnumResourceLanguagesEx  EnumResourceLanguagesExW
 #else
@@ -537,7 +531,6 @@ EnumResourceNamesExW(
     DWORD dwFlags,
     LANGID LangId
     );
-
 #ifdef UNICODE
 #define EnumResourceNamesEx  EnumResourceNamesExW
 #else
@@ -565,7 +558,6 @@ EnumResourceTypesExW(
     DWORD dwFlags,
     LANGID LangId
     );
-
 #ifdef UNICODE
 #define EnumResourceTypesEx  EnumResourceTypesExW
 #else
@@ -609,7 +601,6 @@ WINAPI
 LoadLibraryW(
     _In_ LPCWSTR lpLibFileName
     );
-
 #ifdef UNICODE
 #define LoadLibrary  LoadLibraryW
 #else

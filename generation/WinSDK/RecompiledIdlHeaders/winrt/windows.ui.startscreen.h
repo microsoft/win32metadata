@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1427,7 +1427,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IJumpList = __uuidof(IJumpList);
+                extern MIDL_CONST_ID IID& IID_IJumpList = _uuidof(IJumpList);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1493,7 +1493,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IJumpListItem = __uuidof(IJumpListItem);
+                extern MIDL_CONST_ID IID& IID_IJumpListItem = _uuidof(IJumpListItem);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1534,7 +1534,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IJumpListItemStatics = __uuidof(IJumpListItemStatics);
+                extern MIDL_CONST_ID IID& IID_IJumpListItemStatics = _uuidof(IJumpListItemStatics);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1573,7 +1573,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IJumpListStatics = __uuidof(IJumpListStatics);
+                extern MIDL_CONST_ID IID& IID_IJumpListStatics = _uuidof(IJumpListStatics);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1755,7 +1755,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTile = __uuidof(ISecondaryTile);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTile = _uuidof(ISecondaryTile);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1813,7 +1813,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTile2 = __uuidof(ISecondaryTile2);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTile2 = _uuidof(ISecondaryTile2);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1875,7 +1875,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileFactory = __uuidof(ISecondaryTileFactory);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileFactory = _uuidof(ISecondaryTileFactory);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1919,7 +1919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileFactory2 = __uuidof(ISecondaryTileFactory2);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileFactory2 = _uuidof(ISecondaryTileFactory2);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -1966,7 +1966,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileStatics = __uuidof(ISecondaryTileStatics);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileStatics = _uuidof(ISecondaryTileStatics);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2071,7 +2071,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements = __uuidof(ISecondaryTileVisualElements);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements = _uuidof(ISecondaryTileVisualElements);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2110,7 +2110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements2 = __uuidof(ISecondaryTileVisualElements2);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements2 = _uuidof(ISecondaryTileVisualElements2);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2149,7 +2149,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements3 = __uuidof(ISecondaryTileVisualElements3);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements3 = _uuidof(ISecondaryTileVisualElements3);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2185,7 +2185,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements4 = __uuidof(ISecondaryTileVisualElements4);
+                extern MIDL_CONST_ID IID& IID_ISecondaryTileVisualElements4 = _uuidof(ISecondaryTileVisualElements4);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2233,7 +2233,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStartScreenManager = __uuidof(IStartScreenManager);
+                extern MIDL_CONST_ID IID& IID_IStartScreenManager = _uuidof(IStartScreenManager);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2277,7 +2277,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStartScreenManager2 = __uuidof(IStartScreenManager2);
+                extern MIDL_CONST_ID IID& IID_IStartScreenManager2 = _uuidof(IStartScreenManager2);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2317,7 +2317,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStartScreenManagerStatics = __uuidof(IStartScreenManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IStartScreenManagerStatics = _uuidof(IStartScreenManagerStatics);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2362,7 +2362,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileMixedRealityModel = __uuidof(ITileMixedRealityModel);
+                extern MIDL_CONST_ID IID& IID_ITileMixedRealityModel = _uuidof(ITileMixedRealityModel);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2401,7 +2401,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileMixedRealityModel2 = __uuidof(ITileMixedRealityModel2);
+                extern MIDL_CONST_ID IID& IID_ITileMixedRealityModel2 = _uuidof(ITileMixedRealityModel2);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2446,7 +2446,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVisualElementsRequest = __uuidof(IVisualElementsRequest);
+                extern MIDL_CONST_ID IID& IID_IVisualElementsRequest = _uuidof(IVisualElementsRequest);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2480,7 +2480,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVisualElementsRequestDeferral = __uuidof(IVisualElementsRequestDeferral);
+                extern MIDL_CONST_ID IID& IID_IVisualElementsRequestDeferral = _uuidof(IVisualElementsRequestDeferral);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2516,7 +2516,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVisualElementsRequestedEventArgs = __uuidof(IVisualElementsRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IVisualElementsRequestedEventArgs = _uuidof(IVisualElementsRequestedEventArgs);
             } /* StartScreen */
         } /* UI */
     } /* Windows */
@@ -2577,8 +2577,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
@@ -6456,8 +6456,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.UI.StartScreen.ISecondaryTileFactory2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.

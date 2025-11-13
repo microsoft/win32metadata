@@ -1315,7 +1315,6 @@ typedef enum {
     ND_OPT_ROUTE_INFO = 24,
     ND_OPT_RDNSS = 25,
     ND_OPT_DNSSL = 31,
-    ND_OPT_PREF64 = 38,
 } ND_OPTION_TYPE, *PND_OPTION_TYPE;
 
 
@@ -1474,38 +1473,6 @@ typedef struct nd_opt_dnssl {
 // atleast one suffix (2 * 8 = 16 octets).
 //
 #define ND_OPT_DNSSL_MIN_LEN 16
-
-//
-// ND_OPTION_PREF64
-//
-// Define a structure for a PREF64 option.
-//
-
-typedef struct nd_opt_pref64_info {
-    UINT8 nd_opt_p64_type;
-    UINT8 nd_opt_p64_len;
-    union {
-        UINT16 nd_opt_p64_lifetime_plc;
-        struct {
-            UINT16 nd_opt_p64_prefix_length_code : 3; // Least significant bits.
-            UINT16 nd_opt_p64_scaled_lifetime : 13;
-        };
-    };
-    UINT8 nd_opt_p64_prefix[12];
-} ND_OPTION_PREF64, *PND_OPTION_PREF64;
-
-//
-// PREF64 prefix length encoding.
-//
-
-typedef enum {
-    ND_OPT_PREF64_PREFIX_LENGTH_96 = 0,    // prefix length is 96 bits
-    ND_OPT_PREF64_PREFIX_LENGTH_64,        // prefix length is 64 bits
-    ND_OPT_PREF64_PREFIX_LENGTH_56,        // prefix length is 56 bits
-    ND_OPT_PREF64_PREFIX_LENGTH_48,        // prefix length is 48 bits
-    ND_OPT_PREF64_PREFIX_LENGTH_40,        // prefix length is 40 bits
-    ND_OPT_PREF64_PREFIX_LENGTH_32,        // prefix length is 32 bits
-} ND_OPT_PREF64_PREFIX_LENGTH_CODE;
 
 //
 // MLD_HEADER.
@@ -1988,7 +1955,6 @@ C_ASSERT(DL_ADDRESS_LENGTH_MAXIMUM >= sizeof(DL_TEREDO_ADDRESS));
 
 #include <ifdef.h>
 
-#define NMR_REG_KEY_PATH L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\NMR\\providers"
 
 typedef enum _NPI_MODULEID_TYPE {
     MIT_GUID = 1,

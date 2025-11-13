@@ -9,7 +9,6 @@
            xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
-           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -18,7 +17,6 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
-  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
 
   <xs:element name="Extension" substitutionGroup="f:ExtensionChoice">
     <xs:complexType>
@@ -27,7 +25,6 @@
         <xs:element name="EnterpriseDataProtection" type="CT_EnterpriseDataProtection"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ExtensionCategory_Uap7" use="required"/>
-      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>

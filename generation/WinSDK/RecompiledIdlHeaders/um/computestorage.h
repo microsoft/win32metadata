@@ -28,6 +28,7 @@ extern "C" {
 #endif
 
 // Imports a container layer.
+
 HRESULT
 WINAPI
 HcsImportLayer(
@@ -37,6 +38,7 @@ HcsImportLayer(
     );
 
 // Exports a container layer.
+
 HRESULT
 WINAPI
 HcsExportLayer(
@@ -47,6 +49,7 @@ HcsExportLayer(
     );
 
 // Exports a legacy container writable layer.
+
 HRESULT
 WINAPI
 HcsExportLegacyWritableLayer(
@@ -57,6 +60,7 @@ HcsExportLegacyWritableLayer(
     );
 
 // Deletes a container layer.
+
 HRESULT
 WINAPI
 HcsDestroyLayer(
@@ -64,6 +68,7 @@ HcsDestroyLayer(
     );
 
 // Sets up a layer that contains a base OS for a container.
+
 HRESULT
 WINAPI
 HcsSetupBaseOSLayer(
@@ -73,6 +78,7 @@ HcsSetupBaseOSLayer(
     );
 
 // Initializes a writable layer for a container.
+
 HRESULT
 WINAPI
 HcsInitializeWritableLayer(
@@ -82,6 +88,7 @@ HcsInitializeWritableLayer(
     );
 
 // Initializes a writable layer for a container using the legacy hive folder format.
+
 HRESULT
 WINAPI
 HcsInitializeLegacyWritableLayer(
@@ -92,6 +99,7 @@ HcsInitializeLegacyWritableLayer(
     );
 
 // Sets up the layer storage filter on a writable container layer.
+
 HRESULT
 WINAPI
 HcsAttachLayerStorageFilter(
@@ -100,6 +108,7 @@ HcsAttachLayerStorageFilter(
     );
 
 // Detaches the layer storage filter from a writable container layer.
+
 HRESULT
 WINAPI
 HcsDetachLayerStorageFilter(
@@ -107,6 +116,7 @@ HcsDetachLayerStorageFilter(
     );
 
 // Formats a virtual disk for the use as a writable container layer.
+
 HRESULT
 WINAPI
 HcsFormatWritableLayerVhd(
@@ -114,6 +124,7 @@ HcsFormatWritableLayerVhd(
     );
 
 // Returns the volume path for a virtual disk of a writable container layer.
+
 HRESULT
 WINAPI
 HcsGetLayerVhdMountPath(
@@ -122,28 +133,13 @@ HcsGetLayerVhdMountPath(
     );
 
 // Same as HcsSetupBaseOSLayer except that this works on a volume.
+
 HRESULT
 WINAPI
 HcsSetupBaseOSVolume(
     _In_ PCWSTR layerPath,
     _In_ PCWSTR volumePath,
     _In_ PCWSTR options
-    );
-
-// Sets up the unionFS layer storage filter on a writable container layer.
-HRESULT
-WINAPI
-HcsAttachOverlayFilter(
-    _In_ PCWSTR VolumeMountPoint,
-    _In_ PCWSTR LayerData
-    );
-
-// Detaches the UnionFS filter from a writable container layer.
-HRESULT
-WINAPI
-HcsDetachOverlayFilter(
-    _In_ PCWSTR VolumeMountPoint,
-    _In_ PCWSTR LayerData
     );
 
 #ifdef __cplusplus
@@ -155,8 +151,8 @@ HcsDetachOverlayFilter(
 
 #endif // _HYPERV_COMPUTESTORAGE_H_
 
-#ifndef ext_ms_win_hyperv_computestorage_l1_1_2_query_routines
-#define ext_ms_win_hyperv_computestorage_l1_1_2_query_routines
+#ifndef ext_ms_win_hyperv_computestorage_l1_1_1_query_routines
+#define ext_ms_win_hyperv_computestorage_l1_1_1_query_routines
 
 //
 //Private Extension API Query Routines
@@ -235,18 +231,6 @@ IsHcsGetLayerVhdMountPathPresent(
 BOOLEAN
 __stdcall
 IsHcsSetupBaseOSVolumePresent(
-    VOID
-    );
-
-BOOLEAN
-__stdcall
-IsHcsAttachOverlayFilterPresent(
-    VOID
-    );
-
-BOOLEAN
-__stdcall
-IsHcsDetachOverlayFilterPresent(
     VOID
     );
 

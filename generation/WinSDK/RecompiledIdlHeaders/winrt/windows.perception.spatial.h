@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2030,7 +2030,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchor = __uuidof(ISpatialAnchor);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchor = _uuidof(ISpatialAnchor);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2066,7 +2066,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchor2 = __uuidof(ISpatialAnchor2);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchor2 = _uuidof(ISpatialAnchor2);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2108,7 +2108,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorExportSufficiency = __uuidof(ISpatialAnchorExportSufficiency);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorExportSufficiency = _uuidof(ISpatialAnchorExportSufficiency);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2152,7 +2152,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorExporter = __uuidof(ISpatialAnchorExporter);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorExporter = _uuidof(ISpatialAnchorExporter);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2191,7 +2191,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorExporterStatics = __uuidof(ISpatialAnchorExporterStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorExporterStatics = _uuidof(ISpatialAnchorExporterStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2227,7 +2227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorManagerStatics = __uuidof(ISpatialAnchorManagerStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorManagerStatics = _uuidof(ISpatialAnchorManagerStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2263,7 +2263,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorRawCoordinateSystemAdjustedEventArgs = __uuidof(ISpatialAnchorRawCoordinateSystemAdjustedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorRawCoordinateSystemAdjustedEventArgs = _uuidof(ISpatialAnchorRawCoordinateSystemAdjustedEventArgs);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2311,7 +2311,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorStatics = __uuidof(ISpatialAnchorStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorStatics = _uuidof(ISpatialAnchorStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2356,7 +2356,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Clear(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorStore = __uuidof(ISpatialAnchorStore);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorStore = _uuidof(ISpatialAnchorStore);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2413,7 +2413,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialAnchorTransferManagerStatics = __uuidof(ISpatialAnchorTransferManagerStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialAnchorTransferManagerStatics = _uuidof(ISpatialAnchorTransferManagerStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2446,7 +2446,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialBoundingVolume = __uuidof(ISpatialBoundingVolume);
+                extern MIDL_CONST_ID IID& IID_ISpatialBoundingVolume = _uuidof(ISpatialBoundingVolume);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2499,7 +2499,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialBoundingVolumeStatics = __uuidof(ISpatialBoundingVolumeStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialBoundingVolumeStatics = _uuidof(ISpatialBoundingVolumeStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2536,7 +2536,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialCoordinateSystem = __uuidof(ISpatialCoordinateSystem);
+                extern MIDL_CONST_ID IID& IID_ISpatialCoordinateSystem = _uuidof(ISpatialCoordinateSystem);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2578,7 +2578,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntity = __uuidof(ISpatialEntity);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntity = _uuidof(ISpatialEntity);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2614,7 +2614,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityAddedEventArgs = __uuidof(ISpatialEntityAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityAddedEventArgs = _uuidof(ISpatialEntityAddedEventArgs);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2656,7 +2656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityFactory = __uuidof(ISpatialEntityFactory);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityFactory = _uuidof(ISpatialEntityFactory);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2692,7 +2692,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityRemovedEventArgs = __uuidof(ISpatialEntityRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityRemovedEventArgs = _uuidof(ISpatialEntityRemovedEventArgs);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2736,7 +2736,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityStore = __uuidof(ISpatialEntityStore);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityStore = _uuidof(ISpatialEntityStore);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2776,7 +2776,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityStoreStatics = __uuidof(ISpatialEntityStoreStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityStoreStatics = _uuidof(ISpatialEntityStoreStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2812,7 +2812,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityUpdatedEventArgs = __uuidof(ISpatialEntityUpdatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityUpdatedEventArgs = _uuidof(ISpatialEntityUpdatedEventArgs);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2878,7 +2878,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialEntityWatcher = __uuidof(ISpatialEntityWatcher);
+                extern MIDL_CONST_ID IID& IID_ISpatialEntityWatcher = _uuidof(ISpatialEntityWatcher);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2935,7 +2935,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocation = __uuidof(ISpatialLocation);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocation = _uuidof(ISpatialLocation);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -2974,7 +2974,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocation2 = __uuidof(ISpatialLocation2);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocation2 = _uuidof(ISpatialLocation2);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3065,7 +3065,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocator = __uuidof(ISpatialLocator);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocator = _uuidof(ISpatialLocator);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3121,7 +3121,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocatorAttachedFrameOfReference = __uuidof(ISpatialLocatorAttachedFrameOfReference);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocatorAttachedFrameOfReference = _uuidof(ISpatialLocatorAttachedFrameOfReference);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3160,7 +3160,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocatorPositionalTrackingDeactivatingEventArgs = __uuidof(ISpatialLocatorPositionalTrackingDeactivatingEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocatorPositionalTrackingDeactivatingEventArgs = _uuidof(ISpatialLocatorPositionalTrackingDeactivatingEventArgs);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3196,7 +3196,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialLocatorStatics = __uuidof(ISpatialLocatorStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialLocatorStatics = _uuidof(ISpatialLocatorStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3247,7 +3247,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialStageFrameOfReference = __uuidof(ISpatialStageFrameOfReference);
+                extern MIDL_CONST_ID IID& IID_ISpatialStageFrameOfReference = _uuidof(ISpatialStageFrameOfReference);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3293,7 +3293,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialStageFrameOfReferenceStatics = __uuidof(ISpatialStageFrameOfReferenceStatics);
+                extern MIDL_CONST_ID IID& IID_ISpatialStageFrameOfReferenceStatics = _uuidof(ISpatialStageFrameOfReferenceStatics);
             } /* Spatial */
         } /* Perception */
     } /* Windows */
@@ -3329,7 +3329,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISpatialStationaryFrameOfReference = __uuidof(ISpatialStationaryFrameOfReference);
+                extern MIDL_CONST_ID IID& IID_ISpatialStationaryFrameOfReference = _uuidof(ISpatialStationaryFrameOfReference);
             } /* Spatial */
         } /* Perception */
     } /* Windows */

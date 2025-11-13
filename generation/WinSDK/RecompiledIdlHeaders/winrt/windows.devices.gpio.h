@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -997,7 +997,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioChangeCounter = __uuidof(IGpioChangeCounter);
+                extern MIDL_CONST_ID IID& IID_IGpioChangeCounter = _uuidof(IGpioChangeCounter);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1034,7 +1034,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioChangeCounterFactory = __uuidof(IGpioChangeCounterFactory);
+                extern MIDL_CONST_ID IID& IID_IGpioChangeCounterFactory = _uuidof(IGpioChangeCounterFactory);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1107,7 +1107,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioChangeReader = __uuidof(IGpioChangeReader);
+                extern MIDL_CONST_ID IID& IID_IGpioChangeReader = _uuidof(IGpioChangeReader);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1149,7 +1149,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioChangeReaderFactory = __uuidof(IGpioChangeReaderFactory);
+                extern MIDL_CONST_ID IID& IID_IGpioChangeReaderFactory = _uuidof(IGpioChangeReaderFactory);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1201,7 +1201,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioController = __uuidof(IGpioController);
+                extern MIDL_CONST_ID IID& IID_IGpioController = _uuidof(IGpioController);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1237,7 +1237,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioControllerStatics = __uuidof(IGpioControllerStatics);
+                extern MIDL_CONST_ID IID& IID_IGpioControllerStatics = _uuidof(IGpioControllerStatics);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1277,7 +1277,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioControllerStatics2 = __uuidof(IGpioControllerStatics2);
+                extern MIDL_CONST_ID IID& IID_IGpioControllerStatics2 = _uuidof(IGpioControllerStatics2);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1348,7 +1348,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioPin = __uuidof(IGpioPin);
+                extern MIDL_CONST_ID IID& IID_IGpioPin = _uuidof(IGpioPin);
             } /* Gpio */
         } /* Devices */
     } /* Windows */
@@ -1384,7 +1384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGpioPinValueChangedEventArgs = __uuidof(IGpioPinValueChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IGpioPinValueChangedEventArgs = _uuidof(IGpioPinValueChangedEventArgs);
             } /* Gpio */
         } /* Devices */
     } /* Windows */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1059,7 +1059,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPicker = __uuidof(IFileOpenPicker);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPicker = _uuidof(IFileOpenPicker);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1106,7 +1106,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE PickMultipleFilesAndContinue(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPicker2 = __uuidof(IFileOpenPicker2);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPicker2 = _uuidof(IFileOpenPicker2);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1142,7 +1142,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPicker3 = __uuidof(IFileOpenPicker3);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPicker3 = _uuidof(IFileOpenPicker3);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1181,7 +1181,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPickerStatics = __uuidof(IFileOpenPickerStatics);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPickerStatics = _uuidof(IFileOpenPickerStatics);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1218,7 +1218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPickerStatics2 = __uuidof(IFileOpenPickerStatics2);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPickerStatics2 = _uuidof(IFileOpenPickerStatics2);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1255,7 +1255,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileOpenPickerWithOperationId = __uuidof(IFileOpenPickerWithOperationId);
+                extern MIDL_CONST_ID IID& IID_IFileOpenPickerWithOperationId = _uuidof(IFileOpenPickerWithOperationId);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1330,7 +1330,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileSavePicker = __uuidof(IFileSavePicker);
+                extern MIDL_CONST_ID IID& IID_IFileSavePicker = _uuidof(IFileSavePicker);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1370,7 +1370,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE PickSaveFileAndContinue(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileSavePicker2 = __uuidof(IFileSavePicker2);
+                extern MIDL_CONST_ID IID& IID_IFileSavePicker2 = _uuidof(IFileSavePicker2);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1409,7 +1409,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileSavePicker3 = __uuidof(IFileSavePicker3);
+                extern MIDL_CONST_ID IID& IID_IFileSavePicker3 = _uuidof(IFileSavePicker3);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1445,7 +1445,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileSavePicker4 = __uuidof(IFileSavePicker4);
+                extern MIDL_CONST_ID IID& IID_IFileSavePicker4 = _uuidof(IFileSavePicker4);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1482,7 +1482,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileSavePickerStatics = __uuidof(IFileSavePickerStatics);
+                extern MIDL_CONST_ID IID& IID_IFileSavePickerStatics = _uuidof(IFileSavePickerStatics);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1545,7 +1545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFolderPicker = __uuidof(IFolderPicker);
+                extern MIDL_CONST_ID IID& IID_IFolderPicker = _uuidof(IFolderPicker);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1585,7 +1585,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE PickFolderAndContinue(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFolderPicker2 = __uuidof(IFolderPicker2);
+                extern MIDL_CONST_ID IID& IID_IFolderPicker2 = _uuidof(IFolderPicker2);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1621,7 +1621,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFolderPicker3 = __uuidof(IFolderPicker3);
+                extern MIDL_CONST_ID IID& IID_IFolderPicker3 = _uuidof(IFolderPicker3);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1658,7 +1658,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFolderPickerStatics = __uuidof(IFolderPickerStatics);
+                extern MIDL_CONST_ID IID& IID_IFolderPickerStatics = _uuidof(IFolderPickerStatics);
             } /* Pickers */
         } /* Storage */
     } /* Windows */
@@ -1698,8 +1698,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Pickers.IFileOpenPicker2
@@ -4604,8 +4604,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.Pickers.IFileOpenPickerStatics2 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Pickers.IFileOpenPicker2

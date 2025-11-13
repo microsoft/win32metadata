@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -854,7 +854,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDeviceAccountConfiguration = __uuidof(IDeviceAccountConfiguration);
+                    extern MIDL_CONST_ID IID& IID_IDeviceAccountConfiguration = _uuidof(IDeviceAccountConfiguration);
                 } /* SystemAccess */
             } /* UserDataAccounts */
         } /* ApplicationModel */
@@ -1057,7 +1057,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDeviceAccountConfiguration2 = __uuidof(IDeviceAccountConfiguration2);
+                    extern MIDL_CONST_ID IID& IID_IDeviceAccountConfiguration2 = _uuidof(IDeviceAccountConfiguration2);
                 } /* SystemAccess */
             } /* UserDataAccounts */
         } /* ApplicationModel */
@@ -1096,7 +1096,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataAccountSystemAccessManagerStatics = __uuidof(IUserDataAccountSystemAccessManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IUserDataAccountSystemAccessManagerStatics = _uuidof(IUserDataAccountSystemAccessManagerStatics);
                 } /* SystemAccess */
             } /* UserDataAccounts */
         } /* ApplicationModel */
@@ -1147,7 +1147,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IUserDataAccountSystemAccessManagerStatics2 = __uuidof(IUserDataAccountSystemAccessManagerStatics2);
+                    extern MIDL_CONST_ID IID& IID_IUserDataAccountSystemAccessManagerStatics2 = _uuidof(IUserDataAccountSystemAccessManagerStatics2);
                 } /* SystemAccess */
             } /* UserDataAccounts */
         } /* ApplicationModel */

@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -948,7 +948,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILocalContentSuggestionSettings = __uuidof(ILocalContentSuggestionSettings);
+                extern MIDL_CONST_ID IID& IID_ILocalContentSuggestionSettings = _uuidof(ILocalContentSuggestionSettings);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1138,7 +1138,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPane = __uuidof(ISearchPane);
+                extern MIDL_CONST_ID IID& IID_ISearchPane = _uuidof(ISearchPane);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1190,7 +1190,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneQueryChangedEventArgs = __uuidof(ISearchPaneQueryChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneQueryChangedEventArgs = _uuidof(ISearchPaneQueryChangedEventArgs);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1232,7 +1232,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneQueryLinguisticDetails = __uuidof(ISearchPaneQueryLinguisticDetails);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneQueryLinguisticDetails = _uuidof(ISearchPaneQueryLinguisticDetails);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1280,7 +1280,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneQuerySubmittedEventArgs = __uuidof(ISearchPaneQuerySubmittedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneQuerySubmittedEventArgs = _uuidof(ISearchPaneQuerySubmittedEventArgs);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1322,7 +1322,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneQuerySubmittedEventArgsWithLinguisticDetails = __uuidof(ISearchPaneQuerySubmittedEventArgsWithLinguisticDetails);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneQuerySubmittedEventArgsWithLinguisticDetails = _uuidof(ISearchPaneQuerySubmittedEventArgsWithLinguisticDetails);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1364,7 +1364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneResultSuggestionChosenEventArgs = __uuidof(ISearchPaneResultSuggestionChosenEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneResultSuggestionChosenEventArgs = _uuidof(ISearchPaneResultSuggestionChosenEventArgs);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1406,7 +1406,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneStatics = __uuidof(ISearchPaneStatics);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneStatics = _uuidof(ISearchPaneStatics);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1446,7 +1446,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE HideThisApplication(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneStaticsWithHideThisApplication = __uuidof(ISearchPaneStaticsWithHideThisApplication);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneStaticsWithHideThisApplication = _uuidof(ISearchPaneStaticsWithHideThisApplication);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1500,7 +1500,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequest = __uuidof(ISearchPaneSuggestionsRequest);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequest = _uuidof(ISearchPaneSuggestionsRequest);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1540,7 +1540,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequestDeferral = __uuidof(ISearchPaneSuggestionsRequestDeferral);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequestDeferral = _uuidof(ISearchPaneSuggestionsRequestDeferral);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1585,7 +1585,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequestedEventArgs = __uuidof(ISearchPaneSuggestionsRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneSuggestionsRequestedEventArgs = _uuidof(ISearchPaneSuggestionsRequestedEventArgs);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1627,7 +1627,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchPaneVisibilityChangedEventArgs = __uuidof(ISearchPaneVisibilityChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISearchPaneVisibilityChangedEventArgs = _uuidof(ISearchPaneVisibilityChangedEventArgs);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1669,7 +1669,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchQueryLinguisticDetails = __uuidof(ISearchQueryLinguisticDetails);
+                extern MIDL_CONST_ID IID& IID_ISearchQueryLinguisticDetails = _uuidof(ISearchQueryLinguisticDetails);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1708,7 +1708,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchQueryLinguisticDetailsFactory = __uuidof(ISearchQueryLinguisticDetailsFactory);
+                extern MIDL_CONST_ID IID& IID_ISearchQueryLinguisticDetailsFactory = _uuidof(ISearchQueryLinguisticDetailsFactory);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1760,7 +1760,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchSuggestionCollection = __uuidof(ISearchSuggestionCollection);
+                extern MIDL_CONST_ID IID& IID_ISearchSuggestionCollection = _uuidof(ISearchSuggestionCollection);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1802,7 +1802,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchSuggestionsRequest = __uuidof(ISearchSuggestionsRequest);
+                extern MIDL_CONST_ID IID& IID_ISearchSuggestionsRequest = _uuidof(ISearchSuggestionsRequest);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1836,7 +1836,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISearchSuggestionsRequestDeferral = __uuidof(ISearchSuggestionsRequestDeferral);
+                extern MIDL_CONST_ID IID& IID_ISearchSuggestionsRequestDeferral = _uuidof(ISearchSuggestionsRequestDeferral);
             } /* Search */
         } /* ApplicationModel */
     } /* Windows */
@@ -1875,8 +1875,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Search.SearchContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Search.ISearchPane ** Default Interface **
@@ -5018,8 +5018,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Search.SearchContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Search.ISearchPane ** Default Interface **

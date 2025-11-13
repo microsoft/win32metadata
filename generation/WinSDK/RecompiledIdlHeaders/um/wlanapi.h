@@ -601,32 +601,6 @@ typedef struct _WLAN_SECURITY_ATTRIBUTES {
     DOT11_CIPHER_ALGORITHM dot11CipherAlgorithm;
 } WLAN_SECURITY_ATTRIBUTES, *PWLAN_SECURITY_ATTRIBUTES;
 
-typedef struct _WLAN_QOS_CAPABILITIES {
-    BOOL bMSCSSupported;
-    BOOL bDSCPToUPMappingSupported;
-    BOOL bSCSSupported;
-    BOOL bDSCPPolicySupported;
-} WLAN_QOS_CAPABILITIES, *PWLAN_QOS_CAPABILITIES;
-
-typedef struct _WLAN_CONNECTION_QOS_INFO {
-    WLAN_QOS_CAPABILITIES peerCapabilities;
-    BOOL bMSCSConfigured;
-    BOOL bDSCPToUPMappingConfigured;
-    ULONG ulNumConfiguredSCSStreams;
-    ULONG ulNumConfiguredDSCPPolicies;
-} WLAN_CONNECTION_QOS_INFO, *PWLAN_CONNECTION_QOS_INFO;
-
-typedef struct _WLAN_QOS_INFO {
-    // QoS capabilities of interface 
-    WLAN_QOS_CAPABILITIES interfaceCapabilities;
-    // bConnected indicates whether or not there is an established connection and therefore whether the connection
-    // QoS info is present in connectionQoSInfo.
-    BOOL bConnected;
-    // QoS info of the current connection. Meaningful only if bConnected is true; otherwise, if bConnected is false, 
-    // connectionQoSInfo will be zeroed and should be ignored.
-    WLAN_CONNECTION_QOS_INFO connectionQoSInfo;
-} WLAN_QOS_INFO, *PWLAN_QOS_INFO;
-
 // structure WLAN_CONNECTION_ATTRIBUTES defines attributes of a wireless connection
 typedef struct _WLAN_CONNECTION_ATTRIBUTES {
     WLAN_INTERFACE_STATE isState;
@@ -636,25 +610,6 @@ typedef struct _WLAN_CONNECTION_ATTRIBUTES {
     WLAN_SECURITY_ATTRIBUTES wlanSecurityAttributes;
 } WLAN_CONNECTION_ATTRIBUTES, *PWLAN_CONNECTION_ATTRIBUTES;
 
-typedef struct _WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO
-{
-    UCHAR ucLinkID;
-    ULONG ulChannelCenterFrequencyMhz;
-    ULONG ulBandwidth;
-    LONG lRssi;
-    WLAN_RATE_SET wlanRateSet;
-} WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO, *PWLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO;
-
-typedef struct _WLAN_REALTIME_CONNECTION_QUALITY {
-    DOT11_PHY_TYPE dot11PhyType;
-    ULONG ulLinkQuality;
-    ULONG ulRxRate;
-    ULONG ulTxRate;
-    BOOL bIsMLOConnection;
-    ULONG ulNumLinks;
-    // Array of size ulNumLinks
-    WLAN_REALTIME_CONNECTION_QUALITY_LINK_INFO linksInfo[1];
-} WLAN_REALTIME_CONNECTION_QUALITY, *PWLAN_REALTIME_CONNECTION_QUALITY;
 
 // use the 4-byte enum
 #ifdef __midl
@@ -1038,8 +993,6 @@ typedef enum _WLAN_INTF_OPCODE {
     wlan_intf_opcode_management_frame_protection_capable,
     wlan_intf_opcode_secondary_sta_interfaces,
     wlan_intf_opcode_secondary_sta_synchronized_connections,
-    wlan_intf_opcode_realtime_connection_quality,
-    wlan_intf_opcode_qos_info,
     wlan_intf_opcode_autoconf_end = 0x0fffffff,
     wlan_intf_opcode_msm_start = 0x10000100,
     wlan_intf_opcode_statistics,

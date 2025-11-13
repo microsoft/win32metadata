@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1342,7 +1342,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICredentialCommandCredentialDeletedHandler = __uuidof(ICredentialCommandCredentialDeletedHandler);
+                extern MIDL_CONST_ID IID& IID_ICredentialCommandCredentialDeletedHandler = _uuidof(ICredentialCommandCredentialDeletedHandler);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1376,7 +1376,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountCommandInvokedHandler = __uuidof(IWebAccountCommandInvokedHandler);
+                extern MIDL_CONST_ID IID& IID_IWebAccountCommandInvokedHandler = _uuidof(IWebAccountCommandInvokedHandler);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1409,7 +1409,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountProviderCommandInvokedHandler = __uuidof(IWebAccountProviderCommandInvokedHandler);
+                extern MIDL_CONST_ID IID& IID_IWebAccountProviderCommandInvokedHandler = _uuidof(IWebAccountProviderCommandInvokedHandler);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1449,7 +1449,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPane = __uuidof(IAccountsSettingsPane);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPane = _uuidof(IAccountsSettingsPane);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1503,7 +1503,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneCommandsRequestedEventArgs = __uuidof(IAccountsSettingsPaneCommandsRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneCommandsRequestedEventArgs = _uuidof(IAccountsSettingsPaneCommandsRequestedEventArgs);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1539,7 +1539,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneCommandsRequestedEventArgs2 = __uuidof(IAccountsSettingsPaneCommandsRequestedEventArgs2);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneCommandsRequestedEventArgs2 = _uuidof(IAccountsSettingsPaneCommandsRequestedEventArgs2);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1573,7 +1573,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneEventDeferral = __uuidof(IAccountsSettingsPaneEventDeferral);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneEventDeferral = _uuidof(IAccountsSettingsPaneEventDeferral);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1610,7 +1610,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Show(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics = __uuidof(IAccountsSettingsPaneStatics);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics = _uuidof(IAccountsSettingsPaneStatics);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1652,7 +1652,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics2 = __uuidof(IAccountsSettingsPaneStatics2);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics2 = _uuidof(IAccountsSettingsPaneStatics2);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1693,7 +1693,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics3 = __uuidof(IAccountsSettingsPaneStatics3);
+                extern MIDL_CONST_ID IID& IID_IAccountsSettingsPaneStatics3 = _uuidof(IAccountsSettingsPaneStatics3);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1732,7 +1732,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICredentialCommand = __uuidof(ICredentialCommand);
+                extern MIDL_CONST_ID IID& IID_ICredentialCommand = _uuidof(ICredentialCommand);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1774,7 +1774,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICredentialCommandFactory = __uuidof(ICredentialCommandFactory);
+                extern MIDL_CONST_ID IID& IID_ICredentialCommandFactory = _uuidof(ICredentialCommandFactory);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1813,7 +1813,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsCommandFactory = __uuidof(ISettingsCommandFactory);
+                extern MIDL_CONST_ID IID& IID_ISettingsCommandFactory = _uuidof(ISettingsCommandFactory);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1849,7 +1849,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsCommandStatics = __uuidof(ISettingsCommandStatics);
+                extern MIDL_CONST_ID IID& IID_ISettingsCommandStatics = _uuidof(ISettingsCommandStatics);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1898,7 +1898,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsPane = __uuidof(ISettingsPane);
+                extern MIDL_CONST_ID IID& IID_ISettingsPane = _uuidof(ISettingsPane);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1940,7 +1940,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsPaneCommandsRequest = __uuidof(ISettingsPaneCommandsRequest);
+                extern MIDL_CONST_ID IID& IID_ISettingsPaneCommandsRequest = _uuidof(ISettingsPaneCommandsRequest);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -1982,7 +1982,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsPaneCommandsRequestedEventArgs = __uuidof(ISettingsPaneCommandsRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ISettingsPaneCommandsRequestedEventArgs = _uuidof(ISettingsPaneCommandsRequestedEventArgs);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2034,7 +2034,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISettingsPaneStatics = __uuidof(ISettingsPaneStatics);
+                extern MIDL_CONST_ID IID& IID_ISettingsPaneStatics = _uuidof(ISettingsPaneStatics);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2076,7 +2076,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountCommand = __uuidof(IWebAccountCommand);
+                extern MIDL_CONST_ID IID& IID_IWebAccountCommand = _uuidof(IWebAccountCommand);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2115,7 +2115,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountCommandFactory = __uuidof(IWebAccountCommandFactory);
+                extern MIDL_CONST_ID IID& IID_IWebAccountCommandFactory = _uuidof(IWebAccountCommandFactory);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2151,7 +2151,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountInvokedArgs = __uuidof(IWebAccountInvokedArgs);
+                extern MIDL_CONST_ID IID& IID_IWebAccountInvokedArgs = _uuidof(IWebAccountInvokedArgs);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2190,7 +2190,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountProviderCommand = __uuidof(IWebAccountProviderCommand);
+                extern MIDL_CONST_ID IID& IID_IWebAccountProviderCommand = _uuidof(IWebAccountProviderCommand);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */
@@ -2228,7 +2228,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWebAccountProviderCommandFactory = __uuidof(IWebAccountProviderCommandFactory);
+                extern MIDL_CONST_ID IID& IID_IWebAccountProviderCommandFactory = _uuidof(IWebAccountProviderCommandFactory);
             } /* ApplicationSettings */
         } /* UI */
     } /* Windows */

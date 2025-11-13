@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -428,7 +428,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPdfDocument = __uuidof(IPdfDocument);
+                extern MIDL_CONST_ID IID& IID_IPdfDocument = _uuidof(IPdfDocument);
             } /* Pdf */
         } /* Data */
     } /* Windows */
@@ -479,7 +479,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPdfDocumentStatics = __uuidof(IPdfDocumentStatics);
+                extern MIDL_CONST_ID IID& IID_IPdfDocumentStatics = _uuidof(IPdfDocumentStatics);
             } /* Pdf */
         } /* Data */
     } /* Windows */
@@ -539,7 +539,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPdfPage = __uuidof(IPdfPage);
+                extern MIDL_CONST_ID IID& IID_IPdfPage = _uuidof(IPdfPage);
             } /* Pdf */
         } /* Data */
     } /* Windows */
@@ -587,7 +587,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPdfPageDimensions = __uuidof(IPdfPageDimensions);
+                extern MIDL_CONST_ID IID& IID_IPdfPageDimensions = _uuidof(IPdfPageDimensions);
             } /* Pdf */
         } /* Data */
     } /* Windows */
@@ -656,7 +656,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPdfPageRenderOptions = __uuidof(IPdfPageRenderOptions);
+                extern MIDL_CONST_ID IID& IID_IPdfPageRenderOptions = _uuidof(IPdfPageRenderOptions);
             } /* Pdf */
         } /* Data */
     } /* Windows */

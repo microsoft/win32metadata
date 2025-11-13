@@ -7,7 +7,10 @@
  *
  **************************************************************************/
 
+#ifdef _MSC_VER
 #pragma once
+#endif
+
 #ifndef __XAUDIO2_INCLUDED__
 #define __XAUDIO2_INCLUDED__
 

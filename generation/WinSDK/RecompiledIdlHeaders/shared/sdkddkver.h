@@ -158,12 +158,8 @@ Abstract:
 #define NTDDI_WIN10_FE                      0x0A00000A
 #define NTDDI_WIN10_CO                      0x0A00000B
 #define NTDDI_WIN10_NI                      0x0A00000C
-#define NTDDI_WIN10_CU                      0x0A00000D
-#define NTDDI_WIN11_ZN                      0x0A00000E
-#define NTDDI_WIN11_GA                      0x0A00000F
-#define NTDDI_WIN11_GE                      0x0A000010
 
-#define WDK_NTDDI_VERSION                   NTDDI_WIN11_GE
+#define WDK_NTDDI_VERSION                   NTDDI_WIN10_NI
 
 
 //
@@ -239,7 +235,7 @@ Abstract:
 #endif // (_WIN32_WINNT <= _WIN32_WINNT_WINBLUE)
 #else
 // set NTDDI_VERSION to default to latest if _WIN32_WINNT isn't set
-#define NTDDI_VERSION   0x0A000010
+#define NTDDI_VERSION   0x0A00000C
 #endif // _WIN32_WINNT
 #endif // NTDDI_VERSION
 

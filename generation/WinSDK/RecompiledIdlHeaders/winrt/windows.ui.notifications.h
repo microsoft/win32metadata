@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -3637,7 +3637,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdaptiveNotificationContent = __uuidof(IAdaptiveNotificationContent);
+                extern MIDL_CONST_ID IID& IID_IAdaptiveNotificationContent = _uuidof(IAdaptiveNotificationContent);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3682,7 +3682,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdaptiveNotificationText = __uuidof(IAdaptiveNotificationText);
+                extern MIDL_CONST_ID IID& IID_IAdaptiveNotificationText = _uuidof(IAdaptiveNotificationText);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3724,7 +3724,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeNotification = __uuidof(IBadgeNotification);
+                extern MIDL_CONST_ID IID& IID_IBadgeNotification = _uuidof(IBadgeNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3761,7 +3761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeNotificationFactory = __uuidof(IBadgeNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_IBadgeNotificationFactory = _uuidof(IBadgeNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3808,7 +3808,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeUpdateManagerForUser = __uuidof(IBadgeUpdateManagerForUser);
+                extern MIDL_CONST_ID IID& IID_IBadgeUpdateManagerForUser = _uuidof(IBadgeUpdateManagerForUser);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3856,7 +3856,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeUpdateManagerStatics = __uuidof(IBadgeUpdateManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IBadgeUpdateManagerStatics = _uuidof(IBadgeUpdateManagerStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3893,7 +3893,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeUpdateManagerStatics2 = __uuidof(IBadgeUpdateManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IBadgeUpdateManagerStatics2 = _uuidof(IBadgeUpdateManagerStatics2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3940,7 +3940,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE StopPeriodicUpdate(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBadgeUpdater = __uuidof(IBadgeUpdater);
+                extern MIDL_CONST_ID IID& IID_IBadgeUpdater = _uuidof(IBadgeUpdater);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -3991,7 +3991,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownAdaptiveNotificationHintsStatics = __uuidof(IKnownAdaptiveNotificationHintsStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownAdaptiveNotificationHintsStatics = _uuidof(IKnownAdaptiveNotificationHintsStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4081,7 +4081,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownAdaptiveNotificationTextStylesStatics = __uuidof(IKnownAdaptiveNotificationTextStylesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownAdaptiveNotificationTextStylesStatics = _uuidof(IKnownAdaptiveNotificationTextStylesStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4117,7 +4117,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownNotificationBindingsStatics = __uuidof(IKnownNotificationBindingsStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownNotificationBindingsStatics = _uuidof(IKnownNotificationBindingsStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4162,7 +4162,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INotification = __uuidof(INotification);
+                extern MIDL_CONST_ID IID& IID_INotification = _uuidof(INotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4213,7 +4213,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INotificationBinding = __uuidof(INotificationBinding);
+                extern MIDL_CONST_ID IID& IID_INotificationBinding = _uuidof(INotificationBinding);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4255,7 +4255,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INotificationData = __uuidof(INotificationData);
+                extern MIDL_CONST_ID IID& IID_INotificationData = _uuidof(INotificationData);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4297,7 +4297,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INotificationDataFactory = __uuidof(INotificationDataFactory);
+                extern MIDL_CONST_ID IID& IID_INotificationDataFactory = _uuidof(INotificationDataFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4343,7 +4343,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INotificationVisual = __uuidof(INotificationVisual);
+                extern MIDL_CONST_ID IID& IID_INotificationVisual = _uuidof(INotificationVisual);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4400,7 +4400,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledTileNotification = __uuidof(IScheduledTileNotification);
+                extern MIDL_CONST_ID IID& IID_IScheduledTileNotification = _uuidof(IScheduledTileNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4438,7 +4438,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledTileNotificationFactory = __uuidof(IScheduledTileNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_IScheduledTileNotificationFactory = _uuidof(IScheduledTileNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4489,7 +4489,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotification = __uuidof(IScheduledToastNotification);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotification = _uuidof(IScheduledToastNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4540,7 +4540,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotification2 = __uuidof(IScheduledToastNotification2);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotification2 = _uuidof(IScheduledToastNotification2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4585,7 +4585,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotification3 = __uuidof(IScheduledToastNotification3);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotification3 = _uuidof(IScheduledToastNotification3);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4624,7 +4624,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotification4 = __uuidof(IScheduledToastNotification4);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotification4 = _uuidof(IScheduledToastNotification4);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4669,7 +4669,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotificationFactory = __uuidof(IScheduledToastNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotificationFactory = _uuidof(IScheduledToastNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4714,7 +4714,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IScheduledToastNotificationShowingEventArgs = __uuidof(IScheduledToastNotificationShowingEventArgs);
+                extern MIDL_CONST_ID IID& IID_IScheduledToastNotificationShowingEventArgs = _uuidof(IScheduledToastNotificationShowingEventArgs);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4750,7 +4750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IShownTileNotification = __uuidof(IShownTileNotification);
+                extern MIDL_CONST_ID IID& IID_IShownTileNotification = _uuidof(IShownTileNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4792,7 +4792,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileFlyoutNotification = __uuidof(ITileFlyoutNotification);
+                extern MIDL_CONST_ID IID& IID_ITileFlyoutNotification = _uuidof(ITileFlyoutNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4829,7 +4829,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileFlyoutNotificationFactory = __uuidof(ITileFlyoutNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_ITileFlyoutNotificationFactory = _uuidof(ITileFlyoutNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4877,7 +4877,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileFlyoutUpdateManagerStatics = __uuidof(ITileFlyoutUpdateManagerStatics);
+                extern MIDL_CONST_ID IID& IID_ITileFlyoutUpdateManagerStatics = _uuidof(ITileFlyoutUpdateManagerStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4927,7 +4927,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileFlyoutUpdater = __uuidof(ITileFlyoutUpdater);
+                extern MIDL_CONST_ID IID& IID_ITileFlyoutUpdater = _uuidof(ITileFlyoutUpdater);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -4975,7 +4975,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileNotification = __uuidof(ITileNotification);
+                extern MIDL_CONST_ID IID& IID_ITileNotification = _uuidof(ITileNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5012,7 +5012,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileNotificationFactory = __uuidof(ITileNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_ITileNotificationFactory = _uuidof(ITileNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5059,7 +5059,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileUpdateManagerForUser = __uuidof(ITileUpdateManagerForUser);
+                extern MIDL_CONST_ID IID& IID_ITileUpdateManagerForUser = _uuidof(ITileUpdateManagerForUser);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5107,7 +5107,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileUpdateManagerStatics = __uuidof(ITileUpdateManagerStatics);
+                extern MIDL_CONST_ID IID& IID_ITileUpdateManagerStatics = _uuidof(ITileUpdateManagerStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5144,7 +5144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileUpdateManagerStatics2 = __uuidof(ITileUpdateManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_ITileUpdateManagerStatics2 = _uuidof(ITileUpdateManagerStatics2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5215,7 +5215,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileUpdater = __uuidof(ITileUpdater);
+                extern MIDL_CONST_ID IID& IID_ITileUpdater = _uuidof(ITileUpdater);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5257,7 +5257,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITileUpdater2 = __uuidof(ITileUpdater2);
+                extern MIDL_CONST_ID IID& IID_ITileUpdater2 = _uuidof(ITileUpdater2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5293,7 +5293,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastActivatedEventArgs = __uuidof(IToastActivatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IToastActivatedEventArgs = _uuidof(IToastActivatedEventArgs);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5329,7 +5329,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastActivatedEventArgs2 = __uuidof(IToastActivatedEventArgs2);
+                extern MIDL_CONST_ID IID& IID_IToastActivatedEventArgs2 = _uuidof(IToastActivatedEventArgs2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5383,7 +5383,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastCollection = __uuidof(IToastCollection);
+                extern MIDL_CONST_ID IID& IID_IToastCollection = _uuidof(IToastCollection);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5423,7 +5423,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastCollectionFactory = __uuidof(IToastCollectionFactory);
+                extern MIDL_CONST_ID IID& IID_IToastCollectionFactory = _uuidof(IToastCollectionFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5480,7 +5480,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastCollectionManager = __uuidof(IToastCollectionManager);
+                extern MIDL_CONST_ID IID& IID_IToastCollectionManager = _uuidof(IToastCollectionManager);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5516,7 +5516,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastDismissedEventArgs = __uuidof(IToastDismissedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IToastDismissedEventArgs = _uuidof(IToastDismissedEventArgs);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5552,7 +5552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastFailedEventArgs = __uuidof(IToastFailedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IToastFailedEventArgs = _uuidof(IToastFailedEventArgs);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5615,7 +5615,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotification = __uuidof(IToastNotification);
+                extern MIDL_CONST_ID IID& IID_IToastNotification = _uuidof(IToastNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5666,7 +5666,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotification2 = __uuidof(IToastNotification2);
+                extern MIDL_CONST_ID IID& IID_IToastNotification2 = _uuidof(IToastNotification2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5711,7 +5711,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotification3 = __uuidof(IToastNotification3);
+                extern MIDL_CONST_ID IID& IID_IToastNotification3 = _uuidof(IToastNotification3);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5756,7 +5756,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotification4 = __uuidof(IToastNotification4);
+                extern MIDL_CONST_ID IID& IID_IToastNotification4 = _uuidof(IToastNotification4);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5795,7 +5795,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotification6 = __uuidof(IToastNotification6);
+                extern MIDL_CONST_ID IID& IID_IToastNotification6 = _uuidof(IToastNotification6);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5834,7 +5834,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationActionTriggerDetail = __uuidof(IToastNotificationActionTriggerDetail);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationActionTriggerDetail = _uuidof(IToastNotificationActionTriggerDetail);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5871,7 +5871,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationFactory = __uuidof(IToastNotificationFactory);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationFactory = _uuidof(IToastNotificationFactory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5927,7 +5927,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationHistory = __uuidof(IToastNotificationHistory);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationHistory = _uuidof(IToastNotificationHistory);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -5967,7 +5967,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationHistory2 = __uuidof(IToastNotificationHistory2);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationHistory2 = _uuidof(IToastNotificationHistory2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6003,7 +6003,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationHistoryChangedTriggerDetail = __uuidof(IToastNotificationHistoryChangedTriggerDetail);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationHistoryChangedTriggerDetail = _uuidof(IToastNotificationHistoryChangedTriggerDetail);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6039,7 +6039,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationHistoryChangedTriggerDetail2 = __uuidof(IToastNotificationHistoryChangedTriggerDetail2);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationHistoryChangedTriggerDetail2 = _uuidof(IToastNotificationHistoryChangedTriggerDetail2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6085,7 +6085,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser = __uuidof(IToastNotificationManagerForUser);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser = _uuidof(IToastNotificationManagerForUser);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6133,7 +6133,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser2 = __uuidof(IToastNotificationManagerForUser2);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser2 = _uuidof(IToastNotificationManagerForUser2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6176,7 +6176,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser3 = __uuidof(IToastNotificationManagerForUser3);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerForUser3 = _uuidof(IToastNotificationManagerForUser3);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6220,7 +6220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics = __uuidof(IToastNotificationManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics = _uuidof(IToastNotificationManagerStatics);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6256,7 +6256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics2 = __uuidof(IToastNotificationManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics2 = _uuidof(IToastNotificationManagerStatics2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6296,7 +6296,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics4 = __uuidof(IToastNotificationManagerStatics4);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics4 = _uuidof(IToastNotificationManagerStatics4);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6332,7 +6332,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics5 = __uuidof(IToastNotificationManagerStatics5);
+                extern MIDL_CONST_ID IID& IID_IToastNotificationManagerStatics5 = _uuidof(IToastNotificationManagerStatics5);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6383,7 +6383,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotifier = __uuidof(IToastNotifier);
+                extern MIDL_CONST_ID IID& IID_IToastNotifier = _uuidof(IToastNotifier);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6427,7 +6427,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotifier2 = __uuidof(IToastNotifier2);
+                extern MIDL_CONST_ID IID& IID_IToastNotifier2 = _uuidof(IToastNotifier2);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6467,7 +6467,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IToastNotifier3 = __uuidof(IToastNotifier3);
+                extern MIDL_CONST_ID IID& IID_IToastNotifier3 = _uuidof(IToastNotifier3);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6512,7 +6512,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserNotification = __uuidof(IUserNotification);
+                extern MIDL_CONST_ID IID& IID_IUserNotification = _uuidof(IUserNotification);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6551,7 +6551,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserNotificationChangedEventArgs = __uuidof(IUserNotificationChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IUserNotificationChangedEventArgs = _uuidof(IUserNotificationChangedEventArgs);
             } /* Notifications */
         } /* UI */
     } /* Windows */
@@ -6783,8 +6783,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Notifications.INotificationDataFactory interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Notifications.INotificationDataFactory interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Notifications.INotificationData ** Default Interface **
@@ -7004,8 +7004,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -7253,10 +7253,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -17159,8 +17159,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Notifications.INotificationDataFactory interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Notifications.INotificationDataFactory interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Notifications.INotificationData ** Default Interface **
@@ -17380,8 +17380,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.ITileUpdateManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -17629,10 +17629,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1026,7 +1026,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileInformationFactory = __uuidof(IFileInformationFactory);
+                extern MIDL_CONST_ID IID& IID_IFileInformationFactory = _uuidof(IFileInformationFactory);
             } /* BulkAccess */
         } /* Storage */
     } /* Windows */
@@ -1085,7 +1085,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFileInformationFactoryFactory = __uuidof(IFileInformationFactoryFactory);
+                extern MIDL_CONST_ID IID& IID_IFileInformationFactoryFactory = _uuidof(IFileInformationFactoryFactory);
             } /* BulkAccess */
         } /* Storage */
     } /* Windows */
@@ -1148,7 +1148,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageItemInformation = __uuidof(IStorageItemInformation);
+                extern MIDL_CONST_ID IID& IID_IStorageItemInformation = _uuidof(IStorageItemInformation);
             } /* BulkAccess */
         } /* Storage */
     } /* Windows */

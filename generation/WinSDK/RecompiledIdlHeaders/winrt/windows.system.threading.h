@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -323,7 +323,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITimerDestroyedHandler = __uuidof(ITimerDestroyedHandler);
+                extern MIDL_CONST_ID IID& IID_ITimerDestroyedHandler = _uuidof(ITimerDestroyedHandler);
             } /* Threading */
         } /* System */
     } /* Windows */
@@ -356,7 +356,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITimerElapsedHandler = __uuidof(ITimerElapsedHandler);
+                extern MIDL_CONST_ID IID& IID_ITimerElapsedHandler = _uuidof(ITimerElapsedHandler);
             } /* Threading */
         } /* System */
     } /* Windows */
@@ -389,7 +389,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWorkItemHandler = __uuidof(IWorkItemHandler);
+                extern MIDL_CONST_ID IID& IID_IWorkItemHandler = _uuidof(IWorkItemHandler);
             } /* Threading */
         } /* System */
     } /* Windows */
@@ -437,7 +437,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IThreadPoolStatics = __uuidof(IThreadPoolStatics);
+                extern MIDL_CONST_ID IID& IID_IThreadPoolStatics = _uuidof(IThreadPoolStatics);
             } /* Threading */
         } /* System */
     } /* Windows */
@@ -477,7 +477,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Cancel(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IThreadPoolTimer = __uuidof(IThreadPoolTimer);
+                extern MIDL_CONST_ID IID& IID_IThreadPoolTimer = _uuidof(IThreadPoolTimer);
             } /* Threading */
         } /* System */
     } /* Windows */
@@ -532,7 +532,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IThreadPoolTimerStatics = __uuidof(IThreadPoolTimerStatics);
+                extern MIDL_CONST_ID IID& IID_IThreadPoolTimerStatics = _uuidof(IThreadPoolTimerStatics);
             } /* Threading */
         } /* System */
     } /* Windows */

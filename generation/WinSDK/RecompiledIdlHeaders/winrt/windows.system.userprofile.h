@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -1165,7 +1165,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvertisingManagerForUser = __uuidof(IAdvertisingManagerForUser);
+                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerForUser = _uuidof(IAdvertisingManagerForUser);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1201,7 +1201,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics = __uuidof(IAdvertisingManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics = _uuidof(IAdvertisingManagerStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1238,7 +1238,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics2 = __uuidof(IAdvertisingManagerStatics2);
+                extern MIDL_CONST_ID IID& IID_IAdvertisingManagerStatics2 = _uuidof(IAdvertisingManagerStatics2);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1280,7 +1280,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAssignedAccessSettings = __uuidof(IAssignedAccessSettings);
+                extern MIDL_CONST_ID IID& IID_IAssignedAccessSettings = _uuidof(IAssignedAccessSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1320,7 +1320,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAssignedAccessSettingsStatics = __uuidof(IAssignedAccessSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IAssignedAccessSettingsStatics = _uuidof(IAssignedAccessSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1359,7 +1359,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDiagnosticsSettings = __uuidof(IDiagnosticsSettings);
+                extern MIDL_CONST_ID IID& IID_IDiagnosticsSettings = _uuidof(IDiagnosticsSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1399,7 +1399,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDiagnosticsSettingsStatics = __uuidof(IDiagnosticsSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IDiagnosticsSettingsStatics = _uuidof(IDiagnosticsSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1436,7 +1436,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IFirstSignInSettings = __uuidof(IFirstSignInSettings);
+                extern MIDL_CONST_ID IID& IID_IFirstSignInSettings = _uuidof(IFirstSignInSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1472,7 +1472,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFirstSignInSettingsStatics = __uuidof(IFirstSignInSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IFirstSignInSettingsStatics = _uuidof(IFirstSignInSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1526,7 +1526,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesForUser = __uuidof(IGlobalizationPreferencesForUser);
+                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesForUser = _uuidof(IGlobalizationPreferencesForUser);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1577,7 +1577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics = __uuidof(IGlobalizationPreferencesStatics);
+                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics = _uuidof(IGlobalizationPreferencesStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1618,7 +1618,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics2 = __uuidof(IGlobalizationPreferencesStatics2);
+                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics2 = _uuidof(IGlobalizationPreferencesStatics2);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1655,7 +1655,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics3 = __uuidof(IGlobalizationPreferencesStatics3);
+                extern MIDL_CONST_ID IID& IID_IGlobalizationPreferencesStatics3 = _uuidof(IGlobalizationPreferencesStatics3);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1695,7 +1695,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenImageFeedStatics = __uuidof(ILockScreenImageFeedStatics);
+                extern MIDL_CONST_ID IID& IID_ILockScreenImageFeedStatics = _uuidof(ILockScreenImageFeedStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1742,7 +1742,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILockScreenStatics = __uuidof(ILockScreenStatics);
+                extern MIDL_CONST_ID IID& IID_ILockScreenStatics = _uuidof(ILockScreenStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1878,7 +1878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserInformationStatics = __uuidof(IUserInformationStatics);
+                extern MIDL_CONST_ID IID& IID_IUserInformationStatics = _uuidof(IUserInformationStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1919,7 +1919,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettings = __uuidof(IUserProfilePersonalizationSettings);
+                extern MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettings = _uuidof(IUserProfilePersonalizationSettings);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettingsStatics = __uuidof(IUserProfilePersonalizationSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IUserProfilePersonalizationSettingsStatics = _uuidof(IUserProfilePersonalizationSettingsStatics);
             } /* UserProfile */
         } /* System */
     } /* Windows */
@@ -2091,8 +2091,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2132,8 +2132,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.UserProfile.UserProfileLockScreenContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.UserProfile.ILockScreenStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
  *   Static Methods exist on the Windows.System.UserProfile.ILockScreenImageFeedStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
+ *   Static Methods exist on the Windows.System.UserProfile.ILockScreenStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
  *
  */
 #if WINDOWS_SYSTEM_USERPROFILE_USERPROFILELOCKSCREENCONTRACT_VERSION >= 0x10000
@@ -5245,8 +5245,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.UserProfile.IGlobalizationPreferencesStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5286,8 +5286,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.UserProfile.UserProfileLockScreenContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.UserProfile.ILockScreenStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
  *   Static Methods exist on the Windows.System.UserProfile.ILockScreenImageFeedStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
+ *   Static Methods exist on the Windows.System.UserProfile.ILockScreenStatics interface starting with version 1.0 of the Windows.System.UserProfile.UserProfileLockScreenContract API contract
  *
  */
 #if WINDOWS_SYSTEM_USERPROFILE_USERPROFILELOCKSCREENCONTRACT_VERSION >= 0x10000

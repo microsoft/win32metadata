@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1523,7 +1523,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthentication = __uuidof(ISecondaryAuthenticationFactorAuthentication);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthentication = _uuidof(ISecondaryAuthenticationFactorAuthentication);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1575,7 +1575,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationResult = __uuidof(ISecondaryAuthenticationFactorAuthenticationResult);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationResult = _uuidof(ISecondaryAuthenticationFactorAuthenticationResult);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1621,7 +1621,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs = __uuidof(ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs = _uuidof(ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1679,7 +1679,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStageInfo = __uuidof(ISecondaryAuthenticationFactorAuthenticationStageInfo);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStageInfo = _uuidof(ISecondaryAuthenticationFactorAuthenticationStageInfo);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1754,7 +1754,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStatics = __uuidof(ISecondaryAuthenticationFactorAuthenticationStatics);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorAuthenticationStatics = _uuidof(ISecondaryAuthenticationFactorAuthenticationStatics);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1828,7 +1828,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics = __uuidof(ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics = _uuidof(ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1892,7 +1892,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorInfo = __uuidof(ISecondaryAuthenticationFactorInfo);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorInfo = _uuidof(ISecondaryAuthenticationFactorInfo);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -1954,7 +1954,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorInfo2 = __uuidof(ISecondaryAuthenticationFactorInfo2);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorInfo2 = _uuidof(ISecondaryAuthenticationFactorInfo2);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -2008,7 +2008,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistration = __uuidof(ISecondaryAuthenticationFactorRegistration);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistration = _uuidof(ISecondaryAuthenticationFactorRegistration);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -2060,7 +2060,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistrationResult = __uuidof(ISecondaryAuthenticationFactorRegistrationResult);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistrationResult = _uuidof(ISecondaryAuthenticationFactorRegistrationResult);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */
@@ -2134,7 +2134,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistrationStatics = __uuidof(ISecondaryAuthenticationFactorRegistrationStatics);
+                        extern MIDL_CONST_ID IID& IID_ISecondaryAuthenticationFactorRegistrationStatics = _uuidof(ISecondaryAuthenticationFactorRegistrationStatics);
                     } /* Provider */
                 } /* Identity */
             } /* Authentication */

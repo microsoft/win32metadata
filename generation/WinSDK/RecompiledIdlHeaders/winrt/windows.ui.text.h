@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1608,7 +1608,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IContentLinkInfo = __uuidof(IContentLinkInfo);
+                extern MIDL_CONST_ID IID& IID_IContentLinkInfo = _uuidof(IContentLinkInfo);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -1641,7 +1641,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IFontWeights = __uuidof(IFontWeights);
+                extern MIDL_CONST_ID IID& IID_IFontWeights = _uuidof(IFontWeights);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -1707,7 +1707,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFontWeightsStatics = __uuidof(IFontWeightsStatics);
+                extern MIDL_CONST_ID IID& IID_IFontWeightsStatics = _uuidof(IFontWeightsStatics);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -1746,7 +1746,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRichEditTextRange = __uuidof(IRichEditTextRange);
+                extern MIDL_CONST_ID IID& IID_IRichEditTextRange = _uuidof(IRichEditTextRange);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -1928,7 +1928,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextCharacterFormat = __uuidof(ITextCharacterFormat);
+                extern MIDL_CONST_ID IID& IID_ITextCharacterFormat = _uuidof(ITextCharacterFormat);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -1985,7 +1985,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextConstantsStatics = __uuidof(ITextConstantsStatics);
+                extern MIDL_CONST_ID IID& IID_ITextConstantsStatics = _uuidof(ITextConstantsStatics);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2097,7 +2097,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Undo(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextDocument = __uuidof(ITextDocument);
+                extern MIDL_CONST_ID IID& IID_ITextDocument = _uuidof(ITextDocument);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2142,7 +2142,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextDocument2 = __uuidof(ITextDocument2);
+                extern MIDL_CONST_ID IID& IID_ITextDocument2 = _uuidof(ITextDocument2);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2176,7 +2176,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ClearUndoRedoHistory(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextDocument3 = __uuidof(ITextDocument3);
+                extern MIDL_CONST_ID IID& IID_ITextDocument3 = _uuidof(ITextDocument3);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2218,7 +2218,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextDocument4 = __uuidof(ITextDocument4);
+                extern MIDL_CONST_ID IID& IID_ITextDocument4 = _uuidof(ITextDocument4);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2400,7 +2400,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextParagraphFormat = __uuidof(ITextParagraphFormat);
+                extern MIDL_CONST_ID IID& IID_ITextParagraphFormat = _uuidof(ITextParagraphFormat);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2622,7 +2622,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextRange = __uuidof(ITextRange);
+                extern MIDL_CONST_ID IID& IID_ITextRange = _uuidof(ITextRange);
             } /* Text */
         } /* UI */
     } /* Windows */
@@ -2702,7 +2702,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITextSelection = __uuidof(ITextSelection);
+                extern MIDL_CONST_ID IID& IID_ITextSelection = _uuidof(ITextSelection);
             } /* Text */
         } /* UI */
     } /* Windows */

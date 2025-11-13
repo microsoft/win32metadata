@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1064,7 +1064,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisInkBullet = __uuidof(IInkAnalysisInkBullet);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisInkBullet = _uuidof(IInkAnalysisInkBullet);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1113,7 +1113,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisInkDrawing = __uuidof(IInkAnalysisInkDrawing);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisInkDrawing = _uuidof(IInkAnalysisInkDrawing);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1159,7 +1159,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisInkWord = __uuidof(IInkAnalysisInkWord);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisInkWord = _uuidof(IInkAnalysisInkWord);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1205,7 +1205,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisLine = __uuidof(IInkAnalysisLine);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisLine = _uuidof(IInkAnalysisLine);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1248,7 +1248,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisListItem = __uuidof(IInkAnalysisListItem);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisListItem = _uuidof(IInkAnalysisListItem);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1304,7 +1304,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisNode = __uuidof(IInkAnalysisNode);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisNode = _uuidof(IInkAnalysisNode);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1347,7 +1347,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisParagraph = __uuidof(IInkAnalysisParagraph);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisParagraph = _uuidof(IInkAnalysisParagraph);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1387,7 +1387,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisResult = __uuidof(IInkAnalysisResult);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisResult = _uuidof(IInkAnalysisResult);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1434,7 +1434,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisRoot = __uuidof(IInkAnalysisRoot);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisRoot = _uuidof(IInkAnalysisRoot);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1477,7 +1477,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalysisWritingRegion = __uuidof(IInkAnalysisWritingRegion);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalysisWritingRegion = _uuidof(IInkAnalysisWritingRegion);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1543,7 +1543,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalyzer = __uuidof(IInkAnalyzer);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalyzer = _uuidof(IInkAnalyzer);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */
@@ -1581,7 +1581,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IInkAnalyzerFactory = __uuidof(IInkAnalyzerFactory);
+                        extern MIDL_CONST_ID IID& IID_IInkAnalyzerFactory = _uuidof(IInkAnalyzerFactory);
                     } /* Analysis */
                 } /* Inking */
             } /* Input */

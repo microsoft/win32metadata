@@ -110,8 +110,6 @@ enum GdiplusStartupParams
     GdiplusStartupNoSetRound = 0x00000001,
     GdiplusStartupSetPSValue = 0x00000002,
     GdiplusStartupReserved0  = 0x00000004,
-    GdiplusStartupReserved1  = 0x00000008,
-    GdiplusStartupReserved2  = 0x00000010,
     GdiplusStartupTransparencyMask = 0xFF000000
 };
 

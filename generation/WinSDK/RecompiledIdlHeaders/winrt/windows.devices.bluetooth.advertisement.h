@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -264,23 +264,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher2_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    interface IBluetoothLEAdvertisementPublisher3;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3 ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementPublisher3
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory_FWD_DEFINED__
 namespace ABI {
@@ -366,57 +349,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs2_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    interface IBluetoothLEAdvertisementReceivedEventArgs3;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3 ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementReceivedEventArgs3
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    interface IBluetoothLEAdvertisementScanParameters;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParameters
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    interface IBluetoothLEAdvertisementScanParametersStatics;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParametersStatics
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher_FWD_DEFINED__
 namespace ABI {
@@ -450,23 +382,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2 ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementWatcher2
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    interface IBluetoothLEAdvertisementWatcher3;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3 ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementWatcher3
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcherFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcherFactory_FWD_DEFINED__
@@ -1304,18 +1219,6 @@ namespace ABI {
         namespace Devices {
             namespace Bluetooth {
                 namespace Advertisement {
-                    typedef enum BluetoothLEAdvertisementPhyType : int BluetoothLEAdvertisementPhyType;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
                     typedef enum BluetoothLEAdvertisementPublisherStatus : int BluetoothLEAdvertisementPublisherStatus;
                 } /* Advertisement */
             } /* Bluetooth */
@@ -1383,18 +1286,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    class BluetoothLEAdvertisementScanParameters;
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
 /*
  *
  * Struct Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementFlags
@@ -1425,33 +1316,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Struct Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    enum BluetoothLEAdvertisementPhyType : int
-                    {
-                        BluetoothLEAdvertisementPhyType_Unspecified = 0,
-                        BluetoothLEAdvertisementPhyType_Uncoded1MPhy = 1,
-                        BluetoothLEAdvertisementPhyType_Uncoded2MPhy = 2,
-                        BluetoothLEAdvertisementPhyType_CodedPhy = 3,
-                    };
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -1622,7 +1486,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisement = __uuidof(IBluetoothLEAdvertisement);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisement = _uuidof(IBluetoothLEAdvertisement);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1675,7 +1539,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePattern = __uuidof(IBluetoothLEAdvertisementBytePattern);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePattern = _uuidof(IBluetoothLEAdvertisementBytePattern);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1716,7 +1580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePatternFactory = __uuidof(IBluetoothLEAdvertisementBytePatternFactory);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementBytePatternFactory = _uuidof(IBluetoothLEAdvertisementBytePatternFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1763,7 +1627,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSection = __uuidof(IBluetoothLEAdvertisementDataSection);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSection = _uuidof(IBluetoothLEAdvertisementDataSection);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1803,7 +1667,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSectionFactory = __uuidof(IBluetoothLEAdvertisementDataSectionFactory);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataSectionFactory = _uuidof(IBluetoothLEAdvertisementDataSectionFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1904,7 +1768,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataTypesStatics = __uuidof(IBluetoothLEAdvertisementDataTypesStatics);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementDataTypesStatics = _uuidof(IBluetoothLEAdvertisementDataTypesStatics);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1948,7 +1812,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementFilter = __uuidof(IBluetoothLEAdvertisementFilter);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementFilter = _uuidof(IBluetoothLEAdvertisementFilter);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -1998,7 +1862,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher = __uuidof(IBluetoothLEAdvertisementPublisher);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher = _uuidof(IBluetoothLEAdvertisementPublisher);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2057,7 +1921,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher2 = __uuidof(IBluetoothLEAdvertisementPublisher2);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher2 = _uuidof(IBluetoothLEAdvertisementPublisher2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2067,53 +1931,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPublisher
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementPublisher3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    MIDL_INTERFACE("1cff3902-61ec-5776-ab86-9b41f94b1e66")
-                    IBluetoothLEAdvertisementPublisher3 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_PrimaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_PrimaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_SecondaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_SecondaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisher3 = __uuidof(IBluetoothLEAdvertisementPublisher3);
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2143,7 +1960,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherFactory = __uuidof(IBluetoothLEAdvertisementPublisherFactory);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherFactory = _uuidof(IBluetoothLEAdvertisementPublisherFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2184,7 +2001,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs = __uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs = _uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2222,7 +2039,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2 = __uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2 = _uuidof(IBluetoothLEAdvertisementPublisherStatusChangedEventArgs2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2272,7 +2089,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs = __uuidof(IBluetoothLEAdvertisementReceivedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs = _uuidof(IBluetoothLEAdvertisementReceivedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2328,7 +2145,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs2 = __uuidof(IBluetoothLEAdvertisementReceivedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs2 = _uuidof(IBluetoothLEAdvertisementReceivedEventArgs2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2338,129 +2155,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementReceivedEventArgs
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementReceivedEventArgs3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    MIDL_INTERFACE("8d204b54-ff86-5d84-a25a-137dccd96f7a")
-                    IBluetoothLEAdvertisementReceivedEventArgs3 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_PrimaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_SecondaryPhy(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementPhyType* value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementReceivedEventArgs3 = __uuidof(IBluetoothLEAdvertisementReceivedEventArgs3);
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementScanParameters[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    MIDL_INTERFACE("94f91413-63d9-53bd-af4c-e6b1a6514595")
-                    IBluetoothLEAdvertisementScanParameters : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_ScanWindow(
-                            UINT16* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_ScanInterval(
-                            UINT16* value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementScanParameters = __uuidof(IBluetoothLEAdvertisementScanParameters);
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementScanParametersStatics[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    MIDL_INTERFACE("548e39cd-3c9e-5f8d-b5e1-adebed5c357c")
-                    IBluetoothLEAdvertisementScanParametersStatics : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE CoexistenceOptimized(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParameters** parameters
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE LowLatency(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParameters** parameters
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementScanParametersStatics = __uuidof(IBluetoothLEAdvertisementScanParametersStatics);
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2535,7 +2229,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher = __uuidof(IBluetoothLEAdvertisementWatcher);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher = _uuidof(IBluetoothLEAdvertisementWatcher);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2576,7 +2270,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher2 = __uuidof(IBluetoothLEAdvertisementWatcher2);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher2 = _uuidof(IBluetoothLEAdvertisementWatcher2);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2586,65 +2280,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementWatcher3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3";
-namespace ABI {
-    namespace Windows {
-        namespace Devices {
-            namespace Bluetooth {
-                namespace Advertisement {
-                    MIDL_INTERFACE("14d980be-4002-5dbe-8519-ffca6ca389f0")
-                    IBluetoothLEAdvertisementWatcher3 : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE get_UseUncoded1MPhy(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_UseUncoded1MPhy(
-                            boolean value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_UseCodedPhy(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_UseCodedPhy(
-                            boolean value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_ScanParameters(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParameters** value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_ScanParameters(
-                            ABI::Windows::Devices::Bluetooth::Advertisement::IBluetoothLEAdvertisementScanParameters* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_UseHardwareFilter(
-                            boolean* value
-                            ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE put_UseHardwareFilter(
-                            boolean value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcher3 = __uuidof(IBluetoothLEAdvertisementWatcher3);
-                } /* Advertisement */
-            } /* Bluetooth */
-        } /* Devices */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2674,7 +2309,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherFactory = __uuidof(IBluetoothLEAdvertisementWatcherFactory);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherFactory = _uuidof(IBluetoothLEAdvertisementWatcherFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2712,7 +2347,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherStoppedEventArgs = __uuidof(IBluetoothLEAdvertisementWatcherStoppedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEAdvertisementWatcherStoppedEventArgs = _uuidof(IBluetoothLEAdvertisementWatcherStoppedEventArgs);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2759,7 +2394,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerData = __uuidof(IBluetoothLEManufacturerData);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerData = _uuidof(IBluetoothLEManufacturerData);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2799,7 +2434,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerDataFactory = __uuidof(IBluetoothLEManufacturerDataFactory);
+                    extern MIDL_CONST_ID IID& IID_IBluetoothLEManufacturerDataFactory = _uuidof(IBluetoothLEManufacturerDataFactory);
                 } /* Advertisement */
             } /* Bluetooth */
         } /* Devices */
@@ -2866,8 +2501,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementDataSectionFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementDataSection ** Default Interface **
@@ -2936,13 +2571,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2987,7 +2621,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3003,30 +2636,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
- * Class Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters ** Default Interface **
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#ifndef RUNTIMECLASS_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters[] = L"Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters";
-#endif
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Class Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -3038,7 +2647,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3080,8 +2688,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **
@@ -3154,12 +2762,6 @@ typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoot
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher2_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3 __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisherFactory;
@@ -3190,24 +2792,6 @@ typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoot
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs2_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3 __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher;
@@ -3219,12 +2803,6 @@ typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoot
 typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2 __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2;
 
 #endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3 __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3;
-
-#endif // ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcherFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcherFactory_FWD_DEFINED__
@@ -4977,8 +4555,6 @@ typedef interface __x_ABI_CWindows_CStorage_CStreams_CIBuffer __x_ABI_CWindows_C
 
 #endif // ____x_ABI_CWindows_CStorage_CStreams_CIBuffer_FWD_DEFINED__
 
-typedef enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType;
-
 typedef enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPublisherStatus __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPublisherStatus;
 
 typedef enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementType __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementType;
@@ -5005,23 +4581,6 @@ enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertiseme
     BluetoothLEAdvertisementFlags_DualModeHostCapable = 0x10,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Struct Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPhyType
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType
-{
-    BluetoothLEAdvertisementPhyType_Unspecified = 0,
-    BluetoothLEAdvertisementPhyType_Uncoded1MPhy = 1,
-    BluetoothLEAdvertisementPhyType_Uncoded2MPhy = 2,
-    BluetoothLEAdvertisementPhyType_CodedPhy = 3,
-};
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -5983,90 +5542,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBlu
 
 /*
  *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementPublisher
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementPublisher3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_PrimaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType* value);
-    HRESULT (STDMETHODCALLTYPE* put_PrimaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType value);
-    HRESULT (STDMETHODCALLTYPE* get_SecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType* value);
-    HRESULT (STDMETHODCALLTYPE* put_SecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3Vtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_get_PrimaryPhy(This, value) \
-    ((This)->lpVtbl->get_PrimaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_put_PrimaryPhy(This, value) \
-    ((This)->lpVtbl->put_PrimaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_get_SecondaryPhy(This, value) \
-    ((This)->lpVtbl->get_SecondaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_put_SecondaryPhy(This, value) \
-    ((This)->lpVtbl->put_SecondaryPhy(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementPublisher3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -6468,228 +5943,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBlu
 
 /*
  *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementReceivedEventArgs
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementReceivedEventArgs3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_PrimaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType* value);
-    HRESULT (STDMETHODCALLTYPE* get_SecondaryPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3* This,
-        enum __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CBluetoothLEAdvertisementPhyType* value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3Vtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_get_PrimaryPhy(This, value) \
-    ((This)->lpVtbl->get_PrimaryPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_get_SecondaryPhy(This, value) \
-    ((This)->lpVtbl->get_SecondaryPhy(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementReceivedEventArgs3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementScanParameters[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_ScanWindow)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        UINT16* value);
-    HRESULT (STDMETHODCALLTYPE* get_ScanInterval)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* This,
-        UINT16* value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersVtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_get_ScanWindow(This, value) \
-    ((This)->lpVtbl->get_ScanWindow(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_get_ScanInterval(This, value) \
-    ((This)->lpVtbl->get_ScanInterval(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementScanParametersStatics[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStaticsVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* CoexistenceOptimized)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters** parameters);
-    HRESULT (STDMETHODCALLTYPE* LowLatency)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics* This,
-        __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters** parameters);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStaticsVtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStaticsVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_CoexistenceOptimized(This, parameters) \
-    ((This)->lpVtbl->CoexistenceOptimized(This, parameters))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_LowLatency(This, parameters) \
-    ((This)->lpVtbl->LowLatency(This, parameters))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParametersStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -6910,110 +6163,6 @@ interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdver
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
-
-/*
- *
- * Interface Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Bluetooth_Advertisement_IBluetoothLEAdvertisementWatcher3[] = L"Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3";
-typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_UseUncoded1MPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* put_UseUncoded1MPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean value);
-    HRESULT (STDMETHODCALLTYPE* get_UseCodedPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* put_UseCodedPhy)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean value);
-    HRESULT (STDMETHODCALLTYPE* get_ScanParameters)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters** value);
-    HRESULT (STDMETHODCALLTYPE* put_ScanParameters)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementScanParameters* value);
-    HRESULT (STDMETHODCALLTYPE* get_UseHardwareFilter)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean* value);
-    HRESULT (STDMETHODCALLTYPE* put_UseHardwareFilter)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3* This,
-        boolean value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3Vtbl;
-
-interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3
-{
-    CONST_VTBL struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_get_UseUncoded1MPhy(This, value) \
-    ((This)->lpVtbl->get_UseUncoded1MPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_put_UseUncoded1MPhy(This, value) \
-    ((This)->lpVtbl->put_UseUncoded1MPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_get_UseCodedPhy(This, value) \
-    ((This)->lpVtbl->get_UseCodedPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_put_UseCodedPhy(This, value) \
-    ((This)->lpVtbl->put_UseCodedPhy(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_get_ScanParameters(This, value) \
-    ((This)->lpVtbl->get_ScanParameters(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_put_ScanParameters(This, value) \
-    ((This)->lpVtbl->put_ScanParameters(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_get_UseHardwareFilter(This, value) \
-    ((This)->lpVtbl->get_UseHardwareFilter(This, value))
-
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_put_UseHardwareFilter(This, value) \
-    ((This)->lpVtbl->put_UseHardwareFilter(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3;
-#endif /* !defined(____x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementWatcher3_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -7365,8 +6514,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementDataSectionFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementDataSection ** Default Interface **
@@ -7435,13 +6584,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisherFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementPublisher3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7486,7 +6634,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementReceivedEventArgs3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7502,30 +6649,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
- * Class Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParametersStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
- *
- * Class implements the following interfaces:
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementScanParameters ** Default Interface **
- *
- * Class Threading Model:  Both Single and Multi Threaded Apartment
- *
- * Class Marshaling Behavior:  Agile - Class is agile
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#ifndef RUNTIMECLASS_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters_DEFINED
-#define RUNTIMECLASS_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters_DEFINED
-extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Bluetooth_Advertisement_BluetoothLEAdvertisementScanParameters[] = L"Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementScanParameters";
-#endif
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Class Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcher
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -7537,7 +6660,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher ** Default Interface **
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher2
- *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementWatcher3
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7579,8 +6701,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **

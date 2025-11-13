@@ -398,14 +398,6 @@ Abstract:
     #define STATIC_CODECAPI_AVEncVideoMaxNumRefFrameForLayer    0x3141C639, 0x6329, 0x40d1, 0xB7, 0xE7, 0x2F, 0x0E, 0x3A, 0xC1, 0x8E, 0x02
     #define STATIC_CODECAPI_AVEncTileRows                   0xFBC650FC, 0x41AB, 0x4f9b, 0x84, 0xB5, 0x06, 0x5B, 0xE9, 0xCD, 0x99, 0xEE
     #define STATIC_CODECAPI_AVEncTileColumns                0xB4B31205, 0x01E8, 0x452c, 0xB8, 0x76, 0x8C, 0x65, 0x06, 0x54, 0x59, 0x25
-    #define STATIC_CODECAPI_FeatureMapFlagsUsed             0x8bfda3b8, 0x7387, 0x4c07, 0x92, 0x4f, 0xfe, 0x63, 0x0, 0x6c, 0xf2, 0x2b
-
-    #define STATIC_CODECAPI_AVEncVideoEnableSpatialAdaptiveQuantization 0x659cb943, 0x15ca, 0x448d, 0xb9, 0x9a, 0x87, 0x56, 0x19, 0xdb, 0x4d, 0xe4
-    #define STATIC_CODECAPI_AVEncVideoEnableFramePsnrYuv    0x2bbcdd1d, 0xbc47, 0x430e, 0xb2, 0xe8, 0x64, 0x80, 0x1b, 0x47, 0xf5, 0xf0
-    #define STATIC_CODECAPI_AVEncVideoOutputQPMapBlockSize  0x97038743, 0x4ae3, 0x44c3, 0xa0, 0xf2, 0x5b, 0xd5, 0x8a, 0x46, 0x34, 0xef
-    #define STATIC_CODECAPI_AVEncVideoOutputBitsUsedMapBlockSize        0x6c2cd11a, 0xca3b, 0x44bd, 0x9a, 0x9e, 0x93, 0xb0, 0x36, 0x34, 0xc3, 0x6e
-    #define STATIC_CODECAPI_AVEncVideoSatdMapBlockSize      0x596f1106, 0x8ce0, 0x4302, 0xaf, 0x79, 0xc4, 0xec, 0x67, 0xaa, 0xdc, 0x6
-
 // end of static definitions }
 
 //
@@ -1344,10 +1336,7 @@ enum eAVEncH264VLevel
     eAVEncH264VLevel4_2       = 42,
     eAVEncH264VLevel5         = 50,
     eAVEncH264VLevel5_1       = 51,
-    eAVEncH264VLevel5_2       = 52,
-    eAVEncH264VLevel6         = 60,
-    eAVEncH264VLevel6_1       = 61,
-    eAVEncH264VLevel6_2       = 62
+    eAVEncH264VLevel5_2       = 52
 };
 
 enum eAVEncH265VLevel  
@@ -2100,11 +2089,6 @@ DEFINE_CODECAPI_GUID( AVPriorityControl,"54ba3dc8-bdde-4329-b187-2018bc5c2ba1", 
 //   1 - realtime 
 DEFINE_CODECAPI_GUID( AVRealtimeControl,"6f440632-c4ad-4bf7-9e52-456942b454b0", 0x6f440632, 0xc4ad, 0x4bf7, 0x9e, 0x52, 0x45, 0x69, 0x42, 0xb4, 0x54, 0xb0 ) 
 
-// FeatureMapFlagsUsed (UINT32) 
-// Indicates which flags may and won't be present in the per-frame FeatureMap data for the sequence.
-// The value is a bitwise OR of the MACROBLOCK_FLAG_* fields specified in mfapi.h
-DEFINE_CODECAPI_GUID( FeatureMapFlagsUsed,"8BFDA3B8-7387-4c07-924F-FE63006CF22B", 0x8bfda3b8, 0x7387, 0x4c07, 0x92, 0x4f, 0xfe, 0x63, 0x0, 0x6c, 0xf2, 0x2b ) 
-
 // AVEncNoInputCopy (UINT32)
 // Enables the encoder to avoid copying the input buffer
 // 0 - default behavior (copy input buffer to encoder internal buffer)
@@ -2161,33 +2145,6 @@ DEFINE_CODECAPI_GUID( AVEncTileRows, "FBC650FC-41AB-4f9b-84B5-065BE9CD99EE", 0xF
 // Specifies the number of tile columns to encode.
 DEFINE_CODECAPI_GUID( AVEncTileColumns, "B4B31205-01E8-452c-B876-8C6506545925", 0xB4B31205, 0x01E8, 0x452c, 0xB8, 0x76, 0x8C, 0x65, 0x06, 0x54, 0x59, 0x25 )
 
-// AVEncVideoEnableFramePsnrYuv (BOOL)
-// Indicates whether to enable or disable reporting frame PSNR of YUV planes for video encoding.
-// VARIANT_FALSE: disable; VARIANT_TRUE: enable
-DEFINE_CODECAPI_GUID( AVEncVideoEnableFramePsnrYuv,"2BBCDD1D-BC47-430E-B2E8-64801B47F5F0", 0x2bbcdd1d, 0xbc47, 0x430e, 0xb2, 0xe8, 0x64, 0x80, 0x1b, 0x47, 0xf5, 0xf0 )
-
-// AVEncVideoEnableSpatialAdaptiveQuantization (BOOL)
-// Indicates whether to enable or disable spatial adaptive quantization for video encoding.
-// VARIANT_FALSE: disable; VARIANT_TRUE: enable 
-DEFINE_CODECAPI_GUID( AVEncVideoEnableSpatialAdaptiveQuantization,"659CB943-15CA-448D-B99A-875619DB4DE4", 0x659cb943, 0x15ca, 0x448d, 0xb9, 0x9a, 0x87, 0x56, 0x19, 0xdb, 0x4d, 0xe4 )
-
-// AVEncVideoOutputQPMapBlockSize (VT_UI4)
-// The block size used in reporting the output QP map for each block in an encoded video frame.
-// ulVal should be power of 2, such as 16 or 32, etc.
-// Zero value is used to disable the QP map reporting.
-DEFINE_CODECAPI_GUID( AVEncVideoOutputQPMapBlockSize,"97038743-4AE3-44C3-A0F2-5BD58A4634EF", 0x97038743, 0x4ae3, 0x44c3, 0xa0, 0xf2, 0x5b, 0xd5, 0x8a, 0x46, 0x34, 0xef )
-
-// AVEncVideoOutputBitsUsedMapBlockSize (VT_UI4)
-// The block size used in reporting the output bits used map for each block in an encoded video frame.
-// ulVal should be power of 2, such as 16 or 32, etc.
-// Zero value is used to disable the bits used map reporting.
-DEFINE_CODECAPI_GUID( AVEncVideoOutputBitsUsedMapBlockSize,"6C2CD11A-CA3B-44BD-9A9E-93B03634C36E", 0x6c2cd11a, 0xca3b, 0x44bd, 0x9a, 0x9e, 0x93, 0xb0, 0x36, 0x34, 0xc3, 0x6e )
-
-// AVEncVideoSatdMapBlockSize (VT_UI4)  
-// The block size used in reporting the output SATD map for each block in an encoded video frame. 
-// ulVal should be zero or power of 2, such as 16 or 32. 
-// A zero value disables the SATD map reporting. 
-DEFINE_CODECAPI_GUID( AVEncVideoSatdMapBlockSize, "596F1106-8CE0-4302-AF79-C4EC67AADC6D", 0x596f1106, 0x8ce0, 0x4302, 0xaf, 0x79, 0xc4, 0xec, 0x67, 0xaa, 0xdc, 0x6d )
 
 #ifndef UUID_GEN
 // { GUID refs
@@ -2515,8 +2472,6 @@ DEFINE_CODECAPI_GUID( AVEncVideoSatdMapBlockSize, "596F1106-8CE0-4302-AF79-C4EC6
     #define CODECAPI_AVPriorityControl              DEFINE_CODECAPI_GUIDNAMED( AVPriorityControl )
     #define CODECAPI_AVRealtimeControl              DEFINE_CODECAPI_GUIDNAMED( AVRealtimeControl )
     #define CODECAPI_AVEncMaxFrameRate              DEFINE_CODECAPI_GUIDNAMED( AVEncMaxFrameRate)
-    
-    #define CODECAPI_FeatureMapFlagsUsed            DEFINE_CODECAPI_GUIDNAMED( FeatureMapFlagsUsed )
 
     #define CODECAPI_AVEncNoInputCopy               DEFINE_CODECAPI_GUIDNAMED( AVEncNoInputCopy )
 
@@ -2529,12 +2484,6 @@ DEFINE_CODECAPI_GUID( AVEncVideoSatdMapBlockSize, "596F1106-8CE0-4302-AF79-C4EC6
     #define CODECAPI_AVEncVideoMaxNumRefFramePerLayer    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoMaxNumRefFramePerLayer )
     #define CODECAPI_AVEncTileRows                  DEFINE_CODECAPI_GUIDNAMED( AVEncTileRows )
     #define CODECAPI_AVEncTileColumns               DEFINE_CODECAPI_GUIDNAMED( AVEncTileColumns )
-
-    #define CODECAPI_AVEncVideoEnableFramePsnrYuv   DEFINE_CODECAPI_GUIDNAMED( AVEncVideoEnableFramePsnrYuv )
-    #define CODECAPI_AVEncVideoEnableSpatialAdaptiveQuantization       DEFINE_CODECAPI_GUIDNAMED( AVEncVideoEnableSpatialAdaptiveQuantization )
-    #define CODECAPI_AVEncVideoOutputQPMapBlockSize          DEFINE_CODECAPI_GUIDNAMED( AVEncVideoOutputQPMapBlockSize )
-    #define CODECAPI_AVEncVideoOutputBitsUsedMapBlockSize    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoOutputBitsUsedMapBlockSize )
-    #define CODECAPI_AVEncVideoSatdMapBlockSize    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoSatdMapBlockSize ) 
 #endif
 
 

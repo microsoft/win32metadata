@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -244,7 +244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILanguageFont = __uuidof(ILanguageFont);
+                extern MIDL_CONST_ID IID& IID_ILanguageFont = _uuidof(ILanguageFont);
             } /* Fonts */
         } /* Globalization */
     } /* Windows */
@@ -310,7 +310,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILanguageFontGroup = __uuidof(ILanguageFontGroup);
+                extern MIDL_CONST_ID IID& IID_ILanguageFontGroup = _uuidof(ILanguageFontGroup);
             } /* Fonts */
         } /* Globalization */
     } /* Windows */
@@ -347,7 +347,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILanguageFontGroupFactory = __uuidof(ILanguageFontGroupFactory);
+                extern MIDL_CONST_ID IID& IID_ILanguageFontGroupFactory = _uuidof(ILanguageFontGroupFactory);
             } /* Fonts */
         } /* Globalization */
     } /* Windows */

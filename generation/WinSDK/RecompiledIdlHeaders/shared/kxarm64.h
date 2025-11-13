@@ -227,11 +227,11 @@ AlignStmt SETS "ALIGN 0x":CC: :STR:(1 << $Alignment)
         ;
 
         MACRO
-        __AddEntryThunkPointer $Alignment
+        __AddEntryThunkPointer
 
         IF :DEF:$__FuncEntryThunkLabel
-        ASSERT(__FuncComDat == "")
-        ALIGN   (1 << $Alignment),(1 << $Alignment) - 4
+        ASSERT(__FuncComDat != "")
+        ALIGN   (1 << $__FuncAlignment),(1 << $__FuncAlignment) - 4
         dcd     ($__FuncEntryThunkLabel - ({PC} + 4)) + 1
         ENDIF
 
@@ -306,14 +306,7 @@ __FuncAlignment SETA 4
 __FuncComDat SETS ""
         __DeriveFunctionLabels $FuncName,$AreaName
         __SetFunctionAreaAndAlign $Alignment
-
-        IF ("$Alignment" != "")
-__FuncAlignment SETA $Alignment
-        ELSE
-__FuncAlignment SETA 4
-        ENDIF
-
-        __AddEntryThunkPointer $__FuncAlignment
+        ASSERT (!:DEF:$__FuncEntryThunkLabel)
         __ResetUnwindState $ExceptHandler
         __ExportProc $__FuncNameNoBars
         ROUT
@@ -331,7 +324,7 @@ __FuncAlignment SETA 4
 __FuncComDat SETS "COMDAT"
         __DeriveFunctionLabels $FuncName,$AreaName
         __SetFunctionAreaAndAlign $__FuncAlignment
-        ASSERT (!:DEF:$__FuncEntryThunkLabel)
+        __AddEntryThunkPointer
         __ResetUnwindState $ExceptHandler
         __ExportProc $__FuncNameNoBars
         ROUT
@@ -348,7 +341,7 @@ __FuncComDat SETS "COMDAT"
         IMPORT __os_arm64x_dispatch_ret
 
         MACRO
-        ARM64EC_ENTRY_THUNK $FuncName, $Parameters, $SaveQCount, $AreaName, $Alignment
+        ARM64EC_ENTRY_THUNK $FuncName, $Parameters, $SaveQCount, $AreaName
 
         LCLS    OriginalFunc
         LCLS    OriginalArea
@@ -366,9 +359,9 @@ QCount  SETA    (($SaveQCount + 1)/2)*2
 
         ; first derive labels for the original function
         ; and set that as the target area
-__FuncComDat SETS ""
+__FuncComDat SETS "COMDAT"
         __DeriveFunctionLabels $FuncName,$AreaName
-        __SetFunctionAreaAndAlign $Alignment
+        __SetFunctionAreaAndAlign $__FuncAlignment
 OriginalFunc SETS __FuncStartLabel
 OriginalArea SETS __FuncArea
 
@@ -454,7 +447,7 @@ __FuncArea SETS OriginalArea
         MEND
 
         MACRO
-        ARM64EC_CUSTOM_ENTRY_THUNK $FuncName, $AreaName, $Alignment
+        ARM64EC_CUSTOM_ENTRY_THUNK $FuncName, $AreaName
 
         LCLS    OriginalFunc
         LCLS    OriginalArea
@@ -463,9 +456,9 @@ __FuncArea SETS OriginalArea
 
         ; first derive labels for the original function
         ; and set that as the target area
-__FuncComDat SETS ""
+__FuncComDat SETS "COMDAT"
         __DeriveFunctionLabels $FuncName,$AreaName
-        __SetFunctionAreaAndAlign $Alignment
+        __SetFunctionAreaAndAlign $__FuncAlignment
 OriginalFunc SETS __FuncStartLabel
 OriginalArea SETS __FuncArea
 
@@ -490,11 +483,7 @@ __FuncArea SETS OriginalArea
 
 #else
         MACRO
-        ARM64EC_ENTRY_THUNK $FuncName, $Parameters, $SaveQCount, $AreaName, $Alignment
-        MEND
-
-        MACRO
-        ARM64EC_CUSTOM_ENTRY_THUNK $FuncName, $AreaName, $Alignment
+        ARM64EC_ENTRY_THUNK $FuncName, $Parameters, $SaveQCount=10, $AreaName
         MEND
 #endif
 
@@ -750,8 +739,7 @@ __FuncEndLabel  SETS    ""
         ; 
         ; N.B. x16-x17 are free, other registers should be treated as live.
         ;
-        ; N.B. ValidTarget should only specify a label for the ARM64EC checkers.
-        ;      The function has logic below which depends on this.
+        ; N.B. This macro expects the $FailLabel to be right after this macro.
         ;
 
         MACRO
@@ -809,27 +797,10 @@ ValidLabel SETS "$ValidTarget"
         ;
         and     x16, x16, #0xfffffffffffffffe   ; force low bit of shift to 0
         lsr     x17, x17, x16                   ; shift bitmap chunk down
-        tbz     x17, #0, %F4                    ; invalid if the low bit was clear
+        tbz     x17, #0, $FailLabel             ; invalid if the low bit was clear
 3 ; FailOpen
         tbnz    x17, #1, %B1                    ; valid if upper bit was set as well
-4 ; Failure
-        IF "$ValidLabel" != ""
-            ;
-            ; Don't need to explicitly set mode for ARM64EC.
-            ;
-        ELIF "$ValidTarget" != "lr"
-            mov     x16, #1                     ; CFG dispatch mode
-            IF ("$TargetReg" != "x15")
-                mov     x15, $TargetReg         ; move CFG target to x15 for failure function
-            ENDIF
-        ELSE
-            mov     x16, #0                     ; CFG check mode
-            IF ("$TargetReg" != "x15")
-                mov     x15, $TargetReg         ; move CFG target to x15 for failure function
-            ENDIF
-        ENDIF
 
-        b       $FailLabel                      ; jump to failure function
         MEND
 
 
@@ -842,8 +813,7 @@ ValidLabel SETS "$ValidTarget"
         ; 
         ; N.B. x16-x17 are free, other registers should be treated as live.
         ;
-        ; N.B. ValidTarget should only specify a label for the ARM64EC checkers.
-        ;      The function has logic below which depends on this.
+        ; N.B. This macro expects the $FailLabel to be right after this macro.
         ;
 
         MACRO
@@ -875,7 +845,7 @@ ValidLabel SETS "$ValidTarget"
         ubfx    x16, $TargetReg, #3, #3         ; compute bit index*2
         bne     %F2                             ; if misaligned, account for extra bits
         lsr     x17, x17, x16                   ; shift bitmap chunk over to valid align bit
-        tbz     x17, #0, %F3                    ; if low bit not set, either invalid or export
+        tbz     x17, #0, $FailLabel             ; if low bit not set, either invalid or export
                                                 ; suppressed target
 1 ; Valid
 
@@ -901,27 +871,8 @@ ValidLabel SETS "$ValidTarget"
         ;
         and     x16, x16, #0xfffffffffffffffe   ; force low bit of shift to 0
         lsr     x17, x17, x16                   ; shift bitmap chunk down
-        tbz     x17, #0, %F3                    ; invalid if the low bit was clear
+        tbz     x17, #0, $FailLabel             ; invalid if the low bit was clear
         tbnz    x17, #1, %B1                    ; valid if upper bit was set as well
-
-3 ; Failure
-        IF "$ValidLabel" != ""
-            ;
-            ; Don't need to explicitly set mode for ARM64EC.
-            ;
-        ELIF "$ValidTarget" != "lr"
-            mov     x16, #1                     ; CFG dispatch mode
-            IF ("$TargetReg" != "x15")
-                mov     x15, $TargetReg         ; move CFG target to x15 for failure function
-            ENDIF
-        ELSE
-            mov     x16, #0                     ; CFG check mode
-            IF ("$TargetReg" != "x15")
-                mov     x15, $TargetReg         ; move CFG target to x15 for failure function
-            ENDIF
-        ENDIF
-
-        b       $FailLabel                      ; jump to failure function
         MEND
 
 
@@ -1133,26 +1084,17 @@ ValidLabel SETS "$ValidTarget"
         ;                 if a boolen result is not required. It can
         ;                 also overlap with xAddress, T1 or T2.
         ;
-        ; SkipBoundsChecking - If set to "SkipBoundsChecking", no EC
-        ;                      Bitmap bounds checks are performed (and
-        ;                      T2 doesn't need to provide the max user-land
-        ;                      address). T2 is still a scratch reg.
-        ;
         ; Zero Flag     - Z=0 for EC code and Z=1 otherwise.
         ;
 
         MACRO
-        EC_BITMAP_LOOKUP $xAddress, $T1, $T2, $xResult, $SkipBoundsChecking
-
-        IF "$SkipBoundsChecking" != "SkipBoundsChecking"
+        EC_BITMAP_LOOKUP $xAddress, $T1, $T2, $xResult
 
         cmp     $xAddress, x$T2             ; Check if the address is above user space range
         bhi     %F1
 
         cmp     $xAddress, #(MM_LOWEST_USER_ADDRESS / 4096), lsl #12 ; Check if address < MM_LOWEST_USER_ADDRESS (64KiB)
         blo     %F1                         ; if so, take the fast path
-
-        ENDIF
 
         lsr     x$T2, $xAddress, #15        ; each byte of bitmap indexes 8*4K = 2^15 byte span
         ldrb    w$T2, [x$T1, x$T2]          ; load the bitmap byte for the 8*4K span
@@ -1162,16 +1104,11 @@ ValidLabel SETS "$ValidTarget"
                                             ;
         ubfx    x$T1, $xAddress, #12, #3    ; index to the 4K page within the 8*4K span
         lsr     x$T1, x$T2, x$T1
-
-        IF "$SkipBoundsChecking" != "SkipBoundsChecking"
-
         b       %F2
 1
         mov     x$T1, xzr
-
-        ENDIF
-
 2
         ands    $xResult, x$T1, #1          ; test the specific page
 
         MEND
+

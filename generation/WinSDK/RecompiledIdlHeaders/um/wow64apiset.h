@@ -100,7 +100,6 @@ GetSystemWow64DirectoryW(
     _Out_writes_to_opt_(uSize,return + 1) LPWSTR lpBuffer,
     _In_ UINT uSize
     );
-
 #ifdef UNICODE
 #define GetSystemWow64Directory  GetSystemWow64DirectoryW
 #else
@@ -169,7 +168,6 @@ GetSystemWow64Directory2W(
     _In_ UINT uSize,
     _In_ WORD ImageFileMachineType
     );
-
 #ifdef UNICODE
 #define GetSystemWow64Directory2  GetSystemWow64Directory2W
 #else

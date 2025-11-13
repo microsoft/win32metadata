@@ -240,12 +240,6 @@ enum VARENUM {
 };
 #endif // _NTDDK_ && !__wtypes_h__
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-#pragma endregion
-
-#pragma region Application Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
-
 typedef struct {
     ULONG    Size;
     ULONG    Count;
@@ -333,12 +327,6 @@ typedef struct {
 #endif // !_NTDDK_
     KSPROPERTY_BOUNDS_LONGLONG  Bounds;
 } KSPROPERTY_STEPPING_LONGLONG, *PKSPROPERTY_STEPPING_LONGLONG;
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-#pragma endregion
-
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 //===========================================================================
 #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -1373,9 +1361,6 @@ DEFINE_GUIDSTRUCT("DD4F192E-3B78-49AD-A534-2C315B822000", KSEVENTSETID_PinCapsCh
 typedef enum {
     KSEVENT_PINCAPS_FORMATCHANGE,
     KSEVENT_PINCAPS_JACKINFOCHANGE
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-    , KSEVENT_PINCAPS_INVALIDATECLIENTS
-#endif
 } KSEVENT_PINCAPS_CHANGENOTIFICATIONS;
 
 #define STATIC_KSEVENTSETID_VolumeLimit \

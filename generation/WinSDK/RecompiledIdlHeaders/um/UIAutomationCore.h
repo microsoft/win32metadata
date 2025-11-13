@@ -763,8 +763,7 @@ enum NotificationProcessing
         NotificationProcessing_ImportantMostRecent	= 1,
         NotificationProcessing_All	= 2,
         NotificationProcessing_MostRecent	= 3,
-        NotificationProcessing_CurrentThenMostRecent	= 4,
-        NotificationProcessing_ImportantCurrentThenMostRecent	= 5
+        NotificationProcessing_CurrentThenMostRecent	= 4
     } ;
 
 enum NotificationKind

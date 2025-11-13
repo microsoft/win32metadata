@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1717,7 +1717,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTask = __uuidof(IUserDataTask);
+                extern MIDL_CONST_ID IID& IID_IUserDataTask = _uuidof(IUserDataTask);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -1753,7 +1753,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskBatch = __uuidof(IUserDataTaskBatch);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskBatch = _uuidof(IUserDataTaskBatch);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -1847,7 +1847,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskList = __uuidof(IUserDataTaskList);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskList = _uuidof(IUserDataTaskList);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -1896,7 +1896,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskListLimitedWriteOperations = __uuidof(IUserDataTaskListLimitedWriteOperations);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskListLimitedWriteOperations = _uuidof(IUserDataTaskListLimitedWriteOperations);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -1957,7 +1957,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManager = __uuidof(IUserDataTaskListSyncManager);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskListSyncManager = _uuidof(IUserDataTaskListSyncManager);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -1997,7 +1997,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskManager = __uuidof(IUserDataTaskManager);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskManager = _uuidof(IUserDataTaskManager);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2037,7 +2037,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskManagerStatics = __uuidof(IUserDataTaskManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskManagerStatics = _uuidof(IUserDataTaskManagerStatics);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2082,7 +2082,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskQueryOptions = __uuidof(IUserDataTaskQueryOptions);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskQueryOptions = _uuidof(IUserDataTaskQueryOptions);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2118,7 +2118,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskReader = __uuidof(IUserDataTaskReader);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskReader = _uuidof(IUserDataTaskReader);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2199,7 +2199,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskRecurrenceProperties = __uuidof(IUserDataTaskRecurrenceProperties);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskRecurrenceProperties = _uuidof(IUserDataTaskRecurrenceProperties);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2256,7 +2256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskRegenerationProperties = __uuidof(IUserDataTaskRegenerationProperties);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskRegenerationProperties = _uuidof(IUserDataTaskRegenerationProperties);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */
@@ -2305,7 +2305,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUserDataTaskStore = __uuidof(IUserDataTaskStore);
+                extern MIDL_CONST_ID IID& IID_IUserDataTaskStore = _uuidof(IUserDataTaskStore);
             } /* UserDataTasks */
         } /* ApplicationModel */
     } /* Windows */

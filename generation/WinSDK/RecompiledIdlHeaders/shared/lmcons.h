@@ -135,11 +135,6 @@ Abstract:
 #define MAX_PREFERRED_LENGTH    ((DWORD) -1)
 
 //
-// Moral equivalent of DNS_MAX_NAME_LENGTH in windnsdef.h.
-//
-#define LM_DNS_MAX_NAME_LENGTH  255
-
-//
 //        Constants used with encryption
 //
 

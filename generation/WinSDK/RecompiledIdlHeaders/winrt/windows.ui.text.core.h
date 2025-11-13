@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -1498,7 +1498,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextCompositionCompletedEventArgs = __uuidof(ICoreTextCompositionCompletedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextCompositionCompletedEventArgs = _uuidof(ICoreTextCompositionCompletedEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1539,7 +1539,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextCompositionSegment = __uuidof(ICoreTextCompositionSegment);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextCompositionSegment = _uuidof(ICoreTextCompositionSegment);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1580,7 +1580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextCompositionStartedEventArgs = __uuidof(ICoreTextCompositionStartedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextCompositionStartedEventArgs = _uuidof(ICoreTextCompositionStartedEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1713,7 +1713,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE NotifyLayoutChanged(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextEditContext = __uuidof(ICoreTextEditContext);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextEditContext = _uuidof(ICoreTextEditContext);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1755,7 +1755,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextEditContext2 = __uuidof(ICoreTextEditContext2);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextEditContext2 = _uuidof(ICoreTextEditContext2);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1820,7 +1820,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextFormatUpdatingEventArgs = __uuidof(ICoreTextFormatUpdatingEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextFormatUpdatingEventArgs = _uuidof(ICoreTextFormatUpdatingEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1867,7 +1867,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextLayoutBounds = __uuidof(ICoreTextLayoutBounds);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextLayoutBounds = _uuidof(ICoreTextLayoutBounds);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1914,7 +1914,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextLayoutRequest = __uuidof(ICoreTextLayoutRequest);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextLayoutRequest = _uuidof(ICoreTextLayoutRequest);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1952,7 +1952,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextLayoutRequest2 = __uuidof(ICoreTextLayoutRequest2);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextLayoutRequest2 = _uuidof(ICoreTextLayoutRequest2);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -1990,7 +1990,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextLayoutRequestedEventArgs = __uuidof(ICoreTextLayoutRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextLayoutRequestedEventArgs = _uuidof(ICoreTextLayoutRequestedEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2037,7 +2037,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextSelectionRequest = __uuidof(ICoreTextSelectionRequest);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextSelectionRequest = _uuidof(ICoreTextSelectionRequest);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2075,7 +2075,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextSelectionRequestedEventArgs = __uuidof(ICoreTextSelectionRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextSelectionRequestedEventArgs = _uuidof(ICoreTextSelectionRequestedEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2125,7 +2125,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextSelectionUpdatingEventArgs = __uuidof(ICoreTextSelectionUpdatingEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextSelectionUpdatingEventArgs = _uuidof(ICoreTextSelectionUpdatingEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2173,7 +2173,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextServicesManager = __uuidof(ICoreTextServicesManager);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextServicesManager = _uuidof(ICoreTextServicesManager);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2211,7 +2211,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextServicesManagerStatics = __uuidof(ICoreTextServicesManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextServicesManagerStatics = _uuidof(ICoreTextServicesManagerStatics);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2249,7 +2249,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextServicesStatics = __uuidof(ICoreTextServicesStatics);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextServicesStatics = _uuidof(ICoreTextServicesStatics);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2299,7 +2299,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextTextRequest = __uuidof(ICoreTextTextRequest);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextTextRequest = _uuidof(ICoreTextTextRequest);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2337,7 +2337,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextTextRequestedEventArgs = __uuidof(ICoreTextTextRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextTextRequestedEventArgs = _uuidof(ICoreTextTextRequestedEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */
@@ -2396,7 +2396,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICoreTextTextUpdatingEventArgs = __uuidof(ICoreTextTextUpdatingEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICoreTextTextUpdatingEventArgs = _uuidof(ICoreTextTextUpdatingEventArgs);
                 } /* Core */
             } /* Text */
         } /* UI */

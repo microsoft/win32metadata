@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -332,7 +332,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Trim(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDirect3DDevice = __uuidof(IDirect3DDevice);
+                    extern MIDL_CONST_ID IID& IID_IDirect3DDevice = _uuidof(IDirect3DDevice);
                 } /* Direct3D11 */
             } /* DirectX */
         } /* Graphics */
@@ -371,7 +371,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IDirect3DSurface = __uuidof(IDirect3DSurface);
+                    extern MIDL_CONST_ID IID& IID_IDirect3DSurface = _uuidof(IDirect3DSurface);
                 } /* Direct3D11 */
             } /* DirectX */
         } /* Graphics */

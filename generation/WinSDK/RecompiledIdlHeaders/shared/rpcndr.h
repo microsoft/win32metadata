@@ -806,7 +806,7 @@ typedef struct _MIDL_STUB_MESSAGE
 
     void *                             ContextHandleHash;
     void *                             pUserMarshalList;
-    unsigned char *                    pFullPtrFormat;
+    INT_PTR                         Reserved51_3;
     INT_PTR                         Reserved51_4;
     INT_PTR                         Reserved51_5;
 
@@ -3123,7 +3123,7 @@ NdrOleFree (
 
 typedef struct _NDR_USER_MARSHAL_INFO_LEVEL1
 {
-    _Field_size_bytes_(BufferSize) void* Buffer;
+    void *                      Buffer;
     unsigned long               BufferSize;
     void *(__RPC_API * pfnAllocate)(size_t);
     void (__RPC_API * pfnFree)(void *);

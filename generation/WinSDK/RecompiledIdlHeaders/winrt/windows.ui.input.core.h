@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -311,7 +311,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSource = __uuidof(IRadialControllerIndependentInputSource);
+                    extern MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSource = _uuidof(IRadialControllerIndependentInputSource);
                 } /* Core */
             } /* Input */
         } /* UI */
@@ -349,7 +349,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSource2 = __uuidof(IRadialControllerIndependentInputSource2);
+                    extern MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSource2 = _uuidof(IRadialControllerIndependentInputSource2);
                 } /* Core */
             } /* Input */
         } /* UI */
@@ -388,7 +388,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSourceStatics = __uuidof(IRadialControllerIndependentInputSourceStatics);
+                    extern MIDL_CONST_ID IID& IID_IRadialControllerIndependentInputSourceStatics = _uuidof(IRadialControllerIndependentInputSourceStatics);
                 } /* Core */
             } /* Input */
         } /* UI */

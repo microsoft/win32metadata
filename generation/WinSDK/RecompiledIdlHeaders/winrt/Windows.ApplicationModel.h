@@ -116,7 +116,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -3286,7 +3286,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppDisplayInfo = __uuidof(IAppDisplayInfo);
+            extern MIDL_CONST_ID IID& IID_IAppDisplayInfo = _uuidof(IAppDisplayInfo);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3329,7 +3329,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInfo = __uuidof(IAppInfo);
+            extern MIDL_CONST_ID IID& IID_IAppInfo = _uuidof(IAppInfo);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3363,7 +3363,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInfo2 = __uuidof(IAppInfo2);
+            extern MIDL_CONST_ID IID& IID_IAppInfo2 = _uuidof(IAppInfo2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3397,7 +3397,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInfo3 = __uuidof(IAppInfo3);
+            extern MIDL_CONST_ID IID& IID_IAppInfo3 = _uuidof(IAppInfo3);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3432,7 +3432,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInfo4 = __uuidof(IAppInfo4);
+            extern MIDL_CONST_ID IID& IID_IAppInfo4 = _uuidof(IAppInfo4);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3475,7 +3475,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInfoStatics = __uuidof(IAppInfoStatics);
+            extern MIDL_CONST_ID IID& IID_IAppInfoStatics = _uuidof(IAppInfoStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3509,7 +3509,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInstallerInfo = __uuidof(IAppInstallerInfo);
+            extern MIDL_CONST_ID IID& IID_IAppInstallerInfo = _uuidof(IAppInstallerInfo);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3585,7 +3585,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInstallerInfo2 = __uuidof(IAppInstallerInfo2);
+            extern MIDL_CONST_ID IID& IID_IAppInstallerInfo2 = _uuidof(IAppInstallerInfo2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3623,7 +3623,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE RedirectActivationTo(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInstance = __uuidof(IAppInstance);
+            extern MIDL_CONST_ID IID& IID_IAppInstance = _uuidof(IAppInstance);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3668,7 +3668,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAppInstanceStatics = __uuidof(IAppInstanceStatics);
+            extern MIDL_CONST_ID IID& IID_IAppInstanceStatics = _uuidof(IAppInstanceStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3702,7 +3702,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IDesignModeStatics = __uuidof(IDesignModeStatics);
+            extern MIDL_CONST_ID IID& IID_IDesignModeStatics = _uuidof(IDesignModeStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3736,7 +3736,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IDesignModeStatics2 = __uuidof(IDesignModeStatics2);
+            extern MIDL_CONST_ID IID& IID_IDesignModeStatics2 = _uuidof(IDesignModeStatics2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3768,7 +3768,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IEnteredBackgroundEventArgs = __uuidof(IEnteredBackgroundEventArgs);
+            extern MIDL_CONST_ID IID& IID_IEnteredBackgroundEventArgs = _uuidof(IEnteredBackgroundEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3829,7 +3829,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IFindRelatedPackagesOptions = __uuidof(IFindRelatedPackagesOptions);
+            extern MIDL_CONST_ID IID& IID_IFindRelatedPackagesOptions = _uuidof(IFindRelatedPackagesOptions);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3864,7 +3864,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IFindRelatedPackagesOptionsFactory = __uuidof(IFindRelatedPackagesOptionsFactory);
+            extern MIDL_CONST_ID IID& IID_IFindRelatedPackagesOptionsFactory = _uuidof(IFindRelatedPackagesOptionsFactory);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3901,7 +3901,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IFullTrustProcessLaunchResult = __uuidof(IFullTrustProcessLaunchResult);
+            extern MIDL_CONST_ID IID& IID_IFullTrustProcessLaunchResult = _uuidof(IFullTrustProcessLaunchResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3948,7 +3948,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IFullTrustProcessLauncherStatics = __uuidof(IFullTrustProcessLauncherStatics);
+            extern MIDL_CONST_ID IID& IID_IFullTrustProcessLauncherStatics = _uuidof(IFullTrustProcessLauncherStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -3988,7 +3988,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IFullTrustProcessLauncherStatics2 = __uuidof(IFullTrustProcessLauncherStatics2);
+            extern MIDL_CONST_ID IID& IID_IFullTrustProcessLauncherStatics2 = _uuidof(IFullTrustProcessLauncherStatics2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4020,7 +4020,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILeavingBackgroundEventArgs = __uuidof(ILeavingBackgroundEventArgs);
+            extern MIDL_CONST_ID IID& IID_ILeavingBackgroundEventArgs = _uuidof(ILeavingBackgroundEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4060,7 +4060,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILimitedAccessFeatureRequestResult = __uuidof(ILimitedAccessFeatureRequestResult);
+            extern MIDL_CONST_ID IID& IID_ILimitedAccessFeatureRequestResult = _uuidof(ILimitedAccessFeatureRequestResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4097,7 +4097,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILimitedAccessFeaturesStatics = __uuidof(ILimitedAccessFeaturesStatics);
+            extern MIDL_CONST_ID IID& IID_ILimitedAccessFeaturesStatics = _uuidof(ILimitedAccessFeaturesStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4140,7 +4140,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage = __uuidof(IPackage);
+            extern MIDL_CONST_ID IID& IID_IPackage = _uuidof(IPackage);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4192,7 +4192,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage2 = __uuidof(IPackage2);
+            extern MIDL_CONST_ID IID& IID_IPackage2 = _uuidof(IPackage2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4232,7 +4232,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage3 = __uuidof(IPackage3);
+            extern MIDL_CONST_ID IID& IID_IPackage3 = _uuidof(IPackage3);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4272,7 +4272,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage4 = __uuidof(IPackage4);
+            extern MIDL_CONST_ID IID& IID_IPackage4 = _uuidof(IPackage4);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4323,7 +4323,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage5 = __uuidof(IPackage5);
+            extern MIDL_CONST_ID IID& IID_IPackage5 = _uuidof(IPackage5);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4360,7 +4360,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage6 = __uuidof(IPackage6);
+            extern MIDL_CONST_ID IID& IID_IPackage6 = _uuidof(IPackage6);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4397,7 +4397,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage7 = __uuidof(IPackage7);
+            extern MIDL_CONST_ID IID& IID_IPackage7 = _uuidof(IPackage7);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4465,7 +4465,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage8 = __uuidof(IPackage8);
+            extern MIDL_CONST_ID IID& IID_IPackage8 = _uuidof(IPackage8);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4503,7 +4503,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackage9 = __uuidof(IPackage9);
+            extern MIDL_CONST_ID IID& IID_IPackage9 = _uuidof(IPackage9);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4569,7 +4569,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalog = __uuidof(IPackageCatalog);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalog = _uuidof(IPackageCatalog);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4611,7 +4611,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalog2 = __uuidof(IPackageCatalog2);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalog2 = _uuidof(IPackageCatalog2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4646,7 +4646,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalog3 = __uuidof(IPackageCatalog3);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalog3 = _uuidof(IPackageCatalog3);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4687,7 +4687,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalog4 = __uuidof(IPackageCatalog4);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalog4 = _uuidof(IPackageCatalog4);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4724,7 +4724,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogAddOptionalPackageResult = __uuidof(IPackageCatalogAddOptionalPackageResult);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogAddOptionalPackageResult = _uuidof(IPackageCatalogAddOptionalPackageResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4764,7 +4764,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogAddResourcePackageResult = __uuidof(IPackageCatalogAddResourcePackageResult);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogAddResourcePackageResult = _uuidof(IPackageCatalogAddResourcePackageResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4801,7 +4801,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogRemoveOptionalPackagesResult = __uuidof(IPackageCatalogRemoveOptionalPackagesResult);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogRemoveOptionalPackagesResult = _uuidof(IPackageCatalogRemoveOptionalPackagesResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4838,7 +4838,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogRemoveResourcePackagesResult = __uuidof(IPackageCatalogRemoveResourcePackagesResult);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogRemoveResourcePackagesResult = _uuidof(IPackageCatalogRemoveResourcePackagesResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4875,7 +4875,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogStatics = __uuidof(IPackageCatalogStatics);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogStatics = _uuidof(IPackageCatalogStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4908,7 +4908,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageCatalogStatics2 = __uuidof(IPackageCatalogStatics2);
+            extern MIDL_CONST_ID IID& IID_IPackageCatalogStatics2 = _uuidof(IPackageCatalogStatics2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -4951,7 +4951,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageContentGroup = __uuidof(IPackageContentGroup);
+            extern MIDL_CONST_ID IID& IID_IPackageContentGroup = _uuidof(IPackageContentGroup);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5003,7 +5003,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageContentGroupStagingEventArgs = __uuidof(IPackageContentGroupStagingEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageContentGroupStagingEventArgs = _uuidof(IPackageContentGroupStagingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5037,7 +5037,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageContentGroupStatics = __uuidof(IPackageContentGroupStatics);
+            extern MIDL_CONST_ID IID& IID_IPackageContentGroupStatics = _uuidof(IPackageContentGroupStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5092,7 +5092,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageId = __uuidof(IPackageId);
+            extern MIDL_CONST_ID IID& IID_IPackageId = _uuidof(IPackageId);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5129,7 +5129,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageIdWithMetadata = __uuidof(IPackageIdWithMetadata);
+            extern MIDL_CONST_ID IID& IID_IPackageIdWithMetadata = _uuidof(IPackageIdWithMetadata);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5175,7 +5175,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageInstallingEventArgs = __uuidof(IPackageInstallingEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageInstallingEventArgs = _uuidof(IPackageInstallingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5221,7 +5221,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageStagingEventArgs = __uuidof(IPackageStagingEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageStagingEventArgs = _uuidof(IPackageStagingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5255,7 +5255,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageStatics = __uuidof(IPackageStatics);
+            extern MIDL_CONST_ID IID& IID_IPackageStatics = _uuidof(IPackageStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5322,7 +5322,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageStatus = __uuidof(IPackageStatus);
+            extern MIDL_CONST_ID IID& IID_IPackageStatus = _uuidof(IPackageStatus);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5356,7 +5356,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageStatus2 = __uuidof(IPackageStatus2);
+            extern MIDL_CONST_ID IID& IID_IPackageStatus2 = _uuidof(IPackageStatus2);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5390,7 +5390,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageStatusChangedEventArgs = __uuidof(IPackageStatusChangedEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageStatusChangedEventArgs = _uuidof(IPackageStatusChangedEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5436,7 +5436,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageUninstallingEventArgs = __uuidof(IPackageUninstallingEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageUninstallingEventArgs = _uuidof(IPackageUninstallingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5473,7 +5473,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageUpdateAvailabilityResult = __uuidof(IPackageUpdateAvailabilityResult);
+            extern MIDL_CONST_ID IID& IID_IPackageUpdateAvailabilityResult = _uuidof(IPackageUpdateAvailabilityResult);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5522,7 +5522,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageUpdatingEventArgs = __uuidof(IPackageUpdatingEventArgs);
+            extern MIDL_CONST_ID IID& IID_IPackageUpdatingEventArgs = _uuidof(IPackageUpdatingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5565,7 +5565,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPackageWithMetadata = __uuidof(IPackageWithMetadata);
+            extern MIDL_CONST_ID IID& IID_IPackageWithMetadata = _uuidof(IPackageWithMetadata);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5606,7 +5606,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IStartupTask = __uuidof(IStartupTask);
+            extern MIDL_CONST_ID IID& IID_IStartupTask = _uuidof(IStartupTask);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5644,7 +5644,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IStartupTaskStatics = __uuidof(IStartupTaskStatics);
+            extern MIDL_CONST_ID IID& IID_IStartupTaskStatics = _uuidof(IStartupTaskStatics);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5674,7 +5674,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ISuspendingDeferral = __uuidof(ISuspendingDeferral);
+            extern MIDL_CONST_ID IID& IID_ISuspendingDeferral = _uuidof(ISuspendingDeferral);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5706,7 +5706,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ISuspendingEventArgs = __uuidof(ISuspendingEventArgs);
+            extern MIDL_CONST_ID IID& IID_ISuspendingEventArgs = _uuidof(ISuspendingEventArgs);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -5741,7 +5741,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ISuspendingOperation = __uuidof(ISuspendingOperation);
+            extern MIDL_CONST_ID IID& IID_ISuspendingOperation = _uuidof(ISuspendingOperation);
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
@@ -6049,8 +6049,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.IPackageCatalog ** Default Interface **
@@ -16236,8 +16236,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.IPackageCatalogStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.IPackageCatalog ** Default Interface **

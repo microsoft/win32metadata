@@ -180,7 +180,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IClassicAppManagerStatics = __uuidof(IClassicAppManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IClassicAppManagerStatics = _uuidof(IClassicAppManagerStatics);
                 } /* Preview */
             } /* Deployment */
         } /* Management */
@@ -221,7 +221,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInstalledClassicAppInfo = __uuidof(IInstalledClassicAppInfo);
+                    extern MIDL_CONST_ID IID& IID_IInstalledClassicAppInfo = _uuidof(IInstalledClassicAppInfo);
                 } /* Preview */
             } /* Deployment */
         } /* Management */

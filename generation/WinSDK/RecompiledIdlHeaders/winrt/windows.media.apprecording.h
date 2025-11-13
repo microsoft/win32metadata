@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_APPRECORDING_APPRECORDINGCONTRACT_VERSION)
@@ -683,7 +683,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingManager = __uuidof(IAppRecordingManager);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingManager = _uuidof(IAppRecordingManager);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -719,7 +719,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingManagerStatics = __uuidof(IAppRecordingManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingManagerStatics = _uuidof(IAppRecordingManagerStatics);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -764,7 +764,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingResult = __uuidof(IAppRecordingResult);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingResult = _uuidof(IAppRecordingResult);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -806,7 +806,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingSaveScreenshotResult = __uuidof(IAppRecordingSaveScreenshotResult);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingSaveScreenshotResult = _uuidof(IAppRecordingSaveScreenshotResult);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -845,7 +845,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingSavedScreenshotInfo = __uuidof(IAppRecordingSavedScreenshotInfo);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingSavedScreenshotInfo = _uuidof(IAppRecordingSavedScreenshotInfo);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -890,7 +890,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingStatus = __uuidof(IAppRecordingStatus);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingStatus = _uuidof(IAppRecordingStatus);
             } /* AppRecording */
         } /* Media */
     } /* Windows */
@@ -950,7 +950,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppRecordingStatusDetails = __uuidof(IAppRecordingStatusDetails);
+                extern MIDL_CONST_ID IID& IID_IAppRecordingStatusDetails = _uuidof(IAppRecordingStatusDetails);
             } /* AppRecording */
         } /* Media */
     } /* Windows */

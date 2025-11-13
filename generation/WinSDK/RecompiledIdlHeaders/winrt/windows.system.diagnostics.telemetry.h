@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -256,7 +256,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlatformTelemetryClientStatics = __uuidof(IPlatformTelemetryClientStatics);
+                    extern MIDL_CONST_ID IID& IID_IPlatformTelemetryClientStatics = _uuidof(IPlatformTelemetryClientStatics);
                 } /* Telemetry */
             } /* Diagnostics */
         } /* System */
@@ -294,7 +294,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlatformTelemetryRegistrationResult = __uuidof(IPlatformTelemetryRegistrationResult);
+                    extern MIDL_CONST_ID IID& IID_IPlatformTelemetryRegistrationResult = _uuidof(IPlatformTelemetryRegistrationResult);
                 } /* Telemetry */
             } /* Diagnostics */
         } /* System */
@@ -341,7 +341,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPlatformTelemetryRegistrationSettings = __uuidof(IPlatformTelemetryRegistrationSettings);
+                    extern MIDL_CONST_ID IID& IID_IPlatformTelemetryRegistrationSettings = _uuidof(IPlatformTelemetryRegistrationSettings);
                 } /* Telemetry */
             } /* Diagnostics */
         } /* System */

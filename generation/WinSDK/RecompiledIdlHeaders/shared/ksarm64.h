@@ -109,7 +109,6 @@
 #define BUGCHECK_CONTEXT_MODIFIER 0x80000000
 #define INVALID_CALLBACK_STACK_ADDRESS 0x1cd
 #define INVALID_KERNEL_STACK_ADDRESS 0x1ce
-#define PREVIOUS_MODE_MISMATCH 0x1f9
 
 //
 // Breakpoint type definitions
@@ -253,7 +252,7 @@
 #define UsNumberOfPhysicalPages 0x2e8
 #define UsSafeBootMode 0x2ec
 #define UsTestRetInstruction 0x2f8
-#define UsSystemCallPad 0x318
+#define UsSystemCallPad 0x310
 #define UsTickCount 0x320
 #define UsTickCountQuad 0x320
 #define UsXState 0x3d8
@@ -453,17 +452,19 @@
 #define PrDirectoryTableBase 0x28
 #define PrThreadListHead 0x38
 #define PrAffinity 0x58
-#define PrReadyListHead 0x70
-#define PrSwapListEntry 0x80
-#define PrActiveProcessors 0x88
-#define PrProcessFlags 0x90
-#define PrBasePriority 0x98
-#define PrQuantumReset 0x99
-#define PrCycleTime 0x128
-#define PrInstrumentationCallback 0x160
-#define PrMitigationFlags2 0x814
-#define KernelProcessObjectLength 0x1b8
-#define ExecutiveProcessObjectLength 0x900
+#define PrReadyListHead 0x160
+#define PrSwapListEntry 0x170
+#define PrActiveProcessors 0x178
+#define PrProcessFlags 0x280
+#define PrBasePriority 0x288
+#define PrQuantumReset 0x289
+#define PrCycleTime 0x368
+#define PrKernelTime 0x384
+#define PrUserTime 0x388
+#define PrInstrumentationCallback 0x390
+#define PrMitigationFlags2 0xa94
+#define KernelProcessObjectLength 0x3f0
+#define ExecutiveProcessObjectLength 0xc80
 #define Win32BatchFlushCallout 0x7
 
 //
@@ -521,9 +522,6 @@
 #define ThSignalState 0x4
 #define ThCycleTime 0x48
 #define ThCurrentRunTime 0x50
-#define ThStateSaveArea 0x478
-#define ThStateSaveAreaSveVectorOffset 0x428
-#define ThStateSaveAreaSvePredicateOffset 0x42c
 #define ThVfpState 0x230
 #define ThInitialStack 0x28
 #define ThStackLimit 0x30
@@ -550,6 +548,7 @@
 #define KTHREAD_RESTRICTED_GUI_THREAD_MASK 0x200000
 #define KTHREAD_SYSTEM_THREAD_BIT 0xa
 #define KTHREAD_QUEUE_DEFER_PREEMPTION_BIT 0xb
+#define KTHREAD_BAM_QOS_LEVEL_MASK 0xff
 #define KTHREAD_CET_USER_SHADOW_STACK_BIT 0x14
 #define KTHREAD_CET_KERNEL_SHADOW_STACK_BIT 0x16
 
@@ -570,7 +569,7 @@
 #define ThStackBase 0x38
 #define ThLegoData 0x2f0
 #define KernelThreadObjectLength 0x4a0
-#define ExecutiveThreadObjectLength 0x778
+#define ExecutiveThreadObjectLength 0x930
 
 
 //
@@ -728,9 +727,7 @@
 #define TeGuaranteedStackBytes 0x1748
 #define TeChpeV2CpuAreaInfo 0x1788
 #define TeFlsData 0x17c8
-#define TeCurrentIdealProcessor 0x1744
-#define TePrimaryGroupAffinity 0x1860
-#define ThreadEnvironmentBlockLength 0x1878
+#define ThreadEnvironmentBlockLength 0x1850
 #define CmThreadEnvironmentBlockOffset 0x2000
 #define TLS_MINIMUM_AVAILABLE 0x40
 #define TLS_EXPANSION_SLOTS 0x400
@@ -801,8 +798,8 @@
 
 #define AfCount 0x0
 #define AfBitmap 0x8
-#define PbEntropyCount 0xff8
-#define PbEntropyBuffer 0xffc
+#define PbEntropyCount 0xf78
+#define PbEntropyBuffer 0xf7c
 #define KENTROPY_TIMING_INTERRUPTS_PER_BUFFER 0x400
 #define KENTROPY_TIMING_BUFFER_MASK 0x7ff
 #define KENTROPY_TIMING_ANALYSIS 0x0
@@ -812,11 +809,6 @@
 //
 
 #define KPRIORITY_STATE_PRIORITY_BITMASK 0x7f
-#define PnGroup 0x0
-#define PnNumber 0x2
-#define GaGroup 0x8
-#define GaMask 0x0
-#define KgsProcessorNumberToIndexMappingTable 0x8
 #define PERF_SYSCALL_FLAG_BIT 0x6
 
 //
@@ -861,12 +853,9 @@
 // Processor Control Region Structure Offset Definitions
 //
 
-#define PCR_MITIGATION_VBAR_MASK 0xf
-#define PCR_KVA_MITIGATION_VBAR_MASK 0x1
-#define PCR_BTI_MITIGATION_VBAR_MASK 0xe
+#define PCR_BTI_MITIGATION_VBAR_MASK 0xf
 #define PCR_BTI_MITIGATION_CSWAP_HVC 0x10
 #define PCR_BTI_MITIGATION_CSWAP_SMC 0x20
-#define PCR_BTI_MITIGATION_TRAP_HVC 0x2
 #define PCR_BTI_MITIGATION_CSWAP_HVC_BIT 0x4
 #define PCR_BTI_MITIGATION_CSWAP_SMC_BIT 0x5
 #define ARM64_ASID_KVA_SHADOW 0x8000
@@ -878,7 +867,6 @@
 #define PcStallScaleFactor 0x40
 #define PcBtiMitigation 0x4c
 #define PcSsbMitigationFlags 0x4d
-#define PcCachePrefetcherMitigationFlags 0x4f
 #define PcBhbMitigation 0x4e
 #define PcPanicStorage 0x50
 #define PcHalReserved 0x88
@@ -890,15 +878,14 @@
 #define PcIdleThread 0x998
 #define PcNestingLevel 0x9a0
 #define PcNumber 0x9a4
-#define PcGroup 0x1108
+#define PcGroup 0x10e8
 #define PcPrcbLock 0x9a8
-#define PcGroupSetMember 0x1100
-#define PcFeatureBits 0x1294
-#define PcVirtualApicAssist 0x23a8
-#define PcTrappedSecurityDomain 0x15f8
-#define PcEmulatedFaultSyndrome 0x12b0
-#define PcEmulatedAccess 0x12ac
-#define RTL_KERNELSCP_STUBS_UNWIND_INFO_MAX_SIZE 0x1f4
+#define PcGroupSetMember 0x10e0
+#define PcFeatureBits 0x1214
+#define PcVirtualApicAssist 0x21a8
+#define PcTrappedSecurityDomain 0x1578
+#define PcEmulatedFaultSyndrome 0x1230
+#define PcEmulatedAccess 0x122c
 #define TlThread 0x0
 #define TlCpuNumber 0x8
 #define TlTrapType 0x9
@@ -923,17 +910,17 @@
 #define TRAP_TYPE_PREFETCH_ABORT 0x5
 #define TRAP_TYPE_RESET 0x6
 #define TRAP_TYPE_FIQ 0x7
-#define PcInterruptCount 0x1900
-#define PcDebuggerSavedIRQL 0x1919
-#define PcDeferredReadyListHead 0x1408
-#define PcInterruptCount 0x1900
-#define PcSystemCalls 0x1438
-#define PcDpcRoutineActive 0x151a
-#define PcDeferredReadyListHead 0x1408
-#define PcSkipTick 0x1918
-#define PcStartCycles 0x1948
-#define PcSpBase 0x1500
-#define ProcessorControlRegisterLength 0x2a840
+#define PcInterruptCount 0x1880
+#define PcDebuggerSavedIRQL 0x1899
+#define PcDeferredReadyListHead 0x1388
+#define PcInterruptCount 0x1880
+#define PcSystemCalls 0x13b8
+#define PcDpcRoutineActive 0x149a
+#define PcDeferredReadyListHead 0x1388
+#define PcSkipTick 0x1898
+#define PcStartCycles 0x18c8
+#define PcSpBase 0x1480
+#define ProcessorControlRegisterLength 0x29e40
 
 //
 // Defines for user shared data
@@ -967,75 +954,77 @@
 #define PbIdleThread 0x18
 #define PbNumber 0x24
 #define PbPrcbLock 0x28
-#define PbKeSpinLockOrdering 0xc74
-#define KI_SPINLOCK_ORDER_PRCB_LOCK 0x200
+#define PbKeSpinLockOrdering 0xbf4
+#define KI_SPINLOCK_ORDER_PRCB_LOCK 0x80
 #define PbProcessorState 0x40
-#define PbHalReserved 0x710
-#define PbMinorVersion 0x760
-#define PbMajorVersion 0x762
-#define PbBuildType 0x764
-#define PbCoresPerPhysicalProcessor 0x790
-#define PbLogicalProcessorsPerCore 0x794
+#define PbHalReserved 0x700
+#define PbMinorVersion 0x750
+#define PbMajorVersion 0x752
+#define PbBuildType 0x754
+#define PbCoresPerPhysicalProcessor 0x770
+#define PbLogicalProcessorsPerCore 0x774
 #define PbPriorityState 0x30
-#define PbLockQueue 0x800
-#define PbPPLookasideList 0x980
-#define PbPPNPagedLookasideList 0x6a00
-#define PbPPPagedLookasideList 0x7600
-#define PbPacketBarrier 0xa80
-#define PbDeferredReadyListHead 0xa88
-#define PbLookasideIrpFloat 0xad8
-#define PbRequestMailbox 0x9e80
-#define PbMailbox 0xb00
-#define PbDpcGate 0xc00
-#define PbWaitListHead 0xc80
-#define PbCcFastMdlReadNoWait 0x1380
-#define PbPowerState 0x1400
-#define PbSpinLockAcquireCount 0x1a80
-#define PbSystemCalls 0xab8
-#define PbReadOperationCount 0xadc
-#define PbWriteOperationCount 0xae0
-#define PbOtherOperationCount 0xae4
-#define PbReadTransferCount 0xae8
-#define PbWriteTransferCount 0xaf0
-#define PbOtherTransferCount 0xaf8
-#define PbContextSwitches 0xabc
-#define PbIpiFrozen 0xb0c
-#define PbDpcList 0xb18
-#define PbDpcLock 0xb28
-#define PbDpcCount 0xb34
-#define PbDpcStack 0xb78
-#define PbSpBase 0xb80
-#define PbMaximumDpcQueueDepth 0xb88
-#define PbDpcRequestRate 0xb8c
-#define PbMinimumDpcRate 0xb90
-#define PbDpcRoutineActive 0xb9a
-#define PbDpcRequestSummary 0xb9c
-#define PbNormalDpcState 0xb9c
-#define PbDpcLastCount 0xb94
-#define PbQuantumEnd 0xb99
-#define PbIdleSchedule 0xb9b
-#define PbDispatcherReadyListHead 0xd80
-#define PbInterruptCount 0xf80
-#define PbKernelTime 0xf84
-#define PbUserTime 0xf88
-#define PbDpcTime 0xf8c
-#define PbInterruptTime 0xf90
-#define PbAdjustDpcThreshold 0xf94
-#define PbStartCycles 0xfc8
-#define PbPageColor 0x1160
-#define PbNodeColor 0x1164
-#define PbCycleTime 0x1170
-#define PbFastReadNoWait 0xac0
-#define PbFastReadWait 0xac4
-#define PbFastReadNotPossible 0xac8
-#define PbCopyReadNoWait 0xacc
-#define PbCopyReadWait 0xad0
-#define PbCopyReadNoWaitMiss 0xad4
-#define PbAlignmentFixupCount 0x1678
-#define PbExceptionDispatchCount 0xfb4
-#define PbProcessorVendorString 0x910
-#define PbFeatureBits 0x914
-#define PbPanicStackBase 0x1b58
+#define PbLockQueue 0x780
+#define PbPPLookasideList 0x900
+#define PbPPNPagedLookasideList 0x6800
+#define PbPPPagedLookasideList 0x7400
+#define PbPacketBarrier 0xa00
+#define PbDeferredReadyListHead 0xa08
+#define PbLookasideIrpFloat 0xa58
+#define PbRequestMailbox 0x9480
+#define PbMailbox 0xa80
+#define PbDpcGate 0xb80
+#define PbWaitListHead 0xc00
+#define PbCcFastMdlReadNoWait 0x1180
+#define PbPowerState 0x1200
+#define PbSpinLockAcquireCount 0x1880
+#define PbSystemCalls 0xa38
+#define PbReadOperationCount 0xa5c
+#define PbWriteOperationCount 0xa60
+#define PbOtherOperationCount 0xa64
+#define PbReadTransferCount 0xa68
+#define PbWriteTransferCount 0xa70
+#define PbOtherTransferCount 0xa78
+#define PbContextSwitches 0xa3c
+#define PbIpiFrozen 0xa8c
+#define PbDpcList 0xa98
+#define PbDpcLock 0xaa8
+#define PbDpcCount 0xab4
+#define PbDpcStack 0xaf8
+#define PbSpBase 0xb00
+#define PbMaximumDpcQueueDepth 0xb08
+#define PbDpcRequestRate 0xb0c
+#define PbMinimumDpcRate 0xb10
+#define PbDpcRoutineActive 0xb1a
+#define PbDpcRequestSummary 0xb1c
+#define PbNormalDpcState 0xb1c
+#define PbDpcLastCount 0xb14
+#define PbQuantumEnd 0xb19
+#define PbIdleSchedule 0xb1b
+#define PbDispatcherReadyListHead 0xd00
+#define PbInterruptCount 0xf00
+#define PbKernelTime 0xf04
+#define PbUserTime 0xf08
+#define PbDpcTime 0xf0c
+#define PbInterruptTime 0xf10
+#define PbAdjustDpcThreshold 0xf14
+#define PbStartCycles 0xf48
+#define PbPageColor 0x10e0
+#define PbNodeColor 0x10e4
+#define PbNodeShiftedColor 0x10e8
+#define PbSecondaryColorMask 0x10ec
+#define PbCycleTime 0x10f0
+#define PbFastReadNoWait 0xa40
+#define PbFastReadWait 0xa44
+#define PbFastReadNotPossible 0xa48
+#define PbCopyReadNoWait 0xa4c
+#define PbCopyReadWait 0xa50
+#define PbCopyReadNoWaitMiss 0xa54
+#define PbAlignmentFixupCount 0x1478
+#define PbExceptionDispatchCount 0xf34
+#define PbProcessorVendorString 0x890
+#define PbFeatureBits 0x894
+#define PbPanicStackBase 0x1958
 
 //
 // KTHREAD state
@@ -1191,191 +1180,210 @@
 #define FPSR_IOC 0x1
 
 //
-// ARMv8-A Architecture (System Registers)
+// ARMv8 Status Registers
 //
 
-
-//
-// A64 Base Instruction Descriptions
-//
-
-
-//
-// Special-purpose registers
-//
-
-#define ARM64_CurrentEL 0x4212
-#define ARM64_DAIF 0x5a11
-#define ARM64_DIT 0x5a15
-#define ARM64_DLR 0x5a29
-#define ARM64_DSPSR 0x5a28
+#define ARM64_SPSR_EL1 0x4200
+#define ARM64_SPSR_EL2 0x6200
 #define ARM64_ELR_EL1 0x4201
 #define ARM64_ELR_EL2 0x6201
-#define ARM64_FPCR 0x5a20
-#define ARM64_FPSR 0x5a21
-#define ARM64_NZCV 0x5a10
-#define ARM64_PAN 0x4213
 #define ARM64_SP_EL0 0x4208
 #define ARM64_SP_EL1 0x6208
 #define ARM64_SP_EL2 0x7208
 #define ARM64_SPSel 0x4210
-#define ARM64_SPSR_EL1 0x4200
-#define ARM64_SPSR_EL2 0x6200
-#define ARM64_SSBS 0x5a16
-#define ARM64_TCO 0x5a17
-#define ARM64_UAO 0x4214
+#define ARM64_DAIF 0x5a11
+#define ARM64_CurrentEL 0x4212
+#define ARM64_NZCV 0x5a10
+#define ARM64_FPCR 0x5a20
+#define ARM64_FPSR 0x5a21
+#define ARM64_DSPSR 0x5a28
+#define ARM64_DLR 0x5a29
 
 //
-// AArch64 System Register Descriptions
+// ID and feature registers
 //
 
-
-//
-// ID Registers
-//
-
-#define ARM64_ID_AA64AFR0_EL1 0x402c
-#define ARM64_ID_AA64AFR1_EL1 0x402d
+#define ARM64_MIDR_EL1 0x4000
+#define ARM64_VPIDR_EL2 0x6000
+#define ARM64_CTR_EL0 0x5801
+#define ARM64_MPIDR_EL1 0x4005
+#define ARM64_VMPIDR_EL2 0x6005
+#define ARM64_ID_AA64PFR0_EL1 0x4020
+#define ARM64_ID_AA64PFR1_EL1 0x4021
 #define ARM64_ID_AA64DFR0_EL1 0x4028
 #define ARM64_ID_AA64DFR1_EL1 0x4029
+#define ARM64_ID_AA64AFR0_EL1 0x402c
+#define ARM64_ID_AA64AFR1_EL1 0x402d
 #define ARM64_ID_AA64ISAR0_EL1 0x4030
 #define ARM64_ID_AA64ISAR1_EL1 0x4031
-#define ARM64_ID_AA64ISAR2_EL1 0x4032
 #define ARM64_ID_AA64MMFR0_EL1 0x4038
 #define ARM64_ID_AA64MMFR1_EL1 0x4039
 #define ARM64_ID_AA64MMFR2_EL1 0x403a
-#define ARM64_ID_AA64PFR0_EL1 0x4020
-#define ARM64_ID_AA64PFR1_EL1 0x4021
-#define ARM64_ID_AA64SMFR0_EL1 0x4025
-#define ARM64_ID_AA64ZFR0_EL1 0x4024
 
 //
-// General system control registers (minus the ID registers)
+// System control registers
 //
 
-#define ARM64_ACCDATA_EL1 0x4685
+#define ARM64_SCTLR_EL1 0x4080
+#define ARM64_SCTLR_EL2 0x6080
+#define ARM64_HCR_EL2 0x6088
+#define ARM64_HCR_EL2_VM 0x0000000000000001
+#define ARM64_HCR_EL2_FMO 0x0000000000000008
+#define ARM64_HCR_EL2_IMO 0x0000000000000010
+#define ARM64_HCR_EL2_AMO 0x0000000000000020
+#define ARM64_HCR_EL2_TID3 0x0000000000040000
+#define ARM64_HCR_EL2_TSC 0x0000000000080000
+#define ARM64_HCR_EL2_TGE 0x0000000008000000
+#define ARM64_HCR_EL2_RW 0x0000000080000000
 #define ARM64_ACTLR_EL1 0x4081
 #define ARM64_ACTLR_EL2 0x6081
-#define ARM64_AFSR0_EL1 0x4288
-#define ARM64_AFSR0_EL2 0x6288
-#define ARM64_AFSR1_EL1 0x4289
-#define ARM64_AFSR1_EL2 0x6289
-#define ARM64_AIDR_EL1 0x4807
-#define ARM64_AMAIR_EL1 0x4518
-#define ARM64_AMAIR_EL2 0x6518
-#define ARM64_APDAKeyHi_EL1 0x4111
-#define ARM64_APDAKeyLo_EL1 0x4110
-#define ARM64_APDBKeyHi_EL1 0x4113
-#define ARM64_APDBKeyLo_EL1 0x4112
-#define ARM64_APGAKeyHi_EL1 0x4119
-#define ARM64_APGAKeyLo_EL1 0x4118
-#define ARM64_APIAKeyHi_EL1 0x4109
-#define ARM64_APIAKeyLo_EL1 0x4108
-#define ARM64_APIBKeyHi_EL1 0x410b
-#define ARM64_APIBKeyLo_EL1 0x410a
-#define ARM64_CCSIDR_EL1 0x4800
-#define ARM64_CLIDR_EL1 0x4801
-#define ARM64_CONTEXTIDR_EL1 0x4681
-#define ARM64_CONTEXTIDR_EL2 0x6681
 #define ARM64_CPACR_EL1 0x4082
-#define ARM64_CPTR_EL2 0x608a
-#define ARM64_CSSELR_EL1 0x5000
-#define ARM64_CTR_EL0 0x5801
-#define ARM64_DACR32_EL2 0x6180
-#define ARM64_DCZID_EL0 0x5807
+#define ARM64_SCR_EL3 0x7088
+#define ARM64_CPTR_EL3 0x708a
+
+//
+// Memory protection and control registers
+//
+
+#define ARM64_TTBR0_EL1 0x4100
+#define ARM64_TTBR0_EL2 0x6100
+#define ARM64_TTBR1_EL1 0x4101
+#define ARM64_TCR_EL1 0x4102
+#define ARM64_TCR_EL2 0x6102
+#define ARM64_TCR_EL2_TBI 0x100000
+#define ARM64_TCR_EL2_PASize_SHIFT 0x10
+#define ARM64_TCR_IPASize_SHIFT 0x20
+#define ARM64_TCR_IPASize_MASK 0x0000000700000000
+#define ARM64_TCR_PASize_MASK 0x0000000000070000
+#define ARM64_TCR_TBI0 0x0000002000000000
+#define ARM64_TCR_TBI1 0x0000004000000000
 #define ARM64_ESR_EL1 0x4290
 #define ARM64_ESR_EL2 0x6290
 #define ARM64_FAR_EL1 0x4300
 #define ARM64_FAR_EL2 0x6300
-#define ARM64_FPEXC32_EL2 0x6298
-#define ARM64_GCR_EL1 0x4086
-#define ARM64_GMID_EL1 0x4804
-#define ARM64_HACR_EL2 0x608f
-#define ARM64_HAFGRTR_EL2 0x618e
-#define ARM64_HCR_EL2 0x6088
-#define ARM64_HCRX_EL2 0x6092
-#define ARM64_HDFGRTR_EL2 0x618c
-#define ARM64_HDFGWTR_EL2 0x618d
-#define ARM64_HFGITR_EL2 0x608e
-#define ARM64_HFGRTR_EL2 0x608c
-#define ARM64_HFGWTR_EL2 0x608d
 #define ARM64_HPFAR_EL2 0x6304
-#define ARM64_HSTR_EL2 0x608b
-#define ARM64_IFSR32_EL2 0x6281
-#define ARM64_ISR_EL1 0x4608
-#define ARM64_LORC_EL1 0x4523
-#define ARM64_LOREA_EL1 0x4521
-#define ARM64_LORID_EL1 0x4527
-#define ARM64_LORN_EL1 0x4522
-#define ARM64_LORSA_EL1 0x4520
+#define ARM64_AFSR0_EL2 0x6288
+#define ARM64_AFSR1_EL2 0x6289
+#define ARM64_TCR_T0SZ_MASK 0x3f
+#define ARM64_TCR_IRGN0_MASK 0x300
+#define ARM64_TCR_ORGN0_MASK 0xc00
+#define ARM64_TCR_SH0_MASK 0x3000
+#define ARM64_TCR_TG0_MASK 0xc000
+
+//
+// ARM Cache Operations
+//
+
+#define ARM64_DCZID_EL0 0x5807
+#define ARM64_IC_IALLUIS 0x388
+#define ARM64_IC_IALLU 0x3a8
+#define ARM64_IC_IVAU 0x1ba9
+#define ARM64_DC_ZVA 0x1ba1
+#define ARM64_DC_IVAC 0x3b1
+#define ARM64_DC_ISW 0x3b2
+#define ARM64_DC_CVAC 0x1bd1
+#define ARM64_DC_CSW 0x3d2
+#define ARM64_DC_CVAU 0x1bd9
+#define ARM64_DC_CIVAC 0x1bf1
+#define ARM64_DC_CISW 0x3f2
+
+//
+// ARM Translation Operations
+//
+
+#define ARM64_PAR_EL1 0x43a0
+#define ARM64_AT_S1E1R 0x3c0
+#define ARM64_AT_S1E1W 0x3c1
+#define ARM64_AT_S1E0R 0x3c2
+#define ARM64_AT_S1E0W 0x3c3
+#define ARM64_AT_S1E2R 0x23c0
+
+//
+// TLB maintenance operations
+//
+
+#define ARM64_TLBI_VMALLE1 0x438
+#define ARM64_TLBI_ALLE1 0x243c
+#define ARM64_TLBI_ALLE2 0x2438
+#define ARM64_TLBI_VAE1 0x439
+#define ARM64_TLBI_ASIDE1 0x43a
+#define ARM64_TLBI_VAAE1 0x43b
+#define ARM64_TLBI_VALE1 0x43d
+#define ARM64_TLBI_VAALE1 0x43f
+#define ARM64_TLBI_VMALLE1IS 0x418
+#define ARM64_TLBI_VAE1IS 0x419
+#define ARM64_TLBI_ASIDE1IS 0x41a
+#define ARM64_TLBI_VAAE1IS 0x41b
+#define ARM64_TLBI_VALE1IS 0x41d
+#define ARM64_TLBI_VAALE1IS 0x41f
+
+//
+// Performance counter registers
+//
+
+#define ARM64_PMCCFILTR_EL0 0x5f7f
+#define ARM64_PMCCFILTR_NSH 0x8000000
+#define ARM64_MDCR_EL2 0x6089
+#define ARM64_MDCR_HPME 0x80
+#define ARM64_PMCR_EL0 0x5ce0
+#define ARM64_PMCNTENSET_EL0 0x5ce1
+#define ARM64_PMCNTENCLR_EL0 0x5ce2
+#define ARM64_PMCNTEN_PMCCNT 0x80000000
+#define ARM64_PMOVSSET_EL0 0x5cf3
+#define ARM64_PMOVSCLR_EL0 0x5ce3
+#define ARM64_PMSWINC_EL0 0x5ce4
+#define ARM64_PMSELR_EL0 0x5ce5
+#define ARM64_PMCCNTR_EL0 0x5ce8
+#define ARM64_PMXEVTYPER_EL0 0x5ce9
+#define ARM64_PMXEVCNTR_EL0 0x5cea
+#define ARM64_PMUSERENR_EL0 0x5cf0
+#define ARM64_PMINTENSET_EL1 0x44f1
+#define ARM64_PMINTENCLR_EL1 0x44f2
+
+//
+// Memory remap registers
+//
+
 #define ARM64_MAIR_EL1 0x4510
 #define ARM64_MAIR_EL2 0x6510
-#define ARM64_MIDR_EL1 0x4000
-#define ARM64_MPIDR_EL1 0x4005
-#define ARM64_MVFR0_EL1 0x4018
-#define ARM64_MVFR1_EL1 0x4019
-#define ARM64_MVFR2_EL1 0x401a
-#define ARM64_PAR_EL1 0x43a0
-#define ARM64_REVIDR_EL1 0x4006
-#define ARM64_RGSR_EL1 0x4085
-#define ARM64_RNDR 0x5920
-#define ARM64_RNDRRS 0x5921
-#define ARM64_SCTLR_EL1 0x4080
-#define ARM64_SCTLR_EL2 0x6080
-#define ARM64_SCXTNUM_EL0 0x5e87
-#define ARM64_SCXTNUM_EL1 0x4687
-#define ARM64_SCXTNUM_EL2 0x6687
-#define ARM64_SMCR_EL1 0x4096
-#define ARM64_SMCR_EL2 0x6096
-#define ARM64_SMIDR_EL1 0x4806
-#define ARM64_SMPRI_EL1 0x4094
-#define ARM64_SMPRIMAP_EL2 0x6095
-#define ARM64_TCR_EL1 0x4102
-#define ARM64_TCR_EL2 0x6102
-#define ARM64_TFSRE0_EL1 0x42b1
-#define ARM64_TFSR_EL1 0x42b0
-#define ARM64_TFSR_EL2 0x6330
-#define ARM64_TPIDR2_EL0 0x5e85
-#define ARM64_TPIDR_EL0 0x5e82
-#define ARM64_TPIDR_EL1 0x4684
-#define ARM64_TPIDR_EL2 0x6682
-#define ARM64_TPIDRRO_EL0 0x5e83
-#define ARM64_TTBR0_EL1 0x4100
-#define ARM64_TTBR0_EL2 0x6100
-#define ARM64_TTBR1_EL1 0x4101
+#define ARM64_AMAIR_EL2 0x6518
+
+//
+// Security extensions registers
+//
+
 #define ARM64_VBAR_EL1 0x4600
 #define ARM64_VBAR_EL2 0x6600
-#define ARM64_VMPIDR_EL2 0x6005
-#define ARM64_VNCR_EL2 0x6110
-#define ARM64_VPIDR_EL2 0x6000
-#define ARM64_VSTCR_EL2 0x6132
-#define ARM64_VSTTBR_EL2 0x6130
-#define ARM64_VTCR_EL2 0x610a
-#define ARM64_VTTBR_EL2 0x6108
-#define ARM64_ZCR_EL1 0x4090
-#define ARM64_ZCR_EL2 0x6090
+#define ARM64_ISR_EL1 0x4608
 
 //
-// Debug Registers
+// Process, context and thread ID registers
 //
 
-#define ARM64_DBGAUTHSTATUS_EL1 0x3f6
-#define ARM64_DBGBCR0_EL1 0x5
-#define ARM64_DBGBCR1_EL1 0xd
-#define ARM64_DBGBCR2_EL1 0x15
-#define ARM64_DBGBCR3_EL1 0x1d
-#define ARM64_DBGBCR4_EL1 0x25
-#define ARM64_DBGBCR5_EL1 0x2d
-#define ARM64_DBGBCR6_EL1 0x35
-#define ARM64_DBGBCR7_EL1 0x3d
-#define ARM64_DBGBCR8_EL1 0x45
-#define ARM64_DBGBCR9_EL1 0x4d
-#define ARM64_DBGBCR10_EL1 0x55
-#define ARM64_DBGBCR11_EL1 0x5d
-#define ARM64_DBGBCR12_EL1 0x65
-#define ARM64_DBGBCR13_EL1 0x6d
-#define ARM64_DBGBCR14_EL1 0x75
-#define ARM64_DBGBCR15_EL1 0x7d
+#define ARM64_TPIDR_EL0 0x5e82
+#define ARM64_TPIDRRO_EL0 0x5e83
+#define ARM64_TPIDR_EL1 0x4684
+#define ARM64_TPIDR_EL2 0x6682
+
+//
+// Cache information registers
+//
+
+#define ARM64_CCSIDR_EL1 0x4800
+#define ARM64_CLIDR_EL1 0x4801
+#define ARM64_AIDR_EL1 0x4807
+#define ARM64_CSSELR_EL1 0x5000
+
+//
+// CP14 debugging registers
+//
+
+#define ARM64_MDCCSR_EL0 0x1808
+#define ARM64_DBGDTRRX_EL0 0x1828
+#define ARM64_DBGDTRTX_EL0 0x1828
+#define ARM64_OSDTRRX_EL1 0x2
+#define ARM64_MDSCR_EL1 0x12
+#define ARM64_OSDTRTX_EL1 0x1a
 #define ARM64_DBGBVR0_EL1 0x4
 #define ARM64_DBGBVR1_EL1 0xc
 #define ARM64_DBGBVR2_EL1 0x14
@@ -1392,28 +1400,22 @@
 #define ARM64_DBGBVR13_EL1 0x6c
 #define ARM64_DBGBVR14_EL1 0x74
 #define ARM64_DBGBVR15_EL1 0x7c
-#define ARM64_DBGCLAIMCLR_EL1 0x3ce
-#define ARM64_DBGCLAIMSET_EL1 0x3c6
-#define ARM64_DBGDTRRX_EL0 0x1828
-#define ARM64_DBGDTRTX_EL0 0x1828
-#define ARM64_DBGPRCR_EL1 0xa4
-#define ARM64_DBGVCR32_EL2 0x2038
-#define ARM64_DBGWCR0_EL1 0x7
-#define ARM64_DBGWCR1_EL1 0xf
-#define ARM64_DBGWCR2_EL1 0x17
-#define ARM64_DBGWCR3_EL1 0x1f
-#define ARM64_DBGWCR4_EL1 0x27
-#define ARM64_DBGWCR5_EL1 0x2f
-#define ARM64_DBGWCR6_EL1 0x37
-#define ARM64_DBGWCR7_EL1 0x3f
-#define ARM64_DBGWCR8_EL1 0x47
-#define ARM64_DBGWCR9_EL1 0x4f
-#define ARM64_DBGWCR10_EL1 0x57
-#define ARM64_DBGWCR11_EL1 0x5f
-#define ARM64_DBGWCR12_EL1 0x67
-#define ARM64_DBGWCR13_EL1 0x6f
-#define ARM64_DBGWCR14_EL1 0x77
-#define ARM64_DBGWCR15_EL1 0x7f
+#define ARM64_DBGBCR0_EL1 0x5
+#define ARM64_DBGBCR1_EL1 0xd
+#define ARM64_DBGBCR2_EL1 0x15
+#define ARM64_DBGBCR3_EL1 0x1d
+#define ARM64_DBGBCR4_EL1 0x25
+#define ARM64_DBGBCR5_EL1 0x2d
+#define ARM64_DBGBCR6_EL1 0x35
+#define ARM64_DBGBCR7_EL1 0x3d
+#define ARM64_DBGBCR8_EL1 0x45
+#define ARM64_DBGBCR9_EL1 0x4d
+#define ARM64_DBGBCR10_EL1 0x55
+#define ARM64_DBGBCR11_EL1 0x5d
+#define ARM64_DBGBCR12_EL1 0x65
+#define ARM64_DBGBCR13_EL1 0x6d
+#define ARM64_DBGBCR14_EL1 0x75
+#define ARM64_DBGBCR15_EL1 0x7d
 #define ARM64_DBGWVR0_EL1 0x6
 #define ARM64_DBGWVR1_EL1 0xe
 #define ARM64_DBGWVR2_EL1 0x16
@@ -1430,792 +1432,73 @@
 #define ARM64_DBGWVR13_EL1 0x6e
 #define ARM64_DBGWVR14_EL1 0x76
 #define ARM64_DBGWVR15_EL1 0x7e
-#define ARM64_DLR_EL0 0x5a29
-#define ARM64_DSPSR_EL0 0x5a28
-#define ARM64_MDCCINT_EL1 0x10
-#define ARM64_MDCCSR_EL0 0x1808
-#define ARM64_MDCR_EL2 0x6089
-#define ARM64_MDRAR_EL1 0x80
-#define ARM64_MDSCR_EL1 0x12
-#define ARM64_OSDLR_EL1 0x9c
-#define ARM64_OSDTRRX_EL1 0x2
-#define ARM64_OSDTRTX_EL1 0x1a
-#define ARM64_OSECCR_EL1 0x32
+#define ARM64_DBGWCR0_EL1 0x7
+#define ARM64_DBGWCR1_EL1 0xf
+#define ARM64_DBGWCR2_EL1 0x17
+#define ARM64_DBGWCR3_EL1 0x1f
+#define ARM64_DBGWCR4_EL1 0x27
+#define ARM64_DBGWCR5_EL1 0x2f
+#define ARM64_DBGWCR6_EL1 0x37
+#define ARM64_DBGWCR7_EL1 0x3f
+#define ARM64_DBGWCR8_EL1 0x47
+#define ARM64_DBGWCR9_EL1 0x4f
+#define ARM64_DBGWCR10_EL1 0x57
+#define ARM64_DBGWCR11_EL1 0x5f
+#define ARM64_DBGWCR12_EL1 0x67
+#define ARM64_DBGWCR13_EL1 0x6f
+#define ARM64_DBGWCR14_EL1 0x77
+#define ARM64_DBGWCR15_EL1 0x7f
 #define ARM64_OSLAR_EL1 0x84
 #define ARM64_OSLSR_EL1 0x8c
-#define ARM64_SDER32_EL2 0x6099
-#define ARM64_TRFCR_EL1 0x4091
-#define ARM64_TRFCR_EL2 0x6091
+#define ARM64_OSDLR_EL1 0x9c
+#define ARM64_DBGPRCR_EL1 0xa4
 
 //
-// Trace Registers
+// Counter-Timer Control Registers
 //
 
-
-//
-// Performance Monitors Registers
-//
-
-#define ARM64_PMCCFILTR_EL0 0x5f7f
-#define ARM64_PMCCNTR_EL0 0x5ce8
-#define ARM64_PMCEID0_EL0 0x5ce6
-#define ARM64_PMCEID1_EL0 0x5ce7
-#define ARM64_PMCNTENCLR_EL0 0x5ce2
-#define ARM64_PMCNTENSET_EL0 0x5ce1
-#define ARM64_PMCR_EL0 0x5ce0
-#define ARM64_PMEVCNTR0_EL0 0x5f40
-#define ARM64_PMEVCNTR1_EL0 0x5f41
-#define ARM64_PMEVCNTR2_EL0 0x5f42
-#define ARM64_PMEVCNTR3_EL0 0x5f43
-#define ARM64_PMEVCNTR4_EL0 0x5f44
-#define ARM64_PMEVCNTR5_EL0 0x5f45
-#define ARM64_PMEVCNTR6_EL0 0x5f46
-#define ARM64_PMEVCNTR7_EL0 0x5f47
-#define ARM64_PMEVCNTR8_EL0 0x5f48
-#define ARM64_PMEVCNTR9_EL0 0x5f49
-#define ARM64_PMEVCNTR10_EL0 0x5f4a
-#define ARM64_PMEVCNTR11_EL0 0x5f4b
-#define ARM64_PMEVCNTR12_EL0 0x5f4c
-#define ARM64_PMEVCNTR13_EL0 0x5f4d
-#define ARM64_PMEVCNTR14_EL0 0x5f4e
-#define ARM64_PMEVCNTR15_EL0 0x5f4f
-#define ARM64_PMEVCNTR16_EL0 0x5f50
-#define ARM64_PMEVCNTR17_EL0 0x5f51
-#define ARM64_PMEVCNTR18_EL0 0x5f52
-#define ARM64_PMEVCNTR19_EL0 0x5f53
-#define ARM64_PMEVCNTR20_EL0 0x5f54
-#define ARM64_PMEVCNTR21_EL0 0x5f55
-#define ARM64_PMEVCNTR22_EL0 0x5f56
-#define ARM64_PMEVCNTR23_EL0 0x5f57
-#define ARM64_PMEVCNTR24_EL0 0x5f58
-#define ARM64_PMEVCNTR25_EL0 0x5f59
-#define ARM64_PMEVCNTR26_EL0 0x5f5a
-#define ARM64_PMEVCNTR27_EL0 0x5f5b
-#define ARM64_PMEVCNTR28_EL0 0x5f5c
-#define ARM64_PMEVCNTR29_EL0 0x5f5d
-#define ARM64_PMEVCNTR30_EL0 0x5f5e
-#define ARM64_PMEVTYPER0_EL0 0x5f60
-#define ARM64_PMEVTYPER1_EL0 0x5f61
-#define ARM64_PMEVTYPER2_EL0 0x5f62
-#define ARM64_PMEVTYPER3_EL0 0x5f63
-#define ARM64_PMEVTYPER4_EL0 0x5f64
-#define ARM64_PMEVTYPER5_EL0 0x5f65
-#define ARM64_PMEVTYPER6_EL0 0x5f66
-#define ARM64_PMEVTYPER7_EL0 0x5f67
-#define ARM64_PMEVTYPER8_EL0 0x5f68
-#define ARM64_PMEVTYPER9_EL0 0x5f69
-#define ARM64_PMEVTYPER10_EL0 0x5f6a
-#define ARM64_PMEVTYPER11_EL0 0x5f6b
-#define ARM64_PMEVTYPER12_EL0 0x5f6c
-#define ARM64_PMEVTYPER13_EL0 0x5f6d
-#define ARM64_PMEVTYPER14_EL0 0x5f6e
-#define ARM64_PMEVTYPER15_EL0 0x5f6f
-#define ARM64_PMEVTYPER16_EL0 0x5f70
-#define ARM64_PMEVTYPER17_EL0 0x5f71
-#define ARM64_PMEVTYPER18_EL0 0x5f72
-#define ARM64_PMEVTYPER19_EL0 0x5f73
-#define ARM64_PMEVTYPER20_EL0 0x5f74
-#define ARM64_PMEVTYPER21_EL0 0x5f75
-#define ARM64_PMEVTYPER22_EL0 0x5f76
-#define ARM64_PMEVTYPER23_EL0 0x5f77
-#define ARM64_PMEVTYPER24_EL0 0x5f78
-#define ARM64_PMEVTYPER25_EL0 0x5f79
-#define ARM64_PMEVTYPER26_EL0 0x5f7a
-#define ARM64_PMEVTYPER27_EL0 0x5f7b
-#define ARM64_PMEVTYPER28_EL0 0x5f7c
-#define ARM64_PMEVTYPER29_EL0 0x5f7d
-#define ARM64_PMEVTYPER30_EL0 0x5f7e
-#define ARM64_PMINTENCLR_EL1 0x44f2
-#define ARM64_PMINTENSET_EL1 0x44f1
-#define ARM64_PMMIR_EL1 0x44f6
-#define ARM64_PMOVSCLR_EL0 0x5ce3
-#define ARM64_PMOVSSET_EL0 0x5cf3
-#define ARM64_PMSELR_EL0 0x5ce5
-#define ARM64_PMSWINC_EL0 0x5ce4
-#define ARM64_PMUSERENR_EL0 0x5cf0
-#define ARM64_PMXEVCNTR_EL0 0x5cea
-#define ARM64_PMXEVTYPER_EL0 0x5ce9
-
-//
-// Activity Monitors registers
-//
-
-#define ARM64_AMCNTENSET0_EL0 0x5e95
-#define ARM64_AMEVCNTR00_EL0 0x5ea0
-#define ARM64_AMEVCNTR01_EL0 0x5ea1
-#define ARM64_AMEVCNTR02_EL0 0x5ea2
-#define ARM64_AMEVCNTR03_EL0 0x5ea3
-#define ARM64_AMUSERENR_EL0 0x5e93
-
-//
-// Statistical Profiling Extensions
-//
-
-#define ARM64_PMBIDR_EL1 0x44d7
-#define ARM64_PMBLIMITR_EL1 0x44d0
-#define ARM64_PMBPTR_EL1 0x44d1
-#define ARM64_PMBSR_EL1 0x44d3
-#define ARM64_PMSCR_EL1 0x44c8
-#define ARM64_PMSCR_EL2 0x64c8
-#define ARM64_PMSEVFR_EL1 0x44cd
-#define ARM64_PMSFCR_EL1 0x44cc
-#define ARM64_PMSICR_EL1 0x44ca
-#define ARM64_PMSIDR_EL1 0x44cf
-#define ARM64_PMSIRR_EL1 0x44cb
-#define ARM64_PMSLATFR_EL1 0x44ce
-#define ARM64_PMSNEVFR_EL1 0x44c9
-
-//
-// Branch Record Buffer Extension Registers
-//
-
-
-//
-// RAS Registers
-//
-
-#define ARM64_DISR_EL1 0x4609
-#define ARM64_ERRIDR_EL1 0x4298
-#define ARM64_ERRSELR_EL1 0x4299
-#define ARM64_ERXADDR_EL1 0x42a3
-#define ARM64_ERXCTLR_EL1 0x42a1
-#define ARM64_ERRXFR_EL1 0x42a0
-#define ARM64_ERXMISC0_EL1 0x42a8
-#define ARM64_ERXMISC1_EL1 0x42a9
-#define ARM64_ERXMISC2_EL1 0x42aa
-#define ARM64_ERXPFGCDN_EL1 0x42a6
-#define ARM64_ERXPFGCTL_EL1 0x42a5
-#define ARM64_ERXPFGF_EL1 0x42a4
-#define ARM64_ERXSTATUS_EL1 0x42a2
-#define ARM64_VDISR_EL2 0x6609
-#define ARM64_VSESR_EL2 0x6293
-
-//
-// Realm Management Extension Registers
-//
-
-
-//
-// Generic Timer Registers
-//
-
-#define ARM64_CNTFRQ_EL0 0x5f00
-#define ARM64_CNTHCTL_EL2 0x6708
-#define ARM64_CNTHP_CTL_EL2 0x6711
-#define ARM64_CNTHP_CVAL_EL2 0x6712
-#define ARM64_CNTHP_TVAL_EL2 0x6710
-#define ARM64_CNTHV_CTL_EL2 0x6719
-#define ARM64_CNTHV_CVAL_EL2 0x671a
-#define ARM64_CNTHV_TVAL_EL2 0x6718
-#define ARM64_CNTKCTL_EL1 0x4708
-#define ARM64_CNTP_CTL_EL0 0x5f11
-#define ARM64_CNTP_CVAL_EL0 0x5f12
-#define ARM64_CNTP_TVAL_EL0 0x5f10
-#define ARM64_CNTPCT_EL0 0x5f01
-#define ARM64_CNTPOFF_EL2 0x6706
-#define ARM64_CNTV_CTL_EL0 0x5f19
-#define ARM64_CNTV_CVAL_EL0 0x5f1a
-#define ARM64_CNTV_TVAL_EL0 0x5f18
-#define ARM64_CNTVCT_EL0 0x5f02
-#define ARM64_CNTVOFF_EL2 0x6703
-#define ARM64_CNTV_OFF_EL2 0x6703
-#define ARM64_CNTK_CTL_EL1 0x4708
 #define ARM64_CNT_HCTL_EL2 0x6708
-#define ARM64_CNTVCT 0x5f02
-#define ARM64_CNTKCTL 0x4708
-#define ARM64_CNTV_CTL 0x5f19
-#define ARM64_CNTV_CVAL 0x5f1a
+#define ARM64_CNT_HCTL_EL1PCTEN 0x0000000000000001
+#define ARM64_CNT_HCTL_EL1PCEN 0x0000000000000002
+#define ARM64_CNTV_OFF_EL2 0x6703
 
 //
-// AArch32 System Register Descriptions
+// Interrupt Controller Registers
 //
 
-
-//
-// ID Registers
-//
-
-#define ARM64_ID_DFR0_EL1 0x400a
-#define ARM64_ID_DFR1_EL1 0x401d
-#define ARM64_ID_ISAR0_EL1 0x4010
-#define ARM64_ID_ISAR1_EL1 0x4011
-#define ARM64_ID_ISAR2_EL1 0x4012
-#define ARM64_ID_ISAR3_EL1 0x4013
-#define ARM64_ID_ISAR4_EL1 0x4014
-#define ARM64_ID_ISAR5_EL1 0x4015
-#define ARM64_ID_ISAR6_EL1 0x4017
-#define ARM64_ID_MMFR0_EL1 0x400c
-#define ARM64_ID_MMFR1_EL1 0x400d
-#define ARM64_ID_MMFR2_EL1 0x400e
-#define ARM64_ID_MMFR3_EL1 0x400f
-#define ARM64_ID_MMFR4_EL1 0x4016
-#define ARM64_ID_MMFR5_EL1 0x401e
-#define ARM64_ID_PFR0_EL1 0x4008
-#define ARM64_ID_PFR1_EL1 0x4009
-#define ARM64_ID_PFR2_EL1 0x401c
-#define ARM64_MVFR0_EL1 0x4018
-#define ARM64_MVFR1_EL1 0x4019
-#define ARM64_MVFR2_EL1 0x401a
-
-//
-// ARM GIC (System Registers)
-//
-
-
-//
-// AArch64 System Register Descriptions
-//
-
-#define ARM64_ICC_AP1R0_EL1 0x4648
-#define ARM64_ICC_AP1R1_EL1 0x4649
-#define ARM64_ICC_AP1R2_EL1 0x464a
-#define ARM64_ICC_AP1R3_EL1 0x464b
-#define ARM64_ICC_ASGI1R_EL1 0x465e
-#define ARM64_ICC_BPR1_EL1 0x4663
-#define ARM64_ICC_CTLR_EL1 0x4664
-#define ARM64_ICC_DIR_EL1 0x4659
-#define ARM64_ICC_EOIR1_EL1 0x4661
-#define ARM64_ICC_HPPIR1_EL1 0x4662
-#define ARM64_ICC_IAR1_EL1 0x4660
-#define ARM64_ICC_IGRPEN1_EL1 0x4667
-#define ARM64_ICC_PMR_EL1 0x4230
-#define ARM64_ICC_RPR_EL1 0x465b
-#define ARM64_ICC_SGI1R_EL1 0x465d
-#define ARM64_ICC_SRE_EL1 0x4665
 #define ARM64_ICC_SRE_EL2 0x664d
 
 //
-// AArch64 Virtualization Control System Registers
+// Pointer Authentication Key Registers
 //
 
-#define ARM64_ICH_AP1R0_EL2 0x6648
-#define ARM64_ICH_AP1R1_EL2 0x6649
-#define ARM64_ICH_AP1R2_EL2 0x664a
-#define ARM64_ICH_AP1R3_EL2 0x664b
-#define ARM64_ICH_EISR_EL2 0x665b
-#define ARM64_ICH_ELRSR_EL2 0x665d
-#define ARM64_ICH_HCR_EL2 0x6658
-#define ARM64_ICH_LR0_EL2 0x6660
-#define ARM64_ICH_LR1_EL2 0x6661
-#define ARM64_ICH_LR2_EL2 0x6662
-#define ARM64_ICH_LR3_EL2 0x6663
-#define ARM64_ICH_LR4_EL2 0x6664
-#define ARM64_ICH_LR5_EL2 0x6665
-#define ARM64_ICH_LR6_EL2 0x6666
-#define ARM64_ICH_LR7_EL2 0x6667
-#define ARM64_ICH_LR8_EL2 0x6668
-#define ARM64_ICH_LR9_EL2 0x6669
-#define ARM64_ICH_LR10_EL2 0x666a
-#define ARM64_ICH_LR11_EL2 0x666b
-#define ARM64_ICH_LR12_EL2 0x666c
-#define ARM64_ICH_LR13_EL2 0x666d
-#define ARM64_ICH_LR14_EL2 0x666e
-#define ARM64_ICH_LR15_EL2 0x666f
-#define ARM64_ICH_MISR_EL2 0x665a
-#define ARM64_ICH_VMCR_EL2 0x665f
-#define ARM64_ICH_VTR_EL2 0x6659
+#define ARM64_APIBKeyHi_EL1 0x410b
+#define ARM64_APIBKeyLo_EL1 0x410a
 
 //
-// AArch64 Memory Partitioning and Monitoring (MPAM) System Registers
+// SCTLR bits
 //
 
-#define ARM64_MPAM0_EL1 0x4529
-#define ARM64_MPAM1_EL1 0x4528
-#define ARM64_MPAM2_EL2 0x6528
-#define ARM64_MPAM3_EL3 0x7528
-#define ARM64_MPAM1_EL12 0x6d28
-#define ARM64_MPAMHCR_EL2 0x6520
-#define ARM64_MPAMIDR_EL1 0x4524
-#define ARM64_MPAMVPM0_EL2 0x6530
-#define ARM64_MPAMVPM1_EL2 0x6531
-#define ARM64_MPAMVPM2_EL2 0x6532
-#define ARM64_MPAMVPM3_EL2 0x6533
-#define ARM64_MPAMVPM4_EL2 0x6534
-#define ARM64_MPAMVPM5_EL2 0x6535
-#define ARM64_MPAMVPM6_EL2 0x6536
-#define ARM64_MPAMVPM7_EL2 0x6537
-#define ARM64_MPAMVPMV_EL2 0x6521
-
-//
-// Constants for flags for ARM64_MPAM0_EL1
-//
-
-#define ARM64_MPAM0_EL1_PARTID_I 0x000000000000ffff
-#define ARM64_MPAM0_EL1_PARTID_D 0x00000000ffff0000
-#define ARM64_MPAM0_EL1_PMG_I 0x000000ff00000000
-#define ARM64_MPAM0_EL1_PMG_D 0x0000ff0000000000
-
-//
-// Constants for flags for ARM64_MPAM1_EL1
-//
-
-#define ARM64_MPAM1_EL1_PARTID_I 0x000000000000ffff
-#define ARM64_MPAM1_EL1_PARTID_D 0x00000000ffff0000
-#define ARM64_MPAM1_EL1_PMG_I 0x000000ff00000000
-#define ARM64_MPAM1_EL1_PMG_D 0x0000ff0000000000
-#define ARM64_MPAM1_EL1_FORCED_NS 0x1000000000000000
-#define ARM64_MPAM1_EL1_MPAMEN 0x8000000000000000
-
-//
-// Constants for flags for ARM64_MPAM2_EL2
-//
-
-#define ARM64_MPAM2_EL2_PARTID_I 0x000000000000ffff
-#define ARM64_MPAM2_EL2_PARTID_D 0x00000000ffff0000
-#define ARM64_MPAM2_EL2_PMG_I 0x000000ff00000000
-#define ARM64_MPAM2_EL2_PMG_D 0x0000ff0000000000
-#define ARM64_MPAM2_EL2_TRAPMPAM0EL1 0x0001000000000000
-#define ARM64_MPAM2_EL2_TRAPMPAM1EL1 0x0002000000000000
-#define ARM64_MPAM2_EL2_TIDR 0x0400000000000000
-#define ARM64_MPAM2_EL2_MPAMEN 0x8000000000000000
-
-//
-// Constants for flags for ARM64_MPAMHCR_EL2
-//
-
-#define ARM64_MPAMHCR_EL2_TRAP_MPAMIDR_EL1 0x0000000080000000
-#define ARM64_MPAMHCR_EL2_GSTAPP_PLK 0x0000000000000100
-#define ARM64_MPAMHCR_EL2_EL1_VPMEN 0x0000000000000002
-#define ARM64_MPAMHCR_EL2_EL0_VPMEN 0x0000000000000001
-
-//
-// ARMv8-A Architecture (System Instructions)
-//
-
-
-//
-// A64 System instructions for cache maintenance
-//
-
-#define ARM64_DC_CGDSW_EL1 0x3d6
-#define ARM64_DC_CGDVAC_EL1 0x1bd5
-#define ARM64_DC_CGDVADP_EL1 0x1bed
-#define ARM64_DC_CGDVAP_EL1 0x1be5
-#define ARM64_DC_CGSW_EL1 0x3d4
-#define ARM64_DC_CGVAC_EL1 0x1bd3
-#define ARM64_DC_CGVADP_EL1 0x1beb
-#define ARM64_DC_CGVAP_EL1 0x1be3
-#define ARM64_DC_CIGDSW_EL1 0x3f6
-#define ARM64_DC_CIGDVAC_EL1 0x1bf5
-#define ARM64_DC_CIGSW_EL1 0x3f4
-#define ARM64_DC_CIGVAC_EL1 0x1bf3
-#define ARM64_DC_CISW_EL1 0x3f2
-#define ARM64_DC_CIVAC_EL1 0x1bf1
-#define ARM64_DC_CSW_EL1 0x3d2
-#define ARM64_DC_CVAC_EL1 0x1bd1
-#define ARM64_DC_CVADP_EL1 0x1be9
-#define ARM64_DC_CVAP_EL1 0x1be1
-#define ARM64_DC_CVAU_EL1 0x1bd9
-#define ARM64_DC_GVA_EL1 0x1ba3
-#define ARM64_DC_GZVA_EL1 0x1ba4
-#define ARM64_DC_IGDSW_EL1 0x3b6
-#define ARM64_DC_IGDVAC_EL1 0x3b5
-#define ARM64_DC_IGSW_EL1 0x3b4
-#define ARM64_DC_IGVAC_EL1 0x3b3
-#define ARM64_DC_ISW_EL1 0x3b2
-#define ARM64_DC_IVAC_EL1 0x3b1
-#define ARM64_DC_ZVA_EL1 0x1ba1
-#define ARM64_IC_IALLU_EL1 0x3a8
-#define ARM64_IC_IALLUIS_EL1 0x388
-#define ARM64_IC_IVAU_EL1 0x1ba9
-#define ARM64_DC_ZVA 0x1ba1
-#define ARM64_DC_IVAC 0x3b1
-#define ARM64_DC_ISW 0x3b2
-#define ARM64_DC_CVAC 0x1bd1
-#define ARM64_DC_CSW 0x3d2
-#define ARM64_DC_CVAU 0x1bd9
-#define ARM64_DC_CIVAC 0x1bf1
-#define ARM64_DC_CISW 0x3f2
-#define ARM64_IC_IALLUIS 0x388
-#define ARM64_IC_IALLU 0x3a8
-#define ARM64_IC_IVAU 0x1ba9
-
-//
-// A64 System instructions for address translation
-//
-
-#define ARM64_AT_S1E2R 0x23c0
-#define ARM64_AT_S1E2W 0x23c1
-#define ARM64_AT_S1E1R 0x3c0
-#define ARM64_AT_S1E1W 0x3c1
-#define ARM64_AT_S1E0R 0x3c2
-#define ARM64_AT_S1E0W 0x3c3
-#define ARM64_AT_S12E1R 0x23c4
-#define ARM64_AT_S12E1W 0x23c5
-#define ARM64_AT_S12E0R 0x23c6
-#define ARM64_AT_S12E0W 0x23c7
-
-//
-// A64 System instructions for TLB maintenance
-//
-
-#define ARM64_TLBI_VMALLE1 0x438
-#define ARM64_TLBI_VAE1 0x439
-#define ARM64_TLBI_ASIDE1 0x43a
-#define ARM64_TLBI_VAAE1 0x43b
-#define ARM64_TLBI_VALE1 0x43d
-#define ARM64_TLBI_VAALE1 0x43f
-#define ARM64_TLBI_VMALLE1IS 0x418
-#define ARM64_TLBI_VAE1IS 0x419
-#define ARM64_TLBI_ASIDE1IS 0x41a
-#define ARM64_TLBI_VAAE1IS 0x41b
-#define ARM64_TLBI_VALE1IS 0x41d
-#define ARM64_TLBI_VAALE1IS 0x41f
-#define ARM64_TLBI_ALLE1 0x243c
-#define ARM64_TLBI_VMALLS12E1 0x243e
-#define ARM64_TLBI_IPAS2E1 0x2421
-#define ARM64_TLBI_IPAS2LE1 0x2425
-#define ARM64_TLBI_ALLE1IS 0x241c
-#define ARM64_TLBI_VMALLS12E1IS 0x241e
-#define ARM64_TLBI_IPAS2E1IS 0x2401
-#define ARM64_TLBI_IPAS2LE1IS 0x2405
-#define ARM64_TLBI_ALLE2 0x2438
-#define ARM64_TLBI_VAE2 0x2439
-#define ARM64_TLBI_VALE2 0x243d
-#define ARM64_TLBI_ALLE2IS 0x2418
-#define ARM64_TLBI_VAE2IS 0x2419
-#define ARM64_TLBI_VALE2IS 0x241d
-
-//
-// Constants for flags for ARM64_CPTR_EL2
-//
-
-#define ARM64_CPTR_TFP 0x0000000000000400
-#define ARM64_CPTR_TTA 0x0000000000100000
-#define ARM64_CPTR_TAM 0x0000000040000000
-#define ARM64_CPTR_CPAC 0x0000000080000000
-
-//
-// Constants for flags for ARM64_OSLSR_EL1
-//
-
-#define ARM64_OSLSR_LOCK_IMP 0x0000000000000001
-#define ARM64_OSLSR_LOCKED 0x0000000000000002
-
-//
-// Constants for flags for ARM64_CNT_HCTL_EL2
-//
-
-#define ARM64_CNT_HCTL_EL1PCTEN 0x0000000000000001
-#define ARM64_CNT_HCTL_EL1PCEN 0x0000000000000002
-#define ARM64_CNT_HCTL_EVNTEN 0x0000000000000004
-#define ARM64_CNT_HCTL_EVNTDIR 0x0000000000000008
-#define ARM64_CNT_HCTL_EVNTI_MASK 0x00000000000000f0
-#define ARM64_CNT_HCTL_EVNTI_SHIFT 0x0000000000000004
-
-//
-// Constants for flags for ???
-//
-
-#define ARM64_CNT_CTL_ENABLE 0x0000000000000001
-#define ARM64_CNT_CTL_IMASK 0x0000000000000002
-#define ARM64_CNT_CTL_ISTATUS 0x0000000000000004
-
-//
-// Constants for flags for ARM64_CNTK_CTL_EL1
-//
-
-#define ARM64_CNTK_CTL_EL0PCTEN 0x0000000000000001
-#define ARM64_CNTK_CTL_EL0VCTEN 0x0000000000000002
-#define ARM64_CNTK_CTL_EVNTEN 0x0000000000000004
-#define ARM64_CNTK_CTL_EVNTDIR 0x0000000000000008
-#define ARM64_CNTK_CTL_EVNTI_MASK 0x00000000000000f0
-#define ARM64_CNTK_CTL_EL0VTEN 0x0000000000000100
-#define ARM64_CNTK_CTL_EL0PTEN 0x0000000000000200
-
-//
-// Constants for flags in system control register.
-//
-
-#define ARM64_SCTLR_M 0x0000000000000001
-#define ARM64_SCTLR_A 0x0000000000000002
-#define ARM64_SCTLR_C 0x0000000000000004
-#define ARM64_SCTLR_SA 0x0000000000000008
-#define ARM64_SCTLR_SA0 0x0000000000000010
-#define ARM64_SCTLR_CP15BEN 0x0000000000000020
-#define ARM64_SCTLR_NAA 0x0000000000000040
-#define ARM64_SCTLR_ITD 0x0000000000000080
-#define ARM64_SCTLR_SED 0x0000000000000100
-#define ARM64_SCTLR_UMA 0x0000000000000200
-#define ARM64_SCTLR_RES0_10 0x0000000000000400
-#define ARM64_SCTLR_RES1_11 0x0000000000000800
-#define ARM64_SCTLR_I 0x0000000000001000
-#define ARM64_SCTLR_EnDB 0x0000000000002000
-#define ARM64_SCTLR_DZE 0x0000000000004000
-#define ARM64_SCTLR_UCT 0x0000000000008000
-#define ARM64_SCTLR_nTWI 0x0000000000010000
-#define ARM64_SCTLR_RES0_17 0x0000000000020000
-#define ARM64_SCTLR_nTWE 0x0000000000040000
-#define ARM64_SCTLR_WXN 0x0000000000080000
-#define ARM64_SCTLR_RES1_20 0x0000000000100000
-#define ARM64_SCTLR_RES0_21 0x0000000000200000
-#define ARM64_SCTLR_RES1_22 0x0000000000400000
-#define ARM64_SCTLR_SPAN 0x0000000000800000
-#define ARM64_SCTLR_E0E 0x0000000001000000
-#define ARM64_SCTLR_EE 0x0000000002000000
-#define ARM64_SCTLR_UCI 0x0000000004000000
-#define ARM64_SCTLR_EnDA 0x0000000008000000
-#define ARM64_SCTLR_RES1_28 0x0000000010000000
-#define ARM64_SCTLR_RES1_29 0x0000000020000000
-#define ARM64_SCTLR_EnIB 0x0000000040000000
-#define ARM64_SCTLR_EnIB_BIT 0x1e
-#define ARM64_SCTLR_EnIA 0x0000000080000000
-#define ARM64_SCTLR_RES0_32 0x0000000100000000
-#define ARM64_SCTLR_RES0_33 0x0000000200000000
-#define ARM64_SCTLR_RES0_34 0x0000000400000000
-#define ARM64_SCTLR_BT0 0x0000000800000000
-#define ARM64_SCTLR_BT1 0x0000001000000000
-#define ARM64_SCTLR_ITFSB 0x0000002000000000
-#define ARM64_SCTLR_TCF0_MASK 0x000000c000000000
-#define ARM64_SCTLR_TCF_MASK 0x0000030000000000
-#define ARM64_SCTLR_ATA0 0x0000040000000000
-#define ARM64_SCTLR_ATA 0x0000080000000000
-#define ARM64_SCTLR_DSSBS 0x0000100000000000
-#define ARM64_SCTLR_TWEDEn 0x0000200000000000
-#define ARM64_SCTLR_TWEDEL_MASK 0x0003c00000000000
-#define ARM64_SCTLR_RES0_50 0x0004000000000000
-#define ARM64_SCTLR_RES0_51 0x0008000000000000
-#define ARM64_SCTLR_RES0_52 0x0010000000000000
-#define ARM64_SCTLR_RES0_53 0x0020000000000000
-#define ARM64_SCTLR_EnASR 0x0040000000000000
-#define ARM64_SCTLR_EnAS0 0x0080000000000000
-#define ARM64_SCTLR_EnALS 0x0100000000000000
-#define ARM64_SCTLR_EPAN 0x0200000000000000
-#define ARM64_SCTLR_RES0_58 0x0400000000000000
-#define ARM64_SCTLR_RES0_59 0x0800000000000000
-#define ARM64_SCTLR_RES0_60 0x1000000000000000
-#define ARM64_SCTLR_RES0_61 0x2000000000000000
-#define ARM64_SCTLR_RES0_62 0x4000000000000000
-#define ARM64_SCTLR_RES0_63 0x8000000000000000
-
-//
-// Processor feature register definitions and masks
-//
-
-#define ARM64_PFR0_EL1_EL0_MASK 0x000000000000000f
-#define ARM64_PFR0_EL1_EL1_MASK 0x00000000000000f0
-#define ARM64_PFR0_EL1_EL2_MASK 0x0000000000000f00
-#define ARM64_PFR0_EL1_EL3_MASK 0x000000000000f000
-#define ARM64_PFR0_EL1_FP_MASK 0x00000000000f0000
-#define ARM64_PFR0_EL1_ADVSIMD_MASK 0x0000000000f00000
-#define ARM64_PFR0_EL1_GIC_MASK 0x000000000f000000
-#define ARM64_PFR0_EL1_RAS_MASK 0x00000000f0000000
-#define ARM64_PFR0_EL1_SVE_MASK 0x0000000f00000000
-#define ARM64_PFR0_EL1_SEL2_MASK 0x000000f000000000
-#define ARM64_PFR0_EL1_MPAM_MASK 0x00000f0000000000
-#define ARM64_PFR0_EL1_AMU_MASK 0x0000f00000000000
-#define ARM64_PFR0_EL1_DIT_MASK 0x000f000000000000
-#define ARM64_PFR0_EL1_RES0_MASK 0x00f0000000000000
-#define ARM64_PFR0_EL1_CSV2_MASK 0x0f00000000000000
-#define ARM64_PFR0_EL1_CSV3_MASK 0xf000000000000000
-#define ARM64_PFR0_EL1_MPAM_SHIFT 0x0000000000000028
-#define ARM64_PFR1_EL1_BT_MASK 0x000000000000000f
-#define ARM64_PFR1_EL1_SBSS_MASK 0x00000000000000f0
-#define ARM64_PFR1_EL1_MTE_MASK 0x0000000000000f00
-#define ARM64_PFR1_EL1_RAS_FRAC_MASK 0x000000000000f000
-#define ARM64_PFR1_EL1_MPAM_FRAC_MASK 0x00000000000f0000
-#define ARM64_PFR1_EL1_RES0_MASK 0x00000000fff00000
-#define ARM64_PFR1_EL1_CSV2_FRAC_MASK 0x0000000f00000000
-#define ARM64_PFR1_EL1_RES1_MASK 0xfffffff000000000
-#define ARM64_PFR1_EL1_MPAM_FRAC_SHIFT 0x0000000000000010
-
-//
-// Constants for flags in the hypervisor control register
-//
-
-#define ARM64_HCR_EL2_VM 0x0000000000000001
-#define ARM64_HCR_EL2_SWIO 0x0000000000000002
-#define ARM64_HCR_EL2_PTW 0x0000000000000004
-#define ARM64_HCR_EL2_FMO 0x0000000000000008
-#define ARM64_HCR_EL2_IMO 0x0000000000000010
-#define ARM64_HCR_EL2_AMO 0x0000000000000020
-#define ARM64_HCR_EL2_VF 0x0000000000000040
-#define ARM64_HCR_EL2_VI 0x0000000000000080
-#define ARM64_HCR_EL2_VSE 0x0000000000000100
-#define ARM64_HCR_EL2_FB 0x0000000000000200
-#define ARM64_HCR_EL2_BSU_NONE 0x0000000000000000
-#define ARM64_HCR_EL2_BSU_ISH 0x0000000000000400
-#define ARM64_HCR_EL2_BSU_OSH 0x0000000000000800
-#define ARM64_HCR_EL2_BSU_FS 0x0000000000000c00
-#define ARM64_HCR_EL2_BSU_MASK 0x0000000000000c00
-#define ARM64_HCR_EL2_DC 0x0000000000001000
-#define ARM64_HCR_EL2_TWI 0x0000000000002000
-#define ARM64_HCR_EL2_TWE 0x0000000000004000
-#define ARM64_HCR_EL2_TID0 0x0000000000008000
-#define ARM64_HCR_EL2_TID1 0x0000000000010000
-#define ARM64_HCR_EL2_TID2 0x0000000000020000
-#define ARM64_HCR_EL2_TID3 0x0000000000040000
-#define ARM64_HCR_EL2_TSC 0x0000000000080000
-#define ARM64_HCR_EL2_TIDCP 0x0000000000100000
-#define ARM64_HCR_EL2_TACR 0x0000000000200000
-#define ARM64_HCR_EL2_TSW 0x0000000000400000
-#define ARM64_HCR_EL2_TPC 0x0000000000800000
-#define ARM64_HCR_EL2_TPU 0x0000000001000000
-#define ARM64_HCR_EL2_TTLB 0x0000000002000000
-#define ARM64_HCR_EL2_TVM 0x0000000004000000
-#define ARM64_HCR_EL2_TGE 0x0000000008000000
-#define ARM64_HCR_EL2_TDZ 0x0000000010000000
-#define ARM64_HCR_EL2_HCD 0x0000000020000000
-#define ARM64_HCR_EL2_TRVM 0x0000000040000000
-#define ARM64_HCR_EL2_RW 0x0000000080000000
-#define ARM64_HCR_EL2_CD 0x0000000100000000
-#define ARM64_HCR_EL2_ID 0x0000000200000000
-
-//
-// Constants for flags in translation control register.
-//
-
-#define ARM64_TCR_T0SZ_MASK 0x000000000000003f
-#define ARM64_TCR_RES0_1 0x0000000000000040
-#define ARM64_TCR_EPD0 0x0000000000000080
-#define ARM64_TCR_IRGN0_NC 0x0000000000000000
-#define ARM64_TCR_IRGN0_WBWA 0x0000000000000100
-#define ARM64_TCR_IRGN0_WT 0x0000000000000200
-#define ARM64_TCR_IRGN0_WB 0x0000000000000300
-#define ARM64_TCR_IRGN0_MASK 0x0000000000000300
-#define ARM64_TCR_ORGN0_NC 0x0000000000000000
-#define ARM64_TCR_ORGN0_WBWA 0x0000000000000400
-#define ARM64_TCR_ORGN0_WT 0x0000000000000800
-#define ARM64_TCR_ORGN0_WB 0x0000000000000c00
-#define ARM64_TCR_ORGN0_MASK 0x0000000000000c00
-#define ARM64_TCR_SH0_NON_SHARED 0x0000000000000000
-#define ARM64_TCR_SH0_OUTER_SHARED 0x0000000000002000
-#define ARM64_TCR_SH0_INNER_SHARED 0x0000000000003000
-#define ARM64_TCR_SH0_MASK 0x0000000000003000
-#define ARM64_TCR_TG0_4K 0x0000000000000000
-#define ARM64_TCR_TG0_16K 0x0000000000008000
-#define ARM64_TCR_TG0_64K 0x0000000000004000
-#define ARM64_TCR_TG0_RESERVED 0x000000000000c000
-#define ARM64_TCR_TG0_MASK 0x000000000000c000
-#define ARM64_TCR_T1SZ_MASK 0x00000000003f0000
-#define ARM64_TCR_A1 0x0000000000400000
-#define ARM64_TCR_EPD1 0x0000000000800000
-#define ARM64_TCR_IRGN1_NC 0x0000000000000000
-#define ARM64_TCR_IRGN1_WBWA 0x0000000001000000
-#define ARM64_TCR_IRGN1_WT 0x0000000002000000
-#define ARM64_TCR_IRGN1_WB 0x0000000003000000
-#define ARM64_TCR_IRGN1_MASK 0x0000000003000000
-#define ARM64_TCR_ORGN1_NC 0x0000000000000000
-#define ARM64_TCR_ORGN1_WBWA 0x0000000004000000
-#define ARM64_TCR_ORGN1_WT 0x0000000008000000
-#define ARM64_TCR_ORGN1_WB 0x000000000c000000
-#define ARM64_TCR_ORGN1_MASK 0x000000000c000000
-#define ARM64_TCR_SH1_NON_SHARED 0x0000000000000000
-#define ARM64_TCR_SH1_OUTER_SHARED 0x0000000020000000
-#define ARM64_TCR_SH1_INNER_SHARED 0x0000000030000000
-#define ARM64_TCR_SH1_MASK 0x0000000030000000
-#define ARM64_TCR_TG1_4K 0x0000000080000000
-#define ARM64_TCR_TG1_16K 0x0000000040000000
-#define ARM64_TCR_TG1_64K 0x00000000c0000000
-#define ARM64_TCR_TG1_RESERVED 0x0000000000000000
-#define ARM64_TCR_TG1_MASK 0x00000000c0000000
-#define ARM64_TCR_IPASize_4G 0x0000000000000000
-#define ARM64_TCR_IPASize_64G 0x0000000100000000
-#define ARM64_TCR_IPASize_1T 0x0000000200000000
-#define ARM64_TCR_IPASize_4T 0x0000000300000000
-#define ARM64_TCR_IPASize_16T 0x0000000400000000
-#define ARM64_TCR_IPASize_256T 0x0000000500000000
-#define ARM64_TCR_IPASize_MASK 0x0000000700000000
-#define ARM64_TCR_RES0_35 0x0000000800000000
-#define ARM64_TCR_AS 0x0000001000000000
-#define ARM64_TCR_TBI0 0x0000002000000000
-#define ARM64_TCR_TBI1 0x0000004000000000
-#define ARM64_TCR_HA 0x0000008000000000
-#define ARM64_TCR_HD 0x0000010000000000
-#define ARM64_TCR_HPD0 0x0000020000000000
-#define ARM64_TCR_HPD1 0x0000040000000000
-#define ARM64_TCR_T0SZ_SHIFT 0x0000000000000000
-#define ARM64_TCR_T1SZ_SHIFT 0x0000000000000010
-#define ARM64_TCR_IPASize_SHIFT 0x0000000000000020
-
-//
-// Constants for flags in translation control register for EL2.
-//
-
-#define ARM64_TCR_PASize_4G 0x0000000000000000
-#define ARM64_TCR_PASize_64G 0x0000000000010000
-#define ARM64_TCR_PASize_1T 0x0000000000020000
-#define ARM64_TCR_PASize_4T 0x0000000000030000
-#define ARM64_TCR_PASize_16T 0x0000000000040000
-#define ARM64_TCR_PASize_256T 0x0000000000050000
-#define ARM64_TCR_PASize_MASK 0x0000000000070000
-#define ARM64_TCR_EL2_TBI 0x0000000000100000
-#define ARM64_TCR_EL2_PASize_SHIFT 0x0000000000000010
-
-//
-// Performance counter register bits
-//
-
-#define ARM64_PMCR_N_MASK 0x000000000000f800
-#define ARM64_PMCR_N_SHIFT 0x000000000000000b
-#define ARM64_PMCR_LC 0x0000000000000040
-#define ARM64_PMCR_DP 0x0000000000000020
-#define ARM64_PMCR_X 0x0000000000000010
-#define ARM64_PMCR_D 0x0000000000000008
-#define ARM64_PMCR_C 0x0000000000000004
-#define ARM64_PMCR_P 0x0000000000000002
-#define ARM64_PMCR_E 0x0000000000000001
-
-//
-// Performance counter enable register bits
-//
-
-#define ARM64_PMCNTEN_PMCCNT 0x0000000080000000
-
-//
-// Performance counter select register bits
-//
-
-#define ARM64_PMSELR_PMCCNT 0x000000000000001f
-
-//
-// Performance counter user-enable register bits
-//
-
-#define ARM64_PMUSERENR_EN 0x0000000000000001
-#define ARM64_PMUSERENR_SW 0x0000000000000002
-#define ARM64_PMUSERENR_CR 0x0000000000000004
-#define ARM64_PMUSERENR_ER 0x0000000000000008
-
-//
-// Performance filter register bits
-//
-
-#define ARM64_PMCCFILTR_M 0x0000000004000000
-#define ARM64_PMCCFILTR_NSH 0x0000000008000000
-#define ARM64_PMCCFILTR_NSU 0x0000000010000000
-#define ARM64_PMCCFILTR_NSK 0x0000000020000000
-#define ARM64_PMCCFILTR_U 0x0000000040000000
-#define ARM64_PMCCFILTR_P 0x0000000080000000
-
-//
-// Activity monitors count enable set register 0 bits
-//
-
-#define ARM64_AMCNTENSET0_P0 0x0000000000000001
-#define ARM64_AMCNTENSET0_P1 0x0000000000000002
-#define ARM64_AMCNTENSET0_P2 0x0000000000000004
-#define ARM64_AMCNTENSET0_P3 0x0000000000000008
-
-//
-// Activity monitors user-enable register bits
-//
-
-#define ARM64_AMUSERENR_EN 0x0000000000000001
-
-//
-// Monitor Debug Configuration Register bits
-//
-
-#define ARM64_MDCR_HPMN_MASK 0x000000000000001f
-#define ARM64_MDCR_TPMCR 0x0000000000000020
-#define ARM64_MDCR_TPM 0x0000000000000040
-#define ARM64_MDCR_HPME 0x0000000000000080
-#define ARM64_MDCR_TDE 0x0000000000000100
-#define ARM64_MDCR_TDA 0x0000000000000200
-#define ARM64_MDCR_TDOSA 0x0000000000000400
-#define ARM64_MDCR_TDRA 0x0000000000000800
-#define ARM64_MDCR_SPE_PBUF_MASK 0x0000000000003000
+#define ARM64_SCTLR_M 0x1
+#define ARM64_SCTLR_A 0x2
+#define ARM64_SCTLR_C 0x4
+#define ARM64_SCTLR_SA 0x8
+#define ARM64_SCTLR_SA0 0x10
+#define ARM64_SCTLR_CP15BEN 0x20
+#define ARM64_SCTLR_NAA 0x40
+#define ARM64_SCTLR_ITD 0x80
+#define ARM64_SCTLR_SED 0x100
+#define ARM64_SCTLR_UMA 0x200
+#define ARM64_SCTLR_I 0x1000
+#define ARM64_SCTLR_DZE 0x4000
+#define ARM64_SCTLR_UCT 0x8000
+#define ARM64_SCTLR_nTWI 0x10000
+#define ARM64_SCTLR_nTWE 0x40000
+#define ARM64_SCTLR_WXN 0x80000
+#define ARM64_SCTLR_E0E 0x1000000
+#define ARM64_SCTLR_EE 0x2000000
+#define ARM64_SCTLR_UCI 0x4000000
+#define ARM64_SCTLR_EnIB 0x40000000
 
 //
 // MDSCR bits
@@ -2266,6 +1549,8 @@
 #define FAST_FAIL_CONTROL_INVALID_RETURN_ADDRESS 0x39
 #define BASE_PRIORITY_THRESHOLD 0x8
 #define LOW_REALTIME_PRIORITY 0x10
+#define KERNEL_LARGE_STACK_COMMIT 0x8000
+#define KERNEL_LARGE_STACK_SIZE 0x12000
 #define DOUBLE_FAULT_STACK_SIZE 0x8000
 #define BREAKPOINT_BREAK 0x0
 #define BREAKPOINT_HW_BREAK 0x7
@@ -2309,6 +1594,7 @@
 #define KEXCEPTION_FRAME_LENGTH 0x60
 #define EXCEPTION_RECORD_LENGTH 0xa0
 
+#define Enable_Feature_DTrace 0x1
 
 //
 // Kernel Dynamic Tracing flags
@@ -2431,7 +1717,6 @@
 #define CONTEXT_INTEGER 0x400002
 #define CONTEXT_FLOATING_POINT 0x400004
 #define CONTEXT_DEBUG_REGISTERS 0x400008
-#define CONTEXT_XSTATE 0x400020
 
 #define CxContextFlags 0x0
 #define CxCpsr 0x4
@@ -2448,7 +1733,6 @@
 #define CxWvr 0x380
 #define CxWcr 0x378
 #define CONTEXT_FRAME_LENGTH 0x390
-#define CONTEXT_EX_LENGTH 0x20
 #define CONTEXT_ALIGN 0x10
 #define DEBUG_ACTIVE_DBG 0x1
 #define DEBUG_ACTIVE_DBG_BIT 0x0
@@ -2577,8 +1861,8 @@
 #define PsSvcRW 0x20
 #define PsSpecialRegisters 0x0
 #define PsArchState 0xa0
-#define PsContextFrame 0x340
-#define ProcessorStateLength 0x6d0
+#define PsContextFrame 0x320
+#define ProcessorStateLength 0x6b0
 
 //
 // Processor Parked Page Offset Definitions
@@ -2613,9 +1897,9 @@
 // EPROCESS
 //
 
-#define EpDebugPort 0x2f8
-#define EpSecurityDomain 0x820
-#define EpPointerAuthUserIpKey 0x850
+#define EpDebugPort 0x530
+#define EpSecurityDomain 0xaa0
+#define EpPointerAuthUserIpKey 0xbe8
 
 //
 // EPROCESS MitigationFlags2

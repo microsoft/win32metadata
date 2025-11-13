@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -354,7 +354,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICompressor = __uuidof(ICompressor);
+                extern MIDL_CONST_ID IID& IID_ICompressor = _uuidof(ICompressor);
             } /* Compression */
         } /* Storage */
     } /* Windows */
@@ -397,7 +397,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICompressorFactory = __uuidof(ICompressorFactory);
+                extern MIDL_CONST_ID IID& IID_ICompressorFactory = _uuidof(ICompressorFactory);
             } /* Compression */
         } /* Storage */
     } /* Windows */
@@ -437,7 +437,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDecompressor = __uuidof(IDecompressor);
+                extern MIDL_CONST_ID IID& IID_IDecompressor = _uuidof(IDecompressor);
             } /* Compression */
         } /* Storage */
     } /* Windows */
@@ -474,7 +474,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDecompressorFactory = __uuidof(IDecompressorFactory);
+                extern MIDL_CONST_ID IID& IID_IDecompressorFactory = _uuidof(IDecompressorFactory);
             } /* Compression */
         } /* Storage */
     } /* Windows */

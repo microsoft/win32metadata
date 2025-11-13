@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -535,7 +535,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensor = __uuidof(ICustomSensor);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensor = _uuidof(ICustomSensor);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */
@@ -579,7 +579,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensor2 = __uuidof(ICustomSensor2);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensor2 = _uuidof(ICustomSensor2);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */
@@ -620,7 +620,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensorReading = __uuidof(ICustomSensorReading);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensorReading = _uuidof(ICustomSensorReading);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */
@@ -658,7 +658,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensorReading2 = __uuidof(ICustomSensorReading2);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensorReading2 = _uuidof(ICustomSensorReading2);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */
@@ -696,7 +696,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensorReadingChangedEventArgs = __uuidof(ICustomSensorReadingChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensorReadingChangedEventArgs = _uuidof(ICustomSensorReadingChangedEventArgs);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */
@@ -739,7 +739,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICustomSensorStatics = __uuidof(ICustomSensorStatics);
+                    extern MIDL_CONST_ID IID& IID_ICustomSensorStatics = _uuidof(ICustomSensorStatics);
                 } /* Custom */
             } /* Sensors */
         } /* Devices */

@@ -711,6 +711,4 @@ void __pfx_assume(int, const char *);
 #pragma warning(pop)
 #endif
 
-
 #endif /* #ifndef SPECSTRINGS_H */  // ]
-

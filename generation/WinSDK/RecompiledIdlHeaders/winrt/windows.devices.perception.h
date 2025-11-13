@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -2797,7 +2797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownCameraIntrinsicsPropertiesStatics = __uuidof(IKnownCameraIntrinsicsPropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownCameraIntrinsicsPropertiesStatics = _uuidof(IKnownCameraIntrinsicsPropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -2851,7 +2851,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionColorFrameSourcePropertiesStatics = __uuidof(IKnownPerceptionColorFrameSourcePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionColorFrameSourcePropertiesStatics = _uuidof(IKnownPerceptionColorFrameSourcePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -2899,7 +2899,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionDepthFrameSourcePropertiesStatics = __uuidof(IKnownPerceptionDepthFrameSourcePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionDepthFrameSourcePropertiesStatics = _uuidof(IKnownPerceptionDepthFrameSourcePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -2965,7 +2965,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionFrameSourcePropertiesStatics = __uuidof(IKnownPerceptionFrameSourcePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionFrameSourcePropertiesStatics = _uuidof(IKnownPerceptionFrameSourcePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3007,7 +3007,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionFrameSourcePropertiesStatics2 = __uuidof(IKnownPerceptionFrameSourcePropertiesStatics2);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionFrameSourcePropertiesStatics2 = _uuidof(IKnownPerceptionFrameSourcePropertiesStatics2);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3085,7 +3085,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionInfraredFrameSourcePropertiesStatics = __uuidof(IKnownPerceptionInfraredFrameSourcePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionInfraredFrameSourcePropertiesStatics = _uuidof(IKnownPerceptionInfraredFrameSourcePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3151,7 +3151,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionVideoFrameSourcePropertiesStatics = __uuidof(IKnownPerceptionVideoFrameSourcePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionVideoFrameSourcePropertiesStatics = _uuidof(IKnownPerceptionVideoFrameSourcePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3217,7 +3217,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownPerceptionVideoProfilePropertiesStatics = __uuidof(IKnownPerceptionVideoProfilePropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownPerceptionVideoProfilePropertiesStatics = _uuidof(IKnownPerceptionVideoProfilePropertiesStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3262,7 +3262,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrame = __uuidof(IPerceptionColorFrame);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrame = _uuidof(IPerceptionColorFrame);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3310,7 +3310,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameArrivedEventArgs = __uuidof(IPerceptionColorFrameArrivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameArrivedEventArgs = _uuidof(IPerceptionColorFrameArrivedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3386,7 +3386,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameReader = __uuidof(IPerceptionColorFrameReader);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameReader = _uuidof(IPerceptionColorFrameReader);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3610,7 +3610,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSource = __uuidof(IPerceptionColorFrameSource);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSource = _uuidof(IPerceptionColorFrameSource);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3652,7 +3652,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSource2 = __uuidof(IPerceptionColorFrameSource2);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSource2 = _uuidof(IPerceptionColorFrameSource2);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3694,7 +3694,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceAddedEventArgs = __uuidof(IPerceptionColorFrameSourceAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceAddedEventArgs = _uuidof(IPerceptionColorFrameSourceAddedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3736,7 +3736,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceRemovedEventArgs = __uuidof(IPerceptionColorFrameSourceRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceRemovedEventArgs = _uuidof(IPerceptionColorFrameSourceRemovedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3797,7 +3797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceStatics = __uuidof(IPerceptionColorFrameSourceStatics);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceStatics = _uuidof(IPerceptionColorFrameSourceStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3899,7 +3899,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceWatcher = __uuidof(IPerceptionColorFrameSourceWatcher);
+                extern MIDL_CONST_ID IID& IID_IPerceptionColorFrameSourceWatcher = _uuidof(IPerceptionColorFrameSourceWatcher);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -3959,7 +3959,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionControlSession = __uuidof(IPerceptionControlSession);
+                extern MIDL_CONST_ID IID& IID_IPerceptionControlSession = _uuidof(IPerceptionControlSession);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4032,7 +4032,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthCorrelatedCameraIntrinsics = __uuidof(IPerceptionDepthCorrelatedCameraIntrinsics);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthCorrelatedCameraIntrinsics = _uuidof(IPerceptionDepthCorrelatedCameraIntrinsics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4105,7 +4105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthCorrelatedCoordinateMapper = __uuidof(IPerceptionDepthCorrelatedCoordinateMapper);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthCorrelatedCoordinateMapper = _uuidof(IPerceptionDepthCorrelatedCoordinateMapper);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4150,7 +4150,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrame = __uuidof(IPerceptionDepthFrame);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrame = _uuidof(IPerceptionDepthFrame);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4198,7 +4198,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameArrivedEventArgs = __uuidof(IPerceptionDepthFrameArrivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameArrivedEventArgs = _uuidof(IPerceptionDepthFrameArrivedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4274,7 +4274,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameReader = __uuidof(IPerceptionDepthFrameReader);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameReader = _uuidof(IPerceptionDepthFrameReader);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4498,7 +4498,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSource = __uuidof(IPerceptionDepthFrameSource);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSource = _uuidof(IPerceptionDepthFrameSource);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4540,7 +4540,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSource2 = __uuidof(IPerceptionDepthFrameSource2);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSource2 = _uuidof(IPerceptionDepthFrameSource2);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4582,7 +4582,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceAddedEventArgs = __uuidof(IPerceptionDepthFrameSourceAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceAddedEventArgs = _uuidof(IPerceptionDepthFrameSourceAddedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4624,7 +4624,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceRemovedEventArgs = __uuidof(IPerceptionDepthFrameSourceRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceRemovedEventArgs = _uuidof(IPerceptionDepthFrameSourceRemovedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4685,7 +4685,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceStatics = __uuidof(IPerceptionDepthFrameSourceStatics);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceStatics = _uuidof(IPerceptionDepthFrameSourceStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4787,7 +4787,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceWatcher = __uuidof(IPerceptionDepthFrameSourceWatcher);
+                extern MIDL_CONST_ID IID& IID_IPerceptionDepthFrameSourceWatcher = _uuidof(IPerceptionDepthFrameSourceWatcher);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4835,7 +4835,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionFrameSourcePropertiesChangedEventArgs = __uuidof(IPerceptionFrameSourcePropertiesChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionFrameSourcePropertiesChangedEventArgs = _uuidof(IPerceptionFrameSourcePropertiesChangedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4883,7 +4883,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionFrameSourcePropertyChangeResult = __uuidof(IPerceptionFrameSourcePropertyChangeResult);
+                extern MIDL_CONST_ID IID& IID_IPerceptionFrameSourcePropertyChangeResult = _uuidof(IPerceptionFrameSourcePropertyChangeResult);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4928,7 +4928,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrame = __uuidof(IPerceptionInfraredFrame);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrame = _uuidof(IPerceptionInfraredFrame);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -4976,7 +4976,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameArrivedEventArgs = __uuidof(IPerceptionInfraredFrameArrivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameArrivedEventArgs = _uuidof(IPerceptionInfraredFrameArrivedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5052,7 +5052,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameReader = __uuidof(IPerceptionInfraredFrameReader);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameReader = _uuidof(IPerceptionInfraredFrameReader);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5276,7 +5276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSource = __uuidof(IPerceptionInfraredFrameSource);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSource = _uuidof(IPerceptionInfraredFrameSource);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5318,7 +5318,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSource2 = __uuidof(IPerceptionInfraredFrameSource2);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSource2 = _uuidof(IPerceptionInfraredFrameSource2);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5360,7 +5360,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceAddedEventArgs = __uuidof(IPerceptionInfraredFrameSourceAddedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceAddedEventArgs = _uuidof(IPerceptionInfraredFrameSourceAddedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5402,7 +5402,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceRemovedEventArgs = __uuidof(IPerceptionInfraredFrameSourceRemovedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceRemovedEventArgs = _uuidof(IPerceptionInfraredFrameSourceRemovedEventArgs);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5463,7 +5463,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceStatics = __uuidof(IPerceptionInfraredFrameSourceStatics);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceStatics = _uuidof(IPerceptionInfraredFrameSourceStatics);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5565,7 +5565,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceWatcher = __uuidof(IPerceptionInfraredFrameSourceWatcher);
+                extern MIDL_CONST_ID IID& IID_IPerceptionInfraredFrameSourceWatcher = _uuidof(IPerceptionInfraredFrameSourceWatcher);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5638,7 +5638,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPerceptionVideoProfile = __uuidof(IPerceptionVideoProfile);
+                extern MIDL_CONST_ID IID& IID_IPerceptionVideoProfile = _uuidof(IPerceptionVideoProfile);
             } /* Perception */
         } /* Devices */
     } /* Windows */
@@ -5727,8 +5727,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -15644,8 +15644,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Perception.IKnownPerceptionFrameSourcePropertiesStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

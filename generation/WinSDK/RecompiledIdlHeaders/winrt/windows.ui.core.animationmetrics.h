@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_ANIMATIONMETRICS_ANIMATIONMETRICSCONTRACT_VERSION)
@@ -551,7 +551,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAnimationDescription = __uuidof(IAnimationDescription);
+                    extern MIDL_CONST_ID IID& IID_IAnimationDescription = _uuidof(IAnimationDescription);
                 } /* AnimationMetrics */
             } /* Core */
         } /* UI */
@@ -591,7 +591,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAnimationDescriptionFactory = __uuidof(IAnimationDescriptionFactory);
+                    extern MIDL_CONST_ID IID& IID_IAnimationDescriptionFactory = _uuidof(IAnimationDescriptionFactory);
                 } /* AnimationMetrics */
             } /* Core */
         } /* UI */
@@ -635,7 +635,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IOpacityAnimation = __uuidof(IOpacityAnimation);
+                    extern MIDL_CONST_ID IID& IID_IOpacityAnimation = _uuidof(IOpacityAnimation);
                 } /* AnimationMetrics */
             } /* Core */
         } /* UI */
@@ -683,7 +683,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPropertyAnimation = __uuidof(IPropertyAnimation);
+                    extern MIDL_CONST_ID IID& IID_IPropertyAnimation = _uuidof(IPropertyAnimation);
                 } /* AnimationMetrics */
             } /* Core */
         } /* UI */
@@ -736,7 +736,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IScaleAnimation = __uuidof(IScaleAnimation);
+                    extern MIDL_CONST_ID IID& IID_IScaleAnimation = _uuidof(IScaleAnimation);
                 } /* AnimationMetrics */
             } /* Core */
         } /* UI */

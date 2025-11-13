@@ -326,6 +326,7 @@ typedef struct joyinfoex_tag {
 /* joystick function prototypes */
 
 #if (WINVER >= 0x0400)
+
 WINMMAPI
 MMRESULT
 WINAPI
@@ -333,7 +334,6 @@ joyGetPosEx(
     _In_ UINT uJoyID,
     _Out_ LPJOYINFOEX pji
     );
-
 #endif /* WINVER >= 0x0400 */
 
 WINMMAPI
@@ -342,7 +342,6 @@ WINAPI
 joyGetNumDevs(
     void
     );
-
 #ifdef _WIN32
 
 WINMMAPI
@@ -362,7 +361,6 @@ joyGetDevCapsW(
     _Out_writes_bytes_(cbjc) LPJOYCAPSW pjc,
     _In_ UINT cbjc
     );
-
 #ifdef UNICODE
 #define joyGetDevCaps  joyGetDevCapsW
 #else
@@ -415,13 +413,13 @@ joySetThreshold(
     );
 
 #if (WINVER >= 0x0400)
+
 WINMMAPI
 MMRESULT
 WINAPI
 joyConfigChanged(
     _In_ DWORD dwFlags
     );
-
 #endif
 
 #endif  /* ifndef MMNOJOY */

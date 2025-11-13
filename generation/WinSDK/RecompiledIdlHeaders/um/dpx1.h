@@ -274,8 +274,6 @@ typedef /* [public][public] */ struct __MIDL___MIDL_itf_dpx1_0000_0000_0006
 #define DPX_OPTION_HASH_TYPE L"cix_hash_type"
 #define DPX_OPTION_HARDLINK_ASSETS L"hardlink_assets"
 #define DPX_OPTION_COMPLETE_SELF_COPIES L"complete_self_copies"
-#define DPX_OPTION_IGNORE_FNF_WARNINGS L"ignore_filenotfound_warnings"
-#define DPX_OPTION_SKIP_EXTRACTION_FOR_FILE L"skip_extraction_for_file"
 
 
 extern RPC_IF_HANDLE __MIDL_itf_dpx1_0000_0000_v0_0_c_ifspec;

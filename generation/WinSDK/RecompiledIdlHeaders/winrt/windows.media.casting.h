@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1074,7 +1074,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingConnection = __uuidof(ICastingConnection);
+                extern MIDL_CONST_ID IID& IID_ICastingConnection = _uuidof(ICastingConnection);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1113,7 +1113,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingConnectionErrorOccurredEventArgs = __uuidof(ICastingConnectionErrorOccurredEventArgs);
+                extern MIDL_CONST_ID IID& IID_ICastingConnectionErrorOccurredEventArgs = _uuidof(ICastingConnectionErrorOccurredEventArgs);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1161,7 +1161,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingDevice = __uuidof(ICastingDevice);
+                extern MIDL_CONST_ID IID& IID_ICastingDevice = _uuidof(ICastingDevice);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1222,7 +1222,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Hide(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingDevicePicker = __uuidof(ICastingDevicePicker);
+                extern MIDL_CONST_ID IID& IID_ICastingDevicePicker = _uuidof(ICastingDevicePicker);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1276,7 +1276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingDevicePickerFilter = __uuidof(ICastingDevicePickerFilter);
+                extern MIDL_CONST_ID IID& IID_ICastingDevicePickerFilter = _uuidof(ICastingDevicePickerFilter);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1312,7 +1312,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingDeviceSelectedEventArgs = __uuidof(ICastingDeviceSelectedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ICastingDeviceSelectedEventArgs = _uuidof(ICastingDeviceSelectedEventArgs);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1361,7 +1361,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingDeviceStatics = __uuidof(ICastingDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_ICastingDeviceStatics = _uuidof(ICastingDeviceStatics);
             } /* Casting */
         } /* Media */
     } /* Windows */
@@ -1400,7 +1400,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICastingSource = __uuidof(ICastingSource);
+                extern MIDL_CONST_ID IID& IID_ICastingSource = _uuidof(ICastingSource);
             } /* Casting */
         } /* Media */
     } /* Windows */

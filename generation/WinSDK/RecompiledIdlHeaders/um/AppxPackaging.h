@@ -103,13 +103,6 @@ typedef interface IAppxFile IAppxFile;
 #endif 	/* __IAppxFile_FWD_DEFINED__ */
 
 
-#ifndef __IAppxFile2_FWD_DEFINED__
-#define __IAppxFile2_FWD_DEFINED__
-typedef interface IAppxFile2 IAppxFile2;
-
-#endif 	/* __IAppxFile2_FWD_DEFINED__ */
-
-
 #ifndef __IAppxFilesEnumerator_FWD_DEFINED__
 #define __IAppxFilesEnumerator_FWD_DEFINED__
 typedef interface IAppxFilesEnumerator IAppxFilesEnumerator;
@@ -129,13 +122,6 @@ typedef interface IAppxBlockMapReader IAppxBlockMapReader;
 typedef interface IAppxBlockMapFile IAppxBlockMapFile;
 
 #endif 	/* __IAppxBlockMapFile_FWD_DEFINED__ */
-
-
-#ifndef __IAppxBlockMapFile2_FWD_DEFINED__
-#define __IAppxBlockMapFile2_FWD_DEFINED__
-typedef interface IAppxBlockMapFile2 IAppxBlockMapFile2;
-
-#endif 	/* __IAppxBlockMapFile2_FWD_DEFINED__ */
 
 
 #ifndef __IAppxBlockMapFilesEnumerator_FWD_DEFINED__
@@ -699,18 +685,6 @@ typedef struct AppxPackagingDiagnosticEventSinkManager AppxPackagingDiagnosticEv
 #endif 	/* __AppxPackagingDiagnosticEventSinkManager_FWD_DEFINED__ */
 
 
-#ifndef __AppxPackagingServiceProvider_FWD_DEFINED__
-#define __AppxPackagingServiceProvider_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class AppxPackagingServiceProvider AppxPackagingServiceProvider;
-#else
-typedef struct AppxPackagingServiceProvider AppxPackagingServiceProvider;
-#endif /* __cplusplus */
-
-#endif 	/* __AppxPackagingServiceProvider_FWD_DEFINED__ */
-
-
 #ifndef __AppxEncryptionFactory_FWD_DEFINED__
 #define __AppxEncryptionFactory_FWD_DEFINED__
 
@@ -870,8 +844,6 @@ enum APPX_PACKAGING_CONTEXT_CHANGE_TYPE
         APPX_PACKAGING_CONTEXT_CHANGE_TYPE_DETAILS	= 2,
         APPX_PACKAGING_CONTEXT_CHANGE_TYPE_END	= 3
     } 	APPX_PACKAGING_CONTEXT_CHANGE_TYPE;
-
-
 
 
 
@@ -1960,139 +1932,6 @@ EXTERN_C const IID IID_IAppxFile;
 #endif 	/* __IAppxFile_INTERFACE_DEFINED__ */
 
 
-#ifndef __IAppxFile2_INTERFACE_DEFINED__
-#define __IAppxFile2_INTERFACE_DEFINED__
-
-/* interface IAppxFile2 */
-/* [ref][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IAppxFile2;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("0c830b3c-40e9-11ee-be56-0242ac120002")
-    IAppxFile2 : public IAppxFile
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE GetBlockSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *blockSize) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IAppxFile2Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in IAppxFile2 * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in IAppxFile2 * This);
-        
-        DECLSPEC_XFGVIRT(IAppxFile, GetCompressionOption)
-        HRESULT ( STDMETHODCALLTYPE *GetCompressionOption )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  APPX_COMPRESSION_OPTION *compressionOption);
-        
-        DECLSPEC_XFGVIRT(IAppxFile, GetContentType)
-        HRESULT ( STDMETHODCALLTYPE *GetContentType )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *contentType);
-        
-        DECLSPEC_XFGVIRT(IAppxFile, GetName)
-        HRESULT ( STDMETHODCALLTYPE *GetName )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *fileName);
-        
-        DECLSPEC_XFGVIRT(IAppxFile, GetSize)
-        HRESULT ( STDMETHODCALLTYPE *GetSize )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *size);
-        
-        DECLSPEC_XFGVIRT(IAppxFile, GetStream)
-        HRESULT ( STDMETHODCALLTYPE *GetStream )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
-        
-        DECLSPEC_XFGVIRT(IAppxFile2, GetBlockSize)
-        HRESULT ( STDMETHODCALLTYPE *GetBlockSize )( 
-            __RPC__in IAppxFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *blockSize);
-        
-        END_INTERFACE
-    } IAppxFile2Vtbl;
-
-    interface IAppxFile2
-    {
-        CONST_VTBL struct IAppxFile2Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IAppxFile2_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IAppxFile2_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IAppxFile2_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IAppxFile2_GetCompressionOption(This,compressionOption)	\
-    ( (This)->lpVtbl -> GetCompressionOption(This,compressionOption) ) 
-
-#define IAppxFile2_GetContentType(This,contentType)	\
-    ( (This)->lpVtbl -> GetContentType(This,contentType) ) 
-
-#define IAppxFile2_GetName(This,fileName)	\
-    ( (This)->lpVtbl -> GetName(This,fileName) ) 
-
-#define IAppxFile2_GetSize(This,size)	\
-    ( (This)->lpVtbl -> GetSize(This,size) ) 
-
-#define IAppxFile2_GetStream(This,stream)	\
-    ( (This)->lpVtbl -> GetStream(This,stream) ) 
-
-
-#define IAppxFile2_GetBlockSize(This,blockSize)	\
-    ( (This)->lpVtbl -> GetBlockSize(This,blockSize) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IAppxFile2_INTERFACE_DEFINED__ */
-
-
 #ifndef __IAppxFilesEnumerator_INTERFACE_DEFINED__
 #define __IAppxFilesEnumerator_INTERFACE_DEFINED__
 
@@ -2477,141 +2316,6 @@ EXTERN_C const IID IID_IAppxBlockMapFile;
 
 
 #endif 	/* __IAppxBlockMapFile_INTERFACE_DEFINED__ */
-
-
-#ifndef __IAppxBlockMapFile2_INTERFACE_DEFINED__
-#define __IAppxBlockMapFile2_INTERFACE_DEFINED__
-
-/* interface IAppxBlockMapFile2 */
-/* [ref][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IAppxBlockMapFile2;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("54785f78-40e9-11ee-be56-0242ac120002")
-    IAppxBlockMapFile2 : public IAppxBlockMapFile
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE GetBlockSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *blockSize) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IAppxBlockMapFile2Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in IAppxBlockMapFile2 * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in IAppxBlockMapFile2 * This);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile, GetBlocks)
-        HRESULT ( STDMETHODCALLTYPE *GetBlocks )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppxBlockMapBlocksEnumerator **blocks);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile, GetLocalFileHeaderSize)
-        HRESULT ( STDMETHODCALLTYPE *GetLocalFileHeaderSize )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *lfhSize);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile, GetName)
-        HRESULT ( STDMETHODCALLTYPE *GetName )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile, GetUncompressedSize)
-        HRESULT ( STDMETHODCALLTYPE *GetUncompressedSize )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *size);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile, ValidateFileHash)
-        HRESULT ( STDMETHODCALLTYPE *ValidateFileHash )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *fileStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isValid);
-        
-        DECLSPEC_XFGVIRT(IAppxBlockMapFile2, GetBlockSize)
-        HRESULT ( STDMETHODCALLTYPE *GetBlockSize )( 
-            __RPC__in IAppxBlockMapFile2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT64 *blockSize);
-        
-        END_INTERFACE
-    } IAppxBlockMapFile2Vtbl;
-
-    interface IAppxBlockMapFile2
-    {
-        CONST_VTBL struct IAppxBlockMapFile2Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IAppxBlockMapFile2_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IAppxBlockMapFile2_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IAppxBlockMapFile2_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IAppxBlockMapFile2_GetBlocks(This,blocks)	\
-    ( (This)->lpVtbl -> GetBlocks(This,blocks) ) 
-
-#define IAppxBlockMapFile2_GetLocalFileHeaderSize(This,lfhSize)	\
-    ( (This)->lpVtbl -> GetLocalFileHeaderSize(This,lfhSize) ) 
-
-#define IAppxBlockMapFile2_GetName(This,name)	\
-    ( (This)->lpVtbl -> GetName(This,name) ) 
-
-#define IAppxBlockMapFile2_GetUncompressedSize(This,size)	\
-    ( (This)->lpVtbl -> GetUncompressedSize(This,size) ) 
-
-#define IAppxBlockMapFile2_ValidateFileHash(This,fileStream,isValid)	\
-    ( (This)->lpVtbl -> ValidateFileHash(This,fileStream,isValid) ) 
-
-
-#define IAppxBlockMapFile2_GetBlockSize(This,blockSize)	\
-    ( (This)->lpVtbl -> GetBlockSize(This,blockSize) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IAppxBlockMapFile2_INTERFACE_DEFINED__ */
 
 
 #ifndef __IAppxBlockMapFilesEnumerator_INTERFACE_DEFINED__
@@ -9954,7 +9658,7 @@ EXTERN_C const IID IID_IAppxDigestProvider;
 #endif 	/* __IAppxDigestProvider_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_appxpackaging_0000_0077 */
+/* interface __MIDL_itf_appxpackaging_0000_0075 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
@@ -10002,8 +9706,8 @@ typedef struct APPX_ENCRYPTED_EXEMPTIONS
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0077_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0077_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0075_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0075_v0_0_s_ifspec;
 
 #ifndef __IAppxEncryptionFactory_INTERFACE_DEFINED__
 #define __IAppxEncryptionFactory_INTERFACE_DEFINED__
@@ -11213,7 +10917,7 @@ EXTERN_C const IID IID_IAppxEncryptedBundleWriter2;
 #endif 	/* __IAppxEncryptedBundleWriter2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_appxpackaging_0000_0086 */
+/* interface __MIDL_itf_appxpackaging_0000_0084 */
 /* [local] */ 
 
 typedef /* [v1_enum] */ 
@@ -11233,8 +10937,8 @@ enum APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS
 DEFINE_ENUM_FLAG_OPERATORS(APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0086_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0086_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0084_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0084_v0_0_s_ifspec;
 
 #ifndef __IAppxEncryptedBundleWriter3_INTERFACE_DEFINED__
 #define __IAppxEncryptedBundleWriter3_INTERFACE_DEFINED__
@@ -11560,15 +11264,15 @@ EXTERN_C const IID IID_IAppxPackageEditor;
 #endif 	/* __IAppxPackageEditor_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_appxpackaging_0000_0088 */
+/* interface __MIDL_itf_appxpackaging_0000_0086 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0088_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0088_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0086_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0086_v0_0_s_ifspec;
 
 
 #ifndef __APPXPACKAGING_LIBRARY_DEFINED__
@@ -11612,14 +11316,6 @@ class DECLSPEC_UUID("50CA0A46-1588-4161-8ED2-EF9E469CED5D")
 AppxPackagingDiagnosticEventSinkManager;
 #endif
 
-EXTERN_C const CLSID CLSID_AppxPackagingServiceProvider;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("FB1B3839-09DA-404F-B002-9CBB8DA5CA4F")
-AppxPackagingServiceProvider;
-#endif
-
 EXTERN_C const CLSID CLSID_AppxEncryptionFactory;
 
 #ifdef __cplusplus
@@ -11637,14 +11333,14 @@ AppxPackageEditor;
 #endif
 #endif /* __APPXPACKAGING_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_appxpackaging_0000_0089 */
+/* interface __MIDL_itf_appxpackaging_0000_0087 */
 /* [local] */ 
 
 #endif // (NTDDI >= NTDDI_WIN7)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0089_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0089_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0087_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_appxpackaging_0000_0087_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

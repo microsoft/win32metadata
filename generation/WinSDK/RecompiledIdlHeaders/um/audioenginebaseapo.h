@@ -124,13 +124,6 @@ typedef interface IApoAcousticEchoCancellation IApoAcousticEchoCancellation;
 #endif 	/* __IApoAcousticEchoCancellation_FWD_DEFINED__ */
 
 
-#ifndef __IApoAcousticEchoCancellation2_FWD_DEFINED__
-#define __IApoAcousticEchoCancellation2_FWD_DEFINED__
-typedef interface IApoAcousticEchoCancellation2 IApoAcousticEchoCancellation2;
-
-#endif 	/* __IApoAcousticEchoCancellation2_FWD_DEFINED__ */
-
-
 /* header files for imported files */
 #include "oaidl.h"
 #include "ocidl.h"
@@ -1489,110 +1482,6 @@ EXTERN_C const IID IID_IApoAcousticEchoCancellation;
 /* interface __MIDL_itf_audioenginebaseapo_0000_0011 */
 /* [local] */ 
 
-typedef /* [v1_enum] */ 
-enum APO_REFERENCE_STREAM_PROPERTIES
-    {
-        APO_REFERENCE_STREAM_PROPERTIES_NONE	= 0,
-        APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK	= 0x1
-    } 	APO_REFERENCE_STREAM_PROPERTIES;
-
-DEFINE_ENUM_FLAG_OPERATORS(APO_REFERENCE_STREAM_PROPERTIES);
-
-
-extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0011_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0011_v0_0_s_ifspec;
-
-#ifndef __IApoAcousticEchoCancellation2_INTERFACE_DEFINED__
-#define __IApoAcousticEchoCancellation2_INTERFACE_DEFINED__
-
-/* interface IApoAcousticEchoCancellation2 */
-/* [unique][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IApoAcousticEchoCancellation2;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("F235855F-F06D-45B3-A63F-EE4B71509DC2")
-    IApoAcousticEchoCancellation2 : public IApoAcousticEchoCancellation
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE GetDesiredReferenceStreamProperties( 
-            /* [annotation][out] */ 
-            _Out_  APO_REFERENCE_STREAM_PROPERTIES *pProperties) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IApoAcousticEchoCancellation2Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            __RPC__in IApoAcousticEchoCancellation2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            __RPC__in IApoAcousticEchoCancellation2 * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            __RPC__in IApoAcousticEchoCancellation2 * This);
-        
-        DECLSPEC_XFGVIRT(IApoAcousticEchoCancellation2, GetDesiredReferenceStreamProperties)
-        HRESULT ( STDMETHODCALLTYPE *GetDesiredReferenceStreamProperties )( 
-            __RPC__in IApoAcousticEchoCancellation2 * This,
-            /* [annotation][out] */ 
-            _Out_  APO_REFERENCE_STREAM_PROPERTIES *pProperties);
-        
-        END_INTERFACE
-    } IApoAcousticEchoCancellation2Vtbl;
-
-    interface IApoAcousticEchoCancellation2
-    {
-        CONST_VTBL struct IApoAcousticEchoCancellation2Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IApoAcousticEchoCancellation2_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IApoAcousticEchoCancellation2_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IApoAcousticEchoCancellation2_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-
-#define IApoAcousticEchoCancellation2_GetDesiredReferenceStreamProperties(This,pProperties)	\
-    ( (This)->lpVtbl -> GetDesiredReferenceStreamProperties(This,pProperties) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IApoAcousticEchoCancellation2_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_audioenginebaseapo_0000_0012 */
-/* [local] */ 
-
 typedef struct APOInitSystemEffects
     {
     APOInitBaseStruct APOInit;
@@ -1615,7 +1504,7 @@ typedef struct APOInitSystemEffects2
     BOOL InitializeForDiscoveryOnly;
     } 	APOInitSystemEffects2;
 
-typedef /* [public] */ struct __MIDL___MIDL_itf_audioenginebaseapo_0000_0012_0001
+typedef /* [public] */ struct __MIDL___MIDL_itf_audioenginebaseapo_0000_0011_0001
     {
     LPARAM AddPageParam;
     LPWSTR pwstrEndpointID;
@@ -1656,9 +1545,6 @@ DEFINE_PROPERTYKEY(PKEY_FX_ApplyToBluetooth, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0
 DEFINE_PROPERTYKEY(PKEY_FX_ApplyToUsb, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 31);
 DEFINE_PROPERTYKEY(PKEY_FX_ApplyToRender, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 32);
 DEFINE_PROPERTYKEY(PKEY_FX_ApplyToCapture, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 33);
-DEFINE_PROPERTYKEY(PKEY_FX_RequestSetAsDefault, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 34);
-DEFINE_PROPERTYKEY(PKEY_FX_RequestSetAsDefaultPriority, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 35);
-DEFINE_PROPERTYKEY(PKEY_FX_OEM_Preferred_EffectPack_Id, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 36);
 DEFINE_PROPERTYKEY(PKEY_SFX_ProcessingModes_Supported_For_Streaming, 0xd3993a3f, 0x99c2, 0x4402, 0xb5, 0xec, 0xa9, 0x2a, 0x3, 0x67, 0x66, 0x4b, 5);
 DEFINE_PROPERTYKEY(PKEY_MFX_ProcessingModes_Supported_For_Streaming, 0xd3993a3f, 0x99c2, 0x4402, 0xb5, 0xec, 0xa9, 0x2a, 0x3, 0x67, 0x66, 0x4b, 6);
 DEFINE_PROPERTYKEY(PKEY_EFX_ProcessingModes_Supported_For_Streaming, 0xd3993a3f, 0x99c2, 0x4402, 0xb5, 0xec, 0xa9, 0x2a, 0x3, 0x67, 0x66, 0x4b, 7);
@@ -1673,8 +1559,8 @@ DEFINE_GUID(PKEY_FX_EffectPack_Schema_V1, 0x7abf23d9, 0x727e, 0x4d0b, 0x86, 0xa3
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0012_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0012_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0011_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioenginebaseapo_0000_0011_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

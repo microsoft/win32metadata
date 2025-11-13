@@ -1003,7 +1003,7 @@ Revision History:
 //
 // MessageText:
 //
-// Dump file creation failed due to error during dump creation. BugCheckProgress was: %2
+// Dump file creation failed due to error during dump creation.
 //
 #define IO_ERROR_DUMP_CREATION_ERROR     ((NTSTATUS)0xC00400A1L)
 

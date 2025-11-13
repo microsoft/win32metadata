@@ -1475,7 +1475,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDeviceDebug, IUnknown, "A1A3C64A-224F-4A81-9
     STDMETHOD(EnableDebugCounters)(THIS_
         ) PURE;
 
-    // Disables debug counters
+    // Enables debug counters
     STDMETHOD(DisableDebugCounters)(THIS_
         ) PURE;
 };
@@ -2463,61 +2463,6 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice4, IDCompositionDevice3, "85FC5CCA-2DA
 };
 
 #endif // #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
-
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-
-//+-----------------------------------------------------------------------------
-//
-//  Interface:
-//      IDCompositionDynamicTexture
-//
-//  Synopsis:
-//      An interface representing a dynamically changing texture that can be
-//      bound to a dcomp visual as content.
-//
-//------------------------------------------------------------------------------
-#undef INTERFACE
-#define INTERFACE IDCompositionDynamicTexture
-DECLARE_INTERFACE_IID_(IDCompositionDynamicTexture, IUnknown, "A1DE1D3F-6405-447F-8E95-1383A34B0277")
-{
-    // Set current texture, assuming that every pixel has changed.
-    STDMETHOD(SetTexture)(THIS_
-        _In_ IDCompositionTexture* pTexture) PURE;
-
-    // Set current texture, assuming that only pixels inside the provided rects have changed.
-    //
-    // DWM will use the provided rects to optimize the redrawing of the texture on the screen,
-    // but it can't check the correctness of the provided rects, so the caller is responsible for
-    // including every pixel that changed in at least one rect. There are no guarantees about
-    // what will be redrawn outside of the provided dirty rects. It means that DWM may choose to draw
-    // any set of additional pixels outside of provided dirty rects if it needs to.
-    //
-    // If provided with an empty array or empty rects, this method will treat the texture as identical
-    // to the previous one so that DWM may choose not to redraw it.
-    STDMETHOD(SetTexture)(THIS_
-        _In_ IDCompositionTexture* pTexture,
-        _In_count_(rectCount) const D2D_RECT_L *pRects,
-        _In_ size_t rectCount) PURE;
-};
-
-//+-----------------------------------------------------------------------------
-//
-//  Interface:
-//      IDCompositionDevice5
-//
-//  Synopsis:
-//      Servers as the root factory for composition dynamic textures
-//
-//------------------------------------------------------------------------------
-#undef INTERFACE
-#define INTERFACE IDCompositionDevice5
-DECLARE_INTERFACE_IID_(IDCompositionDevice5, IDCompositionDevice4, "2C6BEBFE-A603-472F-AF34-D2443356E61B")
-{
-    STDMETHOD(CreateDynamicTexture)(THIS_
-        _Outptr_ IDCompositionDynamicTexture** compositionDynamicTexture) PURE;
-};
-
-#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
 

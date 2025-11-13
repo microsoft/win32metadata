@@ -82,6 +82,7 @@ typedef DWORD STGFMT;
 
 // Structured storage APIs
 _Check_return_
+
 WINOLEAPI
 StgCreateDocfile(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -91,6 +92,7 @@ StgCreateDocfile(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgCreateDocfileOnILockBytes(
     _In_ ILockBytes* plkbyt,
@@ -100,6 +102,7 @@ StgCreateDocfileOnILockBytes(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgOpenStorage(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -111,6 +114,7 @@ StgOpenStorage(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgOpenStorageOnILockBytes(
     _In_ ILockBytes* plkbyt,
@@ -122,18 +126,21 @@ StgOpenStorageOnILockBytes(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgIsStorageFile(
     _In_ _Null_terminated_ const WCHAR* pwcsName
     );
 
 _Check_return_
+
 WINOLEAPI
 StgIsStorageILockBytes(
     _In_ ILockBytes* plkbyt
     );
 
 _Check_return_
+
 WINOLEAPI
 StgSetTimes(
     _In_ _Null_terminated_ const WCHAR* lpszName,
@@ -162,6 +169,7 @@ typedef struct tagSTGOPTIONS
 } STGOPTIONS;
 
 _Check_return_
+
 WINOLEAPI
 StgCreateStorageEx(
     _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
@@ -175,6 +183,7 @@ StgCreateStorageEx(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgOpenStorageEx(
     _In_ _Null_terminated_ const WCHAR* pwcsName,
@@ -190,6 +199,7 @@ StgOpenStorageEx(
 #ifndef _STGCREATEPROPSTG_DEFINED_
 
 _Check_return_
+
 WINOLEAPI
 StgCreatePropStg(
     _In_ IUnknown* pUnk,
@@ -201,6 +211,7 @@ StgCreatePropStg(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgOpenPropStg(
     _In_ IUnknown* pUnk,
@@ -211,6 +222,7 @@ StgOpenPropStg(
     );
 
 _Check_return_
+
 WINOLEAPI
 StgCreatePropSetStg(
     _In_ IStorage* pStorage,
@@ -221,6 +233,7 @@ StgCreatePropSetStg(
 #define CCH_MAX_PROPSTG_NAME    31
 
 _Check_return_
+
 WINOLEAPI
 FmtIdToPropStgName(
     _In_ const FMTID* pfmtid,
@@ -228,6 +241,7 @@ FmtIdToPropStgName(
     );
 
 _Check_return_
+
 WINOLEAPI
 PropStgNameToFmtId(
     _In_ const LPOLESTR oszName,
@@ -237,6 +251,7 @@ PropStgNameToFmtId(
 #endif // _STGCREATEPROPSTG_DEFINED_
 
 // Helper functions
+
 WINOLEAPI
 ReadClassStg(
     _In_ LPSTORAGE pStg,
@@ -263,6 +278,7 @@ WriteClassStm(
 
 // Storage utility APIs
 _Check_return_
+
 WINOLEAPI
 GetHGlobalFromILockBytes(
     _In_ LPLOCKBYTES plkbyt,
@@ -270,6 +286,7 @@ GetHGlobalFromILockBytes(
     );
 
 _Check_return_
+
 WINOLEAPI
 CreateILockBytesOnHGlobal(
     _In_opt_ HGLOBAL hGlobal,
@@ -278,6 +295,7 @@ CreateILockBytesOnHGlobal(
     );
 
 // ConvertTo APIs
+
 WINOLEAPI
 GetConvertStg(
     _In_ LPSTORAGE pStg

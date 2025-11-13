@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2192,7 +2192,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportDeleteImportedItemsFromSourceResult = __uuidof(IPhotoImportDeleteImportedItemsFromSourceResult);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportDeleteImportedItemsFromSourceResult = _uuidof(IPhotoImportDeleteImportedItemsFromSourceResult);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2322,7 +2322,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportFindItemsResult = __uuidof(IPhotoImportFindItemsResult);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportFindItemsResult = _uuidof(IPhotoImportFindItemsResult);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2359,7 +2359,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportFindItemsResult2 = __uuidof(IPhotoImportFindItemsResult2);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportFindItemsResult2 = _uuidof(IPhotoImportFindItemsResult2);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2434,7 +2434,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportImportItemsResult = __uuidof(IPhotoImportImportItemsResult);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportImportItemsResult = _uuidof(IPhotoImportImportItemsResult);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2506,7 +2506,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportItem = __uuidof(IPhotoImportItem);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportItem = _uuidof(IPhotoImportItem);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2542,7 +2542,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportItem2 = __uuidof(IPhotoImportItem2);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportItem2 = _uuidof(IPhotoImportItem2);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2578,7 +2578,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportItemImportedEventArgs = __uuidof(IPhotoImportItemImportedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportItemImportedEventArgs = _uuidof(IPhotoImportItemImportedEventArgs);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2620,7 +2620,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportManagerStatics = __uuidof(IPhotoImportManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportManagerStatics = _uuidof(IPhotoImportManagerStatics);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2668,7 +2668,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportOperation = __uuidof(IPhotoImportOperation);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportOperation = _uuidof(IPhotoImportOperation);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2704,7 +2704,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSelectionChangedEventArgs = __uuidof(IPhotoImportSelectionChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSelectionChangedEventArgs = _uuidof(IPhotoImportSelectionChangedEventArgs);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2775,7 +2775,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSession = __uuidof(IPhotoImportSession);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSession = _uuidof(IPhotoImportSession);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2820,7 +2820,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSession2 = __uuidof(IPhotoImportSession2);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSession2 = _uuidof(IPhotoImportSession2);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2862,7 +2862,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSidecar = __uuidof(IPhotoImportSidecar);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSidecar = _uuidof(IPhotoImportSidecar);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2946,7 +2946,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSource = __uuidof(IPhotoImportSource);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSource = _uuidof(IPhotoImportSource);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -2987,7 +2987,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportSourceStatics = __uuidof(IPhotoImportSourceStatics);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportSourceStatics = _uuidof(IPhotoImportSourceStatics);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -3042,7 +3042,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Refresh(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportStorageMedium = __uuidof(IPhotoImportStorageMedium);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportStorageMedium = _uuidof(IPhotoImportStorageMedium);
             } /* Import */
         } /* Media */
     } /* Windows */
@@ -3090,7 +3090,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoImportVideoSegment = __uuidof(IPhotoImportVideoSegment);
+                extern MIDL_CONST_ID IID& IID_IPhotoImportVideoSegment = _uuidof(IPhotoImportVideoSegment);
             } /* Import */
         } /* Media */
     } /* Windows */

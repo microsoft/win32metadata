@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1864,7 +1864,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapBuffer = __uuidof(IBitmapBuffer);
+                extern MIDL_CONST_ID IID& IID_IBitmapBuffer = _uuidof(IBitmapBuffer);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -1909,7 +1909,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapCodecInformation = __uuidof(IBitmapCodecInformation);
+                extern MIDL_CONST_ID IID& IID_IBitmapCodecInformation = _uuidof(IBitmapCodecInformation);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapDecoder = __uuidof(IBitmapDecoder);
+                extern MIDL_CONST_ID IID& IID_IBitmapDecoder = _uuidof(IBitmapDecoder);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2024,7 +2024,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapDecoderStatics = __uuidof(IBitmapDecoderStatics);
+                extern MIDL_CONST_ID IID& IID_IBitmapDecoderStatics = _uuidof(IBitmapDecoderStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2063,7 +2063,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapDecoderStatics2 = __uuidof(IBitmapDecoderStatics2);
+                extern MIDL_CONST_ID IID& IID_IBitmapDecoderStatics2 = _uuidof(IBitmapDecoderStatics2);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2146,7 +2146,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapEncoder = __uuidof(IBitmapEncoder);
+                extern MIDL_CONST_ID IID& IID_IBitmapEncoder = _uuidof(IBitmapEncoder);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2220,7 +2220,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapEncoderStatics = __uuidof(IBitmapEncoderStatics);
+                extern MIDL_CONST_ID IID& IID_IBitmapEncoderStatics = _uuidof(IBitmapEncoderStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2256,7 +2256,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapEncoderStatics2 = __uuidof(IBitmapEncoderStatics2);
+                extern MIDL_CONST_ID IID& IID_IBitmapEncoderStatics2 = _uuidof(IBitmapEncoderStatics2);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2292,7 +2292,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapEncoderWithSoftwareBitmap = __uuidof(IBitmapEncoderWithSoftwareBitmap);
+                extern MIDL_CONST_ID IID& IID_IBitmapEncoderWithSoftwareBitmap = _uuidof(IBitmapEncoderWithSoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2364,7 +2364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapFrame = __uuidof(IBitmapFrame);
+                extern MIDL_CONST_ID IID& IID_IBitmapFrame = _uuidof(IBitmapFrame);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2414,7 +2414,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapFrameWithSoftwareBitmap = __uuidof(IBitmapFrameWithSoftwareBitmap);
+                extern MIDL_CONST_ID IID& IID_IBitmapFrameWithSoftwareBitmap = _uuidof(IBitmapFrameWithSoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2454,7 +2454,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapProperties = __uuidof(IBitmapProperties);
+                extern MIDL_CONST_ID IID& IID_IBitmapProperties = _uuidof(IBitmapProperties);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2489,7 +2489,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapPropertiesView = __uuidof(IBitmapPropertiesView);
+                extern MIDL_CONST_ID IID& IID_IBitmapPropertiesView = _uuidof(IBitmapPropertiesView);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2558,7 +2558,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapTransform = __uuidof(IBitmapTransform);
+                extern MIDL_CONST_ID IID& IID_IBitmapTransform = _uuidof(IBitmapTransform);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2597,7 +2597,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapTypedValue = __uuidof(IBitmapTypedValue);
+                extern MIDL_CONST_ID IID& IID_IBitmapTypedValue = _uuidof(IBitmapTypedValue);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2635,7 +2635,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IBitmapTypedValueFactory = __uuidof(IBitmapTypedValueFactory);
+                extern MIDL_CONST_ID IID& IID_IBitmapTypedValueFactory = _uuidof(IBitmapTypedValueFactory);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2672,7 +2672,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPixelDataProvider = __uuidof(IPixelDataProvider);
+                extern MIDL_CONST_ID IID& IID_IPixelDataProvider = _uuidof(IPixelDataProvider);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2751,7 +2751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISoftwareBitmap = __uuidof(ISoftwareBitmap);
+                extern MIDL_CONST_ID IID& IID_ISoftwareBitmap = _uuidof(ISoftwareBitmap);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2797,7 +2797,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISoftwareBitmapFactory = __uuidof(ISoftwareBitmapFactory);
+                extern MIDL_CONST_ID IID& IID_ISoftwareBitmapFactory = _uuidof(ISoftwareBitmapFactory);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */
@@ -2869,7 +2869,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISoftwareBitmapStatics = __uuidof(ISoftwareBitmapStatics);
+                extern MIDL_CONST_ID IID& IID_ISoftwareBitmapStatics = _uuidof(ISoftwareBitmapStatics);
             } /* Imaging */
         } /* Graphics */
     } /* Windows */

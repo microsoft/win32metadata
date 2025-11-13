@@ -11,7 +11,6 @@ import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.Data.Xml.Dom.idl";
-import "Windows.Storage.Streams.idl";
 
 // Forward Declare
 namespace Windows
@@ -34,16 +33,6 @@ namespace Windows
         interface IAsyncAction;
 
         apicontract UniversalApiContract;
-    }
-}
-namespace Windows
-{
-    namespace Storage
-    {
-        namespace Streams
-        {
-            interface IInputStream;
-        }
     }
 }
 namespace Windows
@@ -73,8 +62,6 @@ namespace Windows
                 interface IPrintTicketValue;
 
                 interface IWorkflowPrintTicket;
-
-                interface IWorkflowPrintTicketFactory;
 
                 interface IWorkflowPrintTicketValidationResult;
 
@@ -283,15 +270,6 @@ namespace Windows
                     HRESULT MergeAndValidateTicket([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* deltaShemaTicket, [out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** result);
                 }
 
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [exclusiveto(Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket)]
-                [experimental]
-                [uuid(966D1166-D9C7-569E-B7D8-F2B341C8F976)]
-                interface IWorkflowPrintTicketFactory : IInspectable
-                {
-                    HRESULT CreateInstance([in] HSTRING printerName, [in] Windows.Storage.Streams.IInputStream* printTicketStream, [out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** value);
-                }
-
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicketValidationResult)]
                 [uuid(0AD1F392-DA7B-4A36-BF36-6A99A62E2059)]
@@ -349,7 +327,6 @@ namespace Windows
                     [default] interface Windows.Graphics.Printing.PrintTicket.IPrintTicketValue;
                 }
 
-                [activatable(Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory, Windows.Foundation.UniversalApiContract, 19.0)]
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [marshaling_behavior(agile)]
                 [threading(both)]

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1197,7 +1197,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAsymmetricAlgorithmNamesStatics = __uuidof(IAsymmetricAlgorithmNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_IAsymmetricAlgorithmNamesStatics = _uuidof(IAsymmetricAlgorithmNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1241,7 +1241,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAsymmetricAlgorithmNamesStatics2 = __uuidof(IAsymmetricAlgorithmNamesStatics2);
+                    extern MIDL_CONST_ID IID& IID_IAsymmetricAlgorithmNamesStatics2 = _uuidof(IAsymmetricAlgorithmNamesStatics2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1301,7 +1301,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProvider = __uuidof(IAsymmetricKeyAlgorithmProvider);
+                    extern MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProvider = _uuidof(IAsymmetricKeyAlgorithmProvider);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1345,7 +1345,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProvider2 = __uuidof(IAsymmetricKeyAlgorithmProvider2);
+                    extern MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProvider2 = _uuidof(IAsymmetricKeyAlgorithmProvider2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1384,7 +1384,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProviderStatics = __uuidof(IAsymmetricKeyAlgorithmProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IAsymmetricKeyAlgorithmProviderStatics = _uuidof(IAsymmetricKeyAlgorithmProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1463,7 +1463,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICryptographicEngineStatics = __uuidof(ICryptographicEngineStatics);
+                    extern MIDL_CONST_ID IID& IID_ICryptographicEngineStatics = _uuidof(ICryptographicEngineStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1525,7 +1525,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICryptographicEngineStatics2 = __uuidof(ICryptographicEngineStatics2);
+                    extern MIDL_CONST_ID IID& IID_ICryptographicEngineStatics2 = _uuidof(ICryptographicEngineStatics2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1577,7 +1577,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICryptographicKey = __uuidof(ICryptographicKey);
+                    extern MIDL_CONST_ID IID& IID_ICryptographicKey = _uuidof(ICryptographicKey);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1750,7 +1750,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IEccCurveNamesStatics = __uuidof(IEccCurveNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_IEccCurveNamesStatics = _uuidof(IEccCurveNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1791,7 +1791,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IEncryptedAndAuthenticatedData = __uuidof(IEncryptedAndAuthenticatedData);
+                    extern MIDL_CONST_ID IID& IID_IEncryptedAndAuthenticatedData = _uuidof(IEncryptedAndAuthenticatedData);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1841,7 +1841,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHashAlgorithmNamesStatics = __uuidof(IHashAlgorithmNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_IHashAlgorithmNamesStatics = _uuidof(IHashAlgorithmNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1889,7 +1889,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHashAlgorithmProvider = __uuidof(IHashAlgorithmProvider);
+                    extern MIDL_CONST_ID IID& IID_IHashAlgorithmProvider = _uuidof(IHashAlgorithmProvider);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1928,7 +1928,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHashAlgorithmProviderStatics = __uuidof(IHashAlgorithmProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IHashAlgorithmProviderStatics = _uuidof(IHashAlgorithmProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -1969,7 +1969,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IHashComputation = __uuidof(IHashComputation);
+                    extern MIDL_CONST_ID IID& IID_IHashComputation = _uuidof(IHashComputation);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2049,7 +2049,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmNamesStatics = __uuidof(IKeyDerivationAlgorithmNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmNamesStatics = _uuidof(IKeyDerivationAlgorithmNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2099,7 +2099,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmNamesStatics2 = __uuidof(IKeyDerivationAlgorithmNamesStatics2);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmNamesStatics2 = _uuidof(IKeyDerivationAlgorithmNamesStatics2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2141,7 +2141,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmProvider = __uuidof(IKeyDerivationAlgorithmProvider);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmProvider = _uuidof(IKeyDerivationAlgorithmProvider);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2180,7 +2180,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmProviderStatics = __uuidof(IKeyDerivationAlgorithmProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationAlgorithmProviderStatics = _uuidof(IKeyDerivationAlgorithmProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2224,7 +2224,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationParameters = __uuidof(IKeyDerivationParameters);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationParameters = _uuidof(IKeyDerivationParameters);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2265,7 +2265,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationParameters2 = __uuidof(IKeyDerivationParameters2);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationParameters2 = _uuidof(IKeyDerivationParameters2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2318,7 +2318,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationParametersStatics = __uuidof(IKeyDerivationParametersStatics);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationParametersStatics = _uuidof(IKeyDerivationParametersStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2357,7 +2357,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IKeyDerivationParametersStatics2 = __uuidof(IKeyDerivationParametersStatics2);
+                    extern MIDL_CONST_ID IID& IID_IKeyDerivationParametersStatics2 = _uuidof(IKeyDerivationParametersStatics2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2410,7 +2410,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMacAlgorithmNamesStatics = __uuidof(IMacAlgorithmNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_IMacAlgorithmNamesStatics = _uuidof(IMacAlgorithmNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2455,7 +2455,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMacAlgorithmProvider = __uuidof(IMacAlgorithmProvider);
+                    extern MIDL_CONST_ID IID& IID_IMacAlgorithmProvider = _uuidof(IMacAlgorithmProvider);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2494,7 +2494,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMacAlgorithmProvider2 = __uuidof(IMacAlgorithmProvider2);
+                    extern MIDL_CONST_ID IID& IID_IMacAlgorithmProvider2 = _uuidof(IMacAlgorithmProvider2);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2533,7 +2533,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IMacAlgorithmProviderStatics = __uuidof(IMacAlgorithmProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IMacAlgorithmProviderStatics = _uuidof(IMacAlgorithmProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2580,7 +2580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPersistedKeyProviderStatics = __uuidof(IPersistedKeyProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_IPersistedKeyProviderStatics = _uuidof(IPersistedKeyProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2672,7 +2672,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISymmetricAlgorithmNamesStatics = __uuidof(ISymmetricAlgorithmNamesStatics);
+                    extern MIDL_CONST_ID IID& IID_ISymmetricAlgorithmNamesStatics = _uuidof(ISymmetricAlgorithmNamesStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2717,7 +2717,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISymmetricKeyAlgorithmProvider = __uuidof(ISymmetricKeyAlgorithmProvider);
+                    extern MIDL_CONST_ID IID& IID_ISymmetricKeyAlgorithmProvider = _uuidof(ISymmetricKeyAlgorithmProvider);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2756,7 +2756,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISymmetricKeyAlgorithmProviderStatics = __uuidof(ISymmetricKeyAlgorithmProviderStatics);
+                    extern MIDL_CONST_ID IID& IID_ISymmetricKeyAlgorithmProviderStatics = _uuidof(ISymmetricKeyAlgorithmProviderStatics);
                 } /* Core */
             } /* Cryptography */
         } /* Security */
@@ -2819,8 +2819,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2960,8 +2960,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -3004,8 +3004,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Cryptography.Core.IKeyDerivationParameters ** Default Interface **
@@ -6803,8 +6803,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6944,8 +6944,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -6988,8 +6988,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IKeyDerivationParametersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Cryptography.Core.IKeyDerivationParameters ** Default Interface **

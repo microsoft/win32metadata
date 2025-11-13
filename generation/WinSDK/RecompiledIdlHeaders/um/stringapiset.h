@@ -66,7 +66,6 @@ CompareStringW(
     _In_NLS_string_(cchCount2) PCNZWCH lpString2,
     _In_ int cchCount2
     );
-
 #ifdef UNICODE
 #define CompareString  CompareStringW
 #endif
@@ -81,7 +80,6 @@ FoldStringW(
     _Out_writes_opt_(cchDest) LPWSTR lpDestStr,
     _In_ int cchDest
     );
-
 #ifdef UNICODE
 #define FoldString  FoldStringW
 #endif
@@ -96,7 +94,6 @@ GetStringTypeExW(
     _In_ int cchSrc,
     _Out_writes_(cchSrc) LPWORD lpCharType
     );
-
 #ifdef UNICODE
 #define GetStringTypeEx  GetStringTypeExW
 #endif

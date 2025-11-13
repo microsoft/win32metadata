@@ -30,19 +30,15 @@ Environment:
 
 //
 // DEVPKEY_NAME
-// Namespace: {b725f130-47ef-101a-a5f1-02608c9eebac}
-// Property IDs: 10
 // Common DEVPKEY used to retrieve the display name for an object.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_NAME,                          0xb725f130, 0x47ef, 0x101a, 0xa5, 0xf1, 0x02, 0x60, 0x8c, 0x9e, 0xeb, 0xac, 10);    // DEVPROP_TYPE_STRING
 
 //
 // Device properties
-// Namespace: {a45c254e-df1c-4efd-8020-67d146a850e0}
-// Property IDs: 2-38
 // These DEVPKEYs correspond to the SetupAPI SPDRP_XXX device properties.
 //
-DEFINE_DEVPROPKEY(DEVPKEY_Device_DeviceDesc,             0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 2);     // DEVPROP_TYPE_STRING (localizable)
+DEFINE_DEVPROPKEY(DEVPKEY_Device_DeviceDesc,             0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 2);     // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_Device_HardwareIds,            0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 3);     // DEVPROP_TYPE_STRING_LIST
 DEFINE_DEVPROPKEY(DEVPKEY_Device_CompatibleIds,          0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 4);     // DEVPROP_TYPE_STRING_LIST
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Service,                0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 6);     // DEVPROP_TYPE_STRING
@@ -50,9 +46,9 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_Class,                  0xa45c254e, 0xdf1c, 0x4
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ClassGuid,              0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 10);    // DEVPROP_TYPE_GUID
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Driver,                 0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 11);    // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ConfigFlags,            0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 12);    // DEVPROP_TYPE_UINT32
-DEFINE_DEVPROPKEY(DEVPKEY_Device_Manufacturer,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 13);    // DEVPROP_TYPE_STRING (localizable)
-DEFINE_DEVPROPKEY(DEVPKEY_Device_FriendlyName,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 14);    // DEVPROP_TYPE_STRING (localizable)
-DEFINE_DEVPROPKEY(DEVPKEY_Device_LocationInfo,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 15);    // DEVPROP_TYPE_STRING (localizable)
+DEFINE_DEVPROPKEY(DEVPKEY_Device_Manufacturer,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 13);    // DEVPROP_TYPE_STRING
+DEFINE_DEVPROPKEY(DEVPKEY_Device_FriendlyName,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 14);    // DEVPROP_TYPE_STRING
+DEFINE_DEVPROPKEY(DEVPKEY_Device_LocationInfo,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 15);    // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_Device_PDOName,                0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 16);    // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Capabilities,           0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 17);    // DEVPROP_TYPE_UINT32
 DEFINE_DEVPROPKEY(DEVPKEY_Device_UINumber,               0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 18);    // DEVPROP_TYPE_UINT32
@@ -79,16 +75,12 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_BaseContainerId,        0xa45c254e, 0xdf1c, 0x4
 
 //
 // Device and Device Interface property
-// Namespace: {78c34fc8-104a-4aca-9ea4-524d52996e57}
-// Property IDs: 256
 // Common DEVPKEY used to retrieve the device instance id associated with devices and device interfaces.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_InstanceId,             0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 256);   // DEVPROP_TYPE_STRING
 
 //
 // Device properties
-// Namespace: {4340a6c5-93fa-4706-972c-7b648008a5a7}
-// Property IDs: 2-3
 // These DEVPKEYs correspond to a device's status and problem code.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_DevNodeStatus,          0x4340a6c5, 0x93fa, 0x4706, 0x97, 0x2c, 0x7b, 0x64, 0x80, 0x08, 0xa5, 0xa7, 2);     // DEVPROP_TYPE_UINT32
@@ -96,8 +88,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_ProblemCode,            0x4340a6c5, 0x93fa, 0x4
 
 //
 // Device properties
-// Namespace: {4340a6c5-93fa-4706-972c-7b648008a5a7}
-// Property IDs: 4-11
 // These DEVPKEYs correspond to a device's relations.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_EjectionRelations,      0x4340a6c5, 0x93fa, 0x4706, 0x97, 0x2c, 0x7b, 0x64, 0x80, 0x08, 0xa5, 0xa7, 4);     // DEVPROP_TYPE_STRING_LIST
@@ -111,16 +101,12 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_TransportRelations,     0x4340a6c5, 0x93fa, 0x4
 
 //
 // Device property
-// Namespace: {4340a6c5-93fa-4706-972c-7b648008a5a7}
-// Property IDs: 12-13
 // This DEVPKEY corresponds to a the status code that resulted in a device to be in a problem state.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ProblemStatus,          0x4340a6c5, 0x93fa, 0x4706, 0x97, 0x2c, 0x7b, 0x64, 0x80, 0x08, 0xa5, 0xa7, 12);     // DEVPROP_TYPE_NTSTATUS
 
 //
 // Device properties
-// Namespace: {80497100-8c73-48b9-aad9-ce387e19c56e}
-// Property IDs: 2-3
 // These DEVPKEYs are set for the corresponding types of root-enumerated devices.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Reported,                   0x80497100, 0x8c73, 0x48b9, 0xaa, 0xd9, 0xce, 0x38, 0x7e, 0x19, 0xc5, 0x6e, 2);  // DEVPROP_TYPE_BOOLEAN
@@ -129,35 +115,19 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_Legacy,                     0x80497100, 0x8c73,
 
 //
 // Device Container Id
-// Namespace: {8c7ed206-3f8a-4827-b3ab-ae9e1faefc6c}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ContainerId,             0x8c7ed206, 0x3f8a, 0x4827, 0xb3, 0xab, 0xae, 0x9e, 0x1f, 0xae, 0xfc, 0x6c, 2);     // DEVPROP_TYPE_GUID
 DEFINE_DEVPROPKEY(DEVPKEY_Device_InLocalMachineContainer, 0x8c7ed206, 0x3f8a, 0x4827, 0xb3, 0xab, 0xae, 0x9e, 0x1f, 0xae, 0xfc, 0x6c, 4);     // DEVPROP_TYPE_BOOLEAN
 
-//
-// Device Container device driver properties (container metadata properties)
-// Namespace: {7d0300e4-4fb7-493d-8a95-656f00e6a271}
-// Property IDs: all
-//
-DEFINE_DEVPROPKEY(DEVPKEY_Device_ContainerModelName,    0x7d0300e4, 0x4fb7, 0x493d, 0x8a, 0x95, 0x65, 0x6f, 0x00, 0xe6, 0xa2, 0x71, 2); // DEVPROP_TYPE_STRING (localizable)
-DEFINE_DEVPROPKEY(DEVPKEY_Device_ContainerManufacturer, 0x7d0300e4, 0x4fb7, 0x493d, 0x8a, 0x95, 0x65, 0x6f, 0x00, 0xe6, 0xa2, 0x71, 3); // DEVPROP_TYPE_STRING (localizable)
-DEFINE_DEVPROPKEY(DEVPKEY_Device_ContainerCategories,   0x7d0300e4, 0x4fb7, 0x493d, 0x8a, 0x95, 0x65, 0x6f, 0x00, 0xe6, 0xa2, 0x71, 4); // DEVPROP_TYPE_STRING_LIST
-DEFINE_DEVPROPKEY(DEVPKEY_Device_ContainerIcon,         0x7d0300e4, 0x4fb7, 0x493d, 0x8a, 0x95, 0x65, 0x6f, 0x00, 0xe6, 0xa2, 0x71, 5); // DEVPROP_TYPE_STRING
-
 
 //
 // Device property
-// Namespace: {78c34fc8-104a-4aca-9ea4-524d52996e57}
-// Property IDs: 39
 // This DEVPKEY correspond to a device's model.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Model,                  0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 39);    // DEVPROP_TYPE_STRING
 
 //
 // Device Experience related Keys
-// Namespace: {80d81ea6-7473-4b0c-8216-efc11a2c4c8b}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ModelId,                     0x80d81ea6, 0x7473, 0x4b0c, 0x82, 0x16, 0xef, 0xc1, 0x1a, 0x2c, 0x4c, 0x8b, 2); // DEVPROP_TYPE_GUID
 DEFINE_DEVPROPKEY(DEVPKEY_Device_FriendlyNameAttributes,      0x80d81ea6, 0x7473, 0x4b0c, 0x82, 0x16, 0xef, 0xc1, 0x1a, 0x2c, 0x4c, 0x8b, 3); // DEVPROP_TYPE_UINT32
@@ -175,8 +145,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_PrimaryCompanionApp,      0x6a742654, 0xd0b2, 0
 
 //
 // Other Device properties
-// Namespace: {540b947e-8b40-45bc-a8a2-6a0b894cbda2}
-// Property IDs: all
 //
 #define DEVPKEY_Numa_Proximity_Domain  DEVPKEY_Device_Numa_Proximity_Domain
 DEFINE_DEVPROPKEY(DEVPKEY_Device_Numa_Proximity_Domain,    0x540b947e, 0x8b40, 0x45bc, 0xa8, 0xa2, 0x6a, 0x0b, 0x89, 0x4c, 0xbd, 0xa2, 1);    // DEVPROP_TYPE_UINT32
@@ -210,8 +178,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_SessionId,               0x83da6326, 0x97a6, 0x
 
 //
 // Device activity timestamp properties
-// Namespace: {83da6326-97a6-4088-9453-a1923f573b29}
-// Property IDs: 100-103
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_InstallDate,             0x83da6326, 0x97a6, 0x4088, 0x94, 0x53, 0xa1, 0x92, 0x3f, 0x57, 0x3b, 0x29, 100);   // DEVPROP_TYPE_FILETIME
 DEFINE_DEVPROPKEY(DEVPKEY_Device_FirstInstallDate,        0x83da6326, 0x97a6, 0x4088, 0x94, 0x53, 0xa1, 0x92, 0x3f, 0x57, 0x3b, 0x29, 101);   // DEVPROP_TYPE_FILETIME
@@ -221,8 +187,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_LastRemovalDate,         0x83da6326, 0x97a6, 0x
 
 //
 // Device driver properties
-// Namespace: {a8b865dd-2e3d-4094-ad97-e593a7c75d6}
-// Property IDs: 2-15
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_DriverDate,               0xa8b865dd, 0x2e3d, 0x4094, 0xad, 0x97, 0xe5, 0x93, 0xa7, 0xc, 0x75, 0xd6, 2);     // DEVPROP_TYPE_FILETIME
 DEFINE_DEVPROPKEY(DEVPKEY_Device_DriverVersion,            0xa8b865dd, 0x2e3d, 0x4094, 0xad, 0x97, 0xe5, 0x93, 0xa7, 0xc, 0x75, 0xd6, 3);     // DEVPROP_TYPE_STRING
@@ -241,8 +205,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_DriverLogoLevel,          0xa8b865dd, 0x2e3d, 0
 
 //
 // Device properties
-// Namespace: {a8b865dd-2e3d-4094-ad97-e593a7c75d6}
-// Property IDs: 17-19
 // These DEVPKEYs may be set by the driver package installed for a device.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_NoConnectSound,              0xa8b865dd, 0x2e3d, 0x4094, 0xad, 0x97, 0xe5, 0x93, 0xa7, 0xc, 0x75, 0xd6, 17); // DEVPROP_TYPE_BOOLEAN
@@ -251,8 +213,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_AdditionalSoftwareRequested, 0xa8b865dd, 0x2e3d
 
 //
 // Device safe-removal properties
-// Namespace: {afd97640-86a3-4210-b67c-289c41aabe55}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_Device_SafeRemovalRequired,         0xafd97640, 0x86a3, 0x4210, 0xb6, 0x7c, 0x28, 0x9c, 0x41, 0xaa, 0xbe, 0x55, 2); // DEVPROP_TYPE_BOOLEAN
 DEFINE_DEVPROPKEY(DEVPKEY_Device_SafeRemovalRequiredOverride, 0xafd97640, 0x86a3, 0x4210, 0xb6, 0x7c, 0x28, 0x9c, 0x41, 0xaa, 0xbe, 0x55, 3); // DEVPROP_TYPE_BOOLEAN
@@ -260,8 +220,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_SafeRemovalRequiredOverride, 0xafd97640, 0x86a3
 
 //
 // Device properties
-// Namespace: {cf73bb51-3abf-44a2-85e0-9a3dc7a12132}
-// Property IDs: all
 // These DEVPKEYs may be set by the driver package installed for a device.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DrvPkg_Model,                  0xcf73bb51, 0x3abf, 0x44a2, 0x85, 0xe0, 0x9a, 0x3d, 0xc7, 0xa1, 0x21, 0x32, 2);     // DEVPROP_TYPE_STRING
@@ -274,8 +232,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_DrvPkg_BrandingIcon,           0xcf73bb51, 0x3abf, 0x4
 
 //
 // Device setup class properties
-// Namespace: {4321918b-f69e-470d-a5de-4d88c75ad24b}
-// Property IDs: all
 // These DEVPKEYs correspond to the SetupAPI SPCRP_XXX setup class properties.
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_UpperFilters,      0x4321918b, 0xf69e, 0x470d, 0xa5, 0xde, 0x4d, 0x88, 0xc7, 0x5a, 0xd2, 0x4b, 19);    // DEVPROP_TYPE_STRING_LIST
@@ -288,8 +244,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_Characteristics,   0x4321918b, 0xf69e, 0x4
 
 //
 // Device setup class properties
-// Namespace: {259abffc-50a7-47ce-af8-68c9a7d73366}
-// Property IDs: 2-12
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_Name,              0x259abffc, 0x50a7, 0x47ce, 0xaf, 0x8, 0x68, 0xc9, 0xa7, 0xd7, 0x33, 0x66, 2);      // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_ClassName,         0x259abffc, 0x50a7, 0x47ce, 0xaf, 0x8, 0x68, 0xc9, 0xa7, 0xd7, 0x33, 0x66, 3);      // DEVPROP_TYPE_STRING
@@ -305,22 +259,13 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_IconPath,          0x259abffc, 0x50a7, 0x4
 
 //
 // Other Device setup class properties
-// Namespace: {d14d3ef3-66cf-4ba2-9d38-0ddb37ab4701}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_DHPRebalanceOptOut, 0xd14d3ef3, 0x66cf, 0x4ba2, 0x9d, 0x38, 0x0d, 0xdb, 0x37, 0xab, 0x47, 0x01, 2);    // DEVPROP_TYPE_BOOLEAN
 
-//
-// Other Device setup class properties
-// Namespace: {713d1703-a2e2-49f5-9214-56472ef3da5c}
-// Property IDs: all
-//
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceClass_ClassCoInstallers,  0x713d1703, 0xa2e2, 0x49f5, 0x92, 0x14, 0x56, 0x47, 0x2e, 0xf3, 0xda, 0x5c, 2);     // DEVPROP_TYPE_STRING_LIST
 
 //
 // Device interface properties
-// Namespace: {026e516e-b814-414b-83cd-856d6fef4822}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_FriendlyName,       0x026e516e, 0xb814, 0x414b, 0x83, 0xcd, 0x85, 0x6d, 0x6f, 0xef, 0x48, 0x22, 2);   // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_Enabled,            0x026e516e, 0xb814, 0x414b, 0x83, 0xcd, 0x85, 0x6d, 0x6f, 0xef, 0x48, 0x22, 3);   // DEVPROP_TYPE_BOOLEAN
@@ -332,16 +277,12 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_SchematicName,      0x026e516e, 0xb814
 
 //
 // Device interface class properties
-// Namespace: {14c83a99-0b3f-44b7-be4c-a178d3990564}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterfaceClass_DefaultInterface,    0x14c83a99, 0x0b3f, 0x44b7, 0xbe, 0x4c, 0xa1, 0x78, 0xd3, 0x99, 0x05, 0x64, 2); // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterfaceClass_Name,                0x14c83a99, 0x0b3f, 0x44b7, 0xbe, 0x4c, 0xa1, 0x78, 0xd3, 0x99, 0x05, 0x64, 3); // DEVPROP_TYPE_STRING
 
 //
 // Device Container Properties
-// Namespace: {78c34fc8-104a-4aca-9ea4-524d52996e57}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_Address,                  0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 51);    // DEVPROP_TYPE_STRING | DEVPROP_TYPE_STRING_LIST
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_DiscoveryMethod,          0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 52);    // DEVPROP_TYPE_STRING_LIST
@@ -389,18 +330,11 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_PrivilegedPackageFamilyNames, 0x78c34f
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_CustomPrivilegedPackageFamilyNames, 0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 107);   // DEVPROP_TYPE_STRING_LIST
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_IsRebootRequired,         0x78c34fc8, 0x104a, 0x4aca, 0x9e, 0xa4, 0x52, 0x4d, 0x52, 0x99, 0x6e, 0x57, 108);   // DEVPROP_TYPE_BOOLEAN
 
-//
-// Device Container Properties
-// Namespace: {656a3bb3-ecc0-43fd-8477-4ae0404a96cd}
-// Property IDs: all
-//
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_FriendlyName,             0x656A3BB3, 0xECC0, 0x43FD, 0x84, 0x77, 0x4A, 0xE0, 0x40, 0x4A, 0x96, 0xCD, 12288); // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_Manufacturer,             0x656A3BB3, 0xECC0, 0x43FD, 0x84, 0x77, 0x4A, 0xE0, 0x40, 0x4A, 0x96, 0xCD, 8192);  // DEVPROP_TYPE_STRING
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_ModelName,                0x656A3BB3, 0xECC0, 0x43FD, 0x84, 0x77, 0x4A, 0xE0, 0x40, 0x4A, 0x96, 0xCD, 8194);  // DEVPROP_TYPE_STRING (localizable)
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_ModelNumber,              0x656A3BB3, 0xECC0, 0x43FD, 0x84, 0x77, 0x4A, 0xE0, 0x40, 0x4A, 0x96, 0xCD, 8195);  // DEVPROP_TYPE_STRING
 
-// {83da6326-97a6-4088-9453-a1923f573b29}
-// Property IDs: 9
 DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_InstallInProgress,        0x83da6326, 0x97a6, 0x4088, 0x94, 0x53, 0xa1, 0x92, 0x3f, 0x57, 0x3b, 0x29, 9);     // DEVPROP_TYPE_BOOLEAN
 
 //
@@ -419,8 +353,6 @@ DEFINE_DEVPROPKEY(DEVPKEY_DeviceContainer_InstallInProgress,        0x83da6326, 
 
 //
 // DevQuery properties
-// Namespace: {13673f42-a3d6-49f6-b4da-ae46e0c5237c}
-// Property IDs: all
 //
 DEFINE_DEVPROPKEY(DEVPKEY_DevQuery_ObjectType,                  0x13673f42, 0xa3d6, 0x49f6, 0xb4, 0xda, 0xae, 0x46, 0xe0, 0xc5, 0x23, 0x7c, 2);   // DEVPROP_TYPE_UINT32
 

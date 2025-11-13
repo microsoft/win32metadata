@@ -3732,7 +3732,7 @@ interface DWRITE_DECLARE_INTERFACE("EEC175FC-BEA9-4C86-8B53-CCBDD7DF0C82") IDWri
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
-#if NTDDI_VERSION >= NTDDI_WIN10_CU // TODO - set correct DDI version
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
 
 /// <summary>
 /// Contains information about a bitmap associated with an IDWriteBitmapRenderTarget.
@@ -4261,7 +4261,7 @@ DWRITE_BEGIN_INTERFACE(IDWritePaintReader, "8128E912-3B97-42A5-AB6C-24AAD3A86E54
     // Inline overload of SetCurrentGlyph, in which structSize is implied.
     HRESULT SetCurrentGlyph(
         UINT32 glyphIndex,
-        _Out_ DWRITE_PAINT_ELEMENT* paintElement,
+        _Out_writes_bytes_(structSize) DWRITE_PAINT_ELEMENT* paintElement,
         _Out_ D2D_RECT_F* clipBox,
         _Out_opt_ DWRITE_PAINT_ATTRIBUTES* glyphAttributes = nullptr
         )

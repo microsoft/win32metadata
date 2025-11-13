@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -886,7 +886,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceInfo = __uuidof(ISpatialSurfaceInfo);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceInfo = _uuidof(ISpatialSurfaceInfo);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -939,7 +939,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceMesh = __uuidof(ISpatialSurfaceMesh);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceMesh = _uuidof(ISpatialSurfaceMesh);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -986,7 +986,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshBuffer = __uuidof(ISpatialSurfaceMeshBuffer);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshBuffer = _uuidof(ISpatialSurfaceMeshBuffer);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1045,7 +1045,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshOptions = __uuidof(ISpatialSurfaceMeshOptions);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshOptions = _uuidof(ISpatialSurfaceMeshOptions);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1089,7 +1089,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshOptionsStatics = __uuidof(ISpatialSurfaceMeshOptionsStatics);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceMeshOptionsStatics = _uuidof(ISpatialSurfaceMeshOptionsStatics);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1140,7 +1140,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceObserver = __uuidof(ISpatialSurfaceObserver);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceObserver = _uuidof(ISpatialSurfaceObserver);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1178,7 +1178,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceObserverStatics = __uuidof(ISpatialSurfaceObserverStatics);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceObserverStatics = _uuidof(ISpatialSurfaceObserverStatics);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1219,7 +1219,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISpatialSurfaceObserverStatics2 = __uuidof(ISpatialSurfaceObserverStatics2);
+                    extern MIDL_CONST_ID IID& IID_ISpatialSurfaceObserverStatics2 = _uuidof(ISpatialSurfaceObserverStatics2);
                 } /* Surfaces */
             } /* Spatial */
         } /* Perception */
@@ -1330,8 +1330,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserver ** Default Interface **
@@ -3257,8 +3257,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserverStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Perception.Spatial.Surfaces.ISpatialSurfaceObserver ** Default Interface **

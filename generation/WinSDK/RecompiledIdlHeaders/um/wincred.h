@@ -45,6 +45,7 @@ Revision History:
 extern "C" {
 #endif
 
+
 //
 // Ensure PCtxtHandle is defined
 //
@@ -152,14 +153,6 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
         (_Status) == HRESULT_FROM_NT( STATUS_SMB_GUEST_LOGON_BLOCKED ) || \
         (_Status) == ERROR_SMB_GUEST_LOGON_BLOCKED || \
         (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_LOGON_BLOCKED ) || \
-        (_Status) == STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED || \
-        (_Status) == HRESULT_FROM_NT( STATUS_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED ) || \
-        (_Status) == ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED || \
-        (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_LOGON_BLOCKED_SIGNING_REQUIRED ) || \
-        (_Status) == ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED || \
-        (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_ENCRYPTION_NOT_SUPPORTED ) || \
-        (_Status) == ERROR_NTLM_BLOCKED || \
-        (_Status) == __HRESULT_FROM_WIN32( ERROR_NTLM_BLOCKED ) || \
         (_Status) == ERROR_LOGON_FAILURE || \
         (_Status) == __HRESULT_FROM_WIN32( ERROR_LOGON_FAILURE ) || \
         (_Status) == STATUS_LOGON_FAILURE || \
@@ -787,7 +780,6 @@ typedef PCREDUI_INFOA PCREDUI_INFO;
 #define CREDUIWIN_SECURE_PROMPT             0x00001000  // The Credui prompt should be displayed on the secure desktop
 #define CREDUIWIN_PREPROMPTING              0X00002000  // CredUI is invoked by SspiPromptForCredentials and the client is prompting before a prior handshake
 #define CREDUIWIN_PACK_32_WOW               0x10000000  // Tell the credential provider it should be packing its Auth Blob 32 bit even though it is running 64 native
-#define CREDUIWIN_USE_V2                    0x00000040  // For the rejuvenated CREDUI experience
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
 #define CREDUIWIN_IGNORE_CLOUDAUTHORITY_NAME            0x00040000  // Tell the credential provider it should not pack AAD authority name
 #endif
@@ -839,12 +831,6 @@ typedef PCREDUI_INFOA PCREDUI_INFO;
         CREDUIWIN_PACK_32_WOW            )
 
 #endif
-
-// AuthPackageId in case of Back Button on Picker Screeen
-// CAD----- : Credui Authpackage iD's
-#define BACK_BUTTON_IDENTIFY_AUTH_PACKAGE  0xCAD00001
-#define CREDUI_FOOTER_LINK_AUTHPACKAGE_ID   0XCAD0002
-#define CREDUI_PICKERSCREEN_AUTHPACKAGE_ID  0XCAD0003
 
 
 //-----------------------------------------------------------------------------

@@ -183,6 +183,7 @@ PathCchRemoveExtension(
     );
 
 /* PATHCCH_OPTIONS */
+
 WINPATHCCHAPI
 HRESULT
 APIENTRY
@@ -203,6 +204,7 @@ PathCchCanonicalize(
     );
 
 /* PATHCCH_OPTIONS */
+
 WINPATHCCHAPI
 HRESULT
 APIENTRY
@@ -225,6 +227,7 @@ PathCchCombine(
     );
 
 /* PATHCCH_OPTIONS */
+
 WINPATHCCHAPI
 HRESULT
 APIENTRY
@@ -253,6 +256,7 @@ PathCchStripPrefix(
     );
 
 /* PATHCCH_OPTIONS */
+
 WINPATHCCHAPI
 HRESULT
 APIENTRY
@@ -264,6 +268,7 @@ PathAllocCombine(
     );
 
 /* PATHCCH_OPTIONS */
+
 WINPATHCCHAPI
 HRESULT
 APIENTRY

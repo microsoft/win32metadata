@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -711,7 +711,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGeofence = __uuidof(IGeofence);
+                    extern MIDL_CONST_ID IID& IID_IGeofence = _uuidof(IGeofence);
                 } /* Geofencing */
             } /* Geolocation */
         } /* Devices */
@@ -776,7 +776,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGeofenceFactory = __uuidof(IGeofenceFactory);
+                    extern MIDL_CONST_ID IID& IID_IGeofenceFactory = _uuidof(IGeofenceFactory);
                 } /* Geofencing */
             } /* Geolocation */
         } /* Devices */
@@ -837,7 +837,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGeofenceMonitor = __uuidof(IGeofenceMonitor);
+                    extern MIDL_CONST_ID IID& IID_IGeofenceMonitor = _uuidof(IGeofenceMonitor);
                 } /* Geofencing */
             } /* Geolocation */
         } /* Devices */
@@ -875,7 +875,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGeofenceMonitorStatics = __uuidof(IGeofenceMonitorStatics);
+                    extern MIDL_CONST_ID IID& IID_IGeofenceMonitorStatics = _uuidof(IGeofenceMonitorStatics);
                 } /* Geofencing */
             } /* Geolocation */
         } /* Devices */
@@ -922,7 +922,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IGeofenceStateChangeReport = __uuidof(IGeofenceStateChangeReport);
+                    extern MIDL_CONST_ID IID& IID_IGeofenceStateChangeReport = _uuidof(IGeofenceStateChangeReport);
                 } /* Geofencing */
             } /* Geolocation */
         } /* Devices */

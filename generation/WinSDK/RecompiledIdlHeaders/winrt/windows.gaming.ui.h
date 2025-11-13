@@ -108,7 +108,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GAMING_UI_GAMECHATOVERLAYCONTRACT_VERSION)
@@ -474,7 +474,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameBarStatics = __uuidof(IGameBarStatics);
+                extern MIDL_CONST_ID IID& IID_IGameBarStatics = _uuidof(IGameBarStatics);
             } /* UI */
         } /* Gaming */
     } /* Windows */
@@ -522,7 +522,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameChatMessageReceivedEventArgs = __uuidof(IGameChatMessageReceivedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IGameChatMessageReceivedEventArgs = _uuidof(IGameChatMessageReceivedEventArgs);
             } /* UI */
         } /* Gaming */
     } /* Windows */
@@ -566,7 +566,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameChatOverlay = __uuidof(IGameChatOverlay);
+                extern MIDL_CONST_ID IID& IID_IGameChatOverlay = _uuidof(IGameChatOverlay);
             } /* UI */
         } /* Gaming */
     } /* Windows */
@@ -609,7 +609,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameChatOverlayMessageSource = __uuidof(IGameChatOverlayMessageSource);
+                extern MIDL_CONST_ID IID& IID_IGameChatOverlayMessageSource = _uuidof(IGameChatOverlayMessageSource);
             } /* UI */
         } /* Gaming */
     } /* Windows */
@@ -645,7 +645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameChatOverlayStatics = __uuidof(IGameChatOverlayStatics);
+                extern MIDL_CONST_ID IID& IID_IGameChatOverlayStatics = _uuidof(IGameChatOverlayStatics);
             } /* UI */
         } /* Gaming */
     } /* Windows */
@@ -687,7 +687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGameUIProviderActivatedEventArgs = __uuidof(IGameUIProviderActivatedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IGameUIProviderActivatedEventArgs = _uuidof(IGameUIProviderActivatedEventArgs);
             } /* UI */
         } /* Gaming */
     } /* Windows */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -187,7 +187,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE ResetTotalEnergyUsage(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IBackgroundEnergyDiagnosticsStatics = __uuidof(IBackgroundEnergyDiagnosticsStatics);
+                    extern MIDL_CONST_ID IID& IID_IBackgroundEnergyDiagnosticsStatics = _uuidof(IBackgroundEnergyDiagnosticsStatics);
                 } /* Diagnostics */
             } /* Power */
         } /* System */
@@ -241,7 +241,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE ResetTotalEnergyUsage(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IForegroundEnergyDiagnosticsStatics = __uuidof(IForegroundEnergyDiagnosticsStatics);
+                    extern MIDL_CONST_ID IID& IID_IForegroundEnergyDiagnosticsStatics = _uuidof(IForegroundEnergyDiagnosticsStatics);
                 } /* Diagnostics */
             } /* Power */
         } /* System */

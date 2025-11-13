@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -319,7 +319,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICompositionDebugHeatMaps = __uuidof(ICompositionDebugHeatMaps);
+                    extern MIDL_CONST_ID IID& IID_ICompositionDebugHeatMaps = _uuidof(ICompositionDebugHeatMaps);
                 } /* Diagnostics */
             } /* Composition */
         } /* UI */
@@ -357,7 +357,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICompositionDebugSettings = __uuidof(ICompositionDebugSettings);
+                    extern MIDL_CONST_ID IID& IID_ICompositionDebugSettings = _uuidof(ICompositionDebugSettings);
                 } /* Diagnostics */
             } /* Composition */
         } /* UI */
@@ -396,7 +396,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ICompositionDebugSettingsStatics = __uuidof(ICompositionDebugSettingsStatics);
+                    extern MIDL_CONST_ID IID& IID_ICompositionDebugSettingsStatics = _uuidof(ICompositionDebugSettingsStatics);
                 } /* Diagnostics */
             } /* Composition */
         } /* UI */

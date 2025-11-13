@@ -291,7 +291,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILowLevelDevicesAggregateProvider = __uuidof(ILowLevelDevicesAggregateProvider);
+            extern MIDL_CONST_ID IID& IID_ILowLevelDevicesAggregateProvider = _uuidof(ILowLevelDevicesAggregateProvider);
         } /* Devices */
     } /* Windows */
 } /* ABI */
@@ -330,7 +330,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILowLevelDevicesAggregateProviderFactory = __uuidof(ILowLevelDevicesAggregateProviderFactory);
+            extern MIDL_CONST_ID IID& IID_ILowLevelDevicesAggregateProviderFactory = _uuidof(ILowLevelDevicesAggregateProviderFactory);
         } /* Devices */
     } /* Windows */
 } /* ABI */
@@ -361,7 +361,7 @@ namespace ABI {
             public:
             };
 
-            MIDL_CONST_ID IID& IID_ILowLevelDevicesController = __uuidof(ILowLevelDevicesController);
+            extern MIDL_CONST_ID IID& IID_ILowLevelDevicesController = _uuidof(ILowLevelDevicesController);
         } /* Devices */
     } /* Windows */
 } /* ABI */
@@ -398,7 +398,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_ILowLevelDevicesControllerStatics = __uuidof(ILowLevelDevicesControllerStatics);
+            extern MIDL_CONST_ID IID& IID_ILowLevelDevicesControllerStatics = _uuidof(ILowLevelDevicesControllerStatics);
         } /* Devices */
     } /* Windows */
 } /* ABI */

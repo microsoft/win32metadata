@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1228,7 +1228,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE CancelAsyncOperations(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAtomPubClient = __uuidof(IAtomPubClient);
+                extern MIDL_CONST_ID IID& IID_IAtomPubClient = _uuidof(IAtomPubClient);
             } /* AtomPub */
         } /* Web */
     } /* Windows */
@@ -1265,7 +1265,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAtomPubClientFactory = __uuidof(IAtomPubClientFactory);
+                extern MIDL_CONST_ID IID& IID_IAtomPubClientFactory = _uuidof(IAtomPubClientFactory);
             } /* AtomPub */
         } /* Web */
     } /* Windows */
@@ -1313,7 +1313,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IResourceCollection = __uuidof(IResourceCollection);
+                extern MIDL_CONST_ID IID& IID_IResourceCollection = _uuidof(IResourceCollection);
             } /* AtomPub */
         } /* Web */
     } /* Windows */
@@ -1352,7 +1352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IServiceDocument = __uuidof(IServiceDocument);
+                extern MIDL_CONST_ID IID& IID_IServiceDocument = _uuidof(IServiceDocument);
             } /* AtomPub */
         } /* Web */
     } /* Windows */
@@ -1394,7 +1394,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWorkspace = __uuidof(IWorkspace);
+                extern MIDL_CONST_ID IID& IID_IWorkspace = _uuidof(IWorkspace);
             } /* AtomPub */
         } /* Web */
     } /* Windows */
@@ -1411,8 +1411,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CAtomPub_CIWorkspace;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.AtomPub.IAtomPubClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.AtomPub.IAtomPubClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.AtomPub.IAtomPubClient ** Default Interface **
@@ -3897,8 +3897,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CAtomPub_CIWorkspace;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.AtomPub.IAtomPubClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.AtomPub.IAtomPubClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.AtomPub.IAtomPubClient ** Default Interface **

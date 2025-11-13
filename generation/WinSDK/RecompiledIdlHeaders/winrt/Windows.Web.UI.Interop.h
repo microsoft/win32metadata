@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -770,7 +770,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlAcceleratorKeyPressedEventArgs = __uuidof(IWebViewControlAcceleratorKeyPressedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlAcceleratorKeyPressedEventArgs = _uuidof(IWebViewControlAcceleratorKeyPressedEventArgs);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -808,7 +808,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlMoveFocusRequestedEventArgs = __uuidof(IWebViewControlMoveFocusRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlMoveFocusRequestedEventArgs = _uuidof(IWebViewControlMoveFocusRequestedEventArgs);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -868,7 +868,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlProcess = __uuidof(IWebViewControlProcess);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcess = _uuidof(IWebViewControlProcess);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -907,7 +907,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlProcessFactory = __uuidof(IWebViewControlProcessFactory);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcessFactory = _uuidof(IWebViewControlProcessFactory);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -954,7 +954,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlProcessOptions = __uuidof(IWebViewControlProcessOptions);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlProcessOptions = _uuidof(IWebViewControlProcessOptions);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -1028,7 +1028,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlSite = __uuidof(IWebViewControlSite);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlSite = _uuidof(IWebViewControlSite);
                 } /* Interop */
             } /* UI */
         } /* Web */
@@ -1077,7 +1077,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWebViewControlSite2 = __uuidof(IWebViewControlSite2);
+                    extern MIDL_CONST_ID IID& IID_IWebViewControlSite2 = _uuidof(IWebViewControlSite2);
                 } /* Interop */
             } /* UI */
         } /* Web */

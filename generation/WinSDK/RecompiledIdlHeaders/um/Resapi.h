@@ -2478,8 +2478,7 @@ typedef enum _CLUSTER_ROLE {
     ClusterRoleStoragePool,
     ClusterRoleVirtualMachine,
     ClusterRoleVirtualMachineConfiguration,
-    ClusterRoleVirtualMachineReplicaBroker,
-    ClusterRoleKeyValueStore
+    ClusterRoleVirtualMachineReplicaBroker
 } CLUSTER_ROLE;
 
 typedef enum _CLUSTER_ROLE_STATE {

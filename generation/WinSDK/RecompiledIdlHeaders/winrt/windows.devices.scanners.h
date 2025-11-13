@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -878,7 +878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScanner = __uuidof(IImageScanner);
+                extern MIDL_CONST_ID IID& IID_IImageScanner = _uuidof(IImageScanner);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -968,7 +968,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerFeederConfiguration = __uuidof(IImageScannerFeederConfiguration);
+                extern MIDL_CONST_ID IID& IID_IImageScannerFeederConfiguration = _uuidof(IImageScannerFeederConfiguration);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -1012,7 +1012,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerFormatConfiguration = __uuidof(IImageScannerFormatConfiguration);
+                extern MIDL_CONST_ID IID& IID_IImageScannerFormatConfiguration = _uuidof(IImageScannerFormatConfiguration);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -1051,7 +1051,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerPreviewResult = __uuidof(IImageScannerPreviewResult);
+                extern MIDL_CONST_ID IID& IID_IImageScannerPreviewResult = _uuidof(IImageScannerPreviewResult);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -1087,7 +1087,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerScanResult = __uuidof(IImageScannerScanResult);
+                extern MIDL_CONST_ID IID& IID_IImageScannerScanResult = _uuidof(IImageScannerScanResult);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -1210,7 +1210,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerSourceConfiguration = __uuidof(IImageScannerSourceConfiguration);
+                extern MIDL_CONST_ID IID& IID_IImageScannerSourceConfiguration = _uuidof(IImageScannerSourceConfiguration);
             } /* Scanners */
         } /* Devices */
     } /* Windows */
@@ -1250,7 +1250,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IImageScannerStatics = __uuidof(IImageScannerStatics);
+                extern MIDL_CONST_ID IID& IID_IImageScannerStatics = _uuidof(IImageScannerStatics);
             } /* Scanners */
         } /* Devices */
     } /* Windows */

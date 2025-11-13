@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1594,7 +1594,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationAttribute = __uuidof(ISyndicationAttribute);
+                extern MIDL_CONST_ID IID& IID_ISyndicationAttribute = _uuidof(ISyndicationAttribute);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1633,7 +1633,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationAttributeFactory = __uuidof(ISyndicationAttributeFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationAttributeFactory = _uuidof(ISyndicationAttributeFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1687,7 +1687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationCategory = __uuidof(ISyndicationCategory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationCategory = _uuidof(ISyndicationCategory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1730,7 +1730,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationCategoryFactory = __uuidof(ISyndicationCategoryFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationCategoryFactory = _uuidof(ISyndicationCategoryFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1799,7 +1799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationClient = __uuidof(ISyndicationClient);
+                extern MIDL_CONST_ID IID& IID_ISyndicationClient = _uuidof(ISyndicationClient);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1836,7 +1836,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationClientFactory = __uuidof(ISyndicationClientFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationClientFactory = _uuidof(ISyndicationClientFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1879,7 +1879,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationContent = __uuidof(ISyndicationContent);
+                extern MIDL_CONST_ID IID& IID_ISyndicationContent = _uuidof(ISyndicationContent);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1921,7 +1921,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationContentFactory = __uuidof(ISyndicationContentFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationContentFactory = _uuidof(ISyndicationContentFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -1958,7 +1958,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationErrorStatics = __uuidof(ISyndicationErrorStatics);
+                extern MIDL_CONST_ID IID& IID_ISyndicationErrorStatics = _uuidof(ISyndicationErrorStatics);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2078,7 +2078,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationFeed = __uuidof(ISyndicationFeed);
+                extern MIDL_CONST_ID IID& IID_ISyndicationFeed = _uuidof(ISyndicationFeed);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2117,7 +2117,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationFeedFactory = __uuidof(ISyndicationFeedFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationFeedFactory = _uuidof(ISyndicationFeedFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2168,7 +2168,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationGenerator = __uuidof(ISyndicationGenerator);
+                extern MIDL_CONST_ID IID& IID_ISyndicationGenerator = _uuidof(ISyndicationGenerator);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2205,7 +2205,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationGeneratorFactory = __uuidof(ISyndicationGeneratorFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationGeneratorFactory = _uuidof(ISyndicationGeneratorFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2325,7 +2325,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationItem = __uuidof(ISyndicationItem);
+                extern MIDL_CONST_ID IID& IID_ISyndicationItem = _uuidof(ISyndicationItem);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2364,7 +2364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationItemFactory = __uuidof(ISyndicationItemFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationItemFactory = _uuidof(ISyndicationItemFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2436,7 +2436,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationLink = __uuidof(ISyndicationLink);
+                extern MIDL_CONST_ID IID& IID_ISyndicationLink = _uuidof(ISyndicationLink);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2481,7 +2481,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationLinkFactory = __uuidof(ISyndicationLinkFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationLinkFactory = _uuidof(ISyndicationLinkFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2552,7 +2552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationNode = __uuidof(ISyndicationNode);
+                extern MIDL_CONST_ID IID& IID_ISyndicationNode = _uuidof(ISyndicationNode);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2591,7 +2591,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationNodeFactory = __uuidof(ISyndicationNodeFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationNodeFactory = _uuidof(ISyndicationNodeFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2645,7 +2645,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationPerson = __uuidof(ISyndicationPerson);
+                extern MIDL_CONST_ID IID& IID_ISyndicationPerson = _uuidof(ISyndicationPerson);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2688,7 +2688,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationPersonFactory = __uuidof(ISyndicationPersonFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationPersonFactory = _uuidof(ISyndicationPersonFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2740,7 +2740,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationText = __uuidof(ISyndicationText);
+                extern MIDL_CONST_ID IID& IID_ISyndicationText = _uuidof(ISyndicationText);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2782,7 +2782,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISyndicationTextFactory = __uuidof(ISyndicationTextFactory);
+                extern MIDL_CONST_ID IID& IID_ISyndicationTextFactory = _uuidof(ISyndicationTextFactory);
             } /* Syndication */
         } /* Web */
     } /* Windows */
@@ -2799,8 +2799,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CSyndication_CISyndicationTextFacto
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationAttributeFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationAttribute ** Default Interface **
@@ -2850,8 +2850,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationClient ** Default Interface **
@@ -2923,8 +2923,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationFeedFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationFeed ** Default Interface **
@@ -2975,8 +2975,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationItem ** Default Interface **
@@ -3027,8 +3027,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationNodeFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationNode ** Default Interface **
@@ -3052,8 +3052,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationPersonFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationPersonFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationPerson ** Default Interface **
@@ -3078,8 +3078,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationTextFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationTextFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationText ** Default Interface **
@@ -7926,8 +7926,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CSyndication_CISyndicationTextFacto
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationAttributeFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationAttribute ** Default Interface **
@@ -7977,8 +7977,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationClientFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationClient ** Default Interface **
@@ -8050,8 +8050,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationFeedFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationFeed ** Default Interface **
@@ -8102,8 +8102,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationItem ** Default Interface **
@@ -8154,8 +8154,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Syndication.ISyndicationNodeFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationNode ** Default Interface **
@@ -8179,8 +8179,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationPersonFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationPersonFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationPerson ** Default Interface **
@@ -8205,8 +8205,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Web.Syndication.ISyndicationTextFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Web.Syndication.ISyndicationTextFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Syndication.ISyndicationText ** Default Interface **

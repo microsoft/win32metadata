@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -227,7 +227,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkWorkspaceHostedAppManager = __uuidof(IInkWorkspaceHostedAppManager);
+                    extern MIDL_CONST_ID IID& IID_IInkWorkspaceHostedAppManager = _uuidof(IInkWorkspaceHostedAppManager);
                 } /* InkWorkspace */
             } /* Preview */
         } /* ApplicationModel */
@@ -265,7 +265,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IInkWorkspaceHostedAppManagerStatics = __uuidof(IInkWorkspaceHostedAppManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IInkWorkspaceHostedAppManagerStatics = _uuidof(IInkWorkspaceHostedAppManagerStatics);
                 } /* InkWorkspace */
             } /* Preview */
         } /* ApplicationModel */

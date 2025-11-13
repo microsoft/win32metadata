@@ -785,9 +785,6 @@ BOOL       WINAPI UnregisterCMMA(_In_opt_ PCSTR pMachineName, _In_ DWORD cmmID);
 BOOL       WINAPI UnregisterCMMW(_In_opt_ PCWSTR pMachineName, _In_ DWORD cmmID);
 BOOL       WINAPI SelectCMM(DWORD dwCMMType);
 
-#ifndef BUILD_WINDOWS
-__declspec(deprecated("GetColorDirectoryW is deprecated and might not work on all platforms. For more info, see MSDN."))
-#endif
 BOOL
 WINAPI
 GetColorDirectoryA(
@@ -796,9 +793,6 @@ GetColorDirectoryA(
     _Inout_ PDWORD pdwSize
     );
 
-#ifndef BUILD_WINDOWS
-__declspec(deprecated("GetColorDirectoryA is deprecated and might not work on all platforms. For more info, see MSDN."))
-#endif
 BOOL
 WINAPI
 GetColorDirectoryW(

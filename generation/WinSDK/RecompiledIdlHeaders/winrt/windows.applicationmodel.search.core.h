@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -625,7 +625,7 @@ namespace ABI {
                     public:
                     };
 
-                    MIDL_CONST_ID IID& IID_IRequestingFocusOnKeyboardInputEventArgs = __uuidof(IRequestingFocusOnKeyboardInputEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IRequestingFocusOnKeyboardInputEventArgs = _uuidof(IRequestingFocusOnKeyboardInputEventArgs);
                 } /* Core */
             } /* Search */
         } /* ApplicationModel */
@@ -678,7 +678,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISearchSuggestion = __uuidof(ISearchSuggestion);
+                    extern MIDL_CONST_ID IID& IID_ISearchSuggestion = _uuidof(ISearchSuggestion);
                 } /* Core */
             } /* Search */
         } /* ApplicationModel */
@@ -765,7 +765,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISearchSuggestionManager = __uuidof(ISearchSuggestionManager);
+                    extern MIDL_CONST_ID IID& IID_ISearchSuggestionManager = _uuidof(ISearchSuggestionManager);
                 } /* Core */
             } /* Search */
         } /* ApplicationModel */
@@ -812,7 +812,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISearchSuggestionsRequestedEventArgs = __uuidof(ISearchSuggestionsRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_ISearchSuggestionsRequestedEventArgs = _uuidof(ISearchSuggestionsRequestedEventArgs);
                 } /* Core */
             } /* Search */
         } /* ApplicationModel */

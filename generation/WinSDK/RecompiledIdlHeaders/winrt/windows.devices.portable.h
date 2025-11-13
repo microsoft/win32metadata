@@ -227,7 +227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IServiceDeviceStatics = __uuidof(IServiceDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_IServiceDeviceStatics = _uuidof(IServiceDeviceStatics);
             } /* Portable */
         } /* Devices */
     } /* Windows */
@@ -267,7 +267,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStorageDeviceStatics = __uuidof(IStorageDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_IStorageDeviceStatics = _uuidof(IStorageDeviceStatics);
             } /* Portable */
         } /* Devices */
     } /* Windows */

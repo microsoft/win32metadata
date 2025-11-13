@@ -217,7 +217,6 @@ FatalAppExitW(
     _In_ UINT uAction,
     _In_ LPCWSTR lpMessageText
     );
-
 #ifdef UNICODE
 #define FatalAppExit  FatalAppExitW
 #else

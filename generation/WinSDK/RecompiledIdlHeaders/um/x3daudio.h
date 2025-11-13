@@ -42,7 +42,9 @@
         float parameters -- NAN and infinite values are not accepted.
         All computation occurs in 32-bit precision mode.                    */
 
+#ifdef _MSC_VER
 #pragma once
+#endif
 
 #include <sdkddkver.h>
 

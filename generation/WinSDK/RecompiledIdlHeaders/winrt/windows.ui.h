@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -282,7 +282,7 @@ namespace ABI {
             public:
             };
 
-            MIDL_CONST_ID IID& IID_IColorHelper = __uuidof(IColorHelper);
+            extern MIDL_CONST_ID IID& IID_IColorHelper = _uuidof(IColorHelper);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -320,7 +320,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IColorHelperStatics = __uuidof(IColorHelperStatics);
+            extern MIDL_CONST_ID IID& IID_IColorHelperStatics = _uuidof(IColorHelperStatics);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -355,7 +355,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IColorHelperStatics2 = __uuidof(IColorHelperStatics2);
+            extern MIDL_CONST_ID IID& IID_IColorHelperStatics2 = _uuidof(IColorHelperStatics2);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -386,7 +386,7 @@ namespace ABI {
             public:
             };
 
-            MIDL_CONST_ID IID& IID_IColors = __uuidof(IColors);
+            extern MIDL_CONST_ID IID& IID_IColors = _uuidof(IColors);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -840,7 +840,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IColorsStatics = __uuidof(IColorsStatics);
+            extern MIDL_CONST_ID IID& IID_IColorsStatics = _uuidof(IColorsStatics);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -874,7 +874,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IUIContentRoot = __uuidof(IUIContentRoot);
+            extern MIDL_CONST_ID IID& IID_IUIContentRoot = _uuidof(IUIContentRoot);
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -905,7 +905,7 @@ namespace ABI {
             public:
             };
 
-            MIDL_CONST_ID IID& IID_IUIContext = __uuidof(IUIContext);
+            extern MIDL_CONST_ID IID& IID_IUIContext = _uuidof(IUIContext);
         } /* UI */
     } /* Windows */
 } /* ABI */

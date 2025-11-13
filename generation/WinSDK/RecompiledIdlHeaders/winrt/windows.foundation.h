@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1161,7 +1161,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAsyncActionCompletedHandler = __uuidof(IAsyncActionCompletedHandler);
+            extern MIDL_CONST_ID IID& IID_IAsyncActionCompletedHandler = _uuidof(IAsyncActionCompletedHandler);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1190,7 +1190,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Invoke(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IDeferralCompletedHandler = __uuidof(IDeferralCompletedHandler);
+            extern MIDL_CONST_ID IID& IID_IDeferralCompletedHandler = _uuidof(IDeferralCompletedHandler);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1225,7 +1225,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IPropertySet = __uuidof(IPropertySet);
+                extern MIDL_CONST_ID IID& IID_IPropertySet = _uuidof(IPropertySet);
             } /* Collections */
         } /* Foundation */
     } /* Windows */
@@ -1265,7 +1265,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE GetResults(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IAsyncAction = __uuidof(IAsyncAction);
+            extern MIDL_CONST_ID IID& IID_IAsyncAction = _uuidof(IAsyncAction);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1295,7 +1295,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Close(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IClosable = __uuidof(IClosable);
+            extern MIDL_CONST_ID IID& IID_IClosable = _uuidof(IClosable);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1330,7 +1330,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IDeferral = __uuidof(IDeferral);
+            extern MIDL_CONST_ID IID& IID_IDeferral = _uuidof(IDeferral);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1365,7 +1365,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IDeferralFactory = __uuidof(IDeferralFactory);
+            extern MIDL_CONST_ID IID& IID_IDeferralFactory = _uuidof(IDeferralFactory);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1398,7 +1398,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IGetActivationFactory = __uuidof(IGetActivationFactory);
+            extern MIDL_CONST_ID IID& IID_IGetActivationFactory = _uuidof(IGetActivationFactory);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1440,7 +1440,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IGuidHelperStatics = __uuidof(IGuidHelperStatics);
+            extern MIDL_CONST_ID IID& IID_IGuidHelperStatics = _uuidof(IGuidHelperStatics);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1475,7 +1475,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IMemoryBuffer = __uuidof(IMemoryBuffer);
+            extern MIDL_CONST_ID IID& IID_IMemoryBuffer = _uuidof(IMemoryBuffer);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1510,7 +1510,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IMemoryBufferFactory = __uuidof(IMemoryBufferFactory);
+            extern MIDL_CONST_ID IID& IID_IMemoryBufferFactory = _uuidof(IMemoryBufferFactory);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1552,7 +1552,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IMemoryBufferReference = __uuidof(IMemoryBufferReference);
+            extern MIDL_CONST_ID IID& IID_IMemoryBufferReference = _uuidof(IMemoryBufferReference);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1717,7 +1717,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPropertyValue = __uuidof(IPropertyValue);
+            extern MIDL_CONST_ID IID& IID_IPropertyValue = _uuidof(IPropertyValue);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1922,7 +1922,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IPropertyValueStatics = __uuidof(IPropertyValueStatics);
+            extern MIDL_CONST_ID IID& IID_IPropertyValueStatics = _uuidof(IPropertyValueStatics);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1954,7 +1954,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IStringable = __uuidof(IStringable);
+            extern MIDL_CONST_ID IID& IID_IStringable = _uuidof(IStringable);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -1993,7 +1993,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IUriEscapeStatics = __uuidof(IUriEscapeStatics);
+            extern MIDL_CONST_ID IID& IID_IUriEscapeStatics = _uuidof(IUriEscapeStatics);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2077,7 +2077,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IUriRuntimeClass = __uuidof(IUriRuntimeClass);
+            extern MIDL_CONST_ID IID& IID_IUriRuntimeClass = _uuidof(IUriRuntimeClass);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2117,7 +2117,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IUriRuntimeClassFactory = __uuidof(IUriRuntimeClassFactory);
+            extern MIDL_CONST_ID IID& IID_IUriRuntimeClassFactory = _uuidof(IUriRuntimeClassFactory);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2154,7 +2154,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IUriRuntimeClassWithAbsoluteCanonicalUri = __uuidof(IUriRuntimeClassWithAbsoluteCanonicalUri);
+            extern MIDL_CONST_ID IID& IID_IUriRuntimeClassWithAbsoluteCanonicalUri = _uuidof(IUriRuntimeClassWithAbsoluteCanonicalUri);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2189,7 +2189,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderEntry = __uuidof(IWwwFormUrlDecoderEntry);
+            extern MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderEntry = _uuidof(IWwwFormUrlDecoderEntry);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2228,7 +2228,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderRuntimeClass = __uuidof(IWwwFormUrlDecoderRuntimeClass);
+            extern MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderRuntimeClass = _uuidof(IWwwFormUrlDecoderRuntimeClass);
         } /* Foundation */
     } /* Windows */
 } /* ABI */
@@ -2263,7 +2263,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderRuntimeClassFactory = __uuidof(IWwwFormUrlDecoderRuntimeClassFactory);
+            extern MIDL_CONST_ID IID& IID_IWwwFormUrlDecoderRuntimeClassFactory = _uuidof(IWwwFormUrlDecoderRuntimeClassFactory);
         } /* Foundation */
     } /* Windows */
 } /* ABI */

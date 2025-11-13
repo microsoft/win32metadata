@@ -65,12 +65,12 @@ mciSendCommandW(
     _In_opt_ DWORD_PTR dwParam1,
     _In_opt_ DWORD_PTR dwParam2
     );
-
 #ifdef UNICODE
 #define mciSendCommand  mciSendCommandW
 #else
 #define mciSendCommand  mciSendCommandA
 #endif // !UNICODE
+
 WINMMAPI
 MCIERROR
 WINAPI
@@ -90,12 +90,12 @@ mciSendStringW(
     _In_ UINT uReturnLength,
     _In_opt_ HWND hwndCallback
     );
-
 #ifdef UNICODE
 #define mciSendString  mciSendStringW
 #else
 #define mciSendString  mciSendStringA
 #endif // !UNICODE
+
 WINMMAPI
 MCIDEVICEID
 WINAPI
@@ -109,12 +109,12 @@ WINAPI
 mciGetDeviceIDW(
     _In_ LPCWSTR pszDevice
     );
-
 #ifdef UNICODE
 #define mciGetDeviceID  mciGetDeviceIDW
 #else
 #define mciGetDeviceID  mciGetDeviceIDA
 #endif // !UNICODE
+
 WINMMAPI
 MCIDEVICEID
 WINAPI
@@ -130,12 +130,12 @@ mciGetDeviceIDFromElementIDW(
     _In_ DWORD dwElementID,
     _In_ LPCWSTR lpstrType
     );
-
 #ifdef UNICODE
 #define mciGetDeviceIDFromElementID  mciGetDeviceIDFromElementIDW
 #else
 #define mciGetDeviceIDFromElementID  mciGetDeviceIDFromElementIDA
 #endif // !UNICODE
+
 WINMMAPI
 BOOL
 WINAPI
@@ -153,7 +153,6 @@ mciGetErrorStringW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
-
 #ifdef UNICODE
 #define mciGetErrorString  mciGetErrorStringW
 #else
@@ -177,6 +176,7 @@ mciSetYieldProc(
     );
 
 #if (WINVER >= 0x030a)
+
 WINMMAPI
 HTASK
 WINAPI
@@ -191,17 +191,16 @@ mciGetYieldProc(
     _In_ MCIDEVICEID mciId,
     _In_ LPDWORD pdwYieldData
     );
-
 #endif /* ifdef WINVER >= 0x030a */
 
 #if (WINVER < 0x030a)
+
 WINMMAPI
 BOOL
 WINAPI
 mciExecute(
     LPCSTR pszCommand
     );
-
 #endif /* ifdef WINVER < 0x030a */
 
 /* MCI error return values */
@@ -1348,6 +1347,7 @@ typedef struct tagMCI_OVLY_LOAD_PARMS {
 //
 // APIs moved from mmddk.h - function prototypes for MCI driver functions
 //
+
 DWORD_PTR
 APIENTRY
 mciGetDriverData(

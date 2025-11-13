@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -666,7 +666,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentAppCanMakePaymentTriggerDetails = __uuidof(IPaymentAppCanMakePaymentTriggerDetails);
+                    extern MIDL_CONST_ID IID& IID_IPaymentAppCanMakePaymentTriggerDetails = _uuidof(IPaymentAppCanMakePaymentTriggerDetails);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */
@@ -708,7 +708,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentAppManager = __uuidof(IPaymentAppManager);
+                    extern MIDL_CONST_ID IID& IID_IPaymentAppManager = _uuidof(IPaymentAppManager);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */
@@ -746,7 +746,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentAppManagerStatics = __uuidof(IPaymentAppManagerStatics);
+                    extern MIDL_CONST_ID IID& IID_IPaymentAppManagerStatics = _uuidof(IPaymentAppManagerStatics);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */
@@ -815,7 +815,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Reject(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentTransaction = __uuidof(IPaymentTransaction);
+                    extern MIDL_CONST_ID IID& IID_IPaymentTransaction = _uuidof(IPaymentTransaction);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */
@@ -853,7 +853,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentTransactionAcceptResult = __uuidof(IPaymentTransactionAcceptResult);
+                    extern MIDL_CONST_ID IID& IID_IPaymentTransactionAcceptResult = _uuidof(IPaymentTransactionAcceptResult);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */
@@ -892,7 +892,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPaymentTransactionStatics = __uuidof(IPaymentTransactionStatics);
+                    extern MIDL_CONST_ID IID& IID_IPaymentTransactionStatics = _uuidof(IPaymentTransactionStatics);
                 } /* Provider */
             } /* Payments */
         } /* ApplicationModel */

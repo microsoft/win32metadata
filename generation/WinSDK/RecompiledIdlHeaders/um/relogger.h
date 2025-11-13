@@ -219,8 +219,13 @@ typedef struct _EVENT_RECORD *PEVENT_RECORD;
 typedef const EVENT_RECORD *PCEVENT_RECORD;
 
 #endif
-typedef ULONG64 RELOGSTREAM_ID;
+#ifndef _TRACEHANDLE_DEFINED
+#define _TRACEHANDLE_DEFINED
+typedef ULONG64 TRACEHANDLE;
 
+typedef ULONG64 *PTRACEHANDLE;
+
+#endif
 
 
 
@@ -607,7 +612,7 @@ EXTERN_C const IID IID_ITraceRelogger;
             /* [annotation][in] */ 
             _In_  void *UserContext,
             /* [annotation][retval][out] */ 
-            _Out_retval_  RELOGSTREAM_ID *TraceStreamId) = 0;
+            _Out_retval_  TRACEHANDLE *TraceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRealtimeTraceStream( 
             /* [annotation][in] */ 
@@ -615,7 +620,7 @@ EXTERN_C const IID IID_ITraceRelogger;
             /* [annotation][in] */ 
             _In_  void *UserContext,
             /* [annotation][retval][out] */ 
-            _Out_retval_  RELOGSTREAM_ID *TraceStreamId) = 0;
+            _Out_retval_  TRACEHANDLE *TraceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterCallback( 
             /* [annotation][in] */ 
@@ -627,7 +632,7 @@ EXTERN_C const IID IID_ITraceRelogger;
         
         virtual HRESULT STDMETHODCALLTYPE CreateEventInstance( 
             /* [annotation][in] */ 
-            _In_  RELOGSTREAM_ID TraceStreamId,
+            _In_  TRACEHANDLE TraceHandle,
             /* [annotation][in] */ 
             _In_  ULONG Flags,
             /* [annotation][retval][out] */ 
@@ -678,7 +683,7 @@ EXTERN_C const IID IID_ITraceRelogger;
             /* [annotation][in] */ 
             _In_  void *UserContext,
             /* [annotation][retval][out] */ 
-            _Out_retval_  RELOGSTREAM_ID *TraceStreamId);
+            _Out_retval_  TRACEHANDLE *TraceHandle);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, AddRealtimeTraceStream)
         HRESULT ( STDMETHODCALLTYPE *AddRealtimeTraceStream )( 
@@ -688,7 +693,7 @@ EXTERN_C const IID IID_ITraceRelogger;
             /* [annotation][in] */ 
             _In_  void *UserContext,
             /* [annotation][retval][out] */ 
-            _Out_retval_  RELOGSTREAM_ID *TraceStreamId);
+            _Out_retval_  TRACEHANDLE *TraceHandle);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, RegisterCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterCallback )( 
@@ -706,7 +711,7 @@ EXTERN_C const IID IID_ITraceRelogger;
         HRESULT ( STDMETHODCALLTYPE *CreateEventInstance )( 
             ITraceRelogger * This,
             /* [annotation][in] */ 
-            _In_  RELOGSTREAM_ID TraceStreamId,
+            _In_  TRACEHANDLE TraceHandle,
             /* [annotation][in] */ 
             _In_  ULONG Flags,
             /* [annotation][retval][out] */ 
@@ -755,11 +760,11 @@ EXTERN_C const IID IID_ITraceRelogger;
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define ITraceRelogger_AddLogfileTraceStream(This,LogfileName,UserContext,TraceStreamId)	\
-    ( (This)->lpVtbl -> AddLogfileTraceStream(This,LogfileName,UserContext,TraceStreamId) ) 
+#define ITraceRelogger_AddLogfileTraceStream(This,LogfileName,UserContext,TraceHandle)	\
+    ( (This)->lpVtbl -> AddLogfileTraceStream(This,LogfileName,UserContext,TraceHandle) ) 
 
-#define ITraceRelogger_AddRealtimeTraceStream(This,LoggerName,UserContext,TraceStreamId)	\
-    ( (This)->lpVtbl -> AddRealtimeTraceStream(This,LoggerName,UserContext,TraceStreamId) ) 
+#define ITraceRelogger_AddRealtimeTraceStream(This,LoggerName,UserContext,TraceHandle)	\
+    ( (This)->lpVtbl -> AddRealtimeTraceStream(This,LoggerName,UserContext,TraceHandle) ) 
 
 #define ITraceRelogger_RegisterCallback(This,Callback)	\
     ( (This)->lpVtbl -> RegisterCallback(This,Callback) ) 
@@ -767,8 +772,8 @@ EXTERN_C const IID IID_ITraceRelogger;
 #define ITraceRelogger_Inject(This,Event)	\
     ( (This)->lpVtbl -> Inject(This,Event) ) 
 
-#define ITraceRelogger_CreateEventInstance(This,TraceStreamId,Flags,Event)	\
-    ( (This)->lpVtbl -> CreateEventInstance(This,TraceStreamId,Flags,Event) ) 
+#define ITraceRelogger_CreateEventInstance(This,TraceHandle,Flags,Event)	\
+    ( (This)->lpVtbl -> CreateEventInstance(This,TraceHandle,Flags,Event) ) 
 
 #define ITraceRelogger_ProcessTrace(This)	\
     ( (This)->lpVtbl -> ProcessTrace(This) ) 

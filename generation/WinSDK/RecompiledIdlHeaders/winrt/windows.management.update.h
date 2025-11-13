@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MANAGEMENT_UPDATE_WINDOWSUPDATECONTRACT_VERSION)
@@ -1299,7 +1299,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPreviewBuildsManager = __uuidof(IPreviewBuildsManager);
+                extern MIDL_CONST_ID IID& IID_IPreviewBuildsManager = _uuidof(IPreviewBuildsManager);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1338,7 +1338,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPreviewBuildsManagerStatics = __uuidof(IPreviewBuildsManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IPreviewBuildsManagerStatics = _uuidof(IPreviewBuildsManagerStatics);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1374,7 +1374,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPreviewBuildsState = __uuidof(IPreviewBuildsState);
+                extern MIDL_CONST_ID IID& IID_IPreviewBuildsState = _uuidof(IPreviewBuildsState);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1478,7 +1478,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE AcceptEula(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdate = __uuidof(IWindowsUpdate);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdate = _uuidof(IWindowsUpdate);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1523,7 +1523,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateActionCompletedEventArgs = __uuidof(IWindowsUpdateActionCompletedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateActionCompletedEventArgs = _uuidof(IWindowsUpdateActionCompletedEventArgs);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1562,7 +1562,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateActionProgress = __uuidof(IWindowsUpdateActionProgress);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateActionProgress = _uuidof(IWindowsUpdateActionProgress);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1607,7 +1607,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateActionResult = __uuidof(IWindowsUpdateActionResult);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateActionResult = _uuidof(IWindowsUpdateActionResult);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1659,7 +1659,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateAdministrator = __uuidof(IWindowsUpdateAdministrator);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateAdministrator = _uuidof(IWindowsUpdateAdministrator);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1715,7 +1715,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateAdministratorStatics = __uuidof(IWindowsUpdateAdministratorStatics);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateAdministratorStatics = _uuidof(IWindowsUpdateAdministratorStatics);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1778,7 +1778,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateApprovalData = __uuidof(IWindowsUpdateApprovalData);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateApprovalData = _uuidof(IWindowsUpdateApprovalData);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1817,7 +1817,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateAttentionRequiredInfo = __uuidof(IWindowsUpdateAttentionRequiredInfo);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateAttentionRequiredInfo = _uuidof(IWindowsUpdateAttentionRequiredInfo);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1856,7 +1856,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateAttentionRequiredReasonChangedEventArgs = __uuidof(IWindowsUpdateAttentionRequiredReasonChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateAttentionRequiredReasonChangedEventArgs = _uuidof(IWindowsUpdateAttentionRequiredReasonChangedEventArgs);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1895,7 +1895,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateGetAdministratorResult = __uuidof(IWindowsUpdateGetAdministratorResult);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateGetAdministratorResult = _uuidof(IWindowsUpdateGetAdministratorResult);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -1952,7 +1952,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateItem = __uuidof(IWindowsUpdateItem);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateItem = _uuidof(IWindowsUpdateItem);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2050,7 +2050,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateManager = __uuidof(IWindowsUpdateManager);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateManager = _uuidof(IWindowsUpdateManager);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2087,7 +2087,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateManagerFactory = __uuidof(IWindowsUpdateManagerFactory);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateManagerFactory = _uuidof(IWindowsUpdateManagerFactory);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2126,7 +2126,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateProgressChangedEventArgs = __uuidof(IWindowsUpdateProgressChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateProgressChangedEventArgs = _uuidof(IWindowsUpdateProgressChangedEventArgs);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2201,7 +2201,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateRestartRequestOptions = __uuidof(IWindowsUpdateRestartRequestOptions);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateRestartRequestOptions = _uuidof(IWindowsUpdateRestartRequestOptions);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2242,7 +2242,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateRestartRequestOptionsFactory = __uuidof(IWindowsUpdateRestartRequestOptionsFactory);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateRestartRequestOptionsFactory = _uuidof(IWindowsUpdateRestartRequestOptionsFactory);
             } /* Update */
         } /* Management */
     } /* Windows */
@@ -2287,7 +2287,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsUpdateScanCompletedEventArgs = __uuidof(IWindowsUpdateScanCompletedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IWindowsUpdateScanCompletedEventArgs = _uuidof(IWindowsUpdateScanCompletedEventArgs);
             } /* Update */
         } /* Management */
     } /* Windows */

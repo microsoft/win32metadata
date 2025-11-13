@@ -641,10 +641,7 @@ namespace Windows
                 VideoCall      = 0x8,
                 SocialFeeds    = 0x10,
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
-                Share          = 0x20,
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [experimental]
-                Activity       = 0x40
+                Share          = 0x20
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

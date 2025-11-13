@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -687,7 +687,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cConnectionSettings = __uuidof(II2cConnectionSettings);
+                extern MIDL_CONST_ID IID& IID_II2cConnectionSettings = _uuidof(II2cConnectionSettings);
             } /* I2c */
         } /* Devices */
     } /* Windows */
@@ -724,7 +724,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cConnectionSettingsFactory = __uuidof(II2cConnectionSettingsFactory);
+                extern MIDL_CONST_ID IID& IID_II2cConnectionSettingsFactory = _uuidof(II2cConnectionSettingsFactory);
             } /* I2c */
         } /* Devices */
     } /* Windows */
@@ -761,7 +761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cController = __uuidof(II2cController);
+                extern MIDL_CONST_ID IID& IID_II2cController = _uuidof(II2cController);
             } /* I2c */
         } /* Devices */
     } /* Windows */
@@ -801,7 +801,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cControllerStatics = __uuidof(II2cControllerStatics);
+                extern MIDL_CONST_ID IID& IID_II2cControllerStatics = _uuidof(II2cControllerStatics);
             } /* I2c */
         } /* Devices */
     } /* Windows */
@@ -874,7 +874,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cDevice = __uuidof(II2cDevice);
+                extern MIDL_CONST_ID IID& IID_II2cDevice = _uuidof(II2cDevice);
             } /* I2c */
         } /* Devices */
     } /* Windows */
@@ -917,7 +917,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_II2cDeviceStatics = __uuidof(II2cDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_II2cDeviceStatics = _uuidof(II2cDeviceStatics);
             } /* I2c */
         } /* Devices */
     } /* Windows */

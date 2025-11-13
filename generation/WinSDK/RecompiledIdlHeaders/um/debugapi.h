@@ -26,13 +26,13 @@ extern "C" {
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
+
 WINBASEAPI
 BOOL
 WINAPI
 IsDebuggerPresent(
     VOID
     );
-
 #endif
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -61,7 +61,6 @@ WINAPI
 OutputDebugStringW(
     _In_opt_ LPCWSTR lpOutputString
     );
-
 #ifdef UNICODE
 #define OutputDebugString  OutputDebugStringW
 #else

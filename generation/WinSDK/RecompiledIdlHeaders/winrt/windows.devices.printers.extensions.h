@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -588,7 +588,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrint3DWorkflow = __uuidof(IPrint3DWorkflow);
+                    extern MIDL_CONST_ID IID& IID_IPrint3DWorkflow = _uuidof(IPrint3DWorkflow);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -630,7 +630,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrint3DWorkflow2 = __uuidof(IPrint3DWorkflow2);
+                    extern MIDL_CONST_ID IID& IID_IPrint3DWorkflow2 = _uuidof(IPrint3DWorkflow2);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -677,7 +677,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrint3DWorkflowPrintRequestedEventArgs = __uuidof(IPrint3DWorkflowPrintRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IPrint3DWorkflowPrintRequestedEventArgs = _uuidof(IPrint3DWorkflowPrintRequestedEventArgs);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -715,7 +715,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrint3DWorkflowPrinterChangedEventArgs = __uuidof(IPrint3DWorkflowPrinterChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IPrint3DWorkflowPrinterChangedEventArgs = _uuidof(IPrint3DWorkflowPrinterChangedEventArgs);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -754,7 +754,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintExtensionContextStatic = __uuidof(IPrintExtensionContextStatic);
+                    extern MIDL_CONST_ID IID& IID_IPrintExtensionContextStatic = _uuidof(IPrintExtensionContextStatic);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -798,7 +798,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintNotificationEventDetails = __uuidof(IPrintNotificationEventDetails);
+                    extern MIDL_CONST_ID IID& IID_IPrintNotificationEventDetails = _uuidof(IPrintNotificationEventDetails);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -843,7 +843,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTaskConfiguration = __uuidof(IPrintTaskConfiguration);
+                    extern MIDL_CONST_ID IID& IID_IPrintTaskConfiguration = _uuidof(IPrintTaskConfiguration);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -888,7 +888,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequest = __uuidof(IPrintTaskConfigurationSaveRequest);
+                    extern MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequest = _uuidof(IPrintTaskConfigurationSaveRequest);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -924,7 +924,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequestedDeferral = __uuidof(IPrintTaskConfigurationSaveRequestedDeferral);
+                    extern MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequestedDeferral = _uuidof(IPrintTaskConfigurationSaveRequestedDeferral);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */
@@ -962,7 +962,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequestedEventArgs = __uuidof(IPrintTaskConfigurationSaveRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IPrintTaskConfigurationSaveRequestedEventArgs = _uuidof(IPrintTaskConfigurationSaveRequestedEventArgs);
                 } /* Extensions */
             } /* Printers */
         } /* Devices */

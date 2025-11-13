@@ -134,8 +134,6 @@ library SearchAPILib
 
    [public] interface ISearchCatalogManager2;
 
-   [public] interface ISearchCatalogManager3;
-
    [public] interface ISearchQueryHelper;
 
    [public] interface ISearchItemsChangedSink;

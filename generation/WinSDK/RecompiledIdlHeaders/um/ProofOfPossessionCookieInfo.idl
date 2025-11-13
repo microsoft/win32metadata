@@ -33,14 +33,6 @@ cpp_quote("     }                                           ")
 cpp_quote("     CoTaskMemFree(cookieInfo);                  ")
 cpp_quote("}                                                ")
 
-cpp_quote("// Flags that can be passed into GetCookieInfoForUriWithOptions")
-cpp_quote("// to control the behavior")
-cpp_quote("typedef enum _PROOF_OF_POSSESSION_FLAGS : DWORD")
-cpp_quote("{")
-cpp_quote("    PROOF_OF_POSSESSION_DEFAULT                      = 0x0000000000000000,")
-cpp_quote("    PROOF_OF_POSSESSION_ALLOW_SILENT_REQUESTS        = 0x0000000000000001,")
-cpp_quote("} PROOF_OF_POSSESSION_FLAGS;")
-
 //
 // Interface to get information for creating proof of possession cookies.
 // CoCreateInstance(__uuidof(ProofOfPossessionCookieInfoManager), nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&manager))
@@ -61,7 +53,7 @@ interface IProofOfPossessionCookieInfoManager : IUnknown
     HRESULT GetCookieInfoForUri(
         [in]                              LPCWSTR                       uri,
         [out]                             DWORD*                        cookieInfoCount,
-        [out, size_is(, *cookieInfoCount)] ProofOfPossessionCookieInfo** cookieInfo);
+        [out, size_is(,*cookieInfoCount)] ProofOfPossessionCookieInfo** cookieInfo);
 }
 
 //
@@ -88,30 +80,6 @@ interface IProofOfPossessionCookieInfoManager2 : IUnknown
         [in]                               IInspectable*                 webAccount, // Windows.Security.Credentials.WebAccount as IInspectable.
         [in]                               LPCWSTR                       uri,
         [out]                              DWORD*                        cookieInfoCount,
-        [out, size_is(, *cookieInfoCount)] ProofOfPossessionCookieInfo** cookieInfo);
-}
-
-//
-// Interface to get information for creating proof of possession cookies, with options.
-// CoCreateInstance(__uuidof(ProofOfPossessionCookieInfoManager), nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&manager))
-// to create an instance of the CookieInfo manager (IProofOfPossessionCookieInfoManager).
-// 
-[
-    object,
-    uuid(c8891744-32bd-4a77-b92c-0e79a2823b96),
-    pointer_default(unique)
-]
-interface IProofOfPossessionCookieInfoManager3 : IUnknown
-{
-    // 
-    // Gets cookie information corresponding to the supplied URI with the supplied options.
-    // A case sensitive string search is performed on the supplied URI.
-    // Free the returned array using FreeProofOfPossessionCookieInfoArray().
-    // 
-    HRESULT GetCookieInfoForUriWithOptions(
-        [in]                              LPCWSTR                        uri,
-        [in]                              DWORD                          options,
-        [out]                             DWORD*                         cookieInfoCount,
         [out, size_is(, *cookieInfoCount)] ProofOfPossessionCookieInfo** cookieInfo);
 }
 
@@ -165,9 +133,8 @@ library ProofOfPossessionCookieInfoManagerLib
     {
         [default] interface IProofOfPossessionCookieInfoManager;
         interface IProofOfPossessionCookieInfoManager2;
-        interface IProofOfPossessionCookieInfoManager3;
         interface IProofOfPossessionCookieInfoManager4;
-};
+    };
 }
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")

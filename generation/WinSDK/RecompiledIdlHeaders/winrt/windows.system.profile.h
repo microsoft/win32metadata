@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1120,7 +1120,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAnalyticsInfoStatics = __uuidof(IAnalyticsInfoStatics);
+                extern MIDL_CONST_ID IID& IID_IAnalyticsInfoStatics = _uuidof(IAnalyticsInfoStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1157,7 +1157,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAnalyticsInfoStatics2 = __uuidof(IAnalyticsInfoStatics2);
+                extern MIDL_CONST_ID IID& IID_IAnalyticsInfoStatics2 = _uuidof(IAnalyticsInfoStatics2);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1196,7 +1196,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAnalyticsVersionInfo = __uuidof(IAnalyticsVersionInfo);
+                extern MIDL_CONST_ID IID& IID_IAnalyticsVersionInfo = _uuidof(IAnalyticsVersionInfo);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1232,7 +1232,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAnalyticsVersionInfo2 = __uuidof(IAnalyticsVersionInfo2);
+                extern MIDL_CONST_ID IID& IID_IAnalyticsVersionInfo2 = _uuidof(IAnalyticsVersionInfo2);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1269,7 +1269,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAppApplicabilityStatics = __uuidof(IAppApplicabilityStatics);
+                extern MIDL_CONST_ID IID& IID_IAppApplicabilityStatics = _uuidof(IAppApplicabilityStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1305,7 +1305,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IEducationSettingsStatics = __uuidof(IEducationSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IEducationSettingsStatics = _uuidof(IEducationSettingsStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1342,7 +1342,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHardwareIdentificationStatics = __uuidof(IHardwareIdentificationStatics);
+                extern MIDL_CONST_ID IID& IID_IHardwareIdentificationStatics = _uuidof(IHardwareIdentificationStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1384,7 +1384,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHardwareToken = __uuidof(IHardwareToken);
+                extern MIDL_CONST_ID IID& IID_IHardwareToken = _uuidof(IHardwareToken);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1483,7 +1483,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKnownRetailInfoPropertiesStatics = __uuidof(IKnownRetailInfoPropertiesStatics);
+                extern MIDL_CONST_ID IID& IID_IKnownRetailInfoPropertiesStatics = _uuidof(IKnownRetailInfoPropertiesStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1519,7 +1519,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPlatformAutomaticAppSignInManagerStatics = __uuidof(IPlatformAutomaticAppSignInManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IPlatformAutomaticAppSignInManagerStatics = _uuidof(IPlatformAutomaticAppSignInManagerStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1566,7 +1566,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPlatformDiagnosticsAndUsageDataSettingsStatics = __uuidof(IPlatformDiagnosticsAndUsageDataSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_IPlatformDiagnosticsAndUsageDataSettingsStatics = _uuidof(IPlatformDiagnosticsAndUsageDataSettingsStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1605,7 +1605,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRetailInfoStatics = __uuidof(IRetailInfoStatics);
+                extern MIDL_CONST_ID IID& IID_IRetailInfoStatics = _uuidof(IRetailInfoStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1641,7 +1641,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISharedModeSettingsStatics = __uuidof(ISharedModeSettingsStatics);
+                extern MIDL_CONST_ID IID& IID_ISharedModeSettingsStatics = _uuidof(ISharedModeSettingsStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1677,7 +1677,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISharedModeSettingsStatics2 = __uuidof(ISharedModeSettingsStatics2);
+                extern MIDL_CONST_ID IID& IID_ISharedModeSettingsStatics2 = _uuidof(ISharedModeSettingsStatics2);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1720,7 +1720,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISmartAppControlPolicyStatics = __uuidof(ISmartAppControlPolicyStatics);
+                extern MIDL_CONST_ID IID& IID_ISmartAppControlPolicyStatics = _uuidof(ISmartAppControlPolicyStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1759,7 +1759,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISystemIdentificationInfo = __uuidof(ISystemIdentificationInfo);
+                extern MIDL_CONST_ID IID& IID_ISystemIdentificationInfo = _uuidof(ISystemIdentificationInfo);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1799,7 +1799,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISystemIdentificationStatics = __uuidof(ISystemIdentificationStatics);
+                extern MIDL_CONST_ID IID& IID_ISystemIdentificationStatics = _uuidof(ISystemIdentificationStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1842,7 +1842,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISystemSetupInfoStatics = __uuidof(ISystemSetupInfoStatics);
+                extern MIDL_CONST_ID IID& IID_ISystemSetupInfoStatics = _uuidof(ISystemSetupInfoStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1881,7 +1881,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUnsupportedAppRequirement = __uuidof(IUnsupportedAppRequirement);
+                extern MIDL_CONST_ID IID& IID_IUnsupportedAppRequirement = _uuidof(IUnsupportedAppRequirement);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1933,7 +1933,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWindowsIntegrityPolicyStatics = __uuidof(IWindowsIntegrityPolicyStatics);
+                extern MIDL_CONST_ID IID& IID_IWindowsIntegrityPolicyStatics = _uuidof(IWindowsIntegrityPolicyStatics);
             } /* Profile */
         } /* System */
     } /* Windows */
@@ -1950,8 +1950,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5244,8 +5244,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

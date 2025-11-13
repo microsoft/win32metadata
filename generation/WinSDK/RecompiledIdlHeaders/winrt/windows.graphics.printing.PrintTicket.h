@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -105,7 +105,6 @@
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
 #include "Windows.Data.Xml.Dom.h"
-#include "Windows.Storage.Streams.h"
 // Importing Collections header
 #include <windows.foundation.collections.h>
 
@@ -229,23 +228,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
-#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Graphics {
-            namespace Printing {
-                namespace PrintTicket {
-                    interface IWorkflowPrintTicketFactory;
-                } /* PrintTicket */
-            } /* Printing */
-        } /* Graphics */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicketFactory
-
-#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketValidationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketValidationResult_FWD_DEFINED__
@@ -455,21 +437,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CFoundation_CIAsyncAction ABI::Windows::Foundation::IAsyncAction
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
-#define ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Storage {
-            namespace Streams {
-                interface IInputStream;
-            } /* Streams */
-        } /* Storage */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CStorage_CStreams_CIInputStream ABI::Windows::Storage::Streams::IInputStream
-
-#endif // ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 
 namespace ABI {
     namespace Windows {
@@ -744,7 +711,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketCapabilities = __uuidof(IPrintTicketCapabilities);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketCapabilities = _uuidof(IPrintTicketCapabilities);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -808,7 +775,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketFeature = __uuidof(IPrintTicketFeature);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketFeature = _uuidof(IPrintTicketFeature);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -875,7 +842,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketOption = __uuidof(IPrintTicketOption);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketOption = _uuidof(IPrintTicketOption);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -931,7 +898,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketParameterDefinition = __uuidof(IPrintTicketParameterDefinition);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketParameterDefinition = _uuidof(IPrintTicketParameterDefinition);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -981,7 +948,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketParameterInitializer = __uuidof(IPrintTicketParameterInitializer);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketParameterInitializer = _uuidof(IPrintTicketParameterInitializer);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -1025,7 +992,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IPrintTicketValue = __uuidof(IPrintTicketValue);
+                    extern MIDL_CONST_ID IID& IID_IPrintTicketValue = _uuidof(IPrintTicketValue);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -1149,7 +1116,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWorkflowPrintTicket = __uuidof(IWorkflowPrintTicket);
+                    extern MIDL_CONST_ID IID& IID_IWorkflowPrintTicket = _uuidof(IWorkflowPrintTicket);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -1159,50 +1126,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
-
-/*
- *
- * Interface Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintTicket_IWorkflowPrintTicketFactory[] = L"Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory";
-namespace ABI {
-    namespace Windows {
-        namespace Graphics {
-            namespace Printing {
-                namespace PrintTicket {
-                    MIDL_INTERFACE("966d1166-d9c7-569e-b7d8-f2b341c8f976")
-                    IWorkflowPrintTicketFactory : public IInspectable
-                    {
-                    public:
-                        virtual HRESULT STDMETHODCALLTYPE CreateInstance(
-                            HSTRING printerName,
-                            ABI::Windows::Storage::Streams::IInputStream* printTicketStream,
-                            ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket** value
-                            ) = 0;
-                    };
-
-                    MIDL_CONST_ID IID& IID_IWorkflowPrintTicketFactory = __uuidof(IWorkflowPrintTicketFactory);
-                } /* PrintTicket */
-            } /* Printing */
-        } /* Graphics */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory;
-#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -1234,7 +1157,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IWorkflowPrintTicketValidationResult = __uuidof(IWorkflowPrintTicketValidationResult);
+                    extern MIDL_CONST_ID IID& IID_IWorkflowPrintTicketValidationResult = _uuidof(IWorkflowPrintTicketValidationResult);
                 } /* PrintTicket */
             } /* Printing */
         } /* Graphics */
@@ -1377,9 +1300,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
- * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
- *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicket ** Default Interface **
  *
@@ -1459,12 +1379,6 @@ typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIPrintTicke
 typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket;
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
-#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory;
-
-#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketValidationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketValidationResult_FWD_DEFINED__
@@ -1842,12 +1756,6 @@ typedef interface __x_ABI_CWindows_CData_CXml_CDom_CIXmlNode __x_ABI_CWindows_CD
 typedef interface __x_ABI_CWindows_CFoundation_CIAsyncAction __x_ABI_CWindows_CFoundation_CIAsyncAction;
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
-#define ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CStorage_CStreams_CIInputStream __x_ABI_CWindows_CStorage_CStreams_CIInputStream;
-
-#endif // ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CPrintTicketFeatureSelectionType __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CPrintTicketFeatureSelectionType;
 
@@ -2767,81 +2675,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkf
 
 /*
  *
- * Interface Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
- * Interface is a part of the implementation of type Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket
- *
- */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintTicket_IWorkflowPrintTicketFactory[] = L"Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory";
-typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactoryVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory* This,
-        HSTRING printerName,
-        __x_ABI_CWindows_CStorage_CStreams_CIInputStream* printTicketStream,
-        __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket** value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactoryVtbl;
-
-interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory
-{
-    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactoryVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_CreateInstance(This, printerName, printTicketStream, value) \
-    ((This)->lpVtbl->CreateInstance(This, printerName, printTicketStream, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory;
-#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-
-/*
- *
  * Interface Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketValidationResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
@@ -3045,9 +2878,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
- *
- * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicket ** Default Interface **

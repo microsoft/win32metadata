@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -170,7 +170,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGraphicsEffect = __uuidof(IGraphicsEffect);
+                extern MIDL_CONST_ID IID& IID_IGraphicsEffect = _uuidof(IGraphicsEffect);
             } /* Effects */
         } /* Graphics */
     } /* Windows */
@@ -201,7 +201,7 @@ namespace ABI {
                 public:
                 };
 
-                MIDL_CONST_ID IID& IID_IGraphicsEffectSource = __uuidof(IGraphicsEffectSource);
+                extern MIDL_CONST_ID IID& IID_IGraphicsEffectSource = _uuidof(IGraphicsEffectSource);
             } /* Effects */
         } /* Graphics */
     } /* Windows */

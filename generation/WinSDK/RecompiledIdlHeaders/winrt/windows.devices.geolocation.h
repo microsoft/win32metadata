@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1801,7 +1801,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICivicAddress = __uuidof(ICivicAddress);
+                extern MIDL_CONST_ID IID& IID_ICivicAddress = _uuidof(ICivicAddress);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1852,7 +1852,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoboundingBox = __uuidof(IGeoboundingBox);
+                extern MIDL_CONST_ID IID& IID_IGeoboundingBox = _uuidof(IGeoboundingBox);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1903,7 +1903,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoboundingBoxFactory = __uuidof(IGeoboundingBoxFactory);
+                extern MIDL_CONST_ID IID& IID_IGeoboundingBoxFactory = _uuidof(IGeoboundingBoxFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1951,7 +1951,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoboundingBoxStatics = __uuidof(IGeoboundingBoxStatics);
+                extern MIDL_CONST_ID IID& IID_IGeoboundingBoxStatics = _uuidof(IGeoboundingBoxStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -1993,7 +1993,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocircle = __uuidof(IGeocircle);
+                extern MIDL_CONST_ID IID& IID_IGeocircle = _uuidof(IGeocircle);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2044,7 +2044,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocircleFactory = __uuidof(IGeocircleFactory);
+                extern MIDL_CONST_ID IID& IID_IGeocircleFactory = _uuidof(IGeocircleFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2110,7 +2110,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinate = __uuidof(IGeocoordinate);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinate = _uuidof(IGeocoordinate);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2152,7 +2152,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData = __uuidof(IGeocoordinateSatelliteData);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData = _uuidof(IGeocoordinateSatelliteData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2191,7 +2191,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData2 = __uuidof(IGeocoordinateSatelliteData2);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateSatelliteData2 = _uuidof(IGeocoordinateSatelliteData2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2227,7 +2227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateWithPoint = __uuidof(IGeocoordinateWithPoint);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPoint = _uuidof(IGeocoordinateWithPoint);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2269,7 +2269,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionData = __uuidof(IGeocoordinateWithPositionData);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionData = _uuidof(IGeocoordinateWithPositionData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2305,7 +2305,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionSourceTimestamp = __uuidof(IGeocoordinateWithPositionSourceTimestamp);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithPositionSourceTimestamp = _uuidof(IGeocoordinateWithPositionSourceTimestamp);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2341,7 +2341,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeocoordinateWithRemoteSource = __uuidof(IGeocoordinateWithRemoteSource);
+                extern MIDL_CONST_ID IID& IID_IGeocoordinateWithRemoteSource = _uuidof(IGeocoordinateWithRemoteSource);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2417,7 +2417,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeolocator = __uuidof(IGeolocator);
+                extern MIDL_CONST_ID IID& IID_IGeolocator = _uuidof(IGeolocator);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2451,7 +2451,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE AllowFallbackToConsentlessPositions(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeolocator2 = __uuidof(IGeolocator2);
+                extern MIDL_CONST_ID IID& IID_IGeolocator2 = _uuidof(IGeolocator2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2485,16 +2485,10 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE RequestAccessAsync(
                         __FIAsyncOperation_1_Windows__CDevices__CGeolocation__CGeolocationAccessStatus** result
                         ) = 0;
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-                    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE GetGeopositionHistoryAsync(
                         ABI::Windows::Foundation::DateTime startTime,
                         __FIAsyncOperation_1___FIVectorView_1_Windows__CDevices__CGeolocation__CGeoposition** result
                         ) = 0;
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-                    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE GetGeopositionHistoryWithDurationAsync(
                         ABI::Windows::Foundation::DateTime startTime,
                         ABI::Windows::Foundation::TimeSpan duration,
@@ -2502,7 +2496,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeolocatorStatics = __uuidof(IGeolocatorStatics);
+                extern MIDL_CONST_ID IID& IID_IGeolocatorStatics = _uuidof(IGeolocatorStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2544,7 +2538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeolocatorStatics2 = __uuidof(IGeolocatorStatics2);
+                extern MIDL_CONST_ID IID& IID_IGeolocatorStatics2 = _uuidof(IGeolocatorStatics2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2586,7 +2580,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeolocatorWithScalarAccuracy = __uuidof(IGeolocatorWithScalarAccuracy);
+                extern MIDL_CONST_ID IID& IID_IGeolocatorWithScalarAccuracy = _uuidof(IGeolocatorWithScalarAccuracy);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2625,7 +2619,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeopath = __uuidof(IGeopath);
+                extern MIDL_CONST_ID IID& IID_IGeopath = _uuidof(IGeopath);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2673,7 +2667,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeopathFactory = __uuidof(IGeopathFactory);
+                extern MIDL_CONST_ID IID& IID_IGeopathFactory = _uuidof(IGeopathFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2712,7 +2706,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeopoint = __uuidof(IGeopoint);
+                extern MIDL_CONST_ID IID& IID_IGeopoint = _uuidof(IGeopoint);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2760,7 +2754,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeopointFactory = __uuidof(IGeopointFactory);
+                extern MIDL_CONST_ID IID& IID_IGeopointFactory = _uuidof(IGeopointFactory);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2799,7 +2793,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoposition = __uuidof(IGeoposition);
+                extern MIDL_CONST_ID IID& IID_IGeoposition = _uuidof(IGeoposition);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2838,7 +2832,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoposition2 = __uuidof(IGeoposition2);
+                extern MIDL_CONST_ID IID& IID_IGeoposition2 = _uuidof(IGeoposition2);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2878,7 +2872,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeoshape = __uuidof(IGeoshape);
+                extern MIDL_CONST_ID IID& IID_IGeoshape = _uuidof(IGeoshape);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2920,7 +2914,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeovisit = __uuidof(IGeovisit);
+                extern MIDL_CONST_ID IID& IID_IGeovisit = _uuidof(IGeovisit);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -2967,7 +2961,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeovisitMonitor = __uuidof(IGeovisitMonitor);
+                extern MIDL_CONST_ID IID& IID_IGeovisitMonitor = _uuidof(IGeovisitMonitor);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3003,7 +2997,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeovisitMonitorStatics = __uuidof(IGeovisitMonitorStatics);
+                extern MIDL_CONST_ID IID& IID_IGeovisitMonitorStatics = _uuidof(IGeovisitMonitorStatics);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3039,7 +3033,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeovisitStateChangedEventArgs = __uuidof(IGeovisitStateChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IGeovisitStateChangedEventArgs = _uuidof(IGeovisitStateChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3075,7 +3069,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IGeovisitTriggerDetails = __uuidof(IGeovisitTriggerDetails);
+                extern MIDL_CONST_ID IID& IID_IGeovisitTriggerDetails = _uuidof(IGeovisitTriggerDetails);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3111,7 +3105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPositionChangedEventArgs = __uuidof(IPositionChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IPositionChangedEventArgs = _uuidof(IPositionChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3147,7 +3141,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IStatusChangedEventArgs = __uuidof(IStatusChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IStatusChangedEventArgs = _uuidof(IStatusChangedEventArgs);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3186,7 +3180,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVenueData = __uuidof(IVenueData);
+                extern MIDL_CONST_ID IID& IID_IVenueData = _uuidof(IVenueData);
             } /* Geolocation */
         } /* Devices */
     } /* Windows */
@@ -3319,8 +3313,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Geolocation.IGeolocator ** Default Interface **
@@ -6850,15 +6844,9 @@ typedef struct __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStaticsVtbl
         TrustLevel* trustLevel);
     HRESULT (STDMETHODCALLTYPE* RequestAccessAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         __FIAsyncOperation_1_Windows__CDevices__CGeolocation__CGeolocationAccessStatus** result);
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* GetGeopositionHistoryAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         struct __x_ABI_CWindows_CFoundation_CDateTime startTime,
         __FIAsyncOperation_1___FIVectorView_1_Windows__CDevices__CGeolocation__CGeoposition** result);
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* GetGeopositionHistoryWithDurationAsync)(__x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics* This,
         struct __x_ABI_CWindows_CFoundation_CDateTime startTime,
         struct __x_ABI_CWindows_CFoundation_CTimeSpan duration,
@@ -6895,15 +6883,9 @@ interface __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_RequestAccessAsync(This, result) \
     ((This)->lpVtbl->RequestAccessAsync(This, result))
 
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-    DEPRECATED("GetGeopositionHistoryAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_GetGeopositionHistoryAsync(This, startTime, result) \
     ((This)->lpVtbl->GetGeopositionHistoryAsync(This, startTime, result))
 
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
-    DEPRECATED("GetGeopositionHistoryWithDurationAsync is deprecated and might not work on all platforms. For more info, see MSDN.")
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CDevices_CGeolocation_CIGeolocatorStatics_GetGeopositionHistoryWithDurationAsync(This, startTime, duration, result) \
     ((This)->lpVtbl->GetGeopositionHistoryWithDurationAsync(This, startTime, duration, result))
 
@@ -8316,8 +8298,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Geolocation.IGeolocatorStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Geolocation.IGeolocator ** Default Interface **

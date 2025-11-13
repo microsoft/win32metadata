@@ -22,7 +22,6 @@ Abstract:
 
 #include <windows.h>
 #include <ntenclv.h>
-#include <enclaveium.h>
 #include <winenclaveapi.h>
 
 #endif /* _WINENCLAVE_ */

@@ -110,7 +110,6 @@ QueryIoRateControlInformationJobObject(
     _Outptr_result_buffer_(*InfoBlockCount) JOBOBJECT_IO_RATE_CONTROL_INFORMATION** InfoBlocks,
     _Out_ ULONG* InfoBlockCount
     );
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 
 #pragma endregion

@@ -24,7 +24,6 @@ typedef enum {
     eOffloadConnector,
     eLoopbackConnector,
     eKeywordDetectorConnector,
-    eLoopbackConnectorPostVolume,
     eConnectorCount
 } EndpointConnectorType;
 

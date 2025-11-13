@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1325,7 +1325,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IDownloadProgressEventHandler = __uuidof(IDownloadProgressEventHandler);
+                        extern MIDL_CONST_ID IID& IID_IDownloadProgressEventHandler = _uuidof(IDownloadProgressEventHandler);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1407,7 +1407,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImage = __uuidof(IBitmapImage);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImage = _uuidof(IBitmapImage);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1450,7 +1450,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImage2 = __uuidof(IBitmapImage2);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImage2 = _uuidof(IBitmapImage2);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1501,7 +1501,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImage3 = __uuidof(IBitmapImage3);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImage3 = _uuidof(IBitmapImage3);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1542,7 +1542,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImageFactory = __uuidof(IBitmapImageFactory);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImageFactory = _uuidof(IBitmapImageFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1591,7 +1591,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImageStatics = __uuidof(IBitmapImageStatics);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImageStatics = _uuidof(IBitmapImageStatics);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1631,7 +1631,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImageStatics2 = __uuidof(IBitmapImageStatics2);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImageStatics2 = _uuidof(IBitmapImageStatics2);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1677,7 +1677,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapImageStatics3 = __uuidof(IBitmapImageStatics3);
+                        extern MIDL_CONST_ID IID& IID_IBitmapImageStatics3 = _uuidof(IBitmapImageStatics3);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1727,7 +1727,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapSource = __uuidof(IBitmapSource);
+                        extern MIDL_CONST_ID IID& IID_IBitmapSource = _uuidof(IBitmapSource);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1769,7 +1769,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapSourceFactory = __uuidof(IBitmapSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_IBitmapSourceFactory = _uuidof(IBitmapSourceFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1812,7 +1812,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IBitmapSourceStatics = __uuidof(IBitmapSourceStatics);
+                        extern MIDL_CONST_ID IID& IID_IBitmapSourceStatics = _uuidof(IBitmapSourceStatics);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1855,7 +1855,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IDownloadProgressEventArgs = __uuidof(IDownloadProgressEventArgs);
+                        extern MIDL_CONST_ID IID& IID_IDownloadProgressEventArgs = _uuidof(IDownloadProgressEventArgs);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1911,7 +1911,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IRenderTargetBitmap = __uuidof(IRenderTargetBitmap);
+                        extern MIDL_CONST_ID IID& IID_IRenderTargetBitmap = _uuidof(IRenderTargetBitmap);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1954,7 +1954,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IRenderTargetBitmapStatics = __uuidof(IRenderTargetBitmapStatics);
+                        extern MIDL_CONST_ID IID& IID_IRenderTargetBitmapStatics = _uuidof(IRenderTargetBitmapStatics);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -1995,7 +1995,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISoftwareBitmapSource = __uuidof(ISoftwareBitmapSource);
+                        extern MIDL_CONST_ID IID& IID_ISoftwareBitmapSource = _uuidof(ISoftwareBitmapSource);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2032,7 +2032,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_ISurfaceImageSource = __uuidof(ISurfaceImageSource);
+                        extern MIDL_CONST_ID IID& IID_ISurfaceImageSource = _uuidof(ISurfaceImageSource);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2084,7 +2084,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISurfaceImageSourceFactory = __uuidof(ISurfaceImageSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_ISurfaceImageSourceFactory = _uuidof(ISurfaceImageSourceFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2157,7 +2157,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISvgImageSource = __uuidof(ISvgImageSource);
+                        extern MIDL_CONST_ID IID& IID_ISvgImageSource = _uuidof(ISvgImageSource);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2205,7 +2205,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISvgImageSourceFactory = __uuidof(ISvgImageSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_ISvgImageSourceFactory = _uuidof(ISvgImageSourceFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2245,7 +2245,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISvgImageSourceFailedEventArgs = __uuidof(ISvgImageSourceFailedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_ISvgImageSourceFailedEventArgs = _uuidof(ISvgImageSourceFailedEventArgs);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2282,7 +2282,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_ISvgImageSourceOpenedEventArgs = __uuidof(ISvgImageSourceOpenedEventArgs);
+                        extern MIDL_CONST_ID IID& IID_ISvgImageSourceOpenedEventArgs = _uuidof(ISvgImageSourceOpenedEventArgs);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2328,7 +2328,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_ISvgImageSourceStatics = __uuidof(ISvgImageSourceStatics);
+                        extern MIDL_CONST_ID IID& IID_ISvgImageSourceStatics = _uuidof(ISvgImageSourceStatics);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2365,7 +2365,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IVirtualSurfaceImageSource = __uuidof(IVirtualSurfaceImageSource);
+                        extern MIDL_CONST_ID IID& IID_IVirtualSurfaceImageSource = _uuidof(IVirtualSurfaceImageSource);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2413,7 +2413,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IVirtualSurfaceImageSourceFactory = __uuidof(IVirtualSurfaceImageSourceFactory);
+                        extern MIDL_CONST_ID IID& IID_IVirtualSurfaceImageSourceFactory = _uuidof(IVirtualSurfaceImageSourceFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2454,7 +2454,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Invalidate(void) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWriteableBitmap = __uuidof(IWriteableBitmap);
+                        extern MIDL_CONST_ID IID& IID_IWriteableBitmap = _uuidof(IWriteableBitmap);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2496,7 +2496,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IWriteableBitmapFactory = __uuidof(IWriteableBitmapFactory);
+                        extern MIDL_CONST_ID IID& IID_IWriteableBitmapFactory = _uuidof(IWriteableBitmapFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2533,7 +2533,7 @@ namespace ABI {
                         public:
                         };
 
-                        MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTask = __uuidof(IXamlRenderingBackgroundTask);
+                        extern MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTask = _uuidof(IXamlRenderingBackgroundTask);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2575,7 +2575,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTaskFactory = __uuidof(IXamlRenderingBackgroundTaskFactory);
+                        extern MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTaskFactory = _uuidof(IXamlRenderingBackgroundTaskFactory);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */
@@ -2615,7 +2615,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTaskOverrides = __uuidof(IXamlRenderingBackgroundTaskOverrides);
+                        extern MIDL_CONST_ID IID& IID_IXamlRenderingBackgroundTaskOverrides = _uuidof(IXamlRenderingBackgroundTaskOverrides);
                     } /* Imaging */
                 } /* Media */
             } /* Xaml */

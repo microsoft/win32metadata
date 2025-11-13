@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_PROFILE_SYSTEMMANUFACTURERS_SYSTEMMANUFACTURERSCONTRACT_VERSION)
@@ -277,7 +277,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IOemSupportInfo = __uuidof(IOemSupportInfo);
+                    extern MIDL_CONST_ID IID& IID_IOemSupportInfo = _uuidof(IOemSupportInfo);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -315,7 +315,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISmbiosInformationStatics = __uuidof(ISmbiosInformationStatics);
+                    extern MIDL_CONST_ID IID& IID_ISmbiosInformationStatics = _uuidof(ISmbiosInformationStatics);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -371,7 +371,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISystemSupportDeviceInfo = __uuidof(ISystemSupportDeviceInfo);
+                    extern MIDL_CONST_ID IID& IID_ISystemSupportDeviceInfo = _uuidof(ISystemSupportDeviceInfo);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -412,7 +412,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics = __uuidof(ISystemSupportInfoStatics);
+                    extern MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics = _uuidof(ISystemSupportInfoStatics);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -450,7 +450,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics2 = __uuidof(ISystemSupportInfoStatics2);
+                    extern MIDL_CONST_ID IID& IID_ISystemSupportInfoStatics2 = _uuidof(ISystemSupportInfoStatics2);
                 } /* SystemManufacturers */
             } /* Profile */
         } /* System */
@@ -529,8 +529,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.SystemManufacturers.SystemManufacturersContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics interface starting with version 2.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
  *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics2 interface starting with version 3.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
+ *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics interface starting with version 2.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1044,8 +1044,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.SystemManufacturers.SystemManufacturersContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics interface starting with version 2.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
  *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics2 interface starting with version 3.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
+ *   Static Methods exist on the Windows.System.Profile.SystemManufacturers.ISystemSupportInfoStatics interface starting with version 2.0 of the Windows.System.Profile.SystemManufacturers.SystemManufacturersContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

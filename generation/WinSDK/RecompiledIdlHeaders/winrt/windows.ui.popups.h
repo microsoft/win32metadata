@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -494,7 +494,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUICommandInvokedHandler = __uuidof(IUICommandInvokedHandler);
+                extern MIDL_CONST_ID IID& IID_IUICommandInvokedHandler = _uuidof(IUICommandInvokedHandler);
             } /* Popups */
         } /* UI */
     } /* Windows */
@@ -563,7 +563,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMessageDialog = __uuidof(IMessageDialog);
+                extern MIDL_CONST_ID IID& IID_IMessageDialog = _uuidof(IMessageDialog);
             } /* Popups */
         } /* UI */
     } /* Windows */
@@ -605,7 +605,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMessageDialogFactory = __uuidof(IMessageDialogFactory);
+                extern MIDL_CONST_ID IID& IID_IMessageDialogFactory = _uuidof(IMessageDialogFactory);
             } /* Popups */
         } /* UI */
     } /* Windows */
@@ -654,7 +654,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPopupMenu = __uuidof(IPopupMenu);
+                extern MIDL_CONST_ID IID& IID_IPopupMenu = _uuidof(IPopupMenu);
             } /* Popups */
         } /* UI */
     } /* Windows */
@@ -703,7 +703,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUICommand = __uuidof(IUICommand);
+                extern MIDL_CONST_ID IID& IID_IUICommand = _uuidof(IUICommand);
             } /* Popups */
         } /* UI */
     } /* Windows */
@@ -751,7 +751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IUICommandFactory = __uuidof(IUICommandFactory);
+                extern MIDL_CONST_ID IID& IID_IUICommandFactory = _uuidof(IUICommandFactory);
             } /* Popups */
         } /* UI */
     } /* Windows */

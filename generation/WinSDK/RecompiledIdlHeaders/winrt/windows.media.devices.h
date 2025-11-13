@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_CAPTURE_APPBROADCASTCONTRACT_VERSION)
@@ -131,7 +131,6 @@
 #include "Windows.Devices.Enumeration.h"
 #include "Windows.Media.Capture.h"
 #include "Windows.Media.Devices.Core.h"
-#include "Windows.Media.Effects.h"
 #include "Windows.Media.MediaProperties.h"
 #include "Windows.Storage.Streams.h"
 // Importing Collections header
@@ -408,21 +407,6 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController ABI::Windows::Media::Devices::IAudioDeviceController
 
 #endif // ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Media {
-            namespace Devices {
-                interface IAudioDeviceController2;
-            } /* Devices */
-        } /* Media */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2 ABI::Windows::Media::Devices::IAudioDeviceController2
-
-#endif // ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceModule_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceModule_FWD_DEFINED__
@@ -3013,31 +2997,6 @@ namespace ABI {
 namespace ABI {
     namespace Windows {
         namespace Media {
-            namespace Effects {
-                class AudioCaptureEffectsManager;
-            } /* Effects */
-        } /* Media */
-    } /* Windows */
-} /* ABI */
-
-#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Media {
-            namespace Effects {
-                interface IAudioCaptureEffectsManager;
-            } /* Effects */
-        } /* Media */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager ABI::Windows::Media::Effects::IAudioCaptureEffectsManager
-
-#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-
-namespace ABI {
-    namespace Windows {
-        namespace Media {
             namespace MediaProperties {
                 typedef enum MediaPixelFormat : int MediaPixelFormat;
             } /* MediaProperties */
@@ -4249,7 +4208,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICallControlEventHandler = __uuidof(ICallControlEventHandler);
+                extern MIDL_CONST_ID IID& IID_ICallControlEventHandler = _uuidof(ICallControlEventHandler);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4283,7 +4242,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDialRequestedEventHandler = __uuidof(IDialRequestedEventHandler);
+                extern MIDL_CONST_ID IID& IID_IDialRequestedEventHandler = _uuidof(IDialRequestedEventHandler);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4317,7 +4276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKeypadPressedEventHandler = __uuidof(IKeypadPressedEventHandler);
+                extern MIDL_CONST_ID IID& IID_IKeypadPressedEventHandler = _uuidof(IKeypadPressedEventHandler);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4351,7 +4310,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRedialRequestedEventHandler = __uuidof(IRedialRequestedEventHandler);
+                extern MIDL_CONST_ID IID& IID_IRedialRequestedEventHandler = _uuidof(IRedialRequestedEventHandler);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4390,7 +4349,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedPhotoCaptureSettings = __uuidof(IAdvancedPhotoCaptureSettings);
+                extern MIDL_CONST_ID IID& IID_IAdvancedPhotoCaptureSettings = _uuidof(IAdvancedPhotoCaptureSettings);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4435,7 +4394,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedPhotoControl = __uuidof(IAdvancedPhotoControl);
+                extern MIDL_CONST_ID IID& IID_IAdvancedPhotoControl = _uuidof(IAdvancedPhotoControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4476,7 +4435,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController = __uuidof(IAdvancedVideoCaptureDeviceController);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController = _uuidof(IAdvancedVideoCaptureDeviceController);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4512,7 +4471,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController10 = __uuidof(IAdvancedVideoCaptureDeviceController10);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController10 = _uuidof(IAdvancedVideoCaptureDeviceController10);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4550,7 +4509,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController11 = __uuidof(IAdvancedVideoCaptureDeviceController11);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController11 = _uuidof(IAdvancedVideoCaptureDeviceController11);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4622,7 +4581,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController2 = __uuidof(IAdvancedVideoCaptureDeviceController2);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController2 = _uuidof(IAdvancedVideoCaptureDeviceController2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4664,7 +4623,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController3 = __uuidof(IAdvancedVideoCaptureDeviceController3);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController3 = _uuidof(IAdvancedVideoCaptureDeviceController3);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4715,7 +4674,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController4 = __uuidof(IAdvancedVideoCaptureDeviceController4);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController4 = _uuidof(IAdvancedVideoCaptureDeviceController4);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4774,7 +4733,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController5 = __uuidof(IAdvancedVideoCaptureDeviceController5);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController5 = _uuidof(IAdvancedVideoCaptureDeviceController5);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4810,7 +4769,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController6 = __uuidof(IAdvancedVideoCaptureDeviceController6);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController6 = _uuidof(IAdvancedVideoCaptureDeviceController6);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4846,7 +4805,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController7 = __uuidof(IAdvancedVideoCaptureDeviceController7);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController7 = _uuidof(IAdvancedVideoCaptureDeviceController7);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4882,7 +4841,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController8 = __uuidof(IAdvancedVideoCaptureDeviceController8);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController8 = _uuidof(IAdvancedVideoCaptureDeviceController8);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4918,7 +4877,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController9 = __uuidof(IAdvancedVideoCaptureDeviceController9);
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController9 = _uuidof(IAdvancedVideoCaptureDeviceController9);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4966,7 +4925,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAudioDeviceController = __uuidof(IAudioDeviceController);
+                extern MIDL_CONST_ID IID& IID_IAudioDeviceController = _uuidof(IAudioDeviceController);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -4975,42 +4934,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Media.Devices.IAudioDeviceController2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Media.Devices.AudioDeviceController
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Devices_IAudioDeviceController2[] = L"Windows.Media.Devices.IAudioDeviceController2";
-namespace ABI {
-    namespace Windows {
-        namespace Media {
-            namespace Devices {
-                MIDL_INTERFACE("85326599-4c24-48b0-81dd-0c5cc79ddf05")
-                IAudioDeviceController2 : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE get_AudioCaptureEffectsManager(
-                        ABI::Windows::Media::Effects::IAudioCaptureEffectsManager** value
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IAudioDeviceController2 = __uuidof(IAudioDeviceController2);
-            } /* Devices */
-        } /* Media */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2;
-#endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -5054,7 +4977,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAudioDeviceModule = __uuidof(IAudioDeviceModule);
+                extern MIDL_CONST_ID IID& IID_IAudioDeviceModule = _uuidof(IAudioDeviceModule);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5093,7 +5016,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAudioDeviceModuleNotificationEventArgs = __uuidof(IAudioDeviceModuleNotificationEventArgs);
+                extern MIDL_CONST_ID IID& IID_IAudioDeviceModuleNotificationEventArgs = _uuidof(IAudioDeviceModuleNotificationEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5140,7 +5063,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAudioDeviceModulesManager = __uuidof(IAudioDeviceModulesManager);
+                extern MIDL_CONST_ID IID& IID_IAudioDeviceModulesManager = _uuidof(IAudioDeviceModulesManager);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5177,7 +5100,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAudioDeviceModulesManagerFactory = __uuidof(IAudioDeviceModulesManagerFactory);
+                extern MIDL_CONST_ID IID& IID_IAudioDeviceModulesManagerFactory = _uuidof(IAudioDeviceModulesManagerFactory);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5269,7 +5192,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICallControl = __uuidof(ICallControl);
+                extern MIDL_CONST_ID IID& IID_ICallControl = _uuidof(ICallControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5309,7 +5232,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICallControlStatics = __uuidof(ICallControlStatics);
+                extern MIDL_CONST_ID IID& IID_ICallControlStatics = _uuidof(ICallControlStatics);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5356,7 +5279,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICameraOcclusionInfo = __uuidof(ICameraOcclusionInfo);
+                extern MIDL_CONST_ID IID& IID_ICameraOcclusionInfo = _uuidof(ICameraOcclusionInfo);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5396,7 +5319,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICameraOcclusionState = __uuidof(ICameraOcclusionState);
+                extern MIDL_CONST_ID IID& IID_ICameraOcclusionState = _uuidof(ICameraOcclusionState);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5432,7 +5355,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICameraOcclusionStateChangedEventArgs = __uuidof(ICameraOcclusionStateChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_ICameraOcclusionStateChangedEventArgs = _uuidof(ICameraOcclusionStateChangedEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5469,7 +5392,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDefaultAudioDeviceChangedEventArgs = __uuidof(IDefaultAudioDeviceChangedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IDefaultAudioDeviceChangedEventArgs = _uuidof(IDefaultAudioDeviceChangedEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5506,7 +5429,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDialRequestedEventArgs = __uuidof(IDialRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IDialRequestedEventArgs = _uuidof(IDialRequestedEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5557,7 +5480,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDigitalWindowBounds = __uuidof(IDigitalWindowBounds);
+                extern MIDL_CONST_ID IID& IID_IDigitalWindowBounds = _uuidof(IDigitalWindowBounds);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5608,7 +5531,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDigitalWindowCapability = __uuidof(IDigitalWindowCapability);
+                extern MIDL_CONST_ID IID& IID_IDigitalWindowCapability = _uuidof(IDigitalWindowCapability);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5669,7 +5592,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDigitalWindowControl = __uuidof(IDigitalWindowControl);
+                extern MIDL_CONST_ID IID& IID_IDigitalWindowControl = _uuidof(IDigitalWindowControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5721,7 +5644,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IExposureCompensationControl = __uuidof(IExposureCompensationControl);
+                extern MIDL_CONST_ID IID& IID_IExposureCompensationControl = _uuidof(IExposureCompensationControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5780,7 +5703,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IExposureControl = __uuidof(IExposureControl);
+                extern MIDL_CONST_ID IID& IID_IExposureControl = _uuidof(IExposureControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5822,7 +5745,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IExposurePriorityVideoControl = __uuidof(IExposurePriorityVideoControl);
+                extern MIDL_CONST_ID IID& IID_IExposurePriorityVideoControl = _uuidof(IExposurePriorityVideoControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5888,7 +5811,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFlashControl = __uuidof(IFlashControl);
+                extern MIDL_CONST_ID IID& IID_IFlashControl = _uuidof(IFlashControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -5930,7 +5853,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFlashControl2 = __uuidof(IFlashControl2);
+                extern MIDL_CONST_ID IID& IID_IFlashControl2 = _uuidof(IFlashControl2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6000,7 +5923,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFocusControl = __uuidof(IFocusControl);
+                extern MIDL_CONST_ID IID& IID_IFocusControl = _uuidof(IFocusControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6063,7 +5986,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFocusControl2 = __uuidof(IFocusControl2);
+                extern MIDL_CONST_ID IID& IID_IFocusControl2 = _uuidof(IFocusControl2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6132,7 +6055,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IFocusSettings = __uuidof(IFocusSettings);
+                extern MIDL_CONST_ID IID& IID_IFocusSettings = _uuidof(IFocusSettings);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6177,7 +6100,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IHdrVideoControl = __uuidof(IHdrVideoControl);
+                extern MIDL_CONST_ID IID& IID_IHdrVideoControl = _uuidof(IHdrVideoControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6237,7 +6160,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IInfraredTorchControl = __uuidof(IInfraredTorchControl);
+                extern MIDL_CONST_ID IID& IID_IInfraredTorchControl = _uuidof(IInfraredTorchControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6292,7 +6215,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIsoSpeedControl = __uuidof(IIsoSpeedControl);
+                extern MIDL_CONST_ID IID& IID_IIsoSpeedControl = _uuidof(IIsoSpeedControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6347,7 +6270,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIsoSpeedControl2 = __uuidof(IIsoSpeedControl2);
+                extern MIDL_CONST_ID IID& IID_IIsoSpeedControl2 = _uuidof(IIsoSpeedControl2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6383,7 +6306,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IKeypadPressedEventArgs = __uuidof(IKeypadPressedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IKeypadPressedEventArgs = _uuidof(IKeypadPressedEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6444,7 +6367,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILowLagPhotoControl = __uuidof(ILowLagPhotoControl);
+                extern MIDL_CONST_ID IID& IID_ILowLagPhotoControl = _uuidof(ILowLagPhotoControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6526,7 +6449,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILowLagPhotoSequenceControl = __uuidof(ILowLagPhotoSequenceControl);
+                extern MIDL_CONST_ID IID& IID_ILowLagPhotoSequenceControl = _uuidof(ILowLagPhotoSequenceControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6578,7 +6501,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaDeviceControl = __uuidof(IMediaDeviceControl);
+                extern MIDL_CONST_ID IID& IID_IMediaDeviceControl = _uuidof(IMediaDeviceControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6629,7 +6552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaDeviceControlCapabilities = __uuidof(IMediaDeviceControlCapabilities);
+                extern MIDL_CONST_ID IID& IID_IMediaDeviceControlCapabilities = _uuidof(IMediaDeviceControlCapabilities);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6673,7 +6596,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaDeviceController = __uuidof(IMediaDeviceController);
+                extern MIDL_CONST_ID IID& IID_IMediaDeviceController = _uuidof(IMediaDeviceController);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6737,7 +6660,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IMediaDeviceStatics = __uuidof(IMediaDeviceStatics);
+                extern MIDL_CONST_ID IID& IID_IMediaDeviceStatics = _uuidof(IMediaDeviceStatics);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6776,7 +6699,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IModuleCommandResult = __uuidof(IModuleCommandResult);
+                extern MIDL_CONST_ID IID& IID_IModuleCommandResult = _uuidof(IModuleCommandResult);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6821,7 +6744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IOpticalImageStabilizationControl = __uuidof(IOpticalImageStabilizationControl);
+                extern MIDL_CONST_ID IID& IID_IOpticalImageStabilizationControl = _uuidof(IOpticalImageStabilizationControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6863,7 +6786,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPanelBasedOptimizationControl = __uuidof(IPanelBasedOptimizationControl);
+                extern MIDL_CONST_ID IID& IID_IPanelBasedOptimizationControl = _uuidof(IPanelBasedOptimizationControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6911,7 +6834,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IPhotoConfirmationControl = __uuidof(IPhotoConfirmationControl);
+                extern MIDL_CONST_ID IID& IID_IPhotoConfirmationControl = _uuidof(IPhotoConfirmationControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -6945,7 +6868,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Handled(void) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRedialRequestedEventArgs = __uuidof(IRedialRequestedEventArgs);
+                extern MIDL_CONST_ID IID& IID_IRedialRequestedEventArgs = _uuidof(IRedialRequestedEventArgs);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7002,7 +6925,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRegionOfInterest = __uuidof(IRegionOfInterest);
+                extern MIDL_CONST_ID IID& IID_IRegionOfInterest = _uuidof(IRegionOfInterest);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7053,7 +6976,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRegionOfInterest2 = __uuidof(IRegionOfInterest2);
+                extern MIDL_CONST_ID IID& IID_IRegionOfInterest2 = _uuidof(IRegionOfInterest2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7110,7 +7033,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRegionsOfInterestControl = __uuidof(IRegionsOfInterestControl);
+                extern MIDL_CONST_ID IID& IID_IRegionsOfInterestControl = _uuidof(IRegionsOfInterestControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7153,7 +7076,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ISceneModeControl = __uuidof(ISceneModeControl);
+                extern MIDL_CONST_ID IID& IID_ISceneModeControl = _uuidof(ISceneModeControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7204,7 +7127,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ITorchControl = __uuidof(ITorchControl);
+                extern MIDL_CONST_ID IID& IID_ITorchControl = _uuidof(ITorchControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7281,7 +7204,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVideoDeviceController = __uuidof(IVideoDeviceController);
+                extern MIDL_CONST_ID IID& IID_IVideoDeviceController = _uuidof(IVideoDeviceController);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7320,7 +7243,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVideoDeviceControllerGetDevicePropertyResult = __uuidof(IVideoDeviceControllerGetDevicePropertyResult);
+                extern MIDL_CONST_ID IID& IID_IVideoDeviceControllerGetDevicePropertyResult = _uuidof(IVideoDeviceControllerGetDevicePropertyResult);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7365,7 +7288,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IVideoTemporalDenoisingControl = __uuidof(IVideoTemporalDenoisingControl);
+                extern MIDL_CONST_ID IID& IID_IVideoTemporalDenoisingControl = _uuidof(IVideoTemporalDenoisingControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7424,7 +7347,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWhiteBalanceControl = __uuidof(IWhiteBalanceControl);
+                extern MIDL_CONST_ID IID& IID_IWhiteBalanceControl = _uuidof(IWhiteBalanceControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7475,7 +7398,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IZoomControl = __uuidof(IZoomControl);
+                extern MIDL_CONST_ID IID& IID_IZoomControl = _uuidof(IZoomControl);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7517,7 +7440,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IZoomControl2 = __uuidof(IZoomControl2);
+                extern MIDL_CONST_ID IID& IID_IZoomControl2 = _uuidof(IZoomControl2);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7562,7 +7485,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IZoomSettings = __uuidof(IZoomSettings);
+                extern MIDL_CONST_ID IID& IID_IZoomSettings = _uuidof(IZoomSettings);
             } /* Devices */
         } /* Media */
     } /* Windows */
@@ -7626,7 +7549,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Media.Devices.IAudioDeviceController ** Default Interface **
  *    Windows.Media.Devices.IMediaDeviceController
- *    Windows.Media.Devices.IAudioDeviceController2
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -8659,12 +8581,6 @@ typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceC
 typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController;
 
 #endif // ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController_FWD_DEFINED__
-
-#ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
-#define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2 __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2;
-
-#endif // ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceModule_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceModule_FWD_DEFINED__
@@ -13076,12 +12992,6 @@ typedef interface __x_ABI_CWindows_CMedia_CDevices_CCore_CIVariablePhotoSequence
 
 #endif // ____x_ABI_CWindows_CMedia_CDevices_CCore_CIVariablePhotoSequenceController_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager;
-
-#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
-
 typedef enum __x_ABI_CWindows_CMedia_CMediaProperties_CMediaPixelFormat __x_ABI_CWindows_CMedia_CMediaProperties_CMediaPixelFormat;
 
 #ifndef ____x_ABI_CWindows_CMedia_CMediaProperties_CIMediaRatio_FWD_DEFINED__
@@ -14936,75 +14846,6 @@ interface __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-
-/*
- *
- * Interface Windows.Media.Devices.IAudioDeviceController2
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Media.Devices.AudioDeviceController
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Devices_IAudioDeviceController2[] = L"Windows.Media.Devices.IAudioDeviceController2";
-typedef struct __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2Vtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* get_AudioCaptureEffectsManager)(__x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2* This,
-        __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager** value);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2Vtbl;
-
-interface __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2
-{
-    CONST_VTBL struct __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2Vtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_get_AudioCaptureEffectsManager(This, value) \
-    ((This)->lpVtbl->get_AudioCaptureEffectsManager(This, value))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2;
-#endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAudioDeviceController2_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -19751,7 +19592,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Media.Devices.IAudioDeviceController ** Default Interface **
  *    Windows.Media.Devices.IMediaDeviceController
- *    Windows.Media.Devices.IAudioDeviceController2
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

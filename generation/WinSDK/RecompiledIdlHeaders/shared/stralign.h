@@ -115,7 +115,6 @@ ua_wcscpy(
 #pragma warning(disable:4995)
 #pragma warning(disable:4996)
 #ifdef _PREFAST_
-#pragma warning(disable:25025) // call to dangerous string function 'wcscpy'
 #pragma warning(disable:28719) // This function (ua_wcscpy) is also tagged as insecure and deprecated
 #endif // _PREFAST_
     return wcscpy(Destination, Source);
@@ -372,9 +371,6 @@ ua_wcschr(
 #pragma warning(push)
 #pragma warning(disable:4995)
 #pragma warning(disable:4996)
-#ifdef _PREFAST_
-#pragma warning(disable:25025) // call to dangerous string function 'wcscpy'
-#endif
         return wcscpy( (PWSTR)Destination, (PCWSTR)Source );
 #pragma warning(pop)
     } else {
@@ -430,7 +426,6 @@ ua_wcscpy(
 #pragma warning(disable:4995)
 #pragma warning(disable:4996)
 #ifdef _PREFAST_
-#pragma warning(disable:25025) // call to dangerous string function 'wcscpy'
 #pragma warning(disable:28719) // This function (ua_wcscpy) is also tagged as insecure and deprecated
 #endif // _PREFAST_
         return wcscpy( (PWSTR)Destination, (PCWSTR)Source );

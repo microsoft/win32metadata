@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1684,7 +1684,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSource = __uuidof(IAdaptiveMediaSource);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSource = _uuidof(IAdaptiveMediaSource);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1722,7 +1722,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSource2 = __uuidof(IAdaptiveMediaSource2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSource2 = _uuidof(IAdaptiveMediaSource2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1775,7 +1775,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSource3 = __uuidof(IAdaptiveMediaSource3);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSource3 = _uuidof(IAdaptiveMediaSource3);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1828,7 +1828,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceAdvancedSettings = __uuidof(IAdaptiveMediaSourceAdvancedSettings);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceAdvancedSettings = _uuidof(IAdaptiveMediaSourceAdvancedSettings);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1872,7 +1872,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCorrelatedTimes = __uuidof(IAdaptiveMediaSourceCorrelatedTimes);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCorrelatedTimes = _uuidof(IAdaptiveMediaSourceCorrelatedTimes);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1916,7 +1916,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCreationResult = __uuidof(IAdaptiveMediaSourceCreationResult);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCreationResult = _uuidof(IAdaptiveMediaSourceCreationResult);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -1954,7 +1954,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCreationResult2 = __uuidof(IAdaptiveMediaSourceCreationResult2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceCreationResult2 = _uuidof(IAdaptiveMediaSourceCreationResult2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2016,7 +2016,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs = __uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs = _uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2054,7 +2054,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs2 = __uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs2 = _uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2095,7 +2095,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs3 = __uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs3);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnosticAvailableEventArgs3 = _uuidof(IAdaptiveMediaSourceDiagnosticAvailableEventArgs3);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2137,7 +2137,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnostics = __uuidof(IAdaptiveMediaSourceDiagnostics);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDiagnostics = _uuidof(IAdaptiveMediaSourceDiagnostics);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2178,7 +2178,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadBitrateChangedEventArgs = __uuidof(IAdaptiveMediaSourceDownloadBitrateChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadBitrateChangedEventArgs = _uuidof(IAdaptiveMediaSourceDownloadBitrateChangedEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2216,7 +2216,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2 = __uuidof(IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2 = _uuidof(IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2266,7 +2266,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs = __uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs = _uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2310,7 +2310,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs2 = __uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs2 = _uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2351,7 +2351,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs3 = __uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs3);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadCompletedEventArgs3 = _uuidof(IAdaptiveMediaSourceDownloadCompletedEventArgs3);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2401,7 +2401,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs = __uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs = _uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2448,7 +2448,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs2 = __uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs2 = _uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2489,7 +2489,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs3 = __uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs3);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadFailedEventArgs3 = _uuidof(IAdaptiveMediaSourceDownloadFailedEventArgs3);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2525,7 +2525,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedDeferral = __uuidof(IAdaptiveMediaSourceDownloadRequestedDeferral);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedDeferral = _uuidof(IAdaptiveMediaSourceDownloadRequestedDeferral);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2578,7 +2578,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs = __uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs = _uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2619,7 +2619,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs2 = __uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs2 = _uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2660,7 +2660,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs3 = __uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs3);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadRequestedEventArgs3 = _uuidof(IAdaptiveMediaSourceDownloadRequestedEventArgs3);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2725,7 +2725,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadResult = __uuidof(IAdaptiveMediaSourceDownloadResult);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadResult = _uuidof(IAdaptiveMediaSourceDownloadResult);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2772,7 +2772,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadResult2 = __uuidof(IAdaptiveMediaSourceDownloadResult2);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadResult2 = _uuidof(IAdaptiveMediaSourceDownloadResult2);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2819,7 +2819,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadStatistics = __uuidof(IAdaptiveMediaSourceDownloadStatistics);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceDownloadStatistics = _uuidof(IAdaptiveMediaSourceDownloadStatistics);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2863,7 +2863,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs = __uuidof(IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs = _uuidof(IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */
@@ -2924,7 +2924,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceStatics = __uuidof(IAdaptiveMediaSourceStatics);
+                    extern MIDL_CONST_ID IID& IID_IAdaptiveMediaSourceStatics = _uuidof(IAdaptiveMediaSourceStatics);
                 } /* Adaptive */
             } /* Streaming */
         } /* Media */

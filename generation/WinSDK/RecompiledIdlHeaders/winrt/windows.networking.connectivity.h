@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
-#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x30000
+#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -3169,12 +3169,6 @@ namespace ABI {
                     WwanDataClass_Hsdpa = 0x8,
                     WwanDataClass_Hsupa = 0x10,
                     WwanDataClass_LteAdvanced = 0x20,
-#if WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-                    WwanDataClass_NewRadioNonStandalone = 0x40,
-#endif // WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-#if WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-                    WwanDataClass_NewRadioStandalone = 0x80,
-#endif // WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
                     WwanDataClass_Cdma1xRtt = 0x10000,
                     WwanDataClass_Cdma1xEvdo = 0x20000,
                     WwanDataClass_Cdma1xEvdoRevA = 0x40000,
@@ -3292,7 +3286,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkStatusChangedEventHandler = __uuidof(INetworkStatusChangedEventHandler);
+                extern MIDL_CONST_ID IID& IID_INetworkStatusChangedEventHandler = _uuidof(INetworkStatusChangedEventHandler);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3340,7 +3334,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IAttributedNetworkUsage = __uuidof(IAttributedNetworkUsage);
+                extern MIDL_CONST_ID IID& IID_IAttributedNetworkUsage = _uuidof(IAttributedNetworkUsage);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3409,7 +3403,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICellularApnContext = __uuidof(ICellularApnContext);
+                extern MIDL_CONST_ID IID& IID_ICellularApnContext = _uuidof(ICellularApnContext);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3448,7 +3442,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ICellularApnContext2 = __uuidof(ICellularApnContext2);
+                extern MIDL_CONST_ID IID& IID_ICellularApnContext2 = _uuidof(ICellularApnContext2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3493,7 +3487,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionCost = __uuidof(IConnectionCost);
+                extern MIDL_CONST_ID IID& IID_IConnectionCost = _uuidof(IConnectionCost);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3529,7 +3523,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionCost2 = __uuidof(IConnectionCost2);
+                extern MIDL_CONST_ID IID& IID_IConnectionCost2 = _uuidof(IConnectionCost2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3600,7 +3594,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile = __uuidof(IConnectionProfile);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile = _uuidof(IConnectionProfile);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3667,7 +3661,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile2 = __uuidof(IConnectionProfile2);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile2 = _uuidof(IConnectionProfile2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3706,7 +3700,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile3 = __uuidof(IConnectionProfile3);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile3 = _uuidof(IConnectionProfile3);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3745,7 +3739,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile4 = __uuidof(IConnectionProfile4);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile4 = _uuidof(IConnectionProfile4);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3784,7 +3778,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile5 = __uuidof(IConnectionProfile5);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile5 = _uuidof(IConnectionProfile5);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3821,7 +3815,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfile6 = __uuidof(IConnectionProfile6);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfile6 = _uuidof(IConnectionProfile6);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3884,7 +3878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfileFilter = __uuidof(IConnectionProfileFilter);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfileFilter = _uuidof(IConnectionProfileFilter);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3938,7 +3932,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfileFilter2 = __uuidof(IConnectionProfileFilter2);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfileFilter2 = _uuidof(IConnectionProfileFilter2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -3977,7 +3971,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionProfileFilter3 = __uuidof(IConnectionProfileFilter3);
+                extern MIDL_CONST_ID IID& IID_IConnectionProfileFilter3 = _uuidof(IConnectionProfileFilter3);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4016,7 +4010,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectionSession = __uuidof(IConnectionSession);
+                extern MIDL_CONST_ID IID& IID_IConnectionSession = _uuidof(IConnectionSession);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4055,7 +4049,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectivityInterval = __uuidof(IConnectivityInterval);
+                extern MIDL_CONST_ID IID& IID_IConnectivityInterval = _uuidof(IConnectivityInterval);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4098,7 +4092,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IConnectivityManagerStatics = __uuidof(IConnectivityManagerStatics);
+                extern MIDL_CONST_ID IID& IID_IConnectivityManagerStatics = _uuidof(IConnectivityManagerStatics);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4149,7 +4143,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDataPlanStatus = __uuidof(IDataPlanStatus);
+                extern MIDL_CONST_ID IID& IID_IDataPlanStatus = _uuidof(IDataPlanStatus);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4188,7 +4182,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDataPlanUsage = __uuidof(IDataPlanUsage);
+                extern MIDL_CONST_ID IID& IID_IDataPlanUsage = _uuidof(IDataPlanUsage);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4236,7 +4230,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IDataUsage = __uuidof(IDataUsage);
+                extern MIDL_CONST_ID IID& IID_IDataUsage = _uuidof(IDataUsage);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4275,7 +4269,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IIPInformation = __uuidof(IIPInformation);
+                extern MIDL_CONST_ID IID& IID_IIPInformation = _uuidof(IIPInformation);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4317,7 +4311,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILanIdentifier = __uuidof(ILanIdentifier);
+                extern MIDL_CONST_ID IID& IID_ILanIdentifier = _uuidof(ILanIdentifier);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4356,7 +4350,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_ILanIdentifierData = __uuidof(ILanIdentifierData);
+                extern MIDL_CONST_ID IID& IID_ILanIdentifierData = _uuidof(ILanIdentifierData);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4407,7 +4401,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkAdapter = __uuidof(INetworkAdapter);
+                extern MIDL_CONST_ID IID& IID_INetworkAdapter = _uuidof(INetworkAdapter);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4468,7 +4462,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkInformationStatics = __uuidof(INetworkInformationStatics);
+                extern MIDL_CONST_ID IID& IID_INetworkInformationStatics = _uuidof(INetworkInformationStatics);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4505,7 +4499,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkInformationStatics2 = __uuidof(INetworkInformationStatics2);
+                extern MIDL_CONST_ID IID& IID_INetworkInformationStatics2 = _uuidof(INetworkInformationStatics2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4544,7 +4538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkItem = __uuidof(INetworkItem);
+                extern MIDL_CONST_ID IID& IID_INetworkItem = _uuidof(INetworkItem);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4583,7 +4577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkSecuritySettings = __uuidof(INetworkSecuritySettings);
+                extern MIDL_CONST_ID IID& IID_INetworkSecuritySettings = _uuidof(INetworkSecuritySettings);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4634,7 +4628,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkStateChangeEventDetails = __uuidof(INetworkStateChangeEventDetails);
+                extern MIDL_CONST_ID IID& IID_INetworkStateChangeEventDetails = _uuidof(INetworkStateChangeEventDetails);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4673,7 +4667,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkStateChangeEventDetails2 = __uuidof(INetworkStateChangeEventDetails2);
+                extern MIDL_CONST_ID IID& IID_INetworkStateChangeEventDetails2 = _uuidof(INetworkStateChangeEventDetails2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4715,7 +4709,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_INetworkUsage = __uuidof(INetworkUsage);
+                extern MIDL_CONST_ID IID& IID_INetworkUsage = _uuidof(INetworkUsage);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4757,7 +4751,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProviderNetworkUsage = __uuidof(IProviderNetworkUsage);
+                extern MIDL_CONST_ID IID& IID_IProviderNetworkUsage = _uuidof(IProviderNetworkUsage);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4796,7 +4790,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IProxyConfiguration = __uuidof(IProxyConfiguration);
+                extern MIDL_CONST_ID IID& IID_IProxyConfiguration = _uuidof(IProxyConfiguration);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4838,7 +4832,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRoutePolicy = __uuidof(IRoutePolicy);
+                extern MIDL_CONST_ID IID& IID_IRoutePolicy = _uuidof(IRoutePolicy);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4877,7 +4871,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IRoutePolicyFactory = __uuidof(IRoutePolicyFactory);
+                extern MIDL_CONST_ID IID& IID_IRoutePolicyFactory = _uuidof(IRoutePolicyFactory);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4913,7 +4907,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWlanConnectionProfileDetails = __uuidof(IWlanConnectionProfileDetails);
+                extern MIDL_CONST_ID IID& IID_IWlanConnectionProfileDetails = _uuidof(IWlanConnectionProfileDetails);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4958,7 +4952,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWwanConnectionProfileDetails = __uuidof(IWwanConnectionProfileDetails);
+                extern MIDL_CONST_ID IID& IID_IWwanConnectionProfileDetails = _uuidof(IWwanConnectionProfileDetails);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -4997,7 +4991,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                MIDL_CONST_ID IID& IID_IWwanConnectionProfileDetails2 = __uuidof(IWwanConnectionProfileDetails2);
+                extern MIDL_CONST_ID IID& IID_IWwanConnectionProfileDetails2 = _uuidof(IWwanConnectionProfileDetails2);
             } /* Connectivity */
         } /* Networking */
     } /* Windows */
@@ -5320,8 +5314,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -10323,12 +10317,6 @@ enum __x_ABI_CWindows_CNetworking_CConnectivity_CWwanDataClass
     WwanDataClass_Hsdpa = 0x8,
     WwanDataClass_Hsupa = 0x10,
     WwanDataClass_LteAdvanced = 0x20,
-#if WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-    WwanDataClass_NewRadioNonStandalone = 0x40,
-#endif // WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-#if WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
-    WwanDataClass_NewRadioStandalone = 0x80,
-#endif // WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION >= 0x30000
     WwanDataClass_Cdma1xRtt = 0x10000,
     WwanDataClass_Cdma1xEvdo = 0x20000,
     WwanDataClass_Cdma1xEvdoRevA = 0x40000,
@@ -13922,8 +13910,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.Connectivity.INetworkInformationStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
