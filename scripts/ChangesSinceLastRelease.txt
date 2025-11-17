@@ -1,0 +1,2 @@
+# Add SetLastError attribute to GetFileSecurityW
+Windows.Win32.Security.Apis.GetFileSecurityW : [DllImport(ADVAPI32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-getfilesecurityw),Unicode] => [DllImport(ADVAPI32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-getfilesecurityw),Unicode]
