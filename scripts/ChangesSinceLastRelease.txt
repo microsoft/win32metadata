@@ -1,0 +1,2 @@
+# Add Reserved to FwpmEngineOpen0::serverName
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmEngineOpen0 : serverName : [Const,In,Optional] => [Const,In,Optional,Reserved]
