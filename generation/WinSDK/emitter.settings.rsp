@@ -2125,3 +2125,4 @@ FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 IRowsetKeys::ListKeys::prgColumns=[-In][NativeArrayInfo(CountParamIndex=0)]
 IScopedOperations::Copy::pAuthenticate=[Optional]
 IScopedOperations::Move::pAuthenticate=[Optional]
+FwpmEngineOpen0::serverName=[Reserved]
