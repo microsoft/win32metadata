@@ -1,2 +1,4 @@
 # Add Reserved to FwpmEngineOpen0::serverName
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmEngineOpen0 : serverName : [Const,In,Optional] => [Const,In,Optional,Reserved]
+# Remove vague Version doc mapping
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupInputEx.Version : [Documentation(https://learn.microsoft.com/windows/win32/TaskSchd/taskschedulerschema-version-registrationinfotype-element)] => 
