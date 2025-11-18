@@ -821,8 +821,40 @@ WinBioReleaseFocus(
 ///////////////////////////////////////////////////////////////////////////////
 
 HRESULT WINAPI
-EXPERIMENTAL_WinBioGetEssState(
-    _Out_ EXPERIMENTAL_PWINBIO_ESS_STATE EssState
+WinBioGetEssState(
+    _Out_ PWINBIO_ESS_STATE EssState
+    );
+
+HRESULT WINAPI
+WinBioIsDeviceEnhancedSignInSecurityCapable(
+    _Out_ BOOL* IsCapable
+    );
+
+HRESULT WINAPI
+WinBioGetEnhancedSignInSecurityStateSource(
+    _Out_ WINBIO_POLICY_SOURCE* Source
+    );
+
+HRESULT WINAPI
+WinBioIsDeviceEnhancedSignInSecurityEnabled(
+    _Out_ BOOL* IsEnabled
+    );
+
+HRESULT WINAPI
+WinBioAreEnhancedSignInSecurityRequirementsMet(
+    _Out_ BOOL* AreRequirementsMet
+    );
+
+HRESULT WINAPI
+WinBioGetConnectedSensors(
+    _Out_ SIZE_T* SensorCount,
+    _Out_ WINBIO_CONNECTED_SENSOR** ConnectedSensors
+    );
+
+HRESULT WINAPI
+WinBioGetEnhancedSignInSecurityEnrolledFactors(
+    _In_ WINBIO_IDENTITY* Identity,
+    _Out_ WINBIO_BIOMETRIC_TYPE* EnhancedSignInSecurityEnrolledFactors
     );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)

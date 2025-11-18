@@ -921,7 +921,6 @@ namespace Windows
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
-            [experimental]
             [uuid(AFF493F6-E1FD-5D03-B480-F1849C83EF4A)]
             interface IStorageProviderSuggestionsHandler : IInspectable
             {
@@ -933,7 +932,6 @@ namespace Windows
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
-            [experimental]
             [uuid(DC7B35D8-A25B-58A3-ACE7-B3543106A2AA)]
             interface IStorageProviderSuggestionsHandlerFactory : IInspectable
             {
@@ -942,7 +940,6 @@ namespace Windows
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [exclusiveto(Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions)]
-            [experimental]
             [uuid(EFB8B74D-0D84-579C-B137-EA730635D9BB)]
             interface IStorageProviderSuggestionsQueryOptions : IInspectable
             {
@@ -1213,7 +1210,6 @@ namespace Windows
 
             [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
-            [experimental]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass StorageProviderSuggestionResult
@@ -1222,11 +1218,10 @@ namespace Windows
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
-            [experimental]
             [marshaling_behavior(agile)]
             runtimeclass StorageProviderSuggestionsQueryOptions
             {
-                [default] [experimental] interface Windows.Storage.Provider.IStorageProviderSuggestionsQueryOptions;
+                [default] interface Windows.Storage.Provider.IStorageProviderSuggestionsQueryOptions;
             }
 
             [activatable(Windows.Storage.Provider.CloudFilesContract, 1.0)]

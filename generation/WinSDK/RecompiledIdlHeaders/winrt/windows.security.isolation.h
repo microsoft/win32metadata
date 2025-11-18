@@ -4453,8 +4453,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.Isolation.IsolatedWindowsEnvironmentContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics interface starting with version 1.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
+ *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -10878,8 +10878,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.Isolation.IsolatedWindowsEnvironmentContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics interface starting with version 1.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
+ *   Static Methods exist on the Windows.Security.Isolation.IIsolatedWindowsHostMessengerStatics2 interface starting with version 2.0 of the Windows.Security.Isolation.IsolatedWindowsEnvironmentContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

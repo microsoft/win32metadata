@@ -1,7 +1,13 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$true)]
-    [string]$Version
+    [string]$Version,
+
+    [Parameter(Mandatory=$false)]
+    [string]$NuGetSource = "https://api.nuget.org/v3/index.json",
+    
+    [Parameter(Mandatory=$false)]
+    [switch]$Strict
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -16,8 +22,22 @@ Write-Host "Updating $buildToolsProj..."
 "<PackageReference Include=""Microsoft.Windows.SDK.CPP.x64"" Version=""$Version"" GeneratePathProperty=""true""/>" |
 Set-Content $buildToolsProj
 
+# Restore packages from the specified source
+Write-Host "Restoring packages from $NuGetSource..."
+dotnet restore $buildToolsProj -s $NuGetSource
+if ($LASTEXITCODE -ne 0) {
+    throw "Failed to restore package version $Version from $NuGetSource. Ensure the exact version exists."
+}
+
+if ($Strict) {
+    Write-Host "Strict mode enabled - verified exact version $Version is available"
+}
+
 Write-Host "Rebuilding $buildToolsProj..."
-dotnet build $buildToolsProj -t:Clean
+dotnet build $buildToolsProj -t:Clean --no-restore
+if ($LASTEXITCODE -ne 0) {
+    throw "Build failed. Check that version $Version is available."
+}
 
 Write-Host "Recompiling IDL files for scraping..."
 . "$PSScriptRoot\RecompileIdlFilesForScraping.ps1"

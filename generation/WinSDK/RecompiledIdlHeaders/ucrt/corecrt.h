@@ -634,6 +634,45 @@ typedef _Mbstatet mbstate_t;
     #error You cannot use 32-bit time_t (_USE_32BIT_TIME_T) with _WIN64
 #endif
 
+// There are certain functions in the UCRT (e.g. `time`) that used to have a
+// non-standard `static` declaration. This is incompatible with C++ modules as they cannot
+// export functions with internal linkage.
+// To bring these UCRT functions back to conformance, we drop the `static` keyword from
+// MSVC toolset version 19.50 and onwards.
+//
+// NOTE:
+// There is **nothing** in the compiler (i.e. _MSC_VER) version 19.50 that enables this change.
+// The choice to guard the change behind a specific `_MSC_VER` value is simply to allow us
+// to ship this change without waiting for a new major version of the Windows SDK.
+// Ultimately, dropping `static` from the UCRT risks introducing novel link-time errors for projects
+// that mix headers from multiple CRT versions, use forward declarations of CRT functions, etc.
+//
+// A user may opt back in to the old behavior by setting the macro `_STATIC_INLINE_UCRT_FUNCTIONS` to `1`.
+// The macro `_STATIC_INLINE_UCRT_FUNCTIONS` is always defined to consumers, as either `0` (implies conformance)
+// or `1` (implies backwards compatibility).
+
+// Ensure that `_STATIC_INLINE_UCRT_FUNCTIONS` is always defined.
+// The STL needs this to know if it's safe to export UCRT functions through C++ modules.
+#ifndef _STATIC_INLINE_UCRT_FUNCTIONS
+    #if defined _MSC_VER && _MSC_VER >= 1950
+        #define _STATIC_INLINE_UCRT_FUNCTIONS 0
+    #else
+        #define _STATIC_INLINE_UCRT_FUNCTIONS 1
+    #endif
+#endif // !defined _STATIC_INLINE_UCRT_FUNCTIONS
+
+// Ensure `_STATIC_INLINE_UCRT_FUNCTIONS` is a binary macro
+#if _STATIC_INLINE_UCRT_FUNCTIONS != 0 && _STATIC_INLINE_UCRT_FUNCTIONS != 1
+    #error _STATIC_INLINE_UCRT_FUNCTIONS was defined to be a value other than 0 (i.e. conformance mode) or 1 (i.e. backwards compatibility mode)
+#endif // _STATIC_INLINE_UCRT_FUNCTIONS != 0 && _STATIC_INLINE_UCRT_FUNCTIONS != 1
+
+// Define `_CRT_NONSTANDARD_STATIC` based on `_STATIC_INLINE_UCRT_FUNCTIONS`
+#if _STATIC_INLINE_UCRT_FUNCTIONS == 0
+    #define _CRT_NONSTANDARD_STATIC
+#else // ^^^ _STATIC_INLINE_UCRT_FUNCTIONS == 0 // _STATIC_INLINE_UCRT_FUNCTIONS == 1 vvv
+    #define _CRT_NONSTANDARD_STATIC static
+#endif // ^^^ _STATIC_INLINE_UCRT_FUNCTIONS == 1
+
 #if defined _VCRT_BUILD || defined _CORECRT_BUILD
     #define _CRT_NO_TIME_T
 #endif

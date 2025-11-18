@@ -156,11 +156,13 @@ interface IAppxManifestProperties;
 interface IAppxManifestReader;
 interface IAppxBundleFactory;
 interface IAppxBundleFactory2;
+interface IAppxBundleFactory3;
 interface IAppxBundleWriter;
 interface IAppxBundleWriter2;
 interface IAppxBundleWriter3;
 interface IAppxBundleWriter4;
 interface IAppxBundleReader;
+interface IAppxBundleReader2;
 interface IAppxBundleManifestReader;
 interface IAppxBundleManifestReader2;
 interface IAppxBundleManifestPackageInfoEnumerator;
@@ -304,6 +306,21 @@ interface IAppxFactory3 : IUnknown
         [in, optional]  LPCWSTR                     expectedDigest,
         [out, retval]   IAppxAppInstallerReader**   appInstallerReader
     );
+}
+
+[
+    object,
+    uuid(92E50000-6934-4C8D-B472-229D431DADDF),
+    pointer_default(ref)
+]
+interface IAppxFactory4 : IUnknown
+{
+    HRESULT
+        CreatePackageReaderFromSourceUri(
+        [in]                  LPCWSTR                     uri,
+        [in, unique, string]  LPCWSTR                     expectedDigest,
+        [out, retval]         IAppxPackageReader**        packageReader
+        );
 }
 
 [
@@ -1392,6 +1409,20 @@ interface IAppxBundleFactory2 : IUnknown
 
 [
     object,
+    uuid(D11EA6B6-3909-4376-B7C4-10D50F5CF3AE),
+    pointer_default(ref)
+]
+interface IAppxBundleFactory3 : IUnknown
+{
+    HRESULT CreateBundleReaderFromSourceUri(
+        [in]                 LPCWSTR              uri,
+        [in, unique, string] LPCWSTR              expectedDigest,
+        [out, retval]        IAppxBundleReader**  bundleReader
+    );
+}
+
+[
+    object,
     uuid(EC446FE8-BFEC-4C64-AB4F-49F038F0C6D2),
     pointer_default(ref)
 ]
@@ -1488,6 +1519,19 @@ interface IAppxBundleReader : IUnknown
     HRESULT GetPayloadPackage(
         [in, string]   LPCWSTR      fileName,
         [out, retval]  IAppxFile**  payloadPackage
+    );
+}
+
+[
+    object,
+    uuid(98262195-D63A-4C10-B4CF-DD72E061BA87),
+    pointer_default(ref)
+]
+interface IAppxBundleReader2 : IUnknown
+{
+    HRESULT GetPayloadPackageReader(
+        [in, string]   LPCWSTR               fileName,
+        [out, retval]  IAppxPackageReader** payloadPackageReader
     );
 }
 
@@ -2198,6 +2242,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
 ]
 coclass AppxFactory
 {
+    interface IAppxFactory4;
     interface IAppxFactory3;
     interface IAppxFactory2;
     [default] interface IAppxFactory;
@@ -2208,6 +2253,7 @@ coclass AppxFactory
 ]
 coclass AppxBundleFactory
 {
+    interface IAppxBundleFactory3;
     interface IAppxBundleFactory2;
     [default] interface IAppxBundleFactory;
 };

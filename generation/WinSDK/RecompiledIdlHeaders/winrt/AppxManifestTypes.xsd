@@ -512,6 +512,12 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ST_Capability_SystemAI_2">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="backgroundAITasks"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="ST_DeviceFunction">
     <xs:restriction base="ST_NonEmptyString">
       <xs:maxLength value="100"/>

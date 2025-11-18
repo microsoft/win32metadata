@@ -5738,8 +5738,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ILearningModelSession ** Default Interface **
@@ -5830,8 +5830,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorBoolean ** Default Interface **
@@ -5908,8 +5908,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorFloat ** Default Interface **
@@ -5995,8 +5995,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorInt32Bit ** Default Interface **
@@ -6082,8 +6082,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorString ** Default Interface **
@@ -6169,8 +6169,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorUInt64Bit ** Default Interface **
@@ -6198,8 +6198,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorUInt8Bit ** Default Interface **
@@ -15571,8 +15571,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Type can be activated via the Windows.AI.MachineLearning.ILearningModelSessionFactory2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ILearningModelSession ** Default Interface **
@@ -15663,8 +15663,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorBooleanStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorBoolean ** Default Interface **
@@ -15741,8 +15741,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorFloatStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorFloat ** Default Interface **
@@ -15828,8 +15828,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorInt32BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorInt32Bit ** Default Interface **
@@ -15915,8 +15915,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorStringStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorString ** Default Interface **
@@ -16002,8 +16002,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt64BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorUInt64Bit ** Default Interface **
@@ -16031,8 +16031,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.AI.MachineLearning.MachineLearningContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics interface starting with version 1.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
+ *   Static Methods exist on the Windows.AI.MachineLearning.ITensorUInt8BitStatics2 interface starting with version 2.0 of the Windows.AI.MachineLearning.MachineLearningContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.AI.MachineLearning.ITensorUInt8Bit ** Default Interface **

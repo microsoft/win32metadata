@@ -385,6 +385,8 @@ namespace Windows
 
             interface ICodecSubtypesStatics;
 
+            interface ICodecSubtypesStatics2;
+
             interface IDataCue;
 
             interface IDataCue2;
@@ -1378,6 +1380,14 @@ namespace Windows
                 [propget] HRESULT AudioFormatWMAudioLossless([out] [retval] HSTRING* value);
                 [propget] HRESULT AudioFormatWMAudioV8([out] [retval] HSTRING* value);
                 [propget] HRESULT AudioFormatWMAudioV9([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Media.Core.CodecSubtypes)]
+            [uuid(363B0930-DE26-582E-8014-F546D0753887)]
+            interface ICodecSubtypesStatics2 : IInspectable
+            {
+                [propget] HRESULT VideoFormatAv1([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2570,6 +2580,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Media.Core.ICodecSubtypesStatics, Windows.Foundation.UniversalApiContract, 4.0)]
+            [static(Windows.Media.Core.ICodecSubtypesStatics2, Windows.Foundation.UniversalApiContract, 19.0)]
             [threading(both)]
             runtimeclass CodecSubtypes
             {

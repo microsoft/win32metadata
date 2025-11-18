@@ -164,7 +164,7 @@ __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_0(
     #ifdef _USE_32BIT_TIME_T
 
         _Check_return_
-        static __inline wchar_t* __CRTDECL _wctime(
+        _CRT_NONSTANDARD_STATIC __inline wchar_t* __CRTDECL _wctime(
             _In_ time_t const* const _Time
             )
         {
@@ -172,7 +172,7 @@ __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_0(
         }
 
         _Check_return_wat_
-        static __inline errno_t __CRTDECL _wctime_s(
+        _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL _wctime_s(
             _Pre_notnull_ _Post_z_ _Out_writes_z_(_SizeInWords) wchar_t*      const _Buffer,
             _In_                                                size_t        const _SizeInWords,
             _In_                                                time_t const* const _Time)
@@ -183,14 +183,14 @@ __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_0(
     #else // ^^^ _USE_32BIT_TIME_T ^^^ // vvv !_USE_32BIT_TIME_T vvv //
 
         _Check_return_
-        static __inline wchar_t * __CRTDECL _wctime(
+        _CRT_NONSTANDARD_STATIC __inline wchar_t * __CRTDECL _wctime(
             _In_ time_t const* const _Time)
         {
             return _wctime64(_Time);
         }
 
         _Check_return_wat_
-        static __inline errno_t __CRTDECL _wctime_s(
+        _CRT_NONSTANDARD_STATIC __inline errno_t __CRTDECL _wctime_s(
             _Pre_notnull_ _Post_z_ _Out_writes_z_(_SizeInWords) wchar_t*      const _Buffer,
             _In_                                                size_t        const _SizeInWords,
             _In_                                                time_t const* const _Time

@@ -2331,7 +2331,8 @@ typedef enum _WINHTTP_PROXY_SETTINGS_TYPE
 {
     WinHttpProxySettingsTypeUnknown,
     WinHttpProxySettingsTypeWsl,
-    WinHttpProxySettingsTypeWsa
+    WinHttpProxySettingsTypeWsa,
+    WinHttpProxySettingsTypeXBox
 } WINHTTP_PROXY_SETTINGS_TYPE, *PWINHTTP_PROXY_SETTINGS_TYPE;
 
 
@@ -2502,6 +2503,8 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
 #define WINHTTP_FEATURE_DSCP_TAG                                             92
 #define WINHTTP_FEATURE_HTTP11_DOWNGRADE_TTL                                 93
 #define WINHTTP_FEATURE_SESSION_ERROR_LOG_GUID                               94
+
+#define WINHTTP_FEATURE_GET_PROXY_SETTINGS_EX_XBOX                           95
 
 
 

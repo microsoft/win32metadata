@@ -89,7 +89,7 @@ _ACRTIMP errno_t __cdecl _ftime64_s(
 
     #ifdef _USE_32BIT_TIME_T
 
-        static __inline void __CRTDECL ftime(struct timeb* const _Tmb)
+        _CRT_NONSTANDARD_STATIC __inline void __CRTDECL ftime(struct timeb* const _Tmb)
         {
             _STATIC_ASSERT(sizeof(struct timeb) == sizeof(struct __timeb32));
             _ftime32((struct __timeb32*)_Tmb);
@@ -97,7 +97,7 @@ _ACRTIMP errno_t __cdecl _ftime64_s(
 
     #else
 
-        static __inline void __CRTDECL ftime(struct timeb* const _Tmb)
+        _CRT_NONSTANDARD_STATIC __inline void __CRTDECL ftime(struct timeb* const _Tmb)
         {
             _STATIC_ASSERT(sizeof(struct timeb) == sizeof(struct __timeb64));
             _ftime64((struct __timeb64*)_Tmb);

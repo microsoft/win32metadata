@@ -69,6 +69,8 @@ namespace Windows
     namespace UI
     {
         typedef struct Color Color;
+
+        typedef struct WindowId WindowId;
     }
 }
 namespace Windows
@@ -185,6 +187,22 @@ namespace Windows
 
             interface ITargetApplicationChosenEventArgs;
 
+            interface ITransferTarget;
+
+            interface ITransferTargetChangedEventArgs;
+
+            interface ITransferTargetDiscoveryOptions;
+
+            interface ITransferTargetDiscoveryOptionsFactory;
+
+            interface ITransferTargetInvokeResult;
+
+            interface ITransferTargetStatics;
+
+            interface ITransferTargetWatcher;
+
+            interface ITransferTargetWatcherStatics;
+
             runtimeclass Clipboard;
 
             runtimeclass ClipboardContentOptions;
@@ -236,6 +254,16 @@ namespace Windows
             runtimeclass StandardDataFormats;
 
             runtimeclass TargetApplicationChosenEventArgs;
+
+            runtimeclass TransferTarget;
+
+            runtimeclass TransferTargetChangedEventArgs;
+
+            runtimeclass TransferTargetDiscoveryOptions;
+
+            runtimeclass TransferTargetInvokeResult;
+
+            runtimeclass TransferTargetWatcher;
         }
     }
 }
@@ -265,6 +293,8 @@ namespace Windows
 
                 interface Windows.Foundation.EventHandler<Windows.ApplicationModel.DataTransfer.ClipboardHistoryChangedEventArgs*>;
 
+                interface Windows.Foundation.IAsyncOperationWithProgress<Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult*, DOUBLE>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.DataTransfer.ClipboardHistoryItemsResult*>;
 
                 interface Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.DataTransfer.DataPackage*>;
@@ -282,6 +312,10 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.ShareProvidersRequestedEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.TargetApplicationChosenEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, IInspectable*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs*>;
             }
         }
     }
@@ -848,6 +882,98 @@ namespace Windows
                 [propget] HRESULT ApplicationName([out] [retval] HSTRING* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTarget)]
+            [experimental]
+            [uuid(897E04E5-60C2-5EAE-909F-E6257E32C644)]
+            interface ITransferTarget : IInspectable
+            {
+                [propget] HRESULT Id([out] [retval] HSTRING* value);
+                [propget] HRESULT Label([out] [retval] HSTRING* value);
+                [propget] HRESULT DisplayIcon([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [propget] HRESULT IsEnabled([out] [retval] boolean* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs)]
+            [experimental]
+            [uuid(D513D198-4174-53CF-A06E-4CD263D0DFEF)]
+            interface ITransferTargetChangedEventArgs : IInspectable
+            {
+                [propget] HRESULT Target([out] [retval] Windows.ApplicationModel.DataTransfer.TransferTarget** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions)]
+            [experimental]
+            [uuid(712FE3B5-644F-5F6B-97B6-3A3400999ED7)]
+            interface ITransferTargetDiscoveryOptions : IInspectable
+            {
+                [propget] HRESULT DataPackage([out] [retval] Windows.ApplicationModel.DataTransfer.DataPackageView** value);
+                [propget] HRESULT MaxAppTargets([out] [retval] INT32* value);
+                [propput] HRESULT MaxAppTargets([in] INT32 value);
+                [propget] HRESULT AllowedTargetAppIds([out] UINT32* __valueSize, [out] [retval] [size_is(, *__valueSize)] HSTRING** value);
+                [propput] HRESULT AllowedTargetAppIds([in] UINT32 __valueSize, [in] [size_is(__valueSize)] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions)]
+            [experimental]
+            [uuid(EC4B7FFC-CBC6-5E12-8E9B-D5E892F2C6F8)]
+            interface ITransferTargetDiscoveryOptionsFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] Windows.ApplicationModel.DataTransfer.DataPackageView* dataPackage, [out] [retval] Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult)]
+            [experimental]
+            [uuid(15F220A6-CFFE-56F5-B403-ED44E9C3AD38)]
+            interface ITransferTargetInvokeResult : IInspectable
+            {
+                [propget] HRESULT Succeeded([out] [retval] boolean* value);
+                [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTarget)]
+            [experimental]
+            [uuid(815B8804-E7F1-5F37-B52F-BE1CEBA9A59E)]
+            interface ITransferTargetStatics : IInspectable
+            {
+                HRESULT CreateWatcher([in] Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions* options, [out] [retval] Windows.ApplicationModel.DataTransfer.TransferTargetWatcher** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetWatcher)]
+            [experimental]
+            [uuid(2F85CA29-0100-5D09-907C-FE554D2FCD1A)]
+            interface ITransferTargetWatcher : IInspectable
+            {
+                HRESULT Start();
+                HRESULT Stop();
+                HRESULT TransferToAsync([in] Windows.ApplicationModel.DataTransfer.TransferTarget* target, [in] Windows.UI.WindowId parentWindowHandle, [out] [retval] Windows.Foundation.IAsyncOperationWithProgress<Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult*, DOUBLE>** operation);
+                [eventadd] HRESULT Added([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Added([in] EventRegistrationToken token);
+                [eventadd] HRESULT Removed([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Removed([in] EventRegistrationToken token);
+                [eventadd] HRESULT Updated([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Updated([in] EventRegistrationToken token);
+                [eventadd] HRESULT EnumerationCompleted([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT EnumerationCompleted([in] EventRegistrationToken token);
+                [eventadd] HRESULT Stopped([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Stopped([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.ApplicationModel.DataTransfer.TransferTargetWatcher)]
+            [experimental]
+            [uuid(A24B3528-DB4E-5BDD-9D30-DCB192C701F5)]
+            interface ITransferTargetWatcherStatics : IInspectable
+            {
+                HRESULT IsSupported([in] Windows.ApplicationModel.DataTransfer.DataPackageView* dataPackage, [out] [retval] boolean* result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(standard)]
             [static(Windows.ApplicationModel.DataTransfer.IClipboardStatics, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1061,6 +1187,52 @@ namespace Windows
             runtimeclass TargetApplicationChosenEventArgs
             {
                 [default] interface Windows.ApplicationModel.DataTransfer.ITargetApplicationChosenEventArgs;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [static(Windows.ApplicationModel.DataTransfer.ITransferTargetStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+            [threading(both)]
+            runtimeclass TransferTarget
+            {
+                [default] [experimental] interface Windows.ApplicationModel.DataTransfer.ITransferTarget;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            runtimeclass TransferTargetChangedEventArgs
+            {
+                [default] [experimental] interface Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs;
+            }
+
+            [activatable(Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory, Windows.Foundation.UniversalApiContract, 19.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass TransferTargetDiscoveryOptions
+            {
+                [default] [experimental] interface Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            runtimeclass TransferTargetInvokeResult
+            {
+                [default] [experimental] interface Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [static(Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+            [threading(both)]
+            runtimeclass TransferTargetWatcher
+            {
+                [default] [experimental] interface Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher;
             }
         }
     }

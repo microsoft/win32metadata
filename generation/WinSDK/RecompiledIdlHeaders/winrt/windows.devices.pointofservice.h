@@ -11694,8 +11694,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPointOfService_CIUnifiedPosErr
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.IBarcodeScanner ** Default Interface **
@@ -11883,8 +11883,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ICashDrawer ** Default Interface **
@@ -29947,8 +29947,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPointOfService_CIUnifiedPosErr
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.IBarcodeScannerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.IBarcodeScanner ** Default Interface **
@@ -30136,8 +30136,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.PointOfService.ICashDrawerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.PointOfService.ICashDrawer ** Default Interface **

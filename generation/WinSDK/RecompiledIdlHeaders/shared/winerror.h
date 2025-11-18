@@ -29056,6 +29056,15 @@
 //
 #define ERROR_CANNOT_COMPOSE_APISET_EXTENSION 15380L
 
+//
+// MessageId: ERROR_APISET_SCHEMA_VERSION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The API Set schema version is not supported.
+//
+#define ERROR_APISET_SCHEMA_VERSION_NOT_SUPPORTED 15381L
+
 //////////////////////////////////////////////////
 //                                              //
 //         Start of Run Level error codes       //
@@ -51401,6 +51410,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
 //
 #define FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT _HRESULT_TYPEDEF_(0xC0310115L)
+
+//
+// MessageId: FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG
+//
+// MessageText:
+//
+// The TPM PCR values did not match what was calculated from the TCG log.
+//
+#define FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG  _HRESULT_TYPEDEF_(0xC0310116L)
 
 //
 // =======================================================

@@ -6674,16 +6674,23 @@ YieldProcessor (
 #define CONTEXT_ARM64_DEBUG_REGISTERS (CONTEXT_ARM64 | 0x8L)
 #define CONTEXT_ARM64_X18 (CONTEXT_ARM64 | 0x10L)
 #define CONTEXT_ARM64_XSTATE (CONTEXT_ARM64 | 0x20L)
+#define CONTEXT_ARM64_FLOATING_POINT_LOW (CONTEXT_ARM64 | 0x40L)
+#define CONTEXT_ARM64_FLOATING_POINT_HIGH (CONTEXT_ARM64 | 0x80L)
 
 //
 // CONTEXT_ARM64_X18 is not part of CONTEXT_ARM64_FULL because in NT user-mode
 // threads, x18 contains a pointer to the TEB and should generally not be set
 // without intending to.
 //
+// CONTEXT_ARM64_FLOATING_POINT_LOW and CONTEXT_ARM64_FLOATING_POINT_HIGH are
+// not part of CONTEXT_ARM64_FULL because they are only used in limited cases
+// involving conversion between ARM64 and ARM64EC (AMD64) context records.
+//
 
 #define CONTEXT_ARM64_FULL (CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT)
 #define CONTEXT_ARM64_ALL  (CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT | \
-                            CONTEXT_ARM64_DEBUG_REGISTERS | CONTEXT_ARM64_X18)
+                            CONTEXT_ARM64_DEBUG_REGISTERS | CONTEXT_ARM64_X18 | CONTEXT_ARM64_FLOATING_POINT_LOW | \
+                            CONTEXT_ARM64_FLOATING_POINT_HIGH)
 
 #if defined(_ARM64_)
 
@@ -6762,6 +6769,14 @@ YieldProcessor (
 //
 // CONTEXT_DEBUG_REGISTERS specifies up to 16 of DBGBVR, DBGBCR, DBGWVR,
 //      DBGWCR.
+//
+// CONTEXT_XSTATE specifies ARM64 extended state such as SVE and SME.
+//
+// CONTEXT_ARM64_FLOATING_POINT_LOW specifies that only the FPCR, FPSR and
+// V0-V15 should be operated on, and CONTEXT_ARM64_FLOATING_POINT_HIGH
+// specifies that only V16-31 should be operated on, for use in ARM64 context
+// records that have been converted from ARM64EC (AMD64) context records. Both
+// flags are considered to be set if CONTEXT_FLOATING_POINT is set.
 //
 
 typedef union _ARM64_NT_NEON128 {

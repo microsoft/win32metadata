@@ -12299,12 +12299,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics8 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapControl ** Default Interface **
@@ -12600,10 +12600,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapElement ** Default Interface **
@@ -12855,8 +12855,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapIcon ** Default Interface **
@@ -13289,8 +13289,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapTileSource ** Default Interface **
@@ -30291,12 +30291,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics6 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics8 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapControlStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapControl ** Default Interface **
@@ -30592,10 +30592,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics4 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapElementStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapElement ** Default Interface **
@@ -30847,8 +30847,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapIconStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapIcon ** Default Interface **
@@ -31281,8 +31281,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Maps.IMapTileSourceStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Maps.IMapTileSource ** Default Interface **

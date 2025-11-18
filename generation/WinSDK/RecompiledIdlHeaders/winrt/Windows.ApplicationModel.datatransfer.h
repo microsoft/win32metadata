@@ -867,6 +867,126 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITargetApplicationChosenEventArgs_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTarget;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget ABI::Windows::ApplicationModel::DataTransfer::ITransferTarget
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetChangedEventArgs;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetChangedEventArgs
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetDiscoveryOptions;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetDiscoveryOptions
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetDiscoveryOptionsFactory;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetDiscoveryOptionsFactory
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetInvokeResult;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetInvokeResult
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetStatics;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetStatics
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetWatcher;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetWatcher
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                interface ITransferTargetWatcherStatics;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetWatcherStatics
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
@@ -1636,6 +1756,103 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::Storage::Streams::RandomAc
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CStorage__CStreams__CRandomAccessStreamReference_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                class TransferTargetInvokeResult;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#define DEF___FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("b3a0b269-36e0-5c7e-a779-f7c4ae4fba85"))
+IAsyncOperationWithProgressCompletedHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> : IAsyncOperationWithProgressCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetInvokeResult*>, double>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2<Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult, Double>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationWithProgressCompletedHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t;
+#define __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double ABI::Windows::Foundation::__FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#define DEF___FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("1822bca9-47a2-58ad-8c40-054c4b5aaf2d"))
+IAsyncOperationWithProgress<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> : IAsyncOperationWithProgress_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetInvokeResult*>, double>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperationWithProgress`2<Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult, Double>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationWithProgress<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t;
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double ABI::Windows::Foundation::__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#define DEF___FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("66518d3e-0448-5c56-920e-8a0af567fe91"))
+IAsyncOperationProgressHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> : IAsyncOperationProgressHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetInvokeResult*>, double>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationProgressHandler`2<Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult, Double>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationProgressHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetInvokeResult*, double> __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t;
+#define __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double ABI::Windows::Foundation::__FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 
 #ifndef DEF___FIIterator_1_HSTRING_USE
@@ -2439,6 +2656,86 @@ typedef ITypedEventHandler<ABI::Windows::ApplicationModel::DataTransfer::DataTra
 
 namespace ABI {
     namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                class TransferTargetWatcher;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_USE
+#define DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("2d0d4dd2-4dc7-533a-9601-84d15554f6e4"))
+ITypedEventHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, IInspectable*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetWatcher*>, IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher, Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, IInspectable*> __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_t;
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                class TransferTargetChangedEventArgs;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_USE
+#define DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("9ebd72fb-43ed-57a0-862a-cda366a68827"))
+ITypedEventHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, ABI::Windows::ApplicationModel::DataTransfer::TransferTargetChangedEventArgs*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetWatcher*>, ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetChangedEventArgs*, ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetChangedEventArgs*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.ApplicationModel.DataTransfer.TransferTargetWatcher, Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::ApplicationModel::DataTransfer::TransferTargetWatcher*, ABI::Windows::ApplicationModel::DataTransfer::TransferTargetChangedEventArgs*> __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_t;
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+namespace ABI {
+    namespace Windows {
         namespace Foundation {
             typedef struct DateTime DateTime;
         } /* Foundation */
@@ -2483,6 +2780,14 @@ namespace ABI {
     namespace Windows {
         namespace UI {
             typedef struct Color Color;
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            typedef struct WindowId WindowId;
         } /* UI */
     } /* Windows */
 } /* ABI */
@@ -2632,6 +2937,26 @@ namespace ABI {
         namespace ApplicationModel {
             namespace DataTransfer {
                 class ShareUIOptions;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                class TransferTarget;
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                class TransferTargetDiscoveryOptions;
             } /* DataTransfer */
         } /* ApplicationModel */
     } /* Windows */
@@ -4932,13 +5257,401 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITarget
 
 /*
  *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTarget
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTarget[] = L"Windows.ApplicationModel.DataTransfer.ITransferTarget";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("897e04e5-60c2-5eae-909f-e6257e32c644")
+                ITransferTarget : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Id(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Label(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_DisplayIcon(
+                        ABI::Windows::Storage::Streams::IRandomAccessStreamReference** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsEnabled(
+                        boolean* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTarget = __uuidof(ITransferTarget);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetChangedEventArgs[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("d513d198-4174-53cf-a06e-4cd263d0dfef")
+                ITransferTargetChangedEventArgs : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Target(
+                        ABI::Windows::ApplicationModel::DataTransfer::ITransferTarget** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetChangedEventArgs = __uuidof(ITransferTargetChangedEventArgs);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetDiscoveryOptions[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("712fe3b5-644f-5f6b-97b6-3a3400999ed7")
+                ITransferTargetDiscoveryOptions : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DataPackage(
+                        ABI::Windows::ApplicationModel::DataTransfer::IDataPackageView** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_MaxAppTargets(
+                        INT32* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_MaxAppTargets(
+                        INT32 value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_AllowedTargetAppIds(
+                        UINT32* valueLength,
+                        HSTRING** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_AllowedTargetAppIds(
+                        UINT32 valueLength,
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetDiscoveryOptions = __uuidof(ITransferTargetDiscoveryOptions);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetDiscoveryOptionsFactory[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("ec4b7ffc-cbc6-5e12-8e9b-d5e892f2c6f8")
+                ITransferTargetDiscoveryOptionsFactory : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateInstance(
+                        ABI::Windows::ApplicationModel::DataTransfer::IDataPackageView* dataPackage,
+                        ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetDiscoveryOptions** value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetDiscoveryOptionsFactory = __uuidof(ITransferTargetDiscoveryOptionsFactory);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetInvokeResult[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("15f220a6-cffe-56f5-b403-ed44e9c3ad38")
+                ITransferTargetInvokeResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Succeeded(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ExtendedError(
+                        HRESULT* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetInvokeResult = __uuidof(ITransferTargetInvokeResult);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetStatics[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetStatics";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("815b8804-e7f1-5f37-b52f-be1ceba9a59e")
+                ITransferTargetStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateWatcher(
+                        ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetDiscoveryOptions* options,
+                        ABI::Windows::ApplicationModel::DataTransfer::ITransferTargetWatcher** result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetStatics = __uuidof(ITransferTargetStatics);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetWatcher[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("2f85ca29-0100-5d09-907c-fe554d2fcd1a")
+                ITransferTargetWatcher : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TransferToAsync(
+                        ABI::Windows::ApplicationModel::DataTransfer::ITransferTarget* target,
+                        ABI::Windows::UI::WindowId parentWindowHandle,
+                        __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_Added(
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_Added(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_Removed(
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_Removed(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_Updated(
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_Updated(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_EnumerationCompleted(
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_EnumerationCompleted(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_Stopped(
+                        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_Stopped(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetWatcher = __uuidof(ITransferTargetWatcher);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetWatcherStatics[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace DataTransfer {
+                MIDL_INTERFACE("a24b3528-db4e-5bdd-9d30-dcb192c701f5")
+                ITransferTargetWatcherStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE IsSupported(
+                        ABI::Windows::ApplicationModel::DataTransfer::IDataPackageView* dataPackage,
+                        boolean* result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_ITransferTargetWatcherStatics = __uuidof(ITransferTargetWatcherStatics);
+            } /* DataTransfer */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.DataTransfer.Clipboard
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5234,8 +5947,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
@@ -5438,9 +6151,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5470,6 +6183,136 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TargetApplicationChosenEventArgs[] = L"Windows.ApplicationModel.DataTransfer.TargetApplicationChosenEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.ITransferTargetStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTarget ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTarget_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTarget_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTarget[] = L"Windows.ApplicationModel.DataTransfer.TransferTarget";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetWatcher";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
@@ -5772,6 +6615,54 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIStandardDat
 typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITargetApplicationChosenEventArgs __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITargetApplicationChosenEventArgs;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITargetApplicationChosenEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -7447,6 +8338,198 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CStorage__CStreams__CRan
 
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CStorage__CStreams__CRandomAccessStreamReference_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+typedef interface __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+typedef interface __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+typedef struct __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl;
+
+interface __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double
+{
+    CONST_VTBL struct __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+typedef struct __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Progress)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Progress)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double** result);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationWithProgressCompletedHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult** result);
+
+    END_INTERFACE
+} __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl;
+
+interface __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double
+{
+    CONST_VTBL struct __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_put_Progress(This, handler) \
+    ((This)->lpVtbl->put_Progress(This, handler))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_get_Progress(This, result) \
+    ((This)->lpVtbl->get_Progress(This, result))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double;
+
+typedef struct __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* This,
+        __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double* asyncInfo,
+        DOUBLE progressInfo);
+
+    END_INTERFACE
+} __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl;
+
+interface __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double
+{
+    CONST_VTBL struct __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_doubleVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_Invoke(This, asyncInfo, progressInfo) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, progressInfo))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationProgressHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #if !defined(____FIIterator_1_HSTRING_INTERFACE_DEFINED__)
 #define ____FIIterator_1_HSTRING_INTERFACE_DEFINED__
@@ -9330,6 +10413,110 @@ interface __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CDa
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable;
+
+typedef struct __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectableVtbl;
+
+interface __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs;
+
+typedef struct __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* sender,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgsVtbl;
+
+interface __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
 typedef struct __x_ABI_CWindows_CFoundation_CDateTime __x_ABI_CWindows_CFoundation_CDateTime;
 
 #ifndef ____x_ABI_CWindows_CFoundation_CIDeferral_FWD_DEFINED__
@@ -9345,6 +10532,8 @@ typedef interface __x_ABI_CWindows_CFoundation_CIPropertyValue __x_ABI_CWindows_
 #endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 
 typedef struct __x_ABI_CWindows_CUI_CColor __x_ABI_CWindows_CUI_CColor;
+
+typedef struct __x_ABI_CWindows_CUI_CWindowId __x_ABI_CWindows_CUI_CWindowId;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CDataTransfer_CClipboardHistoryItemsResultStatus __x_ABI_CWindows_CApplicationModel_CDataTransfer_CClipboardHistoryItemsResultStatus;
 
@@ -13494,13 +14683,707 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITarget
 
 /*
  *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTarget
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTarget[] = L"Windows.ApplicationModel.DataTransfer.ITransferTarget";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_Label)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_DisplayIcon)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        __x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStreamReference** value);
+    HRESULT (STDMETHODCALLTYPE* get_IsEnabled)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_get_Id(This, value) \
+    ((This)->lpVtbl->get_Id(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_get_Label(This, value) \
+    ((This)->lpVtbl->get_Label(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_get_DisplayIcon(This, value) \
+    ((This)->lpVtbl->get_DisplayIcon(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_get_IsEnabled(This, value) \
+    ((This)->lpVtbl->get_IsEnabled(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetChangedEventArgs[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Target)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_get_Target(This, value) \
+    ((This)->lpVtbl->get_Target(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetChangedEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetDiscoveryOptions[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DataPackage)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView** value);
+    HRESULT (STDMETHODCALLTYPE* get_MaxAppTargets)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        INT32* value);
+    HRESULT (STDMETHODCALLTYPE* put_MaxAppTargets)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        INT32 value);
+    HRESULT (STDMETHODCALLTYPE* get_AllowedTargetAppIds)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        UINT32* valueLength,
+        HSTRING** value);
+    HRESULT (STDMETHODCALLTYPE* put_AllowedTargetAppIds)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* This,
+        UINT32 valueLength,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_get_DataPackage(This, value) \
+    ((This)->lpVtbl->get_DataPackage(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_get_MaxAppTargets(This, value) \
+    ((This)->lpVtbl->get_MaxAppTargets(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_put_MaxAppTargets(This, value) \
+    ((This)->lpVtbl->put_MaxAppTargets(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_get_AllowedTargetAppIds(This, valueLength, value) \
+    ((This)->lpVtbl->get_AllowedTargetAppIds(This, valueLength, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_put_AllowedTargetAppIds(This, valueLength, value) \
+    ((This)->lpVtbl->put_AllowedTargetAppIds(This, valueLength, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetDiscoveryOptionsFactory[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactoryVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateInstance)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView* dataPackage,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactoryVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactoryVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_CreateInstance(This, dataPackage, value) \
+    ((This)->lpVtbl->CreateInstance(This, dataPackage, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptionsFactory_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetInvokeResult[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Succeeded)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* get_ExtendedError)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult* This,
+        HRESULT* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResultVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_get_Succeeded(This, value) \
+    ((This)->lpVtbl->get_Succeeded(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_get_ExtendedError(This, value) \
+    ((This)->lpVtbl->get_ExtendedError(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetInvokeResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetStatics[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetStatics";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateWatcher)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetDiscoveryOptions* options,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStaticsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_CreateWatcher(This, options, result) \
+    ((This)->lpVtbl->CreateWatcher(This, options, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetWatcher[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* Start)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This);
+    HRESULT (STDMETHODCALLTYPE* Stop)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This);
+    HRESULT (STDMETHODCALLTYPE* TransferToAsync)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTarget* target,
+        struct __x_ABI_CWindows_CUI_CWindowId parentWindowHandle,
+        __FIAsyncOperationWithProgress_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetInvokeResult_double** operation);
+    HRESULT (STDMETHODCALLTYPE* add_Added)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Added)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_Removed)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Removed)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_Updated)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_Windows__CApplicationModel__CDataTransfer__CTransferTargetChangedEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Updated)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_EnumerationCompleted)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_EnumerationCompleted)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_Stopped)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        __FITypedEventHandler_2_Windows__CApplicationModel__CDataTransfer__CTransferTargetWatcher_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Stopped)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_Start(This) \
+    ((This)->lpVtbl->Start(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_Stop(This) \
+    ((This)->lpVtbl->Stop(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_TransferToAsync(This, target, parentWindowHandle, operation) \
+    ((This)->lpVtbl->TransferToAsync(This, target, parentWindowHandle, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_add_Added(This, handler, token) \
+    ((This)->lpVtbl->add_Added(This, handler, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_remove_Added(This, token) \
+    ((This)->lpVtbl->remove_Added(This, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_add_Removed(This, handler, token) \
+    ((This)->lpVtbl->add_Removed(This, handler, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_remove_Removed(This, token) \
+    ((This)->lpVtbl->remove_Removed(This, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_add_Updated(This, handler, token) \
+    ((This)->lpVtbl->add_Updated(This, handler, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_remove_Updated(This, token) \
+    ((This)->lpVtbl->remove_Updated(This, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_add_EnumerationCompleted(This, handler, token) \
+    ((This)->lpVtbl->add_EnumerationCompleted(This, handler, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_remove_EnumerationCompleted(This, token) \
+    ((This)->lpVtbl->remove_EnumerationCompleted(This, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_add_Stopped(This, handler, token) \
+    ((This)->lpVtbl->add_Stopped(This, handler, token))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_remove_Stopped(This, token) \
+    ((This)->lpVtbl->remove_Stopped(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcher_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_DataTransfer_ITransferTargetWatcherStatics[] = L"Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics";
+typedef struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* IsSupported)(__x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics* This,
+        __x_ABI_CWindows_CApplicationModel_CDataTransfer_CIDataPackageView* dataPackage,
+        boolean* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStaticsVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_IsSupported(This, dataPackage, result) \
+    ((This)->lpVtbl->IsSupported(This, dataPackage, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CDataTransfer_CITransferTargetWatcherStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.ApplicationModel.DataTransfer.Clipboard
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics2 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IClipboardStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -13796,8 +15679,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.DataTransfer.IDataTransferManager ** Default Interface **
@@ -14000,9 +15883,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics3 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.IStandardDataFormatsStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -14032,6 +15915,136 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TargetApplicationChosenEventArgs[] = L"Windows.ApplicationModel.DataTransfer.TargetApplicationChosenEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTarget
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.ITransferTargetStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTarget ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTarget_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTarget_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTarget[] = L"Windows.ApplicationModel.DataTransfer.TransferTarget";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetChangedEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetChangedEventArgs[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetChangedEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass can be activated.
+ *   Type can be activated via the Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptionsFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetDiscoveryOptions ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetDiscoveryOptions[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetDiscoveryOptions";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetInvokeResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetInvokeResult[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetInvokeResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Class Windows.ApplicationModel.DataTransfer.TransferTargetWatcher
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.ApplicationModel.DataTransfer.ITransferTargetWatcherStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.DataTransfer.ITransferTargetWatcher ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_DataTransfer_TransferTargetWatcher[] = L"Windows.ApplicationModel.DataTransfer.TransferTargetWatcher";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #endif // defined(__cplusplus)
 #pragma pop_macro("MIDL_CONST_ID")

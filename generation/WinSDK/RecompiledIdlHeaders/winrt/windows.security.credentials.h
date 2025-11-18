@@ -222,21 +222,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCacheConfigurationFactory_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace Security {
-            namespace Credentials {
-                interface IKeyCredentialManagerExtendedStatics;
-            } /* Credentials */
-        } /* Security */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics ABI::Windows::Security::Credentials::IKeyCredentialManagerExtendedStatics
-
-#endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
 namespace ABI {
@@ -251,6 +236,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics ABI::Windows::Security::Credentials::IKeyCredentialManagerStatics
 
 #endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Credentials {
+                interface IKeyCredentialManagerStatics2;
+            } /* Credentials */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2 ABI::Windows::Security::Credentials::IKeyCredentialManagerStatics2
+
+#endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialOperationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialOperationResult_FWD_DEFINED__
@@ -1431,9 +1431,8 @@ namespace ABI {
             namespace Credentials {
                 enum KeyCredentialCacheOption : int
                 {
-                    KeyCredentialCacheOption_NoCache = 1,
-                    KeyCredentialCacheOption_CacheWhenUnlocked = 2,
-                    KeyCredentialCacheOption_CacheUnderLock = 4,
+                    KeyCredentialCacheOption_NoCache = 0,
+                    KeyCredentialCacheOption_CacheWhenUnlocked = 1,
                 };
             } /* Credentials */
         } /* Security */
@@ -1485,6 +1484,7 @@ namespace ABI {
                     KeyCredentialStatus_UserPrefersPassword = 4,
                     KeyCredentialStatus_CredentialAlreadyExists = 5,
                     KeyCredentialStatus_SecurityDeviceLocked = 6,
+                    KeyCredentialStatus_AlgorithmNotSupported = 7,
                 };
             } /* Credentials */
         } /* Security */
@@ -1681,17 +1681,18 @@ namespace ABI {
     namespace Windows {
         namespace Security {
             namespace Credentials {
-                MIDL_INTERFACE("ca343273-f558-53ef-b943-4a3ec81a217e")
+                MIDL_INTERFACE("3b7c5e09-7b72-5a05-b2f0-7119ca3fd5df")
                 IKeyCredential2 : public IInspectable
                 {
                 public:
                     virtual HRESULT STDMETHODCALLTYPE RequestDeriveSharedSecretAsync(
                         ABI::Windows::UI::WindowId windowId,
                         HSTRING message,
-                        ABI::Windows::Storage::Streams::IBuffer* publicKey,
+                        ABI::Windows::Storage::Streams::IBuffer* encryptedRequest,
                         __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialOperationResult** operation
                         ) = 0;
                     virtual HRESULT STDMETHODCALLTYPE RetrieveAuthorizationContext(
+                        ABI::Windows::Storage::Streams::IBuffer* encryptedRequest,
                         ABI::Windows::Storage::Streams::IBuffer** result
                         ) = 0;
                 };
@@ -1829,56 +1830,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCa
 
 /*
  *
- * Interface Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerExtendedStatics[] = L"Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics";
-namespace ABI {
-    namespace Windows {
-        namespace Security {
-            namespace Credentials {
-                MIDL_INTERFACE("a5312d27-b408-5011-9b36-b07ab0a67a7e")
-                IKeyCredentialManagerExtendedStatics : public IInspectable
-                {
-                public:
-                    virtual HRESULT STDMETHODCALLTYPE RequestCreateAsync(
-                        HSTRING name,
-                        ABI::Windows::Security::Credentials::KeyCredentialCreationOption option,
-                        HSTRING algorithm,
-                        HSTRING message,
-                        ABI::Windows::Security::Credentials::IKeyCredentialCacheConfiguration* cacheConfiguration,
-                        ABI::Windows::UI::WindowId windowId,
-                        ABI::Windows::Security::Credentials::ChallengeResponseKind callbackType,
-                        ABI::Windows::Security::Credentials::IAttestationChallengeHandler* attestationCallback,
-                        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation
-                        ) = 0;
-                    virtual HRESULT STDMETHODCALLTYPE OpenAsync(
-                        HSTRING name,
-                        ABI::Windows::Security::Credentials::ChallengeResponseKind callbackType,
-                        ABI::Windows::Security::Credentials::IAttestationChallengeHandler* attestationCallback,
-                        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation
-                        ) = 0;
-                };
-
-                MIDL_CONST_ID IID& IID_IKeyCredentialManagerExtendedStatics = __uuidof(IKeyCredentialManagerExtendedStatics);
-            } /* Credentials */
-        } /* Security */
-    } /* Windows */
-} /* ABI */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics;
-#endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.Security.Credentials.IKeyCredentialManagerStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1928,6 +1879,59 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Security.Credentials.IKeyCredentialManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
+ *
+ * Any object which implements this interface must also implement the following interfaces:
+ *     Windows.Security.Credentials.IKeyCredentialManagerStatics
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerStatics2[] = L"Windows.Security.Credentials.IKeyCredentialManagerStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace Security {
+            namespace Credentials {
+                MIDL_INTERFACE("79912cac-2b19-5658-9fa6-60bce01ef205")
+                IKeyCredentialManagerStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE RequestCreateAsync(
+                        HSTRING name,
+                        ABI::Windows::Security::Credentials::KeyCredentialCreationOption option,
+                        HSTRING algorithm,
+                        HSTRING message,
+                        ABI::Windows::Security::Credentials::IKeyCredentialCacheConfiguration* cacheConfiguration,
+                        ABI::Windows::UI::WindowId windowId,
+                        ABI::Windows::Security::Credentials::ChallengeResponseKind callbackType,
+                        ABI::Windows::Security::Credentials::IAttestationChallengeHandler* attestationCallback,
+                        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE OpenAsync(
+                        HSTRING name,
+                        ABI::Windows::Security::Credentials::ChallengeResponseKind callbackType,
+                        ABI::Windows::Security::Credentials::IAttestationChallengeHandler* attestationCallback,
+                        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IKeyCredentialManagerStatics2 = __uuidof(IKeyCredentialManagerStatics2);
+            } /* Credentials */
+        } /* Security */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2520,7 +2524,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2579,8 +2583,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Credentials.ICredentialFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Credentials.IPasswordCredential ** Default Interface **
@@ -2744,17 +2748,17 @@ typedef interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCacheCo
 
 #endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCacheConfigurationFactory_FWD_DEFINED__
 
-#ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics;
-
-#endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_FWD_DEFINED__
-
 #ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics;
 
 #endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2 __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2;
+
+#endif // ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialOperationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialOperationResult_FWD_DEFINED__
@@ -4641,9 +4645,8 @@ enum __x_ABI_CWindows_CSecurity_CCredentials_CKeyCredentialAttestationStatus
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 enum __x_ABI_CWindows_CSecurity_CCredentials_CKeyCredentialCacheOption
 {
-    KeyCredentialCacheOption_NoCache = 1,
-    KeyCredentialCacheOption_CacheWhenUnlocked = 2,
-    KeyCredentialCacheOption_CacheUnderLock = 4,
+    KeyCredentialCacheOption_NoCache = 0,
+    KeyCredentialCacheOption_CacheWhenUnlocked = 1,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
@@ -4679,6 +4682,7 @@ enum __x_ABI_CWindows_CSecurity_CCredentials_CKeyCredentialStatus
     KeyCredentialStatus_UserPrefersPassword = 4,
     KeyCredentialStatus_CredentialAlreadyExists = 5,
     KeyCredentialStatus_SecurityDeviceLocked = 6,
+    KeyCredentialStatus_AlgorithmNotSupported = 7,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -4961,9 +4965,10 @@ typedef struct __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2Vtbl
     HRESULT (STDMETHODCALLTYPE* RequestDeriveSharedSecretAsync)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2* This,
         struct __x_ABI_CWindows_CUI_CWindowId windowId,
         HSTRING message,
-        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* publicKey,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* encryptedRequest,
         __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialOperationResult** operation);
     HRESULT (STDMETHODCALLTYPE* RetrieveAuthorizationContext)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2* This,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* encryptedRequest,
         __x_ABI_CWindows_CStorage_CStreams_CIBuffer** result);
 
     END_INTERFACE
@@ -4994,11 +4999,11 @@ interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2
 #define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2_RequestDeriveSharedSecretAsync(This, windowId, message, publicKey, operation) \
-    ((This)->lpVtbl->RequestDeriveSharedSecretAsync(This, windowId, message, publicKey, operation))
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2_RequestDeriveSharedSecretAsync(This, windowId, message, encryptedRequest, operation) \
+    ((This)->lpVtbl->RequestDeriveSharedSecretAsync(This, windowId, message, encryptedRequest, operation))
 
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2_RetrieveAuthorizationContext(This, result) \
-    ((This)->lpVtbl->RetrieveAuthorizationContext(This, result))
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredential2_RetrieveAuthorizationContext(This, encryptedRequest, result) \
+    ((This)->lpVtbl->RetrieveAuthorizationContext(This, encryptedRequest, result))
 
 #endif /* COBJMACROS */
 
@@ -5236,91 +5241,6 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCa
 
 /*
  *
- * Interface Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics
- *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
- *
- * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
- *
- */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__)
-#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__
-extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerExtendedStatics[] = L"Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics";
-typedef struct __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStaticsVtbl
-{
-    BEGIN_INTERFACE
-
-    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        REFIID riid,
-        void** ppvObject);
-    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This);
-    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This);
-    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        ULONG* iidCount,
-        IID** iids);
-    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        HSTRING* className);
-    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        TrustLevel* trustLevel);
-    HRESULT (STDMETHODCALLTYPE* RequestCreateAsync)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        HSTRING name,
-        enum __x_ABI_CWindows_CSecurity_CCredentials_CKeyCredentialCreationOption option,
-        HSTRING algorithm,
-        HSTRING message,
-        __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCacheConfiguration* cacheConfiguration,
-        struct __x_ABI_CWindows_CUI_CWindowId windowId,
-        enum __x_ABI_CWindows_CSecurity_CCredentials_CChallengeResponseKind callbackType,
-        __x_ABI_CWindows_CSecurity_CCredentials_CIAttestationChallengeHandler* attestationCallback,
-        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation);
-    HRESULT (STDMETHODCALLTYPE* OpenAsync)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics* This,
-        HSTRING name,
-        enum __x_ABI_CWindows_CSecurity_CCredentials_CChallengeResponseKind callbackType,
-        __x_ABI_CWindows_CSecurity_CCredentials_CIAttestationChallengeHandler* attestationCallback,
-        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation);
-
-    END_INTERFACE
-} __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStaticsVtbl;
-
-interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics
-{
-    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStaticsVtbl* lpVtbl;
-};
-
-#ifdef COBJMACROS
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_QueryInterface(This, riid, ppvObject) \
-    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_AddRef(This) \
-    ((This)->lpVtbl->AddRef(This))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_Release(This) \
-    ((This)->lpVtbl->Release(This))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_GetIids(This, iidCount, iids) \
-    ((This)->lpVtbl->GetIids(This, iidCount, iids))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_GetRuntimeClassName(This, className) \
-    ((This)->lpVtbl->GetRuntimeClassName(This, className))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_GetTrustLevel(This, trustLevel) \
-    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_RequestCreateAsync(This, name, option, algorithm, message, cacheConfiguration, windowId, callbackType, attestationCallback, operation) \
-    ((This)->lpVtbl->RequestCreateAsync(This, name, option, algorithm, message, cacheConfiguration, windowId, callbackType, attestationCallback, operation))
-
-#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_OpenAsync(This, name, callbackType, attestationCallback, operation) \
-    ((This)->lpVtbl->OpenAsync(This, name, callbackType, attestationCallback, operation))
-
-#endif /* COBJMACROS */
-
-EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics;
-#endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerExtendedStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-
-/*
- *
  * Interface Windows.Security.Credentials.IKeyCredentialManagerStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5411,6 +5331,94 @@ interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Security.Credentials.IKeyCredentialManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
+ *
+ * Any object which implements this interface must also implement the following interfaces:
+ *     Windows.Security.Credentials.IKeyCredentialManagerStatics
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerStatics2[] = L"Windows.Security.Credentials.IKeyCredentialManagerStatics2";
+typedef struct __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* RequestCreateAsync)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        HSTRING name,
+        enum __x_ABI_CWindows_CSecurity_CCredentials_CKeyCredentialCreationOption option,
+        HSTRING algorithm,
+        HSTRING message,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCacheConfiguration* cacheConfiguration,
+        struct __x_ABI_CWindows_CUI_CWindowId windowId,
+        enum __x_ABI_CWindows_CSecurity_CCredentials_CChallengeResponseKind callbackType,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIAttestationChallengeHandler* attestationCallback,
+        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation);
+    HRESULT (STDMETHODCALLTYPE* OpenAsync)(__x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2* This,
+        HSTRING name,
+        enum __x_ABI_CWindows_CSecurity_CCredentials_CChallengeResponseKind callbackType,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIAttestationChallengeHandler* attestationCallback,
+        __FIAsyncOperation_1_Windows__CSecurity__CCredentials__CKeyCredentialRetrievalResult** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_RequestCreateAsync(This, name, option, algorithm, message, cacheConfiguration, windowId, callbackType, attestationCallback, operation) \
+    ((This)->lpVtbl->RequestCreateAsync(This, name, option, algorithm, message, cacheConfiguration, windowId, callbackType, attestationCallback, operation))
+
+#define __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_OpenAsync(This, name, callbackType, attestationCallback, operation) \
+    ((This)->lpVtbl->OpenAsync(This, name, callbackType, attestationCallback, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -6449,7 +6457,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerExtendedStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6508,8 +6516,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Security.Credentials.ICredentialFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Credentials.IPasswordCredential ** Default Interface **

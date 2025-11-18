@@ -232,6 +232,14 @@ typedef struct _BCRYPT_OAEP_PADDING_INFO
     ULONG   cbLabel;
 } BCRYPT_OAEP_PADDING_INFO;
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+typedef struct _BCRYPT_PQDSA_PADDING_INFO {
+    PUCHAR  pbCtx;
+    ULONG   cbCtx;
+    LPCWSTR pszPrehashAlgId;
+} BCRYPT_PQDSA_PADDING_INFO;
+#endif
+
 #define BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_VERSION  1
 
 #define BCRYPT_AUTH_MODE_CHAIN_CALLS_FLAG   0x00000001
@@ -372,6 +380,12 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
 
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_KEM_SHARED_SECRET_LENGTH     L"KEMSharedSecretLength"
+#define BCRYPT_KEM_CIPHERTEXT_LENGTH        L"KEMCiphertextLength"
+#define BCRYPT_PARAMETER_SET_NAME           L"ParameterSetName"
+#endif
+
 // BCryptSetProperty strings
 #define BCRYPT_INITIALIZATION_VECTOR    L"IV"
 
@@ -382,9 +396,6 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
 #define BCRYPT_CHAIN_MODE_CFB       L"ChainingModeCFB"
 #define BCRYPT_CHAIN_MODE_CCM       L"ChainingModeCCM"
 #define BCRYPT_CHAIN_MODE_GCM       L"ChainingModeGCM"
-#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
-#define BCRYPT_CHAIN_MODE_KWP       L"ChainingModeKWP"
-#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 // Supported RSA Padding Types
 #define BCRYPT_SUPPORTED_PAD_ROUTER     0x00000001
@@ -412,6 +423,11 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
 #define BCRYPT_PAD_PSS              0x00000008  // BCryptSignHash/VerifySignature
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
 #define BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID  0x00000010   //BCryptVerifySignature
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_PAD_PQDSA            0x00000020  // BCryptSignHash/VerifySignature
+#define BCRYPT_MLDSA_EXTERNAL_MU    0x00000040  // BCryptSignHash/VerifySignature
 #endif
 
 #define BCRYPTBUFFER_VERSION        0
@@ -683,6 +699,49 @@ typedef struct _BCRYPT_KEY_DATA_BLOB_HEADER
 
 #define BCRYPT_KEY_DATA_BLOB_VERSION1    0x1
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_MLDSA_PUBLIC_MAGIC		    0x4B505344	// DSPK
+#define BCRYPT_MLDSA_PRIVATE_MAGIC		    0x4B535344	// DSSK
+#define BCRYPT_MLDSA_PRIVATE_SEED_MAGIC	    0x53535344	// DSSS
+
+#define BCRYPT_SLHDSA_PUBLIC_MAGIC		    0x4B504853	// SHPK
+#define BCRYPT_SLHDSA_PRIVATE_MAGIC		    0x4B534853	// SHSK
+
+#define BCRYPT_LMS_PUBLIC_MAGIC 			0x4B504D4C	// LMPK
+#define BCRYPT_XMSS_PUBLIC_MAGIC			0x4B504D58	// XMPK
+
+#define BCRYPT_PQDSA_PUBLIC_BLOB            L"PQDSAPUBLICBLOB"
+#define BCRYPT_PQDSA_PRIVATE_BLOB         	L"PQDSAPRIVATEBLOB"
+#define BCRYPT_PQDSA_PRIVATE_SEED_BLOB		L"PQDSAPRIVATESEEDBLOB"
+
+typedef struct BCRYPT_PQDSA_KEY_BLOB {
+    ULONG dwMagic;
+    ULONG cbParameterSet;                                   // Byte size of parameterSet[]
+    ULONG cbKey;                                            // Byte size of key[]
+    // WCHAR parameterSet[cbParameterSet / sizeof(WCHAR)];  // For ML-DSA and SLH-DSA, \0-terminated
+    // BYTE key[cbKey];                                     // Key material
+} BCRYPT_PQDSA_KEY_BLOB, *PBCRYPT_PQDSA_KEY_BLOB;
+
+#define BCRYPT_MLKEM_PUBLIC_MAGIC           0x504B4C4D  // MLKP
+#define BCRYPT_MLKEM_PRIVATE_MAGIC          0x524B4C4D  // MLKR
+#define BCRYPT_MLKEM_PRIVATE_SEED_MAGIC     0x534B4C4D  // MLKS
+
+#define BCRYPT_MLKEM_PUBLIC_BLOB            L"MLKEMPUBLICBLOB"
+#define BCRYPT_MLKEM_PRIVATE_BLOB           L"MLKEMPRIVATEBLOB"
+#define BCRYPT_MLKEM_PRIVATE_SEED_BLOB      L"MLKEMPRIVATESEEDBLOB"
+#define BCRYPT_MLKEM_ENCAPSULATION_BLOB     BCRYPT_MLKEM_PUBLIC_BLOB
+#define BCRYPT_MLKEM_DECAPSULATION_BLOB     BCRYPT_MLKEM_PRIVATE_BLOB
+
+typedef struct BCRYPT_MLKEM_KEY_BLOB
+{
+    ULONG   dwMagic;
+    ULONG   cbParameterSet;             // Byte size of parameterSet[]
+    ULONG   cbKey;                      // Byte size of key[]
+    // WCHAR parameterSet[cbParameterSet / sizeof(WCHAR)];  // For ML-KEM, \0-terminated
+    // BYTE key[cbKey];                                     // Key material
+} BCRYPT_MLKEM_KEY_BLOB, *PBCRYPT_MLKEM_KEY_BLOB;
+#endif
+
 // Property Strings for DSA
 #define BCRYPT_DSA_PARAMETERS       L"DSAParameters"
 
@@ -789,6 +848,36 @@ typedef struct _BCRYPT_ECC_CURVE_NAMES
 #endif
 
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+//
+// PQDSA property values for BCRYPT_PARAMETER_SET_NAME
+//
+#define BCRYPT_MLDSA_PARAMETER_SET_44               L"44"
+#define BCRYPT_MLDSA_PARAMETER_SET_65               L"65"
+#define BCRYPT_MLDSA_PARAMETER_SET_87               L"87"
+
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128S       L"SHA2-128s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128S      L"SHAKE-128s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128F       L"SHA2-128f"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128F      L"SHAKE-128f"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192S       L"SHA2-192s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192S      L"SHAKE-192s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192F       L"SHA2-192f"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192F      L"SHAKE-192f"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256S       L"SHA2-256s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256S      L"SHAKE-256s"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256F       L"SHA2-256f"
+#define BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256F      L"SHAKE-256f"
+
+//
+// MLKEM property values for BCRYPT_PARAMETER_SET_NAME
+//
+#define BCRYPT_MLKEM_PARAMETER_SET_512              L"512"
+#define BCRYPT_MLKEM_PARAMETER_SET_768              L"768"
+#define BCRYPT_MLKEM_PARAMETER_SET_1024             L"1024"
+
+#endif
+
 
 // Operation types used in BCRYPT_MULTI_HASH_OPERATION structures
 typedef enum {
@@ -888,6 +977,19 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_KMAC256_ALGORITHM                L"KMAC256"
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_SHAKE128_ALGORITHM               L"SHAKE128"
+#define BCRYPT_SHAKE256_ALGORITHM               L"SHAKE256"
+
+#define BCRYPT_MLDSA_ALGORITHM                  L"ML-DSA"
+#define BCRYPT_SLHDSA_ALGORITHM                 L"SLH-DSA"
+
+#define BCRYPT_LMS_ALGORITHM                    L"LMS"
+#define BCRYPT_XMSS_ALGORITHM                   L"XMSS"
+
+#define BCRYPT_MLKEM_ALGORITHM                  L"ML-KEM"
+#endif
+
 //
 // Interfaces
 //
@@ -901,6 +1003,10 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define BCRYPT_KEY_DERIVATION_INTERFACE         0x00000007
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_KEY_ENCAPSULATION_INTERFACE      0x00000008
 #endif
 
 
@@ -995,8 +1101,14 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_KMAC256_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000441)
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
-#define BCRYPT_AES_KWP_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000451)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_SHAKE128_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x00000451)
+#define BCRYPT_SHAKE256_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x00000461)
+
+#define BCRYPT_MLDSA_ALG_HANDLE                 ((BCRYPT_ALG_HANDLE) 0x00000471)
+
+#define BCRYPT_MLKEM_ALG_HANDLE                 ((BCRYPT_ALG_HANDLE) 0x00000481)
+
 #endif
 
 //
@@ -1116,6 +1228,10 @@ BCryptOpenAlgorithmProvider(
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define BCRYPT_KEY_DERIVATION_OPERATION         0x00000040
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define BCRYPT_KEY_ENCAPSULATION_OPERATION      0x00000080
 #endif
 
 // USE EXTREME CAUTION: editing comments that contain "certenrolls_*" tokens
@@ -1542,6 +1658,41 @@ BCryptDeriveKeyPBKDF2(
 #endif
 
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+_Must_inspect_result_
+NTSTATUS
+WINAPI
+BCryptEncapsulate(
+  _In_                              BCRYPT_KEY_HANDLE       hKey,
+  _Out_writes_bytes_to_opt_(cbSecretKey, *pcbSecretKey)     
+                                    PUCHAR                  pbSecretKey,
+  _In_                              ULONG                   cbSecretKey,
+  _Out_                             ULONG                   *pcbSecretKey,
+  _Out_writes_bytes_to_opt_(cbCipherText, *pcbCipherText)   
+                                    PUCHAR                  pbCipherText,
+  _In_                              ULONG                   cbCipherText,
+  _Out_                             ULONG                   *pcbCipherText,
+  _In_                              ULONG                   dwFlags);
+#endif
+
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+_Must_inspect_result_
+NTSTATUS
+WINAPI
+BCryptDecapsulate(
+  _In_                              BCRYPT_KEY_HANDLE       hKey,
+  _In_reads_bytes_(cbCipherText)
+                                    PUCHAR                  pbCipherText,
+  _In_                              ULONG                   cbCipherText,
+  _Out_writes_bytes_to_opt_(cbSecretKey, *pcbSecretKey)
+                                    PUCHAR                  pbSecretKey,
+  _In_                              ULONG                   cbSecretKey,
+  _Out_                             ULONG                   *pcbSecretKey,
+  _In_                              ULONG                   dwFlags);
+#endif
+
+
 //
 // Interface version control...
 //
@@ -1582,6 +1733,9 @@ typedef struct _BCRYPT_INTERFACE_VERSION
 
 
 #define BCRYPT_RNG_INTERFACE_VERSION_1    BCRYPT_MAKE_INTERFACE_VERSION(1,0)
+
+
+#define BCRYPT_KEY_ENCAPSULATION_INTERFACE_VERSION_1    BCRYPT_MAKE_INTERFACE_VERSION(1,0)
 
 
 //////////////////////////////////////////////////////////////////////////////

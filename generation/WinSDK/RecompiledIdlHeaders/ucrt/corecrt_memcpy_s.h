@@ -34,6 +34,7 @@ _CRT_BEGIN_C_HEADER
 
 #if !defined RC_INVOKED && !defined __midl && __STDC_WANT_SECURE_LIB__
 
+    // TRANSITION OS-58345186: this function should have external linkage.
     _Success_(return == 0)
     _Check_return_opt_
     _CRT_MEMCPY_S_INLINE errno_t __CRTDECL memcpy_s(
@@ -63,6 +64,7 @@ _CRT_BEGIN_C_HEADER
         return 0;
     }
 
+    // TRANSITION OS-58345186: this function should have external linkage.
     _Check_return_wat_
     _CRT_MEMCPY_S_INLINE errno_t __CRTDECL memmove_s(
         _Out_writes_bytes_to_opt_(_DestinationSize, _SourceSize) void*       const _Destination,

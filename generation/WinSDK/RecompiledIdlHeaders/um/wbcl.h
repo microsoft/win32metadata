@@ -309,6 +309,13 @@ extern "C" {
 
 #endif
 
+// This event contains the IDK caching status for VsmProvisionIdk
+// The definitions for these events are contained in VsmConstants.h
+//     - IDK_PROVISIONING_TYPE_HW (0) - Uses Cached IDKS if available
+//     - IDK_PROVISIONING_TYPE_VTPM (1) - Skips caching logic and generates new IDKS on boot
+#define SIPAEVENT_IDK_GENERATION_STATUS    (SIPAEVENTTYPE_INFORMATION + \
+                                            0x000C)
+
 //
 // This event data contains a single DWORD which corresponds
 // to the NTSTATUS code returned by the (regular, non-secure) MOR bit
@@ -599,6 +606,16 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
                                             0x000c)
 
 #endif //NTDDI_VERSION >= NTDDI_WIN10_NI
+
+#if NTDDI_VERSION >= NTDDI_WIN10_GE
+
+#define SIPAEVENT_MODULE_ORIGINAL_FILENAME (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000d)
+
+#define SIPAEVENT_MODULE_VERSION           (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000e)
+
+#endif
 
 //SIPAEVENTTYPE_TRUSTPOINT
 #define SIPAEVENT_QUOTE                    (SIPAEVENTTYPE_NONMEASURED + \

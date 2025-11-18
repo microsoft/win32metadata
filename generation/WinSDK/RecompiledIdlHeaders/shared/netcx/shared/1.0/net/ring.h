@@ -17,6 +17,9 @@ typedef struct _NET_PACKET NET_PACKET;
 struct _NET_FRAGMENT;
 typedef struct _NET_FRAGMENT NET_FRAGMENT;
 
+struct _NET_FRAGMENT_RETURN_CONTEXT;
+typedef struct _NET_FRAGMENT_RETURN_CONTEXT NET_FRAGMENT_RETURN_CONTEXT;
+
 #pragma warning(push)
 #pragma warning(disable:4201) // 'nonstandard extension used: nameless struct/union'
 
@@ -196,13 +199,13 @@ NetRingGetFragmentAtIndex(
 }
 
 inline
-SIZE_T *
-NetRingGetDataBufferAtIndex(
+NET_FRAGMENT_RETURN_CONTEXT *
+NetRingGetFragmentReturnContextAtIndex(
     NET_RING const * Ring,
     UINT32 Index
 )
 {
-    return (SIZE_T *)NetRingGetElementAtIndex(Ring, Index);
+    return (NET_FRAGMENT_RETURN_CONTEXT *)NetRingGetElementAtIndex(Ring, Index);
 }
 
 EXTERN_C_END

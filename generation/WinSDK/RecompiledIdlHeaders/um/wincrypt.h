@@ -1893,6 +1893,54 @@ typedef struct _CRYPT_ALGORITHM_IDENTIFIER {
 #define szOID_NIST_sha256                   "2.16.840.1.101.3.4.2.1"
 #define szOID_NIST_sha384                   "2.16.840.1.101.3.4.2.2"
 #define szOID_NIST_sha512                   "2.16.840.1.101.3.4.2.3"
+#define szOID_NIST_shake128                 "2.16.840.1.101.3.4.2.11"
+#define szOID_NIST_shake256                 "2.16.840.1.101.3.4.2.12"
+
+// NIST PQ Algorithms
+// joint-iso-itu-t(2) country(16) us(840) organization(1) gov(101) csor(3) nistAlgorithms(4) 3
+
+// "Pure" ML-DSA 
+#define szOID_NIST_ml_dsa_44            "2.16.840.1.101.3.4.3.17"
+#define szOID_NIST_ml_dsa_65            "2.16.840.1.101.3.4.3.18"
+#define szOID_NIST_ml_dsa_87            "2.16.840.1.101.3.4.3.19"
+
+// "Pre-Hash" ML-DSA
+#define szOID_NIST_hash_ml_dsa_44_with_sha512   "2.16.840.1.101.3.4.3.32"
+#define szOID_NIST_hash_ml_dsa_65_with_sha512   "2.16.840.1.101.3.4.3.33"
+#define szOID_NIST_hash_ml_dsa_87_with_sha512   "2.16.840.1.101.3.4.3.34"
+
+// ML-KEM
+#define szOID_NIST_ml_kem_512           "2.16.840.1.101.3.4.4.1"
+#define szOID_NIST_ml_kem_768           "2.16.840.1.101.3.4.4.2"
+#define szOID_NIST_ml_kem_1024          "2.16.840.1.101.3.4.4.3"
+
+// "Pure" SLH-DSA
+#define szOID_NIST_slh_dsa_sha2_128s                "2.16.840.1.101.3.4.3.20"
+#define szOID_NIST_slh_dsa_sha2_128f                "2.16.840.1.101.3.4.3.21"
+#define szOID_NIST_slh_dsa_sha2_192s                "2.16.840.1.101.3.4.3.22"
+#define szOID_NIST_slh_dsa_sha2_192f                "2.16.840.1.101.3.4.3.23"
+#define szOID_NIST_slh_dsa_sha2_256s                "2.16.840.1.101.3.4.3.24"
+#define szOID_NIST_slh_dsa_sha2_256f                "2.16.840.1.101.3.4.3.25"
+#define szOID_NIST_slh_dsa_shake_128s               "2.16.840.1.101.3.4.3.26"
+#define szOID_NIST_slh_dsa_shake_128f               "2.16.840.1.101.3.4.3.27"
+#define szOID_NIST_slh_dsa_shake_192s               "2.16.840.1.101.3.4.3.28"
+#define szOID_NIST_slh_dsa_shake_192f               "2.16.840.1.101.3.4.3.29"
+#define szOID_NIST_slh_dsa_shake_256s               "2.16.840.1.101.3.4.3.30"
+#define szOID_NIST_slh_dsa_shake_256f               "2.16.840.1.101.3.4.3.31"
+
+// "PreHash" SLH-DSA
+#define szOID_NIST_hash_slh_dsa_sha2_128s_with_sha256    "2.16.840.1.101.3.4.3.35"
+#define szOID_NIST_hash_slh_dsa_sha2_128f_with_sha256    "2.16.840.1.101.3.4.3.36"
+#define szOID_NIST_hash_slh_dsa_sha2_192s_with_sha512    "2.16.840.1.101.3.4.3.37"
+#define szOID_NIST_hash_slh_dsa_sha2_192f_with_sha512    "2.16.840.1.101.3.4.3.38"
+#define szOID_NIST_hash_slh_dsa_sha2_256s_with_sha512    "2.16.840.1.101.3.4.3.39"
+#define szOID_NIST_hash_slh_dsa_sha2_256f_with_sha512    "2.16.840.1.101.3.4.3.40"
+#define szOID_NIST_hash_slh_dsa_shake_128s_with_shake128    "2.16.840.1.101.3.4.3.41"
+#define szOID_NIST_hash_slh_dsa_shake_128f_with_shake128    "2.16.840.1.101.3.4.3.42"
+#define szOID_NIST_hash_slh_dsa_shake_192s_with_shake256    "2.16.840.1.101.3.4.3.43"
+#define szOID_NIST_hash_slh_dsa_shake_192f_with_shake256    "2.16.840.1.101.3.4.3.44"
+#define szOID_NIST_hash_slh_dsa_shake_256s_with_shake256    "2.16.840.1.101.3.4.3.45"
+#define szOID_NIST_hash_slh_dsa_shake_256f_with_shake256    "2.16.840.1.101.3.4.3.46"
 
 typedef struct _CRYPT_OBJID_TABLE {
     DWORD   dwAlgId;
@@ -6223,8 +6271,11 @@ CryptEnumOIDFunction(
 // using CNG.
 #define CALG_OID_INFO_PARAMETERS                 0xFFFFFFFE
 
+// PQ Algorithm 
+#define CALG_OID_INFO_PQ                         0xFFFFFFFD
+
 // Macro to check for a special ALG_ID used in CRYPT_OID_INFO
-#define IS_SPECIAL_OID_INFO_ALGID(Algid)        (Algid >= CALG_OID_INFO_PARAMETERS)
+#define IS_SPECIAL_OID_INFO_ALGID(Algid)        (Algid >= CALG_OID_INFO_PQ)
 
 
 //+-------------------------------------------------------------------------
@@ -6237,6 +6288,70 @@ CryptEnumOIDFunction(
 #define CRYPT_OID_INFO_OAEP_PARAMETERS_ALGORITHM L"CryptOIDInfoOAEPParameters"
 #define CRYPT_OID_INFO_ECC_WRAP_PARAMETERS_ALGORITHM L"CryptOIDInfoECCWrapParameters"
 #define CRYPT_OID_INFO_NO_PARAMETERS_ALGORITHM   L"CryptOIDInfoNoParameters"
+#define CRYPT_OID_INFO_NO_HASH_ALGORITHM         L"NoHash"
+#define CRYPT_OID_INFO_PREHASH_ALGORITHM         L"PreHash"
+#define CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM(pwszCNGAlgid, pwszCNGParaSetName) \
+    pwszCNGAlgid L":" pwszCNGParaSetName
+
+// L"ML-DSA:44"
+#define CRYPT32_MLDSA_44_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLDSA_ALGORITHM, BCRYPT_MLDSA_PARAMETER_SET_44)
+// L"ML-DSA:65"
+#define CRYPT32_MLDSA_65_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLDSA_ALGORITHM, BCRYPT_MLDSA_PARAMETER_SET_65)
+// L"ML-DSA:87"
+#define CRYPT32_MLDSA_87_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLDSA_ALGORITHM, BCRYPT_MLDSA_PARAMETER_SET_87)
+
+// L"ML-KEM:512"
+#define CRYPT32_MLKEM_512_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLKEM_ALGORITHM, BCRYPT_MLKEM_PARAMETER_SET_512)
+// L"ML-KEM:768"
+#define CRYPT32_MLKEM_768_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLKEM_ALGORITHM, BCRYPT_MLKEM_PARAMETER_SET_768)
+// L"ML-KEM:1024"
+#define CRYPT32_MLKEM_1024_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_MLKEM_ALGORITHM, BCRYPT_MLKEM_PARAMETER_SET_1024)
+
+// There will be one BCrypt SLHDSA parameter set and one Crypt32
+// SLHDSA algorithm applicable to both the "Pure" and "PreHash"
+
+// L"SLH-DSA:SHA2-128s"
+#define CRYPT32_SLHDSA_SHA2_128S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128S)
+// L"SLH-DSA:SHAKE-128s"
+#define CRYPT32_SLHDSA_SHAKE_128S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128S)
+// L"SLH-DSA:SHA2-128f"
+#define CRYPT32_SLHDSA_SHA2_128F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128F)
+// L"SLH-DSA:SHAKE-128f"
+#define CRYPT32_SLHDSA_SHAKE_128F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128F)
+// L"SLH-DSA:SHA2-192s"
+#define CRYPT32_SLHDSA_SHA2_192S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192S)
+// L"SLH-DSA:SHAKE-192s"
+#define CRYPT32_SLHDSA_SHAKE_192S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192S)
+// L"SLH-DSA:SHA2-192f"
+#define CRYPT32_SLHDSA_SHA2_192F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192F)
+// L"SLH-DSA:SHAKE-192f"
+#define CRYPT32_SLHDSA_SHAKE_192F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192F)
+// L"SLH-DSA:SHA2-256s"
+#define CRYPT32_SLHDSA_SHA2_256S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256S)
+// L"SLH-DSA:SHAKE-256s"
+#define CRYPT32_SLHDSA_SHAKE_256S_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256S)
+// L"SLH-DSA:SHA2-256f"
+#define CRYPT32_SLHDSA_SHA2_256F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256F)
+// L"SLH-DSA:SHAKE-256f"
+#define CRYPT32_SLHDSA_SHAKE_256F_ALGORITHM CRYPT_OID_INFO_MAKE_PARAMETER_SET_ALGORITHM( \
+    BCRYPT_SLHDSA_ALGORITHM, BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256F)
 
 //+-------------------------------------------------------------------------
 //  OID Information
@@ -6268,13 +6383,18 @@ typedef struct _CRYPT_OID_INFO {
     //  CRYPT_HASH_ALG_OID_GROUP_ID
     //  CRYPT_ENCRYPT_ALG_OID_GROUP_ID
     //  CRYPT_PUBKEY_ALG_OID_GROUP_ID
+    //      For PQ, assume pwszCNGAlgid has a 1-to-1
+    //      mapping between OID and CNG PQ algorithm name.
     //  CRYPT_SIGN_ALG_OID_GROUP_ID
+    //      For PQ, for hash then sign, the hash algorithm.
+    //      Otherwise for no hash, L"NoHash". 
     LPCWSTR         pwszCNGAlgid;
 
     // Following is only applicable to the following groups:
     //  CRYPT_SIGN_ALG_OID_GROUP_ID
     //      The public key pwszCNGAlgid. For ECC,
     //      CRYPT_OID_INFO_ECC_PARAMETERS_ALGORITHM.
+    //      For PQ, pwszCNGExtraAlgid will be the CNG PQ Algorithm name.
     //  CRYPT_PUBKEY_ALG_OID_GROUP_ID
     //      For the ECC algorithms, CRYPT_OID_INFO_ECC_PARAMETERS_ALGORITHM.
     LPCWSTR         pwszCNGExtraAlgid;
@@ -6328,6 +6448,21 @@ typedef const CRYPT_OID_INFO CCRYPT_OID_INFO, *PCCRYPT_OID_INFO;
 //  DWORD[2] - dwBitLength. Where BCRYPT_ECCKEY_BLOB's
 //             cbKey = dwBitLength / 8 + ((dwBitLength % 8) ? 1 : 0)
 //
+// For PQ
+//  DWORD[0] - Flags
+//  DWORD[1] - Public Magic
+//  DWORD[2] - Private Magic
+//  DWORD[3] - Public Key Byte Length
+//  DWORD[4] - Private Key Byte Length
+//  DWORD[5] - Signature Byte Length
+
+#define CRYPT_OID_PQ_EXTRA_INFO_FLAGS_INDEX                   0
+#define CRYPT_OID_PQ_EXTRA_INFO_PUBLIC_MAGIC_INDEX            1
+#define CRYPT_OID_PQ_EXTRA_INFO_PRIVATE_MAGIC_INDEX           2
+#define CRYPT_OID_PQ_EXTRA_INFO_PUBLIC_KEY_LENGTH_INDEX       3
+#define CRYPT_OID_PQ_EXTRA_INFO_PRIVATE_KEY_LENGTH_INDEX      4
+#define CRYPT_OID_PQ_EXTRA_INFO_SIGNATURE_LENGTH_INDEX        5
+#define CRYPT_OID_PQ_EXTRA_INFO_MAX_LENGTH                    6
 
 #define CRYPT_OID_INHIBIT_SIGNATURE_FORMAT_FLAG         0x00000001
 #define CRYPT_OID_USE_PUBKEY_PARA_FOR_PKCS7_FLAG        0x00000002
@@ -6338,12 +6473,21 @@ typedef const CRYPT_OID_INFO CCRYPT_OID_INFO, *PCCRYPT_OID_INFO;
 #define CRYPT_OID_USE_CURVE_NAME_FOR_ENCODE_FLAG        0x20000000
 #define CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG  0x10000000
 
+// A PQ key can only be used for either "Pure" or "PreHash" signing.
+// For "PreHash" a single hash algorithm per PQ parameter set
+#define CRYPT_OID_PUBKEY_PURE_ONLY_FLAG                 0x08000000
+#define CRYPT_OID_PUBKEY_PREHASH_ONLY_FLAG              0x04000000
+
 // CRYPT_SIGN_ALG_OID_GROUP_ID has the following optional ExtraInfo:
 //  DWORD[0] - Public Key Algid.
 //  DWORD[1] - Flags. Same as above for CRYPT_PUBKEY_ALG_OID_GROUP_ID.
 //  DWORD[2] - Optional CryptAcquireContext(CRYPT_VERIFYCONTEXT)'s dwProvType.
 //             If omitted or 0, uses Public Key Algid to select
 //             appropriate dwProvType for signature verification.
+//
+// For PQ
+//  DWORD[1] - Flags
+//  DWORD[2] - Signature Byte Length
 
 // CRYPT_RDN_ATTR_OID_GROUP_ID has the following optional ExtraInfo:
 //  Array of DWORDs:
@@ -6397,6 +6541,11 @@ CryptFindOIDInfo(
 #define CRYPT_OID_INFO_OID_KEY_FLAGS_MASK           0xFFFF0000
 #define CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG         0x80000000
 #define CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG      0x40000000
+
+// Set the following in the above dwKeyType parameter to restrict public keys
+// valid for "Pure" or "PreHash" signing
+#define CRYPT_OID_INFO_PUBKEY_PURE_KEY_FLAG         0x08000000
+#define CRYPT_OID_INFO_PUBKEY_PREHASH_KEY_FLAG      0x04000000
 
 // The following flag can be set in above dwGroupId parameter to disable
 // searching the directory server
@@ -6652,6 +6801,8 @@ typedef const CERT_STRONG_SIGN_PARA *PCCERT_STRONG_SIGN_PARA;
     CERT_STRONG_SIGN_OID_INFO_CHOICE, \
     szOID_CERT_STRONG_KEY_OS_CURRENT \
 }
+
+#define szOID_NO_HASH                   "1.3.6.1.4.1.311.73.1"
 
 
 //+=========================================================================
@@ -14927,6 +15078,11 @@ CryptExportPublicKeyInfo(
 //  CryptFindOIDInfo:
 //      CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG
 //      CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG
+//
+//  dwFlags can be set with the following 2 flags passed directly to
+//  CryptFindOIDInfo to restrict PQ key to either "Pure" or "PreHash":
+//      CRYPT_OID_INFO_PUBKEY_PURE_KEY_FLAG
+//      CRYPT_OID_INFO_PUBKEY_PREHASH_KEY_FLAG
 //
 //  dwFlags can be set with the following 2 flags to encode either Curve OID
 //  or ECC Parameters in Algorithm's Parameters section:
