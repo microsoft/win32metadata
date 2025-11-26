@@ -1,0 +1,38 @@
+# DXC: Annotate new struct fields and enums
+Windows.Win32.Graphics.Direct3D.Dxc.Apis.DXC_HASHFLAG_INCLUDES_SOURCE removed
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_HASHFLAG added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_HASHFLAG.DXC_HASHFLAG_INCLUDES_SOURCE added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_DXIL added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_INPUT_SIGNATURE added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_OUTPUT_SIGNATURE added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_PATCH_CONSTANT_SIGNATURE added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_PDB added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_PDB_NAME added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_PRIVATE_DATA added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_REFLECTION_DATA added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_ROOT_SIGNATURE added
+Windows.Win32.Graphics.Direct3D.Dxc.DXC_PART.DXC_PART_SHADER_HASH added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcBuffer.Encoding...System.UInt32 => Windows.Win32.Graphics.Direct3D.Dxc.DXC_CP
+Windows.Win32.Graphics.Direct3D.Dxc.DxcShaderHash.Flags...System.UInt32 => Windows.Win32.Graphics.Direct3D.Dxc.DXC_HASHFLAG
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags.Default added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags.InPlaceEdit added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags.ModuleOnly added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags.RootSignatureOnly added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcValidatorFlags.ValidMask added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcVersionInfoFlags added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcVersionInfoFlags.Debug added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcVersionInfoFlags.Internal added
+Windows.Win32.Graphics.Direct3D.Dxc.DxcVersionInfoFlags.None added
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcContainerBuilder.AddPart : fourCC...UInt32 => DXC_PART
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcContainerBuilder.RemovePart : fourCC...UInt32 => DXC_PART
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcContainerReflection.FindFirstPartKind : kind...UInt32 => DXC_PART
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcContainerReflection.GetPartKind : pResult...UInt32* => DXC_PART*
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcContainerReflection.GetPartReflection : ppvObject : [In,Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcUtils.CreateReflection : ppvReflection : [In,Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcUtils.GetDxilContainerPart : DxcPart...UInt32 => DXC_PART
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcUtils.GetDxilContainerPart : ppPartData : [Out] => [NativeArrayInfo(CountFieldName=pPartSizeInBytes),Out]
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcValidator.Validate : Flags...UInt32 => DxcValidatorFlags
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcValidator2.ValidateWithDebug : Flags...UInt32 => DxcValidatorFlags
+Windows.Win32.Graphics.Direct3D.Dxc.IDxcVersionInfo.GetFlags : pFlags...UInt32* => DxcVersionInfoFlags*
