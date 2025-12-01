@@ -29,3 +29,4 @@ using static Windows.Win32.System.Threading.Apis; // Various constants
 using static Windows.Win32.System.Ole.Apis; // Various constants
 using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
 using static Windows.Win32.UI.Controls.Apis; // Various constants
+using static Windows.Win32.Globalization.Apis;
