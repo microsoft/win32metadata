@@ -1,0 +1,7 @@
+# Add additional globalization constants
+Windows.Win32.Globalization.Apis.LOCALE_CUSTOM_DEFAULT added
+Windows.Win32.Globalization.Apis.LOCALE_CUSTOM_UI_DEFAULT added
+Windows.Win32.Globalization.Apis.LOCALE_CUSTOM_UNSPECIFIED added
+Windows.Win32.Globalization.Apis.LOCALE_INVARIANT added
+Windows.Win32.Globalization.Apis.LOCALE_NEUTRAL added
+Windows.Win32.System.SystemServices.Apis.LOCALE_UNASSIGNED_LCID added
