@@ -31,7 +31,7 @@ stages:
           - task: GitHubRelease@1
             displayName: GitHub release (create)
             inputs:
-              gitHubConnection: github.com_mikebattista
+              gitHubConnection: github.com_jevansaks
               repositoryName: $(Build.Repository.Name)
               target: $(resources.pipeline.win32metadata.sourceCommit)
               tagSource: userSpecifiedTag
@@ -70,3 +70,4 @@ stages:
               }
             displayName: Push packages to nuget.org
             workingDirectory: $(Pipeline.Workspace)/win32metadata
+
