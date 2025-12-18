@@ -1,3 +1,3 @@
-# Upgrade D3D12 Agility SDK to 1.618.4
+# Upgrade D3D12 Agility SDK to 1.618.5
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_MS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID added
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_WORK_GRAPHS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID added
