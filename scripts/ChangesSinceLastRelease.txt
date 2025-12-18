@@ -65,6 +65,6 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_CONTEXT_ENUM_H
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_ENUM_HANDLE added
 # Make ITfCandidateListUIElement::GetPageIndex pIndex parameter optional
 Windows.Win32.UI.TextServices.ITfCandidateListUIElement.GetPageIndex : pIndex : [NativeArrayInfo(CountParamIndex=1),Out] => [NativeArrayInfo(CountParamIndex=1),Optional,Out]
-# Upgrade D3D12 Agility SDK to 1.618.4
+# Upgrade D3D12 Agility SDK to 1.618.5
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_MS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID added
 Windows.Win32.Graphics.Direct3D12.Apis.D3D12_WORK_GRAPHS_DISPATCH_MAX_THREAD_GROUPS_PER_GRID added
