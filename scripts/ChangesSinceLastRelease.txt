@@ -5,3 +5,5 @@ Windows.Win32.Globalization.Apis.LOCALE_CUSTOM_UNSPECIFIED added
 Windows.Win32.Globalization.Apis.LOCALE_INVARIANT added
 Windows.Win32.Globalization.Apis.LOCALE_NEUTRAL added
 Windows.Win32.System.SystemServices.Apis.LOCALE_UNASSIGNED_LCID added
+# Mark FwpmEngineOpen0::engineHandle with correct close method
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmEngineOpen0 : engineHandle : [Out] => [Out,RAIIFree(FwpmEngineClose0)]
