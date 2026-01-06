@@ -2847,7 +2847,7 @@
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
-    "Name": "FWPM_ENGINE_HANDLE_0",
+    "Name": "FWPM_ENGINE_HANDLE",
     "ValueType": "void*",
     "CloseApi": "FwpmEngineClose0",
     "InvalidHandleValues": [ -1, 0 ],
