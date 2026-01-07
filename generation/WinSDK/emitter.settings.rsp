@@ -2311,3 +2311,7 @@ IPsecSaDbSetSecurityInfo0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaDestroyEnumHandle0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaEnum0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaEnum1::engineHandle=FWPM_ENGINE_HANDLE
+IWICBitmapSource::CopyPixels::prc=[Optional]
+NotifyServiceStatusChangeA::pNotifyBuffer=[Retained]
+NotifyServiceStatusChangeW::pNotifyBuffer=[Retained]
+PSCreateMemoryPropertyStore::ppv=[ComOutPtr]
