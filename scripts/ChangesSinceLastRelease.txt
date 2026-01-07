@@ -191,3 +191,8 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaDestroyEnum
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaEnum0 : engineHandle...HANDLE => FWPM_ENGINE_HANDLE
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaEnum1 : engineHandle...HANDLE => FWPM_ENGINE_HANDLE
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_ENGINE_HANDLE added
+# Add some missing metadata attributes
+Windows.Win32.Graphics.Imaging.IWICBitmapSource.CopyPixels : prc : [Const,In] => [Const,In,Optional]
+Windows.Win32.System.Services.Apis.NotifyServiceStatusChangeA : pNotifyBuffer : [In] => [In,Retained]
+Windows.Win32.System.Services.Apis.NotifyServiceStatusChangeW : pNotifyBuffer : [In] => [In,Retained]
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PSCreateMemoryPropertyStore : ppv : [Out] => [ComOutPtr,Out]
