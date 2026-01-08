@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/deliveryoptimization.h
+--namespace
+Windows.Win32.Networking.DeliveryOptimization
