@@ -258,3 +258,68 @@ Windows.Win32.Networking.DeliveryOptimization.DODownloadState.DODownloadState_Tr
 Windows.Win32.Networking.DeliveryOptimization.IDODownload added
 Windows.Win32.Networking.DeliveryOptimization.IDODownloadStatusCallback added
 Windows.Win32.Networking.DeliveryOptimization.IDOManager added
+# Add domain-specific handle types for WFP enumerations
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmCalloutCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_CALLOUT_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmCalloutDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_CALLOUT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmCalloutEnum0 : enumHandle...HANDLE => FWPM_CALLOUT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmConnectionCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_CONNECTION_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmConnectionDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_CONNECTION_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmConnectionEnum0 : enumHandle...HANDLE => FWPM_CONNECTION_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmFilterCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_FILTER_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmFilterDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_FILTER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmFilterEnum0 : enumHandle...HANDLE => FWPM_FILTER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmLayerCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_LAYER_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmLayerDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_LAYER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmLayerEnum0 : enumHandle...HANDLE => FWPM_LAYER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_NET_EVENT_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum0 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum1 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum2 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum3 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum4 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmNetEventEnum5 : enumHandle...HANDLE => FWPM_NET_EVENT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextEnum0 : enumHandle...HANDLE => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextEnum1 : enumHandle...HANDLE => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextEnum2 : enumHandle...HANDLE => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderContextEnum3 : enumHandle...HANDLE => FWPM_PROVIDER_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_PROVIDER_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_PROVIDER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmProviderEnum0 : enumHandle...HANDLE => FWPM_PROVIDER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSessionCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_SESSION_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSessionDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_SESSION_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSessionEnum0 : enumHandle...HANDLE => FWPM_SESSION_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSubLayerCreateEnumHandle0 : enumHandle...HANDLE* => FWPM_SUBLAYER_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSubLayerDestroyEnumHandle0 : enumHandle...HANDLE => FWPM_SUBLAYER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSubLayerEnum0 : enumHandle...HANDLE => FWPM_SUBLAYER_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IkeextSaCreateEnumHandle0 : enumHandle...HANDLE* => IKEEXT_SA_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IkeextSaDestroyEnumHandle0 : enumHandle...HANDLE => IKEEXT_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IkeextSaEnum0 : enumHandle...HANDLE => IKEEXT_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IkeextSaEnum1 : enumHandle...HANDLE => IKEEXT_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IkeextSaEnum2 : enumHandle...HANDLE => IKEEXT_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecDospStateCreateEnumHandle0 : enumHandle...HANDLE* => IPSEC_DOSP_STATE_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecDospStateDestroyEnumHandle0 : enumHandle...HANDLE => IPSEC_DOSP_STATE_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecDospStateEnum0 : enumHandle...HANDLE => IPSEC_DOSP_STATE_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaContextCreateEnumHandle0 : enumHandle...HANDLE* => IPSEC_SA_CONTEXT_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaContextDestroyEnumHandle0 : enumHandle...HANDLE => IPSEC_SA_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaContextEnum0 : enumHandle...HANDLE => IPSEC_SA_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaContextEnum1 : enumHandle...HANDLE => IPSEC_SA_CONTEXT_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaCreateEnumHandle0 : enumHandle...HANDLE* => IPSEC_SA_ENUM_HANDLE*
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaDestroyEnumHandle0 : enumHandle...HANDLE => IPSEC_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaEnum0 : enumHandle...HANDLE => IPSEC_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecSaEnum1 : enumHandle...HANDLE => IPSEC_SA_ENUM_HANDLE
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_CALLOUT_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_CONNECTION_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_FILTER_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_LAYER_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_NET_EVENT_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_PROVIDER_CONTEXT_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_PROVIDER_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_SESSION_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_SUBLAYER_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IKEEXT_SA_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_DOSP_STATE_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_CONTEXT_ENUM_HANDLE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_ENUM_HANDLE added

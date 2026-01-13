@@ -2852,5 +2852,109 @@
     "CloseApi": "FwpmEngineClose0",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_CALLOUT_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmCalloutDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_CONNECTION_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmConnectionDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_FILTER_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmFilterDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_LAYER_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmLayerDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_NET_EVENT_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmNetEventDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_PROVIDER_CONTEXT_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmProviderContextDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_PROVIDER_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmProviderDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_SESSION_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmSessionDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "FWPM_SUBLAYER_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "FwpmSubLayerDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "IKEEXT_SA_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "IkeextSaDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "IPSEC_DOSP_STATE_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "IPsecDospStateDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "IPSEC_SA_CONTEXT_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "IPsecSaContextDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "Name": "IPSEC_SA_ENUM_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "IPsecSaDestroyEnumHandle0",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   }
 ]
