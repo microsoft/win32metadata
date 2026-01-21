@@ -3,13 +3,16 @@ registries:
   nuget-azure-devops:
     type: nuget-feed
     # The URL of the NuGet feed to check for updates
+
     url: https://pkgs.dev.azure.com/shine-oss/Win32Metadata/_packaging/Win32Metadata-Dependencies/nuget/v3/index.json
 updates:
   # Enable version updates for nuget
   - package-ecosystem: "nuget"
     # Look for NuGet dependency info from the `root` directory
+
     directory: "/"
     # Check the nuget registry for updates monthly
+
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 10
@@ -22,3 +25,13 @@ updates:
       nuget-dependencies:
         dependency-type: production
         applies-to: security-updates
+  - package-ecosystem: dotnet-sdk
+    directory: /
+    schedule:
+      interval: weekly
+      day: wednesday
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
