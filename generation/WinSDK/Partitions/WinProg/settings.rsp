@@ -12,6 +12,7 @@ _THREADINFOCLASS
 _UNICODE_STRING
 NtClose
 NtCreateFile
+NtCreateNamedPipeFile
 NtDeviceIoControlFile
 NtNotifyChangeMultipleKeys
 NtOpenFile
