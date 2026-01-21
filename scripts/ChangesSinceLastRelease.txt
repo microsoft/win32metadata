@@ -63,3 +63,5 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IKEEXT_SA_ENUM_HANDLE a
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_DOSP_STATE_ENUM_HANDLE added
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_CONTEXT_ENUM_HANDLE added
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_ENUM_HANDLE added
+# Make ITfCandidateListUIElement::GetPageIndex pIndex parameter optional
+Windows.Win32.UI.TextServices.ITfCandidateListUIElement.GetPageIndex : pIndex : [NativeArrayInfo(CountParamIndex=1),Out] => [NativeArrayInfo(CountParamIndex=1),Optional,Out]

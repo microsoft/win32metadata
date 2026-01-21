@@ -2366,3 +2366,4 @@ IPsecSaCreateEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE*
 IPsecSaEnum0::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaEnum1::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaDestroyEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE
+ITfCandidateListUIElement::GetPageIndex::pIndex=[Optional]
