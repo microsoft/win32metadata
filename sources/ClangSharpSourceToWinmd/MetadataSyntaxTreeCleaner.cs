@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MetadataUtils;
-using System.Xml.Linq;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -221,13 +220,13 @@ namespace ClangSharpSourceToWinmd
 
                 foreach (var member in node.Members)
                 {
-                    if (!(member is FieldDeclarationSyntax))
+                    if (member is not FieldDeclarationSyntax { Declaration: { Type: PredefinedTypeSyntax } } fieldDeclaration)
                     {
                         continue;
                     }
 
-                    var fieldName = ((FieldDeclarationSyntax)member).Declaration.Variables[0].Identifier.Value.ToString();
-                    if (fieldName == "cbSize")
+                    var fieldName = fieldDeclaration.Declaration.Variables[0].Identifier.Value.ToString();
+                    if (fieldName is "cbSize" or "cb" or "cbStruct" or "dwSize" or "lStructSize")
                     {
                         var attributeList = SyntaxFactory.AttributeList(
                                 SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -236,6 +235,7 @@ namespace ClangSharpSourceToWinmd
                                         SyntaxFactory.ParseAttributeArgumentList($"(\"{fieldName}\")"))));
 
                         node = node.AddAttributeLists(attributeList);
+                        break;
                     }
                 }
 
@@ -408,69 +408,69 @@ namespace ClangSharpSourceToWinmd
                     // struct doesn't have a NativeTypeName, which means it's a forward declaration.
                     // The real declaration will have the SupportedOSPlatform that we'll keep 
                     case "SupportedOSPlatform":
-                    {
-                        if (node.Parent is StructDeclarationSyntax structDeclaration)
                         {
-                            if (!structDeclaration.AttributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "NativeTypeName")))
+                            if (node.Parent is StructDeclarationSyntax structDeclaration)
+                            {
+                                if (!structDeclaration.AttributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "NativeTypeName")))
+                                {
+                                    return null;
+                                }
+                            }
+
+                            // We don't want these for parameters or fields
+                            if (node.Parent is ParameterSyntax || node.Parent is FieldDeclarationSyntax)
                             {
                                 return null;
                             }
-                        }
 
-                        // We don't want these for parameters or fields
-                        if (node.Parent is ParameterSyntax || node.Parent is FieldDeclarationSyntax)
-                        {
-                            return null;
-                        }
+                            // We don't want these for interface methods
+                            if (node.Parent is MethodDeclarationSyntax && node.Parent.Parent is StructDeclarationSyntax)
+                            {
+                                return null;
+                            }
 
-                        // We don't want these for interface methods
-                        if (node.Parent is MethodDeclarationSyntax && node.Parent.Parent is StructDeclarationSyntax)
-                        {
-                            return null;
+                            break;
                         }
-
-                        break;
-                    }
 
                     case "Guid":
-                    {
-                        return this.ProcessGuidAttr(firstAttr);
-                    }
-
-                    case "UnmanagedFunctionPointer":
-                    {
-                        // ClangSharp can emit this attribute with no arguments.
-                        // The typedef we're using of this attribute has no such ctor,
-                        // so emit one that does, using WinApi as the default calling convention.
-                        // Also, convert StdCall to Winapi
-                        if (firstAttr.ArgumentList == null || firstAttr.ArgumentList.ToString() == "(CallingConvention.StdCall)")
                         {
-                            return
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
-                                        SyntaxFactory.Attribute(
-                                            SyntaxFactory.ParseName("UnmanagedFunctionPointer"),
-                                            SyntaxFactory.ParseAttributeArgumentList("(CallingConvention.Winapi)"))));
+                            return this.ProcessGuidAttr(firstAttr);
                         }
 
-                        break;
-                    }
+                    case "UnmanagedFunctionPointer":
+                        {
+                            // ClangSharp can emit this attribute with no arguments.
+                            // The typedef we're using of this attribute has no such ctor,
+                            // so emit one that does, using WinApi as the default calling convention.
+                            // Also, convert StdCall to Winapi
+                            if (firstAttr.ArgumentList == null || firstAttr.ArgumentList.ToString() == "(CallingConvention.StdCall)")
+                            {
+                                return
+                                    SyntaxFactory.AttributeList(
+                                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                            SyntaxFactory.Attribute(
+                                                SyntaxFactory.ParseName("UnmanagedFunctionPointer"),
+                                                SyntaxFactory.ParseAttributeArgumentList("(CallingConvention.Winapi)"))));
+                            }
+
+                            break;
+                        }
 
                     case "NativeTypeName":
-                    {
-                        bool alreadyConst = 
-                            node.Parent is FieldDeclarationSyntax parentField &&
-                            parentField.Modifiers.Any(m => m.ToString() == "const");
+                        {
+                            bool alreadyConst =
+                                node.Parent is FieldDeclarationSyntax parentField &&
+                                parentField.Modifiers.Any(m => m.ToString() == "const");
 
-                        var ret = this.ProcessNativeTypeNameAttr(alreadyConst, firstAttr);
+                            var ret = this.ProcessNativeTypeNameAttr(alreadyConst, firstAttr);
 
-                        return ret == null ? node : ret;
-                    }
+                            return ret == null ? node : ret;
+                        }
 
                     case "CppAttributeList":
-                    {
-                        return this.CreateAttributeListForSal(node);
-                    }
+                        {
+                            return this.CreateAttributeListForSal(node);
+                        }
                 }
 
                 return base.VisitAttributeList(node);
