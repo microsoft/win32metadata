@@ -687,6 +687,14 @@
     "NativeTypedef": false
   },
   {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "AVRT_THREAD_ORDERING_GROUP_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "AvRtDeleteThreadOrderingGroup",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
+  },
+  {
     "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HCMNOTIFICATION",
     "ValueType": "DECLARE_HANDLE",
