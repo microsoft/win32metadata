@@ -85,3 +85,6 @@ Windows.Win32.System.Threading.Apis.AvSetMmThreadCharacteristicsW : return...HAN
 Windows.Win32.System.Threading.Apis.AvSetMmThreadPriority : AvrtHandle...HANDLE => AVRT_TASK_HANDLE
 Windows.Win32.System.Threading.AVRT_TASK_HANDLE added
 Windows.Win32.System.Threading.AVRT_THREAD_ORDERING_GROUP_HANDLE added
+# Annotate RasEnumConnections function parameters
+Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsA : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]
+Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsW : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]

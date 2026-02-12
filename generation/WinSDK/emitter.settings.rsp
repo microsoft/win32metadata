@@ -2383,3 +2383,5 @@ IPsecSaEnum0::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaEnum1::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaDestroyEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE
 ITfCandidateListUIElement::GetPageIndex::pIndex=[Optional]
+RasEnumConnectionsA::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
+RasEnumConnectionsW::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
