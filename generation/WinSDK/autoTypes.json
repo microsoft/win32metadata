@@ -679,6 +679,22 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "AVRT_TASK_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "AvRevertMmThreadCharacteristics",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "AVRT_THREAD_ORDERING_GROUP_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "AvRtDeleteThreadOrderingGroup",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
+  },
+  {
     "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HCMNOTIFICATION",
     "ValueType": "DECLARE_HANDLE",
@@ -998,6 +1014,14 @@
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.HttpServer",
+    "Name": "HTTP_REQUEST_QUEUE_HANDLE",
+    "ValueType": "void*",
+    "CloseApi": "HttpCloseRequestQueue",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Globalization",
