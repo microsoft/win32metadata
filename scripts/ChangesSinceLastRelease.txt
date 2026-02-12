@@ -65,3 +65,6 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_CONTEXT_ENUM_H
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.IPSEC_SA_ENUM_HANDLE added
 # Make ITfCandidateListUIElement::GetPageIndex pIndex parameter optional
 Windows.Win32.UI.TextServices.ITfCandidateListUIElement.GetPageIndex : pIndex : [NativeArrayInfo(CountParamIndex=1),Out] => [NativeArrayInfo(CountParamIndex=1),Optional,Out]
+# Annotate RasEnumConnections function parameters
+Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsA : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]
+Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsW : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]
