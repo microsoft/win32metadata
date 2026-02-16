@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
     public class CrossArchSyntaxMap
     {
+        private const string StructLayoutAttributeName = "StructLayout";
+
         private readonly Dictionary<string, List<CrossArchInfo>> namesToInfos = new();
         private readonly Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new();
-        private readonly HashSet<string> x86StructsNeed64BitAttrs = new();
+        private readonly HashSet<string> x86StructsNeed64BitLayoutAttribute = new();
         private readonly object syncObj = new();
 
         public CrossArchSyntaxMap()
@@ -82,9 +82,20 @@ namespace ClangSharpSourceToWinmd
 
             lock (this.syncObj)
             {
-                if (this.x86StructsNeed64BitAttrs.Contains(name))
+                if (this.x86StructsNeed64BitLayoutAttribute.Contains(name))
                 {
-                    return x86Node.AddAttributeLists(this.namesTo64BitStructs[name].AttributeLists.ToArray());
+                    foreach (var attrList in this.namesTo64BitStructs[name].AttributeLists)
+                    {
+                        foreach (var attr in attrList.Attributes)
+                        {
+                            if (attr.Name.ToString().Contains(StructLayoutAttributeName))
+                            {
+                                return x86Node.AddAttributeLists(
+                                    SyntaxFactory.AttributeList(
+                                        SyntaxFactory.SingletonSeparatedList(attr)));
+                            }
+                        }
+                    }
                 }
             }
 
@@ -97,7 +108,7 @@ namespace ClangSharpSourceToWinmd
 
             lock (this.syncObj)
             {
-                foreach (var name in this.x86StructsNeed64BitAttrs)
+                foreach (var name in this.x86StructsNeed64BitLayoutAttribute)
                 {
                     var nonX86Struct = this.namesTo64BitStructs[name];
                     if (!ret.Contains(nonX86Struct.SyntaxTree.FilePath))
@@ -278,7 +289,7 @@ namespace ClangSharpSourceToWinmd
                         else
                         {
                             ret.Append(',');
-                        }   
+                        }
 
                         var firstVar = field.Declaration.Variables.First();
                         var typeName = GetTypeName(field.Declaration.Type.ToString(), field.AttributeLists);
@@ -321,8 +332,8 @@ namespace ClangSharpSourceToWinmd
 
                     if (arch == Architecture.X86)
                     {
-                        // If the x86 node doesn't have any attributes, try using the ones cached from the non-x86 version
-                        if (structNode.AttributeLists.Count == 0 && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
+                        // If the x86 node doesn't have dedicated [StructLayout] attribute, try using the ones cached from the non-x86 version
+                        if (!HasStructLayoutAttribute(structNode) && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
                         {
                             var tempNode = structNode.WithAttributeLists(nonX86Node.AttributeLists);
 
@@ -342,7 +353,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (info.FullSignature == altSignatureForX86)
                     {
-                        this.x86StructsNeed64BitAttrs.Add(name);
+                        this.x86StructsNeed64BitLayoutAttribute.Add(name);
                         info.Arch |= arch;
                         return;
                     }
@@ -356,6 +367,22 @@ namespace ClangSharpSourceToWinmd
 
                 var newInfo = new CrossArchInfo() { Arch = arch, FullSignature = fullSignature };
                 crossArchInfos.Add(newInfo);
+
+                static bool HasStructLayoutAttribute(StructDeclarationSyntax structDeclaration)
+                {
+                    foreach (var attrList in structDeclaration.AttributeLists)
+                    {
+                        foreach (var attr in attrList.Attributes)
+                        {
+                            if (attr.Name.ToString().Contains(StructLayoutAttributeName))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                }
             }
         }
 

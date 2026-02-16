@@ -88,3 +88,142 @@ Windows.Win32.System.Threading.AVRT_THREAD_ORDERING_GROUP_HANDLE added
 # Annotate RasEnumConnections function parameters
 Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsA : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]
 Windows.Win32.NetworkManagement.Rras.Apis.RasEnumConnectionsW : param0 : [In,Optional,Out] => [In,MemorySize(BytesParamIndex=1),NativeArrayInfo(CountParamIndex=2),Optional,Out]
+# Allow crossarch merge for structs with attributes other than `[StructLayout]`
+Windows.Win32.NetworkManagement.Rras.RASCONNA added
+Windows.Win32.NetworkManagement.Rras.RASCONNA(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASCONNA(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASCONNW added
+Windows.Win32.NetworkManagement.Rras.RASCONNW(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASCONNW(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASDEVSPECIFICINFO added
+Windows.Win32.NetworkManagement.Rras.RASDEVSPECIFICINFO(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASDEVSPECIFICINFO(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSA added
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSA(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSA(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSW added
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSW(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASDIALPARAMSW(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGA added
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGA(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGA(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGW added
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGW(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASENTRYDLGW(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO added
+Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASPBDLGA added
+Windows.Win32.NetworkManagement.Rras.RASPBDLGA(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASPBDLGA(X86) removed
+Windows.Win32.NetworkManagement.Rras.RASPBDLGW added
+Windows.Win32.NetworkManagement.Rras.RASPBDLGW(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Rras.RASPBDLGW(X86) removed
+Windows.Win32.NetworkManagement.Snmp.AsnObjectIdentifier added
+Windows.Win32.NetworkManagement.Snmp.AsnObjectIdentifier(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Snmp.AsnObjectIdentifier(X86) removed
+Windows.Win32.NetworkManagement.Snmp.AsnOctetString added
+Windows.Win32.NetworkManagement.Snmp.AsnOctetString(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Snmp.AsnOctetString(X86) removed
+Windows.Win32.NetworkManagement.Snmp.SnmpVarBindList added
+Windows.Win32.NetworkManagement.Snmp.SnmpVarBindList(X64, Arm64) removed
+Windows.Win32.NetworkManagement.Snmp.SnmpVarBindList(X86) removed
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_ID added
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_ID(X64, Arm64) removed
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_ID(X86) removed
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_INFO added
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_INFO(X64, Arm64) removed
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_INFO(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INFORMATION added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INFORMATION(X64, Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INFORMATION(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_INFORMATION added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_INFORMATION(X64, Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_INFORMATION(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM_INFORMATION added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM_INFORMATION(X64, Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM_INFORMATION(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM(X64, Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM(X86) removed
+Windows.Win32.UI.Controls.RichEdit.CLIPBOARDFORMAT added
+Windows.Win32.UI.Controls.RichEdit.CLIPBOARDFORMAT(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.CLIPBOARDFORMAT(X86) removed
+Windows.Win32.UI.Controls.RichEdit.EDITSTREAM added
+Windows.Win32.UI.Controls.RichEdit.EDITSTREAM(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.EDITSTREAM(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENCORRECTTEXT added
+Windows.Win32.UI.Controls.RichEdit.ENCORRECTTEXT(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENCORRECTTEXT(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENDCOMPOSITIONNOTIFY added
+Windows.Win32.UI.Controls.RichEdit.ENDCOMPOSITIONNOTIFY(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENDCOMPOSITIONNOTIFY(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENDROPFILES added
+Windows.Win32.UI.Controls.RichEdit.ENDROPFILES(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENDROPFILES(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENLINK added
+Windows.Win32.UI.Controls.RichEdit.ENLINK(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENLINK(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENLOWFIRTF added
+Windows.Win32.UI.Controls.RichEdit.ENLOWFIRTF(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENLOWFIRTF(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENOLEOPFAILED added
+Windows.Win32.UI.Controls.RichEdit.ENOLEOPFAILED(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENOLEOPFAILED(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENPROTECTED added
+Windows.Win32.UI.Controls.RichEdit.ENPROTECTED(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENPROTECTED(X86) removed
+Windows.Win32.UI.Controls.RichEdit.ENSAVECLIPBOARD added
+Windows.Win32.UI.Controls.RichEdit.ENSAVECLIPBOARD(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.ENSAVECLIPBOARD(X86) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTA added
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTA(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTA(X86) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXA added
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXA(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXA(X86) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXW added
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXW(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTEXW(X86) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTW added
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTW(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.FINDTEXTW(X86) removed
+Windows.Win32.UI.Controls.RichEdit.FORMATRANGE added
+Windows.Win32.UI.Controls.RichEdit.FORMATRANGE(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.FORMATRANGE(X86) removed
+Windows.Win32.UI.Controls.RichEdit.GETCONTEXTMENUEX added
+Windows.Win32.UI.Controls.RichEdit.GETCONTEXTMENUEX(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.GETCONTEXTMENUEX(X86) removed
+Windows.Win32.UI.Controls.RichEdit.GETTEXTEX added
+Windows.Win32.UI.Controls.RichEdit.GETTEXTEX(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.GETTEXTEX(X86) removed
+Windows.Win32.UI.Controls.RichEdit.HYPHENATEINFO added
+Windows.Win32.UI.Controls.RichEdit.HYPHENATEINFO(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.HYPHENATEINFO(X86) removed
+Windows.Win32.UI.Controls.RichEdit.MSGFILTER added
+Windows.Win32.UI.Controls.RichEdit.MSGFILTER(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.MSGFILTER(X86) removed
+Windows.Win32.UI.Controls.RichEdit.OBJECTPOSITIONS added
+Windows.Win32.UI.Controls.RichEdit.OBJECTPOSITIONS(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.OBJECTPOSITIONS(X86) removed
+Windows.Win32.UI.Controls.RichEdit.PUNCTUATION added
+Windows.Win32.UI.Controls.RichEdit.PUNCTUATION(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.PUNCTUATION(X86) removed
+Windows.Win32.UI.Controls.RichEdit.REPASTESPECIAL added
+Windows.Win32.UI.Controls.RichEdit.REPASTESPECIAL(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.REPASTESPECIAL(X86) removed
+Windows.Win32.UI.Controls.RichEdit.REQRESIZE added
+Windows.Win32.UI.Controls.RichEdit.REQRESIZE(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.REQRESIZE(X86) removed
+Windows.Win32.UI.Controls.RichEdit.RICHEDIT_IMAGE_PARAMETERS added
+Windows.Win32.UI.Controls.RichEdit.RICHEDIT_IMAGE_PARAMETERS(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.RICHEDIT_IMAGE_PARAMETERS(X86) removed
+Windows.Win32.UI.Controls.RichEdit.SELCHANGE added
+Windows.Win32.UI.Controls.RichEdit.SELCHANGE(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.SELCHANGE(X86) removed
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEA added
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEA(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEA(X86) removed
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEW added
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEW(X64, Arm64) removed
+Windows.Win32.UI.Controls.RichEdit.TEXTRANGEW(X86) removed
