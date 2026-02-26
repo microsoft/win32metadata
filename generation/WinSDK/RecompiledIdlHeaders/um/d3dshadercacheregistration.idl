@@ -11,8 +11,8 @@ import "ocidl.idl";
 cpp_quote("DEFINE_GUID(CLSID_D3DShaderCacheInstallerFactory,    0x16195a0b, 0x607c, 0x41f1, 0xbf, 0x03, 0xc7, 0x69, 0x4d, 0x60, 0xa8, 0xd4);")
 
 typedef enum D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE
-{ 
-    D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE_USER, 
+{
+    D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE_USER,
     D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE_SYSTEM
 } D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE;
 
@@ -185,7 +185,6 @@ interface ID3DShaderCacheInstallerFactory : IUnknown
         [in] REFIID riid,
         [out, iid_is(riid), annotation("_COM_Outptr_")] void** ppvExplorer); // Expected: ID3DShaderCacheExplorer
 };
-
 
 cpp_quote( "DEFINE_GUID(IID_ID3DShaderCacheInstallerClient,0xa16ee930,0xd9f6,0x4222,0xa5,0x14,0x24,0x44,0x73,0xe5,0xd2,0x66);" )
 cpp_quote( "DEFINE_GUID(IID_ID3DShaderCacheComponent,0xeed1bf00,0xf5c7,0x4cf7,0x88,0x5c,0xd0,0xf9,0xc0,0xcb,0x48,0x28);" )
