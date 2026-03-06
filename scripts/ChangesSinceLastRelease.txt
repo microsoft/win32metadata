@@ -58,3 +58,5 @@ winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 717, 
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 618, winmd2 = 619
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D_SHADER_MODEL.D3D_HIGHEST_SHADER_MODEL = 105, winmd2 = 106
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1442, winmd2 = 1464
+# Upgrade D3D12 Agility SDK to 1.619.1
+Windows.Win32.Graphics.Direct3D12.ID3D12RootSignature1 added
