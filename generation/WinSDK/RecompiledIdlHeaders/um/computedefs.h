@@ -148,7 +148,8 @@ typedef enum HCS_RESOURCE_TYPE
     HcsResourceTypeFile = 1,
     HcsResourceTypeJob = 2,
     HcsResourceTypeComObject = 3,
-    HcsResourceTypeSocket = 4
+    HcsResourceTypeSocket = 4,
+    HcsResourceTypeSection = 5
 } HCS_RESOURCE_TYPE;
 
 // Flags applicable to HCS_NOTIFICATIONS

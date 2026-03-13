@@ -309,6 +309,15 @@ extern "C" {
 #define IOCTL_STORAGE_FIRMWARE_DOWNLOAD         CTL_CODE(IOCTL_STORAGE_BASE, 0x0701, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 #define IOCTL_STORAGE_FIRMWARE_ACTIVATE         CTL_CODE(IOCTL_STORAGE_BASE, 0x0702, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 
+//
+// IOCTLs for BOOT partition support on storage devices
+//
+
+#define IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD CTL_CODE(IOCTL_STORAGE_BASE, 0x0703, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE CTL_CODE(IOCTL_STORAGE_BASE, 0x0704, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_GET_INFO CTL_CODE(IOCTL_STORAGE_BASE, 0x0705, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+
 
 //
 // IOCTL to support Idle Power Management, including Device Wake
@@ -992,7 +1001,7 @@ typedef enum _STORAGE_PROPERTY_ID {
     StorageDeviceResiliencyProperty,
     StorageDeviceMediumProductType,
     StorageAdapterRpmbProperty,
-    StorageAdapterCryptoProperty,                   // Deprecated for GE or greater OS. Use StorageHwCryptoProperty.
+    StorageAdapterCryptoProperty,                   // Deprecated. Use StorageHwCryptoProperty.
 // end_winioctl
     StorageDeviceTieringProperty,
     StorageDeviceFaultDomainProperty,
@@ -1794,8 +1803,7 @@ typedef enum _STORAGE_CRYPTO_KEY_SIZE {
 #define STORAGE_CRYPTO_CAPABILITY_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this struct is deprecated. 
-// Use STORAGE_HW_CRYPTO_CAPABILITY.
+// Note: This struct is deprecated. Use STORAGE_HW_CRYPTO_CAPABILITY.
 //
 typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
@@ -1936,8 +1944,7 @@ typedef struct _STORAGE_CRYPTO_CAPABILITY_V2 {
 #define STORAGE_CRYPTO_DESCRIPTOR_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated.
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
 
@@ -1987,8 +1994,7 @@ typedef enum _STORAGE_ICE_TYPE {
 } STORAGE_ICE_TYPE, *PSTORAGE_ICE_TYPE;
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated. 
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR_V2 {
 
@@ -5238,6 +5244,10 @@ DeviceDsmValidateInput (
     ULONG   Min   = 0;
     BOOLEAN Valid = FALSE;
 
+    if (Input->Size != sizeof(*Input)) {
+        goto Cleanup;
+    }
+
     if (Definition->Action != Input->Action) {
         goto Cleanup;
     }
@@ -6984,6 +6994,68 @@ typedef struct _STORAGE_HW_FIRMWARE_ACTIVATE {
     UCHAR   Reserved0[3];
 
 } STORAGE_HW_FIRMWARE_ACTIVATE, *PSTORAGE_HW_FIRMWARE_ACTIVATE;
+
+//
+// Indicate the target of the request other than the device handle/object itself.
+// This is used in "Flags" field of data structures for boot partition upgrade request.
+// This flag is valid for STORAGE_HW_BOOT_PARTITION_ACTIVATE and STORAGE_HW_BOOT_PARTITION_DOWNLOAD structures.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_FLAG_CONTROLLER                       0x00000001
+
+//
+// Below definitions are only valid for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE.
+//
+
+//
+// Indicate that any existing boot partition specified in the boot partition ID field should be replaced with the downloaded image.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_REPLACE_EXISTING_BOOT_PARTITION           0x40000000
+//
+// Indicate that the existing boot partition specified in the boot partition ID field should be activated.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_ACTIVATE_EXISTING_BOOT_PARTITION          0x80000000
+
+#define STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_ACTIVATE {
+    ULONG 	        Version;            // STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION
+    ULONG	        Size;               // Size of the whole structure
+    ULONG           Flags;
+    UCHAR 	        BPID;              	// Boot Partition ID (BPID);
+    UCHAR 	        Reserved[3];
+} STORAGE_HW_BOOT_PARTITION_ACTIVATE, *PSTORAGE_HW_BOOT_PARTITION_ACTIVATE;
+
+#define STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_DOWNLOAD {
+    ULONG 	                        Version;	                        // STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION
+    ULONG	                        Size;		                        // Size of the whole structure including the image buffer.
+    ULONG                           Flags;
+    UCHAR 	                        BPID; 		                        // Boot Partition ID (BPID);
+    UCHAR 	                        Reserved[3];
+    ULONGLONG                       Offset;                             // Offset for each download command
+    ULONGLONG                       BufferSize;                         // ImageSize for each download command
+    _Field_size_bytes_(BufferSize)  UCHAR ImageBuffer[ANYSIZE_ARRAY];   // Buffer to hold the image data
+} STORAGE_HW_BOOT_PARTITION_DOWNLOAD, *PSTORAGE_HW_BOOT_PARTITION_DOWNLOAD;
+
+#define STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1 0x01
+//
+// Input and Output buffer for IOCTL_STORAGE_BOOT_PARTITION_GET_INFO
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_INFO {
+    ULONG       Version;                // STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1
+    ULONG       Size;                   // Size of the whole structure
+    ULONGLONG   BPSZ;                   // Boot Partition Size (BPSZ)
+    ULONG       Flags;
+    ULONG       ImagePayloadAlignment;
+    ULONG       ImagePayloadMaxSize;
+    UCHAR       SlotCount;
+    UCHAR       ABPID;                  // Active Boot Partition ID (ABPID)
+} STORAGE_HW_BOOT_PARTITION_INFO, *PSTORAGE_HW_BOOT_PARTITION_INFO;
 
 //
 // Parameter for IOCTL_STORAGE_PROTOCOL_COMMAND

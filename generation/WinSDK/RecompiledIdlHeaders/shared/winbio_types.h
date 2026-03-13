@@ -2443,8 +2443,18 @@ enum EXPERIMENTAL_WINBIO_ESS_STATE_FLAGS
     EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_FPR                      = 0x00002000,
 
     // This PC blocked non-ESS capable face camera sensor.
-    EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_CAMERA                   = 0x00004000
+    EXPERIMENTAL_WINBIO_ESS_BLOCKED_NON_ESS_CAMERA                   = 0x00004000,
+
+    // This PC's ESS state is determined based on if they have non ESS enrollments
+    EXPERIMENTAL_WINBIO_ESS_SOURCE_DEFAULT                           = 0x00008000
 };
+
+// Returns biometric capable sensor type connected to the PC.
+typedef struct _EXPERIMENTAL_WINBIO_CONNECTED_SENSOR
+{
+    WINBIO_BIOMETRIC_TYPE biometricType;
+    BOOL isEnhancedSignInSecurityCapable;
+} EXPERIMENTAL_WINBIO_CONNECTED_SENSOR, *EXPERIMENTAL_PWINBIO_CONNECTED_SENSOR;
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 

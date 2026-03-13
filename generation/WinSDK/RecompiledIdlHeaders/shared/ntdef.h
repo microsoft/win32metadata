@@ -428,8 +428,20 @@ Abstract:
 #endif
 #endif
 
+#if !defined(DECLSPEC_PAGED_CODE)
+
+#if defined(_KERNEL_MODE)
+#define DECLSPEC_PAGED_CODE __declspec(code_seg("PAGE"))
+#else
+#define DECLSPEC_PAGED_CODE
+#endif // defined(_KERNEL_MODE)
+
+#endif // !defined(DECLSPEC_PAGED_CODE)
+
 #ifndef FORCEINLINE
-#if (_MSC_VER >= 1200)
+#if __clang__
+#define FORCEINLINE __attribute__((always_inline)) inline
+#elif (_MSC_VER >= 1200)
 #define FORCEINLINE __forceinline
 #else
 #define FORCEINLINE __inline
@@ -1956,7 +1968,7 @@ typedef struct  _OBJECTID {     // size is 20
 #endif // !_OBJECTID_DEFINED
 
 // end_winnt end_ntndis
-// begin_wudfpwdm
+// begin_wudfpwdm begin_ntoshvp
 
 #define MINCHAR     0x80        // winnt
 #define MAXCHAR     0x7f        // winnt
@@ -1968,7 +1980,7 @@ typedef struct  _OBJECTID {     // size is 20
 #define MAXUSHORT   0xffff      // winnt
 #define MAXULONG    0xffffffff  // winnt
 
-// end_wudfpwdm
+// end_wudfpwdm end_ntoshvp
 
 //
 // Useful Helper Macros
@@ -2210,7 +2222,7 @@ char _RTL_CONSTANT_STRING_type_check(const void *s);
 #define RTL_CONSTANT_STRING(s) \
 { \
     sizeof( s ) - sizeof( (s)[0] ), \
-    sizeof( s ) / sizeof(_RTL_CONSTANT_STRING_type_check(s)), \
+    ((void)sizeof(_RTL_CONSTANT_STRING_type_check(s)), sizeof( s )), \
     _RTL_CONSTANT_STRING_remove_const_macro(s) \
 }
 // begin_winnt
@@ -3264,12 +3276,14 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 
 void _Prefast_unreferenced_parameter_impl_(const char*, ...);
 #define UNREFERENCED_PARAMETER(P)          _Prefast_unreferenced_parameter_impl_("PREfast", ((void) (P), 0))
+#define UNREFERENCED_VARIABLE(V)           _Prefast_unreferenced_parameter_impl_("PREfast", ((void) (V), 0))
 #define DBG_UNREFERENCED_PARAMETER(P)      _Prefast_unreferenced_parameter_impl_("PREfast", ((void) (P), 0))
 #define DBG_UNREFERENCED_LOCAL_VARIABLE(V) _Prefast_unreferenced_parameter_impl_("PREfast", ((void) (V), 0))
 
 #else // _PREFAST_
 
 #define UNREFERENCED_PARAMETER(P)          (P)
+#define UNREFERENCED_VARIABLE(V)           (&V)
 #define DBG_UNREFERENCED_PARAMETER(P)      (P)
 #define DBG_UNREFERENCED_LOCAL_VARIABLE(V) (V)
 
@@ -3287,6 +3301,23 @@ void _Prefast_unreferenced_parameter_impl_(const char*, ...);
         (P) = (P); \
     } \
     /*lint -restore */
+
+#ifdef __clang__
+#define UNREFERENCED_VARIABLE(V) \
+    /*lint -save -e527 -e530 */ \
+    { \
+        (void)&V; \
+    } \
+    /*lint -restore */
+#else
+#define UNREFERENCED_VARIABLE(V) \
+    /*lint -save -e527 -e530 */ \
+    { \
+        (V) = (V); \
+    } \
+    /*lint -restore */
+#endif
+
 #define DBG_UNREFERENCED_PARAMETER(P)      \
     /*lint -save -e527 -e530 */ \
     { \

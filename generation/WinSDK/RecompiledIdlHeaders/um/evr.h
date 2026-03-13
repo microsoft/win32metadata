@@ -465,17 +465,6 @@ enum MFVideoRenderPrefs
         MFVideoRenderPrefs_Mask	= 0x1ff
     } 	MFVideoRenderPrefs;
 
-#ifndef _MFVideoNormalizedRect_
-#define _MFVideoNormalizedRect_
-typedef struct MFVideoNormalizedRect
-    {
-    float left;
-    float top;
-    float right;
-    float bottom;
-    } 	MFVideoNormalizedRect;
-
-#endif
 
 
 extern RPC_IF_HANDLE __MIDL_itf_evr_0000_0002_v0_0_c_ifspec;

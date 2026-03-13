@@ -259,6 +259,8 @@ DEFINE_DEVPROPKEY(DEVPKEY_Storage_Gpt_Name,           0x4d1ebee8, 0x803, 0x4774,
 #define FILE_DEVICE_SVM                 0x00000063
 #define FILE_DEVICE_HARDWARE_ACCELERATOR 0x00000064
 #define FILE_DEVICE_I3C                 0x00000065
+#define FILE_DEVICE_MULTITIER_MEMORY    0x00000066
+#define FILE_DEVICE_CXL_TYPE3           0x00000067
 
 //
 // Macro definition for defining IOCTL and FSCTL function control codes.  Note
@@ -480,6 +482,15 @@ extern "C" {
 #define IOCTL_STORAGE_FIRMWARE_GET_INFO         CTL_CODE(IOCTL_STORAGE_BASE, 0x0700, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define IOCTL_STORAGE_FIRMWARE_DOWNLOAD         CTL_CODE(IOCTL_STORAGE_BASE, 0x0701, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 #define IOCTL_STORAGE_FIRMWARE_ACTIVATE         CTL_CODE(IOCTL_STORAGE_BASE, 0x0702, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+
+//
+// IOCTLs for BOOT partition support on storage devices
+//
+
+#define IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD CTL_CODE(IOCTL_STORAGE_BASE, 0x0703, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE CTL_CODE(IOCTL_STORAGE_BASE, 0x0704, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_GET_INFO CTL_CODE(IOCTL_STORAGE_BASE, 0x0705, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 
 
 //
@@ -1164,7 +1175,7 @@ typedef enum _STORAGE_PROPERTY_ID {
     StorageDeviceResiliencyProperty,
     StorageDeviceMediumProductType,
     StorageAdapterRpmbProperty,
-    StorageAdapterCryptoProperty,                   // Deprecated for GE or greater OS. Use StorageHwCryptoProperty.
+    StorageAdapterCryptoProperty,                   // Deprecated. Use StorageHwCryptoProperty.
     StorageDeviceIoCapabilityProperty = 48,
     StorageAdapterProtocolSpecificProperty,
     StorageDeviceProtocolSpecificProperty,
@@ -1960,8 +1971,7 @@ typedef enum _STORAGE_CRYPTO_KEY_SIZE {
 #define STORAGE_CRYPTO_CAPABILITY_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this struct is deprecated. 
-// Use STORAGE_HW_CRYPTO_CAPABILITY.
+// Note: This struct is deprecated. Use STORAGE_HW_CRYPTO_CAPABILITY.
 //
 typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
@@ -2102,8 +2112,7 @@ typedef struct _STORAGE_CRYPTO_CAPABILITY_V2 {
 #define STORAGE_CRYPTO_DESCRIPTOR_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated.
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
 
@@ -2153,8 +2162,7 @@ typedef enum _STORAGE_ICE_TYPE {
 } STORAGE_ICE_TYPE, *PSTORAGE_ICE_TYPE;
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated. 
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR_V2 {
 
@@ -5402,6 +5410,10 @@ DeviceDsmValidateInput (
     DWORD   Min   = 0;
     BOOLEAN Valid = FALSE;
 
+    if (Input->Size != sizeof(*Input)) {
+        goto Cleanup;
+    }
+
     if (Definition->Action != Input->Action) {
         goto Cleanup;
     }
@@ -7150,6 +7162,68 @@ typedef struct _STORAGE_HW_FIRMWARE_ACTIVATE {
 } STORAGE_HW_FIRMWARE_ACTIVATE, *PSTORAGE_HW_FIRMWARE_ACTIVATE;
 
 //
+// Indicate the target of the request other than the device handle/object itself.
+// This is used in "Flags" field of data structures for boot partition upgrade request.
+// This flag is valid for STORAGE_HW_BOOT_PARTITION_ACTIVATE and STORAGE_HW_BOOT_PARTITION_DOWNLOAD structures.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_FLAG_CONTROLLER                       0x00000001
+
+//
+// Below definitions are only valid for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE.
+//
+
+//
+// Indicate that any existing boot partition specified in the boot partition ID field should be replaced with the downloaded image.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_REPLACE_EXISTING_BOOT_PARTITION           0x40000000
+//
+// Indicate that the existing boot partition specified in the boot partition ID field should be activated.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_ACTIVATE_EXISTING_BOOT_PARTITION          0x80000000
+
+#define STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_ACTIVATE {
+    DWORD 	        Version;            // STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION
+    DWORD	        Size;               // Size of the whole structure
+    DWORD           Flags;
+    BYTE  	        BPID;              	// Boot Partition ID (BPID);
+    BYTE  	        Reserved[3];
+} STORAGE_HW_BOOT_PARTITION_ACTIVATE, *PSTORAGE_HW_BOOT_PARTITION_ACTIVATE;
+
+#define STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_DOWNLOAD {
+    DWORD 	                        Version;	                        // STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION
+    DWORD	                        Size;		                        // Size of the whole structure including the image buffer.
+    DWORD                           Flags;
+    BYTE  	                        BPID; 		                        // Boot Partition ID (BPID);
+    BYTE  	                        Reserved[3];
+    DWORDLONG                       Offset;                             // Offset for each download command
+    DWORDLONG                       BufferSize;                         // ImageSize for each download command
+    _Field_size_bytes_(BufferSize)  BYTE  ImageBuffer[ANYSIZE_ARRAY];   // Buffer to hold the image data
+} STORAGE_HW_BOOT_PARTITION_DOWNLOAD, *PSTORAGE_HW_BOOT_PARTITION_DOWNLOAD;
+
+#define STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1 0x01
+//
+// Input and Output buffer for IOCTL_STORAGE_BOOT_PARTITION_GET_INFO
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_INFO {
+    DWORD       Version;                // STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1
+    DWORD       Size;                   // Size of the whole structure
+    DWORDLONG   BPSZ;                   // Boot Partition Size (BPSZ)
+    DWORD       Flags;
+    DWORD       ImagePayloadAlignment;
+    DWORD       ImagePayloadMaxSize;
+    BYTE        SlotCount;
+    BYTE        ABPID;                  // Active Boot Partition ID (ABPID)
+} STORAGE_HW_BOOT_PARTITION_INFO, *PSTORAGE_HW_BOOT_PARTITION_INFO;
+
+//
 // Parameter for IOCTL_STORAGE_PROTOCOL_COMMAND
 // Buffer layout: <STORAGE_PROTOCOL_COMMAND> <Command> [Error Info Buffer] [Data-to-Device Buffer] [Data-from-Device Buffer]
 //
@@ -8433,7 +8507,7 @@ typedef struct _SCM_PD_FIRMWARE_INFO {
     // Sizeof() of this structure serves as the version.
     //
     DWORD Version;
-    
+
     //
     // Size of the data contained in this structure, including the Slots
     // array. If the output buffer is too small to contain the requested information,
@@ -9608,6 +9682,10 @@ typedef struct _GET_LENGTH_INFORMATION {
 typedef struct _PARTITION_INFORMATION_EX {
 
     PARTITION_STYLE PartitionStyle;
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+    WORD   PartitionOrdinal;
+#endif
 
     LARGE_INTEGER StartingOffset;
 
@@ -11570,6 +11648,14 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 #endif
 #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
 #define FSCTL_CASCADES_REFS_SET_FILE_REMOTE         CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 295, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#define FSCTL_CIMFS_QUERY_BACKING_REGION_NAMES      CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 296, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+#define FSCTL_REFS_VOLUME_ATTESTATION_PREPARE_TO_SIGN           CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 297, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_VOLUME_ATTESTATION_INJECT_CERTIFICATE        CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 298, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_VOLUME_ATTESTATION_QUERY_STATUS              CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 299, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 //
 // AVIO IOCTLS.
@@ -14507,9 +14593,26 @@ typedef struct _FILE_SYSTEM_RECOGNITION_INFORMATION {
 #define OPLOCK_LEVEL_CACHE_HANDLE       (0x00000002)
 #define OPLOCK_LEVEL_CACHE_WRITE        (0x00000004)
 
-#define REQUEST_OPLOCK_INPUT_FLAG_REQUEST               (0x00000001)
-#define REQUEST_OPLOCK_INPUT_FLAG_ACK                   (0x00000002)
-#define REQUEST_OPLOCK_INPUT_FLAG_COMPLETE_ACK_ON_CLOSE (0x00000004)
+#define REQUEST_OPLOCK_INPUT_FLAG_REQUEST                   (0x00000001)
+#define REQUEST_OPLOCK_INPUT_FLAG_ACK                       (0x00000002)
+#define REQUEST_OPLOCK_INPUT_FLAG_COMPLETE_ACK_ON_CLOSE     (0x00000004)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+// The requested oplock should block all operations when the oplock breaks, even if the breaking
+// operation normally would not block (for example, a write on a file with a Read-Handle oplock).
+// This flag is valid only for Read-Handle oplocks.
+#define REQUEST_OPLOCK_INPUT_FLAG_RH_ALWAYS_BLOCK_UNTIL_ACK (0x00000008)
+
+// The requested oplock should NOT break on writes or write-like operations. This flag is valid only
+// for Read-Handle oplocks.
+#define REQUEST_OPLOCK_INPUT_FLAG_RH_IGNORE_WRITES          (0x00000010)
+
+// The requested oplock should be denied if there are already handles open for non-cached I/O, and
+// the requested oplock should break if a handle is opened later for non-cached I/O. This flag is
+// valid only for Read-Handle oplocks. Not all file systems may support this semantic.
+#define REQUEST_OPLOCK_INPUT_FLAG_RH_NO_NON_CACHED_IO       (0x00000020)
+
+#endif
 
 #define REQUEST_OPLOCK_CURRENT_VERSION          1
 
@@ -14544,6 +14647,15 @@ typedef struct _REQUEST_OPLOCK_INPUT_BUFFER {
 // If the oplock request fails with STATUS_OPLOCK_NOT_GRANTED, this flag indicates that the oplock
 // could not be granted due to the presence of a writable user-mapped section.
 #define REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT     (0x00000004)
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+// This flag is set only if the request included the REQUEST_OPLOCK_INPUT_FLAG_NO_NON_CACHED_IO flag.
+// - If returned as part of the oplock request failing with STATUS_OPLOCK_NOT_GRANTED, indicates that
+//   the file has one or more handles opened for non-cached I/O.
+// - If returned as part of the oplock breaking, indicates that some caller opened a handle to the file
+//   for non-cached I/O.
+#define REQUEST_OPLOCK_OUTPUT_FLAG_NON_CACHED_IO_PRESENT        (0x00000008)
 #endif
 
 typedef struct _REQUEST_OPLOCK_OUTPUT_BUFFER {

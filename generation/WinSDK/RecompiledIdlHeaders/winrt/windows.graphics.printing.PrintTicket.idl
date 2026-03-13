@@ -283,7 +283,7 @@ namespace Windows
                     HRESULT MergeAndValidateTicket([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* deltaShemaTicket, [out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** result);
                 }
 
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [contract(Windows.Foundation.UniversalApiContract, 20.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket)]
                 [experimental]
                 [uuid(966D1166-D9C7-569E-B7D8-F2B341C8F976)]
@@ -349,7 +349,7 @@ namespace Windows
                     [default] interface Windows.Graphics.Printing.PrintTicket.IPrintTicketValue;
                 }
 
-                [activatable(Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory, Windows.Foundation.UniversalApiContract, 19.0)]
+                [activatable(Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory, Windows.Foundation.UniversalApiContract, 20.0)]
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [marshaling_behavior(agile)]
                 [threading(both)]

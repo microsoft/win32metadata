@@ -777,6 +777,10 @@ typedef struct _PARTITION_INFORMATION_EX {
 
     PARTITION_STYLE PartitionStyle;
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+    USHORT PartitionOrdinal;
+#endif
+
     LARGE_INTEGER StartingOffset;
 
     LARGE_INTEGER PartitionLength;
@@ -798,6 +802,9 @@ typedef struct _PARTITION_INFORMATION_EX {
     } DUMMYUNIONNAME;
 
 } PARTITION_INFORMATION_EX, *PPARTITION_INFORMATION_EX;
+// end_winioctl
+C_ASSERT(sizeof(PARTITION_INFORMATION_EX) == 0x90);
+// begin_winioctl
 
 
 //
@@ -1542,6 +1549,7 @@ typedef struct _SET_PARTITION_ATTRIBUTES {
 #define DISK_ATTRIBUTE_SPACES_BYPASS        0x0000000000000010
 #define DISK_ATTRIBUTE_IGNORE_CONFLICTS     0x0000000000000020
 #define DISK_ATTRIBUTE_PASSTHROUGH          0x0000000000000040
+#define DISK_ATTRIBUTE_SUPERFLOPPY          0x0000000000000080
 
 // begin_winioctl
 //
@@ -1717,6 +1725,7 @@ typedef enum _DISK_SAN_POLICY {
     DiskSanPolicyOffline,
     DiskSanPolicyOfflineInternal,
     DiskSanPolicyPassthrough,
+    DiskSanPolicySuperfloppy,
     DiskSanPolicyMax
 
 } DISK_SAN_POLICY, *PDISK_SAN_POLICY;

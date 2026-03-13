@@ -3,7 +3,7 @@
 Install-BuildTools
 
 $cppPkgPath = Get-WinSdkCppPkgPath
-$sdkBinDir = "$cppPkgPath\c\bin\$([System.IO.Path]::GetFileName($cppPkgPath) -replace "\d+$", "0")\x86"
+$sdkBinDir = "C:\Users\Rafael\.nuget\packages\microsoft.windows.sdk.cpp\10.0.28000.1-rtm\c\bin\10.0.28000.0\x86"
 $sdkIncludeDir = (Get-ChildItem -Path "$cppPkgPath\c\include").FullName
 $midl = Join-Path $sdkBinDir "midl.exe"
 if (!(Test-Path $sdkBinDir)) {

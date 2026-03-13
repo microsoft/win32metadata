@@ -343,6 +343,20 @@ typedef enum {
 
 } NVME_CMBSZ_SIZE_UNITS;
 
+//
+// Offset 0040h: NvmePropBPINFO (Boot Partition Information)
+//
+typedef union {
+    struct {
+        ULONG BPSZ              : 15;       // RO - Boot Partition Size (BPSZ)
+        ULONG Reserved0         : 9;        // RO
+        ULONG BRS               : 2;        // RO - Boot Read Status (BRS)
+        ULONG Reserved1         : 5;        // RO
+        ULONG ABPID             : 1;        // RO - Active Boot Partition ID (ABPID)
+    } DUMMYSTRUCTNAME;
+    ULONG AsUlong;
+} NVME_BOOT_PARTITION_INFORMATION, *PNVME_BOOT_PARTITION_INFORMATION;
+
 typedef union {
 
     struct {
@@ -443,8 +457,9 @@ typedef struct {
 
     NVME_CONTROLLER_MEMORY_BUFFER_LOCATION      CMBLOC; // Controller Memory Buffer Location (Optional)
     NVME_CONTROLLER_MEMORY_BUFFER_SIZE          CMBSZ;  // Controller Memory Buffer Size (Optional)
+    NVME_BOOT_PARTITION_INFORMATION	            BPINFO; // Boot Partition Information at offset 0x40
 
-    ULONG                           Reserved1[9];       // 40h ~ 64h
+    ULONG                           Reserved1[8];       // 44h ~ 64h
 
     NVME_NVM_SUBSYSTEM_SHUTDOWN     NSSD;               // NVM Subsystem Shutdown
     NVME_CONTROLLER_READY_TIMEOUTS  CRTO;               // Controller Ready Timeouts
@@ -1899,6 +1914,13 @@ DEFINE_GUID(GUID_OCP_DEVICE_TCG_CONFIGURATION, 0xBD244006, 0xE07E, 0x83E6, 0xC0,
 //
 #define GUID_OCP_DEVICE_TCG_HISTORYGuid { 0x704B513E, 0x09C6, 0x9490, { 0x27, 0x4E, 0xD0, 0x96, 0x96, 0x90, 0xD7, 0x88} }
 DEFINE_GUID(GUID_OCP_DEVICE_TCG_HISTORY, 0x704B513E, 0x09C6, 0x9490, 0x27, 0x4E, 0xD0, 0x96, 0x96, 0x90, 0xD7, 0x88);
+
+//
+// The GUID for DSSD Specific Information is defined in the spec as byte stream: C194D55BE0944794A21D29998F56BE6Fh
+// which is converted to the GUID format as: {5BD594C1-94E0-9447-A21D-29998F56BE6F}
+//
+#define GUID_OCP_DSSD_SPECIFIC_INFORMATIONGuid { 0x5BD594C1, 0x94E0, 0x9447, { 0xA2, 0x1D, 0x29, 0x99, 0x8F, 0x56, 0xBE, 0x6F} }
+DEFINE_GUID(GUID_OCP_DSSD_SPECIFIC_INFORMATION, 0x5BD594C1, 0x94E0, 0x9447, 0xA2, 0x1D, 0x29, 0x99, 0x8F, 0x56, 0xBE, 0x6F);
 
 //
 // MFND child controller event Log Page GUID is defined in spec as byte stream: 0x9C669D257FD944A5BF35A5F098BCCE18
@@ -3730,6 +3752,13 @@ typedef union {
 #define NVME_CDW10_LSP_ACTION_RELEASE_CONTEXT                                  0x2
 #define NVME_CDW10_LSP_ACTION_ESTABLISH_CONTEXT_AND_READ_512_BYTES_OF_HEADER   0x3
 
+//
+// Defined values for bit 08 of Log Specific Field (LSP) in CDW10 for Get Log Page, Boot Partition Log (Log Identifier 015h)
+//
+
+#define NVME_CDW10_LSP_BOOT_PARTITION_0              0x0
+#define NVME_CDW10_LSP_BOOT_PARTITION_1              0x1
+
 typedef union {
 
     struct {
@@ -3971,6 +4000,18 @@ typedef struct {
     UCHAR       Reserved1[448];
 
 } NVME_FIRMWARE_SLOT_INFO_LOG, *PNVME_FIRMWARE_SLOT_INFO_LOG;
+
+//
+// Information of log: NVME_LOG_PAGE_BOOT_PARTITON. Size: 512 bytes min recommended.
+//
+typedef struct {
+    UCHAR	 			                LogIdentifier;
+    UCHAR 			                    Reserved0[3];
+    NVME_BOOT_PARTITION_INFORMATION 	BpInfo;
+    UCHAR 			                    Reserved1[8];
+    UCHAR 			                    BootPartitionData[ANYSIZE_ARRAY];
+} NVME_BOOT_PARTITION_LOG, *PNVME_BOOT_PARTITION_LOG;
+
 
 //
 // Information of log: NVME_LOG_PAGE_CHANGED_NAMESPACE_LIST. Size: 4096 bytes
@@ -4447,18 +4488,25 @@ typedef enum {
     //
     NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE_IMMEDIATE                = 3,
 
+    //
+    // Downloaded image replaces the Boot Partition specified by the Boot Partition ID field.
+    //
+    NVME_FIRMWARE_ACTIVATE_ACTION_REPLACE_BOOT_PARTITION = 6,
+
+    //
+    // Mark the Boot Partition specified in the BPID field as active and update BPINFO.ABPID.
+    //
+    NVME_FIRMWARE_ACTIVATE_ACTION_ACTIVATE_BOOT_PARTITION = 7,
 } NVME_FIRMWARE_ACTIVATE_ACTIONS;
 
 typedef union {
-
     struct {
-        ULONG   FS          : 3;            // Firmware Slot (FS)
-        ULONG   AA          : 2;            // Activate Action (AA)
-        ULONG   Reserved    : 27;
+        ULONG   FS          : 3;    // Firmware Slot (FS)
+        ULONG 	AA          : 3;    // Activate Action (AA)
+        ULONG 	Reserved    : 25;
+        ULONG 	BPID        : 1;     //Boot Partition ID (BPID)
     } DUMMYSTRUCTNAME;
-
     ULONG   AsUlong;
-
 } NVME_CDW10_FIRMWARE_ACTIVATE, *PNVME_CDW10_FIRMWARE_ACTIVATE;
 
 //

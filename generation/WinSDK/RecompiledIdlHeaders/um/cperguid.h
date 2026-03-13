@@ -171,6 +171,28 @@ DEFINE_GUID(RECOVERY_INFO_SECTION_GUID,
             0xc34832a1, 0x02c3, 0x4c52, 0xa9, 0xf1,
             0x9f, 0x1d, 0x5d, 0x77, 0x23, 0xfc);
 
+/* 80b9efb4-52b5-4dE3-a777-68784b771048 */
+DEFINE_GUID(CXL_PROTOCOL_ERROR_SECTION_GUID,
+            0x80b9efb4, 0x52b5, 0x4de3, 0xa7, 0x77,
+            0x68, 0x78, 0x4b, 0x77, 0x10, 0x48);
+
+/* Below CXL Component Events Section Type GUID refer to the Event Record Identifier UUID */
+/* Note: GUIDs utilize little endian for the first 3 arguments, while UUIDs utilize big endian */
+/* 601dcbb3-9c06-4eab-b8af-4e9bfb5c9624 */
+DEFINE_GUID(CXL_COMPONENT_EVENTS_SECTION_DRAM_EVENT_RECORD_GUID,
+            0xb3cb1d60, 0x069c, 0xab4e, 0xb8, 0xaf,
+            0x4e, 0x9b, 0xfb, 0x5c, 0x96, 0x24);
+
+/* fe927475-dd59-4339-a586-79bab113b774 */
+DEFINE_GUID(CXL_COMPONENT_EVENTS_SECTION_MEMORY_MODULE_EVENT_RECORD_GUID,
+            0x757492fe, 0x59dd, 0x3943, 0xa5, 0x86,
+            0x79, 0xba, 0xb1, 0x13, 0xb7, 0x74);
+
+/* CC245308-61D5-4356-A707-25172EC2F5EA */
+DEFINE_GUID(WHEA_MEMORY_RANGE_ERROR_SECTION_GUID, 
+            0xcc245308, 0x61d5, 0x4356, 0xa7, 0x7,
+            0x25, 0x17, 0x2e, 0xc2, 0xf5, 0xea);
+
 //-------------------------------------- Processor check information type GUIDs
 
 /* a55701f5-e3ef-43de-ac72-249b573fad2c */
@@ -309,6 +331,17 @@ DEFINE_GUID(ARM_RAS_NODE_SECTION_GUID,
 DEFINE_GUID(MEMORY_ERROR_EXT_SECTION_INTEL_GUID,
             0xe16edb28, 0x6113, 0x4263, 0xa4, 0x1d,
             0xe5, 0x3f, 0x8d, 0xe7, 0x87, 0x51);
+
+/* C6749AC0-16FB-4868-B976-65A61299834F */
+DEFINE_GUID(PLATFORM_EXTENDED_RAS_SECTION_GUID, 
+            0xc6749ac0, 
+            0x16fb, 0x4868, 
+            0xb9, 0x76, 0x65, 0xa6, 0x12, 0x99, 0x83, 0x4f);
+
+/* 0d3a4a3b-774a-4c72-95e2-152d43180374 */
+DEFINE_GUID(MEMORY_ERROR_EXT_SECTION_AMD_GUID,
+            0x0d3a4a3b, 0x774a, 0x4c72, 0x95, 0xe2,
+            0x15, 0x2d, 0x43, 0x18, 0x03, 0x74);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

@@ -716,7 +716,7 @@ namespace Windows
                 PhoneCallActivation                 = 1025,
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 VpnForeground                       = 1026,
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [contract(Windows.Foundation.UniversalApiContract, 20.0)]
                 [experimental]
                 PrintSupportEnterpriseManagementUI  = 1027
             };

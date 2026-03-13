@@ -344,6 +344,7 @@ FAST_FAIL_INVALID_CONTROL_STACK equ 0002FH
 FAST_FAIL_SET_CONTEXT_DENIED equ 00030H
 FAST_FAIL_ENCLAVE_CALL_FAILURE equ 00035H
 FAST_FAIL_FLAGS_CORRUPTION equ 0003BH
+FAST_FAIL_INVALID_ARG equ 00005H
 
 ;
 ;  Bounds Callback Status Code Definitions
@@ -542,8 +543,8 @@ ThNextProcessor equ 00218H
 ThAdjustReason equ 00236H
 ThAdjustIncrement equ 00237H
 ThWaitReason equ 00283H
-ThRunning equ 00071H
-ThAlerted equ 00072H
+ThRunning equ 00072H
+ThAlerted equ 00071H
 ThWaitTime equ 001B4H
 ThCombinedApcDisable equ 001E4H
 ThKernelApcDisable equ 001E4H
@@ -698,8 +699,8 @@ TeGdiBatchCount equ 01740H
 TeGuaranteedStackBytes equ 01748H
 TeFlsData equ 017C8H
 TeCurrentIdealProcessor equ 01744H
-TePrimaryGroupAffinity equ 01860H
-ThreadEnvironmentBlockLength equ 01878H
+TePrimaryGroupAffinity equ 01858H
+ThreadEnvironmentBlockLength equ 01870H
 CmThreadEnvironmentBlockOffset equ 02000H
 TLS_MINIMUM_AVAILABLE equ 00040H
 TLS_EXPANSION_SLOTS equ 00400H
@@ -792,11 +793,18 @@ XSAVE_ALIGN equ 00040H
 
 XsaHeader equ 00200H
 XsaHeaderLength equ 00040H
+
+;
+;  XSAVE_AREA_HEADER structure offset definitions
+;
+
+XshCompactionMask equ 00008H
 XSTATE_MASK_LEGACY_FLOATING_POINT equ 00001H
 XSTATE_MASK_LEGACY_SSE equ 00002H
 XSTATE_MASK_LEGACY equ 00003H
 XSTATE_MASK_GSSE equ 00004H
 XSTATE_MASK_IPT equ 00100H
+XSTATE_MASK_USER_VISIBLE_SUPERVISOR equ 00800H
 XSTATE_MASK_LARGE_FEATURES equ 040000H
 
 ;
@@ -827,8 +835,8 @@ CxxKernelCetLength equ 0001CH
 AfCount equ 00000H
 AfBitmap equ 00008H
 CFlushSize equ 000E8H
-PbEntropyCount equ 08FE0H
-PbEntropyBuffer equ 08FE4H
+PbEntropyCount equ 09020H
+PbEntropyBuffer equ 09024H
 KENTROPY_TIMING_INTERRUPTS_PER_BUFFER equ 00400H
 KENTROPY_TIMING_BUFFER_MASK equ 007FFH
 KENTROPY_TIMING_ANALYSIS equ 00000H
@@ -843,6 +851,9 @@ PnNumber equ 00002H
 GaGroup equ 00008H
 GaMask equ 00000H
 KgsProcessorNumberToIndexMappingTable equ 00008H
+RTL_KERNELSCP_STUBS_UNWIND_INFO_MAX_SIZE equ 001F4H
+RTL_KERNELSCP_NUMBER_OF_RESERVE_PAGES equ 00002H
+RTL_KERNELSCP_SIZE equ 02000H
 
 ;
 ;  Register Argument Home Address Offset Definitions
@@ -875,6 +886,11 @@ SrMsrCStar equ 000C8H
 SrMsrSyscallMask equ 000D0H
 SrXcr0 equ 000D8H
 SrMsrFsBase equ 000E0H
+SrMsrFredConfig equ 000E8H
+SrMsrFredStklvls equ 000F0H
+SrMsrFredRsp0 equ 000F8H
+SrMsrFredRsp1 equ 00100H
+SrMsrFredRsp2 equ 00108H
 
 ;
 ;  Processor Control Region Structure Offset Definitions
@@ -909,7 +925,7 @@ PcRspBase equ 001A8H
 PcRspBaseShadow equ 0B008H
 PcShadowFlags equ 0B018H
 PcVerwSelector equ 0B02AH
-PcIsrStackNesting equ 0A360H
+PcIsrStackNesting equ 0A3A0H
 PcPrcbLock equ 001B0H
 PcCr0 equ 00280H
 PcCr2 equ 00288H
@@ -936,20 +952,20 @@ PcCpuType equ 001C0H
 PcCpuID equ 001C1H
 PcCpuStep equ 001C2H
 PcCpuVendor equ 0020DH
-PcVirtualApicAssist equ 08D88H
-PcFeatureBits equ 09120H
+PcVirtualApicAssist equ 08DC8H
+PcFeatureBits equ 09160H
 PcNmiActive equ 08526H
 PcMceActive equ 08527H
 PcCombinedNmiMceActive equ 08526H
-PcSfCode equ 09568H
-PcSfVa equ 09570H
-PcSfPa equ 09578H
+PcSfCode equ 095A8H
+PcSfVa equ 095B0H
+PcSfPa equ 095B8H
 PcKernelDirectoryTableBase equ 0B000H
 PcExceptionStack equ 088E8H
 PcExceptionStackActive equ 088E6H
 PcDpcRequestSummary equ 03A3CH
-PcTransitionShadowStack equ 09D20H
-PcKernelShadowStackInitial equ 09D28H
+PcTransitionShadowStack equ 09D60H
+PcKernelShadowStackInitial equ 09D68H
 ;
 ;
 CPU_AMD equ 00001H
@@ -965,7 +981,6 @@ PcDebuggerSavedIRQL equ 087D8H
 PcStartCycles equ 08800H
 PcSelfIpiRequestSummary equ 00228H
 PcMceRecoveryContext equ 08860H
-RTL_KERNELSCP_STUBS_UNWIND_INFO_MAX_SIZE equ 001F4H
 ProcessorControlRegisterLength equ 02D040H
 
 ;
@@ -1054,7 +1069,7 @@ PbIdleHalt equ 00007H
 PbCurrentThread equ 00008H
 PbNextThread equ 00010H
 PbIdleThread equ 00018H
-PbSmtIsolationThread equ 08E80H
+PbSmtIsolationThread equ 08EC0H
 PbNestingLevel equ 00020H
 PbNumber equ 00024H
 PbRspBase equ 00028H
@@ -1062,11 +1077,11 @@ PbRspBaseShadow equ 0AE88H
 PbPrcbLock equ 00030H
 PbTscFrequency equ 00090H
 PbKeSpinLockOrdering equ 083B0H
-KI_SPINLOCK_ORDER_PRCB_LOCK equ 00200H
+KI_SPINLOCK_ORDER_PRCB_LOCK equ 00400H
 PbGroup equ 000D0H
 PbGroupIndex equ 000D1H
 PbProcessorState equ 00100H
-PbContext equ 08FC0H
+PbContext equ 09000H
 PbCpuType equ 00040H
 PbCpuID equ 00041H
 PbCpuStep equ 00042H
@@ -1084,10 +1099,8 @@ PbInitialApicId equ 000D4H
 PbPrcbFlags equ 000ECH
 KPRCB_BAM_QOS_LEVEL_MASK equ 0000FH
 PbPriorityState equ 00038H
-PbLockQueue equ 006F0H
-PbPPLookasideList equ 00800H
-PbPPNPagedLookasideList equ 01500H
-PbPPPagedLookasideList equ 02100H
+PbLockQueue equ 00730H
+PbPPLookasideList equ 00840H
 PbPacketBarrier equ 02D80H
 PbDeferredReadyListHead equ 02D08H
 PbLookasideIrpFloat equ 02D9CH
@@ -1102,12 +1115,12 @@ PbContextSwitches equ 02D3CH
 PbTargetCount equ 02D84H
 PbIpiFrozen equ 02D88H
 PbRequestMailbox equ 0CEC0H
-PbMailbox equ 09AC0H
+PbMailbox equ 09B00H
 PbDpcList equ 03840H
 PbDpcLock equ 03850H
 PbDpcCount equ 0385CH
 PbDpcStack equ 038A0H
-PbIsrStack equ 08FD8H
+PbIsrStack equ 09018H
 PbMaximumDpcQueueDepth equ 038A8H
 PbDpcRequestRate equ 038ACH
 PbMinimumDpcRate equ 038B0H
@@ -1138,13 +1151,13 @@ PbFastReadNotPossible equ 02D4CH
 PbCopyReadNoWait equ 02D50H
 PbCopyReadWait equ 02D54H
 PbCopyReadNoWaitMiss equ 02D58H
-PbAlignmentFixupCount equ 08BB8H
+PbAlignmentFixupCount equ 08BF8H
 PbExceptionDispatchCount equ 08670H
-PbVendorString equ 08F90H
+PbVendorString equ 08FD0H
 ProcessorBlockLength equ 0CF00H
 PbShadowFlags equ 0AE98H
-PbTrappedSecurityDomain equ 006D0H
-PbKernelShadowStackInitial equ 09BA8H
+PbTrappedSecurityDomain equ 00710H
+PbKernelShadowStackInitial equ 09BE8H
 
 ;
 ;  Time Fields (TIME_FIELDS) Structure Offset Definitions
@@ -1203,10 +1216,12 @@ CR4_PGE equ 00080H
 CR4_FXSR equ 00200H
 CR4_XMMEXCPT equ 00400H
 CR4_LA57 equ 01000H
-CR4_XSAVE equ 040000H
 CR4_PCIDE equ 020000H
+CR4_XSAVE equ 040000H
+CR4_SMAP equ 0200000H
 CR4_CET equ 0800000H
 CR4_LASS equ 08000000H
+CR4_FRED_BIT equ 00020H
 
 ;
 ;  Legacy Floating Status Bit Masks
@@ -1334,7 +1349,6 @@ TRUE equ 00001H
 NMI_BLOCKING_MASK equ 00004H
 KERNEL_MCA_EXCEPTION_STACK_SIZE equ 02000H
 EXCEPTION_EXECUTE_FAULT equ 00008H
-KCACHE_ERRATA_MONITOR_FLAGS equ 00003H
 
 ;
 ;  Machine check nesting simulation debug controls
@@ -1345,6 +1359,7 @@ DBG_MCE_MCE_ON_NMI equ 00001H
 DBG_MCE_MCE_ON_NMI_MCE_TAIL equ 00002H
 DBG_MCE_MCE_ON_MCE_MCE_TAIL equ 00003H
 DBG_MCE_NMI_ON_MCE_MCE_TAIL equ 00004H
+DBG_MCE_MCE_ALTERNATE_RETURN equ 00005H
 DBG_MCE_NMI_PENDING equ 0001FH
 
 ;
@@ -1587,6 +1602,7 @@ TrP5 equ 0FFFFFFA0H
 TrPreviousMode equ 0FFFFFFA8H
 TrPreviousIrql equ 0FFFFFFA9H
 TrFaultIndicator equ 0FFFFFFAAH
+TrEventType equ 0FFFFFFAAH
 TrExceptionActive equ 0FFFFFFABH
 TrMxCsr equ 0FFFFFFACH
 TrRax equ 0FFFFFFB0H
@@ -1598,6 +1614,7 @@ TrR10 equ 0FFFFFFD8H
 TrR11 equ 0FFFFFFE0H
 TrGsBase equ 0FFFFFFE8H
 TrGsSwap equ 0FFFFFFE8H
+TrVectorMask equ 0FFFFFFE8H
 TrXmm0 equ 0FFFFFFF0H
 TrXmm1 equ 00000H
 TrXmm2 equ 00010H
@@ -1637,6 +1654,8 @@ TrSegSs equ 00108H
 ;
 
 KTRAP_FRAME_LENGTH equ 00190H
+KFRED_TRAP_FRAME_LENGTH equ 001A0H
+KFRED_RSP_ALIGN equ 00040H
 
 ;
 ;  CPU information structure offset definitions
@@ -1668,6 +1687,54 @@ MfEFlags equ 00010H
 MfRsp equ 00018H
 MfSegSs equ 00020H
 MachineFrameLength equ 00028H
+
+;
+;  FRED Frame Offset Definitions
+;
+
+FfMachineFrame equ 00008H
+FfEventInformation equ 00030H
+FredFrameLength equ 00040H
+
+;
+;  FRED Event Information Definitions
+;
+
+FRED_SS_STI_BLOCKING_MASK equ 010000H
+FRED_SS_DB_ON_TF_MASK equ 020000H
+FRED_SS_NMI_UNBLOCKING_MASK equ 040000H
+FRED_SS_VECTOR_MASK equ 0000000FF00000000H
+FRED_SS_VECTOR_SHIFT equ 00020H
+FRED_SS_EVENT_TYPE_MASK equ 0000F000000000000H
+FRED_SS_EVENT_TYPE_SHIFT equ 00030H
+FRED_SS_ENCLAVE_MASK equ 00100000000000000H
+FRED_SS_ENCLAVE_SHIFT equ 00038H
+FRED_SS_LONG_MODE_MASK equ 00200000000000000H
+FRED_SS_LONG_MODE_SHIFT equ 00039H
+FRED_SS_NESTED_EVENT_MASK equ 00200000000000000H
+FRED_SS_NESTED_EVENT_SHIFT equ 0003AH
+FRED_SS_INSTRUCTION_LENGTH_MASK equ 0F000000000000000H
+FRED_SS_INSTRUCTION_LENGTH_SHIFT equ 0003CH
+FRED_EVENT_TYPE_HARDWARE_INTERRUPT equ 00000H
+FRED_EVENT_TYPE_NMI equ 00002H
+FRED_EVENT_TYPE_HARDWARE_EXCEPTION equ 00003H
+FRED_EVENT_TYPE_SOFTWARE_INTERRUPT equ 00004H
+FRED_EVENT_TYPE_PRIVILEGED_SOFTWARE_INTERRUPT equ 00005H
+FRED_EVENT_TYPE_SOFTWARE_EXCEPTION equ 00006H
+FRED_EVENT_TYPE_OTHER equ 00007H
+FRED_EXCEPTION_VECTOR_NMI equ 00002H
+FRED_EXCEPTION_VECTOR_BP equ 00003H
+FRED_EXCEPTION_VECTOR_GP equ 0000DH
+FRED_EXCEPTION_VECTOR_MCE equ 00012H
+FRED_OTHER_VECTOR_SYSCALL equ 00001H
+FRED_OTHER_VECTOR_SYSENTER equ 00002H
+FRED_DPL3_VECTOR_MASK equ 00000320000000018H
+FRED_EVENT_TYPE_AND_VECTOR_MASK equ 0000F00FF00000000H
+FRED_GP_EVENT_MASK equ 00003000D00000000H
+FRED_HARDWARE_INTERRUPT_EVENT_MASK equ 00000000000000000H
+FRED_INTERRUPTION_VECTOR_MASK equ 00000000000040004H
+FRED_CS_CSL_MASK equ 030000H
+FRED_CS_IBT_WAIT_FOR_ENDBRANCH_MASK equ 040000H
 
 ;
 ;  Shadow Stack Machine Frame Offset Definitions
@@ -1761,8 +1828,16 @@ CxLastExceptionToRip equ 004C0H
 CxLastExceptionFromRip equ 004C8H
 CxVectorControl equ 004A0H
 CxVectorRegister equ 00300H
+
 CONTEXT_FRAME_LENGTH equ 004D0H
 CONTEXT_EX_LENGTH equ 00020H
+
+CxStkWlkRip equ 00000H
+CxStkWlkRsp equ 00008H
+CxStkWlkRbp equ 00010H
+CxStkWlkR15 equ 00020H
+CxStkWlkIa32CetUMsr equ 00038H
+CxStkWlkIa32Pl3SspMsr equ 00040H
 
 ;
 ;  Debug Control Register Masks
@@ -1778,6 +1853,7 @@ DEBUG_ACTIVE_DBG_INSTRUMENTED equ 00003H
 DEBUG_ACTIVE_MINIMAL_THREAD equ 00004H
 DEBUG_ACTIVE_SET_CONTEXT_STATE_LOCK_BIT equ 0001BH
 DEBUG_ACTIVE_SET_CONTEXT_STATE_LOCK equ 08000000H
+DEBUG_ACTIVE_USER_ISOLATION equ 00080H
 
 ;
 ;  Continue Argument Structure Definitions
@@ -1856,36 +1932,40 @@ PsMsrCStar equ 000C8H
 PsMsrSyscallMask equ 000D0H
 PsXcr0 equ 000D8H
 PsMsrFsBase equ 000E0H
-PsContextFrame equ 000F0H
+PsMsrFredConfig equ 000E8H
+PsMsrFredStklvls equ 000F0H
+PsMsrFredRsp0 equ 000F8H
+PsMsrFredRsp1 equ 00100H
+PsMsrFredRsp2 equ 00108H
+PsContextFrame equ 00110H
 PsDebugControl equ 00078H
 PsLastBranchToRip equ 00080H
 PsLastBranchFromRip equ 00088H
 PsLastExceptionToRip equ 00090H
 PsLastExceptionFromRip equ 00098H
 PsCr8 equ 000A0H
-ProcessorStateLength equ 005C0H
+ProcessorStateLength equ 005E0H
 
 ;
 ;  Processor Start Block Offset Definitions
 ;
 
 PsbCompletionFlag equ 00004H
-PsbGdt32 equ 0000CH
-PsbIdt32 equ 00012H
-PsbGdt equ 00018H
-PsbTiledMemoryMap equ 00058H
-PsbPmTarget equ 00060H
-PsbLmTarget equ 00070H
-PsbLmIdentityTarget equ 00066H
-PsbSelfMap equ 00078H
-PsbMsrPat equ 00080H
-PsbMsrEFER equ 00088H
-PsbProcessorState equ 00090H
-PsbFlags equ 00008H
+PsbGdt32 equ 00008H
+PsbGdt equ 00010H
+PsbTiledMemoryMap equ 00088H
+PsbPmTarget equ 00050H
+PsbLmTarget equ 00090H
+PsbLmIdentityTarget equ 00056H
+PsbSelfMap equ 00060H
+PsbMsrPat equ 00068H
+PsbMsrEFER equ 00070H
+PsbProcessorState equ 000A0H
+PsbFlags equ 00080H
 PROCESSOR_START_FLAG_FORCE_ENABLE_NX equ 00001H
 PROCESSOR_START_FLAG_LA57 equ 00002H
 PROCESSOR_START_FLAG_HIDDEN equ 00004H
-ProcessorStartBlockLength equ 00650H
+ProcessorStartBlockLength equ 00680H
 XHF_NOEXECUTE equ 0100000H
 
 ;
@@ -1893,6 +1973,7 @@ XHF_NOEXECUTE equ 0100000H
 ;
 
 MrcFlags equ 00000H
+MrcReserved equ 00004H
 MrcPhysicalAddress equ 00008H
 MrcRecord equ 00008H
 MceRecoveryContextLength equ 00010H
@@ -1906,6 +1987,7 @@ KMRC_WORK_ITEM equ 00002H
 KMRC_OFFLINE_PAGE equ 00004H
 KMRC_TERMINATE_PROCESS equ 00008H
 KMRC_KERNEL_CONSUMER equ 00010H
+KMRC_SIMULATION equ 00020H
 
 ;
 ;  KTHREAD
@@ -2046,4 +2128,5 @@ AffinityExLength equ 00108H
 ServiceCpupReturnFromSimulatedCode equ 0001FH
 HV_VECTOR equ 00030H
 MmWriteCombined equ 00002H
+MI_USER_PROBE_ADDRESS equ 000007FFFFFFF0000H
 ;

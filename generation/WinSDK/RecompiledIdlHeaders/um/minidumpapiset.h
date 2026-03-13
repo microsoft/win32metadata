@@ -142,7 +142,8 @@ typedef enum _MINIDUMP_STREAM_TYPE {
     ProcessVmCountersStream     = 22,
     IptTraceStream              = 23,
     ThreadNamesStream           = 24,
-
+    CompressedMemoryStream      = 25,
+    CompressedMemoryStreamSQL   = 0x7000,
     ceStreamNull                = 0x8000,
     ceStreamSystemInfo          = 0x8001,
     ceStreamException           = 0x8002,
@@ -1116,7 +1117,9 @@ typedef enum _MINIDUMP_CALLBACK_TYPE {
     VmStartCallback,
     VmQueryCallback,
     VmPreReadCallback,
-    VmPostReadCallback
+    VmPostReadCallback,
+    CompressedMemoryStreamStartCallback,
+    CompressedMemoryStreamFinishCallback
 } MINIDUMP_CALLBACK_TYPE;
 
 typedef struct _MINIDUMP_THREAD_CALLBACK {
@@ -1234,6 +1237,21 @@ typedef struct _MINIDUMP_VM_POST_READ_CALLBACK
     HRESULT Status;
 } MINIDUMP_VM_POST_READ_CALLBACK, *PMINIDUMP_VM_POST_READ_CALLBACK;
 
+typedef struct _MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK
+{
+    ULONG MaxParallelism;
+    ULONG MaxTransferSize;
+    PNUMA_NODE_RELATIONSHIP NumaNodeInfoArray;
+    ULONG NumaNodeInfoArraySize;
+    ULONG Reserved;
+} MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK, *PMINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK;
+
+typedef struct _MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK
+{
+    ULONG64 CompressedStreamSize;
+    ULONG32 StreamCompressionRate;
+} MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK, *PMINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK;
+
 typedef struct _MINIDUMP_CALLBACK_INPUT {
     ULONG ProcessId;
     HANDLE ProcessHandle;
@@ -1251,6 +1269,7 @@ typedef struct _MINIDUMP_CALLBACK_INPUT {
         MINIDUMP_VM_QUERY_CALLBACK VmQuery;
         MINIDUMP_VM_PRE_READ_CALLBACK VmPreRead;
         MINIDUMP_VM_POST_READ_CALLBACK VmPostRead;
+        MINIDUMP_COMPRESSED_MEMORY_STREAM_FINISH_CALLBACK CompressedMemoryStreamFinish;
     };
 } MINIDUMP_CALLBACK_INPUT, *PMINIDUMP_CALLBACK_INPUT;
 
@@ -1280,6 +1299,7 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
             HRESULT VmReadStatus;
             ULONG VmReadBytesCompleted;
         };
+        MINIDUMP_COMPRESSED_MEMORY_STREAM_START_CALLBACK CompressedMemoryStreamStart;
         HRESULT Status;
     };
 } MINIDUMP_CALLBACK_OUTPUT, *PMINIDUMP_CALLBACK_OUTPUT;
@@ -1389,9 +1409,10 @@ typedef enum _MINIDUMP_TYPE {
     MiniDumpWithIptTrace                   = 0x00400000,
     MiniDumpScanInaccessiblePartialPages   = 0x00800000,
     MiniDumpFilterWriteCombinedMemory      = 0x01000000,
-    MiniDumpValidTypeFlags                 = 0x01ffffff,
+    MiniDumpWithMemoryCompressed           = 0x04000000,
+    MiniDumpValidTypeFlags                 = 0x05ffffff,
     MiniDumpNoIgnoreInaccessibleMemory     = 0x02000000,
-    MiniDumpValidTypeFlagsEx               = 0x03ffffff,
+    MiniDumpValidTypeFlagsEx               = 0x07ffffff,
 } MINIDUMP_TYPE;
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */

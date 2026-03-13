@@ -186,6 +186,11 @@ DEFINE_PCI_ROOT_BUS_DEVPKEY(DEVPKEY_PciRootBus_NativePciExpressControl, 17); // 
 
 DEFINE_PCI_ROOT_BUS_DEVPKEY(DEVPKEY_PciRootBus_SystemMsiSupport, 18); // DEVPROP_TYPE_BOOLEAN
 
+//
+// This is a value indicating the segment number associated with this root bus.
+//
+
+DEFINE_PCI_ROOT_BUS_DEVPKEY(DEVPKEY_PciRootBus_Segment, 19); // DEVPROP_TYPE_UINT32
 
 //
 // The GUID {3AB22E31-8264-4b4e-9AF5-A8D2D8E33E62} is a seed for all properties
@@ -451,6 +456,7 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_S0WakeupSupported, 25);
 #define DevProp_PciDevice_SriovSupport_MissingPfDriver             0x2
 #define DevProp_PciDevice_SriovSupport_NoBusResource               0x3
 #define DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace          0x4
+#define DevProp_PciDevice_SriovSupport_NoSriovCap                  0x5
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_SriovSupport, 26);
 
@@ -611,6 +617,13 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_SupportsDmwrOnEntireDeviceTree, 46);
 //
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_IsTunneledDevice, 47);
+
+//
+// This property contains a boolean to indicate whether the device
+// supports TEE-IO (as described in the TDISP specification).
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_TeeIOSupported, 48);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

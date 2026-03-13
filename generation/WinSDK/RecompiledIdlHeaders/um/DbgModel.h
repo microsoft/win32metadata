@@ -264,6 +264,9 @@ DEFINE_GUID(IID_IDebugHostSymbols, 0x854fd751, 0xc2e1, 0x4eb2, 0xb5, 0x25, 0x66,
 // {6BAF1F48-65EE-4ff2-B3AF-10C7F21D38B2}
 DEFINE_GUID(IID_IDebugHostSymbols2, 0x6baf1f48, 0x65ee, 0x4ff2, 0xb3, 0xaf, 0x10, 0xc7, 0xf2, 0x1d, 0x38, 0xb2);
 
+// {8535E318-4F4B-4ace-A21B-AF9E134A4E9B}
+DEFINE_GUID(IID_IDebugHostSymbols3, 0x8535e318, 0x4f4b, 0x4ace, 0xa2, 0x1b, 0xaf, 0x9e, 0x13, 0x4a, 0x4e, 0x9b);
+
 // {212149C9-9183-4a3e-B00E-4FD1DC95339B}
 DEFINE_GUID(IID_IDebugHostMemory, 0x212149c9, 0x9183, 0x4a3e, 0xb0, 0xe, 0x4f, 0xd1, 0xdc, 0x95, 0x33, 0x9b);
 
@@ -308,6 +311,9 @@ DEFINE_GUID(IID_IDebugHostModule4, 0x41415136, 0x38a4, 0x474f, 0x8e, 0x98, 0x57,
 
 // {ED36A63D-AD2B-467e-A0CA-4CA949357625}
 DEFINE_GUID(IID_IDebugHostModule5, 0xed36a63d, 0xad2b, 0x467e, 0xa0, 0xca, 0x4c, 0xa9, 0x49, 0x35, 0x76, 0x25);
+
+// {10EFC47E-68D4-4f87-810F-6729A805940A}
+DEFINE_GUID(IID_IDebugHostModule6, 0x10efc47e, 0x68d4, 0x4f87, 0x81, 0xf, 0x67, 0x29, 0xa8, 0x5, 0x94, 0xa);
 
 // {F219B848-63B2-4a43-A6C9-72ABF25A9711}
 DEFINE_GUID(IID_IDebugHostType, 0xf219b848, 0x63b2, 0x4a43, 0xa6, 0xc9, 0x72, 0xab, 0xf2, 0x5a, 0x97, 0x11);
@@ -480,6 +486,9 @@ DEFINE_GUID(IID_IDebugHostFunctionIntrospection2, 0x8e1cb118, 0xaa83, 0x409a, 0x
 // {A24E286B-891A-40fc-8A3A-89B66EDDCE57}
 DEFINE_GUID(IID_IDebugHostFunctionIntrospection3, 0xa24e286b, 0x891a, 0x40fc, 0x8a, 0x3a, 0x89, 0xb6, 0x6e, 0xdd, 0xce, 0x57);
 
+// {F93F6699-1F2E-4fb2-8164-363A78F7914E}
+DEFINE_GUID(IID_IDebugHostFunctionIntrospection4, 0xf93f6699, 0x1f2e, 0x4fb2, 0x81, 0x64, 0x36, 0x3a, 0x78, 0xf7, 0x91, 0x4e);
+
 // {A61ADC36-1ED5-40fe-A976-6A21CD81E811}
 DEFINE_GUID(IID_IDebugHostFunctionLocalDetailsEnumerator, 0xa61adc36, 0x1ed5, 0x40fe, 0xa9, 0x76, 0x6a, 0x21, 0xcd, 0x81, 0xe8, 0x11);
 
@@ -536,6 +545,7 @@ struct DECLSPEC_UUID("EEB8FB43-B44E-4B0F-B871-65F0886FCAF2") IDebugHostContextCo
 struct DECLSPEC_UUID("6301EEE8-85E3-4058-A7C0-D37E0EA65F75") IDebugHostContextAlternator;
 struct DECLSPEC_UUID("854FD751-C2E1-4eb2-B525-6619CB97A588") IDebugHostSymbols;
 struct DECLSPEC_UUID("6BAF1F48-65EE-4ff2-B3AF-10C7F21D38B2") IDebugHostSymbols2;
+struct DECLSPEC_UUID("8535E318-4F4B-4ace-A21B-AF9E134A4E9B") IDebugHostSymbols3;
 struct DECLSPEC_UUID("31E53A5A-01EE-4BBB-B899-4B46AE7D595C") IDebugHostModuleSignature;
 struct DECLSPEC_UUID("3AADC353-2B14-4abb-9893-5E03458E07EE") IDebugHostTypeSignature;
 struct DECLSPEC_UUID("212149C9-9183-4a3e-B00E-4FD1DC95339B") IDebugHostMemory;
@@ -556,6 +566,7 @@ struct DECLSPEC_UUID("B51887E8-BCD0-4e8f-A8C7-434398B78C37") IDebugHostModule2;
 struct DECLSPEC_UUID("68576417-9fAB-4C69-8977-3A4D87CF08FD") IDebugHostModule3;
 struct DECLSPEC_UUID("41415136-38A4-474f-8E98-57E2DC64E565") IDebugHostModule4;
 struct DECLSPEC_UUID("ED36A63D-AD2B-467e-A0CA-4CA949357625") IDebugHostModule5;
+struct DECLSPEC_UUID("10EFC47E-68D4-4f87-810F-6729A805940A") IDebugHostModule6;
 struct DECLSPEC_UUID("3AADC353-2B14-4abb-9893-5E03458E07EE") IDebugHostType;
 struct DECLSPEC_UUID("B28632B9-8506-4676-87CE-8F7E05E59876") IDebugHostType2;
 struct DECLSPEC_UUID("8B0409AC-C1BB-433D-887A-ED12C3AF0E7D") IDebugHostType3;
@@ -617,6 +628,7 @@ struct DECLSPEC_UUID("F798139E-1B2C-4077-8D87-9FA5D044F3EB") IDeconstructableCon
 struct DECLSPEC_UUID("A754393C-4FBE-4178-8AD5-FE6079AC048D") IDebugHostFunctionIntrospection;
 struct DECLSPEC_UUID("8E1CB118-AA83-409a-AAE9-C7FF78911A5F") IDebugHostFunctionIntrospection2;
 struct DECLSPEC_UUID("A24E286B-891A-40fc-8A3A-89B66EDDCE57") IDebugHostFunctionIntrospection3;
+struct DECLSPEC_UUID("F93F6699-1F2E-4fb2-8164-363A78F7914E") IDebugHostFunctionIntrospection4;
 struct DECLSPEC_UUID("A61ADC36-1ED5-40fe-A976-6A21CD81E811") IDebugHostFunctionLocalDetailsEnumerator;
 struct DECLSPEC_UUID("89280EA8-B3B9-408c-BE16-32AB28F5C0AC") IDebugHostFunctionLocalDetails;
 struct DECLSPEC_UUID("199A57B0-1967-4363-B25E-90C7E8A07F22") IDebugHostFunctionLocalDetails2;
@@ -983,6 +995,13 @@ enum LocationKind
 //     UI.  By default, the value of this key is "false".  Only a single action method on any given object may
 //     be marked as the default action.
 //
+// "ActionIsPrimaryLink"
+//     applicable only where the "ActionIsDefault" key is present and true, this is a boolean value which
+//     describes whether that default action should (in some circumstances) replace the default left-click hyperlink
+//     for the object.  This should only be done on objects for which an expansion/viewing the object provides
+//     no additional value (e.g.: this can be done for actions like the time travel link on a TTD position object).
+//     By default, the value of this key is "false".
+//
 // "PreferAutoExpand"
 //     contains an unsigned value which describes whether the element should be expanded automatically if
 //     it is a child of some other object and the recursion level is high enough.  The default value for this
@@ -996,6 +1015,10 @@ enum LocationKind
 // "PreferTabularFormat"
 //     contains a boolean value which describes whether the value should be displayed in a tabular form instead
 //     of a hierarchical form
+//
+// "PreferredGraphForm"
+//     If this object is graphed, is there a preference to the form of the graph visualization.  The values here
+//     are of the PreferredGraphForm enumeration.
 //
 
 //
@@ -1053,6 +1076,29 @@ enum PreferredFormat
 
     // The preferred format is a quoted Unicode (UTF-32) string
     FormatQuotedUTF32String
+};
+
+// PreferredGraphForm:
+//
+// If this object is graphed, this describes the particular preferred form of the graph.
+//
+enum PreferredGraphForm
+{
+    //
+    // The form is unspecified -- let the renderer decide.  If there is no metadata for a graph
+    // or this key is not specified, GraphFormUnspecified is the default value.
+    //
+    GraphFormUnspecified,
+
+    // The form should be a generalized di-graph
+    GraphFormGraph,
+    
+    // The form should be a tree
+    GraphFormTree,
+
+    // The graph should be presented with the nodes in a roughly linear ordering to the way they are enumerated
+    // Such is useful, for instance, for the control flow graph of a disassembled function.
+    GraphFormLinearFlow
 };
 
 //
@@ -5285,6 +5331,162 @@ DECLARE_INTERFACE_(IDebugHostModule5, IDebugHostModule4)
         ) PURE;
 };
 
+#undef INTERFACE
+#define INTERFACE IDebugHostModule6
+DECLARE_INTERFACE_(IDebugHostModule6, IDebugHostModule5)
+{
+    //*************************************************
+    // IUnknown:
+
+    STDMETHOD(QueryInterface)(
+        THIS_
+        _In_ REFIID iid,
+        _COM_Outptr_ PVOID* iface
+        ) PURE;
+
+    STDMETHOD_(ULONG, AddRef)(
+        THIS
+        ) PURE;
+
+    STDMETHOD_(ULONG, Release)(
+        THIS
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostSymbol:
+
+    STDMETHOD(GetContext)(
+        THIS_
+        _COM_Outptr_ IDebugHostContext** context
+        ) PURE;
+
+    STDMETHOD(EnumerateChildren)(
+        THIS_
+        _In_ SymbolKind kind,
+        _In_opt_z_ PCWSTR name,
+        _Out_ IDebugHostSymbolEnumerator **ppEnum
+        ) PURE;
+
+    STDMETHOD(GetSymbolKind)(
+        THIS_
+        _Out_ SymbolKind *kind
+        ) PURE;
+
+    STDMETHOD(GetName)(
+        THIS_
+        _Out_ BSTR* symbolName
+        ) PURE;
+
+    STDMETHOD(GetType)(
+        THIS_
+        _Out_ IDebugHostType** type
+        ) PURE;
+
+    STDMETHOD(GetContainingModule)(
+        THIS_
+        _Out_ IDebugHostModule **containingModule
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule:
+
+    STDMETHOD(GetImageName)(
+        THIS_
+        _In_ bool allowPath,
+        _Out_ BSTR* imageName
+        ) PURE;
+
+    STDMETHOD(GetBaseLocation)(
+        THIS_
+        _Out_ Location* moduleBaseLocation
+        ) PURE;
+
+    STDMETHOD(GetVersion)(
+        THIS_
+        _Out_opt_ ULONG64* fileVersion,
+        _Out_opt_ ULONG64* productVersion
+        ) PURE;
+
+    STDMETHOD(FindTypeByName)(
+        THIS_
+        _In_z_ PCWSTR typeName,
+        _Out_ IDebugHostType** type
+        ) PURE;
+
+    STDMETHOD(FindSymbolByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ IDebugHostSymbol** symbol
+        ) PURE;
+
+    STDMETHOD(FindSymbolByName)(
+        THIS_
+        _In_z_ PCWSTR symbolName,
+        _Out_ IDebugHostSymbol** symbol
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule2:
+
+    STDMETHOD(FindContainingSymbolByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ IDebugHostSymbol** symbol,
+        _Out_ ULONG64 *offset
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule3:
+
+    STDMETHOD(GetRange)(
+        THIS_
+        _Out_ Location* moduleStart,
+        _Out_ Location* moduleEnd
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule4:
+    //
+
+    STDMETHOD(FindTypeByName2)(
+        THIS_
+        _In_opt_ IDebugHostSymbol *pEnclosingSymbol,
+        _In_z_ PCWSTR typeName,
+        _Out_ IDebugHostType** type
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule5:
+    //
+
+    STDMETHOD(GetPrimaryCompilerInformation)(
+        THIS_
+        _Out_ KnownCompiler *pCompilerId,
+        _Out_opt_ BSTR *pPrimaryCompilerString
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostModule6:
+    //
+
+    // GetArchitectureByRVA():
+    //
+    // If the given rva is an address within the module, this method will return the architecture
+    // of the code at that rva as an IMAGE_FILE_MACHINE_* constant.  If the bytes at the given rva do not
+    // have any architecture information associated with them, the architecture of the module itself is returned.
+    // If the bounds of the range at 'rva' for a given returned architecture can be determined, such will
+    // be returned as RVAs in *pRangeRvaStart and *pRangeRvaEnd.
+    //
+    // This method is only generally useful for mixed architecture binaries (e.g.: ARM64EC)
+    //
+    STDMETHOD(GetArchitectureByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ ULONG *pMachineArchitecture,
+        _Out_opt_ ULONG64 *pRangeRvaStart,
+        _Out_opt_ ULONG64 *pRangeRvaEnd
+        ) PURE;
+};
 
 //
 // ArrayDimension:
@@ -8298,6 +8500,139 @@ DECLARE_INTERFACE_(IDebugHostSymbols2, IDebugHostSymbols)
         _In_ IDebugHostSymbol *pSymbol,
         _In_ ULONG flags,
         _Out_ BSTR *pDemangledSymbolName
+        ) PURE;
+};
+
+//
+// IDebugHostSymbols3:
+//
+// The core symbols interface which a debug host presents.  This interface can be QI'd from
+// IDebugHost in order to access global symbols, the module list of the debug target, type
+// signatures, etc...
+//
+#undef INTERFACE
+#define INTERFACE IDebugHostSymbols3
+DECLARE_INTERFACE_(IDebugHostSymbols3, IDebugHostSymbols2)
+{
+    //*************************************************
+    // IUnknown:
+
+    STDMETHOD(QueryInterface)(
+        THIS_
+        _In_ REFIID iid,
+        _COM_Outptr_ PVOID* iface
+        ) PURE;
+
+    STDMETHOD_(ULONG, AddRef)(
+        THIS
+        ) PURE;
+
+    STDMETHOD_(ULONG, Release)(
+        THIS
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostSymbols:
+
+    STDMETHOD(CreateModuleSignature)(
+        THIS_
+        _In_z_ PCWSTR pwszModuleName,
+        _In_opt_z_ PCWSTR pwszMinVersion,
+        _In_opt_z_ PCWSTR pwszMaxVersion,
+        _Out_ IDebugHostModuleSignature** ppModuleSignature
+        ) PURE;
+
+    STDMETHOD(CreateTypeSignature)(
+        THIS_
+        _In_z_ PCWSTR signatureSpecification,
+        _In_opt_ IDebugHostModule* module,
+        _Out_ IDebugHostTypeSignature** typeSignature
+        ) PURE;
+
+    STDMETHOD(CreateTypeSignatureForModuleRange)(
+        THIS_
+        _In_z_ PCWSTR signatureSpecification,
+        _In_z_ PCWSTR moduleName,
+        _In_opt_z_ PCWSTR minVersion,
+        _In_opt_z_ PCWSTR maxVersion,
+        _Out_ IDebugHostTypeSignature** typeSignature
+        ) PURE;
+
+    STDMETHOD(EnumerateModules)(
+        THIS_
+        _In_ IDebugHostContext* context,
+        _COM_Outptr_ IDebugHostSymbolEnumerator** moduleEnum
+        ) PURE;
+
+    STDMETHOD(FindModuleByName)(
+        THIS_
+        _In_ IDebugHostContext* context,
+        _In_z_ PCWSTR moduleName,
+        _COM_Outptr_ IDebugHostModule **module
+        ) PURE;
+
+    STDMETHOD(FindModuleByLocation)(
+        THIS_
+        _In_ IDebugHostContext* context,
+        _In_ Location moduleLocation,
+        _COM_Outptr_ IDebugHostModule **module
+        ) PURE;
+
+    STDMETHOD(GetMostDerivedObject)(
+        THIS_
+        _In_opt_ IDebugHostContext *pContext,
+        _In_ Location location,
+        _In_ IDebugHostType* objectType,
+        _Out_ Location* derivedLocation,
+        _Out_ IDebugHostType** derivedType
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostSymbols2:
+    //
+
+    STDMETHOD(DemangleSymbolName)(
+        THIS_
+        _In_ IDebugHostSymbol *pSymbol,
+        _In_ ULONG flags,
+        _Out_ BSTR *pDemangledSymbolName
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostSymbols3:
+    //
+
+    // CreateModuleSignature2():
+    //
+    // Operates as per CreateModuleSignature but allows for looser name matching.  If 'allowLooseNameMatch'
+    // is set to true, a module signature will match against the host's looser definition of a module name
+    // rather than strictly against the module name.  One example might be the difference between "combase" and 
+    // "combase.dll" for instance.
+    //
+    STDMETHOD(CreateModuleSignature2)(
+        THIS_
+        _In_z_ PCWSTR pwszModuleName,
+        _In_ bool allowLooseNameMatch,
+        _In_opt_z_ PCWSTR pwszMinVersion,
+        _In_opt_z_ PCWSTR pwszMaxVersion,
+        _Out_ IDebugHostModuleSignature** ppModuleSignature
+        ) PURE;
+
+    // CreateTypeSignatureForModuleRange2():
+    //
+    // Operates as per CreateTypeSignatureForModuleRange but allows for looser name matching.  If 'allowLooseNameMatch'
+    // is set to true, the type signature will match against the host's looser definition of a module name
+    // rather than strictly against the module name.  One example might be the difference between "combase" and 
+    // "combase.dll" for instance.
+    //
+    STDMETHOD(CreateTypeSignatureForModuleRange2)(
+        THIS_
+        _In_z_ PCWSTR signatureSpecification,
+        _In_z_ PCWSTR moduleName,
+        _In_ bool allowLooseNameMatch,
+        _In_opt_z_ PCWSTR minVersion,
+        _In_opt_z_ PCWSTR maxVersion,
+        _Out_ IDebugHostTypeSignature** typeSignature
         ) PURE;
 };
 
@@ -12579,6 +12914,106 @@ DECLARE_INTERFACE_(IDebugHostFunctionIntrospection3, IDebugHostFunctionIntrospec
         _Out_ bool *pIsNoReturnFunction
         ) PURE;
 
+};
+
+//
+// IDebugHostFunctionIntrospection4:
+//
+// A host optional interface which provides detailed information about a function.
+//
+#undef INTERFACE
+#define INTERFACE IDebugHostFunctionIntrospection4
+DECLARE_INTERFACE_(IDebugHostFunctionIntrospection4, IDebugHostFunctionIntrospection3)
+{
+    //*************************************************
+    // IUnknown:
+
+    STDMETHOD(QueryInterface)(
+        THIS_
+        _In_ REFIID iid,
+        _COM_Outptr_ PVOID* iface
+        ) PURE;
+
+    STDMETHOD_(ULONG, AddRef)(
+        THIS
+        ) PURE;
+
+    STDMETHOD_(ULONG, Release)(
+        THIS
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostFunctionIntrospection:
+
+    STDMETHOD(EnumerateLocalsDetails)(
+        THIS_
+        _Out_ IDebugHostFunctionLocalDetailsEnumerator** localsEnum
+        ) PURE;
+
+    STDMETHOD(EnumerateInlineFunctionsByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ IDebugHostSymbolEnumerator** inlinesEnum
+        ) PURE;
+
+    STDMETHOD(FindContainingCodeRangeByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ Location* rangeStart,
+        _Out_ Location* rangeEnd
+        ) PURE;
+
+    STDMETHOD(FindSourceLocationByRVA)(
+        THIS_
+        _In_ ULONG64 rva,
+        _Out_ BSTR* sourceFile,
+        _Out_ ULONG64* sourceLine
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostFunctionIntrospection2:
+    //
+
+    STDMETHOD(EnumerateLocalsDetailsEx)(
+        THIS_
+        _In_ bool enumerateInlinedLocals,
+        _Out_ IDebugHostFunctionLocalDetailsEnumerator** localsEnum
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostFunctionIntrospection3:
+    //
+
+    STDMETHOD(IsNoReturnFunction)(
+        THIS_
+        _Out_ bool *pIsNoReturnFunction
+        ) PURE;
+
+    //*************************************************
+    // IDebugHostFunctionIntrospection4:
+    //
+
+    // GetPrologueRange():
+    //
+    // If the function in question has a determinable prologue range, this returns the
+    // range of the prologue.
+    //
+    STDMETHOD(GetPrologueRange)(
+        THIS_
+        _Out_ Location *pPrologueStart,
+        _Out_ Location *pPrologueEnd
+        ) PURE;
+
+    // GetEpilogueRange():
+    //
+    // If the function in question has a determinable epilogue range, this returns the
+    // range of the epilogue.
+    //
+    STDMETHOD(GetEpilogueRange)(
+        THIS_
+        _Out_ Location *pEpilogueStart, 
+        _Out_ Location *pEpilogueEnd
+        ) PURE;
 };
 
 //

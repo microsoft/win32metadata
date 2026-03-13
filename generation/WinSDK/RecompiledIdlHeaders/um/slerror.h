@@ -67,6 +67,7 @@
 // Define the facility codes
 //
 #define FACILITY_SL_ITF                  0x4
+#define FACILITY_SL_ACS                  0x14
 #define _FACILITY_WINDOWS_STORE          0x3F
 
 
@@ -503,9 +504,9 @@
 //
 // MessageText:
 //
-// The activation server determined there is a problem with the specified product key.
+// The activation server determined there is no CBR associated with the specified product key.
 //
-#define SL_E_CHPA_DIGITALMARKER_BINDING_NOT_CONFIGURED ((HRESULT)0xC004C052L)
+#define SL_E_CHPA_DIGITALMARKER_BINDING_NOT_CONFIGURED ((HRESULT)0xC014C052L)
 
 //
 // MessageId: SL_E_CHPA_DYNAMICALLY_BLOCKED_PRODUCT_KEY
@@ -3778,7 +3779,7 @@
 //
 // MessageText:
 //
-// The activation server determined there is a problem with the specified product key.
+// The activation server determined there is no CBR associated with the specified product key.
 //
 #define SL_REMAPPING_MDOLLAR_DIGITALMARKER_BINDING_NOT_CONFIGURED ((HRESULT)0x803FA0D4L)
 

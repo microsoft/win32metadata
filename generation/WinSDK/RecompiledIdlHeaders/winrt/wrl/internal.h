@@ -61,10 +61,40 @@ namespace Details {
 #endif
     }
 
-    template <class From, class To>
-    struct IsConvertible
+    template <typename T>
+    struct TypeIdentity
     {
-        static const bool value = __is_convertible_to(From, To);
+        typedef T type;
+    };
+
+    template <typename T>
+    TypeIdentity<T&&> TryAddRValueReference(int);
+
+    template <typename T>
+    TypeIdentity<T> TryAddRValueReference(...);
+
+    template <typename T>
+    struct AddRValueReference : decltype(TryAddRValueReference<T>(0))
+    {
+    };
+
+    template <typename T>
+    typename AddRValueReference<T>::type Declval();
+
+    template <typename T, T Value>
+    struct IntegralConstant
+    {
+        static const T value = Value;
+    };
+
+    template <bool Value>
+    using BoolConstant = IntegralConstant<bool, Value>;
+    using TrueType = BoolConstant<true>;
+    using FalseType = BoolConstant<false>;
+
+    template <class From, class To>
+    struct IsConvertible : BoolConstant<__is_convertible_to(From, To)>
+    {
     };
 
     template <bool b, typename T = void>
@@ -79,15 +109,13 @@ namespace Details {
     };
 
     template <typename T1, typename T2>
-    struct IsSame
+    struct IsSame : FalseType
     {
-        static const bool value = false;
     };
 
     template <typename T1>
-    struct IsSame<T1, T1>
+    struct IsSame<T1, T1> : TrueType
     {
-        static const bool value = true;
     };
 
     template<class T>
@@ -138,15 +166,13 @@ namespace Details {
     }
 
     template <typename Base, typename Derived>
-    struct IsBaseOfStrict
+    struct IsBaseOfStrict : BoolConstant<__is_base_of(Base, Derived)>
     {
-        static const bool value = __is_base_of(Base, Derived);
     };
 
     template <typename Base>
-    struct IsBaseOfStrict<Base, Base>
+    struct IsBaseOfStrict<Base, Base> : FalseType
     {
-        static const bool value = false;
     };
 
 }}} // namespace Microsoft::WRL::Details

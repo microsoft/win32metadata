@@ -1020,7 +1020,7 @@ public:
     {
 #ifdef __WRL_STRICT__
         static_assert(__is_base_of(Details::RuntimeClassBase, Base), "SimpleClassFactory can only instantiate 'Base' that derive from RuntimeClass");
-        static_assert((Base::ClassFlags::value & ::Microsoft::WRL::ClassicCom) == ::Microsoft::WRL::ClassicCom,
+        static_assert((Base::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::ClassicCom) == ::Microsoft::WRL::ClassicCom,
             "SimpleClassFactory can only instantiate 'Base' that is configured with ClassicCom or WinRtClassicComMix flags");
 #endif
 
@@ -1220,7 +1220,7 @@ public:
     {
 #ifdef __WRL_STRICT__
         static_assert(__is_base_of(Details::RuntimeClassBase, Base), "SimpleActivationFactory can only instantiate 'Base' that derive from RuntimeClass");
-        static_assert((Base::ClassFlags::value & ::Microsoft::WRL::WinRt) == ::Microsoft::WRL::WinRt,
+        static_assert((Base::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::WinRt) == ::Microsoft::WRL::WinRt,
             "SimpleActivationFactory can only instantiate 'Base' that is configured with WinRt or WinRtClassicComMix flags");
 #endif
 
@@ -1242,7 +1242,7 @@ public:
     {
 #ifdef __WRL_STRICT__
         static_assert(__is_base_of(Details::RuntimeClassBase, Base), "SimpleAgileActivationFactory can only instantiate 'Base' that derive from RuntimeClass");
-        static_assert((Base::ClassFlags::value & ::Microsoft::WRL::WinRt) == ::Microsoft::WRL::WinRt,
+        static_assert((Base::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::WinRt) == ::Microsoft::WRL::WinRt,
             "SimpleAgileActivationFactory can only instantiate 'Base' that is configured with WinRt or WinRtClassicComMix flags");
 #endif
 

@@ -1864,7 +1864,7 @@ Notes:
 //
 // MessageText:
 //
-// An oplock of the requested level cannot be granted.  An oplock of a lower level may be available.
+// The oplock request cannot be satisfied as specified. The output buffer contains more details.
 //
 #define STATUS_CANNOT_GRANT_REQUESTED_OPLOCK ((NTSTATUS)0x8000002EL)
 
@@ -1934,6 +1934,15 @@ Notes:
 // The secure page table update could not be completed due to a temporary address exclusion.
 //
 #define STATUS_PTE_CHANGE_NOT_COMPLETED  ((NTSTATUS)0x80000035L)
+
+//
+// MessageId: STATUS_FAILED_SUBMITTED_DEVICE_COMMAND
+//
+// MessageText:
+//
+// A command is submitted to the device and failed.
+//
+#define STATUS_FAILED_SUBMITTED_DEVICE_COMMAND ((NTSTATUS)0x80000036L)
 
 //
 // MessageId: DBG_EXCEPTION_NOT_HANDLED
@@ -10910,6 +10919,15 @@ Notes:
 //
 #define STATUS_FS_METADATA_INCONSISTENT  ((NTSTATUS)0xC0000518L)
 
+//
+// MessageId: STATUS_INVALID_OPLOCK_REQUEST
+//
+// MessageText:
+//
+// An invalid combination of oplock level and flags was specified for an oplock request.
+//
+#define STATUS_INVALID_OPLOCK_REQUEST    ((NTSTATUS)0xC0000519L)
+
 
 //     **** New SYSTEM error codes can be inserted here ****
 
@@ -12349,6 +12367,15 @@ Notes:
 //
 #define STATUS_APISET_COMPOSE_FAILURE    ((NTSTATUS)0xC000A161L)
 
+//
+// MessageId: STATUS_APISET_SCHEMA_VERSION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The API Set schema version is not supported.
+//
+#define STATUS_APISET_SCHEMA_VERSION_NOT_SUPPORTED ((NTSTATUS)0xC000A162L)
+
 /*++
 
  MessageId's 0xa200 - 0xa280 (inclusive) are reserved for app container specific messages.
@@ -12389,15 +12416,6 @@ Notes:
 // Access to the specified resource has been denied for a less privileged app container.
 //
 #define STATUS_LPAC_ACCESS_DENIED        ((NTSTATUS)0xC000A203L)
-
-//
-// MessageId: STATUS_ADMINLESS_ACCESS_DENIED
-//
-// MessageText:
-//
-// Access to the specified resource has been denied for an adminless system.
-//
-#define STATUS_ADMINLESS_ACCESS_DENIED   ((NTSTATUS)0xC000A204L)
 
 /*++
 
@@ -12539,6 +12557,15 @@ Notes:
 // The system does not support this version of the CimFS image.
 //
 #define STATUS_CIMFS_IMAGE_VERSION_NOT_SUPPORTED ((NTSTATUS)0xC000C002L)
+
+//
+// MessageId: STATUS_CIMFS_VERIFICATION_FAILED
+//
+// MessageText:
+//
+// An integrity violation was detected when accessing a verified CIM.
+//
+#define STATUS_CIMFS_VERIFICATION_FAILED ((NTSTATUS)0xC000C003L)
 
 /*++
 
@@ -13087,6 +13114,15 @@ Notes:
 // An attempt was made to create a new union root as an ancestor or descendant of an existing union root, but the new union is not configured to allow nesting.
 //
 #define STATUS_UNIONFS_NESTED_UNION_NOT_ALLOWED ((NTSTATUS)0xC0ED000CL)
+
+//
+// MessageId: STATUS_UNIONFS_BOOT_LAYER_NOT_ATTACHED
+//
+// MessageText:
+//
+// UnionFS failed to attach to a boot layer.
+//
+#define STATUS_UNIONFS_BOOT_LAYER_NOT_ATTACHED ((NTSTATUS)0xC0ED000DL)
 
 
 //     **** New SYSTEM error codes can be inserted here ****
@@ -18995,7 +19031,7 @@ Notes:
 
 //
 // Camera Error messages (ks.sys, usbvideo.sys)
-// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode, 
+// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode,
 // which has 1:1 mapping for Error code in WinError.mc file.
 //
 // The remaining NTSTATUS in camera category may not have mapping with System Error code.
@@ -19801,6 +19837,15 @@ Notes:
 #define STATUS_FVE_NO_TPM_BINDINGS       ((NTSTATUS)0xC021005AL)
 
 //
+// MessageId: STATUS_FVE_BOOT_CRIT_DEVICE_UNEXPECTED_BEHAVIOR
+//
+// MessageText:
+//
+// Boot critical volume device has been found to exhibit unexpected behavior such as device surprise removal or arrivial. This may lead to improper behavior of BitLocker Drive Encryption.
+//
+#define STATUS_FVE_BOOT_CRIT_DEVICE_UNEXPECTED_BEHAVIOR ((NTSTATUS)0xC021005BL)
+
+//
 // MessageId: STATUS_FVE_FW_UPDATE_PCRS_BLOCK
 //
 // MessageText:
@@ -19844,6 +19889,42 @@ Notes:
 // FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
 //
 #define STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC0210060L)
+
+//
+// MessageId: STATUS_FVE_NOT_ALLOWED_ON_EPHEMERAL_VOLUME
+//
+// MessageText:
+//
+// The operation is not allowed on an ephemeral volume.
+//
+#define STATUS_FVE_NOT_ALLOWED_ON_EPHEMERAL_VOLUME ((NTSTATUS)0xC0210061L)
+
+//
+// MessageId: STATUS_FVE_UNTRUSTED_OFFLOAD_STORAGE
+//
+// MessageText:
+//
+// The operation is not allowed on the volume when untrusted crypto offload storage protection is enabled.
+//
+#define STATUS_FVE_UNTRUSTED_OFFLOAD_STORAGE ((NTSTATUS)0xC0210062L)
+
+//
+// MessageId: STATUS_FVE_TPM_PCRS_DO_NOT_MATCH_LOG
+//
+// MessageText:
+//
+// The TPM PCR values did not match what was calculated from the TCG log.
+//
+#define STATUS_FVE_TPM_PCRS_DO_NOT_MATCH_LOG ((NTSTATUS)0xC0210063L)
+
+//
+// MessageId: STATUS_FVE_MISSING_PROTECTORS
+//
+// MessageText:
+//
+// The volume is not configured with protectors required to complete the operation.
+//
+#define STATUS_FVE_MISSING_PROTECTORS    ((NTSTATUS)0xC0210064L)
 
 
 //
@@ -23286,7 +23367,7 @@ Notes:
 //
 // MessageText:
 //
-// An attempt to retrieve debugging data failed because none was available.
+// An attempt to retrieve data failed because none was available.
 //
 #define STATUS_HV_NO_DATA                ((NTSTATUS)0xC035001BL)
 
@@ -23442,6 +23523,15 @@ Notes:
 // The supplied page request specifies a memory access that the guest does not have permissions to perform.
 //
 #define STATUS_HV_PAGE_REQUEST_INVALID   ((NTSTATUS)0xC0350060L)
+
+//
+// MessageId: STATUS_HV_DEVICE_ALREADY_IN_DOMAIN
+//
+// MessageText:
+//
+// The device is already attached to the device domain.
+//
+#define STATUS_HV_DEVICE_ALREADY_IN_DOMAIN ((NTSTATUS)0xC0350066L)
 
 //
 // MessageId: STATUS_HV_INVALID_CPU_GROUP_ID
@@ -24055,6 +24145,249 @@ Notes:
 // The process has already been set.
 //
 #define STATUS_VID_PROCESS_ALREADY_SET   ((NTSTATUS)0xC0370030L)
+
+//
+// MessageId: STATUS_VID_PARTITION_INVARIANTS_MISMATCH
+//
+// MessageText:
+//
+// The partition invariants for the restoring partition do not match the partition invariants from the original partition.
+//
+#define STATUS_VID_PARTITION_INVARIANTS_MISMATCH ((NTSTATUS)0xC0370031L)
+
+//
+// MessageId: STATUS_VID_MEMORY_BLOCK_INVARIANTS_MISMATCH
+//
+// MessageText:
+//
+// The invariants for the restoring memory block do not match the invariants from the original memory block.
+//
+#define STATUS_VID_MEMORY_BLOCK_INVARIANTS_MISMATCH ((NTSTATUS)0xC0370032L)
+
+//
+// MessageId: STATUS_VID_MEMORY_BLOCK_RESTORE_STATE_MISMATCH
+//
+// MessageText:
+//
+// The state for the restoring memory block does not match the state from the original memory block.
+//
+#define STATUS_VID_MEMORY_BLOCK_RESTORE_STATE_MISMATCH ((NTSTATUS)0xC0370033L)
+
+//
+// MessageId: STATUS_VID_KSR_PERSISTED_ITEMS_STILL_REGISTERED
+//
+// MessageText:
+//
+// Persisted items were still registered after attempting to free persisted data.
+//
+#define STATUS_VID_KSR_PERSISTED_ITEMS_STILL_REGISTERED ((NTSTATUS)0xC0370034L)
+
+//
+// MessageId: STATUS_VID_MEMORY_PARTITION_SETUP_FAILED
+//
+// MessageText:
+//
+// Setup for the memory partition failed.
+//
+#define STATUS_VID_MEMORY_PARTITION_SETUP_FAILED ((NTSTATUS)0xC0370035L)
+
+//
+// MessageId: STATUS_VID_MEMORY_RESERVE_NOT_ENABLED
+//
+// MessageText:
+//
+// The memory reserve was not enabled.
+//
+#define STATUS_VID_MEMORY_RESERVE_NOT_ENABLED ((NTSTATUS)0xC0370036L)
+
+//
+// MessageId: STATUS_VID_MEMORY_BLOCK_PAGECOUNT_MISMATCH
+//
+// MessageText:
+//
+// The restoring memory block's KSR page count does not match the persisted memory block's KSR page count.
+//
+#define STATUS_VID_MEMORY_BLOCK_PAGECOUNT_MISMATCH ((NTSTATUS)0xC0370037L)
+
+//
+// MessageId: STATUS_VID_KSR_IOHANDLER_PROPERTY_MISMATCH
+//
+// MessageText:
+//
+// The restoring IO handler's properties do not match the persisted IO handler's properties.
+//
+#define STATUS_VID_KSR_IOHANDLER_PROPERTY_MISMATCH ((NTSTATUS)0xC0370038L)
+
+//
+// MessageId: STATUS_VID_KSR_MSR_HANDLER_PROPERTY_MISMATCH
+//
+// MessageText:
+//
+// The restoring MSR handler's properties do not match the persisted MSR handler's properties.
+//
+#define STATUS_VID_KSR_MSR_HANDLER_PROPERTY_MISMATCH ((NTSTATUS)0xC0370039L)
+
+//
+// MessageId: STATUS_VID_KSR_MEMORY_PARTITION_STATE_SIZE_MISMATCH
+//
+// MessageText:
+//
+// The size of the preserved KSR memory partition state structure does not match the size of the current KSR memory partition state structure.
+//
+#define STATUS_VID_KSR_MEMORY_PARTITION_STATE_SIZE_MISMATCH ((NTSTATUS)0xC037003AL)
+
+//
+// MessageId: STATUS_VID_KSR_METADATA_MISMATCH
+//
+// MessageText:
+//
+// The preserved KSR metadata does not match the current KSR metadata.
+//
+#define STATUS_VID_KSR_METADATA_MISMATCH ((NTSTATUS)0xC037003BL)
+
+//
+// MessageId: STATUS_VID_KSR_TOTAL_PAGE_COUNT_MISMATCH
+//
+// MessageText:
+//
+// There is a mismatch between the actual amount of KSR pages that were backed and the expected amount of backed KSR pages.
+//
+#define STATUS_VID_KSR_TOTAL_PAGE_COUNT_MISMATCH ((NTSTATUS)0xC037003CL)
+
+//
+// MessageId: STATUS_VID_MBP_ARRAY_NOT_PERSISTED
+//
+// MessageText:
+//
+// The MBP array was required to be persisted, but was not.
+//
+#define STATUS_VID_MBP_ARRAY_NOT_PERSISTED ((NTSTATUS)0xC037003DL)
+
+//
+// MessageId: STATUS_VID_KSR_INVALID_PERSIST_ID
+//
+// MessageText:
+//
+// The KSR persistence ID was invalid.
+//
+#define STATUS_VID_KSR_INVALID_PERSIST_ID ((NTSTATUS)0xC037003EL)
+
+//
+// MessageId: STATUS_VID_KSR_INVALID_PERSISTENCE_OPTIONS
+//
+// MessageText:
+//
+// An invalid combination of persistence options was specified.
+//
+#define STATUS_VID_KSR_INVALID_PERSISTENCE_OPTIONS ((NTSTATUS)0xC037003FL)
+
+//
+// MessageId: STATUS_VID_GPA_RANGE_INVALID_FLAGS
+//
+// MessageText:
+//
+// An invalid or incompatible combination of GPA flags was specified.
+//
+#define STATUS_VID_GPA_RANGE_INVALID_FLAGS ((NTSTATUS)0xC0370040L)
+
+//
+// MessageId: STATUS_VID_MEMORY_BLOCK_INVALID_FLAGS
+//
+// MessageText:
+//
+// An invalid or incompatible combination of memory block flags was specified.
+//
+#define STATUS_VID_MEMORY_BLOCK_INVALID_FLAGS ((NTSTATUS)0xC0370041L)
+
+//
+// MessageId: STATUS_VID_KSR_ALREADY_PERSISTED
+//
+// MessageText:
+//
+// The item has already been persisted.
+//
+#define STATUS_VID_KSR_ALREADY_PERSISTED ((NTSTATUS)0xC0370042L)
+
+//
+// MessageId: STATUS_VID_KSR_ALREADY_UNPERSISTED
+//
+// MessageText:
+//
+// The item has already been unpersisted.
+//
+#define STATUS_VID_KSR_ALREADY_UNPERSISTED ((NTSTATUS)0xC0370043L)
+
+//
+// MessageId: STATUS_VID_KSR_PERSISTENCE_DISALLOWED
+//
+// MessageText:
+//
+// The item is not allowed to be persisted.
+//
+#define STATUS_VID_KSR_PERSISTENCE_DISALLOWED ((NTSTATUS)0xC0370044L)
+
+//
+// MessageId: STATUS_VID_KSR_CLIENT_TYPE_MISMATCH
+//
+// MessageText:
+//
+// The client type does match the memory block creator mode.
+//
+#define STATUS_VID_KSR_CLIENT_TYPE_MISMATCH ((NTSTATUS)0xC0370045L)
+
+//
+// MessageId: STATUS_VID_KSR_INVALID_STATE
+//
+// MessageText:
+//
+// The KSR state was invalid for the operation attempted.
+//
+#define STATUS_VID_KSR_INVALID_STATE     ((NTSTATUS)0xC0370046L)
+
+//
+// MessageId: STATUS_VID_KSR_NOT_READY
+//
+// MessageText:
+//
+// The system is not ready to perform KSR.
+//
+#define STATUS_VID_KSR_NOT_READY         ((NTSTATUS)0xC0370047L)
+
+//
+// MessageId: STATUS_VID_GPA_RANGE_OVERLAP_PROHIBITED
+//
+// MessageText:
+//
+// The GPA range overlap is prohibited.
+//
+#define STATUS_VID_GPA_RANGE_OVERLAP_PROHIBITED ((NTSTATUS)0xC0370048L)
+
+//
+// MessageId: STATUS_VID_PARTITION_NOT_HIERARCHICAL_HOST
+//
+// MessageText:
+//
+// The specified partition is not a hierarchical host.
+//
+#define STATUS_VID_PARTITION_NOT_HIERARCHICAL_HOST ((NTSTATUS)0xC0370049L)
+
+//
+// MessageId: STATUS_VID_GPA_RANGE_INVARIANTS_MISMATCH
+//
+// MessageText:
+//
+// The GPA range invariants for the restoring GPA range do not match the GPA range invariants from the original GPA range.
+//
+#define STATUS_VID_GPA_RANGE_INVARIANTS_MISMATCH ((NTSTATUS)0xC037004AL)
+
+//
+// MessageId: STATUS_VID_KSR_PSCI_HANDLER_PROPERTY_MISMATCH
+//
+// MessageText:
+//
+// The restoring PSCI handler's properties do not match the persisted PSCI handler's properties.
+//
+#define STATUS_VID_KSR_PSCI_HANDLER_PROPERTY_MISMATCH ((NTSTATUS)0xC037004BL)
 
 
 //
@@ -27685,7 +28018,7 @@ Notes:
 
 #ifdef INLINE_NTSTATUS_FROM_WIN32
 #ifndef __midl
-__inline NTSTATUS_FROM_WIN32(long x) { return x <= 0 ? (NTSTATUS)x : (NTSTATUS) (((x) & 0x0000FFFF) | (FACILITY_NTWIN32 << 16) | ERROR_SEVERITY_ERROR);}
+__inline NTSTATUS NTSTATUS_FROM_WIN32(long x) { return x <= 0 ? (NTSTATUS)x : (NTSTATUS) (((x) & 0x0000FFFF) | (FACILITY_NTWIN32 << 16) | ERROR_SEVERITY_ERROR);}
 #else
 #define NTSTATUS_FROM_WIN32(x) __NTSTATUS_FROM_WIN32(x)
 #endif

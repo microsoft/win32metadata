@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1164,7 +1164,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkf
  *
  * Interface Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Type is for evaluation purposes and is subject to change or removal in future updates.
  *
@@ -1172,7 +1172,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkf
  *
  */
 #if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintTicket_IWorkflowPrintTicketFactory[] = L"Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory";
@@ -1201,7 +1201,7 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
@@ -1378,7 +1378,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 20.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicket ** Default Interface **
@@ -2769,7 +2769,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkf
  *
  * Interface Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Type is for evaluation purposes and is subject to change or removal in future updates.
  *
@@ -2777,7 +2777,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkf
  *
  */
 #if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_PrintTicket_IWorkflowPrintTicketFactory[] = L"Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory";
@@ -2837,7 +2837,7 @@ interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicke
 
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicketFactory_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
@@ -3047,7 +3047,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicketFactory interface starting with version 20.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.PrintTicket.IWorkflowPrintTicket ** Default Interface **

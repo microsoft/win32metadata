@@ -14,7 +14,7 @@ interface IWTSVirtualChannelManager;
 interface IWTSVirtualChannel;
 
 
-cpp_quote("#define  WTS_PROPERTY_DEFAULT_CONFIG  L\"DefaultConfig\"") 
+cpp_quote("#define  WTS_PROPERTY_DEFAULT_CONFIG  L\"DefaultConfig\"")
 
 cpp_quote("#define E_MAPPEDRENDERER_SHUTDOWN    HRESULT_FROM_WIN32(ERROR_INVALID_STATE)")
 
@@ -70,7 +70,7 @@ interface IWTSPlugin : IUnknown
         );
 
     /*
-     *  The last method called by the TS client before 
+     *  The last method called by the TS client before
      *  terminating the object
      */
     [helpstring("Terminated")]
@@ -87,7 +87,7 @@ interface IWTSPlugin : IUnknown
 //
 //  Description:
 //      With this interface the plugin can acquire configuration data for
-//  for a listener. It is returned by 
+//  for a listener. It is returned by
 //  IWTSVirtualChannelManager::CreateListener
 //
 // =========================================================================
@@ -105,7 +105,7 @@ interface IWTSListener : IUnknown
     HRESULT
     GetConfiguration(
         [out] IPropertyBag ** ppPropertyBag
-        ); 
+        );
 };
 
 //
@@ -156,7 +156,7 @@ interface IWTSListenerCallback : IUnknown
 //
 //  Description:
 //      This interface receives data and close notifications for a specific
-//      channel. Implemented by the plugin. Set in 
+//      channel. Implemented by the plugin. Set in
 //      IWTSLisneterCallback::OnNewChannelConnection() method
 //
 // =========================================================================
@@ -185,7 +185,7 @@ interface IWTSVirtualChannelCallback : IUnknown
 
     /*
      *  The channel is disconnected, all Write() calls will fail
-     *  no more incomming data is expected. 
+     *  no more incomming data is expected.
      */
     [helpstring("OnClose")]
     HRESULT
@@ -239,7 +239,7 @@ interface IWTSVirtualChannelManager : IUnknown
 //
 //  Description:
 //      This interface is used by the plugin to send data and closing specific
-//      channel. Implemented by the TS client side. 
+//      channel. Implemented by the TS client side.
 //      Supplied in IWTSLisneterCallback::OnNewChannelConnection()
 //
 // =========================================================================
@@ -280,6 +280,15 @@ interface IWTSVirtualChannel : IUnknown
 //
 cpp_quote( "EXTERN_GUID( RDCLIENT_BITMAP_RENDER_SERVICE, 0xe4cc08cb, 0x942e, 0x4b19, 0x85, 0x4, 0xbd, 0x5a, 0x89, 0xa7, 0x47, 0xf5);" )
 
+//
+// Use this service GUID to retrieve RDCLIENT_REMOTE_APP_WINDOW_INFO_SERVICE through
+// IWTSPluginServiceProvider::GetService
+cpp_quote( "EXTERN_GUID( RDCLIENT_REMOTE_APP_WINDOW_INFO_SERVICE, 0x10d23864, 0xcfa3, 0x447b, 0x89, 0x9f, 0x3f, 0xcf, 0x69, 0x80, 0x81, 0x2a);" )
+
+//
+// Use this service GUID to retrieve RDCLIENT_WINDOW_INFO_SERVICE through
+// IWTSPluginServiceProvider::GetService
+cpp_quote( "EXTERN_GUID( RDCLIENT_WINDOW_INFO_SERVICE, 0xa9a17a6b, 0xcdb3, 0x4e81, 0xb5, 0xc8, 0xbd, 0x63, 0x82, 0x2a, 0x8d, 0x6c);" )
 
 //
 // =========================================================================
@@ -314,7 +323,7 @@ interface IWTSPluginServiceProvider : IUnknown
     GetService(
         [in]    GUID      ServiceId,
         [out]   IUnknown  **ppunkObject
-        );        
+        );
 };
 
 //
@@ -326,12 +335,12 @@ interface IWTSPluginServiceProvider : IUnknown
 //
 //  Description:
 //       This interface is returned to the dynamic virtual channel plugins once
-//       a mapping has been successfully created using IWTSBitmapRenderService. 
+//       a mapping has been successfully created using IWTSBitmapRenderService.
 //       The plugin can use this interface to render the bitmaps at the location
-//       associated with the mapping. The mapping must to removed using 
+//       associated with the mapping. The mapping must to removed using
 //       IWTSBitmapRenderer::RemoveMapping once the plugin has completed
 //       rendering to it to avoid a mispainted visual element.
-//       
+//
 // =========================================================================
 //
 typedef struct __BITMAP_RENDERER_STATISTICS
@@ -383,7 +392,7 @@ interface IWTSBitmapRenderer : IUnknown
 //       can provide this callback interface to get notified of the render
 //       target size change. The image passed in IWTSBitmapRenderer::Render
 //       must conform to this size. The Remote Desktop Client doesn't perform
-//       any stretching operations on the passed in image. 
+//       any stretching operations on the passed in image.
 //
 // =========================================================================
 //
@@ -397,11 +406,11 @@ cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWTSBitmapRendererCallba
 interface IWTSBitmapRendererCallback : IUnknown
 {
 
-    [helpstring("OnTargetSizeChanged")]     
+    [helpstring("OnTargetSizeChanged")]
     HRESULT
     OnTargetSizeChanged (
         [in]    RECT    rcNewSize
-        );     
+        );
 };
 
 //
@@ -412,11 +421,11 @@ interface IWTSBitmapRendererCallback : IUnknown
 //  Implementation:     Client Side (System)
 //
 //  Description:
-//       A dynamic virtual channel can use this service to create a visual 
+//       A dynamic virtual channel can use this service to create a visual
 //       mapping on the client corresponding to a mapped window on the server
 //       (using WTSSetRenderHint). The returned IWTSBitmapRenderer can be used
 //       to pass the bitmaps to render on the target and the IWTSBitmapRendererCallback
-//       interface can be used to get notified of the changes to size of the 
+//       interface can be used to get notified of the changes to size of the
 //       render target
 //
 // =========================================================================
@@ -439,6 +448,129 @@ interface IWTSBitmapRenderService : IUnknown
         );
 };
 
+//
+// =========================================================================
+//
+//  Interface:          IWTSRemoteAppWindowInfoService
+//
+//  Implementation:     Client Side (System)
+//
+//  Description:
+//      This service provides a way for Dynamic Virtual Channel plugins 
+//      to query information about the RDP session window of a Remote App
+//
+// =========================================================================
+//
+cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWTSRemoteAppWindowInfoService = { 0x3869f11a, 0xde41, 0x427f, { 0x80, 0x28, 0x2d, 0x15, 0xd2, 0xec, 0x94, 0x98 } };")
+[
+    object,
+    uuid(3869F11A-DE41-427F-8028-2D15D2EC9498),
+    oleautomation,
+    helpstring("interface IWTSRemoteAppWindowInfoService")
+]
+interface IWTSRemoteAppWindowInfoService : IUnknown
+{
+    [helpstring("GetLocalHwnd")]
+    HRESULT GetLocalHwnd(
+        [in] unsigned int remoteWindowId,
+        [out, retval] HWND* localHwnd
+        );
+};
+
+typedef enum RdpSessionType
+{
+    Desktop = 0,
+    RemoteApp = 1,
+} RdpSessionType;
+
+typedef struct WTSWindowInfo
+{
+    HWND Hwnd;
+    int Height;
+    int Width;
+    int ViewWidth;
+    int ViewHeight;
+    int ViewOffsetX;
+    int ViewOffsetY;
+    float Scale;
+} WTSWindowInfo;
+
+//
+// =========================================================================
+//
+//  Interface:          IWTSWindowChangedCallback
+//
+//  Implementation:     Client Side (System)
+//
+//  Description:
+//      This interface provides a way for Dynamic Virtual Channel plugins 
+//      to provide a callback when the RDP session window changes.
+//
+// =========================================================================
+cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWTSWindowChangedCallback = { 0xe8a47fd3, 0x1af5, 0x4d7f, { 0x8e, 0x15, 0x51, 0x5c, 0xca, 0xe1, 0xc0, 0x0c } };")
+[
+    object,
+    uuid(E8A47FD3-1AF6-4D7F-8E15-515CCAE1C00C),
+    oleautomation,
+    helpstring("interface IWTSWindowChangedCallback")
+]
+interface IWTSWindowChangedCallback : IUnknown
+{
+    [helpstring("WindowChanged")]
+    HRESULT WindowChanged(
+        [in] const WTSWindowInfo* windowInfo
+    );
+};
+
+//
+// =========================================================================
+//
+//  Interface:          IWTSWindowInfoService
+//
+//  Implementation:     Client Side (System)
+//
+//  Description:
+//      This service provides a way for Dynamic Virtual Channel plugins 
+//      to query information about the RDP session window.
+//
+// =========================================================================
+cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWTSWindowInfoService = { 0x2a002c7b, 0x0120, 0x4d04, { 0xbf, 0xb1, 0x3c, 0x73, 0x11, 0x0c, 0x85, 0x81 } };")
+[
+    object,
+    uuid(2A002C7B-0120-4D04-BFB1-3C73110C8581),
+    oleautomation,
+    helpstring("interface IWTSWindowInfoService")
+]
+interface IWTSWindowInfoService : IUnknown
+{
+    [helpstring("GetWindowInfo")]
+    HRESULT GetWindowInfo(
+        [in] HWND remoteHwnd,
+        [out] WTSWindowInfo* windowInfo
+        );
+
+    [helpstring("GetRdpClientProcessId")]
+    HRESULT GetRdpClientProcessId(
+        [out, retval] unsigned long* processId
+        );
+
+    [helpstring("GetRdpSessionType")]
+    HRESULT GetRdpSessionType(
+        [out, retval] RdpSessionType* sessionType
+        );
+
+    [helpstring("SubscribeWindowChanged")]
+    HRESULT SubscribeWindowChanged(
+        [in] HWND remoteHwnd,
+        [in] IWTSWindowChangedCallback* windowChanged
+    );
+
+    [helpstring("UnsubscribeWindowChanged")]
+    HRESULT UnsubscribeWindowChanged(
+        [in] HWND remoteHwnd,
+        [in] IWTSWindowChangedCallback* windowChanged
+    );
+};
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

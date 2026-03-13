@@ -123,6 +123,8 @@ Revision History:
 #define FILE_DEVICE_SVM                 0x00000063
 #define FILE_DEVICE_HARDWARE_ACCELERATOR 0x00000064
 #define FILE_DEVICE_I3C                 0x00000065
+#define FILE_DEVICE_MULTITIER_MEMORY    0x00000066
+#define FILE_DEVICE_CXL_TYPE3           0x00000067
 
 //
 // Macro definition for defining IOCTL and FSCTL function control codes.  Note

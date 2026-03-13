@@ -727,21 +727,21 @@ typedef struct _MIDL_STUB_MESSAGE
 
     unsigned long                   PointerLength;
 
-    int                             fInDontFree       :1;
-    int                             fDontCallFreeInst :1;
-    int                             fUnused1          :1;
-    int                             fHasReturn        :1;
-    int                             fHasExtensions    :1;
-    int                             fHasNewCorrDesc   :1;
-    int                             fIsIn             :1;
-    int                             fIsOut            :1;
-    int                             fIsOicf           :1;
-    int                             fBufferValid      :1;
-    int                             fHasMemoryValidateCallback: 1;
-    int                             fInFree             :1;
-    int                             fNeedMCCP         :1;
-    int                             fUnused2          :3;
-    int                             fUnused3          :16;
+    unsigned int                    fInDontFree       :1;
+    unsigned int                    fDontCallFreeInst :1;
+    unsigned int                    fUnused1          :1;
+    unsigned int                    fHasReturn        :1;
+    unsigned int                    fHasExtensions    :1;
+    unsigned int                    fHasNewCorrDesc   :1;
+    unsigned int                    fIsIn             :1;
+    unsigned int                    fIsOut            :1;
+    unsigned int                    fIsOicf           :1;
+    unsigned int                    fBufferValid      :1;
+    unsigned int                    fHasMemoryValidateCallback: 1;
+    unsigned int                    fInFree             :1;
+    unsigned int                    fNeedMCCP         :1;
+    unsigned int                    fUnused2          :3;
+    unsigned int                    fUnused3          :16;
 
 
     unsigned long                   dwDestContext;

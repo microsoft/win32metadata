@@ -109,7 +109,7 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_BAD_PIECE_HASH_NO_BAN                  _HRESULT_TYPEDEF_(0x80D06806L) // Content piece hash check failed but source is not banned yet
 #define DO_E_ALREADY_HAVE_PIECE                     _HRESULT_TYPEDEF_(0x80D06807L) // The piece was rejected because it already exists in the cache
 #define DO_E_MISSING_PIECE                          _HRESULT_TYPEDEF_(0x80D06808L) // The piece requested is no longer available in the cache
-#define DO_E_METAINFO_CONTENT                       _HRESULT_TYPEDEF_(0x80D06809L) // Failed to parse JSON from input buffer
+#define DO_E_METAINFO_PARSE_JSON                    _HRESULT_TYPEDEF_(0x80D06809L) // Failed to parse JSON from input buffer
 #define DO_E_METAINFO_VERSION                       _HRESULT_TYPEDEF_(0x80D0680AL) // Invalid metainfo version
 #define DO_E_SWARM_NOT_RUNNING                      _HRESULT_TYPEDEF_(0x80D0680BL) // The swarm isn't running
 #define DO_E_UNRECOGNIZED_CONN                      _HRESULT_TYPEDEF_(0x80D0680CL) // The peer was not recognized by the connection manager
@@ -136,6 +136,8 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_METAINFO_PARSE_PIECEHASHES             _HRESULT_TYPEDEF_(0x80D06820L) // Failed to parse array of piece hashes
 #define DO_E_METAINFO_PARSE_ONE_PIECEHASH           _HRESULT_TYPEDEF_(0x80D06821L) // Failed to parse an individual piece hash digest
 #define DO_E_METAINFO_FILE_SIZE                     _HRESULT_TYPEDEF_(0x80D06822L) // Failed to get PHF file's size or size is bad
+#define DO_E_PHF_DIGESTMATCH_POTENTIAL_PROXYSERVER  _HRESULT_TYPEDEF_(0x80D06823L) // Digest mismatch because possible captive portal is blocking access to PHF download
+#define DO_E_PHF_PARSEJSON_POTENTIAL_PROXYSERVER    _HRESULT_TYPEDEF_(0x80D06824L) // Faild to parse json from input buffer because possible captive portal is blocking access to PHF download
 
 // clang-format on
 

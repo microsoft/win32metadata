@@ -1,4 +1,3 @@
-
 /*++
 
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1691,11 +1690,13 @@ typedef struct _PATHOBJ
 #define SURFOBJ_SET_HDEV(pso, hdevNew)      ((pso)->private_hdev = (hdevNew))
 #define SURFOBJ_GET_DHPDEV(pso)              ((pso)->private_dhpdev)
 #define SURFOBJ_SET_DHPDEV(pso, dhpdevNew)   ((pso)->private_dhpdev = (dhpdevNew))
+#define SURFOBJ_SET_DHPDEV_UM(pso, dhpdevNew)   (GreProbeAndCopyToAndFromUntrustedVa(&(pso)->private_dhpdev, &(dhpdevNew)))
 #else
 #define SURFOBJ_GET_HDEV(pso)               ((pso)->hdev)
 #define SURFOBJ_SET_HDEV(pso, hdevNew)      ((pso)->hdev = (hdevNew))
 #define SURFOBJ_GET_DHPDEV(pso)              ((pso)->dhpdev)
 #define SURFOBJ_SET_DHPDEV(pso, dhpdevNew)   ((pso)->dhpdev = (dhpdevNew))
+#define SURFOBJ_SET_DHPDEV_UM(pso, dhpdevNew)   (GreProbeAndCopyToAndFromUntrustedVa(&(pso)->dhpdev, &(dhpdevNew)))
 #endif
 
 typedef struct _SURFOBJ
@@ -4370,7 +4371,6 @@ BOOL APIENTRY EngEnumForms(
 
 #endif // !USERMODE_DRIVER
 
-
 #if defined(_X86_) && !defined(USERMODE_DRIVER)
 
     typedef struct _FLOATOBJ
@@ -4748,12 +4748,10 @@ PVOID APIENTRY  EngFntCacheLookUp(
     _In_    ULONG FastCheckSum, 
     _Out_   ULONG * pulSize);
 
-#ifdef USERMODE_DRIVER
 ENGAPI
 BOOL WINAPI EngFntCacheFlush(
     _In_  PVOID OffsetBuffer,
     _In_  BOOL  DiscardContent);
-#endif
 
 ENGAPI
 _Post_writable_byte_size_(ulSize)
@@ -4967,3 +4965,4 @@ typedef BOOL    (APIENTRY *PFN_DrvSurfaceComplete)(DHPDEV, HANDLE);
 #pragma endregion
 
 #endif  //  _WINDDI_
+

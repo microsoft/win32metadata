@@ -1056,6 +1056,9 @@ typedef struct _DNS_SVCB_PARAM_UNKNOWN
     BYTE pbSvcParamValue[1];
 } DNS_SVCB_PARAM_UNKNOWN;
 
+#pragma warning(push)
+#pragma warning(disable: 4201) // nonstandard extension used: nameless struct/union
+
 typedef struct _DNS_SVCB_PARAM
 {
     WORD wSvcParamKey;
@@ -1071,6 +1074,8 @@ typedef struct _DNS_SVCB_PARAM
         PVOID                    pReserved;
     };
 } DNS_SVCB_PARAM;
+
+#pragma warning(pop) // 4201 nonstandard extension used: nameless struct/union
 
 typedef struct _DNS_SVCB_DATA
 {

@@ -509,7 +509,7 @@
 //
 // MessageText:
 //
-//  Attribute is not allowed.
+//  No component found using a case-sensitive match for the given namespace.
 //
 #define WCM_S_NAMESPACENOTFOUND                 _HRESULT_TYPEDEF_(0x00221006L)
 

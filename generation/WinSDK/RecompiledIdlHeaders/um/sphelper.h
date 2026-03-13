@@ -497,7 +497,7 @@ Return Value:
 {
     DWORD AppContainer;
     HANDLE EffectiveToken;
-    DWORD Error;
+    DWORD dwError;
     DWORD ReturnLength;
     
     //
@@ -532,9 +532,9 @@ Return Value:
         // caller.
         //
 
-        Error = GetLastError();
-        if (Error != ERROR_NO_TOKEN) {
-            return Error;
+        dwError = GetLastError();
+        if (dwError != ERROR_NO_TOKEN) {
+            return dwError;
         }
 
         //
@@ -569,15 +569,15 @@ Return Value:
             *IsAppContainer = TRUE;
         }
 
-        Error = ERROR_SUCCESS;
+        dwError = ERROR_SUCCESS;
 
     } else {
-        Error = GetLastError();
+        dwError = GetLastError();
     }
 
     CloseHandle(EffectiveToken);
 
-    return Error;
+    return dwError;
 }
 
 

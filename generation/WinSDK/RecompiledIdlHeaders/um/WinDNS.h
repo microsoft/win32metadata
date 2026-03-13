@@ -1890,11 +1890,6 @@ DNS_STATUS WINAPI DnsStopMulticastQuery(
 // End of mDNS definitions
 //
 
-
-//
-// Note: Below API is not yet library linkable and hence need to be loaded using GetProcAddress.
-//
-
 #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
 BOOL
 WINAPI

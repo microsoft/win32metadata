@@ -68,15 +68,7 @@ namespace Windows
             {
                 typedef enum McpAuthorizationResponse McpAuthorizationResponse;
 
-                typedef enum McpMessageAction McpMessageAction;
-
-                typedef enum McpMessageDirection McpMessageDirection;
-
                 interface IMcpHttpConnectionResult;
-
-                interface IMcpMessageFilter;
-
-                interface IMcpMessageFilterResponse;
 
                 interface IMcpNamedPipeConnectionResult;
 
@@ -99,8 +91,6 @@ namespace Windows
                 interface IMcpStdioConnectionInfo;
 
                 runtimeclass McpHttpConnectionResult;
-
-                runtimeclass McpMessageFilterResponse;
 
                 runtimeclass McpNamedPipeConnectionResult;
 
@@ -137,22 +127,6 @@ namespace Windows
                     Approved = 1
                 };
 
-                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
-                [experimental]
-                enum McpMessageAction
-                {
-                    Allow = 0,
-                    Block = 1
-                };
-
-                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
-                [experimental]
-                enum McpMessageDirection
-                {
-                    Request  = 0,
-                    Response = 1
-                };
-
                 [contract(Windows.AI.Agents.AgentsContract, 1.0)]
                 [exclusiveto(Windows.AI.Agents.Mcp.McpHttpConnectionResult)]
                 [experimental]
@@ -162,25 +136,6 @@ namespace Windows
                     [propget] HRESULT Uri([out] [retval] Windows.Foundation.Uri** value);
                     [propput] HRESULT Uri([in] Windows.Foundation.Uri* value);
                     [propget] HRESULT Headers([out] [retval] Windows.Foundation.Collections.ValueSet** value);
-                }
-
-                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
-                [experimental]
-                [uuid(8EE681F8-F858-56F7-A0C7-45F928845F9B)]
-                interface IMcpMessageFilter : IInspectable
-                {
-                    HRESULT Initialize([in] HSTRING clientAppUserModelId, [in] HSTRING serverPackageFamilyName, [in] HSTRING serverId);
-                    HRESULT OnMessage([in] HSTRING message, [in] Windows.AI.Agents.Mcp.McpMessageDirection direction, [in] Windows.AI.Agents.Mcp.McpMessageFilterResponse* filterResponse);
-                }
-
-                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
-                [exclusiveto(Windows.AI.Agents.Mcp.McpMessageFilterResponse)]
-                [experimental]
-                [uuid(BCFC9710-E1D8-5ED4-9DAB-03269635D83B)]
-                interface IMcpMessageFilterResponse : IInspectable
-                {
-                    [propget] HRESULT MessageAction([out] [retval] Windows.AI.Agents.Mcp.McpMessageAction* value);
-                    [propput] HRESULT MessageAction([in] Windows.AI.Agents.Mcp.McpMessageAction value);
                 }
 
                 [contract(Windows.AI.Agents.AgentsContract, 1.0)]
@@ -292,14 +247,6 @@ namespace Windows
                 runtimeclass McpHttpConnectionResult
                 {
                     [default] [experimental] interface Windows.AI.Agents.Mcp.IMcpHttpConnectionResult;
-                }
-
-                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
-                [experimental]
-                [marshaling_behavior(agile)]
-                runtimeclass McpMessageFilterResponse
-                {
-                    [default] [experimental] interface Windows.AI.Agents.Mcp.IMcpMessageFilterResponse;
                 }
 
                 [contract(Windows.AI.Agents.AgentsContract, 1.0)]

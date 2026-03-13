@@ -72,10 +72,12 @@ typedef enum _WHEA_ERROR_SOURCE_STATE {
 #define WHEA_ERROR_SOURCE_DESCRIPTOR_VERSION_11          11
 
 #define WHEA_MAX_MC_BANKS                                32
+#define WHEA_MAX_MC_BANKS64                              64
 
 #define WHEA_ERROR_SOURCE_FLAG_FIRMWAREFIRST             0x00000001
 #define WHEA_ERROR_SOURCE_FLAG_GLOBAL                    0x00000002
 #define WHEA_ERROR_SOURCE_FLAG_GHES_ASSIST               0x00000004
+#define WHEA_ERROR_SOURCE_FLAG_V2_DESCRIPTOR             0x00000008
 #define WHEA_ERROR_SOURCE_FLAG_DEFAULTSOURCE             0x80000000
 
 //
@@ -394,6 +396,16 @@ typedef struct _WHEA_XPF_MCE_DESCRIPTOR {
     WHEA_XPF_MC_BANK_DESCRIPTOR Banks[WHEA_MAX_MC_BANKS];
 } WHEA_XPF_MCE_DESCRIPTOR, *PWHEA_XPF_MCE_DESCRIPTOR;
 
+typedef struct _WHEA_XPF_MCE_DESCRIPTOR_V2 {
+    USHORT Type;
+    UCHAR Enabled;
+    UCHAR NumberOfBanks;
+    XPF_MCE_FLAGS Flags;
+    ULONGLONG MCG_Capability;
+    ULONGLONG MCG_GlobalControl;
+    WHEA_XPF_MC_BANK_DESCRIPTOR Banks[WHEA_MAX_MC_BANKS64];
+} WHEA_XPF_MCE_DESCRIPTOR_V2, *PWHEA_XPF_MCE_DESCRIPTOR_V2;
+
 //
 // The following structure describes an XPF platform's corrected machine check
 // error source mechanism. The information represented in this structure tells
@@ -408,6 +420,15 @@ typedef struct _WHEA_XPF_CMC_DESCRIPTOR {
     WHEA_NOTIFICATION_DESCRIPTOR Notify;
     WHEA_XPF_MC_BANK_DESCRIPTOR Banks[WHEA_MAX_MC_BANKS];
 } WHEA_XPF_CMC_DESCRIPTOR, *PWHEA_XPF_CMC_DESCRIPTOR;
+
+typedef struct _WHEA_XPF_CMC_DESCRIPTOR_V2 {
+    USHORT Type;
+    BOOLEAN Enabled;
+    UCHAR NumberOfBanks;
+    ULONG Reserved;
+    WHEA_NOTIFICATION_DESCRIPTOR Notify;
+    WHEA_XPF_MC_BANK_DESCRIPTOR Banks[WHEA_MAX_MC_BANKS64];
+} WHEA_XPF_CMC_DESCRIPTOR_V2, *PWHEA_XPF_CMC_DESCRIPTOR_V2;
 
 typedef struct _WHEA_PCI_SLOT_NUMBER {
     union {
@@ -689,6 +710,35 @@ typedef struct _WHEA_ERROR_SOURCE_DESCRIPTOR {
 
 } WHEA_ERROR_SOURCE_DESCRIPTOR, *PWHEA_ERROR_SOURCE_DESCRIPTOR;
 
+typedef struct _WHEA_ERROR_SOURCE_DESCRIPTOR_V2 {
+    ULONG Length;                                              // +00 (0)
+    ULONG Version;                                             // +04 (4)
+    WHEA_ERROR_SOURCE_TYPE Type;                               // +08 (8)
+    WHEA_ERROR_SOURCE_STATE State;                             // +0C (12)
+    ULONG MaxRawDataLength;                                    // +10 (16)
+    ULONG NumRecordsToPreallocate;                             // +14 (20)
+    ULONG MaxSectionsPerRecord;                                // +18 (24)
+    ULONG ErrorSourceId;                                       // +1C (28)
+    ULONG PlatformErrorSourceId;                               // +20 (32)
+    ULONG Flags;                                               // +24 (36)
+
+    union {                                                    // +28 (40)
+        WHEA_XPF_MCE_DESCRIPTOR_V2 XpfMceDescriptorV2;
+        WHEA_XPF_CMC_DESCRIPTOR_V2 XpfCmcDescriptorV2;
+        WHEA_XPF_NMI_DESCRIPTOR XpfNmiDescriptor;
+        WHEA_IPF_MCA_DESCRIPTOR IpfMcaDescriptor;
+        WHEA_IPF_CMC_DESCRIPTOR IpfCmcDescriptor;
+        WHEA_IPF_CPE_DESCRIPTOR IpfCpeDescriptor;
+        WHEA_AER_ROOTPORT_DESCRIPTOR AerRootportDescriptor;
+        WHEA_AER_ENDPOINT_DESCRIPTOR AerEndpointDescriptor;
+        WHEA_AER_BRIDGE_DESCRIPTOR AerBridgeDescriptor;
+        WHEA_GENERIC_ERROR_DESCRIPTOR GenErrDescriptor;
+        WHEA_GENERIC_ERROR_DESCRIPTOR_V2 GenErrDescriptorV2;
+        WHEA_DEVICE_DRIVER_DESCRIPTOR DeviceDriverDescriptor;
+    } Info;
+
+} WHEA_ERROR_SOURCE_DESCRIPTOR_V2, *PWHEA_ERROR_SOURCE_DESCRIPTOR_V2;
+
 __inline
 BOOLEAN
 WheaIsGhesAssistSrc (
@@ -867,7 +917,8 @@ typedef union _PAGE_OFFLINE_VALID_BITS {
     struct {
         UINT8 PhysicalAddress: 1;
         UINT8 MemDefect: 1;
-        UINT8 Reserved: 6;
+        UINT8 NumberOfPages: 1;
+        UINT8 Reserved: 5;
     };
 
     UINT8 AsUINT8;
@@ -917,8 +968,18 @@ typedef struct _DIMM_INFO {
     DIMM_ADDR_VALID_BITS ValidBits;
 } DIMM_INFO, *PDIMM_INFO;
 
+typedef union _MEMORY_DEFECT_FLAGS {
+    struct {
+        UINT16 RepairedDefectEntry: 1;
+        UINT16 Reserved: 15;
+    };
+
+    UINT16 AsUINT16;
+} MEMORY_DEFECT_FLAGS, *PMEMORY_DEFECT_FLAGS;
+
 typedef struct _MEMORY_DEFECT {
-    UINT32 Version;
+    UINT16 Version;
+    MEMORY_DEFECT_FLAGS Flags;
     DIMM_INFO DimmInfo;
     PAGE_OFFLINE_ERROR_TYPES ErrType;
 } MEMORY_DEFECT, * PMEMORY_DEFECT;

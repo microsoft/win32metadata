@@ -499,6 +499,119 @@ endif ; _CAPKERN
         endm
 
 ;
+; TEST_AMD_TPR_ERRATA_ENABLED - Tests whether the AMD TPR lower interrupt errata workaround is enabled (writes condition flags).
+;
+; Arguments:
+;
+;   None.
+;
+; Return value:
+;
+;   zf is clear if the AMD TPR errata workaround is enabled; else zf is set if the workaround is disabled.
+;
+
+TEST_AMD_TPR_ERRATA_ENABLED macro
+
+        extern  KiTrapFeatures:qword    ; declare global
+
+        .errnz (KTF_AMD_TPR_ERRATA AND NOT 0FFh)
+
+        test    byte ptr KiTrapFeatures, KTF_AMD_TPR_ERRATA ; clear zf if AMD TPR errata workaround is enabled
+
+        endm
+;
+; TEST_FRED_ENABLED - Tests whether FRED is enabled (writes condition flags).
+;
+; Arguments:
+;
+;   None.
+;
+; Return value:
+;
+;   zf is clear if FRED is enabled; else zf is set if FRED is disabled.
+;
+
+TEST_FRED_ENABLED macro
+
+        extern  KiTrapFeatures:qword    ; declare global
+
+        .errnz (KTF_FRED AND NOT 0FFh)
+
+        test    byte ptr KiTrapFeatures, KTF_FRED ; clear zf if FRED is enabled
+
+        endm
+
+;
+; TEST_KVA_SHADOW_ENABLED - Tests whether KVA shadow is enabled (writes condition
+;                           flags).
+;
+; Arguments:
+;
+;   None.
+;
+; Return value:
+;
+;   zf is clear if KVA shadow is enabled; else zf is set if KVA shadow is
+;   disabled.
+;
+
+TEST_KVA_SHADOW_ENABLED macro
+
+        extern  KiTrapFeatures:qword    ; declare global
+
+        .errnz (KTF_KVA_SHADOW AND NOT 0FFh)
+
+        test    byte ptr KiTrapFeatures, KTF_KVA_SHADOW ; clear zf if KVA shadow is enabled
+
+        endm
+
+
+;
+; TEST_LKGS_SUPPORTED - Tests whether LKGS is supported (writes condition
+;                       flags).
+;
+; Arguments:
+;
+;   None.
+;
+; Return value:
+;
+;   zf is clear if LKGS is supported; else zf is set if LKGS is unavailable.
+;
+
+TEST_LKGS_SUPPORTED macro
+
+        extern  KiTrapFeatures:qword    ; declare global
+
+        .errnz (KTF_LKGS AND NOT 0FFH)
+
+        test    byte ptr KiTrapFeatures, KTF_LKGS ; clear zf if LKGS is enabled
+
+        endm
+
+;
+; TEST_SMAP_ENABLED - Tests whether SMAP is enabled (writes condition flags).
+;
+; Arguments:
+;
+;   None.
+;
+; Return value:
+;
+;   zf is clear if SMAP is enabled; else zf is set if SMAP is disabled.
+;
+
+TEST_SMAP_ENABLED macro
+
+        extern  KiTrapFeatures:qword    ; declare global
+
+        .errnz (KTF_SMAP AND NOT 0FFh)
+
+        test    byte ptr KiTrapFeatures, KTF_SMAP ; clear zf if SMAP is enabled
+
+        endm
+
+;
 ; Define macro to clear legacy floating exceptions.
 ;
 

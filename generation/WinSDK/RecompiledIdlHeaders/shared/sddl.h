@@ -208,6 +208,7 @@ extern "C" {
 #define SDDL_ENTERPRISE_KEY_ADMINS          TEXT("EK")      // Members of this group have full control over all key credential objects in the forest
 #define SDDL_USER_MODE_HARDWARE_OPERATORS   TEXT("HO")      // Members of this group may operate hardware from user mode
 #define SDDL_OPENSSH_USERS                  TEXT("SH")      // Members of this group may connect to this computer using SSH
+#define SDDL_CUA_USERS                      TEXT("CU")      // Members of this group are authorized to perform trusted AI processes within designated environments
 
 //
 // Note !! While making the above changes check if ScepReplaceNewAcronymsInSDDL

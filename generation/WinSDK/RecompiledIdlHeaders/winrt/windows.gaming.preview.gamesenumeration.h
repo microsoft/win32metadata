@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GAMING_PREVIEW_GAMESENUMERATIONCONTRACT_VERSION)
@@ -1384,8 +1384,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGaming_CPreview_CGamesEnumeration_CIGam
  * Introduced to Windows.Gaming.Preview.GamesEnumerationContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics2 interface starting with version 2.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
  *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics interface starting with version 1.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
+ *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics2 interface starting with version 2.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3676,8 +3676,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGaming_CPreview_CGamesEnumeration_CIGam
  * Introduced to Windows.Gaming.Preview.GamesEnumerationContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics2 interface starting with version 2.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
  *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics interface starting with version 1.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
+ *   Static Methods exist on the Windows.Gaming.Preview.GamesEnumeration.IGameListStatics2 interface starting with version 2.0 of the Windows.Gaming.Preview.GamesEnumerationContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

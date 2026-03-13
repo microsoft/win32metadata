@@ -5717,11 +5717,16 @@ typedef union _TWO_BYTE {
 // This macro has the effect of Bit = log2(Data)
 //
 
-#define WHICH_BIT(Data, Bit) {          \
-    ULONG idx;                          \
-    BitScanReverse(&idx, (Data));       \
-    (Bit) = (UCHAR)idx;                 \
-    }
+#define WHICH_BIT(Data, Bit) {                      \
+    UCHAR tmp;                                      \
+    for (tmp = 0; tmp < 32; tmp++) {                \
+        if (((Data) >> tmp) == 1) {                 \
+            break;                                  \
+        }                                           \
+    }                                               \
+    NT_ASSERT(tmp != 32);                           \
+    (Bit) = tmp;                                    \
+}
 
 //
 // Define alignment requirements for variable length components in extended SRB.

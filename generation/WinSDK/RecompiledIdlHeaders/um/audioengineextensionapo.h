@@ -853,7 +853,7 @@ EXTERN_C const IID IID_IAudioProcessingObjectNotifications2;
         virtual HRESULT STDMETHODCALLTYPE GetApoNotificationRegistrationInfo2( 
             APO_NOTIFICATION_TYPE maxApoNotificationTypeSupported,
             /* [annotation][out] */ 
-            _Out_writes_(count)  APO_NOTIFICATION_DESCRIPTOR **apoNotifications,
+            _Out_writes_(*count)  APO_NOTIFICATION_DESCRIPTOR **apoNotifications,
             /* [annotation][out] */ 
             _Out_  DWORD *count) = 0;
         
@@ -901,7 +901,7 @@ EXTERN_C const IID IID_IAudioProcessingObjectNotifications2;
             IAudioProcessingObjectNotifications2 * This,
             APO_NOTIFICATION_TYPE maxApoNotificationTypeSupported,
             /* [annotation][out] */ 
-            _Out_writes_(count)  APO_NOTIFICATION_DESCRIPTOR **apoNotifications,
+            _Out_writes_(*count)  APO_NOTIFICATION_DESCRIPTOR **apoNotifications,
             /* [annotation][out] */ 
             _Out_  DWORD *count);
         

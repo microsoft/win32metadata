@@ -85,6 +85,7 @@ extern "C" {
 // User should include ws2ipdef.h to use these APIs.
 //
 
+#define NETIO_PULONG PDWORD
 #define NETIO_STATUS DWORD
 #define NETIO_SUCCESS(x) ((x) == NO_ERROR)
 #define NETIOAPI_API_ WINAPI
@@ -100,6 +101,7 @@ extern "C" {
 #include <ifdef.h>
 #include <nldef.h>
 
+#define NETIO_PULONG PULONG
 #define NETIO_STATUS NTSTATUS
 #define NETIO_SUCCESS(x) NT_SUCCESS(x)
 #define NETIOAPI_API_ NTAPI
@@ -2397,6 +2399,45 @@ Return Value:
 #pragma endregion
 
 #endif //_WS2IPDEF_
+
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+struct sockaddr;
+
+IPHLPAPI_DLL_LINKAGE
+_NETIOAPI_SUCCESS_
+NETIOAPI_API
+GetBestInterfaceEx(
+    _In_  struct sockaddr *DestinationAddress,
+    _Out_ NETIO_PULONG     BestIfIndex
+    );
+/*++
+
+Routine Description:
+
+    Retrieves the index of the interface that has the best route to the
+    specified IP address.
+
+Arguments:
+
+    DestinationAddress - Destination IP address for which to retrieve
+        the interface that has the best route.
+
+    BestIfIndex - Pointer to a ULONG variable that receives the index of
+        the interface that has the best route to the address specified
+        by DestinationAddress.
+
+Return Value:
+
+    User-Mode: NO_ERROR on success, error code on failure.
+
+    Kernel-Mode: STATUS_SUCCESS on success, error code on failure.
+
+--*/
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
 
 #pragma region Desktop Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)

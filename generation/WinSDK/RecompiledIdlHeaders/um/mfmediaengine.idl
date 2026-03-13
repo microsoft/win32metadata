@@ -299,17 +299,6 @@ typedef enum MF_MEDIA_ENGINE_PRELOAD
 } MF_MEDIA_ENGINE_PRELOAD;
 
 
-cpp_quote("#ifndef _MFVideoNormalizedRect_")
-cpp_quote("#define _MFVideoNormalizedRect_")
-typedef struct MFVideoNormalizedRect
-{
-    float left;
-    float top;
-    float right;
-    float bottom;
-} MFVideoNormalizedRect;
-cpp_quote("#endif")
-
 //+-----------------------------------------------------------------------------
 //
 //  Interface:  IMFMediaEngine

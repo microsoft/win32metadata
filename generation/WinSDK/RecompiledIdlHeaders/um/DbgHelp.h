@@ -1582,25 +1582,26 @@ typedef struct _SOURCEFILEW {
 // data structures used for registered symbol callbacks
 //
 
-#define CBA_DEFERRED_SYMBOL_LOAD_START          0x00000001
-#define CBA_DEFERRED_SYMBOL_LOAD_COMPLETE       0x00000002
-#define CBA_DEFERRED_SYMBOL_LOAD_FAILURE        0x00000003
-#define CBA_SYMBOLS_UNLOADED                    0x00000004
-#define CBA_DUPLICATE_SYMBOL                    0x00000005
-#define CBA_READ_MEMORY                         0x00000006
-#define CBA_DEFERRED_SYMBOL_LOAD_CANCEL         0x00000007
-#define CBA_SET_OPTIONS                         0x00000008
-#define CBA_EVENT                               0x00000010
-#define CBA_DEFERRED_SYMBOL_LOAD_PARTIAL        0x00000020
-#define CBA_DEBUG_INFO                          0x10000000
-#define CBA_SRCSRV_INFO                         0x20000000
-#define CBA_SRCSRV_EVENT                        0x40000000
-#define CBA_UPDATE_STATUS_BAR                   0x50000000
-#define CBA_ENGINE_PRESENT                      0x60000000
-#define CBA_CHECK_ENGOPT_DISALLOW_NETWORK_PATHS 0x70000000
-#define CBA_CHECK_ARM_MACHINE_THUMB_TYPE_OVERRIDE 0x80000000
-#define CBA_XML_LOG                             0x90000000
-#define CBA_MAP_JIT_SYMBOL                      0xA0000000
+#define CBA_DEFERRED_SYMBOL_LOAD_START             0x00000001
+#define CBA_DEFERRED_SYMBOL_LOAD_COMPLETE          0x00000002
+#define CBA_DEFERRED_SYMBOL_LOAD_FAILURE           0x00000003
+#define CBA_SYMBOLS_UNLOADED                       0x00000004
+#define CBA_DUPLICATE_SYMBOL                       0x00000005
+#define CBA_READ_MEMORY                            0x00000006
+#define CBA_DEFERRED_SYMBOL_LOAD_CANCEL            0x00000007
+#define CBA_SET_OPTIONS                            0x00000008
+#define CBA_EVENT                                  0x00000010
+#define CBA_DEFERRED_SYMBOL_LOAD_PARTIAL           0x00000020
+#define CBA_QUERY_IF_SYMBOL_DOWNLOAD_DISALLOWED    0x00000040
+#define CBA_DEBUG_INFO                             0x10000000
+#define CBA_SRCSRV_INFO                            0x20000000
+#define CBA_SRCSRV_EVENT                           0x40000000
+#define CBA_UPDATE_STATUS_BAR                      0x50000000
+#define CBA_ENGINE_PRESENT                         0x60000000
+#define CBA_CHECK_ENGOPT_DISALLOW_NETWORK_PATHS    0x70000000
+#define CBA_CHECK_ARM_MACHINE_THUMB_TYPE_OVERRIDE  0x80000000
+#define CBA_XML_LOG                                0x90000000
+#define CBA_MAP_JIT_SYMBOL                         0xA0000000
 
 
 typedef struct _IMAGEHLP_CBA_READ_MEMORY {
@@ -1826,7 +1827,8 @@ typedef enum {
     SYMOPT_EX_DISABLEACCESSTIMEUPDATE, // Disable File Last Access Time on Symbols
     SYMOPT_EX_LASTVALIDDEBUGDIRECTORY, // For entries with multiple debug directories: prefer the last to the first
     SYMOPT_EX_NOIMPLICITPATTERNSEARCH, // For SymEnum* APIs: never implicitly run a pattern search without explicit pattern characters
-    SYMOPT_EX_NEVERLOADSYMBOLS,        // Never try to load and parse symbols 
+    SYMOPT_EX_NEVERLOADSYMBOLS,        // Never try to load and parse symbols
+    SYMOPT_EX_DISALLOW_NETWORK_PATHS,  // Don't allow network paths
     SYMOPT_EX_MAX                      // Unused
 } IMAGEHLP_EXTENDED_OPTIONS;
 
@@ -3870,10 +3872,14 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
 #define SSRVURI_HTTP_NORMAL         0x01
 #define SSRVURI_HTTP_COMPRESSED     0x02
 #define SSRVURI_HTTP_FILEPTR        0x04
+// HTTP requests include MSFZ0 header.
+#define SSRVURI_HTTP_MSFZ0          0x08
 
 #define SSRVURI_UNC_NORMAL          0x10
 #define SSRVURI_UNC_COMPRESSED      0x20
 #define SSRVURI_UNC_FILEPTR         0x40
+// MSFZ0 files are nested in a "msfz0" folder.
+#define SSRVURI_UNC_MSFZ0           0x80
 
 #define SSRVURI_HTTP_MASK           0x0F
 #define SSRVURI_UNC_MASK            0xF0
@@ -3884,14 +3890,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
 #define SSRVURI_COMPRESSED          SSRVURI_HTTP_COMPRESSED
 #define SSRVURI_FILEPTR             SSRVURI_HTTP_FILEPTR
 
-#define SSRVACTION_TRACE            1
-#define SSRVACTION_QUERYCANCEL      2
-#define SSRVACTION_EVENT            3
-#define SSRVACTION_EVENTW           4
-#define SSRVACTION_SIZE             5
-#define SSRVACTION_HTTPSTATUS       6
-#define SSRVACTION_XMLOUTPUT        7
-#define SSRVACTION_CHECKSUMSTATUS   8
+#define SSRVACTION_TRACE                          1
+#define SSRVACTION_QUERYCANCEL                    2
+#define SSRVACTION_EVENT                          3
+#define SSRVACTION_EVENTW                         4
+#define SSRVACTION_SIZE                           5
+#define SSRVACTION_HTTPSTATUS                     6
+#define SSRVACTION_XMLOUTPUT                      7
+#define SSRVACTION_CHECKSUMSTATUS                 8
+#define SSRVACTION_QUERY_IF_DOWNLOAD_DISALLOWED   9
 
 #endif // WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
 #pragma endregion
@@ -4302,6 +4309,7 @@ RangeMapFree(
 #define IMAGEHLP_RMAP_BIG_ENDIAN                    0x00000002
 #define IMAGEHLP_RMAP_IGNORE_MISCOMPARE             0x00000004
 
+#define IMAGEHLP_RMAP_NOBASERELOCATIONS             0x08000000
 #define IMAGEHLP_RMAP_FIXUP_ARM64X                  0x10000000
 #define IMAGEHLP_RMAP_LOAD_RW_DATA_SECTIONS         0x20000000
 #define IMAGEHLP_RMAP_OMIT_SHARED_RW_DATA_SECTIONS  0x40000000

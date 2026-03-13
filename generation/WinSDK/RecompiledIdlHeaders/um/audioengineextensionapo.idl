@@ -403,7 +403,7 @@ interface IAudioProcessingObjectNotifications2 : IAudioProcessingObjectNotificat
 {
     HRESULT GetApoNotificationRegistrationInfo2(
         APO_NOTIFICATION_TYPE maxApoNotificationTypeSupported,
-        [out, annotation("_Out_writes_(count)")] APO_NOTIFICATION_DESCRIPTOR** apoNotifications,
+        [out, annotation("_Out_writes_(*count)")] APO_NOTIFICATION_DESCRIPTOR** apoNotifications,
         [out, annotation("_Out_")] DWORD* count);
 };
 

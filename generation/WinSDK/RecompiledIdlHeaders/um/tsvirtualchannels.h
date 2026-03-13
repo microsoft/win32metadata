@@ -117,6 +117,27 @@ typedef interface IWTSBitmapRenderService IWTSBitmapRenderService;
 #endif 	/* __IWTSBitmapRenderService_FWD_DEFINED__ */
 
 
+#ifndef __IWTSRemoteAppWindowInfoService_FWD_DEFINED__
+#define __IWTSRemoteAppWindowInfoService_FWD_DEFINED__
+typedef interface IWTSRemoteAppWindowInfoService IWTSRemoteAppWindowInfoService;
+
+#endif 	/* __IWTSRemoteAppWindowInfoService_FWD_DEFINED__ */
+
+
+#ifndef __IWTSWindowChangedCallback_FWD_DEFINED__
+#define __IWTSWindowChangedCallback_FWD_DEFINED__
+typedef interface IWTSWindowChangedCallback IWTSWindowChangedCallback;
+
+#endif 	/* __IWTSWindowChangedCallback_FWD_DEFINED__ */
+
+
+#ifndef __IWTSWindowInfoService_FWD_DEFINED__
+#define __IWTSWindowInfoService_FWD_DEFINED__
+typedef interface IWTSWindowInfoService IWTSWindowInfoService;
+
+#endif 	/* __IWTSWindowInfoService_FWD_DEFINED__ */
+
+
 /* header files for imported files */
 #include "unknwn.h"
 #include "oaidl.h"
@@ -800,6 +821,8 @@ EXTERN_C const IID IID_IWTSVirtualChannel;
 /* [local] */ 
 
 EXTERN_GUID( RDCLIENT_BITMAP_RENDER_SERVICE, 0xe4cc08cb, 0x942e, 0x4b19, 0x85, 0x4, 0xbd, 0x5a, 0x89, 0xa7, 0x47, 0xf5);
+EXTERN_GUID( RDCLIENT_REMOTE_APP_WINDOW_INFO_SERVICE, 0x10d23864, 0xcfa3, 0x447b, 0x89, 0x9f, 0x3f, 0xcf, 0x69, 0x80, 0x81, 0x2a);
+EXTERN_GUID( RDCLIENT_WINDOW_INFO_SERVICE, 0xa9a17a6b, 0xcdb3, 0x4e81, 0xb5, 0xc8, 0xbd, 0x63, 0x82, 0x2a, 0x8d, 0x6c);
 EXTERN_C __declspec(selectany) const IID IID_IWTSPluginServiceProvider = { 0xd3e07363, 0x87c, 0x476c, { 0x86, 0xa7, 0xdb, 0xb1, 0x5f, 0x46, 0xdd, 0xb4 } };
 
 
@@ -1246,12 +1269,387 @@ EXTERN_C const IID IID_IWTSBitmapRenderService;
 /* interface __MIDL_itf_tsvirtualchannels_0000_0010 */
 /* [local] */ 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-#pragma endregion
+EXTERN_C __declspec(selectany) const IID IID_IWTSRemoteAppWindowInfoService = { 0x3869f11a, 0xde41, 0x427f, { 0x80, 0x28, 0x2d, 0x15, 0xd2, 0xec, 0x94, 0x98 } };
 
 
 extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0010_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0010_v0_0_s_ifspec;
+
+#ifndef __IWTSRemoteAppWindowInfoService_INTERFACE_DEFINED__
+#define __IWTSRemoteAppWindowInfoService_INTERFACE_DEFINED__
+
+/* interface IWTSRemoteAppWindowInfoService */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWTSRemoteAppWindowInfoService;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3869F11A-DE41-427F-8028-2D15D2EC9498")
+    IWTSRemoteAppWindowInfoService : public IUnknown
+    {
+    public:
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLocalHwnd( 
+            /* [annotation][in] */ 
+            _In_  unsigned int remoteWindowId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *localHwnd) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWTSRemoteAppWindowInfoServiceVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IWTSRemoteAppWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IWTSRemoteAppWindowInfoService * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IWTSRemoteAppWindowInfoService * This);
+        
+        DECLSPEC_XFGVIRT(IWTSRemoteAppWindowInfoService, GetLocalHwnd)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLocalHwnd )( 
+            __RPC__in IWTSRemoteAppWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  unsigned int remoteWindowId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *localHwnd);
+        
+        END_INTERFACE
+    } IWTSRemoteAppWindowInfoServiceVtbl;
+
+    interface IWTSRemoteAppWindowInfoService
+    {
+        CONST_VTBL struct IWTSRemoteAppWindowInfoServiceVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWTSRemoteAppWindowInfoService_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWTSRemoteAppWindowInfoService_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWTSRemoteAppWindowInfoService_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWTSRemoteAppWindowInfoService_GetLocalHwnd(This,remoteWindowId,localHwnd)	\
+    ( (This)->lpVtbl -> GetLocalHwnd(This,remoteWindowId,localHwnd) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWTSRemoteAppWindowInfoService_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_tsvirtualchannels_0000_0011 */
+/* [local] */ 
+
+typedef 
+enum RdpSessionType
+    {
+        Desktop	= 0,
+        RemoteApp	= 1
+    } 	RdpSessionType;
+
+typedef struct WTSWindowInfo
+    {
+    HWND Hwnd;
+    int Height;
+    int Width;
+    int ViewWidth;
+    int ViewHeight;
+    int ViewOffsetX;
+    int ViewOffsetY;
+    float Scale;
+    } 	WTSWindowInfo;
+
+EXTERN_C __declspec(selectany) const IID IID_IWTSWindowChangedCallback = { 0xe8a47fd3, 0x1af5, 0x4d7f, { 0x8e, 0x15, 0x51, 0x5c, 0xca, 0xe1, 0xc0, 0x0c } };
+
+
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0011_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0011_v0_0_s_ifspec;
+
+#ifndef __IWTSWindowChangedCallback_INTERFACE_DEFINED__
+#define __IWTSWindowChangedCallback_INTERFACE_DEFINED__
+
+/* interface IWTSWindowChangedCallback */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWTSWindowChangedCallback;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("E8A47FD3-1AF6-4D7F-8E15-515CCAE1C00C")
+    IWTSWindowChangedCallback : public IUnknown
+    {
+    public:
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WindowChanged( 
+            /* [annotation][in] */ 
+            _In_  const WTSWindowInfo *windowInfo) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWTSWindowChangedCallbackVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IWTSWindowChangedCallback * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IWTSWindowChangedCallback * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IWTSWindowChangedCallback * This);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowChangedCallback, WindowChanged)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WindowChanged )( 
+            __RPC__in IWTSWindowChangedCallback * This,
+            /* [annotation][in] */ 
+            _In_  const WTSWindowInfo *windowInfo);
+        
+        END_INTERFACE
+    } IWTSWindowChangedCallbackVtbl;
+
+    interface IWTSWindowChangedCallback
+    {
+        CONST_VTBL struct IWTSWindowChangedCallbackVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWTSWindowChangedCallback_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWTSWindowChangedCallback_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWTSWindowChangedCallback_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWTSWindowChangedCallback_WindowChanged(This,windowInfo)	\
+    ( (This)->lpVtbl -> WindowChanged(This,windowInfo) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWTSWindowChangedCallback_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_tsvirtualchannels_0000_0012 */
+/* [local] */ 
+
+EXTERN_C __declspec(selectany) const IID IID_IWTSWindowInfoService = { 0x2a002c7b, 0x0120, 0x4d04, { 0xbf, 0xb1, 0x3c, 0x73, 0x11, 0x0c, 0x85, 0x81 } };
+
+
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0012_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0012_v0_0_s_ifspec;
+
+#ifndef __IWTSWindowInfoService_INTERFACE_DEFINED__
+#define __IWTSWindowInfoService_INTERFACE_DEFINED__
+
+/* interface IWTSWindowInfoService */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWTSWindowInfoService;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2A002C7B-0120-4D04-BFB1-3C73110C8581")
+    IWTSWindowInfoService : public IUnknown
+    {
+    public:
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetWindowInfo( 
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][out] */ 
+            _Out_  WTSWindowInfo *windowInfo) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRdpClientProcessId( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *processId) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRdpSessionType( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RdpSessionType *sessionType) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SubscribeWindowChanged( 
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][in] */ 
+            _In_  IWTSWindowChangedCallback *windowChanged) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UnsubscribeWindowChanged( 
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][in] */ 
+            _In_  IWTSWindowChangedCallback *windowChanged) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWTSWindowInfoServiceVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IWTSWindowInfoService * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IWTSWindowInfoService * This);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowInfoService, GetWindowInfo)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWindowInfo )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][out] */ 
+            _Out_  WTSWindowInfo *windowInfo);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowInfoService, GetRdpClientProcessId)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRdpClientProcessId )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *processId);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowInfoService, GetRdpSessionType)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRdpSessionType )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RdpSessionType *sessionType);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowInfoService, SubscribeWindowChanged)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SubscribeWindowChanged )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][in] */ 
+            _In_  IWTSWindowChangedCallback *windowChanged);
+        
+        DECLSPEC_XFGVIRT(IWTSWindowInfoService, UnsubscribeWindowChanged)
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnsubscribeWindowChanged )( 
+            __RPC__in IWTSWindowInfoService * This,
+            /* [annotation][in] */ 
+            _In_  HWND remoteHwnd,
+            /* [annotation][in] */ 
+            _In_  IWTSWindowChangedCallback *windowChanged);
+        
+        END_INTERFACE
+    } IWTSWindowInfoServiceVtbl;
+
+    interface IWTSWindowInfoService
+    {
+        CONST_VTBL struct IWTSWindowInfoServiceVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWTSWindowInfoService_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWTSWindowInfoService_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWTSWindowInfoService_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWTSWindowInfoService_GetWindowInfo(This,remoteHwnd,windowInfo)	\
+    ( (This)->lpVtbl -> GetWindowInfo(This,remoteHwnd,windowInfo) ) 
+
+#define IWTSWindowInfoService_GetRdpClientProcessId(This,processId)	\
+    ( (This)->lpVtbl -> GetRdpClientProcessId(This,processId) ) 
+
+#define IWTSWindowInfoService_GetRdpSessionType(This,sessionType)	\
+    ( (This)->lpVtbl -> GetRdpSessionType(This,sessionType) ) 
+
+#define IWTSWindowInfoService_SubscribeWindowChanged(This,remoteHwnd,windowChanged)	\
+    ( (This)->lpVtbl -> SubscribeWindowChanged(This,remoteHwnd,windowChanged) ) 
+
+#define IWTSWindowInfoService_UnsubscribeWindowChanged(This,remoteHwnd,windowChanged)	\
+    ( (This)->lpVtbl -> UnsubscribeWindowChanged(This,remoteHwnd,windowChanged) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWTSWindowInfoService_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_tsvirtualchannels_0000_0013 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_tsvirtualchannels_0000_0013_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
@@ -1260,10 +1658,20 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
 unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
 void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
 
+unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+void                      __RPC_USER  HWND_UserFree(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+
 unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
 unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
 unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
 void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
 
 /* end of Additional Prototypes */
 

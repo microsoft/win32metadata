@@ -378,9 +378,13 @@ typedef struct _SERVER_ALIAS_INFO_0 {
 #define SHI1005_FLAGS_COMPRESS_DATA                             0x100000          // Request compression
 #define SHI1005_FLAGS_ISOLATED_TRANSPORT                        0x200000          // Request asymmetric connections for this share
 #define SHI1005_FLAGS_DISABLE_DIRECTORY_HANDLE_LEASING          0x400000          // Used to disable handle caching for directories
+#define SHI1005_FLAGS_DISABLE_CLIENT_METADATA_CACHING           0x800000          // Used to disable metadata caching on client side
 
 //
 // The subset of 1005 infolevel flags that can be set via the API
+// Note: when adding new flag, you also need to add it to
+// SMB2_SHAREFLAG_VALID_SET (%SDXROOT%\onecore\base\fs\remotefs\smb\inc\smb2.h)
+// to make sure the flag values match.
 //
 
 #define SHI1005_VALID_FLAGS_SET    (CSC_MASK|                                           \
@@ -398,7 +402,8 @@ typedef struct _SERVER_ALIAS_INFO_0 {
                                     SHI1005_FLAGS_RESERVED |                            \
                                     SHI1005_FLAGS_COMPRESS_DATA |                       \
                                     SHI1005_FLAGS_ISOLATED_TRANSPORT |                  \
-                                    SHI1005_FLAGS_DISABLE_DIRECTORY_HANDLE_LEASING)
+                                    SHI1005_FLAGS_DISABLE_DIRECTORY_HANDLE_LEASING |    \
+                                    SHI1005_FLAGS_DISABLE_CLIENT_METADATA_CACHING)
 
 #endif // _LMSHARE_
 

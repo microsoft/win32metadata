@@ -342,6 +342,7 @@
 #define FAST_FAIL_SET_CONTEXT_DENIED 0x30
 #define FAST_FAIL_ENCLAVE_CALL_FAILURE 0x35
 #define FAST_FAIL_FLAGS_CORRUPTION 0x3b
+#define FAST_FAIL_INVALID_ARG 0x5
 
 //
 // APC Object Structure Offset Definitions
@@ -463,7 +464,7 @@
 #define PrInstrumentationCallback 0x160
 #define PrMitigationFlags2 0x814
 #define KernelProcessObjectLength 0x1b8
-#define ExecutiveProcessObjectLength 0x900
+#define ExecutiveProcessObjectLength 0x980
 #define Win32BatchFlushCallout 0x7
 
 //
@@ -524,6 +525,8 @@
 #define ThStateSaveArea 0x478
 #define ThStateSaveAreaSveVectorOffset 0x428
 #define ThStateSaveAreaSvePredicateOffset 0x42c
+#define ThStateSaveAreaSmeZaOffset 0x458
+#define ThSmeSvcr 0x450
 #define ThVfpState 0x230
 #define ThInitialStack 0x28
 #define ThStackLimit 0x30
@@ -535,8 +538,8 @@
 #define ThAdjustReason 0x256
 #define ThAdjustIncrement 0x257
 #define ThWaitReason 0x2a3
-#define ThRunning 0x69
-#define ThAlerted 0x6a
+#define ThRunning 0x6a
+#define ThAlerted 0x69
 #define ThWaitTime 0x1ac
 #define ThCombinedApcDisable 0x1dc
 #define ThKernelApcDisable 0x1dc
@@ -682,6 +685,7 @@
 #define Cv2ciContextAmd64 0x18
 #define Cv2ciSuspendDoorbell 0x20
 #define Cv2ciLoadingModuleModflag 0x28
+#define Cv2ciLoadingModuleModflag2 0x850
 
 //
 // Thread Environment Block Structure Offset Definitions
@@ -729,8 +733,8 @@
 #define TeChpeV2CpuAreaInfo 0x1788
 #define TeFlsData 0x17c8
 #define TeCurrentIdealProcessor 0x1744
-#define TePrimaryGroupAffinity 0x1860
-#define ThreadEnvironmentBlockLength 0x1878
+#define TePrimaryGroupAffinity 0x1858
+#define ThreadEnvironmentBlockLength 0x1870
 #define CmThreadEnvironmentBlockOffset 0x2000
 #define TLS_MINIMUM_AVAILABLE 0x40
 #define TLS_EXPANSION_SLOTS 0x400
@@ -817,6 +821,9 @@
 #define GaGroup 0x8
 #define GaMask 0x0
 #define KgsProcessorNumberToIndexMappingTable 0x8
+#define RTL_KERNELSCP_STUBS_UNWIND_INFO_MAX_SIZE 0x1f4
+#define RTL_KERNELSCP_NUMBER_OF_RESERVE_PAGES 0x2
+#define RTL_KERNELSCP_SIZE 0x2000
 #define PERF_SYSCALL_FLAG_BIT 0x6
 
 //
@@ -896,9 +903,8 @@
 #define PcFeatureBits 0x1294
 #define PcVirtualApicAssist 0x23a8
 #define PcTrappedSecurityDomain 0x15f8
-#define PcEmulatedFaultSyndrome 0x12b0
-#define PcEmulatedAccess 0x12ac
-#define RTL_KERNELSCP_STUBS_UNWIND_INFO_MAX_SIZE 0x1f4
+#define PcEmulatedFaultSyndrome 0x12bc
+#define PcEmulatedAccess 0x12b8
 #define TlThread 0x0
 #define TlCpuNumber 0x8
 #define TlTrapType 0x9
@@ -923,6 +929,8 @@
 #define TRAP_TYPE_PREFETCH_ABORT 0x5
 #define TRAP_TYPE_RESET 0x6
 #define TRAP_TYPE_FIQ 0x7
+#define KTF_SME_BIT 0x0
+#define KTF_SME_FA64_BIT 0x1
 #define PcInterruptCount 0x1900
 #define PcDebuggerSavedIRQL 0x1919
 #define PcDeferredReadyListHead 0x1408
@@ -933,7 +941,7 @@
 #define PcSkipTick 0x1918
 #define PcStartCycles 0x1948
 #define PcSpBase 0x1500
-#define ProcessorControlRegisterLength 0x2a840
+#define ProcessorControlRegisterLength 0x2a9c0
 
 //
 // Defines for user shared data
@@ -968,7 +976,7 @@
 #define PbNumber 0x24
 #define PbPrcbLock 0x28
 #define PbKeSpinLockOrdering 0xc74
-#define KI_SPINLOCK_ORDER_PRCB_LOCK 0x200
+#define KI_SPINLOCK_ORDER_PRCB_LOCK 0x400
 #define PbProcessorState 0x40
 #define PbHalReserved 0x710
 #define PbMinorVersion 0x760
@@ -979,12 +987,10 @@
 #define PbPriorityState 0x30
 #define PbLockQueue 0x800
 #define PbPPLookasideList 0x980
-#define PbPPNPagedLookasideList 0x6a00
-#define PbPPPagedLookasideList 0x7600
 #define PbPacketBarrier 0xa80
 #define PbDeferredReadyListHead 0xa88
 #define PbLookasideIrpFloat 0xad8
-#define PbRequestMailbox 0x9e80
+#define PbRequestMailbox 0xa000
 #define PbMailbox 0xb00
 #define PbDpcGate 0xc00
 #define PbWaitListHead 0xc80
@@ -1031,7 +1037,7 @@
 #define PbCopyReadNoWait 0xacc
 #define PbCopyReadWait 0xad0
 #define PbCopyReadNoWaitMiss 0xad4
-#define PbAlignmentFixupCount 0x1678
+#define PbAlignmentFixupCount 0x16c0
 #define PbExceptionDispatchCount 0xfb4
 #define PbProcessorVendorString 0x910
 #define PbFeatureBits 0x914
@@ -1206,6 +1212,7 @@
 
 #define ARM64_CurrentEL 0x4212
 #define ARM64_DAIF 0x5a11
+#define ARM64_SVCR 0x5a12
 #define ARM64_DIT 0x5a15
 #define ARM64_DLR 0x5a29
 #define ARM64_DSPSR 0x5a28
@@ -1924,6 +1931,13 @@
 #define ARM64_CNTK_CTL_EL0PTEN 0x0000000000000200
 
 //
+// Constants for flags for ARM64_SVCR
+//
+
+#define ARM64_SVCR_SM 0x0000000000000001
+#define ARM64_SVCR_ZA 0x0000000000000002
+
+//
 // Constants for flags in system control register.
 //
 
@@ -1983,7 +1997,7 @@
 #define ARM64_SCTLR_EPAN 0x0200000000000000
 #define ARM64_SCTLR_RES0_58 0x0400000000000000
 #define ARM64_SCTLR_RES0_59 0x0800000000000000
-#define ARM64_SCTLR_RES0_60 0x1000000000000000
+#define ARM64_SCTLR_EnTP2 0x1000000000000000
 #define ARM64_SCTLR_RES0_61 0x2000000000000000
 #define ARM64_SCTLR_RES0_62 0x4000000000000000
 #define ARM64_SCTLR_RES0_63 0x8000000000000000
@@ -2060,6 +2074,7 @@
 #define ARM64_HCR_EL2_RW 0x0000000080000000
 #define ARM64_HCR_EL2_CD 0x0000000100000000
 #define ARM64_HCR_EL2_ID 0x0000000200000000
+#define ARM64_HCR_EL2_ATA 0x0100000000000000
 
 //
 // Constants for flags in translation control register.
@@ -2356,9 +2371,10 @@
 #define SfX0 0x0
 #define SfX1 0x8
 #define SfX2 0x10
-#define SfReturn 0x18
+#define SfFp 0x20
+#define SfReturn 0x28
 
-#define KSTART_FRAME_LENGTH 0x20
+#define KSTART_FRAME_LENGTH 0x30
 
 
 //
@@ -2408,6 +2424,16 @@
 #define CalloutFrameLength 0x30
 
 //
+// Usermode Callout State Definitions
+//
+
+#define CsNonvolatileState 0x30
+#define CsCallerStack 0x18
+#define CsStatus 0x20
+#define CsNvVfpD8 0x90
+#define CalloutStateLength 0xd0
+
+//
 // Machine Frame Offset Definitions
 //
 
@@ -2436,6 +2462,8 @@
 #define CxContextFlags 0x0
 #define CxCpsr 0x4
 #define CxX 0x8
+#define CxX9 0x50
+#define CxX15 0x80
 #define CxFp 0xf0
 #define CxLr 0xf8
 #define CxSp 0x100
@@ -2447,9 +2475,19 @@
 #define CxBcr 0x318
 #define CxWvr 0x380
 #define CxWcr 0x378
+
 #define CONTEXT_FRAME_LENGTH 0x390
 #define CONTEXT_EX_LENGTH 0x20
 #define CONTEXT_ALIGN 0x10
+
+#define CxStkWlkPc 0x0
+#define CxStkWlkSp 0x8
+#define CxStkWlkFp 0x10
+#define CxStkWlkLr 0x18
+#define CxStkWlkX22 0x20
+#define CxStkWlkX28 0x28
+#define CxStkWlkX9 0x30
+
 #define DEBUG_ACTIVE_DBG 0x1
 #define DEBUG_ACTIVE_DBG_BIT 0x0
 #define DEBUG_ACTIVE_DBG_INSTRUMENTED 0x3
@@ -2531,6 +2569,7 @@
 #define EcAMD64_LastExceptionToRip 0x4c0
 #define EcAMD64_LastExceptionFromRip 0x4c8
 #define ARM64EC_CONTEXT_LENGTH 0x4d0
+#define AMD64_CONTEXT_XSTATE 0x100040
 
 //
 // Dispatcher Context Structure Offset Definitions
@@ -2558,6 +2597,7 @@
 #define ARM64_ID_AA64MMFR0_EL1 0x4038
 #define ARM64_ID_AA64PFR0_EL1 0x4020
 #define PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE 0x22
+#define PF_ARM_LSE2_AVAILABLE 0x3e
 
 //
 // Processor State Frame Offset Definitions

@@ -121,6 +121,11 @@ extern "C" {
 #define IOCTL_SCSI_MINIPORT_FIRMWARE          ((FILE_DEVICE_SCSI << 16) + 0x0780)
 
 //
+// Boot partition upgrade support
+//
+#define IOCTL_SCSI_MINIPORT_BOOT_PARTITION    ((FILE_DEVICE_SCSI << 16) + 0x0790)
+
+//
 // Diagnostic support
 //
 #define IOCTL_SCSI_MINIPORT_DIAGNOSTIC        ((FILE_DEVICE_SCSI << 16) + 0x0900)
@@ -576,6 +581,7 @@ typedef struct _SCSI_INQUIRY_DATA {
 #define IOCTL_MINIPORT_SIGNATURE_SET_TEMPERATURE_THRESHOLD  "SETTEMPT"
 #define IOCTL_MINIPORT_SIGNATURE_QUERY_PHYSICAL_TOPOLOGY    "TOPOLOGY"
 #define IOCTL_MINIPORT_SIGNATURE_ENDURANCE_INFO     "ENDURINF"
+#define IOCTL_MINIPORT_SIGNATURE_BOOT_PARTITION     "BOOTPINF"
 
 
 typedef struct _SRB_IO_CONTROL {
@@ -1300,6 +1306,90 @@ typedef struct _STORAGE_FIRMWARE_ACTIVATE {
 
 } STORAGE_FIRMWARE_ACTIVATE, *PSTORAGE_FIRMWARE_ACTIVATE;
 
+//
+// BOOT_PARTITION IOCTL status
+//
+#define BOOT_PARTITION_STATUS_SUCCESS                             0x0
+#define BOOT_PARTITION_STATUS_ERROR                               0x1
+#define BOOT_PARTITION_STATUS_ILLEGAL_REQUEST                     0x2
+#define BOOT_PARTITION_STATUS_INVALID_PARAMETER                   0x3
+#define BOOT_PARTITION_STATUS_INPUT_BUFFER_TOO_BIG                0x4
+#define BOOT_PARTITION_STATUS_OUTPUT_BUFFER_TOO_SMALL             0x5
+#define BOOT_PARTITION_STATUS_INVALID_SLOT                        0x6
+#define BOOT_PARTITION_STATUS_INVALID_IMAGE                       0x7
+#define BOOT_PARTITION_STATUS_INVALID_ALIGNMENT                   0x8
+
+//
+// Data structure and definitions related to IOCTL_SCSI_MINIPORT_BOOT_PARTITION
+//
+#define BOOT_PARTITION_FUNCTION_DOWNLOAD                          0x01
+#define BOOT_PARTITION_FUNCTION_ACTIVATE                          0x02
+#define BOOT_PARTITION_FUNCTION_GET_INFO                          0x03
+
+//
+// Parameter for BOOT_PARTITION_FUNCTION_GET_INFO
+// Input buffer should contain SRB_IO_CONTROL and BOOT_PARTITION_REQUEST_BLOCK data structures.
+// Field "DataBufferOffset" of BOOT_PARTITION_REQUEST_BLOCK points to input data buffer that contains STORAGE_BOOT_PARTITION_INFO.
+// The function returns NTSTATUS.
+//
+#define STORAGE_BOOT_PARTITION_GET_INFO_STRUCTURE_VERSION_V1         0x1
+
+typedef struct _STORAGE_BOOT_PARTITION_INFO {
+    ULONG       Version;                // STORAGE_BOOT_PARTITION_GET_INFO_STRUCTURE_VERSION_V1
+    ULONG       Size;                   // Size of the whole structure
+    ULONGLONG   BPSZ;                   // Boot Partition Size (BPSZ)
+    ULONG       ImagePayloadAlignment;
+    ULONG       ImagePayloadMaxSize;
+    UCHAR       SlotCount;
+    UCHAR       ABPID;                  // Active Boot Partition ID (ABPID)
+} STORAGE_BOOT_PARTITION_INFO, *PSTORAGE_BOOT_PARTITION_INFO;
+
+//
+// Parameter for BOOT_PARTITION_FUNCTION_DOWNLOAD
+// Input buffer should contain SRB_IO_CONTROL and BOOT_PARTITION_REQUEST_BLOCK data structures.
+// Field "DataBufferOffset" of BOOT_PARTITION_REQUEST_BLOCK points to input data buffer that contains STORAGE_BOOT_PARTITION_DOWNLOAD.
+// The function returns NTSTATUS.
+//
+#define STORAGE_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION         0x1
+
+typedef struct _STORAGE_BOOT_PARTITION_DOWNLOAD {
+    ULONG                           Version;                             // STORAGE_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION
+    ULONG                           Size;                                // sizeof(STORAGE_BOOT_PARTITION_DOWNLOAD)
+    UCHAR                           BPID;                                // Boot partition Id
+    ULONGLONG                       Offset;                              // Offset for each download command
+    ULONGLONG                       BufferSize;                          // ImageSize for each download command
+    _Field_size_bytes_(BufferSize)  UCHAR ImageBuffer[ANYSIZE_ARRAY];    // Buffer to hold the image data
+} STORAGE_BOOT_PARTITION_DOWNLOAD, *PSTORAGE_BOOT_PARTITION_DOWNLOAD; 
+
+//
+// Parameter for BOOT_PARTITION_FUNCTION_ACTIVATE
+// Input buffer should contain SRB_IO_CONTROL and BOOT_PARTITION_REQUEST_BLOCK data structures.
+// Field "DataBufferOffset" of BOOT_PARTITION_REQUEST_BLOCK points to input data buffer that contains STORAGE_BOOT_PARTITION_ACTIVATE.
+// The function returns NTSTATUS.
+//
+#define STORAGE_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION         0x1
+
+typedef struct _STORAGE_BOOT_PARTITION_ACTIVATE {
+
+    ULONG   Version;
+    ULONG   Size;
+
+    UCHAR   BPID;
+    UCHAR   Reserved0[3];
+
+} STORAGE_BOOT_PARTITION_ACTIVATE, *PSTORAGE_BOOT_PARTITION_ACTIVATE;
+
+
+#define BOOT_PARTITION_REQUEST_BLOCK_STRUCTURE_VERSION            0x1
+
+typedef struct _BOOT_PARTITION_REQUEST_BLOCK {
+    ULONG   Version;            // BOOT_PARTITION_REQUEST_BLOCK_STRUCTURE_VERSION
+    ULONG   Size;               // Size of the data structure.
+    ULONG   Function;           // Function code: BOOT_PARTITION_FUNCTION
+    ULONG   Flags;              
+    ULONG   DataBufferOffset;   // The offset is from the beginning of buffer. e.g. from beginning of SRB_IO_CONTROL. The value should be multiple of sizeof(PVOID); Value 0 means that there is no data buffer.
+    ULONG   DataBufferLength;   // Length of the buffer
+} BOOT_PARTITION_REQUEST_BLOCK, *PBOOT_PARTITION_REQUEST_BLOCK;
 
 
 //

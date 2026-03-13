@@ -78,7 +78,7 @@ enum RuntimeClassType
 template <unsigned int flags>
 struct RuntimeClassFlags
 {
-    static const unsigned int value = flags;
+    static const unsigned int RuntimeClassFlagsValue = flags;
 };
 
 namespace Details
@@ -428,7 +428,7 @@ struct VerifyInterfaceHelper<type, I, true, true>
 #ifdef __WRL_STRICT__
         // Verifies if Implements has correct RuntimeClassFlags setting
         // Allow using FtmBase on classes configured with RuntimeClassFlags<WinRt> (Default configuration)
-        static_assert(I::ClassFlags::value == type ||
+        static_assert(I::ClassFlags::RuntimeClassFlagsValue == type ||
                 type == WinRtClassicComMix ||
                     __is_base_of(::Microsoft::WRL::Details::FtmBaseMarker, I),
             "Implements class must have the same and/or compatibile flags configuration");
@@ -444,12 +444,12 @@ struct VerifyInterfaceHelper<type, I, false, true>
     {
 #ifdef __WRL_STRICT__
         // Verifies if Implements has correct RuntimeClassFlags setting
-        static_assert(I::ClassFlags::value == type || type == WinRtClassicComMix,
+        static_assert(I::ClassFlags::RuntimeClassFlagsValue == type || type == WinRtClassicComMix,
             "Implements class must have the same and/or compatible flags configuration."
                 "If you use WRL::FtmBase it cannot be specified as first template parameter on RuntimeClass");
 
         // Besides make sure that the first interface on Implements meet flags requirement
-        VerifyInterfaceHelper<type, I::FirstInterface, false>::Verify();
+        VerifyInterfaceHelper<type, typename I::FirstInterface, false>::Verify();
 #endif
     }
 };
@@ -841,7 +841,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        VerifyInterfaceHelper<RuntimeClassFlagsT::value & WinRtClassicComMix, I0, doStrictCheck>::Verify();
+        VerifyInterfaceHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRtClassicComMix, I0, doStrictCheck>::Verify();
         // Prefer InlineIsEqualGUID over other forms since it's better perf on 4-byte aligned data, which is almost always the case.
         if (InlineIsEqualGUID(riid, __uuidof(I0)))
         {
@@ -893,7 +893,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        VerifyInterfaceHelper<RuntimeClassFlagsT::value & WinRtClassicComMix, I0, doStrictCheck>::Verify();
+        VerifyInterfaceHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRtClassicComMix, I0, doStrictCheck>::Verify();
         HRESULT hr = CurrentType::CanCastTo(riid, ppv);
         if (hr == E_NOINTERFACE)
         {
@@ -939,7 +939,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        VerifyInterfaceHelper<RuntimeClassFlagsT::value & WinRtClassicComMix, I0, doStrictCheck>::Verify();
+        VerifyInterfaceHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRtClassicComMix, I0, doStrictCheck>::Verify();
 
         HRESULT hr = CurrentType::CanCastTo(riid, ppv, pRefDelegated);
         if (SUCCEEDED(hr))
@@ -979,7 +979,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        VerifyInterfaceHelper<RuntimeClassFlagsT::value & WinRtClassicComMix, I0, doStrictCheck>::Verify();
+        VerifyInterfaceHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRtClassicComMix, I0, doStrictCheck>::Verify();
 
         return CurrentType::CanCastTo(riid, ppv, pRefDelegated);
     }
@@ -1044,7 +1044,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        ChainInterfaces<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>::template Verify<RuntimeClassFlagsT::value>();
+        ChainInterfaces<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>::template Verify<RuntimeClassFlagsT::RuntimeClassFlagsValue>();
 
         HRESULT hr = ChainInterfaces<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>::CanCastTo(riid, ppv);
         if (FAILED(hr))
@@ -1089,7 +1089,7 @@ protected:
 
     HRESULT CanCastTo(REFIID riid, _Outptr_ void **ppv, bool *pRefDelegated = nullptr) throw()
     {
-        VerifyInterfaceHelper<RuntimeClassFlagsT::value & WinRtClassicComMix, BaseMixInType, doStrictCheck>::Verify();
+        VerifyInterfaceHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRtClassicComMix, BaseMixInType, doStrictCheck>::Verify();
 
         HRESULT hr = static_cast<BaseMixInType*>(static_cast<DerivedType*>(this))->CanCastTo(riid, ppv);
         if (FAILED(hr))
@@ -1226,7 +1226,7 @@ public:
         if (composableBase_ != nullptr)
         {
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-            ErrorHelper<RuntimeClassFlagsT::value & InhibitRoOriginateError>::OriginateError(E_UNEXPECTED, nullptr);
+            ErrorHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitRoOriginateError>::OriginateError(E_UNEXPECTED, nullptr);
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
             return E_UNEXPECTED;
         }
@@ -1551,9 +1551,9 @@ private:
 // Since variadic templates can't have a parameter pack after default arguments, provide a convenient helper for defaults.
 #define DETAILS_RTCLASS_FLAGS_ARGUMENTS(RuntimeClassFlagsT) \
     RuntimeClassFlagsT, \
-    (RuntimeClassFlagsT::value & InhibitWeakReference) == 0, \
-    (RuntimeClassFlagsT::value & WinRt) == WinRt, \
-    __WRL_IMPLEMENTS_FTM_BASE__(RuntimeClassFlagsT::value) \
+    (RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitWeakReference) == 0, \
+    (RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRt) == WinRt, \
+    __WRL_IMPLEMENTS_FTM_BASE__(RuntimeClassFlagsT::RuntimeClassFlagsValue) \
 
 template <class RuntimeClassFlagsT, bool implementsWeakReferenceSource, bool implementsInspectable, bool implementsFtmBase, typename ...TInterfaces>
 class __declspec(novtable) RuntimeClassImpl;
@@ -1596,7 +1596,7 @@ inline unsigned long SafeUnknownDecrementReference(long volatile &refcount) thro
 template <class RuntimeClassFlagsT, bool implementsWeakReferenceSource, bool implementsFtmBase, typename ...TInterfaces>
 class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, implementsWeakReferenceSource, false, implementsFtmBase, TInterfaces...> :
     public Details::AdjustImplements<RuntimeClassFlagsT, false, TInterfaces...>::Type,
-    public RuntimeClassBaseT<RuntimeClassFlagsT::value>,
+    public RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>,
     protected RuntimeClassFlags<InhibitWeakReference>,
     public DontUseNewUseMake
 #ifdef _PERF_COUNTERS
@@ -1637,7 +1637,7 @@ public:
     }
 
 protected:
-    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::value>;
+    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>;
 
     RuntimeClassImpl() throw() : refcount_(1)
     {
@@ -1724,7 +1724,7 @@ struct IInspectableInjector<I0, false>
 template <class RuntimeClassFlagsT, typename I0, typename ...TInterfaces>
 class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, false, true, false, I0, TInterfaces...> :
     public Details::AdjustImplements<RuntimeClassFlagsT, false, typename IInspectableInjector<I0>::InspectableIfNeeded, I0, TInterfaces...>::Type,
-    public RuntimeClassBaseT<RuntimeClassFlagsT::value>,
+    public RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>,
     protected RuntimeClassFlags<InhibitWeakReference>,
     public DontUseNewUseMake
 #ifdef _PERF_COUNTERS
@@ -1747,6 +1747,7 @@ public:
         return InternalAddRef();
     }
 
+    DECLSPEC_CHPE_PATCHABLE
     STDMETHOD_(ULONG, Release)()
     {
         ULONG ref = InternalRelease();
@@ -1782,7 +1783,7 @@ public:
         __WRL_ASSERT__(false && "Use InspectableClass macro to set runtime class name and trust level.");
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-        ErrorHelper<RuntimeClassFlagsT::value & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
+        ErrorHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
         return E_NOTIMPL;
     }
@@ -1792,14 +1793,14 @@ public:
         __WRL_ASSERT__(false && "Use InspectableClass macro to set runtime class name and trust level.");
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-        ErrorHelper<RuntimeClassFlagsT::value & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
+        ErrorHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
         return E_NOTIMPL;
     }
 #endif // !defined(__WRL_STRICT__) || !defined(__WRL_FORCE_INSPECTABLE_CLASS_MACRO__)
 
 protected:
-    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::value>;
+    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>;
 
     RuntimeClassImpl() throw() : refcount_(1)
     {
@@ -2011,7 +2012,7 @@ inline WeakReferenceImpl* CreateWeakReference(_In_ IUnknown*);
 template <class RuntimeClassFlagsT, typename I0, typename ...TInterfaces>
 class __declspec(novtable) RuntimeClassImpl<RuntimeClassFlagsT, true, true, false, I0, TInterfaces...> :
     public Details::AdjustImplements<RuntimeClassFlagsT, false, typename IInspectableInjector<I0>::InspectableIfNeeded, I0, IWeakReferenceSource, TInterfaces...>::Type,
-    public RuntimeClassBaseT<RuntimeClassFlagsT::value>,
+    public RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>,
     public DontUseNewUseMake
 #ifdef _PERF_COUNTERS
     , public PerfCountersBase
@@ -2073,7 +2074,7 @@ public:
         __WRL_ASSERT__(false && "Use InspectableClass macro to set runtime class name and trust level.");
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-        ErrorHelper<RuntimeClassFlagsT::value & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
+        ErrorHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
         return E_NOTIMPL;
     }
@@ -2082,7 +2083,7 @@ public:
     {
         __WRL_ASSERT__(false && "Use InspectableClass macro to set runtime class name and trust level.");
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-        ErrorHelper<RuntimeClassFlagsT::value & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
+        ErrorHelper<RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitRoOriginateError>::OriginateError(E_NOTIMPL, nullptr);
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
         return E_NOTIMPL;
     }
@@ -2095,7 +2096,7 @@ public:
 protected:
     template <unsigned int RuntimeClassTypeT> friend class Details::RuntimeClassBaseT;
     using ImplementsHelper = typename Details::AdjustImplements<RuntimeClassFlagsT, false, typename IInspectableInjector<I0>::InspectableIfNeeded, I0, IWeakReferenceSource, TInterfaces...>::Type;
-    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::value>;
+    using Super = RuntimeClassBaseT<RuntimeClassFlagsT::RuntimeClassFlagsValue>;
 
     unsigned long InternalAddRef() throw();
 
@@ -2147,9 +2148,9 @@ struct InterfaceListHelper
 template <
     typename ILst,
     class RuntimeClassFlagsT,
-    bool implementsWeakReferenceSource = (RuntimeClassFlagsT::value & InhibitWeakReference) == 0,
-    bool implementsInspectable = (RuntimeClassFlagsT::value & WinRt) == WinRt,
-    bool implementsFtmBase = __WRL_IMPLEMENTS_FTM_BASE__(RuntimeClassFlagsT::value)
+    bool implementsWeakReferenceSource = (RuntimeClassFlagsT::RuntimeClassFlagsValue & InhibitWeakReference) == 0,
+    bool implementsInspectable = (RuntimeClassFlagsT::RuntimeClassFlagsValue & WinRt) == WinRt,
+    bool implementsFtmBase = __WRL_IMPLEMENTS_FTM_BASE__(RuntimeClassFlagsT::RuntimeClassFlagsValue)
 >
 class RuntimeClass;
 
@@ -2254,7 +2255,7 @@ namespace Details
 
         for(;;)
         {
-            long ref = this->strongRefCount_;
+            long ref = const_cast<long volatile&>(this->strongRefCount_);
             if (ref == 0)
             {
                 return S_OK;
@@ -2564,8 +2565,8 @@ namespace Details
     public: \
         static _Null_terminated_ const wchar_t* STDMETHODCALLTYPE InternalGetRuntimeClassName() throw() \
         { \
-            static_assert((RuntimeClassT::ClassFlags::value & ::Microsoft::WRL::WinRtClassicComMix) == ::Microsoft::WRL::WinRt || \
-                (RuntimeClassT::ClassFlags::value & ::Microsoft::WRL::WinRtClassicComMix) == ::Microsoft::WRL::WinRtClassicComMix, \
+            static_assert((RuntimeClassT::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::WinRtClassicComMix) == ::Microsoft::WRL::WinRt || \
+                (RuntimeClassT::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::WinRtClassicComMix) == ::Microsoft::WRL::WinRtClassicComMix, \
                     "'InspectableClass' macro must not be used with ClassicCom clasess."); \
             static_assert(__is_base_of(::Microsoft::WRL::Details::RuntimeClassBase, RuntimeClassT), "'InspectableClass' macro can only be used with ::Windows::WRL::RuntimeClass types"); \
             static_assert(!__is_base_of(IActivationFactory, RuntimeClassT), "Incorrect usage of IActivationFactory interface. Make sure that your RuntimeClass doesn't implement IActivationFactory interface use ::Windows::WRL::ActivationFactory instead or 'InspectableClass' macro is not used on ::Windows::WRL::ActivationFactory"); \
@@ -2619,7 +2620,7 @@ namespace Details
     public: \
         STDMETHOD(QueryInterface)(REFIID riid, _Outptr_result_nullonfailure_ void **ppvObject) \
         { \
-            static_assert((RuntimeClassT::ClassFlags::value & ::Microsoft::WRL::WinRt) == 0, "'MixInClass' macro must not be used with WinRt clasess."); \
+            static_assert((RuntimeClassT::ClassFlags::RuntimeClassFlagsValue & ::Microsoft::WRL::WinRt) == 0, "'MixInClass' macro must not be used with WinRt clasess."); \
             static_assert(__is_base_of(::Microsoft::WRL::Details::RuntimeClassBase, RuntimeClassT), "'MixInHelper' macro can only be used with ::Windows::WRL::RuntimeClass types"); \
             static_assert(!__is_base_of(IClassFactory, RuntimeClassT), "Incorrect usage of IClassFactory interface. Make sure that your RuntimeClass doesn't implement IClassFactory interface use ::Windows::WRL::ClassFactory instead or 'MixInHelper' macro is not used on ::Windows::WRL::ClassFactory"); \
             return RuntimeClassT::QueryInterface(riid, ppvObject); \

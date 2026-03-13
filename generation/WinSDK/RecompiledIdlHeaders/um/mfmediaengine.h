@@ -1087,17 +1087,6 @@ enum MF_MEDIA_ENGINE_PRELOAD
         MF_MEDIA_ENGINE_PRELOAD_AUTOMATIC	= 4
     } 	MF_MEDIA_ENGINE_PRELOAD;
 
-#ifndef _MFVideoNormalizedRect_
-#define _MFVideoNormalizedRect_
-typedef struct MFVideoNormalizedRect
-    {
-    float left;
-    float top;
-    float right;
-    float bottom;
-    } 	MFVideoNormalizedRect;
-
-#endif
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mfmediaengine_0000_0004_v0_0_c_ifspec;

@@ -469,7 +469,7 @@ FindPackagesByPackageFamily(
     _Out_writes_opt_(*count) UINT32* packageProperties
     );
 
-typedef enum PackageOrigin
+typedef enum _PackageOrigin
 {
     PackageOrigin_Unknown           = 0,
     PackageOrigin_Unsigned          = 1,

@@ -37,6 +37,7 @@ Revision History:
 #define NT11_MAJOR_VERSION          10
 #define NT12_MAJOR_VERSION          11
 #define NT13_MAJOR_VERSION          12
+#define NT14_MAJOR_VERSION          14
 
 // NT10 cluster upgrade versions (eg technical previews)
 #define WS2016_TP4_UPGRADE_VERSION  6
@@ -62,6 +63,10 @@ Revision History:
 #define ZN_UPGRADE_VERSION           4
 #define GA_UPGRADE_VERSION           5
 #define GE_UPGRADE_VERSION           6
+
+// NT14 upgrade versions
+#define DT_UPGRADE_VERSION           1
+#define SE_UPGRADE_VERSION           2
 
 #define HCI_UPGRADE_BIT 0x8000
 
@@ -96,10 +101,16 @@ Revision History:
 #define CLUSAPI_VERSION_CU           0x00000C03
 #define CLUSAPI_VERSION_ZN           0x00000C04
 #define CLUSAPI_VERSION_GA           0x00000C05
+#define CLUSAPI_VERSION_GE           0x00000C06
+#define CLUSAPI_VERSION_DT           0x00000C07
 
 
 #if (!defined(CLUSAPI_VERSION))
-#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_GA))
+#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_DT))
+#define CLUSAPI_VERSION  CLUSAPI_VERSION_DT
+#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_GE))
+#define CLUSAPI_VERSION  CLUSAPI_VERSION_GE
+#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_GA))
 #define CLUSAPI_VERSION  CLUSAPI_VERSION_GA
 #elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN11_ZN))
 #define CLUSAPI_VERSION  CLUSAPI_VERSION_ZN
@@ -4823,6 +4834,8 @@ typedef enum CLCTL_CODES {
     CLCTL_GET_NODE_NETWORK_CONNECTIVITY     = CLCTL_EXTERNAL_CODE( 199, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 
 
+    CLCTL_RLUA_GET_PWD                 =  CLCTL_EXTERNAL_CODE( 200, CLUS_ACCESS_WRITE, CLUS_NO_MODIFY ),
+
     // Control codes 2000 to 2999 are reserved.
 
     CLCTL_STORAGE_GET_AVAILABLE_DISKS_EX2_INT   = CLCTL_EXTERNAL_CODE( 2040, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
@@ -5214,6 +5227,8 @@ typedef enum CLUSCTL_RESOURCE_CODES {
     CLUSCTL_RESOURCE_RLUA_SET_PWD_INFOEX =
         CLUSCTL_RESOURCE_CODE( CLCTL_NETNAME_SET_PWD_INFOEX ),
 
+    CLUSCTL_RESOURCE_RLUA_GET_PWD =
+        CLUSCTL_RESOURCE_CODE( CLCTL_RLUA_GET_PWD ),
 
     //
     // Internal resource codes
@@ -5981,6 +5996,8 @@ typedef enum CLUSCTL_CLUSTER_CODES {
 
     CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS =
         CLUSCTL_CLUSTER_CODE( CLCTL_CHECK_VOTER_DOWN_WITNESS ),
+
+
 
 } CLUSCTL_CLUSTER_CODES;
 
@@ -8797,6 +8814,9 @@ typedef DWORD
 #define CLUSREG_NAME_NETNAME_DNS_SUFFIX             L"DnsSuffix"
 #define CLUSREG_NAME_NETNAME_AD_AWARE               L"ADAware"
 #define CLUSREG_NAME_NETNAME_DNN_DISABLE_CLONES     L"DisableClones"
+#define CLUSREG_NAME_NETNAME_USE_DYNAMIC_DNS        L"UseDynamicDNS"
+#define CLUSREG_NAME_NETNAME_DNS_AUTHENTICATION     L"DnsAuthenticationMode"
+#define CLUSREG_NAME_NETNAME_USE_DNS                L"DnsEnabled"
 
 //
 // Print Spooler

@@ -105,6 +105,8 @@ namespace Windows
 
             interface IActionEntityFactory6;
 
+            interface IActionEntityFactory7;
+
             interface IActionEntityFactoryFactory;
 
             interface IActionFeedback;
@@ -115,6 +117,8 @@ namespace Windows
 
             interface IActionInvocationHelpDetails;
 
+            interface IActionInvocationHelpDetails2;
+
             interface IActionRuntime;
 
             interface IActionRuntime2;
@@ -123,13 +127,25 @@ namespace Windows
 
             interface IActionRuntime4;
 
+            interface IActionRuntime5;
+
             interface IActionRuntimeFactory;
+
+            interface IActionRuntimeStatics;
 
             interface IAppointmentActionEntity;
 
             interface IArrayActionEntity;
 
+            interface IArrayActionEntity2;
+
             interface IContactActionEntity;
+
+            interface ICustomActionEntityStore;
+
+            interface ICustomActionEntityStoreFactory;
+
+            interface ICustomTextActionEntity;
 
             interface IDateTimeActionEntity;
 
@@ -179,6 +195,10 @@ namespace Windows
 
             runtimeclass ContactActionEntity;
 
+            runtimeclass CustomActionEntityStore;
+
+            runtimeclass CustomTextActionEntity;
+
             runtimeclass DateTimeActionEntity;
 
             runtimeclass DocumentActionEntity;
@@ -215,6 +235,8 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.TypedEventHandler<Windows.AI.Actions.ActionInvocationHelpDetails*, IInspectable*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.AI.Actions.StreamingTextActionEntity*, Windows.AI.Actions.StreamingTextActionEntityTextChangedArgs*>;
             }
         }
@@ -228,7 +250,7 @@ namespace Windows
     {
         namespace Actions
         {
-            [contractversion(7.0)]
+            [contractversion(8.0)]
             apicontract ActionsContract
             {
             }
@@ -260,7 +282,10 @@ namespace Windows
                 Appointment   = 11,
                 [contract(Windows.AI.Actions.ActionsContract, 7.0)]
                 [experimental]
-                Date          = 12
+                Date          = 12,
+                [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+                [experimental]
+                CustomText    = 13
             };
 
             [contract(Windows.AI.Actions.ActionsContract, 2.0)]
@@ -384,6 +409,16 @@ namespace Windows
                 HRESULT CreateAppointmentEntity([in] HSTRING sourceId, [in] Windows.ApplicationModel.Appointments.Appointment* appointment, [in] UINT32 __attendeesSize, [in] [size_is(__attendeesSize)] Windows.AI.Actions.ContactActionEntity** attendees, [out] [retval] Windows.AI.Actions.AppointmentActionEntity** result);
             }
 
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.ActionEntityFactory)]
+            [experimental]
+            [uuid(B814B8D5-C9B2-51B5-A342-9FE054D8A1EB)]
+            interface IActionEntityFactory7 : IInspectable
+            {
+                HRESULT CreateCustomTextEntity([in] HSTRING kind, [in] HSTRING keyPhrase, [in] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>* props, [out] [retval] Windows.AI.Actions.CustomTextActionEntity** result);
+                HRESULT CreateArrayEntityWithCustomKind([in] Windows.AI.Actions.ActionEntityKind elementKind, [in] HSTRING customKind, [in] UINT32 __entitiesSize, [in] [size_is(__entitiesSize)] Windows.AI.Actions.ActionEntity** entities, [out] [retval] Windows.AI.Actions.ArrayActionEntity** result);
+            }
+
             [contract(Windows.AI.Actions.ActionsContract, 1.0)]
             [exclusiveto(Windows.AI.Actions.ActionEntityFactory)]
             [uuid(C9147D8F-88A0-5EC0-A564-47E2A1081412)]
@@ -443,6 +478,16 @@ namespace Windows
                 [propput] HRESULT HelpUriDescription([in] HSTRING value);
             }
 
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.ActionInvocationHelpDetails)]
+            [experimental]
+            [uuid(307F6BA5-5FDA-59F1-9722-1859801AD550)]
+            interface IActionInvocationHelpDetails2 : IInspectable
+            {
+                [eventadd] HRESULT Changed([in] Windows.Foundation.TypedEventHandler<Windows.AI.Actions.ActionInvocationHelpDetails*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Changed([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.AI.Actions.ActionsContract, 1.0)]
             [exclusiveto(Windows.AI.Actions.ActionRuntime)]
             [uuid(206EFA2C-C909-508A-B4B0-9482BE96DB9C)]
@@ -481,11 +526,28 @@ namespace Windows
                 HRESULT GetActionInvocationContextFromToken([in] HSTRING token, [out] [retval] Windows.AI.Actions.ActionInvocationContext** result);
             }
 
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.ActionRuntime)]
+            [experimental]
+            [uuid(C2E995B1-52A9-5F3A-BEBB-A04655E96218)]
+            interface IActionRuntime5 : IInspectable
+            {
+                [propget] HRESULT CustomEntityStore([out] [retval] Windows.AI.Actions.CustomActionEntityStore** value);
+            }
+
             [contract(Windows.AI.Actions.ActionsContract, 1.0)]
             [exclusiveto(Windows.AI.Actions.ActionRuntime)]
             [uuid(D3F366E9-8DC9-50A0-8040-E5C14FA609D6)]
             interface IActionRuntimeFactory : IInspectable
             {
+            }
+
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.ActionRuntime)]
+            [uuid(2C697AAB-55F2-55AA-9D63-A73EC190CECD)]
+            interface IActionRuntimeStatics : IInspectable
+            {
+                HRESULT GetDefault([out] [retval] Windows.AI.Actions.ActionRuntime** result);
             }
 
             [contract(Windows.AI.Actions.ActionsContract, 7.0)]
@@ -513,12 +575,52 @@ namespace Windows
                 HRESULT GetAll([out] UINT32* __resultSize, [out] [retval] [size_is(, *__resultSize)] Windows.AI.Actions.ActionEntity*** result);
             }
 
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.ArrayActionEntity)]
+            [experimental]
+            [uuid(7366E049-7FE8-5DF9-BBCA-CEA5C0F3D316)]
+            interface IArrayActionEntity2 : IInspectable
+            {
+                [propget] HRESULT CustomElementKind([out] [retval] HSTRING* value);
+            }
+
             [contract(Windows.AI.Actions.ActionsContract, 3.0)]
             [exclusiveto(Windows.AI.Actions.ContactActionEntity)]
             [uuid(458C3E07-5892-5485-BD9B-8F7A540C9501)]
             interface IContactActionEntity : IInspectable
             {
                 [propget] HRESULT Contact([out] [retval] Windows.ApplicationModel.Contacts.Contact** value);
+            }
+
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.CustomActionEntityStore)]
+            [experimental]
+            [uuid(FA7B44D0-1762-5828-9938-E7CAE5199E01)]
+            interface ICustomActionEntityStore : IInspectable
+            {
+                HRESULT GetLastModifiedTime([in] HSTRING kind, [out] [retval] Windows.Foundation.DateTime* result);
+                HRESULT Insert([in] Windows.AI.Actions.CustomTextActionEntity* entity);
+                HRESULT InsertMany([in] UINT32 __entitiesSize, [in] [size_is(__entitiesSize)] Windows.AI.Actions.CustomTextActionEntity** entities);
+                HRESULT Delete([in] HSTRING kind);
+            }
+
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.CustomActionEntityStore)]
+            [experimental]
+            [uuid(D8B46BDB-68A5-5E07-9113-ABB9241AAAB1)]
+            interface ICustomActionEntityStoreFactory : IInspectable
+            {
+            }
+
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [exclusiveto(Windows.AI.Actions.CustomTextActionEntity)]
+            [experimental]
+            [uuid(50EAAC95-1D6C-54B0-8963-E38DEA3F6AEC)]
+            interface ICustomTextActionEntity : IInspectable
+            {
+                [propget] HRESULT CustomTextKind([out] [retval] HSTRING* value);
+                [propget] HRESULT KeyPhrase([out] [retval] HSTRING* value);
+                [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
             }
 
             [contract(Windows.AI.Actions.ActionsContract, 7.0)]
@@ -692,6 +794,7 @@ namespace Windows
                 [contract(Windows.AI.Actions.ActionsContract, 3.0)] interface Windows.AI.Actions.IActionEntityFactory4;
                 [contract(Windows.AI.Actions.ActionsContract, 6.0)] [experimental] interface Windows.AI.Actions.IActionEntityFactory5;
                 [contract(Windows.AI.Actions.ActionsContract, 7.0)] [experimental] interface Windows.AI.Actions.IActionEntityFactory6;
+                [contract(Windows.AI.Actions.ActionsContract, 8.0)] [experimental] interface Windows.AI.Actions.IActionEntityFactory7;
                 interface Windows.Foundation.IClosable;
             }
 
@@ -717,12 +820,14 @@ namespace Windows
             runtimeclass ActionInvocationHelpDetails
             {
                 [default] interface Windows.AI.Actions.IActionInvocationHelpDetails;
+                [contract(Windows.AI.Actions.ActionsContract, 8.0)] [experimental] interface Windows.AI.Actions.IActionInvocationHelpDetails2;
                 interface Windows.Foundation.IClosable;
             }
 
             [composable(Windows.AI.Actions.IActionRuntimeFactory, public, Windows.AI.Actions.ActionsContract, 1.0)]
             [contract(Windows.AI.Actions.ActionsContract, 1.0)]
             [marshaling_behavior(agile)]
+            [static(Windows.AI.Actions.IActionRuntimeStatics, Windows.AI.Actions.ActionsContract, 8.0)]
             [threading(both)]
             runtimeclass ActionRuntime
             {
@@ -730,6 +835,7 @@ namespace Windows
                 [contract(Windows.AI.Actions.ActionsContract, 2.0)] interface Windows.AI.Actions.IActionRuntime2;
                 [contract(Windows.AI.Actions.ActionsContract, 3.0)] interface Windows.AI.Actions.IActionRuntime3;
                 [contract(Windows.AI.Actions.ActionsContract, 5.0)] interface Windows.AI.Actions.IActionRuntime4;
+                [contract(Windows.AI.Actions.ActionsContract, 8.0)] [experimental] interface Windows.AI.Actions.IActionRuntime5;
                 interface Windows.Foundation.IClosable;
             }
 
@@ -749,6 +855,7 @@ namespace Windows
             runtimeclass ArrayActionEntity : Windows.AI.Actions.ActionEntity
             {
                 [default] [experimental] interface Windows.AI.Actions.IArrayActionEntity;
+                [contract(Windows.AI.Actions.ActionsContract, 8.0)] [experimental] interface Windows.AI.Actions.IArrayActionEntity2;
             }
 
             [contract(Windows.AI.Actions.ActionsContract, 3.0)]
@@ -757,6 +864,26 @@ namespace Windows
             runtimeclass ContactActionEntity : Windows.AI.Actions.ActionEntity
             {
                 [default] interface Windows.AI.Actions.IContactActionEntity;
+            }
+
+            [composable(Windows.AI.Actions.ICustomActionEntityStoreFactory, public, Windows.AI.Actions.ActionsContract, 8.0)]
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass CustomActionEntityStore
+            {
+                [default] [experimental] interface Windows.AI.Actions.ICustomActionEntityStore;
+                interface Windows.Foundation.IClosable;
+            }
+
+            [contract(Windows.AI.Actions.ActionsContract, 8.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass CustomTextActionEntity : Windows.AI.Actions.ActionEntity
+            {
+                [default] [experimental] interface Windows.AI.Actions.ICustomTextActionEntity;
             }
 
             [contract(Windows.AI.Actions.ActionsContract, 7.0)]

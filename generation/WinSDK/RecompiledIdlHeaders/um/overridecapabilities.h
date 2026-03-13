@@ -506,22 +506,23 @@
 #define OVRDCAP_ARM64_UMA_IOR_64_TO_USER_SO               0x0001005B
 #define OVRDCAP_ARM64_UMA_IAND_32_TO_USER_SO              0x0001005C
 #define OVRDCAP_ARM64_UMA_IAND_64_TO_USER_SO              0x0001005D
+#define OVRDCAP_ARM64_QC_CHIPSET_8480                     0x0001005E
 
-#define OVRDCAP_ARM64_MAX                                 0x0001005E
+#define OVRDCAP_ARM64_MAX                                 0x0001005F
 
 #define OVRDCAP_ALWAYS_OFF                                0x7FFFFFFF
 
 //
 // SPECIAL OS FUNCTIONS:
 // If the top bit is set (32-bit value) this indicates the capability is an
-// "OS Special Function". For these functions, the OS will override the 
-// function implementation with a function that it supplies (for example, 
-// a function implemented by ntdll). This bit cannot be set on arbitrary 
+// "OS Special Function". For these functions, the OS will override the
+// function implementation with a function that it supplies (for example,
+// a function implemented by ntdll). This bit cannot be set on arbitrary
 // overrides capabilities (i.e. the capabilities listed above), it must
 // be set on specific capabilities.
 //
 // Note that this behavior is hard coded in to the linker which
-// will use the top-bit being set as an indication to ensure the branch the 
+// will use the top-bit being set as an indication to ensure the branch the
 // relocation is applied to is able to point at the 32MB of VA trailing
 // the binary (as the operating system may map the special function after
 // the binary). This is especially important for ARM64 where the "b" and "bl"
@@ -529,6 +530,6 @@
 // cannot guarantee this instruction will be placed such that it can target 32MB
 // off the end of the binary the linker will instead need to emit a different
 // instruction sequence (using ADRP/ADD) that has enough range. Accordingly,
-// it is not possible to place "OS Special Functions" anywhere else in the 
+// it is not possible to place "OS Special Functions" anywhere else in the
 // capability bitspace as the linker will not behave correctly.
 //
