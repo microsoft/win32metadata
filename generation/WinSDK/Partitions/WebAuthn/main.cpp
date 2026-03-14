@@ -6,5 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <webservices.h>
-#include <icontentprefetchertasktrigger.h>
+#include <webauthn.h>
+#include <webauthnplugin.h>
+#include <pluginauthenticator.h>
