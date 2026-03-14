@@ -80,6 +80,14 @@ cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpoint_JackSubType, 0x1da5d803, 0xd492
 // vartype = VT_UI4 (Float value expressed in fixed point 16.16 format)
 cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpoint_Default_VolumeInDb, 0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 9);")
 
+// PKEY_AudioEndpoint_Max_VolumeInDb: INF supplied property that indicates max volume in DB for an endpoint to be used by the OS volume implementation.
+// vartype = VT_UI4 (Float value expressed in fixed point 16.16 format)
+cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpoint_Max_VolumeInDb, 0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 10);")
+
+// PKEY_AudioEndpoint_Min_VolumeInDb: INF supplied property that indicates min volume in DB for an endpoint to be used by the OS volume implementation.
+// vartype = VT_I4 (Float value expressed in fixed point 16.16 format)
+cpp_quote("DEFINE_PROPERTYKEY(PKEY_AudioEndpoint_Min_VolumeInDb, 0x1da5d803, 0xd492, 0x4edd, 0x8c, 0x23, 0xe0, 0xc0, 0xff, 0xee, 0x7f, 0x0e, 11);")
+
 // PKEY_AudioEngine_xxx
 // GUID for PKEY_AudioEngine_xxx (public): {F19F064D-082C-4e27-BC73-6882A1BB8E4C}
 

@@ -11665,6 +11665,15 @@ Notes:
 //
 #define STATUS_BLOCK_SHARED              ((NTSTATUS)0xC0000915L)
 
+//
+// MessageId: STATUS_SYSTEM_FILE_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The specified operation is not supported on a system file.
+//
+#define STATUS_SYSTEM_FILE_NOT_SUPPORTED ((NTSTATUS)0xC0000916L)
+
 /*++
 
  MessageId's 0xc08 - 0xc7f (inclusive) are reserved for Verifier errors.
@@ -12348,6 +12357,15 @@ Notes:
 // An API Set schema extension failed to compose.
 //
 #define STATUS_APISET_COMPOSE_FAILURE    ((NTSTATUS)0xC000A161L)
+
+//
+// MessageId: STATUS_APISET_SCHEMA_VERSION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The API Set schema version is not supported.
+//
+#define STATUS_APISET_SCHEMA_VERSION_NOT_SUPPORTED ((NTSTATUS)0xC000A162L)
 
 /*++
 
@@ -18995,7 +19013,7 @@ Notes:
 
 //
 // Camera Error messages (ks.sys, usbvideo.sys)
-// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode, 
+// The first 50 NTSTATUS are reserved for Camera drivers in Kernel mode,
 // which has 1:1 mapping for Error code in WinError.mc file.
 //
 // The remaining NTSTATUS in camera category may not have mapping with System Error code.
@@ -19844,6 +19862,15 @@ Notes:
 // FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
 //
 #define STATUS_FVE_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT ((NTSTATUS)0xC0210060L)
+
+//
+// MessageId: STATUS_FVE_TPM_PCRS_DO_NOT_MATCH_LOG
+//
+// MessageText:
+//
+// The TPM PCR values did not match what was calculated from the TCG log.
+//
+#define STATUS_FVE_TPM_PCRS_DO_NOT_MATCH_LOG ((NTSTATUS)0xC0210061L)
 
 
 //

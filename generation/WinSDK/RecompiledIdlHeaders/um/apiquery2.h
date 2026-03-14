@@ -38,6 +38,16 @@ IsApiSetImplemented(
     _In_ PCSTR Contract
     );
 
+APICONTRACT
+HRESULT
+APIENTRY
+GetApiSetModuleBaseName(
+    _In_ PCSTR contractName,
+    _In_ UINT32 bufferLength,
+    _Out_writes_to_(bufferLength,*actualNameLength) PWSTR moduleBaseName,
+    _Out_opt_ UINT32* actualNameLength
+    );
+
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
 

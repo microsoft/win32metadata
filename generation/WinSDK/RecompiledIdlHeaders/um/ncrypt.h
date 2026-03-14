@@ -140,6 +140,23 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPT_HMAC_SHA256_ALGORITHM            L"HMAC-SHA256"
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+// ML-KEM
+#define NCRYPT_MLKEM_ALGORITHM   BCRYPT_MLKEM_ALGORITHM
+
+// ML-DSA
+#define NCRYPT_MLDSA_ALGORITHM    BCRYPT_MLDSA_ALGORITHM
+
+// SLH-DSA
+#define NCRYPT_SLHDSA_ALGORITHM   BCRYPT_SLHDSA_ALGORITHM
+
+// LMS and XMSS
+#define NCRYPT_LMS_ALGORITHM      BCRYPT_LMS_ALGORITHM
+#define NCRYPT_XMSS_ALGORITHM     BCRYPT_XMSS_ALGORITHM
+
+#endif
+
 //
 // Interfaces
 //
@@ -153,6 +170,10 @@ typedef struct NCRYPT_ALLOC_PARA {
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define NCRYPT_KEY_DERIVATION_INTERFACE         BCRYPT_KEY_DERIVATION_INTERFACE
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_KEY_ENCAPSULATION_INTERFACE      BCRYPT_KEY_ENCAPSULATION_INTERFACE
+#endif
 
 #define NCRYPT_KEY_STORAGE_INTERFACE            0x00010001
 #define NCRYPT_SCHANNEL_INTERFACE               0x00010002
@@ -179,6 +200,14 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPT_DES_ALGORITHM_GROUP              L"DES"
 #define NCRYPT_KEY_DERIVATION_GROUP             L"KEY_DERIVATION"
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+
+# if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_MLKEM_ALGORITHM_GROUP            L"MLKEM"
+#define NCRYPT_MLDSA_ALGORITHM_GROUP            L"MLDSA"
+#define NCRYPT_SLHDSA_ALGORITHM_GROUP           L"SLHDSA"
+#define NCRYPT_LMS_ALGORITHM_GROUP              NCRYPT_LMS_ALGORITHM
+#define NCRYPT_XMSS_ALGORITHM_GROUP             NCRYPT_XMSS_ALGORITHM
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 //
 // NCrypt generic memory descriptors
@@ -256,6 +285,14 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPTBUFFER_VBS_ATTESTATION_STATEMENT_IDENTITY_DETAILS      95
 
 #endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+#define NCRYPTBUFFER_PKCS_AES_KEY_BITS                              96
+#define NCRYPTBUFFER_PKCS_PADDING_ALGO                              97
+#define NCRYPTBUFFER_PKCS_PADDING_LABEL                             98
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 
 // NCRYPT shares the same BCRYPT definitions
@@ -597,6 +634,9 @@ typedef struct _NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define NCRYPT_PAD_CIPHER_FLAG                  0x00000010  // NCryptEncrypt/Decrypt
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_PAD_PQDSA_FLAG	                BCRYPT_PAD_PQDSA  // BCryptSignHash/VerifySignature NCryptSignHash/VerifySignature
+#endif
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #define NCRYPT_ATTESTATION_FLAG                 0x00000020 // NCryptDecrypt for key attestation
@@ -671,6 +711,9 @@ NCryptOpenStorageProvider(
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define NCRYPT_KEY_DERIVATION_OPERATION         BCRYPT_KEY_DERIVATION_OPERATION
 #endif  // (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_KEY_ENCAPSULATION_OPERATION      BCRYPT_KEY_ENCAPSULATION_OPERATION
+#endif
 // USE EXTREME CAUTION: editing comments that contain "certenrolls_*" tokens
 // could break building CertEnroll idl files:
 // certenrolls_begin -- NCryptAlgorithmName
@@ -868,11 +911,14 @@ NCryptCreatePersistedKey(
 #define NCRYPT_CERTIFICATE_FROM_NVRAM_PROPERTY  L"KeyCertificateFromTpmNvram"
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
-#define NCRYPT_PKCS11_KWP_AES_KEY_BITS_PROPERTY   L"Pkcs11AesKeyBits"
-#define NCRYPT_PKCS11_KWP_OAEP_HASH_ALGO_PROPERTY L"Pkcs11OaepHashAlgorithm"
-#define NCRYPT_PKCS11_KWP_OAEP_LABEL_PROPERTY     L"Pkcs11OaepLabel"
-#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+#define NCRYPT_PARAMETER_SET_NAME_PROPERTY        BCRYPT_PARAMETER_SET_NAME // For PQC keys
+
+#define NCRYPT_KEM_SHARED_SECRET_LENGTH_PROPERTY BCRYPT_KEM_SHARED_SECRET_LENGTH
+#define NCRYPT_KEM_CIPHERTEXT_LENGTH_PROPERTY    BCRYPT_KEM_CIPHERTEXT_LENGTH
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 //
 // Additional property strings specific for the Platform Crypto Provider
@@ -1267,6 +1313,40 @@ NCryptDecrypt(
 
 
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+_Check_return_
+SECURITY_STATUS
+WINAPI
+NCryptEncapsulate(
+    _In_                              NCRYPT_KEY_HANDLE       hKey,
+    _Out_writes_bytes_to_opt_(cbSecretKey ,*pcbSecretKey)
+                                      PBYTE                   pbSecretKey,
+    _In_                              ULONG                   cbSecretKey,
+    _Out_                             ULONG                  *pcbSecretKey,
+    _Out_writes_bytes_to_opt_(cbCipherText ,*pcbCipherText)
+                                      PBYTE                   pbCipherText,
+    _In_                              ULONG                   cbCipherText,
+    _Out_                             ULONG                  *pcbCipherText,
+    _In_                              ULONG                   dwFlags);
+
+
+_Check_return_
+SECURITY_STATUS
+WINAPI
+NCryptDecapsulate(
+    _In_                              NCRYPT_KEY_HANDLE       hKey,
+    _In_reads_bytes_(cbCipherText)    PBYTE                   pbCipherText,
+    _In_                              ULONG                   cbCipherText,
+    _Out_writes_bytes_to_opt_(cbSecretKey, *pcbSecretKey)
+                                      PBYTE                   pbSecretKey,
+    _In_                              ULONG                   cbSecretKey,
+    _Out_                             ULONG                  *pcbSecretKey,
+    _In_                              ULONG                   dwFlags);
+
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 
 typedef struct _NCRYPT_KEY_BLOB_HEADER
@@ -1318,6 +1398,25 @@ typedef struct NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define NCRYPT_ISOLATED_KEY_ENVELOPE_BLOB   L"ISOLATED_KEY_ENVELOPE"
 #endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+typedef struct _NCRYPT_PQ_BLOB
+{
+    ULONG   dwMagic;
+    ULONG   cbBCryptType;   // Number of bytes in BCrypt blob type.
+    ULONG   cbBCryptBlob;   // Number of bytes in BCrypt blob data.
+    // UCHAR BCryptType[cbBCryptType]  -- The BCrypt blob type including '\0'. For example, BCRYPT_PQDSA_PRIVATE_BLOB or BCRYPT_PQDSA_PUBLIC_BLOB .
+    // UCHAR BCryptBlob[cbBCryptBlob]  -- BCrypt blob data. Currently it's BCRYPT_PQDSA_KEY_BLOB.
+} NCRYPT_PQ_BLOB, *PNCRYPT_PQ_BLOB;
+
+#define NCRYPT_PQ_PRIVATE_BLOB_MAGIC   0x52505150      // PQPR
+
+#define NCRYPT_PQ_PRIVATE_KEY_BLOB     L"PQPrivateKeyBlob"
+#define NCRYPT_PQ_PUBLIC_KEY_BLOB      BCRYPT_PUBLIC_KEY_BLOB
+
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 // NCryptImportKey flags
 #define NCRYPT_MACHINE_KEY_FLAG         0x00000020
@@ -1521,6 +1620,7 @@ NCryptVerifyClaim(
 #define NCRYPT_KEY_STORAGE_INTERFACE_VERSION BCRYPT_MAKE_INTERFACE_VERSION(1,0)
 #define NCRYPT_KEY_STORAGE_INTERFACE_VERSION_2 BCRYPT_MAKE_INTERFACE_VERSION(2,0)
 #define NCRYPT_KEY_STORAGE_INTERFACE_VERSION_3 BCRYPT_MAKE_INTERFACE_VERSION(3,0)
+#define NCRYPT_KEY_STORAGE_INTERFACE_VERSION_4 BCRYPT_MAKE_INTERFACE_VERSION(4,0)
 
 
 #ifdef __cplusplus

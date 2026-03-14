@@ -109,6 +109,36 @@
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                interface IInputHapticsManager;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager ABI::Windows::Devices::Haptics::IInputHapticsManager
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                interface IInputHapticsManagerStatics;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics ABI::Windows::Devices::Haptics::IInputHapticsManagerStatics
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
 namespace ABI {
@@ -568,11 +598,67 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace Haptics {
+                typedef enum HapticDeviceType : int HapticDeviceType;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                typedef struct HapticsControllerOverrideToken HapticsControllerOverrideToken;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                class InputHapticsManager;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
                 class SimpleHapticsController;
             } /* Haptics */
         } /* Devices */
     } /* Windows */
 } /* ABI */
+
+/*
+ *
+ * Struct Windows.Devices.Haptics.HapticDeviceType
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                enum HapticDeviceType : int
+                {
+                    HapticDeviceType_None = 0,
+                    HapticDeviceType_Generic = 1,
+                    HapticDeviceType_Pen = 2,
+                    HapticDeviceType_Touchpad = 3,
+                    HapticDeviceType_Mouse = 4,
+                };
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -598,6 +684,153 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Struct Windows.Devices.Haptics.HapticsControllerOverrideToken
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                struct HapticsControllerOverrideToken
+                {
+                    INT64 Value;
+                };
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Haptics.IInputHapticsManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.InputHapticsManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IInputHapticsManager[] = L"Windows.Devices.Haptics.IInputHapticsManager";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                MIDL_INTERFACE("040e91df-bb3a-507c-9e25-a2d2c685b2e5")
+                IInputHapticsManager : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_ThreadId(
+                        UINT32* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CurrentHapticsControllerDeviceType(
+                        ABI::Windows::Devices::Haptics::HapticDeviceType* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CurrentHapticsController(
+                        ABI::Windows::Devices::Haptics::ISimpleHapticsController** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySendHapticWaveform(
+                        UINT16 waveform,
+                        UINT16 waveformFallback,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySendHapticWaveformWithIntensity(
+                        UINT16 waveform,
+                        UINT16 waveformFallback,
+                        DOUBLE intensity,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySendHapticWaveformForDuration(
+                        UINT16 waveform,
+                        UINT16 waveformFallback,
+                        DOUBLE intensity,
+                        ABI::Windows::Foundation::TimeSpan playDuration,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySendHapticWaveformForPlayCount(
+                        UINT16 waveform,
+                        UINT16 waveformFallback,
+                        DOUBLE intensity,
+                        INT32 playCount,
+                        ABI::Windows::Foundation::TimeSpan replayPauseInterval,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TryStopFeedback(
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetOverrideHapticsController(
+                        ABI::Windows::Devices::Haptics::HapticDeviceType deviceType,
+                        ABI::Windows::Devices::Haptics::ISimpleHapticsController* controller,
+                        ABI::Windows::Devices::Haptics::HapticsControllerOverrideToken* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ClearOverrideHapticsController(
+                        ABI::Windows::Devices::Haptics::HapticsControllerOverrideToken token
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IInputHapticsManager = __uuidof(IInputHapticsManager);
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Haptics.IInputHapticsManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.InputHapticsManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IInputHapticsManagerStatics[] = L"Windows.Devices.Haptics.IInputHapticsManagerStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                MIDL_INTERFACE("7bb40f77-e187-5322-844e-aa58223c281a")
+                IInputHapticsManagerStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE IsSupported(
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE IsHapticDevicePresent(
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetForCurrentThread(
+                        ABI::Windows::Devices::Haptics::IInputHapticsManager** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TryGetForThread(
+                        UINT32 ThreadId,
+                        ABI::Windows::Devices::Haptics::IInputHapticsManager** result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IInputHapticsManagerStatics = __uuidof(IInputHapticsManagerStatics);
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -909,6 +1142,30 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
 
 /*
  *
+ * Class Windows.Devices.Haptics.InputHapticsManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Haptics.IInputHapticsManagerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Haptics.IInputHapticsManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Haptics_InputHapticsManager_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Haptics_InputHapticsManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Haptics_InputHapticsManager[] = L"Windows.Devices.Haptics.InputHapticsManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Class Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -991,6 +1248,18 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager;
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics;
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics;
@@ -1870,6 +2139,28 @@ interface __FIVectorView_1_Windows__CDevices__CHaptics__CSimpleHapticsController
 
 typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
+typedef enum __x_ABI_CWindows_CDevices_CHaptics_CHapticDeviceType __x_ABI_CWindows_CDevices_CHaptics_CHapticDeviceType;
+
+typedef struct __x_ABI_CWindows_CDevices_CHaptics_CHapticsControllerOverrideToken __x_ABI_CWindows_CDevices_CHaptics_CHapticsControllerOverrideToken;
+
+/*
+ *
+ * Struct Windows.Devices.Haptics.HapticDeviceType
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CDevices_CHaptics_CHapticDeviceType
+{
+    HapticDeviceType_None = 0,
+    HapticDeviceType_Generic = 1,
+    HapticDeviceType_Pen = 2,
+    HapticDeviceType_Touchpad = 3,
+    HapticDeviceType_Mouse = 4,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
 /*
  *
  * Struct Windows.Devices.Haptics.VibrationAccessStatus
@@ -1886,6 +2177,235 @@ enum __x_ABI_CWindows_CDevices_CHaptics_CVibrationAccessStatus
     VibrationAccessStatus_DeniedByEnergySaver = 3,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Struct Windows.Devices.Haptics.HapticsControllerOverrideToken
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+struct __x_ABI_CWindows_CDevices_CHaptics_CHapticsControllerOverrideToken
+{
+    INT64 Value;
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Haptics.IInputHapticsManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.InputHapticsManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IInputHapticsManager[] = L"Windows.Devices.Haptics.IInputHapticsManager";
+typedef struct __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_ThreadId)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        UINT32* value);
+    HRESULT (STDMETHODCALLTYPE* get_CurrentHapticsControllerDeviceType)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        enum __x_ABI_CWindows_CDevices_CHaptics_CHapticDeviceType* value);
+    HRESULT (STDMETHODCALLTYPE* get_CurrentHapticsController)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController** value);
+    HRESULT (STDMETHODCALLTYPE* TrySendHapticWaveform)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        UINT16 waveform,
+        UINT16 waveformFallback,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* TrySendHapticWaveformWithIntensity)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        UINT16 waveform,
+        UINT16 waveformFallback,
+        DOUBLE intensity,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* TrySendHapticWaveformForDuration)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        UINT16 waveform,
+        UINT16 waveformFallback,
+        DOUBLE intensity,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan playDuration,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* TrySendHapticWaveformForPlayCount)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        UINT16 waveform,
+        UINT16 waveformFallback,
+        DOUBLE intensity,
+        INT32 playCount,
+        struct __x_ABI_CWindows_CFoundation_CTimeSpan replayPauseInterval,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* TryStopFeedback)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* SetOverrideHapticsController)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        enum __x_ABI_CWindows_CDevices_CHaptics_CHapticDeviceType deviceType,
+        __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController* controller,
+        struct __x_ABI_CWindows_CDevices_CHaptics_CHapticsControllerOverrideToken* result);
+    HRESULT (STDMETHODCALLTYPE* ClearOverrideHapticsController)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager* This,
+        struct __x_ABI_CWindows_CDevices_CHaptics_CHapticsControllerOverrideToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerVtbl;
+
+interface __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_get_ThreadId(This, value) \
+    ((This)->lpVtbl->get_ThreadId(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_get_CurrentHapticsControllerDeviceType(This, value) \
+    ((This)->lpVtbl->get_CurrentHapticsControllerDeviceType(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_get_CurrentHapticsController(This, value) \
+    ((This)->lpVtbl->get_CurrentHapticsController(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_TrySendHapticWaveform(This, waveform, waveformFallback, result) \
+    ((This)->lpVtbl->TrySendHapticWaveform(This, waveform, waveformFallback, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_TrySendHapticWaveformWithIntensity(This, waveform, waveformFallback, intensity, result) \
+    ((This)->lpVtbl->TrySendHapticWaveformWithIntensity(This, waveform, waveformFallback, intensity, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_TrySendHapticWaveformForDuration(This, waveform, waveformFallback, intensity, playDuration, result) \
+    ((This)->lpVtbl->TrySendHapticWaveformForDuration(This, waveform, waveformFallback, intensity, playDuration, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_TrySendHapticWaveformForPlayCount(This, waveform, waveformFallback, intensity, playCount, replayPauseInterval, result) \
+    ((This)->lpVtbl->TrySendHapticWaveformForPlayCount(This, waveform, waveformFallback, intensity, playCount, replayPauseInterval, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_TryStopFeedback(This, result) \
+    ((This)->lpVtbl->TryStopFeedback(This, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_SetOverrideHapticsController(This, deviceType, controller, result) \
+    ((This)->lpVtbl->SetOverrideHapticsController(This, deviceType, controller, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_ClearOverrideHapticsController(This, token) \
+    ((This)->lpVtbl->ClearOverrideHapticsController(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Haptics.IInputHapticsManagerStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.InputHapticsManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IInputHapticsManagerStatics[] = L"Windows.Devices.Haptics.IInputHapticsManagerStatics";
+typedef struct __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* IsSupported)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* IsHapticDevicePresent)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetForCurrentThread)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager** result);
+    HRESULT (STDMETHODCALLTYPE* TryGetForThread)(__x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics* This,
+        UINT32 ThreadId,
+        __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManager** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStaticsVtbl;
+
+interface __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_IsSupported(This, result) \
+    ((This)->lpVtbl->IsSupported(This, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_IsHapticDevicePresent(This, result) \
+    ((This)->lpVtbl->IsHapticDevicePresent(This, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_GetForCurrentThread(This, result) \
+    ((This)->lpVtbl->GetForCurrentThread(This, result))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_TryGetForThread(This, ThreadId, result) \
+    ((This)->lpVtbl->TryGetForThread(This, ThreadId, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIInputHapticsManagerStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2451,6 +2971,30 @@ interface __x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStatics;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x40000
+
+/*
+ *
+ * Class Windows.Devices.Haptics.InputHapticsManager
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Haptics.IInputHapticsManagerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Haptics.IInputHapticsManager ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Haptics_InputHapticsManager_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Haptics_InputHapticsManager_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Haptics_InputHapticsManager[] = L"Windows.Devices.Haptics.InputHapticsManager";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *

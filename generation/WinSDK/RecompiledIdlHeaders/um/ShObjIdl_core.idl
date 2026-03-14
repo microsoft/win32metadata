@@ -8337,6 +8337,9 @@ library ShellCoreObjects
     // CLSID_DestinationList
     [ uuid(77f10cf0-3db5-4966-b520-b7c54fd35ed6) ] coclass DestinationList { interface ICustomDestinationList; }
 
+    // CLSID_DestinationListBoth
+    [ uuid(38fe0cf4-6a59-4729-8e4a-2d580059ede4) ] coclass DestinationListBoth { interface ICustomDestinationList; }
+
     // CLSID_ApplicationDestinations
     [ uuid(86c14003-4d6b-4ef3-a7b4-0506663b2e68) ] coclass ApplicationDestinations { interface IApplicationDestinations; }
 

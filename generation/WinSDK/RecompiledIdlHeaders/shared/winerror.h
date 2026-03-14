@@ -3923,6 +3923,15 @@
 #define ERROR_CLOUD_FILE_HYDRATION_NOT_AVAILABLE 523L
 
 //
+// MessageId: ERROR_SYSTEM_FILE_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The specified operation is not supported on a system file.
+//
+#define ERROR_SYSTEM_FILE_NOT_SUPPORTED  525L
+
+//
 // **** Available SYSTEM error codes ****
 //
 //
@@ -29056,6 +29065,15 @@
 //
 #define ERROR_CANNOT_COMPOSE_APISET_EXTENSION 15380L
 
+//
+// MessageId: ERROR_APISET_SCHEMA_VERSION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The API Set schema version is not supported.
+//
+#define ERROR_APISET_SCHEMA_VERSION_NOT_SUPPORTED 15381L
+
 //////////////////////////////////////////////////
 //                                              //
 //         Start of Run Level error codes       //
@@ -29860,6 +29878,24 @@
 // The deployment operation on this package is blocked because the package family name is in RemoveDefaultMicrosoftStorePackages policy override.
 //
 #define ERROR_DEPLOYMENT_BLOCKED_BY_REMOVEDEFAULTPACKAGES_POLICY 15679L
+
+//
+// MessageId: ERROR_URI_BLOCKED_BY_POLICY_MSIXALLOWEDZONES
+//
+// MessageText:
+//
+// The source uri is blocked by MsixAllowedZones policy. Please contact your system administrator.
+//
+#define ERROR_URI_BLOCKED_BY_POLICY_MSIXALLOWEDZONES 15680L
+
+//
+// MessageId: ERROR_URI_RECOMMENDED_BLOCK_BY_SMARTSCREEN
+//
+// MessageText:
+//
+// The source uri is recommended to be blocked by SmartScreen. Please contact your system administrator.
+//
+#define ERROR_URI_RECOMMENDED_BLOCK_BY_SMARTSCREEN 15681L
 
 //////////////////////////
 //                      //
@@ -51401,6 +51437,15 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
 // FIPS compliance is required, but the hardware crypto key manager does not report compliance with this standard.
 //
 #define FVE_E_HARDWARE_CRYPTO_KEY_MANAGER_NOT_FIPS_COMPLIANT _HRESULT_TYPEDEF_(0xC0310115L)
+
+//
+// MessageId: FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG
+//
+// MessageText:
+//
+// The TPM PCR values did not match what was calculated from the TCG log.
+//
+#define FVE_E_TPM_PCRS_DO_NOT_MATCH_LOG  _HRESULT_TYPEDEF_(0xC0310116L)
 
 //
 // =======================================================

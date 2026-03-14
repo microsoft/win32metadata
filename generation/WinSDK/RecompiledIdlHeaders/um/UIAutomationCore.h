@@ -426,6 +426,51 @@ typedef struct CUIAutomationRegistrar CUIAutomationRegistrar;
 #endif 	/* __CUIAutomationRegistrar_FWD_DEFINED__ */
 
 
+#ifndef __IUIAutomationClientInfo_FWD_DEFINED__
+#define __IUIAutomationClientInfo_FWD_DEFINED__
+typedef interface IUIAutomationClientInfo IUIAutomationClientInfo;
+
+#endif 	/* __IUIAutomationClientInfo_FWD_DEFINED__ */
+
+
+#ifndef __CUIAutomationClientInfo_FWD_DEFINED__
+#define __CUIAutomationClientInfo_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CUIAutomationClientInfo CUIAutomationClientInfo;
+#else
+typedef struct CUIAutomationClientInfo CUIAutomationClientInfo;
+#endif /* __cplusplus */
+
+#endif 	/* __CUIAutomationClientInfo_FWD_DEFINED__ */
+
+
+#ifndef __IUIAutomationClientConnectionCallback_FWD_DEFINED__
+#define __IUIAutomationClientConnectionCallback_FWD_DEFINED__
+typedef interface IUIAutomationClientConnectionCallback IUIAutomationClientConnectionCallback;
+
+#endif 	/* __IUIAutomationClientConnectionCallback_FWD_DEFINED__ */
+
+
+#ifndef __IUIAutomationClientInfoSource_FWD_DEFINED__
+#define __IUIAutomationClientInfoSource_FWD_DEFINED__
+typedef interface IUIAutomationClientInfoSource IUIAutomationClientInfoSource;
+
+#endif 	/* __IUIAutomationClientInfoSource_FWD_DEFINED__ */
+
+
+#ifndef __CUIAutomationClientInfoSource_FWD_DEFINED__
+#define __CUIAutomationClientInfoSource_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CUIAutomationClientInfoSource CUIAutomationClientInfoSource;
+#else
+typedef struct CUIAutomationClientInfoSource CUIAutomationClientInfoSource;
+#endif /* __cplusplus */
+
+#endif 	/* __CUIAutomationClientInfoSource_FWD_DEFINED__ */
+
+
 /* header files for imported files */
 #include "oaidl.h"
 #include "oleacc.h"
@@ -7993,6 +8038,335 @@ EXTERN_C const CLSID CLSID_CUIAutomationRegistrar;
 
 class DECLSPEC_UUID("6e29fabf-9977-42d1-8d0e-ca7e61ad87e6")
 CUIAutomationRegistrar;
+#endif
+
+#ifndef __IUIAutomationClientInfo_INTERFACE_DEFINED__
+#define __IUIAutomationClientInfo_INTERFACE_DEFINED__
+
+/* interface IUIAutomationClientInfo */
+/* [oleautomation][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IUIAutomationClientInfo;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B2E8A3F1-4C5D-4E7A-8F6B-3D2E1C9A0B8F")
+    IUIAutomationClientInfo : public IUnknown
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProcessId( 
+            /* [retval][out] */ __RPC__out DWORD *processId) = 0;
+        
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProcessName( 
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *processName) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IUIAutomationClientInfoVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IUIAutomationClientInfo * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IUIAutomationClientInfo * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IUIAutomationClientInfo * This);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientInfo, get_ProcessId)
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessId )( 
+            __RPC__in IUIAutomationClientInfo * This,
+            /* [retval][out] */ __RPC__out DWORD *processId);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientInfo, get_ProcessName)
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessName )( 
+            __RPC__in IUIAutomationClientInfo * This,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *processName);
+        
+        END_INTERFACE
+    } IUIAutomationClientInfoVtbl;
+
+    interface IUIAutomationClientInfo
+    {
+        CONST_VTBL struct IUIAutomationClientInfoVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IUIAutomationClientInfo_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IUIAutomationClientInfo_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IUIAutomationClientInfo_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IUIAutomationClientInfo_get_ProcessId(This,processId)	\
+    ( (This)->lpVtbl -> get_ProcessId(This,processId) ) 
+
+#define IUIAutomationClientInfo_get_ProcessName(This,processName)	\
+    ( (This)->lpVtbl -> get_ProcessName(This,processName) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IUIAutomationClientInfo_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_CUIAutomationClientInfo;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("C2D4F567-8A9B-4C3E-9F1A-2B5C7D8E0F3A")
+CUIAutomationClientInfo;
+#endif
+
+#ifndef __IUIAutomationClientConnectionCallback_INTERFACE_DEFINED__
+#define __IUIAutomationClientConnectionCallback_INTERFACE_DEFINED__
+
+/* interface IUIAutomationClientConnectionCallback */
+/* [oleautomation][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IUIAutomationClientConnectionCallback;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5B8E8F2A-9C7D-4F3E-A1B2-8D6E9F4C0A1B")
+    IUIAutomationClientConnectionCallback : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE OnConnected( 
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientInfo *clientInfo) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE OnDisconnected( 
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientInfo *clientInfo) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IUIAutomationClientConnectionCallbackVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IUIAutomationClientConnectionCallback * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IUIAutomationClientConnectionCallback * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IUIAutomationClientConnectionCallback * This);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientConnectionCallback, OnConnected)
+        HRESULT ( STDMETHODCALLTYPE *OnConnected )( 
+            __RPC__in IUIAutomationClientConnectionCallback * This,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientInfo *clientInfo);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientConnectionCallback, OnDisconnected)
+        HRESULT ( STDMETHODCALLTYPE *OnDisconnected )( 
+            __RPC__in IUIAutomationClientConnectionCallback * This,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientInfo *clientInfo);
+        
+        END_INTERFACE
+    } IUIAutomationClientConnectionCallbackVtbl;
+
+    interface IUIAutomationClientConnectionCallback
+    {
+        CONST_VTBL struct IUIAutomationClientConnectionCallbackVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IUIAutomationClientConnectionCallback_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IUIAutomationClientConnectionCallback_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IUIAutomationClientConnectionCallback_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IUIAutomationClientConnectionCallback_OnConnected(This,clientInfo)	\
+    ( (This)->lpVtbl -> OnConnected(This,clientInfo) ) 
+
+#define IUIAutomationClientConnectionCallback_OnDisconnected(This,clientInfo)	\
+    ( (This)->lpVtbl -> OnDisconnected(This,clientInfo) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IUIAutomationClientConnectionCallback_INTERFACE_DEFINED__ */
+
+
+#ifndef __IUIAutomationClientInfoSource_INTERFACE_DEFINED__
+#define __IUIAutomationClientInfoSource_INTERFACE_DEFINED__
+
+/* interface IUIAutomationClientInfoSource */
+/* [oleautomation][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IUIAutomationClientInfoSource;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F4B8A2E1-9C3D-4A7E-8F6B-2D5E4C1A9B8F")
+    IUIAutomationClientInfoSource : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE RegisterClientConnectionCallback( 
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientConnectionCallback *callback,
+            /* [annotation][out] */ 
+            _Out_  unsigned __int64 *handle) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE UnregisterClientConnectionCallback( 
+            /* [annotation][in] */ 
+            _In_  unsigned __int64 handle) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetConnectedClients( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *clients) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IUIAutomationClientInfoSourceVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IUIAutomationClientInfoSource * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IUIAutomationClientInfoSource * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IUIAutomationClientInfoSource * This);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientInfoSource, RegisterClientConnectionCallback)
+        HRESULT ( STDMETHODCALLTYPE *RegisterClientConnectionCallback )( 
+            __RPC__in IUIAutomationClientInfoSource * This,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationClientConnectionCallback *callback,
+            /* [annotation][out] */ 
+            _Out_  unsigned __int64 *handle);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientInfoSource, UnregisterClientConnectionCallback)
+        HRESULT ( STDMETHODCALLTYPE *UnregisterClientConnectionCallback )( 
+            __RPC__in IUIAutomationClientInfoSource * This,
+            /* [annotation][in] */ 
+            _In_  unsigned __int64 handle);
+        
+        DECLSPEC_XFGVIRT(IUIAutomationClientInfoSource, GetConnectedClients)
+        HRESULT ( STDMETHODCALLTYPE *GetConnectedClients )( 
+            __RPC__in IUIAutomationClientInfoSource * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *clients);
+        
+        END_INTERFACE
+    } IUIAutomationClientInfoSourceVtbl;
+
+    interface IUIAutomationClientInfoSource
+    {
+        CONST_VTBL struct IUIAutomationClientInfoSourceVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IUIAutomationClientInfoSource_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IUIAutomationClientInfoSource_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IUIAutomationClientInfoSource_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IUIAutomationClientInfoSource_RegisterClientConnectionCallback(This,callback,handle)	\
+    ( (This)->lpVtbl -> RegisterClientConnectionCallback(This,callback,handle) ) 
+
+#define IUIAutomationClientInfoSource_UnregisterClientConnectionCallback(This,handle)	\
+    ( (This)->lpVtbl -> UnregisterClientConnectionCallback(This,handle) ) 
+
+#define IUIAutomationClientInfoSource_GetConnectedClients(This,clients)	\
+    ( (This)->lpVtbl -> GetConnectedClients(This,clients) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IUIAutomationClientInfoSource_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_CUIAutomationClientInfoSource;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("A8D4F123-7B2C-4E5F-9A1B-3C8D6E9F0A2B")
+CUIAutomationClientInfoSource;
 #endif
 #endif /* __UIA_LIBRARY_DEFINED__ */
 

@@ -6674,16 +6674,23 @@ YieldProcessor (
 #define CONTEXT_ARM64_DEBUG_REGISTERS (CONTEXT_ARM64 | 0x8L)
 #define CONTEXT_ARM64_X18 (CONTEXT_ARM64 | 0x10L)
 #define CONTEXT_ARM64_XSTATE (CONTEXT_ARM64 | 0x20L)
+#define CONTEXT_ARM64_FLOATING_POINT_LOW (CONTEXT_ARM64 | 0x40L)
+#define CONTEXT_ARM64_FLOATING_POINT_HIGH (CONTEXT_ARM64 | 0x80L)
 
 //
 // CONTEXT_ARM64_X18 is not part of CONTEXT_ARM64_FULL because in NT user-mode
 // threads, x18 contains a pointer to the TEB and should generally not be set
 // without intending to.
 //
+// CONTEXT_ARM64_FLOATING_POINT_LOW and CONTEXT_ARM64_FLOATING_POINT_HIGH are
+// not part of CONTEXT_ARM64_FULL because they are only used in limited cases
+// involving conversion between ARM64 and ARM64EC (AMD64) context records.
+//
 
 #define CONTEXT_ARM64_FULL (CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT)
 #define CONTEXT_ARM64_ALL  (CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT | \
-                            CONTEXT_ARM64_DEBUG_REGISTERS | CONTEXT_ARM64_X18)
+                            CONTEXT_ARM64_DEBUG_REGISTERS | CONTEXT_ARM64_X18 | CONTEXT_ARM64_FLOATING_POINT_LOW | \
+                            CONTEXT_ARM64_FLOATING_POINT_HIGH)
 
 #if defined(_ARM64_)
 
@@ -6762,6 +6769,14 @@ YieldProcessor (
 //
 // CONTEXT_DEBUG_REGISTERS specifies up to 16 of DBGBVR, DBGBCR, DBGWVR,
 //      DBGWCR.
+//
+// CONTEXT_XSTATE specifies ARM64 extended state such as SVE and SME.
+//
+// CONTEXT_ARM64_FLOATING_POINT_LOW specifies that only the FPCR, FPSR and
+// V0-V15 should be operated on, and CONTEXT_ARM64_FLOATING_POINT_HIGH
+// specifies that only V16-31 should be operated on, for use in ARM64 context
+// records that have been converted from ARM64EC (AMD64) context records. Both
+// flags are considered to be set if CONTEXT_FLOATING_POINT is set.
 //
 
 typedef union _ARM64_NT_NEON128 {
@@ -10757,6 +10772,7 @@ typedef struct _ATTRIBUTES_AND_SID {
 #define SECURITY_MANDATORY_HIGH_RID                 (0x00003000L)
 #define SECURITY_MANDATORY_SYSTEM_RID               (0x00004000L)
 #define SECURITY_MANDATORY_PROTECTED_PROCESS_RID    (0x00005000L)
+#define SECURITY_MANDATORY_MEDIUM_PLUS_CREDUI_RID   (SECURITY_MANDATORY_MEDIUM_RID + 0xA)
 
 //
 // SECURITY_MANDATORY_MAXIMUM_USER_RID is the highest RID that
@@ -14499,6 +14515,354 @@ typedef struct _XSTATE_CONFIGURATION {
     WORD   Spare1;
 
 } XSTATE_CONFIGURATION, *PXSTATE_CONFIGURATION;
+
+//
+//
+
+//
+//  Runtime Report Definitions
+//
+
+//
+// ===============================================
+// Runtime Report Package Format:
+//
+// ------------------------------------- Signed part Begin
+//
+//     RUNTIME_REPORT_PACKAGE_HEADER
+//
+//     BYTE Nonce[RUNTIME_REPORT_NONCE_SIZE]
+//
+//     RUNTIME_REPORT_DIGEST_HEADER_A
+//
+//     RUNTIME_REPORT_DIGEST_HEADER_B
+//     ...
+//     ...
+//
+// ------------------------------------- Signed part End
+//
+//     Signature Blob
+//
+// ------------------------------------- Authenticated part Begin
+//
+//     RUNTIME_REPORT_HEADER
+//     REPORT_A
+//
+//     RUNTIME_REPORT_HEADER
+//     REPORT_B
+//
+// ------------------------------------- Authenticated part End
+//
+// ===============================================
+//
+
+#define RUNTIME_REPORT_PACKAGE_MAGIC    0x52545250  // = "RTRP"
+
+#define RUNTIME_REPORT_PACKAGE_VERSION_CURRENT  (1)
+
+#define RUNTIME_REPORT_NONCE_SIZE   32
+
+#define RUNTIME_REPORT_DIGEST_MAX_SIZE  64
+
+#define RUNTIME_REPORT_SIGNATURE_SCHEME_SHA512_RSA_PSS_SHA512   (1)
+
+//
+// Runtime Report Type Enumeration
+//
+
+typedef enum _RUNTIME_REPORT_TYPE {
+    RuntimeReportTypeDriver = 0,
+    RuntimeReportTypeMax
+} RUNTIME_REPORT_TYPE;
+
+//
+// Macro to convert a report type enum value to a bitmap mask
+//
+
+#define RUNTIME_REPORT_TYPE_TO_MASK(type) (1ULL << (type))
+
+//
+// Bitmap mask containing all valid report types
+//
+
+#define RUNTIME_REPORT_TYPE_MASK_ALL ((1ULL << RuntimeReportTypeMax) - 1)
+
+typedef struct _RUNTIME_REPORT_PACKAGE_HEADER {
+
+    //
+    // Set to RUNTIME_REPORT_PACKAGE_MAGIC = 0x52545250 ("RTRP")
+    //
+
+    UINT32 Magic;
+
+    //
+    // The version of the package format
+    //
+
+    UINT16 PackageVersion;
+
+    //
+    // Number of different report types contained in the package.
+    //
+
+    UINT16 NumberOfReports;
+
+    //
+    // A bitmap of all the report types in the package.
+    //
+    // Use RUNTIME_REPORT_TYPE_TO_MASK macro to convert enum values to bitmap masks.
+    // Current valid report types:
+    //      RuntimeReportTypeDriver = 0
+    //
+
+    UINT64 ReportTypesBitmap;
+
+    //
+    // The size of the total package including the package header,
+    // various runtime reports, their digests, and the signature blob.
+    //
+
+    UINT32 PackageSize;
+
+    //
+    // The type of digest contained in the report digest headers.
+    //
+    // Current valid values:
+    //      CALG_SHA_512 (see wincrypt.h)
+    //
+
+    UINT16 ReportDigestType;
+
+    //
+    // Total size of the signed runtime report digest headers
+    // following the package header.
+    //
+
+    UINT16 TotalReportDigestsSize;
+
+    //
+    // Reserved field. Must be set to zero.
+    //
+
+    UINT16 Reserved;
+
+    //
+    // The signature scheme used to sign the runtime reports.
+    //
+    // Current valid values:
+    //      RUNTIME_REPORT_SIGNATURE_SCHEME_SHA512_RSA_PSS_SHA512 = 1
+    //
+
+    UINT16 SignatureScheme;
+
+    //
+    // Size of the signature blob following the runtime report digests.
+    //
+
+    UINT32 SignatureSize;
+
+    //
+    // Total size of the authenticated (but unsigned) runtime reports
+    // following the signature blob.
+    //
+
+    UINT32 TotalAuthenticatedReportsSize;
+
+} RUNTIME_REPORT_PACKAGE_HEADER, *PRUNTIME_REPORT_PACKAGE_HEADER;
+
+typedef struct _RUNTIME_REPORT_DIGEST_HEADER {
+
+    //
+    // Indicates the type of report that was hashed.
+    //
+    // Current valid values:
+    //      RuntimeReportTypeDriver = 0
+    //
+
+    UINT16 ReportType;
+
+    //
+    // Reserved field.
+    //
+
+    UINT16 Reserved;
+
+    //
+    // Digest of the report including the report header.
+    // This is a SHA-512 digest.
+    //
+
+    UINT8 ReportDigest[RUNTIME_REPORT_DIGEST_MAX_SIZE];
+
+} RUNTIME_REPORT_DIGEST_HEADER, *PRUNTIME_REPORT_DIGEST_HEADER;
+
+typedef struct _RUNTIME_REPORT_HEADER {
+
+    //
+    // Indicates the type of report.
+    //
+    // Current valid values:
+    //      RuntimeReportTypeDriver = 0
+    //
+
+    UINT16 ReportType;
+
+    //
+    // Reserved field.
+    //
+
+    UINT16 Reserved;
+
+    //
+    // The number of bytes consumed by this report, including the header.
+    //
+
+    UINT32 ReportSize;
+
+} RUNTIME_REPORT_HEADER, *PRUNTIME_REPORT_HEADER;
+
+//
+//  Driver Report Definitions
+//
+
+#define DRIVER_REPORT_DIGEST_MAX_SIZE   RUNTIME_REPORT_DIGEST_MAX_SIZE
+
+#define DRIVER_REPORT_NAME_MAX_LENGTH   32
+
+typedef struct _DRIVER_INFO_ENTRY {
+
+    //
+    // Internal name of the driver from the resource section.
+    //
+
+    CHAR InternalName[DRIVER_REPORT_NAME_MAX_LENGTH];
+
+    //
+    // Hash algorithm used to calculate the image digest.
+    //
+
+    UINT16 ImageHashAlgorithm;
+
+    //
+    // Hash algorithm used to calculate the thumbprint of the leaf certificate
+    // that validates the entire image.
+    //
+
+    UINT16 PublisherThumbprintHashAlgorithm;
+
+    //
+    // Offset from the start of the driver report to a buffer containing the
+    // digest of the driver image on disk.
+    //
+
+    UINT32 ImageHashOffset;
+
+    //
+    // Offset from the start of the driver report to a buffer containing the
+    // thumbprint of the leaf certificate validating the entire image
+    //
+
+    UINT32 PublisherThumbprintOffset;
+
+    //
+    // Number of times that this driver image has been loaded into the system.
+    //
+
+    UINT16 LoadCount;
+
+    //
+    // Size and Offset of a string indicating the OEM name stored in the
+    // authenticated OPUS block of the image digital signature.
+    // There is no OEM name for inbox Windows signed drivers. The size does *NOT*
+    // include the NULL terminator (even though the string is NULL-terminated).
+    //
+
+    UINT16 OemNameSize;
+    UINT32 OemNameOffset;
+
+    //
+    // Flags indicating various properties of the current driver image:
+    //      - Unloaded - Set to 1 in case the driver is current unloaded.
+    //
+    //      - BootDriver - Set to 1 in case the image is a Boot Driver;
+    //           0 otherwise (the image is a Runtime driver).
+    //
+    //      - HotPatch - Set to 1 in case the image can be also loaded as Hotpatch;
+    //
+    //      - Reserved - Reserved flags bits.
+    //
+
+    union {
+        struct {
+            UINT16 Unloaded : 1;
+            UINT16 BootDriver : 1;
+            UINT16 HotPatch : 1;
+            UINT16 Reserved : 13;
+        };
+        UINT16 AsUInt16;
+    } Flags;
+
+    UINT16 Padding;
+} DRIVER_INFO_ENTRY, *PDRIVER_INFO_ENTRY;
+
+typedef struct _DRIVER_RUNTIME_REPORT {
+
+    //
+    // The driver runtime report header.
+    //
+
+    RUNTIME_REPORT_HEADER Header;
+
+    //
+    // The current number of unique drivers in the report.
+    //
+
+    UINT16 NumberOfDrivers;
+
+    //
+    // Flags indicating various properties of the report:
+    //      - ReportOverflowed - Secure Kernel places a limit on the number of
+    //          drivers it can list in the report. If this is set, it indicates
+    //          that some loaded drivers might be missing from the report.
+    //
+    //      - PartialReport - Indicates whether the report contains only a
+    //          subset of NT loaded drivers.
+    //
+    //      - IncludeBootDrivers - Set to 1 in case the report includes
+    //          boot-loaded drivers; 0 otherwise (in that case the information
+    //          is stored in the TCG Log).
+    //
+    //      - Reserved - Reserved flags bits.
+    //
+
+    union {
+        struct {
+            UINT16 ReportOverflowed : 1;
+            UINT16 PartialReport : 1;
+            UINT16 IncludeBootDrivers : 1;
+            UINT16 Reserved : 13;
+        };
+        UINT16 AsUInt16;
+    } Flags;
+
+    //
+    // A list, of size zero up to MaximumDriversRecorded, containing driver entries.
+    // Unloaded drivers are not removed from the list.
+    //
+
+    DRIVER_INFO_ENTRY DriverEntries[ANYSIZE_ARRAY];
+
+    //
+    // After the driver info array the driver runtime report store hashes,
+    // strings and information that are dynamic in size.
+    //
+    // BYTE DynamicBuffer[ANYSIZE_ARRAY];
+    //
+    // The dynamic buffer, for each driver is composed off:
+    // ImageHash - PublisherHash - OemName.
+    //
+
+} DRIVER_RUNTIME_REPORT, *PDRIVER_RUNTIME_REPORT;
 
 //
 // begin_ntifs

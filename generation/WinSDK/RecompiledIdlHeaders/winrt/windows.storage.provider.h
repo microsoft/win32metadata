@@ -4655,10 +4655,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderStat
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__
@@ -4707,7 +4704,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4715,10 +4711,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSugg
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__
@@ -4746,7 +4739,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4754,12 +4746,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSugg
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__
@@ -4798,7 +4787,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -5613,8 +5601,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Storage.Provider.CloudFilesContract API contract
  *
@@ -5626,14 +5612,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #ifndef RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionResult_DEFINED
 #define RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionResult_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Storage_Provider_StorageProviderSuggestionResult[] = L"Windows.Storage.Provider.StorageProviderSuggestionResult";
 #endif
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -5641,22 +5625,18 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Class implements the following interfaces:
  *    Windows.Storage.Provider.IStorageProviderSuggestionsQueryOptions ** Default Interface **
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #ifndef RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions_DEFINED
 #define RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions[] = L"Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions";
 #endif
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12680,10 +12660,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderStat
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__
@@ -12773,7 +12750,6 @@ interface __x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandle
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandler_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12781,10 +12757,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSugg
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__
@@ -12845,7 +12818,6 @@ interface __x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandle
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsHandlerFactory_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12853,12 +12825,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSugg
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #if !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__
@@ -12938,7 +12907,6 @@ interface __x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryO
 EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions;
 #endif /* !defined(____x_ABI_CWindows_CStorage_CProvider_CIStorageProviderSuggestionsQueryOptions_INTERFACE_DEFINED__) */
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -14065,8 +14033,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 7.0 of the Windows.Storage.Provider.CloudFilesContract API contract
  *
@@ -14078,14 +14044,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #ifndef RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionResult_DEFINED
 #define RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionResult_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Storage_Provider_StorageProviderSuggestionResult[] = L"Windows.Storage.Provider.StorageProviderSuggestionResult";
 #endif
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -14093,22 +14057,18 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Storage.Provider.CloudFilesContract in version 7.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Class implements the following interfaces:
  *    Windows.Storage.Provider.IStorageProviderSuggestionsQueryOptions ** Default Interface **
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
 #ifndef RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions_DEFINED
 #define RUNTIMECLASS_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Storage_Provider_StorageProviderSuggestionsQueryOptions[] = L"Windows.Storage.Provider.StorageProviderSuggestionsQueryOptions";
 #endif
 #endif // WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION >= 0x70000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *

@@ -3100,6 +3100,19 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderSharingStatus, 0xFCEFF153, 0xE839, 0x4CF3
 DEFINE_PROPERTYKEY(PKEY_StorageProviderStatus, 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8, 110);
 #define INIT_PKEY_StorageProviderStatus { { 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 0xE7, 0xEA, 0x22, 0x83, 0x20, 0x94, 0xB8 }, 110 }
 
+//  Name:     System.StorageProviderUserAccountKind -- PKEY_StorageProviderUserAccountKind
+//  Type:     UInt32 -- VT_UI4
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 17
+//
+//  The account kind for the user who is authenticated with this storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderUserAccountKind, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 17);
+#define INIT_PKEY_StorageProviderUserAccountKind { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 17 }
+
+// Possible discrete values for PKEY_StorageProviderUserAccountKind are:
+#define STORAGEPROVIDERUSERACCOUNTKIND_UNKNOWN 0ul
+#define STORAGEPROVIDERUSERACCOUNTKIND_CONSUMER 1ul
+#define STORAGEPROVIDERUSERACCOUNTKIND_BUSINESS 2ul
+
 //  Name:     System.StorageProviderUserId -- PKEY_StorageProviderUserId
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
 //  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 13

@@ -158,7 +158,7 @@ _ACRTIMP size_t __cdecl wcsnlen(
         _MaxCount <= _String_length_(_Source),
         _Post_satisfies_(return == _MaxCount)
     )
-    static __inline size_t __CRTDECL wcsnlen_s(
+    _CRT_NONSTANDARD_STATIC __inline size_t __CRTDECL wcsnlen_s(
         _In_reads_or_z_(_MaxCount) wchar_t const* _Source,
         _In_                       size_t         _MaxCount
         )
@@ -235,6 +235,7 @@ _ACRTIMP wchar_t* __cdecl wcstok(
                 "wcstok, define _CRT_NON_CONFORMING_WCSTOK.")
     #endif
 
+    // TRANSITION OS-58345186: this function should have external linkage.
     _Check_return_ _CRT_INSECURE_DEPRECATE(wcstok_s)
     static __inline wchar_t* __CRTDECL _wcstok(
         _Inout_opt_z_ wchar_t*       const _String,

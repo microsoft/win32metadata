@@ -354,9 +354,9 @@ struct sqlite3_api_routines {
   const char *(SQLITE_APICALL *filename_journal)(const char*);
   const char *(SQLITE_APICALL *filename_wal)(const char*);
   /* Version 3.32.0 and later */
-  _SQLITE_FILENAME_NONCONST(SQLITE_APICALL *create_filename)(const char*,const char*,const char*,
+  const char *(SQLITE_APICALL *create_filename)(const char*,const char*,const char*,
                            int,const char**);
-  void (SQLITE_APICALL *free_filename)(_SQLITE_FILENAME_NONCONST);
+  void (SQLITE_APICALL *free_filename)(const char*);
   sqlite3_file *(SQLITE_APICALL *database_file_object)(const char*);
   /* Version 3.34.0 and later */
   int (SQLITE_APICALL *txn_state)(sqlite3*,const char*);
@@ -389,6 +389,14 @@ struct sqlite3_api_routines {
   int (SQLITE_APICALL *is_interrupted)(sqlite3*);
   /* Version 3.43.0 and later */
   int (SQLITE_APICALL *stmt_explain)(sqlite3_stmt*,int);
+  /* Version 3.44.0 and later */
+  void *(SQLITE_APICALL *get_clientdata)(sqlite3*,const char*);
+  int (SQLITE_APICALL *set_clientdata)(sqlite3*, const char*, void*, void(SQLITE_CALLBACK *)(void*));
+  /* Version 3.50.0 and later */
+  int (SQLITE_APICALL *setlk_timeout)(sqlite3*,int,int);
+  /* Version 3.51.0 and later */
+  int (SQLITE_APICALL *set_errmsg)(sqlite3*,int,const char*);
+  int (SQLITE_APICALL *db_status64)(sqlite3*,int,sqlite3_int64*,sqlite3_int64*,int);
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 };
 
@@ -397,7 +405,7 @@ struct sqlite3_api_routines {
 ** This is the function signature used for all extension entry points.  It
 ** is also defined in the file "loadext.c".
 */
-typedef int (SQLITE_APICALL *sqlite3_loadext_entry)(
+typedef int (*sqlite3_loadext_entry)(
   sqlite3 *db,                       /* Handle to the database. */
   char **pzErrMsg,                   /* Used to set error string on failure. */
   const sqlite3_api_routines *pThunk /* Extension API function pointers. */
@@ -743,6 +751,14 @@ typedef int (SQLITE_APICALL *sqlite3_loadext_entry)(
 #define sqlite3_is_interrupted         sqlite3_api->is_interrupted
 /* Version 3.43.0 and later */
 #define sqlite3_stmt_explain           sqlite3_api->stmt_explain
+/* Version 3.44.0 and later */
+#define sqlite3_get_clientdata         sqlite3_api->get_clientdata
+#define sqlite3_set_clientdata         sqlite3_api->set_clientdata
+/* Version 3.50.0 and later */
+#define sqlite3_setlk_timeout          sqlite3_api->setlk_timeout
+/* Version 3.51.0 and later */
+#define sqlite3_set_errmsg             sqlite3_api->set_errmsg
+#define sqlite3_db_status64            sqlite3_api->db_status64
 #endif /* NTDDI_VERSION >= NTDDI_WIN11_GE */
 #endif /* !defined(SQLITE_CORE) && !defined(SQLITE_OMIT_LOAD_EXTENSION) */
 

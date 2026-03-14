@@ -5402,6 +5402,10 @@ DeviceDsmValidateInput (
     DWORD   Min   = 0;
     BOOLEAN Valid = FALSE;
 
+    if (Input->Size != sizeof(*Input)) {
+        goto Cleanup;
+    }
+
     if (Definition->Action != Input->Action) {
         goto Cleanup;
     }

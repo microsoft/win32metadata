@@ -209,7 +209,24 @@ extern "C" {
 #define SIPAEV_AMD_DRTM_DRV (0x00008301)
 #define SIPAEV_AMD_AGESA_DRV (0x00008302)
 #define SIPAEV_AMD_PSP_END (0x000083FF)
-#endif
+//----------------------------------PCR Event Types for ARM DRTM
+#define SIPAEV_ARM_BASE (0x00009000)
+#define SIPAEV_ARM_PCR_SCHEMA (0x00009001)
+#define SIPAEV_ARM_DCE (0x00009002)
+#define SIPAEV_ARM_DCE_PUBKEY (0x00009003)
+#define SIPAEV_ARM_DLME (0x00009004)
+#define SIPAEV_ARM_DLME_ENTRY_POINT (0x00009005)
+#define SIPAEV_ARM_DEBUG_CONFIG (0x00009006)
+#define SIPAEV_ARM_NONSECURE_CONFIG  (0x00009007)
+#define SIPAEV_ARM_DCE_SECONDARY (0x00009008)
+#define SIPAEV_ARM_TZFW (0x00009009)
+#define SIPAEV_ARM_SEPARATOR (0x0000900A)
+#define SIPAEV_ARM_DLME_PUBKEY (0x0000900B)
+#define SIPAEV_ARM_DLME_SVN (0x0000900C)
+#define SIPAEV_ARM_NO_ACTION (0x0000900D)
+#define SIPAEV_ARM_SECURE_INT_DISABLE (0x0000900E)
+
+#endif // SIPAEV_PREBOOT_CERT
 
 //-----------------------------Types of tagged events in WBCL file
 #ifndef SIPAEVENTTYPE_NONMEASURED
@@ -308,6 +325,13 @@ extern "C" {
                                             0x000a)
 
 #endif
+
+// This event contains the IDK caching status for VsmProvisionIdk
+// The definitions for these events are contained in VsmConstants.h
+//     - IDK_PROVISIONING_TYPE_HW (0) - Uses Cached IDKS if available
+//     - IDK_PROVISIONING_TYPE_VTPM (1) - Skips caching logic and generates new IDKS on boot
+#define SIPAEVENT_IDK_GENERATION_STATUS    (SIPAEVENTTYPE_INFORMATION + \
+                                            0x000C)
 
 //
 // This event data contains a single DWORD which corresponds
@@ -599,6 +623,18 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
                                             0x000c)
 
 #endif //NTDDI_VERSION >= NTDDI_WIN10_NI
+
+#if NTDDI_VERSION >= NTDDI_WIN10_GE
+
+#define SIPAEVENT_MODULE_ORIGINAL_FILENAME (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000d)
+
+#define SIPAEVENT_MODULE_VERSION           (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000e)
+
+#define SIPAEVENT_PUBLISHER_OEMNAME        (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000f)
+#endif //NTDDI_VERSION >= NTDDI_WIN10_GE
 
 //SIPAEVENTTYPE_TRUSTPOINT
 #define SIPAEVENT_QUOTE                    (SIPAEVENTTYPE_NONMEASURED + \

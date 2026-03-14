@@ -406,6 +406,8 @@ Abstract:
     #define STATIC_CODECAPI_AVEncVideoOutputBitsUsedMapBlockSize        0x6c2cd11a, 0xca3b, 0x44bd, 0x9a, 0x9e, 0x93, 0xb0, 0x36, 0x34, 0xc3, 0x6e
     #define STATIC_CODECAPI_AVEncVideoSatdMapBlockSize      0x596f1106, 0x8ce0, 0x4302, 0xaf, 0x79, 0xc4, 0xec, 0x67, 0xaa, 0xdc, 0x6
 
+    #define STATIC_CODECAPI_AVEncVideoInputDeltaQPBlockSettings 0x5a4787dc, 0x648, 0x47aa, 0xb9, 0x45, 0x55, 0x2b, 0xfa, 0xd2, 0xa6, 0xd8
+    #define STATIC_CODECAPI_AVEncVideoInputAbsoluteQPBlockSettings 0xef95a145, 0x4f91, 0x4dea, 0x81, 0x73, 0xac, 0xff, 0x11, 0x43, 0x42, 0x10
 // end of static definitions }
 
 //
@@ -2189,6 +2191,18 @@ DEFINE_CODECAPI_GUID( AVEncVideoOutputBitsUsedMapBlockSize,"6C2CD11A-CA3B-44BD-9
 // A zero value disables the SATD map reporting. 
 DEFINE_CODECAPI_GUID( AVEncVideoSatdMapBlockSize, "596F1106-8CE0-4302-AF79-C4EC67AADC6D", 0x596f1106, 0x8ce0, 0x4302, 0xaf, 0x79, 0xc4, 0xec, 0x67, 0xaa, 0xdc, 0x6d )
 
+// AVEncVideoInputDeltaQPSettings (VT_BLOB)
+// Read-only parameter that specifies the settings that the encoder MFT supports with respect to delta QP values as input.
+// Use ICodecAPI::GetValue to determine supported settings for Input Delta QP.
+// See usage of InputQPSettings within mfapi.h to retrieve block size & qp details
+DEFINE_CODECAPI_GUID(AVEncVideoInputDeltaQPBlockSettings, "5A4787DC-0648-47AA-B945-552BFAD2A6D8", 0x5a4787dc, 0x648, 0x47aa, 0xb9, 0x45, 0x55, 0x2b, 0xfa, 0xd2, 0xa6, 0xd8 )
+
+// AVEncVideoInputAbsoluteQPBlockSettings (VT_BLOB)
+// Read-only parameter that specifies the settings that the encoder MFT supports with respect to absolute QP values as input.
+// Use ICodecAPI::GetValue to determine supported settings for Input Absolute QP.
+// See usage of InputQPSettings within mfapi.h to retrieve block size & qp details
+DEFINE_CODECAPI_GUID(AVEncVideoInputAbsoluteQPBlockSettings, "EF95A145-4F91-4DEA-8173-ACFF11434210", 0xef95a145, 0x4f91, 0x4dea, 0x81, 0x73, 0xac, 0xff, 0x11, 0x43, 0x42, 0x10 )
+
 #ifndef UUID_GEN
 // { GUID refs
     #define CODECAPI_AVEncCommonFormatConstraint DEFINE_CODECAPI_GUIDNAMED( AVEncCommonFormatConstraint )
@@ -2535,6 +2549,8 @@ DEFINE_CODECAPI_GUID( AVEncVideoSatdMapBlockSize, "596F1106-8CE0-4302-AF79-C4EC6
     #define CODECAPI_AVEncVideoOutputQPMapBlockSize          DEFINE_CODECAPI_GUIDNAMED( AVEncVideoOutputQPMapBlockSize )
     #define CODECAPI_AVEncVideoOutputBitsUsedMapBlockSize    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoOutputBitsUsedMapBlockSize )
     #define CODECAPI_AVEncVideoSatdMapBlockSize    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoSatdMapBlockSize ) 
+    #define CODECAPI_AVEncVideoInputDeltaQPBlockSettings    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoInputDeltaQPBlockSettings )
+    #define CODECAPI_AVEncVideoInputAbsoluteQPBlockSettings DEFINE_CODECAPI_GUIDNAMED( AVEncVideoInputAbsoluteQPBlockSettings )
 #endif
 
 

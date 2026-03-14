@@ -722,6 +722,7 @@ cpp_quote("#define IKEEXT_POLICY_FLAG_IMS_VPN (0x00000040)")
 cpp_quote("#define IKEEXT_POLICY_ENABLE_IKEV2_FRAGMENTATION (0x00000080)")
 //IKEv2 Tunnel Support for Low Power Mode
 cpp_quote("#define IKEEXT_POLICY_SUPPORT_LOW_POWER_MODE (0x00000100)")
+cpp_quote("#define IKEEXT_POLICY_FLAG_POINT_TO_SITE (0x00000200)")
 
 // Type used to store the IKE/Authip main mode negotiation policy
 typedef struct IKEEXT_POLICY0_

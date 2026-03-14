@@ -1454,7 +1454,47 @@ DEFINE_GUID(MFSampleExtension_VideoEncodeBitsUsedMap,
 // The SATD map of an encoded video frame. 
 DEFINE_GUID(MFSampleExtension_VideoEncodeSatdMap,  
 0xadf61d96, 0xc2d3, 0x4b57, 0xa1, 0x38, 0xdd, 0xe4, 0xd3, 0x51, 0xea, 0xa9); 
- 
+
+
+typedef enum _eAVEncVideoQPMapElementDataType
+{
+    // Signed types
+    CODEC_API_QP_MAP_INT8   = 0x00000000, // QP map elements are of type INT8
+    CODEC_API_QP_MAP_INT16  = 0x00000001, // QP map elements are of type INT16
+    CODEC_API_QP_MAP_INT32  = 0x00000002, // QP map elements are of type INT32
+    // Unsigned types
+    CODEC_API_QP_MAP_UINT8  = 0x80000000, // QP map elements are of type UINT8
+    CODEC_API_QP_MAP_UINT16 = 0x80000001, // QP map elements are of type UINT16
+    CODEC_API_QP_MAP_UINT32 = 0x80000002, // QP map elements are of type UINT32
+} eAVEncVideoQPMapElementDataType;
+
+// To be used with AVEncVideoInputDeltaQPSettings and AVEncVideoInputAbsoluteQPSettings
+typedef struct _inputQPSettings
+{
+    UINT32 minBlockSize;
+    UINT32 maxBlockSize;
+    UINT32 stepsBlockSize;
+    eAVEncVideoQPMapElementDataType dataType;
+    INT16 minValue;
+    INT16 maxValue;
+    UINT16 step;
+} InputQPSettings;
+
+
+// MFSampleExtension_VideoEncodeInputDeltaQPMap   {DAB419C3-BF21-4B46-8692-9A7BF0A71769}
+// Type: IMFMediaBuffer
+// MFSampleExtension_VideoEncodeInputDeltaQPMap specifies the input delta QP map of the frame.
+// The delta QP map must use one of the block sizes specified by CODECAPI_AVEncVideoInputDeltaQPBlockSize.
+DEFINE_GUID(MFSampleExtension_VideoEncodeInputDeltaQPMap,
+0xdab419c3, 0xbf21, 0x4b46, 0x86, 0x92, 0x9a, 0x7b, 0xf0, 0xa7, 0x17, 0x69);
+
+// MFSampleExtension_VideoEncodeInputAbsoluteQPMap {432A6E9A-F1ED-456E-8DC3-6F8985649EB9}
+// Type: IMFMediaBuffer
+// MFSampleExtension_VideoEncodeInputExtAbsDeltaQPMap specifies the absolute QP map of the frame.
+// The absolute QP map must use one of the block sizes specified by CODECAPI_AVEncVideoInputAbsQPBlockSize.
+DEFINE_GUID(MFSampleExtension_VideoEncodeInputAbsoluteQPMap,
+0x432a6e9a, 0xf1ed, 0x456e, 0x8d, 0xc3, 0x6f, 0x89, 0x85, 0x64, 0x9e, 0xb9);
+
 ///////////////////////////////////////////////////////////////////////////////
 /// These are the attribute GUIDs that need to be used by MFT0 to provide
 /// thumbnail support.  We are declaring these in our internal idl first and
@@ -1871,7 +1911,6 @@ DEFINE_GUID(MFT_CATEGORY_ENCRYPTOR,
 0xb0c687be, 0x01cd, 0x44b5, 0xb8, 0xb2, 0x7c, 0x1d, 0x7e, 0x05, 0x8b, 0x1f);
 #endif
 
-// TODO: switch to NTDDI_WIN10_RS3 when _NT_TARGET_VERSION is updated to support RS3
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 // {145CD8B4-92F4-4b23-8AE7-E0DF06C2DA95}   MFT_CATEGORY_VIDEO_RENDERER_EFFECT 
 DEFINE_GUID(MFT_CATEGORY_VIDEO_RENDERER_EFFECT,
@@ -2000,7 +2039,6 @@ MFTEnumEx(
 );
 #endif // (WINVER >= _WIN32_WINNT_WIN7)
 
-// TODO: switch to NTDDI_WIN10_RS3 when _NT_TARGET_VERSION is updated to support RS3
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
 // MFT_ENUM_VIDEO_RENDERER_EXTENSION_PROFILE {62C56928-9A4E-443b-B9DC-CAC830C24100} 
@@ -2286,9 +2324,8 @@ DEFINE_MEDIATYPE_GUID(MFVideoFormat_VP10,       FCC('VP10'));
 DEFINE_MEDIATYPE_GUID(MFVideoFormat_AV1,        FCC('AV01'));
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
 DEFINE_MEDIATYPE_GUID(MFVideoFormat_Theora,     FCC('theo')); // {6F656874-0000-0010-8000-00AA00389B71}
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
+DEFINE_MEDIATYPE_GUID(MFVideoFormat_APV,        FCC('APV '));
 
 #if (WDK_NTDDI_VERSION >= NTDDI_WIN10)
 //
@@ -2443,6 +2480,9 @@ DEFINE_GUID(MFAudioFormat_DTS_UHD, // {87020117-ACE3-42DE-B73E-C656706263F8}
 0x87020117, 0xACE3, 0x42DE, 0xB7, 0x3E, 0xC6, 0x56, 0x70, 0x62, 0x63, 0xF8);
 DEFINE_GUID(MFAudioFormat_DTS_UHDY, // {9B9CCA00-91B9-4CCC-883A-8F787AC3CC86}
 0x9B9CCA00, 0x91B9, 0x4CCC, 0x88, 0x3A, 0x8F, 0x78, 0x7A, 0xC3, 0xCC, 0x86);
+
+DEFINE_GUID(MFAudioFormat_IAMF, // {78a8eba0-f446-4851-a55d-5372280e6b0b}
+0x78a8eba0, 0xf446, 0x4851, 0xa5, 0x5d, 0x53, 0x72, 0x28, 0x0e, 0x6b, 0x0b);
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
@@ -2781,7 +2821,6 @@ DEFINE_GUID(MF_MT_VIDEO_H264_NO_FMOASO,
 
 #endif // (WINVER >= _WIN32_WINNT_WIN8)
 
-// TODO: switch to NTDDI_WIN10_RS3 when _NT_TARGET_VERSION is updated to support RS3
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2) 
 
 // 
@@ -3090,7 +3129,6 @@ DEFINE_GUID(MF_MT_TRANSFER_FUNCTION,
 DEFINE_GUID(MF_MT_VIDEO_PRIMARIES,
 0xdbfbe4d7, 0x0740, 0x4ee0, 0x81, 0x92, 0x85, 0x0a, 0xb0, 0xe2, 0x19, 0x35);
 
-// TODO: switch to RS define once it exists (see: 5312604)
 #if (WINVER >= _WIN32_WINNT_WIN10)
 //
 // MF_MT_MAX_LUMINANCE_LEVEL specifies the maximum luminance level of the content in Nits.
@@ -3218,7 +3256,6 @@ DEFINE_GUID(MF_MT_USER_DATA,
 DEFINE_GUID(MF_MT_OUTPUT_BUFFER_NUM,
 0xa505d3ac, 0xf930, 0x436e, 0x8e, 0xde, 0x93, 0xa5, 0x09, 0xce, 0x23, 0xb2);
 
-// TODO: Fix when GovM has the right ifdef check
 #if (WINVER >= _WIN32_WINNT_WIN10)
 /// {0xbb12d222,0x2bdb,0x425e,0x91,0xec,0x23,0x08,0xe1,0x89,0xa5,0x8f}   MF_MT_REALTIME_CONTENT UINT32 (0 or 1)
 DEFINE_GUID(MF_MT_REALTIME_CONTENT,
@@ -3682,7 +3719,6 @@ DEFINE_GUID(MFMediaType_MultiplexedFrames,
 DEFINE_GUID(MFMediaType_Subtitle,
 0xa6d13581, 0xed50, 0x4e65, 0xae, 0x08, 0x26, 0x06, 0x55, 0x76, 0xaa, 0xcc);
 
-// TODO: switch to RS define once it exists (see: 5312604)
 #if (WINVER >= _WIN32_WINNT_WIN10)
 DEFINE_GUID(MFMediaType_Perception,
 0x597ff6f9, 0x6ea2, 0x4670, 0x85, 0xb4, 0xea, 0x84, 0x7, 0x3f, 0xe9, 0x40);

@@ -3039,6 +3039,12 @@ typedef struct {
     HANDLE WriteEvent;
 } KSMIDILOOPED_EVENT, *PKSMIDILOOPED_EVENT;
 
+#define MIDILOOPED_EVENT2
+typedef struct {
+    HANDLE WriteEvent;
+    HANDLE ReadEvent;
+} KSMIDILOOPED_EVENT2, *PKSMIDILOOPED_EVENT2;
+
 typedef struct {
     KSPROPERTY  Property;
     ULONG       RequestedBufferSize;

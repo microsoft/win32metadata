@@ -425,7 +425,7 @@ typedef struct ldap {
     ULONG   ld_cldaptimeout;
     ULONG   ld_refhoplimit;
     ULONG   ld_options;
-    ULONG   ld_maxvalrange;
+    ULONG   ld_anonymousmaxvalrange;
 
 } LDAP, * PLDAP;
 
@@ -869,7 +869,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *inv
 // Allows configuration of maximum value range
 // to accept from an LDAP server response.
 //
-#define LDAP_OPT_MAX_VAL_RANGE          0x47
+#define LDAP_OPT_ANONYMOUS_MAX_VAL_RANGE          0x47
 
 //
 //  End of Microsoft only options

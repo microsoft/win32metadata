@@ -1519,6 +1519,18 @@ typedef struct DestinationList DestinationList;
 #endif 	/* __DestinationList_FWD_DEFINED__ */
 
 
+#ifndef __DestinationListBoth_FWD_DEFINED__
+#define __DestinationListBoth_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class DestinationListBoth DestinationListBoth;
+#else
+typedef struct DestinationListBoth DestinationListBoth;
+#endif /* __cplusplus */
+
+#endif 	/* __DestinationListBoth_FWD_DEFINED__ */
+
+
 #ifndef __ApplicationDestinations_FWD_DEFINED__
 #define __ApplicationDestinations_FWD_DEFINED__
 
@@ -32066,6 +32078,14 @@ EXTERN_C const CLSID CLSID_DestinationList;
 
 class DECLSPEC_UUID("77f10cf0-3db5-4966-b520-b7c54fd35ed6")
 DestinationList;
+#endif
+
+EXTERN_C const CLSID CLSID_DestinationListBoth;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("38fe0cf4-6a59-4729-8e4a-2d580059ede4")
+DestinationListBoth;
 #endif
 
 EXTERN_C const CLSID CLSID_ApplicationDestinations;

@@ -368,8 +368,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCryptography_CDataProtection_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Security.Cryptography.DataProtection.IDataProtectionProviderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Security.Cryptography.DataProtection.IDataProtectionProviderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Cryptography.DataProtection.IDataProtectionProvider ** Default Interface **
@@ -720,8 +720,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCryptography_CDataProtection_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Security.Cryptography.DataProtection.IDataProtectionProviderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Security.Cryptography.DataProtection.IDataProtectionProviderFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Security.Cryptography.DataProtection.IDataProtectionProvider ** Default Interface **

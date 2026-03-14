@@ -1056,6 +1056,8 @@ typedef struct _DNS_SVCB_PARAM_UNKNOWN
     BYTE pbSvcParamValue[1];
 } DNS_SVCB_PARAM_UNKNOWN;
 
+#pragma warning(push)
+#pragma warning(disable: 4201) // nameless struct/union (anonymous union for SVCB parameter variants)
 typedef struct _DNS_SVCB_PARAM
 {
     WORD wSvcParamKey;
@@ -1071,6 +1073,7 @@ typedef struct _DNS_SVCB_PARAM
         PVOID                    pReserved;
     };
 } DNS_SVCB_PARAM;
+#pragma warning(pop)
 
 typedef struct _DNS_SVCB_DATA
 {
@@ -1626,7 +1629,7 @@ DNS_MESSAGE_BUFFER, *PDNS_MESSAGE_BUFFER;
 #define DNS_CUSTOM_SERVER_UPGRADE_FROM_WELL_KNOWN_SERVERS 0x2
 
 #pragma warning(push)
-#pragma warning(disable: 4201) // nameless struct/unions
+#pragma warning(disable: 4201) // nameless struct/union (anonymous unions for DNS_CUSTOM_SERVER representation variants)
 
 #ifdef MIDL_PASS
 
