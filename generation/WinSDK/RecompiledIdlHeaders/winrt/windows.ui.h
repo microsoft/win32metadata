@@ -921,8 +921,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CIUIContext;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.IColorHelper ** Default Interface **
@@ -2266,8 +2266,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CIUIContext;
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.IColorHelperStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.IColorHelperStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.IColorHelper ** Default Interface **

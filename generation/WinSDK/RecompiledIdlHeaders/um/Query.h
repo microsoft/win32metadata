@@ -220,6 +220,10 @@ typedef struct tagCONTENTRESTRICTION
     ULONG ulGenerateMethod;
     } 	CONTENTRESTRICTION;
 
+#define	GENERATE_METHOD_WITH_BM25	( 5 )
+
+#define	GENERATE_METHOD_WITH_TFDOCLEN	( 6 )
+
 typedef struct tagNATLANGUAGERESTRICTION
     {
     FULLPROPSPEC prop;

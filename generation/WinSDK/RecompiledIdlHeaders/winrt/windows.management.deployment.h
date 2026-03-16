@@ -152,6 +152,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IAddPackageOptions3;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3 ABI::Windows::Management::Deployment::IAddPackageOptions3
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
 namespace ABI {
@@ -751,6 +766,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions2 ABI::Windows::Management::Deployment::IStagePackageOptions2
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                interface IStagePackageOptions3;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3 ABI::Windows::Management::Deployment::IStagePackageOptions3
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
@@ -2036,6 +2066,16 @@ namespace ABI {
     namespace Windows {
         namespace Management {
             namespace Deployment {
+                typedef enum PackageOperationPriority : int PackageOperationPriority;
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
                 typedef enum PackageState : int PackageState;
             } /* Deployment */
         } /* Management */
@@ -2395,6 +2435,30 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Management.Deployment.PackageOperationPriority
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                enum PackageOperationPriority : int
+                {
+                    PackageOperationPriority_Low = 0,
+                    PackageOperationPriority_Normal = 1,
+                    PackageOperationPriority_High = 2,
+                };
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2806,6 +2870,45 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAddPackageOptions3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AddPackageOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAddPackageOptions3[] = L"Windows.Management.Deployment.IAddPackageOptions3";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("cba622a7-aa31-45ab-8b88-40d08b0a8b27")
+                IAddPackageOptions3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_PackageOperationPriority(
+                        ABI::Windows::Management::Deployment::PackageOperationPriority* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_PackageOperationPriority(
+                        ABI::Windows::Management::Deployment::PackageOperationPriority value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAddPackageOptions3 = __uuidof(IAddPackageOptions3);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -4975,6 +5078,45 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 
 /*
  *
+ * Interface Windows.Management.Deployment.IStagePackageOptions3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.StagePackageOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IStagePackageOptions3[] = L"Windows.Management.Deployment.IStagePackageOptions3";
+namespace ABI {
+    namespace Windows {
+        namespace Management {
+            namespace Deployment {
+                MIDL_INTERFACE("ce392e55-1743-4945-ad43-9e5add4be96d")
+                IStagePackageOptions3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_PackageOperationPriority(
+                        ABI::Windows::Management::Deployment::PackageOperationPriority* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_PackageOperationPriority(
+                        ABI::Windows::Management::Deployment::PackageOperationPriority value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IStagePackageOptions3 = __uuidof(IStagePackageOptions3);
+            } /* Deployment */
+        } /* Management */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerOptions
  *
  * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
@@ -5069,6 +5211,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPa
  * Class implements the following interfaces:
  *    Windows.Management.Deployment.IAddPackageOptions ** Default Interface **
  *    Windows.Management.Deployment.IAddPackageOptions2
+ *    Windows.Management.Deployment.IAddPackageOptions3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5508,6 +5651,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Management.Deployment.IStagePackageOptions ** Default Interface **
  *    Windows.Management.Deployment.IStagePackageOptions2
+ *    Windows.Management.Deployment.IStagePackageOptions3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5575,6 +5719,12 @@ typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions _
 typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2 __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2;
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3 __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIAppInstallerManager_FWD_DEFINED__
@@ -5815,6 +5965,12 @@ typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions
 typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions2 __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions2;
 
 #endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3 __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3;
+
+#endif // ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
 #define ____x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPackageContainerOptions_FWD_DEFINED__
@@ -8977,6 +9133,8 @@ typedef enum __x_ABI_CWindows_CManagement_CDeployment_CDeploymentProgressState _
 
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageInstallState __x_ABI_CWindows_CManagement_CDeployment_CPackageInstallState;
 
+typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority;
+
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageState __x_ABI_CWindows_CManagement_CDeployment_CPackageState;
 
 typedef enum __x_ABI_CWindows_CManagement_CDeployment_CPackageStatus __x_ABI_CWindows_CManagement_CDeployment_CPackageStatus;
@@ -9080,6 +9238,22 @@ enum __x_ABI_CWindows_CManagement_CDeployment_CPackageInstallState
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.Management.Deployment.PackageOperationPriority
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority
+{
+    PackageOperationPriority_Low = 0,
+    PackageOperationPriority_Normal = 1,
+    PackageOperationPriority_High = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -9541,6 +9715,80 @@ interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2
 EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2;
 #endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Management.Deployment.IAddPackageOptions3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.AddPackageOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IAddPackageOptions3[] = L"Windows.Management.Deployment.IAddPackageOptions3";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PackageOperationPriority)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority* value);
+    HRESULT (STDMETHODCALLTYPE* put_PackageOperationPriority)(__x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3Vtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_get_PackageOperationPriority(This, value) \
+    ((This)->lpVtbl->get_PackageOperationPriority(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_put_PackageOperationPriority(This, value) \
+    ((This)->lpVtbl->put_PackageOperationPriority(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIAddPackageOptions3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -13384,6 +13632,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOp
 
 /*
  *
+ * Interface Windows.Management.Deployment.IStagePackageOptions3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Management.Deployment.StagePackageOptions
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Management_Deployment_IStagePackageOptions3[] = L"Windows.Management.Deployment.IStagePackageOptions3";
+typedef struct __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PackageOperationPriority)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority* value);
+    HRESULT (STDMETHODCALLTYPE* put_PackageOperationPriority)(__x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3* This,
+        enum __x_ABI_CWindows_CManagement_CDeployment_CPackageOperationPriority value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3Vtbl;
+
+interface __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_get_PackageOperationPriority(This, value) \
+    ((This)->lpVtbl->get_PackageOperationPriority(This, value))
+
+#define __x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_put_PackageOperationPriority(This, value) \
+    ((This)->lpVtbl->put_PackageOperationPriority(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3;
+#endif /* !defined(____x_ABI_CWindows_CManagement_CDeployment_CIStagePackageOptions3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Management.Deployment.IUpdateSharedPackageContainerOptions
  *
  * Introduced to Windows.Management.Deployment.SharedPackageContainerContract in version 1.0
@@ -13552,6 +13874,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CManagement_CDeployment_CIUpdateSharedPa
  * Class implements the following interfaces:
  *    Windows.Management.Deployment.IAddPackageOptions ** Default Interface **
  *    Windows.Management.Deployment.IAddPackageOptions2
+ *    Windows.Management.Deployment.IAddPackageOptions3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -13991,6 +14314,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Management.Deployment.IStagePackageOptions ** Default Interface **
  *    Windows.Management.Deployment.IStagePackageOptions2
+ *    Windows.Management.Deployment.IStagePackageOptions3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

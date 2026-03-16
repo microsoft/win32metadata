@@ -174,7 +174,13 @@ typedef enum _HTTP_SERVER_PROPERTY
     // Used to configure fast forwarding support.
     //
 
-    HttpServerFastForwardingProperty = 18
+    HttpServerFastForwardingProperty = 18,
+
+    //
+    // Used to enable optional request info fields.
+    //
+
+    HttpServerRequestInfoProperty = 19,
 
 } HTTP_SERVER_PROPERTY, *PHTTP_SERVER_PROPERTY;
 
@@ -820,6 +826,20 @@ typedef struct _HTTP_PROTECTION_LEVEL_INFO
 } HTTP_PROTECTION_LEVEL_INFO, *PHTTP_PROTECTION_LEVEL_INFO;
 
 #endif
+
+//
+// Used with HttpServerRequestInfoProperty. These flags will identify optional request
+// info fields not normally supplied; these fields are only populated on-demand as they
+// are less commonly requested.
+//
+
+#define HTTP_REQUEST_INFO_FLAG_INITIAL_TTL (0x00000001ULL)
+
+typedef struct _HTTP_REQUEST_INFO_PROPERTY_INFO
+{
+    HTTP_PROPERTY_FLAGS Flags;
+    ULONGLONG RequestInfoFlags;
+} HTTP_REQUEST_INFO_PROPERTY_INFO, *PHTTP_REQUEST_INFO_PROPERTY_INFO;
 
 #if _WIN32_WINNT >= 0x0600
 
@@ -2953,7 +2973,8 @@ typedef enum _HTTP_FEATURE_ID
     HttpFeatureDscp                                 = 14,
     HttpFeatureQueryCipherInfo                      = 15,
     HttpFeatureQueryInitialPacketTtl                = 16,
-    HttpFeatureLast                                 = 17,
+    HttpFeatureTlsHandshakePerformanceCounters      = 17,
+    HttpFeatureLast                                 = 18,
 
 
     HttpFeaturemax              = 0xFFFFFFFF,

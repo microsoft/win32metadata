@@ -709,6 +709,27 @@ GetDeveloperDriveEnablementState(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES | WINAPI_PARTITION_DESKTOP)
+
+#if defined(NTDDI_WIN11_GE) && (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+WINBASEAPI
+BOOL
+WINAPI
+GetRuntimeAttestationReport(
+    _In_reads_bytes_opt_(RUNTIME_REPORT_NONCE_SIZE) UCHAR* Nonce,
+    _In_ UINT16 PackageVersion,
+    _In_ UINT64 ReportTypesBitmap,
+    _Out_writes_bytes_to_opt_(*ReportBufferSize, *ReportBufferSize) PVOID ReportBuffer,
+    _Inout_ PUINT32 ReportBufferSize
+    );
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES | WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
 #ifdef __cplusplus
 }
 #endif

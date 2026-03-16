@@ -55,6 +55,8 @@ namespace Windows
 
             typedef enum PackageInstallState PackageInstallState;
 
+            typedef enum PackageOperationPriority PackageOperationPriority;
+
             typedef enum PackageState PackageState;
 
             typedef enum PackageStatus PackageStatus;
@@ -76,6 +78,8 @@ namespace Windows
             interface IAddPackageOptions;
 
             interface IAddPackageOptions2;
+
+            interface IAddPackageOptions3;
 
             interface IAppInstallerManager;
 
@@ -156,6 +160,8 @@ namespace Windows
             interface IStagePackageOptions;
 
             interface IStagePackageOptions2;
+
+            interface IStagePackageOptions3;
 
             interface IUpdateSharedPackageContainerOptions;
 
@@ -315,6 +321,14 @@ namespace Windows
                 Paused       = 6
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum PackageOperationPriority
+            {
+                Low    = 0,
+                Normal = 1,
+                High   = 2
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum PackageState
             {
@@ -453,6 +467,15 @@ namespace Windows
                 [propget] HRESULT ExpectedDigests([out] [retval] Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>** value);
                 [propget] HRESULT LimitToExistingPackages([out] [retval] boolean* value);
                 [propput] HRESULT LimitToExistingPackages([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Management.Deployment.AddPackageOptions)]
+            [uuid(CBA622A7-AA31-45AB-8B88-40D08B0A8B27)]
+            interface IAddPackageOptions3 : IInspectable
+            {
+                [propget] HRESULT PackageOperationPriority([out] [retval] Windows.Management.Deployment.PackageOperationPriority* value);
+                [propput] HRESULT PackageOperationPriority([in] Windows.Management.Deployment.PackageOperationPriority value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -952,6 +975,15 @@ namespace Windows
                 [propget] HRESULT ExpectedDigests([out] [retval] Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Management.Deployment.StagePackageOptions)]
+            [uuid(CE392E55-1743-4945-AD43-9E5ADD4BE96D)]
+            interface IStagePackageOptions3 : IInspectable
+            {
+                [propget] HRESULT PackageOperationPriority([out] [retval] Windows.Management.Deployment.PackageOperationPriority* value);
+                [propput] HRESULT PackageOperationPriority([in] Windows.Management.Deployment.PackageOperationPriority value);
+            }
+
             [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
             [exclusiveto(Windows.Management.Deployment.UpdateSharedPackageContainerOptions)]
             [uuid(80672E83-7194-59F9-B5B9-DAA5375F130A)]
@@ -979,6 +1011,7 @@ namespace Windows
             {
                 [default] interface Windows.Management.Deployment.IAddPackageOptions;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Management.Deployment.IAddPackageOptions2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Management.Deployment.IAddPackageOptions3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -1153,6 +1186,7 @@ namespace Windows
             {
                 [default] interface Windows.Management.Deployment.IStagePackageOptions;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Management.Deployment.IStagePackageOptions2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Management.Deployment.IStagePackageOptions3;
             }
 
             [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]

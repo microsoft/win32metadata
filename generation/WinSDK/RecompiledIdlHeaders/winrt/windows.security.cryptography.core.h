@@ -2774,8 +2774,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCryptography_CCore_CISymmetri
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2819,8 +2819,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6758,8 +6758,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCryptography_CCore_CISymmetri
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.IAsymmetricAlgorithmNamesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -6803,8 +6803,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Cryptography.Core.ICryptographicEngineStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

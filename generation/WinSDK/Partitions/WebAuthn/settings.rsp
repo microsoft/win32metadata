@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/um/webauthn.h
+<IncludeRoot>/um/webauthnplugin.h
+<IncludeRoot>/um/pluginauthenticator.h
+--namespace
+Windows.Win32.Security.Authentication.WebAuthn

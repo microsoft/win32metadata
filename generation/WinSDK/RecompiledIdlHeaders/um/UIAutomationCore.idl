@@ -1431,4 +1431,267 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
         [default] interface IUIAutomationRegistrar;
     }
 
+    //
+    // Client information interface and callbacks
+    //
+    // This section defines the public COM interfaces and callback types that enable
+    // UI Automation providers to register for notifications about client connections
+    // and disconnections, as well as query information about currently connected clients.
+    //
+    // These interfaces support scenarios such as:
+    // - Performance optimization based on active client count
+    // - Resource management and cleanup when clients disconnect
+    // - Telemetry and diagnostics collection
+    // - Provider behavior adaptation based on client characteristics
+    //
+
+    //
+    // IUIAutomationClientInfo Interface
+    //
+    // Provides read-only access to information about a connected UI Automation client.
+    // This interface is implemented by the UIAutomation system and returned to providers
+    // through callback registrations and client enumeration methods.
+    //
+    // The information provided includes process identification and executable name
+    //
+    [
+        object,
+        uuid(B2E8A3F1-4C5D-4E7A-8F6B-3D2E1C9A0B8F),
+        pointer_default(unique),
+        oleautomation
+    ]
+    interface IUIAutomationClientInfo: IUnknown
+    {
+        // Retrieves the process ID of the connected UI Automation client
+        //
+        // Parameters:
+        //   processId [out] - Receives the process ID of the client application
+        //
+        // Return Values:
+        //   S_OK - Process ID retrieved successfully
+        //   E_INVALIDARG - processId parameter is null
+        //
+        [propget] HRESULT ProcessId([ out, retval ] DWORD* processId);
+
+        // Retrieves the executable name of the connected UI Automation client
+        //
+        // Parameters:
+        //   processName [out] - Receives a BSTR containing the executable name
+        //                       Caller must free using SysFreeString()
+        //
+        // Return Values:
+        //   S_OK - Process name retrieved successfully
+        //   E_INVALIDARG - processName parameter is null
+        //   E_OUTOFMEMORY - Failed to allocate memory for the process name
+        //
+        // Notes:
+        //   The returned BSTR contains the executable file name (e.g., "narrator.exe")
+        //   without the full path. The caller is responsible for freeing the BSTR.
+        //
+        [propget] HRESULT ProcessName([ out, retval ] BSTR * processName);
+    };
+
+    //
+    //  CUIAClientInfo Coclass
+    //
+    // COM class implementation of the IUIAutomationClientInfo interface.
+    // This class is instantiated by the UIAutomation system to represent
+    // connected client information and is not intended for direct instantiation
+    // by external code.
+    //
+    [
+        uuid(C2D4F567-8A9B-4C3E-9F1A-2B5C7D8E0F3A),
+        version(1.0),
+        helpstring("Class for UI Automation client information.")
+    ]
+    coclass CUIAutomationClientInfo
+    {
+        [default] interface IUIAutomationClientInfo;
+    }
+
+    //
+    // Client Connection Callback Function Types
+    //
+    // These callback function pointer types define the signatures for functions
+    // that providers can register to receive notifications about client lifecycle events.
+    // The callbacks are invoked synchronously on the UI Automation system thread,
+    // so implementations should be efficient and avoid blocking operations.
+    //
+
+    //
+    // IUIAutomationClientConnectionCallback Interface
+    //
+    // Interface that providers implement to receive notifications about UI Automation
+    // client lifecycle events (connection and disconnection).
+    //
+    // Providers implement this interface and register it with IUIAutomationClientInfoSource
+    // to receive notifications when clients connect or disconnect.
+    //
+    // Important Notes:
+    //   - Methods are invoked synchronously on the UI Automation system thread
+    //   - Implementations should be efficient and avoid blocking operations
+    //   - The clientInfo parameter is only valid during the callback execution
+    //   - Do not store the clientInfo pointer; query needed information immediately
+    //
+    [
+        object,
+        uuid(5B8E8F2A-9C7D-4F3E-A1B2-8D6E9F4C0A1B),
+        pointer_default(unique),
+        oleautomation
+    ]
+    interface IUIAutomationClientConnectionCallback : IUnknown
+    {
+        // Called when a UI Automation client connects to the provider
+        //
+        // Parameters:
+        //   clientInfo [in] - Interface providing information about the connecting client
+        //                     Valid only during the method execution
+        //
+        // Return Values:
+        //   UIA will just call these callbacks and ignore any return values.
+        //
+        // Notes:
+        //   - Called synchronously when a client establishes a UIA connection
+        //   - The clientInfo parameter is only valid during method execution
+        //   - Method should return quickly to avoid blocking the UIA system
+        //
+        HRESULT OnConnected([in] IUIAutomationClientInfo* clientInfo);
+
+        // Called when a UI Automation client disconnects from the provider
+        //
+        // Parameters:
+        //   clientInfo [in] - Interface providing information about the disconnecting client
+        //                     Valid only during the method execution
+        //
+        // Return Values:
+        //   UIA will just call these callbacks and ignore any return values.
+        //
+        // Notes:
+        //   - Called synchronously when a client terminates its UIA connection
+        //   - The clientInfo parameter is only valid during method execution
+        //   - Method should return quickly to avoid blocking the UIA system
+        //   - Will be called during client process disconnection
+        //
+        HRESULT OnDisconnected([in] IUIAutomationClientInfo* clientInfo);
+    };
+
+    //
+    //  IUIAutomationClientInfoSource Interface
+    //
+    // Main interface for managing UI Automation client callback registrations and
+    // querying connected client information. This interface is implemented as a
+    // singleton service that providers can use to register for client lifecycle
+    // notifications and enumerate currently connected clients.
+    //
+    // Usage Pattern:
+    //   1. CoCreateInstance with CLSID_CUIAutomationClientInfoSource
+    //   2. Implement IUIAutomationClientConnectionCallback interface
+    //   3. Register callback interface using RegisterClientConnectionCallback
+    //   4. Store returned handle for later unregistration
+    //   5. Unregister callback using stored handle before shutdown
+    //   6. At any point, query connected clients using GetConnectedClients
+    //
+    [
+        object,
+        uuid(F4B8A2E1-9C3D-4A7E-8F6B-2D5E4C1A9B8F),
+        pointer_default(unique),
+        oleautomation
+    ]
+    interface IUIAutomationClientInfoSource : IUnknown
+    {
+        // Registers a callback interface to receive client connection/disconnection notifications
+        //
+        // Parameters:
+        //   callback [in] - Pointer to IUIAutomationClientConnectionCallback interface
+        //                   Must remain valid until unregistered
+        //   handle [out] - Receives a unique handle for later unregistration
+        //
+        // Return Values:
+        //   S_OK - Callback registered successfully
+        //   E_INVALIDARG - callback or handle parameter is null
+        //   E_OUTOFMEMORY - Failed to allocate memory for registration
+        //
+        // Notes:
+        //   - Multiple callbacks can be registered and will be called in order
+        //   - The callback interface must remain valid until explicitly unregistered
+        //   - Store the returned handle to unregister the callback later
+        //   - Callbacks are invoked synchronously on the UIA system thread
+        //
+        HRESULT RegisterClientConnectionCallback(
+            [in] IUIAutomationClientConnectionCallback* callback,
+            [out] unsigned __int64* handle);
+
+        // Unregisters a previously registered callback interface
+        //
+        // Parameters:
+        //   handle [in] - The handle returned from RegisterClientConnectionCallback
+        //
+        // Return Values:
+        //   S_OK - Callback unregistered successfully
+        //   S_FALSE - handle not found (callback may have already been unregistered)
+        //   E_INVALIDARG - Invalid handle value (zero)
+        //
+        // Notes:
+        //   - Safe to call multiple times with the same handle
+        //   - After successful unregistration, the callback will no longer be invoked
+        //   - The callback interface can be released after successful unregistration
+        //
+        HRESULT UnregisterClientConnectionCallback([in] unsigned __int64 handle);
+
+        // Retrieves information about currently connected UI Automation clients
+        //
+        // Parameters:
+        //   clients [out] - Receives a SAFEARRAY of IUIAutomationClientInfo interface pointers
+        //
+        // Return Values:
+        //   S_OK - Client information retrieved successfully or empty SAFEARRAY in case of no clients connected
+        //   E_INVALIDARG - clients parameter is null
+        //   E_OUTOFMEMORY - Failed to allocate memory for the client array
+        //
+        // Notes:
+        //   - Caller must destroy the SAFEARRAY using SafeArrayDestroy()
+        //   - The returned interfaces provide a snapshot at the time of the call
+        //   - Client connections may change between calls to this method
+        //
+        // Example Usage:
+        //   SAFEARRAY* clients = nullptr;
+        //   auto cleanup = wil::scope_exit([&clients]() {
+        //      if (clients)
+        //      {
+        //          SafeArrayDestroy(clients);
+        //      }
+        //   });
+        //   if (SUCCEEDED(pApi->GetConnectedClients(&clients))) {
+        //       LONG lBound, uBound;
+        //       SafeArrayGetLBound(clients, 1, &lBound);
+        //       SafeArrayGetUBound(clients, 1, &uBound);
+        //       for (LONG i = lBound; i <= uBound; i++) {
+        //           wil::com_ptr_nothrow<IUIAutomationClientInfo> clientInfo;
+        //           if (SUCCEEDED(SafeArrayGetElement(clients, &i, clientInfo.put()) && clientInfo)
+        //              // Use clientInfo
+        //           }
+        //       }
+        //   }
+        //
+        HRESULT GetConnectedClients([out, retval] SAFEARRAY(IUIAutomationClientInfo*) * clients);
+    };
+
+
+    //
+    //  CUIAutomationClientInfoSource Coclass
+    //
+    // COM class implementation of the IUIAutomationClientInfoSource interface.
+    // This class implements a singleton pattern to ensure consistent callback state
+    // across the application. Use CoCreateInstance with this CLSID to obtain the
+    // provider API interface.
+    //
+    [
+        uuid(A8D4F123-7B2C-4E5F-9A1B-3C8D6E9F0A2B),
+        version(1.0),
+        helpstring("Class for managing UI Automation client callback registrations.")
+    ]
+    coclass CUIAutomationClientInfoSource
+    {
+        [default] interface IUIAutomationClientInfoSource;
+    }
 }

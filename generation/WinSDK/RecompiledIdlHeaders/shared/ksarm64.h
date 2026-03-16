@@ -933,7 +933,7 @@
 #define PcSkipTick 0x1918
 #define PcStartCycles 0x1948
 #define PcSpBase 0x1500
-#define ProcessorControlRegisterLength 0x2a840
+#define ProcessorControlRegisterLength 0x2a940
 
 //
 // Defines for user shared data
@@ -984,7 +984,7 @@
 #define PbPacketBarrier 0xa80
 #define PbDeferredReadyListHead 0xa88
 #define PbLookasideIrpFloat 0xad8
-#define PbRequestMailbox 0x9e80
+#define PbRequestMailbox 0x9f80
 #define PbMailbox 0xb00
 #define PbDpcGate 0xc00
 #define PbWaitListHead 0xc80
@@ -2531,6 +2531,7 @@
 #define EcAMD64_LastExceptionToRip 0x4c0
 #define EcAMD64_LastExceptionFromRip 0x4c8
 #define ARM64EC_CONTEXT_LENGTH 0x4d0
+#define AMD64_CONTEXT_XSTATE 0x100040
 
 //
 // Dispatcher Context Structure Offset Definitions

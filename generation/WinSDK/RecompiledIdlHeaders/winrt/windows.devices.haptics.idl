@@ -27,7 +27,15 @@ namespace Windows
     {
         namespace Haptics
         {
+            typedef enum HapticDeviceType HapticDeviceType;
+
             typedef enum VibrationAccessStatus VibrationAccessStatus;
+
+            typedef struct HapticsControllerOverrideToken HapticsControllerOverrideToken;
+
+            interface IInputHapticsManager;
+
+            interface IInputHapticsManagerStatics;
 
             interface IKnownSimpleHapticsControllerWaveformsStatics;
 
@@ -40,6 +48,8 @@ namespace Windows
             interface IVibrationDevice;
 
             interface IVibrationDeviceStatics;
+
+            runtimeclass InputHapticsManager;
 
             runtimeclass KnownSimpleHapticsControllerWaveforms;
 
@@ -96,6 +106,16 @@ namespace Windows
     {
         namespace Haptics
         {
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum HapticDeviceType
+            {
+                None     = 0,
+                Generic  = 1,
+                Pen      = 2,
+                Touchpad = 3,
+                Mouse    = 4
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             enum VibrationAccessStatus
             {
@@ -104,6 +124,40 @@ namespace Windows
                 DeniedBySystem      = 2,
                 DeniedByEnergySaver = 3
             };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            struct HapticsControllerOverrideToken
+            {
+                INT64 Value;
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Haptics.InputHapticsManager)]
+            [uuid(040E91DF-BB3A-507C-9E25-A2D2C685B2E5)]
+            interface IInputHapticsManager : IInspectable
+            {
+                [propget] HRESULT ThreadId([out] [retval] UINT32* value);
+                [propget] HRESULT CurrentHapticsControllerDeviceType([out] [retval] Windows.Devices.Haptics.HapticDeviceType* value);
+                [propget] HRESULT CurrentHapticsController([out] [retval] Windows.Devices.Haptics.SimpleHapticsController** value);
+                [overload("TrySendHapticWaveform")] HRESULT TrySendHapticWaveform([in] UINT16 waveform, [in] UINT16 waveformFallback, [out] [retval] boolean* result);
+                [overload("TrySendHapticWaveform")] HRESULT TrySendHapticWaveformWithIntensity([in] UINT16 waveform, [in] UINT16 waveformFallback, [in] DOUBLE intensity, [out] [retval] boolean* result);
+                HRESULT TrySendHapticWaveformForDuration([in] UINT16 waveform, [in] UINT16 waveformFallback, [in] DOUBLE intensity, [in] Windows.Foundation.TimeSpan playDuration, [out] [retval] boolean* result);
+                HRESULT TrySendHapticWaveformForPlayCount([in] UINT16 waveform, [in] UINT16 waveformFallback, [in] DOUBLE intensity, [in] INT32 playCount, [in] Windows.Foundation.TimeSpan replayPauseInterval, [out] [retval] boolean* result);
+                HRESULT TryStopFeedback([out] [retval] boolean* result);
+                HRESULT SetOverrideHapticsController([in] Windows.Devices.Haptics.HapticDeviceType deviceType, [in] Windows.Devices.Haptics.SimpleHapticsController* controller, [out] [retval] Windows.Devices.Haptics.HapticsControllerOverrideToken* result);
+                HRESULT ClearOverrideHapticsController([in] Windows.Devices.Haptics.HapticsControllerOverrideToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Haptics.InputHapticsManager)]
+            [uuid(7BB40F77-E187-5322-844E-AA58223C281A)]
+            interface IInputHapticsManagerStatics : IInspectable
+            {
+                HRESULT IsSupported([out] [retval] boolean* result);
+                HRESULT IsHapticDevicePresent([out] [retval] boolean* result);
+                HRESULT GetForCurrentThread([out] [retval] Windows.Devices.Haptics.InputHapticsManager** result);
+                HRESULT TryGetForThread([in] UINT32 ThreadId, [out] [retval] Windows.Devices.Haptics.InputHapticsManager** result);
+            }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [exclusiveto(Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms)]
@@ -180,6 +234,15 @@ namespace Windows
                 HRESULT FromIdAsync([in] HSTRING deviceId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Haptics.VibrationDevice*>** operation);
                 HRESULT GetDefaultAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Haptics.VibrationDevice*>** operation);
                 HRESULT FindAllAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.Haptics.VibrationDevice*>*>** operation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Devices.Haptics.IInputHapticsManagerStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+            [threading(both)]
+            runtimeclass InputHapticsManager
+            {
+                [default] interface Windows.Devices.Haptics.IInputHapticsManager;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]

@@ -578,10 +578,8 @@ typedef struct _IPV4_ROUTING_HEADER {
     IPV4_OPTION_HEADER;
 #endif
     UINT8 Pointer;
-#pragma warning(push)
-#pragma warning(disable: 4228) /* nonstandard extension: qualifiers after comma in declarator list */
-} IPV4_ROUTING_HEADER, UNALIGNED *PIPV4_ROUTING_HEADER;
-#pragma warning(pop)
+} IPV4_ROUTING_HEADER;
+typedef IPV4_ROUTING_HEADER UNALIGNED *PIPV4_ROUTING_HEADER;
 
 //
 // ICMPV4_HEADER
