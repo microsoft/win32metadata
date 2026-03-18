@@ -42,6 +42,7 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
+            private readonly Dictionary<string, ParameterListSyntax> delegateParametersByName = new();
 
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
@@ -68,8 +69,24 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
+            private void BuildDelegateParameterMap(SyntaxNode root)
+            {
+                foreach (var node in root.DescendantNodes().OfType<DelegateDeclarationSyntax>())
+                {
+                    string name = node.Identifier.ValueText;
+
+                    if (!this.delegateParametersByName.ContainsKey(name) ||
+                        node.ParameterList.Parameters.Count > this.delegateParametersByName[name].Parameters.Count)
+                    {
+                        this.delegateParametersByName[name] = node.ParameterList;
+                    }
+                }
+            }
+
             public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
             {
+                this.BuildDelegateParameterMap(node);
+
                 var ret = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
 
                 // Add any namespaces we might need due to remappings
@@ -543,6 +560,17 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 this.visitedDelegateNames.Add(fullName);
+
+                // If this delegate has no parameters and starts with P,
+                // try to get parameters from the original delegate declaration
+                if (node.ParameterList.Parameters.Count == 0 && name.StartsWith('P'))
+                {
+                    if (this.delegateParametersByName.TryGetValue(name[1..], out var paramList) &&
+                        paramList.Parameters.Count > 0)
+                    {
+                        node = node.WithParameterList(paramList);
+                    }
+                }
 
                 // Add Ansi or Unicode attributes to -A/-W APIs.
                 if ((name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W")) ||

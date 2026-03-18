@@ -671,3 +671,14 @@ Windows.Win32.Security.Authentication.WebAuthn.WEBAUTHN_PLUGIN_REQUEST_TYPE.WEBA
 Windows.Win32.Security.Authentication.WebAuthn.WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK added
 Windows.Win32.Security.Authentication.WebAuthn.WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS added
 Windows.Win32.Security.Authentication.WebAuthn.WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST added
+# Fix P-prefixed delegates with empty parameter list
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK.Invoke(ObjectContext,CleanupContext) added
+Windows.Win32.System.Threading.PTP_SIMPLE_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_SIMPLE_CALLBACK.Invoke(Instance,Context) added
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke(Instance,Context,Timer) added
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke(Instance,Context,Wait,WaitResult) added
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke(Instance,Context,Work) added
