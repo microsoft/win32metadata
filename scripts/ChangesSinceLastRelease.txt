@@ -1219,3 +1219,12 @@ Windows.Win32.Devices.AllJoyn.Apis.AllJoynEventSelect added
 Windows.Win32.Devices.AllJoyn.Apis.AllJoynReceiveFromBus added
 Windows.Win32.Devices.AllJoyn.Apis.AllJoynSendToBus added
 Windows.Win32.Devices.AllJoyn.Apis.QCC_StatusText added
+# Annotate scoped enums in DXCore
+Windows.Win32.Graphics.DXCore.DXCoreAdapterPreference : [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterpreference)] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterpreference),ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreAdapterProperty : [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterproperty)] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterproperty),ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreHardwareTypeFilterFlags : [Flags] => [Flags,ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreMemoryType :  => [ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreNotificationType : [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcorenotificationtype)] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcorenotificationtype),ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreRuntimeFilterFlags : [Flags] => [Flags,ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreSegmentGroup : [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoresegmentgroup)] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoresegmentgroup),ScopedEnum]
+Windows.Win32.Graphics.DXCore.DXCoreWorkload :  => [ScopedEnum]
