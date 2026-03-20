@@ -1228,3 +1228,19 @@ Windows.Win32.Graphics.DXCore.DXCoreNotificationType : [Documentation(https://le
 Windows.Win32.Graphics.DXCore.DXCoreRuntimeFilterFlags : [Flags] => [Flags,ScopedEnum]
 Windows.Win32.Graphics.DXCore.DXCoreSegmentGroup : [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoresegmentgroup)] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoresegmentgroup),ScopedEnum]
 Windows.Win32.Graphics.DXCore.DXCoreWorkload :  => [ScopedEnum]
+# Fix threadpool function pointer types
+Windows.Win32.System.SystemServices.TP_CLEANUP_GROUP_CANCEL_CALLBACK removed
+Windows.Win32.System.SystemServices.TP_SIMPLE_CALLBACK removed
+Windows.Win32.System.SystemServices.TP_TIMER_CALLBACK removed
+Windows.Win32.System.SystemServices.TP_WAIT_CALLBACK removed
+Windows.Win32.System.SystemServices.TP_WORK_CALLBACK removed
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK.Invoke(ObjectContext,CleanupContext) added
+Windows.Win32.System.Threading.PTP_SIMPLE_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_SIMPLE_CALLBACK.Invoke(Instance,Context) added
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke(Instance,Context,Timer) added
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke(Instance,Context,Wait,WaitResult) added
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke() removed
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke(Instance,Context,Work) added

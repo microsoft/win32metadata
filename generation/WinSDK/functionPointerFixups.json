@@ -707,5 +707,25 @@
   {
     "name": "LSA_SET_SECPKG_FAILURE_REASON",
     "pointerType": "PLSA_SET_SECPKG_FAILURE_REASON"
+  },
+  {
+    "name": "TP_SIMPLE_CALLBACK",
+    "pointerType": "PTP_SIMPLE_CALLBACK"
+  },
+  {
+    "name": "TP_CLEANUP_GROUP_CANCEL_CALLBACK",
+    "pointerType": "PTP_CLEANUP_GROUP_CANCEL_CALLBACK"
+  },
+  {
+    "name": "TP_WORK_CALLBACK",
+    "pointerType": "PTP_WORK_CALLBACK"
+  },
+  {
+    "name": "TP_TIMER_CALLBACK",
+    "pointerType": "PTP_TIMER_CALLBACK"
+  },
+  {
+    "name": "TP_WAIT_CALLBACK",
+    "pointerType": "PTP_WAIT_CALLBACK"
   }
 ]
