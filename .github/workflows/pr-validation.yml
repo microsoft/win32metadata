@@ -1,0 +1,146 @@
+# PR Validation — Full cross-architecture build and test
+#
+# Mirrors the Azure Pipelines CI pipeline (azure-pipelines.yml) but runs as a
+# GitHub Actions workflow so PR checks work without Azure DevOps integration.
+#
+# Pipeline structure:
+#   1. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
+#   2. One build job assembles the winmd, packages, samples, and runs tests
+
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'apidocs/**'
+      - 'docs/**'
+  workflow_dispatch:
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────
+  # Stage 1: Parallel header scraping (one job per architecture)
+  # ──────────────────────────────────────────────────────────────────────
+
+  scrape:
+    name: 'Scrape headers: ${{ matrix.arch }}'
+    runs-on: windows-2022
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, x86, arm64]
+        include:
+          - arch: x64
+            extra_args: ''
+            set_version: true
+          - arch: x86
+            extra_args: '-scrapeConstants'
+            set_version: false
+          - arch: arm64
+            extra_args: ''
+            set_version: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Install nbgv and set version
+        if: matrix.set_version
+        shell: pwsh
+        run: |
+          .\scripts\Install-DotNetTool.ps1 -Name nbgv -NuGetConfigFile "${{ github.workspace }}\nuget.config"
+          nbgv cloud
+
+      - name: Generate metadata source (${{ matrix.arch }})
+        shell: pwsh
+        run: .\scripts\GenerateMetadataSource.ps1 -arch ${{ matrix.arch }} ${{ matrix.extra_args }}
+
+      - name: Upload generated assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated_${{ matrix.arch }}
+          path: generation/WinSDK/obj
+          retention-days: 1
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scrape_logs_${{ matrix.arch }}
+          path: bin/logs
+          retention-days: 7
+
+  # ──────────────────────────────────────────────────────────────────────
+  # Stage 2: Build, test, and package (depends on all scrape jobs)
+  # ──────────────────────────────────────────────────────────────────────
+
+  build-test:
+    name: 'Build, test, package'
+    needs: [scrape]
+    runs-on: windows-2022
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: microsoft/setup-msbuild@v2
+
+      - name: Download all generated assets
+        uses: actions/download-artifact@v4
+        with:
+          pattern: generated_*
+          path: generation/WinSDK/obj
+          merge-multiple: true
+
+      - name: Build metadata binary
+        shell: pwsh
+        run: .\scripts\BuildMetadataBin.ps1 -assetsScrapedSeparately
+
+      - name: Package
+        shell: pwsh
+        run: .\scripts\DoPackages.ps1
+
+      - name: Build samples
+        shell: pwsh
+        run: .\scripts\DoSamples.ps1
+
+      - name: Run tests
+        shell: pwsh
+        run: .\scripts\DoTests.ps1
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build_logs
+          path: bin/logs
+          retention-days: 7
+
+      - name: Upload NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: NuGetPackages
+          path: bin/Packages/Release/NuGet
+          retention-days: 7
