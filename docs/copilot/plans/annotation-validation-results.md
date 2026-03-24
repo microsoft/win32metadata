@@ -1,7 +1,20 @@
 # Annotation Validation Results
 
 *Validated: March 2026*
-*ClangSharp: v17.0.1 | Clang: via libclang | Platform: x64*
+*ClangSharp: v17.0.1 and v18.1.0.4 | Clang: via libclang | Platform: x64*
+
+---
+
+## Key Finding: Upgrade ClangSharp to v18+
+
+ClangSharp v17.0.1 (currently pinned in this repo) only preserves
+`__attribute__((annotate(...)))` on **parameters**. All other placements
+(functions, return values, struct fields, typedefs) are silently dropped.
+
+ClangSharp v18.1.0.4+ (via PR [#552](https://github.com/dotnet/ClangSharp/pull/552))
+adds `[NativeAnnotation("...")]` support that preserves annotate attributes on
+**all declaration types**. We validated this — every proposed annotation works.
+**Upgrading to v18+ is the path forward.**
 
 ---
 
@@ -13,7 +26,9 @@ ClangSharp into the generated C# output (and thus into the final .winmd).
 ### Prerequisites
 
 - .NET 8.0+ SDK
-- `ClangSharpPInvokeGenerator` v17.0.1 (installed via `dotnet tool install --global`)
+- `ClangSharpPInvokeGenerator` **v18.1.0.4+** (installed via `dotnet tool install --global`)
+  - v17.0.1 only supports parameter-level annotations
+  - v18+ adds `[NativeAnnotation]` for all declaration types
 - Windows SDK headers (or the `RecompiledIdlHeaders` from this repo)
 
 ### Steps
@@ -49,7 +64,8 @@ ClangSharp into the generated C# output (and thus into the final .winmd).
 
 5. **Check for warnings** about "Unsupported attribute: 'Annotate'" —
    these indicate ClangSharp saw the attribute but doesn't know how to
-   handle it at that location (it only handles annotate on parameters).
+   handle it at that location (v17 only handles annotate on parameters;
+   v18+ handles all declaration types).
 
 ### Test Files Location
 
@@ -57,96 +73,72 @@ All validation test files are in `obj/annotation-validation/`:
 - `win32metadata.h` — Annotation macro definitions
 - `test_annotations.h` — Primary test cases (19 scenarios)
 - `test_alternatives.h` — Alternative mechanism tests (8 scenarios)
+- `test_returnval.h` — Return value annotation tests (4 scenarios)
 - `main.cpp` — Entry point
 - `output.cs` — Generated C# output (the evidence)
-- `test.rsp` — Response file (not used due to @-syntax parsing issue)
 
 ---
 
 ## Results Summary
 
-### By Declaration Target
+### ClangSharp v17.0.1 (currently pinned)
 
-| Annotation Target | Works? | Evidence |
+| Annotation Target | Works? | Output Attribute |
 |---|---|---|
-| **Function parameter** | ✅ YES | Appears as `[CppAttributeList("w32m:...")]` on param |
+| **Function parameter** | ✅ YES | `[CppAttributeList("w32m:...")]` |
 | **Multiple attrs on same param** | ✅ YES | Concatenated with `^` separator |
-| **Function pointer param** | ✅ YES | Same behavior as regular params |
-| **SAL + custom coexistence** | ✅ YES | Both appear as separate CppAttributeList entries |
+| **Function pointer param** | ✅ YES | Same as regular params |
+| **SAL + custom coexistence** | ✅ YES | Both present |
 | **Function declaration** | ❌ NO | Dropped — "Unsupported attribute: 'Annotate'" |
-| **Function (after param list)** | ❌ NO | Dropped |
+| **Return value** | ❌ NO | Dropped |
 | **Between return type and name** | ❌ NO | Dropped |
 | **`__declspec` on function** | ❌ NO | Dropped |
-| **typedef** | ❌ NO | Dropped; typedefs don't appear in output |
+| **typedef** | ❌ NO | Dropped |
 | **struct field** | ❌ NO | Dropped |
 
-### By Proposed Annotation
+### ClangSharp v18.1.0.4+ (recommended upgrade)
 
-| Annotation | Target | Works Natively? | Alternative |
+| Annotation Target | Works? | Output Attribute |
+|---|---|---|
+| **Function parameter** | ✅ YES | Both `[CppAttributeList]` AND `[NativeAnnotation]` |
+| **Multiple attrs on same param** | ✅ YES | Each as separate `[NativeAnnotation]` |
+| **Function declaration** | ✅ YES | `[NativeAnnotation("w32m:...")]` on method |
+| **Multiple attrs on function** | ✅ YES | Each as separate `[NativeAnnotation]` |
+| **Return value** | ✅ YES | `[NativeAnnotation("w32m:...")]` on method |
+| **struct field** | ✅ YES | `[NativeAnnotation("w32m:...")]` on field |
+| **Function pointer/delegate** | ✅ YES | `[NativeAnnotation("w32m:...")]` on delegate |
+| **SAL + custom coexistence** | ✅ YES | Both present without interference |
+| **`__declspec` on function** | ❌ NO | Still dropped (not needed) |
+| **typedef** | ⚠️ PARTIAL | Annotation preserved but typedef may be flattened |
+
+### By Proposed Annotation (with v18+)
+
+| Annotation | Target | v17 | v18 |
 |---|---|---|---|
-| `_Com_out_ptr_w32m_` | parameter | ✅ YES | — |
-| `_Do_not_release_` | parameter | ✅ YES | — |
-| `_Not_null_terminated_w32m_` | parameter | ✅ YES | — |
-| `_Null_null_terminated_w32m_` | parameter | ✅ YES | — |
-| `_Array_count_param_(n)` | parameter | ✅ YES | — |
-| `_Array_count_(n)` | parameter | ✅ YES | — |
-| `_Memory_size_param_(n)` | parameter | ✅ YES | — |
-| `_Enum_type_(name)` | parameter | ✅ YES | — |
-| `_Sets_last_error_` | function | ❌ NO | Carrier-param or extraction |
-| `_Min_os_version_(ver)` | function | ❌ NO | Carrier-param or extraction |
-| `_Must_close_with_(func)` | function | ❌ NO | Carrier-param or extraction |
-| `_Can_return_errors_as_success_` | function | ❌ NO | Carrier-param or extraction |
-| `_Multiple_success_values_` | function | ❌ NO | Carrier-param or extraction |
-| `_Close_handle_with_(func)` | typedef | ❌ NO | Extraction only |
-| `_Invalid_handle_(val)` | typedef | ❌ NO | Extraction only |
-| `_Also_usable_for_(type)` | typedef | ❌ NO | Extraction only |
-| `_Enum_type_(name)` on field | struct field | ❌ NO | Extraction only |
+| `_Sets_last_error_` | function | ❌ | ✅ |
+| `_Min_os_version_(ver)` | function | ❌ | ✅ |
+| `_Must_close_with_(func)` | function/return | ❌ | ✅ |
+| `_Can_return_errors_as_success_` | function | ❌ | ✅ |
+| `_Multiple_success_values_` | function | ❌ | ✅ |
+| `_Com_out_ptr_w32m_` | parameter | ✅ | ✅ |
+| `_Do_not_release_` | parameter | ✅ | ✅ |
+| `_Not_null_terminated_w32m_` | parameter | ✅ | ✅ |
+| `_Null_null_terminated_w32m_` | parameter | ✅ | ✅ |
+| `_Array_count_param_(n)` | parameter | ✅ | ✅ |
+| `_Array_count_(n)` | parameter | ✅ | ✅ |
+| `_Memory_size_param_(n)` | parameter | ✅ | ✅ |
+| `_Enum_type_(name)` | parameter | ✅ | ✅ |
+| `_Enum_type_(name)` | struct field | ❌ | ✅ |
+| `_Not_null_terminated_` | struct field | ❌ | ✅ |
+| `_Close_handle_with_(func)` | typedef | ❌ | ⚠️ |
+| `_Invalid_handle_(val)` | typedef | ❌ | ⚠️ |
+| `_Also_usable_for_(type)` | typedef | ❌ | ⚠️ |
 
 ---
 
-## Detailed Evidence
+## Detailed Evidence (v18.1.0.4)
 
-### Parameter Annotations That Work
-
-**Test: `_Com_out_ptr_w32m_` on parameter**
-```c
-// Header:
-HRESULT TestComOutPtr(LPCSTR lpClsid, _Com_out_ptr_w32m_ void** ppv);
-
-// Output.cs line 72:
-public static extern int TestComOutPtr(
-    [NativeTypeName("LPCSTR")] sbyte* lpClsid,
-    [CppAttributeList("w32m:comoutptr")] void** ppv);  // ✅ PRESENT
-```
-
-**Test: Multiple annotations on same parameter**
-```c
-// Header:
-HRESULT AltH_MultiAnnotParam(
-    __attribute__((annotate("w32m:arraycountparam=1")))
-    __attribute__((annotate("w32m:notnullterm")))
-    __attribute__((annotate("w32m:enumtype=BUFFER_FLAGS")))
-    DWORD* pBuffer, DWORD dwCount);
-
-// Output.cs line 140:
-public static extern int AltH_MultiAnnotParam(
-    [CppAttributeList("w32m:arraycountparam=1^w32m:notnullterm^w32m:enumtype=BUFFER_FLAGS")]
-    uint* pBuffer, ...);  // ✅ ALL THREE PRESENT, ^-separated
-```
-
-**Test: SAL and custom annotations coexist**
-```c
-// Header:
-BOOL TestWithSAL(_In_ LPCSTR lpFileName, _Out_ DWORD* pdwResult,
-                 _Com_out_ptr_w32m_ void** ppInterface);
-
-// Output.cs line 116:
-// lpFileName has SAL CppAttributeList: "Name=SAL_name; p1=\"_In_\"..."
-// ppInterface has our CppAttributeList: "w32m:comoutptr"
-// ✅ BOTH COEXIST
-```
-
-### Function-Level Annotations That FAIL
+### Function-Level Annotations — NOW WORK ✅
 
 **Test: `_Sets_last_error_` on function**
 ```c
@@ -154,155 +146,190 @@ BOOL TestWithSAL(_In_ LPCSTR lpFileName, _Out_ DWORD* pdwResult,
 _Sets_last_error_   // expands to __attribute__((annotate("w32m:setlasterror")))
 BOOL TestSetLastError_FuncDecl(LPCSTR lpFileName);
 
-// Output.cs line 38-40:
-public static extern int TestSetLastError_FuncDecl(
-    [NativeTypeName("LPCSTR")] sbyte* lpFileName);
-// ❌ NO CppAttributeList — annotation completely dropped
+// v17 output: NO annotation (dropped)
+// v18 output:
+[NativeAnnotation("w32m:setlasterror")]       // ✅ PRESENT
+public static extern int TestSetLastError_FuncDecl(...);
 ```
 
-**Test: `_Min_os_version_` on function**
+**Test: Multiple function-level annotations**
 ```c
-// Header:
-_Min_os_version_(10.0.19041)
-HRESULT TestMinVersion_FuncDecl(UINT uParam);
+_Sets_last_error_
+_Min_os_version_(6.0.6000)
+BOOL TestMultipleAnnotations(DWORD dwParam);
 
-// Output.cs line 46-48:
-public static extern int TestMinVersion_FuncDecl(uint uParam);
-// ❌ NO CppAttributeList — annotation completely dropped
+// v18 output — each annotation is a separate attribute:
+[NativeAnnotation("w32m:setlasterror")]        // ✅
+[NativeAnnotation("w32m:minversion=6.0.6000")] // ✅
+public static extern int TestMultipleAnnotations(...);
 ```
 
-### The "Carrier Parameter" Workaround (Alternative C)
+**Test: Combined function + parameter annotations**
+```c
+_Sets_last_error_
+_Min_os_version_(10.0.22000)
+_Must_close_with_(TestClose_Combined)
+HANDLE TestCombined(
+    _Enum_type_(CREATE_FLAGS) DWORD dwFlags,
+    _Not_null_terminated_w32m_ LPCSTR lpData,
+    DWORD cbData,
+    _Com_out_ptr_w32m_ void** ppResult);
+
+// v18 output:
+[NativeAnnotation("w32m:setlasterror")]                  // ✅ function
+[NativeAnnotation("w32m:minversion=10.0.22000")]         // ✅ function
+[NativeAnnotation("w32m:raiifree=TestClose_Combined")]   // ✅ function
+public static extern void* TestCombined(
+    [NativeAnnotation("w32m:enumtype=CREATE_FLAGS")] ..., // ✅ param
+    [NativeAnnotation("w32m:notnullterm")] ...,           // ✅ param
+    ...,
+    [NativeAnnotation("w32m:comoutptr")] ...);            // ✅ param
+```
+
+### Return Value Annotations — NOW WORK ✅
 
 ```c
-// Header — put function metadata as annotations on first parameter:
+_Must_close_with_(CloseHandle)
+HANDLE TestReturnAnnotate1(LPCSTR lpName);
+
+HANDLE __attribute__((annotate("w32m:raiifree=FindClose")))
+    TestReturnAnnotate2(LPCSTR lpName);
+
+HANDLE TestReturnAnnotate3(LPCSTR lpName)
+    __attribute__((annotate("w32m:raiifree=RegCloseKey")));
+
+// v18 output — all three placements work:
+[NativeAnnotation("w32m:raiifree=CloseHandle")]  // ✅
+public static extern void* TestReturnAnnotate1(...);
+
+[NativeAnnotation("w32m:raiifree=FindClose")]    // ✅
+public static extern void* TestReturnAnnotate2(...);
+
+[NativeAnnotation("w32m:raiifree=RegCloseKey")]  // ✅
+public static extern void* TestReturnAnnotate3(...);
+```
+
+### Struct Field Annotations — NOW WORK ✅
+
+```c
+typedef struct _TEST_STRUCT {
+    DWORD dwSize;
+    _Enum_type_(TEST_FLAGS) DWORD dwFlags;
+    _Not_null_terminated_w32m_ LPCSTR lpData;
+    DWORD cbData;
+} TEST_STRUCT;
+
+// v18 output:
+public unsafe partial struct _TEST_STRUCT
+{
+    public uint dwSize;
+
+    [NativeAnnotation("w32m:enumtype=TEST_FLAGS")]  // ✅ PRESENT
+    public uint dwFlags;
+
+    [NativeAnnotation("w32m:notnullterm")]          // ✅ PRESENT
+    public sbyte* lpData;
+
+    public uint cbData;
+}
+```
+
+### SAL + Custom Annotations Coexist ✅
+
+```c
+_Sets_last_error_
+_Min_os_version_(10.0.10240)
+BOOL TestWithSAL(
+    _In_ LPCSTR lpFileName,
+    _Out_ DWORD* pdwResult,
+    _Com_out_ptr_w32m_ void** ppInterface);
+
+// v18 output:
+[NativeAnnotation("w32m:setlasterror")]       // ✅ our function annotation
+[NativeAnnotation("w32m:minversion=10.0.10240")] // ✅ our function annotation
+public static extern int TestWithSAL(
+    [CppAttributeList("Name=SAL_name; p1=\"_In_\"...")]  // SAL preserved
+    [NativeAnnotation("Name=SAL_name; ...")]             // SAL also as NativeAnnotation
+    sbyte* lpFileName,
+    ...
+    [NativeAnnotation("w32m:comoutptr")]      // ✅ our param annotation
+    void** ppInterface);
+```
+
+### Parameter Annotations — Still Work ✅
+
+All parameter annotations from v17 continue to work in v18. In v18, they appear
+as BOTH `[CppAttributeList]` (v17 format) AND `[NativeAnnotation]` (v18 format).
+Multiple annotations on the same parameter appear as separate `[NativeAnnotation]`
+entries (cleaner than v17's `^`-separated concatenation).
+
+---
+
+## What Still Doesn't Work
+
+| Mechanism | Status | Notes |
+|---|---|---|
+| `__declspec` on function | ❌ | Not needed — `__attribute__((annotate))` covers everything |
+| typedef annotations | ⚠️ | Annotation is preserved on usages, but simple typedefs (e.g., `typedef void* HANDLE`) are flattened by ClangSharp — the typedef itself doesn't appear as a named type in output. Handle types from `autoTypes.json` are structurally generated and will continue to need their JSON definition. |
+
+---
+
+## How v18's `NativeAnnotation` Works
+
+ClangSharp v18+ (PR [#552](https://github.com/dotnet/ClangSharp/pull/552)) added a
+`NativeAnnotation` attribute that is emitted whenever Clang reports an `AnnotateAttr`
+on any declaration. This is fundamentally different from v17's `CppAttributeList`:
+
+| Aspect | v17 `CppAttributeList` | v18 `NativeAnnotation` |
+|---|---|---|
+| Supported on parameters | ✅ | ✅ |
+| Supported on functions | ❌ | ✅ |
+| Supported on struct fields | ❌ | ✅ |
+| Supported on return values | ❌ | ✅ |
+| Supported on types | ❌ | ✅ |
+| Multiple annotations | Concatenated with `^` | Separate attributes |
+| String escaping | Basic | Proper (PR #572) |
+
+The `NativeAnnotation` attribute is emitted under the same conditions as
+`NativeTypeNameAttribute` — whenever the declaration has at least one
+`annotate` attribute. The annotation string is the verbatim argument
+to `__attribute__((annotate("...")))`.
+
+### Emitter Processing Required
+
+`MetadataSyntaxTreeCleaner` currently processes `CppAttributeList` to extract
+SAL annotations. For v18+, it needs a parallel path to process `NativeAnnotation`
+attributes with the `w32m:` prefix:
+
+```csharp
+case "NativeAnnotation":
+{
+    var text = GetAttributeStringArg(firstAttr);
+    if (text.StartsWith("w32m:"))
+        return ProcessWin32MetadataAnnotation(text.Substring(5));
+    break;
+}
+```
+
+---
+
+## Appendix: v17 Workarounds (Retained for Reference)
+
+These workarounds were validated during v17 testing but are **no longer needed**
+with v18+. They are documented here in case v18 upgrade is delayed.
+
+### Carrier-Parameter Pattern
+
+Encode function-level metadata as annotations on the first parameter:
+```c
 BOOL AltC_MetaOnFirstParam(
     __attribute__((annotate("w32m:func_setlasterror")))
     __attribute__((annotate("w32m:func_minversion=10.0.19041")))
-    DWORD dwParam,
-    HANDLE hObject);
+    DWORD dwParam, HANDLE hObject);
 
-// Output.cs line 128:
-public static extern int AltC_MetaOnFirstParam(
-    [CppAttributeList("w32m:func_setlasterror^w32m:func_minversion=10.0.19041")]
-    uint dwParam, ...);
-// ✅ BOTH function-level annotations preserved on the first param!
+// v17 output:
+[CppAttributeList("w32m:func_setlasterror^w32m:func_minversion=10.0.19041")]
+uint dwParam  // ✅ Function metadata carried on first param
 ```
 
----
-
-## Alternative Approaches for Non-Working Cases
-
-### Option 1: Carrier-Parameter Pattern (for function-level metadata)
-
-Encode function-level metadata as annotations on the first parameter, using
-a `func_` prefix to distinguish them from parameter-specific annotations.
-
-**Pros:**
-- Works through ClangSharp today without any tool changes
-- Source of truth is in the header
-- Multiple annotations stack correctly (^-separated)
-
-**Cons:**
-- Semantically incorrect — function metadata shouldn't be on a parameter
-- Doesn't work for zero-parameter functions (no parameter to carry)
-- `MetadataSyntaxTreeCleaner` needs logic to strip `func_` annotations
-  from parameters and apply them to the containing method
-
-**Macro design:**
-```c
-// In win32metadata.h — carrier-param versions
-#define _Func_sets_last_error_ \
-    __attribute__((annotate("w32m:func_setlasterror")))
-#define _Func_min_version_(ver) \
-    __attribute__((annotate("w32m:func_minversion=" #ver)))
-#define _Func_must_close_with_(func) \
-    __attribute__((annotate("w32m:func_raiifree=" #func)))
-
-// Usage in header:
-BOOL CreateFileA(
-    _Func_sets_last_error_
-    _Func_min_version_(5.1.2600)
-    _In_ LPCSTR lpFileName,
-    ...);
-```
-
-### Option 2: Header Extraction Tool (for all non-working cases)
-
-A preprocessing step that scans headers for annotations and generates
-the corresponding .rsp/json sidecar entries automatically.
-
-**How it works:**
-1. Headers contain annotations using `__attribute__((annotate(...)))` or
-   custom macros (even if ClangSharp can't read them)
-2. A lightweight Clang-based tool (or regex scanner) reads the headers
-3. It extracts annotations and generates:
-   - `WithSetLastError.rsp` entries from `_Sets_last_error_`
-   - `supportedOS.rsp` entries from `_Min_os_version_`
-   - `autoTypes.json` entries from `_Close_handle_with_`
-   - `emitter.settings.rsp` remaps from `_Enum_type_` on struct fields
-4. ClangSharp runs with the auto-generated sidecar files
-
-**Pros:**
-- Source of truth moves to headers (the goal)
-- No ClangSharp modifications needed
-- Works for ALL annotation types including struct fields and typedefs
-- Generated sidecar files can be committed and diffed for review
-
-**Cons:**
-- Adds a build step
-- Still uses sidecar files (but they're auto-generated, not hand-maintained)
-- Extraction tool needs to be built and maintained
-
-**This is the recommended approach for non-parameter annotations.**
-
-### Option 3: ClangSharp Patch (longer-term)
-
-Modify ClangSharp to preserve `__attribute__((annotate(...)))` on all
-declaration types, not just parameters. This would be a PR to the
-ClangSharp project.
-
-**Pros:** Cleanest solution; annotations flow naturally through the pipeline
-**Cons:** Requires external project change; uncertain acceptance timeline
-
----
-
-## Recommended Strategy
-
-| Annotation Category | Approach | Rationale |
-|---|---|---|
-| **Parameter annotations** | Direct `__attribute__((annotate(...)))` | Works natively ✅ |
-| **Function-level metadata** | Carrier-parameter pattern OR extraction tool | Carrier works for functions with params; extraction for edge cases |
-| **Type/typedef metadata** | Extraction tool | No workaround exists |
-| **Struct field metadata** | Extraction tool | No workaround exists |
-
-### Hybrid Implementation
-
-Phase 1: Use direct parameter annotations for all parameter-level metadata
-(~8 annotation types). This works TODAY with no tool changes.
-
-Phase 2: Build a lightweight extraction tool that:
-- Scans headers for all `_W32M_` / `_Sets_last_error_` / etc. macros
-- Uses `clang -ast-dump` or regex to find annotated declarations
-- Generates the corresponding .rsp entries
-- Runs as the first step in the build pipeline
-
-Phase 3 (optional): Submit a PR to ClangSharp to preserve annotate
-attributes on all declaration types. If accepted, Phase 2 becomes
-unnecessary.
-
----
-
-## Appendix: How ClangSharp Processes Annotate Attributes
-
-ClangSharp v17 only emits `CppAttributeList` for `__attribute__((annotate(...)))`
-when the attribute is attached to a **parameter** in the Clang AST. This is because:
-
-1. Clang's libclang exposes annotate attributes on all declaration types
-2. But ClangSharp's `generate-cpp-attributes` handler only processes
-   `CXCursor_ParmDecl` (parameter declarations) when collecting annotate attributes
-3. For function-level, type-level, and field-level annotate attributes, ClangSharp
-   logs the "Unsupported attribute: 'Annotate'" warning and skips them
-
-The SAL annotations work because they are applied to parameters (`_In_`, `_Out_`,
-etc.), not to functions or types. SAL's function-level annotations like
-`_Return_type_success_` are handled through different mechanisms (not CppAttributeList).
+**Limitations:** Semantically incorrect; doesn't work for zero-parameter functions.

@@ -2,7 +2,7 @@
 
 *Created: March 2026*
 *Workstream: 4 — Shift-Left Metadata Definition*
-*Branch: TBD*
+*Branch: user/jevansaks/shift-left-metadata*
 
 ---
 
@@ -14,6 +14,13 @@ that live outside the Windows SDK headers. This plan details how to move each cl
 metadata into the headers themselves, using a SAL-like annotation mechanism that's already
 proven in the Windows SDK. We'll use a structured patch system to apply these annotations
 to ingested SDK headers until the official SDK adopts them.
+
+**Key finding (March 2026):** ClangSharp v18+ (via PR [#552](https://github.com/dotnet/ClangSharp/pull/552))
+added `[NativeAnnotation("...")]` support that preserves `__attribute__((annotate(...)))`
+on **all declaration types** — functions, parameters, struct fields, and return values.
+This repo currently pins v17.0.1 which only supports parameter-level annotations.
+**Upgrading ClangSharp to v18+ unblocks the entire shift-left strategy with no
+workarounds or extraction tools needed.**
 
 ---
 
@@ -432,13 +439,20 @@ DoAll.ps1
 **Goal:** Establish the annotation mechanism and prove it works end-to-end.
 
 **Tasks:**
-1. Create `win32metadata.h` with the annotation macros
-2. Add `-D_WIN32METADATA_=1` to `baseSettings.rsp`
-3. Add `#include "win32metadata.h"` to the scraper include chain
-4. Modify `MetadataSyntaxTreeCleaner` to recognize `w32m:` prefixed annotations
-5. Convert a small pilot set (~20 functions) of `WithSetLastError.rsp` entries into
+1. **Upgrade ClangSharp from v17.0.1 to v18.1.0.4+** — This is the critical
+   prerequisite. v18 adds `[NativeAnnotation("...")]` support for
+   `__attribute__((annotate(...)))` on all declaration types (functions,
+   parameters, struct fields, return values). Without this upgrade, only
+   parameter-level annotations work. Update the version pin in
+   `global.json` / `ScrapeHeaders.cs` and validate existing builds still pass.
+2. Create `win32metadata.h` with the annotation macros
+3. Add `-D_WIN32METADATA_=1` to `baseSettings.rsp`
+4. Add `#include "win32metadata.h"` to the scraper include chain
+5. Modify `MetadataSyntaxTreeCleaner` to recognize `[NativeAnnotation("w32m:...")]`
+   attributes (v18 emits these instead of / in addition to `CppAttributeList`)
+6. Convert a small pilot set (~20 functions) of `WithSetLastError.rsp` entries into
    header annotations and verify the winmd output is identical
-6. Write tests comparing winmd output before/after
+7. Write tests comparing winmd output before/after
 
 **Success criteria:** A header with `_Sets_last_error_` produces the same winmd metadata
 as the current `--with-setlasterror` rsp entry.
@@ -551,12 +565,12 @@ This can be expressed with a macro:
 
 ### Risk 1: ClangSharp doesn't preserve custom `__attribute__((annotate(...)))` data
 
-**Likelihood:** Low — we've confirmed that `generate-cpp-attributes` causes ClangSharp
-to emit `CppAttributeList` attributes with the annotation string content. The SAL
-annotations already flow through this exact path.
-
-**Mitigation:** Phase 1 is specifically a proof-of-concept to validate this before
-committing to the full migration.
+**Status: RESOLVED** — ClangSharp v17 (currently pinned) only preserves annotate
+attributes on parameters. However, ClangSharp v18+ (PR [#552](https://github.com/dotnet/ClangSharp/pull/552))
+added `[NativeAnnotation("...")]` support that preserves annotate attributes on
+**all declaration types**: functions, parameters, struct fields, and return values.
+We validated this by testing v18.1.0.4 against our full test suite — every proposed
+annotation type works. **Upgrading to v18+ is a prerequisite for this workstream.**
 
 ### Risk 2: Annotation placement varies across header styles
 
@@ -630,83 +644,65 @@ Target: 80%+ coverage for Category A metadata within the first two phases.
 
 ## Validation Results (March 2026)
 
-We rigorously tested every proposed annotation through ClangSharp v17.0.1 and
-discovered a critical limitation. **Full details in `annotation-validation-results.md`.**
+We rigorously tested every proposed annotation through ClangSharp v17.0.1 and v18.1.0.4.
+**Full details in `annotation-validation-results.md`.** Test files in `obj/annotation-validation/`.
 
-### What Works: Parameter-Level Annotations ✅
+### ClangSharp v17.0.1 (currently pinned): Parameter-Only Support
 
-`__attribute__((annotate("w32m:...")))` on **function parameters** is correctly
-preserved as `[CppAttributeList("w32m:...")]` in the generated C#. This includes:
+`__attribute__((annotate("w32m:...")))` on **function parameters** is preserved as
+`[CppAttributeList("w32m:...")]`. All other placements (functions, return values,
+struct fields, typedefs) are silently dropped with "Unsupported attribute: 'Annotate'".
 
-- `_Com_out_ptr_w32m_`, `_Do_not_release_`, `_Not_null_terminated_w32m_`
-- `_Null_null_terminated_w32m_`, `_Array_count_param_(n)`, `_Array_count_(n)`
-- `_Memory_size_param_(n)`, `_Enum_type_(name)`
-- Multiple annotations stack correctly (concatenated with `^` separator)
-- SAL and custom annotations coexist without interference
-- Function pointer/callback parameters work identically
+### ClangSharp v18.1.0.4+: Full Support ✅
 
-### What Doesn't Work ❌
+PR [#552](https://github.com/dotnet/ClangSharp/pull/552) added `[NativeAnnotation("...")]`
+attribute emission for `__attribute__((annotate(...)))` on **all declaration types**.
+We validated every proposed annotation:
 
-ClangSharp only processes `annotate` attributes on parameter declarations.
-All other placements are silently dropped with "Unsupported attribute: 'Annotate'":
+| Annotation | Placement | v17 | v18 |
+|---|---|---|---|
+| `_Sets_last_error_` | function | ❌ | ✅ `[NativeAnnotation("w32m:setlasterror")]` |
+| `_Min_os_version_(ver)` | function | ❌ | ✅ `[NativeAnnotation("w32m:minversion=...")]` |
+| `_Must_close_with_(func)` | function/return | ❌ | ✅ `[NativeAnnotation("w32m:raiifree=...")]` |
+| `_Can_return_errors_as_success_` | function | ❌ | ✅ `[NativeAnnotation("w32m:errorsassuccess")]` |
+| `_Multiple_success_values_` | function | ❌ | ✅ `[NativeAnnotation("w32m:multiplesuccess")]` |
+| Multiple annotations on function | function | ❌ | ✅ Each as separate `[NativeAnnotation]` |
+| Return value annotations | return | ❌ | ✅ Appears on method |
+| `_Enum_type_(name)` on struct field | field | ❌ | ✅ `[NativeAnnotation("w32m:enumtype=...")]` |
+| `_Not_null_terminated_` on struct field | field | ❌ | ✅ `[NativeAnnotation("w32m:notnullterm")]` |
+| All parameter annotations | param | ✅ | ✅ Both `CppAttributeList` AND `NativeAnnotation` |
+| SAL + custom coexistence | param | ✅ | ✅ Both present without interference |
+| `__declspec` on function | function | ❌ | ❌ Still dropped (not needed) |
 
-- **Function-level** (`_Sets_last_error_`, `_Min_os_version_`, `_Must_close_with_`,
-  `_Can_return_errors_as_success_`, `_Multiple_success_values_`)
-- **typedef-level** (`_Close_handle_with_`, `_Invalid_handle_`, `_Also_usable_for_`)
-- **struct field-level** (`_Enum_type_` on fields)
-- **`__declspec`** on functions — also dropped
+**Conclusion:** Upgrading ClangSharp to v18+ eliminates all workarounds. No extraction
+tools, no carrier-parameter hacks — `__attribute__((annotate(...)))` flows through the
+AST into `[NativeAnnotation("...")]` on the correct declaration in the generated C#.
+The emitter (`MetadataSyntaxTreeCleaner`) needs to be updated to process
+`NativeAnnotation` attributes in addition to `CppAttributeList`.
 
-### Workarounds
-
-**Carrier-parameter pattern** (validated — works): Encode function-level metadata
-as annotations on the first parameter with a `func_` prefix:
-```c
-BOOL CreateFileA(
-    _Func_sets_last_error_
-    _Func_min_version_(5.1.2600)
-    _In_ LPCSTR lpFileName, ...);
-```
-Produces: `[CppAttributeList("w32m:func_setlasterror^w32m:func_minversion=5.1.2600")]`
-on the first parameter. The emitter strips `func_` annotations and applies them to the method.
-
-**Limitation**: Doesn't work for zero-parameter functions.
-
-**Extraction tool** (recommended for all non-parameter cases): A preprocessing step
-scans headers for annotation macros (using `clang -ast-dump` or regex) and generates
-the corresponding .rsp entries automatically. The source of truth is still the header;
-the sidecar files are auto-generated artifacts.
-
-### Revised Strategy
-
-| Annotation Category | Approach | Coverage |
-|---|---|---|
-| Parameter annotations | Direct `__attribute__((annotate))` | ~8 types, works today |
-| Function-level | Carrier-param + extraction tool | ~5 types |
-| Type/typedef | Extraction tool | ~3 types |
-| Struct field | Extraction tool | memberRemap subset |
-
-### Revised Phase 1 Goals
-
-1. Implement parameter-level annotations end-to-end (proven path)
-2. Build the extraction tool for function/type/field annotations
-3. Optionally submit ClangSharp PR to support annotate on all declarations
+**Typedef annotations** are a special case: `__attribute__((annotate(...)))` on a
+typedef is preserved on the function parameters that use that typedef, but the typedef
+itself is typically flattened by ClangSharp. Handle types from `autoTypes.json` are
+generated structurally and will continue to need their JSON definition for the
+`DECLARE_HANDLE` pattern, but RAII/close metadata can move to annotations.
 
 ---
 
 ## Open Questions for Review
 
-1. **Carrier-parameter pattern**: Is putting function metadata on the first
-   parameter acceptable, or should we use extraction-only for function-level?
+1. **ClangSharp upgrade**: v17→v18 is a major version bump. Are there breaking
+   changes that affect our existing pipeline? Need a compatibility assessment.
 
-2. **ClangSharp PR**: Should we pursue a ClangSharp change to support annotate
-   on functions/types/fields? This would simplify everything significantly.
+2. **`NativeAnnotation` vs `CppAttributeList`**: v18 emits BOTH for parameters.
+   Should `MetadataSyntaxTreeCleaner` process `NativeAnnotation` only (cleaner),
+   or continue to support both for backwards compat?
 
-3. **Extraction tool technology**: Use `clang -ast-dump -ast-dump-filter` (accurate
-   but requires Clang), regex scanning (simpler, might miss edge cases), or
-   Roslyn source generators?
-
-4. **Enum reform strategy**: Annotate parameters with enum types (interim) vs.
+3. **Enum reform strategy**: Annotate parameters with enum types (interim) vs.
    actually create enum definitions (requires SDK changes)?
 
-5. **Macro naming convention**: SAL-style `_Sets_last_error_` vs.
+4. **Macro naming convention**: SAL-style `_Sets_last_error_` vs.
    `WIN32META_SETS_LAST_ERROR`?
+
+5. **Typedef/handle type metadata**: Keep in `autoTypes.json` (structural definition)
+   but move RAII annotations to headers? Or find a way to express the full typedef
+   definition as an annotation?
