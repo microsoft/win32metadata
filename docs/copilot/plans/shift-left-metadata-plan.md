@@ -628,25 +628,85 @@ Target: 80%+ coverage for Category A metadata within the first two phases.
 
 ---
 
+## Validation Results (March 2026)
+
+We rigorously tested every proposed annotation through ClangSharp v17.0.1 and
+discovered a critical limitation. **Full details in `annotation-validation-results.md`.**
+
+### What Works: Parameter-Level Annotations ✅
+
+`__attribute__((annotate("w32m:...")))` on **function parameters** is correctly
+preserved as `[CppAttributeList("w32m:...")]` in the generated C#. This includes:
+
+- `_Com_out_ptr_w32m_`, `_Do_not_release_`, `_Not_null_terminated_w32m_`
+- `_Null_null_terminated_w32m_`, `_Array_count_param_(n)`, `_Array_count_(n)`
+- `_Memory_size_param_(n)`, `_Enum_type_(name)`
+- Multiple annotations stack correctly (concatenated with `^` separator)
+- SAL and custom annotations coexist without interference
+- Function pointer/callback parameters work identically
+
+### What Doesn't Work ❌
+
+ClangSharp only processes `annotate` attributes on parameter declarations.
+All other placements are silently dropped with "Unsupported attribute: 'Annotate'":
+
+- **Function-level** (`_Sets_last_error_`, `_Min_os_version_`, `_Must_close_with_`,
+  `_Can_return_errors_as_success_`, `_Multiple_success_values_`)
+- **typedef-level** (`_Close_handle_with_`, `_Invalid_handle_`, `_Also_usable_for_`)
+- **struct field-level** (`_Enum_type_` on fields)
+- **`__declspec`** on functions — also dropped
+
+### Workarounds
+
+**Carrier-parameter pattern** (validated — works): Encode function-level metadata
+as annotations on the first parameter with a `func_` prefix:
+```c
+BOOL CreateFileA(
+    _Func_sets_last_error_
+    _Func_min_version_(5.1.2600)
+    _In_ LPCSTR lpFileName, ...);
+```
+Produces: `[CppAttributeList("w32m:func_setlasterror^w32m:func_minversion=5.1.2600")]`
+on the first parameter. The emitter strips `func_` annotations and applies them to the method.
+
+**Limitation**: Doesn't work for zero-parameter functions.
+
+**Extraction tool** (recommended for all non-parameter cases): A preprocessing step
+scans headers for annotation macros (using `clang -ast-dump` or regex) and generates
+the corresponding .rsp entries automatically. The source of truth is still the header;
+the sidecar files are auto-generated artifacts.
+
+### Revised Strategy
+
+| Annotation Category | Approach | Coverage |
+|---|---|---|
+| Parameter annotations | Direct `__attribute__((annotate))` | ~8 types, works today |
+| Function-level | Carrier-param + extraction tool | ~5 types |
+| Type/typedef | Extraction tool | ~3 types |
+| Struct field | Extraction tool | memberRemap subset |
+
+### Revised Phase 1 Goals
+
+1. Implement parameter-level annotations end-to-end (proven path)
+2. Build the extraction tool for function/type/field annotations
+3. Optionally submit ClangSharp PR to support annotate on all declarations
+
+---
+
 ## Open Questions for Review
 
-1. **Macro naming convention**: Should we use `_Sets_last_error_` (SAL-like underscored)
-   or `WIN32META_SETS_LAST_ERROR` (macro-style uppercase)?  SAL-like is recommended
-   for consistency with existing header style.
+1. **Carrier-parameter pattern**: Is putting function metadata on the first
+   parameter acceptable, or should we use extraction-only for function-level?
 
-2. **Single vs. multiple annotation headers**: Should all annotations live in one
-   `win32metadata.h` or be split by category (e.g., `win32meta_raii.h`,
-   `win32meta_platform.h`)?
+2. **ClangSharp PR**: Should we pursue a ClangSharp change to support annotate
+   on functions/types/fields? This would simplify everything significantly.
 
-3. **Patch format**: JSON manifest (proposed) vs. structured diff files vs. a
-   domain-specific patch language?
+3. **Extraction tool technology**: Use `clang -ast-dump -ast-dump-filter` (accurate
+   but requires Clang), regex scanning (simpler, might miss edge cases), or
+   Roslyn source generators?
 
 4. **Enum reform strategy**: Annotate parameters with enum types (interim) vs.
    actually create enum definitions (requires SDK changes)?
 
-5. **Coordination with SAL team**: Should the `w32m:` annotations be proposed as
-   extensions to the SAL specification, or remain a separate system?
-
-6. **ClangSharp version constraints**: Do we need changes in ClangSharp itself, or
-   can we work entirely within the existing `CppAttributeList` processing?
-   (Belief: existing infrastructure is sufficient.)
+5. **Macro naming convention**: SAL-style `_Sets_last_error_` vs.
+   `WIN32META_SETS_LAST_ERROR`?
