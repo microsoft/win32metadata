@@ -10,6 +10,7 @@
   <UsingTask TaskName="MetadataTasks.MergeFilesIntoFile" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.PrepSettingsForFunctionPointerFixups" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.PrepSettingsForAutoTypes" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.AutoDeriveRemaps" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
   <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
@@ -49,6 +50,10 @@
 
     <ScrapedConstantsMarker>$(GeneratedDir)\constants.scraped.txt</ScrapedConstantsMarker>
     <ScrapedHeadersMarker>$(GeneratedDir)\scannedheaders.$(ScanArch).txt</ScrapedHeadersMarker>
+
+    <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
+    <ScraperAutoFuncPtrRsp>$(GeneratedDir)\scraper.autoFuncPtr.generated.rsp</ScraperAutoFuncPtrRsp>
+    <EmitterAutoFuncPtrRsp>$(GeneratedDir)\emitter.autoFuncPtr.generated.rsp</EmitterAutoFuncPtrRsp>
 
   </PropertyGroup>
 
@@ -112,6 +117,21 @@
     <PrepSettingsForAutoTypes
       AutoTypes="@(AutoType);@(AutoTypesForSettingsOnly)"
       ScraperAutoTypesRsp="$(ScraperAutoTypesRsp)"/>
+
+  </Target>
+
+  <Target Name="AutoDeriveRemaps" BeforeTargets="Build"
+    DependsOnTargets="PrepSettingsForAutoTypes;PrepSettingsForFunctionPointerFixups"
+    Outputs="$(ScraperAutoRemapsRsp);$(ScraperAutoFuncPtrRsp);$(EmitterAutoFuncPtrRsp)">
+
+    <AutoDeriveRemaps
+      SdkIncRoot="$(SdkIncRoot)"
+      AdditionalIncludes="$(AdditionalIncludes)"
+      ScraperAutoRemapsRsp="$(ScraperAutoRemapsRsp)"
+      ScraperAutoFuncPtrRsp="$(ScraperAutoFuncPtrRsp)"
+      EmitterAutoFuncPtrRsp="$(EmitterAutoFuncPtrRsp)"
+      ExcludeRemapKeysFromRsp="$(ScraperAutoTypesRsp);$(ScraperFunctionPointerFixupsRsp);@(ScraperRsp->'%(FullPath)', ';');@(EmitterRsp->'%(FullPath)', ';')"
+      ExcludeRemapKeysFromDirs="$(MSBuildProjectDirectory)\partitions;$(Win32MetadataScraperAssetsDir)"/>
 
   </Target>
 
@@ -179,6 +199,8 @@
   <ItemGroup>
     <ScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
     <ScraperRsp Include="$(ScraperAutoTypesRsp)"/>
+    <ScraperRsp Include="$(ScraperAutoRemapsRsp)"/>
+    <ScraperRsp Include="$(ScraperAutoFuncPtrRsp)"/>
     <ScraperRsp Include="$(FilteredRspForHeaders)"/>
     <ScraperRsp Include="$(WithLibsRsp)"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
@@ -190,7 +212,7 @@
   </ItemGroup>
 
   <Target Name="ScrapeHeaders" BeforeTargets="Build"
-    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
+    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;AutoDeriveRemaps;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
     <ScrapeHeaders
       Condition="'$(SkipScraping)' != 'true'"
@@ -262,6 +284,7 @@
 
     <ItemGroup>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
+      <EmitterRsp Include="$(EmitterAutoFuncPtrRsp)"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
     </ItemGroup>
