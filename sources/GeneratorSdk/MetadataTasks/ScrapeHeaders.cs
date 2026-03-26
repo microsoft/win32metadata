@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -18,6 +17,7 @@ namespace MetadataTasks
         private static readonly string[] allArches = new string[] { "x86", "x64", "arm64" };
 
         private bool canceled;
+        private string clangSharpToolPath;
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
@@ -73,7 +73,6 @@ namespace MetadataTasks
         [Required]
         public string ScriptsDir { get; set; }
 
-        [Required]
         public string NuGetPackageSource { get; set; }
 
         public override bool Execute()
@@ -130,16 +129,13 @@ namespace MetadataTasks
             }
             else
             {
-                throttleCount = System.Environment.ProcessorCount / 2;
-
-                if (throttleCount < 2)
-                {
-                    throttleCount = 2;
-                }
+                throttleCount = System.Environment.ProcessorCount;
             }
 
             opt.MaxDegreeOfParallelism = throttleCount;
 #endif
+
+            this.Log.LogMessage(MessageImportance.High, $"Scraping with MaxDegreeOfParallelism = {opt.MaxDegreeOfParallelism} (ProcessorCount = {System.Environment.ProcessorCount})");
 
             this.defaultIncDirs = new string[]
             {
@@ -151,15 +147,20 @@ namespace MetadataTasks
 
             this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
 
-            bool ret = true;
+            int failureCount = 0;
 
             System.Threading.Tasks.Parallel.ForEach(items, opt, (item) =>
             {
                 if (!this.canceled)
                 {
-                    ret &= this.ProcessPartition(item.Partition, item.Arch);
+                    if (!this.ProcessPartition(item.Partition, item.Arch))
+                    {
+                        System.Threading.Interlocked.Increment(ref failureCount);
+                    }
                 }
             });
+
+            bool ret = failureCount == 0;
 
             if (this.suggestedRemaps.Count != 0)
             {
@@ -186,21 +187,56 @@ namespace MetadataTasks
 
         private bool EnsureClangSharpInstalled()
         {
-            string nugetConfigFile = this.GenerateNuGetConfig(this.NuGetPackageSource);
-            string scriptPath = Path.Combine(this.ScriptsDir, "Install-DotNetTool.ps1");
-            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion} -NuGetConfigFile {nugetConfigFile}";
-            bool installResult = TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _);
+            // Restore ClangSharp as a local tool with the pinned version, so we are
+            // not affected by whatever version is installed globally on the machine.
+            // A tool manifest is generated in the scratch directory so this works both
+            // in-repo and when the GeneratorSdk is consumed as a NuGet MSBuild SDK.
+            string toolManifestDir = Path.Combine(this.ScratchDir, ".config");
+            string toolManifest = Path.Combine(toolManifestDir, "dotnet-tools.json");
 
-            try
+            Directory.CreateDirectory(toolManifestDir);
+            File.WriteAllText(toolManifest,
+$@"{{
+  ""version"": 1,
+  ""isRoot"": true,
+  ""tools"": {{
+    ""clangsharppinvokegenerator"": {{
+      ""version"": ""{ClangSharpVersion}"",
+      ""commands"": [""ClangSharpPInvokeGenerator""]
+    }}
+  }}
+}}");
+
+            int exitCode = TaskUtils.ExecuteCmd("dotnet", $"tool restore --tool-manifest \"{toolManifest}\"", out var output, this.Log);
+            if (exitCode != 0)
             {
-                // try and delete the file generated nuget.config file.
-                File.Delete(nugetConfigFile);
+                this.Log.LogError($"Failed to restore ClangSharpPInvokeGenerator {ClangSharpVersion}. Exit code: {exitCode}. Output: {output}");
+                return false;
             }
-            catch(Exception e)
+
+            // Resolve the tool DLL path so we can invoke it directly via 'dotnet <dll>'
+            // instead of 'dotnet tool run' which has per-invocation overhead.
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string storeRoot = Path.Combine(userProfile, ".dotnet", "tools", ".store", "clangsharppinvokegenerator");
+            if (Directory.Exists(storeRoot))
             {
-                this.Log.LogWarningFromException(e);
+                var found = Directory.GetFiles(storeRoot, "ClangSharpPInvokeGenerator.dll", SearchOption.AllDirectories);
+                if (found.Length > 0)
+                {
+                    this.clangSharpToolPath = found[0];
+                }
             }
-            return installResult;
+
+            if (this.clangSharpToolPath != null)
+            {
+                this.Log.LogMessage(MessageImportance.High, $"Using ClangSharp {ClangSharpVersion} from {this.clangSharpToolPath}");
+            }
+            else
+            {
+                this.Log.LogWarning($"Could not resolve ClangSharpPInvokeGenerator.dll path; falling back to 'dotnet tool run'");
+            }
+
+            return true;
         }
 
         private bool AreNonPartitionFilesUpToDate()
@@ -416,7 +452,16 @@ $@"--file
                 }
             }
 
-            int exitCode = TaskUtils.ExecuteCmd("ClangSharpPInvokeGenerator", args.ToString(), out var output, this.Log);
+            string output;
+            int exitCode;
+            if (this.clangSharpToolPath != null)
+            {
+                exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
+            }
+            else
+            {
+                exitCode = TaskUtils.ExecuteCmd("dotnet", $"tool run ClangSharpPInvokeGenerator -- {args}", out output, this.Log, workingDirectory: this.ScratchDir);
+            }
             if (output == null)
             {
                 output = string.Empty;
@@ -503,25 +548,5 @@ $@"--file
             return items;
         }
 
-        private string GenerateNuGetConfig(string url)
-        {
-            var config = new XElement("configuration",
-                new XElement("packageSources",
-                    new XElement("clear"),
-                    new XElement("add",
-                        new XAttribute("key", "Win32Metadata-Dependencies"),
-                        new XAttribute("value", url),
-                        new XAttribute("protocolVersion", "3")
-                    )
-                ),
-                new XElement("disabledPackageSources",
-                    new XElement("clear")
-                )
-            );
-
-            string filePath = Path.Combine(this.ScriptsDir, "NuGet.config");
-            config.Save(filePath);
-            return filePath;
-        }
     }
 }
