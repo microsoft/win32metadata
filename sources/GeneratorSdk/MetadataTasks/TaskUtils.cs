@@ -169,7 +169,7 @@ namespace MetadataTasks
             return scriptOutput;
         }
 
-        public static int ExecuteCmd(string cmd, string args, out string output, out string error, TaskLoggingHelper log, string extraPath = null)
+        public static int ExecuteCmd(string cmd, string args, out string output, out string error, TaskLoggingHelper log, string extraPath = null, string workingDirectory = null)
         {
             output = null;
 
@@ -184,6 +184,11 @@ namespace MetadataTasks
             {
                 StringDictionary env = process.StartInfo.EnvironmentVariables;
                 env["PATH"] = env["PATH"] + ";" + extraPath;
+            }
+
+            if (workingDirectory != null)
+            {
+                process.StartInfo.WorkingDirectory = workingDirectory;
             }
 
             StringBuilder errorText = new StringBuilder();
@@ -204,10 +209,10 @@ namespace MetadataTasks
             return process.ExitCode;
         }
 
-        public static int ExecuteCmd(string cmd, string args, out string output, TaskLoggingHelper log, string extraPath = null)
+        public static int ExecuteCmd(string cmd, string args, out string output, TaskLoggingHelper log, string extraPath = null, string workingDirectory = null)
         {
             string fullOutput;
-            int ret = ExecuteCmd(cmd, args, out fullOutput, out var error, log, extraPath);
+            int ret = ExecuteCmd(cmd, args, out fullOutput, out var error, log, extraPath, workingDirectory);
             fullOutput += error;
 
             output = fullOutput;
