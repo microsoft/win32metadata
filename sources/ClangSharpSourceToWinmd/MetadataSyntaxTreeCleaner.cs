@@ -15,9 +15,9 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, Dictionary<string, string> typedefTagRemaps = null)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, typedefTagRemaps);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
@@ -42,8 +42,11 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
+            // Tag→typedef remaps discovered by ClangSharpWorker from the AST.
+            // Applied globally to rename all identifier references.
+            private Dictionary<string, string> typedefTagRemaps;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, Dictionary<string, string> typedefTagRemaps = null)
             {
                 this.remaps = remaps;
                 this.InitRegexRemaps();
@@ -55,6 +58,7 @@ namespace ClangSharpSourceToWinmd
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
+                this.typedefTagRemaps = typedefTagRemaps ?? new Dictionary<string, string>();
             }
 
             private void InitRegexRemaps()
@@ -70,6 +74,26 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
             {
+                // Strip the AutoRemaps namespace from the compilation — it's only
+                // data for the build pipeline, not part of the winmd output
+                var members = node.Members;
+                for (int i = members.Count - 1; i >= 0; i--)
+                {
+                    if (members[i] is NamespaceDeclarationSyntax ns && ns.Name.ToString() == "AutoRemaps")
+                    {
+                        members = members.RemoveAt(i);
+                    }
+                    else if (members[i] is FileScopedNamespaceDeclarationSyntax fns && fns.Name.ToString() == "AutoRemaps")
+                    {
+                        members = members.RemoveAt(i);
+                    }
+                }
+
+                if (members.Count != node.Members.Count)
+                {
+                    node = node.WithMembers(members);
+                }
+
                 var ret = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
 
                 // Add any namespaces we might need due to remappings
@@ -94,6 +118,27 @@ namespace ClangSharpSourceToWinmd
             {
                 this.usingNamespaces.Add(node.Name.ToString());
                 return base.VisitUsingDirective(node);
+            }
+
+            /// <summary>
+            /// Renames type references that match typedef-tag remaps discovered by
+            /// ClangSharpWorker. When PInvokeGenerator generates with raw tag names
+            /// (e.g., _ACL instead of ACL), this visitor renames all identifier
+            /// references to use the correct public typedef name.
+            /// </summary>
+            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                if (this.typedefTagRemaps.Count > 0)
+                {
+                    string name = node.Identifier.ValueText;
+                    if (this.typedefTagRemaps.TryGetValue(name, out string newName))
+                    {
+                        return node.WithIdentifier(
+                            SyntaxFactory.Identifier(node.Identifier.LeadingTrivia, newName, node.Identifier.TrailingTrivia));
+                    }
+                }
+
+                return base.VisitIdentifierName(node);
             }
 
             private static SyntaxList<AttributeListSyntax> FixRemappedAttributes(
@@ -252,6 +297,12 @@ namespace ClangSharpSourceToWinmd
                 else
                 {
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
+
+                    // Apply typedef-tag remap if discovered by ClangSharpWorker
+                    if (this.typedefTagRemaps.TryGetValue(name, out string typedefName))
+                    {
+                        node = node.WithIdentifier(SyntaxFactory.Identifier(typedefName));
+                    }
                 }
 
                 return node;
@@ -484,6 +535,11 @@ namespace ClangSharpSourceToWinmd
                 if (this.GetRemapInfo(enumName, node.AttributeLists, out var listAttributes, null, out _, out _))
                 {
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+                }
+                // Apply typedef-tag remap if discovered by ClangSharpWorker
+                else if (this.typedefTagRemaps.TryGetValue(enumName, out string typedefName))
+                {
+                    node = node.WithIdentifier(SyntaxFactory.Identifier(typedefName));
                 }
 
                 if (this.enumAdditions.TryGetValue(enumName, out var additionsList))

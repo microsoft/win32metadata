@@ -63,6 +63,41 @@ namespace ClangSharpSourceToWinmd
             return CSharpSyntaxTree.ParseText(File.ReadAllText(fileName), null, fileName);
         }
 
+        /// <summary>
+        /// Loads auto-discovered typedef-tag remaps from AutoRemaps.generated.cs.
+        /// This file is produced by ClangSharpWorker and contains tag→typedef mappings
+        /// discovered from PInvokeGenerator's AST traversal.
+        /// </summary>
+        private static Dictionary<string, string> LoadAutoTypedefRemaps(string sourceDirectory)
+        {
+            var remaps = new Dictionary<string, string>(StringComparer.Ordinal);
+            string autoRemapsFile = Path.Combine(sourceDirectory, "AutoRemaps.generated.cs");
+
+            if (!File.Exists(autoRemapsFile))
+                return remaps;
+
+            // Parse the string array from the .cs file — each line containing
+            // "TAG=TYPEDEF" inside quotes is a remap entry
+            foreach (var line in File.ReadLines(autoRemapsFile))
+            {
+                string trimmed = line.Trim();
+                if (trimmed.StartsWith("\"") && trimmed.Contains("=\""))
+                {
+                    // Strip quotes and trailing comma: "TAG=TYPEDEF", → TAG=TYPEDEF
+                    string entry = trimmed.TrimStart('"').TrimEnd(',').TrimEnd('"');
+                    int eq = entry.IndexOf('=');
+                    if (eq > 0)
+                    {
+                        string tag = entry.Substring(0, eq);
+                        string typedef = entry.Substring(eq + 1);
+                        remaps[tag] = typedef;
+                    }
+                }
+            }
+
+            return remaps;
+        }
+
         private static IEnumerable<SyntaxTree> FilesToTrees(IEnumerable<string> files)
         {
             foreach (string file in files)
@@ -203,10 +238,17 @@ namespace ClangSharpSourceToWinmd
 
             watch.Restart();
 
+            // Load auto-discovered typedef-tag remaps from ClangSharpWorker output
+            var autoTypedefRemaps = LoadAutoTypedefRemaps(sourceDirectory);
+            if (autoTypedefRemaps.Count > 0)
+            {
+                Console.WriteLine($"  Loaded {autoTypedefRemaps.Count} auto-discovered typedef-tag remaps");
+            }
+
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, autoTypedefRemaps);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
