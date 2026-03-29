@@ -27,21 +27,27 @@ fundamentally failed because it can't handle macro-expanded names (e.g.,
 `VK_TO_WCHARS1` is produced by `##` token-pasting — it never appears literally in
 the header source).
 
-## Solution: Use ClangSharp as a Library
+## Solution: CLI with `log-potential-typedef-remappings`
 
 ClangSharp already runs libclang on every SDK partition during the scraping phase.
-libclang fully preprocesses macros and builds a complete AST. We now use
-`ClangSharp.PInvokeGenerator` as an in-process library (instead of a CLI tool) to
-access the AST data directly.
+libclang fully preprocesses macros and builds a complete AST. The
+`log-potential-typedef-remappings` config option (already enabled in
+`baseSettings.rsp`) causes ClangSharp to output `Info: Potential remap: X=Y`
+lines for every typedef-tag relationship it discovers that isn't already
+configured via `--remap`.
 
 ### Key Discovery
 
-PInvokeGenerator has a private field `_allValidNameRemappings` (type:
-`Dictionary<string, HashSet<string>>`) that contains **every typedef-tag
-relationship** libclang discovers during parsing. By reading this field via
-reflection after `GenerateBindings()` completes, we get the complete set of
-auto-derivable remaps — **13,896 entries** from a full build, including
-macro-expanded names.
+The in-process library approach (loading ClangSharp assemblies via reflection,
+reading `_allValidNameRemappings` from the PInvokeGenerator instance) was
+replaced with a simpler CLI-based approach. The `log-potential-typedef-remappings`
+config option provides the same remap discovery through CLI output parsing, with
+the critical advantage of **process isolation** — each partition runs in its own
+`dotnet` process, eliminating concerns about:
+- Shared libclang state across threads
+- Memory pressure from accumulating CXIndex instances
+- File contention from multiple PInvokeGenerator instances in one process
+- Thread safety of libclang with concurrent CXIndex usage
 
 ### Architecture
 
@@ -49,196 +55,161 @@ macro-expanded names.
 ┌─────────────────────────────────────────────────────────────────┐
 │  ScrapeHeaders.ProcessPartition (per partition, parallel)       │
 │                                                                 │
-│  1. Parse RSP files → PInvokeGeneratorConfiguration             │
-│  2. Create PInvokeGenerator (via reflection)                    │
-│  3. CXTranslationUnit.TryParse → TranslationUnit.GetOrCreate   │
-│  4. generator.GenerateBindings(tu, ...)                         │
+│  1. Build RSP files + CommandLineBuilder args                   │
+│  2. dotnet "ClangSharpPInvokeGenerator.dll" @rsp1 @rsp2 ...    │
+│     └─ Each partition runs in its own process                   │
 │     └─ libclang parses headers (macros expanded)                │
 │     └─ Discovers typedef-tag relationships                      │
-│     └─ Generates C# output (same as CLI)                        │
-│  5. Read generator._allValidNameRemappings (reflection)         │
-│     └─ 3000+ remaps per partition (many overlap across parts)   │
-│  6. generator.Close() → MemoryStream → File.WriteAllBytes       │
-│  7. generator.Dispose()                                         │
-│                                                                 │
-│  Falls back to CLI for x86 partitions with inline asm errors    │
+│     └─ Generates C# output                                      │
+│     └─ Outputs "Info: Potential remap: X=Y" for NEW remaps      │
+│  3. Parse CLI output for potential remap lines                  │
+│  4. Collect into suggestedRemaps (thread-safe with lock)        │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
               suggestedRemaps: Dictionary<string, string>
-              (merged across all partitions, 13,896 entries)
+              (merged across all partitions)
+                              │
+                              ▼
+         WriteAutoRemapsRsp() in Execute()
+              → scraper.autoRemaps.generated.rsp
+              (consumed on subsequent builds via @(ScraperRsp))
 ```
 
 ### Implementation Details
 
 **File:** `sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs`
 
-**Assembly loading:** ClangSharp DLLs are loaded from the dotnet tool store
-(`~/.dotnet/tools/.store/clangsharppinvokegenerator/17.0.1/.../tools/net8.0/any/`)
-using `Assembly.LoadFrom`. Native libraries (`libclang.dll`, `libClangSharp.dll`)
-are pre-loaded via `NativeLibrary.Load` before ClangSharp.Interop's static
-constructor runs (which sets its own `DllImportResolver`).
+**CLI invocation:** Each partition runs ClangSharp in its own `dotnet` process
+via `TaskUtils.ExecuteCmd("dotnet", "<ClangSharpPInvokeGenerator.dll> @rsp")`.
+This ensures complete process isolation — no shared libclang, no shared state.
 
-**Reflection:** All ClangSharp types are accessed via reflection because the
-assemblies are loaded dynamically — there are no compile-time references.
-Key reflected types:
-- `ClangSharp.PInvokeGeneratorConfiguration` — config object
-- `ClangSharp.PInvokeGenerator` — the generator
-- `ClangSharp.Interop.CXTranslationUnit` — libclang translation unit
-- `ClangSharp.TranslationUnit` — managed wrapper
+**Remap discovery:** The `log-potential-typedef-remappings` config option
+(in `baseSettings.rsp`) causes ClangSharp to output potential remaps as
+`Info: Potential remap: X=Y` lines. `ProcessPartition` parses these from the
+CLI output and collects them in the thread-safe `suggestedRemaps` dictionary.
 
-**IL emission:** `CXTranslationUnit.TryParse` takes `ReadOnlySpan<string>` and
-`ReadOnlySpan<CXUnsavedFile>` parameters which cannot be called via
-`MethodInfo.Invoke` (ReadOnlySpan can't be boxed). A `DynamicMethod` with IL
-emission is used to build a callable delegate. See `BuildTryParseDelegate()`.
+**Auto-rsp writing:** After all partitions complete, `WriteAutoRemapsRsp()`:
+1. Reads existing auto remaps from previous builds (accumulates over time)
+2. Merges newly discovered remaps from the current build
+3. Writes all entries to `$(GeneratedDir)/scraper.autoRemaps.generated.rsp`
+4. Logs summary statistics
 
-**Output handling:** A custom `Func<string, Stream>` output stream factory writes
-to `MemoryStream` instances instead of files directly. After `Close()`, the
-memory streams are flushed to disk. This avoids file locking issues that occur
-when multiple PInvokeGenerator instances run in the same process.
-
-**CLI fallback:** Five x86 partitions (Dfs, Dns, Hid, Js, Mf) have inline
-assembly in `winnt.h` that produces clang diagnostics. PInvokeGenerator rejects
-translation units with error-level diagnostics. For these partitions, the code
-catches the `ArgumentException` and falls back to the CLI invocation.
+**Build integration:** The auto-generated rsp is included in `@(ScraperRsp)`
+in `sdk.targets` with `Condition="Exists(...)"`:
+- First build: file doesn't exist → not consumed → remaps discovered and written
+- Subsequent builds: file consumed → remaps applied → only NEW remaps logged
+- Auto rsp appears BEFORE `scraper.settings.rsp` so manual overrides take priority
 
 **RSP parsing:** The method `ParseRspFile` reads `.rsp` files into a
 `Dictionary<string, List<string>>` mapping switch names (`--remap`, `--exclude`,
-`--config`, etc.) to their values. Config strings are mapped to
-`PInvokeGeneratorConfigurationOptions` enum flags via `MapConfigToFieldName`.
+etc.) to their values.
 
 ### Current Status (March 2026)
 
 | Aspect | Status |
 |--------|--------|
-| Library loading | ✅ Works — assemblies + native DLLs load correctly |
-| Config parsing | ✅ All RSP settings parsed into PInvokeGeneratorConfiguration |
+| CLI invocation | ✅ All partitions run in separate processes (process isolated) |
+| Config parsing | ✅ All RSP settings parsed correctly |
 | Code generation | ✅ 393/393 partitions produce correct C# output |
-| Remap discovery | ✅ 13,896 typedef-tag remaps auto-discovered from AST |
-| CLI fallback | ✅ 5 x86 partitions fall back gracefully |
-| End-to-end build | ✅ Full build succeeds, winmd generated (24.3 MB) |
+| Remap discovery | ✅ Potential remaps collected from CLI output via `log-potential-typedef-remappings` |
+| Auto-rsp writing | ✅ Discovered remaps written to `scraper.autoRemaps.generated.rsp` |
+| Build integration | ✅ Auto-rsp included in `@(ScraperRsp)` with bootstrap support |
+| End-to-end build | ✅ Full build succeeds, winmd generated |
 | Winmd comparison | ⚠️ Not yet compared byte-for-byte against published baseline |
-| Remap application | ❌ Discovered remaps not yet used to replace manual entries |
+| Manual rsp cleanup | ❌ Auto-derivable entries not yet removed from `scraper.settings.rsp` |
 
 ---
 
 ## Next Steps
 
-### Step 1: Validate output equivalence
+### ✅ Step 1: Process isolation (completed)
 
-Compare the library-generated winmd against the CLI-generated baseline to confirm
-byte-for-byte equivalence. Use `WinmdUtils` or a binary diff tool.
+Replaced the in-process library approach (reflection, IL emission, shared libclang)
+with CLI-only invocation. Each partition now runs in its own `dotnet` process.
+This eliminates thread safety, memory pressure, and file contention concerns.
+
+### ✅ Step 2: Write auto-derived remaps to generated .rsp (completed)
+
+`WriteAutoRemapsRsp()` writes discovered remaps to:
+
+```
+$(GeneratedDir)/scraper.autoRemaps.generated.rsp
+```
+
+This file is included in `@(ScraperRsp)` in `sdk.targets` with
+`Condition="Exists(...)"`. On the first build, remaps are discovered and written.
+On subsequent builds, the auto-generated file is consumed alongside the manual
+file. The auto-rsp appears before `scraper.settings.rsp` so manual overrides
+take priority.
+
+### Step 3: Validate output equivalence
+
+Compare the winmd generated on this branch against the CLI-generated baseline
+(origin/main) to confirm equivalence.
 
 ```powershell
 # Generate baseline with CLI (revert to origin/main, build)
-# Then generate with library (this branch, build)
+# Then generate with this branch, build
 # Compare the two winmd files
 ```
 
 If there are differences, investigate whether they're benign (timestamps, ordering)
 or indicate a generation bug.
 
-### Step 2: Use discovered remaps to eliminate manual entries
+### Step 4: Analyze manual vs auto-discovered remaps
 
-The 13,896 discovered remaps should subsume most of the ~12,700 entries in
-`scraper.settings.rsp --remap`. The plan:
+To identify which entries in `scraper.settings.rsp --remap` are auto-derivable:
 
-1. After all partitions complete, compare `suggestedRemaps` against the existing
-   `--remap` entries in `scraper.settings.rsp`
-2. Entries that match (same key, same value) can be removed from the manual file
-3. Entries in the manual file but NOT discovered (semantic renames like
-   `_RTL_BARRIER=SYNCHRONIZATION_BARRIER`) must stay as manual overrides
-4. Entries discovered but NOT in the manual file are NEW remaps — types currently
-   using wrong names in the winmd
+1. Run a build — `log-potential-typedef-remappings` outputs NEW potential remaps
+   (types not yet in `--remap`)
+2. To find which EXISTING manual entries are auto-derivable: run a build with
+   the `--remap` entries temporarily removed. The potential remaps output will
+   show all auto-discoverable typedef-tag relationships.
+3. Entries in `scraper.settings.rsp` that appear in the auto-discovery output
+   (same key=value) are auto-derivable and can be removed.
+4. Entries NOT in auto-discovery are semantic overrides and must stay.
 
-The discovered remaps should be injected into `PInvokeGeneratorConfiguration
-.RemappedNames` BEFORE calling `GenerateBindings`, so ClangSharp uses the correct
-names during code generation. This is more correct than applying remaps at emit
-time, because:
-- The Roslyn compilation needs consistent type names across partitions
-- Cross-partition type references must use the same name
+### Step 5: Remove auto-derivable entries from scraper.settings.rsp
 
-### Step 3: Write auto-derived remaps to generated .rsp
-
-Write the discovered remaps (minus any manually-overridden entries) to an
-auto-generated `.rsp` file:
-
-```
-$(GeneratedDir)/scraper.autoRemaps.generated.rsp
-```
-
-This file is included in the ScrapeHeaders invocation (via `@(ScraperRsp)` in
-`sdk.targets`). On the first build, remaps are discovered and written. On
-subsequent builds, the auto-generated file is consumed alongside the manual file.
-
-### Step 4: Remove auto-derivable entries from scraper.settings.rsp
-
-Once validated, remove the ~11,000 entries from `scraper.settings.rsp --remap`
-that are auto-derived. Keep only:
+Once validated, remove the auto-derivable entries from `scraper.settings.rsp
+--remap`. Keep only:
 - Semantic renames (tag→different_public_name)
 - Type alias remaps (DWORD_PTR=UIntPtr, LRESULT=IntPtr, etc.)
 - Identity remaps for disambiguation
-
-### Step 5: Handle the x86 fallback partitions
-
-The 5 x86 partitions that fall back to CLI don't get their remaps discovered.
-Options:
-- Accept this (they still work via CLI with manual remaps)
-- Investigate why the inline assembly diagnostic causes PInvokeGenerator to reject
-  the translation unit (the CLI is more tolerant)
-- Filter out error-level diagnostics before calling GenerateBindings
 
 ---
 
 ## Technical Notes
 
-### ClangSharp v17.0.1 API (via reflection)
+### Remap discovery flow
 
-```csharp
-// Constructor
-PInvokeGenerator(PInvokeGeneratorConfiguration config, Func<string, Stream>? outputStreamFactory = null)
+1. `baseSettings.rsp` has `log-potential-typedef-remappings` in its `--config` section
+2. ClangSharp CLI outputs `Info: Potential remap: X=Y` for discovered typedef-tag
+   relationships that aren't already in `--remap`
+3. `ProcessPartition` parses these lines with regex and adds to `suggestedRemaps`
+4. After all partitions, `WriteAutoRemapsRsp` merges new + existing and writes to rsp
+5. On next build, `sdk.targets` includes the auto rsp in `@(ScraperRsp)` via
+   `Condition="Exists(...)"`
 
-// Main method
-void GenerateBindings(TranslationUnit translationUnit, string filePath,
-    string[] clangCommandLineArgs, CXTranslationUnit_Flags translationFlags)
+### Auto-rsp accumulation
 
-// Lifecycle
-void Close()    // Writes output
-void Dispose()  // Cleans up CXIndex
+The auto-rsp file accumulates across builds:
+- Build 1: Many potential remaps discovered → written to auto rsp
+- Build 2: Auto rsp consumed → those remaps now configured → only truly NEW remaps
+  output → merged with existing auto rsp
+- This ensures the auto rsp grows as the SDK adds new types
 
-// Key properties
-CXIndex IndexHandle { get; }
-IReadOnlyList<Diagnostic> Diagnostics { get; }
+### Manual override priority
 
-// Private fields (accessible via reflection)
-Dictionary<string, HashSet<string>> _allValidNameRemappings    // ALL discovered
-Dictionary<string, HashSet<string>> _traversedValidNameRemappings  // Traversed files only
-HashSet<string> _usedRemappings  // Which --remap entries were actually used
-```
-
-### PInvokeGeneratorConfiguration properties
-
-```csharp
-// Set via init-only property setters
-IReadOnlyCollection<string> TraversalNames { get; set; }
-IReadOnlyCollection<string> ExcludedNames { get; set; }
-IReadOnlyDictionary<string, string> RemappedNames { get; set; }
-IReadOnlyDictionary<string, IReadOnlyList<string>> WithAttributes { get; set; }
-IReadOnlyDictionary<string, string> WithTypes { get; set; }
-IReadOnlyDictionary<string, string> WithLibraryPaths { get; set; }
-IReadOnlyDictionary<string, string> WithCallConvs { get; set; }
-IReadOnlyDictionary<string, IReadOnlyList<string>> WithUsings { get; set; }
-string DefaultClass { get; set; }
-```
+In `sdk.targets`, the auto rsp appears BEFORE `scraper.settings.rsp` in the
+`@(ScraperRsp)` item group. When RSP files are processed, later entries override
+earlier ones for the same key. This means if both files have `_FOO=...`, the
+manual file's value wins.
 
 ### Files modified
 
 | File | Change |
 |------|--------|
-| `sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs` | +458 lines: library invocation, RSP parsing, IL emission, reflection helpers |
-
-### Files NOT modified
-
-No changes to `sdk.targets`, `EmitWinmd.cs`, `Program.cs`,
-`ClangSharpSourceWinmdGenerator.cs`, or `scraper.settings.rsp`. The library
-integration is fully contained in `ScrapeHeaders.cs`.
+| `sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs` | Removed ~300 lines of library invocation code (reflection, IL emission, assembly loading). Added `WriteAutoRemapsRsp()` and `ParseRspFile()` utilities. |
+| `sources/GeneratorSdk/sdk/sdk.targets` | Added `ScraperAutoRemapsRsp` property and included in `@(ScraperRsp)` with bootstrap support |

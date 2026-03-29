@@ -33,6 +33,7 @@
     <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
     <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
     <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+    <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
     <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
     <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
 
@@ -58,6 +59,8 @@
   <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
     <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
     <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
+    <!-- Auto-discovered remaps come BEFORE manual so manual overrides take priority -->
+    <ScraperRsp Include="$(ScraperAutoRemapsRsp)" Condition="Exists('$(ScraperAutoRemapsRsp)')"/>
     <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
   </ItemGroup>
 
