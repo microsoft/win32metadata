@@ -237,20 +237,23 @@ $@"{{
             {
                 this.clangSharpToolDir = Path.GetDirectoryName(this.clangSharpToolPath);
                 this.Log.LogMessage(MessageImportance.High, $"Using ClangSharp {ClangSharpVersion} from {this.clangSharpToolPath}");
-
-                // Resolve ClangSharpWorker — a process-isolated wrapper that runs
-                // PInvokeGenerator as a library and extracts typedef-tag remaps
-                string workerPath = Path.Combine(this.ToolsBinDir, "ClangSharpWorker.dll");
-                if (File.Exists(workerPath))
-                {
-                    this.clangSharpWorkerPath = workerPath;
-                    this.Log.LogMessage(MessageImportance.High, $"Using ClangSharpWorker from {workerPath}");
-                }
             }
             else
             {
-                this.Log.LogWarning($"Could not resolve ClangSharpPInvokeGenerator.dll path; falling back to 'dotnet tool run'");
+                this.Log.LogError($"Could not resolve ClangSharpPInvokeGenerator.dll in tool store under {storeRoot}");
+                return false;
             }
+
+            // Resolve ClangSharpWorker — a process-isolated wrapper that runs
+            // PInvokeGenerator as a library and extracts typedef-tag remaps
+            this.clangSharpWorkerPath = Path.Combine(this.ToolsBinDir, "ClangSharpWorker.dll");
+            if (!File.Exists(this.clangSharpWorkerPath))
+            {
+                this.Log.LogError($"ClangSharpWorker.dll not found at {this.clangSharpWorkerPath}. Build the ClangSharpWorker project first.");
+                return false;
+            }
+
+            this.Log.LogMessage(MessageImportance.High, $"Using ClangSharpWorker from {this.clangSharpWorkerPath}");
 
             return true;
         }
@@ -471,30 +474,12 @@ $@"--file
             string output;
             int exitCode;
             string remapsFile = Path.Combine(scratchDir, $"{partitionName}.remaps");
-            if (this.clangSharpWorkerPath != null)
-            {
-                // Use ClangSharpWorker: runs PInvokeGenerator as a library in its own
-                // process and writes a .remaps sidecar with discovered typedef-tag remaps
-                exitCode = TaskUtils.ExecuteCmd("dotnet",
-                    $"\"{this.clangSharpWorkerPath}\" \"{this.clangSharpToolDir}\" \"{remapsFile}\" {args}",
-                    out output, this.Log);
 
-                // Fall back to stock CLI if the worker fails
-                if (exitCode != 0 && this.clangSharpToolPath != null)
-                {
-                    this.Log.LogMessage(MessageImportance.Normal,
-                        $"{infoPrefix} - Worker failed, falling back to CLI");
-                    exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
-                }
-            }
-            else if (this.clangSharpToolPath != null)
-            {
-                exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
-            }
-            else
-            {
-                exitCode = TaskUtils.ExecuteCmd("dotnet", $"tool run ClangSharpPInvokeGenerator -- {args}", out output, this.Log, workingDirectory: this.ScratchDir);
-            }
+            // Use ClangSharpWorker: runs PInvokeGenerator as a library in its own
+            // process and writes a .remaps sidecar with discovered typedef-tag remaps
+            exitCode = TaskUtils.ExecuteCmd("dotnet",
+                $"\"{this.clangSharpWorkerPath}\" \"{this.clangSharpToolDir}\" \"{remapsFile}\" {args}",
+                out output, this.Log);
             if (output == null)
             {
                 output = string.Empty;
