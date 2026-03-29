@@ -117,8 +117,8 @@ A standalone console app that:
 | Auto-rsp writing | ✅ `scraper.autoRemaps.generated.rsp` written |
 | Build integration | ✅ Auto-rsp included in `@(ScraperRsp)` |
 | End-to-end build | ✅ Full build succeeds, winmd generated (23.2 MB) |
-| Winmd comparison | ⚠️ Not yet compared against baseline from origin/main |
-| Manual rsp cleanup | ❌ Auto-derivable entries not yet removed from `scraper.settings.rsp` |
+| Winmd comparison | ✅ Identical to origin/main baseline (1,651,355 IL lines compared) |
+| Manual rsp cleanup | ⚠️ 32 conflicts found — auto-rsp cannot fully replace manual entries |
 
 ---
 
@@ -185,6 +185,49 @@ public IReadOnlyDictionary<string, IReadOnlyCollection<string>>
     AllValidNameRemappings { get; }
 ```
 This would eliminate the need for reflection.
+
+## Verification Results
+
+### Winmd equivalence: ✅ PASS
+
+The ClangSharpWorker build produces an identical winmd to the origin/main baseline:
+- Baseline (stock CLI): 24,328,704 bytes
+- Worker build: 24,328,704 bytes
+- IL comparison: 1,651,355 lines — **0 differences** (excluding image base address)
+
+### Auto-rsp analysis
+
+| Category | Count | Description |
+|----------|------:|-------------|
+| Auto-discovered | 16,098 | Total typedef-tag remaps from 393 partitions |
+| Manual entries | 12,705 | Existing `--remap` entries in `scraper.settings.rsp` |
+| Matching | 12,196 | Same key=value in both — safely auto-derivable |
+| **Conflicts** | **32** | **Same key, different value — auto picks wrong name** |
+| Only in manual | 477 | Semantic overrides not discoverable from AST |
+| Only in auto | 3,869 | New discoveries (mostly ABI:: WinRT namespace remaps) |
+
+### Conflict examples (auto-rsp picks wrong name)
+
+| Tag | Auto discovers | Manual specifies | Why manual is correct |
+|-----|---------------|-------------------|----------------------|
+| `_LARGE_INTEGER` | `LARGE_INTEGER` | `long` | Semantic alias to C# primitive |
+| `_ULARGE_INTEGER` | `ULARGE_INTEGER` | `ulong` | Semantic alias to C# primitive |
+| `_RTL_CRITICAL_SECTION` | `RTL_CRITICAL_SECTION` | `CRITICAL_SECTION` | Public API name |
+| `_RTL_SRWLOCK` | `RTL_SRWLOCK` | `SRWLOCK` | Public API name |
+| `tagSTGMEDIUM` | `uSTGMEDIUM` | `STGMEDIUM` | Internal union vs public typedef |
+| `_IMAGE_RUNTIME_FUNCTION_ENTRY` | `IMAGE_IA64_RUNTIME_FUNCTION_ENTRY` | `IMAGE_RUNTIME_FUNCTION_ENTRY` | Platform-specific vs generic |
+
+### Conclusion
+
+The auto-rsp **works correctly with manual overrides** — the current build produces
+identical output because manual entries take priority over auto-discovered ones.
+However, the auto-rsp **cannot fully replace** the manual file. The 32 conflicts
+and 477 manual-only entries must remain as manual overrides.
+
+The value of the auto-rsp is:
+1. **Going forward**: new SDK types automatically get correct names without manual entries
+2. **Cleanup**: 12,196 of 12,705 manual entries (96%) are auto-derivable and could be removed
+3. **Discovery**: 3,869 new typedef-tag remaps not in the manual file
 
 ---
 
