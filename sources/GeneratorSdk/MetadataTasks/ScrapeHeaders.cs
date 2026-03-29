@@ -19,6 +19,8 @@ namespace MetadataTasks
 
         private bool canceled;
         private string clangSharpToolPath;
+        private string clangSharpToolDir;
+        private string clangSharpWorkerPath;
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
@@ -233,7 +235,17 @@ $@"{{
 
             if (this.clangSharpToolPath != null)
             {
+                this.clangSharpToolDir = Path.GetDirectoryName(this.clangSharpToolPath);
                 this.Log.LogMessage(MessageImportance.High, $"Using ClangSharp {ClangSharpVersion} from {this.clangSharpToolPath}");
+
+                // Resolve ClangSharpWorker — a process-isolated wrapper that runs
+                // PInvokeGenerator as a library and extracts typedef-tag remaps
+                string workerPath = Path.Combine(this.ToolsBinDir, "ClangSharpWorker.dll");
+                if (File.Exists(workerPath))
+                {
+                    this.clangSharpWorkerPath = workerPath;
+                    this.Log.LogMessage(MessageImportance.High, $"Using ClangSharpWorker from {workerPath}");
+                }
             }
             else
             {
@@ -458,7 +470,24 @@ $@"--file
 
             string output;
             int exitCode;
-            if (this.clangSharpToolPath != null)
+            string remapsFile = Path.Combine(scratchDir, $"{partitionName}.remaps");
+            if (this.clangSharpWorkerPath != null)
+            {
+                // Use ClangSharpWorker: runs PInvokeGenerator as a library in its own
+                // process and writes a .remaps sidecar with discovered typedef-tag remaps
+                exitCode = TaskUtils.ExecuteCmd("dotnet",
+                    $"\"{this.clangSharpWorkerPath}\" \"{this.clangSharpToolDir}\" \"{remapsFile}\" {args}",
+                    out output, this.Log);
+
+                // Fall back to stock CLI if the worker fails
+                if (exitCode != 0 && this.clangSharpToolPath != null)
+                {
+                    this.Log.LogMessage(MessageImportance.Normal,
+                        $"{infoPrefix} - Worker failed, falling back to CLI");
+                    exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
+                }
+            }
+            else if (this.clangSharpToolPath != null)
             {
                 exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
             }
@@ -527,6 +556,24 @@ $@"--file
                         }
                     }
                 }
+
+                // Read typedef-tag remaps from the worker's .remaps sidecar file
+                if (File.Exists(remapsFile))
+                {
+                    lock (this.suggestedRemaps)
+                    {
+                        foreach (var line in File.ReadLines(remapsFile))
+                        {
+                            int eq = line.IndexOf('=');
+                            if (eq > 0)
+                            {
+                                string key = line.Substring(0, eq);
+                                if (!this.suggestedRemaps.ContainsKey(key))
+                                    this.suggestedRemaps[key] = line.Substring(eq + 1);
+                            }
+                        }
+                    }
+                }
             }
 
             return true;
@@ -560,8 +607,8 @@ $@"--file
 
         /// <summary>
         /// Writes auto-discovered typedef-tag remaps to a generated RSP file.
-        /// ClangSharp discovers these via the log-potential-typedef-remappings config
-        /// option and outputs them as "Info: Potential remap: X=Y" in CLI output.
+        /// The ClangSharpWorker subprocess extracts these from PInvokeGenerator's
+        /// _allValidNameRemappings field after GenerateBindings completes.
         /// On subsequent builds, this file is consumed alongside the manual
         /// scraper.settings.rsp so newly discovered types get correct names
         /// without manual remap entries.
