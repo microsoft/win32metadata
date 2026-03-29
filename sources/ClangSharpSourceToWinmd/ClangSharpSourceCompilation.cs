@@ -81,7 +81,7 @@ namespace ClangSharpSourceToWinmd
             foreach (var line in File.ReadLines(autoRemapsFile))
             {
                 string trimmed = line.Trim();
-                if (trimmed.StartsWith("\"") && trimmed.Contains("=\""))
+                if (trimmed.StartsWith("\"") && trimmed.Contains("="))
                 {
                     // Strip quotes and trailing comma: "TAG=TYPEDEF", → TAG=TYPEDEF
                     string entry = trimmed.TrimStart('"').TrimEnd(',').TrimEnd('"');
