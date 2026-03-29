@@ -110,15 +110,12 @@ A standalone console app that:
 
 | Aspect | Status |
 |--------|--------|
-| ClangSharpWorker | ✅ Compiles and runs correctly |
-| Process isolation | ✅ Each partition in own dotnet process |
-| Code generation | ✅ 393/393 partitions produce correct C# output |
-| Remap discovery | ✅ 16,098 unique typedef-tag remaps from full build |
-| Auto-rsp writing | ✅ `scraper.autoRemaps.generated.rsp` written |
-| Build integration | ✅ Auto-rsp included in `@(ScraperRsp)` |
-| End-to-end build | ✅ Full build succeeds, winmd generated (23.2 MB) |
-| Winmd comparison | ✅ Identical to origin/main baseline (1,651,355 IL lines compared) |
-| Manual rsp cleanup | ⚠️ 32 conflicts found — auto-rsp cannot fully replace manual entries |
+| ClangSharpWorker | ✅ Subprocess wrapper, process isolated |
+| Remap discovery | ✅ 16,098 typedef-tag remaps from AST |
+| AutoRemaps.generated.cs | ✅ Written to GeneratedDir as C# source |
+| WinmdGenerator integration | ✅ MetadataSyntaxTreeCleaner applies remaps |
+| End-to-end build | ✅ Full build succeeds, winmd identical to baseline |
+| Manual remap removal | ❌ Not yet — need filtering for incorrect entries |
 
 ---
 
@@ -235,30 +232,30 @@ The value of the auto-rsp is:
 
 ### Step 1: Validate output equivalence
 
-Compare the winmd generated on this branch against the CLI-generated baseline
-(origin/main) to confirm the ClangSharpWorker produces identical output.
+✅ **DONE.** Full IL comparison confirms identical output (1,651,355 lines).
+The auto-remaps .cs pipeline produces the same winmd as baseline.
 
-### Step 2: Analyze manual vs auto-discovered remaps
+### Step 2: Remove manual --remap entries and validate
 
-The 16,098 auto-discovered remaps should subsume most of the ~12,700 entries in
-`scraper.settings.rsp`. To identify which are auto-derivable:
+Remove typedef-tag entries from `scraper.settings.rsp` that are auto-discoverable.
+Without `--remap`, PInvokeGenerator generates raw tag names (`_ACL`, `tagACCEL`).
+The WinmdGenerator's `MetadataSyntaxTreeCleaner` then renames them using the
+auto-discovered remaps from `AutoRemaps.generated.cs`.
 
-1. Compare `scraper.autoRemaps.generated.rsp` against `scraper.settings.rsp`
-2. Entries matching (same key=value) in both are auto-derivable
-3. Entries only in manual file are semantic overrides or type aliases — keep these
+**Prerequisite:** Filter auto-discovered remaps to exclude incorrect entries:
+- Entries where tag has multiple typedef candidates (ambiguous)
+- Entries where typedef name starts with `_` (likely wrong direction)
+- Entries where tag doesn't look like an internal name
 
-### Step 3: Remove auto-derivable entries from scraper.settings.rsp
+Keep in `scraper.settings.rsp`:
+- Semantic overrides (LARGE_INTEGER=long, CRITICAL_SECTION vs RTL_CRITICAL_SECTION)
+- Type alias remaps (DWORD_PTR=UIntPtr, etc.)
+- Entries that conflict with auto-discovery
 
-Once validated, remove the auto-derivable entries from `scraper.settings.rsp
---remap`. Keep only:
-- Semantic renames (tag→different_public_name)
-- Type alias remaps (DWORD_PTR=UIntPtr, LRESULT=IntPtr, etc.)
-- Identity remaps for disambiguation
+### Step 3: Extract `_usedRemappings` for dead entry detection
 
-### Step 4: Extract `_usedRemappings` for dead entry detection
-
-Extend ClangSharpWorker to also write `_usedRemappings` to a sidecar file.
-This enables identifying dead `--remap` entries that are never used.
+Extend ClangSharpWorker to also write `_usedRemappings` to help identify
+dead `--remap` entries that are never actually used.
 
 ---
 
