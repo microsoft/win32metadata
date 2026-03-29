@@ -115,7 +115,7 @@ A standalone console app that:
 | AutoRemaps.generated.cs | ✅ Written to GeneratedDir as C# source |
 | WinmdGenerator integration | ✅ MetadataSyntaxTreeCleaner applies remaps |
 | End-to-end build | ✅ Full build succeeds, winmd identical to baseline |
-| Manual remap removal | ❌ Not yet — need filtering for incorrect entries |
+| Manual remap removal | ⚠️ Blocked — `_allValidNameRemappings` contains wrong entries |
 
 ---
 
@@ -235,22 +235,32 @@ The value of the auto-rsp is:
 ✅ **DONE.** Full IL comparison confirms identical output (1,651,355 lines).
 The auto-remaps .cs pipeline produces the same winmd as baseline.
 
-### Step 2: Remove manual --remap entries and validate
+### Step 2: Remove manual --remap entries — BLOCKED
 
-Remove typedef-tag entries from `scraper.settings.rsp` that are auto-discoverable.
-Without `--remap`, PInvokeGenerator generates raw tag names (`_ACL`, `tagACCEL`).
-The WinmdGenerator's `MetadataSyntaxTreeCleaner` then renames them using the
-auto-discovered remaps from `AutoRemaps.generated.cs`.
+**Problem found:** `_allValidNameRemappings` contains incorrect entries that cannot
+be blindly applied as global renames. Example: `IUnknown → IXmlReaderInput` — this
+is a structurally valid typedef-tag relationship in libclang's AST but renaming
+`IUnknown` to `IXmlReaderInput` globally would be catastrophic.
 
-**Prerequisite:** Filter auto-discovered remaps to exclude incorrect entries:
-- Entries where tag has multiple typedef candidates (ambiguous)
-- Entries where typedef name starts with `_` (likely wrong direction)
-- Entries where tag doesn't look like an internal name
+The root cause: when a tag type (struct/union) has multiple typedef aliases,
+`_allValidNameRemappings` records ALL of them. The worker takes `FirstOrDefault()`
+which is arbitrary. Some entries map the wrong direction (tag name IS the public
+name, typedef is internal).
 
-Keep in `scraper.settings.rsp`:
-- Semantic overrides (LARGE_INTEGER=long, CRITICAL_SECTION vs RTL_CRITICAL_SECTION)
-- Type alias remaps (DWORD_PTR=UIntPtr, etc.)
-- Entries that conflict with auto-discovery
+**Attempted fix:** `VisitIdentifierName` in `MetadataSyntaxTreeCleaner` to rename
+all type references. This renames too aggressively — it hits type references that
+are correct and shouldn't be touched.
+
+**Path forward options:**
+1. **Intersection filter:** Only apply auto-remaps that were also in the original
+   manual `--remap` file (safe — just moves existing remaps to winmd generator).
+   This doesn't gain new auto-discovery but enables removing manual entries.
+2. **Type-declaration-only filter:** Only rename identifiers that appear as
+   struct/enum declarations in the syntax tree. This is more targeted but requires
+   a two-pass approach (first collect declarations, then rename references).
+3. **Heuristic filter:** Only apply remaps where the tag name matches patterns
+   like `_Foo`, `tagFoo`, `__MIDL_*` and the typedef doesn't. Skip entries where
+   the tag name looks like a public API name (no leading `_`/`tag`/`__MIDL`).
 
 ### Step 3: Extract `_usedRemappings` for dead entry detection
 
