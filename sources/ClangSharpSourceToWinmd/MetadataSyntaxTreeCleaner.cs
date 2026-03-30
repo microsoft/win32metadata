@@ -125,21 +125,25 @@ namespace ClangSharpSourceToWinmd
             /// ClangSharpWorker. When PInvokeGenerator generates with raw tag names
             /// (e.g., _ACL instead of ACL), this visitor renames all identifier
             /// references to use the correct public typedef name.
+            ///
+            /// NOTE: Currently disabled — applying new remap discoveries changes the
+            /// API surface, which needs review. The auto-remaps .cs is generated for
+            /// analysis but not consumed here until the heuristic is validated.
             /// </summary>
-            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                if (this.typedefTagRemaps.Count > 0)
-                {
-                    string name = node.Identifier.ValueText;
-                    if (this.typedefTagRemaps.TryGetValue(name, out string newName))
-                    {
-                        return node.WithIdentifier(
-                            SyntaxFactory.Identifier(node.Identifier.LeadingTrivia, newName, node.Identifier.TrailingTrivia));
-                    }
-                }
-
-                return base.VisitIdentifierName(node);
-            }
+            // public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+            // {
+            //     if (this.typedefTagRemaps.Count > 0)
+            //     {
+            //         string name = node.Identifier.ValueText;
+            //         if (this.typedefTagRemaps.TryGetValue(name, out string newName))
+            //         {
+            //             return node.WithIdentifier(
+            //                 SyntaxFactory.Identifier(node.Identifier.LeadingTrivia, newName, node.Identifier.TrailingTrivia));
+            //         }
+            //     }
+            //
+            //     return base.VisitIdentifierName(node);
+            // }
 
             private static SyntaxList<AttributeListSyntax> FixRemappedAttributes(
                 SyntaxList<AttributeListSyntax> existingAttrList,
@@ -297,12 +301,6 @@ namespace ClangSharpSourceToWinmd
                 else
                 {
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
-
-                    // Apply typedef-tag remap if discovered by ClangSharpWorker
-                    if (this.typedefTagRemaps.TryGetValue(name, out string typedefName))
-                    {
-                        node = node.WithIdentifier(SyntaxFactory.Identifier(typedefName));
-                    }
                 }
 
                 return node;
@@ -535,11 +533,6 @@ namespace ClangSharpSourceToWinmd
                 if (this.GetRemapInfo(enumName, node.AttributeLists, out var listAttributes, null, out _, out _))
                 {
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
-                }
-                // Apply typedef-tag remap if discovered by ClangSharpWorker
-                else if (this.typedefTagRemaps.TryGetValue(enumName, out string typedefName))
-                {
-                    node = node.WithIdentifier(SyntaxFactory.Identifier(typedefName));
                 }
 
                 if (this.enumAdditions.TryGetValue(enumName, out var additionsList))
