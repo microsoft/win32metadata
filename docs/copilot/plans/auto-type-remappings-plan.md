@@ -115,8 +115,9 @@ A standalone console app that:
 | AutoRemaps.generated.cs | ✅ Written to GeneratedDir as C# source |
 | WinmdGenerator integration | ✅ Infrastructure in place (disabled pending safe rename) |
 | Heuristic filter | ✅ Filters 13,498 safe entries from 16,098 discovered |
-| End-to-end build | ✅ Full build succeeds, winmd identical to baseline |
-| Manual remap removal | ⚠️ Blocked — VisitIdentifierName global rename causes API changes |
+| End-to-end build | ✅ Full build succeeds, winmd identical to baseline (0 IL diff) |
+| Manual remap removal | ❌ Removing entries causes cross-namespace conflicts (VDMCONTEXT) |
+| Going-forward benefit | ✅ New SDK types auto-remapped without manual entries |
 
 ---
 
@@ -236,31 +237,25 @@ The value of the auto-rsp is:
 ✅ **DONE.** Full IL comparison confirms identical output (1,651,355 lines).
 The auto-remaps .cs pipeline produces the same winmd as baseline.
 
-### Step 2: Remove manual --remap entries — BLOCKED
+### Step 2: Remove manual --remap entries — NOT FEASIBLE
 
-**Root cause:** Removing entries from `scraper.settings.rsp --remap` means
-PInvokeGenerator generates raw tag names in .cs files. The auto-remap
-`VisitIdentifierName` in `MetadataSyntaxTreeCleaner` then renames these globally.
-But this has two problems:
+Removing `--remap` entries from `scraper.settings.rsp` changes PInvokeGenerator's
+generation-time behavior beyond just naming. Some remaps affect type exclusion
+and namespace scoping across partitions. Example: removing `_VDMCONTEXT=VDMCONTEXT`
+causes the type to appear in multiple namespaces (SystemServices AND
+VirtualDosMachines), creating Roslyn compilation ambiguity errors.
 
-1. **New API surface changes:** Tags like `smiOCTETS` that were NEVER remapped in
-   the manual file get renamed to `smiBITS` (their typedef). This is technically
-   correct but changes the public API of the winmd.
+The two-phase worker correctly auto-discovers and applies these remaps in Phase 2,
+but removing them from the scraper rsp means Phase 1 runs without them, producing
+different partition-scoping behavior.
 
-2. **Wrong remaps for entries not in the filter:** Even with heuristic filtering,
-   some entries like `IUnknown→IXmlReaderInput` would incorrectly rename
-   fundamental types.
+**Current approach:** Keep original `scraper.settings.rsp` unchanged. The two-phase
+worker adds NEW auto-discoveries on top of configured remaps. Going forward, new
+SDK types get correct typedef names without manual entries.
 
-**Current state:** The heuristic filter correctly identifies 13,498 safe entries
-from 16,098 discovered. The `VisitIdentifierName` is disabled. The filtered
-`AutoRemaps.generated.cs` is still produced for analysis.
-
-**To unblock, need a targeted approach:**
-- Only rename identifiers that appear as struct/enum **declarations** in the tree
-  AND match an auto-remap entry that was also in the original manual file
-- Two-pass: first collect declaration names, then rename all references
-- Or: keep using PInvokeGenerator's `--remap` but auto-generate the rsp from the
-  worker's discovery (the original approach, but with the heuristic filter)
+**Future improvement:** If ClangSharp adds a public API for remap discovery
+(avoiding the need for the Phase 1 discovery pass), the auto-discovered remaps
+could be applied in a single pass, eliminating the ~53% build time overhead.
 
 ### Step 3: Extract `_usedRemappings` for dead entry detection
 
