@@ -113,9 +113,10 @@ A standalone console app that:
 | ClangSharpWorker | ✅ Subprocess wrapper, process isolated |
 | Remap discovery | ✅ 16,098 typedef-tag remaps from AST |
 | AutoRemaps.generated.cs | ✅ Written to GeneratedDir as C# source |
-| WinmdGenerator integration | ✅ MetadataSyntaxTreeCleaner applies remaps |
+| WinmdGenerator integration | ✅ Infrastructure in place (disabled pending safe rename) |
+| Heuristic filter | ✅ Filters 13,498 safe entries from 16,098 discovered |
 | End-to-end build | ✅ Full build succeeds, winmd identical to baseline |
-| Manual remap removal | ⚠️ Blocked — `_allValidNameRemappings` contains wrong entries |
+| Manual remap removal | ⚠️ Blocked — VisitIdentifierName global rename causes API changes |
 
 ---
 
@@ -237,30 +238,29 @@ The auto-remaps .cs pipeline produces the same winmd as baseline.
 
 ### Step 2: Remove manual --remap entries — BLOCKED
 
-**Problem found:** `_allValidNameRemappings` contains incorrect entries that cannot
-be blindly applied as global renames. Example: `IUnknown → IXmlReaderInput` — this
-is a structurally valid typedef-tag relationship in libclang's AST but renaming
-`IUnknown` to `IXmlReaderInput` globally would be catastrophic.
+**Root cause:** Removing entries from `scraper.settings.rsp --remap` means
+PInvokeGenerator generates raw tag names in .cs files. The auto-remap
+`VisitIdentifierName` in `MetadataSyntaxTreeCleaner` then renames these globally.
+But this has two problems:
 
-The root cause: when a tag type (struct/union) has multiple typedef aliases,
-`_allValidNameRemappings` records ALL of them. The worker takes `FirstOrDefault()`
-which is arbitrary. Some entries map the wrong direction (tag name IS the public
-name, typedef is internal).
+1. **New API surface changes:** Tags like `smiOCTETS` that were NEVER remapped in
+   the manual file get renamed to `smiBITS` (their typedef). This is technically
+   correct but changes the public API of the winmd.
 
-**Attempted fix:** `VisitIdentifierName` in `MetadataSyntaxTreeCleaner` to rename
-all type references. This renames too aggressively — it hits type references that
-are correct and shouldn't be touched.
+2. **Wrong remaps for entries not in the filter:** Even with heuristic filtering,
+   some entries like `IUnknown→IXmlReaderInput` would incorrectly rename
+   fundamental types.
 
-**Path forward options:**
-1. **Intersection filter:** Only apply auto-remaps that were also in the original
-   manual `--remap` file (safe — just moves existing remaps to winmd generator).
-   This doesn't gain new auto-discovery but enables removing manual entries.
-2. **Type-declaration-only filter:** Only rename identifiers that appear as
-   struct/enum declarations in the syntax tree. This is more targeted but requires
-   a two-pass approach (first collect declarations, then rename references).
-3. **Heuristic filter:** Only apply remaps where the tag name matches patterns
-   like `_Foo`, `tagFoo`, `__MIDL_*` and the typedef doesn't. Skip entries where
-   the tag name looks like a public API name (no leading `_`/`tag`/`__MIDL`).
+**Current state:** The heuristic filter correctly identifies 13,498 safe entries
+from 16,098 discovered. The `VisitIdentifierName` is disabled. The filtered
+`AutoRemaps.generated.cs` is still produced for analysis.
+
+**To unblock, need a targeted approach:**
+- Only rename identifiers that appear as struct/enum **declarations** in the tree
+  AND match an auto-remap entry that was also in the original manual file
+- Two-pass: first collect declaration names, then rename all references
+- Or: keep using PInvokeGenerator's `--remap` but auto-generate the rsp from the
+  worker's discovery (the original approach, but with the heuristic filter)
 
 ### Step 3: Extract `_usedRemappings` for dead entry detection
 
