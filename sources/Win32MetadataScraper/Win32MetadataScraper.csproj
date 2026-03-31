@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <WarningLevel>5</WarningLevel>
+    <NoWarn>1701;1702;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClangSharp" Version="17.0.1" />
+    <PackageReference Include="ClangSharp.Interop" Version="17.0.1" />
+    <PackageReference Include="ClangSharp.PInvokeGenerator" Version="17.0.1" />
+    <PackageReference Include="libclang" Version="17.0.4" />
+    <PackageReference Include="libClangSharp" Version="17.0.4" />
+  </ItemGroup>
+
+</Project>

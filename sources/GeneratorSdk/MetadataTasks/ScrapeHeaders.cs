@@ -18,10 +18,12 @@ namespace MetadataTasks
 
         private bool canceled;
         private string clangSharpToolPath;
+        private string win32MetadataScraperPath; // Path to Win32MetadataScraper.dll
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private Dictionary<string, string> suggestedRemaps = new();
+        private Dictionary<string, string> discoveredRemaps = new();
 
 
         [Required]
@@ -172,6 +174,12 @@ namespace MetadataTasks
                 }
             }
 
+            // Write auto-discovered remaps to generated RSP
+            if (ret)
+            {
+                this.WriteAutoRemapsRsp();
+            }
+
             if (ret && string.IsNullOrEmpty(this.PartitionFilter))
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
@@ -234,6 +242,18 @@ $@"{{
             else
             {
                 this.Log.LogWarning($"Could not resolve ClangSharpPInvokeGenerator.dll path; falling back to 'dotnet tool run'");
+            }
+
+            // Locate Win32MetadataScraper (requires clangSharpToolPath for native libs)
+            this.win32MetadataScraperPath = Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll");
+            if (File.Exists(this.win32MetadataScraperPath) && this.clangSharpToolPath != null)
+            {
+                this.Log.LogMessage(MessageImportance.High, $"Using Win32MetadataScraper from {this.win32MetadataScraperPath}");
+            }
+            else
+            {
+                this.win32MetadataScraperPath = null;
+                this.Log.LogMessage(MessageImportance.High, $"Win32MetadataScraper not found at {Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll")}; using stock ClangSharp");
             }
 
             return true;
@@ -454,7 +474,22 @@ $@"--file
 
             string output;
             int exitCode;
-            if (this.clangSharpToolPath != null)
+            string remapsFile = Path.Combine(currentScraperOutputDir, $"{partitionName}.remaps");
+            if (this.win32MetadataScraperPath != null)
+            {
+                // Use Win32MetadataScraper — hosts PInvokeGenerator as a library,
+                // walks the AST to discover remaps, and generates output in a single pass
+                string exclusionsFile = Path.Combine(this.Win32MetadataScraperAssetsDir, "remapExclusions.rsp");
+                string nativeLibDir = Path.GetDirectoryName(this.clangSharpToolPath);
+                string scraperArgs = $"\"{this.win32MetadataScraperPath}\" \"{nativeLibDir}\" \"{remapsFile}\"";
+                if (File.Exists(exclusionsFile))
+                {
+                    scraperArgs += $" --remap-exclusions \"{exclusionsFile}\"";
+                }
+                scraperArgs += $" {args}";
+                exitCode = TaskUtils.ExecuteCmd("dotnet", scraperArgs, out output, this.Log);
+            }
+            else if (this.clangSharpToolPath != null)
             {
                 exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
             }
@@ -519,6 +554,30 @@ $@"--file
                         }
                     }
                 }
+
+                // Read discovered remaps from sidecar file (written by Win32MetadataScraper)
+                if (File.Exists(remapsFile))
+                {
+                    foreach (var line in File.ReadLines(remapsFile))
+                    {
+                        string trimmed = line.Trim();
+                        if (string.IsNullOrEmpty(trimmed)) continue;
+                        int eq = trimmed.IndexOf('=');
+                        if (eq > 0)
+                        {
+                            string key = trimmed.Substring(0, eq);
+                            string value = trimmed.Substring(eq + 1);
+                            lock (this.discoveredRemaps)
+                            {
+                                // First partition to discover a remap wins
+                                if (!this.discoveredRemaps.ContainsKey(key))
+                                {
+                                    this.discoveredRemaps[key] = value;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             return true;
@@ -546,6 +605,32 @@ $@"--file
             }
 
             return items;
+        }
+
+        /// <summary>
+        /// Writes the auto-discovered remaps to a generated RSP file.
+        /// This RSP can be included in subsequent builds via @(ScraperRsp).
+        /// </summary>
+        private void WriteAutoRemapsRsp()
+        {
+            if (this.discoveredRemaps.Count == 0)
+            {
+                return;
+            }
+
+            string autoRemapsRsp = Path.Combine(this.GeneratedDir, "scraper.autoRemaps.generated.rsp");
+            Directory.CreateDirectory(this.GeneratedDir);
+
+            using (var writer = new StreamWriter(autoRemapsRsp))
+            {
+                writer.WriteLine("--remap");
+                foreach (var kv in this.discoveredRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
+                {
+                    writer.WriteLine($"{kv.Key}={kv.Value}");
+                }
+            }
+
+            this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredRemaps.Count} auto-discovered remaps to {autoRemapsRsp}");
         }
 
     }
