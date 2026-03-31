@@ -25,7 +25,7 @@ class Program
     {
         if (args.Length < 3)
         {
-            Console.Error.WriteLine("Usage: dotnet Win32MetadataScraper.dll <nativeLibDir> <remapsOutputPath> [--remap-exclusions <file>] @rsp1 @rsp2 ...");
+            Console.Error.WriteLine("Usage: dotnet Win32MetadataScraper.dll <nativeLibDir> <remapsOutputPath> @rsp1 @rsp2 ...");
             return 1;
         }
 
@@ -36,25 +36,7 @@ class Program
         NativeLibrary.Load(Path.Combine(nativeLibDir, "libclang.dll"));
         NativeLibrary.Load(Path.Combine(nativeLibDir, "libClangSharp.dll"));
 
-        // Parse optional --remap-exclusions before RSP args
-        var remapExclusions = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        int rspStartIndex = 2;
-        if (args.Length > 3 && args[2] == "--remap-exclusions")
-        {
-            string exclusionsFile = args[3];
-            if (File.Exists(exclusionsFile))
-            {
-                foreach (var line in File.ReadLines(exclusionsFile))
-                {
-                    string trimmed = line.Trim();
-                    if (!string.IsNullOrEmpty(trimmed) && !trimmed.StartsWith("#") && !trimmed.StartsWith("--"))
-                        remapExclusions.Add(trimmed);
-                }
-            }
-            rspStartIndex = 4;
-        }
-
-        string[] rspArgs = args.Skip(rspStartIndex).ToArray();
+        string[] rspArgs = args.Skip(2).ToArray();
 
         try
         {
@@ -121,20 +103,39 @@ class Program
             using var translationUnit = TranslationUnit.GetOrCreate(cxHandle);
             Debug.Assert(translationUnit is not null);
 
-            // ── Walk AST to discover typedef-tag remappings ──
-            var discoveredRemaps = new Dictionary<string, string>();
-            WalkForTypedefRemaps(translationUnit.TranslationUnitDecl, discoveredRemaps);
+            // ── Walk AST to discover all typedef-tag and function pointer relationships ──
+            var tagToTypedefs = new Dictionary<string, List<string>>();
+            var fnProtoToPointerTypedefs = new Dictionary<string, List<string>>();
+            var fnProtoTypedefNames = new HashSet<string>();
+            WalkForTypedefRemaps(translationUnit.TranslationUnitDecl, tagToTypedefs, fnProtoToPointerTypedefs, fnProtoTypedefNames);
 
-            // Filter and merge remaps
-            var autoRemaps = FilterRemaps(discoveredRemaps, configuredRemaps, remapExclusions);
+            // Resolve tag remaps using disambiguation (no exclusion list needed)
+            var resolvedTagRemaps = ResolveTagRemaps(tagToTypedefs, configuredRemaps);
+            var autoRemaps = FilterRemaps(resolvedTagRemaps, configuredRemaps);
 
-            // Merge: auto-discovered + configured (configured wins on conflict)
+            // Resolve function pointer fixups
+            var fnPtrRemaps = new Dictionary<string, string>();
+            var fnPtrExcludes = new HashSet<string>();
+            var reducePointerLevel = new HashSet<string>();
+            ResolveFunctionPointerFixups(fnProtoTypedefNames, fnProtoToPointerTypedefs, fnPtrRemaps, fnPtrExcludes, reducePointerLevel);
+
+            // Merge all remaps: auto tag remaps + fn ptr remaps + configured (configured wins)
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
+            foreach (var kv in fnPtrRemaps)
+                mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in configuredRemaps)
                 mergedRemaps[kv.Key] = kv.Value;
 
+            // Merge excludes from function pointer fixups into the configured excludes
+            var allExcludes = new List<string>(settings.GetValueOrDefault("--exclude") ?? new List<string>());
+            foreach (var excl in fnPtrExcludes)
+            {
+                if (!allExcludes.Contains(excl))
+                    allExcludes.Add(excl);
+            }
+
             // ── Run PInvokeGenerator with merged remaps on the same TranslationUnit ──
-            var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps);
+            var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
             Func<string, Stream> streamFactory = (path) =>
@@ -175,16 +176,30 @@ class Program
                 }
             }
 
-            // Write auto-discovered remaps to sidecar file
-            if (autoRemaps.Count > 0)
+            // Write auto-discovered remaps + fn ptr remaps to sidecar file
+            var allAutoRemaps = new Dictionary<string, string>(autoRemaps);
+            foreach (var kv in fnPtrRemaps)
+                allAutoRemaps[kv.Key] = kv.Value;
+
+            if (allAutoRemaps.Count > 0 || fnPtrExcludes.Count > 0 || reducePointerLevel.Count > 0)
             {
                 var remapDir = Path.GetDirectoryName(remapsOutputPath);
                 if (!string.IsNullOrEmpty(remapDir))
                     Directory.CreateDirectory(remapDir);
 
                 using var writer = new StreamWriter(remapsOutputPath);
-                foreach (var kv in autoRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
+
+                // Tag remaps
+                foreach (var kv in allAutoRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
                     writer.WriteLine($"{kv.Key}={kv.Value}");
+
+                // Function pointer excludes (prefixed for downstream parsing)
+                foreach (var excl in fnPtrExcludes.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    writer.WriteLine($"FNPTR_EXCLUDE:{excl}");
+
+                // Reduce pointer level entries
+                foreach (var rpl in reducePointerLevel.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    writer.WriteLine($"REDUCE_PTR_LEVEL:{rpl}");
             }
 
             return exitCode;
@@ -198,59 +213,199 @@ class Program
     }
 
     /// <summary>
-    /// Recursively walks the AST to find TypedefDecl nodes whose underlying type
-    /// is a TagType (struct/union/enum). Records tagName -> typedefName mappings.
+    /// Recursively walks the AST to collect all typedef-tag relationships and
+    /// function pointer typedef pairs.
     /// </summary>
-    static void WalkForTypedefRemaps(Decl decl, Dictionary<string, string> remaps)
+    static void WalkForTypedefRemaps(Decl decl,
+        Dictionary<string, List<string>> tagToTypedefs,
+        Dictionary<string, List<string>> fnProtoToPointerTypedefs,
+        HashSet<string> fnProtoTypedefNames)
     {
         if (decl is TypedefDecl typedefDecl)
         {
-            WalkTypedefUnderlying(typedefDecl, typedefDecl.UnderlyingType, remaps);
+            var underlyingType = UnwrapType(typedefDecl.UnderlyingType);
+
+            if (underlyingType is TagType tagType)
+            {
+                // Direct tag-typedef pair (struct _FOO → FOO)
+                var tagDecl = tagType.Decl;
+                if (tagDecl != null)
+                {
+                    string tagName = tagDecl.Name;
+                    if (tagDecl.DeclContext is NamedDecl parent)
+                        tagName = $"{parent.Name}::{tagName}";
+
+                    string typedefName = typedefDecl.Name;
+                    if (!string.IsNullOrEmpty(tagName) && tagName != typedefName)
+                    {
+                        if (!tagToTypedefs.TryGetValue(tagName, out var list))
+                            tagToTypedefs[tagName] = list = new List<string>();
+                        if (!list.Contains(typedefName))
+                            list.Add(typedefName);
+                    }
+                }
+            }
+            else if (underlyingType is FunctionProtoType)
+            {
+                // Function prototype typedef (e.g., TIMECALLBACK)
+                fnProtoTypedefNames.Add(typedefDecl.Name);
+            }
+            else if (underlyingType is PointerType ptrType)
+            {
+                var pointee = UnwrapType(ptrType.PointeeType);
+
+                if (pointee is FunctionProtoType)
+                {
+                    // Direct pointer-to-function typedef (e.g., typedef void (*LPFOO)(...))
+                    fnProtoTypedefNames.Add(typedefDecl.Name);
+                }
+                else if (pointee is TypedefType tdType)
+                {
+                    // Pointer to a typedef — might be a fn ptr alias
+                    // e.g., typedef TIMECALLBACK *LPTIMECALLBACK
+                    string pointedTypedefName = tdType.Decl?.Name;
+                    if (pointedTypedefName != null)
+                    {
+                        if (!fnProtoToPointerTypedefs.TryGetValue(pointedTypedefName, out var ptrList))
+                            fnProtoToPointerTypedefs[pointedTypedefName] = ptrList = new List<string>();
+                        if (!ptrList.Contains(typedefDecl.Name))
+                            ptrList.Add(typedefDecl.Name);
+                    }
+                }
+            }
+            else if (underlyingType is TypedefType tdType2)
+            {
+                // Typedef-to-typedef alias (e.g., typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE)
+                string sourceTypedefName = tdType2.Decl?.Name;
+                if (sourceTypedefName != null)
+                {
+                    if (!fnProtoToPointerTypedefs.TryGetValue(sourceTypedefName, out var aliasList))
+                        fnProtoToPointerTypedefs[sourceTypedefName] = aliasList = new List<string>();
+                    if (!aliasList.Contains(typedefDecl.Name))
+                        aliasList.Add(typedefDecl.Name);
+                }
+            }
         }
 
         if (decl is IDeclContext context)
         {
             foreach (var child in context.Decls)
             {
-                WalkForTypedefRemaps(child, remaps);
+                WalkForTypedefRemaps(child, tagToTypedefs, fnProtoToPointerTypedefs, fnProtoTypedefNames);
             }
         }
     }
 
     /// <summary>
-    /// Walks a typedef's underlying type to find direct tag-typedef relationships.
-    /// Only records remaps for direct TagType references (not through pointer/reference
-    /// indirection, which represent pointer aliases like PFOO, not type remaps).
+    /// Unwraps sugar types (ElaboratedType, AttributedType, ParenType) to get to
+    /// the semantically meaningful type underneath.
     /// </summary>
-    static void WalkTypedefUnderlying(TypedefDecl typedefDecl, ClangSharp.Type underlyingType, Dictionary<string, string> remaps)
+    static ClangSharp.Type UnwrapType(ClangSharp.Type type)
     {
-        if (underlyingType is TagType tagType)
+        while (true)
         {
-            var tagDecl = tagType.Decl;
-            if (tagDecl != null)
-            {
-                string tagName = tagDecl.Name;
-                // For nested/namespaced types, build qualified name
-                var declContext = tagDecl.DeclContext;
-                if (declContext is NamedDecl parent)
-                    tagName = $"{parent.Name}::{tagName}";
+            if (type is ElaboratedType elab)
+                type = elab.NamedType;
+            else if (type is AttributedType attr)
+                type = attr.ModifiedType;
+            else if (type is ParenType paren)
+                type = paren.InnerType;
+            else
+                return type;
+        }
+    }
 
-                string typedefName = typedefDecl.Name;
-                if (!string.IsNullOrEmpty(tagName) && tagName != typedefName)
+    /// <summary>
+    /// Resolves discovered tag-typedef mappings into a flat remap dictionary.
+    /// For tags with multiple typedefs, uses disambiguation rules to pick the best one,
+    /// or skips the tag if ambiguous (requiring manual override).
+    /// </summary>
+    static Dictionary<string, string> ResolveTagRemaps(
+        Dictionary<string, List<string>> tagToTypedefs,
+        Dictionary<string, string> configuredRemaps)
+    {
+        var result = new Dictionary<string, string>();
+
+        foreach (var kv in tagToTypedefs)
+        {
+            string tag = kv.Key;
+            var typedefs = kv.Value;
+
+            if (typedefs.Count == 1)
+            {
+                // Unambiguous — single typedef for this tag
+                result[tag] = typedefs[0];
+            }
+            else
+            {
+                // Multiple typedefs — try to disambiguate
+
+                // If one of them matches what manual config says, use that
+                if (configuredRemaps.TryGetValue(tag, out string manualValue) && typedefs.Contains(manualValue))
                 {
-                    // First typedef wins (matches PInvokeGenerator behavior)
-                    if (!remaps.ContainsKey(tagName))
-                        remaps[tagName] = typedefName;
+                    result[tag] = manualValue;
+                    continue;
                 }
+
+                // Heuristic: prefer the typedef that is the "cleaned" version of the tag
+                // e.g., _FOO → FOO (strip leading underscore)
+                // e.g., tagFOO → FOO (strip "tag" prefix)
+                string stripped = null;
+                if (tag.StartsWith("_") && tag.Length > 1)
+                    stripped = tag.Substring(1);
+                else if (tag.StartsWith("tag") && tag.Length > 3 && char.IsUpper(tag[3]))
+                    stripped = tag.Substring(3);
+
+                if (stripped != null)
+                {
+                    var match = typedefs.FirstOrDefault(t => string.Equals(t, stripped, StringComparison.OrdinalIgnoreCase));
+                    if (match != null)
+                    {
+                        result[tag] = match;
+                        continue;
+                    }
+                }
+
+                // Can't disambiguate — skip (requires manual override)
+                // This is the conservative choice: no auto-remap for ambiguous tags
             }
         }
-        else if (underlyingType is ElaboratedType elaborated)
+
+        return result;
+    }
+
+    /// <summary>
+    /// Resolves function pointer typedef pairs into remap + exclude + reducePointerLevel entries.
+    /// </summary>
+    static void ResolveFunctionPointerFixups(
+        HashSet<string> fnProtoTypedefNames,
+        Dictionary<string, List<string>> fnProtoToPointerTypedefs,
+        Dictionary<string, string> fnPtrRemaps,
+        HashSet<string> fnPtrExcludes,
+        HashSet<string> reducePointerLevel)
+    {
+        foreach (var protoName in fnProtoTypedefNames)
         {
-            WalkTypedefUnderlying(typedefDecl, elaborated.NamedType, remaps);
-        }
-        else if (underlyingType is TemplateSpecializationType templateSpec && templateSpec.IsTypeAlias)
-        {
-            WalkTypedefUnderlying(typedefDecl, templateSpec.AliasedType, remaps);
+            if (!fnProtoToPointerTypedefs.TryGetValue(protoName, out var pointerNames))
+                continue;
+
+            if (pointerNames.Count != 1)
+                continue; // Ambiguous — skip
+
+            string pointerName = pointerNames[0];
+
+            // Validate the naming convention looks right
+            bool looksLikePointerTypedef =
+                pointerName.StartsWith("LP") ||
+                pointerName.StartsWith("P") ||
+                pointerName.StartsWith("PFN");
+
+            if (!looksLikePointerTypedef)
+                continue; // Conservative — skip non-standard naming
+
+            fnPtrRemaps[protoName] = pointerName;
+            fnPtrExcludes.Add(pointerName);
+            reducePointerLevel.Add(pointerName);
         }
     }
 
@@ -258,7 +413,8 @@ class Program
         Dictionary<string, List<string>> settings,
         string ns, string outputFile, string headerFile,
         PInvokeGeneratorConfigurationOptions options,
-        Dictionary<string, string> remaps)
+        Dictionary<string, string> remaps,
+        List<string> excludes)
     {
         string defaultClass = null;
         if (settings.TryGetValue("--methodClassName", out var classNames) && classNames.Count > 0)
@@ -273,7 +429,7 @@ class Program
         {
             DefaultClass = defaultClass ?? "Methods",
             TraversalNames = settings.GetValueOrDefault("--traverse")?.ToArray() ?? Array.Empty<string>(),
-            ExcludedNames = settings.GetValueOrDefault("--exclude")?.ToArray() ?? Array.Empty<string>(),
+            ExcludedNames = excludes.ToArray(),
             RemappedNames = remaps,
             WithAttributes = ParseKeyValueMultiPairs(settings.GetValueOrDefault("--with-attribute")),
             WithTypes = ParseKeyValuePairs(settings.GetValueOrDefault("--with-type")),
@@ -289,12 +445,13 @@ class Program
     }
 
     /// <summary>
-    /// Filters discovered remaps using heuristic rules and exclusion list.
+    /// Filters discovered remaps using structural signals only — no exclusion list needed.
+    /// Ambiguous tags (multiple typedefs) are already handled by ResolveTagRemaps.
+    /// This filter only removes entries that are clearly NOT tag-typedef pairs.
     /// </summary>
     static Dictionary<string, string> FilterRemaps(
         Dictionary<string, string> discovered,
-        Dictionary<string, string> configuredRemaps,
-        HashSet<string> exclusions)
+        Dictionary<string, string> configuredRemaps)
     {
         var builtins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             { "intptr_t", "ptrdiff_t", "size_t", "uintptr_t", "_GUID" };
@@ -305,26 +462,15 @@ class Program
             string tag = kv.Key;
             string typedef = kv.Value;
 
+            // Skip built-in Clang defaults
             if (builtins.Contains(tag)) continue;
+
+            // Skip identity remaps
             if (tag == typedef) continue;
-            if (exclusions.Contains(tag)) continue;
-            if (exclusions.Contains(typedef)) continue;
-            if (!tag.StartsWith("_") && typedef.StartsWith("_")) continue;
 
             // Skip if configured remap has a different value (semantic override wins)
             if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
                 continue;
-
-            // Tag must look like an internal/compiler-generated name
-            bool looksInternal =
-                (tag.Length > 1 && tag[0] == '_' && (char.IsUpper(tag[1]) || tag[1] == '_')) ||
-                (tag.StartsWith("tag") && tag.Length > 3 && char.IsUpper(tag[3])) ||
-                tag.StartsWith("__MIDL") || tag.StartsWith("__Anonymous") ||
-                tag.StartsWith("ABI::") ||
-                (tag.Length > 0 && char.IsLower(tag[0])) ||
-                tag.EndsWith("_");
-
-            if (!looksInternal) continue;
 
             result[tag] = typedef;
         }

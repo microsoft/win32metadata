@@ -24,6 +24,8 @@ namespace MetadataTasks
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private Dictionary<string, string> suggestedRemaps = new();
         private Dictionary<string, string> discoveredRemaps = new();
+        private HashSet<string> discoveredFnPtrExcludes = new();
+        private HashSet<string> discoveredReducePointerLevel = new();
 
 
         [Required]
@@ -479,14 +481,8 @@ $@"--file
             {
                 // Use Win32MetadataScraper — hosts PInvokeGenerator as a library,
                 // walks the AST to discover remaps, and generates output in a single pass
-                string exclusionsFile = Path.Combine(this.Win32MetadataScraperAssetsDir, "remapExclusions.rsp");
                 string nativeLibDir = Path.GetDirectoryName(this.clangSharpToolPath);
-                string scraperArgs = $"\"{this.win32MetadataScraperPath}\" \"{nativeLibDir}\" \"{remapsFile}\"";
-                if (File.Exists(exclusionsFile))
-                {
-                    scraperArgs += $" --remap-exclusions \"{exclusionsFile}\"";
-                }
-                scraperArgs += $" {args}";
+                string scraperArgs = $"\"{this.win32MetadataScraperPath}\" \"{nativeLibDir}\" \"{remapsFile}\" {args}";
                 exitCode = TaskUtils.ExecuteCmd("dotnet", scraperArgs, out output, this.Log);
             }
             else if (this.clangSharpToolPath != null)
@@ -562,17 +558,34 @@ $@"--file
                     {
                         string trimmed = line.Trim();
                         if (string.IsNullOrEmpty(trimmed)) continue;
-                        int eq = trimmed.IndexOf('=');
-                        if (eq > 0)
+
+                        if (trimmed.StartsWith("FNPTR_EXCLUDE:"))
                         {
-                            string key = trimmed.Substring(0, eq);
-                            string value = trimmed.Substring(eq + 1);
-                            lock (this.discoveredRemaps)
+                            lock (this.discoveredFnPtrExcludes)
                             {
-                                // First partition to discover a remap wins
-                                if (!this.discoveredRemaps.ContainsKey(key))
+                                this.discoveredFnPtrExcludes.Add(trimmed.Substring("FNPTR_EXCLUDE:".Length));
+                            }
+                        }
+                        else if (trimmed.StartsWith("REDUCE_PTR_LEVEL:"))
+                        {
+                            lock (this.discoveredReducePointerLevel)
+                            {
+                                this.discoveredReducePointerLevel.Add(trimmed.Substring("REDUCE_PTR_LEVEL:".Length));
+                            }
+                        }
+                        else
+                        {
+                            int eq = trimmed.IndexOf('=');
+                            if (eq > 0)
+                            {
+                                string key = trimmed.Substring(0, eq);
+                                string value = trimmed.Substring(eq + 1);
+                                lock (this.discoveredRemaps)
                                 {
-                                    this.discoveredRemaps[key] = value;
+                                    if (!this.discoveredRemaps.ContainsKey(key))
+                                    {
+                                        this.discoveredRemaps[key] = value;
+                                    }
                                 }
                             }
                         }
@@ -608,29 +621,55 @@ $@"--file
         }
 
         /// <summary>
-        /// Writes the auto-discovered remaps to a generated RSP file.
-        /// This RSP can be included in subsequent builds via @(ScraperRsp).
+        /// Writes the auto-discovered remaps and function pointer fixups to generated RSP files.
         /// </summary>
         private void WriteAutoRemapsRsp()
         {
-            if (this.discoveredRemaps.Count == 0)
-            {
-                return;
-            }
-
-            string autoRemapsRsp = Path.Combine(this.GeneratedDir, "scraper.autoRemaps.generated.rsp");
             Directory.CreateDirectory(this.GeneratedDir);
 
-            using (var writer = new StreamWriter(autoRemapsRsp))
+            if (this.discoveredRemaps.Count > 0 || this.discoveredFnPtrExcludes.Count > 0)
             {
-                writer.WriteLine("--remap");
-                foreach (var kv in this.discoveredRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
+                string autoRemapsRsp = Path.Combine(this.GeneratedDir, "scraper.autoRemaps.generated.rsp");
+
+                using (var writer = new StreamWriter(autoRemapsRsp))
                 {
-                    writer.WriteLine($"{kv.Key}={kv.Value}");
+                    if (this.discoveredFnPtrExcludes.Count > 0)
+                    {
+                        writer.WriteLine("--exclude");
+                        foreach (var excl in this.discoveredFnPtrExcludes.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                        {
+                            writer.WriteLine(excl);
+                        }
+                    }
+
+                    if (this.discoveredRemaps.Count > 0)
+                    {
+                        writer.WriteLine("--remap");
+                        foreach (var kv in this.discoveredRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
+                        {
+                            writer.WriteLine($"{kv.Key}={kv.Value}");
+                        }
+                    }
                 }
+
+                this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredRemaps.Count} auto-remaps and {this.discoveredFnPtrExcludes.Count} fn-ptr excludes to {autoRemapsRsp}");
             }
 
-            this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredRemaps.Count} auto-discovered remaps to {autoRemapsRsp}");
+            if (this.discoveredReducePointerLevel.Count > 0)
+            {
+                string autoEmitterRsp = Path.Combine(this.GeneratedDir, "emitter.autoFnPtr.generated.rsp");
+
+                using (var writer = new StreamWriter(autoEmitterRsp))
+                {
+                    writer.WriteLine("--reducePointerLevel");
+                    foreach (var rpl in this.discoveredReducePointerLevel.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    {
+                        writer.WriteLine(rpl);
+                    }
+                }
+
+                this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredReducePointerLevel.Count} reduce-pointer-level entries to {autoEmitterRsp}");
+            }
         }
 
     }
