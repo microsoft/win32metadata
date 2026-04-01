@@ -18,3 +18,4 @@
 #include <iphlpapi.h>
 #include <fltdefs.h>
 #include <ipinfoid.h>
+#include <inaddr.h>

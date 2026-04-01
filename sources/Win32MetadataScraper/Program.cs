@@ -5,7 +5,7 @@
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
 // with the full merged remap set — all in a single parse pass.
 //
-// Usage: dotnet Win32MetadataScraper.dll <nativeLibDir> <remapsOutputPath> [--remap-exclusions <file>] @rsp1 @rsp2 ...
+// Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
 using System;
 using System.Collections.Generic;
@@ -24,20 +24,14 @@ class Program
 {
     static int Main(string[] args)
     {
-        if (args.Length < 3)
+        if (args.Length < 2)
         {
-            Console.Error.WriteLine("Usage: dotnet Win32MetadataScraper.dll <nativeLibDir> <remapsOutputPath> @rsp1 @rsp2 ...");
+            Console.Error.WriteLine("Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...");
             return 1;
         }
 
-        // Pre-load native libraries from the specified directory (the ClangSharp tool store)
-        string nativeLibDir = args[0];
-        string remapsOutputPath = args[1];
-
-        NativeLibrary.Load(Path.Combine(nativeLibDir, "libclang.dll"));
-        NativeLibrary.Load(Path.Combine(nativeLibDir, "libClangSharp.dll"));
-
-        string[] rspArgs = args.Skip(2).ToArray();
+        string remapsOutputPath = args[0];
+        string[] rspArgs = args.Skip(1).ToArray();
 
         try
         {
@@ -185,9 +179,15 @@ class Program
 
                 using var writer = new StreamWriter(remapsOutputPath);
 
-                // Tag remaps
+                // Tag remaps (with header file info)
                 foreach (var kv in allAutoRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
-                    writer.WriteLine($"{kv.Key}={kv.Value}");
+                {
+                    discovery.TagToHeaderFile.TryGetValue(kv.Key, out string srcHeader);
+                    if (srcHeader != null)
+                        writer.WriteLine($"{kv.Key}={kv.Value}|HEADER:{srcHeader}");
+                    else
+                        writer.WriteLine($"{kv.Key}={kv.Value}");
+                }
 
                 // Function pointer excludes (prefixed for downstream parsing)
                 foreach (var excl in fnPtrResult.FnPtrExcludes.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))

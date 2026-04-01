@@ -24,6 +24,9 @@ public class DiscoveryResult
     /// <summary>Tag name → list of typedef names. One tag may have multiple typedefs.</summary>
     public Dictionary<string, List<string>> TagToTypedefs { get; } = new();
 
+    /// <summary>Tag name → header file where the typedef was found.</summary>
+    public Dictionary<string, string> TagToHeaderFile { get; } = new();
+
     /// <summary>Function prototype typedef name → list of pointer-to-function typedef names.</summary>
     public Dictionary<string, List<string>> FnProtoToPointerTypedefs { get; } = new();
 
@@ -110,6 +113,16 @@ public static class RemapDiscovery
                     }
                 }
 
+                // Try case-insensitive match of the tag name itself (e.g., in6_addr → IN6_ADDR)
+                {
+                    var match = typedefs.FirstOrDefault(t => string.Equals(t, tag, StringComparison.OrdinalIgnoreCase));
+                    if (match != null)
+                    {
+                        result[tag] = match;
+                        continue;
+                    }
+                }
+
                 // Can't disambiguate — skip (conservative: no auto-remap for ambiguous tags)
             }
         }
@@ -134,9 +147,16 @@ public static class RemapDiscovery
             string tag = kv.Key;
             string typedef = kv.Value;
 
-            if (builtins.Contains(tag)) continue;
+                        if (builtins.Contains(tag)) continue;
             if (tag == typedef) continue;
             if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
+                continue;
+
+            // Skip remaps where the typedef is LONGER than the tag (adds a suffix).
+            // Normal remaps strip prefixes (_FOO→FOO, tagFOO→FOO).
+            // Suffix-adding remaps (GLUnurbs→GLUnurbsObj) indicate the tag name
+            // is already the canonical name used in function signatures.
+            if (typedef.Length > tag.Length && typedef.StartsWith(tag))
                 continue;
 
             result[tag] = typedef;
@@ -157,28 +177,45 @@ public static class RemapDiscovery
 
         foreach (var protoName in fnProtoTypedefNames)
         {
-            if (!fnProtoToPointerTypedefs.TryGetValue(protoName, out var pointerNames))
+            if (!fnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
                 continue;
 
-            if (pointerNames.Count != 1)
+            if (aliasNames.Count != 1)
                 continue; // Ambiguous — skip
 
-            string pointerName = pointerNames[0];
+            string aliasName = aliasNames[0];
 
-            bool looksLikePointerTypedef =
-                pointerName.StartsWith("LP") ||
-                pointerName.StartsWith("P") ||
-                pointerName.StartsWith("PFN");
+            bool protoHasPointerPrefix = HasPointerPrefix(protoName);
+            bool aliasHasPointerPrefix = HasPointerPrefix(aliasName);
 
-            if (!looksLikePointerTypedef)
-                continue;
-
-            result.FnPtrRemaps[protoName] = pointerName;
-            result.FnPtrExcludes.Add(pointerName);
-            result.ReducePointerLevel.Add(pointerName);
+            if (protoHasPointerPrefix && !aliasHasPointerPrefix)
+            {
+                // "Already pointer" pattern: PEXCEPTION_ROUTINE (ptr) → EXCEPTION_ROUTINE (alias)
+                // The alias should be remapped TO the pointer name.
+                // Remap: EXCEPTION_ROUTINE=PEXCEPTION_ROUTINE
+                // Exclude: PEXCEPTION_ROUTINE (it's the canonical pointer typedef)
+                result.FnPtrRemaps[aliasName] = protoName;
+                result.FnPtrExcludes.Add(protoName);
+                // No reducePointerLevel — the proto is already a pointer, no extra * to strip
+            }
+            else if (!protoHasPointerPrefix && aliasHasPointerPrefix)
+            {
+                // Standard pattern: TIMECALLBACK (proto) → LPTIMECALLBACK (ptr alias)
+                // Remap: TIMECALLBACK=LPTIMECALLBACK
+                // Exclude: LPTIMECALLBACK
+                result.FnPtrRemaps[protoName] = aliasName;
+                result.FnPtrExcludes.Add(aliasName);
+                result.ReducePointerLevel.Add(aliasName);
+            }
+            // else: both or neither have prefix — skip (can't determine direction)
         }
 
         return result;
+    }
+
+    private static bool HasPointerPrefix(string name)
+    {
+        return name.StartsWith("LP") || name.StartsWith("PFN") || name.StartsWith("P");
     }
 
     /// <summary>
@@ -209,7 +246,10 @@ public static class RemapDiscovery
             if (underlyingType is TagType tagType)
             {
                 var tagDecl = tagType.Decl;
-                if (tagDecl != null)
+                // Skip tags inside C++ namespaces — PInvokeGenerator handles
+                // namespace-qualified types (Gdiplus::, ABI::) internally.
+                // Only discover remaps for top-level tags.
+                if (tagDecl != null && tagDecl.DeclContext is not NamespaceDecl)
                 {
                     string tagName = tagDecl.Name;
                     if (tagDecl.DeclContext is NamedDecl parent)
@@ -221,7 +261,21 @@ public static class RemapDiscovery
                         if (!result.TagToTypedefs.TryGetValue(tagName, out var list))
                             result.TagToTypedefs[tagName] = list = new List<string>();
                         if (!list.Contains(typedefName))
+                        {
                             list.Add(typedefName);
+                        }
+
+                        // Record which header file contains this typedef
+                        if (!result.TagToHeaderFile.ContainsKey(tagName))
+                        {
+                            var location = typedefDecl.Location;
+                            location.GetPresumedLocation(out var fileName, out _, out _);
+                            string headerPath = fileName.ToString();
+                            if (!string.IsNullOrEmpty(headerPath))
+                            {
+                                result.TagToHeaderFile[tagName] = headerPath;
+                            }
+                        }
                     }
                 }
             }
@@ -264,11 +318,24 @@ public static class RemapDiscovery
 
         if (decl is IDeclContext context)
         {
+            // Walk Decls first (direct declarations)
             foreach (var child in context.Decls)
             {
                 WalkDecl(child, result);
+            }
+
+            // Also walk CursorChildren to find typedefs from transitively included
+            // headers that don't appear in Decls. PInvokeGenerator uses both traversals.
+            foreach (var cursor in decl.CursorChildren)
+            {
+                if (cursor is TypedefDecl && !context.Decls.Contains((Decl)cursor))
+                {
+                    WalkDecl((Decl)cursor, result);
+                }
             }
         }
     }
 }
 }
+
+

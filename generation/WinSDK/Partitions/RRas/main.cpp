@@ -19,3 +19,4 @@ extern "C" {
 }
 #include <rtmv2.h>
 #include <raserror.h>
+#include <inaddr.h>

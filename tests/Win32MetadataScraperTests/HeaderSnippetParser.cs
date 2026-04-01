@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using ClangSharp;
 using ClangSharp.Interop;
 using Win32MetadataScraper;
@@ -15,46 +14,30 @@ namespace Win32MetadataScraperTests
     /// </summary>
     public static class HeaderSnippetParser
     {
-        private static bool s_nativeLibsLoaded;
-        private static readonly object s_lock = new();
 
         /// <summary>
-        /// Ensures libclang and libClangSharp native libraries are loaded.
-        /// Uses the ClangSharp tool store if available, otherwise relies on NuGet runtime assets.
+        /// Ensures native libraries are available. With RuntimeIdentifiers set in the
+        /// project, the .NET host resolves libclang/libClangSharp from the NuGet cache
+        /// at execution time — no manual loading needed.
         /// </summary>
         public static void EnsureNativeLibsLoaded()
         {
-            lock (s_lock)
-            {
-                if (s_nativeLibsLoaded) return;
-
-                // Try the dotnet tool store first (same as ScrapeHeaders.cs)
-                string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                string storeRoot = Path.Combine(userProfile, ".dotnet", "tools", ".store", "clangsharppinvokegenerator");
-                if (Directory.Exists(storeRoot))
-                {
-                    var found = Directory.GetFiles(storeRoot, "libclang.dll", SearchOption.AllDirectories);
-                    if (found.Length > 0)
-                    {
-                        string toolDir = Path.GetDirectoryName(found[0]);
-                        NativeLibrary.Load(Path.Combine(toolDir, "libclang.dll"));
-                        NativeLibrary.Load(Path.Combine(toolDir, "libClangSharp.dll"));
-                        s_nativeLibsLoaded = true;
-                        return;
-                    }
-                }
-
-                // Fall back to NuGet runtime assets (should be in the output directory)
-                s_nativeLibsLoaded = true; // let it fail naturally if not found
-            }
+            // Native libs are resolved automatically by the .NET host via deps.json
+            // and the NuGet runtime package graph. No manual loading required.
         }
 
         /// <summary>
         /// Parses a C header snippet and returns the AST discovery results.
         /// </summary>
-        /// <param name="headerContent">The C/C++ header content to parse.</param>
-        /// <returns>Discovery results with tag-typedef and fn-ptr relationships.</returns>
         public static DiscoveryResult ParseAndDiscover(string headerContent)
+        {
+            return ParseAndDiscover(new Dictionary<string, string> { ["test.h"] = headerContent }, "#include \"test.h\"\n");
+        }
+
+        /// <summary>
+        /// Parses multiple header files with a custom main source and returns discovery results.
+        /// </summary>
+        public static DiscoveryResult ParseAndDiscover(Dictionary<string, string> files, string mainSource)
         {
             EnsureNativeLibsLoaded();
 
@@ -63,11 +46,11 @@ namespace Win32MetadataScraperTests
 
             try
             {
-                string headerFile = Path.Combine(tempDir, "test.h");
-                string sourceFile = Path.Combine(tempDir, "test.cpp");
+                foreach (var kv in files)
+                    File.WriteAllText(Path.Combine(tempDir, kv.Key), kv.Value);
 
-                File.WriteAllText(headerFile, headerContent);
-                File.WriteAllText(sourceFile, "#include \"test.h\"\n");
+                string sourceFile = Path.Combine(tempDir, "test.cpp");
+                File.WriteAllText(sourceFile, mainSource);
 
                 var clangArgs = new string[]
                 {

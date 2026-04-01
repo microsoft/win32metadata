@@ -8,3 +8,4 @@
 
 #include <webservices.h>
 #include <icontentprefetchertasktrigger.h>
+#include <schannel.h>

@@ -28,3 +28,4 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <winbase.h>
 #include <winnt.h>
 #include <mssip.h>
+#include <mscat.h>

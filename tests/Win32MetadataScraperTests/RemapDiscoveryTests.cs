@@ -132,6 +132,29 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void MultipleTypedefs_DisambiguatesByCaseInsensitiveMatch()
+        {
+            // Pattern from in6addr.h: struct in6_addr has typedefs IN6_ADDR and IPv6Addr.
+            // The disambiguator should pick IN6_ADDR (case-insensitive match of tag name).
+            var files = new Dictionary<string, string>
+            {
+                ["test.h"] = @"
+                    typedef struct in6_addr {
+                        unsigned char Byte[16];
+                    } IN6_ADDR;
+                    typedef struct in6_addr IPv6Addr;
+                "
+            };
+
+            var discovery = HeaderSnippetParser.ParseAndDiscover(files, "#include \"test.h\"\n");
+            var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
+                discovery.TagToTypedefs, new Dictionary<string, string>());
+
+            Assert.True(resolved.ContainsKey("in6_addr"));
+            Assert.Equal("IN6_ADDR", resolved["in6_addr"]);
+        }
+
+        [Fact]
         public void AmbiguousTypedefs_SkippedWithoutManualHint()
         {
             // When a tag has multiple typedefs and none is the "stripped" version,
@@ -195,6 +218,29 @@ namespace Win32MetadataScraperTests
             Assert.False(remaps.ContainsKey("_LARGE_INTEGER"));
         }
 
+        // ── C++ namespace types skipped ──────────────────────────────────────
+
+        [Fact]
+        public void CppNamespaceTypes_NotRemapped()
+        {
+            // Types inside C++ namespaces (like Gdiplus::Status) should not be
+            // auto-remapped — PInvokeGenerator handles these internally.
+            // Pattern from gdiplusenums.h / gdiplusgpstubs.h
+            var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
+                namespace Gdiplus {
+                    enum Status { Ok = 0, GenericError = 1 };
+                    typedef Status GpStatus;
+                    enum FillMode { FillModeAlternate = 0 };
+                    typedef FillMode GpFillMode;
+                }
+            ");
+
+            Assert.False(remaps.ContainsKey("Status"));
+            Assert.False(remaps.ContainsKey("Gdiplus::Status"));
+            Assert.False(remaps.ContainsKey("FillMode"));
+            Assert.False(remaps.ContainsKey("Gdiplus::FillMode"));
+        }
+
         // ── Built-in type filtering ──────────────────────────────────────────
 
         [Fact]
@@ -229,6 +275,127 @@ namespace Win32MetadataScraperTests
             var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
                 discovery.TagToTypedefs, new Dictionary<string, string>());
             Assert.False(resolved.ContainsKey("ALREADY_NAMED"));
+        }
+
+        [Fact]
+        public void SuffixAdding_Filtered()
+        {
+            // When the typedef adds a suffix to the tag name (e.g., GLUnurbs→GLUnurbsObj),
+            // the tag name is the canonical name used in function signatures.
+            // The remap should be filtered out.
+            var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
+                typedef struct GLUnurbs GLUnurbsObj;
+            ");
+
+            Assert.False(remaps.ContainsKey("GLUnurbs"));
+        }
+
+        // ── Transitive include discovery ─────────────────────────────────────
+
+        [Fact]
+        public void TransitiveInclude_TypedefDiscoveredAcrossHeaders()
+        {
+            // Pattern from in6addr.h / ws2ipdef.h:
+            // Header A defines: typedef struct in6_addr { ... } IN6_ADDR;
+            // Header B includes Header A and uses: struct in6_addr *addr;
+            // Main.cpp includes Header B.
+            // The typedef should be discovered even though it's in a transitively
+            // included header, not the directly included one.
+            var files = new Dictionary<string, string>
+            {
+                ["inner.h"] = @"
+                    typedef struct in6_addr {
+                        unsigned char Byte[16];
+                    } IN6_ADDR;
+                ",
+                ["outer.h"] = @"
+                    #include ""inner.h""
+                    typedef struct _SOME_STRUCT {
+                        struct in6_addr addr;
+                    } SOME_STRUCT;
+                "
+            };
+
+            var discovery = HeaderSnippetParser.ParseAndDiscover(files, "#include \"outer.h\"\n");
+            var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
+                discovery.TagToTypedefs, new Dictionary<string, string>());
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                resolved, new Dictionary<string, string>());
+
+            Assert.True(filtered.ContainsKey("in6_addr"), 
+                "in6_addr remap should be discovered from transitively included header");
+            Assert.Equal("IN6_ADDR", filtered["in6_addr"]);
+        }
+
+        [Fact]
+        public void TransitiveInclude_WithIncludeGuardStillDiscovered()
+        {
+            // Reproduce the in6addr.h pattern: the typedef is guarded by
+            // #ifndef s6_addr, and s6_addr is #defined WITHIN the same header
+            // after the typedef. The typedef should still be visible.
+            var files = new Dictionary<string, string>
+            {
+                ["guarded.h"] = @"
+                    #ifndef s6_addr
+                    #pragma once
+                    typedef struct in6_addr {
+                        union {
+                            unsigned char Byte[16];
+                            unsigned short Word[8];
+                        } u;
+                    } IN6_ADDR;
+                    #define s6_addr u.Byte
+                    #endif
+                ",
+                ["consumer.h"] = @"
+                    #include ""guarded.h""
+                    typedef struct _USES_ADDR {
+                        struct in6_addr addr;
+                    } USES_ADDR;
+                "
+            };
+
+            var discovery = HeaderSnippetParser.ParseAndDiscover(files, "#include \"consumer.h\"\n");
+            var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
+                discovery.TagToTypedefs, new Dictionary<string, string>());
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                resolved, new Dictionary<string, string>());
+
+            Assert.True(filtered.ContainsKey("in6_addr"),
+                "in6_addr remap should be discovered even with include guard");
+        }
+
+        [Fact]
+        public void TransitiveInclude_MultipleTypedefsSameTag()
+        {
+            // Pattern: struct has both IN6_ADDR and *PIN6_ADDR typedefs.
+            // Multiple typedefs for same tag — disambiguator should pick IN6_ADDR.
+            var files = new Dictionary<string, string>
+            {
+                ["types.h"] = @"
+                    typedef struct in6_addr {
+                        unsigned char Byte[16];
+                    } IN6_ADDR, *PIN6_ADDR;
+                ",
+                ["user.h"] = @"
+                    #include ""types.h""
+                    void do_something(IN6_ADDR* addr);
+                "
+            };
+
+            var discovery = HeaderSnippetParser.ParseAndDiscover(files, "#include \"user.h\"\n");
+
+            // Should find in6_addr with multiple typedefs
+            Assert.True(discovery.TagToTypedefs.ContainsKey("in6_addr"));
+
+            var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
+                discovery.TagToTypedefs, new Dictionary<string, string>());
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                resolved, new Dictionary<string, string>());
+
+            // Should pick IN6_ADDR (not PIN6_ADDR) since it strips the prefix
+            Assert.True(filtered.ContainsKey("in6_addr"));
+            Assert.Equal("IN6_ADDR", filtered["in6_addr"]);
         }
     }
 
@@ -363,6 +530,38 @@ namespace Win32MetadataScraperTests
         }
 
         // ── Ambiguous pointer targets skipped ────────────────────────────────
+
+        [Fact]
+        public void FnPtr_AlreadyPointer_AliasRemappedToPointerName()
+        {
+            // Pattern from winnt.h:
+            //   typedef DWORD (*PEXCEPTION_ROUTINE)(...);   // already a fn pointer
+            //   typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;  // non-pointer alias
+            // The alias (EXCEPTION_ROUTINE, no P/LP prefix) should be remapped TO
+            // the pointer name (PEXCEPTION_ROUTINE), not the other way around.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long (*PEXCEPTION_ROUTINE)(void* EstablisherFrame, unsigned long long DispatcherContext);
+                typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;
+            ");
+
+            // The remap should be alias→pointer, not pointer→alias
+            Assert.True(result.FnPtrRemaps.ContainsKey("EXCEPTION_ROUTINE"));
+            Assert.Equal("PEXCEPTION_ROUTINE", result.FnPtrRemaps["EXCEPTION_ROUTINE"]);
+            Assert.Contains("PEXCEPTION_ROUTINE", result.FnPtrExcludes);
+        }
+
+        [Fact]
+        public void FnPtr_BothHavePointerPrefix_Skipped()
+        {
+            // When both names have P/LP prefixes, we can't determine the direction
+            // by naming convention alone — skip (leave for manual fixups).
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long (*LPTHREAD_START_ROUTINE)(void* lpThreadParameter);
+                typedef LPTHREAD_START_ROUTINE PTHREAD_START_ROUTINE;
+            ");
+
+            Assert.Empty(result.FnPtrRemaps);
+        }
 
         [Fact]
         public void FnPtr_MultiplePointerNames_Skipped()
