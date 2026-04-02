@@ -31,7 +31,9 @@
 
     <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
     <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
+    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.generated.rsp</EmitterAutoFnPtrRsp>
     <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+    <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
     <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
     <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
 
@@ -179,6 +181,8 @@
   <ItemGroup>
     <ScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
     <ScraperRsp Include="$(ScraperAutoTypesRsp)"/>
+    <!-- Auto-discovered remaps (before manual settings so manual overrides win) -->
+    <ScraperRsp Condition="Exists('$(ScraperAutoRemapsRsp)')" Include="$(ScraperAutoRemapsRsp)"/>
     <ScraperRsp Include="$(FilteredRspForHeaders)"/>
     <ScraperRsp Include="$(WithLibsRsp)"/>
     <ScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
@@ -262,6 +266,7 @@
 
     <ItemGroup>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
+      <EmitterRsp Condition="Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
     </ItemGroup>

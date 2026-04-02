@@ -35,3 +35,4 @@
 //#include <routprot.h> -- won't compile because it includes stm.h which is missing a type
 #include <rtinfo.h>
 #include <rtutils.h>
+#include <wincrypt.h>
