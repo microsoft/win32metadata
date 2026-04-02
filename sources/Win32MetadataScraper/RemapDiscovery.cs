@@ -215,7 +215,9 @@ public static class RemapDiscovery
 
     private static bool HasPointerPrefix(string name)
     {
-        return name.StartsWith("LP") || name.StartsWith("PFN") || name.StartsWith("P");
+        return name.StartsWith("LP")
+            || name.StartsWith("PFN")
+            || (name.Length > 1 && name[0] == 'P' && char.IsUpper(name[1]));
     }
 
     /// <summary>

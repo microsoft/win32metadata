@@ -182,7 +182,7 @@ namespace MetadataTasks
             if (ret)
             {
                 this.WriteAutoRemapsRsp();
-                ret = this.CheckCrossPartitionRemapConsistency();
+                this.CheckCrossPartitionRemapConsistency();
             }
 
             if (ret && string.IsNullOrEmpty(this.PartitionFilter))
@@ -643,11 +643,11 @@ $@"--file
         /// If any declared type name matches a tag that was remapped in another partition,
         /// it means this partition didn't discover the remap and used the raw tag name.
         /// </summary>
-        private bool CheckCrossPartitionRemapConsistency()
+        private void CheckCrossPartitionRemapConsistency()
         {
             if (this.discoveredRemaps.Count == 0)
             {
-                return true;
+                return;
             }
 
             // Collect all declared type names from all generated .cs files.
@@ -734,8 +734,6 @@ $@"--file
                     "Fix by adding the missing #include directives to the affected partition's main.cpp " +
                     "so the typedef is visible during scraping.");
             }
-
-            return true; // Warnings only — PInvokeGenerator handles these internally
         }
 
         /// <summary>

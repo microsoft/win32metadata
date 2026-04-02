@@ -12,7 +12,7 @@
     "pointerType": "PLSA_AP_CALL_PACKAGE"
   },
   {
-    "name": "LSA_GET_EXTENDED_CALL_FLAGS ",
+    "name": "LSA_GET_EXTENDED_CALL_FLAGS",
     "pointerType": "PLSA_GET_EXTENDED_CALL_FLAGS"
   },
   {

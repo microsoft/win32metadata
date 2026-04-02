@@ -242,40 +242,6 @@ class Program
         return config;
     }
 
-    /// <summary>
-    /// Filters discovered remaps using structural signals only — no exclusion list needed.
-    /// Ambiguous tags (multiple typedefs) are already handled by ResolveTagRemaps.
-    /// This filter only removes entries that are clearly NOT tag-typedef pairs.
-    /// </summary>
-    static Dictionary<string, string> FilterRemaps(
-        Dictionary<string, string> discovered,
-        Dictionary<string, string> configuredRemaps)
-    {
-        var builtins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-            { "intptr_t", "ptrdiff_t", "size_t", "uintptr_t", "_GUID" };
-        var result = new Dictionary<string, string>();
-
-        foreach (var kv in discovered)
-        {
-            string tag = kv.Key;
-            string typedef = kv.Value;
-
-            // Skip built-in Clang defaults
-            if (builtins.Contains(tag)) continue;
-
-            // Skip identity remaps
-            if (tag == typedef) continue;
-
-            // Skip if configured remap has a different value (semantic override wins)
-            if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
-                continue;
-
-            result[tag] = typedef;
-        }
-
-        return result;
-    }
-
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
     {
         var clangArgs = new List<string> { "--language=c++", "--std=c++17", "-Wno-pragma-once-outside-header" };
