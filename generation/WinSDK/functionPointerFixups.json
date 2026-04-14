@@ -85,5 +85,39 @@
   {
     "name": "_WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER",
     "pointerType": "WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER"
+  },
+  {
+    "name": "PTHREAD_START_ROUTINE",
+    "pointerType": "LPTHREAD_START_ROUTINE",
+    "alreadyPointer": true
+  },
+  {
+    "name": "INTERNET_STATUS_CALLBACK",
+    "pointerType": "LPINTERNET_STATUS_CALLBACK",
+    "alreadyPointer": true
+  },
+  {
+    "name": "INSTALLUI_HANDLER_RECORD",
+    "pointerType": "PINSTALLUI_HANDLER_RECORD"
+  },
+  {
+    "name": "PBMCALLBACKFN",
+    "pointerType": "LPBMCALLBACKFN"
+  },
+  {
+    "name": "ACMDRIVERPROC",
+    "pointerType": "LPACMDRIVERPROC"
+  },
+  {
+    "name": "PTOP_LEVEL_EXCEPTION_FILTER",
+    "pointerType": "LPTOP_LEVEL_EXCEPTION_FILTER"
+  },
+  {
+    "name": "LPFNADDPROPSHEETPAGE",
+    "pointerType": "LPFNSVADDPROPSHEETPAGE"
+  },
+  {
+    "name": "PFIBER_START_ROUTINE",
+    "pointerType": "LPFIBER_START_ROUTINE"
   }
 ]

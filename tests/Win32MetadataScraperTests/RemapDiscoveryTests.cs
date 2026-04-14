@@ -155,6 +155,30 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void MultipleTypedefs_PrefersFirstTypedefWhenTagMatchesIt()
+        {
+            // Pattern from ks.h: an anonymous struct's first typedef becomes the
+            // synthesized tag name, and later aliases should not trigger an auto-remap.
+            var discovery = HeaderSnippetParser.ParseAndDiscover(@"
+                typedef struct {
+                    unsigned long FormatSize;
+                    unsigned long Flags;
+                } KSDATAFORMAT, *PKSDATAFORMAT, KSDATARANGE, *PKSDATARANGE;
+            ");
+
+            Assert.True(discovery.TagToTypedefs.ContainsKey("KSDATAFORMAT"));
+
+            var resolved = Win32MetadataScraper.RemapDiscovery.ResolveTagRemaps(
+                discovery.TagToTypedefs, new Dictionary<string, string>());
+            Assert.True(resolved.ContainsKey("KSDATAFORMAT"));
+            Assert.Equal("KSDATAFORMAT", resolved["KSDATAFORMAT"]);
+
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                resolved, new Dictionary<string, string>());
+            Assert.False(filtered.ContainsKey("KSDATAFORMAT"));
+        }
+
+        [Fact]
         public void AmbiguousTypedefs_SkippedWithoutManualHint()
         {
             // When a tag has multiple typedefs and none is the "stripped" version,
@@ -288,6 +312,32 @@ namespace Win32MetadataScraperTests
             ");
 
             Assert.False(remaps.ContainsKey("GLUnurbs"));
+        }
+
+        [Fact]
+        public void EnumSuffixAdding_EnumAliasSuffixAllowed()
+        {
+            var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
+                typedef enum ADS_USER_FLAG {
+                    ADS_UF_SCRIPT = 0x1
+                } ADS_USER_FLAG_ENUM;
+            ");
+
+            Assert.True(remaps.ContainsKey("ADS_USER_FLAG"));
+            Assert.Equal("ADS_USER_FLAG_ENUM", remaps["ADS_USER_FLAG"]);
+        }
+
+        [Fact]
+        public void EnumSuffixAdding_PluralSuffixAllowed()
+        {
+            var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
+                typedef enum D3D11_SHADER_TRACKING_OPTION {
+                    D3D11_SHADER_TRACKING_OPTION_IGNORE = 0
+                } D3D11_SHADER_TRACKING_OPTIONS;
+            ");
+
+            Assert.True(remaps.ContainsKey("D3D11_SHADER_TRACKING_OPTION"));
+            Assert.Equal("D3D11_SHADER_TRACKING_OPTIONS", remaps["D3D11_SHADER_TRACKING_OPTION"]);
         }
 
         // ── Transitive include discovery ─────────────────────────────────────
@@ -494,17 +544,35 @@ namespace Win32MetadataScraperTests
         // ── Non-standard naming skipped ──────────────────────────────────────
 
         [Fact]
-        public void FnPtr_NonStandardPointerName_Skipped()
+        public void FnPtr_NonStandardPointerName_Resolved()
         {
-            // When the pointer typedef doesn't start with P/LP/PFN,
-            // the heuristic should skip it (conservative)
+            // When the pointer typedef doesn't follow naming conventions, the structural
+            // approach still resolves it correctly based on AST structure.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef void MY_CALLBACK(int x);
                 typedef MY_CALLBACK *MY_CALLBACK_HANDLER;
             ");
 
-            // MY_CALLBACK_HANDLER doesn't start with P/LP/PFN — skipped
+            // Bare function + pointer alias → standard fixup
+            Assert.True(result.FnPtrRemaps.ContainsKey("MY_CALLBACK"));
+            Assert.Equal("MY_CALLBACK_HANDLER", result.FnPtrRemaps["MY_CALLBACK"]);
+            Assert.Contains("MY_CALLBACK_HANDLER", result.FnPtrExcludes);
+            Assert.Contains("MY_CALLBACK_HANDLER", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void FnPtr_ConfiguredExclude_SuppressesAutoFixup()
+        {
+            // Partition/manual settings already exclude these WAB aliases, so the
+            // scraper should not emit duplicate auto fixups for them.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef int MAPIALLOCATEBUFFER(unsigned long cbSize, void** lppBuffer);
+                typedef MAPIALLOCATEBUFFER *LPMAPIALLOCATEBUFFER;
+            ", new[] { "LPMAPIALLOCATEBUFFER" });
+
             Assert.Empty(result.FnPtrRemaps);
+            Assert.Empty(result.FnPtrExcludes);
+            Assert.Empty(result.ReducePointerLevel);
         }
 
         // ── Typedef-to-typedef alias pattern ─────────────────────────────────
@@ -522,45 +590,94 @@ namespace Win32MetadataScraperTests
                 typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
             ");
 
-            // PTHREAD_START_ROUTINE is a fn ptr typedef
+            // PTHREAD_START_ROUTINE is a pointer-to-function typedef
+            Assert.Contains("PTHREAD_START_ROUTINE", discovery.FnPointerFunctionTypedefs);
             Assert.Contains("PTHREAD_START_ROUTINE", discovery.FnProtoTypedefNames);
             // LPTHREAD_START_ROUTINE references PTHREAD_START_ROUTINE
             Assert.True(discovery.FnProtoToPointerTypedefs.ContainsKey("PTHREAD_START_ROUTINE"));
             Assert.Contains("LPTHREAD_START_ROUTINE", discovery.FnProtoToPointerTypedefs["PTHREAD_START_ROUTINE"]);
+
+            // Resolution: already-pointer aliases → no fixup generated (both names are valid)
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long (*PTHREAD_START_ROUTINE)(void* lpThreadParameter);
+                typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
+            ");
+            Assert.Empty(result.FnPtrRemaps);
         }
 
         // ── Ambiguous pointer targets skipped ────────────────────────────────
 
         [Fact]
-        public void FnPtr_AlreadyPointer_AliasRemappedToPointerName()
+        public void FnPtr_AlreadyPointer_NoFixupGenerated()
         {
             // Pattern from winnt.h:
             //   typedef DWORD (*PEXCEPTION_ROUTINE)(...);   // already a fn pointer
             //   typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;  // non-pointer alias
-            // The alias (EXCEPTION_ROUTINE, no P/LP prefix) should be remapped TO
-            // the pointer name (PEXCEPTION_ROUTINE), not the other way around.
+            // Both names are valid aliases — no fixup needed.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PEXCEPTION_ROUTINE)(void* EstablisherFrame, unsigned long long DispatcherContext);
                 typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;
             ");
 
-            // The remap should be alias→pointer, not pointer→alias
-            Assert.True(result.FnPtrRemaps.ContainsKey("EXCEPTION_ROUTINE"));
-            Assert.Equal("PEXCEPTION_ROUTINE", result.FnPtrRemaps["EXCEPTION_ROUTINE"]);
-            Assert.Contains("PEXCEPTION_ROUTINE", result.FnPtrExcludes);
+            Assert.Empty(result.FnPtrRemaps);
         }
 
         [Fact]
-        public void FnPtr_BothHavePointerPrefix_Skipped()
+        public void FnPtr_BothHavePointerPrefix_NoFixupForAlreadyPointer()
         {
-            // When both names have P/LP prefixes, we can't determine the direction
-            // by naming convention alone — skip (leave for manual fixups).
+            // When the proto is already a pointer (typedef DWORD (*P...)(...))
+            // and the alias is a typedef-to-typedef, no fixup is generated —
+            // both names are valid aliases for the same pointer-to-function type.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
-                typedef unsigned long (*LPTHREAD_START_ROUTINE)(void* lpThreadParameter);
-                typedef LPTHREAD_START_ROUTINE PTHREAD_START_ROUTINE;
+                typedef unsigned long (*PTHREAD_START_ROUTINE)(void* lpThreadParameter);
+                typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
             ");
 
             Assert.Empty(result.FnPtrRemaps);
+        }
+
+        [Fact]
+        public void FnPtr_AlreadyPointer_VersionedProtoWithUnversionedAlias()
+        {
+            // Pattern from powrprof.h:
+            //   typedef BOOLEAN (CALLBACK* PWRSCHEMESENUMPROC_V2)(UINT, DWORD, ...);
+            //   typedef PWRSCHEMESENUMPROC_V2 PWRSCHEMESENUMPROC;
+            // Both names are valid aliases — no fixup generated.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned char (*PWRSCHEMESENUMPROC_V2)(unsigned int uiIndex, unsigned long dwName);
+                typedef PWRSCHEMESENUMPROC_V2 PWRSCHEMESENUMPROC;
+            ");
+
+            Assert.Empty(result.FnPtrRemaps);
+        }
+
+        [Fact]
+        public void FnPtr_AlreadyPointer_PrefixedProtoWithPrefixedAlias()
+        {
+            // Pattern from patchapi.h — both are already-pointer aliases.
+            // No fixup generated.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef int (*PPATCH_PROGRESS_CALLBACK)(void* CallbackContext, unsigned long CurrentPosition, unsigned long MaximumPosition);
+                typedef PPATCH_PROGRESS_CALLBACK PATCH_PROGRESS_CALLBACK;
+            ");
+
+            Assert.Empty(result.FnPtrRemaps);
+        }
+
+        [Fact]
+        public void FnPtr_BareFunction_DistinguishedFromPointerFunction()
+        {
+            // Verify that bare function typedefs and pointer-to-function typedefs
+            // are correctly classified in the discovery result.
+            var discovery = HeaderSnippetParser.ParseAndDiscover(@"
+                typedef void BARE_CALLBACK(int x);
+                typedef void (*PTR_CALLBACK)(int x);
+            ");
+
+            Assert.Contains("BARE_CALLBACK", discovery.FnBareFunctionTypedefs);
+            Assert.DoesNotContain("BARE_CALLBACK", discovery.FnPointerFunctionTypedefs);
+            Assert.Contains("PTR_CALLBACK", discovery.FnPointerFunctionTypedefs);
+            Assert.DoesNotContain("PTR_CALLBACK", discovery.FnBareFunctionTypedefs);
         }
 
         [Fact]
@@ -602,7 +719,7 @@ namespace Win32MetadataScraperTests
                 typedef void (__stdcall MY_CALLBACK)(int x);
             ");
 
-            Assert.Contains("MY_CALLBACK", discovery.FnProtoTypedefNames);
+            Assert.Contains("MY_CALLBACK", discovery.FnBareFunctionTypedefs);
         }
     }
 }

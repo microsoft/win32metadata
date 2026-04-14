@@ -24,14 +24,23 @@ public class DiscoveryResult
     /// <summary>Tag name → list of typedef names. One tag may have multiple typedefs.</summary>
     public Dictionary<string, List<string>> TagToTypedefs { get; } = new();
 
+    /// <summary>Names of tags that are enums.</summary>
+    public HashSet<string> EnumTags { get; } = new();
+
     /// <summary>Tag name → header file where the typedef was found.</summary>
     public Dictionary<string, string> TagToHeaderFile { get; } = new();
 
     /// <summary>Function prototype typedef name → list of pointer-to-function typedef names.</summary>
     public Dictionary<string, List<string>> FnProtoToPointerTypedefs { get; } = new();
 
-    /// <summary>Names of typedefs whose underlying type is a FunctionProtoType.</summary>
-    public HashSet<string> FnProtoTypedefNames { get; } = new();
+    /// <summary>Names of typedefs whose underlying type is a bare FunctionProtoType (no pointer).</summary>
+    public HashSet<string> FnBareFunctionTypedefs { get; } = new();
+
+    /// <summary>Names of typedefs whose underlying type is PointerType → FunctionProtoType (already a pointer).</summary>
+    public HashSet<string> FnPointerFunctionTypedefs { get; } = new();
+
+    /// <summary>All fn proto typedef names (bare + pointer). Convenience accessor.</summary>
+    public IEnumerable<string> FnProtoTypedefNames => FnBareFunctionTypedefs.Concat(FnPointerFunctionTypedefs);
 }
 
 /// <summary>
@@ -83,7 +92,10 @@ public static class RemapDiscovery
 
             if (typedefs.Count == 1)
             {
-                result[tag] = typedefs[0];
+                if (!string.Equals(tag, typedefs[0], StringComparison.Ordinal))
+                {
+                    result[tag] = typedefs[0];
+                }
             }
             else
             {
@@ -136,7 +148,8 @@ public static class RemapDiscovery
     /// </summary>
     public static Dictionary<string, string> FilterTagRemaps(
         Dictionary<string, string> discovered,
-        Dictionary<string, string> configuredRemaps)
+        Dictionary<string, string> configuredRemaps,
+        ISet<string> enumTags = null)
     {
         var builtins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             { "intptr_t", "ptrdiff_t", "size_t", "uintptr_t", "_GUID" };
@@ -147,7 +160,7 @@ public static class RemapDiscovery
             string tag = kv.Key;
             string typedef = kv.Value;
 
-                        if (builtins.Contains(tag)) continue;
+            if (builtins.Contains(tag)) continue;
             if (tag == typedef) continue;
             if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
                 continue;
@@ -156,7 +169,10 @@ public static class RemapDiscovery
             // Normal remaps strip prefixes (_FOO→FOO, tagFOO→FOO).
             // Suffix-adding remaps (GLUnurbs→GLUnurbsObj) indicate the tag name
             // is already the canonical name used in function signatures.
-            if (typedef.Length > tag.Length && typedef.StartsWith(tag))
+            // A small exception is warranted for enum aliases like
+            // ADS_USER_FLAG→ADS_USER_FLAG_ENUM and
+            // D3D11_SHADER_TRACKING_OPTION→D3D11_SHADER_TRACKING_OPTIONS.
+            if (ShouldSkipSuffixAddingRemap(tag, typedef, enumTags))
                 continue;
 
             result[tag] = typedef;
@@ -165,19 +181,52 @@ public static class RemapDiscovery
         return result;
     }
 
+    private static bool ShouldSkipSuffixAddingRemap(string tag, string typedef, ISet<string> enumTags)
+    {
+        if (typedef.Length <= tag.Length || !typedef.StartsWith(tag, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (enumTags?.Contains(tag) == true)
+        {
+            string suffix = typedef.Substring(tag.Length);
+            if (suffix == "S" || suffix == "_ENUM")
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /// <summary>
     /// Resolves function pointer typedef pairs into remap, exclude, and
-    /// reducePointerLevel entries.
+    /// reducePointerLevel entries. Uses AST structure (bare vs pointer-to-function)
+    /// to determine direction, replacing the old name-prefix heuristic.
+    ///
+    /// Only the "bare function + pointer alias" pattern generates fixups:
+    ///   typedef void CALLBACK(int x);      // bare function proto
+    ///   typedef CALLBACK *LPCALLBACK;      // pointer alias (adds *)
+    /// → remap proto→alias, exclude alias, reducePointerLevel alias
+    ///
+    /// "Already-pointer" typedef aliases (typedef PFOO LPFOO) are skipped —
+    /// both names are valid and may be referenced independently. Likewise, if the
+    /// pointer alias is already excluded by existing settings, auto-discovery defers
+    /// to that manual fixup rather than emitting a duplicate.
     /// </summary>
     public static ResolvedRemaps ResolveFunctionPointerFixups(
-        HashSet<string> fnProtoTypedefNames,
-        Dictionary<string, List<string>> fnProtoToPointerTypedefs)
+        DiscoveryResult discovery,
+        ISet<string> configuredExcludes = null)
     {
+        configuredExcludes ??= new HashSet<string>(StringComparer.Ordinal);
         var result = new ResolvedRemaps();
 
-        foreach (var protoName in fnProtoTypedefNames)
+        // Only process bare function typedefs — these are the ones that need
+        // fixups when they have a pointer alias (the alias adds * indirection).
+        foreach (var protoName in discovery.FnBareFunctionTypedefs)
         {
-            if (!fnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
+            if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
                 continue;
 
             if (aliasNames.Count != 1)
@@ -185,39 +234,23 @@ public static class RemapDiscovery
 
             string aliasName = aliasNames[0];
 
-            bool protoHasPointerPrefix = HasPointerPrefix(protoName);
-            bool aliasHasPointerPrefix = HasPointerPrefix(aliasName);
+            if (configuredExcludes.Contains(aliasName))
+                continue;
 
-            if (protoHasPointerPrefix && !aliasHasPointerPrefix)
-            {
-                // "Already pointer" pattern: PEXCEPTION_ROUTINE (ptr) → EXCEPTION_ROUTINE (alias)
-                // The alias should be remapped TO the pointer name.
-                // Remap: EXCEPTION_ROUTINE=PEXCEPTION_ROUTINE
-                // Exclude: PEXCEPTION_ROUTINE (it's the canonical pointer typedef)
-                result.FnPtrRemaps[aliasName] = protoName;
-                result.FnPtrExcludes.Add(protoName);
-                // No reducePointerLevel — the proto is already a pointer, no extra * to strip
-            }
-            else if (!protoHasPointerPrefix && aliasHasPointerPrefix)
-            {
-                // Standard pattern: TIMECALLBACK (proto) → LPTIMECALLBACK (ptr alias)
-                // Remap: TIMECALLBACK=LPTIMECALLBACK
-                // Exclude: LPTIMECALLBACK
-                result.FnPtrRemaps[protoName] = aliasName;
-                result.FnPtrExcludes.Add(aliasName);
-                result.ReducePointerLevel.Add(aliasName);
-            }
-            // else: both or neither have prefix — skip (can't determine direction)
+            // Bare function proto + pointer alias → standard fixup
+            // e.g., typedef void TIMECALLBACK(UINT, ...); typedef TIMECALLBACK *LPTIMECALLBACK;
+            result.FnPtrRemaps[protoName] = aliasName;
+            result.FnPtrExcludes.Add(aliasName);
+            result.ReducePointerLevel.Add(aliasName);
         }
 
-        return result;
-    }
+        // For already-pointer typedefs (typedef DWORD (*PFOO)(...); typedef PFOO LPFOO;)
+        // we do NOT generate fixups. Both names are valid typedef aliases for the
+        // same pointer-to-function type, and code may reference either name.
+        // The old functionPointerFixups.json had curated entries for specific cases,
+        // but auto-excluding all aliases is too aggressive.
 
-    private static bool HasPointerPrefix(string name)
-    {
-        return name.StartsWith("LP")
-            || name.StartsWith("PFN")
-            || (name.Length > 1 && name[0] == 'P' && char.IsUpper(name[1]));
+        return result;
     }
 
     /// <summary>
@@ -258,16 +291,24 @@ public static class RemapDiscovery
                         tagName = $"{parent.Name}::{tagName}";
 
                     string typedefName = typedefDecl.Name;
-                    if (!string.IsNullOrEmpty(tagName) && tagName != typedefName)
+                    if (!string.IsNullOrEmpty(tagName))
                     {
+                        if (tagDecl is EnumDecl)
+                        {
+                            result.EnumTags.Add(tagName);
+                        }
+
                         if (!result.TagToTypedefs.TryGetValue(tagName, out var list))
                             result.TagToTypedefs[tagName] = list = new List<string>();
+
+                        // Anonymous tags can inherit their first typedef name as a
+                        // synthesized tag name. Preserve that identity typedef so a
+                        // later alias does not become the auto-selected canonical name.
                         if (!list.Contains(typedefName))
                         {
                             list.Add(typedefName);
                         }
 
-                        // Record which header file contains this typedef
                         if (!result.TagToHeaderFile.ContainsKey(tagName))
                         {
                             var location = typedefDecl.Location;
@@ -283,7 +324,7 @@ public static class RemapDiscovery
             }
             else if (underlyingType is FunctionProtoType)
             {
-                result.FnProtoTypedefNames.Add(typedefDecl.Name);
+                result.FnBareFunctionTypedefs.Add(typedefDecl.Name);
             }
             else if (underlyingType is PointerType ptrType)
             {
@@ -291,7 +332,7 @@ public static class RemapDiscovery
 
                 if (pointee is FunctionProtoType)
                 {
-                    result.FnProtoTypedefNames.Add(typedefDecl.Name);
+                    result.FnPointerFunctionTypedefs.Add(typedefDecl.Name);
                 }
                 else if (pointee is TypedefType tdType)
                 {

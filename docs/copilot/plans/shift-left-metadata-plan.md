@@ -450,9 +450,17 @@ DoAll.ps1
 4. Add `#include "win32metadata.h"` to the scraper include chain
 5. Modify `MetadataSyntaxTreeCleaner` to recognize `[NativeAnnotation("w32m:...")]`
    attributes (v18 emits these instead of / in addition to `CppAttributeList`)
-6. Convert a small pilot set (~20 functions) of `WithSetLastError.rsp` entries into
+6. Add a canonical-name guardrail for tag/typedef remaps before removing manual
+   remaps wholesale. When a tag has multiple viable typedef names, prefer the
+   existing public name that participates in `requiredNamespacesForNames.rsp`
+   and other emitter namespace policy, rather than choosing purely by lexical
+   cleanup. This preserves cases like
+   `_RTL_UMS_THREAD_INFO_CLASS=UMS_THREAD_INFO_CLASS`, where auto-selecting
+   `RTL_UMS_THREAD_INFO_CLASS` created a namespace-cycle regression
+   (`System.Power -> System.SystemServices -> System.Threading -> System.Power`).
+7. Convert a small pilot set (~20 functions) of `WithSetLastError.rsp` entries into
    header annotations and verify the winmd output is identical
-7. Write tests comparing winmd output before/after
+8. Write tests comparing winmd output before/after
 
 **Success criteria:** A header with `_Sets_last_error_` produces the same winmd metadata
 as the current `--with-setlasterror` rsp entry.

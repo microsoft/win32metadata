@@ -104,17 +104,21 @@ namespace Win32MetadataScraperTests
             configuredRemaps ??= new Dictionary<string, string>();
             var discovery = ParseAndDiscover(headerContent);
             var resolved = RemapDiscovery.ResolveTagRemaps(discovery.TagToTypedefs, configuredRemaps);
-            return RemapDiscovery.FilterTagRemaps(resolved, configuredRemaps);
+            return RemapDiscovery.FilterTagRemaps(resolved, configuredRemaps, discovery.EnumTags);
         }
 
         /// <summary>
         /// Convenience: parse, discover, and resolve function pointer fixups.
         /// </summary>
-        public static ResolvedRemaps ParseAndResolveFnPtrFixups(string headerContent)
+        public static ResolvedRemaps ParseAndResolveFnPtrFixups(
+            string headerContent,
+            IEnumerable<string> configuredExcludes = null)
         {
             var discovery = ParseAndDiscover(headerContent);
-            return RemapDiscovery.ResolveFunctionPointerFixups(
-                discovery.FnProtoTypedefNames, discovery.FnProtoToPointerTypedefs);
+            var excludeSet = configuredExcludes is null
+                ? null
+                : new HashSet<string>(configuredExcludes, StringComparer.Ordinal);
+            return RemapDiscovery.ResolveFunctionPointerFixups(discovery, excludeSet);
         }
     }
 }

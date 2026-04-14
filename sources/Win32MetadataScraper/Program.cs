@@ -57,6 +57,9 @@ class Program
             var clangArgs = BuildClangArgs(settings);
             var configOptions = BuildOptionsFlags(settings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
+            var configuredExcludes = new HashSet<string>(
+                settings.GetValueOrDefault("--exclude") ?? new List<string>(),
+                StringComparer.Ordinal);
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
@@ -103,11 +106,10 @@ class Program
 
             // Resolve tag remaps using disambiguation (no exclusion list needed)
             var resolvedTagRemaps = RemapDiscovery.ResolveTagRemaps(discovery.TagToTypedefs, configuredRemaps);
-            var autoRemaps = RemapDiscovery.FilterTagRemaps(resolvedTagRemaps, configuredRemaps);
+            var autoRemaps = RemapDiscovery.FilterTagRemaps(resolvedTagRemaps, configuredRemaps, discovery.EnumTags);
 
             // Resolve function pointer fixups
-            var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(
-                discovery.FnProtoTypedefNames, discovery.FnProtoToPointerTypedefs);
+            var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(discovery, configuredExcludes);
 
             // Merge all remaps: auto tag remaps + fn ptr remaps + configured (configured wins)
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);

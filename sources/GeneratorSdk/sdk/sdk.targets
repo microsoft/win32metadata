@@ -200,6 +200,8 @@
       Condition="'$(SkipScraping)' != 'true'"
       Partitions="@(Partition)"
       ResponseFiles="@(ScraperRsp)"
+      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
+      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"
       HeaderTextFile="$(FinalScraperHeaderFile)"
       SdkIncRoot="$(SdkIncRoot)"
       WinSdkRoot="$(TargetPlatformSdkRootOverride)"

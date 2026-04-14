@@ -127,79 +127,166 @@ Static class with AST walking and heuristic resolution:
 
 | Aspect | Status |
 |--------|--------|
-| Win32MetadataScraper | ✅ Single-pass scraper, process isolated, no reflection |
-| Tag remap discovery | ✅ Auto-discovers typedef-tag remaps from AST |
-| Fn ptr fixup discovery | ✅ Auto-discovers function pointer remappings from AST |
-| Manual remap removal | ✅ **12,197 entries removed** from scraper.settings.rsp (12,700→525) |
-| Manual fn ptr removal | ✅ **~160 entries removed** from functionPointerFixups.json (575→~20) |
-| Cross-partition fixes | ✅ 7 partition main.cpp files updated with #include directives |
-| Disambiguation heuristics | ✅ Case-insensitive prefix stripping, suffix filter, configured fallback |
-| Unit tests | ✅ Comprehensive tests for tag-typedef, fn ptr, and edge cases |
-| End-to-end build | ⬜ Needs full build verification on this branch |
+| Win32MetadataScraper | ✅ Single-pass scraper is in place and is the right long-term architecture |
+| Tag remap discovery | ✅ Auto-discovers typedef→tag remaps and feeds them back into generation before emit |
+| Fn ptr discovery model | ✅ Discovery now distinguishes bare-function typedefs from already-pointer typedef aliases |
+| Manual remap removal | ✅ **~12,197 entries removed** from `scraper.settings.rsp` |
+| Manual fn ptr removal | ⚠️ Large reduction landed, but the branch still carries temporary manual fixups for delegate correctness while discovery is tightened |
+| Main-branch baseline | ✅ A detached `origin/main` worktree passes all 13 `Windows.Win32.Tests` |
+| D2D emit regression | ✅ Fixed by changing `ID2D1SimplifiedGeometrySink=ID2D1SimplifiedGeometrySink` |
+| Empty delegates | ✅ No longer failing in the current branch validation run |
+| Duplicate fn ptr fixups | ✅ Auto-discovery now defers to configured/manual excludes, and sidecar ingestion dedupes against the manual fixup RSPs |
+| End-to-end validation | ⚠️ `DoAll.ps1 -ExcludePackages -ExcludeSamples` now builds the winmd and passes all tests except `NoCyclicalNamespaces` |
+| Remaining blocker | ⚠️ One 3-node namespace cycle remains: `System.Power → System.SystemServices → System.Threading → System.Power` |
+
+### Validation Snapshot
+
+Latest validation was run against a fresh generated tree (`generation\WinSDK\obj`
+deleted, `bin\Windows.Win32.winmd` deleted first):
+
+- `dotnet build BuildTools -c Release` — passed
+- `dotnet test tests\Win32MetadataScraperTests -c Release --no-restore` — **34/34 passed**
+- `.\DoAll.ps1 -ExcludePackages -ExcludeSamples` — built tools, scraped headers,
+  emitted `Windows.Win32.winmd`, passed `MetadataUtils.Tests` and scraper tests,
+  passed **12/13** `Windows.Win32.Tests`, failed only `NoCyclicalNamespaces`
+
+Latest `showNamespaceCycles` output:
+
+```text
+Windows.Win32.System.Power
+  Cyclical dependent namespaces: Windows.Win32.System.SystemServices
+Windows.Win32.System.SystemServices
+  Cyclical dependent namespaces: Windows.Win32.System.Threading
+Windows.Win32.System.Threading
+  Cyclical dependent namespaces: Windows.Win32.System.Power
+```
 
 ---
 
-## What Was Done (April 2026)
+## What Was Done
 
-### 1. Created Win32MetadataScraper tool
-- New project `sources/Win32MetadataScraper/` with NuGet references to ClangSharp
-  v17.0.1 (same version pinned by the repo)
-- `Program.cs`: full RSP parser, PInvokeGenerator configuration builder, single-pass
-  scrape + discovery pipeline
-- `RemapDiscovery.cs`: AST walker and heuristic resolution logic
+### 1. Established the correct validation path
 
-### 2. Removed ~12,197 manual --remap entries
-The previous agent's approach (ClangSharpWorker with reflection) could not remove
-manual entries because removing them changed PInvokeGenerator's generation-time
-behavior. The new approach (single-pass, merged remaps before generation) resolves
-this: auto-discovered remaps are merged INTO the remap set BEFORE GenerateBindings
-runs, so PInvokeGenerator sees all remaps during generation.
+Early validation on this branch only built the tools and ran unit tests. That was
+not enough. Real validation for this work must exercise the full scrape + emit +
+winmd test pipeline:
 
-This enabled safely removing ~96% of manual `--remap` entries. The remaining ~525
-entries are semantic overrides that cannot be auto-derived:
-- Primitive type aliases (`_LARGE_INTEGER=long`, `DWORD_PTR=UIntPtr`)
-- Public API name overrides (`_RTL_CRITICAL_SECTION=CRITICAL_SECTION`)
-- MIDL-generated name remaps (`__MIDL___MIDL_itf_*=FriendlyName`)
-- Nested type remaps (`D3D11_AUTHENTICATED_PROTECTION_FLAGS::__MIDL_*=_Flags_e__Struct`)
-- Opaque pointer types (`_HIDP_PREPARSED_DATA*=IntPtr`)
+```powershell
+.\DoAll.ps1 -ExcludePackages -ExcludeSamples
+```
 
-### 3. Removed ~160 function pointer fixup entries
-Auto-discovers fn ptr prototype→alias pairs from the AST and generates appropriate
-`--remap`, `--exclude`, and `--reducePointerLevel` entries. The remaining ~20
-entries in `functionPointerFixups.json` are edge cases:
-- Entries with no `pointerType` (solo fn ptr typedefs)
-- `alreadyPointer` entries (reversed direction)
-- Names that don't follow standard LP/PFN/P prefix convention
+That is the command that exposed the real regressions.
 
-### 4. Fixed cross-partition remap visibility
-7 partition `main.cpp` files were updated with `#include` directives to ensure
-typedef declarations are visible during scraping:
-- `IpHlp/main.cpp` ← `#include <inaddr.h>`
-- `NetMgmt/main.cpp` ← `#include <wincrypt.h>`
-- `RRas/main.cpp` ← `#include <inaddr.h>`
-- `Security.Cryptography.Sip/main.cpp` ← `#include <mscat.h>`
-- `Security.WinTrust/main.cpp` ← `#include <mssip.h>`
-- `TermServ/main.cpp` ← `#include <winsock.h>`
-- `Wsw/main.cpp` ← `#include <schannel.h>`
+### 2. Fixed the first real end-to-end regression
 
-### 5. Fixed thread-safety bug in ScrapeHeaders
-The original `ret &= this.ProcessPartition(...)` in `Parallel.ForEach` was a race
-condition (non-atomic boolean AND). Replaced with `Interlocked.Increment` on a
-failure count.
+The initial full build failed during emit because `scraper.settings.rsp` still had:
 
-### 6. Added unit tests
-- `tests/Win32MetadataScraperTests/` with `RemapDiscoveryTests.cs` covering:
-  - Simple tag-typedef patterns (underscore, tag prefix, lowercase, trailing underscore, enum)
-  - Multi-typedef disambiguation (prefix stripping, case-insensitive, configured fallback)
-  - Function pointer fixup resolution (standard LP/PFN pattern, already-pointer pattern)
-  - Edge cases (namespace-scoped tags, identity remaps, built-in filtering)
-- `HeaderSnippetParser.cs` test helper for parsing C header snippets via ClangSharp
+```text
+ID2D1SimplifiedGeometrySink=IDWriteGeometrySink
+```
 
-### 7. Other changes
-- `NuGetPackageSource` property no longer `[Required]` (tool installed via NuGet packages, not dotnet tool)
-- `MaxDegreeOfParallelism` changed from `ProcessorCount/2` to `ProcessorCount`
-- `ChangesSinceLastRelease.txt` emptied
-- Version bumped to 71.0-preview
+That remap caused `ID2D1GeometrySink` to inherit from the wrong interface identity
+at emit time. Changing it to:
+
+```text
+ID2D1SimplifiedGeometrySink=ID2D1SimplifiedGeometrySink
+```
+
+unblocked emit and allowed the run to reach the integration tests.
+
+### 3. Proved the branch regressions against a clean main baseline
+
+A detached worktree at `C:\repos\win32metadata.2.main` was used to build
+`origin/main` with the same real pipeline. Main passes all 13
+`Windows.Win32.Tests`, so both of the branch failures below are genuine branch
+regressions:
+
+- `NoInvalidEmptyDelegates`
+- `NoCyclicalNamespaces`
+
+### 4. Tightened fn-ptr discovery semantics
+
+The scraper no longer treats all function-pointer typedef shapes as equivalent.
+Discovery now records:
+
+- bare-function typedefs (`typedef void CALLBACK(...);`)
+- already-pointer typedefs (`typedef DWORD (*PFOO)(...);`)
+
+That distinction is important because only the first shape should automatically
+generate `--remap` / `--exclude` / `--reducePointerLevel` fixups by default.
+
+Unit tests were expanded to cover:
+
+- non-standard pointer alias names
+- already-pointer alias chains
+- versioned/unversioned aliases
+- configured excludes suppressing auto-generated fixups
+
+### 5. Restored delegate correctness conservatively
+
+The empty-delegate failure was not fully solvable by the structural split alone.
+Some legacy cases are still carried by curated fixups. To keep the branch correct
+while continuing to shrink the manual file, the following entries were restored to
+`functionPointerFixups.json` as a temporary measure:
+
+- `PTHREAD_START_ROUTINE -> LPTHREAD_START_ROUTINE` (`alreadyPointer: true`)
+- `INTERNET_STATUS_CALLBACK -> LPINTERNET_STATUS_CALLBACK` (`alreadyPointer: true`)
+- `INSTALLUI_HANDLER_RECORD -> PINSTALLUI_HANDLER_RECORD`
+- `PBMCALLBACKFN -> LPBMCALLBACKFN`
+- `ACMDRIVERPROC -> LPACMDRIVERPROC`
+- `PTOP_LEVEL_EXCEPTION_FILTER -> LPTOP_LEVEL_EXCEPTION_FILTER`
+- `LPFNADDPROPSHEETPAGE -> LPFNSVADDPROPSHEETPAGE`
+- `PFIBER_START_ROUTINE -> LPFIBER_START_ROUTINE`
+
+This is a correctness-preserving fallback, not the desired end state.
+
+### 6. Traced and suppressed the obvious duplicate `reducePointerLevel` sources
+
+The namespace-cycle investigation found 9 suspect `reducePointerLevel` entries that
+were present on this branch but not on main:
+
+- `LPMAPIALLOCATEBUFFER`
+- `LPMAPIALLOCATEMORE`
+- `LPMAPIFREEBUFFER`
+- `PENCLAVE_TARGET_FUNCTION`
+- `PEXCEPTION_ROUTINE`
+- `PLSA_GET_EXTENDED_CALL_FLAGS`
+- `WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER`
+- `WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER`
+- `WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER`
+
+Those resolved to three buckets:
+
+1. Already manually excluded in partition or global scraper settings
+2. Already present in the manual function-pointer fixup RSPs
+3. Newly auto-discovered entries that should defer to existing manual configuration
+
+The current code now does two conservative things:
+
+1. `Win32MetadataScraper` passes the configured `--exclude` set into
+   `ResolveFunctionPointerFixups` and skips auto-generating a fn-ptr fixup when the
+   alias is already manually excluded.
+2. `ScrapeHeaders` parses the manual function-pointer fixup RSPs and drops matching
+   auto-generated remap / exclude / reducePointerLevel entries while reading the
+   scraper sidecar files.
+
+After that change:
+
+- the 9 suspect names above no longer appear in `emitter.autoFnPtr.generated.rsp`
+- overlap between auto and manual `--reducePointerLevel` files is now **0**
+- the branch still has the same 3-node namespace cycle, so those duplicates were
+  real noise, but not the last root cause
+
+### 7. Current interpretation
+
+The branch is now in a cleaner debugging state:
+
+- empty delegates are fixed
+- duplicate/manual fn-ptr fixups are suppressed correctly
+- the remaining failure is isolated to the namespace-cycle regression
+
+That is a much better place for the next round of investigation than the earlier
+state where delegate failures and duplicate fixups were interleaved.
 
 ---
 
@@ -207,44 +294,40 @@ failure count.
 
 ### High Priority
 
-- [ ] **Full end-to-end build verification** — Run `./DoAll.ps1 -Clean` on this
-  branch and compare the resulting winmd against the main branch baseline.
-  Verify IL equivalence.
+- [ ] **Find the remaining cause of the `Power/SystemServices/Threading` cycle** —
+  the obvious duplicate fn-ptr fixups are no longer in the auto-generated RSPs, but
+  the emitted winmd still forms the same 3-namespace cycle.
 
-- [ ] **Remove remaining auto-derivable remaps from scraper.settings.rsp** —
-  The current 525 remaining entries likely include some that ARE auto-derivable
-  but were conservatively kept. Audit categories:
-  - `tagFOO=FOO` patterns (e.g., `tagRASCONNA=RASCONNA`) — these follow standard
-    prefix patterns and should be auto-derived
-  - `_FOO=FOO` patterns (e.g., `_WSACMSGHDR=WSACMSGHDR`) — standard underscore
-    prefix, should be auto-derived
-  - `FWPS_*_=FWPS_*` trailing underscore patterns — should be auto-derived
+- [ ] **Compare namespace dependency edges against `origin/main` again now that the
+  duplicate fn-ptr entries are gone** — focus on the three namespaces still in the
+  cycle instead of the broader earlier graph.
 
-- [ ] **Remove remaining auto-derivable fn ptr fixups from functionPointerFixups.json** —
-  The 20 remaining entries should be audited. Some may be auto-derivable with
-  improved heuristics (e.g., `_WHEA_*` entries, `DRVCALLBACK→LPDRVCALLBACK`).
+- [ ] **Decide which of the temporary 8 manual function-pointer fixups can be
+  eliminated next** — they are currently justified by correctness, but the branch
+  goal is still to keep shrinking `functionPointerFixups.json`, not grow it.
 
 ### Medium Priority
 
-- [ ] **Improve `HasPointerPrefix` heuristic** — The current check `StartsWith("P")`
-  is overly broad. Consider requiring `StartsWith("LP")`, `StartsWith("PFN")`, or
-  `StartsWith("P") && name[1] is uppercase` to reduce false positives.
+- [ ] **Audit the remaining cross-partition consistency warnings** — the latest full
+  build still warned about raw-tag declarations such as `in_addr`, `sockaddr`,
+  `timeval`, `_CERT_CONTEXT`, and `_SecPkgContext_IssuerListInfoEx`. These may be
+  orthogonal, but they should be reviewed once the namespace cycle is fixed.
 
-- [ ] **Validate cross-partition consistency** — The `CheckCrossPartitionRemapConsistency`
-  method currently only warns. After build verification, consider whether it should
-  fail the build to prevent regressions.
+- [ ] **Continue whittling down `scraper.settings.rsp`** — after the namespace cycle
+  is understood, resume removing still-auto-derivable tag remaps from the manual
+  RSP.
 
-- [ ] **Remove dead code** — `Program.cs` has a `FilterRemaps()` method (lines 250-277)
-  that is never called; it duplicates `RemapDiscovery.FilterTagRemaps`.
+- [ ] **Revisit already-pointer alias handling** — the current model is deliberately
+  conservative. A future refinement may allow more of those cases to move out of
+  `functionPointerFixups.json` without reintroducing empty delegates.
 
 ### Low Priority / Future
 
-- [ ] **Extract `_usedRemappings` for dead entry detection** — Add analysis to
-  identify which remaining manual `--remap` entries PInvokeGenerator never actually
-  uses (dead entries that can be removed).
+- [ ] **Extract `_usedRemappings` for dead-entry detection** — this would make the
+  remaining manual remap audit much cheaper.
 
-- [ ] **Upstream recommendation** — Contribute a PR to dotnet/ClangSharp adding a
-  public API for remap discovery data, eliminating the need for parallel AST walking.
+- [ ] **Upstream recommendation** — if ClangSharp ever exposes remap-discovery data
+  directly, the repo could stop maintaining its parallel AST walk.
 
 ---
 
