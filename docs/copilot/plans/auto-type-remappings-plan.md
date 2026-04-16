@@ -204,12 +204,12 @@ regressions:
 - `NoInvalidEmptyDelegates`
 - `NoCyclicalNamespaces`
 
-Temporary compatibility note: `DxcBuffer` is intentionally pinned with
-`DxcBuffer=DxcBuffer` in `scraper.settings.rsp`. The DXC docs now use the
-newer `DxcText` name, but the clean `main` baseline still emits `DxcBuffer`,
-so the branch keeps the historical public name until we intentionally accept
-that winmd change. The scraper response-file parser now skips `#` comment
-lines, so that note can also live inline next to the pin in the `.rsp`.
+The scraper response-file parser now skips whole `#` comment lines, so inline
+notes in `scraper.settings.rsp` are safe again. In the current branch state we
+removed the temporary branch-only `DxcBuffer=DxcBuffer` pin so the file stays a
+pure subset of clean `main`; that means `DxcBuffer` vs `DxcText` is again an
+open compatibility drift to resolve separately from the restored main-era
+manual remaps such as `IDxcBlobWide=IDxcBlobUtf16`.
 
 ### 4. Tightened fn-ptr discovery semantics
 
