@@ -57,6 +57,9 @@ class Program
             var clangArgs = BuildClangArgs(settings);
             var configOptions = BuildOptionsFlags(settings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
+            var configuredAutoRemapExcludes = new HashSet<string>(
+                settings.GetValueOrDefault("--exclude-auto-remap") ?? new List<string>(),
+                StringComparer.Ordinal);
             var configuredExcludes = new HashSet<string>(
                 settings.GetValueOrDefault("--exclude") ?? new List<string>(),
                 StringComparer.Ordinal);
@@ -104,9 +107,14 @@ class Program
             // ── Walk AST to discover all typedef-tag and function pointer relationships ──
             var discovery = RemapDiscovery.WalkTranslationUnit(translationUnit.TranslationUnitDecl);
 
-            // Resolve tag remaps using disambiguation (no exclusion list needed)
+            // Resolve tag remaps using disambiguation, then apply opt-outs for
+            // compatibility cases where we intentionally keep the historical public name.
             var resolvedTagRemaps = RemapDiscovery.ResolveTagRemaps(discovery.TagToTypedefs, configuredRemaps);
-            var autoRemaps = RemapDiscovery.FilterTagRemaps(resolvedTagRemaps, configuredRemaps, discovery.EnumTags);
+            var autoRemaps = RemapDiscovery.FilterTagRemaps(
+                resolvedTagRemaps,
+                configuredRemaps,
+                discovery.EnumTags,
+                configuredAutoRemapExcludes);
 
             // Resolve function pointer fixups
             var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(discovery, configuredExcludes);

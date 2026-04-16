@@ -99,12 +99,16 @@ namespace Win32MetadataScraperTests
         /// </summary>
         public static Dictionary<string, string> ParseAndResolveTagRemaps(
             string headerContent,
-            Dictionary<string, string> configuredRemaps = null)
+            Dictionary<string, string> configuredRemaps = null,
+            IEnumerable<string> autoRemapExcludes = null)
         {
             configuredRemaps ??= new Dictionary<string, string>();
+            var autoRemapExcludeSet = autoRemapExcludes is null
+                ? null
+                : new HashSet<string>(autoRemapExcludes, StringComparer.Ordinal);
             var discovery = ParseAndDiscover(headerContent);
             var resolved = RemapDiscovery.ResolveTagRemaps(discovery.TagToTypedefs, configuredRemaps);
-            return RemapDiscovery.FilterTagRemaps(resolved, configuredRemaps, discovery.EnumTags);
+            return RemapDiscovery.FilterTagRemaps(resolved, configuredRemaps, discovery.EnumTags, autoRemapExcludeSet);
         }
 
         /// <summary>

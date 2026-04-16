@@ -205,11 +205,23 @@ regressions:
 - `NoCyclicalNamespaces`
 
 The scraper response-file parser now skips whole `#` comment lines, so inline
-notes in `scraper.settings.rsp` are safe again. In the current branch state we
-removed the temporary branch-only `DxcBuffer=DxcBuffer` pin so the file stays a
-pure subset of clean `main`; that means `DxcBuffer` vs `DxcText` is again an
-open compatibility drift to resolve separately from the restored main-era
-manual remaps such as `IDxcBlobWide=IDxcBlobUtf16`.
+notes in `scraper.settings.rsp` are safe again. The branch now uses a dedicated
+`--exclude-auto-remap` switch for temporary compatibility pins rather than
+identity remaps. The current pinned tag names are:
+
+- `DxcBuffer`
+- `_DnsRecordOptA`
+- `_ERROR_INFOW`
+- `D3D12_SERIALIZED_BLOCK_TYPE`
+- `_SPLCLIENT_INFO_2_V3`
+- `DTC_STATUS_`
+- `WHV_PROCESSOR_INTERCEPT_COUNTERS`
+- `WHV_PROCESSOR_EVENT_COUNTERS`
+- `CompilationRelaxationsEnum`
+
+With those opt-outs in place, a clean `EmitWinmd` run compares equal to the
+clean `main` worktree winmd (`No unknown differences found.`), and the focused
+metadata test suites pass again.
 
 ### 4. Tightened fn-ptr discovery semantics
 

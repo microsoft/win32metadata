@@ -149,8 +149,10 @@ public static class RemapDiscovery
     public static Dictionary<string, string> FilterTagRemaps(
         Dictionary<string, string> discovered,
         Dictionary<string, string> configuredRemaps,
-        ISet<string> enumTags = null)
+        ISet<string> enumTags = null,
+        ISet<string> autoRemapExcludes = null)
     {
+        autoRemapExcludes ??= new HashSet<string>(StringComparer.Ordinal);
         var builtins = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             { "intptr_t", "ptrdiff_t", "size_t", "uintptr_t", "_GUID" };
         var result = new Dictionary<string, string>();
@@ -162,6 +164,7 @@ public static class RemapDiscovery
 
             if (builtins.Contains(tag)) continue;
             if (tag == typedef) continue;
+            if (autoRemapExcludes.Contains(tag)) continue;
             if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
                 continue;
             if (IsLikelyComInterfaceTag(tag))

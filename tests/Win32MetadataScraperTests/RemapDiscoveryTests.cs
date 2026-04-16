@@ -344,6 +344,19 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void AutoRemapExclude_SkipsConfiguredTag()
+        {
+            var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
+                typedef struct DxcBuffer {
+                    void* Ptr;
+                    unsigned long long Size;
+                } DxcText;
+            ", autoRemapExcludes: new[] { "DxcBuffer" });
+
+            Assert.False(remaps.ContainsKey("DxcBuffer"));
+        }
+
+        [Fact]
         public void EnumSuffixAdding_EnumAliasSuffixAllowed()
         {
             var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
