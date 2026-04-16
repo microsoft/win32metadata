@@ -164,6 +164,8 @@ public static class RemapDiscovery
             if (tag == typedef) continue;
             if (configuredRemaps.TryGetValue(tag, out string configuredValue) && configuredValue != typedef)
                 continue;
+            if (IsLikelyComInterfaceTag(tag))
+                continue;
 
             // Skip remaps where the typedef is LONGER than the tag (adds a suffix).
             // Normal remaps strip prefixes (_FOO→FOO, tagFOO→FOO).
@@ -179,6 +181,26 @@ public static class RemapDiscovery
         }
 
         return result;
+    }
+
+    private static bool IsLikelyComInterfaceTag(string name)
+    {
+        if (string.IsNullOrEmpty(name) || name.Length < 2)
+        {
+            return false;
+        }
+
+        if (name[0] != 'I' || !char.IsUpper(name[1]))
+        {
+            return false;
+        }
+
+        if (name.EndsWith("Vtbl", StringComparison.Ordinal) || name.Contains('_'))
+        {
+            return false;
+        }
+
+        return name.Any(char.IsLower);
     }
 
     private static bool ShouldSkipSuffixAddingRemap(string tag, string typedef, ISet<string> enumTags)

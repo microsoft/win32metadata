@@ -315,6 +315,35 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void InterfaceAlias_Filtered()
+        {
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                new Dictionary<string, string>
+                {
+                    ["ID2D1SimplifiedGeometrySink"] = "IDWriteGeometrySink",
+                },
+                new Dictionary<string, string>());
+
+            Assert.False(filtered.ContainsKey("ID2D1SimplifiedGeometrySink"));
+        }
+
+        [Fact]
+        public void InterfaceAlias_WithManualConfigStillNotAutoEmitted()
+        {
+            var filtered = Win32MetadataScraper.RemapDiscovery.FilterTagRemaps(
+                new Dictionary<string, string>
+                {
+                    ["ID3D10Blob"] = "ID3DBlob",
+                },
+                new Dictionary<string, string>
+                {
+                    ["ID3D10Blob"] = "ID3DBlob",
+                });
+
+            Assert.False(filtered.ContainsKey("ID3D10Blob"));
+        }
+
+        [Fact]
         public void EnumSuffixAdding_EnumAliasSuffixAllowed()
         {
             var remaps = HeaderSnippetParser.ParseAndResolveTagRemaps(@"
@@ -608,12 +637,16 @@ namespace Win32MetadataScraperTests
         // ── Ambiguous pointer targets skipped ────────────────────────────────
 
         [Fact]
-        public void FnPtr_AlreadyPointer_NoFixupGenerated()
+        public void FnPtr_AlreadyPointer_NoAutoFixupGenerated()
         {
             // Pattern from winnt.h:
             //   typedef DWORD (*PEXCEPTION_ROUTINE)(...);   // already a fn pointer
             //   typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;  // non-pointer alias
-            // Both names are valid aliases — no fixup needed.
+            // Discovery intentionally skips auto-fixing this shape because the AST
+            // alone does not tell us which public name should win. The repo's
+            // current baseline still canonicalizes this one manually with:
+            //   --exclude PEXCEPTION_ROUTINE
+            //   --remap PEXCEPTION_ROUTINE=EXCEPTION_ROUTINE
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PEXCEPTION_ROUTINE)(void* EstablisherFrame, unsigned long long DispatcherContext);
                 typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;

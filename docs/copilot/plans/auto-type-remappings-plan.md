@@ -204,6 +204,12 @@ regressions:
 - `NoInvalidEmptyDelegates`
 - `NoCyclicalNamespaces`
 
+Temporary compatibility note: `DxcBuffer` is intentionally pinned with
+`DxcBuffer=DxcBuffer` in `scraper.settings.rsp`. The DXC docs now use the
+newer `DxcText` name, but the clean `main` baseline still emits `DxcBuffer`,
+so the branch keeps the historical public name until we intentionally accept
+that winmd change.
+
 ### 4. Tightened fn-ptr discovery semantics
 
 The scraper no longer treats all function-pointer typedef shapes as equivalent.
