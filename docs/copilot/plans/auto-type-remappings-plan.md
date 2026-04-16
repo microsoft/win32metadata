@@ -208,7 +208,8 @@ Temporary compatibility note: `DxcBuffer` is intentionally pinned with
 `DxcBuffer=DxcBuffer` in `scraper.settings.rsp`. The DXC docs now use the
 newer `DxcText` name, but the clean `main` baseline still emits `DxcBuffer`,
 so the branch keeps the historical public name until we intentionally accept
-that winmd change.
+that winmd change. The scraper response-file parser now skips `#` comment
+lines, so that note can also live inline next to the pin in the `.rsp`.
 
 ### 4. Tightened fn-ptr discovery semantics
 

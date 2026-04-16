@@ -317,6 +317,7 @@ class Program
         {
             string line = rawLine.Trim();
             if (string.IsNullOrEmpty(line)) continue;
+            if (line.StartsWith("#", StringComparison.Ordinal)) continue;
 
             if (line.StartsWith("@"))
             {

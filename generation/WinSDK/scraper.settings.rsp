@@ -175,6 +175,7 @@ ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistr
 D3D11_AUTHENTICATED_PROTECTION_FLAGS::__MIDL___MIDL_itf_d3d11_0000_0034_0001=_Flags_e__Struct
 DEVPROPGUID=Guid
 DWORD_PTR=UIntPtr
+# Temporary compatibility pin: clean main still emits DxcBuffer.
 DxcBuffer=DxcBuffer
 PEXCEPTION_ROUTINE=EXCEPTION_ROUTINE
 PBOOL=BOOL*
