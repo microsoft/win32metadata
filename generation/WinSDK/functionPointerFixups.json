@@ -1,17 +1,5 @@
 [
   {
-    "name": "FN_CUSTOM_HELP",
-    "pointerType": "PFN_CUSTOM_HELP"
-  },
-  {
-    "name": "DRVCALLBACK",
-    "pointerType": "LPDRVCALLBACK"
-  },
-  {
-    "name": "LSA_AP_CALL_PACKAGE",
-    "pointerType": "PLSA_AP_CALL_PACKAGE"
-  },
-  {
     "name": "LSA_GET_EXTENDED_CALL_FLAGS",
     "pointerType": "PLSA_GET_EXTENDED_CALL_FLAGS"
   },
@@ -97,16 +85,8 @@
     "alreadyPointer": true
   },
   {
-    "name": "INSTALLUI_HANDLER_RECORD",
-    "pointerType": "PINSTALLUI_HANDLER_RECORD"
-  },
-  {
     "name": "PBMCALLBACKFN",
     "pointerType": "LPBMCALLBACKFN"
-  },
-  {
-    "name": "ACMDRIVERPROC",
-    "pointerType": "LPACMDRIVERPROC"
   },
   {
     "name": "PTOP_LEVEL_EXCEPTION_FILTER",

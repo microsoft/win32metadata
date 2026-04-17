@@ -635,11 +635,13 @@ namespace Win32MetadataScraperTests
             // PTHREAD_START_ROUTINE is a pointer-to-function typedef
             Assert.Contains("PTHREAD_START_ROUTINE", discovery.FnPointerFunctionTypedefs);
             Assert.Contains("PTHREAD_START_ROUTINE", discovery.FnProtoTypedefNames);
-            // LPTHREAD_START_ROUTINE references PTHREAD_START_ROUTINE
-            Assert.True(discovery.FnProtoToPointerTypedefs.ContainsKey("PTHREAD_START_ROUTINE"));
-            Assert.Contains("LPTHREAD_START_ROUTINE", discovery.FnProtoToPointerTypedefs["PTHREAD_START_ROUTINE"]);
+            // LPTHREAD_START_ROUTINE is a same-level alias (not pointer-adding)
+            Assert.True(discovery.FnSameLevelAliases.ContainsKey("PTHREAD_START_ROUTINE"));
+            Assert.Contains("LPTHREAD_START_ROUTINE", discovery.FnSameLevelAliases["PTHREAD_START_ROUTINE"]);
+            // Should NOT be in FnProtoToPointerTypedefs (which is for pointer-adding aliases)
+            Assert.False(discovery.FnProtoToPointerTypedefs.ContainsKey("PTHREAD_START_ROUTINE"));
 
-            // Resolution: already-pointer aliases → no fixup generated (both names are valid)
+            // Resolution: same-level aliases for already-pointer types → no fixup generated
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PTHREAD_START_ROUTINE)(void* lpThreadParameter);
                 typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
@@ -737,6 +739,59 @@ namespace Win32MetadataScraperTests
             ");
 
             // Two pointer aliases — ambiguous, should skip
+            Assert.Empty(result.FnPtrRemaps);
+        }
+
+        [Fact]
+        public void FnPtr_MultiplePointerNames_DisambiguatedByExclude()
+        {
+            // Pattern from mmsyscom.h:
+            //   typedef void (CALLBACK DRVCALLBACK)(...);
+            //   typedef DRVCALLBACK *LPDRVCALLBACK;
+            //   typedef DRVCALLBACK *PDRVCALLBACK;
+            // Two pointer aliases → ambiguous, but if one is in configuredExcludes,
+            // it's filtered out, leaving exactly one candidate.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef void DRVCALLBACK(unsigned int hdrvr, unsigned int uMsg);
+                typedef DRVCALLBACK *LPDRVCALLBACK;
+                typedef DRVCALLBACK *PDRVCALLBACK;
+            ", new[] { "PDRVCALLBACK" });
+
+            Assert.True(result.FnPtrRemaps.ContainsKey("DRVCALLBACK"));
+            Assert.Equal("LPDRVCALLBACK", result.FnPtrRemaps["DRVCALLBACK"]);
+            Assert.Contains("LPDRVCALLBACK", result.FnPtrExcludes);
+            Assert.Contains("LPDRVCALLBACK", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void FnPtr_AlreadyPointer_WithPointerAddingAlias()
+        {
+            // Pattern from MSAcm.h:
+            //   typedef LRESULT (*ACMDRIVERPROC)(...);
+            //   typedef ACMDRIVERPROC *LPACMDRIVERPROC;
+            // ACMDRIVERPROC is already a pointer-to-function. LPACMDRIVERPROC adds
+            // another * level. This should generate remap + exclude + reducePointerLevel.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef long (*ACMDRIVERPROC)(unsigned long dwId, unsigned int uMsg);
+                typedef ACMDRIVERPROC *LPACMDRIVERPROC;
+            ");
+
+            Assert.True(result.FnPtrRemaps.ContainsKey("ACMDRIVERPROC"));
+            Assert.Equal("LPACMDRIVERPROC", result.FnPtrRemaps["ACMDRIVERPROC"]);
+            Assert.Contains("LPACMDRIVERPROC", result.FnPtrExcludes);
+            Assert.Contains("LPACMDRIVERPROC", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void FnPtr_AlreadyPointer_SameLevelAlias_NoFixup()
+        {
+            // Pattern: typedef DWORD (*PFOO)(...); typedef PFOO LPFOO;
+            // Same-level alias — no fixup generated (needs manual curation).
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long (*PFOO)(void* param);
+                typedef PFOO LPFOO;
+            ");
+
             Assert.Empty(result.FnPtrRemaps);
         }
     }

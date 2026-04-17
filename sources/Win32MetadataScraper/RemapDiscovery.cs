@@ -30,8 +30,17 @@ public class DiscoveryResult
     /// <summary>Tag name → header file where the typedef was found.</summary>
     public Dictionary<string, string> TagToHeaderFile { get; } = new();
 
-    /// <summary>Function prototype typedef name → list of pointer-to-function typedef names.</summary>
+    /// <summary>
+    /// Function typedef name → list of pointer-adding alias names.
+    /// These are aliases declared as <c>typedef NAME *ALIAS;</c> (adds one level of pointer).
+    /// </summary>
     public Dictionary<string, List<string>> FnProtoToPointerTypedefs { get; } = new();
+
+    /// <summary>
+    /// Function typedef name → list of same-level alias names.
+    /// These are aliases declared as <c>typedef NAME ALIAS;</c> (no added pointer).
+    /// </summary>
+    public Dictionary<string, List<string>> FnSameLevelAliases { get; } = new();
 
     /// <summary>Names of typedefs whose underlying type is a bare FunctionProtoType (no pointer).</summary>
     public HashSet<string> FnBareFunctionTypedefs { get; } = new();
@@ -235,10 +244,14 @@ public static class RemapDiscovery
     ///   typedef CALLBACK *LPCALLBACK;      // pointer alias (adds *)
     /// → remap proto→alias, exclude alias, reducePointerLevel alias
     ///
-    /// "Already-pointer" typedef aliases (typedef PFOO LPFOO) are skipped —
-    /// both names are valid and may be referenced independently. Likewise, if the
-    /// pointer alias is already excluded by existing settings, auto-discovery defers
-    /// to that manual fixup rather than emitting a duplicate.
+    /// Already-pointer typedefs with a pointer-adding alias also generate fixups:
+    ///   typedef DWORD (*ACMDRIVERPROC)(...);  // already a pointer
+    ///   typedef ACMDRIVERPROC *LPACMDRIVERPROC; // adds another *
+    /// → remap proto→alias, exclude alias, reducePointerLevel alias
+    ///
+    /// Already-pointer typedefs with same-level aliases (typedef PFOO LPFOO) are
+    /// left to manual configuration — the AST alone cannot determine which name
+    /// should be canonical.
     /// </summary>
     public static ResolvedRemaps ResolveFunctionPointerFixups(
         DiscoveryResult discovery,
@@ -247,33 +260,48 @@ public static class RemapDiscovery
         configuredExcludes ??= new HashSet<string>(StringComparer.Ordinal);
         var result = new ResolvedRemaps();
 
-        // Only process bare function typedefs — these are the ones that need
-        // fixups when they have a pointer alias (the alias adds * indirection).
+        // Pass 1: bare function typedefs with pointer aliases
         foreach (var protoName in discovery.FnBareFunctionTypedefs)
         {
             if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
                 continue;
 
-            if (aliasNames.Count != 1)
-                continue; // Ambiguous — skip
+            // Filter out aliases that are already manually excluded
+            var candidates = aliasNames.Where(a => !configuredExcludes.Contains(a)).ToList();
 
-            string aliasName = aliasNames[0];
+            if (candidates.Count != 1)
+                continue; // Ambiguous or all excluded — skip
 
-            if (configuredExcludes.Contains(aliasName))
-                continue;
+            string aliasName = candidates[0];
 
             // Bare function proto + pointer alias → standard fixup
-            // e.g., typedef void TIMECALLBACK(UINT, ...); typedef TIMECALLBACK *LPTIMECALLBACK;
             result.FnPtrRemaps[protoName] = aliasName;
             result.FnPtrExcludes.Add(aliasName);
             result.ReducePointerLevel.Add(aliasName);
         }
 
-        // For already-pointer typedefs (typedef DWORD (*PFOO)(...); typedef PFOO LPFOO;)
-        // we do NOT generate fixups. Both names are valid typedef aliases for the
-        // same pointer-to-function type, and code may reference either name.
-        // The old functionPointerFixups.json had curated entries for specific cases,
-        // but auto-excluding all aliases is too aggressive.
+        // Pass 2: already-pointer typedefs with pointer-adding aliases
+        // e.g., typedef LRESULT (*ACMDRIVERPROC)(...); typedef ACMDRIVERPROC *LPACMDRIVERPROC;
+        // The alias adds another *, so reducePointerLevel is needed.
+        foreach (var protoName in discovery.FnPointerFunctionTypedefs)
+        {
+            if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var ptrAliasNames))
+                continue;
+
+            var candidates = ptrAliasNames.Where(a => !configuredExcludes.Contains(a)).ToList();
+
+            if (candidates.Count != 1)
+                continue;
+
+            string aliasName = candidates[0];
+
+            result.FnPtrRemaps[protoName] = aliasName;
+            result.FnPtrExcludes.Add(aliasName);
+            result.ReducePointerLevel.Add(aliasName);
+        }
+
+        // Already-pointer typedefs with same-level aliases (typedef PFOO LPFOO)
+        // are NOT auto-discovered — left to manual configuration.
 
         return result;
     }
@@ -373,11 +401,12 @@ public static class RemapDiscovery
             }
             else if (underlyingType is TypedefType tdType2)
             {
+                // Same-level alias: typedef EXISTING_NAME NEW_ALIAS;
                 string sourceTypedefName = tdType2.Decl?.Name;
                 if (sourceTypedefName != null)
                 {
-                    if (!result.FnProtoToPointerTypedefs.TryGetValue(sourceTypedefName, out var aliasList))
-                        result.FnProtoToPointerTypedefs[sourceTypedefName] = aliasList = new List<string>();
+                    if (!result.FnSameLevelAliases.TryGetValue(sourceTypedefName, out var aliasList))
+                        result.FnSameLevelAliases[sourceTypedefName] = aliasList = new List<string>();
                     if (!aliasList.Contains(typedefDecl.Name))
                         aliasList.Add(typedefDecl.Name);
                 }
