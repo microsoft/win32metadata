@@ -210,13 +210,17 @@ namespace MetadataTasks
 
         private bool EnsureClangSharpInstalled()
         {
-            // Locate Win32MetadataScraper — built with RuntimeIdentifier for native lib resolution.
-            // The build output is in a RID-specific subdirectory (e.g., net8.0/win-x64/).
             string rid = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
-            this.win32MetadataScraperPath = Path.Combine(this.ToolsBinDir, rid, "Win32MetadataScraper.dll");
-            if (!File.Exists(this.win32MetadataScraperPath))
+            string[] candidatePaths =
             {
-                this.Log.LogError($"Win32MetadataScraper not found at {this.win32MetadataScraperPath}");
+                Path.Combine(this.ToolsBinDir, rid, "Win32MetadataScraper.dll"),
+                Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll"),
+            };
+
+            this.win32MetadataScraperPath = candidatePaths.FirstOrDefault(File.Exists);
+            if (this.win32MetadataScraperPath is null)
+            {
+                this.Log.LogError($"Win32MetadataScraper not found. Checked: {string.Join(", ", candidatePaths)}");
                 return false;
             }
 
