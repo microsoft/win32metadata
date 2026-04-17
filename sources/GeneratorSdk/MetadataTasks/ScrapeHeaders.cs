@@ -728,7 +728,7 @@ $@"--file
 
             if (this.discoveredReducePointerLevel.Count > 0)
             {
-                string autoEmitterRsp = Path.Combine(this.GeneratedDir, "emitter.autoFnPtr.generated.rsp");
+                string autoEmitterRsp = Path.Combine(this.GeneratedDir, $"emitter.autoFnPtr.{this.ScanArch}.generated.rsp");
 
                 using (var writer = new StreamWriter(autoEmitterRsp))
                 {

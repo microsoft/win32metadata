@@ -31,7 +31,7 @@
 
     <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
     <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
-    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.generated.rsp</EmitterAutoFnPtrRsp>
+    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.$(ScanArch).generated.rsp</EmitterAutoFnPtrRsp>
     <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
     <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
     <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
@@ -269,7 +269,10 @@
 
     <ItemGroup>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
-      <EmitterRsp Condition="Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
+      <!-- When scraping ran in this build, include only the current arch's auto-rsp -->
+      <EmitterRsp Condition="'$(SkipScraping)' != 'true' and Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
+      <!-- When assets were scraped in separate CI jobs, include all arch-specific auto-rsps -->
+      <EmitterRsp Condition="'$(SkipScraping)' == 'true'" Include="$(GeneratedDir)\emitter.autoFnPtr.*.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
     </ItemGroup>
