@@ -17,11 +17,20 @@ namespace MetadataTasks
         private static readonly string[] allArches = new string[] { "x86", "x64", "arm64" };
 
         private bool canceled;
-        private string clangSharpToolPath;
+        private string win32MetadataScraperPath;
         private string[] defaultIncDirs;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private Dictionary<string, string> suggestedRemaps = new();
+        private Dictionary<string, string> discoveredRemaps = new();
+        private Dictionary<string, string> discoveredRemapHeaders = new(); // tag → header file path
+        private HashSet<string> discoveredFnPtrExcludes = new();
+        private HashSet<string> discoveredReducePointerLevel = new();
+        private Dictionary<string, string> manualFnPtrRemaps = new(StringComparer.Ordinal);
+        private HashSet<string> manualFnPtrExcludes = new(StringComparer.Ordinal);
+        private HashSet<string> manualReducePointerLevel = new(StringComparer.Ordinal);
+        // Per-partition: which tag remaps each partition discovered from its own AST
+        private Dictionary<string, Dictionary<string, string>> perPartitionRemaps = new();
 
 
         [Required]
@@ -31,6 +40,12 @@ namespace MetadataTasks
         public string HeaderTextFile { get; set; }
 
         public ITaskItem[] ResponseFiles { get; set; }
+
+        [Required]
+        public string ScraperFunctionPointerFixupsRsp { get; set; }
+
+        [Required]
+        public string EmitterFunctionPointerFixupsRsp { get; set; }
 
         [Required]
         public string WinSdkRoot { get; set; }
@@ -145,7 +160,8 @@ namespace MetadataTasks
                 Path.Combine(this.SdkIncRoot, "winrt"),
             };
 
-            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
+            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
+            this.LoadManualFunctionPointerFixups();
 
             int failureCount = 0;
 
@@ -172,6 +188,13 @@ namespace MetadataTasks
                 }
             }
 
+            // Write auto-discovered remaps to generated RSP
+            if (ret)
+            {
+                this.WriteAutoRemapsRsp();
+                this.CheckCrossPartitionRemapConsistency();
+            }
+
             if (ret && string.IsNullOrEmpty(this.PartitionFilter))
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
@@ -187,55 +210,21 @@ namespace MetadataTasks
 
         private bool EnsureClangSharpInstalled()
         {
-            // Restore ClangSharp as a local tool with the pinned version, so we are
-            // not affected by whatever version is installed globally on the machine.
-            // A tool manifest is generated in the scratch directory so this works both
-            // in-repo and when the GeneratorSdk is consumed as a NuGet MSBuild SDK.
-            string toolManifestDir = Path.Combine(this.ScratchDir, ".config");
-            string toolManifest = Path.Combine(toolManifestDir, "dotnet-tools.json");
-
-            Directory.CreateDirectory(toolManifestDir);
-            File.WriteAllText(toolManifest,
-$@"{{
-  ""version"": 1,
-  ""isRoot"": true,
-  ""tools"": {{
-    ""clangsharppinvokegenerator"": {{
-      ""version"": ""{ClangSharpVersion}"",
-      ""commands"": [""ClangSharpPInvokeGenerator""]
-    }}
-  }}
-}}");
-
-            int exitCode = TaskUtils.ExecuteCmd("dotnet", $"tool restore --tool-manifest \"{toolManifest}\"", out var output, this.Log);
-            if (exitCode != 0)
+            string rid = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
+            string[] candidatePaths =
             {
-                this.Log.LogError($"Failed to restore ClangSharpPInvokeGenerator {ClangSharpVersion}. Exit code: {exitCode}. Output: {output}");
+                Path.Combine(this.ToolsBinDir, rid, "Win32MetadataScraper.dll"),
+                Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll"),
+            };
+
+            this.win32MetadataScraperPath = candidatePaths.FirstOrDefault(File.Exists);
+            if (this.win32MetadataScraperPath is null)
+            {
+                this.Log.LogError($"Win32MetadataScraper not found. Checked: {string.Join(", ", candidatePaths)}");
                 return false;
             }
 
-            // Resolve the tool DLL path so we can invoke it directly via 'dotnet <dll>'
-            // instead of 'dotnet tool run' which has per-invocation overhead.
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string storeRoot = Path.Combine(userProfile, ".dotnet", "tools", ".store", "clangsharppinvokegenerator");
-            if (Directory.Exists(storeRoot))
-            {
-                var found = Directory.GetFiles(storeRoot, "ClangSharpPInvokeGenerator.dll", SearchOption.AllDirectories);
-                if (found.Length > 0)
-                {
-                    this.clangSharpToolPath = found[0];
-                }
-            }
-
-            if (this.clangSharpToolPath != null)
-            {
-                this.Log.LogMessage(MessageImportance.High, $"Using ClangSharp {ClangSharpVersion} from {this.clangSharpToolPath}");
-            }
-            else
-            {
-                this.Log.LogWarning($"Could not resolve ClangSharpPInvokeGenerator.dll path; falling back to 'dotnet tool run'");
-            }
-
+            this.Log.LogMessage(MessageImportance.High, $"Using Win32MetadataScraper from {this.win32MetadataScraperPath}");
             return true;
         }
 
@@ -454,14 +443,12 @@ $@"--file
 
             string output;
             int exitCode;
-            if (this.clangSharpToolPath != null)
-            {
-                exitCode = TaskUtils.ExecuteCmd("dotnet", $"\"{this.clangSharpToolPath}\" {args}", out output, this.Log);
-            }
-            else
-            {
-                exitCode = TaskUtils.ExecuteCmd("dotnet", $"tool run ClangSharpPInvokeGenerator -- {args}", out output, this.Log, workingDirectory: this.ScratchDir);
-            }
+            string remapsFile = Path.Combine(currentScraperOutputDir, $"{partitionName}.remaps");
+
+            // Use Win32MetadataScraper — hosts PInvokeGenerator as a library,
+            // walks the AST to discover remaps, and generates output in a single pass
+            string scraperArgs = $"\"{this.win32MetadataScraperPath}\" \"{remapsFile}\" {args}";
+            exitCode = TaskUtils.ExecuteCmd("dotnet", scraperArgs, out output, this.Log);
             if (output == null)
             {
                 output = string.Empty;
@@ -519,6 +506,88 @@ $@"--file
                         }
                     }
                 }
+
+                // Read discovered remaps from sidecar file (written by Win32MetadataScraper)
+                if (File.Exists(remapsFile))
+                {
+                    foreach (var line in File.ReadLines(remapsFile))
+                    {
+                        string trimmed = line.Trim();
+                        if (string.IsNullOrEmpty(trimmed)) continue;
+
+                        if (trimmed.StartsWith("FNPTR_EXCLUDE:"))
+                        {
+                            string exclude = trimmed.Substring("FNPTR_EXCLUDE:".Length);
+                            if (this.manualFnPtrExcludes.Contains(exclude))
+                            {
+                                continue;
+                            }
+
+                            lock (this.discoveredFnPtrExcludes)
+                            {
+                                this.discoveredFnPtrExcludes.Add(exclude);
+                            }
+                        }
+                        else if (trimmed.StartsWith("REDUCE_PTR_LEVEL:"))
+                        {
+                            string reducePointerLevel = trimmed.Substring("REDUCE_PTR_LEVEL:".Length);
+                            if (this.manualReducePointerLevel.Contains(reducePointerLevel))
+                            {
+                                continue;
+                            }
+
+                            lock (this.discoveredReducePointerLevel)
+                            {
+                                this.discoveredReducePointerLevel.Add(reducePointerLevel);
+                            }
+                        }
+                        else
+                        {
+                            int eq = trimmed.IndexOf('=');
+                            if (eq > 0)
+                            {
+                                string key = trimmed.Substring(0, eq);
+                                string rest = trimmed.Substring(eq + 1);
+
+                                // Parse optional header info: value|HEADER:path
+                                string value = rest;
+                                string headerFile = null;
+                                int headerMarker = rest.IndexOf("|HEADER:");
+                                if (headerMarker >= 0)
+                                {
+                                    value = rest.Substring(0, headerMarker);
+                                    headerFile = rest.Substring(headerMarker + "|HEADER:".Length);
+                                }
+
+                                if (this.manualFnPtrRemaps.TryGetValue(key, out string manualValue) &&
+                                    string.Equals(manualValue, value, StringComparison.Ordinal))
+                                {
+                                    continue;
+                                }
+
+                                lock (this.discoveredRemaps)
+                                {
+                                    if (!this.discoveredRemaps.ContainsKey(key))
+                                    {
+                                        this.discoveredRemaps[key] = value;
+                                        if (headerFile != null)
+                                            this.discoveredRemapHeaders[key] = headerFile;
+                                    }
+                                }
+
+                                // Track per-partition for consistency checking
+                                lock (this.perPartitionRemaps)
+                                {
+                                    if (!this.perPartitionRemaps.TryGetValue(partitionName, out var partRemaps))
+                                    {
+                                        this.perPartitionRemaps[partitionName] = partRemaps = new Dictionary<string, string>();
+                                    }
+                                    partRemaps[key] = value;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             return true;
@@ -546,6 +615,243 @@ $@"--file
             }
 
             return items;
+        }
+
+        private void LoadManualFunctionPointerFixups()
+        {
+            this.manualFnPtrRemaps.Clear();
+            this.manualFnPtrExcludes.Clear();
+            this.manualReducePointerLevel.Clear();
+
+            ParseFunctionPointerFixupsRsp(
+                this.GetAbsolutePath(this.ScraperFunctionPointerFixupsRsp),
+                (currentSwitch, value) =>
+                {
+                    if (currentSwitch == "--exclude")
+                    {
+                        this.manualFnPtrExcludes.Add(value);
+                    }
+                    else if (currentSwitch == "--remap")
+                    {
+                        int eq = value.IndexOf('=');
+                        if (eq > 0)
+                        {
+                            this.manualFnPtrRemaps[value.Substring(0, eq)] = value.Substring(eq + 1);
+                        }
+                    }
+                });
+
+            ParseFunctionPointerFixupsRsp(
+                this.GetAbsolutePath(this.EmitterFunctionPointerFixupsRsp),
+                (currentSwitch, value) =>
+                {
+                    if (currentSwitch == "--reducePointerLevel")
+                    {
+                        this.manualReducePointerLevel.Add(value);
+                    }
+                });
+        }
+
+        private string GetAbsolutePath(string path)
+        {
+            if (string.IsNullOrEmpty(path) || Path.IsPathRooted(path))
+            {
+                return path;
+            }
+
+            return Path.Combine(this.MSBuildProjectDirectory, path);
+        }
+
+        private static void ParseFunctionPointerFixupsRsp(string rspPath, Action<string, string> onItem)
+        {
+            if (string.IsNullOrEmpty(rspPath) || !File.Exists(rspPath))
+            {
+                return;
+            }
+
+            string currentSwitch = null;
+            foreach (string line in File.ReadLines(rspPath))
+            {
+                string trimmed = line.Trim();
+                if (string.IsNullOrEmpty(trimmed))
+                {
+                    continue;
+                }
+
+                if (trimmed.StartsWith("--"))
+                {
+                    currentSwitch = trimmed;
+                    continue;
+                }
+
+                if (currentSwitch != null)
+                {
+                    onItem(currentSwitch, trimmed);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the auto-discovered remaps and function pointer fixups to generated RSP files.
+        /// </summary>
+        private void WriteAutoRemapsRsp()
+        {
+            Directory.CreateDirectory(this.GeneratedDir);
+
+            if (this.discoveredRemaps.Count > 0 || this.discoveredFnPtrExcludes.Count > 0)
+            {
+                string autoRemapsRsp = Path.Combine(this.GeneratedDir, "scraper.autoRemaps.generated.rsp");
+
+                using (var writer = new StreamWriter(autoRemapsRsp))
+                {
+                    if (this.discoveredFnPtrExcludes.Count > 0)
+                    {
+                        writer.WriteLine("--exclude");
+                        foreach (var excl in this.discoveredFnPtrExcludes.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                        {
+                            writer.WriteLine(excl);
+                        }
+                    }
+
+                    if (this.discoveredRemaps.Count > 0)
+                    {
+                        writer.WriteLine("--remap");
+                        foreach (var kv in this.discoveredRemaps.OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase))
+                        {
+                            writer.WriteLine($"{kv.Key}={kv.Value}");
+                        }
+                    }
+                }
+
+                this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredRemaps.Count} auto-remaps and {this.discoveredFnPtrExcludes.Count} fn-ptr excludes to {autoRemapsRsp}");
+            }
+
+            if (this.discoveredReducePointerLevel.Count > 0)
+            {
+                string autoEmitterRsp = Path.Combine(this.GeneratedDir, $"emitter.autoFnPtr.{this.ScanArch}.generated.rsp");
+
+                using (var writer = new StreamWriter(autoEmitterRsp))
+                {
+                    writer.WriteLine("--reducePointerLevel");
+                    foreach (var rpl in this.discoveredReducePointerLevel.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    {
+                        writer.WriteLine(rpl);
+                    }
+                }
+
+                this.Log.LogMessage(MessageImportance.High, $"Wrote {this.discoveredReducePointerLevel.Count} reduce-pointer-level entries to {autoEmitterRsp}");
+            }
+        }
+
+        /// <summary>
+        /// Checks for cross-partition remap inconsistencies. After all partitions are
+        /// scraped, collects the set of type names declared in the generated C# files.
+        /// If any declared type name matches a tag that was remapped in another partition,
+        /// it means this partition didn't discover the remap and used the raw tag name.
+        /// </summary>
+        private void CheckCrossPartitionRemapConsistency()
+        {
+            if (this.discoveredRemaps.Count == 0)
+            {
+                return;
+            }
+
+            // Collect all declared type names from all generated .cs files.
+            // Pattern: "partial struct FOO" / "enum FOO" / "delegate ... FOO("
+            var declaredTypeNames = new HashSet<string>(StringComparer.Ordinal);
+            string[] archDirs = new string[] { "common", "x86", "x64", "arm64" };
+            var typeNameToFile = new Dictionary<string, string>();
+
+            foreach (string archDir in archDirs)
+            {
+                string dir = Path.Combine(this.GeneratedDir, archDir);
+                if (!Directory.Exists(dir)) continue;
+
+                foreach (string csFile in Directory.GetFiles(dir, "*.cs"))
+                {
+                    foreach (var line in File.ReadLines(csFile))
+                    {
+                        // Match: public partial struct FOO / public enum FOO / public delegate ... FOO(
+                        string trimmed = line.TrimStart();
+                        if (trimmed.StartsWith("public "))
+                        {
+                            // Extract the type name after struct/enum/delegate keywords
+                            string typeName = null;
+                            int idx;
+                            if ((idx = trimmed.IndexOf(" struct ")) >= 0)
+                                typeName = ExtractIdentifier(trimmed, idx + 8);
+                            else if ((idx = trimmed.IndexOf(" enum ")) >= 0)
+                                typeName = ExtractIdentifier(trimmed, idx + 6);
+                            else if ((idx = trimmed.IndexOf(" interface ")) >= 0)
+                                typeName = ExtractIdentifier(trimmed, idx + 11);
+
+                            if (typeName != null)
+                            {
+                                declaredTypeNames.Add(typeName);
+                                if (!typeNameToFile.ContainsKey(typeName))
+                                {
+                                    string partName = Path.GetFileNameWithoutExtension(csFile);
+                                    typeNameToFile[typeName] = $"{partName} ({archDir})";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Check: does any declared type name match a remap TAG?
+            // If so, that type was declared with its raw tag name instead of the typedef.
+            bool consistent = true;
+            foreach (var kv in this.discoveredRemaps)
+            {
+                string tagName = kv.Key;
+                string typedefName = kv.Value;
+
+                if (declaredTypeNames.Contains(tagName))
+                {
+                    // Find which partition discovered this remap
+                    string definingPartition = null;
+                    foreach (var pp in this.perPartitionRemaps)
+                    {
+                        if (pp.Value.ContainsKey(tagName))
+                        {
+                            definingPartition = pp.Key;
+                            break;
+                        }
+                    }
+
+                    typeNameToFile.TryGetValue(tagName, out string location);
+                    this.discoveredRemapHeaders.TryGetValue(tagName, out string headerFile);
+                    string headerHint = headerFile != null
+                        ? $" Add '#include \"{Path.GetFileName(headerFile)}\"' to that partition's main.cpp."
+                        : "";
+
+                    this.Log.LogWarning(
+                        $"Inconsistent remap: type '{tagName}' is declared in {location} but should be " +
+                        $"'{typedefName}' (remap discovered in partition '{definingPartition}').{headerHint}");
+                    consistent = false;
+                }
+            }
+
+            if (!consistent)
+            {
+                this.Log.LogWarning(
+                    "Cross-partition remap inconsistencies detected. See warnings above. " +
+                    "Fix by adding the missing #include directives to the affected partition's main.cpp " +
+                    "so the typedef is visible during scraping.");
+            }
+        }
+
+        /// <summary>
+        /// Extracts a C# identifier starting at the given position in a line.
+        /// </summary>
+        private static string ExtractIdentifier(string line, int startIndex)
+        {
+            if (startIndex >= line.Length) return null;
+            int end = startIndex;
+            while (end < line.Length && (char.IsLetterOrDigit(line[end]) || line[end] == '_'))
+                end++;
+            return end > startIndex ? line.Substring(startIndex, end - startIndex) : null;
         }
 
     }

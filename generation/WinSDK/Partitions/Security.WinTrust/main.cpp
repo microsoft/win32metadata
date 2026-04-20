@@ -31,3 +31,4 @@ typedef struct _OLD_LARGE_INTEGER {
 
 #include <wintrust.h>
 #include <softpub.h>
+#include <mssip.h>

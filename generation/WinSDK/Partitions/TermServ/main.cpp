@@ -34,3 +34,4 @@
 #include <wtsprotocol.h>
 #include <rdpappcontainerclient.h>
 #include <remotesystemadditionalinfo.h>
+#include <winsock.h>
