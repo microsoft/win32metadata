@@ -144,35 +144,36 @@ These follow patterns the heuristic already handles, but the headers declaring t
 
 ---
 
-## Summary and Priority
+## Summary and Resolution
 
-| Category | Entries | Approach | Complexity |
-|----------|---------|----------|------------|
-| Header inclusion gaps | 4 | Add `#include` to partitions | Low — do first |
-| Same-level aliases | 10 | Heuristic (alias=canonical), annotation fallback | Medium |
-| Struct field callbacks | 12 | Heuristic (scan struct fields), annotation fallback | Medium-high |
-| **Total** | **27** | | |
+| Category | Entries | Resolution | Status |
+|----------|---------|------------|--------|
+| Header inclusion gaps | 4 | Auto-discovered by existing heuristic (Passes 1/2) | ✅ Done |
+| Same-level aliases | 10 | Moved to `scraper.settings.rsp` / `emitter.settings.rsp` | ✅ Done (manual) |
+| Struct field callbacks | 12 | Auto-discovered by new struct-field scanning (Pass 3) | ✅ Done |
+| **Total** | **27** | `functionPointerFixups.json` deleted | |
 
-### Suggested order of work
-1. **Header inclusion gaps** (4 entries) — lowest risk, immediate payoff
-2. **Same-level aliases** (10 entries) — try the "alias is canonical" heuristic
-3. **Struct field callbacks** (12 entries) — add struct field scanning or `_Reduce_pointer_level_` annotations
+### What's still manual (10 entries in RSP files)
 
-### Annotation macros to define (if needed)
+The 10 same-level alias entries cannot be safely auto-discovered because `--exclude` directives are global across partitions and can remove types that other partitions depend on. They now live in standard RSP files:
 
-Add to a shared header (e.g., `win32metadata.h`) guarded by `#ifdef _WIN32METADATA_`:
+- **`scraper.settings.rsp`**: `--exclude` (10 entries) + `--remap` (10 entries)
+- **`emitter.settings.rsp`**: `--reducePointerLevel` (4 entries without `alreadyPointer`)
+
+### Future: header annotations to replace the manual entries
+
+With ClangSharp v18+ (see `annotation-validation-results.md`), a `_Canonical_name_` annotation on the original typedef would let the scraper determine which name to keep, making the RSP entries unnecessary:
 
 ```c
 #ifdef _WIN32METADATA_
-  // Tells the emitter to reduce pointer level on this struct field
-  #define _Reduce_pointer_level_ __attribute__((annotate("w32m:reduceptrlevel")))
-
   // Tells the toolchain which typedef name is canonical for this function pointer
   #define _Canonical_name_(name) __attribute__((annotate("w32m:canonical=" #name)))
 #else
-  #define _Reduce_pointer_level_
   #define _Canonical_name_(name)
 #endif
-```
 
-These annotations require ClangSharp v18+ for full support (see `annotation-validation-results.md`).
+// Example: minwinbase.h
+_Canonical_name_(LPTHREAD_START_ROUTINE)
+typedef DWORD (WINAPI *PTHREAD_START_ROUTINE)(LPVOID lpThreadParameter);
+typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
+```

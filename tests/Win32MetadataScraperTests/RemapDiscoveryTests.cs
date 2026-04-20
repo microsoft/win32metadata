@@ -641,7 +641,8 @@ namespace Win32MetadataScraperTests
             // Should NOT be in FnProtoToPointerTypedefs (which is for pointer-adding aliases)
             Assert.False(discovery.FnProtoToPointerTypedefs.ContainsKey("PTHREAD_START_ROUTINE"));
 
-            // Resolution: same-level aliases for already-pointer types → no fixup generated
+            // Resolution: same-level aliases are left to manual config in scraper.settings.rsp.
+            // Auto-discovering these is unsafe because --exclude is global across partitions.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PTHREAD_START_ROUTINE)(void* lpThreadParameter);
                 typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
@@ -657,11 +658,7 @@ namespace Win32MetadataScraperTests
             // Pattern from winnt.h:
             //   typedef DWORD (*PEXCEPTION_ROUTINE)(...);   // already a fn pointer
             //   typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;  // non-pointer alias
-            // Discovery intentionally skips auto-fixing this shape because the AST
-            // alone does not tell us which public name should win. The repo's
-            // current baseline still canonicalizes this one manually with:
-            //   --exclude PEXCEPTION_ROUTINE
-            //   --remap PEXCEPTION_ROUTINE=EXCEPTION_ROUTINE
+            // Same-level aliases are NOT auto-discovered — left to manual configuration.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PEXCEPTION_ROUTINE)(void* EstablisherFrame, unsigned long long DispatcherContext);
                 typedef PEXCEPTION_ROUTINE EXCEPTION_ROUTINE;
@@ -674,8 +671,7 @@ namespace Win32MetadataScraperTests
         public void FnPtr_BothHavePointerPrefix_NoFixupForAlreadyPointer()
         {
             // When the proto is already a pointer (typedef DWORD (*P...)(...))
-            // and the alias is a typedef-to-typedef, no fixup is generated —
-            // both names are valid aliases for the same pointer-to-function type.
+            // and the alias is a typedef-to-typedef, no fixup is generated.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PTHREAD_START_ROUTINE)(void* lpThreadParameter);
                 typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
@@ -687,10 +683,7 @@ namespace Win32MetadataScraperTests
         [Fact]
         public void FnPtr_AlreadyPointer_VersionedProtoWithUnversionedAlias()
         {
-            // Pattern from powrprof.h:
-            //   typedef BOOLEAN (CALLBACK* PWRSCHEMESENUMPROC_V2)(UINT, DWORD, ...);
-            //   typedef PWRSCHEMESENUMPROC_V2 PWRSCHEMESENUMPROC;
-            // Both names are valid aliases — no fixup generated.
+            // Pattern from powrprof.h — same-level alias, no fixup generated.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned char (*PWRSCHEMESENUMPROC_V2)(unsigned int uiIndex, unsigned long dwName);
                 typedef PWRSCHEMESENUMPROC_V2 PWRSCHEMESENUMPROC;
@@ -702,8 +695,7 @@ namespace Win32MetadataScraperTests
         [Fact]
         public void FnPtr_AlreadyPointer_PrefixedProtoWithPrefixedAlias()
         {
-            // Pattern from patchapi.h — both are already-pointer aliases.
-            // No fixup generated.
+            // Pattern from patchapi.h — same-level alias, no fixup generated.
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef int (*PPATCH_PROGRESS_CALLBACK)(void* CallbackContext, unsigned long CurrentPosition, unsigned long MaximumPosition);
                 typedef PPATCH_PROGRESS_CALLBACK PATCH_PROGRESS_CALLBACK;
@@ -786,13 +778,118 @@ namespace Win32MetadataScraperTests
         public void FnPtr_AlreadyPointer_SameLevelAlias_NoFixup()
         {
             // Pattern: typedef DWORD (*PFOO)(...); typedef PFOO LPFOO;
-            // Same-level alias — no fixup generated (needs manual curation).
+            // Same-level alias — no fixup generated (needs manual config).
             var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
                 typedef unsigned long (*PFOO)(void* param);
                 typedef PFOO LPFOO;
             ");
 
             Assert.Empty(result.FnPtrRemaps);
+        }
+    }
+
+    /// <summary>
+    /// Tests for struct field callback pattern (Category 1):
+    /// bare function typedefs used as pointer fields in structs.
+    /// </summary>
+    public class StructFieldCallbackTests
+    {
+        [Fact]
+        public void BareFunctionTypedef_UsedAsPointerField_DiscoveredForReducePointerLevel()
+        {
+            // Pattern from Winldap.h:
+            //   typedef ULONG QUERYFORCONNECTION(void*, void*, ...);
+            //   typedef struct LdapReferralCallback {
+            //       QUERYFORCONNECTION *QueryForConnection;
+            //   } LDAP_REFERRAL_CALLBACK;
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long QUERYFORCONNECTION(void* PrimaryConnection, void* ReferralFromConnection);
+                typedef struct LdapReferralCallback {
+                    unsigned long SizeOfCallbacks;
+                    QUERYFORCONNECTION *QueryForConnection;
+                } LDAP_REFERRAL_CALLBACK;
+            ");
+
+            Assert.Contains("QUERYFORCONNECTION", result.ReducePointerLevel);
+            // No remap or exclude — there's no pointer typedef alias
+            Assert.False(result.FnPtrRemaps.ContainsKey("QUERYFORCONNECTION"));
+        }
+
+        [Fact]
+        public void BareFunctionTypedef_NotUsedInStruct_NotDiscovered()
+        {
+            // A bare function typedef with no struct field usage should NOT be in ReducePointerLevel
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long MY_CALLBACK(void* param);
+            ");
+
+            Assert.DoesNotContain("MY_CALLBACK", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void MultipleBareFunctionTypedefs_InSameStruct()
+        {
+            // Pattern from icucommon.h:
+            //   typedef int32_t UCharIteratorGetIndex(UCharIterator*, UCharIteratorOrigin);
+            //   typedef int32_t UCharIteratorMove(UCharIterator*, int32_t, UCharIteratorOrigin);
+            //   struct UCharIterator {
+            //       UCharIteratorGetIndex *getIndex;
+            //       UCharIteratorMove *move;
+            //   };
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                struct UCharIterator;
+                typedef int UCharIteratorGetIndex(struct UCharIterator *iter, int origin);
+                typedef int UCharIteratorMove(struct UCharIterator *iter, int delta, int origin);
+                typedef int UCharIteratorHasNext(struct UCharIterator *iter);
+                struct UCharIterator {
+                    void *context;
+                    UCharIteratorGetIndex *getIndex;
+                    UCharIteratorMove *move;
+                    UCharIteratorHasNext *hasNext;
+                };
+            ");
+
+            Assert.Contains("UCharIteratorGetIndex", result.ReducePointerLevel);
+            Assert.Contains("UCharIteratorMove", result.ReducePointerLevel);
+            Assert.Contains("UCharIteratorHasNext", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void AlreadyPointerTypedef_UsedAsField_NotInReducePointerLevel()
+        {
+            // Already-pointer typedefs (typedef DWORD (*PFOO)(...)) used in struct fields
+            // should NOT trigger reducePointerLevel — the typedef is already at the right level.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef unsigned long (*PFOO)(void* param);
+                typedef struct {
+                    PFOO callback;
+                } MyStruct;
+            ");
+
+            // PFOO is already a pointer, so the struct field doesn't add an extra *.
+            // No reducePointerLevel should be emitted.
+            Assert.DoesNotContain("PFOO", result.ReducePointerLevel);
+        }
+
+        [Fact]
+        public void BareFunctionTypedef_WithPointerAlias_BothDiscovered()
+        {
+            // When a bare function typedef has BOTH a pointer alias AND is used
+            // as a struct field, the pointer-alias fixup takes precedence (Pass 1)
+            // and the struct field also discovers it for reducePointerLevel.
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef void MY_CALLBACK(int x);
+                typedef MY_CALLBACK *LPMY_CALLBACK;
+                typedef struct {
+                    MY_CALLBACK *handler;
+                } MyStruct;
+            ");
+
+            // Pass 1 handles the pointer alias pair
+            Assert.True(result.FnPtrRemaps.ContainsKey("MY_CALLBACK"));
+            Assert.Equal("LPMY_CALLBACK", result.FnPtrRemaps["MY_CALLBACK"]);
+            // Struct field scan also finds it
+            Assert.Contains("MY_CALLBACK", result.ReducePointerLevel);
         }
     }
 

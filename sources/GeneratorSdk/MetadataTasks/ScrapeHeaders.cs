@@ -26,9 +26,6 @@ namespace MetadataTasks
         private Dictionary<string, string> discoveredRemapHeaders = new(); // tag → header file path
         private HashSet<string> discoveredFnPtrExcludes = new();
         private HashSet<string> discoveredReducePointerLevel = new();
-        private Dictionary<string, string> manualFnPtrRemaps = new(StringComparer.Ordinal);
-        private HashSet<string> manualFnPtrExcludes = new(StringComparer.Ordinal);
-        private HashSet<string> manualReducePointerLevel = new(StringComparer.Ordinal);
         // Per-partition: which tag remaps each partition discovered from its own AST
         private Dictionary<string, Dictionary<string, string>> perPartitionRemaps = new();
 
@@ -40,12 +37,6 @@ namespace MetadataTasks
         public string HeaderTextFile { get; set; }
 
         public ITaskItem[] ResponseFiles { get; set; }
-
-        [Required]
-        public string ScraperFunctionPointerFixupsRsp { get; set; }
-
-        [Required]
-        public string EmitterFunctionPointerFixupsRsp { get; set; }
 
         [Required]
         public string WinSdkRoot { get; set; }
@@ -161,7 +152,6 @@ namespace MetadataTasks
             };
 
             this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
-            this.LoadManualFunctionPointerFixups();
 
             int failureCount = 0;
 
@@ -518,10 +508,6 @@ $@"--file
                         if (trimmed.StartsWith("FNPTR_EXCLUDE:"))
                         {
                             string exclude = trimmed.Substring("FNPTR_EXCLUDE:".Length);
-                            if (this.manualFnPtrExcludes.Contains(exclude))
-                            {
-                                continue;
-                            }
 
                             lock (this.discoveredFnPtrExcludes)
                             {
@@ -531,10 +517,6 @@ $@"--file
                         else if (trimmed.StartsWith("REDUCE_PTR_LEVEL:"))
                         {
                             string reducePointerLevel = trimmed.Substring("REDUCE_PTR_LEVEL:".Length);
-                            if (this.manualReducePointerLevel.Contains(reducePointerLevel))
-                            {
-                                continue;
-                            }
 
                             lock (this.discoveredReducePointerLevel)
                             {
@@ -557,12 +539,6 @@ $@"--file
                                 {
                                     value = rest.Substring(0, headerMarker);
                                     headerFile = rest.Substring(headerMarker + "|HEADER:".Length);
-                                }
-
-                                if (this.manualFnPtrRemaps.TryGetValue(key, out string manualValue) &&
-                                    string.Equals(manualValue, value, StringComparison.Ordinal))
-                                {
-                                    continue;
                                 }
 
                                 lock (this.discoveredRemaps)
@@ -615,80 +591,6 @@ $@"--file
             }
 
             return items;
-        }
-
-        private void LoadManualFunctionPointerFixups()
-        {
-            this.manualFnPtrRemaps.Clear();
-            this.manualFnPtrExcludes.Clear();
-            this.manualReducePointerLevel.Clear();
-
-            ParseFunctionPointerFixupsRsp(
-                this.GetAbsolutePath(this.ScraperFunctionPointerFixupsRsp),
-                (currentSwitch, value) =>
-                {
-                    if (currentSwitch == "--exclude")
-                    {
-                        this.manualFnPtrExcludes.Add(value);
-                    }
-                    else if (currentSwitch == "--remap")
-                    {
-                        int eq = value.IndexOf('=');
-                        if (eq > 0)
-                        {
-                            this.manualFnPtrRemaps[value.Substring(0, eq)] = value.Substring(eq + 1);
-                        }
-                    }
-                });
-
-            ParseFunctionPointerFixupsRsp(
-                this.GetAbsolutePath(this.EmitterFunctionPointerFixupsRsp),
-                (currentSwitch, value) =>
-                {
-                    if (currentSwitch == "--reducePointerLevel")
-                    {
-                        this.manualReducePointerLevel.Add(value);
-                    }
-                });
-        }
-
-        private string GetAbsolutePath(string path)
-        {
-            if (string.IsNullOrEmpty(path) || Path.IsPathRooted(path))
-            {
-                return path;
-            }
-
-            return Path.Combine(this.MSBuildProjectDirectory, path);
-        }
-
-        private static void ParseFunctionPointerFixupsRsp(string rspPath, Action<string, string> onItem)
-        {
-            if (string.IsNullOrEmpty(rspPath) || !File.Exists(rspPath))
-            {
-                return;
-            }
-
-            string currentSwitch = null;
-            foreach (string line in File.ReadLines(rspPath))
-            {
-                string trimmed = line.Trim();
-                if (string.IsNullOrEmpty(trimmed))
-                {
-                    continue;
-                }
-
-                if (trimmed.StartsWith("--"))
-                {
-                    currentSwitch = trimmed;
-                    continue;
-                }
-
-                if (currentSwitch != null)
-                {
-                    onItem(currentSwitch, trimmed);
-                }
-            }
         }
 
         /// <summary>

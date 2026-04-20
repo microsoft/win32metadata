@@ -170,6 +170,22 @@ DEVPKEY_Device_SupportsSearch
 DEVPKEY_Device_SupportsMute
 DEVPKEY_Device_MaxVolume
 DEVPKEY_Device_SupportsSetNextAVT
+# Same-level function pointer aliases (formerly in functionPointerFixups.json).
+# These are typedef PFOO LPFOO patterns — both names refer to the same
+# pointer-to-function type. Auto-discovery can't safely handle these because
+# --exclude is global across partitions and can remove types other partitions
+# depend on. A future _Canonical_name_ header annotation could replace these.
+# See docs/copilot/plans/remaining-function-pointer-fixups.md, Category 2.
+LPTHREAD_START_ROUTINE
+LPINTERNET_STATUS_CALLBACK
+FONTENUMPROCA
+FONTENUMPROCW
+RTM_EVENT_CALLBACK
+RTM_ENTITY_EXPORT_METHOD
+LPBMCALLBACKFN
+LPTOP_LEVEL_EXCEPTION_FILTER
+LPFNSVADDPROPSHEETPAGE
+LPFIBER_START_ROUTINE
 --exclude-auto-remap
 # Temporary compatibility pins: keep the historical public names until we intentionally
 # accept the corresponding breaking renames in the winmd surface.
@@ -725,3 +741,15 @@ _EXPERIMENTAL2_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS=EXPERIMENTAL2_WEBAUTHN_
 _EXPERIMENTAL2_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS=EXPERIMENTAL2_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS
 _EXPERIMENTAL2_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS=EXPERIMENTAL2_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS
 _EXPERIMENTAL2_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST=EXPERIMENTAL2_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST
+# Same-level function pointer aliases (matching --exclude entries above).
+# See docs/copilot/plans/remaining-function-pointer-fixups.md, Category 2.
+PTHREAD_START_ROUTINE=LPTHREAD_START_ROUTINE
+INTERNET_STATUS_CALLBACK=LPINTERNET_STATUS_CALLBACK
+OLDFONTENUMPROCA=FONTENUMPROCA
+OLDFONTENUMPROCW=FONTENUMPROCW
+_EVENT_CALLBACK=RTM_EVENT_CALLBACK
+_ENTITY_METHOD=RTM_ENTITY_EXPORT_METHOD
+PBMCALLBACKFN=LPBMCALLBACKFN
+PTOP_LEVEL_EXCEPTION_FILTER=LPTOP_LEVEL_EXCEPTION_FILTER
+LPFNADDPROPSHEETPAGE=LPFNSVADDPROPSHEETPAGE
+PFIBER_START_ROUTINE=LPFIBER_START_ROUTINE

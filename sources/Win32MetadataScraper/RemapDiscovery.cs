@@ -48,6 +48,12 @@ public class DiscoveryResult
     /// <summary>Names of typedefs whose underlying type is PointerType → FunctionProtoType (already a pointer).</summary>
     public HashSet<string> FnPointerFunctionTypedefs { get; } = new();
 
+    /// <summary>
+    /// Names of bare function typedefs that appear as pointer-to-typedef fields in structs.
+    /// These need reducePointerLevel because the struct field adds * at the usage site.
+    /// </summary>
+    public HashSet<string> FnBareFieldReducePointerLevel { get; } = new();
+
     /// <summary>All fn proto typedef names (bare + pointer). Convenience accessor.</summary>
     public IEnumerable<string> FnProtoTypedefNames => FnBareFunctionTypedefs.Concat(FnPointerFunctionTypedefs);
 }
@@ -80,6 +86,9 @@ public static class RemapDiscovery
     {
         var result = new DiscoveryResult();
         WalkDecl(rootDecl, result);
+        // Second pass: scan struct fields for pointers to bare function typedefs.
+        // This requires FnBareFunctionTypedefs to be populated from pass 1.
+        ScanStructFields(rootDecl, result);
         return result;
     }
 
@@ -300,8 +309,18 @@ public static class RemapDiscovery
             result.ReducePointerLevel.Add(aliasName);
         }
 
-        // Already-pointer typedefs with same-level aliases (typedef PFOO LPFOO)
-        // are NOT auto-discovered — left to manual configuration.
+        // Same-level aliases (typedef PFOO LPFOO) are left to manual configuration
+        // in scraper.settings.rsp. Auto-discovering these is unsafe because the
+        // --exclude directive is global across partitions and can remove types that
+        // other partitions depend on.
+
+        // Pass 3: bare function typedefs used as pointer fields in structs.
+        // These have no pointer typedef alias — the * is applied at the struct field.
+        // The emitter needs reducePointerLevel to strip that extra *.
+        foreach (var name in discovery.FnBareFieldReducePointerLevel)
+        {
+            result.ReducePointerLevel.Add(name);
+        }
 
         return result;
     }
@@ -322,6 +341,57 @@ public static class RemapDiscovery
                 type = paren.InnerType;
             else
                 return type;
+        }
+    }
+
+    /// <summary>
+    /// Second pass: scans all RecordDecl (struct/union) fields for pointers to
+    /// bare function typedefs. When a struct field is declared as <c>CALLBACK *field</c>
+    /// where CALLBACK is a bare function typedef, the pointer is added at the usage
+    /// site and needs reducePointerLevel in the emitter.
+    /// </summary>
+    private static void ScanStructFields(Decl decl, DiscoveryResult result)
+    {
+        if (result.FnBareFunctionTypedefs.Count == 0)
+            return;
+
+        ScanStructFieldsRecursive(decl, result);
+    }
+
+    private static void ScanStructFieldsRecursive(Decl decl, DiscoveryResult result)
+    {
+        if (decl is RecordDecl recordDecl)
+        {
+            foreach (var field in recordDecl.Fields)
+            {
+                var fieldType = UnwrapType(field.Type);
+                if (fieldType is PointerType ptrType)
+                {
+                    var pointee = UnwrapType(ptrType.PointeeType);
+
+                    // Pattern 1: PointerType → TypedefType → FunctionProtoType
+                    // e.g., QUERYFORCONNECTION *QueryForConnection;
+                    if (pointee is TypedefType tdType)
+                    {
+                        string typedefName = tdType.Decl?.Name;
+                        if (typedefName != null && result.FnBareFunctionTypedefs.Contains(typedefName))
+                        {
+                            result.FnBareFieldReducePointerLevel.Add(typedefName);
+                        }
+                    }
+                    // Pattern 2: PointerType → FunctionProtoType directly
+                    // (less common, but handle for completeness)
+                    // This doesn't need reducePointerLevel since there's no named typedef.
+                }
+            }
+        }
+
+        if (decl is IDeclContext context)
+        {
+            foreach (var child in context.Decls)
+            {
+                ScanStructFieldsRecursive(child, result);
+            }
         }
     }
 
