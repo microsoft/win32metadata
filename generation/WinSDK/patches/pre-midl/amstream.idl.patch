@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.idl b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.idl
+index 69cde55c..05cfbaa1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.idl
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.idl
+@@ -71,6 +71,13 @@ typedef [v1_enum] enum {
+     RenderData = 2
+ } OUTPUT_STATE;
+ 
++cpp_quote("")
++cpp_quote("// [win32metadata sdk patch] Metadata marker for OUTPUT_STATE enum")
++cpp_quote("#ifdef _WIN32METADATA_")
++cpp_quote("#define _AMSTREAM_OUTPUT_STATE_PATCHED_ 1")
++cpp_quote("#endif")
++cpp_quote("")
++
+ 
+ // IAMMultiMediaStream interface
+ [
