@@ -156,12 +156,6 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0004
     } 	OUTPUT_STATE;
 
 
-// [win32metadata sdk patch] Metadata marker for OUTPUT_STATE enum
-#ifdef _WIN32METADATA_
-#define _AMSTREAM_OUTPUT_STATE_PATCHED_ 1
-#endif
-
-
 
 extern RPC_IF_HANDLE __MIDL_itf_amstream_0000_0000_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_amstream_0000_0000_v0_0_s_ifspec;

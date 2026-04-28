@@ -69,6 +69,6 @@ When the official SDK ships a fix, delete the `.patch` file and re-run `UpdateSD
 
 ## Examples
 
-**Header patch** (`post-midl/Uxtheme.h.set-theme-app-properties-enum.patch`): Adds a conditional `SET_THEME_APP_PROPERTIES_FLAGS` enum under `#ifdef _WIN32METADATA_` and updates function signatures.
+**Header patch** (`post-midl/Uxtheme.h.set-theme-app-properties-enum.patch`): Would add a conditional `SET_THEME_APP_PROPERTIES_FLAGS` enum under `#ifdef _WIN32METADATA_` and update function signatures.
 
-**IDL patch** (`pre-midl/amstream.idl.output-state-metadata-marker.patch`): Adds a `cpp_quote` block to `amstream.idl`. MIDL compiles it and the change appears in the generated `amstream.h`.
+**IDL patch** (`pre-midl/myfile.idl.my-reason.patch`): Would add a `cpp_quote` block to an IDL file. MIDL compiles it and the change appears in the generated `.h`.
