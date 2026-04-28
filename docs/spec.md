@@ -171,7 +171,7 @@ The `#define` groups are "lifted" into real C++ enums using conditional compilat
 
 ```cpp
 #ifdef _WIN32METADATA_
-enum [[clang::flag_enum]] FILE_ATTRIBUTE_FLAGS : DWORD {
+enum class [[clang::flag_enum]] FILE_ATTRIBUTE_FLAGS : DWORD {
     FILE_ATTRIBUTE_READONLY = 0x00000001,
     FILE_ATTRIBUTE_HIDDEN   = 0x00000002,
     FILE_ATTRIBUTE_SYSTEM   = 0x00000004,

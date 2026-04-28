@@ -56,7 +56,7 @@ enums.
 ```cpp
 #ifdef _WIN32METADATA_
 
-enum [[clang::flag_enum]] SET_THEME_APP_PROPERTIES_FLAGS : DWORD {
+enum class [[clang::flag_enum]] SET_THEME_APP_PROPERTIES_FLAGS : DWORD {
     ALLOW_NONCLIENT  = STAP_ALLOW_NONCLIENT,
     ALLOW_CONTROLS   = STAP_ALLOW_CONTROLS,
     ALLOW_WEBCONTENT = STAP_ALLOW_WEBCONTENT,
@@ -91,7 +91,8 @@ type. During normal compilation, the macro expands to `DWORD` — zero behavior 
 - **`#else #define NAME DWORD`** — The enum name becomes a DWORD macro for normal
   compilation, allowing unconditional use in function signatures with no `#ifdef`s
   at call sites.
-- **Modern C++ syntax** — `enum NAME : base_type`, no `typedef` needed.
+- **Modern C++ syntax** — `enum class NAME : base_type`. Using `enum class` (scoped enum)
+  avoids leaking member names into the enclosing namespace.
 - **`[[clang::flag_enum]]`** — Clang's standard attribute for bitmask enums (see
   [Clang Attribute Reference](https://clang.llvm.org/docs/AttributeReference.html#flag-enum)).
   Signals intent; does not affect code generation.
@@ -123,7 +124,7 @@ All scenarios were tested (test files in `obj/enum-annotation-test/`):
 No macro conflict — reference the `#define` directly:
 
 ```cpp
-enum SET_THEME_APP_PROPERTIES_FLAGS : DWORD {
+enum class SET_THEME_APP_PROPERTIES_FLAGS : DWORD {
     ALLOW_NONCLIENT  = STAP_ALLOW_NONCLIENT,   // preprocessor resolves to 1
     ALLOW_CONTROLS   = STAP_ALLOW_CONTROLS,     // preprocessor resolves to 2
     ALLOW_WEBCONTENT = STAP_ALLOW_WEBCONTENT,    // preprocessor resolves to 4
@@ -140,7 +141,7 @@ Use `push_macro`/`undef`/`pop_macro` to suppress macro expansion inside the enum
 #undef FILE_ATTRIBUTE_READONLY
 #undef FILE_ATTRIBUTE_HIDDEN
 
-enum [[clang::flag_enum]] FILE_ATTRIBUTE_FLAGS : DWORD {
+enum class [[clang::flag_enum]] FILE_ATTRIBUTE_FLAGS : DWORD {
     FILE_ATTRIBUTE_READONLY = 0x00000001,
     FILE_ATTRIBUTE_HIDDEN   = 0x00000002,
 };
@@ -158,7 +159,7 @@ in the same header.
 Use a C cast — ClangSharp generates `unchecked()` automatically:
 
 ```cpp
-enum OBJECT_IDENTIFIER : int {
+enum class OBJECT_IDENTIFIER : int {
     OBJID_WINDOW  = 0,
     OBJID_SYSMENU = (int)0xFFFFFFFF,   // → unchecked((int)(0xFFFFFFFF))
 };
