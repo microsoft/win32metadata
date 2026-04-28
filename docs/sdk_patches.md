@@ -18,21 +18,37 @@ patches/
 
 Both phases run automatically during `UpdateSDK.ps1` / `RecompileIdlFilesForScraping.ps1`. If a patch fails to apply, the script errors out — this signals the SDK changed and the patch needs regeneration.
 
+## Naming Convention
+
+```
+<filename>.<reason>.patch
+```
+
+Each patch is a single logical change. Multiple patches per file are supported:
+
+```
+patches/post-midl/
+  Uxtheme.h.set-theme-app-properties-enum.patch
+  Uxtheme.h.some-other-fix.patch
+```
+
+Patches are applied in sorted filename order within each phase.
+
 ## Creating a Patch
 
-1. Run `UpdateSDK.ps1` (or `RecompileIdlFilesForScraping.ps1`) to get a pristine SDK copy with patches applied.
+1. Run `UpdateSDK.ps1` (or `RecompileIdlFilesForScraping.ps1`) to get a pristine SDK copy with existing patches applied.
 2. Edit the target file in `generation/WinSDK/RecompiledIdlHeaders/`.
 3. Generate the patch:
    ```powershell
    git diff -- "generation/WinSDK/RecompiledIdlHeaders/um/MyHeader.h" `
-     > "generation/WinSDK/patches/post-midl/MyHeader.h.patch"
+     > "generation/WinSDK/patches/post-midl/MyHeader.h.my-reason.patch"
    ```
 4. Commit both the patch file and the modified header.
 
 For IDL files, use `pre-midl/`:
 ```powershell
 git diff -- "generation/WinSDK/RecompiledIdlHeaders/um/myfile.idl" `
-  > "generation/WinSDK/patches/pre-midl/myfile.idl.patch"
+  > "generation/WinSDK/patches/pre-midl/myfile.idl.my-reason.patch"
 ```
 
 ## Updating a Patch After an SDK Update
@@ -53,6 +69,6 @@ When the official SDK ships a fix, delete the `.patch` file and re-run `UpdateSD
 
 ## Examples
 
-**Header patch** (`post-midl/Uxtheme.h.patch`): Adds a conditional `SET_THEME_APP_PROPERTIES_FLAGS` enum under `#ifdef _WIN32METADATA_` and updates function signatures.
+**Header patch** (`post-midl/Uxtheme.h.set-theme-app-properties-enum.patch`): Adds a conditional `SET_THEME_APP_PROPERTIES_FLAGS` enum under `#ifdef _WIN32METADATA_` and updates function signatures.
 
-**IDL patch** (`pre-midl/amstream.idl.patch`): Adds a `cpp_quote` block to `amstream.idl`. MIDL compiles it and the change appears in the generated `amstream.h`.
+**IDL patch** (`pre-midl/amstream.idl.output-state-metadata-marker.patch`): Adds a `cpp_quote` block to `amstream.idl`. MIDL compiles it and the change appears in the generated `amstream.h`.
