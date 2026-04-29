@@ -213,6 +213,14 @@ VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE
 VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT
 VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT
 VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA
+# Same-level function pointer aliases without alreadyPointer flag in the
+# original fixups JSON. These 4 are likely already-pointer types where the
+# flag was an oversight; reducePointerLevel is kept for behavioral compat.
+# See docs/copilot/plans/remaining-function-pointer-fixups.md, Category 2.
+LPBMCALLBACKFN
+LPTOP_LEVEL_EXCEPTION_FILTER
+LPFNSVADDPROPSHEETPAGE
+LPFIBER_START_ROUTINE
 --memberRemap
 SetFileAttributesA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SetFileAttributesW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES

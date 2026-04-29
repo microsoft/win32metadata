@@ -8,7 +8,6 @@
   <UsingTask TaskName="MetadataTasks.FilterResponseFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.GetPartitionFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.MergeFilesIntoFile" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.PrepSettingsForFunctionPointerFixups" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.PrepSettingsForAutoTypes" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
 
   <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
@@ -29,10 +28,8 @@
 
     <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
 
-    <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
-    <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
-    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.$(ScanArch).generated.rsp</EmitterAutoFnPtrRsp>
     <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.$(ScanArch).generated.rsp</EmitterAutoFnPtrRsp>
     <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
     <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
     <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
@@ -55,7 +52,6 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
-    <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
     <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
     <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
   </ItemGroup>
@@ -93,17 +89,6 @@
     <MergeFilesIntoFile
       InputFiles="@(InputScraperFiles)"
       OutputFile="$(FinalConstantsScraperHeaderFile)"/>
-
-  </Target>
-
-  <Target Name="PrepSettingsForFunctionPointerFixups" BeforeTargets="Build"
-    Inputs="@(FunctionPointerFixup)"
-    Outputs="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)">
-
-    <PrepSettingsForFunctionPointerFixups
-      FunctionPointerFixups="@(FunctionPointerFixup)"
-      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
-      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"/>
 
   </Target>
 
@@ -180,7 +165,6 @@
 
   <ItemGroup>
     <!-- Generated settings must come before project/manual RSPs so manual overrides win. -->
-    <FinalScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
     <FinalScraperRsp Include="$(ScraperAutoTypesRsp)"/>
     <FinalScraperRsp Condition="Exists('$(ScraperAutoRemapsRsp)')" Include="$(ScraperAutoRemapsRsp)"/>
     <FinalScraperRsp Include="@(ScraperRsp)"/>
@@ -195,14 +179,12 @@
   </ItemGroup>
 
   <Target Name="ScrapeHeaders" BeforeTargets="Build"
-    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
+    DependsOnTargets="PrepScraperHeader;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
     <ScrapeHeaders
       Condition="'$(SkipScraping)' != 'true'"
       Partitions="@(Partition)"
       ResponseFiles="@(FinalScraperRsp)"
-      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
-      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"
       HeaderTextFile="$(FinalScraperHeaderFile)"
       SdkIncRoot="$(SdkIncRoot)"
       WinSdkRoot="$(TargetPlatformSdkRootOverride)"
@@ -268,7 +250,7 @@
     DependsOnTargets="ScrapeConstants">
 
     <ItemGroup>
-      <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
+      <EmitterRsp Include="$(FilteredRspForEmitter)"/>
       <!-- When scraping ran in this build, include only the current arch's auto-rsp -->
       <EmitterRsp Condition="'$(SkipScraping)' != 'true' and Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
       <!-- When assets were scraped in separate CI jobs, include all arch-specific auto-rsps -->

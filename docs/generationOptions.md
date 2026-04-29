@@ -157,42 +157,14 @@ This tells the constants scraper create a new enum named WNDCLASS_STYLES and mak
 
 ## Function pointer fixups
 
-Because ClangSharp emits both prototypes and pointers to prototypes as delegates, it can be tricky to get them to emit correctly. Projects can include a functionPointerFixups.json file to make sure things get represented correctly. Look at a fragment of [generation/WinSDK/functionPointerFixups.json](/generation/WinSDK/functionPointerFixups.json):
+ClangSharp emits both prototypes and pointers to prototypes as delegates, which can lead to duplicate types in the winmd. The scraper's `RemapDiscovery` module automatically discovers function pointer typedef pairs and generates the correct `--remap`, `--exclude`, and `--reducePointerLevel` directives. It handles three patterns:
 
-````json
-  {
-    "name": "PTHREAD_START_ROUTINE",
-    "pointerType": "LPTHREAD_START_ROUTINE",
-    "alreadyPointer": true
-  },
-````
+1. **Bare function + pointer alias**: `typedef void FOO(int); typedef FOO *PFOO;` — remaps FOO→PFOO, excludes PFOO, reduces pointer level on PFOO.
 
-Now let's look at the C definition:
+2. **Already-pointer + pointer-adding alias**: `typedef DWORD (*PFOO)(...); typedef PFOO *LPPFOO;` — same treatment.
 
-````C
-typedef DWORD (WINAPI *PTHREAD_START_ROUTINE)(
-    LPVOID lpThreadParameter
-    );
-typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
-````
+3. **Already-pointer + same-level alias**: `typedef DWORD (*PFOO)(...); typedef PFOO LPFOO;` — remaps PFOO→LPFOO, excludes LPFOO, no pointer level reduction needed.
 
-The json tells the build system that PTHREAD_START_ROUTINE is the prototype name and that it's already a pointer. It should get remapped to LPTHREAD_START_ROUTINE.
+4. **Struct field callbacks**: Bare function typedefs used as `NAME *field` in structs with no pointer typedef alias — reduces pointer level on the typedef name.
 
-Here's another one:
-
-````json
-  {
-    "name": "QUERYHANDLER",
-    "pointerType": "PQUERYHANDLER"
-  },
-````
-
-````C
-DWORD __cdecl
-QUERYHANDLER (LPVOID keycontext, PVALCONTEXT val_list, DWORD num_vals,
-          LPVOID outputbuffer, DWORD FAR *total_outlen, DWORD input_blen);
-
-typedef QUERYHANDLER FAR *PQUERYHANDLER;
-````
-
-The json tells the build system that QUERYHANDLER is the prototype name but it wasn't defined as a pointer ("alreadyPointer" is assumed to be false if not present). It should get remapped to PQUERYHANDLER.
+These patterns were previously handled by a manual `functionPointerFixups.json` configuration file, which has been eliminated in favor of the AST-based auto-discovery.
