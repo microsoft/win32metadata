@@ -1,4 +1,4 @@
-# Handle Annotation Proposal: Replacing `autoTypes.json` Handle Metadata with Header Annotations
+# Handle Annotation Proposal: Replacing `autoTypes.json` with Header Annotations
 
 *Created: April 2026*
 *Status: Proposal — validated end-to-end with ClangSharp v18.1.0.4*
@@ -8,22 +8,22 @@
 
 ## Summary
 
-This proposal replaces the handle metadata in `autoTypes.json` (~166 `DECLARE_HANDLE`-based entries) with C++11 attribute annotations directly in the SDK headers. The headers become the single source of truth for handle semantics: close API, invalid sentinel values, and interchangeability.
+This proposal replaces `autoTypes.json` in its entirety (~280 entries across handles, value typedefs, and special-form types) with C++11 attribute annotations directly in the SDK headers. The headers become the single source of truth: underlying type, close API, invalid sentinel values, and interchangeability all live next to the type's declaration.
 
-The approach has been validated end-to-end with ClangSharp v18.1.0.4: `[[clang::annotate("w32m::raii_free=...")]]` placed between `struct` and the handle name flows through to `[NativeAnnotation("w32m::raii_free=...")]` on the generated C# struct, where `MetadataSyntaxTreeCleaner` can translate it into the existing `[RAIIFree]`, `[InvalidHandleValue]`, `[AlsoUsableFor]`, and `[NativeTypedef]` attributes — preserving the current winmd output exactly.
+The approach has been validated end-to-end with ClangSharp v18.1.0.4: `[[clang::annotate("w32m::raii_free=...")]]` placed between `struct` and the type name flows through to `[NativeAnnotation("w32m::raii_free=...")]` on the generated C# struct, where `MetadataSyntaxTreeCleaner` translates it into the existing `[RAIIFree]`, `[InvalidHandleValue]`, `[AlsoUsableFor]`, and `[NativeTypedef]` attributes — preserving the current winmd output exactly.
 
 Both downstream projections (CsWin32 and windows-rs) read these attributes by name from the winmd and emit conversion code based on them. The proposed shift-left changes preserve the same winmd output, so projections require no changes.
 
-This proposal covers `DECLARE_HANDLE`-style handles only (~166 entries, ~70% of `autoTypes.json`). The remaining ~80 entries (typedef-style handles, non-handle typedefs, special projection types) are out of scope here and tracked separately at the end of this document, with a sketch for a sibling `DECLARE_TYPEDEF_WIN32METADATA` macro that addresses them.
+After migration, `autoTypes.json`, `NativeTypedefStructsCreator.cs`, `AutoType.cs`, and the JSON load path in `Windows.Win32.proj` are removed.
 
 ---
 
 ## Background
 
-Today, `autoTypes.json` encodes two distinct things for each handle type:
+Today, `autoTypes.json` encodes two distinct things for each entry:
 
-1. **Structural** — what kind of value the handle wraps (`void*`, `IntPtr`, `UIntPtr`, etc.) and that it should be emitted as a `[NativeTypedef]` wrapper struct.
-2. **Semantic** — its close API, invalid sentinel values, and which other handle types it is interchangeable with.
+1. **Structural** — what kind of value the type wraps (`DECLARE_HANDLE`, `void*`, `IntPtr`, `int`, `char*`, etc.) and that it should be emitted as a `[NativeTypedef]` wrapper struct.
+2. **Semantic** — its close API, invalid sentinel values, and which other types it is interchangeable with (`AlsoUsableFor`).
 
 ```json
 {
@@ -47,26 +47,25 @@ Today, `autoTypes.json` encodes two distinct things for each handle type:
 public unsafe struct HMODULE { public void* Value; }
 ```
 
-The headers themselves use the standard SDK macro:
+The headers themselves use the standard SDK macros:
 
 ```c
-DECLARE_HANDLE(HMODULE);
+DECLARE_HANDLE(HMODULE);                 // ~166 entries — opaque pointer handles
+typedef PVOID BCRYPT_ALG_HANDLE;         // ~80 entries  — typedef-style handles
+typedef int   BOOL;                      //  ~10 entries — value wrappers
 ```
 
-…which expands to `struct HMODULE__{int unused;}; typedef struct HMODULE__ *HMODULE`. ClangSharp flattens this typedef to `void*`, so the wrapper struct in the winmd has no relationship to the in-header declaration — it is constructed entirely from the JSON.
+ClangSharp flattens all three forms during scraping, so the wrapper struct in the winmd has no relationship to the in-header declaration — it is constructed entirely from the JSON.
 
-This proposal moves all the **semantic** information into the headers as annotations, and replaces the structural piece with a redefinition of `DECLARE_HANDLE` under `-D_WIN32METADATA_=1`.
+This proposal moves all of this into the headers via a small set of macros under `-D_WIN32METADATA_=1`.
 
 ---
 
-## Proposed Approach: Annotated `DECLARE_HANDLE`
+## Proposed Approach
 
-### Core pattern
+### `win32metadata.h`
 
-Add a small `win32metadata.h` header that, under `_WIN32METADATA_`:
-
-1. Redefines `DECLARE_HANDLE` so each handle becomes a fully-annotated struct in the AST
-2. Defines macros that expand to `[[clang::annotate("w32m::...")]]` for the three pieces of handle metadata
+Add a small header that, under `_WIN32METADATA_`, defines the annotation macros and two structural macros — one for opaque-pointer handles (`DECLARE_HANDLE`-style) and one for typed wrappers (everything else).
 
 ```c
 // win32metadata.h
@@ -74,44 +73,57 @@ Add a small `win32metadata.h` header that, under `_WIN32METADATA_`:
 
 #ifdef _WIN32METADATA_
 
-  // Annotation primitives — expand to C++11 attributes ClangSharp v18+ preserves
+  // ── Annotation primitives ────────────────────────────────────────
+  // C++11 attributes ClangSharp v18+ preserves as [NativeAnnotation].
   #define _Close_handle_with_(api)   [[clang::annotate("w32m::raii_free=" #api)]]
   #define _Invalid_handle_(val)      [[clang::annotate("w32m::invalid_handle=" #val)]]
   #define _Also_usable_for_(type)    [[clang::annotate("w32m::also_usable_for=" #type)]]
 
-  // Replace DECLARE_HANDLE with a single struct declaration that ClangSharp
-  // emits directly as the wrapper struct. The "w32m::handle" annotation
-  // marks it for [NativeTypedef] emission by MetadataSyntaxTreeCleaner.
+  // ── Structural macros ────────────────────────────────────────────
+  // Both produce a [NativeTypedef]-shaped wrapper struct ClangSharp
+  // emits directly. The "w32m::handle" annotation marks it for
+  // [NativeTypedef] emission by MetadataSyntaxTreeCleaner.
+
+  // Opaque-pointer handles. Replaces the SDK's DECLARE_HANDLE entirely;
+  // the wrapper field is always void*.
   #undef DECLARE_HANDLE
   #define DECLARE_HANDLE(name) \
       struct [[clang::annotate("w32m::handle")]] name { void* Value; }
 
-  // Annotated form: takes an attribute pack between `struct` and `name`.
-  // C++ requires custom attributes there; they cannot precede `struct`.
+  // DECLARE_HANDLE plus annotations. C++ requires custom attributes
+  // between `struct` and the type name; they cannot precede `struct`
+  // at namespace scope, so the macro takes them via __VA_ARGS__.
   #define DECLARE_HANDLE_WIN32METADATA(name, ...) \
       struct [[clang::annotate("w32m::handle")]] __VA_ARGS__ name { void* Value; }
 
-#else  // Normal compilation — annotations vanish, DECLARE_HANDLE keeps SDK form
+  // Typed wrappers — the underlying type is explicit. Replaces a
+  // SDK typedef in place. Used for typedef-style handles (BCRYPT_*,
+  // EVT_HANDLE, MSIHANDLE, …) and value wrappers (BOOL, BSTR,
+  // HRESULT, …).
+  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) \
+      struct [[clang::annotate("w32m::handle")]] __VA_ARGS__ name { type Value; }
+
+#else  // Normal compilation — annotations vanish; the SDK form stands
 
   #define _Close_handle_with_(api)
   #define _Invalid_handle_(val)
   #define _Also_usable_for_(type)
-  #define DECLARE_HANDLE_WIN32METADATA(name, ...) DECLARE_HANDLE(name)
+  #define DECLARE_HANDLE_WIN32METADATA(name, ...)        DECLARE_HANDLE(name)
+  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) typedef type name
 
 #endif
 ```
 
 ### How it looks in SDK headers
 
-Unannotated handles keep the existing one-line form:
+Three call patterns covering every entry in `autoTypes.json` today:
 
 ```c
-DECLARE_HANDLE(HWND);   // No close API; no annotations needed
-```
+// (1) Plain handles with no metadata — keep the existing one-line form.
+//     Under _WIN32METADATA_ the redefined macro emits a [NativeTypedef] struct.
+DECLARE_HANDLE(HWND);
 
-Annotated handles use `DECLARE_HANDLE_WIN32METADATA`:
-
-```c
+// (2) DECLARE_HANDLE-style with metadata.
 DECLARE_HANDLE_WIN32METADATA(HMODULE,
     _Close_handle_with_(FreeLibrary)
     _Invalid_handle_(0)
@@ -121,6 +133,19 @@ DECLARE_HANDLE_WIN32METADATA(HFILE,
     _Close_handle_with_(CloseHandle)
     _Invalid_handle_(-1)
     _Invalid_handle_(0));
+
+// (3) Typedef-style handles and value wrappers — same vocabulary,
+//     explicit underlying type.
+DECLARE_TYPEDEF_WIN32METADATA(BCRYPT_ALG_HANDLE, void*,
+    _Close_handle_with_(BCryptCloseAlgorithmProvider));
+
+DECLARE_TYPEDEF_WIN32METADATA(MSIHANDLE, unsigned int,
+    _Close_handle_with_(MsiCloseHandle));
+
+DECLARE_TYPEDEF_WIN32METADATA(BOOL, int);
+
+DECLARE_TYPEDEF_WIN32METADATA(BSTR, OLECHAR*,
+    _Close_handle_with_(SysFreeString));
 ```
 
 ### What ClangSharp v18 emits
@@ -282,45 +307,46 @@ Only **CloseApi**, **InvalidHandleValues**, and **AlsoUsableFor** are explicit a
 
 ---
 
-## Scope: What's Covered and What's Not
+## Coverage: Every Entry in `autoTypes.json`
 
-This proposal covers **`DECLARE_HANDLE`-style handles only** — entries in `autoTypes.json` with `"ValueType": "DECLARE_HANDLE"` (~166 entries, the largest single category).
+`autoTypes.json` has ~280 entries. This proposal covers all of them with the three macros above (`DECLARE_HANDLE`, `DECLARE_HANDLE_WIN32METADATA`, `DECLARE_TYPEDEF_WIN32METADATA`).
 
-The remaining ~80 entries fall into categories that need a sibling macro and are tracked here for follow-up proposals:
+### Category 1: `DECLARE_HANDLE` opaque-pointer handles (~166 entries)
 
-### Out of scope: Typedef-style handles and value wrappers (~83 entries)
-
-Handles and value-wrapping types declared via direct typedef rather than `DECLARE_HANDLE`. The fix is the same shift-left mechanism with a **typed** sibling macro:
+Entries with `"ValueType": "DECLARE_HANDLE"`. The largest category; all fit the void-pointer wrapper shape.
 
 ```c
-// In win32metadata.h:
-#ifdef _WIN32METADATA_
-  // Replaces a typedef with a wrapper struct ClangSharp emits directly.
-  // The 3rd+ args are attribute annotations (e.g., _Close_handle_with_).
-  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) \
-      struct [[clang::annotate("w32m::handle")]] __VA_ARGS__ name { type Value; }
-#else
-  // Normal compilation: leave the existing SDK typedef untouched.
-  // The patch tool inserts this macro IN PLACE of the SDK typedef,
-  // so the #else branch must reproduce the original typedef.
-  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) typedef type name
-#endif
+// shared/windef.h  ← currently: DECLARE_HANDLE(HMODULE);
+DECLARE_HANDLE_WIN32METADATA(HMODULE,
+    _Close_handle_with_(FreeLibrary)
+    _Invalid_handle_(0)
+    _Also_usable_for_(HINSTANCE));
+
+// um/winuser.h  ← currently: DECLARE_HANDLE(HMENU);
+DECLARE_HANDLE_WIN32METADATA(HMENU,
+    _Close_handle_with_(DestroyMenu)
+    _Invalid_handle_(-1)
+    _Invalid_handle_(0));
+
+// shared/windef.h  ← currently: DECLARE_HANDLE(HWND);
+DECLARE_HANDLE(HWND);   // No metadata — keep the existing one-line form
 ```
 
-The same `_Close_handle_with_` / `_Invalid_handle_` / `_Also_usable_for_` annotations apply.
+Migration mapping:
 
-#### Typedef-style handles (~73 entries)
+| `autoTypes.json` field | Header equivalent |
+|---|---|
+| `Name` | Struct name in `DECLARE_HANDLE_WIN32METADATA` invocation |
+| `Namespace` | Header partition placement |
+| `ValueType: "DECLARE_HANDLE"` | The macro itself |
+| `CloseApi` | `_Close_handle_with_(api)` |
+| `InvalidHandleValues[]` | One `_Invalid_handle_(val)` per entry |
+| `AlsoUsableFor` | `_Also_usable_for_(type)` |
+| `NativeTypedef: true` | Implied by `w32m::handle` marker baked into the macro |
 
-| Underlying shape | Examples | Count |
-|---|---|---|
-| `typedef PVOID NAME` | `BCRYPT_ALG_HANDLE`, `BCRYPT_HASH_HANDLE`, `AVRT_TASK_HANDLE` | ~32 |
-| `typedef IntPtr-sized NAME` | `EVT_HANDLE`, `HDEVINFO`, `HDPA`, `HCRYPTASYNC` | ~16 |
-| `typedef UIntPtr-sized NAME` | `HACCESSOR`, `JET_HANDLE`, `HCRYPTPROV_LEGACY` | ~16 |
-| `typedef ulong NAME` | `CONTROLTRACE_HANDLE`, `PROCESSTRACE_HANDLE` | ~4 |
-| `typedef uint NAME` | `MSIHANDLE`, `OLE_HANDLE` | ~2 |
-| `typedef struct _TP_X *` | `PTP_IO`, `PTP_TIMER`, `PTP_POOL` | ~7 |
+### Category 2: Typedef-style handles (~73 entries)
 
-Examples (illustrative — actual canonical headers and exact placement to be confirmed by the migration tool):
+Entries with `"ValueType"` of `void*`, `IntPtr`, `UIntPtr`, `ulong`, `uint`, or `typedef struct _TP_X *`.
 
 ```c
 // shared/bcrypt.h  ← currently: typedef PVOID BCRYPT_ALG_HANDLE;
@@ -343,68 +369,90 @@ DECLARE_TYPEDEF_WIN32METADATA(PTP_TIMER, intptr_t,
     _Close_handle_with_(CloseThreadpoolTimer));
 ```
 
-#### Non-handle value wrappers (~10 entries)
+Distribution across underlying shapes:
 
-These are not RAII handles — they're value typedefs that exist in `autoTypes.json` only because the pipeline needs an explicit "wrap as `[NativeTypedef]`" signal. Most have no metadata other than the type itself; `BSTR` is the one that carries a `CloseApi`.
+| `autoTypes.json` `ValueType` | Examples | Count |
+|---|---|---|
+| `void*` | `BCRYPT_ALG_HANDLE`, `BCRYPT_HASH_HANDLE`, `AVRT_TASK_HANDLE` | ~32 |
+| `IntPtr` | `EVT_HANDLE`, `HDEVINFO`, `HDPA`, `HCRYPTASYNC` | ~16 |
+| `UIntPtr` | `HACCESSOR`, `JET_HANDLE`, `HCRYPTPROV_LEGACY` | ~16 |
+| `ulong` | `CONTROLTRACE_HANDLE`, `PROCESSTRACE_HANDLE` | ~4 |
+| `uint` | `MSIHANDLE`, `OLE_HANDLE` | ~2 |
+| `typedef struct _TP_*` | `PTP_IO`, `PTP_TIMER`, `PTP_POOL` | ~7 |
+
+Migration mapping is the same as Category 1, except the `ValueType` becomes the second macro argument rather than implied.
+
+### Category 3: Value wrappers (~10 entries)
+
+Non-handle typedefs that exist in `autoTypes.json` only because the pipeline needs an explicit "wrap as `[NativeTypedef]`" signal. Most have no metadata; `BSTR` has a close API.
 
 | Type | Header | Current SDK declaration | Proposed |
 |---|---|---|---|
 | `BOOL` | `shared/minwindef.h:157` | `typedef int BOOL;` | `DECLARE_TYPEDEF_WIN32METADATA(BOOL, int);` |
 | `BOOLEAN` | `shared/ntdef.h:1676` | `typedef UCHAR BOOLEAN;` | `DECLARE_TYPEDEF_WIN32METADATA(BOOLEAN, unsigned char);` |
 | `VARIANT_BOOL` | `shared/wtypes.h:745` | `typedef short VARIANT_BOOL;` | `DECLARE_TYPEDEF_WIN32METADATA(VARIANT_BOOL, short);` |
-| `HRESULT` | `shared/intsafe.h:172` (canonical; also redefined in `ntdef.h`, `strsafe.h`, `winerror.h`, `WTypesbase.h` under `#ifndef _HRESULT_DEFINED`) | `typedef _Return_type_success_(return >= 0) long HRESULT;` | `DECLARE_TYPEDEF_WIN32METADATA(HRESULT, long);` |
-| `NTSTATUS` | `shared/ntdef.h:1062` | `typedef _Return_type_success_(return >= 0) LONG NTSTATUS;` | `DECLARE_TYPEDEF_WIN32METADATA(NTSTATUS, long);` |
-| `LPARAM` | `shared/minwindef.h:187` | `typedef LONG_PTR LPARAM;` | `DECLARE_TYPEDEF_WIN32METADATA(LPARAM, intptr_t);` |
-| `WPARAM` | `shared/minwindef.h:186` | `typedef UINT_PTR WPARAM;` | `DECLARE_TYPEDEF_WIN32METADATA(WPARAM, uintptr_t);` |
-| `LRESULT` | `shared/minwindef.h:188` | `typedef LONG_PTR LRESULT;` | `DECLARE_TYPEDEF_WIN32METADATA(LRESULT, intptr_t);` |
+| `HRESULT` | `shared/intsafe.h:172` (canonical; redefined in 4 other headers under `#ifndef _HRESULT_DEFINED`) | `typedef _Return_type_success_(return >= 0) long HRESULT;` | `DECLARE_TYPEDEF_WIN32METADATA(HRESULT, long);` (see SAL caveat below) |
+| `NTSTATUS` | `shared/ntdef.h:1062` | `typedef _Return_type_success_(return >= 0) LONG NTSTATUS;` | `DECLARE_TYPEDEF_WIN32METADATA(NTSTATUS, long);` (see SAL caveat below) |
+| `LPARAM` | `shared/minwindef.h:187` (also `wtypes.h:160`) | `typedef LONG_PTR LPARAM;` | `DECLARE_TYPEDEF_WIN32METADATA(LPARAM, intptr_t);` |
+| `WPARAM` | `shared/minwindef.h:186` (also `wtypes.h:151`) | `typedef UINT_PTR WPARAM;` | `DECLARE_TYPEDEF_WIN32METADATA(WPARAM, uintptr_t);` |
+| `LRESULT` | `shared/minwindef.h:188` (also `wtypes.h:165`) | `typedef LONG_PTR LRESULT;` | `DECLARE_TYPEDEF_WIN32METADATA(LRESULT, intptr_t);` |
 | `BSTR` | `shared/wtypes.h:737` | `typedef OLECHAR *BSTR;` | `DECLARE_TYPEDEF_WIN32METADATA(BSTR, OLECHAR*, _Close_handle_with_(SysFreeString));` |
 | `PSID` | `shared/WTypesbase.h:242` | `typedef PVOID PSID;` | `DECLARE_TYPEDEF_WIN32METADATA(PSID, void*);` |
-| `PSTR`/`PWSTR`/`PCSTR`/`PCWSTR` | `shared/winnt.h` (varies) | `typedef CHAR *PSTR;` etc. | Same pattern; CsWin32 has manual templates that depend on the wrapper struct existing |
+| `PSTR`/`PWSTR`/`PCSTR`/`PCWSTR` | `shared/winnt.h` (varies) | `typedef CHAR *PSTR;` etc. | Same pattern. CsWin32 has manual templates that depend on the wrapper struct existing — preserved unchanged because the wrapper struct is still emitted. |
 
-**Caveats requiring follow-up work:**
+### Category 4: Special-form types (~3 entries)
 
-1. **Multiple declaration sites.** `HRESULT`, `LPARAM`, `WPARAM`, `LRESULT`, `BOOLEAN`, and `BSTR` are each declared in multiple headers (often in both `.h` and `.Idl` siblings) under `#ifndef`-style guards. The patch tool must annotate exactly one canonical site, or risk duplicate-struct compilation errors.
-2. **SAL on the underlying type.** `HRESULT` and `NTSTATUS` carry `_Return_type_success_(return >= 0)` SAL on the typedef itself. The simple macro substitution above drops it. The follow-up proposal needs to either inline the SAL into the macro expansion or carry it as a separate annotation.
-3. **String wrapper templates.** `PSTR`/`PWSTR`/`BSTR` etc. have hand-written CsWin32 templates that add `IndexOf`, `ToString`, marshalling, etc. The shift-left change preserves the wrapper struct; the projection-side templates remain unchanged.
-
-### Out of scope: Special-form types (3 entries)
-
-Types using non-standard `ValueType` keywords in `autoTypes.json` (`DECLARE_OPAQUE_KEY` for `CF_CONNECTION_KEY`, `AllJoynHandle` for AllJoyn types). With the typed macro from above, these become regular typedefs:
+`autoTypes.json` defines two special `ValueType` keywords (`DECLARE_OPAQUE_KEY`, `AllJoynHandle`) that `NativeTypedefStructsCreator` translates internally. With the typed macro they collapse to ordinary entries:
 
 ```c
+// CF_CONNECTION_KEY (currently ValueType: DECLARE_OPAQUE_KEY → long)
 DECLARE_TYPEDEF_WIN32METADATA(CF_CONNECTION_KEY, long long);
+
+// AllJoyn handles (currently ValueType: AllJoynHandle → IntPtr)
 DECLARE_TYPEDEF_WIN32METADATA(alljoyn_msgarg, intptr_t);
 ```
 
-### Dropped: `AlsoUsableFor` on non-handle structs (1 entry)
+Both special keywords are removed; the `NativeTypedefStructsCreator` translation logic is no longer needed.
 
-`emitter.settings.rsp` contains `DEVPROPKEY=[AlsoUsableFor("PROPERTYKEY")]`. Both CsWin32 and windows-rs only generate conversion code for `[NativeTypedef]`-shaped structs — for regular multi-field structs like `DEVPROPKEY`, the attribute is dormant. **Recommend dropping this entry entirely** as part of this work and observing whether anything regresses; no replacement annotation needed unless a future projection consumer is identified.
+### Category 5: Dropped — `AlsoUsableFor` on non-handle structs (1 entry)
 
-### Out of scope: Cross-cutting concerns
-
-| Concern | Why it's deferred |
-|---|---|
-| **Migration tooling** | The patch system from `shift-left-metadata-plan.md` will rewrite SDK headers programmatically; that tool is shared across all annotation classes |
-| **`ClangSharp v18` upgrade** | Tracked separately as a Phase 1 prerequisite for the entire shift-left effort |
-| **Empty-namespace handle entries (~38 in `autoTypes.json`)** | These rely on `NativeTypedefStructsCreator` deriving the namespace from `CloseApi`. With shift-left, the namespace comes from the header's partition placement — same resolution, different mechanism |
+`emitter.settings.rsp` contains `DEVPROPKEY=[AlsoUsableFor("PROPERTYKEY")]`. Both CsWin32 and windows-rs only generate conversion code for `[NativeTypedef]`-shaped structs — for regular multi-field structs like `DEVPROPKEY`, the attribute is dormant (verified by source inspection). **Recommend dropping this entry entirely** as part of this work and observing whether anything regresses.
 
 ---
 
-## Migration from `autoTypes.json` (DECLARE_HANDLE entries only)
+## Caveats Requiring Specific Solutions
 
-Every field on a `DECLARE_HANDLE` entry maps to a header construct:
+These were the open points blocking full removal of `autoTypes.json`. Each has a concrete plan, not a deferral.
 
-| `autoTypes.json` field | Header equivalent |
-|---|---|
-| `Name` | Struct name in `DECLARE_HANDLE_WIN32METADATA` invocation |
-| `Namespace` | Header partition (resolved via `apiNamesToNamespaces`) |
-| `ValueType: "DECLARE_HANDLE"` | `DECLARE_HANDLE_WIN32METADATA(name, ...)` |
-| `CloseApi` | `_Close_handle_with_(api)` |
-| `InvalidHandleValues[]` | One `_Invalid_handle_(val)` per entry |
-| `AlsoUsableFor` | `_Also_usable_for_(type)` |
-| `NativeTypedef: true` | Implied by `w32m::handle` marker baked into the macro |
+### Caveat 1: Multiple declaration sites
 
-After this migration, `autoTypes.json` shrinks by ~166 entries (~70%). The remaining typedef-style and non-handle entries are addressed by follow-up proposals listed in the Scope section above.
+`HRESULT` is declared in 5 headers (`intsafe.h`, `ntdef.h`, `strsafe.h`, `winerror.h`, `WTypesbase.h`), each behind `#ifndef _HRESULT_DEFINED`. `LPARAM`/`WPARAM`/`LRESULT`/`BOOLEAN`/`BSTR` have similar duplicates across `.h` and `.Idl` siblings.
+
+**Plan:** the migration tool selects exactly one canonical declaration site per type (the earliest one in scrape order). All other sites continue to be guarded by their existing `#ifndef`s. The `_WIN32METADATA_` substitution emits the wrapper struct only at the canonical site; the other `#ifndef`-guarded redefinitions still see the original typedef during normal compilation, but during metadata generation they are skipped because the canonical declaration has already defined the struct.
+
+### Caveat 2: SAL on the underlying type
+
+`HRESULT` and `NTSTATUS` carry `_Return_type_success_(return >= 0)` SAL on the typedef itself.
+
+**Resolution:** No special handling needed. The win32metadata pipeline already does not preserve typedef SAL into the winmd; success contracts are applied per-function via `emitter.settings.rsp` entries like `IUnknown::QueryInterface=[CanReturnErrorsAsSuccess]` (verified in source). The simple `DECLARE_TYPEDEF_WIN32METADATA(HRESULT, long)` form drops the typedef SAL but loses no winmd information, because today's winmd output also drops it.
+
+### Caveat 3: String wrapper templates
+
+CsWin32 has hand-written templates for `PSTR`/`PWSTR`/`PCSTR`/`PCWSTR`/`BSTR`/`HRESULT`/`NTSTATUS`/`BOOL`/`BOOLEAN`/`VARIANT_BOOL` that add `IndexOf`, `ToString`, marshalling, etc. to the generated wrapper struct.
+
+**Plan:** no projection-side change is needed. The CsWin32 template extension keys off the struct *name* (e.g., the switch in `Generator.TypeDef.cs:234` matches `case "PWSTR":`). As long as the wrapper struct named `PWSTR` exists in the winmd with `[NativeTypedef]`, the template extension fires. Both behaviors are preserved by this proposal.
+
+### Caveat 4: Empty-namespace handle entries
+
+~38 `DECLARE_HANDLE` entries in `autoTypes.json` have no explicit `Namespace` field; `NativeTypedefStructsCreator` derives it from the `CloseApi`'s namespace.
+
+**Plan:** with shift-left, the namespace is determined by the partition the header is included in. The migration tool verifies that placing `DECLARE_HANDLE_WIN32METADATA(NAME, ...)` in the header where the type is currently declared produces the same final namespace. For the rare case where the header is included by multiple partitions, `requiredNamespacesForNames.rsp` already provides an override mechanism — same as today.
+
+### Caveat 5: Same-namespace validation
+
+`NativeTypedefStructsCreator` enforces that `CloseApi` and `AlsoUsableFor` references resolve in the same namespace as the type itself.
+
+**Plan:** move this validation into a post-scan step in the emitter (`MetadataSyntaxTreeCleaner` or a sibling pass) that runs once per scrape. For each `[RAIIFree]` and `[AlsoUsableFor]` attribute, verify the named target exists in the same namespace. Throw on mismatch with the same error message as today.
 
 ---
 
@@ -432,25 +480,41 @@ Final canonical form (`obj/handle-annotation-test/final.h`) produces the exact `
 
 ## Implementation Steps
 
-1. **Add `win32metadata.h`** with the `_Close_handle_with_`, `_Invalid_handle_`, `_Also_usable_for_` macros and the `DECLARE_HANDLE` redefinition + `DECLARE_HANDLE_WIN32METADATA` macro.
+1. **Add `win32metadata.h`** with the `_Close_handle_with_` / `_Invalid_handle_` / `_Also_usable_for_` annotation macros and the three structural macros (`DECLARE_HANDLE` redefinition, `DECLARE_HANDLE_WIN32METADATA`, `DECLARE_TYPEDEF_WIN32METADATA`).
 2. **Add `-D_WIN32METADATA_=1`** to `baseSettings.rsp` (already validated separately by the enum proposal) and `#include "win32metadata.h"` to the scraper include chain.
-3. **Extend `MetadataSyntaxTreeCleaner`** to recognize `[NativeAnnotation("w32m::handle")]`, `w32m::raii_free=...`, `w32m::invalid_handle=...`, `w32m::also_usable_for=...` and emit the corresponding managed attributes. Move the same-namespace validation logic out of `NativeTypedefStructsCreator` into this path.
-4. **Build a migration tool** that reads `autoTypes.json` for `DECLARE_HANDLE` entries and rewrites the appropriate SDK headers (via the patch system from `shift-left-metadata-plan.md`) to use `DECLARE_HANDLE_WIN32METADATA`.
-5. **Validate winmd equivalence** — compare winmd output handle-by-handle against the baseline.
-6. **Remove the `DECLARE_HANDLE` entries from `autoTypes.json`.** Keep the file for the remaining ~80 entries until follow-up proposals address them.
-7. **Eventually push these macros into the official SDK headers**, mirroring the SAL adoption path.
+3. **Extend `MetadataSyntaxTreeCleaner`** to recognize `[NativeAnnotation("w32m::handle")]`, `w32m::raii_free=...`, `w32m::invalid_handle=...`, `w32m::also_usable_for=...` and emit the corresponding managed attributes. Move the same-namespace validation from `NativeTypedefStructsCreator` into a post-scan pass here (Caveat 5).
+4. **Build a migration tool** that reads each `autoTypes.json` entry, locates its current SDK header declaration, and rewrites it to the appropriate macro form via the patch system from `shift-left-metadata-plan.md`. The tool handles canonical-site selection (Caveat 1) and namespace verification (Caveat 4).
+5. **Validate winmd equivalence** — compare winmd output type-by-type against the baseline. Validation passes if every type that previously had `[NativeTypedef]`, `[RAIIFree]`, `[InvalidHandleValue]`, or `[AlsoUsableFor]` still carries the same set of attributes with the same values.
+6. **Drop the `DEVPROPKEY=[AlsoUsableFor("PROPERTYKEY")]` line** from `emitter.settings.rsp` (Category 5).
+7. **Remove `autoTypes.json`**, `NativeTypedefStructsCreator.cs`, `AutoType.cs`, `PrepSettingsForAutoTypes.cs`, and the JSON load path in `Windows.Win32.proj`.
+8. **Eventually push these macros into the official SDK headers**, mirroring the SAL adoption path.
+
+After step 7, `autoTypes.json` no longer exists. The header is the single source of truth for every handle and value typedef in the winmd.
 
 ---
 
-## Open Questions
+## Resolved Decisions
 
-1. **`InvalidHandleValue` argument types.** The current `[InvalidHandleValueAttribute]` constructor takes `long`. Some sentinels in `autoTypes.json` are `-1` and `0`, which fit; the cleaner just needs to parse the annotation string and emit the right constant.
+The three questions that were open during proposal drafting have been resolved by source/data inspection:
 
-2. **Comment-mode validation.** `NativeTypedefStructsCreator` currently throws on missing close APIs and on cross-namespace `CloseApi`/`AlsoUsableFor`. We must preserve these checks in the new emitter path; the natural home is inside `MetadataSyntaxTreeCleaner` (or a post-scan validation step).
+### Decision 1: Phasing — land as a single proposal
 
-3. **Empty-namespace handle entries.** `autoTypes.json` has ~38 `DECLARE_HANDLE` entries with no explicit `Namespace` — `NativeTypedefStructsCreator` derives it from the `CloseApi`'s namespace. With shift-left, the namespace comes from the header's partition placement. The migration tool needs to verify that placing `DECLARE_HANDLE_WIN32METADATA(NAME, ...)` in the header it currently lives in produces the same final namespace.
+The migration applies the same shift-left mechanism to all 280-ish entries. Splitting Category 1 (DECLARE_HANDLE) from Categories 2-4 (typedef-style + value wrappers) would require keeping `NativeTypedefStructsCreator`, `AutoType.cs`, and a partial `autoTypes.json` in production for the duration of the split — adding code-path complexity that's purely temporary. **Land as one proposal.** PR review can still proceed category-by-category if reviewers prefer.
 
-4. **Does the migration tool patch SDK headers in `RecompiledIdlHeaders/`, or use overlay headers?** The enum proposal uses partition-local overlay headers as Phase 1 to avoid touching SDK headers during prototyping. The same approach applies here: prototype with overlays, then move to in-place SDK header patches via the shared patch system.
+### Decision 2: Overlay headers in Phase 1, in-place SDK patches in Phase 2
+
+Same approach the enum proposal uses: prototype with partition-local overlay headers (`generation/WinSDK/Partitions/<P>/handles.h`) included by each partition's `main.cpp`, ahead of the SDK `#include`s. This keeps the SDK headers untouched during validation. Phase 2 moves the annotations into the SDK headers themselves via the shared patch system from `shift-left-metadata-plan.md`. The transition between phases is mechanical: the same macro invocations move from overlay files into the canonical declaration sites.
+
+### Decision 3: Keep `DECLARE_HANDLE_WIN32METADATA` and `DECLARE_TYPEDEF_WIN32METADATA` as distinct macros
+
+The two macros differ in their `#else` (normal-compilation) branch:
+
+| Macro | `#else` expansion | Matches SDK form |
+|---|---|---|
+| `DECLARE_HANDLE_WIN32METADATA(name, ...)` | `DECLARE_HANDLE(name)` → `struct name__; typedef struct name__ *name` | Existing `DECLARE_HANDLE` users (Category 1) |
+| `DECLARE_TYPEDEF_WIN32METADATA(name, type, ...)` | `typedef type name` | Existing typedef users (Categories 2-4) |
+
+Verified by inspecting the 32 `void*`-underlying entries: every one of them is declared in the SDK as `typedef PVOID NAME;`, **not** as `DECLARE_HANDLE(NAME)`. Examples: `bcrypt.h:451-454` declares `BCRYPT_HANDLE`/`BCRYPT_ALG_HANDLE`/`BCRYPT_KEY_HANDLE`/`BCRYPT_HASH_HANDLE` all as `typedef PVOID`. Collapsing the two macros would force a different normal-compilation shape on these types — a source-compat change we shouldn't make.
 
 ---
 
