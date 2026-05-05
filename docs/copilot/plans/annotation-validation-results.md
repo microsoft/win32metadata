@@ -333,3 +333,31 @@ uint dwParam  // ✅ Function metadata carried on first param
 ```
 
 **Limitations:** Semantically incorrect; doesn't work for zero-parameter functions.
+
+---
+
+## Remaining Sidecar Annotations to Shift Left
+
+*Updated: April 2026*
+
+The enum remapping proposal (PR [#2247](https://github.com/microsoft/win32metadata/pull/2247)) replaces `enums.json` with conditional C++ enum declarations in headers. The following Category A sidecar annotations remain — each needs prototyping, a comprehensive proposal, and a spec update:
+
+| # | Annotation | Sidecar Source | Entries | Complexity |
+|---|---|---|---|---|
+| 1 | **SetLastError** | `WithSetLastError.rsp` | ~1,600 | Low |
+| 2 | **OS Version** | `supportedOS.rsp` | ~8,600 | Low |
+| 3 | **Manual lib mappings** | `libMappingsManual.rsp` | ~190 | Low |
+| 4 | **RAII/Close API** | `autoTypes.json` | ~60 | Low |
+| 5 | **Invalid Handle Values** | `autoTypes.json` | ~40 | Low |
+| 6 | **AlsoUsableFor** | `autoTypes.json` | ~10 | Low |
+| 7 | **RAII on return** | `emitter.settings.rsp` memberRemap | ~50 | Medium |
+| 8 | **ComOutPtr** | `emitter.settings.rsp` memberRemap | ~30 | Medium |
+| 9 | **DoNotRelease** | `emitter.settings.rsp` memberRemap | ~20 | Medium |
+| 10 | **NotNullTerminated** | `emitter.settings.rsp` memberRemap | ~10 | Low |
+| 11 | **NullNullTerminated** | `emitter.settings.rsp` memberRemap | ~10 | Low |
+| 12 | **Array info** | `emitter.settings.rsp` memberRemap | ~50 | Medium |
+| 13 | **MemorySize** | `emitter.settings.rsp` memberRemap | ~20 | Medium |
+| 14 | **ErrorsAsSuccess** | `emitter.settings.rsp` memberRemap | ~30 | Low |
+| 15 | **MultipleSuccess** | `emitter.settings.rsp` memberRemap | ~10 | Low |
+
+Items 4–6 (handle types from `autoTypes.json`) are closely related and can be addressed as a single proposal. Items 7–15 (emitter memberRemap annotations) may also be groupable.
