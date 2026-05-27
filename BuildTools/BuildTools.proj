@@ -15,6 +15,6 @@
     <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="$(LastWin32MetadataReleaseVersion)" GeneratePathProperty="True">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.619.1" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.619.3" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>
