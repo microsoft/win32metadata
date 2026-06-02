@@ -1168,10 +1168,20 @@ namespace ClangSharpSourceToWinmd
                     (parameters.First().Attrs & ParameterAttributes.Out) == ParameterAttributes.Out)
                 {
                     methodAttrs |= MethodAttributes.SpecialName;
+                    parameters.First().Attrs &= ~ParameterAttributes.In;
                 }
                 else if ((methodName.StartsWith("set_") || methodName.StartsWith("put_")) &&
                     parameters.Count() == 1 &&
                     (parameters.First().Attrs & ParameterAttributes.In) == ParameterAttributes.In)
+                {
+                    methodAttrs |= MethodAttributes.SpecialName;
+                }
+                else if (methodName.StartsWith("add_") && parameters.Count() == 2)
+                {
+                    methodAttrs |= MethodAttributes.SpecialName;
+                    parameters.Last().Attrs &= ~ParameterAttributes.In;
+                }
+                else if (methodName.StartsWith("remove_") && parameters.Count() == 1)
                 {
                     methodAttrs |= MethodAttributes.SpecialName;
                 }
@@ -2550,7 +2560,7 @@ namespace ClangSharpSourceToWinmd
 
             public string Name { get; }
             public ITypeSymbol Type { get; }
-            public ParameterAttributes Attrs { get; }
+            public ParameterAttributes Attrs { get; set; }
             public IParameterSymbol Symbol { get; }
         }
 
