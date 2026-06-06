@@ -1517,7 +1517,8 @@ typedef enum D3D12_MESSAGE_ID {
     D3D12_MESSAGE_ID_RESOLVEQUERYDATA_INVALID_QUERYHEAP = 1444,
 
     D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_NON_UNIFORM_RESOURCE_INDEX = 1451,
-    D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1464, // This must be the last entry in the enum, and must be one past the last enumerant.
+    D3D12_MESSAGE_ID_DEGENERATE_SPLIT_BARRIER = 1466,
+    D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1467, // This must be the last entry in the enum, and must be one past the last enumerant.
 } D3D12_MESSAGE_ID;
 
 typedef struct D3D12_MESSAGE

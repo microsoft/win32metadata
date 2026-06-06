@@ -15,6 +15,11 @@ on:
     paths-ignore:
       - 'apidocs/**'
       - 'docs/**'
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'apidocs/**'
+      - 'docs/**'
   workflow_dispatch:
 
 concurrency:
