@@ -216,6 +216,8 @@ stages:
           bin/Release/net8.0/ICSharpCode.Decompiler.dll;
           bin/Release/net8.0/MetadataTasks.dll;
           bin/Release/net8.0/MetadataUtils.dll;
+          bin/Release/net8.0/win-x64/Win32MetadataScraper.dll;
+          bin/Release/net8.0/win-x64/Win32MetadataScraper.exe;
           bin/Release/net8.0/WinmdUtils.dll;
           bin/Windows.Win32.winmd;
           scripts/*.ps1;
