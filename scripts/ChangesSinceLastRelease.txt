@@ -62,3 +62,8 @@ Windows.Win32.Graphics.Direct3D12.ID3D12RootSignature1 added
 # Upgrade D3D12 Agility SDK to 1.619.3
 Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_DEGENERATE_SPLIT_BARRIER added
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1442, winmd2 = 1467
+# Annotate reserved parameters of MsiDatabaseGenerateTransform
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformA : iReserved1 : [In] => [In,Reserved]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformA : iReserved2 : [In] => [In,Reserved]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformW : iReserved1 : [In] => [In,Reserved]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformW : iReserved2 : [In] => [In,Reserved]
