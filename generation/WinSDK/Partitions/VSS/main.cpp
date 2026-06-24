@@ -17,7 +17,7 @@
 #include <vss.h>
 #include <vswriter.h>
 #include <vsmgmt.h>
-//#include <vsbackup.h> This contains C++ classes instead of COM interfaces
+#include <vsbackup.h>
 #include <vsadmin.h>
 #include <vsprov.h>
 #include <vsserror.h>
