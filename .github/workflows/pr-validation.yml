@@ -139,18 +139,36 @@ jobs:
         shell: pwsh
         run: .\scripts\DoTests.ps1
 
-      - name: Generate API surface dumps
+      - name: Download baseline winmd from main
+        if: github.event_name == 'pull_request'
+        id: baseline
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: pr-validation.yml
+          branch: ${{ github.event.pull_request.base.ref }}
+          name: winmd
+          path: bin/baseline-artifact
+          search_artifacts: true
+          if_no_artifact_found: warn
+
+      - name: Generate API surface diff
+        if: github.event_name == 'pull_request'
         id: apidump
         shell: pwsh
         run: |
+          $ErrorActionPreference = 'Continue'
+          $PSNativeCommandUseErrorActionPreference = $false
+
           $winmdUtils = "bin\Release\net8.0\WinmdUtils.dll"
           $currentWinmd = "bin\Windows.Win32.winmd"
 
-          # Get the baseline winmd from the last release NuGet package
-          . .\scripts\CommonUtils.ps1
-          $ErrorActionPreference = 'Continue'
-          $PSNativeCommandUseErrorActionPreference = $false
-          $baselineWinmd = Get-Win32MetadataLastReleaseWinmdPath
+          # Determine baseline: prefer main branch artifact, fall back to last release
+          $baselineWinmd = "bin\baseline-artifact\Windows.Win32.winmd"
+          if (-not (Test-Path $baselineWinmd)) {
+            Write-Host "No main branch artifact found, falling back to last NuGet release..."
+            . .\scripts\CommonUtils.ps1
+            $baselineWinmd = Get-Win32MetadataLastReleaseWinmdPath
+          }
 
           Write-Host "Baseline: $baselineWinmd"
           Write-Host "Current:  $currentWinmd"
@@ -166,7 +184,6 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Failed to dump current" }
 
           # Generate diff — git diff exits 1 when differences exist, which is expected
-          # Use cmd /c to isolate from PowerShell's native command error handling
           & cmd /c "git diff --no-index --unified=3 bin\baseline.apidump.cs bin\current.apidump.cs > bin\api-diff.patch 2>&1"
           $diffExitCode = $LASTEXITCODE
 
@@ -196,7 +213,6 @@ jobs:
           }
 
           # Reset LASTEXITCODE so GitHub Actions doesn't treat this step as failed
-          # (git diff exits 1 when differences exist, which is expected/success for us)
           $global:LASTEXITCODE = 0
 
       - name: Post API diff comment on PR
@@ -215,7 +231,7 @@ jobs:
             const body = `${marker}
             ## 📋 API Surface Diff
 
-            **+${additions} additions / -${deletions} deletions** vs last release ([full build log](${runUrl}))
+            **+${additions} additions / -${deletions} deletions** vs main branch ([full build log](${runUrl}))
 
             <details>
             <summary>Click to expand API diff</summary>

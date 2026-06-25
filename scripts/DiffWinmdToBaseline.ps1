@@ -7,7 +7,8 @@
     winmd to sorted C# declarations, then displays a unified diff of the changes.
 
     This is a local development helper for reviewing API changes before submitting a PR.
-    The same diff is automatically posted as a PR comment by the CI pipeline.
+    The CI pipeline automatically diffs against the target branch (main) and posts
+    a PR comment showing only the changes introduced by the PR.
 
 .PARAMETER SkipInstallTools
     Skip building the build tools (assumes they are already built).
