@@ -19,15 +19,19 @@ ThrowOnNativeProcessError
 
 Write-Host "`n`e[32mTesting .winmd succeeded`e[0m"
 
-Write-Host "*** Comparing .winmd to last release" -ForegroundColor Blue
+Write-Host "*** Comparing .winmd to last release (informational)" -ForegroundColor Blue
 
+# Run the comparison for informational purposes — differences are expected
+# and will be reviewed via the PR diff comment posted by CI.
 & "$PSScriptRoot\CompareBinToLastRelease.ps1" -SkipInstallTools
 
 if ($LastExitCode -lt 0)
 {
-    exit -1
+    Write-Host "`e[33mAPI differences detected (see above). These will be posted as a PR comment for review.`e[0m"
 }
-
-Write-Host "`n`e[32mComparing .winmd to last release succeeded`e[0m"
+else
+{
+    Write-Host "`n`e[32mNo API differences from last release.`e[0m"
+}
 
 exit 0

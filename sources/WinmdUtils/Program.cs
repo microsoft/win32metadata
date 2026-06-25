@@ -12,6 +12,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 using ICSharpCode.Decompiler;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
@@ -134,6 +135,14 @@ namespace WinmdUtilsProgram
 
             showBrokenArchTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowBrokenArchTypes);
 
+            var dumpCommand = new Command("dump", "Dump all types in a winmd as sorted C# declarations.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to dump.") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--output", "Output file path. If not specified, writes to stdout.") { IsRequired = false },
+            };
+
+            dumpCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, IConsole>(DumpWinmd);
+
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
@@ -144,6 +153,7 @@ namespace WinmdUtilsProgram
                 showPointersToDelegates,
                 showSuggestedRemappings,
                 compareCommand,
+                dumpCommand,
                 showLibImports,
                 createLibRsp,
                 showNamespaceDependencies,
@@ -1844,6 +1854,107 @@ namespace WinmdUtilsProgram
 
                 return 0;
             }
+        }
+
+        public static int DumpWinmd(FileInfo winmd, FileInfo output, IConsole console)
+        {
+            var settings = new DecompilerSettings()
+            {
+                ThrowOnAssemblyResolveErrors = false,
+                LoadInMemory = true
+            };
+
+            var decompiler = new CSharpDecompiler(winmd.FullName, settings);
+
+            // Map types from metadata, sorted by full name for deterministic output
+            var peFile = decompiler.TypeSystem.MainModule.PEFile;
+            var metadata = peFile.Metadata;
+
+            var sortedHandles = new List<System.Reflection.Metadata.TypeDefinitionHandle>();
+            var typeFullNames = new Dictionary<System.Reflection.Metadata.TypeDefinitionHandle, string>();
+
+            foreach (var handle in metadata.TypeDefinitions)
+            {
+                var typeDef = metadata.GetTypeDefinition(handle);
+                string ns = metadata.GetString(typeDef.Namespace);
+                string name = metadata.GetString(typeDef.Name);
+                string fullName = string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
+
+                if (fullName == "<Module>")
+                    continue;
+
+                // Skip nested types — they'll be decompiled as part of their parent
+                if (typeDef.GetDeclaringType().IsNil == false)
+                    continue;
+
+                sortedHandles.Add(handle);
+                typeFullNames[handle] = fullName;
+            }
+
+            sortedHandles.Sort((a, b) => string.Compare(typeFullNames[a], typeFullNames[b], StringComparison.Ordinal));
+
+            TextWriter writer;
+            if (output != null)
+            {
+                writer = new StreamWriter(output.FullName, false, Encoding.UTF8);
+            }
+            else
+            {
+                writer = Console.Out;
+            }
+
+            try
+            {
+                writer.WriteLine("// Win32 Metadata API Surface");
+                writer.WriteLine($"// Source: {winmd.Name}");
+                writer.WriteLine();
+
+                string currentNamespace = null;
+                foreach (var handle in sortedHandles)
+                {
+                    string fullName = typeFullNames[handle];
+                    string ns = fullName.Contains('.') ? fullName.Substring(0, fullName.LastIndexOf('.')) : "";
+
+                    if (ns != currentNamespace)
+                    {
+                        if (currentNamespace != null)
+                        {
+                            writer.WriteLine();
+                        }
+                        writer.WriteLine($"// ═══════════════════════════════════════════════════════════════");
+                        writer.WriteLine($"// Namespace: {ns}");
+                        writer.WriteLine($"// ═══════════════════════════════════════════════════════════════");
+                        writer.WriteLine();
+                        currentNamespace = ns;
+                    }
+
+                    try
+                    {
+                        var fullTypeName = new ICSharpCode.Decompiler.TypeSystem.FullTypeName(fullName);
+                        var syntaxTree = decompiler.DecompileType(fullTypeName);
+                        writer.WriteLine(syntaxTree.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        writer.WriteLine($"// ERROR decompiling {fullName}: {ex.Message}");
+                        writer.WriteLine();
+                    }
+                }
+
+                if (output != null)
+                {
+                    console.Out.WriteLine($"Dumped {sortedHandles.Count} types to {output.FullName}");
+                }
+            }
+            finally
+            {
+                if (output != null)
+                {
+                    writer.Dispose();
+                }
+            }
+
+            return 0;
         }
 
         public static int ShowMissingImports(FileInfo first, FileInfo second, string exclusions, IConsole console)

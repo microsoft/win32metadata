@@ -112,11 +112,6 @@ function Get-LibMappingsFile
     return $libMappingOutputFileName
 }
 
-function Get-ChangesSinceLastReleaseFile
-{
-    return Join-Path $PSScriptRoot "ChangesSinceLastRelease.txt"
-}
-
 function Get-NugetPropsProperty
 {
     Param ([string] $name, [string]$projectName)
