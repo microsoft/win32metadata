@@ -67,3 +67,22 @@ Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerat
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformA : iReserved2 : [In] => [In,Reserved]
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformW : iReserved1 : [In] => [In,Reserved]
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiDatabaseGenerateTransformW : iReserved2 : [In] => [In,Reserved]
+# Add IVssBackupComponents and related VSS backup interfaces from vsbackup.h (fixes #2095)
+Windows.Win32.Storage.Vss.Apis.CreateVssBackupComponentsInternal added
+Windows.Win32.Storage.Vss.Apis.CreateVssExamineWriterMetadataInternal added
+Windows.Win32.Storage.Vss.Apis.GetProviderMgmtInterfaceInternal added
+Windows.Win32.Storage.Vss.Apis.IsVolumeSnapshottedInternal added
+Windows.Win32.Storage.Vss.Apis.ShouldBlockRevertInternal added
+Windows.Win32.Storage.Vss.Apis.VSS_SW_BOOTABLE_STATE added
+Windows.Win32.Storage.Vss.Apis.VssFreeSnapshotPropertiesInternal added
+Windows.Win32.Storage.Vss.IVssBackupComponents added
+Windows.Win32.Storage.Vss.IVssBackupComponentsEx added
+Windows.Win32.Storage.Vss.IVssBackupComponentsEx2 added
+Windows.Win32.Storage.Vss.IVssBackupComponentsEx3 added
+Windows.Win32.Storage.Vss.IVssBackupComponentsEx4 added
+Windows.Win32.Storage.Vss.IVssExamineWriterMetadata added
+Windows.Win32.Storage.Vss.IVssExamineWriterMetadataEx added
+Windows.Win32.Storage.Vss.IVssExamineWriterMetadataEx2 added
+Windows.Win32.Storage.Vss.IVssWMComponent added
+Windows.Win32.Storage.Vss.IVssWriterComponentsExt added
+Windows.Win32.Storage.Vss.VSS_COMPONENTINFO added

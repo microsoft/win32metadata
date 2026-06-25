@@ -4,8 +4,12 @@ CreateWriter
 CVssWriterEx
 CreateWriterEx
 CVssWriterEx2
+CreateVssBackupComponents
+CreateVssExamineWriterMetadata
+ShouldBlockRevert
 --traverse
 <IncludeRoot>/um/vsadmin.h
+<IncludeRoot>/um/vsbackup.h
 <IncludeRoot>/um/vsmgmt.h
 <IncludeRoot>/um/vsprov.h
 <IncludeRoot>/um/vss.h
