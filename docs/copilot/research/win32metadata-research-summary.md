@@ -123,7 +123,7 @@ Tasks are loaded via `UsingTask AssemblyFile` (in-process), but net8.0 assemblie
 - No full winmd binary snapshots (only ~100 interfaces)
 - No cross-build consistency tests ("build A vs build B")
 - No hash-based regression detection
-- `ChangesSinceLastRelease.txt` is manually maintained (400+ lines)
+- API diffs are posted as PR comments (full C# declarations via `WinmdUtils dump`)
 
 ### 3.5 Metadata Defined After-the-Fact
 

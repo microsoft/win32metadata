@@ -66,7 +66,7 @@ Each arch job scrapes ALL partitions for that architecture.
 
 **NuGet feed:** The repo uses a private ADO Artifact Feed (`Win32Metadata-Dependencies`) as its sole package source. New packages from nuget.org must be saved to this feed first.
 
-**Winmd equivalence:** After any change, the winmd must be compared against the baseline. The `NoSuggestedRemappings` test in `Windows.Win32.Tests` validates that no new unhandled remappings were introduced. Changes to the winmd are tracked in `scripts/ChangesSinceLastRelease.txt`.
+**Winmd equivalence:** After any change, the winmd must be compared against the baseline. The `NoSuggestedRemappings` test in `Windows.Win32.Tests` validates that no new unhandled remappings were introduced. API diffs are automatically posted as PR comments by CI. Run `.\scripts\DiffWinmdToBaseline.ps1` locally to see a full C# declaration diff against the last release.
 
 **Cross-partition remaps:** Remaps in `scraper.settings.rsp` are global — they apply to all partitions. Auto-discovered remaps (from `Win32MetadataScraper`) are per-partition. If a tag name is used across partitions but the typedef is only in one partition's headers, the remap must be global (in `scraper.settings.rsp`) OR the referencing partition must `#include` the header with the typedef.
 

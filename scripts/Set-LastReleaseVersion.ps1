@@ -15,9 +15,3 @@ $dirBuildPropsXml.Load($dirBuildPropsFile)
 $dirBuildPropsXml.Project.PropertyGroup.LastWin32MetadataReleaseVersion = $LastReleaseVersion
 $dirBuildPropsXml.Save($dirBuildPropsFile)
 
-. "$PSScriptRoot\CommonUtils.ps1"
-$changesFile = Get-ChangesSinceLastReleaseFile
-Write-Verbose "Clearing contents of $changesFile..."
-
-Clear-Content -Path $changesFile
-

@@ -252,19 +252,29 @@ Run `./DoAll.ps1 -ExcludePackages -ExcludeSamples` in [PowerShell 7](https://aka
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
-### Comparing against the last release
+### Reviewing API changes
 
-A list of accumulated changes since the last release is kept at [ChangesSinceLastRelease.txt](scripts/ChangesSinceLastRelease.txt). New changes are reported by `./scripts/TestWinmdBinary.ps1` which is called during both full and incremental builds if you follow the steps above.
+API differences between your build and the last release are automatically detected during the build. When you submit a PR, the CI pipeline posts a comment showing the full API diff as decompiled C# declarations, making it easy for reviewers to see exactly what changed.
 
-When validating changes, it's important to evaluate the diffs to ensure all changes are intentional. Common patterns to expect in the diffs include:
+#### Viewing changes locally
+
+To see a full diff of your changes locally before submitting a PR:
+
+```powershell
+.\scripts\DiffWinmdToBaseline.ps1
+```
+
+This decompiles both the current build's winmd and the last released winmd to sorted C# declarations, then displays a unified diff. The output shows full type declarations with attributes, method signatures, and constants — similar to what you'd see in ILSpy.
+
+#### What to look for
+
+When validating changes, it's important to evaluate the diffs to ensure all changes are intentional. Common patterns to expect include:
 
 * APIs were added to the baseline
 * APIs were removed from the baseline
 * APIs were moved to different namespaces
 
 Additionally, it is useful to load the winmd in [ILSpy](https://github.com/icsharpcode/ILSpy) and navigate through the APIs as another means to identify additional changes that may be required to achieve the desired end result. You may notice that two related APIs are in different namespaces or that a type that an API depends on was not moved as you would have expected. If that happens, search the repo for the API or its header file to identify where it may be being mapped to another namespace.
-
-Once all the changes are validated, update the list of known changes since the last release by following the steps reported in the build output. When a new release is made, the list of changes in [ChangesSinceLastRelease.txt](scripts/ChangesSinceLastRelease.txt) will get reset and will start accumulating again until the next release.
 
 ## Releasing
 

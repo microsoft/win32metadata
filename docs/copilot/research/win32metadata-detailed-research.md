@@ -475,7 +475,7 @@ DoAll.ps1
 
 6. **Allow-list testing pattern**: Tests use `.rsp` allow-list files to track known acceptable violations. This enables progressive quality improvement without blocking builds.
 
-7. **Winmd diff as release gate**: Every build compares the new .winmd against the last release via `WinmdUtils compare`. The diff is tracked in `ChangesSinceLastRelease.txt` to ensure all changes are intentional.
+7. **Winmd diff for PR review**: Every build compares the new .winmd against the last release via `WinmdUtils compare`. The full API diff (decompiled C# declarations) is posted as a PR comment by CI for reviewer visibility.
 
 8. **Separate pipelines for metadata vs docs**: The API documentation pipeline (`azure-pipelines-apidocs.yml`) is completely independent, triggered only by changes in `apidocs/`.
 

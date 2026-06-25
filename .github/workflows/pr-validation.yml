@@ -22,6 +22,10 @@ on:
       - 'docs/**'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 concurrency:
   group: pr-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -134,6 +138,166 @@ jobs:
       - name: Run tests
         shell: pwsh
         run: .\scripts\DoTests.ps1
+
+      - name: Generate API surface dumps
+        id: apidump
+        shell: pwsh
+        run: |
+          $winmdUtils = "bin\Release\net8.0\WinmdUtils.dll"
+          $currentWinmd = "bin\Windows.Win32.winmd"
+
+          # Get the baseline winmd from the last release NuGet package
+          . .\scripts\CommonUtils.ps1
+          $ErrorActionPreference = 'Continue'
+          $PSNativeCommandUseErrorActionPreference = $false
+          $baselineWinmd = Get-Win32MetadataLastReleaseWinmdPath
+
+          Write-Host "Baseline: $baselineWinmd"
+          Write-Host "Current:  $currentWinmd"
+
+          # Dump baseline
+          Write-Host "Dumping baseline..."
+          & dotnet $winmdUtils dump --winmd $baselineWinmd --output bin\baseline.apidump.cs
+          if ($LASTEXITCODE -ne 0) { throw "Failed to dump baseline" }
+
+          # Dump current build
+          Write-Host "Dumping current build..."
+          & dotnet $winmdUtils dump --winmd $currentWinmd --output bin\current.apidump.cs
+          if ($LASTEXITCODE -ne 0) { throw "Failed to dump current" }
+
+          # Generate diff — git diff exits 1 when differences exist, which is expected
+          # Use cmd /c to isolate from PowerShell's native command error handling
+          & cmd /c "git diff --no-index --unified=3 bin\baseline.apidump.cs bin\current.apidump.cs > bin\api-diff.patch 2>&1"
+          $diffExitCode = $LASTEXITCODE
+
+          if ($diffExitCode -eq 0) {
+            Write-Host "No API differences found."
+            "has_diff=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          } else {
+            Write-Host "API differences detected."
+            "has_diff=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+            # Count additions/deletions from the patch file
+            $diffLines = Get-Content bin\api-diff.patch
+            $additions = ($diffLines | Where-Object { $_ -match '^\+[^+]' }).Count
+            $deletions = ($diffLines | Where-Object { $_ -match '^\-[^-]' }).Count
+            "additions=$additions" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+            "deletions=$deletions" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+            Write-Host "+$additions additions / -$deletions deletions"
+
+            # Truncate if too large for a GH comment
+            $diffText = $diffLines -join "`n"
+            $maxLen = 60000
+            if ($diffText.Length -gt $maxLen) {
+              $diffText = $diffText.Substring(0, $maxLen) + "`n`n... (diff truncated - see full artifact)"
+              Set-Content -Path bin\api-diff.patch -Value $diffText -Encoding UTF8
+            }
+          }
+
+          # Reset LASTEXITCODE so GitHub Actions doesn't treat this step as failed
+          # (git diff exits 1 when differences exist, which is expected/success for us)
+          $global:LASTEXITCODE = 0
+
+      - name: Post API diff comment on PR
+        if: github.event_name == 'pull_request' && steps.apidump.outputs.has_diff == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const diff = fs.readFileSync('bin/api-diff.patch', 'utf8');
+            const prNumber = context.payload.pull_request.number;
+            const additions = ${{ steps.apidump.outputs.additions || 0 }};
+            const deletions = ${{ steps.apidump.outputs.deletions || 0 }};
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            const marker = '<!-- win32metadata-api-diff -->';
+            const body = `${marker}
+            ## 📋 API Surface Diff
+
+            **+${additions} additions / -${deletions} deletions** vs last release ([full build log](${runUrl}))
+
+            <details>
+            <summary>Click to expand API diff</summary>
+
+            \`\`\`diff
+            ${diff}
+            \`\`\`
+
+            </details>
+
+            > This comment is automatically updated on each push.`;
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100
+            });
+
+            const existing = comments.data.find(c => c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body
+              });
+            }
+
+      - name: Post no-diff comment on PR
+        if: github.event_name == 'pull_request' && steps.apidump.outputs.has_diff == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const marker = '<!-- win32metadata-api-diff -->';
+            const body = `${marker}\n## 📋 API Surface Diff\n\n✅ No API differences vs last release.\n\n> This comment is automatically updated on each push.`;
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100
+            });
+
+            const existing = comments.data.find(c => c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body
+              });
+            }
+
+      - name: Upload winmd and API dump
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: winmd
+          path: |
+            bin/Windows.Win32.winmd
+            bin/current.apidump.cs
+            bin/baseline.apidump.cs
+            bin/api-diff.patch
+          retention-days: 30
 
       - name: Upload build logs
         uses: actions/upload-artifact@v4
