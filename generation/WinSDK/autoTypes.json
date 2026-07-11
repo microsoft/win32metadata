@@ -447,23 +447,29 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
     "Name": "PIDLIST_RELATIVE",
-    "ValueType": "Windows.Win32.UI.Shell.Common.ITEMIDLIST*",
-    "CloseApi": "CoTaskMemFree",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
     "Name": "PIDLIST_ABSOLUTE",
-    "ValueType": "Windows.Win32.UI.Shell.Common.ITEMIDLIST*",
-    "CloseApi": "CoTaskMemFree",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
     "AlsoUsableFor": "PIDLIST_RELATIVE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
     "Name": "PITEMID_CHILD",
-    "ValueType": "Windows.Win32.UI.Shell.Common.ITEMIDLIST*",
-    "CloseApi": "CoTaskMemFree",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
     "AlsoUsableFor": "PIDLIST_RELATIVE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
