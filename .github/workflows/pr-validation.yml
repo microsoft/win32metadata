@@ -170,7 +170,7 @@ jobs:
             // Find the winmd artifact
             const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: context.repo.owner,
               run_id: runId
             });
 
@@ -348,6 +348,7 @@ jobs:
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
+                issue_number: prNumber,
                 comment_id: existing.id,
                 body: body
               });
