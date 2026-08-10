@@ -170,7 +170,7 @@ jobs:
             // Find the winmd artifact
             const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: context.repo.owner,
               run_id: runId
             });
 
@@ -348,6 +348,7 @@ jobs:
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
+                issue_number: prNumber,
                 comment_id: existing.id,
                 body: body
               });
@@ -370,7 +371,7 @@ jobs:
             bin/current.apidump.cs
             bin/baseline.apidump.cs
             bin/api-diff.patch
-          retention-days: 30
+          retention-days: 90
 
       - name: Upload build logs
         uses: actions/upload-artifact@v4
