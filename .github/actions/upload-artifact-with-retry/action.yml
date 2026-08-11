@@ -1,6 +1,9 @@
 name: Upload artifact with retry
 description: Upload a workflow artifact and retry once after a transient failure.
 
+# Extracted from .github/workflows/pr-validation.yml to share upload behavior.
+# Retry workaround: https://github.com/actions/upload-artifact/issues/560
+
 inputs:
   name:
     description: Artifact name
