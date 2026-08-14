@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
     <WarningLevel>5</WarningLevel>
@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ClangSharp" Version="17.0.1" />
-    <PackageReference Include="ClangSharp.Interop" Version="17.0.1" />
-    <PackageReference Include="ClangSharp.PInvokeGenerator" Version="17.0.1" />
-    <PackageReference Include="libclang" Version="17.0.4" />
-    <PackageReference Include="libClangSharp" Version="17.0.4" />
+    <PackageReference Include="ClangSharp" Version="21.1.8.4" />
+    <PackageReference Include="ClangSharp.Interop" Version="21.1.8.4" />
+    <PackageReference Include="ClangSharp.PInvokeGenerator" Version="21.1.8.4" />
+    <PackageReference Include="libclang" Version="21.1.8" />
+    <PackageReference Include="libClangSharp" Version="21.1.8.2" />
   </ItemGroup>
 
 </Project>
