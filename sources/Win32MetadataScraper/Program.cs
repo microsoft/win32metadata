@@ -24,6 +24,64 @@ using static ClangSharp.Interop.CXTranslationUnit_Flags;
 
 class Program
 {
+    static readonly Dictionary<string, string> OptionAliases = new(StringComparer.Ordinal)
+    {
+        ["-a"] = "--additional",
+        ["-c"] = "--config",
+        ["-e"] = "--exclude",
+        ["-f"] = "--file",
+        ["-hf"] = "--headerFile",
+        ["--header-file"] = "--headerFile",
+        ["-I"] = "--include-directory",
+        ["-x"] = "--language",
+        ["-l"] = "--libraryPath",
+        ["--library-path"] = "--libraryPath",
+        ["-m"] = "--methodClassName",
+        ["--method-class-name"] = "--methodClassName",
+        ["-n"] = "--namespace",
+        ["-o"] = "--output",
+        ["-r"] = "--remap",
+        ["-std"] = "--std",
+        ["-t"] = "--traverse",
+        ["-wa"] = "--with-attribute",
+        ["-wcc"] = "--with-callconv",
+        ["-wlb"] = "--with-librarypath",
+        ["--with-library-path"] = "--with-librarypath",
+        ["-wsle"] = "--with-setlasterror",
+        ["--with-set-last-error"] = "--with-setlasterror",
+        ["-wsgct"] = "--with-suppressgctransition",
+        ["--with-suppress-gc-transition"] = "--with-suppressgctransition",
+        ["-wt"] = "--with-type",
+        ["-wu"] = "--with-using",
+    };
+
+    static readonly HashSet<string> SupportedOptions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "--additional",
+        "--config",
+        "--exclude",
+        "--exclude-auto-remap",
+        "--file",
+        "--headerFile",
+        "--include-directory",
+        "--language",
+        "--libraryPath",
+        "--methodClassName",
+        "--namespace",
+        "--output",
+        "--preserve-auto-fnptr-level",
+        "--remap",
+        "--std",
+        "--traverse",
+        "--with-attribute",
+        "--with-callconv",
+        "--with-librarypath",
+        "--with-setlasterror",
+        "--with-suppressgctransition",
+        "--with-type",
+        "--with-using",
+    };
+
     static int Main(string[] args)
     {
         if (args.Length < 2)
@@ -43,6 +101,16 @@ class Program
             {
                 string rspPath = arg.StartsWith("@") ? arg.Substring(1).Trim('"') : arg;
                 ParseRspFile(rspPath, settings);
+            }
+
+            string[] unsupportedOptions = settings.Keys
+                .Where(option => !SupportedOptions.Contains(option))
+                .OrderBy(option => option, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+            if (unsupportedOptions.Length > 0)
+            {
+                Console.Error.WriteLine($"Error: Unsupported response-file option(s): {string.Join(", ", unsupportedOptions)}");
+                return 1;
             }
 
             string sourceFile = settings.GetValueOrDefault("--file")?.LastOrDefault();
@@ -276,7 +344,10 @@ class Program
         if (settings.TryGetValue("--libraryPath", out var libPaths) && libPaths.Count > 0)
             libraryPath = libPaths.Last();
 
-        var config = new PInvokeGeneratorConfiguration("c++", "c++17", ns, outputFile, headerFile ?? string.Empty,
+        string language = settings.GetValueOrDefault("--language")?.LastOrDefault() ?? "c++";
+        string languageStandard = settings.GetValueOrDefault("--std")?.LastOrDefault() ?? "c++17";
+
+        var config = new PInvokeGeneratorConfiguration(language, languageStandard, ns, outputFile, headerFile ?? string.Empty,
             PInvokeGeneratorOutputMode.CSharp, options)
         {
             DefaultClass = defaultClass ?? "Methods",
@@ -298,7 +369,9 @@ class Program
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
     {
-        var clangArgs = new List<string> { "--language=c++", "--std=c++17", "-Wno-pragma-once-outside-header" };
+        string language = settings.GetValueOrDefault("--language")?.LastOrDefault() ?? "c++";
+        string languageStandard = settings.GetValueOrDefault("--std")?.LastOrDefault() ?? "c++17";
+        var clangArgs = new List<string> { $"--language={language}", $"--std={languageStandard}", "-Wno-pragma-once-outside-header" };
         if (settings.TryGetValue("--include-directory", out var incDirs))
             foreach (var dir in incDirs)
                 clangArgs.Add($"--include-directory={dir}");
@@ -376,16 +449,37 @@ class Program
                 string nestedPath = line.Substring(1).Trim('"');
                 ParseRspFile(nestedPath, settings);
             }
-            else if (line.StartsWith("--"))
+            else if (TryParseOption(line, out string option, out string inlineValue))
             {
-                currentSwitch = line;
+                currentSwitch = option;
                 if (!settings.ContainsKey(currentSwitch))
                     settings[currentSwitch] = new List<string>();
+
+                if (!string.IsNullOrEmpty(inlineValue))
+                    settings[currentSwitch].Add(inlineValue);
             }
             else if (currentSwitch != null)
             {
                 settings[currentSwitch].Add(line);
             }
+        }
+
+        static bool TryParseOption(string line, out string option, out string inlineValue)
+        {
+            option = null;
+            inlineValue = null;
+
+            int separatorIndex = line.IndexOf('=');
+            string candidate = separatorIndex >= 0 ? line.Substring(0, separatorIndex) : line;
+            bool isLongOption = candidate.StartsWith("--", StringComparison.Ordinal);
+            if (!isLongOption && !OptionAliases.ContainsKey(candidate))
+                return false;
+
+            option = OptionAliases.GetValueOrDefault(candidate) ?? candidate;
+            if (separatorIndex >= 0 && separatorIndex < line.Length - 1)
+                inlineValue = line.Substring(separatorIndex + 1);
+
+            return true;
         }
     }
 
