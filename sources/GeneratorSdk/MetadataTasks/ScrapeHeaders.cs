@@ -159,7 +159,7 @@ namespace MetadataTasks
                 Path.Combine(this.SdkIncRoot, "winrt"),
             };
 
-            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--preserve-auto-fnptr-level", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
+            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--preserve-auto-fnptr-level", "--remap", "--std", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
             this.LoadManualFunctionPointerFixups();
 
             int failureCount = 0;

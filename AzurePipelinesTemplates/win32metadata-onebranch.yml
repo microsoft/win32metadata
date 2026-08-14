@@ -41,7 +41,13 @@ stages:
         RepoDirectory: ${{ parameters.RepoDirectory }}
 
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET SDK
+      displayName: ⚙ Install .NET 8 SDK for net8.0 build tools
+      inputs:
+        packageType: sdk
+        version: 8.0.423
+
+    - task: UseDotNet@2
+      displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
         useGlobalJson: true
@@ -163,7 +169,13 @@ stages:
           & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
 
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET SDK
+      displayName: ⚙ Install .NET 8 SDK for net8.0 build tools
+      inputs:
+        packageType: sdk
+        version: 8.0.423
+
+    - task: UseDotNet@2
+      displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
         useGlobalJson: true

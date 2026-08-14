@@ -64,7 +64,13 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - uses: actions/setup-dotnet@v4
+      - name: Install .NET 8 SDK for net8.0 build tools
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.423
+
+      - name: Install SDK from global.json
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: global.json
 
@@ -110,7 +116,13 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - uses: actions/setup-dotnet@v4
+      - name: Install .NET 8 SDK for net8.0 build tools
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.423
+
+      - name: Install SDK from global.json
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: global.json
 

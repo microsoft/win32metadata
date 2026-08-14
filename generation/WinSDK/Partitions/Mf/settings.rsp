@@ -39,3 +39,5 @@ _MFT_ENUM_FLAG=MFT_ENUM_FLAG
 <IncludeRoot>/um/playto.h
 --namespace
 Windows.Win32.Media.MediaFoundation
+--std
+c++20

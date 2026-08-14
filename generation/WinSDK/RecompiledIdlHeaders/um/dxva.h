@@ -1958,9 +1958,9 @@ typedef enum _DXVA_SampleFormat {
 #define DXVA_ExtractExtColorData(_sf, _Mask, _Shift) \
     (((_sf) & (_Mask)) >> (_Shift))
 
-#define DXVABitMask(__n) (~((~0u) << __n))
+#define DXVABitMask(__n) (~((~0) << __n))
 #define DXVA_ExtColorData_ShiftBase 8
-#define DXVAColorMask(__bits,__base) ((int)(DXVABitMask(__bits) << (__base)))
+#define DXVAColorMask(__bits,__base) (DXVABitMask(__bits) << (__base))
 
 typedef enum _DXVA_VideoTransferFunction
 {
