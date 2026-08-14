@@ -729,19 +729,6 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
-        public void FnPtr_AutoRemapExclude_SkipsConfiguredPrototype()
-        {
-            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
-                typedef void CALLBACK(int x);
-                typedef CALLBACK *PCALLBACK;
-            ", autoRemapExcludes: new[] { "CALLBACK" });
-
-            Assert.Empty(result.FnPtrRemaps);
-            Assert.Empty(result.FnPtrExcludes);
-            Assert.Empty(result.ReducePointerLevel);
-        }
-
-        [Fact]
         public void FnPtr_MultiplePointerNames_Skipped()
         {
             // If a prototype has multiple pointer aliases, skip (ambiguous)

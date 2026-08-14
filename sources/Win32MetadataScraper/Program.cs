@@ -117,10 +117,7 @@ class Program
                 configuredAutoRemapExcludes);
 
             // Resolve function pointer fixups
-            var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(
-                discovery,
-                configuredExcludes,
-                configuredAutoRemapExcludes);
+            var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(discovery, configuredExcludes);
 
             // Merge all remaps: auto tag remaps + fn ptr remaps + configured (configured wins)
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
