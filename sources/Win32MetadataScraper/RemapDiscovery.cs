@@ -255,14 +255,19 @@ public static class RemapDiscovery
     /// </summary>
     public static ResolvedRemaps ResolveFunctionPointerFixups(
         DiscoveryResult discovery,
-        ISet<string> configuredExcludes = null)
+        ISet<string> configuredExcludes = null,
+        ISet<string> autoRemapExcludes = null)
     {
         configuredExcludes ??= new HashSet<string>(StringComparer.Ordinal);
+        autoRemapExcludes ??= new HashSet<string>(StringComparer.Ordinal);
         var result = new ResolvedRemaps();
 
         // Pass 1: bare function typedefs with pointer aliases
         foreach (var protoName in discovery.FnBareFunctionTypedefs)
         {
+            if (autoRemapExcludes.Contains(protoName))
+                continue;
+
             if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
                 continue;
 
@@ -285,6 +290,9 @@ public static class RemapDiscovery
         // The alias adds another *, so reducePointerLevel is needed.
         foreach (var protoName in discovery.FnPointerFunctionTypedefs)
         {
+            if (autoRemapExcludes.Contains(protoName))
+                continue;
+
             if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var ptrAliasNames))
                 continue;
 
@@ -434,5 +442,4 @@ public static class RemapDiscovery
     }
 }
 }
-
 

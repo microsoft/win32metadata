@@ -116,13 +116,20 @@ namespace Win32MetadataScraperTests
         /// </summary>
         public static ResolvedRemaps ParseAndResolveFnPtrFixups(
             string headerContent,
-            IEnumerable<string> configuredExcludes = null)
+            IEnumerable<string> configuredExcludes = null,
+            IEnumerable<string> autoRemapExcludes = null)
         {
             var discovery = ParseAndDiscover(headerContent);
             var excludeSet = configuredExcludes is null
                 ? null
                 : new HashSet<string>(configuredExcludes, StringComparer.Ordinal);
-            return RemapDiscovery.ResolveFunctionPointerFixups(discovery, excludeSet);
+            var autoRemapExcludeSet = autoRemapExcludes is null
+                ? null
+                : new HashSet<string>(autoRemapExcludes, StringComparer.Ordinal);
+            return RemapDiscovery.ResolveFunctionPointerFixups(
+                discovery,
+                excludeSet,
+                autoRemapExcludeSet);
         }
     }
 }
