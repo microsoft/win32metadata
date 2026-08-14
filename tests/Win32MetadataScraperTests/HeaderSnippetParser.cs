@@ -55,7 +55,7 @@ namespace Win32MetadataScraperTests
                 var clangArgs = new string[]
                 {
                     "--language=c++",
-                    "--std=c++17",
+                    "--std=c++20",
                     $"--include-directory={tempDir}",
                     "-Wno-pragma-once-outside-header"
                 };

@@ -12,7 +12,7 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task, ICancelableTask
     {
-        public const string ClangSharpVersion = "17.0.1";
+        public const string ClangSharpVersion = "21.1.8.4";
 
         private static readonly string[] allArches = new string[] { "x86", "x64", "arm64" };
 

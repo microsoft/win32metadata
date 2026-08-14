@@ -404,6 +404,12 @@ namespace ClangSharpSourceToWinmd
 
                 switch (attrName)
                 {
+                    // SAL is converted to supported metadata attributes later in this pipeline.
+                    case "NativeAnnotation":
+                    {
+                        return null;
+                    }
+
                     // We don't want more than one of these on an interface. Get rid of it if the 
                     // struct doesn't have a NativeTypeName, which means it's a forward declaration.
                     // The real declaration will have the SupportedOSPlatform that we'll keep 

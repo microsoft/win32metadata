@@ -42,6 +42,35 @@ PEXCEPTION_ROUTINE
             }
         }
 
+        [Fact]
+        public void ParseRspFile_ParsesInlineSwitchValues()
+        {
+            string tempFile = Path.GetTempFileName();
+
+            try
+            {
+                File.WriteAllText(tempFile, @"
+--with-librarypath=Method=library.dll
+--exclude=
+ExcludedType
+");
+
+                var settings = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+                InvokeParseRspFile(tempFile, settings);
+
+                Assert.Collection(
+                    settings["--with-librarypath"],
+                    item => Assert.Equal("Method=library.dll", item));
+                Assert.Collection(
+                    settings["--exclude"],
+                    item => Assert.Equal("ExcludedType", item));
+            }
+            finally
+            {
+                File.Delete(tempFile);
+            }
+        }
+
         private static void InvokeParseRspFile(string path, Dictionary<string, List<string>> settings)
         {
             MethodInfo parseRspFile = typeof(RemapDiscovery).Assembly.GetType("Program", throwOnError: true)!

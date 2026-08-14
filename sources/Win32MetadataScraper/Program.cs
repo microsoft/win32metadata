@@ -232,7 +232,7 @@ class Program
         if (settings.TryGetValue("--libraryPath", out var libPaths) && libPaths.Count > 0)
             libraryPath = libPaths.Last();
 
-        var config = new PInvokeGeneratorConfiguration("c++", "c++17", ns, outputFile, headerFile ?? string.Empty,
+        var config = new PInvokeGeneratorConfiguration("c++", "c++20", ns, outputFile, headerFile ?? string.Empty,
             PInvokeGeneratorOutputMode.CSharp, options)
         {
             DefaultClass = defaultClass ?? "Methods",
@@ -254,7 +254,7 @@ class Program
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
     {
-        var clangArgs = new List<string> { "--language=c++", "--std=c++17", "-Wno-pragma-once-outside-header" };
+        var clangArgs = new List<string> { "--language=c++", "--std=c++20", "-Wno-pragma-once-outside-header" };
         if (settings.TryGetValue("--include-directory", out var incDirs))
             foreach (var dir in incDirs)
                 clangArgs.Add($"--include-directory={dir}");
@@ -334,9 +334,13 @@ class Program
             }
             else if (line.StartsWith("--"))
             {
-                currentSwitch = line;
+                int separatorIndex = line.IndexOf('=');
+                currentSwitch = separatorIndex >= 0 ? line.Substring(0, separatorIndex) : line;
                 if (!settings.ContainsKey(currentSwitch))
                     settings[currentSwitch] = new List<string>();
+
+                if (separatorIndex >= 0 && separatorIndex < line.Length - 1)
+                    settings[currentSwitch].Add(line.Substring(separatorIndex + 1));
             }
             else if (currentSwitch != null)
             {
