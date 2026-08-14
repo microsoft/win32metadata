@@ -17,6 +17,11 @@ namespace ClangSharpSourceToWinmd
 
         public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
+            string sourceText = tree.GetText().ToString()
+                .Replace("_Anonymous-1_e__Struct", "_Anonymous_e__Struct")
+                .Replace("_Anonymous-1_e__Union", "_Anonymous_e__Union");
+            tree = CSharpSyntaxTree.ParseText(sourceText, null, filePath);
+
             TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
@@ -195,6 +200,8 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
+                node = NormalizeRedundantIUnknownInheritance(node);
+
                 string name = node.Identifier.Text;
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
@@ -255,6 +262,37 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return node;
+            }
+
+            private static StructDeclarationSyntax NormalizeRedundantIUnknownInheritance(
+                StructDeclarationSyntax node)
+            {
+                AttributeSyntax nativeTypeName = node.AttributeLists
+                    .SelectMany(list => list.Attributes)
+                    .FirstOrDefault(attribute => attribute.Name.ToString() == "NativeTypeName");
+                Match inheritanceMatch = Regex.Match(
+                    nativeTypeName?.ArgumentList?.Arguments.FirstOrDefault()?.ToString() ?? string.Empty,
+                    @""".+ : (?<primaryBase>\w+), IUnknown""");
+                if (!inheritanceMatch.Success)
+                {
+                    return node;
+                }
+
+                string primaryBase = inheritanceMatch.Groups["primaryBase"].Value;
+                node = node.ReplaceNodes(
+                    node.AttributeLists
+                        .SelectMany(list => list.Attributes)
+                        .Where(attribute => attribute.Name.ToString() == "NativeInheritance"),
+                    (attribute, _) => attribute.WithArgumentList(
+                        SyntaxFactory.ParseAttributeArgumentList($"(\"{primaryBase}\")")));
+
+                return node.WithMembers(
+                    SyntaxFactory.List(
+                        node.Members.Where(member =>
+                            member is not FieldDeclarationSyntax field ||
+                            field.Declaration.Type.ToString() != "IUnknown" ||
+                            field.Declaration.Variables.All(variable =>
+                                variable.Identifier.ValueText != "Base2"))));
             }
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -475,6 +513,11 @@ namespace ClangSharpSourceToWinmd
 
                     case "CppAttributeList":
                     {
+                        if (node.Parent is not ParameterSyntax)
+                        {
+                            return null;
+                        }
+
                         return this.CreateAttributeListForSal(node);
                     }
                 }
