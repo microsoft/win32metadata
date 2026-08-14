@@ -67,7 +67,7 @@ jobs:
       - name: Install .NET 8 SDK for net8.0 build tools
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.423
+          dotnet-version: 8.0.424
 
       - name: Install SDK from global.json
         uses: actions/setup-dotnet@v4
@@ -119,7 +119,7 @@ jobs:
       - name: Install .NET 8 SDK for net8.0 build tools
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.423
+          dotnet-version: 8.0.424
 
       - name: Install SDK from global.json
         uses: actions/setup-dotnet@v4
