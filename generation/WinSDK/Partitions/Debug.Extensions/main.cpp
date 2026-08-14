@@ -4,6 +4,7 @@
 
 #include "windows.fixed.h"
 #include <sdkddkver.h>
+#include <new>
 
 #include <DbgEng.h>
 #include <DbgModel.h>
