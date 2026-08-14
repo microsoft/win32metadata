@@ -211,8 +211,11 @@ namespace MetadataTasks
         private bool EnsureClangSharpInstalled()
         {
             string rid = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
+            string toolsRoot = Path.GetDirectoryName(this.ToolsBinDir);
             string[] candidatePaths =
             {
+                Path.Combine(toolsRoot, "net10.0", rid, "Win32MetadataScraper.dll"),
+                Path.Combine(toolsRoot, "net10.0", "Win32MetadataScraper.dll"),
                 Path.Combine(this.ToolsBinDir, rid, "Win32MetadataScraper.dll"),
                 Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll"),
             };
