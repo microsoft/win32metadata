@@ -64,11 +64,6 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Install .NET 8 SDK for net8.0 build tools
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.424
-
       - name: Install SDK from global.json
         uses: actions/setup-dotnet@v4
         with:
@@ -115,11 +110,6 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-
-      - name: Install .NET 8 SDK for net8.0 build tools
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.424
 
       - name: Install SDK from global.json
         uses: actions/setup-dotnet@v4
@@ -228,7 +218,7 @@ jobs:
           $ErrorActionPreference = 'Continue'
           $PSNativeCommandUseErrorActionPreference = $false
 
-          $winmdUtils = "bin\Release\net8.0\WinmdUtils.dll"
+          $winmdUtils = "bin\Release\net10.0\WinmdUtils.dll"
           $currentWinmd = "bin\Windows.Win32.winmd"
 
           # Determine baseline: prefer main branch artifact, fall back to last release

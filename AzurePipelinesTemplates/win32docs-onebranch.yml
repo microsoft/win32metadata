@@ -27,12 +27,6 @@ stages:
         RepoDirectory: ${{ parameters.RepoDirectory }}
         Submodules: true
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET 8 SDK for net8.0 build tools
-      inputs:
-        packageType: sdk
-        version: 8.0.424
-
-    - task: UseDotNet@2
       displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
