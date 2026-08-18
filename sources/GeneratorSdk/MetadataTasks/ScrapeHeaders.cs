@@ -12,8 +12,6 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task, ICancelableTask
     {
-        public const string ClangSharpVersion = "17.0.1";
-
         private static readonly string[] allArches = new string[] { "x86", "x64", "arm64" };
 
         private bool canceled;
@@ -26,6 +24,7 @@ namespace MetadataTasks
         private Dictionary<string, string> discoveredRemapHeaders = new(); // tag → header file path
         private HashSet<string> discoveredFnPtrExcludes = new();
         private HashSet<string> discoveredReducePointerLevel = new();
+        private HashSet<string> preservedFnPtrLevels = new();
         private Dictionary<string, string> manualFnPtrRemaps = new(StringComparer.Ordinal);
         private HashSet<string> manualFnPtrExcludes = new(StringComparer.Ordinal);
         private HashSet<string> manualReducePointerLevel = new(StringComparer.Ordinal);
@@ -160,7 +159,7 @@ namespace MetadataTasks
                 Path.Combine(this.SdkIncRoot, "winrt"),
             };
 
-            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--remap", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
+            this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--preserve-auto-fnptr-level", "--remap", "--std", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
             this.LoadManualFunctionPointerFixups();
 
             int failureCount = 0;
@@ -211,8 +210,10 @@ namespace MetadataTasks
         private bool EnsureClangSharpInstalled()
         {
             string rid = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
+            string toolsRoot = Path.GetDirectoryName(this.ToolsBinDir);
             string[] candidatePaths =
             {
+                Path.Combine(toolsRoot, "net10.0", rid, "Win32MetadataScraper.dll"),
                 Path.Combine(this.ToolsBinDir, rid, "Win32MetadataScraper.dll"),
                 Path.Combine(this.ToolsBinDir, "Win32MetadataScraper.dll"),
             };
@@ -541,6 +542,14 @@ $@"--file
                                 this.discoveredReducePointerLevel.Add(reducePointerLevel);
                             }
                         }
+                        else if (trimmed.StartsWith("PRESERVE_PTR_LEVEL:"))
+                        {
+                            string preservePointerLevel = trimmed.Substring("PRESERVE_PTR_LEVEL:".Length);
+                            lock (this.preservedFnPtrLevels)
+                            {
+                                this.preservedFnPtrLevels.Add(preservePointerLevel);
+                            }
+                        }
                         else
                         {
                             int eq = trimmed.IndexOf('=');
@@ -697,6 +706,7 @@ $@"--file
         private void WriteAutoRemapsRsp()
         {
             Directory.CreateDirectory(this.GeneratedDir);
+            this.discoveredReducePointerLevel.ExceptWith(this.preservedFnPtrLevels);
 
             if (this.discoveredRemaps.Count > 0 || this.discoveredFnPtrExcludes.Count > 0)
             {

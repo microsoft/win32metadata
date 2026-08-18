@@ -64,7 +64,8 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - uses: actions/setup-dotnet@v4
+      - name: Install SDK from global.json
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: global.json
 
@@ -110,7 +111,8 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - uses: actions/setup-dotnet@v4
+      - name: Install SDK from global.json
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: global.json
 
@@ -216,7 +218,7 @@ jobs:
           $ErrorActionPreference = 'Continue'
           $PSNativeCommandUseErrorActionPreference = $false
 
-          $winmdUtils = "bin\Release\net8.0\WinmdUtils.dll"
+          $winmdUtils = "bin\Release\net10.0\WinmdUtils.dll"
           $currentWinmd = "bin\Windows.Win32.winmd"
 
           # Determine baseline: prefer main branch artifact, fall back to last release
