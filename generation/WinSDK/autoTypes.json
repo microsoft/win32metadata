@@ -447,6 +447,32 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
+    "Name": "PIDLIST_RELATIVE",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
+    "Name": "PIDLIST_ABSOLUTE",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
+    "AlsoUsableFor": "PIDLIST_RELATIVE",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell.Common",
+    "Name": "PITEMID_CHILD",
+    "ValueType": "ITEMIDLIST*",
+    "CloseApi": "ILFree",
+    "AlsoUsableFor": "PIDLIST_RELATIVE",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
     "Name": "HCOLORSPACE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteColorSpace",
