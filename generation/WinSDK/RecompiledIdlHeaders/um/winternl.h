@@ -466,10 +466,7 @@ NtClose (
     IN HANDLE Handle
     );
 
-//
-// use the Win32 API instead
-//     CreateFile
-//
+
 __kernel_entry NTSTATUS
 NTAPI
 NtCreateFile (
@@ -500,6 +497,29 @@ NtOpenFile (
     IN ULONG ShareAccess,
     IN ULONG OpenOptions
     );
+
+//
+// use the Win32 API instead
+//     CreateNamedPipeA
+//
+__kernel_entry NTSTATUS
+NTAPI
+NtCreateNamedPipeFile(
+  OUT PHANDLE FileHandle,
+  IN ULONG DesiredAccess,
+  IN POBJECT_ATTRIBUTES ObjectAttributes,
+  OUT PIO_STATUS_BLOCK IoStatusBlock,
+  IN ULONG ShareAccess,
+  IN ULONG CreateDisposition,
+  IN ULONG CreateOptions,
+  IN ULONG NamedPipeType,
+  IN ULONG ReadMode,
+  IN ULONG CompletionMode,
+  IN ULONG MaximumInstances,
+  IN ULONG InboundQuota,
+  IN ULONG OutboundQuota,
+  IN PLARGE_INTEGER DefaultTimeout OPTIONAL
+);
 
 //
 // use the Win32 API instead
