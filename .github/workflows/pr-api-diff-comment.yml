@@ -1,0 +1,129 @@
+name: PR API Diff Comment
+
+on:
+  workflow_run:
+    workflows: [PR Validation]
+    types: [completed]
+
+permissions:
+  actions: read
+  pull-requests: write
+
+concurrency:
+  group: api-diff-comment-${{ github.event.workflow_run.head_repository.full_name }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  comment:
+    name: Post API diff comment
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download API diff artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: api-diff
+          path: artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Post API diff comment
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const workflowRun = context.payload.workflow_run;
+            if (!workflowRun.head_repository) {
+              core.setFailed('Workflow run has no head repository.');
+              return;
+            }
+
+            const head = `${workflowRun.head_repository.owner.login}:${workflowRun.head_branch}`;
+            const pullRequests = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              head,
+              per_page: 100
+            });
+            const matchingPullRequests = pullRequests.filter(
+              pullRequest => pullRequest.head.sha === workflowRun.head_sha
+            );
+            if (matchingPullRequests.length !== 1) {
+              core.setFailed(
+                `Expected one pull request for ${head} at ${workflowRun.head_sha}, found ${matchingPullRequests.length}.`
+              );
+              return;
+            }
+
+            const diffPath = path.join('artifact', 'api-diff.patch');
+            if (!fs.existsSync(diffPath)) {
+              core.setFailed(`API diff artifact is missing ${diffPath}.`);
+              return;
+            }
+
+            const diff = fs.readFileSync(diffPath, 'utf8');
+            const prNumber = matchingPullRequests[0].number;
+            const runUrl = workflowRun.html_url;
+            const marker = '<!-- win32metadata-api-diff -->';
+            let body;
+
+            if (diff.trim().length === 0) {
+              body = `${marker}
+            ## 📋 API Surface Diff
+
+            ✅ No API differences vs the baseline.
+
+            [Full validation run](${runUrl})
+
+            > This comment is automatically updated on each push.`;
+            } else {
+              const diffLines = diff.split(/\r?\n/);
+              const additions = diffLines.filter(line => /^\+[^+]/.test(line)).length;
+              const deletions = diffLines.filter(line => /^-[^-]/.test(line)).length;
+              const longestBacktickRun = Math.max(0, ...Array.from(diff.matchAll(/`+/g), match => match[0].length));
+              const fence = '`'.repeat(Math.max(3, longestBacktickRun + 1));
+
+              body = `${marker}
+            ## 📋 API Surface Diff
+
+            **+${additions} additions / -${deletions} deletions** vs main branch ([full validation run](${runUrl}))
+
+            <details>
+            <summary>Click to expand API diff</summary>
+
+            ${fence}diff
+            ${diff}
+            ${fence}
+
+            </details>
+
+            > This comment is automatically updated on each push.`;
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100
+            });
+            const existing = comments.find(comment => comment.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body
+              });
+            }
