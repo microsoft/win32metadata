@@ -80,14 +80,14 @@ jobs:
         run: .\scripts\GenerateMetadataSource.ps1 -arch ${{ matrix.arch }} ${{ matrix.extra_args }}
 
       - name: Upload generated assets
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: generated_${{ matrix.arch }}
           path: generation/WinSDK/obj
           retention-days: 1
 
       - name: Upload build logs
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/upload-artifact-with-retry
         if: always()
         with:
           name: scrape_logs_${{ matrix.arch }}
@@ -180,24 +180,33 @@ jobs:
               return;
             }
 
+            if (winmdArtifact.expired) {
+              core.warning('The baseline winmd artifact has expired. Will fall back to NuGet baseline.');
+              return;
+            }
+
             // Download and extract
-            const download = await github.rest.actions.downloadArtifact({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              artifact_id: winmdArtifact.id,
-              archive_format: 'zip'
-            });
+            try {
+              const download = await github.rest.actions.downloadArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: winmdArtifact.id,
+                archive_format: 'zip'
+              });
 
-            const outputDir = 'bin/baseline-artifact';
-            fs.mkdirSync(outputDir, { recursive: true });
-            const zipPath = path.join(outputDir, 'artifact.zip');
-            fs.writeFileSync(zipPath, Buffer.from(download.data));
+              const outputDir = 'bin/baseline-artifact';
+              fs.mkdirSync(outputDir, { recursive: true });
+              const zipPath = path.join(outputDir, 'artifact.zip');
+              fs.writeFileSync(zipPath, Buffer.from(download.data));
 
-            // Extract using PowerShell
-            const { execSync } = require('child_process');
-            execSync(`Expand-Archive -Path "${zipPath}" -DestinationPath "${outputDir}" -Force`, { shell: 'pwsh' });
-            fs.unlinkSync(zipPath);
-            core.info(`Extracted baseline winmd to ${outputDir}`);
+              // Extract using PowerShell
+              const { execSync } = require('child_process');
+              execSync(`Expand-Archive -Path "${zipPath}" -DestinationPath "${outputDir}" -Force`, { shell: 'pwsh' });
+              fs.unlinkSync(zipPath);
+              core.info(`Extracted baseline winmd to ${outputDir}`);
+            } catch (error) {
+              core.warning(`Could not download or extract the baseline winmd artifact. Will fall back to NuGet baseline: ${error.message}`);
+            }
 
       - name: Generate API surface diff
         if: github.event_name == 'pull_request'
@@ -352,7 +361,7 @@ jobs:
             }
 
       - name: Upload winmd and API dump
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/upload-artifact-with-retry
         if: always()
         with:
           name: winmd
@@ -361,10 +370,10 @@ jobs:
             bin/current.apidump.cs
             bin/baseline.apidump.cs
             bin/api-diff.patch
-          retention-days: 30
+          retention-days: 90
 
       - name: Upload build logs
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/upload-artifact-with-retry
         if: always()
         with:
           name: build_logs
@@ -372,7 +381,7 @@ jobs:
           retention-days: 7
 
       - name: Upload NuGet packages
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: NuGetPackages
           path: bin/Packages/Release/NuGet

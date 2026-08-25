@@ -1,0 +1,44 @@
+name: Upload artifact with retry
+description: Upload a workflow artifact and retry once after a transient failure.
+
+# Extracted from .github/workflows/pr-validation.yml to share upload behavior.
+# Retry workaround: https://github.com/actions/upload-artifact/issues/560
+
+inputs:
+  name:
+    description: Artifact name
+    required: true
+  path:
+    description: Files or directories to upload
+    required: true
+  retention-days:
+    description: Number of days to retain the artifact
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Upload artifact
+      id: upload
+      continue-on-error: true
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+        retention-days: ${{ inputs.retention-days }}
+
+    - name: Wait before retry
+      if: steps.upload.outcome == 'failure'
+      shell: pwsh
+      run: |
+        Write-Warning 'Artifact upload failed. Retrying in 15 seconds.'
+        Start-Sleep -Seconds 15
+
+    - name: Retry artifact upload
+      if: steps.upload.outcome == 'failure'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+        retention-days: ${{ inputs.retention-days }}
+        overwrite: true
