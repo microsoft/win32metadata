@@ -273,7 +273,7 @@ jobs:
           $global:LASTEXITCODE = 0
 
       - name: Post API diff comment on PR
-        if: github.event_name == 'pull_request' && steps.apidump.outputs.has_diff == 'true'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && steps.apidump.outputs.has_diff == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -327,7 +327,7 @@ jobs:
             }
 
       - name: Post no-diff comment on PR
-        if: github.event_name == 'pull_request' && steps.apidump.outputs.has_diff == 'false'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && steps.apidump.outputs.has_diff == 'false'
         uses: actions/github-script@v7
         with:
           script: |
