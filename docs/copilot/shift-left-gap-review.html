@@ -1,0 +1,2099 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shift-left Win32 metadata gap review</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c667a;
+      --paper: #f5f7fb;
+      --card: #ffffff;
+      --line: #d9dfeb;
+      --blue: #1769e0;
+      --blue-soft: #eaf2ff;
+      --green: #18794e;
+      --green-soft: #e8f7ef;
+      --amber: #9a6700;
+      --amber-soft: #fff4ce;
+      --red: #c42b1c;
+      --red-soft: #fde7e9;
+      --purple: #6b46c1;
+      --code: #101522;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.48 "Segoe UI", system-ui, sans-serif;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 24px;
+      color: white;
+      background: #111827;
+      box-shadow: 0 2px 12px #0003;
+    }
+    header strong { white-space: nowrap; }
+    header nav {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    header a {
+      color: #dbeafe;
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    header a:hover { background: #ffffff1f; }
+    main {
+      width: min(1500px, calc(100% - 34px));
+      margin: 24px auto 80px;
+    }
+    section {
+      min-height: calc(100vh - 84px);
+      margin: 0 0 28px;
+      padding: 34px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px #27365712;
+      scroll-margin-top: 66px;
+    }
+    h1 { font-size: clamp(34px, 5vw, 68px); line-height: 1.05; margin: 0 0 22px; }
+    h2 { font-size: clamp(28px, 3.2vw, 46px); line-height: 1.1; margin: 0 0 12px; }
+    h3 { font-size: 18px; margin: 0 0 10px; }
+    p { margin: 8px 0 14px; }
+    .lede { max-width: 950px; color: var(--muted); font-size: 22px; }
+    .eyebrow {
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .grid { display: grid; gap: 18px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+    }
+    .card.source { border-top: 5px solid var(--purple); }
+    .card.current { border-top: 5px solid var(--amber); }
+    .card.target { border-top: 5px solid var(--green); }
+    .card.proposal { border-top: 5px solid var(--blue); }
+    .pill {
+      display: inline-block;
+      margin: 3px 5px 3px 0;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .annotation { color: var(--blue); background: var(--blue-soft); }
+    .generator { color: var(--red); background: var(--red-soft); }
+    .policy { color: var(--amber); background: var(--amber-soft); }
+    .vocabulary { color: var(--purple); background: #f0eaff; }
+    .done { color: var(--green); background: var(--green-soft); }
+    pre {
+      margin: 0;
+      padding: 14px;
+      color: #e8eefb;
+      background: var(--code);
+      border-radius: 8px;
+      overflow: auto;
+      font: 12.5px/1.45 "Cascadia Code", Consolas, monospace;
+      tab-size: 4;
+      white-space: pre;
+    }
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--blue);
+      background: var(--blue-soft);
+      border-radius: 7px;
+    }
+    .warning { border-left-color: var(--amber); background: var(--amber-soft); }
+    .decision { border-left-color: var(--purple); background: #f4efff; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #f1f5fb; }
+    ul { margin: 8px 0 14px; padding-left: 22px; }
+    .delta { color: var(--red); font-weight: 700; }
+    .match { color: var(--green); font-weight: 700; }
+    pre .lost {
+      color: #fff3c4;
+      background: #7a4b00;
+      border-radius: 3px;
+      padding: 1px 2px;
+    }
+    pre .target-delta {
+      color: #d9ffe9;
+      background: #12603d;
+      border-radius: 3px;
+      padding: 1px 2px;
+    }
+    pre .proposed {
+      color: #e6f1ff;
+      background: #1557a0;
+      border-radius: 3px;
+      padding: 1px 2px;
+    }
+    details {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fafbfe;
+    }
+    summary {
+      padding: 11px 14px;
+      color: #29415f;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    details > div { padding: 0 14px 14px; }
+    details pre { font-size: 12px; }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 18px;
+    }
+    .controls {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      gap: 8px;
+      z-index: 20;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: white;
+      background: #111827;
+      cursor: pointer;
+      box-shadow: 0 3px 12px #0003;
+    }
+    @media (max-width: 980px) {
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+      section { padding: 22px; }
+      header strong { display: none; }
+    }
+    @media print {
+      header, .controls { display: none; }
+      body { background: white; }
+      main { width: 100%; margin: 0; }
+      section {
+        min-height: auto;
+        break-after: page;
+        border: 0;
+        box-shadow: none;
+        margin: 0;
+        padding: 24px;
+      }
+      pre { white-space: pre-wrap; overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Shift-left metadata review</strong>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#meta">Meta attributes</a>
+      <a href="#cogetclassobject">CoGetClassObject</a>
+      <a href="#addfontresourceexw">AddFontResourceExW</a>
+      <a href="#adsbuildvararrayint">ADsBuildVarArrayInt</a>
+      <a href="#ws">WsRequestReply</a>
+      <a href="#jet">JetTerm</a>
+      <a href="#d2d">D2D1CreateDevice</a>
+      <a href="#ndr">NdrClientCall2</a>
+      <a href="#psapi">K32EnumProcesses</a>
+      <a href="#ownership">Ownership</a>
+      <a href="#results">Results</a>
+      <a href="#buffers">Buffers</a>
+      <a href="#types">Types</a>
+      <a href="#declarations">Declarations</a>
+      <a href="#rust-fixed-issues">Rust-fixed issues</a>
+      <a href="#fidelity">Other fidelity</a>
+      <a href="#actions">Actions</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="eyebrow">Team review draft</div>
+      <h1>From SDK declaration to opinionated Win32 metadata</h1>
+      <p class="lede">
+        API deep dives covering annotation families, cases already fixed by direct
+        windows-rs generation, and non-annotation fidelity work needed to replace the
+        win32metadata sidecars.
+      </p>
+      <div class="grid three" style="margin-top:30px">
+        <div class="card">
+          <h3>Experimental partition run</h3>
+          <p><b>98.06%</b> P/Invoke-name coverage</p>
+          <p><b>354</b> genuinely missing P/Invoke names</p>
+          <p><b>88.37%</b> weighted identity similarity</p>
+        </div>
+        <div class="card">
+          <h3>What this review separates</h3>
+          <span class="pill annotation">Header annotation</span>
+          <span class="pill generator">Generator defect</span>
+          <span class="pill policy">Projection policy</span>
+          <span class="pill vocabulary">New vocabulary</span>
+        </div>
+        <div class="card">
+          <h3>Official Rust baseline</h3>
+          <p>
+            Rust consumers use the committed
+            <code>crates/libs/default/Windows.Win32.winmd</code>. It is generated from the
+            committed <code>metadata/win32</code> and <code>metadata/wdk</code> RDL snapshots.
+          </p>
+        </div>
+      </div>
+      <div class="note">
+        <b>Review question:</b> Should the final contract be raw-header fidelity in the winmd,
+        with CsWin32 honoring use-site projection attributes, or should selected metadata types
+        themselves retain today&apos;s opinionated aliases? The examples call out where that choice matters.
+      </div>
+      <div class="note decision">
+        <b>Scope rule for this revision:</b> every API example below exists in upstream
+        windows-rs&apos;s committed RDL and canonical <code>Windows.Win32.winmd</code>.
+      </div>
+    </section>
+
+    <section id="meta">
+      <div class="eyebrow">Cross-cutting metadata contract</div>
+      <h2>Meta attributes: inferred facts versus explicit header contracts</h2>
+      <p class="lede">
+        Some metadata does not change the ABI declaration but is still part of the contract
+        consumed by projections. Mechanical inference is useful, but every inferred fact should
+        also have an explicit, ABI-neutral header annotation for exceptions and long-term ownership.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Metadata</th><th>windows-rs today</th><th>Proposed header vocabulary</th><th>Decision</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>DllImport</code>, entry point, calling convention</td>
+            <td>Function-to-DLL mapping is inferred from SDK COFF import libraries; aliases and calling convention come from the declaration.</td>
+            <td><code>_Win32_Import_library_("name.dll")</code>; keep explicit entry-point/name vocabulary for exceptions.</td>
+            <td>Keep import-library scanning as the default, but preserve the resulting <code>ImplMap</code>/<code>DllImport</code> in metadata.</td>
+          </tr>
+          <tr>
+            <td><code>SetLastError</code></td>
+            <td>Not safely inferable from an import library. Supported by the annotation parser where the header states it.</td>
+            <td><code>_Win32_Set_last_error_</code></td>
+            <td>Must be explicit.</td>
+          </tr>
+          <tr>
+            <td><code>SupportedOSPlatform</code></td>
+            <td>The RDL/winmd vocabulary exists, but ordinary SDK headers do not provide the version. Current values originated in external policy data unless already patched into a header.</td>
+            <td><code>_Win32_Supported_os_(windowsX.Y)</code></td>
+            <td>Migrate <code>supportedOS.rsp</code> into headers; do not infer from SDK package version.</td>
+          </tr>
+          <tr>
+            <td><code>Documentation</code></td>
+            <td>No equivalent attribute exists in the current windows-rs metadata seed or header scraper.</td>
+            <td>Scrape and cross-reference the Windows documentation sites by default. Retain <code>_Win32_Documentation_("https://...")</code> only as an override for missing or ambiguous matches.</td>
+            <td>Revisit and automate the pipeline used to produce <code>Microsoft.Windows.SDK.Win32Docs</code>; the latest published package, <code>0.1.42-alpha</code>, is more than three years old and the prior process appears to have required manual work.</td>
+          </tr>
+          <tr>
+            <td><code>SupportedArchitecture</code></td>
+            <td>Inferred by comparing x86, x64, and ARM64 scrapes.</td>
+            <td>An explicit architecture annotation remains useful for declarations hidden by preprocessing or exceptional policy.</td>
+            <td>Prefer multi-architecture inference; retain an override.</td>
+          </tr>
+          <tr>
+            <td><code>Const</code></td>
+            <td>The scraper writes native pointer constness into RDL as <code>*const</code>, but the RDL-to-winmd path currently loses the corresponding <code>ConstAttribute</code>.</td>
+            <td>Use native C/C++ <code>const</code>. Fix the RDL-to-winmd loss once rather than adding a compensating header annotation.</td>
+            <td>Fix the RDL compiler once rather than treating each affected API as a separate header gap.</td>
+          </tr>
+          <tr>
+            <td><code>ComOutPtr</code></td>
+            <td>Recovered from <code>_COM_Outptr_</code>/<code>[iid_is]</code>, or heuristically from an <code>HRESULT</code> method containing a conventionally named IID selector and a single-object <code>void**</code> output.</td>
+            <td>Use standard SAL where it is already present: <code>_COM_Outptr_</code>, <code>_COM_Outptr_opt_</code>, or the corresponding <code>_result_maybenull_</code> variant.</td>
+            <td>No new annotation or broad header cleanup is needed. Preserve IID/PPV shape inference for existing declarations that use generic <code>_Outptr_</code>.</td>
+          </tr>
+          <tr>
+            <td>SAL semantic implied defaults</td>
+            <td>Mutable pointers currently tend to surface as output-only. This does not match SAL&apos;s semantic implied defaults.</td>
+            <td>No header annotation should be added merely to restate an implied default.</td>
+            <td>Apply the semantic implied defaults: an unannotated pointer is <code>In|Out</code> with element count 1; an unannotated scalar is <code>In</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note decision">
+        <b>Proposed rule:</b> inferred values are allowed to establish the default, but the emitted
+        winmd must still contain the corresponding semantic record, and an explicit header annotation
+        must be able to override or supply every value that cannot be derived reliably.
+      </div>
+      <div class="note warning">
+        <b>Documentation TODO:</b> investigate the former
+        <a href="https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Docs/0.1.42-alpha">Microsoft.Windows.SDK.Win32Docs</a>
+        generation and cross-reference process, identify the authoritative windows-docs repositories
+        and stable symbol keys, then define an automated refresh and publishing path. Do not shift
+        thousands of documentation URLs into SDK headers unless a scraped match needs correction.
+      </div>
+    </section>
+
+    <section id="cogetclassobject">
+      <div class="eyebrow">1 / 8 &middot; Synthetic enum and use-site association</div>
+      <h2>CoGetClassObject</h2>
+      <p><span class="pill annotation">Header annotation</span><span class="pill done">Present in official Rust RDL</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>WINOLEAPI CoGetClassObject(
+    _In_ REFCLSID rclsid,
+    _In_ DWORD dwClsContext,
+    _In_opt_ LPVOID pvReserved,
+    _In_ REFIID riid,
+    _Outptr_ LPVOID FAR * ppv);</pre>
+          <p class="footer"><code>um/combaseapi.h</code></p>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("ole32.dll")]
+HRESULT CoGetClassObject(
+    [In] GUID* rclsid,
+    <span class="lost">[In] uint dwClsContext</span>,
+    [Optional][In] void* pvReserved,
+    [In] GUID* riid,
+    [Out][ComOutPtr] void** ppv);</pre>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("OLE32.dll")]
+HRESULT CoGetClassObject(
+    [In][Const] Guid* rclsid,
+    [In]<span class="target-delta">[AssociatedEnum("CLSCTX")]</span>
+        uint dwClsContext,
+    [Optional][In] void* pvReserved,
+    [In][Const] Guid* riid,
+    [Out][ComOutPtr] void** ppv);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed header change</h3>
+<pre>// CLSCTX already defined in shared/WTypesbase.h (unchanged)
+
+WINOLEAPI CoGetClassObject(
+    _In_ REFCLSID rclsid,
+    _In_ <span class="proposed">_Win32_Associated_enum_(CLSCTX)</span>
+        DWORD dwClsContext,
+    _In_opt_ LPVOID pvReserved,
+    _In_ REFIID riid,
+    _Outptr_ LPVOID FAR * ppv);</pre>
+      </div>
+      <div class="note">
+        <b>Expected result:</b> associate the existing <code>CLSCTX</code> enum with the
+        ABI-preserving <code>DWORD</code> parameter. No other header change is required.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// emitter.settings.rsp
+CoGetClassObject::dwClsContext=[AssociatedEnum("CLSCTX")]
+CoGetClassObject::ppv=[ComOutPtr]
+
+// libMappings.rsp
+CoGetClassObject=OLE32.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="adsbuildvararrayint">
+      <div class="eyebrow">3 / 8 &middot; Incorrect semantic implied direction</div>
+      <h2>ADsBuildVarArrayInt</h2>
+      <p><span class="pill generator">Generator defect</span><span class="pill done">No header change</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>HRESULT WINAPI ADsBuildVarArrayInt(
+    LPDWORD lpdwObjectTypes,
+    DWORD dwObjectTypes,
+    VARIANT* pVar);</pre>
+          <p class="footer"><code>um/AdsHlp.h</code></p>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("ACTIVEDS.dll")]
+HRESULT ADsBuildVarArrayInt(
+    <span class="lost">[Out]</span> uint* lpdwObjectTypes,
+    [In] uint dwObjectTypes,
+    <span class="lost">[Out]</span> VARIANT* pVar);</pre>
+          <p class="footer"><code>metadata/win32/adshlp.rdl</code> has mutable pointers with no direction attributes.</p>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("ACTIVEDS.dll")]
+HRESULT ADsBuildVarArrayInt(
+    <span class="target-delta">[In][Out]</span> uint* lpdwObjectTypes,
+    [In] uint dwObjectTypes,
+    <span class="target-delta">[In][Out]</span> VARIANT* pVar);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed change</h3>
+<pre>// No header change.
+
+<span class="proposed">// windows-rs must apply SAL semantic implied defaults:
+//   unannotated pointer -> In | Out, element count 1
+//   unannotated scalar  -> In</span></pre>
+      </div>
+      <div class="note warning">
+        <b>Parser gap:</b> the SDK declaration correctly relies on SAL&apos;s semantic implied defaults. windows-rs
+        currently interprets the mutable pointers as output-only, but they should be
+        <code>In|Out</code> without adding redundant SAL to the header.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div><pre>
+// libMappings.rsp
+ADsBuildVarArrayInt=ACTIVEDS.dll
+
+// No functional direction override was found in emitter.settings.rsp.
+// win32metadata applies the SAL semantic implied defaults.</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="ws">
+      <div class="eyebrow">4 / 8 &middot; Existing SAL is already sufficient</div>
+      <h2>WsRequestReply</h2>
+      <p><span class="pill generator">Fixed pipeline path</span><span class="pill done">No SDK annotation needed</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>HRESULT WINAPI WsRequestReply(
+    _In_ WS_CHANNEL* channel,
+    _In_ WS_MESSAGE* requestMessage,
+    _In_ const WS_MESSAGE_DESCRIPTION*
+        requestMessageDescription,
+    _In_ WS_WRITE_OPTION writeOption,
+    _In_reads_bytes_opt_(requestBodyValueSize)
+        const void* requestBodyValue,
+    _In_ ULONG requestBodyValueSize,
+    _In_ WS_MESSAGE* replyMessage,
+    _In_ const WS_MESSAGE_DESCRIPTION*
+        replyMessageDescription,
+    _In_ WS_READ_OPTION readOption,
+    _In_opt_ WS_HEAP* heap,
+    _Out_writes_bytes_opt_(valueSize) void* value,
+    _In_ ULONG valueSize,
+    _In_opt_ const WS_ASYNC_CONTEXT* asyncContext,
+    _In_opt_ WS_ERROR* error);</pre>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("webservices.dll")]
+HRESULT WsRequestReply(
+    [In] WS_CHANNEL* channel,
+    [In] WS_MESSAGE* requestMessage,
+    [In] WS_MESSAGE_DESCRIPTION* requestMessageDescription,
+    [In] WS_WRITE_OPTION writeOption,
+    [Optional][In]
+    [MemorySize(BytesParamIndex=5)] void* requestBodyValue,
+    [In] uint requestBodyValueSize,
+    [In] WS_MESSAGE* replyMessage,
+    [In] WS_MESSAGE_DESCRIPTION* replyMessageDescription,
+    [In] WS_READ_OPTION readOption,
+    [Optional][In] WS_HEAP* heap,
+    [Optional][Out]
+    [MemorySize(BytesParamIndex=11)] void* value,
+    [In] uint valueSize,
+    [Optional][In] WS_ASYNC_CONTEXT* asyncContext,
+    [Optional][In] WS_ERROR* error);</pre>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("webservices.dll")]
+HRESULT WsRequestReply(
+    [In] WS_CHANNEL* channel,
+    [In] WS_MESSAGE* requestMessage,
+    [In][Const] WS_MESSAGE_DESCRIPTION* requestMessageDescription,
+    [In] WS_WRITE_OPTION writeOption,
+    [Optional][In][Const]
+    [MemorySize(BytesParamIndex=5)] void* requestBodyValue,
+    [In] uint requestBodyValueSize,
+    [In] WS_MESSAGE* replyMessage,
+    [In][Const] WS_MESSAGE_DESCRIPTION* replyMessageDescription,
+    [In] WS_READ_OPTION readOption,
+    [Optional][In] WS_HEAP* heap,
+    [Optional][Out]
+    [MemorySize(BytesParamIndex=11)] void* value,
+    [In] uint valueSize,
+    [Optional][In][Const] WS_ASYNC_CONTEXT* asyncContext,
+    [Optional][In] WS_ERROR* error);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed header change</h3>
+<pre>// None. Preserve the declaration exactly as written.
+
+// Pipeline requirement:
+<span class="proposed">clang.args(["-include", SAL_SHIM])
+     .args(["-DWIN32METADATA=1"])
+     .inputs(win32metadata_partitions);</span></pre>
+      </div>
+      <div class="note">
+        <b>Expected result:</b> the existing SDK declaration is sufficient. Regenerate the
+        canonical metadata after the cross-cutting pipeline fixes described on the meta slide.
+      </div>
+      <div class="note decision">
+        <b>Parameter names:</b> there is no header-versus-IDL naming difference here. The SDK
+        header, upstream RDL, Rust winmd, and win32metadata winmd all use
+        <code>requestMessageDescription</code>, <code>replyMessageDescription</code>, and
+        <code>asyncContext</code>. The shortened names in the earlier deck were transcription errors.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// No functional override is needed: the SDK SAL is authoritative.
+
+// libMappings.rsp
+WsRequestReply=webservices.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="jet">
+      <div class="eyebrow">5 / 8 &middot; Architecture-neutral pointer-sized typedef</div>
+      <h2>JetTerm / JET_API_PTR</h2>
+      <p><span class="pill generator">Generator defect</span><span class="pill policy">Architecture policy</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>#if defined(_WIN64)
+typedef JET_UINT64 JET_API_PTR;
+#else
+typedef JET_UINT32 JET_API_PTR;
+#endif
+
+typedef JET_API_PTR JET_INSTANCE;
+
+JET_ERR JET_API JetTerm(
+    _In_ JET_INSTANCE instance);</pre>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[SupportedArchitecture(X64 | Arm64)]
+struct JET_API_PTR {
+    JET_UINT64 Value;
+}
+
+struct JET_INSTANCE {
+    JET_API_PTR Value;
+}
+
+struct JET_INT32 {
+    int Value;
+}
+
+struct JET_ERR {
+    JET_INT32 Value;
+}
+
+[DllImport("ESENT.dll")]
+JET_ERR JetTerm(
+    [In] JET_INSTANCE instance);</pre>
+          <p class="delta">
+            The canonical Rust winmd emits a 64-bit typedef restricted to X64/ARM64 rather than
+            one architecture-neutral pointer-sized typedef.
+          </p>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>struct <span class="target-delta">JET_API_PTR</span> {
+    <span class="target-delta">UIntPtr</span> Value;
+}
+
+struct JET_INSTANCE {
+    UIntPtr Value;
+}
+
+[DllImport("ESENT.dll")]
+int JetTerm(
+    [In] JET_INSTANCE instance);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed change</h3>
+<pre>// No header annotation.
+
+<span class="proposed">// Merge the conditional SDK typedef into one architecture-neutral
+// metadata type:
+struct JET_API_PTR {
+    UIntPtr Value;
+}
+
+// Preserve the native typedef identity with a direct int underlying type:
+struct JET_ERR {
+    int Value;
+}
+
+JET_ERR JetTerm(JET_INSTANCE instance);</span></pre>
+      </div>
+      <div class="note decision">
+        <b>Architecture policy discussion:</b> <code>UIntPtr</code> is the arch-neutral metadata
+        representation of the SDK&apos;s conditional 32/64-bit typedef. Emitting only the 64-bit
+        definition with architecture restrictions leaves the canonical winmd incomplete for x86.
+        The multi-architecture merge should recognize this pattern and produce one pointer-sized type.
+      </div>
+      <div class="note">
+        <b>JET_ERR:</b> retaining the native typedef is useful and requires no
+        <code>ProjectAs</code> annotation. Collapse the redundant
+        <code>JET_ERR -&gt; JET_INT32 -&gt; int</code> chain so <code>JET_ERR</code> is a
+        distinct metadata struct with a direct <code>int</code> field, and APIs may return it directly.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// autoTypes.json
+{
+  "Namespace": "Windows.Win32.Storage.Jet",
+  "Name": "JET_INSTANCE",
+  "ValueType": "UIntPtr",
+  "InvalidHandleValues": [ 0 ],
+  "CloseApi": "JetTerm",
+  "NativeTypedef": true
+}
+
+// libMappings.rsp
+JetTerm=ESENT.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="d2d">
+      <div class="eyebrow">6 / 8 &middot; Cross-partition ownership regression</div>
+      <h2>D2D1CreateDevice</h2>
+      <p><span class="pill generator">Generator defect</span><span class="pill done">Header already complete</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>HRESULT WINAPI
+D2D1CreateDevice(
+    _In_ IDXGIDevice *dxgiDevice,
+    _In_opt_ CONST D2D1_CREATION_PROPERTIES*
+        creationProperties,
+    _Outptr_ ID2D1Device **d2dDevice);</pre>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("d2d1.dll")]
+HRESULT D2D1CreateDevice(
+    [In] IDXGIDevice dxgiDevice,
+    [Optional][In]
+        D2D1_CREATION_PROPERTIES* properties,
+    [Out] ID2D1Device* device);</pre>
+          <p class="match">The API and interface hierarchy already exist in the official baseline.</p>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("d2d1.dll")]
+HRESULT D2D1CreateDevice(
+    [In] IDXGIDevice dxgiDevice,
+    [Optional][In][Const]
+        D2D1_CREATION_PROPERTIES* properties,
+    [Out] ID2D1Device* device);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed header change</h3>
+<pre>// None.
+// Generator fix:
+<span class="proposed">// Prefer declarations discovered in the current partition set over
+// the reference winmd, and assign one stable in-house owner for the
+// central ID2D1Device interface hierarchy.</span></pre>
+      </div>
+      <div class="note">
+        Adding another SDK annotation would hide the partition ownership issue. Our partition
+        experiment must stop suppressing an API that official windows-rs already carries.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// libMappings.rsp
+D2D1CreateDevice=d2d1.dll
+D2D1CreateDeviceContext=d2d1.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="ndr">
+      <div class="eyebrow">7 / 8 &middot; Semantic implied pointer direction</div>
+      <h2>NdrClientCall2</h2>
+      <p><span class="pill generator">Generator defect</span><span class="pill done">No header change</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>CLIENT_CALL_RETURN RPC_VAR_ENTRY
+NdrClientCall2(
+    PMIDL_STUB_DESC pStubDescriptor,
+    PFORMAT_STRING pFormat,
+    ...
+    );</pre>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("RPCRT4.dll")]
+CLIENT_CALL_RETURN NdrClientCall2(
+    <span class="lost">[In]</span> MIDL_STUB_DESC* stubDescriptor,
+    <span class="lost">[In]</span> byte* format,
+    __arglist);</pre>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("RPCRT4.dll")]
+<span class="target-delta">CLIENT_CALL_RETURN NdrClientCall2(
+    [In][Out] MIDL_STUB_DESC* stubDescriptor,
+    [In][Out] byte* format,
+    __arglist);</span></pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed change</h3>
+<pre>// No header change.
+
+<span class="proposed">// Apply SAL semantic implied defaults to both
+// unannotated pointer parameters: In | Out, element count 1.</span></pre>
+      </div>
+      <div class="note warning">
+        Official windows-rs already handles the variadic declaration and calling convention. The
+        remaining difference is direction: windows-rs must apply the semantic implied pointer
+        defaults rather than adding redundant SAL to the SDK header.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// libMappings.rsp
+NdrClientCall2=RPCRT4.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="psapi">
+      <div class="eyebrow">8 / 8 &middot; Public name versus import name</div>
+      <h2>K32EnumProcesses</h2>
+      <p><span class="pill policy">Team discussion</span><span class="pill done">No proposed header change</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>#if (PSAPI_VERSION &gt; 1)
+#define EnumProcesses K32EnumProcesses
+#endif
+
+_Win32_Set_last_error_
+BOOL WINAPI EnumProcesses(
+    _Out_writes_bytes_(cb) DWORD* lpidProcess,
+    _In_ DWORD cb,
+    _Out_ LPDWORD lpcbNeeded);</pre>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("PSAPI.dll")]
+BOOL EnumProcesses(...);
+
+<span class="lost">[DllImport("KERNEL32.dll",
+    EntryPoint="K32EnumProcesses")]
+BOOL EnumProcesses(...);</span></pre>
+          <p class="delta">Two imports, but both have the same public metadata name.</p>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre><span class="target-delta">[DllImport("KERNEL32.dll")]
+BOOL K32EnumProcesses(</span>
+    [Out][MemorySize(BytesParamIndex=1)]
+        uint* processIds,
+    [In] uint bytes,
+    [Out] uint* bytesNeeded);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Discussion</h3>
+<pre><span class="proposed">// The windows-rs baseline may be more faithful to the header:
+[DllImport("PSAPI.dll")]
+BOOL EnumProcesses(...);
+
+[DllImport("KERNEL32.dll", EntryPoint="K32EnumProcesses")]
+BOOL EnumProcesses(...);</span>
+
+// No header annotation proposed.</pre>
+      </div>
+      <div class="note decision">
+        <b>Team decision required:</b> windows-rs appears more faithful by preserving the
+        documented source name and recording <code>K32EnumProcesses</code> as the import entry point.
+        The confusing part is whether two flat methods with the same metadata name are acceptable
+        and how projections should disambiguate them.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// libMappings.rsp
+K32EnumProcesses=KERNEL32.dll
+
+// The public K32* name is recovered from the PSAPI_VERSION macro alias,
+// not from an existing function-name sidecar.</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="addfontresourceexw">
+      <div class="eyebrow">2 / 8 &middot; Reserved optionality and synthetic enum typing</div>
+      <h2>AddFontResourceExW</h2>
+      <p><span class="pill annotation">Header annotation</span><span class="pill done">Present in official Rust RDL</span></p>
+      <div class="grid three">
+        <div class="card source">
+          <h3>SDK header today</h3>
+<pre>WINGDIAPI int WINAPI AddFontResourceExW(
+    _In_ LPCWSTR name,
+    _In_ DWORD fl,
+    _Reserved_ PVOID res);</pre>
+          <p class="footer"><code>um/wingdi.h</code></p>
+        </div>
+        <div class="card current">
+          <h3>Official windows-rs baseline</h3>
+<pre>[DllImport("GDI32.dll")]
+int AddFontResourceExW(
+    [In] PCWSTR name,
+    <span class="lost">[In] uint fl</span>,
+    <span class="lost">[In][Reserved]</span> void* res);</pre>
+        </div>
+        <div class="card target">
+          <h3>win32metadata reference</h3>
+<pre>[DllImport("GDI32.dll")]
+int AddFontResourceExW(
+    [In][Const] PWSTR name,
+    [In] <span class="target-delta">FONT_RESOURCE_CHARACTERISTICS</span> fl,
+    <span class="target-delta">[Optional][Reserved]</span> void* res);</pre>
+        </div>
+      </div>
+      <div class="card proposal" style="margin-top:18px">
+        <h3>Proposed header change</h3>
+<pre><span class="proposed">#ifdef WIN32METADATA
+#pragma push_macro("FR_PRIVATE")
+#pragma push_macro("FR_NOT_ENUM")
+#undef FR_PRIVATE
+#undef FR_NOT_ENUM
+enum class FONT_RESOURCE_CHARACTERISTICS : unsigned int
+{
+    FR_PRIVATE = 0x10,
+    FR_NOT_ENUM = 0x20,
+};
+#pragma pop_macro("FR_NOT_ENUM")
+#pragma pop_macro("FR_PRIVATE")
+#endif</span>
+
+WINGDIAPI int WINAPI AddFontResourceExW(
+    _In_ LPCWSTR name,
+    _In_ <span class="proposed">_Win32_Associated_enum_(
+        FONT_RESOURCE_CHARACTERISTICS)</span> DWORD fl,
+    _Reserved_ PVOID res);</pre>
+      </div>
+      <div class="note">
+        <b>Synthetic enum example:</b> unlike <code>CLSCTX</code>,
+        <code>FONT_RESOURCE_CHARACTERISTICS</code> does not exist in the SDK headers today.
+        It is defined only by win32metadata&apos;s <code>enums.json</code>, using the existing
+        <code>FR_PRIVATE</code> and <code>FR_NOT_ENUM</code> macros. The guarded enum introduces
+        metadata shape without changing the normal SDK ABI.
+      </div>
+      <div class="note">
+        <b>Two directly reviewable issues:</b> the checked-in RDL has <code>#[reserved]</code>
+        but no <code>#[opt]</code>, even though the parser&apos;s intended model treats
+        <code>_Reserved_</code> as optional. The <code>fl</code> parameter also lacks the
+        win32metadata synthetic enum. Regeneration plus the guarded enum/use-site association
+        should close both.
+      </div>
+      <details>
+        <summary>Existing win32metadata sidecars and mappings</summary>
+        <div>
+<pre>// enums.json
+{
+  "name": "FONT_RESOURCE_CHARACTERISTICS",
+  "members": [ "FR_PRIVATE", "FR_NOT_ENUM" ],
+  "uses": [
+    { "method": "AddFontResourceExW", "parameter": "fl" },
+    { "method": "AddFontResourceExA", "parameter": "fl" }
+  ]
+}
+
+// libMappings.rsp
+AddFontResourceExW=GDI32.dll</pre>
+        </div>
+      </details>
+    </section>
+
+    <section id="raii-free">
+      <div class="eyebrow">Annotation example &middot; Producer ownership</div>
+      <h2>OpenPrinterW</h2>
+      <p><span class="pill annotation">Header annotation</span><span class="pill policy">Remove pseudo handle</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>BOOL WINAPI OpenPrinterW(
+    _In_opt_ LPWSTR pPrinterName,
+    _Out_ LPHANDLE phPrinter,
+    _In_opt_ LPPRINTER_DEFAULTSW pDefault);</pre>
+          <p class="footer"><code>um/Winspool.h</code></p>
+        </div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("WINSPOOL.DRV")]
+BOOL OpenPrinterW(
+    [Optional][In] PCWSTR pPrinterName,
+    <span class="lost">[Out] HANDLE* phPrinter</span>,
+    [Optional][In]
+        PRINTER_DEFAULTSW* pDefault);</pre>
+          <p class="delta">The ABI type is correct, but ownership and invalid values are absent.</p>
+        </div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport("winspool.drv")]
+BOOL OpenPrinterW(
+    [Optional][In][Const] PWSTR pPrinterName,
+    [Out] <span class="target-delta">PRINTER_HANDLE*</span> phPrinter,
+    [Optional][In]
+        PRINTER_DEFAULTSW* pDefault);
+
+[RAIIFree("ClosePrinter")]
+[InvalidHandleValue(-1)]
+[InvalidHandleValue(0)]
+struct PRINTER_HANDLE;</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>BOOL WINAPI OpenPrinterW(
+    _In_opt_ LPWSTR pPrinterName,
+    _Out_
+    <span class="proposed">_Win32_RAII_free_(ClosePrinter)
+        _Win32_Invalid_handle_(-1)
+        _Win32_Invalid_handle_(0)</span>
+    LPHANDLE phPrinter,
+    _In_opt_ LPPRINTER_DEFAULTSW pDefault
+);</pre></div>
+      <div class="note"><b>Expected result:</b> remove <code>PRINTER_HANDLE</code> and keep the ABI-authentic <code>HANDLE</code>. The producer output alone says that a successful value is owned, is closed by <code>ClosePrinter</code>, and must not wrap <code>0</code> or <code>-1</code>.</div>
+      <details><summary>Existing win32metadata sidecars</summary><div><pre>// autoTypes.json currently creates PRINTER_HANDLE
+// and associates ClosePrinter plus invalid values.
+
+// Proposed migration:
+// delete the pseudo type and place the same lifecycle
+// contract on OpenPrinterW::phPrinter.</pre></div></details>
+    </section>
+
+    <section id="errors-as-success">
+      <div class="eyebrow">Annotation example &middot; CanReturnErrorsAsSuccess</div>
+      <h2>IDXGIFactory1::EnumAdapters1</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>virtual HRESULT STDMETHODCALLTYPE EnumAdapters1(
+    _In_ UINT Adapter,
+    _COM_Outptr_ IDXGIAdapter1 **ppAdapter
+) = 0;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>HRESULT EnumAdapters1(
+    [In] uint Adapter,
+    [Out] IDXGIAdapter1* ppAdapter);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre><span class="target-delta">[CanReturnErrorsAsSuccess]</span>
+HRESULT EnumAdapters1(
+    [In] uint Adapter,
+    [Out][ComOutPtr] IDXGIAdapter1* ppAdapter);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre><span class="proposed">_Win32_Preserve_result_</span>
+virtual HRESULT STDMETHODCALLTYPE EnumAdapters1(
+    _In_ UINT Adapter,
+    _COM_Outptr_ IDXGIAdapter1 **ppAdapter
+) = 0;</pre></div>
+      <div class="note"><b>Impact:</b> <code>DXGI_ERROR_NOT_FOUND</code> ends enumeration and should be available to the caller rather than translated as an exceptional failure. This and the multiple-success case below have the same projection requirement, so both use one annotation.</div>
+    </section>
+
+    <section id="multiple-success">
+      <div class="eyebrow">Annotation example &middot; CanReturnMultipleSuccessValues</div>
+      <h2>DoDragDrop</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>WINOLEAPI DoDragDrop(
+    _In_ LPDATAOBJECT pDataObj,
+    _In_ LPDROPSOURCE pDropSource,
+    _In_ DWORD dwOKEffects,
+    _Out_ LPDWORD pdwEffect);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("ole32.dll")]
+HRESULT DoDragDrop(
+    [In] IDataObject pDataObj,
+    [In] IDropSource pDropSource,
+    [In] uint dwOKEffects,
+    [Out] uint* pdwEffect);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre><span class="target-delta">[CanReturnMultipleSuccessValues]</span>
+[DllImport("OLE32.dll")]
+HRESULT DoDragDrop(
+    [In] IDataObject pDataObj,
+    [In] IDropSource pDropSource,
+    [In] DROPEFFECT dwOKEffects,
+    [Out] DROPEFFECT* pdwEffect);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre><span class="proposed">_Win32_Preserve_result_</span>
+WINOLEAPI DoDragDrop(
+    _In_ LPDATAOBJECT pDataObj,
+    _In_ LPDROPSOURCE pDropSource,
+    _In_ DWORD dwOKEffects,
+    _Out_ LPDWORD pdwEffect
+);</pre></div>
+      <div class="note"><b>Impact:</b> preserve distinct successful outcomes such as <code>DRAGDROP_S_DROP</code> and <code>DRAGDROP_S_CANCEL</code> instead of collapsing them to a unit success.</div>
+    </section>
+
+    <section id="retained">
+      <div class="eyebrow">Annotation example &middot; Retained</div>
+      <h2>HttpReceiveHttpRequest</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>ULONG WINAPI HttpReceiveHttpRequest(
+    IN HANDLE RequestQueueHandle,
+    IN HTTP_REQUEST_ID RequestId,
+    IN ULONG Flags,
+    _Out_writes_bytes_to_(RequestBufferLength,
+        *BytesReturned) PHTTP_REQUEST RequestBuffer,
+    IN ULONG RequestBufferLength,
+    _Out_opt_ PULONG BytesReturned,
+    IN LPOVERLAPPED Overlapped OPTIONAL);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("HTTPAPI.dll")]
+uint HttpReceiveHttpRequest(
+    [In] HANDLE RequestQueueHandle,
+    [In] HTTP_REQUEST_ID RequestId,
+    [In] uint Flags,
+    [Out][MemorySize(BytesParamIndex=4)]
+        HTTP_REQUEST* RequestBuffer,
+    [In] uint RequestBufferLength,
+    [Optional][Out] uint* BytesReturned,
+    <span class="lost">[Optional][In] OVERLAPPED* Overlapped</span>);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport("HTTPAPI.dll")]
+uint HttpReceiveHttpRequest(
+    [In] HANDLE RequestQueueHandle,
+    [In] ulong RequestId,
+    [In] HTTP_RECEIVE_HTTP_REQUEST_FLAGS Flags,
+    [Out][MemorySize(BytesParamIndex=4)]
+        HTTP_REQUEST_V2* RequestBuffer,
+    [In] uint RequestBufferLength,
+    [Optional][Out] uint* BytesReturned,
+    <span class="target-delta">[Optional][In][Out][Retained]</span>
+        OVERLAPPED* Overlapped);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>ULONG WINAPI HttpReceiveHttpRequest(
+    IN HANDLE RequestQueueHandle,
+    IN HTTP_REQUEST_ID RequestId,
+    IN ULONG Flags,
+    _Out_writes_bytes_to_(RequestBufferLength,
+        *BytesReturned) PHTTP_REQUEST RequestBuffer,
+    IN ULONG RequestBufferLength,
+    _Out_opt_ PULONG BytesReturned,
+    <span class="proposed">_Win32_Retained_</span>
+    IN LPOVERLAPPED Overlapped OPTIONAL
+);</pre></div>
+      <div class="note"><b>Impact:</b> CsWin32 uses <code>Retained</code> to avoid generating a lifetime-unsafe friendly overload. windows-rs does not currently consume it, so Rust behavior still needs a policy decision.</div>
+    </section>
+
+    <section id="ignore-if-return">
+      <div class="eyebrow">Annotation example &middot; IgnoreIfReturn</div>
+      <h2>CreatePipe</h2>
+      <p><span class="pill policy">Propose dropping attribute</span><span class="pill done">No header change</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>BOOL WINAPI CreatePipe(
+    _Out_ PHANDLE hReadPipe,
+    _Out_ PHANDLE hWritePipe,
+    _In_opt_ LPSECURITY_ATTRIBUTES lpPipeAttributes,
+    _In_ DWORD nSize);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("KERNEL32.dll")]
+BOOL CreatePipe(
+    [Out] HANDLE* hReadPipe,
+    [Out] HANDLE* hWritePipe,
+    [Optional][In]
+        SECURITY_ATTRIBUTES* lpPipeAttributes,
+    [In] uint nSize);</pre>
+          <p class="delta">windows-rs does not read <code>IgnoreIfReturn</code>.</p>
+        </div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport("KERNEL32.dll")]
+BOOL CreatePipe(
+    [Out]<span class="target-delta">[IgnoreIfReturn("0")]</span>
+        HANDLE* hReadPipe,
+    [Out]<span class="target-delta">[IgnoreIfReturn("0")]</span>
+        HANDLE* hWritePipe,
+    [Optional][In]
+        SECURITY_ATTRIBUTES* lpPipeAttributes,
+    [In] uint nSize);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No header annotation.
+
+// Remove both IgnoreIfReturn sidecars and remove
+// _Win32_Ignore_if_return_ from the
+// proposed vocabulary.</pre></div>
+      <div class="note"><b>Impact:</b> neither CsWin32 nor windows-rs consumes this attribute. Both already expose the output storage with the function result controlling success. Keeping unused metadata adds vocabulary without changing either projection.</div>
+    </section>
+
+    <section id="retval">
+      <div class="eyebrow">Annotation example &middot; RetVal</div>
+      <h2>IDXGIAdapter::GetDesc</h2>
+      <p><span class="pill annotation">Existing direction SAL plus custom metadata</span><span class="pill done">Consumed by both projections</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>virtual HRESULT STDMETHODCALLTYPE GetDesc(
+    _Out_ DXGI_ADAPTER_DESC *pDesc
+) = 0;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>HRESULT GetDesc(
+    <span class="lost">[Out]</span>
+    DXGI_ADAPTER_DESC* pDesc);
+
+// windows-rs bindgen uses RetVal, when present,
+// to generate:
+Result&lt;DXGI_ADAPTER_DESC&gt; GetDesc();</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>HRESULT GetDesc(
+    [Out]<span class="target-delta">[RetVal]</span>
+    DXGI_ADAPTER_DESC* pDesc);
+
+// CsWin32 moves this parameter to the managed
+// return value unless PreserveSig is requested.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>virtual HRESULT STDMETHODCALLTYPE GetDesc(
+    _Out_
+    <span class="proposed">_Win32_Retval_</span>
+    DXGI_ADAPTER_DESC *pDesc
+) = 0;</pre></div>
+      <div class="note"><b>Purpose and impact:</b> <code>RetVal</code> identifies which native output becomes the friendly projected return value. CsWin32 explicitly consumes it, and windows-rs checks it before applying heuristics. The SDK already supplies <code>_Out_</code>; retval requires custom metadata.</div>
+      <div class="note decision"><b>Correction:</b> <code>_Out_retval_</code> is not defined by SDK SAL. IDL-authored declarations should use MIDL <code>[retval]</code>, which remains visible in generated-header comments. C/C++-authored declarations combine existing direction SAL with <code>_Win32_Retval_</code>.</div>
+    </section>
+
+    <section id="array-count-field">
+      <div class="eyebrow">Annotation example &middot; NativeArrayInfo.CountFieldName</div>
+      <h2>CERT_INFO::rgExtension</h2>
+      <p><span class="pill policy">Consumer value not established</span><span class="pill done">No header change yet</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef struct _CERT_INFO {
+    DWORD dwVersion;
+    CRYPT_INTEGER_BLOB SerialNumber;
+    CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+    CERT_NAME_BLOB Issuer;
+    FILETIME NotBefore;
+    FILETIME NotAfter;
+    CERT_NAME_BLOB Subject;
+    CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+    CRYPT_BIT_BLOB IssuerUniqueId;
+    CRYPT_BIT_BLOB SubjectUniqueId;
+    DWORD cExtension;
+    PCERT_EXTENSION rgExtension;
+} CERT_INFO, *PCERT_INFO;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>struct CERT_INFO {
+    // preceding fields unchanged
+    uint cExtension;
+    <span class="lost">CERT_EXTENSION* rgExtension;</span>
+}
+
+// Generated Rust likewise exposes a raw pointer.</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>struct CERT_INFO {
+    // preceding fields unchanged
+    uint cExtension;
+    <span class="target-delta">[NativeArrayInfo(
+        CountFieldName="cExtension")]</span>
+    CERT_EXTENSION* rgExtension;
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// Do not shift this sidecar into the SDK yet.
+
+// First agree on a consumer behavior, such as a
+// generated span/view over rgExtension[0..cExtension].</pre></div>
+      <div class="note"><b>Current usage:</b> CsWin32 decodes only <code>CountConst</code> and <code>CountParamIndex</code>; windows-rs also has no <code>CountFieldName</code> consumer. The attribute is descriptive in the winmd today but does not improve either projection. Retain it only if we commit to a concrete field-array projection.</div>
+    </section>
+
+    <section id="array-and-memory-size">
+      <div class="eyebrow">Annotation examples &middot; CountParamIndex and BytesParamIndex</div>
+      <h2>RasEnumConnectionsW</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>DWORD APIENTRY RasEnumConnectionsW(
+    _Inout_opt_ LPRASCONNW param0,
+    _Inout_ LPDWORD param1,
+    _Out_ LPDWORD param2);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("RASAPI32.dll")]
+uint RasEnumConnectionsW(
+    <span class="lost">[Optional][In][Out]</span>
+        tagRASCONNW* param0,
+    [In][Out] uint* param1,
+    [Out] uint* param2);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport("RASAPI32.dll")]
+uint RasEnumConnectionsW(
+    [Optional][In][Out]
+    <span class="target-delta">[NativeArrayInfo(CountParamIndex=2)]
+    [MemorySize(BytesParamIndex=1)]</span>
+        RASCONNW* param0,
+    [In][Out] uint* param1,
+    [Out] uint* param2);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>DWORD APIENTRY RasEnumConnectionsW(
+    _Inout_opt_
+    <span class="proposed">_Win32_Array_count_param_(2)
+    _Win32_Memory_size_param_(1)</span>
+    LPRASCONNW connections,
+    _Inout_ LPDWORD bytes,
+    _Out_ LPDWORD count
+);</pre></div>
+      <div class="note"><b>Impact:</b> parameter 1 is capacity in bytes and parameter 2 is the logical element count. Both relationships are consumed for parameter-array projection; they are not interchangeable.</div>
+    </section>
+
+    <section id="not-null-terminated">
+      <div class="eyebrow">Annotation example &middot; NotNullTerminated</div>
+      <h2>WAVEHDR::lpData</h2>
+      <p><span class="pill annotation">SDK metadata annotation</span><span class="pill done">Preserve explicit contract</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef struct wavehdr_tag {
+    LPSTR lpData;
+    DWORD dwBufferLength;
+    DWORD dwBytesRecorded;
+    DWORD_PTR dwUser;
+    DWORD dwFlags;
+    DWORD dwLoops;
+    struct wavehdr_tag FAR *lpNext;
+    DWORD_PTR reserved;
+} WAVEHDR, *PWAVEHDR, *LPWAVEHDR;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>struct WAVEHDR {
+    <span class="lost">PSTR lpData;</span>
+    uint dwBufferLength;
+    uint dwBytesRecorded;
+    UIntPtr dwUser;
+    uint dwFlags;
+    uint dwLoops;
+    WAVEHDR* lpNext;
+    UIntPtr reserved;
+}</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>struct WAVEHDR {
+    <span class="target-delta">[NotNullTerminated]</span>
+    PSTR lpData;
+    uint dwBufferLength;
+    uint dwBytesRecorded;
+    UIntPtr dwUser;
+    uint dwFlags;
+    uint dwLoops;
+    WAVEHDR* lpNext;
+    UIntPtr reserved;
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>typedef struct wavehdr_tag {
+    <span class="proposed">_Win32_Not_null_terminated_</span>
+    LPSTR lpData;
+    DWORD dwBufferLength;
+    DWORD dwBytesRecorded;
+    DWORD_PTR dwUser;
+    DWORD dwFlags;
+    DWORD dwLoops;
+    struct wavehdr_tag FAR *lpNext;
+    DWORD_PTR reserved;
+} WAVEHDR, *PWAVEHDR, *LPWAVEHDR;</pre></div>
+      <div class="note"><b>Expected result:</b> preserve the explicit fact that this pointer is a byte buffer rather than a C string. No existing annotation currently produces this metadata reliably for fields, so this remains an SDK metadata annotation rather than an inferred SAL rule.</div>
+      <div class="note decision"><b>Coverage:</b> this moves the only explicit <code>[NotNullTerminated]</code> sidecar in <code>emitter.settings.rsp</code>. The other emitted occurrences still need classification: double-NUL strings should come from <code>_NullNull_terminated_</code>, counted buffers may be derivable from size/count SAL after tooling support exists, and standalone cases may require the same explicit annotation.</div>
+    </section>
+
+    <section id="null-null-terminated">
+      <div class="eyebrow">Annotation example &middot; NullNullTerminated</div>
+      <h2>GetVolumePathNamesForVolumeNameW</h2>
+      <p><span class="pill generator">Generator defect</span><span class="pill done">No header change</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>BOOL WINAPI GetVolumePathNamesForVolumeNameW(
+    _In_ LPCWSTR lpszVolumeName,
+    _Out_writes_to_opt_(cchBufferLength,
+        *lpcchReturnLength)
+    _Post_ <span class="target-delta">_NullNull_terminated_</span>
+    LPWCH lpszVolumePathNames,
+    _In_ DWORD cchBufferLength,
+    _Out_ PDWORD lpcchReturnLength
+);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("KERNEL32.dll")]
+BOOL GetVolumePathNamesForVolumeNameW(
+    [In] PCWSTR lpszVolumeName,
+    [Optional][Out]
+    [NativeArrayInfo(CountParamIndex=2)]
+    <span class="lost">ushort*</span> lpszVolumePathNames,
+    [In] uint cchBufferLength,
+    [Out] uint* lpcchReturnLength);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport("KERNEL32.dll")]
+BOOL GetVolumePathNamesForVolumeNameW(
+    [In][Const] PWSTR lpszVolumeName,
+    [Optional][Out]
+    [NativeArrayInfo(CountParamIndex=2)]
+    <span class="target-delta">[NotNullTerminated]
+    [NullNullTerminated]</span>
+    PWSTR lpszVolumePathNames,
+    [In] uint cchBufferLength,
+    [Out] uint* lpcchReturnLength);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No header change.
+
+// Preserve the existing _NullNull_terminated_
+// SAL through RDL and emit [NullNullTerminated].
+// The separate NotNullTerminated attribute is
+// redundant once the double-NUL contract survives.</pre></div>
+      <div class="note"><b>Expected result:</b> windows-rs already recovers optionality and the count parameter but loses the termination rule. The SDK declaration is complete; this is a SAL-to-RDL-to-winmd preservation bug.</div>
+    </section>
+
+    <section id="project-as">
+      <div class="eyebrow">Native typedef fidelity &middot; no ProjectAs annotation</div>
+      <h2>AcceptSecurityContext</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>SECURITY_STATUS SEC_ENTRY AcceptSecurityContext(
+    _In_opt_ PCredHandle phCredential,
+    _In_opt_ PCtxtHandle phContext,
+    _In_opt_ PSecBufferDesc pInput,
+    _In_ ASC_REQ_FLAGS fContextReq,
+    _In_ unsigned long TargetDataRep,
+    _Inout_opt_ PCtxtHandle phNewContext,
+    _Inout_opt_ PSecBufferDesc pOutput,
+    _Out_ unsigned long *pfContextAttr,
+    _Out_opt_ PTimeStamp ptsExpiry
+);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[DllImport("Secur32.dll")]
+<span class="lost">SECURITY_STATUS</span> AcceptSecurityContext(
+    [Optional][In] PCredHandle phCredential,
+    [Optional][In] PCtxtHandle phContext,
+    [Optional][In] SecBufferDesc* pInput,
+    [In] uint fContextReq,
+    [In] uint TargetDataRep,
+    [Optional][In][Out] PCtxtHandle phNewContext,
+    [Optional][In][Out] SecBufferDesc* pOutput,
+    [Out] uint* pfContextAttr,
+    [Optional][Out] SECURITY_INTEGER* ptsExpiry);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[CanReturnMultipleSuccessValues]
+[DllImport("SECUR32.dll")]
+<span class="target-delta">HRESULT</span> AcceptSecurityContext(
+    [Optional][In] SecHandle* phCredential,
+    [Optional][In] SecHandle* phContext,
+    [Optional][In] SecBufferDesc* pInput,
+    [In] ASC_REQ_FLAGS fContextReq,
+    [In] uint TargetDataRep,
+    [Optional][In][Out] SecHandle* phNewContext,
+    [Optional][In][Out] SecBufferDesc* pOutput,
+    [Out] uint* pfContextAttr,
+    [Optional][Out] long* ptsExpiry);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre><span class="proposed">_Win32_Preserve_result_</span>
+SECURITY_STATUS SEC_ENTRY AcceptSecurityContext(
+    _In_opt_ PCredHandle phCredential,
+    _In_opt_ PCtxtHandle phContext,
+    _In_opt_ PSecBufferDesc pInput,
+    _In_ ASC_REQ_FLAGS fContextReq,
+    _In_ unsigned long TargetDataRep,
+    _Inout_opt_ PCtxtHandle phNewContext,
+    _Inout_opt_ PSecBufferDesc pOutput,
+    _Out_ unsigned long *pfContextAttr,
+    _Out_opt_ PTimeStamp ptsExpiry
+);</pre></div>
+      <div class="note"><b>Impact:</b> preserve the native <code>SECURITY_STATUS</code> typedef and the exact success result. <code>ProjectAs</code> has no current win32metadata sidecar uses and is removed from the proposed vocabulary rather than being placed after the function declarator.</div>
+    </section>
+
+    <section id="callback-name">
+      <div class="eyebrow">Annotation example &middot; CanonicalName</div>
+      <h2>PTOP_LEVEL_EXCEPTION_FILTER</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef LONG (WINAPI
+    *PTOP_LEVEL_EXCEPTION_FILTER)(
+    _In_opt_ struct _EXCEPTION_POINTERS
+        *ExceptionInfo);
+
+typedef PTOP_LEVEL_EXCEPTION_FILTER
+    LPTOP_LEVEL_EXCEPTION_FILTER;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>delegate int PTOP_LEVEL_EXCEPTION_FILTER(
+    [In] EXCEPTION_POINTERS* ExceptionInfo);
+
+[NativeTypedef]
+struct LPTOP_LEVEL_EXCEPTION_FILTER {
+    PTOP_LEVEL_EXCEPTION_FILTER Value;
+}
+
+LPTOP_LEVEL_EXCEPTION_FILTER
+SetUnhandledExceptionFilter(
+    [Optional][In]
+    LPTOP_LEVEL_EXCEPTION_FILTER filter);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>delegate int
+    <span class="target-delta">LPTOP_LEVEL_EXCEPTION_FILTER</span>(
+    [In] EXCEPTION_POINTERS* ExceptionInfo);
+
+LPTOP_LEVEL_EXCEPTION_FILTER
+SetUnhandledExceptionFilter(
+    [Optional][In]
+    LPTOP_LEVEL_EXCEPTION_FILTER filter);
+
+// The API uses the callback directly; there is no
+// second wrapper type.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre><span class="proposed">_Win32_Canonical_name_(
+    LPTOP_LEVEL_EXCEPTION_FILTER)</span>
+typedef LONG (WINAPI
+    *PTOP_LEVEL_EXCEPTION_FILTER)(
+    _In_opt_ struct _EXCEPTION_POINTERS
+        *ExceptionInfo
+);
+typedef PTOP_LEVEL_EXCEPTION_FILTER
+    LPTOP_LEVEL_EXCEPTION_FILTER;</pre></div>
+    <div class="note"><b>Impact:</b> both baselines expose the API under the <code>LPTOP_LEVEL_EXCEPTION_FILTER</code> spelling, but official windows-rs reaches it through a wrapper around a separately named callback. Selecting the canonical callback identity removes that duplicate type without changing the ABI or API signature.</div>
+    </section>
+
+    <section id="pointer-level">
+      <div class="eyebrow">Annotation example &middot; ReducePointerLevel</div>
+      <h2>UCharIterator::move</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef int32_t U_CALLCONV
+UCharIteratorMove(
+    UCharIterator *iter,
+    int32_t delta,
+    UCharIteratorOrigin origin
+);
+
+struct UCharIterator {
+    UCharIteratorMove *move;
+};</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>delegate int UCharIteratorMove(
+    <span class="lost">[Out]</span> UCharIterator* iter,
+    [In] int delta,
+    [In] UCharIteratorOrigin origin);
+
+struct UCharIterator {
+    UCharIteratorMove move;
+}</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>delegate int UCharIteratorMove(
+    <span class="target-delta">[In][Out]</span> UCharIterator* iter,
+    [In] int delta,
+    [In] UCharIteratorOrigin origin);
+
+struct UCharIterator {
+    UCharIteratorMove move;
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No pointer-level header annotation.
+
+// windows-rs already emits one callback value for
+// UCharIteratorMove *move. Apply the SAL semantic
+// implied In|Out default to iter.</pre></div>
+      <div class="note"><b>Impact:</b> the official Rust baseline already has the correct pointer level. The remaining difference is the cross-cutting implied-direction bug, not a declaration-specific fixup.</div>
+    </section>
+
+    <section id="agile">
+      <div class="eyebrow">Type annotation example &middot; Agile</div>
+      <h2>IDXGIFactory</h2>
+      <p><span class="pill annotation">Custom metadata required</span><span class="pill policy">Authoritative source must be reviewed</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>MIDL_INTERFACE(
+    "7b7166ec-21c7-44ae-b21a-c9ae321ae369")
+IDXGIFactory : public IDXGIObject
+{
+    // methods omitted
+};</pre>
+          <p class="delta">The declaration does not inherit <code>IAgileObject</code> and has no SAL or COM syntax that states agility.</p>
+        </div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>[Guid(...)]
+interface IDXGIFactory : IDXGIObject
+{
+    // methods omitted
+}
+
+// No AgileAttribute.</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[Guid(...)]
+<span class="target-delta">[Agile]</span>
+interface IDXGIFactory : IDXGIObject
+{
+    // methods omitted
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre><span class="proposed">_Win32_Agile_</span>
+MIDL_INTERFACE(
+    "7b7166ec-21c7-44ae-b21a-c9ae321ae369")
+IDXGIFactory : public IDXGIObject
+{
+    // methods unchanged
+};</pre></div>
+      <div class="note"><b>Gap:</b> COM agility is runtime behavior, not native ABI inheritance. There is no general SAL annotation for it, and adding <code>IAgileObject</code> as a base would change the declared contract. windows-rs already consumes <code>AgileAttribute</code> to emit <code>Send</code> and <code>Sync</code>.</div>
+      <div class="note decision"><b>Decision needed:</b> keep a custom annotation, but replace the current name-pattern sidecar only after the owning component confirms which interfaces are actually agile. The annotation itself should not infer agility from an <code>ID2D*</code>, <code>IDWrite*</code>, or <code>IDXGI*</code> name.</div>
+    </section>
+
+    <section id="associated-constant">
+      <div class="eyebrow">Type annotation example &middot; AssociatedConstant</div>
+      <h2>ENUM_SERVICE_TYPE and SERVICE_NO_CHANGE</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>#define SERVICE_NO_CHANGE 0xffffffff
+#define SERVICE_KERNEL_DRIVER 0x00000001
+#define SERVICE_FILE_SYSTEM_DRIVER 0x00000002
+#define SERVICE_ADAPTER 0x00000004
+#define SERVICE_RECOGNIZER_DRIVER 0x00000008
+#define SERVICE_WIN32_OWN_PROCESS 0x00000010
+#define SERVICE_WIN32_SHARE_PROCESS 0x00000020
+
+BOOL ChangeServiceConfigW(
+    SC_HANDLE hService,
+    DWORD dwServiceType,
+    DWORD dwStartType,
+    DWORD dwErrorControl,
+    // remaining parameters omitted
+);</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>const uint SERVICE_NO_CHANGE = uint.MaxValue;
+
+BOOL ChangeServiceConfigW(
+    SC_HANDLE hService,
+    <span class="lost">uint dwServiceType</span>,
+    uint dwStartType,
+    uint dwErrorControl,
+    // remaining parameters omitted
+);</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre><span class="target-delta">[AssociatedConstant("SERVICE_NO_CHANGE")]</span>
+[Flags]
+enum ENUM_SERVICE_TYPE : uint {
+    SERVICE_KERNEL_DRIVER = 1,
+    SERVICE_FILE_SYSTEM_DRIVER = 2,
+    // remaining service-type values
+}
+
+BOOL ChangeServiceConfigW(
+    SC_HANDLE hService,
+    <span class="target-delta">ENUM_SERVICE_TYPE dwServiceType</span>,
+    SERVICE_START_TYPE dwStartType,
+    SERVICE_ERROR dwErrorControl,
+    // remaining parameters omitted
+);</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed guarded metadata declaration</h3>
+<pre>#ifdef WIN32METADATA
+enum <span class="proposed">_Win32_Associated_constant_(
+    SERVICE_NO_CHANGE)</span>
+ENUM_SERVICE_TYPE : DWORD {
+    SERVICE_KERNEL_DRIVER = 0x00000001,
+    SERVICE_FILE_SYSTEM_DRIVER = 0x00000002,
+    SERVICE_ADAPTER = 0x00000004,
+    SERVICE_RECOGNIZER_DRIVER = 0x00000008,
+    SERVICE_WIN32_OWN_PROCESS = 0x00000010,
+    SERVICE_WIN32_SHARE_PROCESS = 0x00000020
+    // remaining existing macro values
+};
+#endif
+
+BOOL ChangeServiceConfigW(
+    SC_HANDLE hService,
+    <span class="proposed">_Win32_Associated_enum_(
+        ENUM_SERVICE_TYPE)</span>
+    DWORD dwServiceType,
+    <span class="proposed">_Win32_Associated_enum_(
+        SERVICE_START_TYPE)</span>
+    DWORD dwStartType,
+    <span class="proposed">_Win32_Associated_enum_(
+        SERVICE_ERROR)</span>
+    DWORD dwErrorControl,
+    // remaining parameters unchanged
+);</pre></div>
+      <div class="note"><b>Gap:</b> the SDK exposes service types as <code>DWORD</code> plus macros, while win32metadata synthesizes typed enums and maps the parameters to them. <code>SERVICE_NO_CHANGE</code> is valid for configuration parameters but is deliberately not a normal enum member.</div>
+      <div class="note decision"><b>Impact:</b> windows-rs must use the guarded enum for the relevant <code>DWORD</code> parameters and preserve the associated constant relationship. The same pattern applies to <code>SERVICE_START_TYPE</code> and <code>SERVICE_ERROR</code>.</div>
+    </section>
+
+    <section id="native-inheritance">
+      <div class="eyebrow">Type fidelity example &middot; Native inheritance</div>
+      <h2>MONITORINFOEXW</h2>
+      <p><span class="pill done">Header already expresses relationship</span><span class="pill generator">Normalize field naming</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>#ifdef __cplusplus
+typedef struct tagMONITORINFOEXW
+    : public tagMONITORINFO
+{
+    WCHAR szDevice[CCHDEVICENAME];
+} MONITORINFOEXW;
+#else
+typedef struct tagMONITORINFOEXW {
+    MONITORINFO DUMMYSTRUCTNAME;
+    WCHAR szDevice[CCHDEVICENAME];
+} MONITORINFOEXW;
+#endif</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>struct MONITORINFOEXW {
+    <span class="target-delta">MONITORINFO Base;</span>
+    ushort[] szDevice;
+}</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>struct MONITORINFOEXW {
+    <span class="target-delta">MONITORINFO monitorInfo;</span>
+    char[] szDevice;
+}
+
+// No NativeInheritanceAttribute is emitted.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No SDK annotation is required for this example.
+
+// Parse the existing C++ base relationship, or the
+// equivalent first C field, into one embedded base
+// field with a stable generator naming policy.</pre></div>
+      <div class="note"><b>Gap:</b> both metadata baselines already preserve the ABI-significant layout prefix. The remaining difference is only the generated field name. This example does not justify adding a custom native-inheritance annotation to the SDK.</div>
+    </section>
+
+    <section id="obsolete-field">
+      <div class="eyebrow">Field annotation example &middot; Obsolete</div>
+      <h2>IMAGE_OPTIONAL_HEADER32::LoaderFlags</h2>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef struct _IMAGE_OPTIONAL_HEADER {
+    // preceding fields omitted
+    DWORD SizeOfHeapCommit;
+    DWORD LoaderFlags;
+    DWORD NumberOfRvaAndSizes;
+    IMAGE_DATA_DIRECTORY
+        DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+} IMAGE_OPTIONAL_HEADER32;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>struct IMAGE_OPTIONAL_HEADER32 {
+    // preceding fields omitted
+    uint SizeOfHeapCommit;
+    <span class="lost">uint LoaderFlags;</span>
+    uint NumberOfRvaAndSizes;
+    IMAGE_DATA_DIRECTORY[] DataDirectory;
+}</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>struct IMAGE_OPTIONAL_HEADER32 {
+    // preceding fields omitted
+    uint SizeOfHeapCommit;
+    <span class="target-delta">[Obsolete]</span>
+    uint LoaderFlags;
+    uint NumberOfRvaAndSizes;
+    IMAGE_DATA_DIRECTORY[] DataDirectory;
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>typedef struct _IMAGE_OPTIONAL_HEADER {
+    // preceding fields omitted
+    DWORD SizeOfHeapCommit;
+#ifdef WIN32METADATA
+    <span class="proposed">[[deprecated]]</span>
+#endif
+    DWORD LoaderFlags;
+    DWORD NumberOfRvaAndSizes;
+    IMAGE_DATA_DIRECTORY
+        DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+} IMAGE_OPTIONAL_HEADER32;</pre></div>
+      <div class="note"><b>Gap:</b> the field remains ABI-visible but should be discouraged in projections. Prefer the standard C++ deprecation attribute and teach the Clang-to-winmd path to emit <code>ObsoleteAttribute</code>; no custom metadata vocabulary is needed.</div>
+    </section>
+
+    <section id="struct-size-field">
+      <div class="eyebrow">Type annotation example &middot; StructSizeField</div>
+      <h2>CM_NOTIFY_FILTER::cbSize</h2>
+      <p><span class="pill annotation">Keep metadata</span><span class="pill policy">Prefer explicit source contract</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>typedef struct _CM_NOTIFY_FILTER {
+    DWORD cbSize;
+    DWORD Flags;
+    CM_NOTIFY_FILTER_TYPE FilterType;
+    DWORD Reserved;
+    union {
+        // variants omitted
+    } u;
+} CM_NOTIFY_FILTER;</pre></div>
+        <div class="card current"><h3>Official windows-rs baseline</h3>
+<pre>struct CM_NOTIFY_FILTER {
+    <span class="lost">uint cbSize;</span>
+    uint Flags;
+    CM_NOTIFY_FILTER_TYPE FilterType;
+    uint Reserved;
+    CM_NOTIFY_FILTER_4 u;
+}
+
+// Generated Rust Default zeroes cbSize.</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre><span class="target-delta">[StructSizeField("cbSize")]</span>
+struct CM_NOTIFY_FILTER {
+    uint cbSize;
+    uint Flags;
+    CM_NOTIFY_FILTER_TYPE FilterType;
+    uint Reserved;
+    _u_e__Union u;
+}</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
+<pre>typedef struct
+    <span class="proposed">_Win32_Struct_size_field_(cbSize)</span>
+    _CM_NOTIFY_FILTER
+{
+    DWORD cbSize;
+    DWORD Flags;
+    CM_NOTIFY_FILTER_TYPE FilterType;
+    DWORD Reserved;
+    union {
+        // variants unchanged
+    } u;
+} CM_NOTIFY_FILTER;</pre></div>
+      <div class="note"><b>Gap:</b> callers must initialize <code>cbSize</code> to <code>sizeof(CM_NOTIFY_FILTER)</code>, but official generated Rust currently derives a zeroed <code>Default</code>. The metadata is important because a projection can provide a correct constructor/default instead of relying on documentation.</div>
+      <div class="note decision"><b>Policy:</b> keep <code>StructSizeField</code>, but stop applying it solely because a field is named <code>cbSize</code>. Explicit source annotations avoid false positives such as <code>BLOB</code> and <code>BSTRBLOB</code>; windows-rs still needs consumer behavior that initializes the field.</div>
+    </section>
+
+    <section id="rust-fixed-issues">
+      <div class="eyebrow">Recent issue review &middot; Direct SDK generation</div>
+      <h2>Rust has already closed several win32metadata gaps</h2>
+      <p class="lede">Recent issue comments from Kenny Kerr and Rafael Rivera point to cases where the in-house windows-rs metadata now follows the SDK more faithfully than the published win32metadata package.</p>
+      <table>
+        <thead><tr><th>Issue</th><th>Gap</th><th>Why it matters here</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://github.com/microsoft/win32metadata/issues/1044">#1044</a></td><td><code>CONTEXT</code> alignment</td><td>Native type layout must come directly from Clang attributes.</td></tr>
+          <tr><td><a href="https://github.com/microsoft/win32metadata/issues/2241">#2241</a></td><td>Unsigned reparse-tag constants</td><td>The compiler's literal typing rules are more reliable than regex scraping.</td></tr>
+          <tr><td><a href="https://github.com/microsoft/win32metadata/issues/2238">#2238</a></td><td><code>EnumWindows</code> error transformation</td><td>Import metadata must not turn an intentional callback stop into an error.</td></tr>
+          <tr><td><a href="https://github.com/microsoft/win32metadata/issues/1557">#1557</a></td><td><code>LocalFree</code> return handling</td><td>Generic handle-success heuristics cannot replace the API's actual contract.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>Review goal:</b> preserve these wins when converging on one SDK-to-winmd pipeline. They are examples where matching the old NuGet metadata exactly would be a regression.</div>
+    </section>
+
+    <section id="rust-fixed-context-alignment">
+      <div class="eyebrow">Rust-fixed example &middot; <a href="https://github.com/microsoft/win32metadata/issues/1044">Issue #1044</a></div>
+      <h2>CONTEXT preserves native alignment</h2>
+      <p><span class="pill done">Fixed by direct Clang parsing</span><span class="pill generator">Do not copy old metadata</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>// x64
+typedef struct <span class="target-delta">DECLSPEC_ALIGN(16)</span>
+    DECLSPEC_NOINITALL _CONTEXT
+{
+    DWORD64 P1Home;
+    // remaining registers omitted
+} CONTEXT, *PCONTEXT;
+
+// x86 uses pack 4 rather than align 16.</pre></div>
+        <div class="card current"><h3>Current windows-rs direct generation</h3>
+<pre>// windows-bindgen regression sample:
+
+target arch: x86_64
+        size   align
+M128A     16      16
+CONTEXT 1232      <span class="target-delta">16</span>
+
+target arch: x86
+        size   align
+M128A     16      16
+CONTEXT  716       <span class="target-delta">4</span></pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[SupportedArchitecture(...)]
+struct CONTEXT {
+    // fields omitted
+}
+
+<span class="lost">// Native alignment is absent.</span>
+// Consumers cannot distinguish x64 align 16
+// from the default structure alignment.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
+<pre>// No SDK annotation is required.
+
+// Preserve Clang's AlignedAttr from
+// DECLSPEC_ALIGN(16), independently of pack.
+
+// Emit architecture-specific alignment into
+// RDL/winmd and #[repr(C, align(16))] in Rust.</pre></div>
+      <div class="note"><b>Gap:</b> alignment and packing are separate layout properties. The old pipeline lost the explicit alignment, while windows-rs now validates the generated size and alignment on x64 and x86. The unified generator should adopt this behavior rather than reproduce the NuGet gap.</div>
+    </section>
+
+    <section id="rust-fixed-reparse-tags">
+      <div class="eyebrow">Rust-fixed example &middot; <a href="https://github.com/microsoft/win32metadata/issues/2241">Issue #2241</a></div>
+      <h2>IO_REPARSE_TAG constants retain unsigned types</h2>
+      <p><span class="pill done">Fixed by compiler literal typing</span><span class="pill generator">Constant scraper gap</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>#define IO_REPARSE_TAG_APPXSTRM
+    (0xC0000014L)
+
+#define IO_REPARSE_TAG_LX_SYMLINK
+    (0xA000001DL)</pre>
+          <p class="delta">Under MSVC integer-constant conversion rules, these values require an unsigned representation.</p>
+        </div>
+        <div class="card current"><h3>Current windows-rs direct metadata</h3>
+<pre>const IO_REPARSE_TAG_APPXSTRM:
+    <span class="target-delta">u32</span> = 3221225492;
+
+const IO_REPARSE_TAG_LX_SYMLINK:
+    <span class="target-delta">u32</span> = 2684354589;
+
+// Generated Rust keeps both constants as u32.</pre></div>
+        <div class="card target"><h3>win32metadata issue result</h3>
+<pre>const IO_REPARSE_TAG_APPXSTRM:
+    <span class="lost">i32</span> = unchecked((int)0xC0000014);
+
+const IO_REPARSE_TAG_LX_SYMLINK:
+    <span class="lost">i32</span> = unchecked((int)0xA000001D);
+
+// Several high-bit IO_REPARSE_TAG values were
+// emitted as signed constants.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
+<pre>// No header annotation and no sidecar.
+
+// Evaluate macro literals with the target compiler's
+// integer type and conversion rules. Preserve both
+// the 32-bit bit pattern and unsigned type in winmd.</pre></div>
+      <div class="note"><b>Gap:</b> this is not an annotation problem. Regex-based constant extraction lost the compiler's type-selection rules; the direct windows-rs path parses these definitions correctly. Constant emission should use compiler semantics wherever possible.</div>
+    </section>
+
+    <section id="rust-fixed-enumwindows">
+      <div class="eyebrow">Rust-fixed example &middot; <a href="https://github.com/microsoft/win32metadata/issues/2238">Issue #2238</a></div>
+      <h2>EnumWindows keeps its raw BOOL result</h2>
+      <p><span class="pill done">Fixed in windows-rs metadata</span><span class="pill policy">Remove incorrect last-error metadata</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>WINUSERAPI
+BOOL
+WINAPI
+EnumWindows(
+    _In_ WNDENUMPROC lpEnumFunc,
+    _In_ LPARAM lParam
+);</pre>
+          <p class="delta"><code>FALSE</code> can mean the callback intentionally stopped enumeration. The declaration does not unconditionally promise a last-error result.</p>
+        </div>
+        <div class="card current"><h3>Current windows-rs direct metadata</h3>
+<pre><span class="target-delta">#[library("USER32.dll")]</span>
+extern fn EnumWindows(
+    lpEnumFunc: WNDENUMPROC,
+    lParam: LPARAM
+) -&gt; BOOL;
+
+pub unsafe fn EnumWindows(...) -&gt; BOOL;</pre></div>
+        <div class="card target"><h3>win32metadata reference</h3>
+<pre>[DllImport(
+    "USER32.dll",
+    <span class="lost">SetLastError=true</span>)]
+BOOL EnumWindows(
+    [In] WNDENUMPROC lpEnumFunc,
+    [In] LPARAM lParam);
+
+// The older Rust projection converted BOOL through
+// .ok(), producing Result&lt;()&gt;.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
+<pre>// No header annotation.
+
+// Do not apply _Win32_Set_last_error_ to
+// EnumWindows. Preserve the raw BOOL so callers can
+// distinguish callback termination using their own
+// callback state and, when applicable, GetLastError.</pre></div>
+      <div class="note"><b>Gap:</b> a blanket <code>SupportsLastError</code> flag caused an invalid friendly transformation. windows-rs now omits that metadata and returns <code>BOOL</code> directly. Our staged header must not reintroduce the old sidecar behavior.</div>
+    </section>
+
+    <section id="rust-fixed-localfree">
+      <div class="eyebrow">Rust-fixed example &middot; <a href="https://github.com/microsoft/win32metadata/issues/1557">Issue #1557</a></div>
+      <h2>LocalFree preserves its unusual return contract</h2>
+      <p><span class="pill done">Fixed in direct Rust generation</span><span class="pill policy">No generic handle-result transform</span></p>
+      <div class="grid three">
+        <div class="card source"><h3>SDK header today</h3>
+<pre>WINBASEAPI
+<span class="target-delta">_Success_(return == 0)</span>
+_Ret_maybenull_
+HLOCAL
+WINAPI
+LocalFree(
+    _Frees_ptr_opt_ HLOCAL hMem
+);</pre>
+          <p class="delta"><code>NULL</code> means success. A non-NULL return is the still-valid input handle and means failure.</p>
+        </div>
+        <div class="card current"><h3>Current windows-rs direct generation</h3>
+<pre>#[library("KERNEL32.dll")]
+extern fn LocalFree(hMem: HLOCAL) -&gt; HLOCAL;
+
+pub unsafe fn LocalFree(
+    hmem: HLOCAL
+) -&gt; <span class="target-delta">HLOCAL</span> {
+    LocalFree(hmem)
+}</pre></div>
+        <div class="card target"><h3>win32metadata-fed Rust behavior</h3>
+<pre>pub unsafe fn LocalFree(
+    hmem: HLOCAL
+) -&gt; <span class="lost">Result&lt;HLOCAL&gt;</span> {
+    let result = LocalFree(hmem);
+    then(!result.is_invalid(), || result)
+        .ok_or_else(Error::from_win32)
+}
+
+// NULL success was reported as an error.</pre></div>
+      </div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
+<pre>// No LocalFree-specific metadata annotation.
+
+// Preserve _Success_(return == 0) and the raw HLOCAL
+// return. Ownership metadata belongs on producer
+// returns/out parameters, not on this consumer API.
+
+// Do not apply generic invalid-handle success logic.</pre></div>
+      <div class="note"><b>Gap:</b> the old projection inferred success from generic handle invalid values, which is exactly backwards for <code>LocalFree</code>. The direct windows-rs path preserves the native result. This also supports the new producer-site-only <code>RAIIFree</code> policy.</div>
+    </section>
+
+    <section id="unused-vocabulary">
+      <div class="eyebrow">Vocabulary review &middot; No current canonical sidecar example</div>
+      <h2>Do not standardize speculative annotations yet</h2>
+      <table>
+        <thead><tr><th>Provisional macro</th><th>Current finding</th><th>Recommendation</th></tr></thead>
+        <tbody>
+          <tr><td><code>DoNotRelease</code></td><td>The old sidecars compensate for pseudo-handle types that implied ownership.</td><td>Remove. Plain <code>HANDLE</code> is borrowed unless the producer explicitly carries <code>RAIIFree</code>.</td></tr>
+          <tr><td><code>StaticLibrary</code></td><td>No current sidecar migration example was found.</td><td>Defer until a real SDK declaration requires it.</td></tr>
+          <tr><td><code>ArrayCount(constant)</code></td><td>No current member-remap example was found.</td><td>Prefer SAL or native arrays; retain only with a canonical gap.</td></tr>
+          <tr><td><code>NativeEncoding</code>, <code>Ansi</code>, <code>Unicode</code></td><td>Current behavior is largely generator policy or native A/W naming.</td><td>First determine which information is actually absent from headers.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>Policy:</b> the annotation header should represent proven metadata gaps, not every attribute the old emitter happened to define. <code>FreeWith</code> and <code>DoNotRelease</code> have been removed under this rule; allocated producer outputs use <code>RAIIFree</code>.</div>
+    </section>
+
+    <section id="fidelity">
+      <div class="eyebrow">Additional fidelity work &middot; Not solved by declaration annotations</div>
+      <h2>Manual metadata and generator policy still need migration</h2>
+      <table>
+        <thead>
+          <tr><th>Example</th><th>Gap</th><th>Proposed path</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Current-token helpers</td><td><code>GetCurrentProcessToken</code> and related APIs are inline constant-return helpers, not DLL exports.</td><td>Add guarded metadata-only declarations/constants; do not invent a normal P/Invoke.</td></tr>
+          <tr><td>Structure-valued constants</td><td>SID authority values and static initializers currently live in <code>manual/*.cs</code>.</td><td>Emit guarded typed <code>const</code>/<code>constexpr</code> declarations or add a pre-AST constant representation.</td></tr>
+          <tr><td>Hidden and ordinal exports</td><td><code>RtlGenRandom</code>, <code>SystemPrng</code>, and ordinal <code>FileIconInit</code> are manually declared.</td><td>Recover authoritative export declarations and entry-point metadata in a guarded compatibility header.</td></tr>
+          <tr><td>Legacy APIs</td><td>Some baseline declarations no longer exist in current SDK headers.</td><td>Maintain exact guarded compatibility declarations sourced from an authoritative SDK/reference.</td></tr>
+          <tr><td>Architecture merge</td><td><code>JET_API_PTR</code> and similar conditional typedefs need one pointer-sized logical type.</td><td>Teach multi-arch merge to normalize equivalent x86/x64 definitions.</td></tr>
+          <tr><td>Type imports</td><td>Eleven WinRT interfaces are supplied through <code>emitter.settings.rsp --typeImport</code>.</td><td>Resolve them from the WinRT winmd/reference graph rather than SDK declaration annotations.</td></tr>
+          <tr><td>Remaps and exclusions</td><td>Hundreds of scraper remaps, forced types, exclusions, constant types, and member remaps remain.</td><td>Classify each as a source defect, generator normalization rule, intentional exclusion, or guarded declaration.</td></tr>
+          <tr><td>Layout and native syntax</td><td>Packing, alignment, bitfields, native typedef identity, GUIDs, and noreturn behavior may be lost or overridden.</td><td>Prefer the real C/C++ declaration and fix parser/RDL preservation rather than adding redundant metadata annotations.</td></tr>
+          <tr><td>Enum additions</td><td>Composite values and members such as <code>CLSCTX_ALL</code> are added after scraping.</td><td>Use guarded enum members or <code>AssociatedConstant</code> while preserving macro compatibility.</td></tr>
+          <tr><td>Documentation</td><td>Documentation mappings are external and stale.</td><td>Automate windows-docs scraping and symbol cross-reference; use header overrides only for ambiguous matches.</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <b>Gap shown:</b> the annotation vocabulary can represent declaration semantics, but it
+        cannot by itself create missing APIs, evaluate every macro, merge architecture-specific
+        declarations, import external WinRT types, or decide intentional exclusions.
+      </div>
+    </section>
+
+    <section id="actions">
+      <div class="eyebrow">Proposed review outcome</div>
+      <h2>Decisions and implementation order</h2>
+      <table>
+        <thead>
+          <tr><th>Priority</th><th>Case</th><th>Recommended action</th><th>Owner surface</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>CoGetClassObject</td><td>Add the AssociatedEnum(CLSCTX) use-site annotation for the existing enum.</td><td>SDK header + consumer test</td></tr>
+          <tr><td>2</td><td>AddFontResourceExW</td><td>Recover Optional from _Reserved_ and add the guarded FONT_RESOURCE_CHARACTERISTICS enum.</td><td>generator + SDK header</td></tr>
+          <tr><td>3</td><td>ADsBuildVarArrayInt</td><td>Apply SAL semantic implied defaults: unannotated pointers are InOut with one element; scalars are In.</td><td>windows-rs generator</td></tr>
+          <tr><td>4</td><td>WsRequestReply</td><td>Regenerate official metadata after the cross-cutting RDL and SAL pipeline fixes.</td><td>windows-rs pipeline</td></tr>
+          <tr><td>5</td><td>JET_API_PTR / JET_ERR</td><td>Emit pointer-sized typedefs architecture-neutrally and retain JET_ERR with an int underlying type.</td><td>windows-rs arch merge</td></tr>
+          <tr><td>6</td><td>D2D1CreateDevice</td><td>Preserve official API ownership in the partition path.</td><td>windows-rs generator</td></tr>
+          <tr><td>7</td><td>NdrClientCall2</td><td>Apply SAL semantic implied pointer defaults; preserve the already-working official variadic API.</td><td>windows-rs generator</td></tr>
+          <tr><td>8</td><td>K32EnumProcesses</td><td>Discuss duplicate flat metadata names and projection disambiguation; no header change proposed.</td><td>team projection policy</td></tr>
+          <tr><td>9</td><td>Remaining sidecar families</td><td>Migrate ownership, result, buffer/string, type-projection, callback, and declaration-level semantics in reviewed batches.</td><td>SDK headers + windows-rs tests</td></tr>
+          <tr><td>10</td><td>Non-annotation fidelity</td><td>Replace manual declarations/constants and classify architecture merge, type imports, remaps, exclusions, and legacy APIs.</td><td>windows-rs generator + compatibility headers</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <b>Suggested acceptance rule:</b> Header changes are appropriate only when the SDK lacks
+        authoritative semantic information. If the declaration already contains the information,
+        fix the consumer and add a regression test instead.
+      </div>
+      <p class="footer">
+        Sources: patched SDK headers in <code>generation/WinSDK/RecompiledIdlHeaders</code>;
+        official windows-rs <code>origin/master:crates/libs/default/Windows.Win32.winmd</code>
+        and committed RDL; experimental x64 partition output v7 where explicitly labeled;
+        current win32metadata <code>bin/Windows.Win32.winmd</code>.
+      </p>
+    </section>
+  </main>
+
+  <div class="controls">
+    <button id="prev" title="Previous slide (Left arrow)">&larr;</button>
+    <button id="next" title="Next slide (Right arrow)">&rarr;</button>
+  </div>
+  <script>
+    const main = document.querySelector("main");
+    main.insertBefore(
+      document.getElementById("addfontresourceexw"),
+      document.getElementById("adsbuildvararrayint")
+    );
+    const slides = [...document.querySelectorAll("main > section")];
+    function currentIndex() {
+      const y = window.scrollY + 100;
+      let index = 0;
+      slides.forEach((slide, i) => {
+        if (slide.offsetTop <= y) index = i;
+      });
+      return index;
+    }
+    function go(delta) {
+      const next = Math.max(0, Math.min(slides.length - 1, currentIndex() + delta));
+      slides[next].scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", "#" + slides[next].id);
+    }
+    document.getElementById("prev").addEventListener("click", () => go(-1));
+    document.getElementById("next").addEventListener("click", () => go(1));
+    addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft" || event.key === "PageUp") go(-1);
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") go(1);
+    });
+  </script>
+</body>
+</html>
