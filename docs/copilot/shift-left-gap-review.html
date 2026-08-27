@@ -301,20 +301,20 @@
           <tr>
             <td><code>DllImport</code>, entry point, calling convention</td>
             <td>Function-to-DLL mapping is inferred from SDK COFF import libraries; aliases and calling convention come from the declaration.</td>
-            <td><code>_Win32_Import_library_("name.dll")</code>; keep explicit entry-point/name vocabulary for exceptions.</td>
+            <td><code>_Win32_ImportLibrary_("name.dll")</code>; keep explicit entry-point/name vocabulary for exceptions.</td>
             <td>Keep import-library scanning as the default, but preserve the resulting <code>ImplMap</code>/<code>DllImport</code> in metadata.</td>
           </tr>
           <tr>
             <td><code>SetLastError</code></td>
             <td>Not safely inferable from an import library. Supported by the annotation parser where the header states it.</td>
-            <td><code>_Win32_Set_last_error_</code></td>
+            <td><code>_Win32_SetLastError_</code></td>
             <td>Must be explicit.</td>
           </tr>
           <tr>
             <td><code>SupportedOSPlatform</code></td>
             <td>The RDL/winmd vocabulary exists, but ordinary SDK headers do not provide the version. Current values originated in external policy data unless already patched into a header.</td>
-            <td><code>_Win32_Supported_os_(windowsX.Y)</code></td>
-            <td>Migrate <code>supportedOS.rsp</code> into headers; do not infer from SDK package version.</td>
+            <td>Choose a fixed macro such as <code>_Windows_SupportedOS_10240_</code>.</td>
+            <td>Migrate <code>supportedOS.rsp</code> into headers using a reviewed macro menu. Each macro expands to a canonical version string, so individual declarations cannot mistype it.</td>
           </tr>
           <tr>
             <td><code>Documentation</code></td>
@@ -405,7 +405,7 @@ HRESULT CoGetClassObject(
 
 WINOLEAPI CoGetClassObject(
     _In_ REFCLSID rclsid,
-    _In_ <span class="proposed">_Win32_Associated_enum_(CLSCTX)</span>
+    _In_ <span class="proposed">_Win32_AssociatedEnum_(CLSCTX)</span>
         DWORD dwClsContext,
     _In_opt_ LPVOID pvReserved,
     _In_ REFIID riid,
@@ -810,7 +810,7 @@ NdrClientCall2=RPCRT4.dll</pre>
 #define EnumProcesses K32EnumProcesses
 #endif
 
-_Win32_Set_last_error_
+_Win32_SetLastError_
 BOOL WINAPI EnumProcesses(
     _Out_writes_bytes_(cb) DWORD* lpidProcess,
     _In_ DWORD cb,
@@ -913,7 +913,7 @@ enum class FONT_RESOURCE_CHARACTERISTICS : unsigned int
 
 WINGDIAPI int WINAPI AddFontResourceExW(
     _In_ LPCWSTR name,
-    _In_ <span class="proposed">_Win32_Associated_enum_(
+    _In_ <span class="proposed">_Win32_AssociatedEnum_(
         FONT_RESOURCE_CHARACTERISTICS)</span> DWORD fl,
     _Reserved_ PVOID res);</pre>
       </div>
@@ -988,9 +988,9 @@ struct PRINTER_HANDLE;</pre></div>
 <pre>BOOL WINAPI OpenPrinterW(
     _In_opt_ LPWSTR pPrinterName,
     _Out_
-    <span class="proposed">_Win32_RAII_free_(ClosePrinter)
-        _Win32_Invalid_handle_(-1)
-        _Win32_Invalid_handle_(0)</span>
+    <span class="proposed">_Win32_RAIIFree_(ClosePrinter)
+        _Win32_InvalidHandle_(-1)
+        _Win32_InvalidHandle_(0)</span>
     LPHANDLE phPrinter,
     _In_opt_ LPPRINTER_DEFAULTSW pDefault
 );</pre></div>
@@ -1023,7 +1023,7 @@ HRESULT EnumAdapters1(
     [Out][ComOutPtr] IDXGIAdapter1* ppAdapter);</pre></div>
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre><span class="proposed">_Win32_Preserve_result_</span>
+<pre><span class="proposed">_Win32_PreserveResult_</span>
 virtual HRESULT STDMETHODCALLTYPE EnumAdapters1(
     _In_ UINT Adapter,
     _COM_Outptr_ IDXGIAdapter1 **ppAdapter
@@ -1058,7 +1058,7 @@ HRESULT DoDragDrop(
     [Out] DROPEFFECT* pdwEffect);</pre></div>
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre><span class="proposed">_Win32_Preserve_result_</span>
+<pre><span class="proposed">_Win32_PreserveResult_</span>
 WINOLEAPI DoDragDrop(
     _In_ LPDATAOBJECT pDataObj,
     _In_ LPDROPSOURCE pDropSource,
@@ -1157,7 +1157,7 @@ BOOL CreatePipe(
 <pre>// No header annotation.
 
 // Remove both IgnoreIfReturn sidecars and remove
-// _Win32_Ignore_if_return_ from the
+// the proposed custom vocabulary entry from the
 // proposed vocabulary.</pre></div>
       <div class="note"><b>Impact:</b> neither CsWin32 nor windows-rs consumes this attribute. Both already expose the output storage with the function result controlling success. Keeping unused metadata adds vocabulary without changing either projection.</div>
     </section>
@@ -1270,20 +1270,19 @@ uint RasEnumConnectionsW(
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
 <pre>DWORD APIENTRY RasEnumConnectionsW(
-    _Inout_opt_
-    <span class="proposed">_Win32_Array_count_param_(2)
-    _Win32_Memory_size_param_(1)</span>
+    <span class="proposed">_Inout_updates_bytes_(*bytes)
+    _Post_readable_size_(*count)</span>
     LPRASCONNW connections,
     _Inout_ LPDWORD bytes,
     _Out_ LPDWORD count
 );</pre></div>
-      <div class="note"><b>Impact:</b> parameter 1 is capacity in bytes and parameter 2 is the logical element count. Both relationships are consumed for parameter-array projection; they are not interchangeable.</div>
+      <div class="note"><b>Impact:</b> parameter 1 is capacity in bytes and parameter 2 is the logical element count. SAL already has vocabulary for both relationships; windows-rs must consume the complete SAL contract rather than requiring parallel Win32 annotations.</div>
     </section>
 
     <section id="not-null-terminated">
-      <div class="eyebrow">Annotation example &middot; NotNullTerminated</div>
+      <div class="eyebrow">Declaration correction &middot; binary buffer, not string</div>
       <h2>WAVEHDR::lpData</h2>
-      <p><span class="pill annotation">SDK metadata annotation</span><span class="pill done">Preserve explicit contract</span></p>
+      <p><span class="pill policy">Use the correct native type</span><span class="pill done">Use standard field SAL</span></p>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
 <pre>typedef struct wavehdr_tag {
@@ -1322,8 +1321,12 @@ uint RasEnumConnectionsW(
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
 <pre>typedef struct wavehdr_tag {
-    <span class="proposed">_Win32_Not_null_terminated_</span>
+<span class="proposed">#ifdef WIN32METADATA
+    _Field_size_bytes_(dwBufferLength)
+    BYTE *lpData;
+#else</span>
     LPSTR lpData;
+<span class="proposed">#endif</span>
     DWORD dwBufferLength;
     DWORD dwBytesRecorded;
     DWORD_PTR dwUser;
@@ -1332,8 +1335,8 @@ uint RasEnumConnectionsW(
     struct wavehdr_tag FAR *lpNext;
     DWORD_PTR reserved;
 } WAVEHDR, *PWAVEHDR, *LPWAVEHDR;</pre></div>
-      <div class="note"><b>Expected result:</b> preserve the explicit fact that this pointer is a byte buffer rather than a C string. No existing annotation currently produces this metadata reliably for fields, so this remains an SDK metadata annotation rather than an inferred SAL rule.</div>
-      <div class="note decision"><b>Coverage:</b> this moves the only explicit <code>[NotNullTerminated]</code> sidecar in <code>emitter.settings.rsp</code>. The other emitted occurrences still need classification: double-NUL strings should come from <code>_NullNull_terminated_</code>, counted buffers may be derivable from size/count SAL after tooling support exists, and standalone cases may require the same explicit annotation.</div>
+      <div class="note"><b>Expected result:</b> the metadata-only branch no longer claims that binary audio data is a C string, while the ordinary SDK declaration remains unchanged. The existing <code>_Field_size_bytes_</code> SAL family describes the buffer relationship without a new metadata attribute.</div>
+      <div class="note decision"><b>Coverage:</b> remove <code>NotNullTerminated</code> from the proposed vocabulary. Classify remaining occurrences as incorrect string typedefs, counted buffers, or double-NUL strings and correct the declaration or SAL contract.</div>
     </section>
 
     <section id="null-null-terminated">
@@ -1425,7 +1428,7 @@ BOOL GetVolumePathNamesForVolumeNameW(
     [Optional][Out] long* ptsExpiry);</pre></div>
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre><span class="proposed">_Win32_Preserve_result_</span>
+<pre><span class="proposed">_Win32_PreserveResult_</span>
 SECURITY_STATUS SEC_ENTRY AcceptSecurityContext(
     _In_opt_ PCredHandle phCredential,
     _In_opt_ PCtxtHandle phContext,
@@ -1441,7 +1444,7 @@ SECURITY_STATUS SEC_ENTRY AcceptSecurityContext(
     </section>
 
     <section id="callback-name">
-      <div class="eyebrow">Annotation example &middot; CanonicalName</div>
+      <div class="eyebrow">Generator normalization &middot; callback typedef aliases</div>
       <h2>PTOP_LEVEL_EXCEPTION_FILTER</h2>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
@@ -1478,21 +1481,17 @@ SetUnhandledExceptionFilter(
 // The API uses the callback directly; there is no
 // second wrapper type.</pre></div>
       </div>
-      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre><span class="proposed">_Win32_Canonical_name_(
-    LPTOP_LEVEL_EXCEPTION_FILTER)</span>
-typedef LONG (WINAPI
-    *PTOP_LEVEL_EXCEPTION_FILTER)(
-    _In_opt_ struct _EXCEPTION_POINTERS
-        *ExceptionInfo
-);
-typedef PTOP_LEVEL_EXCEPTION_FILTER
-    LPTOP_LEVEL_EXCEPTION_FILTER;</pre></div>
-    <div class="note"><b>Impact:</b> both baselines expose the API under the <code>LPTOP_LEVEL_EXCEPTION_FILTER</code> spelling, but official windows-rs reaches it through a wrapper around a separately named callback. Selecting the canonical callback identity removes that duplicate type without changing the ABI or API signature.</div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No header annotation.
+
+// Resolve typedef aliases in the generator and select the
+// public callback spelling used by the API without emitting
+// a second wrapper type.</pre></div>
+    <div class="note"><b>Impact:</b> <code>CanonicalName</code> was scraper control rather than projection metadata. The native typedef graph already contains both spellings, so windows-rs should choose the public alias directly.</div>
     </section>
 
     <section id="pointer-level">
-      <div class="eyebrow">Annotation example &middot; ReducePointerLevel</div>
+      <div class="eyebrow">Generator normalization &middot; pointer depth</div>
       <h2>UCharIterator::move</h2>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
@@ -1577,7 +1576,7 @@ IDXGIFactory : public IDXGIObject
     </section>
 
     <section id="associated-constant">
-      <div class="eyebrow">Type annotation example &middot; AssociatedConstant</div>
+      <div class="eyebrow">Guarded enum design &middot; no AssociatedConstant attribute</div>
       <h2>ENUM_SERVICE_TYPE and SERVICE_NO_CHANGE</h2>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
@@ -1625,34 +1624,33 @@ BOOL ChangeServiceConfigW(
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed guarded metadata declaration</h3>
 <pre>#ifdef WIN32METADATA
-enum <span class="proposed">_Win32_Associated_constant_(
-    SERVICE_NO_CHANGE)</span>
-ENUM_SERVICE_TYPE : DWORD {
+enum class ENUM_SERVICE_TYPE : DWORD {
+    <span class="proposed">SERVICE_NO_CHANGE = 0xffffffff,</span>
     SERVICE_KERNEL_DRIVER = 0x00000001,
     SERVICE_FILE_SYSTEM_DRIVER = 0x00000002,
     SERVICE_ADAPTER = 0x00000004,
     SERVICE_RECOGNIZER_DRIVER = 0x00000008,
     SERVICE_WIN32_OWN_PROCESS = 0x00000010,
-    SERVICE_WIN32_SHARE_PROCESS = 0x00000020
+    SERVICE_WIN32_SHARE_PROCESS = 0x00000020,
     // remaining existing macro values
 };
 #endif
 
 BOOL ChangeServiceConfigW(
     SC_HANDLE hService,
-    <span class="proposed">_Win32_Associated_enum_(
+    <span class="proposed">_Win32_AssociatedEnum_(
         ENUM_SERVICE_TYPE)</span>
     DWORD dwServiceType,
-    <span class="proposed">_Win32_Associated_enum_(
+    <span class="proposed">_Win32_AssociatedEnum_(
         SERVICE_START_TYPE)</span>
     DWORD dwStartType,
-    <span class="proposed">_Win32_Associated_enum_(
+    <span class="proposed">_Win32_AssociatedEnum_(
         SERVICE_ERROR)</span>
     DWORD dwErrorControl,
     // remaining parameters unchanged
 );</pre></div>
-      <div class="note"><b>Gap:</b> the SDK exposes service types as <code>DWORD</code> plus macros, while win32metadata synthesizes typed enums and maps the parameters to them. <code>SERVICE_NO_CHANGE</code> is valid for configuration parameters but is deliberately not a normal enum member.</div>
-      <div class="note decision"><b>Impact:</b> windows-rs must use the guarded enum for the relevant <code>DWORD</code> parameters and preserve the associated constant relationship. The same pattern applies to <code>SERVICE_START_TYPE</code> and <code>SERVICE_ERROR</code>.</div>
+      <div class="note"><b>Current projection behavior:</b> CsWin32 reads <code>AssociatedConstant</code>, copies <code>SERVICE_NO_CHANGE</code> into the generated enum, and suppresses the separate global constant. windows-rs ignores the attribute and leaves the constant global.</div>
+      <div class="note decision"><b>Impact:</b> encode the desired shape directly. A scoped metadata enum permits <code>SERVICE_NO_CHANGE</code> to appear in all three service configuration enums without an unscoped C++ name collision, eliminating the custom relationship attribute.</div>
     </section>
 
     <section id="native-inheritance">
@@ -1742,9 +1740,9 @@ typedef struct tagMONITORINFOEXW {
     </section>
 
     <section id="struct-size-field">
-      <div class="eyebrow">Type annotation example &middot; StructSizeField</div>
+      <div class="eyebrow">Deferred projection behavior &middot; structure size field</div>
       <h2>CM_NOTIFY_FILTER::cbSize</h2>
-      <p><span class="pill annotation">Keep metadata</span><span class="pill policy">Prefer explicit source contract</span></p>
+      <p><span class="pill policy">No SAL equivalent found</span><span class="pill generator">No current projection consumer</span></p>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
 <pre>typedef struct _CM_NOTIFY_FILTER {
@@ -1776,21 +1774,13 @@ struct CM_NOTIFY_FILTER {
     _u_e__Union u;
 }</pre></div>
       </div>
-      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre>typedef struct
-    <span class="proposed">_Win32_Struct_size_field_(cbSize)</span>
-    _CM_NOTIFY_FILTER
-{
-    DWORD cbSize;
-    DWORD Flags;
-    CM_NOTIFY_FILTER_TYPE FilterType;
-    DWORD Reserved;
-    union {
-        // variants unchanged
-    } u;
-} CM_NOTIFY_FILTER;</pre></div>
-      <div class="note"><b>Gap:</b> callers must initialize <code>cbSize</code> to <code>sizeof(CM_NOTIFY_FILTER)</code>, but official generated Rust currently derives a zeroed <code>Default</code>. The metadata is important because a projection can provide a correct constructor/default instead of relying on documentation.</div>
-      <div class="note decision"><b>Policy:</b> keep <code>StructSizeField</code>, but stop applying it solely because a field is named <code>cbSize</code>. Explicit source annotations avoid false positives such as <code>BLOB</code> and <code>BSTRBLOB</code>; windows-rs still needs consumer behavior that initializes the field.</div>
+      <div class="card proposal" style="margin-top:18px"><h3>Proposed change</h3>
+<pre>// No header annotation yet.
+
+// First define projection behavior for versioned size
+// fields and add a consumer test.</pre></div>
+      <div class="note"><b>Gap:</b> callers often initialize <code>cbSize</code>, but some APIs intentionally accept older structure sizes. SAL has <code>_Struct_size_bytes_</code> for describing storage extents, not a contract saying that one field must be initialized to <code>sizeof</code> the containing record.</div>
+      <div class="note decision"><b>Policy:</b> defer <code>StructSizeField</code>. win32metadata inferred it from every <code>cbSize</code> and needed exceptions for <code>BLOB</code> and <code>BSTRBLOB</code>; neither CsWin32 nor windows-rs currently consumes it.</div>
     </section>
 
     <section id="rust-fixed-issues">
@@ -1934,7 +1924,7 @@ BOOL EnumWindows(
       <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
 <pre>// No header annotation.
 
-// Do not apply _Win32_Set_last_error_ to
+// Do not apply _Win32_SetLastError_ to
 // EnumWindows. Preserve the raw BOOL so callers can
 // distinguish callback termination using their own
 // callback state and, when applicable, GetLastError.</pre></div>
@@ -1996,8 +1986,11 @@ pub unsafe fn LocalFree(
         <tbody>
           <tr><td><code>DoNotRelease</code></td><td>The old sidecars compensate for pseudo-handle types that implied ownership.</td><td>Remove. Plain <code>HANDLE</code> is borrowed unless the producer explicitly carries <code>RAIIFree</code>.</td></tr>
           <tr><td><code>StaticLibrary</code></td><td>No current sidecar migration example was found.</td><td>Defer until a real SDK declaration requires it.</td></tr>
-          <tr><td><code>ArrayCount(constant)</code></td><td>No current member-remap example was found.</td><td>Prefer SAL or native arrays; retain only with a canonical gap.</td></tr>
-          <tr><td><code>NativeEncoding</code>, <code>Ansi</code>, <code>Unicode</code></td><td>Current behavior is largely generator policy or native A/W naming.</td><td>First determine which information is actually absent from headers.</td></tr>
+          <tr><td><code>NativeArrayInfo</code>, <code>MemorySize</code></td><td>SAL already describes element counts, capacities, and byte sizes.</td><td>Remove custom fallbacks and fix complete SAL consumption.</td></tr>
+          <tr><td><code>NotNullTerminated</code></td><td>It compensates for declarations that use string typedefs for binary or counted data.</td><td>Remove; correct the pointer type and use ordinary SAL.</td></tr>
+          <tr><td><code>NativeEncoding</code></td><td>windows-rs only uses it when choosing ANSI dependencies for string constants; CsWin32 does not consume it.</td><td>Remove; declare guarded constants with their real <code>char</code>/<code>wchar_t</code> type.</td></tr>
+          <tr><td><code>Ansi</code>, <code>Unicode</code></td><td>win32metadata infers these from A/W naming, but neither current projection consumes them.</td><td>Remove.</td></tr>
+          <tr><td><code>CanonicalName</code>, <code>ReducePointerLevel</code></td><td>These alter scraper naming or pointer depth rather than expressing API semantics.</td><td>Remove; fix typedef-alias and callback pointer handling in the generator.</td></tr>
         </tbody>
       </table>
       <div class="note"><b>Policy:</b> the annotation header should represent proven metadata gaps, not every attribute the old emitter happened to define. <code>FreeWith</code> and <code>DoNotRelease</code> have been removed under this rule; allocated producer outputs use <code>RAIIFree</code>.</div>
@@ -2019,7 +2012,7 @@ pub unsafe fn LocalFree(
           <tr><td>Type imports</td><td>Eleven WinRT interfaces are supplied through <code>emitter.settings.rsp --typeImport</code>.</td><td>Resolve them from the WinRT winmd/reference graph rather than SDK declaration annotations.</td></tr>
           <tr><td>Remaps and exclusions</td><td>Hundreds of scraper remaps, forced types, exclusions, constant types, and member remaps remain.</td><td>Classify each as a source defect, generator normalization rule, intentional exclusion, or guarded declaration.</td></tr>
           <tr><td>Layout and native syntax</td><td>Packing, alignment, bitfields, native typedef identity, GUIDs, and noreturn behavior may be lost or overridden.</td><td>Prefer the real C/C++ declaration and fix parser/RDL preservation rather than adding redundant metadata annotations.</td></tr>
-          <tr><td>Enum additions</td><td>Composite values and members such as <code>CLSCTX_ALL</code> are added after scraping.</td><td>Use guarded enum members or <code>AssociatedConstant</code> while preserving macro compatibility.</td></tr>
+          <tr><td>Enum additions</td><td>Composite values and members such as <code>CLSCTX_ALL</code> are added after scraping.</td><td>Use guarded scoped enum members while preserving macro compatibility.</td></tr>
           <tr><td>Documentation</td><td>Documentation mappings are external and stale.</td><td>Automate windows-docs scraping and symbol cross-reference; use header overrides only for ambiguous matches.</td></tr>
         </tbody>
       </table>

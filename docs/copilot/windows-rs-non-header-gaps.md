@@ -24,6 +24,8 @@ win32metadata partition set and with the generated
 | Alignment and packing conflated | The reference historically mishandled `CONTEXT`; x64/ARM64 require 16-byte alignment while x86 uses 4. | Read compiler alignment independently from packing and merge architecture-specific layout correctly. | Direct windows-rs behavior is more accurate and must not regress. |
 | Compiler integer typing discarded | High-bit `IO_REPARSE_TAG_*` values can become signed or truncated when evaluated outside compiler rules. | Use Clang's evaluated type and C integer-conversion rules. | Direct windows-rs behavior is more accurate and must not regress. |
 | COM pointer aliases collapse to `void*` | Macro-generated aliases such as `LPADRBOOK` can lose their referenced interface type, as seen in `OpenTnefStreamEx`. | Resolve macro-generated COM interface pointer typedefs and their owning declarations. | Open parser/type-ownership issue. |
+| Callback typedef aliases become duplicate public types | `PTOP_LEVEL_EXCEPTION_FILTER` and `LPTOP_LEVEL_EXCEPTION_FILTER` can become a callback plus a projected wrapper even though the native typedef graph already identifies the public alias used by APIs. | Resolve the typedef-alias graph and select the API-facing public callback name. Do not add `CanonicalName` header metadata. | Open generator naming issue. |
+| Callback pointer depth or direction is normalized incorrectly | Sidecar `ReducePointerLevel` entries compensate for parser/fixup behavior rather than an SDK semantic contract; `UCharIterator::move` already has the correct native pointer depth in direct windows-rs output. | Correct callback typedef resolution and apply SAL implied direction. Use a guarded corrected declaration only if the SDK declaration itself is unsuitable for metadata. | Generator fix; remove `ReducePointerLevel` from the header vocabulary. |
 | Cross-partition owner suppression | `D2D1CreateDevice` and the central `ID2D1Device` hierarchy disappeared even though `d2d1_1.h` was traversed and an earlier run emitted them. | Fix owner selection, duplicate suppression, and cross-partition reference resolution. | Open generator regression; not a header-list gap. |
 | Classic NDR functions filtered or skipped | Many `NdrClientCall*` and related RPC functions are absent while similar variadic declarations emit correctly. | Correct cursor collection and RPC declaration filtering rather than annotating the SDK. | Open generator issue. |
 | Public alias policy differs | windows-rs may emit `EnumProcesses` with entry point `K32EnumProcesses`, while win32metadata also exposes a flat `K32EnumProcesses` method. Similar differences occur for CLFS and legacy dbghelp aliases. | Decide whether both public names are required or whether entry-point equivalence is sufficient. | Team projection-policy decision. |
@@ -163,8 +165,8 @@ Clang accepts the annotation before the return type and attaches it to the
 `FunctionDecl`; windows-rs can then emit it on the metadata return parameter:
 
 ```cpp
-_Win32_RAII_free_(CloseHandle)
-_Win32_Invalid_handle_(INVALID_HANDLE_VALUE)
+_Win32_RAIIFree_(CloseHandle)
+_Win32_InvalidHandle_(INVALID_HANDLE_VALUE)
 HANDLE WINAPI OpenThing(void);
 ```
 
