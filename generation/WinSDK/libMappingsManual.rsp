@@ -385,3 +385,30 @@ VDMConsoleOperation=KERNEL32.dll
 VerifyConsoleIoHandle=KERNEL32.dll
 WriteConsoleInputVDMA=KERNEL32.dll
 WriteConsoleInputVDMW=KERNEL32.dll
+# webauthnplugin.h APIs are exported from webauthn.dll but have no import library in the SDK.
+# The documentation lists WebAuthnPlugin.dll/WebAuthnPlugin.Lib, but neither ships in the SDK
+# or in Windows; LoadLibrary("WebAuthnPlugin.dll") fails with ERROR_MOD_NOT_FOUND.
+WebAuthNPluginGetAuthenticatorState=webauthn.dll
+WebAuthNPluginAddAuthenticator=webauthn.dll
+WebAuthNPluginFreeAddAuthenticatorResponse=webauthn.dll
+WebAuthNPluginRemoveAuthenticator=webauthn.dll
+WebAuthNPluginUpdateAuthenticatorDetails=webauthn.dll
+WebAuthNPluginAuthenticatorAddCredentials=webauthn.dll
+WebAuthNPluginAuthenticatorRemoveCredentials=webauthn.dll
+WebAuthNPluginAuthenticatorRemoveAllCredentials=webauthn.dll
+WebAuthNPluginAuthenticatorGetAllCredentials=webauthn.dll
+WebAuthNPluginAuthenticatorFreeCredentialDetailsArray=webauthn.dll
+WebAuthNPluginPerformUserVerification=webauthn.dll
+WebAuthNPluginFreeUserVerificationResponse=webauthn.dll
+WebAuthNPluginGetUserVerificationCount=webauthn.dll
+WebAuthNPluginGetUserVerificationPublicKey=webauthn.dll
+WebAuthNPluginGetOperationSigningPublicKey=webauthn.dll
+WebAuthNPluginFreePublicKeyResponse=webauthn.dll
+WebAuthNEncodeMakeCredentialResponse=webauthn.dll
+WebAuthNDecodeMakeCredentialRequest=webauthn.dll
+WebAuthNFreeDecodedMakeCredentialRequest=webauthn.dll
+WebAuthNDecodeGetAssertionRequest=webauthn.dll
+WebAuthNFreeDecodedGetAssertionRequest=webauthn.dll
+WebAuthNEncodeGetAssertionResponse=webauthn.dll
+WebAuthNPluginRegisterStatusChangeCallback=webauthn.dll
+WebAuthNPluginUnregisterStatusChangeCallback=webauthn.dll
