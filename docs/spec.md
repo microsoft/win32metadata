@@ -67,9 +67,93 @@ The SDK declares handles using `DECLARE_HANDLE(FOO)`, which expands to:
 typedef struct FOO##__ { int unused; } *FOO;
 ```
 
-These are pointer-to-opaque-struct typedefs. The metadata tooling recognizes them and
-generates value-type wrappers with RAII metadata (close function, invalid values) from
-`autoTypes.json`.
+These are pointer-to-opaque-struct typedefs. ClangSharp flattens the typedef during scraping — the wrapper struct in the winmd is *not* derived from the SDK's `DECLARE_HANDLE` expansion. Instead, the metadata tooling generates a value-type wrapper struct with RAII metadata (close function, invalid handle values, alias-for relationships) on top.
+
+#### Current approach: `autoTypes.json`
+
+`autoTypes.json` (~280 entries) lists each handle and value typedef with its underlying value type (`DECLARE_HANDLE`, `void*`, `IntPtr`, etc.), close API, invalid sentinel values, and `AlsoUsableFor` relationships. `NativeTypedefStructsCreator` reads the JSON and generates a C# wrapper struct per entry, decorated with `[NativeTypedef]`, `[RAIIFree]`, `[InvalidHandleValue]`, and `[AlsoUsableFor]` attributes.
+
+#### Proposed approach: conditional `DECLARE_HANDLE` redefinition
+
+See `docs/copilot/plans/handle-annotation-proposal.md` for the full proposal.
+
+Under `_WIN32METADATA_`, `DECLARE_HANDLE` is redefined as a single-struct form that ClangSharp emits directly. SDK headers continue to use `DECLARE_HANDLE(NAME)` for handles with no metadata; handles with RAII metadata use the new `DECLARE_HANDLE_WIN32METADATA(NAME, ...)` macro that takes attribute annotations between `struct` and the name:
+
+```cpp
+#ifdef _WIN32METADATA_
+  #undef DECLARE_HANDLE
+  #define DECLARE_HANDLE(name) \
+      struct [[clang::annotate("w32m::handle")]] name { void* Value; }
+  #define DECLARE_HANDLE_WIN32METADATA(name, ...) \
+      struct [[clang::annotate("w32m::handle")]] __VA_ARGS__ name { void* Value; }
+
+  #define _Close_handle_with_(api)  [[clang::annotate("w32m::raii_free=" #api)]]
+  #define _Invalid_handle_(val)     [[clang::annotate("w32m::invalid_handle=" #val)]]
+  #define _Also_usable_for_(type)   [[clang::annotate("w32m::also_usable_for=" #type)]]
+#else
+  #define DECLARE_HANDLE_WIN32METADATA(name, ...) DECLARE_HANDLE(name)
+  #define _Close_handle_with_(api)
+  #define _Invalid_handle_(val)
+  #define _Also_usable_for_(type)
+#endif
+```
+
+In SDK headers:
+
+```c
+DECLARE_HANDLE(HWND);                         // No metadata; unchanged
+
+DECLARE_HANDLE_WIN32METADATA(HMODULE,         // FreeLibrary; nullable
+    _Close_handle_with_(FreeLibrary)
+    _Invalid_handle_(0)
+    _Also_usable_for_(HINSTANCE));
+
+DECLARE_HANDLE_WIN32METADATA(HFILE,           // CloseHandle; INVALID_HANDLE_VALUE or NULL
+    _Close_handle_with_(CloseHandle)
+    _Invalid_handle_(-1)
+    _Invalid_handle_(0));
+```
+
+ClangSharp v18+ preserves these as `[NativeAnnotation]` attributes on the generated struct. The emitter (`MetadataSyntaxTreeCleaner`) translates them to the existing managed attributes:
+
+| Annotation | Translated to |
+|---|---|
+| `w32m::handle` | `[NativeTypedef]` |
+| `w32m::raii_free=X` | `[RAIIFree("X")]` |
+| `w32m::invalid_handle=N` | `[InvalidHandleValue(N)]` (one per occurrence) |
+| `w32m::also_usable_for=T` | `[AlsoUsableFor("T")]` |
+
+The winmd output is byte-identical to today's output. Both downstream projections (CsWin32 and windows-rs) read these attributes by name and require no changes.
+
+#### Typedef-style handles and value wrappers
+
+Handles declared via direct typedef (e.g., `typedef PVOID BCRYPT_ALG_HANDLE`) and non-handle value wrappers (`BOOL`, `BOOLEAN`, `HRESULT`, `NTSTATUS`, `LPARAM`, `WPARAM`, `LRESULT`, `BSTR`, `PSID`, `VARIANT_BOOL`) use a sibling macro that takes the underlying type:
+
+```cpp
+#ifdef _WIN32METADATA_
+  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) \
+      struct [[clang::annotate("w32m::handle")]] __VA_ARGS__ name { type Value; }
+#else
+  #define DECLARE_TYPEDEF_WIN32METADATA(name, type, ...) typedef type name
+#endif
+```
+
+Examples:
+
+```c
+// shared/bcrypt.h  ← currently: typedef PVOID BCRYPT_ALG_HANDLE;
+DECLARE_TYPEDEF_WIN32METADATA(BCRYPT_ALG_HANDLE, void*,
+    _Close_handle_with_(BCryptCloseAlgorithmProvider));
+
+// shared/minwindef.h  ← currently: typedef int BOOL;
+DECLARE_TYPEDEF_WIN32METADATA(BOOL, int);
+
+// shared/wtypes.h  ← currently: typedef OLECHAR *BSTR;
+DECLARE_TYPEDEF_WIN32METADATA(BSTR, OLECHAR*,
+    _Close_handle_with_(SysFreeString));
+```
+
+Same annotation surface as `DECLARE_HANDLE_WIN32METADATA`; the macros differ only in their normal-compilation expansion (one preserves `DECLARE_HANDLE`, the other preserves the original typedef form). Together the two macros cover all ~280 entries in `autoTypes.json` — after migration, the JSON file is removed entirely.
 
 ### Function pointers
 
@@ -228,8 +312,14 @@ Defined annotations:
 | `_Enum_return_(name)` | function | Changes return type to named enum |
 | `_Com_out_ptr_` | parameter | `[ComOutPtr]` |
 | `_Not_null_terminated_` | parameter, field | `[NotNullTerminated]` |
+| `_Close_handle_with_(api)` | handle struct | `[RAIIFree("api")]` on struct |
+| `_Invalid_handle_(val)` | handle struct | `[InvalidHandleValue(val)]` on struct (multiple allowed) |
+| `_Also_usable_for_(type)` | handle struct | `[AlsoUsableFor("type")]` on struct |
 
-See `docs/copilot/plans/shift-left-metadata-plan.md` for the full annotation design.
+The handle annotations are placed between `struct` and the name via the `DECLARE_HANDLE_WIN32METADATA(name, ...)` and `DECLARE_TYPEDEF_WIN32METADATA(name, type, ...)` macros described in the [Handle types](#handle-types) section.
+
+See `docs/copilot/plans/shift-left-metadata-plan.md` for the full annotation design and
+`docs/copilot/plans/handle-annotation-proposal.md` for the handle-specific proposal.
 
 ---
 
