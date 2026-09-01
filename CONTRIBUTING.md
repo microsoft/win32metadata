@@ -278,10 +278,24 @@ Additionally, it is useful to load the winmd in [ILSpy](https://github.com/icsha
 
 ## Releasing
 
-The main branch must have a clean build to publish a new release. Run the [release pipeline](https://github-private.visualstudio.com/microsoft/_build?definitionId=750) to publish new packages to nuget.org and create a new draft release on GitHub autopopulated with the list of resolved issues.
+The main branch must have a clean build to publish a new release. The official NuGet release is performed by the [Win32 Metadata release pipeline (definition 750)](https://github-private.visualstudio.com/microsoft/_build?definitionId=750). The pipeline consumes the signed `NuGetPackages` artifact from the `Win32 Metadata` build pipeline, creates a draft GitHub release, and pushes `Microsoft.Windows.SDK.Win32Metadata` and `Microsoft.Windows.WinmdGenerator` to nuget.org. `Microsoft.Dia.Win32Metadata` is intentionally excluded from the nuget.org push.
+
+To queue a release:
+
+1. Confirm the intended commit on `main` has a successful `Win32 Metadata` build and that its `NuGetPackages` artifact contains the expected package versions.
+2. Open the release pipeline and select **Run pipeline**.
+3. In the **Run pipeline** pane, select **Resources**, select the `win32metadata` pipeline resource, and choose the successful `Win32 Metadata` run for the intended `main` commit. Do not rely on the default latest run, which could be from another branch or commit.
+4. Run the pipeline and verify both the **GitHub Release** and **nuget.org** stages succeed.
+
+Alternatively, adding the `auto-release` build tag to a successful `Win32 Metadata` run triggers the release pipeline automatically. Only add this tag when the build is ready to publish; it initiates the nuget.org release rather than performing another validation build.
+
+The release pipeline initially creates the GitHub release as a draft. Before publishing that draft, confirm the expected package versions are visible on nuget.org:
+
+* [Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata)
+* [Microsoft.Windows.WinmdGenerator](https://www.nuget.org/packages/Microsoft.Windows.WinmdGenerator)
 
 Once the packages are live on nuget.org, manually save the new package versions to the ADO Artifact Feed [https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies](https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies) following the instructions at [https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages](https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages).
 
 Once the packages are saved to the ADO Artifact Feed, publish the GitHub release.
 
-After the release is published, run [Set-LastReleaseVersion.ps1](scripts/Set-LastReleaseVersion.ps1) with the metadata package version published to nuget.org, and run [Set-MajorVersion.ps1](scripts/Set-MajorVersion.ps1) to increment the version number in the build for the next release.
+After the release is published, run [Set-LastReleaseVersion.ps1](scripts/Set-LastReleaseVersion.ps1) with the metadata package version published to nuget.org. Run [Set-MajorVersion.ps1](scripts/Set-MajorVersion.ps1) only when starting the next major release train; it is not required for another release on the current major version.
