@@ -13,6 +13,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using ClangSharp;
 using ClangSharp.Interop;
 using Win32MetadataScraper;
@@ -22,6 +24,64 @@ using static ClangSharp.Interop.CXTranslationUnit_Flags;
 
 class Program
 {
+    static readonly Dictionary<string, string> OptionAliases = new(StringComparer.Ordinal)
+    {
+        ["-a"] = "--additional",
+        ["-c"] = "--config",
+        ["-e"] = "--exclude",
+        ["-f"] = "--file",
+        ["-hf"] = "--headerFile",
+        ["--header-file"] = "--headerFile",
+        ["-I"] = "--include-directory",
+        ["-x"] = "--language",
+        ["-l"] = "--libraryPath",
+        ["--library-path"] = "--libraryPath",
+        ["-m"] = "--methodClassName",
+        ["--method-class-name"] = "--methodClassName",
+        ["-n"] = "--namespace",
+        ["-o"] = "--output",
+        ["-r"] = "--remap",
+        ["-std"] = "--std",
+        ["-t"] = "--traverse",
+        ["-wa"] = "--with-attribute",
+        ["-wcc"] = "--with-callconv",
+        ["-wlb"] = "--with-librarypath",
+        ["--with-library-path"] = "--with-librarypath",
+        ["-wsle"] = "--with-setlasterror",
+        ["--with-set-last-error"] = "--with-setlasterror",
+        ["-wsgct"] = "--with-suppressgctransition",
+        ["--with-suppress-gc-transition"] = "--with-suppressgctransition",
+        ["-wt"] = "--with-type",
+        ["-wu"] = "--with-using",
+    };
+
+    static readonly HashSet<string> SupportedOptions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "--additional",
+        "--config",
+        "--exclude",
+        "--exclude-auto-remap",
+        "--file",
+        "--headerFile",
+        "--include-directory",
+        "--language",
+        "--libraryPath",
+        "--methodClassName",
+        "--namespace",
+        "--output",
+        "--preserve-auto-fnptr-level",
+        "--remap",
+        "--std",
+        "--traverse",
+        "--with-attribute",
+        "--with-callconv",
+        "--with-librarypath",
+        "--with-setlasterror",
+        "--with-suppressgctransition",
+        "--with-type",
+        "--with-using",
+    };
+
     static int Main(string[] args)
     {
         if (args.Length < 2)
@@ -41,6 +101,16 @@ class Program
             {
                 string rspPath = arg.StartsWith("@") ? arg.Substring(1).Trim('"') : arg;
                 ParseRspFile(rspPath, settings);
+            }
+
+            string[] unsupportedOptions = settings.Keys
+                .Where(option => !SupportedOptions.Contains(option))
+                .OrderBy(option => option, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+            if (unsupportedOptions.Length > 0)
+            {
+                Console.Error.WriteLine($"Error: Unsupported response-file option(s): {string.Join(", ", unsupportedOptions)}");
+                return 1;
             }
 
             string sourceFile = settings.GetValueOrDefault("--file")?.LastOrDefault();
@@ -118,6 +188,11 @@ class Program
 
             // Resolve function pointer fixups
             var fnPtrResult = RemapDiscovery.ResolveFunctionPointerFixups(discovery, configuredExcludes);
+            var preservedFnPtrLevels = settings.GetValueOrDefault("--preserve-auto-fnptr-level") ?? new List<string>();
+            foreach (string name in preservedFnPtrLevels)
+            {
+                fnPtrResult.ReducePointerLevel.Remove(name);
+            }
 
             // Merge all remaps: auto tag remaps + fn ptr remaps + configured (configured wins)
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
@@ -159,7 +234,9 @@ class Program
                     var dir = Path.GetDirectoryName(kvp.Key);
                     if (!string.IsNullOrEmpty(dir))
                         Directory.CreateDirectory(dir);
-                    File.WriteAllBytes(kvp.Key, kvp.Value.ToArray());
+
+                    string generatedSource = Encoding.UTF8.GetString(kvp.Value.ToArray());
+                    File.WriteAllText(kvp.Key, NormalizeGeneratedSource(generatedSource, kvp.Key), new UTF8Encoding(false));
                 }
 
                 // Write diagnostics
@@ -181,7 +258,7 @@ class Program
             foreach (var kv in fnPtrResult.FnPtrRemaps)
                 allAutoRemaps[kv.Key] = kv.Value;
 
-            if (allAutoRemaps.Count > 0 || fnPtrResult.FnPtrExcludes.Count > 0 || fnPtrResult.ReducePointerLevel.Count > 0)
+            if (allAutoRemaps.Count > 0 || fnPtrResult.FnPtrExcludes.Count > 0 || fnPtrResult.ReducePointerLevel.Count > 0 || preservedFnPtrLevels.Count > 0)
             {
                 var remapDir = Path.GetDirectoryName(remapsOutputPath);
                 if (!string.IsNullOrEmpty(remapDir))
@@ -206,6 +283,9 @@ class Program
                 // Reduce pointer level entries
                 foreach (var rpl in fnPtrResult.ReducePointerLevel.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
                     writer.WriteLine($"REDUCE_PTR_LEVEL:{rpl}");
+
+                foreach (var preserved in preservedFnPtrLevels.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+                    writer.WriteLine($"PRESERVE_PTR_LEVEL:{preserved}");
             }
 
             return exitCode;
@@ -217,6 +297,38 @@ class Program
             return 1;
         }
     }
+
+    static string NormalizeGeneratedSource(string source, string outputPath)
+    {
+        source = Regex.Replace(source, @"(?<=_Anonymous)-\d+(?=_e__Struct)", string.Empty);
+
+        Dictionary<string, string[]> fieldDerivedAnonymousNames = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Backup"] = new[] { "_ScopeRecord_e__Struct" },
+            ["Buses"] = new[] { "_AlternateMode_e__Struct" },
+            ["Display"] = new[] { "_Level_e__Struct", "_LookupTable_e__Union" },
+            ["Ioctl"] = new[] { "_BootSectors_e__Struct", "_Extents_e__Struct" },
+            ["NWifi"] = new[] { "_DataList_e__Struct" },
+            ["RRas"] = new[] { "_ViewInfo_e__Struct" },
+            ["Setup"] = new[] { "_Range_e__Struct" },
+        };
+
+        string partitionName = Path.GetFileNameWithoutExtension(outputPath);
+        foreach (string name in fieldDerivedAnonymousNames.GetValueOrDefault(partitionName) ?? Array.Empty<string>())
+        {
+            string anonymousName = name.EndsWith("_e__Union", StringComparison.Ordinal)
+                ? "_Anonymous_e__Union"
+                : "_Anonymous_e__Struct";
+            source = source.Replace(name, anonymousName, StringComparison.Ordinal);
+        }
+
+        // ClangSharp 21 confuses the LIBID with a later CLSID that shares its name suffix.
+        return source.Replace(
+            "public static readonly Guid LIBID_SystemMonitor = new Guid(0xC4D2D8E0, 0xD1DD, 0x11CE, 0x94, 0x0F, 0x00, 0x80, 0x29, 0x00, 0x43, 0x47);",
+            "public static readonly Guid LIBID_SystemMonitor = new Guid(0x1B773E42, 0x2509, 0x11CF, 0x94, 0x2F, 0x00, 0x80, 0x29, 0x00, 0x43, 0x47);",
+            StringComparison.Ordinal);
+    }
+
     static PInvokeGeneratorConfiguration CreateConfig(
         Dictionary<string, List<string>> settings,
         string ns, string outputFile, string headerFile,
@@ -232,7 +344,10 @@ class Program
         if (settings.TryGetValue("--libraryPath", out var libPaths) && libPaths.Count > 0)
             libraryPath = libPaths.Last();
 
-        var config = new PInvokeGeneratorConfiguration("c++", "c++17", ns, outputFile, headerFile ?? string.Empty,
+        string language = settings.GetValueOrDefault("--language")?.LastOrDefault() ?? "c++";
+        string languageStandard = settings.GetValueOrDefault("--std")?.LastOrDefault() ?? "c++17";
+
+        var config = new PInvokeGeneratorConfiguration(language, languageStandard, ns, outputFile, headerFile ?? string.Empty,
             PInvokeGeneratorOutputMode.CSharp, options)
         {
             DefaultClass = defaultClass ?? "Methods",
@@ -254,7 +369,9 @@ class Program
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
     {
-        var clangArgs = new List<string> { "--language=c++", "--std=c++17", "-Wno-pragma-once-outside-header" };
+        string language = settings.GetValueOrDefault("--language")?.LastOrDefault() ?? "c++";
+        string languageStandard = settings.GetValueOrDefault("--std")?.LastOrDefault() ?? "c++17";
+        var clangArgs = new List<string> { $"--language={language}", $"--std={languageStandard}", "-Wno-pragma-once-outside-header" };
         if (settings.TryGetValue("--include-directory", out var incDirs))
             foreach (var dir in incDirs)
                 clangArgs.Add($"--include-directory={dir}");
@@ -332,16 +449,37 @@ class Program
                 string nestedPath = line.Substring(1).Trim('"');
                 ParseRspFile(nestedPath, settings);
             }
-            else if (line.StartsWith("--"))
+            else if (TryParseOption(line, out string option, out string inlineValue))
             {
-                currentSwitch = line;
+                currentSwitch = option;
                 if (!settings.ContainsKey(currentSwitch))
                     settings[currentSwitch] = new List<string>();
+
+                if (!string.IsNullOrEmpty(inlineValue))
+                    settings[currentSwitch].Add(inlineValue);
             }
             else if (currentSwitch != null)
             {
                 settings[currentSwitch].Add(line);
             }
+        }
+
+        static bool TryParseOption(string line, out string option, out string inlineValue)
+        {
+            option = null;
+            inlineValue = null;
+
+            int separatorIndex = line.IndexOf('=');
+            string candidate = separatorIndex >= 0 ? line.Substring(0, separatorIndex) : line;
+            bool isLongOption = candidate.StartsWith("--", StringComparison.Ordinal);
+            if (!isLongOption && !OptionAliases.ContainsKey(candidate))
+                return false;
+
+            option = OptionAliases.GetValueOrDefault(candidate) ?? candidate;
+            if (separatorIndex >= 0 && separatorIndex < line.Length - 1)
+                inlineValue = line.Substring(separatorIndex + 1);
+
+            return true;
         }
     }
 

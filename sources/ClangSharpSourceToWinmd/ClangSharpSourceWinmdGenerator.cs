@@ -1,4 +1,4 @@
-﻿// This adds the enclosing symbol name to the neseted type name.
+// This adds the enclosing symbol name to the neseted type name.
 // Can help disambiguate where a name came from when looking at a winmd
 //#define MakeShortNameIncludeEnclosingName
 
@@ -2042,6 +2042,10 @@ namespace ClangSharpSourceToWinmd
                             // in the node's methods
                             foreach (INamedTypeSymbol symbol in symbols)
                             {
+                                bool hasBaseSubobject = node.Members
+                                    .OfType<FieldDeclarationSyntax>()
+                                    .Any(field => SymbolEqualityComparer.Default.Equals(model.GetTypeInfo(field.Declaration.Type).Type, symbol));
+
                                 bool allFound = true;
                                 foreach (var member in symbol.GetMembers().Where(m => m is IMethodSymbol && m.Name != ".ctor"))
                                 {
@@ -2052,7 +2056,7 @@ namespace ClangSharpSourceToWinmd
                                     }
                                 }
 
-                                if (allFound)
+                                if (allFound || hasBaseSubobject)
                                 {
                                     this.structNodesToInheritedSymbols[node] = symbol;
                                     return symbol;

@@ -41,7 +41,7 @@ stages:
         RepoDirectory: ${{ parameters.RepoDirectory }}
 
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET SDK
+      displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
         useGlobalJson: true
@@ -163,7 +163,7 @@ stages:
           & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
 
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET SDK
+      displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
         useGlobalJson: true
@@ -210,15 +210,15 @@ stages:
         command: sign
         signing_profile: external_distribution
         files_to_sign: |
-          bin/Release/net8.0/ClangSharpSourceToWinmd.dll;
-          bin/Release/net8.0/ConstantsScraper.dll;
-          bin/Release/net8.0/CsvHelper.dll;
-          bin/Release/net8.0/ICSharpCode.Decompiler.dll;
-          bin/Release/net8.0/MetadataTasks.dll;
-          bin/Release/net8.0/MetadataUtils.dll;
-          bin/Release/net8.0/win-x64/Win32MetadataScraper.dll;
-          bin/Release/net8.0/win-x64/Win32MetadataScraper.exe;
-          bin/Release/net8.0/WinmdUtils.dll;
+          bin/Release/net10.0/ClangSharpSourceToWinmd.dll;
+          bin/Release/net10.0/ConstantsScraper.dll;
+          bin/Release/net10.0/CsvHelper.dll;
+          bin/Release/net10.0/ICSharpCode.Decompiler.dll;
+          bin/Release/net10.0/MetadataTasks.dll;
+          bin/Release/net10.0/MetadataUtils.dll;
+          bin/Release/net10.0/win-x64/Win32MetadataScraper.dll;
+          bin/Release/net10.0/win-x64/Win32MetadataScraper.exe;
+          bin/Release/net10.0/WinmdUtils.dll;
           bin/Windows.Win32.winmd;
           scripts/*.ps1;
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}

@@ -30,3 +30,6 @@ SystemFunction041
 <IncludeRoot>/um/wdigest.h
 --namespace
 Windows.Win32.Security.Authentication.Identity
+--preserve-auto-fnptr-level
+PLSA_REDIRECTED_LOGON_CALLBACK
+PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK

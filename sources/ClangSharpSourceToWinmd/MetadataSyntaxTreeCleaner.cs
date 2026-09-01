@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -467,6 +467,11 @@ namespace ClangSharpSourceToWinmd
                         return ret == null ? node : ret;
                     }
 
+                    case "NativeAnnotation":
+                    {
+                        return null;
+                    }
+
                     case "CppAttributeList":
                     {
                         return this.CreateAttributeListForSal(node);
@@ -891,7 +896,11 @@ namespace ClangSharpSourceToWinmd
 
             private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList)
             {
-                ParameterSyntax paramNode = (ParameterSyntax)cppAttrList.Parent;
+                if (cppAttrList.Parent is not ParameterSyntax paramNode)
+                {
+                    return null;
+                }
+
                 bool marshalAsAdded = this.nodesWithMarshalAs.Contains(paramNode);
 
                 AttributeSyntax cppAttr = cppAttrList.Attributes[0];

@@ -27,7 +27,7 @@ stages:
         RepoDirectory: ${{ parameters.RepoDirectory }}
         Submodules: true
     - task: UseDotNet@2
-      displayName: ⚙ Install .NET SDK
+      displayName: ⚙ Install SDK from global.json
       inputs:
         packageType: sdk
         useGlobalJson: true
