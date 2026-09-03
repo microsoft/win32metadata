@@ -231,7 +231,7 @@ namespace ClangSharpSourceToWinmd
 
         private static bool HasGuidAttribute(SyntaxList<AttributeListSyntax> attributeLists)
         {
-            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Foundation.Metadata.Guid"));
+            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == EncodeHelpers.GuidAttributeName));
             return ret;
         }
 

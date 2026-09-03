@@ -11,6 +11,7 @@ namespace MetadataUtils
     public static class EncodeHelpers
     {
         public const string AttributeToRemoveSuffix = "__remove";
+        public const string GuidAttributeName = "global::Windows.Win32.Foundation.Metadata.Guid";
 
         private static readonly System.Text.RegularExpressions.Regex RemappedParmRegex = new System.Text.RegularExpressions.Regex(@"(?:\[([^\]]*)\])?(?:\s*(\w+\**)(?:\s+(\w+))?)?");
         private static readonly System.Text.RegularExpressions.Regex AttributeRegex = new System.Text.RegularExpressions.Regex(@"(-?\w+)(\(.+\)$)?");
@@ -400,7 +401,7 @@ namespace MetadataUtils
                 SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                         SyntaxFactory.Attribute(
-                            SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
+                            SyntaxFactory.ParseName(GuidAttributeName),
                             SyntaxFactory.ParseAttributeArgumentList(args))));
         }
     }
