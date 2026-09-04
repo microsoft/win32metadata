@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Download API diff artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: api-diff
           path: artifact
@@ -29,7 +29,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Post API diff comment
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
