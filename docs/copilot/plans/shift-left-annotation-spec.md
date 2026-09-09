@@ -3,8 +3,7 @@
 ## Status
 
 This document defines how Windows SDK C/C++ headers represent win32metadata semantics
-and how the windows-rs metadata toolchain consumes them. It incorporates the decisions
-from `docs/copilot/shift-left-gap-review.html`.
+and how the windows-rs metadata toolchain consumes them.
 
 Metadata is generated from Windows SDKs that ship. The SDK selected for a metadata
 release defines its API surface. Headers and APIs absent from that SDK, including
