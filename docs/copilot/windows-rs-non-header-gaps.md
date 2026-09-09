@@ -172,7 +172,7 @@ Clang accepts the annotation before the return type and attaches it to the
 `FunctionDecl`; windows-rs can then emit it on the metadata return parameter:
 
 ```cpp
-_Win32_RAIIFree_(CloseHandle, 0, -1)
+_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
 HANDLE WINAPI OpenThing(void);
 ```
 

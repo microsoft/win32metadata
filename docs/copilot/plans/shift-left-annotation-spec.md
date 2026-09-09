@@ -66,14 +66,14 @@ identify invalid values:
 
 ```cpp
 _Win32_RAIIFree_(SysFreeString)
-_Win32_RAIIFree_(CloseHandle, 0, -1)
+_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
 ```
 
-The consumer parses the comma-separated payload and emits one `RAIIFreeAttribute` plus
-one `InvalidHandleValueAttribute` for each supplied value. Invalid values use signed
-decimal or hexadecimal integer literals. Do not pass a macro such as
-`INVALID_HANDLE_VALUE`: stringification preserves the macro name rather than its
-evaluated value.
+The consumer parses the comma-separated token payload. For each invalid value, it uses
+the declaration's Clang preprocessor context to expand object-like macros and evaluates
+the resulting constant expression. It emits one `RAIIFreeAttribute` plus one
+`InvalidHandleValueAttribute` for each supplied value. An unresolved or non-constant
+value is an error.
 
 windows-rs enables `WIN32METADATA` while scraping annotated headers. Unknown,
 malformed, valued-versus-valueless, and incorrectly placed annotations are errors with
@@ -113,7 +113,7 @@ and preserves the complete calling-convention declarator while matching normal S
 reading order.
 
 ```cpp
-_Win32_RAIIFree_(CloseHandle, 0, -1)
+_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
 HANDLE WINAPI OpenThing(void);
 ```
 
@@ -126,7 +126,7 @@ invalid-value metadata together in `_Win32_RAIIFree_`.
 
 ```cpp
 BOOL WINAPI CreateThing(
-    _Out_ _Win32_RAIIFree_(CloseThing, 0, -1)
+    _Out_ _Win32_RAIIFree_(CloseThing, 0, INVALID_HANDLE_VALUE)
     HANDLE* result);
 ```
 
@@ -176,7 +176,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. |
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `Agile` | `_Win32_Agile_` | Class/struct/interface declaration. |
-| `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional signed decimal or hexadecimal integer literals. The consumer emits one `RAIIFree` attribute and one `InvalidHandleValue` attribute for each supplied invalid value. Macro names are not accepted because the annotation string preserves tokens rather than evaluated macro values. |
+| `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
 | `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Without this annotation, the pointer does not need to remain valid after the call returns. |
 | array count/capacity/byte size | Existing SAL and native array declarations | Use `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, their byte-count variants, and related standard forms. Do not define parallel Win32 annotations. |
@@ -287,7 +287,7 @@ return or output parameter:
 ```cpp
 BOOL WINAPI OpenPrinterW(
     _In_ LPWSTR name,
-    _Out_ _Win32_RAIIFree_(ClosePrinter, 0, -1)
+    _Out_ _Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)
     HANDLE* printer);
 ```
 
@@ -295,10 +295,10 @@ Do not create `PRINTER_HANDLE`, `HEAP_HANDLE`, or similar metadata-only pseudo t
 Absence of `RAIIFree` means borrowed. `GetProcessHeap`, for example, requires no custom
 annotation because its returned `HANDLE` is not automatically closed.
 
-Invalid values are API-specific rather than a fixed global set. The existing `HANDLE`
-and `PRINTER_HANDLE` metadata uses `0` and `-1`. The annotation uses those numeric
-values directly because preprocessor stringification does not evaluate
-`INVALID_HANDLE_VALUE` or other nested macros.
+Invalid values are API-specific rather than a fixed global set. Use the SDK spelling
+that expresses the API contract, such as `0` and `INVALID_HANDLE_VALUE`. The annotation
+preserves those tokens; the consumer is responsible for macro expansion and constant
+evaluation.
 
 Consumer/freeing APIs such as `LocalFree` retain their raw native signature. Do not use
 generic invalid-handle success logic for them: `LocalFree` returns `NULL` on success and
@@ -490,6 +490,8 @@ The windows-rs consumer must:
 - emit the standard `Windows.Win32.Metadata` attribute types into the generated winmd;
 - generate x86, x64, and arm64 metadata from the same annotated headers;
 - preserve compiler-derived constant types, alignment, packing, and native constness;
+- resolve object-like macros used as annotation values in the declaration's
+  preprocessor context and evaluate the expanded constant expression;
 - apply SAL semantic defaults without requiring redundant header edits;
 - retain raw signatures where metadata does not justify an opinionated transformation.
 
@@ -547,7 +549,7 @@ requires a source syntax, consumer behavior, patch, and regression test.
 ### Phase 3: patch canonical SDK examples
 
 1. `OpenPrinterW`: use raw `HANDLE*` annotated with
-   `_Win32_RAIIFree_(ClosePrinter, 0, -1)`.
+   `_Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)`.
 2. `CoGetClassObject`: associate `dwClsContext` with the existing `CLSCTX` declaration;
    use existing COM output SAL.
 3. `AddFontResourceExW`: add the reviewed guarded enum and associate the flags use.
