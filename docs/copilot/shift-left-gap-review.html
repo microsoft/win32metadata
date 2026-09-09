@@ -907,7 +907,7 @@ int AddFontResourceExW(
 #pragma push_macro("FR_NOT_ENUM")
 #undef FR_PRIVATE
 #undef FR_NOT_ENUM
-enum class FONT_RESOURCE_CHARACTERISTICS : unsigned int
+enum [[clang::flag_enum]] FONT_RESOURCE_CHARACTERISTICS : unsigned int
 {
     FR_PRIVATE = 0x10,
     FR_NOT_ENUM = 0x20,
@@ -926,8 +926,9 @@ WINGDIAPI int WINAPI AddFontResourceExW(
         <b>Synthetic enum example:</b> unlike <code>CLSCTX</code>,
         <code>FONT_RESOURCE_CHARACTERISTICS</code> does not exist in the SDK headers today.
         It is defined only by win32metadata&apos;s <code>enums.json</code>, using the existing
-        <code>FR_PRIVATE</code> and <code>FR_NOT_ENUM</code> macros. The guarded enum introduces
-        metadata shape without changing the normal SDK ABI.
+        <code>FR_PRIVATE</code> and <code>FR_NOT_ENUM</code> macros. The guarded unscoped enum
+        introduces metadata shape without changing the normal SDK ABI or the existing
+        unqualified constant names used by consuming code.
       </div>
       <div class="note">
         <b>Two directly reviewable issues:</b> the checked-in RDL has <code>#[reserved]</code>
@@ -1529,49 +1530,20 @@ struct UCharIterator {
     </section>
 
     <section id="agile">
-      <div class="eyebrow">Type annotation example &middot; Agile</div>
-      <h2>IDXGIFactory</h2>
-      <p><span class="pill annotation">Custom metadata required</span><span class="pill policy">Authoritative source must be reviewed</span></p>
-      <div class="grid three">
-        <div class="card source"><h3>SDK header today</h3>
-<pre>MIDL_INTERFACE(
-    "7b7166ec-21c7-44ae-b21a-c9ae321ae369")
-IDXGIFactory : public IDXGIObject
-{
-    // methods omitted
-};</pre>
-          <p class="delta">The declaration does not inherit <code>IAgileObject</code> and has no SAL or COM syntax that states agility.</p>
-        </div>
-        <div class="card current"><h3>Official windows-rs baseline</h3>
-<pre>[Guid(...)]
-interface IDXGIFactory : IDXGIObject
-{
-    // methods omitted
-}
+      <div class="eyebrow">Vocabulary intentionally jettisoned &middot; Agile</div>
+      <h2>Do not migrate AgileAttribute into SDK headers</h2>
+      <p><span class="pill done">No header annotation</span><span class="pill policy">Remove existing sidecar behavior</span></p>
+      <div class="card proposal" style="margin-top:18px"><h3>Unified behavior</h3>
+<pre>// No _Win32_Agile_ annotation.
 
-// No AgileAttribute.</pre></div>
-        <div class="card target"><h3>win32metadata reference</h3>
-<pre>[Guid(...)]
-<span class="target-delta">[Agile]</span>
-interface IDXGIFactory : IDXGIObject
-{
-    // methods omitted
-}</pre></div>
-      </div>
-      <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
-<pre><span class="proposed">_Win32_Agile_</span>
-MIDL_INTERFACE(
-    "7b7166ec-21c7-44ae-b21a-c9ae321ae369")
-IDXGIFactory : public IDXGIObject
-{
-    // methods unchanged
-};</pre></div>
-      <div class="note"><b>Gap:</b> COM agility is runtime behavior, not native ABI inheritance. There is no general SAL annotation for it, and adding <code>IAgileObject</code> as a base would change the declared contract. windows-rs already consumes <code>AgileAttribute</code> to emit <code>Send</code> and <code>Sync</code>.</div>
-      <div class="note decision"><b>Decision needed:</b> keep a custom annotation, but replace the current name-pattern sidecar only after the owning component confirms which interfaces are actually agile. The annotation itself should not infer agility from an <code>ID2D*</code>, <code>IDWrite*</code>, or <code>IDXGI*</code> name.</div>
+// Do not infer AgileAttribute from ID2D*, ID3D*,
+// IDWrite*, IDXGI*, or other COM interface names.</pre></div>
+      <div class="note"><b>Reason:</b> the existing win32metadata annotation asserted that selected non-WinRT COM interfaces were always thread-safe. That guarantee was repeatedly violated, and COM does not have WinRT&apos;s exclusive/agile interface contract.</div>
+      <div class="note decision"><b>Decision:</b> remove <code>Agile</code> from the shift-left vocabulary and intentionally do not reproduce the existing sidecar annotations.</div>
     </section>
 
     <section id="associated-constant">
-      <div class="eyebrow">Guarded enum design &middot; no AssociatedConstant attribute</div>
+      <div class="eyebrow">Guarded enum design &middot; preserve AssociatedConstant</div>
       <h2>ENUM_SERVICE_TYPE and SERVICE_NO_CHANGE</h2>
       <div class="grid three">
         <div class="card source"><h3>SDK header today</h3>
@@ -1619,8 +1591,21 @@ BOOL ChangeServiceConfigW(
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed guarded metadata declaration</h3>
 <pre>#ifdef WIN32METADATA
-enum class ENUM_SERVICE_TYPE : DWORD {
-    <span class="proposed">SERVICE_NO_CHANGE = 0xffffffff,</span>
+#pragma push_macro("SERVICE_KERNEL_DRIVER")
+#pragma push_macro("SERVICE_FILE_SYSTEM_DRIVER")
+#pragma push_macro("SERVICE_ADAPTER")
+#pragma push_macro("SERVICE_RECOGNIZER_DRIVER")
+#pragma push_macro("SERVICE_WIN32_OWN_PROCESS")
+#pragma push_macro("SERVICE_WIN32_SHARE_PROCESS")
+#undef SERVICE_KERNEL_DRIVER
+#undef SERVICE_FILE_SYSTEM_DRIVER
+#undef SERVICE_ADAPTER
+#undef SERVICE_RECOGNIZER_DRIVER
+#undef SERVICE_WIN32_OWN_PROCESS
+#undef SERVICE_WIN32_SHARE_PROCESS
+enum <span class="proposed">_Win32_AssociatedConstant_(
+    SERVICE_NO_CHANGE)</span>
+    [[clang::flag_enum]] ENUM_SERVICE_TYPE : DWORD {
     SERVICE_KERNEL_DRIVER = 0x00000001,
     SERVICE_FILE_SYSTEM_DRIVER = 0x00000002,
     SERVICE_ADAPTER = 0x00000004,
@@ -1629,6 +1614,12 @@ enum class ENUM_SERVICE_TYPE : DWORD {
     SERVICE_WIN32_SHARE_PROCESS = 0x00000020,
     // remaining existing macro values
 };
+#pragma pop_macro("SERVICE_WIN32_SHARE_PROCESS")
+#pragma pop_macro("SERVICE_WIN32_OWN_PROCESS")
+#pragma pop_macro("SERVICE_RECOGNIZER_DRIVER")
+#pragma pop_macro("SERVICE_ADAPTER")
+#pragma pop_macro("SERVICE_FILE_SYSTEM_DRIVER")
+#pragma pop_macro("SERVICE_KERNEL_DRIVER")
 #endif
 
 BOOL ChangeServiceConfigW(
@@ -1645,7 +1636,7 @@ BOOL ChangeServiceConfigW(
     // remaining parameters unchanged
 );</pre></div>
       <div class="note"><b>Current projection behavior:</b> CsWin32 reads <code>AssociatedConstant</code>, copies <code>SERVICE_NO_CHANGE</code> into the generated enum, and suppresses the separate global constant. windows-rs ignores the attribute and leaves the constant global.</div>
-      <div class="note decision"><b>Impact:</b> encode the desired shape directly. A scoped metadata enum permits <code>SERVICE_NO_CHANGE</code> to appear in all three service configuration enums without an unscoped C++ name collision, eliminating the custom relationship attribute.</div>
+      <div class="note decision"><b>Impact:</b> synthetic bags of constants use unscoped enums so existing enumerator spellings remain unchanged. Loose constants such as <code>SERVICE_NO_CHANGE</code> remain global and use <code>AssociatedConstant</code>, preserving existing CsWin32 and windows-rs behavior without duplicate unscoped enumerator names.</div>
     </section>
 
     <section id="native-inheritance">
@@ -2007,7 +1998,7 @@ pub unsafe fn LocalFree(
           <tr><td>Type imports</td><td>Eleven WinRT interfaces are supplied through <code>emitter.settings.rsp --typeImport</code>.</td><td>Resolve them from the WinRT winmd/reference graph rather than SDK declaration annotations.</td></tr>
           <tr><td>Remaps and exclusions</td><td>Hundreds of scraper remaps, forced types, exclusions, constant types, and member remaps remain.</td><td>Classify each as a source defect, generator normalization rule, intentional exclusion, or guarded declaration.</td></tr>
           <tr><td>Layout and native syntax</td><td>Packing, alignment, bitfields, native typedef identity, GUIDs, and noreturn behavior may be lost or overridden.</td><td>Prefer the real C/C++ declaration and fix parser/RDL preservation rather than adding redundant metadata annotations.</td></tr>
-          <tr><td>Enum additions</td><td>Composite values and members such as <code>CLSCTX_ALL</code> are added after scraping.</td><td>Use guarded scoped enum members while preserving macro compatibility.</td></tr>
+          <tr><td>Enum additions</td><td>Composite values and members such as <code>CLSCTX_ALL</code> are added after scraping.</td><td>Use guarded unscoped enum members and associated-constant annotations while preserving macro compatibility.</td></tr>
           <tr><td>Documentation</td><td>Documentation mappings are external and stale.</td><td>Automate windows-docs scraping and symbol cross-reference; use header overrides only for ambiguous matches.</td></tr>
         </tbody>
       </table>
