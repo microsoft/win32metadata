@@ -4,17 +4,16 @@
 # GitHub Actions workflow so PR checks work without Azure DevOps integration.
 #
 # Pipeline structure:
-#   1. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
-#   2. One build job assembles the winmd, packages, samples, and runs tests
+#   1. Detect whether the PR changes files outside docs/ and apidocs/
+#   2. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
+#   3. One build job assembles the winmd, packages, samples, and runs tests
+#      or reports success immediately for documentation-only PRs
 
 name: PR Validation
 
 on:
   pull_request:
     branches: [main]
-    paths-ignore:
-      - 'apidocs/**'
-      - 'docs/**'
   push:
     branches: [main]
     paths-ignore:
@@ -25,6 +24,7 @@ on:
 permissions:
   actions: read
   contents: read
+  pull-requests: read
 
 concurrency:
   group: pr-${{ github.event.pull_request.number || github.ref }}
@@ -34,12 +34,58 @@ env:
   BUILD_CONFIGURATION: Release
 
 jobs:
+  changes:
+    name: Detect build changes
+    runs-on: ubuntu-latest
+    outputs:
+      build_needed: ${{ steps.filter.outputs.build_needed }}
+
+    steps:
+      - name: Check changed paths
+        id: filter
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            if (context.eventName !== 'pull_request') {
+              core.setOutput('build_needed', 'true');
+              return;
+            }
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100
+            });
+
+            const ignoredPrefixes = ['docs/', 'apidocs/'];
+            const changedPaths = files.flatMap(file =>
+              file.status === 'renamed' && file.previous_filename
+                ? [file.previous_filename, file.filename]
+                : [file.filename]);
+            const buildFiles = [...new Set(changedPaths)]
+              .filter(file => !ignoredPrefixes.some(prefix => file.startsWith(prefix)));
+            const fileListIncomplete = files.length < context.payload.pull_request.changed_files;
+            const buildNeeded = fileListIncomplete || buildFiles.length !== 0;
+
+            core.setOutput('build_needed', buildNeeded.toString());
+            await core.summary
+              .addHeading(buildNeeded ? 'Full validation required' : 'Documentation-only change')
+              .addRaw(fileListIncomplete
+                ? 'The complete changed-file list was not available. Running full validation.'
+                : buildNeeded
+                  ? `Files outside docs/ or apidocs/ changed:\n${buildFiles.map(file => `- ${file}`).join('\n')}`
+                  : 'All changed files are under docs/ or apidocs/. The expensive build is skipped.')
+              .write();
+
   # ──────────────────────────────────────────────────────────────────────
   # Stage 1: Parallel header scraping (one job per architecture)
   # ──────────────────────────────────────────────────────────────────────
 
   scrape:
     name: 'Scrape headers: ${{ matrix.arch }}'
+    needs: [changes]
+    if: needs.changes.outputs.build_needed == 'true'
     runs-on: windows-2022
     timeout-minutes: 60
 
@@ -100,23 +146,38 @@ jobs:
 
   build-test:
     name: 'Build, test, package'
-    needs: [scrape]
+    needs: [changes, scrape]
+    if: always() && needs.changes.result == 'success'
     runs-on: windows-2022
     timeout-minutes: 60
 
     steps:
+      - name: Documentation-only change
+        if: needs.changes.outputs.build_needed != 'true'
+        shell: pwsh
+        run: Write-Host 'All changed files are under docs/ or apidocs/. No build is required.'
+
+      - name: Verify scrape jobs
+        if: needs.changes.outputs.build_needed == 'true' && needs.scrape.result != 'success'
+        shell: pwsh
+        run: throw 'One or more header scrape jobs did not succeed.'
+
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        if: needs.changes.outputs.build_needed == 'true'
         with:
           lfs: true
           fetch-depth: 0
 
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        if: needs.changes.outputs.build_needed == 'true'
         with:
           global-json-file: global.json
 
       - uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
+        if: needs.changes.outputs.build_needed == 'true'
 
       - name: Download all generated assets
+        if: needs.changes.outputs.build_needed == 'true'
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           pattern: generated_*
@@ -124,23 +185,27 @@ jobs:
           merge-multiple: true
 
       - name: Build metadata binary
+        if: needs.changes.outputs.build_needed == 'true'
         shell: pwsh
         run: .\scripts\BuildMetadataBin.ps1 -assetsScrapedSeparately
 
       - name: Package
+        if: needs.changes.outputs.build_needed == 'true'
         shell: pwsh
         run: .\scripts\DoPackages.ps1
 
       - name: Build samples
+        if: needs.changes.outputs.build_needed == 'true'
         shell: pwsh
         run: .\scripts\DoSamples.ps1
 
       - name: Run tests
+        if: needs.changes.outputs.build_needed == 'true'
         shell: pwsh
         run: .\scripts\DoTests.ps1
 
       - name: Download baseline winmd from target branch
-        if: github.event_name == 'pull_request'
+        if: needs.changes.outputs.build_needed == 'true' && github.event_name == 'pull_request'
         id: baseline
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
@@ -209,7 +274,7 @@ jobs:
             }
 
       - name: Generate API surface diff
-        if: github.event_name == 'pull_request'
+        if: needs.changes.outputs.build_needed == 'true' && github.event_name == 'pull_request'
         id: apidump
         shell: pwsh
         run: |
@@ -273,7 +338,7 @@ jobs:
           $global:LASTEXITCODE = 0
 
       - name: Upload API diff
-        if: github.event_name == 'pull_request'
+        if: needs.changes.outputs.build_needed == 'true' && github.event_name == 'pull_request'
         uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: api-diff
@@ -282,7 +347,7 @@ jobs:
 
       - name: Upload winmd and API dump
         uses: ./.github/actions/upload-artifact-with-retry
-        if: always()
+        if: always() && needs.changes.outputs.build_needed == 'true'
         with:
           name: winmd
           path: |
@@ -294,13 +359,14 @@ jobs:
 
       - name: Upload build logs
         uses: ./.github/actions/upload-artifact-with-retry
-        if: always()
+        if: always() && needs.changes.outputs.build_needed == 'true'
         with:
           name: build_logs
           path: bin/logs
           retention-days: 7
 
       - name: Upload NuGet packages
+        if: needs.changes.outputs.build_needed == 'true'
         uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: NuGetPackages
