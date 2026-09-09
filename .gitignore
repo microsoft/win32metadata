@@ -61,6 +61,7 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+/tools/rust/target/
 
 # StyleCop
 StyleCopReport.xml
