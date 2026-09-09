@@ -2,19 +2,19 @@
 
 ## Status
 
-This document is the canonical, reviewed implementation plan for representing
-win32metadata semantics in Windows SDK C/C++ headers and consuming them with the
-windows-rs metadata toolchain. It incorporates the decisions from
-`docs/copilot/shift-left-gap-review.html`.
+This document defines how Windows SDK C/C++ headers represent win32metadata semantics
+and how the windows-rs metadata toolchain consumes them. It incorporates the decisions
+from `docs/copilot/shift-left-gap-review.html`.
 
-Much of the annotation transport and RDL/winmd plumbing has been prototyped on
-`jevansaks/windows-rs:user/jevansa/shift-left-metadata`. Prototype support does not mean
-that every provisional annotation should ship. The vocabulary must be reduced to the
-semantics retained by this review before implementation is finalized.
+Metadata is generated from Windows SDKs that ship. The SDK selected for a metadata
+release defines its API surface. Headers and APIs absent from that SDK, including
+deprecated or experimental surfaces removed from the SDK, are omitted from the
+generated metadata. Consumers that require those surfaces must continue using metadata
+generated from an older SDK.
 
-The migration is staged through the SDK ingestion patch system in
-`generation/WinSDK/patches`. The eventual source of truth is the Windows SDK headers;
-the patches are temporary until the corresponding header changes ship in the SDK.
+Header changes are staged through the SDK ingestion patch system in
+`generation/WinSDK/patches`. Each patch is temporary until the corresponding change
+ships in the SDK.
 
 ## Non-negotiable rules
 
@@ -36,6 +36,10 @@ the patches are temporary until the corresponding header changes ship in the SDK
 9. Logical equivalence to the NuGet winmd is the target only where the NuGet metadata is
    correct. Direct windows-rs fixes for native alignment, compiler-typed constants,
    `EnumWindows`, and `LocalFree` must not be regressed.
+10. The selected shipped SDK is authoritative for API availability. Do not carry
+    forward copied headers or declarations removed from that SDK. Metadata-only
+    declarations may represent macros, inline helpers, constants, or exports that are
+    part of the selected SDK, but they must not resurrect APIs absent from it.
 
 ## Transport and vocabulary
 
@@ -50,28 +54,40 @@ The ingested SDK defines the vocabulary in
 #endif
 ```
 
+Lifecycle metadata uses one variadic source annotation:
+
+```cpp
+#define _Win32_RAIIFree_(...) \
+    _WIN32META_ANNOTATION_("RAIIFree(" #__VA_ARGS__ ")")
+```
+
+The first argument identifies the cleanup function and the optional remaining arguments
+identify invalid values:
+
+```cpp
+_Win32_RAIIFree_(SysFreeString)
+_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
+```
+
+The consumer parses the comma-separated payload, evaluates each invalid-value
+expression, and emits one `RAIIFreeAttribute` plus one
+`InvalidHandleValueAttribute` for each supplied value.
+
 windows-rs enables `WIN32METADATA` while scraping annotated headers. Unknown,
 malformed, valued-versus-valueless, and incorrectly placed annotations are errors with
 source locations.
 
-Custom names retain an explicit `_Win32_` owner prefix and use PascalCase semantic
-names. For example, use `_Win32_SetLastError_`, `_Win32_ImportLibrary_(...)`,
-`_Win32_Retval_`, and `_Win32_Retained_`. Existing SAL itself is not consistently
-sentence-cased: names such as `_Return_type_success_` and
-`_Outptr_result_maybenull_` use lowercase word segments. The Win32 additions
-intentionally use PascalCase rather than copying that historical inconsistency.
+Custom names use an explicit `_Win32_` owner prefix and PascalCase semantic names. For
+example, use `_Win32_SetLastError_`, `_Win32_ImportLibrary_(...)`,
+`_Win32_Retval_`, and `_Win32_Retained_`.
 
-`_Out_retval_` is not an SDK SAL macro and must not be described as one. For
-IDL-authored declarations, use authoritative MIDL `[retval]`; MIDL-generated headers
-retain that marker in parameter comments and windows-rs parses those comments. For
-C/C++-authored declarations without such a comment, combine existing direction SAL
-with `_Win32_Retval_`:
+IDL `[retval]` does not survive in MIDL-generated headers as SAL. It remains in comments
+such as `/* [retval] */`, which windows-rs parses. C/C++-authored declarations without
+that comment combine ordinary direction SAL with `_Win32_Retval_`:
 
 ```cpp
 virtual HRESULT STDMETHODCALLTYPE GetDesc(
-    _Out_
-    _Win32_Retval_
-    DXGI_ADAPTER_DESC *pDesc) = 0;
+    _Out_ _Win32_Retval_ DXGI_ADAPTER_DESC* pDesc) = 0;
 ```
 
 ## Declaration placement
@@ -95,25 +111,21 @@ and preserves the complete calling-convention declarator while matching normal S
 reading order.
 
 ```cpp
-_Win32_RAIIFree_(CloseHandle)
-_Win32_InvalidHandle_(INVALID_HANDLE_VALUE)
-_Win32_InvalidHandle_(NULL)
+_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
 HANDLE WINAPI OpenThing(void);
 ```
 
 ### Parameters and fields
 
 Parameter and field annotations precede the declaration type, alongside SAL. This is
-supported by Clang and matches the established SDK annotation style. Put repeated
-annotations on separate source lines when needed.
+supported by Clang and matches the established SDK annotation style. Keep distinct
+annotations on separate source lines when that improves readability; keep cleanup and
+invalid-value metadata together in `_Win32_RAIIFree_`.
 
 ```cpp
 BOOL WINAPI CreateThing(
-    _Out_
-    _Win32_RAIIFree_(CloseThing)
-    _Win32_InvalidHandle_(-1)
-    _Win32_InvalidHandle_(0)
-    HANDLE *result);
+    _Out_ _Win32_RAIIFree_(CloseThing, 0, INVALID_HANDLE_VALUE)
+    HANDLE* result);
 ```
 
 Buffer counts, capacities, and byte sizes use existing SAL rather than parallel Win32
@@ -122,41 +134,35 @@ metadata annotations:
 ```cpp
 BOOL WINAPI ReadThings(
     _Out_writes_(count)
-    THING *items,
+    THING* items,
     _In_ DWORD count);
 ```
 
-Do not place custom return annotations after the closing parenthesis. The earlier
-prototype used trailing attributes while diagnosing a calling-convention parsing bug,
-but the prefix fixture proves that trailing placement is unnecessary.
+Do not place custom return annotations after the closing parenthesis.
 
 ### Records, interfaces, and enums
 
 Attributes appear between the declaration keyword and name.
 
 ```cpp
-struct
-    DESCRIPTION {
+struct _Windows_SupportedOS_10240_ DESCRIPTION {
     DWORD cbSize;
 };
 ```
 
 ```cpp
-enum class
-    _Windows_SupportedOS_10240_
-    [[clang::flag_enum]]
-    OPTION : unsigned long {
+enum class _Windows_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long {
     OPTION_NONE = 0,
 };
 ```
 
 ### Typedefs and callback aliases
 
-Type metadata precedes the typedef. A canonical callback annotation preserves the
-public metadata name while references continue to use the native typedef.
+Type metadata precedes the typedef.
 
 ```cpp
-typedef BOOL (WINAPI *PUBLIC_CALLBACK)(DWORD value);
+_Windows_SupportedOS_10240_
+typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 ```
 
 ## Attribute solution matrix
@@ -166,20 +172,19 @@ typedef BOOL (WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | `SetLastError` / P/Invoke `SupportsLastError` | `_Win32_SetLastError_` | Function. No existing SAL annotation means that an API sets thread last error; sets the ECMA-335 P/Invoke flag. |
 | P/Invoke module override | `_Win32_ImportLibrary_("name.dll")` | Function. Overrides import-library scan results. |
 | `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. |
-| preserve exact return/result | `_Win32_PreserveResult_` | Function or method. Replaces both `CanReturnErrorsAsSuccess` and `CanReturnMultipleSuccessValues`; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
+| preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `Agile` | `_Win32_Agile_` | Class/struct/interface declaration. |
-| `RAIIFree("CloseX")` | `_Win32_RAIIFree_(CloseX)` | Producer function/method return or output parameter only. |
-| `InvalidHandleValue(value)` | `_Win32_InvalidHandle_(value)` | Producer function/method return or output parameter only. Repeatable; signed decimal and hexadecimal C literals are accepted. |
+| `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional invalid values. Any integral constant expression accepted by Clang is valid; use named SDK constants such as `INVALID_HANDLE_VALUE` when they express the contract. The consumer emits one `RAIIFree` attribute and one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
-| `Retained` | `_Win32_Retained_` | Parameter. |
+| `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Without this annotation, the pointer does not need to remain valid after the call returns. |
 | array count/capacity/byte size | Existing SAL and native array declarations | Use `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, their byte-count variants, and related standard forms. Do not define parallel Win32 annotations. |
 | `AlsoUsableFor("TYPE")` | `_Win32_AlsoUsableFor_(TYPE)` | Typedef. |
-| `AssociatedEnum("TYPE")` | `_Win32_AssociatedEnum_(TYPE)` | Parameter, return value, or field when direct enum typing is impossible. Legacy `__typefix` is obsolete analyzer metadata, has no real SDK use sites, and is not a projection contract. |
+| `AssociatedEnum("TYPE")` | `_Win32_AssociatedEnum_(TYPE)` | Parameter, return value, or field when direct enum typing is impossible. `__typefix` is analyzer metadata, not a projection contract. |
 | input/output/optional/reserved | Existing SAL/MIDL | Use `_In_`, `_Out_`, `_Inout_`, `_Reserved_`, and their standard variants; no custom duplicates. |
 | `RetVal` | MIDL `[retval]` or existing direction SAL plus `_Win32_Retval_` | Parameter. windows-rs parses `[retval]` from MIDL-generated header comments; C/C++-only declarations use the custom annotation. |
 | `ComOutPtr` | `_COM_Outptr_` and standard SAL variants | Parameter. No new Win32 metadata annotation is required; shape-based inference is compatibility-only. |
 | native constness | Native C/C++ `const` | Parameter or field. Const loss is a windows-rs RDL/winmd fidelity bug, not a header-annotation requirement. |
-| scoped enum | guarded `enum class` | Emitted as `ScopedEnum`; normal branch retains the original ABI type. |
+| scoped enum | guarded `enum class` | Emitted as `ScopedEnum`; the ordinary branch retains the original ABI type. Existing SDK enums are not converted solely to make them scoped. |
 | flags enum | `[[clang::flag_enum]]` | Enum. Emitted with flags semantics. |
 
 ### Supported OS macro menu
@@ -218,27 +223,27 @@ by native syntax, including `noreturn`, architecture guards, alignment, native t
 identity, bitfields, UUIDs, packing, parameter direction, optionality, and array sizes.
 The custom annotations are fallbacks where existing syntax is absent or wrong.
 
-### Removed or deferred vocabulary
+### Vocabulary not included in the initial implementation
 
 | Semantic | Decision |
 | --- | --- |
-| `IgnoreIfReturn` | Remove. Neither CsWin32 nor windows-rs consumes it, including the `CreatePipe` sidecars. |
-| `FreeWith` | Remove. Allocated producer outputs use `RAIIFree`; cleanup is not attached to pointer typedefs. |
-| `DoNotRelease` | Remove. Plain handles are borrowed unless a producer site carries ownership metadata. |
-| custom COM out-pointer annotation | Remove. Use `_COM_Outptr_`, its standard variants, IID/PPV conventions, or explicit existing SAL. |
-| `NotNullTerminated` | Remove. Correct declarations that use a string typedef for non-string data. Use an appropriately typed pointer plus ordinary SAL count/byte-count annotations. |
-| `NativeArrayInfo` and `MemorySize` fallbacks | Remove. SAL's purpose is to express buffer counts, capacities, and byte sizes; fix SAL capture instead of defining duplicate metadata annotations. |
-| `NativeArrayInfo.CountFieldName` | Defer with the rest of field-array projection. `CERT_INFO::rgExtension` is descriptive metadata today, but neither CsWin32 nor windows-rs provides a field-array projection. |
-| `NativeInheritance` | Do not add for `MONITORINFOEXW`; the SDK already expresses the C++ base and equivalent C layout prefix, and both metadata baselines preserve it. Retain the vocabulary only if a separate, proven source gap is found. |
-| `ReducePointerLevel` for `UCharIterator::move` | Do not use. windows-rs already emits the correct callback field pointer level; only implied pointer direction needs correction. |
-| `ProjectAs` | Remove from the proposed vocabulary. No current win32metadata sidecar uses it. Preserve native typedef identity and use `AssociatedEnum` for the proven enum-specific use-site relationship. |
-| `AssociatedConstant` | Remove. CsWin32 alone consumes it by copying `SERVICE_NO_CHANGE` into an enum and suppressing the global constant; windows-rs ignores it. Put the value directly in each guarded scoped metadata enum instead. |
-| `StructSizeField` | Defer. No equivalent SAL annotation was found, but neither CsWin32 nor windows-rs currently consumes the metadata. Reintroduce only with a concrete projection behavior and tests. |
-| `NativeEncoding` | Remove. The only windows-rs use found selects ANSI dependencies for string constants; CsWin32 does not consume it. Declare guarded constants with their real `char`/`wchar_t` type. |
-| `Ansi` / `Unicode` | Remove. win32metadata infers them from A/W naming, but neither current projection consumes the attributes. |
-| `CanonicalName` | Remove from the header vocabulary. It renames callback typedefs inside the scraper and is not projection metadata. Resolve the public callback name from the native typedef-alias graph. |
-| `ReducePointerLevel` | Remove. It rewrites the emitted type to compensate for callback/pointer parsing. Correct the parser or use the correct typedef in a guarded metadata declaration. |
-| `StaticLibrary` | Do not expand without a canonical current sidecar whose functional consumer behavior is demonstrated. |
+| `IgnoreIfReturn` | Not included. Neither CsWin32 nor windows-rs consumes it, including the `CreatePipe` sidecars. |
+| `FreeWith` | Not included. Allocated producer outputs use `RAIIFree`; cleanup is not attached to pointer typedefs. |
+| `DoNotRelease` | Not included. Plain handles are borrowed unless a producer site carries ownership metadata. |
+| custom COM out-pointer annotation | Not included. Use `_COM_Outptr_`, its standard variants, IID/PPV conventions, or explicit existing SAL. |
+| `NotNullTerminated` | Not included. Declarations that use a string typedef for non-string data require an appropriately typed pointer plus ordinary SAL count/byte-count annotations. |
+| `NativeArrayInfo` and `MemorySize` fallbacks | Not included. SAL expresses buffer counts, capacities, and byte sizes; the consumer must preserve that SAL instead of introducing duplicate metadata annotations. |
+| `NativeArrayInfo.CountFieldName` | Deferred with field-array projection. `CERT_INFO::rgExtension` is descriptive metadata, but neither CsWin32 nor windows-rs provides a field-array projection. |
+| `NativeInheritance` | Not included for `MONITORINFOEXW`; the SDK expresses the C++ base and equivalent C layout prefix, and both metadata baselines preserve it. Add this vocabulary only if a separate, proven source gap requires it. |
+| `ReducePointerLevel` for `UCharIterator::move` | Not included. windows-rs emits the correct callback field pointer level; only implied pointer direction requires correction. |
+| `ProjectAs` | Not included. Preserve native typedef identity and use `AssociatedEnum` for the proven enum-specific use-site relationship. |
+| `AssociatedConstant` | Not included. Put values such as `SERVICE_NO_CHANGE` directly in each guarded scoped metadata enum. |
+| `StructSizeField` | Deferred. No equivalent SAL annotation exists, and neither CsWin32 nor windows-rs consumes the metadata. Add it only with concrete projection behavior and tests. |
+| `NativeEncoding` | Not included. Declare guarded constants with their real `char`/`wchar_t` type. |
+| `Ansi` / `Unicode` | Not included. No projection behavior in scope requires these attributes. |
+| `CanonicalName` | Not a header annotation. Resolve the public callback name from the native typedef-alias graph. |
+| `ReducePointerLevel` | Not a header annotation. Correct callback/pointer parsing or use the correct typedef in a guarded metadata declaration. |
+| `StaticLibrary` | Deferred until a canonical use and functional consumer behavior are defined. |
 
 ## Enum and constant migration
 
@@ -280,16 +285,18 @@ return or output parameter:
 ```cpp
 BOOL WINAPI OpenPrinterW(
     _In_ LPWSTR name,
-    _Out_
-    _Win32_RAIIFree_(ClosePrinter)
-    _Win32_InvalidHandle_(0)
-    _Win32_InvalidHandle_(-1)
-    HANDLE *printer);
+    _Out_ _Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)
+    HANDLE* printer);
 ```
 
 Do not create `PRINTER_HANDLE`, `HEAP_HANDLE`, or similar metadata-only pseudo types.
 Absence of `RAIIFree` means borrowed. `GetProcessHeap`, for example, requires no custom
 annotation because its returned `HANDLE` is not automatically closed.
+
+Invalid values are API-specific rather than a fixed global set. Use the SDK constant
+spelling that expresses the API contract where one exists. The existing `HANDLE` and
+`PRINTER_HANDLE` metadata uses `0` and `-1`; `INVALID_HANDLE_VALUE` is the clearer
+spelling for `-1` when the API defines that sentinel.
 
 Consumer/freeing APIs such as `LocalFree` retain their raw native signature. Do not use
 generic invalid-handle success logic for them: `LocalFree` returns `NULL` on success and
@@ -321,7 +328,7 @@ duplicating the complete scan-derived mapping.
 | array/string/size overrides | Correct the declaration type and existing SAL/MIDL contract; do not add parallel Win32 buffer annotations. |
 | COM/manual metadata | Guarded declarations and method/parameter annotations in the authoritative header. |
 | documentation mappings | Documentation tooling concern; not required for functional winmd equivalence. |
-| removed legacy APIs | Recover the exact historical declaration from an authoritative SDK and place it in a guarded metadata-only legacy header when compatibility requires it. |
+| APIs absent from the selected SDK | Omit them from that metadata release. Consumers that require them use metadata generated from an SDK that still contains them. |
 
 ### Macro-only and non-owning declarations
 
@@ -335,8 +342,7 @@ references a declaration owned elsewhere.
   an explicit annotated-macro construct consumed before Clang declaration traversal.
 - Put supported-OS and ownership annotations on the header that owns the complete
   declaration, not on aliases or references.
-- Do not synthesize values absent from the current SDK. Recover them from an
-  authoritative released SDK or baseline metadata and record that source.
+- Do not synthesize declarations or values absent from the selected SDK.
 - Pointer aliases such as `PSECURITY_DESCRIPTOR` do not own pointed-to memory. Use
   producer-specific return/parameter ownership.
 
@@ -362,11 +368,13 @@ recognized by convention. Do not introduce a custom Win32 COM-out-pointer annota
 
 - `RetVal` identifies the output parameter selected as the friendly projected return.
   Both CsWin32 and windows-rs consume it.
-- `Retained` remains metadata because CsWin32 uses it to suppress lifetime-unsafe
-  overloads. windows-rs consumer policy remains unresolved.
-- `CanReturnErrorsAsSuccess` and `CanReturnMultipleSuccessValues` collapse to
-  `_Win32_PreserveResult_`. Their documentation rationale differs, but their functional
-  projection requirement is the same: do not transform or discard the exact result.
+- `Retained` identifies a pointer that the API may use after the function returns. The
+  caller follows the API documentation to determine the end of that lifetime. CsWin32
+  uses it to suppress lifetime-unsafe overloads; windows-rs consumer policy remains
+  unresolved.
+- `_Win32_PreserveResult_` means that a projection must not transform or discard the
+  exact result. It covers APIs represented in existing metadata by
+  `CanReturnErrorsAsSuccess` or `CanReturnMultipleSuccessValues`.
   `_Success_` and `_Return_type_success_` remain useful static-analysis predicates but
   do not express this projection rule.
 - `EnumWindows` must not carry `SupportsLastError`; preserve its raw `BOOL` result
@@ -384,11 +392,9 @@ context and allocator objects are not thread-safe.
 ### Struct size fields
 
 No SAL annotation specifically identifies a field as the structure's initialization
-size. The current win32metadata pipeline infers `StructSizeField` from a `cbSize` field
-and carries exceptions for `BLOB` and `BSTRBLOB`, but neither CsWin32 nor windows-rs
-currently consumes the resulting metadata. Defer a source annotation until a projection
-defines concrete initializer behavior, including versioned structures that intentionally
-accept an older size.
+size. Neither CsWin32 nor windows-rs consumes `StructSizeField`. Defer a source
+annotation until a projection defines concrete initializer behavior, including
+versioned structures that intentionally accept an older size.
 
 ### Obsolete fields
 
@@ -400,10 +406,8 @@ pipeline to emit `ObsoleteAttribute`. `IMAGE_OPTIONAL_HEADER32::LoaderFlags` and
 
 `ENUM_SERVICE_TYPE`, `SERVICE_START_TYPE`, and `SERVICE_ERROR` are guarded synthetic
 enums because the SDK exposes `DWORD` parameters and macro constants. Add
-`SERVICE_NO_CHANGE` directly to each guarded scoped enum. CsWin32's current
-`AssociatedConstant` behavior already copies that loose constant into the projected enum
-and suppresses the global constant; windows-rs does not consume the attribute. Encoding
-the desired result directly removes the custom relationship metadata.
+`SERVICE_NO_CHANGE` directly to each guarded scoped enum so no custom constant
+relationship metadata is required.
 
 ### Documentation
 
@@ -412,9 +416,9 @@ follow-up is to revisit scraping windows-docs and the stale
 `Microsoft.Windows.SDK.Win32Docs` package process, which appears to have required a
 manual merge/cross-reference step.
 
-## Native fidelity that must supersede the NuGet baseline
+## Native fidelity requirements
 
-The unified pipeline must preserve fixes already present in direct windows-rs
+The unified pipeline must preserve native behavior represented by direct windows-rs
 generation:
 
 1. Read `__declspec(align(...))`/Clang alignment independently from packing. `CONTEXT`
@@ -428,7 +432,27 @@ generation:
 6. Apply SAL semantic defaults: an unannotated pointer is `In|Out` with one element and
    an unannotated scalar is `In`.
 
-These are expected differences from the old NuGet winmd, not acceptable fidelity gaps.
+`CONTEXT` is the canonical alignment example:
+
+```cpp
+#if defined(_M_AMD64) || defined(_M_ARM64)
+typedef struct DECLSPEC_ALIGN(16) _CONTEXT {
+    // Architecture-specific fields.
+} CONTEXT;
+#else
+#pragma pack(push, 4)
+typedef struct _CONTEXT {
+    // Architecture-specific fields.
+} CONTEXT;
+#pragma pack(pop)
+#endif
+```
+
+No custom annotation is required. The consumer preserves compiler alignment separately
+from packing and emits the architecture-specific layout.
+
+Differences from the NuGet winmd are intentional when the NuGet baseline conflicts with
+the native declaration or API contract.
 
 ## Reviewed API-specific conclusions
 
@@ -437,7 +461,6 @@ These are expected differences from the old NuGet winmd, not acceptable fidelity
 | `CoGetClassObject` | Add only the `CLSCTX` association. `CLSCTX` already exists in `shared/WTypesbase.h`; use existing COM output SAL. |
 | `AddFontResourceExW` | Use a guarded synthetic enum because the semantic enum is not already declared in the header. |
 | `ADsBuildVarArrayInt` | No redundant `_In_`/`_Inout_` header edits. Fix windows-rs handling of SAL semantic defaults. |
-| `WsRequestReply` | The earlier parameter-name mismatch was a transcription/comparison issue, not a metadata annotation requirement. |
 | `JetTerm` | Preserve `JET_API_PTR` as an architecture-neutral pointer-sized type. A typed `JET_ERR` definition is acceptable only if it remains ABI-compatible with `int`; no `ProjectAs` annotation is needed. |
 | `D2D1CreateDevice` | No declaration punctuation or return-type annotation gap was established. |
 | `K32EnumProcesses` | The windows-rs baseline may be more accurate, but duplicate flat names are confusing. Preserve as an explicit team naming-policy decision rather than forcing NuGet parity. |
@@ -495,14 +518,12 @@ requires a source syntax, consumer behavior, patch, and regression test.
 
 ## Implementation plan
 
-### Phase 1: freeze the reviewed vocabulary
+### Phase 1: implement the reviewed vocabulary
 
-1. Remove `IgnoreIfReturn`, `FreeWith`, `DoNotRelease`, `NotNullTerminated`,
-   `AssociatedConstant`, `NativeEncoding`, `Ansi`, `Unicode`, `CanonicalName`,
-   `ReducePointerLevel`, all custom array/size annotations, and the custom COM
-   out-pointer annotation from the staged header, parser, fixtures, and documentation.
-2. Mark `CountFieldName`, `StructSizeField`, and `NativeInheritance` as deferred unless
-   a concrete consumer and canonical gap are demonstrated.
+1. Limit the annotation header, parser, fixtures, and documentation to the vocabulary
+   defined by this specification.
+2. Keep `CountFieldName`, `StructSizeField`, and `NativeInheritance` out of the initial
+   vocabulary unless a concrete consumer and canonical gap are demonstrated.
 3. Use MIDL `[retval]` where authoritative and `_Win32_Retval_` only for C/C++-authored
    declarations that lack the MIDL-generated comment.
 4. Normalize function, return, parameter, and field annotations to SAL-style prefix
@@ -523,8 +544,8 @@ requires a source syntax, consumer behavior, patch, and regression test.
 
 ### Phase 3: patch canonical SDK examples
 
-1. `OpenPrinterW`: remove `PRINTER_HANDLE`; annotate raw `HANDLE*` with
-   `RAIIFree(ClosePrinter)` and invalid values `0` and `-1`.
+1. `OpenPrinterW`: use raw `HANDLE*` annotated with
+   `_Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)`.
 2. `CoGetClassObject`: associate `dwClsContext` with the existing `CLSCTX` declaration;
    use existing COM output SAL.
 3. `AddFontResourceExW`: add the reviewed guarded enum and associate the flags use.
@@ -555,7 +576,8 @@ NuGet reference and current direct windows-rs output.
 
 ### Phase 5: equivalence and rollout
 
-1. Generate x86, x64, and arm64 metadata from a clean patched SDK.
+1. Select a shipped SDK and generate x86, x64, and arm64 metadata only from that SDK's
+   declarations plus temporary patches for changes intended to ship in that SDK.
 2. Compare by logical declaration identity and attribute behavior, not byte identity.
 3. Classify every difference as:
    - required parity with win32metadata;

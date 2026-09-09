@@ -280,8 +280,13 @@
         themselves retain today&apos;s opinionated aliases? The examples call out where that choice matters.
       </div>
       <div class="note decision">
-        <b>Scope rule for this revision:</b> every API example below exists in upstream
+        <b>Example scope:</b> every API example below exists in upstream
         windows-rs&apos;s committed RDL and canonical <code>Windows.Win32.winmd</code>.
+      </div>
+      <div class="note decision">
+        <b>SDK surface policy:</b> the shipped SDK selected for generation defines the
+        metadata surface. Headers and APIs removed from that SDK are omitted; consumers
+        that require them must use metadata generated from an older SDK.
       </div>
     </section>
 
@@ -570,7 +575,7 @@ HRESULT WsRequestReply(
         <b>Parameter names:</b> there is no header-versus-IDL naming difference here. The SDK
         header, upstream RDL, Rust winmd, and win32metadata winmd all use
         <code>requestMessageDescription</code>, <code>replyMessageDescription</code>, and
-        <code>asyncContext</code>. The shortened names in the earlier deck were transcription errors.
+        <code>asyncContext</code>.
       </div>
       <details>
         <summary>Existing win32metadata sidecars and mappings</summary>
@@ -987,20 +992,10 @@ struct PRINTER_HANDLE;</pre></div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
 <pre>BOOL WINAPI OpenPrinterW(
     _In_opt_ LPWSTR pPrinterName,
-    _Out_
-    <span class="proposed">_Win32_RAIIFree_(ClosePrinter)
-        _Win32_InvalidHandle_(-1)
-        _Win32_InvalidHandle_(0)</span>
-    LPHANDLE phPrinter,
-    _In_opt_ LPPRINTER_DEFAULTSW pDefault
-);</pre></div>
-      <div class="note"><b>Expected result:</b> remove <code>PRINTER_HANDLE</code> and keep the ABI-authentic <code>HANDLE</code>. The producer output alone says that a successful value is owned, is closed by <code>ClosePrinter</code>, and must not wrap <code>0</code> or <code>-1</code>.</div>
-      <details><summary>Existing win32metadata sidecars</summary><div><pre>// autoTypes.json currently creates PRINTER_HANDLE
-// and associates ClosePrinter plus invalid values.
-
-// Proposed migration:
-// delete the pseudo type and place the same lifecycle
-// contract on OpenPrinterW::phPrinter.</pre></div></details>
+    _Out_ <span class="proposed">_Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)</span>
+        LPHANDLE phPrinter,
+    _In_opt_ LPPRINTER_DEFAULTSW pDefault);</pre></div>
+      <div class="note"><b>Expected result:</b> keep the ABI-authentic <code>HANDLE</code>. The producer output alone says that a successful value is owned, is closed by <code>ClosePrinter</code>, and must not wrap <code>0</code> or <code>INVALID_HANDLE_VALUE</code>. The consumer emits one <code>RAIIFree</code> attribute and one <code>InvalidHandleValue</code> attribute for each invalid-value argument.</div>
     </section>
 
     <section id="errors-as-success">
@@ -1118,7 +1113,7 @@ uint HttpReceiveHttpRequest(
     <span class="proposed">_Win32_Retained_</span>
     IN LPOVERLAPPED Overlapped OPTIONAL
 );</pre></div>
-      <div class="note"><b>Impact:</b> CsWin32 uses <code>Retained</code> to avoid generating a lifetime-unsafe friendly overload. windows-rs does not currently consume it, so Rust behavior still needs a policy decision.</div>
+      <div class="note"><b>Impact:</b> <code>Retained</code> means that the API may continue using the attributed pointer after the function returns. The caller must follow the API documentation to determine when the referenced storage may be released. Without the annotation, the pointer does not need to remain valid after the call. CsWin32 uses this metadata to avoid generating a lifetime-unsafe friendly overload; windows-rs consumer behavior still needs a policy decision.</div>
     </section>
 
     <section id="ignore-if-return">
@@ -1784,9 +1779,9 @@ struct CM_NOTIFY_FILTER {
     </section>
 
     <section id="rust-fixed-issues">
-      <div class="eyebrow">Recent issue review &middot; Direct SDK generation</div>
-      <h2>Rust has already closed several win32metadata gaps</h2>
-      <p class="lede">Recent issue comments from Kenny Kerr and Rafael Rivera point to cases where the in-house windows-rs metadata now follows the SDK more faithfully than the published win32metadata package.</p>
+      <div class="eyebrow">Native fidelity &middot; Direct SDK generation</div>
+      <h2>Native SDK fidelity takes precedence over NuGet parity</h2>
+      <p class="lede">Direct compiler parsing preserves several native contracts more accurately than the published win32metadata package.</p>
       <table>
         <thead><tr><th>Issue</th><th>Gap</th><th>Why it matters here</th></tr></thead>
         <tbody>
@@ -1796,7 +1791,7 @@ struct CM_NOTIFY_FILTER {
           <tr><td><a href="https://github.com/microsoft/win32metadata/issues/1557">#1557</a></td><td><code>LocalFree</code> return handling</td><td>Generic handle-success heuristics cannot replace the API's actual contract.</td></tr>
         </tbody>
       </table>
-      <div class="note"><b>Review goal:</b> preserve these wins when converging on one SDK-to-winmd pipeline. They are examples where matching the old NuGet metadata exactly would be a regression.</div>
+      <div class="note"><b>Review goal:</b> preserve these behaviors in the unified SDK-to-winmd pipeline. Matching the NuGet metadata in these cases would be a regression.</div>
     </section>
 
     <section id="rust-fixed-context-alignment">
@@ -1844,7 +1839,7 @@ struct CONTEXT {
 
 // Emit architecture-specific alignment into
 // RDL/winmd and #[repr(C, align(16))] in Rust.</pre></div>
-      <div class="note"><b>Gap:</b> alignment and packing are separate layout properties. The old pipeline lost the explicit alignment, while windows-rs now validates the generated size and alignment on x64 and x86. The unified generator should adopt this behavior rather than reproduce the NuGet gap.</div>
+      <div class="note"><b>Gap:</b> alignment and packing are separate layout properties. The unified generator must preserve Clang&apos;s explicit alignment and validate generated size and alignment on x64 and x86 rather than reproduce the NuGet gap.</div>
     </section>
 
     <section id="rust-fixed-reparse-tags">
@@ -1918,8 +1913,8 @@ BOOL EnumWindows(
     [In] WNDENUMPROC lpEnumFunc,
     [In] LPARAM lParam);
 
-// The older Rust projection converted BOOL through
-// .ok(), producing Result&lt;()&gt;.</pre></div>
+// Keep BOOL as the projected return type; do not
+// convert it through .ok() to Result&lt;()&gt;.</pre></div>
       </div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed unified behavior</h3>
 <pre>// No header annotation.
@@ -1928,7 +1923,7 @@ BOOL EnumWindows(
 // EnumWindows. Preserve the raw BOOL so callers can
 // distinguish callback termination using their own
 // callback state and, when applicable, GetLastError.</pre></div>
-      <div class="note"><b>Gap:</b> a blanket <code>SupportsLastError</code> flag caused an invalid friendly transformation. windows-rs now omits that metadata and returns <code>BOOL</code> directly. Our staged header must not reintroduce the old sidecar behavior.</div>
+      <div class="note"><b>Gap:</b> <code>SupportsLastError</code> would produce an invalid friendly transformation. Preserve the native <code>BOOL</code> result and callback-state contract.</div>
     </section>
 
     <section id="rust-fixed-localfree">
@@ -1975,7 +1970,7 @@ pub unsafe fn LocalFree(
 // returns/out parameters, not on this consumer API.
 
 // Do not apply generic invalid-handle success logic.</pre></div>
-      <div class="note"><b>Gap:</b> the old projection inferred success from generic handle invalid values, which is exactly backwards for <code>LocalFree</code>. The direct windows-rs path preserves the native result. This also supports the new producer-site-only <code>RAIIFree</code> policy.</div>
+      <div class="note"><b>Gap:</b> generic invalid-handle success logic is backwards for <code>LocalFree</code>. Preserve the native result and keep <code>RAIIFree</code> metadata on producer sites.</div>
     </section>
 
     <section id="unused-vocabulary">
@@ -1984,16 +1979,16 @@ pub unsafe fn LocalFree(
       <table>
         <thead><tr><th>Provisional macro</th><th>Current finding</th><th>Recommendation</th></tr></thead>
         <tbody>
-          <tr><td><code>DoNotRelease</code></td><td>The old sidecars compensate for pseudo-handle types that implied ownership.</td><td>Remove. Plain <code>HANDLE</code> is borrowed unless the producer explicitly carries <code>RAIIFree</code>.</td></tr>
-          <tr><td><code>StaticLibrary</code></td><td>No current sidecar migration example was found.</td><td>Defer until a real SDK declaration requires it.</td></tr>
-          <tr><td><code>NativeArrayInfo</code>, <code>MemorySize</code></td><td>SAL already describes element counts, capacities, and byte sizes.</td><td>Remove custom fallbacks and fix complete SAL consumption.</td></tr>
-          <tr><td><code>NotNullTerminated</code></td><td>It compensates for declarations that use string typedefs for binary or counted data.</td><td>Remove; correct the pointer type and use ordinary SAL.</td></tr>
-          <tr><td><code>NativeEncoding</code></td><td>windows-rs only uses it when choosing ANSI dependencies for string constants; CsWin32 does not consume it.</td><td>Remove; declare guarded constants with their real <code>char</code>/<code>wchar_t</code> type.</td></tr>
-          <tr><td><code>Ansi</code>, <code>Unicode</code></td><td>win32metadata infers these from A/W naming, but neither current projection consumes them.</td><td>Remove.</td></tr>
-          <tr><td><code>CanonicalName</code>, <code>ReducePointerLevel</code></td><td>These alter scraper naming or pointer depth rather than expressing API semantics.</td><td>Remove; fix typedef-alias and callback pointer handling in the generator.</td></tr>
+          <tr><td><code>DoNotRelease</code></td><td>Plain handles are borrowed unless a producer site carries ownership metadata.</td><td>Not included.</td></tr>
+          <tr><td><code>StaticLibrary</code></td><td>No canonical SDK declaration and consumer behavior are defined.</td><td>Deferred.</td></tr>
+          <tr><td><code>NativeArrayInfo</code>, <code>MemorySize</code></td><td>SAL describes element counts, capacities, and byte sizes.</td><td>Not included; consume the complete SAL contract.</td></tr>
+          <tr><td><code>NotNullTerminated</code></td><td>Binary and counted data require the correct pointer type and ordinary SAL.</td><td>Not included.</td></tr>
+          <tr><td><code>NativeEncoding</code></td><td>Guarded constants can use their real <code>char</code>/<code>wchar_t</code> type.</td><td>Not included.</td></tr>
+          <tr><td><code>Ansi</code>, <code>Unicode</code></td><td>No projection behavior in scope requires these attributes.</td><td>Not included.</td></tr>
+          <tr><td><code>CanonicalName</code>, <code>ReducePointerLevel</code></td><td>These alter scraper naming or pointer depth rather than expressing API semantics.</td><td>Not header annotations; fix typedef-alias and callback pointer handling in the generator.</td></tr>
         </tbody>
       </table>
-      <div class="note"><b>Policy:</b> the annotation header should represent proven metadata gaps, not every attribute the old emitter happened to define. <code>FreeWith</code> and <code>DoNotRelease</code> have been removed under this rule; allocated producer outputs use <code>RAIIFree</code>.</div>
+      <div class="note"><b>Policy:</b> the annotation header represents proven metadata gaps. Allocated producer outputs use <code>RAIIFree</code>; plain handles remain borrowed.</div>
     </section>
 
     <section id="fidelity">
@@ -2006,8 +2001,8 @@ pub unsafe fn LocalFree(
         <tbody>
           <tr><td>Current-token helpers</td><td><code>GetCurrentProcessToken</code> and related APIs are inline constant-return helpers, not DLL exports.</td><td>Add guarded metadata-only declarations/constants; do not invent a normal P/Invoke.</td></tr>
           <tr><td>Structure-valued constants</td><td>SID authority values and static initializers currently live in <code>manual/*.cs</code>.</td><td>Emit guarded typed <code>const</code>/<code>constexpr</code> declarations or add a pre-AST constant representation.</td></tr>
-          <tr><td>Hidden and ordinal exports</td><td><code>RtlGenRandom</code>, <code>SystemPrng</code>, and ordinal <code>FileIconInit</code> are manually declared.</td><td>Recover authoritative export declarations and entry-point metadata in a guarded compatibility header.</td></tr>
-          <tr><td>Legacy APIs</td><td>Some baseline declarations no longer exist in current SDK headers.</td><td>Maintain exact guarded compatibility declarations sourced from an authoritative SDK/reference.</td></tr>
+          <tr><td>Hidden and ordinal exports</td><td><code>RtlGenRandom</code>, <code>SystemPrng</code>, and ordinal <code>FileIconInit</code> are manually declared.</td><td>Represent them only when the selected SDK provides an authoritative declaration or SDK-owned source construct.</td></tr>
+          <tr><td>APIs absent from the selected SDK</td><td>Some reference declarations are not present in newer SDKs.</td><td>Omit them from that metadata release. Consumers that require them use metadata generated from an older SDK.</td></tr>
           <tr><td>Architecture merge</td><td><code>JET_API_PTR</code> and similar conditional typedefs need one pointer-sized logical type.</td><td>Teach multi-arch merge to normalize equivalent x86/x64 definitions.</td></tr>
           <tr><td>Type imports</td><td>Eleven WinRT interfaces are supplied through <code>emitter.settings.rsp --typeImport</code>.</td><td>Resolve them from the WinRT winmd/reference graph rather than SDK declaration annotations.</td></tr>
           <tr><td>Remaps and exclusions</td><td>Hundreds of scraper remaps, forced types, exclusions, constant types, and member remaps remain.</td><td>Classify each as a source defect, generator normalization rule, intentional exclusion, or guarded declaration.</td></tr>
@@ -2018,8 +2013,9 @@ pub unsafe fn LocalFree(
       </table>
       <div class="note">
         <b>Gap shown:</b> the annotation vocabulary can represent declaration semantics, but it
-        cannot by itself create missing APIs, evaluate every macro, merge architecture-specific
-        declarations, import external WinRT types, or decide intentional exclusions.
+        cannot create APIs absent from the selected SDK, evaluate every macro, merge
+        architecture-specific declarations, import external WinRT types, or decide
+        intentional exclusions.
       </div>
     </section>
 
@@ -2040,7 +2036,7 @@ pub unsafe fn LocalFree(
           <tr><td>7</td><td>NdrClientCall2</td><td>Apply SAL semantic implied pointer defaults; preserve the already-working official variadic API.</td><td>windows-rs generator</td></tr>
           <tr><td>8</td><td>K32EnumProcesses</td><td>Discuss duplicate flat metadata names and projection disambiguation; no header change proposed.</td><td>team projection policy</td></tr>
           <tr><td>9</td><td>Remaining sidecar families</td><td>Migrate ownership, result, buffer/string, type-projection, callback, and declaration-level semantics in reviewed batches.</td><td>SDK headers + windows-rs tests</td></tr>
-          <tr><td>10</td><td>Non-annotation fidelity</td><td>Replace manual declarations/constants and classify architecture merge, type imports, remaps, exclusions, and legacy APIs.</td><td>windows-rs generator + compatibility headers</td></tr>
+          <tr><td>10</td><td>Non-annotation fidelity</td><td>Replace eligible manual declarations/constants and classify architecture merge, type imports, remaps, exclusions, and APIs absent from the selected SDK.</td><td>windows-rs generator + SDK source policy</td></tr>
         </tbody>
       </table>
       <div class="note">
