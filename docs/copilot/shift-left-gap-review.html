@@ -992,10 +992,10 @@ struct PRINTER_HANDLE;</pre></div>
       <div class="card proposal" style="margin-top:18px"><h3>Proposed header change</h3>
 <pre>BOOL WINAPI OpenPrinterW(
     _In_opt_ LPWSTR pPrinterName,
-    _Out_ <span class="proposed">_Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)</span>
+    _Out_ <span class="proposed">_Win32_RAIIFree_(ClosePrinter, 0, -1)</span>
         LPHANDLE phPrinter,
     _In_opt_ LPPRINTER_DEFAULTSW pDefault);</pre></div>
-      <div class="note"><b>Expected result:</b> keep the ABI-authentic <code>HANDLE</code>. The producer output alone says that a successful value is owned, is closed by <code>ClosePrinter</code>, and must not wrap <code>0</code> or <code>INVALID_HANDLE_VALUE</code>. The consumer emits one <code>RAIIFree</code> attribute and one <code>InvalidHandleValue</code> attribute for each invalid-value argument.</div>
+      <div class="note"><b>Expected result:</b> keep the ABI-authentic <code>HANDLE</code>. The producer output alone says that a successful value is owned, is closed by <code>ClosePrinter</code>, and must not wrap <code>0</code> or <code>-1</code>. The consumer emits one <code>RAIIFree</code> attribute and one <code>InvalidHandleValue</code> attribute for each invalid-value argument. Numeric literals are required because annotation stringification does not evaluate nested macros such as <code>INVALID_HANDLE_VALUE</code>.</div>
     </section>
 
     <section id="errors-as-success">

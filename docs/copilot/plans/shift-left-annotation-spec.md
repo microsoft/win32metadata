@@ -66,12 +66,14 @@ identify invalid values:
 
 ```cpp
 _Win32_RAIIFree_(SysFreeString)
-_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
+_Win32_RAIIFree_(CloseHandle, 0, -1)
 ```
 
-The consumer parses the comma-separated payload, evaluates each invalid-value
-expression, and emits one `RAIIFreeAttribute` plus one
-`InvalidHandleValueAttribute` for each supplied value.
+The consumer parses the comma-separated payload and emits one `RAIIFreeAttribute` plus
+one `InvalidHandleValueAttribute` for each supplied value. Invalid values use signed
+decimal or hexadecimal integer literals. Do not pass a macro such as
+`INVALID_HANDLE_VALUE`: stringification preserves the macro name rather than its
+evaluated value.
 
 windows-rs enables `WIN32METADATA` while scraping annotated headers. Unknown,
 malformed, valued-versus-valueless, and incorrectly placed annotations are errors with
@@ -111,7 +113,7 @@ and preserves the complete calling-convention declarator while matching normal S
 reading order.
 
 ```cpp
-_Win32_RAIIFree_(CloseHandle, 0, INVALID_HANDLE_VALUE)
+_Win32_RAIIFree_(CloseHandle, 0, -1)
 HANDLE WINAPI OpenThing(void);
 ```
 
@@ -124,7 +126,7 @@ invalid-value metadata together in `_Win32_RAIIFree_`.
 
 ```cpp
 BOOL WINAPI CreateThing(
-    _Out_ _Win32_RAIIFree_(CloseThing, 0, INVALID_HANDLE_VALUE)
+    _Out_ _Win32_RAIIFree_(CloseThing, 0, -1)
     HANDLE* result);
 ```
 
@@ -174,7 +176,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. |
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `Agile` | `_Win32_Agile_` | Class/struct/interface declaration. |
-| `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional invalid values. Any integral constant expression accepted by Clang is valid; use named SDK constants such as `INVALID_HANDLE_VALUE` when they express the contract. The consumer emits one `RAIIFree` attribute and one `InvalidHandleValue` attribute for each supplied invalid value. |
+| `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional signed decimal or hexadecimal integer literals. The consumer emits one `RAIIFree` attribute and one `InvalidHandleValue` attribute for each supplied invalid value. Macro names are not accepted because the annotation string preserves tokens rather than evaluated macro values. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
 | `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Without this annotation, the pointer does not need to remain valid after the call returns. |
 | array count/capacity/byte size | Existing SAL and native array declarations | Use `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, their byte-count variants, and related standard forms. Do not define parallel Win32 annotations. |
@@ -285,7 +287,7 @@ return or output parameter:
 ```cpp
 BOOL WINAPI OpenPrinterW(
     _In_ LPWSTR name,
-    _Out_ _Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)
+    _Out_ _Win32_RAIIFree_(ClosePrinter, 0, -1)
     HANDLE* printer);
 ```
 
@@ -293,10 +295,10 @@ Do not create `PRINTER_HANDLE`, `HEAP_HANDLE`, or similar metadata-only pseudo t
 Absence of `RAIIFree` means borrowed. `GetProcessHeap`, for example, requires no custom
 annotation because its returned `HANDLE` is not automatically closed.
 
-Invalid values are API-specific rather than a fixed global set. Use the SDK constant
-spelling that expresses the API contract where one exists. The existing `HANDLE` and
-`PRINTER_HANDLE` metadata uses `0` and `-1`; `INVALID_HANDLE_VALUE` is the clearer
-spelling for `-1` when the API defines that sentinel.
+Invalid values are API-specific rather than a fixed global set. The existing `HANDLE`
+and `PRINTER_HANDLE` metadata uses `0` and `-1`. The annotation uses those numeric
+values directly because preprocessor stringification does not evaluate
+`INVALID_HANDLE_VALUE` or other nested macros.
 
 Consumer/freeing APIs such as `LocalFree` retain their raw native signature. Do not use
 generic invalid-handle success logic for them: `LocalFree` returns `NULL` on success and
@@ -545,7 +547,7 @@ requires a source syntax, consumer behavior, patch, and regression test.
 ### Phase 3: patch canonical SDK examples
 
 1. `OpenPrinterW`: use raw `HANDLE*` annotated with
-   `_Win32_RAIIFree_(ClosePrinter, 0, INVALID_HANDLE_VALUE)`.
+   `_Win32_RAIIFree_(ClosePrinter, 0, -1)`.
 2. `CoGetClassObject`: associate `dwClsContext` with the existing `CLSCTX` declaration;
    use existing COM output SAL.
 3. `AddFontResourceExW`: add the reviewed guarded enum and associate the flags use.
