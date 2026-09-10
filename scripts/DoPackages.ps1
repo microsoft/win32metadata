@@ -1,6 +1,7 @@
 param
 (
-    [switch]$skipInstallTools
+    [switch]$skipInstallTools,
+    [switch]$skipNativeToolsBuild
 )
 
 . $PSScriptRoot\CommonUtils.ps1
@@ -12,14 +13,11 @@ if (!$skipInstallTools)
 
 Write-Host "*** Packing packages..." -ForegroundColor Blue
 
-dotnet pack "$PSScriptRoot\..\sources\packages.proj" -c Release
+$packArgs = @("pack", "$PSScriptRoot\..\sources\packages.proj", "-c", "Release")
+if ($skipNativeToolsBuild) {
+    $packArgs += "-p:SkipNativeToolsBuild=true"
+}
+dotnet @packArgs
 ThrowOnNativeProcessError
 
 Install-BuildTools
-
-& "$PSScriptRoot\UpdateSampleDependencies.ps1"
-
-dotnet clean "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
-
-dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release "-bl:$PSScriptRoot\..\bin\logs\samples_diasdk_pack.binlog"
-ThrowOnNativeProcessError

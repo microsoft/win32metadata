@@ -3,10 +3,10 @@
     Generates a WinMD directly from selected SDK-header partitions with windows-rs.
 
 .PARAMETER Partition
-    Partition names under generation\WinSDK\Partitions. Defaults to Foundation.
+    Partition names under generation\WinSDK\Partitions. Defaults to every partition.
 
 .PARAMETER Architecture
-    Target architectures to scrape and merge. Defaults to x64.
+    Target architectures to scrape and merge. Defaults to x64, x86, and arm64.
 
 .PARAMETER OutputWinmd
     Output WinMD path.
@@ -16,12 +16,12 @@
 #>
 [CmdletBinding()]
 param (
-    [string[]]$Partition = @("Foundation"),
+    [string[]]$Partition = @(),
 
     [ValidateSet("x64", "arm64", "x86")]
-    [string[]]$Architecture = @("x64"),
+    [string[]]$Architecture = @("x64", "x86", "arm64"),
 
-    [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.windows-rs.winmd",
+    [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
 
     [switch]$SkipBuild
 )
@@ -55,6 +55,17 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 }
 
 $sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
+
+if ($Partition.Count -eq 0)
+{
+    $Partition = Get-ChildItem (Join-Path $windowsWin32ProjectRoot "Partitions") -Directory |
+        Where-Object { Test-Path (Join-Path $_.FullName "main.cpp") } |
+        Sort-Object Name |
+        Select-Object -ExpandProperty Name
+}
+
+Write-Host "Generating $($Partition.Count) partition(s) for $($Architecture -join ', ')"
+
 $arguments = @(
     "scrape",
     "--include", $localIncludes,

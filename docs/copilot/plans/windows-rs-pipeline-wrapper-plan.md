@@ -90,17 +90,15 @@ depend on that owner rather than duplicating the patch.
 
 ## Current work
 
-PR 1 is active. The pinned `windows-rdl` wrapper successfully round-tripped the
-released `Windows.Win32.winmd`, and the rebuilt WinMD passes the existing
-duplicate-type, duplicate-import, duplicate-constant, empty-delegate,
-pointer-to-delegate, architecture, and namespace-cycle checks. The active work
-is the direct partition-to-WinMD command.
+PR 1 now packages the pinned Rust executable and `libclang.dll` in
+`Microsoft.Windows.WinmdGenerator`. Its MSBuild SDK is a thin argument wrapper,
+and a local-package integration test parses a custom header, generates a WinMD,
+verifies its assembly identity, and compares a deterministic API dump.
 
-The direct command now produces x64, x86, and arm64 WinMD output from a selected
-partition set. Two upstream/tooling follow-ups were exposed:
+The legacy C# scraper, constants scraper, emitter, MetadataTasks orchestration,
+manual C# metadata, and API-specific RSP/JSON inputs have been removed.
 
-- `HtmlHelp` reaches `_com_ptr_t<FontEvents>` through `infotech.h` and MSVC
-  `comdef.h`; windows-clang 0.100.0 currently treats that helper type as
-  unhandled.
-- Architecture merge currently duplicates architecture-dependent constants in
-  the flat `Windows.Win32.Apis` container.
+The direct command produces x64, x86, and arm64 WinMD output from selected
+partitions. Full-queue convergence is continuing; architecture merge currently
+duplicates architecture-dependent constants in the flat `Windows.Win32.Apis`
+container.

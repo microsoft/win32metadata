@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.Windows.WinmdGenerator">
+  <PropertyGroup>
+    <OutputWinmd>$(MSBuildProjectDirectory)\bin\SampleWinmd.winmd</OutputWinmd>
+    <WinmdRootNamespace>Sample.Api</WinmdRootNamespace>
+    <WinmdAssemblyName>Sample.Metadata</WinmdAssemblyName>
+    <WinmdVersion>1.2.3.4</WinmdVersion>
+    <TargetArchitectures>x64</TargetArchitectures>
+    <UseWinSDKAssets>false</UseWinSDKAssets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Partition Include="main.cpp"/>
+    <WinmdIncludeDir Include="$(MSBuildProjectDirectory)"/>
+    <WinmdScope Include="sample"/>
+    <WinmdScopeHeader Include="SampleApi"/>
+  </ItemGroup>
+</Project>

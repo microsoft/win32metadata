@@ -2,9 +2,8 @@
 //!
 //! This is the minimal alternate pipeline. Its inputs are the existing partition translation
 //! units, the SDK header roots, optionally the SDK import-library root, and the target
-//! architectures. Everything else - the flat `Windows.Win32` root namespace, the clang
-//! language settings, the reachability scope, and the intermediate RDL - is fixed and lands
-//! under the object directory. There are no RSP or JSON sidecars.
+//! architectures. The root namespace, reachability scope, assembly identity, clang language
+//! settings, and intermediate RDL have simple defaults and require no RSP or JSON sidecars.
 
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
@@ -17,23 +16,24 @@ use crate::args::{Args, required, set_once};
 use crate::catch::catch;
 use crate::libclang;
 
-/// Flat root namespace every partition emits into; the defining header chooses the `.rdl`.
-const ROOT: &str = "Windows.Win32";
+const DEFAULT_NAMESPACE: &str = "Windows.Win32";
 
 /// Parse the SDK headers as C++ so `extern "C"`, `__declspec`, and SAL are understood.
 /// `-ferror-limit=0` keeps clang from dropping later declarations after a tolerated error.
-const CLANG_ARGS: [&str; 6] = [
+const CLANG_ARGS: [&str; 8] = [
     "-x",
     "c++",
     "-std=c++17",
+    "-fms-compatibility",
     "-ferror-limit=0",
     "-Wno-pragma-once-outside-header",
     "-DWIN32METADATA=1",
+    "-D_COM_NO_STANDARD_GUIDS_=1",
 ];
 
 /// Header directory segments whose declarations are emitted unconditionally. Anything else
 /// a partition pulls in is emitted only when a declaration in scope references it.
-const SCOPE: [&str; 2] = ["shared", "um"];
+const DEFAULT_SCOPES: [&str; 2] = ["shared", "um"];
 
 /// SDK include-root layout. A `--include` directory containing any of these is expanded
 /// into them, so the SDK root can be named once.
@@ -46,6 +46,11 @@ pub struct Options {
     includes: Vec<PathBuf>,
     libs: Vec<PathBuf>,
     archs: Vec<String>,
+    scopes: Vec<String>,
+    scope_headers: Vec<String>,
+    namespace: Option<String>,
+    assembly_name: Option<String>,
+    assembly_version: Option<[u16; 4]>,
     output: Option<PathBuf>,
     obj: Option<PathBuf>,
 }
@@ -73,6 +78,17 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--include" => options.includes.push(args.path(&option)?),
             "--lib" => options.libs.push(args.path(&option)?),
             "--arch" => options.archs.push(args.value(&option)?),
+            "--scope" => options.scopes.push(args.value(&option)?),
+            "--scope-header" => options.scope_headers.push(args.value(&option)?),
+            "--namespace" => set_once(&mut options.namespace, args.value(&option)?, &option)?,
+            "--assembly-name" => {
+                set_once(&mut options.assembly_name, args.value(&option)?, &option)?
+            }
+            "--assembly-version" => set_once(
+                &mut options.assembly_version,
+                parse_version(&args.value(&option)?)?,
+                &option,
+            )?,
             "--output" => set_once(&mut options.output, args.path(&option)?, &option)?,
             "--obj" => set_once(&mut options.obj, args.path(&option)?, &option)?,
             _ => {
@@ -82,6 +98,20 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
                 ));
             }
         }
+    }
+
+    fn parse_version(value: &str) -> Result<[u16; 4], String> {
+        let parts = value
+            .split('.')
+            .map(|part| {
+                part.parse::<u16>()
+                    .map_err(|_| format!("invalid `--assembly-version {value}`; expected A.B.C.D"))
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+
+        parts
+            .try_into()
+            .map_err(|_| format!("invalid `--assembly-version {value}`; expected A.B.C.D"))
     }
 
     validate(&options)?;
@@ -116,6 +146,31 @@ fn archs(options: &Options) -> Vec<String> {
     } else {
         options.archs.clone()
     }
+}
+
+fn scopes(options: &Options) -> Vec<&str> {
+    if options.scopes.is_empty() {
+        DEFAULT_SCOPES.to_vec()
+    } else {
+        options.scopes.iter().map(String::as_str).collect()
+    }
+}
+
+fn namespace(options: &Options) -> &str {
+    options.namespace.as_deref().unwrap_or(DEFAULT_NAMESPACE)
+}
+
+fn assembly_name(options: &Options) -> Result<&str, String> {
+    if let Some(name) = &options.assembly_name {
+        return Ok(name);
+    }
+
+    options
+        .output
+        .as_ref()
+        .and_then(|path| path.file_stem())
+        .and_then(|name| name.to_str())
+        .ok_or_else(|| "could not derive the assembly name from `--output`".to_string())
 }
 
 /// Object directory for the intermediate RDL and per-architecture WinMDs.
@@ -266,8 +321,11 @@ fn build_clang(options: &Options) -> Result<Clang, String> {
         builder.drop_lib_less();
     }
 
-    builder.scopes(SCOPE);
-    builder.namespace(ROOT);
+    builder.scopes(scopes(options));
+    for header in &options.scope_headers {
+        builder.scope_header(header);
+    }
+    builder.namespace(namespace(options));
     Ok(builder)
 }
 
@@ -328,6 +386,7 @@ fn execute(options: &Options) -> Result<(), String> {
                 .filter(|_| arch.bits != canonical.bits),
             &arch_rdl_dir,
             &arch_winmd,
+            options,
         )?;
 
         merged.push(ArchInput {
@@ -342,7 +401,7 @@ fn execute(options: &Options) -> Result<(), String> {
         // symbols that exist on only some architectures are tagged, then rebuild.
         merge_arch_rdl(&merged, None, &rdl_dir)
             .map_err(|error| format!("failed to merge architectures: {error}"))?;
-        compile(&rdl_dir, output)?;
+        compile(&rdl_dir, output, options)?;
     } else {
         copy(&merged[0].winmd, output)?;
     }
@@ -365,6 +424,7 @@ fn scrape_arch(
     resource_dir: Option<&str>,
     rdl_dir: &Path,
     winmd: &Path,
+    options: &Options,
 ) -> Result<(), String> {
     clear_rdl_dir(rdl_dir)?;
 
@@ -377,23 +437,29 @@ fn scrape_arch(
     catch("the header scrape panicked", || builder.write_by_header())?
         .map_err(|error| format!("failed to generate RDL in `{}`: {error}", rdl_dir.display()))?;
 
-    compile(rdl_dir, winmd)
+    compile(rdl_dir, winmd, options)
 }
 
 /// Compiles a directory of RDL partitions into a WinMD.
 ///
 /// The bundled Windows metadata supplies what headers cannot: the `Windows.Win32.Metadata`
 /// pseudo-attribute vocabulary and the system types the emitted RDL refers to.
-fn compile(rdl_dir: &Path, winmd: &Path) -> Result<(), String> {
+fn compile(rdl_dir: &Path, winmd: &Path, options: &Options) -> Result<(), String> {
     if let Some(parent) = winmd.parent() {
         std::fs::create_dir_all(parent)
             .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
     }
 
-    reader()
+    let mut compiler = reader();
+    compiler
         .input(rdl_dir)
         .reference_default()
-        .output(winmd)
+        .assembly_name(assembly_name(options)?)
+        .output(winmd);
+    if let Some(version) = options.assembly_version {
+        compiler.assembly_version(version);
+    }
+    compiler
         .write()
         .map_err(|error| format!("failed to compile `{}`: {error}", winmd.display()))
 }
@@ -458,6 +524,11 @@ pub fn help_text() -> &'static str {
     --include <dir>... \\
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
+    [--scope <path-segment>]... \\
+    [--scope-header <header>]... \\
+    [--namespace <root>] \\
+    [--assembly-name <name>] \\
+    [--assembly-version <A.B.C.D>] \\
     --output <output.winmd> \\
     [--obj <dir>]
 
@@ -468,12 +539,20 @@ pub fn help_text() -> &'static str {
                 Repeatable. Without it, functions carry no import library.
   --arch        Architecture to scrape. Repeatable. Defaults to x64. The first is
                 canonical; the rest are merged into it.
+  --scope       Header path segment whose declarations are emitted unconditionally.
+                Repeatable. Defaults to shared and um.
+  --scope-header
+                Header stem whose declarations are emitted unconditionally. Repeatable.
+  --namespace   Root namespace for emitted declarations. Defaults to Windows.Win32.
+  --assembly-name
+                Output assembly name. Defaults to the --output file stem.
+  --assembly-version
+                Four-part numeric output assembly version. Defaults to 255.255.255.255.
   --output      WinMD to write.
   --obj         Intermediate directory for the generated RDL and per-architecture
                 WinMDs. Defaults to the directory of --output.
 
-All declarations are emitted into the flat `Windows.Win32` namespace, partitioned by
-defining header. There are no RSP or JSON inputs."
+Declarations are partitioned by defining header. There are no RSP or JSON inputs."
 }
 
 #[cfg(test)]
@@ -508,6 +587,9 @@ mod tests {
         assert_eq!(options.includes.len(), 1);
         assert!(options.libs.is_empty());
         assert_eq!(archs(&options), vec!["x64".to_string()]);
+        assert_eq!(scopes(&options), vec!["shared", "um"]);
+        assert_eq!(namespace(&options), "Windows.Win32");
+        assert_eq!(assembly_name(&options).unwrap(), "Windows.Win32");
     }
 
     #[test]
@@ -563,10 +645,40 @@ mod tests {
     }
 
     #[test]
+    fn output_identity_and_scope_parse() {
+        let options = parse_with(&[
+            "--scope",
+            "sample",
+            "--scope-header",
+            "SampleApi",
+            "--namespace",
+            "Contoso.Api",
+            "--assembly-name",
+            "Contoso.Metadata",
+            "--assembly-version",
+            "1.2.3.4",
+        ])
+        .unwrap();
+        assert_eq!(scopes(&options), vec!["sample"]);
+        assert_eq!(options.scope_headers, vec!["SampleApi"]);
+        assert_eq!(namespace(&options), "Contoso.Api");
+        assert_eq!(assembly_name(&options).unwrap(), "Contoso.Metadata");
+        assert_eq!(options.assembly_version, Some([1, 2, 3, 4]));
+    }
+
+    #[test]
+    fn invalid_assembly_versions_are_rejected() {
+        for value in ["1.2.3", "1.2.3.4.5", "1.2.x.4", "65536.2.3.4"] {
+            let error = parse_with(&["--assembly-version", value]).unwrap_err();
+            assert!(error.contains("expected A.B.C.D"), "{error}");
+        }
+    }
+
+    #[test]
     fn unknown_options_report_usage() {
-        let error = parse_with(&["--namespace", "Windows.Win32"]).unwrap_err();
+        let error = parse_with(&["--unknown"]).unwrap_err();
         assert!(
-            error.contains("unknown scrape option `--namespace`"),
+            error.contains("unknown scrape option `--unknown`"),
             "{error}"
         );
     }

@@ -1,304 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <UsingTask TaskName="MetadataTasks.ScanLibs" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.ScrapeConstants" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.FilterResponseFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.GetPartitionFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.MergeFilesIntoFile" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.PrepSettingsForFunctionPointerFixups" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  <UsingTask TaskName="MetadataTasks.PrepSettingsForAutoTypes" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-
-  <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
-    <ParameterGroup>
-      <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
-      <Namespace ParameterType="System.String" Output="true" Required="false" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System.Linq"/>
-      <Code Type="Fragment" Language="cs">Namespace = Items.First().GetMetadata("Namespace");</Code>
-    </Task>
-  </UsingTask>
-
-  <PropertyGroup>
-    <EnumsJson>$(MSBuildProjectDirectory)\enums.json</EnumsJson>
-    <GeneratedDir>$(ObjDir)\generated</GeneratedDir>
-    <ScratchOutputDir>$(ObjDir)\scratch</ScratchOutputDir>
-
-    <Win32MetadataScraperAssetsDir>$(Win32MetadataAssetsDir)\scraper</Win32MetadataScraperAssetsDir>
-
-    <ScraperFunctionPointerFixupsRsp>$(GeneratedDir)\scraper.functionPointerFixups.generated.rsp</ScraperFunctionPointerFixupsRsp>
-    <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
-    <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.$(ScanArch).generated.rsp</EmitterAutoFnPtrRsp>
-    <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
-    <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
-    <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
-    <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
-
-    <BaseConstantsScraperHeaderFile>$(Win32MetadataScraperAssetsDir)\ConstantsScraper.header.txt</BaseConstantsScraperHeaderFile>
-    <BaseScraperHeaderFile>$(Win32MetadataScraperAssetsDir)\scraper.header.txt</BaseScraperHeaderFile>
-
-    <WinSDKConstantsScraperHeaderFile>$(WinSDKAssets)\ConstantsScraper.header.txt</WinSDKConstantsScraperHeaderFile>
-    <WinSDKScraperHeaderFile>$(WinSDKAssets)\scraper.header.txt</WinSDKScraperHeaderFile>
-
-    <WithLibsRsp>$(GeneratedDir)\withLibs.generated.rsp</WithLibsRsp>
-
-    <FilteredRspForHeaders>$(GeneratedDir)\filtered.headers.generated.rsp</FilteredRspForHeaders>
-    <FilteredRspForConstants>$(GeneratedDir)\filtered.constants.generated.rsp</FilteredRspForConstants>
-    <FilteredRspForEmitter>$(GeneratedDir)\filtered.emitter.generated.rsp</FilteredRspForEmitter>
-
-    <ScrapedConstantsMarker>$(GeneratedDir)\constants.scraped.txt</ScrapedConstantsMarker>
-    <ScrapedHeadersMarker>$(GeneratedDir)\scannedheaders.$(ScanArch).txt</ScrapedHeadersMarker>
-
-  </PropertyGroup>
-
   <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
-    <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
-    <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
-    <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
+    <WinmdIncludeDir Include="$(WinSDKAssets)\inc"/>
+    <WinmdIncludeDir Include="$(SdkIncRoot)" Condition="Exists('$(SdkIncRoot)')"/>
+  </ItemGroup>
+  <ItemGroup>
+    <WinmdIncludeDir Include="$(AdditionalIncludes)" Condition="'$(AdditionalIncludes)' != ''"/>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(UseWinSDKAssets)' == 'true'">
-    <AdditionalIncludes>$(WinSDKAssets)\inc;$(AdditionalIncludes)</AdditionalIncludes>
-  </PropertyGroup>
+  <Target Name="BuildWin32MetadataTools"
+          BeforeTargets="EmitWinmd"
+          Condition="'$(Win32MetadataToolsManifest)' != ''">
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(RepoRootPath)scripts\Build-Win32MetadataTools.ps1&quot; -OutputDir &quot;$(Win32MetadataToolsDir)&quot;"/>
+  </Target>
 
-  <Target Name="PrepScraperHeader"
-    Inputs="$(BaseScraperHeaderFile);$(ScraperHeader)"
-    Outputs="$(FinalScraperHeaderFile)">
+  <Target Name="EmitWinmd" BeforeTargets="Build" DependsOnTargets="BuildWin32MetadataTools">
+    <Error Condition="'@(Partition)' == ''" Text="At least one Partition item is required."/>
+    <Error Condition="'@(WinmdIncludeDir)' == ''" Text="At least one WinmdIncludeDir item is required."/>
+    <Error Condition="!Exists('$(Win32MetadataToolsExe)')" Text="WinmdGenerator tool not found at '$(Win32MetadataToolsExe)'."/>
+    <Error Condition="!Exists('$(LibClangPath)\libclang.dll')" Text="libclang.dll not found in '$(LibClangPath)'."/>
 
     <ItemGroup>
-      <InputScraperFiles Include="$(BaseScraperHeaderFile)"/>
-      <InputScraperFiles Include="$(ScraperHeader)"/>
-      <InputScraperFiles Condition="'$(UseWinSDKAssets)' == 'true'" Include="$(WinSDKScraperHeaderFile)"/>
+      <_WinmdArch Include="$(TargetArchitectures)"/>
     </ItemGroup>
-
-    <MergeFilesIntoFile
-      InputFiles="@(InputScraperFiles)"
-      OutputFile="$(FinalScraperHeaderFile)"/>
-
-  </Target>
-
-  <Target Name="PrepConstantsScraperHeader"
-    Inputs="$(BaseConstantsScraperHeaderFile);$(ConstantsScraperHeader)"
-    Outputs="$(FinalConstantsScraperHeaderFile)">
-
-    <ItemGroup>
-      <InputScraperFiles Include="$(BaseConstantsScraperHeaderFile)"/>
-      <InputScraperFiles Include="$(ConstantsScraperHeader)"/>
-      <InputScraperFiles Condition="'$(UseWinSDKAssets)' == 'true'" Include="$(WinSDKConstantsScraperHeaderFile)"/>
-    </ItemGroup>
-
-    <MergeFilesIntoFile
-      InputFiles="@(InputScraperFiles)"
-      OutputFile="$(FinalConstantsScraperHeaderFile)"/>
-
-  </Target>
-
-  <Target Name="PrepSettingsForFunctionPointerFixups" BeforeTargets="Build"
-    Inputs="@(FunctionPointerFixup)"
-    Outputs="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)">
-
-    <PrepSettingsForFunctionPointerFixups
-      FunctionPointerFixups="@(FunctionPointerFixup)"
-      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
-      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"/>
-
-  </Target>
-
-  <Target Name="PrepSettingsForAutoTypes" BeforeTargets="Build"
-    Inputs="@(AutoType);@(AutoTypesForSettingsOnly)"
-    Outputs="$(ScraperAutoTypesRsp)">
-
-    <PrepSettingsForAutoTypes
-      AutoTypes="@(AutoType);@(AutoTypesForSettingsOnly)"
-      ScraperAutoTypesRsp="$(ScraperAutoTypesRsp)"/>
-
-  </Target>
-
-  <Target Name="CompileIdls" BeforeTargets="Build"
-    Inputs="@(Idls)"
-    Outputs="@(Idls -> '$(CompiledHeadersDir)\%(Filename).h')">
-
-    <Message Text="Compiling idl files..." Importance="high"/>
-
-    <CompileIdls
-      Idls="@(Idls)"
-      ObjDir="$(ObjDir)"
-      CompiledHeadersDir="$(CompiledHeadersDir)"
-      ScriptsDir="$(ScriptsDir)"
-      SdkIncRoot="$(SdkIncRoot)"
-      SdkBinDir="$(WindowsSDKVersionedBinRoot)"
-      AdditionalIncludes="$(AdditionalIncludes)"
-      MidlSwitches="$(MidlSwitches)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
-  </Target>
-
-  <Target Name="PrepareWithLibsRsp" BeforeTargets="Build"
-    Inputs="@(ImportLibs)"
-    Outputs="$(WithLibsRsp)">
-
-    <Message Text="Scanning libs..." Importance="high"/>
-
-    <ScanLibs
-      Libs="@(ImportLibs)"
-      LibToolsBinDir="$(LibToolsBinDir)"
-      WithLibsRsp="$(WithLibsRsp)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
-    </ScanLibs>
-
-  </Target>
-
-  <Target Name="FilterRsps"
-    Inputs="@(ResponseFile)"
-    Outputs="$(FilteredRspForHeaders);$(FilteredRspForConstants)">
-
-    <FilterResponseFiles
-      ResponseFiles="@(ResponseFile)"
-      OutputFileName="$(FilteredRspForHeaders)"
-      ValidSwitches="--exclude;--remap;--with-attribute;--with-type;--with-librarypath"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
-
-    <FilterResponseFiles
-      ResponseFiles="@(ResponseFile)"
-      OutputFileName="$(FilteredRspForConstants)"
-      ValidSwitches="--exclude;--requiredNamespaceForName;--with-attribute;--memberRemap;--with-type"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
-
-    <FilterResponseFiles
-      ResponseFiles="@(ResponseFile)"
-      OutputFileName="$(FilteredRspForEmitter)"
-      ValidSwitches="--memberRemap;--enumMakeFlags;--reducePointerLevel;--requiredNamespaceForName;--autoTypes;--staticLibs;--enumAddition"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
-
-  </Target>
-
-  <ItemGroup>
-    <Clean Include="obj\**"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- Generated settings must come before project/manual RSPs so manual overrides win. -->
-    <FinalScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
-    <FinalScraperRsp Include="$(ScraperAutoTypesRsp)"/>
-    <FinalScraperRsp Condition="Exists('$(ScraperAutoRemapsRsp)')" Include="$(ScraperAutoRemapsRsp)"/>
-    <FinalScraperRsp Include="@(ScraperRsp)"/>
-    <FinalScraperRsp Include="$(FilteredRspForHeaders)"/>
-    <FinalScraperRsp Include="$(WithLibsRsp)"/>
-    <FinalScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.rsp"/>
-    <FinalScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.*.rsp"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <AllTraverseFiles Include="%(Partition.TraverseFiles)"/>
-  </ItemGroup>
-
-  <Target Name="ScrapeHeaders" BeforeTargets="Build"
-    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
-
-    <ScrapeHeaders
-      Condition="'$(SkipScraping)' != 'true'"
-      Partitions="@(Partition)"
-      ResponseFiles="@(FinalScraperRsp)"
-      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
-      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"
-      HeaderTextFile="$(FinalScraperHeaderFile)"
-      SdkIncRoot="$(SdkIncRoot)"
-      WinSdkRoot="$(TargetPlatformSdkRootOverride)"
-      ToolsBinDir="$(ToolsBinDir)"
-      ScriptsDir="$(ScriptsDir)"
-      AdditionalIncludes="$(AdditionalIncludes)"
-      GeneratedDir="$(GeneratedDir)"
-      ScratchDir="$(ScratchOutputDir)"
-      MaxProcessors="$(MaxProcessors)"
-      ScanArch="$(ScanArch)"
-      MarkerFileName="$(ScrapedHeadersMarker)"
-      Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
-      ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
-      PartitionFilter="$(PartitionFilter)"
-      NuGetPackageSource="$(NuGetPackageSource)"/>
-
-  </Target>
-
-  <Target Name="CopyManualFilesToScraped" BeforeTargets="Build"
-    Inputs="@(ManualCs)"
-    Outputs="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')">
-    <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')" />
-  </Target>
-
-  <ItemGroup>
-    <AllTraverseFiles Include="%(Partition.TraverseFiles)"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ConstantsScraperRsp Include="$(FilteredRspForConstants)"/>
-    <ConstantsScraperRsp Include="$(Win32MetadataScraperAssetsDir)\baseSettings.ConstantsScraper.rsp"/>
-  </ItemGroup>
-
-  <Target Name="ScrapeConstants" BeforeTargets="Build"
-    DependsOnTargets="PrepConstantsScraperHeader;ScrapeHeaders;CopyManualFilesToScraped">
-
     <PropertyGroup>
-      <DefaultNamespace>DefaultNamespace</DefaultNamespace>
+      <_WinmdArgs>scrape</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(Partition->'--partition &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(WinmdIncludeDir->'--include &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(ImportLibs->'--lib &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(_WinmdArch->'--arch %(Identity)', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(WinmdScope->'--scope &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(WinmdScopeHeader->'--scope-header &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) --namespace &quot;$(WinmdRootNamespace)&quot;</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) --assembly-name &quot;$(WinmdAssemblyName)&quot;</_WinmdArgs>
+      <_WinmdArgs Condition="'$(WinmdVersion)' != ''">$(_WinmdArgs) --assembly-version &quot;$(WinmdVersion)&quot;</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) --obj &quot;$(WinmdObjDir)&quot; --output &quot;$(OutputWinmd)&quot;</_WinmdArgs>
     </PropertyGroup>
 
-    <ScrapeConstants
-      Condition="'$(SkipScraping)' != 'true'"
-      DefaultNamespace="$(DefaultNamespace)"
-      ScraperOutputDir="$(GeneratedDir)"
-      ResponseFiles="@(ConstantsScraperRsp)"
-      Partitions="@(Partition)"
-      ManualCs="@(ManualCs)"
-      EnumsJson="$(EnumsJson)"
-      ToolsBinDir="$(ToolsBinDir)"
-      HeaderTextFile="$(FinalConstantsScraperHeaderFile)"
-      MarkerFileName="$(ScrapedConstantsMarker)"
-      SdkIncRoot="$(SdkIncRoot)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
-      StandardErrorImportance="high"
-      />
-
-  </Target>
-
-  <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
-    Outputs="$(OutputWinmd)"
-    DependsOnTargets="ScrapeConstants">
-
-    <ItemGroup>
-      <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
-      <!-- When scraping ran in this build, include only the current arch's auto-rsp -->
-      <EmitterRsp Condition="'$(SkipScraping)' != 'true' and Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
-      <!-- When assets were scraped in separate CI jobs, include all arch-specific auto-rsps -->
-      <EmitterRsp Condition="'$(SkipScraping)' == 'true'" Include="$(GeneratedDir)\emitter.autoFnPtr.*.generated.rsp"/>
-      <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
-      <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
-    </ItemGroup>
-
-    <Message Text="Writing winmd..." Importance="high"/>
-
-    <EmitWinmd
-      Libs="@(ImportLibs)"
-      AutoTypes="@(AutoType)"
-      EmitterSourceDir="$(GeneratedDir)"
-      ToolsBinDir="$(ToolsBinDir)"
-      ResponseFiles="@(EmitterRsp)"
-      Win32WinmdBinDir="$(Win32WinmdBinDir)"
-      WinmdVersion="$(WinmdVersion)"
-      OutputWinmd="$(OutputWinmd)"
-      ShowOutputDetails="$(ShowEmitWinmdOutputDetails)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
-    </EmitWinmd>
-
+    <Message Text="Generating $(OutputWinmd) with windows-clang/windows-rdl/windows-metadata" Importance="high"/>
+    <Exec Command="&quot;$(Win32MetadataToolsExe)&quot; $(_WinmdArgs)"
+          EnvironmentVariables="LIBCLANG_PATH=$(LibClangPath)"
+          StandardOutputImportance="high"/>
   </Target>
 
   <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.targets"/>
 
   <Target Name="BeforeClean">
-    <RemoveDir Directories="obj" />
+    <RemoveDir Directories="$(ObjDir)"/>
     <Delete Files="$(OutputWinmd)"/>
   </Target>
-
 </Project>

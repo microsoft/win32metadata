@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
     - main
+    - feature/shift-left-annotations
   paths:
     exclude:
       - apidocs
@@ -12,6 +13,7 @@ pr:
   branches:
     include:
     - main
+    - feature/shift-left-annotations
   paths:
     exclude:
       - apidocs
@@ -21,105 +23,11 @@ variables:
   BuildConfiguration: Release
 
 jobs:
-- job: scrape_x64
-  displayName: "Scrape headers: x64"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
-
-  steps:
-  - checkout: self
-    lfs: true
-
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
-
-  - task: PowerShell@2
-    displayName: Set build version
-    inputs:
-      targetType: inline
-      script: |
-        .\scripts\Install-DotNetTool.ps1 -Name nbgv
-        nbgv cloud
-
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - x64
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64'
-      errorActionPreference: 'continue'
-      pwsh: true
-
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish x64 generated assets
-    artifact: 'generated_x64'
-
-- job: scrape_x86
-  displayName: "Scrape headers: x86"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
-  steps:
-  - checkout: self
-    lfs: true
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
-
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - x86
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86 -scrapeConstants'
-      errorActionPreference: 'continue'
-      pwsh: true
-
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish x86 generated assets
-    artifact: 'generated_x86'
-
-- job: scrape_arm64
-  displayName: "Scrape headers: arm64"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
-  steps:
-  - checkout: self
-    lfs: true
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
-
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - arm64
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch arm64'
-      errorActionPreference: 'continue'
-      pwsh: true
-
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish arm64 generated assets
-    artifact: 'generated_arm64'
-
 - job: build_winmd
   displayName: Build, test, sign, package winmd
+  timeoutInMinutes: 180
   workspace:
     clean: all
-  dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
   variables:
     OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
   pool:
@@ -150,29 +58,17 @@ jobs:
   - script: dotnet --info
     displayName: Display .NET SDK/runtime info
 
-  - task: DownloadPipelineArtifact@2
-    displayName: Download x64 generated assets
+  - task: PowerShell@2
+    displayName: Install pinned Rust toolchain
     inputs:
-      artifact: 'generated_x64'
-      path: 'generation\WinSDK\obj'
-
-  - task: DownloadPipelineArtifact@2
-    displayName: Download x86 generated assets
-    inputs:
-      artifact: 'generated_x86'
-      path: 'generation\WinSDK\obj'
-
-  - task: DownloadPipelineArtifact@2
-    displayName: Download arm64 generated assets
-    inputs:
-      artifact: 'generated_arm64'
-      path: 'generation\WinSDK\obj'
+      targetType: inline
+      script: rustup show
+      pwsh: true
 
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assetsScrapedSeparately'
       pwsh: true
 
   - task: EsrpCodeSigning@1
@@ -219,11 +115,11 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: Authenticode sign net10.0 binaries in Generator SDK package
+    displayName: Authenticode sign WinmdGenerator native tool
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net10.0'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
+      FolderPath: '$(Build.SourcesDirectory)\bin\GeneratorSdk\tools\win-x64'
+      Pattern: 'win32metadata-tools.exe'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [
@@ -265,7 +161,7 @@ jobs:
     displayName: Do packages
     inputs:
       filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1
-      arguments: -SkipInstallTools
+      arguments: '-SkipInstallTools -SkipNativeToolsBuild'
       pwsh: true
 
   - task: PowerShell@2
