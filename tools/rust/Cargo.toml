@@ -9,4 +9,6 @@ name = "win32metadata-tools"
 path = "src/main.rs"
 
 [dependencies]
+windows-clang = "=0.100.0"
+windows-metadata = "=0.100.0"
 windows-rdl = "=0.100.0"

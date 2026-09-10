@@ -4,43 +4,40 @@
 
 Make `win32metadata` and the reusable `Microsoft.Windows.WinmdGenerator` SDK thin
 orchestration layers over the public `windows-clang`, `windows-rdl`, and
-`windows-metadata` Rust libraries. Preserve the existing Win32 metadata contract,
-partition namespaces, diagnostics, and downstream MSBuild entry points while
-removing duplicate scraper and emitter implementations.
+`windows-metadata` Rust libraries.
 
 The annotation specification is being reviewed separately and is a prerequisite
 for enabling annotated SDK header patches in the shipping pipeline.
 
 ## Acceptance principles
 
-- Preserve the existing public WinMD API surface and partition namespace layout
-  unless a reviewed delta is explicitly accepted.
-- Keep the MSBuild targets and properties used by `win32metadata`,
-  `wdkmetadata`, and external WinmdGenerator consumers.
+- Prefer a small, working pipeline over compatibility with legacy configuration.
+- Accept that the first generated WinMD will differ. Measure and refine it after
+  the complete path works.
 - Invoke Rust through versioned command-line tools. Do not create a C ABI or
   duplicate the Rust APIs in C#.
 - Keep generated RDL under `obj` initially. Committing RDL can be evaluated
   separately after pipeline equivalence is established.
 - Pin windows-rs crate versions and provision dependencies through approved
   repository feeds and build images.
-- Introduce the new path behind explicit properties until aggregate WinMD
-  validation is complete.
+- Treat SDK headers, import libraries, and the shift-left annotation vocabulary
+  as the metadata source. Do not carry forward API-specific RSP or JSON sidecars.
 
 ## Proposed architecture
 
-The existing MSBuild SDK remains the public wrapper:
+The first implementation is one Rust command:
 
-1. `ScrapeHeaders` invokes a small Rust executable backed by `windows-clang`.
-2. Header output is RDL, partitioned by defining SDK header.
-3. `ScrapeConstants` remains unchanged until windows-clang macro parity is
-   measured.
-4. `EmitWinmd` invokes a small Rust executable backed by `windows-rdl` and
-   `windows-metadata`.
-5. Cross-architecture merge and namespace routing use
-   `windows-metadata` rather than the current Roslyn syntax-tree merger.
+```text
+partition main.cpp files + SDK include root + SDK import libraries
+    -> windows-clang
+    -> generated RDL under obj
+    -> windows-rdl/windows-metadata
+    -> output WinMD
+```
 
-The first implementation uses one Rust package with focused commands so Cargo
-dependency compilation and packaging are shared.
+Its required inputs are intentionally limited to the selected partitions, SDK
+locations, target architectures, and output path. Existing scraper/emitter RSP
+files and JSON metadata databases are not inputs.
 
 ## PR stack
 
@@ -49,49 +46,19 @@ dependency compilation and packaging are shared.
 Already in review. Land the stable annotation vocabulary before enabling patched
 headers in the shipping generator.
 
-### PR 1A: RDL fidelity harness
+### PR 1: Minimal windows-rs generator
 
-- Add a pinned Rust wrapper package.
-- Add a non-shipping WinMD -> RDL -> WinMD round-trip command.
-- Measure unsupported or normalized metadata forms with existing integrity tests
-  and API-diff tooling.
-- Produce the namespace/type routing data needed by later stages.
+- Add a pinned Rust executable using `windows-clang`, `windows-rdl`, and
+  `windows-metadata`.
+- Accept one or more existing partition `main.cpp` files.
+- Locate declarations through the supplied SDK include root and recover imports
+  from the supplied SDK library root.
+- Generate RDL as an untracked intermediate and emit a WinMD.
+- Add one inner-loop script that restores/builds prerequisites and produces the
+  WinMD from a selected partition set.
 
-This PR changes no shipping output.
-
-### PR 1B: Import-library wrapper
-
-- Replace the duplicate COFF import-library reader with `windows-rdl::implib`.
-- Compare generated function-to-library mappings with the existing output.
-- Keep the current MSBuild task contract.
-
-### PR 1C: Emitter and architecture merge
-
-- Compile generated RDL with `windows-rdl`.
-- Merge x86, x64, and arm64 metadata with `windows-metadata`.
-- Reproduce current namespace routing and assembly identity.
-- Enable with an opt-in MSBuild property and retain the legacy emitter.
-
-### PR 1D: Header scraper pilot
-
-- Add `windows-clang` and approved libclang provisioning.
-- Scrape one representative partition through the Rust wrapper.
-- Map existing partition include/traversal configuration to public
-  windows-clang filters and scopes.
-- Upstream missing general-purpose capabilities to windows-rs rather than
-  reimplementing its parser.
-
-### PR 1E: Scraper rollout
-
-- Expand the Rust scraper across all partitions and architectures.
-- Remove the legacy ClangSharp and Roslyn implementation after equivalence.
-- Preserve targeted partition builds and MSBuild-formatted diagnostics.
-
-### PR 1F: Constants and remaining utilities
-
-- Evaluate windows-clang macro output against `ConstantsScraper`.
-- Replace only after parity is demonstrated.
-- Move remaining metadata inspection to `windows-metadata::reader` where useful.
+The PR is complete when the inner loop produces a WinMD from representative
+partitions. API equivalence is explicitly deferred.
 
 ### PR 2.x: SDK header patches by partition
 
@@ -115,23 +82,25 @@ depend on that owner rather than duplicating the patch.
 
 ## Known gaps to resolve
 
-- Existing `--remap`, `--with-type`, and traversal behavior do not have direct
-  public windows-clang equivalents.
-- Current partition namespaces must be reconstructed using namespace routing.
-- RDL has documented normalization and lossless-round-trip limits, especially
-  unspecified parameter direction and attributes on void return rows.
 - windows-clang's libclang version and dependency provisioning must comply with
   repository build policy.
-- Downstream WinmdGenerator consumers require compatibility validation, not only
-  successful Win32 generation.
+- Some declarations currently depend on information not yet present in headers.
+  Those become annotation or windows-rs tooling follow-ups rather than inputs to
+  this first wrapper.
 
 ## Current work
 
-PR 1A is the active slice. Its round-trip result will determine the concrete
-compatibility backlog before the shipping emitter or scraper is changed.
+PR 1 is active. The pinned `windows-rdl` wrapper successfully round-tripped the
+released `Windows.Win32.winmd`, and the rebuilt WinMD passes the existing
+duplicate-type, duplicate-import, duplicate-constant, empty-delegate,
+pointer-to-delegate, architecture, and namespace-cycle checks. The active work
+is the direct partition-to-WinMD command.
 
-The initial wrapper compiles successfully with Rust 1.96. Local execution is
-currently blocked by Windows Defender classifying the newly built unsigned Rust
-executable as potentially unwanted software. The same command must be exercised
-on an approved CI image or after the binary is approved; this does not affect
-the existing shipping pipeline.
+The direct command now produces x64, x86, and arm64 WinMD output from a selected
+partition set. Two upstream/tooling follow-ups were exposed:
+
+- `HtmlHelp` reaches `_com_ptr_t<FontEvents>` through `infotech.h` and MSVC
+  `comdef.h`; windows-clang 0.100.0 currently treats that helper type as
+  unhandled.
+- Architecture merge currently duplicates architecture-dependent constants in
+  the flat `Windows.Win32.Apis` container.

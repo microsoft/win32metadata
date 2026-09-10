@@ -15,6 +15,9 @@
 
 .PARAMETER ReferenceWinmd
     Additional WinMD references needed to resolve external types or attributes.
+
+.PARAMETER NoDefaultReferences
+    Do not use the standard Windows metadata bundled with windows-rdl.
 #>
 [CmdletBinding()]
 param (
@@ -23,7 +26,9 @@ param (
 
     [string]$OutputDirectory = "$PSScriptRoot\..\obj\windows-rdl-roundtrip",
 
-    [string[]]$ReferenceWinmd = @()
+    [string[]]$ReferenceWinmd = @(),
+
+    [switch]$NoDefaultReferences
 )
 
 $ErrorActionPreference = "Stop"
@@ -47,6 +52,11 @@ $arguments = @(
     "--rdl-output", $rdlPath,
     "--winmd-output", $winmdPath
 )
+
+if (!$NoDefaultReferences.IsPresent)
+{
+    $arguments += "--reference-default"
+}
 
 foreach ($reference in $ReferenceWinmd)
 {
