@@ -88,7 +88,7 @@ dependencies = [
 [[package]]
 name = "windows-clang"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 dependencies = [
  "clang-sys",
  "proc-macro2",
@@ -103,7 +103,7 @@ dependencies = [
 [[package]]
 name = "windows-default"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 
 [[package]]
 name = "windows-link"
@@ -114,17 +114,17 @@ checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
 [[package]]
 name = "windows-link"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 
 [[package]]
 name = "windows-metadata"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 
 [[package]]
 name = "windows-rdl"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -136,7 +136,7 @@ dependencies = [
 [[package]]
 name = "windows-threading"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=071c7e737#071c7e7377e7805f233d9f311ad2824e54248647"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f4f7a0ee9#f4f7a0ee97eb8c3b5223cbd5a4942585ad6e53f8"
 dependencies = [
  "windows-link 0.100.0",
 ]
