@@ -295,6 +295,7 @@ fn path_arg(path: &Path, option: &str) -> Result<String, String> {
 fn build_clang(options: &Options) -> Result<Clang, String> {
     let mut builder = clang();
     builder.args(CLANG_ARGS);
+    builder.resolution_default();
 
     for dir in include_dirs(options)? {
         builder.args(["-isystem", &path_arg(&dir, "--include")?]);
