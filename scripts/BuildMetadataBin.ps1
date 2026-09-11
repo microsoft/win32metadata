@@ -1,16 +1,17 @@
 param
 (
     [switch]
-    $assetsScrapedSeparately,
-
-    [switch]
     $skipInstallTools,
 
     [switch]
     $Clean,
 
     [switch]
-    $Debug
+    $Debug,
+
+    [ValidateSet("crossarch", "x64", "x86", "arm64")]
+    [string]
+    $arch = "crossarch"
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -27,19 +28,10 @@ if (!$skipInstallTools.IsPresent)
 
 $assemblyVersion = nbgv get-version -v AssemblyVersion
 
-$arch = "crossarch"
-
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 
 Write-Host "`n"
 Write-Host "*** Creating $outputWinmdFileName..." -ForegroundColor Blue
-
-$skipScraping = "false"
-
-if ($assetsScrapedSeparately)
-{
-    $skipScraping = "true"
-}
 
 if ($Debug)
 {
@@ -57,5 +49,6 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 $logFile = "$PSScriptRoot\..\bin\logs\BuildMetadataBin_$timestamp.binlog"
-& dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping "-bl:$logFile" --no-restore
+$targetArchitectures = if ($arch -eq "crossarch") { "x64;x86;arm64" } else { $arch }
+& dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:TargetArchitectures=$targetArchitectures "-bl:$logFile" --no-restore
 ThrowOnNativeProcessError

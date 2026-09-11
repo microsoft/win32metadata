@@ -1,0 +1,14 @@
+[package]
+name = "win32metadata-tools"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "win32metadata-tools"
+path = "src/main.rs"
+
+[dependencies]
+windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "3f06caf8b" }
+windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "3f06caf8b" }
+windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "3f06caf8b" }

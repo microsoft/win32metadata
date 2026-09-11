@@ -1,68 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-
-  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.props" />
-
-  <!-- These are for debugging purposes only. A normal project wouldn't set these -->
-  <PropertyGroup>
-    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net10.0</ToolsBinDir>
-    <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
-    <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
-    <Win32MetadataAssetsDir>$(RepoRootPath)sources\GeneratorSdk\tools\assets</Win32MetadataAssetsDir>
-    <Win32WinmdBinDir>$(RepoRootPath)bin</Win32WinmdBinDir>
-    <TaskBinDir>$(LocalTaskBinDir)</TaskBinDir>
-    <NuGetPackageSource>https://pkgs.dev.azure.com/shine-oss/Win32Metadata/_packaging/Win32Metadata-Dependencies/nuget/v3/index.json</NuGetPackageSource>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ResponseFile Remove="*.rsp"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ScraperRsp Include="scraper.settings.rsp"/>
-    <ScraperRsp Include="libMappings.rsp"/>
-    <ScraperRsp Include="libMappingsManual.rsp"/>
-    <ScraperRsp Include="supportedOS.rsp"/>
-    <ScraperRsp Include="WithSetLastError.rsp"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ConstantsScraperRsp Include="ConstantsScraper.settings.rsp"/>
-    <ConstantsScraperRsp Include="requiredNamespacesForNames.rsp"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmitterRsp Include="emitter.settings.rsp"/>
-    <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
-    <EmitterRsp Include="documentationMappings.rsp"/>
-  </ItemGroup>
+  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.props"/>
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <OutputWinmd Condition="'$(OutputWinmd)' == ''">..\..\bin\Windows.Win32.winmd</OutputWinmd>
+    <Win32MetadataToolsDir>$(RepoRootPath)bin\GeneratorSdk\tools\win-x64</Win32MetadataToolsDir>
+    <Win32MetadataToolsExe>$(Win32MetadataToolsDir)\win32metadata-tools.exe</Win32MetadataToolsExe>
+    <LibClangPath>$(Win32MetadataToolsDir)</LibClangPath>
+    <Win32MetadataToolsManifest>$(RepoRootPath)tools\rust\Cargo.toml</Win32MetadataToolsManifest>
+    <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(RepoRootPath)bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
-    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
-    <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
-
-    <!-- To regenerate this list; remove the property and the build will indicate what names can safely go here as a build optimization -->
-    <ExcludeFromCrossarch>ActiveDirectory;AllJoyn;Antimalware;ApplicationVerifier;Audio.Apo;Audio.DirectMusic;Audio.DirectSound;Audio.Endpoints;Authorization;Authorization.UI;Base;Bits;Bluetooth;Buses;CEIP;Certificates;Cloudapi;ClrHosting;ClrProfiling;CmpApi;Com;Com.CallObj;Com.ChannelCreds;Com.Events;Com.StructuredStorage;Com.Urlmon;Communication;ComOle;CompositionSwapchain;Console;Cos;Credentials;DataXchg;Debug.ActiveScript;Debug.Extensions;Debug.WebApp;Dedup;DeliveryOptimization;DeviceAccess;DeviceQuery;Devices.Properties;Devices.1394;Devices.Beep;Devices.Cdrom;Devices.Changer;Devices.Dvd;DevLic;Dhcp;Direct2D;Direct2D.Common;Direct3D;Direct3D10;Direct3D11;Direct3D11on12;Direct3D12;Direct3D9on12;Direct3DDxc;Direct3DFxc;DirectComp;DirectDraw;DirectManipulation;DirectML;DirectWrite;Dlna;DTC;Dwm;DXCore;Dxgi;Dxgi.Common;Eap;EapHost;Edp;Enstor;Environment;Etw;Fax;FileHistory;Foundation;Fs;Fsrm;FunctionDiscovery;GameInput;GameMode;GamingDvcInfo;Gdi;Gdiplus;Gpmc;HostComputeNetwork;HostComputeSystem;HtmlHelp;HttpServer;Hypervisor;Identity;IdentityProvider;Ifsk;Iis;ImagingDevice;IMapi;IndexSrv;Input_Ink;Input_IntContext;Input.Ime;InputRadial;InternetConnectionWizard;InternetExplorer;Intl;IO;Isolation;JobObjects;Kernel;KeyboardAndMouseInput;Ldap;LibraryLoader;Lwef;MachineLearning;MadCap;MagApi;Mapi;Mbn;MdmReg;Media;Media.DShow;Media.DShow.Xml;Media.DxMediaObjects;Memory;MessageQueuing;Mi;MixedReality;MixedRealityInterop;Mmc;Monitor;MsChap;MsCs;MsHtml;MsTv;MsXml;Multimedia;Ndf;Ndis;NetMgmt;NetShell;NetworkAccessProtection;Nfc;Nfp;Nla;Nps;NWifi;Of;Opc;OpenGL;P2p;Parcon;PicAcq;Pipes;Pla;Policy;Power;PrintTicket;Proc_Snap;ProjFs;Properties;PsApi1;PsApi2;PWM;Qos;Rdc;Rdp;RealTimeCommunications;Registry;RemoteAssist;Rm;Rpc;RstMgr;SecBitomet;Security;Security.AppLocker;Security.ConfigurationSnapin;Security.Cryptography;Security.Cryptography.Catalog;Security.Cryptography.Sip;Security.Cryptography.UI;Security.DiagnosticDataQuery;Security.DirectoryServices;Security.LicenseProtection;Security.Tpm;Security.WinTrust;Security.WinWlx;SecurityCenter;Sens;SerPorts;Services;Setup;Shell.Common;Shutdown;SideShow;Smi;Speech;Sr;Storage.Nvme;SwDevice;SystemInformation;Tablet;Tapi3;TaskSchd;Tbs;Tcui;TermServ;Threading;Time;ToolHelp;TraceLogging;TransactionServer;Tsf;Ual;UiAnimation;UpdateAssessment;Upnp;Variant;Vhd;VirtualDiskService;VSS;Wab;Wcm;Wcn;Wcs;Wds;WebDav;WebServicesOnDevices;WebSock;Wec;Wer;Wes;Wia;Wibe;Wic;Win32_Tile_Badge_Notif;WinAuto;WinContacts;WindowsConnectionManager;WindowsFilteringPlatform;WindowsFirewall;WindowsRibbon;WindowsSetupAndMigration;WinInet;WinLocation;WinRm;WinRT;WinRT.AllJoyn;WinRT.Composition;WinRT.CoreInputView;WinRT.Direct2D;WinRT.Direct3D11;WinRT.Display;WinRT.Graphics.Capture;WinRT.Graphics.Imaging;WinRT.Holographic;WinRT.Isolation;WinRT.Media;WinRT.ML;WinRT.Pdf;WinRT.Printing;WinRT.Storage;WinRT.Xaml;WinSat;WinSensors;WinSync;WinTouch;Wmdm;WmFormat;Wmi;Wmlss;Wmp;Wnet;wnv;WpdSdk;Wsb;Wsl;Wsw;Wua;Xaml_Diagnostics;Xaudio2;Xblidp;Xinput;XmlLite;Xps;XpsPrinting</ExcludeFromCrossarch>
-
-    <!-- Set to false because the WinSDK assets are already in this project -->
     <UseWinSDKAssets>false</UseWinSDKAssets>
   </PropertyGroup>
 
   <ItemGroup>
-    <ManualCs Include="manual\*.cs"/>
-    <PartitionFiles Include="partitions\**\main.cpp"/>
-    <Partition Include="@(PartitionFiles)">
-      <Name>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName($([System.String]::Copy('%(Directory)'))))))</Name>
-    </Partition>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.26100.7705" GeneratePathProperty="true"/>
+    <Partition Include="Partitions\**\main.cpp"/>
+    <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
   </ItemGroup>
 
-  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
+  <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>
 </Project>

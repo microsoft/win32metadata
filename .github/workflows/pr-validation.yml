@@ -4,19 +4,19 @@
 # GitHub Actions workflow so PR checks work without Azure DevOps integration.
 #
 # Pipeline structure:
-#   1. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
-#   2. One build job assembles the winmd, packages, samples, and runs tests
+#   One job builds the Rust-backed WinmdGenerator SDK, emits the multi-architecture
+#   winmd, consumes the local package in an integration sample, and runs tests.
 
 name: PR Validation
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feature/shift-left-annotations]
     paths-ignore:
       - 'apidocs/**'
       - 'docs/**'
   push:
-    branches: [main]
+    branches: [main, feature/shift-left-annotations]
     paths-ignore:
       - 'apidocs/**'
       - 'docs/**'
@@ -34,75 +34,10 @@ env:
   BUILD_CONFIGURATION: Release
 
 jobs:
-  # ──────────────────────────────────────────────────────────────────────
-  # Stage 1: Parallel header scraping (one job per architecture)
-  # ──────────────────────────────────────────────────────────────────────
-
-  scrape:
-    name: 'Scrape headers: ${{ matrix.arch }}'
-    runs-on: windows-2022
-    timeout-minutes: 60
-
-    strategy:
-      fail-fast: false
-      matrix:
-        arch: [x64, x86, arm64]
-        include:
-          - arch: x64
-            extra_args: ''
-            set_version: true
-          - arch: x86
-            extra_args: '-scrapeConstants'
-            set_version: false
-          - arch: arm64
-            extra_args: ''
-            set_version: false
-
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
-          lfs: true
-          fetch-depth: 0
-
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
-        with:
-          global-json-file: global.json
-
-      - name: Install nbgv and set version
-        if: matrix.set_version
-        shell: pwsh
-        run: |
-          .\scripts\Install-DotNetTool.ps1 -Name nbgv -NuGetConfigFile "${{ github.workspace }}\nuget.config"
-          nbgv cloud
-
-      - name: Generate metadata source (${{ matrix.arch }})
-        shell: pwsh
-        run: .\scripts\GenerateMetadataSource.ps1 -arch ${{ matrix.arch }} ${{ matrix.extra_args }}
-
-      - name: Upload generated assets
-        uses: ./.github/actions/upload-artifact-with-retry
-        with:
-          name: generated_${{ matrix.arch }}
-          path: generation/WinSDK/obj
-          retention-days: 1
-
-      - name: Upload build logs
-        uses: ./.github/actions/upload-artifact-with-retry
-        if: always()
-        with:
-          name: scrape_logs_${{ matrix.arch }}
-          path: bin/logs
-          retention-days: 7
-
-  # ──────────────────────────────────────────────────────────────────────
-  # Stage 2: Build, test, and package (depends on all scrape jobs)
-  # ──────────────────────────────────────────────────────────────────────
-
   build-test:
     name: 'Build, test, package'
-    needs: [scrape]
     runs-on: windows-2022
-    timeout-minutes: 60
+    timeout-minutes: 180
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -116,16 +51,13 @@ jobs:
 
       - uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
 
-      - name: Download all generated assets
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
-        with:
-          pattern: generated_*
-          path: generation/WinSDK/obj
-          merge-multiple: true
+      - name: Install pinned Rust toolchain
+        shell: pwsh
+        run: rustup show
 
       - name: Build metadata binary
         shell: pwsh
-        run: .\scripts\BuildMetadataBin.ps1 -assetsScrapedSeparately
+        run: .\scripts\BuildMetadataBin.ps1
 
       - name: Package
         shell: pwsh
