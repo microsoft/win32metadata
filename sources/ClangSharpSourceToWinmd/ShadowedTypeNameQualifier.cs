@@ -129,6 +129,11 @@ namespace ClangSharpSourceToWinmd
                     return false;
                 }
 
+                if (node.Parent is AliasQualifiedNameSyntax)
+                {
+                    return false;
+                }
+
                 // Using and namespace declarations always name a namespace.
                 SyntaxNode outerName = node;
                 while (outerName.Parent is NameSyntax)
@@ -142,7 +147,12 @@ namespace ClangSharpSourceToWinmd
             private bool BoundToNamespace(IdentifierNameSyntax node)
             {
                 var symbolInfo = this.model.GetSymbolInfo(node);
-                return symbolInfo.Symbol is INamespaceSymbol || symbolInfo.CandidateSymbols.Any(symbol => symbol is INamespaceSymbol);
+                return IsTopLevelNamespace(symbolInfo.Symbol) || symbolInfo.CandidateSymbols.Any(IsTopLevelNamespace);
+            }
+
+            private static bool IsTopLevelNamespace(ISymbol symbol)
+            {
+                return symbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.ContainingNamespace.IsGlobalNamespace;
             }
         }
     }

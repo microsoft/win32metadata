@@ -99,6 +99,53 @@ namespace Test.Internal
         }
 
         [TestMethod]
+        public void QualifyShadowedTypeNames_LeavesAliasQualifiedAndNestedNamespaceReferencesAlone()
+        {
+            const string Source = @"
+namespace Test.Public
+{
+    public partial struct Windows
+    {
+        public int Count;
+    }
+}
+
+namespace Windows.Win32.Foundation
+{
+    public partial struct HWND
+    {
+        public int Value;
+    }
+}
+
+namespace System.Windows.Forms
+{
+    public partial struct Control
+    {
+        public int Value;
+    }
+}
+
+namespace Test.Internal
+{
+    public partial struct Shell
+    {
+        public global::Windows.Win32.Foundation.HWND GlobalHandle;
+
+        public System.Windows.Forms.Control NestedHandle;
+    }
+}";
+
+            CSharpCompilation compilation = CreateCompilation(Source);
+
+            Assert.AreEqual(0, GetErrors(compilation).Length);
+
+            compilation = ShadowedTypeNameQualifier.QualifyShadowedTypeNames(compilation);
+
+            Assert.AreEqual(Source, compilation.SyntaxTrees.Single().ToString());
+        }
+
+        [TestMethod]
         public void QualifyShadowedTypeNames_AmbiguousShadowedNameIsLeftAlone()
         {
             const string Source = @"
