@@ -9,7 +9,7 @@
       "order": 1,
       "partition": "ActiveDirectory",
       "branch": "jevansaks-annotations-001-first-partition",
-      "pr": null,
+      "pr": 2310,
       "status": "blocked",
       "architectures": {
         "x64": "blocked-os-security",
@@ -44,7 +44,7 @@
       ],
       "unresolvedCount": 16,
       "baselineDeltaSummary": "Comparison blocked because Windows Defender denied execution of the locally built metadata tool (OS error 225).",
-      "lastCommit": null,
+      "lastCommit": "4fd127eb4317efe13c17c70baea2ba0d3e514b98",
       "blockers": "Local endpoint protection quarantines both debug and release win32metadata-tools executables before startup (OS error 225). Re-run targeted x64/x86/arm64 generation in approved CI or an environment where the repository-built tool is allowed.",
       "evidence": [
         "docs/copilot/partition-reports/ActiveDirectory.md",
