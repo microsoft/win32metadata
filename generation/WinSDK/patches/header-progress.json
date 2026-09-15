@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-15T22:41:00Z",
+  "items": [
+    {
+      "header": "AdsHlp.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/AdsHlp.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/AdsHlp.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "ADSIid.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": null,
+      "report": "docs/copilot/header-reports/ADSIid.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "AdsProp.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/AdsProp.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/AdsProp.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "Adssts.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": null,
+      "report": "docs/copilot/header-reports/Adssts.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "CmnQuery.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/CmnQuery.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/CmnQuery.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "DSAdmin.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/DSAdmin.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/DSAdmin.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "DSClient.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/DSClient.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/DSClient.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "DsGetDC.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/DsGetDC.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/DsGetDC.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "dsparse.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/dsparse.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/dsparse.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "DSQuery.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": null,
+      "report": "docs/copilot/header-reports/DSQuery.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "DSRole.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/DSRole.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/DSRole.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "Iads.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/Iads.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/Iads.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "NtDsAPI.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/NtDsAPI.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/NtDsAPI.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "NtDsBMsg.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": null,
+      "report": "docs/copilot/header-reports/NtDsBMsg.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "ObjSel.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": "generation/WinSDK/patches/post-midl/ObjSel.h.win32metadata.patch",
+      "report": "docs/copilot/header-reports/ObjSel.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    },
+    {
+      "header": "Schedule.h",
+      "owningPartition": "ActiveDirectory",
+      "owningPr": null,
+      "partitions": [
+        "ActiveDirectory"
+      ],
+      "status": "blocked",
+      "classification": null,
+      "patch": null,
+      "report": "docs/copilot/header-reports/Schedule.h.md",
+      "blocker": "Targeted metadata generation/comparison could not execute locally because Windows Defender blocked the repository-built Rust tool with OS error 225.",
+      "evidence": [
+        "docs/copilot/partition-reports/ActiveDirectory.md"
+      ]
+    }
+  ]
+}
