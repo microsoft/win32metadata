@@ -20,6 +20,7 @@ Abstract:
 #pragma once
 #endif
 #include <winapifamily.h>
+#include <win32metadata_annotations.h>
 
 #pragma region Desktop Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -107,6 +108,7 @@ typedef struct _DSROLE_OPERATION_STATE_INFO {
 
 } DSROLE_OPERATION_STATE_INFO, *PDSROLE_OPERATION_STATE_INFO;
 
+_Windows_SupportedOS_WindowsVista_
 DWORD
 WINAPI
 DsRoleGetPrimaryDomainInformation(
@@ -115,6 +117,7 @@ DsRoleGetPrimaryDomainInformation(
     OUT PBYTE *Buffer 
     );
 
+_Windows_SupportedOS_WindowsVista_
 VOID
 WINAPI
 DsRoleFreeMemory(

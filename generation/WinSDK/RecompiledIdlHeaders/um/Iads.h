@@ -28,6 +28,7 @@
 
 #ifndef __iads_h__
 #define __iads_h__
+#include <win32metadata_annotations.h>
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -1589,6 +1590,7 @@ EXTERN_C const IID IID_IADs;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("fd8256d0-fd15-11ce-abc4-02608c9e7553")
     IADs : public IDispatch
     {
@@ -1867,6 +1869,7 @@ EXTERN_C const IID IID_IADsContainer;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("001677d0-fd16-11ce-abc4-02608c9e7553")
     IADsContainer : public IDispatch
     {
@@ -2133,6 +2136,7 @@ EXTERN_C const IID IID_IADsCollection;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("72b945e0-253b-11cf-a988-00aa006bc149")
     IADsCollection : public IDispatch
     {
@@ -2308,6 +2312,7 @@ EXTERN_C const IID IID_IADsMembers;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("451a0030-72ec-11cf-b03b-00aa006e0975")
     IADsMembers : public IDispatch
     {
@@ -2479,6 +2484,7 @@ EXTERN_C const IID IID_IADsPropertyList;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("c6f602b6-8f69-11d0-8528-00c04fd8d503")
     IADsPropertyList : public IDispatch
     {
@@ -2707,6 +2713,7 @@ EXTERN_C const IID IID_IADsPropertyEntry;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("05792c8e-941f-11d0-8529-00c04fd8d503")
     IADsPropertyEntry : public IDispatch
     {
@@ -2939,6 +2946,7 @@ EXTERN_C const IID IID_IADsPropertyValue;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("79fa9ad0-a97c-11d0-8534-00c04fd8d503")
     IADsPropertyValue : public IDispatch
     {
@@ -3339,6 +3347,7 @@ EXTERN_C const IID IID_IADsPropertyValue2;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("306e831c-5bc7-11d1-a3b8-00c04fb950dc")
     IADsPropertyValue2 : public IDispatch
     {
@@ -3751,6 +3760,7 @@ EXTERN_C const IID IID_IADsExtension;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("3d35553c-d2b0-11d1-b17b-0000f87593a0")
     IADsExtension : public IUnknown
     {
@@ -3885,6 +3895,7 @@ EXTERN_C const IID IID_IADsDeleteOps;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b2bd0902-8878-11d1-8c21-00c04fd8d503")
     IADsDeleteOps : public IDispatch
     {
@@ -4023,6 +4034,7 @@ EXTERN_C const IID IID_IADsNamespaces;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("28b96ba0-b330-11cf-a9ad-00aa006bc149")
     IADsNamespaces : public IADs
     {
@@ -4281,6 +4293,7 @@ EXTERN_C const IID IID_IADsClass;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("c8f93dd0-4ae0-11cf-9e73-00aa004a5691")
     IADsClass : public IADs
     {
@@ -4847,6 +4860,7 @@ EXTERN_C const IID IID_IADsProperty;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("c8f93dd3-4ae0-11cf-9e73-00aa004a5691")
     IADsProperty : public IADs
     {
@@ -5204,6 +5218,7 @@ EXTERN_C const IID IID_IADsSyntax;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("c8f93dd2-4ae0-11cf-9e73-00aa004a5691")
     IADsSyntax : public IADs
     {
@@ -5462,6 +5477,7 @@ EXTERN_C const IID IID_IADsLocality;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a05e03a2-effe-11cf-8abc-00c04fd8d503")
     IADsLocality : public IADs
     {
@@ -5786,6 +5802,7 @@ EXTERN_C const IID IID_IADsO;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a1cd2dc6-effe-11cf-8abc-00c04fd8d503")
     IADsO : public IADs
     {
@@ -6154,6 +6171,7 @@ EXTERN_C const IID IID_IADsOU;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a2f733b8-effe-11cf-8abc-00c04fd8d503")
     IADsOU : public IADs
     {
@@ -6544,6 +6562,7 @@ EXTERN_C const IID IID_IADsDomain;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("00e4c220-fd16-11ce-abc4-02608c9e7553")
     IADsDomain : public IADs
     {
@@ -6967,6 +6986,7 @@ EXTERN_C const IID IID_IADsComputer;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("efe3cc70-1d9f-11cf-b1f3-02608c9e7553")
     IADsComputer : public IADs
     {
@@ -7555,6 +7575,7 @@ EXTERN_C const IID IID_IADsComputerOperations;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("ef497680-1d9f-11cf-b1f3-02608c9e7553")
     IADsComputerOperations : public IADs
     {
@@ -7813,6 +7834,7 @@ EXTERN_C const IID IID_IADsGroup;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("27636b00-410f-11cf-b1ff-02608c9e7553")
     IADsGroup : public IADs
     {
@@ -8117,6 +8139,7 @@ EXTERN_C const IID IID_IADsUser;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("3e37e320-17e2-11cf-abc4-02608c9e7553")
     IADsUser : public IADs
     {
@@ -9356,6 +9379,7 @@ EXTERN_C const IID IID_IADsPrintQueue;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b15160d0-1226-11cf-a985-00aa006bc149")
     IADsPrintQueue : public IADs
     {
@@ -9878,6 +9902,7 @@ EXTERN_C const IID IID_IADsPrintQueueOperations;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("124be5c0-156e-11cf-a986-00aa006bc149")
     IADsPrintQueueOperations : public IADs
     {
@@ -10163,6 +10188,7 @@ EXTERN_C const IID IID_IADsPrintJob;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("32fb6780-1ed0-11cf-a988-00aa006bc149")
     IADsPrintJob : public IADs
     {
@@ -10597,6 +10623,7 @@ EXTERN_C const IID IID_IADsPrintJobOperations;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("9a52db30-1ecf-11cf-a988-00aa006bc149")
     IADsPrintJobOperations : public IADs
     {
@@ -10906,6 +10933,7 @@ EXTERN_C const IID IID_IADsService;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("68af66e0-31ca-11cf-a98a-00aa006bc149")
     IADsService : public IADs
     {
@@ -11406,6 +11434,7 @@ EXTERN_C const IID IID_IADsServiceOperations;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("5d7b33f0-31ca-11cf-a98a-00aa006bc149")
     IADsServiceOperations : public IADs
     {
@@ -11700,6 +11729,7 @@ EXTERN_C const IID IID_IADsFileService;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a89d1900-31ca-11cf-a98a-00aa006bc149")
     IADsFileService : public IADsService
     {
@@ -12173,6 +12203,7 @@ EXTERN_C const IID IID_IADsFileServiceOperations;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a02ded10-31ca-11cf-a98a-00aa006bc149")
     IADsFileServiceOperations : public IADsServiceOperations
     {
@@ -12476,6 +12507,7 @@ EXTERN_C const IID IID_IADsFileShare;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("eb6dcaf0-4b83-11cf-a995-00aa006bc149")
     IADsFileShare : public IADs
     {
@@ -12811,6 +12843,7 @@ EXTERN_C const IID IID_IADsSession;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("398b7da0-4aab-11cf-ae2c-00aa006ebfb9")
     IADsSession : public IADs
     {
@@ -13113,6 +13146,7 @@ EXTERN_C const IID IID_IADsResource;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("34a05b20-4aab-11cf-ae2c-00aa006ebfb9")
     IADsResource : public IADs
     {
@@ -13393,6 +13427,7 @@ EXTERN_C const IID IID_IADsOpenDSObject;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503")
     IADsOpenDSObject : public IDispatch
     {
@@ -13539,6 +13574,7 @@ EXTERN_C const IID IID_IDirectoryObject;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("e798de2c-22e4-11d0-84fe-00c04fd8d503")
     IDirectoryObject : public IUnknown
     {
@@ -13683,6 +13719,7 @@ EXTERN_C const IID IID_IDirectorySearch;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("109ba8ec-92f0-11d0-a790-00c04fd8d5a8")
     IDirectorySearch : public IUnknown
     {
@@ -13880,6 +13917,7 @@ EXTERN_C const IID IID_IDirectorySchemaMgmt;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8")
     IDirectorySchemaMgmt : public IUnknown
     {
@@ -14269,6 +14307,7 @@ EXTERN_C const IID IID_IADsAccessControlEntry;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b4f3a14c-9bdd-11d0-852c-00c04fd8d503")
     IADsAccessControlEntry : public IDispatch
     {
@@ -14558,6 +14597,7 @@ EXTERN_C const IID IID_IADsAccessControlList;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b7ee91cc-9bdd-11d0-852c-00c04fd8d503")
     IADsAccessControlList : public IDispatch
     {
@@ -14781,6 +14821,7 @@ EXTERN_C const IID IID_IADsSecurityDescriptor;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b8c787ca-9bdd-11d0-852c-00c04fd8d503")
     IADsSecurityDescriptor : public IDispatch
     {
@@ -15147,6 +15188,7 @@ EXTERN_C const IID IID_IADsLargeInteger;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("9068270b-0939-11d1-8be1-00c04fd8d503")
     IADsLargeInteger : public IDispatch
     {
@@ -15326,6 +15368,7 @@ EXTERN_C const IID IID_IADsNameTranslate;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b1b272a3-3625-11d1-a3a4-00c04fb950dc")
     IADsNameTranslate : public IDispatch
     {
@@ -15556,6 +15599,7 @@ EXTERN_C const IID IID_IADsCaseIgnoreList;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("7b66b533-4680-11d1-a3b4-00c04fb950dc")
     IADsCaseIgnoreList : public IDispatch
     {
@@ -15713,6 +15757,7 @@ EXTERN_C const IID IID_IADsFaxNumber;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a910dea9-4680-11d1-a3b4-00c04fb950dc")
     IADsFaxNumber : public IDispatch
     {
@@ -15892,6 +15937,7 @@ EXTERN_C const IID IID_IADsNetAddress;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b21a50a9-4080-11d1-a3ac-00c04fb950dc")
     IADsNetAddress : public IDispatch
     {
@@ -16071,6 +16117,7 @@ EXTERN_C const IID IID_IADsOctetList;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("7b28b80f-4680-11d1-a3b4-00c04fb950dc")
     IADsOctetList : public IDispatch
     {
@@ -16228,6 +16275,7 @@ EXTERN_C const IID IID_IADsEmail;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("97af011a-478e-11d1-a3b4-00c04fb950dc")
     IADsEmail : public IDispatch
     {
@@ -16407,6 +16455,7 @@ EXTERN_C const IID IID_IADsPath;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b287fcd5-4080-11d1-a3ac-00c04fb950dc")
     IADsPath : public IDispatch
     {
@@ -16608,6 +16657,7 @@ EXTERN_C const IID IID_IADsReplicaPointer;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("f60fb803-4080-11d1-a3ac-00c04fb950dc")
     IADsReplicaPointer : public IDispatch
     {
@@ -16853,6 +16903,7 @@ EXTERN_C const IID IID_IADsAcl;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("8452d3ab-0869-11d1-a377-00c04fb950dc")
     IADsAcl : public IDispatch
     {
@@ -17057,6 +17108,7 @@ EXTERN_C const IID IID_IADsTimestamp;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b2f5a901-4080-11d1-a3ac-00c04fb950dc")
     IADsTimestamp : public IDispatch
     {
@@ -17236,6 +17288,7 @@ EXTERN_C const IID IID_IADsPostalAddress;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("7adecf29-4680-11d1-a3b4-00c04fb950dc")
     IADsPostalAddress : public IDispatch
     {
@@ -17393,6 +17446,7 @@ EXTERN_C const IID IID_IADsBackLink;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("fd1302bd-4080-11d1-a3ac-00c04fb950dc")
     IADsBackLink : public IDispatch
     {
@@ -17572,6 +17626,7 @@ EXTERN_C const IID IID_IADsTypedName;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b371a349-4080-11d1-a3ac-00c04fb950dc")
     IADsTypedName : public IDispatch
     {
@@ -17773,6 +17828,7 @@ EXTERN_C const IID IID_IADsHold;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("b3eb3b37-4080-11d1-a3ac-00c04fb950dc")
     IADsHold : public IDispatch
     {
@@ -17952,6 +18008,7 @@ EXTERN_C const IID IID_IADsObjectOptions;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("46f14fda-232b-11d1-a808-00c04fd8d5a8")
     IADsObjectOptions : public IDispatch
     {
@@ -18105,6 +18162,7 @@ EXTERN_C const IID IID_IADsPathname;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("d592aed4-f420-11d0-a36e-00c04fb950dc")
     IADsPathname : public IDispatch
     {
@@ -18369,6 +18427,7 @@ EXTERN_C const IID IID_IADsADSystemInfo;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("5BB11929-AFD1-11d2-9CB9-0000F87A369E")
     IADsADSystemInfo : public IDispatch
     {
@@ -18647,6 +18706,7 @@ EXTERN_C const IID IID_IADsWinNTSystemInfo;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("6C6D65DC-AFD1-11d2-9CB9-0000F87A369E")
     IADsWinNTSystemInfo : public IDispatch
     {
@@ -18826,6 +18886,7 @@ EXTERN_C const IID IID_IADsDNWithBinary;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1")
     IADsDNWithBinary : public IDispatch
     {
@@ -19005,6 +19066,7 @@ EXTERN_C const IID IID_IADsDNWithString;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("370df02e-f934-11d2-ba96-00c04fb6d0d1")
     IADsDNWithString : public IDispatch
     {
@@ -19184,6 +19246,7 @@ EXTERN_C const IID IID_IADsSecurityUtility;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
+_Windows_SupportedOS_WindowsVista_
     MIDL_INTERFACE("a63251b2-5f21-474b-ab52-4a8efad10895")
     IADsSecurityUtility : public IDispatch
     {

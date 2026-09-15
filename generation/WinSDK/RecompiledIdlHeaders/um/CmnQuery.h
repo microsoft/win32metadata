@@ -2,6 +2,7 @@
 //    Copyright (C) Microsoft.  All rights reserved.
 //
 #include <winapifamily.h>
+#include <win32metadata_annotations.h>
 
 #ifndef __cmnquery_h
 #define __cmnquery_h
@@ -104,6 +105,7 @@ struct _cqpage
 #undef  INTERFACE
 #define INTERFACE IQueryForm
 
+_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
 {
     // *** IUnknown methods ***
@@ -142,6 +144,7 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
 #undef  INTERFACE
 #define INTERFACE IPersistQuery
 
+_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c906af45")
 {
     // *** IUnknown methods ***
@@ -202,6 +205,7 @@ typedef struct
 #undef  INTERFACE
 #define INTERFACE ICommonQuery
 
+_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
 {
     // *** IUnknown methods ***
