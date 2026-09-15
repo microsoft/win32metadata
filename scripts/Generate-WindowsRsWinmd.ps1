@@ -23,14 +23,20 @@ param (
 
     [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
 
-    [switch]$SkipBuild
+    [switch]$SkipBuild,
+
+    [string]$ToolPath
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
 $ErrorActionPreference = "Stop"
 $manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
-$tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
+$tool = if ($ToolPath) {
+    [System.IO.Path]::GetFullPath($ToolPath)
+} else {
+    Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
+}
 $headerRoot = Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders"
 $localIncludes = Join-Path $windowsWin32ProjectRoot "inc"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
