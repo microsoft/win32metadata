@@ -21,7 +21,6 @@
 #pragma once
 #endif
 #include <winapifamily.h>
-#include <win32metadata_annotations.h>
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -87,7 +86,6 @@ typedef struct _ADSPROPERROR {
 //  Returns:    HRESULTs.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI
 ADsPropCreateNotifyObj(LPDATAOBJECT pAppThdDataObj, _In_ PWSTR pwzADsObjName,
                        HWND * phNotifyObj);
@@ -112,7 +110,6 @@ ADsPropCreateNotifyObj(LPDATAOBJECT pAppThdDataObj, _In_ PWSTR pwzADsObjName,
 //              writable attributes.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropGetInitInfo(HWND hNotifyObj, PADSPROPINITPARAMS pInitParams);
 
@@ -134,7 +131,6 @@ ADsPropGetInitInfo(HWND hNotifyObj, PADSPROPINITPARAMS pInitParams);
 //              multi-select property pages
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropSetHwndWithTitle(HWND hNotifyObj, HWND hPage, _In_ PTSTR ptzTitle);
 
@@ -154,7 +150,6 @@ ADsPropSetHwndWithTitle(HWND hNotifyObj, HWND hPage, _In_ PTSTR ptzTitle);
 //              window.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropSetHwnd(HWND hNotifyObj, HWND hPage);
 
@@ -172,7 +167,6 @@ ADsPropSetHwnd(HWND hNotifyObj, HWND hPage);
 //              array or if the array pointer is NULL.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropCheckIfWritable(_In_ const PWSTR pwzAttr, const PADS_ATTR_INFO pWritableAttrs);
 
@@ -189,7 +183,6 @@ ADsPropCheckIfWritable(_In_ const PWSTR pwzAttr, const PADS_ATTR_INFO pWritableA
 //  Returns:    FALSE if the notify window has gone away for some reason.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropSendErrorMessage(HWND hNotifyObj, PADSPROPERROR pError);
 
@@ -206,7 +199,6 @@ ADsPropSendErrorMessage(HWND hNotifyObj, PADSPROPERROR pError);
 //  Returns:    FALSE if the notify window has gone away for some reason.
 //
 //-----------------------------------------------------------------------------
-_Windows_SupportedOS_WindowsVista_
 STDAPI_(BOOL)
 ADsPropShowErrorDialog(HWND hNotifyObj, HWND hPage);
 

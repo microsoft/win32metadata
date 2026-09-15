@@ -49,7 +49,6 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
 #ifndef _DSADMIN_H
 #define _DSADMIN_H
 #include <winapifamily.h>
-#include <win32metadata_annotations.h>
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -69,7 +68,6 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
 #undef  INTERFACE
 #define INTERFACE   IDsAdminCreateObj
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
 {
   // *** IUnknown methods ***
@@ -102,7 +100,6 @@ DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
 #undef  INTERFACE
 #define INTERFACE   IDsAdminNewObj
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
 {
   // *** IUnknown methods ***
@@ -132,7 +129,6 @@ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
 #undef  INTERFACE
 #define INTERFACE   IDsAdminNewObjPrimarySite
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsAdminNewObjPrimarySite, IUnknown)
 {
   // *** IUnknown methods ***
@@ -188,7 +184,6 @@ typedef struct
 #undef  INTERFACE
 #define INTERFACE   IDsAdminNewObjExt
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
 {
   // *** IUnknown methods ***
@@ -255,7 +250,6 @@ DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
 #define INTERFACE   IDsAdminNotifyHandler
 
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsAdminNotifyHandler, IUnknown)
 {
   // *** IUnknown methods ***

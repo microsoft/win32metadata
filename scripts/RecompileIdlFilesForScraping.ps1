@@ -168,8 +168,8 @@ foreach ($deprecatedHeader in $deprecatedHeaders) {
         if (!(Test-Path $directory)) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
-        
-        git checkout origin/main $fullPath
+
+        Copy-Item (Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders\$deprecatedHeader") $fullPath
     }
 }
 
@@ -184,7 +184,7 @@ Write-Host "Restoring WinHv headers to older versions..."
 foreach ($winHvHeader in $winHvHeadersToRestore) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
     Write-Host "Restoring WinHv header: $winHvHeader"
-    git checkout origin/main $fullPath
+    Copy-Item (Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders\$winHvHeader") $fullPath -Force
 }
 
 Write-Host "Applying SDK patches to header files (post-MIDL)..."
