@@ -16,7 +16,6 @@
 #pragma once
 #endif
 #include <winapifamily.h>
-#include <win32metadata_annotations.h>
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -586,7 +585,6 @@ typedef struct _DS_SELECTION_LIST
 #undef INTERFACE
 #define INTERFACE IDsObjectPicker
 
-_Windows_SupportedOS_WindowsVista_
 DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
 {
     // *** IUnknown methods ***
@@ -614,7 +612,6 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
          IDataObject      **ppdoSelections) PURE;
 };
 
-_Windows_SupportedOS_Server2008_
 DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
 {
     // *** IUnknown methods ***
@@ -642,4 +639,5 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
 #pragma endregion
 
 #endif // __OBJSEL_H_
+
 
