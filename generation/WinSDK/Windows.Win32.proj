@@ -12,7 +12,7 @@
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
-    <UseWinSDKAssets>false</UseWinSDKAssets>
+    <UseWinSDKAssets>true</UseWinSDKAssets>
   </PropertyGroup>
 
   <ItemGroup>

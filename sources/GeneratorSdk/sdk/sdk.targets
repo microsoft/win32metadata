@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
-    <WinmdIncludeDir Include="$(WinSDKAssets)\inc"/>
-    <WinmdIncludeDir Include="$(SdkIncRoot)" Condition="Exists('$(SdkIncRoot)')"/>
-  </ItemGroup>
   <ItemGroup>
     <WinmdIncludeDir Include="$(AdditionalIncludes)" Condition="'$(AdditionalIncludes)' != ''"/>
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseWinSDKAssets)' == 'true'">
+    <WinmdIncludeDir Include="$(WinSDKAssets)\inc" Condition="Exists('$(WinSDKAssets)\inc')"/>
+    <WinmdIncludeDir Include="$(SdkIncRoot)" Condition="Exists('$(SdkIncRoot)')"/>
   </ItemGroup>
 
   <Target Name="BuildWin32MetadataTools"

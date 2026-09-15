@@ -432,7 +432,7 @@ fn scrape_arch(
     let mut builder = builder.clone();
     builder.target(&arch.triple).output(rdl_dir);
     if let Some(dir) = resource_dir {
-        builder.args(["-resource-dir", dir]);
+        builder.args(["-resource-dir", dir]).exclude_path(dir);
     }
 
     catch("the header scrape panicked", || builder.write_by_header())?

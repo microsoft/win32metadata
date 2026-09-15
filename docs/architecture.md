@@ -47,6 +47,17 @@ For a faster raw-tool inner loop:
 .\scripts\Generate-WindowsRsWinmd.ps1 -Partition Foundation -Architecture x64
 ```
 
+Before the aggregate build, partitions can be preflighted independently for all
+three architectures. The bounded process isolation reports every failing
+partition in one run and avoids retaining the entire SDK queue in one process:
+
+```powershell
+.\scripts\Test-WindowsRsPartitions.ps1
+```
+
+The aggregate build remains necessary after preflight to detect cross-partition
+name collisions, duplicate declarations, and architecture-merge differences.
+
 ## Package validation
 
 `scripts/Test-GeneratorSdkPackage.ps1` builds the NuGet package, restores it into

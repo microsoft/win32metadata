@@ -49,6 +49,19 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 $logFile = "$PSScriptRoot\..\bin\logs\BuildMetadataBin_$timestamp.binlog"
-$targetArchitectures = if ($arch -eq "crossarch") { "x64;x86;arm64" } else { $arch }
-& dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:TargetArchitectures=$targetArchitectures "-bl:$logFile" --no-restore
+$buildArgs = @(
+    "build",
+    $windowsWin32ProjectRoot,
+    "-c", $configuration,
+    "-t:EmitWinmd",
+    "-p:WinmdVersion=$assemblyVersion",
+    "-p:OutputWinmd=$outputWinmdFileName",
+    "-bl:$logFile",
+    "--no-restore"
+)
+if ($arch -ne "crossarch")
+{
+    $buildArgs += "-p:TargetArchitectures=$arch"
+}
+& dotnet @buildArgs
 ThrowOnNativeProcessError
