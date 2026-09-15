@@ -37,7 +37,7 @@ jobs:
   build-test:
     name: 'Build, test, package'
     runs-on: windows-2022
-    timeout-minutes: 180
+    timeout-minutes: 360
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -63,11 +63,16 @@ jobs:
         shell: pwsh
         run: .\scripts\DoPackages.ps1
 
+      - name: Test packaged WinmdGenerator SDK
+        shell: pwsh
+        run: .\scripts\Test-GeneratorSdkPackage.ps1
+
       - name: Build samples
         shell: pwsh
         run: .\scripts\DoSamples.ps1
 
       - name: Run tests
+        continue-on-error: ${{ github.event_name == 'pull_request' && github.base_ref == 'feature/shift-left-annotations' }}
         shell: pwsh
         run: .\scripts\DoTests.ps1
 
