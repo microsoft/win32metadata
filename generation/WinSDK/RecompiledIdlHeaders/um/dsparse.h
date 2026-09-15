@@ -27,6 +27,7 @@ Notes:
 #pragma once
 #endif
 #include <winapifamily.h>
+#include <win32metadata_annotations.h>
 
 #pragma region Desktop Familyy or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -98,6 +99,7 @@ typedef enum _DS_MANGLE_FOR {
 //
 //
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
 DSPARSE
@@ -113,6 +115,7 @@ DsMakeSpnW(
     _Out_writes_to_opt_(*pcSpnLength, *pcSpnLength) LPWSTR pszSpn
 );
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == ERROR_SUCCESS)
 DSPARSE
@@ -160,6 +163,7 @@ DsMakeSpnA(
 // All arguments except pszSpn are optional.
 //
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 DSPARSE
 DWORD
@@ -175,6 +179,7 @@ DsCrackSpnA(
     _Out_opt_ USHORT *pInstancePort
     );
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 DSPARSE
 DWORD
@@ -261,6 +266,7 @@ Return Value:
 
 --*/
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == 0)
 DSPARSE
@@ -273,6 +279,7 @@ DsQuoteRdnValueW(
     _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
 );
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == 0)
 DSPARSE
@@ -371,6 +378,7 @@ Return Value:
 
 --*/
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == 0)
 DSPARSE
@@ -383,6 +391,7 @@ DsUnquoteRdnValueW(
     _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
 );
 
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == 0)
 DSPARSE
@@ -493,6 +502,7 @@ Return Value:
         All output parameters are undefined.
 
 --*/
+_Windows_SupportedOS_WindowsVista_
 _Check_return_
 _Success_(return == 0)
 DSPARSE
@@ -547,6 +557,7 @@ Return Value:
 
 --*/
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
@@ -557,6 +568,7 @@ DsCrackUnquotedMangledRdnW(
      _Out_opt_ DS_MANGLE_FOR *peDsMangleFor
      );
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
@@ -622,6 +634,7 @@ Return Value:
 
 --*/
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
@@ -631,6 +644,7 @@ DsIsMangledRdnValueW(
     DS_MANGLE_FOR eDsMangleForDesired
     );
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
@@ -680,6 +694,7 @@ Return Value:
 
 --*/
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
@@ -688,6 +703,7 @@ DsIsMangledDnA(
     DS_MANGLE_FOR eDsMangleFor
     );
 
+_Windows_SupportedOS_WindowsVista_
 DSPARSE
 BOOL
 WINAPI
