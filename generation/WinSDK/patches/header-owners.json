@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-15T22:41:00Z",
+  "headers": {
+    "AdsHlp.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "ADSIid.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "AdsProp.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "Adssts.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "CmnQuery.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "DSAdmin.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "DSClient.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "DsGetDC.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "dsparse.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "DSQuery.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "DSRole.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "Iads.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "NtDsAPI.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "NtDsBMsg.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "ObjSel.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    },
+    "Schedule.h": {
+      "partition": "ActiveDirectory",
+      "order": 1,
+      "pr": null
+    }
+  }
+}
