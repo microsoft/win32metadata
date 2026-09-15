@@ -5,7 +5,7 @@
     {
       "header": "AdsHlp.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -21,7 +21,7 @@
     {
       "header": "ADSIid.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -37,7 +37,7 @@
     {
       "header": "AdsProp.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -53,7 +53,7 @@
     {
       "header": "Adssts.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -69,7 +69,7 @@
     {
       "header": "CmnQuery.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -85,7 +85,7 @@
     {
       "header": "DSAdmin.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -101,7 +101,7 @@
     {
       "header": "DSClient.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -117,7 +117,7 @@
     {
       "header": "DsGetDC.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -133,7 +133,7 @@
     {
       "header": "dsparse.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -149,7 +149,7 @@
     {
       "header": "DSQuery.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -165,7 +165,7 @@
     {
       "header": "DSRole.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -181,7 +181,7 @@
     {
       "header": "Iads.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -197,7 +197,7 @@
     {
       "header": "NtDsAPI.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -213,7 +213,7 @@
     {
       "header": "NtDsBMsg.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -229,7 +229,7 @@
     {
       "header": "ObjSel.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
@@ -245,7 +245,7 @@
     {
       "header": "Schedule.h",
       "owningPartition": "ActiveDirectory",
-      "owningPr": null,
+      "owningPr": 2310,
       "partitions": [
         "ActiveDirectory"
       ],
