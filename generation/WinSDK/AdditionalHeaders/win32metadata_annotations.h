@@ -20,8 +20,8 @@
     _WIN32META_ANNOTATION_("win32metadata:import_library=" value)
 #define _Win32_PreserveResult_ \
     _WIN32META_ANNOTATION_("win32metadata:preserve_result")
-#define _Win32_RAIIFree_(function) \
-    _WIN32META_ANNOTATION_("win32metadata:raii_free=" #function)
+#define _Win32_RAIIFree_(...) \
+    _WIN32META_ANNOTATION_("win32metadata:raii_free=" #__VA_ARGS__)
 #define _Win32_Retained_ \
     _WIN32META_ANNOTATION_("win32metadata:retained")
 #define _Win32_AlsoUsableFor_(type) \
