@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/webapplication.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/webapplication.h
+index c59959607e..b36aaee3a3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/webapplication.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/webapplication.h
+@@ -121,6 +121,7 @@ extern "C"{
+ 
+ #include <urlmon.h>
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -139,6 +140,7 @@ EXTERN_C const IID IID_IWebApplicationScriptEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("7C3F6998-1567-4BBA-B52B-48D32141D613")
+     IWebApplicationScriptEvents : public IUnknown
+     {
+@@ -242,6 +244,7 @@ EXTERN_C const IID IID_IWebApplicationNavigationEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C22615D2-D318-4DA2-8422-1FCAF77B10E4")
+     IWebApplicationNavigationEvents : public IUnknown
+     {
+@@ -397,6 +400,7 @@ EXTERN_C const IID IID_IWebApplicationUIEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("5B2B3F99-328C-41D5-A6f7-7483ED8E71DD")
+     IWebApplicationUIEvents : public IUnknown
+     {
+@@ -483,6 +487,7 @@ EXTERN_C const IID IID_IWebApplicationUpdateEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("3E59E6B7-C652-4DAF-AD5E-16FEB350CDE3")
+     IWebApplicationUpdateEvents : public IUnknown
+     {
+@@ -574,6 +579,7 @@ EXTERN_C const IID IID_IWebApplicationHost;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("CECBD2C3-A3A5-4749-9681-20E9161C6794")
+     IWebApplicationHost : public IUnknown
+     {
+@@ -704,6 +710,7 @@ EXTERN_C const IID IID_IWebApplicationActivation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("BCDCD0DE-330E-481B-B843-4898A6A8EBAC")
+     IWebApplicationActivation : public IUnknown
+     {
+@@ -796,6 +803,7 @@ EXTERN_C const IID IID_IWebApplicationAuthoringMode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("720AEA93-1964-4DB0-B005-29EB9E2B18A9")
+     IWebApplicationAuthoringMode : public IServiceProvider
+     {
