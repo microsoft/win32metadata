@@ -1,0 +1,19 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fci.h b/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
+@@ -23,6 +23,7 @@
+  */
+ 
+ #include <fdi_fci_types.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifndef INCLUDED_FCI
+ #define INCLUDED_FCI 1
+@@ -350,6 +351,7 @@ typedef BOOL (DIAMONDAPI *PFNFCIGETTEMPFILE)(_Out_writes_bytes_(cbTempName) char
+  *  Exit-Failure:
+  *      Returns NULL, perf filled in.
+  */
++_Win32_RAIIFree_(FCIDestroy, 0)
+ HFCI DIAMONDAPI FCICreate(_In_       PERF               perf,
+                           __callback PFNFCIFILEPLACED   pfnfcifp,
+                           __callback PFNFCIALLOC        pfna,

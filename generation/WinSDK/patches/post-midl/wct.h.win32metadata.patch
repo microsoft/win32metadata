@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wct.h b/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
+@@ -21,6 +21,7 @@ History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -105,6 +106,9 @@ typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
+ #define WCT_ASYNC_OPEN_FLAG 0x1
+ #define WCTP_OPEN_ALL_FLAGS (WCT_ASYNC_OPEN_FLAG)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseThreadWaitChainSession)
+ _Check_return_
+ WINADVAPI
+ HWCT WINAPI
