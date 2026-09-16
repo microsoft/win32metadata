@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
+index eb2e55a528..4544a6c9cb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
+@@ -1,3 +1,7 @@
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #include <winapifamily.h>
+ 
+ //+-------------------------------------------------------------------------
+@@ -30,6 +34,7 @@ typedef VOID* NTPROP;
+ 
+ #include <propidl.h>
+ 
++_Windows_SupportedOS_Windows2000_
+ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ ULONG __stdcall
