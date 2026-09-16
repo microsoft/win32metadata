@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/OleAuto.h b/generation/WinSDK/RecompiledIdlHeaders/um/OleAuto.h
+index 44e69c4a93..d6adf74698 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/OleAuto.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/OleAuto.h
+@@ -1,3 +1,7 @@
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #include <winapifamily.h>
+ 
+ #if _MSC_VER >= 1200
+@@ -75,7 +79,9 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
+ WINOLEAUTAPI_(INT)  SysReAllocString(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(_String_length_(psz)+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz);
+ WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
+ _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
++_Windows_SupportedOS_WindowsXP_
+ WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
++_Windows_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
+ WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
+ WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
+@@ -131,10 +137,13 @@ WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ VARTYPE vt, _In_ UINT cDims, _In
+ WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
+ _Check_return_
+ WINOLEAUTAPI SafeArrayCopyData(_In_ SAFEARRAY *psaSource, _In_ SAFEARRAY *psaTarget);
++_Windows_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SafeArrayReleaseDescriptor(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayDestroyDescriptor(_In_ SAFEARRAY * psa);
++_Windows_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SafeArrayReleaseData(_In_ PVOID pData);
+ WINOLEAUTAPI SafeArrayDestroyData(_In_ SAFEARRAY * psa);
++_Windows_SupportedOS_WindowsXP_
+ WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
+ WINOLEAUTAPI SafeArrayDestroy(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayRedim(_Inout_ SAFEARRAY * psa, _In_ SAFEARRAYBOUND * psaboundNew);

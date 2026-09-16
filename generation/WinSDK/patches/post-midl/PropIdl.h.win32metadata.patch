@@ -1,0 +1,110 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PropIdl.h b/generation/WinSDK/RecompiledIdlHeaders/um/PropIdl.h
+index 6f7c2286b6..4446dd974d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PropIdl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PropIdl.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -496,6 +500,7 @@ EXTERN_C const IID IID_IPropertyStorage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("00000138-0000-0000-C000-000000000046")
+     IPropertyStorage : public IUnknown
+     {
+@@ -776,6 +781,7 @@ EXTERN_C const IID IID_IPropertySetStorage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("0000013A-0000-0000-C000-000000000046")
+     IPropertySetStorage : public IUnknown
+     {
+@@ -928,6 +934,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("00000139-0000-0000-C000-000000000046")
+     IEnumSTATPROPSTG : public IUnknown
+     {
+@@ -1077,6 +1084,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("0000013B-0000-0000-C000-000000000046")
+     IEnumSTATPROPSETSTG : public IUnknown
+     {
+@@ -1302,12 +1310,15 @@ enum PIDMSI_STATUS_VALUE
+ #pragma endregion
+ #pragma region Application Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
++_Windows_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI PropVariantCopy(
+             _Out_ PROPVARIANT* pvarDest,
+             _In_ const PROPVARIANT * pvarSrc);
+ 
++_Windows_SupportedOS_Windows2000_
+ WINOLEAPI PropVariantClear(_Inout_ PROPVARIANT* pvar);
+ 
++_Windows_SupportedOS_Windows2000_
+ WINOLEAPI FreePropVariantArray(
+             _In_ ULONG cVariants,
+             _Inout_updates_(cVariants) PROPVARIANT* rgvars);
+@@ -1319,6 +1330,7 @@ WINOLEAPI FreePropVariantArray(
+ 
+ #   ifdef __cplusplus
+ 
++_Windows_SupportedOS_Windows2000_
+ inline void PropVariantInit (_Out_ PROPVARIANT * pvar )
+ {
+     memset ( pvar, 0, sizeof(PROPVARIANT) );
+@@ -1349,6 +1361,7 @@ typedef struct tagSERIALIZEDPROPERTYVALUE
+ } SERIALIZEDPROPERTYVALUE;
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_
+ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ SERIALIZEDPROPERTYVALUE* __stdcall
+@@ -1364,6 +1377,7 @@ StgConvertVariantToProperty(
+ #ifdef __cplusplus
+ class PMemoryAllocator;
+ 
++_Windows_SupportedOS_Windows2000_
+ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ BOOLEAN __stdcall
+@@ -1400,14 +1414,22 @@ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *,
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+ void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
+ /* [local] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSTG_Next_Proxy( 

@@ -1,0 +1,166 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
+index f384727508..55099da80f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
+@@ -25,6 +25,9 @@
+ #include <wingdi.h>
+ #endif
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -32,6 +35,7 @@ extern "C" {
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -41,6 +45,7 @@ GetNumberOfConsoleMouseButtons(
+ 
+ #if (_WIN32_WINNT >= 0x0500)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ COORD
+ WINAPI
+@@ -49,6 +54,7 @@ GetConsoleFontSize(
+     _In_ DWORD nFont
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -69,6 +75,7 @@ typedef struct _CONSOLE_FONT_INFOEX {
+     WCHAR FaceName[LF_FACESIZE];
+ } CONSOLE_FONT_INFOEX, *PCONSOLE_FONT_INFOEX;
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -78,6 +85,7 @@ GetCurrentConsoleFontEx(
+     _Out_ PCONSOLE_FONT_INFOEX lpConsoleCurrentFontEx
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -105,6 +113,7 @@ typedef struct _CONSOLE_SELECTION_INFO {
+     SMALL_RECT srSelection;
+ } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -125,6 +134,7 @@ typedef struct _CONSOLE_HISTORY_INFO {
+     DWORD dwFlags;
+ } CONSOLE_HISTORY_INFO, *PCONSOLE_HISTORY_INFO;
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -132,6 +142,7 @@ GetConsoleHistoryInfo(
+     _Out_ PCONSOLE_HISTORY_INFO lpConsoleHistoryInfo
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -142,6 +153,7 @@ SetConsoleHistoryInfo(
+ #define CONSOLE_FULLSCREEN 1            // fullscreen console
+ #define CONSOLE_FULLSCREEN_HARDWARE 2   // console owns the hardware
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -152,6 +164,7 @@ GetConsoleDisplayMode(
+ #define CONSOLE_FULLSCREEN_MODE 1
+ #define CONSOLE_WINDOWED_MODE 2
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -172,6 +185,7 @@ GetConsoleWindow(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -181,6 +195,7 @@ AddConsoleAliasA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -196,6 +211,7 @@ AddConsoleAliasW(
+ #define AddConsoleAlias  AddConsoleAliasA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -206,6 +222,7 @@ GetConsoleAliasA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -262,6 +279,7 @@ GetConsoleAliasExesLengthW(
+ #define GetConsoleAliasExesLength  GetConsoleAliasExesLengthA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -271,6 +289,7 @@ GetConsoleAliasesA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -286,6 +305,7 @@ GetConsoleAliasesW(
+ #define GetConsoleAliases  GetConsoleAliasesA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -294,6 +314,7 @@ GetConsoleAliasExesA(
+     _In_ DWORD ExeNameBufferLength
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -398,6 +419,7 @@ GetConsoleCommandHistoryW(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
