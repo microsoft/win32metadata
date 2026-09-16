@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
+index 24509159..059609c8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
+@@ -103,6 +103,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -123,6 +124,7 @@ EXTERN_C const IID IID_IBitsTokenOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9a2584c3-f7d2-457a-9a5e-22b67bffc7d2")
++_Windows_SupportedOS_Windows7_
+     IBitsTokenOptions : public IUnknown
+     {
+@@ -252,6 +254,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ef7e0655-7888-4960-b0e5-730846e03492")
++_Windows_SupportedOS_Windows7_
+     IBackgroundCopyFile4 : public IBackgroundCopyFile3
+     {

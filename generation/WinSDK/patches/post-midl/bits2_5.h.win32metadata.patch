@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
+index e93db140..0a6cf20a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
+@@ -87,6 +87,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -118,6 +119,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f1bd1079-9f01-4bdc-8036-f09b70095066")
++_Windows_SupportedOS_WindowsVista_
+     IBackgroundCopyJobHttpOptions : public IUnknown
+     {
