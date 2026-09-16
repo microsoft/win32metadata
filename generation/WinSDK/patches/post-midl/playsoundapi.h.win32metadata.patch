@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
-index 0ec683ff..a5a70e0d 100644
+index 0ec683ff..f506b26d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
 @@ -18,6 +18,8 @@

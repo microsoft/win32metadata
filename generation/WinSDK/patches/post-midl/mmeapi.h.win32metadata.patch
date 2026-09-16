@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
-index 93079425..e2a9fdb0 100644
+index 93079425..06591501 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 @@ -25,10 +25,20 @@

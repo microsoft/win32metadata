@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
-index adf54c90..1438124a 100644
+index adf54c90..1256064c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
 @@ -33,6 +33,8 @@
