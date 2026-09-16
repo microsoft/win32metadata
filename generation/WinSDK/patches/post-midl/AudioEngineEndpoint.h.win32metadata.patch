@@ -89,17 +89,3 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/g
      MIDL_INTERFACE("C684B72A-6DF4-4774-BDF9-76B77509B653")
      IAudioEndpointControl : public IUnknown
      {
-@@ -1634,9 +1645,13 @@ EXTERN_C const IID IID_IAudioEndpointControl;
-     0X9F2F7B66l, 0X65AC, 0X4FA6, 0X8A, 0XE4, 0X12, 0X3C, 0X78, 0XB8, 0X93, 0X13                         
- DEFINE_GUIDSTRUCT("9F2F7B66-65AC-4FA6-8AE4-123C78B89313", DEVINTERFACE_AUDIOENDPOINTPLUGIN);          
- #define DEVINTERFACE_AUDIOENDPOINTPLUGIN DEFINE_GUIDNAMED(DEVINTERFACE_AUDIOENDPOINTPLUGIN)             
-+_Windows_SupportedOS_WindowsVista_
- DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_FactoryCLSID,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 1); 
-+_Windows_SupportedOS_WindowsVista_
- DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_DataFlow,       0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 2); 
-+_Windows_SupportedOS_WindowsVista_
- DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_PnPInterface,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 3); 
-+_Windows_SupportedOS_WindowsVista_
- DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin2_FactoryCLSID,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 4); 
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
- #pragma endregion
