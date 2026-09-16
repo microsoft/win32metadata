@@ -42,9 +42,9 @@
 #define _Windows_SupportedOS_Windows7_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.1")
 #define _Windows_SupportedOS_Windows8_ \
-    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.2")
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows8.0")
 #define _Windows_SupportedOS_Windows81_ \
-    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.3")
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows8.1")
 #define _Windows_SupportedOS_10240_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.10240")
 #define _Windows_SupportedOS_10586_ \
