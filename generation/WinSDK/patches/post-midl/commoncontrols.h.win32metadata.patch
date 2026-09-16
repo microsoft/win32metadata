@@ -1,0 +1,71 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
+index 293451ea..8ac1340a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
+@@ -9,6 +9,8 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#include <win32metadata_annotations.h>
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -35,6 +37,15 @@
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
++
++#ifndef __WIN32METADATA_IMAGELIST_CREATION_FLAGS_DECLARED__
++#define __WIN32METADATA_IMAGELIST_CREATION_FLAGS_DECLARED__
++#ifdef WIN32METADATA
++enum class IMAGELIST_CREATION_FLAGS : int;
++#else
++typedef UINT IMAGELIST_CREATION_FLAGS;
++#endif
++#endif
+ #endif
+ 
+ #ifndef DECLSPEC_XFGVIRT
+@@ -137,6 +148,7 @@ typedef IMAGEINFO *LPIMAGEINFO;
+ 
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Windows_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(
+          _In_  REFCLSID rclsid,
+      _In_opt_  const IUnknown *punkOuter,
+@@ -163,6 +175,7 @@ EXTERN_C const IID IID_IImageList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("46EB5926-582E-4017-9FDF-E8998DAA0950")
+     IImageList : public IUnknown
+     {
+@@ -725,6 +738,7 @@ EXTERN_C const IID IID_IImageList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
+     IImageList2 : public IImageList
+     {
+@@ -785,7 +799,7 @@ EXTERN_C const IID IID_IImageList2;
+             /* [annotation][in] */ 
+             _In_  int cy,
+             /* [annotation][in] */ 
+-            _In_  UINT flags,
++            _In_  IMAGELIST_CREATION_FLAGS flags,
+             /* [annotation][in] */ 
+             _In_  int cInitial,
+             /* [annotation][in] */ 
+@@ -1124,7 +1138,7 @@ EXTERN_C const IID IID_IImageList2;
+             /* [annotation][in] */ 
+             _In_  int cy,
+             /* [annotation][in] */ 
+-            _In_  UINT flags,
++            _In_  IMAGELIST_CREATION_FLAGS flags,
+             /* [annotation][in] */ 
+             _In_  int cInitial,
+             /* [annotation][in] */ 
