@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h b/genera
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+_Windows_SupportedOS_Windows7_
      MIDL_INTERFACE("784CFD40-9F89-456E-A1A6-873B006A664E")
++    _Windows_SupportedOS_Windows7_
      IAudioEndpointFormatControl : public IUnknown
      {
