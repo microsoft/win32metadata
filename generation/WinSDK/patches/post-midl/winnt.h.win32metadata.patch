@@ -1,0 +1,381 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
+@@ -33,6 +33,7 @@ extern "C" {
+ 
+ #include <ctype.h>  
+ #include <winapifamily.h>  
++#include <win32metadata_annotations.h>
+ 
+ //
+ // Anywhere that NOINITALL is defined, warning 4845 should be disabled. This warning
+@@ -25204,8 +25205,24 @@ typedef enum _CM_ERROR_CONTROL_TYPE {
+ #define TAPE_ERASE_SHORT            0L
+ #define TAPE_ERASE_LONG             1L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_ERASE_SHORT")
++#pragma push_macro("TAPE_ERASE_LONG")
++#undef TAPE_ERASE_SHORT
++#undef TAPE_ERASE_LONG
++enum ERASE_TAPE_TYPE : DWORD
++{
++    TAPE_ERASE_SHORT = 0L,
++    TAPE_ERASE_LONG = 1L,
++};
++#pragma pop_macro("TAPE_ERASE_LONG")
++#pragma pop_macro("TAPE_ERASE_SHORT")
++#else
++typedef DWORD ERASE_TAPE_TYPE;
++#endif
++
+ typedef struct _TAPE_ERASE {
+-    DWORD Type;
++    ERASE_TAPE_TYPE Type;
+     BOOLEAN Immediate;
+ } TAPE_ERASE, *PTAPE_ERASE;
+ 
+@@ -25220,8 +25237,40 @@ typedef struct _TAPE_ERASE {
+ #define TAPE_UNLOCK                 4L
+ #define TAPE_FORMAT                 5L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_LOAD")
++#pragma push_macro("TAPE_UNLOAD")
++#pragma push_macro("TAPE_TENSION")
++#pragma push_macro("TAPE_LOCK")
++#pragma push_macro("TAPE_UNLOCK")
++#pragma push_macro("TAPE_FORMAT")
++#undef TAPE_LOAD
++#undef TAPE_UNLOAD
++#undef TAPE_TENSION
++#undef TAPE_LOCK
++#undef TAPE_UNLOCK
++#undef TAPE_FORMAT
++enum PREPARE_TAPE_OPERATION : DWORD
++{
++    TAPE_LOAD = 0L,
++    TAPE_UNLOAD = 1L,
++    TAPE_TENSION = 2L,
++    TAPE_LOCK = 3L,
++    TAPE_UNLOCK = 4L,
++    TAPE_FORMAT = 5L,
++};
++#pragma pop_macro("TAPE_FORMAT")
++#pragma pop_macro("TAPE_UNLOCK")
++#pragma pop_macro("TAPE_LOCK")
++#pragma pop_macro("TAPE_TENSION")
++#pragma pop_macro("TAPE_UNLOAD")
++#pragma pop_macro("TAPE_LOAD")
++#else
++typedef DWORD PREPARE_TAPE_OPERATION;
++#endif
++
+ typedef struct _TAPE_PREPARE {
+-    DWORD Operation;
++    PREPARE_TAPE_OPERATION Operation;
+     BOOLEAN Immediate;
+ } TAPE_PREPARE, *PTAPE_PREPARE;
+ 
+@@ -25234,8 +25283,32 @@ typedef struct _TAPE_PREPARE {
+ #define TAPE_SHORT_FILEMARKS        2L
+ #define TAPE_LONG_FILEMARKS         3L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_SETMARKS")
++#pragma push_macro("TAPE_FILEMARKS")
++#pragma push_macro("TAPE_SHORT_FILEMARKS")
++#pragma push_macro("TAPE_LONG_FILEMARKS")
++#undef TAPE_SETMARKS
++#undef TAPE_FILEMARKS
++#undef TAPE_SHORT_FILEMARKS
++#undef TAPE_LONG_FILEMARKS
++enum TAPEMARK_TYPE : DWORD
++{
++    TAPE_SETMARKS = 0L,
++    TAPE_FILEMARKS = 1L,
++    TAPE_SHORT_FILEMARKS = 2L,
++    TAPE_LONG_FILEMARKS = 3L,
++};
++#pragma pop_macro("TAPE_LONG_FILEMARKS")
++#pragma pop_macro("TAPE_SHORT_FILEMARKS")
++#pragma pop_macro("TAPE_FILEMARKS")
++#pragma pop_macro("TAPE_SETMARKS")
++#else
++typedef DWORD TAPEMARK_TYPE;
++#endif
++
+ typedef struct _TAPE_WRITE_MARKS {
+-    DWORD Type;
++    TAPEMARK_TYPE Type;
+     DWORD Count;
+     BOOLEAN Immediate;
+ } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
+@@ -25248,8 +25321,28 @@ typedef struct _TAPE_WRITE_MARKS {
+ #define TAPE_LOGICAL_POSITION        1L
+ #define TAPE_PSEUDO_LOGICAL_POSITION 2L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_ABSOLUTE_POSITION")
++#pragma push_macro("TAPE_LOGICAL_POSITION")
++#pragma push_macro("TAPE_PSEUDO_LOGICAL_POSITION")
++#undef TAPE_ABSOLUTE_POSITION
++#undef TAPE_LOGICAL_POSITION
++#undef TAPE_PSEUDO_LOGICAL_POSITION
++enum TAPE_POSITION_TYPE : DWORD
++{
++    TAPE_ABSOLUTE_POSITION = 0L,
++    TAPE_LOGICAL_POSITION = 1L,
++    TAPE_PSEUDO_LOGICAL_POSITION = 2L,
++};
++#pragma pop_macro("TAPE_PSEUDO_LOGICAL_POSITION")
++#pragma pop_macro("TAPE_LOGICAL_POSITION")
++#pragma pop_macro("TAPE_ABSOLUTE_POSITION")
++#else
++typedef DWORD TAPE_POSITION_TYPE;
++#endif
++
+ typedef struct _TAPE_GET_POSITION {
+-    DWORD Type;
++    TAPE_POSITION_TYPE Type;
+     DWORD Partition;
+     LARGE_INTEGER Offset;
+ } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
+@@ -25269,8 +25362,56 @@ typedef struct _TAPE_GET_POSITION {
+ #define TAPE_SPACE_SETMARKS         8L
+ #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_REWIND")
++#pragma push_macro("TAPE_ABSOLUTE_BLOCK")
++#pragma push_macro("TAPE_LOGICAL_BLOCK")
++#pragma push_macro("TAPE_PSEUDO_LOGICAL_BLOCK")
++#pragma push_macro("TAPE_SPACE_END_OF_DATA")
++#pragma push_macro("TAPE_SPACE_RELATIVE_BLOCKS")
++#pragma push_macro("TAPE_SPACE_FILEMARKS")
++#pragma push_macro("TAPE_SPACE_SEQUENTIAL_FMKS")
++#pragma push_macro("TAPE_SPACE_SETMARKS")
++#pragma push_macro("TAPE_SPACE_SEQUENTIAL_SMKS")
++#undef TAPE_REWIND
++#undef TAPE_ABSOLUTE_BLOCK
++#undef TAPE_LOGICAL_BLOCK
++#undef TAPE_PSEUDO_LOGICAL_BLOCK
++#undef TAPE_SPACE_END_OF_DATA
++#undef TAPE_SPACE_RELATIVE_BLOCKS
++#undef TAPE_SPACE_FILEMARKS
++#undef TAPE_SPACE_SEQUENTIAL_FMKS
++#undef TAPE_SPACE_SETMARKS
++#undef TAPE_SPACE_SEQUENTIAL_SMKS
++enum TAPE_POSITION_METHOD : DWORD
++{
++    TAPE_REWIND = 0L,
++    TAPE_ABSOLUTE_BLOCK = 1L,
++    TAPE_LOGICAL_BLOCK = 2L,
++    TAPE_PSEUDO_LOGICAL_BLOCK = 3L,
++    TAPE_SPACE_END_OF_DATA = 4L,
++    TAPE_SPACE_RELATIVE_BLOCKS = 5L,
++    TAPE_SPACE_FILEMARKS = 6L,
++    TAPE_SPACE_SEQUENTIAL_FMKS = 7L,
++    TAPE_SPACE_SETMARKS = 8L,
++    TAPE_SPACE_SEQUENTIAL_SMKS = 9L,
++};
++#pragma pop_macro("TAPE_SPACE_SEQUENTIAL_SMKS")
++#pragma pop_macro("TAPE_SPACE_SETMARKS")
++#pragma pop_macro("TAPE_SPACE_SEQUENTIAL_FMKS")
++#pragma pop_macro("TAPE_SPACE_FILEMARKS")
++#pragma pop_macro("TAPE_SPACE_RELATIVE_BLOCKS")
++#pragma pop_macro("TAPE_SPACE_END_OF_DATA")
++#pragma pop_macro("TAPE_PSEUDO_LOGICAL_BLOCK")
++#pragma pop_macro("TAPE_LOGICAL_BLOCK")
++#pragma pop_macro("TAPE_ABSOLUTE_BLOCK")
++#pragma pop_macro("TAPE_REWIND")
++#else
++typedef DWORD TAPE_POSITION_METHOD;
++#endif
++
+ typedef struct _TAPE_SET_POSITION {
+-    DWORD Method;
++    TAPE_POSITION_METHOD Method;
+     DWORD Partition;
+     LARGE_INTEGER Offset;
+     BOOLEAN Immediate;
+@@ -25362,6 +25503,140 @@ typedef struct _TAPE_SET_POSITION {
+ #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
+ #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_DRIVE_LOAD_UNLOAD")
++#pragma push_macro("TAPE_DRIVE_TENSION")
++#pragma push_macro("TAPE_DRIVE_LOCK_UNLOCK")
++#pragma push_macro("TAPE_DRIVE_REWIND_IMMEDIATE")
++#pragma push_macro("TAPE_DRIVE_SET_BLOCK_SIZE")
++#pragma push_macro("TAPE_DRIVE_LOAD_UNLD_IMMED")
++#pragma push_macro("TAPE_DRIVE_TENSION_IMMED")
++#pragma push_macro("TAPE_DRIVE_LOCK_UNLK_IMMED")
++#pragma push_macro("TAPE_DRIVE_SET_ECC")
++#pragma push_macro("TAPE_DRIVE_SET_COMPRESSION")
++#pragma push_macro("TAPE_DRIVE_SET_PADDING")
++#pragma push_macro("TAPE_DRIVE_SET_REPORT_SMKS")
++#pragma push_macro("TAPE_DRIVE_ABSOLUTE_BLK")
++#pragma push_macro("TAPE_DRIVE_ABS_BLK_IMMED")
++#pragma push_macro("TAPE_DRIVE_LOGICAL_BLK")
++#pragma push_macro("TAPE_DRIVE_LOG_BLK_IMMED")
++#pragma push_macro("TAPE_DRIVE_END_OF_DATA")
++#pragma push_macro("TAPE_DRIVE_RELATIVE_BLKS")
++#pragma push_macro("TAPE_DRIVE_FILEMARKS")
++#pragma push_macro("TAPE_DRIVE_SEQUENTIAL_FMKS")
++#pragma push_macro("TAPE_DRIVE_SETMARKS")
++#pragma push_macro("TAPE_DRIVE_SEQUENTIAL_SMKS")
++#pragma push_macro("TAPE_DRIVE_REVERSE_POSITION")
++#pragma push_macro("TAPE_DRIVE_SPACE_IMMEDIATE")
++#pragma push_macro("TAPE_DRIVE_WRITE_SETMARKS")
++#pragma push_macro("TAPE_DRIVE_WRITE_FILEMARKS")
++#pragma push_macro("TAPE_DRIVE_WRITE_SHORT_FMKS")
++#pragma push_macro("TAPE_DRIVE_WRITE_LONG_FMKS")
++#pragma push_macro("TAPE_DRIVE_WRITE_MARK_IMMED")
++#pragma push_macro("TAPE_DRIVE_FORMAT")
++#pragma push_macro("TAPE_DRIVE_FORMAT_IMMEDIATE")
++#undef TAPE_DRIVE_LOAD_UNLOAD
++#undef TAPE_DRIVE_TENSION
++#undef TAPE_DRIVE_LOCK_UNLOCK
++#undef TAPE_DRIVE_REWIND_IMMEDIATE
++#undef TAPE_DRIVE_SET_BLOCK_SIZE
++#undef TAPE_DRIVE_LOAD_UNLD_IMMED
++#undef TAPE_DRIVE_TENSION_IMMED
++#undef TAPE_DRIVE_LOCK_UNLK_IMMED
++#undef TAPE_DRIVE_SET_ECC
++#undef TAPE_DRIVE_SET_COMPRESSION
++#undef TAPE_DRIVE_SET_PADDING
++#undef TAPE_DRIVE_SET_REPORT_SMKS
++#undef TAPE_DRIVE_ABSOLUTE_BLK
++#undef TAPE_DRIVE_ABS_BLK_IMMED
++#undef TAPE_DRIVE_LOGICAL_BLK
++#undef TAPE_DRIVE_LOG_BLK_IMMED
++#undef TAPE_DRIVE_END_OF_DATA
++#undef TAPE_DRIVE_RELATIVE_BLKS
++#undef TAPE_DRIVE_FILEMARKS
++#undef TAPE_DRIVE_SEQUENTIAL_FMKS
++#undef TAPE_DRIVE_SETMARKS
++#undef TAPE_DRIVE_SEQUENTIAL_SMKS
++#undef TAPE_DRIVE_REVERSE_POSITION
++#undef TAPE_DRIVE_SPACE_IMMEDIATE
++#undef TAPE_DRIVE_WRITE_SETMARKS
++#undef TAPE_DRIVE_WRITE_FILEMARKS
++#undef TAPE_DRIVE_WRITE_SHORT_FMKS
++#undef TAPE_DRIVE_WRITE_LONG_FMKS
++#undef TAPE_DRIVE_WRITE_MARK_IMMED
++#undef TAPE_DRIVE_FORMAT
++#undef TAPE_DRIVE_FORMAT_IMMEDIATE
++enum
++    [[clang::flag_enum]]
++    TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH : DWORD
++{
++    TAPE_DRIVE_LOAD_UNLOAD = 0x80000001,
++    TAPE_DRIVE_TENSION = 0x80000002,
++    TAPE_DRIVE_LOCK_UNLOCK = 0x80000004,
++    TAPE_DRIVE_REWIND_IMMEDIATE = 0x80000008,
++    TAPE_DRIVE_SET_BLOCK_SIZE = 0x80000010,
++    TAPE_DRIVE_LOAD_UNLD_IMMED = 0x80000020,
++    TAPE_DRIVE_TENSION_IMMED = 0x80000040,
++    TAPE_DRIVE_LOCK_UNLK_IMMED = 0x80000080,
++    TAPE_DRIVE_SET_ECC = 0x80000100,
++    TAPE_DRIVE_SET_COMPRESSION = 0x80000200,
++    TAPE_DRIVE_SET_PADDING = 0x80000400,
++    TAPE_DRIVE_SET_REPORT_SMKS = 0x80000800,
++    TAPE_DRIVE_ABSOLUTE_BLK = 0x80001000,
++    TAPE_DRIVE_ABS_BLK_IMMED = 0x80002000,
++    TAPE_DRIVE_LOGICAL_BLK = 0x80004000,
++    TAPE_DRIVE_LOG_BLK_IMMED = 0x80008000,
++    TAPE_DRIVE_END_OF_DATA = 0x80010000,
++    TAPE_DRIVE_RELATIVE_BLKS = 0x80020000,
++    TAPE_DRIVE_FILEMARKS = 0x80040000,
++    TAPE_DRIVE_SEQUENTIAL_FMKS = 0x80080000,
++    TAPE_DRIVE_SETMARKS = 0x80100000,
++    TAPE_DRIVE_SEQUENTIAL_SMKS = 0x80200000,
++    TAPE_DRIVE_REVERSE_POSITION = 0x80400000,
++    TAPE_DRIVE_SPACE_IMMEDIATE = 0x80800000,
++    TAPE_DRIVE_WRITE_SETMARKS = 0x81000000,
++    TAPE_DRIVE_WRITE_FILEMARKS = 0x82000000,
++    TAPE_DRIVE_WRITE_SHORT_FMKS = 0x84000000,
++    TAPE_DRIVE_WRITE_LONG_FMKS = 0x88000000,
++    TAPE_DRIVE_WRITE_MARK_IMMED = 0x90000000,
++    TAPE_DRIVE_FORMAT = 0xA0000000,
++    TAPE_DRIVE_FORMAT_IMMEDIATE = 0xC0000000,
++};
++#pragma pop_macro("TAPE_DRIVE_FORMAT_IMMEDIATE")
++#pragma pop_macro("TAPE_DRIVE_FORMAT")
++#pragma pop_macro("TAPE_DRIVE_WRITE_MARK_IMMED")
++#pragma pop_macro("TAPE_DRIVE_WRITE_LONG_FMKS")
++#pragma pop_macro("TAPE_DRIVE_WRITE_SHORT_FMKS")
++#pragma pop_macro("TAPE_DRIVE_WRITE_FILEMARKS")
++#pragma pop_macro("TAPE_DRIVE_WRITE_SETMARKS")
++#pragma pop_macro("TAPE_DRIVE_SPACE_IMMEDIATE")
++#pragma pop_macro("TAPE_DRIVE_REVERSE_POSITION")
++#pragma pop_macro("TAPE_DRIVE_SEQUENTIAL_SMKS")
++#pragma pop_macro("TAPE_DRIVE_SETMARKS")
++#pragma pop_macro("TAPE_DRIVE_SEQUENTIAL_FMKS")
++#pragma pop_macro("TAPE_DRIVE_FILEMARKS")
++#pragma pop_macro("TAPE_DRIVE_RELATIVE_BLKS")
++#pragma pop_macro("TAPE_DRIVE_END_OF_DATA")
++#pragma pop_macro("TAPE_DRIVE_LOG_BLK_IMMED")
++#pragma pop_macro("TAPE_DRIVE_LOGICAL_BLK")
++#pragma pop_macro("TAPE_DRIVE_ABS_BLK_IMMED")
++#pragma pop_macro("TAPE_DRIVE_ABSOLUTE_BLK")
++#pragma pop_macro("TAPE_DRIVE_SET_REPORT_SMKS")
++#pragma pop_macro("TAPE_DRIVE_SET_PADDING")
++#pragma pop_macro("TAPE_DRIVE_SET_COMPRESSION")
++#pragma pop_macro("TAPE_DRIVE_SET_ECC")
++#pragma pop_macro("TAPE_DRIVE_LOCK_UNLK_IMMED")
++#pragma pop_macro("TAPE_DRIVE_TENSION_IMMED")
++#pragma pop_macro("TAPE_DRIVE_LOAD_UNLD_IMMED")
++#pragma pop_macro("TAPE_DRIVE_SET_BLOCK_SIZE")
++#pragma pop_macro("TAPE_DRIVE_REWIND_IMMEDIATE")
++#pragma pop_macro("TAPE_DRIVE_LOCK_UNLOCK")
++#pragma pop_macro("TAPE_DRIVE_TENSION")
++#pragma pop_macro("TAPE_DRIVE_LOAD_UNLOAD")
++#else
++typedef DWORD TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH;
++#endif
++
+ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
+     BOOLEAN ECC;
+     BOOLEAN Compression;
+@@ -25372,7 +25647,7 @@ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
+     DWORD MinimumBlockSize;
+     DWORD MaximumPartitionCount;
+     DWORD FeaturesLow;
+-    DWORD FeaturesHigh;
++    TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH FeaturesHigh;
+     DWORD EOTWarningZoneSize;
+ } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
+ 
+@@ -25416,8 +25691,28 @@ typedef struct _TAPE_SET_MEDIA_PARAMETERS {
+ #define TAPE_SELECT_PARTITIONS      1L
+ #define TAPE_INITIATOR_PARTITIONS   2L
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("TAPE_FIXED_PARTITIONS")
++#pragma push_macro("TAPE_SELECT_PARTITIONS")
++#pragma push_macro("TAPE_INITIATOR_PARTITIONS")
++#undef TAPE_FIXED_PARTITIONS
++#undef TAPE_SELECT_PARTITIONS
++#undef TAPE_INITIATOR_PARTITIONS
++enum CREATE_TAPE_PARTITION_METHOD : DWORD
++{
++    TAPE_FIXED_PARTITIONS = 0L,
++    TAPE_SELECT_PARTITIONS = 1L,
++    TAPE_INITIATOR_PARTITIONS = 2L,
++};
++#pragma pop_macro("TAPE_INITIATOR_PARTITIONS")
++#pragma pop_macro("TAPE_SELECT_PARTITIONS")
++#pragma pop_macro("TAPE_FIXED_PARTITIONS")
++#else
++typedef DWORD CREATE_TAPE_PARTITION_METHOD;
++#endif
++
+ typedef struct _TAPE_CREATE_PARTITION {
+-    DWORD Method;
++    CREATE_TAPE_PARTITION_METHOD Method;
+     DWORD Count;
+     DWORD Size;
+ } TAPE_CREATE_PARTITION, *PTAPE_CREATE_PARTITION;

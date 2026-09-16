@@ -1,0 +1,268 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/winbase.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winbase.h
+@@ -1,6 +1,7 @@
+ //@[contract("ntoskrnl-winbase"), comment("MVI_tracked - https://osgwiki.com/wiki/Microsoft_Virus_Initiative")];
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /************************************************************************
+ *                                                                       *
+@@ -2307,67 +2308,82 @@ GetCommPorts(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++#ifdef WIN32METADATA
++enum GET_TAPE_DRIVE_PARAMETERS_OPERATION : DWORD;
++enum TAPE_INFORMATION_TYPE : DWORD;
++#else
++typedef DWORD GET_TAPE_DRIVE_PARAMETERS_OPERATION;
++typedef DWORD TAPE_INFORMATION_TYPE;
++#endif
++
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ SetTapePosition(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwPositionMethod,
++    _In_ TAPE_POSITION_METHOD dwPositionMethod,
+     _In_ DWORD dwPartition,
+     _In_ DWORD dwOffsetLow,
+     _In_ DWORD dwOffsetHigh,
+     _In_ BOOL bImmediate
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ GetTapePosition(
+     _In_  HANDLE hDevice,
+-    _In_  DWORD dwPositionType,
++    _In_  TAPE_POSITION_TYPE dwPositionType,
+     _Out_ LPDWORD lpdwPartition,
+     _Out_ LPDWORD lpdwOffsetLow,
+     _Out_ LPDWORD lpdwOffsetHigh
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ PrepareTape(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwOperation,
++    _In_ PREPARE_TAPE_OPERATION dwOperation,
+     _In_ BOOL bImmediate
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ EraseTape(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwEraseType,
++    _In_ ERASE_TAPE_TYPE dwEraseType,
+     _In_ BOOL bImmediate
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ CreateTapePartition(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwPartitionMethod,
++    _In_ CREATE_TAPE_PARTITION_METHOD dwPartitionMethod,
+     _In_ DWORD dwCount,
+     _In_ DWORD dwSize
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ WriteTapemark(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwTapemarkType,
++    _In_ TAPEMARK_TYPE dwTapemarkType,
+     _In_ DWORD dwTapemarkCount,
+     _In_ BOOL bImmediate
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -2375,12 +2391,13 @@ GetTapeStatus(
+     _In_ HANDLE hDevice
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ GetTapeParameters(
+     _In_    HANDLE hDevice,
+-    _In_    DWORD dwOperation,
++    _In_    GET_TAPE_DRIVE_PARAMETERS_OPERATION dwOperation,
+     _Inout_ LPDWORD lpdwSize,
+     _Out_writes_bytes_(*lpdwSize) LPVOID lpTapeInformation
+     );
+@@ -2388,18 +2405,47 @@ GetTapeParameters(
+ #define GET_TAPE_MEDIA_INFORMATION 0
+ #define GET_TAPE_DRIVE_INFORMATION 1
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("GET_TAPE_MEDIA_INFORMATION")
++#pragma push_macro("GET_TAPE_DRIVE_INFORMATION")
++#undef GET_TAPE_MEDIA_INFORMATION
++#undef GET_TAPE_DRIVE_INFORMATION
++enum GET_TAPE_DRIVE_PARAMETERS_OPERATION : DWORD
++{
++    GET_TAPE_MEDIA_INFORMATION = 0,
++    GET_TAPE_DRIVE_INFORMATION = 1,
++};
++#pragma pop_macro("GET_TAPE_DRIVE_INFORMATION")
++#pragma pop_macro("GET_TAPE_MEDIA_INFORMATION")
++#endif
++
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ SetTapeParameters(
+     _In_ HANDLE hDevice,
+-    _In_ DWORD dwOperation,
++    _In_ TAPE_INFORMATION_TYPE dwOperation,
+     _In_ LPVOID lpTapeInformation
+     );
+ 
+ #define SET_TAPE_MEDIA_INFORMATION 0
+ #define SET_TAPE_DRIVE_INFORMATION 1
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("SET_TAPE_MEDIA_INFORMATION")
++#pragma push_macro("SET_TAPE_DRIVE_INFORMATION")
++#undef SET_TAPE_MEDIA_INFORMATION
++#undef SET_TAPE_DRIVE_INFORMATION
++enum TAPE_INFORMATION_TYPE : DWORD
++{
++    SET_TAPE_MEDIA_INFORMATION = 0,
++    SET_TAPE_DRIVE_INFORMATION = 1,
++};
++#pragma pop_macro("SET_TAPE_DRIVE_INFORMATION")
++#pragma pop_macro("SET_TAPE_MEDIA_INFORMATION")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
+@@ -3040,6 +3086,8 @@ SignalObjectAndWait(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -3053,6 +3101,8 @@ BackupRead(
+     _Inout_ LPVOID *lpContext
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -3065,6 +3115,8 @@ BackupSeek(
+     _Inout_ LPVOID *lpContext
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -3082,8 +3134,14 @@ BackupWrite(
+ //
+ //  Stream id structure
+ //
++#ifdef WIN32METADATA
++enum WIN_STREAM_ID : DWORD;
++#else
++typedef DWORD WIN_STREAM_ID;
++#endif
++
+ typedef struct _WIN32_STREAM_ID {
+-        DWORD          dwStreamId ;
++        WIN_STREAM_ID  dwStreamId ;
+         DWORD          dwStreamAttributes ;
+         LARGE_INTEGER  Size ;
+         DWORD          dwStreamNameSize ;
+@@ -3107,6 +3165,60 @@ typedef struct _WIN32_STREAM_ID {
+ #define BACKUP_TXFS_DATA        0x0000000a
+ #define BACKUP_GHOSTED_FILE_EXTENTS 0x0000000b
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("BACKUP_INVALID")
++#pragma push_macro("BACKUP_DATA")
++#pragma push_macro("BACKUP_EA_DATA")
++#pragma push_macro("BACKUP_SECURITY_DATA")
++#pragma push_macro("BACKUP_ALTERNATE_DATA")
++#pragma push_macro("BACKUP_LINK")
++#pragma push_macro("BACKUP_PROPERTY_DATA")
++#pragma push_macro("BACKUP_OBJECT_ID")
++#pragma push_macro("BACKUP_REPARSE_DATA")
++#pragma push_macro("BACKUP_SPARSE_BLOCK")
++#pragma push_macro("BACKUP_TXFS_DATA")
++#pragma push_macro("BACKUP_GHOSTED_FILE_EXTENTS")
++#undef BACKUP_INVALID
++#undef BACKUP_DATA
++#undef BACKUP_EA_DATA
++#undef BACKUP_SECURITY_DATA
++#undef BACKUP_ALTERNATE_DATA
++#undef BACKUP_LINK
++#undef BACKUP_PROPERTY_DATA
++#undef BACKUP_OBJECT_ID
++#undef BACKUP_REPARSE_DATA
++#undef BACKUP_SPARSE_BLOCK
++#undef BACKUP_TXFS_DATA
++#undef BACKUP_GHOSTED_FILE_EXTENTS
++enum WIN_STREAM_ID : DWORD
++{
++    BACKUP_INVALID = 0x00000000,
++    BACKUP_DATA = 0x00000001,
++    BACKUP_EA_DATA = 0x00000002,
++    BACKUP_SECURITY_DATA = 0x00000003,
++    BACKUP_ALTERNATE_DATA = 0x00000004,
++    BACKUP_LINK = 0x00000005,
++    BACKUP_PROPERTY_DATA = 0x00000006,
++    BACKUP_OBJECT_ID = 0x00000007,
++    BACKUP_REPARSE_DATA = 0x00000008,
++    BACKUP_SPARSE_BLOCK = 0x00000009,
++    BACKUP_TXFS_DATA = 0x0000000a,
++    BACKUP_GHOSTED_FILE_EXTENTS = 0x0000000b,
++};
++#pragma pop_macro("BACKUP_GHOSTED_FILE_EXTENTS")
++#pragma pop_macro("BACKUP_TXFS_DATA")
++#pragma pop_macro("BACKUP_SPARSE_BLOCK")
++#pragma pop_macro("BACKUP_REPARSE_DATA")
++#pragma pop_macro("BACKUP_OBJECT_ID")
++#pragma pop_macro("BACKUP_PROPERTY_DATA")
++#pragma pop_macro("BACKUP_LINK")
++#pragma pop_macro("BACKUP_ALTERNATE_DATA")
++#pragma pop_macro("BACKUP_SECURITY_DATA")
++#pragma pop_macro("BACKUP_EA_DATA")
++#pragma pop_macro("BACKUP_DATA")
++#pragma pop_macro("BACKUP_INVALID")
++#endif
++
+ //
+ //  Stream Attributes
+ //
