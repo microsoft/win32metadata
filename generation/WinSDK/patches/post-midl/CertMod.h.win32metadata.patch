@@ -1,0 +1,44 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
+@@ -67,6 +67,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CMM_REFRESHONLY	( 0x1 )
+@@ -102,8 +103,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certmod_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertManageModule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e7d7ad42-bd3d-11d1-9a4d-00c04fc297eb")
++    _Windows_SupportedOS_Server2003_
+     ICertManageModule : public IDispatch
+     {
+     public:
+@@ -329,14 +330,22 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* end of Additional Prototypes */

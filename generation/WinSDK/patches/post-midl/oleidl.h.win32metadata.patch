@@ -1,0 +1,198 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -262,6 +266,7 @@ EXTERN_C const IID IID_IOleAdviseHolder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000111-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleAdviseHolder : public IUnknown
+     {
+@@ -424,6 +429,7 @@ EXTERN_C const IID IID_IOleCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000011e-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleCache : public IUnknown
+     {
+@@ -606,6 +612,7 @@ EXTERN_C const IID IID_IOleCache2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000128-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleCache2 : public IOleCache
+     {
+@@ -799,6 +806,7 @@ EXTERN_C const IID IID_IOleCacheControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000129-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleCacheControl : public IUnknown
+     {
+@@ -895,6 +903,7 @@ EXTERN_C const IID IID_IParseDisplayName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000011a-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IParseDisplayName : public IUnknown
+     {
+@@ -996,6 +1005,7 @@ EXTERN_C const IID IID_IOleContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000011b-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleContainer : public IParseDisplayName
+     {
+@@ -1118,6 +1128,7 @@ EXTERN_C const IID IID_IOleClientSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000118-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleClientSite : public IUnknown
+     {
+@@ -1328,6 +1339,7 @@ EXTERN_C const IID IID_IOleObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000112-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleObject : public IUnknown
+     {
+@@ -1782,6 +1794,7 @@ EXTERN_C const IID IID_IOleWindow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000114-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleWindow : public IUnknown
+     {
+@@ -1901,6 +1914,7 @@ EXTERN_C const IID IID_IOleLink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000011d-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleLink : public IUnknown
+     {
+@@ -2138,6 +2152,7 @@ EXTERN_C const IID IID_IOleItemContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000011c-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleItemContainer : public IOleContainer
+     {
+@@ -2324,6 +2339,7 @@ EXTERN_C const IID IID_IOleInPlaceUIWindow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000115-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleInPlaceUIWindow : public IOleWindow
+     {
+@@ -2475,6 +2491,7 @@ EXTERN_C const IID IID_IOleInPlaceActiveObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000117-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleInPlaceActiveObject : public IOleWindow
+     {
+@@ -2693,6 +2710,7 @@ EXTERN_C const IID IID_IOleInPlaceFrame;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000116-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleInPlaceFrame : public IOleInPlaceUIWindow
+     {
+@@ -2921,6 +2939,7 @@ EXTERN_C const IID IID_IOleInPlaceObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000113-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleInPlaceObject : public IOleWindow
+     {
+@@ -3060,6 +3079,7 @@ EXTERN_C const IID IID_IOleInPlaceSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000119-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IOleInPlaceSite : public IOleWindow
+     {
+@@ -3360,6 +3380,7 @@ EXTERN_C const IID IID_IViewObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000010d-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IViewObject : public IUnknown
+     {
+@@ -3688,6 +3709,7 @@ EXTERN_C const IID IID_IViewObject2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000127-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IViewObject2 : public IViewObject
+     {
+@@ -3887,6 +3909,7 @@ EXTERN_C const IID IID_IDropSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000121-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IDropSource : public IUnknown
+     {
+@@ -4025,6 +4048,7 @@ EXTERN_C const IID IID_IDropTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000122-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IDropTarget : public IUnknown
+     {
+@@ -4179,6 +4203,7 @@ EXTERN_C const IID IID_IDropSourceNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0000012B-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_WindowsVista_
+     IDropSourceNotify : public IUnknown
+     {
+@@ -4275,6 +4300,7 @@ EXTERN_C const IID IID_IEnterpriseDropTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("390E3878-FD55-4E18-819D-4682081C0CFD")
++    _Windows_SupportedOS_10240_
+     IEnterpriseDropTarget : public IUnknown
+     {
+@@ -4407,6 +4433,7 @@ EXTERN_C const IID IID_IEnumOLEVERB;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("00000104-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
+     IEnumOLEVERB : public IUnknown
+     {

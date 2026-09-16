@@ -1,0 +1,94 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+@@ -162,6 +162,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -179,8 +180,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certcli_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertGetConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("c7ea09c0-ce17-11d0-8833-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertGetConfig : public IDispatch
+     {
+     public:
+@@ -319,8 +320,8 @@ EXTERN_C const IID IID_ICertGetConfig;
+ EXTERN_C const IID IID_ICertConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("372fce34-4324-11d0-8810-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertConfig : public IDispatch
+     {
+     public:
+@@ -496,8 +497,8 @@ EXTERN_C const IID IID_ICertConfig;
+ EXTERN_C const IID IID_ICertConfig2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("7a18edde-7e78-4163-8ded-78e2c9cee924")
++    _Windows_SupportedOS_Server2003_
+     ICertConfig2 : public ICertConfig
+     {
+     public:
+@@ -670,8 +671,8 @@ EXTERN_C const IID IID_ICertConfig2;
+ EXTERN_C const IID IID_ICertRequest;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("014e4840-5523-11d0-8812-00a0c903b83c")
++    _Windows_SupportedOS_WindowsXP_
+     ICertRequest : public IDispatch
+     {
+     public:
+@@ -894,8 +895,8 @@ EXTERN_C const IID IID_ICertRequest;
+ EXTERN_C const IID IID_ICertRequest2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("a4772988-4a85-4fa9-824e-b5cf5c16405a")
++    _Windows_SupportedOS_WindowsXP_
+     ICertRequest2 : public ICertRequest
+     {
+     public:
+@@ -1208,8 +1209,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certcli_0000_0005_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertRequest3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("AFC8F92B-33A2-4861-BF36-2933B7CD67B3")
++    _Windows_SupportedOS_Windows7_
+     ICertRequest3 : public ICertRequest2
+     {
+     public:
+@@ -1927,14 +1928,22 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* end of Additional Prototypes */
