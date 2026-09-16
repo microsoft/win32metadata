@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
+@@ -24,6 +24,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -206,6 +207,7 @@ typedef enum _SI_PAGE_ACTIVATED
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-00AA00BBB723")
+ {
+     // *** IUnknown methods ***
+@@ -236,6 +238,7 @@ typedef ISecurityInformation *LPSECURITYINFO;
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation2
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
+ {
+     // *** IUnknown methods ***
+@@ -267,6 +270,7 @@ typedef struct _SID_INFO_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
+ {
+     // *** IUnknown methods ***
+@@ -285,6 +289,7 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityObjectTypeInfo
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
+ {
+     // *** IUnknown methods ***
+@@ -307,6 +312,7 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
+ // Support for separation or read-only ACL viewer and elevated ACL editor
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation3
++_Windows_SupportedOS_WindowsVista_
+ DECLARE_INTERFACE_IID_(ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
+ {
+     // *** IUnknown methods ***
+@@ -351,6 +357,7 @@ typedef struct _EFFPERM_RESULT_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation4
++_Windows_SupportedOS_Windows8_
+ DECLARE_INTERFACE_IID_(ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
+ {
+     // *** IUnknown methods ***
+@@ -370,6 +377,7 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
++_Windows_SupportedOS_Windows8_
+ DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
+ {
+     // *** IUnknown methods ***
+@@ -419,11 +427,16 @@ EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb,
+ EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ HPROPSHEETPAGE ACLUIAPI CreateSecurityPage(_In_ LPSECURITYINFO psi );
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ BOOL ACLUIAPI EditSecurity(_In_ HWND hwndOwner,
+                            _In_ LPSECURITYINFO psi );
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Windows_SupportedOS_WindowsVista_
+ HRESULT ACLUIAPI EditSecurityAdvanced(_In_ HWND hwndOwner,
+                                       _In_ LPSECURITYINFO psi,
+                                       _In_ SI_PAGE_TYPE   uSIPage );
