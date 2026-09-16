@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
-index 14d3158e..e315d0a4 100644
+index 14d3158e50..1fd74dae24 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 @@ -25,6 +25,9 @@ Revision History:
@@ -12,15 +12,16 @@ index 14d3158e..e315d0a4 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -541,6 +544,7 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTES_INFORMATION {
+@@ -541,6 +544,8 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTES_INFORMATION {
  
  #define AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD 0x00000001
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -555,8 +559,10 @@ AuthzAccessCheck(
+@@ -555,8 +560,11 @@ AuthzAccessCheck(
      _In_      DWORD                              OptionalSecurityDescriptorCount,
      _Inout_   PAUTHZ_ACCESS_REPLY                pReply,
      _Out_opt_ PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE phAccessCheckResults
@@ -28,34 +29,38 @@ index 14d3158e..e315d0a4 100644
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -568,6 +574,7 @@ AuthzCachedAccessCheck(
+@@ -568,6 +576,8 @@ AuthzCachedAccessCheck(
       _Inout_ PAUTHZ_ACCESS_REPLY               pReply
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -583,6 +590,7 @@ AuthzOpenObjectAudit(
+@@ -583,6 +593,8 @@ AuthzOpenObjectAudit(
      _In_     PAUTHZ_ACCESS_REPLY         pReply
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -601,6 +609,7 @@ AuthzFreeHandle(
+@@ -601,6 +613,8 @@ AuthzFreeHandle(
          AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION | \
          AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES)
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -611,6 +620,7 @@ AuthzInitializeResourceManager(
+@@ -611,6 +625,7 @@ AuthzInitializeResourceManager(
      _In_opt_ PFN_AUTHZ_FREE_DYNAMIC_GROUPS    pfnFreeDynamicGroups,
      _In_opt_ PCWSTR                           szResourceManagerName,
      _Out_    PAUTHZ_RESOURCE_MANAGER_HANDLE   phAuthzResourceManager
@@ -63,15 +68,16 @@ index 14d3158e..e315d0a4 100644
      );
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
-@@ -668,6 +678,7 @@ typedef struct _AUTHZ_INIT_INFO
+@@ -668,6 +683,8 @@ typedef struct _AUTHZ_INIT_INFO
      PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY    pfnFreeCentralAccessPolicy;
  } AUTHZ_INIT_INFO, *PAUTHZ_INIT_INFO;
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -675,20 +686,24 @@ AuthzInitializeResourceManagerEx(
+@@ -675,20 +692,26 @@ AuthzInitializeResourceManagerEx(
      _In_opt_ DWORD                          Flags,
      _In_opt_ PAUTHZ_INIT_INFO               pAuthzInitInfo,
      _Out_    PAUTHZ_RESOURCE_MANAGER_HANDLE phAuthzResourceManager
@@ -81,6 +87,7 @@ index 14d3158e..e315d0a4 100644
  
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
@@ -93,18 +100,20 @@ index 14d3158e..e315d0a4 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -696,6 +711,7 @@ AuthzFreeResourceManager(
+@@ -696,6 +719,8 @@ AuthzFreeResourceManager(
      _In_ AUTHZ_RESOURCE_MANAGER_HANDLE hAuthzResourceManager
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -707,8 +723,10 @@ AuthzInitializeContextFromToken(
+@@ -707,8 +732,11 @@ AuthzInitializeContextFromToken(
      _In_      LUID                          Identifier,
      _In_opt_  PVOID                         DynamicGroupArgs,
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
@@ -112,10 +121,11 @@ index 14d3158e..e315d0a4 100644
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -720,8 +738,10 @@ AuthzInitializeContextFromSid(
+@@ -720,8 +748,11 @@ AuthzInitializeContextFromSid(
      _In_      LUID                          Identifier,
      _In_opt_  PVOID                         DynamicGroupArgs,
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
@@ -123,10 +133,11 @@ index 14d3158e..e315d0a4 100644
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -732,11 +752,13 @@ AuthzInitializeContextFromAuthzContext(
+@@ -732,11 +763,14 @@ AuthzInitializeContextFromAuthzContext(
      _In_      LUID                         Identifier,
      _In_      PVOID                        DynamicGroupArgs,
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE phNewAuthzClientContext
@@ -137,10 +148,11 @@ index 14d3158e..e315d0a4 100644
  
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -744,10 +766,12 @@ AuthzInitializeCompoundContext(
+@@ -744,10 +778,13 @@ AuthzInitializeCompoundContext(
      _In_ AUTHZ_CLIENT_CONTEXT_HANDLE UserContext,
      _In_ AUTHZ_CLIENT_CONTEXT_HANDLE DeviceContext,
      _Out_ PAUTHZ_CLIENT_CONTEXT_HANDLE phCompoundContext
@@ -150,10 +162,11 @@ index 14d3158e..e315d0a4 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -758,12 +782,14 @@ AuthzAddSidsToContext(
+@@ -758,12 +795,15 @@ AuthzAddSidsToContext(
      _In_opt_  PSID_AND_ATTRIBUTES          RestrictedSids,
      _In_      DWORD                        RestrictedSidCount,
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE phNewAuthzClientContext
@@ -165,58 +178,65 @@ index 14d3158e..e315d0a4 100644
  //
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows7_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -801,6 +827,7 @@ typedef enum _AUTHZ_CONTEXT_INFORMATION_CLASS
+@@ -801,6 +841,8 @@ typedef enum _AUTHZ_CONTEXT_INFORMATION_CLASS
  } AUTHZ_CONTEXT_INFORMATION_CLASS;
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -813,6 +840,7 @@ AuthzModifyClaims(
+@@ -813,6 +855,8 @@ AuthzModifyClaims(
      _In_opt_ PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION pClaims
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -825,6 +853,7 @@ AuthzModifySids(
+@@ -825,6 +869,8 @@ AuthzModifySids(
      _In_opt_ PTOKEN_GROUPS                          pSids
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -838,6 +867,7 @@ AuthzSetAppContainerInformation(
+@@ -838,6 +884,8 @@ AuthzSetAppContainerInformation(
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -849,6 +879,7 @@ AuthzGetInformationFromContext(
+@@ -849,6 +897,8 @@ AuthzGetInformationFromContext(
      _Out_ PVOID                           Buffer
  );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -872,6 +903,7 @@ AuthzFreeContext(
+@@ -872,6 +922,8 @@ AuthzFreeContext(
                                                    AUTHZ_NO_ALLOC_STRINGS | \
                                                    AUTHZ_WPD_CATEGORY_FLAG)
                               
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -882,11 +914,13 @@ AuthzInitializeObjectAccessAuditEvent(
+@@ -882,11 +934,14 @@ AuthzInitializeObjectAccessAuditEvent(
      _In_    PWSTR                         szObjectType,
      _In_    PWSTR                         szObjectName,
      _In_    PWSTR                         szAdditionalInfo,
@@ -228,10 +248,11 @@ index 14d3158e..e315d0a4 100644
      );
      
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -898,7 +932,8 @@ AuthzInitializeObjectAccessAuditEvent2(
+@@ -898,7 +953,8 @@ AuthzInitializeObjectAccessAuditEvent2(
      _In_    PWSTR                         szObjectName,
      _In_    PWSTR                         szAdditionalInfo,
      _In_    PWSTR                         szAdditionalInfo2,
@@ -241,47 +262,52 @@ index 14d3158e..e315d0a4 100644
      _In_    DWORD                         dwAdditionalParameterCount,
      ...
      );
-@@ -917,6 +952,7 @@ typedef enum _AUTHZ_AUDIT_EVENT_INFORMATION_CLASS
+@@ -917,6 +973,8 @@ typedef enum _AUTHZ_AUDIT_EVENT_INFORMATION_CLASS
      AuthzAuditEventInfoAdditionalInfo,
  } AUTHZ_AUDIT_EVENT_INFORMATION_CLASS;
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -991,6 +1027,7 @@ typedef struct _AUTHZ_SOURCE_SCHEMA_REGISTRATION
+@@ -991,6 +1049,8 @@ typedef struct _AUTHZ_SOURCE_SCHEMA_REGISTRATION
  
  #define AUTHZ_FLAG_ALLOW_MULTIPLE_SOURCE_INSTANCES 0x1
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL 
  WINAPI
-@@ -999,6 +1036,7 @@ AuthzInstallSecurityEventSource(
+@@ -999,6 +1059,8 @@ AuthzInstallSecurityEventSource(
      _In_ PAUTHZ_SOURCE_SCHEMA_REGISTRATION pRegistration
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1008,6 +1046,7 @@ AuthzUninstallSecurityEventSource(
+@@ -1008,6 +1070,8 @@ AuthzUninstallSecurityEventSource(
      );
  
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1018,6 +1057,7 @@ AuthzEnumerateSecurityEventSources(
+@@ -1018,6 +1082,8 @@ AuthzEnumerateSecurityEventSources(
       _Inout_ PDWORD                            pdwLength
      );
      
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1025,8 +1065,10 @@ AuthzRegisterSecurityEventSource(
+@@ -1025,8 +1091,11 @@ AuthzRegisterSecurityEventSource(
      _In_  DWORD                                 dwFlags,
      _In_  PCWSTR                                szEventSourceName,
      _Out_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
@@ -289,30 +315,34 @@ index 14d3158e..e315d0a4 100644
      );
      
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1035,6 +1077,7 @@ AuthzUnregisterSecurityEventSource(
+@@ -1035,6 +1104,8 @@ AuthzUnregisterSecurityEventSource(
       _Inout_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1047,6 +1090,7 @@ AuthzReportSecurityEvent(
+@@ -1047,6 +1118,8 @@ AuthzReportSecurityEvent(
      ...    
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Server2003_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1059,16 +1103,19 @@ AuthzReportSecurityEventFromParams(
+@@ -1059,16 +1132,21 @@ AuthzReportSecurityEventFromParams(
      );
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  _Success_(return != FALSE)
  AUTHZAPI
  BOOL
@@ -326,14 +356,16 @@ index 14d3158e..e315d0a4 100644
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1076,6 +1123,7 @@ AuthzUnregisterCapChangeNotification(
+@@ -1076,6 +1154,8 @@ AuthzUnregisterCapChangeNotification(
      _In_ AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE hCapChangeSubscription
      );
  
 +_Win32_SetLastError_
++_Windows_SupportedOS_Windows8_
  AUTHZAPI
  BOOL
  WINAPI
