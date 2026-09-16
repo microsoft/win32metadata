@@ -17,576 +17,576 @@ index cd8acc4d..2f0b74e0 100644
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("CAFC823C-B441-11d1-B82B-0000F8757E2A")
++    _Windows_SupportedOS_Windows2000_
      ISecurityIdentityColl : public IDispatch
      {
 @@ -1471,6 +1476,7 @@ EXTERN_C const IID IID_ISecurityCallersColl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("CAFC823D-B441-11d1-B82B-0000F8757E2A")
++    _Windows_SupportedOS_Windows2000_
      ISecurityCallersColl : public IDispatch
      {
 @@ -1633,6 +1639,7 @@ EXTERN_C const IID IID_ISecurityCallContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("CAFC823E-B441-11d1-B82B-0000F8757E2A")
++    _Windows_SupportedOS_Windows2000_
      ISecurityCallContext : public IDispatch
      {
 @@ -1834,6 +1841,7 @@ EXTERN_C const IID IID_IGetSecurityCallContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("CAFC823F-B441-11d1-B82B-0000F8757E2A")
++    _Windows_SupportedOS_Windows2000_
      IGetSecurityCallContext : public IDispatch
      {
 @@ -1972,6 +1980,7 @@ EXTERN_C const IID IID_SecurityProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("E74A7215-014D-11d1-A63C-00A0C911B4E0")
++    _Windows_SupportedOS_Windows2000_
      SecurityProperty : public IDispatch
      {
 @@ -2143,6 +2152,7 @@ EXTERN_C const IID IID_ContextInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("19A5A02C-0AC8-11d2-B286-00C04F8EF934")
++    _Windows_SupportedOS_Windows2000_
      ContextInfo : public IDispatch
      {
 @@ -2325,6 +2335,7 @@ EXTERN_C const IID IID_ContextInfo2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("c99d6e75-2375-11d4-8331-00c04f605588")
++    _Windows_SupportedOS_WindowsXP_
      ContextInfo2 : public ContextInfo
      {
 @@ -2794,6 +2805,7 @@ EXTERN_C const IID IID_ITransactionContextEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("7999FC22-D3C6-11CF-ACAB-00A024A55AEF")
++    _Windows_SupportedOS_Windows2000_
      ITransactionContextEx : public IUnknown
      {
 @@ -2900,6 +2912,7 @@ EXTERN_C const IID IID_ITransactionContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("7999FC21-D3C6-11CF-ACAB-00A024A55AEF")
++    _Windows_SupportedOS_Windows2000_
      ITransactionContext : public IDispatch
      {
 @@ -3058,6 +3071,7 @@ EXTERN_C const IID IID_ICreateWithTransactionEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("455ACF57-5345-11d2-99CF-00C04F797BC9")
++    _Windows_SupportedOS_Windows2000_
      ICreateWithTransactionEx : public IUnknown
      {
 @@ -3148,6 +3162,7 @@ EXTERN_C const IID IID_ICreateWithLocalTransaction;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("227AC7A8-8423-42ce-B7CF-03061EC9AAA3")
++    _Windows_SupportedOS_WindowsXP_
      ICreateWithLocalTransaction : public IUnknown
      {
 @@ -3238,6 +3253,7 @@ EXTERN_C const IID IID_ICreateWithTipTransactionEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("455ACF59-5345-11d2-99CF-00C04F797BC9")
++    _Windows_SupportedOS_Windows2000_
      ICreateWithTipTransactionEx : public IUnknown
      {
 @@ -3357,6 +3373,7 @@ EXTERN_C const IID IID_IComLTxEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("605CF82C-578E-4298-975D-82BABCD9E053")
++    _Windows_SupportedOS_WindowsXP_
      IComLTxEvents : public IUnknown
      {
 @@ -3505,6 +3522,7 @@ EXTERN_C const IID IID_IComUserEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A4-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComUserEvent : public IUnknown
      {
 @@ -3591,6 +3609,7 @@ EXTERN_C const IID IID_IComThreadEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A5-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComThreadEvents : public IUnknown
      {
 @@ -3847,6 +3866,7 @@ EXTERN_C const IID IID_IComAppEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A6-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComAppEvents : public IUnknown
      {
 @@ -3959,6 +3979,7 @@ EXTERN_C const IID IID_IComInstanceEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A7-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComInstanceEvents : public IUnknown
      {
 @@ -4066,6 +4087,7 @@ EXTERN_C const IID IID_IComTransactionEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A8-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComTransactionEvents : public IUnknown
      {
 @@ -4197,6 +4219,7 @@ EXTERN_C const IID IID_IComMethodEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130A9-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComMethodEvents : public IUnknown
      {
 @@ -4329,6 +4352,7 @@ EXTERN_C const IID IID_IComObjectEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AA-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComObjectEvents : public IUnknown
      {
 @@ -4484,6 +4508,7 @@ EXTERN_C const IID IID_IComResourceEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AB-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComResourceEvents : public IUnknown
      {
 @@ -4654,6 +4679,7 @@ EXTERN_C const IID IID_IComSecurityEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AC-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComSecurityEvents : public IUnknown
      {
 @@ -4785,6 +4811,7 @@ EXTERN_C const IID IID_IComObjectPoolEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AD-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComObjectPoolEvents : public IUnknown
      {
 @@ -4934,6 +4961,7 @@ EXTERN_C const IID IID_IComObjectPoolEvents2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AE-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComObjectPoolEvents2 : public IUnknown
      {
 @@ -5098,6 +5126,7 @@ EXTERN_C const IID IID_IComObjectConstructionEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130AF-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComObjectConstructionEvents : public IUnknown
      {
 @@ -5188,6 +5217,7 @@ EXTERN_C const IID IID_IComActivityEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130B0-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComActivityEvents : public IUnknown
      {
 @@ -5370,6 +5400,7 @@ EXTERN_C const IID IID_IComIdentityEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130B1-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComIdentityEvents : public IUnknown
      {
 @@ -5462,6 +5493,7 @@ EXTERN_C const IID IID_IComQCEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130B2-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComQCEvents : public IUnknown
      {
 @@ -5658,6 +5690,7 @@ EXTERN_C const IID IID_IComExceptionEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130B3-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComExceptionEvents : public IUnknown
      {
 @@ -5862,6 +5895,7 @@ EXTERN_C const IID IID_IComCRMEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("683130B5-2E50-11d2-98A5-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IComCRMEvents : public IUnknown
      {
 @@ -6150,6 +6184,7 @@ EXTERN_C const IID IID_IComMethod2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("FB388AAA-567D-4024-AF8E-6E93EE748573")
++    _Windows_SupportedOS_Windows2000_
      IComMethod2Events : public IUnknown
      {
 @@ -6288,6 +6323,7 @@ EXTERN_C const IID IID_IComTrackingInfoEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("4e6cdcc9-fb25-4fd5-9cc5-c9f4b6559cec")
++    _Windows_SupportedOS_WindowsXP_
      IComTrackingInfoEvents : public IUnknown
      {
 @@ -6388,6 +6424,7 @@ EXTERN_C const IID IID_IComTrackingInfoCollection;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("c266c677-c9ad-49ab-9fd9-d9661078588a")
++    _Windows_SupportedOS_WindowsXP_
      IComTrackingInfoCollection : public IUnknown
      {
 @@ -6498,6 +6535,7 @@ EXTERN_C const IID IID_IComTrackingInfoObject;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("116e42c5-d8b1-47bf-ab1e-c895ed3e2372")
++    _Windows_SupportedOS_WindowsXP_
      IComTrackingInfoObject : public IUnknown
      {
 @@ -6584,6 +6622,7 @@ EXTERN_C const IID IID_IComTrackingInfoProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("789b42be-6f6b-443a-898e-67abf390aa14")
++    _Windows_SupportedOS_WindowsXP_
      IComTrackingInfoProperties : public IUnknown
      {
 @@ -6681,6 +6720,7 @@ EXTERN_C const IID IID_IComApp2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("1290BC1A-B219-418d-B078-5934DED08242")
++    _Windows_SupportedOS_WindowsXP_
      IComApp2Events : public IUnknown
      {
 @@ -6827,6 +6867,7 @@ EXTERN_C const IID IID_IComTransaction2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("A136F62A-2F94-4288-86E0-D8A1FA4C0299")
++    _Windows_SupportedOS_Windows2000_
      IComTransaction2Events : public IUnknown
      {
 @@ -6960,6 +7001,7 @@ EXTERN_C const IID IID_IComInstance2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("20E3BF07-B506-4ad5-A50C-D2CA5B9C158E")
++    _Windows_SupportedOS_Windows2000_
      IComInstance2Events : public IUnknown
      {
 @@ -7069,6 +7111,7 @@ EXTERN_C const IID IID_IComObjectPool2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("65BF6534-85EA-4f64-8CF4-3D974B2AB1CF")
++    _Windows_SupportedOS_Windows2000_
      IComObjectPool2Events : public IUnknown
      {
 @@ -7222,6 +7265,7 @@ EXTERN_C const IID IID_IComObjectConstruction2Events;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("4B5A7827-8DF2-45c0-8F6F-57EA1F856A9F")
++    _Windows_SupportedOS_Windows2000_
      IComObjectConstruction2Events : public IUnknown
      {
 @@ -7314,6 +7358,7 @@ EXTERN_C const IID IID_ISystemAppEventData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D6D48A3C-D5C5-49E7-8C74-99E4889ED52F")
++    _Windows_SupportedOS_Windows2000_
      ISystemAppEventData : public IUnknown
      {
 @@ -7417,6 +7462,7 @@ EXTERN_C const IID IID_IMtsEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("BACEDF4D-74AB-11D0-B162-00AA00BA3258")
++    _Windows_SupportedOS_Windows2000_
      IMtsEvents : public IDispatch
      {
 @@ -7599,6 +7645,7 @@ EXTERN_C const IID IID_IMtsEventInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D56C3DC1-8482-11d0-B170-00AA00BA3258")
++    _Windows_SupportedOS_Windows2000_
      IMtsEventInfo : public IDispatch
      {
 @@ -7783,6 +7830,7 @@ EXTERN_C const IID IID_IMTSLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D19B8BFD-7F88-11D0-B16E-00AA00BA3258")
++    _Windows_SupportedOS_Windows2000_
      IMTSLocator : public IDispatch
      {
 @@ -7921,6 +7969,7 @@ EXTERN_C const IID IID_IMtsGrp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("4B2E958C-0393-11D1-B1AB-00AA00BA3258")
++    _Windows_SupportedOS_Windows2000_
      IMtsGrp : public IDispatch
      {
 @@ -8081,6 +8130,7 @@ EXTERN_C const IID IID_IMessageMover;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("588A085A-B795-11D1-8054-00C04FC340EE")
++    _Windows_SupportedOS_Windows2000_
      IMessageMover : public IDispatch
      {
 @@ -8663,6 +8713,7 @@ EXTERN_C const IID IID_IGetAppTrackerData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("507C3AC8-3E12-4cb0-9366-653D3E050638")
++    _Windows_SupportedOS_WindowsXP_
      IGetAppTrackerData : public IUnknown
      {
 @@ -8964,6 +9015,7 @@ EXTERN_C const IID IID_IDispenserManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("5cb31e10-2b5f-11cf-be10-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IDispenserManager : public IUnknown
      {
 @@ -9077,6 +9129,7 @@ EXTERN_C const IID IID_IHolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("bf6a1850-2b45-11cf-be10-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IHolder : public IUnknown
      {
 @@ -9254,6 +9307,7 @@ EXTERN_C const IID IID_IDispenserDriver;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("208b3651-2b48-11cf-be10-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IDispenserDriver : public IUnknown
      {
 @@ -9444,6 +9498,7 @@ EXTERN_C const IID IID_ITransactionProxy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("02558374-DF2E-4dae-BD6B-1D5C994F9BDC")
++    _Windows_SupportedOS_WindowsXP_
      ITransactionProxy : public IUnknown
      {
 @@ -9773,6 +9828,7 @@ EXTERN_C const IID IID_IObjectContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372ae0-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IObjectContext : public IUnknown
      {
 @@ -9928,6 +9984,7 @@ EXTERN_C const IID IID_IObjectControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372aec-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IObjectControl : public IUnknown
      {
 @@ -10028,6 +10085,7 @@ EXTERN_C const IID IID_IEnumNames;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372af2-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IEnumNames : public IUnknown
      {
 @@ -10147,6 +10205,7 @@ EXTERN_C const IID IID_ISecurityProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372aea-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      ISecurityProperty : public IUnknown
      {
 @@ -10275,6 +10334,7 @@ EXTERN_C const IID IID_ObjectControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("7DC41850-0C31-11d0-8B79-00AA00B8A790")
++    _Windows_SupportedOS_Windows2000_
      ObjectControl : public IUnknown
      {
 @@ -10377,6 +10437,7 @@ EXTERN_C const IID IID_ISharedProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("2A005C01-A5DE-11CF-9E66-00AA00A3F464")
++    _Windows_SupportedOS_Windows2000_
      ISharedProperty : public IDispatch
      {
 @@ -10526,6 +10587,7 @@ EXTERN_C const IID IID_ISharedPropertyGroup;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("2A005C07-A5DE-11CF-9E66-00AA00A3F464")
++    _Windows_SupportedOS_Windows2000_
      ISharedPropertyGroup : public IDispatch
      {
 @@ -10709,6 +10771,7 @@ EXTERN_C const IID IID_ISharedPropertyGroupManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("2A005C0D-A5DE-11CF-9E66-00AA00A3F464")
++    _Windows_SupportedOS_Windows2000_
      ISharedPropertyGroupManager : public IDispatch
      {
 @@ -10879,6 +10942,7 @@ EXTERN_C const IID IID_IObjectConstruct;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("41C4F8B3-7439-11D2-98CB-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IObjectConstruct : public IUnknown
      {
 @@ -10963,6 +11027,7 @@ EXTERN_C const IID IID_IObjectConstructString;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("41C4F8B2-7439-11D2-98CB-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IObjectConstructString : public IDispatch
      {
 @@ -11101,6 +11166,7 @@ EXTERN_C const IID IID_IObjectContextActivity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372afc-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IObjectContextActivity : public IUnknown
      {
 @@ -11185,6 +11251,7 @@ EXTERN_C const IID IID_IObjectContextInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("75B52DDB-E8ED-11d1-93AD-00AA00BA3258")
++    _Windows_SupportedOS_Windows2000_
      IObjectContextInfo : public IUnknown
      {
 @@ -11311,6 +11378,7 @@ EXTERN_C const IID IID_IObjectContextInfo2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("594BE71A-4BC4-438b-9197-CFD176248B09")
++    _Windows_SupportedOS_WindowsXP_
      IObjectContextInfo2 : public IObjectContextInfo
      {
 @@ -11457,6 +11525,7 @@ EXTERN_C const IID IID_ITransactionStatus;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("61F589E8-3724-4898-A0A4-664AE9E1D1B4")
++    _Windows_SupportedOS_WindowsXP_
      ITransactionStatus : public IUnknown
      {
 @@ -11552,6 +11621,7 @@ EXTERN_C const IID IID_IObjectContextTip;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("92FD41CA-BAD9-11d2-9A2D-00C04F797BC9")
++    _Windows_SupportedOS_Windows2000_
      IObjectContextTip : public IUnknown
      {
 @@ -11636,6 +11706,7 @@ EXTERN_C const IID IID_IPlaybackControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372afd-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IPlaybackControl : public IUnknown
      {
 @@ -11727,6 +11798,7 @@ EXTERN_C const IID IID_IGetContextProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372af4-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IGetContextProperties : public IUnknown
      {
 @@ -11850,6 +11922,7 @@ EXTERN_C const IID IID_IContextState;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("3C05E54B-A42A-11d2-AFC4-00C04F8EE1C4")
++    _Windows_SupportedOS_Windows2000_
      IContextState : public IUnknown
      {
 @@ -11967,6 +12040,7 @@ EXTERN_C const IID IID_IPoolManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("0a469861-5a91-43a0-99b6-d5e179bb0631")
++    _Windows_SupportedOS_Windows2000_
      IPoolManager : public IDispatch
      {
 @@ -12105,6 +12179,7 @@ EXTERN_C const IID IID_ISelectCOMLBServer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("dcf443f4-3f8a-4872-b9f0-369a796d12d6")
++    _Windows_SupportedOS_Windows2000_
      ISelectCOMLBServer : public IUnknown
      {
 @@ -12198,6 +12273,7 @@ EXTERN_C const IID IID_ICOMLBArguments;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("3a0f150f-8ee5-4b94-b40e-aef2f9e42ed2")
++    _Windows_SupportedOS_Windows2000_
      ICOMLBArguments : public IUnknown
      {
 @@ -12318,13 +12394,20 @@ EXTERN_C const IID IID_ICOMLBArguments;
@@ -614,272 +614,272 @@ index cd8acc4d..2f0b74e0 100644
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("A0E174B3-D26E-11d2-8F84-00805FC7BCD9")
++    _Windows_SupportedOS_Windows2000_
      ICrmLogControl : public IUnknown
      {
 @@ -12493,6 +12577,7 @@ EXTERN_C const IID IID_ICrmCompensatorVariants;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("F0BAF8E4-7804-11d1-82E9-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmCompensatorVariants : public IUnknown
      {
 @@ -12694,6 +12779,7 @@ EXTERN_C const IID IID_ICrmCompensator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("BBC01830-8D3B-11d1-82EC-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmCompensator : public IUnknown
      {
 @@ -12897,6 +12983,7 @@ EXTERN_C const IID IID_ICrmMonitorLogRecords;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("70C8E441-C7ED-11d1-82FB-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmMonitorLogRecords : public IUnknown
      {
 @@ -13029,6 +13116,7 @@ EXTERN_C const IID IID_ICrmMonitorClerks;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("70C8E442-C7ED-11d1-82FB-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmMonitorClerks : public IDispatch
      {
 @@ -13243,6 +13331,7 @@ EXTERN_C const IID IID_ICrmMonitor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("70C8E443-C7ED-11d1-82FB-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmMonitor : public IUnknown
      {
 @@ -13340,6 +13429,7 @@ EXTERN_C const IID IID_ICrmFormatLogRecords;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("9C51D821-C98B-11d1-82FB-00A0C91EEDE9")
++    _Windows_SupportedOS_Windows2000_
      ICrmFormatLogRecords : public IUnknown
      {
 @@ -13547,6 +13637,7 @@ EXTERN_C const IID IID_IServiceIISIntrinsicsConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("1a0cf920-d452-46f4-bc36-48118d54ea52")
++    _Windows_SupportedOS_WindowsXP_
      IServiceIISIntrinsicsConfig : public IUnknown
      {
 @@ -13631,6 +13722,7 @@ EXTERN_C const IID IID_IServiceComTIIntrinsicsConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("09e6831e-04e1-4ed4-9d0f-e8b168bafeaf")
++    _Windows_SupportedOS_WindowsXP_
      IServiceComTIIntrinsicsConfig : public IUnknown
      {
 @@ -13715,6 +13807,7 @@ EXTERN_C const IID IID_IServiceSxsConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("c7cd7379-f3f2-4634-811b-703281d73e08")
++    _Windows_SupportedOS_WindowsXP_
      IServiceSxsConfig : public IUnknown
      {
 @@ -13821,6 +13914,7 @@ EXTERN_C const IID IID_ICheckSxsConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("0FF5A96F-11FC-47d1-BAA6-25DD347E7242")
++    _Windows_SupportedOS_WindowsXP_
      ICheckSxsConfig : public IUnknown
      {
 @@ -13909,6 +14003,7 @@ EXTERN_C const IID IID_IServiceInheritanceConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("92186771-d3b4-4d77-a8ea-ee842d586f35")
++    _Windows_SupportedOS_WindowsXP_
      IServiceInheritanceConfig : public IUnknown
      {
 @@ -13993,6 +14088,7 @@ EXTERN_C const IID IID_IServiceThreadPoolConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("186d89bc-f277-4bcc-80d5-4df7b836ef4a")
++    _Windows_SupportedOS_WindowsXP_
      IServiceThreadPoolConfig : public IUnknown
      {
 @@ -14088,6 +14184,7 @@ EXTERN_C const IID IID_IServiceTransactionConfigBase;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("772b3fbe-6ffd-42fb-b5f8-8f9b260f3810")
++    _Windows_SupportedOS_WindowsXP_
      IServiceTransactionConfigBase : public IUnknown
      {
 @@ -14216,6 +14313,7 @@ EXTERN_C const IID IID_IServiceTransactionConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("59f4c2a3-d3d7-4a31-b6e4-6ab3177c50b9")
++    _Windows_SupportedOS_WindowsXP_
      IServiceTransactionConfig : public IServiceTransactionConfigBase
      {
 @@ -14341,6 +14439,7 @@ EXTERN_C const IID IID_IServiceSysTxnConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("33CAF1A1-FCB8-472b-B45E-967448DED6D8")
++    _Windows_SupportedOS_WindowsXP_
      IServiceSysTxnConfig : public IServiceTransactionConfig
      {
 @@ -14475,6 +14574,7 @@ EXTERN_C const IID IID_IServiceSynchronizationConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("fd880e81-6dce-4c58-af83-a208846c0030")
++    _Windows_SupportedOS_WindowsXP_
      IServiceSynchronizationConfig : public IUnknown
      {
 @@ -14559,6 +14659,7 @@ EXTERN_C const IID IID_IServiceTrackerConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("6c3a3e1d-0ba6-4036-b76f-d0404db816c9")
++    _Windows_SupportedOS_WindowsXP_
      IServiceTrackerConfig : public IUnknown
      {
 @@ -14647,6 +14748,7 @@ EXTERN_C const IID IID_IServicePartitionConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("80182d03-5ea4-4831-ae97-55beffc2e590")
++    _Windows_SupportedOS_WindowsXP_
      IServicePartitionConfig : public IUnknown
      {
 @@ -14742,6 +14844,7 @@ EXTERN_C const IID IID_IServiceCall;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("BD3E2E12-42DD-40f4-A09A-95A50C58304B")
++    _Windows_SupportedOS_WindowsXP_
      IServiceCall : public IUnknown
      {
 @@ -14824,6 +14927,7 @@ EXTERN_C const IID IID_IAsyncErrorNotify;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("FE6777FB-A674-4177-8F32-6D707E113484")
++    _Windows_SupportedOS_WindowsXP_
      IAsyncErrorNotify : public IUnknown
      {
 @@ -14908,6 +15012,7 @@ EXTERN_C const IID IID_IServiceActivity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("67532E0C-9E2F-4450-A354-035633944E17")
++    _Windows_SupportedOS_WindowsXP_
      IServiceActivity : public IUnknown
      {
 @@ -15021,6 +15126,7 @@ EXTERN_C const IID IID_IThreadPoolKnobs;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372af7-cae7-11cf-be81-00aa00a2fa25")
++    _Windows_SupportedOS_Windows2000_
      IThreadPoolKnobs : public IUnknown
      {
 @@ -15787,6 +15893,7 @@ EXTERN_C const IID IID_IProcessInitializer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("1113f52d-dc7f-4943-aed6-88d04027e32a")
++    _Windows_SupportedOS_Windows2000_
      IProcessInitializer : public IUnknown
      {
 @@ -15880,6 +15987,7 @@ EXTERN_C const IID IID_IServicePoolConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("a9690656-5bca-470c-8451-250c1f43a33e")
++    _Windows_SupportedOS_WindowsXP_
      IServicePoolConfig : public IUnknown
      {
 @@ -16063,6 +16171,7 @@ EXTERN_C const IID IID_IServicePool;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b302df81-ea45-451e-99a2-09f9fd1b1e13")
++    _Windows_SupportedOS_Windows2000_
      IServicePool : public IUnknown
      {
 @@ -16169,6 +16278,7 @@ EXTERN_C const IID IID_IManagedPooledObj;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("c5da4bea-1b42-4437-8926-b6a38860a770")
++    _Windows_SupportedOS_WindowsXP_
      IManagedPooledObj : public IUnknown
      {
 @@ -16253,6 +16363,7 @@ EXTERN_C const IID IID_IManagedPoolAction;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("da91b74e-5388-4783-949d-c1cd5fb00506")
++    _Windows_SupportedOS_Windows2000_
      IManagedPoolAction : public IUnknown
      {
 @@ -16335,6 +16446,7 @@ EXTERN_C const IID IID_IManagedObjectInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("1427c51a-4584-49d8-90a0-c50d8086cbe9")
++    _Windows_SupportedOS_WindowsXP_
      IManagedObjectInfo : public IUnknown
      {
 @@ -16454,6 +16566,7 @@ EXTERN_C const IID IID_IAppDomainHelper;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("c7b67079-8255-42c6-9ec0-6994a3548780")
++    _Windows_SupportedOS_WindowsXP_
      IAppDomainHelper : public IDispatch
      {
 @@ -16615,6 +16728,7 @@ EXTERN_C const IID IID_IAssemblyLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("391ffbb9-a8ee-432a-abc8-baa238dab90f")
++    _Windows_SupportedOS_WindowsXP_
      IAssemblyLocator : public IDispatch
      {
 @@ -16759,6 +16873,7 @@ EXTERN_C const IID IID_IManagedActivationEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("a5f325af-572f-46da-b8ab-827c3d95d99e")
++    _Windows_SupportedOS_WindowsXP_
      IManagedActivationEvents : public IUnknown
      {
 @@ -16856,6 +16971,7 @@ EXTERN_C const IID IID_ISendMethodEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("2732fd59-b2b4-4d44-878c-8b8f09626008")
++    _Windows_SupportedOS_Windows2000_
      ISendMethodEvents : public IUnknown
      {
 @@ -16972,6 +17088,7 @@ EXTERN_C const IID IID_ITransactionResourcePool;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("C5FEB7C1-346A-11D1-B1CC-00AA00BA3258")
++    _Windows_SupportedOS_WindowsXP_
      ITransactionResourcePool : public IUnknown
      {
 @@ -17063,6 +17180,7 @@ EXTERN_C const IID IID_ITransactionResourcePool;
@@ -894,40 +894,40 @@ index cd8acc4d..2f0b74e0 100644
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372AEF-CAE7-11CF-BE81-00AA00A2FA25")
++    _Windows_SupportedOS_Windows2000_
      IMTSCall : public IUnknown
      {
 @@ -17162,6 +17281,7 @@ EXTERN_C const IID IID_IContextProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D396DA85-BF8F-11d1-BBAE-00C04FC2FA5F")
++    _Windows_SupportedOS_Windows2000_
      IContextProperties : public IUnknown
      {
 @@ -17294,6 +17414,7 @@ EXTERN_C const IID IID_IObjPool;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("7D8805A0-2EA7-11D1-B1CC-00AA00BA3258")
++    _Windows_SupportedOS_WindowsXP_
      IObjPool : public IUnknown
      {
 @@ -17432,6 +17553,7 @@ EXTERN_C const IID IID_ITransactionProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_WindowsXP_
      MIDL_INTERFACE("788ea814-87b1-11d1-bba6-00c04fc2fa5f")
++    _Windows_SupportedOS_WindowsXP_
      ITransactionProperty : public IUnknown
      {
 @@ -17669,6 +17791,7 @@ EXTERN_C const IID IID_IMTSActivity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("51372AF0-CAE7-11CF-BE81-00AA00A2FA25")
++    _Windows_SupportedOS_Windows2000_
      IMTSActivity : public IUnknown
      {
 @@ -18126,19 +18249,31 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
