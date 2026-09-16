@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
-index 4065f7bf..ca4c5c9f 100644
+index 4065f7bf..f523c7e3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
 @@ -23,6 +23,9 @@ Revision History:
@@ -16,7 +16,7 @@ index 4065f7bf..ca4c5c9f 100644
  #if !defined(_NTDDK_)
  
  #if (_WIN32_WINNT >= 0x0500)
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -24,7 +24,7 @@ index 4065f7bf..ca4c5c9f 100644
      _Outptr_ LPSTR  *StringSid
      );
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -32,7 +32,7 @@ index 4065f7bf..ca4c5c9f 100644
  #define ConvertSidToStringSid  ConvertSidToStringSidA
  #endif // !UNICODE
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -40,7 +40,7 @@ index 4065f7bf..ca4c5c9f 100644
      _Outptr_ PSID   *Sid
      );
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -48,7 +48,7 @@ index 4065f7bf..ca4c5c9f 100644
  #define ConvertStringSidToSid  ConvertStringSidToSidA
  #endif // !UNICODE
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -56,7 +56,7 @@ index 4065f7bf..ca4c5c9f 100644
      _Out_opt_ PULONG  SecurityDescriptorSize
      );
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -64,7 +64,7 @@ index 4065f7bf..ca4c5c9f 100644
  #define ConvertStringSecurityDescriptorToSecurityDescriptor  ConvertStringSecurityDescriptorToSecurityDescriptorA
  #endif // !UNICODE
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -72,7 +72,7 @@ index 4065f7bf..ca4c5c9f 100644
      _Out_opt_ PULONG StringSecurityDescriptorLen
      );
  
-+_Win32_metadata_set_last_error_
++_Win32_SetLastError_
  _Success_(return != FALSE)
  BOOL
  WINAPI
