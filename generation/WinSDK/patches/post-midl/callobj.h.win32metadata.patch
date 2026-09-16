@@ -16,7 +16,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D573B4B0-894E-11d2-B8B6-00C04FB9618A")
      ICallFrame : public IUnknown
      {
@@ -24,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("D573B4B1-894E-11d2-B8B6-00C04FB9618A")
      ICallIndirect : public IUnknown
      {
@@ -32,7 +32,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("60C7CA75-896D-11d2-B8B6-00C04FB9618A")
      ICallInterceptor : public ICallIndirect
      {
@@ -40,7 +40,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("FD5E0843-FC91-11d0-97D7-00C04FB9618A")
      ICallFrameEvents : public IUnknown
      {
@@ -48,7 +48,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("5333B003-2E42-11d2-B89D-00C04FB9618A")
      ICallUnmarshal : public IUnknown
      {
@@ -56,7 +56,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Win32_metadata_supported_os_(windows5.0)
++    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("08B23919-392D-11d2-B8A4-00C04FB9618A")
      ICallFrameWalker : public IUnknown
      {
@@ -64,7 +64,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/Wi
  /* interface ICallFrameAPIs */
  /* [local][uuid] */ 
  
-+_Win32_metadata_supported_os_(windows5.0)
++_Windows_SupportedOS_Windows2000_
  HRESULT __stdcall CoGetInterceptor( 
      /* [annotation][in] */ 
      _In_  REFIID iidIntercepted,
