@@ -1,0 +1,78 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+index 4065f7bf..ca4c5c9f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+@@ -23,6 +23,9 @@ Revision History:
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #ifdef _CONTRACT_GEN
+ #include <minwindef.h>
+@@ -263,6 +266,7 @@ extern "C" {
+ #if !defined(_NTDDK_)
+ 
+ #if (_WIN32_WINNT >= 0x0500)
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -271,6 +275,7 @@ ConvertSidToStringSidA(
+     _Outptr_ LPSTR  *StringSid
+     );
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -285,6 +290,7 @@ ConvertSidToStringSidW(
+ #define ConvertSidToStringSid  ConvertSidToStringSidA
+ #endif // !UNICODE
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -293,6 +299,7 @@ ConvertStringSidToSidA(
+     _Outptr_ PSID   *Sid
+     );
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -307,6 +314,7 @@ ConvertStringSidToSidW(
+ #define ConvertStringSidToSid  ConvertStringSidToSidA
+ #endif // !UNICODE
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -317,6 +325,7 @@ ConvertStringSecurityDescriptorToSecurityDescriptorA(
+     _Out_opt_ PULONG  SecurityDescriptorSize
+     );
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -333,6 +342,7 @@ ConvertStringSecurityDescriptorToSecurityDescriptorW(
+ #define ConvertStringSecurityDescriptorToSecurityDescriptor  ConvertStringSecurityDescriptorToSecurityDescriptorA
+ #endif // !UNICODE
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -344,6 +354,7 @@ ConvertSecurityDescriptorToStringSecurityDescriptorA(
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );
+ 
++_Win32_metadata_set_last_error_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
