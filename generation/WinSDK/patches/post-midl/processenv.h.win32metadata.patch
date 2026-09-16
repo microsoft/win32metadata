@@ -1,0 +1,110 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
+index 1be64a94..f8b4611c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
+@@ -15,6 +15,9 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #include <minwindef.h>
+ 
+@@ -42,6 +45,7 @@ SetEnvironmentStringsW(
+ #pragma region PC Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -49,6 +53,7 @@ GetStdHandle(
+     _In_ DWORD nStdHandle
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -118,6 +123,7 @@ GetEnvironmentStringsW(
+ #define GetEnvironmentStringsA  GetEnvironmentStrings
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -125,6 +131,7 @@ FreeEnvironmentStringsA(
+     _In_ _Pre_ _NullNull_terminated_ LPCH penv
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -138,6 +145,7 @@ FreeEnvironmentStringsW(
+ #define FreeEnvironmentStrings  FreeEnvironmentStringsA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < nSize)
+ DWORD
+@@ -148,6 +156,7 @@ GetEnvironmentVariableA(
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < nSize)
+ DWORD
+@@ -164,6 +173,7 @@ GetEnvironmentVariableW(
+ #define GetEnvironmentVariable  GetEnvironmentVariableA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -172,6 +182,7 @@ SetEnvironmentVariableA(
+     _In_opt_ LPCSTR lpValue
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -186,6 +197,7 @@ SetEnvironmentVariableW(
+ #define SetEnvironmentVariable  SetEnvironmentVariableA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return <= nSize)
+ DWORD
+@@ -196,6 +208,7 @@ ExpandEnvironmentStringsA(
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return <= nSize)
+ DWORD
+@@ -262,6 +275,7 @@ GetCurrentDirectoryW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -280,6 +294,7 @@ SearchPathW(
+ #define SearchPath  SearchPathA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY

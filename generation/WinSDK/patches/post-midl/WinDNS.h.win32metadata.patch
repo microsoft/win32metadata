@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
+index 8513e017..94ba049d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
+@@ -24,6 +24,9 @@ Revision History:
+ #ifndef _WINDNS_INCLUDED_
+ #define _WINDNS_INCLUDED_
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #include <windnsdef.h>
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+@@ -1748,6 +1751,7 @@ typedef struct _DNS_SERVICE_BROWSE_REQUEST
+ 
+ #pragma warning(pop)
+ 
++_Win32_SetLastError_
+ DNS_STATUS
+ WINAPI
+ DnsServiceBrowse(
+@@ -1755,6 +1759,7 @@ DnsServiceBrowse(
+     _Inout_ PDNS_SERVICE_CANCEL            pCancel
+     );
+ 
++_Win32_SetLastError_
+ DNS_STATUS
+ WINAPI
+ DnsServiceBrowseCancel(
+@@ -1784,6 +1789,7 @@ typedef struct _DNS_SERVICE_RESOLVE_REQUEST{
+     PVOID pQueryContext;
+ } DNS_SERVICE_RESOLVE_REQUEST, *PDNS_SERVICE_RESOLVE_REQUEST;
+ 
++_Win32_SetLastError_
+ DNS_STATUS
+ WINAPI
+ DnsServiceResolve(
+@@ -1791,6 +1797,7 @@ DnsServiceResolve(
+     _Inout_ PDNS_SERVICE_CANCEL             pCancel
+     );
+ 
++_Win32_SetLastError_
+ DNS_STATUS
+ WINAPI
+ DnsServiceResolveCancel(
+@@ -1822,6 +1829,7 @@ typedef struct _DNS_SERVICE_REGISTER_REQUEST{
+     BOOL unicastEnabled;
+ } DNS_SERVICE_REGISTER_REQUEST, *PDNS_SERVICE_REGISTER_REQUEST;
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ DnsServiceRegister(
+@@ -1829,6 +1837,7 @@ DnsServiceRegister(
+     _Inout_opt_ PDNS_SERVICE_CANCEL             pCancel
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ DnsServiceDeRegister(
+@@ -1877,11 +1886,13 @@ typedef struct _MDNS_QUERY_REQUEST
+     ULONG                   ulResendCount;   // Reserved
+ } MDNS_QUERY_REQUEST, *PMDNS_QUERY_REQUEST;
+ 
++_Win32_SetLastError_
+ DNS_STATUS WINAPI DnsStartMulticastQuery(
+     _In_        PMDNS_QUERY_REQUEST pQueryRequest,
+     _Inout_     PMDNS_QUERY_HANDLE pHandle
+     );
+ 
++_Win32_SetLastError_
+ DNS_STATUS WINAPI DnsStopMulticastQuery(
+     _Inout_     PMDNS_QUERY_HANDLE pHandle
+     );

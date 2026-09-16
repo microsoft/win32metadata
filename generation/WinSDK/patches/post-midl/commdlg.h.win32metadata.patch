@@ -1,0 +1,85 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
+index ffa5f0d8..0ac77f51 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
+@@ -1,3 +1,7 @@
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #include <winapifamily.h>
+ 
+ /************************************************************************
+@@ -250,14 +254,18 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ 
+ 
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(LPOPENFILENAMEA);
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(LPOPENFILENAMEW);
+ #ifdef UNICODE
+ #define GetOpenFileName  GetOpenFileNameW
+ #else
+ #define GetOpenFileName  GetOpenFileNameA
+ #endif // !UNICODE
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(LPOPENFILENAMEA);
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
+ #ifdef UNICODE
+ #define GetSaveFileName  GetSaveFileNameW
+@@ -266,7 +274,9 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
+ #endif // !UNICODE
+ 
+ 
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI short APIENTRY GetFileTitleA(LPCSTR, _Out_writes_(cchSize) LPSTR Buf, _In_ WORD cchSize);
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR Buf, _In_ WORD cchSize);
+ #ifdef UNICODE
+ #define GetFileTitle  GetFileTitleW
+@@ -620,7 +630,9 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
+ #define FR_MATCHALEFHAMZA               0x80000000
+ #endif // (NTDDI_VERSION >= NTDDI_WIN2K)
+ 
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI HWND APIENTRY FindTextA(LPFINDREPLACEA);
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
+ #ifdef UNICODE
+ #define FindText  FindTextW
+@@ -628,7 +640,9 @@ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
+ #define FindText  FindTextA
+ #endif // !UNICODE
+ #ifndef _MAC
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(LPFINDREPLACEA);
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
+ #ifdef UNICODE
+ #define ReplaceText  ReplaceTextW
+@@ -951,6 +965,7 @@ WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINT
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogCallback
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+@@ -983,6 +998,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogServices
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+@@ -1155,6 +1171,7 @@ typedef const DEVNAMES *PCDEVNAMES;
+ #define DN_DEFAULTPRN      0x0001
+ 
+ 
++_Windows_SupportedOS_Windows2000_
+ WINCOMMDLGAPI DWORD APIENTRY CommDlgExtendedError(VOID);
+ 
+ #if(WINVER >= 0x0400)

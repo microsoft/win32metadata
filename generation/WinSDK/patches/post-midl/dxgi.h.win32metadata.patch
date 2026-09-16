@@ -1,0 +1,58 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
+index 6cef7e71..4a32c5d4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -1148,6 +1153,7 @@ EXTERN_C const IID IID_IDXGISurface1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86")
+     IDXGISurface1 : public IDXGISurface
+     {
+@@ -2357,6 +2363,7 @@ EXTERN_C const IID IID_IDXGIFactory;
+ HRESULT WINAPI CreateDXGIFactory(REFIID riid, _COM_Outptr_ void **ppFactory);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _COM_Outptr_ void **ppFactory);
+ 
+ 
+@@ -2624,6 +2631,7 @@ EXTERN_C const IID IID_IDXGIFactory1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387")
+     IDXGIFactory1 : public IDXGIFactory
+     {
+@@ -2827,6 +2835,7 @@ EXTERN_C const IID IID_IDXGIAdapter1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05")
+     IDXGIAdapter1 : public IDXGIAdapter
+     {
+@@ -2995,6 +3004,7 @@ EXTERN_C const IID IID_IDXGIDevice1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c")
+     IDXGIDevice1 : public IDXGIDevice
+     {
