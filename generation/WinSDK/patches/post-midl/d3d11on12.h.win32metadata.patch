@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11on12.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11on12.h
+index e13790b7de..0155809099 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11on12.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11on12.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -309,6 +314,7 @@ EXTERN_C const IID IID_ID3D11On12Device1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("bdb64df4-ea2f-4c70-b861-aaab1258bb5d")
++    _Windows_SupportedOS_18362_
+     ID3D11On12Device1 : public ID3D11On12Device
+     {
+     public:
+@@ -436,6 +442,7 @@ EXTERN_C const IID IID_ID3D11On12Device2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("dc90f331-4740-43fa-866e-67f12cb58223")
++    _Windows_SupportedOS_19041_
+     ID3D11On12Device2 : public ID3D11On12Device1
+     {
+     public:

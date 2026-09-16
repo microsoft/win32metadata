@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_1.h
+index d05dd30873..97d8689308 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_1.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -227,6 +232,7 @@ EXTERN_C const IID IID_ID3D11BlendState1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("cc86fabe-da55-401d-85e7-e3c9de2877e9")
++    _Windows_SupportedOS_Windows8_
+     ID3D11BlendState1 : public ID3D11BlendState
+     {
+     public:
+@@ -445,6 +451,7 @@ EXTERN_C const IID IID_ID3D11RasterizerState1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1217d7a6-5039-418c-b042-9cbe256afd6e")
++    _Windows_SupportedOS_Windows8_
+     ID3D11RasterizerState1 : public ID3D11RasterizerState
+     {
+     public:
+@@ -603,6 +610,7 @@ EXTERN_C const IID IID_ID3DDeviceContextState;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5c1e0d8a-7c23-48f9-8c59-a92958ceff11")
++    _Windows_SupportedOS_Windows8_
+     ID3DDeviceContextState : public ID3D11DeviceChild
+     {
+     public:
+@@ -724,6 +732,7 @@ EXTERN_C const IID IID_ID3D11DeviceContext1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1")
++    _Windows_SupportedOS_Windows8_
+     ID3D11DeviceContext1 : public ID3D11DeviceContext
+     {
+     public:
+@@ -2809,6 +2818,7 @@ EXTERN_C const IID IID_ID3D11VideoContext1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A7F026DA-A5F8-4487-A564-15E34357651E")
++    _Windows_SupportedOS_10240_
+     ID3D11VideoContext1 : public ID3D11VideoContext
+     {
+     public:
+@@ -4085,6 +4095,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("29DA1D51-1321-4454-804B-F5FC9F861F0F")
++    _Windows_SupportedOS_10240_
+     ID3D11VideoDevice1 : public ID3D11VideoDevice
+     {
+     public:
+@@ -4505,6 +4516,7 @@ EXTERN_C const IID IID_ID3D11VideoProcessorEnumerator1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("465217F2-5568-43CF-B5B9-F61D54531CA1")
++    _Windows_SupportedOS_10240_
+     ID3D11VideoProcessorEnumerator1 : public ID3D11VideoProcessorEnumerator
+     {
+     public:
+@@ -4720,6 +4732,7 @@ EXTERN_C const IID IID_ID3D11Device1;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("a04bfb29-08ef-43d6-a49c-a9bdbdcbe686")
++    _Windows_SupportedOS_Windows8_
+     ID3D11Device1 : public ID3D11Device
+     {
+     public:
+@@ -5428,6 +5441,7 @@ EXTERN_C const IID IID_ID3DUserDefinedAnnotation;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab")
++    _Windows_SupportedOS_Windows8_
+     ID3DUserDefinedAnnotation : public IUnknown
+     {
+     public:

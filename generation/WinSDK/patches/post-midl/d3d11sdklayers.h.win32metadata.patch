@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11sdklayers.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11sdklayers.h
+index f936bfa50f..81c6ac0db7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11sdklayers.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11sdklayers.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -148,6 +153,7 @@ EXTERN_C const IID IID_ID3D11Debug;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("79cf2233-7536-4948-9d36-1e4692dc5760")
++    _Windows_SupportedOS_Windows7_
+     ID3D11Debug : public IUnknown
+     {
+     public:
+@@ -338,6 +344,7 @@ EXTERN_C const IID IID_ID3D11SwitchToRef;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1ef337e3-58e7-4f83-a692-db221f5ed47e")
++    _Windows_SupportedOS_Windows7_
+     ID3D11SwitchToRef : public IUnknown
+     {
+     public:
+@@ -478,6 +485,7 @@ EXTERN_C const IID IID_ID3D11TracingDevice;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1911c771-1587-413e-a7e0-fb26c3de0268")
++    _Windows_SupportedOS_Windows8_
+     ID3D11TracingDevice : public IUnknown
+     {
+     public:
+@@ -586,6 +594,7 @@ EXTERN_C const IID IID_ID3D11RefTrackingOptions;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("193dacdf-0db2-4c05-a55c-ef06cac56fd9")
++    _Windows_SupportedOS_Windows8_
+     ID3D11RefTrackingOptions : public IUnknown
+     {
+     public:
+@@ -671,6 +680,7 @@ EXTERN_C const IID IID_ID3D11RefDefaultTrackingOptions;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("03916615-c644-418c-9bf4-75db5be63ca0")
++    _Windows_SupportedOS_Windows8_
+     ID3D11RefDefaultTrackingOptions : public IUnknown
+     {
+     public:
+@@ -2189,6 +2199,7 @@ EXTERN_C const IID IID_ID3D11InfoQueue;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6543dbb6-1b48-42f5-ab82-e97ec74326f6")
++    _Windows_SupportedOS_Windows7_
+     ID3D11InfoQueue : public IUnknown
+     {
+     public:
