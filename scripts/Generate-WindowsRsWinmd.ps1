@@ -31,7 +31,7 @@ param (
 $ErrorActionPreference = "Stop"
 $manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
 $tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
-$headerRoot = Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders"
+$headerRoot = $recompiledIdlHeadersDir
 $localIncludes = Join-Path $windowsWin32ProjectRoot "inc"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
