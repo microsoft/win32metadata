@@ -1,0 +1,19 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+@@ -180,6 +180,7 @@
+  */
+ 
+ #include <fdi_fci_types.h>
++#include <win32metadata_annotations.h>
+ 
+ #include <basetsd.h>
+ 
+@@ -957,6 +958,7 @@ typedef INT_PTR (FAR DIAMONDAPI *PFNFDINOTIFY)(FDINOTIFICATIONTYPE fdint,
+  *      FDICreate(), and then free it up afterwards (or do all your allocation
+  *      before calling FDICreate().
+  */
++_Win32_RAIIFree_(FDIDestroy, 0)
+ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+                               __callback PFNFREE  pfnfree,
+                               __callback PFNOPEN  pfnopen,
