@@ -1,0 +1,138 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
+index 5228924d69..3ee18c8647 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define _INC_NEWDEV
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -37,6 +38,8 @@ extern "C" {
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN2K)
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ UpdateDriverForPlugAndPlayDevicesA(
+@@ -47,6 +50,8 @@ UpdateDriverForPlugAndPlayDevicesA(
+     _Out_opt_ PBOOL bRebootRequired
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ UpdateDriverForPlugAndPlayDevicesW(
+@@ -74,6 +79,36 @@ UpdateDriverForPlugAndPlayDevicesW(
+ #define DIIDFLAG_INSTALLCOPYINFDRIVERS  0x00000008      // Install any extra INFs specified via CopyInf directive.
+ #define DIIDFLAG_BITS                   0x0000000F
+ 
++#if defined(WIN32METADATA)
++#pragma push_macro("DIIDFLAG_SHOWSEARCHUI")
++#pragma push_macro("DIIDFLAG_NOFINISHINSTALLUI")
++#pragma push_macro("DIIDFLAG_INSTALLNULLDRIVER")
++#pragma push_macro("DIIDFLAG_INSTALLCOPYINFDRIVERS")
++#pragma push_macro("DIIDFLAG_BITS")
++#undef DIIDFLAG_SHOWSEARCHUI
++#undef DIIDFLAG_NOFINISHINSTALLUI
++#undef DIIDFLAG_INSTALLNULLDRIVER
++#undef DIIDFLAG_INSTALLCOPYINFDRIVERS
++#undef DIIDFLAG_BITS
++enum class
++    [[clang::flag_enum]]
++    DIINSTALLDEVICE_FLAGS : unsigned int
++{
++    DIIDFLAG_SHOWSEARCHUI = 0x00000001,
++    DIIDFLAG_NOFINISHINSTALLUI = 0x00000002,
++    DIIDFLAG_INSTALLNULLDRIVER = 0x00000004,
++    DIIDFLAG_INSTALLCOPYINFDRIVERS = 0x00000008,
++    DIIDFLAG_BITS = 0x0000000F,
++};
++#pragma pop_macro("DIIDFLAG_BITS")
++#pragma pop_macro("DIIDFLAG_INSTALLCOPYINFDRIVERS")
++#pragma pop_macro("DIIDFLAG_INSTALLNULLDRIVER")
++#pragma pop_macro("DIIDFLAG_NOFINISHINSTALLUI")
++#pragma pop_macro("DIIDFLAG_SHOWSEARCHUI")
++#endif
++
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiInstallDevice(
+@@ -81,7 +116,7 @@ DiInstallDevice(
+     _In_      HDEVINFO DeviceInfoSet,
+     _In_      PSP_DEVINFO_DATA DeviceInfoData,
+     _In_opt_  PSP_DRVINFO_DATA DriverInfoData,
+-    _In_      DWORD Flags,
++    _In_      _Win32_AssociatedEnum_(DIINSTALLDEVICE_FLAGS) DWORD Flags,
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
+@@ -125,6 +160,8 @@ DiInstallDevice(
+ 
+ #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiInstallDriverW(
+@@ -134,6 +171,8 @@ DiInstallDriverW(
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiInstallDriverA(
+@@ -153,6 +192,8 @@ DiInstallDriverA(
+ 
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiUninstallDevice(
+@@ -176,6 +217,8 @@ DiUninstallDevice(
+ #define DIURFLAG_VALID              (DIURFLAG_NO_REMOVE_INF |\
+                                      DIURFLAG_RESERVED      )
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiUninstallDriverW(
+@@ -185,6 +228,7 @@ DiUninstallDriverW(
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiUninstallDriverA(
+@@ -203,6 +247,8 @@ DiUninstallDriverA(
+ 
+ 
+ #if (WINVER >= _WIN32_WINNT_LONGHORN)
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiShowUpdateDevice(
+@@ -221,6 +267,8 @@ DiShowUpdateDevice(
+ #define ROLLBACK_BITS                   0x00000001
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DiRollbackDriver(

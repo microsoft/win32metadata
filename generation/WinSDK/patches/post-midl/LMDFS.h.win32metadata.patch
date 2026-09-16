@@ -1,0 +1,188 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
+index 86ac9f1abf..2a8706093e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
+@@ -28,6 +28,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -640,6 +641,7 @@ typedef struct _DFS_INFO_300 {
+ // Add a new volume or additional storage for an existing volume at
+ // DfsEntryPath.
+ //
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsAdd(
+     _In_ LPWSTR     DfsEntryPath,   // DFS entry path for this added volume or storage
+@@ -659,6 +661,7 @@ NetDfsAdd(
+ // Setup/teardown API's for standard and FtDfs roots.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsAddStdRoot(
+     _In_ LPWSTR     ServerName,     // Server to remote to
+@@ -667,6 +670,7 @@ NetDfsAddStdRoot(
+     _In_  DWORD     Flags           // Flags for operation.  Zero for no flags.
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsRemoveStdRoot(
+     _In_  LPWSTR ServerName,        // Server to remote to
+@@ -674,6 +678,7 @@ NetDfsRemoveStdRoot(
+     _Reserved_  DWORD  Flags        // Flags for operation.  Zero for no flags.
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsAddFtRoot(
+     _In_ LPWSTR         ServerName,     // Server to remote to
+@@ -684,6 +689,7 @@ NetDfsAddFtRoot(
+ );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsRemoveFtRoot(
+     _In_ LPWSTR         ServerName,     // Server to remote to
+@@ -692,6 +698,7 @@ NetDfsRemoveFtRoot(
+     _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsRemoveFtRootForced(
+     _In_  LPWSTR        DomainName,     // Name of domain the server is in
+@@ -742,6 +749,7 @@ typedef struct {
+ // DfsEntryPath. When applied to the last storage in a volume, removes
+ // the volume from the DFS.
+ //
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsRemove(
+     _In_ LPWSTR     DfsEntryPath,       // DFS entry path for this added volume or storage
+@@ -755,6 +763,7 @@ NetDfsRemove(
+ //
+ // Valid levels are 1-5, 200, 300
+ //
++_Windows_SupportedOS_WindowsVista_
+ _When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_1))))
+ _When_(Level == 2, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_2))))
+ _When_(Level == 3, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_3))))
+@@ -783,6 +792,7 @@ NetDfsEnum(
+ //
+ // Valid levels are 1-5, 100
+ //
++_Windows_SupportedOS_WindowsVista_
+ _When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_1))))
+ _When_(Level == 2, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_2))))
+ _When_(Level == 3, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_3))))
+@@ -813,6 +823,7 @@ NetDfsGetInfo(
+ // Valid levels are 100, 101 and 102
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
+ _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsSetInfo(
+@@ -831,6 +842,7 @@ NetDfsSetInfo(
+ //
+ // Valid levels are 1-4
+ //
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsGetClientInfo(
+     _In_ LPWSTR         DfsEntryPath,   // DFS entry path for the volume
+@@ -849,6 +861,7 @@ NetDfsGetClientInfo(
+ // Valid levels are 101 and 102.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
+ _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsSetClientInfo(
+@@ -865,6 +878,7 @@ NetDfsSetClientInfo(
+ //
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsMove(
+     _In_ LPWSTR     OldDfsEntryPath,    // Current DFS entry path for this volume
+@@ -900,6 +914,7 @@ NetDfsRename(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsAddRootTarget(
+     _In_        LPWSTR  pDfsPath,
+@@ -917,6 +932,7 @@ NetDfsAddRootTarget(
+ #define DFS_FORCE_REMOVE    0x80000000
+ #endif
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsRemoveRootTarget(
+     _In_        LPWSTR  pDfsPath,
+@@ -924,6 +940,7 @@ NetDfsRemoveRootTarget(
+     _In_        ULONG   Flags
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsGetSecurity(
+     _In_ LPWSTR                                                         DfsEntryPath,
+@@ -932,6 +949,7 @@ NetDfsGetSecurity(
+     _Out_ LPDWORD                                                       lpcbSecurityDescriptor
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsSetSecurity(
+     _In_ LPWSTR                 DfsEntryPath,
+@@ -939,6 +957,7 @@ NetDfsSetSecurity(
+     _In_ PSECURITY_DESCRIPTOR   pSecurityDescriptor
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsGetStdContainerSecurity(
+     _In_ LPWSTR                                                         MachineName,
+@@ -947,6 +966,7 @@ NetDfsGetStdContainerSecurity(
+     _Out_ LPDWORD                                                       lpcbSecurityDescriptor
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsSetStdContainerSecurity(
+     _In_ LPWSTR                 MachineName,
+@@ -954,6 +974,7 @@ NetDfsSetStdContainerSecurity(
+     _In_ PSECURITY_DESCRIPTOR   pSecurityDescriptor
+ );
+     
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsGetFtContainerSecurity(
+     _In_ LPWSTR                                                         DomainName,
+@@ -962,6 +983,7 @@ NetDfsGetFtContainerSecurity(
+     _Out_ LPDWORD                                                       lpcbSecurityDescriptor
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsSetFtContainerSecurity(
+     _In_ LPWSTR                 DomainName,
+@@ -1015,6 +1037,7 @@ typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
+ } DFS_SUPPORTED_NAMESPACE_VERSION_INFO, *PDFS_SUPPORTED_NAMESPACE_VERSION_INFO;
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ NET_API_STATUS NET_API_FUNCTION
+ NetDfsGetSupportedNamespaceVersion(
+     _In_        DFS_NAMESPACE_VERSION_ORIGIN            Origin,
