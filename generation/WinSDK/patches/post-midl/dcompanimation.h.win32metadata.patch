@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h b/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
+index e58d1316f1..3808f172d4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -90,6 +95,7 @@ EXTERN_C const IID IID_IDCompositionAnimation;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("CBFD91D9-51B2-45e4-B3DE-D19CCFB863C5")
++    _Windows_SupportedOS_Windows8_
+     IDCompositionAnimation : public IUnknown
+     {
+     public:

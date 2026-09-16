@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3helper.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3helper.h
+index 542f0a2405..27d12c123b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3helper.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3helper.h
+@@ -11,6 +11,10 @@
+ 
+ \*=========================================================================*/
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifdef _MSC_VER
+ #pragma once
+ #endif  // _MSC_VER
+@@ -36,6 +40,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_GRADIENT_MESH_PATCH
++    _Windows_SupportedOS_Windows7_
+     GradientMeshPatch( 
+         D2D1_POINT_2F point00, 
+         D2D1_POINT_2F point01, 
+@@ -97,6 +102,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_GRADIENT_MESH_PATCH
++    _Windows_SupportedOS_Windows7_
+     GradientMeshPatchFromCoonsPatch(
+         D2D1_POINT_2F point0,
+         D2D1_POINT_2F point1,
+@@ -168,6 +174,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_INK_POINT 
++    _Windows_SupportedOS_Windows7_
+     InkPoint( 
+         const D2D1_POINT_2F &point, 
+         FLOAT radius 
+@@ -185,6 +192,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_INK_BEZIER_SEGMENT 
++    _Windows_SupportedOS_Windows7_
+     InkBezierSegment( 
+         const D2D1_INK_POINT &point1, 
+         const D2D1_INK_POINT &point2, 
+@@ -203,6 +211,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_INK_STYLE_PROPERTIES 
++    _Windows_SupportedOS_Windows7_
+     InkStyleProperties( 
+         D2D1_INK_NIB_SHAPE nibShape, 
+         const D2D1_MATRIX_3X2_F &nibTransform 

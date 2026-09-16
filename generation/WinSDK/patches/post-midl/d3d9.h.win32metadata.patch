@@ -1,0 +1,51 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/d3d9.h b/generation/WinSDK/RecompiledIdlHeaders/shared/d3d9.h
+index 2b5e1914ec..4769dd77a4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/d3d9.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/d3d9.h
+@@ -7,6 +7,10 @@
+  *
+  ****************************************************************************/
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef _D3D9_H_
+ #define _D3D9_H_
+ 
+@@ -2625,7 +2629,7 @@ typedef struct IDirect3DSwapChain9Ex *LPDIRECT3DSWAPCHAIN9EX, *PDIRECT3DSWAPCHAI
+ #undef INTERFACE
+ #define INTERFACE IDirect3D9ExOverlayExtension
+ 
+-DECLARE_INTERFACE_(IDirect3D9ExOverlayExtension, IUnknown)
++DECLARE_INTERFACE_(_Windows_SupportedOS_Windows7_ IDirect3D9ExOverlayExtension, IUnknown)
+ {
+     /*** IUnknown methods ***/
+     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+@@ -2655,7 +2659,7 @@ typedef struct IDirect3D9ExOverlayExtension *LPDIRECT3D9EXOVERLAYEXTENSION, *PDI
+ #undef INTERFACE
+ #define INTERFACE IDirect3DDevice9Video
+ 
+-DECLARE_INTERFACE_(IDirect3DDevice9Video, IUnknown)
++DECLARE_INTERFACE_(_Windows_SupportedOS_Windows7_ IDirect3DDevice9Video, IUnknown)
+ {
+     /*** IUnknown methods ***/
+     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+@@ -2692,7 +2696,7 @@ typedef struct IDirect3DDevice9Video *LPDIRECT3DDEVICE9VIDEO, *PDIRECT3DDEVICE9V
+ #undef INTERFACE
+ #define INTERFACE IDirect3DAuthenticatedChannel9
+ 
+-DECLARE_INTERFACE_(IDirect3DAuthenticatedChannel9, IUnknown)
++DECLARE_INTERFACE_(_Windows_SupportedOS_Windows7_ IDirect3DAuthenticatedChannel9, IUnknown)
+ {
+     /*** IUnknown methods ***/
+     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+@@ -2734,7 +2738,7 @@ typedef struct IDirect3DAuthenticatedChannel9 *LPDIRECT3DAUTHENTICATEDCHANNEL9,
+ #undef INTERFACE
+ #define INTERFACE IDirect3DCryptoSession9
+ 
+-DECLARE_INTERFACE_(IDirect3DCryptoSession9, IUnknown)
++DECLARE_INTERFACE_(_Windows_SupportedOS_Windows7_ IDirect3DCryptoSession9, IUnknown)
+ {
+     /*** IUnknown methods ***/
+     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;

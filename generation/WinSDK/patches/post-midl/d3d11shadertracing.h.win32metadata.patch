@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shadertracing.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shadertracing.h
+index 852959123f..be15190e3e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shadertracing.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shadertracing.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 501
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -277,6 +282,7 @@ EXTERN_C const IID IID_ID3D11ShaderTrace;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("36b013e6-2811-4845-baa7-d623fe0df104")
++    _Windows_SupportedOS_Windows8_
+     ID3D11ShaderTrace : public IUnknown
+     {
+     public:
+@@ -482,6 +488,7 @@ EXTERN_C const IID IID_ID3D11ShaderTraceFactory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1fbad429-66ab-41cc-9617-667ac10e4459")
++    _Windows_SupportedOS_Windows8_
+     ID3D11ShaderTraceFactory : public IUnknown
+     {
+     public:
+@@ -568,6 +575,7 @@ EXTERN_C const IID IID_ID3D11ShaderTraceFactory;
+ /* [local] */ 
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_
+ D3DDisassemble11Trace(_In_reads_bytes_(SrcDataSize) LPCVOID pSrcData,
+                       _In_ SIZE_T SrcDataSize,
+                       _In_ ID3D11ShaderTrace* pTrace,

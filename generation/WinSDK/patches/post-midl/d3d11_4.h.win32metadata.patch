@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_4.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_4.h
+index 5c808c5717..d2699c3f25 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_4.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11_4.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -2059,6 +2064,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("C4E7374C-6243-4D1B-AE87-52B4F740E261")
++    _Windows_SupportedOS_10240_
+     ID3D11VideoContext2 : public ID3D11VideoContext1
+     {
+     public:

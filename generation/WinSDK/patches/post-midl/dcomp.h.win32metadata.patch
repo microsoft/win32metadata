@@ -1,0 +1,291 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
+index 0181947e8b..9d99d3ff1c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
+@@ -1,6 +1,10 @@
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ //---------------------------------------------------------------------------
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #pragma once
+ 
+ #include <d2dbasetypes.h>   // for D2D_MATRIX_3X2_F
+@@ -64,6 +68,7 @@ typedef interface IDCompositionVisual                    IDCompositionVisual;
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
++_Windows_SupportedOS_Windows8_
+ STDAPI DCompositionCreateDevice(
+     _In_opt_ IDXGIDevice *dxgiDevice,
+     _In_ REFIID iid,
+@@ -81,6 +86,7 @@ STDAPI DCompositionCreateDevice(
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
++_Windows_SupportedOS_Windows81_
+ STDAPI DCompositionCreateDevice2(
+     _In_opt_ IUnknown *renderingDevice,
+     _In_ REFIID iid,
+@@ -118,6 +124,7 @@ STDAPI DCompositionCreateDevice3(
+ //      with a visual.
+ //
+ //------------------------------------------------------------------------------
++_Windows_SupportedOS_Windows8_
+ STDAPI DCompositionCreateSurfaceHandle(
+     _In_ DWORD desiredAccess,
+     _In_opt_ SECURITY_ATTRIBUTES *securityAttributes,
+@@ -247,7 +254,7 @@ STDAPI_(DWORD) DCompositionWaitForCompositorClock(
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionDevice
+-DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9746CB0407F3")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9746CB0407F3")
+ {
+     // Commits all DirectComposition commands pending on this device.
+     STDMETHOD(Commit)(THIS
+@@ -397,7 +404,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionTarget
+-DECLARE_INTERFACE_IID_(IDCompositionTarget, IUnknown, "eacdd04c-117e-4e17-88f4-d1b12b0e3d89")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionTarget, IUnknown, "eacdd04c-117e-4e17-88f4-d1b12b0e3d89")
+ {
+     // Sets the root visual
+     STDMETHOD(SetRoot)(THIS_
+@@ -417,7 +424,7 @@ DECLARE_INTERFACE_IID_(IDCompositionTarget, IUnknown, "eacdd04c-117e-4e17-88f4-d
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionVisual
+-DECLARE_INTERFACE_IID_(IDCompositionVisual, IUnknown, "4d93059d-097b-4651-9a60-f0f25116e2f3")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionVisual, IUnknown, "4d93059d-097b-4651-9a60-f0f25116e2f3")
+ {
+     // Changes the value of OffsetX property
+     STDMETHOD(SetOffsetX)(THIS_
+@@ -520,7 +527,7 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual, IUnknown, "4d93059d-097b-4651-9a60-f
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionEffect
+-DECLARE_INTERFACE_IID_(IDCompositionEffect, IUnknown, "EC81B08F-BFCB-4e8d-B193-A915587999E8")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionEffect, IUnknown, "EC81B08F-BFCB-4e8d-B193-A915587999E8")
+ {
+ };
+ 
+@@ -535,7 +542,7 @@ DECLARE_INTERFACE_IID_(IDCompositionEffect, IUnknown, "EC81B08F-BFCB-4e8d-B193-A
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionTransform3D
+-DECLARE_INTERFACE_IID_(IDCompositionTransform3D, IDCompositionEffect, "71185722-246B-41f2-AAD1-0443F7F4BFC2")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionTransform3D, IDCompositionEffect, "71185722-246B-41f2-AAD1-0443F7F4BFC2")
+ {
+ };
+ 
+@@ -551,7 +558,7 @@ DECLARE_INTERFACE_IID_(IDCompositionTransform3D, IDCompositionEffect, "71185722-
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionTransform
+-DECLARE_INTERFACE_IID_(IDCompositionTransform, IDCompositionTransform3D, "FD55FAA7-37E0-4c20-95D2-9BE45BC33F55")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionTransform, IDCompositionTransform3D, "FD55FAA7-37E0-4c20-95D2-9BE45BC33F55")
+ {
+ };
+ 
+@@ -567,7 +574,7 @@ DECLARE_INTERFACE_IID_(IDCompositionTransform, IDCompositionTransform3D, "FD55FA
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionTranslateTransform
+-DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform, IDCompositionTransform, "06791122-C6F0-417d-8323-269E987F5954")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionTranslateTransform, IDCompositionTransform, "06791122-C6F0-417d-8323-269E987F5954")
+ {
+     // Changes the value of the OffsetX property.
+     STDMETHOD(SetOffsetX)(THIS_
+@@ -603,7 +610,7 @@ DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform, IDCompositionTransform,
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionScaleTransform
+-DECLARE_INTERFACE_IID_(IDCompositionScaleTransform, IDCompositionTransform, "71FDE914-40EF-45ef-BD51-68B037C339F9")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionScaleTransform, IDCompositionTransform, "71FDE914-40EF-45ef-BD51-68B037C339F9")
+ {
+     // Changes the value of the ScaleX property.
+     STDMETHOD(SetScaleX)(THIS_
+@@ -659,7 +666,7 @@ DECLARE_INTERFACE_IID_(IDCompositionScaleTransform, IDCompositionTransform, "71F
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionRotateTransform
+-DECLARE_INTERFACE_IID_(IDCompositionRotateTransform, IDCompositionTransform, "641ED83C-AE96-46c5-90DC-32774CC5C6D5")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionRotateTransform, IDCompositionTransform, "641ED83C-AE96-46c5-90DC-32774CC5C6D5")
+ {
+     // Changes the value of the Angle property.
+     STDMETHOD(SetAngle)(THIS_
+@@ -705,7 +712,7 @@ DECLARE_INTERFACE_IID_(IDCompositionRotateTransform, IDCompositionTransform, "64
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionSkewTransform
+-DECLARE_INTERFACE_IID_(IDCompositionSkewTransform, IDCompositionTransform, "E57AA735-DCDB-4c72-9C61-0591F58889EE")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionSkewTransform, IDCompositionTransform, "E57AA735-DCDB-4c72-9C61-0591F58889EE")
+ {
+     // Changes the value of the AngleX property.
+     STDMETHOD(SetAngleX)(THIS_
+@@ -760,7 +767,7 @@ DECLARE_INTERFACE_IID_(IDCompositionSkewTransform, IDCompositionTransform, "E57A
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionMatrixTransform
+-DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform, IDCompositionTransform, "16CDFF07-C503-419c-83F2-0965C7AF1FA6")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionMatrixTransform, IDCompositionTransform, "16CDFF07-C503-419c-83F2-0965C7AF1FA6")
+ {
+     // Changes all values of the matrix of this transform.
+     STDMETHOD(SetMatrix)(THIS_
+@@ -794,7 +801,7 @@ DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform, IDCompositionTransform, "16
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionEffectGroup
+-DECLARE_INTERFACE_IID_(IDCompositionEffectGroup, IDCompositionEffect, "A7929A74-E6B2-4bd6-8B95-4040119CA34D")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionEffectGroup, IDCompositionEffect, "A7929A74-E6B2-4bd6-8B95-4040119CA34D")
+ {
+     // Changes the opacity property.
+     STDMETHOD(SetOpacity)(THIS_
+@@ -824,7 +831,7 @@ DECLARE_INTERFACE_IID_(IDCompositionEffectGroup, IDCompositionEffect, "A7929A74-
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionTranslateTransform3D
+-DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform3D, IDCompositionTransform3D, "91636D4B-9BA1-4532-AAF7-E3344994D788")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionTranslateTransform3D, IDCompositionTransform3D, "91636D4B-9BA1-4532-AAF7-E3344994D788")
+ {
+     // Changes the value of the OffsetX property.
+     STDMETHOD(SetOffsetX)(THIS_
+@@ -870,7 +877,7 @@ DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform3D, IDCompositionTransform
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionScaleTransform3D
+-DECLARE_INTERFACE_IID_(IDCompositionScaleTransform3D, IDCompositionTransform3D, "2A9E9EAD-364B-4b15-A7C4-A1997F78B389")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionScaleTransform3D, IDCompositionTransform3D, "2A9E9EAD-364B-4b15-A7C4-A1997F78B389")
+ {
+     // Changes the value of the ScaleX property.
+     STDMETHOD(SetScaleX)(THIS_
+@@ -946,7 +953,7 @@ DECLARE_INTERFACE_IID_(IDCompositionScaleTransform3D, IDCompositionTransform3D,
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionRotateTransform3D
+-DECLARE_INTERFACE_IID_(IDCompositionRotateTransform3D, IDCompositionTransform3D, "D8F5B23F-D429-4a91-B55A-D2F45FD75B18")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionRotateTransform3D, IDCompositionTransform3D, "D8F5B23F-D429-4a91-B55A-D2F45FD75B18")
+ {
+     // Changes the value of the Angle property.
+     STDMETHOD(SetAngle)(THIS_
+@@ -1033,7 +1040,7 @@ DECLARE_INTERFACE_IID_(IDCompositionRotateTransform3D, IDCompositionTransform3D,
+ #pragma warning(disable : 4995)    // D3DMATRIX': name was marked as #pragma deprecated
+ #undef INTERFACE
+ #define INTERFACE IDCompositionMatrixTransform3D
+-DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform3D, IDCompositionTransform3D, "4B3363F0-643B-41b7-B6E0-CCF22D34467C")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionMatrixTransform3D, IDCompositionTransform3D, "4B3363F0-643B-41b7-B6E0-CCF22D34467C")
+ {
+     // Changes all values of the matrix of this transform.
+     STDMETHOD(SetMatrix)(THIS_
+@@ -1068,7 +1075,7 @@ DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform3D, IDCompositionTransform3D,
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionClip
+-DECLARE_INTERFACE_IID_(IDCompositionClip, IUnknown, "64AC3703-9D3F-45ec-A109-7CAC0E7A13A7")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionClip, IUnknown, "64AC3703-9D3F-45ec-A109-7CAC0E7A13A7")
+ {
+ };
+ 
+@@ -1084,7 +1091,7 @@ DECLARE_INTERFACE_IID_(IDCompositionClip, IUnknown, "64AC3703-9D3F-45ec-A109-7CA
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionRectangleClip
+-DECLARE_INTERFACE_IID_(IDCompositionRectangleClip, IDCompositionClip, "9842AD7D-D9CF-4908-AED7-48B51DA5E7C2")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionRectangleClip, IDCompositionClip, "9842AD7D-D9CF-4908-AED7-48B51DA5E7C2")
+ {
+     // Changes the value of the Left property.
+     STDMETHOD(SetLeft)(THIS_
+@@ -1235,7 +1242,7 @@ DECLARE_INTERFACE_IID_(IDCompositionRectangleClip, IDCompositionClip, "9842AD7D-
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionSurface
+-DECLARE_INTERFACE_IID_(IDCompositionSurface, IUnknown, "BB8A4953-2C99-4F5A-96F5-4819027FA3AC")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionSurface, IUnknown, "BB8A4953-2C99-4F5A-96F5-4819027FA3AC")
+ {
+     STDMETHOD(BeginDraw)(THIS_
+         _In_opt_ const RECT *updateRect,
+@@ -1273,7 +1280,7 @@ DECLARE_INTERFACE_IID_(IDCompositionSurface, IUnknown, "BB8A4953-2C99-4F5A-96F5-
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionVirtualSurface
+-DECLARE_INTERFACE_IID_(IDCompositionVirtualSurface, IDCompositionSurface, "AE471C51-5F53-4A24-8D3E-D0C39C30B3F0")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionVirtualSurface, IDCompositionSurface, "AE471C51-5F53-4A24-8D3E-D0C39C30B3F0")
+ {
+     STDMETHOD(Resize)(THIS_
+         _In_ UINT width,
+@@ -1306,7 +1313,7 @@ typedef interface IDCompositionVisualDebug          IDCompositionVisualDebug;
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionDevice2
+-DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-75FEA80B5B25")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-75FEA80B5B25")
+ {
+     // Commits all DirectComposition commands pending on this device.
+     STDMETHOD(Commit)(THIS
+@@ -1437,7 +1444,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionDesktopDevice
+-DECLARE_INTERFACE_IID_(IDCompositionDesktopDevice, IDCompositionDevice2, "5F4633FE-1E08-4CB8-8C75-CE24333F5602")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionDesktopDevice, IDCompositionDevice2, "5F4633FE-1E08-4CB8-8C75-CE24333F5602")
+ {
+     STDMETHOD(CreateTargetForHwnd)(THIS_
+         _In_ HWND hwnd,
+@@ -1492,7 +1499,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDeviceDebug, IUnknown, "A1A3C64A-224F-4A81-9
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionSurfaceFactory
+-DECLARE_INTERFACE_IID_(IDCompositionSurfaceFactory, IUnknown, "E334BC12-3937-4E02-85EB-FCF4EB30D2C8")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionSurfaceFactory, IUnknown, "E334BC12-3937-4E02-85EB-FCF4EB30D2C8")
+ {
+     // Creates a DirectComposition surface object
+     STDMETHOD(CreateSurface)(THIS_
+@@ -1525,7 +1532,7 @@ DECLARE_INTERFACE_IID_(IDCompositionSurfaceFactory, IUnknown, "E334BC12-3937-4E0
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionVisual2
+-DECLARE_INTERFACE_IID_(IDCompositionVisual2, IDCompositionVisual, "E8DE1639-4331-4B26-BC5F-6A321D347A85")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionVisual2, IDCompositionVisual, "E8DE1639-4331-4B26-BC5F-6A321D347A85")
+ {
+     // Changes the interpretation of the opacity property of an effect group
+     // associated with this visual
+@@ -1550,7 +1557,7 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual2, IDCompositionVisual, "E8DE1639-4331
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionVisualDebug
+-DECLARE_INTERFACE_IID_(IDCompositionVisualDebug, IDCompositionVisual2, "FED2B808-5EB4-43A0-AEA3-35F65280F91B")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionVisualDebug, IDCompositionVisual2, "FED2B808-5EB4-43A0-AEA3-35F65280F91B")
+ {
+     // Enable heat map
+     STDMETHOD(EnableHeatMap)(THIS_
+@@ -1587,7 +1594,7 @@ typedef interface IDCompositionVisual3                      IDCompositionVisual3
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionVisual3
+-DECLARE_INTERFACE_IID_(IDCompositionVisual3, IDCompositionVisualDebug, "2775F462-B6C1-4015-B0BE-B3E7D6A4976D")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionVisual3, IDCompositionVisualDebug, "2775F462-B6C1-4015-B0BE-B3E7D6A4976D")
+ {
+     // Sets depth mode property associated with this visual
+     STDMETHOD(SetDepthMode)(THIS_
+@@ -1642,7 +1649,7 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual3, IDCompositionVisualDebug, "2775F462
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionDevice3
+-DECLARE_INTERFACE_IID_(IDCompositionDevice3, IDCompositionDevice2, "0987CB06-F916-48BF-8D35-CE7641781BD9")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows81_ IDCompositionDevice3, IDCompositionDevice2, "0987CB06-F916-48BF-8D35-CE7641781BD9")
+ {
+     // Effect creation calls, each creates an interface around a D2D1Effect
+     STDMETHOD(CreateGaussianBlurEffect)(THIS_
+@@ -1709,7 +1716,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice3, IDCompositionDevice2, "0987CB06-F91
+ //------------------------------------------------------------------------------
+ #undef INTERFACE
+ #define INTERFACE IDCompositionFilterEffect
+-DECLARE_INTERFACE_IID_(IDCompositionFilterEffect, IDCompositionEffect, "30C421D5-8CB2-4E9F-B133-37BE270D4AC2")
++DECLARE_INTERFACE_IID_(_Windows_SupportedOS_Windows8_ IDCompositionFilterEffect, IDCompositionEffect, "30C421D5-8CB2-4E9F-B133-37BE270D4AC2")
+ {
+     // Sets the input at the given index to the filterEffect (NULL will use source visual, unless flagged otherwise)
+     STDMETHOD(SetInput)(THIS_

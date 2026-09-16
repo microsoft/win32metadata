@@ -1,0 +1,151 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1helper.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1helper.h
+index 1c1a37bb43..fc4a49f430 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1helper.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1helper.h
+@@ -10,6 +10,10 @@
+     Description: Helper files over the D2D interfaces and APIs.
+ 
+ \*=========================================================================*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #pragma once
+ 
+ #ifndef _D2D1_1HELPER_H_
+@@ -543,6 +547,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     inline
+     D2D1_COLOR_F
++    _Windows_SupportedOS_Windows7_
+     ConvertColorSpace(
+         D2D1_COLOR_SPACE sourceColorSpace,
+         D2D1_COLOR_SPACE destinationColorSpace,
+@@ -559,6 +564,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_DRAWING_STATE_DESCRIPTION1
++    _Windows_SupportedOS_Windows7_
+     DrawingStateDescription1(
+         D2D1_ANTIALIAS_MODE antialiasMode = D2D1_ANTIALIAS_MODE_PER_PRIMITIVE,
+         D2D1_TEXT_ANTIALIAS_MODE textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE_DEFAULT,
+@@ -607,6 +613,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_BITMAP_PROPERTIES1
++    _Windows_SupportedOS_Windows7_
+     BitmapProperties1(
+         D2D1_BITMAP_OPTIONS bitmapOptions = D2D1_BITMAP_OPTIONS_NONE,
+         _In_ CONST D2D1_PIXEL_FORMAT pixelFormat = D2D1::PixelFormat(),
+@@ -631,6 +638,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_LAYER_PARAMETERS1
++    _Windows_SupportedOS_Windows7_
+     LayerParameters1(
+         _In_ CONST D2D1_RECT_F &contentBounds = D2D1::InfiniteRect(),
+         _In_opt_ ID2D1Geometry *geometricMask = NULL,
+@@ -657,6 +665,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_STROKE_STYLE_PROPERTIES1
++    _Windows_SupportedOS_Windows7_
+     StrokeStyleProperties1(
+         D2D1_CAP_STYLE startCap = D2D1_CAP_STYLE_FLAT,
+         D2D1_CAP_STYLE endCap = D2D1_CAP_STYLE_FLAT,
+@@ -685,6 +694,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_IMAGE_BRUSH_PROPERTIES
++    _Windows_SupportedOS_Windows7_
+     ImageBrushProperties(
+         D2D1_RECT_F sourceRectangle,
+         D2D1_EXTEND_MODE extendModeX = D2D1_EXTEND_MODE_CLAMP,
+@@ -705,6 +715,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_BITMAP_BRUSH_PROPERTIES1
++    _Windows_SupportedOS_Windows7_
+     BitmapBrushProperties1(
+         D2D1_EXTEND_MODE extendModeX = D2D1_EXTEND_MODE_CLAMP,
+         D2D1_EXTEND_MODE extendModeY = D2D1_EXTEND_MODE_CLAMP,
+@@ -723,6 +734,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_PRINT_CONTROL_PROPERTIES
++    _Windows_SupportedOS_Windows7_
+     PrintControlProperties(
+         D2D1_PRINT_FONT_SUBSET_MODE fontSubsetMode = D2D1_PRINT_FONT_SUBSET_MODE_DEFAULT,
+         FLOAT rasterDpi = 150.0f,
+@@ -741,6 +753,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_RENDERING_CONTROLS
++    _Windows_SupportedOS_Windows7_
+     RenderingControls(
+         D2D1_BUFFER_PRECISION bufferPrecision,
+         D2D1_SIZE_U tileSize
+@@ -757,6 +770,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_EFFECT_INPUT_DESCRIPTION
++    _Windows_SupportedOS_Windows7_
+     EffectInputDescription(
+         ID2D1Effect *effect,
+         UINT32 inputIndex,
+@@ -775,6 +789,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_CREATION_PROPERTIES
++    _Windows_SupportedOS_Windows7_
+     CreationProperties(
+         D2D1_THREADING_MODE threadingMode,
+         D2D1_DEBUG_LEVEL debugLevel,
+@@ -793,6 +808,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_VECTOR_2F
++    _Windows_SupportedOS_Windows7_
+     Vector2F(
+         FLOAT x = 0.0f,
+         FLOAT y = 0.0f
+@@ -805,6 +821,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_VECTOR_3F
++    _Windows_SupportedOS_Windows7_
+     Vector3F(
+         FLOAT x = 0.0f,
+         FLOAT y = 0.0f,
+@@ -818,6 +835,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_VECTOR_4F
++    _Windows_SupportedOS_Windows7_
+     Vector4F(
+         FLOAT x = 0.0f,
+         FLOAT y = 0.0f,
+@@ -832,6 +850,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_POINT_2L
++    _Windows_SupportedOS_Windows7_
+     Point2L(
+         INT32 x = 0,
+         INT32 y = 0
+@@ -843,6 +862,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     D2D1_RECT_L
++    _Windows_SupportedOS_Windows7_
+     RectL(
+         INT32 left = 0.f,
+         INT32 top = 0.f,
+@@ -860,6 +880,7 @@ namespace D2D1
+     COM_DECLSPEC_NOTHROW
+     D2D1FORCEINLINE
+     HRESULT
++    _Windows_SupportedOS_Windows7_
+     SetDpiCompensatedEffectInput(
+         _In_ ID2D1DeviceContext *deviceContext,
+         _In_ ID2D1Effect *effect,
