@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+index 796708e1..e4aac8a2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -963,14 +964,16 @@ EXTERN_C const CLSID CLSID_Antimalware;
+ DECLARE_HANDLE(HAMSICONTEXT);
+ DECLARE_HANDLE(HAMSISESSION);
+ 
+ STDAPI AmsiInitialize(
+     _In_  LPCWSTR appName,
+-    _Outptr_ HAMSICONTEXT* amsiContext);
++    _Outptr_ _Win32_RAIIFree_(AmsiUninitialize, 0)
++        HAMSICONTEXT* amsiContext);
+ 
+ STDAPI_(VOID) AmsiUninitialize(
+     _In_  HAMSICONTEXT amsiContext);
+ 
+ STDAPI AmsiOpenSession(
+     _In_  HAMSICONTEXT amsiContext,
+-    _Out_ HAMSISESSION* amsiSession);
++    _Out_ _Win32_RAIIFree_(AmsiCloseSession, 0)
++        HAMSISESSION* amsiSession);
+ 
+ STDAPI_(VOID) AmsiCloseSession(
+     _In_  HAMSICONTEXT amsiContext,
