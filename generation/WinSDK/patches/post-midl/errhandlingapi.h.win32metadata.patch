@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
+@@ -16,6 +16,9 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -28,11 +31,11 @@ extern "C" {
+ // Typedefs
+ //
+ 
+-typedef LONG (WINAPI *PTOP_LEVEL_EXCEPTION_FILTER)(
++typedef LONG (WINAPI *LPTOP_LEVEL_EXCEPTION_FILTER)(
+     _In_ struct _EXCEPTION_POINTERS *ExceptionInfo
+     );
+ 
+-typedef PTOP_LEVEL_EXCEPTION_FILTER LPTOP_LEVEL_EXCEPTION_FILTER;
++typedef LPTOP_LEVEL_EXCEPTION_FILTER PTOP_LEVEL_EXCEPTION_FILTER;
+ 
+ //
+ // Prototypes
+@@ -88,6 +91,7 @@ GetLastError(
+ 
+ #endif
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -237,6 +241,7 @@ GetThreadErrorMode(
+     VOID
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

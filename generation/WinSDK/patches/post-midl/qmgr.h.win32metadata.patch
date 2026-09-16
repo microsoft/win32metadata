@@ -1,0 +1,60 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
+index ef58ac5d..d320cc6b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
+@@ -115,6 +115,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ // Background Copy QMgr Public Interface
+@@ -168,6 +169,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("59f5553c-2031-4629-bb18-2645a6970947")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyJob1 : public IUnknown
+     {
+@@ -362,6 +364,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8baeba9d-8f1c-42c4-b82c-09ae79980d25")
++_Windows_SupportedOS_WindowsXP_
+     IEnumBackgroundCopyJobs1 : public IUnknown
+     {
+@@ -523,6 +526,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1ded80a7-53ea-424f-8a04-17fea9adc4f5")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyGroup : public IUnknown
+     {
+@@ -827,6 +831,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d993e603-4aa4-47c5-8665-c20d39c2ba4f")
++_Windows_SupportedOS_WindowsXP_
+     IEnumBackgroundCopyGroups : public IUnknown
+     {
+@@ -970,6 +975,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("084f6593-3800-4e08-9b59-99fa59addf82")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyCallback1 : public IUnknown
+     {
+@@ -1147,6 +1153,7 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyQMgr : public IUnknown
+     {

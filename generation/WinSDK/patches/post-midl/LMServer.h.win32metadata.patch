@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
+@@ -31,6 +31,9 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -273,6 +276,7 @@ NetServerTransportEnum (
+ // Therefore, if this is the only function called by that service, then
+ // it is not necessary to link to netapi32.lib.
+ //
++_Win32_SetLastError_
+ BOOL NET_API_FUNCTION
+ SetServiceBits(
+     IN SERVICE_STATUS_HANDLE    hServiceStatus,

@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
+index 76c32997..1b65cd61 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
+@@ -186,6 +186,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -204,6 +205,7 @@ EXTERN_C const IID IID_IBitsPeerCacheRecord;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdeaf-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBitsPeerCacheRecord : public IUnknown
+     {
+@@ -359,6 +361,7 @@ EXTERN_C const IID IID_IEnumBitsPeerCacheRecords;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdea4-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IEnumBitsPeerCacheRecords : public IUnknown
+     {
+@@ -500,6 +503,7 @@ EXTERN_C const IID IID_IBitsPeer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdea2-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBitsPeer : public IUnknown
+     {
+@@ -607,6 +611,7 @@ EXTERN_C const IID IID_IEnumBitsPeers;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdea5-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IEnumBitsPeers : public IUnknown
+     {
+@@ -751,6 +756,7 @@ EXTERN_C const IID IID_IBitsPeerCacheAdministration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdead-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBitsPeerCacheAdministration : public IUnknown
+     {
+@@ -986,6 +992,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdeae-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBackgroundCopyJob4 : public IBackgroundCopyJob3
+     {
+@@ -1538,6 +1545,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdeaa-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBackgroundCopyFile3 : public IBackgroundCopyFile2
+     {
+@@ -1712,6 +1720,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("659cdeac-489e-11d9-a9cd-000d56965251")
++_Windows_SupportedOS_WindowsVista_
+     IBackgroundCopyCallback2 : public IBackgroundCopyCallback
+     {

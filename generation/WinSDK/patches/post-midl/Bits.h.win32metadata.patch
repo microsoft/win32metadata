@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
+index 1b88988d..791d51e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
+@@ -134,6 +134,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include "bitsmsg.h"
+@@ -161,6 +162,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("01b7bd23-fb88-4a77-8490-5891d3e4653a")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyFile : public IUnknown
+     {
+@@ -274,6 +276,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ca51e165-c365-424c-8d41-24aaa4ff3c40")
++_Windows_SupportedOS_WindowsXP_
+     IEnumBackgroundCopyFiles : public IUnknown
+     {
+@@ -429,6 +432,7 @@ EXTERN_C const IID IID_IBackgroundCopyError;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("19c613a0-fcb8-4f28-81ae-897c3d078f81")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyError : public IUnknown
+     {
+@@ -631,6 +635,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("37668d37-507e-4160-9316-26306d150b12")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyJob : public IUnknown
+     {
+@@ -1125,6 +1130,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1af4f612-3b71-466f-8f58-7b6f73ac57ad")
++_Windows_SupportedOS_WindowsXP_
+     IEnumBackgroundCopyJobs : public IUnknown
+     {
+@@ -1280,6 +1286,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyCallback : public IUnknown
+     {
+@@ -1550,6 +1557,7 @@ EXTERN_C const IID IID_IBackgroundCopyManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c")
++_Windows_SupportedOS_WindowsXP_
+     IBackgroundCopyManager : public IUnknown
+     {
