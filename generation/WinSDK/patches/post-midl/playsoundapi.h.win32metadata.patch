@@ -50,7 +50,7 @@ index 0ec683ff..a5a70e0d 100644
 +    _Win32_AssociatedConstant_(SND_ALIAS_ID)
 +    _Win32_AssociatedConstant_(SND_RESOURCE)
 +    [[clang::flag_enum]]
-+    SND_FLAGS : int
++    SND_FLAGS : DWORD
 +{
 +    SND_SYNC = 0x0000,
 +    SND_ASYNC = 0x0001,
