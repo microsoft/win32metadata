@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+index 9192f7e9c2..2869078c04 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+@@ -86,6 +86,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -125,6 +126,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Server2012_
+     MIDL_INTERFACE("7BACC67A-2F1D-42D0-897E-6FF62DD533BB")
+     IDedupReadFileCallback : public IUnknown
+     {
+@@ -278,6 +280,7 @@ EXTERN_C const IID IID_IDedupBackupSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Server2012_
+     MIDL_INTERFACE("C719D963-2B2D-415E-ACF7-7EB7CA596FF4")
+     IDedupBackupSupport : public IUnknown
+     {
+@@ -407,9 +410,13 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+ void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ /* end of Additional Prototypes */
