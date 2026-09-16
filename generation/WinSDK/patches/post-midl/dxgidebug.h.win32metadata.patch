@@ -1,0 +1,50 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
+index 33a6dca8..0c1a890a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -160,6 +165,7 @@ typedef struct DXGI_INFO_QUEUE_FILTER
+     } 	DXGI_INFO_QUEUE_FILTER;
+ 
+ #define DXGI_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);
+ 
+ 
+@@ -177,6 +183,7 @@ EXTERN_C const IID IID_IDXGIInfoQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("D67441C7-672A-476f-9E82-CD55B44949CE")
+     IDXGIInfoQueue : public IUnknown
+     {
+@@ -840,6 +847,7 @@ EXTERN_C const IID IID_IDXGIDebug;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("119E7452-DE9E-40fe-8806-88F90C12B441")
+     IDXGIDebug : public IUnknown
+     {
+@@ -927,6 +935,7 @@ EXTERN_C const IID IID_IDXGIDebug1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550")
+     IDXGIDebug1 : public IDXGIDebug
+     {

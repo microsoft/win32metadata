@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
+index 98306c81..67d5bd04 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -140,6 +145,7 @@ EXTERN_C const IID IID_IDXGIDisplayControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("ea9dbf1a-c88e-4486-854a-98aa0138f30c")
+     IDXGIDisplayControl : public IUnknown
+     {
+@@ -290,6 +296,7 @@ EXTERN_C const IID IID_IDXGIOutputDuplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("191cfac3-a341-470d-b26e-a864f428319c")
+     IDXGIOutputDuplication : public IDXGIObject
+     {
+@@ -567,6 +574,7 @@ EXTERN_C const IID IID_IDXGISurface2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("aba496dd-b617-4cb8-a866-bc44d7eb1fa2")
+     IDXGISurface2 : public IDXGISurface1
+     {
+@@ -772,6 +780,7 @@ EXTERN_C const IID IID_IDXGIResource1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("30961379-4609-4a41-998e-54fe567ee0c1")
+     IDXGIResource1 : public IDXGIResource
+     {
+@@ -1000,6 +1009,7 @@ EXTERN_C const IID IID_IDXGIDevice2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("05008617-fbfd-4051-a790-144884b4f6a9")
+     IDXGIDevice2 : public IDXGIDevice1
+     {
+@@ -1322,6 +1332,7 @@ EXTERN_C const IID IID_IDXGISwapChain1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("790a45f7-0d42-4876-983a-0a55cfe6f4aa")
+     IDXGISwapChain1 : public IDXGISwapChain
+     {
+@@ -1717,6 +1728,7 @@ EXTERN_C const IID IID_IDXGIFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("50c83a1c-e072-4c48-87b0-3630fa36a6d0")
+     IDXGIFactory2 : public IDXGIFactory1
+     {
+@@ -2172,6 +2184,7 @@ EXTERN_C const IID IID_IDXGIAdapter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5")
+     IDXGIAdapter2 : public IDXGIAdapter1
+     {
+@@ -2350,6 +2363,7 @@ EXTERN_C const IID IID_IDXGIOutput1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("00cddea8-939b-4b83-a340-a685226666cc")
+     IDXGIOutput1 : public IDXGIOutput
+     {

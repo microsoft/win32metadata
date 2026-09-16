@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
+index fca6ced9..b401d581 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -111,6 +116,7 @@ EXTERN_C const IID IID_IDXGIOutput5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_10240_
+     MIDL_INTERFACE("80A07424-AB52-42EB-833C-0C42FD282D98")
+     IDXGIOutput5 : public IDXGIOutput4
+     {

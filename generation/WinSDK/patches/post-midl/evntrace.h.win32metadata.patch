@@ -1,0 +1,52 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
+index 72f9d730..a406369c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
+@@ -1,4 +1,7 @@
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ /*++
+ 
+@@ -2626,6 +2629,7 @@ UnregisterTraceGuids (
+     _In_ TRACEGUID_HANDLE RegistrationHandle
+     );
+ 
++_Win32_SetLastError_
+ EXTERN_C
+ TRACELOGGER_HANDLE
+ WMIAPI
+@@ -2633,6 +2637,7 @@ GetTraceLoggerHandle (
+     _In_ PVOID Buffer
+     );
+ 
++_Win32_SetLastError_
+ EXTERN_C
+ UCHAR
+ WMIAPI
+@@ -2640,6 +2645,7 @@ GetTraceEnableLevel (
+     _In_ TRACELOGGER_HANDLE TraceHandle
+     );
+ 
++_Win32_SetLastError_
+ EXTERN_C
+ ULONG
+ WMIAPI
+@@ -2657,6 +2663,7 @@ GetTraceEnableFlags (
+ #pragma region Application Family or OneCore Family or GameCore family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ EXTERN_C
+ ETW_APP_DECLSPEC_DEPRECATED
+ PROCESSTRACE_HANDLE
+@@ -2811,6 +2818,7 @@ QueryTraceProcessingHandle (
+ // Data Consumer APIs and structures start here
+ //
+ 
++_Win32_SetLastError_
+ EXTERN_C
+ PROCESSTRACE_HANDLE
+ WMIAPI

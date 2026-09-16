@@ -1,0 +1,92 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
+index 50c03b2a..295f9271 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
+@@ -9,8 +9,13 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
++
+ #endif
+ 
+ /* verify that the <rpcsal.h> version is high enough to compile this file*/
+@@ -118,7 +123,9 @@ extern "C"{
+ #pragma region App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+ #define DXGI_CREATE_FACTORY_DEBUG 0x1
++_Windows_SupportedOS_Windows81_
+ HRESULT WINAPI CreateDXGIFactory2(UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);
++_Windows_SupportedOS_Windows81_
+ HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);
+ 
+ 
+@@ -136,6 +143,7 @@ EXTERN_C const IID IID_IDXGIDevice3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("6007896c-3244-4afd-bf18-a6d3beda5023")
+     IDXGIDevice3 : public IDXGIDevice2
+     {
+@@ -399,6 +407,7 @@ EXTERN_C const IID IID_IDXGISwapChain2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("a8be2ac4-199f-4946-b331-79599fb98de7")
+     IDXGISwapChain2 : public IDXGISwapChain1
+     {
+@@ -834,6 +843,7 @@ EXTERN_C const IID IID_IDXGIOutput2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("595e39d1-2724-4663-99b1-da969de28364")
+     IDXGIOutput2 : public IDXGIOutput1
+     {
+@@ -1131,6 +1141,7 @@ EXTERN_C const IID IID_IDXGIFactory3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("25483823-cd46-4c7d-86ca-47aa95b837bd")
+     IDXGIFactory3 : public IDXGIFactory2
+     {
+@@ -1497,6 +1508,7 @@ EXTERN_C const IID IID_IDXGIDecodeSwapChain;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("2633066b-4514-4c7a-8fd8-12ea98059d18")
+     IDXGIDecodeSwapChain : public IUnknown
+     {
+@@ -1684,6 +1696,7 @@ EXTERN_C const IID IID_IDXGIFactoryMedia;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12")
+     IDXGIFactoryMedia : public IUnknown
+     {
+@@ -1848,6 +1861,7 @@ EXTERN_C const IID IID_IDXGISwapChainMedia;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("dd95b90b-f05f-4f6a-bd65-25bfb264bd84")
+     IDXGISwapChainMedia : public IUnknown
+     {
+@@ -1984,6 +1998,7 @@ EXTERN_C const IID IID_IDXGIOutput3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18")
+     IDXGIOutput3 : public IDXGIOutput2
+     {
