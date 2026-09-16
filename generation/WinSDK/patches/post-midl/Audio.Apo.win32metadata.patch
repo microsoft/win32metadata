@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
+@@ -71,2 +71,3 @@
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -224,2 +225,3 @@
++_Windows_SupportedOS_WindowsVista_
+ STDAPI CreateAudioMediaType(
+     const WAVEFORMATEX* pAudioFormat,
+@@ -232,2 +234,3 @@
++_Windows_SupportedOS_WindowsVista_
+ STDAPI CreateAudioMediaTypeFromUncompressedAudioFormat(
+     const UNCOMPRESSEDAUDIOFORMAT* pUncompressedAudioFormat,
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
+@@ -12,2 +12,3 @@
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -497,2 +498,3 @@
++_Win32_ImportLibrary_("DSOUND.dll")
+ extern HRESULT WINAPI GetDeviceID(_In_opt_ LPCGUID pGuidSrc, _Out_ LPGUID pGuidDest);
+ #endif // DIRECTSOUND_VERSION >= 0x0800
