@@ -26,7 +26,7 @@ index 796708e1..e4aac8a2 100644
  STDAPI AmsiOpenSession(
      _In_  HAMSICONTEXT amsiContext,
 -    _Out_ HAMSISESSION* amsiSession);
-+    _Out_ _Win32_RAIIFree_(AmsiCloseSession, 0)
++    _Out_ _Win32_RAIIFree_(AmsiCloseSession, -1, 0)
 +        HAMSISESSION* amsiSession);
  
  STDAPI_(VOID) AmsiCloseSession(
