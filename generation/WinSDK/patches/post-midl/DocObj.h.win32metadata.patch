@@ -16,56 +16,56 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h b/generation/Win
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcc5-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IOleDocument : public IUnknown
      {
 @@ -328,6 +333,7 @@ EXTERN_C const IID IID_IOleDocumentSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcc7-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IOleDocumentSite : public IUnknown
      {
 @@ -428,6 +434,7 @@ EXTERN_C const IID IID_IOleDocumentView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcc6-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IOleDocumentView : public IUnknown
      {
 @@ -696,6 +703,7 @@ EXTERN_C const IID IID_IEnumOleDocumentViews;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcc8-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IEnumOleDocumentViews : public IUnknown
      {
 @@ -856,6 +864,7 @@ EXTERN_C const IID IID_IContinueCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcca-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IContinueCallback : public IUnknown
      {
 @@ -1001,6 +1010,7 @@ EXTERN_C const IID IID_IPrint;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bcc9-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IPrint : public IUnknown
      {
 @@ -1366,6 +1376,7 @@ EXTERN_C const IID IID_IOleCommandTarget;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("b722bccb-4e68-101b-a2bc-00aa00404770")
++    _Windows_SupportedOS_Windows2000_
      IOleCommandTarget : public IUnknown
      {
 @@ -1998,9 +2009,13 @@ unsigned char * __RPC_USER  HMENU_UserMarshal64(  __RPC__in unsigned long *, __R

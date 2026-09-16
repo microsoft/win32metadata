@@ -16,7 +16,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h b/generation/W
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-+    _Windows_SupportedOS_Windows2000_
      MIDL_INTERFACE("000001da-0000-0000-C000-000000000046")
++    _Windows_SupportedOS_Windows2000_
      IContextCallback : public IUnknown
      {
