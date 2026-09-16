@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
+@@ -9,6 +9,10 @@
+ #ifndef _MINWINBASE_
+ #define _MINWINBASE_
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #if     ( _MSC_VER >= 800 )
+ #pragma warning(disable:4514)
+ #ifndef __WINDOWS_DONT_DISABLE_PRAGMA_PACK_WARNING__
+@@ -299,10 +303,10 @@ typedef struct _REASON_CONTEXT {
+ #define OUTPUT_DEBUG_STRING_EVENT   8
+ #define RIP_EVENT                   9
+ 
+-typedef DWORD (WINAPI *PTHREAD_START_ROUTINE)(
++typedef DWORD (WINAPI *LPTHREAD_START_ROUTINE)(
+     LPVOID lpThreadParameter
+     );
+-typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
++typedef LPTHREAD_START_ROUTINE PTHREAD_START_ROUTINE;
+ 
+ typedef LPVOID (WINAPI *PENCLAVE_ROUTINE)(
+     LPVOID lpThreadParameter
