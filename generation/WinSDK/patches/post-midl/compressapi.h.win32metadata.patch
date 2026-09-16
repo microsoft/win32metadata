@@ -1,0 +1,156 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+index 9399b3a0..c5c9c107 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+@@ -17,6 +17,9 @@ Environment:
+ --*/
+ 
+ #include <windef.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+@@ -45,6 +48,29 @@ typedef COMPRESSOR_HANDLE *PDECOMPRESSOR_HANDLE;
+ 
+ #define COMPRESS_RAW             (1 << 29)
+ 
++#if defined(WIN32METADATA)
++#pragma push_macro("COMPRESS_ALGORITHM_MSZIP")
++#pragma push_macro("COMPRESS_ALGORITHM_XPRESS")
++#pragma push_macro("COMPRESS_ALGORITHM_XPRESS_HUFF")
++#pragma push_macro("COMPRESS_ALGORITHM_LZMS")
++#undef COMPRESS_ALGORITHM_MSZIP
++#undef COMPRESS_ALGORITHM_XPRESS
++#undef COMPRESS_ALGORITHM_XPRESS_HUFF
++#undef COMPRESS_ALGORITHM_LZMS
++enum COMPRESS_ALGORITHM : DWORD {
++    COMPRESS_ALGORITHM_MSZIP = 2,
++    COMPRESS_ALGORITHM_XPRESS = 3,
++    COMPRESS_ALGORITHM_XPRESS_HUFF = 4,
++    COMPRESS_ALGORITHM_LZMS = 5,
++};
++#pragma pop_macro("COMPRESS_ALGORITHM_LZMS")
++#pragma pop_macro("COMPRESS_ALGORITHM_XPRESS_HUFF")
++#pragma pop_macro("COMPRESS_ALGORITHM_XPRESS")
++#pragma pop_macro("COMPRESS_ALGORITHM_MSZIP")
++#else
++typedef DWORD COMPRESS_ALGORITHM;
++#endif
++
+ typedef PVOID (__cdecl *PFN_COMPRESS_ALLOCATE) (
+     _In_ PVOID UserContext,
+     _In_ SIZE_T Size
+@@ -69,14 +95,18 @@ typedef enum {
+ 
+ // Compression routines
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ CreateCompressor (
+-    _In_ DWORD Algorithm,
++    _In_ COMPRESS_ALGORITHM Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PCOMPRESSOR_HANDLE CompressorHandle
++    _Out_ _Win32_RAIIFree_(CloseCompressor, -1, 0) PCOMPRESSOR_HANDLE CompressorHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetCompressorInformation (
+@@ -86,6 +116,8 @@ SetCompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ QueryCompressorInformation (
+@@ -95,6 +127,8 @@ QueryCompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Compress (
+@@ -106,12 +140,16 @@ Compress (
+     _Out_ PSIZE_T CompressedDataSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ ResetCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ CloseCompressor (
+@@ -120,14 +158,18 @@ CloseCompressor (
+ 
+ // Decompression routines
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ CreateDecompressor (
+-    _In_ DWORD Algorithm,
++    _In_ COMPRESS_ALGORITHM Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
++    _Out_ _Win32_RAIIFree_(CloseDecompressor, -1, 0) PDECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetDecompressorInformation (
+@@ -137,6 +179,8 @@ SetDecompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ QueryDecompressorInformation (
+@@ -146,6 +190,8 @@ QueryDecompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Decompress (
+@@ -157,12 +203,16 @@ Decompress (
+     _Out_opt_ PSIZE_T UncompressedDataSize
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ ResetDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ CloseDecompressor (

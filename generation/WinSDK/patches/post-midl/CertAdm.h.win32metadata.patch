@@ -1,0 +1,104 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
+@@ -157,6 +157,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CA_DISP_INCOMPLETE	( 0 )
+@@ -214,8 +215,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certadm_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertAdmin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("34df6950-7fb6-11d0-8817-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertAdmin : public IDispatch
+     {
+     public:
+@@ -517,8 +518,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certadm_0000_0001_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertAdmin2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("f7c3ac41-b8ce-4fb4-aa58-3d1dc0e36b39")
++    _Windows_SupportedOS_Server2003_
+     ICertAdmin2 : public ICertAdmin
+     {
+     public:
+@@ -935,8 +936,8 @@ EXTERN_C const IID IID_ICertAdmin2;
+ EXTERN_C const IID IID_IOCSPProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("66FB7839-5F04-4C25-AD18-9FF1A8376EE0")
++    _Windows_SupportedOS_Server2008_
+     IOCSPProperty : public IDispatch
+     {
+     public:
+@@ -1106,8 +1107,8 @@ EXTERN_C const IID IID_IOCSPProperty;
+ EXTERN_C const IID IID_IOCSPPropertyCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("2597C18D-54E6-4B74-9FA9-A6BFDA99CBBE")
++    _Windows_SupportedOS_Server2008_
+     IOCSPPropertyCollection : public IDispatch
+     {
+     public:
+@@ -1329,8 +1330,8 @@ EXTERN_C const IID IID_IOCSPPropertyCollection;
+ EXTERN_C const IID IID_IOCSPCAConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("AEC92B40-3D46-433F-87D1-B84D5C1E790D")
++    _Windows_SupportedOS_Server2008_
+     IOCSPCAConfiguration : public IDispatch
+     {
+     public:
+@@ -1720,8 +1721,8 @@ EXTERN_C const IID IID_IOCSPCAConfiguration;
+ EXTERN_C const IID IID_IOCSPCAConfigurationCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("2BEBEA0B-5ECE-4F28-A91C-86B4BB20F0D3")
++    _Windows_SupportedOS_Server2008_
+     IOCSPCAConfigurationCollection : public IDispatch
+     {
+     public:
+@@ -1921,8 +1922,8 @@ EXTERN_C const IID IID_IOCSPCAConfigurationCollection;
+ EXTERN_C const IID IID_IOCSPAdmin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("322E830D-67DB-4FE9-9577-4596D9F09294")
++    _Windows_SupportedOS_Server2008_
+     IOCSPAdmin : public IDispatch
+     {
+     public:
+@@ -2289,14 +2290,22 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* end of Additional Prototypes */
