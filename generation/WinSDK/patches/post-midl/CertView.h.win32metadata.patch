@@ -1,0 +1,71 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CV_OUT_BASE64HEADER	( 0 )
+@@ -201,8 +202,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certview_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9c735be2-57a5-11d1-9bdb-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     IEnumCERTVIEWCOLUMN : public IDispatch
+     {
+     public:
+@@ -438,8 +439,8 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e77db656-7653-11d1-9bde-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     IEnumCERTVIEWATTRIBUTE : public IDispatch
+     {
+     public:
+@@ -629,8 +630,8 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e7dd1466-7653-11d1-9bde-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     IEnumCERTVIEWEXTENSION : public IDispatch
+     {
+     public:
+@@ -835,8 +836,8 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("d1157f4c-5af2-11d1-9bdc-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     IEnumCERTVIEWROW : public IDispatch
+     {
+     public:
+@@ -1052,8 +1053,8 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+ EXTERN_C const IID IID_ICertView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("c3fac344-1e84-11d1-9bd6-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     ICertView : public IDispatch
+     {
+     public:
+@@ -1281,8 +1282,8 @@ EXTERN_C const IID IID_ICertView;
+ EXTERN_C const IID IID_ICertView2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("d594b282-8851-4b61-9c66-3edadf848863")
++    _Windows_SupportedOS_Server2003_
+     ICertView2 : public ICertView
+     {
+     public:

@@ -1,0 +1,85 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+@@ -216,6 +216,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -233,8 +234,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certenc_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertEncodeStringArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("12a88820-7494-11d0-8816-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeStringArray : public IDispatch
+     {
+     public:
+@@ -656,8 +657,8 @@ EXTERN_C const IID IID_ICertEncodeStringArray2;
+ EXTERN_C const IID IID_ICertEncodeLongArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("15e2f230-a0a2-11d0-8821-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeLongArray : public IDispatch
+     {
+     public:
+@@ -1057,8 +1058,8 @@ EXTERN_C const IID IID_ICertEncodeLongArray2;
+ EXTERN_C const IID IID_ICertEncodeDateArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("2f9469a0-a470-11d0-8821-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeDateArray : public IDispatch
+     {
+     public:
+@@ -1458,8 +1459,8 @@ EXTERN_C const IID IID_ICertEncodeDateArray2;
+ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("01958640-bbff-11d0-8825-00a0c903b83c")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeCRLDistInfo : public IDispatch
+     {
+     public:
+@@ -1949,8 +1950,8 @@ extern RPC_IF_HANDLE __MIDL_itf_certenc_0000_0008_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ICertEncodeAltName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("1c9a8c70-1271-11d1-9bd4-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeAltName : public IDispatch
+     {
+     public:
+@@ -2407,8 +2408,8 @@ EXTERN_C const IID IID_ICertEncodeAltName2;
+ EXTERN_C const IID IID_ICertEncodeBitString;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6db525be-1278-11d1-9bd4-00c04fb683fa")
++    _Windows_SupportedOS_Server2003_
+     ICertEncodeBitString : public IDispatch
+     {
+     public:
+@@ -2855,9 +2856,13 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+ void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ /* end of Additional Prototypes */
