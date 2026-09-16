@@ -1,0 +1,314 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -481,6 +485,7 @@ EXTERN_C const IID IID_IEnumConnections;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B287-BAB4-101A-B69C-00AA00341D07")
+     IEnumConnections : public IUnknown
+     {
+@@ -632,6 +637,7 @@ EXTERN_C const IID IID_IConnectionPoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B286-BAB4-101A-B69C-00AA00341D07")
+     IConnectionPoint : public IUnknown
+     {
+@@ -779,6 +785,7 @@ EXTERN_C const IID IID_IEnumConnectionPoints;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B285-BAB4-101A-B69C-00AA00341D07")
+     IEnumConnectionPoints : public IUnknown
+     {
+@@ -930,6 +937,7 @@ EXTERN_C const IID IID_IConnectionPointContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B284-BAB4-101A-B69C-00AA00341D07")
+     IConnectionPointContainer : public IUnknown
+     {
+@@ -1057,6 +1065,7 @@ EXTERN_C const IID IID_IClassFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B28F-BAB4-101A-B69C-00AA00341D07")
+     IClassFactory2 : public IClassFactory
+     {
+@@ -1232,6 +1241,7 @@ EXTERN_C const IID IID_IProvideClassInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B283-BAB4-101A-B69C-00AA00341D07")
+     IProvideClassInfo : public IUnknown
+     {
+@@ -1327,6 +1337,7 @@ EXTERN_C const IID IID_IProvideClassInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851")
+     IProvideClassInfo2 : public IProvideClassInfo
+     {
+@@ -1435,6 +1446,7 @@ EXTERN_C const IID IID_IProvideMultipleClassInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("A7ABA9C1-8983-11cf-8F20-00805F2CD064")
+     IProvideMultipleClassInfo : public IProvideClassInfo2
+     {
+@@ -1600,6 +1612,7 @@ EXTERN_C const IID IID_IOleControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B288-BAB4-101A-B69C-00AA00341D07")
+     IOleControl : public IUnknown
+     {
+@@ -1746,6 +1759,7 @@ EXTERN_C const IID IID_IOleControlSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B289-BAB4-101A-B69C-00AA00341D07")
+     IOleControlSite : public IUnknown
+     {
+@@ -1929,6 +1943,7 @@ EXTERN_C const IID IID_IPropertyPage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B28D-BAB4-101A-B69C-00AA00341D07")
+     IPropertyPage : public IUnknown
+     {
+@@ -2148,6 +2163,7 @@ EXTERN_C const IID IID_IPropertyPage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("01E44665-24AC-101B-84ED-08002B2EC713")
+     IPropertyPage2 : public IPropertyPage
+     {
+@@ -2345,6 +2361,7 @@ EXTERN_C const IID IID_IPropertyPageSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B28C-BAB4-101A-B69C-00AA00341D07")
+     IPropertyPageSite : public IUnknown
+     {
+@@ -2473,6 +2490,7 @@ EXTERN_C const IID IID_IPropertyNotifySink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("9BFBBC02-EFF1-101A-84ED-00AA00341D07")
+     IPropertyNotifySink : public IUnknown
+     {
+@@ -2583,6 +2601,7 @@ EXTERN_C const IID IID_ISpecifyPropertyPages;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B196B28B-BAB4-101A-B69C-00AA00341D07")
+     ISpecifyPropertyPages : public IUnknown
+     {
+@@ -2859,6 +2878,7 @@ EXTERN_C const IID IID_IPersistStreamInit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("7FD52380-4E07-101B-AE2D-08002B2EC713")
+     IPersistStreamInit : public IPersist
+     {
+@@ -3139,6 +3159,7 @@ EXTERN_C const IID IID_ISimpleFrameSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("742B0E01-14E6-101B-914E-00AA00300CAB")
+     ISimpleFrameSite : public IUnknown
+     {
+@@ -3289,6 +3310,7 @@ EXTERN_C const IID IID_IFont;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("BEF6E002-A874-101A-8BBA-00AA00300CAB")
+     IFont : public IUnknown
+     {
+@@ -3698,6 +3720,7 @@ EXTERN_C const IID IID_IPicture;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("7BF80980-BF32-101A-8BBB-00AA00300CAB")
+     IPicture : public IUnknown
+     {
+@@ -4450,6 +4473,7 @@ EXTERN_C const IID IID_IFontDisp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("BEF6E003-A874-101A-8BBA-00AA00300CAB")
+     IFontDisp : public IDispatch
+     {
+@@ -4588,6 +4612,7 @@ EXTERN_C const IID IID_IPictureDisp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("7BF80981-BF32-101A-8BBB-00AA00300CAB")
+     IPictureDisp : public IDispatch
+     {
+@@ -4726,6 +4751,7 @@ EXTERN_C const IID IID_IOleInPlaceObjectWindowless;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("1C2056CC-5EF4-101B-8BC8-00AA003E3B29")
+     IOleInPlaceObjectWindowless : public IOleInPlaceObject
+     {
+@@ -4898,6 +4924,7 @@ EXTERN_C const IID IID_IOleInPlaceSiteEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("9C2CAD80-3424-11CF-B670-00AA004CD6D8")
+     IOleInPlaceSiteEx : public IOleInPlaceSite
+     {
+@@ -5129,6 +5156,7 @@ EXTERN_C const IID IID_IOleInPlaceSiteWindowless;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("922EADA0-3424-11CF-B670-00AA004CD6D8")
+     IOleInPlaceSiteWindowless : public IOleInPlaceSiteEx
+     {
+@@ -5576,6 +5604,7 @@ EXTERN_C const IID IID_IViewObjectEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("3AF24292-0C96-11CE-A0CF-00AA00600AB8")
+     IViewObjectEx : public IViewObject2
+     {
+@@ -5887,6 +5916,7 @@ EXTERN_C const IID IID_IOleUndoUnit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("894AD3B0-EF97-11CE-9BC9-00AA00608E01")
+     IOleUndoUnit : public IUnknown
+     {
+@@ -6015,6 +6045,7 @@ EXTERN_C const IID IID_IOleParentUndoUnit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("A1FAF330-EF97-11CE-9BC9-00AA00608E01")
+     IOleParentUndoUnit : public IOleUndoUnit
+     {
+@@ -6197,6 +6228,7 @@ EXTERN_C const IID IID_IEnumOleUndoUnits;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("B3E7C340-EF97-11CE-9BC9-00AA00608E01")
+     IEnumOleUndoUnits : public IUnknown
+     {
+@@ -6347,6 +6379,7 @@ EXTERN_C const IID IID_IOleUndoManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("D001F200-EF97-11CE-9BC9-00AA00608E01")
+     IOleUndoManager : public IUnknown
+     {
+@@ -6591,6 +6624,7 @@ EXTERN_C const IID IID_IPointerInactive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("55980BA0-35AA-11CF-B671-00AA004CD6D8")
+     IPointerInactive : public IUnknown
+     {
+@@ -6734,6 +6768,7 @@ EXTERN_C const IID IID_IObjectWithSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("FC4801A3-2BA9-11CF-A229-00AA003D7352")
+     IObjectWithSite : public IUnknown
+     {
+@@ -6868,6 +6903,7 @@ EXTERN_C const IID IID_IPerPropertyBrowsing;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("376BD3AA-3845-101B-84ED-08002B2EC713")
+     IPerPropertyBrowsing : public IUnknown
+     {
+@@ -7409,6 +7445,7 @@ EXTERN_C const IID IID_IAdviseSinkEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("3AF24290-0C96-11CE-A0CF-00AA00600AB8")
+     IAdviseSinkEx : public IAdviseSink
+     {
+@@ -7614,6 +7651,7 @@ EXTERN_C const IID IID_IQuickActivate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("CF51ED10-62FE-11CF-BF86-00A0C9034836")
+     IQuickActivate : public IUnknown
+     {
+@@ -7795,9 +7833,13 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ unsigned long             __RPC_USER  CLIPFORMAT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLIPFORMAT * ); 
+@@ -7835,9 +7877,13 @@ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RP
+ unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* [local] */ HRESULT STDMETHODCALLTYPE IEnumConnections_Next_Proxy( 
