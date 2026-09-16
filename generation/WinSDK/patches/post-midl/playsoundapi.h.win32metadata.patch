@@ -1,0 +1,115 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
+index 0ec683ff..a5a70e0d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
+@@ -18,6 +18,8 @@
+ 
+ #include <mmsyscom.h> // mm common definitions
+ 
++#include <win32metadata_annotations.h>
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -84,6 +86,78 @@ BOOL WINAPI sndPlaySound(LPCSTR pszSound, UINT fuSound);
+ #define SND_RING        0x00100000L /* Treat this as a "ring" from a communications app - don't duck me */
+ #define SND_SYSTEM      0x00200000L /* Treat this as a system sound */
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("SND_SYNC")
++#pragma push_macro("SND_ASYNC")
++#pragma push_macro("SND_NODEFAULT")
++#pragma push_macro("SND_MEMORY")
++#pragma push_macro("SND_LOOP")
++#pragma push_macro("SND_NOSTOP")
++#pragma push_macro("SND_NOWAIT")
++#pragma push_macro("SND_ALIAS")
++#pragma push_macro("SND_FILENAME")
++#if(WINVER >= 0x0400)
++#pragma push_macro("SND_PURGE")
++#pragma push_macro("SND_APPLICATION")
++#endif
++#pragma push_macro("SND_SENTRY")
++#pragma push_macro("SND_SYSTEM")
++#undef SND_SYNC
++#undef SND_ASYNC
++#undef SND_NODEFAULT
++#undef SND_MEMORY
++#undef SND_LOOP
++#undef SND_NOSTOP
++#undef SND_NOWAIT
++#undef SND_ALIAS
++#undef SND_FILENAME
++#if(WINVER >= 0x0400)
++#undef SND_PURGE
++#undef SND_APPLICATION
++#endif
++#undef SND_SENTRY
++#undef SND_SYSTEM
++enum
++    _Win32_AssociatedConstant_(SND_ALIAS_ID)
++    _Win32_AssociatedConstant_(SND_RESOURCE)
++    [[clang::flag_enum]]
++    SND_FLAGS : int
++{
++    SND_SYNC = 0x0000,
++    SND_ASYNC = 0x0001,
++    SND_NODEFAULT = 0x0002,
++    SND_MEMORY = 0x0004,
++    SND_LOOP = 0x0008,
++    SND_NOSTOP = 0x0010,
++    SND_NOWAIT = 0x00002000,
++    SND_ALIAS = 0x00010000,
++    SND_FILENAME = 0x00020000,
++#if(WINVER >= 0x0400)
++    SND_PURGE = 0x0040,
++    SND_APPLICATION = 0x0080,
++#endif
++    SND_SENTRY = 0x00080000,
++    SND_SYSTEM = 0x00200000,
++};
++#pragma pop_macro("SND_SYSTEM")
++#pragma pop_macro("SND_SENTRY")
++#if(WINVER >= 0x0400)
++#pragma pop_macro("SND_APPLICATION")
++#pragma pop_macro("SND_PURGE")
++#endif
++#pragma pop_macro("SND_FILENAME")
++#pragma pop_macro("SND_ALIAS")
++#pragma pop_macro("SND_NOWAIT")
++#pragma pop_macro("SND_NOSTOP")
++#pragma pop_macro("SND_LOOP")
++#pragma pop_macro("SND_MEMORY")
++#pragma pop_macro("SND_NODEFAULT")
++#pragma pop_macro("SND_ASYNC")
++#pragma pop_macro("SND_SYNC")
++#else
++typedef DWORD SND_FLAGS;
++#endif
++
+ #define SND_ALIAS_START 0           /* alias base */
+ 
+ #ifdef _WIN32
+@@ -104,7 +178,7 @@ WINAPI
+ PlaySoundA(
+     _In_opt_ LPCSTR pszSound,
+     _In_opt_ HMODULE hmod,
+-    _In_ DWORD fdwSound
++    _In_ SND_FLAGS fdwSound
+     );
+ 
+ WINMMAPI
+@@ -113,7 +187,7 @@ WINAPI
+ PlaySoundW(
+     _In_opt_ LPCWSTR pszSound,
+     _In_opt_ HMODULE hmod,
+-    _In_ DWORD fdwSound
++    _In_ SND_FLAGS fdwSound
+     );
+ 
+ #ifdef UNICODE
+@@ -137,4 +211,3 @@ BOOL WINAPI PlaySound(LPCSTR pszSound, HMODULE hmod, DWORD fdwSound);
+ #endif
+ 
+ #endif // _PLAYSOUNDAPI_H_
+-
