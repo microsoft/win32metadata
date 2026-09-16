@@ -65,12 +65,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h b/generation/WinS
  DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
  {
      // *** IUnknown methods ***
-@@ -419,11 +427,16 @@ EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb,
+@@ -419,11 +427,17 @@ EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb,
  EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  
 +_Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
++_Win32_RAIIFree_(DestroyPropertySheetPage)
  HPROPSHEETPAGE ACLUIAPI CreateSecurityPage(_In_ LPSECURITYINFO psi );
 +_Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
