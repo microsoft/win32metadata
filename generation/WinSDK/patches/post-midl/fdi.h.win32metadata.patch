@@ -9,11 +9,34 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h b/generation/WinSDK
  
  #include <basetsd.h>
  
-@@ -957,6 +958,7 @@ typedef INT_PTR (FAR DIAMONDAPI *PFNFDINOTIFY)(FDINOTIFICATIONTYPE fdint,
+@@ -957,6 +958,8 @@ typedef INT_PTR (FAR DIAMONDAPI *PFNFDINOTIFY)(FDINOTIFICATIONTYPE fdint,
   *      FDICreate(), and then free it up afterwards (or do all your allocation
   *      before calling FDICreate().
   */
++_Windows_SupportedOS_Windows2000_
 +_Win32_RAIIFree_(FDIDestroy, 0)
  HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
                                __callback PFNFREE  pfnfree,
                                __callback PFNOPEN  pfnopen,
+@@ -983,6 +986,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+  *      Returns FALSE, file is not a cabinet;  If an error occurred,
+  *          perf (passed on FDICreate call!) filled in with error.
+  */
++_Windows_SupportedOS_Windows2000_
+ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+                                  _In_  INT_PTR          hf,
+                                  _Out_opt_ PFDICABINETINFO  pfdici);
+@@ -1014,6 +1018,7 @@ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+  *      it will not be in a valid state (since there was an error while
+  *      writing it out).
+  */
++_Windows_SupportedOS_Windows2000_
+ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+                             _In_ LPSTR                  pszCabinet,
+                             _In_ LPSTR                  pszCabPath,
+@@ -1034,4 +1039,5 @@ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+  *  Exit-Failure:
+  *      Returns FALSE;
+  */
++_Windows_SupportedOS_Windows2000_
+ BOOL FAR DIAMONDAPI FDIDestroy(_In_ HFDI hfdi);
