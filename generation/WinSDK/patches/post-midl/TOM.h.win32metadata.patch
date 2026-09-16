@@ -1,0 +1,164 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+index 315d94c173..89c64653cd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+@@ -6,6 +6,8 @@
+  /* File created by MIDL compiler version 8.00.0594 */
+ /* @@MIDL_FILE_HEADING(  ) */
+ 
++#include <win32metadata_annotations.h>
++
+ #pragma warning( disable: 4049 )  /* more than 64k source lines */
+ 
+ 
+@@ -963,6 +965,7 @@ EXTERN_C const IID IID_ITextDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C0-A1DF-11ce-8098-00AA0047BE5D")
+     ITextDocument : public IDispatch
+     {
+@@ -1287,6 +1290,7 @@ EXTERN_C const IID IID_ITextRange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C2-A1DF-11ce-8098-00AA0047BE5D")
+     ITextRange : public IDispatch
+     {
+@@ -2013,6 +2017,7 @@ EXTERN_C const IID IID_ITextSelection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C1-A1DF-11ce-8098-00AA0047BE5D")
+     ITextSelection : public ITextRange
+     {
+@@ -2671,6 +2676,7 @@ EXTERN_C const IID IID_ITextFont;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C3-A1DF-11ce-8098-00AA0047BE5D")
+     ITextFont : public IDispatch
+     {
+@@ -3343,6 +3349,7 @@ EXTERN_C const IID IID_ITextPara;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C4-A1DF-11ce-8098-00AA0047BE5D")
+     ITextPara : public IDispatch
+     {
+@@ -3959,6 +3966,7 @@ EXTERN_C const IID IID_ITextStoryRanges;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("8CC497C5-A1DF-11ce-8098-00AA0047BE5D")
+     ITextStoryRanges : public IDispatch
+     {
+@@ -4111,6 +4119,7 @@ EXTERN_C const IID IID_ITextDocument2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E0-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextDocument2 : public ITextDocument
+     {
+@@ -4856,6 +4865,7 @@ EXTERN_C const IID IID_ITextRange2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E2-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextRange2 : public ITextSelection
+     {
+@@ -5953,6 +5963,7 @@ EXTERN_C const IID IID_ITextSelection2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E1-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextSelection2 : public ITextRange2
+     {
+@@ -6889,6 +6900,7 @@ EXTERN_C const IID IID_ITextFont2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E3-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextFont2 : public ITextFont
+     {
+@@ -7874,6 +7886,7 @@ EXTERN_C const IID IID_ITextPara2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E4-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextPara2 : public ITextPara
+     {
+@@ -8509,6 +8522,7 @@ EXTERN_C const IID IID_ITextStoryRanges2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E5-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextStoryRanges2 : public ITextStoryRanges
+     {
+@@ -8664,6 +8678,7 @@ EXTERN_C const IID IID_ITextStory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5F3-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextStory : public IUnknown
+     {
+@@ -8866,6 +8881,7 @@ EXTERN_C const IID IID_ITextStrings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5E7-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextStrings : public IDispatch
+     {
+@@ -9186,6 +9202,7 @@ EXTERN_C const IID IID_ITextRow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5EF-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextRow : public IDispatch
+     {
+@@ -9798,6 +9815,7 @@ EXTERN_C const IID IID_ITextDisplays;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("C241F5F2-7206-11D8-A2C7-00A0D1D6C6B3")
+     ITextDisplays : public IDispatch
+     {
+@@ -10445,14 +10463,22 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* end of Additional Prototypes */

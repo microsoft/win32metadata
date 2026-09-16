@@ -1,0 +1,49 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+index 9d9994c0a8..8e708128ce 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+@@ -1,8 +1,19 @@
++#include <win32metadata_annotations.h>
++
+ #ifndef _RICHOLE_
+ #define _RICHOLE_
+ 
+ #if _MSC_VER > 1000
+ #pragma once
++
++#ifndef __WIN32METADATA_RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE_DECLARED__
++#define __WIN32METADATA_RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE_DECLARED__
++#ifdef WIN32METADATA
++enum class RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE : unsigned short;
++#else
++typedef WORD RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE;
++#endif
++#endif
+ #endif
+ 
+ /*
+@@ -90,6 +101,7 @@ typedef struct _reobject
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOle
+ 
++_Windows_SupportedOS_WindowsVista_
+ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -132,6 +144,7 @@ typedef         IRichEditOle FAR * LPRICHEDITOLE;
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOleCallback
+ 
++_Windows_SupportedOS_WindowsVista_
+ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -156,7 +169,7 @@ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ 									LPDATAOBJECT FAR * lplpdataobj) PURE;
+ 	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, DWORD grfKeyState,
+ 									LPDWORD pdwEffect) PURE;
+-	STDMETHOD(GetContextMenu) (THIS_ WORD seltype, LPOLEOBJECT lpoleobj,
++	STDMETHOD(GetContextMenu) (THIS_ RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE seltype, LPOLEOBJECT lpoleobj,
+ 									CHARRANGE FAR * lpchrg,
+ 									HMENU FAR * lphmenu) PURE;
+ };

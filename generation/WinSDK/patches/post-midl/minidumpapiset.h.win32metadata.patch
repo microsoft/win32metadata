@@ -1,0 +1,12 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
+index 752a2e7523..aed1945b8a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
+@@ -1469,6 +1469,7 @@ typedef struct _MINIDUMP_CALLBACK_INFORMATION {
+ 
+ #define RVA_TO_ADDR(Mapping,Rva) ((PVOID)(((ULONG_PTR) (Mapping)) + (Rva)))
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ MiniDumpWriteDump(

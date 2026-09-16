@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+index 5d9abceec7..1d6af7304d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+@@ -14,6 +14,8 @@
+  *
+  */
+ 
++#include <win32metadata_annotations.h>
++
+ #ifndef _TEXTSERV_H
+ #define _TEXTSERV_H
+ 
+@@ -457,6 +459,7 @@ interface IRawElementProviderSimple;
+  *
+  *	@base	public | IUnknown 
+  */
++_Windows_SupportedOS_Windows8_
+ interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
+@@ -473,6 +476,7 @@ struct UiaRect;
+  *
+  *	@base	public | IUnknown 
+  */
++_Windows_SupportedOS_Windows8_
+ interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
+@@ -490,6 +494,7 @@ typedef int PROPERTYID;
+  *
+  *	@base	public | IUnknown 
+  */
++_Windows_SupportedOS_Windows8_
+ interface IRicheditUiaOverrides : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetPropertyOverrideValue(
+@@ -502,6 +507,7 @@ interface IRicheditUiaOverrides : public IUnknown
+ //------------------------------------------------------------------------
+ 
+ // Text Services factory
++_Windows_SupportedOS_WindowsVista_
+ STDAPI CreateTextServices(
+ 	IUnknown *punkOuter,
+ 	ITextHost *pITextHost,

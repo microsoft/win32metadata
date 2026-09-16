@@ -1,0 +1,261 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+index d3e0354092..f896c23755 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+@@ -1,6 +1,7 @@
+ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /*++ BUILD Version: 0001 // Increment this if a change has global effects --*/
+ 
+@@ -45,6 +46,7 @@ typedef struct tagHSZPAIR {
+     HSZ hszTopic;
+ } HSZPAIR, FAR *PHSZPAIR;
+ 
++_Windows_SupportedOS_Windows2000_
+ /* The following structure is used by DdeConnect() and DdeConnectList() and
+    by XTYP_CONNECT and XTYP_WILDCONNECT callbacks. */
+ 
+@@ -218,6 +220,7 @@ typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
+ 
+ /* DLL registration functions */
+ 
++_Windows_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeInitializeA(
+@@ -225,6 +228,7 @@ DdeInitializeA(
+     _In_ PFNCALLBACK pfnCallback,
+     _In_ DWORD afCmd,
+     _Reserved_ DWORD ulRes);
++_Windows_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeInitializeW(
+@@ -269,6 +273,7 @@ DdeInitializeW(
+ #define     APPCLASS_STANDARD            0x00000000L
+ #define     APPCLASS_MASK                0x0000000FL
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeUninitialize(
+@@ -277,6 +282,8 @@ DdeUninitialize(
+ /*
+  * conversation enumeration functions
+  */
++_Windows_SupportedOS_Windows2000_
++_Win32_RAIIFree_(DdeDisconnectList, -1, 0)
+ HCONVLIST
+ WINAPI
+ DdeConnectList(
+@@ -286,11 +293,13 @@ DdeConnectList(
+     _In_ HCONVLIST hConvList,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
++_Windows_SupportedOS_Windows2000_
+ HCONV
+ WINAPI
+ DdeQueryNextServer(
+     _In_ HCONVLIST hConvList,
+     _In_ HCONV hConvPrev);
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeDisconnectList(
+@@ -299,6 +308,8 @@ DdeDisconnectList(
+ /*
+  * conversation control functions
+  */
++_Windows_SupportedOS_Windows2000_
++_Win32_RAIIFree_(DdeDisconnect, -1, 0)
+ HCONV
+ WINAPI
+ DdeConnect(
+@@ -307,16 +318,20 @@ DdeConnect(
+     _In_ HSZ hszTopic,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeDisconnect(
+     _In_ HCONV hConv);
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_RAIIFree_(DdeDisconnect, -1, 0)
+ HCONV
+ WINAPI
+ DdeReconnect(
+     _In_ HCONV hConv);
+ 
++_Windows_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeQueryConvInfo(
+@@ -324,6 +339,7 @@ DdeQueryConvInfo(
+     _In_ DWORD idTransaction,
+     _Inout_ PCONVINFO pConvInfo);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeSetUserHandle(
+@@ -331,6 +347,7 @@ DdeSetUserHandle(
+     _In_ DWORD id,
+     _In_ DWORD_PTR hUser);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeAbandonTransaction(
+@@ -342,6 +359,7 @@ DdeAbandonTransaction(
+ /*
+  * app server interface functions
+  */
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdePostAdvise(
+@@ -349,6 +367,7 @@ DdePostAdvise(
+     _In_ HSZ hszTopic,
+     _In_ HSZ hszItem);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeEnableCallback(
+@@ -356,6 +375,8 @@ DdeEnableCallback(
+     _In_ HCONV hConv,
+     _In_ UINT wCmd);
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ DdeImpersonateClient(
+@@ -367,6 +388,7 @@ DdeImpersonateClient(
+ #define EC_DISABLE              ST_BLOCKED
+ #define EC_QUERYWAITING         2
+ 
++_Windows_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeNameService(
+@@ -383,6 +405,7 @@ DdeNameService(
+ /*
+  * app client interface functions
+  */
++_Windows_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeClientTransaction(
+@@ -400,6 +423,8 @@ DdeClientTransaction(
+  *data transfer functions
+  */
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_RAIIFree_(DdeFreeDataHandle, 0)
+ HDDEDATA
+ WINAPI
+ DdeCreateDataHandle(
+@@ -411,6 +436,7 @@ DdeCreateDataHandle(
+     _In_ UINT wFmt,
+     _In_ UINT afCmd);
+ 
++_Windows_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeAddData(
+@@ -419,6 +445,7 @@ DdeAddData(
+     _In_ DWORD cb,
+     _In_ DWORD cbOff);
+ 
++_Windows_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeGetData(
+@@ -427,17 +454,20 @@ DdeGetData(
+     _In_ DWORD cbMax,
+     _In_ DWORD cbOff);
+ 
++_Windows_SupportedOS_Windows2000_
+ LPBYTE
+ WINAPI
+ DdeAccessData(
+     _In_ HDDEDATA hData,
+     _Out_opt_ LPDWORD pcbDataSize);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeUnaccessData(
+     _In_ HDDEDATA hData);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeFreeDataHandle(
+@@ -446,6 +476,7 @@ DdeFreeDataHandle(
+ #define     HDATA_APPOWNED          0x0001
+ 
+ 
++_Windows_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeGetLastError(
+@@ -477,12 +508,14 @@ DdeGetLastError(
+ 
+ #define     DMLERR_LAST                        0x4011
+ 
++_Windows_SupportedOS_Windows2000_
+ HSZ
+ WINAPI
+ DdeCreateStringHandleA(
+     _In_ DWORD idInst,
+     _In_ LPCSTR psz,
+     _In_ int iCodePage);
++_Windows_SupportedOS_Windows2000_
+ HSZ
+ WINAPI
+ DdeCreateStringHandleW(
+@@ -495,6 +528,7 @@ DdeCreateStringHandleW(
+ #define DdeCreateStringHandle  DdeCreateStringHandleA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeQueryStringA(
+@@ -503,6 +537,7 @@ DdeQueryStringA(
+     _Out_writes_opt_(cchMax) LPSTR psz,
+     _In_ DWORD cchMax,
+     _In_ int iCodePage);
++_Windows_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeQueryStringW(
+@@ -517,18 +552,21 @@ DdeQueryStringW(
+ #define DdeQueryString  DdeQueryStringA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeFreeStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeKeepStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
++_Windows_SupportedOS_Windows2000_
+ int
+ WINAPI
+ DdeCmpStringHandles(

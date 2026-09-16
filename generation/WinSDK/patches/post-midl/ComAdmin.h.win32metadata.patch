@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
+index bce187fc92..ce209a4fad 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
+@@ -132,6 +132,7 @@ extern "C"{
+ // Copyright (c) 1995-2001 Microsoft Corporation.  All Rights Reserved.      
+ // -----------------------------------------------------------------------   
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include <objbase.h>
+@@ -169,6 +170,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("DD662187-DFC2-11d1-A2CF-00805FC79235")
+     ICOMAdminCatalog : public IDispatch
+     {
+@@ -772,6 +774,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_WindowsXP_
+     MIDL_INTERFACE("790C6E0B-9194-4cc9-9426-A48A63185696")
+     ICOMAdminCatalog2 : public ICOMAdminCatalog
+     {
+@@ -1763,6 +1766,7 @@ EXTERN_C const IID IID_ICatalogObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("6eb22871-8a19-11d0-81b6-00a0c9231c29")
+     ICatalogObject : public IDispatch
+     {
+@@ -2006,6 +2010,7 @@ EXTERN_C const IID IID_ICatalogCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("6eb22872-8a19-11d0-81b6-00a0c9231c29")
+     ICatalogCollection : public IDispatch
+     {
+@@ -2758,19 +2763,31 @@ unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+ void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* end of Additional Prototypes */
