@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
+@@ -88,6 +88,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ typedef struct AUDIO_VOLUME_NOTIFICATION_DATA
+@@ -120,6 +121,7 @@ EXTERN_C const IID IID_IAudioEndpointVolumeCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("657804FA-D6AD-4496-8A60-352752AF4F89")
+     IAudioEndpointVolumeCallback : public IUnknown
+     {
+@@ -205,6 +207,7 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("5CDF2C82-841E-4546-9722-0CF74078229A")
+     IAudioEndpointVolume : public IUnknown
+     {
+@@ -559,6 +562,7 @@ EXTERN_C const IID IID_IAudioEndpointVolumeEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("66E11784-F695-4F28-A505-A7080081A78F")
+     IAudioEndpointVolumeEx : public IAudioEndpointVolume
+     {
+@@ -848,6 +852,7 @@ EXTERN_C const IID IID_IAudioMeterInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("C02216F6-8C67-4B5B-9D00-D008E73E0064")
+     IAudioMeterInformation : public IUnknown
+     {

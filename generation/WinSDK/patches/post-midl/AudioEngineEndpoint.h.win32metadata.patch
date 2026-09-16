@@ -1,0 +1,105 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
+@@ -148,6 +148,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [public][public][public] */ 
+@@ -208,6 +209,7 @@ EXTERN_C const IID IID_IAudioEndpoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("30A99515-1527-4451-AF9F-00C5F0234DAF")
+     IAudioEndpoint : public IUnknown
+     {
+@@ -347,6 +349,7 @@ EXTERN_C const IID IID_IAudioEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("DFD2005F-A6E5-4d39-A265-939ADA9FBB4D")
+     IAudioEndpointRT : public IUnknown
+     {
+@@ -465,6 +468,7 @@ EXTERN_C const IID IID_IAudioInputEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("8026AB61-92B2-43c1-A1DF-5C37EBD08D82")
+     IAudioInputEndpointRT : public IUnknown
+     {
+@@ -582,6 +586,7 @@ EXTERN_C const IID IID_IAudioOutputEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("8FA906E4-C31C-4e31-932E-19A66385E9AA")
+     IAudioOutputEndpointRT : public IUnknown
+     {
+@@ -695,6 +700,7 @@ EXTERN_C const IID IID_IAudioDeviceEndpoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("D4952F5A-A0B2-4cc4-8B82-9358488DD8AC")
+     IAudioDeviceEndpoint : public IUnknown
+     {
+@@ -974,6 +980,7 @@ EXTERN_C const IID IID_IAudioEndpointOffloadStreamMute;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("DFE21355-5EC2-40E0-8D6B-710AC3C00249")
+     IAudioEndpointOffloadStreamMute : public IUnknown
+     {
+@@ -1178,6 +1185,7 @@ EXTERN_C const IID IID_IAudioEndpointLastBufferControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows81_
+     MIDL_INTERFACE("F8520DD3-8F9D-4437-9861-62F584C33DD6")
+     IAudioEndpointLastBufferControl : public IUnknown
+     {
+@@ -1274,6 +1282,7 @@ EXTERN_C const IID IID_IAudioLfxControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("076A6922-D802-4F83-BAF6-409D9CA11BFE")
+     IAudioLfxControl : public IUnknown
+     {
+@@ -1374,6 +1383,7 @@ EXTERN_C const IID IID_IHardwareAudioEngineBase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("EDDCE3E4-F3C1-453a-B461-223563CBD886")
+     IHardwareAudioEngineBase : public IUnknown
+     {
+@@ -1537,6 +1547,7 @@ EXTERN_C const IID IID_IAudioEndpointControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("C684B72A-6DF4-4774-BDF9-76B77509B653")
+     IAudioEndpointControl : public IUnknown
+     {
+@@ -1634,9 +1645,13 @@ EXTERN_C const IID IID_IAudioEndpointControl;
+     0X9F2F7B66l, 0X65AC, 0X4FA6, 0X8A, 0XE4, 0X12, 0X3C, 0X78, 0XB8, 0X93, 0X13                         
+ DEFINE_GUIDSTRUCT("9F2F7B66-65AC-4FA6-8AE4-123C78B89313", DEVINTERFACE_AUDIOENDPOINTPLUGIN);          
+ #define DEVINTERFACE_AUDIOENDPOINTPLUGIN DEFINE_GUIDNAMED(DEVINTERFACE_AUDIOENDPOINTPLUGIN)             
++_Windows_SupportedOS_WindowsVista_
+ DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_FactoryCLSID,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 1); 
++_Windows_SupportedOS_WindowsVista_
+ DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_DataFlow,       0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 2); 
++_Windows_SupportedOS_WindowsVista_
+ DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_PnPInterface,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 3); 
++_Windows_SupportedOS_WindowsVista_
+ DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin2_FactoryCLSID,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 4); 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

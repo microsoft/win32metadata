@@ -1,0 +1,19 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
+@@ -66,6 +66,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define   ENDPOINT_FORMAT_RESET_MIX_ONLY     0x00000001
+@@ -85,6 +86,7 @@ EXTERN_C const IID IID_IAudioEndpointFormatControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++_Windows_SupportedOS_Windows7_
+     MIDL_INTERFACE("784CFD40-9F89-456E-A1A6-873B006A664E")
+     IAudioEndpointFormatControl : public IUnknown
+     {
