@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+index 796708e1..902bd3be 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -254,6 +255,7 @@ EXTERN_C const IID IID_IAmsiStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373")
++    _Windows_SupportedOS_10240_
+     IAmsiStream : public IUnknown
+     {
+@@ -374,6 +376,7 @@ EXTERN_C const IID IID_IAntimalwareProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125")
++    _Windows_SupportedOS_10240_
+     IAntimalwareProvider : public IUnknown
+     {
+@@ -728,6 +731,7 @@ EXTERN_C const IID IID_IAntimalware;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df")
++    _Windows_SupportedOS_10240_
+     IAntimalware : public IUnknown
+     {
+@@ -963,14 +967,16 @@ EXTERN_C const CLSID CLSID_Antimalware;
+ DECLARE_HANDLE(HAMSICONTEXT);
+ DECLARE_HANDLE(HAMSISESSION);
+ 
+ STDAPI AmsiInitialize(
+     _In_  LPCWSTR appName,
+-    _Outptr_ HAMSICONTEXT* amsiContext);
++    _Outptr_ _Win32_RAIIFree_(AmsiUninitialize, 0)
++        HAMSICONTEXT* amsiContext);
+ 
+ STDAPI_(VOID) AmsiUninitialize(
+     _In_  HAMSICONTEXT amsiContext);
+ 
+ STDAPI AmsiOpenSession(
+     _In_  HAMSICONTEXT amsiContext,
+-    _Out_ HAMSISESSION* amsiSession);
++    _Out_ _Win32_RAIIFree_(AmsiCloseSession, -1, 0)
++        HAMSISESSION* amsiSession);
+ 
+ STDAPI_(VOID) AmsiCloseSession(
+     _In_  HAMSICONTEXT amsiContext,
