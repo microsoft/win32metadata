@@ -1,0 +1,94 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
+index 621e2aa7..e643fd68 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
+@@ -19,6 +19,9 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #include <objidl.h>
+ 
+ #pragma region Desktop Family
+@@ -458,6 +461,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYDYNAMICODETRUST_API)(
+ // This routine queries Windows Lockdown mode.
+ // 
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpQueryWindowsLockdownMode(
+@@ -488,6 +492,7 @@ typedef HRESULT(WINAPI* PWLDP_QUERYDEVICESECURITYINFORMATION_API)(
+ // This routine queries CI lock down restriction. 
+ //
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpQueryWindowsLockdownRestriction(
+@@ -501,6 +506,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API)(
+ // This routine sets CI lock down restriction.
+ //
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpSetWindowsLockdownRestriction(
+@@ -517,6 +523,7 @@ typedef HRESULT(WINAPI *PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API)(
+ //
+ // This routine queries if a particular PackageFamilyName would pass the currently installed CIPolicy
+ //
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpIsAppApprovedByPolicy(
+@@ -533,6 +540,7 @@ typedef HRESULT(WINAPI *PWLDP_ISAPPAPPROVEDBYPOLICY_API)(
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_MN
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpQueryPolicySettingEnabled(
+@@ -545,6 +553,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED_API)(
+     _Out_ PBOOL Enabled
+     );
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpQueryPolicySettingEnabled2(
+@@ -560,6 +569,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED2_API)(
+ //
+ //    This function checks the security watermark state of 10x system
+ //
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpIsWcosProductionConfiguration(
+@@ -568,6 +578,7 @@ WldpIsWcosProductionConfiguration(
+ 
+ typedef HRESULT(WINAPI *PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API)(_Out_ PBOOL IsProductionConfiguration);
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpResetWcosProductionConfiguration();
+@@ -577,6 +588,7 @@ typedef HRESULT(WINAPI *PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API)();
+ //
+ //    This function checks the security configuration state of the non-10x system
+ //
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpIsProductionConfiguration(
+@@ -585,6 +597,7 @@ WldpIsProductionConfiguration(
+ 
+ typedef HRESULT(WINAPI *PWLDP_ISPRODUCTIONCONFIGURATION_API)(_Out_ PBOOL IsProductionConfiguration);
+ 
++_Win32_ImportLibrary_("Wldp.dll")
+ HRESULT
+ WINAPI
+ WldpResetProductionConfiguration(VOID);

@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
+index 8618aa1a..118af29a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
+@@ -1,4 +1,7 @@
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ /*****************************************************************************\
+ *                                                                             *
+@@ -112,6 +115,7 @@ VerInstallFileW(
+ #ifndef RC_INVOKED
+ 
+ /* Returns size of version info in bytes */
++_Win32_SetLastError_
+ DWORD
+ APIENTRY
+ GetFileVersionInfoSizeA(
+@@ -119,6 +123,7 @@ GetFileVersionInfoSizeA(
+         _Out_opt_ LPDWORD lpdwHandle       /* Information for use by GetFileVersionInfo */
+         );
+ /* Returns size of version info in bytes */
++_Win32_SetLastError_
+ DWORD
+ APIENTRY
+ GetFileVersionInfoSizeW(
+@@ -132,6 +137,7 @@ GetFileVersionInfoSizeW(
+ #endif // !UNICODE
+ 
+ /* Read version info into buffer */
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetFileVersionInfoA(
+@@ -141,6 +147,7 @@ GetFileVersionInfoA(
+         _Out_writes_bytes_(dwLen) LPVOID lpData            /* Buffer to place the data structure */
+         );
+ /* Read version info into buffer */
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetFileVersionInfoW(
+@@ -155,7 +162,9 @@ GetFileVersionInfoW(
+ #define GetFileVersionInfo  GetFileVersionInfoA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ DWORD APIENTRY GetFileVersionInfoSizeExA(_In_ DWORD dwFlags, _In_ LPCSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
++_Win32_SetLastError_
+ DWORD APIENTRY GetFileVersionInfoSizeExW(_In_ DWORD dwFlags, _In_ LPCWSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
+ #ifdef UNICODE
+ #define GetFileVersionInfoSizeEx  GetFileVersionInfoSizeExW
+@@ -163,11 +172,13 @@ DWORD APIENTRY GetFileVersionInfoSizeExW(_In_ DWORD dwFlags, _In_ LPCWSTR lpwstr
+ #define GetFileVersionInfoSizeEx  GetFileVersionInfoSizeExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOL APIENTRY GetFileVersionInfoExA(_In_ DWORD dwFlags,
+                                     _In_ LPCSTR lpwstrFilename,
+                                     _Reserved_ DWORD dwHandle,
+                                     _In_ DWORD dwLen,
+                                     _Out_writes_bytes_(dwLen) LPVOID lpData);
++_Win32_SetLastError_
+ BOOL APIENTRY GetFileVersionInfoExW(_In_ DWORD dwFlags,
+                                     _In_ LPCWSTR lpwstrFilename,
+                                     _Reserved_ DWORD dwHandle,

@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
+index 79f257db..1aa6b349 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
+@@ -21,6 +21,9 @@ Revision History:
+ #define _LZEXPAND_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -88,6 +91,7 @@ LZInit(
+     _In_ INT hfSource
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return >= 0)
+ _Check_return_
+ INT
+@@ -96,6 +100,7 @@ GetExpandedNameA(
+     _In_ LPSTR lpszSource,
+     _Out_writes_(MAX_PATH) LPSTR lpszBuffer
+     );
++_Win32_SetLastError_
+ _Success_(return >= 0)
+ _Check_return_
+ INT

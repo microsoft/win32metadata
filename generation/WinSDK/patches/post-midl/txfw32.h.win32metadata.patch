@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/txfw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/txfw32.h
+index 435c4159..736c9cf7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/txfw32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/txfw32.h
+@@ -31,6 +31,9 @@
+ #define _TXF_W32_H_INCLUDED_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -300,6 +303,7 @@ typedef struct _TXF_LOG_RECORD_AFFECTED_FILE {
+ extern "C" {
+ #endif
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TxfLogCreateFileReadContext (
+@@ -367,6 +371,7 @@ TxfLogCreateRangeReadContext (
+ 
+ */
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TxfLogDestroyReadContext (
+@@ -385,6 +390,7 @@ TxfLogDestroyReadContext (
+ */
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TxfLogReadRecords (

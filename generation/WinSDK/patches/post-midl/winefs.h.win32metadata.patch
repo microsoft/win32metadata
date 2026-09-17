@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
+index 30e1a95a..230af114 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
+@@ -1,4 +1,7 @@
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ //+---------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -398,6 +401,7 @@ FreeEncryptionCertificateHashList(
+     _In_    PENCRYPTION_CERTIFICATE_HASH_LIST       pUsers
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI

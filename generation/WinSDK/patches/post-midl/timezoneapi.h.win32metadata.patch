@@ -1,0 +1,102 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+index 0a3847b6..87affe1e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+@@ -19,6 +19,9 @@
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -54,6 +57,7 @@ typedef struct _TIME_DYNAMIC_ZONE_INFORMATION {
+     BOOLEAN DynamicDaylightTimeDisabled;
+ } DYNAMIC_TIME_ZONE_INFORMATION, *PDYNAMIC_TIME_ZONE_INFORMATION;
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -64,6 +68,7 @@ SystemTimeToTzSpecificLocalTime(
+     _Out_ LPSYSTEMTIME lpLocalTime
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -74,6 +79,7 @@ TzSpecificLocalTimeToSystemTime(
+     _Out_ LPSYSTEMTIME lpUniversalTime
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -83,6 +89,7 @@ FileTimeToSystemTime(
+     _Out_ LPSYSTEMTIME lpSystemTime
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -92,6 +99,7 @@ SystemTimeToFileTime(
+     _Out_ LPFILETIME lpFileTime
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
+ DWORD
+@@ -100,6 +108,7 @@ GetTimeZoneInformation(
+     _Out_ LPTIME_ZONE_INFORMATION lpTimeZoneInformation
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -109,6 +118,7 @@ SetTimeZoneInformation(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -120,6 +130,7 @@ SetDynamicTimeZoneInformation(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
+ DWORD
+@@ -132,6 +143,7 @@ GetDynamicTimeZoneInformation(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SetLastError_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -166,6 +178,7 @@ GetDynamicTimeZoneInformationEffectiveYears(
+     _Out_ LPDWORD LastYear
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -176,6 +189,7 @@ SystemTimeToTzSpecificLocalTimeEx(
+     _Out_ LPSYSTEMTIME lpLocalTime
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
