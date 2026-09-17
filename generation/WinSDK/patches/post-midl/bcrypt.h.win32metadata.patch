@@ -1,0 +1,697 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h b/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
+index a89e9d423a..f0d8c1b7e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
+@@ -28,6 +28,37 @@
+ extern "C" {
+ #endif
+ 
++#if defined(WIN32METADATA)
++enum class BCRYPT_OPERATION : int;
++enum class BCRYPT_TABLE : int;
++enum class BCRYPT_INTERFACE : int;
++enum class BCRYPT_FLAGS : int;
++enum class BCRYPT_QUERY_PROVIDER_MODE : int;
++enum class BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS : int;
++enum class BCRYPT_RESOLVE_PROVIDERS_FLAGS : int;
++enum class CRYPT_IMAGE_REF_FLAGS : int;
++enum class CRYPT_CONTEXT_CONFIG_FLAGS : int;
++enum class BCRYPT_DSA_MAGIC : int;
++enum class BCRYPT_RSAKEY_BLOB_MAGIC : int;
++enum class BCRYPT_DH_KEY_BLOB_MAGIC : int;
++enum class BCRYPTGENRANDOM_FLAGS : int;
++#else
++typedef ULONG BCRYPT_OPERATION;
++typedef ULONG BCRYPT_TABLE;
++typedef ULONG BCRYPT_INTERFACE;
++typedef ULONG BCRYPT_FLAGS;
++typedef ULONG BCRYPT_QUERY_PROVIDER_MODE;
++typedef ULONG BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS;
++typedef ULONG BCRYPT_RESOLVE_PROVIDERS_FLAGS;
++typedef ULONG CRYPT_IMAGE_REF_FLAGS;
++typedef ULONG CRYPT_CONTEXT_CONFIG_FLAGS;
++typedef ULONG BCRYPT_DSA_MAGIC;
++typedef ULONG BCRYPT_RSAKEY_BLOB_MAGIC;
++typedef ULONG BCRYPT_DH_KEY_BLOB_MAGIC;
++typedef ULONG BCRYPTGENRANDOM_FLAGS;
++#endif
++
++
+ #pragma region Desktop Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+@@ -449,9 +480,13 @@ typedef struct _BCryptBufferDesc {
+ //
+ 
+ typedef PVOID BCRYPT_HANDLE;
++_Win32_AlsoUsableFor_(BCRYPT_HANDLE)
+ typedef PVOID BCRYPT_ALG_HANDLE;
++_Win32_AlsoUsableFor_(BCRYPT_HANDLE)
+ typedef PVOID BCRYPT_KEY_HANDLE;
++_Win32_AlsoUsableFor_(BCRYPT_HANDLE)
+ typedef PVOID BCRYPT_HASH_HANDLE;
++_Win32_AlsoUsableFor_(BCRYPT_HANDLE)
+ typedef PVOID BCRYPT_SECRET_HANDLE;
+ 
+ //
+@@ -485,7 +520,7 @@ typedef struct _BCRYPT_KEY_BLOB
+ 
+ typedef struct _BCRYPT_RSAKEY_BLOB
+ {
+-    ULONG   Magic;
++    BCRYPT_RSAKEY_BLOB_MAGIC   Magic;
+     ULONG   BitLength;
+     ULONG   cbPublicExp;
+     ULONG   cbModulus;
+@@ -618,7 +653,7 @@ typedef struct _BCRYPT_ECCFULLKEY_BLOB
+ 
+ typedef struct _BCRYPT_DH_KEY_BLOB
+ {
+-    ULONG   dwMagic;
++    BCRYPT_DH_KEY_BLOB_MAGIC   dwMagic;
+     ULONG   cbKey;
+ } BCRYPT_DH_KEY_BLOB, *PBCRYPT_DH_KEY_BLOB;
+ 
+@@ -655,7 +690,7 @@ typedef _Struct_size_bytes_(cbLength) struct _BCRYPT_DH_PARAMETER_HEADER
+ 
+ typedef struct _BCRYPT_DSA_KEY_BLOB
+ {
+-    ULONG   dwMagic;
++    BCRYPT_DSA_MAGIC   dwMagic;
+     ULONG   cbKey;
+     UCHAR   Count[4];
+     UCHAR   Seed[20];
+@@ -678,7 +713,7 @@ typedef enum
+ 
+ typedef struct _BCRYPT_DSA_KEY_BLOB_V2
+ {
+-    ULONG                                   dwMagic;
++    BCRYPT_DSA_MAGIC                                   dwMagic;
+     ULONG                                   cbKey;
+     HASHALGORITHM_ENUM                      hashAlgorithm;
+     DSAFIPSVERSION_ENUM                     standardVersion;
+@@ -1211,10 +1246,10 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptOpenAlgorithmProvider(
+-    _Out_       BCRYPT_ALG_HANDLE   *phAlgorithm,
++    _Win32_RAIIFree_(BCryptCloseAlgorithmProvider, 0) _Out_       BCRYPT_ALG_HANDLE   *phAlgorithm,
+     _In_z_      LPCWSTR pszAlgId,
+     _In_opt_z_  LPCWSTR pszImplementation,
+-    _In_        ULONG   dwFlags);
++    _In_        BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1250,7 +1285,7 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptEnumAlgorithms(
+-    _In_    ULONG   dwAlgOperations,
++    _In_    BCRYPT_OPERATION   dwAlgOperations,
+     _Out_   ULONG   *pAlgCount,
+     _Out_   BCRYPT_ALGORITHM_IDENTIFIER **ppAlgList,
+     _In_    ULONG   dwFlags);
+@@ -1319,7 +1354,7 @@ NTSTATUS
+ WINAPI
+ BCryptGenerateSymmetricKey(
+     _Inout_                             BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                               BCRYPT_KEY_HANDLE   *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                               BCRYPT_KEY_HANDLE   *phKey,
+     _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                                ULONG   cbKeyObject,
+     _In_reads_bytes_(cbSecret)               PUCHAR   pbSecret,
+@@ -1332,7 +1367,7 @@ NTSTATUS
+ WINAPI
+ BCryptGenerateKeyPair(
+     _Inout_ BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_   BCRYPT_KEY_HANDLE   *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_   BCRYPT_KEY_HANDLE   *phKey,
+     _In_    ULONG   dwLength,
+     _In_    ULONG   dwFlags);
+ 
+@@ -1350,7 +1385,7 @@ BCryptEncrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
+     _In_                                        ULONG   cbOutput,
+     _Out_                                       ULONG   *pcbResult,
+-    _In_                                        ULONG   dwFlags);
++    _In_                                        BCRYPT_FLAGS   dwFlags);
+ 
+ 
+ _Must_inspect_result_
+@@ -1366,7 +1401,7 @@ BCryptDecrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
+     _In_                                        ULONG   cbOutput,
+     _Out_                                       ULONG   *pcbResult,
+-    _In_                                        ULONG   dwFlags);
++    _In_                                        BCRYPT_FLAGS   dwFlags);
+ 
+ 
+ _Must_inspect_result_
+@@ -1389,7 +1424,7 @@ BCryptImportKey(
+     _In_                                BCRYPT_ALG_HANDLE hAlgorithm,
+     _In_opt_                            BCRYPT_KEY_HANDLE hImportKey,
+     _In_z_                              LPCWSTR pszBlobType,
+-    _Out_                               BCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                               BCRYPT_KEY_HANDLE *phKey,
+     _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                                ULONG   cbKeyObject,
+     _In_reads_bytes_(cbInput)                PUCHAR   pbInput,
+@@ -1412,7 +1447,7 @@ BCryptImportKeyPair(
+     _In_                            BCRYPT_ALG_HANDLE hAlgorithm,
+     _In_opt_                        BCRYPT_KEY_HANDLE hImportKey,
+     _In_z_                          LPCWSTR pszBlobType,
+-    _Out_                           BCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                           BCRYPT_KEY_HANDLE *phKey,
+     _In_reads_bytes_(cbInput)            PUCHAR   pbInput,
+     _In_                            ULONG   cbInput,
+     _In_                            ULONG   dwFlags);
+@@ -1423,7 +1458,7 @@ NTSTATUS
+ WINAPI
+ BCryptDuplicateKey(
+     _In_                                BCRYPT_KEY_HANDLE   hKey,
+-    _Out_                               BCRYPT_KEY_HANDLE   *phNewKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                               BCRYPT_KEY_HANDLE   *phNewKey,
+     _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                                ULONG   cbKeyObject,
+     _In_                                ULONG   dwFlags);
+@@ -1460,7 +1495,7 @@ BCryptSignHash(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
+     _In_                                        ULONG   cbOutput,
+     _Out_                                       ULONG   *pcbResult,
+-    _In_                                        ULONG   dwFlags);
++    _In_                                        BCRYPT_FLAGS   dwFlags);
+ 
+ 
+ _Must_inspect_result_
+@@ -1473,7 +1508,7 @@ BCryptVerifySignature(
+     _In_                        ULONG   cbHash,
+     _In_reads_bytes_(cbSignature)    PUCHAR   pbSignature,
+     _In_                        ULONG   cbSignature,
+-    _In_                        ULONG   dwFlags);
++    _In_                        BCRYPT_FLAGS   dwFlags);
+ 
+ 
+ _Must_inspect_result_
+@@ -1482,7 +1517,7 @@ WINAPI
+ BCryptSecretAgreement(
+     _In_    BCRYPT_KEY_HANDLE       hPrivKey,
+     _In_    BCRYPT_KEY_HANDLE       hPubKey,
+-    _Out_   BCRYPT_SECRET_HANDLE    *phAgreedSecret,
++    _Win32_RAIIFree_(BCryptDestroySecret, 0) _Out_   BCRYPT_SECRET_HANDLE    *phAgreedSecret,
+     _In_    ULONG                   dwFlags);
+ 
+ 
+@@ -1521,7 +1556,7 @@ NTSTATUS
+ WINAPI
+ BCryptCreateHash(
+     _Inout_                             BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                               BCRYPT_HASH_HANDLE  *phHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                               BCRYPT_HASH_HANDLE  *phHash,
+     _Out_writes_bytes_all_opt_(cbHashObject) PUCHAR   pbHashObject,
+     _In_                                ULONG   cbHashObject,
+     _In_reads_bytes_opt_(cbSecret)           PUCHAR   pbSecret,   // optional
+@@ -1555,7 +1590,7 @@ NTSTATUS
+ WINAPI
+ BCryptCreateMultiHash(
+     _Inout_                                     BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                                       BCRYPT_HASH_HANDLE *phHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                                       BCRYPT_HASH_HANDLE *phHash,
+     _In_                                        ULONG               nHashes,
+     _Out_writes_bytes_all_opt_(cbHashObject)    PUCHAR              pbHashObject,
+     _In_                                        ULONG               cbHashObject,
+@@ -1580,7 +1615,7 @@ NTSTATUS
+ WINAPI
+ BCryptDuplicateHash(
+     _In_                                BCRYPT_HASH_HANDLE  hHash,
+-    _Out_                               BCRYPT_HASH_HANDLE  *phNewHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                               BCRYPT_HASH_HANDLE  *phNewHash,
+     _Out_writes_bytes_all_opt_(cbHashObject) PUCHAR   pbHashObject,
+     _In_                                ULONG   cbHashObject,
+     _In_                                ULONG   dwFlags);
+@@ -1622,7 +1657,7 @@ BCryptGenRandom(
+     _In_opt_                        BCRYPT_ALG_HANDLE   hAlgorithm,
+     _Out_writes_bytes_(cbBuffer)    PUCHAR  pbBuffer,
+     _In_                            ULONG   cbBuffer,
+-    _In_                            ULONG   dwFlags);
++    _In_                            BCRYPTGENRANDOM_FLAGS   dwFlags);
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+@@ -1791,8 +1826,8 @@ typedef struct _BCRYPT_INTERFACE_VERSION
+ 
+ typedef struct _CRYPT_INTERFACE_REG
+ {
+-    ULONG dwInterface;
+-    ULONG dwFlags;
++    BCRYPT_INTERFACE dwInterface;
++    BCRYPT_TABLE dwFlags;
+ 
+     ULONG cFunctions;
+     PWSTR *rgpszFunctions;
+@@ -1831,7 +1866,7 @@ CRYPT_PROVIDERS, *PCRYPT_PROVIDERS;
+ 
+ typedef struct _CRYPT_CONTEXT_CONFIG
+ {
+-    ULONG dwFlags;
++    CRYPT_CONTEXT_CONFIG_FLAGS dwFlags;
+     ULONG dwReserved;
+ }
+ CRYPT_CONTEXT_CONFIG, *PCRYPT_CONTEXT_CONFIG;
+@@ -1880,7 +1915,7 @@ CRYPT_PROPERTY_REF, *PCRYPT_PROPERTY_REF;
+ typedef struct _CRYPT_IMAGE_REF
+ {
+     PWSTR pszImage;
+-    ULONG dwFlags;
++    CRYPT_IMAGE_REF_FLAGS dwFlags;
+ }
+ CRYPT_IMAGE_REF, *PCRYPT_IMAGE_REF;
+ 
+@@ -1923,8 +1958,8 @@ NTSTATUS
+ WINAPI
+ BCryptQueryProviderRegistration(
+     _In_z_ LPCWSTR pszProvider,
+-    _In_ ULONG dwMode,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_QUERY_PROVIDER_MODE dwMode,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REG *ppBuffer);
+ 
+@@ -1942,7 +1977,7 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptCreateContext(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+     _In_opt_ PCRYPT_CONTEXT_CONFIG pConfig); // Optional
+ 
+@@ -1950,14 +1985,14 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptDeleteContext(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext);
+ 
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptEnumContexts(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXTS *ppBuffer);
+ 
+@@ -1965,7 +2000,7 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptConfigureContext(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+     _In_ PCRYPT_CONTEXT_CONFIG pConfig);
+ 
+@@ -1973,7 +2008,7 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptQueryContextConfiguration(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_CONFIG *ppBuffer);
+@@ -1982,9 +2017,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptAddContextFunction(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _In_ ULONG dwPosition);
+ 
+@@ -1992,18 +2027,18 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptRemoveContextFunction(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction);
+ 
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptEnumContextFunctions(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTIONS *ppBuffer);
+ 
+@@ -2011,9 +2046,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptConfigureContextFunction(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _In_ PCRYPT_CONTEXT_FUNCTION_CONFIG pConfig);
+ 
+@@ -2021,9 +2056,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptQueryContextFunctionConfiguration(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_CONFIG *ppBuffer);
+@@ -2033,9 +2068,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptEnumContextFunctionProviders(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_PROVIDERS *ppBuffer);
+@@ -2044,9 +2079,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptSetContextFunctionProperty(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _In_z_ LPCWSTR pszProperty,
+     _In_ ULONG cbValue,
+@@ -2056,9 +2091,9 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptQueryContextFunctionProperty(
+-    _In_ ULONG dwTable,
++    _In_ BCRYPT_TABLE dwTable,
+     _In_z_ LPCWSTR pszContext,
+-    _In_ ULONG dwInterface,
++    _In_ BCRYPT_INTERFACE dwInterface,
+     _In_z_ LPCWSTR pszFunction,
+     _In_z_ LPCWSTR pszProperty,
+     _Inout_ ULONG* pcbValue,
+@@ -2082,7 +2117,7 @@ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptRegisterConfigChangeNotify(
+-    _Out_ HANDLE *phEvent);
++    _Win32_RAIIFree_(BCryptUnregisterConfigChangeNotify, -1, 0) _Out_ HANDLE *phEvent);
+ #endif
+ 
+ #ifdef KERNEL_MODE_CNG
+@@ -2108,8 +2143,8 @@ BCryptResolveProviders(
+     _In_opt_ ULONG dwInterface,
+     _In_opt_z_ LPCWSTR pszFunction,
+     _In_opt_z_ LPCWSTR pszProvider,
+-    _In_ ULONG dwMode,
+-    _In_ ULONG dwFlags,
++    _In_ BCRYPT_QUERY_PROVIDER_MODE dwMode,
++    _In_ BCRYPT_RESOLVE_PROVIDERS_FLAGS dwFlags,
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REFS *ppBuffer);
+ 
+@@ -2143,6 +2178,257 @@ CngGetFipsAlgorithmMode(
+ #pragma endregion
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("BCRYPT_CIPHER_OPERATION")
++#pragma push_macro("BCRYPT_HASH_OPERATION")
++#pragma push_macro("BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
++#pragma push_macro("BCRYPT_SECRET_AGREEMENT_OPERATION")
++#pragma push_macro("BCRYPT_SIGNATURE_OPERATION")
++#pragma push_macro("BCRYPT_RNG_OPERATION")
++#undef BCRYPT_CIPHER_OPERATION
++#undef BCRYPT_HASH_OPERATION
++#undef BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION
++#undef BCRYPT_SECRET_AGREEMENT_OPERATION
++#undef BCRYPT_SIGNATURE_OPERATION
++#undef BCRYPT_RNG_OPERATION
++enum class
++    [[clang::flag_enum]]
++    BCRYPT_OPERATION : int
++{
++    BCRYPT_CIPHER_OPERATION = 1,
++    BCRYPT_HASH_OPERATION = 2,
++    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4,
++    BCRYPT_SECRET_AGREEMENT_OPERATION = 8,
++    BCRYPT_SIGNATURE_OPERATION = 0x10,
++    BCRYPT_RNG_OPERATION = 0x20,
++};
++#pragma pop_macro("BCRYPT_RNG_OPERATION")
++#pragma pop_macro("BCRYPT_SIGNATURE_OPERATION")
++#pragma pop_macro("BCRYPT_SECRET_AGREEMENT_OPERATION")
++#pragma pop_macro("BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
++#pragma pop_macro("BCRYPT_HASH_OPERATION")
++#pragma pop_macro("BCRYPT_CIPHER_OPERATION")
++
++#pragma push_macro("CRYPT_LOCAL")
++#pragma push_macro("CRYPT_DOMAIN")
++#undef CRYPT_LOCAL
++#undef CRYPT_DOMAIN
++enum class
++    BCRYPT_TABLE : int
++{
++    CRYPT_LOCAL = 1,
++    CRYPT_DOMAIN,
++};
++#pragma pop_macro("CRYPT_DOMAIN")
++#pragma pop_macro("CRYPT_LOCAL")
++
++#pragma push_macro("BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE")
++#pragma push_macro("BCRYPT_CIPHER_INTERFACE")
++#pragma push_macro("BCRYPT_HASH_INTERFACE")
++#pragma push_macro("BCRYPT_RNG_INTERFACE")
++#pragma push_macro("BCRYPT_SECRET_AGREEMENT_INTERFACE")
++#pragma push_macro("BCRYPT_SIGNATURE_INTERFACE")
++#pragma push_macro("NCRYPT_KEY_STORAGE_INTERFACE")
++#pragma push_macro("NCRYPT_SCHANNEL_INTERFACE")
++#pragma push_macro("NCRYPT_SCHANNEL_SIGNATURE_INTERFACE")
++#undef BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE
++#undef BCRYPT_CIPHER_INTERFACE
++#undef BCRYPT_HASH_INTERFACE
++#undef BCRYPT_RNG_INTERFACE
++#undef BCRYPT_SECRET_AGREEMENT_INTERFACE
++#undef BCRYPT_SIGNATURE_INTERFACE
++#undef NCRYPT_KEY_STORAGE_INTERFACE
++#undef NCRYPT_SCHANNEL_INTERFACE
++#undef NCRYPT_SCHANNEL_SIGNATURE_INTERFACE
++enum class
++    BCRYPT_INTERFACE : int
++{
++    BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3,
++    BCRYPT_CIPHER_INTERFACE = 1,
++    BCRYPT_HASH_INTERFACE = 2,
++    BCRYPT_RNG_INTERFACE = 6,
++    BCRYPT_SECRET_AGREEMENT_INTERFACE = 4,
++    BCRYPT_SIGNATURE_INTERFACE = 5,
++    NCRYPT_KEY_STORAGE_INTERFACE = 65537,
++    NCRYPT_SCHANNEL_INTERFACE = 65538,
++    NCRYPT_SCHANNEL_SIGNATURE_INTERFACE = 65539,
++};
++#pragma pop_macro("NCRYPT_SCHANNEL_SIGNATURE_INTERFACE")
++#pragma pop_macro("NCRYPT_SCHANNEL_INTERFACE")
++#pragma pop_macro("NCRYPT_KEY_STORAGE_INTERFACE")
++#pragma pop_macro("BCRYPT_SIGNATURE_INTERFACE")
++#pragma pop_macro("BCRYPT_SECRET_AGREEMENT_INTERFACE")
++#pragma pop_macro("BCRYPT_RNG_INTERFACE")
++#pragma pop_macro("BCRYPT_HASH_INTERFACE")
++#pragma pop_macro("BCRYPT_CIPHER_INTERFACE")
++#pragma pop_macro("BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE")
++
++#pragma push_macro("BCRYPT_BLOCK_PADDING")
++#pragma push_macro("BCRYPT_PAD_NONE")
++#pragma push_macro("BCRYPT_PAD_OAEP")
++#pragma push_macro("BCRYPT_PAD_PKCS1")
++#pragma push_macro("BCRYPT_PAD_PSS")
++#undef BCRYPT_BLOCK_PADDING
++#undef BCRYPT_PAD_NONE
++#undef BCRYPT_PAD_OAEP
++#undef BCRYPT_PAD_PKCS1
++#undef BCRYPT_PAD_PSS
++enum class
++    [[clang::flag_enum]]
++    BCRYPT_FLAGS : int
++{
++    BCRYPT_BLOCK_PADDING = 1,
++    BCRYPT_PAD_NONE = 1,
++    BCRYPT_PAD_OAEP = 4,
++    BCRYPT_PAD_PKCS1 = 2,
++    BCRYPT_PAD_PSS = 8,
++};
++#pragma pop_macro("BCRYPT_PAD_PSS")
++#pragma pop_macro("BCRYPT_PAD_PKCS1")
++#pragma pop_macro("BCRYPT_PAD_OAEP")
++#pragma pop_macro("BCRYPT_PAD_NONE")
++#pragma pop_macro("BCRYPT_BLOCK_PADDING")
++
++#pragma push_macro("CRYPT_ANY")
++#pragma push_macro("CRYPT_UM")
++#pragma push_macro("CRYPT_KM")
++#pragma push_macro("CRYPT_MM")
++#undef CRYPT_ANY
++#undef CRYPT_UM
++#undef CRYPT_KM
++#undef CRYPT_MM
++enum class
++    BCRYPT_QUERY_PROVIDER_MODE : int
++{
++    CRYPT_ANY = 4,
++    CRYPT_UM = 1,
++    CRYPT_KM = 2,
++    CRYPT_MM = 3,
++};
++#pragma pop_macro("CRYPT_MM")
++#pragma pop_macro("CRYPT_KM")
++#pragma pop_macro("CRYPT_UM")
++#pragma pop_macro("CRYPT_ANY")
++
++#pragma push_macro("BCRYPT_ALG_HANDLE_HMAC_FLAG")
++#pragma push_macro("BCRYPT_PROV_DISPATCH")
++#pragma push_macro("BCRYPT_HASH_REUSABLE_FLAG")
++#undef BCRYPT_ALG_HANDLE_HMAC_FLAG
++#undef BCRYPT_PROV_DISPATCH
++#undef BCRYPT_HASH_REUSABLE_FLAG
++enum class
++    [[clang::flag_enum]]
++    BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS : int
++{
++    BCRYPT_ALG_HANDLE_HMAC_FLAG = 8,
++    BCRYPT_PROV_DISPATCH = 1,
++    BCRYPT_HASH_REUSABLE_FLAG = 0x20,
++};
++#pragma pop_macro("BCRYPT_HASH_REUSABLE_FLAG")
++#pragma pop_macro("BCRYPT_PROV_DISPATCH")
++#pragma pop_macro("BCRYPT_ALG_HANDLE_HMAC_FLAG")
++
++#pragma push_macro("CRYPT_ALL_FUNCTIONS")
++#pragma push_macro("CRYPT_ALL_PROVIDERS")
++#undef CRYPT_ALL_FUNCTIONS
++#undef CRYPT_ALL_PROVIDERS
++enum class
++    [[clang::flag_enum]]
++    BCRYPT_RESOLVE_PROVIDERS_FLAGS : int
++{
++    CRYPT_ALL_FUNCTIONS = 1,
++    CRYPT_ALL_PROVIDERS = 2,
++};
++#pragma pop_macro("CRYPT_ALL_PROVIDERS")
++#pragma pop_macro("CRYPT_ALL_FUNCTIONS")
++
++#pragma push_macro("CRYPT_MIN_DEPENDENCIES")
++#pragma push_macro("CRYPT_PROCESS_ISOLATE")
++#undef CRYPT_MIN_DEPENDENCIES
++#undef CRYPT_PROCESS_ISOLATE
++enum class
++    [[clang::flag_enum]]
++    CRYPT_IMAGE_REF_FLAGS : int
++{
++    CRYPT_MIN_DEPENDENCIES = 1,
++    CRYPT_PROCESS_ISOLATE = 0x10000,
++};
++#pragma pop_macro("CRYPT_PROCESS_ISOLATE")
++#pragma pop_macro("CRYPT_MIN_DEPENDENCIES")
++
++#pragma push_macro("CRYPT_EXCLUSIVE")
++#pragma push_macro("CRYPT_OVERRIDE")
++#undef CRYPT_EXCLUSIVE
++#undef CRYPT_OVERRIDE
++enum class
++    [[clang::flag_enum]]
++    CRYPT_CONTEXT_CONFIG_FLAGS : int
++{
++    CRYPT_EXCLUSIVE = 1,
++    CRYPT_OVERRIDE = 0x10000,
++};
++#pragma pop_macro("CRYPT_OVERRIDE")
++#pragma pop_macro("CRYPT_EXCLUSIVE")
++
++#pragma push_macro("BCRYPT_DSA_PUBLIC_MAGIC")
++#pragma push_macro("BCRYPT_DSA_PRIVATE_MAGIC")
++#undef BCRYPT_DSA_PUBLIC_MAGIC
++#undef BCRYPT_DSA_PRIVATE_MAGIC
++enum class
++    BCRYPT_DSA_MAGIC : int
++{
++    BCRYPT_DSA_PUBLIC_MAGIC = 1112560452,
++    BCRYPT_DSA_PRIVATE_MAGIC = 1448104772,
++};
++#pragma pop_macro("BCRYPT_DSA_PRIVATE_MAGIC")
++#pragma pop_macro("BCRYPT_DSA_PUBLIC_MAGIC")
++
++#pragma push_macro("BCRYPT_RSAPUBLIC_MAGIC")
++#pragma push_macro("BCRYPT_RSAPRIVATE_MAGIC")
++#pragma push_macro("BCRYPT_RSAFULLPRIVATE_MAGIC")
++#undef BCRYPT_RSAPUBLIC_MAGIC
++#undef BCRYPT_RSAPRIVATE_MAGIC
++#undef BCRYPT_RSAFULLPRIVATE_MAGIC
++enum class
++    BCRYPT_RSAKEY_BLOB_MAGIC : int
++{
++    BCRYPT_RSAPUBLIC_MAGIC = 826364754,
++    BCRYPT_RSAPRIVATE_MAGIC = 843141970,
++    BCRYPT_RSAFULLPRIVATE_MAGIC = 859919186,
++};
++#pragma pop_macro("BCRYPT_RSAFULLPRIVATE_MAGIC")
++#pragma pop_macro("BCRYPT_RSAPRIVATE_MAGIC")
++#pragma pop_macro("BCRYPT_RSAPUBLIC_MAGIC")
++
++#pragma push_macro("BCRYPT_DH_PUBLIC_MAGIC")
++#pragma push_macro("BCRYPT_DH_PRIVATE_MAGIC")
++#undef BCRYPT_DH_PUBLIC_MAGIC
++#undef BCRYPT_DH_PRIVATE_MAGIC
++enum class
++    BCRYPT_DH_KEY_BLOB_MAGIC : int
++{
++    BCRYPT_DH_PUBLIC_MAGIC = 1112557636,
++    BCRYPT_DH_PRIVATE_MAGIC = 1448101956,
++};
++#pragma pop_macro("BCRYPT_DH_PRIVATE_MAGIC")
++#pragma pop_macro("BCRYPT_DH_PUBLIC_MAGIC")
++
++#pragma push_macro("BCRYPT_RNG_USE_ENTROPY_IN_BUFFER")
++#pragma push_macro("BCRYPT_USE_SYSTEM_PREFERRED_RNG")
++#undef BCRYPT_RNG_USE_ENTROPY_IN_BUFFER
++#undef BCRYPT_USE_SYSTEM_PREFERRED_RNG
++enum class
++    BCRYPTGENRANDOM_FLAGS : int
++{
++    BCRYPT_RNG_USE_ENTROPY_IN_BUFFER = 1,
++    BCRYPT_USE_SYSTEM_PREFERRED_RNG,
++};
++#pragma pop_macro("BCRYPT_USE_SYSTEM_PREFERRED_RNG")
++#pragma pop_macro("BCRYPT_RNG_USE_ENTROPY_IN_BUFFER")
++
++#endif
++
+ #ifdef __cplusplus
+ }
+ #endif

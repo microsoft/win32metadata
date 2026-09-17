@@ -1,0 +1,96 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
+index 666a967914..e63b1947a4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
+@@ -18,6 +18,9 @@ Abstract:
+ #define _WINSAFER_H
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -619,6 +622,7 @@ typedef struct _SAFER_URLZONE_IDENTIFICATION
+ // enumeration operations.
+ //
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetPolicyInformation(
+@@ -630,6 +634,7 @@ SaferGetPolicyInformation(
+     _Reserved_ LPVOID            lpReserved
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetPolicyInformation(
+@@ -644,41 +649,46 @@ SaferSetPolicyInformation(
+ // Functions to open or close a handle to a Safer Level.
+ //
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCreateLevel(
+     _In_ DWORD                dwScopeId,
+     _In_ DWORD                dwLevelId,
+     _In_ DWORD                OpenFlags,
+-    _Outptr_ SAFER_LEVEL_HANDLE * pLevelHandle,
++    _Win32_RAIIFree_(SaferCloseLevel, -1, 0) _Outptr_ SAFER_LEVEL_HANDLE * pLevelHandle,
+     _Reserved_ LPVOID               lpReserved
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCloseLevel(
+     _In_ SAFER_LEVEL_HANDLE hLevelHandle
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferIdentifyLevel(
+     _In_ DWORD              dwNumProperties,
+     _In_reads_opt_(dwNumProperties) PSAFER_CODE_PROPERTIES pCodeProperties,
+-    _Outptr_ SAFER_LEVEL_HANDLE  * pLevelHandle,
++    _Win32_RAIIFree_(SaferCloseLevel, -1, 0) _Outptr_ SAFER_LEVEL_HANDLE  * pLevelHandle,
+     _In_opt_ LPVOID         lpReserved
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferComputeTokenFromLevel(
+     _In_ SAFER_LEVEL_HANDLE LevelHandle,
+     _In_opt_ HANDLE         InAccessToken,
+-    _Out_ PHANDLE           OutAccessToken,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE           OutAccessToken,
+     _In_ DWORD              dwFlags,
+     _Inout_opt_ LPVOID      lpReserved
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetLevelInformation(
+@@ -689,6 +699,7 @@ SaferGetLevelInformation(
+         _Out_ LPDWORD                           lpdwOutBufferSize
+         );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetLevelInformation(
+@@ -704,6 +715,7 @@ SaferSetLevelInformation(
+ // ShellExecute and cmd when a lower trust evaluation result occurs.
+ //
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL WINAPI
+ SaferRecordEventLogEntry(

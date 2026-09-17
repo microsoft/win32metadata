@@ -1,0 +1,230 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
+index d9bf771842..3fa71619e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
+@@ -25,6 +25,9 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -128,6 +131,7 @@ extern "C" {
+ 
+ #endif
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumProcesses(
+@@ -142,6 +146,7 @@ EnumProcesses(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumProcessModules(
+@@ -151,6 +156,7 @@ EnumProcessModules(
+     _Out_ LPDWORD lpcbNeeded
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumProcessModulesEx(
+@@ -167,6 +173,7 @@ EnumProcessModulesEx(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetModuleBaseNameA(
+@@ -176,6 +183,7 @@ GetModuleBaseNameA(
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetModuleBaseNameW(
+@@ -191,6 +199,7 @@ GetModuleBaseNameW(
+ #define GetModuleBaseName  GetModuleBaseNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ _Ret_range_(1, nSize)
+ DWORD
+@@ -204,6 +213,7 @@ GetModuleFileNameExA(
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ _Ret_range_(1, nSize)
+ DWORD
+@@ -229,6 +239,7 @@ typedef struct _MODULEINFO {
+     LPVOID EntryPoint;
+ } MODULEINFO, *LPMODULEINFO;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetModuleInformation(
+@@ -244,6 +255,7 @@ GetModuleInformation(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EmptyWorkingSet(
+@@ -256,6 +268,7 @@ EmptyWorkingSet(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ InitializeProcessForWsWatch(
+@@ -273,6 +286,7 @@ typedef struct _PSAPI_WS_WATCH_INFORMATION_EX {
+     ULONG_PTR Flags;    // Reserved
+ } PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetWsChanges(
+@@ -281,6 +295,7 @@ GetWsChanges(
+     _In_ DWORD cb
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetWsChangesEx(
+@@ -289,6 +304,7 @@ GetWsChangesEx(
+     _Inout_ PDWORD cb
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetMappedFileNameW (
+@@ -298,6 +314,7 @@ GetMappedFileNameW (
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetMappedFileNameA (
+@@ -313,6 +330,7 @@ GetMappedFileNameA (
+ #define GetMappedFileName  GetMappedFileNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumDeviceDrivers (
+@@ -321,6 +339,7 @@ EnumDeviceDrivers (
+     _Out_ LPDWORD lpcbNeeded
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDeviceDriverBaseNameA (
+@@ -329,6 +348,7 @@ GetDeviceDriverBaseNameA (
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDeviceDriverBaseNameW (
+@@ -343,6 +363,7 @@ GetDeviceDriverBaseNameW (
+ #define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDeviceDriverFileNameA (
+@@ -351,6 +372,7 @@ GetDeviceDriverFileNameA (
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDeviceDriverFileNameW (
+@@ -445,6 +467,7 @@ typedef struct _PSAPI_WORKING_SET_EX_INFORMATION {
+ #pragma warning(default:4201)
+ #endif
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ QueryWorkingSet(
+@@ -453,6 +476,7 @@ QueryWorkingSet(
+     _In_ DWORD cb
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ QueryWorkingSetEx(
+@@ -517,6 +541,7 @@ typedef PROCESS_MEMORY_COUNTERS_EX2 *PPROCESS_MEMORY_COUNTERS_EX2;
+ 
+ #endif
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetProcessMemoryInfo (
+@@ -548,6 +573,7 @@ typedef struct _PERFORMANCE_INFORMATION {
+     DWORD ThreadCount;
+ } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetPerformanceInfo (
+@@ -573,6 +599,7 @@ typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (LPVOID pContext, PENUM_PAGE
+ 
+ typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumPageFilesW (
+@@ -580,6 +607,7 @@ EnumPageFilesW (
+     LPVOID pContext
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EnumPageFilesA (
+@@ -601,6 +629,7 @@ EnumPageFilesA (
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetProcessImageFileNameA (
+@@ -609,6 +638,7 @@ GetProcessImageFileNameA (
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetProcessImageFileNameW (

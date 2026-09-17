@@ -1,0 +1,416 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
+index 2a80ff95ff..24da1aaa06 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
+@@ -19,6 +19,9 @@ Environment:
+ #define _WINSVC_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ //
+ // Define API decoration for direct importing of DLL references.
+@@ -1019,6 +1022,7 @@ typedef struct _SERVICE_START_REASON {
+ // API Function Prototypes
+ ///////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1035,6 +1039,7 @@ ChangeServiceConfigA(
+     _In_opt_    LPCSTR     lpPassword,
+     _In_opt_    LPCSTR     lpDisplayName
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1057,6 +1062,7 @@ ChangeServiceConfigW(
+ #define ChangeServiceConfig  ChangeServiceConfigA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1065,6 +1071,7 @@ ChangeServiceConfig2A(
+     _In_        DWORD        dwInfoLevel,
+     _In_opt_    LPVOID       lpInfo
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1079,6 +1086,7 @@ ChangeServiceConfig2W(
+ #define ChangeServiceConfig2  ChangeServiceConfig2A
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1086,6 +1094,7 @@ CloseServiceHandle(
+     _In_        SC_HANDLE   hSCObject
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1095,6 +1104,8 @@ ControlService(
+     _Out_       LPSERVICE_STATUS    lpServiceStatus
+     );
+ 
++_Win32_RAIIFree_(CloseServiceHandle, -1, 0)
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1114,6 +1125,7 @@ CreateServiceA(
+     _In_opt_    LPCSTR     lpServiceStartName,
+     _In_opt_    LPCSTR     lpPassword
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1139,6 +1151,7 @@ CreateServiceW(
+ #define CreateService  CreateServiceA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1146,6 +1159,7 @@ DeleteService(
+     _In_        SC_HANDLE   hService
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1159,6 +1173,7 @@ EnumDependentServicesA(
+     _Out_           LPDWORD                 pcbBytesNeeded,
+     _Out_           LPDWORD                 lpServicesReturned
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1184,6 +1199,7 @@ EnumDependentServicesW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1199,6 +1215,7 @@ EnumServicesStatusA(
+     _Out_           LPDWORD                 lpServicesReturned,
+     _Inout_opt_     LPDWORD                 lpResumeHandle
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1226,6 +1243,7 @@ EnumServicesStatusW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1243,6 +1261,7 @@ EnumServicesStatusExA(
+     _Inout_opt_     LPDWORD                 lpResumeHandle,
+     _In_opt_        LPCSTR                pszGroupName
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1266,6 +1285,7 @@ EnumServicesStatusExW(
+ #define EnumServicesStatusEx  EnumServicesStatusExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1277,6 +1297,7 @@ GetServiceKeyNameA(
+                     LPSTR                 lpServiceName,
+     _Inout_         LPDWORD                 lpcchBuffer
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1294,6 +1315,7 @@ GetServiceKeyNameW(
+ #define GetServiceKeyName  GetServiceKeyNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1305,6 +1327,7 @@ GetServiceDisplayNameA(
+                     LPSTR                 lpDisplayName,
+     _Inout_         LPDWORD                 lpcchBuffer
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1328,6 +1351,7 @@ GetServiceDisplayNameW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ SC_LOCK
+ WINAPI
+@@ -1335,6 +1359,7 @@ LockServiceDatabase(
+     _In_            SC_HANDLE               hSCManager
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1348,6 +1373,8 @@ NotifyBootConfigStatus(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_RAIIFree_(CloseServiceHandle, -1, 0)
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1357,6 +1384,7 @@ OpenSCManagerA(
+     _In_opt_        LPCSTR                lpDatabaseName,
+     _In_            DWORD                   dwDesiredAccess
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1372,6 +1400,8 @@ OpenSCManagerW(
+ #define OpenSCManager  OpenSCManagerA
+ #endif // !UNICODE
+ 
++_Win32_RAIIFree_(CloseServiceHandle, -1, 0)
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1381,6 +1411,7 @@ OpenServiceA(
+     _In_            LPCSTR                lpServiceName,
+     _In_            DWORD                   dwDesiredAccess
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SC_HANDLE
+@@ -1396,6 +1427,7 @@ OpenServiceW(
+ #define OpenService  OpenServiceA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1407,6 +1439,7 @@ QueryServiceConfigA(
+     _In_            DWORD                   cbBufSize,
+     _Out_           LPDWORD                 pcbBytesNeeded
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1424,6 +1457,7 @@ QueryServiceConfigW(
+ #define QueryServiceConfig  QueryServiceConfigA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
+        _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONA))))
+ _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
+@@ -1443,6 +1477,7 @@ QueryServiceConfig2A(
+     _In_            DWORD                   cbBufSize,
+     _Out_           LPDWORD                 pcbBytesNeeded
+     );
++_Win32_SetLastError_
+ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
+        _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONW))))
+ _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
+@@ -1474,6 +1509,7 @@ QueryServiceConfig2W(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1485,6 +1521,7 @@ QueryServiceLockStatusA(
+     _In_            DWORD                           cbBufSize,
+     _Out_           LPDWORD                         pcbBytesNeeded
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1508,6 +1545,7 @@ QueryServiceLockStatusW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1521,6 +1559,7 @@ QueryServiceObjectSecurity(
+     _Out_           LPDWORD                 pcbBytesNeeded
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1530,6 +1569,7 @@ QueryServiceStatus(
+     _Out_           LPSERVICE_STATUS    lpServiceStatus
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -1543,6 +1583,7 @@ QueryServiceStatusEx(
+     _Out_           LPDWORD             pcbBytesNeeded
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SERVICE_STATUS_HANDLE
+@@ -1552,6 +1593,7 @@ RegisterServiceCtrlHandlerA(
+     _In_    __callback
+             LPHANDLER_FUNCTION          lpHandlerProc
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SERVICE_STATUS_HANDLE
+@@ -1567,6 +1609,7 @@ RegisterServiceCtrlHandlerW(
+ #define RegisterServiceCtrlHandler  RegisterServiceCtrlHandlerA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SERVICE_STATUS_HANDLE
+@@ -1577,6 +1620,7 @@ RegisterServiceCtrlHandlerExA(
+             LPHANDLER_FUNCTION_EX       lpHandlerProc,
+     _In_opt_ LPVOID                     lpContext
+     );
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ SERVICE_STATUS_HANDLE
+@@ -1593,6 +1637,7 @@ RegisterServiceCtrlHandlerExW(
+ #define RegisterServiceCtrlHandlerEx  RegisterServiceCtrlHandlerExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1602,6 +1647,7 @@ SetServiceObjectSecurity(
+     _In_        PSECURITY_DESCRIPTOR    lpSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1610,12 +1656,14 @@ SetServiceStatus(
+     _In_        LPSERVICE_STATUS        lpServiceStatus
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+ StartServiceCtrlDispatcherA(
+     _In_ CONST  SERVICE_TABLE_ENTRYA    *lpServiceStartTable
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1629,6 +1677,7 @@ StartServiceCtrlDispatcherW(
+ #endif // !UNICODE
+ 
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1638,6 +1687,7 @@ StartServiceA(
+     _In_reads_opt_(dwNumServiceArgs)
+                     LPCSTR             *lpServiceArgVectors
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1659,6 +1709,7 @@ StartServiceW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1696,6 +1747,7 @@ NotifyServiceStatusChangeW (
+ #define NotifyServiceStatusChange  NotifyServiceStatusChangeA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1705,6 +1757,7 @@ ControlServiceExA(
+     _In_        DWORD                   dwInfoLevel,
+     _Inout_     PVOID                   pControlParams
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1720,6 +1773,7 @@ ControlServiceExW(
+ #define ControlServiceEx  ControlServiceExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1754,6 +1808,7 @@ typedef SC_NOTIFICATION_CALLBACK* PSC_NOTIFICATION_CALLBACK;
+ 
+ typedef struct _SC_NOTIFICATION_REGISTRATION* PSC_NOTIFICATION_REGISTRATION;
+ 
++_Win32_ImportLibrary_("SecHost.dll")
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -1765,6 +1820,7 @@ SubscribeServiceChangeNotifications (
+     _Out_     PSC_NOTIFICATION_REGISTRATION* pSubscription
+     );
+ 
++_Win32_ImportLibrary_("SecHost.dll")
+ WINADVAPI
+ VOID
+ WINAPI

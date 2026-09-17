@@ -1,0 +1,77 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
+index b533a8a2bf..2ff69e0ff8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
+@@ -18,12 +18,16 @@
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+ 
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -34,6 +38,7 @@ CreatePipe(
+     _In_ DWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -42,6 +47,7 @@ ConnectNamedPipe(
+     _Inout_opt_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -49,6 +55,7 @@ DisconnectNamedPipe(
+     _In_ HANDLE hNamedPipe
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -59,6 +66,7 @@ SetNamedPipeHandleState(
+     _In_opt_ LPDWORD lpCollectDataTimeout
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -75,6 +83,7 @@ PeekNamedPipe(
+ 
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -143,6 +152,7 @@ GetNamedPipeClientComputerNameW(
+ #define GetNamedPipeClientComputerName  GetNamedPipeClientComputerNameW
+ #endif
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Must_inspect_result_
+ BOOL
+@@ -156,6 +166,7 @@ ImpersonateNamedPipeClient(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

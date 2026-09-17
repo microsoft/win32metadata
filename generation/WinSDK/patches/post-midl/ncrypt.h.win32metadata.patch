@@ -1,0 +1,341 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
+index 63307cd1e0..6e3810057d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
+@@ -23,6 +23,23 @@
+ extern "C" {
+ #endif
+ 
++#if defined(WIN32METADATA)
++enum class CERT_KEY_SPEC : int;
++#else
++typedef DWORD CERT_KEY_SPEC;
++#endif
++
++#if defined(WIN32METADATA)
++enum class NCRYPT_OPERATION : int;
++enum class NCRYPT_FLAGS : int;
++enum class NCRYPT_ALGORITHM_NAME_CLASS : int;
++#else
++typedef DWORD NCRYPT_OPERATION;
++typedef DWORD NCRYPT_FLAGS;
++typedef DWORD NCRYPT_ALGORITHM_NAME_CLASS;
++#endif
++
++
+ #ifndef WINAPI
+ #define WINAPI __stdcall
+ #endif
+@@ -306,7 +323,9 @@ typedef BCryptBufferDesc* PNCryptBufferDesc;
+ //
+ 
+ typedef ULONG_PTR NCRYPT_HANDLE;
++_Win32_AlsoUsableFor_(NCRYPT_HANDLE)
+ typedef ULONG_PTR NCRYPT_PROV_HANDLE;
++_Win32_AlsoUsableFor_(NCRYPT_HANDLE)
+ typedef ULONG_PTR NCRYPT_KEY_HANDLE;
+ typedef ULONG_PTR NCRYPT_HASH_HANDLE;
+ typedef ULONG_PTR NCRYPT_SECRET_HANDLE;
+@@ -695,7 +714,7 @@ _Check_return_
+ SECURITY_STATUS
+ WINAPI
+ NCryptOpenStorageProvider(
+-    _Out_   NCRYPT_PROV_HANDLE *phProvider,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_PROV_HANDLE *phProvider,
+     _In_opt_ LPCWSTR pszProviderName,
+     _In_    DWORD   dwFlags);
+ 
+@@ -720,8 +739,8 @@ NCryptOpenStorageProvider(
+ typedef struct _NCryptAlgorithmName
+ {
+     LPWSTR  pszName;
+-    DWORD   dwClass;            // the CNG interface that supports this algorithm
+-    DWORD   dwAlgOperations;    // the types of operations supported by this algorithm
++    NCRYPT_ALGORITHM_NAME_CLASS   dwClass;            // the CNG interface that supports this algorithm
++    NCRYPT_OPERATION   dwAlgOperations;    // the types of operations supported by this algorithm
+     DWORD   dwFlags;
+ } NCryptAlgorithmName;
+ // certenrolls_end
+@@ -731,7 +750,7 @@ SECURITY_STATUS
+ WINAPI
+ NCryptEnumAlgorithms(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+-    _In_    DWORD   dwAlgOperations,
++    _In_    NCRYPT_OPERATION   dwAlgOperations,
+     _Out_   DWORD * pdwAlgCount,
+     _Outptr_result_buffer_(*pdwAlgCount) NCryptAlgorithmName **ppAlgList,
+     _In_    DWORD   dwFlags);
+@@ -755,7 +774,7 @@ typedef struct NCryptKeyName
+ {
+     LPWSTR  pszName;
+     LPWSTR  pszAlgid;
+-    DWORD   dwLegacyKeySpec;
++    CERT_KEY_SPEC   dwLegacyKeySpec;
+     DWORD   dwFlags;
+ } NCryptKeyName;
+ 
+@@ -767,7 +786,7 @@ NCryptEnumKeys(
+     _In_opt_ LPCWSTR pszScope,
+     _Outptr_ NCryptKeyName **ppKeyName,
+     _Inout_ PVOID * ppEnumState,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -815,10 +834,10 @@ SECURITY_STATUS
+ WINAPI
+ NCryptOpenKey(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszKeyName,
+-    _In_opt_ DWORD  dwLegacyKeySpec,
+-    _In_    DWORD   dwFlags);
++    _In_opt_ CERT_KEY_SPEC  dwLegacyKeySpec,
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -831,11 +850,11 @@ SECURITY_STATUS
+ WINAPI
+ NCryptCreatePersistedKey(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszAlgId,
+     _In_opt_ LPCWSTR pszKeyName,
+-    _In_    DWORD   dwLegacyKeySpec,
+-    _In_    DWORD   dwFlags);
++    _In_    CERT_KEY_SPEC   dwLegacyKeySpec,
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1267,7 +1286,7 @@ NCryptSetProperty(
+     _In_    LPCWSTR pszProperty,
+     _In_reads_bytes_(cbInput) PBYTE pbInput,
+     _In_    DWORD   cbInput,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1279,7 +1298,7 @@ SECURITY_STATUS
+ WINAPI
+ NCryptFinalizeKey(
+     _In_    NCRYPT_KEY_HANDLE hKey,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1294,7 +1313,7 @@ NCryptEncrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1309,7 +1328,7 @@ NCryptDecrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1431,10 +1450,10 @@ NCryptImportKey(
+     _In_opt_ NCRYPT_KEY_HANDLE hImportKey,
+     _In_    LPCWSTR pszBlobType,
+     _In_opt_ NCryptBufferDesc *pParameterList,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_reads_bytes_(cbData) PBYTE pbData,
+     _In_    DWORD   cbData,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1449,7 +1468,7 @@ NCryptExportKey(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1464,7 +1483,7 @@ NCryptSignHash(
+     _Out_writes_bytes_to_opt_(cbSignature, *pcbResult) PBYTE pbSignature,
+     _In_    DWORD   cbSignature,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1478,7 +1497,7 @@ NCryptVerifySignature(
+     _In_    DWORD   cbHashValue,
+     _In_reads_bytes_(cbSignature) PBYTE pbSignature,
+     _In_    DWORD   cbSignature,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1508,11 +1527,11 @@ _Check_return_
+ SECURITY_STATUS
+ WINAPI
+ NCryptTranslateHandle(
+-    _Out_opt_ NCRYPT_PROV_HANDLE *phProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_opt_ NCRYPT_PROV_HANDLE *phProvider,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    HCRYPTPROV hLegacyProv,
+     _In_opt_ HCRYPTKEY hLegacyKey,
+-    _In_opt_ DWORD  dwLegacyKeySpec,
++    _In_opt_ CERT_KEY_SPEC  dwLegacyKeySpec,
+     _In_    DWORD   dwFlags);
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -1533,7 +1552,7 @@ WINAPI
+ NCryptNotifyChangeKey(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+     _Inout_ HANDLE *phEvent,
+-    _In_    DWORD   dwFlags);
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1546,8 +1565,8 @@ WINAPI
+ NCryptSecretAgreement(
+     _In_    NCRYPT_KEY_HANDLE hPrivKey,
+     _In_    NCRYPT_KEY_HANDLE hPubKey,
+-    _Out_   NCRYPT_SECRET_HANDLE *phAgreedSecret,
+-    _In_    DWORD   dwFlags);
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_SECRET_HANDLE *phAgreedSecret,
++    _In_    NCRYPT_FLAGS   dwFlags);
+ 
+ 
+ 
+@@ -1623,6 +1642,115 @@ NCryptVerifyClaim(
+ #define NCRYPT_KEY_STORAGE_INTERFACE_VERSION_4 BCRYPT_MAKE_INTERFACE_VERSION(4,0)
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("NCRYPT_CIPHER_OPERATION")
++#pragma push_macro("NCRYPT_HASH_OPERATION")
++#pragma push_macro("NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
++#pragma push_macro("NCRYPT_SECRET_AGREEMENT_OPERATION")
++#pragma push_macro("NCRYPT_SIGNATURE_OPERATION")
++#undef NCRYPT_CIPHER_OPERATION
++#undef NCRYPT_HASH_OPERATION
++#undef NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION
++#undef NCRYPT_SECRET_AGREEMENT_OPERATION
++#undef NCRYPT_SIGNATURE_OPERATION
++enum class
++    [[clang::flag_enum]]
++    NCRYPT_OPERATION : int
++{
++    NCRYPT_CIPHER_OPERATION = 1,
++    NCRYPT_HASH_OPERATION = 2,
++    NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4,
++    NCRYPT_SECRET_AGREEMENT_OPERATION = 8,
++    NCRYPT_SIGNATURE_OPERATION = 0x10,
++};
++#pragma pop_macro("NCRYPT_SIGNATURE_OPERATION")
++#pragma pop_macro("NCRYPT_SECRET_AGREEMENT_OPERATION")
++#pragma pop_macro("NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
++#pragma pop_macro("NCRYPT_HASH_OPERATION")
++#pragma pop_macro("NCRYPT_CIPHER_OPERATION")
++
++#pragma push_macro("NCRYPT_SILENT_FLAG")
++#pragma push_macro("NCRYPT_NO_PADDING_FLAG")
++#pragma push_macro("NCRYPT_PAD_OAEP_FLAG")
++#pragma push_macro("NCRYPT_PAD_PKCS1_FLAG")
++#pragma push_macro("NCRYPT_REGISTER_NOTIFY_FLAG")
++#pragma push_macro("NCRYPT_UNREGISTER_NOTIFY_FLAG")
++#pragma push_macro("NCRYPT_MACHINE_KEY_FLAG")
++#pragma push_macro("NCRYPT_UNPROTECT_NO_DECRYPT")
++#pragma push_macro("NCRYPT_OVERWRITE_KEY_FLAG")
++#pragma push_macro("NCRYPT_NO_KEY_VALIDATION")
++#pragma push_macro("NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG")
++#pragma push_macro("NCRYPT_PAD_PSS_FLAG")
++#pragma push_macro("NCRYPT_PERSIST_FLAG")
++#pragma push_macro("NCRYPT_PERSIST_ONLY_FLAG")
++#undef NCRYPT_SILENT_FLAG
++#undef NCRYPT_NO_PADDING_FLAG
++#undef NCRYPT_PAD_OAEP_FLAG
++#undef NCRYPT_PAD_PKCS1_FLAG
++#undef NCRYPT_REGISTER_NOTIFY_FLAG
++#undef NCRYPT_UNREGISTER_NOTIFY_FLAG
++#undef NCRYPT_MACHINE_KEY_FLAG
++#undef NCRYPT_UNPROTECT_NO_DECRYPT
++#undef NCRYPT_OVERWRITE_KEY_FLAG
++#undef NCRYPT_NO_KEY_VALIDATION
++#undef NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG
++#undef NCRYPT_PAD_PSS_FLAG
++#undef NCRYPT_PERSIST_FLAG
++#undef NCRYPT_PERSIST_ONLY_FLAG
++enum class
++    [[clang::flag_enum]]
++    NCRYPT_FLAGS : int
++{
++    NCRYPT_SILENT_FLAG = 0x40,
++    NCRYPT_NO_PADDING_FLAG = 1,
++    NCRYPT_PAD_OAEP_FLAG = 4,
++    NCRYPT_PAD_PKCS1_FLAG = 2,
++    NCRYPT_REGISTER_NOTIFY_FLAG = 1,
++    NCRYPT_UNREGISTER_NOTIFY_FLAG = 2,
++    NCRYPT_MACHINE_KEY_FLAG = 0x20,
++    NCRYPT_UNPROTECT_NO_DECRYPT = 1,
++    NCRYPT_OVERWRITE_KEY_FLAG = 0x80,
++    NCRYPT_NO_KEY_VALIDATION = 8,
++    NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG = 0x200,
++    NCRYPT_PAD_PSS_FLAG = 8,
++    NCRYPT_PERSIST_FLAG = -2147483648,
++    NCRYPT_PERSIST_ONLY_FLAG = 0x40000000,
++};
++#pragma pop_macro("NCRYPT_PERSIST_ONLY_FLAG")
++#pragma pop_macro("NCRYPT_PERSIST_FLAG")
++#pragma pop_macro("NCRYPT_PAD_PSS_FLAG")
++#pragma pop_macro("NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG")
++#pragma pop_macro("NCRYPT_NO_KEY_VALIDATION")
++#pragma pop_macro("NCRYPT_OVERWRITE_KEY_FLAG")
++#pragma pop_macro("NCRYPT_UNPROTECT_NO_DECRYPT")
++#pragma pop_macro("NCRYPT_MACHINE_KEY_FLAG")
++#pragma pop_macro("NCRYPT_UNREGISTER_NOTIFY_FLAG")
++#pragma pop_macro("NCRYPT_REGISTER_NOTIFY_FLAG")
++#pragma pop_macro("NCRYPT_PAD_PKCS1_FLAG")
++#pragma pop_macro("NCRYPT_PAD_OAEP_FLAG")
++#pragma pop_macro("NCRYPT_NO_PADDING_FLAG")
++#pragma pop_macro("NCRYPT_SILENT_FLAG")
++
++#pragma push_macro("NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE")
++#pragma push_macro("NCRYPT_SECRET_AGREEMENT_INTERFACE")
++#pragma push_macro("NCRYPT_SIGNATURE_INTERFACE")
++#undef NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE
++#undef NCRYPT_SECRET_AGREEMENT_INTERFACE
++#undef NCRYPT_SIGNATURE_INTERFACE
++enum class
++    NCRYPT_ALGORITHM_NAME_CLASS : int
++{
++    NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3,
++    NCRYPT_SECRET_AGREEMENT_INTERFACE,
++    NCRYPT_SIGNATURE_INTERFACE,
++};
++#pragma pop_macro("NCRYPT_SIGNATURE_INTERFACE")
++#pragma pop_macro("NCRYPT_SECRET_AGREEMENT_INTERFACE")
++#pragma pop_macro("NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE")
++
++#endif
++
+ #ifdef __cplusplus
+ }       // Balance extern "C" above
+ #endif
