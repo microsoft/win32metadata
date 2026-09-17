@@ -1,0 +1,285 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
+index a5d8211d4e..5c6756d431 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
+@@ -15,6 +15,9 @@ Abstract:
+ #ifndef __WINEVT_H__
+ #define __WINEVT_H__
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or EventLogService Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_EVENTLOGSERVICE)
+@@ -154,6 +157,7 @@ typedef struct _EVT_RPC_LOGIN
+ 
+ 
+ // Timeout and Flags must currently be 0
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenSession(
+@@ -169,6 +173,7 @@ EvtOpenSession(
+ //
+ ////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -177,6 +182,7 @@ EvtClose(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtCancel(
+@@ -223,6 +229,7 @@ typedef enum _EVT_SEEK_FLAGS
+ } EVT_SEEK_FLAGS;
+ 
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtQuery(
+@@ -232,6 +239,7 @@ EvtQuery(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -245,6 +253,7 @@ EvtNext(
+     );
+ 
+ // Timeout must currently be 0
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtSeek(
+@@ -286,6 +295,7 @@ typedef DWORD (WINAPI *EVT_SUBSCRIBE_CALLBACK)(
+     _Maybenull_ PVOID UserContext,
+     _In_ EVT_HANDLE Event );
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtSubscribe(
+@@ -345,6 +355,7 @@ typedef enum _EVT_RENDER_FLAGS
+ 
+  } EVT_RENDER_FLAGS;
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtCreateRenderContext(
+@@ -353,6 +364,7 @@ EvtCreateRenderContext(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -382,6 +394,7 @@ typedef enum _EVT_FORMAT_MESSAGE_FLAGS
+ 
+ 
+ // PublisherMetadata is NULL for forwarded events
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -423,6 +436,7 @@ typedef enum _EVT_LOG_PROPERTY_ID
+ 
+ } EVT_LOG_PROPERTY_ID;
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenLog(
+@@ -431,6 +445,7 @@ EvtOpenLog(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -442,6 +457,7 @@ EvtGetLogInfo(
+     _Out_ PDWORD PropertyValueBufferUsed
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtClearLog(
+@@ -461,6 +477,7 @@ typedef enum _EVT_EXPORTLOG_FLAGS
+ 
+ } EVT_EXPORTLOG_FLAGS;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtExportLog(
+@@ -472,6 +489,7 @@ EvtExportLog(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtArchiveExportedLog(
+@@ -546,6 +564,7 @@ typedef enum _EVT_CHANNEL_SID_TYPE
+ } EVT_CHANNEL_SID_TYPE;
+ 
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenChannelEnum(
+@@ -553,6 +572,7 @@ EvtOpenChannelEnum(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -563,6 +583,7 @@ EvtNextChannelPath(
+     _Out_ PDWORD ChannelPathBufferUsed
+     );
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenChannelConfig(
+@@ -572,6 +593,7 @@ EvtOpenChannelConfig(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtSaveChannelConfig(
+@@ -579,6 +601,7 @@ EvtSaveChannelConfig(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtSetChannelConfigProperty(
+@@ -588,6 +611,7 @@ EvtSetChannelConfigProperty(
+     _In_ PEVT_VARIANT PropertyValue
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -654,6 +678,7 @@ typedef enum _EVT_PUBLISHER_METADATA_PROPERTY_ID
+ } EVT_PUBLISHER_METADATA_PROPERTY_ID;
+ 
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenPublisherEnum(
+@@ -661,6 +686,7 @@ EvtOpenPublisherEnum(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -671,6 +697,7 @@ EvtNextPublisherId(
+     _Out_ PDWORD PublisherIdBufferUsed
+     );
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenPublisherMetadata(
+@@ -681,6 +708,7 @@ EvtOpenPublisherMetadata(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -715,6 +743,7 @@ typedef enum _EVT_EVENT_METADATA_PROPERTY_ID
+ } EVT_EVENT_METADATA_PROPERTY_ID;
+ 
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtOpenEventMetadataEnum(
+@@ -722,6 +751,7 @@ EvtOpenEventMetadataEnum(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtNextEventMetadata(
+@@ -729,6 +759,7 @@ EvtNextEventMetadata(
+     DWORD Flags
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -750,6 +781,7 @@ EvtGetEventMetadataProperty(
+ typedef HANDLE EVT_OBJECT_ARRAY_PROPERTY_HANDLE;
+ 
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -758,6 +790,7 @@ EvtGetObjectArraySize(
+     _Out_ PDWORD ObjectArraySize
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -805,6 +838,7 @@ typedef enum _EVT_EVENT_PROPERTY_ID
+ } EVT_EVENT_PROPERTY_ID;
+ 
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -816,12 +850,14 @@ EvtGetQueryInfo(
+     _Out_ PDWORD PropertyValueBufferUsed
+     );
+ 
++_Win32_SetLastError_
+ EVT_HANDLE
+ WINAPI
+ EvtCreateBookmark(
+     _In_opt_z_ LPCWSTR BookmarkXml
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ EvtUpdateBookmark(
+@@ -829,6 +865,7 @@ EvtUpdateBookmark(
+     _In_ EVT_HANDLE Event
+     );
+ 
++_Win32_SetLastError_
+ _Success_(return != 0)
+ BOOL
+ WINAPI

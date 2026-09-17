@@ -1,0 +1,70 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
+index afa6c2f750..76268d0f4f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -201,8 +205,9 @@ extern RPC_IF_HANDLE __MIDL_itf_thumbcache_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISharedBitmap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("091162a4-bc96-411f-aae8-c5122cd03363")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISharedBitmap : public IUnknown
+     {
+     public:
+@@ -344,8 +349,9 @@ EXTERN_C const IID IID_ISharedBitmap;
+ EXTERN_C const IID IID_IThumbnailCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("F676C15D-596A-4ce2-8234-33996F445DB1")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IThumbnailCache : public IUnknown
+     {
+     public:
+@@ -518,8 +524,9 @@ void __RPC_STUB IThumbnailCache_RemoteGetThumbnailByID_Stub(
+ EXTERN_C const IID IID_IThumbnailProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e357fccd-a995-4576-b01f-234630154e96")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IThumbnailProvider : public IUnknown
+     {
+     public:
+@@ -613,8 +620,9 @@ EXTERN_C const IID IID_IThumbnailProvider;
+ EXTERN_C const IID IID_IThumbnailSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("F4376F00-BEF5-4d45-80F3-1E023BBF1209")
++    
++    _Windows_SupportedOS_Windows8_
+     IThumbnailSettings : public IUnknown
+     {
+     public:
+@@ -700,8 +708,9 @@ EXTERN_C const IID IID_IThumbnailSettings;
+ EXTERN_C const IID IID_IThumbnailCachePrimer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("0f03f8fe-2b26-46f0-965a-212aa8d66b76")
++    
++    _Windows_SupportedOS_Windows8_
+     IThumbnailCachePrimer : public IUnknown
+     {
+     public:

@@ -1,0 +1,51 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/control.h b/generation/WinSDK/RecompiledIdlHeaders/um/control.h
+index be335c74e2..7813421777 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/control.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/control.h
+@@ -29,6 +29,23 @@
+ #ifndef __control_h__
+ #define __control_h__
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#pragma push_macro("OATRUE")
++#pragma push_macro("OAFALSE")
++#undef OATRUE
++#undef OAFALSE
++enum class OA_BOOL : int
++{
++    OATRUE = -1,
++    OAFALSE = 0,
++};
++#pragma pop_macro("OAFALSE")
++#pragma pop_macro("OATRUE")
++#else
++typedef long OA_BOOL;
++#endif
++
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+ #endif
+@@ -1558,7 +1575,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+             /* [out] */ __RPC__out long *pHeight) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE HideCursor( 
+-            /* [in] */ long HideCursor) = 0;
++            /* [in] */ OA_BOOL HideCursor) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsCursorHidden( 
+             /* [out] */ __RPC__out long *CursorHidden) = 0;
+@@ -1830,7 +1847,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+         DECLSPEC_XFGVIRT(IVideoWindow, HideCursor)
+         HRESULT ( STDMETHODCALLTYPE *HideCursor )( 
+             __RPC__in IVideoWindow * This,
+-            /* [in] */ long HideCursor);
++            /* [in] */ OA_BOOL HideCursor);
+         
+         DECLSPEC_XFGVIRT(IVideoWindow, IsCursorHidden)
+         HRESULT ( STDMETHODCALLTYPE *IsCursorHidden )( 
+@@ -4185,4 +4202,3 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
+ 
+ #endif
+ 
+-

@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
+index 8cc8d89ca9..89f8edd3db 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
+@@ -22,6 +22,9 @@ Environment:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -160,6 +163,7 @@ typedef enum _WDS_CLI_IMAGE_PARAM_TYPE
+ //
+ // Session functions
+ //
++_Win32_SetLastError_
+ HRESULT
+ WDSCLIAPI
+ WdsCliCreateSession(

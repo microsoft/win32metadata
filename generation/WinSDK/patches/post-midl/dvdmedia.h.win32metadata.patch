@@ -1,0 +1,80 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dvdmedia.h b/generation/WinSDK/RecompiledIdlHeaders/um/dvdmedia.h
+index 8fcf063cf6..4da58c157c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dvdmedia.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dvdmedia.h
+@@ -15,6 +15,9 @@
+ #ifndef __DVDMEDIA_H__
+ #define __DVDMEDIA_H__
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -297,6 +300,56 @@ enum AM_MPEG2Profile {
+                         //  be in widescreen format (4x3 content should be centered on a 16x9 output).
+                         //  Streams sent to VGA should be widescreened only by renderers.
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("AMMPEG2_DoPanScan")
++#pragma push_macro("AMMPEG2_DVDLine21Field1")
++#pragma push_macro("AMMPEG2_DVDLine21Field2")
++#pragma push_macro("AMMPEG2_SourceIsLetterboxed")
++#pragma push_macro("AMMPEG2_FilmCameraMode")
++#pragma push_macro("AMMPEG2_LetterboxAnalogOut")
++#pragma push_macro("AMMPEG2_DSS_UserData")
++#pragma push_macro("AMMPEG2_DVB_UserData")
++#pragma push_macro("AMMPEG2_27MhzTimebase")
++#pragma push_macro("AMMPEG2_WidescreenAnalogOut")
++#undef AMMPEG2_DoPanScan
++#undef AMMPEG2_DVDLine21Field1
++#undef AMMPEG2_DVDLine21Field2
++#undef AMMPEG2_SourceIsLetterboxed
++#undef AMMPEG2_FilmCameraMode
++#undef AMMPEG2_LetterboxAnalogOut
++#undef AMMPEG2_DSS_UserData
++#undef AMMPEG2_DVB_UserData
++#undef AMMPEG2_27MhzTimebase
++#undef AMMPEG2_WidescreenAnalogOut
++enum class
++    [[clang::flag_enum]]
++    MPEG2VIDEOINFO_FLAGS : int
++{
++    AMMPEG2_DoPanScan = 0x00000001,
++    AMMPEG2_DVDLine21Field1 = 0x00000002,
++    AMMPEG2_DVDLine21Field2 = 0x00000004,
++    AMMPEG2_SourceIsLetterboxed = 0x00000008,
++    AMMPEG2_FilmCameraMode = 0x00000010,
++    AMMPEG2_LetterboxAnalogOut = 0x00000020,
++    AMMPEG2_DSS_UserData = 0x00000040,
++    AMMPEG2_DVB_UserData = 0x00000080,
++    AMMPEG2_27MhzTimebase = 0x00000100,
++    AMMPEG2_WidescreenAnalogOut = 0x00000200,
++};
++#pragma pop_macro("AMMPEG2_WidescreenAnalogOut")
++#pragma pop_macro("AMMPEG2_27MhzTimebase")
++#pragma pop_macro("AMMPEG2_DVB_UserData")
++#pragma pop_macro("AMMPEG2_DSS_UserData")
++#pragma pop_macro("AMMPEG2_LetterboxAnalogOut")
++#pragma pop_macro("AMMPEG2_FilmCameraMode")
++#pragma pop_macro("AMMPEG2_SourceIsLetterboxed")
++#pragma pop_macro("AMMPEG2_DVDLine21Field2")
++#pragma pop_macro("AMMPEG2_DVDLine21Field1")
++#pragma pop_macro("AMMPEG2_DoPanScan")
++#else
++typedef DWORD MPEG2VIDEOINFO_FLAGS;
++#endif
++
+ // PRESENT in dwReserved1 field in VIDEOINFOHEADER2
+ #define AMCONTROL_USED              0x00000001 // Used to test if these flags are supported.  Set and test for AcceptMediaType.
+                                                 // If rejected, then you cannot use the AMCONTROL flags (send 0 for dwReserved1)
+@@ -328,7 +381,7 @@ typedef struct tagMPEG2VIDEOINFO {
+     DWORD               cbSequenceHeader;       // is 0 for DVD (no sequence header)
+     DWORD               dwProfile;              // use enum MPEG2Profile
+     DWORD               dwLevel;                // use enum MPEG2Level
+-    DWORD               dwFlags;                // use AMMPEG2_* defines.  Reject connection if undefined bits are not 0
++    MPEG2VIDEOINFO_FLAGS dwFlags;                // use AMMPEG2_* defines.  Reject connection if undefined bits are not 0
+     DWORD               dwSequenceHeader[1];    // DWORD instead of Byte for alignment purposes
+                                                 //   For MPEG-2, if a sequence_header is included, the sequence_extension
+                                                 //   should also be included

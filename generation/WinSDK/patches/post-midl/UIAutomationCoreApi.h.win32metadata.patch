@@ -1,0 +1,319 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
+index 675367b41c..cc5c0aeb29 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
+@@ -7,6 +7,10 @@
+ // -------------------------------------------------------------
+ 
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef _INC_UIAUTOMATIONCOREAPI
+ #define _INC_UIAUTOMATIONCOREAPI
+ #pragma once
+@@ -476,6 +480,7 @@ DEFINE_GUID(IsDialog_Property_GUID,                                     0x9d0dfb
+ //
+ // --------------------------------------------------------------------------
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaGetErrorDescription(BSTR * pDescription);
+ 
+ // --------------------------------------------------------------------------
+@@ -556,8 +561,11 @@ struct UiaCacheRequest
+     enum AutomationElementMode automationElementMode;
+ };
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaHUiaNodeFromVariant(VARIANT * pvar, HUIANODE *phnode);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaHPatternObjectFromVariant(VARIANT * pvar, HUIAPATTERNOBJECT *phobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaHTextRangeFromVariant(VARIANT * pvar, HUIATEXTRANGE *phtextrange);
+ 
+ // --------------------------------------------------------------------------
+@@ -605,24 +613,38 @@ struct UiaFindParams
+     struct UiaCondition * pFindCondition;
+ };
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaNodeRelease(HUIANODE hnode);
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetPropertyValue(HUIANODE hnode, PROPERTYID propertyId, VARIANT * pValue);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetPatternProvider(HUIANODE hnode, PATTERNID patternId, HUIAPATTERNOBJECT * phobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetRuntimeId(HUIANODE hnode, SAFEARRAY ** pruntimeId);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaSetFocus(HUIANODE hnode);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaNavigate(HUIANODE hnode, enum NavigateDirection direction, struct UiaCondition * pCondition, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetUpdatedCache(HUIANODE hnode, struct UiaCacheRequest * pRequest, enum NormalizeState normalizeState, struct UiaCondition * pNormalizeCondition, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaFind(HUIANODE hnode, struct UiaFindParams * pParams, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, SAFEARRAY ** ppOffsets, SAFEARRAY ** ppTreeStructures);
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaNodeFromPoint(double x, double y, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaNodeFromFocus(struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, HUIANODE * phnode);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, HUIANODE * phnode);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
+ 
+ 
+ #ifdef __cplusplus
++_Windows_SupportedOS_WindowsXP_
+ inline void UiaRectSetEmpty(_Out_ UiaRect & rc)
+ {
+     rc.left = 0;
+@@ -631,6 +653,7 @@ inline void UiaRectSetEmpty(_Out_ UiaRect & rc)
+     rc.height = 0;
+ }
+ 
++_Windows_SupportedOS_WindowsXP_
+ inline bool UiaRectIsEmpty(const UiaRect & rc)
+ {
+     return rc.width <= 0 || rc.height <= 0;
+@@ -652,6 +675,7 @@ enum ProviderType
+ 
+ typedef SAFEARRAY * WINAPI UiaProviderCallback(HWND hwnd, enum ProviderType providerType);
+ 
++_Windows_SupportedOS_WindowsXP_
+ void WINAPI UiaRegisterProviderCallback(UiaProviderCallback * pCallback);
+ 
+ 
+@@ -674,6 +698,7 @@ enum AutomationIdentifierType
+     AutomationIdentifierType_Style,
+ };
+ 
++_Windows_SupportedOS_WindowsXP_
+ int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -682,7 +707,9 @@ int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetReservedNotSupportedValue(IUnknown **punkNotSupportedValue);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaGetReservedMixedAttributeValue(IUnknown **punkMixedAttributeValue);
+ 
+ // --------------------------------------------------------------------------
+@@ -774,19 +801,28 @@ struct UiaWindowClosedEventArgs
+ //
+ // Provider Event APIs
+ //
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaClientsAreListening();
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple * pProvider, PROPERTYID id, VARIANT oldValue, VARIANT newValue);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaRaiseAutomationEvent(IRawElementProviderSimple * pProvider, EVENTID id);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaRaiseStructureChangedEvent(IRawElementProviderSimple * pProvider, enum StructureChangeType structureChangeType, int * pRuntimeId, int cRuntimeIdLen);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaRaiseAsyncContentLoadedEvent(IRawElementProviderSimple * pProvider, enum AsyncContentLoadedState asyncContentLoadedState, double percentComplete);
++_Windows_SupportedOS_Windows81_
+ HRESULT WINAPI UiaRaiseTextEditTextChangedEvent(IRawElementProviderSimple * pProvider, enum TextEditChangeType textEditChangeType, SAFEARRAY *pChangedData);
++_Windows_SupportedOS_10240_
+ HRESULT WINAPI UiaRaiseChangesEvent(IRawElementProviderSimple * pProvider, int eventIdCount, struct UiaChangeInfo * pUiaChanges);
++_Windows_SupportedOS_16299_
+ HRESULT WINAPI UiaRaiseNotificationEvent(
+     _In_ IRawElementProviderSimple* provider,
+     enum NotificationKind notificationKind,
+     enum NotificationProcessing notificationProcessing,
+     _In_opt_ BSTR displayString,
+     _In_ BSTR activityId);
++_Windows_SupportedOS_Windows81_
+ HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
+     _In_ IRawElementProviderSimple* provider,
+     _In_opt_ ITextRangeProvider* textRange);
+@@ -801,9 +837,13 @@ HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
+ // Client Event APIs
+ //
+ typedef void WINAPI UiaEventCallback(struct UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, enum TreeScope scope, PROPERTYID * pProperties, int cProperties, struct UiaCacheRequest * pRequest, HUIAEVENT * phEvent);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaRemoveEvent(HUIAEVENT hEvent);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaEventAddWindow(HUIAEVENT hEvent, HWND hwnd);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
+ 
+ 
+@@ -813,65 +853,121 @@ HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
+ //
+ // --------------------------------------------------------------------------
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DockPattern_SetDockPosition(HUIAPATTERNOBJECT hobj, enum DockPosition dockPosition);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ExpandCollapsePattern_Collapse(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ExpandCollapsePattern_Expand(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int row, int column, HUIANODE * pResult);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI InvokePattern_Invoke(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI MultipleViewPattern_GetViewName(HUIAPATTERNOBJECT hobj, int viewId, BSTR * ppStr);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI MultipleViewPattern_SetCurrentView(HUIAPATTERNOBJECT hobj, int viewId);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI RangeValuePattern_SetValue(HUIAPATTERNOBJECT hobj, double val);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ScrollItemPattern_ScrollIntoView(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ScrollPattern_Scroll(HUIAPATTERNOBJECT hobj, enum ScrollAmount horizontalAmount, enum ScrollAmount verticalAmount);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ScrollPattern_SetScrollPercent(HUIAPATTERNOBJECT hobj, double horizontalPercent, double verticalPercent);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SelectionItemPattern_AddToSelection(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SelectionItemPattern_RemoveFromSelection(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SelectionItemPattern_Select(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TogglePattern_Toggle(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TransformPattern_Move(HUIAPATTERNOBJECT hobj, double x, double y);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TransformPattern_Resize(HUIAPATTERNOBJECT hobj, double width, double height);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TransformPattern_Rotate(HUIAPATTERNOBJECT hobj, double degrees);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI ValuePattern_SetValue(HUIAPATTERNOBJECT hobj, LPCWSTR pVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI WindowPattern_Close(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI WindowPattern_SetWindowVisualState(HUIAPATTERNOBJECT hobj, enum WindowVisualState state);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI WindowPattern_WaitForInputIdle(HUIAPATTERNOBJECT hobj, int milliseconds, BOOL * pResult);
+ 
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_GetSelection(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_GetVisibleRanges(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, HUIATEXTRANGE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, HUIATEXTRANGE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, HUIATEXTRANGE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, enum SupportedTextSelection* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_Clone(HUIATEXTRANGE hobj, HUIATEXTRANGE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_Compare(HUIATEXTRANGE hobj, HUIATEXTRANGE range, BOOL* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_CompareEndpoints(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, enum TextPatternRangeEndpoint targetEndpoint, int* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, enum TextUnit unit);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_GetAttributeValue(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT * pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_FindAttribute(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT val, BOOL backward, HUIATEXTRANGE * pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, HUIATEXTRANGE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_GetBoundingRectangles(HUIATEXTRANGE hobj, SAFEARRAY** pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, HUIANODE* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_GetText(HUIATEXTRANGE hobj, int maxLength, BSTR* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_Move(HUIATEXTRANGE hobj, enum TextUnit unit, int count, int* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_MoveEndpointByUnit(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, enum TextUnit unit, int count, int* pRetVal);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_MoveEndpointByRange(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, enum TextPatternRangeEndpoint targetEndpoint);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_Select(HUIATEXTRANGE hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_AddToSelection(HUIATEXTRANGE hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_RemoveFromSelection(HUIATEXTRANGE hobj);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_ScrollIntoView(HUIATEXTRANGE hobj, BOOL alignToTop);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI TextRange_GetChildren(HUIATEXTRANGE hobj, SAFEARRAY** pRetVal);
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, PROPERTYID propertyId, VARIANT value, HUIANODE *pFound);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI LegacyIAccessiblePattern_Select(HUIAPATTERNOBJECT hobj, long flagsSelect);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI LegacyIAccessiblePattern_DoDefaultAction(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI LegacyIAccessiblePattern_SetValue(HUIAPATTERNOBJECT hobj, LPCWSTR szValue);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI LegacyIAccessiblePattern_GetIAccessible(HUIAPATTERNOBJECT hobj, IAccessible ** pAccessible);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI SynchronizedInputPattern_StartListening(HUIAPATTERNOBJECT hobj, enum SynchronizedInputType inputType);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI SynchronizedInputPattern_Cancel(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_Windows7_
+ HRESULT WINAPI VirtualizedItemPattern_Realize(HUIAPATTERNOBJECT hobj);
+ HRESULT WINAPI CustomNavigationPattern_Navigate(HUIAPATTERNOBJECT hobj, enum NavigateDirection direction, HUIANODE * pResult);
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaPatternRelease(HUIAPATTERNOBJECT hobj);
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -887,8 +983,11 @@ BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);
+ // 
+ // --------------------------------------------------------------------------
+ 
++_Windows_SupportedOS_WindowsXP_
+ LRESULT WINAPI UiaReturnRawElementProvider(HWND hwnd, WPARAM wParam, LPARAM lParam, IRawElementProviderSimple * el);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI UiaHostProviderFromHwnd(HWND hwnd, IRawElementProviderSimple ** ppProvider);
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI UiaProviderForNonClient(HWND hwnd, long idObject, long idChild, IRawElementProviderSimple ** ppProvider);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+@@ -900,6 +999,7 @@ HRESULT WINAPI UiaProviderForNonClient(HWND hwnd, long idObject, long idChild, I
+ #define UIA_IAFP_DEFAULT        0x0000
+ #define UIA_IAFP_UNWRAP_BRIDGE  0x0001
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI UiaIAccessibleFromProvider(
+     _In_ IRawElementProviderSimple * pProvider, 
+     _In_ DWORD dwFlags, 
+@@ -915,6 +1015,7 @@ HRESULT WINAPI UiaIAccessibleFromProvider(
+ #define UIA_PFIA_DEFAULT        0x0000
+ #define UIA_PFIA_UNWRAP_BRIDGE  0x0001
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI UiaProviderFromIAccessible(
+     _In_ IAccessible * pAccessible, 
+     long idChild, 
+@@ -927,7 +1028,9 @@ HRESULT WINAPI UiaProviderFromIAccessible(
+ // 
+ // --------------------------------------------------------------------------
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI UiaDisconnectAllProviders();
++_Windows_SupportedOS_Windows8_
+ HRESULT WINAPI UiaDisconnectProvider(IRawElementProviderSimple * pProvider);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+@@ -942,6 +1045,7 @@ HRESULT WINAPI UiaDisconnectProvider(IRawElementProviderSimple * pProvider);
+ //
+ // --------------------------------------------------------------------------
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL WINAPI UiaHasServerSideProvider(HWND hwnd);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */

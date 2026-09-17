@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
+index e48c86d731..2ab8bb9650 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
+@@ -17,6 +17,9 @@ Abstract:
+ #define _WINREG_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -1413,6 +1416,7 @@ RegLoadAppKeyW(
+ // Remoteable System Shutdown APIs
+ //
+ 
++_Win32_SetLastError_
+ __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+ WINADVAPI
+ BOOL
+@@ -1424,6 +1428,7 @@ InitiateSystemShutdownA(
+     _In_ BOOL bForceAppsClosed,
+     _In_ BOOL bRebootAfterShutdown
+     );
++_Win32_SetLastError_
+ __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+ WINADVAPI
+ BOOL
+@@ -1441,12 +1446,14 @@ InitiateSystemShutdownW(
+ #define InitiateSystemShutdown  InitiateSystemShutdownA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+ AbortSystemShutdownA(
+     _In_opt_ LPSTR lpMachineName
+     );
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -1482,6 +1489,7 @@ AbortSystemShutdownW(
+ //
+ #define MAX_SHUTDOWN_TIMEOUT (10*365*24*60*60)
+ 
++_Win32_SetLastError_
+ __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+ _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
+     __drv_reportError("Requires a valid dwReason or lpMessage"))
+@@ -1496,6 +1504,7 @@ InitiateSystemShutdownExA(
+     _In_ BOOL bRebootAfterShutdown,
+     _In_ DWORD dwReason
+     );
++_Win32_SetLastError_
+ __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+ _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
+     __drv_reportError("Requires a valid dwReason or lpMessage"))

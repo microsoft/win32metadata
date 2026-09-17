@@ -1,0 +1,238 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
+index 8cc6aa8c21..1eefced2ce 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
+@@ -37,6 +37,9 @@
+ # define NOT_BUILD_WINDOWS_DEPRECATE __declspec(deprecated)
+ #endif
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -80,6 +83,7 @@ typedef struct _MEMORYSTATUSEX {
+ #define USER_CET_ENVIRONMENT_VBS_ENCLAVE          0x00000010
+ #define USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE    0x00000011
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -159,6 +163,7 @@ GetVersion(
+     VOID
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -197,6 +202,7 @@ GetTickCount64(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -213,6 +219,7 @@ GetSystemTimeAdjustment(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -229,6 +236,7 @@ GetSystemTimeAdjustmentPrecise(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -238,6 +246,7 @@ GetSystemDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -259,6 +268,7 @@ GetSystemDirectoryW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ _Success_(return != 0 && return < uSize)
+@@ -269,6 +279,7 @@ GetWindowsDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ _Success_(return != 0 && return < uSize)
+@@ -291,6 +302,7 @@ GetWindowsDirectoryW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -300,6 +312,7 @@ GetSystemWindowsDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -333,6 +346,7 @@ typedef enum _COMPUTER_NAME_FORMAT {
+     ComputerNameMax
+ } COMPUTER_NAME_FORMAT ;
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -343,6 +357,7 @@ GetComputerNameExA(
+     _Inout_ LPDWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -365,6 +380,7 @@ GetComputerNameExW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -377,6 +393,7 @@ SetComputerNameExW(
+ #define SetComputerNameEx SetComputerNameExW
+ #endif
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -391,6 +408,7 @@ SetSystemTime(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ NOT_BUILD_WINDOWS_DEPRECATE
++_Win32_SetLastError_
+ WINBASEAPI
+ __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
+ BOOL
+@@ -400,6 +418,7 @@ GetVersionExA(
+     );
+ 
+ NOT_BUILD_WINDOWS_DEPRECATE
++_Win32_SetLastError_
+ WINBASEAPI
+ __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
+ BOOL
+@@ -414,6 +433,7 @@ GetVersionExW(
+ #define GetVersionEx  GetVersionExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -424,6 +444,7 @@ GetLogicalProcessorInformation(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -514,6 +535,7 @@ GetOsSafeBootMode(
+ #pragma region OneCore Family or App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -523,6 +545,7 @@ EnumSystemFirmwareTables(
+     _In_ DWORD BufferSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -549,6 +572,7 @@ DnsHostnameToComputerNameExW(
+     _Inout_ LPDWORD nSize
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -572,6 +596,7 @@ SetComputerNameEx2W(
+ #define SetComputerNameEx2 SetComputerNameEx2W
+ #endif
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -581,6 +606,7 @@ SetSystemTimeAdjustment(
+     _In_ BOOL bTimeAdjustmentDisabled
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -590,6 +616,7 @@ SetSystemTimeAdjustmentPrecise(
+     _In_ BOOL bTimeAdjustmentDisabled
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -602,6 +629,7 @@ InstallELAMCertificateInfo(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -650,6 +678,7 @@ GetIntegratedDisplaySize(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -657,6 +686,7 @@ SetComputerNameA(
+     _In_ LPCSTR lpComputerName
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -670,6 +700,7 @@ SetComputerNameW(
+ #define SetComputerName  SetComputerNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

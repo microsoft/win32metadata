@@ -1,0 +1,134 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
+index ff4742c89d..22007e4c96 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
+@@ -17,6 +17,9 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -29,6 +32,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ /****** Shapshot function **********************************************/
+ 
++_Win32_SetLastError_
+ HANDLE
+ WINAPI
+ CreateToolhelp32Snapshot(
+@@ -78,6 +82,7 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
+ #define HF32_DEFAULT      1  // process's default heap
+ #define HF32_SHARED       2  // is shared heap
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Heap32ListFirst(
+@@ -85,6 +90,7 @@ Heap32ListFirst(
+     LPHEAPLIST32 lphl
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Heap32ListNext(
+@@ -113,6 +119,7 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
+ #define LF32_FREE     0x00000002
+ #define LF32_MOVEABLE 0x00000004
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Heap32First(
+@@ -121,6 +128,7 @@ Heap32First(
+     ULONG_PTR th32HeapID
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Heap32Next(
+@@ -155,6 +163,7 @@ typedef struct tagPROCESSENTRY32W
+ typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
+ typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Process32FirstW(
+@@ -162,6 +171,7 @@ Process32FirstW(
+     LPPROCESSENTRY32W lppe
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Process32NextW(
+@@ -185,6 +195,7 @@ typedef struct tagPROCESSENTRY32
+ typedef PROCESSENTRY32 *  PPROCESSENTRY32;
+ typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Process32First(
+@@ -192,6 +203,7 @@ Process32First(
+     LPPROCESSENTRY32 lppe
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Process32Next(
+@@ -222,6 +234,7 @@ typedef struct tagTHREADENTRY32
+ typedef THREADENTRY32 *  PTHREADENTRY32;
+ typedef THREADENTRY32 *  LPTHREADENTRY32;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Thread32First(
+@@ -229,6 +242,7 @@ Thread32First(
+     LPTHREADENTRY32 lpte
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Thread32Next(
+@@ -254,6 +268,7 @@ typedef struct tagMODULEENTRY32W
+ typedef MODULEENTRY32W *  PMODULEENTRY32W;
+ typedef MODULEENTRY32W *  LPMODULEENTRY32W;
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Module32FirstW(
+@@ -261,6 +276,7 @@ Module32FirstW(
+     LPMODULEENTRY32W lpme
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Module32NextW(
+@@ -289,6 +305,7 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
+ // in th32ProcessID's process context.
+ //
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Module32First(
+@@ -296,6 +313,7 @@ Module32First(
+     LPMODULEENTRY32 lpme
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ Module32Next(

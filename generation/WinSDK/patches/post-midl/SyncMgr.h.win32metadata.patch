@@ -1,0 +1,337 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
+index 0065cbee9f..0135589964 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -386,8 +390,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("a7f337a3-d20b-45cb-9ed7-87d094ca5045")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrHandlerCollection : public IUnknown
+     {
+     public:
+@@ -538,8 +543,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0001_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("04ec2e43-ac77-49f9-9b98-0307ef7a72a2")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrHandler : public IUnknown
+     {
+     public:
+@@ -759,8 +765,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0002_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("4ff1d798-ecf7-4524-aa81-1e362a0aef3a")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrHandlerInfo : public IUnknown
+     {
+     public:
+@@ -912,8 +919,9 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
+ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("90701133-be32-4129-a65c-99e616cafff4")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSyncItemContainer : public IUnknown
+     {
+     public:
+@@ -1068,8 +1076,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0004_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrSyncItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("b20b24ce-2593-4f04-bd8b-7ad6c45051cd")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSyncItem : public IUnknown
+     {
+     public:
+@@ -1250,8 +1259,9 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
+ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e7fd9502-be0c-4464-90a1-2b5277031232")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSyncItemInfo : public IUnknown
+     {
+     public:
+@@ -1381,8 +1391,9 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
+ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("54b3abf3-f085-4181-b546-e29c403c726b")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IEnumSyncMgrSyncItems : public IUnknown
+     {
+     public:
+@@ -1556,8 +1567,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0007_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrSessionCreator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("17f48517-f305-4321-a08d-b25a834918fd")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSessionCreator : public IUnknown
+     {
+     public:
+@@ -1653,8 +1665,9 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
+ EXTERN_C const IID IID_ISyncMgrSyncCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("884ccd87-b139-4937-a4ba-4f8e19513fbe")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSyncCallback : public IUnknown
+     {
+     public:
+@@ -1899,8 +1912,9 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
+ EXTERN_C const IID IID_ISyncMgrUIOperation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("fc7cfa47-dfe1-45b5-a049-8cfd82bec271")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrUIOperation : public IUnknown
+     {
+     public:
+@@ -1986,8 +2000,9 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
+ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("64522e52-848b-4015-89ce-5a36f00b94ff")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrEventLinkUIOperation : public ISyncMgrUIOperation
+     {
+     public:
+@@ -2087,8 +2102,9 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
+ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("459a6c84-21d2-4ddc-8a53-f023a46066f2")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrScheduleWizardUIOperation : public ISyncMgrUIOperation
+     {
+     public:
+@@ -2182,8 +2198,9 @@ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
+ EXTERN_C const IID IID_ISyncMgrSyncResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrSyncResult : public IUnknown
+     {
+     public:
+@@ -2312,8 +2329,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0013_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9B63616C-36B2-46BC-959F-C1593952D19B")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrControl : public IUnknown
+     {
+     public:
+@@ -2677,8 +2695,9 @@ EXTERN_C const IID IID_ISyncMgrControl;
+ EXTERN_C const IID IID_ISyncMgrEventStore;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("37e412f9-016e-44c2-81ff-db3add774266")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrEventStore : public IUnknown
+     {
+     public:
+@@ -2809,8 +2828,9 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
+ EXTERN_C const IID IID_ISyncMgrEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrEvent : public IUnknown
+     {
+     public:
+@@ -3004,8 +3024,9 @@ EXTERN_C const IID IID_ISyncMgrEvent;
+ EXTERN_C const IID IID_IEnumSyncMgrEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("c81a1d4e-8cf7-4683-80e0-bcae88d677b6")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IEnumSyncMgrEvents : public IUnknown
+     {
+     public:
+@@ -3150,8 +3171,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0017_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrConflictStore;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("cf8fc579-c396-4774-85f1-d908a831156e")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictStore : public IUnknown
+     {
+     public:
+@@ -3300,8 +3322,9 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
+ EXTERN_C const IID IID_IEnumSyncMgrConflict;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("82705914-dda3-4893-ba99-49de6c8c8036")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IEnumSyncMgrConflict : public IUnknown
+     {
+     public:
+@@ -3449,8 +3472,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0019_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrConflict;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9c204249-c443-4ba4-85ed-c972681db137")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflict : public IUnknown
+     {
+     public:
+@@ -3625,8 +3649,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0020_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("40A3D052-8BFF-4c4b-A338-D4A395700DE9")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrResolutionHandler : public IUnknown
+     {
+     public:
+@@ -3772,8 +3797,9 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
+ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("0b4f5353-fd2b-42cd-8763-4779f2d508a3")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictPresenter : public IUnknown
+     {
+     public:
+@@ -3890,8 +3916,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0022_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("c405a219-25a2-442e-8743-b845a2cee93f")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictResolveInfo : public IUnknown
+     {
+     public:
+@@ -4090,8 +4117,9 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
+ EXTERN_C const IID IID_ISyncMgrConflictFolder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictFolder : public IUnknown
+     {
+     public:
+@@ -4185,6 +4213,7 @@ typedef struct CONFIRM_CONFLICT_ITEM
+     } 	CONFIRM_CONFLICT_ITEM;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
++_Windows_SupportedOS_WindowsVista_
+ __inline void FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)
+ {
+     if (pcci->pShellItem)
+@@ -4219,8 +4248,9 @@ extern RPC_IF_HANDLE __MIDL_itf_syncmgr_0000_0024_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ISyncMgrConflictItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9C7EAD52-8023-4936-A4DB-D2A9A99E436A")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictItems : public IUnknown
+     {
+     public:
+@@ -4323,8 +4353,9 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
+ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("458725B9-129D-4135-A998-9CEAFEC27007")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ISyncMgrConflictResolutionItems : public IUnknown
+     {
+     public:
+@@ -4519,9 +4550,13 @@ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *,
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+ void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+@@ -4529,9 +4564,13 @@ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RP
+ unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
+ /* end of Additional Prototypes */

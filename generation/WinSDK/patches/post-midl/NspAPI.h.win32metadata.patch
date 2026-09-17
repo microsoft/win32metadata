@@ -1,0 +1,109 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
+index 31422b6616..f8fb1bdd1d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
+@@ -29,6 +29,9 @@ Notes:
+ #define _NSPAPI_INCLUDED
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -537,6 +540,7 @@ typedef struct _SERVICE_ASYNC_INFO {
+ //
+ // Public NSP API prototypes.
+ //
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ EnumProtocolsA (
+@@ -547,6 +551,7 @@ EnumProtocolsA (
+ //
+ // Public NSP API prototypes.
+ //
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ EnumProtocolsW (
+@@ -560,6 +565,7 @@ EnumProtocolsW (
+ #define EnumProtocols  EnumProtocolsA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetAddressByNameA (
+@@ -574,6 +580,7 @@ GetAddressByNameA (
+     _Inout_updates_opt_(*lpdwAliasBufferLength) LPSTR  lpAliasBuffer,
+     _Inout_ LPDWORD               lpdwAliasBufferLength
+     );
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetAddressByNameW (
+@@ -594,12 +601,14 @@ GetAddressByNameW (
+ #define GetAddressByName  GetAddressByNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetTypeByNameA (
+     _In_    LPSTR         lpServiceName,
+     _Inout_ LPGUID        lpServiceType
+     );
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetTypeByNameW (
+@@ -612,6 +621,7 @@ GetTypeByNameW (
+ #define GetTypeByName  GetTypeByNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetNameByTypeA (
+@@ -619,6 +629,7 @@ GetNameByTypeA (
+     _Out_writes_bytes_(dwNameLength) LPSTR         lpServiceName,
+     _In_   DWORD           dwNameLength
+     );
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetNameByTypeW (
+@@ -632,6 +643,7 @@ GetNameByTypeW (
+ #define GetNameByType  GetNameByTypeA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ SetServiceA (
+@@ -642,6 +654,7 @@ SetServiceA (
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo,
+     _Out_    LPDWORD              lpdwStatusFlags
+     );
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ SetServiceW (
+@@ -658,6 +671,7 @@ SetServiceW (
+ #define SetService  SetServiceA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetServiceA (
+@@ -669,6 +683,7 @@ GetServiceA (
+     _Inout_  LPDWORD              lpdwBufferSize,
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo
+     );
++_Win32_SetLastError_
+ INT
+ APIENTRY
+ GetServiceW (

@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
+index 1785a20834..9ec8d6e9f5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
+@@ -20,6 +20,9 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -1450,13 +1453,16 @@ typedef const NSPV2_ROUTINE * PCNSPV2_ROUTINE, * LPCNSPV2_ROUTINE;
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
+ INT WSAAPI WSAAdvertiseProvider(
+         _In_                const GUID *                    puuidProviderId,
+         _In_                const LPCNSPV2_ROUTINE          pNSPv2Routine);
+ 
++_Win32_SetLastError_
+ INT WSAAPI WSAUnadvertiseProvider(
+         _In_                const GUID *                    puuidProviderId);
+ 
++_Win32_SetLastError_
+ INT WSAAPI WSAProviderCompleteAsyncCall(
+         _In_                HANDLE                          hAsyncCall,
+         _In_                INT                             iRetCode);

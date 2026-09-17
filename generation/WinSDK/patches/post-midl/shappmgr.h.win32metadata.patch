@@ -1,0 +1,70 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
+index 1679c95cd5..c1a231663e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -188,8 +192,9 @@ typedef struct _tagSlowAppInfo *PSLOWAPPINFO;
+ EXTERN_C const IID IID_IShellApp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("A3E14960-935F-11D1-B8B8-006008059382")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IShellApp : public IUnknown
+     {
+     public:
+@@ -346,8 +351,9 @@ typedef struct _PubAppInfo *PPUBAPPINFO;
+ EXTERN_C const IID IID_IPublishedApp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("1BC752E0-9046-11D1-B8B3-006008059382")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IPublishedApp : public IShellApp
+     {
+     public:
+@@ -499,8 +505,9 @@ EXTERN_C const IID IID_IPublishedApp;
+ EXTERN_C const IID IID_IPublishedApp2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("12B81347-1B3A-4A04-AA61-3F768B67FD7E")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPublishedApp2 : public IPublishedApp
+     {
+     public:
+@@ -660,8 +667,9 @@ EXTERN_C const IID IID_IPublishedApp2;
+ EXTERN_C const IID IID_IEnumPublishedApps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("0B124F8C-91F0-11D1-B8B5-006008059382")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IEnumPublishedApps : public IUnknown
+     {
+     public:
+@@ -756,8 +764,9 @@ EXTERN_C const IID IID_IEnumPublishedApps;
+ EXTERN_C const IID IID_IAppPublisher;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("07250A10-9CF9-11D1-9076-006008059382")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IAppPublisher : public IUnknown
+     {
+     public:

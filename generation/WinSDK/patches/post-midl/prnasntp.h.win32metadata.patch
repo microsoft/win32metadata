@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h b/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
+index 27bbc74c2b..492343b6dd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
+@@ -20,6 +20,9 @@ Revision History:
+ #define _PRINTASYNCNOTIFYP_H_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -481,12 +484,14 @@ RouterRegisterForPrintAsyncNotifications(
+ 
+ 
+ 
++_Win32_ImportLibrary_("SPOOLSS.dll")
+ HRESULT
+ WINAPI
+ RouterUnregisterForPrintAsyncNotifications(
+     _In_ HANDLE  hNotify
+     );
+ 
++_Win32_ImportLibrary_("SPOOLSS.dll")
+ HRESULT
+ WINAPI
+ RouterCreatePrintAsyncNotificationChannel(
+@@ -498,6 +503,7 @@ RouterCreatePrintAsyncNotificationChannel(
+     _Outptr_ IPrintAsyncNotifyChannel            **ppIAsynchNotification
+     );
+ 
++_Win32_ImportLibrary_("SPOOLSS.dll")
+ HRESULT
+ WINAPI
+ RouterGetPrintClassObject(

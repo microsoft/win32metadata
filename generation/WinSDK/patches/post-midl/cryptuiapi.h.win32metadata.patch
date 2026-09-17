@@ -1,0 +1,13 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
+index e5fec80078..8b981c7f94 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
+@@ -909,7 +909,7 @@ typedef struct _CRYPTUI_WIZ_IMPORT_SUBJECT_INFO
+         HCERTSTORE          hCertStore;
+     };
+ 
+-    DWORD                   dwFlags;            //Required if pwszFileName contains a PFX BLOB.
++    CRYPT_KEY_FLAGS                   dwFlags;            //Required if pwszFileName contains a PFX BLOB.
+                                                 //Ignored otherwise
+                                                 //This is the same flag for PFXImportCertStore
+     LPCWSTR                 pwszPassword;       //Required if pwszFileName contains a PFX BLOB.

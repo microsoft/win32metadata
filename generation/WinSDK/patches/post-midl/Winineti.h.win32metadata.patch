@@ -1,0 +1,148 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+index d951d495eb..4806ed5567 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+@@ -1,5 +1,8 @@
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -1042,6 +1045,7 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ (0x100)
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE (0x300)
+ 
++_Win32_SetLastError_
+ BOOLAPI CreateUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ LPCSTR lpCachePrefix,
+@@ -1052,6 +1056,7 @@ BOOLAPI CreateUrlCacheContainerA(
+     _Reserved_ LPVOID pvBuffer,
+     _Reserved_ LPDWORD cbBuffer
+     );
++_Win32_SetLastError_
+ BOOLAPI CreateUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ LPCWSTR lpCachePrefix,
+@@ -1068,10 +1073,12 @@ BOOLAPI CreateUrlCacheContainerW(
+ #define CreateUrlCacheContainer  CreateUrlCacheContainerA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ DWORD dwOptions
+     );
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ DWORD dwOptions
+@@ -1161,11 +1168,13 @@ typedef enum {
+ } WININET_SYNC_MODE;
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI FreeUrlCacheSpaceA(
+     _In_opt_ LPCSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+     );
++_Win32_SetLastError_
+ BOOLAPI FreeUrlCacheSpaceW(
+     _In_opt_ LPCWSTR lpszCachePath,
+     _In_ DWORD dwSize,
+@@ -1229,12 +1238,14 @@ DWORD UrlCacheGetGlobalCacheSize(
+ #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
+ #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheConfigInfoA(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
+     _Reserved_ LPDWORD lpcbCacheConfigInfo,
+     _In_ DWORD dwFieldControl
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheConfigInfoW(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,
+@@ -1783,12 +1794,14 @@ INTERNETAPI_(DWORD) InternetHangUp(
+ #define INTERENT_GOONLINE_NOPROMPT 0x00000002
+ #define INTERENT_GOONLINE_MASK     0x00000003
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnlineA(
+     _In_opt_ LPCSTR lpszURL,
+     _In_ HWND     hwndParent,
+     _In_ DWORD    dwFlags
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnlineW(
+     _In_opt_ LPCWSTR lpszURL,
+     _In_ HWND     hwndParent,
+@@ -1801,6 +1814,7 @@ BOOLAPI InternetGoOnlineW(
+ #ifdef _WINX32_
+ #define InternetGoOnline  InternetGoOnlineA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnline(
+     _In_opt_ LPSTR   lpszURL,
+     _In_ HWND     hwndParent,
+@@ -1809,6 +1823,7 @@ BOOLAPI InternetGoOnline(
+ #endif // _WINX32_
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetAutodial(
+     _In_       DWORD  dwFlags,
+     _In_opt_ HWND   hwndParent);
+@@ -1821,13 +1836,16 @@ BOOLAPI InternetAutodial(
+ 
+ 
+ #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
++_Win32_SetLastError_
+ BOOLAPI InternetAutodialHangup(
+     _Reserved_ DWORD    dwReserved);
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGetConnectedState(
+     _Out_  LPDWORD  lpdwFlags,
+     _Reserved_ DWORD    dwReserved);
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetConnectedStateExA(
+     _Out_opt_ LPDWORD lpdwFlags,
+@@ -1836,6 +1854,7 @@ InternetGetConnectedStateExA(
+     _Reserved_ DWORD dwReserved
+ );
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetConnectedStateExW(
+     _Out_opt_ LPDWORD lpdwFlags,
+@@ -1880,10 +1899,12 @@ ReadGuidsForConnectedNetworks(
+ #define INTERNET_AUTOPROXY_INIT_MASK (INTERNET_AUTOPROXY_INIT_DEFAULT|INTERNET_AUTOPROXY_INIT_DOWNLOADSYNC|INTERNET_AUTOPROXY_INIT_QUERYSTATE|INTERNET_AUTOPROXY_INIT_ONLYQUERY)
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetInitializeAutoProxyDll(
+     _In_ DWORD dwReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI DetectAutoProxyUrl(
+     _Out_writes_(cchAutoProxyUrl) PSTR pszAutoProxyUrl,
+     _In_ DWORD cchAutoProxyUrl,
+@@ -1903,6 +1924,7 @@ BOOLAPI CreateMD5SSOHash (
+ #ifdef _WINX32_
+ #define InternetGetConnectedStateEx  InternetGetConnectedStateExA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetGetConnectedStateEx(
+     _Out_ LPDWORD lpdwFlags,
+     _Out_writes_opt_(dwNameLen) LPSTR lpszConnectionName,

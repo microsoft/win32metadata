@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
+index 35e5990cbb..e748329079 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
+@@ -1,4 +1,7 @@
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ /*++
+ 
+@@ -789,6 +792,7 @@ WNetGetNetworkInformationW(
+ //  Error handling.
+ //
+ 
++_Win32_SetLastError_
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorA(
+@@ -798,6 +802,7 @@ WNetGetLastErrorA(
+     _Out_writes_(nNameBufSize) LPSTR  lpNameBuf,
+     _In_ DWORD      nNameBufSize
+     );
++_Win32_SetLastError_
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorW(

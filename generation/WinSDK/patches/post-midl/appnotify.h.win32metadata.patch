@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
+index 7362f8b4f2..c139c85764 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
+@@ -12,6 +12,10 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifdef _CONTRACT_GEN        // Header(s) needed for contract generation only.
+ #include <windows.h>
+ 
+@@ -47,7 +51,7 @@ NTAPI
+ RegisterAppStateChangeNotification(
+     _In_ PAPPSTATE_CHANGE_ROUTINE Routine,
+     _In_opt_ PVOID Context,
+-    _Out_ PAPPSTATE_REGISTRATION* Registration
++    _Win32_RAIIFree_(UnregisterAppStateChangeNotification, 0) _Out_ PAPPSTATE_REGISTRATION* Registration
+     );
+ 
+ APICONTRACT
+@@ -72,7 +76,7 @@ NTAPI
+ RegisterAppConstrainedChangeNotification(
+     _In_ PAPPCONSTRAIN_CHANGE_ROUTINE Routine,
+     _In_opt_ PVOID Context,
+-    _Out_ PAPPCONSTRAIN_REGISTRATION* Registration
++    _Win32_RAIIFree_(UnregisterAppConstrainedChangeNotification, 0) _Out_ PAPPCONSTRAIN_REGISTRATION* Registration
+     );
+ 
+ APICONTRACT
