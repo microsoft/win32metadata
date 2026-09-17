@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
+index 49ef584531..8a618659fc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
+@@ -2128,6 +2128,12 @@ STDAPI MFCreateASFIndexerByteStream(
+ extern RPC_IF_HANDLE __MIDL_itf_wmcontainer_0000_0006_v0_0_c_ifspec;
+ extern RPC_IF_HANDLE __MIDL_itf_wmcontainer_0000_0006_v0_0_s_ifspec;
+ 
++typedef enum ASF_STATUSFLAGS
++{
++    ASF_STATUSFLAGS_INCOMPLETE = 0x1,
++    ASF_STATUSFLAGS_NONFATAL_ERROR = 0x2
++} ASF_STATUSFLAGS;
++
+ #ifndef __IMFASFSplitter_INTERFACE_DEFINED__
+ #define __IMFASFSplitter_INTERFACE_DEFINED__
+ 
+@@ -2177,7 +2183,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNextSample( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwStatusFlags,
++            _Out_  ASF_STATUSFLAGS *pdwStatusFlags,
+             /* [annotation][out] */ 
+             _Out_  WORD *pwStreamNumber,
+             /* [annotation][out] */ 
+@@ -2262,7 +2268,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
+         HRESULT ( STDMETHODCALLTYPE *GetNextSample )( 
+             IMFASFSplitter * This,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwStatusFlags,
++            _Out_  ASF_STATUSFLAGS *pdwStatusFlags,
+             /* [annotation][out] */ 
+             _Out_  WORD *pwStreamNumber,
+             /* [annotation][out] */ 
+@@ -2419,13 +2425,6 @@ enum MFASF_SPLITTERFLAGS
+         MFASF_SPLITTER_WMDRM	= 0x2
+     } 	MFASF_SPLITTERFLAGS;
+ 
+-typedef 
+-enum ASF_STATUSFLAGS
+-    {
+-        ASF_STATUSFLAGS_INCOMPLETE	= 0x1,
+-        ASF_STATUSFLAGS_NONFATAL_ERROR	= 0x2
+-    } 	ASF_STATUSFLAGS;
+-
+ EXTERN_GUID(MFASFSPLITTER_PACKET_BOUNDARY, 0xfe584a05, 0xe8d6, 0x42e3, 0xb1, 0x76, 0xf1, 0x21, 0x17, 0x5, 0xfb, 0x6f);
+ typedef 
+ enum MFASF_MULTIPLEXERFLAGS
+@@ -3208,5 +3207,3 @@ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned lo
+ #endif
+ 
+ #endif
+-
+-

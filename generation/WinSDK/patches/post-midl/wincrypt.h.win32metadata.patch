@@ -1,0 +1,2527 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
+index c5a1f165fc..925a81c007 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
+@@ -37,6 +37,105 @@
+ extern "C" {
+ #endif
+ 
++#if defined(WIN32METADATA)
++enum class CERT_FIND_FLAGS : int;
++enum class CERT_QUERY_OBJECT_TYPE : unsigned int;
++enum class CERT_QUERY_CONTENT_TYPE : unsigned int;
++enum class CERT_QUERY_CONTENT_TYPE_FLAGS : unsigned int;
++enum class CERT_QUERY_FORMAT_TYPE : unsigned int;
++enum class CERT_QUERY_FORMAT_TYPE_FLAGS : unsigned int;
++enum class CERT_QUERY_ENCODING_TYPE : unsigned int;
++enum class CERT_RDN_ATTR_VALUE_TYPE : int;
++enum class CERT_STRING_TYPE : int;
++enum class CERT_KEY_SPEC : int;
++enum class CRYPT_STRING : int;
++enum class CRYPT_IMPORT_PUBLIC_KEY_FLAGS : int;
++enum class CRYPT_OBJECT_LOCATOR_RELEASE_REASON : int;
++enum class CRYPT_ACQUIRE_FLAGS : int;
++enum class CRYPT_GET_URL_FLAGS : int;
++enum class CERT_STORE_SAVE_AS : int;
++enum class CERT_FIND_CHAIN_IN_STORE_FLAGS : int;
++enum class CERT_CONTROL_STORE_FLAGS : int;
++enum class CERT_STORE_SAVE_TO : int;
++enum class CRYPT_KEY_PARAM_ID : int;
++enum class CRYPT_KEY_FLAGS : int;
++enum class CERT_ALT_NAME : int;
++enum class CRYPT_MSG_TYPE : int;
++enum class CRYPT_DEFAULT_CONTEXT_FLAGS : int;
++enum class CRYPT_VERIFY_CERT_FLAGS : int;
++enum class CRYPT_SET_HASH_PARAM : int;
++enum class CERT_SYSTEM_STORE_FLAGS : int;
++enum class CERT_CREATE_SELFSIGN_FLAGS : int;
++enum class CRYPT_DEFAULT_CONTEXT_TYPE : int;
++enum class CERT_FIND_TYPE : int;
++enum class CRYPT_FIND_FLAGS : int;
++enum class CERT_REVOCATION_STATUS_REASON : int;
++enum class CERT_ROOT_PROGRAM_FLAGS : int;
++enum class CERT_LOGOTYPE_CHOICE : int;
++enum class CMSG_KEY_AGREE_OPTION : int;
++enum class CERT_LOGOTYPE_OPTION : int;
++enum class CERT_STORE_PROV_FLAGS : int;
++enum class CMSG_KEY_AGREE_ORIGINATOR : int;
++enum class CERT_BIOMETRIC_DATA_TYPE : int;
++enum class CERT_CHAIN_POLICY_FLAGS : int;
++enum class CERT_STRONG_SIGN_FLAGS : int;
++enum class CERT_LOGOTYPE_IMAGE_INFO_TYPE : int;
++enum class CERT_SELECT_CRITERIA_TYPE : int;
++enum class CRYPT_TIMESTAMP_VERSION : int;
++enum class CERT_ID_OPTION : int;
++enum class HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE : int;
++enum class CRYPT_TIMESTAMP_RESPONSE_STATUS : int;
++#else
++typedef DWORD CERT_FIND_FLAGS;
++typedef DWORD CERT_QUERY_OBJECT_TYPE;
++typedef DWORD CERT_QUERY_CONTENT_TYPE;
++typedef DWORD CERT_QUERY_CONTENT_TYPE_FLAGS;
++typedef DWORD CERT_QUERY_FORMAT_TYPE;
++typedef DWORD CERT_QUERY_FORMAT_TYPE_FLAGS;
++typedef DWORD CERT_QUERY_ENCODING_TYPE;
++typedef LONG CERT_RDN_ATTR_VALUE_TYPE;
++typedef DWORD CERT_STRING_TYPE;
++typedef DWORD CERT_KEY_SPEC;
++typedef DWORD CRYPT_STRING;
++typedef DWORD CRYPT_IMPORT_PUBLIC_KEY_FLAGS;
++typedef DWORD CRYPT_OBJECT_LOCATOR_RELEASE_REASON;
++typedef DWORD CRYPT_ACQUIRE_FLAGS;
++typedef DWORD CRYPT_GET_URL_FLAGS;
++typedef DWORD CERT_STORE_SAVE_AS;
++typedef DWORD CERT_FIND_CHAIN_IN_STORE_FLAGS;
++typedef DWORD CERT_CONTROL_STORE_FLAGS;
++typedef DWORD CERT_STORE_SAVE_TO;
++typedef DWORD CRYPT_KEY_PARAM_ID;
++typedef DWORD CRYPT_KEY_FLAGS;
++typedef LONG CERT_ALT_NAME;
++typedef DWORD CRYPT_MSG_TYPE;
++typedef DWORD CRYPT_DEFAULT_CONTEXT_FLAGS;
++typedef DWORD CRYPT_VERIFY_CERT_FLAGS;
++typedef DWORD CRYPT_SET_HASH_PARAM;
++typedef DWORD CERT_SYSTEM_STORE_FLAGS;
++typedef DWORD CERT_CREATE_SELFSIGN_FLAGS;
++typedef DWORD CRYPT_DEFAULT_CONTEXT_TYPE;
++typedef DWORD CERT_FIND_TYPE;
++typedef DWORD CRYPT_FIND_FLAGS;
++typedef DWORD CERT_REVOCATION_STATUS_REASON;
++typedef DWORD CERT_ROOT_PROGRAM_FLAGS;
++typedef DWORD CERT_LOGOTYPE_CHOICE;
++typedef DWORD CMSG_KEY_AGREE_OPTION;
++typedef DWORD CERT_LOGOTYPE_OPTION;
++typedef DWORD CERT_STORE_PROV_FLAGS;
++typedef DWORD CMSG_KEY_AGREE_ORIGINATOR;
++typedef DWORD CERT_BIOMETRIC_DATA_TYPE;
++typedef DWORD CERT_CHAIN_POLICY_FLAGS;
++typedef DWORD CERT_STRONG_SIGN_FLAGS;
++typedef DWORD CERT_LOGOTYPE_IMAGE_INFO_TYPE;
++typedef DWORD CERT_SELECT_CRITERIA_TYPE;
++typedef DWORD CRYPT_TIMESTAMP_VERSION;
++typedef DWORD CERT_ID_OPTION;
++typedef DWORD HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE;
++typedef DWORD CRYPT_TIMESTAMP_RESPONSE_STATUS;
++#endif
++
++
+ /*
+ * The relationship between partitions and families (from: winapifamily.h) 
+ *
+@@ -1133,7 +1232,7 @@ WINAPI
+ CryptGenKey(
+     _In_    HCRYPTPROV  hProv,
+     _In_    ALG_ID      Algid,
+-    _In_    DWORD       dwFlags,
++    _In_    CRYPT_KEY_FLAGS       dwFlags,
+     _Out_   HCRYPTKEY   *phKey
+     );
+ 
+@@ -1160,7 +1259,7 @@ BOOL
+ WINAPI
+ CryptSetKeyParam(
+     _In_    HCRYPTKEY   hKey,
+-    _In_    DWORD       dwParam,
++    _In_    CRYPT_KEY_PARAM_ID       dwParam,
+     _In_    CONST BYTE  *pbData,
+     _In_    DWORD       dwFlags
+     );
+@@ -1170,7 +1269,7 @@ BOOL
+ WINAPI
+ CryptGetKeyParam(
+     _In_                                            HCRYPTKEY   hKey,
+-    _In_                                            DWORD   dwParam,
++    _In_                                            CRYPT_KEY_PARAM_ID   dwParam,
+     _Out_writes_bytes_to_opt_(*pdwDataLen, *pdwDataLen) BYTE    *pbData,
+     _Inout_                                         DWORD   *pdwDataLen,
+     _In_                                            DWORD   dwFlags
+@@ -1181,7 +1280,7 @@ BOOL
+ WINAPI
+ CryptSetHashParam(
+     _In_    HCRYPTHASH  hHash,
+-    _In_    DWORD       dwParam,
++    _In_    CRYPT_SET_HASH_PARAM       dwParam,
+     _In_    CONST BYTE  *pbData,
+     _In_    DWORD       dwFlags
+     );
+@@ -1243,7 +1342,7 @@ CryptExportKey(
+     _In_                                            HCRYPTKEY   hKey,
+     _In_                                            HCRYPTKEY   hExpKey,
+     _In_                                            DWORD   dwBlobType,
+-    _In_                                            DWORD   dwFlags,
++    _In_                                            CRYPT_KEY_FLAGS   dwFlags,
+     _Out_writes_bytes_to_opt_(*pdwDataLen, *pdwDataLen) BYTE    *pbData,
+     _Inout_                                         DWORD   *pdwDataLen
+     );
+@@ -1256,7 +1355,7 @@ CryptImportKey(
+     _In_reads_bytes_(dwDataLen)  CONST BYTE  *pbData,
+     _In_                    DWORD       dwDataLen,
+     _In_                    HCRYPTKEY   hPubKey,
+-    _In_                    DWORD       dwFlags,
++    _In_                    CRYPT_KEY_FLAGS       dwFlags,
+     _Out_                   HCRYPTKEY   *phKey
+     );
+ 
+@@ -2635,7 +2734,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptFormatObject(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ DWORD dwFormatType,
+     _In_ DWORD dwFormatStrType,
+     _In_opt_ void *pFormatStruct,
+@@ -2734,7 +2833,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptEncodeObjectEx(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR lpszStructType,
+     _In_ const void *pvStructInfo,
+     _In_ DWORD dwFlags,
+@@ -2747,7 +2846,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptEncodeObject(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR lpszStructType,
+     _In_ const void *pvStructInfo,
+     _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
+@@ -2839,7 +2938,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptDecodeObjectEx(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR lpszStructType,
+     _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
+     _In_ DWORD cbEncoded,
+@@ -2854,7 +2953,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptDecodeObject(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR lpszStructType,
+     _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
+     _In_ DWORD cbEncoded,
+@@ -5537,13 +5636,13 @@ typedef struct _CERT_LOGOTYPE_REFERENCE {
+ typedef struct _CERT_LOGOTYPE_IMAGE_INFO {
+     // CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE or
+     // CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE
+-    DWORD                       dwLogotypeImageInfoChoice;
++    CERT_LOGOTYPE_IMAGE_INFO_TYPE                       dwLogotypeImageInfoChoice;
+ 
+     DWORD                       dwFileSize;     // In octets
+     DWORD                       dwXSize;        // Horizontal size in pixels
+     DWORD                       dwYSize;        // Vertical size in pixels
+ 
+-    DWORD                       dwLogotypeImageResolutionChoice;
++    CERT_LOGOTYPE_CHOICE                       dwLogotypeImageResolutionChoice;
+     union {
+         // CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE
+         // No resolution value
+@@ -5599,7 +5698,7 @@ typedef struct _CERT_LOGOTYPE_DATA {
+ 
+ 
+ typedef struct _CERT_LOGOTYPE_INFO {
+-    DWORD                       dwLogotypeInfoChoice;
++    CERT_LOGOTYPE_OPTION                       dwLogotypeInfoChoice;
+     union {
+         // CERT_LOGOTYPE_DIRECT_INFO_CHOICE
+         PCERT_LOGOTYPE_DATA         pLogotypeDirectInfo;
+@@ -5640,7 +5739,7 @@ typedef struct _CERT_LOGOTYPE_EXT_INFO {
+ //==========================================================================
+ 
+ typedef struct _CERT_BIOMETRIC_DATA {
+-    DWORD                       dwTypeOfBiometricDataChoice;
++    CERT_BIOMETRIC_DATA_TYPE                       dwTypeOfBiometricDataChoice;
+     union {
+         // CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE
+         DWORD                       dwPredefined;
+@@ -5764,7 +5863,7 @@ typedef struct _OCSP_BASIC_REVOKED_INFO {
+     FILETIME                    RevocationDate;
+ 
+     // See X509_CRL_REASON_CODE for list of reason codes
+-    DWORD                       dwCrlReasonCode;
++    CERT_REVOCATION_STATUS_REASON                       dwCrlReasonCode;
+ } OCSP_BASIC_REVOKED_INFO, *POCSP_BASIC_REVOKED_INFO;
+ 
+ typedef struct _OCSP_BASIC_RESPONSE_ENTRY {
+@@ -6691,7 +6790,7 @@ CryptFindLocalizedName(
+ //==========================================================================
+ 
+ typedef struct _CERT_STRONG_SIGN_SERIALIZED_INFO {
+-    DWORD                   dwFlags;
++    CERT_STRONG_SIGN_FLAGS                   dwFlags;
+     LPWSTR                  pwszCNGSignHashAlgids;
+     LPWSTR                  pwszCNGPubKeyMinBitLengths; // Optional
+ } CERT_STRONG_SIGN_SERIALIZED_INFO, *PCERT_STRONG_SIGN_SERIALIZED_INFO;
+@@ -6855,7 +6954,7 @@ typedef struct _CERT_ISSUER_SERIAL_NUMBER {
+ //  Certificate Identifier
+ //--------------------------------------------------------------------------
+ typedef struct _CERT_ID {
+-    DWORD   dwIdChoice;
++    CERT_ID_OPTION   dwIdChoice;
+     union {
+         // CERT_ID_ISSUER_SERIAL_NUMBER
+         CERT_ISSUER_SERIAL_NUMBER   IssuerSerialNumber;
+@@ -7136,7 +7235,7 @@ typedef struct _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
+     HCRYPTPROV_LEGACY           hCryptProv;
+     DWORD                       dwKeySpec;
+ 
+-    DWORD                       dwKeyChoice;
++    CMSG_KEY_AGREE_OPTION                       dwKeyChoice;
+     union {
+         // CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE
+         //
+@@ -7407,7 +7506,7 @@ WINAPI
+ CryptMsgOpenToEncode(
+     _In_ DWORD dwMsgEncodingType,
+     _In_ DWORD dwFlags,
+-    _In_ DWORD dwMsgType,
++    _In_ CRYPT_MSG_TYPE dwMsgType,
+     _In_ void const *pvMsgEncodeInfo,
+     _In_opt_ LPSTR pszInnerContentObjID,
+     _In_opt_ PCMSG_STREAM_INFO pStreamInfo
+@@ -7989,7 +8088,7 @@ typedef struct _CMSG_RECIPIENT_ENCRYPTED_KEY_INFO {
+ 
+ typedef struct _CMSG_KEY_AGREE_RECIPIENT_INFO {
+     DWORD                       dwVersion;
+-    DWORD                       dwOriginatorChoice;
++    CMSG_KEY_AGREE_ORIGINATOR                       dwOriginatorChoice;
+     union {
+         // CMSG_KEY_AGREE_ORIGINATOR_CERT
+         CERT_ID                     OriginatorCertId;
+@@ -8805,7 +8904,7 @@ typedef struct _CMSG_KEY_AGREE_ENCRYPT_INFO {
+     DWORD                       dwRecipientIndex;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+     CRYPT_DATA_BLOB             UserKeyingMaterial;
+-    DWORD                       dwOriginatorChoice;
++    CMSG_KEY_AGREE_ORIGINATOR                       dwOriginatorChoice;
+     union {
+         // CMSG_KEY_AGREE_ORIGINATOR_CERT
+         CERT_ID                     OriginatorCertId;
+@@ -9183,7 +9282,7 @@ typedef void *HCERTSTORE;
+ //--------------------------------------------------------------------------
+ // certenrolls_begin -- CERT_CONTEXT
+ typedef struct _CERT_CONTEXT {
+-    DWORD                   dwCertEncodingType;
++    CERT_QUERY_ENCODING_TYPE                   dwCertEncodingType;
+     BYTE                    *pbCertEncoded;
+     DWORD                   cbCertEncoded;
+     PCERT_INFO              pCertInfo;
+@@ -9202,7 +9301,7 @@ typedef const CERT_CONTEXT *PCCERT_CONTEXT;
+ //  copy (which also must be freed by calling CertFreeCRLContext).
+ //--------------------------------------------------------------------------
+ typedef struct _CRL_CONTEXT {
+-    DWORD                   dwCertEncodingType;
++    CERT_QUERY_ENCODING_TYPE                   dwCertEncodingType;
+     BYTE                    *pbCrlEncoded;
+     DWORD                   cbCrlEncoded;
+     PCRL_INFO               pCrlInfo;
+@@ -9530,7 +9629,7 @@ typedef struct _CRYPT_KEY_PROV_INFO {
+     LPWSTR                  pwszContainerName;
+     LPWSTR                  pwszProvName;
+     DWORD                   dwProvType;
+-    DWORD                   dwFlags;
++    CRYPT_KEY_FLAGS                   dwFlags;
+     DWORD                   cProvParam;
+     PCRYPT_KEY_PROV_PARAM   rgProvParam;
+     DWORD                   dwKeySpec;
+@@ -10578,7 +10677,7 @@ HCERTSTORE
+ WINAPI
+ CertOpenStore(
+     _In_ LPCSTR lpszStoreProvider,
+-    _In_ DWORD dwEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwEncodingType,
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+     _In_ DWORD dwFlags,
+     _In_opt_ const void *pvPara
+@@ -10605,7 +10704,7 @@ typedef struct _CERT_STORE_PROV_INFO {
+     DWORD               cStoreProvFunc;
+     void                **rgpvStoreProvFunc;
+     HCERTSTOREPROV      hStoreProv;
+-    DWORD               dwStoreProvFlags;
++    CERT_STORE_PROV_FLAGS               dwStoreProvFlags;
+     HCRYPTOIDFUNCADDR   hStoreProvFuncAddr2;
+ } CERT_STORE_PROV_INFO, *PCERT_STORE_PROV_INFO;
+ 
+@@ -10618,7 +10717,7 @@ typedef struct _CERT_STORE_PROV_INFO {
+ // call the appropriate provider callback function.
+ typedef BOOL (WINAPI *PFN_CERT_DLL_OPEN_STORE_PROV_FUNC)(
+     _In_ LPCSTR lpszStoreProvider,
+-    _In_ DWORD dwEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwEncodingType,
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+     _In_ DWORD dwFlags,
+     _In_opt_ const void *pvPara,
+@@ -11015,9 +11114,9 @@ BOOL
+ WINAPI
+ CertSaveStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwEncodingType,
+-    _In_ DWORD dwSaveAs,
+-    _In_ DWORD dwSaveTo,
++    _In_ CERT_QUERY_ENCODING_TYPE dwEncodingType,
++    _In_ CERT_STORE_SAVE_AS dwSaveAs,
++    _In_ CERT_STORE_SAVE_TO dwSaveTo,
+     _Inout_ void *pvSaveToPara,
+     _In_ DWORD dwFlags
+     );
+@@ -11077,7 +11176,7 @@ PCCERT_CONTEXT
+ WINAPI
+ CertGetSubjectCertificateFromStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_INFO pCertId           // Only the Issuer and SerialNumber
+                                       // fields are used
+     );
+@@ -11135,9 +11234,9 @@ PCCERT_CONTEXT
+ WINAPI
+ CertFindCertificateInStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ DWORD dwFindFlags,
+-    _In_ DWORD dwFindType,
++    _In_ CERT_FIND_FLAGS dwFindType,
+     _In_opt_ const void *pvFindPara,
+     _In_opt_ PCCERT_CONTEXT pPrevCertContext
+     );
+@@ -11560,7 +11659,7 @@ WINCRYPT32API
+ PCCERT_CONTEXT
+ WINAPI
+ CertCreateCertificateContext(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbCertEncoded) const BYTE *pbCertEncoded,
+     _In_ DWORD cbCertEncoded
+     );
+@@ -12008,7 +12107,7 @@ PCCRL_CONTEXT
+ WINAPI
+ CertFindCRLInStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ DWORD dwFindFlags,
+     _In_ DWORD dwFindType,
+     _In_opt_ const void *pvFindPara,
+@@ -12132,7 +12231,7 @@ WINCRYPT32API
+ PCCRL_CONTEXT
+ WINAPI
+ CertCreateCRLContext(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbCrlEncoded) const BYTE *pbCrlEncoded,
+     _In_ DWORD cbCrlEncoded
+     );
+@@ -12311,7 +12410,7 @@ BOOL
+ WINAPI
+ CertAddEncodedCertificateToStore(
+     _In_opt_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbCertEncoded) const BYTE *pbCertEncoded,
+     _In_ DWORD cbCertEncoded,
+     _In_ DWORD dwAddDisposition,
+@@ -12488,7 +12587,7 @@ BOOL
+ WINAPI
+ CertAddEncodedCRLToStore(
+     _In_opt_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbCrlEncoded) const BYTE *pbCrlEncoded,
+     _In_ DWORD cbCrlEncoded,
+     _In_ DWORD dwAddDisposition,
+@@ -12763,7 +12862,7 @@ CertFindCTLInStore(
+     _In_ HCERTSTORE hCertStore,
+     _In_ DWORD dwMsgAndCertEncodingType,
+     _In_ DWORD dwFindFlags,
+-    _In_ DWORD dwFindType,
++    _In_ CERT_FIND_TYPE dwFindType,
+     _In_opt_ const void *pvFindPara,
+     _In_opt_ PCCTL_CONTEXT pPrevCtlContext
+     );
+@@ -12867,7 +12966,7 @@ BOOL
+ WINAPI
+ CertAddEncodedCTLToStore(
+     _In_opt_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwMsgAndCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwMsgAndCertEncodingType,
+     _In_reads_bytes_(cbCtlEncoded) const BYTE *pbCtlEncoded,
+     _In_ DWORD cbCtlEncoded,
+     _In_ DWORD dwAddDisposition,
+@@ -12995,7 +13094,7 @@ BOOL
+ WINAPI
+ CertControlStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwFlags,
++    _In_ CERT_CONTROL_STORE_FLAGS dwFlags,
+     _In_ DWORD dwCtrlType,
+     _In_opt_ void const *pvCtrlPara
+     );
+@@ -13496,7 +13595,7 @@ typedef BOOL (WINAPI *PFN_CERT_ENUM_SYSTEM_STORE_LOCATION)(
+ 
+ typedef BOOL (WINAPI *PFN_CERT_ENUM_SYSTEM_STORE)(
+     _In_ const void *pvSystemStore,
+-    _In_ DWORD dwFlags,
++    _In_ CERT_SYSTEM_STORE_FLAGS dwFlags,
+     _In_ PCERT_SYSTEM_STORE_INFO pStoreInfo,
+     _Reserved_ void *pvReserved,
+     _Inout_opt_ void *pvArg
+@@ -14111,7 +14210,7 @@ typedef struct _CERT_REVOCATION_STATUS {
+     DWORD                   cbSize;
+     DWORD                   dwIndex;
+     DWORD                   dwError;
+-    DWORD                   dwReason;
++    CERT_REVOCATION_STATUS_REASON                   dwReason;
+ 
+     // Depending on cbSize, the following fields may optionally be returned.
+ 
+@@ -14315,7 +14414,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertCompareCertificate(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_INFO pCertId1,
+     _In_ PCERT_INFO pCertId2
+     );
+@@ -14329,7 +14428,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertCompareCertificateName(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_NAME_BLOB pCertName1,
+     _In_ PCERT_NAME_BLOB pCertName2
+     );
+@@ -14362,7 +14461,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertIsRDNAttrsInCertificateName(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ DWORD dwFlags,
+     _In_ PCERT_NAME_BLOB pCertName,
+     _In_ PCERT_RDN pRDN
+@@ -14380,7 +14479,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertComparePublicKeyInfo(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pPublicKey1,
+     _In_ PCERT_PUBLIC_KEY_INFO pPublicKey2
+     );
+@@ -14400,7 +14499,7 @@ WINCRYPT32API
+ DWORD
+ WINAPI
+ CertGetPublicKeyLength(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pPublicKey
+     );
+ 
+@@ -14425,7 +14524,7 @@ BOOL
+ WINAPI
+ CryptVerifyCertificateSignature(
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
+     _In_ DWORD cbEncoded,
+     _In_ PCERT_PUBLIC_KEY_INFO pPublicKey
+@@ -14462,12 +14561,12 @@ BOOL
+ WINAPI
+ CryptVerifyCertificateSignatureEx(
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ DWORD dwSubjectType,
+     _In_ void *pvSubject,
+     _In_ DWORD dwIssuerType,
+     _In_opt_ void *pvIssuer,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_VERIFY_CERT_FLAGS dwFlags,
+     _Inout_opt_ void *pvExtra
+     );
+ 
+@@ -14599,7 +14698,7 @@ BOOL
+ WINAPI
+ CryptHashToBeSigned(
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
+     _In_ DWORD cbEncoded,
+     _Out_writes_bytes_to_opt_(*pcbComputedHash, *pcbComputedHash) BYTE *pbComputedHash,
+@@ -14682,7 +14781,7 @@ CryptSignCertificate(
+     _In_opt_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
+ #endif
+     _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_reads_bytes_(cbEncodedToBeSigned) const BYTE *pbEncodedToBeSigned,
+     _In_ DWORD cbEncodedToBeSigned,
+     _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+@@ -14712,8 +14811,8 @@ CryptSignAndEncodeCertificate(
+ #else
+     _In_opt_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
+ #endif
+-    _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
+-    _In_ DWORD dwCertEncodingType,
++    _In_opt_ CERT_KEY_SPEC dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR lpszStructType,       // "to be signed"
+     _In_ const void *pvStructInfo,
+     _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+@@ -14748,7 +14847,7 @@ CryptSignAndEncodeCertificate(
+ #define CRYPT_OID_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC \
+     "CryptDllExtractEncodedSignatureParameters"
+ typedef BOOL (WINAPI *PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC)(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+     _Outptr_result_maybenull_ void **ppvDecodedSignPara, // LocalFree()
+     _Outptr_ LPWSTR *ppwszCNGHashAlgid      // LocalFree()
+@@ -14759,7 +14858,7 @@ typedef BOOL (WINAPI *PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC)(
+     "CryptDllSignAndEncodeHash"
+ typedef BOOL (WINAPI *PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC)(
+     _In_ NCRYPT_KEY_HANDLE hKey,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+     _In_opt_ void *pvDecodedSignPara,
+     _In_ LPCWSTR pwszCNGPubKeyAlgid,    // obtained from signature OID
+@@ -14775,7 +14874,7 @@ typedef BOOL (WINAPI *PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC)(
+ #define CRYPT_OID_VERIFY_ENCODED_SIGNATURE_FUNC \
+     "CryptDllVerifyEncodedSignature"
+ typedef BOOL (WINAPI *PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC)(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pPubKeyInfo,
+     _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+     _In_opt_ void *pvDecodedSignPara,
+@@ -14849,7 +14948,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertVerifyCRLRevocation(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_INFO pCertId,          // Only the Issuer and SerialNumber
+                                       // fields are used
+     _In_ DWORD cCrlInfo,
+@@ -14940,7 +15039,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertGetIntendedKeyUsage(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_INFO pCertInfo,
+     _Out_writes_bytes_all_(cbKeyUsage) BYTE *pbKeyUsage,
+     _In_ DWORD cbKeyUsage
+@@ -14986,9 +15085,9 @@ BOOL
+ WINAPI
+ CryptInstallDefaultContext(
+     _In_ HCRYPTPROV hCryptProv,
+-    _In_ DWORD dwDefaultType,
++    _In_ CRYPT_DEFAULT_CONTEXT_TYPE dwDefaultType,
+     _In_opt_ const void *pvDefaultPara,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_DEFAULT_CONTEXT_FLAGS dwFlags,
+     _Reserved_ void *pvReserved,
+     _Out_ HCRYPTDEFAULTCONTEXT *phDefaultContext
+     );
+@@ -15056,7 +15155,7 @@ WINAPI
+ CryptExportPublicKeyInfo(
+     _In_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
+     _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) PCERT_PUBLIC_KEY_INFO pInfo,
+     _Inout_ DWORD *pcbInfo
+     );
+@@ -15096,7 +15195,7 @@ WINAPI
+ CryptExportPublicKeyInfoEx(
+     _In_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
+     _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_opt_ LPSTR pszPublicKeyObjId,
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvAuxInfo,
+@@ -15115,7 +15214,7 @@ CryptExportPublicKeyInfoEx(
+     "CryptDllExportPublicKeyInfoEx2"
+ typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
+     _In_ NCRYPT_KEY_HANDLE hNCryptKey,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPSTR pszPublicKeyObjId,
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvAuxInfo,
+@@ -15150,7 +15249,7 @@ BOOL
+ WINAPI
+ CryptExportPublicKeyInfoFromBCryptKeyHandle(
+     _In_ BCRYPT_KEY_HANDLE hBCryptKey,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_opt_ LPSTR pszPublicKeyObjId,
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvAuxInfo,
+@@ -15167,7 +15266,7 @@ CryptExportPublicKeyInfoFromBCryptKeyHandle(
+     "CryptDllExportPublicKeyInfoFromBCryptKeyHandle"
+ typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC) (
+     _In_ BCRYPT_KEY_HANDLE hBCryptKey,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPSTR pszPublicKeyObjId,
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvAuxInfo,
+@@ -15189,7 +15288,7 @@ BOOL
+ WINAPI
+ CryptImportPublicKeyInfo(
+     _In_ HCRYPTPROV hCryptProv,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _Out_ HCRYPTKEY *phKey
+     );
+@@ -15215,7 +15314,7 @@ BOOL
+ WINAPI
+ CryptImportPublicKeyInfoEx(
+     _In_ HCRYPTPROV hCryptProv,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _In_ ALG_ID aiKeyAlg,
+     _In_ DWORD dwFlags,
+@@ -15250,9 +15349,9 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptImportPublicKeyInfoEx2(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pInfo,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_IMPORT_PUBLIC_KEY_FLAGS dwFlags,
+     _In_opt_ void *pvAuxInfo,
+     _Out_ BCRYPT_KEY_HANDLE *phKey
+     );
+@@ -15263,7 +15362,7 @@ CryptImportPublicKeyInfoEx2(
+ #define CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC \
+     "CryptDllImportPublicKeyInfoEx2"
+ typedef BOOL (WINAPI *PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvAuxInfo,
+@@ -15367,10 +15466,10 @@ BOOL
+ WINAPI
+ CryptAcquireCertificatePrivateKey(
+     _In_ PCCERT_CONTEXT pCert,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_ACQUIRE_FLAGS dwFlags,
+     _In_opt_ void *pvParameters,
+     _Out_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE *phCryptProvOrNCryptKey,
+-    _Out_opt_ DWORD *pdwKeySpec,
++    _Out_opt_ CERT_KEY_SPEC *pdwKeySpec,
+     _Out_opt_ BOOL *pfCallerFreeProvOrNCryptKey
+     );
+ 
+@@ -15421,7 +15520,7 @@ BOOL
+ WINAPI
+ CryptFindCertificateKeyProvInfo(
+     _In_ PCCERT_CONTEXT pCert,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_FIND_FLAGS dwFlags,
+     _Reserved_ void *pvReserved
+     );
+ 
+@@ -15476,7 +15575,7 @@ BOOL
+ WINAPI
+ CryptImportPKCS8(
+     _In_ CRYPT_PKCS8_IMPORT_PARAMS sPrivateKeyAndParams,    // in
+-    _In_ DWORD dwFlags,                                     // in
++    _In_ CRYPT_KEY_FLAGS dwFlags,                                     // in
+     _Out_opt_ HCRYPTPROV *phCryptProv,                      // out, optional
+     _In_opt_ void* pvAuxInfo                                // in, optional
+     );
+@@ -15572,7 +15671,7 @@ CryptHashPublicKeyInfo(
+     _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
+     _In_ ALG_ID Algid,
+     _In_ DWORD dwFlags,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _Out_writes_bytes_to_opt_(*pcbComputedHash, *pcbComputedHash) BYTE *pbComputedHash,
+     _Inout_ DWORD *pcbComputedHash
+@@ -15725,9 +15824,9 @@ WINCRYPT32API
+ DWORD
+ WINAPI
+ CertNameToStrA(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_NAME_BLOB pName,
+-    _In_ DWORD dwStrType,
++    _In_ CERT_STRING_TYPE dwStrType,
+     _Out_writes_to_opt_(csz, return) LPSTR psz,
+     _In_ DWORD csz
+     );
+@@ -15735,9 +15834,9 @@ WINCRYPT32API
+ DWORD
+ WINAPI
+ CertNameToStrW(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_NAME_BLOB pName,
+-    _In_ DWORD dwStrType,
++    _In_ CERT_STRING_TYPE dwStrType,
+     _Out_writes_to_opt_(csz, return) LPWSTR psz,
+     _In_ DWORD csz
+     );
+@@ -15891,9 +15990,9 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertStrToNameA(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCSTR pszX500,
+-    _In_ DWORD dwStrType,
++    _In_ CERT_STRING_TYPE dwStrType,
+     _Reserved_ void *pvReserved,
+     _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
+     _Inout_ DWORD *pcbEncoded,
+@@ -15905,9 +16004,9 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CertStrToNameW(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ LPCWSTR pszX500,
+-    _In_ DWORD dwStrType,
++    _In_ CERT_STRING_TYPE dwStrType,
+     _Reserved_ void *pvReserved,
+     _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
+     _Inout_ DWORD *pcbEncoded,
+@@ -16122,7 +16221,7 @@ CertGetNameStringW(
+ //--------------------------------------------------------------------------
+ typedef PCCERT_CONTEXT (WINAPI *PFN_CRYPT_GET_SIGNER_CERTIFICATE)(
+     _Inout_opt_ void *pvGetArg,
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_ PCERT_INFO pSignerId,    // Only the Issuer and SerialNumber
+                                 // fields have been updated
+     _In_ HCERTSTORE hMsgCertStore
+@@ -16374,7 +16473,7 @@ typedef struct _CRYPT_HASH_MESSAGE_PARA {
+ //--------------------------------------------------------------------------
+ typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
+     DWORD                       cbSize;
+-    DWORD                       dwMsgAndCertEncodingType;
++    CERT_QUERY_ENCODING_TYPE                       dwMsgAndCertEncodingType;
+ 
+     // NCryptIsKeyHandle() is called to determine the union choice.
+     union {
+@@ -16383,7 +16482,7 @@ typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
+     } DUMMYUNIONNAME;
+ 
+     // not applicable for hNCryptKey choice
+-    DWORD                       dwKeySpec;
++    CERT_KEY_SPEC                       dwKeySpec;
+ 
+     CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
+     void                        *pvHashAuxInfo;
+@@ -17052,14 +17151,14 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptQueryObject(
+-    _In_ DWORD                    dwObjectType,
++    _In_ CERT_QUERY_OBJECT_TYPE                    dwObjectType,
+     _In_ const void               *pvObject,
+-    _In_ DWORD                    dwExpectedContentTypeFlags,
+-    _In_ DWORD                    dwExpectedFormatTypeFlags,
++    _In_ CERT_QUERY_CONTENT_TYPE_FLAGS                    dwExpectedContentTypeFlags,
++    _In_ CERT_QUERY_FORMAT_TYPE_FLAGS                    dwExpectedFormatTypeFlags,
+     _In_ DWORD                    dwFlags,
+-    _Out_opt_ DWORD               *pdwMsgAndCertEncodingType,
+-    _Out_opt_ DWORD               *pdwContentType,
+-    _Out_opt_ DWORD               *pdwFormatType,
++    _Out_opt_ CERT_QUERY_ENCODING_TYPE               *pdwMsgAndCertEncodingType,
++    _Out_opt_ CERT_QUERY_CONTENT_TYPE               *pdwContentType,
++    _Out_opt_ CERT_QUERY_FORMAT_TYPE               *pdwFormatType,
+     _Out_opt_ HCERTSTORE          *phCertStore,
+     _Out_opt_ HCRYPTMSG           *phMsg,
+     _Outptr_opt_result_maybenull_ const void **ppvContext
+@@ -17279,7 +17378,7 @@ BOOL
+ WINAPI
+ CryptCreateAsyncHandle (
+     _In_ DWORD dwFlags,
+-    _Out_ PHCRYPTASYNC phAsync
++    _Win32_RAIIFree_(CryptCloseAsyncHandle, -1, 0) _Out_ PHCRYPTASYNC phAsync
+     );
+ 
+ WINCRYPT32API
+@@ -17897,7 +17996,7 @@ WINAPI
+ CryptGetObjectUrl (
+     _In_ LPCSTR pszUrlOid,
+     _In_ LPVOID pvPara,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_GET_URL_FLAGS dwFlags,
+     _Out_writes_bytes_to_opt_(*pcbUrlArray, *pcbUrlArray) PCRYPT_URL_ARRAY pUrlArray,
+     _Inout_ DWORD* pcbUrlArray,
+     _Out_writes_bytes_to_opt_(*pcbUrlInfo, *pcbUrlInfo) PCRYPT_URL_INFO pUrlInfo,
+@@ -18230,7 +18329,7 @@ WINAPI
+ CertCreateSelfSignCertificate(
+     _In_opt_  HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
+     _In_      PCERT_NAME_BLOB             pSubjectIssuerBlob,
+-    _In_      DWORD                       dwFlags,
++    _In_      CERT_CREATE_SELFSIGN_FLAGS                       dwFlags,
+     _In_opt_  PCRYPT_KEY_PROV_INFO        pKeyProvInfo,
+     _In_opt_  PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
+     _In_opt_  PSYSTEMTIME                 pStartTime,
+@@ -18397,7 +18496,7 @@ WINCRYPT32API
+ BOOL
+ WINAPI
+ CryptCreateKeyIdentifierFromCSP(
+-    _In_ DWORD dwCertEncodingType,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
+     _In_opt_ LPCSTR pszPubKeyOID,
+     _In_reads_bytes_(cbPubKeyStruc) const PUBLICKEYSTRUC *pPubKeyStruc,
+     _In_ DWORD cbPubKeyStruc,
+@@ -19531,7 +19630,7 @@ BOOL
+ WINAPI
+ CertCreateCertificateChainEngine (
+     _In_ PCERT_CHAIN_ENGINE_CONFIG pConfig,
+-    _Out_ HCERTCHAINENGINE* phChainEngine
++    _Win32_RAIIFree_(CertFreeCertificateChainEngine, -1, 0) _Out_ HCERTCHAINENGINE* phChainEngine
+     );
+ 
+ //
+@@ -20105,8 +20204,8 @@ PCCERT_CHAIN_CONTEXT
+ WINAPI
+ CertFindChainInStore(
+     _In_ HCERTSTORE hCertStore,
+-    _In_ DWORD dwCertEncodingType,
+-    _In_ DWORD dwFindFlags,
++    _In_ CERT_QUERY_ENCODING_TYPE dwCertEncodingType,
++    _In_ CERT_FIND_CHAIN_IN_STORE_FLAGS dwFindFlags,
+     _In_ DWORD dwFindType,
+     _In_opt_ const void *pvFindPara,
+     _In_opt_ PCCERT_CHAIN_CONTEXT pPrevChainContext
+@@ -20257,7 +20356,7 @@ typedef struct _CERT_CHAIN_FIND_BY_ISSUER_PARA {
+ //==========================================================================
+ typedef struct _CERT_CHAIN_POLICY_PARA {
+     DWORD                   cbSize;
+-    DWORD                   dwFlags;
++    CERT_CHAIN_POLICY_FLAGS                   dwFlags;
+     void                    *pvExtraPolicyPara;     // pszPolicyOID specific
+ } CERT_CHAIN_POLICY_PARA, *PCERT_CHAIN_POLICY_PARA;
+ 
+@@ -20438,7 +20537,7 @@ typedef struct _HTTPSPolicyCallbackData
+         DWORD           cbSize;         // sizeof(HTTPSPolicyCallbackData);
+     } DUMMYUNIONNAME;
+ 
+-    DWORD           dwAuthType;
++    HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE           dwAuthType;
+ #                       define      AUTHTYPE_CLIENT         1
+ #                       define      AUTHTYPE_SERVER         2
+ 
+@@ -20554,7 +20653,7 @@ typedef struct _HTTPSPolicyCallbackData
+ 
+ typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_PARA {
+     DWORD               cbSize;
+-    DWORD               dwRootProgramQualifierFlags;
++    CERT_ROOT_PROGRAM_FLAGS               dwRootProgramQualifierFlags;
+ } EV_EXTRA_CERT_CHAIN_POLICY_PARA,
+     *PEV_EXTRA_CERT_CHAIN_POLICY_PARA;
+ 
+@@ -20839,7 +20938,7 @@ CryptStringToBinaryA(
+     _When_(dwFlags == CRYPT_STRING_BINARY, _In_reads_bytes_(cchString))
+         LPCSTR pszString,
+     _In_ DWORD cchString,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_STRING dwFlags,
+     _Out_writes_bytes_to_opt_(*pcbBinary, *pcbBinary) BYTE *pbBinary,
+     _Inout_ DWORD  *pcbBinary,
+     _Out_opt_ DWORD *pdwSkip,
+@@ -20865,7 +20964,7 @@ CryptStringToBinaryW(
+     _When_(dwFlags == CRYPT_STRING_BINARY, _In_reads_bytes_(cchString))
+         LPCWSTR pszString,
+     _In_ DWORD cchString,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_STRING dwFlags,
+     _Out_writes_bytes_to_opt_(*pcbBinary, *pcbBinary) BYTE *pbBinary,
+     _Inout_ DWORD  *pcbBinary,
+     _Out_opt_ DWORD *pdwSkip,
+@@ -20890,7 +20989,7 @@ WINAPI
+ CryptBinaryToStringA(
+     _In_reads_bytes_(cbBinary) CONST BYTE *pbBinary,
+     _In_ DWORD cbBinary,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_STRING dwFlags,
+     _Out_writes_to_opt_(*pcchString, *pcchString) LPSTR pszString,
+     _Inout_ DWORD *pcchString
+     );
+@@ -20907,7 +21006,7 @@ WINAPI
+ CryptBinaryToStringW(
+     _In_reads_bytes_(cbBinary) CONST BYTE *pbBinary,
+     _In_ DWORD cbBinary,
+-    _In_ DWORD dwFlags,
++    _In_ CRYPT_STRING dwFlags,
+     _Out_writes_to_opt_(*pcchString, *pcchString) LPWSTR pszString,
+     _Inout_ DWORD *pcchString
+     );
+@@ -21062,7 +21161,7 @@ WINAPI
+ PFXImportCertStore(
+     _In_ CRYPT_DATA_BLOB* pPFX,
+     _In_ LPCWSTR szPassword,
+-    _In_ DWORD   dwFlags);
++    _In_ CRYPT_KEY_FLAGS   dwFlags);
+ 
+ // dwFlags definitions for PFXImportCertStore
+ //#define CRYPT_EXPORTABLE          0x00000001  // CryptImportKey dwFlags
+@@ -21563,7 +21662,7 @@ typedef const CERT_SELECT_CHAIN_PARA*    PCCERT_SELECT_CHAIN_PARA;
+ 
+ typedef struct _CERT_SELECT_CRITERIA
+ {
+-    DWORD                           dwType;
++    CERT_SELECT_CRITERIA_TYPE                           dwType;
+     DWORD                           cPara;
+     _Field_size_(cPara) void**    ppPara;
+ }
+@@ -21653,7 +21752,7 @@ CertFreeCertificateChainList(
+ 
+ typedef struct _CRYPT_TIMESTAMP_REQUEST
+ {
+-    DWORD                       dwVersion;              // v1
++    CRYPT_TIMESTAMP_VERSION                       dwVersion;              // v1
+     CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
+     CRYPT_DER_BLOB              HashedMessage;
+     LPSTR                       pszTSAPolicyId;         // OPTIONAL
+@@ -21670,7 +21769,7 @@ typedef struct _CRYPT_TIMESTAMP_REQUEST
+ //--------------------------------------------------------------------------
+ typedef struct _CRYPT_TIMESTAMP_RESPONSE
+ {
+-    DWORD                       dwStatus;
++    CRYPT_TIMESTAMP_RESPONSE_STATUS                       dwStatus;
+     DWORD                       cFreeText;              // OPTIONAL
+     _Field_size_(cFreeText)
+     LPWSTR*                     rgFreeText;
+@@ -22012,7 +22111,7 @@ typedef BOOL (WINAPI *PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET)(
+ //    it is initialized. 
+ //--------------------------------------------------------------------------
+ typedef void (WINAPI * PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE)(
+-    _In_ DWORD dwReason,
++    _In_ CRYPT_OBJECT_LOCATOR_RELEASE_REASON dwReason,
+     _In_opt_ LPVOID pPluginContext);
+ 
+ 
+@@ -22174,6 +22273,1503 @@ typedef WINCRYPT32API BOOL (WINAPI *PFN_CERT_IS_WEAK_HASH)(
+ 
+ #endif //!defined(_DDK_DRIVER_)
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CERT_FIND_ANY")
++#pragma push_macro("CERT_FIND_CERT_ID")
++#pragma push_macro("CERT_FIND_CTL_USAGE")
++#pragma push_macro("CERT_FIND_ENHKEY_USAGE")
++#pragma push_macro("CERT_FIND_EXISTING")
++#pragma push_macro("CERT_FIND_HASH")
++#pragma push_macro("CERT_FIND_HAS_PRIVATE_KEY")
++#pragma push_macro("CERT_FIND_ISSUER_ATTR")
++#pragma push_macro("CERT_FIND_ISSUER_NAME")
++#pragma push_macro("CERT_FIND_ISSUER_OF")
++#pragma push_macro("CERT_FIND_ISSUER_STR")
++#pragma push_macro("CERT_FIND_KEY_IDENTIFIER")
++#pragma push_macro("CERT_FIND_KEY_SPEC")
++#pragma push_macro("CERT_FIND_MD5_HASH")
++#pragma push_macro("CERT_FIND_PROPERTY")
++#pragma push_macro("CERT_FIND_PUBLIC_KEY")
++#pragma push_macro("CERT_FIND_SHA1_HASH")
++#pragma push_macro("CERT_FIND_SIGNATURE_HASH")
++#pragma push_macro("CERT_FIND_SUBJECT_ATTR")
++#pragma push_macro("CERT_FIND_SUBJECT_CERT")
++#pragma push_macro("CERT_FIND_SUBJECT_NAME")
++#pragma push_macro("CERT_FIND_SUBJECT_STR")
++#pragma push_macro("CERT_FIND_CROSS_CERT_DIST_POINTS")
++#pragma push_macro("CERT_FIND_PUBKEY_MD5_HASH")
++#pragma push_macro("CERT_FIND_SHA256_HASH")
++#pragma push_macro("CERT_FIND_SHA1_SHA256_HASH")
++#pragma push_macro("CERT_FIND_SUBJECT_STR_A")
++#pragma push_macro("CERT_FIND_SUBJECT_STR_W")
++#pragma push_macro("CERT_FIND_ISSUER_STR_A")
++#pragma push_macro("CERT_FIND_ISSUER_STR_W")
++#pragma push_macro("CERT_FIND_SUBJECT_INFO_ACCESS")
++#pragma push_macro("CERT_FIND_HASH_STR")
++#pragma push_macro("CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_NO_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_OR_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_VALID_ENHKEY_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_OPTIONAL_CTL_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_NO_CTL_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_OR_CTL_USAGE_FLAG")
++#pragma push_macro("CERT_FIND_VALID_CTL_USAGE_FLAG")
++#undef CERT_FIND_ANY
++#undef CERT_FIND_CERT_ID
++#undef CERT_FIND_CTL_USAGE
++#undef CERT_FIND_ENHKEY_USAGE
++#undef CERT_FIND_EXISTING
++#undef CERT_FIND_HASH
++#undef CERT_FIND_HAS_PRIVATE_KEY
++#undef CERT_FIND_ISSUER_ATTR
++#undef CERT_FIND_ISSUER_NAME
++#undef CERT_FIND_ISSUER_OF
++#undef CERT_FIND_ISSUER_STR
++#undef CERT_FIND_KEY_IDENTIFIER
++#undef CERT_FIND_KEY_SPEC
++#undef CERT_FIND_MD5_HASH
++#undef CERT_FIND_PROPERTY
++#undef CERT_FIND_PUBLIC_KEY
++#undef CERT_FIND_SHA1_HASH
++#undef CERT_FIND_SIGNATURE_HASH
++#undef CERT_FIND_SUBJECT_ATTR
++#undef CERT_FIND_SUBJECT_CERT
++#undef CERT_FIND_SUBJECT_NAME
++#undef CERT_FIND_SUBJECT_STR
++#undef CERT_FIND_CROSS_CERT_DIST_POINTS
++#undef CERT_FIND_PUBKEY_MD5_HASH
++#undef CERT_FIND_SHA256_HASH
++#undef CERT_FIND_SHA1_SHA256_HASH
++#undef CERT_FIND_SUBJECT_STR_A
++#undef CERT_FIND_SUBJECT_STR_W
++#undef CERT_FIND_ISSUER_STR_A
++#undef CERT_FIND_ISSUER_STR_W
++#undef CERT_FIND_SUBJECT_INFO_ACCESS
++#undef CERT_FIND_HASH_STR
++#undef CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_NO_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_OR_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_VALID_ENHKEY_USAGE_FLAG
++#undef CERT_FIND_OPTIONAL_CTL_USAGE_FLAG
++#undef CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG
++#undef CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG
++#undef CERT_FIND_NO_CTL_USAGE_FLAG
++#undef CERT_FIND_OR_CTL_USAGE_FLAG
++#undef CERT_FIND_VALID_CTL_USAGE_FLAG
++enum class
++    [[clang::flag_enum]]
++    CERT_FIND_FLAGS : int
++{
++    CERT_FIND_ANY = 0,
++    CERT_FIND_CERT_ID = 0x100000,
++    CERT_FIND_CTL_USAGE = 0xA0000,
++    CERT_FIND_ENHKEY_USAGE = 0xA0000,
++    CERT_FIND_EXISTING = 0xD0000,
++    CERT_FIND_HASH = 0x10000,
++    CERT_FIND_HAS_PRIVATE_KEY = 0x150000,
++    CERT_FIND_ISSUER_ATTR = 0x30004,
++    CERT_FIND_ISSUER_NAME = 0x20004,
++    CERT_FIND_ISSUER_OF = 0xC0000,
++    CERT_FIND_ISSUER_STR = 0x80004,
++    CERT_FIND_KEY_IDENTIFIER = 0xF0000,
++    CERT_FIND_KEY_SPEC = 0x90000,
++    CERT_FIND_MD5_HASH = 0x40000,
++    CERT_FIND_PROPERTY = 0x50000,
++    CERT_FIND_PUBLIC_KEY = 0x60000,
++    CERT_FIND_SHA1_HASH = 0x10000,
++    CERT_FIND_SIGNATURE_HASH = 0xE0000,
++    CERT_FIND_SUBJECT_ATTR = 0x30007,
++    CERT_FIND_SUBJECT_CERT = 0xB0000,
++    CERT_FIND_SUBJECT_NAME = 0x20007,
++    CERT_FIND_SUBJECT_STR = 0x80007,
++    CERT_FIND_CROSS_CERT_DIST_POINTS = 0x110000,
++    CERT_FIND_PUBKEY_MD5_HASH = 0x120000,
++    CERT_FIND_SHA256_HASH = 0x160000,
++    CERT_FIND_SHA1_SHA256_HASH = 0x170000,
++    CERT_FIND_SUBJECT_STR_A = 0x70007,
++    CERT_FIND_SUBJECT_STR_W = 0x80007,
++    CERT_FIND_ISSUER_STR_A = 0x70004,
++    CERT_FIND_ISSUER_STR_W = 0x80004,
++    CERT_FIND_SUBJECT_INFO_ACCESS = 0x130000,
++    CERT_FIND_HASH_STR = 0x140000,
++    CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG = 1,
++    CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG = 2,
++    CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG = 4,
++    CERT_FIND_NO_ENHKEY_USAGE_FLAG = 8,
++    CERT_FIND_OR_ENHKEY_USAGE_FLAG = 0x10,
++    CERT_FIND_VALID_ENHKEY_USAGE_FLAG = 0x20,
++    CERT_FIND_OPTIONAL_CTL_USAGE_FLAG = 1,
++    CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG = 2,
++    CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG = 4,
++    CERT_FIND_NO_CTL_USAGE_FLAG = 8,
++    CERT_FIND_OR_CTL_USAGE_FLAG = 0x10,
++    CERT_FIND_VALID_CTL_USAGE_FLAG = 0x20,
++};
++#pragma pop_macro("CERT_FIND_VALID_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_OR_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_NO_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_OPTIONAL_CTL_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_VALID_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_OR_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_NO_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG")
++#pragma pop_macro("CERT_FIND_HASH_STR")
++#pragma pop_macro("CERT_FIND_SUBJECT_INFO_ACCESS")
++#pragma pop_macro("CERT_FIND_ISSUER_STR_W")
++#pragma pop_macro("CERT_FIND_ISSUER_STR_A")
++#pragma pop_macro("CERT_FIND_SUBJECT_STR_W")
++#pragma pop_macro("CERT_FIND_SUBJECT_STR_A")
++#pragma pop_macro("CERT_FIND_SHA1_SHA256_HASH")
++#pragma pop_macro("CERT_FIND_SHA256_HASH")
++#pragma pop_macro("CERT_FIND_PUBKEY_MD5_HASH")
++#pragma pop_macro("CERT_FIND_CROSS_CERT_DIST_POINTS")
++#pragma pop_macro("CERT_FIND_SUBJECT_STR")
++#pragma pop_macro("CERT_FIND_SUBJECT_NAME")
++#pragma pop_macro("CERT_FIND_SUBJECT_CERT")
++#pragma pop_macro("CERT_FIND_SUBJECT_ATTR")
++#pragma pop_macro("CERT_FIND_SIGNATURE_HASH")
++#pragma pop_macro("CERT_FIND_SHA1_HASH")
++#pragma pop_macro("CERT_FIND_PUBLIC_KEY")
++#pragma pop_macro("CERT_FIND_PROPERTY")
++#pragma pop_macro("CERT_FIND_MD5_HASH")
++#pragma pop_macro("CERT_FIND_KEY_SPEC")
++#pragma pop_macro("CERT_FIND_KEY_IDENTIFIER")
++#pragma pop_macro("CERT_FIND_ISSUER_STR")
++#pragma pop_macro("CERT_FIND_ISSUER_OF")
++#pragma pop_macro("CERT_FIND_ISSUER_NAME")
++#pragma pop_macro("CERT_FIND_ISSUER_ATTR")
++#pragma pop_macro("CERT_FIND_HAS_PRIVATE_KEY")
++#pragma pop_macro("CERT_FIND_HASH")
++#pragma pop_macro("CERT_FIND_EXISTING")
++#pragma pop_macro("CERT_FIND_ENHKEY_USAGE")
++#pragma pop_macro("CERT_FIND_CTL_USAGE")
++#pragma pop_macro("CERT_FIND_CERT_ID")
++#pragma pop_macro("CERT_FIND_ANY")
++
++#pragma push_macro("CERT_QUERY_OBJECT_FILE")
++#pragma push_macro("CERT_QUERY_OBJECT_BLOB")
++#undef CERT_QUERY_OBJECT_FILE
++#undef CERT_QUERY_OBJECT_BLOB
++enum class
++    CERT_QUERY_OBJECT_TYPE : unsigned int
++{
++    CERT_QUERY_OBJECT_FILE = 1u,
++    CERT_QUERY_OBJECT_BLOB,
++};
++#pragma pop_macro("CERT_QUERY_OBJECT_BLOB")
++#pragma pop_macro("CERT_QUERY_OBJECT_FILE")
++
++#pragma push_macro("CERT_QUERY_CONTENT_CERT")
++#pragma push_macro("CERT_QUERY_CONTENT_CTL")
++#pragma push_macro("CERT_QUERY_CONTENT_CRL")
++#pragma push_macro("CERT_QUERY_CONTENT_SERIALIZED_STORE")
++#pragma push_macro("CERT_QUERY_CONTENT_SERIALIZED_CERT")
++#pragma push_macro("CERT_QUERY_CONTENT_SERIALIZED_CTL")
++#pragma push_macro("CERT_QUERY_CONTENT_SERIALIZED_CRL")
++#pragma push_macro("CERT_QUERY_CONTENT_PKCS7_SIGNED")
++#pragma push_macro("CERT_QUERY_CONTENT_PKCS7_UNSIGNED")
++#pragma push_macro("CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED")
++#pragma push_macro("CERT_QUERY_CONTENT_PKCS10")
++#pragma push_macro("CERT_QUERY_CONTENT_PFX")
++#pragma push_macro("CERT_QUERY_CONTENT_CERT_PAIR")
++#pragma push_macro("CERT_QUERY_CONTENT_PFX_AND_LOAD")
++#undef CERT_QUERY_CONTENT_CERT
++#undef CERT_QUERY_CONTENT_CTL
++#undef CERT_QUERY_CONTENT_CRL
++#undef CERT_QUERY_CONTENT_SERIALIZED_STORE
++#undef CERT_QUERY_CONTENT_SERIALIZED_CERT
++#undef CERT_QUERY_CONTENT_SERIALIZED_CTL
++#undef CERT_QUERY_CONTENT_SERIALIZED_CRL
++#undef CERT_QUERY_CONTENT_PKCS7_SIGNED
++#undef CERT_QUERY_CONTENT_PKCS7_UNSIGNED
++#undef CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED
++#undef CERT_QUERY_CONTENT_PKCS10
++#undef CERT_QUERY_CONTENT_PFX
++#undef CERT_QUERY_CONTENT_CERT_PAIR
++#undef CERT_QUERY_CONTENT_PFX_AND_LOAD
++enum class
++    CERT_QUERY_CONTENT_TYPE : unsigned int
++{
++    CERT_QUERY_CONTENT_CERT = 1u,
++    CERT_QUERY_CONTENT_CTL,
++    CERT_QUERY_CONTENT_CRL,
++    CERT_QUERY_CONTENT_SERIALIZED_STORE,
++    CERT_QUERY_CONTENT_SERIALIZED_CERT,
++    CERT_QUERY_CONTENT_SERIALIZED_CTL,
++    CERT_QUERY_CONTENT_SERIALIZED_CRL,
++    CERT_QUERY_CONTENT_PKCS7_SIGNED,
++    CERT_QUERY_CONTENT_PKCS7_UNSIGNED,
++    CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED,
++    CERT_QUERY_CONTENT_PKCS10,
++    CERT_QUERY_CONTENT_PFX,
++    CERT_QUERY_CONTENT_CERT_PAIR,
++    CERT_QUERY_CONTENT_PFX_AND_LOAD,
++};
++#pragma pop_macro("CERT_QUERY_CONTENT_PFX_AND_LOAD")
++#pragma pop_macro("CERT_QUERY_CONTENT_CERT_PAIR")
++#pragma pop_macro("CERT_QUERY_CONTENT_PFX")
++#pragma pop_macro("CERT_QUERY_CONTENT_PKCS10")
++#pragma pop_macro("CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED")
++#pragma pop_macro("CERT_QUERY_CONTENT_PKCS7_UNSIGNED")
++#pragma pop_macro("CERT_QUERY_CONTENT_PKCS7_SIGNED")
++#pragma pop_macro("CERT_QUERY_CONTENT_SERIALIZED_CRL")
++#pragma pop_macro("CERT_QUERY_CONTENT_SERIALIZED_CTL")
++#pragma pop_macro("CERT_QUERY_CONTENT_SERIALIZED_CERT")
++#pragma pop_macro("CERT_QUERY_CONTENT_SERIALIZED_STORE")
++#pragma pop_macro("CERT_QUERY_CONTENT_CRL")
++#pragma pop_macro("CERT_QUERY_CONTENT_CTL")
++#pragma pop_macro("CERT_QUERY_CONTENT_CERT")
++
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_CERT")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_CTL")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_CRL")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PKCS10")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PFX")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_CERT_PAIR")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_ALL")
++#pragma push_macro("CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT")
++#undef CERT_QUERY_CONTENT_FLAG_CERT
++#undef CERT_QUERY_CONTENT_FLAG_CTL
++#undef CERT_QUERY_CONTENT_FLAG_CRL
++#undef CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE
++#undef CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT
++#undef CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL
++#undef CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL
++#undef CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED
++#undef CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED
++#undef CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED
++#undef CERT_QUERY_CONTENT_FLAG_PKCS10
++#undef CERT_QUERY_CONTENT_FLAG_PFX
++#undef CERT_QUERY_CONTENT_FLAG_CERT_PAIR
++#undef CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD
++#undef CERT_QUERY_CONTENT_FLAG_ALL
++#undef CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT
++enum class
++    CERT_QUERY_CONTENT_TYPE_FLAGS : unsigned int
++{
++    CERT_QUERY_CONTENT_FLAG_CERT = 2u,
++    CERT_QUERY_CONTENT_FLAG_CTL = 4u,
++    CERT_QUERY_CONTENT_FLAG_CRL = 8u,
++    CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 16u,
++    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 32u,
++    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 64u,
++    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 128u,
++    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 256u,
++    CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 512u,
++    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 1024u,
++    CERT_QUERY_CONTENT_FLAG_PKCS10 = 2048u,
++    CERT_QUERY_CONTENT_FLAG_PFX = 4096u,
++    CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 8192u,
++    CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 16384u,
++    CERT_QUERY_CONTENT_FLAG_ALL = 16382u,
++    CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT = 818u,
++};
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_ALL")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_CERT_PAIR")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PFX")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PKCS10")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_CRL")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_CTL")
++#pragma pop_macro("CERT_QUERY_CONTENT_FLAG_CERT")
++
++#pragma push_macro("CERT_QUERY_FORMAT_BINARY")
++#pragma push_macro("CERT_QUERY_FORMAT_BASE64_ENCODED")
++#pragma push_macro("CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED")
++#undef CERT_QUERY_FORMAT_BINARY
++#undef CERT_QUERY_FORMAT_BASE64_ENCODED
++#undef CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED
++enum class
++    CERT_QUERY_FORMAT_TYPE : unsigned int
++{
++    CERT_QUERY_FORMAT_BINARY = 1u,
++    CERT_QUERY_FORMAT_BASE64_ENCODED,
++    CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED,
++};
++#pragma pop_macro("CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED")
++#pragma pop_macro("CERT_QUERY_FORMAT_BASE64_ENCODED")
++#pragma pop_macro("CERT_QUERY_FORMAT_BINARY")
++
++#pragma push_macro("CERT_QUERY_FORMAT_FLAG_BINARY")
++#pragma push_macro("CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED")
++#pragma push_macro("CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED")
++#pragma push_macro("CERT_QUERY_FORMAT_FLAG_ALL")
++#undef CERT_QUERY_FORMAT_FLAG_BINARY
++#undef CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED
++#undef CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED
++#undef CERT_QUERY_FORMAT_FLAG_ALL
++enum class
++    CERT_QUERY_FORMAT_TYPE_FLAGS : unsigned int
++{
++    CERT_QUERY_FORMAT_FLAG_BINARY = 2u,
++    CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 4u,
++    CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 8u,
++    CERT_QUERY_FORMAT_FLAG_ALL = 14u,
++};
++#pragma pop_macro("CERT_QUERY_FORMAT_FLAG_ALL")
++#pragma pop_macro("CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED")
++#pragma pop_macro("CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED")
++#pragma pop_macro("CERT_QUERY_FORMAT_FLAG_BINARY")
++
++#pragma push_macro("X509_ASN_ENCODING")
++#pragma push_macro("PKCS_7_ASN_ENCODING")
++#undef X509_ASN_ENCODING
++#undef PKCS_7_ASN_ENCODING
++enum class
++    [[clang::flag_enum]]
++    CERT_QUERY_ENCODING_TYPE : unsigned int
++{
++    X509_ASN_ENCODING = 1u,
++    PKCS_7_ASN_ENCODING = 0x10000u,
++};
++#pragma pop_macro("PKCS_7_ASN_ENCODING")
++#pragma pop_macro("X509_ASN_ENCODING")
++
++#pragma push_macro("CERT_RDN_ANY_TYPE")
++#pragma push_macro("CERT_RDN_NUMERIC_STRING")
++#pragma push_macro("CERT_RDN_PRINTABLE_STRING")
++#pragma push_macro("CERT_RDN_T61_STRING")
++#pragma push_macro("CERT_RDN_VIDEOTEX_STRING")
++#pragma push_macro("CERT_RDN_IA5_STRING")
++#pragma push_macro("CERT_RDN_GRAPHIC_STRING")
++#pragma push_macro("CERT_RDN_ISO646_STRING")
++#pragma push_macro("CERT_RDN_GENERAL_STRING")
++#pragma push_macro("CERT_RDN_INT4_STRING")
++#pragma push_macro("CERT_RDN_UNICODE_STRING")
++#pragma push_macro("CERT_RDN_BMP_STRING")
++#pragma push_macro("CERT_RDN_ENCODED_BLOB")
++#pragma push_macro("CERT_RDN_OCTET_STRING")
++#pragma push_macro("CERT_RDN_TELETEX_STRING")
++#pragma push_macro("CERT_RDN_UNIVERSAL_STRING")
++#pragma push_macro("CERT_RDN_UTF8_STRING")
++#pragma push_macro("CERT_RDN_VISIBLE_STRING")
++#undef CERT_RDN_ANY_TYPE
++#undef CERT_RDN_NUMERIC_STRING
++#undef CERT_RDN_PRINTABLE_STRING
++#undef CERT_RDN_T61_STRING
++#undef CERT_RDN_VIDEOTEX_STRING
++#undef CERT_RDN_IA5_STRING
++#undef CERT_RDN_GRAPHIC_STRING
++#undef CERT_RDN_ISO646_STRING
++#undef CERT_RDN_GENERAL_STRING
++#undef CERT_RDN_INT4_STRING
++#undef CERT_RDN_UNICODE_STRING
++#undef CERT_RDN_BMP_STRING
++#undef CERT_RDN_ENCODED_BLOB
++#undef CERT_RDN_OCTET_STRING
++#undef CERT_RDN_TELETEX_STRING
++#undef CERT_RDN_UNIVERSAL_STRING
++#undef CERT_RDN_UTF8_STRING
++#undef CERT_RDN_VISIBLE_STRING
++enum class
++    CERT_RDN_ATTR_VALUE_TYPE : int
++{
++    CERT_RDN_ANY_TYPE = 0,
++    CERT_RDN_NUMERIC_STRING = 3,
++    CERT_RDN_PRINTABLE_STRING = 4,
++    CERT_RDN_T61_STRING = 5,
++    CERT_RDN_VIDEOTEX_STRING = 6,
++    CERT_RDN_IA5_STRING = 7,
++    CERT_RDN_GRAPHIC_STRING = 8,
++    CERT_RDN_ISO646_STRING = 9,
++    CERT_RDN_GENERAL_STRING = 10,
++    CERT_RDN_INT4_STRING = 11,
++    CERT_RDN_UNICODE_STRING = 12,
++    CERT_RDN_BMP_STRING = 12,
++    CERT_RDN_ENCODED_BLOB = 1,
++    CERT_RDN_OCTET_STRING = 2,
++    CERT_RDN_TELETEX_STRING = 5,
++    CERT_RDN_UNIVERSAL_STRING = 11,
++    CERT_RDN_UTF8_STRING = 13,
++    CERT_RDN_VISIBLE_STRING = 9,
++};
++#pragma pop_macro("CERT_RDN_VISIBLE_STRING")
++#pragma pop_macro("CERT_RDN_UTF8_STRING")
++#pragma pop_macro("CERT_RDN_UNIVERSAL_STRING")
++#pragma pop_macro("CERT_RDN_TELETEX_STRING")
++#pragma pop_macro("CERT_RDN_OCTET_STRING")
++#pragma pop_macro("CERT_RDN_ENCODED_BLOB")
++#pragma pop_macro("CERT_RDN_BMP_STRING")
++#pragma pop_macro("CERT_RDN_UNICODE_STRING")
++#pragma pop_macro("CERT_RDN_INT4_STRING")
++#pragma pop_macro("CERT_RDN_GENERAL_STRING")
++#pragma pop_macro("CERT_RDN_ISO646_STRING")
++#pragma pop_macro("CERT_RDN_GRAPHIC_STRING")
++#pragma pop_macro("CERT_RDN_IA5_STRING")
++#pragma pop_macro("CERT_RDN_VIDEOTEX_STRING")
++#pragma pop_macro("CERT_RDN_T61_STRING")
++#pragma pop_macro("CERT_RDN_PRINTABLE_STRING")
++#pragma pop_macro("CERT_RDN_NUMERIC_STRING")
++#pragma pop_macro("CERT_RDN_ANY_TYPE")
++
++#pragma push_macro("CERT_SIMPLE_NAME_STR")
++#pragma push_macro("CERT_OID_NAME_STR")
++#pragma push_macro("CERT_X500_NAME_STR")
++#undef CERT_SIMPLE_NAME_STR
++#undef CERT_OID_NAME_STR
++#undef CERT_X500_NAME_STR
++enum class
++    CERT_STRING_TYPE : int
++{
++    CERT_SIMPLE_NAME_STR = 1,
++    CERT_OID_NAME_STR,
++    CERT_X500_NAME_STR,
++};
++#pragma pop_macro("CERT_X500_NAME_STR")
++#pragma pop_macro("CERT_OID_NAME_STR")
++#pragma pop_macro("CERT_SIMPLE_NAME_STR")
++
++#pragma push_macro("AT_KEYEXCHANGE")
++#pragma push_macro("AT_SIGNATURE")
++#pragma push_macro("CERT_NCRYPT_KEY_SPEC")
++#undef AT_KEYEXCHANGE
++#undef AT_SIGNATURE
++#undef CERT_NCRYPT_KEY_SPEC
++enum class
++    CERT_KEY_SPEC : int
++{
++    AT_KEYEXCHANGE = 1,
++    AT_SIGNATURE = 2,
++    CERT_NCRYPT_KEY_SPEC = 0xFFFFFFFFu,
++};
++#pragma pop_macro("CERT_NCRYPT_KEY_SPEC")
++#pragma pop_macro("AT_SIGNATURE")
++#pragma pop_macro("AT_KEYEXCHANGE")
++
++#pragma push_macro("CRYPT_STRING_BASE64HEADER")
++#pragma push_macro("CRYPT_STRING_BASE64")
++#pragma push_macro("CRYPT_STRING_BINARY")
++#pragma push_macro("CRYPT_STRING_BASE64REQUESTHEADER")
++#pragma push_macro("CRYPT_STRING_HEX")
++#pragma push_macro("CRYPT_STRING_HEXASCII")
++#pragma push_macro("CRYPT_STRING_BASE64X509CRLHEADER")
++#pragma push_macro("CRYPT_STRING_HEXADDR")
++#pragma push_macro("CRYPT_STRING_HEXASCIIADDR")
++#pragma push_macro("CRYPT_STRING_HEXRAW")
++#pragma push_macro("CRYPT_STRING_STRICT")
++#pragma push_macro("CRYPT_STRING_BASE64_ANY")
++#pragma push_macro("CRYPT_STRING_ANY")
++#pragma push_macro("CRYPT_STRING_HEX_ANY")
++#undef CRYPT_STRING_BASE64HEADER
++#undef CRYPT_STRING_BASE64
++#undef CRYPT_STRING_BINARY
++#undef CRYPT_STRING_BASE64REQUESTHEADER
++#undef CRYPT_STRING_HEX
++#undef CRYPT_STRING_HEXASCII
++#undef CRYPT_STRING_BASE64X509CRLHEADER
++#undef CRYPT_STRING_HEXADDR
++#undef CRYPT_STRING_HEXASCIIADDR
++#undef CRYPT_STRING_HEXRAW
++#undef CRYPT_STRING_STRICT
++#undef CRYPT_STRING_BASE64_ANY
++#undef CRYPT_STRING_ANY
++#undef CRYPT_STRING_HEX_ANY
++enum class
++    CRYPT_STRING : int
++{
++    CRYPT_STRING_BASE64HEADER = 0,
++    CRYPT_STRING_BASE64 = 1,
++    CRYPT_STRING_BINARY = 2,
++    CRYPT_STRING_BASE64REQUESTHEADER = 3,
++    CRYPT_STRING_HEX = 4,
++    CRYPT_STRING_HEXASCII = 5,
++    CRYPT_STRING_BASE64X509CRLHEADER = 9,
++    CRYPT_STRING_HEXADDR = 10,
++    CRYPT_STRING_HEXASCIIADDR = 11,
++    CRYPT_STRING_HEXRAW = 12,
++    CRYPT_STRING_STRICT = 536870912,
++    CRYPT_STRING_BASE64_ANY = 6,
++    CRYPT_STRING_ANY = 7,
++    CRYPT_STRING_HEX_ANY = 8,
++};
++#pragma pop_macro("CRYPT_STRING_HEX_ANY")
++#pragma pop_macro("CRYPT_STRING_ANY")
++#pragma pop_macro("CRYPT_STRING_BASE64_ANY")
++#pragma pop_macro("CRYPT_STRING_STRICT")
++#pragma pop_macro("CRYPT_STRING_HEXRAW")
++#pragma pop_macro("CRYPT_STRING_HEXASCIIADDR")
++#pragma pop_macro("CRYPT_STRING_HEXADDR")
++#pragma pop_macro("CRYPT_STRING_BASE64X509CRLHEADER")
++#pragma pop_macro("CRYPT_STRING_HEXASCII")
++#pragma pop_macro("CRYPT_STRING_HEX")
++#pragma pop_macro("CRYPT_STRING_BASE64REQUESTHEADER")
++#pragma pop_macro("CRYPT_STRING_BINARY")
++#pragma pop_macro("CRYPT_STRING_BASE64")
++#pragma pop_macro("CRYPT_STRING_BASE64HEADER")
++
++#pragma push_macro("CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG")
++#pragma push_macro("CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG")
++#undef CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG
++#undef CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG
++enum class
++    [[clang::flag_enum]]
++    CRYPT_IMPORT_PUBLIC_KEY_FLAGS : int
++{
++    CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG = -2147483648,
++    CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG = 0x40000000,
++};
++#pragma pop_macro("CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG")
++#pragma pop_macro("CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG")
++
++#pragma push_macro("CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN")
++#pragma push_macro("CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP")
++#pragma push_macro("CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT")
++#pragma push_macro("CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD")
++#undef CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN
++#undef CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP
++#undef CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT
++#undef CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD
++enum class
++    CRYPT_OBJECT_LOCATOR_RELEASE_REASON : int
++{
++    CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN = 1,
++    CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP,
++    CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT,
++    CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD,
++};
++#pragma pop_macro("CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD")
++#pragma pop_macro("CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT")
++#pragma pop_macro("CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP")
++#pragma pop_macro("CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN")
++
++#pragma push_macro("CRYPT_ACQUIRE_CACHE_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_USE_PROV_INFO_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_COMPARE_KEY_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_NO_HEALING")
++#pragma push_macro("CRYPT_ACQUIRE_SILENT_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK")
++#pragma push_macro("CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG")
++#pragma push_macro("CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG")
++#undef CRYPT_ACQUIRE_CACHE_FLAG
++#undef CRYPT_ACQUIRE_USE_PROV_INFO_FLAG
++#undef CRYPT_ACQUIRE_COMPARE_KEY_FLAG
++#undef CRYPT_ACQUIRE_NO_HEALING
++#undef CRYPT_ACQUIRE_SILENT_FLAG
++#undef CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG
++#undef CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK
++#undef CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG
++#undef CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG
++#undef CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG
++enum class
++    [[clang::flag_enum]]
++    CRYPT_ACQUIRE_FLAGS : int
++{
++    CRYPT_ACQUIRE_CACHE_FLAG = 1,
++    CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 2,
++    CRYPT_ACQUIRE_COMPARE_KEY_FLAG = 4,
++    CRYPT_ACQUIRE_NO_HEALING = 8,
++    CRYPT_ACQUIRE_SILENT_FLAG = 0x40,
++    CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG = 0x80,
++    CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK = 0x70000,
++    CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG = 0x10000,
++    CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG = 0x20000,
++    CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG = 0x40000,
++};
++#pragma pop_macro("CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK")
++#pragma pop_macro("CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_SILENT_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_NO_HEALING")
++#pragma pop_macro("CRYPT_ACQUIRE_COMPARE_KEY_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_USE_PROV_INFO_FLAG")
++#pragma pop_macro("CRYPT_ACQUIRE_CACHE_FLAG")
++
++#pragma push_macro("CRYPT_GET_URL_FROM_PROPERTY")
++#pragma push_macro("CRYPT_GET_URL_FROM_EXTENSION")
++#pragma push_macro("CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE")
++#pragma push_macro("CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE")
++#undef CRYPT_GET_URL_FROM_PROPERTY
++#undef CRYPT_GET_URL_FROM_EXTENSION
++#undef CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE
++#undef CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE
++enum class
++    [[clang::flag_enum]]
++    CRYPT_GET_URL_FLAGS : int
++{
++    CRYPT_GET_URL_FROM_PROPERTY = 1,
++    CRYPT_GET_URL_FROM_EXTENSION = 2,
++    CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE = 4,
++    CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE = 8,
++};
++#pragma pop_macro("CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE")
++#pragma pop_macro("CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE")
++#pragma pop_macro("CRYPT_GET_URL_FROM_EXTENSION")
++#pragma pop_macro("CRYPT_GET_URL_FROM_PROPERTY")
++
++#pragma push_macro("CERT_STORE_SAVE_AS_PKCS7")
++#pragma push_macro("CERT_STORE_SAVE_AS_STORE")
++#undef CERT_STORE_SAVE_AS_PKCS7
++#undef CERT_STORE_SAVE_AS_STORE
++enum class
++    CERT_STORE_SAVE_AS : int
++{
++    CERT_STORE_SAVE_AS_PKCS7 = 2,
++    CERT_STORE_SAVE_AS_STORE = 1,
++};
++#pragma pop_macro("CERT_STORE_SAVE_AS_STORE")
++#pragma pop_macro("CERT_STORE_SAVE_AS_PKCS7")
++
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG")
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG")
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG")
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG")
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG")
++#pragma push_macro("CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG")
++#undef CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG
++#undef CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG
++#undef CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG
++#undef CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG
++#undef CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG
++#undef CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG
++enum class
++    [[clang::flag_enum]]
++    CERT_FIND_CHAIN_IN_STORE_FLAGS : int
++{
++    CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG = 1,
++    CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG = 2,
++    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG = 0x8000,
++    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG = 4,
++    CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG = 8,
++    CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG = 0x4000,
++};
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG")
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG")
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG")
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG")
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG")
++#pragma pop_macro("CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG")
++
++#pragma push_macro("CERT_STORE_CTRL_COMMIT_FORCE_FLAG")
++#pragma push_macro("CERT_STORE_CTRL_COMMIT_CLEAR_FLAG")
++#pragma push_macro("CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG")
++#undef CERT_STORE_CTRL_COMMIT_FORCE_FLAG
++#undef CERT_STORE_CTRL_COMMIT_CLEAR_FLAG
++#undef CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG
++enum class
++    CERT_CONTROL_STORE_FLAGS : int
++{
++    CERT_STORE_CTRL_COMMIT_FORCE_FLAG = 1,
++    CERT_STORE_CTRL_COMMIT_CLEAR_FLAG = 2,
++    CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG = 1,
++};
++#pragma pop_macro("CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG")
++#pragma pop_macro("CERT_STORE_CTRL_COMMIT_CLEAR_FLAG")
++#pragma pop_macro("CERT_STORE_CTRL_COMMIT_FORCE_FLAG")
++
++#pragma push_macro("CERT_STORE_SAVE_TO_FILE")
++#pragma push_macro("CERT_STORE_SAVE_TO_FILENAME")
++#pragma push_macro("CERT_STORE_SAVE_TO_FILENAME_A")
++#pragma push_macro("CERT_STORE_SAVE_TO_FILENAME_W")
++#pragma push_macro("CERT_STORE_SAVE_TO_MEMORY")
++#undef CERT_STORE_SAVE_TO_FILE
++#undef CERT_STORE_SAVE_TO_FILENAME
++#undef CERT_STORE_SAVE_TO_FILENAME_A
++#undef CERT_STORE_SAVE_TO_FILENAME_W
++#undef CERT_STORE_SAVE_TO_MEMORY
++enum class
++    CERT_STORE_SAVE_TO : int
++{
++    CERT_STORE_SAVE_TO_FILE = 1,
++    CERT_STORE_SAVE_TO_FILENAME = 4,
++    CERT_STORE_SAVE_TO_FILENAME_A = 3,
++    CERT_STORE_SAVE_TO_FILENAME_W = 4,
++    CERT_STORE_SAVE_TO_MEMORY = 2,
++};
++#pragma pop_macro("CERT_STORE_SAVE_TO_MEMORY")
++#pragma pop_macro("CERT_STORE_SAVE_TO_FILENAME_W")
++#pragma pop_macro("CERT_STORE_SAVE_TO_FILENAME_A")
++#pragma pop_macro("CERT_STORE_SAVE_TO_FILENAME")
++#pragma pop_macro("CERT_STORE_SAVE_TO_FILE")
++
++#pragma push_macro("KP_ALGID")
++#pragma push_macro("KP_CERTIFICATE")
++#pragma push_macro("KP_PERMISSIONS")
++#pragma push_macro("KP_SALT")
++#pragma push_macro("KP_SALT_EX")
++#pragma push_macro("KP_BLOCKLEN")
++#pragma push_macro("KP_GET_USE_COUNT")
++#pragma push_macro("KP_KEYLEN")
++#undef KP_ALGID
++#undef KP_CERTIFICATE
++#undef KP_PERMISSIONS
++#undef KP_SALT
++#undef KP_SALT_EX
++#undef KP_BLOCKLEN
++#undef KP_GET_USE_COUNT
++#undef KP_KEYLEN
++enum class
++    CRYPT_KEY_PARAM_ID : int
++{
++    KP_ALGID = 7,
++    KP_CERTIFICATE = 26,
++    KP_PERMISSIONS = 6,
++    KP_SALT = 2,
++    KP_SALT_EX = 10,
++    KP_BLOCKLEN = 8,
++    KP_GET_USE_COUNT = 42,
++    KP_KEYLEN = 9,
++};
++#pragma pop_macro("KP_KEYLEN")
++#pragma pop_macro("KP_GET_USE_COUNT")
++#pragma pop_macro("KP_BLOCKLEN")
++#pragma pop_macro("KP_SALT_EX")
++#pragma pop_macro("KP_SALT")
++#pragma pop_macro("KP_PERMISSIONS")
++#pragma pop_macro("KP_CERTIFICATE")
++#pragma pop_macro("KP_ALGID")
++
++#pragma push_macro("CRYPT_EXPORTABLE")
++#pragma push_macro("CRYPT_USER_PROTECTED")
++#pragma push_macro("CRYPT_ARCHIVABLE")
++#pragma push_macro("CRYPT_CREATE_IV")
++#pragma push_macro("CRYPT_CREATE_SALT")
++#pragma push_macro("CRYPT_DATA_KEY")
++#pragma push_macro("CRYPT_FORCE_KEY_PROTECTION_HIGH")
++#pragma push_macro("CRYPT_KEK")
++#pragma push_macro("CRYPT_INITIATOR")
++#pragma push_macro("CRYPT_NO_SALT")
++#pragma push_macro("CRYPT_ONLINE")
++#pragma push_macro("CRYPT_PREGEN")
++#pragma push_macro("CRYPT_RECIPIENT")
++#pragma push_macro("CRYPT_SF")
++#pragma push_macro("CRYPT_SGCKEY")
++#pragma push_macro("CRYPT_VOLATILE")
++#pragma push_macro("CRYPT_MACHINE_KEYSET")
++#pragma push_macro("CRYPT_USER_KEYSET")
++#pragma push_macro("PKCS12_PREFER_CNG_KSP")
++#pragma push_macro("PKCS12_ALWAYS_CNG_KSP")
++#pragma push_macro("PKCS12_ALLOW_OVERWRITE_KEY")
++#pragma push_macro("PKCS12_NO_PERSIST_KEY")
++#pragma push_macro("PKCS12_INCLUDE_EXTENDED_PROPERTIES")
++#pragma push_macro("CRYPT_OAEP")
++#pragma push_macro("CRYPT_BLOB_VER3")
++#pragma push_macro("CRYPT_DESTROYKEY")
++#pragma push_macro("CRYPT_SSL2_FALLBACK")
++#pragma push_macro("CRYPT_Y_ONLY")
++#pragma push_macro("CRYPT_IPSEC_HMAC_KEY")
++#pragma push_macro("CERT_SET_KEY_PROV_HANDLE_PROP_ID")
++#pragma push_macro("CERT_SET_KEY_CONTEXT_PROP_ID")
++#undef CRYPT_EXPORTABLE
++#undef CRYPT_USER_PROTECTED
++#undef CRYPT_ARCHIVABLE
++#undef CRYPT_CREATE_IV
++#undef CRYPT_CREATE_SALT
++#undef CRYPT_DATA_KEY
++#undef CRYPT_FORCE_KEY_PROTECTION_HIGH
++#undef CRYPT_KEK
++#undef CRYPT_INITIATOR
++#undef CRYPT_NO_SALT
++#undef CRYPT_ONLINE
++#undef CRYPT_PREGEN
++#undef CRYPT_RECIPIENT
++#undef CRYPT_SF
++#undef CRYPT_SGCKEY
++#undef CRYPT_VOLATILE
++#undef CRYPT_MACHINE_KEYSET
++#undef CRYPT_USER_KEYSET
++#undef PKCS12_PREFER_CNG_KSP
++#undef PKCS12_ALWAYS_CNG_KSP
++#undef PKCS12_ALLOW_OVERWRITE_KEY
++#undef PKCS12_NO_PERSIST_KEY
++#undef PKCS12_INCLUDE_EXTENDED_PROPERTIES
++#undef CRYPT_OAEP
++#undef CRYPT_BLOB_VER3
++#undef CRYPT_DESTROYKEY
++#undef CRYPT_SSL2_FALLBACK
++#undef CRYPT_Y_ONLY
++#undef CRYPT_IPSEC_HMAC_KEY
++#undef CERT_SET_KEY_PROV_HANDLE_PROP_ID
++#undef CERT_SET_KEY_CONTEXT_PROP_ID
++enum class
++    [[clang::flag_enum]]
++    CRYPT_KEY_FLAGS : int
++{
++    CRYPT_EXPORTABLE = 1,
++    CRYPT_USER_PROTECTED = 2,
++    CRYPT_ARCHIVABLE = 0x4000,
++    CRYPT_CREATE_IV = 0x200,
++    CRYPT_CREATE_SALT = 4,
++    CRYPT_DATA_KEY = 0x800,
++    CRYPT_FORCE_KEY_PROTECTION_HIGH = 0x8000,
++    CRYPT_KEK = 0x400,
++    CRYPT_INITIATOR = 0x40,
++    CRYPT_NO_SALT = 0x10,
++    CRYPT_ONLINE = 0x80,
++    CRYPT_PREGEN = 0x40,
++    CRYPT_RECIPIENT = 0x10,
++    CRYPT_SF = 0x100,
++    CRYPT_SGCKEY = 0x2000,
++    CRYPT_VOLATILE = 0x1000,
++    CRYPT_MACHINE_KEYSET = 0x20,
++    CRYPT_USER_KEYSET = 0x1000,
++    PKCS12_PREFER_CNG_KSP = 0x100,
++    PKCS12_ALWAYS_CNG_KSP = 0x200,
++    PKCS12_ALLOW_OVERWRITE_KEY = 0x4000,
++    PKCS12_NO_PERSIST_KEY = 0x8000,
++    PKCS12_INCLUDE_EXTENDED_PROPERTIES = 0x10,
++    CRYPT_OAEP = 0x40,
++    CRYPT_BLOB_VER3 = 0x80,
++    CRYPT_DESTROYKEY = 4,
++    CRYPT_SSL2_FALLBACK = 2,
++    CRYPT_Y_ONLY = 1,
++    CRYPT_IPSEC_HMAC_KEY = 0x100,
++    CERT_SET_KEY_PROV_HANDLE_PROP_ID = 1,
++    CERT_SET_KEY_CONTEXT_PROP_ID = 1,
++};
++#pragma pop_macro("CERT_SET_KEY_CONTEXT_PROP_ID")
++#pragma pop_macro("CERT_SET_KEY_PROV_HANDLE_PROP_ID")
++#pragma pop_macro("CRYPT_IPSEC_HMAC_KEY")
++#pragma pop_macro("CRYPT_Y_ONLY")
++#pragma pop_macro("CRYPT_SSL2_FALLBACK")
++#pragma pop_macro("CRYPT_DESTROYKEY")
++#pragma pop_macro("CRYPT_BLOB_VER3")
++#pragma pop_macro("CRYPT_OAEP")
++#pragma pop_macro("PKCS12_INCLUDE_EXTENDED_PROPERTIES")
++#pragma pop_macro("PKCS12_NO_PERSIST_KEY")
++#pragma pop_macro("PKCS12_ALLOW_OVERWRITE_KEY")
++#pragma pop_macro("PKCS12_ALWAYS_CNG_KSP")
++#pragma pop_macro("PKCS12_PREFER_CNG_KSP")
++#pragma pop_macro("CRYPT_USER_KEYSET")
++#pragma pop_macro("CRYPT_MACHINE_KEYSET")
++#pragma pop_macro("CRYPT_VOLATILE")
++#pragma pop_macro("CRYPT_SGCKEY")
++#pragma pop_macro("CRYPT_SF")
++#pragma pop_macro("CRYPT_RECIPIENT")
++#pragma pop_macro("CRYPT_PREGEN")
++#pragma pop_macro("CRYPT_ONLINE")
++#pragma pop_macro("CRYPT_NO_SALT")
++#pragma pop_macro("CRYPT_INITIATOR")
++#pragma pop_macro("CRYPT_KEK")
++#pragma pop_macro("CRYPT_FORCE_KEY_PROTECTION_HIGH")
++#pragma pop_macro("CRYPT_DATA_KEY")
++#pragma pop_macro("CRYPT_CREATE_SALT")
++#pragma pop_macro("CRYPT_CREATE_IV")
++#pragma pop_macro("CRYPT_ARCHIVABLE")
++#pragma pop_macro("CRYPT_USER_PROTECTED")
++#pragma pop_macro("CRYPT_EXPORTABLE")
++
++#pragma push_macro("CERT_ALT_NAME_RFC822_NAME")
++#pragma push_macro("CERT_ALT_NAME_DNS_NAME")
++#pragma push_macro("CERT_ALT_NAME_URL")
++#pragma push_macro("CERT_ALT_NAME_REGISTERED_ID")
++#pragma push_macro("CERT_ALT_NAME_DIRECTORY_NAME")
++#pragma push_macro("CERT_ALT_NAME_IP_ADDRESS")
++#pragma push_macro("CERT_ALT_NAME_OTHER_NAME")
++#undef CERT_ALT_NAME_RFC822_NAME
++#undef CERT_ALT_NAME_DNS_NAME
++#undef CERT_ALT_NAME_URL
++#undef CERT_ALT_NAME_REGISTERED_ID
++#undef CERT_ALT_NAME_DIRECTORY_NAME
++#undef CERT_ALT_NAME_IP_ADDRESS
++#undef CERT_ALT_NAME_OTHER_NAME
++enum class
++    CERT_ALT_NAME : int
++{
++    CERT_ALT_NAME_RFC822_NAME = 2,
++    CERT_ALT_NAME_DNS_NAME = 3,
++    CERT_ALT_NAME_URL = 7,
++    CERT_ALT_NAME_REGISTERED_ID = 9,
++    CERT_ALT_NAME_DIRECTORY_NAME = 5,
++    CERT_ALT_NAME_IP_ADDRESS = 8,
++    CERT_ALT_NAME_OTHER_NAME = 1,
++};
++#pragma pop_macro("CERT_ALT_NAME_OTHER_NAME")
++#pragma pop_macro("CERT_ALT_NAME_IP_ADDRESS")
++#pragma pop_macro("CERT_ALT_NAME_DIRECTORY_NAME")
++#pragma pop_macro("CERT_ALT_NAME_REGISTERED_ID")
++#pragma pop_macro("CERT_ALT_NAME_URL")
++#pragma pop_macro("CERT_ALT_NAME_DNS_NAME")
++#pragma pop_macro("CERT_ALT_NAME_RFC822_NAME")
++
++#pragma push_macro("CMSG_DATA")
++#pragma push_macro("CMSG_SIGNED")
++#pragma push_macro("CMSG_ENVELOPED")
++#pragma push_macro("CMSG_SIGNED_AND_ENVELOPED")
++#pragma push_macro("CMSG_HASHED")
++#undef CMSG_DATA
++#undef CMSG_SIGNED
++#undef CMSG_ENVELOPED
++#undef CMSG_SIGNED_AND_ENVELOPED
++#undef CMSG_HASHED
++enum class
++    CRYPT_MSG_TYPE : int
++{
++    CMSG_DATA = 1,
++    CMSG_SIGNED,
++    CMSG_ENVELOPED,
++    CMSG_SIGNED_AND_ENVELOPED,
++    CMSG_HASHED,
++};
++#pragma pop_macro("CMSG_HASHED")
++#pragma pop_macro("CMSG_SIGNED_AND_ENVELOPED")
++#pragma pop_macro("CMSG_ENVELOPED")
++#pragma pop_macro("CMSG_SIGNED")
++#pragma pop_macro("CMSG_DATA")
++
++#pragma push_macro("CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG")
++#pragma push_macro("CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG")
++#undef CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG
++#undef CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG
++enum class
++    [[clang::flag_enum]]
++    CRYPT_DEFAULT_CONTEXT_FLAGS : int
++{
++    CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG = 1,
++    CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG = 2,
++};
++#pragma pop_macro("CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG")
++#pragma pop_macro("CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG")
++
++#pragma push_macro("CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG")
++#pragma push_macro("CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG")
++#pragma push_macro("CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG")
++#undef CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG
++#undef CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG
++#undef CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG
++enum class
++    CRYPT_VERIFY_CERT_FLAGS : int
++{
++    CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG = 1,
++    CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG = 2,
++    CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG = 4,
++};
++#pragma pop_macro("CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG")
++#pragma pop_macro("CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG")
++#pragma pop_macro("CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG")
++
++#pragma push_macro("HP_HMAC_INFO")
++#pragma push_macro("HP_HASHVAL")
++#undef HP_HMAC_INFO
++#undef HP_HASHVAL
++enum class
++    CRYPT_SET_HASH_PARAM : int
++{
++    HP_HMAC_INFO = 5,
++    HP_HASHVAL = 2,
++};
++#pragma pop_macro("HP_HASHVAL")
++#pragma pop_macro("HP_HMAC_INFO")
++
++#pragma push_macro("CERT_SYSTEM_STORE_LOCATION_MASK")
++#pragma push_macro("CERT_SYSTEM_STORE_RELOCATE_FLAG")
++#undef CERT_SYSTEM_STORE_LOCATION_MASK
++#undef CERT_SYSTEM_STORE_RELOCATE_FLAG
++enum class
++    CERT_SYSTEM_STORE_FLAGS : int
++{
++    CERT_SYSTEM_STORE_LOCATION_MASK = 16711680,
++    CERT_SYSTEM_STORE_RELOCATE_FLAG = -2147483648,
++};
++#pragma pop_macro("CERT_SYSTEM_STORE_RELOCATE_FLAG")
++#pragma pop_macro("CERT_SYSTEM_STORE_LOCATION_MASK")
++
++#pragma push_macro("CERT_CREATE_SELFSIGN_NO_KEY_INFO")
++#pragma push_macro("CERT_CREATE_SELFSIGN_NO_SIGN")
++#undef CERT_CREATE_SELFSIGN_NO_KEY_INFO
++#undef CERT_CREATE_SELFSIGN_NO_SIGN
++enum class
++    [[clang::flag_enum]]
++    CERT_CREATE_SELFSIGN_FLAGS : int
++{
++    CERT_CREATE_SELFSIGN_NO_KEY_INFO = 2,
++    CERT_CREATE_SELFSIGN_NO_SIGN = 1,
++};
++#pragma pop_macro("CERT_CREATE_SELFSIGN_NO_SIGN")
++#pragma pop_macro("CERT_CREATE_SELFSIGN_NO_KEY_INFO")
++
++#pragma push_macro("CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID")
++#pragma push_macro("CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID")
++#undef CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID
++#undef CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID
++enum class
++    CRYPT_DEFAULT_CONTEXT_TYPE : int
++{
++    CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID = 1,
++    CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID,
++};
++#pragma pop_macro("CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID")
++#pragma pop_macro("CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID")
++
++#pragma push_macro("CTL_FIND_ANY")
++#pragma push_macro("CTL_FIND_SHA1_HASH")
++#pragma push_macro("CTL_FIND_MD5_HASH")
++#pragma push_macro("CTL_FIND_USAGE")
++#pragma push_macro("CTL_FIND_SAME_USAGE_FLAG")
++#pragma push_macro("CTL_FIND_EXISTING")
++#pragma push_macro("CTL_FIND_SUBJECT")
++#undef CTL_FIND_ANY
++#undef CTL_FIND_SHA1_HASH
++#undef CTL_FIND_MD5_HASH
++#undef CTL_FIND_USAGE
++#undef CTL_FIND_SAME_USAGE_FLAG
++#undef CTL_FIND_EXISTING
++#undef CTL_FIND_SUBJECT
++enum class
++    CERT_FIND_TYPE : int
++{
++    CTL_FIND_ANY = 0,
++    CTL_FIND_SHA1_HASH = 1,
++    CTL_FIND_MD5_HASH = 2,
++    CTL_FIND_USAGE = 3,
++    CTL_FIND_SAME_USAGE_FLAG = 1,
++    CTL_FIND_EXISTING = 5,
++    CTL_FIND_SUBJECT = 4,
++};
++#pragma pop_macro("CTL_FIND_SUBJECT")
++#pragma pop_macro("CTL_FIND_EXISTING")
++#pragma pop_macro("CTL_FIND_SAME_USAGE_FLAG")
++#pragma pop_macro("CTL_FIND_USAGE")
++#pragma pop_macro("CTL_FIND_MD5_HASH")
++#pragma pop_macro("CTL_FIND_SHA1_HASH")
++#pragma pop_macro("CTL_FIND_ANY")
++
++#pragma push_macro("CRYPT_FIND_USER_KEYSET_FLAG")
++#pragma push_macro("CRYPT_FIND_MACHINE_KEYSET_FLAG")
++#pragma push_macro("CRYPT_FIND_SILENT_KEYSET_FLAG")
++#undef CRYPT_FIND_USER_KEYSET_FLAG
++#undef CRYPT_FIND_MACHINE_KEYSET_FLAG
++#undef CRYPT_FIND_SILENT_KEYSET_FLAG
++enum class
++    CRYPT_FIND_FLAGS : int
++{
++    CRYPT_FIND_USER_KEYSET_FLAG = 1,
++    CRYPT_FIND_MACHINE_KEYSET_FLAG = 2,
++    CRYPT_FIND_SILENT_KEYSET_FLAG = 0x40,
++};
++#pragma pop_macro("CRYPT_FIND_SILENT_KEYSET_FLAG")
++#pragma pop_macro("CRYPT_FIND_MACHINE_KEYSET_FLAG")
++#pragma pop_macro("CRYPT_FIND_USER_KEYSET_FLAG")
++
++#pragma push_macro("CRL_REASON_UNSPECIFIED")
++#pragma push_macro("CRL_REASON_KEY_COMPROMISE")
++#pragma push_macro("CRL_REASON_CA_COMPROMISE")
++#pragma push_macro("CRL_REASON_AFFILIATION_CHANGED")
++#pragma push_macro("CRL_REASON_SUPERSEDED")
++#pragma push_macro("CRL_REASON_CESSATION_OF_OPERATION")
++#pragma push_macro("CRL_REASON_CERTIFICATE_HOLD")
++#pragma push_macro("CRL_REASON_REMOVE_FROM_CRL")
++#undef CRL_REASON_UNSPECIFIED
++#undef CRL_REASON_KEY_COMPROMISE
++#undef CRL_REASON_CA_COMPROMISE
++#undef CRL_REASON_AFFILIATION_CHANGED
++#undef CRL_REASON_SUPERSEDED
++#undef CRL_REASON_CESSATION_OF_OPERATION
++#undef CRL_REASON_CERTIFICATE_HOLD
++#undef CRL_REASON_REMOVE_FROM_CRL
++enum class
++    CERT_REVOCATION_STATUS_REASON : int
++{
++    CRL_REASON_UNSPECIFIED = 0,
++    CRL_REASON_KEY_COMPROMISE = 1,
++    CRL_REASON_CA_COMPROMISE = 2,
++    CRL_REASON_AFFILIATION_CHANGED = 3,
++    CRL_REASON_SUPERSEDED = 4,
++    CRL_REASON_CESSATION_OF_OPERATION = 5,
++    CRL_REASON_CERTIFICATE_HOLD = 6,
++    CRL_REASON_REMOVE_FROM_CRL = 8,
++};
++#pragma pop_macro("CRL_REASON_REMOVE_FROM_CRL")
++#pragma pop_macro("CRL_REASON_CERTIFICATE_HOLD")
++#pragma pop_macro("CRL_REASON_CESSATION_OF_OPERATION")
++#pragma pop_macro("CRL_REASON_SUPERSEDED")
++#pragma pop_macro("CRL_REASON_AFFILIATION_CHANGED")
++#pragma pop_macro("CRL_REASON_CA_COMPROMISE")
++#pragma pop_macro("CRL_REASON_KEY_COMPROMISE")
++#pragma pop_macro("CRL_REASON_UNSPECIFIED")
++
++#pragma push_macro("CERT_ROOT_PROGRAM_FLAG_LSC")
++#pragma push_macro("CERT_ROOT_PROGRAM_FLAG_ORG")
++#pragma push_macro("CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO")
++#undef CERT_ROOT_PROGRAM_FLAG_LSC
++#undef CERT_ROOT_PROGRAM_FLAG_ORG
++#undef CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO
++enum class
++    [[clang::flag_enum]]
++    CERT_ROOT_PROGRAM_FLAGS : int
++{
++    CERT_ROOT_PROGRAM_FLAG_LSC = 0x40,
++    CERT_ROOT_PROGRAM_FLAG_ORG = 0x80,
++    CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO = 0x20,
++};
++#pragma pop_macro("CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO")
++#pragma pop_macro("CERT_ROOT_PROGRAM_FLAG_ORG")
++#pragma pop_macro("CERT_ROOT_PROGRAM_FLAG_LSC")
++
++#pragma push_macro("CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE")
++#pragma push_macro("CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE")
++#pragma push_macro("CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE")
++#undef CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE
++#undef CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE
++#undef CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE
++enum class
++    CERT_LOGOTYPE_CHOICE : int
++{
++    CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE,
++    CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE,
++    CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE,
++};
++#pragma pop_macro("CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE")
++#pragma pop_macro("CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE")
++#pragma pop_macro("CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE")
++
++#pragma push_macro("CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE")
++#pragma push_macro("CMSG_KEY_AGREE_STATIC_KEY_CHOICE")
++#undef CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE
++#undef CMSG_KEY_AGREE_STATIC_KEY_CHOICE
++enum class
++    CMSG_KEY_AGREE_OPTION : int
++{
++    CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE = 1,
++    CMSG_KEY_AGREE_STATIC_KEY_CHOICE,
++};
++#pragma pop_macro("CMSG_KEY_AGREE_STATIC_KEY_CHOICE")
++#pragma pop_macro("CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE")
++
++#pragma push_macro("CERT_LOGOTYPE_DIRECT_INFO_CHOICE")
++#pragma push_macro("CERT_LOGOTYPE_INDIRECT_INFO_CHOICE")
++#undef CERT_LOGOTYPE_DIRECT_INFO_CHOICE
++#undef CERT_LOGOTYPE_INDIRECT_INFO_CHOICE
++enum class
++    CERT_LOGOTYPE_OPTION : int
++{
++    CERT_LOGOTYPE_DIRECT_INFO_CHOICE = 1,
++    CERT_LOGOTYPE_INDIRECT_INFO_CHOICE,
++};
++#pragma pop_macro("CERT_LOGOTYPE_INDIRECT_INFO_CHOICE")
++#pragma pop_macro("CERT_LOGOTYPE_DIRECT_INFO_CHOICE")
++
++#pragma push_macro("CERT_STORE_PROV_EXTERNAL_FLAG")
++#pragma push_macro("CERT_STORE_PROV_DELETED_FLAG")
++#pragma push_macro("CERT_STORE_PROV_NO_PERSIST_FLAG")
++#pragma push_macro("CERT_STORE_PROV_SYSTEM_STORE_FLAG")
++#pragma push_macro("CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG")
++#undef CERT_STORE_PROV_EXTERNAL_FLAG
++#undef CERT_STORE_PROV_DELETED_FLAG
++#undef CERT_STORE_PROV_NO_PERSIST_FLAG
++#undef CERT_STORE_PROV_SYSTEM_STORE_FLAG
++#undef CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG
++enum class
++    [[clang::flag_enum]]
++    CERT_STORE_PROV_FLAGS : int
++{
++    CERT_STORE_PROV_EXTERNAL_FLAG = 1,
++    CERT_STORE_PROV_DELETED_FLAG = 2,
++    CERT_STORE_PROV_NO_PERSIST_FLAG = 4,
++    CERT_STORE_PROV_SYSTEM_STORE_FLAG = 8,
++    CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG = 0x10,
++};
++#pragma pop_macro("CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG")
++#pragma pop_macro("CERT_STORE_PROV_SYSTEM_STORE_FLAG")
++#pragma pop_macro("CERT_STORE_PROV_NO_PERSIST_FLAG")
++#pragma pop_macro("CERT_STORE_PROV_DELETED_FLAG")
++#pragma pop_macro("CERT_STORE_PROV_EXTERNAL_FLAG")
++
++#pragma push_macro("CMSG_KEY_AGREE_ORIGINATOR_CERT")
++#pragma push_macro("CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY")
++#undef CMSG_KEY_AGREE_ORIGINATOR_CERT
++#undef CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY
++enum class
++    CMSG_KEY_AGREE_ORIGINATOR : int
++{
++    CMSG_KEY_AGREE_ORIGINATOR_CERT = 1,
++    CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY,
++};
++#pragma pop_macro("CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY")
++#pragma pop_macro("CMSG_KEY_AGREE_ORIGINATOR_CERT")
++
++#pragma push_macro("CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE")
++#pragma push_macro("CERT_BIOMETRIC_OID_DATA_CHOICE")
++#undef CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE
++#undef CERT_BIOMETRIC_OID_DATA_CHOICE
++enum class
++    CERT_BIOMETRIC_DATA_TYPE : int
++{
++    CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE = 1,
++    CERT_BIOMETRIC_OID_DATA_CHOICE,
++};
++#pragma pop_macro("CERT_BIOMETRIC_OID_DATA_CHOICE")
++#pragma pop_macro("CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE")
++
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS")
++#pragma push_macro("CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS")
++#pragma push_macro("CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG")
++#pragma push_macro("CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG")
++#pragma push_macro("BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG")
++#pragma push_macro("BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG")
++#pragma push_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG")
++#pragma push_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG")
++#pragma push_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG")
++#undef CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS
++#undef CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS
++#undef CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG
++#undef CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG
++#undef CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG
++#undef BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG
++#undef BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG
++#undef MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG
++#undef MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG
++#undef MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG
++enum class
++    [[clang::flag_enum]]
++    CERT_CHAIN_POLICY_FLAGS : int
++{
++    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 1,
++    CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 2,
++    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 4,
++    CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 8,
++    CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 7,
++    CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 0x10,
++    CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 0x20,
++    CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 0x40,
++    CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG = 0x80,
++    CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG = 0x100,
++    CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG = 0x200,
++    CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG = 0x400,
++    CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG = 0x800,
++    CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS = 0xF00,
++    CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG = 0x8000,
++    CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 0x4000,
++    CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 0x2000,
++    CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 0x1000,
++    CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG = 0x8000000,
++    BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG = -2147483648,
++    BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG = 0x40000000,
++    MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG = 0x10000,
++    MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG = 0x20000,
++    MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG = 0x40000,
++};
++#pragma pop_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG")
++#pragma pop_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG")
++#pragma pop_macro("MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG")
++#pragma pop_macro("BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG")
++#pragma pop_macro("BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG")
++#pragma pop_macro("CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG")
++
++#pragma push_macro("CERT_STRONG_SIGN_ENABLE_CRL_CHECK")
++#pragma push_macro("CERT_STRONG_SIGN_ENABLE_OCSP_CHECK")
++#undef CERT_STRONG_SIGN_ENABLE_CRL_CHECK
++#undef CERT_STRONG_SIGN_ENABLE_OCSP_CHECK
++enum class
++    [[clang::flag_enum]]
++    CERT_STRONG_SIGN_FLAGS : int
++{
++    CERT_STRONG_SIGN_ENABLE_CRL_CHECK = 1,
++    CERT_STRONG_SIGN_ENABLE_OCSP_CHECK = 2,
++};
++#pragma pop_macro("CERT_STRONG_SIGN_ENABLE_OCSP_CHECK")
++#pragma pop_macro("CERT_STRONG_SIGN_ENABLE_CRL_CHECK")
++
++#pragma push_macro("CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE")
++#pragma push_macro("CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE")
++#undef CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE
++#undef CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE
++enum class
++    CERT_LOGOTYPE_IMAGE_INFO_TYPE : int
++{
++    CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE = 1,
++    CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE,
++};
++#pragma pop_macro("CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE")
++#pragma pop_macro("CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE")
++
++#pragma push_macro("CERT_SELECT_BY_ENHKEY_USAGE")
++#pragma push_macro("CERT_SELECT_BY_KEY_USAGE")
++#pragma push_macro("CERT_SELECT_BY_POLICY_OID")
++#pragma push_macro("CERT_SELECT_BY_PROV_NAME")
++#pragma push_macro("CERT_SELECT_BY_EXTENSION")
++#pragma push_macro("CERT_SELECT_BY_SUBJECT_HOST_NAME")
++#pragma push_macro("CERT_SELECT_BY_ISSUER_ATTR")
++#pragma push_macro("CERT_SELECT_BY_SUBJECT_ATTR")
++#pragma push_macro("CERT_SELECT_BY_ISSUER_NAME")
++#pragma push_macro("CERT_SELECT_BY_PUBLIC_KEY")
++#pragma push_macro("CERT_SELECT_BY_TLS_SIGNATURES")
++#undef CERT_SELECT_BY_ENHKEY_USAGE
++#undef CERT_SELECT_BY_KEY_USAGE
++#undef CERT_SELECT_BY_POLICY_OID
++#undef CERT_SELECT_BY_PROV_NAME
++#undef CERT_SELECT_BY_EXTENSION
++#undef CERT_SELECT_BY_SUBJECT_HOST_NAME
++#undef CERT_SELECT_BY_ISSUER_ATTR
++#undef CERT_SELECT_BY_SUBJECT_ATTR
++#undef CERT_SELECT_BY_ISSUER_NAME
++#undef CERT_SELECT_BY_PUBLIC_KEY
++#undef CERT_SELECT_BY_TLS_SIGNATURES
++enum class
++    CERT_SELECT_CRITERIA_TYPE : int
++{
++    CERT_SELECT_BY_ENHKEY_USAGE = 1,
++    CERT_SELECT_BY_KEY_USAGE,
++    CERT_SELECT_BY_POLICY_OID,
++    CERT_SELECT_BY_PROV_NAME,
++    CERT_SELECT_BY_EXTENSION,
++    CERT_SELECT_BY_SUBJECT_HOST_NAME,
++    CERT_SELECT_BY_ISSUER_ATTR,
++    CERT_SELECT_BY_SUBJECT_ATTR,
++    CERT_SELECT_BY_ISSUER_NAME,
++    CERT_SELECT_BY_PUBLIC_KEY,
++    CERT_SELECT_BY_TLS_SIGNATURES,
++};
++#pragma pop_macro("CERT_SELECT_BY_TLS_SIGNATURES")
++#pragma pop_macro("CERT_SELECT_BY_PUBLIC_KEY")
++#pragma pop_macro("CERT_SELECT_BY_ISSUER_NAME")
++#pragma pop_macro("CERT_SELECT_BY_SUBJECT_ATTR")
++#pragma pop_macro("CERT_SELECT_BY_ISSUER_ATTR")
++#pragma pop_macro("CERT_SELECT_BY_SUBJECT_HOST_NAME")
++#pragma pop_macro("CERT_SELECT_BY_EXTENSION")
++#pragma pop_macro("CERT_SELECT_BY_PROV_NAME")
++#pragma pop_macro("CERT_SELECT_BY_POLICY_OID")
++#pragma pop_macro("CERT_SELECT_BY_KEY_USAGE")
++#pragma pop_macro("CERT_SELECT_BY_ENHKEY_USAGE")
++
++#pragma push_macro("TIMESTAMP_VERSION")
++#undef TIMESTAMP_VERSION
++enum class
++    CRYPT_TIMESTAMP_VERSION : int
++{
++    TIMESTAMP_VERSION = 1,
++};
++#pragma pop_macro("TIMESTAMP_VERSION")
++
++#pragma push_macro("CERT_ID_ISSUER_SERIAL_NUMBER")
++#pragma push_macro("CERT_ID_KEY_IDENTIFIER")
++#pragma push_macro("CERT_ID_SHA1_HASH")
++#undef CERT_ID_ISSUER_SERIAL_NUMBER
++#undef CERT_ID_KEY_IDENTIFIER
++#undef CERT_ID_SHA1_HASH
++enum class
++    CERT_ID_OPTION : int
++{
++    CERT_ID_ISSUER_SERIAL_NUMBER = 1,
++    CERT_ID_KEY_IDENTIFIER,
++    CERT_ID_SHA1_HASH,
++};
++#pragma pop_macro("CERT_ID_SHA1_HASH")
++#pragma pop_macro("CERT_ID_KEY_IDENTIFIER")
++#pragma pop_macro("CERT_ID_ISSUER_SERIAL_NUMBER")
++
++#pragma push_macro("AUTHTYPE_CLIENT")
++#pragma push_macro("AUTHTYPE_SERVER")
++#undef AUTHTYPE_CLIENT
++#undef AUTHTYPE_SERVER
++enum class
++    HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE : int
++{
++    AUTHTYPE_CLIENT = 1,
++    AUTHTYPE_SERVER,
++};
++#pragma pop_macro("AUTHTYPE_SERVER")
++#pragma pop_macro("AUTHTYPE_CLIENT")
++
++#pragma push_macro("TIMESTAMP_STATUS_GRANTED")
++#pragma push_macro("TIMESTAMP_STATUS_GRANTED_WITH_MODS")
++#pragma push_macro("TIMESTAMP_STATUS_REJECTED")
++#pragma push_macro("TIMESTAMP_STATUS_WAITING")
++#pragma push_macro("TIMESTAMP_STATUS_REVOCATION_WARNING")
++#pragma push_macro("TIMESTAMP_STATUS_REVOKED")
++#undef TIMESTAMP_STATUS_GRANTED
++#undef TIMESTAMP_STATUS_GRANTED_WITH_MODS
++#undef TIMESTAMP_STATUS_REJECTED
++#undef TIMESTAMP_STATUS_WAITING
++#undef TIMESTAMP_STATUS_REVOCATION_WARNING
++#undef TIMESTAMP_STATUS_REVOKED
++enum class
++    CRYPT_TIMESTAMP_RESPONSE_STATUS : int
++{
++    TIMESTAMP_STATUS_GRANTED,
++    TIMESTAMP_STATUS_GRANTED_WITH_MODS,
++    TIMESTAMP_STATUS_REJECTED,
++    TIMESTAMP_STATUS_WAITING,
++    TIMESTAMP_STATUS_REVOCATION_WARNING,
++    TIMESTAMP_STATUS_REVOKED,
++};
++#pragma pop_macro("TIMESTAMP_STATUS_REVOKED")
++#pragma pop_macro("TIMESTAMP_STATUS_REVOCATION_WARNING")
++#pragma pop_macro("TIMESTAMP_STATUS_WAITING")
++#pragma pop_macro("TIMESTAMP_STATUS_REJECTED")
++#pragma pop_macro("TIMESTAMP_STATUS_GRANTED_WITH_MODS")
++#pragma pop_macro("TIMESTAMP_STATUS_GRANTED")
++
++
++#endif
++
+ #ifdef __cplusplus
+ }       // Balance extern "C" above
+ #endif

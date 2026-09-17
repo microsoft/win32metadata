@@ -1,0 +1,58 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
+index 2ff3292044..841c9c0008 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
+@@ -33,6 +33,10 @@
+ #ifndef __mfobjects_h__
+ #define __mfobjects_h__
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+ #endif
+@@ -4837,6 +4841,19 @@ EXTERN_C const IID IID_IMFMediaEvent;
+ 
+ #define MF_EVENT_FLAG_NO_WAIT 0x00000001
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_EVENT_FLAG_NO_WAIT")
++#undef MF_EVENT_FLAG_NO_WAIT
++enum class MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS : int
++{
++    MF_EVENT_FLAG_NONE = 0,
++    MF_EVENT_FLAG_NO_WAIT = 0x00000001,
++};
++#pragma pop_macro("MF_EVENT_FLAG_NO_WAIT")
++#else
++typedef DWORD MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS;
++#endif
++
+ 
+ 
+ extern RPC_IF_HANDLE __MIDL_itf_mfobjects_0000_0014_v0_0_c_ifspec;
+@@ -4859,7 +4876,7 @@ EXTERN_C const IID IID_IMFMediaEventGenerator;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _In_  MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS dwFlags,
+             /* [annotation][out] */ 
+             _Out_  IMFMediaEvent **ppEvent) = 0;
+         
+@@ -4914,7 +4931,7 @@ EXTERN_C const IID IID_IMFMediaEventGenerator;
+         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
+             __RPC__in IMFMediaEventGenerator * This,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _In_  MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS dwFlags,
+             /* [annotation][out] */ 
+             _Out_  IMFMediaEvent **ppEvent);
+         
+@@ -7797,4 +7814,3 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
+ 
+ #endif
+ 
+-

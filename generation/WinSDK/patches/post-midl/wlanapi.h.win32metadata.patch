@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
+index 3b444d9b95..167167c9f0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
+@@ -25,6 +25,9 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -1570,6 +1573,7 @@ WlanReasonCodeToString(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SetLastError_
+ PVOID WINAPI
+ WlanAllocateMemory(
+     _In_ DWORD dwMemorySize

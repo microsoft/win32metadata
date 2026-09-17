@@ -1,0 +1,16 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxva9typ.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxva9typ.h
+index 0343093981..e07a77e80e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dxva9typ.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxva9typ.h
+@@ -261,7 +261,11 @@ typedef enum _DXVA_SampleFormat {
+ #define DXVA_ExtractExtColorData(_sf, _Mask, _Shift) \
+     (((_sf) & (_Mask)) >> (_Shift))
+ 
++#ifdef WIN32METADATA
++#define DXVABitMask(__n) (~((~0u) << __n))
++#else
+ #define DXVABitMask(__n) (~((~0) << __n))
++#endif
+ #define DXVA_ExtColorData_ShiftBase 8
+ #define DXVAColorMask(__bits,__base) (DXVABitMask(__bits) << (__base))
+ 
