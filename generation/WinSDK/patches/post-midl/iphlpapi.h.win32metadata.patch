@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
+index 52c0937e43..249c8c077b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
+@@ -19,6 +19,9 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //                                                                          //
+@@ -1202,6 +1205,7 @@ SendARP(
+     _Inout_ PULONG  PhyAddrLen
+     );
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ BOOL
+ WINAPI

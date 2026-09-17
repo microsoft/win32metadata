@@ -1,0 +1,60 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
+index 5fb9f4f748..038bd30838 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
+@@ -7,6 +7,10 @@
+ // -------------------------------------------------------------
+ 
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef _INC_MAGNIFIER
+ #define _INC_MAGNIFIER
+ 
+@@ -72,25 +76,44 @@ typedef struct tagMAGCOLOREFFECT
+ typedef BOOL (CALLBACK* MagImageScalingCallback)(HWND hwnd, void * srcdata, MAGIMAGEHEADER srcheader, void * destdata, MAGIMAGEHEADER destheader, RECT unclipped, RECT clipped, HRGN dirty );
+ 
+ // Public Functions
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagInitialize();
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagUninitialize();
+ 
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagSetWindowSource(HWND hwnd, RECT rect);
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagGetWindowSource(HWND hwnd, RECT *pRect);
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagSetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagGetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagSetWindowFilterList(HWND hwnd, DWORD dwFilterMode, int count, HWND *pHWND );
++_Windows_SupportedOS_WindowsVista_
+ int  WINAPI MagGetWindowFilterList(HWND hwnd, DWORD *pdwFilterMode, int count, HWND *pHWND );
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagSetImageScalingCallback(HWND hwnd, MagImageScalingCallback callback );
++_Windows_SupportedOS_WindowsVista_
+ MagImageScalingCallback WINAPI MagGetImageScalingCallback(HWND hwnd );
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagSetColorEffect(HWND hwnd, PMAGCOLOREFFECT pEffect);
++_Windows_SupportedOS_WindowsVista_
+ BOOL WINAPI MagGetColorEffect(HWND hwnd, PMAGCOLOREFFECT pEffect);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagSetFullscreenTransform(_In_ float magLevel, _In_ int xOffset, _In_ int yOffset);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagGetFullscreenTransform(_Out_ float *pMagLevel, _Out_ int *pxOffset, _Out_ int *pyOffset);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagSetFullscreenColorEffect(_In_ PMAGCOLOREFFECT pEffect);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagGetFullscreenColorEffect(_Out_ PMAGCOLOREFFECT pEffect);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagSetInputTransform(_In_ BOOL fEnabled, _In_ const LPRECT pRectSource, _In_ const LPRECT pRectDest);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagGetInputTransform(_Out_ BOOL *pfEnabled, _Out_ LPRECT pRectSource, _Out_ LPRECT pRectDest);
++_Windows_SupportedOS_Windows8_
+ BOOL WINAPI MagShowSystemCursor(_In_ BOOL fShowCursor);
+ 
+ #ifdef __cplusplus

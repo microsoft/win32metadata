@@ -1,0 +1,673 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
+index 7bbb693e01..c2192428c0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
+@@ -29,6 +29,27 @@
+ extern "C" {
+ #endif
+ 
++#if defined(WIN32METADATA)
++enum SECPKG_ATTR : int;
++enum SECPKG_CRED : int;
++enum EXPORT_SECURITY_CONTEXT_FLAGS : int;
++enum SECURITY_PACKAGE_OPTIONS_TYPE : int;
++enum ISC_REQ_HIGH_FLAGS : unsigned long long;
++enum ISC_REQ_FLAGS : int;
++enum ASC_REQ_HIGH_FLAGS : unsigned long long;
++enum ASC_REQ_FLAGS : int;
++#else
++typedef unsigned long SECPKG_ATTR;
++typedef unsigned long SECPKG_CRED;
++typedef ULONG EXPORT_SECURITY_CONTEXT_FLAGS;
++typedef unsigned long SECURITY_PACKAGE_OPTIONS_TYPE;
++typedef ULONGLONG ISC_REQ_HIGH_FLAGS;
++typedef unsigned long ISC_REQ_FLAGS;
++typedef ULONGLONG ASC_REQ_HIGH_FLAGS;
++typedef unsigned long ASC_REQ_FLAGS;
++#endif
++
++
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+@@ -1313,7 +1334,7 @@ AcquireCredentialsHandleW(
+     _In_opt_  LPWSTR pszPrincipal,                // Name of principal
+     _In_      LPWSTR pszPackage,                  // Name of package
+ #endif
+-    _In_      unsigned long fCredentialUse,       // Flags indicating use
++    _In_      SECPKG_CRED fCredentialUse,       // Flags indicating use
+     _In_opt_  void * pvLogonId,                   // Pointer to logon ID
+     _In_opt_  void * pAuthData,                   // Package specific data
+     _In_opt_  SEC_GET_KEY_FN pGetKeyFn,           // Pointer to GetKey() func
+@@ -1345,7 +1366,7 @@ SECURITY_STATUS SEC_ENTRY
+ AcquireCredentialsHandleA(
+     _In_opt_  LPSTR pszPrincipal,                 // Name of principal
+     _In_      LPSTR pszPackage,                   // Name of package
+-    _In_      unsigned long fCredentialUse,       // Flags indicating use
++    _In_      SECPKG_CRED fCredentialUse,       // Flags indicating use
+     _In_opt_  void * pvLogonId,                   // Pointer to logon ID
+     _In_opt_  void * pAuthData,                   // Package specific data
+     _In_opt_  SEC_GET_KEY_FN pGetKeyFn,           // Pointer to GetKey() func
+@@ -1713,7 +1734,7 @@ InitializeSecurityContextW(
+ #else
+     _In_opt_ SEC_WCHAR * pszTargetName,         // Name of target
+ #endif
+-    _In_        unsigned long fContextReq,              // Context Requirements
++    _In_        ISC_REQ_FLAGS fContextReq,              // Context Requirements
+     _In_        unsigned long Reserved1,                // Reserved, MBZ
+     _In_        unsigned long TargetDataRep,            // Data rep of target
+     _In_opt_    PSecBufferDesc pInput,                  // Input Buffers
+@@ -1750,7 +1771,7 @@ InitializeSecurityContextA(
+     _In_opt_    PCredHandle phCredential,               // Cred to base context
+     _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
+     _In_opt_    SEC_CHAR * pszTargetName,       // Name of target
+-    _In_        unsigned long fContextReq,              // Context Requirements
++    _In_        ISC_REQ_FLAGS fContextReq,              // Context Requirements
+     _In_        unsigned long Reserved1,                // Reserved, MBZ
+     _In_        unsigned long TargetDataRep,            // Data rep of target
+     _In_opt_    PSecBufferDesc pInput,                  // Input Buffers
+@@ -1792,7 +1813,7 @@ AcceptSecurityContext(
+     _In_opt_    PCredHandle phCredential,               // Cred to base context
+     _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
+     _In_opt_    PSecBufferDesc pInput,                  // Input buffer
+-    _In_        unsigned long fContextReq,              // Context Requirements
++    _In_        ASC_REQ_FLAGS fContextReq,              // Context Requirements
+     _In_        unsigned long TargetDataRep,            // Target Data Rep
+     _Inout_opt_ PCtxtHandle phNewContext,               // (out) New context handle
+     _Inout_opt_ PSecBufferDesc pOutput,                 // (inout) Output buffers
+@@ -1882,7 +1903,7 @@ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesW(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _In_  SECPKG_ATTR ulAttribute,          // Attribute to query
+     _Out_ void * pBuffer              // Buffer for attributes
+     );
+ 
+@@ -1895,7 +1916,7 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesExW(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _In_  SECPKG_ATTR ulAttribute,          // Attribute to query
+     _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
+     _In_  unsigned long cbBuffer              // Length of buffer
+     );
+@@ -1912,7 +1933,7 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesA(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _In_  SECPKG_ATTR ulAttribute,          // Attribute to query
+     _Out_ void * pBuffer              // Buffer for attributes
+     );
+ 
+@@ -1925,7 +1946,7 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesExA(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _In_  SECPKG_ATTR ulAttribute,          // Attribute to query
+     _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
+     _In_  unsigned long cbBuffer              // Length of buffer
+     );
+@@ -1956,7 +1977,7 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS SEC_ENTRY
+ SetContextAttributesW(
+     _In_ PCtxtHandle phContext,                   // Context to Set
+-    _In_ unsigned long ulAttribute,               // Attribute to Set
++    _In_ SECPKG_ATTR ulAttribute,               // Attribute to Set
+     _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
+     _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
+     );
+@@ -1975,7 +1996,7 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS SEC_ENTRY
+ SetContextAttributesA(
+     _In_ PCtxtHandle phContext,                   // Context to Set
+-    _In_ unsigned long ulAttribute,               // Attribute to Set
++    _In_ SECPKG_ATTR ulAttribute,               // Attribute to Set
+     _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
+     _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
+     );
+@@ -2366,7 +2387,7 @@ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ ExportSecurityContext(
+     _In_  PCtxtHandle          phContext,             // (in) context to export
+-    _In_  ULONG                fFlags,                // (in) option flags
++    _In_  EXPORT_SECURITY_CONTEXT_FLAGS                fFlags,                // (in) option flags
+     _Out_ PSecBuffer           pPackedContext,        // (out) marshalled context
+     _Out_ void * * pToken             // (out, optional) token handle for impersonation
+     );
+@@ -2798,7 +2819,7 @@ SaslInitializeSecurityContextW(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    LPWSTR                      pszTargetName,      // Name of target
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _In_        ISC_REQ_FLAGS               fContextReq,        // Context Requirements
+     _In_        unsigned long               Reserved1,          // Reserved, MBZ
+     _In_        unsigned long               TargetDataRep,      // Data rep of target
+     _In_opt_    PSecBufferDesc              pInput,             // Input Buffers
+@@ -2815,7 +2836,7 @@ SaslInitializeSecurityContextA(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    LPSTR                       pszTargetName,      // Name of target
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _In_        ISC_REQ_FLAGS               fContextReq,        // Context Requirements
+     _In_        unsigned long               Reserved1,          // Reserved, MBZ
+     _In_        unsigned long               TargetDataRep,      // Data rep of target
+     _In_opt_    PSecBufferDesc              pInput,             // Input Buffers
+@@ -2839,7 +2860,7 @@ SaslAcceptSecurityContext(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    PSecBufferDesc              pInput,             // Input buffer
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _In_        ASC_REQ_FLAGS               fContextReq,        // Context Requirements
+     _In_        unsigned long               TargetDataRep,      // Target Data Rep
+     _Inout_opt_ PCtxtHandle                 phNewContext,       // (out) New context handle
+     _Inout_opt_ PSecBufferDesc              pOutput,            // (inout) Output buffers
+@@ -3365,7 +3386,7 @@ SspiGetCredUIContext(
+    _In_ GUID* CredType,
+    _In_opt_ LUID* LogonId, // use this LogonId, the caller must be localsystem to supply a logon id
+    _Outptr_ PSEC_WINNT_CREDUI_CONTEXT_VECTOR* CredUIContexts,
+-   _Out_opt_ HANDLE* TokenHandle
++   _Out_opt_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE* TokenHandle
+    );
+ 
+ SECURITY_STATUS
+@@ -3685,7 +3706,7 @@ SspiSetChannelBindingFlags(
+ 
+ typedef struct _SECURITY_PACKAGE_OPTIONS {
+     unsigned long   Size;
+-    unsigned long   Type;
++    SECURITY_PACKAGE_OPTIONS_TYPE   Type;
+     unsigned long   Flags;
+     unsigned long   SignatureSize;
+     void *  Signature;
+@@ -3738,6 +3759,487 @@ DeleteSecurityPackageW(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_ATTR_C_ACCESS_TOKEN")
++#pragma push_macro("SECPKG_ATTR_C_FULL_ACCESS_TOKEN")
++#pragma push_macro("SECPKG_ATTR_CERT_TRUST_STATUS")
++#pragma push_macro("SECPKG_ATTR_CREDS")
++#pragma push_macro("SECPKG_ATTR_CREDS_2")
++#pragma push_macro("SECPKG_ATTR_NEGOTIATION_PACKAGE")
++#pragma push_macro("SECPKG_ATTR_PACKAGE_INFO")
++#pragma push_macro("SECPKG_ATTR_SERVER_AUTH_FLAGS")
++#pragma push_macro("SECPKG_ATTR_SIZES")
++#pragma push_macro("SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES")
++#pragma push_macro("SECPKG_ATTR_APP_DATA")
++#pragma push_macro("SECPKG_ATTR_EAP_PRF_INFO")
++#pragma push_macro("SECPKG_ATTR_EARLY_START")
++#pragma push_macro("SECPKG_ATTR_DTLS_MTU")
++#pragma push_macro("SECPKG_ATTR_KEYING_MATERIAL_INFO")
++#pragma push_macro("SECPKG_ATTR_ACCESS_TOKEN")
++#pragma push_macro("SECPKG_ATTR_AUTHORITY")
++#pragma push_macro("SECPKG_ATTR_CLIENT_SPECIFIED_TARGET")
++#pragma push_macro("SECPKG_ATTR_CONNECTION_INFO")
++#pragma push_macro("SECPKG_ATTR_DCE_INFO")
++#pragma push_macro("SECPKG_ATTR_ENDPOINT_BINDINGS")
++#pragma push_macro("SECPKG_ATTR_EAP_KEY_BLOCK")
++#pragma push_macro("SECPKG_ATTR_FLAGS")
++#pragma push_macro("SECPKG_ATTR_ISSUER_LIST_EX")
++#pragma push_macro("SECPKG_ATTR_KEY_INFO")
++#pragma push_macro("SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS")
++#pragma push_macro("SECPKG_ATTR_LIFESPAN")
++#pragma push_macro("SECPKG_ATTR_LOCAL_CERT_CONTEXT")
++#pragma push_macro("SECPKG_ATTR_LOCAL_CRED")
++#pragma push_macro("SECPKG_ATTR_NAMES")
++#pragma push_macro("SECPKG_ATTR_NATIVE_NAMES")
++#pragma push_macro("SECPKG_ATTR_NEGOTIATION_INFO")
++#pragma push_macro("SECPKG_ATTR_PASSWORD_EXPIRY")
++#pragma push_macro("SECPKG_ATTR_REMOTE_CERT_CONTEXT")
++#pragma push_macro("SECPKG_ATTR_ROOT_STORE")
++#pragma push_macro("SECPKG_ATTR_SESSION_KEY")
++#pragma push_macro("SECPKG_ATTR_SESSION_INFO")
++#pragma push_macro("SECPKG_ATTR_STREAM_SIZES")
++#pragma push_macro("SECPKG_ATTR_SUPPORTED_SIGNATURES")
++#pragma push_macro("SECPKG_ATTR_TARGET_INFORMATION")
++#pragma push_macro("SECPKG_ATTR_UNIQUE_BINDINGS")
++#undef SECPKG_ATTR_C_ACCESS_TOKEN
++#undef SECPKG_ATTR_C_FULL_ACCESS_TOKEN
++#undef SECPKG_ATTR_CERT_TRUST_STATUS
++#undef SECPKG_ATTR_CREDS
++#undef SECPKG_ATTR_CREDS_2
++#undef SECPKG_ATTR_NEGOTIATION_PACKAGE
++#undef SECPKG_ATTR_PACKAGE_INFO
++#undef SECPKG_ATTR_SERVER_AUTH_FLAGS
++#undef SECPKG_ATTR_SIZES
++#undef SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES
++#undef SECPKG_ATTR_APP_DATA
++#undef SECPKG_ATTR_EAP_PRF_INFO
++#undef SECPKG_ATTR_EARLY_START
++#undef SECPKG_ATTR_DTLS_MTU
++#undef SECPKG_ATTR_KEYING_MATERIAL_INFO
++#undef SECPKG_ATTR_ACCESS_TOKEN
++#undef SECPKG_ATTR_AUTHORITY
++#undef SECPKG_ATTR_CLIENT_SPECIFIED_TARGET
++#undef SECPKG_ATTR_CONNECTION_INFO
++#undef SECPKG_ATTR_DCE_INFO
++#undef SECPKG_ATTR_ENDPOINT_BINDINGS
++#undef SECPKG_ATTR_EAP_KEY_BLOCK
++#undef SECPKG_ATTR_FLAGS
++#undef SECPKG_ATTR_ISSUER_LIST_EX
++#undef SECPKG_ATTR_KEY_INFO
++#undef SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS
++#undef SECPKG_ATTR_LIFESPAN
++#undef SECPKG_ATTR_LOCAL_CERT_CONTEXT
++#undef SECPKG_ATTR_LOCAL_CRED
++#undef SECPKG_ATTR_NAMES
++#undef SECPKG_ATTR_NATIVE_NAMES
++#undef SECPKG_ATTR_NEGOTIATION_INFO
++#undef SECPKG_ATTR_PASSWORD_EXPIRY
++#undef SECPKG_ATTR_REMOTE_CERT_CONTEXT
++#undef SECPKG_ATTR_ROOT_STORE
++#undef SECPKG_ATTR_SESSION_KEY
++#undef SECPKG_ATTR_SESSION_INFO
++#undef SECPKG_ATTR_STREAM_SIZES
++#undef SECPKG_ATTR_SUPPORTED_SIGNATURES
++#undef SECPKG_ATTR_TARGET_INFORMATION
++#undef SECPKG_ATTR_UNIQUE_BINDINGS
++enum
++    SECPKG_ATTR : int
++{
++    SECPKG_ATTR_C_ACCESS_TOKEN = -2147483630,
++    SECPKG_ATTR_C_FULL_ACCESS_TOKEN = -2147483518,
++    SECPKG_ATTR_CERT_TRUST_STATUS = -2147483516,
++    SECPKG_ATTR_CREDS = -2147483520,
++    SECPKG_ATTR_CREDS_2 = -2147483514,
++    SECPKG_ATTR_NEGOTIATION_PACKAGE = -2147483519,
++    SECPKG_ATTR_PACKAGE_INFO = 10,
++    SECPKG_ATTR_SERVER_AUTH_FLAGS = -2147483517,
++    SECPKG_ATTR_SIZES = 0,
++    SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 128,
++    SECPKG_ATTR_APP_DATA = 94,
++    SECPKG_ATTR_EAP_PRF_INFO = 101,
++    SECPKG_ATTR_EARLY_START = 105,
++    SECPKG_ATTR_DTLS_MTU = 34,
++    SECPKG_ATTR_KEYING_MATERIAL_INFO = 106,
++    SECPKG_ATTR_ACCESS_TOKEN = 18,
++    SECPKG_ATTR_AUTHORITY = 6,
++    SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 27,
++    SECPKG_ATTR_CONNECTION_INFO = 90,
++    SECPKG_ATTR_DCE_INFO = 3,
++    SECPKG_ATTR_ENDPOINT_BINDINGS = 26,
++    SECPKG_ATTR_EAP_KEY_BLOCK = 91,
++    SECPKG_ATTR_FLAGS = 14,
++    SECPKG_ATTR_ISSUER_LIST_EX = 89,
++    SECPKG_ATTR_KEY_INFO = 5,
++    SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS = 30,
++    SECPKG_ATTR_LIFESPAN = 2,
++    SECPKG_ATTR_LOCAL_CERT_CONTEXT = 84,
++    SECPKG_ATTR_LOCAL_CRED = 82,
++    SECPKG_ATTR_NAMES = 1,
++    SECPKG_ATTR_NATIVE_NAMES = 13,
++    SECPKG_ATTR_NEGOTIATION_INFO = 12,
++    SECPKG_ATTR_PASSWORD_EXPIRY = 8,
++    SECPKG_ATTR_REMOTE_CERT_CONTEXT = 83,
++    SECPKG_ATTR_ROOT_STORE = 85,
++    SECPKG_ATTR_SESSION_KEY = 9,
++    SECPKG_ATTR_SESSION_INFO = 93,
++    SECPKG_ATTR_STREAM_SIZES = 4,
++    SECPKG_ATTR_SUPPORTED_SIGNATURES = 102,
++    SECPKG_ATTR_TARGET_INFORMATION = 17,
++    SECPKG_ATTR_UNIQUE_BINDINGS = 25,
++};
++#pragma pop_macro("SECPKG_ATTR_UNIQUE_BINDINGS")
++#pragma pop_macro("SECPKG_ATTR_TARGET_INFORMATION")
++#pragma pop_macro("SECPKG_ATTR_SUPPORTED_SIGNATURES")
++#pragma pop_macro("SECPKG_ATTR_STREAM_SIZES")
++#pragma pop_macro("SECPKG_ATTR_SESSION_INFO")
++#pragma pop_macro("SECPKG_ATTR_SESSION_KEY")
++#pragma pop_macro("SECPKG_ATTR_ROOT_STORE")
++#pragma pop_macro("SECPKG_ATTR_REMOTE_CERT_CONTEXT")
++#pragma pop_macro("SECPKG_ATTR_PASSWORD_EXPIRY")
++#pragma pop_macro("SECPKG_ATTR_NEGOTIATION_INFO")
++#pragma pop_macro("SECPKG_ATTR_NATIVE_NAMES")
++#pragma pop_macro("SECPKG_ATTR_NAMES")
++#pragma pop_macro("SECPKG_ATTR_LOCAL_CRED")
++#pragma pop_macro("SECPKG_ATTR_LOCAL_CERT_CONTEXT")
++#pragma pop_macro("SECPKG_ATTR_LIFESPAN")
++#pragma pop_macro("SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS")
++#pragma pop_macro("SECPKG_ATTR_KEY_INFO")
++#pragma pop_macro("SECPKG_ATTR_ISSUER_LIST_EX")
++#pragma pop_macro("SECPKG_ATTR_FLAGS")
++#pragma pop_macro("SECPKG_ATTR_EAP_KEY_BLOCK")
++#pragma pop_macro("SECPKG_ATTR_ENDPOINT_BINDINGS")
++#pragma pop_macro("SECPKG_ATTR_DCE_INFO")
++#pragma pop_macro("SECPKG_ATTR_CONNECTION_INFO")
++#pragma pop_macro("SECPKG_ATTR_CLIENT_SPECIFIED_TARGET")
++#pragma pop_macro("SECPKG_ATTR_AUTHORITY")
++#pragma pop_macro("SECPKG_ATTR_ACCESS_TOKEN")
++#pragma pop_macro("SECPKG_ATTR_KEYING_MATERIAL_INFO")
++#pragma pop_macro("SECPKG_ATTR_DTLS_MTU")
++#pragma pop_macro("SECPKG_ATTR_EARLY_START")
++#pragma pop_macro("SECPKG_ATTR_EAP_PRF_INFO")
++#pragma pop_macro("SECPKG_ATTR_APP_DATA")
++#pragma pop_macro("SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES")
++#pragma pop_macro("SECPKG_ATTR_SIZES")
++#pragma pop_macro("SECPKG_ATTR_SERVER_AUTH_FLAGS")
++#pragma pop_macro("SECPKG_ATTR_PACKAGE_INFO")
++#pragma pop_macro("SECPKG_ATTR_NEGOTIATION_PACKAGE")
++#pragma pop_macro("SECPKG_ATTR_CREDS_2")
++#pragma pop_macro("SECPKG_ATTR_CREDS")
++#pragma pop_macro("SECPKG_ATTR_CERT_TRUST_STATUS")
++#pragma pop_macro("SECPKG_ATTR_C_FULL_ACCESS_TOKEN")
++#pragma pop_macro("SECPKG_ATTR_C_ACCESS_TOKEN")
++
++#pragma push_macro("SECPKG_CRED_INBOUND")
++#pragma push_macro("SECPKG_CRED_OUTBOUND")
++#undef SECPKG_CRED_INBOUND
++#undef SECPKG_CRED_OUTBOUND
++enum
++    SECPKG_CRED : int
++{
++    SECPKG_CRED_INBOUND = 1,
++    SECPKG_CRED_OUTBOUND,
++};
++#pragma pop_macro("SECPKG_CRED_OUTBOUND")
++#pragma pop_macro("SECPKG_CRED_INBOUND")
++
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_RESET_NEW")
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_DELETE_OLD")
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_TO_KERNEL")
++#undef SECPKG_CONTEXT_EXPORT_RESET_NEW
++#undef SECPKG_CONTEXT_EXPORT_DELETE_OLD
++#undef SECPKG_CONTEXT_EXPORT_TO_KERNEL
++enum
++    [[clang::flag_enum]]
++    EXPORT_SECURITY_CONTEXT_FLAGS : int
++{
++    SECPKG_CONTEXT_EXPORT_RESET_NEW = 1,
++    SECPKG_CONTEXT_EXPORT_DELETE_OLD = 2,
++    SECPKG_CONTEXT_EXPORT_TO_KERNEL = 4,
++};
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_TO_KERNEL")
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_DELETE_OLD")
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_RESET_NEW")
++
++#pragma push_macro("SECPKG_OPTIONS_TYPE_UNKNOWN")
++#pragma push_macro("SECPKG_OPTIONS_TYPE_LSA")
++#pragma push_macro("SECPKG_OPTIONS_TYPE_SSPI")
++#undef SECPKG_OPTIONS_TYPE_UNKNOWN
++#undef SECPKG_OPTIONS_TYPE_LSA
++#undef SECPKG_OPTIONS_TYPE_SSPI
++enum
++    SECURITY_PACKAGE_OPTIONS_TYPE : int
++{
++    SECPKG_OPTIONS_TYPE_UNKNOWN,
++    SECPKG_OPTIONS_TYPE_LSA,
++    SECPKG_OPTIONS_TYPE_SSPI,
++};
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_SSPI")
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_LSA")
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_UNKNOWN")
++
++#pragma push_macro("ISC_REQ_MESSAGES")
++#pragma push_macro("ISC_REQ_DEFERRED_CRED_VALIDATION")
++#pragma push_macro("ISC_REQ_NO_POST_HANDSHAKE_AUTH")
++#pragma push_macro("ISC_REQ_REUSE_SESSION_TICKETS")
++#pragma push_macro("ISC_REQ_EXPLICIT_SESSION")
++#undef ISC_REQ_MESSAGES
++#undef ISC_REQ_DEFERRED_CRED_VALIDATION
++#undef ISC_REQ_NO_POST_HANDSHAKE_AUTH
++#undef ISC_REQ_REUSE_SESSION_TICKETS
++#undef ISC_REQ_EXPLICIT_SESSION
++enum
++    [[clang::flag_enum]]
++    ISC_REQ_HIGH_FLAGS : unsigned long long
++{
++    ISC_REQ_MESSAGES = 0x100000000ULL,
++    ISC_REQ_DEFERRED_CRED_VALIDATION = 0x200000000ULL,
++    ISC_REQ_NO_POST_HANDSHAKE_AUTH = 0x400000000ULL,
++    ISC_REQ_REUSE_SESSION_TICKETS = 0x800000000ULL,
++    ISC_REQ_EXPLICIT_SESSION = 0x1000000000ULL,
++};
++#pragma pop_macro("ISC_REQ_EXPLICIT_SESSION")
++#pragma pop_macro("ISC_REQ_REUSE_SESSION_TICKETS")
++#pragma pop_macro("ISC_REQ_NO_POST_HANDSHAKE_AUTH")
++#pragma pop_macro("ISC_REQ_DEFERRED_CRED_VALIDATION")
++#pragma pop_macro("ISC_REQ_MESSAGES")
++
++#pragma push_macro("ISC_REQ_DELEGATE")
++#pragma push_macro("ISC_REQ_MUTUAL_AUTH")
++#pragma push_macro("ISC_REQ_REPLAY_DETECT")
++#pragma push_macro("ISC_REQ_SEQUENCE_DETECT")
++#pragma push_macro("ISC_REQ_CONFIDENTIALITY")
++#pragma push_macro("ISC_REQ_USE_SESSION_KEY")
++#pragma push_macro("ISC_REQ_PROMPT_FOR_CREDS")
++#pragma push_macro("ISC_REQ_USE_SUPPLIED_CREDS")
++#pragma push_macro("ISC_REQ_ALLOCATE_MEMORY")
++#pragma push_macro("ISC_REQ_USE_DCE_STYLE")
++#pragma push_macro("ISC_REQ_DATAGRAM")
++#pragma push_macro("ISC_REQ_CONNECTION")
++#pragma push_macro("ISC_REQ_CALL_LEVEL")
++#pragma push_macro("ISC_REQ_FRAGMENT_SUPPLIED")
++#pragma push_macro("ISC_REQ_EXTENDED_ERROR")
++#pragma push_macro("ISC_REQ_STREAM")
++#pragma push_macro("ISC_REQ_INTEGRITY")
++#pragma push_macro("ISC_REQ_IDENTIFY")
++#pragma push_macro("ISC_REQ_NULL_SESSION")
++#pragma push_macro("ISC_REQ_MANUAL_CRED_VALIDATION")
++#pragma push_macro("ISC_REQ_RESERVED1")
++#pragma push_macro("ISC_REQ_FRAGMENT_TO_FIT")
++#pragma push_macro("ISC_REQ_FORWARD_CREDENTIALS")
++#pragma push_macro("ISC_REQ_NO_INTEGRITY")
++#pragma push_macro("ISC_REQ_USE_HTTP_STYLE")
++#pragma push_macro("ISC_REQ_UNVERIFIED_TARGET_NAME")
++#pragma push_macro("ISC_REQ_CONFIDENTIALITY_ONLY")
++#undef ISC_REQ_DELEGATE
++#undef ISC_REQ_MUTUAL_AUTH
++#undef ISC_REQ_REPLAY_DETECT
++#undef ISC_REQ_SEQUENCE_DETECT
++#undef ISC_REQ_CONFIDENTIALITY
++#undef ISC_REQ_USE_SESSION_KEY
++#undef ISC_REQ_PROMPT_FOR_CREDS
++#undef ISC_REQ_USE_SUPPLIED_CREDS
++#undef ISC_REQ_ALLOCATE_MEMORY
++#undef ISC_REQ_USE_DCE_STYLE
++#undef ISC_REQ_DATAGRAM
++#undef ISC_REQ_CONNECTION
++#undef ISC_REQ_CALL_LEVEL
++#undef ISC_REQ_FRAGMENT_SUPPLIED
++#undef ISC_REQ_EXTENDED_ERROR
++#undef ISC_REQ_STREAM
++#undef ISC_REQ_INTEGRITY
++#undef ISC_REQ_IDENTIFY
++#undef ISC_REQ_NULL_SESSION
++#undef ISC_REQ_MANUAL_CRED_VALIDATION
++#undef ISC_REQ_RESERVED1
++#undef ISC_REQ_FRAGMENT_TO_FIT
++#undef ISC_REQ_FORWARD_CREDENTIALS
++#undef ISC_REQ_NO_INTEGRITY
++#undef ISC_REQ_USE_HTTP_STYLE
++#undef ISC_REQ_UNVERIFIED_TARGET_NAME
++#undef ISC_REQ_CONFIDENTIALITY_ONLY
++enum
++    [[clang::flag_enum]]
++    ISC_REQ_FLAGS : int
++{
++    ISC_REQ_DELEGATE = 1,
++    ISC_REQ_MUTUAL_AUTH = 2,
++    ISC_REQ_REPLAY_DETECT = 4,
++    ISC_REQ_SEQUENCE_DETECT = 8,
++    ISC_REQ_CONFIDENTIALITY = 0x10,
++    ISC_REQ_USE_SESSION_KEY = 0x20,
++    ISC_REQ_PROMPT_FOR_CREDS = 0x40,
++    ISC_REQ_USE_SUPPLIED_CREDS = 0x80,
++    ISC_REQ_ALLOCATE_MEMORY = 0x100,
++    ISC_REQ_USE_DCE_STYLE = 0x200,
++    ISC_REQ_DATAGRAM = 0x400,
++    ISC_REQ_CONNECTION = 0x800,
++    ISC_REQ_CALL_LEVEL = 0x1000,
++    ISC_REQ_FRAGMENT_SUPPLIED = 0x2000,
++    ISC_REQ_EXTENDED_ERROR = 0x4000,
++    ISC_REQ_STREAM = 0x8000,
++    ISC_REQ_INTEGRITY = 0x10000,
++    ISC_REQ_IDENTIFY = 0x20000,
++    ISC_REQ_NULL_SESSION = 0x40000,
++    ISC_REQ_MANUAL_CRED_VALIDATION = 0x80000,
++    ISC_REQ_RESERVED1 = 0x100000,
++    ISC_REQ_FRAGMENT_TO_FIT = 0x200000,
++    ISC_REQ_FORWARD_CREDENTIALS = 0x400000,
++    ISC_REQ_NO_INTEGRITY = 0x800000,
++    ISC_REQ_USE_HTTP_STYLE = 0x1000000,
++    ISC_REQ_UNVERIFIED_TARGET_NAME = 0x20000000,
++    ISC_REQ_CONFIDENTIALITY_ONLY = 0x40000000,
++};
++#pragma pop_macro("ISC_REQ_CONFIDENTIALITY_ONLY")
++#pragma pop_macro("ISC_REQ_UNVERIFIED_TARGET_NAME")
++#pragma pop_macro("ISC_REQ_USE_HTTP_STYLE")
++#pragma pop_macro("ISC_REQ_NO_INTEGRITY")
++#pragma pop_macro("ISC_REQ_FORWARD_CREDENTIALS")
++#pragma pop_macro("ISC_REQ_FRAGMENT_TO_FIT")
++#pragma pop_macro("ISC_REQ_RESERVED1")
++#pragma pop_macro("ISC_REQ_MANUAL_CRED_VALIDATION")
++#pragma pop_macro("ISC_REQ_NULL_SESSION")
++#pragma pop_macro("ISC_REQ_IDENTIFY")
++#pragma pop_macro("ISC_REQ_INTEGRITY")
++#pragma pop_macro("ISC_REQ_STREAM")
++#pragma pop_macro("ISC_REQ_EXTENDED_ERROR")
++#pragma pop_macro("ISC_REQ_FRAGMENT_SUPPLIED")
++#pragma pop_macro("ISC_REQ_CALL_LEVEL")
++#pragma pop_macro("ISC_REQ_CONNECTION")
++#pragma pop_macro("ISC_REQ_DATAGRAM")
++#pragma pop_macro("ISC_REQ_USE_DCE_STYLE")
++#pragma pop_macro("ISC_REQ_ALLOCATE_MEMORY")
++#pragma pop_macro("ISC_REQ_USE_SUPPLIED_CREDS")
++#pragma pop_macro("ISC_REQ_PROMPT_FOR_CREDS")
++#pragma pop_macro("ISC_REQ_USE_SESSION_KEY")
++#pragma pop_macro("ISC_REQ_CONFIDENTIALITY")
++#pragma pop_macro("ISC_REQ_SEQUENCE_DETECT")
++#pragma pop_macro("ISC_REQ_REPLAY_DETECT")
++#pragma pop_macro("ISC_REQ_MUTUAL_AUTH")
++#pragma pop_macro("ISC_REQ_DELEGATE")
++
++#pragma push_macro("ASC_REQ_MESSAGES")
++#pragma push_macro("ASC_REQ_EXPLICIT_SESSION")
++#undef ASC_REQ_MESSAGES
++#undef ASC_REQ_EXPLICIT_SESSION
++enum
++    [[clang::flag_enum]]
++    ASC_REQ_HIGH_FLAGS : unsigned long long
++{
++    ASC_REQ_MESSAGES = 0x100000000ULL,
++    ASC_REQ_EXPLICIT_SESSION = 0x1000000000ULL,
++};
++#pragma pop_macro("ASC_REQ_EXPLICIT_SESSION")
++#pragma pop_macro("ASC_REQ_MESSAGES")
++
++#pragma push_macro("ASC_REQ_DELEGATE")
++#pragma push_macro("ASC_REQ_MUTUAL_AUTH")
++#pragma push_macro("ASC_REQ_REPLAY_DETECT")
++#pragma push_macro("ASC_REQ_SEQUENCE_DETECT")
++#pragma push_macro("ASC_REQ_CONFIDENTIALITY")
++#pragma push_macro("ASC_REQ_USE_SESSION_KEY")
++#pragma push_macro("ASC_REQ_SESSION_TICKET")
++#pragma push_macro("ASC_REQ_ALLOCATE_MEMORY")
++#pragma push_macro("ASC_REQ_USE_DCE_STYLE")
++#pragma push_macro("ASC_REQ_DATAGRAM")
++#pragma push_macro("ASC_REQ_CONNECTION")
++#pragma push_macro("ASC_REQ_CALL_LEVEL")
++#pragma push_macro("ASC_REQ_FRAGMENT_SUPPLIED")
++#pragma push_macro("ASC_REQ_EXTENDED_ERROR")
++#pragma push_macro("ASC_REQ_STREAM")
++#pragma push_macro("ASC_REQ_INTEGRITY")
++#pragma push_macro("ASC_REQ_LICENSING")
++#pragma push_macro("ASC_REQ_IDENTIFY")
++#pragma push_macro("ASC_REQ_ALLOW_NULL_SESSION")
++#pragma push_macro("ASC_REQ_ALLOW_NON_USER_LOGONS")
++#pragma push_macro("ASC_REQ_ALLOW_CONTEXT_REPLAY")
++#pragma push_macro("ASC_REQ_FRAGMENT_TO_FIT")
++#pragma push_macro("ASC_REQ_NO_TOKEN")
++#pragma push_macro("ASC_REQ_PROXY_BINDINGS")
++#pragma push_macro("ASC_REQ_ALLOW_MISSING_BINDINGS")
++#undef ASC_REQ_DELEGATE
++#undef ASC_REQ_MUTUAL_AUTH
++#undef ASC_REQ_REPLAY_DETECT
++#undef ASC_REQ_SEQUENCE_DETECT
++#undef ASC_REQ_CONFIDENTIALITY
++#undef ASC_REQ_USE_SESSION_KEY
++#undef ASC_REQ_SESSION_TICKET
++#undef ASC_REQ_ALLOCATE_MEMORY
++#undef ASC_REQ_USE_DCE_STYLE
++#undef ASC_REQ_DATAGRAM
++#undef ASC_REQ_CONNECTION
++#undef ASC_REQ_CALL_LEVEL
++#undef ASC_REQ_FRAGMENT_SUPPLIED
++#undef ASC_REQ_EXTENDED_ERROR
++#undef ASC_REQ_STREAM
++#undef ASC_REQ_INTEGRITY
++#undef ASC_REQ_LICENSING
++#undef ASC_REQ_IDENTIFY
++#undef ASC_REQ_ALLOW_NULL_SESSION
++#undef ASC_REQ_ALLOW_NON_USER_LOGONS
++#undef ASC_REQ_ALLOW_CONTEXT_REPLAY
++#undef ASC_REQ_FRAGMENT_TO_FIT
++#undef ASC_REQ_NO_TOKEN
++#undef ASC_REQ_PROXY_BINDINGS
++#undef ASC_REQ_ALLOW_MISSING_BINDINGS
++enum
++    [[clang::flag_enum]]
++    ASC_REQ_FLAGS : int
++{
++    ASC_REQ_DELEGATE = 1,
++    ASC_REQ_MUTUAL_AUTH = 2,
++    ASC_REQ_REPLAY_DETECT = 4,
++    ASC_REQ_SEQUENCE_DETECT = 8,
++    ASC_REQ_CONFIDENTIALITY = 0x10,
++    ASC_REQ_USE_SESSION_KEY = 0x20,
++    ASC_REQ_SESSION_TICKET = 0x40,
++    ASC_REQ_ALLOCATE_MEMORY = 0x100,
++    ASC_REQ_USE_DCE_STYLE = 0x200,
++    ASC_REQ_DATAGRAM = 0x400,
++    ASC_REQ_CONNECTION = 0x800,
++    ASC_REQ_CALL_LEVEL = 0x1000,
++    ASC_REQ_FRAGMENT_SUPPLIED = 0x2000,
++    ASC_REQ_EXTENDED_ERROR = 0x8000,
++    ASC_REQ_STREAM = 0x10000,
++    ASC_REQ_INTEGRITY = 0x20000,
++    ASC_REQ_LICENSING = 0x40000,
++    ASC_REQ_IDENTIFY = 0x80000,
++    ASC_REQ_ALLOW_NULL_SESSION = 0x100000,
++    ASC_REQ_ALLOW_NON_USER_LOGONS = 0x200000,
++    ASC_REQ_ALLOW_CONTEXT_REPLAY = 0x400000,
++    ASC_REQ_FRAGMENT_TO_FIT = 0x800000,
++    ASC_REQ_NO_TOKEN = 0x1000000,
++    ASC_REQ_PROXY_BINDINGS = 0x4000000,
++    ASC_REQ_ALLOW_MISSING_BINDINGS = 0x10000000,
++};
++#pragma pop_macro("ASC_REQ_ALLOW_MISSING_BINDINGS")
++#pragma pop_macro("ASC_REQ_PROXY_BINDINGS")
++#pragma pop_macro("ASC_REQ_NO_TOKEN")
++#pragma pop_macro("ASC_REQ_FRAGMENT_TO_FIT")
++#pragma pop_macro("ASC_REQ_ALLOW_CONTEXT_REPLAY")
++#pragma pop_macro("ASC_REQ_ALLOW_NON_USER_LOGONS")
++#pragma pop_macro("ASC_REQ_ALLOW_NULL_SESSION")
++#pragma pop_macro("ASC_REQ_IDENTIFY")
++#pragma pop_macro("ASC_REQ_LICENSING")
++#pragma pop_macro("ASC_REQ_INTEGRITY")
++#pragma pop_macro("ASC_REQ_STREAM")
++#pragma pop_macro("ASC_REQ_EXTENDED_ERROR")
++#pragma pop_macro("ASC_REQ_FRAGMENT_SUPPLIED")
++#pragma pop_macro("ASC_REQ_CALL_LEVEL")
++#pragma pop_macro("ASC_REQ_CONNECTION")
++#pragma pop_macro("ASC_REQ_DATAGRAM")
++#pragma pop_macro("ASC_REQ_USE_DCE_STYLE")
++#pragma pop_macro("ASC_REQ_ALLOCATE_MEMORY")
++#pragma pop_macro("ASC_REQ_SESSION_TICKET")
++#pragma pop_macro("ASC_REQ_USE_SESSION_KEY")
++#pragma pop_macro("ASC_REQ_CONFIDENTIALITY")
++#pragma pop_macro("ASC_REQ_SEQUENCE_DETECT")
++#pragma pop_macro("ASC_REQ_REPLAY_DETECT")
++#pragma pop_macro("ASC_REQ_MUTUAL_AUTH")
++#pragma pop_macro("ASC_REQ_DELEGATE")
++
++#endif
++
+ #ifdef __cplusplus
+ }  // extern "C"
+ #endif

@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+index 7a32065382..5bf9383f92 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -4157,6 +4161,7 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsXP_
+     MIDL_INTERFACE("E7A1AF80-4D96-11CF-960C-0080C7F4EE85")
+     IShellFolderViewDual : public IDispatch
+     {
+@@ -4422,6 +4427,7 @@ EXTERN_C const IID IID_IShellFolderViewDual2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsXP_
+     MIDL_INTERFACE("31C147b6-0ADE-4A3C-B514-DDF932EF6D17")
+     IShellFolderViewDual2 : public IShellFolderViewDual
+     {
+@@ -4685,6 +4691,7 @@ EXTERN_C const IID IID_IShellFolderViewDual3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_WindowsVista_
+     MIDL_INTERFACE("29EC8E6C-46D3-411f-BAAA-611A6C9CAC66")
+     IShellFolderViewDual3 : public IShellFolderViewDual2
+     {
+@@ -8872,6 +8879,7 @@ EXTERN_C const IID IID_IAutoComplete;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("00bb2762-6a77-11d0-a535-00c04fd7d062")
+     IAutoComplete : public IUnknown
+     {
+@@ -9001,6 +9009,7 @@ EXTERN_C const IID IID_IAutoComplete2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows2000_
+     MIDL_INTERFACE("EAC04BC0-3791-11d2-BB95-0060977B464C")
+     IAutoComplete2 : public IAutoComplete
+     {
+@@ -9316,6 +9325,7 @@ EXTERN_C const IID IID_IDataObjectAsyncCapability;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
++    _Windows_SupportedOS_Windows8_
+     MIDL_INTERFACE("3D8B0590-F691-11d2-8EA9-006097DF5BD4")
+     IDataObjectAsyncCapability : public IUnknown
+     {
