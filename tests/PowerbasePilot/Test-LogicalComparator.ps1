@@ -51,6 +51,36 @@ Test-Case 'documentation is excluded, raw fixture is unchanged' {
     $method.customAttributes=@($method.customAttributes | Where-Object {$_.constructor.declaringType.name -ne 'DocumentationAttribute'})
     Require (@(Diff-Facts $before (Effective-Method $method $fixture 'unit')).Count -eq 0) 'Documentation removal changed behavior.'
 }
+Test-Case 'managed attribute AutoClass does not change positional decoding' {
+    $definition=Get-Definition $fixture 'MemorySizeAttribute'
+    $changed=Copy-Value $definition
+    $changed.attributes.value=$changed.attributes.value -bxor 0x20000
+    Require (@(Diff-Facts (Attribute-Schema $definition $fixture 'unit') (Attribute-Schema $changed $fixture 'unit')).Count -eq 0) 'Metadata attribute AutoClass affected decoding.'
+    Assert-Changed (Effective-Type $definition $fixture 'unit') (Effective-Type $changed $fixture 'unit') 'AutoClass normalization leaked into native type comparison.'
+}
+Test-Case 'attribute constructor parameter labels are not native API names' {
+    $definition=Get-Definition $fixture 'RAIIFreeAttribute'
+    $changed=Copy-Value $definition
+    $changed.methods[0].parameters[0].name='different-positional-label'
+    Require (@(Diff-Facts (Attribute-Schema $definition $fixture 'unit') (Attribute-Schema $changed $fixture 'unit')).Count -eq 0) 'Positional attribute parameter label affected decoding.'
+    $method=Find-Method $fixture 'GetPwrCapabilities'
+    $changedMethod=Copy-Value $method
+    ($changedMethod.parameters | Where-Object sequence -eq 1).name='different-native-name'
+    Assert-Changed (Effective-Method $method $fixture 'unit') (Effective-Method $changedMethod $fixture 'unit') 'Native API parameter name was incorrectly erased.'
+}
+Test-Case 'fixed array zero-default encoding preserves bounds and size contracts' {
+    $definition=Get-Definition $fixture 'SYSTEM_POWER_CAPABILITIES'
+    $array=($definition.fields | Where-Object name -CEQ 'spare3').type
+    $omitted=Copy-Value $array
+    $omitted.lowerBounds=@()
+    Require (@(Diff-Facts (Convert-Type $array $fixture 'unit' 'spare3') (Convert-Type $omitted $fixture 'unit' 'spare3')).Count -eq 0) 'Omitted zero lower bound changed a fixed array.'
+    $changed=Copy-Value $array
+    $changed.lowerBounds=@(1)
+    Assert-Changed (Convert-Type $array $fixture 'unit' 'spare3') (Convert-Type $changed $fixture 'unit' 'spare3') 'Nonzero native lower bound was erased.'
+    $changed=Copy-Value $array
+    $changed.sizes[0]++
+    Assert-Changed (Convert-Type $array $fixture 'unit' 'spare3') (Convert-Type $changed $fixture 'unit' 'spare3') 'Native array extent was erased.'
+}
 
 foreach($mutation in @('remove-member','change-value','change-flags','change-storage','member-attribute')) {
     Test-Case "enum $mutation is substantive" {

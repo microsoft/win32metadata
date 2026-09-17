@@ -55,6 +55,11 @@ function Convert-Type($Type,$Snapshot,[string]$Stage,[string]$Use) {
                     $copy[$key]=@($value | ForEach-Object { if($_ -is [Collections.IDictionary] -and $_.Contains('kind')){Convert-Type $_ $Snapshot $Stage $Use}else{$_} })
                 } else { $copy[$key]=$value }
             }
+            if ($Type.kind -ceq 'array' -and $Type.rank -eq 1 -and
+                $Type.sizes -is [array] -and $Type.sizes.Count -eq 1 -and $Type.sizes[0] -gt 0 -and
+                $Type.lowerBounds -is [array] -and $Type.lowerBounds.Count -eq 0) {
+                $copy.lowerBounds=@(0)
+            }
             return $copy
         }
     }
@@ -78,7 +83,14 @@ function Enum-Shape($Definition,$Snapshot,[string]$Stage) {
 }
 function Attribute-Schema($Definition,$Snapshot,[string]$Stage) {
     if(-not $Definition){return $null}
-    Schema-Value $Definition $Snapshot $Stage $Definition.name
+    $schema=Schema-Value $Definition $Snapshot $Stage $Definition.name
+    if ($Definition.baseType.fullName -ceq 'System.Attribute') {
+        $schema.attributes=$schema.attributes -band (-bnot 0x20000)
+        foreach ($constructor in @($schema.methods | Where-Object name -CEQ '.ctor')) {
+            foreach ($parameter in $constructor.parameters) { $parameter.Remove('name') }
+        }
+    }
+    return $schema
 }
 function Schema-Value($Value,$Snapshot,[string]$Stage,[string]$Use) {
     if ($null -eq $Value) { return $null }
@@ -258,6 +270,8 @@ $verdict=[ordered]@{equivalent=$equivalent;comparisons=$comparisons.ToArray();is
     rules=@(
         'Namespaces pair only unique declaration names. Full source namespaces and schema differences are recorded; any unmatched native/attribute schema prevents equivalence.',
         'DocumentationAttribute, assembly/module identity, source tokens/blobs and BeforeFieldInit are not native behavior. Raw serialization audit preserves them.',
+        'Only on managed System.Attribute-derived vocabulary classes, AutoClass and positional constructor parameter labels do not change attribute decoding. Native API parameters, native string-format flags, named fields/properties, AttributeUsage and multiplicity are not excluded.',
+        'For closed rank-one fixed arrays with a positive encoded size, an omitted lower bound means zero (ECMA-335 II.23.2.13). Element type, rank, size and nonzero bounds remain compared.',
         'An integer+AssociatedEnum slot is consumed only when exactly one emitted enum resolves and its primitive storage matches the original slot; complete member names/types/values and flags/scoped semantics remain compared.',
         'No primitive-vs-native-typedef, pointer modifier, ownership, invalid-value, parameter direction, byte-count, OS or enum membership difference is erased.',
         'No unresolved Windows.Win32 API/attribute reference is accepted as an external framework type.'

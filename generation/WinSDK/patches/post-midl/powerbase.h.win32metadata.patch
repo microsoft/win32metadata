@@ -1,5 +1,4 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
-index 6ccde0d6a0..c69fecbc88 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
 @@ -17,6 +17,7 @@
@@ -10,7 +9,7 @@ index 6ccde0d6a0..c69fecbc88 100644
  
  #ifdef _CONTRACT_GEN
  #include <nt.h>
-@@ -32,6 +33,46 @@ extern "C" {
+@@ -32,6 +33,41 @@ extern "C" {
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -22,11 +21,6 @@ index 6ccde0d6a0..c69fecbc88 100644
 +#undef POWER_PLATFORM_ROLE_V1
 +#undef POWER_PLATFORM_ROLE_V2
 +enum POWER_PLATFORM_ROLE_VERSION : ULONG {
-+#if (NTDDI_VERSION >= NTDDI_WIN8)
-+    POWER_PLATFORM_ROLE_CURRENT_VERSION = 2,
-+#else
-+    POWER_PLATFORM_ROLE_CURRENT_VERSION = 1,
-+#endif
 +    POWER_PLATFORM_ROLE_V1 = 1,
 +    POWER_PLATFORM_ROLE_V2 = 2,
 +};
@@ -57,7 +51,7 @@ index 6ccde0d6a0..c69fecbc88 100644
  #ifndef _HPOWERNOTIFY_DEF_
  #define _HPOWERNOTIFY_DEF_
  
-@@ -44,6 +85,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+@@ -44,6 +80,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
  #define _OVERRIDE_NTSTATUS_
  #endif
  
@@ -65,7 +59,7 @@ index 6ccde0d6a0..c69fecbc88 100644
  NTSTATUS
  WINAPI
  CallNtPowerInformation(
-@@ -58,6 +100,8 @@ CallNtPowerInformation(
+@@ -58,6 +95,8 @@ CallNtPowerInformation(
  #undef NTSTATUS
  #endif
  
@@ -74,7 +68,7 @@ index 6ccde0d6a0..c69fecbc88 100644
  BOOLEAN
  WINAPI
  GetPwrCapabilities(
-@@ -65,26 +109,31 @@ GetPwrCapabilities(
+@@ -65,26 +104,31 @@ GetPwrCapabilities(
      );
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)

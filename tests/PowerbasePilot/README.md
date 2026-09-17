@@ -61,7 +61,6 @@ The consolidated patch adds only these guarded metadata groups:
 
 | Group | Member | Value and native provenance |
 | --- | --- | --- |
-| `POWER_PLATFORM_ROLE_VERSION` | `POWER_PLATFORM_ROLE_CURRENT_VERSION` | `winnt.h`'s `POWER_PLATFORM_ROLE_VERSION`: 2 for Windows 8+, otherwise 1 |
 | `POWER_PLATFORM_ROLE_VERSION` | `POWER_PLATFORM_ROLE_V1` | 1, `winnt.h` |
 | `POWER_PLATFORM_ROLE_VERSION` | `POWER_PLATFORM_ROLE_V2` | 2, `winnt.h` |
 | `REGISTER_NOTIFICATION_FLAGS` (flags) | `DEVICE_NOTIFY_SERVICE_HANDLE` | 1, `winuser.h` |
@@ -74,6 +73,10 @@ the underlying native constants originate in this header**. The original macros
 are restored after the enum declarations. The broad shared flags group does not
 override the API documentation: `PowerRegisterSuspendResumeNotification` requires
 `DEVICE_NOTIFY_CALLBACK`.
+The proposed `POWER_PLATFORM_ROLE_CURRENT_VERSION` alias is deliberately absent
+from metadata, matching the published reference. The original native
+`POWER_PLATFORM_ROLE_VERSION` macro remains unchanged and is checked by the
+macro-restoration probe; no native constant is removed.
 
 ## Generate and inspect
 
