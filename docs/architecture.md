@@ -47,6 +47,20 @@ For a faster raw-tool inner loop:
 .\scripts\Generate-WindowsRsWinmd.ps1 -Partition Foundation -Architecture x64
 ```
 
+Components that require distinct root namespaces are scraped independently, then their
+generated RDL directories are compiled into one metadata assembly:
+
+```powershell
+win32metadata-tools compile `
+    --input obj\Foundation\rdl `
+    --input obj\Power\rdl `
+    --assembly-name Windows.Win32 `
+    --output bin\Windows.Win32.winmd
+```
+
+This composition step consumes only source-generated RDL. It does not introduce an
+API-specific semantic sidecar.
+
 Before the aggregate build, partitions can be preflighted independently for all
 three architectures. The bounded process isolation reports every failing
 partition in one run and avoids retaining the entire SDK queue in one process:
