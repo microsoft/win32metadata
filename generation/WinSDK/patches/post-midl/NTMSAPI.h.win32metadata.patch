@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+index fa78bd5b..c2131797 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+@@ -25,6 +25,9 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -155,12 +158,14 @@ enum NtmsSessionOptions {
+     NTMS_SESSION_QUERYEXPEDITE      = 0x1
+ };
+ 
++_Win32_SetLastError_
+ HANDLE WINAPI OpenNtmsSessionW(
+     LPCWSTR lpServer,
+     LPCWSTR lpApplication,
+     DWORD   dwOptions
+     );
+ 
++_Win32_SetLastError_
+ HANDLE WINAPI OpenNtmsSessionA(
+     LPCSTR lpServer,
+     LPCSTR lpApplication,
+@@ -1867,6 +1872,7 @@ DWORD WINAPI ExportNtmsDatabase(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SetLastError_
+ HANDLE WINAPI OpenNtmsNotification(
+     HANDLE hSession,
+     DWORD dwType

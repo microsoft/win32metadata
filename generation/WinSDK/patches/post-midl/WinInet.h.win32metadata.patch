@@ -1,0 +1,1079 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
+index 2c8cbbac..99b30089 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
+@@ -733,6 +733,7 @@ typedef LPINTERNET_BUFFERSA LPINTERNET_BUFFERS;
+ // prototypes
+ //
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetTimeFromSystemTimeA(
+     _In_ CONST SYSTEMTIME *pst,           // input GMT time
+     _In_ DWORD dwRFC,                     // RFC format
+@@ -740,6 +741,7 @@ BOOLAPI InternetTimeFromSystemTimeA(
+     _In_ DWORD cbTime                     // output buffer size
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetTimeFromSystemTimeW(
+     _In_ CONST SYSTEMTIME *pst,            // input GMT time
+     _In_ DWORD dwRFC,                      // RFC format
+@@ -753,6 +755,7 @@ BOOLAPI InternetTimeFromSystemTimeW(
+ #ifdef _WINX32_
+ #define InternetTimeFromSystemTime  InternetTimeFromSystemTimeA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetTimeFromSystemTime(
+     _In_ CONST SYSTEMTIME *pst,           // input GMT time
+     _In_ DWORD dwRFC,                     // RFC format
+@@ -769,12 +772,14 @@ BOOLAPI InternetTimeFromSystemTime(
+ #define INTERNET_RFC1123_FORMAT     0
+ #define INTERNET_RFC1123_BUFSIZE   30
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetTimeToSystemTimeA(
+     _In_ LPCSTR lpszTime,          // NULL terminated string
+     _Out_ SYSTEMTIME *pst,         // output in GMT time
+     _Reserved_ DWORD dwReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetTimeToSystemTimeW(
+     _In_ LPCWSTR lpszTime,         // NULL terminated string
+     _Out_ SYSTEMTIME *pst,         // output in GMT time
+@@ -787,6 +792,7 @@ BOOLAPI InternetTimeToSystemTimeW(
+ #ifdef _WINX32_
+ #define InternetTimeToSystemTime  InternetTimeToSystemTimeA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetTimeToSystemTime(
+     _In_ LPCSTR lpszTime,          // NULL terminated string
+     _Out_ SYSTEMTIME *pst,         // output in GMT time
+@@ -796,6 +802,7 @@ BOOLAPI InternetTimeToSystemTime(
+ #endif // !UNICODE
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCrackUrlA(
+     _In_reads_(dwUrlLength) LPCSTR lpszUrl,
+@@ -803,6 +810,7 @@ InternetCrackUrlA(
+     _In_ DWORD dwFlags,
+     _Inout_ LPURL_COMPONENTSA lpUrlComponents
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCrackUrlW(
+     _In_reads_(dwUrlLength) LPCWSTR lpszUrl,
+@@ -816,6 +824,7 @@ InternetCrackUrlW(
+ #define InternetCrackUrl  InternetCrackUrlA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCreateUrlA(
+     _In_ LPURL_COMPONENTSA lpUrlComponents,
+@@ -823,6 +832,7 @@ InternetCreateUrlA(
+     _Out_writes_opt_(*lpdwUrlLength) LPSTR lpszUrl,
+     _Inout_ LPDWORD lpdwUrlLength
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCreateUrlW(
+     _In_ LPURL_COMPONENTSW lpUrlComponents,
+@@ -836,6 +846,7 @@ InternetCreateUrlW(
+ #define InternetCreateUrl  InternetCreateUrlA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCanonicalizeUrlA(
+     _In_ LPCSTR lpszUrl,
+@@ -843,6 +854,7 @@ InternetCanonicalizeUrlA(
+     _Inout_ LPDWORD lpdwBufferLength,
+     _In_ DWORD dwFlags
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCanonicalizeUrlW(
+     _In_ LPCWSTR lpszUrl,
+@@ -856,6 +868,7 @@ InternetCanonicalizeUrlW(
+ #define InternetCanonicalizeUrl  InternetCanonicalizeUrlA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCombineUrlA(
+     _In_ LPCSTR lpszBaseUrl,
+@@ -864,6 +877,7 @@ InternetCombineUrlA(
+     _Inout_ LPDWORD lpdwBufferLength,
+     _In_ DWORD dwFlags
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCombineUrlW(
+     _In_ LPCWSTR lpszBaseUrl,
+@@ -898,6 +912,7 @@ InternetCombineUrlW(
+ #define ICU_ENCODE_PERCENT      0x00001000      // Encode any percent (ASCII25)
+         // signs encountered, default is to not encode percent.
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) InternetOpenA(
+     _In_opt_ LPCSTR lpszAgent,
+     _In_ DWORD dwAccessType,
+@@ -905,6 +920,7 @@ INTERNETAPI_(HINTERNET) InternetOpenA(
+     _In_opt_ LPCSTR lpszProxyBypass,
+     _In_ DWORD dwFlags
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) InternetOpenW(
+     _In_opt_ LPCWSTR lpszAgent,
+     _In_ DWORD dwAccessType,
+@@ -935,10 +951,12 @@ INTERNETAPI_(HINTERNET) InternetOpenW(
+ #define LOCAL_INTERNET_ACCESS       INTERNET_OPEN_TYPE_DIRECT
+ #define CERN_PROXY_INTERNET_ACCESS  INTERNET_OPEN_TYPE_PROXY
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetCloseHandle(
+     _In_ HINTERNET hInternet
+     );
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET)
+ InternetConnectA(
+     _In_ HINTERNET hInternet,
+@@ -950,6 +968,7 @@ InternetConnectA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET)
+ InternetConnectW(
+     _In_ HINTERNET hInternet,
+@@ -976,6 +995,7 @@ InternetConnectW(
+ #define INTERNET_SERVICE_HTTP   3
+ 
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) InternetOpenUrlA(
+     _In_ HINTERNET hInternet,
+     _In_ LPCSTR lpszUrl,
+@@ -984,6 +1004,7 @@ INTERNETAPI_(HINTERNET) InternetOpenUrlA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) InternetOpenUrlW(
+     _In_ HINTERNET hInternet,
+     _In_ LPCWSTR lpszUrl,
+@@ -998,6 +1019,7 @@ INTERNETAPI_(HINTERNET) InternetOpenUrlW(
+ #define InternetOpenUrl  InternetOpenUrlA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetReadFile(
+     _In_ HINTERNET hFile,
+     _Out_writes_bytes_(dwNumberOfBytesToRead) __out_data_source(NETWORK) LPVOID lpBuffer,
+@@ -1005,12 +1027,14 @@ BOOLAPI InternetReadFile(
+     _Out_ LPDWORD lpdwNumberOfBytesRead
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetReadFileExA(
+     _In_ HINTERNET hFile,
+     _Out_ __out_data_source(NETWORK) LPINTERNET_BUFFERSA lpBuffersOut,
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI InternetReadFileExW(
+     _In_ HINTERNET hFile,
+     _Out_ __out_data_source(NETWORK) LPINTERNET_BUFFERSW lpBuffersOut,
+@@ -1032,6 +1056,7 @@ BOOLAPI InternetReadFileExW(
+ #define IRF_USE_CONTEXT WININET_API_FLAG_USE_CONTEXT
+ #define IRF_NO_WAIT     0x00000008
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(DWORD) InternetSetFilePointer(
+     _In_ HINTERNET hFile,
+     _In_ LONG  lDistanceToMove,
+@@ -1040,6 +1065,7 @@ INTERNETAPI_(DWORD) InternetSetFilePointer(
+     _Reserved_ DWORD_PTR dwContext
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetWriteFile(
+     _In_ HINTERNET hFile,
+     _In_reads_bytes_(dwNumberOfBytesToWrite) LPCVOID lpBuffer,
+@@ -1048,6 +1074,7 @@ BOOLAPI InternetWriteFile(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetQueryDataAvailable(
+     _In_ HINTERNET hFile,
+     _Out_opt_ __out_data_source(NETWORK) LPDWORD lpdwNumberOfBytesAvailable,
+@@ -1055,10 +1082,12 @@ BOOLAPI InternetQueryDataAvailable(
+     _In_opt_ DWORD_PTR dwContext
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetFindNextFileA(
+     _In_ HINTERNET hFind,
+     _Out_ LPVOID lpvFindData
+     );
++_Win32_SetLastError_
+ BOOLAPI InternetFindNextFileW(
+     _In_ HINTERNET hFind,
+     _Out_ LPVOID lpvFindData
+@@ -1069,12 +1098,14 @@ BOOLAPI InternetFindNextFileW(
+ #define InternetFindNextFile  InternetFindNextFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetQueryOptionA(
+     _In_opt_ HINTERNET hInternet,
+     _In_ DWORD dwOption,
+     _Out_writes_bytes_to_opt_(*lpdwBufferLength, *lpdwBufferLength) __out_data_source(NETWORK) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpdwBufferLength
+     );
++_Win32_SetLastError_
+ BOOLAPI InternetQueryOptionW(
+     _In_opt_ HINTERNET hInternet,
+     _In_ DWORD dwOption,
+@@ -1087,12 +1118,14 @@ BOOLAPI InternetQueryOptionW(
+ #define InternetQueryOption  InternetQueryOptionA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetSetOptionA(
+     _In_opt_ HINTERNET hInternet,
+     _In_       DWORD dwOption,
+     _In_opt_ LPVOID lpBuffer,
+     _In_       DWORD dwBufferLength
+     );
++_Win32_SetLastError_
+ BOOLAPI InternetSetOptionW(
+     _In_opt_ HINTERNET hInternet,
+     _In_       DWORD dwOption,
+@@ -1125,11 +1158,13 @@ BOOLAPI InternetSetOptionExW(
+ #define InternetSetOptionEx  InternetSetOptionExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetLockRequestFile(
+     _In_  HINTERNET hInternet,
+     _Out_ HANDLE * lphLockRequestInfo
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetUnlockRequestFile(
+     _Inout_ HANDLE hLockRequestInfo
+     );
+@@ -1391,12 +1426,14 @@ BOOLAPI InternetUnlockRequestFile(
+ #define AUTODIAL_MODE_NO_NETWORK_PRESENT        4
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetLastResponseInfoA(
+     _Out_ LPDWORD lpdwError,
+     _Out_writes_opt_(*lpdwBufferLength) LPSTR lpszBuffer,
+     _Inout_ LPDWORD lpdwBufferLength
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetLastResponseInfoW(
+     _Out_ LPDWORD lpdwError,
+@@ -1578,6 +1615,7 @@ CookieDecision;
+ // prototypes
+ //
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) FtpFindFirstFileA(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCSTR lpszSearchFile,
+@@ -1585,6 +1623,7 @@ INTERNETAPI_(HINTERNET) FtpFindFirstFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) FtpFindFirstFileW(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCWSTR lpszSearchFile,
+@@ -1598,6 +1637,7 @@ INTERNETAPI_(HINTERNET) FtpFindFirstFileW(
+ #define FtpFindFirstFile  FtpFindFirstFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpGetFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszRemoteFile,
+@@ -1607,6 +1647,7 @@ BOOLAPI FtpGetFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpGetFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszRemoteFile,
+@@ -1622,6 +1663,7 @@ BOOLAPI FtpGetFileW(
+ #define FtpGetFile  FtpGetFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpPutFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszLocalFile,
+@@ -1629,6 +1671,7 @@ BOOLAPI FtpPutFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpPutFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszLocalFile,
+@@ -1660,10 +1703,12 @@ BOOLAPI FtpPutFileEx(
+     _In_opt_ DWORD_PTR dwContext
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpDeleteFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszFileName
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpDeleteFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszFileName
+@@ -1674,11 +1719,13 @@ BOOLAPI FtpDeleteFileW(
+ #define FtpDeleteFile  FtpDeleteFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpRenameFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszExisting,
+     _In_ LPCSTR lpszNew
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpRenameFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszExisting,
+@@ -1690,6 +1737,7 @@ BOOLAPI FtpRenameFileW(
+ #define FtpRenameFile  FtpRenameFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) FtpOpenFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszFileName,
+@@ -1697,6 +1745,7 @@ INTERNETAPI_(HINTERNET) FtpOpenFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) FtpOpenFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszFileName,
+@@ -1710,10 +1759,12 @@ INTERNETAPI_(HINTERNET) FtpOpenFileW(
+ #define FtpOpenFile  FtpOpenFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpCreateDirectoryA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszDirectory
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpCreateDirectoryW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszDirectory
+@@ -1724,10 +1775,12 @@ BOOLAPI FtpCreateDirectoryW(
+ #define FtpCreateDirectory  FtpCreateDirectoryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpRemoveDirectoryA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszDirectory
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpRemoveDirectoryW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszDirectory
+@@ -1738,10 +1791,12 @@ BOOLAPI FtpRemoveDirectoryW(
+ #define FtpRemoveDirectory  FtpRemoveDirectoryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpSetCurrentDirectoryA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszDirectory
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpSetCurrentDirectoryW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszDirectory
+@@ -1752,11 +1807,13 @@ BOOLAPI FtpSetCurrentDirectoryW(
+ #define FtpSetCurrentDirectory  FtpSetCurrentDirectoryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpGetCurrentDirectoryA(
+     _In_ HINTERNET hConnect,
+     _Out_writes_(*lpdwCurrentDirectory) LPSTR lpszCurrentDirectory,
+     _Inout_ LPDWORD lpdwCurrentDirectory
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpGetCurrentDirectoryW(
+     _In_ HINTERNET hConnect,
+     _Out_writes_(*lpdwCurrentDirectory) LPWSTR lpszCurrentDirectory,
+@@ -1768,6 +1825,7 @@ BOOLAPI FtpGetCurrentDirectoryW(
+ #define FtpGetCurrentDirectory  FtpGetCurrentDirectoryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI FtpCommandA(
+     _In_ HINTERNET hConnect,
+     _In_ BOOL fExpectResponse,
+@@ -1776,6 +1834,7 @@ BOOLAPI FtpCommandA(
+     _In_opt_ DWORD_PTR dwContext,
+     _Out_opt_ HINTERNET *phFtpCommand
+     );
++_Win32_SetLastError_
+ BOOLAPI FtpCommandW(
+     _In_ HINTERNET hConnect,
+     _In_ BOOL fExpectResponse,
+@@ -2119,6 +2178,7 @@ typedef struct {
+ // prototypes
+ //
+ 
++_Win32_SetLastError_
+ BOOLAPI GopherCreateLocatorA(
+     _In_ LPCSTR lpszHost,
+     _In_ INTERNET_PORT nServerPort,
+@@ -2128,6 +2188,7 @@ BOOLAPI GopherCreateLocatorA(
+     _Out_writes_opt_(*lpdwBufferLength) LPSTR lpszLocator,
+     _Inout_ LPDWORD lpdwBufferLength
+     );
++_Win32_SetLastError_
+ BOOLAPI GopherCreateLocatorW(
+     _In_ LPCWSTR lpszHost,
+     _In_ INTERNET_PORT nServerPort,
+@@ -2143,10 +2204,12 @@ BOOLAPI GopherCreateLocatorW(
+ #define GopherCreateLocator  GopherCreateLocatorA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI GopherGetLocatorTypeA(
+     _In_ LPCSTR lpszLocator,
+     _Out_ LPDWORD lpdwGopherType
+     );
++_Win32_SetLastError_
+ BOOLAPI GopherGetLocatorTypeW(
+     _In_ LPCWSTR lpszLocator,
+     _Out_ LPDWORD lpdwGopherType
+@@ -2157,6 +2220,7 @@ BOOLAPI GopherGetLocatorTypeW(
+ #define GopherGetLocatorType  GopherGetLocatorTypeA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) GopherFindFirstFileA(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCSTR lpszLocator,
+@@ -2165,6 +2229,7 @@ INTERNETAPI_(HINTERNET) GopherFindFirstFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) GopherFindFirstFileW(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCWSTR lpszLocator,
+@@ -2179,6 +2244,7 @@ INTERNETAPI_(HINTERNET) GopherFindFirstFileW(
+ #define GopherFindFirstFile  GopherFindFirstFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) GopherOpenFileA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszLocator,
+@@ -2186,6 +2252,7 @@ INTERNETAPI_(HINTERNET) GopherOpenFileA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) GopherOpenFileW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszLocator,
+@@ -2204,6 +2271,7 @@ typedef BOOL (CALLBACK * GOPHER_ATTRIBUTE_ENUMERATOR)(
+     _In_ DWORD dwError
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI GopherGetAttributeA(
+     _In_ HINTERNET hConnect,
+     _In_ LPCSTR lpszLocator,
+@@ -2214,6 +2282,7 @@ BOOLAPI GopherGetAttributeA(
+     _In_opt_ GOPHER_ATTRIBUTE_ENUMERATOR lpfnEnumerator,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI GopherGetAttributeW(
+     _In_ HINTERNET hConnect,
+     _In_ LPCWSTR lpszLocator,
+@@ -2508,6 +2577,7 @@ BOOLAPI GopherGetAttributeW(
+ // prototypes
+ //
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) HttpOpenRequestA(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCSTR lpszVerb,
+@@ -2518,6 +2588,7 @@ INTERNETAPI_(HINTERNET) HttpOpenRequestA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HINTERNET) HttpOpenRequestW(
+     _In_ HINTERNET hConnect,
+     _In_opt_ LPCWSTR lpszVerb,
+@@ -2534,6 +2605,7 @@ INTERNETAPI_(HINTERNET) HttpOpenRequestW(
+ #define HttpOpenRequest  HttpOpenRequestA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI HttpAddRequestHeadersA(
+     _In_ HINTERNET hRequest,
+     _When_(dwHeadersLength == (DWORD)-1, _In_z_)
+@@ -2542,6 +2614,7 @@ BOOLAPI HttpAddRequestHeadersA(
+     _In_ DWORD dwHeadersLength,
+     _In_ DWORD dwModifiers
+     );
++_Win32_SetLastError_
+ BOOLAPI HttpAddRequestHeadersW(
+     _In_ HINTERNET hRequest,
+     _When_(dwHeadersLength == (DWORD)-1, _In_z_)
+@@ -2599,6 +2672,7 @@ BOOLAPI HttpAddRequestHeadersW(
+ #define HTTP_ADDREQ_FLAG_REPLACE    0x80000000
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI HttpSendRequestA(
+     _In_ HINTERNET hRequest,
+     _In_reads_opt_(dwHeadersLength) LPCSTR lpszHeaders,
+@@ -2606,6 +2680,7 @@ BOOLAPI HttpSendRequestA(
+     _In_reads_bytes_opt_(dwOptionalLength) LPVOID lpOptional,
+     _In_ DWORD dwOptionalLength
+     );
++_Win32_SetLastError_
+ BOOLAPI HttpSendRequestW(
+     _In_ HINTERNET hRequest,
+     _In_reads_opt_(dwHeadersLength) LPCWSTR lpszHeaders,
+@@ -2619,6 +2694,7 @@ BOOLAPI HttpSendRequestW(
+ #define HttpSendRequest  HttpSendRequestA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI HttpSendRequestExA(
+     _In_ HINTERNET hRequest,
+     _In_opt_ LPINTERNET_BUFFERSA lpBuffersIn,
+@@ -2626,6 +2702,7 @@ BOOLAPI HttpSendRequestExA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI HttpSendRequestExW(
+     _In_ HINTERNET hRequest,
+     _In_opt_ LPINTERNET_BUFFERSW lpBuffersIn,
+@@ -2650,12 +2727,14 @@ BOOLAPI HttpSendRequestExW(
+ #define HSR_DOWNLOAD    0x00000010                      // download to file
+ #define HSR_CHUNKED     0x00000020                      // operation is send of chunked data
+ 
++_Win32_SetLastError_
+ BOOLAPI HttpEndRequestA(
+     _In_ HINTERNET hRequest,
+     _Out_opt_ LPINTERNET_BUFFERSA lpBuffersOut,
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
++_Win32_SetLastError_
+ BOOLAPI HttpEndRequestW(
+     _In_ HINTERNET hRequest,
+     _Out_opt_ LPINTERNET_BUFFERSW lpBuffersOut,
+@@ -2668,6 +2747,7 @@ BOOLAPI HttpEndRequestW(
+ #define HttpEndRequest  HttpEndRequestA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ HttpQueryInfoA(
+     _In_ HINTERNET hRequest,
+@@ -2676,6 +2756,7 @@ HttpQueryInfoA(
+     _Inout_ LPDWORD lpdwBufferLength,
+     _Inout_opt_ LPDWORD lpdwIndex
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ HttpQueryInfoW(
+     _In_ HINTERNET hRequest,
+@@ -2732,12 +2813,14 @@ typedef struct
+ #define INTERNET_COOKIE_SAME_SITE_LEVEL_CROSS_SITE 0x00400000
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetSetCookieA(
+     _In_ LPCSTR lpszUrl,
+     _In_opt_ LPCSTR lpszCookieName,
+     _In_ LPCSTR lpszCookieData
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetSetCookieW(
+     _In_ LPCWSTR lpszUrl,
+@@ -2750,6 +2833,7 @@ InternetSetCookieW(
+ #define InternetSetCookie  InternetSetCookieA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetCookieA(
+     _In_ LPCSTR lpszUrl,
+@@ -2757,6 +2841,7 @@ InternetGetCookieA(
+     _Out_writes_opt_(*lpdwSize) LPSTR lpszCookieData,
+     _Inout_ LPDWORD lpdwSize
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetCookieW(
+     _In_ LPCWSTR lpszUrl,
+@@ -2770,6 +2855,7 @@ InternetGetCookieW(
+ #define InternetGetCookie  InternetGetCookieA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(DWORD)
+ InternetSetCookieExA(
+     _In_ LPCSTR lpszUrl,
+@@ -2778,6 +2864,7 @@ InternetSetCookieExA(
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwReserved
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(DWORD)
+ InternetSetCookieExW(
+     _In_ LPCWSTR lpszUrl,
+@@ -2792,6 +2879,7 @@ InternetSetCookieExW(
+ #define InternetSetCookieEx  InternetSetCookieExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetCookieExA(
+     _In_ LPCSTR lpszUrl,
+@@ -2801,6 +2889,7 @@ InternetGetCookieExA(
+     _In_ DWORD dwFlags,
+     _Reserved_ LPVOID lpReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetCookieExW(
+     _In_ LPCWSTR lpszUrl,
+@@ -2849,12 +2938,14 @@ InternetAttemptConnect(
+     _In_ DWORD dwReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCheckConnectionA(
+     _In_ LPCSTR lpszUrl,
+     _In_ DWORD dwFlags,
+     _In_ DWORD dwReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ InternetCheckConnectionW(
+     _In_ LPCWSTR lpszUrl,
+@@ -2910,6 +3001,7 @@ typedef struct
+     INTERNET_AUTH_NOTIFY_DATA;
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI ResumeSuspendedDownload(
+     _In_ HINTERNET hRequest,
+     _In_ DWORD dwResultCode
+@@ -3281,6 +3373,7 @@ typedef LPINTERNET_CACHE_GROUP_INFOA LPINTERNET_CACHE_GROUP_INFO;
+ // Cache APIs
+ //
+ 
++_Win32_SetLastError_
+ BOOLAPI CreateUrlCacheEntryA(
+     _In_       LPCSTR lpszUrlName,
+     _In_       DWORD dwExpectedFileSize,
+@@ -3288,6 +3381,7 @@ BOOLAPI CreateUrlCacheEntryA(
+     _Inout_updates_(MAX_PATH) LPSTR lpszFileName,
+     _In_       DWORD dwReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI CreateUrlCacheEntryW(
+     _In_       LPCWSTR lpszUrlName,
+     _In_       DWORD dwExpectedFileSize,
+@@ -3301,6 +3395,7 @@ BOOLAPI CreateUrlCacheEntryW(
+ #define CreateUrlCacheEntry  CreateUrlCacheEntryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ CommitUrlCacheEntryA(
+     _In_ LPCSTR lpszUrlName,
+@@ -3314,6 +3409,7 @@ CommitUrlCacheEntryA(
+     _In_opt_ LPCSTR lpszOriginalUrl
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ CommitUrlCacheEntryW(
+     _In_ LPCWSTR lpszUrlName,
+@@ -3333,6 +3429,7 @@ CommitUrlCacheEntryW(
+ #define CommitUrlCacheEntry CommitUrlCacheEntryA
+ #endif
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ RetrieveUrlCacheEntryFileA(
+     _In_ LPCSTR lpszUrlName,
+@@ -3340,6 +3437,7 @@ RetrieveUrlCacheEntryFileA(
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+     _Reserved_ DWORD dwReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ RetrieveUrlCacheEntryFileW(
+     _In_ LPCWSTR lpszUrlName,
+@@ -3353,11 +3451,13 @@ RetrieveUrlCacheEntryFileW(
+ #define RetrieveUrlCacheEntryFile  RetrieveUrlCacheEntryFileA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI UnlockUrlCacheEntryFileA(
+     _In_ LPCSTR lpszUrlName,
+     _Reserved_ DWORD dwReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI UnlockUrlCacheEntryFileW(
+     _In_ LPCWSTR lpszUrlName,
+     _Reserved_ DWORD dwReserved
+@@ -3371,6 +3471,7 @@ BOOLAPI UnlockUrlCacheEntryFileW(
+ #ifdef _WINX32_
+ #define UnlockUrlCacheEntryFile  UnlockUrlCacheEntryFileA
+ #else
++_Win32_SetLastError_
+ BOOLAPI UnlockUrlCacheEntryFile(
+     _In_ LPCSTR lpszUrlName,
+     _Reserved_ DWORD dwReserved
+@@ -3378,6 +3479,7 @@ BOOLAPI UnlockUrlCacheEntryFile(
+ #endif // _WINX32_
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ RetrieveUrlCacheEntryStreamA(
+     _In_ LPCSTR  lpszUrlName,
+@@ -3386,6 +3488,7 @@ RetrieveUrlCacheEntryStreamA(
+     _In_ BOOL fRandomRead,
+     _Reserved_ DWORD dwReserved
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ RetrieveUrlCacheEntryStreamW(
+     _In_ LPCWSTR  lpszUrlName,
+@@ -3400,6 +3503,7 @@ RetrieveUrlCacheEntryStreamW(
+ #define RetrieveUrlCacheEntryStream  RetrieveUrlCacheEntryStreamA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ ReadUrlCacheEntryStream(
+     _In_ HANDLE hUrlCacheStream,
+@@ -3417,6 +3521,7 @@ ReadUrlCacheEntryStreamEx(
+     _Inout_ LPDWORD lpdwLen
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ UnlockUrlCacheEntryStream(
+     _In_ HANDLE hUrlCacheStream,
+@@ -3424,12 +3529,14 @@ UnlockUrlCacheEntryStream(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheEntryInfoA(
+     _In_ LPCSTR lpszUrlName,
+     _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpCacheEntryInfo,
+     _Inout_opt_ LPDWORD lpcbCacheEntryInfo
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheEntryInfoW(
+     _In_ LPCWSTR lpszUrlName,
+@@ -3443,6 +3550,7 @@ GetUrlCacheEntryInfoW(
+ #endif // !UNICODE
+ 
+ 
++_Win32_SetLastError_
+ URLCACHEAPI_(HANDLE) FindFirstUrlCacheGroup(
+     _In_        DWORD       dwFlags,
+     _In_        DWORD       dwFilter,
+@@ -3452,6 +3560,7 @@ URLCACHEAPI_(HANDLE) FindFirstUrlCacheGroup(
+     _Reserved_  LPVOID      lpReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI FindNextUrlCacheGroup(
+     _In_        HANDLE      hFind,
+     _Out_       GROUPID*    lpGroupId,
+@@ -3459,6 +3568,7 @@ BOOLAPI FindNextUrlCacheGroup(
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI GetUrlCacheGroupAttributeA(
+     _In_                            GROUPID                         gid,
+     _Reserved_                      DWORD                           dwFlags,
+@@ -3467,6 +3577,7 @@ BOOLAPI GetUrlCacheGroupAttributeA(
+     _Inout_                         LPDWORD                         lpcbGroupInfo,
+     _Reserved_                      LPVOID                          lpReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI GetUrlCacheGroupAttributeW(
+     _In_                            GROUPID                         gid,
+     _Reserved_                      DWORD                           dwFlags,
+@@ -3481,6 +3592,7 @@ BOOLAPI GetUrlCacheGroupAttributeW(
+ #define GetUrlCacheGroupAttribute  GetUrlCacheGroupAttributeA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI SetUrlCacheGroupAttributeA(
+     _In_        GROUPID                         gid,
+     _Reserved_  DWORD                           dwFlags,
+@@ -3488,6 +3600,7 @@ BOOLAPI SetUrlCacheGroupAttributeA(
+     _In_        LPINTERNET_CACHE_GROUP_INFOA    lpGroupInfo,
+     _Reserved_  LPVOID                          lpReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI SetUrlCacheGroupAttributeW(
+     _In_        GROUPID                         gid,
+     _Reserved_  DWORD                           dwFlags,
+@@ -3502,6 +3615,7 @@ BOOLAPI SetUrlCacheGroupAttributeW(
+ #endif // !UNICODE
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheEntryInfoExA(
+     _In_ LPCSTR lpszUrl,
+@@ -3512,6 +3626,7 @@ GetUrlCacheEntryInfoExA(
+     _Reserved_ LPVOID lpReserved,
+     _In_ DWORD dwFlags
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ GetUrlCacheEntryInfoExW(
+     _In_ LPCWSTR lpszUrl,
+@@ -3537,11 +3652,13 @@ GetUrlCacheEntryInfoExW(
+ #define CACHE_ENTRY_HEADERINFO_FC   0x00000400
+ #define CACHE_ENTRY_EXEMPT_DELTA_FC 0x00000800
+ 
++_Win32_SetLastError_
+ BOOLAPI SetUrlCacheEntryInfoA(
+     _In_ LPCSTR lpszUrlName,
+     _In_ LPINTERNET_CACHE_ENTRY_INFOA lpCacheEntryInfo,
+     _In_ DWORD dwFieldControl
+     );
++_Win32_SetLastError_
+ BOOLAPI SetUrlCacheEntryInfoW(
+     _In_ LPCWSTR lpszUrlName,
+     _In_ LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
+@@ -3559,11 +3676,13 @@ BOOLAPI SetUrlCacheEntryInfoW(
+ //
+ 
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(GROUPID) CreateUrlCacheGroup(
+     _In_   DWORD  dwFlags,
+     _Reserved_ LPVOID lpReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheGroup(
+     _In_   GROUPID GroupId,
+     _In_   DWORD   dwFlags,       // must pass 0
+@@ -3609,6 +3728,7 @@ BOOLAPI SetUrlCacheEntryGroup(
+ #endif // _WINX32_
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheEntryExA(
+     _In_opt_ LPCSTR  lpszUrlSearchPattern,
+@@ -3621,6 +3741,7 @@ FindFirstUrlCacheEntryExA(
+     _Reserved_ LPDWORD lpcbGroupAttributes,
+     _Reserved_ LPVOID lpReserved
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheEntryExW(
+     _In_opt_ LPCWSTR  lpszUrlSearchPattern,
+@@ -3639,6 +3760,7 @@ FindFirstUrlCacheEntryExW(
+ #define FindFirstUrlCacheEntryEx  FindFirstUrlCacheEntryExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ FindNextUrlCacheEntryExA(
+     _In_ HANDLE hEnumHandle,
+@@ -3648,6 +3770,7 @@ FindNextUrlCacheEntryExA(
+     _Reserved_ LPDWORD lpcbGroupAttributes,
+     _Reserved_ LPVOID lpReserved
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ FindNextUrlCacheEntryExW(
+     _In_ HANDLE hEnumHandle,
+@@ -3663,12 +3786,14 @@ FindNextUrlCacheEntryExW(
+ #define FindNextUrlCacheEntryEx  FindNextUrlCacheEntryExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheEntryA(
+     _In_opt_ LPCSTR lpszUrlSearchPattern,
+     _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpFirstCacheEntryInfo,
+     _Inout_ LPDWORD lpcbCacheEntryInfo
+     );
++_Win32_SetLastError_
+ INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheEntryW(
+     _In_opt_ LPCWSTR lpszUrlSearchPattern,
+@@ -3681,12 +3806,14 @@ FindFirstUrlCacheEntryW(
+ #define FindFirstUrlCacheEntry  FindFirstUrlCacheEntryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ FindNextUrlCacheEntryA(
+     _In_ HANDLE hEnumHandle,
+     _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpNextCacheEntryInfo,
+     _Inout_ LPDWORD lpcbCacheEntryInfo
+     );
++_Win32_SetLastError_
+ BOOLAPI
+ FindNextUrlCacheEntryW(
+     _In_ HANDLE hEnumHandle,
+@@ -3700,14 +3827,17 @@ FindNextUrlCacheEntryW(
+ #endif // !UNICODE
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI FindCloseUrlCache(
+     _In_ HANDLE hEnumHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheEntryA(
+     _In_ LPCSTR lpszUrlName
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheEntryW(
+     _In_ LPCWSTR lpszUrlName
+     );
+@@ -3718,6 +3848,7 @@ BOOLAPI DeleteUrlCacheEntryW(
+ #ifdef _WINX32_
+ #define DeleteUrlCacheEntry  DeleteUrlCacheEntryA
+ #else
++_Win32_SetLastError_
+ BOOLAPI DeleteUrlCacheEntry(
+     _In_ LPCSTR lpszUrlName
+     );
+@@ -3776,12 +3907,14 @@ INTERNETAPI_(DWORD) InternetHangUp(
+ #define INTERENT_GOONLINE_NOPROMPT 0x00000002
+ #define INTERENT_GOONLINE_MASK     0x00000003
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnlineA(
+     _In_opt_ LPCSTR lpszURL,
+     _In_ HWND     hwndParent,
+     _In_ DWORD    dwFlags
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnlineW(
+     _In_opt_ LPCWSTR lpszURL,
+     _In_ HWND     hwndParent,
+@@ -3794,6 +3927,7 @@ BOOLAPI InternetGoOnlineW(
+ #ifdef _WINX32_
+ #define InternetGoOnline  InternetGoOnlineA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetGoOnline(
+     _In_opt_ LPSTR   lpszURL,
+     _In_ HWND     hwndParent,
+@@ -3802,6 +3936,7 @@ BOOLAPI InternetGoOnline(
+ #endif // _WINX32_
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetAutodial(
+     _In_       DWORD  dwFlags,
+     _In_opt_ HWND   hwndParent);
+@@ -3814,13 +3949,16 @@ BOOLAPI InternetAutodial(
+ 
+ 
+ #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
++_Win32_SetLastError_
+ BOOLAPI InternetAutodialHangup(
+     _Reserved_ DWORD    dwReserved);
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetGetConnectedState(
+     _Out_  LPDWORD  lpdwFlags,
+     _Reserved_ DWORD    dwReserved);
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetConnectedStateExA(
+     _Out_opt_ LPDWORD lpdwFlags,
+@@ -3829,6 +3967,7 @@ InternetGetConnectedStateExA(
+     _Reserved_ DWORD dwReserved
+ );
+ 
++_Win32_SetLastError_
+ BOOLAPI
+ InternetGetConnectedStateExW(
+     _Out_opt_ LPDWORD lpdwFlags,
+@@ -3932,10 +4071,12 @@ BOOLAPI DeleteWpadCacheForNetworks(
+ 
+ 
+ 
++_Win32_SetLastError_
+ BOOLAPI InternetInitializeAutoProxyDll(
+     _In_ DWORD dwReserved
+     );
+ 
++_Win32_SetLastError_
+ BOOLAPI DetectAutoProxyUrl(
+     _Out_writes_(cchAutoProxyUrl) PSTR pszAutoProxyUrl,
+     _In_ DWORD cchAutoProxyUrl,
+@@ -3955,6 +4096,7 @@ BOOLAPI CreateMD5SSOHash (
+ #ifdef _WINX32_
+ #define InternetGetConnectedStateEx  InternetGetConnectedStateExA
+ #else
++_Win32_SetLastError_
+ BOOLAPI InternetGetConnectedStateEx(
+     _Out_ LPDWORD lpdwFlags,
+     _Out_writes_opt_(dwNameLen) LPSTR lpszConnectionName,

@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+index 3cd5ed93..2e161c8e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+@@ -16,6 +16,9 @@
+ #ifndef	_FILEHC_H_
+ #define	_FILEHC_H_
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -639,6 +642,7 @@ FindSyncContextFromName(
+ //
+ //	If the name is already present in the cache, this will fail with GetLastError()==ERROR_DUP_NAME !
+ //
++_Win32_SetLastError_
+ FILEHC_EXPORT
+ BOOL	__stdcall
+ AssociateContextWithName(	

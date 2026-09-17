@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
+index ae8bb839..46d91a95 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
+@@ -23,6 +23,9 @@ Notes:
+ --*/
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -143,6 +146,7 @@ NetUserModalsSet (
+     _Out_opt_ LPDWORD   parm_err OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUserChangePassword (
+     _In_opt_ IN  LPCWSTR   domainname OPTIONAL,

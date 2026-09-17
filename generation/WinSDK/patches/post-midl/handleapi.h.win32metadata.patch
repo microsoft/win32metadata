@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
+index fe2d256b..cc66c752 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
+@@ -17,6 +17,9 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -32,6 +35,7 @@ extern "C" {
+ //
+ // Prototypes
+ //
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -39,6 +43,7 @@ CloseHandle(
+     _In_ _Post_ptr_invalid_ HANDLE hObject
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -72,6 +77,7 @@ CompareObjectHandles(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -80,6 +86,7 @@ GetHandleInformation(
+     _Out_ LPDWORD lpdwFlags
+     );
+ 
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

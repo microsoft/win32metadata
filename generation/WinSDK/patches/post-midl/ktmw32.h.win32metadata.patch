@@ -1,0 +1,318 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
+index 9f0dd996..45c5b402 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
+@@ -22,6 +22,9 @@ Revision History:
+ #define _KTMUSER_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -36,6 +39,7 @@ extern "C" {
+ // Win32-level transaction manager API calls
+ //
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ CreateTransaction (
+@@ -48,6 +52,7 @@ CreateTransaction (
+     _In_opt_ LPWSTR Description
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ OpenTransaction (
+@@ -55,30 +60,35 @@ OpenTransaction (
+     IN LPGUID TransactionId
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ CommitTransaction (
+     IN HANDLE TransactionHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ CommitTransactionAsync (
+     IN HANDLE TransactionHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RollbackTransaction (
+     IN HANDLE TransactionHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RollbackTransactionAsync (
+     IN HANDLE TransactionHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetTransactionId (
+@@ -87,6 +97,7 @@ GetTransactionId (
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetTransactionInformation (
+@@ -99,6 +110,7 @@ GetTransactionInformation (
+     _Out_writes_to_opt_(BufferLength, return + 1) LPWSTR Description
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ SetTransactionInformation (
+@@ -109,6 +121,7 @@ SetTransactionInformation (
+     _In_opt_ LPWSTR Description
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ CreateTransactionManager (
+@@ -118,6 +131,7 @@ CreateTransactionManager (
+     IN ULONG CommitStrength OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ OpenTransactionManager (
+@@ -126,6 +140,7 @@ OpenTransactionManager (
+     IN ULONG OpenOptions OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ OpenTransactionManagerById (
+@@ -134,6 +149,7 @@ OpenTransactionManagerById (
+     IN ULONG OpenOptions OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RenameTransactionManager (
+@@ -141,6 +157,7 @@ RenameTransactionManager (
+     IN LPGUID ExistingTransactionManagerGuid
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RollforwardTransactionManager (
+@@ -148,24 +165,28 @@ RollforwardTransactionManager (
+     IN PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RecoverTransactionManager (
+     IN HANDLE TransactionManagerHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ GetCurrentClockTransactionManager(
+     IN HANDLE TransactionManagerHandle,
+     OUT PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ GetTransactionManagerId(
+     IN HANDLE TransactionManagerHandle,
+     OUT LPGUID TransactionManagerId
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ CreateResourceManager (
+@@ -176,6 +197,7 @@ CreateResourceManager (
+     _In_opt_ LPWSTR Description
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ OpenResourceManager (
+@@ -184,12 +206,14 @@ OpenResourceManager (
+     IN LPGUID ResourceManagerId
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RecoverResourceManager (
+     IN HANDLE ResourceManagerHandle
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetNotificationResourceManager (
+@@ -200,6 +224,7 @@ GetNotificationResourceManager (
+     OUT PULONG                          ReturnLength OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetNotificationResourceManagerAsync (
+@@ -210,6 +235,7 @@ GetNotificationResourceManagerAsync (
+     IN  LPOVERLAPPED                  lpOverlapped
+     );
+     
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ SetResourceManagerCompletionPort(
+@@ -218,6 +244,7 @@ SetResourceManagerCompletionPort(
+     IN ULONG_PTR CompletionKey
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ CreateEnlistment (
+@@ -229,6 +256,7 @@ CreateEnlistment (
+     IN PVOID             EnlistmentKey OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ APIENTRY
+ OpenEnlistment (
+@@ -238,6 +266,7 @@ OpenEnlistment (
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RecoverEnlistment (
+@@ -246,6 +275,7 @@ RecoverEnlistment (
+     );
+ 
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetEnlistmentRecoveryInformation (
+@@ -255,6 +285,7 @@ GetEnlistmentRecoveryInformation (
+     OUT PULONG BufferUsed OPTIONAL
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetEnlistmentId (
+@@ -262,6 +293,7 @@ GetEnlistmentId (
+     OUT LPGUID EnlistmentId
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ SetEnlistmentRecoveryInformation (
+@@ -270,6 +302,7 @@ SetEnlistmentRecoveryInformation (
+     IN PVOID  Buffer
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ PrepareEnlistment (
+@@ -277,6 +310,7 @@ PrepareEnlistment (
+     IN PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ PrePrepareEnlistment (
+@@ -284,6 +318,7 @@ PrePrepareEnlistment (
+     IN PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ CommitEnlistment (
+@@ -291,6 +326,7 @@ CommitEnlistment (
+     IN PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RollbackEnlistment (
+@@ -298,6 +334,7 @@ RollbackEnlistment (
+     IN PLARGE_INTEGER TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ PrePrepareComplete (
+@@ -305,6 +342,7 @@ PrePrepareComplete (
+     IN  PLARGE_INTEGER    TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ PrepareComplete (
+@@ -312,6 +350,7 @@ PrepareComplete (
+     IN  PLARGE_INTEGER    TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ ReadOnlyEnlistment (
+@@ -319,6 +358,7 @@ ReadOnlyEnlistment (
+     IN  PLARGE_INTEGER    TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ CommitComplete (
+@@ -326,6 +366,7 @@ CommitComplete (
+     IN  PLARGE_INTEGER    TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ RollbackComplete (
+@@ -333,6 +374,7 @@ RollbackComplete (
+     IN  PLARGE_INTEGER    TmVirtualClock
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ SinglePhaseReject (

@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
+index 21ce97d0..a3f9c278 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
+@@ -5,6 +5,10 @@
+ *   Copyright (c) 1991-1999, Microsoft Corp. All rights reserved.         *
+ *                                                                         *
+ **************************************************************************/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __DSKQUOTA_H
+ #define __DSKQUOTA_H
+ 
+@@ -172,6 +176,7 @@ typedef struct DiskQuotaUserInformation {
+ //
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUser
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IDiskQuotaUser, IUnknown, "7988B574-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(GetID)(THIS_
+@@ -242,6 +247,7 @@ typedef IDiskQuotaUser DISKQUOTA_USER, *PDISKQUOTA_USER;
+ //
+ #undef  INTERFACE
+ #define INTERFACE IEnumDiskQuotaUsers
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IEnumDiskQuotaUsers, IUnknown, "7988B577-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Next)(THIS_
+@@ -267,6 +273,7 @@ typedef IEnumDiskQuotaUsers ENUM_DISKQUOTA_USERS, *PENUM_DISKQUOTA_USERS;
+ // 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUserBatch
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IDiskQuotaUserBatch, IUnknown, "7988B576-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Add)(THIS_
+@@ -289,6 +296,7 @@ typedef IDiskQuotaUserBatch DISKQUOTA_USER_BATCH, *PDISKQUOTA_USER_BATCH;
+ //
+ #undef INTERFACE
+ #define INTERFACE IDiskQuotaControl
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Initialize)(THIS_
+@@ -372,6 +380,7 @@ typedef IDiskQuotaControl DISKQUOTA_CONTROL, *PDISKQUOTA_CONTROL;
+ 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaEvents
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IDiskQuotaEvents, IUnknown, "7988B579-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(OnUserNameChanged)(THIS_

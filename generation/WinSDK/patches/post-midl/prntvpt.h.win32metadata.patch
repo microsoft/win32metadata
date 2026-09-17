@@ -1,0 +1,32 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prntvpt.h b/generation/WinSDK/RecompiledIdlHeaders/um/prntvpt.h
+index 3684050..10abfb9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/prntvpt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/prntvpt.h
+@@ -17,6 +17,9 @@ Abstract:
+ #define _PRNPTNTV_H_
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -87,7 +90,7 @@ HRESULT WINAPI
+ PTOpenProvider( 
+             _In_        PCWSTR       pszPrinterName,
+                         DWORD        dwVersion,
+-            _Out_       HPTPROVIDER *phProvider
++            _Out_ _Win32_RAIIFree_(PTCloseProvider, 0) HPTPROVIDER *phProvider
+             );
+ 
+ HRESULT WINAPI
+@@ -95,7 +98,7 @@ PTOpenProviderEx(
+             _In_  PCWSTR       pszPrinterName,
+                   DWORD        dwMaxVersion,
+                   DWORD        dwPrefVersion,
+-            _Out_ HPTPROVIDER *phProvider,
++            _Out_ _Win32_RAIIFree_(PTCloseProvider, 0) HPTPROVIDER *phProvider,
+             _Out_ DWORD       *pUsedVersion
+             );
+ 

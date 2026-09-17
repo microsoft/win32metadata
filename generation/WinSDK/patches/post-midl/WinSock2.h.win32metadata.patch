@@ -1,0 +1,854 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
+index d92b69cd..8d132202 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
+@@ -18,6 +18,9 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+ #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -1626,6 +1629,7 @@ typedef struct pollfd {
+ /* Socket function prototypes */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+@@ -1649,6 +1653,7 @@ SOCKET
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1670,6 +1675,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1687,6 +1693,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1708,6 +1715,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1731,6 +1739,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1752,6 +1761,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1773,6 +1783,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1798,6 +1809,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ u_long
+ WSAAPI
+@@ -1815,6 +1827,7 @@ u_long
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ u_short
+ WSAAPI
+@@ -1832,6 +1845,7 @@ u_short
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("inet_pton() or InetPton()")
+ WINSOCK_API_LINKAGE
+ unsigned long
+@@ -1850,6 +1864,7 @@ unsigned long
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("inet_ntop() or InetNtop()")
+ WINSOCK_API_LINKAGE
+ char FAR *
+@@ -1951,6 +1966,7 @@ __inline double ntohd ( unsigned __int64 Value )
+ #endif /* NO_EXTRA_HTON_FUNCTIONS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -1970,6 +1986,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ u_long
+ WSAAPI
+@@ -1987,6 +2004,7 @@ u_long
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ u_short
+ WSAAPI
+@@ -2004,6 +2022,7 @@ u_short
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2027,6 +2046,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2054,6 +2074,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2079,6 +2100,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2102,6 +2124,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2129,6 +2152,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2154,6 +2178,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2173,6 +2198,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+@@ -2198,6 +2224,7 @@ SOCKET
+ /* Database function prototypes */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getnameinfo() or GetNameInfoW()")
+ WINSOCK_API_LINKAGE
+ struct hostent FAR *
+@@ -2220,6 +2247,7 @@ struct hostent FAR *
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getaddrinfo() or GetAddrInfoW()")
+ WINSOCK_API_LINKAGE
+ struct hostent FAR *
+@@ -2238,6 +2266,7 @@ struct hostent FAR *
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2258,6 +2287,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2278,6 +2308,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ struct servent FAR *
+ WSAAPI
+@@ -2297,6 +2328,7 @@ struct servent FAR *
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ struct servent FAR *
+ WSAAPI
+@@ -2316,6 +2348,7 @@ struct servent FAR *
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ struct protoent FAR *
+ WSAAPI
+@@ -2333,6 +2366,7 @@ struct protoent FAR *
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ struct protoent FAR *
+ WSAAPI
+@@ -2352,6 +2386,7 @@ struct protoent FAR *
+ /* Microsoft Windows Extension function prototypes */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ int
+@@ -2373,6 +2408,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2390,6 +2426,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ void
+ WSAAPI
+@@ -2407,6 +2444,7 @@ void
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2427,6 +2465,7 @@ int
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ BOOL
+@@ -2445,6 +2484,7 @@ BOOL
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ int
+@@ -2463,6 +2503,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ FARPROC
+@@ -2481,6 +2522,7 @@ FARPROC
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ int
+@@ -2499,6 +2541,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getservbyname()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2527,6 +2570,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getservbyport()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2555,6 +2599,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getprotobyname()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2581,6 +2626,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getprotobynumber()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2607,6 +2653,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("GetAddrInfoExW()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2633,6 +2680,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("getnameinfo() or GetNameInfoW()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+@@ -2663,6 +2711,7 @@ HANDLE
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED
+ WINSOCK_API_LINKAGE
+ int
+@@ -2681,6 +2730,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAEventSelect()")
+ WINSOCK_API_LINKAGE
+ int
+@@ -2710,6 +2760,7 @@ int
+ /* WinSock 2 API new function prototypes */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+@@ -2737,6 +2788,7 @@ SOCKET
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ BOOL
+ WSAAPI
+@@ -2754,6 +2806,7 @@ BOOL
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2776,6 +2829,7 @@ WSAConnect(
+ #define WSAConnectByName    WSAConnectByNameA
+ #endif
+ 
++_Win32_SetLastError_
+ BOOL
+ PASCAL
+ WSAConnectByNameW(
+@@ -2789,6 +2843,7 @@ WSAConnectByNameW(
+     _In_opt_ const struct timeval * timeout,
+     _Reserved_ LPWSAOVERLAPPED Reserved);
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAConnectByNameW()")
+ BOOL
+ PASCAL
+@@ -2803,6 +2858,7 @@ WSAConnectByNameA(
+     _In_opt_ const struct timeval * timeout,
+     _Reserved_ LPWSAOVERLAPPED Reserved);
+ 
++_Win32_SetLastError_
+ BOOL
+ PASCAL
+ WSAConnectByList(
+@@ -2831,6 +2887,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ WSAEVENT
+ WSAAPI
+@@ -2848,6 +2905,7 @@ WSAEVENT
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSADuplicateSocketW()")
+ WINSOCK_API_LINKAGE
+ int
+@@ -2858,6 +2916,7 @@ WSADuplicateSocketA(
+     _Out_ LPWSAPROTOCOL_INFOA lpProtocolInfo
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2897,6 +2956,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2918,6 +2978,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAEnumProtocolsW()")
+ WINSOCK_API_LINKAGE
+ int
+@@ -2928,6 +2989,7 @@ WSAEnumProtocolsA(
+     _Inout_ LPDWORD lpdwBufferLength
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2967,6 +3029,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -2988,6 +3051,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ BOOL
+ WSAAPI
+@@ -3016,6 +3080,7 @@ BOOL
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED
+ WINSOCK_API_LINKAGE
+ BOOL
+@@ -3041,6 +3106,7 @@ BOOL
+ #pragma endregion
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3062,6 +3128,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3083,6 +3150,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3116,6 +3184,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ SOCKET
+ WSAAPI
+@@ -3147,6 +3216,7 @@ SOCKET
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3168,6 +3238,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3189,6 +3260,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3221,6 +3293,7 @@ int
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSARecv()")
+ WINSOCK_API_LINKAGE
+ int
+@@ -3244,6 +3317,7 @@ int
+ #pragma endregion
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3277,6 +3351,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ BOOL
+ WSAAPI
+@@ -3294,6 +3369,7 @@ BOOL
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3324,6 +3400,7 @@ int
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3342,6 +3419,7 @@ WSASendMsg(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSASend()")
+ WINSOCK_API_LINKAGE
+ int
+@@ -3365,6 +3443,7 @@ int
+ #pragma endregion
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+@@ -3398,6 +3477,7 @@ int
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ BOOL
+ WSAAPI
+@@ -3416,6 +3496,7 @@ BOOL
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSASocketW()")
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+@@ -3430,6 +3511,7 @@ WSASocketA(
+     _In_ DWORD dwFlags
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+@@ -3482,6 +3564,7 @@ SOCKET
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ DWORD
+ WSAAPI
+@@ -3508,6 +3591,7 @@ DWORD
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAAddressToStringW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3520,6 +3604,7 @@ WSAAddressToStringA(
+     _Inout_  LPDWORD             lpdwAddressStringLength
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3567,6 +3652,7 @@ INT
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAStringToAddressW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3579,6 +3665,7 @@ WSAStringToAddressA(
+     _Inout_ LPINT               lpAddressLength
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3629,6 +3716,7 @@ INT
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSALookupServiceBeginW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3639,6 +3727,7 @@ WSALookupServiceBeginA(
+     _Out_ LPHANDLE       lphLookup
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3680,6 +3769,7 @@ INT
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
+ 
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSALookupServiceNextW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3691,6 +3781,7 @@ WSALookupServiceNextA(
+     _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSAQUERYSETA lpqsResults
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3735,6 +3826,7 @@ INT
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3767,6 +3859,7 @@ INT
+ #endif //(_WIN32_WINNT >= 0x0501)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3787,6 +3880,7 @@ INT
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAInstallServiceClassW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3794,6 +3888,7 @@ WSAAPI
+ WSAInstallServiceClassA(
+     _In_  LPWSASERVICECLASSINFOA   lpServiceClassInfo
+     );
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3826,6 +3921,7 @@ INT
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3848,6 +3944,7 @@ INT
+ #if INCL_WINSOCK_API_PROTOTYPES
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassInfoW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3861,6 +3958,7 @@ WSAGetServiceClassInfoA(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3907,6 +4005,7 @@ INT
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3916,6 +4015,7 @@ WSAEnumNameSpaceProvidersA(
+     _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSANAMESPACE_INFOA lpnspBuffer
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -3931,6 +4031,7 @@ WSAEnumNameSpaceProvidersW(
+ #endif /* !UNICODE */
+ 
+ #if(_WIN32_WINNT >= 0x0600 )
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -3940,6 +4041,7 @@ WSAEnumNameSpaceProvidersExA(
+     _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSANAMESPACE_INFOEXA lpnspBuffer
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -4006,6 +4108,7 @@ INT
+ #if INCL_WINSOCK_API_PROTOTYPES
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassNameByClassIdW()")
+ WINSOCK_API_LINKAGE
+ _Success_(return == 0) INT
+@@ -4018,6 +4121,7 @@ WSAGetServiceClassNameByClassIdA(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ _Success_(return == 0) INT
+ WSAAPI
+@@ -4061,6 +4165,7 @@ INT
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ _WINSOCK_DEPRECATED_BY("WSASetServiceW()")
+ WINSOCK_API_LINKAGE
+ INT
+@@ -4071,6 +4176,7 @@ WSASetServiceA(
+     _In_ DWORD dwControlFlags
+     );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -4110,6 +4216,7 @@ INT
+ #endif /* INCL_WINSOCK_API_TYPEDEFS */
+ 
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -4132,6 +4239,7 @@ INT
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+ #if INCL_WINSOCK_API_PROTOTYPES
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
