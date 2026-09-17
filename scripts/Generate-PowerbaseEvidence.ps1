@@ -188,6 +188,16 @@ try {
     }
     $sources = @($manifest.windowsRs.source | Select-Object -Unique)
     if ($sources.Count -ne 1) { throw 'windows-rs crates are not pinned to the same source revision.' }
+    $rdlRoot = Split-Path (@($cargo.packages | Where-Object name -eq 'windows-rdl')[0].manifest_path)
+    $windowsRsRoot = [IO.Path]::GetFullPath((Join-Path $rdlRoot '..\..\..'))
+    $manifest.metadataVocabulary = [ordered]@{
+        classification='shared tooling definitions, not powerbase-owned APIs or copied baseline rows'
+        source=(Get-Identity (Join-Path $windowsRsRoot 'metadata\metadata.rdl'))
+        export=(Get-Identity (Join-Path $rdlRoot 'src\lib.rs'))
+        exportSymbol='windows_rdl::WIN32_METADATA_RDL'
+        injection=(Get-Identity (Join-Path $toolRoot 'tools\rust\src\scrape.rs'))
+        injectionSymbol='compile: .input_text(windows_rdl::WIN32_METADATA_RDL)'
+    }
     $defaults = @($cargo.packages | Where-Object name -eq 'windows-default')
     if ($defaults.Count -ne 1 -or $defaults[0].source -cne $sources[0]) {
         throw 'Bundled metadata reference package does not share the recorded windows-rs pin.'
