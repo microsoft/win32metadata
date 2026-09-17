@@ -16,6 +16,7 @@ if($LASTEXITCODE -ne 0){throw 'Failed to build metadata contract reader.'}
 & "$PSScriptRoot\Generate-PowerbaseEvidence.ps1" -EvidenceDirectory $evidence `
     -ResourceDirectory $ResourceDirectory -ReferenceEvidence $ReferenceEvidence `
     -ToolPath $ToolPath -ToolSha256 $ToolSha256 -ToolSourceRoot $ToolSourceRoot
+& "$PSScriptRoot\Compose-PowerbaseShared.ps1" -EvidenceDirectory $evidence
 $manifest=Get-Content (Join-Path $evidence 'manifest.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 100
 $header=$manifest.nativeHeader.path
 $sdk=Split-Path (Split-Path $header)
@@ -28,6 +29,7 @@ $manifest['verificationImplementation']=@(
     $paths=@(
         'scripts\Test-PowerbasePilot.ps1','scripts\Test-PowerbaseNative.ps1',
         'scripts\Compare-PowerbaseEvidence.ps1','scripts\Test-PowerbaseLogical.ps1',
+        'scripts\Generate-Win32ErrorHeader.ps1','scripts\Compose-PowerbaseShared.ps1','tests\PowerbasePilot\shared.cpp',
         'tests\PowerbasePilot\NativeProbe.cs','tests\PowerbasePilot\macros.cpp',
         'tests\PowerbasePilot\Test-NativeNegative.ps1','tests\PowerbasePilot\Test-MetadataNegative.ps1',
         'sources\MetadataUtils\WinmdContractSnapshot.cs','sources\MetadataUtils\ContractTypeProvider.cs',
@@ -49,7 +51,7 @@ try {
     $manifest['verification']=[ordered]@{
         nativeContracts='passed'; nativeMutation='rejected'; metadataMutations='all three rejected'
         logicalEquivalence=$logical.equivalent
-        scope='only powerbase.h and explicitly inventoried dependencies; not full SDK'
+        scope='powerbase.h plus explicit source-backed shared WIN32_ERROR prerequisite; not full SDK'
     }
     $manifest['status']=if($logical.equivalent){'verified logical equivalence'}else{'verified evidence; unresolved logical differences'}
 } catch {
@@ -58,7 +60,7 @@ try {
     throw
 } finally {
     $manifest['verificationFiles']=@(
-        foreach($directory in @('native','comparison','logical','negative-native','negative-metadata')){
+        foreach($directory in @('native','comparison','logical','negative-native','negative-metadata','shared-prerequisite')){
             $path=Join-Path $evidence $directory
             if(Test-Path $path){
                 Get-ChildItem $path -Recurse -File | Sort-Object FullName | ForEach-Object {
