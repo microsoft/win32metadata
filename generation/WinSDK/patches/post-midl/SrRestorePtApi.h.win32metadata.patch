@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
+index 3a782d47e0..4218f1f47d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
+@@ -14,6 +14,9 @@ Abstract:
+ #define _SRRESTOREPTAPI_H
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -157,6 +160,7 @@ SRSetRestorePointInternal(
+                   _In_ BOOL           fForceSurrogate
+                   );
+ 
++_Win32_ImportLibrary_("SrClient.dll")
+ DWORD __stdcall
+ SRRemoveRestorePoint(DWORD dwRPNum);
+ 

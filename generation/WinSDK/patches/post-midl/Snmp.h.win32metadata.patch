@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
+index bd1d075118..0eefa5375b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
+@@ -19,6 +19,9 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -382,6 +385,7 @@ SnmpUtilOidCpy(
+     AsnObjectIdentifier * pOidSrc
+     );
+ 
++_Win32_SetLastError_
+ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOidAppend(

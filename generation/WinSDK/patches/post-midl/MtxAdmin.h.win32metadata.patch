@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MtxAdmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/MtxAdmin.h
+index 1c926affc8..c72d3d2897 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MtxAdmin.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MtxAdmin.h
+@@ -5,6 +5,10 @@
+ /* at Fri Nov 14 05:07:21 1997
+  */
+ //@@MIDL_FILE_HEADING(  )
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #include "rpc.h"
+ #include "rpcndr.h"
+ #ifndef COM_NO_WINDOWS_H
+@@ -518,6 +522,7 @@ EXTERN_C const IID IID_ICatalogObject;
+         END_INTERFACE
+     } ICatalogObjectVtbl;
+ 
++    _Windows_SupportedOS_Windows2000_
+     interface ICatalogObject
+     {
+         CONST_VTBL struct ICatalogObjectVtbl __RPC_FAR *lpVtbl;
+@@ -860,6 +865,7 @@ EXTERN_C const IID IID_ICatalogCollection;
+         END_INTERFACE
+     } ICatalogCollectionVtbl;
+ 
++    _Windows_SupportedOS_Windows2000_
+     interface ICatalogCollection
+     {
+         CONST_VTBL struct ICatalogCollectionVtbl __RPC_FAR *lpVtbl;

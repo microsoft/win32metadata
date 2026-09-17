@@ -1,0 +1,59 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
+index e914f3f879..d56c1e2290 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
+@@ -10,6 +10,9 @@
+ //--------------------------------------------------------------------------
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -76,6 +79,7 @@ HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, RECO_ATTRS* pRecoAttrs);
+ HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
+ HRESULT WINAPI DestroyContext(HRECOCONTEXT hrc);
+ HRESULT WINAPI GetResultPropertyList(HRECOGNIZER hrec, ULONG* pPropertyCount, GUID*pPropertyGuid);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetPreferredPacketDescription(HRECOGNIZER hrec, PACKET_DESCRIPTION* pPacketDescription);
+ HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, ULONG *pcRanges, CHARACTER_RANGE *pcr);
+ 
+@@ -84,26 +88,36 @@ HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, ULONG *pcRanges, CHARACTER_RAN
+ ////////////////////////
+ HRESULT WINAPI AddStroke(HRECOCONTEXT hrc, const PACKET_DESCRIPTION* pPacketDesc, ULONG cbPacket, const BYTE *pPacket, const XFORM *pXForm);
+ HRESULT WINAPI GetBestResultString(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_opt_ (*pcSize) WCHAR* pwcBestResult);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI DestroyAlternate(HRECOALT hrcalt);
+ HRESULT WINAPI SetGuide(HRECOCONTEXT hrc, const RECO_GUIDE* pGuide, ULONG iIndex);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetGuide(HRECOCONTEXT hrc, RECO_GUIDE* pGuide, ULONG *piIndex);
+ HRESULT WINAPI AdviseInkChange(HRECOCONTEXT hrc, BOOL bNewStroke);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI SetCACMode(HRECOCONTEXT hrc, int iMode);
+ HRESULT WINAPI EndInkInput(HRECOCONTEXT hrc);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI CloneContext(HRECOCONTEXT hrc, HRECOCONTEXT* pCloneHrc);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI ResetContext(HRECOCONTEXT hrc);
+ HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
+ HRESULT WINAPI SetFactoid(HRECOCONTEXT hrc, ULONG cwcFactoid, const WCHAR *pwcFactoid);
+ HRESULT WINAPI SetFlags(HRECOCONTEXT hrc, DWORD dwFlags);
+ HRESULT WINAPI GetLatticePtr(HRECOCONTEXT hrc, RECO_LATTICE **ppLattice);
+ HRESULT WINAPI SetTextContext(HRECOCONTEXT hrc, ULONG cwcBefore, _In_reads_(cwcBefore) const WCHAR *pwcBefore, ULONG cwcAfter, _In_reads_(cwcAfter) const WCHAR *pwcAfter);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG *pcRanges, CHARACTER_RANGE *pcr);
+ HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, CHARACTER_RANGE *pcr);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetContextPropertyList(HRECOCONTEXT hrc, ULONG *pcProperties, GUID *pPropertyGUIDS);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetContextPropertyValue(HRECOCONTEXT hrc, GUID *pGuid, ULONG *pcbSize, BYTE *pProperty);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI SetContextPropertyValue(HRECOCONTEXT hrc, GUID *pGuid, ULONG cbSize, BYTE *pProperty);
+ HRESULT WINAPI IsStringSupported(HRECOCONTEXT hrc, ULONG wcString, const WCHAR *pwcString);
+ HRESULT WINAPI SetWordList(HRECOCONTEXT hrc, HRECOWORDLIST hwl);
++_Win32_ImportLibrary_("inkobjcore.dll")
+ HRESULT WINAPI GetContextPreferenceFlags(HRECOCONTEXT hrc, DWORD *pdwContextPreferenceFlags);
+ HRESULT WINAPI GetRightSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcRightSeparator);
+ HRESULT WINAPI GetLeftSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcLeftSeparator);

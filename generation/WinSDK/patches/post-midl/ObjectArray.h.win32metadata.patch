@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
+index 4146414cc5..331f22c005 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -91,8 +95,9 @@ extern RPC_IF_HANDLE __MIDL_itf_objectarray_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IObjectArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("92CA9DCD-5622-4bba-A805-5E9F541BD8C9")
++    
++    _Windows_SupportedOS_Windows7_
+     IObjectArray : public IUnknown
+     {
+     public:
+@@ -199,8 +204,9 @@ EXTERN_C const IID IID_IObjectArray;
+ EXTERN_C const IID IID_IObjectCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("5632b1a4-e38a-400a-928a-d4cd63230295")
++    
++    _Windows_SupportedOS_Windows7_
+     IObjectCollection : public IObjectArray
+     {
+     public:

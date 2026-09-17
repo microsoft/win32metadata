@@ -1,0 +1,70 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
+index 837c01548f..08c3270c03 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 501
+ #endif
+@@ -549,8 +553,9 @@ extern RPC_IF_HANDLE __MIDL_itf_shdeprecated_0000_0002_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IExpDispSupportXP;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("2f0dd58c-f789-4f14-99fb-9293b3c9c212")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IExpDispSupportXP : public IUnknown
+     {
+     public:
+@@ -1644,8 +1649,9 @@ extern RPC_IF_HANDLE __MIDL_itf_shdeprecated_0000_0006_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IBrowserService2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("68BD21CC-438B-11d2-A560-00A0C92DBFE8")
++    
++    _Windows_SupportedOS_Windows2000_
+     IBrowserService2 : public IBrowserService
+     {
+     public:
+@@ -2879,8 +2885,9 @@ enum IEPDNFLAGS
+ EXTERN_C const IID IID_IBrowserService3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("27D7CE21-762D-48F3-86F3-40E2FD3749C4")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IBrowserService3 : public IBrowserService2
+     {
+     public:
+@@ -3883,8 +3890,9 @@ extern RPC_IF_HANDLE __MIDL_itf_shdeprecated_0000_0008_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IBrowserService4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("639f1bff-e135-4096-abd8-e0f504d649a4")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IBrowserService4 : public IBrowserService3
+     {
+     public:
+@@ -4902,8 +4910,9 @@ extern RPC_IF_HANDLE __MIDL_itf_shdeprecated_0000_0009_v0_0_s_ifspec;
+ EXTERN_C const IID IID_ITrackShellMenu;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("8278F932-2A3E-11d2-838F-00C04FD918D0")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ITrackShellMenu : public IShellMenu
+     {
+     public:
