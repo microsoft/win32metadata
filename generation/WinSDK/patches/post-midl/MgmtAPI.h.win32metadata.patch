@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+index 61d8256b85..c36de85d36 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+@@ -19,6 +19,9 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -74,6 +77,7 @@ typedef PVOID LPSNMP_MGR_SESSION;
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SetLastError_
+ LPSNMP_MGR_SESSION
+ SNMP_FUNC_TYPE
+ SnmpMgrOpen(
+@@ -83,6 +87,7 @@ SnmpMgrOpen(
+     IN INT   nRetries                       // Comm time-out/retry count
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrCtl(
+@@ -101,6 +106,7 @@ SnmpMgrClose(
+     IN LPSNMP_MGR_SESSION session           // SNMP session pointer
+     );
+ 
++_Win32_SetLastError_
+ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpMgrRequest(
+@@ -125,6 +131,7 @@ SnmpMgrOidToStr(
+     _Outptr_opt_ LPSTR   *string         // OID string representation
+     );
+ 
++_Win32_SetLastError_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrTrapListen(

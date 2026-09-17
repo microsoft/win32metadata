@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
+index 31053c5b5b..e837c5400a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 501
+ #endif
+@@ -134,8 +138,9 @@ extern RPC_IF_HANDLE __MIDL_itf_shimgdata_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IShellImageDataFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9be8ed5c-edab-4d75-90f3-bd5bdbb21c82")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IShellImageDataFactory : public IUnknown
+     {
+     public:
+@@ -257,8 +262,9 @@ EXTERN_C const IID IID_IShellImageDataFactory;
+ EXTERN_C const IID IID_IShellImageData;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("bfdeec12-8040-4403-a5ea-9e07dafcf530")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IShellImageData : public IUnknown
+     {
+     public:
+@@ -660,8 +666,9 @@ EXTERN_C const IID IID_IShellImageData;
+ EXTERN_C const IID IID_IShellImageDataAbort;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("53fb8e58-50c0-4003-b4aa-0c8df28e7f3a")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IShellImageDataAbort : public IUnknown
+     {
+     public:

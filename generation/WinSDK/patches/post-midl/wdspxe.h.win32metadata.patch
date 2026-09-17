@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
+index 6cfa722c0f..26d3f197d5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
+@@ -15,6 +15,9 @@ Abstract:
+ #ifndef __WDSPXE_H__
+ #define __WDSPXE_H__
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -358,6 +361,7 @@ PxeTraceV (
+ //
+ // Packet Allocation
+ //
++_Win32_SetLastError_
+ PVOID
+ PXEAPI
+ PxePacketAllocate (

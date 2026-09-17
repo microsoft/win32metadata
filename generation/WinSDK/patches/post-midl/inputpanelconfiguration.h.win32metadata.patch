@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h b/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
+index 5d57c288b4..3a4f46dcd2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -104,8 +108,9 @@ extern RPC_IF_HANDLE __MIDL_itf_inputpanelconfiguration_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IInputPanelConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("41C81592-514C-48BD-A22E-E6AF638521A6")
++    
++    _Windows_SupportedOS_Windows8_
+     IInputPanelConfiguration : public IUnknown
+     {
+     public:
+@@ -187,8 +192,9 @@ EXTERN_C const IID IID_IInputPanelConfiguration;
+ EXTERN_C const IID IID_IInputPanelInvocationConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("A213F136-3B45-4362-A332-EFB6547CD432")
++    
++    _Windows_SupportedOS_Windows8_
+     IInputPanelInvocationConfiguration : public IUnknown
+     {
+     public:

@@ -1,0 +1,214 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
+index 5a48c6aa50..faff147109 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
+@@ -6,6 +6,10 @@
+ *                                                                               *
+ ********************************************************************************/
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #pragma once
+ 
+ #include <apiset.h>
+@@ -72,6 +76,7 @@ DEFINE_ENUM_FLAG_OPERATORS(PATHCCH_OPTIONS)
+ // (0x7FFF + 1 for NULL terminator)
+ #define PATHCCH_MAX_CCH             0x8000
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ BOOL
+ APIENTRY
+@@ -80,6 +85,7 @@ PathIsUNCEx(
+     _Outptr_opt_ PCWSTR* ppszServer
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ BOOL
+ APIENTRY
+@@ -87,6 +93,7 @@ PathCchIsRoot(
+     _In_opt_ PCWSTR pszPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -97,6 +104,7 @@ PathCchAddBackslashEx(
+     _Out_opt_ size_t* pcchRemaining
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -105,6 +113,7 @@ PathCchAddBackslash(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -115,6 +124,7 @@ PathCchRemoveBackslashEx(
+     _Out_opt_ size_t* pcchRemaining
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -123,6 +133,7 @@ PathCchRemoveBackslash(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -131,6 +142,7 @@ PathCchSkipRoot(
+     _Outptr_ PCWSTR* ppszRootEnd
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -139,6 +151,7 @@ PathCchStripToRoot(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -147,6 +160,7 @@ PathCchRemoveFileSpec(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -156,6 +170,7 @@ PathCchFindExtension(
+     _Outptr_ PCWSTR* ppszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -165,6 +180,7 @@ PathCchAddExtension(
+     _In_ PCWSTR pszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -174,6 +190,7 @@ PathCchRenameExtension(
+     _In_ PCWSTR pszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -183,6 +200,7 @@ PathCchRemoveExtension(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -193,6 +211,7 @@ PathCchCanonicalizeEx(
+     _In_ ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -203,6 +222,7 @@ PathCchCanonicalize(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -214,6 +234,7 @@ PathCchCombineEx(
+     _In_ ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -225,6 +246,7 @@ PathCchCombine(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -235,6 +257,7 @@ PathCchAppendEx(
+     _In_ ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -244,6 +267,7 @@ PathCchAppend(
+     _In_opt_ PCWSTR pszMore
+     );
+ 
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -253,6 +277,7 @@ PathCchStripPrefix(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -264,6 +289,7 @@ PathAllocCombine(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -308,12 +334,14 @@ PathAllocCanonicalize(
+ 
+ // non-const overload (C++ only)
+ 
++_Windows_SupportedOS_Windows8_
+ _Success_(return != 0)
+ __inline BOOL PathIsUNCEx(_In_ PWSTR pszPath, _Outptr_opt_ PWSTR *ppszServer)
+ {
+     return PathIsUNCEx(const_cast<PCWSTR>(pszPath), const_cast<PCWSTR*>(ppszServer));
+ }
+ 
++_Windows_SupportedOS_Windows8_
+ __inline HRESULT
+ PathCchSkipRoot(
+     _In_ PWSTR pszPath,
+@@ -322,6 +350,7 @@ PathCchSkipRoot(
+     return PathCchSkipRoot(const_cast<PCWSTR>(pszPath), const_cast<PCWSTR*>(ppszRootEnd));
+ }
+ 
++_Windows_SupportedOS_Windows8_
+ __inline HRESULT
+ PathCchFindExtension(
+     _In_reads_(_Inexpressible_(cchPath)) PWSTR pszPath,

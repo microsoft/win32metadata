@@ -1,0 +1,70 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
+index 4fb25861a0..55cd4c6761 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -198,8 +202,9 @@ typedef struct _tagSYNCMGRLOGERRORINFO *LPSYNCMGRLOGERRORINFO;
+ EXTERN_C const IID IID_ISyncMgrSynchronizeCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6295DF41-35EE-11d1-8707-00C04FD93327")
++    
++    _Windows_SupportedOS_Windows2000_
+     ISyncMgrSynchronizeCallback : public IUnknown
+     {
+     public:
+@@ -446,8 +451,9 @@ typedef struct _tagSYNCMGRITEM *LPSYNCMGRITEM;
+ EXTERN_C const IID IID_ISyncMgrEnumItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6295DF2A-35EE-11d1-8707-00C04FD93327")
++    
++    _Windows_SupportedOS_Windows2000_
+     ISyncMgrEnumItems : public IUnknown
+     {
+     public:
+@@ -621,8 +627,9 @@ enum _tagSYNCMGRITEMSTATE
+ EXTERN_C const IID IID_ISyncMgrSynchronize;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6295DF40-35EE-11d1-8707-00C04FD93327")
++    
++    _Windows_SupportedOS_Windows2000_
+     ISyncMgrSynchronize : public IUnknown
+     {
+     public:
+@@ -878,8 +885,9 @@ enum _tagSYNCMGRINVOKEFLAGS
+ EXTERN_C const IID IID_ISyncMgrSynchronizeInvoke;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6295DF2C-35EE-11d1-8707-00C04FD93327")
++    
++    _Windows_SupportedOS_Windows2000_
+     ISyncMgrSynchronizeInvoke : public IUnknown
+     {
+     public:
+@@ -997,8 +1005,9 @@ enum _tagSYNCMGRREGISTERFLAGS
+ EXTERN_C const IID IID_ISyncMgrRegister;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6295DF42-35EE-11d1-8707-00C04FD93327")
++    
++    _Windows_SupportedOS_Windows2000_
+     ISyncMgrRegister : public IUnknown
+     {
+     public:
