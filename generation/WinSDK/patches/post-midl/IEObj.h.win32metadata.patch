@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IEObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/IEObj.h
+index c42be908ed..d7643c5ce3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IEObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IEObj.h
+@@ -16,6 +16,9 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -35,6 +38,7 @@
+ //   dwTabThreadID - ID of the tab thread
+ //   dwAssociatedThreadID - ID of the thread to associate with the tab thread.
+ //
++_Win32_ImportLibrary_("Ieframe.dll")
+ STDAPI IEAssociateThreadWithTab(_In_ DWORD dwTabThreadID,
+                                 _In_ DWORD dwAssociatedThreadID);
+ 
+@@ -46,6 +50,7 @@ STDAPI IEAssociateThreadWithTab(_In_ DWORD dwTabThreadID,
+ //   dwTabThreadID - ID of the tab thread
+ //   dwAssociatedThreadID - ID of the thread to disassociate with the tab thread.
+ //
++_Win32_ImportLibrary_("Ieframe.dll")
+ STDAPI IEDisassociateThreadWithTab(_In_ DWORD dwTabThreadID,
+                                    _In_ DWORD dwAssociatedThreadID);
+ 
+@@ -56,6 +61,7 @@ STDAPI IEDisassociateThreadWithTab(_In_ DWORD dwTabThreadID,
+ // TRUE- InPrivate Browsing is enabled.
+ // FALSE - InPrivate Browsing is not enabled.
+ //
++_Win32_ImportLibrary_("Ieframe.dll")
+ BOOL IEIsInPrivateBrowsing();
+ 
+ // This method returns Internet Explorer's InPrivate Blocking status.
+@@ -64,6 +70,7 @@ BOOL IEIsInPrivateBrowsing();
+ // TRUE- InPrivate Blocking is enabled.
+ // FALSE - InPrivate Blocking is not enabled.
+ //
++_Win32_ImportLibrary_("Ieframe.dll")
+ BOOL IEInPrivateFilteringEnabled();
+ 
+ // This method returns Internet Explorer's Tracking Protection status.
+@@ -72,6 +79,7 @@ BOOL IEInPrivateFilteringEnabled();
+ // TRUE- Tracking Protection is enabled.
+ // FALSE - Tracking Protection is not enabled.
+ //
++_Win32_ImportLibrary_("Ieframe.dll")
+ BOOL IETrackingProtectionEnabled();
+ 
+ 

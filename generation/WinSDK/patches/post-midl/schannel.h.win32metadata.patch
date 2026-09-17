@@ -1,0 +1,158 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
+index 439c82244b..513d880ba9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
+@@ -30,6 +30,17 @@
+ #include <minschannel.h>
+ #include <wincrypt.h>
+ 
++#if defined(WIN32METADATA)
++enum SCHANNEL_CRED_FLAGS : int;
++enum SCHANNEL_ALERT_TOKEN_ALERT_TYPE : int;
++enum SCHANNEL_SESSION_TOKEN_FLAGS : int;
++#else
++typedef DWORD SCHANNEL_CRED_FLAGS;
++typedef DWORD SCHANNEL_ALERT_TOKEN_ALERT_TYPE;
++typedef DWORD SCHANNEL_SESSION_TOKEN_FLAGS;
++#endif
++
++
+ 
+ //
+ // Security package names.
+@@ -401,7 +412,7 @@ typedef struct _SCHANNEL_CRED
+     DWORD           dwMinimumCipherStrength;
+     DWORD           dwMaximumCipherStrength;
+     DWORD           dwSessionLifespan;
+-    DWORD           dwFlags;
++    SCHANNEL_CRED_FLAGS           dwFlags;
+     DWORD           dwCredFormat;
+ } SCHANNEL_CRED, *PSCHANNEL_CRED;
+ 
+@@ -695,7 +706,7 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
+ typedef struct _SCHANNEL_ALERT_TOKEN
+ {
+     DWORD   dwTokenType;            // SCHANNEL_ALERT
+-    DWORD   dwAlertType;
++    SCHANNEL_ALERT_TOKEN_ALERT_TYPE   dwAlertType;
+     DWORD   dwAlertNumber;
+ } SCHANNEL_ALERT_TOKEN;
+ 
+@@ -739,7 +750,7 @@ typedef struct _SCHANNEL_ALERT_TOKEN
+ typedef struct _SCHANNEL_SESSION_TOKEN
+ {
+     DWORD   dwTokenType;        // SCHANNEL_SESSION
+-    DWORD   dwFlags;
++    SCHANNEL_SESSION_TOKEN_FLAGS   dwFlags;
+ } SCHANNEL_SESSION_TOKEN;
+ 
+ 
+@@ -1158,4 +1169,108 @@ SslDeserializeCertificateStore(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SCH_CRED_AUTO_CRED_VALIDATION")
++#pragma push_macro("SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE")
++#pragma push_macro("SCH_DISABLE_RECONNECTS")
++#pragma push_macro("SCH_CRED_IGNORE_NO_REVOCATION_CHECK")
++#pragma push_macro("SCH_CRED_IGNORE_REVOCATION_OFFLINE")
++#pragma push_macro("SCH_CRED_MANUAL_CRED_VALIDATION")
++#pragma push_macro("SCH_CRED_NO_DEFAULT_CREDS")
++#pragma push_macro("SCH_CRED_NO_SERVERNAME_CHECK")
++#pragma push_macro("SCH_CRED_NO_SYSTEM_MAPPER")
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_CHAIN")
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_END_CERT")
++#pragma push_macro("SCH_CRED_USE_DEFAULT_CREDS")
++#pragma push_macro("SCH_SEND_AUX_RECORD")
++#pragma push_macro("SCH_SEND_ROOT_CERT")
++#pragma push_macro("SCH_USE_STRONG_CRYPTO")
++#pragma push_macro("SCH_USE_PRESHAREDKEY_ONLY")
++#undef SCH_CRED_AUTO_CRED_VALIDATION
++#undef SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE
++#undef SCH_DISABLE_RECONNECTS
++#undef SCH_CRED_IGNORE_NO_REVOCATION_CHECK
++#undef SCH_CRED_IGNORE_REVOCATION_OFFLINE
++#undef SCH_CRED_MANUAL_CRED_VALIDATION
++#undef SCH_CRED_NO_DEFAULT_CREDS
++#undef SCH_CRED_NO_SERVERNAME_CHECK
++#undef SCH_CRED_NO_SYSTEM_MAPPER
++#undef SCH_CRED_REVOCATION_CHECK_CHAIN
++#undef SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT
++#undef SCH_CRED_REVOCATION_CHECK_END_CERT
++#undef SCH_CRED_USE_DEFAULT_CREDS
++#undef SCH_SEND_AUX_RECORD
++#undef SCH_SEND_ROOT_CERT
++#undef SCH_USE_STRONG_CRYPTO
++#undef SCH_USE_PRESHAREDKEY_ONLY
++enum
++    [[clang::flag_enum]]
++    SCHANNEL_CRED_FLAGS : int
++{
++    SCH_CRED_AUTO_CRED_VALIDATION = 0x20,
++    SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE = 0x20000,
++    SCH_DISABLE_RECONNECTS = 0x80,
++    SCH_CRED_IGNORE_NO_REVOCATION_CHECK = 0x800,
++    SCH_CRED_IGNORE_REVOCATION_OFFLINE = 0x1000,
++    SCH_CRED_MANUAL_CRED_VALIDATION = 8,
++    SCH_CRED_NO_DEFAULT_CREDS = 0x10,
++    SCH_CRED_NO_SERVERNAME_CHECK = 4,
++    SCH_CRED_NO_SYSTEM_MAPPER = 2,
++    SCH_CRED_REVOCATION_CHECK_CHAIN = 0x200,
++    SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 0x400,
++    SCH_CRED_REVOCATION_CHECK_END_CERT = 0x100,
++    SCH_CRED_USE_DEFAULT_CREDS = 0x40,
++    SCH_SEND_AUX_RECORD = 0x200000,
++    SCH_SEND_ROOT_CERT = 0x40000,
++    SCH_USE_STRONG_CRYPTO = 0x400000,
++    SCH_USE_PRESHAREDKEY_ONLY = 0x800000,
++};
++#pragma pop_macro("SCH_USE_PRESHAREDKEY_ONLY")
++#pragma pop_macro("SCH_USE_STRONG_CRYPTO")
++#pragma pop_macro("SCH_SEND_ROOT_CERT")
++#pragma pop_macro("SCH_SEND_AUX_RECORD")
++#pragma pop_macro("SCH_CRED_USE_DEFAULT_CREDS")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_END_CERT")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_CHAIN")
++#pragma pop_macro("SCH_CRED_NO_SYSTEM_MAPPER")
++#pragma pop_macro("SCH_CRED_NO_SERVERNAME_CHECK")
++#pragma pop_macro("SCH_CRED_NO_DEFAULT_CREDS")
++#pragma pop_macro("SCH_CRED_MANUAL_CRED_VALIDATION")
++#pragma pop_macro("SCH_CRED_IGNORE_REVOCATION_OFFLINE")
++#pragma pop_macro("SCH_CRED_IGNORE_NO_REVOCATION_CHECK")
++#pragma pop_macro("SCH_DISABLE_RECONNECTS")
++#pragma pop_macro("SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE")
++#pragma pop_macro("SCH_CRED_AUTO_CRED_VALIDATION")
++
++#pragma push_macro("TLS1_ALERT_WARNING")
++#pragma push_macro("TLS1_ALERT_FATAL")
++#undef TLS1_ALERT_WARNING
++#undef TLS1_ALERT_FATAL
++enum
++    SCHANNEL_ALERT_TOKEN_ALERT_TYPE : int
++{
++    TLS1_ALERT_WARNING = 1,
++    TLS1_ALERT_FATAL,
++};
++#pragma pop_macro("TLS1_ALERT_FATAL")
++#pragma pop_macro("TLS1_ALERT_WARNING")
++
++#pragma push_macro("SSL_SESSION_ENABLE_RECONNECTS")
++#pragma push_macro("SSL_SESSION_DISABLE_RECONNECTS")
++#undef SSL_SESSION_ENABLE_RECONNECTS
++#undef SSL_SESSION_DISABLE_RECONNECTS
++enum
++    SCHANNEL_SESSION_TOKEN_FLAGS : int
++{
++    SSL_SESSION_ENABLE_RECONNECTS = 1,
++    SSL_SESSION_DISABLE_RECONNECTS,
++};
++#pragma pop_macro("SSL_SESSION_DISABLE_RECONNECTS")
++#pragma pop_macro("SSL_SESSION_ENABLE_RECONNECTS")
++
++#endif
++
+ #endif //__SCHANNEL_H__

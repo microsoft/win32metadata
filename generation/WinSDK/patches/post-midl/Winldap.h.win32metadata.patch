@@ -1,0 +1,62 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
+index 637626b543..771ee57916 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
+@@ -640,7 +640,9 @@ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, in
+ //  multi-thread: cldap_open* calls are safe.
+ //
+ 
++_Win32_SetLastError_
+ WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
++_Win32_SetLastError_
+ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ 
+@@ -650,6 +652,7 @@ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ #else
+ 
++_Win32_SetLastError_
+ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ #endif
+@@ -2505,6 +2508,7 @@ WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
+ //
+ 
+ 
++_Win32_SetLastError_
+ WINLDAPAPI int LDAPAPI
+ LdapUTF8ToUnicode(
+     _In_reads_(cchSrc) LPCSTR lpSrcStr,
+@@ -2513,6 +2517,7 @@ LdapUTF8ToUnicode(
+     int cchDest
+     );
+ 
++_Win32_SetLastError_
+ WINLDAPAPI
+ int LDAPAPI
+ LdapUnicodeToUTF8(
+@@ -2756,6 +2761,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
+ #define LDAP_PAGED_RESULT_OID_STRING "1.2.840.113556.1.4.319"
+ #define LDAP_PAGED_RESULT_OID_STRING_W L"1.2.840.113556.1.4.319"
+ 
++_Win32_SetLastError_
+ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
+         PLDAP           ExternalHandle,
+         _In_ const PWSTR    DistinguishedName,
+@@ -2770,6 +2776,7 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
+         PLDAPSortKeyW  *SortKeys
+     );
+ 
++_Win32_SetLastError_
+ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
+         PLDAP           ExternalHandle,
+         _In_ const PSTR     DistinguishedName,
+@@ -2790,6 +2797,7 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
+ 
+ #else
+ 
++_Win32_SetLastError_
+ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
+         PLDAP           ExternalHandle,
+         const PSTR      DistinguishedName,

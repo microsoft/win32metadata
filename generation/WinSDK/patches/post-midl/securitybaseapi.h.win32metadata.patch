@@ -1,0 +1,635 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
+index e62d6e9ecf..ed3a9ef855 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
+@@ -15,6 +15,9 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
+@@ -30,6 +33,7 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -65,6 +69,7 @@ AccessCheckAndAuditAlarmW(
+ #define AccessCheckAndAuditAlarm  AccessCheckAndAuditAlarmW
+ #endif
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -82,6 +87,7 @@ AccessCheckByType(
+     _Out_ LPBOOL AccessStatus
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -184,6 +190,7 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -194,6 +201,7 @@ AddAccessAllowedAce(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -211,6 +219,7 @@ AddAccessAllowedAceEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -224,6 +233,7 @@ AddAccessAllowedObjectAce(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -234,6 +244,7 @@ AddAccessDeniedAce(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -245,6 +256,7 @@ AddAccessDeniedAceEx(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -264,6 +276,7 @@ AddAccessDeniedObjectAce(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -281,6 +294,7 @@ AddAce(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -293,6 +307,7 @@ AddAuditAccessAce(
+     _In_ BOOL bAuditFailure
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -306,6 +321,7 @@ AddAuditAccessAceEx(
+     _In_ BOOL bAuditFailure
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -329,6 +345,7 @@ AddAuditAccessObjectAce(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -350,6 +367,7 @@ AddMandatoryAce(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -363,6 +381,7 @@ AddResourceAttributeAce(
+     _Out_ PDWORD pReturnLength
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -382,6 +401,7 @@ AddScopedPolicyIDAce(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -400,6 +420,7 @@ AdjustTokenGroups(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -418,6 +439,7 @@ AdjustTokenPrivileges(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -435,6 +457,7 @@ AllocateAndInitializeSid(
+     _Outptr_ PSID* pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -470,6 +493,7 @@ AreAnyAccessesGranted(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -487,6 +511,7 @@ CheckTokenMembership(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -512,6 +537,7 @@ GetAppContainerAce(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -530,6 +556,7 @@ CheckTokenMembershipEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -548,6 +575,7 @@ ConvertToAutoInheritPrivateObjectSecurity(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -563,6 +591,7 @@ CopySid(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -575,6 +604,7 @@ CreatePrivateObjectSecurity(
+     _In_ PGENERIC_MAPPING GenericMapping
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -589,6 +619,7 @@ CreatePrivateObjectSecurityEx(
+     _In_ PGENERIC_MAPPING GenericMapping
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -604,6 +635,7 @@ CreatePrivateObjectSecurityWithMultipleInheritance(
+     _In_ PGENERIC_MAPPING GenericMapping
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -616,7 +648,7 @@ CreateRestrictedToken(
+     _In_reads_opt_(DeletePrivilegeCount) PLUID_AND_ATTRIBUTES PrivilegesToDelete,
+     _In_ DWORD RestrictedSidCount,
+     _In_reads_opt_(RestrictedSidCount) PSID_AND_ATTRIBUTES SidsToRestrict,
+-    _Outptr_ PHANDLE NewTokenHandle
++    _Outptr_ _Win32_RAIIFree_(CloseHandle, -1, 0) PHANDLE NewTokenHandle
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+@@ -627,6 +659,7 @@ CreateRestrictedToken(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -638,6 +671,7 @@ CreateWellKnownSid(
+     _Inout_ DWORD* cbSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -650,6 +684,7 @@ EqualDomainSid(
+ 
+ #endif //(_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -664,6 +699,7 @@ DeleteAce(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -677,15 +713,17 @@ DestroyPrivateObjectSecurity(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+ DuplicateToken(
+     _In_ HANDLE ExistingTokenHandle,
+     _In_ SECURITY_IMPERSONATION_LEVEL ImpersonationLevel,
+-    _Outptr_ PHANDLE DuplicateTokenHandle
++    _Outptr_ _Win32_RAIIFree_(CloseHandle, -1, 0) PHANDLE DuplicateTokenHandle
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -695,7 +733,7 @@ DuplicateTokenEx(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpTokenAttributes,
+     _In_ SECURITY_IMPERSONATION_LEVEL ImpersonationLevel,
+     _In_ TOKEN_TYPE TokenType,
+-    _Outptr_ PHANDLE phNewToken
++    _Outptr_ _Win32_RAIIFree_(CloseHandle, -1, 0) PHANDLE phNewToken
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+@@ -704,6 +742,7 @@ DuplicateTokenEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -712,6 +751,7 @@ EqualPrefixSid(
+     _In_ PSID pSid2
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -720,6 +760,7 @@ EqualSid(
+     _In_ PSID pSid2
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -741,6 +782,7 @@ FreeSid(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -750,6 +792,7 @@ GetAce(
+     _Outptr_ LPVOID* pAce
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -766,6 +809,7 @@ GetAclInformation(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -787,6 +831,7 @@ GetFileSecurityW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -813,6 +858,7 @@ GetLengthSid(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -831,6 +877,7 @@ GetPrivateObjectSecurity(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -840,6 +887,7 @@ GetSecurityDescriptorControl(
+     _Out_ LPDWORD lpdwRevision
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -850,6 +898,7 @@ GetSecurityDescriptorDacl(
+     _Out_ LPBOOL lpbDaclDefaulted
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -866,6 +915,7 @@ GetSecurityDescriptorLength(
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -883,6 +933,7 @@ GetSecurityDescriptorRMControl(
+     _Out_ PUCHAR RMControl
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -893,6 +944,7 @@ GetSecurityDescriptorSacl(
+     _Out_ LPBOOL lpbSaclDefaulted
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ PSID_IDENTIFIER_AUTHORITY
+ WINAPI
+@@ -907,6 +959,7 @@ GetSidLengthRequired(
+     _In_ UCHAR nSubAuthorityCount
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ PDWORD
+ WINAPI
+@@ -915,6 +968,7 @@ GetSidSubAuthority(
+     _In_ DWORD nSubAuthority
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ PUCHAR
+ WINAPI
+@@ -922,6 +976,7 @@ GetSidSubAuthorityCount(
+     _In_ PSID pSid
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -935,6 +990,7 @@ GetTokenInformation(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -953,6 +1009,7 @@ GetWindowsAccountDomainSid(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -960,6 +1017,7 @@ ImpersonateAnonymousToken(
+     _In_ HANDLE ThreadHandle
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -968,6 +1026,7 @@ ImpersonateLoggedOnUser(
+     _In_ HANDLE hToken
+     );
+ 
++_Win32_SetLastError_
+ _Must_inspect_result_
+ WINADVAPI
+ BOOL
+@@ -982,6 +1041,7 @@ ImpersonateSelf(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -991,6 +1051,7 @@ InitializeAcl(
+     _In_ DWORD dwAclRevision
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -999,6 +1060,7 @@ InitializeSecurityDescriptor(
+     _In_ DWORD dwRevision
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1014,6 +1076,7 @@ InitializeSid(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1060,6 +1123,7 @@ IsWellKnownSid(
+ 
+ #endif // (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -1078,6 +1142,7 @@ MakeAbsoluteSD(
+     _Inout_ LPDWORD lpdwPrimaryGroupSize
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -1166,6 +1231,7 @@ ObjectPrivilegeAuditAlarmW(
+ #define ObjectPrivilegeAuditAlarm  ObjectPrivilegeAuditAlarmW
+ #endif
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1202,6 +1268,7 @@ QuerySecurityAccessMask(
+ 
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1209,6 +1276,7 @@ RevertToSelf(
+     VOID
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1238,6 +1306,7 @@ SetFileSecurityW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1253,6 +1322,7 @@ SetKernelObjectSecurity(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1264,6 +1334,7 @@ SetPrivateObjectSecurity(
+     _In_opt_ HANDLE Token
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1294,6 +1365,7 @@ SetSecurityAccessMask(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1303,6 +1375,7 @@ SetSecurityDescriptorControl(
+     _In_ SECURITY_DESCRIPTOR_CONTROL ControlBitsToSet
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1313,6 +1386,7 @@ SetSecurityDescriptorDacl(
+     _In_ BOOL bDaclDefaulted
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1322,6 +1396,7 @@ SetSecurityDescriptorGroup(
+     _In_ BOOL bGroupDefaulted
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1339,6 +1414,7 @@ SetSecurityDescriptorRMControl(
+     _In_opt_ PUCHAR RMControl
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1349,6 +1425,7 @@ SetSecurityDescriptorSacl(
+     _In_ BOOL bSaclDefaulted
+     );
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI
+@@ -1420,6 +1497,7 @@ CveEventWrite(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ WINADVAPI
+ BOOL
+ WINAPI

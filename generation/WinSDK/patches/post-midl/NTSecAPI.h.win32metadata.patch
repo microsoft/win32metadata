@@ -1,0 +1,650 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
+index 3bbc196fa2..d0796873c0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
+@@ -15,6 +15,9 @@ Revision History:
+ --*/
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -891,6 +894,29 @@ Audit_ObjectAccess_Registry and Audit_ObjectAccess_Handle must be enabled
+ extern "C" {
+ #endif
+ 
++#if defined(WIN32METADATA)
++enum MSV_SUB_AUTHENTICATION_FILTER : int;
++enum KERB_TICKET_FLAGS : int;
++enum DOMAIN_PASSWORD_PROPERTIES : int;
++enum MSV_SUBAUTH_LOGON_PARAMETER_CONTROL : int;
++enum KERB_REQUEST_FLAGS : int;
++enum TRUSTED_DOMAIN_TRUST_DIRECTION : int;
++enum MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS : int;
++enum LSA_AUTH_INFORMATION_AUTH_TYPE : int;
++enum TRUSTED_DOMAIN_TRUST_ATTRIBUTES : int;
++#else
++typedef ULONG MSV_SUB_AUTHENTICATION_FILTER;
++typedef ULONG KERB_TICKET_FLAGS;
++typedef ULONG DOMAIN_PASSWORD_PROPERTIES;
++typedef ULONG MSV_SUBAUTH_LOGON_PARAMETER_CONTROL;
++typedef ULONG KERB_REQUEST_FLAGS;
++typedef ULONG TRUSTED_DOMAIN_TRUST_DIRECTION;
++typedef ULONG MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS;
++typedef ULONG LSA_AUTH_INFORMATION_AUTH_TYPE;
++typedef ULONG TRUSTED_DOMAIN_TRUST_ATTRIBUTES;
++#endif
++
++
+ #ifndef _NTDEF_
+ typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
+ #endif
+@@ -1659,7 +1685,7 @@ NTSTATUS
+ NTAPI
+ LsaRegisterLogonProcess (
+     _In_ PLSA_STRING LogonProcessName,
+-    _Out_ PHANDLE LsaHandle,
++    _Out_ _Win32_RAIIFree_(LsaDeregisterLogonProcess, -1, 0) PHANDLE LsaHandle,
+     _Out_ PLSA_OPERATIONAL_MODE SecurityMode
+     );
+ 
+@@ -1684,7 +1710,7 @@ LsaLogonUser (
+     _Out_       PVOID           *ProfileBuffer,
+     _Out_       PULONG          ProfileBufferLength,
+     _Inout_     PLUID           LogonId,
+-    _Out_       PHANDLE         Token,
++    _Out_       _Win32_RAIIFree_(CloseHandle, -1, 0) PHANDLE         Token,
+     _Out_       PQUOTA_LIMITS   Quotas,
+     _Out_       PNTSTATUS       SubStatus
+     );
+@@ -1739,7 +1765,7 @@ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+ NTAPI
+ LsaConnectUntrusted (
+-    _Out_ PHANDLE LsaHandle
++    _Out_ _Win32_RAIIFree_(LsaDeregisterLogonProcess, -1, 0) PHANDLE LsaHandle
+     );
+ 
+ __drv_sameIRQL
+@@ -2552,9 +2578,9 @@ typedef struct _TRUSTED_DOMAIN_INFORMATION_EX {
+     LSA_UNICODE_STRING Name;
+     LSA_UNICODE_STRING FlatName;
+     PSID  Sid;
+-    ULONG TrustDirection;
++    TRUSTED_DOMAIN_TRUST_DIRECTION TrustDirection;
+     ULONG TrustType;
+-    ULONG TrustAttributes;
++    TRUSTED_DOMAIN_TRUST_ATTRIBUTES TrustAttributes;
+ 
+ } TRUSTED_DOMAIN_INFORMATION_EX, *PTRUSTED_DOMAIN_INFORMATION_EX;
+ 
+@@ -2585,7 +2611,7 @@ typedef struct _TRUSTED_DOMAIN_INFORMATION_EX2 {
+ typedef struct _LSA_AUTH_INFORMATION {
+ 
+     LARGE_INTEGER LastUpdateTime;
+-    ULONG AuthType;
++    LSA_AUTH_INFORMATION_AUTH_TYPE AuthType;
+     ULONG AuthInfoLength;
+     PUCHAR AuthInfo;
+ } LSA_AUTH_INFORMATION, *PLSA_AUTH_INFORMATION;
+@@ -2945,7 +2971,7 @@ LsaOpenPolicy(
+     _In_opt_ PLSA_UNICODE_STRING SystemName,
+     _In_ PLSA_OBJECT_ATTRIBUTES ObjectAttributes,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE PolicyHandle
++    _Out_ _Win32_RAIIFree_(LsaClose, -1, 0) PLSA_HANDLE PolicyHandle
+     );
+ 
+ 
+@@ -3259,7 +3285,7 @@ LsaOpenTrustedDomainByName(
+     _In_ LSA_HANDLE PolicyHandle,
+     _In_ PLSA_UNICODE_STRING TrustedDomainName,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE TrustedDomainHandle
++    _Out_ _Win32_RAIIFree_(LsaClose, -1, 0) PLSA_HANDLE TrustedDomainHandle
+     );
+ 
+ 
+@@ -3323,7 +3349,7 @@ LsaCreateTrustedDomainEx(
+     _In_ PTRUSTED_DOMAIN_INFORMATION_EX TrustedDomainInformation,
+     _In_ PTRUSTED_DOMAIN_AUTH_INFORMATION AuthenticationInformation,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE TrustedDomainHandle
++    _Out_ _Win32_RAIIFree_(LsaClose, -1, 0) PLSA_HANDLE TrustedDomainHandle
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+@@ -3472,7 +3498,7 @@ typedef LSA_STRING STRING, *PSTRING ;
+ typedef struct _DOMAIN_PASSWORD_INFORMATION {
+     USHORT MinPasswordLength;
+     USHORT PasswordHistoryLength;
+-    ULONG PasswordProperties;
++    DOMAIN_PASSWORD_PROPERTIES PasswordProperties;
+ #if defined(MIDL_PASS)
+     OLD_LARGE_INTEGER MaxPasswordAge;
+     OLD_LARGE_INTEGER MinPasswordAge;
+@@ -3793,7 +3819,7 @@ typedef struct _MSV1_0_SUBAUTH_LOGON{
+     UCHAR ChallengeToClient[MSV1_0_CHALLENGE_LENGTH];
+     STRING AuthenticationInfo1;
+     STRING AuthenticationInfo2;
+-    ULONG ParameterControl;
++    MSV_SUBAUTH_LOGON_PARAMETER_CONTROL ParameterControl;
+     ULONG SubAuthPackageId;
+ } MSV1_0_SUBAUTH_LOGON, * PMSV1_0_SUBAUTH_LOGON;
+ 
+@@ -3867,7 +3893,7 @@ typedef struct _MSV1_0_LM20_LOGON_PROFILE {
+     MSV1_0_PROFILE_BUFFER_TYPE MessageType;
+     LARGE_INTEGER KickOffTime;
+     LARGE_INTEGER LogoffTime;
+-    ULONG UserFlags;
++    MSV_SUB_AUTHENTICATION_FILTER UserFlags;
+     UCHAR UserSessionKey[MSV1_0_USER_SESSION_KEY_LENGTH];
+     UNICODE_STRING LogonDomainName;
+     UCHAR LanmanSessionKey[MSV1_0_LANMAN_SESSION_KEY_LENGTH];
+@@ -3915,7 +3941,7 @@ typedef struct _MSV1_0_CREDENTIAL_KEY {
+ 
+ typedef struct _MSV1_0_SUPPLEMENTAL_CREDENTIAL {
+     ULONG Version;
+-    ULONG Flags;
++    MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS Flags;
+     UCHAR LmPassword[MSV1_0_OWF_PASSWORD_LENGTH];
+     UCHAR NtPassword[MSV1_0_OWF_PASSWORD_LENGTH];
+ } MSV1_0_SUPPLEMENTAL_CREDENTIAL, *PMSV1_0_SUPPLEMENTAL_CREDENTIAL;
+@@ -4750,7 +4776,7 @@ typedef struct _KERB_TICKET_CACHE_INFO {
+     LARGE_INTEGER EndTime;
+     LARGE_INTEGER RenewTime;
+     LONG EncryptionType;
+-    ULONG TicketFlags;
++    KERB_TICKET_FLAGS TicketFlags;
+ } KERB_TICKET_CACHE_INFO, *PKERB_TICKET_CACHE_INFO;
+ 
+ 
+@@ -4916,7 +4942,7 @@ typedef struct _KERB_EXTERNAL_TICKET {
+     UNICODE_STRING TargetDomainName;
+     UNICODE_STRING AltTargetDomainName;  // contains ClientDomainName
+     KERB_CRYPTO_KEY SessionKey;
+-    ULONG TicketFlags;
++    KERB_TICKET_FLAGS TicketFlags;
+     ULONG Flags;
+     LARGE_INTEGER KeyExpirationTime;
+     LARGE_INTEGER StartTime;
+@@ -5290,7 +5316,7 @@ typedef struct _KERB_ADD_CREDENTIALS_REQUEST {
+     UNICODE_STRING DomainName;
+     UNICODE_STRING Password;
+     LUID  LogonId; // optional
+-    ULONG Flags;
++    KERB_REQUEST_FLAGS Flags;
+ } KERB_ADD_CREDENTIALS_REQUEST, *PKERB_ADD_CREDENTIALS_REQUEST;
+ 
+ 
+@@ -5479,6 +5505,7 @@ typedef const PAUDIT_POLICY_INFORMATION PCAUDIT_POLICY_INFORMATION, LPCAUDIT_POL
+ #define AUDIT_GENERIC_EXECUTE        (STANDARD_RIGHTS_EXECUTE)
+ 
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditSetSystemPolicy(
+@@ -5486,6 +5513,7 @@ AuditSetSystemPolicy(
+     _In_ ULONG dwPolicyCount
+     );
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditSetPerUserPolicy(
+@@ -5494,6 +5522,7 @@ AuditSetPerUserPolicy(
+     _In_ ULONG dwPolicyCount
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5504,6 +5533,7 @@ AuditQuerySystemPolicy(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5515,6 +5545,7 @@ AuditQueryPerUserPolicy(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5522,6 +5553,7 @@ AuditEnumeratePerUserPolicy(
+     _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PPOLICY_AUDIT_SID_ARRAY* ppAuditSidArray
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5533,6 +5565,7 @@ AuditComputeEffectivePolicyBySid(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5544,6 +5577,7 @@ AuditComputeEffectivePolicyByToken(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5553,6 +5587,7 @@ AuditEnumerateCategories(
+     _Out_ PULONG pdwCountReturned
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5564,6 +5599,7 @@ AuditEnumerateSubCategories(
+     _Out_ PULONG pdwCountReturned
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5572,6 +5608,7 @@ AuditLookupCategoryNameW(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszCategoryName
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5586,6 +5623,7 @@ AuditLookupCategoryNameA(
+ #define AuditLookupCategoryName  AuditLookupCategoryNameA
+ #endif
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5594,6 +5632,7 @@ AuditLookupSubCategoryNameW(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszSubCategoryName
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5608,6 +5647,7 @@ AuditLookupSubCategoryNameA(
+ #define AuditLookupSubCategoryName  AuditLookupSubCategoryNameA
+ #endif
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditLookupCategoryIdFromCategoryGuid(
+@@ -5615,6 +5655,7 @@ AuditLookupCategoryIdFromCategoryGuid(
+     _Out_ PPOLICY_AUDIT_EVENT_TYPE pAuditCategoryId
+     );
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditLookupCategoryGuidFromCategoryId(
+@@ -5622,6 +5663,7 @@ AuditLookupCategoryGuidFromCategoryId(
+     _Out_ GUID* pAuditCategoryGuid
+     );
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditSetSecurity(
+@@ -5629,6 +5671,7 @@ AuditSetSecurity(
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5637,6 +5680,7 @@ AuditQuerySecurity(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSECURITY_DESCRIPTOR *ppSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditSetGlobalSaclW(
+@@ -5644,6 +5688,7 @@ AuditSetGlobalSaclW(
+     _In_opt_ PACL Acl
+     );
+ 
++_Win32_SetLastError_
+ BOOLEAN
+ NTAPI
+ AuditSetGlobalSaclA(
+@@ -5657,6 +5702,7 @@ AuditSetGlobalSaclA(
+ #define AuditSetGlobalSacl AuditSetGlobalSaclA
+ #endif
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5665,6 +5711,7 @@ AuditQueryGlobalSaclW(
+     _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PACL *Acl
+     );
+ 
++_Win32_SetLastError_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5739,6 +5786,299 @@ typedef struct _PKU2U_CERTIFICATE_S4U_LOGON {
+ #endif // _WIN32_WINNT
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("LOGON_GUEST")
++#pragma push_macro("LOGON_NOENCRYPTION")
++#pragma push_macro("LOGON_CACHED_ACCOUNT")
++#pragma push_macro("LOGON_USED_LM_PASSWORD")
++#pragma push_macro("LOGON_EXTRA_SIDS")
++#pragma push_macro("LOGON_SUBAUTH_SESSION_KEY")
++#pragma push_macro("LOGON_SERVER_TRUST_ACCOUNT")
++#pragma push_macro("LOGON_PROFILE_PATH_RETURNED")
++#pragma push_macro("LOGON_RESOURCE_GROUPS")
++#undef LOGON_GUEST
++#undef LOGON_NOENCRYPTION
++#undef LOGON_CACHED_ACCOUNT
++#undef LOGON_USED_LM_PASSWORD
++#undef LOGON_EXTRA_SIDS
++#undef LOGON_SUBAUTH_SESSION_KEY
++#undef LOGON_SERVER_TRUST_ACCOUNT
++#undef LOGON_PROFILE_PATH_RETURNED
++#undef LOGON_RESOURCE_GROUPS
++enum
++    MSV_SUB_AUTHENTICATION_FILTER : int
++{
++    LOGON_GUEST = 1,
++    LOGON_NOENCRYPTION = 2,
++    LOGON_CACHED_ACCOUNT = 4,
++    LOGON_USED_LM_PASSWORD = 8,
++    LOGON_EXTRA_SIDS = 32,
++    LOGON_SUBAUTH_SESSION_KEY = 64,
++    LOGON_SERVER_TRUST_ACCOUNT = 128,
++    LOGON_PROFILE_PATH_RETURNED = 1024,
++    LOGON_RESOURCE_GROUPS = 512,
++};
++#pragma pop_macro("LOGON_RESOURCE_GROUPS")
++#pragma pop_macro("LOGON_PROFILE_PATH_RETURNED")
++#pragma pop_macro("LOGON_SERVER_TRUST_ACCOUNT")
++#pragma pop_macro("LOGON_SUBAUTH_SESSION_KEY")
++#pragma pop_macro("LOGON_EXTRA_SIDS")
++#pragma pop_macro("LOGON_USED_LM_PASSWORD")
++#pragma pop_macro("LOGON_CACHED_ACCOUNT")
++#pragma pop_macro("LOGON_NOENCRYPTION")
++#pragma pop_macro("LOGON_GUEST")
++
++#pragma push_macro("KERB_TICKET_FLAGS_forwardable")
++#pragma push_macro("KERB_TICKET_FLAGS_forwarded")
++#pragma push_macro("KERB_TICKET_FLAGS_hw_authent")
++#pragma push_macro("KERB_TICKET_FLAGS_initial")
++#pragma push_macro("KERB_TICKET_FLAGS_invalid")
++#pragma push_macro("KERB_TICKET_FLAGS_may_postdate")
++#pragma push_macro("KERB_TICKET_FLAGS_ok_as_delegate")
++#pragma push_macro("KERB_TICKET_FLAGS_postdated")
++#pragma push_macro("KERB_TICKET_FLAGS_pre_authent")
++#pragma push_macro("KERB_TICKET_FLAGS_proxiable")
++#pragma push_macro("KERB_TICKET_FLAGS_proxy")
++#pragma push_macro("KERB_TICKET_FLAGS_renewable")
++#pragma push_macro("KERB_TICKET_FLAGS_reserved")
++#pragma push_macro("KERB_TICKET_FLAGS_reserved1")
++#undef KERB_TICKET_FLAGS_forwardable
++#undef KERB_TICKET_FLAGS_forwarded
++#undef KERB_TICKET_FLAGS_hw_authent
++#undef KERB_TICKET_FLAGS_initial
++#undef KERB_TICKET_FLAGS_invalid
++#undef KERB_TICKET_FLAGS_may_postdate
++#undef KERB_TICKET_FLAGS_ok_as_delegate
++#undef KERB_TICKET_FLAGS_postdated
++#undef KERB_TICKET_FLAGS_pre_authent
++#undef KERB_TICKET_FLAGS_proxiable
++#undef KERB_TICKET_FLAGS_proxy
++#undef KERB_TICKET_FLAGS_renewable
++#undef KERB_TICKET_FLAGS_reserved
++#undef KERB_TICKET_FLAGS_reserved1
++enum
++    [[clang::flag_enum]]
++    KERB_TICKET_FLAGS : int
++{
++    KERB_TICKET_FLAGS_forwardable = 0x40000000,
++    KERB_TICKET_FLAGS_forwarded = 0x20000000,
++    KERB_TICKET_FLAGS_hw_authent = 0x100000,
++    KERB_TICKET_FLAGS_initial = 0x400000,
++    KERB_TICKET_FLAGS_invalid = 0x1000000,
++    KERB_TICKET_FLAGS_may_postdate = 0x4000000,
++    KERB_TICKET_FLAGS_ok_as_delegate = 0x40000,
++    KERB_TICKET_FLAGS_postdated = 0x2000000,
++    KERB_TICKET_FLAGS_pre_authent = 0x200000,
++    KERB_TICKET_FLAGS_proxiable = 0x10000000,
++    KERB_TICKET_FLAGS_proxy = 0x8000000,
++    KERB_TICKET_FLAGS_renewable = 0x800000,
++    KERB_TICKET_FLAGS_reserved = -2147483648,
++    KERB_TICKET_FLAGS_reserved1 = 1,
++};
++#pragma pop_macro("KERB_TICKET_FLAGS_reserved1")
++#pragma pop_macro("KERB_TICKET_FLAGS_reserved")
++#pragma pop_macro("KERB_TICKET_FLAGS_renewable")
++#pragma pop_macro("KERB_TICKET_FLAGS_proxy")
++#pragma pop_macro("KERB_TICKET_FLAGS_proxiable")
++#pragma pop_macro("KERB_TICKET_FLAGS_pre_authent")
++#pragma pop_macro("KERB_TICKET_FLAGS_postdated")
++#pragma pop_macro("KERB_TICKET_FLAGS_ok_as_delegate")
++#pragma pop_macro("KERB_TICKET_FLAGS_may_postdate")
++#pragma pop_macro("KERB_TICKET_FLAGS_invalid")
++#pragma pop_macro("KERB_TICKET_FLAGS_initial")
++#pragma pop_macro("KERB_TICKET_FLAGS_hw_authent")
++#pragma pop_macro("KERB_TICKET_FLAGS_forwarded")
++#pragma pop_macro("KERB_TICKET_FLAGS_forwardable")
++
++#pragma push_macro("DOMAIN_PASSWORD_COMPLEX")
++#pragma push_macro("DOMAIN_PASSWORD_NO_ANON_CHANGE")
++#pragma push_macro("DOMAIN_PASSWORD_NO_CLEAR_CHANGE")
++#pragma push_macro("DOMAIN_LOCKOUT_ADMINS")
++#pragma push_macro("DOMAIN_PASSWORD_STORE_CLEARTEXT")
++#pragma push_macro("DOMAIN_REFUSE_PASSWORD_CHANGE")
++#undef DOMAIN_PASSWORD_COMPLEX
++#undef DOMAIN_PASSWORD_NO_ANON_CHANGE
++#undef DOMAIN_PASSWORD_NO_CLEAR_CHANGE
++#undef DOMAIN_LOCKOUT_ADMINS
++#undef DOMAIN_PASSWORD_STORE_CLEARTEXT
++#undef DOMAIN_REFUSE_PASSWORD_CHANGE
++enum
++    [[clang::flag_enum]]
++    DOMAIN_PASSWORD_PROPERTIES : int
++{
++    DOMAIN_PASSWORD_COMPLEX = 1,
++    DOMAIN_PASSWORD_NO_ANON_CHANGE = 2,
++    DOMAIN_PASSWORD_NO_CLEAR_CHANGE = 4,
++    DOMAIN_LOCKOUT_ADMINS = 8,
++    DOMAIN_PASSWORD_STORE_CLEARTEXT = 0x10,
++    DOMAIN_REFUSE_PASSWORD_CHANGE = 0x20,
++};
++#pragma pop_macro("DOMAIN_REFUSE_PASSWORD_CHANGE")
++#pragma pop_macro("DOMAIN_PASSWORD_STORE_CLEARTEXT")
++#pragma pop_macro("DOMAIN_LOCKOUT_ADMINS")
++#pragma pop_macro("DOMAIN_PASSWORD_NO_CLEAR_CHANGE")
++#pragma pop_macro("DOMAIN_PASSWORD_NO_ANON_CHANGE")
++#pragma pop_macro("DOMAIN_PASSWORD_COMPLEX")
++
++#pragma push_macro("MSV1_0_CLEARTEXT_PASSWORD_ALLOWED")
++#pragma push_macro("MSV1_0_UPDATE_LOGON_STATISTICS")
++#pragma push_macro("MSV1_0_RETURN_USER_PARAMETERS")
++#pragma push_macro("MSV1_0_DONT_TRY_GUEST_ACCOUNT")
++#pragma push_macro("MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT")
++#pragma push_macro("MSV1_0_RETURN_PASSWORD_EXPIRY")
++#pragma push_macro("MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT")
++#pragma push_macro("MSV1_0_TRY_GUEST_ACCOUNT_ONLY")
++#pragma push_macro("MSV1_0_RETURN_PROFILE_PATH")
++#pragma push_macro("MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY")
++#undef MSV1_0_CLEARTEXT_PASSWORD_ALLOWED
++#undef MSV1_0_UPDATE_LOGON_STATISTICS
++#undef MSV1_0_RETURN_USER_PARAMETERS
++#undef MSV1_0_DONT_TRY_GUEST_ACCOUNT
++#undef MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT
++#undef MSV1_0_RETURN_PASSWORD_EXPIRY
++#undef MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT
++#undef MSV1_0_TRY_GUEST_ACCOUNT_ONLY
++#undef MSV1_0_RETURN_PROFILE_PATH
++#undef MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY
++enum
++    [[clang::flag_enum]]
++    MSV_SUBAUTH_LOGON_PARAMETER_CONTROL : int
++{
++    MSV1_0_CLEARTEXT_PASSWORD_ALLOWED = 2,
++    MSV1_0_UPDATE_LOGON_STATISTICS = 4,
++    MSV1_0_RETURN_USER_PARAMETERS = 8,
++    MSV1_0_DONT_TRY_GUEST_ACCOUNT = 0x10,
++    MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT = 0x20,
++    MSV1_0_RETURN_PASSWORD_EXPIRY = 0x40,
++    MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT = 0x800,
++    MSV1_0_TRY_GUEST_ACCOUNT_ONLY = 0x100,
++    MSV1_0_RETURN_PROFILE_PATH = 0x200,
++    MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY = 0x400,
++};
++#pragma pop_macro("MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY")
++#pragma pop_macro("MSV1_0_RETURN_PROFILE_PATH")
++#pragma pop_macro("MSV1_0_TRY_GUEST_ACCOUNT_ONLY")
++#pragma pop_macro("MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT")
++#pragma pop_macro("MSV1_0_RETURN_PASSWORD_EXPIRY")
++#pragma pop_macro("MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT")
++#pragma pop_macro("MSV1_0_DONT_TRY_GUEST_ACCOUNT")
++#pragma pop_macro("MSV1_0_RETURN_USER_PARAMETERS")
++#pragma pop_macro("MSV1_0_UPDATE_LOGON_STATISTICS")
++#pragma pop_macro("MSV1_0_CLEARTEXT_PASSWORD_ALLOWED")
++
++#pragma push_macro("KERB_REQUEST_ADD_CREDENTIAL")
++#pragma push_macro("KERB_REQUEST_REPLACE_CREDENTIAL")
++#pragma push_macro("KERB_REQUEST_REMOVE_CREDENTIAL")
++#undef KERB_REQUEST_ADD_CREDENTIAL
++#undef KERB_REQUEST_REPLACE_CREDENTIAL
++#undef KERB_REQUEST_REMOVE_CREDENTIAL
++enum
++    KERB_REQUEST_FLAGS : int
++{
++    KERB_REQUEST_ADD_CREDENTIAL = 1,
++    KERB_REQUEST_REPLACE_CREDENTIAL = 2,
++    KERB_REQUEST_REMOVE_CREDENTIAL = 4,
++};
++#pragma pop_macro("KERB_REQUEST_REMOVE_CREDENTIAL")
++#pragma pop_macro("KERB_REQUEST_REPLACE_CREDENTIAL")
++#pragma pop_macro("KERB_REQUEST_ADD_CREDENTIAL")
++
++#pragma push_macro("TRUST_DIRECTION_DISABLED")
++#pragma push_macro("TRUST_DIRECTION_INBOUND")
++#pragma push_macro("TRUST_DIRECTION_OUTBOUND")
++#pragma push_macro("TRUST_DIRECTION_BIDIRECTIONAL")
++#undef TRUST_DIRECTION_DISABLED
++#undef TRUST_DIRECTION_INBOUND
++#undef TRUST_DIRECTION_OUTBOUND
++#undef TRUST_DIRECTION_BIDIRECTIONAL
++enum
++    TRUSTED_DOMAIN_TRUST_DIRECTION : int
++{
++    TRUST_DIRECTION_DISABLED,
++    TRUST_DIRECTION_INBOUND,
++    TRUST_DIRECTION_OUTBOUND,
++    TRUST_DIRECTION_BIDIRECTIONAL,
++};
++#pragma pop_macro("TRUST_DIRECTION_BIDIRECTIONAL")
++#pragma pop_macro("TRUST_DIRECTION_OUTBOUND")
++#pragma pop_macro("TRUST_DIRECTION_INBOUND")
++#pragma pop_macro("TRUST_DIRECTION_DISABLED")
++
++#pragma push_macro("MSV1_0_CRED_LM_PRESENT")
++#pragma push_macro("MSV1_0_CRED_NT_PRESENT")
++#pragma push_macro("MSV1_0_CRED_VERSION")
++#undef MSV1_0_CRED_LM_PRESENT
++#undef MSV1_0_CRED_NT_PRESENT
++#undef MSV1_0_CRED_VERSION
++enum
++    [[clang::flag_enum]]
++    MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS : int
++{
++    MSV1_0_CRED_LM_PRESENT = 1,
++    MSV1_0_CRED_NT_PRESENT = 2,
++    MSV1_0_CRED_VERSION = 0,
++};
++#pragma pop_macro("MSV1_0_CRED_VERSION")
++#pragma pop_macro("MSV1_0_CRED_NT_PRESENT")
++#pragma pop_macro("MSV1_0_CRED_LM_PRESENT")
++
++#pragma push_macro("TRUST_AUTH_TYPE_NONE")
++#pragma push_macro("TRUST_AUTH_TYPE_NT4OWF")
++#pragma push_macro("TRUST_AUTH_TYPE_CLEAR")
++#pragma push_macro("TRUST_AUTH_TYPE_VERSION")
++#undef TRUST_AUTH_TYPE_NONE
++#undef TRUST_AUTH_TYPE_NT4OWF
++#undef TRUST_AUTH_TYPE_CLEAR
++#undef TRUST_AUTH_TYPE_VERSION
++enum
++    LSA_AUTH_INFORMATION_AUTH_TYPE : int
++{
++    TRUST_AUTH_TYPE_NONE,
++    TRUST_AUTH_TYPE_NT4OWF,
++    TRUST_AUTH_TYPE_CLEAR,
++    TRUST_AUTH_TYPE_VERSION,
++};
++#pragma pop_macro("TRUST_AUTH_TYPE_VERSION")
++#pragma pop_macro("TRUST_AUTH_TYPE_CLEAR")
++#pragma pop_macro("TRUST_AUTH_TYPE_NT4OWF")
++#pragma pop_macro("TRUST_AUTH_TYPE_NONE")
++
++#pragma push_macro("TRUST_ATTRIBUTE_NON_TRANSITIVE")
++#pragma push_macro("TRUST_ATTRIBUTE_UPLEVEL_ONLY")
++#pragma push_macro("TRUST_ATTRIBUTE_FILTER_SIDS")
++#pragma push_macro("TRUST_ATTRIBUTE_FOREST_TRANSITIVE")
++#pragma push_macro("TRUST_ATTRIBUTE_CROSS_ORGANIZATION")
++#pragma push_macro("TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL")
++#pragma push_macro("TRUST_ATTRIBUTE_WITHIN_FOREST")
++#undef TRUST_ATTRIBUTE_NON_TRANSITIVE
++#undef TRUST_ATTRIBUTE_UPLEVEL_ONLY
++#undef TRUST_ATTRIBUTE_FILTER_SIDS
++#undef TRUST_ATTRIBUTE_FOREST_TRANSITIVE
++#undef TRUST_ATTRIBUTE_CROSS_ORGANIZATION
++#undef TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL
++#undef TRUST_ATTRIBUTE_WITHIN_FOREST
++enum
++    TRUSTED_DOMAIN_TRUST_ATTRIBUTES : int
++{
++    TRUST_ATTRIBUTE_NON_TRANSITIVE = 1,
++    TRUST_ATTRIBUTE_UPLEVEL_ONLY = 2,
++    TRUST_ATTRIBUTE_FILTER_SIDS = 4,
++    TRUST_ATTRIBUTE_FOREST_TRANSITIVE = 8,
++    TRUST_ATTRIBUTE_CROSS_ORGANIZATION = 16,
++    TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL = 64,
++    TRUST_ATTRIBUTE_WITHIN_FOREST = 32,
++};
++#pragma pop_macro("TRUST_ATTRIBUTE_WITHIN_FOREST")
++#pragma pop_macro("TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL")
++#pragma pop_macro("TRUST_ATTRIBUTE_CROSS_ORGANIZATION")
++#pragma pop_macro("TRUST_ATTRIBUTE_FOREST_TRANSITIVE")
++#pragma pop_macro("TRUST_ATTRIBUTE_FILTER_SIDS")
++#pragma pop_macro("TRUST_ATTRIBUTE_UPLEVEL_ONLY")
++#pragma pop_macro("TRUST_ATTRIBUTE_NON_TRANSITIVE")
++
++#endif
++
+ #ifdef __cplusplus
+ }
+ #endif

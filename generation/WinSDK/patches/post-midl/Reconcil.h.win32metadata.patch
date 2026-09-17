@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
+index 59fd6b54de..5597afa98a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
+@@ -2,6 +2,10 @@
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+ // OLE reconciliation interface definitions.
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #pragma once
+ 
+ #include <winapifamily.h>
+@@ -27,6 +31,7 @@
+ #define REC_E_INEEDTODOTHEUPDATES      MAKE_HRESULT(SEVERITY_ERROR,   FACILITY_ITF, 0x1004)
+ 
+ #define IID_INotifyReplica __uuidof(INotifyReplica)
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(INotifyReplica, IUnknown, "99180163-DA16-101A-935C-444553540000")
+ {
+    // IUnknown
+@@ -47,6 +52,7 @@ DECLARE_INTERFACE_IID_(INotifyReplica, IUnknown, "99180163-DA16-101A-935C-444553
+ };
+ 
+ #define IID_IReconcileInitiator __uuidof(IReconcileInitiator)
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IReconcileInitiator, IUnknown, "99180161-DA16-101A-935C-444553540000")
+ {
+    // IUnknown
+@@ -116,6 +122,7 @@ typedef enum _reconcilef
+ RECONCILEF;
+ 
+ #define IID_IReconcilableObject __uuidof(IReconcilableObject)
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IReconcilableObject, IUnknown, "99180162-DA16-101A-935C-444553540000")
+ {
+    // IUnknown

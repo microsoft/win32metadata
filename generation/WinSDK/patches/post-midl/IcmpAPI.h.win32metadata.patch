@@ -1,0 +1,86 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+index d864f1ebaf..cb6fd16bf2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+@@ -28,6 +28,9 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ //
+ // Establish DLL function linkage if supported by the current build
+@@ -75,6 +78,7 @@ extern "C" {
+ //
+ //--
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ HANDLE
+ WINAPI
+@@ -104,6 +108,7 @@ IcmpCreateFile(
+ //
+ //--
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ HANDLE
+ WINAPI
+@@ -133,6 +138,7 @@ Icmp6CreateFile(
+ //
+ //--
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ BOOL
+ WINAPI
+@@ -194,6 +200,7 @@ IcmpCloseHandle(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -283,6 +290,7 @@ IcmpSendEcho(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -312,6 +320,7 @@ IcmpSendEcho2(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -343,6 +352,7 @@ IcmpSendEcho2Ex(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -397,6 +407,7 @@ Icmp6SendEcho2(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -407,6 +418,7 @@ IcmpParseReplies(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SetLastError_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI

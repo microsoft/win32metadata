@@ -1,0 +1,199 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
+index 438dff65df..cc1728e2ca 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
+@@ -6,6 +6,10 @@ File: shlobj.h
+ 
+ ===========================================================================*/
+ 
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef _SHLOBJ_H_
+ #define _SHLOBJ_H_
+ 
+@@ -134,6 +138,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ #undef  INTERFACE
+ #define INTERFACE   INewShortcutHookA
+ 
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(INewShortcutHookA, IUnknown, "000214e1-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+@@ -150,6 +155,7 @@ DECLARE_INTERFACE_IID_(INewShortcutHookA, IUnknown, "000214e1-0000-0000-c000-000
+ #undef  INTERFACE
+ #define INTERFACE   INewShortcutHookW
+ 
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(INewShortcutHookW, IUnknown, "000214f7-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+@@ -245,6 +251,7 @@ typedef ICopyHookW *    LPCOPYHOOKW;
+ #undef  INTERFACE
+ #define INTERFACE   IFileViewerSite
+ 
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IFileViewerSite, IUnknown, "000214f3-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(SetPinnedWindow) (THIS_ _In_opt_ HWND hwnd) PURE;
+@@ -386,6 +393,7 @@ typedef IFileViewerW * LPFILEVIEWERW;
+ #undef INTERFACE
+ #define INTERFACE ICurrentWorkingDirectory
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-921A-006097DF5BD4")
+ {
+     STDMETHOD(GetDirectory) (THIS_ _Out_writes_(cchSize) PWSTR pwzPath, DWORD cchSize) PURE;
+@@ -434,6 +442,7 @@ DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-9
+ #undef  INTERFACE
+ #define INTERFACE   IDockingWindowFrame
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9-00a0c92dbfe8")
+ {
+     STDMETHOD(AddToolbar) (THIS_ _In_ IUnknown* punkSrc, _In_ PCWSTR pwszItem, DWORD dwAddFlags) PURE;
+@@ -451,6 +460,7 @@ DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9
+ #undef  INTERFACE
+ #define INTERFACE   IThumbnailCapture
+ 
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IThumbnailCapture, IUnknown, "4ea39266-7211-409f-b622-f63dbd16c533")
+ {
+     // *** IThumbnailCapture methods ***
+@@ -500,6 +510,7 @@ typedef IEnumShellImageStore * LPENUMSHELLIMAGESTORE;
+ 
+ // this interface is used to manipulate the Image cache. It can potentially be used
+ // in a free threaded manner in conjunction with the Lock parameter to Open and close
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_( IShellImageStore, IUnknown, "48C8118C-B924-11D1-98D5-00C04FB687DA" )
+ {
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+@@ -579,6 +590,7 @@ typedef struct {
+ #undef INTERFACE
+ #define INTERFACE IShellFolderBand
+ 
++_Windows_SupportedOS_WindowsXP_
+ DECLARE_INTERFACE_IID_(IShellFolderBand, IUnknown, "7FE80CC8-C247-11d0-B93A-00A0C90312E1")
+ {
+     STDMETHOD(InitializeSFB)(THIS_ _In_opt_ IShellFolder *psf, _In_opt_ PCIDLIST_ABSOLUTE pidl) PURE;
+@@ -643,6 +655,7 @@ enum {
+ #undef INTERFACE
+ #define INTERFACE IActiveDesktopP
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IActiveDesktopP, IUnknown, "52502EE0-EC80-11D0-89AB-00C04FC2972D")
+ {
+     // IUnknown methods
+@@ -665,6 +678,7 @@ typedef IActiveDesktopP * LPACTIVEDESKTOPP;
+ #undef INTERFACE
+ #define INTERFACE IADesktopP2
+ 
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IADesktopP2, IUnknown, "B22754E2-4574-11d1-9888-006097DEACF9")
+ {
+     // IUnknown methods
+@@ -724,6 +738,7 @@ typedef const SHCOLUMNDATA* LPCSHCOLUMNDATA;
+ 
+ // Note: these objects must be threadsafe!  GetItemData _will_ be called
+ // simultaneously from multiple threads.
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C9A83DA1")
+ {
+     // IUnknown methods
+@@ -753,6 +768,7 @@ typedef struct _SHChangeProductKeyAsIDList {
+ //  use SHChangeNotifyRegisterThread() to enable Async Register and Deregister.
+ //  call with SCNRT_ENABLE at the thread proc begining and SCNRT_DISABLE at the end
+ //  the call with SCNRT_DISABLE can block while it synchronizes with the main ChangeNotify thread
++_Windows_SupportedOS_WindowsVista_
+ STDAPI_(void) SHChangeNotifyRegisterThread(SCNRT_STATUS status);
+ #endif
+ 
+@@ -762,7 +778,9 @@ STDAPI_(void) SHChangeNotifyRegisterThread(SCNRT_STATUS status);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ #endif
+ SHSTDAPI_(void) PathQualify(_Inout_ PWSTR psz);
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(BOOL) PathIsSlowA(_In_ LPCSTR pszFile, DWORD dwAttr);
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(BOOL) PathIsSlowW(_In_ LPCWSTR pszFile, DWORD dwAttr);
+ #ifdef UNICODE
+ #define PathIsSlow  PathIsSlowW
+@@ -770,15 +788,19 @@ SHSTDAPI_(BOOL) PathIsSlowW(_In_ LPCWSTR pszFile, DWORD dwAttr);
+ #define PathIsSlow  PathIsSlowA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFilePath) PWSTR pszFilePath, UINT cchFilePath,
+                                       _In_opt_ PCWSTR pszWorkingDir, _In_ PCWSTR pszDefExt, _In_opt_ PCWSTR pszFilters, _In_opt_ PCWSTR pszTitle);
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(int) DriveType(int iDrive);
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINSHELLAPI HPSXA WINAPI SHCreatePropSheetExtArray(_In_ HKEY hKey, _In_opt_ PCWSTR pszSubKey, UINT max_iface);
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
+ #undef  INTERFACE
+ #define INTERFACE   IDefViewFrame
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IDefViewFrame, IUnknown, "710EB7A0-45ED-11D0-924A-0020AFC7AC4D")
+ {
+     STDMETHOD(GetWindowLV) (THIS_ _Out_ HWND *phwnd) PURE;
+@@ -797,10 +819,12 @@ DECLARE_INTERFACE_IID_(IDefViewFrame, IUnknown, "710EB7A0-45ED-11D0-924A-0020AFC
+ #define PPCF_FORCEQUALIFY            0x00000040        // qualify even non-relative names
+ #define PPCF_LONGESTPOSSIBLE         0x00000080        // always find the longest possible name
+ 
++_Windows_SupportedOS_Windows2000_
+ SHSTDAPI_(LONG) PathProcessCommand(_In_ PCWSTR pszSrc, _Out_writes_(cchDest) PWSTR pszDest, int cchDest, DWORD dwFlags);
+ #endif
+ 
+ #if (NTDDI_VERSION < NTDDI_VISTA)
++_Windows_SupportedOS_Windows2000_
+ SHSTDAPI SHLoadOLE(LPARAM lParam);
+ #endif
+ 
+@@ -810,6 +834,7 @@ SHSTDAPI SHLoadOLE(LPARAM lParam);
+ //
+ #undef  INTERFACE
+ #define INTERFACE  IDocViewSite
++_Windows_SupportedOS_Windows2000_
+ DECLARE_INTERFACE_IID_(IDocViewSite, IUnknown, "87D605E0-C511-11CF-89A9-00A0C9054129")
+ {
+     STDMETHOD(OnSetTitle) (THIS_ _In_ VARIANTARG *pvTitle) PURE;
+@@ -866,9 +891,11 @@ typedef struct _TBINFO
+ } TBINFO;
+ typedef TBINFO * LPTBINFO;
+ 
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(BOOL) SHOpenPropSheetA(_In_opt_ LPCSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
+                                  _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
+                                  _In_opt_ IShellBrowser *psb, _In_opt_ LPCSTR pStartPage);
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(BOOL) SHOpenPropSheetW(_In_opt_ LPCWSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
+                                  _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
+                                  _In_opt_ IShellBrowser *psb, _In_opt_ LPCWSTR pStartPage);
+@@ -981,6 +1008,7 @@ typedef const SFV_SETITEMPOS *PCSFV_SETITEMPOS;
+ //               Note: There is no Abort button in the standard UI.
+ 
+ 
++_Windows_SupportedOS_Windows2000_
+ SHDOCAPI_(DWORD) SoftwareUpdateMessageBox( _In_opt_ HWND hWnd,
+                                            _In_ PCWSTR pszDistUnit,
+                                            DWORD dwFlags,
+@@ -1012,12 +1040,16 @@ SHDOCAPI_(DWORD) SoftwareUpdateMessageBox( _In_opt_ HWND hWnd,
+ // Returns:
+ //      S_OK
+ //
++_Windows_SupportedOS_Windows2000_
+ SHSTDAPI SHMultiFileProperties(_In_ IDataObject *pdtobj, DWORD dwFlags);
+ 
+ #endif  // NTDDI_WIN2K
+ 
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI SHCreateQueryCancelAutoPlayMoniker(_Outptr_ IMoniker** ppmoniker);    // deprecated: use CreateClassMoniker(CLSID_YourOwnClsid, ...)
++_Windows_SupportedOS_Windows2000_
+ STDAPI_(void) PerUserInit(void);
++_Windows_SupportedOS_WindowsXP_
+ SHSTDAPI_(BOOL)SHRunControlPanel(_In_ PCWSTR lpcszCmdLine, _In_opt_ HWND hwndMsgParent);
+ 
+ #include <pshpack8.h>
