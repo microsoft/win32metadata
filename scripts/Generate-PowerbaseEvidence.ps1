@@ -120,7 +120,8 @@ function Assert-PilotRdlScope([string]$VariantRoot, [string]$Variant) {
         $native | ConvertTo-Json -Depth 90 | Set-Content -Encoding utf8 (Join-Path $VariantRoot "$directory-native-source-scope.json")
         if ($native.hasErrors) { throw "Source scope probe failed for $Variant/$directory." }
         $sourceDefinitions = @{}
-        foreach ($definition in @($native.ownedDeclarations) + @($native.dependencyDeclarations) + @($native.annotationDependencyDeclarations)) {
+        foreach ($definition in @($native.ownedDeclarations) + @($native.dependencyDeclarations) +
+            @($native.annotationDependencyDeclarations) + @($native.macroDerivedDependencyDeclarations)) {
             $headerName = [IO.Path]::GetFileNameWithoutExtension($definition['source']['file'])
             $key = "$headerName`:$($definition['name'])"
             if (-not $sourceDefinitions.ContainsKey($key)) { $sourceDefinitions[$key] = @() }
@@ -148,7 +149,8 @@ function Assert-PilotRdlScope([string]$VariantRoot, [string]$Variant) {
                 if (-not $sourceDefinitions.ContainsKey($key)) {
                     throw "Emitted $key has no defining-source path through a native or annotation dependency. See $VariantRoot\$directory-inventory.json."
                 }
-                [ordered]@{ declaration=$declaration; nativeDefinitions=$sourceDefinitions[$key] }
+                [ordered]@{ declaration=$declaration; nativeDefinitions=$sourceDefinitions[$key];
+                    macroTypedefBindings=@($native.macroTypedefSourceBindings | Where-Object { $_.macroTokens[0] -ceq $declaration.name }) }
             }
         )
         $ledger | ConvertTo-Json -Depth 90 | Set-Content -Encoding utf8 (Join-Path $VariantRoot "$directory-source-ledger.json")
