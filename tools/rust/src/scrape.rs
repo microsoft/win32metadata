@@ -326,6 +326,7 @@ fn build_clang(options: &Options) -> Result<Clang, String> {
     for header in &options.scope_headers {
         builder.scope_header(header);
     }
+    builder.resolution_default();
     builder.namespace(namespace(options));
     Ok(builder)
 }
@@ -400,7 +401,7 @@ fn execute(options: &Options) -> Result<(), String> {
     if merged.len() > 1 {
         // Fold the per-architecture surfaces back into the defining-header partitions so
         // symbols that exist on only some architectures are tagged, then rebuild.
-        merge_arch_rdl(&merged, None, &rdl_dir)
+        merge_arch_rdl(&merged, None, namespace(options), &rdl_dir)
             .map_err(|error| format!("failed to merge architectures: {error}"))?;
         compile(&rdl_dir, output, options)?;
     } else {
@@ -443,8 +444,8 @@ fn scrape_arch(
 
 /// Compiles a directory of RDL partitions into a WinMD.
 ///
-/// The bundled Windows metadata supplies what headers cannot: the `Windows.Win32.Metadata`
-/// pseudo-attribute vocabulary and the system types the emitted RDL refers to.
+/// Emit the metadata-only pseudo-attribute vocabulary into the output while the bundled
+/// references resolve framework and external Win32 types used by generated declarations.
 fn compile(rdl_dir: &Path, winmd: &Path, options: &Options) -> Result<(), String> {
     if let Some(parent) = winmd.parent() {
         std::fs::create_dir_all(parent)
@@ -454,6 +455,7 @@ fn compile(rdl_dir: &Path, winmd: &Path, options: &Options) -> Result<(), String
     let mut compiler = reader();
     compiler
         .input(rdl_dir)
+        .input_text(windows_rdl::WIN32_METADATA_RDL)
         .reference_default()
         .assembly_name(assembly_name(options)?)
         .output(winmd);
