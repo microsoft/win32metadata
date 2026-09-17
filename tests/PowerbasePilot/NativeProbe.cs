@@ -36,6 +36,20 @@ public static class PowerbaseNativeProbe
         public uint Data2;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    private struct SourceRange
+    {
+        public IntPtr Data0, Data1;
+        public uint Begin, End;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct Token
+    {
+        public uint Data0, Data1, Data2, Data3;
+        public IntPtr Pointer;
+    }
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate uint Visitor(Cursor cursor, Cursor parent, IntPtr data);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -52,6 +66,12 @@ public static class PowerbaseNativeProbe
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeString clang_getCursorSpelling(Cursor cursor);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeString clang_getCursorKindSpelling(uint kind);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern Location clang_getCursorLocation(Cursor cursor);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern SourceRange clang_getCursorExtent(Cursor cursor);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern Location clang_getRangeStart(SourceRange range);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern Cursor clang_getCursorReferenced(Cursor cursor);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern void clang_tokenize(IntPtr tu, SourceRange range, out IntPtr tokens, out uint count);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeString clang_getTokenSpelling(IntPtr tu, Token token);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern void clang_disposeTokens(IntPtr tu, IntPtr tokens, uint count);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern void clang_getExpansionLocation(Location location, out IntPtr file, out uint line, out uint column, out uint offset);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeString clang_getFileName(IntPtr file);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeType clang_getCursorType(Cursor cursor);
@@ -99,11 +119,29 @@ public static class PowerbaseNativeProbe
 
     private static Dictionary<string, object> Source(Cursor cursor)
     {
-        clang_getExpansionLocation(clang_getCursorLocation(cursor), out var file, out var line, out var column, out var offset);
+        return Source(clang_getCursorLocation(cursor));
+    }
+
+    private static Dictionary<string, object> Source(Location location)
+    {
+        clang_getExpansionLocation(location, out var file, out var line, out var column, out var offset);
         return new Dictionary<string, object> {
             ["file"] = file == IntPtr.Zero ? "" : Text(clang_getFileName(file)).Replace('/', '\\'),
             ["line"] = line, ["column"] = column, ["offset"] = offset
         };
+    }
+
+    private static string[] Tokens(IntPtr tu, Cursor cursor)
+    {
+        clang_tokenize(tu, clang_getCursorExtent(cursor), out var tokens, out var count);
+        try
+        {
+            var result = new string[count];
+            for (int i = 0; i < count; i++)
+                result[i] = Text(clang_getTokenSpelling(tu, Marshal.PtrToStructure<Token>(IntPtr.Add(tokens, i * Marshal.SizeOf<Token>()))));
+            return result;
+        }
+        finally { clang_disposeTokens(tu, tokens, count); }
     }
 
     private static Dictionary<string, object> TypeFacts(NativeType type)
@@ -215,11 +253,18 @@ public static class PowerbaseNativeProbe
             }
             var roots = new List<Cursor>();
             var declarations = new List<Cursor>();
+            var macroExpansions = new List<Cursor>();
             var pending = new Queue<Cursor>(Children(clang_getTranslationUnitCursor(tu)));
             while (pending.Count != 0)
             {
                 var cursor = pending.Dequeue();
-                if (cursor.Kind == 22 || cursor.Kind == 23 || cursor.Kind == 1 || cursor.Kind == 300)
+                if (cursor.Kind == 502)
+                {
+                    var source = (string)Source(cursor)["file"];
+                    if (source.Length != 0 && string.Equals(Path.GetFullPath(source), Path.GetFullPath(header), StringComparison.OrdinalIgnoreCase))
+                        macroExpansions.Add(cursor);
+                }
+                else if (cursor.Kind == 22 || cursor.Kind == 23 || cursor.Kind == 1 || cursor.Kind == 300)
                 {
                     foreach (var child in Children(cursor)) pending.Enqueue(child);
                 }
@@ -266,6 +311,38 @@ public static class PowerbaseNativeProbe
                 }
             };
             drain();
+            var macroDependencies = new List<Cursor>();
+            var macroBindings = new List<object>();
+            foreach (var function in roots.Where(c => c.Kind == 8))
+            {
+                var functionSource = Source(function);
+                var beginning = Source(clang_getRangeStart(clang_getCursorExtent(function)));
+                var returnType = clang_getResultType(clang_getCursorType(function));
+                var returnSpelling = Text(clang_getTypeSpelling(returnType));
+                var returnCanonical = Text(clang_getTypeSpelling(clang_getCanonicalType(returnType)));
+                foreach (var expansion in macroExpansions)
+                {
+                    var location = Source(expansion);
+                    if (!Equals(location["file"], functionSource["file"]) ||
+                        (uint)location["offset"] < (uint)beginning["offset"] ||
+                        (uint)location["offset"] >= (uint)functionSource["offset"]) continue;
+                    var definition = clang_getCursorReferenced(expansion);
+                    if (definition.Kind != 501) continue;
+                    var tokens = Tokens(tu, definition);
+                    if (tokens.Length != 2 || tokens[1] != returnSpelling) continue;
+                    var matches = declarations.Where(c => c.Kind == 20 &&
+                        Text(clang_getCursorSpelling(c)) == tokens[0] &&
+                        Text(clang_getTypeSpelling(clang_getCanonicalType(clang_getTypedefDeclUnderlyingType(c)))) == returnCanonical).ToArray();
+                    if (matches.Length == 0) continue;
+                    macroBindings.Add(new {
+                        owner = Text(clang_getCursorSpelling(function)), use = "return",
+                        expansion = location, macroDefinition = Source(definition), macroTokens = tokens,
+                        nativeReturnType = TypeFacts(returnType), definitions = matches.Select(Facts).ToArray()
+                    });
+                    foreach (var match in matches)
+                        if (seen.Add(Identity(match))) macroDependencies.Add(match);
+                }
+            }
             var annotationDependencies = new List<Cursor>();
             dependencyTarget = annotationDependencies;
             var bindings = new List<object>();
@@ -308,6 +385,8 @@ public static class PowerbaseNativeProbe
                 ownedDeclarations = roots.OrderBy(Identity, StringComparer.Ordinal).Select(Facts).ToArray(),
                 dependencyDeclarations = dependencies.OrderBy(Identity, StringComparer.Ordinal).Select(Facts).ToArray(),
                 annotationDependencyDeclarations = annotationDependencies.OrderBy(Identity, StringComparer.Ordinal).Select(Facts).ToArray(),
+                macroDerivedDependencyDeclarations = macroDependencies.OrderBy(Identity, StringComparer.Ordinal).Select(Facts).ToArray(),
+                macroTypedefSourceBindings = macroBindings,
                 associatedEnumSourceBindings = bindings
             };
         }

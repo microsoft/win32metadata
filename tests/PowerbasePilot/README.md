@@ -7,7 +7,7 @@ patch series. No legacy metadata sidecar is an input to generation.
 
 **Current result: not equivalent.** [REPORT.md](REPORT.md) separates completed
 native/transport evidence, all five function comparisons, and the remaining
-source-ledger and logical-contract blockers. Canonical generation now succeeds.
+logical-contract blockers. Canonical generation and source provenance now pass.
 The commands below reproduce gates; they are not
 a statement that the final gate currently passes.
 
@@ -121,6 +121,10 @@ graph. The observed seven-definition control closure is not a cap on legitimate
 source-backed dependencies introduced by corrected annotations. Raw annotation
 bindings with no source declaration remain explicit. A supported header-only
 selector belongs in the base tooling, not another pilot implementation.
+Macro-derived typedef references use actual Clang expansion/definition tokens,
+an included typedef declaration, and identical canonical return/underlying
+types. Their source bindings are a separate ledger; they do not turn every
+declaration in the defining header into a pilot-owned symbol.
 
 Native comparison uses the same libclang binary as generation:
 
