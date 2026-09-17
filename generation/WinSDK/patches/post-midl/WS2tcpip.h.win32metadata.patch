@@ -1,0 +1,102 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+index 0808320a67..e5bb74aba7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+@@ -23,6 +23,9 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -115,6 +118,7 @@ typedef ADDRINFOEXA     ADDRINFOEX, *PADDRINFOEX;
+ extern "C" {
+ #endif
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -393,6 +397,7 @@ INT
+ 
+ #endif
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ VOID
+ WSAAPI
+@@ -495,6 +500,7 @@ void
+ 
+ typedef int socklen_t;
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -567,6 +573,7 @@ INT
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -588,6 +595,7 @@ InetPtonW(
+                                               PVOID           pAddrBuf
+     );
+ 
++_Win32_SetLastError_
+ PCSTR
+ WSAAPI
+ inet_ntop(
+@@ -1229,6 +1237,7 @@ WSASetReceivedProcessorOption(
+ // Secure socket API definitions
+ //
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -1240,6 +1249,7 @@ WSASetSocketSecurity (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -1253,6 +1263,7 @@ WSAQuerySocketSecurity (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -1264,6 +1275,7 @@ WSASetSocketPeerTargetName (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -1275,6 +1287,7 @@ WSADeleteSocketPeerTargetName (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -1284,6 +1297,7 @@ WSAImpersonateSocketPeer (
+    _In_ ULONG PeerAddrLen
+ );
+ 
++_Win32_SetLastError_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI

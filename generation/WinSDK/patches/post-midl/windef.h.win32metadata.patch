@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
+index 30e73b1877..6325bbb57f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
+@@ -1,4 +1,7 @@
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ /****************************************************************************
+ *                                                                           *
+@@ -36,7 +39,8 @@ extern "C" {
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-DECLARE_HANDLE            (HWND);
++DECLARE_HANDLE            (HWND)
++    _Win32_AlsoUsableFor_(HANDLE);
+ DECLARE_HANDLE            (HHOOK);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -70,8 +74,10 @@ DECLARE_HANDLE(HGDIOBJ);
+ DECLARE_HANDLE(HACCEL);
+ #endif
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HBITMAP);
+-DECLARE_HANDLE(HBRUSH);
++DECLARE_HANDLE(HBITMAP)
++    _Win32_AlsoUsableFor_(HGDIOBJ);
++DECLARE_HANDLE(HBRUSH)
++    _Win32_AlsoUsableFor_(HGDIOBJ);
+ #endif
+ #if(WINVER >= 0x0400)
+ DECLARE_HANDLE(HCOLORSPACE);
+@@ -83,15 +89,18 @@ DECLARE_HANDLE(HGLRC);          // OpenGL
+ DECLARE_HANDLE(HDESK);
+ DECLARE_HANDLE(HENHMETAFILE);
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HFONT);
++DECLARE_HANDLE(HFONT)
++    _Win32_AlsoUsableFor_(HGDIOBJ);
+ #endif
+ DECLARE_HANDLE(HICON);
+ #if !defined(_MAC) || !defined(WIN_INTERNAL)
+ DECLARE_HANDLE(HMENU);
+ #endif
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HPALETTE);
+-DECLARE_HANDLE(HPEN);
++DECLARE_HANDLE(HPALETTE)
++    _Win32_AlsoUsableFor_(HGDIOBJ);
++DECLARE_HANDLE(HPEN)
++    _Win32_AlsoUsableFor_(HGDIOBJ);
+ #endif
+ 
+ #if(WINVER >= 0x0400)
+@@ -128,9 +137,11 @@ DECLARE_HANDLE(HUMPD);
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #ifndef _MAC
+-typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
++typedef HICON HCURSOR
++    _Win32_AlsoUsableFor_(HICON);      /* HICONs & HCURSORs are polymorphic */
+ #else
+-DECLARE_HANDLE(HCURSOR);    /* HICONs & HCURSORs are not polymorphic */
++DECLARE_HANDLE(HCURSOR)
++    _Win32_AlsoUsableFor_(HICON);    /* HICONs & HCURSORs are not polymorphic */
+ #endif
+ 
+ typedef DWORD   COLORREF;
+@@ -277,4 +288,3 @@ typedef enum DPI_HOSTING_BEHAVIOR {
+ #endif
+ 
+ #endif /* _WINDEF_ */
+-

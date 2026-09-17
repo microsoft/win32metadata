@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
+index cc07341b82..795bf0150e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
+@@ -396,6 +396,9 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+@@ -498,6 +501,7 @@ WINAPI
+ NetworkIsolationUnregisterForAppContainerChanges(
+     _In_ HANDLE registrationObject 
+     );
++_Win32_ImportLibrary_("Firewallapi.dll")
+ HRESULT
+ WINAPI
+ NetworkIsolationEnumerateAppContainerRules(
+@@ -555,6 +559,7 @@ typedef void (CALLBACK *PNETISO_EDP_ID_CALLBACK_FN) (
+     );
+ #define NETISO_GEID_FOR_WDAG 0x01
+ #define NETISO_GEID_FOR_NEUTRAL_AWARE 0x02
++_Win32_ImportLibrary_("Firewallapi.dll")
+ DWORD
+ WINAPI
+ NetworkIsolationGetEnterpriseIdAsync(
+@@ -564,6 +569,7 @@ NetworkIsolationGetEnterpriseIdAsync(
+     _In_   PNETISO_EDP_ID_CALLBACK_FN callback,
+     _Out_  HANDLE *hOperation 
+     );
++_Win32_ImportLibrary_("Firewallapi.dll")
+ DWORD
+ WINAPI
+ NetworkIsolationGetEnterpriseIdClose(
