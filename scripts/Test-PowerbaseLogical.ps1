@@ -16,6 +16,7 @@ $ownerTypes=@('HPOWERNOTIFY','POWER_PLATFORM_ROLE_VERSION','REGISTER_NOTIFICATIO
 $issues=[Collections.Generic.List[object]]::new()
 $namespaceMappings=[Collections.Generic.List[object]]::new()
 $enumConsumptions=[Collections.Generic.List[object]]::new()
+$usagePolicies=[Collections.Generic.List[object]]::new()
 
 function Save-Json($Value,[string]$Path) {
     ConvertTo-Json -InputObject $Value -Depth 100 | Set-Content -Encoding utf8 $Path
@@ -92,6 +93,56 @@ function Attribute-Schema($Definition,$Snapshot,[string]$Stage) {
     }
     return $schema
 }
+function Attribute-Usage($Definition) {
+            $found=@($Definition.customAttributes | Where-Object {$_.constructor.declaringType.fullName -ceq 'System.AttributeUsageAttribute'})
+            if($found.Count -gt 1){throw "Conflicting AttributeUsage on $($Definition.name)"}
+            $usage=[ordered]@{targets=32767;allowMultiple=$false;inherited=$true;explicit=($found.Count -eq 1)}
+            if($found.Count -eq 1){
+                $usage.targets=[int]$found[0].fixedArguments[0].value
+                foreach($argument in $found[0].namedArguments){
+                    switch -CaseSensitive ($argument.name){
+                        'AllowMultiple' {$usage.allowMultiple=[bool]$argument.value}
+                        'Inherited' {$usage.inherited=[bool]$argument.value}
+                        default {throw "Unsupported AttributeUsage argument: $($argument.name)"}
+                    }
+                }
+            }
+            return $usage
+        }
+function Current-UsageCompatible($Old,$New,$Snapshot,[string]$Stage) {
+            $oldUsage=Attribute-Usage $Old
+            $newUsage=Attribute-Usage $New
+            $uses=[Collections.Generic.List[object]]::new()
+            foreach($type in $Snapshot.declarations){
+                $targets=@([ordered]@{name=$type.qualifiedName;attributes=$type.customAttributes;
+                    mask=if($type.baseType.fullName -ceq 'System.ValueType'){8}else{0};
+                    inheritanceIrrelevant=($type.baseType.fullName -ceq 'System.ValueType' -and ($type.attributes.value -band 0x100) -ne 0)})
+                foreach($method in $type.methods){
+                    $targets+=@([ordered]@{name=$method.qualifiedName;attributes=$method.customAttributes;mask=64;
+                        inheritanceIrrelevant=(($method.attributes.value -band 0x10) -ne 0 -and $null -ne $method.import)})
+                    foreach($parameter in $method.parameters){
+                        $targets+=@([ordered]@{name="$($method.qualifiedName):$($parameter.sequence)";attributes=$parameter.customAttributes;
+                            mask=if($parameter.sequence -eq 0){8192}else{2048};inheritanceIrrelevant=$false})
+                    }
+                }
+                foreach($field in $type.fields){
+                    $targets+=@([ordered]@{name=$field.qualifiedName;attributes=$field.customAttributes;mask=256;inheritanceIrrelevant=$false})
+                }
+                foreach($target in $targets){
+                    $count=@($target.attributes | Where-Object {$_.constructor.declaringType.fullName -ceq $New.qualifiedName}).Count
+                    if($count -eq 0){continue}
+                    $valid=$target.mask -ne 0 -and ($oldUsage.targets -band $target.mask) -ne 0 -and
+                        ($newUsage.targets -band $target.mask) -ne 0 -and
+                        ($count -eq 1 -or ($oldUsage.allowMultiple -and $newUsage.allowMultiple)) -and $target.inheritanceIrrelevant
+                    $uses.Add([ordered]@{target=$target.name;targetMask=$target.mask;count=$count;
+                        inheritanceIrrelevant=$target.inheritanceIrrelevant;valid=$valid})
+                }
+            }
+            $valid=$uses.Count -gt 0 -and @($uses | Where-Object {-not $_.valid}).Count -eq 0
+            $usagePolicies.Add([ordered]@{stage=$Stage;attribute=$New.qualifiedName;reference=$oldUsage;candidate=$newUsage;
+                uses=$uses.ToArray();currentUsesCompatible=$valid;generalPolicyEquivalent=$false})
+            return $valid
+        }
 function Schema-Value($Value,$Snapshot,[string]$Stage,[string]$Use) {
     if ($null -eq $Value) { return $null }
     if ($Value -is [Collections.IDictionary]) {
@@ -255,23 +306,35 @@ foreach($variant in @('control','candidate')){
             $oldSchema=if($old.name -like '*Attribute'){Attribute-Schema $old $reference 'reference'}else{Effective-Type $old $reference 'reference'}
             $newSchema=if($type.name -like '*Attribute'){Attribute-Schema $type $snapshot $stage}else{Effective-Type $type $snapshot $stage}
             $schemaDiff=@(Diff-Facts $oldSchema $newSchema)
+            $currentUsesCompatible=$false
+            if($schemaDiff.Count -gt 0 -and $type.baseType.fullName -ceq 'System.Attribute'){
+                $oldWithoutUsage=[ordered]@{};foreach($key in $oldSchema.Keys){$oldWithoutUsage[$key]=$oldSchema[$key]}
+                $newWithoutUsage=[ordered]@{};foreach($key in $newSchema.Keys){$newWithoutUsage[$key]=$newSchema[$key]}
+                $oldWithoutUsage.customAttributes=@($oldSchema.customAttributes | Where-Object name -CNE 'System.AttributeUsageAttribute')
+                $newWithoutUsage.customAttributes=@($newSchema.customAttributes | Where-Object name -CNE 'System.AttributeUsageAttribute')
+                if(@(Diff-Facts $oldWithoutUsage $newWithoutUsage).Count -eq 0){
+                    $currentUsesCompatible=Current-UsageCompatible $old $type $snapshot $stage
+                }
+            }
             $namespaceMappings.Add([ordered]@{stage=$stage;name=$type.name;reference=$old.qualifiedName;candidate=$type.qualifiedName;
-                schemasMatch=($schemaDiff.Count -eq 0);schemaDifferences=$schemaDiff})
+                schemasMatch=($schemaDiff.Count -eq 0);currentUsesCompatible=$currentUsesCompatible;schemaDifferences=$schemaDiff})
         }
         $comparisons.Add([ordered]@{stage=$stage;effectiveDifferences=$diff.Count;referenceHash=$reference.source.sha256;candidateHash=$snapshot.source.sha256})
     }
 }
 $candidateIssues=@($issues | Where-Object stage -like 'candidate-*')
 $candidateDiffs=@($comparisons | Where-Object {$_.stage -like 'candidate-*' -and $_.effectiveDifferences -ne 0})
-$unmatchedSchemas=@($namespaceMappings | Where-Object {$_.stage -like 'candidate-*' -and -not $_.schemasMatch})
+$unmatchedSchemas=@($namespaceMappings | Where-Object {$_.stage -like 'candidate-*' -and -not $_.schemasMatch -and -not $_.currentUsesCompatible})
 $equivalent=$candidateIssues.Count -eq 0 -and $candidateDiffs.Count -eq 0 -and $unmatchedSchemas.Count -eq 0
 $verdict=[ordered]@{equivalent=$equivalent;comparisons=$comparisons.ToArray();issues=$issues.ToArray();
     namespaceMappings=$namespaceMappings.ToArray();enumConsumptions=$enumConsumptions.ToArray();
+    currentUseAttributePolicies=$usagePolicies.ToArray();
     rules=@(
-        'Namespaces pair only unique declaration names. Full source namespaces and schema differences are recorded; any unmatched native/attribute schema prevents equivalence.',
+        'Namespaces pair only unique declaration names. Full source namespaces and schema differences are recorded; unmatched native schemas prevent equivalence. AttributeUsage-only differences require the explicit current-use checks below, not schema-wide compatibility.',
         'DocumentationAttribute, assembly/module identity, source tokens/blobs and BeforeFieldInit are not native behavior. Raw serialization audit preserves them.',
         'Only on managed System.Attribute-derived vocabulary classes, AutoClass and positional constructor parameter labels do not change attribute decoding. Native API parameters, native string-format flags, named fields/properties, AttributeUsage and multiplicity are not excluded.',
         'For closed rank-one fixed arrays with a positive encoded size, an omitted lower bound means zero (ECMA-335 II.23.2.13). Element type, rank, size and nonzero bounds remain compared.',
+        'AttributeUsage-only differences permit current-use equivalence only when typed schemas/arguments otherwise match, both masks allow each realized placement/count, and each use is on a sealed native struct or static PInvoke. General target/inheritance/repetition policy remains unproven and recorded.',
         'An integer+AssociatedEnum slot is consumed only when exactly one emitted enum resolves and its primitive storage matches the original slot; complete member names/types/values and flags/scoped semantics remain compared.',
         'No primitive-vs-native-typedef, pointer modifier, ownership, invalid-value, parameter direction, byte-count, OS or enum membership difference is erased.',
         'No unresolved Windows.Win32 API/attribute reference is accepted as an external framework type.'

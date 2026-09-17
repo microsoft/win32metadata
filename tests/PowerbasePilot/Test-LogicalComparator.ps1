@@ -81,6 +81,23 @@ Test-Case 'fixed array zero-default encoding preserves bounds and size contracts
     $changed.sizes[0]++
     Assert-Changed (Convert-Type $array $fixture 'unit' 'spare3') (Convert-Type $changed $fixture 'unit' 'spare3') 'Native array extent was erased.'
 }
+Test-Case 'current attribute policy rejects invalid targets repetition and inheritance' {
+    $old=Get-Definition $fixture 'NativeTypedefAttribute'
+    $new=Copy-Value $old
+    $new.customAttributes=@()
+    Require (Current-UsageCompatible $old $new $fixture 'unit') 'Current sealed native typedef uses should remain valid.'
+    $wrongMask=Copy-Value $old
+    $wrongMask.customAttributes[0].fixedArguments[0].value=64
+    Require (-not (Current-UsageCompatible $wrongMask $new $fixture 'unit')) 'Disallowed native struct placement was accepted.'
+    $repeated=Copy-Value $fixture
+    $type=Get-Definition $repeated 'BOOLEAN'
+    $attribute=@($type.customAttributes | Where-Object {$_.constructor.declaringType.name -eq 'NativeTypedefAttribute'})[0]
+    $type.customAttributes+=@($attribute)
+    Require (-not (Current-UsageCompatible $old $new $repeated 'unit')) 'Invalid repeated native typedef attribute was accepted.'
+    $inheritable=Copy-Value $fixture
+    (Get-Definition $inheritable 'BOOLEAN').attributes.value=(Get-Definition $inheritable 'BOOLEAN').attributes.value -band (-bnot 0x100)
+    Require (-not (Current-UsageCompatible $old $new $inheritable 'unit')) 'Unproven inheritance behavior was accepted.'
+}
 
 foreach($mutation in @('remove-member','change-value','change-flags','change-storage','member-attribute')) {
     Test-Case "enum $mutation is substantive" {

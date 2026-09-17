@@ -80,13 +80,15 @@ macro-restoration probe; no native constant is removed.
 
 ## Generate and inspect
 
-The complete reproducible gate is:
+The complete reproducible gate includes the explicitly authorized source-backed
+shared `WIN32_ERROR` prerequisite:
 
 ```powershell
 .\scripts\Test-PowerbasePilot.ps1 -EvidenceDirectory C:\evidence\powerbase-run
 ```
 
-It generates both variants, verifies native contracts and source ownership, writes
+It generates both variants, composes the shared Foundation enum into each image,
+verifies native contracts and source ownership, writes
 the raw and effective comparisons, and exercises the negative controls. It
 preserves all evidence and returns a failure if logical differences remain; a
 successful transport test cannot turn that failure into a passing equivalence
@@ -111,6 +113,23 @@ configuration/provenance ledger without using it as generator input.
 The namespace is read from the existing Power partition's `--namespace` setting,
 recorded with that file's hash, and supplied to both variants. This imports only
 the supported namespace input policy, not legacy semantic sidecars.
+
+`Generate-Win32ErrorHeader.ps1` evaluates the selected SDK's Win32 error macro
+families plus SetupAPI error macros using pinned Clang on all three architectures.
+It excludes native HRESULT values, writes a metadata-only header under the fresh
+evidence/OBJ directory, and verifies all original macro types/values before and
+after inclusion. `Compose-PowerbaseShared.ps1` scrapes only that generated header
+into Foundation and combines its generated RDL with Power using the owner-supplied
+`compile` command. No shipped SDK header/include guard is edited. This is a
+**pilot bridge**, not completed shared SDK-header annotation migration. Legacy
+JSON/WinMD are not production inputs to this source selection or generation.
+
+The Foundation-only gate requires exactly the compiler-selected enum, no helper
+API roots, canonical storage/field flags and identical per-architecture values.
+The complete selected SDK currently yields 3,378 members (3,288 winerror and
+90 SetupAPI), with 380 source/compiler-typed HRESULT exclusions. Composed images
+must retain all five candidate Power roots and exactly one shared enum/vocabulary
+definition per name. The original Power-only images are kept separately.
 
 **Provisional selector:** the pinned wrapper's default scope includes all
 `shared`/`um` declarations. The pilot explicitly passes the nonmatching path

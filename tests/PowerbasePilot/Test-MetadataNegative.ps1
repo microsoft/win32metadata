@@ -14,7 +14,7 @@ if ($candidateCommand.Count -ne 1 -or $candidateCommand[0].exitCode -ne 0) {
     throw 'Negative tests require a successfully generated pinned candidate command.'
 }
 $command = $candidateCommand[0]
-$tool = $command.executable
+$tool = Join-Path $evidence 'inputs\win32metadata-tools.exe'
 if ((Get-FileHash $tool).Hash -cne $manifest.tool.sha256) { throw 'Generator changed since positive evidence was recorded.' }
 $reader = Join-Path $repo 'bin\Release\net10.0\WinmdUtils.dll'
 $output = Join-Path $evidence 'negative-metadata'
@@ -81,6 +81,14 @@ try {
         $args.Add('--arch'); $args.Add('x64')
         & $tool @args *> (Join-Path $caseRoot 'generation.log')
         if ($LASTEXITCODE -ne 0) { throw "Negative mutation did not reach metadata comparison: $($case.name)." }
+        if($manifest.sharedPrerequisite){
+            $composeArgs=@('compile','--input',(Join-Path $evidence 'shared-prerequisite\obj\rdl'),
+                '--input',(Join-Path $caseRoot 'obj\rdl'),'--assembly-name','Windows.Win32',
+                '--output',(Join-Path $caseRoot 'Windows.Win32.winmd'))
+            & $tool @composeArgs *> (Join-Path $caseRoot 'composition.log')
+            if($LASTEXITCODE -ne 0){throw "Negative mutation composition failed: $($case.name)."}
+            $composeArgs | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $caseRoot 'composition-command.json')
+        }
         $negative = Read-MethodContract (Join-Path $caseRoot 'Windows.Win32.winmd') $case.method (Join-Path $caseRoot 'negative.json')
         $failure = $null
         try { Assert-PilotParameter $negative $case.name } catch { $failure=$_.Exception.Message }
