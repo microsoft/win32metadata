@@ -1,0 +1,13 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
+index 44880d5537..e4bbf2f4ba 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
+@@ -1658,7 +1658,7 @@ WINAPI
+ CryptXmlSign(
+     _In_            HCRYPTXML           hSignature,
+     _In_opt_        HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hKey,
+-                    DWORD               dwKeySpec,
++                    CERT_KEY_SPEC               dwKeySpec,
+                     DWORD               dwFlags,
+                     CRYPT_XML_KEYINFO_SPEC dwKeyInfoSpec,
+     _In_opt_        const void          *pvKeyInfoSpec,

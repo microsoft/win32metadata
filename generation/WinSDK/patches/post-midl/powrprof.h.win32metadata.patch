@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
+index 6a4a1b5661..a5f819241f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
+@@ -18,6 +18,9 @@
+ #include <powerbase.h>
+ #include <powersetting.h>
+ #include <winapifamily.h>
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -205,29 +208,34 @@ typedef PWRSCHEMESENUMPROC_V1 *PWRSCHEMESENUMPROC;
+ 
+ // Public function prototypes
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ GetPwrDiskSpindownRange(
+     _Out_ PUINT puiMax,
+     _Out_ PUINT puiMin
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ EnumPwrSchemes(
+     _In_ PWRSCHEMESENUMPROC lpfn,
+     _In_ LPARAM lParam
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ ReadGlobalPwrPolicy(
+     _In_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ ReadPwrScheme(
+     _In_ UINT uiID,
+     _Out_ PPOWER_POLICY pPowerPolicy
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ WritePwrScheme(
+     _In_ PUINT puiID,
+@@ -236,21 +244,25 @@ WritePwrScheme(
+     _In_ PPOWER_POLICY lpScheme
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ WriteGlobalPwrPolicy(
+         _In_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ DeletePwrScheme(
+         _In_ UINT uiID
+         );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ GetActivePwrScheme(
+         _Out_ PUINT puiID
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ SetActivePwrScheme(
+     _In_ UINT uiID,
+@@ -278,6 +290,7 @@ IsAdminOverrideActive(
+     _In_ PADMINISTRATOR_POWER_POLICY papp
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ SetSuspendState(
+     _In_ BOOLEAN bHibernate,
+@@ -285,12 +298,14 @@ SetSuspendState(
+     _In_ BOOLEAN bWakeupEventsDisabled
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ GetCurrentPowerPolicies(
+     _Out_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy,
+     _Out_ PPOWER_POLICY pPowerPolicy
+     );
+ 
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ CanUserWritePwrScheme(
+         VOID
+@@ -300,6 +315,7 @@ CanUserWritePwrScheme(
+ //
+ // deprecated.
+ //
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ ReadProcessorPwrScheme(
+     _In_ UINT uiID,
+@@ -311,6 +327,7 @@ ReadProcessorPwrScheme(
+ //
+ // deprecated.
+ //
++_Win32_SetLastError_
+ STDAPI_(BOOLEAN)
+ WriteProcessorPwrScheme(
+     _In_ UINT uiID,
+@@ -1057,6 +1074,7 @@ DevicePowerEnumDevices(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03)
++_Win32_SetLastError_
+ STDAPI_(DWORD)
+ DevicePowerSetDeviceState(
+     _In_ LPCWSTR DeviceDescription,

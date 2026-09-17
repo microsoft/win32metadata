@@ -1,0 +1,702 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
+index c40eaf536a..3e7922d020 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
+@@ -9,6 +9,10 @@
+ 
+ 
+ /* verify that the <rpcndr.h> version is high enough to compile this file*/
++#if defined(WIN32METADATA)
++#include <win32metadata_annotations.h>
++#endif
++
+ #ifndef __REQUIRED_RPCNDR_H_VERSION__
+ #define __REQUIRED_RPCNDR_H_VERSION__ 500
+ #endif
+@@ -311,8 +315,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0000_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IInitializeWithFile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("b7d14566-0509-4cce-a71f-0a554233bd9b")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IInitializeWithFile : public IUnknown
+     {
+     public:
+@@ -402,8 +407,9 @@ EXTERN_C const IID IID_IInitializeWithFile;
+ EXTERN_C const IID IID_IInitializeWithStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("b824b49d-22ac-4161-ac8a-9916e8fa3f7f")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IInitializeWithStream : public IUnknown
+     {
+     public:
+@@ -666,7 +672,9 @@ typedef /* [unique] */  __RPC_unique_pointer IPropertyStore *LPPROPERTYSTORE;
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
++_Windows_SupportedOS_Windows8_
+ PSSTDAPI PropVariantToWinRTPropertyValue(_In_ REFPROPVARIANT propvar, _In_ REFIID riid, _COM_Outptr_result_maybenull_ void **ppv);
++_Windows_SupportedOS_Windows8_
+ PSSTDAPI WinRTPropertyValueToPropVariant(_In_opt_ IUnknown *punkPropertyValue, _Out_ PROPVARIANT *ppropvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+@@ -687,8 +695,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0003_v0_0_s_ifspec;
+ EXTERN_C const IID IID_INamedPropertyStore;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("71604b0f-97b0-4764-8577-2f13e98a1422")
++    
++    _Windows_SupportedOS_WindowsVista_
+     INamedPropertyStore : public IUnknown
+     {
+     public:
+@@ -854,8 +863,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0004_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IObjectWithPropertyKey;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("fc0ca0a7-c316-4fd2-9031-3e628e6d4f23")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IObjectWithPropertyKey : public IUnknown
+     {
+     public:
+@@ -970,8 +980,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0005_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IPropertyChange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("f917bc8a-1bba-4478-a245-1bde03eb9431")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyChange : public IObjectWithPropertyKey
+     {
+     public:
+@@ -1080,8 +1091,9 @@ EXTERN_C const IID IID_IPropertyChange;
+ EXTERN_C const IID IID_IPropertyChangeArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("380f5cad-1b5e-42f2-805d-637fd392d31e")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyChangeArray : public IUnknown
+     {
+     public:
+@@ -1257,8 +1269,9 @@ EXTERN_C const IID IID_IPropertyChangeArray;
+ EXTERN_C const IID IID_IPropertyStoreCapabilities;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("c8e2d566-186e-4d49-bf41-6909ead56acc")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyStoreCapabilities : public IUnknown
+     {
+     public:
+@@ -1353,8 +1366,9 @@ enum PSC_STATE
+ EXTERN_C const IID IID_IPropertyStoreCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("3017056d-9a91-4e90-937d-746c72abbf4f")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyStoreCache : public IPropertyStore
+     {
+     public:
+@@ -1562,8 +1576,9 @@ enum PROPENUMTYPE
+ EXTERN_C const IID IID_IPropertyEnumType;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("11e1fbf9-2d56-4a6b-8db3-7cd193a471f2")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyEnumType : public IUnknown
+     {
+     public:
+@@ -1701,8 +1716,9 @@ EXTERN_C const IID IID_IPropertyEnumType;
+ EXTERN_C const IID IID_IPropertyEnumType2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("9b6e051c-5ddd-4321-9070-fe2acb55e794")
++    
++    _Windows_SupportedOS_Windows7_
+     IPropertyEnumType2 : public IPropertyEnumType
+     {
+     public:
+@@ -1834,8 +1850,9 @@ EXTERN_C const IID IID_IPropertyEnumType2;
+ EXTERN_C const IID IID_IPropertyEnumTypeList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("a99400f4-3d84-4557-94ba-1242fb2cc9a6")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyEnumTypeList : public IUnknown
+     {
+     public:
+@@ -2116,8 +2133,9 @@ enum PROPDESC_CONDITION_TYPE
+ EXTERN_C const IID IID_IPropertyDescription;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("6f79d558-3e96-4549-a1d1-7d75d2288814")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyDescription : public IUnknown
+     {
+     public:
+@@ -2514,8 +2532,9 @@ void __RPC_STUB IPropertyDescription_RemoteCoerceToCanonicalValue_Stub(
+ EXTERN_C const IID IID_IPropertyDescription2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("57d2eded-5062-400e-b107-5dae79fe57a6")
++    
++    _Windows_SupportedOS_Windows7_
+     IPropertyDescription2 : public IPropertyDescription
+     {
+     public:
+@@ -2813,8 +2832,9 @@ EXTERN_C const IID IID_IPropertyDescription2;
+ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("f67104fc-2af9-46fd-b32d-243c1404f3d1")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyDescriptionAliasInfo : public IPropertyDescription
+     {
+     public:
+@@ -3152,8 +3172,9 @@ enum PROPDESC_COLUMNINDEX_TYPE
+ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("078f91bd-29a2-440f-924e-46a291524520")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyDescriptionSearchInfo : public IPropertyDescription
+     {
+     public:
+@@ -3486,8 +3507,9 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
+ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("507393f4-2a3d-4a60-b59e-d9c75716c2dd")
++    
++    _Windows_SupportedOS_Windows7_
+     IPropertyDescriptionRelatedPropertyInfo : public IPropertyDescription
+     {
+     public:
+@@ -3809,8 +3831,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0017_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IPropertySystem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("ca724e8a-c3e6-442b-88a4-6fb0db8035a3")
++    
++    _Windows_SupportedOS_WindowsXP_
+     IPropertySystem : public IUnknown
+     {
+     public:
+@@ -4054,8 +4077,9 @@ EXTERN_C const IID IID_IPropertySystem;
+ EXTERN_C const IID IID_IPropertyDescriptionList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("1f9fc1d0-c39b-4b26-817f-011967d3440e")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyDescriptionList : public IUnknown
+     {
+     public:
+@@ -4162,8 +4186,9 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
+ EXTERN_C const IID IID_IPropertyStoreFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("bc110b6d-57e8-4148-a9c6-91015ab2f3a5")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPropertyStoreFactory : public IUnknown
+     {
+     public:
+@@ -4290,8 +4315,9 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
+ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("40d4577f-e237-4bdb-bd69-58f089431b6a")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IDelayedPropertyStoreFactory : public IPropertyStoreFactory
+     {
+     public:
+@@ -4445,8 +4471,9 @@ extern RPC_IF_HANDLE __MIDL_itf_propsys_0000_0021_v0_0_s_ifspec;
+ EXTERN_C const IID IID_IPersistSerializedPropStorage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("e318ad57-0aa0-450f-aca5-6fab7103d917")
++    
++    _Windows_SupportedOS_WindowsVista_
+     IPersistSerializedPropStorage : public IUnknown
+     {
+     public:
+@@ -4566,8 +4593,9 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
+ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("77effa68-4f98-4366-ba72-573b3d880571")
++    
++    _Windows_SupportedOS_Windows7_
+     IPersistSerializedPropStorage2 : public IPersistSerializedPropStorage
+     {
+     public:
+@@ -4789,8 +4817,9 @@ EXTERN_C const IID IID_IPropertySystemChangeNotify;
+ EXTERN_C const IID IID_ICreateObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+-    
+     MIDL_INTERFACE("75121952-e0d0-43e5-9380-1d80483acf72")
++    
++    _Windows_SupportedOS_WindowsVista_
+     ICreateObject : public IUnknown
+     {
+     public:
+@@ -4882,6 +4911,7 @@ EXTERN_C const IID IID_ICreateObject;
+ /* [local] */ 
+ 
+ // Format a property value for display purposes
++_Windows_SupportedOS_WindowsVista_
+ PSSTDAPI PSFormatForDisplay(
+     _In_ REFPROPERTYKEY propkey,
+     _In_ REFPROPVARIANT propvar,
+@@ -4889,12 +4919,14 @@ PSSTDAPI PSFormatForDisplay(
+     _Out_writes_(cchText) LPWSTR pwszText,
+     _In_ DWORD cchText);
+ 
++_Windows_SupportedOS_WindowsVista_
+ PSSTDAPI PSFormatForDisplayAlloc(
+     _In_ REFPROPERTYKEY key,
+     _In_ REFPROPVARIANT propvar,
+     _In_ PROPDESC_FORMAT_FLAGS pdff,
+     _Outptr_ PWSTR *ppszDisplay);
+ 
++_Windows_SupportedOS_WindowsVista_
+ PSSTDAPI PSFormatPropertyValue(
+     _In_ IPropertyStore *pps,
+     _In_ IPropertyDescription *ppd,
+@@ -4902,6 +4934,7 @@ PSSTDAPI PSFormatPropertyValue(
+     _Outptr_ LPWSTR *ppszDisplay);
+ 
+ // Retrieve the image reference associated with a property value (if specified)
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSGetImageReferenceForValue(
+     _In_ REFPROPERTYKEY propkey,
+     _In_ REFPROPVARIANT propvar,
+@@ -4913,11 +4946,13 @@ PSSTDAPI PSGetImageReferenceForValue(
+ #define PKEYSTR_MAX         (GUIDSTRING_MAX + 1 + PKEY_PIDSTR_MAX)
+ 
+ // Convert a PROPERTYKEY to and from a PWSTR
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSStringFromPropertyKey(
+     _In_ REFPROPERTYKEY pkey,
+     _Out_writes_(cch) LPWSTR psz,
+     _In_ UINT cch);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSPropertyKeyFromString(
+     _In_ LPCWSTR pszString,
+     _Out_ PROPERTYKEY *pkey);
+@@ -4929,6 +4964,7 @@ PSSTDAPI PSPropertyKeyFromString(
+ 
+ // Creates an in-memory property store
+ // Returns an IPropertyStore, IPersistSerializedPropStorage, and related interfaces interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreateMemoryPropertyStore(
+     _In_ REFIID riid,
+     _Outptr_ void **ppv);
+@@ -4940,6 +4976,7 @@ PSSTDAPI PSCreateMemoryPropertyStore(
+ 
+ // Create a read-only, delay-bind multiplexing property store
+ // Returns an IPropertyStore interface or related interfaces
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreateDelayedMultiplexPropertyStore(
+     _In_ GETPROPERTYSTOREFLAGS flags,
+     _In_ IDelayedPropertyStoreFactory *pdpsf,
+@@ -4951,6 +4988,7 @@ PSSTDAPI PSCreateDelayedMultiplexPropertyStore(
+ 
+ // Create a read-only property store from one or more sources (which each must support either IPropertyStore or IPropertySetStorage)
+ // Returns an IPropertyStore interface or related interfaces
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreateMultiplexPropertyStore(
+     _In_reads_(cStores) IUnknown **prgpunkStores,
+     _In_ DWORD cStores,
+@@ -4960,6 +4998,7 @@ PSSTDAPI PSCreateMultiplexPropertyStore(
+ 
+ // Create a container for IPropertyChanges
+ // Returns an IPropertyChangeArray interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreatePropertyChangeArray(
+     _In_reads_opt_(cChanges) const PROPERTYKEY *rgpropkey,
+     _In_reads_opt_(cChanges) const PKA_FLAGS *rgflags,
+@@ -4971,6 +5010,7 @@ PSSTDAPI PSCreatePropertyChangeArray(
+ 
+ // Create a simple property change
+ // Returns an IPropertyChange interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreateSimplePropertyChange(
+     _In_ PKA_FLAGS flags,
+     _In_ REFPROPERTYKEY key,
+@@ -4981,11 +5021,13 @@ PSSTDAPI PSCreateSimplePropertyChange(
+ 
+ // Get a property description
+ // Returns an IPropertyDescription interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyDescription(
+     _In_ REFPROPERTYKEY propkey,
+     _In_ REFIID riid,
+     _Outptr_ void **ppv);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyDescriptionByName(
+     _In_ LPCWSTR pszCanonicalName,
+     _In_ REFIID riid,
+@@ -4993,12 +5035,14 @@ PSSTDAPI PSGetPropertyDescriptionByName(
+ 
+ 
+ // Lookup a per-machine registered file property handler
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSLookupPropertyHandlerCLSID(
+     _In_ PCWSTR pszFilePath,
+     _Out_ CLSID *pclsid);
+ // Get a property handler, on Vista or downlevel to XP
+ // punkItem is a shell item created with an SHCreateItemXXX API
+ // Returns an IPropertyStore
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetItemPropertyHandler(
+     _In_ IUnknown *punkItem,
+     _In_ BOOL fReadWrite,
+@@ -5010,6 +5054,7 @@ PSSTDAPI PSGetItemPropertyHandler(
+ // punkItem is a shell item created with an SHCreateItemXXX API
+ // punkCreateObject supports ICreateObject
+ // Returns an IPropertyStore
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetItemPropertyHandlerWithCreateObject(
+     _In_ IUnknown *punkItem,
+     _In_ BOOL fReadWrite,
+@@ -5019,11 +5064,13 @@ PSSTDAPI PSGetItemPropertyHandlerWithCreateObject(
+ 
+ 
+ // Get or set a property value from a store
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyValue(
+     _In_ IPropertyStore *pps,
+     _In_ IPropertyDescription *ppd,
+     _Out_ PROPVARIANT *ppropvar);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSSetPropertyValue(
+     _In_ IPropertyStore *pps,
+     _In_ IPropertyDescription *ppd,
+@@ -5031,15 +5078,19 @@ PSSTDAPI PSSetPropertyValue(
+ 
+ 
+ // Interact with the set of property descriptions
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSRegisterPropertySchema(
+     _In_ PCWSTR pszPath);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSUnregisterPropertySchema(
+     _In_ PCWSTR pszPath);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSRefreshPropertySchema(void);
+ 
+ // Returns either: IPropertyDescriptionList or IEnumUnknown interfaces
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSEnumeratePropertyDescriptions(
+     _In_ PROPDESC_ENUMFILTER filterOn,
+     _In_ REFIID riid,
+@@ -5047,16 +5098,19 @@ PSSTDAPI PSEnumeratePropertyDescriptions(
+ 
+ 
+ // Convert between a PROPERTYKEY and its canonical name
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyKeyFromName(
+     _In_ PCWSTR pszName,
+     _Out_ PROPERTYKEY *ppropkey);
+ 
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetNameFromPropertyKey(
+     _In_ REFPROPERTYKEY propkey,
+     _Outptr_ PWSTR *ppszCanonicalName);
+ 
+ 
+ // Coerce and canonicalize a property value
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCoerceToCanonicalValue(
+     _In_ REFPROPERTYKEY key,
+     _Inout_ PROPVARIANT *ppropvar);
+@@ -5064,6 +5118,7 @@ PSSTDAPI PSCoerceToCanonicalValue(
+ 
+ // Convert a 'prop:' string into a list of property descriptions
+ // Returns an IPropertyDescriptionList interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyDescriptionListFromString(
+     _In_ LPCWSTR pszPropList,
+     _In_ REFIID riid,
+@@ -5072,6 +5127,7 @@ PSSTDAPI PSGetPropertyDescriptionListFromString(
+ 
+ // Wrap an IPropertySetStorage interface in an IPropertyStore interface
+ // Returns an IPropertyStore or related interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreatePropertyStoreFromPropertySetStorage(
+     _In_ IPropertySetStorage *ppss,
+     _In_ DWORD grfMode,
+@@ -5086,6 +5142,7 @@ PSSTDAPI PSCreatePropertyStoreFromPropertySetStorage(
+ // punkSource must support IPropertyStore or IPropertySetStorage
+ // On success, the returned ppv is guaranteed to support IPropertyStore.
+ // If punkSource already supports IPropertyStore, no wrapper is created.
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreatePropertyStoreFromObject(
+     _In_ IUnknown *punk,
+     _In_ DWORD grfMode,
+@@ -5095,6 +5152,7 @@ PSSTDAPI PSCreatePropertyStoreFromObject(
+ 
+ // punkSource must support IPropertyStore
+ // riid may be IPropertyStore, IPropertySetStorage, IPropertyStoreCapabilities, or IObjectProvider
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSCreateAdapterFromPropertyStore(
+     _In_ IPropertyStore *pps,
+     _In_ REFIID riid,
+@@ -5107,12 +5165,14 @@ PSSTDAPI PSCreateAdapterFromPropertyStore(
+ 
+ // Talk to the property system using an interface
+ // Returns an IPropertySystem interface
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertySystem(
+     _In_ REFIID riid,
+     _Outptr_ void **ppv);
+ 
+ 
+ // Obtain a value from serialized property storage
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetPropertyFromPropertyStorage(
+     _In_reads_bytes_(cb) PCUSERIALIZEDPROPSTORAGE psps, 
+     _In_ DWORD cb, 
+@@ -5121,6 +5181,7 @@ PSSTDAPI PSGetPropertyFromPropertyStorage(
+ 
+ 
+ // Obtain a named value from serialized property storage
++_Windows_SupportedOS_WindowsXP_
+ PSSTDAPI PSGetNamedPropertyFromPropertyStorage(
+     _In_reads_bytes_(cb) PCUSERIALIZEDPROPSTORAGE psps, 
+     _In_ DWORD cb, 
+@@ -5129,136 +5190,169 @@ PSSTDAPI PSGetNamedPropertyFromPropertyStorage(
+ 
+ 
+ // Helper functions for reading and writing values from IPropertyBag's.
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadType(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ VARIANT *var,
+     VARTYPE type);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadStr(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_writes_(characterCount) LPWSTR value,
+     int characterCount);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadStrAlloc(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Outptr_ PWSTR *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadBSTR(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Outptr_ BSTR *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteStr(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ LPCWSTR value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteBSTR(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ BSTR value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadInt(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ INT *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteInt(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     INT value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadSHORT(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ SHORT *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteSHORT(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     SHORT value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadLONG(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ LONG *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteLONG(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     LONG value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadDWORD(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ DWORD *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteDWORD(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     DWORD value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadBOOL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ BOOL *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteBOOL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     BOOL value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadPOINTL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ POINTL *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WritePOINTL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ const POINTL *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadPOINTS(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ POINTS *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WritePOINTS(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ const POINTS *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadRECTL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ RECTL *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteRECTL(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ const RECTL *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadStream(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Outptr_ IStream **value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteStream(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ IStream *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_Delete(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadULONGLONG(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ ULONGLONG *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteULONGLONG(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     ULONGLONG value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadUnknown(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ REFIID riid,
+     _Outptr_ void **ppv);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteUnknown(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ IUnknown *punk);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadGUID(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ GUID *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WriteGUID(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _In_ const GUID *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_ReadPropertyKey(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+     _Out_ PROPERTYKEY *value);
++_Windows_SupportedOS_Windows7_
+ PSSTDAPI PSPropertyBag_WritePropertyKey(
+     _In_ IPropertyBag *propBag,
+     _In_ LPCWSTR propName,
+@@ -5328,14 +5422,22 @@ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *,
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+ void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
++_Windows_SupportedOS_WindowsXP_
+ unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_
+ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+ 
+ /* [local] */ HRESULT STDMETHODCALLTYPE IInitializeWithStream_Initialize_Proxy( 
