@@ -37,7 +37,8 @@ const DEFAULT_SCOPES: [&str; 2] = ["shared", "um"];
 
 /// SDK include-root layout. A `--include` directory containing any of these is expanded
 /// into them, so the SDK root can be named once.
-const SDK_INCLUDE_SUBDIRS: [&str; 4] = ["shared", "um", "ucrt", "winrt"];
+const SDK_INCLUDE_SUBDIRS: [&[&str]; 5] =
+    [&["shared"], &["um"], &["um", "cpdk"], &["ucrt"], &["winrt"]];
 
 #[derive(Default, Debug)]
 pub struct Options {
@@ -208,7 +209,7 @@ fn absolutize(options: &mut Options) -> Result<(), String> {
     Ok(())
 }
 
-/// Expands an SDK include root into its `shared`/`um`/`ucrt`/`winrt` subdirectories.
+/// Expands an SDK include root into its canonical SDK subdirectories.
 ///
 /// A directory with none of them - a repository-local header directory, for example - is
 /// used as-is, so both kinds of root are named the same way on the command line.
@@ -225,7 +226,11 @@ fn include_dirs(options: &Options) -> Result<Vec<PathBuf>, String> {
 
         let expanded: Vec<PathBuf> = SDK_INCLUDE_SUBDIRS
             .iter()
-            .map(|name| include.join(name))
+            .map(|segments| {
+                segments
+                    .iter()
+                    .fold(include.clone(), |path, segment| path.join(segment))
+            })
             .filter(|path| path.is_dir())
             .collect();
 
@@ -536,7 +541,7 @@ pub fn help_text() -> &'static str {
     [--obj <dir>]
 
   --partition   Partition translation unit to scrape. Repeatable.
-  --include     Header root. An SDK root is expanded into its shared/um/ucrt/winrt
+  --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
                 Repeatable. Without it, functions carry no import library.
@@ -639,6 +644,41 @@ mod tests {
 
         let options = parse_with(&["--obj", "obj/scratch"]).unwrap();
         assert_eq!(obj_dir(&options), PathBuf::from("obj/scratch"));
+    }
+
+    #[test]
+    fn sdk_roots_include_cpdk_without_flattening_other_nested_directories() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-includes-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        for path in [
+            root.join("shared"),
+            root.join("um"),
+            root.join("um").join("cpdk"),
+            root.join("um").join("unrelated"),
+            root.join("ucrt"),
+            root.join("winrt"),
+        ] {
+            std::fs::create_dir_all(path).unwrap();
+        }
+
+        let options = Options {
+            includes: vec![root.clone()],
+            ..Default::default()
+        };
+        assert_eq!(
+            include_dirs(&options).unwrap(),
+            [
+                root.join("shared"),
+                root.join("um"),
+                root.join("um").join("cpdk"),
+                root.join("ucrt"),
+                root.join("winrt"),
+            ]
+        );
+        std::fs::remove_dir_all(root).ok();
     }
 
     #[test]
