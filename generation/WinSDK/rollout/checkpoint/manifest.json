@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "sequence": 11,
+  "fingerprint": "7A6B1E86F296A3C48EA1764F7791CA16C4BD2871C7215E7861ED2EE3099B1314",
+  "head": "aa570d99995f03853a4daf0b2d07c0cc33057f8f",
+  "pins": {
+    "schemaVersion": 1,
+    "pilotCommit": "4eb2583e06e41560a05a048c1dabb05c230ea32c",
+    "toolingCommit": "f320e1343f2458e947f699c3fe10ca28a97ca341",
+    "windowsRsCommit": "e322c213f5a4b5fd1911a05bd9e1ee57ee32d9fc",
+    "toolSha256": "0D8C17333ABCD7877CBA4A666F2331CEEE24A0D865E53FFF4EE4DAD525B816CA",
+    "sdkVersion": "10.0.26100.7705",
+    "sdkIncludeVersion": "10.0.26100.0",
+    "libclangVersion": "22.1.8",
+    "libclangSha256": "C3C6799ADD679682580C9ADD26F73950463396B0997110F07EAF5578A25A09B8",
+    "referenceVersion": "70.0.11-preview",
+    "referenceSha256": "6AEC29BE3359468D9EBA03C3AE932591B39960F1812B6D25D33C0D9F14A6D665",
+    "legacyCommit": "5c5efbc01d4c87f6830ec304d42777991d533154",
+    "architectures": [
+      "x64",
+      "x86",
+      "arm64"
+    ],
+    "publicationBase": "user/jevansa/windows-rs-pipeline-wrapper",
+    "policyCommit": null,
+    "policyRules": []
+  },
+  "evidenceRoot": "C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\bootstrap-005",
+  "checkpoint": {
+    "path": "C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\state\\checkpoint-000011-3684b28c717c40f5aff139b8ae737848.json",
+    "sha256": "8CAF80CE83BAE9909EA6091BB2AC6D2572BF61026D5CCE8CCFD4A16709D2180E",
+    "bytes": 66720027
+  },
+  "tool": {
+    "path": "C:\\Users\\jevansa\\.copilot\\session-state\\ac7b652c-c8c0-40c2-8251-946330986647\\files\\powrprof\\final-f320e134-r3\\inputs\\win32metadata-tools.exe",
+    "sha256": "0D8C17333ABCD7877CBA4A666F2331CEEE24A0D865E53FFF4EE4DAD525B816CA",
+    "bytes": 23662080
+  },
+  "libclang": {
+    "path": "C:\\Users\\jevansa\\.nuget\\packages\\libclang.runtime.win-x64\\22.1.8\\runtimes\\win-x64\\native\\libclang.dll",
+    "sha256": "C3C6799ADD679682580C9ADD26F73950463396B0997110F07EAF5578A25A09B8",
+    "bytes": 85053368
+  },
+  "reference": {
+    "path": "C:\\Users\\jevansa\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\70.0.11-preview\\Windows.Win32.winmd",
+    "sha256": "6AEC29BE3359468D9EBA03C3AE932591B39960F1812B6D25D33C0D9F14A6D665",
+    "bytes": 24328704
+  },
+  "nextItem": "Foundation",
+  "activeJob": null,
+  "draftPr": null,
+  "reconciliationGaps": [
+    "Native symbol denominator is incomplete until every canonical partition/architecture is captured without errors.",
+    "Unresolved direct includes and selected-SDK versus compatibility/MIDL alternatives need explicit source ownership decisions.",
+    "Unreached SDK/CRT/WinRT/provider files are catalog-only, NOT additional conversion obligations. Relevant reference/legacy omissions remain explicit reconciliation gaps.",
+    "Compiler captures cover active canonical conditions only. Skipped branches, IDL/MIDL facts and alternative macro configurations remain pending.",
+    "Published reference declarations and all legacy semantic records are audit inputs only; their per-symbol reconciliation remains pending.",
+    "Shared Foundation WIN32_ERROR and Registry REG_SAM_FLAGS pilot bridges are not shipped-header migrations.",
+    "No generic full-SDK metadata/native/negative-control or consumer gate has closed any header.",
+    "Powrprof source additions, callback constructors, macro placement, exact availability, shared lifetime and invalid values remain open."
+  ],
+  "partitionCount": 321,
+  "providerCatalogCount": 7897,
+  "selectedSourceCount": 1418,
+  "resolvedDirectHeaderCount": 1358,
+  "distinctDirectIncludeSpellings": 1397,
+  "unresolvedDirectIncludes": [
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 7,
+        "spelling": "MSAJTransport.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 8,
+        "spelling": "alljoyn_c\\AjAPI.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 9,
+        "spelling": "alljoyn_c\\AboutData.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 10,
+        "spelling": "alljoyn_c\\AboutIconObj.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 11,
+        "spelling": "alljoyn_c\\AboutIconProxy.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 12,
+        "spelling": "alljoyn_c\\AboutObj.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 13,
+        "spelling": "alljoyn_c\\AboutObjectDescription.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 14,
+        "spelling": "alljoyn_c\\AboutProxy.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 15,
+        "spelling": "alljoyn_c\\ApplicationStateListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 16,
+        "spelling": "alljoyn_c\\AuthListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 17,
+        "spelling": "alljoyn_c\\AutoPinger.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 18,
+        "spelling": "alljoyn_c\\BusAttachment.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 19,
+        "spelling": "alljoyn_c\\BusListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 20,
+        "spelling": "alljoyn_c\\BusObject.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 21,
+        "spelling": "alljoyn_c\\DBusStdDefines.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 22,
+        "spelling": "alljoyn_c\\version.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 23,
+        "spelling": "alljoyn_c\\Init.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 24,
+        "spelling": "alljoyn_c\\InterfaceDescription.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 25,
+        "spelling": "alljoyn_c\\KeyStoreListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 26,
+        "spelling": "alljoyn_c\\Message.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 27,
+        "spelling": "alljoyn_c\\MsgArg.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 28,
+        "spelling": "alljoyn_c\\Observer.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 29,
+        "spelling": "alljoyn_c\\PasswordManager.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 30,
+        "spelling": "alljoyn_c\\PermissionConfigurationListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 31,
+        "spelling": "alljoyn_c\\PermissionConfigurator.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 32,
+        "spelling": "alljoyn_c\\AutoPinger.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 33,
+        "spelling": "alljoyn_c\\ProxyBusObject.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 34,
+        "spelling": "alljoyn_c\\SecurityApplicationProxy.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 35,
+        "spelling": "alljoyn_c\\SessionListener.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "AllJoyn",
+      "include": {
+        "line": 36,
+        "spelling": "alljoyn_c\\Session.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Direct3D12",
+      "include": {
+        "line": 14,
+        "spelling": "d3d12compiler.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "P2p",
+      "include": {
+        "line": 4,
+        "spelling": "p2p.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 34,
+        "spelling": "bcrypt_provider.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 35,
+        "spelling": "ncrypt_provider.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 36,
+        "spelling": "sslprovider.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 37,
+        "spelling": "cspdk.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 38,
+        "spelling": "msclmd.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "Security.Cryptography",
+      "include": {
+        "line": 39,
+        "spelling": "cardmod.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "WinRT.AllJoyn",
+      "include": {
+        "line": 11,
+        "spelling": "alljoyn_c\\AjAPI.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "WinRT.AllJoyn",
+      "include": {
+        "line": 12,
+        "spelling": "windows.devices.alljoyn.interop.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    },
+    {
+      "partition": "WinRT",
+      "include": {
+        "line": 36,
+        "spelling": "msajtransport.h",
+        "quoted": false,
+        "condition": "",
+        "header": null,
+        "compilerSource": null
+      }
+    }
+  ],
+  "complete": false
+}
