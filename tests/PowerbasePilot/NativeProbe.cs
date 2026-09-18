@@ -80,6 +80,8 @@ public static class PowerbaseNativeProbe
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeType clang_getTypedefDeclUnderlyingType(Cursor cursor);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeType clang_getEnumDeclIntegerType(Cursor cursor);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeType clang_getResultType(NativeType type);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern int clang_getNumArgTypes(NativeType type);
+    [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern NativeType clang_getArgType(NativeType type, uint index);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern uint clang_getFunctionTypeCallingConv(NativeType type);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern int clang_Cursor_getNumArguments(Cursor cursor);
     [DllImport(Library, CallingConvention = CallingConvention.Cdecl)] private static extern Cursor clang_Cursor_getArgument(Cursor cursor, uint index);
@@ -173,7 +175,21 @@ public static class PowerbaseNativeProbe
         }
         else if (cursor.Kind == 20)
         {
-            result["underlyingType"] = TypeFacts(clang_getTypedefDeclUnderlyingType(cursor));
+            var underlying = clang_getTypedefDeclUnderlyingType(cursor);
+            result["underlyingType"] = TypeFacts(underlying);
+            var callable = clang_getCanonicalType(underlying);
+            var pointee = clang_getPointeeType(callable);
+            if (pointee.Kind != 0) callable = pointee;
+            int count = clang_getNumArgTypes(callable);
+            if (count >= 0)
+            {
+                result["callbackSignature"] = new Dictionary<string, object> {
+                    ["returnType"] = TypeFacts(clang_getResultType(callable)),
+                    ["callingConvention"] = clang_getFunctionTypeCallingConv(callable),
+                    ["parameterTypes"] = Enumerable.Range(0, count).Select(i => TypeFacts(clang_getArgType(callable, (uint)i))).ToArray(),
+                    ["parameterDeclarations"] = Children(cursor).Where(c => c.Kind == 10).Select(Facts).ToArray()
+                };
+            }
         }
         else if (cursor.Kind == 5)
         {
