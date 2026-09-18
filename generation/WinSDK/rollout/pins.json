@@ -13,6 +13,10 @@
   "legacyCommit": "5c5efbc01d4c87f6830ec304d42777991d533154",
   "architectures": ["x64", "x86", "arm64"],
   "publicationBase": "user/jevansa/windows-rs-pipeline-wrapper",
-  "policyCommit": null,
-  "policyRules": []
+  "policyCommit": "c8502d3f9b6f08ef7eda7e5b93f847df7d1815e7",
+  "policyRules": [
+    "sdk-guid-system-guid/v1",
+    "utf16-const-pwstr-pcwstr/v1",
+    "native-regsam-uint32/v1"
+  ]
 }

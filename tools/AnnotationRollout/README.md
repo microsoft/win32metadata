@@ -104,9 +104,11 @@ per-header reconciliation. It requires every discovered symbol/family
 disposition, all consumer/architecture captures, nine gates on x64/x86/ARM64
 and merged metadata, actual mutation controls, hashed evidence, and exact
 approved policy rules explaining every retained raw difference. It cannot
-close an empty inventory or accept a compile-only result. Pins currently
-contain **no registered policy rules**: the separately owned approved-policy
-implementation must be integrated explicitly.
+close an empty inventory or accept a compile-only result. Pins register the
+three approved projection rules from `scripts\ProjectionPolicy.psd1`. Their
+tested adapter currently covers imported Winapi method parameters only;
+registration is not evidence that COM, callback, field, or generic rollout
+obligations have been explained. The generic comparison adapter remains open.
 
 ## Remaining integration work
 
