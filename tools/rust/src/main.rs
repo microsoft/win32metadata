@@ -4,6 +4,7 @@ mod args;
 mod catch;
 mod compile;
 mod libclang;
+mod merge_arch;
 mod roundtrip;
 mod scrape;
 
@@ -26,6 +27,7 @@ fn run() -> Result<(), String> {
         .as_deref()
     {
         Some("compile") => compile::run(args.collect()),
+        Some("merge-arch") => merge_arch::run(args.collect()),
         Some("roundtrip") => roundtrip::run(args.collect()),
         Some("scrape") => scrape::run(args.collect()),
         Some("libclang") => libclang::run(args.collect()),
@@ -44,6 +46,8 @@ fn print_help() {
     println!();
     println!("{}", compile::help_text());
     println!();
+    println!("{}", merge_arch::help_text());
+    println!();
     println!("{}", roundtrip::help_text());
 }
 
@@ -54,6 +58,7 @@ fn help_text() -> &'static str {
 Commands:
   scrape      Partition main.cpp files -> WinMD, via windows-clang and windows-rdl.
   compile     Compile one or more generated RDL inputs into a single WinMD.
+  merge-arch  Merge cached per-architecture RDL and WinMD inputs.
   roundtrip   Round-trip a WinMD through RDL back into a WinMD.
   libclang    Resolve and report the pinned libclang.
 
