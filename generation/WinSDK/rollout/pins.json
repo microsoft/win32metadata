@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "pilotCommit": "4eb2583e06e41560a05a048c1dabb05c230ea32c",
+  "toolingCommit": "f320e1343f2458e947f699c3fe10ca28a97ca341",
+  "windowsRsCommit": "e322c213f5a4b5fd1911a05bd9e1ee57ee32d9fc",
+  "toolSha256": "0D8C17333ABCD7877CBA4A666F2331CEEE24A0D865E53FFF4EE4DAD525B816CA",
+  "sdkVersion": "10.0.26100.7705",
+  "sdkIncludeVersion": "10.0.26100.0",
+  "libclangVersion": "22.1.8",
+  "libclangSha256": "C3C6799ADD679682580C9ADD26F73950463396B0997110F07EAF5578A25A09B8",
+  "referenceVersion": "70.0.11-preview",
+  "referenceSha256": "6AEC29BE3359468D9EBA03C3AE932591B39960F1812B6D25D33C0D9F14A6D665",
+  "legacyCommit": "5c5efbc01d4c87f6830ec304d42777991d533154",
+  "architectures": ["x64", "x86", "arm64"],
+  "publicationBase": "user/jevansa/windows-rs-pipeline-wrapper",
+  "policyCommit": null,
+  "policyRules": []
+}
