@@ -1,7 +1,7 @@
 //! `merge-arch`: cached per-architecture RDL and WinMD pairs -> merged RDL and WinMD.
 
 use std::collections::HashSet;
-use std::ffi::OsString;
+use std::ffi::{OsStr, OsString};
 use std::path::{Path, PathBuf};
 
 use windows_clang::Arch;
@@ -175,6 +175,16 @@ fn execute(options: &Options) -> Result<(), String> {
         ));
     }
 
+    let physical_output_rdl = resolve_physical_path(output_rdl)?;
+    let physical_output_winmd = resolve_physical_path(output_winmd)?;
+    if path_is_within(&physical_output_winmd, &physical_output_rdl) {
+        return Err(format!(
+            "`--output-winmd {}` must not be inside `--output-rdl {}`",
+            output_winmd.display(),
+            output_rdl.display()
+        ));
+    }
+
     let mut names = HashSet::new();
     let mut inputs = Vec::with_capacity(options.inputs.len());
     for input in &options.inputs {
@@ -196,10 +206,34 @@ fn execute(options: &Options) -> Result<(), String> {
         if !winmd.is_file() {
             return Err(format!("`--winmd {}` is not a file", winmd.display()));
         }
-        reject_output_overlap(rdl_dir, output_rdl, "--output-rdl")?;
-        reject_output_overlap(rdl_dir, output_winmd, "--output-winmd")?;
-        reject_output_alias(winmd, output_rdl, "--output-rdl")?;
-        reject_output_alias(winmd, output_winmd, "--output-winmd")?;
+        let physical_rdl_dir = std::fs::canonicalize(rdl_dir)
+            .map_err(|error| format!("failed to resolve `{}`: {error}", rdl_dir.display()))?;
+        let physical_winmd = std::fs::canonicalize(winmd)
+            .map_err(|error| format!("failed to resolve `{}`: {error}", winmd.display()))?;
+        reject_output_overlap(
+            &physical_rdl_dir,
+            &physical_output_rdl,
+            output_rdl,
+            "--output-rdl",
+        )?;
+        reject_output_overlap(
+            &physical_rdl_dir,
+            &physical_output_winmd,
+            output_winmd,
+            "--output-winmd",
+        )?;
+        reject_output_alias(
+            &physical_winmd,
+            &physical_output_rdl,
+            output_rdl,
+            "--output-rdl",
+        )?;
+        reject_output_alias(
+            &physical_winmd,
+            &physical_output_winmd,
+            output_winmd,
+            "--output-winmd",
+        )?;
         inputs.push(ArchInput {
             rdl_dir: rdl_dir.clone(),
             winmd: winmd.clone(),
@@ -238,22 +272,93 @@ fn execute(options: &Options) -> Result<(), String> {
     Ok(())
 }
 
-fn reject_output_alias(input: &Path, output: &Path, option: &str) -> Result<(), String> {
-    if input == output {
+fn resolve_physical_path(path: &Path) -> Result<PathBuf, String> {
+    let mut existing = path;
+    let mut suffix = Vec::<OsString>::new();
+    while !existing.exists() {
+        let name = existing.file_name().ok_or_else(|| {
+            format!(
+                "could not find an existing ancestor for `{}`",
+                path.display()
+            )
+        })?;
+        suffix.push(name.to_os_string());
+        existing = existing.parent().ok_or_else(|| {
+            format!(
+                "could not find an existing ancestor for `{}`",
+                path.display()
+            )
+        })?;
+    }
+
+    let mut resolved = std::fs::canonicalize(existing)
+        .map_err(|error| format!("failed to resolve `{}`: {error}", existing.display()))?;
+    for component in suffix.iter().rev() {
+        resolved.push(component);
+    }
+    Ok(resolved)
+}
+
+fn component_eq(left: &OsStr, right: &OsStr) -> bool {
+    if cfg!(windows) {
+        left.to_string_lossy()
+            .eq_ignore_ascii_case(&right.to_string_lossy())
+    } else {
+        left == right
+    }
+}
+
+fn path_eq(left: &Path, right: &Path) -> bool {
+    let mut left = left.components();
+    let mut right = right.components();
+    loop {
+        match (left.next(), right.next()) {
+            (Some(left), Some(right)) if component_eq(left.as_os_str(), right.as_os_str()) => {}
+            (None, None) => return true,
+            _ => return false,
+        }
+    }
+}
+
+fn path_is_within(path: &Path, directory: &Path) -> bool {
+    let mut path = path.components();
+    for expected in directory.components() {
+        let Some(actual) = path.next() else {
+            return false;
+        };
+        if !component_eq(actual.as_os_str(), expected.as_os_str()) {
+            return false;
+        }
+    }
+    true
+}
+
+fn reject_output_alias(
+    input: &Path,
+    physical_output: &Path,
+    display_output: &Path,
+    option: &str,
+) -> Result<(), String> {
+    if path_eq(input, physical_output) {
         Err(format!(
             "`{option} {}` must be separate from all cached inputs",
-            output.display()
+            display_output.display()
         ))
     } else {
         Ok(())
     }
 }
 
-fn reject_output_overlap(input_dir: &Path, output: &Path, option: &str) -> Result<(), String> {
-    if output.starts_with(input_dir) {
+fn reject_output_overlap(
+    input_dir: &Path,
+    physical_output: &Path,
+    display_output: &Path,
+    option: &str,
+) -> Result<(), String> {
+    if path_is_within(physical_output, input_dir) {
         Err(format!(
             "`{option} {}` must not be inside cached input directory `{}`",
-            output.display(),
+            display_output.display(),
             input_dir.display()
         ))
     } else {
@@ -275,7 +380,8 @@ pub fn help_text() -> &'static str {
 
 Each architecture must provide a matching generated RDL directory and compiled WinMD.
 At least two unique architectures, including x64, are required. Cached inputs are read-only;
-both output paths must be new. The command only merges and compiles existing artifacts."
+both output paths must be new and the WinMD must not be nested in the RDL output directory.
+The command only merges and compiles existing artifacts."
 }
 
 #[cfg(test)]
@@ -352,6 +458,83 @@ mod tests {
             .unwrap_err()
             .contains("at least two")
         );
+    }
+
+    #[test]
+    fn rejects_nested_output_paths() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-merge-nested-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        std::fs::create_dir_all(&root).unwrap();
+
+        let options = Options {
+            output_rdl: Some(root.join("merged")),
+            output_winmd: Some(root.join("merged").join("Windows.Win32.winmd")),
+            ..Default::default()
+        };
+        let error = execute(&options).unwrap_err();
+        assert!(error.contains("must not be inside"), "{error}");
+        assert!(error.contains("`--output-rdl"), "{error}");
+        assert!(!root.join("merged").exists());
+        std::fs::remove_dir_all(root).ok();
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn rejects_junction_alias_inside_cached_input_without_writing() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-merge-junction-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let x64_rdl = root.join("cache").join("x64-rdl");
+        let x86_rdl = root.join("cache").join("x86-rdl");
+        std::fs::create_dir_all(&x64_rdl).unwrap();
+        std::fs::create_dir_all(&x86_rdl).unwrap();
+        let marker = x64_rdl.join("marker.txt");
+        std::fs::write(&marker, "unchanged").unwrap();
+        let x64_winmd = root.join("x64.winmd");
+        let x86_winmd = root.join("x86.winmd");
+        std::fs::write(&x64_winmd, "not reached").unwrap();
+        std::fs::write(&x86_winmd, "not reached").unwrap();
+
+        let alias = root.join("cache-alias");
+        let status = std::process::Command::new("cmd")
+            .args(["/c", "mklink", "/J"])
+            .arg(&alias)
+            .arg(&x64_rdl)
+            .status()
+            .unwrap();
+        assert!(status.success());
+
+        let output_rdl = alias.join("fresh-output");
+        let output_winmd = root.join("merged.winmd");
+        let error = execute(&Options {
+            inputs: vec![
+                Input {
+                    arch: "x64".to_string(),
+                    rdl_dir: Some(x64_rdl.clone()),
+                    winmd: Some(x64_winmd),
+                },
+                Input {
+                    arch: "x86".to_string(),
+                    rdl_dir: Some(x86_rdl),
+                    winmd: Some(x86_winmd),
+                },
+            ],
+            output_rdl: Some(output_rdl.clone()),
+            output_winmd: Some(output_winmd.clone()),
+            ..Default::default()
+        })
+        .unwrap_err();
+
+        assert!(error.contains("cached input directory"), "{error}");
+        assert_eq!(std::fs::read_to_string(marker).unwrap(), "unchanged");
+        assert!(!output_rdl.exists());
+        assert!(!output_winmd.exists());
+        std::fs::remove_dir_all(root).ok();
     }
 
     #[test]
