@@ -88,6 +88,43 @@ internal static class SelfTests
             Check(Census.Fingerprint(Fixture().Inputs) == Census.Fingerprint(Fixture().Inputs.AsEnumerable().Reverse()), "stable fingerprint ordering");
             var changed = Fixture(); changed.Inputs[0] = changed.Inputs[0] with { Sha256 = "changed" };
             Check(Census.Fingerprint(changed.Inputs) != Census.Fingerprint(Fixture().Inputs), "changed source fingerprint");
+            var shim = Path.Combine(directory, @"generation\WinSDK\inc");
+            var prepared = Path.Combine(directory, "prepared");
+            var compiler = Path.Combine(directory, "compiler");
+            Directory.CreateDirectory(shim);
+            Directory.CreateDirectory(prepared);
+            Directory.CreateDirectory(compiler);
+            var providerPartition = Path.Combine(directory, @"generation\WinSDK\Partitions\Fixture");
+            Directory.CreateDirectory(providerPartition);
+            File.WriteAllText(Path.Combine(providerPartition, "main.cpp"), "#include <header.h>\n");
+            var preparedHeader = Path.Combine(prepared, "header.h");
+            var compilerHeader = Path.Combine(compiler, "support.h");
+            File.WriteAllText(preparedHeader, "typedef int PREPARED;\n");
+            File.WriteAllText(compilerHeader, "typedef int SUPPORT;\n");
+            var providers = new ProviderManifest(3, directory, "control", "Fixture", [shim, prepared, compiler],
+                [new("prepared-test", prepared, "prepared-midl"), new("compiler-test", compiler, "compiler-support")],
+                [fact], [FileFact.Capture(preparedHeader), FileFact.Capture(compilerHeader)], Vocabulary.Architectures);
+            SourceProviders.Validate(providers, directory);
+            checks++;
+            var preparedLedger = Fixture();
+            preparedLedger.Providers = providers;
+            Check(Census.IncludeDirectories(preparedLedger).SequenceEqual(providers.IncludeDirectories),
+                "prepared include precedence replaces raw SDK fallback");
+            Reject(() => SourceProviders.Validate(providers with { Repository = Path.Combine(directory, "other") }, directory),
+                "cross-worktree provider adoption");
+            Reject(() => SourceProviders.Validate(providers with { Variant = "unverified" }, directory), "unknown provider variant");
+            Reject(() => SourceProviders.Validate(providers with { Partition = "Missing" }, directory), "unprepared partition");
+            Reject(() => SourceProviders.Validate(providers with { ClosureArchitectures = ["x64"] }, directory), "incomplete architecture provider closure");
+            Reject(() => SourceProviders.Validate(providers with { ClosureArchitectures = null }, directory), "missing architecture preparation provenance");
+            Reject(() => SourceProviders.Validate(providers with { PreparationInputs = [] }, directory), "missing preparation provenance");
+            Reject(() => SourceProviders.Validate(providers with { PreparedFiles = [FileFact.Capture(preparedHeader)] }, directory),
+                "omitted compiler support identity");
+            Reject(() => SourceProviders.Validate(providers with { IncludeDirectories = [prepared, shim] }, directory), "SAL shadowed by SDK provider");
+            Reject(() => SourceProviders.Validate(providers with { IncludeDirectories = [shim, directory] }, directory), "unregistered include root");
+            Reject(() => SourceProviders.Validate(providers with { Roots = [providers.Roots[0], providers.Roots[0]] }, directory),
+                "duplicate prepared provider");
+            File.AppendAllText(preparedHeader, "// source drift\n");
+            Reject(() => SourceProviders.Validate(providers, directory), "modified prepared source");
             string stateDirectory = Path.Combine(directory, "state");
             using (var store = new Store(stateDirectory))
             {
@@ -122,6 +159,40 @@ internal static class SelfTests
                 ExplainedPaths = ["/value"],
                 Rules = ["unapproved"]
             }), "invented policy acceptance");
+            var approvedPins = pins with { PolicyRules = ["sdk-guid-system-guid/v1"] };
+            foreach (var property in new[] { "nativeWidth", "count", "closer" })
+            {
+                var before = JsonSerializer.SerializeToElement(new Dictionary<string, string> { [property] = "original" });
+                var after = JsonSerializer.SerializeToElement(new Dictionary<string, string> { [property] = "wrong" });
+                Reject(() => Dispositions.VerifyContract(approvedPins, contract with
+                {
+                    Expected = before,
+                    Actual = after,
+                    RawDifferencePaths = ["/" + property],
+                    ExplainedPaths = ["/" + property],
+                    Rules = ["sdk-guid-system-guid/v1"]
+                }), "registered but inapplicable rule cannot explain " + property);
+            }
+            Reject(() => Dispositions.VerifyContract(approvedPins, contract with { Rules = ["sdk-guid-system-guid/v1"] }),
+                "empty delta cannot invent a policy application");
+            var dispositionPath = Path.Combine(directory, "disposition.json");
+            Data.Write(dispositionPath, disposition);
+            var tampered = Fixture();
+            tampered.Headers[0].State = "equivalent";
+            tampered.Headers[0].RemainingFamilies = [];
+            tampered.Headers[0].LastVerifiedFingerprint = "current";
+            tampered.Headers[0].Disposition = FileFact.Capture(dispositionPath);
+            Data.Write(dispositionPath, disposition with { Verdict = "already-native" });
+            try
+            {
+                Store.Validate(tampered, true);
+                throw new InvalidOperationException("Tampered disposition was accepted.");
+            }
+            catch (InvalidDataException error)
+            {
+                Check(error.Message.StartsWith("Missing or changed evidence/input:", StringComparison.Ordinal) &&
+                    error.Message.Contains(dispositionPath, StringComparison.Ordinal), "valid-JSON disposition tampering fails its pinned hash before acceptance");
+            }
             Reject(() => Dispositions.VerifyContract(pins, contract with { Evidence = [] }), "missing contract evidence");
             Check(Dispositions.Differences(JsonSerializer.SerializeToElement(new[] { 1, 2 }),
                 JsonSerializer.SerializeToElement(new[] { 1 })).SequenceEqual(["/1"]), "omitted array member raw delta");

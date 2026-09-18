@@ -186,7 +186,8 @@ internal static class NativeInventory
         Directory.CreateDirectory(directory);
         var arguments = Arguments(ledger, architecture);
         var headerPaths = ledger.Headers.ToDictionary(h => Census.Key(h.Path), h => h.Id);
-        var resourcePaths = ledger.Inputs.Where(i => i.Role == "compiler-resource").Select(i => Census.Key(i.Path)).ToHashSet();
+        var resourcePaths = ledger.Inputs.Where(i => i.Role is "compiler-resource" or "compiler-support")
+            .Select(i => Census.Key(i.Path)).ToHashSet();
         var symbolsFile = Path.Combine(directory, "symbols.jsonl");
         var manifestFile = Path.Combine(directory, "capture.json");
         var diagnostics = new List<object>();

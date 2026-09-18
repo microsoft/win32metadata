@@ -101,9 +101,8 @@ internal static class Dispositions
             "Declared raw diff omits or invents actual expected/actual contract differences.");
         Data.Require(obligation.Rules.All(pins.PolicyRules.Contains), "Unrecorded/unapproved comparison rule.");
         Data.Require(obligation.ExplainedPaths.All(obligation.RawDifferencePaths.Contains), "Explained path is absent from raw diff.");
-        Data.Require(obligation.RawDifferencePaths.Length == 0 ||
-            (obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Order().SequenceEqual(obligation.ExplainedPaths.Order())),
-            "Unexplained raw difference.");
+        Data.Require(differences.Length == 0 && obligation.Rules.Length == 0 && obligation.ExplainedPaths.Length == 0,
+            "Nonzero-delta acceptance requires a verified rule-proof adapter; registered rule names and caller-supplied paths are not proof.");
         if (obligation.Verdict == "expected-improvement")
             Data.Require(obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Length > 0, "Improvement has no bounded rule/delta.");
         foreach (var fact in obligation.Evidence) fact.Verify();

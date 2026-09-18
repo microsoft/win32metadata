@@ -78,7 +78,7 @@ internal sealed class Store : IDisposable
             foreach (var include in partition.Includes.Where(i => i.Header != null))
                 Data.Require(headers.ContainsKey(include.Header!), $"Missing header: {include.Header}");
             foreach (var include in partition.Includes.Where(i => i.CompilerSource != null))
-                Data.Require(ledger.Inputs.Any(i => i.Role == "compiler-resource" && Census.Key(i.Path) == Census.Key(include.CompilerSource!)),
+                Data.Require(ledger.Inputs.Any(i => i.Role is "compiler-resource" or "compiler-support" && Census.Key(i.Path) == Census.Key(include.CompilerSource!)),
                     $"Unrecorded external compiler header: {include.CompilerSource}");
             if (partition.State == "blocked")
                 Data.Require(!string.IsNullOrWhiteSpace(partition.Blocker) && !string.IsNullOrWhiteSpace(partition.BlockerOwner) &&
@@ -122,7 +122,11 @@ internal sealed class Store : IDisposable
             {
                 Data.Require(header.LastVerifiedFingerprint == ledger.Fingerprint && header.Disposition != null &&
                     header.RemainingFamilies.Length == 0, $"Unproven terminal header: {header.Id}");
-                if (evidence) Dispositions.Verify(ledger, header, Data.Read<Disposition>(header.Disposition.Path));
+                if (evidence)
+                {
+                    header.Disposition.Verify();
+                    Dispositions.Verify(ledger, header, Data.Read<Disposition>(header.Disposition.Path));
+                }
             }
         }
         Data.Require(ledger.Runlog.Count == ledger.Sequence &&
@@ -134,6 +138,8 @@ internal sealed class Store : IDisposable
             ledger.Tool!.Verify();
             ledger.Libclang!.Verify();
             ledger.Reference!.Verify();
+            ledger.ProviderManifest?.Verify();
+            if (ledger.Providers != null) SourceProviders.Validate(ledger.Providers, ledger.Repository);
         }
     }
 
@@ -162,8 +168,8 @@ internal sealed class Store : IDisposable
             $"resolved distinct direct headers: {ledger.Partitions.SelectMany(p => p.Includes).Select(i => i.Header).Where(h => h != null).Distinct().Count()}; " +
             $"unresolved direct include occurrences: {ledger.Partitions.SelectMany(p => p.Includes).Count(i => i.Header == null && i.CompilerSource == null)}.\n");
         text.AppendLine($"Discovered symbol-context rows: {ledger.Partitions.Sum(p => p.Captures.Values.Sum(c => c.SymbolCount))}; " +
-            $"pending semantic obligations in those rows: {ledger.Partitions.Sum(p => p.Captures.Values.Sum(c => c.ObligationCount))}. " +
-            "These are architecture/TU occurrences, not deduplicated SDK symbol coverage.\n");
+            $"pending family-screening slots in those rows: {ledger.Partitions.Sum(p => p.Captures.Values.Sum(c => c.ObligationCount))}. " +
+            "These are architecture/TU occurrences and generic applicability checks, not deduplicated public APIs or reconciled semantic obligations.\n");
         text.AppendLine($"Terminal headers: {ledger.Headers.Count(h => Vocabulary.Terminal.Contains(h.State))}; " +
             $"undiscovered partition/architecture contexts: {ledger.Partitions.Sum(p => 3 - p.Captures.Count)}.\n");
         text.AppendLine($"Selected source records: {ledger.Headers.Count(h => h.Selection != "catalog-only")}; " +

@@ -7,6 +7,7 @@ param(
     [string]$EvidenceDirectory,
     [string]$ToolPath,
     [string]$ResourceDirectory,
+    [string]$Providers,
     [ValidateRange(1, 16)][int]$Limit = 1,
     [string]$Partition,
     [string]$Reason,
@@ -28,11 +29,18 @@ switch ($Command) {
         $arguments += @('--root', $root, '--evidence', [IO.Path]::GetFullPath($EvidenceDirectory),
             '--tool', [IO.Path]::GetFullPath($ToolPath), '--resource', [IO.Path]::GetFullPath($ResourceDirectory))
     }
-    'discover' { $arguments += @('--limit', "$Limit") }
+    'discover' {
+        $arguments += @('--limit', "$Limit")
+        if ($Partition) { $arguments += @('--partition', $Partition) }
+    }
     'refresh' { $arguments += @('--evidence', $EvidenceDirectory) }
     'retry' { $arguments += @('--partition', $Partition, '--reason', $Reason) }
     'accept' { $arguments += @('--disposition', $Disposition) }
     'export' { $arguments += @('--output', $OutputDirectory) }
+}
+if ($Providers) {
+    if ($Command -notin @('bootstrap','refresh')) { throw 'Providers is supported only for bootstrap or refresh.' }
+    $arguments += @('--providers', [IO.Path]::GetFullPath($Providers))
 }
 & dotnet @arguments
 if ($LASTEXITCODE -ne 0) { throw "Annotation rollout $Command failed ($LASTEXITCODE)." }

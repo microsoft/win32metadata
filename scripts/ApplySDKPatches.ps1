@@ -32,10 +32,15 @@
 Param(
     [Parameter(Mandatory=$true)]
     [ValidateSet("pre-midl", "post-midl")]
-    [string]$Phase
+    [string]$Phase,
+
+    [string]$HeaderRoot
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
+if ($HeaderRoot) {
+    $recompiledIdlHeadersDir = [System.IO.Path]::GetFullPath($HeaderRoot)
+}
 
 $patchDir = Join-Path $windowsWin32ProjectRoot "patches\$Phase"
 $patchTarget = [System.IO.Path]::GetRelativePath($rootDir, $recompiledIdlHeadersDir).Replace("\", "/")
