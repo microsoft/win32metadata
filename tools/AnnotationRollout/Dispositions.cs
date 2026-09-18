@@ -52,17 +52,7 @@ internal static class Dispositions
         foreach (var obligation in result.Obligations)
         {
             Data.Require(actual.Add(Data.Identity(obligation.Symbol, obligation.Family)), "Duplicate obligation disposition.");
-            Data.Require(Vocabulary.Terminal.Contains(obligation.Verdict) && obligation.Evidence.Length > 0, "Missing obligation verdict/evidence.");
-            Data.Require(obligation.Expected.ValueKind is not (JsonValueKind.Null or JsonValueKind.Undefined) &&
-                obligation.Actual.ValueKind is not (JsonValueKind.Null or JsonValueKind.Undefined), "Missing expected/actual contract.");
-            Data.Require(obligation.Rules.All(r => ledger.Pins!.PolicyRules.Contains(r)), "Unrecorded/unapproved comparison rule.");
-            Data.Require(obligation.ExplainedPaths.All(obligation.RawDifferencePaths.Contains), "Explained path is absent from raw diff.");
-            Data.Require(obligation.RawDifferencePaths.Length == 0 ||
-                (obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Order().SequenceEqual(obligation.ExplainedPaths.Order())),
-                "Unexplained raw difference.");
-            if (obligation.Verdict == "expected-improvement")
-                Data.Require(obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Length > 0, "Improvement has no bounded rule/delta.");
-            foreach (var fact in obligation.Evidence) fact.Verify();
+            VerifyContract(ledger.Pins!, obligation);
         }
         Data.Require(actual.SetEquals(expected), "Missing or extra symbol/family dispositions.");
         var gateKeys = new HashSet<string>();
@@ -99,5 +89,49 @@ internal static class Dispositions
             Data.Require(result.Approval != null, "SDK exclusion requires explicit retained approval.");
             result.Approval.Verify();
         }
+    }
+
+    internal static void VerifyContract(Pins pins, ObligationResult obligation)
+    {
+        Data.Require(Vocabulary.Terminal.Contains(obligation.Verdict) && obligation.Evidence.Length > 0, "Missing obligation verdict/evidence.");
+        Data.Require(obligation.Expected.ValueKind is not (JsonValueKind.Null or JsonValueKind.Undefined) &&
+            obligation.Actual.ValueKind is not (JsonValueKind.Null or JsonValueKind.Undefined), "Missing expected/actual contract.");
+        var differences = Differences(obligation.Expected, obligation.Actual).Order(StringComparer.Ordinal).ToArray();
+        Data.Require(differences.SequenceEqual(obligation.RawDifferencePaths.Order(StringComparer.Ordinal)),
+            "Declared raw diff omits or invents actual expected/actual contract differences.");
+        Data.Require(obligation.Rules.All(pins.PolicyRules.Contains), "Unrecorded/unapproved comparison rule.");
+        Data.Require(obligation.ExplainedPaths.All(obligation.RawDifferencePaths.Contains), "Explained path is absent from raw diff.");
+        Data.Require(obligation.RawDifferencePaths.Length == 0 ||
+            (obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Order().SequenceEqual(obligation.ExplainedPaths.Order())),
+            "Unexplained raw difference.");
+        if (obligation.Verdict == "expected-improvement")
+            Data.Require(obligation.Rules.Length > 0 && obligation.RawDifferencePaths.Length > 0, "Improvement has no bounded rule/delta.");
+        foreach (var fact in obligation.Evidence) fact.Verify();
+    }
+
+    internal static IEnumerable<string> Differences(JsonElement expected, JsonElement actual, string path = "")
+    {
+        if (JsonElement.DeepEquals(expected, actual)) yield break;
+        if (expected.ValueKind == JsonValueKind.Object && actual.ValueKind == JsonValueKind.Object)
+        {
+            var left = expected.EnumerateObject().ToDictionary(p => p.Name, p => p.Value, StringComparer.Ordinal);
+            var right = actual.EnumerateObject().ToDictionary(p => p.Name, p => p.Value, StringComparer.Ordinal);
+            foreach (var name in left.Keys.Union(right.Keys).Order(StringComparer.Ordinal))
+            {
+                var child = path + "/" + name.Replace("~", "~0", StringComparison.Ordinal).Replace("/", "~1", StringComparison.Ordinal);
+                if (!left.TryGetValue(name, out var a) || !right.TryGetValue(name, out var b)) yield return child;
+                else foreach (var difference in Differences(a, b, child)) yield return difference;
+            }
+        }
+        else if (expected.ValueKind == JsonValueKind.Array && actual.ValueKind == JsonValueKind.Array)
+        {
+            for (int i = 0; i < Math.Max(expected.GetArrayLength(), actual.GetArrayLength()); i++)
+            {
+                var child = path + "/" + i;
+                if (i >= expected.GetArrayLength() || i >= actual.GetArrayLength()) yield return child;
+                else foreach (var difference in Differences(expected[i], actual[i], child)) yield return difference;
+            }
+        }
+        else yield return path;
     }
 }

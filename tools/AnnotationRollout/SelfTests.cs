@@ -108,6 +108,25 @@ internal static class SelfTests
             var disposition = new Disposition(1, "sdk\\header.h", "current", "equivalent", [], [], [], null);
             Reject(() => Dispositions.Verify(Fixture(), Fixture().Headers[0], disposition), "empty/partial native captures");
             Reject(() => Dispositions.Verify(Fixture(), Fixture().Headers[0], disposition with { Fingerprint = "stale" }), "stale disposition");
+            var expected = JsonSerializer.SerializeToElement(new { value = 1 });
+            var actual = JsonSerializer.SerializeToElement(new { value = 2 });
+            var contract = new ObligationResult("symbol", "native-identity-abi", "equivalent", expected, expected, [], [], [], [fact]);
+            Dispositions.VerifyContract(pins, contract);
+            checks++;
+            Reject(() => Dispositions.VerifyContract(pins, contract with { Actual = actual }), "hidden actual raw delta");
+            Reject(() => Dispositions.VerifyContract(pins, contract with { Actual = actual, RawDifferencePaths = ["/value"] }), "unexplained delta");
+            Reject(() => Dispositions.VerifyContract(pins, contract with
+            {
+                Actual = actual,
+                RawDifferencePaths = ["/value"],
+                ExplainedPaths = ["/value"],
+                Rules = ["unapproved"]
+            }), "invented policy acceptance");
+            Reject(() => Dispositions.VerifyContract(pins, contract with { Evidence = [] }), "missing contract evidence");
+            Check(Dispositions.Differences(JsonSerializer.SerializeToElement(new[] { 1, 2 }),
+                JsonSerializer.SerializeToElement(new[] { 1 })).SequenceEqual(["/1"]), "omitted array member raw delta");
+            Check(Dispositions.Differences(JsonSerializer.SerializeToElement(new Dictionary<string, int> { ["a/b"] = 1 }),
+                JsonSerializer.SerializeToElement(new { })).SequenceEqual(["/a~1b"]), "escaped JSON pointer for missing contract");
             var staleEvidence = FileFact.Capture(file);
             File.AppendAllText(file, "// mutation\n");
             Reject(staleEvidence.Verify, "mutated evidence");
