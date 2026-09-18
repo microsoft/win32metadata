@@ -1,0 +1,79 @@
+[
+  {
+    "sequence": 1,
+    "time": "2026-09-18T21:18:24.3083753+00:00",
+    "action": "bootstrap",
+    "item": "canonical-sdk",
+    "detail": "Fresh census, no inherited acceptance statuses."
+  },
+  {
+    "sequence": 2,
+    "time": "2026-09-18T21:18:55.8640381+00:00",
+    "action": "claim",
+    "item": "Mf",
+    "detail": "Bounded sequential multiarchitecture discovery: C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\bootstrap-001\\discovery\\000002-Mf"
+  },
+  {
+    "sequence": 3,
+    "time": "2026-09-18T21:19:03.0341287+00:00",
+    "action": "checkpoint",
+    "item": "Mf",
+    "detail": "blocked; native discovery never closes semantic obligations; retained evidence=C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\bootstrap-001\\discovery\\000002-Mf"
+  },
+  {
+    "sequence": 4,
+    "time": "2026-09-18T21:28:16.4466965+00:00",
+    "action": "refresh",
+    "item": "canonical-sdk",
+    "detail": "New census; unchanged native dependency captures reused; semantic dispositions require replay, never recompilation for policy-only edits."
+  },
+  {
+    "sequence": 5,
+    "time": "2026-09-18T21:28:26.1913226+00:00",
+    "action": "claim",
+    "item": "Mf",
+    "detail": "Bounded sequential multiarchitecture discovery: C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\bootstrap-003\\discovery\\000005-Mf"
+  },
+  {
+    "sequence": 6,
+    "time": "2026-09-18T21:28:34.1242939+00:00",
+    "action": "capture",
+    "item": "Mf",
+    "detail": "x64: 157181 symbol-context rows; 2029978 pending obligations; hasErrors=True."
+  },
+  {
+    "sequence": 7,
+    "time": "2026-09-18T21:28:40.5383034+00:00",
+    "action": "capture",
+    "item": "Mf",
+    "detail": "x86: 156633 symbol-context rows; 2023075 pending obligations; hasErrors=True."
+  },
+  {
+    "sequence": 8,
+    "time": "2026-09-18T21:28:47.2330762+00:00",
+    "action": "capture",
+    "item": "Mf",
+    "detail": "arm64: 156679 symbol-context rows; 2023621 pending obligations; hasErrors=True."
+  },
+  {
+    "sequence": 9,
+    "time": "2026-09-18T21:28:47.6894307+00:00",
+    "action": "checkpoint",
+    "item": "Mf",
+    "detail": "blocked; native discovery never closes semantic obligations; retained evidence=C:\\Users\\jevansa\\.copilot\\session-state\\cd0a7ef8-2dd7-4b88-882e-dea4cce81ddb\\files\\rollout\\bootstrap-003\\discovery\\000005-Mf"
+  },
+  {
+    "sequence": 10,
+    "time": "2026-09-18T21:32:11.9673916+00:00",
+    "action": "refresh",
+    "item": "canonical-sdk",
+    "detail": "New census; unchanged native dependency captures reused; semantic dispositions require replay, never recompilation for policy-only edits."
+  },
+  {
+    "sequence": 11,
+    "time": "2026-09-18T21:36:09.9319474+00:00",
+    "action": "refresh",
+    "item": "canonical-sdk",
+    "detail": "New census; unchanged native dependency captures reused; semantic dispositions require replay, never recompilation for policy-only edits."
+  }
+]
