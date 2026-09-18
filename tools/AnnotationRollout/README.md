@@ -43,6 +43,51 @@ dotnet run --project tools\AnnotationRollout -c Release -- self-test
 .\scripts\Invoke-AnnotationRollout.ps1 export -StateDirectory <state> -OutputDirectory <ledger-export>
 ```
 
+### Prepared partition sources
+
+Use the partition-first materializer rather than compiling every SDK IDL for
+each batch:
+
+```powershell
+.\scripts\Prepare-AnnotationSources.ps1 -Partition Foundation `
+    -ResourceDirectory <libclang-22.1.8-resource-include-directory>
+
+# The materializer prints separate control.json and candidate.json paths.
+.\scripts\Invoke-AnnotationRollout.ps1 bootstrap `
+    -StateDirectory <new-state-directory> -EvidenceDirectory <new-evidence-directory> `
+    -ToolPath <pinned-win32metadata-tools.exe> -ResourceDirectory <resource-include-directory> `
+    -Providers <printed-control-manifest>
+.\scripts\Invoke-AnnotationRollout.ps1 discover -StateDirectory <state> -Partition Foundation -Limit 1
+```
+
+Source-provider schema 3 binds a manifest to its worktree, partition, variant
+and x64/x86/ARM64 active include union. It pins SDK, D3D, additional and
+compatibility sources, the MIDL/IDL-to-SAL recipe, compiler support, prepared
+files and exact include precedence. The SAL shim precedes patch/MIDL/base
+overlays; MSVC support headers are compiler inputs, not conversion obligations.
+Raw SDK fallback does not silently bypass the declared provider order.
+
+The source cache is under `generation\WinSDK\obj\annotation-sources` by default.
+It separately caches production source copying/pre-MIDL overrides, IDL-to-SAL
+conversion, each consumed MIDL header, partition closure and consumed post-MIDL
+patches. MIDL uses the production AMD64 generation recipe; the resulting
+headers' include closure is then parsed under all three target architectures.
+Alternate preprocessor conditions remain open. Each stage checks input/output
+hashes and file census; an incomplete or altered cache is retained and rejected.
+Changing comparison policy or documentation does not compile headers.
+Candidate patches introducing an unprepared MIDL dependency fail explicitly.
+
+The original full `RecompileIdlFilesForScraping.ps1` defaults are unchanged.
+Its optional `-OutputDirectory`, `-SkipMidl` and `-SkipPostMidlPatches` switches
+permit isolated source preparation. `WinSdkMidlConfig.ps1` is the shared
+production options/exclusion list, not a metadata sidecar.
+
+Each ledger currently binds one partition's prepared manifest. Select that
+partition explicitly: the global deterministic queue can name a different
+partition. Prepare/refresh another partition or bootstrap separate state rather
+than mixing captures from incompatible include roots. Cross-partition compatible
+provider composition and generated metadata caches remain integration work.
+
 The `ResourceDirectory` is the **include** directory, as in the immutable pilot.
 The controller supplies its parent as clang's `-resource-dir`. It uses the
 exact target triple, eight wrapper arguments, and include order; it does not
@@ -109,6 +154,11 @@ three approved projection rules from `scripts\ProjectionPolicy.psd1`. Their
 tested adapter currently covers imported Winapi method parameters only;
 registration is not evidence that COM, callback, field, or generic rollout
 obligations have been explained. The generic comparison adapter remains open.
+Until that adapter recomputes and binds each bounded rule application to the
+exact contracts and native evidence, controller acceptance rejects **all
+nonzero deltas**, including deltas labelled with a registered rule. Replay
+reports remain evidence, not blanket disposition permission. Verification also
+checks the retained disposition file hash before reading its contents.
 
 ## Remaining integration work
 
@@ -135,7 +185,7 @@ Residual gaps/additions/differences stay OPEN rather than being normalized away.
 Large evidence and checkpoints remain outside Git; checked-in compact ledgers
 are snapshots with hashes/references, not replacements for that evidence.
 
-## First real discovery checkpoint
+## Frozen raw-provider discovery checkpoint
 
 The bounded `Mf` smoke retained 157,181 x64, 156,633 x86 and 156,679 ARM64
 declaration-context rows, with 2,029,978 / 2,023,075 / 2,023,621 **pending**
@@ -151,20 +201,20 @@ arguments, included-file hashes, diagnostics and partial symbol inventories
 remain in the capture manifests. Neither issue is silently normalized or
 treated as a tooling defect without source-materialization triage.
 
-The next deterministic discovery item is Foundation. No further item was
-started by the bootstrap owner. The replacement integration owner should
-materialize the intended source providers before a broad sweep:
-
-```powershell
-# Existing repository pipeline; inspect dependencies first. This generates
-# an OBJ overlay, recompiles MIDL and applies pre-/post-MIDL patches.
-.\scripts\RecompileIdlFilesForScraping.ps1
-```
+The next deterministic discovery item was Foundation. No further item was
+started by the bootstrap owner; this frozen checkpoint remains evidence of the
+raw-provider limitation, not the replacement's current state.
 
 The bootstrap's raw selected-SDK control does **not** stand in for that
 post-MIDL candidate. The existing pipeline also restores selected historical
 compatibility/WinHv headers; those choices require explicit current-scope
-reconciliation, not inherited completeness. The native controller currently
-has no prepared-overlay CLI option. Adding provider selection/materialization,
-pinning implicit compiler support inputs, and then generating cached
-control/candidate metadata are remaining integration tasks.
+reconciliation, not inherited completeness.
+
+The replacement's prepared Foundation trial resolved 1,390 distinct direct
+headers in the global lexical census and regenerated only 13 consumed MIDL
+headers. Its native captures retained 80,733 x64, 80,202 x86 and 80,235 ARM64
+source-context rows, each with 130 included source records and no compiler or
+unknown-provider errors. These counts are not deduplicated public API coverage.
+No terminal header disposition or semantic equivalence follows from a successful
+parse. The all-architecture preparation subsequently reached the same 13-header
+union in two rounds, reusing those MIDL outputs rather than recompiling them.

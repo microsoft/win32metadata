@@ -87,11 +87,12 @@ internal static partial class Census
     internal static string Relative(string root, string path) => Path.GetRelativePath(root, path).Replace('/', '\\');
 
     internal static string[] IncludeDirectories(Ledger ledger) =>
+        ledger.Providers?.IncludeDirectories ??
         [Path.Combine(ledger.Repository, @"generation\WinSDK\inc"),
          Path.Combine(ledger.Repository, @"generation\WinSDK\AdditionalHeaders"),
          .. new[] { "shared", "um", "ucrt", "winrt" }.Select(p => Path.Combine(ledger.SdkRoot, p))];
 
-    internal static Ledger Bootstrap(string root, string evidence, string tool, string resource)
+    internal static Ledger Bootstrap(string root, string evidence, string tool, string resource, string? providersPath = null)
     {
         root = Path.GetFullPath(root);
         evidence = Path.GetFullPath(evidence);
@@ -129,6 +130,11 @@ internal static partial class Census
             Libclang = FileFact.Capture(libclang),
             Reference = FileFact.Capture(reference)
         };
+        if (providersPath != null)
+        {
+            ledger.Providers = SourceProviders.Read(providersPath, root);
+            ledger.ProviderManifest = FileFact.Capture(providersPath);
+        }
         Data.Require(ledger.Tool.Sha256 == pins.ToolSha256 && ledger.Libclang.Sha256 == pins.LibclangSha256 &&
             ledger.Reference.Sha256 == pins.ReferenceSha256, "Binary/compiler/reference hash pin mismatch.");
         Directory.CreateDirectory(evidence);
@@ -144,7 +150,9 @@ internal static partial class Census
             ("controller", Path.Combine(root, @"tools\AnnotationRollout"), "controller"),
             ("pins", Path.Combine(root, @"generation\WinSDK\rollout"), "configuration"),
             ("consumer", Path.Combine(root, @"tools\rust\src"), "consumer")
-        };
+        }.Concat(ledger.Providers?.Roots.Select(r => (r.Id, r.Path, r.Role)) ?? []).ToArray();
+        Data.Require(roots.Select(r => r.Id).Distinct(StringComparer.Ordinal).Count() == roots.Length,
+            "Prepared provider identity conflicts with a canonical catalog root.");
         var patches = Directory.EnumerateFiles(Path.Combine(root, @"generation\WinSDK\patches"), "*", SearchOption.AllDirectories)
             .ToLookup(Path.GetFileName, StringComparer.OrdinalIgnoreCase);
         foreach (var (id, path, role) in roots)
@@ -157,7 +165,8 @@ internal static partial class Census
                 if (relative.Split('\\').Any(p => p is "obj" or "bin")) continue;
                 var input = new InputFile(id + "\\" + relative, Path.GetFullPath(file), Data.Hash(file), role);
                 ledger.Inputs.Add(input);
-                if ((id is "sdk" or "recompiled" or "additional" or "inc" or "partition") &&
+                if ((id is "sdk" or "recompiled" or "additional" or "inc" or "partition" ||
+                     role is "prepared-sdk" or "prepared-midl" or "prepared-patch") &&
                     new[] { ".h", ".hpp", ".inl", ".idl" }.Contains(Path.GetExtension(file), StringComparer.OrdinalIgnoreCase))
                 {
                     var text = File.ReadAllText(file);
@@ -170,6 +179,12 @@ internal static partial class Census
                     });
                 }
             }
+        }
+        if (ledger.ProviderManifest != null)
+        {
+            ledger.Inputs.Add(new("providers\\manifest", ledger.ProviderManifest.Path, ledger.ProviderManifest.Sha256, "provider-manifest"));
+            foreach (var file in ledger.Providers!.PreparationInputs)
+                ledger.Inputs.Add(new("provider-input\\" + Data.Identity(file.Path), file.Path, file.Sha256, "provider-input"));
         }
         foreach (var path in new[] { projectPath, Path.Combine(root, @"tools\rust\Cargo.toml"),
             Path.Combine(root, @"tools\rust\Cargo.lock"), Path.Combine(root, @"scripts\RecompileIdlFilesForScraping.ps1") }
@@ -275,6 +290,17 @@ internal static partial class Census
                 .Where(p => !Relative(Path.Combine(ledger.Repository, path), p).Split('\\').Any(s => s is "obj" or "bin"))
                 .Select(Key).ToHashSet(StringComparer.Ordinal);
             changed |= !paths.SetEquals(ledger.Inputs.Where(i => i.Role == role).Select(i => Key(i.Path)));
+        }
+        if (ledger.Providers != null)
+        {
+            foreach (var provider in ledger.Providers.Roots)
+            {
+                var paths = Directory.Exists(provider.Path)
+                    ? Directory.GetFiles(provider.Path, "*", SearchOption.AllDirectories).Select(Key).ToHashSet(StringComparer.Ordinal)
+                    : [];
+                changed |= !paths.SetEquals(ledger.Inputs.Where(i => i.Id.StartsWith(provider.Id + "\\", StringComparison.Ordinal))
+                    .Select(i => Key(i.Path)));
+            }
         }
         if (changed)
         {

@@ -31,7 +31,8 @@ internal static class Program
             if (args[0] == "bootstrap")
             {
                 Data.Require(!store.Exists, "State already exists; never overwrite a prior run. Use a fresh state/evidence directory.");
-                var ledger = Census.Bootstrap(Required("root"), Required("evidence"), Required("tool"), Required("resource"));
+                var ledger = Census.Bootstrap(Required("root"), Required("evidence"), Required("tool"), Required("resource"),
+                    options.GetValueOrDefault("providers"));
                 store.Save(ledger, "bootstrap", "canonical-sdk", "Fresh census, no inherited acceptance statuses.");
                 Console.WriteLine($"Bootstrapped {ledger.Partitions.Count} partitions, {ledger.Headers.Count} provider/catalog records, " +
                     $"{ledger.Partitions.SelectMany(p => p.Includes).Select(i => i.Header).Where(h => h != null).Distinct().Count()} resolved direct headers. " +
@@ -43,7 +44,8 @@ internal static class Program
             {
                 case "refresh":
                     Data.Require(state.ActiveJob == null, "Cannot refresh while a job is in flight.");
-                    var fresh = Census.Bootstrap(state.Repository, Required("evidence"), state.Tool!.Path, state.ResourceDirectory);
+                    var fresh = Census.Bootstrap(state.Repository, Required("evidence"), state.Tool!.Path, state.ResourceDirectory,
+                        options.GetValueOrDefault("providers") ?? state.ProviderManifest?.Path);
                     Census.ReuseDiscovery(state, fresh);
                     fresh.Sequence = state.Sequence;
                     fresh.Runlog = state.Runlog;
@@ -97,11 +99,16 @@ internal static class Program
                     Store.Validate(state, true);
                     int limit = options.TryGetValue("limit", out var count) ? int.Parse(count) : 1;
                     Data.Require(limit is >= 1 and <= 16, "Discovery batches must be bounded to 1..16 partitions.");
+                    var requestedPartition = options.GetValueOrDefault("partition");
+                    Data.Require(requestedPartition == null || limit == 1, "Explicit partition discovery is a single bounded batch.");
                     bool batchBlocked = false;
                     for (int i = 0; i < limit; i++)
                     {
-                        var selected = Store.Select(state);
+                        var selected = requestedPartition == null ? Store.Select(state) : state.Partitions.Single(p => p.Id == requestedPartition);
                         if (selected == null) { Console.WriteLine("No ready discovery item. Review unresolved semantic/blocked work; rollout remains incomplete."); break; }
+                        Data.Require(selected.State is "pending" or "regressed", "Selected partition is not ready; use explicit retry for a recorded blocker.");
+                        Data.Require(state.Providers == null || state.Providers.Partition == selected.Id,
+                            "Partition has no matching prepared provider closure. Prepare its providers and refresh before discovery.");
                         Discover(store, state, selected);
                         batchBlocked |= selected.State == "blocked";
                     }
@@ -135,6 +142,7 @@ internal static class Program
                         state.Tool,
                         state.Libclang,
                         state.Reference,
+                        state.ProviderManifest,
                         state.NextItem,
                         state.ActiveJob,
                         state.DraftPr,
@@ -220,7 +228,7 @@ internal static class Program
                 Census.AssignOwners(ledger);
                 failed |= capture.HasErrors;
                 store.Save(ledger, "capture", partition.Id,
-                    $"{architecture}: {capture.SymbolCount} symbol-context rows; {capture.ObligationCount} pending obligations; hasErrors={capture.HasErrors}.");
+                    $"{architecture}: {capture.SymbolCount} source-context rows; {capture.ObligationCount} pending family-screening slots; hasErrors={capture.HasErrors}.");
             }
             partition.State = failed ? "blocked" : "validating";
             partition.Blocker = failed ? $"Native parse/source completeness failed. Retained diagnostics: {directory}" : null;

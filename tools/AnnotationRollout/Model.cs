@@ -108,6 +108,8 @@ internal sealed class Ledger
     public FileFact? Tool { get; set; }
     public FileFact? Libclang { get; set; }
     public FileFact? Reference { get; set; }
+    public FileFact? ProviderManifest { get; set; }
+    public ProviderManifest? Providers { get; set; }
     public Pins? Pins { get; set; }
     public List<InputFile> Inputs { get; set; } = [];
     public List<Partition> Partitions { get; set; } = [];
