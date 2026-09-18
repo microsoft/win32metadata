@@ -16,8 +16,6 @@ using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace WinmdUtilsProgram
 {
@@ -145,39 +143,6 @@ namespace WinmdUtilsProgram
 
             dumpCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, IConsole>(DumpWinmd);
 
-            var contractsCommand = new Command("contracts",
-                "Snapshot unprojected metadata as JSON: assembly/module identity, exact namespaces, type/member flags, layouts, " +
-                "typed signatures/constants, imports, return/parameter rows, marshaling and decoded custom attributes (duplicates retained). " +
-                "With no roots, read every declaration. Exact case-sensitive roots match ALL short names, namespace.symbol names, " +
-                "or namespace.Type.member names; nested types use '+'. Root types own their members/nested types; root members include " +
-                "only their declaring-type context and recursive local type dependencies, including attribute types and AssociatedEnum targets. " +
-                "Designations are root, owned, dependency, context. Missing roots are always listed. " +
-                "Raw blobs/tokens/MVID/RVAs are evidence, not semantic facts. Method bodies are not API contracts. " +
-                "Assembly-scoped self-references resolve locally, with original scopes retained in evidence; namespaces are unchanged. " +
-                "Unsupported external attribute enums, field RVA data, legacy security XML/resources/exports fail explicitly. " +
-                "Schema v1: source, assembly, module, selectionMode, roots[{query,matches}], missingRoots, declarations[type with fields/methods/properties/events]. " +
-                "Fields, virtual/interface methods (vtable order), and parameter rows retain metadata order; other methods, attributes, and types are sorted. " +
-                "Exit 0: snapshot written; 1: required roots missing (snapshot still written); 2: invalid/unsupported input.")
-            {
-                new Option<FileInfo>("--winmd", "The metadata PE image.") { IsRequired = true }.ExistingOnly(),
-                new Option<FileInfo>("--output", "Output JSON path.") { IsRequired = true },
-                new Option<string>("--root", "Exact short or qualified symbol. Repeat to request multiple roots.", ArgumentArity.OneOrMore),
-                new Option<bool>("--require-roots", "Return exit code 1 if any requested root is missing."),
-            };
-            contractsCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, string[], bool, IConsole>(Contracts);
-
-            var compareContractsCommand = new Command("compare-contracts",
-                "Compare two contracts JSON files exactly. Excludes only source and evidence properties (hash, tokens, raw signature/attribute blobs, MVID, RVAs). " +
-                "No namespace, import, attribute, or ownership normalization. Assembly identity and missing-root inventories are compared. " +
-                "Output: equal, firstMissingRoots, secondMissingRoots, differences[{path (JSON pointer),firstPresent,secondPresent,first,second}]. " +
-                "Exit 0: equal; 1: different; 2: invalid input. Equality alone does not establish header coverage or pilot equivalence.")
-            {
-                new Option<FileInfo>("--first", "First snapshot JSON.") { IsRequired = true }.ExistingOnly(),
-                new Option<FileInfo>("--second", "Second snapshot JSON.") { IsRequired = true }.ExistingOnly(),
-                new Option<FileInfo>("--output", "Output difference JSON path; otherwise stdout."),
-            };
-            compareContractsCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, IConsole>(CompareContracts);
-
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
@@ -189,8 +154,6 @@ namespace WinmdUtilsProgram
                 showSuggestedRemappings,
                 compareCommand,
                 dumpCommand,
-                contractsCommand,
-                compareContractsCommand,
                 showLibImports,
                 createLibRsp,
                 showNamespaceDependencies,
@@ -199,73 +162,6 @@ namespace WinmdUtilsProgram
             };
 
             return rootCommand.Invoke(args);
-        }
-
-        public static int Contracts(FileInfo winmd, FileInfo output, string[] root, bool requireRoots, IConsole console)
-        {
-            try
-            {
-                var snapshot = WinmdContractSnapshot.Read(winmd.FullName, root);
-                WriteContractJson(output.FullName, snapshot);
-                var missing = (JArray)snapshot["missingRoots"];
-                console.Out.WriteLine($"Wrote {((JArray)snapshot["declarations"]).Count} type contracts to {output.FullName}.");
-                if (missing.Count != 0)
-                {
-                    console.Error.WriteLine("Missing roots: " + string.Join(", ", missing.Values<string>()));
-                }
-
-                return requireRoots && missing.Count != 0 ? 1 : 0;
-            }
-            catch (Exception exception) when (exception is BadImageFormatException || exception is NotSupportedException ||
-                exception is IOException || exception is ArgumentException || exception is InvalidOperationException)
-            {
-                console.Error.WriteLine("Contract snapshot failed: " + exception.Message);
-                return 2;
-            }
-        }
-
-        public static int CompareContracts(FileInfo first, FileInfo second, FileInfo output, IConsole console)
-        {
-            try
-            {
-                var comparison = WinmdContractSnapshot.Compare(ReadContractJson(first.FullName), ReadContractJson(second.FullName));
-                if (output == null)
-                {
-                    console.Out.Write(comparison.ToString(Formatting.Indented) + Environment.NewLine);
-                }
-                else
-                {
-                    WriteContractJson(output.FullName, comparison);
-                }
-
-                return (bool)comparison["equal"] ? 0 : 1;
-            }
-            catch (Exception exception) when (exception is JsonException || exception is IOException || exception is ArgumentException)
-            {
-                console.Error.WriteLine("Contract comparison failed: " + exception.Message);
-                return 2;
-            }
-        }
-
-        private static JObject ReadContractJson(string path)
-        {
-            using var text = File.OpenText(path);
-            using var json = new JsonTextReader(text) { DateParseHandling = DateParseHandling.None, MaxDepth = null };
-            var result = JObject.Load(json, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
-            if (json.Read())
-            {
-                throw new InvalidDataException("Trailing content after contract snapshot.");
-            }
-
-            return result;
-        }
-
-        private static void WriteContractJson(string path, JToken value)
-        {
-            using var text = new StreamWriter(path, append: false, new UTF8Encoding(false));
-            using var json = new JsonTextWriter(text) { Formatting = Formatting.Indented };
-            value.WriteTo(json);
-            json.WriteWhitespace(Environment.NewLine);
         }
 
         private static bool TypeIsPointerToOneOfNames(HashSet<string> names, string type)

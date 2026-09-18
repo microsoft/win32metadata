@@ -1,4 +1,2 @@
 RecompiledIdlHeaders.zip filter=lfs diff=lfs merge=lfs -text
 Windows.Win32.winmd filter=lfs diff=lfs merge=lfs -text
-generation/WinSDK/patches/post-midl/powerbase.h.win32metadata.patch text eol=lf whitespace=-blank-at-eol
-generation/WinSDK/patches/post-midl/powrprof.h.win32metadata.patch text eol=lf whitespace=-blank-at-eol

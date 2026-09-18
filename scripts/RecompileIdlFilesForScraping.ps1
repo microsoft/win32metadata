@@ -1,18 +1,6 @@
-[CmdletBinding()]
-param(
-    [string]$OutputDirectory,
-    [switch]$SkipMidl,
-    [switch]$SkipPostMidlPatches
-)
-
 . "$PSScriptRoot\CommonUtils.ps1"
-. "$PSScriptRoot\WinSdkMidlConfig.ps1"
-Install-BuildTools
 
-if ($OutputDirectory) {
-    $recompiledIdlHeadersDir = [System.IO.Path]::GetFullPath($OutputDirectory)
-    $recompiledIdlHeadersScratchDir = "$recompiledIdlHeadersDir.midl"
-}
+Install-BuildTools
 
 $cppPkgPath = Get-WinSdkCppPkgPath
 $sdkBinDir = "$cppPkgPath\c\bin\$([System.IO.Path]::GetFileName($cppPkgPath) -replace "\d+$", "0")\x86"
@@ -57,13 +45,12 @@ Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalH
 Copy-Item "$windowsWin32ProjectRoot\AdditionalHeaders\*" "$recompiledIdlHeadersDir\um" -Recurse
 
 Write-Host "Applying SDK patches to IDL files (pre-MIDL)..."
-& $PSScriptRoot\ApplySDKPatches.ps1 -Phase pre-midl -HeaderRoot $recompiledIdlHeadersDir
+& $PSScriptRoot\ApplySDKPatches.ps1 -Phase pre-midl
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-if (!$SkipMidl) {
 Write-Host "Converting MIDL attributes to SAL annotations..."
 $idlFilesToRecompile = [System.Collections.ArrayList]@()
-$idlFilesToExclude = Get-WinSdkMidlExclusions
+$idlFilesToExclude = "cellularapi_oem", "certbcli", "dxgicommon", "dxgitype", "microsoft.diagnostics.appanalysis", "PortableDeviceConnectImports", "wincrypt" | ForEach-Object { "$_.idl" }
 Get-ChildItem "$recompiledIdlHeadersDir\um\*.idl", "$recompiledIdlHeadersDir\shared\*.idl" -Exclude $idlFilesToExclude | ForEach-Object {
     # Convert MIDL attributes to SAL annotations in all IDL files. Some IDL files are included in others like strmif.idl.
     & $PSScriptRoot\ConvertMidlAttributesToSalAnnotations.ps1 $_.FullName (Join-Path $recompiledIdlHeadersScratchDir $_.Name)
@@ -89,11 +76,7 @@ $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System
     Write-Verbose "MidlRsp: $midlRsp"
 
     # Write the params as an rsp so we can run later
-    . "$using:PSScriptRoot\WinSdkMidlConfig.ps1"
-    $midlArguments = Get-WinSdkMidlArguments -InputFile $inputFileName -OutputHeader $outputHeader `
-        -OutputDirectory $using:recompiledIdlHeadersScratchDir -ConvertedIdlDirectory $using:recompiledIdlHeadersScratchDir `
-        -HeaderRoot $using:recompiledIdlHeadersDir
-    Set-Content -Path $midlRsp (($midlArguments | ForEach-Object { '"' + $_ + '"' }) -join ' ')
+    Set-Content -Path $midlRsp "$inputFileName /out $($using:recompiledIdlHeadersScratchDir) /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /D_AMD64_ /D_WIN64 /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /amd64 /target NT100 /Zp8 /I$($using:recompiledIdlHeadersScratchDir) /I$($using:recompiledIdlHeadersDir)\um /I$($using:recompiledIdlHeadersDir)\shared /I$($using:recompiledIdlHeadersDir)\winrt /I""$($using:PSScriptRoot)\inc"""
 
     & $using:midl `@$midlRsp 3>&1 2>&1 > $outputLog
 
@@ -121,7 +104,6 @@ if ($errorsEncountered.Count -gt 0)
 {
     Write-Error "MIDL compile errors encountered. Scroll up to see which IDL files failed to compile."
     Exit 1
-}
 }
 
 # Restore headers which have been removed from the SDK but that we still include for compatibility.
@@ -206,9 +188,7 @@ foreach ($winHvHeader in $winHvHeadersToRestore) {
 }
 
 Write-Host "Applying SDK patches to header files (post-MIDL)..."
-if (!$SkipPostMidlPatches) {
-    & $PSScriptRoot\ApplySDKPatches.ps1 -Phase post-midl -HeaderRoot $recompiledIdlHeadersDir
-    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-}
+& $PSScriptRoot\ApplySDKPatches.ps1 -Phase post-midl
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 $ErrorActionPreference = "Stop"
