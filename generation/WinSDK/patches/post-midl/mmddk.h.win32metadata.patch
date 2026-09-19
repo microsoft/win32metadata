@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
+index 7893d8d2cd701ee14fa9300acef667544a692417..27826d669b550a99123b0affec9d659ae035a122 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
+@@ -13,6 +13,7 @@
+ #define _INC_MMDDK
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -165,7 +166,7 @@ typedef struct {
+ #define VADMAD_Device_ID    0X0444
+ 
+ /* PnP version of media device caps */
+-typedef struct {
++typedef struct _Windows_SupportedOS_WindowsXP_ {
+     DWORD	cbSize;
+     LPVOID	pCaps;
+ } MDEVICECAPSEX;
+@@ -269,7 +270,7 @@ typedef struct midiopenstrmid_tag {
+     UINT           uDeviceID;
+ } MIDIOPENSTRMID;
+ // MIDI input and output device open information structure
+-typedef struct midiopendesc_tag {
++typedef struct _Windows_SupportedOS_WindowsXP_ midiopendesc_tag {
+     HMIDI          hMidi;             // handle
+     DWORD_PTR      dwCallback;        // callback
+     DWORD_PTR      dwInstance;        // app's private instance information
