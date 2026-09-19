@@ -1,0 +1,376 @@
+diff --git a/um/verrsrc.h b/um/verrsrc.h
+index 85022af4d9..9b9444b136 100644
+--- a/um/verrsrc.h
++++ b/um/verrsrc.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /*****************************************************************************\
+ *                                                                             *
+@@ -84,6 +85,201 @@
+ #define VFT2_FONT_VECTOR        0x00000002L
+ #define VFT2_FONT_TRUETYPE      0x00000003L
+ 
++#if defined(WIN32METADATA) && !defined(RC_INVOKED) && !defined(_WIN32METADATA_VERRSRC_FILE_ENUMS_)
++#define _WIN32METADATA_VERRSRC_FILE_ENUMS_
++#pragma push_macro("VS_FF_DEBUG")
++#undef VS_FF_DEBUG
++#pragma push_macro("VS_FF_PRERELEASE")
++#undef VS_FF_PRERELEASE
++#pragma push_macro("VS_FF_PATCHED")
++#undef VS_FF_PATCHED
++#pragma push_macro("VS_FF_PRIVATEBUILD")
++#undef VS_FF_PRIVATEBUILD
++#pragma push_macro("VS_FF_INFOINFERRED")
++#undef VS_FF_INFOINFERRED
++#pragma push_macro("VS_FF_SPECIALBUILD")
++#undef VS_FF_SPECIALBUILD
++enum [[clang::flag_enum]] VS_FIXEDFILEINFO_FILE_FLAGS : unsigned long {
++    VS_FF_DEBUG = 0x00000001L,
++    VS_FF_PRERELEASE = 0x00000002L,
++    VS_FF_PATCHED = 0x00000004L,
++    VS_FF_PRIVATEBUILD = 0x00000008L,
++    VS_FF_INFOINFERRED = 0x00000010L,
++    VS_FF_SPECIALBUILD = 0x00000020L,
++};
++#pragma pop_macro("VS_FF_DEBUG")
++#pragma pop_macro("VS_FF_PRERELEASE")
++#pragma pop_macro("VS_FF_PATCHED")
++#pragma pop_macro("VS_FF_PRIVATEBUILD")
++#pragma pop_macro("VS_FF_INFOINFERRED")
++#pragma pop_macro("VS_FF_SPECIALBUILD")
++
++#pragma push_macro("VOS_UNKNOWN")
++#undef VOS_UNKNOWN
++#pragma push_macro("VOS_DOS")
++#undef VOS_DOS
++#pragma push_macro("VOS_OS216")
++#undef VOS_OS216
++#pragma push_macro("VOS_OS232")
++#undef VOS_OS232
++#pragma push_macro("VOS_NT")
++#undef VOS_NT
++#pragma push_macro("VOS_WINCE")
++#undef VOS_WINCE
++#pragma push_macro("VOS__BASE")
++#undef VOS__BASE
++#pragma push_macro("VOS__WINDOWS16")
++#undef VOS__WINDOWS16
++#pragma push_macro("VOS__PM16")
++#undef VOS__PM16
++#pragma push_macro("VOS__PM32")
++#undef VOS__PM32
++#pragma push_macro("VOS__WINDOWS32")
++#undef VOS__WINDOWS32
++#pragma push_macro("VOS_DOS_WINDOWS16")
++#undef VOS_DOS_WINDOWS16
++#pragma push_macro("VOS_DOS_WINDOWS32")
++#undef VOS_DOS_WINDOWS32
++#pragma push_macro("VOS_OS216_PM16")
++#undef VOS_OS216_PM16
++#pragma push_macro("VOS_OS232_PM32")
++#undef VOS_OS232_PM32
++#pragma push_macro("VOS_NT_WINDOWS32")
++#undef VOS_NT_WINDOWS32
++enum VS_FIXEDFILEINFO_FILE_OS : unsigned long {
++    VOS_UNKNOWN = 0x00000000L,
++    VOS_DOS = 0x00010000L,
++    VOS_OS216 = 0x00020000L,
++    VOS_OS232 = 0x00030000L,
++    VOS_NT = 0x00040000L,
++    VOS_WINCE = 0x00050000L,
++    VOS__BASE = 0x00000000L,
++    VOS__WINDOWS16 = 0x00000001L,
++    VOS__PM16 = 0x00000002L,
++    VOS__PM32 = 0x00000003L,
++    VOS__WINDOWS32 = 0x00000004L,
++    VOS_DOS_WINDOWS16 = 0x00010001L,
++    VOS_DOS_WINDOWS32 = 0x00010004L,
++    VOS_OS216_PM16 = 0x00020002L,
++    VOS_OS232_PM32 = 0x00030003L,
++    VOS_NT_WINDOWS32 = 0x00040004L,
++};
++#pragma pop_macro("VOS_UNKNOWN")
++#pragma pop_macro("VOS_DOS")
++#pragma pop_macro("VOS_OS216")
++#pragma pop_macro("VOS_OS232")
++#pragma pop_macro("VOS_NT")
++#pragma pop_macro("VOS_WINCE")
++#pragma pop_macro("VOS__BASE")
++#pragma pop_macro("VOS__WINDOWS16")
++#pragma pop_macro("VOS__PM16")
++#pragma pop_macro("VOS__PM32")
++#pragma pop_macro("VOS__WINDOWS32")
++#pragma pop_macro("VOS_DOS_WINDOWS16")
++#pragma pop_macro("VOS_DOS_WINDOWS32")
++#pragma pop_macro("VOS_OS216_PM16")
++#pragma pop_macro("VOS_OS232_PM32")
++#pragma pop_macro("VOS_NT_WINDOWS32")
++
++#pragma push_macro("VFT_UNKNOWN")
++#undef VFT_UNKNOWN
++#pragma push_macro("VFT_APP")
++#undef VFT_APP
++#pragma push_macro("VFT_DLL")
++#undef VFT_DLL
++#pragma push_macro("VFT_DRV")
++#undef VFT_DRV
++#pragma push_macro("VFT_FONT")
++#undef VFT_FONT
++#pragma push_macro("VFT_VXD")
++#undef VFT_VXD
++#pragma push_macro("VFT_STATIC_LIB")
++#undef VFT_STATIC_LIB
++enum VS_FIXEDFILEINFO_FILE_TYPE : int {
++    VFT_UNKNOWN = 0x00000000L,
++    VFT_APP = 0x00000001L,
++    VFT_DLL = 0x00000002L,
++    VFT_DRV = 0x00000003L,
++    VFT_FONT = 0x00000004L,
++    VFT_VXD = 0x00000005L,
++    VFT_STATIC_LIB = 0x00000007L,
++};
++#pragma pop_macro("VFT_UNKNOWN")
++#pragma pop_macro("VFT_APP")
++#pragma pop_macro("VFT_DLL")
++#pragma pop_macro("VFT_DRV")
++#pragma pop_macro("VFT_FONT")
++#pragma pop_macro("VFT_VXD")
++#pragma pop_macro("VFT_STATIC_LIB")
++
++#pragma push_macro("VFT2_UNKNOWN")
++#undef VFT2_UNKNOWN
++#pragma push_macro("VFT2_DRV_PRINTER")
++#undef VFT2_DRV_PRINTER
++#pragma push_macro("VFT2_DRV_KEYBOARD")
++#undef VFT2_DRV_KEYBOARD
++#pragma push_macro("VFT2_DRV_LANGUAGE")
++#undef VFT2_DRV_LANGUAGE
++#pragma push_macro("VFT2_DRV_DISPLAY")
++#undef VFT2_DRV_DISPLAY
++#pragma push_macro("VFT2_DRV_MOUSE")
++#undef VFT2_DRV_MOUSE
++#pragma push_macro("VFT2_DRV_NETWORK")
++#undef VFT2_DRV_NETWORK
++#pragma push_macro("VFT2_DRV_SYSTEM")
++#undef VFT2_DRV_SYSTEM
++#pragma push_macro("VFT2_DRV_INSTALLABLE")
++#undef VFT2_DRV_INSTALLABLE
++#pragma push_macro("VFT2_DRV_SOUND")
++#undef VFT2_DRV_SOUND
++#pragma push_macro("VFT2_DRV_COMM")
++#undef VFT2_DRV_COMM
++#pragma push_macro("VFT2_DRV_INPUTMETHOD")
++#undef VFT2_DRV_INPUTMETHOD
++#pragma push_macro("VFT2_DRV_VERSIONED_PRINTER")
++#undef VFT2_DRV_VERSIONED_PRINTER
++#pragma push_macro("VFT2_FONT_RASTER")
++#undef VFT2_FONT_RASTER
++#pragma push_macro("VFT2_FONT_VECTOR")
++#undef VFT2_FONT_VECTOR
++#pragma push_macro("VFT2_FONT_TRUETYPE")
++#undef VFT2_FONT_TRUETYPE
++enum VS_FIXEDFILEINFO_FILE_SUBTYPE : int {
++    VFT2_UNKNOWN = 0x00000000L,
++    VFT2_DRV_PRINTER = 0x00000001L,
++    VFT2_DRV_KEYBOARD = 0x00000002L,
++    VFT2_DRV_LANGUAGE = 0x00000003L,
++    VFT2_DRV_DISPLAY = 0x00000004L,
++    VFT2_DRV_MOUSE = 0x00000005L,
++    VFT2_DRV_NETWORK = 0x00000006L,
++    VFT2_DRV_SYSTEM = 0x00000007L,
++    VFT2_DRV_INSTALLABLE = 0x00000008L,
++    VFT2_DRV_SOUND = 0x00000009L,
++    VFT2_DRV_COMM = 0x0000000AL,
++    VFT2_DRV_INPUTMETHOD = 0x0000000BL,
++    VFT2_DRV_VERSIONED_PRINTER = 0x0000000CL,
++    VFT2_FONT_RASTER = 0x00000001L,
++    VFT2_FONT_VECTOR = 0x00000002L,
++    VFT2_FONT_TRUETYPE = 0x00000003L,
++};
++#pragma pop_macro("VFT2_UNKNOWN")
++#pragma pop_macro("VFT2_DRV_PRINTER")
++#pragma pop_macro("VFT2_DRV_KEYBOARD")
++#pragma pop_macro("VFT2_DRV_LANGUAGE")
++#pragma pop_macro("VFT2_DRV_DISPLAY")
++#pragma pop_macro("VFT2_DRV_MOUSE")
++#pragma pop_macro("VFT2_DRV_NETWORK")
++#pragma pop_macro("VFT2_DRV_SYSTEM")
++#pragma pop_macro("VFT2_DRV_INSTALLABLE")
++#pragma pop_macro("VFT2_DRV_SOUND")
++#pragma pop_macro("VFT2_DRV_COMM")
++#pragma pop_macro("VFT2_DRV_INPUTMETHOD")
++#pragma pop_macro("VFT2_DRV_VERSIONED_PRINTER")
++#pragma pop_macro("VFT2_FONT_RASTER")
++#pragma pop_macro("VFT2_FONT_VECTOR")
++#pragma pop_macro("VFT2_FONT_TRUETYPE")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+@@ -142,9 +338,147 @@ extern "C" {
+ #define FILE_VER_GET_NEUTRAL    0x02
+ #define FILE_VER_GET_PREFETCHED 0x04
+ 
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_VERRSRC_API_ENUMS_)
++#define _WIN32METADATA_VERRSRC_API_ENUMS_
++#pragma push_macro("FILE_VER_GET_LOCALISED")
++#undef FILE_VER_GET_LOCALISED
++#pragma push_macro("FILE_VER_GET_NEUTRAL")
++#undef FILE_VER_GET_NEUTRAL
++#pragma push_macro("FILE_VER_GET_PREFETCHED")
++#undef FILE_VER_GET_PREFETCHED
++enum [[clang::flag_enum]] GET_FILE_VERSION_INFO_FLAGS : unsigned long {
++    FILE_VER_GET_LOCALISED = 0x01,
++    FILE_VER_GET_NEUTRAL = 0x02,
++    FILE_VER_GET_PREFETCHED = 0x04,
++};
++#pragma pop_macro("FILE_VER_GET_LOCALISED")
++#pragma pop_macro("FILE_VER_GET_NEUTRAL")
++#pragma pop_macro("FILE_VER_GET_PREFETCHED")
++
++#pragma push_macro("VFFF_ISSHAREDFILE")
++#undef VFFF_ISSHAREDFILE
++enum VER_FIND_FILE_FLAGS : unsigned long {
++    VFFF_ISSHAREDFILE = 0x0001,
++};
++#pragma pop_macro("VFFF_ISSHAREDFILE")
++
++#pragma push_macro("VFF_CURNEDEST")
++#undef VFF_CURNEDEST
++#pragma push_macro("VFF_FILEINUSE")
++#undef VFF_FILEINUSE
++#pragma push_macro("VFF_BUFFTOOSMALL")
++#undef VFF_BUFFTOOSMALL
++enum [[clang::flag_enum]] VER_FIND_FILE_STATUS : unsigned long {
++    VFF_CURNEDEST = 0x0001,
++    VFF_FILEINUSE = 0x0002,
++    VFF_BUFFTOOSMALL = 0x0004,
++};
++#pragma pop_macro("VFF_CURNEDEST")
++#pragma pop_macro("VFF_FILEINUSE")
++#pragma pop_macro("VFF_BUFFTOOSMALL")
++
++#pragma push_macro("VIFF_FORCEINSTALL")
++#undef VIFF_FORCEINSTALL
++#pragma push_macro("VIFF_DONTDELETEOLD")
++#undef VIFF_DONTDELETEOLD
++enum VER_INSTALL_FILE_FLAGS : unsigned long {
++    VIFF_FORCEINSTALL = 0x0001,
++    VIFF_DONTDELETEOLD = 0x0002,
++};
++#pragma pop_macro("VIFF_FORCEINSTALL")
++#pragma pop_macro("VIFF_DONTDELETEOLD")
++
++#pragma push_macro("VIF_TEMPFILE")
++#undef VIF_TEMPFILE
++#pragma push_macro("VIF_MISMATCH")
++#undef VIF_MISMATCH
++#pragma push_macro("VIF_SRCOLD")
++#undef VIF_SRCOLD
++#pragma push_macro("VIF_DIFFLANG")
++#undef VIF_DIFFLANG
++#pragma push_macro("VIF_DIFFCODEPG")
++#undef VIF_DIFFCODEPG
++#pragma push_macro("VIF_DIFFTYPE")
++#undef VIF_DIFFTYPE
++#pragma push_macro("VIF_WRITEPROT")
++#undef VIF_WRITEPROT
++#pragma push_macro("VIF_FILEINUSE")
++#undef VIF_FILEINUSE
++#pragma push_macro("VIF_OUTOFSPACE")
++#undef VIF_OUTOFSPACE
++#pragma push_macro("VIF_ACCESSVIOLATION")
++#undef VIF_ACCESSVIOLATION
++#pragma push_macro("VIF_SHARINGVIOLATION")
++#undef VIF_SHARINGVIOLATION
++#pragma push_macro("VIF_CANNOTCREATE")
++#undef VIF_CANNOTCREATE
++#pragma push_macro("VIF_CANNOTDELETE")
++#undef VIF_CANNOTDELETE
++#pragma push_macro("VIF_CANNOTRENAME")
++#undef VIF_CANNOTRENAME
++#pragma push_macro("VIF_CANNOTDELETECUR")
++#undef VIF_CANNOTDELETECUR
++#pragma push_macro("VIF_OUTOFMEMORY")
++#undef VIF_OUTOFMEMORY
++#pragma push_macro("VIF_CANNOTREADSRC")
++#undef VIF_CANNOTREADSRC
++#pragma push_macro("VIF_CANNOTREADDST")
++#undef VIF_CANNOTREADDST
++#pragma push_macro("VIF_BUFFTOOSMALL")
++#undef VIF_BUFFTOOSMALL
++#pragma push_macro("VIF_CANNOTLOADLZ32")
++#undef VIF_CANNOTLOADLZ32
++#pragma push_macro("VIF_CANNOTLOADCABINET")
++#undef VIF_CANNOTLOADCABINET
++enum [[clang::flag_enum]] VER_INSTALL_FILE_STATUS : unsigned long {
++    VIF_TEMPFILE = 0x00000001L,
++    VIF_MISMATCH = 0x00000002L,
++    VIF_SRCOLD = 0x00000004L,
++    VIF_DIFFLANG = 0x00000008L,
++    VIF_DIFFCODEPG = 0x00000010L,
++    VIF_DIFFTYPE = 0x00000020L,
++    VIF_WRITEPROT = 0x00000040L,
++    VIF_FILEINUSE = 0x00000080L,
++    VIF_OUTOFSPACE = 0x00000100L,
++    VIF_ACCESSVIOLATION = 0x00000200L,
++    VIF_SHARINGVIOLATION = 0x00000400L,
++    VIF_CANNOTCREATE = 0x00000800L,
++    VIF_CANNOTDELETE = 0x00001000L,
++    VIF_CANNOTRENAME = 0x00002000L,
++    VIF_CANNOTDELETECUR = 0x00004000L,
++    VIF_OUTOFMEMORY = 0x00008000L,
++    VIF_CANNOTREADSRC = 0x00010000L,
++    VIF_CANNOTREADDST = 0x00020000L,
++    VIF_BUFFTOOSMALL = 0x00040000L,
++    VIF_CANNOTLOADLZ32 = 0x00080000L,
++    VIF_CANNOTLOADCABINET = 0x00100000L,
++};
++#pragma pop_macro("VIF_TEMPFILE")
++#pragma pop_macro("VIF_MISMATCH")
++#pragma pop_macro("VIF_SRCOLD")
++#pragma pop_macro("VIF_DIFFLANG")
++#pragma pop_macro("VIF_DIFFCODEPG")
++#pragma pop_macro("VIF_DIFFTYPE")
++#pragma pop_macro("VIF_WRITEPROT")
++#pragma pop_macro("VIF_FILEINUSE")
++#pragma pop_macro("VIF_OUTOFSPACE")
++#pragma pop_macro("VIF_ACCESSVIOLATION")
++#pragma pop_macro("VIF_SHARINGVIOLATION")
++#pragma pop_macro("VIF_CANNOTCREATE")
++#pragma pop_macro("VIF_CANNOTDELETE")
++#pragma pop_macro("VIF_CANNOTRENAME")
++#pragma pop_macro("VIF_CANNOTDELETECUR")
++#pragma pop_macro("VIF_OUTOFMEMORY")
++#pragma pop_macro("VIF_CANNOTREADSRC")
++#pragma pop_macro("VIF_CANNOTREADDST")
++#pragma pop_macro("VIF_BUFFTOOSMALL")
++#pragma pop_macro("VIF_CANNOTLOADLZ32")
++#pragma pop_macro("VIF_CANNOTLOADCABINET")
++#endif
++
+ /* ----- Types and structures ----- */
+ 
+-typedef struct tagVS_FIXEDFILEINFO
++typedef struct _Windows_SupportedOS_Windows2000_ tagVS_FIXEDFILEINFO
+ {
+     DWORD   dwSignature;            /* e.g. 0xfeef04bd */
+     DWORD   dwStrucVersion;         /* e.g. 0x00000042 = "0.42" */
+@@ -153,10 +487,10 @@ typedef struct tagVS_FIXEDFILEINFO
+     DWORD   dwProductVersionMS;     /* e.g. 0x00030010 = "3.10" */
+     DWORD   dwProductVersionLS;     /* e.g. 0x00000031 = "0.31" */
+     DWORD   dwFileFlagsMask;        /* = 0x3F for version "0.42" */
+-    DWORD   dwFileFlags;            /* e.g. VFF_DEBUG | VFF_PRERELEASE */
+-    DWORD   dwFileOS;               /* e.g. VOS_DOS_WINDOWS16 */
+-    DWORD   dwFileType;             /* e.g. VFT_DRIVER */
+-    DWORD   dwFileSubtype;          /* e.g. VFT2_DRV_KEYBOARD */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_FLAGS) DWORD   dwFileFlags;            /* e.g. VFF_DEBUG | VFF_PRERELEASE */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_OS) DWORD   dwFileOS;               /* e.g. VOS_DOS_WINDOWS16 */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_TYPE) DWORD   dwFileType;             /* e.g. VFT_DRIVER */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_SUBTYPE) DWORD   dwFileSubtype;          /* e.g. VFT2_DRV_KEYBOARD */
+     DWORD   dwFileDateMS;           /* e.g. 0 */
+     DWORD   dwFileDateLS;           /* e.g. 0 */
+ } VS_FIXEDFILEINFO;
