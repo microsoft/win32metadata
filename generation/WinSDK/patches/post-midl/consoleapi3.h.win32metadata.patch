@@ -1,5 +1,4 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
-index 6d210ae..e856e91 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 @@ -16,6 +16,7 @@
@@ -42,7 +41,7 @@ index 6d210ae..e856e91 100644
  #ifndef NOGDI
  
 -typedef struct _CONSOLE_FONT_INFOEX {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") _CONSOLE_FONT_INFOEX {
++typedef struct _Windows_SupportedOS_WindowsVista_ _CONSOLE_FONT_INFOEX {
      ULONG cbSize;
      DWORD nFont;
      COORD dwFontSize;
@@ -120,7 +119,7 @@ index 6d210ae..e856e91 100644
 +#pragma pop_macro("HISTORY_NO_DUP_FLAG")
 +#endif
 +
-+typedef struct _Windows_SupportedOS_WindowsVista_ _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") _CONSOLE_HISTORY_INFO {
++typedef struct _Windows_SupportedOS_WindowsVista_ _CONSOLE_HISTORY_INFO {
      UINT cbSize;
      UINT HistoryBufferSize;
      UINT NumberOfHistoryBuffers;
