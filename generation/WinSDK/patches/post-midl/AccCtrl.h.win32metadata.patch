@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
+index eacc2a2ee6b3c86235438793e6adc52f19392a44..096beae96ddf25cb7827b8ca50ee649e23981fd4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
+@@ -18,6 +18,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if (_MSC_VER >= 800)
+ #if (_MSC_VER >= 1200)
+@@ -120,7 +121,7 @@ typedef enum _MULTIPLE_TRUSTEE_OPERATION
+ } MULTIPLE_TRUSTEE_OPERATION;
+ 
+ 
+-typedef struct  _OBJECTS_AND_SID
++typedef struct  _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _OBJECTS_AND_SID
+ {
+     DWORD   ObjectsPresent;
+     GUID    ObjectTypeGuid;

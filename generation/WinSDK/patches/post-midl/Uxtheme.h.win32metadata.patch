@@ -1,0 +1,47 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
+index f4998fa4227a45945f6c5f75a4b6f7a83b05f7f3..75bf83bac0f205d1c9c9cd9afbc85ee0901885bd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
+@@ -10,6 +10,7 @@
+ #define _UXTHEME_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -354,6 +355,7 @@ OpenThemeData(
+ #define OTD_VALIDBITS           (OTD_FORCE_RECT_SIZING | \
+                                  OTD_NONCLIENT)
+ 
++_Windows_SupportedOS_Server2016_
+ THEMEAPI_(HTHEME)
+ OpenThemeDataForDpi(
+     _In_opt_ HWND hwnd,
+@@ -480,7 +482,7 @@ DrawThemeBackground(
+                                  DTBG_MIRRORDC | \
+                                  DTBG_NOMIRROR)
+ 
+-typedef struct _DTBGOPTS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _DTBGOPTS
+ {
+     DWORD dwSize;           // size of the struct
+     DWORD dwFlags;          // which options have been specified
+@@ -1464,6 +1466,8 @@ THEMEAPI GetCurrentThemeName(
+ #define SZ_THDOCPROP_TOOLTIP        L"ToolTip"
+ #define SZ_THDOCPROP_AUTHOR         L"author"
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ THEMEAPI
+ GetThemeDocumentationProperty(
+     _In_ LPCWSTR pszThemeName,
+@@ -1589,6 +1593,8 @@ typedef struct _WTA_OPTIONS
+                                    WTNCA_NOSYSMENU | \
+                                    WTNCA_NOMIRRORHELP)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ THEMEAPI
+ SetWindowThemeAttribute(
+     _In_ HWND hwnd,

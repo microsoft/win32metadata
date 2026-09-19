@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+index 9cd25d9dc8412710028c0e7ba1b88bd36ddd5b71..6176555431d6d118f7cd053d19af5e825a0d7da8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+@@ -33,6 +33,7 @@
+ 
+ #ifndef __tom_h__
+ #define __tom_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -964,7 +965,7 @@ EXTERN_C const IID IID_ITextDocument;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8CC497C0-A1DF-11ce-8098-00AA0047BE5D")
+-    ITextDocument : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextDocument : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetName( 
+@@ -1175,7 +1176,7 @@ EXTERN_C const IID IID_ITextDocument;
+         END_INTERFACE
+     } ITextDocumentVtbl;
+ 
+-    interface ITextDocument
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextDocument
+     {
+         CONST_VTBL struct ITextDocumentVtbl *lpVtbl;
+     };
+@@ -1288,7 +1289,7 @@ EXTERN_C const IID IID_ITextRange;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8CC497C2-A1DF-11ce-8098-00AA0047BE5D")
+-    ITextRange : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextRange : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetText( 
+@@ -1805,7 +1806,7 @@ EXTERN_C const IID IID_ITextRange;
+         END_INTERFACE
+     } ITextRangeVtbl;
+ 
+-    interface ITextRange
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextRange
+     {
+         CONST_VTBL struct ITextRangeVtbl *lpVtbl;
+     };

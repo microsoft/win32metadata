@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
+index 44285099cb28faf5a293c6c69f6b6ba4046639f2..f403e48d7a8e53bc66dee66ceabf348cc9b6f9ca 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
+@@ -22,6 +22,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -138,9 +139,11 @@ extern "C" {
+ #endif // RC_INVOKED
+ #endif //_MAC
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI void WINAPI InitCommonControls(void);
+ 
+-typedef struct tagINITCOMMONCONTROLSEX {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ tagINITCOMMONCONTROLSEX {
+     DWORD dwSize;             // size of this structure
+     DWORD dwICC;              // flags indicating which classes to be initialized
+ } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
+@@ -165,6 +168,8 @@ typedef struct tagINITCOMMONCONTROLSEX {
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(_In_ const INITCOMMONCONTROLSEX *picce);
+ 
+ #define ODT_HEADER              100
+@@ -547,6 +552,8 @@ typedef struct _IMAGELISTDRAWPARAMS
+ #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
+ #endif
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Create(int cx, int cy, UINT flags, int cInitial, int cGrow);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Destroy(_In_opt_ HIMAGELIST himl);
+ 
+ WINCOMMCTRLAPI int         WINAPI ImageList_GetImageCount(_In_ HIMAGELIST himl);

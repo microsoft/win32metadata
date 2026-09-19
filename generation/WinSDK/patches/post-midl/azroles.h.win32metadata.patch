@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h b/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
+index 93f682634e90f9ab4d864def8e5cb8a4146aae9e..ee1774aad3512ebd610219ddcc4118973c8fe649 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
+@@ -572,6 +572,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ //
+@@ -682,7 +683,7 @@ EXTERN_C const IID IID_IAzAuthorizationStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("edbd9ca9-9b82-4f6a-9e8b-98301e450f14")
+-    IAzAuthorizationStore : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IAzAuthorizationStore : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+@@ -1229,7 +1230,7 @@ EXTERN_C const IID IID_IAzAuthorizationStore;
+         END_INTERFACE
+     } IAzAuthorizationStoreVtbl;
+ 
+-    interface IAzAuthorizationStore
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IAzAuthorizationStore
+     {
+         CONST_VTBL struct IAzAuthorizationStoreVtbl *lpVtbl;
+     };

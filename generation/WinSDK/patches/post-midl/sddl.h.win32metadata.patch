@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+index ac2b84be566384493715d762b67ac6aba9c8efb9..2591e379f17ea3c585d97341e1237c92b5f25fae 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #ifndef __SDDL_H__
+ #define __SDDL_H__
++#include "win32metadata_annotations.h"
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -271,6 +272,8 @@ ConvertSidToStringSidA(
+     _Outptr_ LPSTR  *StringSid
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -285,6 +288,8 @@ ConvertSidToStringSidW(
+ #define ConvertSidToStringSid  ConvertSidToStringSidA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -293,6 +298,8 @@ ConvertStringSidToSidA(
+     _Outptr_ PSID   *Sid
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
