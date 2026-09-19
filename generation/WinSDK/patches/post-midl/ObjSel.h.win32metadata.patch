@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+index 777e9002b166a8f0d18032e3111e42980a2f5fe8..f2345b2fa3f3c459080194146204c19c1d247232 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+@@ -16,6 +16,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -382,7 +383,7 @@ flDownlevel
+     Flags to use for a downlevel scope.
+ */
+ 
+-typedef struct _DSOP_UPLEVEL_FILTER_FLAGS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_UPLEVEL_FILTER_FLAGS
+ {
+     ULONG       flBothModes;
+     ULONG       flMixedModeOnly;

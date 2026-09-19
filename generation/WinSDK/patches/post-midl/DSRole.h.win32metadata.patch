@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
+index 811c3c7e7b9f4eafd514133a168575b2ca18a037..34489c0b551439c091b95ea21d877ff2aad9ccf7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
+@@ -20,6 +20,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -75,7 +76,7 @@ typedef enum _DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
+ //
+ // Structure that correspond to the DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
+ //
+-typedef struct _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
+ 
+     DSROLE_MACHINE_ROLE MachineRole;
+     ULONG Flags;
+@@ -107,6 +108,8 @@ typedef struct _DSROLE_OPERATION_STATE_INFO {
+ 
+ } DSROLE_OPERATION_STATE_INFO, *PDSROLE_OPERATION_STATE_INFO;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ DsRoleGetPrimaryDomainInformation(
+@@ -115,6 +118,8 @@ DsRoleGetPrimaryDomainInformation(
+     OUT PBYTE *Buffer 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ VOID
+ WINAPI
+ DsRoleFreeMemory(

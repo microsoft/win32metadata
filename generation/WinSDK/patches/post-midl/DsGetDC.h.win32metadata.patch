@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h b/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
+index ec178be31a2ac36c3fb073dae20ffdeb0b73bc07..9a18ea40d500f6fac3e1431b54073ab100e85927 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
+@@ -27,6 +27,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -127,7 +128,7 @@ extern "C" {
+ // Structure returned from DsGetDcName
+ //
+ 
+-typedef struct _DOMAIN_CONTROLLER_INFOA {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOMAIN_CONTROLLER_INFOA {
+     LPSTR DomainControllerName;
+     LPSTR DomainControllerAddress;
+     ULONG DomainControllerAddressType;
+@@ -223,6 +224,8 @@ typedef struct _DOMAIN_CONTROLLER_INFOW {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DSGETDCAPI
+ DWORD
+@@ -236,6 +239,8 @@ DsGetDcNameA(
+     _Outptr_result_nullonfailure_ PDOMAIN_CONTROLLER_INFOA *DomainControllerInfo
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DSGETDCAPI
+ DWORD
+@@ -255,6 +260,8 @@ DsGetDcNameW(
+ #define DsGetDcName DsGetDcNameA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DSGETDCAPI
+ DWORD

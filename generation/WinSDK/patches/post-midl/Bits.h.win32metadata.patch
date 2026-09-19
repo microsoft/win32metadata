@@ -1,0 +1,217 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
+index 35b2be96b91126519a89267f24fdcfaf990f6630..b48983d650758e6f211187738006ee2f94072a73 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits.h
+@@ -134,6 +134,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include "bitsmsg.h"
+@@ -149,7 +150,7 @@ extern RPC_IF_HANDLE __MIDL_itf_bits_0000_0000_v0_0_s_ifspec;
+ /* interface IBackgroundCopyFile */
+ /* [object][uuid] */ 
+ 
+-typedef struct _BG_FILE_PROGRESS
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BG_FILE_PROGRESS
+     {
+     UINT64 BytesTotal;
+     UINT64 BytesTransferred;
+@@ -162,7 +163,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("01b7bd23-fb88-4a77-8490-5891d3e4653a")
+-    IBackgroundCopyFile : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyFile : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetRemoteName( 
+@@ -223,7 +224,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile;
+         END_INTERFACE
+     } IBackgroundCopyFileVtbl;
+ 
+-    interface IBackgroundCopyFile
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyFile
+     {
+         CONST_VTBL struct IBackgroundCopyFileVtbl *lpVtbl;
+     };
+@@ -275,7 +276,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ca51e165-c365-424c-8d41-24aaa4ff3c40")
+-    IEnumBackgroundCopyFiles : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyFiles : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -358,7 +359,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
+         END_INTERFACE
+     } IEnumBackgroundCopyFilesVtbl;
+ 
+-    interface IEnumBackgroundCopyFiles
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyFiles
+     {
+         CONST_VTBL struct IEnumBackgroundCopyFilesVtbl *lpVtbl;
+     };
+@@ -411,7 +412,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyFiles;
+ /* [object][helpstring][uuid] */ 
+ 
+ typedef 
+-enum BG_ERROR_CONTEXT
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BG_ERROR_CONTEXT
+     {
+         BG_ERROR_CONTEXT_NONE	= 0,
+         BG_ERROR_CONTEXT_UNKNOWN	= 1,
+@@ -430,7 +431,7 @@ EXTERN_C const IID IID_IBackgroundCopyError;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("19c613a0-fcb8-4f28-81ae-897c3d078f81")
+-    IBackgroundCopyError : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyError : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetError( 
+@@ -513,7 +514,7 @@ EXTERN_C const IID IID_IBackgroundCopyError;
+         END_INTERFACE
+     } IBackgroundCopyErrorVtbl;
+ 
+-    interface IBackgroundCopyError
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyError
+     {
+         CONST_VTBL struct IBackgroundCopyErrorVtbl *lpVtbl;
+     };
+@@ -565,13 +566,13 @@ EXTERN_C const IID IID_IBackgroundCopyError;
+ /* interface IBackgroundCopyJob */
+ /* [object][helpstring][uuid] */ 
+ 
+-typedef struct _BG_FILE_INFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BG_FILE_INFO
+     {
+     LPWSTR RemoteName;
+     LPWSTR LocalName;
+     } 	BG_FILE_INFO;
+ 
+-typedef struct _BG_JOB_PROGRESS
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BG_JOB_PROGRESS
+     {
+     UINT64 BytesTotal;
+     UINT64 BytesTransferred;
+@@ -579,7 +580,7 @@ typedef struct _BG_JOB_PROGRESS
+     ULONG FilesTransferred;
+     } 	BG_JOB_PROGRESS;
+ 
+-typedef struct _BG_JOB_TIMES
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BG_JOB_TIMES
+     {
+     FILETIME CreationTime;
+     FILETIME ModificationTime;
+@@ -587,7 +588,7 @@ typedef struct _BG_JOB_TIMES
+     } 	BG_JOB_TIMES;
+ 
+ typedef 
+-enum BG_JOB_PRIORITY
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BG_JOB_PRIORITY
+     {
+         BG_JOB_PRIORITY_FOREGROUND	= 0,
+         BG_JOB_PRIORITY_HIGH	= ( BG_JOB_PRIORITY_FOREGROUND + 1 ) ,
+@@ -596,7 +597,7 @@ enum BG_JOB_PRIORITY
+     } 	BG_JOB_PRIORITY;
+ 
+ typedef 
+-enum BG_JOB_STATE
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BG_JOB_STATE
+     {
+         BG_JOB_STATE_QUEUED	= 0,
+         BG_JOB_STATE_CONNECTING	= ( BG_JOB_STATE_QUEUED + 1 ) ,
+@@ -610,7 +611,7 @@ enum BG_JOB_STATE
+     } 	BG_JOB_STATE;
+ 
+ typedef 
+-enum BG_JOB_TYPE
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BG_JOB_TYPE
+     {
+         BG_JOB_TYPE_DOWNLOAD	= 0,
+         BG_JOB_TYPE_UPLOAD	= ( BG_JOB_TYPE_DOWNLOAD + 1 ) ,
+@@ -618,7 +619,7 @@ enum BG_JOB_TYPE
+     } 	BG_JOB_TYPE;
+ 
+ typedef 
+-enum BG_JOB_PROXY_USAGE
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BG_JOB_PROXY_USAGE
+     {
+         BG_JOB_PROXY_USAGE_PRECONFIG	= 0,
+         BG_JOB_PROXY_USAGE_NO_PROXY	= ( BG_JOB_PROXY_USAGE_PRECONFIG + 1 ) ,
+@@ -632,7 +633,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("37668d37-507e-4160-9316-26306d150b12")
+-    IBackgroundCopyJob : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddFileSet( 
+@@ -987,7 +988,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob;
+         END_INTERFACE
+     } IBackgroundCopyJobVtbl;
+ 
+-    interface IBackgroundCopyJob
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob
+     {
+         CONST_VTBL struct IBackgroundCopyJobVtbl *lpVtbl;
+     };
+@@ -1126,7 +1127,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1af4f612-3b71-466f-8f58-7b6f73ac57ad")
+-    IEnumBackgroundCopyJobs : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyJobs : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -1209,7 +1210,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs;
+         END_INTERFACE
+     } IEnumBackgroundCopyJobsVtbl;
+ 
+-    interface IEnumBackgroundCopyJobs
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyJobs
+     {
+         CONST_VTBL struct IEnumBackgroundCopyJobsVtbl *lpVtbl;
+     };
+@@ -1281,7 +1282,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22")
+-    IBackgroundCopyCallback : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE JobTransferred( 
+@@ -1350,7 +1351,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback;
+         END_INTERFACE
+     } IBackgroundCopyCallbackVtbl;
+ 
+-    interface IBackgroundCopyCallback
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyCallback
+     {
+         CONST_VTBL struct IBackgroundCopyCallbackVtbl *lpVtbl;
+     };
+@@ -1551,7 +1552,7 @@ EXTERN_C const IID IID_IBackgroundCopyManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c")
+-    IBackgroundCopyManager : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateJob( 
+@@ -1650,7 +1651,7 @@ EXTERN_C const IID IID_IBackgroundCopyManager;
+         END_INTERFACE
+     } IBackgroundCopyManagerVtbl;
+ 
+-    interface IBackgroundCopyManager
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyManager
+     {
+         CONST_VTBL struct IBackgroundCopyManagerVtbl *lpVtbl;
+     };

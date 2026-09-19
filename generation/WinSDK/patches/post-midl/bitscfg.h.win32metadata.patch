@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
+index fd4af30f674139d4313e97546eceb6047f91372d..8997df322a8a66ab9cb465f8098d99849af473cc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
+@@ -87,6 +87,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -106,7 +107,7 @@ EXTERN_C const IID IID_IBITSExtensionSetup;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3")
+-    IBITSExtensionSetup : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetup : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnableBITSUploads( void) = 0;
+@@ -222,7 +223,7 @@ EXTERN_C const IID IID_IBITSExtensionSetup;
+         END_INTERFACE
+     } IBITSExtensionSetupVtbl;
+ 
+-    interface IBITSExtensionSetup
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetup
+     {
+         CONST_VTBL struct IBITSExtensionSetupVtbl *lpVtbl;
+     };
+@@ -290,7 +291,7 @@ EXTERN_C const IID IID_IBITSExtensionSetupFactory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d5d2d542-5503-4e64-8b48-72ef91a32ee1")
+-    IBITSExtensionSetupFactory : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetupFactory : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetObject( 
+@@ -382,7 +383,7 @@ EXTERN_C const IID IID_IBITSExtensionSetupFactory;
+         END_INTERFACE
+     } IBITSExtensionSetupFactoryVtbl;
+ 
+-    interface IBITSExtensionSetupFactory
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetupFactory
+     {
+         CONST_VTBL struct IBITSExtensionSetupFactoryVtbl *lpVtbl;
+     };

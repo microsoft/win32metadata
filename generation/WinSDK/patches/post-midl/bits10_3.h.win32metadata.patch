@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
+index af6ea4c7a5b021f22947d04286e3363037a42585..ca77ac9dd3a48259a157e2512b88e91a2b47b4ef 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
+@@ -107,6 +107,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -126,7 +127,7 @@ EXTERN_C const IID IID_IBackgroundCopyServerCertificateValidationCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4CEC0D02-DEF7-4158-813A-C32A46945FF7")
+-    IBackgroundCopyServerCertificateValidationCallback : public IUnknown
++    _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyServerCertificateValidationCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE ValidateServerCertificate( 
+@@ -191,7 +192,7 @@ EXTERN_C const IID IID_IBackgroundCopyServerCertificateValidationCallback;
+         END_INTERFACE
+     } IBackgroundCopyServerCertificateValidationCallbackVtbl;
+ 
+-    interface IBackgroundCopyServerCertificateValidationCallback
++    interface _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyServerCertificateValidationCallback
+     {
+         CONST_VTBL struct IBackgroundCopyServerCertificateValidationCallbackVtbl *lpVtbl;
+     };
+@@ -237,7 +238,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8A9263D3-FD4C-4EDA-9B28-30132A4D4E3C")
+-    IBackgroundCopyJobHttpOptions3 : public IBackgroundCopyJobHttpOptions2
++    _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyJobHttpOptions3 : public IBackgroundCopyJobHttpOptions2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetServerCertificateValidationInterface( 
+@@ -349,7 +350,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions3;
+         END_INTERFACE
+     } IBackgroundCopyJobHttpOptions3Vtbl;
+ 
+-    interface IBackgroundCopyJobHttpOptions3
++    interface _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyJobHttpOptions3
+     {
+         CONST_VTBL struct IBackgroundCopyJobHttpOptions3Vtbl *lpVtbl;
+     };

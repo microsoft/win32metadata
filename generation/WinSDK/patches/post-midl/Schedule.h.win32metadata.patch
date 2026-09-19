@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h b/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
+index 06becd48a96edd922258ad997e5d8a37b6f15aec..21abc03773b9606e1dc4f1afea80a7b2cc4d5081 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
+@@ -21,6 +21,7 @@ Abstract:
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -56,7 +57,7 @@ extern "C" {
+ // Each schedule blob begins with n array of schedule headers that
+ // specify the number and type of schedules contained in the blob.
+ //
+-typedef struct _SCHEDULE_HEADER {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _SCHEDULE_HEADER {
+     ULONG   Type;       // one of the SCHEDULE_ ordinals
+     ULONG   Offset;     // offset from start of schedule structure
+ } SCHEDULE_HEADER, *PSCHEDULE_HEADER;
