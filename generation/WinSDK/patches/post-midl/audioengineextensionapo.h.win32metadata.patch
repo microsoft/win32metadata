@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
+index 63fef52df451b72b4fb41f9360e263d35dc35f0c..3d2b5bc28f4fb7afcaa2158ebc15e6bab7edcc1a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #ifdef DEFINE_PROPERTYKEY
+@@ -273,7 +274,7 @@ typedef struct APOInitSystemEffects3
+     BOOL InitializeForDiscoveryOnly;
+     } 	APOInitSystemEffects3;
+ 
+-typedef struct AcousticEchoCanceller_Reference_Input
++typedef struct _Windows_SupportedOS_20348_ AcousticEchoCanceller_Reference_Input
+     {
+     APOInitSystemEffects3 apoInitSystemEffects;
+     APO_REFERENCE_STREAM_PROPERTIES streamProperties;

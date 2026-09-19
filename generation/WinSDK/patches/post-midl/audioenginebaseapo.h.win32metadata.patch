@@ -1,0 +1,93 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
+index af745cafed71492a94b8142baf39e814e2e97e2a..81eecd1123f55fd8cfd250148bee78a82cf0f5fe 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
+@@ -147,6 +147,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ //
+@@ -216,7 +217,7 @@ typedef struct APO_CONNECTION_DESCRIPTOR
+     } 	APO_CONNECTION_DESCRIPTOR;
+ 
+ typedef 
+-enum APO_FLAG
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ APO_FLAG
+     {
+         APO_FLAG_NONE	= 0,
+         APO_FLAG_INPLACE	= 0x1,
+@@ -808,7 +809,7 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("98F37DAC-D0B6-49F5-896A-AA4D169A4C48")
+-    IAudioDeviceModulesClient : public IUnknown
++    _Windows_SupportedOS_20348_ IAudioDeviceModulesClient : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetAudioDeviceModulesManager( 
+@@ -849,7 +850,7 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
+         END_INTERFACE
+     } IAudioDeviceModulesClientVtbl;
+ 
+-    interface IAudioDeviceModulesClient
++    interface _Windows_SupportedOS_20348_ IAudioDeviceModulesClient
+     {
+         CONST_VTBL struct IAudioDeviceModulesClientVtbl *lpVtbl;
+     };
+@@ -1204,7 +1205,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4CEB0AAB-FA19-48ED-A857-87771AE1B768")
+-    IApoAuxiliaryInputConfiguration : public IUnknown
++    _Windows_SupportedOS_20348_ IApoAuxiliaryInputConfiguration : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddAuxiliaryInput( 
+@@ -1281,7 +1282,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
+         END_INTERFACE
+     } IApoAuxiliaryInputConfigurationVtbl;
+ 
+-    interface IApoAuxiliaryInputConfiguration
++    interface _Windows_SupportedOS_20348_ IApoAuxiliaryInputConfiguration
+     {
+         CONST_VTBL struct IApoAuxiliaryInputConfigurationVtbl *lpVtbl;
+     };
+@@ -1333,7 +1334,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputRT;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F851809C-C177-49A0-B1B2-B66F017943AB")
+-    IApoAuxiliaryInputRT : public IUnknown
++    _Windows_SupportedOS_20348_ IApoAuxiliaryInputRT : public IUnknown
+     {
+     public:
+         virtual void STDMETHODCALLTYPE AcceptInput( 
+@@ -1378,7 +1379,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputRT;
+         END_INTERFACE
+     } IApoAuxiliaryInputRTVtbl;
+ 
+-    interface IApoAuxiliaryInputRT
++    interface _Windows_SupportedOS_20348_ IApoAuxiliaryInputRT
+     {
+         CONST_VTBL struct IApoAuxiliaryInputRTVtbl *lpVtbl;
+     };
+@@ -1424,7 +1425,7 @@ EXTERN_C const IID IID_IApoAcousticEchoCancellation;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("25385759-3236-4101-A943-25693DFB5D2D")
+-    IApoAcousticEchoCancellation : public IUnknown
++    _Windows_SupportedOS_20348_ IApoAcousticEchoCancellation : public IUnknown
+     {
+     public:
+     };
+@@ -1455,7 +1456,7 @@ EXTERN_C const IID IID_IApoAcousticEchoCancellation;
+         END_INTERFACE
+     } IApoAcousticEchoCancellationVtbl;
+ 
+-    interface IApoAcousticEchoCancellation
++    interface _Windows_SupportedOS_20348_ IApoAcousticEchoCancellation
+     {
+         CONST_VTBL struct IApoAcousticEchoCancellationVtbl *lpVtbl;
+     };
