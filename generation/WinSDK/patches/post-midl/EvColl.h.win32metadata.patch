@@ -1,0 +1,116 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
+@@ -16,6 +16,7 @@ Abstract:
+ #ifndef __EVCOLL_H__
+ #define __EVCOLL_H__
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -179,10 +180,11 @@ typedef enum _EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS
+ } EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS;
+ 
+ 
+-EC_HANDLE WINAPI EcOpenSubscriptionEnum(
++EC_HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcOpenSubscriptionEnum(
+     DWORD Flags 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcEnumNextSubscription( 
+     EC_HANDLE SubscriptionEnum,
+     DWORD SubscriptionNameBufferSize,
+@@ -191,12 +193,13 @@ BOOL WINAPI EcEnumNextSubscription(
+     _Out_ PDWORD SubscriptionNameBufferUsed
+     );
+ 
+-EC_HANDLE WINAPI EcOpenSubscription(
++EC_HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcOpenSubscription(
+     LPCWSTR SubscriptionName,
+     DWORD AccessMask,
+     DWORD Flags 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcSetSubscriptionProperty( 
+     EC_HANDLE Subscription,
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -204,6 +207,7 @@ BOOL WINAPI EcSetSubscriptionProperty(
+     PEC_VARIANT PropertyValue
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcGetSubscriptionProperty( 
+     EC_HANDLE Subscription,
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -213,21 +217,24 @@ BOOL WINAPI EcGetSubscriptionProperty(
+     _Out_ PDWORD PropertyValueBufferUsed 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcSaveSubscription( 
+     EC_HANDLE Subscription,
+     DWORD Flags
+     );
+ 
+-BOOL WINAPI EcDeleteSubscription(
++BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcDeleteSubscription(
+     LPCWSTR SubscriptionName,
+     DWORD   Flags 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcGetObjectArraySize( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray,
+     _Out_ PDWORD ObjectArraySize 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcSetObjectArrayProperty( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -236,6 +243,7 @@ BOOL WINAPI EcSetObjectArrayProperty(
+     PEC_VARIANT PropertyValue
+     );
+  
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcGetObjectArrayProperty( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -246,16 +254,19 @@ BOOL WINAPI EcGetObjectArrayProperty(
+     _Out_ PDWORD PropertyValueBufferUsed 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcInsertObjectArrayElement( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     DWORD ArrayIndex 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcRemoveObjectArrayElement( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     DWORD ArrayIndex 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcGetSubscriptionRunTimeStatus( 
+     LPCWSTR SubscriptionName,
+     EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId,
+@@ -266,12 +277,13 @@ BOOL WINAPI EcGetSubscriptionRunTimeStatus(
+     _Out_ PDWORD StatusValueBufferUsed 
+     );
+ 
+-BOOL WINAPI EcRetrySubscription(
++BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcRetrySubscription(
+     LPCWSTR SubscriptionName,
+     LPCWSTR EventSourceName,
+     DWORD Flags 
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ BOOL WINAPI EcClose( 
+     EC_HANDLE Object
+     );
