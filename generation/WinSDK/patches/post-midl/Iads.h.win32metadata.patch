@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
+index 46e8d9b99e1440d2ffdc64dd03df41d75fc62579..35f417557fc75ecabd7079562ee37cb46df01821 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
+@@ -28,6 +28,7 @@
+ 
+ #ifndef __iads_h__
+ #define __iads_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -1590,7 +1591,7 @@ EXTERN_C const IID IID_IADs;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("fd8256d0-fd15-11ce-abc4-02608c9e7553")
+-    IADs : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADs : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+@@ -1773,7 +1774,7 @@ EXTERN_C const IID IID_IADs;
+         END_INTERFACE
+     } IADsVtbl;
+ 
+-    interface IADs
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADs
+     {
+         CONST_VTBL struct IADsVtbl *lpVtbl;
+     };
+@@ -1868,7 +1869,7 @@ EXTERN_C const IID IID_IADsContainer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("001677d0-fd16-11ce-abc4-02608c9e7553")
+-    IADsContainer : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsContainer : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+@@ -2045,7 +2046,7 @@ EXTERN_C const IID IID_IADsContainer;
+         END_INTERFACE
+     } IADsContainerVtbl;
+ 
+-    interface IADsContainer
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsContainer
+     {
+         CONST_VTBL struct IADsContainerVtbl *lpVtbl;
+     };

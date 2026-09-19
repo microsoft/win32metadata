@@ -1,0 +1,516 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
+index 0777b5b9b1eedbbc6ec2b4e4b2a851c475129fc3..d25cb2e1d0ac13ae057cb8a21602537426183530 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
+@@ -274,6 +274,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #ifndef PSSTDAPI
+ #if defined(_PROPSYS_)
+ #define PSSTDAPI          STDAPI
+@@ -313,7 +314,7 @@ EXTERN_C const IID IID_IInitializeWithFile;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b7d14566-0509-4cce-a71f-0a554233bd9b")
+-    IInitializeWithFile : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithFile : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -358,7 +359,7 @@ EXTERN_C const IID IID_IInitializeWithFile;
+         END_INTERFACE
+     } IInitializeWithFileVtbl;
+ 
+-    interface IInitializeWithFile
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithFile
+     {
+         CONST_VTBL struct IInitializeWithFileVtbl *lpVtbl;
+     };
+@@ -404,7 +405,7 @@ EXTERN_C const IID IID_IInitializeWithStream;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b824b49d-22ac-4161-ac8a-9916e8fa3f7f")
+-    IInitializeWithStream : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithStream : public IUnknown
+     {
+     public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -449,7 +450,7 @@ EXTERN_C const IID IID_IInitializeWithStream;
+         END_INTERFACE
+     } IInitializeWithStreamVtbl;
+ 
+-    interface IInitializeWithStream
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithStream
+     {
+         CONST_VTBL struct IInitializeWithStreamVtbl *lpVtbl;
+     };
+@@ -689,7 +690,7 @@ EXTERN_C const IID IID_INamedPropertyStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("71604b0f-97b0-4764-8577-2f13e98a1422")
+-    INamedPropertyStore : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ INamedPropertyStore : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetNamedValue( 
+@@ -772,7 +773,7 @@ EXTERN_C const IID IID_INamedPropertyStore;
+         END_INTERFACE
+     } INamedPropertyStoreVtbl;
+ 
+-    interface INamedPropertyStore
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ INamedPropertyStore
+     {
+         CONST_VTBL struct INamedPropertyStoreVtbl *lpVtbl;
+     };
+@@ -819,7 +820,7 @@ EXTERN_C const IID IID_INamedPropertyStore;
+ /* [local] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum GETPROPERTYSTOREFLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ GETPROPERTYSTOREFLAGS
+     {
+         GPS_DEFAULT	= 0,
+         GPS_HANDLERPROPERTIESONLY	= 0x1,
+@@ -856,7 +857,7 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("fc0ca0a7-c316-4fd2-9031-3e628e6d4f23")
+-    IObjectWithPropertyKey : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IObjectWithPropertyKey : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetPropertyKey( 
+@@ -907,7 +908,7 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
+         END_INTERFACE
+     } IObjectWithPropertyKeyVtbl;
+ 
+-    interface IObjectWithPropertyKey
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IObjectWithPropertyKey
+     {
+         CONST_VTBL struct IObjectWithPropertyKeyVtbl *lpVtbl;
+     };
+@@ -948,7 +949,7 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
+ /* [local] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum PKA_FLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PKA_FLAGS
+     {
+         PKA_SET	= 0,
+         PKA_APPEND	= ( PKA_SET + 1 ) ,
+@@ -972,7 +973,7 @@ EXTERN_C const IID IID_IPropertyChange;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f917bc8a-1bba-4478-a245-1bde03eb9431")
+-    IPropertyChange : public IObjectWithPropertyKey
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChange : public IObjectWithPropertyKey
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE ApplyToPropVariant( 
+@@ -1029,7 +1030,7 @@ EXTERN_C const IID IID_IPropertyChange;
+         END_INTERFACE
+     } IPropertyChangeVtbl;
+ 
+-    interface IPropertyChange
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChange
+     {
+         CONST_VTBL struct IPropertyChangeVtbl *lpVtbl;
+     };
+@@ -1082,7 +1083,7 @@ EXTERN_C const IID IID_IPropertyChangeArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("380f5cad-1b5e-42f2-805d-637fd392d31e")
+-    IPropertyChangeArray : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChangeArray : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -1195,7 +1196,7 @@ EXTERN_C const IID IID_IPropertyChangeArray;
+         END_INTERFACE
+     } IPropertyChangeArrayVtbl;
+ 
+-    interface IPropertyChangeArray
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChangeArray
+     {
+         CONST_VTBL struct IPropertyChangeArrayVtbl *lpVtbl;
+     };
+@@ -1259,7 +1260,7 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c8e2d566-186e-4d49-bf41-6909ead56acc")
+-    IPropertyStoreCapabilities : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCapabilities : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE IsPropertyWritable( 
+@@ -1300,7 +1301,7 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
+         END_INTERFACE
+     } IPropertyStoreCapabilitiesVtbl;
+ 
+-    interface IPropertyStoreCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCapabilities
+     {
+         CONST_VTBL struct IPropertyStoreCapabilitiesVtbl *lpVtbl;
+     };
+@@ -1341,7 +1342,7 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
+ /* [unique][object][uuid] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum PSC_STATE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PSC_STATE
+     {
+         PSC_NORMAL	= 0,
+         PSC_NOTINSOURCE	= 1,
+@@ -1355,7 +1356,7 @@ EXTERN_C const IID IID_IPropertyStoreCache;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3017056d-9a91-4e90-937d-746c72abbf4f")
+-    IPropertyStoreCache : public IPropertyStore
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCache : public IPropertyStore
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetState( 
+@@ -1484,7 +1485,7 @@ EXTERN_C const IID IID_IPropertyStoreCache;
+         END_INTERFACE
+     } IPropertyStoreCacheVtbl;
+ 
+-    interface IPropertyStoreCache
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCache
+     {
+         CONST_VTBL struct IPropertyStoreCacheVtbl *lpVtbl;
+     };
+@@ -1564,7 +1565,7 @@ EXTERN_C const IID IID_IPropertyEnumType;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("11e1fbf9-2d56-4a6b-8db3-7cd193a471f2")
+-    IPropertyEnumType : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumType : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEnumType( 
+@@ -1645,7 +1646,7 @@ EXTERN_C const IID IID_IPropertyEnumType;
+         END_INTERFACE
+     } IPropertyEnumTypeVtbl;
+ 
+-    interface IPropertyEnumType
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumType
+     {
+         CONST_VTBL struct IPropertyEnumTypeVtbl *lpVtbl;
+     };
+@@ -1703,7 +1704,7 @@ EXTERN_C const IID IID_IPropertyEnumType2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9b6e051c-5ddd-4321-9070-fe2acb55e794")
+-    IPropertyEnumType2 : public IPropertyEnumType
++    _Windows_SupportedOS_Windows7_ IPropertyEnumType2 : public IPropertyEnumType
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetImageReference( 
+@@ -1774,7 +1775,7 @@ EXTERN_C const IID IID_IPropertyEnumType2;
+         END_INTERFACE
+     } IPropertyEnumType2Vtbl;
+ 
+-    interface IPropertyEnumType2
++    interface _Windows_SupportedOS_Windows7_ IPropertyEnumType2
+     {
+         CONST_VTBL struct IPropertyEnumType2Vtbl *lpVtbl;
+     };
+@@ -1836,7 +1837,7 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("a99400f4-3d84-4557-94ba-1242fb2cc9a6")
+-    IPropertyEnumTypeList : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumTypeList : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -1927,7 +1928,7 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
+         END_INTERFACE
+     } IPropertyEnumTypeListVtbl;
+ 
+-    interface IPropertyEnumTypeList
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumTypeList
+     {
+         CONST_VTBL struct IPropertyEnumTypeListVtbl *lpVtbl;
+     };
+@@ -1977,7 +1978,7 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
+ /* [unique][object][uuid] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_TYPE_FLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_TYPE_FLAGS
+     {
+         PDTF_DEFAULT	= 0,
+         PDTF_MULTIPLEVALUES	= 0x1,
+@@ -1999,7 +2000,7 @@ enum PROPDESC_TYPE_FLAGS
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_TYPE_FLAGS)
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_VIEW_FLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_VIEW_FLAGS
+     {
+         PDVF_DEFAULT	= 0,
+         PDVF_CENTERALIGN	= 0x1,
+@@ -2041,7 +2042,7 @@ enum PROPDESC_GROUPING_RANGE
+     } 	PROPDESC_GROUPING_RANGE;
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_FORMAT_FLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_FORMAT_FLAGS
+     {
+         PDFF_DEFAULT	= 0,
+         PDFF_PREFIXNAME	= 0x1,
+@@ -2073,7 +2074,7 @@ enum PROPDESC_SORTDESCRIPTION
+     } 	PROPDESC_SORTDESCRIPTION;
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_RELATIVEDESCRIPTION_TYPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_RELATIVEDESCRIPTION_TYPE
+     {
+         PDRDT_GENERAL	= 0,
+         PDRDT_DATE	= 1,
+@@ -2089,7 +2090,7 @@ enum PROPDESC_RELATIVEDESCRIPTION_TYPE
+     } 	PROPDESC_RELATIVEDESCRIPTION_TYPE;
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_AGGREGATION_TYPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_AGGREGATION_TYPE
+     {
+         PDAT_DEFAULT	= 0,
+         PDAT_FIRST	= 1,
+@@ -2102,7 +2103,7 @@ enum PROPDESC_AGGREGATION_TYPE
+     } 	PROPDESC_AGGREGATION_TYPE;
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_CONDITION_TYPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_CONDITION_TYPE
+     {
+         PDCOT_NONE	= 0,
+         PDCOT_STRING	= 1,
+@@ -2118,7 +2119,7 @@ EXTERN_C const IID IID_IPropertyDescription;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6f79d558-3e96-4549-a1d1-7d75d2288814")
+-    IPropertyDescription : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescription : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyKey( 
+@@ -2395,7 +2396,7 @@ EXTERN_C const IID IID_IPropertyDescription;
+         END_INTERFACE
+     } IPropertyDescriptionVtbl;
+ 
+-    interface IPropertyDescription
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescription
+     {
+         CONST_VTBL struct IPropertyDescriptionVtbl *lpVtbl;
+     };
+@@ -2516,7 +2517,7 @@ EXTERN_C const IID IID_IPropertyDescription2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("57d2eded-5062-400e-b107-5dae79fe57a6")
+-    IPropertyDescription2 : public IPropertyDescription
++    _Windows_SupportedOS_Windows7_ IPropertyDescription2 : public IPropertyDescription
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetImageReferenceForValue( 
+@@ -2705,7 +2706,7 @@ EXTERN_C const IID IID_IPropertyDescription2;
+         END_INTERFACE
+     } IPropertyDescription2Vtbl;
+ 
+-    interface IPropertyDescription2
++    interface _Windows_SupportedOS_Windows7_ IPropertyDescription2
+     {
+         CONST_VTBL struct IPropertyDescription2Vtbl *lpVtbl;
+     };
+@@ -2815,7 +2816,7 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f67104fc-2af9-46fd-b32d-243c1404f3d1")
+-    IPropertyDescriptionAliasInfo : public IPropertyDescription
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionAliasInfo : public IPropertyDescription
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSortByAlias( 
+@@ -3018,7 +3019,7 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
+         END_INTERFACE
+     } IPropertyDescriptionAliasInfoVtbl;
+ 
+-    interface IPropertyDescriptionAliasInfo
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionAliasInfo
+     {
+         CONST_VTBL struct IPropertyDescriptionAliasInfoVtbl *lpVtbl;
+     };
+@@ -3126,7 +3127,7 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
+ /* [unique][object][uuid] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_SEARCHINFO_FLAGS
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_SEARCHINFO_FLAGS
+     {
+         PDSIF_DEFAULT	= 0,
+         PDSIF_ININVERTEDINDEX	= 0x1,
+@@ -3138,7 +3139,7 @@ enum PROPDESC_SEARCHINFO_FLAGS
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_SEARCHINFO_FLAGS)
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_COLUMNINDEX_TYPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_COLUMNINDEX_TYPE
+     {
+         PDCIT_NONE	= 0,
+         PDCIT_ONDISK	= 1,
+@@ -3154,7 +3155,7 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("078f91bd-29a2-440f-924e-46a291524520")
+-    IPropertyDescriptionSearchInfo : public IPropertyDescription
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionSearchInfo : public IPropertyDescription
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSearchInfoFlags( 
+@@ -3369,7 +3370,7 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
+         END_INTERFACE
+     } IPropertyDescriptionSearchInfoVtbl;
+ 
+-    interface IPropertyDescriptionSearchInfo
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionSearchInfo
+     {
+         CONST_VTBL struct IPropertyDescriptionSearchInfoVtbl *lpVtbl;
+     };
+@@ -3488,7 +3489,7 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("507393f4-2a3d-4a60-b59e-d9c75716c2dd")
+-    IPropertyDescriptionRelatedPropertyInfo : public IPropertyDescription
++    _Windows_SupportedOS_Windows7_ IPropertyDescriptionRelatedPropertyInfo : public IPropertyDescription
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetRelatedProperty( 
+@@ -3681,7 +3682,7 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
+         END_INTERFACE
+     } IPropertyDescriptionRelatedPropertyInfoVtbl;
+ 
+-    interface IPropertyDescriptionRelatedPropertyInfo
++    interface _Windows_SupportedOS_Windows7_ IPropertyDescriptionRelatedPropertyInfo
+     {
+         CONST_VTBL struct IPropertyDescriptionRelatedPropertyInfoVtbl *lpVtbl;
+     };
+@@ -3783,7 +3784,7 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
+ /* [local] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum PROPDESC_ENUMFILTER
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ PROPDESC_ENUMFILTER
+     {
+         PDEF_ALL	= 0,
+         PDEF_SYSTEM	= 1,
+@@ -4056,7 +4057,7 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1f9fc1d0-c39b-4b26-817f-011967d3440e")
+-    IPropertyDescriptionList : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionList : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -4115,7 +4116,7 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
+         END_INTERFACE
+     } IPropertyDescriptionListVtbl;
+ 
+-    interface IPropertyDescriptionList
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionList
+     {
+         CONST_VTBL struct IPropertyDescriptionListVtbl *lpVtbl;
+     };
+@@ -4164,7 +4165,7 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("bc110b6d-57e8-4148-a9c6-91015ab2f3a5")
+-    IPropertyStoreFactory : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreFactory : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyStore( 
+@@ -4243,7 +4244,7 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
+         END_INTERFACE
+     } IPropertyStoreFactoryVtbl;
+ 
+-    interface IPropertyStoreFactory
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreFactory
+     {
+         CONST_VTBL struct IPropertyStoreFactoryVtbl *lpVtbl;
+     };
+@@ -4292,7 +4293,7 @@ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("40d4577f-e237-4bdb-bd69-58f089431b6a")
+-    IDelayedPropertyStoreFactory : public IPropertyStoreFactory
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDelayedPropertyStoreFactory : public IPropertyStoreFactory
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDelayedPropertyStore( 
+@@ -4371,7 +4372,7 @@ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
+         END_INTERFACE
+     } IDelayedPropertyStoreFactoryVtbl;
+ 
+-    interface IDelayedPropertyStoreFactory
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDelayedPropertyStoreFactory
+     {
+         CONST_VTBL struct IDelayedPropertyStoreFactoryVtbl *lpVtbl;
+     };
+@@ -4447,7 +4448,7 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e318ad57-0aa0-450f-aca5-6fab7103d917")
+-    IPersistSerializedPropStorage : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPersistSerializedPropStorage : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
+@@ -4516,7 +4517,7 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
+         END_INTERFACE
+     } IPersistSerializedPropStorageVtbl;
+ 
+-    interface IPersistSerializedPropStorage
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPersistSerializedPropStorage
+     {
+         CONST_VTBL struct IPersistSerializedPropStorageVtbl *lpVtbl;
+     };
+@@ -4568,7 +4569,7 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("77effa68-4f98-4366-ba72-573b3d880571")
+-    IPersistSerializedPropStorage2 : public IPersistSerializedPropStorage
++    _Windows_SupportedOS_Windows7_ IPersistSerializedPropStorage2 : public IPersistSerializedPropStorage
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyStorageSize( 
+@@ -4649,7 +4650,7 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
+         END_INTERFACE
+     } IPersistSerializedPropStorage2Vtbl;
+ 
+-    interface IPersistSerializedPropStorage2
++    interface _Windows_SupportedOS_Windows7_ IPersistSerializedPropStorage2
+     {
+         CONST_VTBL struct IPersistSerializedPropStorage2Vtbl *lpVtbl;
+     };
+@@ -4791,7 +4792,7 @@ EXTERN_C const IID IID_ICreateObject;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("75121952-e0d0-43e5-9380-1d80483acf72")
+-    ICreateObject : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICreateObject : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateObject( 
+@@ -4844,7 +4845,7 @@ EXTERN_C const IID IID_ICreateObject;
+         END_INTERFACE
+     } ICreateObjectVtbl;
+ 
+-    interface ICreateObject
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICreateObject
+     {
+         CONST_VTBL struct ICreateObjectVtbl *lpVtbl;
+     };
