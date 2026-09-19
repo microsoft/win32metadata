@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
-index c46976b..52956d0 100644
+index c46976b..be1b96f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
 @@ -16,6 +16,7 @@
@@ -120,18 +120,17 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -97,6 +175,10 @@ GenerateConsoleCtrlEvent(
+@@ -97,6 +175,9 @@ GenerateConsoleCtrlEvent(
      _In_ DWORD dwProcessGroupId
      );
  
 +_Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
-+_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")
++_Win32_RAIIFree_(CloseHandle, INVALID_HANDLE_VALUE)
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -108,6 +190,8 @@ CreateConsoleScreenBuffer(
+@@ -108,6 +189,8 @@ CreateConsoleScreenBuffer(
      _Reserved_ LPVOID lpScreenBufferData
      );
  
@@ -140,7 +139,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -115,6 +199,8 @@ SetConsoleActiveScreenBuffer(
+@@ -115,6 +198,8 @@ SetConsoleActiveScreenBuffer(
      _In_ HANDLE hConsoleOutput
      );
  
@@ -149,7 +148,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -122,6 +208,8 @@ FlushConsoleInputBuffer(
+@@ -122,6 +207,8 @@ FlushConsoleInputBuffer(
      _In_ HANDLE hConsoleInput
      );
  
@@ -158,7 +157,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -129,6 +217,8 @@ SetConsoleCP(
+@@ -129,6 +216,8 @@ SetConsoleCP(
      _In_ UINT wCodePageID
      );
  
@@ -167,7 +166,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -141,6 +231,8 @@ typedef struct _CONSOLE_CURSOR_INFO {
+@@ -141,6 +230,8 @@ typedef struct _CONSOLE_CURSOR_INFO {
      BOOL   bVisible;
  } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
  
@@ -176,7 +175,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -149,6 +241,8 @@ GetConsoleCursorInfo(
+@@ -149,6 +240,8 @@ GetConsoleCursorInfo(
      _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo
      );
  
@@ -185,7 +184,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -160,11 +254,13 @@ SetConsoleCursorInfo(
+@@ -160,11 +253,13 @@ SetConsoleCursorInfo(
  typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
      COORD dwSize;
      COORD dwCursorPosition;
@@ -200,7 +199,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -177,14 +273,16 @@ typedef struct _CONSOLE_SCREEN_BUFFER_INFOEX {
+@@ -177,14 +272,16 @@ typedef struct _CONSOLE_SCREEN_BUFFER_INFOEX {
      ULONG cbSize;
      COORD dwSize;
      COORD dwCursorPosition;
@@ -219,7 +218,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -193,6 +291,8 @@ GetConsoleScreenBufferInfoEx(
+@@ -193,6 +290,8 @@ GetConsoleScreenBufferInfoEx(
      _Inout_ PCONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx
      );
  
@@ -228,7 +227,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -201,6 +301,8 @@ SetConsoleScreenBufferInfoEx(
+@@ -201,6 +300,8 @@ SetConsoleScreenBufferInfoEx(
      _In_ PCONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx
      );
  
@@ -237,7 +236,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -209,6 +311,8 @@ SetConsoleScreenBufferSize(
+@@ -209,6 +310,8 @@ SetConsoleScreenBufferSize(
      _In_ COORD dwSize
      );
  
@@ -246,7 +245,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -217,6 +321,8 @@ SetConsoleCursorPosition(
+@@ -217,6 +320,8 @@ SetConsoleCursorPosition(
      _In_ COORD dwCursorPosition
      );
  
@@ -255,7 +254,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  COORD
  WINAPI
-@@ -224,14 +330,18 @@ GetLargestConsoleWindowSize(
+@@ -224,14 +329,18 @@ GetLargestConsoleWindowSize(
      _In_ HANDLE hConsoleOutput
      );
  
@@ -275,7 +274,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -241,6 +351,8 @@ SetConsoleWindowInfo(
+@@ -241,6 +350,8 @@ SetConsoleWindowInfo(
      _In_ CONST SMALL_RECT* lpConsoleWindow
      );
  
@@ -284,7 +283,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -252,6 +364,8 @@ WriteConsoleOutputCharacterA(
+@@ -252,6 +363,8 @@ WriteConsoleOutputCharacterA(
      _Out_ LPDWORD lpNumberOfCharsWritten
      );
  
@@ -293,7 +292,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -269,17 +383,21 @@ WriteConsoleOutputCharacterW(
+@@ -269,17 +382,21 @@ WriteConsoleOutputCharacterW(
  #define WriteConsoleOutputCharacter  WriteConsoleOutputCharacterA
  #endif // !UNICODE
  
@@ -316,7 +315,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -291,6 +409,8 @@ ReadConsoleOutputCharacterA(
+@@ -291,6 +408,8 @@ ReadConsoleOutputCharacterA(
      _Out_ LPDWORD lpNumberOfCharsRead
      );
  
@@ -325,7 +324,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -308,17 +428,21 @@ ReadConsoleOutputCharacterW(
+@@ -308,17 +427,21 @@ ReadConsoleOutputCharacterW(
  #define ReadConsoleOutputCharacter  ReadConsoleOutputCharacterA
  #endif // !UNICODE
  
@@ -348,7 +347,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -329,6 +453,8 @@ WriteConsoleInputA(
+@@ -329,6 +452,8 @@ WriteConsoleInputA(
      _Out_ LPDWORD lpNumberOfEventsWritten
      );
  
@@ -357,7 +356,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -345,6 +471,8 @@ WriteConsoleInputW(
+@@ -345,6 +470,8 @@ WriteConsoleInputW(
  #define WriteConsoleInput  WriteConsoleInputA
  #endif // !UNICODE
  
@@ -366,7 +365,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -356,6 +484,8 @@ ScrollConsoleScreenBufferA(
+@@ -356,6 +483,8 @@ ScrollConsoleScreenBufferA(
      _In_ CONST CHAR_INFO* lpFill
      );
  
@@ -375,7 +374,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -373,6 +503,8 @@ ScrollConsoleScreenBufferW(
+@@ -373,6 +502,8 @@ ScrollConsoleScreenBufferW(
  #define ScrollConsoleScreenBuffer  ScrollConsoleScreenBufferA
  #endif // !UNICODE
  
@@ -384,7 +383,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -384,6 +516,8 @@ WriteConsoleOutputA(
+@@ -384,6 +515,8 @@ WriteConsoleOutputA(
      _Inout_ PSMALL_RECT lpWriteRegion
      );
  
@@ -393,7 +392,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -401,6 +535,8 @@ WriteConsoleOutputW(
+@@ -401,6 +534,8 @@ WriteConsoleOutputW(
  #define WriteConsoleOutput  WriteConsoleOutputA
  #endif // !UNICODE
  
@@ -402,7 +401,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -412,6 +548,8 @@ ReadConsoleOutputA(
+@@ -412,6 +547,8 @@ ReadConsoleOutputA(
      _Inout_ PSMALL_RECT lpReadRegion
      );
  
@@ -411,7 +410,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -429,6 +567,8 @@ ReadConsoleOutputW(
+@@ -429,6 +566,8 @@ ReadConsoleOutputW(
  #define ReadConsoleOutput  ReadConsoleOutputA
  #endif // !UNICODE
  
@@ -420,7 +419,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -437,6 +577,8 @@ GetConsoleTitleA(
+@@ -437,6 +576,8 @@ GetConsoleTitleA(
      _In_ DWORD nSize
      );
  
@@ -429,7 +428,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -453,6 +595,8 @@ GetConsoleTitleW(
+@@ -453,6 +594,8 @@ GetConsoleTitleW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -438,7 +437,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -461,6 +605,8 @@ GetConsoleOriginalTitleA(
+@@ -461,6 +604,8 @@ GetConsoleOriginalTitleA(
      _In_ DWORD nSize
      );
  
@@ -447,7 +446,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -477,6 +623,8 @@ GetConsoleOriginalTitleW(
+@@ -477,6 +622,8 @@ GetConsoleOriginalTitleW(
  
  #endif /* _WIN32_WINNT >= 0x0600 */
  
@@ -456,7 +455,7 @@ index c46976b..52956d0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -484,6 +632,8 @@ SetConsoleTitleA(
+@@ -484,6 +631,8 @@ SetConsoleTitleA(
      _In_ LPCSTR lpConsoleTitle
      );
  
