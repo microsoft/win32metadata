@@ -1,0 +1,362 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
+@@ -26,6 +26,7 @@
+ #ifndef __CLFSW32_H__
+ #define __CLFSW32_H__
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -162,7 +163,7 @@ CLFSUSER_API ULONG WINAPI LsnRecordSequence (
+ // containers lying in a given directory path.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API HANDLE WINAPI CreateLogFile (
++CLFSUSER_API HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CreateLogFile (
+                     IN LPCWSTR pszLogFileName,
+                     IN ACCESS_MASK fDesiredAccess,
+                     IN DWORD dwShareMode,
+@@ -180,7 +181,7 @@ CLFSUSER_API HANDLE WINAPI CreateLogFile (
+ // storage by handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI DeleteLogByHandle (IN HANDLE hLog);
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ DeleteLogByHandle (IN HANDLE hLog);
+ #endif /* _WIN32_WINNT */
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+@@ -191,7 +192,7 @@ CLFSUSER_API BOOL WINAPI DeleteLogByHandle (IN HANDLE hLog);
+ // storage by name.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI DeleteLogFile (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ DeleteLogFile (
+                     IN LPCWSTR pszLogFileName,
+                     IN PVOID pvReserved OPTIONAL
+                     );
+@@ -205,7 +206,7 @@ CLFSUSER_API BOOL WINAPI DeleteLogFile (
+ // handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI AddLogContainer (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ AddLogContainer (
+                     _In_ HANDLE hLog,
+                     _In_opt_ PULONGLONG pcbContainer,
+                     _In_ LPWSTR pwszContainerPath,
+@@ -221,7 +222,7 @@ CLFSUSER_API BOOL WINAPI AddLogContainer (
+ // handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI AddLogContainerSet (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ AddLogContainerSet (
+                     _In_ HANDLE hLog,
+                     _In_ USHORT cContainer,
+                     _In_opt_ PULONGLONG pcbContainer,
+@@ -238,7 +239,7 @@ CLFSUSER_API BOOL WINAPI AddLogContainerSet (
+ // the log handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI RemoveLogContainer (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ RemoveLogContainer (
+                     _In_ HANDLE hLog,
+                     _In_ LPWSTR pwszContainerPath,
+                     _In_ BOOL fForce,
+@@ -255,7 +256,7 @@ CLFSUSER_API BOOL WINAPI RemoveLogContainer (
+ //------------------------------------------------------------------------------
+ 
+ 
+-CLFSUSER_API BOOL WINAPI RemoveLogContainerSet (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ RemoveLogContainerSet (
+                     _In_ HANDLE hLog,
+                     _In_ USHORT cContainer,
+                     _In_reads_(cContainer) LPWSTR *rgwszContainerPath,
+@@ -272,7 +273,7 @@ CLFSUSER_API BOOL WINAPI RemoveLogContainerSet (
+ // depending on the type of the log handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI SetLogArchiveTail (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ SetLogArchiveTail (
+                     IN HANDLE hLog,
+                     IN PCLFS_LSN plsnArchiveTail,
+                     IN OUT LPVOID pReserved OPTIONAL
+@@ -292,7 +293,7 @@ CLFSUSER_API BOOL WINAPI SetLogArchiveTail (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI SetEndOfLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ SetEndOfLog (
+                     IN HANDLE hLog,
+                     IN PCLFS_LSN plsnEnd,
+                     IN OUT LPOVERLAPPED lpOverlapped
+@@ -308,7 +309,7 @@ CLFSUSER_API BOOL WINAPI SetEndOfLog (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI TruncateLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ TruncateLog (
+                     _In_ PVOID pvMarshal,
+                     _In_ PCLFS_LSN plsnEnd,
+                     _Inout_opt_ LPOVERLAPPED lpOverlapped
+@@ -324,7 +325,7 @@ CLFSUSER_API BOOL WINAPI TruncateLog (
+ // that back the physical log file stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI CreateLogContainerScanContext (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CreateLogContainerScanContext (
+                     IN HANDLE hLog,
+                     IN ULONG cFromContainer,
+                     IN ULONG cContainers,
+@@ -342,7 +343,7 @@ CLFSUSER_API BOOL WINAPI CreateLogContainerScanContext (
+ // log file stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ScanLogContainers (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ScanLogContainers (
+                     IN OUT PCLFS_SCAN_CONTEXT pcxScan,
+                     IN CLFS_SCAN_MODE eScanMode,
+                     IN OUT LPVOID pReserved OPTIONAL
+@@ -357,7 +358,7 @@ CLFSUSER_API BOOL WINAPI ScanLogContainers (
+ // number of reserved records and bytes.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI AlignReservedLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ AlignReservedLog (
+                     IN OUT PVOID pvMarshal,
+                     IN ULONG cReservedRecords,
+                     IN LONGLONG rgcbReservation [],
+@@ -373,7 +374,7 @@ CLFSUSER_API BOOL WINAPI AlignReservedLog (
+ // records and bytes.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI AllocReservedLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ AllocReservedLog (
+                     IN OUT PVOID pvMarshal,
+                     IN ULONG cReservedRecords,
+                     IN OUT PLONGLONG pcbAdjustment
+@@ -388,7 +389,7 @@ CLFSUSER_API BOOL WINAPI AllocReservedLog (
+ // for the reserved space.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI FreeReservedLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ FreeReservedLog (
+                     IN OUT PVOID pvMarshal,
+                     IN ULONG cReservedRecords,
+                     IN OUT PLONGLONG pcbAdjustment
+@@ -403,7 +404,7 @@ CLFSUSER_API BOOL WINAPI FreeReservedLog (
+ // specific to the handle.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI GetLogFileInformation (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ GetLogFileInformation (
+                     IN HANDLE hLog,
+                     IN OUT PCLFS_INFORMATION pinfoBuffer,
+                     IN OUT PULONG cbBuffer
+@@ -417,7 +418,7 @@ CLFSUSER_API BOOL WINAPI GetLogFileInformation (
+ // Enable or disable the log's archive support mechanisms.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI SetLogArchiveMode (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ SetLogArchiveMode (
+                     IN HANDLE hLog,
+                     IN CLFS_LOG_ARCHIVE_MODE eMode
+                     );
+@@ -431,7 +432,7 @@ CLFSUSER_API BOOL WINAPI SetLogArchiveMode (
+ // client log stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ReadLogRestartArea (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogRestartArea (
+                     IN PVOID pvMarshal,
+                     OUT PVOID* ppvRestartBuffer,
+                     OUT PULONG pcbRestartBuffer,
+@@ -450,7 +451,7 @@ CLFSUSER_API BOOL WINAPI ReadLogRestartArea (
+ // ReadRestartArea.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ReadPreviousLogRestartArea (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadPreviousLogRestartArea (
+                     IN PVOID pvReadContext,
+                     OUT PVOID *ppvRestartBuffer,
+                     OUT PULONG pcbRestartBuffer,
+@@ -466,7 +467,7 @@ CLFSUSER_API BOOL WINAPI ReadPreviousLogRestartArea (
+ // Write a new restart area to a physical or client log stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI WriteLogRestartArea (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WriteLogRestartArea (
+                     IN OUT PVOID pvMarshal,
+                     IN PVOID pvRestartBuffer,
+                     IN ULONG cbRestartBuffer,
+@@ -500,7 +501,7 @@ CLFSUSER_API BOOL WINAPI GetLogReservationInfo (
+ // Set a new base LSN for a log stream without writing a restart record.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI AdvanceLogBase (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ AdvanceLogBase (
+                     IN OUT PVOID pvMarshal,
+                     IN PCLFS_LSN plsnBase,
+                     IN ULONG fFlags,
+@@ -517,7 +518,7 @@ CLFSUSER_API BOOL WINAPI AdvanceLogBase (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI CloseAndResetLogFile (IN HANDLE hLog);
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CloseAndResetLogFile (IN HANDLE hLog);
+ #endif /* _WIN32_WINNT */
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+@@ -528,7 +529,7 @@ CLFSUSER_API BOOL WINAPI CloseAndResetLogFile (IN HANDLE hLog);
+ // file stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI CreateLogMarshallingArea (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CreateLogMarshallingArea (
+                     IN HANDLE hLog,
+                     IN CLFS_BLOCK_ALLOCATION pfnAllocBuffer OPTIONAL,
+                     IN CLFS_BLOCK_DEALLOCATION pfnFreeBuffer OPTIONAL,
+@@ -548,7 +549,7 @@ CLFSUSER_API BOOL WINAPI CreateLogMarshallingArea (
+ // file stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI DeleteLogMarshallingArea (IN PVOID pvMarshal);
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ DeleteLogMarshallingArea (IN PVOID pvMarshal);
+ #endif /* _WIN32_WINNT */
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+@@ -559,7 +560,7 @@ CLFSUSER_API BOOL WINAPI DeleteLogMarshallingArea (IN PVOID pvMarshal);
+ // log stream.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ReserveAndAppendLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReserveAndAppendLog (
+                     IN PVOID pvMarshal,
+                     IN PCLFS_WRITE_ENTRY rgWriteEntries OPTIONAL,
+                     IN ULONG cWriteEntries,
+@@ -581,7 +582,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLog (
+ // log stream, honoring an alignment between write entries.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ReserveAndAppendLogAligned (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReserveAndAppendLogAligned (
+                     IN PVOID pvMarshal,
+                     IN PCLFS_WRITE_ENTRY rgWriteEntries OPTIONAL,
+                     IN ULONG cWriteEntries,
+@@ -604,7 +605,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLogAligned (
+ // flush all buffers to the disk.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI FlushLogBuffers (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ FlushLogBuffers (
+                     IN PVOID pvMarshal,
+                     IN OUT LPOVERLAPPED pOverlapped OPTIONAL
+                     );
+@@ -618,7 +619,7 @@ CLFSUSER_API BOOL WINAPI FlushLogBuffers (
+ // queue and flush all buffers up to the target LSN to the disk.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI FlushLogToLsn (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ FlushLogToLsn (
+                     IN PVOID pvMarshalContext,
+                     IN PCLFS_LSN plsnFlush,
+                     OUT PCLFS_LSN plsnLastFlushed OPTIONAL,
+@@ -635,7 +636,7 @@ CLFSUSER_API BOOL WINAPI FlushLogToLsn (
+ //------------------------------------------------------------------------------
+ 
+ 
+-CLFSUSER_API BOOL WINAPI ReadLogRecord (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogRecord (
+                     IN PVOID pvMarshal,
+                     IN PCLFS_LSN plsnFirst,
+                     IN CLFS_CONTEXT_MODE eContextMode,
+@@ -657,7 +658,7 @@ CLFSUSER_API BOOL WINAPI ReadLogRecord (
+ //------------------------------------------------------------------------------
+ 
+ 
+-CLFSUSER_API BOOL WINAPI ReadNextLogRecord (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadNextLogRecord (
+                     IN OUT PVOID pvReadContext,
+                     OUT PVOID* ppvBuffer,
+                     OUT PULONG pcbBuffer,
+@@ -677,7 +678,7 @@ CLFSUSER_API BOOL WINAPI ReadNextLogRecord (
+ // Terminate the read context.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI TerminateReadLog (IN PVOID pvCursorContext);
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ TerminateReadLog (IN PVOID pvCursorContext);
+ #endif /* _WIN32_WINNT */
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+@@ -688,7 +689,7 @@ CLFSUSER_API BOOL WINAPI TerminateReadLog (IN PVOID pvCursorContext);
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI DumpLogRecords (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ DumpLogRecords (
+                     _In_ PWSTR pwszLogFileName,
+                     _In_ CLFS_RECORD_TYPE fRecordType,
+                     _In_opt_ PCLFS_LSN plsnStart,
+@@ -714,7 +715,7 @@ CLFSUSER_API BOOL WINAPI DumpLogRecords (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI PrepareLogArchive (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ PrepareLogArchive (
+                 _In_ HANDLE hLog,
+                 _Inout_updates_(cLen) PWSTR pszBaseLogFileName,
+                 _In_ ULONG cLen,
+@@ -739,7 +740,7 @@ CLFSUSER_API BOOL WINAPI PrepareLogArchive (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ReadLogArchiveMetadata(
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogArchiveMetadata(
+                 IN CLFS_LOG_ARCHIVE_CONTEXT pvArchiveContext,
+                 IN ULONG     cbOffset,
+                 IN ULONG     cbBytesToRead,
+@@ -757,7 +758,7 @@ CLFSUSER_API BOOL WINAPI ReadLogArchiveMetadata(
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI GetNextLogArchiveExtent (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ GetNextLogArchiveExtent (
+                 IN CLFS_LOG_ARCHIVE_CONTEXT pvArchiveContext,
+                 IN OUT CLFS_ARCHIVE_DESCRIPTOR rgadExtent [],
+                 IN ULONG cDescriptors,
+@@ -774,7 +775,7 @@ CLFSUSER_API BOOL WINAPI GetNextLogArchiveExtent (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI TerminateLogArchive (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ TerminateLogArchive (
+                 IN CLFS_LOG_ARCHIVE_CONTEXT pvArchiveContext
+                 );
+ #endif /* _WIN32_WINNT */
+@@ -788,7 +789,7 @@ CLFSUSER_API BOOL WINAPI TerminateLogArchive (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI ValidateLog (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ValidateLog (
+                 IN LPCWSTR pszLogFileName,
+                 IN LPSECURITY_ATTRIBUTES psaLogFile OPTIONAL,
+                 OUT PCLFS_INFORMATION pinfoBuffer OPTIONAL,
+@@ -804,7 +805,7 @@ CLFSUSER_API BOOL WINAPI ValidateLog (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI GetLogContainerName (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ GetLogContainerName (
+                 IN HANDLE hLog,
+                 IN CLFS_CONTAINER_ID cidLogicalContainer,
+                 IN OUT LPCWSTR pwstrContainerName,
+@@ -821,7 +822,7 @@ CLFSUSER_API BOOL WINAPI GetLogContainerName (
+ //
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOL WINAPI GetLogIoStatistics (
++CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ GetLogIoStatistics (
+                 IN HANDLE hLog,
+                 IN OUT PVOID pvStatsBuffer,
+                 IN ULONG cbStatsBuffer,
