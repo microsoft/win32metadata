@@ -1,7 +1,7 @@
-diff --git a/um/winver.h b/um/winver.h
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
 index 8618aa1a48..9638e2ab1d 100644
---- a/um/winver.h
-+++ b/um/winver.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
 @@ -17,6 +17,7 @@
  
  #include <SpecStrings.h>
