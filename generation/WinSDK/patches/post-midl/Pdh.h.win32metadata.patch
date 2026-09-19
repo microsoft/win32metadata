@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
+index e1ef840a2762278fdb880964b8304b2e7e3b201f..40b2cd854f18e3a6e53a836ef02a1dd23c00b75c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
+@@ -18,6 +18,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family and or PerfCounter Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_PERFCOUNTER)
+@@ -88,7 +89,7 @@ typedef PDH_HLOG     HLOG;
+ #define H_REALTIME_DATASOURCE NULL
+ #define H_WBEM_DATASOURCE     INVALID_HANDLE_VALUE
+ 
+-typedef struct _PDH_RAW_COUNTER {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _PDH_RAW_COUNTER {
+     volatile DWORD CStatus;
+     FILETIME    TimeStamp;
+     LONGLONG    FirstValue;
+@@ -310,6 +311,8 @@ typedef struct _PDH_LOG_SERVICE_QUERY_INFO_W {
+ 
+ // function definitions
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ PDH_FUNCTION
+ PdhGetDllVersion(
+     _Out_opt_ LPDWORD lpdwVersion
+@@ -319,6 +322,8 @@ PdhGetDllVersion(
+ //  Query Functions
+ //
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ PDH_FUNCTION   
+ PdhOpenQueryW(
+     _In_opt_ LPCWSTR      szDataSource,
+@@ -326,6 +331,8 @@ PdhOpenQueryW(
+     _Out_    PDH_HQUERY * phQuery
+ );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ PDH_FUNCTION
+ PdhOpenQueryA(
+     _In_opt_ LPCSTR       szDataSource,

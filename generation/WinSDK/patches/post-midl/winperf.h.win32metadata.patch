@@ -1,0 +1,19 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h b/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
+index 83e9335336fd4ccee8a86e1b16125e39e63e9184..f9b2a5645cc812c3c8c4d673b93f010f84df556a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++
+ 
+@@ -65,7 +66,7 @@ Abstract:
+ #define PERF_DATA_REVISION  1
+ 
+ 
+-typedef struct _PERF_DATA_BLOCK {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _PERF_DATA_BLOCK {
+     WCHAR           Signature[4];       // Signature: Unicode "PERF"
+     DWORD           LittleEndian;       // 0 = Big Endian, 1 = Little Endian
+     DWORD           Version;            // Version of these data structures
