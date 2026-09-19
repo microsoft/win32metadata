@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+index 24ecb93e..e6ef40c4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+@@ -16,6 +16,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -585,6 +586,7 @@ typedef struct _DS_SELECTION_LIST
+ #undef INTERFACE
+ #define INTERFACE IDsObjectPicker
+ 
++_Windows_SupportedOS_WindowsVista_
+ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -612,6 +614,7 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
+          IDataObject      **ppdoSelections) PURE;
+ };
+ 
++_Windows_SupportedOS_Server2008_
+ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
+ {
+     // *** IUnknown methods ***
+@@ -640,4 +643,3 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
+ 
+ #endif // __OBJSEL_H_
+ 
+-

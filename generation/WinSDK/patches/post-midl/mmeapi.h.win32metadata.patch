@@ -1,0 +1,260 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
+index 93079425..06591501 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
+@@ -25,10 +25,20 @@
+ 
+ #include <mmsyscom.h> // mm common definitions
+ 
++#include <win32metadata_annotations.h>
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+ 
++#ifdef WIN32METADATA
++enum MIDI_WAVE_OPEN_TYPE : DWORD;
++enum MIXERLINE_COMPONENTTYPE : DWORD;
++#else
++typedef DWORD MIDI_WAVE_OPEN_TYPE;
++typedef DWORD MIXERLINE_COMPONENTTYPE;
++#endif
++
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -436,7 +446,7 @@ waveOutOpen(
+     _In_ LPCWAVEFORMATEX pwfx,
+     _In_opt_ DWORD_PTR dwCallback,
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _In_ MIDI_WAVE_OPEN_TYPE fdwOpen
+     );
+ 
+ WINMMAPI
+@@ -643,7 +653,7 @@ waveInOpen(
+     _In_ LPCWAVEFORMATEX pwfx,
+     _In_opt_ DWORD_PTR dwCallback,
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _In_ MIDI_WAVE_OPEN_TYPE fdwOpen
+     );
+ 
+ WINMMAPI
+@@ -797,6 +807,82 @@ typedef WORD FAR *LPKEYARRAY;
+ #define MIDI_IO_STATUS      0x00000020L
+ #endif /* WINVER >= 0x0400 */
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("CALLBACK_NULL")
++#pragma push_macro("CALLBACK_WINDOW")
++#pragma push_macro("CALLBACK_TASK")
++#pragma push_macro("CALLBACK_FUNCTION")
++#ifdef _WIN32
++#pragma push_macro("CALLBACK_THREAD")
++#pragma push_macro("CALLBACK_EVENT")
++#endif
++#pragma push_macro("WAVE_FORMAT_QUERY")
++#pragma push_macro("WAVE_ALLOWSYNC")
++#if (WINVER >= 0x0400)
++#pragma push_macro("WAVE_MAPPED")
++#pragma push_macro("WAVE_FORMAT_DIRECT")
++#pragma push_macro("WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE")
++#pragma push_macro("MIDI_IO_STATUS")
++#endif
++#undef CALLBACK_NULL
++#undef CALLBACK_WINDOW
++#undef CALLBACK_TASK
++#undef CALLBACK_FUNCTION
++#ifdef _WIN32
++#undef CALLBACK_THREAD
++#undef CALLBACK_EVENT
++#endif
++#undef WAVE_FORMAT_QUERY
++#undef WAVE_ALLOWSYNC
++#if (WINVER >= 0x0400)
++#undef WAVE_MAPPED
++#undef WAVE_FORMAT_DIRECT
++#undef WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE
++#undef MIDI_IO_STATUS
++#endif
++enum
++    _Win32_AssociatedConstant_(CALLBACK_TYPEMASK)
++#if (WINVER >= 0x0400)
++    _Win32_AssociatedConstant_(WAVE_FORMAT_DIRECT_QUERY)
++#endif
++    [[clang::flag_enum]]
++    MIDI_WAVE_OPEN_TYPE : DWORD
++{
++    CALLBACK_NULL = 0x00000000,
++    CALLBACK_WINDOW = 0x00010000,
++    CALLBACK_TASK = 0x00020000,
++    CALLBACK_FUNCTION = 0x00030000,
++#ifdef _WIN32
++    CALLBACK_THREAD = 0x00020000,
++    CALLBACK_EVENT = 0x00050000,
++#endif
++    WAVE_FORMAT_QUERY = 0x0001,
++    WAVE_ALLOWSYNC = 0x0002,
++#if (WINVER >= 0x0400)
++    WAVE_MAPPED = 0x0004,
++    WAVE_FORMAT_DIRECT = 0x0008,
++    WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010,
++    MIDI_IO_STATUS = 0x00000020,
++#endif
++};
++#if (WINVER >= 0x0400)
++#pragma pop_macro("MIDI_IO_STATUS")
++#pragma pop_macro("WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE")
++#pragma pop_macro("WAVE_FORMAT_DIRECT")
++#pragma pop_macro("WAVE_MAPPED")
++#endif
++#pragma pop_macro("WAVE_ALLOWSYNC")
++#pragma pop_macro("WAVE_FORMAT_QUERY")
++#ifdef _WIN32
++#pragma pop_macro("CALLBACK_EVENT")
++#pragma pop_macro("CALLBACK_THREAD")
++#endif
++#pragma pop_macro("CALLBACK_FUNCTION")
++#pragma pop_macro("CALLBACK_TASK")
++#pragma pop_macro("CALLBACK_WINDOW")
++#pragma pop_macro("CALLBACK_NULL")
++#endif
++
+ /* flags for wFlags parm of midiOutCachePatches(), midiOutCacheDrumPatches() */
+ #define MIDI_CACHE_ALL      1
+ #define MIDI_CACHE_BESTFIT  2
+@@ -1104,7 +1190,7 @@ midiStreamOpen(
+     _In_ DWORD cMidi,
+     _In_opt_ DWORD_PTR dwCallback,
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _In_ MIDI_WAVE_OPEN_TYPE fdwOpen
+     );
+ 
+ WINMMAPI
+@@ -1274,7 +1360,7 @@ midiOutOpen(
+     _In_ UINT uDeviceID,
+     _In_opt_ DWORD_PTR dwCallback,
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _In_ MIDI_WAVE_OPEN_TYPE fdwOpen
+     );
+ 
+ WINMMAPI
+@@ -1876,7 +1962,7 @@ typedef struct tagMIXERLINEA {
+     DWORD       dwLineID;               /* unique line id for mixer device */
+     DWORD       fdwLine;                /* state/information about line */
+     DWORD_PTR   dwUser;                 /* driver specific information */
+-    DWORD       dwComponentType;        /* component type line connects to */
++    MIXERLINE_COMPONENTTYPE dwComponentType; /* component type line connects to */
+     DWORD       cChannels;              /* number of channels line supports */
+     DWORD       cConnections;           /* number of connections [possible] */
+     DWORD       cControls;              /* number of controls at this line */
+@@ -1898,7 +1984,7 @@ typedef struct tagMIXERLINEW {
+     DWORD       dwLineID;               /* unique line id for mixer device */
+     DWORD       fdwLine;                /* state/information about line */
+     DWORD_PTR   dwUser;                 /* driver specific information */
+-    DWORD       dwComponentType;        /* component type line connects to */
++    MIXERLINE_COMPONENTTYPE dwComponentType; /* component type line connects to */
+     DWORD       cChannels;              /* number of channels line supports */
+     DWORD       cConnections;           /* number of connections [possible] */
+     DWORD       cControls;              /* number of controls at this line */
+@@ -1988,6 +2074,92 @@ typedef struct tMIXERLINE {
+ #define MIXERLINE_COMPONENTTYPE_SRC_ANALOG      (MIXERLINE_COMPONENTTYPE_SRC_FIRST + 10)
+ #define MIXERLINE_COMPONENTTYPE_SRC_LAST        (MIXERLINE_COMPONENTTYPE_SRC_FIRST + 10)
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_DIGITAL")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_HEADPHONES")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_LINE")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_MONITOR")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_SPEAKERS")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_TELEPHONE")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_UNDEFINED")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_VOICEIN")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_DST_WAVEIN")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_ANALOG")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_DIGITAL")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_LINE")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED")
++#pragma push_macro("MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT")
++#undef MIXERLINE_COMPONENTTYPE_DST_DIGITAL
++#undef MIXERLINE_COMPONENTTYPE_DST_HEADPHONES
++#undef MIXERLINE_COMPONENTTYPE_DST_LINE
++#undef MIXERLINE_COMPONENTTYPE_DST_MONITOR
++#undef MIXERLINE_COMPONENTTYPE_DST_SPEAKERS
++#undef MIXERLINE_COMPONENTTYPE_DST_TELEPHONE
++#undef MIXERLINE_COMPONENTTYPE_DST_UNDEFINED
++#undef MIXERLINE_COMPONENTTYPE_DST_VOICEIN
++#undef MIXERLINE_COMPONENTTYPE_DST_WAVEIN
++#undef MIXERLINE_COMPONENTTYPE_SRC_ANALOG
++#undef MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY
++#undef MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC
++#undef MIXERLINE_COMPONENTTYPE_SRC_DIGITAL
++#undef MIXERLINE_COMPONENTTYPE_SRC_LINE
++#undef MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE
++#undef MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER
++#undef MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER
++#undef MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE
++#undef MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED
++#undef MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT
++enum MIXERLINE_COMPONENTTYPE : DWORD
++{
++    MIXERLINE_COMPONENTTYPE_DST_DIGITAL = 1,
++    MIXERLINE_COMPONENTTYPE_DST_HEADPHONES = 5,
++    MIXERLINE_COMPONENTTYPE_DST_LINE = 2,
++    MIXERLINE_COMPONENTTYPE_DST_MONITOR = 3,
++    MIXERLINE_COMPONENTTYPE_DST_SPEAKERS = 4,
++    MIXERLINE_COMPONENTTYPE_DST_TELEPHONE = 6,
++    MIXERLINE_COMPONENTTYPE_DST_UNDEFINED = 0,
++    MIXERLINE_COMPONENTTYPE_DST_VOICEIN = 8,
++    MIXERLINE_COMPONENTTYPE_DST_WAVEIN = 7,
++    MIXERLINE_COMPONENTTYPE_SRC_ANALOG = 0x100A,
++    MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY = 0x1009,
++    MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC = 0x1005,
++    MIXERLINE_COMPONENTTYPE_SRC_DIGITAL = 0x1001,
++    MIXERLINE_COMPONENTTYPE_SRC_LINE = 0x1002,
++    MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE = 0x1003,
++    MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER = 0x1007,
++    MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER = 0x1004,
++    MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE = 0x1006,
++    MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED = 0x1000,
++    MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT = 0x1008,
++};
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_LINE")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_DIGITAL")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_SRC_ANALOG")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_WAVEIN")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_VOICEIN")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_UNDEFINED")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_TELEPHONE")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_SPEAKERS")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_MONITOR")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_LINE")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_HEADPHONES")
++#pragma pop_macro("MIXERLINE_COMPONENTTYPE_DST_DIGITAL")
++#endif
++
+ /* */
+ /*  MIXERLINE.Target.dwType */
+ /* */
+@@ -2436,4 +2608,3 @@ mixerSetControlDetails(
+ #endif
+ 
+ #endif // _MMEAPI_H_
+-
