@@ -1,0 +1,110 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
+@@ -21,6 +21,7 @@
+ =============================================================================*/
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -153,7 +154,7 @@ typedef CLFS_CONTAINER_ID           **PPCLFS_CONTAINER_ID;
+ // CLS_LSN
+ //
+ 
+-typedef struct _CLS_LSN
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_LSN
+ {
+ 
+     ULONGLONG               Internal;
+@@ -332,7 +333,7 @@ typedef enum _CLS_CONTEXT_MODE
+ // Alias all CLS prefixes with CLFS prefixes.
+ //
+ 
+-typedef enum _CLFS_CONTEXT_MODE
++typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_CONTEXT_MODE
+ {
+     ClfsContextNone = 0x00,
+     ClfsContextUndoNext,
+@@ -352,7 +353,7 @@ typedef enum _CLFS_CONTEXT_MODE
+ // field while the size is used in for consistency checking.
+ //
+ 
+-typedef struct _CLFS_NODE_ID
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_NODE_ID
+ {
+     ULONG   cType;                                      // CLFS node type.
+     ULONG   cbNode;                                     // CLFS node size.
+@@ -369,7 +370,7 @@ typedef struct _CLFS_NODE_ID
+ // marshaled in the space reservation and append interface of the CLS API.
+ //
+ 
+-typedef struct _CLS_WRITE_ENTRY
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_WRITE_ENTRY
+ {
+     PVOID Buffer;
+     ULONG ByteLength;
+@@ -403,7 +404,7 @@ typedef GUID CLFS_LOG_ID;
+ // file data, depending on the type of information queried.
+ //
+ 
+-typedef struct _CLS_INFORMATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_INFORMATION
+ {
+     LONGLONG TotalAvailable;                            // Total log data space available.
+     LONGLONG CurrentAvailable;                          // Usable space in the log file.
+@@ -592,7 +593,7 @@ const ULONG CLFS_MAX_CONTAINER_INFO = (256);
+ // attributes, state, minimum, and maximum LSNs.
+ //
+ 
+-typedef struct _CLS_CONTAINER_INFORMATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_CONTAINER_INFORMATION
+ {
+     ULONG FileAttributes;                    // File system attribute flag.
+     ULONGLONG CreationTime;                  // File creation time.
+@@ -670,7 +671,7 @@ typedef enum _CLS_IOSTATS_CLASS
+ // Alias all CLS prefixes with CLFS prefixes.
+ //
+ 
+-typedef enum _CLFS_IOSTATS_CLASS
++typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_IOSTATS_CLASS
+ {
+     ClfsIoStatsDefault = 0x0000,
+     ClfsIoStatsMax     = 0xFFFF
+@@ -688,7 +689,7 @@ typedef enum _CLFS_IOSTATS_CLASS
+ // now.
+ //
+ 
+-typedef struct _CLS_IO_STATISTICS_HEADER
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_IO_STATISTICS_HEADER
+ {
+     UCHAR                ubMajorVersion;     // Major version of the statistics buffer.
+     UCHAR                ubMinorVersion;     // Minor version of the statistics buffer.
+@@ -708,7 +709,7 @@ typedef CLFS_IO_STATISTICS_HEADER *PCLFS_IO_STATISTICS_HEADER, **PPCLFS_IO_STATI
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+-typedef struct _CLS_IO_STATISTICS
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_IO_STATISTICS
+ {
+     CLS_IO_STATISTICS_HEADER hdrIoStats;    // Statistics buffer header.
+     ULONGLONG cFlush;                       // Flush count.
+@@ -848,7 +849,7 @@ typedef CLFS_SCAN_CONTEXT *PCLFS_SCAN_CONTEXT, **PPCLFS_SCAN_CONTEXT;
+ // for archiving and restoring a snapshot of the log.
+ //
+ 
+-typedef struct _CLS_ARCHIVE_DESCRIPTOR
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_ARCHIVE_DESCRIPTOR
+ {
+     ULONGLONG coffLow;
+     ULONGLONG coffHigh;
+@@ -889,7 +890,7 @@ typedef void (* CLFS_BLOCK_DEALLOCATION) (PVOID pvBuffer, PVOID pvUserContext);
+ // Describes the archive support behavior for the log.
+ //
+ 
+-typedef enum _CLFS_LOG_ARCHIVE_MODE
++typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_LOG_ARCHIVE_MODE
+ {
+ 
+     ClfsLogArchiveEnabled = 0x01,

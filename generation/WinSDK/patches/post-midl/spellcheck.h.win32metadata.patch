@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
+index 288a2d6f7656d2009aa98821224e3df54bbaf1e4..d13d1944632a0e0443b8c5a98b11be240f1b6b22 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
+@@ -133,6 +133,7 @@ extern "C"{
+ #endif
+ #if NTDDI_VERSION >= MIN_SPELLING_NTDDI
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ typedef /* [v1_enum] */ 
+@@ -170,7 +171,7 @@ EXTERN_C const IID IID_ISpellingError;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3")
+-    ISpellingError : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ISpellingError : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StartIndex( 
+@@ -241,7 +242,7 @@ EXTERN_C const IID IID_ISpellingError;
+         END_INTERFACE
+     } ISpellingErrorVtbl;
+ 
+-    interface ISpellingError
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ISpellingError
+     {
+         CONST_VTBL struct ISpellingErrorVtbl *lpVtbl;
+     };
+@@ -296,7 +297,7 @@ EXTERN_C const IID IID_IEnumSpellingError;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("803E3BD4-2828-4410-8290-418D1D73C762")
+-    IEnumSpellingError : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IEnumSpellingError : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -337,7 +338,7 @@ EXTERN_C const IID IID_IEnumSpellingError;
+         END_INTERFACE
+     } IEnumSpellingErrorVtbl;
+ 
+-    interface IEnumSpellingError
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IEnumSpellingError
+     {
+         CONST_VTBL struct IEnumSpellingErrorVtbl *lpVtbl;
+     };

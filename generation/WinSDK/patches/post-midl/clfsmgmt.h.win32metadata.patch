@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
+@@ -25,6 +25,7 @@ Revision History:
+ #define _CLFSMGMT_H_
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -42,7 +43,7 @@ extern "C" {
+ // between user and kernel mode.
+ //
+ 
+-typedef enum _CLFS_MGMT_POLICY_TYPE {
++typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_POLICY_TYPE {
+ 
+     ClfsMgmtPolicyMaximumSize = 0x0,
+     ClfsMgmtPolicyMinimumSize,
+@@ -105,7 +106,7 @@ typedef enum _CLFS_MGMT_POLICY_TYPE {
+ // may be present on a log file.  These are installed
+ // via InstallLogPolicy (Win32) or ClfsMgmtInstallPolicy (kernel).
+ //
+-typedef struct _CLFS_MGMT_POLICY {
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_POLICY {
+ 
+     //
+     // Version of the structure.  Should be CLFS_MGMT_POLICY_VERSION.
+@@ -241,7 +242,7 @@ typedef enum _CLFS_MGMT_NOTIFICATION_TYPE
+ // A notification and associated parameters.
+ //
+ 
+-typedef struct _CLFS_MGMT_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_NOTIFICATION
+ {
+ 
+     //
