@@ -1,0 +1,107 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
+index f0b98656cb..d59d97b11a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -29,15 +30,22 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ QueueUserWorkItem(
+-    _In_ LPTHREAD_START_ROUTINE Function,
+-    _In_opt_ PVOID Context,
++    _Win32_Retained_ _In_ LPTHREAD_START_ROUTINE Function,
++    _Win32_Retained_ _In_opt_ PVOID Context,
+     _In_ ULONG Flags
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_PreserveResult_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -53,6 +61,10 @@ UnregisterWaitEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_RAIIFree_(DeleteTimerQueue, 0)
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -61,19 +73,25 @@ CreateTimerQueue(
+     VOID
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ CreateTimerQueueTimer(
+     _Outptr_ PHANDLE phNewTimer,
+     _In_opt_ HANDLE TimerQueue,
+-    _In_ WAITORTIMERCALLBACK Callback,
+-    _In_opt_ PVOID Parameter,
++    _Win32_Retained_ _In_ WAITORTIMERCALLBACK Callback,
++    _Win32_Retained_ _In_opt_ PVOID Parameter,
+     _In_ DWORD DueTime,
+     _In_ DWORD Period,
+     _In_ ULONG Flags
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -85,6 +103,10 @@ ChangeTimerQueueTimer(
+     _In_ ULONG Period
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_PreserveResult_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -95,6 +117,9 @@ DeleteTimerQueueTimer(
+     _In_opt_ HANDLE CompletionEvent
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -103,6 +128,9 @@ DeleteTimerQueue(
+     _In_ HANDLE TimerQueue
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
