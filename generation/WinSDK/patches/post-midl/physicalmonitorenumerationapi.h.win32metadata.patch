@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
+index 0b231f7fd4e5fc688f86a4353dd53a5be3116147..8fb3bae9e844195aa0b19286165ea940f8059961 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
+@@ -5,6 +5,7 @@
+ #define PhysicalMonitorEnumerationAPI_h
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -34,7 +35,7 @@ typedef _Return_type_success_(return == TRUE) BOOL _BOOL;
+ /******************************************************************************
+     Physical Monitor Structures 
+ ******************************************************************************/
+-typedef struct _PHYSICAL_MONITOR
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _PHYSICAL_MONITOR
+ {
+     HANDLE hPhysicalMonitor;
+     WCHAR szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
+@@ -67,6 +68,8 @@ HRESULT WINAPI GetPhysicalMonitorsFromIDirect3DDevice9
+     _Out_writes_(dwPhysicalMonitorArraySize) LPPHYSICAL_MONITOR pPhysicalMonitorArray
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI DestroyPhysicalMonitor( _In_ HANDLE hMonitor );
+ _BOOL WINAPI DestroyPhysicalMonitors
+     ( 

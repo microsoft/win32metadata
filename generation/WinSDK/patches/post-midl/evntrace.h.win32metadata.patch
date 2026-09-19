@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
+index 58677d492aae1a4a4fbfab5e99538fc1861fdc47..104732d5d15b92de84a1dabcddb3ca107bc2ef1e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++
+ 
+@@ -1725,6 +1726,8 @@ extern "C" {
+ // Use the routine below to start an event trace session
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ EXTERN_C
+ ULONG
+ WMIAPI
+@@ -1740,6 +1743,8 @@ StartTraceW (
+ #pragma region Desktop Family or OneCore Family or GameCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ EXTERN_C
+ ULONG
+ WMIAPI
+@@ -1759,6 +1764,8 @@ StartTraceA (
+ // Use the routine below to stop an event trace session
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ EXTERN_C
+ ULONG
+ WMIAPI

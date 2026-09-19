@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
+index 9148a814e894903c54d91d3f3cd4105921fef199..a143cc9019dbfe5f6d60fd053ccc0d7c1f198c5a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
+@@ -5,6 +5,7 @@
+ #define HighLevelMonitorConfigurationAPI_h
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -143,6 +144,8 @@ _BOOL WINAPI GetMonitorContrast
+     _Out_ LPDWORD pdwCurrentContrast, 
+     _Out_ LPDWORD pdwMaximumContrast 
+     );
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI GetMonitorColorTemperature( HANDLE hMonitor, _Out_ LPMC_COLOR_TEMPERATURE pctCurrentColorTemperature );
+ _BOOL WINAPI GetMonitorRedGreenOrBlueDrive
+     ( 
+@@ -161,7 +164,11 @@ _BOOL WINAPI GetMonitorRedGreenOrBlueGain
+     _Out_ LPDWORD pdwMaximumGain
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI SetMonitorBrightness( HANDLE hMonitor, DWORD dwNewBrightness );
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI SetMonitorContrast( HANDLE hMonitor, DWORD dwNewContrast );
+ _BOOL WINAPI SetMonitorColorTemperature( HANDLE hMonitor, MC_COLOR_TEMPERATURE ctCurrentColorTemperature );
+ _BOOL WINAPI SetMonitorRedGreenOrBlueDrive( HANDLE hMonitor, MC_DRIVE_TYPE dtDriveType, DWORD dwNewDrive );
