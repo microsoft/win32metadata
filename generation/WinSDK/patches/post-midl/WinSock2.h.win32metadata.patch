@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
+index 824a3558c9335ada50e761cfadd8016c34ccaf1a..3166aa9c14f4069cb337535a696fbfc9c0615d30 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
+@@ -18,6 +18,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+ #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -138,6 +139,7 @@ typedef struct fd_set {
+         SOCKET  fd_array[FD_SETSIZE];   /* an array of SOCKETs */
+ } fd_set;
+ 
++_Windows_SupportedOS_Server2003_
+ extern int PASCAL FAR __WSAFDIsSet(SOCKET fd, fd_set FAR *);
+ 
+ #define FD_CLR(fd, set) do { \
+@@ -2789,6 +2791,7 @@ WSAConnectByNameW(
+     _In_opt_ const struct timeval * timeout,
+     _Reserved_ LPWSAOVERLAPPED Reserved);
+ 
++_Windows_SupportedOS_Server2008_
+ _WINSOCK_DEPRECATED_BY("WSAConnectByNameW()")
+ BOOL
+ PASCAL
+@@ -2803,6 +2806,7 @@ WSAConnectByNameA(
+     _In_opt_ const struct timeval * timeout,
+     _Reserved_ LPWSAOVERLAPPED Reserved);
+ 
++_Windows_SupportedOS_Server2003_
+ BOOL
+ PASCAL
+ WSAConnectByList(
