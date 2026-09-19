@@ -1,0 +1,130 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -55,13 +56,13 @@ typedef VOID (__cdecl *PFN_COMPRESS_FREE) (
+     _In_ PVOID Memory
+     );
+ 
+-typedef struct _COMPRESS_ALLOCATION_ROUTINES {
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _COMPRESS_ALLOCATION_ROUTINES {
+     PFN_COMPRESS_ALLOCATE Allocate;
+     PFN_COMPRESS_FREE Free;
+     PVOID UserContext;
+ } COMPRESS_ALLOCATION_ROUTINES, *PCOMPRESS_ALLOCATION_ROUTINES;
+ 
+-typedef enum {
++typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ {
+     COMPRESS_INFORMATION_CLASS_INVALID = 0,
+     COMPRESS_INFORMATION_CLASS_BLOCK_SIZE,
+     COMPRESS_INFORMATION_CLASS_LEVEL
+@@ -71,15 +72,15 @@ typedef enum {
+ 
+ BOOL
+ WINAPI
+-CreateCompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ CreateCompressor (
+     _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PCOMPRESSOR_HANDLE CompressorHandle
++    _Out_ PCOMPRESSOR_HANDLE _Win32_RAIIFree_(CloseCompressor) CompressorHandle
+     );
+ 
+ BOOL
+ WINAPI
+-SetCompressorInformation (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ SetCompressorInformation (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _In_reads_bytes_(CompressInformationSize) LPCVOID CompressInformation,
+@@ -88,7 +89,7 @@ SetCompressorInformation (
+ 
+ BOOL
+ WINAPI
+-QueryCompressorInformation (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ QueryCompressorInformation (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _Out_writes_bytes_(CompressInformationSize) PVOID CompressInformation,
+@@ -97,7 +98,7 @@ QueryCompressorInformation (
+ 
+ BOOL
+ WINAPI
+-Compress (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ Compress (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_reads_bytes_opt_(UncompressedDataSize) LPCVOID UncompressedData,
+     _In_ SIZE_T UncompressedDataSize,
+@@ -108,13 +109,13 @@ Compress (
+ 
+ BOOL
+ WINAPI
+-ResetCompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ ResetCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
+ BOOL
+ WINAPI
+-CloseCompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ CloseCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
+@@ -122,15 +123,15 @@ CloseCompressor (
+ 
+ BOOL
+ WINAPI
+-CreateDecompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ CreateDecompressor (
+     _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
++    _Out_ PDECOMPRESSOR_HANDLE _Win32_RAIIFree_(CloseDecompressor) DecompressorHandle
+     );
+ 
+ BOOL
+ WINAPI
+-SetDecompressorInformation (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ SetDecompressorInformation (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _In_reads_bytes_(CompressInformationSize) LPCVOID CompressInformation,
+@@ -139,7 +140,7 @@ SetDecompressorInformation (
+ 
+ BOOL
+ WINAPI
+-QueryDecompressorInformation (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ QueryDecompressorInformation (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _Out_writes_bytes_(CompressInformationSize) PVOID CompressInformation,
+@@ -148,7 +149,7 @@ QueryDecompressorInformation (
+ 
+ BOOL
+ WINAPI
+-Decompress (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ Decompress (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_reads_bytes_opt_(CompressedDataSize) LPCVOID CompressedData,
+     _In_ SIZE_T CompressedDataSize,
+@@ -159,13 +160,13 @@ Decompress (
+ 
+ BOOL
+ WINAPI
+-ResetDecompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ ResetDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
+ BOOL
+ WINAPI
+-CloseDecompressor (
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _Win32_SetLastError_ CloseDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
