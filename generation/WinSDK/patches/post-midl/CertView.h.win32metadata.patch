@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+index f502afb650d44dd79bb30e1807555ac04cc5fb48..1acdfd208ef7e3ef5ed35a47b8bf0236efe47b41 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CV_OUT_BASE64HEADER	( 0 )
+@@ -203,7 +204,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9c735be2-57a5-11d1-9bdb-00c04fb683fa")
+-    IEnumCERTVIEWCOLUMN : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWCOLUMN : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -354,7 +355,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+         END_INTERFACE
+     } IEnumCERTVIEWCOLUMNVtbl;
+ 
+-    interface IEnumCERTVIEWCOLUMN
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWCOLUMN
+     {
+         CONST_VTBL struct IEnumCERTVIEWCOLUMNVtbl *lpVtbl;
+     };
+@@ -440,7 +441,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e77db656-7653-11d1-9bde-00c04fb683fa")
+-    IEnumCERTVIEWATTRIBUTE : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWATTRIBUTE : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -557,7 +558,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+         END_INTERFACE
+     } IEnumCERTVIEWATTRIBUTEVtbl;
+ 
+-    interface IEnumCERTVIEWATTRIBUTE
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWATTRIBUTE
+     {
+         CONST_VTBL struct IEnumCERTVIEWATTRIBUTEVtbl *lpVtbl;
+     };
+@@ -631,7 +632,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e7dd1466-7653-11d1-9bde-00c04fb683fa")
+-    IEnumCERTVIEWEXTENSION : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWEXTENSION : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -760,7 +761,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+         END_INTERFACE
+     } IEnumCERTVIEWEXTENSIONVtbl;
+ 
+-    interface IEnumCERTVIEWEXTENSION
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWEXTENSION
+     {
+         CONST_VTBL struct IEnumCERTVIEWEXTENSIONVtbl *lpVtbl;
+     };
+@@ -837,7 +838,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d1157f4c-5af2-11d1-9bdc-00c04fb683fa")
+-    IEnumCERTVIEWROW : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWROW : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -974,7 +975,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+         END_INTERFACE
+     } IEnumCERTVIEWROWVtbl;
+ 
+-    interface IEnumCERTVIEWROW
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWROW
+     {
+         CONST_VTBL struct IEnumCERTVIEWROWVtbl *lpVtbl;
+     };
+@@ -1054,7 +1055,7 @@ EXTERN_C const IID IID_ICertView;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c3fac344-1e84-11d1-9bd6-00c04fb683fa")
+-    ICertView : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertView : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OpenConnection( 
+@@ -1203,7 +1204,7 @@ EXTERN_C const IID IID_ICertView;
+         END_INTERFACE
+     } ICertViewVtbl;
+ 
+-    interface ICertView
++    interface _Windows_SupportedOS_Server2003_ ICertView
+     {
+         CONST_VTBL struct ICertViewVtbl *lpVtbl;
+     };
+@@ -1283,7 +1284,7 @@ EXTERN_C const IID IID_ICertView2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d594b282-8851-4b61-9c66-3edadf848863")
+-    ICertView2 : public ICertView
++    _Windows_SupportedOS_Server2003_ ICertView2 : public ICertView
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetTable( 
+@@ -1409,7 +1410,7 @@ EXTERN_C const IID IID_ICertView2;
+         END_INTERFACE
+     } ICertView2Vtbl;
+ 
+-    interface ICertView2
++    interface _Windows_SupportedOS_Server2003_ ICertView2
+     {
+         CONST_VTBL struct ICertView2Vtbl *lpVtbl;
+     };

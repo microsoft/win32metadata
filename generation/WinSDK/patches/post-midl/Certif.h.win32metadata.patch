@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h b/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
+index 8de2f13ffb78faa5edb4d311119c6fc267bd9005..4181ab8d71c01b6831bb4c9bed7a133a56912928 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	ENUMEXT_OBJECTID	( 0x1 )
+@@ -95,7 +96,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("aa000922-ffbe-11cf-8800-00a0c903b83c")
+-    ICertServerPolicy : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertServerPolicy : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -298,7 +299,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+         END_INTERFACE
+     } ICertServerPolicyVtbl;
+ 
+-    interface ICertServerPolicy
++    interface _Windows_SupportedOS_Server2003_ ICertServerPolicy
+     {
+         CONST_VTBL struct ICertServerPolicyVtbl *lpVtbl;
+     };
+@@ -396,7 +397,7 @@ EXTERN_C const IID IID_ICertServerExit;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4ba9eb90-732c-11d0-8816-00a0c903b83c")
+-    ICertServerExit : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertServerExit : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -573,7 +574,7 @@ EXTERN_C const IID IID_ICertServerExit;
+         END_INTERFACE
+     } ICertServerExitVtbl;
+ 
+-    interface ICertServerExit
++    interface _Windows_SupportedOS_Server2003_ ICertServerExit
+     {
+         CONST_VTBL struct ICertServerExitVtbl *lpVtbl;
+     };

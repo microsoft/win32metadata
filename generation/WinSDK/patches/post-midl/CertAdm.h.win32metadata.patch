@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
+index b7d55db8586c7f29469f62e9eb58b199a594f965..c4c0cda349058efa366b22a12d60700545d402fd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
+@@ -157,6 +157,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CA_DISP_INCOMPLETE	( 0 )
+@@ -216,7 +217,7 @@ EXTERN_C const IID IID_ICertAdmin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("34df6950-7fb6-11d0-8817-00a0c903b83c")
+-    ICertAdmin : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertAdmin : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE IsValidCertificate( 
+@@ -409,7 +410,7 @@ EXTERN_C const IID IID_ICertAdmin;
+         END_INTERFACE
+     } ICertAdminVtbl;
+ 
+-    interface ICertAdmin
++    interface _Windows_SupportedOS_Server2003_ ICertAdmin
+     {
+         CONST_VTBL struct ICertAdminVtbl *lpVtbl;
+     };
+@@ -519,7 +520,7 @@ EXTERN_C const IID IID_ICertAdmin2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f7c3ac41-b8ce-4fb4-aa58-3d1dc0e36b39")
+-    ICertAdmin2 : public ICertAdmin
++    _Windows_SupportedOS_Server2003_ ICertAdmin2 : public ICertAdmin
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE PublishCRLs( 
+@@ -817,7 +818,7 @@ EXTERN_C const IID IID_ICertAdmin2;
+         END_INTERFACE
+     } ICertAdmin2Vtbl;
+ 
+-    interface ICertAdmin2
++    interface _Windows_SupportedOS_Server2003_ ICertAdmin2
+     {
+         CONST_VTBL struct ICertAdmin2Vtbl *lpVtbl;
+     };

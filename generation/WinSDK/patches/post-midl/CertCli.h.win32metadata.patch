@@ -1,0 +1,129 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+index 24d4f92dc523eb2e039684ccdc2b4ef5c3e043c5..20afc27235aeb6d72d19fc29ad0814430d5f0740 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+@@ -162,6 +162,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -181,7 +182,7 @@ EXTERN_C const IID IID_ICertGetConfig;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c7ea09c0-ce17-11d0-8833-00a0c903b83c")
+-    ICertGetConfig : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertGetConfig : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetConfig( 
+@@ -262,7 +263,7 @@ EXTERN_C const IID IID_ICertGetConfig;
+         END_INTERFACE
+     } ICertGetConfigVtbl;
+ 
+-    interface ICertGetConfig
++    interface _Windows_SupportedOS_Server2003_ ICertGetConfig
+     {
+         CONST_VTBL struct ICertGetConfigVtbl *lpVtbl;
+     };
+@@ -321,7 +322,7 @@ EXTERN_C const IID IID_ICertConfig;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("372fce34-4324-11d0-8810-00a0c903b83c")
+-    ICertConfig : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertConfig : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Reset( 
+@@ -430,7 +431,7 @@ EXTERN_C const IID IID_ICertConfig;
+         END_INTERFACE
+     } ICertConfigVtbl;
+ 
+-    interface ICertConfig
++    interface _Windows_SupportedOS_Server2003_ ICertConfig
+     {
+         CONST_VTBL struct ICertConfigVtbl *lpVtbl;
+     };
+@@ -498,7 +499,7 @@ EXTERN_C const IID IID_ICertConfig2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7a18edde-7e78-4163-8ded-78e2c9cee924")
+-    ICertConfig2 : public ICertConfig
++    _Windows_SupportedOS_Server2003_ ICertConfig2 : public ICertConfig
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetSharedFolder( 
+@@ -600,7 +601,7 @@ EXTERN_C const IID IID_ICertConfig2;
+         END_INTERFACE
+     } ICertConfig2Vtbl;
+ 
+-    interface ICertConfig2
++    interface _Windows_SupportedOS_Server2003_ ICertConfig2
+     {
+         CONST_VTBL struct ICertConfig2Vtbl *lpVtbl;
+     };
+@@ -672,7 +673,7 @@ EXTERN_C const IID IID_ICertRequest;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("014e4840-5523-11d0-8812-00a0c903b83c")
+-    ICertRequest : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICertRequest : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Submit( 
+@@ -819,7 +820,7 @@ EXTERN_C const IID IID_ICertRequest;
+         END_INTERFACE
+     } ICertRequestVtbl;
+ 
+-    interface ICertRequest
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICertRequest
+     {
+         CONST_VTBL struct ICertRequestVtbl *lpVtbl;
+     };
+@@ -896,7 +897,7 @@ EXTERN_C const IID IID_ICertRequest2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("a4772988-4a85-4fa9-824e-b5cf5c16405a")
+-    ICertRequest2 : public ICertRequest
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICertRequest2 : public ICertRequest
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetIssuedCertificate( 
+@@ -1096,7 +1097,7 @@ EXTERN_C const IID IID_ICertRequest2;
+         END_INTERFACE
+     } ICertRequest2Vtbl;
+ 
+-    interface ICertRequest2
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICertRequest2
+     {
+         CONST_VTBL struct ICertRequest2Vtbl *lpVtbl;
+     };
+@@ -1184,7 +1185,7 @@ EXTERN_C const IID IID_ICertRequest2;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509EnrollmentAuthFlags
++enum _Windows_SupportedOS_Windows7_ X509EnrollmentAuthFlags
+     {
+         X509AuthNone	= 0,
+         X509AuthAnonymous	= 1,
+@@ -1210,7 +1211,7 @@ EXTERN_C const IID IID_ICertRequest3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("AFC8F92B-33A2-4861-BF36-2933B7CD67B3")
+-    ICertRequest3 : public ICertRequest2
++    _Windows_SupportedOS_Windows7_ ICertRequest3 : public ICertRequest2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetCredential( 
+@@ -1418,7 +1419,7 @@ EXTERN_C const IID IID_ICertRequest3;
+         END_INTERFACE
+     } ICertRequest3Vtbl;
+ 
+-    interface ICertRequest3
++    interface _Windows_SupportedOS_Windows7_ ICertRequest3
+     {
+         CONST_VTBL struct ICertRequest3Vtbl *lpVtbl;
+     };
