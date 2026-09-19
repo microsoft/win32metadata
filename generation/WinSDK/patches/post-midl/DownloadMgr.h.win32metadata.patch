@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
+index a1640c9caceaa59b6d97c58aa6724810364c98da..9b5e210d59aad81f0d00d104b1b6106448e612e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
+@@ -78,6 +78,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -109,7 +110,7 @@ EXTERN_C const IID IID_IDownloadManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("988934A4-064B-11D3-BB80-00104B35E7F9")
+-    IDownloadManager : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IDownloadManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Download( 
+@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IDownloadManager;
+         END_INTERFACE
+     } IDownloadManagerVtbl;
+ 
+-    interface IDownloadManager
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IDownloadManager
+     {
+         CONST_VTBL struct IDownloadManagerVtbl *lpVtbl;
+     };

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
+index aac33dbfd3bfbd4b29d06afeb5b4d4cb2643cfa6..cb96cb77e0a761428052ff5e56ce447fa74decec 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
+@@ -85,6 +85,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -113,7 +114,7 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("54A8F188-9EBD-4795-AD16-9B4945119636")
+-    IWebBrowserEventsService : public IUnknown
++    _Windows_SupportedOS_Server2003_ IWebBrowserEventsService : public IUnknown
+     {
+     public:
+         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FireBeforeNavigate2Event( 
+@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
+         END_INTERFACE
+     } IWebBrowserEventsServiceVtbl;
+ 
+-    interface IWebBrowserEventsService
++    interface _Windows_SupportedOS_Server2003_ IWebBrowserEventsService
+     {
+         CONST_VTBL struct IWebBrowserEventsServiceVtbl *lpVtbl;
+     };
+@@ -236,7 +237,7 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("87CC5D04-EAFA-4833-9820-8F986530CC00")
+-    IWebBrowserEventsUrlService : public IUnknown
++    _Windows_SupportedOS_Server2003_ IWebBrowserEventsUrlService : public IUnknown
+     {
+     public:
+         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetUrlForEvents( 
+@@ -277,7 +278,7 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
+         END_INTERFACE
+     } IWebBrowserEventsUrlServiceVtbl;
+ 
+-    interface IWebBrowserEventsUrlService
++    interface _Windows_SupportedOS_Server2003_ IWebBrowserEventsUrlService
+     {
+         CONST_VTBL struct IWebBrowserEventsUrlServiceVtbl *lpVtbl;
+     };

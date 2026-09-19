@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
+index 8e78d8f770368679c8184b829afb0c70b1be3eff..c191a0cb01404d76e300106f85973e31f32bd86e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
+@@ -78,6 +78,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -108,7 +109,7 @@ EXTERN_C const IID IID_IPersistHistory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("91A565C1-E38F-11d0-94BF-00A0C9055CBF")
+-    IPersistHistory : public IPersist
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IPersistHistory : public IPersist
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE LoadHistory( 
+@@ -189,7 +190,7 @@ EXTERN_C const IID IID_IPersistHistory;
+         END_INTERFACE
+     } IPersistHistoryVtbl;
+ 
+-    interface IPersistHistory
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IPersistHistory
+     {
+         CONST_VTBL struct IPersistHistoryVtbl *lpVtbl;
+     };

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
+index b0ffeb0f3ea5cb67a0e7ef8cdbb352fdd6996b99..affdfa3d84baa745c6de0c4a10e2a01f3df1e95c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
+@@ -160,6 +160,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef 
+@@ -198,7 +199,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("75cb4db9-6da0-4da3-83ce-422b6a433346")
+-    IOpenServiceActivityInput : public IUnknown
++    _Windows_SupportedOS_Windows7_ IOpenServiceActivityInput : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetVariable( 
+@@ -275,7 +276,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
+         END_INTERFACE
+     } IOpenServiceActivityInputVtbl;
+ 
+-    interface IOpenServiceActivityInput
++    interface _Windows_SupportedOS_Windows7_ IOpenServiceActivityInput
+     {
+         CONST_VTBL struct IOpenServiceActivityInputVtbl *lpVtbl;
+     };
+@@ -327,7 +328,7 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e289deab-f709-49a9-b99e-282364074571")
+-    IOpenServiceActivityOutputContext : public IUnknown
++    _Windows_SupportedOS_Windows7_ IOpenServiceActivityOutputContext : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Navigate( 
+@@ -406,7 +407,7 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
+         END_INTERFACE
+     } IOpenServiceActivityOutputContextVtbl;
+ 
+-    interface IOpenServiceActivityOutputContext
++    interface _Windows_SupportedOS_Windows7_ IOpenServiceActivityOutputContext
+     {
+         CONST_VTBL struct IOpenServiceActivityOutputContextVtbl *lpVtbl;
+     };
