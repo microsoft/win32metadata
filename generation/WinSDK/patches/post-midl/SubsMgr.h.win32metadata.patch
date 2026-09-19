@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
+index 66b7b85c33d34b19aacda03bcbafe0c58f3dfce6..04ccfc4f3ec6e3dcce8cbe9c86118a52cfe7a2d0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
+@@ -118,6 +118,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -141,7 +142,7 @@ extern RPC_IF_HANDLE __MIDL_itf_subsmgr_0000_0000_v0_0_s_ifspec;
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IEnumItemProperties *LPENUMITEMPROPERTIES;
+ 
+-typedef struct _tagITEMPROP
++typedef struct _Windows_SupportedOS_Server2003_ _tagITEMPROP
+     {
+     VARIANT variantValue;
+     LPWSTR pwszName;

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
+index 7516693aa2cc204a567f67590d5cba54191c78ee..4798b09208efdde30b54b86efe48f2ff1c5ee8f3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
+@@ -380,6 +380,7 @@ extern "C"{
+ //
+ //-----------------------------------------------------------------------------
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef LONG ITEMID;
+@@ -5787,7 +5788,7 @@ EXTERN_C const IID IID_IRowsetPrioritization;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("42811652-079D-481B-87A2-09A69ECC5F44")
+-    IRowsetPrioritization : public IUnknown
++    _Windows_SupportedOS_Windows7_ IRowsetPrioritization : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetScopePriority( 
+@@ -5864,7 +5865,7 @@ EXTERN_C const IID IID_IRowsetPrioritization;
+         END_INTERFACE
+     } IRowsetPrioritizationVtbl;
+ 
+-    interface IRowsetPrioritization
++    interface _Windows_SupportedOS_Windows7_ IRowsetPrioritization
+     {
+         CONST_VTBL struct IRowsetPrioritizationVtbl *lpVtbl;
+     };
+@@ -5940,7 +5941,7 @@ EXTERN_C const IID IID_IRowsetEvents;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1551AEA5-5D66-4B11-86F5-D5634CB211B9")
+-    IRowsetEvents : public IUnknown
++    _Windows_SupportedOS_Windows7_ IRowsetEvents : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnNewItem( 
+@@ -6031,7 +6032,7 @@ EXTERN_C const IID IID_IRowsetEvents;
+         END_INTERFACE
+     } IRowsetEventsVtbl;
+ 
+-    interface IRowsetEvents
++    interface _Windows_SupportedOS_Windows7_ IRowsetEvents
+     {
+         CONST_VTBL struct IRowsetEventsVtbl *lpVtbl;
+     };
