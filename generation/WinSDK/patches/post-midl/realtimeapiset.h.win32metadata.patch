@@ -1,0 +1,104 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/realtimeapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/realtimeapiset.h
+index c06884e9c9..3a05d88465 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/realtimeapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/realtimeapiset.h
+@@ -16,6 +16,7 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -26,6 +27,8 @@ extern "C" {
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -34,6 +37,8 @@ QueryThreadCycleTime(
+     _Out_ PULONG64 CycleTime
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -42,6 +47,8 @@ QueryProcessCycleTime(
+     _Out_ PULONG64 CycleTime
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -54,6 +61,8 @@ QueryIdleProcessorCycleTime(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -71,6 +80,7 @@ QueryIdleProcessorCycleTimeEx(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -78,6 +88,7 @@ QueryInterruptTimePrecise(
+     _Out_ PULONGLONG lpInterruptTimePrecise
+     );
+ 
++_Windows_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -85,6 +96,7 @@ QueryUnbiasedInterruptTimePrecise(
+     _Out_ PULONGLONG lpUnbiasedInterruptTimePrecise
+     );
+ 
++_Windows_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -94,6 +106,7 @@ QueryInterruptTime(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Windows_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -103,6 +116,7 @@ QueryUnbiasedInterruptTime(
+ 
+ #endif // (_WIN32_WINNT >= 0x0601)
+ 
++_Windows_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI
+@@ -110,6 +124,7 @@ QueryAuxiliaryCounterFrequency(
+     _Out_ PULONGLONG lpAuxiliaryCounterFrequency
+     );
+ 
++_Windows_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI
+@@ -119,6 +134,7 @@ ConvertAuxiliaryCounterToPerformanceCounter(
+     _Out_opt_ PULONGLONG lpConversionError
+     );
+ 
++_Windows_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI
