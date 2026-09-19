@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
+index e30ee02631413a2922cdf06456cefa7445da6987..0d65ee8d4f1c5a4ea0db1fcf23acf102647b2063 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
+@@ -15,6 +15,7 @@ Revision History:
+ --*/
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -1653,6 +1654,8 @@ typedef enum _POLICY_AUDIT_EVENT_TYPE {
+ #ifndef _NTLSA_IFS_
+ // begin_ntifs
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1691,6 +1694,8 @@ LsaLogonUser (
+ 
+ // end_ntifs
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1703,6 +1708,8 @@ LsaLookupAuthenticationPackage (
+ 
+ // begin_ntifs
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ _IRQL_requires_same_
+ NTSTATUS
+ NTAPI
+@@ -1824,7 +1831,7 @@ LsaRemoveProtectedProcessAddress (
+ // the domains referenced in the lookup operation.
+ //
+ 
+-typedef struct _LSA_TRANSLATED_SID {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TRANSLATED_SID {
+ 
+     SID_NAME_USE Use;
+     ULONG RelativeId;
