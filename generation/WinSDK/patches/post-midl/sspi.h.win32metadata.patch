@@ -1,0 +1,653 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
+index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0deec07fd899 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
+@@ -15,6 +15,7 @@
+ 
+ #include <sdkddkver.h>
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ // begin_ntifs
+ #ifndef __SSPI_H__
+@@ -198,7 +199,7 @@ typedef unsigned long * PTimeStamp;
+ //
+ 
+ #  ifndef _NTDEF_
+-typedef struct _SECURITY_STRING {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_STRING {
+     unsigned short      Length;
+     unsigned short      MaximumLength;
+ #    ifdef MIDL_PASS
+@@ -219,7 +220,7 @@ typedef UNICODE_STRING SECURITY_STRING, *PSECURITY_STRING;  // ntifs
+ //  Provides general information about a security provider
+ //
+ 
+-typedef struct _SecPkgInfoW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgInfoW
+ {
+     unsigned long fCapabilities;        // Capability bitmask
+     unsigned short wVersion;            // Version of driver
+@@ -238,7 +239,7 @@ typedef struct _SecPkgInfoW
+ 
+ // end_ntifs
+ 
+-typedef struct _SecPkgInfoA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgInfoA
+ {
+     unsigned long fCapabilities;        // Capability bitmask
+     unsigned short wVersion;            // Version of driver
+@@ -323,7 +324,7 @@ typedef struct _SecPkgInfoA
+ //  API
+ //
+ 
+-typedef struct _SecBuffer {
++typedef struct _Windows_SupportedOS_Windows81_ _SecBuffer {
+     unsigned long cbBuffer;             // Size of the buffer, in bytes
+     unsigned long BufferType;           // Type of the buffer (below)
+ #ifdef MIDL_PASS
+@@ -333,7 +334,7 @@ typedef struct _SecBuffer {
+ #endif
+ } SecBuffer, * PSecBuffer;
+ 
+-typedef struct _SecBufferDesc {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecBufferDesc {
+     unsigned long ulVersion;            // Version number
+     unsigned long cBuffers;             // Number of buffers
+ #ifdef MIDL_PASS
+@@ -391,7 +392,7 @@ typedef struct _SEC_NEGOTIATION_INFO {
+     void *      Reserved;       // Reserved
+ } SEC_NEGOTIATION_INFO, * PSEC_NEGOTIATION_INFO ;
+ 
+-typedef struct _SEC_CHANNEL_BINDINGS {
++typedef struct _Windows_SupportedOS_Windows7_ _SEC_CHANNEL_BINDINGS {
+     unsigned long  dwInitiatorAddrType;
+     unsigned long  cbInitiatorLength;
+     unsigned long  dwInitiatorOffset;
+@@ -724,7 +725,7 @@ typedef struct _SEC_TRAFFIC_SECRETS {
+ #define SECPKG_CRED_ATTR_CERT         4
+ #define SECPKG_CRED_ATTR_PAC_BYPASS   5
+ 
+-typedef struct _SecPkgCredentials_NamesW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgCredentials_NamesW
+ {
+ #ifdef MIDL_PASS
+     [string]
+@@ -735,7 +736,7 @@ typedef struct _SecPkgCredentials_NamesW
+ 
+ // end_ntifs
+ 
+-typedef struct _SecPkgCredentials_NamesA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgCredentials_NamesA
+ {
+ #ifdef MIDL_PASS
+     [string]
+@@ -889,7 +890,7 @@ typedef struct _SecPkgCredentials_Cert
+ #define SECPKG_ATTR_NEGOTIATED_TLS_EXTENSIONS 36
+ #define SECPKG_ATTR_IS_LOOPBACK 37  // indicates authentication to localhost
+ 
+-typedef struct _SecPkgContext_SubjectAttributes {
++typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SecPkgContext_SubjectAttributes {
+     void* AttributeInfo; // contains a PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION structure
+ } SecPkgContext_SubjectAttributes, *PSecPkgContext_SubjectAttributes;
+ 
+@@ -900,7 +901,7 @@ typedef struct _SecPkgContext_SubjectAttributes {
+ // types of credentials, used by SECPKG_ATTR_PROMPTING_NEEDED
+ //
+ 
+-typedef enum _SECPKG_CRED_CLASS {
++typedef enum _Windows_SupportedOS_Windows7_ _SECPKG_CRED_CLASS {
+     SecPkgCredClass_None = 0,  // no creds
+     SecPkgCredClass_Ephemeral = 10,  // logon creds
+     SecPkgCredClass_PersistedGeneric = 20, // saved creds, not target specific
+@@ -908,7 +909,7 @@ typedef enum _SECPKG_CRED_CLASS {
+     SecPkgCredClass_Explicit = 40, // explicitly supplied creds
+ } SECPKG_CRED_CLASS, * PSECPKG_CRED_CLASS;
+ 
+-typedef struct _SecPkgContext_CredInfo {
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_CredInfo {
+     SECPKG_CRED_CLASS CredClass;
+     unsigned long IsPromptingNeeded;
+ } SecPkgContext_CredInfo, *PSecPkgContext_CredInfo;
+@@ -918,12 +919,12 @@ typedef struct _SecPkgContext_NegoPackageInfo
+     unsigned long PackageMask;
+ } SecPkgContext_NegoPackageInfo, * PSecPkgContext_NegoPackageInfo;
+ 
+-typedef struct _SecPkgContext_NegoStatus
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_NegoStatus
+ {
+     unsigned long LastStatus;
+ } SecPkgContext_NegoStatus, * PSecPkgContext_NegoStatus;
+ 
+-typedef struct _SecPkgContext_Sizes
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Sizes
+ {
+     unsigned long cbMaxToken;
+     unsigned long cbMaxSignature;
+@@ -931,7 +932,7 @@ typedef struct _SecPkgContext_Sizes
+     unsigned long cbSecurityTrailer;
+ } SecPkgContext_Sizes, * PSecPkgContext_Sizes;
+ 
+-typedef struct _SecPkgContext_StreamSizes
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_StreamSizes
+ {
+     unsigned long   cbHeader;
+     unsigned long   cbTrailer;
+@@ -943,25 +944,25 @@ typedef struct _SecPkgContext_StreamSizes
+ typedef SecPkgContext_StreamSizes SecPkgContext_DatagramSizes;
+ typedef PSecPkgContext_StreamSizes PSecPkgContext_DatagramSizes;
+ 
+-typedef struct _SecPkgContext_NamesW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NamesW
+ {
+     SEC_WCHAR * sUserName;
+ } SecPkgContext_NamesW, * PSecPkgContext_NamesW;
+ 
+ // end_ntifs
+ 
+-typedef enum _SECPKG_ATTR_LCT_STATUS {
++typedef enum _Windows_SupportedOS_Windows7_ _SECPKG_ATTR_LCT_STATUS {
+     SecPkgAttrLastClientTokenYes,
+     SecPkgAttrLastClientTokenNo,
+     SecPkgAttrLastClientTokenMaybe
+ } SECPKG_ATTR_LCT_STATUS, * PSECPKG_ATTR_LCT_STATUS;
+ 
+ 
+-typedef struct _SecPkgContext_LastClientTokenStatus {
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_LastClientTokenStatus {
+     SECPKG_ATTR_LCT_STATUS LastClientTokenStatus;
+ } SecPkgContext_LastClientTokenStatus, * PSecPkgContext_LastClientTokenStatus;
+ 
+-typedef struct _SecPkgContext_NamesA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NamesA
+ {
+     SEC_CHAR * sUserName;
+ } SecPkgContext_NamesA, * PSecPkgContext_NamesA;
+@@ -976,13 +977,13 @@ typedef struct _SecPkgContext_NamesA
+ 
+ // begin_ntifs
+ 
+-typedef struct _SecPkgContext_Lifespan
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Lifespan
+ {
+     TimeStamp tsStart;
+     TimeStamp tsExpiry;
+ } SecPkgContext_Lifespan, * PSecPkgContext_Lifespan;
+ 
+-typedef struct _SecPkgContext_DceInfo
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_DceInfo
+ {
+     unsigned long AuthzSvc;
+     void * pPac;
+@@ -990,7 +991,7 @@ typedef struct _SecPkgContext_DceInfo
+ 
+ // end_ntifs
+ 
+-typedef struct _SecPkgContext_KeyInfoA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_KeyInfoA
+ {
+     SEC_CHAR *  sSignatureAlgorithmName;
+     SEC_CHAR *  sEncryptAlgorithmName;
+@@ -1001,7 +1002,7 @@ typedef struct _SecPkgContext_KeyInfoA
+ 
+ // begin_ntifs
+ 
+-typedef struct _SecPkgContext_KeyInfoW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_KeyInfoW
+ {
+     SEC_WCHAR * sSignatureAlgorithmName;
+     SEC_WCHAR * sEncryptAlgorithmName;
+@@ -1020,14 +1021,14 @@ typedef struct _SecPkgContext_KeyInfoW
+ #define PSecPkgContext_KeyInfo  PSecPkgContext_KeyInfoA
+ #endif
+ 
+-typedef struct _SecPkgContext_AuthorityA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AuthorityA
+ {
+     SEC_CHAR *  sAuthorityName;
+ } SecPkgContext_AuthorityA, * PSecPkgContext_AuthorityA;
+ 
+ // begin_ntifs
+ 
+-typedef struct _SecPkgContext_AuthorityW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AuthorityW
+ {
+     SEC_WCHAR * sAuthorityName;
+ } SecPkgContext_AuthorityW, * PSecPkgContext_AuthorityW;
+@@ -1042,7 +1043,7 @@ typedef struct _SecPkgContext_AuthorityW
+ #define PSecPkgContext_Authority    PSecPkgContext_AuthorityA
+ #endif
+ 
+-typedef struct _SecPkgContext_ProtoInfoA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ProtoInfoA
+ {
+     SEC_CHAR *  sProtocolName;
+     unsigned long       majorVersion;
+@@ -1051,7 +1052,7 @@ typedef struct _SecPkgContext_ProtoInfoA
+ 
+ // begin_ntifs
+ 
+-typedef struct _SecPkgContext_ProtoInfoW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ProtoInfoW
+ {
+     SEC_WCHAR * sProtocolName;
+     unsigned long majorVersion;
+@@ -1070,7 +1071,7 @@ typedef struct _SecPkgContext_ProtoInfoW
+ 
+ // begin_ntifs
+ 
+-typedef struct _SecPkgContext_PasswordExpiry
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_PasswordExpiry
+ {
+     TimeStamp tsPasswordExpires;
+ } SecPkgContext_PasswordExpiry, * PSecPkgContext_PasswordExpiry;
+@@ -1082,7 +1083,7 @@ typedef struct _SecPkgContext_LogoffTime
+ } SecPkgContext_LogoffTime, * PSecPkgContext_LogoffTime;
+ #endif // Greater than Windows Server 2003 RTM (SP1 and greater contains this)
+ 
+-typedef struct _SecPkgContext_SessionKey
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_SessionKey
+ {
+     unsigned long SessionKeyLength;
+     _Field_size_bytes_(SessionKeyLength) unsigned char * SessionKey;
+@@ -1118,7 +1119,7 @@ typedef struct _SecPkgContext_UserFlags
+     unsigned long UserFlags;
+ } SecPkgContext_UserFlags, * PSecPkgContext_UserFlags;
+ 
+-typedef struct _SecPkgContext_Flags
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Flags
+ {
+     unsigned long Flags;
+ } SecPkgContext_Flags, * PSecPkgContext_Flags;
+@@ -1134,14 +1135,14 @@ typedef struct _SecPkgContext_Flags
+ #endif
+ 
+ 
+-typedef struct _SecPkgContext_NegotiationInfoA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NegotiationInfoA
+ {
+     PSecPkgInfoA    PackageInfo ;
+     unsigned long   NegotiationState ;
+ } SecPkgContext_NegotiationInfoA, * PSecPkgContext_NegotiationInfoA ;
+ 
+ // begin_ntifs
+-typedef struct _SecPkgContext_NegotiationInfoW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NegotiationInfoW
+ {
+     PSecPkgInfoW    PackageInfo ;
+     unsigned long   NegotiationState ;
+@@ -1212,12 +1213,12 @@ typedef struct _SecPkgContext_CredentialNameA
+ #  define PSecPkgContext_CredentialName PSecPkgContext_CredentialNameA
+ #endif // !UNICODE
+ 
+-typedef struct _SecPkgContext_AccessToken
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AccessToken
+ {
+     void * AccessToken;
+ } SecPkgContext_AccessToken, * PSecPkgContext_AccessToken;
+ 
+-typedef struct _SecPkgContext_TargetInformation
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_TargetInformation
+ {
+     unsigned long MarshalledTargetInfoLength;
+     unsigned char * MarshalledTargetInfo;
+@@ -1239,18 +1240,18 @@ typedef struct _SecPkgContext_Target
+ } SecPkgContext_Target, * PSecPkgContext_Target;
+ 
+ 
+-typedef struct _SecPkgContext_ClientSpecifiedTarget
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_ClientSpecifiedTarget
+ {
+     SEC_WCHAR * sTargetName;
+ } SecPkgContext_ClientSpecifiedTarget, * PSecPkgContext_ClientSpecifiedTarget;
+ 
+-typedef struct _SecPkgContext_Bindings
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_Bindings
+ {
+     unsigned long BindingsLength;
+     _Field_size_bytes_(BindingsLength) SEC_CHANNEL_BINDINGS * Bindings;
+ } SecPkgContext_Bindings, * PSecPkgContext_Bindings;
+ 
+-typedef enum _SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS
++typedef enum _Windows_SupportedOS_Windows81_ _SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS
+ {
+     SecApplicationProtocolNegotiationStatus_None,
+     SecApplicationProtocolNegotiationStatus_Success,
+@@ -1267,7 +1268,7 @@ typedef struct _SecPkgContext_ApplicationProtocol
+     unsigned char ProtocolId[MAX_PROTOCOL_ID_SIZE];              // Byte string representing the negotiated application protocol ID
+ } SecPkgContext_ApplicationProtocol, *PSecPkgContext_ApplicationProtocol;
+ 
+-typedef struct _SecPkgContext_NegotiatedTlsExtensions
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _SecPkgContext_NegotiatedTlsExtensions
+ {
+     unsigned long ExtensionsCount;                               // Number of negotiated TLS extensions.
+     _Field_size_(ExtensionsCount) unsigned short * Extensions;   // Pointer to array of 2-byte TLS extension IDs (allocated by IANA).
+@@ -2569,7 +2570,7 @@ SecLookupWellKnownSid(
+ 
+ #define FreeCredentialHandle FreeCredentialsHandle
+ 
+-typedef struct _SECURITY_FUNCTION_TABLE_W {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_FUNCTION_TABLE_W {
+     unsigned long                       dwVersion;
+     ENUMERATE_SECURITY_PACKAGES_FN_W    EnumerateSecurityPackagesW;
+     QUERY_CREDENTIALS_ATTRIBUTES_FN_W   QueryCredentialsAttributesW;
+@@ -2620,7 +2621,7 @@ typedef struct _SECURITY_FUNCTION_TABLE_W {
+ 
+ // end_ntifs
+ 
+-typedef struct _SECURITY_FUNCTION_TABLE_A {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_FUNCTION_TABLE_A {
+     unsigned long                       dwVersion;
+     ENUMERATE_SECURITY_PACKAGES_FN_A    EnumerateSecurityPackagesA;
+     QUERY_CREDENTIALS_ATTRIBUTES_FN_A   QueryCredentialsAttributesA;
+@@ -2730,6 +2731,7 @@ typedef PSecurityFunctionTableW
+ //
+ 
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslEnumerateProfilesA(
+@@ -2737,6 +2739,7 @@ SaslEnumerateProfilesA(
+     _Out_       ULONG * ProfileCount
+     );
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslEnumerateProfilesW(
+@@ -2751,6 +2754,7 @@ SaslEnumerateProfilesW(
+ #endif
+ 
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslGetProfilePackageA(
+@@ -2759,6 +2763,7 @@ SaslGetProfilePackageA(
+     );
+ 
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslGetProfilePackageW(
+@@ -2772,6 +2777,7 @@ SaslGetProfilePackageW(
+ #define SaslGetProfilePackage   SaslGetProfilePackageA
+ #endif
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslIdentifyPackageA(
+@@ -2779,6 +2785,7 @@ SaslIdentifyPackageA(
+     _Outptr_ PSecPkgInfoA * PackageInfo
+     );
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslIdentifyPackageW(
+@@ -2792,6 +2799,7 @@ SaslIdentifyPackageW(
+ #define SaslIdentifyPackage SaslIdentifyPackageA
+ #endif
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslInitializeSecurityContextW(
+@@ -2809,6 +2817,7 @@ SaslInitializeSecurityContextW(
+     _Out_opt_   PTimeStamp                  ptsExpiry           // (out) Life span (OPT)
+     );
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslInitializeSecurityContextA(
+@@ -2833,6 +2842,7 @@ SaslInitializeSecurityContextA(
+ #endif
+ 
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslAcceptSecurityContext(
+@@ -2858,6 +2868,7 @@ typedef enum _SASL_AUTHZID_STATE {
+     Sasl_AuthZIDProcessed             // AuthZID Strings processed by Application or SSP
+ } SASL_AUTHZID_STATE ;
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslSetContextOption(
+@@ -2868,6 +2879,7 @@ SaslSetContextOption(
+     );
+ 
+ 
++_Windows_SupportedOS_Server2003_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SaslGetContextOption(
+@@ -2905,7 +2917,7 @@ SaslGetContextOption(
+ 
+ #define SEC_WINNT_AUTH_IDENTITY_VERSION_2 0x201
+ 
+-typedef struct _SEC_WINNT_AUTH_IDENTITY_EX2 {
++typedef struct _Windows_SupportedOS_Windows7_ _SEC_WINNT_AUTH_IDENTITY_EX2 {
+    unsigned long Version; // contains SEC_WINNT_AUTH_IDENTITY_VERSION_2
+    unsigned short cbHeaderLength;
+    unsigned long cbStructureLength;
+@@ -2981,7 +2993,7 @@ typedef struct _SEC_WINNT_AUTH_IDENTITY_A {
+ #ifndef SEC_WINNT_AUTH_IDENTITY_VERSION
+ #define SEC_WINNT_AUTH_IDENTITY_VERSION 0x200
+ 
+-typedef struct _SEC_WINNT_AUTH_IDENTITY_EXW {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SEC_WINNT_AUTH_IDENTITY_EXW {
+     unsigned long Version;
+     unsigned long Length;
+     unsigned short *User;           //  Non-NULL terminated string.
+@@ -2997,7 +3009,7 @@ typedef struct _SEC_WINNT_AUTH_IDENTITY_EXW {
+ 
+ // end_ntifs
+ 
+-typedef struct _SEC_WINNT_AUTH_IDENTITY_EXA {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SEC_WINNT_AUTH_IDENTITY_EXA {
+     unsigned long Version;
+     unsigned long Length;
+     unsigned char *User;            //  Non-NULL terminated string.
+@@ -3438,6 +3450,7 @@ SspiUnmarshalCredUIContext(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiPrepareForCredRead(
+@@ -3447,6 +3460,7 @@ SspiPrepareForCredRead(
+     _Outptr_ PCWSTR* ppszCredmanTargetName
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiPrepareForCredWrite(
+@@ -3469,12 +3483,14 @@ SspiPrepareForCredWrite(
+ #define SEC_WINNT_AUTH_IDENTITY_ENCRYPT_SAME_PROCESS      0x2
+ #define SEC_WINNT_AUTH_IDENTITY_ENCRYPT_FOR_SYSTEM        0x4
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiEncryptAuthIdentity(
+     _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiEncryptAuthIdentityEx(
+@@ -3482,12 +3498,14 @@ SspiEncryptAuthIdentityEx(
+     _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiDecryptAuthIdentity(
+     _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE EncryptedAuthData
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiDecryptAuthIdentityEx(
+@@ -3495,6 +3513,7 @@ SspiDecryptAuthIdentityEx(
+     _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE EncryptedAuthData
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ BOOLEAN
+ SEC_ENTRY
+ SspiIsAuthIdentityEncrypted(
+@@ -3519,6 +3538,7 @@ SspiIsAuthIdentityEncrypted(
+ // free the returned memory using SspiLocalFree()
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiEncodeAuthIdentityAsStrings(
+@@ -3528,6 +3548,7 @@ SspiEncodeAuthIdentityAsStrings(
+     _Outptr_opt_result_maybenull_ PCWSTR* ppszPackedCredentialsString
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiValidateAuthIdentity(
+@@ -3538,6 +3559,7 @@ SspiValidateAuthIdentity(
+ // free the returned memory using SspiFreeAuthIdentity()
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiCopyAuthIdentity(
+@@ -3550,18 +3572,21 @@ SspiCopyAuthIdentity(
+ // Internally calls SspiZeroAuthIdentity().
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ VOID
+ SEC_ENTRY
+ SspiFreeAuthIdentity(
+     _In_opt_ __drv_freesMem(Mem) PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ VOID
+ SEC_ENTRY
+ SspiZeroAuthIdentity(
+     _In_opt_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ VOID
+ SEC_ENTRY
+ SspiLocalFree(
+@@ -3573,6 +3598,7 @@ SspiLocalFree(
+ // which zeroes out the credentials blob before freeing it
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiEncodeStringsAsAuthIdentity(
+@@ -3582,6 +3608,7 @@ SspiEncodeStringsAsAuthIdentity(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiCompareAuthIdentities(
+@@ -3596,6 +3623,7 @@ SspiCompareAuthIdentities(
+ // free the returned memory using SspiLocalFree()
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiMarshalAuthIdentity(
+@@ -3608,6 +3636,7 @@ SspiMarshalAuthIdentity(
+ // free the returned auth identity using SspiFreeAuthIdentity()
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiUnmarshalAuthIdentity(
+@@ -3626,6 +3655,7 @@ SspiUnmarshalAuthIdentity(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ 
++_Windows_SupportedOS_Windows7_
+ BOOLEAN
+ SEC_ENTRY
+ SspiIsPromptingNeeded(
+@@ -3642,6 +3672,7 @@ SspiIsPromptingNeeded(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiGetTargetHostName(
+@@ -3649,6 +3680,7 @@ SspiGetTargetHostName(
+     _Outptr_ PWSTR* pszHostName
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ SspiExcludePackage(
+@@ -3683,7 +3715,7 @@ SspiSetChannelBindingFlags(
+ // Routines for manipulating packages
+ //
+ 
+-typedef struct _SECURITY_PACKAGE_OPTIONS {
++typedef struct _Windows_SupportedOS_Windows7_ _SECURITY_PACKAGE_OPTIONS {
+     unsigned long   Size;
+     unsigned long   Type;
+     unsigned long   Flags;
+@@ -3697,6 +3729,7 @@ typedef struct _SECURITY_PACKAGE_OPTIONS {
+ 
+ #define SECPKG_OPTIONS_PERMANENT    0x00000001
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ AddSecurityPackageA(
+@@ -3704,6 +3737,7 @@ AddSecurityPackageA(
+     _In_opt_ PSECURITY_PACKAGE_OPTIONS pOptions
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ AddSecurityPackageW(
+@@ -3717,12 +3751,14 @@ AddSecurityPackageW(
+ #define AddSecurityPackage  AddSecurityPackageA
+ #endif
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ DeleteSecurityPackageA(
+     _In_ LPSTR pszPackageName
+     );
+ 
++_Windows_SupportedOS_Windows7_
+ SECURITY_STATUS
+ SEC_ENTRY
+ DeleteSecurityPackageW(
