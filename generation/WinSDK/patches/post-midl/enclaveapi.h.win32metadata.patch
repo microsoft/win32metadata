@@ -1,0 +1,102 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
+index 70dab08452..b8998a93a3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -25,6 +26,9 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Or App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -33,6 +37,9 @@ IsEnclaveTypeSupported(
+     _In_ DWORD flEnclaveType
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Ret_maybenull_
+ _Post_writable_byte_size_(dwSize)
+@@ -49,6 +56,9 @@ CreateEnclave(
+     _Out_opt_ LPDWORD lpEnclaveError
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -65,6 +75,9 @@ LoadEnclaveData(
+     _Out_opt_ LPDWORD lpEnclaveError
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -83,6 +96,9 @@ InitializeEnclave(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_16299_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -92,6 +108,9 @@ LoadEnclaveImageA(
+     _In_ LPCSTR lpImageName
+     );
+ 
++_Windows_SupportedOS_16299_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -107,6 +126,9 @@ LoadEnclaveImageW(
+ #define LoadEnclaveImage  LoadEnclaveImageA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_16299_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -118,6 +140,9 @@ CallEnclave(
+     _Out_ LPVOID* lpReturnValue
+     );
+ 
++_Windows_SupportedOS_16299_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -127,6 +152,9 @@ TerminateEnclave(
+     _In_ BOOL fWait
+     );
+ 
++_Windows_SupportedOS_16299_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
