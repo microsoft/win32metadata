@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
+index 55920c8e3fea4c3311c842d929329c7049ba8252..827bd362ce79314806d02102084fb4f637970eff 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ //*@@@+++@@@@******************************************************************
+ //
+@@ -2520,7 +2521,7 @@ DEFINE_GUIDSTRUCT("00000000-0000-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_W
+ //
+ #ifndef _WAVEFORMATEXTENSIBLE_
+ #define _WAVEFORMATEXTENSIBLE_
+-typedef struct {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ {
+     WAVEFORMATEX    Format;
+     union {
+         WORD wValidBitsPerSample;       /* bits of precision  */
+@@ -3153,7 +3154,7 @@ typedef MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
+  }
+ */
+ 
+-typedef struct heaacwaveinfo_tag {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ heaacwaveinfo_tag {
+ 
+     // Defines core AAC properties. See description above. WAVEFORMATEX is of size 18 bytes.
+     WAVEFORMATEX wfx;
+@@ -3203,7 +3204,7 @@ typedef HEAACWAVEINFO FAR  *LPHEAACWAVEINFO;
+ //
+ // This structure describes the format block for wStructType=0
+ //
+-typedef struct heaacwaveformat_tag {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ heaacwaveformat_tag {
+ 
+     HEAACWAVEINFO wfInfo; // This structure has a size of 30 bytes
+     BYTE          pbAudioSpecificConfig[1];  // First byte of AudioSpecificConfig()
+@@ -3446,7 +3447,7 @@ typedef CSIMAADPCMWAVEFORMAT  FAR  *LPCSIMAADPCMWAVEFORMAT;
+ #define WAVE_FILTER_UNKNOWN         0x0000
+ #define WAVE_FILTER_DEVELOPMENT    (0xFFFF)
+ 
+-typedef struct wavefilter_tag {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ wavefilter_tag {
+     DWORD   cbStruct;           /* Size of the filter in bytes */
+     DWORD   dwFilterTag;        /* filter type */
+     DWORD   fdwFilter;          /* Flags for the filter (Universal Dfns) */
