@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
+index 778da34755f842bdcf1cc56e2edc0f84cd539929..266afed842b1ad1f1b8ffd78779de474c333b691 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
+@@ -15,6 +15,7 @@ Abstract:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -127,7 +128,7 @@ Note that only certain combinations of the preceding possible values are allowed
+ // of PERF_COUNTER_INFO structures. Note that the structure block will be automatically generated
+ // by schema generation/parsing tool.
+ //
+-typedef struct _PERF_COUNTERSET_INFO {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _PERF_COUNTERSET_INFO {
+     GUID   CounterSetGuid;
+     GUID   ProviderGuid;
+     ULONG  NumCounters;
+@@ -202,6 +203,8 @@ WINAPI
+ // Usually PerfSetCounterSetInfo() calls is automatically generated PerfAutoStartUp() function (generated
+ // by schema generation/parsing tool) to inform PERFLIB the layout of specific counterset.
+ //
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ULONG WINAPI
+ PerfStartProvider(
+     _In_     LPGUID          ProviderGuid,
+@@ -223,6 +226,8 @@ typedef struct _PROVIDER_CONTEXT {
+     LPVOID         pMemContext;
+ } PERF_PROVIDER_CONTEXT, * PPERF_PROVIDER_CONTEXT;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ULONG WINAPI
+ PerfStartProviderEx(
+     _In_ LPGUID ProviderGuid,
+@@ -237,6 +242,8 @@ PerfStartProvider(
+     _Out_ PHANDLE Provider
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ULONG WINAPI
+ PerfStopProvider(
+     _In_ HANDLE ProviderHandle
