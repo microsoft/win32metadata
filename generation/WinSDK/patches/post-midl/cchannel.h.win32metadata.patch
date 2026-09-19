@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
+index a7032a870ee1a514dee5c6ebc98b441aee2b67d1..4d139e0f3febe91ea02e7cde19b3d8bfb664077f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
+@@ -23,6 +23,7 @@ Revision History:
+ #include <pchannel.h>
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -316,7 +317,7 @@ typedef VIRTUALCHANNELWRITE FAR * PVIRTUALCHANNELWRITE;
+ /*                                                                          */
+ /* Description: Virtual Channel entry points passed to VirtualChannelEntry  */
+ /****************************************************************************/
+-typedef struct tagCHANNEL_ENTRY_POINTS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCHANNEL_ENTRY_POINTS
+ {
+     DWORD cbSize;
+     DWORD protocolVersion;

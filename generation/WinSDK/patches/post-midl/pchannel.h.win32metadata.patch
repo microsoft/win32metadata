@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pchannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/pchannel.h
+index 452c9b9628adfedaaf6adf2110ca79f1b1ab12f4..0d811185f7bbd95ffcf9d3a1fa0590653cfca5d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/pchannel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/pchannel.h
+@@ -18,6 +18,7 @@ Revision History:
+ #define _H_PCHANNEL
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -179,7 +180,7 @@ typedef PCHANNEL_DEF UNALIGNED FAR *PPCHANNEL_DEF;
+ /*                                                                          */
+ /* Description: Header sent on Virtual Channel PDUs                         */
+ /****************************************************************************/
+-typedef struct tagCHANNEL_PDU_HEADER
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCHANNEL_PDU_HEADER
+ {
+     UINT32    length;                 /* Length of data excluding header    */
+     UINT32    flags;                  /* CHANNEL_FLAG_xxx flags             */

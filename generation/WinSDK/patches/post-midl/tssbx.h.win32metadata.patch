@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tssbx.h b/generation/WinSDK/RecompiledIdlHeaders/um/tssbx.h
+index bd45c4f6add3e595543dd925934d01a5c096bc6b..cc1d569106e90aab23f636973df4cb47d752064e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tssbx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tssbx.h
+@@ -67,6 +67,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -98,7 +99,7 @@ extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0000_v0_0_s_ifspec;
+ #define	MaxAppName_Len	( 256 )
+ 
+ typedef /* [public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0001
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0001
+     {
+         WTSSBX_MACHINE_DRAIN_UNSPEC	= 0,
+         WTSSBX_MACHINE_DRAIN_OFF	= 0x1,
+@@ -106,7 +107,7 @@ enum __MIDL_IWTSSBPlugin_0001
+     } 	WTSSBX_MACHINE_DRAIN;
+ 
+ typedef /* [public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0002
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0002
+     {
+         WTSSBX_MACHINE_SESSION_MODE_UNSPEC	= 0,
+         WTSSBX_MACHINE_SESSION_MODE_SINGLE	= 0x1,
+@@ -114,7 +115,7 @@ enum __MIDL_IWTSSBPlugin_0002
+     } 	WTSSBX_MACHINE_SESSION_MODE;
+ 
+ typedef /* [public][public][public][public][public][public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0003
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0003
+     {
+         WTSSBX_ADDRESS_FAMILY_AF_UNSPEC	= 0,
+         WTSSBX_ADDRESS_FAMILY_AF_INET	= 0x1,
+@@ -132,7 +133,7 @@ typedef /* [public][public][public][public][public][public][public][public] */ s
+     } 	WTSSBX_IP_ADDRESS;
+ 
+ typedef /* [public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0005
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0005
+     {
+         WTSSBX_MACHINE_STATE_UNSPEC	= 0,
+         WTSSBX_MACHINE_STATE_READY	= 0x1,
+@@ -160,7 +161,7 @@ typedef /* [public][public] */ struct __MIDL_IWTSSBPlugin_0007
+     } 	WTSSBX_MACHINE_INFO;
+ 
+ typedef /* [public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0008
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0008
+     {
+         WTSSBX_SESSION_STATE_UNSPEC	= 0,
+         WTSSBX_SESSION_STATE_ACTIVE	= 0x1,
+@@ -179,7 +180,7 @@ typedef /* [public][public] */ struct __MIDL_IWTSSBPlugin_0009
+     } 	WTSSBX_SESSION_INFO;
+ 
+ typedef /* [public][public][public] */ 
+-enum __MIDL_IWTSSBPlugin_0010
++enum _Windows_SupportedOS_Server2008_ __MIDL_IWTSSBPlugin_0010
+     {
+         WTSSBX_NOTIFICATION_REMOVED	= 0x1,
+         WTSSBX_NOTIFICATION_CHANGED	= 0x2,
+@@ -193,7 +194,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DC44BE78-B18D-4399-B210-641BF67A002C")
+-    IWTSSBPlugin : public IUnknown
++    _Windows_SupportedOS_Server2008_ IWTSSBPlugin : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -336,7 +337,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
+         END_INTERFACE
+     } IWTSSBPluginVtbl;
+ 
+-    interface IWTSSBPlugin
++    interface _Windows_SupportedOS_Server2008_ IWTSSBPlugin
+     {
+         CONST_VTBL struct IWTSSBPluginVtbl *lpVtbl;
+     };

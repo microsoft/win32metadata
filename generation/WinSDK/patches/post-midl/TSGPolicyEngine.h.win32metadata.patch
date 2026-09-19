@@ -1,0 +1,107 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h b/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
+index 8cdcf31bcbb90e1a5c7282e88906dd39a7fed6e3..96923492576f0fe4f96fc411834146b0e195966b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
+@@ -88,10 +88,11 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [public][public][public][public] */ 
+-enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
++enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
+     {
+         AA_AUTH_MIN	= 0,
+         AA_AUTH_BASIC	= ( AA_AUTH_MIN + 1 ) ,
+@@ -109,7 +110,7 @@ enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
+     } 	AAAuthSchemes;
+ 
+ typedef /* [public][public] */ 
+-enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0002
++enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0002
+     {
+         AA_MAIN_SESSION_CREATION	= 0,
+         AA_SUB_SESSION_CREATION	= ( AA_MAIN_SESSION_CREATION + 1 ) ,
+@@ -140,7 +141,7 @@ enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0004
+     } 	SESSION_TIMEOUT_ACTION_TYPE;
+ 
+ typedef /* [public] */ 
+-enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0005
++enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0005
+     {
+         EnableAllRedirections	= 0,
+         DisableAllRedirections	= ( EnableAllRedirections + 1 ) ,
+@@ -180,7 +181,7 @@ EXTERN_C const IID IID_ITSGAuthorizeConnectionSink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c27ece33-7781-4318-98ef-1cf2da7b7005")
+-    ITSGAuthorizeConnectionSink : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGAuthorizeConnectionSink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnConnectionAuthorized( 
+@@ -253,7 +254,7 @@ EXTERN_C const IID IID_ITSGAuthorizeConnectionSink;
+         END_INTERFACE
+     } ITSGAuthorizeConnectionSinkVtbl;
+ 
+-    interface ITSGAuthorizeConnectionSink
++    interface _Windows_SupportedOS_Windows7_ ITSGAuthorizeConnectionSink
+     {
+         CONST_VTBL struct ITSGAuthorizeConnectionSinkVtbl *lpVtbl;
+     };
+@@ -299,7 +300,7 @@ EXTERN_C const IID IID_ITSGAuthorizeResourceSink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("feddfcd4-fa12-4435-ae55-7ad1a9779af7")
+-    ITSGAuthorizeResourceSink : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGAuthorizeResourceSink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnChannelAuthorized( 
+@@ -364,7 +365,7 @@ EXTERN_C const IID IID_ITSGAuthorizeResourceSink;
+         END_INTERFACE
+     } ITSGAuthorizeResourceSinkVtbl;
+ 
+-    interface ITSGAuthorizeResourceSink
++    interface _Windows_SupportedOS_Windows7_ ITSGAuthorizeResourceSink
+     {
+         CONST_VTBL struct ITSGAuthorizeResourceSinkVtbl *lpVtbl;
+     };
+@@ -410,7 +411,7 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8bc24f08-6223-42f4-a5b4-8e37cd135bbd")
+-    ITSGPolicyEngine : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGPolicyEngine : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AuthorizeConnection( 
+@@ -561,7 +562,7 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
+         END_INTERFACE
+     } ITSGPolicyEngineVtbl;
+ 
+-    interface ITSGPolicyEngine
++    interface _Windows_SupportedOS_Windows7_ ITSGPolicyEngine
+     {
+         CONST_VTBL struct ITSGPolicyEngineVtbl *lpVtbl;
+     };
+@@ -616,7 +617,7 @@ EXTERN_C const IID IID_ITSGAccountingEngine;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4ce2a0c9-e874-4f1a-86f4-06bbb9115338")
+-    ITSGAccountingEngine : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGAccountingEngine : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE DoAccounting( 
+@@ -661,7 +662,7 @@ EXTERN_C const IID IID_ITSGAccountingEngine;
+         END_INTERFACE
+     } ITSGAccountingEngineVtbl;
+ 
+-    interface ITSGAccountingEngine
++    interface _Windows_SupportedOS_Windows7_ ITSGAccountingEngine
+     {
+         CONST_VTBL struct ITSGAccountingEngineVtbl *lpVtbl;
+     };
