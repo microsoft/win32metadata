@@ -1,0 +1,201 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h b/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
+index d35645cb7d0662e2a5812cc2f4828af2ebc2a17d..849137f98966c4b4ae9274f2ca47d077709d3688 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
+@@ -130,6 +130,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -159,7 +160,7 @@ EXTERN_C const IID IID_IWTSPlugin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230201-1439-4e62-a414-190d0ac3d40e")
+-    IWTSPlugin : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSPlugin : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -220,7 +221,7 @@ EXTERN_C const IID IID_IWTSPlugin;
+         END_INTERFACE
+     } IWTSPluginVtbl;
+ 
+-    interface IWTSPlugin
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSPlugin
+     {
+         CONST_VTBL struct IWTSPluginVtbl *lpVtbl;
+     };
+@@ -284,7 +285,7 @@ EXTERN_C const IID IID_IWTSListener;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230206-9a39-4d58-8674-cdb4dff4e73b")
+-    IWTSListener : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListener : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetConfiguration( 
+@@ -325,7 +326,7 @@ EXTERN_C const IID IID_IWTSListener;
+         END_INTERFACE
+     } IWTSListenerVtbl;
+ 
+-    interface IWTSListener
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListener
+     {
+         CONST_VTBL struct IWTSListenerVtbl *lpVtbl;
+     };
+@@ -380,7 +381,7 @@ EXTERN_C const IID IID_IWTSListenerCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230203-d6a7-11d8-b9fd-000bdbd1f198")
+-    IWTSListenerCallback : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListenerCallback : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnNewChannelConnection( 
+@@ -431,7 +432,7 @@ EXTERN_C const IID IID_IWTSListenerCallback;
+         END_INTERFACE
+     } IWTSListenerCallbackVtbl;
+ 
+-    interface IWTSListenerCallback
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListenerCallback
+     {
+         CONST_VTBL struct IWTSListenerCallbackVtbl *lpVtbl;
+     };
+@@ -486,7 +487,7 @@ EXTERN_C const IID IID_IWTSVirtualChannelCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230204-d6a7-11d8-b9fd-000bdbd1f198")
+-    IWTSVirtualChannelCallback : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelCallback : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnDataReceived( 
+@@ -537,7 +538,7 @@ EXTERN_C const IID IID_IWTSVirtualChannelCallback;
+         END_INTERFACE
+     } IWTSVirtualChannelCallbackVtbl;
+ 
+-    interface IWTSVirtualChannelCallback
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelCallback
+     {
+         CONST_VTBL struct IWTSVirtualChannelCallbackVtbl *lpVtbl;
+     };
+@@ -596,7 +597,7 @@ EXTERN_C const IID IID_IWTSVirtualChannelManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230205-d6a7-11d8-b9fd-000bdbd1f198")
+-    IWTSVirtualChannelManager : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelManager : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateListener( 
+@@ -649,7 +650,7 @@ EXTERN_C const IID IID_IWTSVirtualChannelManager;
+         END_INTERFACE
+     } IWTSVirtualChannelManagerVtbl;
+ 
+-    interface IWTSVirtualChannelManager
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelManager
+     {
+         CONST_VTBL struct IWTSVirtualChannelManagerVtbl *lpVtbl;
+     };
+@@ -704,7 +705,7 @@ EXTERN_C const IID IID_IWTSVirtualChannel;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A1230207-d6a7-11d8-b9fd-000bdbd1f198")
+-    IWTSVirtualChannel : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannel : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Write( 
+@@ -759,7 +760,7 @@ EXTERN_C const IID IID_IWTSVirtualChannel;
+         END_INTERFACE
+     } IWTSVirtualChannelVtbl;
+ 
+-    interface IWTSVirtualChannel
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannel
+     {
+         CONST_VTBL struct IWTSVirtualChannelVtbl *lpVtbl;
+     };
+@@ -818,7 +819,7 @@ EXTERN_C const IID IID_IWTSPluginServiceProvider;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D3E07363-087C-476C-86A7-DBB15F46DDB4")
+-    IWTSPluginServiceProvider : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSPluginServiceProvider : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetService( 
+@@ -863,7 +864,7 @@ EXTERN_C const IID IID_IWTSPluginServiceProvider;
+         END_INTERFACE
+     } IWTSPluginServiceProviderVtbl;
+ 
+-    interface IWTSPluginServiceProvider
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSPluginServiceProvider
+     {
+         CONST_VTBL struct IWTSPluginServiceProviderVtbl *lpVtbl;
+     };
+@@ -900,7 +901,7 @@ EXTERN_C const IID IID_IWTSPluginServiceProvider;
+ /* interface __MIDL_itf_tsvirtualchannels_0000_0007 */
+ /* [local] */ 
+ 
+-typedef struct __BITMAP_RENDERER_STATISTICS
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ __BITMAP_RENDERER_STATISTICS
+     {
+     DWORD dwFramesDelivered;
+     DWORD dwFramesDropped;
+@@ -926,7 +927,7 @@ EXTERN_C const IID IID_IWTSBitmapRenderer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5B7ACC97-F3C9-46F7-8C5B-FA685D3441B1")
+-    IWTSBitmapRenderer : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderer : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Render( 
+@@ -1003,7 +1004,7 @@ EXTERN_C const IID IID_IWTSBitmapRenderer;
+         END_INTERFACE
+     } IWTSBitmapRendererVtbl;
+ 
+-    interface IWTSBitmapRenderer
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderer
+     {
+         CONST_VTBL struct IWTSBitmapRendererVtbl *lpVtbl;
+     };
+@@ -1064,7 +1065,7 @@ EXTERN_C const IID IID_IWTSBitmapRendererCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D782928E-FE4E-4E77-AE90-9CD0B3E3B353")
+-    IWTSBitmapRendererCallback : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRendererCallback : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnTargetSizeChanged( 
+@@ -1105,7 +1106,7 @@ EXTERN_C const IID IID_IWTSBitmapRendererCallback;
+         END_INTERFACE
+     } IWTSBitmapRendererCallbackVtbl;
+ 
+-    interface IWTSBitmapRendererCallback
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRendererCallback
+     {
+         CONST_VTBL struct IWTSBitmapRendererCallbackVtbl *lpVtbl;
+     };
+@@ -1160,7 +1161,7 @@ EXTERN_C const IID IID_IWTSBitmapRenderService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("EA326091-05FE-40C1-B49C-3D2EF4626A0E")
+-    IWTSBitmapRenderService : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderService : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetMappedRenderer( 
+@@ -1209,7 +1210,7 @@ EXTERN_C const IID IID_IWTSBitmapRenderService;
+         END_INTERFACE
+     } IWTSBitmapRenderServiceVtbl;
+ 
+-    interface IWTSBitmapRenderService
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderService
+     {
+         CONST_VTBL struct IWTSBitmapRenderServiceVtbl *lpVtbl;
+     };

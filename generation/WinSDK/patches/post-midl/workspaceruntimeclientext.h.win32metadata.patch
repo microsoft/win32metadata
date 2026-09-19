@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntimeclientext.h b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntimeclientext.h
+index 94e2a4c776541a4d289904cad0e70a96d83d6ed4..db801f87ba8b7efee90e0d57a4ad6314a07ca46d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntimeclientext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntimeclientext.h
+@@ -67,6 +67,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -86,7 +87,7 @@ EXTERN_C const IID IID_IWorkspaceClientExt;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("12B952F4-41CA-4F21-A829-A6D07D9A16E5")
+-    IWorkspaceClientExt : public IUnknown
++    _Windows_SupportedOS_Windows7_ IWorkspaceClientExt : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetResourceId( 
+@@ -143,7 +144,7 @@ EXTERN_C const IID IID_IWorkspaceClientExt;
+         END_INTERFACE
+     } IWorkspaceClientExtVtbl;
+ 
+-    interface IWorkspaceClientExt
++    interface _Windows_SupportedOS_Windows7_ IWorkspaceClientExt
+     {
+         CONST_VTBL struct IWorkspaceClientExtVtbl *lpVtbl;
+     };

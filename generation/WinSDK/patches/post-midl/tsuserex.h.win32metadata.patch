@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
+index 71dad35999e6631c12202d9cda63770aad623b9f..05af38f537fbed92680ee5cfb51fbe8b1e0db23f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
+@@ -88,6 +88,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -125,7 +126,7 @@ EXTERN_C const IID IID_IADsTSUserEx;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("C4930E79-2989-4462-8A60-2FCF2F2955EF")
+-    IADsTSUserEx : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsTSUserEx : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesProfilePath( 
+@@ -436,7 +437,7 @@ EXTERN_C const IID IID_IADsTSUserEx;
+         END_INTERFACE
+     } IADsTSUserExVtbl;
+ 
+-    interface IADsTSUserEx
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsTSUserEx
+     {
+         CONST_VTBL struct IADsTSUserExVtbl *lpVtbl;
+     };
