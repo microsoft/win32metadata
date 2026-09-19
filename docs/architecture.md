@@ -49,7 +49,10 @@ architectures and merged into `bin/Windows.Win32.winmd`.
 For a faster raw-tool inner loop:
 
 ```powershell
-.\scripts\Generate-WindowsRsWinmd.ps1 -Partition Foundation -Architecture x64
+.\scripts\Generate-WindowsRsWinmd.ps1 `
+    -Partition Foundation `
+    -Architecture x64 `
+    -Namespace Windows.Win32.Foundation
 ```
 
 Components that require distinct root namespaces are scraped independently, then their
