@@ -1,0 +1,150 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h b/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
+index 157f8ea..a3785c9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
+@@ -9,6 +9,8 @@
+ #ifndef _MCX_H_
+ #define _MCX_H_
+ 
++#include <win32metadata_annotations.h>
++
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
+@@ -18,7 +20,7 @@
+ #pragma warning(disable:4820) // padding added after data member
+ #endif
+ 
+-typedef struct _MODEMDEVCAPS {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _MODEMDEVCAPS {
+     DWORD   dwActualSize;
+     DWORD   dwRequiredSize;
+     DWORD   dwDevSpecificOffset;
+@@ -34,11 +36,11 @@ typedef struct _MODEMDEVCAPS {
+     DWORD   dwModemVersionSize;
+ 
+     // local option capabilities
+-    DWORD   dwDialOptions;          // bitmap of supported values
++    _Win32_AssociatedEnum_(MODEMDEVCAPS_DIAL_OPTIONS) DWORD   dwDialOptions;          // bitmap of supported values
+     DWORD   dwCallSetupFailTimer;   // maximum in seconds
+     DWORD   dwInactivityTimeout;    // maximum in seconds
+-    DWORD   dwSpeakerVolume;        // bitmap of supported values
+-    DWORD   dwSpeakerMode;          // bitmap of supported values
++    _Win32_AssociatedEnum_(MODEMDEVCAPS_SPEAKER_VOLUME) DWORD   dwSpeakerVolume;        // bitmap of supported values
++    _Win32_AssociatedEnum_(MODEMDEVCAPS_SPEAKER_MODE) DWORD   dwSpeakerMode;          // bitmap of supported values
+     DWORD   dwModemOptions;         // bitmap of supported values
+     DWORD   dwMaxDTERate;           // maximum value in bit/s
+     DWORD   dwMaxDCERate;           // maximum value in bit/s
+@@ -47,7 +49,7 @@ typedef struct _MODEMDEVCAPS {
+     BYTE    abVariablePortion [1];
+ } MODEMDEVCAPS, *PMODEMDEVCAPS, *LPMODEMDEVCAPS;
+ 
+-typedef struct _MODEMSETTINGS {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _MODEMSETTINGS {
+     DWORD   dwActualSize;
+     DWORD   dwRequiredSize;
+     DWORD   dwDevSpecificOffset;
+@@ -56,8 +58,8 @@ typedef struct _MODEMSETTINGS {
+     // static local options (read/write)
+     DWORD   dwCallSetupFailTimer;       // seconds
+     DWORD   dwInactivityTimeout;        // seconds
+-    DWORD   dwSpeakerVolume;            // level
+-    DWORD   dwSpeakerMode;              // mode
++    _Win32_AssociatedEnum_(MODEM_SPEAKER_VOLUME) DWORD   dwSpeakerVolume;            // level
++    _Win32_AssociatedEnum_(MODEMSETTINGS_SPEAKER_MODE) DWORD   dwSpeakerMode;              // mode
+     DWORD   dwPreferredModemOptions;    // bitmap
+ 
+     // negotiated options (read only) for current or last call
+@@ -95,6 +97,92 @@ typedef struct _MODEMSETTINGS {
+ #define MDMSPKR_ON          0x00000002
+ #define MDMSPKR_CALLSETUP   0x00000003
+ 
++#if defined(WIN32METADATA) && !defined(RC_INVOKED)
++#pragma push_macro("DIALOPTION_BILLING")
++#pragma push_macro("DIALOPTION_QUIET")
++#pragma push_macro("DIALOPTION_DIALTONE")
++#pragma push_macro("MDMVOLFLAG_LOW")
++#pragma push_macro("MDMVOLFLAG_MEDIUM")
++#pragma push_macro("MDMVOLFLAG_HIGH")
++#pragma push_macro("MDMSPKRFLAG_OFF")
++#pragma push_macro("MDMSPKRFLAG_DIAL")
++#pragma push_macro("MDMSPKRFLAG_ON")
++#pragma push_macro("MDMSPKRFLAG_CALLSETUP")
++#pragma push_macro("MDMVOL_LOW")
++#pragma push_macro("MDMVOL_MEDIUM")
++#pragma push_macro("MDMVOL_HIGH")
++#pragma push_macro("MDMSPKR_OFF")
++#pragma push_macro("MDMSPKR_DIAL")
++#pragma push_macro("MDMSPKR_ON")
++#pragma push_macro("MDMSPKR_CALLSETUP")
++#undef DIALOPTION_BILLING
++#undef DIALOPTION_QUIET
++#undef DIALOPTION_DIALTONE
++#undef MDMVOLFLAG_LOW
++#undef MDMVOLFLAG_MEDIUM
++#undef MDMVOLFLAG_HIGH
++#undef MDMSPKRFLAG_OFF
++#undef MDMSPKRFLAG_DIAL
++#undef MDMSPKRFLAG_ON
++#undef MDMSPKRFLAG_CALLSETUP
++#undef MDMVOL_LOW
++#undef MDMVOL_MEDIUM
++#undef MDMVOL_HIGH
++#undef MDMSPKR_OFF
++#undef MDMSPKR_DIAL
++#undef MDMSPKR_ON
++#undef MDMSPKR_CALLSETUP
++enum [[clang::flag_enum]] MODEMDEVCAPS_DIAL_OPTIONS : unsigned long
++{
++    DIALOPTION_BILLING = 0x00000040,
++    DIALOPTION_QUIET = 0x00000080,
++    DIALOPTION_DIALTONE = 0x00000100,
++};
++enum [[clang::flag_enum]] MODEMDEVCAPS_SPEAKER_VOLUME : unsigned long
++{
++    MDMVOLFLAG_LOW = 0x00000001,
++    MDMVOLFLAG_MEDIUM = 0x00000002,
++    MDMVOLFLAG_HIGH = 0x00000004,
++};
++enum [[clang::flag_enum]] MODEMDEVCAPS_SPEAKER_MODE : unsigned long
++{
++    MDMSPKRFLAG_OFF = 0x00000001,
++    MDMSPKRFLAG_DIAL = 0x00000002,
++    MDMSPKRFLAG_ON = 0x00000004,
++    MDMSPKRFLAG_CALLSETUP = 0x00000008,
++};
++enum MODEM_SPEAKER_VOLUME : unsigned long
++{
++    MDMVOL_LOW = 0x00000000,
++    MDMVOL_MEDIUM = 0x00000001,
++    MDMVOL_HIGH = 0x00000002,
++};
++enum MODEMSETTINGS_SPEAKER_MODE : unsigned long
++{
++    MDMSPKR_OFF = 0x00000000,
++    MDMSPKR_DIAL = 0x00000001,
++    MDMSPKR_ON = 0x00000002,
++    MDMSPKR_CALLSETUP = 0x00000003,
++};
++#pragma pop_macro("MDMSPKR_CALLSETUP")
++#pragma pop_macro("MDMSPKR_ON")
++#pragma pop_macro("MDMSPKR_DIAL")
++#pragma pop_macro("MDMSPKR_OFF")
++#pragma pop_macro("MDMVOL_HIGH")
++#pragma pop_macro("MDMVOL_MEDIUM")
++#pragma pop_macro("MDMVOL_LOW")
++#pragma pop_macro("MDMSPKRFLAG_CALLSETUP")
++#pragma pop_macro("MDMSPKRFLAG_ON")
++#pragma pop_macro("MDMSPKRFLAG_DIAL")
++#pragma pop_macro("MDMSPKRFLAG_OFF")
++#pragma pop_macro("MDMVOLFLAG_HIGH")
++#pragma pop_macro("MDMVOLFLAG_MEDIUM")
++#pragma pop_macro("MDMVOLFLAG_LOW")
++#pragma pop_macro("DIALOPTION_DIALTONE")
++#pragma pop_macro("DIALOPTION_QUIET")
++#pragma pop_macro("DIALOPTION_BILLING")
++#endif
++
+ // Modem Options
+ #define MDM_COMPRESSION      0x00000001
+ #define MDM_ERROR_CONTROL    0x00000002
