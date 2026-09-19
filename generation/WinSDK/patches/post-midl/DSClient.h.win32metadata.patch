@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
+index 71ad8398e8cd5efd0e6a0b05e81b895c7edfd618..8f58f9f53a69561eb9ce169417999b561a8af091 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
+@@ -3,6 +3,7 @@
+ //
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -93,7 +94,7 @@ typedef struct
+ #define CFSTR_DS_DISPLAY_SPEC_OPTIONS TEXT("DsDisplaySpecOptions")
+ #define CFSTR_DSDISPLAYSPECOPTIONS CFSTR_DS_DISPLAY_SPEC_OPTIONS
+ 
+-typedef struct _DSDISPLAYSPECOPTIONS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSDISPLAYSPECOPTIONS
+ {
+     DWORD   dwSize;                             // size of struct, for versioning
+     DWORD   dwFlags;                            // invocation flags
+@@ -459,7 +460,11 @@ typedef struct
+ // API exported for browsing for containers.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ STDAPI_(int) DsBrowseForContainerW(_Inout_ PDSBROWSEINFOW pInfo);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
+ 
+ #ifdef UNICODE
+@@ -471,6 +476,8 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
+ 
+ // NOTE: these are here to keep old clients building - remove soon
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ STDAPI_(HICON) DsGetIcon(DWORD dwFlags, LPCWSTR pszObjectClass, INT cxImage, INT cyImage);
+ STDAPI DsGetFriendlyClassName(LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, UINT cchBuffer);
+ 

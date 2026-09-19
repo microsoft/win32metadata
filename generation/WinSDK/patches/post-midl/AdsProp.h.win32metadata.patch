@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
+index 740baae061e52ae3560a80c3c3265eeb22b8e537..3f84e29f3e16172b152147c20efbff4cdc943ecc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
+@@ -21,6 +21,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -46,7 +47,7 @@ extern "C" {
+ //              the notify object.
+ //
+ //-----------------------------------------------------------------------------
+-typedef struct _ADSPROPINITPARAMS {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ADSPROPINITPARAMS {
+     DWORD              dwSize;          // Set this to the size of the struct.
+     DWORD              dwFlags;         // Reserved for future use.
+     HRESULT            hr;              // If this is non-zero, then the others

@@ -1,0 +1,47 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
+index b6471c2900118d6b0a365dc1d439b46614d1936b..3449b724b46eca9bec73a96a55d96e8b129a22c8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
+@@ -27,6 +27,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -1108,12 +1109,16 @@ DsBindingSetTimeout(
+ // DsUnBind
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsUnBindW(
+     _In_ HANDLE          *phDS);             // in
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1139,6 +1144,8 @@ DsUnBindA(
+ // null when the username is fully qualified, for example UPN format.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ NTDSAPI
+ DWORD
+@@ -2698,7 +2705,7 @@ typedef enum _DS_REPL_INFO_TYPE {
+         DS_REPL_NBR_NO_CHANGE_NOTIFICATIONS \
+         )
+ 
+-typedef struct _DS_REPL_NEIGHBORW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_REPL_NEIGHBORW {
+     LPWSTR      pszNamingContext;
+     LPWSTR      pszSourceDsaDN;
+     LPWSTR      pszSourceDsaAddress;

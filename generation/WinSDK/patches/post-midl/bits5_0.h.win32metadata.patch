@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits5_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits5_0.h
+index 81cd1770c4b5d3d3205505eba84da9f7de97ee88..4561ab74cb570394323ae689683e89c6ea19a42e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits5_0.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits5_0.h
+@@ -104,6 +104,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define BITS_COST_STATE_UNRESTRICTED          0x1
+@@ -122,7 +123,7 @@ extern "C"{
+ #define BITS_COST_STATE_TRANSFER_UNRESTRICTED (BITS_COST_OPTION_IGNORE_CONGESTION|BITS_COST_STATE_OVERCAP_THROTTLED|BITS_COST_STATE_UNRESTRICTED)
+ #define BITS_COST_STATE_TRANSFER_ALWAYS       (BITS_COST_OPTION_IGNORE_CONGESTION|BITS_COST_STATE_ROAMING|BITS_COST_STATE_USAGE_BASED|BITS_COST_STATE_OVERCAP_THROTTLED|BITS_COST_STATE_OVERCAP_CHARGED|BITS_COST_STATE_NEAR_CAP|BITS_COST_STATE_BELOW_CAP|BITS_COST_STATE_CAPPED_USAGE_UNKNOWN|BITS_COST_STATE_UNRESTRICTED)
+ typedef 
+-enum BITS_JOB_TRANSFER_POLICY
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ BITS_JOB_TRANSFER_POLICY
+     {
+         BITS_JOB_TRANSFER_POLICY_ALWAYS	= 0x800000ff,
+         BITS_JOB_TRANSFER_POLICY_NOT_ROAMING	= 0x8000007f,
+@@ -132,7 +133,7 @@ enum BITS_JOB_TRANSFER_POLICY
+     } 	BITS_JOB_TRANSFER_POLICY;
+ 
+ typedef 
+-enum BITS_JOB_PROPERTY_ID
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ BITS_JOB_PROPERTY_ID
+     {
+         BITS_JOB_PROPERTY_ID_COST_FLAGS	= 1,
+         BITS_JOB_PROPERTY_NOTIFICATION_CLSID	= 2,
+@@ -154,7 +155,7 @@ typedef /* [public][public][public][switch_type] */ union __MIDL___MIDL_itf_bits
+     } 	BITS_JOB_PROPERTY_VALUE;
+ 
+ typedef 
+-enum BITS_FILE_PROPERTY_ID
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ BITS_FILE_PROPERTY_ID
+     {
+         BITS_FILE_PROPERTY_ID_HTTP_RESPONSE_HEADERS	= 1
+     } 	BITS_FILE_PROPERTY_ID;
+@@ -181,7 +182,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob5;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E847030C-BBBA-4657-AF6D-484AA42BF1FE")
+-    IBackgroundCopyJob5 : public IBackgroundCopyJob4
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IBackgroundCopyJob5 : public IBackgroundCopyJob4
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
+@@ -543,7 +544,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob5;
+         END_INTERFACE
+     } IBackgroundCopyJob5Vtbl;
+ 
+-    interface IBackgroundCopyJob5
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IBackgroundCopyJob5
+     {
+         CONST_VTBL struct IBackgroundCopyJob5Vtbl *lpVtbl;
+     };
+@@ -746,7 +747,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile5;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("85C1657F-DAFC-40E8-8834-DF18EA25717E")
+-    IBackgroundCopyFile5 : public IBackgroundCopyFile4
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IBackgroundCopyFile5 : public IBackgroundCopyFile4
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
+@@ -864,7 +865,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile5;
+         END_INTERFACE
+     } IBackgroundCopyFile5Vtbl;
+ 
+-    interface IBackgroundCopyFile5
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IBackgroundCopyFile5
+     {
+         CONST_VTBL struct IBackgroundCopyFile5Vtbl *lpVtbl;
+     };

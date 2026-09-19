@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
+index 65686c67b9e17a84fd3a05a7a6301706db159301..658532c7528913034925d61b7fbdde0121574b50 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ //+---------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -24,6 +25,8 @@ extern "C" {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsGetObject(
+     LPCWSTR lpszPathName,
+@@ -32,12 +35,16 @@ ADsGetObject(
+     );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsBuildEnumerator(
+     IADsContainer *pADsContainer,
+     IEnumVARIANT   **ppEnumVariant
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsFreeEnumerator(
+     IEnumVARIANT *pEnumVariant

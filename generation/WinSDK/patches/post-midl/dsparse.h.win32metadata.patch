@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
+index 885f3d642dbf82fffe40cc78bae78a0dac0adf67..5acd45ef74c78ce49c9daefcab5ff0f050259f39 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
+@@ -27,6 +27,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Familyy or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -98,6 +99,8 @@ typedef enum _DS_MANGLE_FOR {
+ //
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+ DSPARSE
+@@ -113,6 +116,8 @@ DsMakeSpnW(
+     _Out_writes_to_opt_(*pcSpnLength, *pcSpnLength) LPWSTR pszSpn
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+ DSPARSE
+@@ -160,6 +165,8 @@ DsMakeSpnA(
+ // All arguments except pszSpn are optional.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ DSPARSE
+ DWORD
