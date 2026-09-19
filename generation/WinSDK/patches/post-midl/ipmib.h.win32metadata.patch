@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
+index 78285b58a1169e60fde7f6ba0652462b53e9a82b..056bb2f87e05313b9e87d601566244f18bfd143f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
+@@ -21,6 +21,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -50,7 +51,7 @@ Abstract:
+ #define MIB_IPADDR_TRANSIENT    0x0080 // Transient address
+ #define MIB_IPADDR_DNS_ELIGIBLE 0X0100 // Address is published in DNS.
+ 
+-typedef struct _MIB_IPADDRROW_XP {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IPADDRROW_XP {
+     DWORD dwAddr;
+     IF_INDEX dwIndex;
+     DWORD dwMask;

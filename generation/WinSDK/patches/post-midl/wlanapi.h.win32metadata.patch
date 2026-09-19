@@ -1,0 +1,357 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
+index 0d77f58e087e5e8d4f62fc2d7c5c9d98919f5f3c..a36d8dca40289349bd78eb0b77ebf2d52fb4bb3e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
+@@ -25,6 +25,7 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -77,13 +78,13 @@ extern "C" {
+ #define WLAN_SET_EAPHOST_DATA_ALL_USERS 0x00000001
+ 
+ // struct WLAN_PROFILE_INFO defines the basic information of an 802.11 network profile
+-typedef struct _WLAN_PROFILE_INFO {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_PROFILE_INFO {
+     WCHAR strProfileName[WLAN_MAX_NAME_LENGTH];
+     DWORD dwFlags;
+ } WLAN_PROFILE_INFO, *PWLAN_PROFILE_INFO;
+ 
+ 
+-typedef struct _DOT11_NETWORK {
++typedef struct _Windows_SupportedOS_Server2008_ _DOT11_NETWORK {
+     DOT11_SSID dot11Ssid;
+     DOT11_BSS_TYPE dot11BssType;
+ } DOT11_NETWORK, *PDOT11_NETWORK;
+@@ -95,7 +96,7 @@ typedef struct _DOT11_NETWORK {
+ // the maximum number of PSD IE data entries
+ #define DOT11_PSD_IE_MAX_ENTRY_NUMBER 5
+ 
+-typedef struct _WLAN_RAW_DATA {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_RAW_DATA {
+     // size of the data blob
+     DWORD dwDataSize;
+ #ifdef __midl
+@@ -105,7 +106,7 @@ typedef struct _WLAN_RAW_DATA {
+ #endif
+ } WLAN_RAW_DATA, *PWLAN_RAW_DATA;
+ 
+-typedef struct _WLAN_RAW_DATA_LIST {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_RAW_DATA_LIST {
+     DWORD dwTotalSize;
+     DWORD dwNumberOfItems;
+     struct {
+@@ -117,7 +118,7 @@ typedef struct _WLAN_RAW_DATA_LIST {
+     } DataList[1];
+ } WLAN_RAW_DATA_LIST, *PWLAN_RAW_DATA_LIST;
+ 
+-typedef enum _WLAN_CONNECTION_MODE {
++typedef enum _Windows_SupportedOS_Server2008_ _WLAN_CONNECTION_MODE {
+     wlan_connection_mode_profile = 0,
+     wlan_connection_mode_temporary_profile,
+     wlan_connection_mode_discovery_secure,
+@@ -455,7 +456,7 @@ typedef ULONG WLAN_SIGNAL_QUALITY, *PWLAN_SIGNAL_QUALITY;
+ // include all hidden network profiles in the available network list, regardless they are visible or not
+ #define WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_MANUAL_HIDDEN_PROFILES   0x00000002
+ 
+-typedef struct _WLAN_RATE_SET {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_RATE_SET {
+     ULONG uRateSetLength;
+     _Field_size_part_(DOT11_RATE_SET_MAX_LENGTH, uRateSetLength) USHORT usRateSet[DOT11_RATE_SET_MAX_LENGTH];
+ } WLAN_RATE_SET, * PWLAN_RATE_SET;
+@@ -463,7 +464,7 @@ typedef struct _WLAN_RATE_SET {
+ #define WLAN_MAX_PHY_TYPE_NUMBER    8
+ //
+ // struct WLAN_AVAILABLE_NETWORK defines information needed for an available network
+-typedef struct _WLAN_AVAILABLE_NETWORK {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_AVAILABLE_NETWORK {
+     WCHAR strProfileName[WLAN_MAX_NAME_LENGTH];
+     DOT11_SSID dot11Ssid;
+     DOT11_BSS_TYPE dot11BssType;
+@@ -513,7 +514,7 @@ typedef struct _WLAN_AVAILABLE_NETWORK_V2 {
+     DWORD dwReserved;
+ } WLAN_AVAILABLE_NETWORK_V2, *PWLAN_AVAILABLE_NETWORK_V2;
+ 
+-typedef struct _WLAN_BSS_ENTRY {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_BSS_ENTRY {
+     DOT11_SSID dot11Ssid;
+     ULONG uPhyId;
+     DOT11_MAC_ADDRESS dot11Bssid;
+@@ -537,7 +538,7 @@ typedef struct _WLAN_BSS_ENTRY {
+ 
+ // struct WLAN_VARIABLE_SIZE_ARRAY defines a list of entries,
+ // each of which may have different size
+-typedef struct _WLAN_BSS_LIST {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_BSS_LIST {
+     // The total size of the data in BYTE
+     DWORD dwTotalSize;
+     DWORD dwNumberOfItems;
+@@ -575,7 +576,7 @@ typedef enum _WLAN_ADHOC_NETWORK_STATE {
+ } WLAN_ADHOC_NETWORK_STATE, *PWLAN_ADHOC_NETWORK_STATE;
+ 
+ // struct WLAN_INTERFACE_INFO defines the basic information for an interface
+-typedef struct _WLAN_INTERFACE_INFO {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_INTERFACE_INFO {
+     GUID InterfaceGuid;
+     WCHAR strInterfaceDescription[WLAN_MAX_NAME_LENGTH];
+     WLAN_INTERFACE_STATE isState;
+@@ -583,7 +584,7 @@ typedef struct _WLAN_INTERFACE_INFO {
+ 
+ // structure WLAN_ASSOCIATION_ATTRIBUTES defines attributes of a wireless
+ // association. The unit for Rx/Tx rate is Kbits/second.
+-typedef struct _WLAN_ASSOCIATION_ATTRIBUTES {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_ASSOCIATION_ATTRIBUTES {
+     DOT11_SSID dot11Ssid;
+     DOT11_BSS_TYPE dot11BssType;
+     DOT11_MAC_ADDRESS dot11Bssid;
+@@ -594,7 +595,7 @@ typedef struct _WLAN_ASSOCIATION_ATTRIBUTES {
+     ULONG ulTxRate;
+ } WLAN_ASSOCIATION_ATTRIBUTES, *PWLAN_ASSOCIATION_ATTRIBUTES;
+ 
+-typedef struct _WLAN_SECURITY_ATTRIBUTES {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_SECURITY_ATTRIBUTES {
+     BOOL bSecurityEnabled;
+     BOOL bOneXEnabled;
+     DOT11_AUTH_ALGORITHM dot11AuthAlgorithm;
+@@ -628,7 +629,7 @@ typedef struct _WLAN_QOS_INFO {
+ } WLAN_QOS_INFO, *PWLAN_QOS_INFO;
+ 
+ // structure WLAN_CONNECTION_ATTRIBUTES defines attributes of a wireless connection
+-typedef struct _WLAN_CONNECTION_ATTRIBUTES {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_CONNECTION_ATTRIBUTES {
+     WLAN_INTERFACE_STATE isState;
+     WLAN_CONNECTION_MODE wlanConnectionMode;
+     WCHAR strProfileName[WLAN_MAX_NAME_LENGTH];
+@@ -670,13 +671,13 @@ typedef enum _DOT11_RADIO_STATE {
+ // the maximum number of PHYs supported by a NIC
+ #define WLAN_MAX_PHY_INDEX 64
+ 
+-typedef struct _WLAN_PHY_RADIO_STATE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_PHY_RADIO_STATE {
+     DWORD dwPhyIndex;
+     DOT11_RADIO_STATE dot11SoftwareRadioState;
+     DOT11_RADIO_STATE dot11HardwareRadioState;
+ } WLAN_PHY_RADIO_STATE, *PWLAN_PHY_RADIO_STATE;
+ 
+-typedef struct _WLAN_RADIO_STATE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_RADIO_STATE {
+     DWORD dwNumberOfPhys;
+     WLAN_PHY_RADIO_STATE PhyRadioState[WLAN_MAX_PHY_INDEX];
+ } WLAN_RADIO_STATE, *PWLAN_RADIO_STATE;
+@@ -694,13 +695,13 @@ typedef enum _WLAN_OPERATIONAL_STATE {
+     wlan_operational_state_going_on
+ } WLAN_OPERATIONAL_STATE, *PWLAN_OPERATIONAL_STATE;
+ 
+-typedef enum _WLAN_INTERFACE_TYPE {
++typedef enum _Windows_SupportedOS_Server2008_ _WLAN_INTERFACE_TYPE {
+     wlan_interface_type_emulated_802_11 = 0,
+     wlan_interface_type_native_802_11,
+     wlan_interface_type_invalid
+ } WLAN_INTERFACE_TYPE, *PWLAN_INTERFACE_TYPE;
+ 
+-typedef struct _WLAN_INTERFACE_CAPABILITY {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_INTERFACE_CAPABILITY {
+     WLAN_INTERFACE_TYPE interfaceType;
+     BOOL bDot11DSupported;
+     DWORD dwMaxDesiredSsidListSize;
+@@ -710,7 +711,7 @@ typedef struct _WLAN_INTERFACE_CAPABILITY {
+ } WLAN_INTERFACE_CAPABILITY, *PWLAN_INTERFACE_CAPABILITY;
+ 
+ 
+-typedef struct _WLAN_AUTH_CIPHER_PAIR_LIST {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_AUTH_CIPHER_PAIR_LIST {
+     DWORD dwNumberOfItems;
+ #ifdef __midl
+     [unique, size_is(dwNumberOfItems)] DOT11_AUTH_CIPHER_PAIR pAuthCipherPairList[*];
+@@ -719,7 +720,7 @@ typedef struct _WLAN_AUTH_CIPHER_PAIR_LIST {
+ #endif
+ } WLAN_AUTH_CIPHER_PAIR_LIST, *PWLAN_AUTH_CIPHER_PAIR_LIST;
+ 
+-typedef struct _WLAN_COUNTRY_OR_REGION_STRING_LIST {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_COUNTRY_OR_REGION_STRING_LIST {
+     DWORD dwNumberOfItems;
+ #ifdef __midl
+     [unique, size_is(dwNumberOfItems)] DOT11_COUNTRY_OR_REGION_STRING pCountryOrRegionStringList[*];
+@@ -728,7 +729,7 @@ typedef struct _WLAN_COUNTRY_OR_REGION_STRING_LIST {
+ #endif
+ } WLAN_COUNTRY_OR_REGION_STRING_LIST, *PWLAN_COUNTRY_OR_REGION_STRING_LIST;
+ 
+-typedef struct _WLAN_PROFILE_INFO_LIST {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_PROFILE_INFO_LIST {
+     DWORD dwNumberOfItems;
+     DWORD dwIndex;
+ 
+@@ -741,7 +742,7 @@ typedef struct _WLAN_PROFILE_INFO_LIST {
+ } WLAN_PROFILE_INFO_LIST, *PWLAN_PROFILE_INFO_LIST;
+ 
+ 
+-typedef struct _WLAN_AVAILABLE_NETWORK_LIST {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_AVAILABLE_NETWORK_LIST {
+     DWORD dwNumberOfItems;
+     DWORD dwIndex;
+ 
+@@ -766,7 +767,7 @@ typedef struct _WLAN_AVAILABLE_NETWORK_LIST_V2 {
+ } WLAN_AVAILABLE_NETWORK_LIST_V2, *PWLAN_AVAILABLE_NETWORK_LIST_V2;
+ 
+ 
+-typedef struct _WLAN_INTERFACE_INFO_LIST {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_INTERFACE_INFO_LIST {
+     DWORD dwNumberOfItems;
+     DWORD dwIndex;
+ 
+@@ -779,7 +780,7 @@ typedef struct _WLAN_INTERFACE_INFO_LIST {
+ } WLAN_INTERFACE_INFO_LIST, *PWLAN_INTERFACE_INFO_LIST;
+ 
+ // network list
+-typedef struct _DOT11_NETWORK_LIST {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOT11_NETWORK_LIST {
+     DWORD dwNumberOfItems;
+     DWORD dwIndex;
+ 
+@@ -837,7 +838,7 @@ typedef enum _WLAN_POWER_SETTING {
+ #define WLAN_CONNECTION_PERSIST_DISCOVERY_PROFILE_OVERWRITE_EXISTING 0x00000040
+ 
+ // connection parameters
+-typedef struct _WLAN_CONNECTION_PARAMETERS {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_CONNECTION_PARAMETERS {
+     WLAN_CONNECTION_MODE wlanConnectionMode;
+ #ifdef __midl
+     [string] LPCWSTR strProfile;
+@@ -866,7 +867,7 @@ typedef struct _WLAN_CONNECTION_PARAMETERS_V2 {
+ } WLAN_CONNECTION_PARAMETERS_V2, *PWLAN_CONNECTION_PARAMETERS_V2;
+ 
+ // data structure for connection-related notifications.
+-typedef struct _WLAN_MSM_NOTIFICATION_DATA {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_MSM_NOTIFICATION_DATA {
+     WLAN_CONNECTION_MODE wlanConnectionMode;
+     WCHAR strProfileName[WLAN_MAX_NAME_LENGTH];
+     DOT11_SSID dot11Ssid;
+@@ -884,7 +885,7 @@ typedef struct _WLAN_MSM_NOTIFICATION_DATA {
+ #define WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED    0x00000001     // Formed ad hoc network
+ #define WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE    0x00000004     // The profile is the active console user's per user profile
+ 
+-typedef struct _WLAN_CONNECTION_NOTIFICATION_DATA {
++typedef struct _Windows_SupportedOS_Server2008_ _WLAN_CONNECTION_NOTIFICATION_DATA {
+     WLAN_CONNECTION_MODE wlanConnectionMode;
+     WCHAR strProfileName[WLAN_MAX_NAME_LENGTH];
+     DOT11_SSID dot11Ssid;
+@@ -896,7 +897,7 @@ typedef struct _WLAN_CONNECTION_NOTIFICATION_DATA {
+ } WLAN_CONNECTION_NOTIFICATION_DATA, *PWLAN_CONNECTION_NOTIFICATION_DATA;
+ 
+ // data structure for device service notifications.
+-typedef struct _WLAN_DEVICE_SERVICE_NOTIFICATION_DATA {
++typedef struct _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ _WLAN_DEVICE_SERVICE_NOTIFICATION_DATA {
+     GUID DeviceService;
+     DWORD dwOpCode;
+     DWORD dwDataSize;
+@@ -1081,7 +1082,7 @@ typedef enum _WLAN_IHV_CONTROL_TYPE {
+     wlan_ihv_control_type_driver
+ } WLAN_IHV_CONTROL_TYPE, *PWLAN_IHV_CONTROL_TYPE;
+ 
+-typedef enum _WLAN_FILTER_LIST_TYPE {
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WLAN_FILTER_LIST_TYPE {
+     wlan_filter_list_type_gp_permit,
+     wlan_filter_list_type_gp_deny,
+     wlan_filter_list_type_user_permit,
+@@ -1089,7 +1090,7 @@ typedef enum _WLAN_FILTER_LIST_TYPE {
+ } WLAN_FILTER_LIST_TYPE, *PWLAN_FILTER_LIST_TYPE;
+ 
+ // Driver statistics
+-typedef struct WLAN_PHY_FRAME_STATISTICS {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ WLAN_PHY_FRAME_STATISTICS {
+     // TX counters (MSDU/MMPDU)
+     ULONGLONG ullTransmittedFrameCount;
+     ULONGLONG ullMulticastTransmittedFrameCount;
+@@ -1117,7 +1118,7 @@ typedef struct WLAN_PHY_FRAME_STATISTICS {
+     ULONGLONG ullFCSErrorCount;
+ } WLAN_PHY_FRAME_STATISTICS, * PWLAN_PHY_FRAME_STATISTICS;
+ 
+-typedef struct WLAN_MAC_FRAME_STATISTICS {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ WLAN_MAC_FRAME_STATISTICS {
+     ULONGLONG ullTransmittedFrameCount;
+     ULONGLONG ullReceivedFrameCount;
+     ULONGLONG ullWEPExcludedCount;
+@@ -1132,7 +1133,7 @@ typedef struct WLAN_MAC_FRAME_STATISTICS {
+     ULONGLONG ullDecryptFailureCount;
+ } WLAN_MAC_FRAME_STATISTICS, * PWLAN_MAC_FRAME_STATISTICS;
+ 
+-typedef struct WLAN_STATISTICS {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ WLAN_STATISTICS {
+     ULONGLONG ullFourWayHandshakeFailures;
+     ULONGLONG ullTKIPCounterMeasuresInvoked;
+     ULONGLONG ullReserved;
+@@ -1182,7 +1183,7 @@ _WLAN_SECURABLE_OBJECT
+ WLAN_SECURABLE_OBJECT, *PWLAN_SECURABLE_OBJECT;
+ 
+ // Data structure used for querying supported WLAN Device Services
+-typedef struct _WLAN_DEVICE_SERVICE_GUID_LIST {
++typedef struct _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ _WLAN_DEVICE_SERVICE_GUID_LIST {
+     DWORD dwNumberOfItems;
+     DWORD dwIndex;
+ 
+@@ -1608,7 +1609,7 @@ WlanGetSecuritySettings(
+ #define WLAN_UI_API_INITIAL_VERSION 1
+ 
+ // The list of pages displayed by the wireless profile UI
+-typedef enum _WL_DISPLAY_PAGES
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WL_DISPLAY_PAGES
+ {
+     WLConnectionPage,
+     WLSecurityPage,
+@@ -2564,6 +2565,7 @@ DEFINE_DEVPROPKEY(
+     0x07
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDOpenHandle(
+@@ -2572,6 +2574,7 @@ WFDOpenHandle(
+     _Out_ PHANDLE           phClientHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDCloseHandle(
+@@ -2586,6 +2589,7 @@ typedef VOID (WINAPI *WFD_OPEN_SESSION_COMPLETE_CALLBACK) (
+     _In_ DWORD          dwReasonCode
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDStartOpenSession(
+@@ -2596,12 +2600,14 @@ WFDStartOpenSession(
+     _Out_ PHANDLE                               phSessionHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDCancelOpenSession(
+     _In_ HANDLE                         hSessionHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDOpenLegacySession(
+@@ -2611,12 +2617,14 @@ WFDOpenLegacySession(
+     _Out_ GUID* pGuidSessionInterface
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDCloseSession(
+     _In_ HANDLE                         hSessionHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ WFDUpdateDeviceVisibility(

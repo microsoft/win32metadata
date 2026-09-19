@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tcpmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/tcpmib.h
+index 9dcc2e0c02add862e25c30d9a7c084a3a0d21e2b..c7e95dbbf241ab937ba275f0445c05830f8e2f72 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/tcpmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/tcpmib.h
+@@ -22,6 +22,7 @@ Environment:
+ #define _TCPMIB_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -65,7 +66,7 @@ typedef enum {
+     TcpConnectionOffloadStateMax
+ } TCP_CONNECTION_OFFLOAD_STATE, *PTCP_CONNECTION_OFFLOAD_STATE;
+ 
+-typedef struct _MIB_TCPROW_LH {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_TCPROW_LH {
+     union {
+         DWORD dwState;       // Old field used DWORD type.
+         MIB_TCP_STATE State; // New field uses enum type.
+@@ -76,7 +77,7 @@ typedef struct _MIB_TCPROW_LH {
+     DWORD dwRemotePort;
+ } MIB_TCPROW_LH, *PMIB_TCPROW_LH;
+ 
+-typedef struct _MIB_TCPROW_W2K {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_TCPROW_W2K {
+     DWORD       dwState;
+     DWORD       dwLocalAddr;
+     DWORD       dwLocalPort;
+@@ -95,7 +96,7 @@ typedef MIB_TCPROW_LH MIB_TCPROW;
+ typedef MIB_TCPROW_LH *PMIB_TCPROW;
+ #endif
+ 
+-typedef struct _MIB_TCPTABLE {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_TCPTABLE {
+     DWORD dwNumEntries;
+     MIB_TCPROW table[ANY_SIZE];
+ } MIB_TCPTABLE, *PMIB_TCPTABLE;
+@@ -103,7 +104,7 @@ typedef struct _MIB_TCPTABLE {
+ #define SIZEOF_TCPTABLE(X) (FIELD_OFFSET(MIB_TCPTABLE,table[0]) + \
+                             ((X) * sizeof(MIB_TCPROW)) + ALIGN_SIZE)
+ 
+-typedef struct _MIB_TCPROW2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCPROW2 {
+     DWORD dwState;
+     DWORD dwLocalAddr;
+     DWORD dwLocalPort;
+@@ -113,7 +114,7 @@ typedef struct _MIB_TCPROW2 {
+     TCP_CONNECTION_OFFLOAD_STATE dwOffloadState;
+ } MIB_TCPROW2, *PMIB_TCPROW2;
+ 
+-typedef struct _MIB_TCPTABLE2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCPTABLE2 {
+     DWORD dwNumEntries;
+     MIB_TCPROW2 table[ANY_SIZE];
+ } MIB_TCPTABLE2, *PMIB_TCPTABLE2;
+@@ -165,7 +166,7 @@ typedef struct _MIB_TCPTABLE_OWNER_MODULE
+ // The following definitions require Winsock2.
+ //
+ 
+-typedef struct _MIB_TCP6ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCP6ROW {
+     MIB_TCP_STATE State;
+     IN6_ADDR LocalAddr;
+     DWORD dwLocalScopeId;
+@@ -175,7 +176,7 @@ typedef struct _MIB_TCP6ROW {
+     DWORD dwRemotePort;
+ } MIB_TCP6ROW, *PMIB_TCP6ROW;
+ 
+-typedef struct _MIB_TCP6TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCP6TABLE {
+     DWORD dwNumEntries;
+     MIB_TCP6ROW table[ANY_SIZE];
+ } MIB_TCP6TABLE, *PMIB_TCP6TABLE;
+@@ -183,7 +184,7 @@ typedef struct _MIB_TCP6TABLE {
+ #define SIZEOF_TCP6TABLE(X) (FIELD_OFFSET(MIB_TCP6TABLE,table[0]) + \
+                              ((X) * sizeof(MIB_TCP6ROW)) + ALIGN_SIZE)
+ 
+-typedef struct _MIB_TCP6ROW2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCP6ROW2 {
+     IN6_ADDR LocalAddr;
+     DWORD dwLocalScopeId;
+     DWORD dwLocalPort;
+@@ -195,7 +196,7 @@ typedef struct _MIB_TCP6ROW2 {
+     TCP_CONNECTION_OFFLOAD_STATE dwOffloadState;
+ } MIB_TCP6ROW2, *PMIB_TCP6ROW2;
+ 
+-typedef struct _MIB_TCP6TABLE2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_TCP6TABLE2 {
+     DWORD dwNumEntries;
+     MIB_TCP6ROW2 table[ANY_SIZE];
+ } MIB_TCP6TABLE2, *PMIB_TCP6TABLE2;
+@@ -269,7 +270,7 @@ typedef enum {
+     MIB_TCP_RTO_VANJ      = 4,
+ } TCP_RTO_ALGORITHM, *PTCP_RTO_ALGORITHM;
+ 
+-typedef struct _MIB_TCPSTATS_LH {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_TCPSTATS_LH {
+     union {
+         DWORD dwRtoAlgorithm;
+         TCP_RTO_ALGORITHM RtoAlgorithm;
+@@ -290,7 +291,7 @@ typedef struct _MIB_TCPSTATS_LH {
+     DWORD dwNumConns;
+ } MIB_TCPSTATS_LH, *PMIB_TCPSTATS_LH;
+ 
+-typedef struct _MIB_TCPSTATS_W2K {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_TCPSTATS_W2K {
+     DWORD       dwRtoAlgorithm;
+     DWORD       dwRtoMin;
+     DWORD       dwRtoMax;
+@@ -317,7 +318,7 @@ typedef MIB_TCPSTATS_W2K *PMIB_TCPSTATS;
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+-typedef struct _MIB_TCPSTATS2 {
++typedef struct _Windows_SupportedOS_16299_ _Windows_SupportedOS_Server2016_ _MIB_TCPSTATS2 {
+     TCP_RTO_ALGORITHM RtoAlgorithm;
+     DWORD dwRtoMin;
+     DWORD dwRtoMax;

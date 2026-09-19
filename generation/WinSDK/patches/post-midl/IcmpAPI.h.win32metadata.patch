@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+index e7907cb5ded650716781fed8ecc34bd920812bc6..c9736e0ca7dc720506cb346181166b2fb55a2111 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+@@ -28,6 +28,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ //
+ // Establish DLL function linkage if supported by the current build
+@@ -76,6 +77,7 @@ extern "C" {
+ //--
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ HANDLE
+ WINAPI
+ IcmpCreateFile(
+@@ -105,6 +107,7 @@ IcmpCreateFile(
+ //--
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ HANDLE
+ WINAPI
+ Icmp6CreateFile(
+@@ -134,6 +137,7 @@ Icmp6CreateFile(
+ //--
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ BOOL
+ WINAPI
+ IcmpCloseHandle(
+@@ -195,6 +199,7 @@ IcmpCloseHandle(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ IcmpSendEcho(
+@@ -284,6 +289,7 @@ IcmpSendEcho(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ IcmpSendEcho2(
+@@ -313,6 +319,7 @@ IcmpSendEcho2(
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ IcmpSendEcho2Ex(
+@@ -344,6 +351,7 @@ IcmpSendEcho2Ex(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ DWORD
+ WINAPI
+ Icmp6SendEcho2(
+@@ -398,6 +406,7 @@ Icmp6SendEcho2(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ IcmpParseReplies(
+@@ -408,6 +417,7 @@ IcmpParseReplies(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ DWORD
+ WINAPI
+ Icmp6ParseReplies(

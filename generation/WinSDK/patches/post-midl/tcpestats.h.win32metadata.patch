@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tcpestats.h b/generation/WinSDK/RecompiledIdlHeaders/shared/tcpestats.h
+index b09086d80cd115fac7432e58804a530c5e425105..85aaef588c8d6f24be42b583a437acaf37fe1e20 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/tcpestats.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/tcpestats.h
+@@ -24,6 +24,7 @@ Environment:
+ #define _TCPESTATS_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -64,7 +65,7 @@ typedef enum _TCP_BOOLEAN_OPTIONAL {
+ // Define extended SYN-exchange information maintained for TCP connections.
+ //
+ 
+-typedef struct _TCP_ESTATS_SYN_OPTS_ROS_v0 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _TCP_ESTATS_SYN_OPTS_ROS_v0 {
+     BOOLEAN ActiveOpen;
+     ULONG MssRcvd;
+     ULONG MssSent;

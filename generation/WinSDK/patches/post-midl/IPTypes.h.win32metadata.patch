@@ -1,0 +1,138 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
+index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2de9bfba5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
+@@ -15,6 +15,7 @@ Module Name:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -67,7 +68,7 @@ typedef struct {
+ // both as dotted decimal strings
+ //
+ 
+-typedef struct _IP_ADDR_STRING {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_ADDR_STRING {
+     struct _IP_ADDR_STRING* Next;
+     IP_ADDRESS_STRING IpAddress;
+     IP_MASK_STRING IpMask;
+@@ -79,7 +80,7 @@ typedef struct _IP_ADDR_STRING {
+ // strings
+ //
+ 
+-typedef struct _IP_ADAPTER_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_ADAPTER_INFO {
+     struct _IP_ADAPTER_INFO* Next;
+     DWORD ComboIndex;
+     char AdapterName[MAX_ADAPTER_NAME_LENGTH + 4];
+@@ -110,7 +111,7 @@ typedef NL_PREFIX_ORIGIN IP_PREFIX_ORIGIN;
+ typedef NL_SUFFIX_ORIGIN IP_SUFFIX_ORIGIN;
+ typedef NL_DAD_STATE IP_DAD_STATE;
+ 
+-typedef struct _IP_ADAPTER_UNICAST_ADDRESS_LH {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_UNICAST_ADDRESS_LH {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -132,7 +133,7 @@ typedef struct _IP_ADAPTER_UNICAST_ADDRESS_LH {
+ } IP_ADAPTER_UNICAST_ADDRESS_LH,
+  *PIP_ADAPTER_UNICAST_ADDRESS_LH;
+ 
+-typedef struct _IP_ADAPTER_UNICAST_ADDRESS_XP {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_UNICAST_ADDRESS_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -166,7 +167,7 @@ typedef  IP_ADAPTER_UNICAST_ADDRESS_XP *PIP_ADAPTER_UNICAST_ADDRESS;
+ #define IP_ADAPTER_ADDRESS_DNS_ELIGIBLE 0x01
+ #define IP_ADAPTER_ADDRESS_TRANSIENT    0x02
+ 
+-typedef struct _IP_ADAPTER_ANYCAST_ADDRESS_XP {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ANYCAST_ADDRESS_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -182,7 +183,7 @@ typedef IP_ADAPTER_ANYCAST_ADDRESS_XP IP_ADAPTER_ANYCAST_ADDRESS;
+ typedef IP_ADAPTER_ANYCAST_ADDRESS_XP *PIP_ADAPTER_ANYCAST_ADDRESS;
+ #endif
+ 
+-typedef struct _IP_ADAPTER_MULTICAST_ADDRESS_XP {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_MULTICAST_ADDRESS_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -198,7 +199,7 @@ typedef IP_ADAPTER_MULTICAST_ADDRESS_XP IP_ADAPTER_MULTICAST_ADDRESS;
+ typedef IP_ADAPTER_MULTICAST_ADDRESS_XP *PIP_ADAPTER_MULTICAST_ADDRESS;
+ #endif
+ 
+-typedef struct _IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -214,7 +215,7 @@ typedef IP_ADAPTER_DNS_SERVER_ADDRESS_XP IP_ADAPTER_DNS_SERVER_ADDRESS;
+ typedef IP_ADAPTER_DNS_SERVER_ADDRESS_XP *PIP_ADAPTER_DNS_SERVER_ADDRESS;
+ #endif
+ 
+-typedef struct _IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -231,7 +232,7 @@ typedef IP_ADAPTER_WINS_SERVER_ADDRESS_LH *PIP_ADAPTER_WINS_SERVER_ADDRESS;
+ #endif
+ 
+ 
+-typedef struct _IP_ADAPTER_GATEWAY_ADDRESS_LH {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_GATEWAY_ADDRESS_LH {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -247,7 +248,7 @@ typedef IP_ADAPTER_GATEWAY_ADDRESS_LH IP_ADAPTER_GATEWAY_ADDRESS;
+ typedef IP_ADAPTER_GATEWAY_ADDRESS_LH *PIP_ADAPTER_GATEWAY_ADDRESS;
+ #endif
+ 
+-typedef struct _IP_ADAPTER_PREFIX_XP {
++typedef struct _Windows_SupportedOS_Server2003_ _IP_ADAPTER_PREFIX_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -264,7 +265,7 @@ typedef IP_ADAPTER_PREFIX_XP IP_ADAPTER_PREFIX;
+ typedef IP_ADAPTER_PREFIX_XP *PIP_ADAPTER_PREFIX;
+ #endif
+ 
+-typedef struct _IP_ADAPTER_DNS_SUFFIX {
++typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_DNS_SUFFIX {
+     struct _IP_ADAPTER_DNS_SUFFIX *Next;
+     WCHAR String[MAX_DNS_SUFFIX_STRING_LENGTH];
+ }IP_ADAPTER_DNS_SUFFIX, *PIP_ADAPTER_DNS_SUFFIX;
+@@ -283,7 +284,7 @@ typedef struct _IP_ADAPTER_DNS_SUFFIX {
+ #define IP_ADAPTER_IPV6_ENABLED               0x00000100
+ #define IP_ADAPTER_IPV6_MANAGE_ADDRESS_CONFIG 0x00000200
+ 
+-typedef struct _IP_ADAPTER_ADDRESSES_LH {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ADDRESSES_LH {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -349,7 +350,7 @@ typedef struct _IP_ADAPTER_ADDRESSES_LH {
+ } IP_ADAPTER_ADDRESSES_LH,
+  *PIP_ADAPTER_ADDRESSES_LH;
+ 
+-typedef struct _IP_ADAPTER_ADDRESSES_XP {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ADDRESSES_XP {
+     union {
+         ULONGLONG Alignment;
+         struct {
+@@ -418,7 +419,7 @@ typedef  IP_ADAPTER_ADDRESSES_XP *PIP_ADAPTER_ADDRESSES;
+ // IP_PER_ADAPTER_INFO - per-adapter IP information such as DNS server list.
+ //
+ 
+-typedef struct _IP_PER_ADAPTER_INFO_W2KSP1 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_PER_ADAPTER_INFO_W2KSP1 {
+     UINT AutoconfigEnabled;
+     UINT AutoconfigActive;
+     PIP_ADDR_STRING CurrentDnsServer;
