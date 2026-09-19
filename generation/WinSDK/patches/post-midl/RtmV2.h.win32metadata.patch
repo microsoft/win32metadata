@@ -1,0 +1,44 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
+index cff7f002a6e51b14bc8f1f818653fa8b07d3ce6e..a7348ce21ad76978627f1a7aae93480a181239e6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
+@@ -21,6 +21,7 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -68,7 +69,7 @@ typedef DWORD RTM_VIEW_SET, *PRTM_VIEW_SET;
+ //
+ // Profile returned during registration
+ //
+-typedef struct _RTM_REGN_PROFILE
++typedef struct _Windows_SupportedOS_Server2000_ _RTM_REGN_PROFILE
+ {
+     UINT            MaxNextHopsInRoute; // Max. number of equal cost nexthops
+                                         // in a route, & Max. number of local
+@@ -692,6 +693,7 @@ typedef DWORD          RTM_NOTIFY_FLAGS,
+ // Registration API Prototypes
+ //
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmRegisterEntity (
+@@ -703,12 +705,14 @@ RtmRegisterEntity (
+     OUT     PRTM_ENTITY_HANDLE              RtmRegHandle
+     );
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmDeregisterEntity (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle
+     );
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmGetRegisteredEntities (

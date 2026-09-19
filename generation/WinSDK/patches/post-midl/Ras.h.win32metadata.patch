@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
+index 5fed8633f1bf6ba4139d51abd61a9d636ab13a1d..bb10e5313731765c46f5e31f5ceca859d0d59152 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
+@@ -31,6 +31,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or CmdLineTools Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS)
+@@ -903,7 +904,7 @@ RASPPPCCP
+ */
+ #if (WINVER >= 0x601)
+ 
+-typedef struct _RASPPP_PROJECTION_INFO {
++typedef struct _Windows_SupportedOS_Windows7_ _RASPPP_PROJECTION_INFO {
+ 
+     // IPv4 Projection Parameters
+     DWORD        dwIPv4NegotiationError;
+@@ -1913,11 +1914,17 @@ RASCUSTOMSCRIPTEXTENSIONS
+ DWORD APIENTRY RasDialA( _In_opt_ LPRASDIALEXTENSIONS, _In_opt_ LPCSTR, _In_ LPRASDIALPARAMSA, _In_ DWORD,
+                          _In_opt_ LPVOID, _Out_ LPHRASCONN );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ DWORD APIENTRY RasDialW( _In_opt_ LPRASDIALEXTENSIONS, _In_opt_ LPCWSTR, _In_ LPRASDIALPARAMSW, _In_ DWORD,
+                          _In_opt_ LPVOID, _Out_ LPHRASCONN );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ DWORD APIENTRY RasEnumConnectionsA( _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ DWORD APIENTRY RasEnumConnectionsW( _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+ DWORD APIENTRY RasEnumEntriesA( _In_opt_ LPCSTR, _In_opt_ LPCSTR, _Inout_opt_ LPRASENTRYNAMEA, _Inout_ LPDWORD,

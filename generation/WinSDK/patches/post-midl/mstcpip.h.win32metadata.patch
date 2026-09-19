@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
+index 100f0dd5cfc567193f90df8574fa03748861243b..edc990fa6f3147d9cd5b6e54f5826d5fbe9fd21d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
+@@ -64,6 +64,7 @@ DEFINE_GUID(
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -115,7 +116,7 @@ typedef enum _TCPSTATE {
+ // This structure represents the key used in query and apply transport setting
+ // APIs.
+ //
+-typedef struct TRANSPORT_SETTING_ID
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ TRANSPORT_SETTING_ID
+ {
+     GUID Guid;
+ } TRANSPORT_SETTING_ID, *PTRANSPORT_SETTING_ID;

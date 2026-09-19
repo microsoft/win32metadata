@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+index ed035f548e40352a2d515b46a3c307d3199dd6db..5fbe9941f4ddaac76cc4491f6ac9c032ecefd6c3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+@@ -23,6 +23,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -204,6 +205,8 @@ GetAddrInfoExA(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2008_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -220,6 +223,7 @@ GetAddrInfoExW(
+     _Out_opt_   LPHANDLE        lpHandle
+     );
+ 
++_Windows_SupportedOS_Server2012_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -227,6 +231,7 @@ GetAddrInfoExCancel(
+     _In_        LPHANDLE        lpHandle
+     );
+ 
++_Windows_SupportedOS_Server2012_
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI

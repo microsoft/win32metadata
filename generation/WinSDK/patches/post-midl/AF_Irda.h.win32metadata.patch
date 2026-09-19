@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AF_Irda.h b/generation/WinSDK/RecompiledIdlHeaders/um/AF_Irda.h
+index 1717dfd8bde4c7428042f5957f6cca6d5c206de8..6c85c11d4f5660160769d9b764a5dea98e8b9935 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AF_Irda.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AF_Irda.h
+@@ -11,6 +11,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -131,7 +132,7 @@ typedef struct
+     u_char          nRXPackets;     // Number packets in receive window
+ } LM_IRPARMS,*PLM_IRPARMS;
+ 
+-typedef struct _SOCKADDR_IRDA
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SOCKADDR_IRDA
+ {
+ 	u_short irdaAddressFamily;
+ 	u_char  irdaDeviceID[4];

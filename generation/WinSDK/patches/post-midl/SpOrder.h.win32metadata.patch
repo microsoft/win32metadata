@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
+index 1fcca48d17c5b0f2ebb9cd7f87d90f991dfe8512..b01a3e2dd013c53d62370d039209ebb9edbbfa0b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
+@@ -23,6 +23,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -33,6 +34,8 @@ Revision History:
+ extern "C" {
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ int
+ WSPAPI
+ WSCWriteProviderOrder (
+@@ -58,6 +61,8 @@ WSCWriteProviderOrder32 (
+ #endif //_WIN64
+ #endif //_WIN32_WINNT >= 0x0501
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ int
+ WSPAPI
+ WSCWriteNameSpaceOrder (

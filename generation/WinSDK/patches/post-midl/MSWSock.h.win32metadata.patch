@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
+index e0674441532295294b7d5fddde88833055fdb9e7..95c83a4468ac08b4aa59513ecb9089fedface998 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
+@@ -22,6 +22,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+ #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -148,7 +149,7 @@ WSARecvEx(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+-typedef struct _TRANSMIT_FILE_BUFFERS {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TRANSMIT_FILE_BUFFERS {
+     LPVOID Head;
+     DWORD HeadLength;
+     LPVOID Tail;
+@@ -162,6 +163,7 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+ #define TF_USE_SYSTEM_THREAD  0x10
+ #define TF_USE_KERNEL_APC     0x20
+ 
++_Windows_SupportedOS_Server2003_
+ BOOL
+ PASCAL FAR
+ TransmitFile (
+@@ -174,6 +176,7 @@ TransmitFile (
+     _In_  DWORD dwReserved
+     );
+ 
++_Windows_SupportedOS_Server2003_
+ BOOL
+ PASCAL FAR
+ AcceptEx (
+@@ -187,6 +190,7 @@ AcceptEx (
+     _Inout_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Windows_SupportedOS_Server2003_
+ VOID
+ PASCAL FAR
+ GetAcceptExSockaddrs (

@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
+index 3174e2bbcf940027c02e56c10fe2da45d3863e88..895ce308c34e4aff980ebfc44b3b327a0556f15e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -37,7 +38,7 @@
+ // multicast forwarding on each interface
+ //
+ 
+-typedef struct _MGM_IF_ENTRY {
++typedef struct _Windows_SupportedOS_Server2000_ _MGM_IF_ENTRY {
+ 
+     DWORD               dwIfIndex;
+     DWORD               dwIfNextHopAddr;
+@@ -315,6 +316,7 @@ typedef struct _SOURCE_GROUP_ENTRY {
+ // Routing protocol registration / de-registration API
+ //============================================================================
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ MgmRegisterMProtocol(
+     IN          PROUTING_PROTOCOL_CONFIG    prpiInfo,
+@@ -323,6 +325,7 @@ MgmRegisterMProtocol(
+     OUT         HANDLE  *                   phProtocol
+ );
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ MgmDeRegisterMProtocol(
+     IN          HANDLE                      hProtocol
+@@ -333,6 +336,7 @@ MgmDeRegisterMProtocol(
+ // Interface ownership API
+ //============================================================================
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ MgmTakeInterfaceOwnership(
+     IN          HANDLE                      hProtocol,
