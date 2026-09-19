@@ -1,0 +1,86 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
+index c6ad9cf7d8..7e4549e2dc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <winnls.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -27,6 +28,8 @@ extern "C" {
+ 
+ #if (WINVER >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -42,6 +45,8 @@ CompareStringEx(
+     _Reserved_ LPARAM lParam
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -55,6 +60,8 @@ CompareStringOrdinal(
+ 
+ #endif //(WINVER >= 0x0600)
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -71,6 +78,8 @@ CompareStringW(
+ #define CompareString  CompareStringW
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -86,6 +95,8 @@ FoldStringW(
+ #define FoldString  FoldStringW
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -101,6 +112,8 @@ GetStringTypeExW(
+ #define GetStringTypeEx  GetStringTypeExW
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -115,6 +128,9 @@ GetStringTypeW(
+ //  NLS Code Page Dependent APIs.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("KERNEL32.dll")
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cbMultiByte == -1) && (cchWideChar != 0), _Post_equal_to_(_String_length_(lpWideCharStr)+1))
+@@ -129,6 +145,9 @@ MultiByteToWideChar(
+     _In_ int cchWideChar
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("KERNEL32.dll")
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cchWideChar == -1) && (cbMultiByte != 0), _Post_equal_to_(_String_length_(lpMultiByteStr)+1))
