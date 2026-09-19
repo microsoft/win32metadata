@@ -1,0 +1,138 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
+index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d3126e98702c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
+@@ -134,6 +134,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -153,7 +154,7 @@ EXTERN_C const IID IID_ICEnroll;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("43F8F288-7A20-11D0-8F06-00C04FC295E1")
+-    ICEnroll : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE createFilePKCS10( 
+@@ -688,7 +689,7 @@ EXTERN_C const IID IID_ICEnroll;
+         END_INTERFACE
+     } ICEnrollVtbl;
+ 
+-    interface ICEnroll
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll
+     {
+         CONST_VTBL struct ICEnrollVtbl *lpVtbl;
+     };
+@@ -912,7 +913,7 @@ EXTERN_C const IID IID_ICEnroll2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("704ca730-c90b-11d1-9bec-00c04fc295e1")
+-    ICEnroll2 : public ICEnroll
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll2 : public ICEnroll
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE addCertTypeToRequest( 
+@@ -1321,7 +1322,7 @@ EXTERN_C const IID IID_ICEnroll2;
+         END_INTERFACE
+     } ICEnroll2Vtbl;
+ 
+-    interface ICEnroll2
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll2
+     {
+         CONST_VTBL struct ICEnroll2Vtbl *lpVtbl;
+     };
+@@ -1564,7 +1565,7 @@ EXTERN_C const IID IID_ICEnroll3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c28c2d95-b7de-11d2-a421-00c04f79fe8e")
+-    ICEnroll3 : public ICEnroll2
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll3 : public ICEnroll2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InstallPKCS7( 
+@@ -2074,7 +2075,7 @@ EXTERN_C const IID IID_ICEnroll3;
+         END_INTERFACE
+     } ICEnroll3Vtbl;
+ 
+-    interface ICEnroll3
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll3
+     {
+         CONST_VTBL struct ICEnroll3Vtbl *lpVtbl;
+     };
+@@ -2360,7 +2361,7 @@ EXTERN_C const IID IID_ICEnroll4;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c1f1188a-2eb5-4a80-841b-7e729a356d90")
+-    ICEnroll4 : public ICEnroll3
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll4 : public ICEnroll3
+     {
+     public:
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_PrivateKeyArchiveCertificate( 
+@@ -3152,7 +3153,7 @@ EXTERN_C const IID IID_ICEnroll4;
+         END_INTERFACE
+     } ICEnroll4Vtbl;
+ 
+-    interface ICEnroll4
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll4
+     {
+         CONST_VTBL struct ICEnroll4Vtbl *lpVtbl;
+     };
+@@ -3538,7 +3539,7 @@ EXTERN_C const IID IID_IEnroll;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("acaa7838-4585-11d1-ab57-00c04fc295e1")
+-    IEnroll : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE createFilePKCS10WStr( 
+@@ -4142,7 +4143,7 @@ EXTERN_C const IID IID_IEnroll;
+         END_INTERFACE
+     } IEnrollVtbl;
+ 
+-    interface IEnroll
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll
+     {
+         CONST_VTBL struct IEnrollVtbl *lpVtbl;
+     };
+@@ -4395,7 +4396,7 @@ EXTERN_C const IID IID_IEnroll2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c080e199-b7df-11d2-a421-00c04f79fe8e")
+-    IEnroll2 : public IEnroll
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll2 : public IEnroll
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InstallPKCS7Blob( 
+@@ -4934,7 +4935,7 @@ EXTERN_C const IID IID_IEnroll2;
+         END_INTERFACE
+     } IEnroll2Vtbl;
+ 
+-    interface IEnroll2
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll2
+     {
+         CONST_VTBL struct IEnroll2Vtbl *lpVtbl;
+     };
+@@ -5242,7 +5243,7 @@ EXTERN_C const IID IID_IEnroll4;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f8053fe5-78f4-448f-a0db-41d61b73446b")
+-    IEnroll4 : public IEnroll2
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll4 : public IEnroll2
+     {
+     public:
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ThumbPrintWStr( 
+@@ -6047,7 +6048,7 @@ EXTERN_C const IID IID_IEnroll4;
+         END_INTERFACE
+     } IEnroll4Vtbl;
+ 
+-    interface IEnroll4
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll4
+     {
+         CONST_VTBL struct IEnroll4Vtbl *lpVtbl;
+     };

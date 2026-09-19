@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+index 3bb9bcc4a7059bd2161c89c4ab663b2133fb1e9c..4470961a8b6c44475d8949d6d63472d7a9f06c0c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+@@ -216,6 +216,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -235,7 +236,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("12a88820-7494-11d0-8816-00a0c903b83c")
+-    ICertEncodeStringArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeStringArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -368,7 +369,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
+         END_INTERFACE
+     } ICertEncodeStringArrayVtbl;
+ 
+-    interface ICertEncodeStringArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeStringArray
+     {
+         CONST_VTBL struct ICertEncodeStringArrayVtbl *lpVtbl;
+     };
+@@ -658,7 +659,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("15e2f230-a0a2-11d0-8821-00a0c903b83c")
+-    ICertEncodeLongArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeLongArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -781,7 +782,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
+         END_INTERFACE
+     } ICertEncodeLongArrayVtbl;
+ 
+-    interface ICertEncodeLongArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeLongArray
+     {
+         CONST_VTBL struct ICertEncodeLongArrayVtbl *lpVtbl;
+     };
+@@ -1059,7 +1060,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2f9469a0-a470-11d0-8821-00a0c903b83c")
+-    ICertEncodeDateArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeDateArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -1182,7 +1183,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
+         END_INTERFACE
+     } ICertEncodeDateArrayVtbl;
+ 
+-    interface ICertEncodeDateArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeDateArray
+     {
+         CONST_VTBL struct ICertEncodeDateArrayVtbl *lpVtbl;
+     };
+@@ -1460,7 +1461,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("01958640-bbff-11d0-8825-00a0c903b83c")
+-    ICertEncodeCRLDistInfo : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeCRLDistInfo : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -1621,7 +1622,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+         END_INTERFACE
+     } ICertEncodeCRLDistInfoVtbl;
+ 
+-    interface ICertEncodeCRLDistInfo
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeCRLDistInfo
+     {
+         CONST_VTBL struct ICertEncodeCRLDistInfoVtbl *lpVtbl;
+     };
+@@ -1951,7 +1952,7 @@ EXTERN_C const IID IID_ICertEncodeAltName;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1c9a8c70-1271-11d1-9bd4-00c04fb683fa")
+-    ICertEncodeAltName : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeAltName : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -2086,7 +2087,7 @@ EXTERN_C const IID IID_ICertEncodeAltName;
+         END_INTERFACE
+     } ICertEncodeAltNameVtbl;
+ 
+-    interface ICertEncodeAltName
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeAltName
+     {
+         CONST_VTBL struct ICertEncodeAltNameVtbl *lpVtbl;
+     };
+@@ -2409,7 +2410,7 @@ EXTERN_C const IID IID_ICertEncodeBitString;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6db525be-1278-11d1-9bd4-00c04fb683fa")
+-    ICertEncodeBitString : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeBitString : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -2516,7 +2517,7 @@ EXTERN_C const IID IID_ICertEncodeBitString;
+         END_INTERFACE
+     } ICertEncodeBitStringVtbl;
+ 
+-    interface ICertEncodeBitString
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeBitString
+     {
+         CONST_VTBL struct ICertEncodeBitStringVtbl *lpVtbl;
+     };

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
+index fb2160014bdce4db96d0481fe3efcca542e20634..74c0cd45eb3be089241a8e7c0cf9bb3c7652d3eb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define EXITEVENT_INVALID               ( 0x0 )  // Invalid event
+@@ -103,7 +104,7 @@ EXTERN_C const IID IID_ICertExit;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e19ae1a0-7364-11d0-8816-00a0c903b83c")
+-    ICertExit : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertExit : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -221,7 +222,7 @@ EXTERN_C const IID IID_ICertExit;
+         END_INTERFACE
+     } ICertExitVtbl;
+ 
+-    interface ICertExit
++    interface _Windows_SupportedOS_Server2003_ ICertExit
+     {
+         CONST_VTBL struct ICertExitVtbl *lpVtbl;
+     };
+@@ -286,7 +287,7 @@ EXTERN_C const IID IID_ICertExit2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0abf484b-d049-464d-a7ed-552e7529b0ff")
+-    ICertExit2 : public ICertExit
++    _Windows_SupportedOS_Server2003_ ICertExit2 : public ICertExit
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetManageModule( 
+@@ -398,7 +399,7 @@ EXTERN_C const IID IID_ICertExit2;
+         END_INTERFACE
+     } ICertExit2Vtbl;
+ 
+-    interface ICertExit2
++    interface _Windows_SupportedOS_Server2003_ ICertExit2
+     {
+         CONST_VTBL struct ICertExit2Vtbl *lpVtbl;
+     };
