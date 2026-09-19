@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h b/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
+index 31f1eae70a5bcf8c30796e2d4a5ed512f72c8a71..389937136da86971567de1e8974c1e3bbb5307d2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
+@@ -19,6 +19,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or Traffic Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_TRAFFIC)
+@@ -118,7 +119,7 @@ VOID (CALLBACK * TCI_DEL_FLOW_COMPLETE_HANDLER)(
+     );
+ 
+ 
+-typedef struct _TCI_CLIENT_FUNC_LIST {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TCI_CLIENT_FUNC_LIST {
+ 
+     TCI_NOTIFY_HANDLER              ClNotifyHandler;
+     TCI_ADD_FLOW_COMPLETE_HANDLER   ClAddFlowCompleteHandler;
+@@ -131,7 +132,7 @@ typedef struct _TCI_CLIENT_FUNC_LIST {
+ //
+ // Network address descriptor
+ //
+-typedef struct _ADDRESS_LIST_DESCRIPTOR {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _ADDRESS_LIST_DESCRIPTOR {
+ 
+     ULONG                   MediaType;
+     NETWORK_ADDRESS_LIST    AddressList;
+@@ -142,7 +143,7 @@ typedef struct _ADDRESS_LIST_DESCRIPTOR {
+ //
+ // An interface ID that is returned by the enumerator
+ //
+-typedef struct _TC_IFC_DESCRIPTOR {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TC_IFC_DESCRIPTOR {
+ 
+     ULONG                   Length;
+     LPWSTR                  pInterfaceName;
+@@ -185,7 +186,7 @@ typedef struct _TC_SUPPORTED_INFO_BUFFER {
+ // follow.
+ //
+ 
+-typedef struct _TC_GEN_FILTER {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TC_GEN_FILTER {
+ 
+     USHORT  AddressType;    // IP, IPX, etc.
+     ULONG   PatternSize;    // byte count of the pattern
+@@ -199,7 +200,7 @@ typedef struct _TC_GEN_FILTER {
+ // A generic flow includes two flowspecs and a freeform
+ // buffer which contains flow specific TC objects.
+ //
+-typedef struct _TC_GEN_FLOW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TC_GEN_FLOW {
+     
+     FLOWSPEC        SendingFlowspec;
+     FLOWSPEC        ReceivingFlowspec;
+@@ -212,7 +213,7 @@ typedef struct _TC_GEN_FLOW {
+ //
+ // Format of specific pattern or mask used by GPC for the IP protocol
+ //
+-typedef struct _IP_PATTERN {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_PATTERN {
+ 
+     ULONG       Reserved1;
+     ULONG       Reserved2;
+@@ -241,7 +242,7 @@ typedef struct _IP_PATTERN {
+ //
+ // Format of specific pattern or mask used by GPC for the IPX protocol
+ //
+-typedef struct _IPX_PATTERN {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IPX_PATTERN {
+ 
+     struct {
+         ULONG   NetworkAddress;
+@@ -255,7 +256,7 @@ typedef struct _IPX_PATTERN {
+ //
+ // The enumeration buffer is the flow parameters + a list of filters
+ //
+-typedef struct _ENUMERATION_BUFFER {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _ENUMERATION_BUFFER {
+ 
+     ULONG           Length;
+     ULONG           OwnerProcessId;

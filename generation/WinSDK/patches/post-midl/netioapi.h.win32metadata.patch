@@ -1,0 +1,231 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
+index ca51682f694e29f3cfa44865fc89da7437a9d8a7..f238e51bb80b76d4648a2c1c9c70e8f445806d55 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
+@@ -55,6 +55,7 @@ Notes:
+ #define _NETIOAPI_H_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -114,7 +115,7 @@ extern "C" {
+ 
+ #define NETIOAPI_API NETIO_STATUS NETIOAPI_API_
+ 
+-typedef enum _MIB_NOTIFICATION_TYPE {
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_NOTIFICATION_TYPE {
+     //
+     // ParameterChange.
+     //
+@@ -151,7 +152,7 @@ typedef enum _MIB_NOTIFICATION_TYPE {
+ 
+ #include <ntddndis.h>
+ 
+-typedef struct _MIB_IF_ROW2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IF_ROW2 {
+     //
+     // Key structure.  Sorted by preference.
+     //
+@@ -218,7 +219,7 @@ typedef struct _MIB_IF_ROW2 {
+     ULONG64 OutQLen;
+ } MIB_IF_ROW2, *PMIB_IF_ROW2;
+ 
+-typedef struct _MIB_IF_TABLE2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IF_TABLE2 {
+     ULONG NumEntries;
+     MIB_IF_ROW2 Table[ANY_SIZE];
+ } MIB_IF_TABLE2, *PMIB_IF_TABLE2;
+@@ -391,7 +392,7 @@ Notes:
+ //
+ // The MIB structure for Network layer Interface management routines.
+ //
+-typedef struct _MIB_IPINTERFACE_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPINTERFACE_ROW {
+     //
+     // Key Structure;
+     //
+@@ -457,27 +458,27 @@ typedef struct _MIB_IPINTERFACE_ROW {
+     BOOLEAN DisableDefaultRoutes;
+ } MIB_IPINTERFACE_ROW, *PMIB_IPINTERFACE_ROW;
+ 
+-typedef struct _MIB_IPINTERFACE_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPINTERFACE_TABLE {
+     ULONG NumEntries;
+     MIB_IPINTERFACE_ROW Table[ANY_SIZE];
+ } MIB_IPINTERFACE_TABLE, *PMIB_IPINTERFACE_TABLE;
+ 
+-typedef struct _MIB_IFSTACK_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IFSTACK_ROW {
+     NET_IFINDEX HigherLayerInterfaceIndex;
+     NET_IFINDEX LowerLayerInterfaceIndex;
+ } MIB_IFSTACK_ROW, *PMIB_IFSTACK_ROW;
+ 
+-typedef struct _MIB_INVERTEDIFSTACK_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_INVERTEDIFSTACK_ROW {
+     NET_IFINDEX LowerLayerInterfaceIndex;
+     NET_IFINDEX HigherLayerInterfaceIndex;
+ } MIB_INVERTEDIFSTACK_ROW, *PMIB_INVERTEDIFSTACK_ROW;
+ 
+-typedef struct _MIB_IFSTACK_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IFSTACK_TABLE {
+     ULONG NumEntries;
+     MIB_IFSTACK_ROW Table[ANY_SIZE];
+ } MIB_IFSTACK_TABLE, *PMIB_IFSTACK_TABLE;
+ 
+-typedef struct _MIB_INVERTEDIFSTACK_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_INVERTEDIFSTACK_TABLE {
+     ULONG NumEntries;
+     MIB_INVERTEDIFSTACK_ROW Table[ANY_SIZE];
+ } MIB_INVERTEDIFSTACK_TABLE, *PMIB_INVERTEDIFSTACK_TABLE;
+@@ -490,7 +491,7 @@ VOID
+     _In_ MIB_NOTIFICATION_TYPE NotificationType
+     );
+ 
+-typedef struct _MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
+     NL_BANDWIDTH_INFORMATION InboundBandwidthInformation;
+     NL_BANDWIDTH_INFORMATION OutboundBandwidthInformation;
+ } MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES,
+@@ -748,7 +749,7 @@ Return Value:
+ //
+ // The structure for unicast IP Address management.
+ //
+-typedef struct _MIB_UNICASTIPADDRESS_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UNICASTIPADDRESS_ROW {
+     //
+     // Key Structure.
+     //
+@@ -774,7 +775,7 @@ typedef struct _MIB_UNICASTIPADDRESS_ROW {
+     LARGE_INTEGER CreationTimeStamp;
+ } MIB_UNICASTIPADDRESS_ROW, *PMIB_UNICASTIPADDRESS_ROW;
+ 
+-typedef struct _MIB_UNICASTIPADDRESS_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UNICASTIPADDRESS_TABLE {
+     ULONG NumEntries;
+     MIB_UNICASTIPADDRESS_ROW Table[ANY_SIZE];
+ } MIB_UNICASTIPADDRESS_TABLE, *PMIB_UNICASTIPADDRESS_TABLE;
+@@ -1100,7 +1101,7 @@ Notes:
+ // Anycast address management routines.
+ //
+ 
+-typedef struct _MIB_ANYCASTIPADDRESS_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_ANYCASTIPADDRESS_ROW {
+     //
+     // Key Structure.
+     //
+@@ -1114,7 +1115,7 @@ typedef struct _MIB_ANYCASTIPADDRESS_ROW {
+     SCOPE_ID ScopeId;
+ } MIB_ANYCASTIPADDRESS_ROW, *PMIB_ANYCASTIPADDRESS_ROW;
+ 
+-typedef struct _MIB_ANYCASTIPADDRESS_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_ANYCASTIPADDRESS_TABLE {
+     ULONG NumEntries;
+     MIB_ANYCASTIPADDRESS_ROW Table[ANY_SIZE];
+ } MIB_ANYCASTIPADDRESS_TABLE, *PMIB_ANYCASTIPADDRESS_TABLE;
+@@ -1259,7 +1260,7 @@ Notes:
+ //
+ // Multicast address management routines.
+ //
+-typedef struct _MIB_MULTICASTIPADDRESS_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_MULTICASTIPADDRESS_ROW {
+     //
+     // Key Structure.
+     //
+@@ -1273,7 +1274,7 @@ typedef struct _MIB_MULTICASTIPADDRESS_ROW {
+     SCOPE_ID ScopeId;
+ } MIB_MULTICASTIPADDRESS_ROW, *PMIB_MULTICASTIPADDRESS_ROW;
+ 
+-typedef struct _MIB_MULTICASTIPADDRESS_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_MULTICASTIPADDRESS_TABLE {
+     ULONG NumEntries;
+     MIB_MULTICASTIPADDRESS_ROW Table[ANY_SIZE];
+ } MIB_MULTICASTIPADDRESS_TABLE, *PMIB_MULTICASTIPADDRESS_TABLE;
+@@ -1362,12 +1363,12 @@ Notes:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-typedef struct _IP_ADDRESS_PREFIX {
++typedef struct _Windows_SupportedOS_Server2008_ _IP_ADDRESS_PREFIX {
+     SOCKADDR_INET Prefix;
+     UINT8 PrefixLength;
+ } IP_ADDRESS_PREFIX, *PIP_ADDRESS_PREFIX;
+ 
+-typedef struct _MIB_IPFORWARD_ROW2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPFORWARD_ROW2 {
+     //
+     // Key Structure.
+     //
+@@ -1397,7 +1398,7 @@ typedef struct _MIB_IPFORWARD_ROW2 {
+     NL_ROUTE_ORIGIN Origin;
+ } MIB_IPFORWARD_ROW2, *PMIB_IPFORWARD_ROW2;
+ 
+-typedef struct _MIB_IPFORWARD_TABLE2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPFORWARD_TABLE2 {
+     ULONG NumEntries;
+     MIB_IPFORWARD_ROW2 Table[ANY_SIZE];
+ } MIB_IPFORWARD_TABLE2, *PMIB_IPFORWARD_TABLE2;
+@@ -1757,7 +1758,7 @@ Notes:
+ // Path management routines.
+ //
+ 
+-typedef struct _MIB_IPPATH_ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPPATH_ROW {
+     //
+     // Key.
+     //
+@@ -1803,7 +1804,7 @@ typedef struct _MIB_IPPATH_ROW {
+ 
+ } MIB_IPPATH_ROW, *PMIB_IPPATH_ROW;
+ 
+-typedef struct _MIB_IPPATH_TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPPATH_TABLE {
+     ULONG NumEntries;
+     MIB_IPPATH_ROW Table[ANY_SIZE];
+ } MIB_IPPATH_TABLE, *PMIB_IPPATH_TABLE;
+@@ -1917,7 +1918,7 @@ Notes:
+ // ARP and IPv6 Neighbor management routines.
+ //
+ 
+-typedef struct _MIB_IPNET_ROW2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPNET_ROW2 {
+     //
+     // Key Struture.
+     //
+@@ -1950,7 +1951,7 @@ typedef struct _MIB_IPNET_ROW2 {
+     } ReachabilityTime;
+ } MIB_IPNET_ROW2, *PMIB_IPNET_ROW2;
+ 
+-typedef struct _MIB_IPNET_TABLE2 {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_IPNET_TABLE2 {
+     ULONG NumEntries;
+     MIB_IPNET_ROW2 Table[ANY_SIZE];
+ } MIB_IPNET_TABLE2, *PMIB_IPNET_TABLE2;
+@@ -3253,7 +3254,7 @@ typedef struct _DNS_SETTINGS2
+     ULONG64 SettingFlags;
+ } DNS_SETTINGS2;
+ 
+-typedef struct _DNS_DOH_SERVER_SETTINGS
++typedef struct _Windows_SupportedOS_Server2008_ _DNS_DOH_SERVER_SETTINGS
+ {
+ #ifdef MIDL_PASS
+     [unique, string] PWSTR Template;
+@@ -3275,7 +3276,7 @@ typedef struct _DNS_DOT_SERVER_SETTINGS
+     USHORT Port;
+ } DNS_DOT_SERVER_SETTINGS;
+ 
+-typedef enum _DNS_SERVER_PROPERTY_TYPE
++typedef enum _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ _DNS_SERVER_PROPERTY_TYPE
+ {
+     DnsServerInvalidProperty = 0,
+     DnsServerDohProperty,
+@@ -3296,7 +3297,7 @@ typedef union _DNS_SERVER_PROPERTY_TYPES
+ } DNS_SERVER_PROPERTY_TYPES;
+ #endif
+ 
+-typedef struct _DNS_SERVER_PROPERTY
++typedef struct _Windows_SupportedOS_Server2008_ _DNS_SERVER_PROPERTY
+ {
+     ULONG Version;
+     ULONG ServerIndex;

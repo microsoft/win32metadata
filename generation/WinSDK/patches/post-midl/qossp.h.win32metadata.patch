@@ -1,0 +1,164 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/qossp.h b/generation/WinSDK/RecompiledIdlHeaders/shared/qossp.h
+index 61856bdf30db2dccf95b74606270d134b1beb2d8..6d299d51df86bd39802c418465fb0dca40c14b68 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/qossp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/qossp.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -59,7 +60,7 @@ typedef union _IN_ADDR_IPV4 {
+ /*
+  * IPV6 addressing for RSVP FILTERSPECS
+  */
+-typedef struct _IN_ADDR_IPV6 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IN_ADDR_IPV6 {
+ 
+     UCHAR  Addr[16];               //IPV6 address
+ 
+@@ -70,7 +71,7 @@ typedef const IN_ADDR_IPV6  *LPCIN_ADDR_IPV6;
+ /*
+  * IPV4 addressing for RSVP FILTERSPECS
+  */
+-typedef struct _RSVP_FILTERSPEC_V4 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC_V4 {
+ 
+     IN_ADDR_IPV4    Address;
+     USHORT          Unused;
+@@ -78,7 +79,7 @@ typedef struct _RSVP_FILTERSPEC_V4 {
+ 
+ } RSVP_FILTERSPEC_V4, *LPRSVP_FILTERSPEC_V4;
+ 
+-typedef struct _RSVP_FILTERSPEC_V6 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC_V6 {
+ 
+     IN_ADDR_IPV6    Address;
+     USHORT          UnUsed;
+@@ -87,7 +88,7 @@ typedef struct _RSVP_FILTERSPEC_V6 {
+ } RSVP_FILTERSPEC_V6, *LPRSVP_FILTERSPEC_V6;
+ 
+ 
+-typedef struct _RSVP_FILTERSPEC_V6_FLOW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC_V6_FLOW {
+ 
+     IN_ADDR_IPV6    Address;
+     UCHAR           UnUsed;
+@@ -95,14 +96,14 @@ typedef struct _RSVP_FILTERSPEC_V6_FLOW {
+ 
+ } RSVP_FILTERSPEC_V6_FLOW, *LPRSVP_FILTERSPEC_V6_FLOW;
+ 
+-typedef struct _RSVP_FILTERSPEC_V4_GPI {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC_V4_GPI {
+ 
+     IN_ADDR_IPV4    Address;
+     ULONG           GeneralPortId;
+ 
+ } RSVP_FILTERSPEC_V4_GPI, *LPRSVP_FILTERSPEC_V4_GPI;
+ 
+-typedef struct _RSVP_FILTERSPEC_V6_GPI {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC_V6_GPI {
+ 
+     IN_ADDR_IPV6    Address;
+     ULONG           GeneralPortId;
+@@ -124,7 +125,7 @@ typedef enum {
+ 
+ } FilterType;
+ 
+-typedef struct _RSVP_FILTERSPEC {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_FILTERSPEC {
+ 
+     FilterType   Type;
+ 
+@@ -142,7 +143,7 @@ typedef struct _RSVP_FILTERSPEC {
+  * FLOWDESCRIPTOR Structure used for specifying one or more
+  * Filters per Flowspec.
+  */
+-typedef struct _FLOWDESCRIPTOR {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _FLOWDESCRIPTOR {
+ 
+     FLOWSPEC            FlowSpec;
+     ULONG               NumFilters;
+@@ -154,7 +155,7 @@ typedef struct _FLOWDESCRIPTOR {
+  * RSVP_POLICY contains undefined policy data.  RSVP transports this
+  * data on behalf of the Policy Control component.
+  */
+-typedef struct _RSVP_POLICY {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_POLICY {
+     USHORT  Len;         /* total length of this element object */
+     USHORT  Type;
+     UCHAR   Info[4];
+@@ -166,7 +167,7 @@ typedef const RSVP_POLICY *LPCRSVP_POLICY;
+ /*
+  * RSVP_POLICY_INFO contains undefined policy element(s) retrieved from RSVP.  
+  */
+-typedef struct _RSVP_POLICY_INFO  {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_POLICY_INFO  {
+ 
+     QOS_OBJECT_HDR     ObjectHdr;
+     ULONG              NumPolicyElement;         /* count of the 
+@@ -183,7 +184,7 @@ typedef struct _RSVP_POLICY_INFO  {
+  * includes the QOS_OBJECT_HDR structure directly
+  */
+ 
+-typedef struct _RSVP_RESERVE_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_RESERVE_INFO {
+ 
+     QOS_OBJECT_HDR      ObjectHdr;            /* type and length of this object */
+     ULONG               Style;                /* RSVP Style (FF,WF,SE) */
+@@ -214,7 +215,7 @@ typedef const RSVP_RESERVE_INFO *LPCRSVP_RESERVE_INFO;
+  * since it includes the QOS_OBJECT_COUNT
+  */
+ 
+-typedef struct _RSVP_STATUS_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_STATUS_INFO {
+ 
+     QOS_OBJECT_HDR      ObjectHdr;      /* Object Hdr */
+     ULONG               StatusCode;     /* Error or Status Information see 
+@@ -234,7 +235,7 @@ typedef const RSVP_STATUS_INFO *LPCRSVP_STATUS_INFO;
+  * RSVP signalling.
+ */
+ 
+-typedef struct _QOS_DESTADDR {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_DESTADDR {
+     QOS_OBJECT_HDR ObjectHdr;                     /* Object header */
+     const struct sockaddr *  SocketAddress;       /* Destination socket address */
+     ULONG                    SocketAddressLength; /* Length of the address structure */
+@@ -248,7 +249,7 @@ typedef const QOS_DESTADDR * LPCQOS_DESTADDR;
+  * this structure defines the "General Characterization Parameters" contained in
+  * the RSVP Adspec object
+  */
+-typedef struct _AD_GENERAL_PARAMS{
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _AD_GENERAL_PARAMS{
+ 
+     ULONG       IntServAwareHopCount;   /* number of hops that conform to
+                                          * Integrated Services requirements */
+@@ -294,7 +295,7 @@ typedef struct _AD_GUARANTEED {
+  * application to include any valid Int Serv service parameter in the Buffer 
+  * value, after providing the Int Serv parameter id in the ParameterId field.
+  */
+-typedef struct _PARAM_BUFFER {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _PARAM_BUFFER {
+ 
+     ULONG   ParameterId;    /* Int Server parameter ID */
+     ULONG   Length;         /* total length of this structure 
+@@ -306,7 +307,7 @@ typedef struct _PARAM_BUFFER {
+ /*
+  * this structure contains the service types supported
+  */
+-typedef struct _CONTROL_SERVICE {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _CONTROL_SERVICE {
+ 
+     /*
+      * the length of this entire structure including the following buffer.  
+@@ -338,7 +339,7 @@ typedef struct _CONTROL_SERVICE {
+  * hop has been encountered by the Path message, and the minumum MTU along 
+  * the path. The services array indicates which services are supported
+  */
+-typedef struct _RSVP_ADSPEC  {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _RSVP_ADSPEC  {
+ 
+     QOS_OBJECT_HDR     ObjectHdr;
+     AD_GENERAL_PARAMS  GeneralParams;      /* contains the general 
