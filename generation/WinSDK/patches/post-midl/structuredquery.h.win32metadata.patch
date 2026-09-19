@@ -1,0 +1,119 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h b/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
+index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b49828ec15 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
+@@ -249,6 +249,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if 0
+@@ -266,7 +267,7 @@ typedef PROPERTYKEY *REFPROPERTYKEY;
+ 
+ 
+ typedef /* [v1_enum] */ 
+-enum tagSTRUCTURED_QUERY_SYNTAX
++enum _Windows_SupportedOS_Windows7_ tagSTRUCTURED_QUERY_SYNTAX
+     {
+         SQS_NO_SYNTAX	= 0,
+         SQS_ADVANCED_QUERY_SYNTAX	= ( SQS_NO_SYNTAX + 1 ) ,
+@@ -274,7 +275,7 @@ enum tagSTRUCTURED_QUERY_SYNTAX
+     } 	STRUCTURED_QUERY_SYNTAX;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagSTRUCTURED_QUERY_SINGLE_OPTION
++enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_SINGLE_OPTION
+     {
+         SQSO_SCHEMA	= 0,
+         SQSO_LOCALE_WORD_BREAKING	= ( SQSO_SCHEMA + 1 ) ,
+@@ -290,7 +291,7 @@ enum tagSTRUCTURED_QUERY_SINGLE_OPTION
+     } 	STRUCTURED_QUERY_SINGLE_OPTION;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagSTRUCTURED_QUERY_MULTIOPTION
++enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_MULTIOPTION
+     {
+         SQMO_VIRTUAL_PROPERTY	= 0,
+         SQMO_DEFAULT_PROPERTY	= ( SQMO_VIRTUAL_PROPERTY + 1 ) ,
+@@ -299,7 +300,7 @@ enum tagSTRUCTURED_QUERY_MULTIOPTION
+     } 	STRUCTURED_QUERY_MULTIOPTION;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagSTRUCTURED_QUERY_PARSE_ERROR
++enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_PARSE_ERROR
+     {
+         SQPE_NONE	= 0,
+         SQPE_EXTRA_OPENING_PARENTHESIS	= ( SQPE_NONE + 1 ) ,
+@@ -311,7 +312,7 @@ enum tagSTRUCTURED_QUERY_PARSE_ERROR
+     } 	STRUCTURED_QUERY_PARSE_ERROR;
+ 
+ typedef /* [v1_enum] */ 
+-enum STRUCTURED_QUERY_RESOLVE_OPTION
++enum _Windows_SupportedOS_Server2003_ STRUCTURED_QUERY_RESOLVE_OPTION
+     {
+         SQRO_DEFAULT	= 0,
+         SQRO_DONT_RESOLVE_DATETIME	= 0x1,
+@@ -328,14 +329,14 @@ enum STRUCTURED_QUERY_RESOLVE_OPTION
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(STRUCTURED_QUERY_RESOLVE_OPTION);
+ typedef /* [v1_enum] */ 
+-enum CASE_REQUIREMENT
++enum _Windows_SupportedOS_Windows7_ CASE_REQUIREMENT
+     {
+         CASE_REQUIREMENT_ANY	= 0,
+         CASE_REQUIREMENT_UPPER_IF_AQS	= ( CASE_REQUIREMENT_ANY + 1 ) 
+     } 	CASE_REQUIREMENT;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagINTERVAL_LIMIT_KIND
++enum _Windows_SupportedOS_Server2003_ tagINTERVAL_LIMIT_KIND
+     {
+         ILK_EXPLICIT_INCLUDED	= 0,
+         ILK_EXPLICIT_EXCLUDED	= ( ILK_EXPLICIT_INCLUDED + 1 ) ,
+@@ -344,7 +345,7 @@ enum tagINTERVAL_LIMIT_KIND
+     } 	INTERVAL_LIMIT_KIND;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagQUERY_PARSER_MANAGER_OPTION
++enum _Windows_SupportedOS_Server2003_ tagQUERY_PARSER_MANAGER_OPTION
+     {
+         QPMO_SCHEMA_BINARY_NAME	= 0,
+         QPMO_PRELOCALIZED_SCHEMA_BINARY_PATH	= ( QPMO_SCHEMA_BINARY_NAME + 1 ) ,
+@@ -985,7 +986,7 @@ EXTERN_C const IID IID_IQuerySolution;
+ /* [local] */ 
+ 
+ typedef /* [v1_enum] */ 
+-enum CONDITION_CREATION_OPTIONS
++enum _Windows_SupportedOS_Windows7_ CONDITION_CREATION_OPTIONS
+     {
+         CONDITION_CREATION_DEFAULT	= 0,
+         CONDITION_CREATION_NONE	= 0,
+@@ -1014,7 +1015,7 @@ EXTERN_C const IID IID_IConditionFactory2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("71D222E1-432F-429e-8C13-B6DAFDE5077A")
+-    IConditionFactory2 : public IConditionFactory
++    _Windows_SupportedOS_Windows7_ IConditionFactory2 : public IConditionFactory
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateTrueFalse( 
+@@ -1371,7 +1372,7 @@ EXTERN_C const IID IID_IConditionFactory2;
+         END_INTERFACE
+     } IConditionFactory2Vtbl;
+ 
+-    interface IConditionFactory2
++    interface _Windows_SupportedOS_Windows7_ IConditionFactory2
+     {
+         CONST_VTBL struct IConditionFactory2Vtbl *lpVtbl;
+     };
+@@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IQueryParserManager;
+ /* interface __MIDL_itf_StructuredQuery_0000_0015 */
+ /* [local] */ 
+ 
+-typedef struct tagHITRANGE
++typedef struct _Windows_SupportedOS_Windows7_ tagHITRANGE
+     {
+     ULONG iPosition;
+     ULONG cLength;

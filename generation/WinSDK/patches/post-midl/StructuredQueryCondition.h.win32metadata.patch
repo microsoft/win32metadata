@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/StructuredQueryCondition.h b/generation/WinSDK/RecompiledIdlHeaders/um/StructuredQueryCondition.h
+index ce9fc014a09bd449c5ca9f3f1e3a79e5d91c8c46..339e2bec75eab717002c1f066d38334adad9fc8b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/StructuredQueryCondition.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/StructuredQueryCondition.h
+@@ -82,8 +82,9 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ typedef /* [v1_enum] */ 
+-enum tagCONDITION_TYPE
++enum _Windows_SupportedOS_Server2003_ tagCONDITION_TYPE
+     {
+         CT_AND_CONDITION	= 0,
+         CT_OR_CONDITION	= ( CT_AND_CONDITION + 1 ) ,
+@@ -92,7 +93,7 @@ enum tagCONDITION_TYPE
+     } 	CONDITION_TYPE;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagCONDITION_OPERATION
++enum _Windows_SupportedOS_Server2003_ tagCONDITION_OPERATION
+     {
+         COP_IMPLICIT	= 0,
+         COP_EQUAL	= ( COP_IMPLICIT + 1 ) ,
+@@ -514,7 +515,7 @@ EXTERN_C const IID IID_ICondition2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0DB8851D-2E5B-47eb-9208-D28C325A01D7")
+-    ICondition2 : public ICondition
++    _Windows_SupportedOS_Windows7_ ICondition2 : public ICondition
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetLocale( 
+@@ -655,7 +656,7 @@ EXTERN_C const IID IID_ICondition2;
+         END_INTERFACE
+     } ICondition2Vtbl;
+ 
+-    interface ICondition2
++    interface _Windows_SupportedOS_Windows7_ ICondition2
+     {
+         CONST_VTBL struct ICondition2Vtbl *lpVtbl;
+     };

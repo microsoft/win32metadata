@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h b/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
+index ec5334e9dccaf866b7fa6d24cd733d4893dce365..bf94a949f8b981db69c5894fbd27490ff744c50f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
+@@ -75,6 +75,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ EXTERN_C const CLSID CLSID_FilterRegistration;
+@@ -89,7 +90,7 @@ extern RPC_IF_HANDLE __MIDL_itf_filtereg_0000_0000_v0_0_s_ifspec;
+ /* interface ILoadFilter */
+ /* [unique][helpstring][uuid][object] */ 
+ 
+-typedef struct _FILTERED_DATA_SOURCES
++typedef struct _Windows_SupportedOS_Windows7_ _FILTERED_DATA_SOURCES
+     {
+     const WCHAR *pwcsExtension;
+     const WCHAR *pwcsMime;
+@@ -103,7 +104,7 @@ EXTERN_C const IID IID_ILoadFilter;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c7310722-ac80-11d1-8df3-00c04fb6ef4f")
+-    ILoadFilter : public IUnknown
++    _Windows_SupportedOS_Windows7_ ILoadFilter : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE LoadIFilter( 
+@@ -248,7 +249,7 @@ EXTERN_C const IID IID_ILoadFilter;
+         END_INTERFACE
+     } ILoadFilterVtbl;
+ 
+-    interface ILoadFilter
++    interface _Windows_SupportedOS_Windows7_ ILoadFilter
+     {
+         CONST_VTBL struct ILoadFilterVtbl *lpVtbl;
+     };
