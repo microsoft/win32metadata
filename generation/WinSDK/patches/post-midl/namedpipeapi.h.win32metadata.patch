@@ -1,5 +1,4 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
-index b533a8a2bf..fc7e7799ed 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 @@ -17,6 +17,7 @@
@@ -22,8 +21,8 @@ index b533a8a2bf..fc7e7799ed 100644
  CreatePipe(
 -    _Out_ PHANDLE hReadPipe,
 -    _Out_ PHANDLE hWritePipe,
-+    _Out_ _Win32_RAIIFree_(CloseHandle) _WIN32META_ANNOTATION_("win32metadata:ignore_if_return=0") PHANDLE hReadPipe,
-+    _Out_ _Win32_RAIIFree_(CloseHandle) _WIN32META_ANNOTATION_("win32metadata:ignore_if_return=0") PHANDLE hWritePipe,
++    _Out_ _Win32_RAIIFree_(CloseHandle) PHANDLE hReadPipe,
++    _Out_ _Win32_RAIIFree_(CloseHandle) PHANDLE hWritePipe,
      _In_opt_ LPSECURITY_ATTRIBUTES lpPipeAttributes,
      _In_ DWORD nSize
      );

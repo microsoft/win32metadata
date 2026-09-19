@@ -1,5 +1,4 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
-index 54c1445d36..fc10cce0fd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 @@ -17,6 +17,7 @@
@@ -71,17 +70,16 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  SIZE_T
  WINAPI
-@@ -115,6 +126,9 @@ HeapSize(
+@@ -115,6 +126,8 @@ HeapSize(
      _In_ LPCVOID lpMem
      );
  
 +_Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
-+_WIN32META_ANNOTATION_("win32metadata:do_not_release")
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -122,6 +136,8 @@ GetProcessHeap(
+@@ -122,6 +135,8 @@ GetProcessHeap(
      VOID
      );
  
@@ -90,7 +88,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  SIZE_T
  WINAPI
-@@ -130,6 +146,8 @@ HeapCompact(
+@@ -130,6 +145,8 @@ HeapCompact(
      _In_ DWORD dwFlags
      );
  
@@ -99,7 +97,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -146,6 +164,7 @@ HeapSetInformation(
+@@ -146,6 +163,7 @@ HeapSetInformation(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -107,7 +105,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -161,6 +180,7 @@ HeapValidate(
+@@ -161,6 +179,7 @@ HeapValidate(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -115,7 +113,7 @@ index 54c1445d36..fc10cce0fd 100644
  BOOL
  WINAPI
  HeapSummary(
-@@ -175,14 +195,18 @@ HeapSummary(
+@@ -175,6 +194,8 @@ HeapSummary(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -124,10 +122,8 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  DWORD
  WINAPI
- GetProcessHeaps(
-     _In_ DWORD NumberOfHeaps,
--    _Out_writes_to_(NumberOfHeaps,return) PHANDLE ProcessHeaps
-+    _Out_writes_to_(NumberOfHeaps,return) _WIN32META_ANNOTATION_("win32metadata:do_not_release") PHANDLE ProcessHeaps
+@@ -183,6 +204,8 @@ GetProcessHeaps(
+     _Out_writes_to_(NumberOfHeaps,return) PHANDLE ProcessHeaps
      );
  
 +_Windows_SupportedOS_WindowsXP_
@@ -135,7 +131,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -190,6 +214,8 @@ HeapLock(
+@@ -190,6 +213,8 @@ HeapLock(
      _In_ HANDLE hHeap
      );
  
@@ -144,7 +140,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -203,6 +229,8 @@ HeapUnlock(
+@@ -203,6 +228,8 @@ HeapUnlock(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -153,7 +149,7 @@ index 54c1445d36..fc10cce0fd 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -211,6 +239,8 @@ HeapWalk(
+@@ -211,6 +238,8 @@ HeapWalk(
      _Inout_ LPPROCESS_HEAP_ENTRY lpEntry
      );
  
