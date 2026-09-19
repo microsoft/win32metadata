@@ -76,7 +76,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.20348")
++_Windows_SupportedOS_20348_
  WINBASEAPI
  BOOL
  WINAPI
@@ -316,7 +316,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
      _Inout_ LPDWORD nSize
      );
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.0.6001")
++_Windows_SupportedOS_WindowsVistaSP1_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -398,7 +398,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  
  #if defined(NTDDI_WIN11_GA) && (NTDDI_VERSION >= NTDDI_WIN11_GA)
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.22631")
++_Windows_SupportedOS_22631_
 +_Win32_ImportLibrary_("api-ms-win-core-sysinfo-l1-2-6.dll")
  WINBASEAPI
  DEVELOPER_DRIVE_ENABLEMENT_STATE

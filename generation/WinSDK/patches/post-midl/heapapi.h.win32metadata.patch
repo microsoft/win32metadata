@@ -14,7 +14,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  //
  
 -typedef struct _HEAP_SUMMARY {
-+typedef struct _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.20348") _HEAP_SUMMARY {
++typedef struct _Windows_SupportedOS_20348_ _HEAP_SUMMARY {
      DWORD cb;
      SIZE_T cbAllocated;
      SIZE_T cbCommitted;
@@ -109,7 +109,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.20348")
++_Windows_SupportedOS_20348_
  BOOL
  WINAPI
  HeapSummary(
