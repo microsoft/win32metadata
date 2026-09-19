@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mswsockdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mswsockdef.h
+index 1ff2969276f503f5c9934be7752deee6e64eb18f..c9492e3325e02b497fb235cbe3185c36208573fa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/mswsockdef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mswsockdef.h
+@@ -22,6 +22,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+ #ifdef _MSC_VER
+@@ -89,7 +90,7 @@ typedef struct RIO_BUFFERID_t *RIO_BUFFERID, **PRIO_BUFFERID;
+ typedef struct RIO_CQ_t *RIO_CQ, **PRIO_CQ;
+ typedef struct RIO_RQ_t *RIO_RQ, **PRIO_RQ;
+ 
+-typedef struct _RIORESULT {
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _RIORESULT {
+     LONG Status;
+     ULONG BytesTransferred;
+     ULONGLONG SocketContext;

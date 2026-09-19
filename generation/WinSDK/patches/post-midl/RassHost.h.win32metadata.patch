@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
+index 04310cdbb59293e8f3b4444b39701ee7b50dfee3..7c833e8c50437ea730578b298151157b421deac7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
+@@ -20,6 +20,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -29,7 +30,7 @@ Abstract:
+ 
+ typedef HANDLE  HPORT;
+ 
+-typedef struct _SECURITY_MESSAGE
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SECURITY_MESSAGE
+ {
+     DWORD dwMsgId;
+ 

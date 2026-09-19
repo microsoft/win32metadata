@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
+index eca63657293d193296b4af4e06554a37d4cee92b..54d751a85acadb1775e57abb452ad0dbc7e606f6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
+@@ -130,6 +130,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or CmdLineTools Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS)
+@@ -201,7 +202,7 @@ ROUTER_CONNECTION_STATE;
+ #define MPR_INTERFACE_NO_MEDIA_SENSE                0x00000020
+ #define MPR_INTERFACE_NO_DEVICE                     0x00000040
+ 
+-typedef struct _MPR_INTERFACE_0
++typedef struct _Windows_SupportedOS_Server2000_ _MPR_INTERFACE_0
+ {
+     IN OUT _Field_z_  WCHAR                   wszInterfaceName[MAX_INTERFACE_NAME_LEN+1];
+     OUT     HANDLE                  hInterface;
+@@ -2005,6 +2006,7 @@ MprAdminConnectionEnumEx(
+      _In_      LPDWORD                 lpdwResumeHandle);
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ DWORD APIENTRY MprAdminConnectionGetInfoEx(
+    _In_       RAS_SERVER_HANDLE       hRasServer,
+    _In_       HANDLE                  hRasConnection,

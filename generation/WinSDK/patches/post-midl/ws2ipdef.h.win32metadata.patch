@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2ipdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2ipdef.h
+index 6948fe4f06aa72939551b547d5bc6641d1497847..4d8a804dfad8d95b7c340d453438a5f6c8bc7667 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2ipdef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2ipdef.h
+@@ -35,6 +35,7 @@ Environment:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -86,7 +87,7 @@ typedef union sockaddr_gen {
+ // Structure to keep interface specific information
+ //
+ 
+-typedef struct _INTERFACE_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _INTERFACE_INFO {
+     ULONG iiFlags;              // Interface flags.
+     sockaddr_gen iiAddress;     // Interface address.
+     sockaddr_gen iiBroadcastAddress; // Broadcast address.
+@@ -97,7 +98,7 @@ typedef struct _INTERFACE_INFO {
+ // New structure that does not have dependency on the address size.
+ //
+ 
+-typedef struct _INTERFACE_INFO_EX {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _INTERFACE_INFO_EX {
+     ULONG iiFlags;              // Interface flags.
+     SOCKET_ADDRESS iiAddress;   // Interface address.
+     SOCKET_ADDRESS iiBroadcastAddress; // Broadcast address.
+@@ -230,7 +231,7 @@ typedef union _SOCKADDR_INET {
+ //
+ // Structure to hold a pair of source, destination addresses.
+ //
+-typedef struct _sockaddr_in6_pair
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _sockaddr_in6_pair
+ {
+     PSOCKADDR_IN6 SourceAddress;
+     PSOCKADDR_IN6 DestinationAddress;
+@@ -738,7 +739,7 @@ typedef enum {
+ //
+ // Structure for IP_MREQ (used by IP_ADD_MEMBERSHIP and IP_DROP_MEMBERSHIP).
+ //
+-typedef struct ip_mreq {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ip_mreq {
+     IN_ADDR imr_multiaddr;  // IP multicast address of group.
+     IN_ADDR imr_interface;  // Local IP address of interface.
+ } IP_MREQ, *PIP_MREQ;
+@@ -747,7 +748,7 @@ typedef struct ip_mreq {
+ // Structure for IP_MREQ_SOURCE (used by IP_BLOCK_SOURCE, IP_UNBLOCK_SOURCE
+ // etc.).
+ //
+-typedef struct ip_mreq_source {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ip_mreq_source {
+     IN_ADDR imr_multiaddr;  // IP multicast address of group.
+     IN_ADDR imr_sourceaddr; // IP address of source.
+     IN_ADDR imr_interface;  // Local IP address of interface.
+@@ -756,7 +757,7 @@ typedef struct ip_mreq_source {
+ //
+ // Structure for IP_MSFILTER (used by SIOCSIPMSFILTER and SIOCGIPMSFILTER).
+ //
+-typedef struct ip_msfilter {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ip_msfilter {
+     IN_ADDR imsf_multiaddr;  // IP multicast address of group.
+     IN_ADDR imsf_interface;  // Local IP address of interface.
+     MULTICAST_MODE_TYPE imsf_fmode;        // Filter mode.
+@@ -830,7 +831,7 @@ typedef struct ip_msfilter {
+ // Structure for IPV6_JOIN_GROUP and IPV6_LEAVE_GROUP (also,
+ // IPV6_ADD_MEMBERSHIP and IPV6_DROP_MEMBERSHIP).
+ //
+-typedef struct ipv6_mreq {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ipv6_mreq {
+     IN6_ADDR ipv6mr_multiaddr;  // IPv6 multicast address.
+     ULONG ipv6mr_interface;     // Interface index.
+ } IPV6_MREQ, *PIPV6_MREQ;
+@@ -840,7 +841,7 @@ typedef struct ipv6_mreq {
+ // Structure for GROUP_REQ used by protocol independent source filters
+ // (MCAST_JOIN_GROUP and MCAST_LEAVE_GROUP).
+ //
+-typedef struct group_req {
++typedef struct _Windows_SupportedOS_Server2008_ group_req {
+     ULONG gr_interface;         // Interface index.
+     SOCKADDR_STORAGE gr_group;  // Multicast address.
+ } GROUP_REQ, *PGROUP_REQ;
+@@ -849,7 +850,7 @@ typedef struct group_req {
+ // Structure for GROUP_SOURCE_REQ used by protocol independent source filters
+ // (MCAST_JOIN_SOURCE_GROUP, MCAST_LEAVE_SOURCE_GROUP etc.).
+ //
+-typedef struct group_source_req {
++typedef struct _Windows_SupportedOS_Server2008_ group_source_req {
+     ULONG gsr_interface;        // Interface index.
+     SOCKADDR_STORAGE gsr_group; // Group address.
+     SOCKADDR_STORAGE gsr_source; // Source address.
+@@ -859,7 +860,7 @@ typedef struct group_source_req {
+ // Structure for GROUP_FILTER used by protocol independent source filters
+ // (SIOCSMSFILTER and SIOCGMSFILTER).
+ //
+-typedef struct group_filter {
++typedef struct _Windows_SupportedOS_Server2008_ group_filter {
+     ULONG gf_interface;         // Interface index.
+     SOCKADDR_STORAGE gf_group;  // Multicast address.
+     MULTICAST_MODE_TYPE gf_fmode; // Filter mode.
+@@ -875,7 +876,7 @@ typedef struct group_filter {
+ //
+ // Structure for IP_PKTINFO option.
+ //
+-typedef struct in_pktinfo {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ in_pktinfo {
+     IN_ADDR ipi_addr;     // Source/destination IPv4 address.
+     ULONG ipi_ifindex;    // Send/receive interface index.
+ } IN_PKTINFO, *PIN_PKTINFO;
+@@ -887,7 +888,7 @@ C_ASSERT(sizeof(IN_PKTINFO) == 8);
+ //
+ // Structure for IPV6_PKTINFO option.
+ //
+-typedef struct in6_pktinfo {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ in6_pktinfo {
+     IN6_ADDR ipi6_addr;    // Source/destination IPv6 address.
+     ULONG ipi6_ifindex;    // Send/receive interface index.
+ } IN6_PKTINFO, *PIN6_PKTINFO;
