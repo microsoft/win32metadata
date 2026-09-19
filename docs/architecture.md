@@ -31,6 +31,11 @@ constants scraper, emitter, response files, or JSON fixup databases.
 Metadata semantics belong in the SDK headers and libraries. The generator does not
 accept API-specific RSP or JSON sidecars.
 
+`AssociatedConstant` dependencies are resolved from declarations in the supplied
+partition translation units. Only referenced loose constants are emitted into the
+annotated enum's configured root namespace; missing or conflicting providers fail
+instead of falling back to a name list or synthetic declaration.
+
 ## Repository build
 
 `generation/WinSDK/Windows.Win32.proj` consumes the same SDK targets used by the

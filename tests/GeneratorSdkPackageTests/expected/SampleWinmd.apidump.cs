@@ -11,13 +11,18 @@ namespace Sample.Api;
 
 public sealed class Apis
 {
+	public const uint SAMPLE_MODE_EXTERNAL = 3758096385u;
+
 	[DllImport ("", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false)]
 	public static extern int SampleAdd ([In] int left, [In] int right);
 }
 
+using Windows.Win32.Foundation.Metadata;
+
 namespace Sample.Api;
 
-public enum SAMPLE_MODE
+[AssociatedConstant ("SAMPLE_MODE_EXTERNAL")]
+public enum SAMPLE_MODE : uint
 {
 	SAMPLE_MODE_NONE,
 	SAMPLE_MODE_FAST
