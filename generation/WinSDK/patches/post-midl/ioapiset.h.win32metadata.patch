@@ -1,0 +1,110 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ioapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/ioapiset.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ioapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ioapiset.h
+@@ -15,6 +15,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
+@@ -25,6 +26,8 @@ extern "C" {
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -36,6 +39,8 @@ CreateIoCompletionPort(
+     _In_ DWORD NumberOfConcurrentThreads
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -49,6 +54,8 @@ GetQueuedCompletionStatus(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -63,6 +70,8 @@ GetQueuedCompletionStatusEx(
+ 
+ #endif // _WIN32_WINNT >= 0x0600
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -79,6 +88,8 @@ PostQueuedCompletionStatus(
+ #pragma region  Desktop Family or OneCore Family or Application Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -90,7 +101,7 @@ DeviceIoControl(
+     _Out_writes_bytes_to_opt_(nOutBufferSize,*lpBytesReturned) LPVOID lpOutBuffer,
+     _In_ DWORD nOutBufferSize,
+     _Out_opt_ LPDWORD lpBytesReturned,
+-    _Inout_opt_ LPOVERLAPPED lpOverlapped
++    _Inout_opt_ _Win32_Retained_ LPOVERLAPPED lpOverlapped
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
+@@ -99,6 +110,8 @@ DeviceIoControl(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -111,6 +124,8 @@ GetOverlappedResult(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -127,6 +142,8 @@ CancelIoEx(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -134,6 +151,8 @@ CancelIo(
+     _In_ HANDLE hFile
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -153,6 +172,8 @@ GetOverlappedResultEx(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
