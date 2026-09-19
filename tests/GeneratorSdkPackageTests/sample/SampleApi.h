@@ -23,3 +23,7 @@ public:
 };
 
 extern "C" _Windows_SupportedOS_19041_662_ int SampleAdd(int left, int right);
+extern "C" _Windows_SupportedOS_WindowsVistaSP1_ int SampleVistaSp1(void);
+extern "C" _Windows_SupportedOS_20348_ int SampleServer2022(void);
+extern "C" _Windows_SupportedOS_22631_ int SampleWindows11_23H2(void);
+extern "C" _Windows_SupportedOS_26100_ int SampleWindows11_24H2(void);
