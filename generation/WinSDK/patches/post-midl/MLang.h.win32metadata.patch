@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
+index 76ae304d67a95005c6aa1187cdc85a6265d472f0..5e3ebd3432bc07aa5ab0c0e115418d111d7e88c3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
+@@ -207,6 +207,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ //=--------------------------------------------------------------------------=
+ // MLang.h                                                                    
+ //=--------------------------------------------------------------------------=
+@@ -1615,7 +1616,7 @@ EXTERN_C const IID IID_IEnumCodePage;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("275c23e3-3747-11d0-9fea-00aa003f8646")
+-    IEnumCodePage : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumCodePage : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+@@ -1690,7 +1691,7 @@ EXTERN_C const IID IID_IEnumCodePage;
+         END_INTERFACE
+     } IEnumCodePageVtbl;
+ 
+-    interface IEnumCodePage
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumCodePage
+     {
+         CONST_VTBL struct IEnumCodePageVtbl *lpVtbl;
+     };
+@@ -1760,7 +1761,7 @@ EXTERN_C const IID IID_IEnumRfc1766;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3dc39d1d-c030-11d0-b81b-00c04fc9b31f")
+-    IEnumRfc1766 : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumRfc1766 : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+@@ -1835,7 +1836,7 @@ EXTERN_C const IID IID_IEnumRfc1766;
+         END_INTERFACE
+     } IEnumRfc1766Vtbl;
+ 
+-    interface IEnumRfc1766
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumRfc1766
+     {
+         CONST_VTBL struct IEnumRfc1766Vtbl *lpVtbl;
+     };
