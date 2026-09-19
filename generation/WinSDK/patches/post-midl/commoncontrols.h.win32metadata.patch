@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
+index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7c8e8508b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
+@@ -86,6 +86,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #ifndef WINCOMMCTRLAPI
+@@ -164,7 +165,7 @@ EXTERN_C const IID IID_IImageList;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("46EB5926-582E-4017-9FDF-E8998DAA0950")
+-    IImageList : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IImageList : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Add( 
+@@ -563,7 +564,7 @@ EXTERN_C const IID IID_IImageList;
+         END_INTERFACE
+     } IImageListVtbl;
+ 
+-    interface IImageList
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IImageList
+     {
+         CONST_VTBL struct IImageListVtbl *lpVtbl;
+     };
+@@ -726,7 +727,7 @@ EXTERN_C const IID IID_IImageList2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
+-    IImageList2 : public IImageList
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IImageList2 : public IImageList
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Resize( 
+@@ -1156,7 +1157,7 @@ EXTERN_C const IID IID_IImageList2;
+         END_INTERFACE
+     } IImageList2Vtbl;
+ 
+-    interface IImageList2
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IImageList2
+     {
+         CONST_VTBL struct IImageList2Vtbl *lpVtbl;
+     };
