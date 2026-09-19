@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+index 13a6a61fe854b43f76ed664d23e20856e62d1979..4ac8be6f1e62c7d5846d4d22f1b90c92ca7ccb22 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+@@ -1,5 +1,6 @@
+ #ifndef _RICHOLE_
+ #define _RICHOLE_
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -15,7 +16,7 @@
+  */
+ 
+ // Structure passed to GetObject and InsertObject
+-typedef struct _reobject
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _reobject
+ {
+ 	DWORD			cbStruct;			// Size of structure
+ 	LONG			cp;					// Character position of object

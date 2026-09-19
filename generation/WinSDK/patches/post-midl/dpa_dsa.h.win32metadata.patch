@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
+index 394438f51b086b5c2fdb6666f0e2f6f126381771..b2076d7adcd9e252766ebb7ff100ddb93ca96c8d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
+@@ -23,6 +23,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -71,8 +72,14 @@ struct _DSA;
+ typedef struct _DSA *HDSA;
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI HDSA   WINAPI DSA_Create(int cbItem, int cItemGrow);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI BOOL   WINAPI DSA_Destroy(_Inout_opt_ HDSA hdsa);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI void   WINAPI DSA_DestroyCallback(_Inout_opt_ HDSA hdsa, _In_ PFNDAENUMCALLBACK pfnCB, _In_opt_ void *pData);
+ #ifdef __cplusplus
+ extern "C++" __inline void DSA_DestroyCallback(_Inout_opt_ HDSA hdsa, _In_ PFNDAENUMCALLBACKCONST pfnCB, _In_opt_ void *pData)
+@@ -181,7 +188,7 @@ extern "C++" __inline BOOL DPA_Sort(_Inout_ HDPA hdpa, _In_ PFNDACOMPARECONST pf
+ // or some failure.
+ //
+ 
+-typedef struct _DPASTREAMINFO
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _DPASTREAMINFO
+ {
+     int    iPos;        // Index of item
+     void *pvItem;

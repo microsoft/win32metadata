@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
+index dad771d0a5e07226229b7ebaf48a8897e589ef35..432ce720ea7c55d745ad9b489d96eb1415da8063 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
+@@ -25,6 +25,7 @@ Revision History:
+ #ifndef __AUTHZ_H__
+ #define __AUTHZ_H__
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -84,7 +85,7 @@ typedef AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE *PAUTHZ_CAP_CHANGE_SUBSCRIPTION_HAN
+ // Structure defining the access check request.
+ //
+ 
+-typedef struct _AUTHZ_ACCESS_REQUEST
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AUTHZ_ACCESS_REQUEST
+ {
+     ACCESS_MASK DesiredAccess;
+ 
+@@ -541,6 +542,8 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTES_INFORMATION {
+ 
+ #define AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD 0x00000001
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -557,6 +560,8 @@ AuthzAccessCheck(
+     _Out_opt_ PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE phAccessCheckResults
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -568,6 +573,8 @@ AuthzCachedAccessCheck(
+      _Inout_ PAUTHZ_ACCESS_REPLY               pReply
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI

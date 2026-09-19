@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
+index 3eaee6611807a260ed874eb63047fa8a1f99c690..5f909dc9352404d459e183b657e8bd3a58a3c30a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
+@@ -17,6 +17,7 @@ Abstract:
+ #define __ACCESS_CONTROL_API__
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ 
+ #include <windows.h>
+@@ -50,6 +51,8 @@ typedef VOID (CALLBACK *FN_PROGRESS) (
+     _In_ BOOL                       SecuritySet     // Whether security was set
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -59,6 +62,8 @@ SetEntriesInAclA(
+     _In_opt_  PACL           OldAcl,
+     _Out_ PACL              * NewAcl
+     );
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -75,6 +80,8 @@ SetEntriesInAclW(
+ #endif // !UNICODE
+ 
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ WINADVAPI
+ DWORD
+ WINAPI

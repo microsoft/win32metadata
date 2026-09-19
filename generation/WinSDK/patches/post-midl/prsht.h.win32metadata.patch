@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
+index 9b253c6dcaac6dd5b3483ab6f1f79d47a46b16c2..9a119ba123bfcc784170ec4e1f7d3a9973563543 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*****************************************************************************\
+ *                                                                             *
+@@ -199,7 +200,7 @@ typedef struct _PROPSHEETPAGEA_V1
+ } PROPSHEETPAGEA_V1, *LPPROPSHEETPAGEA_V1;
+ typedef const PROPSHEETPAGEA_V1 *LPCPROPSHEETPAGEA_V1;
+ 
+-typedef struct _PROPSHEETPAGEA_V2
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _PROPSHEETPAGEA_V2
+ {
+     PROPSHEETPAGEA_V1_FIELDS
+ 
+@@ -582,8 +583,14 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
+ #define PSCB_BUTTONPRESSED 3
+ #endif  // NTDDI_VERSION >= NTDDI_WINXP
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageA(LPCPROPSHEETPAGEA constPropSheetPagePointer);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageW(LPCPROPSHEETPAGEW constPropSheetPagePointer);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2003_
+ WINCOMMCTRLAPI BOOL           WINAPI DestroyPropertySheetPage(HPROPSHEETPAGE);
+ 
+ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
