@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
+index 5e8dd7c3e9ad725eb464edf6bfe6cf5891194641..bfc1ca186e2994515a3d6fed40ed7e6ef161651b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
+@@ -6,6 +6,7 @@
+ //----------------------------------------------------------------------------
+ 
+ #pragma once
++#include "win32metadata_annotations.h"
+ 
+ #include <cor.h>
+ #include <activation.h>
+@@ -47,6 +48,8 @@ _Check_return_ extern "C" HRESULT WINAPI RoGetMetaDataFile(
+     _Outptr_opt_ IMetaDataImport2 **metaDataImport,
+     _Out_opt_ mdTypeDef *typeDefToken);
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ _When_(return == S_OK, _At_(typeNameParts, _Outptr_result_buffer_(*partsCount)))
+ _When_(return != S_OK, _At_(typeNameParts, _Outptr_))
+ _Success_(return == S_OK)
+@@ -55,6 +58,8 @@ _Check_return_  extern "C" HRESULT WINAPI RoParseTypeName(
+     _Out_ DWORD *partsCount,
+     _Out_writes_(*partsCount) HSTRING **typeNameParts);
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ _Check_return_ extern "C" HRESULT WINAPI RoResolveNamespace(
+     _In_opt_ const HSTRING name,
+     _In_opt_ const HSTRING windowsMetaDataDir,
+@@ -73,6 +78,7 @@ _Check_return_ STDAPI RoIsApiContractPresent(
+     _In_ UINT16 minorVersion,
+     _Out_ BOOL* present);
+ 
++_Windows_SupportedOS_10240_
+ _Check_return_ STDAPI RoIsApiContractMajorVersionPresent(
+     _In_ PCWSTR name,
+     _In_ UINT16 majorVersion,
