@@ -1,0 +1,95 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
+@@ -12,6 +12,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
+@@ -29,9 +30,13 @@ typedef struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION {
+     LONG64 ReservationIops;
+     PCWSTR VolumeName;
+     ULONG BaseIoSize;
+-    ULONG ControlFlags;
++    _Win32_AssociatedEnum_(JOB_OBJECT_IO_RATE_CONTROL_FLAGS) ULONG ControlFlags;
+ } JOBOBJECT_IO_RATE_CONTROL_INFORMATION;
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseHandle, 0)
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -40,6 +45,8 @@ CreateJobObjectW(
+     _In_opt_ LPCWSTR lpName
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -47,6 +54,10 @@ FreeMemoryJobObject(
+     _In_ _Frees_ptr_ VOID* Buffer
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseHandle, 0)
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -56,6 +67,9 @@ OpenJobObjectW(
+     _In_ LPCWSTR lpName
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -64,6 +78,9 @@ AssignProcessToJobObject(
+     _In_ HANDLE hProcess
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -72,6 +89,9 @@ TerminateJobObject(
+     _In_ UINT uExitCode
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -90,6 +110,9 @@ SetIoRateControlInformationJobObject(
+     _In_ JOBOBJECT_IO_RATE_CONTROL_INFORMATION* IoRateControlInfo
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -107,7 +130,7 @@ WINAPI
+ QueryIoRateControlInformationJobObject(
+     _In_opt_ HANDLE hJob,
+     _In_opt_ PCWSTR VolumeName,
+-    _Outptr_result_buffer_(*InfoBlockCount) JOBOBJECT_IO_RATE_CONTROL_INFORMATION** InfoBlocks,
++    _Outptr_result_buffer_(*InfoBlockCount) _Win32_RAIIFree_(FreeMemoryJobObject) JOBOBJECT_IO_RATE_CONTROL_INFORMATION** InfoBlocks,
+     _Out_ ULONG* InfoBlockCount
+     );
+ 
