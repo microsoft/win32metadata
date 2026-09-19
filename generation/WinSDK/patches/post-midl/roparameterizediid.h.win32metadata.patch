@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
+index 4ca629766e2c52524d8d8ffa376e96dd3b10207f..54093abd75d7b3c2f0bdf58680a300ff4704bb30 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
+@@ -6,6 +6,7 @@
+ 
+ #ifndef _ROPARAMETERIXEDIID_H
+ #define _ROPARAMETERIXEDIID_H
++#include "win32metadata_annotations.h"
+ 
+ #ifdef _CONTRACT_GEN
+ #include <nt.h>
+@@ -65,6 +66,8 @@ struct IRoMetaDataLocator
+     ) const = 0;
+ };
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ RoGetParameterizedTypeInstanceIID(
+     UINT32 nameElementCount,
+@@ -74,11 +77,15 @@ RoGetParameterizedTypeInstanceIID(
+     _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(void)
+ RoFreeParameterizedTypeExtra(
+     _In_ ROPARAMIIDHANDLE extra
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(PCSTR)
+ RoParameterizedTypeExtraGetTypeSignature(
+     _In_ ROPARAMIIDHANDLE extra
