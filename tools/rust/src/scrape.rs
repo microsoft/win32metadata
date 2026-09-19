@@ -49,6 +49,8 @@ pub struct Options {
     archs: Vec<String>,
     scopes: Vec<String>,
     scope_headers: Vec<String>,
+    symbols: Vec<String>,
+    constants: Vec<String>,
     namespace: Option<String>,
     assembly_name: Option<String>,
     assembly_version: Option<[u16; 4]>,
@@ -81,6 +83,8 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--arch" => options.archs.push(args.value(&option)?),
             "--scope" => options.scopes.push(args.value(&option)?),
             "--scope-header" => options.scope_headers.push(args.value(&option)?),
+            "--symbol" => options.symbols.push(args.value(&option)?),
+            "--constant" => options.constants.push(args.value(&option)?),
             "--namespace" => set_once(&mut options.namespace, args.value(&option)?, &option)?,
             "--assembly-name" => {
                 set_once(&mut options.assembly_name, args.value(&option)?, &option)?
@@ -127,6 +131,10 @@ fn validate(options: &Options) -> Result<(), String> {
         return Err("at least one `--include <dir>` is required".to_string());
     }
     required(options.output.as_ref(), "--output")?;
+
+    if !options.symbols.is_empty() && !options.constants.is_empty() {
+        return Err("`--symbol` and `--constant` cannot be combined".to_string());
+    }
 
     for name in &options.archs {
         if Arch::known(name).is_none() {
@@ -331,6 +339,8 @@ fn build_clang(options: &Options) -> Result<Clang, String> {
     for header in &options.scope_headers {
         builder.scope_header(header);
     }
+    builder.symbols(&options.symbols);
+    builder.constants(&options.constants);
     builder.resolution_default();
     builder.namespace(namespace(options));
     Ok(builder)
@@ -533,7 +543,9 @@ pub fn help_text() -> &'static str {
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
     [--scope <path-segment>]... \\
-    [--scope-header <header>]... \\
+    [--scope-header <header>]... \
+    [--symbol <name>]... \\
+    [--constant <name>]... \\
     [--namespace <root>] \\
     [--assembly-name <name>] \\
     [--assembly-version <A.B.C.D>] \\
@@ -551,6 +563,10 @@ pub fn help_text() -> &'static str {
                 Repeatable. Defaults to shared and um.
   --scope-header
                 Header stem whose declarations are emitted unconditionally. Repeatable.
+  --symbol      Exact source function to emit. Repeatable. When present, functions not
+                named here and unrelated declarations are omitted.
+  --constant    Exact source-owned loose constant to emit. Repeatable. When present,
+                functions, types, and unselected constants are omitted.
   --namespace   Root namespace for emitted declarations. Defaults to Windows.Win32.
   --assembly-name
                 Output assembly name. Defaults to the --output file stem.
@@ -694,6 +710,10 @@ mod tests {
             "sample",
             "--scope-header",
             "SampleApi",
+            "--symbol",
+            "GetSample",
+            "--symbol",
+            "SetSample",
             "--namespace",
             "Contoso.Api",
             "--assembly-name",
@@ -704,6 +724,7 @@ mod tests {
         .unwrap();
         assert_eq!(scopes(&options), vec!["sample"]);
         assert_eq!(options.scope_headers, vec!["SampleApi"]);
+        assert_eq!(options.symbols, vec!["GetSample", "SetSample"]);
         assert_eq!(namespace(&options), "Contoso.Api");
         assert_eq!(assembly_name(&options).unwrap(), "Contoso.Metadata");
         assert_eq!(options.assembly_version, Some([1, 2, 3, 4]));
@@ -715,6 +736,22 @@ mod tests {
             let error = parse_with(&["--assembly-version", value]).unwrap_err();
             assert!(error.contains("expected A.B.C.D"), "{error}");
         }
+    }
+
+    #[test]
+    fn symbol_and_constant_selection_are_mutually_exclusive() {
+        let error =
+            parse_with(&["--symbol", "GetSample", "--constant", "ERROR_SAMPLE"]).unwrap_err();
+        assert!(
+            error.contains("`--symbol` and `--constant` cannot be combined"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    fn repeated_constants_parse() {
+        let options = parse_with(&["--constant", "ERROR_ONE", "--constant", "ERROR_TWO"]).unwrap();
+        assert_eq!(options.constants, vec!["ERROR_ONE", "ERROR_TWO"]);
     }
 
     #[test]
