@@ -1,0 +1,59 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMAPIbuf.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMAPIbuf.h
+index 8316cf6b7e87c3f317affc7d6961948e543567cf..c1335b01faf5204edd1c41d613c9478281c1cbc5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMAPIbuf.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMAPIbuf.h
+@@ -28,6 +28,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -40,27 +41,35 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferAllocate(
+     _In_ DWORD ByteCount,
+-    _Outptr_result_bytebuffer_(ByteCount) LPVOID * Buffer
++    _Win32_RAIIFree_(NetApiBufferFree) _Outptr_result_bytebuffer_(ByteCount) LPVOID * Buffer
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferFree (
+     _Frees_ptr_opt_ LPVOID Buffer
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferReallocate(
+     _Frees_ptr_opt_ LPVOID OldBuffer,
+     _In_ DWORD NewByteCount,
+-    _Outptr_result_bytebuffer_(NewByteCount) LPVOID * NewBuffer
++    _Win32_RAIIFree_(NetApiBufferFree) _Outptr_result_bytebuffer_(NewByteCount) LPVOID * NewBuffer
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferSize(
+@@ -91,6 +100,8 @@ NetapipBufferAllocate (                 // Internal Function
+ #pragma region Desktop Family or OneCore Family Or Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferFree (

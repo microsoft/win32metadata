@@ -1,0 +1,71 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
+@@ -33,6 +33,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -91,7 +92,7 @@ extern "C" {
+ 
+ 
+ 
+-typedef struct _AT_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _AT_INFO {
+     DWORD_PTR   JobTime;
+     DWORD   DaysOfMonth;
+     UCHAR   DaysOfWeek;
+@@ -99,7 +100,7 @@ typedef struct _AT_INFO {
+     LPWSTR  Command;
+ } AT_INFO, *PAT_INFO, *LPAT_INFO;
+ 
+-typedef struct _AT_ENUM {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _AT_ENUM {
+     DWORD   JobId;
+     DWORD_PTR   JobTime;
+     DWORD   DaysOfMonth;
+@@ -108,6 +109,7 @@ typedef struct _AT_ENUM {
+     LPWSTR  Command;
+ } AT_ENUM, *PAT_ENUM, *LPAT_ENUM;
+ 
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetScheduleJobAdd(
+     IN      LPCWSTR         Servername  OPTIONAL,
+@@ -115,6 +117,7 @@ NetScheduleJobAdd(
+     OUT     LPDWORD         JobId
+     );
+ 
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetScheduleJobDel(
+     IN      LPCWSTR         Servername  OPTIONAL,
+@@ -122,21 +125,23 @@ NetScheduleJobDel(
+     IN      DWORD           MaxJobId
+     );
+ 
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetScheduleJobEnum(
+     IN      LPCWSTR         Servername              OPTIONAL,
+-    OUT     LPBYTE *        PointerToBuffer,
++    OUT     _Win32_RAIIFree_(NetApiBufferFree) LPBYTE *        PointerToBuffer,
+     IN      DWORD           PrefferedMaximumLength,
+     OUT     LPDWORD         EntriesRead,
+     OUT     LPDWORD         TotalEntries,
+     IN OUT  LPDWORD         ResumeHandle
+     );
+ 
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetScheduleJobGetInfo(
+     IN      LPCWSTR         Servername              OPTIONAL,
+     IN      DWORD           JobId,
+-    OUT     LPBYTE *        PointerToBuffer
++    OUT     _Win32_RAIIFree_(NetApiBufferFree) LPBYTE *        PointerToBuffer
+     );
+ 
+ #ifdef __cplusplus
