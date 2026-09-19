@@ -88,7 +88,7 @@ dependencies = [
 [[package]]
 name = "windows-clang"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 dependencies = [
  "clang-sys",
  "proc-macro2",
@@ -103,7 +103,7 @@ dependencies = [
 [[package]]
 name = "windows-default"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 
 [[package]]
 name = "windows-link"
@@ -114,17 +114,17 @@ checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
 [[package]]
 name = "windows-link"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 
 [[package]]
 name = "windows-metadata"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 
 [[package]]
 name = "windows-rdl"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -136,7 +136,7 @@ dependencies = [
 [[package]]
 name = "windows-threading"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=c0011aef2a399d6a6f8021829663ccc2438a7406#c0011aef2a399d6a6f8021829663ccc2438a7406"
+source = "git+https://github.com/jevansaks/windows-rs?rev=59bcbd72d4d9e5f158161e3055b80b1a3883df84#59bcbd72d4d9e5f158161e3055b80b1a3883df84"
 dependencies = [
  "windows-link 0.100.0",
 ]
