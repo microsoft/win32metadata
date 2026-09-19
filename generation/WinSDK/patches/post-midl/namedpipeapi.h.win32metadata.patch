@@ -68,18 +68,17 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -92,6 +105,10 @@ TransactNamedPipe(
+@@ -92,6 +105,9 @@ TransactNamedPipe(
  
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +_Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
-+_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")
++_Win32_RAIIFree_(CloseHandle, INVALID_HANDLE_VALUE)
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -110,6 +127,8 @@ CreateNamedPipeW(
+@@ -110,6 +126,8 @@ CreateNamedPipeW(
  #define CreateNamedPipe  CreateNamedPipeW
  #endif
  
@@ -88,7 +87,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -128,6 +147,8 @@ WaitNamedPipeW(
+@@ -128,6 +146,8 @@ WaitNamedPipeW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -97,7 +96,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -143,6 +164,8 @@ GetNamedPipeClientComputerNameW(
+@@ -143,6 +163,8 @@ GetNamedPipeClientComputerNameW(
  #define GetNamedPipeClientComputerName  GetNamedPipeClientComputerNameW
  #endif
  
@@ -106,7 +105,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINADVAPI
  _Must_inspect_result_
  BOOL
-@@ -156,6 +179,8 @@ ImpersonateNamedPipeClient(
+@@ -156,6 +178,8 @@ ImpersonateNamedPipeClient(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -115,7 +114,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -167,6 +192,8 @@ GetNamedPipeInfo(
+@@ -167,6 +191,8 @@ GetNamedPipeInfo(
      _Out_opt_ LPDWORD lpMaxInstances
      );
  
@@ -124,7 +123,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -190,6 +217,8 @@ GetNamedPipeHandleStateW(
+@@ -190,6 +216,8 @@ GetNamedPipeHandleStateW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
