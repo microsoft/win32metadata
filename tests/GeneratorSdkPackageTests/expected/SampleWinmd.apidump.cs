@@ -6,6 +6,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 using System.Runtime.InteropServices;
+using Windows.Win32.Foundation.Metadata;
 
 namespace Sample.Api;
 
@@ -14,6 +15,7 @@ public sealed class Apis
 	public const uint SAMPLE_MODE_EXTERNAL = 3758096385u;
 
 	[DllImport ("", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false)]
+	[SupportedOSPlatform ("windows10.0.19041.662")]
 	public static extern int SampleAdd ([In] int left, [In] int right);
 }
 

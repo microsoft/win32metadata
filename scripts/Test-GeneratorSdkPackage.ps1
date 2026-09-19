@@ -71,6 +71,9 @@ if ($actualText -notmatch "public const uint SAMPLE_MODE_EXTERNAL\s*=\s*37580963
 if ($actualText -notmatch '\[AssociatedConstant\s*\(\s*"SAMPLE_MODE_EXTERNAL"\s*\)\]\s*public enum SAMPLE_MODE : uint') {
     throw "The source association was not preserved on SAMPLE_MODE."
 }
+if ($actualText -notmatch '\[SupportedOSPlatform\s*\(\s*"windows10\.0\.19041\.662"\s*\)\][\s\S]*?SampleAdd') {
+    throw "The fixed Windows 10 build availability was not emitted on SampleAdd."
+}
 if ($actualText -match "SAMPLE_MODE_EXTERNAL_VALUE|DEPENDENCY_NOISE|DependencyShouldNotEmit") {
     throw "Unrelated dependency declarations were emitted."
 }

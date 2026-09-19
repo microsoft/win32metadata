@@ -1,9 +1,9 @@
 #pragma once
 
 #include "DependencyConstants.h"
+#include "win32metadata_annotations.h"
 
-enum __attribute__((annotate("win32metadata:associated_constant=SAMPLE_MODE_EXTERNAL")))
-    SAMPLE_MODE : unsigned long
+enum _Win32_AssociatedConstant_(SAMPLE_MODE_EXTERNAL) SAMPLE_MODE : unsigned long
 {
     SAMPLE_MODE_NONE = 0,
     SAMPLE_MODE_FAST = 1,
@@ -22,4 +22,4 @@ public:
     void* value;
 };
 
-extern "C" int SampleAdd(int left, int right);
+extern "C" _Windows_SupportedOS_19041_662_ int SampleAdd(int left, int right);

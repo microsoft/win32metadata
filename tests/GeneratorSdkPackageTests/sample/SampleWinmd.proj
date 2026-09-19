@@ -11,6 +11,7 @@
   <ItemGroup>
     <Partition Include="main.cpp"/>
     <WinmdIncludeDir Include="$(MSBuildProjectDirectory)"/>
+    <WinmdIncludeDir Include="$(MSBuildProjectDirectory)\..\..\..\generation\WinSDK\AdditionalHeaders"/>
     <WinmdScopeHeader Include="SampleApi"/>
   </ItemGroup>
 </Project>

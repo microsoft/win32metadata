@@ -63,6 +63,8 @@
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.18362")
 #define _Windows_SupportedOS_19041_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.19041")
+#define _Windows_SupportedOS_19041_662_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.19041.662")
 #define _Windows_SupportedOS_Server2000_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windowsserver2000")
 #define _Windows_SupportedOS_Server2003_ \
