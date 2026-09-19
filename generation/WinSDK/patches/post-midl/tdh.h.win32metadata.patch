@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
+index 8842ce318f9f43d525ed149d3f1cc17de9aa3f80..11a1fe90e10c6c350cb954dff16c58ec6266ad66 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
+@@ -19,6 +19,7 @@ Abstract:
+ #ifndef __TDH_H__
+ #define __TDH_H__
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -720,6 +721,7 @@ typedef struct _PAYLOAD_FILTER_PREDICATE {
+ 
+ #if (WINVER >= _WIN32_WINNT_WINBLUE)
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhCreatePayloadFilter(
+@@ -731,12 +733,14 @@ TdhCreatePayloadFilter(
+     _Outptr_result_maybenull_ PVOID* PayloadFilter
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhDeletePayloadFilter(
+     _Inout_ PVOID* PayloadFilter
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhAggregatePayloadFilters(

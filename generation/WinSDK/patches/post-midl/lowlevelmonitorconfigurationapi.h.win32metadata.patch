@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
+index 38f5623b7911ca83ed780b6ccec436461610b1eb..863ebfcee5002692bb816edf98f381e7393602f0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
+@@ -5,6 +5,7 @@
+ #define LowLevelMonitorConfigurationAPI_h
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -17,7 +18,7 @@ extern "C" {
+ 
+ #pragma pack( push, 1  )
+ 
+-typedef struct _MC_TIMING_REPORT
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MC_TIMING_REPORT
+ {
+     DWORD dwHorizontalFrequencyInHZ;
+     DWORD dwVerticalFrequencyInHZ;
+@@ -41,10 +42,16 @@ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
+     _Out_opt_ LPDWORD pdwMaximumValue
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI SetVCPFeature( HANDLE hMonitor, BYTE bVCPCode, DWORD dwNewValue );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI SaveCurrentSettings( HANDLE hMonitor );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _BOOL WINAPI GetCapabilitiesStringLength( HANDLE hMonitor, _Out_ LPDWORD pdwCapabilitiesStringLengthInCharacters );
+ 
+ _BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply 
