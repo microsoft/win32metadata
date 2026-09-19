@@ -1,0 +1,114 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fileapifromapp.h b/generation/WinSDK/RecompiledIdlHeaders/um/fileapifromapp.h
+index 8d2400eb2c..3539a19582 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fileapifromapp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fileapifromapp.h
+@@ -18,6 +18,7 @@
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ #include <fileapi.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -27,6 +28,8 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ #if ((_WIN32_WINNT >= _WIN32_WINNT_WIN10) && (NTDDI_VERSION >= NTDDI_WIN10_RS3))
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -40,6 +43,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -52,6 +57,9 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseHandle, INVALID_HANDLE_VALUE)
+ WINSTORAGEAPI
+ HANDLE
+ WINAPI
+@@ -69,6 +77,9 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseHandle, INVALID_HANDLE_VALUE)
+ WINSTORAGEAPI
+ HANDLE
+ WINAPI
+@@ -84,6 +95,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -95,6 +108,9 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
++_Win32_RAIIFree_(FindClose, INVALID_HANDLE_VALUE)
+ WINSTORAGEAPI
+ HANDLE
+ WINAPI
+@@ -111,6 +127,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -124,6 +142,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -136,6 +156,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -147,6 +169,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
+@@ -163,6 +187,8 @@ noexcept
+ #endif
+ ;
+ 
++_Windows_SupportedOS_17134_
++_Win32_SetLastError_
+ WINSTORAGEAPI
+ BOOL
+ WINAPI
