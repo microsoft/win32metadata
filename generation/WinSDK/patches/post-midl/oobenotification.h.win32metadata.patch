@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h b/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * oobenotification.h - API Set Contract for api-ms-win-oobe-notification-l1      *
+@@ -64,7 +65,7 @@ _Check_return_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+-RegisterWaitUntilOOBECompleted(
++_Win32_SetLastError_ RegisterWaitUntilOOBECompleted(
+     _In_ OOBE_COMPLETED_CALLBACK OOBECompletedCallback,
+     _In_opt_ PVOID CallbackContext,
+     _Out_ PVOID* WaitHandle
+@@ -74,7 +75,7 @@ _Check_return_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+-UnregisterWaitUntilOOBECompleted(
++_Win32_SetLastError_ UnregisterWaitUntilOOBECompleted(
+     _In_ PVOID WaitHandle
+     );
+ 
