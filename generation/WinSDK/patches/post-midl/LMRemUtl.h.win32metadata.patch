@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
+index 574d8faaf86c4a29620838552f80217b5d897294..997e056678c112ba3f0d72f33b5284e0ab5b7dd8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
+@@ -26,6 +26,7 @@ Environment:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -57,14 +58,18 @@ typedef LPWSTR LPDESC;
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Check_return_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetRemoteTOD (
+     _In_opt_ LPCWSTR UncServerName,
+-    _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
++    _Win32_RAIIFree_(NetApiBufferFree) _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetRemoteComputerSupports(
+     IN LPCWSTR UncServerName OPTIONAL,   // Must start with "\\".
+@@ -104,7 +109,7 @@ RxRemoteApi(
+ //  Data Structures
+ //
+ 
+-typedef struct _TIME_OF_DAY_INFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TIME_OF_DAY_INFO {
+     DWORD      tod_elapsedt;
+     DWORD      tod_msecs;
+     DWORD      tod_hours;
