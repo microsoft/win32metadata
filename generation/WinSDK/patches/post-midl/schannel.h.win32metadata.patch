@@ -1,0 +1,229 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
+index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce993ba03c6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
+@@ -22,6 +22,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -147,14 +148,14 @@ typedef struct _SecPkgContext_ClientCertPolicyResult
+ } SecPkgContext_ClientCertPolicyResult, *PSecPkgContext_ClientCertPolicyResult;
+ 
+ 
+-typedef struct _SecPkgContext_IssuerListInfoEx
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_IssuerListInfoEx
+ {
+     PCERT_NAME_BLOB   	aIssuers;
+     DWORD           	cIssuers;
+ } SecPkgContext_IssuerListInfoEx, *PSecPkgContext_IssuerListInfoEx;
+ 
+ 
+-typedef struct _SecPkgContext_ConnectionInfo
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ConnectionInfo
+ {
+     DWORD   dwProtocol;
+     ALG_ID  aiCipher;
+@@ -183,7 +184,7 @@ typedef struct _SecPkgContext_ConnectionInfoEx
+ 
+ #define SECPKGCONTEXT_CIPHERINFO_V1 1
+ 
+-typedef struct _SecPkgContext_CipherInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _SecPkgContext_CipherInfo
+ {
+ 
+     DWORD dwVersion;
+@@ -205,7 +206,7 @@ typedef struct _SecPkgContext_CipherInfo
+ 
+ 
+ 
+-typedef struct _SecPkgContext_EapKeyBlock
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_EapKeyBlock
+ {
+     BYTE    rgbKeys[128];
+     BYTE    rgbIVs[64];
+@@ -222,7 +223,7 @@ typedef struct _SecPkgContext_MappedCredAttr
+ // Flag values for SecPkgContext_SessionInfo
+ #define SSL_SESSION_RECONNECT   1
+ 
+-typedef struct _SecPkgContext_SessionInfo
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_SessionInfo
+ {
+     DWORD dwFlags;
+     DWORD cbSessionId;
+@@ -230,14 +231,14 @@ typedef struct _SecPkgContext_SessionInfo
+ } SecPkgContext_SessionInfo, *PSecPkgContext_SessionInfo;
+ 
+ 
+-typedef struct _SecPkgContext_SessionAppData
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_SessionAppData
+ {
+     DWORD dwFlags;
+     DWORD cbAppData;
+     _Field_size_bytes_(cbAppData) PBYTE pbAppData;
+ } SecPkgContext_SessionAppData, *PSecPkgContext_SessionAppData;
+ 
+-typedef struct _SecPkgContext_EapPrfInfo
++typedef struct _Windows_SupportedOS_Server2008_ _SecPkgContext_EapPrfInfo
+ {
+     DWORD dwVersion;
+     DWORD cbPrfData;
+@@ -245,7 +246,7 @@ typedef struct _SecPkgContext_EapPrfInfo
+ } SecPkgContext_EapPrfInfo, *PSecPkgContext_EapPrfInfo;
+ 
+ 
+-typedef struct _SecPkgContext_SupportedSignatures
++typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_SupportedSignatures
+ {
+     WORD cSignatureAndHashAlgorithms;
+ 
+@@ -316,7 +317,7 @@ typedef struct _SecPkgContext_UiInfo
+     HWND    hParentWindow;
+ } SecPkgContext_UiInfo, *PSecPkgContext_UiInfo;
+ 
+-typedef struct _SecPkgContext_EarlyStart
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_EarlyStart
+ {
+     DWORD dwEarlyStartFlags;
+ } SecPkgContext_EarlyStart, *PSecPkgContext_EarlyStart;
+@@ -324,7 +325,7 @@ typedef struct _SecPkgContext_EarlyStart
+ // Flag values for SecPkgContext_EarlyStart
+ #define ENABLE_TLS_CLIENT_EARLY_START           0x00000001
+ 
+-typedef struct _SecPkgContext_KeyingMaterialInfo
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_KeyingMaterialInfo
+ {
+     WORD cbLabel;           // Disambiguating ASCII label length, in bytes, greater than 0.
+     LPSTR pszLabel;         // Disambiguating ASCII label, NUL terminator will be removed by schannel.
+@@ -333,7 +334,7 @@ typedef struct _SecPkgContext_KeyingMaterialInfo
+     DWORD cbKeyingMaterial; // Requested keying material length, in bytes, greater than 0.
+ } SecPkgContext_KeyingMaterialInfo, * PSecPkgContext_KeyingMaterialInfo;
+ 
+-typedef struct _SecPkgContext_KeyingMaterial
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_KeyingMaterial
+ {
+     DWORD cbKeyingMaterial; // Exported keying material length, in bytes.
+     _Field_size_bytes_(cbKeyingMaterial) PBYTE pbKeyingMaterial; // Exported keying material.
+@@ -384,7 +385,7 @@ typedef struct _SecPkgContext_CertificateValidationResult
+ 
+ struct _HMAPPER;
+ 
+-typedef struct _SCHANNEL_CRED
++typedef struct _Windows_SupportedOS_Windows81_ _SCHANNEL_CRED
+ {
+     DWORD           dwVersion;      // always SCHANNEL_CRED_VERSION
+     DWORD           cCreds;
+@@ -510,7 +511,7 @@ typedef struct _SUBSCRIBE_GENERIC_TLS_EXTENSION
+ #define SCH_CRED_MAX_SUPPORTED_ALGS     256
+ #define SCH_CRED_MAX_SUPPORTED_CERTS    100
+ 
+-typedef struct _SCHANNEL_CERT_HASH
++typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SCHANNEL_CERT_HASH
+ {
+     DWORD           dwLength;
+     DWORD           dwFlags;
+@@ -518,7 +519,7 @@ typedef struct _SCHANNEL_CERT_HASH
+     BYTE            ShaHash[20];
+ } SCHANNEL_CERT_HASH, *PSCHANNEL_CERT_HASH;
+ 
+-typedef struct _SCHANNEL_CERT_HASH_STORE
++typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SCHANNEL_CERT_HASH_STORE
+ {
+     DWORD           dwLength;
+     DWORD           dwFlags;
+@@ -692,7 +693,7 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
+ 
+ 
+ // Alert token structure.
+-typedef struct _SCHANNEL_ALERT_TOKEN
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_ALERT_TOKEN
+ {
+     DWORD   dwTokenType;            // SCHANNEL_ALERT
+     DWORD   dwAlertType;
+@@ -736,14 +737,14 @@ typedef struct _SCHANNEL_ALERT_TOKEN
+ #define SSL_SESSION_DISABLE_RECONNECTS  2
+ 
+ // Session control token structure.
+-typedef struct _SCHANNEL_SESSION_TOKEN
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_SESSION_TOKEN
+ {
+     DWORD   dwTokenType;        // SCHANNEL_SESSION
+     DWORD   dwFlags;
+ } SCHANNEL_SESSION_TOKEN;
+ 
+ 
+-typedef struct _SCHANNEL_CLIENT_SIGNATURE
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_CLIENT_SIGNATURE
+ {
+     DWORD       cbLength;
+     ALG_ID      aiHash;
+@@ -887,6 +888,7 @@ typedef BOOL
+     LPSTR  pszTargetName,
+     DWORD  dwFlags);
+ 
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ BOOL
+ WINAPI
+ SslEmptyCacheA(_In_ LPSTR  pszTargetName,
+@@ -897,6 +899,7 @@ typedef BOOL
+     LPWSTR pszTargetName,
+     DWORD  dwFlags);
+ 
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ BOOL
+ WINAPI
+ SslEmptyCacheW(_In_ LPWSTR pszTargetName,
+@@ -961,7 +964,7 @@ typedef struct _SCH_CRED_SECRET_CAPI
+ // Structures for use with the
+ // NT 4.0 SP3 Schannel interface,
+ // do not use.
+-typedef struct _SCH_CRED_SECRET_PRIVKEY
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCH_CRED_SECRET_PRIVKEY
+ {
+     DWORD           dwType;       // SCHANNEL_SECRET_PRIVKEY
+     PBYTE           pPrivateKey;   // Der encoded private key
+@@ -974,7 +977,7 @@ typedef struct _SCH_CRED_SECRET_PRIVKEY
+ // Structures for use with the
+ // NT 4.0 SP3 Schannel interface,
+ // do not use.
+-typedef struct _SCH_CRED_PUBLIC_CERTCHAIN
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCH_CRED_PUBLIC_CERTCHAIN
+ {
+     DWORD       dwType;
+     DWORD       cbCertChain;
+@@ -990,7 +993,7 @@ typedef struct _PctPublicKey
+     UCHAR pKey[1];
+ } PctPublicKey;
+ 
+-typedef struct _X509Certificate {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _X509Certificate {
+     DWORD           Version;
+     DWORD           SerialNumber[4];
+     ALG_ID          SignatureAlgorithm;
+@@ -1024,6 +1027,7 @@ SslGenerateRandomBits(
+ 
+ // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
+ // to get the same functionality instead.
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ BOOL
+ WINAPI
+ SslCrackCertificate(
+@@ -1035,6 +1039,7 @@ SslCrackCertificate(
+ 
+ // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
+ // to get the same functionality instead.
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ VOID
+ WINAPI
+ SslFreeCertificate(
+@@ -1087,6 +1092,7 @@ typedef SECURITY_STATUS
+ );
+ 
+ EXTERN_C
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SECURITY_STATUS
+ WINAPI
+ SslGetServerIdentity(
