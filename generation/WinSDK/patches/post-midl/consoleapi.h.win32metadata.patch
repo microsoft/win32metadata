@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
-index 3754ec4..fbf785a 100644
+index 3754ec4..480cc17 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 @@ -17,6 +17,7 @@
@@ -23,7 +23,7 @@ index 3754ec4..fbf785a 100644
      ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE = 2
  } ALLOC_CONSOLE_RESULT, *PALLOC_CONSOLE_RESULT;
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.26100")
++_Windows_SupportedOS_26100_
  WINBASEAPI
  HRESULT
  WINAPI
@@ -272,7 +272,7 @@ index 3754ec4..fbf785a 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
  
-+_WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.26100")
++_Windows_SupportedOS_26100_
  WINBASEAPI
  HRESULT
  WINAPI
