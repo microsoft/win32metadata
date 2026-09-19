@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
+index 56cfb2b96d78bf86fff73950e3355ff7865f2ac5..e68e567ca2f287bf0aa6a213cbfc3deb77879ae3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
+@@ -32,6 +32,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -60,6 +61,8 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseAdd (
+     _In_opt_ LPTSTR servername,
+@@ -74,6 +77,8 @@ NetUseAdd (
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseDel (
+     _In_opt_ LMSTR  UncServerName OPTIONAL,
+@@ -81,6 +86,8 @@ NetUseDel (
+     _In_ DWORD ForceLevelFlags
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseEnum (
+     _In_opt_ LMSTR  UncServerName,
+@@ -110,7 +117,7 @@ NetUseGetInfo (
+ //  Data Structures
+ //
+ 
+-typedef struct _USE_INFO_0 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _USE_INFO_0 {
+     LMSTR   ui0_local;
+     LMSTR   ui0_remote;
+ }USE_INFO_0, *PUSE_INFO_0, *LPUSE_INFO_0;

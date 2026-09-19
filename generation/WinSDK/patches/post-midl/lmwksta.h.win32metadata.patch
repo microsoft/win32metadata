@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h b/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
+index 7191233a81d28860972a2c1dd458f2bd12677e2e..a7a0d7f79fbd23844d4499009797c19ca97c87dc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
+@@ -30,6 +30,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -52,6 +53,8 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaGetInfo (
+     _In_opt_ LMSTR   servername OPTIONAL,
+@@ -59,6 +62,8 @@ NetWkstaGetInfo (
+     _Outptr_opt_result_buffer_(_Inexpressible_("size varies with level")) OUT LPBYTE  *bufptr
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaSetInfo (
+     _In_opt_  LMSTR   servername OPTIONAL,
+@@ -67,6 +72,8 @@ NetWkstaSetInfo (
+     _Out_opt_ OUT LPDWORD parm_err OPTIONAL
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserGetInfo (
+     _In_opt_ LMSTR  reserved,
+@@ -134,7 +141,7 @@ NetWkstaTransportEnum(
+ //
+ // NetWkstaGetInfo only.  System information - guest access
+ //
+-typedef struct _WKSTA_INFO_100 {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _WKSTA_INFO_100 {
+     DWORD   wki100_platform_id;
+     LMSTR   wki100_computername;
+     LMSTR   wki100_langroup;

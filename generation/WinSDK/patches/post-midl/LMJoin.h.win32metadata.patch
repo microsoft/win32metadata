@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
+index 54ec2025de32a5a60076bd94d65133eae4621ffa..13c426e832b37b56ad55d7cf5bf36bf5c1e8c3ae 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
+@@ -27,6 +27,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #ifdef __cplusplus
+@@ -184,6 +185,8 @@ NetJoinDomain(
+     _In_ DWORD   fJoinOptions
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetUnjoinDomain(
+@@ -193,6 +196,8 @@ NetUnjoinDomain(
+     _In_ DWORD   fUnjoinOptions
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRenameMachineInDomain(
+@@ -238,6 +243,8 @@ NetGetJoinableOUs(
+ 
+ #define NET_IGNORE_UNSUPPORTED_FLAGS  0x01
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetAddAlternateComputerName(
