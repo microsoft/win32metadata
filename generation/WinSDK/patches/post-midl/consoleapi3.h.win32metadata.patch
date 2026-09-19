@@ -1,0 +1,315 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
+@@ -16,6 +16,7 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
++#include <win32metadata_annotations.h>
+ #include <minwinbase.h>
+ 
+ #include <wincontypes.h>
+@@ -32,6 +33,8 @@ extern "C" {
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -41,6 +44,8 @@ GetNumberOfConsoleMouseButtons(
+ 
+ #if (_WIN32_WINNT >= 0x0500)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ COORD
+ WINAPI
+@@ -49,6 +54,8 @@ GetConsoleFontSize(
+     _In_ DWORD nFont
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -60,7 +67,7 @@ GetCurrentConsoleFont(
+ 
+ #ifndef NOGDI
+ 
+-typedef struct _CONSOLE_FONT_INFOEX {
++typedef struct _Windows_SupportedOS_WindowsVista_ _CONSOLE_FONT_INFOEX {
+     ULONG cbSize;
+     DWORD nFont;
+     COORD dwFontSize;
+@@ -69,6 +76,8 @@ typedef struct _CONSOLE_FONT_INFOEX {
+     WCHAR FaceName[LF_FACESIZE];
+ } CONSOLE_FONT_INFOEX, *PCONSOLE_FONT_INFOEX;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -78,6 +87,8 @@ GetCurrentConsoleFontEx(
+     _Out_ PCONSOLE_FONT_INFOEX lpConsoleCurrentFontEx
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -99,12 +110,39 @@ SetCurrentConsoleFontEx(
+ #define CONSOLE_MOUSE_SELECTION         0x0004   // selecting with mouse
+ #define CONSOLE_MOUSE_DOWN              0x0008   // mouse is down
+ 
+-typedef struct _CONSOLE_SELECTION_INFO {
+-    DWORD dwFlags;
++#ifdef WIN32METADATA
++#pragma push_macro("CONSOLE_NO_SELECTION")
++#pragma push_macro("CONSOLE_SELECTION_IN_PROGRESS")
++#pragma push_macro("CONSOLE_SELECTION_NOT_EMPTY")
++#pragma push_macro("CONSOLE_MOUSE_SELECTION")
++#pragma push_macro("CONSOLE_MOUSE_DOWN")
++#undef CONSOLE_NO_SELECTION
++#undef CONSOLE_SELECTION_IN_PROGRESS
++#undef CONSOLE_SELECTION_NOT_EMPTY
++#undef CONSOLE_MOUSE_SELECTION
++#undef CONSOLE_MOUSE_DOWN
++enum [[clang::flag_enum]] CONSOLE_SELECTION_FLAGS : DWORD {
++    CONSOLE_NO_SELECTION = 0x0000,
++    CONSOLE_SELECTION_IN_PROGRESS = 0x0001,
++    CONSOLE_SELECTION_NOT_EMPTY = 0x0002,
++    CONSOLE_MOUSE_SELECTION = 0x0004,
++    CONSOLE_MOUSE_DOWN = 0x0008,
++};
++#pragma pop_macro("CONSOLE_MOUSE_DOWN")
++#pragma pop_macro("CONSOLE_MOUSE_SELECTION")
++#pragma pop_macro("CONSOLE_SELECTION_NOT_EMPTY")
++#pragma pop_macro("CONSOLE_SELECTION_IN_PROGRESS")
++#pragma pop_macro("CONSOLE_NO_SELECTION")
++#endif
++
++typedef struct _Windows_SupportedOS_WindowsXP_ _CONSOLE_SELECTION_INFO {
++    _Win32_AssociatedEnum_(CONSOLE_SELECTION_FLAGS) DWORD dwFlags;
+     COORD dwSelectionAnchor;
+     SMALL_RECT srSelection;
+ } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -118,13 +156,24 @@ GetConsoleSelectionInfo(
+ 
+ #define HISTORY_NO_DUP_FLAG 0x1
+ 
+-typedef struct _CONSOLE_HISTORY_INFO {
++#ifdef WIN32METADATA
++#pragma push_macro("HISTORY_NO_DUP_FLAG")
++#undef HISTORY_NO_DUP_FLAG
++enum [[clang::flag_enum]] CONSOLE_HISTORY_FLAGS : DWORD {
++    HISTORY_NO_DUP_FLAG = 0x1,
++};
++#pragma pop_macro("HISTORY_NO_DUP_FLAG")
++#endif
++
++typedef struct _Windows_SupportedOS_WindowsVista_ _CONSOLE_HISTORY_INFO {
+     UINT cbSize;
+     UINT HistoryBufferSize;
+     UINT NumberOfHistoryBuffers;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(CONSOLE_HISTORY_FLAGS) DWORD dwFlags;
+ } CONSOLE_HISTORY_INFO, *PCONSOLE_HISTORY_INFO;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -132,6 +181,8 @@ GetConsoleHistoryInfo(
+     _Out_ PCONSOLE_HISTORY_INFO lpConsoleHistoryInfo
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -142,25 +193,56 @@ SetConsoleHistoryInfo(
+ #define CONSOLE_FULLSCREEN 1            // fullscreen console
+ #define CONSOLE_FULLSCREEN_HARDWARE 2   // console owns the hardware
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("CONSOLE_FULLSCREEN")
++#pragma push_macro("CONSOLE_FULLSCREEN_HARDWARE")
++#undef CONSOLE_FULLSCREEN
++#undef CONSOLE_FULLSCREEN_HARDWARE
++enum [[clang::flag_enum]] CONSOLE_DISPLAY_MODE_FLAGS : DWORD {
++    CONSOLE_FULLSCREEN = 1,
++    CONSOLE_FULLSCREEN_HARDWARE = 2,
++};
++#pragma pop_macro("CONSOLE_FULLSCREEN_HARDWARE")
++#pragma pop_macro("CONSOLE_FULLSCREEN")
++#endif
++
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+ GetConsoleDisplayMode(
+-    _Out_ LPDWORD lpModeFlags
++    _Out_ _Win32_AssociatedEnum_(CONSOLE_DISPLAY_MODE_FLAGS) LPDWORD lpModeFlags
+     );
+ 
+ #define CONSOLE_FULLSCREEN_MODE 1
+ #define CONSOLE_WINDOWED_MODE 2
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("CONSOLE_FULLSCREEN_MODE")
++#pragma push_macro("CONSOLE_WINDOWED_MODE")
++#undef CONSOLE_FULLSCREEN_MODE
++#undef CONSOLE_WINDOWED_MODE
++enum [[clang::flag_enum]] CONSOLE_DISPLAY_MODE : DWORD {
++    CONSOLE_FULLSCREEN_MODE = 1,
++    CONSOLE_WINDOWED_MODE = 2,
++};
++#pragma pop_macro("CONSOLE_WINDOWED_MODE")
++#pragma pop_macro("CONSOLE_FULLSCREEN_MODE")
++#endif
++
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+ SetConsoleDisplayMode(
+     _In_ HANDLE hConsoleOutput,
+-    _In_ DWORD dwFlags,
++    _In_ _Win32_AssociatedEnum_(CONSOLE_DISPLAY_MODE) DWORD dwFlags,
+     _Out_opt_ PCOORD lpNewScreenBufferDimensions
+     );
+ 
++_Windows_SupportedOS_Windows2000_
+ WINBASEAPI
+ HWND
+ APIENTRY
+@@ -172,6 +254,8 @@ GetConsoleWindow(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -181,6 +265,8 @@ AddConsoleAliasA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -196,6 +282,8 @@ AddConsoleAliasW(
+ #define AddConsoleAlias  AddConsoleAliasA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -206,6 +294,8 @@ GetConsoleAliasA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -222,6 +312,7 @@ GetConsoleAliasW(
+ #define GetConsoleAlias  GetConsoleAliasA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -229,6 +320,7 @@ GetConsoleAliasesLengthA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Windows_SupportedOS_Windows2000_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -242,6 +334,7 @@ GetConsoleAliasesLengthW(
+ #define GetConsoleAliasesLength  GetConsoleAliasesLengthA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -249,6 +342,7 @@ GetConsoleAliasExesLengthA(
+     VOID
+     );
+ 
++_Windows_SupportedOS_Windows2000_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -262,6 +356,8 @@ GetConsoleAliasExesLengthW(
+ #define GetConsoleAliasExesLength  GetConsoleAliasExesLengthA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -271,6 +367,8 @@ GetConsoleAliasesA(
+     _In_ LPSTR ExeName
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -286,6 +384,8 @@ GetConsoleAliasesW(
+ #define GetConsoleAliases  GetConsoleAliasesA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -294,6 +394,8 @@ GetConsoleAliasExesA(
+     _In_ DWORD ExeNameBufferLength
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -398,6 +500,8 @@ GetConsoleCommandHistoryW(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY

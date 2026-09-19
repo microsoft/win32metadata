@@ -1,0 +1,185 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
+index 8618aa1a48..9638e2ab1d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
+@@ -17,6 +17,7 @@
+ 
+ #include <SpecStrings.h>
+ #include <verrsrc.h>
++#include <win32metadata_annotations.h>
+ 
+ 
+ #ifdef __cplusplus
+@@ -31,10 +32,12 @@ extern "C" {
+ 
+ /* ----- Function prototypes ----- */
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(VER_FIND_FILE_STATUS)
+ DWORD
+ APIENTRY
+ VerFindFileA(
+-        _In_                         DWORD uFlags,
++        _Win32_AssociatedEnum_(VER_FIND_FILE_FLAGS) _In_                         DWORD uFlags,
+         _In_                         LPCSTR szFileName,
+         _In_opt_                     LPCSTR szWinDir,
+         _In_                         LPCSTR szAppDir,
+@@ -43,10 +46,12 @@ VerFindFileA(
+         _Out_writes_(*puDestDirLen)  LPSTR szDestDir,
+         _Inout_                      PUINT puDestDirLen
+         );
++_Windows_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(VER_FIND_FILE_STATUS)
+ DWORD
+ APIENTRY
+ VerFindFileW(
+-        _In_                         DWORD uFlags,
++        _Win32_AssociatedEnum_(VER_FIND_FILE_FLAGS) _In_                         DWORD uFlags,
+         _In_                         LPCWSTR szFileName,
+         _In_opt_                     LPCWSTR szWinDir,
+         _In_                         LPCWSTR szAppDir,
+@@ -71,10 +76,12 @@ VerFindFileW(
+ 
+ #ifndef RC_INVOKED
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(VER_INSTALL_FILE_STATUS)
+ DWORD
+ APIENTRY
+ VerInstallFileA(
+-        _In_                         DWORD uFlags,
++        _Win32_AssociatedEnum_(VER_INSTALL_FILE_FLAGS) _In_                         DWORD uFlags,
+         _In_                         LPCSTR szSrcFileName,
+         _In_                         LPCSTR szDestFileName,
+         _In_                         LPCSTR szSrcDir,
+@@ -83,10 +90,12 @@ VerInstallFileA(
+         _Out_writes_(*puTmpFileLen)  LPSTR szTmpFile,
+         _Inout_                      PUINT puTmpFileLen
+         );
++_Windows_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(VER_INSTALL_FILE_STATUS)
+ DWORD
+ APIENTRY
+ VerInstallFileW(
+-        _In_                         DWORD uFlags,
++        _Win32_AssociatedEnum_(VER_INSTALL_FILE_FLAGS) _In_                         DWORD uFlags,
+         _In_                         LPCWSTR szSrcFileName,
+         _In_                         LPCWSTR szDestFileName,
+         _In_                         LPCWSTR szSrcDir,
+@@ -112,6 +121,8 @@ VerInstallFileW(
+ #ifndef RC_INVOKED
+ 
+ /* Returns size of version info in bytes */
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ DWORD
+ APIENTRY
+ GetFileVersionInfoSizeA(
+@@ -119,6 +130,8 @@ GetFileVersionInfoSizeA(
+         _Out_opt_ LPDWORD lpdwHandle       /* Information for use by GetFileVersionInfo */
+         );
+ /* Returns size of version info in bytes */
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ DWORD
+ APIENTRY
+ GetFileVersionInfoSizeW(
+@@ -132,6 +145,8 @@ GetFileVersionInfoSizeW(
+ #endif // !UNICODE
+ 
+ /* Read version info into buffer */
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetFileVersionInfoA(
+@@ -141,6 +156,8 @@ GetFileVersionInfoA(
+         _Out_writes_bytes_(dwLen) LPVOID lpData            /* Buffer to place the data structure */
+         );
+ /* Read version info into buffer */
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ APIENTRY
+ GetFileVersionInfoW(
+@@ -155,20 +172,44 @@ GetFileVersionInfoW(
+ #define GetFileVersionInfo  GetFileVersionInfoA
+ #endif // !UNICODE
+ 
+-DWORD APIENTRY GetFileVersionInfoSizeExA(_In_ DWORD dwFlags, _In_ LPCSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
+-DWORD APIENTRY GetFileVersionInfoSizeExW(_In_ DWORD dwFlags, _In_ LPCWSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++DWORD APIENTRY GetFileVersionInfoSizeExA(
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
++    _Win32_AssociatedEnum_(GET_FILE_VERSION_INFO_FLAGS)
++#endif
++    _In_ DWORD dwFlags, _In_ LPCSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++DWORD APIENTRY GetFileVersionInfoSizeExW(
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
++    _Win32_AssociatedEnum_(GET_FILE_VERSION_INFO_FLAGS)
++#endif
++    _In_ DWORD dwFlags, _In_ LPCWSTR lpwstrFilename, _Out_ LPDWORD lpdwHandle);
+ #ifdef UNICODE
+ #define GetFileVersionInfoSizeEx  GetFileVersionInfoSizeExW
+ #else
+ #define GetFileVersionInfoSizeEx  GetFileVersionInfoSizeExA
+ #endif // !UNICODE
+ 
+-BOOL APIENTRY GetFileVersionInfoExA(_In_ DWORD dwFlags,
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++BOOL APIENTRY GetFileVersionInfoExA(
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
++    _Win32_AssociatedEnum_(GET_FILE_VERSION_INFO_FLAGS)
++#endif
++    _In_ DWORD dwFlags,
+                                     _In_ LPCSTR lpwstrFilename,
+                                     _Reserved_ DWORD dwHandle,
+                                     _In_ DWORD dwLen,
+                                     _Out_writes_bytes_(dwLen) LPVOID lpData);
+-BOOL APIENTRY GetFileVersionInfoExW(_In_ DWORD dwFlags,
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++BOOL APIENTRY GetFileVersionInfoExW(
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
++    _Win32_AssociatedEnum_(GET_FILE_VERSION_INFO_FLAGS)
++#endif
++    _In_ DWORD dwFlags,
+                                     _In_ LPCWSTR lpwstrFilename,
+                                     _Reserved_ DWORD dwHandle,
+                                     _In_ DWORD dwLen,
+@@ -200,6 +241,7 @@ BOOL APIENTRY GetFileVersionInfoExW(_In_ DWORD dwFlags,
+ 
+ #ifndef RC_INVOKED
+ 
++_Windows_SupportedOS_Windows2000_
+ DWORD
+ APIENTRY
+ VerLanguageNameA(
+@@ -207,6 +249,7 @@ VerLanguageNameA(
+         _Out_writes_(cchLang) LPSTR szLang,
+         _In_                  DWORD cchLang
+         );
++_Windows_SupportedOS_Windows2000_
+ DWORD
+ APIENTRY
+ VerLanguageNameW(
+@@ -220,6 +263,7 @@ VerLanguageNameW(
+ #define VerLanguageName  VerLanguageNameA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ APIENTRY
+ VerQueryValueA(
+@@ -228,6 +272,7 @@ VerQueryValueA(
+         _Outptr_result_buffer_(_Inexpressible_("buffer can be PWSTR or DWORD*")) LPVOID * lplpBuffer,
+         _Out_ PUINT puLen
+         );
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ APIENTRY
+ VerQueryValueW(

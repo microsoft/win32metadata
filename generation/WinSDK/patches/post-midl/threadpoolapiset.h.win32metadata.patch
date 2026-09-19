@@ -1,0 +1,392 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoolapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoolapiset.h
+index 830d51fbd0..259954e6b7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoolapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoolapiset.h
+@@ -15,6 +15,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
+@@ -29,6 +30,8 @@ extern "C" {
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ typedef
+ VOID
+ (WINAPI *PTP_WIN32_IO_CALLBACK)(
+@@ -42,6 +45,10 @@ VOID
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseThreadpool, 0)
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_POOL
+@@ -50,6 +57,8 @@ CreateThreadpool(
+     _Reserved_ PVOID reserved
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -58,6 +67,9 @@ SetThreadpoolThreadMaximum(
+     _In_ DWORD cthrdMost
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -66,6 +78,8 @@ SetThreadpoolThreadMinimum(
+     _In_ DWORD cthrdMic
+     );
+ 
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -74,6 +88,8 @@ SetThreadpoolStackInformation(
+     _In_ PTP_POOL_STACK_INFORMATION ptpsi
+     );
+ 
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -82,6 +98,8 @@ QueryThreadpoolStackInformation(
+     _Out_ PTP_POOL_STACK_INFORMATION ptpsi
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -89,6 +107,10 @@ CloseThreadpool(
+     _Inout_ PTP_POOL ptpp
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
++_Win32_RAIIFree_(CloseThreadpoolCleanupGroup, 0)
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_CLEANUP_GROUP
+@@ -97,6 +119,8 @@ CreateThreadpoolCleanupGroup(
+     VOID
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -106,6 +130,8 @@ CloseThreadpoolCleanupGroupMembers(
+     _Inout_opt_ PVOID pvCleanupContext
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -113,6 +139,8 @@ CloseThreadpoolCleanupGroup(
+     _Inout_ PTP_CLEANUP_GROUP ptpcg
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -121,6 +149,8 @@ SetEventWhenCallbackReturns(
+     _In_ HANDLE evt
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -130,6 +160,8 @@ ReleaseSemaphoreWhenCallbackReturns(
+     _In_ DWORD crel
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -138,14 +170,18 @@ ReleaseMutexWhenCallbackReturns(
+     _In_ HANDLE mut
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+ LeaveCriticalSectionWhenCallbackReturns(
+     _Inout_ PTP_CALLBACK_INSTANCE pci,
+-    _Inout_ PCRITICAL_SECTION pcs
++    _Inout_ _Win32_Retained_ PCRITICAL_SECTION pcs
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -154,6 +190,8 @@ FreeLibraryWhenCallbackReturns(
+     _In_ HMODULE mod
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -161,6 +199,8 @@ CallbackMayRunLong(
+     _Inout_ PTP_CALLBACK_INSTANCE pci
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -168,26 +208,34 @@ DisassociateCurrentThreadFromCallback(
+     _Inout_ PTP_CALLBACK_INSTANCE pci
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+ WINAPI
+ TrySubmitThreadpoolCallback(
+-    _In_ PTP_SIMPLE_CALLBACK pfns,
+-    _Inout_opt_ PVOID pv,
++    _In_ _Win32_Retained_ PTP_SIMPLE_CALLBACK pfns,
++    _Inout_opt_ _Win32_Retained_ PVOID pv,
+     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_WORK
+ WINAPI
+ CreateThreadpoolWork(
+-    _In_ PTP_WORK_CALLBACK pfnwk,
+-    _Inout_opt_ PVOID pv,
++    _In_ _Win32_Retained_ PTP_WORK_CALLBACK pfnwk,
++    _Inout_opt_ _Win32_Retained_ PVOID pv,
+     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -195,6 +243,8 @@ SubmitThreadpoolWork(
+     _Inout_ PTP_WORK pwk
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -203,6 +253,8 @@ WaitForThreadpoolWorkCallbacks(
+     _In_ BOOL fCancelPendingCallbacks
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -210,16 +262,21 @@ CloseThreadpoolWork(
+     _Inout_ PTP_WORK pwk
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_TIMER
+ WINAPI
+ CreateThreadpoolTimer(
+-    _In_ PTP_TIMER_CALLBACK pfnti,
+-    _Inout_opt_ PVOID pv,
++    _In_ _Win32_Retained_ PTP_TIMER_CALLBACK pfnti,
++    _Inout_opt_ _Win32_Retained_ PVOID pv,
+     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -230,6 +287,8 @@ SetThreadpoolTimer(
+     _In_opt_ DWORD msWindowLength
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -237,6 +296,8 @@ IsThreadpoolTimerSet(
+     _Inout_ PTP_TIMER pti
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -245,6 +306,8 @@ WaitForThreadpoolTimerCallbacks(
+     _In_ BOOL fCancelPendingCallbacks
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -252,16 +315,21 @@ CloseThreadpoolTimer(
+     _Inout_ PTP_TIMER pti
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_WAIT
+ WINAPI
+ CreateThreadpoolWait(
+-    _In_ PTP_WAIT_CALLBACK pfnwa,
+-    _Inout_opt_ PVOID pv,
++    _In_ _Win32_Retained_ PTP_WAIT_CALLBACK pfnwa,
++    _Inout_opt_ _Win32_Retained_ PVOID pv,
+     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -271,6 +339,8 @@ SetThreadpoolWait(
+     _In_opt_ PFILETIME pftTimeout
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -279,6 +349,8 @@ WaitForThreadpoolWaitCallbacks(
+     _In_ BOOL fCancelPendingCallbacks
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -286,17 +358,22 @@ CloseThreadpoolWait(
+     _Inout_ PTP_WAIT pwa
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Must_inspect_result_
+ PTP_IO
+ WINAPI
+ CreateThreadpoolIo(
+     _In_ HANDLE fl,
+-    _In_ PTP_WIN32_IO_CALLBACK pfnio,
+-    _Inout_opt_ PVOID pv,
++    _In_ _Win32_Retained_ PTP_WIN32_IO_CALLBACK pfnio,
++    _Inout_opt_ _Win32_Retained_ PVOID pv,
+     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -304,6 +381,8 @@ StartThreadpoolIo(
+     _Inout_ PTP_IO pio
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -311,6 +390,8 @@ CancelThreadpoolIo(
+     _Inout_ PTP_IO pio
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -319,6 +400,8 @@ WaitForThreadpoolIoCallbacks(
+     _In_ BOOL fCancelPendingCallbacks
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -332,6 +415,8 @@ CloseThreadpoolIo(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -342,6 +427,8 @@ SetThreadpoolTimerEx(
+     _In_opt_ DWORD msWindowLength
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINBASEAPI
+ BOOL
+ WINAPI

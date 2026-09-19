@@ -1,0 +1,119 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
+@@ -14,6 +14,7 @@ Abstract:
+ #define _SRRESTOREPTAPI_H
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -61,6 +62,50 @@ Abstract:
+ #define MAX_DESC                64
+ #define MAX_DESC_W              256   // longer for Whistler
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("APPLICATION_INSTALL")
++#pragma push_macro("APPLICATION_UNINSTALL")
++#pragma push_macro("DEVICE_DRIVER_INSTALL")
++#pragma push_macro("MODIFY_SETTINGS")
++#pragma push_macro("CANCELLED_OPERATION")
++#undef APPLICATION_INSTALL
++#undef APPLICATION_UNINSTALL
++#undef DEVICE_DRIVER_INSTALL
++#undef MODIFY_SETTINGS
++#undef CANCELLED_OPERATION
++enum RESTOREPOINTINFO_TYPE : DWORD {
++    APPLICATION_INSTALL = 0,
++    APPLICATION_UNINSTALL = 1,
++    DEVICE_DRIVER_INSTALL = 10,
++    MODIFY_SETTINGS = 12,
++    CANCELLED_OPERATION = 13,
++};
++#pragma pop_macro("CANCELLED_OPERATION")
++#pragma pop_macro("MODIFY_SETTINGS")
++#pragma pop_macro("DEVICE_DRIVER_INSTALL")
++#pragma pop_macro("APPLICATION_UNINSTALL")
++#pragma pop_macro("APPLICATION_INSTALL")
++
++#pragma push_macro("BEGIN_NESTED_SYSTEM_CHANGE")
++#pragma push_macro("BEGIN_SYSTEM_CHANGE")
++#pragma push_macro("END_NESTED_SYSTEM_CHANGE")
++#pragma push_macro("END_SYSTEM_CHANGE")
++#undef BEGIN_NESTED_SYSTEM_CHANGE
++#undef BEGIN_SYSTEM_CHANGE
++#undef END_NESTED_SYSTEM_CHANGE
++#undef END_SYSTEM_CHANGE
++enum RESTOREPOINTINFO_EVENT_TYPE : DWORD {
++    BEGIN_NESTED_SYSTEM_CHANGE = 102,
++    BEGIN_SYSTEM_CHANGE = 100,
++    END_NESTED_SYSTEM_CHANGE = 103,
++    END_SYSTEM_CHANGE = 101,
++};
++#pragma pop_macro("END_SYSTEM_CHANGE")
++#pragma pop_macro("END_NESTED_SYSTEM_CHANGE")
++#pragma pop_macro("BEGIN_SYSTEM_CHANGE")
++#pragma pop_macro("BEGIN_NESTED_SYSTEM_CHANGE")
++#endif
++
+ //
+ // for Millennium compatibility
+ //
+@@ -72,16 +117,16 @@ Abstract:
+ // Restore point information
+ //
+ 
+-typedef struct _RESTOREPTINFOA {
+-    DWORD   dwEventType;                // Type of Event - Begin or End
+-    DWORD   dwRestorePtType;            // Type of Restore Point - App install/uninstall
++typedef struct _Windows_SupportedOS_WindowsXP_ _RESTOREPTINFOA {
++    _Win32_AssociatedEnum_(RESTOREPOINTINFO_EVENT_TYPE) DWORD   dwEventType;                // Type of Event - Begin or End
++    _Win32_AssociatedEnum_(RESTOREPOINTINFO_TYPE) DWORD   dwRestorePtType;            // Type of Restore Point - App install/uninstall
+     INT64   llSequenceNumber;           // Sequence Number - 0 for begin
+     CHAR    szDescription[MAX_DESC];    // Description - Name of Application / Operation
+ } RESTOREPOINTINFOA, *PRESTOREPOINTINFOA;
+ 
+-typedef struct _RESTOREPTINFOW {
+-    DWORD   dwEventType;
+-    DWORD   dwRestorePtType;
++typedef struct _Windows_SupportedOS_WindowsXP_ _RESTOREPTINFOW {
++    _Win32_AssociatedEnum_(RESTOREPOINTINFO_EVENT_TYPE) DWORD   dwEventType;
++    _Win32_AssociatedEnum_(RESTOREPOINTINFO_TYPE) DWORD   dwRestorePtType;
+     INT64   llSequenceNumber;
+     WCHAR   szDescription[MAX_DESC_W];
+ } RESTOREPOINTINFOW, *PRESTOREPOINTINFOW;
+@@ -99,7 +144,7 @@ typedef struct _RESTOREPTINFOEX {
+ // Status returned by System Restore
+ //
+ 
+-typedef struct _SMGRSTATUS {
++typedef struct _Windows_SupportedOS_WindowsXP_ _SMGRSTATUS {
+     DWORD   nStatus;            // Status returned by State Manager Process
+     INT64   llSequenceNumber;   // Sequence Number for the restore point
+ } STATEMGRSTATUS, *PSTATEMGRSTATUS;
+@@ -137,6 +182,7 @@ extern "C" {
+ //
+ // ERROR_ALREADY_EXISTS       If this is a nested restore point
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL __stdcall
+ SRSetRestorePointA(
+                   _In_ PRESTOREPOINTINFOA  pRestorePtSpec,// [in] Restore Point specification
+@@ -144,6 +190,7 @@ SRSetRestorePointA(
+                   );
+ 
+ 
++_Windows_SupportedOS_WindowsXP_
+ BOOL __stdcall
+ SRSetRestorePointW(
+                   _In_ PRESTOREPOINTINFOW pRestorePtSpec,
+@@ -157,6 +204,8 @@ SRSetRestorePointInternal(
+                   _In_ BOOL           fForceSurrogate
+                   );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("SrClient.dll")
+ DWORD __stdcall
+ SRRemoveRestorePoint(DWORD dwRPNum);
+ 

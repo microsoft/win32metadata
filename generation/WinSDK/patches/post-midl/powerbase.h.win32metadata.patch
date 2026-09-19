@@ -1,0 +1,105 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
+@@ -17,6 +17,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef _CONTRACT_GEN
+ #include <nt.h>
+@@ -32,6 +33,41 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("POWER_PLATFORM_ROLE_VERSION")
++#pragma push_macro("POWER_PLATFORM_ROLE_V1")
++#pragma push_macro("POWER_PLATFORM_ROLE_V2")
++#undef POWER_PLATFORM_ROLE_VERSION
++#undef POWER_PLATFORM_ROLE_V1
++#undef POWER_PLATFORM_ROLE_V2
++enum POWER_PLATFORM_ROLE_VERSION : ULONG {
++    POWER_PLATFORM_ROLE_V1 = 1,
++    POWER_PLATFORM_ROLE_V2 = 2,
++};
++#pragma pop_macro("POWER_PLATFORM_ROLE_V2")
++#pragma pop_macro("POWER_PLATFORM_ROLE_V1")
++#pragma pop_macro("POWER_PLATFORM_ROLE_VERSION")
++
++#pragma push_macro("DEVICE_NOTIFY_SERVICE_HANDLE")
++#pragma push_macro("DEVICE_NOTIFY_CALLBACK")
++#pragma push_macro("DEVICE_NOTIFY_WINDOW_HANDLE")
++#pragma push_macro("DEVICE_NOTIFY_ALL_INTERFACE_CLASSES")
++#undef DEVICE_NOTIFY_SERVICE_HANDLE
++#undef DEVICE_NOTIFY_CALLBACK
++#undef DEVICE_NOTIFY_WINDOW_HANDLE
++#undef DEVICE_NOTIFY_ALL_INTERFACE_CLASSES
++enum [[clang::flag_enum]] REGISTER_NOTIFICATION_FLAGS : DWORD {
++    DEVICE_NOTIFY_SERVICE_HANDLE = 1,
++    DEVICE_NOTIFY_CALLBACK = 2,
++    DEVICE_NOTIFY_WINDOW_HANDLE = 0,
++    DEVICE_NOTIFY_ALL_INTERFACE_CLASSES = 4,
++};
++#pragma pop_macro("DEVICE_NOTIFY_ALL_INTERFACE_CLASSES")
++#pragma pop_macro("DEVICE_NOTIFY_WINDOW_HANDLE")
++#pragma pop_macro("DEVICE_NOTIFY_CALLBACK")
++#pragma pop_macro("DEVICE_NOTIFY_SERVICE_HANDLE")
++#endif
++
+ #ifndef _HPOWERNOTIFY_DEF_
+ #define _HPOWERNOTIFY_DEF_
+ 
+@@ -44,6 +80,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+ #define _OVERRIDE_NTSTATUS_
+ #endif
+ 
++_Windows_SupportedOS_WindowsXP_
+ NTSTATUS
+ WINAPI
+ CallNtPowerInformation(
+@@ -58,6 +95,8 @@ CallNtPowerInformation(
+ #undef NTSTATUS
+ #endif
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ BOOLEAN
+ WINAPI
+ GetPwrCapabilities(
+@@ -65,26 +104,31 @@ GetPwrCapabilities(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Windows_SupportedOS_Windows8_
+ POWER_PLATFORM_ROLE
+ WINAPI
+ PowerDeterminePlatformRoleEx(
+-    _In_ ULONG Version
++    _In_ _Win32_AssociatedEnum_(POWER_PLATFORM_ROLE_VERSION) ULONG Version
+     );
+ 
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Windows_SupportedOS_Windows8_
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD
+ WINAPI
+ PowerRegisterSuspendResumeNotification(
+-    _In_ DWORD Flags,
++    _In_ _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) DWORD Flags,
+     _In_ HANDLE Recipient,
+-    _Out_ PHPOWERNOTIFY RegistrationHandle
++    _Out_ _Win32_RAIIFree_(PowerUnregisterSuspendResumeNotification) PHPOWERNOTIFY RegistrationHandle
+     );
+ 
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Windows_SupportedOS_Windows8_
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD
+ WINAPI
+ PowerUnregisterSuspendResumeNotification(

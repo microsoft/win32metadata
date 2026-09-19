@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
+index 6f1b2fe0c4..d5bc042287 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -26,6 +27,8 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ // For Windows Vista and above GetDateFormatEx is preferred
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -38,6 +41,8 @@ GetDateFormatA(
+     _In_ int cchDate
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -57,6 +62,8 @@ GetDateFormatW(
+ #endif // !UNICODE
+ 
+ // For Windows Vista and above GetTimeFormatEx is preferred
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -69,6 +76,8 @@ GetTimeFormatA(
+     _In_ int cchTime
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -93,6 +102,8 @@ GetTimeFormatW(
+ #pragma region Application Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -105,6 +116,8 @@ GetTimeFormatEx(
+     _In_ int cchTime
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -126,6 +139,8 @@ GetDateFormatEx(
+ 
+ #define GetDurationFormatEx_DEFINED
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI

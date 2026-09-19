@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
+@@ -19,6 +19,7 @@
+ 
+ #include "rpc.h"
+ #include "rpcndr.h"
++#include <win32metadata_annotations.h>
+ 
+ #ifndef __RPCNDR_H_VERSION__
+ #error this stub requires an updated version of <rpcndr.h>
+@@ -2177,7 +2178,7 @@
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNextSample( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwStatusFlags,
++            _Out_ _Win32_AssociatedEnum_(ASF_STATUSFLAGS) DWORD *pdwStatusFlags,
+             /* [annotation][out] */ 
+             _Out_  WORD *pwStreamNumber,
+             /* [annotation][out] */ 
+@@ -2262,7 +2263,7 @@
+         HRESULT ( STDMETHODCALLTYPE *GetNextSample )( 
+             IMFASFSplitter * This,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwStatusFlags,
++            _Out_ _Win32_AssociatedEnum_(ASF_STATUSFLAGS) DWORD *pdwStatusFlags,
+             /* [annotation][out] */ 
+             _Out_  WORD *pwStreamNumber,
+             /* [annotation][out] */ 
