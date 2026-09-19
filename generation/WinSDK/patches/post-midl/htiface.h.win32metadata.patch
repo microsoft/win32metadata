@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
+index 0bf1a86aa193c8e681c251cb027bc0470b1177ce..054310121857c99477bafdc2584e26b638fbc4d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
+@@ -100,6 +100,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -158,7 +159,7 @@ EXTERN_C const IID IID_ITargetFrame;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d5f78c80-5252-11cf-90fa-00AA0042106e")
+-    ITargetFrame : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetFrame : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetFrameName( 
+@@ -353,7 +354,7 @@ EXTERN_C const IID IID_ITargetFrame;
+         END_INTERFACE
+     } ITargetFrameVtbl;
+ 
+-    interface ITargetFrame
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetFrame
+     {
+         CONST_VTBL struct ITargetFrameVtbl *lpVtbl;
+     };

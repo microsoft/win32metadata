@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
+index badab97e5db2e2a71946302a97cfde04e7f0e847..95ad71dd299e78d598b35474be3110be4df77374 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
+@@ -344,6 +344,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -2263,7 +2264,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3050f6ce-98b5-11cf-bb82-00aa00bdce0b")
+-    IHeaderFooter : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IHeaderFooter : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_htmlHead( 
+@@ -2563,7 +2564,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         END_INTERFACE
+     } IHeaderFooterVtbl;
+ 
+-    interface IHeaderFooter
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IHeaderFooter
+     {
+         CONST_VTBL struct IHeaderFooterVtbl *lpVtbl;
+     };
+@@ -2685,7 +2686,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("305104a5-98b5-11cf-bb82-00aa00bdce0b")
+-    IHeaderFooter2 : public IHeaderFooter
++    _Windows_SupportedOS_Server2008_ IHeaderFooter2 : public IHeaderFooter
+     {
+     public:
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_font( 
+@@ -2917,7 +2918,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
+         END_INTERFACE
+     } IHeaderFooter2Vtbl;
+ 
+-    interface IHeaderFooter2
++    interface _Windows_SupportedOS_Server2008_ IHeaderFooter2
+     {
+         CONST_VTBL struct IHeaderFooter2Vtbl *lpVtbl;
+     };

@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
+index b3d36e48711e2fa228f0083044a60a0d5f1dfa25..1b8ceb32c1c3666c3fa9aa2b4a3ef2d965c1ed18 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
+@@ -78,6 +78,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -97,7 +98,7 @@ EXTERN_C const IID IID_IDocObjectService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3050f801-98b5-11cf-bb82-00aa00bdce0b")
+-    IDocObjectService : public IUnknown
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ IDocObjectService : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE FireBeforeNavigate2( 
+@@ -225,7 +226,7 @@ EXTERN_C const IID IID_IDocObjectService;
+         END_INTERFACE
+     } IDocObjectServiceVtbl;
+ 
+-    interface IDocObjectService
++    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ IDocObjectService
+     {
+         CONST_VTBL struct IDocObjectServiceVtbl *lpVtbl;
+     };

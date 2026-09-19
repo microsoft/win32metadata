@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
+index 30ba0c56086b84a34e405a8df1d264033adb5a21..ef09fd205858ac1bee46a1ff53211711c22d5a58 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
+@@ -103,6 +103,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [helpstring][uuid] */  DECLSPEC_UUID("44EC9B57-DCAB-4CDE-B373-EE94962950E3") 
+@@ -273,7 +274,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ACC84351-04FF-44F9-B23F-655ED168C6D5")
+-    IInternetExplorerManager : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInternetExplorerManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateObject( 
+@@ -326,7 +327,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
+         END_INTERFACE
+     } IInternetExplorerManagerVtbl;
+ 
+-    interface IInternetExplorerManager
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInternetExplorerManager
+     {
+         CONST_VTBL struct IInternetExplorerManagerVtbl *lpVtbl;
+     };
