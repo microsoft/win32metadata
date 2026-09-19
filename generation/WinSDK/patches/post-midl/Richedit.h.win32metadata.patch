@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
+index 5bebec44173cd60247c090ed6d423003d8623273..bd1a353c8ffbd21a74773b58e01aabc6a4e654fa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
+@@ -11,6 +11,7 @@
+ #define _RICHEDIT_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #include <wtypes.h>
+ #include <objbase.h>
+ 
+@@ -357,7 +358,7 @@ typedef enum tagTextMode
+ #define IMF_SMODE_NONE			0x0002
+ 
+ // EM_GETIMECOMPTEXT wparam structure
+-typedef struct _imecomptext {
++typedef struct _Windows_SupportedOS_Server2003_ _imecomptext {
+ 	LONG	cb; 		// count of bytes in the output buffer.
+ 	DWORD	flags;		// value specifying the composition string type.
+ 						//	Currently only support ICT_RESULTREADSTR
