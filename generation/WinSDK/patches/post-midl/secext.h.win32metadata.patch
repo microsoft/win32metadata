@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h b/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
+index 8353e4cdfc97b6125e9df1a16b7e1fc6ed5e8426..b3e81e867408b13ab193dd030f6c486351d42dfd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
+@@ -22,6 +22,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -110,6 +111,8 @@ typedef enum
+ } EXTENDED_NAME_FORMAT, * PEXTENDED_NAME_FORMAT ;
+ 
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -119,6 +122,8 @@ GetUserNameExA(
+     _Inout_ PULONG nSize
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -140,6 +145,8 @@ GetUserNameExW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ BOOLEAN
+ SEC_ENTRY
+ GetComputerObjectNameA(
