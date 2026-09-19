@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
+@@ -12,6 +12,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -135,7 +136,7 @@ DEFINE_GUID(IID_IDiskQuotaEvents,
+ //
+ // Per-user quota information.
+ //
+-typedef struct DiskQuotaUserInformation {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ DiskQuotaUserInformation {
+     LONGLONG QuotaUsed;
+     LONGLONG QuotaThreshold;
+     LONGLONG QuotaLimit;

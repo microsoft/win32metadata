@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
+index bcb720b2364b01104f2d911fb0dea9779b6bd4a2..84d173cf50f95d2d5ff49626e91d9c55679ff371 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
+@@ -10,6 +10,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -114,6 +115,8 @@ typedef void *SCRIPT_CACHE;
+ //      mis-referencing.
+ 
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Check_return_ HRESULT WINAPI ScriptFreeCache(
+     _Inout_updates_(1) _At_(*psc, _Post_null_) SCRIPT_CACHE   *psc);       //InOut  Cache handle
+ 
+@@ -1555,6 +1558,8 @@ _Check_return_ HRESULT WINAPI ScriptStringAnalyse(
+ //
+ 
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ _Check_return_ HRESULT WINAPI ScriptStringFree(
+     _Inout_updates_(1) SCRIPT_STRING_ANALYSIS  *pssa);  //InOut Address of pointer to analysis
+ 
+@@ -1571,6 +1576,8 @@ _Check_return_ HRESULT WINAPI ScriptStringFree(
+ //      SCRIPT_STRING_ANALYSIS is passed to ScriptStringFree.
+ 
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ const SIZE* WINAPI ScriptString_pSize(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
+ 
+@@ -1951,7 +1958,7 @@ typedef struct opentype_feature_record{
+ } OPENTYPE_FEATURE_RECORD;
+ 
+ // Set of OpenType properties applied to the range of characters
+-typedef struct textrange_properties{
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ textrange_properties{
+ 
+     OPENTYPE_FEATURE_RECORD   *potfRecords;
+     int                        cotfRecords;

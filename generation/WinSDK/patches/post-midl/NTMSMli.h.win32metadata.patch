@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
+@@ -28,6 +28,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -39,7 +40,7 @@
+ 
+ #ifndef NTMS_NOREDEF
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ {
+         WCHAR   LabelType[NTMSMLI_MAXTYPE];
+         DWORD   LabelIDSize;

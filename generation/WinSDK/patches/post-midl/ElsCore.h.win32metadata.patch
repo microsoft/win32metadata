@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
+index 3df390971e1b3b6f2713c9fd669c310e61cddfdc..30426b3e97df0cf594acc5f678a436f6292b6d14 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define __ELS_CORE__
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -47,7 +48,7 @@ typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(struct _MAPPING_PROPERTY_BAG *p
+ // Public ELS structures
+ //
+ 
+-typedef struct _MAPPING_SERVICE_INFO
++typedef struct _Windows_SupportedOS_Windows7_ _MAPPING_SERVICE_INFO
+ {
+     size_t      Size;
+     LPWSTR      pszCopyright;
+@@ -149,6 +150,7 @@ typedef struct _MAPPING_PROPERTY_BAG
+ // Public ELS APIs
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingGetServices(
+@@ -158,6 +160,7 @@ MappingGetServices(
+     );
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingFreeServices(
+@@ -165,6 +168,7 @@ MappingFreeServices(
+     );
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingRecognizeText(

@@ -1,0 +1,125 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //+---------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -58,7 +59,7 @@ typedef unsigned int ALG_ID;
+ //
+ 
+ 
+-typedef struct _CERTIFICATE_BLOB {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CERTIFICATE_BLOB {
+ 
+     DWORD   dwCertEncodingType;
+ 
+@@ -79,7 +80,7 @@ typedef struct _CERTIFICATE_BLOB {
+ //  Certificate Hash
+ //
+ 
+-typedef struct _EFS_HASH_BLOB {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _EFS_HASH_BLOB {
+ 
+ #ifdef MIDL_PASS
+     [range(0,100)] 
+@@ -224,7 +225,7 @@ typedef struct _EFS_ENCRYPTION_STATUS_INFO {
+ // Input to add a user to an encrypted file
+ //
+ 
+-typedef struct _ENCRYPTION_CERTIFICATE {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE {
+     DWORD cbTotalLength;
+     SID * pUserSid;
+     PEFS_CERTIFICATE_BLOB pCertBlob;
+@@ -233,7 +234,7 @@ typedef struct _ENCRYPTION_CERTIFICATE {
+ #define MAX_SID_SIZE 256
+ 
+ 
+-typedef struct _ENCRYPTION_CERTIFICATE_HASH {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE_HASH {
+     DWORD cbTotalLength;
+     SID * pUserSid;
+     PEFS_HASH_BLOB  pHash;
+@@ -245,7 +246,7 @@ typedef struct _ENCRYPTION_CERTIFICATE_HASH {
+ 
+ } ENCRYPTION_CERTIFICATE_HASH, *PENCRYPTION_CERTIFICATE_HASH;
+ 
+-typedef struct _ENCRYPTION_CERTIFICATE_HASH_LIST {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE_HASH_LIST {
+ #ifdef MIDL_PASS
+     [range(0,500)] 
+ #endif // MIDL_PASS
+@@ -321,7 +322,7 @@ typedef struct _ENCRYPTION_PROTECTOR_LIST {
+ WINADVAPI
+ DWORD
+ WINAPI
+-QueryUsersOnEncryptedFile(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ QueryUsersOnEncryptedFile(
+     _In_            LPCWSTR                                 lpFileName,
+     _Outptr_     PENCRYPTION_CERTIFICATE_HASH_LIST      *pUsers
+     );
+@@ -330,7 +331,7 @@ QueryUsersOnEncryptedFile(
+ WINADVAPI
+ DWORD
+ WINAPI
+-QueryRecoveryAgentsOnEncryptedFile(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ QueryRecoveryAgentsOnEncryptedFile(
+     _In_            LPCWSTR                                 lpFileName,
+     _Outptr_     PENCRYPTION_CERTIFICATE_HASH_LIST      *pRecoveryAgents
+     );
+@@ -339,7 +340,7 @@ QueryRecoveryAgentsOnEncryptedFile(
+ WINADVAPI
+ DWORD
+ WINAPI
+-RemoveUsersFromEncryptedFile(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ RemoveUsersFromEncryptedFile(
+     _In_    LPCWSTR                             lpFileName,
+     _In_    PENCRYPTION_CERTIFICATE_HASH_LIST   pHashes
+     );
+@@ -347,7 +348,7 @@ RemoveUsersFromEncryptedFile(
+ WINADVAPI
+ DWORD
+ WINAPI
+-AddUsersToEncryptedFile(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ AddUsersToEncryptedFile(
+     _In_    LPCWSTR                         lpFileName,
+     _In_    PENCRYPTION_CERTIFICATE_LIST    pEncryptionCertificates
+     );
+@@ -361,7 +362,7 @@ AddUsersToEncryptedFile(
+ WINADVAPI
+ DWORD
+ WINAPI
+-SetUserFileEncryptionKey(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ SetUserFileEncryptionKey(
+     _In_opt_    PENCRYPTION_CERTIFICATE     pEncryptionCertificate
+     );
+ 
+@@ -394,14 +395,14 @@ SetUserFileEncryptionKeyEx(
+ WINADVAPI
+ VOID
+ WINAPI
+-FreeEncryptionCertificateHashList(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ FreeEncryptionCertificateHashList(
+     _In_    PENCRYPTION_CERTIFICATE_HASH_LIST       pUsers
+     );
+ 
+ WINADVAPI
+ BOOL
+ WINAPI
+-EncryptionDisable(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_ EncryptionDisable(
+     _In_ LPCWSTR DirPath,
+          BOOL        Disable
+     );
+@@ -415,7 +416,7 @@ EncryptionDisable(
+ WINADVAPI
+ DWORD
+ WINAPI
+-DuplicateEncryptionInfoFile(
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ DuplicateEncryptionInfoFile(
+      _In_       LPCWSTR SrcFileName,
+      _In_       LPCWSTR DstFileName, 
+                 DWORD                           dwCreationDistribution, 
