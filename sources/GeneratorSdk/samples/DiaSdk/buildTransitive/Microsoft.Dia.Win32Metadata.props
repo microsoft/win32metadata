@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup>
-    <ProjectionMetadataWinmd Include="$(MSBuildThisFileDirectory)..\Microsoft.Dia.winmd" />
-  </ItemGroup>
-</Project>

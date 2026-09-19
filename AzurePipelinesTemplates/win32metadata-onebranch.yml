@@ -1,7 +1,7 @@
 parameters:
 - name: "RepoDirectory"
   type: string
-  default: "s" # Shortened repo directory name to keep paths under 260 characters. OneBranch issue where longpath setting doesn't get pushed down to submodules. 
+  default: "s" # Shortened repo directory name to keep paths under 260 characters. OneBranch issue where longpath setting doesn't get pushed down to submodules.
 - name: OfficialBuild
   type: boolean
   default: false
@@ -11,132 +11,8 @@ parameters:
   default: ''
 
 stages:
-- stage: scrape
-  displayName: "Scrape"
-  jobs:
-  - job: scrape
-    strategy:
-      matrix:
-        x86:
-          arch: 'x86'
-          generateMetadataArgs: '-scrapeConstants'
-        x64:
-          arch: 'x64'
-          generateMetadataArgs: ''
-        arm64:
-          arch: 'arm64'
-          generateMetadataArgs: ''
-    displayName: "Scrape headers"
-    timeoutInMinutes: 60
-    variables:
-      ob_outputDirectory: '${{parameters.RepoDirectory}}\generation\WinSDK\obj'
-      ob_artifactBaseName: 'generated'
-      ob_artifactSuffix: '_$(arch)'
-      ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
-    pool:
-      type: windows
-    steps:
-    - template: win32metadata-checkout.yml
-      parameters:
-        RepoDirectory: ${{ parameters.RepoDirectory }}
-
-    - task: UseDotNet@2
-      displayName: ⚙ Install SDK from global.json
-      inputs:
-        packageType: sdk
-        useGlobalJson: true
-
-    - task: PowerShell@2
-      displayName: Set build version
-      condition: eq(variables.arch, 'x64') # Only needed for x64
-      inputs:
-        targetType: inline
-        workingDirectory: ${{parameters.RepoDirectory}}
-        script: |
-          .\scripts\Install-ngbv.ps1 -NuGetConfigFile '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\nuget.config'
-          nbgv cloud --common-vars
-
-    # Generate the Azure Devops pipeline build number, since nbgv cannot do it for OneBranch pipelines
-    - task: PowerShell@2
-      displayName: Get pipeline run name
-      condition: eq(variables.arch, 'x64')
-      inputs:
-        targetType: inline
-        workingDirectory: ${{parameters.RepoDirectory}}
-        script: |
-          $jsonString = nbgv get-version -f json
-          $nbgvData = $jsonString | ConvertFrom-Json
-          Write-Host $jsonString
-          $commitId = $nbgvData.GitCommitId
-          $version = $nbgvData.CloudBuildNumber
-          Write-Host "##vso[task.setvariable variable=CommitId;]$commitId"
-          Write-Host "##vso[task.setvariable variable=Version;]$version"
-
-          # Add the branch name and commit message to PR Pipeline build names 
-          $commitMessage = git log --format=%B -n 1 $commitId
-          $pipeline_message = '${{ parameters.PRBranch }}' + ' • ' + $commitMessage
-          $pipeline_message = $pipeline_message -replace '["/:<>\\|?@*]','_'
-          $pipeline_message = $pipeline_message.trim()
-          # Pipeline versions cannot end in a '.'
-          if ($pipeline_message[$pipeline_message.length-1] -eq '.') {
-              $pipeline_message = $pipeline_message + '0'
-          }
-          if ($pipeline_message.Length -gt 200) {
-              $pipeline_message = $pipeline_message.Substring(0, 200) + '...(cont)'
-          }
-          Write-Host "##vso[task.setvariable variable=PipelineMessage;]$pipeline_message"
-
-          Write-Host "Setting Version to $version"
-          Write-Host "Setting CommitId to $commitId"
-          Write-Host "Setting PipelineMessage to $pipeline_message"
-
-    # Set the pipeline build number
-    - ${{ if eq(parameters.PRBranch, '') }}:
-      - task: onebranch.pipeline.version@1
-        condition: eq(variables.arch, 'x64')
-        inputs:
-          system: 'Custom'
-          customVersion: '$(Version)'
-
-    # Add the PR Branch to the build version for clarity if this is a PR build
-    # The Pipeline Version is used as part of the Github release in the Offical builds,
-    # so we don't set it in Offical pipeline runs
-    - ${{ if ne(parameters.PRBranch, '') }}:
-      - task: onebranch.pipeline.version@1
-        condition: eq(variables.arch, 'x64')
-        inputs:
-          system: 'Custom'
-          customVersion: '$(Version) • $(PipelineMessage)'
-
-    - task: PowerShell@2
-      displayName: GenerateMetadataSource.ps1
-      inputs:
-        filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
-        arguments: '-arch $(arch) $(generateMetadataArgs)'
-        errorActionPreference: 'continue'
-        pwsh: true 
-    
-    # Save commit hash for use by the release pipeline    
-    - task: PowerShell@2
-      displayName: Save Source Commit
-      condition: eq(variables.arch, 'x64')
-      inputs:
-        targetType: inline
-        workingDirectory: ${{parameters.RepoDirectory}}
-        script: |
-          Write-Host "Saving Source Commit ID for github release pipeline"
-          "$(CommitId)" | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
-    
-    # Copy build logs from GenerateMetadataSource to artifact location that will automatically get picked up
-    - task: CopyFiles@2
-      displayName: 📢 Copy build logs to pipeline artifact directory 
-      inputs:
-        SourceFolder: '$(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/logs'
-        TargetFolder: '$(Build.SourcesDirectory)/$(ob_outputDirectory)/logs'
-
 - stage: build_winmd
   displayName: "Build WinMD"
-  dependsOn: 'scrape'
   jobs:
   - job: build_winmd
     displayName: Build, test, sign, package winmd
@@ -178,29 +54,18 @@ stages:
     - script: dotnet --info
       displayName: Display .NET SDK/runtime info
 
-    - task: DownloadPipelineArtifact@2
-      displayName: Download x64 generated assets
+    - task: PowerShell@2
+      displayName: Install pinned Rust toolchain
       inputs:
-        artifact: 'generated_x64'
-        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: Download x86 generated assets
-      inputs:
-        artifact: 'generated_x86'
-        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: Download arm64 generated assets
-      inputs:
-        artifact: 'generated_arm64'
-        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: rustup show
+        pwsh: true
 
     - task: PowerShell@2
       displayName: Build metadata binary
       inputs:
         filePath: '${{ parameters.RepoDirectory }}\scripts\BuildMetadataBin.ps1'
-        arguments: '-assetsScrapedSeparately'
         pwsh: true
 
     - task: onebranch.pipeline.signing@1
@@ -210,15 +75,9 @@ stages:
         command: sign
         signing_profile: external_distribution
         files_to_sign: |
-          bin/Release/net10.0/ClangSharpSourceToWinmd.dll;
-          bin/Release/net10.0/ConstantsScraper.dll;
-          bin/Release/net10.0/CsvHelper.dll;
-          bin/Release/net10.0/ICSharpCode.Decompiler.dll;
-          bin/Release/net10.0/MetadataTasks.dll;
           bin/Release/net10.0/MetadataUtils.dll;
-          bin/Release/net10.0/win-x64/Win32MetadataScraper.dll;
-          bin/Release/net10.0/win-x64/Win32MetadataScraper.exe;
           bin/Release/net10.0/WinmdUtils.dll;
+          bin/GeneratorSdk/tools/win-x64/win32metadata-tools.exe;
           bin/Windows.Win32.winmd;
           scripts/*.ps1;
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
@@ -228,7 +87,7 @@ stages:
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoPackages.ps1
         pwsh: true
-        arguments: -SkipInstallTools
+        arguments: '-SkipInstallTools -SkipNativeToolsBuild'
 
     - task: PowerShell@2
       displayName: Do samples
@@ -253,7 +112,7 @@ stages:
 
     # Copy build logs from Build WinMD to artifact location that will automatically get picked up
     - task: CopyFiles@2
-      displayName: 📢 Copy build logs to pipeline artifact location 
+      displayName: 📢 Copy build logs to pipeline artifact location
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/logs'
         TargetFolder: '$(ob_outputDirectory)/logs'

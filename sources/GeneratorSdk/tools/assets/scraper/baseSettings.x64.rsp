@@ -1,4 +1,0 @@
---additional
--D_AMD64_=1
---exclude
-_KNONVOLATILE_CONTEXT_POINTERS_ARM64

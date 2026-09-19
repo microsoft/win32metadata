@@ -6,7 +6,7 @@ $MicrosoftDocsSdkApiPath = "$rootDir\ext\sdk-api"
 $MicrosoftDocsWin32Path = "$rootDir\ext\win32"
 $windowsWin32ProjectRoot = "$rootDir\generation\WinSDK"
 $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
-$recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
+$recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\obj\RecompiledIdlHeaders"
 $recompiledIdlHeadersScratchDir = "$rootDir\obj\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net10.0"
 

@@ -9,45 +9,26 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
-    <ScanArch>crossarch</ScanArch>
-  </PropertyGroup>
 
-  <ItemGroup>
-    <ResponseFile Include="*.rsp"/>
-    <ManualCs Include="*.cs"/>
-    <FunctionPointerFixup Include="$(MSBuildProjectDirectory)\functionPointerFixups.json"/>
-    <AutoType Include="$(MSBuildProjectDirectory)\autoTypes.json"/>
-
-  </ItemGroup>
-
-  <PropertyGroup>
     <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
-    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net10.0</TaskBinDir>
-    <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net10.0</ToolsBinDir>
-    <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
-    <ScriptsDir Condition="'$(ScriptsDir)' == ''">$(Win32MetadataSdkRoot)\scripts</ScriptsDir>
+    <Win32MetadataToolsDir Condition="'$(Win32MetadataToolsDir)' == ''">$(Win32MetadataSdkRoot)\tools\win-x64</Win32MetadataToolsDir>
+    <Win32MetadataToolsExe Condition="'$(Win32MetadataToolsExe)' == ''">$(Win32MetadataToolsDir)\win32metadata-tools.exe</Win32MetadataToolsExe>
+    <LibClangPath Condition="'$(LibClangPath)' == ''">$(Win32MetadataToolsDir)</LibClangPath>
+
     <ObjDir Condition="'$(ObjDir)' == ''">$(MSBuildProjectDirectory)\obj</ObjDir>
-    <CompiledHeadersDir Condition="'$(CompiledHeadersDir)' == ''">$(ObjDir)\CompiledHeaders</CompiledHeadersDir>
-    <SdkIncRoot>$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
-    <NuGetPackageSource Condition="'$(NuGetPackageSource)' == ''">https://pkgs.dev.azure.com/shine-oss/Win32Metadata/_packaging/Win32Metadata-Dependencies/nuget/v3/index.json</NuGetPackageSource>
+    <WinmdObjDir Condition="'$(WinmdObjDir)' == ''">$(ObjDir)\winmd</WinmdObjDir>
+    <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).winmd</OutputWinmd>
+    <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
+    <WinmdRootNamespace Condition="'$(WinmdRootNamespace)' == ''">Windows.Win32</WinmdRootNamespace>
+    <WinmdAssemblyName Condition="'$(WinmdAssemblyName)' == ''">$([System.IO.Path]::GetFileNameWithoutExtension('$(OutputWinmd)'))</WinmdAssemblyName>
 
     <Win32MetadataAssetsDir Condition="'$(Win32MetadataAssetsDir)' == ''">$(Win32MetadataSdkRoot)\tools\assets</Win32MetadataAssetsDir>
     <WinSDKAssets Condition="'$(WinSDKAssets)' == ''">$(Win32MetadataAssetsDir)\WinSDK</WinSDKAssets>
-
-    <Win32WinmdBinDir Condition="'$(Win32WinmdBinDir)' == ''">$(PkgMicrosoft_Windows_SDK_Win32Metadata)</Win32WinmdBinDir>
-    <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
-
-    <ConstantsScraperHeader>$(MSBuildProjectDirectory)\ConstantsScraper.header.txt</ConstantsScraperHeader>
-    <ScraperHeader>$(MSBuildProjectDirectory)\scraper.header.txt</ScraperHeader>
-
-    <ShowEmitWinmdOutputDetails>false</ShowEmitWinmdOutputDetails>
-
-    <!-- Set this to avoid depending on the WinSDK -->
-    <UseWinSDKAssets>true</UseWinSDKAssets>
+    <SdkIncRoot Condition="'$(SdkIncRoot)' == ''">$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
+    <UseWinSDKAssets Condition="'$(UseWinSDKAssets)' == ''">true</UseWinSDKAssets>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
-    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="10.0.19041.202-preview" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>

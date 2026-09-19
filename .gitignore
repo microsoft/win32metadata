@@ -61,6 +61,7 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+/tools/rust/target/
 
 # StyleCop
 StyleCopReport.xml
@@ -358,6 +359,7 @@ MigrationBackup/
 /tests/SourceToWinmd/source/generated/fake/autotypes.cs
 /winsdk
 /sources/GeneratorSdk/sdk/sdk.stamped.props
+/tests/GeneratorSdkPackageTests/sample/global.json
 /tests/SourceToWinmd/source/generated/autotypes.cs
 
 # This gets written when testing the packages, but we don't want to check it in
