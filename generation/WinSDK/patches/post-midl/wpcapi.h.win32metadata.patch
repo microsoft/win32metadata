@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
+index 9e950406ce1a4be771f2a6cd9c5e8564d3e1f431..5f84510b83b2ed9324347dd2ec41f8e481cd6f04 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
+@@ -159,6 +159,7 @@ extern "C"{
+ /*                                                                             */
+ /*******************************************************************************/
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IWPCProviderState;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("50B6A267-C4BD-450b-ADB5-759073837C9E")
+-    IWPCProviderState : public IUnknown
++    _Windows_SupportedOS_Windows7_ IWPCProviderState : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Enable( void) = 0;
+@@ -220,7 +221,7 @@ EXTERN_C const IID IID_IWPCProviderState;
+         END_INTERFACE
+     } IWPCProviderStateVtbl;
+ 
+-    interface IWPCProviderState
++    interface _Windows_SupportedOS_Windows7_ IWPCProviderState
+     {
+         CONST_VTBL struct IWPCProviderStateVtbl *lpVtbl;
+     };
+@@ -283,7 +284,7 @@ EXTERN_C const IID IID_IWPCProviderConfig;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("BEF54196-2D02-4a26-B6E5-D65AF295D0F1")
+-    IWPCProviderConfig : public IUnknown
++    _Windows_SupportedOS_Windows7_ IWPCProviderConfig : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetUserSummary( 
+@@ -345,7 +346,7 @@ EXTERN_C const IID IID_IWPCProviderConfig;
+         END_INTERFACE
+     } IWPCProviderConfigVtbl;
+ 
+-    interface IWPCProviderConfig
++    interface _Windows_SupportedOS_Windows7_ IWPCProviderConfig
+     {
+         CONST_VTBL struct IWPCProviderConfigVtbl *lpVtbl;
+     };
