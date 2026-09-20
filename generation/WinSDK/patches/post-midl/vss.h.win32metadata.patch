@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
+index db02e892159e06eb5a18a080856ce78013125274..6f6ff590b5d0fc9355a76166d2479ac1b12c104f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -422,7 +423,7 @@ EXTERN_C const IID IID_IVssEnumObject;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("AE1C7110-2F60-11d3-8A39-00C04F72D8E3")
+-    IVssEnumObject : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssEnumObject : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -497,7 +498,7 @@ EXTERN_C const IID IID_IVssEnumObject;
+         END_INTERFACE
+     } IVssEnumObjectVtbl;
+ 
+-    interface IVssEnumObject
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssEnumObject
+     {
+         CONST_VTBL struct IVssEnumObjectVtbl *lpVtbl;
+     };
+@@ -552,7 +553,7 @@ EXTERN_C const IID IID_IVssAsync;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("507C37B4-CF5B-4e95-B0AF-14EB9767467E")
+-    IVssAsync : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssAsync : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
+@@ -613,7 +614,7 @@ EXTERN_C const IID IID_IVssAsync;
+         END_INTERFACE
+     } IVssAsyncVtbl;
+ 
+-    interface IVssAsync
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssAsync
+     {
+         CONST_VTBL struct IVssAsyncVtbl *lpVtbl;
+     };

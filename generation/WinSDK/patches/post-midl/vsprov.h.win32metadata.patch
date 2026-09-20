@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
+index 9aca15352bcd5a65b390312cf40010cf8cc2747d..ea91f22d0de37d968ae6db13019b67da8da11c0d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
+@@ -104,6 +104,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -127,7 +128,7 @@ EXTERN_C const IID IID_IVssSoftwareSnapshotProvider;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("609e123e-2c5a-44d3-8f01-0b1d9a47d1ff")
+-    IVssSoftwareSnapshotProvider : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssSoftwareSnapshotProvider : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -326,7 +327,7 @@ EXTERN_C const IID IID_IVssSoftwareSnapshotProvider;
+         END_INTERFACE
+     } IVssSoftwareSnapshotProviderVtbl;
+ 
+-    interface IVssSoftwareSnapshotProvider
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssSoftwareSnapshotProvider
+     {
+         CONST_VTBL struct IVssSoftwareSnapshotProviderVtbl *lpVtbl;
+     };
+@@ -399,7 +400,7 @@ EXTERN_C const IID IID_IVssProviderCreateSnapshotSet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5F894E5B-1E39-4778-8E23-9ABAD9F0E08C")
+-    IVssProviderCreateSnapshotSet : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssProviderCreateSnapshotSet : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EndPrepareSnapshots( 
+@@ -504,7 +505,7 @@ EXTERN_C const IID IID_IVssProviderCreateSnapshotSet;
+         END_INTERFACE
+     } IVssProviderCreateSnapshotSetVtbl;
+ 
+-    interface IVssProviderCreateSnapshotSet
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssProviderCreateSnapshotSet
+     {
+         CONST_VTBL struct IVssProviderCreateSnapshotSetVtbl *lpVtbl;
+     };
