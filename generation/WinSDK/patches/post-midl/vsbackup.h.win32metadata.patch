@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsbackup.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsbackup.h
+index f71f149570d1d29682c299b32d15df25074fbaa0..5b1f8d91761276b857aac9da986127602ed2c982 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vsbackup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsbackup.h
+@@ -15,6 +15,7 @@ Abstract:
+ #ifndef _VSBACKUP_H_
+ #define _VSBACKUP_H_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or VSS Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_VSS)
+@@ -88,7 +89,7 @@ const IID IID_IVssBackupComponentsEx4       = // f434c2fd-b553-4961-a9f9-a8e90b6
+ 
+ 
+ // description of a component
+-typedef struct _VSS_COMPONENTINFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _VSS_COMPONENTINFO
+     {
+     VSS_COMPONENT_TYPE type;    // either VSS_CT_DATABASE or VSS_CT_FILEGROUP
+     BSTR bstrLogicalPath;        // logical path to component
+@@ -813,6 +814,8 @@ extern "C"  {
+ /////////////////////////////////////////////////////////////////////
+ // Life-management methods for structure members
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+     void APIENTRY VssFreeSnapshotPropertiesInternal(
+         _In_ VSS_SNAPSHOT_PROP*  pProp
+         );

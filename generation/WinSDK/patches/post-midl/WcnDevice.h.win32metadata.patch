@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
+index e1218c7dc6bb950d2fbc3fc76306025ec6ad9cdb..5584e6d7a4349d06fbb671e3bfa5dd00ba9d8e8c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
+@@ -99,6 +99,7 @@ Abstract:
+ 
+ --*/
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if NTDDI_VERSION >= NTDDI_WIN7
+@@ -124,7 +125,7 @@ enum tagWCN_SESSION_STATUS
+         WCN_SESSION_STATUS_FAILURE_TIMEOUT	= ( WCN_SESSION_STATUS_FAILURE_GENERIC + 1 ) 
+     } 	WCN_SESSION_STATUS;
+ 
+-typedef struct tagWCN_VENDOR_EXTENSION_SPEC
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VENDOR_EXTENSION_SPEC
+     {
+     DWORD VendorId;
+     DWORD SubType;
