@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+@@ -118,7 +119,7 @@ extern RPC_IF_HANDLE __MIDL_itf_wmlss_0000_0000_v0_0_s_ifspec;
+ /* [helpstring][version][uuid] */ 
+ 
+ typedef /* [public][v1_enum][helpstring][public] */ 
+-enum WindowsMediaLibrarySharingDeviceAuthorizationStatus
++enum _Windows_SupportedOS_Windows7_ WindowsMediaLibrarySharingDeviceAuthorizationStatus
+     {
+         DEVICE_AUTHORIZATION_UNKNOWN	= 0,
+         DEVICE_AUTHORIZATION_ALLOWED	= 1,
