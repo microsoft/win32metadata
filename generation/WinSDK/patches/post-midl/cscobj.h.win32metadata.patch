@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
+index 31cf48fdf988e31b317d1d3585ec38291a969be6..19553a5f97f023a5044662492fddd6adb09e0885 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
+@@ -337,6 +337,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ //
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef 
+@@ -796,7 +797,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E25585C1-0CAA-4eb1-873B-1CAE5B77C314")
+-    IOfflineFilesEvents : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CacheMoved( 
+@@ -1066,7 +1067,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
+         END_INTERFACE
+     } IOfflineFilesEventsVtbl;
+ 
+-    interface IOfflineFilesEvents
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents
+     {
+         CONST_VTBL struct IOfflineFilesEventsVtbl *lpVtbl;
+     };
+@@ -1184,7 +1185,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1EAD8F56-FF76-4faa-A795-6F6EF792498B")
+-    IOfflineFilesEvents2 : public IOfflineFilesEvents
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents2 : public IOfflineFilesEvents
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE ItemReconnectBegin( void) = 0;
+@@ -1417,7 +1418,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
+         END_INTERFACE
+     } IOfflineFilesEvents2Vtbl;
+ 
+-    interface IOfflineFilesEvents2
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents2
+     {
+         CONST_VTBL struct IOfflineFilesEvents2Vtbl *lpVtbl;
+     };

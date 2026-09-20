@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/credssp.h b/generation/WinSDK/RecompiledIdlHeaders/um/credssp.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/credssp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/credssp.h
+@@ -15,6 +15,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -30,7 +31,7 @@ extern "C" {
+ 
+ #define szOID_TS_KP_TS_SERVER_AUTH "1.3.6.1.4.1.311.54.1.2"
+ 
+-typedef struct _SecPkgContext_ClientCreds
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _SecPkgContext_ClientCreds
+ {
+     ULONG       AuthBufferLen;
+     PUCHAR      AuthBuffer;
+@@ -60,7 +61,7 @@ typedef enum _CREDSSP_SUBMIT_TYPE {
+     CredsspCredEx = 100,
+ } CREDSPP_SUBMIT_TYPE;
+ 
+-typedef struct _CREDSSP_CRED {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _CREDSSP_CRED {
+     CREDSPP_SUBMIT_TYPE Type;
+     PVOID pSchannelCred;
+     PVOID pSpnegoCred;
