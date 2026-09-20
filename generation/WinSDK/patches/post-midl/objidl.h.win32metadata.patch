@@ -1,0 +1,146 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
+@@ -801,6 +801,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //+-------------------------------------------------------------------------
+ //+-------------------------------------------------------------------------
+ //
+@@ -887,7 +888,7 @@ extern "C"{
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-typedef struct _COSERVERINFO
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _COSERVERINFO
+     {
+     DWORD dwReserved1;
+     LPWSTR pwszName;
+@@ -1936,7 +1937,7 @@ typedef /* [unique] */  __RPC_unique_pointer IMultiQI *LPMULTIQI;
+ #pragma endregion
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+-typedef struct tagMULTI_QI
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagMULTI_QI
+     {
+     const IID *pIID;
+     IUnknown *pItf;
+@@ -2714,7 +2715,7 @@ void __RPC_STUB ISequentialStream_RemoteWrite_Stub(
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IStream *LPSTREAM;
+ 
+-typedef struct tagSTATSTG
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTATSTG
+     {
+     LPOLESTR pwcsName;
+     DWORD type;
+@@ -3046,7 +3047,7 @@ void __RPC_STUB IStream_RemoteCopyTo_Stub(
+ 
+ typedef ULONG RPCOLEDATAREP;
+ 
+-typedef struct tagRPCOLEMESSAGE
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagRPCOLEMESSAGE
+     {
+     void *reserved1;
+     RPCOLEDATAREP dataRepresentation;
+@@ -4560,7 +4561,7 @@ extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0023_v0_0_s_ifspec;
+ /* interface IClientSecurity */
+ /* [uuid][object][local] */ 
+ 
+-typedef struct tagSOLE_AUTHENTICATION_SERVICE
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSOLE_AUTHENTICATION_SERVICE
+     {
+     DWORD dwAuthnSvc;
+     DWORD dwAuthzSvc;
+@@ -4595,7 +4596,7 @@ enum tagEOLE_AUTHENTICATION_CAPABILITIES
+ 
+ #define	COLE_DEFAULT_AUTHINFO	( ( void * )( INT_PTR  )-1 )
+ 
+-typedef struct tagSOLE_AUTHENTICATION_INFO
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSOLE_AUTHENTICATION_INFO
+     {
+     DWORD dwAuthnSvc;
+     DWORD dwAuthzSvc;
+@@ -4604,7 +4605,7 @@ typedef struct tagSOLE_AUTHENTICATION_INFO
+ 
+ typedef struct tagSOLE_AUTHENTICATION_INFO *PSOLE_AUTHENTICATION_INFO;
+ 
+-typedef struct tagSOLE_AUTHENTICATION_LIST
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSOLE_AUTHENTICATION_LIST
+     {
+     DWORD cAuthInfo;
+     SOLE_AUTHENTICATION_INFO *aAuthInfo;
+@@ -8205,7 +8206,7 @@ EXTERN_C const IID IID_IFastRundown;
+ /* [local] */ 
+ 
+ typedef 
+-enum CO_MARSHALING_CONTEXT_ATTRIBUTES
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ CO_MARSHALING_CONTEXT_ATTRIBUTES
+     {
+         CO_MARSHALING_SOURCE_IS_APP_CONTAINER	= 0,
+         CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_1	= 0x80000000,
+@@ -9749,7 +9750,7 @@ typedef /* [unique] */  __RPC_unique_pointer IBindCtx *LPBC;
+ typedef /* [unique] */  __RPC_unique_pointer IBindCtx *LPBINDCTX;
+ 
+ #if defined(__cplusplus)
+-    typedef _Struct_size_bytes_(cbStruct) struct tagBIND_OPTS {
++    typedef _Struct_size_bytes_(cbStruct) struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagBIND_OPTS {
+     DWORD           cbStruct;
+     DWORD           grfFlags;
+     DWORD           grfMode;
+@@ -11542,7 +11543,7 @@ void __RPC_STUB IEnumSTATSTG_RemoteNext_Stub(
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IStorage *LPSTORAGE;
+ 
+-typedef struct tagRemSNB
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagRemSNB
+     {
+     ULONG ulCntStr;
+     ULONG ulCntChar;
+@@ -12597,7 +12598,7 @@ void __RPC_STUB ILockBytes_RemoteWriteAt_Stub(
+ typedef /* [unique] */  __RPC_unique_pointer IEnumFORMATETC *LPENUMFORMATETC;
+ 
+ 
+-typedef struct tagDVTARGETDEVICE
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagDVTARGETDEVICE
+     {
+     DWORD tdSize;
+     WORD tdDriverNameOffset;
+@@ -12610,7 +12611,7 @@ typedef struct tagDVTARGETDEVICE
+ 
+ typedef CLIPFORMAT *LPCLIPFORMAT;
+ 
+-typedef struct tagFORMATETC
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagFORMATETC
+     {
+     CLIPFORMAT cfFormat;
+     /* [unique] */ DVTARGETDEVICE *ptd;
+@@ -12782,7 +12783,7 @@ enum tagADVF
+         ADVFCACHE_ONSAVE	= 32
+     } 	ADVF;
+ 
+-typedef struct tagSTATDATA
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTATDATA
+     {
+     FORMATETC formatetc;
+     DWORD advf;
+@@ -14519,7 +14520,7 @@ enum tagPENDINGMSG
+         PENDINGMSG_WAITDEFPROCESS	= 2
+     } 	PENDINGMSG;
+ 
+-typedef struct tagINTERFACEINFO
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagINTERFACEINFO
+     {
+     IUnknown *pUnk;
+     IID iid;
+@@ -15115,7 +15116,7 @@ extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0087_v0_0_s_ifspec;
+ /* interface ILayoutStorage */
+ /* [unique][uuid][object][local] */ 
+ 
+-typedef struct tagStorageLayout
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagStorageLayout
+     {
+     DWORD LayoutType;
+     OLECHAR *pwcsElementName;
