@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
+@@ -181,6 +181,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if 0
+ typedef /* [hidden][restricted] */ LONGLONG REFERENCE_TIME;
+ 
+@@ -201,7 +202,7 @@ enum _AUDCLNT_BUFFERFLAGS
+         AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR	= 0x4
+     } ;
+ typedef /* [v1_enum] */ 
+-enum AUDCLNT_STREAMOPTIONS
++enum _Windows_SupportedOS_Windows81_ AUDCLNT_STREAMOPTIONS
+     {
+         AUDCLNT_STREAMOPTIONS_NONE	= 0,
+         AUDCLNT_STREAMOPTIONS_RAW	= 0x1,
