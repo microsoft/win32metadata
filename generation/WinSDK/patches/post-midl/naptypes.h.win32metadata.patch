@@ -1,0 +1,118 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
+@@ -56,6 +56,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -131,20 +132,20 @@ enum tagNapTracingLevel
+ 
+ typedef FILETIME ProbationTime;
+ 
+-typedef struct tagCountedString
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCountedString
+     {
+     UINT16 length;
+     /* [string][size_is][range] */ WCHAR *string;
+     } 	CountedString;
+ 
+-typedef struct tagIsolationInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIsolationInfo
+     {
+     IsolationState isolationState;
+     ProbationTime probEndTime;
+     CountedString failureUrl;
+     } 	IsolationInfo;
+ 
+-typedef struct tagIsolationInfoEx
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIsolationInfoEx
+     {
+     IsolationState isolationState;
+     ExtendedIsolationState extendedIsolationState;
+@@ -165,7 +166,7 @@ enum tagFailureCategory
+         failureCategoryServerCommunication	= 5
+     } 	FailureCategory;
+ 
+-typedef struct tagFailureCategoryMapping
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagFailureCategoryMapping
+     {
+     BOOL mappingCompliance[ 5 ];
+     } 	FailureCategoryMapping;
+@@ -184,7 +185,7 @@ typedef /* [range] */ __RPC__range(0,maxSystemHealthEntityCount) UINT16 SystemHe
+ 
+ typedef /* [range] */ __RPC__range(0,maxEnforcerCount) UINT16 EnforcementEntityCount;
+ 
+-typedef struct tagCorrelationId
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCorrelationId
+     {
+     GUID connId;
+     FILETIME timeStamp;
+@@ -200,18 +201,18 @@ typedef /* [range] */ __RPC__range(0,percentageNotSupported) UINT8 Percentage;
+ 
+ typedef UINT32 MessageId;
+ 
+-typedef struct tagResultCodes
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagResultCodes
+     {
+     /* [range] */ UINT16 count;
+     /* [size_is] */ HRESULT *results;
+     } 	ResultCodes;
+ 
+-typedef struct tagIpv4Address
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIpv4Address
+     {
+     BYTE addr[ 4 ];
+     } 	Ipv4Address;
+ 
+-typedef struct tagIpv6Address
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIpv6Address
+     {
+     BYTE addr[ 16 ];
+     } 	Ipv6Address;
+@@ -224,7 +225,7 @@ enum tagFixupState
+         fixupStateCouldNotUpdate	= 2
+     } 	FixupState;
+ 
+-typedef struct tagFixupInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagFixupInfo
+     {
+     FixupState state;
+     Percentage percentage;
+@@ -240,7 +241,7 @@ enum tagNapNotifyType
+         napNotifyTypeQuarState	= 2
+     } 	NapNotifyType;
+ 
+-typedef struct tagSystemHealthAgentState
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSystemHealthAgentState
+     {
+     SystemHealthEntityId id;
+     ResultCodes shaResultCodes;
+@@ -248,7 +249,7 @@ typedef struct tagSystemHealthAgentState
+     FixupInfo fixupInfo;
+     } 	SystemHealthAgentState;
+ 
+-typedef struct tagSoHAttribute
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSoHAttribute
+     {
+     UINT16 type;
+     /* [range] */ UINT16 size;
+@@ -275,13 +276,13 @@ typedef struct tagNetworkSoH NetworkSoHRequest;
+ 
+ typedef struct tagNetworkSoH NetworkSoHResponse;
+ 
+-typedef struct tagPrivateData
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagPrivateData
+     {
+     /* [range] */ UINT16 size;
+     /* [size_is] */ BYTE *data;
+     } 	PrivateData;
+ 
+-typedef struct tagNapComponentRegistrationInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagNapComponentRegistrationInfo
+     {
+     NapComponentId id;
+     CountedString friendlyName;
