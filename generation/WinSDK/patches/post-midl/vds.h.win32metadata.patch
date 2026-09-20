@@ -1,0 +1,526 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vds.h b/generation/WinSDK/RecompiledIdlHeaders/um/vds.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vds.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vds.h
+@@ -558,6 +558,7 @@ extern "C"{
+ //
+ //---------------------------------------------------------------
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include <winapifamily.h>
+@@ -751,19 +752,19 @@ enum _VDS_NOTIFICATION_TARGET_TYPE
+ 
+ #define	VDS_NF_DRIVE_REMOVED	( 354 )
+ 
+-typedef struct _VDS_PACK_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PACK_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID packId;
+     } 	VDS_PACK_NOTIFICATION;
+ 
+-typedef struct _VDS_DISK_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DISK_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID diskId;
+     } 	VDS_DISK_NOTIFICATION;
+ 
+-typedef struct _VDS_VOLUME_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_VOLUME_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID volumeId;
+@@ -771,7 +772,7 @@ typedef struct _VDS_VOLUME_NOTIFICATION
+     ULONG ulPercentCompleted;
+     } 	VDS_VOLUME_NOTIFICATION;
+ 
+-typedef struct _VDS_PARTITION_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PARTITION_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID diskId;
+@@ -784,69 +785,69 @@ typedef struct _VDS_SERVICE_NOTIFICATION
+     VDS_RECOVER_ACTION action;
+     } 	VDS_SERVICE_NOTIFICATION;
+ 
+-typedef struct _VDS_DRIVE_LETTER_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DRIVE_LETTER_NOTIFICATION
+     {
+     ULONG ulEvent;
+     WCHAR wcLetter;
+     VDS_OBJECT_ID volumeId;
+     } 	VDS_DRIVE_LETTER_NOTIFICATION;
+ 
+-typedef struct _VDS_FILE_SYSTEM_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_FILE_SYSTEM_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID volumeId;
+     DWORD dwPercentCompleted;
+     } 	VDS_FILE_SYSTEM_NOTIFICATION;
+ 
+-typedef struct _VDS_MOUNT_POINT_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_MOUNT_POINT_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID volumeId;
+     } 	VDS_MOUNT_POINT_NOTIFICATION;
+ 
+-typedef struct _VDS_SUB_SYSTEM_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_SUB_SYSTEM_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID subSystemId;
+     } 	VDS_SUB_SYSTEM_NOTIFICATION;
+ 
+-typedef struct _VDS_CONTROLLER_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_CONTROLLER_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID controllerId;
+     } 	VDS_CONTROLLER_NOTIFICATION;
+ 
+-typedef struct _VDS_DRIVE_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DRIVE_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID driveId;
+     } 	VDS_DRIVE_NOTIFICATION;
+ 
+-typedef struct _VDS_LUN_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_LUN_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID LunId;
+     } 	VDS_LUN_NOTIFICATION;
+ 
+-typedef struct _VDS_PORT_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_PORT_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID portId;
+     } 	VDS_PORT_NOTIFICATION;
+ 
+-typedef struct _VDS_PORTAL_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_PORTAL_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID portalId;
+     } 	VDS_PORTAL_NOTIFICATION;
+ 
+-typedef struct _VDS_TARGET_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_TARGET_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID targetId;
+     } 	VDS_TARGET_NOTIFICATION;
+ 
+-typedef struct _VDS_PORTAL_GROUP_NOTIFICATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_PORTAL_GROUP_NOTIFICATION
+     {
+     ULONG ulEvent;
+     VDS_OBJECT_ID portalGroupId;
+@@ -959,7 +960,7 @@ typedef struct _VDS_ASYNC_OUTPUT
+ typedef USHORT VDS_ISCSI_PORTALGROUP_TAG;
+ 
+ typedef 
+-enum VDS_IPADDRESS_TYPE
++enum _Windows_SupportedOS_WindowsVista_ VDS_IPADDRESS_TYPE
+     {
+         VDS_IPT_TEXT	= 0,
+         VDS_IPT_IPV4	= 1,
+@@ -1140,18 +1141,18 @@ enum _VDS_ISCSI_LOGIN_FLAG
+         VDS_ILF_MULTIPATH_ENABLED	= 0x2
+     } 	VDS_ISCSI_LOGIN_FLAG;
+ 
+-typedef struct _VDS_PATH_ID
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_PATH_ID
+     {
+     ULONGLONG ullSourceId;
+     ULONGLONG ullPathId;
+     } 	VDS_PATH_ID;
+ 
+-typedef struct _VDS_WWN
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_WWN
+     {
+     UCHAR rguchWwn[ 8 ];
+     } 	VDS_WWN;
+ 
+-typedef struct _VDS_IPADDRESS
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_IPADDRESS
+     {
+     VDS_IPADDRESS_TYPE type;
+     ULONG ipv4Address;
+@@ -1162,19 +1163,19 @@ typedef struct _VDS_IPADDRESS
+     ULONG ulPort;
+     } 	VDS_IPADDRESS;
+ 
+-typedef struct _VDS_ISCSI_IPSEC_KEY
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_IPSEC_KEY
+     {
+     /* [size_is] */ UCHAR *pKey;
+     ULONG ulKeySize;
+     } 	VDS_ISCSI_IPSEC_KEY;
+ 
+-typedef struct _VDS_ISCSI_SHARED_SECRET
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_SHARED_SECRET
+     {
+     /* [size_is] */ UCHAR *pSharedSecret;
+     ULONG ulSharedSecretSize;
+     } 	VDS_ISCSI_SHARED_SECRET;
+ 
+-typedef struct _VDS_HBAPORT_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_HBAPORT_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_WWN wwnNode;
+@@ -1185,20 +1186,20 @@ typedef struct _VDS_HBAPORT_PROP
+     ULONG ulSupportedPortSpeed;
+     } 	VDS_HBAPORT_PROP;
+ 
+-typedef struct _VDS_ISCSI_INITIATOR_ADAPTER_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_INITIATOR_ADAPTER_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszName;
+     } 	VDS_ISCSI_INITIATOR_ADAPTER_PROP;
+ 
+-typedef struct _VDS_ISCSI_INITIATOR_PORTAL_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_INITIATOR_PORTAL_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_IPADDRESS address;
+     ULONG ulPortIndex;
+     } 	VDS_ISCSI_INITIATOR_PORTAL_PROP;
+ 
+-typedef struct _VDS_PROVIDER_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PROVIDER_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszName;
+@@ -1235,7 +1236,7 @@ typedef struct _VDS_PATH_INFO
+         } 	;
+     } 	VDS_PATH_INFO;
+ 
+-typedef struct _VDS_PATH_POLICY
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_PATH_POLICY
+     {
+     VDS_PATH_ID pathId;
+     BOOL bPrimaryPath;
+@@ -1949,7 +1950,7 @@ enum _VDS_DISK_EXTENT_TYPE
+         VDS_DET_UNUSABLE	= 0x7fff
+     } 	VDS_DISK_EXTENT_TYPE;
+ 
+-typedef struct _VDS_PACK_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PACK_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszName;
+@@ -2069,7 +2070,7 @@ typedef struct _VDS_ADVANCEDDISK_PROP
+ 
+ typedef struct _VDS_ADVANCEDDISK_PROP *PVDS_ADVANCEDDISK_PROP;
+ 
+-typedef struct _VDS_VOLUME_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_VOLUME_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_VOLUME_TYPE type;
+@@ -2084,7 +2085,7 @@ typedef struct _VDS_VOLUME_PROP
+ 
+ typedef struct _VDS_VOLUME_PROP *PVDS_VOLUME_PROP;
+ 
+-typedef struct _VDS_VOLUME_PROP2
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_VOLUME_PROP2
+     {
+     VDS_OBJECT_ID id;
+     VDS_VOLUME_TYPE type;
+@@ -2101,7 +2102,7 @@ typedef struct _VDS_VOLUME_PROP2
+ 
+ typedef struct _VDS_VOLUME_PROP2 *PVDS_VOLUME_PROP2;
+ 
+-typedef struct _VDS_VOLUME_PLEX_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_VOLUME_PLEX_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_VOLUME_PLEX_TYPE type;
+@@ -2115,7 +2116,7 @@ typedef struct _VDS_VOLUME_PLEX_PROP
+ 
+ typedef struct _VDS_VOLUME_PLEX_PROP *PVDS_VOLUME_PLEX_PROP;
+ 
+-typedef struct _VDS_DISK_EXTENT
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DISK_EXTENT
+     {
+     VDS_OBJECT_ID diskId;
+     VDS_DISK_EXTENT_TYPE type;
+@@ -2128,7 +2129,7 @@ typedef struct _VDS_DISK_EXTENT
+ 
+ typedef struct _VDS_DISK_EXTENT *PVDS_DISK_EXTENT;
+ 
+-typedef struct _VDS_DISK_FREE_EXTENT
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_DISK_FREE_EXTENT
+     {
+     VDS_OBJECT_ID diskId;
+     ULONGLONG ullOffset;
+@@ -2137,7 +2138,7 @@ typedef struct _VDS_DISK_FREE_EXTENT
+ 
+ typedef struct _VDS_DISK_FREE_EXTENT *PVDS_DISK_FREE_EXTENT;
+ 
+-typedef struct _VDS_INPUT_DISK
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_INPUT_DISK
+     {
+     VDS_OBJECT_ID diskId;
+     ULONGLONG ullSize;
+@@ -2146,7 +2147,7 @@ typedef struct _VDS_INPUT_DISK
+     } 	VDS_INPUT_DISK;
+ 
+ #define GPT_PARTITION_NAME_LENGTH    36
+-typedef struct _VDS_PARTITION_INFO_GPT
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PARTITION_INFO_GPT
+     {
+     GUID partitionType;
+     GUID partitionId;
+@@ -2154,7 +2155,7 @@ typedef struct _VDS_PARTITION_INFO_GPT
+     WCHAR name[ 36 ];
+     } 	VDS_PARTITION_INFO_GPT;
+ 
+-typedef struct _VDS_PARTITION_INFO_MBR
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PARTITION_INFO_MBR
+     {
+     BYTE partitionType;
+     BOOLEAN bootIndicator;
+@@ -4719,7 +4720,7 @@ enum _VDS_MAINTENANCE_OPERATION
+         Ping	= 5
+     } 	VDS_MAINTENANCE_OPERATION;
+ 
+-typedef struct _VDS_HINTS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_HINTS
+     {
+     ULONGLONG ullHintMask;
+     ULONGLONG ullExpectedMaximumSize;
+@@ -4761,7 +4762,7 @@ typedef struct _VDS_HINTS *PVDS_HINTS;
+ 
+ #define	VDS_HINT_ISYANKABLE	( 0x100L )
+ 
+-typedef struct _VDS_HINTS2
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_HINTS2
+     {
+     ULONGLONG ullHintMask;
+     ULONGLONG ullExpectedMaximumSize;
+@@ -4812,7 +4813,7 @@ typedef struct _VDS_HINTS2 *PVDS_HINTS2;
+ 
+ #define	VDS_HINT_CONSISTENCYCHECKENABLED	( 0x8000L )
+ 
+-typedef struct _VDS_SUB_SYSTEM_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_SUB_SYSTEM_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszFriendlyName;
+@@ -4829,7 +4830,7 @@ typedef struct _VDS_SUB_SYSTEM_PROP
+ 
+ typedef struct _VDS_SUB_SYSTEM_PROP *PVDS_SUB_SYSTEM_PROP;
+ 
+-typedef struct _VDS_SUB_SYSTEM_PROP2
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_SUB_SYSTEM_PROP2
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszFriendlyName;
+@@ -4848,7 +4849,7 @@ typedef struct _VDS_SUB_SYSTEM_PROP2
+ 
+ typedef struct _VDS_SUB_SYSTEM_PROP2 *PVDS_SUB_SYSTEM_PROP2;
+ 
+-typedef struct _VDS_CONTROLLER_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_CONTROLLER_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszFriendlyName;
+@@ -4860,7 +4861,7 @@ typedef struct _VDS_CONTROLLER_PROP
+ 
+ typedef struct _VDS_CONTROLLER_PROP *PVDS_CONTROLLER_PROP;
+ 
+-typedef struct _VDS_DRIVE_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DRIVE_PROP
+     {
+     VDS_OBJECT_ID id;
+     ULONGLONG ullSize;
+@@ -4875,7 +4876,7 @@ typedef struct _VDS_DRIVE_PROP
+ 
+ typedef struct _VDS_DRIVE_PROP *PVDS_DRIVE_PROP;
+ 
+-typedef struct _VDS_DRIVE_PROP2
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_DRIVE_PROP2
+     {
+     VDS_OBJECT_ID id;
+     ULONGLONG ullSize;
+@@ -4893,7 +4894,7 @@ typedef struct _VDS_DRIVE_PROP2
+ 
+ typedef struct _VDS_DRIVE_PROP2 *PVDS_DRIVE_PROP2;
+ 
+-typedef struct _VDS_DRIVE_EXTENT
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DRIVE_EXTENT
+     {
+     VDS_OBJECT_ID id;
+     VDS_OBJECT_ID LunId;
+@@ -4905,7 +4906,7 @@ typedef struct _VDS_DRIVE_EXTENT *PVDS_DRIVE_EXTENT;
+ 
+ #define VDS_REBUILD_PRIORITY_MIN        0
+ #define VDS_REBUILD_PRIORITY_MAX        16
+-typedef struct _VDS_LUN_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_LUN_PROP
+     {
+     VDS_OBJECT_ID id;
+     ULONGLONG ullSize;
+@@ -4922,7 +4923,7 @@ typedef struct _VDS_LUN_PROP
+ 
+ typedef struct _VDS_LUN_PROP *PVDS_LUN_PROP;
+ 
+-typedef struct _VDS_LUN_PLEX_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_LUN_PLEX_PROP
+     {
+     VDS_OBJECT_ID id;
+     ULONGLONG ullSize;
+@@ -4937,7 +4938,7 @@ typedef struct _VDS_LUN_PLEX_PROP
+ 
+ typedef struct _VDS_LUN_PLEX_PROP *PVDS_LUN_PLEX_PROP;
+ 
+-typedef struct _VDS_PORT_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_PORT_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszFriendlyName;
+@@ -4947,7 +4948,7 @@ typedef struct _VDS_PORT_PROP
+ 
+ typedef struct _VDS_PORT_PROP *PVDS_PORT_PROP;
+ 
+-typedef struct _VDS_ISCSI_PORTAL_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_PORTAL_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_IPADDRESS address;
+@@ -4956,7 +4957,7 @@ typedef struct _VDS_ISCSI_PORTAL_PROP
+ 
+ typedef struct _VDS_ISCSI_PORTAL_PROP *PVDS_ISCSI_PORTAL_PROP;
+ 
+-typedef struct _VDS_ISCSI_TARGET_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_TARGET_PROP
+     {
+     VDS_OBJECT_ID id;
+     /* [string] */ LPWSTR pwszIscsiName;
+@@ -4966,7 +4967,7 @@ typedef struct _VDS_ISCSI_TARGET_PROP
+ 
+ typedef struct _VDS_ISCSI_TARGET_PROP *PVDS_ISCSI_TARGET_PROP;
+ 
+-typedef struct _VDS_ISCSI_PORTALGROUP_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _VDS_ISCSI_PORTALGROUP_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_ISCSI_PORTALGROUP_TAG tag;
+@@ -5000,7 +5001,7 @@ enum _VDS_RAID_TYPE
+ 
+ typedef enum _VDS_RAID_TYPE *PVDS_RAID_TYPE;
+ 
+-typedef struct _VDS_POOL_CUSTOM_ATTRIBUTES
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_POOL_CUSTOM_ATTRIBUTES
+     {
+     LPWSTR pwszName;
+     LPWSTR pwszValue;
+@@ -5008,7 +5009,7 @@ typedef struct _VDS_POOL_CUSTOM_ATTRIBUTES
+ 
+ typedef struct _VDS_POOL_CUSTOM_ATTRIBUTES *PVDS_POOL_CUSTOM_ATTRIBUTES;
+ 
+-typedef struct _VDS_POOL_ATTRIBUTES
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_POOL_ATTRIBUTES
+     {
+     ULONGLONG ullAttributeMask;
+     VDS_RAID_TYPE raidType;
+@@ -5108,7 +5109,7 @@ typedef struct _VDS_POOL_ATTRIBUTES *PVDS_POOL_ATTRIBUTES;
+ 
+ #define	VDS_POOL_ATTRIB_CUSTOM_ATTRIB	( 0x8000000L )
+ 
+-typedef struct _VDS_STORAGE_POOL_PROP
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_STORAGE_POOL_PROP
+     {
+     VDS_OBJECT_ID id;
+     VDS_STORAGE_POOL_STATUS status;
+@@ -5123,7 +5124,7 @@ typedef struct _VDS_STORAGE_POOL_PROP
+ 
+ typedef struct _VDS_STORAGE_POOL_PROP *PVDS_STORAGE_POOL_PROP;
+ 
+-typedef struct _VDS_STORAGE_POOL_DRIVE_EXTENT
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_STORAGE_POOL_DRIVE_EXTENT
+     {
+     VDS_OBJECT_ID id;
+     ULONGLONG ullSize;
+@@ -8947,7 +8948,7 @@ EXTERN_C const IID IID_IVdsMaintenance;
+ 
+ 
+ 
+-typedef struct _VDS_CREATE_VDISK_PARAMETERS
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_CREATE_VDISK_PARAMETERS
+     {
+     GUID UniqueId;
+     ULONGLONG MaximumSize;
+@@ -9167,7 +9168,7 @@ enum _VDS_VDISK_STATE
+         VDS_VST_MAX	= ( VDS_VST_DELETED + 1 ) 
+     } 	VDS_VDISK_STATE;
+ 
+-typedef struct _VDS_VDISK_PROPERTIES
++typedef struct _Windows_SupportedOS_Windows7_ _VDS_VDISK_PROPERTIES
+     {
+     VDS_OBJECT_ID Id;
+     VDS_VDISK_STATE State;
+@@ -9590,7 +9591,7 @@ enum _VDS_SERVICE_FLAG
+         VDS_SVF_SUPPORT_REFS	= 0x400L
+     } 	VDS_SERVICE_FLAG;
+ 
+-typedef struct _VDS_SERVICE_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_SERVICE_PROP
+     {
+     /* [string] */ LPWSTR pwszVersion;
+     ULONG ulFlags;
+@@ -9607,7 +9608,7 @@ enum _VDS_SAN_POLICY
+         VDS_SP_MAX	= 0x5
+     } 	VDS_SAN_POLICY;
+ 
+-typedef struct VDS_REPARSE_POINT_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ VDS_REPARSE_POINT_PROP
+     {
+     VDS_OBJECT_ID SourceVolumeId;
+     /* [string] */ LPWSTR pwszPath;
+@@ -9621,7 +9622,7 @@ enum _VDS_DRIVE_LETTER_FLAG
+         VDS_DLF_NON_PERSISTENT	= 0x1
+     } 	VDS_DRIVE_LETTER_FLAG;
+ 
+-typedef struct _VDS_DRIVE_LETTER_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_DRIVE_LETTER_PROP
+     {
+     WCHAR wcLetter;
+     VDS_OBJECT_ID volumeId;
+@@ -9653,7 +9654,7 @@ enum _VDS_FILE_SYSTEM_FLAG
+         VDS_FSF_ALLOCATION_UNIT_256K	= 0x2000000
+     } 	VDS_FILE_SYSTEM_FLAG;
+ 
+-typedef struct _VDS_FILE_SYSTEM_TYPE_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_FILE_SYSTEM_TYPE_PROP
+     {
+     VDS_FILE_SYSTEM_TYPE type;
+     WCHAR wszName[ 8 ];
+@@ -9673,7 +9674,7 @@ enum _VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG
+         VDS_FSS_RECOMMENDED	= 0x4
+     } 	VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG;
+ 
+-typedef struct _VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP
+     {
+     ULONG ulFlags;
+     USHORT usRevision;
+@@ -9700,7 +9701,7 @@ enum _VDS_FORMAT_OPTION_FLAGS
+         VDS_FSOF_DUPLICATE_METADATA	= 0x8
+     } 	VDS_FORMAT_OPTION_FLAGS;
+ 
+-typedef struct _VDS_FILE_SYSTEM_PROP
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_FILE_SYSTEM_PROP
+     {
+     VDS_FILE_SYSTEM_TYPE type;
+     VDS_OBJECT_ID volumeId;
