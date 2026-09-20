@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
+index 42b34b67838452b297ddc6b11dd0e73f403264c0..600329d56714b9d2e98dc1b81a44750b69081b2e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
+@@ -12,6 +12,7 @@
+ #define EAPPEERMETHODAPIS_H
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -98,7 +99,7 @@ extern "C"
+ 
+     // This structure is used in EapPeerGetResult API to convey the authentication result and pass
+     // additional information to the EapHost and Supplicant.
+-    typedef struct tagEapPeerMethodResult
++    typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapPeerMethodResult
+     {
+         BOOL fIsSuccess;
+         DWORD dwFailureReasonCode;
+@@ -115,7 +116,7 @@ extern "C"
+     } EapPeerMethodResult;
+ 
+     // List of functions corresponding to the particular EAP method
+-    typedef struct _EAP_PEER_METHOD_ROUTINES
++    typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAP_PEER_METHOD_ROUTINES
+     {
+         DWORD dwVersion;
+         EAP_TYPE* pEapType;

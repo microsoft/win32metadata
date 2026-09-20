@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ndkinfo.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ndkinfo.h
+index 9d9defd5bc565b2a6e69a23239a960e03b7d0abc..5d28bac7b7325038402ad391d0657257f45a23fd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ndkinfo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ndkinfo.h
+@@ -23,6 +23,7 @@ Environment:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -41,7 +42,7 @@ typedef enum _NDK_RDMA_TECHNOLOGY {
+     NdkMaxTechnology
+ } NDK_RDMA_TECHNOLOGY;
+ 
+-typedef struct _NDK_ADAPTER_INFO {
++typedef struct _Windows_SupportedOS_Server2012_ _NDK_ADAPTER_INFO {
+ 
+     NDK_VERSION Version;
+ 

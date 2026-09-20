@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
+index dffbc1cb9b14086d3af60308f8426b84a2295300..3eced2540c160bd26e1bb0514bcdd7db0ec2cab3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjectArray.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -93,7 +94,7 @@ EXTERN_C const IID IID_IObjectArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("92CA9DCD-5622-4bba-A805-5E9F541BD8C9")
+-    IObjectArray : public IUnknown
++    _Windows_SupportedOS_Windows7_ IObjectArray : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -152,7 +153,7 @@ EXTERN_C const IID IID_IObjectArray;
+         END_INTERFACE
+     } IObjectArrayVtbl;
+ 
+-    interface IObjectArray
++    interface _Windows_SupportedOS_Windows7_ IObjectArray
+     {
+         CONST_VTBL struct IObjectArrayVtbl *lpVtbl;
+     };
+@@ -201,7 +202,7 @@ EXTERN_C const IID IID_IObjectCollection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5632b1a4-e38a-400a-928a-d4cd63230295")
+-    IObjectCollection : public IObjectArray
++    _Windows_SupportedOS_Windows7_ IObjectCollection : public IObjectArray
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddObject( 
+@@ -284,7 +285,7 @@ EXTERN_C const IID IID_IObjectCollection;
+         END_INTERFACE
+     } IObjectCollectionVtbl;
+ 
+-    interface IObjectCollection
++    interface _Windows_SupportedOS_Windows7_ IObjectCollection
+     {
+         CONST_VTBL struct IObjectCollectionVtbl *lpVtbl;
+     };

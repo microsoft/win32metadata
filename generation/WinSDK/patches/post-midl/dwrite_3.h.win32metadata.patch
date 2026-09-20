@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
+index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbbf80d98cd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
+@@ -9,6 +9,7 @@
+ 
+ #ifndef DWRITE_3_H_INCLUDED
+ #define DWRITE_3_H_INCLUDED
++#include "win32metadata_annotations.h"
+ 
+ #pragma once
+ 
+@@ -61,7 +62,7 @@ interface IDWriteFontDownloadQueue;
+ /// <summary>
+ /// The font property enumeration identifies a string in a font.
+ /// </summary>
+-enum DWRITE_FONT_PROPERTY_ID
++enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_PROPERTY_ID
+ {
+     /// <summary>
+     /// Unspecified font property identifier.
+@@ -223,7 +224,7 @@ enum DWRITE_FONT_PROPERTY_ID
+ /// Font property used for filtering font sets and
+ /// building a font set with explicit properties.
+ /// </summary>
+-struct DWRITE_FONT_PROPERTY
++struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_PROPERTY
+ {
+     /// <summary>
+     /// Specifies the requested font property, such as DWRITE_FONT_PROPERTY_ID_FAMILY_NAME.
+@@ -253,7 +254,7 @@ struct DWRITE_FONT_PROPERTY
+ /// <summary>
+ /// Specifies the locality of a resource.
+ /// </summary>
+-enum DWRITE_LOCALITY
++enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_LOCALITY
+ {
+     /// <summary>
+     /// The resource is remote, and information is unknown yet, including the file size and date.
+@@ -279,7 +280,7 @@ enum DWRITE_LOCALITY
+ /// <summary>
+ /// Represents a method of rendering glyphs.
+ /// </summary>
+-enum DWRITE_RENDERING_MODE1
++enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_RENDERING_MODE1
+ {
+     /// <summary>
+     /// Specifies that the rendering mode is determined automatically based on the font and size.
+@@ -1640,7 +1641,7 @@ struct DWRITE_LINE_METRICS1 : DWRITE_LINE_METRICS
+ /// <summary>
+ /// Specify whether DWRITE_FONT_METRICS::lineGap value should be part of the line metrics. 
+ /// </summary>
+-enum DWRITE_FONT_LINE_GAP_USAGE
++enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_LINE_GAP_USAGE
+ {
+     /// <summary>
+     /// The usage of the font line gap depends on the method used for text layout.
+@@ -1661,7 +1662,7 @@ enum DWRITE_FONT_LINE_GAP_USAGE
+ /// <summary>
+ /// The DWRITE_LINE_SPACING structure specifies the parameters used to specify how to manage space between lines.
+ /// </summary>
+-struct DWRITE_LINE_SPACING
++struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_LINE_SPACING
+ {
+     /// <summary>
+     /// Method used to determine line spacing.
