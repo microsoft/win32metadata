@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
+index e67a96293f89c272c7dbfc8609b9ad5e210fffb1..5cdd49f6356528e7f21837356728b60a062d84ee 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
+@@ -21,6 +21,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -34,6 +35,8 @@ Abstract:
+ // If *pbRebootRequired returns TRUE, a system restart is necessary to 
+ // complete the operation.
+ //
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ STDAPI_(DWORD)
+ OfflineFilesEnable(
+     _In_ BOOL bEnable, 
+@@ -45,6 +48,8 @@ OfflineFilesEnable(
+ // Start Offline Files feature if it's available. 
+ // If the feature is not available then a ERROR_NOT_SUPPORTED error is returned.
+ //
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(DWORD)
+ OfflineFilesStart(
+     );
+@@ -58,6 +63,8 @@ OfflineFilesStart(
+ //  - enabled/disabled describes the configured state as last successfully set by 
+ //    OfflineFilesEnable().
+ //
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ STDAPI_(DWORD)
+ OfflineFilesQueryStatus(
+     _Out_opt_ BOOL *pbActive,
