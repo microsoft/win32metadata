@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
+index 5eacdf357b330a5405511c03a88d2057330c225c..75601e109d3d50e659cd503a65cb2ae772ce8099 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
+@@ -374,6 +374,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -602,7 +603,7 @@ EXTERN_C const IID IID_IDataCollectorSet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("03837520-098b-11d8-9414-505054503030")
+-    IDataCollectorSet : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataCollectorSet : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DataCollectors( 
+@@ -1167,7 +1168,7 @@ EXTERN_C const IID IID_IDataCollectorSet;
+         END_INTERFACE
+     } IDataCollectorSetVtbl;
+ 
+-    interface IDataCollectorSet
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataCollectorSet
+     {
+         CONST_VTBL struct IDataCollectorSetVtbl *lpVtbl;
+     };
+@@ -1403,7 +1404,7 @@ EXTERN_C const IID IID_IDataManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("03837541-098b-11d8-9414-505054503030")
+-    IDataManager : public IDispatch
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataManager : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
+@@ -1680,7 +1681,7 @@ EXTERN_C const IID IID_IDataManager;
+         END_INTERFACE
+     } IDataManagerVtbl;
+ 
+-    interface IDataManager
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataManager
+     {
+         CONST_VTBL struct IDataManagerVtbl *lpVtbl;
+     };
