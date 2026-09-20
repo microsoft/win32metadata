@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
+@@ -105,6 +105,7 @@ extern "C"{
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #ifndef _PROPIDLBASE_
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -1342,7 +1343,7 @@ inline void PropVariantInit (_Out_ PROPVARIANT * pvar )
+ 
+ #ifndef _SERIALIZEDPROPERTYVALUE_DEFINED_
+ #define _SERIALIZEDPROPERTYVALUE_DEFINED_
+-typedef struct tagSERIALIZEDPROPERTYVALUE
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSERIALIZEDPROPERTYVALUE
+ {
+     DWORD	dwType;
+     BYTE	rgb[1];
+@@ -1352,7 +1353,7 @@ typedef struct tagSERIALIZEDPROPERTYVALUE
+ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ SERIALIZEDPROPERTYVALUE* __stdcall
+-StgConvertVariantToProperty(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgConvertVariantToProperty(
+             _In_ const PROPVARIANT* pvar,
+             _In_ USHORT CodePage,
+             _Out_writes_bytes_opt_(*pcb) SERIALIZEDPROPERTYVALUE* pprop,
+@@ -1367,7 +1368,7 @@ class PMemoryAllocator;
+ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ BOOLEAN __stdcall
+-StgConvertPropertyToVariant(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgConvertPropertyToVariant(
+             _In_ const SERIALIZEDPROPERTYVALUE* pprop,
+             _In_ USHORT CodePage,
+             _Out_ PROPVARIANT* pvar,

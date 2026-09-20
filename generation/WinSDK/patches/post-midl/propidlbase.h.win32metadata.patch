@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
+@@ -88,6 +88,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //+-------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -457,7 +458,7 @@ typedef struct tagPROPSPEC
+         } 	DUMMYUNIONNAME;
+     } 	PROPSPEC;
+ 
+-typedef struct tagSTATPROPSTG
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTATPROPSTG
+     {
+     LPOLESTR lpwstrName;
+     PROPID propid;
+@@ -469,7 +470,7 @@ typedef struct tagSTATPROPSTG
+ #define PROPSETHDR_OSVER_MAJOR(dwOSVer)     LOBYTE(LOWORD( (dwOSVer) ))
+ #define PROPSETHDR_OSVER_MINOR(dwOSVer)     HIBYTE(LOWORD( (dwOSVer) ))
+ #define PROPSETHDR_OSVERSION_UNKNOWN        0xFFFFFFFF
+-typedef struct tagSTATPROPSETSTG
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTATPROPSETSTG
+     {
+     FMTID fmtid;
+     CLSID clsid;
