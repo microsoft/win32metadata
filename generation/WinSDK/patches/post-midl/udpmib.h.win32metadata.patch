@@ -1,0 +1,60 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
+@@ -22,6 +22,7 @@ Environment:
+ #define _UDPMIB_
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -33,12 +34,12 @@ Environment:
+ 
+ #define TCPIP_OWNING_MODULE_SIZE 16
+ 
+-typedef struct _MIB_UDPROW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPROW {
+     DWORD dwLocalAddr;
+     DWORD dwLocalPort;
+ } MIB_UDPROW, *PMIB_UDPROW;
+ 
+-typedef struct _MIB_UDPTABLE {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPTABLE {
+     DWORD dwNumEntries;
+     MIB_UDPROW table[ANY_SIZE];
+ } MIB_UDPTABLE, *PMIB_UDPTABLE;
+@@ -113,13 +114,13 @@ typedef struct _MIB_UDPTABLE2 {
+ // The following definitions require Winsock2.
+ //
+ 
+-typedef struct _MIB_UDP6ROW {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UDP6ROW {
+     IN6_ADDR dwLocalAddr;
+     DWORD dwLocalScopeId;
+     DWORD dwLocalPort;
+ } MIB_UDP6ROW, *PMIB_UDP6ROW;
+ 
+-typedef struct _MIB_UDP6TABLE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UDP6TABLE {
+     DWORD dwNumEntries;
+     MIB_UDP6ROW table[ANY_SIZE];
+ } MIB_UDP6TABLE, *PMIB_UDP6TABLE;
+@@ -196,7 +197,7 @@ typedef struct _MIB_UDP6TABLE2 {
+ 
+ #endif // _WS2IPDEF_
+ 
+-typedef struct _MIB_UDPSTATS {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPSTATS {
+     DWORD dwInDatagrams;
+     DWORD dwNoPorts;
+     DWORD dwInErrors;
+@@ -205,7 +206,7 @@ typedef struct _MIB_UDPSTATS {
+ } MIB_UDPSTATS,*PMIB_UDPSTATS;
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+-typedef struct _MIB_UDPSTATS2 {
++typedef struct _Windows_SupportedOS_16299_ _Windows_SupportedOS_Server2016_ _MIB_UDPSTATS2 {
+     DWORD64 dw64InDatagrams;
+     DWORD dwNoPorts;
+     DWORD dwInErrors;
