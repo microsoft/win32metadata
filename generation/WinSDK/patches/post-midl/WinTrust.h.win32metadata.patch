@@ -1,0 +1,32 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
+index 5025403f589a99d1fa02d5a926c7891f4e8cbc33..f5f21da690c4684b84ab764d0c1980ee578c99b4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
+@@ -16,6 +16,7 @@
+ #define WINTRUST_H
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or Wintrust Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINTRUST)
+@@ -1166,13 +1167,19 @@ extern BOOL WINAPI              WintrustGetDefaultForUsage(_In_ DWORD dwAction,
+                                                            _In_ const char *pszUsageOID,
+                                                            _Inout_ CRYPT_PROVIDER_DEFUSAGE *psUsage);
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(CRYPT_PROVIDER_DATA *pProvData,
+                                                                        DWORD idxSigner,
+                                                                        BOOL fCounterSigner,
+                                                                        DWORD idxCounterSigner);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(CRYPT_PROVIDER_SGNR *pSgnr,
+                                                                      DWORD idxCert);
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ extern CRYPT_PROVIDER_DATA * WINAPI     WTHelperProvDataFromStateData(HANDLE hStateData);
+ 
+ extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(CRYPT_PROVIDER_DATA *pProvData,
