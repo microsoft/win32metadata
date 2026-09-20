@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
+index e1d43ea98945da83ea1d8cc17a8e279c0a58fbca..6fe4c01243b643b0eecf49f258b06c7c24c61f78 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
+@@ -20,6 +20,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -641,6 +642,8 @@ int
+  * Installation and configuration entrypoints.
+  */
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ int
+ WSPAPI
+ WSCEnumProtocols(
+@@ -676,6 +679,8 @@ WSCEnumProtocols32(
+     );
+ #endif //(defined(_WIN64) && _WIN32_WINNT >= 0x0501)
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ int
+ WSPAPI
+ WSCDeinstallProvider(
