@@ -1,0 +1,390 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
+index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814ebbbfb4368 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
+@@ -430,6 +430,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family or WinMgmt Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
+ 
+@@ -894,7 +895,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("dc12a681-737f-11cf-884d-00aa004b2e24")
+-    IWbemClassObject : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemClassObject : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetQualifierSet( 
+@@ -1261,7 +1262,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+         END_INTERFACE
+     } IWbemClassObjectVtbl;
+ 
+-    interface IWbemClassObject
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemClassObject
+     {
+         CONST_VTBL struct IWbemClassObjectVtbl *lpVtbl;
+     };
+@@ -1376,7 +1377,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("49353c9a-516b-11d1-aea6-00c04fb68820")
+-    IWbemObjectAccess : public IWbemClassObject
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectAccess : public IWbemClassObject
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyHandle( 
+@@ -1751,7 +1752,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+         END_INTERFACE
+     } IWbemObjectAccessVtbl;
+ 
+-    interface IWbemObjectAccess
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectAccess
+     {
+         CONST_VTBL struct IWbemObjectAccessVtbl *lpVtbl;
+     };
+@@ -1897,7 +1898,7 @@ EXTERN_C const IID IID_IWbemQualifierSet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("dc12a680-737f-11cf-884d-00aa004b2e24")
+-    IWbemQualifierSet : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemQualifierSet : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Get( 
+@@ -2020,7 +2021,7 @@ EXTERN_C const IID IID_IWbemQualifierSet;
+         END_INTERFACE
+     } IWbemQualifierSetVtbl;
+ 
+-    interface IWbemQualifierSet
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemQualifierSet
+     {
+         CONST_VTBL struct IWbemQualifierSetVtbl *lpVtbl;
+     };
+@@ -2084,7 +2085,7 @@ EXTERN_C const IID IID_IWbemServices;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9556dc99-828c-11cf-a37e-00aa003240c7")
+-    IWbemServices : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemServices : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OpenNamespace( 
+@@ -2625,7 +2626,7 @@ EXTERN_C const IID IID_IWbemServices;
+         END_INTERFACE
+     } IWbemServicesVtbl;
+ 
+-    interface IWbemServices
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemServices
+     {
+         CONST_VTBL struct IWbemServicesVtbl *lpVtbl;
+     };
+@@ -2737,7 +2738,7 @@ EXTERN_C const IID IID_IWbemLocator;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("dc12a687-737f-11cf-884d-00aa004b2e24")
+-    IWbemLocator : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemLocator : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE ConnectServer( 
+@@ -2806,7 +2807,7 @@ EXTERN_C const IID IID_IWbemLocator;
+         END_INTERFACE
+     } IWbemLocatorVtbl;
+ 
+-    interface IWbemLocator
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemLocator
+     {
+         CONST_VTBL struct IWbemLocatorVtbl *lpVtbl;
+     };
+@@ -2852,7 +2853,7 @@ EXTERN_C const IID IID_IWbemObjectSink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7c857801-7381-11cf-884d-00aa004b2e24")
+-    IWbemObjectSink : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSink : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Indicate( 
+@@ -2919,7 +2920,7 @@ EXTERN_C const IID IID_IWbemObjectSink;
+         END_INTERFACE
+     } IWbemObjectSinkVtbl;
+ 
+-    interface IWbemObjectSink
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSink
+     {
+         CONST_VTBL struct IWbemObjectSinkVtbl *lpVtbl;
+     };
+@@ -2968,7 +2969,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("027947e1-d731-11ce-a357-000000000001")
+-    IEnumWbemClassObject : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumWbemClassObject : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+@@ -3065,7 +3066,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+         END_INTERFACE
+     } IEnumWbemClassObjectVtbl;
+ 
+-    interface IEnumWbemClassObject
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumWbemClassObject
+     {
+         CONST_VTBL struct IEnumWbemClassObjectVtbl *lpVtbl;
+     };
+@@ -3123,7 +3124,7 @@ EXTERN_C const IID IID_IWbemCallResult;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("44aca675-e8fc-11d0-a07c-00c04fb68820")
+-    IWbemCallResult : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemCallResult : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetResultObject( 
+@@ -3210,7 +3211,7 @@ EXTERN_C const IID IID_IWbemCallResult;
+         END_INTERFACE
+     } IWbemCallResultVtbl;
+ 
+-    interface IWbemCallResult
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemCallResult
+     {
+         CONST_VTBL struct IWbemCallResultVtbl *lpVtbl;
+     };
+@@ -3265,7 +3266,7 @@ EXTERN_C const IID IID_IWbemContext;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("44aca674-e8fc-11d0-a07c-00c04fb68820")
+-    IWbemContext : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemContext : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+@@ -3410,7 +3411,7 @@ EXTERN_C const IID IID_IWbemContext;
+         END_INTERFACE
+     } IWbemContextVtbl;
+ 
+-    interface IWbemContext
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemContext
+     {
+         CONST_VTBL struct IWbemContextVtbl *lpVtbl;
+     };
+@@ -3480,7 +3481,7 @@ EXTERN_C const IID IID_IUnsecuredApartment;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1cfaba8c-1523-11d1-ad79-00c04fd8fdff")
+-    IUnsecuredApartment : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IUnsecuredApartment : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateObjectStub( 
+@@ -3525,7 +3526,7 @@ EXTERN_C const IID IID_IUnsecuredApartment;
+         END_INTERFACE
+     } IUnsecuredApartmentVtbl;
+ 
+-    interface IUnsecuredApartment
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IUnsecuredApartment
+     {
+         CONST_VTBL struct IUnsecuredApartmentVtbl *lpVtbl;
+     };
+@@ -3571,7 +3572,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("31739d04-3471-4cf4-9a7c-57a44ae71956")
+-    IWbemUnsecuredApartment : public IUnsecuredApartment
++    _Windows_SupportedOS_Server2008_ IWbemUnsecuredApartment : public IUnsecuredApartment
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateSinkStub( 
+@@ -3632,7 +3633,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
+         END_INTERFACE
+     } IWbemUnsecuredApartmentVtbl;
+ 
+-    interface IWbemUnsecuredApartment
++    interface _Windows_SupportedOS_Server2008_ IWbemUnsecuredApartment
+     {
+         CONST_VTBL struct IWbemUnsecuredApartmentVtbl *lpVtbl;
+     };
+@@ -3682,7 +3683,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("eb87e1bc-3233-11d2-aec9-00c04fb68820")
+-    IWbemStatusCodeText : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemStatusCodeText : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetErrorCodeText( 
+@@ -3757,7 +3758,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+         END_INTERFACE
+     } IWbemStatusCodeTextVtbl;
+ 
+-    interface IWbemStatusCodeText
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemStatusCodeText
+     {
+         CONST_VTBL struct IWbemStatusCodeTextVtbl *lpVtbl;
+     };
+@@ -3806,7 +3807,7 @@ EXTERN_C const IID IID_IWbemBackupRestore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("C49E32C7-BC8B-11d2-85D4-00105A1F8304")
+-    IWbemBackupRestore : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestore : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Backup( 
+@@ -3865,7 +3866,7 @@ EXTERN_C const IID IID_IWbemBackupRestore;
+         END_INTERFACE
+     } IWbemBackupRestoreVtbl;
+ 
+-    interface IWbemBackupRestore
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestore
+     {
+         CONST_VTBL struct IWbemBackupRestoreVtbl *lpVtbl;
+     };
+@@ -3914,7 +3915,7 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A359DEC5-E813-4834-8A2A-BA7F1D777D76")
+-    IWbemBackupRestoreEx : public IWbemBackupRestore
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestoreEx : public IWbemBackupRestore
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Pause( void) = 0;
+@@ -3973,7 +3974,7 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
+         END_INTERFACE
+     } IWbemBackupRestoreExVtbl;
+ 
+-    interface IWbemBackupRestoreEx
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestoreEx
+     {
+         CONST_VTBL struct IWbemBackupRestoreExVtbl *lpVtbl;
+     };
+@@ -4029,7 +4030,7 @@ EXTERN_C const IID IID_IWbemRefresher;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("49353c99-516b-11d1-aea6-00c04fb68820")
+-    IWbemRefresher : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemRefresher : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Refresh( 
+@@ -4070,7 +4071,7 @@ EXTERN_C const IID IID_IWbemRefresher;
+         END_INTERFACE
+     } IWbemRefresherVtbl;
+ 
+-    interface IWbemRefresher
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemRefresher
+     {
+         CONST_VTBL struct IWbemRefresherVtbl *lpVtbl;
+     };
+@@ -4116,7 +4117,7 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2705C288-79AE-11d2-B348-00105A1F8177")
+-    IWbemHiPerfEnum : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemHiPerfEnum : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddObjects( 
+@@ -4219,7 +4220,7 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
+         END_INTERFACE
+     } IWbemHiPerfEnumVtbl;
+ 
+-    interface IWbemHiPerfEnum
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemHiPerfEnum
+     {
+         CONST_VTBL struct IWbemHiPerfEnumVtbl *lpVtbl;
+     };
+@@ -4274,7 +4275,7 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("49353c92-516b-11d1-aea6-00c04fb68820")
+-    IWbemConfigureRefresher : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemConfigureRefresher : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddObjectByPath( 
+@@ -4419,7 +4420,7 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
+         END_INTERFACE
+     } IWbemConfigureRefresherVtbl;
+ 
+-    interface IWbemConfigureRefresher
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemConfigureRefresher
+     {
+         CONST_VTBL struct IWbemConfigureRefresherVtbl *lpVtbl;
+     };
+@@ -4577,7 +4578,7 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e7d35cfa-348b-485e-b524-252725d697ca")
+-    IWbemObjectSinkEx : public IWbemObjectSink
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSinkEx : public IWbemObjectSink
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE WriteMessage( 
+@@ -4722,7 +4723,7 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
+         END_INTERFACE
+     } IWbemObjectSinkExVtbl;
+ 
+-    interface IWbemObjectSinkEx
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSinkEx
+     {
+         CONST_VTBL struct IWbemObjectSinkExVtbl *lpVtbl;
+     };
+@@ -4787,7 +4788,7 @@ EXTERN_C const IID IID_IWbemShutdown;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b7b31df9-d515-11d3-a11c-00105a1f515a")
+-    IWbemShutdown : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemShutdown : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Shutdown( 
+@@ -4836,7 +4837,7 @@ EXTERN_C const IID IID_IWbemShutdown;
+         END_INTERFACE
+     } IWbemShutdownVtbl;
+ 
+-    interface IWbemShutdown
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemShutdown
+     {
+         CONST_VTBL struct IWbemShutdownVtbl *lpVtbl;
+     };
+@@ -4908,7 +4909,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("bfbf883a-cad7-11d3-a11b-00105a1f515a")
+-    IWbemObjectTextSrc : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectTextSrc : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetText( 
+@@ -4991,7 +4992,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+         END_INTERFACE
+     } IWbemObjectTextSrcVtbl;
+ 
+-    interface IWbemObjectTextSrc
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectTextSrc
+     {
+         CONST_VTBL struct IWbemObjectTextSrcVtbl *lpVtbl;
+     };
+@@ -5078,7 +5079,7 @@ EXTERN_C const IID IID_IMofCompiler;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6daf974e-2e37-11d2-aec9-00c04fb68820")
+-    IMofCompiler : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IMofCompiler : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CompileFile( 
+@@ -5231,7 +5232,7 @@ EXTERN_C const IID IID_IMofCompiler;
+         END_INTERFACE
+     } IMofCompilerVtbl;
+ 
+-    interface IMofCompiler
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IMofCompiler
+     {
+         CONST_VTBL struct IMofCompilerVtbl *lpVtbl;
+     };
