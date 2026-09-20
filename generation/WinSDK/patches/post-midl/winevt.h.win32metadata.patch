@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
+index 13d6163d391f53380a97ee2e353923cbd8e9acb5..e52503a5d271635b28ea21d85678a09f6e493013 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
+@@ -15,6 +15,7 @@ Abstract:
+ #ifndef __WINEVT_H__
+ #define __WINEVT_H__
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or EventLogService Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_EVENTLOGSERVICE)
+@@ -169,6 +170,8 @@ EvtOpenSession(
+ //
+ ////////////////////////////////////////////////////////////////////////////////
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return != 0)
+ BOOL
+ WINAPI
+@@ -177,12 +180,16 @@ EvtClose(
+     );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ EvtCancel(
+     _In_opt_ EVT_HANDLE Object
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
