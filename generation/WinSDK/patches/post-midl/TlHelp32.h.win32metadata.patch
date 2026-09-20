@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
+index c712ccb473696c41aeaded29e789d3019b1b72c2..0930e30339419f3a93f63b23ecbf0ef6a2f4482e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -29,6 +30,8 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ /****** Shapshot function **********************************************/
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ HANDLE
+ WINAPI
+ CreateToolhelp32Snapshot(
+@@ -63,7 +66,7 @@ CreateToolhelp32Snapshot(
+ 
+ /****** heap walking ***************************************************/
+ 
+-typedef struct tagHEAPLIST32
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ tagHEAPLIST32
+ {
+     SIZE_T dwSize;
+     DWORD  th32ProcessID;   // owning process
+@@ -78,6 +81,8 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
+ #define HF32_DEFAULT      1  // process's default heap
+ #define HF32_SHARED       2  // is shared heap
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ BOOL
+ WINAPI
+ Heap32ListFirst(
+@@ -85,6 +90,8 @@ Heap32ListFirst(
+     LPHEAPLIST32 lphl
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ BOOL
+ WINAPI
+ Heap32ListNext(
