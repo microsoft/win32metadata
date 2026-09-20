@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
+@@ -140,6 +140,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -980,13 +981,13 @@ enum __MIDL_IPrint_0001
+         PRINTFLAG_PRINTTOFILE	= 64
+     } 	PRINTFLAG;
+ 
+-typedef struct tagPAGERANGE
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagPAGERANGE
+     {
+     LONG nFromPage;
+     LONG nToPage;
+     } 	PAGERANGE;
+ 
+-typedef struct tagPAGESET
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagPAGESET
+     {
+     ULONG cbStruct;
+     BOOL fOddPages;
+@@ -1182,7 +1183,7 @@ extern RPC_IF_HANDLE __MIDL_itf_docobj_0000_0006_v0_0_s_ifspec;
+ typedef /* [unique] */  __RPC_unique_pointer IOleCommandTarget *LPOLECOMMANDTARGET;
+ 
+ typedef 
+-enum OLECMDF
++enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ OLECMDF
+     {
+         OLECMDF_SUPPORTED	= 0x1,
+         OLECMDF_ENABLED	= 0x2,
+@@ -1192,13 +1193,13 @@ enum OLECMDF
+         OLECMDF_DEFHIDEONCTXTMENU	= 0x20
+     } 	OLECMDF;
+ 
+-typedef struct _tagOLECMD
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _tagOLECMD
+     {
+     ULONG cmdID;
+     DWORD cmdf;
+     } 	OLECMD;
+ 
+-typedef struct _tagOLECMDTEXT
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _tagOLECMDTEXT
+     {
+     DWORD cmdtextf;
+     ULONG cwActual;
+@@ -1207,7 +1208,7 @@ typedef struct _tagOLECMDTEXT
+     } 	OLECMDTEXT;
+ 
+ typedef 
+-enum OLECMDTEXTF
++enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ OLECMDTEXTF
+     {
+         OLECMDTEXTF_NONE	= 0,
+         OLECMDTEXTF_NAME	= 1,
+@@ -1215,7 +1216,7 @@ enum OLECMDTEXTF
+     } 	OLECMDTEXTF;
+ 
+ typedef 
+-enum OLECMDEXECOPT
++enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ OLECMDEXECOPT
+     {
+         OLECMDEXECOPT_DODEFAULT	= 0,
+         OLECMDEXECOPT_PROMPTUSER	= 1,
+@@ -1225,7 +1226,7 @@ enum OLECMDEXECOPT
+ 
+ /* OLECMDID_STOPDOWNLOAD and OLECMDID_ALLOWUILESSSAVEAS are supported for QueryStatus Only */
+ typedef 
+-enum OLECMDID
++enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ OLECMDID
+     {
+         OLECMDID_OPEN	= 1,
+         OLECMDID_NEW	= 2,
+@@ -1582,7 +1583,7 @@ typedef enum
+     PAGEACTION_UI_SILENT      = 3,
+ } PAGEACTION_UI;
+ #endif
+-typedef enum
++typedef enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ {
+     OLECMDIDF_WINDOWSTATE_USERVISIBLE        = 0x00000001,
+     OLECMDIDF_WINDOWSTATE_ENABLED            = 0x00000002,
