@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h b/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
+index 2b0657fc58c0ad0b7c43b83738dc2a423da4955d..51136e754d9ea3e57197b068f73f5b65f4f167a6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
+@@ -21,6 +21,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -493,7 +494,7 @@ typedef struct
+ // id that is used to reference the session. It it not related to the
+ // actual ISID
+ //
+-typedef struct _ISCSI_UNIQUE_SESSION_ID
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ISCSI_UNIQUE_SESSION_ID
+ {   
+    ULONGLONG AdapterUnique;
+    ULONGLONG AdapterSpecific;
+@@ -855,10 +856,14 @@ typedef struct
+ 
+ #if ! (defined(MIDL_PASS))
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ISDSC_STATUS ISDSC_API GetIScsiVersionInformation(
+     PISCSI_VERSION_INFO VersionInfo
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ISDSC_STATUS ISDSC_API GetIScsiTargetInformationW(
+     IN _In_ PWSTR TargetName,
+     IN _In_opt_ PWSTR DiscoveryMechanism,
+@@ -867,6 +872,8 @@ ISDSC_STATUS ISDSC_API GetIScsiTargetInformationW(
+     OUT PVOID Buffer
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ ISDSC_STATUS ISDSC_API GetIScsiTargetInformationA(
+     IN _In_ PSTR TargetName,
+     IN _In_opt_ PSTR DiscoveryMechanism,
