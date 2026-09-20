@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
+@@ -699,6 +699,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //=--------------------------------------------------------------------------=
+ // msctf.h
+ 
+@@ -1026,7 +1027,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("88a9c478-f3ec-4763-8345-cd9250443f8d") DWOR
+ 
+ typedef /* [uuid] */  DECLSPEC_UUID("de403c21-89fd-4f85-8b87-64584d063fbc") DWORD TfClientId;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("e26d9e1d-691e-4f29-90d7-338dcf1f8cef") struct TF_PERSISTENT_PROPERTY_HEADER_ACP
++typedef /* [uuid] */  DECLSPEC_UUID("e26d9e1d-691e-4f29-90d7-338dcf1f8cef") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_PERSISTENT_PROPERTY_HEADER_ACP
+     {
+     GUID guidType;
+     LONG ichStart;
+@@ -1036,7 +1037,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("e26d9e1d-691e-4f29-90d7-338dcf1f8cef") stru
+     CLSID clsidTIP;
+     } 	TF_PERSISTENT_PROPERTY_HEADER_ACP;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("e1b5808d-1e46-4c19-84dc-68c5f5978cc8") struct TF_LANGUAGEPROFILE
++typedef /* [uuid] */  DECLSPEC_UUID("e1b5808d-1e46-4c19-84dc-68c5f5978cc8") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_LANGUAGEPROFILE
+     {
+     CLSID clsid;
+     LANGID langid;
+@@ -3625,13 +3626,13 @@ enum __MIDL_ITfContext_0001
+         TF_AE_END	= 2
+     } 	TfActiveSelEnd;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("36ae42a4-6989-4bdc-b48a-6137b7bf2e42") struct TF_SELECTIONSTYLE
++typedef /* [uuid] */  DECLSPEC_UUID("36ae42a4-6989-4bdc-b48a-6137b7bf2e42") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_SELECTIONSTYLE
+     {
+     TfActiveSelEnd ase;
+     BOOL fInterimChar;
+     } 	TF_SELECTIONSTYLE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("75eb22f2-b0bf-46a8-8006-975a3b6efcf1") struct TF_SELECTION
++typedef /* [uuid] */  DECLSPEC_UUID("75eb22f2-b0bf-46a8-8006-975a3b6efcf1") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_SELECTION
+     {
+     ITfRange *range;
+     TF_SELECTIONSTYLE style;
+@@ -4579,7 +4580,7 @@ EXTERN_C const IID IID_ITfReadOnlyProperty;
+ /* interface __MIDL_itf_msctf_0000_0023 */
+ /* [local] */ 
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("d678c645-eb6a-45c9-b4ee-0f3e3a991348") struct TF_PROPERTYVAL
++typedef /* [uuid] */  DECLSPEC_UUID("d678c645-eb6a-45c9-b4ee-0f3e3a991348") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_PROPERTYVAL
+     {
+     GUID guidId;
+     VARIANT varValue;
+@@ -6256,7 +6257,7 @@ enum __MIDL_ITfRange_0002
+ 
+ #define	TF_IE_CORRECTION	( 1 )
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("49930d51-7d93-448c-a48c-fea5dac192b1") struct TF_HALTCOND
++typedef /* [uuid] */  DECLSPEC_UUID("49930d51-7d93-448c-a48c-fea5dac192b1") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_HALTCOND
+     {
+     ITfRange *pHaltRange;
+     TfAnchor aHaltPos;
+@@ -10259,7 +10260,7 @@ EXTERN_C const IID IID_ITfLanguageProfileNotifySink;
+ /* interface __MIDL_itf_msctf_0000_0058 */
+ /* [local] */ 
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("44d2825a-10e5-43b2-877f-6cb2f43b7e7e") struct TF_INPUTPROCESSORPROFILE
++typedef /* [uuid] */  DECLSPEC_UUID("44d2825a-10e5-43b2-877f-6cb2f43b7e7e") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_INPUTPROCESSORPROFILE
+     {
+     DWORD dwProfileType;
+     LANGID langid;
+@@ -10827,7 +10828,7 @@ EXTERN_C const IID IID_ITfInputProcessorProfileActivationSink;
+ /* interface __MIDL_itf_msctf_0000_0061 */
+ /* [local] */ 
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("77c12f95-b783-450d-879f-1cd2362c6521") struct TF_PRESERVEDKEY
++typedef /* [uuid] */  DECLSPEC_UUID("77c12f95-b783-450d-879f-1cd2362c6521") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_PRESERVEDKEY
+     {
+     UINT uVKey;
+     UINT uModifiers;
+@@ -12247,7 +12248,7 @@ enum __MIDL___MIDL_itf_msctf_0000_0070_0004
+         TF_ATTR_OTHER	= -1
+     } 	TF_DA_ATTR_INFO;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("1bf1c305-419b-4182-a4d2-9bfadc3f021f") struct TF_DISPLAYATTRIBUTE
++typedef /* [uuid] */  DECLSPEC_UUID("1bf1c305-419b-4182-a4d2-9bfadc3f021f") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_DISPLAYATTRIBUTE
+     {
+     TF_DA_COLOR crText;
+     TF_DA_COLOR crBk;
