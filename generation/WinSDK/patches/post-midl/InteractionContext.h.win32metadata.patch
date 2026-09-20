@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
+index 92d9778999179dd56231b2897ef2610febfa137a..8645533d399930a4318095dd2d5e94b893770f50 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
+@@ -7,6 +7,7 @@
+ #define INTERACTION_CONTEXT_H
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -188,7 +189,7 @@ typedef enum MANIPULATION_RAILS_STATE
+     MANIPULATION_RAILS_STATE_MAX       = 0xffffffff
+ } MANIPULATION_RAILS_STATE;
+ 
+-typedef struct MANIPULATION_TRANSFORM
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ MANIPULATION_TRANSFORM
+ {
+     float translationX;
+     float translationY;
+@@ -308,16 +309,19 @@ DECLARE_HANDLE(HINTERACTIONCONTEXT);
+ 
+ #define INERTIA_PARAMETER_INVALID_VALUE    FLT_MAX
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ CreateInteractionContext(
+     _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ DestroyInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext);
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ RegisterOutputCallbackInteractionContext(
