@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+index a6276573b62d606f0e19c38456562acb6d43620a..815aa49a2acd2a06e757789090c1835b95e1d4b7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+@@ -1,6 +1,7 @@
+ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++ BUILD Version: 0001 // Increment this if a change has global effects --*/
+ 
+@@ -40,7 +41,7 @@ DECLARE_HANDLE(HDDEDATA);
+ 
+ /* the following structure is for use with XTYP_WILDCONNECT processing. */
+ 
+-typedef struct tagHSZPAIR {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagHSZPAIR {
+     HSZ hszSvc;
+     HSZ hszTopic;
+ } HSZPAIR, FAR *PHSZPAIR;
+@@ -218,6 +219,8 @@ typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
+ 
+ /* DLL registration functions */
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ UINT
+ WINAPI
+ DdeInitializeA(
+@@ -225,6 +228,8 @@ DdeInitializeA(
+     _In_ PFNCALLBACK pfnCallback,
+     _In_ DWORD afCmd,
+     _Reserved_ DWORD ulRes);
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ UINT
+ WINAPI
+ DdeInitializeW(
+@@ -269,6 +274,8 @@ DdeInitializeW(
+ #define     APPCLASS_STANDARD            0x00000000L
+ #define     APPCLASS_MASK                0x0000000FL
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ BOOL
+ WINAPI
+ DdeUninitialize(
