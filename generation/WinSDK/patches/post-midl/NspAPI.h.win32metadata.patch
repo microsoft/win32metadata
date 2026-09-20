@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
+index ba21f468e222d7e4c217afe0a38a171d1a8ecb8c..a931cba0d7b57c8c853b23daf05cab4831be835f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
+@@ -29,6 +29,7 @@ Notes:
+ #define _NSPAPI_INCLUDED
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -560,6 +561,8 @@ EnumProtocolsW (
+ #define EnumProtocols  EnumProtocolsA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ INT
+ APIENTRY
+ GetAddressByNameA (
+@@ -574,6 +577,8 @@ GetAddressByNameA (
+     _Inout_updates_opt_(*lpdwAliasBufferLength) LPSTR  lpAliasBuffer,
+     _Inout_ LPDWORD               lpdwAliasBufferLength
+     );
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ INT
+ APIENTRY
+ GetAddressByNameW (
+@@ -594,6 +599,8 @@ GetAddressByNameW (
+ #define GetAddressByName  GetAddressByNameA
+ #endif // !UNICODE
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ INT
+ APIENTRY
+ GetTypeByNameA (
