@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
+index 5734a93b98ad22033b28fb4dcddef218db6a2c10..e4e39315b23b324dd4179efcf72b785fe868cafe 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
+@@ -30,6 +30,7 @@
+ #ifndef _WINTERNL_
+ #define _WINTERNL_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -52,7 +53,7 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS;
+ 
+ typedef CONST char *PCSZ;
+ 
+-typedef struct _STRING {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _STRING {
+     USHORT Length;
+     USHORT MaximumLength;
+     PCHAR Buffer;
