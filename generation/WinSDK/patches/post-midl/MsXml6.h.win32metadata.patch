@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
+index 2a4df9e14a59575830db7e9ea9e1a16091ae44c6..8fa690a0955419f219f4bf8b6caa6c36edb99cbc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
+@@ -940,6 +940,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ //+-------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -26431,7 +26432,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2Callback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A44A9299-E321-40DE-8866-341B41669162")
+-    IXMLHTTPRequest2Callback : public IUnknown
++    _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2Callback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnRedirect( 
+@@ -26536,7 +26537,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2Callback;
+         END_INTERFACE
+     } IXMLHTTPRequest2CallbackVtbl;
+ 
+-    interface IXMLHTTPRequest2Callback
++    interface _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2Callback
+     {
+         CONST_VTBL struct IXMLHTTPRequest2CallbackVtbl *lpVtbl;
+     };
+@@ -26594,7 +26595,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E5D37DC0-552A-4D52-9CC0-A14D546FBD04")
+-    IXMLHTTPRequest2 : public IUnknown
++    _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2 : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Open( 
+@@ -26769,7 +26770,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2;
+         END_INTERFACE
+     } IXMLHTTPRequest2Vtbl;
+ 
+-    interface IXMLHTTPRequest2
++    interface _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2
+     {
+         CONST_VTBL struct IXMLHTTPRequest2Vtbl *lpVtbl;
+     };
