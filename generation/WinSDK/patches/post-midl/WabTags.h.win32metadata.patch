@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabTags.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabTags.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WabTags.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabTags.h
+@@ -45,6 +45,7 @@
+  */
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -502,7 +503,7 @@
+ 
+ 
+ // Values for PR_GENDER property
+-enum Gender {
++enum _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ Gender {
+ 	genderUnspecified = 0,
+ 	genderFemale,
+ 	genderMale

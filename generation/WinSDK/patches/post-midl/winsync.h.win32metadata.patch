@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
+index 6bf90f1d640af2ee1132d8989267bdac763d0b8c..5aafde372b11c70a1fac86928f152c40062417ca 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
+@@ -556,10 +556,11 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma warning ( disable : 28718 )
+-typedef struct _ID_PARAMETER_PAIR
++typedef struct _Windows_SupportedOS_Windows7_ _ID_PARAMETER_PAIR
+     {
+     BOOL fIsVariable;
+     USHORT cbIdSize;

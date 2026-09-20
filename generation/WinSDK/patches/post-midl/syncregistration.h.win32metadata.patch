@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
+index 1433c2af44c5ccd0751d90ed31f80b298753ea75..abe2f3c904a6c70163fd5472647558ff6068c7f8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
+@@ -177,6 +177,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -220,7 +221,7 @@ DEFINE_PROPERTYKEY(PKEY_CONFIGUI_TOOLTIPS, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x5
+ DEFINE_PROPERTYKEY(PKEY_CONFIGUI_ICON, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x52, 0xdf, 0xb5, 0x61, 0xe1, 0x71, 0xe4, 11);
+ DEFINE_PROPERTYKEY(PKEY_CONFIGUI_MENUITEM_NOUI, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x52, 0xdf, 0xb5, 0x61, 0xe1, 0x71, 0xe4, 12);
+ DEFINE_PROPERTYKEY(PKEY_CONFIGUI_MENUITEM, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x52, 0xdf, 0xb5, 0x61, 0xe1, 0x71, 0xe4, 13);
+-typedef struct _SyncProviderConfiguration
++typedef struct _Windows_SupportedOS_Windows7_ _SyncProviderConfiguration
+     {
+     DWORD dwVersion;
+     GUID guidInstanceId;
