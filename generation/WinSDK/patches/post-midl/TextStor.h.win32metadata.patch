@@ -1,0 +1,69 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h b/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
+@@ -101,6 +101,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+@@ -183,13 +184,13 @@ DEFINE_GUID (GUID_TS_SERVICE_ACTIVEX,    0xea937a50, 0xc9a6, 0x4b7d, 0x89, 0x4a,
+ 
+ #define	TS_IAS_QUERYONLY	( 0x2 )
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("fec4f516-c503-45b1-a5fd-7a3d8ab07049") struct TS_STATUS
++typedef /* [uuid] */  DECLSPEC_UUID("fec4f516-c503-45b1-a5fd-7a3d8ab07049") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_STATUS
+     {
+     DWORD dwDynamicFlags;
+     DWORD dwStaticFlags;
+     } 	TS_STATUS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("f3181bd6-bcf0-41d3-a81c-474b17ec38fb") struct TS_TEXTCHANGE
++typedef /* [uuid] */  DECLSPEC_UUID("f3181bd6-bcf0-41d3-a81c-474b17ec38fb") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_TEXTCHANGE
+     {
+     LONG acpStart;
+     LONG acpOldEnd;
+@@ -204,20 +205,20 @@ enum __MIDL___MIDL_itf_textstor_0000_0000_0001
+         TS_AE_END	= 2
+     } 	TsActiveSelEnd;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("7ecc3ffa-8f73-4d91-98ed-76f8ac5b1600") struct TS_SELECTIONSTYLE
++typedef /* [uuid] */  DECLSPEC_UUID("7ecc3ffa-8f73-4d91-98ed-76f8ac5b1600") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_SELECTIONSTYLE
+     {
+     TsActiveSelEnd ase;
+     BOOL fInterimChar;
+     } 	TS_SELECTIONSTYLE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("c4b9c33b-8a0d-4426-bebe-d444a4701fe9") struct TS_SELECTION_ACP
++typedef /* [uuid] */  DECLSPEC_UUID("c4b9c33b-8a0d-4426-bebe-d444a4701fe9") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_SELECTION_ACP
+     {
+     LONG acpStart;
+     LONG acpEnd;
+     TS_SELECTIONSTYLE style;
+     } 	TS_SELECTION_ACP;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") struct TS_SELECTION_ANCHOR
++typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_SELECTION_ANCHOR
+     {
+     IAnchor *paStart;
+     IAnchor *paEnd;
+@@ -238,7 +239,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") stru
+ 
+ typedef /* [uuid] */  DECLSPEC_UUID("ef3457d9-8446-49a7-a9e6-b50d9d5f3fd9") GUID TS_ATTRID;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("2cc2b33f-1174-4507-b8d9-5bc0eb37c197") struct TS_ATTRVAL
++typedef /* [uuid] */  DECLSPEC_UUID("2cc2b33f-1174-4507-b8d9-5bc0eb37c197") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_ATTRVAL
+     {
+     TS_ATTRID idAttr;
+     DWORD dwOverlapId;
+@@ -277,7 +278,7 @@ enum __MIDL___MIDL_itf_textstor_0000_0000_0003
+         TS_RT_OPAQUE	= ( TS_RT_HIDDEN + 1 ) 
+     } 	TsRunType;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("a6231949-37c5-4b74-a24e-2a26c327201d") struct TS_RUNINFO
++typedef /* [uuid] */  DECLSPEC_UUID("a6231949-37c5-4b74-a24e-2a26c327201d") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TS_RUNINFO
+     {
+     ULONG uCount;
+     TsRunType type;
