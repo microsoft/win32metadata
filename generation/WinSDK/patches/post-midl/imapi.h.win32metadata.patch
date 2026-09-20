@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
+index 1c968ff809bc2c89fbacb0ab51c53511505da7a1..ebaf56b92538bdc9f9c665ae01e0def35367ac4c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
+@@ -146,6 +146,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ // this assert will cause compilation breaks in clients whose code would cause stack corruption
+@@ -198,7 +199,7 @@ EXTERN_C const IID IID_IDiscRecorder;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("85AC9776-CA88-4cf2-894E-09598C078A41")
+-    IDiscRecorder : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IDiscRecorder : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Init( 
+@@ -364,7 +365,7 @@ EXTERN_C const IID IID_IDiscRecorder;
+         END_INTERFACE
+     } IDiscRecorderVtbl;
+ 
+-    interface IDiscRecorder
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IDiscRecorder
+     {
+         CONST_VTBL struct IDiscRecorderVtbl *lpVtbl;
+     };
+@@ -690,7 +691,7 @@ EXTERN_C const IID IID_IRedbookDiscMaster;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E3BC42CD-4E5C-11D3-9144-00104BA11C5E")
+-    IRedbookDiscMaster : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IRedbookDiscMaster : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTotalAudioTracks( 
+@@ -784,7 +785,7 @@ EXTERN_C const IID IID_IRedbookDiscMaster;
+         END_INTERFACE
+     } IRedbookDiscMasterVtbl;
+ 
+-    interface IRedbookDiscMaster
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IRedbookDiscMaster
+     {
+         CONST_VTBL struct IRedbookDiscMasterVtbl *lpVtbl;
+     };
