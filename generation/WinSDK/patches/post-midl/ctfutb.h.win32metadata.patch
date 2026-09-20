@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h b/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
+@@ -165,6 +165,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //=--------------------------------------------------------------------------=
+ // ctfutb.h
+ 
+@@ -893,7 +894,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ #define	TF_LBI_DESC_MAXLEN	( 32 )
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("12a1d29f-a065-440c-9746-eb2002c8bd19") struct TF_LANGBARITEMINFO
++typedef /* [uuid] */  DECLSPEC_UUID("12a1d29f-a065-440c-9746-eb2002c8bd19") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_LANGBARITEMINFO
+     {
+     CLSID clsidService;
+     GUID guidItem;
+@@ -2387,7 +2388,7 @@ enum __MIDL_ITfLangBarItemBalloon_0001
+         TF_LB_BALLOON_MISS	= 2
+     } 	TfLBBalloonStyle;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("37574483-5c50-4092-a55c-922e3a67e5b8") struct TF_LBBALLOONINFO
++typedef /* [uuid] */  DECLSPEC_UUID("37574483-5c50-4092-a55c-922e3a67e5b8") struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ TF_LBBALLOONINFO
+     {
+     TfLBBalloonStyle style;
+     BSTR bstrText;
