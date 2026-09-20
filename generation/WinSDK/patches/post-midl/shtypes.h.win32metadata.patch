@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
+index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55e0f7394b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
+@@ -28,6 +28,7 @@
+ 
+ #ifndef __shtypes_h__
+ #define __shtypes_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -124,7 +125,7 @@ extern "C"{
+ //     BYTE        abID[];         // The item ID (variable length)
+ //
+ #include <pshpack1.h>
+-typedef struct _SHITEMID
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _SHITEMID
+     {
+     USHORT cb;
+     BYTE abID[ 1 ];
+@@ -309,7 +310,7 @@ typedef STRRET *LPSTRRET;
+ //  str;            // String information
+ //
+ #include <pshpack1.h>
+-typedef struct _SHELLDETAILS
++typedef struct _Windows_SupportedOS_Server2003_ _SHELLDETAILS
+     {
+     int fmt;
+     int cxChar;
+@@ -322,7 +323,7 @@ typedef struct _SHELLDETAILS *LPSHELLDETAILS;
+ 
+ #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
+ typedef /* [v1_enum] */ 
+-enum tagPERCEIVED
++enum _Windows_SupportedOS_Server2003_ tagPERCEIVED
+     {
+         PERCEIVED_TYPE_FIRST	= -3,
+         PERCEIVED_TYPE_CUSTOM	= -3,
+@@ -354,7 +355,7 @@ typedef DWORD PERCEIVEDFLAG;
+ #endif  // _WIN32_IE_IE60SP2
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-typedef struct _COMDLG_FILTERSPEC
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _COMDLG_FILTERSPEC
+     {
+     /* [string] */ LPCWSTR pszName;
+     /* [string] */ LPCWSTR pszSpec;
+@@ -478,7 +479,7 @@ typedef PROPERTYKEY SHCOLUMNID;
+ typedef const SHCOLUMNID *LPCSHCOLUMNID;
+ 
+ typedef /* [v1_enum] */ 
+-enum DEVICE_SCALE_FACTOR
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ DEVICE_SCALE_FACTOR
+     {
+         DEVICE_SCALE_FACTOR_INVALID	= 0,
+         SCALE_100_PERCENT	= 100,
