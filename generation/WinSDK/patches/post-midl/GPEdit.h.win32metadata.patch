@@ -1,0 +1,69 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h b/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
+index e1a069eab85e3d4798496f43e3299a23fddbfb0a..953d0e1c1250662524c6c9b2e2509b126aa62c75 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
+@@ -162,6 +162,7 @@ DEFINE_GUID(IID_IRSOPInformation, 0x9a5a81b5, 0xd9c7, 0x49ef, 0x9d, 0x11, 0xdd,
+ #ifndef _GPEDIT_H_
+ #define _GPEDIT_H_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -707,6 +708,7 @@ typedef IRSOPInformation *LPRSOPINFORMATION;
+ //=============================================================================
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ CreateGPOLink(
+@@ -729,6 +731,7 @@ CreateGPOLink(
+ //=============================================================================
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ DeleteGPOLink(
+@@ -749,6 +752,7 @@ DeleteGPOLink(
+ //=============================================================================
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ DeleteAllGPOLinks(
+@@ -779,7 +783,7 @@ DeleteAllGPOLinks(
+ #define GPO_BROWSE_NOUSERGPOS           0x00000020   // Removes the Users tab
+ #define GPO_BROWSE_SENDAPPLYONEDIT      0x00000040   // Send the apply event if edit menu is selected
+ 
+-typedef struct tag_GPOBROWSEINFO
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tag_GPOBROWSEINFO
+ {
+     DWORD       dwSize;                   // [in] Initialized to the size of this structure
+     DWORD       dwFlags;                  // [in] Flags defined above
+@@ -797,6 +801,7 @@ typedef struct tag_GPOBROWSEINFO
+ 
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ BrowseForGPO(
+@@ -820,6 +825,7 @@ BrowseForGPO(
+ //=============================================================================
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ ImportRSoPData(
+@@ -845,6 +851,7 @@ ImportRSoPData(
+ //=============================================================================
+ 
+ GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ ExportRSoPData(
