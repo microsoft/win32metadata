@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
+index dcbad6c7806a962a3993106cfcbaeb0ca210afb6..98c052a608f099a1b5c5e0ef6e75dcef0a17c5c1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -267,12 +268,18 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
+                          IN LPVOID lpClientData);
+ 
+ /* Local Database Functions */
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTranslateMode
+                               (OUT smiLPUINT32 nTranslateMode);
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetTranslateMode
+                               (IN smiUINT32 nTranslateMode);
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetransmitMode
+                               (OUT smiLPUINT32 nRetransmitMode);
+ 
