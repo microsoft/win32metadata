@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
+index deb27eb9160fcea598abe8bf1585059747160c75..fb21e390302277656f679abe311a213800bdef17 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
+@@ -222,6 +222,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -1892,7 +1893,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7E2D2A1E-7192-4bd7-80C1-061FD1D10402")
+-    IStreamBufferConfigure3 : public IStreamBufferConfigure2
++    _Windows_SupportedOS_WindowsVista_ IStreamBufferConfigure3 : public IStreamBufferConfigure2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetStartRecConfig( 
+@@ -2031,7 +2032,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
+         END_INTERFACE
+     } IStreamBufferConfigure3Vtbl;
+ 
+-    interface IStreamBufferConfigure3
++    interface _Windows_SupportedOS_WindowsVista_ IStreamBufferConfigure3
+     {
+         CONST_VTBL struct IStreamBufferConfigure3Vtbl *lpVtbl;
+     };
+@@ -2831,7 +2832,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("caede759-b6b1-11db-a578-0018f3fa24c6")
+-    ISBE2GlobalEvent : public IUnknown
++    _Windows_SupportedOS_Windows7_ ISBE2GlobalEvent : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
+@@ -2900,7 +2901,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
+         END_INTERFACE
+     } ISBE2GlobalEventVtbl;
+ 
+-    interface ISBE2GlobalEvent
++    interface _Windows_SupportedOS_Windows7_ ISBE2GlobalEvent
+     {
+         CONST_VTBL struct ISBE2GlobalEventVtbl *lpVtbl;
+     };
