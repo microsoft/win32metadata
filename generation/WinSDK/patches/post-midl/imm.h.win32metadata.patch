@@ -1,0 +1,371 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /**********************************************************************/
+ /*      imm.h - Input Method Manager definitions                      */
+@@ -50,14 +51,14 @@ typedef UINT FAR *LPUINT;
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-typedef struct tagCOMPOSITIONFORM {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCOMPOSITIONFORM {
+     DWORD dwStyle;
+     POINT ptCurrentPos;
+     RECT  rcArea;
+ } COMPOSITIONFORM, *PCOMPOSITIONFORM, NEAR *NPCOMPOSITIONFORM, FAR *LPCOMPOSITIONFORM;
+ 
+ 
+-typedef struct tagCANDIDATEFORM {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCANDIDATEFORM {
+     DWORD dwIndex;
+     DWORD dwStyle;
+     POINT ptCurrentPos;
+@@ -72,7 +73,7 @@ typedef struct tagCANDIDATEFORM {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagCANDIDATELIST {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCANDIDATELIST {
+     DWORD dwSize;
+     DWORD dwStyle;
+     DWORD dwCount;
+@@ -89,11 +90,11 @@ typedef struct tagCANDIDATELIST {
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-typedef struct tagREGISTERWORDA {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagREGISTERWORDA {
+     LPSTR   lpReading;
+     LPSTR   lpWord;
+ } REGISTERWORDA, *PREGISTERWORDA, NEAR *NPREGISTERWORDA, FAR *LPREGISTERWORDA;
+-typedef struct tagREGISTERWORDW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagREGISTERWORDW {
+     LPWSTR  lpReading;
+     LPWSTR  lpWord;
+ } REGISTERWORDW, *PREGISTERWORDW, NEAR *NPREGISTERWORDW, FAR *LPREGISTERWORDW;
+@@ -117,7 +118,7 @@ typedef LPREGISTERWORDA LPREGISTERWORD;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagRECONVERTSTRING {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagRECONVERTSTRING {
+     DWORD dwSize;
+     DWORD dwVersion;
+     DWORD dwStrLen;
+@@ -138,11 +139,11 @@ typedef struct tagRECONVERTSTRING {
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-typedef struct tagSTYLEBUFA {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTYLEBUFA {
+     DWORD       dwStyle;
+     CHAR        szDescription[STYLE_DESCRIPTION_SIZE];
+ } STYLEBUFA, *PSTYLEBUFA, NEAR *NPSTYLEBUFA, FAR *LPSTYLEBUFA;
+-typedef struct tagSTYLEBUFW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTYLEBUFW {
+     DWORD       dwStyle;
+     WCHAR       szDescription[STYLE_DESCRIPTION_SIZE];
+ } STYLEBUFW, *PSTYLEBUFW, NEAR *NPSTYLEBUFW, FAR *LPSTYLEBUFW;
+@@ -168,7 +169,7 @@ typedef LPSTYLEBUFA LPSTYLEBUF;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagIMEMENUITEMINFOA {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagIMEMENUITEMINFOA {
+     UINT        cbSize;
+     UINT        fType;
+     UINT        fState;
+@@ -179,7 +180,7 @@ typedef struct tagIMEMENUITEMINFOA {
+     CHAR        szString[IMEMENUITEM_STRING_SIZE];
+     HBITMAP     hbmpItem;
+ } IMEMENUITEMINFOA, *PIMEMENUITEMINFOA, NEAR *NPIMEMENUITEMINFOA, FAR *LPIMEMENUITEMINFOA;
+-typedef struct tagIMEMENUITEMINFOW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagIMEMENUITEMINFOW {
+     UINT        cbSize;
+     UINT        fType;
+     UINT        fState;
+@@ -202,7 +203,7 @@ typedef NPIMEMENUITEMINFOA NPIMEMENUITEMINFO;
+ typedef LPIMEMENUITEMINFOA LPIMEMENUITEMINFO;
+ #endif // UNICODE
+ 
+-typedef struct tagIMECHARPOSITION {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagIMECHARPOSITION {
+     DWORD       dwSize;
+     DWORD       dwCharPos;
+     POINT       pt;
+@@ -224,103 +225,103 @@ typedef BOOL    (CALLBACK* IMCENUMPROC)(HIMC, LPARAM);
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-HKL  WINAPI ImmInstallIMEA(_In_ LPCSTR lpszIMEFileName, _In_ LPCSTR lpszLayoutText);
+-HKL  WINAPI ImmInstallIMEW(_In_ LPCWSTR lpszIMEFileName, _In_ LPCWSTR lpszLayoutText);
++HKL  WINAPI _Windows_SupportedOS_Server2003_ ImmInstallIMEA(_In_ LPCSTR lpszIMEFileName, _In_ LPCSTR lpszLayoutText);
++HKL  WINAPI _Windows_SupportedOS_Server2003_ ImmInstallIMEW(_In_ LPCWSTR lpszIMEFileName, _In_ LPCWSTR lpszLayoutText);
+ #ifdef UNICODE
+ #define ImmInstallIME  ImmInstallIMEW
+ #else
+ #define ImmInstallIME  ImmInstallIMEA
+ #endif // !UNICODE
+ 
+-HWND WINAPI ImmGetDefaultIMEWnd(IN HWND);
++HWND WINAPI _Windows_SupportedOS_Server2003_ ImmGetDefaultIMEWnd(IN HWND);
+ 
+-UINT WINAPI ImmGetDescriptionA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszDescription, IN UINT uBufLen);
+-UINT WINAPI ImmGetDescriptionW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszDescription, IN UINT uBufLen);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetDescriptionA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszDescription, IN UINT uBufLen);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetDescriptionW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszDescription, IN UINT uBufLen);
+ #ifdef UNICODE
+ #define ImmGetDescription  ImmGetDescriptionW
+ #else
+ #define ImmGetDescription  ImmGetDescriptionA
+ #endif // !UNICODE
+ 
+-UINT WINAPI ImmGetIMEFileNameA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszFileName, IN UINT uBufLen);
+-UINT WINAPI ImmGetIMEFileNameW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszFileName, IN UINT uBufLen);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetIMEFileNameA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszFileName, IN UINT uBufLen);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetIMEFileNameW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszFileName, IN UINT uBufLen);
+ #ifdef UNICODE
+ #define ImmGetIMEFileName  ImmGetIMEFileNameW
+ #else
+ #define ImmGetIMEFileName  ImmGetIMEFileNameA
+ #endif // !UNICODE
+ 
+-DWORD WINAPI ImmGetProperty(IN HKL, IN DWORD);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetProperty(IN HKL, IN DWORD);
+ 
+-BOOL WINAPI ImmIsIME(IN HKL);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmIsIME(IN HKL);
+ 
+-BOOL WINAPI ImmSimulateHotKey(IN HWND, IN DWORD);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSimulateHotKey(IN HWND, IN DWORD);
+ 
+-HIMC WINAPI ImmCreateContext(void);
+-BOOL WINAPI ImmDestroyContext(IN HIMC);
+-HIMC WINAPI ImmGetContext(IN HWND);
+-BOOL WINAPI ImmReleaseContext(IN HWND, IN HIMC);
+-HIMC WINAPI ImmAssociateContext(IN HWND, IN HIMC);
++HIMC WINAPI _Windows_SupportedOS_Server2003_ ImmCreateContext(void);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmDestroyContext(IN HIMC);
++HIMC WINAPI _Windows_SupportedOS_Server2003_ ImmGetContext(IN HWND);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmReleaseContext(IN HWND, IN HIMC);
++HIMC WINAPI _Windows_SupportedOS_Server2003_ ImmAssociateContext(IN HWND, IN HIMC);
+ #if (WINVER >= 0x040A)
+-BOOL WINAPI ImmAssociateContextEx(_In_ HWND, _In_ HIMC, _In_ DWORD);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmAssociateContextEx(_In_ HWND, _In_ HIMC, _In_ DWORD);
+ #endif /* WINVER >= 0x040A */
+ 
+-LONG  WINAPI ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
+-LONG  WINAPI ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++LONG  WINAPI _Windows_SupportedOS_Server2003_ ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++LONG  WINAPI _Windows_SupportedOS_Server2003_ ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
+ #ifdef UNICODE
+ #define ImmGetCompositionString  ImmGetCompositionStringW
+ #else
+ #define ImmGetCompositionString  ImmGetCompositionStringA
+ #endif // !UNICODE
+ 
+-BOOL  WINAPI ImmSetCompositionStringA(IN HIMC, IN DWORD dwIndex, _In_reads_bytes_opt_(dwCompLen) LPVOID lpComp, IN DWORD dwCompLen, _In_reads_bytes_opt_(dwReadLen) LPVOID lpRead, IN DWORD dwReadLen);
+-BOOL  WINAPI ImmSetCompositionStringW(IN HIMC, IN DWORD dwIndex, _In_reads_bytes_opt_(dwCompLen) LPVOID lpComp, IN DWORD dwCompLen, _In_reads_bytes_opt_(dwReadLen) LPVOID lpRead, IN DWORD dwReadLen);
++BOOL  WINAPI _Windows_SupportedOS_Server2003_ ImmSetCompositionStringA(IN HIMC, IN DWORD dwIndex, _In_reads_bytes_opt_(dwCompLen) LPVOID lpComp, IN DWORD dwCompLen, _In_reads_bytes_opt_(dwReadLen) LPVOID lpRead, IN DWORD dwReadLen);
++BOOL  WINAPI _Windows_SupportedOS_Server2003_ ImmSetCompositionStringW(IN HIMC, IN DWORD dwIndex, _In_reads_bytes_opt_(dwCompLen) LPVOID lpComp, IN DWORD dwCompLen, _In_reads_bytes_opt_(dwReadLen) LPVOID lpRead, IN DWORD dwReadLen);
+ #ifdef UNICODE
+ #define ImmSetCompositionString  ImmSetCompositionStringW
+ #else
+ #define ImmSetCompositionString  ImmSetCompositionStringA
+ #endif // !UNICODE
+ 
+-DWORD WINAPI ImmGetCandidateListCountA(IN HIMC, _Out_ LPDWORD lpdwListCount);
+-DWORD WINAPI ImmGetCandidateListCountW(IN HIMC, _Out_ LPDWORD lpdwListCount);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetCandidateListCountA(IN HIMC, _Out_ LPDWORD lpdwListCount);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetCandidateListCountW(IN HIMC, _Out_ LPDWORD lpdwListCount);
+ #ifdef UNICODE
+ #define ImmGetCandidateListCount  ImmGetCandidateListCountW
+ #else
+ #define ImmGetCandidateListCount  ImmGetCandidateListCountA
+ #endif // !UNICODE
+ 
+-DWORD WINAPI ImmGetCandidateListA(IN HIMC, IN DWORD deIndex, _Out_writes_bytes_opt_(dwBufLen) LPCANDIDATELIST lpCandList, IN DWORD dwBufLen);
+-DWORD WINAPI ImmGetCandidateListW(IN HIMC, IN DWORD deIndex, _Out_writes_bytes_opt_(dwBufLen) LPCANDIDATELIST lpCandList, IN DWORD dwBufLen);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetCandidateListA(IN HIMC, IN DWORD deIndex, _Out_writes_bytes_opt_(dwBufLen) LPCANDIDATELIST lpCandList, IN DWORD dwBufLen);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetCandidateListW(IN HIMC, IN DWORD deIndex, _Out_writes_bytes_opt_(dwBufLen) LPCANDIDATELIST lpCandList, IN DWORD dwBufLen);
+ #ifdef UNICODE
+ #define ImmGetCandidateList  ImmGetCandidateListW
+ #else
+ #define ImmGetCandidateList  ImmGetCandidateListA
+ #endif // !UNICODE
+ 
+-DWORD WINAPI ImmGetGuideLineA(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPSTR lpBuf, _In_ DWORD dwBufLen);
+-DWORD WINAPI ImmGetGuideLineW(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPWSTR lpBuf, _In_ DWORD dwBufLen);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetGuideLineA(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPSTR lpBuf, _In_ DWORD dwBufLen);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetGuideLineW(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPWSTR lpBuf, _In_ DWORD dwBufLen);
+ #ifdef UNICODE
+ #define ImmGetGuideLine  ImmGetGuideLineW
+ #else
+ #define ImmGetGuideLine  ImmGetGuideLineA
+ #endif // !UNICODE
+ 
+-BOOL WINAPI ImmGetConversionStatus(IN HIMC, _Out_opt_ LPDWORD lpfdwConversion, _Out_opt_ LPDWORD lpfdwSentence);
+-BOOL WINAPI ImmSetConversionStatus(IN HIMC, IN DWORD, IN DWORD);
+-BOOL WINAPI ImmGetOpenStatus(IN HIMC);
+-BOOL WINAPI ImmSetOpenStatus(IN HIMC, IN BOOL);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetConversionStatus(IN HIMC, _Out_opt_ LPDWORD lpfdwConversion, _Out_opt_ LPDWORD lpfdwSentence);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetConversionStatus(IN HIMC, IN DWORD, IN DWORD);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetOpenStatus(IN HIMC);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetOpenStatus(IN HIMC, IN BOOL);
+ 
+ #if defined(_WINGDI_) && !defined(NOGDI)
+-BOOL WINAPI ImmGetCompositionFontA(IN HIMC, _Out_ LPLOGFONTA lplf);
+-BOOL WINAPI ImmGetCompositionFontW(IN HIMC, _Out_ LPLOGFONTW lplf);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetCompositionFontA(IN HIMC, _Out_ LPLOGFONTA lplf);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetCompositionFontW(IN HIMC, _Out_ LPLOGFONTW lplf);
+ #ifdef UNICODE
+ #define ImmGetCompositionFont  ImmGetCompositionFontW
+ #else
+ #define ImmGetCompositionFont  ImmGetCompositionFontA
+ #endif // !UNICODE
+ 
+-BOOL WINAPI ImmSetCompositionFontA(IN HIMC, _In_ LPLOGFONTA lplf);
+-BOOL WINAPI ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetCompositionFontA(IN HIMC, _In_ LPLOGFONTA lplf);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
+ #ifdef UNICODE
+ #define ImmSetCompositionFont  ImmSetCompositionFontW
+ #else
+@@ -328,48 +329,48 @@ BOOL WINAPI ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
+ #endif // !UNICODE
+ #endif  // defined(_WINGDI_) && !defined(NOGDI)
+ 
+-BOOL    WINAPI ImmConfigureIMEA(IN HKL, IN HWND, IN DWORD, IN LPVOID);
+-BOOL    WINAPI ImmConfigureIMEW(IN HKL, IN HWND, IN DWORD, IN LPVOID);
++BOOL    WINAPI _Windows_SupportedOS_Server2003_ ImmConfigureIMEA(IN HKL, IN HWND, IN DWORD, IN LPVOID);
++BOOL    WINAPI _Windows_SupportedOS_Server2003_ ImmConfigureIMEW(IN HKL, IN HWND, IN DWORD, IN LPVOID);
+ #ifdef UNICODE
+ #define ImmConfigureIME  ImmConfigureIMEW
+ #else
+ #define ImmConfigureIME  ImmConfigureIMEA
+ #endif // !UNICODE
+ 
+-LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
+-LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
++LRESULT WINAPI _Windows_SupportedOS_Server2003_ ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
++LRESULT WINAPI _Windows_SupportedOS_Server2003_ ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
+ #ifdef UNICODE
+ #define ImmEscape  ImmEscapeW
+ #else
+ #define ImmEscape  ImmEscapeA
+ #endif // !UNICODE
+ 
+-DWORD   WINAPI ImmGetConversionListA(IN HKL, IN HIMC, _In_ LPCSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
+-DWORD   WINAPI ImmGetConversionListW(IN HKL, IN HIMC, _In_ LPCWSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
++DWORD   WINAPI _Windows_SupportedOS_Server2003_ ImmGetConversionListA(IN HKL, IN HIMC, _In_ LPCSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
++DWORD   WINAPI _Windows_SupportedOS_Server2003_ ImmGetConversionListW(IN HKL, IN HIMC, _In_ LPCWSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
+ #ifdef UNICODE
+ #define ImmGetConversionList  ImmGetConversionListW
+ #else
+ #define ImmGetConversionList  ImmGetConversionListA
+ #endif // !UNICODE
+ 
+-BOOL    WINAPI ImmNotifyIME(IN HIMC, IN DWORD dwAction, IN DWORD dwIndex, IN DWORD dwValue);
++BOOL    WINAPI _Windows_SupportedOS_Server2003_ ImmNotifyIME(IN HIMC, IN DWORD dwAction, IN DWORD dwIndex, IN DWORD dwValue);
+ 
+-BOOL WINAPI ImmGetStatusWindowPos(IN HIMC, _Out_ LPPOINT lpptPos);
+-BOOL WINAPI ImmSetStatusWindowPos(IN HIMC, _In_ LPPOINT lpptPos);
+-BOOL WINAPI ImmGetCompositionWindow(IN HIMC, _Out_ LPCOMPOSITIONFORM lpCompForm);
+-BOOL WINAPI ImmSetCompositionWindow(IN HIMC, _In_ LPCOMPOSITIONFORM lpCompForm);
+-BOOL WINAPI ImmGetCandidateWindow(IN HIMC, IN DWORD, _Out_ LPCANDIDATEFORM lpCandidate);
+-BOOL WINAPI ImmSetCandidateWindow(IN HIMC, _In_ LPCANDIDATEFORM lpCandidate);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetStatusWindowPos(IN HIMC, _Out_ LPPOINT lpptPos);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetStatusWindowPos(IN HIMC, _In_ LPPOINT lpptPos);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetCompositionWindow(IN HIMC, _Out_ LPCOMPOSITIONFORM lpCompForm);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetCompositionWindow(IN HIMC, _In_ LPCOMPOSITIONFORM lpCompForm);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmGetCandidateWindow(IN HIMC, IN DWORD, _Out_ LPCANDIDATEFORM lpCandidate);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmSetCandidateWindow(IN HIMC, _In_ LPCANDIDATEFORM lpCandidate);
+ 
+-BOOL WINAPI ImmIsUIMessageA(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
+-BOOL WINAPI ImmIsUIMessageW(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmIsUIMessageA(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmIsUIMessageW(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
+ #ifdef UNICODE
+ #define ImmIsUIMessage  ImmIsUIMessageW
+ #else
+ #define ImmIsUIMessage  ImmIsUIMessageA
+ #endif // !UNICODE
+ 
+-UINT WINAPI ImmGetVirtualKey(IN HWND);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetVirtualKey(IN HWND);
+ 
+ typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
+ typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
+@@ -379,32 +380,32 @@ typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _
+ #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCA
+ #endif // !UNICODE
+ 
+-BOOL WINAPI ImmRegisterWordA(IN HKL, _In_ LPCSTR lpszReading, IN DWORD, _In_ LPCSTR lpszRegister);
+-BOOL WINAPI ImmRegisterWordW(IN HKL, _In_ LPCWSTR lpszReading, IN DWORD, _In_ LPCWSTR lpszRegister);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmRegisterWordA(IN HKL, _In_ LPCSTR lpszReading, IN DWORD, _In_ LPCSTR lpszRegister);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmRegisterWordW(IN HKL, _In_ LPCWSTR lpszReading, IN DWORD, _In_ LPCWSTR lpszRegister);
+ #ifdef UNICODE
+ #define ImmRegisterWord  ImmRegisterWordW
+ #else
+ #define ImmRegisterWord  ImmRegisterWordA
+ #endif // !UNICODE
+ 
+-BOOL WINAPI ImmUnregisterWordA(IN HKL, _In_ LPCSTR lpszReading, IN DWORD, _In_ LPCSTR lpszUnregister);
+-BOOL WINAPI ImmUnregisterWordW(IN HKL, _In_ LPCWSTR lpszReading, IN DWORD, _In_ LPCWSTR lpszUnregister);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmUnregisterWordA(IN HKL, _In_ LPCSTR lpszReading, IN DWORD, _In_ LPCSTR lpszUnregister);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmUnregisterWordW(IN HKL, _In_ LPCWSTR lpszReading, IN DWORD, _In_ LPCWSTR lpszUnregister);
+ #ifdef UNICODE
+ #define ImmUnregisterWord  ImmUnregisterWordW
+ #else
+ #define ImmUnregisterWord  ImmUnregisterWordA
+ #endif // !UNICODE
+ 
+-UINT WINAPI ImmGetRegisterWordStyleA(IN HKL, IN UINT nItem, _Out_writes_(nItem) LPSTYLEBUFA lpStyleBuf);
+-UINT WINAPI ImmGetRegisterWordStyleW(IN HKL, IN UINT nItem, _Out_writes_(nItem) LPSTYLEBUFW lpStyleBuf);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetRegisterWordStyleA(IN HKL, IN UINT nItem, _Out_writes_(nItem) LPSTYLEBUFA lpStyleBuf);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmGetRegisterWordStyleW(IN HKL, IN UINT nItem, _Out_writes_(nItem) LPSTYLEBUFW lpStyleBuf);
+ #ifdef UNICODE
+ #define ImmGetRegisterWordStyle  ImmGetRegisterWordStyleW
+ #else
+ #define ImmGetRegisterWordStyle  ImmGetRegisterWordStyleA
+ #endif // !UNICODE
+ 
+-UINT WINAPI ImmEnumRegisterWordA(IN HKL, IN REGISTERWORDENUMPROCA, _In_opt_ LPCSTR lpszReading, IN DWORD, _In_opt_ LPCSTR lpszRegister, IN LPVOID);
+-UINT WINAPI ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCWSTR lpszReading, IN DWORD, _In_opt_ LPCWSTR lpszRegister, IN LPVOID);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmEnumRegisterWordA(IN HKL, IN REGISTERWORDENUMPROCA, _In_opt_ LPCSTR lpszReading, IN DWORD, _In_opt_ LPCSTR lpszRegister, IN LPVOID);
++UINT WINAPI _Windows_SupportedOS_Server2003_ ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCWSTR lpszReading, IN DWORD, _In_opt_ LPCWSTR lpszRegister, IN LPVOID);
+ #ifdef UNICODE
+ #define ImmEnumRegisterWord  ImmEnumRegisterWordW
+ #else
+@@ -412,21 +413,21 @@ UINT WINAPI ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCW
+ #endif // !UNICODE
+ 
+ #if (WINVER >= 0x040A)
+-BOOL WINAPI ImmDisableIME(IN DWORD);
+-BOOL WINAPI ImmEnumInputContext(DWORD idThread, IMCENUMPROC lpfn, LPARAM lParam);
+-DWORD WINAPI ImmGetImeMenuItemsA(IN HIMC, IN DWORD, IN DWORD, _Out_opt_ LPIMEMENUITEMINFOA lpImeParentMenu, _Out_writes_bytes_opt_(dwSize) LPIMEMENUITEMINFOA lpImeMenu, IN DWORD dwSize);
+-DWORD WINAPI ImmGetImeMenuItemsW(IN HIMC, IN DWORD, IN DWORD, _Out_opt_ LPIMEMENUITEMINFOW lpImeParentMenu, _Out_writes_bytes_opt_(dwSize) LPIMEMENUITEMINFOW lpImeMenu, IN DWORD dwSize);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmDisableIME(IN DWORD);
++BOOL WINAPI _Windows_SupportedOS_Server2003_ ImmEnumInputContext(DWORD idThread, IMCENUMPROC lpfn, LPARAM lParam);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetImeMenuItemsA(IN HIMC, IN DWORD, IN DWORD, _Out_opt_ LPIMEMENUITEMINFOA lpImeParentMenu, _Out_writes_bytes_opt_(dwSize) LPIMEMENUITEMINFOA lpImeMenu, IN DWORD dwSize);
++DWORD WINAPI _Windows_SupportedOS_Server2003_ ImmGetImeMenuItemsW(IN HIMC, IN DWORD, IN DWORD, _Out_opt_ LPIMEMENUITEMINFOW lpImeParentMenu, _Out_writes_bytes_opt_(dwSize) LPIMEMENUITEMINFOW lpImeMenu, IN DWORD dwSize);
+ #ifdef UNICODE
+ #define ImmGetImeMenuItems  ImmGetImeMenuItemsW
+ #else
+ #define ImmGetImeMenuItems  ImmGetImeMenuItemsA
+ #endif // !UNICODE
+ 
+-BOOL WINAPI ImmDisableTextFrameService(DWORD idThread);
++BOOL WINAPI _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ImmDisableTextFrameService(DWORD idThread);
+ #endif /* WINVER >= 0x040A */
+ 
+ #if (WINVER >= 0x0602)
+-BOOL WINAPI ImmDisableLegacyIME(void);
++BOOL WINAPI _Windows_SupportedOS_Server2012_ ImmDisableLegacyIME(void);
+ #endif /* WINVER >= 0x0602 */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
