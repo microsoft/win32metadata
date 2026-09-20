@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
+index b3e27f7c97a7ffc73a827540bd219fe7db7171a1..8d318b1fd62d7abb883964f92d14c14ec175ee05 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
+@@ -67,6 +67,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -92,7 +93,7 @@ typedef const WSDXML_NAMESPACE *PCWSDXML_NAMESPACE;
+ 
+ typedef const WSDXML_TYPE *PCWSDXML_TYPE;
+ 
+-typedef struct _WSD_DATETIME
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_DATETIME
+     {
+     BOOL isPositive;
+     ULONG year;
+@@ -108,7 +109,7 @@ typedef struct _WSD_DATETIME
+     UCHAR TZMinute;
+     } 	WSD_DATETIME;
+ 
+-typedef struct _WSD_DURATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_DURATION
+     {
+     BOOL isPositive;
+     ULONG year;
+@@ -235,7 +236,7 @@ EXTERN_C const IID IID_IWSDXMLContext;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
+-    IWSDXMLContext : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddNamespace( 
+@@ -338,7 +339,7 @@ EXTERN_C const IID IID_IWSDXMLContext;
+         END_INTERFACE
+     } IWSDXMLContextVtbl;
+ 
+-    interface IWSDXMLContext
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext
+     {
+         CONST_VTBL struct IWSDXMLContextVtbl *lpVtbl;
+     };

@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
+@@ -104,6 +104,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ //
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+@@ -343,7 +344,7 @@ extern RPC_IF_HANDLE __MIDL_itf_comcat_0000_0001_v0_0_s_ifspec;
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IEnumCATEGORYINFO *LPENUMCATEGORYINFO;
+ 
+-typedef struct tagCATEGORYINFO
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCATEGORYINFO
+     {
+     CATID catid;
+     LCID lcid;
