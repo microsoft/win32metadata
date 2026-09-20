@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
+index 1aaef4223eb6a1f494e5e9d38ed5c0075af6115c..820dacc7ffc61ca098d46ce09be0767d78280328 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
+@@ -108,6 +108,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -199,7 +200,7 @@ EXTERN_C const IID IID_ICallFrame;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D573B4B0-894E-11d2-B8B6-00C04FB9618A")
+-    ICallFrame : public IUnknown
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallFrame : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
+@@ -542,7 +543,7 @@ EXTERN_C const IID IID_ICallFrame;
+         END_INTERFACE
+     } ICallFrameVtbl;
+ 
+-    interface ICallFrame
++    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallFrame
+     {
+         CONST_VTBL struct ICallFrameVtbl *lpVtbl;
+     };
+@@ -642,7 +643,7 @@ EXTERN_C const IID IID_ICallIndirect;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D573B4B1-894E-11d2-B8B6-00C04FB9618A")
+-    ICallIndirect : public IUnknown
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallIndirect : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CallIndirect( 
+@@ -749,7 +750,7 @@ EXTERN_C const IID IID_ICallIndirect;
+         END_INTERFACE
+     } ICallIndirectVtbl;
+ 
+-    interface ICallIndirect
++    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallIndirect
+     {
+         CONST_VTBL struct ICallIndirectVtbl *lpVtbl;
+     };
