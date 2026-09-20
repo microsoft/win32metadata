@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
+index 63d76285d49186e587c7fcf346bb6e60d3ec00f6..ef8575ee7e669685eb1b9d5f2bdcff92e8079d3f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
+@@ -12,6 +12,7 @@
+ 
+ #ifndef _TIMERAPI_H_
+ #define _TIMERAPI_H_
++#include "win32metadata_annotations.h"
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -38,7 +39,7 @@ extern "C" {
+ #define TIMERR_STRUCT         (TIMERR_BASE+33)     /* time struct size */
+ 
+ /* timer device capabilities data structure */
+-typedef struct timecaps_tag {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ timecaps_tag {
+     UINT    wPeriodMin;     /* minimum period supported  */
+     UINT    wPeriodMax;     /* maximum period supported  */
+ } TIMECAPS, *PTIMECAPS, NEAR *NPTIMECAPS, FAR *LPTIMECAPS;
+@@ -71,6 +72,8 @@ timeGetDevCaps(
+     _In_ UINT cbtc
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -78,6 +81,8 @@ timeBeginPeriod(
+     _In_ UINT uPeriod
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
