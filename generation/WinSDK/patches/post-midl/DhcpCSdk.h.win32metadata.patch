@@ -1,0 +1,86 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -189,7 +190,7 @@ typedef struct _DHCPAPI_PARAMS {                  // use this structure to reque
+ typedef struct _DHCPAPI_PARAMS
+ DHCPCAPI_PARAMS, *PDHCPCAPI_PARAMS, *LPDHCPCAPI_PARAMS;
+ 
+-typedef struct _DHCPCAPI_PARAMS_ARARAY {          // array of params..
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _DHCPCAPI_PARAMS_ARARAY {          // array of params..
+     ULONG                          nParams;       // size of array
+     #ifdef __midl
+         [size_is(nParams)] LPDHCPCAPI_PARAMS              Params;        // actual array
+@@ -198,7 +199,7 @@ typedef struct _DHCPCAPI_PARAMS_ARARAY {          // array of params..
+     #endif
+ } DHCPCAPI_PARAMS_ARRAY, *PDHCPCAPI_PARAMS_ARRAY, *LPDHCPCAPI_PARAMS_ARRAY;
+ 
+-typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _DHCPCAPI_CLASSID {                // defines a client class id.
+     ULONG                          Flags;         // must be zero currently.
+     #ifdef __midl
+         [size_is(nBytesData)] LPBYTE                         Data;          // classid binary data.
+@@ -217,19 +218,19 @@ typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
+ 
+ DWORD
+ APIENTRY
+-DhcpCApiInitialize(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpCApiInitialize(
+     OUT     LPDWORD                Version
+ );
+ 
+ VOID
+ APIENTRY
+-DhcpCApiCleanup(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpCApiCleanup(
+     VOID
+ );
+ 
+ DWORD                                             // win32 status
+ APIENTRY
+-DhcpRequestParams(                                // request parameters of client
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpRequestParams(                                // request parameters of client
+     IN      DWORD                  Flags,         // must be DHCPCAPI_REQUEST_SYNCHRONOUS
+     IN      LPVOID                 Reserved,      // this parameter is reserved
+     _In_    LPWSTR                 AdapterName,   // adapter name to request for
+@@ -249,7 +250,7 @@ DhcpRequestParams(                                // request parameters of clien
+ 
+ DWORD                                             // win32 status
+ APIENTRY
+-DhcpUndoRequestParams(                            // undo the effect of a persistent request -- currently undo from registry
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpUndoRequestParams(                            // undo the effect of a persistent request -- currently undo from registry
+     _Reserved_ DWORD                Flags,         // must be zero, reserved
+     _Reserved_ LPVOID               Reserved,      // this parameter is reserved
+     _In_       LPWSTR               AdapterName,   // the name of the adpater to delete for
+@@ -259,7 +260,7 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
+ #define     DHCPCAPI_REGISTER_HANDLE_EVENT        0x01 // handle returned is to an event
+ DWORD                                             // win32 status
+ APIENTRY
+-DhcpRegisterParamChange(                          // notify if a parameter has changed
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpRegisterParamChange(                          // notify if a parameter has changed
+     IN      DWORD                  Flags,         // must be zero, reserved
+     _Reserved_ LPVOID                 Reserved,      // this parameter is reserved
+     _In_       LPWSTR                 AdapterName,   // adapter of interest
+@@ -271,7 +272,7 @@ DhcpRegisterParamChange(                          // notify if a parameter has c
+ #define     DHCPCAPI_DEREGISTER_HANDLE_EVENT      0x01 // de-register handle that is an event
+ DWORD
+ APIENTRY
+-DhcpDeRegisterParamChange(                        // undo the registration
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpDeRegisterParamChange(                        // undo the registration
+     IN      DWORD                  Flags,         // MUST BE ZERO --> No flags yet.
+     IN      LPVOID                 Reserved,      // MUST BE NULL --> Reserved
+     IN      LPVOID                 Event          // handle to event returned by DhcpRegisterParamChange.
+@@ -279,7 +280,7 @@ DhcpDeRegisterParamChange(                        // undo the registration
+ 
+ DWORD
+ APIENTRY
+-DhcpRemoveDNSRegistrations(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ DhcpRemoveDNSRegistrations(
+     VOID
+     );
+ 
