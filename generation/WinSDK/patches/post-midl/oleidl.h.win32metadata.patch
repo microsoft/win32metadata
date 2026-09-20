@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
+@@ -236,6 +236,7 @@ extern "C"{
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+ #pragma warning(disable:4820) /* padding added after data member */
+@@ -2668,7 +2669,7 @@ void __RPC_STUB IOleInPlaceActiveObject_RemoteResizeBorder_Stub(
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IOleInPlaceFrame *LPOLEINPLACEFRAME;
+ 
+-typedef struct tagOIFI
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOIFI
+     {
+     UINT cb;
+     BOOL fMDIApp;
+@@ -2679,7 +2680,7 @@ typedef struct tagOIFI
+ 
+ typedef struct tagOIFI *LPOLEINPLACEFRAMEINFO;
+ 
+-typedef struct tagOleMenuGroupWidths
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOleMenuGroupWidths
+     {
+     LONG width[ 6 ];
+     } 	OLEMENUGROUPWIDTHS;
+@@ -4385,7 +4386,7 @@ extern RPC_IF_HANDLE __MIDL_itf_oleidl_0000_0024_v0_0_s_ifspec;
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IEnumOLEVERB *LPENUMOLEVERB;
+ 
+-typedef struct tagOLEVERB
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOLEVERB
+     {
+     LONG lVerb;
+     LPOLESTR lpszVerbName;
