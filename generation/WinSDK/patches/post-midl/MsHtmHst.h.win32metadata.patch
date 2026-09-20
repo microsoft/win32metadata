@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
+@@ -132,6 +132,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -429,7 +430,7 @@ extern RPC_IF_HANDLE __MIDL_itf_mshtmhst_0000_0002_v0_0_s_ifspec;
+ /* interface IDocHostUIHandler */
+ /* [local][unique][uuid][object] */ 
+ 
+-typedef struct _DOCHOSTUIINFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _DOCHOSTUIINFO
+     {
+     ULONG cbSize;
+     DWORD dwFlags;
