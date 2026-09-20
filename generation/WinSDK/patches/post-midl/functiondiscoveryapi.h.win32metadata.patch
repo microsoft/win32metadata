@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
+index 28cb2c245e03b52190a52cc39ccb485d37539172..86f6672a4421a7e3abe3037d53ea9775c46f4588 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
+@@ -110,6 +110,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma once
+@@ -198,7 +199,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryNotification;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5f6c1ba8-5330-422e-a368-572b244d3f87")
+-    IFunctionDiscoveryNotification : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscoveryNotification : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnUpdate( 
+@@ -283,7 +284,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryNotification;
+         END_INTERFACE
+     } IFunctionDiscoveryNotificationVtbl;
+ 
+-    interface IFunctionDiscoveryNotification
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscoveryNotification
+     {
+         CONST_VTBL struct IFunctionDiscoveryNotificationVtbl *lpVtbl;
+     };
+@@ -335,7 +336,7 @@ EXTERN_C const IID IID_IFunctionDiscovery;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4df99b70-e148-4432-b004-4c9eeb535a5e")
+-    IFunctionDiscovery : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscovery : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetInstanceCollection( 
+@@ -502,7 +503,7 @@ EXTERN_C const IID IID_IFunctionDiscovery;
+         END_INTERFACE
+     } IFunctionDiscoveryVtbl;
+ 
+-    interface IFunctionDiscovery
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscovery
+     {
+         CONST_VTBL struct IFunctionDiscoveryVtbl *lpVtbl;
+     };
+@@ -563,7 +564,7 @@ EXTERN_C const IID IID_IFunctionInstance;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("33591c10-0bed-4f02-b0ab-1530d5533ee9")
+-    IFunctionInstance : public IServiceProvider
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstance : public IServiceProvider
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetID( 
+@@ -652,7 +653,7 @@ EXTERN_C const IID IID_IFunctionInstance;
+         END_INTERFACE
+     } IFunctionInstanceVtbl;
+ 
+-    interface IFunctionInstance
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstance
+     {
+         CONST_VTBL struct IFunctionInstanceVtbl *lpVtbl;
+     };
+@@ -711,7 +712,7 @@ EXTERN_C const IID IID_IFunctionInstanceCollection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f0a3d895-855c-42a2-948d-2f97d450ecb1")
+-    IFunctionInstanceCollection : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollection : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -824,7 +825,7 @@ EXTERN_C const IID IID_IFunctionInstanceCollection;
+         END_INTERFACE
+     } IFunctionInstanceCollectionVtbl;
+ 
+-    interface IFunctionInstanceCollection
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollection
+     {
+         CONST_VTBL struct IFunctionInstanceCollectionVtbl *lpVtbl;
+     };
+@@ -1065,7 +1066,7 @@ EXTERN_C const IID IID_IFunctionInstanceQuery;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6242bc6b-90ec-4b37-bb46-e229fd84ed95")
+-    IFunctionInstanceQuery : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceQuery : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Execute( 
+@@ -1106,7 +1107,7 @@ EXTERN_C const IID IID_IFunctionInstanceQuery;
+         END_INTERFACE
+     } IFunctionInstanceQueryVtbl;
+ 
+-    interface IFunctionInstanceQuery
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceQuery
+     {
+         CONST_VTBL struct IFunctionInstanceQueryVtbl *lpVtbl;
+     };
+@@ -1152,7 +1153,7 @@ EXTERN_C const IID IID_IFunctionInstanceCollectionQuery;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("57cc6fd2-c09a-4289-bb72-25f04142058e")
+-    IFunctionInstanceCollectionQuery : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollectionQuery : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddQueryConstraint( 
+@@ -1225,7 +1226,7 @@ EXTERN_C const IID IID_IFunctionInstanceCollectionQuery;
+         END_INTERFACE
+     } IFunctionInstanceCollectionQueryVtbl;
+ 
+-    interface IFunctionInstanceCollectionQuery
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollectionQuery
+     {
+         CONST_VTBL struct IFunctionInstanceCollectionQueryVtbl *lpVtbl;
+     };
