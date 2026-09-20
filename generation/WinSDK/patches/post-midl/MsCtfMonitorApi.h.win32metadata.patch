@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsCtfMonitorApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsCtfMonitorApi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsCtfMonitorApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsCtfMonitorApi.h
+@@ -15,6 +15,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -59,14 +60,14 @@ EXTERN_C BOOL WINAPI DoMsCtfMonitor(DWORD dwFlags, HANDLE hEventForServiceStop);
+ // InitLocalMsCtfMonitor
+ //
+ ////////////////////////////////////////////////////////////////////////////
+-EXTERN_C HRESULT WINAPI InitLocalMsCtfMonitor(DWORD dwFlags);
++EXTERN_C HRESULT WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ InitLocalMsCtfMonitor(DWORD dwFlags);
+ 
+ ////////////////////////////////////////////////////////////////////////////
+ //
+ // UninitLocalMsCtfMonitor
+ //
+ ////////////////////////////////////////////////////////////////////////////
+-EXTERN_C HRESULT WINAPI UninitLocalMsCtfMonitor();
++EXTERN_C HRESULT WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ UninitLocalMsCtfMonitor();
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

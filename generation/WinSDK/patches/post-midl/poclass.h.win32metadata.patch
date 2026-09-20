@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
+index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610bc6dd8d6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
+@@ -27,6 +27,7 @@ Revision History:
+ 
+ #include <devpropdef.h>
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ //
+ // This is of type DEVPROP_TYPE_UINT32 and represents the NT processor
+@@ -107,7 +108,7 @@ typedef struct _BATTERY_QUERY_INFORMATION {
+     ULONG                           AtRate;
+ } BATTERY_QUERY_INFORMATION, *PBATTERY_QUERY_INFORMATION;
+ 
+-typedef struct _BATTERY_INFORMATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_INFORMATION {
+     ULONG       Capabilities;
+     UCHAR       Technology;
+     UCHAR       Reserved[3];
+@@ -192,7 +193,7 @@ typedef enum {
+ // Generic Payload for IOCTL_BATTERY_SET_INFORMATION.
+ //
+ 
+-typedef struct _BATTERY_SET_INFORMATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_SET_INFORMATION {
+     ULONG                         BatteryTag;
+     BATTERY_SET_INFORMATION_LEVEL InformationLevel;
+     UCHAR                         Buffer[1];
+@@ -317,7 +318,7 @@ typedef struct _BATTERY_USB_CHARGER_STATUS
+ #define BATTERY_USB_CHARGER_STATUS_UCM_PD                           0x00000002
+ 
+ 
+-typedef struct _BATTERY_WAIT_STATUS {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_WAIT_STATUS {
+     ULONG       BatteryTag;
+     ULONG       Timeout;
+     ULONG       PowerState;
+@@ -325,7 +326,7 @@ typedef struct _BATTERY_WAIT_STATUS {
+     ULONG       HighCapacity;
+ } BATTERY_WAIT_STATUS, *PBATTERY_WAIT_STATUS;
+ 
+-typedef struct _BATTERY_STATUS {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_STATUS {
+     ULONG       PowerState;
+     ULONG       Capacity;
+     ULONG       Voltage;
+@@ -399,7 +400,7 @@ typedef struct _POWER_ADAPTER_CHARGE_REQUIREMENT {
+ #define MAX_BATTERY_STRING_SIZE 128
+ 
+ // Struct for accessing the packed date format in BatteryManufactureDate.
+-typedef struct _BATTERY_MANUFACTURE_DATE
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_MANUFACTURE_DATE
+ {
+     UCHAR   Day;
+     UCHAR   Month;

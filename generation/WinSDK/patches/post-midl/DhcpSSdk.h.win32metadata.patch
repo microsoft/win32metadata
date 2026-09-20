@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define   _CALLOUT_H_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -33,7 +34,7 @@ extern "C" {
+ 
+ 
+ typedef DWORD  DHCP_IP_ADDRESS;
+-typedef struct _DHCP_SERVER_OPTIONS {
++typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SERVER_OPTIONS {
+     BYTE                       *MessageType;
+     DHCP_IP_ADDRESS UNALIGNED  *SubnetMask;
+     DHCP_IP_ADDRESS UNALIGNED  *RequestedAddress;
+@@ -429,7 +430,7 @@ Arguments:
+ ;
+ 
+ typedef
+-struct      _DHCP_CALLOUT_TABLE {
++struct      _Windows_SupportedOS_Server2000_ _DHCP_CALLOUT_TABLE {
+     LPDHCP_CONTROL                 DhcpControlHook;
+     LPDHCP_NEWPKT                  DhcpNewPktHook;
+     LPDHCP_DROP_SEND               DhcpPktDropHook;
