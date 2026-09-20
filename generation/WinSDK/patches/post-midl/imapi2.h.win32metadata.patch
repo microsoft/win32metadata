@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
+index 62ce1ca9c1d1c91b83ae4997ca4d82e9970b4a30..494d79f5d2863bfadd51cbffc0baa7c5d58ce674 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
+@@ -577,6 +577,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -921,7 +922,7 @@ EXTERN_C const IID IID_IDiscMaster2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("27354130-7F64-5B0F-8F00-5D77AFBE261E")
+-    IDiscMaster2 : public IDispatch
++    _Windows_SupportedOS_Server2003_ IDiscMaster2 : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+@@ -1037,7 +1038,7 @@ EXTERN_C const IID IID_IDiscMaster2;
+         END_INTERFACE
+     } IDiscMaster2Vtbl;
+ 
+-    interface IDiscMaster2
++    interface _Windows_SupportedOS_Server2003_ IDiscMaster2
+     {
+         CONST_VTBL struct IDiscMaster2Vtbl *lpVtbl;
+     };
+@@ -1115,7 +1116,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("27354131-7F64-5B0F-8F00-5D77AFBE261E")
+-    DDiscMaster2Events : public IDispatch
++    _Windows_SupportedOS_Server2003_ DDiscMaster2Events : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyDeviceAdded( 
+@@ -1223,7 +1224,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
+         END_INTERFACE
+     } DDiscMaster2EventsVtbl;
+ 
+-    interface DDiscMaster2Events
++    interface _Windows_SupportedOS_Server2003_ DDiscMaster2Events
+     {
+         CONST_VTBL struct DDiscMaster2EventsVtbl *lpVtbl;
+     };

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
+index d366ad37a0ada0e112f0a16aa95d5859131ca3a5..0804aa426bcf2f23fac48ca02de1ae22c3e57af5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
+@@ -376,6 +376,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define IMAPI2FS_BOOT_ENTRY_COUNT_MAX    32
+@@ -433,7 +434,7 @@ EXTERN_C const IID IID_IBootOptions;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2C941FD4-975B-59BE-A960-9A2A262853A5")
+-    IBootOptions : public IDispatch
++    _Windows_SupportedOS_Server2003_ IBootOptions : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BootImage( 
+@@ -603,7 +604,7 @@ EXTERN_C const IID IID_IBootOptions;
+         END_INTERFACE
+     } IBootOptionsVtbl;
+ 
+-    interface IBootOptions
++    interface _Windows_SupportedOS_Server2003_ IBootOptions
+     {
+         CONST_VTBL struct IBootOptionsVtbl *lpVtbl;
+     };
+@@ -686,7 +687,7 @@ EXTERN_C const IID IID_IProgressItem;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2C941FD5-975B-59BE-A960-9A2A262853A5")
+-    IProgressItem : public IDispatch
++    _Windows_SupportedOS_Server2003_ IProgressItem : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+@@ -806,7 +807,7 @@ EXTERN_C const IID IID_IProgressItem;
+         END_INTERFACE
+     } IProgressItemVtbl;
+ 
+-    interface IProgressItem
++    interface _Windows_SupportedOS_Server2003_ IProgressItem
+     {
+         CONST_VTBL struct IProgressItemVtbl *lpVtbl;
+     };
