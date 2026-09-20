@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
+index c369d61a731092ac6646273faaa9d3ba62ad7e82..a68d6b2a7f9e48903310712a8e127b2ec0982b20 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
+@@ -18,6 +18,7 @@ Revision History:
+ #define _DAV_CLNT_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -80,6 +81,8 @@ typedef DWORD (CALLBACK *PFNDAVAUTHCALLBACK)(
+     _Out_ PFNDAVAUTHCALLBACK_FREECRED *pFreeCred    // Callback to free the memory allocated for creds by the callback
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -92,6 +95,8 @@ DavAddConnection(
+     _In_ DWORD CertSize
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -99,6 +104,8 @@ DavDeleteConnection(
+     _In_ HANDLE ConnectionHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
