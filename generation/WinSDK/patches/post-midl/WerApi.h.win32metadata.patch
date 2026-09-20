@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
+index 28820adfc56a9397fe72917d56ba9f9f5d17eda5..323947f3f9177c7be3d14d6f0e79a9b279038603 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++
+ 
+@@ -293,7 +294,7 @@ typedef enum _WER_REPORT_TYPE
+ 
+ #define WER_SUBMIT_DISCARD_IF_QUEUED            WER_SUBMIT_NO_QUEUE
+ 
+-typedef struct _WER_REPORT_INFORMATION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WER_REPORT_INFORMATION
+ {
+     DWORD dwSize;
+     HANDLE hProcess;
+@@ -435,6 +436,8 @@ typedef enum _WER_CONSENT
+     WerConsentMax
+ }WER_CONSENT;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ WerReportCreate(
+@@ -444,6 +447,8 @@ WerReportCreate(
+     _Out_ HREPORT *phReportHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ WerReportSetParameter(
+@@ -453,6 +458,8 @@ WerReportSetParameter(
+     _In_ PCWSTR pwzValue
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT
+ WINAPI
+ WerReportAddFile(
