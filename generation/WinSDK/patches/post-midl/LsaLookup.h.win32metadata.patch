@@ -1,0 +1,91 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h b/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
+index 86e45aa74e8e8936c908b1ccbc6d1616ea28f96d..9d109b02a88d4727c62cc95d1f4f033b2f77996c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
+@@ -21,6 +21,7 @@ Abstract:
+ #define _LSALOOKUP_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family 
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -37,7 +38,7 @@ typedef OBJECT_ATTRIBUTES LSA_OBJECT_ATTRIBUTES, *PLSA_OBJECT_ATTRIBUTES;
+ 
+ #else // _NTDEF_
+ 
+-typedef struct _LSA_UNICODE_STRING {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_UNICODE_STRING {
+     USHORT Length;
+     USHORT MaximumLength;
+ #ifdef MIDL_PASS
+@@ -46,13 +47,13 @@ typedef struct _LSA_UNICODE_STRING {
+     PWSTR  Buffer;
+ } LSA_UNICODE_STRING, *PLSA_UNICODE_STRING;
+ 
+-typedef struct _LSA_STRING {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_STRING {
+     USHORT Length;
+     USHORT MaximumLength;
+     PCHAR Buffer;
+ } LSA_STRING, *PLSA_STRING;
+ 
+-typedef struct _LSA_OBJECT_ATTRIBUTES {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_OBJECT_ATTRIBUTES {
+     ULONG Length;
+     HANDLE RootDirectory;
+     PLSA_UNICODE_STRING ObjectName;
+@@ -67,7 +68,7 @@ typedef struct _LSA_OBJECT_ATTRIBUTES {
+ // The following data type is used to identify a domain
+ //
+ 
+-typedef struct _LSA_TRUST_INFORMATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TRUST_INFORMATION {
+ 
+     LSA_UNICODE_STRING Name;
+     PSID Sid;
+@@ -86,7 +87,7 @@ typedef struct _LSA_TRUST_INFORMATION {
+ // describe the domains referenced in the lookup operation.
+ //
+ 
+-typedef struct _LSA_REFERENCED_DOMAIN_LIST {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_REFERENCED_DOMAIN_LIST {
+ 
+     ULONG Entries;
+     PLSA_TRUST_INFORMATION Domains;
+@@ -108,7 +109,7 @@ typedef struct _LSA_REFERENCED_DOMAIN_LIST {
+ //
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+-typedef struct _LSA_TRANSLATED_SID2 {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TRANSLATED_SID2 {
+ 
+     SID_NAME_USE Use;
+     PSID         Sid;
+@@ -139,7 +140,7 @@ typedef struct _LSA_TRANSLATED_SID2 {
+ // describe the domains referenced in the lookup operation.
+ //
+ 
+-typedef struct _LSA_TRANSLATED_NAME {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TRANSLATED_NAME {
+ 
+     SID_NAME_USE Use;
+     LSA_UNICODE_STRING Name;
+@@ -169,7 +170,7 @@ typedef struct _LSA_TRANSLATED_NAME {
+ // (corresponds to the PolicyAccountDomainInformation information class).
+ //
+ 
+-typedef struct _POLICY_ACCOUNT_DOMAIN_INFO {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _POLICY_ACCOUNT_DOMAIN_INFO {
+ 
+     LSA_UNICODE_STRING DomainName;
+     PSID DomainSid;
+@@ -188,7 +189,7 @@ typedef struct _POLICY_ACCOUNT_DOMAIN_INFO {
+ // information class
+ //
+ 
+-typedef struct _POLICY_DNS_DOMAIN_INFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _POLICY_DNS_DOMAIN_INFO
+ {
+     LSA_UNICODE_STRING Name;
+     LSA_UNICODE_STRING DnsDomainName;
