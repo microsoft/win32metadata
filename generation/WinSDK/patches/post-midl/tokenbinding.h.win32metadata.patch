@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h b/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
+index e02370de9fbe562980a52f31de538018cbd4fa17..2221841bf15cd82072f794ac330c1bd2d9174af6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
+@@ -18,6 +18,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -28,12 +29,12 @@
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+ 
+-typedef enum TOKENBINDING_TYPE{
++typedef enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_TYPE{
+     TOKENBINDING_TYPE_PROVIDED = 0,
+     TOKENBINDING_TYPE_REFERRED = 1,
+ }TOKENBINDING_TYPE;
+ 
+-typedef enum TOKENBINDING_EXTENSION_FORMAT{
++typedef enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_EXTENSION_FORMAT{
+     TOKENBINDING_EXTENSION_FORMAT_UNDEFINED = 0,
+ }TOKENBINDING_EXTENSION_FORMAT;
+ 
+@@ -45,12 +46,12 @@ typedef enum TOKENBINDING_KEY_PARAMETERS_TYPE{
+ }TOKENBINDING_KEY_PARAMETERS_TYPE;
+ 
+ #pragma pack(push, 1)
+-typedef struct TOKENBINDING_IDENTIFIER{
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_IDENTIFIER{
+     BYTE keyType; // TOKENBINDING_KEY_PARAMETERS_TYPE
+ }TOKENBINDING_IDENTIFIER;
+ #pragma pack(pop)
+ 
+-typedef struct TOKENBINDING_RESULT_DATA{
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_RESULT_DATA{
+     TOKENBINDING_TYPE bindingType;
+     DWORD identifierSize;
+     TOKENBINDING_IDENTIFIER *identifierData;
+@@ -59,12 +60,12 @@ typedef struct TOKENBINDING_RESULT_DATA{
+     PVOID extensionData;
+ }TOKENBINDING_RESULT_DATA;
+ 
+-typedef struct TOKENBINDING_RESULT_LIST{
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_RESULT_LIST{
+     DWORD resultCount;
+     TOKENBINDING_RESULT_DATA *resultData;
+ }TOKENBINDING_RESULT_LIST;
+ 
+-typedef struct TOKENBINDING_KEY_TYPES{
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ TOKENBINDING_KEY_TYPES{
+     DWORD keyCount;
+     TOKENBINDING_KEY_PARAMETERS_TYPE *keyType;
+ }TOKENBINDING_KEY_TYPES;
