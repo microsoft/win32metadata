@@ -1,0 +1,380 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
+@@ -683,6 +683,7 @@ extern "C"{
+ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -866,7 +867,7 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
+ /* [local] */ 
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("42FAAC0B-BDCC-11DC-A8A8-001321F1405F") 
+-enum MBN_SIGNAL_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_SIGNAL_CONSTANTS
+     {
+         MBN_RSSI_DEFAULT	= 0xffffffff,
+         MBN_RSSI_DISABLE	= 0,
+@@ -879,7 +880,7 @@ enum MBN_SIGNAL_CONSTANTS
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6002-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_CELLULAR_CLASS
++enum _Windows_SupportedOS_Windows7_ MBN_CELLULAR_CLASS
+     {
+         MBN_CELLULAR_CLASS_NONE	= 0,
+         MBN_CELLULAR_CLASS_GSM	= 0x1,
+@@ -887,7 +888,7 @@ enum MBN_CELLULAR_CLASS
+     } 	MBN_CELLULAR_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6012-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_VOICE_CLASS
++enum _Windows_SupportedOS_Windows7_ MBN_VOICE_CLASS
+     {
+         MBN_VOICE_CLASS_NONE	= 0,
+         MBN_VOICE_CLASS_NO_VOICE	= 0x1,
+@@ -896,7 +897,7 @@ enum MBN_VOICE_CLASS
+     } 	MBN_VOICE_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("6E1348BB-BDCB-11DC-A8A8-001321F1405F") 
+-enum MBN_PROVIDER_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_PROVIDER_STATE
+     {
+         MBN_PROVIDER_STATE_NONE	= 0,
+         MBN_PROVIDER_STATE_HOME	= 0x1,
+@@ -908,14 +909,14 @@ enum MBN_PROVIDER_STATE
+     } 	MBN_PROVIDER_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("934092FD-BDCB-11DC-A8A8-001321F1405F") 
+-enum MBN_PROVIDER_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_PROVIDER_CONSTANTS
+     {
+         MBN_PROVIDERNAME_LEN	= 20,
+         MBN_PROVIDERID_LEN	= 6
+     } 	MBN_PROVIDER_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("59C235E7-BDC9-11DC-A8A8-001321F1405F") 
+-enum MBN_INTERFACE_CAPS_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_INTERFACE_CAPS_CONSTANTS
+     {
+         MBN_DEVICEID_LEN	= 18,
+         MBN_MANUFACTURER_LEN	= 32,
+@@ -924,7 +925,7 @@ enum MBN_INTERFACE_CAPS_CONSTANTS
+     } 	MBN_INTERFACE_CAPS_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("83A34F4C-BDC4-11DC-A8A8-001321F1405F") 
+-enum MBN_DATA_CLASS
++enum _Windows_SupportedOS_Windows7_ MBN_DATA_CLASS
+     {
+         MBN_DATA_CLASS_NONE	= 0,
+         MBN_DATA_CLASS_GPRS	= 0x1,
+@@ -946,7 +947,7 @@ enum MBN_DATA_CLASS
+     } 	MBN_DATA_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("2308C1F7-BDC8-11DC-A8A8-001321F1405F") 
+-enum MBN_CTRL_CAPS
++enum _Windows_SupportedOS_Windows7_ MBN_CTRL_CAPS
+     {
+         MBN_CTRL_CAPS_NONE	= 0,
+         MBN_CTRL_CAPS_REG_MANUAL	= 0x1,
+@@ -960,7 +961,7 @@ enum MBN_CTRL_CAPS
+     } 	MBN_CTRL_CAPS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E4096459-BDC8-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CAPS
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_CAPS
+     {
+         MBN_SMS_CAPS_NONE	= 0,
+         MBN_SMS_CAPS_PDU_RECEIVE	= 0x1,
+@@ -970,7 +971,7 @@ enum MBN_SMS_CAPS
+     } 	MBN_SMS_CAPS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("5DB6A98B-BDC5-11DC-A8A8-001321F1405F") 
+-enum MBN_BAND_CLASS
++enum _Windows_SupportedOS_Windows7_ MBN_BAND_CLASS
+     {
+         MBN_BAND_CLASS_NONE	= 0,
+         MBN_BAND_CLASS_0	= 0x1,
+@@ -994,7 +995,7 @@ enum MBN_BAND_CLASS
+         MBN_BAND_CLASS_CUSTOM	= 0x80000000
+     } 	MBN_BAND_CLASS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") struct MBN_INTERFACE_CAPS
++typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") struct _Windows_SupportedOS_Windows7_ MBN_INTERFACE_CAPS
+     {
+     MBN_CELLULAR_CLASS cellularClass;
+     MBN_VOICE_CLASS voiceClass;
+@@ -1011,7 +1012,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") stru
+     BSTR firmwareInfo;
+     } 	MBN_INTERFACE_CAPS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") struct MBN_PROVIDER
++typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") struct _Windows_SupportedOS_Windows7_ MBN_PROVIDER
+     {
+     BSTR providerID;
+     ULONG providerState;
+@@ -1019,7 +1020,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") stru
+     ULONG dataClass;
+     } 	MBN_PROVIDER;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") struct MBN_PROVIDER2
++typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") struct _Windows_SupportedOS_Windows8_ MBN_PROVIDER2
+     {
+     MBN_PROVIDER provider;
+     MBN_CELLULAR_CLASS cellularClass;
+@@ -1028,7 +1029,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") stru
+     } 	MBN_PROVIDER2;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6003-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_READY_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_READY_STATE
+     {
+         MBN_READY_STATE_OFF	= 0,
+         MBN_READY_STATE_INITIALIZED	= ( MBN_READY_STATE_OFF + 1 ) ,
+@@ -1042,7 +1043,7 @@ enum MBN_READY_STATE
+     } 	MBN_READY_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("EFB7C00D-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_ACTIVATION_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_ACTIVATION_STATE
+     {
+         MBN_ACTIVATION_STATE_NONE	= 0,
+         MBN_ACTIVATION_STATE_ACTIVATED	= ( MBN_ACTIVATION_STATE_NONE + 1 ) ,
+@@ -1052,14 +1053,14 @@ enum MBN_ACTIVATION_STATE
+     } 	MBN_ACTIVATION_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("F601E1EB-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_CONNECTION_MODE
++enum _Windows_SupportedOS_Windows7_ MBN_CONNECTION_MODE
+     {
+         MBN_CONNECTION_MODE_PROFILE	= 0,
+         MBN_CONNECTION_MODE_TMP_PROFILE	= ( MBN_CONNECTION_MODE_PROFILE + 1 ) 
+     } 	MBN_CONNECTION_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("6D8846E5-BDD1-11DC-A8A8-001321F1405F") 
+-enum MBN_VOICE_CALL_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_VOICE_CALL_STATE
+     {
+         MBN_VOICE_CALL_STATE_NONE	= 0,
+         MBN_VOICE_CALL_STATE_IN_PROGRESS	= ( MBN_VOICE_CALL_STATE_NONE + 1 ) ,
+@@ -1067,14 +1068,14 @@ enum MBN_VOICE_CALL_STATE
+     } 	MBN_VOICE_CALL_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D5F1726B-BDCE-11DC-A8A8-001321F1405F") 
+-enum MBN_REGISTRATION_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_REGISTRATION_CONSTANTS
+     {
+         MBN_ROAMTEXT_LEN	= 64,
+         MBN_CDMA_DEFAULT_PROVIDER_ID	= 0
+     } 	MBN_REGISTRATION_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6009-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_REGISTER_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_REGISTER_STATE
+     {
+         MBN_REGISTER_STATE_NONE	= 0,
+         MBN_REGISTER_STATE_DEREGISTERED	= ( MBN_REGISTER_STATE_NONE + 1 ) ,
+@@ -1086,7 +1087,7 @@ enum MBN_REGISTER_STATE
+     } 	MBN_REGISTER_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D7F73F35-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_REGISTER_MODE
++enum _Windows_SupportedOS_Windows7_ MBN_REGISTER_MODE
+     {
+         MBN_REGISTER_MODE_NONE	= 0,
+         MBN_REGISTER_MODE_AUTOMATIC	= ( MBN_REGISTER_MODE_NONE + 1 ) ,
+@@ -1094,14 +1095,14 @@ enum MBN_REGISTER_MODE
+     } 	MBN_REGISTER_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("C75E76F5-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_PIN_CONSTANTS
+     {
+         MBN_ATTEMPTS_REMAINING_UNKNOWN	= 0xffffffff,
+         MBN_PIN_LENGTH_UNKNOWN	= 0xffffffff
+     } 	MBN_PIN_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D11BD29D-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_STATE
++enum _Windows_SupportedOS_Windows7_ MBN_PIN_STATE
+     {
+         MBN_PIN_STATE_NONE	= 0,
+         MBN_PIN_STATE_ENTER	= ( MBN_PIN_STATE_NONE + 1 ) ,
+@@ -1109,7 +1110,7 @@ enum MBN_PIN_STATE
+     } 	MBN_PIN_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6005-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_PIN_TYPE
++enum _Windows_SupportedOS_Windows7_ MBN_PIN_TYPE
+     {
+         MBN_PIN_TYPE_NONE	= 0,
+         MBN_PIN_TYPE_CUSTOM	= ( MBN_PIN_TYPE_NONE + 1 ) ,
+@@ -1124,7 +1125,7 @@ enum MBN_PIN_TYPE
+         MBN_PIN_TYPE_SUBSIDY_LOCK	= ( MBN_PIN_TYPE_CORPORATE_PIN + 1 ) 
+     } 	MBN_PIN_TYPE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") struct MBN_PIN_INFO
++typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") struct _Windows_SupportedOS_Windows7_ MBN_PIN_INFO
+     {
+     MBN_PIN_STATE pinState;
+     MBN_PIN_TYPE pinType;
+@@ -1132,14 +1133,14 @@ typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") stru
+     } 	MBN_PIN_INFO;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("BD8A2871-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_MODE
++enum _Windows_SupportedOS_Windows7_ MBN_PIN_MODE
+     {
+         MBN_PIN_MODE_ENABLED	= 1,
+         MBN_PIN_MODE_DISABLED	= ( MBN_PIN_MODE_ENABLED + 1 ) 
+     } 	MBN_PIN_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("C2A93665-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_FORMAT
++enum _Windows_SupportedOS_Windows7_ MBN_PIN_FORMAT
+     {
+         MBN_PIN_FORMAT_NONE	= 0,
+         MBN_PIN_FORMAT_NUMERIC	= ( MBN_PIN_FORMAT_NONE + 1 ) ,
+@@ -1151,7 +1152,7 @@ enum MBN_PIN_FORMAT
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("0E62803F-BDD0-11DC-A8A8-001321F1405F") 
+-enum MBN_CONTEXT_CONSTANTS
++enum _Windows_SupportedOS_Windows7_ MBN_CONTEXT_CONSTANTS
+     {
+         MBN_ACCESSSTRING_LEN	= 100,
+         MBN_USERNAME_LEN	= 255,
+@@ -1160,7 +1161,7 @@ enum MBN_CONTEXT_CONSTANTS
+     } 	MBN_CONTEXT_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E24B42EF-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_AUTH_PROTOCOL
++enum _Windows_SupportedOS_Windows7_ MBN_AUTH_PROTOCOL
+     {
+         MBN_AUTH_PROTOCOL_NONE	= 0,
+         MBN_AUTH_PROTOCOL_PAP	= ( MBN_AUTH_PROTOCOL_NONE + 1 ) ,
+@@ -1169,14 +1170,14 @@ enum MBN_AUTH_PROTOCOL
+     } 	MBN_AUTH_PROTOCOL;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E6A360B9-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_COMPRESSION
++enum _Windows_SupportedOS_Windows7_ MBN_COMPRESSION
+     {
+         MBN_COMPRESSION_NONE	= 0,
+         MBN_COMPRESSION_ENABLE	= ( MBN_COMPRESSION_NONE + 1 ) 
+     } 	MBN_COMPRESSION;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("EB4731EB-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_CONTEXT_TYPE
++enum _Windows_SupportedOS_Windows7_ MBN_CONTEXT_TYPE
+     {
+         MBN_CONTEXT_TYPE_NONE	= 0,
+         MBN_CONTEXT_TYPE_INTERNET	= ( MBN_CONTEXT_TYPE_NONE + 1 ) ,
+@@ -1187,7 +1188,7 @@ enum MBN_CONTEXT_TYPE
+         MBN_CONTEXT_TYPE_PURCHASE	= ( MBN_CONTEXT_TYPE_CUSTOM + 1 ) 
+     } 	MBN_CONTEXT_TYPE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("FE1F7B6F-BDCD-11DC-A8A8-001321F1405F") struct MBN_CONTEXT
++typedef /* [uuid] */  DECLSPEC_UUID("FE1F7B6F-BDCD-11DC-A8A8-001321F1405F") struct _Windows_SupportedOS_Windows7_ MBN_CONTEXT
+     {
+     ULONG contextID;
+     MBN_CONTEXT_TYPE contextType;
+@@ -1207,7 +1208,7 @@ enum MBN_SMS_CONSTANTS
+     } 	WWAEXT_SMS_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("FC208FC1-BDE5-11DC-A8A8-001321F1405F") 
+-enum MBN_MSG_STATUS
++enum _Windows_SupportedOS_Windows7_ MBN_MSG_STATUS
+     {
+         MBN_MSG_STATUS_NEW	= 0,
+         MBN_MSG_STATUS_OLD	= ( MBN_MSG_STATUS_NEW + 1 ) ,
+@@ -1216,7 +1217,7 @@ enum MBN_MSG_STATUS
+     } 	MBN_MSG_STATUS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("29912B29-BDD4-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CDMA_LANG
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_CDMA_LANG
+     {
+         MBN_SMS_CDMA_LANG_NONE	= 0,
+         MBN_SMS_CDMA_LANG_ENGLISH	= ( MBN_SMS_CDMA_LANG_NONE + 1 ) ,
+@@ -1229,7 +1230,7 @@ enum MBN_SMS_CDMA_LANG
+     } 	MBN_SMS_CDMA_LANG;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("7F8E74CB-BDD4-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CDMA_ENCODING
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_CDMA_ENCODING
+     {
+         MBN_SMS_CDMA_ENCODING_OCTET	= 0,
+         MBN_SMS_CDMA_ENCODING_EPM	= ( MBN_SMS_CDMA_ENCODING_OCTET + 1 ) ,
+@@ -1244,7 +1245,7 @@ enum MBN_SMS_CDMA_ENCODING
+     } 	MBN_SMS_CDMA_ENCODING;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("0D42B514-BDDC-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_FLAG
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_FLAG
+     {
+         MBN_SMS_FLAG_ALL	= 0,
+         MBN_SMS_FLAG_INDEX	= ( MBN_SMS_FLAG_ALL + 1 ) ,
+@@ -1254,28 +1255,28 @@ enum MBN_SMS_FLAG
+         MBN_SMS_FLAG_DRAFT	= ( MBN_SMS_FLAG_SENT + 1 ) 
+     } 	MBN_SMS_FLAG;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("406BFD60-BDDC-11DC-A8A8-001321F1405F") struct MBN_SMS_FILTER
++typedef /* [uuid] */  DECLSPEC_UUID("406BFD60-BDDC-11DC-A8A8-001321F1405F") struct _Windows_SupportedOS_Windows7_ MBN_SMS_FILTER
+     {
+     MBN_SMS_FLAG flag;
+     ULONG messageIndex;
+     } 	MBN_SMS_FILTER;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("8098009D-BDDC-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_STATUS_FLAG
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_STATUS_FLAG
+     {
+         MBN_SMS_FLAG_NONE	= 0,
+         MBN_SMS_FLAG_MESSAGE_STORE_FULL	= 0x1,
+         MBN_SMS_FLAG_NEW_MESSAGE	= 0x2
+     } 	MBN_SMS_STATUS_FLAG;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("1F6E9CA3-BDE6-11DC-A8A8-001321F1405F") struct MBN_SMS_STATUS_INFO
++typedef /* [uuid] */  DECLSPEC_UUID("1F6E9CA3-BDE6-11DC-A8A8-001321F1405F") struct _Windows_SupportedOS_Windows7_ MBN_SMS_STATUS_INFO
+     {
+     ULONG flag;
+     ULONG messageIndex;
+     } 	MBN_SMS_STATUS_INFO;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("4B0FE227-3709-41e2-8A78-E98C0CD0CB09") 
+-enum MBN_SMS_FORMAT
++enum _Windows_SupportedOS_Windows7_ MBN_SMS_FORMAT
+     {
+         MBN_SMS_FORMAT_NONE	= 0,
+         MBN_SMS_FORMAT_PDU	= 0x1,
+@@ -1283,7 +1284,7 @@ enum MBN_SMS_FORMAT
+     } 	MBN_SMS_FORMAT;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("532A3FE4-BDE6-11DC-A8A8-001321F1405F") 
+-enum MBN_RADIO
++enum _Windows_SupportedOS_Windows7_ MBN_RADIO
+     {
+         MBN_RADIO_OFF	= 0,
+         MBN_RADIO_ON	= ( MBN_RADIO_OFF + 1 ) 
+@@ -1299,7 +1300,7 @@ enum MBN_DEVICE_SERVICE_SESSIONS_STATE
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") struct MBN_DEVICE_SERVICE
++typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") struct _Windows_SupportedOS_Windows8_ MBN_DEVICE_SERVICE
+     {
+     BSTR deviceServiceID;
+     VARIANT_BOOL dataWriteSupported;
+@@ -1307,7 +1308,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") stru
+     } 	MBN_DEVICE_SERVICE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("386077A0-275B-45B6-9B32-C343A6749E86") 
+-enum MBN_DEVICE_SERVICES_INTERFACE_STATE
++enum _Windows_SupportedOS_Windows8_ MBN_DEVICE_SERVICES_INTERFACE_STATE
+     {
+         MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL	= 0,
+         MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL	= ( MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL + 1 ) 

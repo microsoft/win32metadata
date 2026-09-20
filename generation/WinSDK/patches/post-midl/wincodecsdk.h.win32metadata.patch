@@ -1,0 +1,67 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincodecsdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincodecsdk.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wincodecsdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincodecsdk.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -272,7 +273,7 @@ DEFINE_GUID(CLSID_WICGainMapMetadataWriter, 0x6f845268, 0xa92e, 0x4a02, 0xb0, 0x
+ 
+ 
+ typedef /* [public] */ 
+-enum WICMetadataCreationOptions
++enum _Windows_SupportedOS_Server2008_ WICMetadataCreationOptions
+     {
+         WICMetadataCreationDefault	= 0,
+         WICMetadataCreationAllowUnknown	= WICMetadataCreationDefault,
+@@ -281,7 +282,7 @@ enum WICMetadataCreationOptions
+     } 	WICMetadataCreationOptions;
+ 
+ typedef /* [public] */ 
+-enum WICPersistOptions
++enum _Windows_SupportedOS_Server2008_ WICPersistOptions
+     {
+         WICPersistOptionDefault	= 0,
+         WICPersistOptionLittleEndian	= 0,
+@@ -1566,7 +1567,7 @@ EXTERN_C const IID IID_IWICMetadataHandlerInfo;
+ /* interface __MIDL_itf_wincodecsdk_0000_0007 */
+ /* [local] */ 
+ 
+-typedef struct WICMetadataPattern
++typedef struct _Windows_SupportedOS_Server2008_ WICMetadataPattern
+     {
+     ULARGE_INTEGER Position;
+     ULONG Length;
+@@ -1902,7 +1903,7 @@ void __RPC_STUB IWICMetadataReaderInfo_Remote_GetPatterns_Stub(
+ /* interface __MIDL_itf_wincodecsdk_0000_0008 */
+ /* [local] */ 
+ 
+-typedef struct WICMetadataHeader
++typedef struct _Windows_SupportedOS_Server2008_ WICMetadataHeader
+     {
+     ULARGE_INTEGER Position;
+     ULONG Length;
+@@ -2757,19 +2758,19 @@ EXTERN_C const IID IID_IWICComponentFactory;
+ /* interface __MIDL_itf_wincodecsdk_0000_0010 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI WICMatchMetadataContent(
++HRESULT WINAPI _Windows_SupportedOS_Server2008_ WICMatchMetadataContent(
+     _In_ REFGUID guidContainerFormat,
+     _In_opt_  const GUID *pguidVendor,
+     _In_  IStream *pIStream,
+     _Out_ GUID *pguidMetadataFormat
+     );
+-HRESULT WINAPI WICSerializeMetadataContent(
++HRESULT WINAPI _Windows_SupportedOS_Server2008_ WICSerializeMetadataContent(
+     _In_ REFGUID guidContainerFormat,
+     _In_ IWICMetadataWriter *pIWriter,
+     _In_ DWORD dwPersistOptions,
+     _In_ IStream *pIStream
+     );
+-HRESULT WINAPI WICGetMetadataContentSize(
++HRESULT WINAPI _Windows_SupportedOS_Server2008_ WICGetMetadataContentSize(
+     _In_ REFGUID guidContainerFormat,
+     _In_ IWICMetadataWriter *pIWriter,
+     _Out_ ULARGE_INTEGER *pcbSize
