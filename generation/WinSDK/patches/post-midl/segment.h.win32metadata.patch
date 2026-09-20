@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/segment.h b/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
+index 206ea4d005369c8527c72831ede0871628e30978..70e1b67e128ad4f14661d02aa3fdfa5724195e28 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
+@@ -561,6 +561,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include <olectl.h>
+@@ -907,7 +908,7 @@ EXTERN_C const IID IID_IMSVidRect;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7F5000A6-A440-47ca-8ACC-C0E75531A2C2")
+-    IMSVidRect : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ IMSVidRect : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Top( 
+@@ -1097,7 +1098,7 @@ EXTERN_C const IID IID_IMSVidRect;
+         END_INTERFACE
+     } IMSVidRectVtbl;
+ 
+-    interface IMSVidRect
++    interface _Windows_SupportedOS_WindowsXP_ IMSVidRect
+     {
+         CONST_VTBL struct IMSVidRectVtbl *lpVtbl;
+     };
+@@ -1197,7 +1198,7 @@ EXTERN_C const IID IID_IMSVidGraphSegmentContainer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3DD2903D-E0AA-11d2-B63A-00C04F79498E")
+-    IMSVidGraphSegmentContainer : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ IMSVidGraphSegmentContainer : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Graph( 
+@@ -1328,7 +1329,7 @@ EXTERN_C const IID IID_IMSVidGraphSegmentContainer;
+         END_INTERFACE
+     } IMSVidGraphSegmentContainerVtbl;
+ 
+-    interface IMSVidGraphSegmentContainer
++    interface _Windows_SupportedOS_WindowsXP_ IMSVidGraphSegmentContainer
+     {
+         CONST_VTBL struct IMSVidGraphSegmentContainerVtbl *lpVtbl;
+     };

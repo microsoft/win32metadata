@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/regbag.h b/generation/WinSDK/RecompiledIdlHeaders/um/regbag.h
+index 58ad8500ee4e170f522e303d107bc1fb78468341..870d0430e8eccd6b0228441d999724240f74f7d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/regbag.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/regbag.h
+@@ -75,6 +75,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -94,7 +95,7 @@ EXTERN_C const IID IID_ICreatePropBagOnRegKey;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8A674B48-1F63-11d3-B64C-00C04F79498E")
+-    ICreatePropBagOnRegKey : public IUnknown
++    _Windows_SupportedOS_WindowsXP_ ICreatePropBagOnRegKey : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Create( 
+@@ -153,7 +154,7 @@ EXTERN_C const IID IID_ICreatePropBagOnRegKey;
+         END_INTERFACE
+     } ICreatePropBagOnRegKeyVtbl;
+ 
+-    interface ICreatePropBagOnRegKey
++    interface _Windows_SupportedOS_WindowsXP_ ICreatePropBagOnRegKey
+     {
+         CONST_VTBL struct ICreatePropBagOnRegKeyVtbl *lpVtbl;
+     };

@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
+index 9179f744d9a56df716cc25a90f3835737bde6e00..1a274e6f3f0b42339709d0c0aee64a93c8d7ca41 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
+@@ -1,6 +1,7 @@
+ // Copyright (c) Microsoft Corporation
+ 
+ #pragma once
++#include "win32metadata_annotations.h"
+ 
+ #include <diagnosticdataquerytypes.h>
+ 
+@@ -20,13 +21,16 @@ STDAPI DdqCreateSession(
+     _In_ DdqAccessLevel accessLevel,
+     _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
+ 
++_Windows_SupportedOS_19041_
+ STDAPI DdqCloseSession(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession);
+ 
++_Windows_SupportedOS_19041_
+ STDAPI DdqGetSessionAccessLevel(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _Out_ DdqAccessLevel* accessLevel);
+ 
++_Windows_SupportedOS_19041_
+ STDAPI DdqGetDiagnosticDataAccessLevelAllowed(
+     _Out_ DdqAccessLevel* accessLevel);
+ 

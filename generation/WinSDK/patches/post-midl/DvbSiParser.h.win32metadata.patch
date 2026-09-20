@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h b/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
+index 147108cf40dab43dc9a31465982f5b68f1b5b30b..e808fb623b289458f3cfb30e837b942ea41dc968 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
+@@ -553,6 +553,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public][public] */ 
+@@ -932,7 +933,7 @@ EXTERN_C const IID IID_IDvbSiParser2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0AC5525F-F816-42F4-93BA-4C0F32F46E54")
+-    IDvbSiParser2 : public IDvbSiParser
++    _Windows_SupportedOS_Windows7_ IDvbSiParser2 : public IDvbSiParser
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEIT2( 
+@@ -1105,7 +1106,7 @@ EXTERN_C const IID IID_IDvbSiParser2;
+         END_INTERFACE
+     } IDvbSiParser2Vtbl;
+ 
+-    interface IDvbSiParser2
++    interface _Windows_SupportedOS_Windows7_ IDvbSiParser2
+     {
+         CONST_VTBL struct IDvbSiParser2Vtbl *lpVtbl;
+     };

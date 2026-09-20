@@ -1,0 +1,92 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+@@ -5,6 +5,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ typedef struct _BLUETOOTH_ADDRESS {
+ 
+ 
+ 
+-typedef struct _BLUETOOTH_LOCAL_SERVICE_INFO {
++typedef struct _Windows_SupportedOS_WindowsVista_ _BLUETOOTH_LOCAL_SERVICE_INFO {
+     BOOL                Enabled;                        //  If TRUE, the enable the services
+ 
+     BLUETOOTH_ADDRESS   btAddr;                         //  If service is to be advertised for a particular remote device
+@@ -176,7 +177,7 @@ _Must_inspect_result_
+ _Success_(return)
+ BOOL
+ WINAPI
+-BluetoothFindNextRadio(
++_Win32_SetLastError_ BluetoothFindNextRadio(
+     _In_  HBLUETOOTH_RADIO_FIND hFind,
+     _Out_ HANDLE * phRadio
+     );
+@@ -201,7 +202,7 @@ BluetoothFindNextRadio(
+ //
+ BOOL
+ WINAPI
+-BluetoothFindRadioClose(
++_Win32_SetLastError_ BluetoothFindRadioClose(
+     _In_ HBLUETOOTH_RADIO_FIND hFind
+     );
+ 
+@@ -465,7 +466,7 @@ BluetoothFindFirstDevice(
+ _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothFindNextDevice(
++_Win32_SetLastError_ BluetoothFindNextDevice(
+     _In_    HBLUETOOTH_DEVICE_FIND  hFind,
+     _Inout_ BLUETOOTH_DEVICE_INFO * pbtdi
+     );
+@@ -490,7 +491,7 @@ BluetoothFindNextDevice(
+ //
+ BOOL
+ WINAPI
+-BluetoothFindDeviceClose(
++_Win32_SetLastError_ BluetoothFindDeviceClose(
+     _In_ HBLUETOOTH_DEVICE_FIND hFind
+     );
+ 
+@@ -709,7 +710,7 @@ typedef struct _BLUETOOTH_SELECT_DEVICE_PARAMS {
+ _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothSelectDevices(
++_Win32_SetLastError_ BluetoothSelectDevices(
+     _Inout_ BLUETOOTH_SELECT_DEVICE_PARAMS * pbtsdp
+     );
+ 
+@@ -763,7 +764,7 @@ BluetoothSelectDevicesFree(
+ //
+ BOOL
+ WINAPI
+-BluetoothDisplayDeviceProperties(
++_Win32_SetLastError_ BluetoothDisplayDeviceProperties(
+     _In_opt_ HWND hwndParent,
+     _Inout_ BLUETOOTH_DEVICE_INFO * pbtdi
+     );
+@@ -1409,7 +1410,7 @@ BluetoothRegisterForAuthenticationEx(
+ //
+ BOOL
+ WINAPI
+-BluetoothUnregisterAuthentication(
++_Win32_SetLastError_ BluetoothUnregisterAuthentication(
+     _In_ HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle
+     );
+ 
+@@ -1901,7 +1902,7 @@ typedef BOOL (CALLBACK *PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK)(
+ _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothSdpEnumAttributes(
++_Win32_SetLastError_ BluetoothSdpEnumAttributes(
+     _In_reads_bytes_(cbStreamSize) LPBYTE  pSDPStream,
+     _In_ ULONG   cbStreamSize,
+     _In_ PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK pfnCallback,
