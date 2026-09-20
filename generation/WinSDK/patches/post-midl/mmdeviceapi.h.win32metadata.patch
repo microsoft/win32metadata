@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
+@@ -142,6 +142,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+ #define E_NOTFOUND HRESULT_FROM_WIN32(ERROR_NOT_FOUND)
+@@ -180,7 +181,7 @@ DEFINE_PROPERTYKEY(PKEY_AudioEndpointLogo_IconPath, 0xf1ab780d, 0x2010, 0x4ed3,
+ DEFINE_PROPERTYKEY(PKEY_AudioEndpointSettings_MenuText, 0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 0);
+ DEFINE_PROPERTYKEY(PKEY_AudioEndpointSettings_LaunchContract, 0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 1);
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-typedef struct tagDIRECTX_AUDIO_ACTIVATION_PARAMS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagDIRECTX_AUDIO_ACTIVATION_PARAMS
+     {
+     DWORD cbDirectXAudioActivationParams;
+     GUID guidAudioSession;
+@@ -1222,7 +1223,7 @@ EXTERN_C const IID IID_IActivateAudioInterfaceAsyncOperation;
+ // * activation parameters specific to the interface being activated
+ // and asynchronously returns a pointer to the specified interface
+ // ----------------------------------------------------------------------
+-STDAPI ActivateAudioInterfaceAsync(
++STDAPI _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ActivateAudioInterfaceAsync(
+     _In_ LPCWSTR deviceInterfacePath,
+     _In_ REFIID riid,
+     _In_opt_ PROPVARIANT *activationParams,
+@@ -1235,7 +1236,7 @@ STDAPI ActivateAudioInterfaceAsync(
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-typedef /* [public] */ struct __MIDL___MIDL_itf_mmdeviceapi_0000_0008_0001
++typedef /* [public] */ struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ __MIDL___MIDL_itf_mmdeviceapi_0000_0008_0001
+     {
+     LPARAM AddPageParam;
+     IMMDevice *pEndpoint;

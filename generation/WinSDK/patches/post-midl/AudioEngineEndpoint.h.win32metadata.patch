@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
+@@ -148,6 +148,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [public][public][public] */ 
+@@ -172,7 +173,7 @@ typedef struct AUDIO_ENDPOINT_SHARED_CREATE_PARAMS
+ typedef struct AUDIO_ENDPOINT_SHARED_CREATE_PARAMS *PAUDIO_ENDPOINT_SHARED_CREATE_PARAMS;
+ 
+ typedef 
+-enum AE_POSITION_FLAGS
++enum _Windows_SupportedOS_Windows7_ AE_POSITION_FLAGS
+     {
+         POSITION_INVALID	= 0,
+         POSITION_DISCONTINUOUS	= 1,
+@@ -180,7 +181,7 @@ enum AE_POSITION_FLAGS
+         POSITION_QPC_ERROR	= 4
+     } 	AE_POSITION_FLAGS;
+ 
+-typedef struct AE_CURRENT_POSITION
++typedef struct _Windows_SupportedOS_Windows7_ AE_CURRENT_POSITION
+     {
+     UINT64 u64DevicePosition;
+     UINT64 u64StreamPosition;
