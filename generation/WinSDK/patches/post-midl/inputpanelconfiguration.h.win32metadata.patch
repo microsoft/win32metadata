@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h b/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
+index fc041e199d6b3fb52877414c8097587519856c5d..97328a61d6ae7779d42dee90831d1ace83a513e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/inputpanelconfiguration.h
+@@ -86,6 +86,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -106,7 +107,7 @@ EXTERN_C const IID IID_IInputPanelConfiguration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("41C81592-514C-48BD-A22E-E6AF638521A6")
+-    IInputPanelConfiguration : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInputPanelConfiguration : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EnableFocusTracking( void) = 0;
+@@ -143,7 +144,7 @@ EXTERN_C const IID IID_IInputPanelConfiguration;
+         END_INTERFACE
+     } IInputPanelConfigurationVtbl;
+ 
+-    interface IInputPanelConfiguration
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInputPanelConfiguration
+     {
+         CONST_VTBL struct IInputPanelConfigurationVtbl *lpVtbl;
+     };
+@@ -189,7 +190,7 @@ EXTERN_C const IID IID_IInputPanelInvocationConfiguration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A213F136-3B45-4362-A332-EFB6547CD432")
+-    IInputPanelInvocationConfiguration : public IUnknown
++    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInputPanelInvocationConfiguration : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RequireTouchInEditControl( void) = 0;
+@@ -226,7 +227,7 @@ EXTERN_C const IID IID_IInputPanelInvocationConfiguration;
+         END_INTERFACE
+     } IInputPanelInvocationConfigurationVtbl;
+ 
+-    interface IInputPanelInvocationConfiguration
++    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInputPanelInvocationConfiguration
+     {
+         CONST_VTBL struct IInputPanelInvocationConfigurationVtbl *lpVtbl;
+     };
