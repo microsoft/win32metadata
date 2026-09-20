@@ -1,0 +1,85 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
+@@ -148,6 +148,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //=--------------------------------------------------------------------------=
+ // OLEACC.H
+ //=--------------------------------------------------------------------------=
+@@ -191,16 +192,16 @@ DEFINE_GUID(IIS_ControlAccessible,   0x38c682a6, 0x9731, 0x43f2, 0x9f, 0xae, 0xe
+ // MSAA API Prototypes
+ //=--------------------------------------------------------------------------=
+ 
+-STDAPI_(LRESULT) LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);
+-STDAPI          ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);
+-STDAPI          WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);
+-STDAPI          AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);
+-STDAPI          AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);
+-STDAPI          AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);
+-STDAPI          AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);
++STDAPI_(LRESULT) _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);
++STDAPI          _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);
+ 
+-STDAPI_(UINT)   GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);
+-STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);
++STDAPI_(UINT)   _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);
++STDAPI_(UINT)   _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);
+ 
+ #ifdef UNICODE
+ #define GetRoleText     GetRoleTextW
+@@ -208,20 +209,20 @@ STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWS
+ #define GetRoleText     GetRoleTextA
+ #endif // UNICODE
+ 
+-STDAPI_(UINT)   GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);
+-STDAPI_(UINT)   GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);
++STDAPI_(UINT)   _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);
++STDAPI_(UINT)   _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);
+ #ifdef UNICODE
+ #define GetStateText    GetStateTextW
+ #else
+ #define GetStateText    GetStateTextA
+ #endif // UNICODE
+ 
+-STDAPI_(VOID)   GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);
++STDAPI_(VOID)   _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);
+ 
+-STDAPI          CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+ 
+-STDAPI          CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+-STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++STDAPI          _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+ 
+ #ifdef UNICODE
+ #define CreateStdAccessibleProxy     CreateStdAccessibleProxyW
+@@ -235,9 +236,9 @@ STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassNam
+ #define ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK 0x0000008
+ #define ANRUS_PRIORITY_AUDIO_DYNAMIC_DUCK 0x0000010
+ 
+-STDAPI          AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _In_ DWORD dwUtilityState);
++STDAPI          _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _In_ DWORD dwUtilityState);
+ 
+-STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);
++STDAPI          _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);
+ 
+ 
+ // Simple Owner-Drawn Menu support...
+@@ -246,7 +247,7 @@ STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarge
+ 
+ // Menu's dwItemData should point to one of these structs:
+ // (or can point to an app-defined struct containing this as the first member)
+-typedef struct tagMSAAMENUINFO {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ tagMSAAMENUINFO {
+     DWORD   dwMSAASignature; // Must be MSAA_MENU_SIG
+     DWORD   cchWText;        // Length of text, in Unicode characters, excluding terminating NUL
+     LPWSTR  pszWText;        // NUL-terminated text, in Unicode

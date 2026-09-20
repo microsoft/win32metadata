@@ -1,0 +1,64 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
+@@ -612,12 +612,13 @@ extern "C"{
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ // -------------------------------------------------------------
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #ifndef _INC_UIAUTOMATIONCOREAPI
+ 
+-enum TreeScope
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ TreeScope
+     {
+         TreeScope_None	= 0,
+         TreeScope_Element	= 0x1,
+@@ -628,39 +629,39 @@ enum TreeScope
+         TreeScope_Subtree	= ( ( TreeScope_Element | TreeScope_Children )  | TreeScope_Descendants ) 
+     } ;
+ 
+-enum PropertyConditionFlags
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ PropertyConditionFlags
+     {
+         PropertyConditionFlags_None	= 0,
+         PropertyConditionFlags_IgnoreCase	= 0x1,
+         PropertyConditionFlags_MatchSubstring	= 0x2
+     } ;
+ 
+-enum AutomationElementMode
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ AutomationElementMode
+     {
+         AutomationElementMode_None	= 0,
+         AutomationElementMode_Full	= ( AutomationElementMode_None + 1 ) 
+     } ;
+ 
+-enum TreeTraversalOptions
++enum _Windows_SupportedOS_15063_ TreeTraversalOptions
+     {
+         TreeTraversalOptions_Default	= 0,
+         TreeTraversalOptions_PostOrder	= 0x1,
+         TreeTraversalOptions_LastToFirstOrder	= 0x2
+     } ;
+ 
+-enum ConnectionRecoveryBehaviorOptions
++enum _Windows_SupportedOS_14393_ _Windows_SupportedOS_Server2016_ ConnectionRecoveryBehaviorOptions
+     {
+         ConnectionRecoveryBehaviorOptions_Disabled	= 0,
+         ConnectionRecoveryBehaviorOptions_Enabled	= 0x1
+     } ;
+ 
+-enum CoalesceEventsOptions
++enum _Windows_SupportedOS_14393_ _Windows_SupportedOS_Server2016_ CoalesceEventsOptions
+     {
+         CoalesceEventsOptions_Disabled	= 0,
+         CoalesceEventsOptions_Enabled	= 0x1
+     } ;
+ #endif
+-struct ExtendedProperty
++struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ExtendedProperty
+     {
+     BSTR PropertyName;
+     BSTR PropertyValue;

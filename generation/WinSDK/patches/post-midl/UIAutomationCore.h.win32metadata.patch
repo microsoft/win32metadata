@@ -1,0 +1,293 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -492,7 +493,7 @@ extern "C"{
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ // -------------------------------------------------------------
+ 
+-enum NavigateDirection
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NavigateDirection
+     {
+         NavigateDirection_Parent	= 0,
+         NavigateDirection_NextSibling	= 1,
+@@ -501,7 +502,7 @@ enum NavigateDirection
+         NavigateDirection_LastChild	= 4
+     } ;
+ 
+-enum ProviderOptions
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ProviderOptions
+     {
+         ProviderOptions_ClientSideProvider	= 0x1,
+         ProviderOptions_ServerSideProvider	= 0x2,
+@@ -515,7 +516,7 @@ enum ProviderOptions
+     } ;
+ DEFINE_ENUM_FLAG_OPERATORS(ProviderOptions)
+ 
+-enum StructureChangeType
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ StructureChangeType
+     {
+         StructureChangeType_ChildAdded	= 0,
+         StructureChangeType_ChildRemoved	= ( StructureChangeType_ChildAdded + 1 ) ,
+@@ -525,7 +526,7 @@ enum StructureChangeType
+         StructureChangeType_ChildrenReordered	= ( StructureChangeType_ChildrenBulkRemoved + 1 ) 
+     } ;
+ 
+-enum TextEditChangeType
++enum _Windows_SupportedOS_Windows81_ TextEditChangeType
+     {
+         TextEditChangeType_None	= 0,
+         TextEditChangeType_AutoCorrect	= 1,
+@@ -534,14 +535,14 @@ enum TextEditChangeType
+         TextEditChangeType_AutoComplete	= 4
+     } ;
+ 
+-enum OrientationType
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ OrientationType
+     {
+         OrientationType_None	= 0,
+         OrientationType_Horizontal	= 1,
+         OrientationType_Vertical	= 2
+     } ;
+ 
+-enum DockPosition
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ DockPosition
+     {
+         DockPosition_Top	= 0,
+         DockPosition_Left	= 1,
+@@ -551,7 +552,7 @@ enum DockPosition
+         DockPosition_None	= 5
+     } ;
+ 
+-enum ExpandCollapseState
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ExpandCollapseState
+     {
+         ExpandCollapseState_Collapsed	= 0,
+         ExpandCollapseState_Expanded	= 1,
+@@ -559,7 +560,7 @@ enum ExpandCollapseState
+         ExpandCollapseState_LeafNode	= 3
+     } ;
+ 
+-enum ScrollAmount
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ScrollAmount
+     {
+         ScrollAmount_LargeDecrement	= 0,
+         ScrollAmount_SmallDecrement	= 1,
+@@ -568,21 +569,21 @@ enum ScrollAmount
+         ScrollAmount_SmallIncrement	= 4
+     } ;
+ 
+-enum RowOrColumnMajor
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ RowOrColumnMajor
+     {
+         RowOrColumnMajor_RowMajor	= 0,
+         RowOrColumnMajor_ColumnMajor	= 1,
+         RowOrColumnMajor_Indeterminate	= 2
+     } ;
+ 
+-enum ToggleState
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ToggleState
+     {
+         ToggleState_Off	= 0,
+         ToggleState_On	= 1,
+         ToggleState_Indeterminate	= 2
+     } ;
+ 
+-enum WindowVisualState
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ WindowVisualState
+     {
+         WindowVisualState_Normal	= 0,
+         WindowVisualState_Maximized	= 1,
+@@ -600,7 +601,7 @@ enum SynchronizedInputType
+     } ;
+ DEFINE_ENUM_FLAG_OPERATORS(SynchronizedInputType)
+ 
+-enum WindowInteractionState
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ WindowInteractionState
+     {
+         WindowInteractionState_Running	= 0,
+         WindowInteractionState_Closing	= 1,
+@@ -609,7 +610,7 @@ enum WindowInteractionState
+         WindowInteractionState_NotResponding	= 4
+     } ;
+ 
+-enum SayAsInterpretAs
++enum _Windows_SupportedOS_15063_ _Windows_SupportedOS_Server2016_ SayAsInterpretAs
+     {
+         SayAsInterpretAs_None	= 0,
+         SayAsInterpretAs_Spell	= 1,
+@@ -640,7 +641,7 @@ enum SayAsInterpretAs
+         SayAsInterpretAs_Time_HoursMinutes24	= 26
+     } ;
+ 
+-enum TextUnit
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ TextUnit
+     {
+         TextUnit_Character	= 0,
+         TextUnit_Format	= 1,
+@@ -651,47 +652,47 @@ enum TextUnit
+         TextUnit_Document	= 6
+     } ;
+ 
+-enum TextPatternRangeEndpoint
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ TextPatternRangeEndpoint
+     {
+         TextPatternRangeEndpoint_Start	= 0,
+         TextPatternRangeEndpoint_End	= 1
+     } ;
+ 
+-enum SupportedTextSelection
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ SupportedTextSelection
+     {
+         SupportedTextSelection_None	= 0,
+         SupportedTextSelection_Single	= 1,
+         SupportedTextSelection_Multiple	= 2
+     } ;
+ 
+-enum LiveSetting
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ LiveSetting
+     {
+         Off	= 0,
+         Polite	= 1,
+         Assertive	= 2
+     } ;
+ 
+-enum ActiveEnd
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ActiveEnd
+     {
+         ActiveEnd_None	= 0,
+         ActiveEnd_Start	= 1,
+         ActiveEnd_End	= 2
+     } ;
+ 
+-enum CaretPosition
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ CaretPosition
+     {
+         CaretPosition_Unknown	= 0,
+         CaretPosition_EndOfLine	= 1,
+         CaretPosition_BeginningOfLine	= 2
+     } ;
+ 
+-enum CaretBidiMode
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ CaretBidiMode
+     {
+         CaretBidiMode_LTR	= 0,
+         CaretBidiMode_RTL	= 1
+     } ;
+ 
+-enum ZoomUnit
++enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ZoomUnit
+     {
+         ZoomUnit_NoAmount	= 0,
+         ZoomUnit_LargeDecrement	= 1,
+@@ -700,7 +701,7 @@ enum ZoomUnit
+         ZoomUnit_SmallIncrement	= 4
+     } ;
+ 
+-enum AnimationStyle
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ AnimationStyle
+     {
+         AnimationStyle_None	= 0,
+         AnimationStyle_LasVegasLights	= 1,
+@@ -712,7 +713,7 @@ enum AnimationStyle
+         AnimationStyle_Other	= -1
+     } ;
+ 
+-enum BulletStyle
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ BulletStyle
+     {
+         BulletStyle_None	= 0,
+         BulletStyle_HollowRoundBullet	= 1,
+@@ -723,7 +724,7 @@ enum BulletStyle
+         BulletStyle_Other	= -1
+     } ;
+ 
+-enum CapStyle
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ CapStyle
+     {
+         CapStyle_None	= 0,
+         CapStyle_SmallCap	= 1,
+@@ -735,7 +736,7 @@ enum CapStyle
+         CapStyle_Other	= -1
+     } ;
+ 
+-enum FillType
++enum _Windows_SupportedOS_15063_ _Windows_SupportedOS_Server2016_ FillType
+     {
+         FillType_None	= 0,
+         FillType_Color	= 1,
+@@ -744,7 +745,7 @@ enum FillType
+         FillType_Pattern	= 4
+     } ;
+ 
+-enum FlowDirections
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ FlowDirections
+     {
+         FlowDirections_Default	= 0,
+         FlowDirections_RightToLeft	= 0x1,
+@@ -760,7 +761,7 @@ enum HorizontalTextAlignment
+         HorizontalTextAlignment_Justified	= 3
+     } ;
+ 
+-enum OutlineStyles
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ OutlineStyles
+     {
+         OutlineStyles_None	= 0,
+         OutlineStyles_Outline	= 1,
+@@ -769,7 +770,7 @@ enum OutlineStyles
+         OutlineStyles_Embossed	= 8
+     } ;
+ 
+-enum TextDecorationLineStyle
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ TextDecorationLineStyle
+     {
+         TextDecorationLineStyle_None	= 0,
+         TextDecorationLineStyle_Single	= 1,
+@@ -792,7 +793,7 @@ enum TextDecorationLineStyle
+         TextDecorationLineStyle_Other	= -1
+     } ;
+ 
+-enum VisualEffects
++enum _Windows_SupportedOS_15063_ _Windows_SupportedOS_Server2016_ VisualEffects
+     {
+         VisualEffects_None	= 0,
+         VisualEffects_Shadow	= ( 1 << 0 ) ,
+@@ -802,7 +803,7 @@ enum VisualEffects
+         VisualEffects_Bevel	= ( 1 << 4 ) 
+     } ;
+ 
+-enum NotificationProcessing
++enum _Windows_SupportedOS_16299_ _Windows_SupportedOS_Server2016_ NotificationProcessing
+     {
+         NotificationProcessing_ImportantAll	= 0,
+         NotificationProcessing_ImportantMostRecent	= 1,
+@@ -812,7 +813,7 @@ enum NotificationProcessing
+         NotificationProcessing_ImportantCurrentThenMostRecent	= 5
+     } ;
+ 
+-enum NotificationKind
++enum _Windows_SupportedOS_16299_ _Windows_SupportedOS_Server2016_ NotificationKind
+     {
+         NotificationKind_ItemAdded	= 0,
+         NotificationKind_ItemRemoved	= 1,
+@@ -836,14 +837,14 @@ typedef int METADATAID;
+ 
+ typedef int HEADINGLEVELID;
+ 
+-struct UiaRect
++struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ UiaRect
+     {
+     double left;
+     double top;
+     double width;
+     double height;
+     } ;
+-struct UiaPoint
++struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ UiaPoint
+     {
+     double x;
+     double y;
