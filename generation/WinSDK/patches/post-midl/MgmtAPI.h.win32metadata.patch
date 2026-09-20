@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+index b581486345d24408970ebb019dc8a78359df94f1..8be8a15e995fa46c2473f7503137b9ec3edac8ab 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+@@ -19,6 +19,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -74,6 +75,8 @@ typedef PVOID LPSNMP_MGR_SESSION;
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ LPSNMP_MGR_SESSION
+ SNMP_FUNC_TYPE
+ SnmpMgrOpen(
+@@ -83,6 +86,8 @@ SnmpMgrOpen(
+     IN INT   nRetries                       // Comm time-out/retry count
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrCtl(
+@@ -95,6 +100,8 @@ SnmpMgrCtl(
+     LPDWORD            lpcbBytesReturned    // space used from lpvOutBuffer
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrClose(

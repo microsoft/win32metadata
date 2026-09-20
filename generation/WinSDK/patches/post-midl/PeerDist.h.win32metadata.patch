@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h b/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
+index 5653931322a10ec587c04f50e40ad275795da0fe..c7af0d8f4020d5a9fd6a82a7fbc746b6620c4e6f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
+@@ -21,6 +21,7 @@ Abstract:
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -292,11 +293,15 @@ typedef struct _PEERDIST_CLIENT_BASIC_INFO {
+ 
+ #ifndef MIDL_PASS
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ DWORD WINAPI PeerDistGetStatusEx(
+         _In_  PEERDIST_INSTANCE_HANDLE hPeerDist,
+         _Inout_ PEERDIST_STATUS_INFO *pPeerDistStatus
+         );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ DWORD WINAPI PeerDistRegisterForStatusChangeNotificationEx(
+         _In_      PEERDIST_INSTANCE_HANDLE hPeerDist,
+         _In_opt_  HANDLE hCompletionPort,
+@@ -305,6 +310,8 @@ DWORD WINAPI PeerDistRegisterForStatusChangeNotificationEx(
+         _Inout_ PEERDIST_STATUS_INFO *pPeerDistStatus
+         );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ BOOL WINAPI PeerDistGetOverlappedResult(
+         _In_ LPOVERLAPPED lpOverlapped,
+         _Out_ LPDWORD lpNumberOfBytesTransferred,

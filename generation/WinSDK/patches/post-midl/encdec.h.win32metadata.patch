@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/encdec.h b/generation/WinSDK/RecompiledIdlHeaders/um/encdec.h
+index 5685043d83ecbd6fda51f144f704296b3ac42466..a5507b5dd2e5e5e722bba1dafe10dc4ed1825b0e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/encdec.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/encdec.h
+@@ -213,6 +213,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma warning(push)
+@@ -1907,7 +1908,7 @@ EXTERN_C const IID IID_IDTFilter3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("513998cc-e929-4cdf-9fbd-bad1e0314866")
+-    IDTFilter3 : public IDTFilter2
++    _Windows_SupportedOS_WindowsVista_ IDTFilter3 : public IDTFilter2
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProtectionType( 
+@@ -2046,7 +2047,7 @@ EXTERN_C const IID IID_IDTFilter3;
+         END_INTERFACE
+     } IDTFilter3Vtbl;
+ 
+-    interface IDTFilter3
++    interface _Windows_SupportedOS_WindowsVista_ IDTFilter3
+     {
+         CONST_VTBL struct IDTFilter3Vtbl *lpVtbl;
+     };
