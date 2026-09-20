@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
+index 1cdaaf102cd0984398d9f3ed7103b8c438ea54d7..4f766ac5c2c44d82f2b8079074a74ec2552ec3cd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
+@@ -23,6 +23,7 @@ Revision History:
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #define NONGAMESPARTITIONS WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WER
+ 
+@@ -126,6 +127,8 @@ typedef struct _LOADED_IMAGE {
+ #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
+ 
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ BOOL
+ IMAGEAPI
+ BindImage(
+@@ -188,6 +191,8 @@ BOOL
+     );
+ 
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ BOOL
+ IMAGEAPI
+ BindImageEx(
+@@ -271,6 +276,8 @@ ReBaseImage64(
+ // Define checksum function prototypes.
+ //
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ PIMAGE_NT_HEADERS
+ IMAGEAPI
+ CheckSumMappedFile (
