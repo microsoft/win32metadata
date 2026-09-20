@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winml.h b/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
+index 0716ef3305762aaea79022ffac0fa2086bb13d09..9481c16c76c330df31456d8d7ff8f4794cc998d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __winml_h__
+ #define __winml_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -132,7 +133,7 @@ enum WINML_BINDING_TYPE
+         WINML_BINDING_RESOURCE	= ( WINML_BINDING_IMAGE + 1 ) 
+     } 	WINML_BINDING_TYPE;
+ 
+-typedef struct WINML_TENSOR_BINDING_DESC
++typedef struct _Windows_SupportedOS_17134_ WINML_TENSOR_BINDING_DESC
+     {
+     WINML_TENSOR_DATA_TYPE DataType;
+     /* [annotation] */ 
