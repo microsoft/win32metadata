@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h b/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
+index 484b70392cfe178b5b7d8d06b939376f61c7191b..cdf86e94456736cfbecd4a0a752f14b2ce9ef6c5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
+@@ -116,6 +116,7 @@ extern "C"{
+ 
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -239,7 +240,7 @@ EXTERN_C const IID IID_ITraceEvent;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8CC97F40-9028-4FF3-9B62-7D1F79CA7BCB")
+-    ITraceEvent : public IUnknown
++    _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEvent : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+@@ -398,7 +399,7 @@ EXTERN_C const IID IID_ITraceEvent;
+         END_INTERFACE
+     } ITraceEventVtbl;
+ 
+-    interface ITraceEvent
++    interface _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEvent
+     {
+         CONST_VTBL struct ITraceEventVtbl *lpVtbl;
+     };
+@@ -477,7 +478,7 @@ EXTERN_C const IID IID_ITraceEventCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3ED25501-593F-43E9-8F38-3AB46F5A4A52")
+-    ITraceEventCallback : public IUnknown
++    _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEventCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnBeginProcessTrace( 
+@@ -546,7 +547,7 @@ EXTERN_C const IID IID_ITraceEventCallback;
+         END_INTERFACE
+     } ITraceEventCallbackVtbl;
+ 
+-    interface ITraceEventCallback
++    interface _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEventCallback
+     {
+         CONST_VTBL struct ITraceEventCallbackVtbl *lpVtbl;
+     };

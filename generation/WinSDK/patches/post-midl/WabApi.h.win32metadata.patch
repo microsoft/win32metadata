@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
+index 2f35e5fd4f40eb9e0e9c593f5eaf88bbc8f22cab..cc58bb1087bf84fb4e15fe22a1d237119a46472d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
+@@ -4,6 +4,7 @@
+ #ifndef _WABAPI_H_
+ #define _WABAPI_H_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -162,7 +163,7 @@ DECLARE_MAPI_INTERFACE(IWABOBJECT_)
+ //
+ // Input information to pass to WABOpen
+ //
+-typedef struct _tagWAB_PARAM
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _tagWAB_PARAM
+ {
+     ULONG   cbSize;         // sizeof(WAB_PARAM).
+     HWND    hwnd;           // hWnd of calling client Application. Can be NULL
