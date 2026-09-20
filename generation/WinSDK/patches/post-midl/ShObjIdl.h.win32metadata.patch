@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl.h
+index 8fa564e5c44eddc7a6854aa87b8806294aa37f68..37fc37e8f8fe539c81fe7e08a9a41bd283270ebc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl.h
+@@ -769,6 +769,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+ #pragma warning(disable:4820) /* padding added after data member */
+@@ -796,7 +797,7 @@ EXTERN_C const IID IID_IQueryCodePage;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("C7B236CE-EE80-11D0-985F-006008059382")
+-    IQueryCodePage : public IUnknown
++    _Windows_SupportedOS_Windows7_ IQueryCodePage : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCodePage( 
+@@ -847,7 +848,7 @@ EXTERN_C const IID IID_IQueryCodePage;
+         END_INTERFACE
+     } IQueryCodePageVtbl;
+ 
+-    interface IQueryCodePage
++    interface _Windows_SupportedOS_Windows7_ IQueryCodePage
+     {
+         CONST_VTBL struct IQueryCodePageVtbl *lpVtbl;
+     };
+@@ -936,7 +937,7 @@ EXTERN_C const IID IID_IFolderViewOptions;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3cc974d2-b302-4d36-ad3e-06d93f695d3f")
+-    IFolderViewOptions : public IUnknown
++    _Windows_SupportedOS_Windows7_ IFolderViewOptions : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetFolderViewOptions( 
+@@ -991,7 +992,7 @@ EXTERN_C const IID IID_IFolderViewOptions;
+         END_INTERFACE
+     } IFolderViewOptionsVtbl;
+ 
+-    interface IFolderViewOptions
++    interface _Windows_SupportedOS_Windows7_ IFolderViewOptions
+     {
+         CONST_VTBL struct IFolderViewOptionsVtbl *lpVtbl;
+     };

@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
+index 62644da1728b7a6b795c1e19ff1cc4027b687c6e..c0f4cf15cfab1e823f2a77bb7ef56a7b5fd96918 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
+@@ -10,6 +10,7 @@ File: shlobj.h
+ #define _SHLOBJ_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -740,7 +741,7 @@ DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+ 
+-typedef struct _SHChangeProductKeyAsIDList {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHChangeProductKeyAsIDList {
+     USHORT cb;
+     WCHAR wszProductKey[39];
+     USHORT cbZero;
+@@ -762,7 +763,11 @@ STDAPI_(void) SHChangeNotifyRegisterThread(SCNRT_STATUS status);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ #endif
+ SHSTDAPI_(void) PathQualify(_Inout_ PWSTR psz);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ SHSTDAPI_(BOOL) PathIsSlowA(_In_ LPCSTR pszFile, DWORD dwAttr);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ SHSTDAPI_(BOOL) PathIsSlowW(_In_ LPCWSTR pszFile, DWORD dwAttr);
+ #ifdef UNICODE
+ #define PathIsSlow  PathIsSlowW

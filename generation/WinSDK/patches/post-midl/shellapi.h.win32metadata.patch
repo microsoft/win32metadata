@@ -1,0 +1,23 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
+index 8db637a14a7a524a85c93a599ddae49097efa031..6b131a046b21ef7852311fd7cd552e39dba680a8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*****************************************************************************\
+ *                                                                             *
+@@ -78,8 +79,12 @@ SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumA
+ 
+ DECLARE_HANDLE(HDROP);
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2000_
+ _Success_(return != 0)
+ SHSTDAPI_(UINT) DragQueryFileA(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_opt_(cch) LPSTR lpszFile, _In_ UINT cch);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2000_
+ _Success_(return != 0)
+ SHSTDAPI_(UINT) DragQueryFileW(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_opt_(cch) LPWSTR lpszFile, _In_ UINT cch);
+ #ifdef UNICODE

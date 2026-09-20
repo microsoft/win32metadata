@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
+index 04174f8702cef388c97f2f363713cd47c457e79a..5655b8d5402c9f551ef0691891247fbd6a139dab 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
+@@ -6,6 +6,7 @@ File: shlobj_core.h
+ 
+ ===========================================================================*/
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -100,6 +101,8 @@ extern "C" {            /* Assume C declarations for C++ */
+ //
+ //===========================================================================
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2000_
+ _Check_return_
+ SHSTDAPI SHGetMalloc(_Outptr_ IMalloc **ppMalloc);   // CoGetMalloc(MEMCTX_TASK,ppMalloc)
+ SHSTDAPI_(void *) SHAlloc(SIZE_T cb);                   // CoTaskMemAlloc(cb)
+@@ -387,6 +390,8 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
+ #define IDO_SHGIOI_SLOWFILE 0x0FFFFFFFD
+ #define IDO_SHGIOI_DEFAULT  0x0FFFFFFFC
+ SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ SHSTDAPI_(int) SHGetIconOverlayIndexW(_In_opt_ LPCWSTR pszIconPath, int iIconIndex);
+ #ifdef UNICODE
+ #define SHGetIconOverlayIndex  SHGetIconOverlayIndexW
+@@ -453,7 +458,7 @@ DEFINE_ENUM_FLAG_OPERATORS(SHELL_LINK_DATA_FLAGS)
+ #pragma warning(disable:4201) /* nonstandard extension used : nameless struct/union */
+ #endif
+ 
+-typedef struct tagDATABLOCKHEADER
++typedef struct _Windows_SupportedOS_Server2000_ tagDATABLOCKHEADER
+ {
+     DWORD   cbSize;             // Size of this extra data block
+     DWORD   dwSignature;        // signature of this extra data block
+@@ -650,6 +655,8 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
+ #define FCIDM_MENU_EXPLORE          (FCIDM_GLOBALFIRST+0x0150)
+ #define FCIDM_MENU_FAVORITES        (FCIDM_GLOBALFIRST+0x0170)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ SHSTDAPI_(PIDLIST_RELATIVE)     ILClone(_In_ PCUIDLIST_RELATIVE pidl);
+ SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
+ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCombine(_In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCUIDLIST_RELATIVE pidl2);

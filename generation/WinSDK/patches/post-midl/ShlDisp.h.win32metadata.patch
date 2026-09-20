@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+index 11b4942409a7f148c589d1d7ae416c8cc3f660be..20a0686822564e336ed20db881bf6425e2bddd3a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+@@ -367,6 +367,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -4158,7 +4159,7 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E7A1AF80-4D96-11CF-960C-0080C7F4EE85")
+-    IShellFolderViewDual : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Application( 
+@@ -4340,7 +4341,7 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+         END_INTERFACE
+     } IShellFolderViewDualVtbl;
+ 
+-    interface IShellFolderViewDual
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual
+     {
+         CONST_VTBL struct IShellFolderViewDualVtbl *lpVtbl;
+     };
+@@ -4423,7 +4424,7 @@ EXTERN_C const IID IID_IShellFolderViewDual2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("31C147b6-0ADE-4A3C-B514-DDF932EF6D17")
+-    IShellFolderViewDual2 : public IShellFolderViewDual
++    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual2 : public IShellFolderViewDual
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentViewMode( 
+@@ -4593,7 +4594,7 @@ EXTERN_C const IID IID_IShellFolderViewDual2;
+         END_INTERFACE
+     } IShellFolderViewDual2Vtbl;
+ 
+-    interface IShellFolderViewDual2
++    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual2
+     {
+         CONST_VTBL struct IShellFolderViewDual2Vtbl *lpVtbl;
+     };
