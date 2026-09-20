@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+@@ -86,17 +86,18 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-typedef struct _DEDUP_CONTAINER_EXTENT
++typedef struct _Windows_SupportedOS_Server2012_ _DEDUP_CONTAINER_EXTENT
+     {
+     ULONG ContainerIndex;
+     hyper StartOffset;
+     hyper Length;
+     } 	DEDUP_CONTAINER_EXTENT;
+ 
+-typedef struct _DDP_FILE_EXTENT
++typedef struct _Windows_SupportedOS_Server2012_ _DDP_FILE_EXTENT
+     {
+     hyper Length;
+     hyper Offset;
