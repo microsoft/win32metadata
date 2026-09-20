@@ -1,0 +1,156 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
+index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391a93549a9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
+@@ -118,6 +118,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -170,7 +171,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1860d430-b24c-4975-9f90-dbb39baa24ec")
+-    IWSDEndpointProxy : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEndpointProxy : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SendOneWayRequest( 
+@@ -299,7 +300,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
+         END_INTERFACE
+     } IWSDEndpointProxyVtbl;
+ 
+-    interface IWSDEndpointProxy
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEndpointProxy
+     {
+         CONST_VTBL struct IWSDEndpointProxyVtbl *lpVtbl;
+     };
+@@ -363,7 +364,7 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("06996d57-1d67-4928-9307-3d7833fdb846")
+-    IWSDMetadataExchange : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDMetadataExchange : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
+@@ -404,7 +405,7 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
+         END_INTERFACE
+     } IWSDMetadataExchangeVtbl;
+ 
+-    interface IWSDMetadataExchange
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDMetadataExchange
+     {
+         CONST_VTBL struct IWSDMetadataExchangeVtbl *lpVtbl;
+     };
+@@ -450,7 +451,7 @@ EXTERN_C const IID IID_IWSDServiceProxy;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d4c7fb9c-03ab-4175-9d67-094fafebf487")
+-    IWSDServiceProxy : public IWSDMetadataExchange
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDServiceProxy : public IWSDMetadataExchange
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE BeginGetMetadata( 
+@@ -573,7 +574,7 @@ EXTERN_C const IID IID_IWSDServiceProxy;
+         END_INTERFACE
+     } IWSDServiceProxyVtbl;
+ 
+-    interface IWSDServiceProxy
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDServiceProxy
+     {
+         CONST_VTBL struct IWSDServiceProxyVtbl *lpVtbl;
+     };
+@@ -650,7 +651,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f9279d6d-1012-4a94-b8cc-fd35d2202bfe")
+-    IWSDServiceProxyEventing : public IWSDServiceProxy
++    _Windows_SupportedOS_Windows7_ IWSDServiceProxyEventing : public IWSDServiceProxy
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SubscribeToMultipleOperations( 
+@@ -1073,7 +1074,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
+         END_INTERFACE
+     } IWSDServiceProxyEventingVtbl;
+ 
+-    interface IWSDServiceProxyEventing
++    interface _Windows_SupportedOS_Windows7_ IWSDServiceProxyEventing
+     {
+         CONST_VTBL struct IWSDServiceProxyEventingVtbl *lpVtbl;
+     };
+@@ -1187,7 +1188,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("eee0c031-c578-4c0e-9a3b-973c35f409db")
+-    IWSDDeviceProxy : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDDeviceProxy : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Init( 
+@@ -1342,7 +1343,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
+         END_INTERFACE
+     } IWSDDeviceProxyVtbl;
+ 
+-    interface IWSDDeviceProxy
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDDeviceProxy
+     {
+         CONST_VTBL struct IWSDDeviceProxyVtbl *lpVtbl;
+     };
+@@ -1415,7 +1416,7 @@ EXTERN_C const IID IID_IWSDAsyncResult;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("11a9852a-8dd8-423e-b537-9356db4fbfb8")
+-    IWSDAsyncResult : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncResult : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetCallback( 
+@@ -1512,7 +1513,7 @@ EXTERN_C const IID IID_IWSDAsyncResult;
+         END_INTERFACE
+     } IWSDAsyncResultVtbl;
+ 
+-    interface IWSDAsyncResult
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncResult
+     {
+         CONST_VTBL struct IWSDAsyncResultVtbl *lpVtbl;
+     };
+@@ -1576,7 +1577,7 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("a63e109d-ce72-49e2-ba98-e845f5ee1666")
+-    IWSDAsyncCallback : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AsyncOperationComplete( 
+@@ -1621,7 +1622,7 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
+         END_INTERFACE
+     } IWSDAsyncCallbackVtbl;
+ 
+-    interface IWSDAsyncCallback
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncCallback
+     {
+         CONST_VTBL struct IWSDAsyncCallbackVtbl *lpVtbl;
+     };
+@@ -1667,7 +1668,7 @@ EXTERN_C const IID IID_IWSDEventingStatus;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("49b17f52-637a-407a-ae99-fbe82a4d38c0")
+-    IWSDEventingStatus : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEventingStatus : public IUnknown
+     {
+     public:
+         virtual void STDMETHODCALLTYPE SubscriptionRenewed( 
+@@ -1732,7 +1733,7 @@ EXTERN_C const IID IID_IWSDEventingStatus;
+         END_INTERFACE
+     } IWSDEventingStatusVtbl;
+ 
+-    interface IWSDEventingStatus
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEventingStatus
+     {
+         CONST_VTBL struct IWSDEventingStatusVtbl *lpVtbl;
+     };
