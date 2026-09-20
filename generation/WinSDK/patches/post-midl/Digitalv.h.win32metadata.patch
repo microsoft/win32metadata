@@ -1,0 +1,326 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
+@@ -13,6 +13,7 @@
+ /****************************************************************************/
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifndef _INC_DIGITALV
+ #define _INC_DIGITALV  100
+@@ -494,7 +495,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ /* parameter block for MCI_WHERE, MCI_PUT, MCI_FREEZE, MCI_UNFREEZE cmds */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+ #ifdef MCI_USE_OFFEXT
+     POINT   ptOffset;
+@@ -507,7 +508,7 @@ typedef MCI_DGV_RECT_PARMS FAR * LPMCI_DGV_RECT_PARMS;
+ 
+ /* parameter block for MCI_CAPTURE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrFileName;
+ #ifdef MCI_USE_OFFEXT
+@@ -517,7 +518,7 @@ typedef struct {
+     RECT    rc;
+ #endif
+ } MCI_DGV_CAPTURE_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrFileName;
+ #ifdef MCI_USE_OFFEXT
+@@ -547,7 +548,7 @@ typedef MCI_CLOSE_PARMS FAR * LPMCI_CLOSE_PARMS;
+ 
+ /* parameter block for MCI_COPY command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwFrom;
+     DWORD   dwTo;
+@@ -564,7 +565,7 @@ typedef MCI_DGV_COPY_PARMS FAR * LPMCI_DGV_COPY_PARMS;
+ 
+ /* parameter block for MCI_CUE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwTo;
+ } MCI_DGV_CUE_PARMS;
+@@ -572,7 +573,7 @@ typedef MCI_DGV_CUE_PARMS FAR * LPMCI_DGV_CUE_PARMS;
+ 
+ /* parameter block for MCI_CUT command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwFrom;
+     DWORD   dwTo;
+@@ -589,7 +590,7 @@ typedef MCI_DGV_CUT_PARMS FAR * LPMCI_DGV_CUT_PARMS;
+ 
+ /* parameter block for MCI_DELETE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwFrom;
+     DWORD   dwTo;
+@@ -611,13 +612,13 @@ typedef MCI_DGV_FREEZE_PARMS FAR * LPMCI_DGV_FREEZE_PARMS;
+ 
+ /* parameter block for MCI_INFO command message */
+ 
+-typedef struct  {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_  {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrReturn;
+     DWORD   dwRetSize;
+     DWORD   dwItem;
+ } MCI_DGV_INFO_PARMSA;
+-typedef struct  {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_  {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrReturn;
+     DWORD   dwRetSize;
+@@ -639,7 +640,7 @@ typedef LPMCI_DGV_INFO_PARMSA LPMCI_DGV_INFO_PARMS;
+ 
+ /* parameter block for MCI_LIST command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrReturn;
+     DWORD   dwLength;
+@@ -647,7 +648,7 @@ typedef struct {
+     DWORD   dwItem;
+     LPSTR   lpstrAlgorithm;
+ } MCI_DGV_LIST_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrReturn;
+     DWORD   dwLength;
+@@ -675,7 +676,7 @@ typedef MCI_DGV_LOAD_PARMS FAR * LPMCI_DGV_LOAD_PARMS;
+ 
+ /* parameter block for MCI_MONITOR command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwSource;
+     DWORD   dwMethod;
+@@ -684,7 +685,7 @@ typedef MCI_DGV_MONITOR_PARMS FAR * LPMCI_DGV_MONITOR_PARMS;
+ 
+ /* parameter block for MCI_OPEN command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     UINT    wDeviceID;
+ #ifndef _WIN32
+@@ -699,7 +700,7 @@ typedef struct {
+     WORD    wReserved1;
+ #endif
+ } MCI_DGV_OPEN_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     UINT    wDeviceID;
+ #ifndef _WIN32
+@@ -734,7 +735,7 @@ typedef MCI_DGV_PAUSE_PARMS FAR * LPMCI_DGV_PAUSE_PARMS;
+ 
+ /* parameter block for MCI_PASTE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwTo;
+ #ifdef MCI_USE_OFFEXT
+@@ -760,14 +761,14 @@ typedef MCI_DGV_PUT_PARMS FAR * LPMCI_DGV_PUT_PARMS;
+ 
+ /* parameter block for MCI_QUALITY command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD       dwItem;
+     LPSTR       lpstrName;
+     DWORD       lpstrAlgorithm;
+     DWORD       dwHandle;
+ } MCI_DGV_QUALITY_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD       dwItem;
+     LPWSTR      lpstrName;
+@@ -794,7 +795,7 @@ typedef MCI_REALIZE_PARMS FAR * LPMCI_REALIZE_PARMS;
+ 
+ /* parameter block for MCI_RECORD command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwFrom;
+     DWORD   dwTo;
+@@ -811,12 +812,12 @@ typedef MCI_DGV_RECORD_PARMS FAR * LPMCI_DGV_RECORD_PARMS;
+ 
+ /* parameter block for MCI_RESERVE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrPath;
+     DWORD   dwSize;
+ } MCI_DGV_RESERVE_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrPath;
+     DWORD   dwSize;
+@@ -836,7 +837,7 @@ typedef LPMCI_DGV_RESERVE_PARMSA LPMCI_DGV_RESERVE_PARMS;
+ 
+ /* parameter block for MCI_RESTORE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrFileName;
+ #ifdef MCI_USE_OFFEXT
+@@ -846,7 +847,7 @@ typedef struct {
+     RECT    rc;
+ #endif
+ } MCI_DGV_RESTORE_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrFileName;
+ #ifdef MCI_USE_OFFEXT
+@@ -876,12 +877,12 @@ typedef MCI_DGV_RESUME_PARMS FAR * LPMCI_DGV_RESUME_PARMS;
+ 
+ /* parameter block for MCI_SAVE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPSTR   lpstrFileName;
+     RECT    rc;
+ } MCI_DGV_SAVE_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     LPWSTR  lpstrFileName;
+     RECT    rc;
+@@ -901,7 +902,7 @@ typedef LPMCI_DGV_SAVE_PARMSA LPMCI_DGV_SAVE_PARMS;
+ 
+ /* parameter block for MCI_SET command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwTimeFormat;
+     DWORD   dwAudio;
+@@ -912,7 +913,7 @@ typedef MCI_DGV_SET_PARMS FAR * LPMCI_DGV_SET_PARMS;
+ 
+ /* parameter block for MCI_SETAUDIO command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwItem;
+     DWORD   dwValue;
+@@ -920,7 +921,7 @@ typedef struct {
+     LPSTR   lpstrAlgorithm;
+     LPSTR   lpstrQuality;
+ } MCI_DGV_SETAUDIO_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwItem;
+     DWORD   dwValue;
+@@ -943,7 +944,7 @@ typedef LPMCI_DGV_SETAUDIO_PARMSA LPMCI_DGV_SETAUDIO_PARMS;
+ 
+ /* parameter block for MCI_SIGNAL command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwPosition;
+     DWORD   dwPeriod;
+@@ -953,7 +954,7 @@ typedef MCI_DGV_SIGNAL_PARMS FAR * LPMCI_DGV_SIGNAL_PARMS;
+ 
+ /* parameter block for MCI_SETVIDEO command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwItem;
+     DWORD   dwValue;
+@@ -962,7 +963,7 @@ typedef struct {
+     LPSTR   lpstrQuality;
+     DWORD   dwSourceNumber;
+ } MCI_DGV_SETVIDEO_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwItem;
+     DWORD   dwValue;
+@@ -986,7 +987,7 @@ typedef LPMCI_DGV_SETVIDEO_PARMSA LPMCI_DGV_SETVIDEO_PARMS;
+ 
+ /* parameter block for MCI_STATUS command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR dwCallback;
+     DWORD_PTR dwReturn;
+     DWORD   dwItem;
+@@ -994,7 +995,7 @@ typedef struct {
+     LPSTR   lpstrDrive;
+     DWORD   dwReference;
+ } MCI_DGV_STATUS_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR dwCallback;
+     DWORD_PTR dwReturn;
+     DWORD   dwItem;
+@@ -1017,7 +1018,7 @@ typedef LPMCI_DGV_STATUS_PARMSA LPMCI_DGV_STATUS_PARMS;
+ 
+ /* parameter block for MCI_STEP command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     DWORD   dwFrames;
+ } MCI_DGV_STEP_PARMS;
+@@ -1035,7 +1036,7 @@ typedef MCI_DGV_UNFREEZE_PARMS FAR * LPMCI_DGV_UNFREEZE_PARMS;
+ 
+ /* parameter block for MCI_UPDATE command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+ #ifdef MCI_USE_OFFEXT
+     POINT   ptOffset;
+@@ -1058,7 +1059,7 @@ typedef MCI_DGV_WHERE_PARMS FAR * LPMCI_DGV_WHERE_PARMS;
+ 
+ /* parameter block for MCI_WINDOW command message */
+ 
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     HWND    hWnd;
+ #ifndef _WIN32
+@@ -1070,7 +1071,7 @@ typedef struct {
+ #endif
+     LPSTR   lpstrText;
+ } MCI_DGV_WINDOW_PARMSA;
+-typedef struct {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
+     DWORD_PTR   dwCallback;
+     HWND    hWnd;
+ #ifndef _WIN32
