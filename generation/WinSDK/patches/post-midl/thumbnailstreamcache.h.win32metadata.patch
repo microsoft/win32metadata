@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h b/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
+index a6087505720dda112c32c421daa5884195de8ee9..831fd2a2819dd3811469088a598ca9428d819fcc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
+@@ -80,10 +80,11 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ typedef /* [v1_enum] */ 
+-enum ThumbnailStreamCacheOptions
++enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ ThumbnailStreamCacheOptions
+     {
+         ExtractIfNotCached	= 0,
+         ReturnOnlyIfCached	= 0x1,
+@@ -109,7 +110,7 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("90E11430-9569-41D8-AE75-6D4D2AE7CCA0")
+-    IThumbnailStreamCache : public IUnknown
++    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IThumbnailStreamCache : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetThumbnailStream( 
+@@ -192,7 +193,7 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
+         END_INTERFACE
+     } IThumbnailStreamCacheVtbl;
+ 
+-    interface IThumbnailStreamCache
++    interface _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IThumbnailStreamCache
+     {
+         CONST_VTBL struct IThumbnailStreamCacheVtbl *lpVtbl;
+     };
