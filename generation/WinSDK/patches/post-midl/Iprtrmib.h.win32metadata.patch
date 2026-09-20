@@ -1,0 +1,44 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
+@@ -23,6 +23,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -140,7 +141,7 @@ Abstract:
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-typedef struct _MIB_OPAQUE_QUERY
++typedef struct _Windows_SupportedOS_Server2000_ _MIB_OPAQUE_QUERY
+ {
+     DWORD  dwVarId;
+     DWORD  rgdwVarIndex[ANY_SIZE];
+@@ -251,20 +252,20 @@ typedef struct _MIB_IPDESTTABLE
+     MIB_IPDESTROW     table[ANY_SIZE];
+ }MIB_IPDESTTABLE, *PMIB_IPDESTTABLE;
+ 
+-typedef struct _MIB_BEST_IF
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_BEST_IF
+ {
+     DWORD       dwDestAddr;
+     DWORD       dwIfIndex;
+ }MIB_BEST_IF, *PMIB_BEST_IF;
+ 
+-typedef struct _MIB_PROXYARP
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_PROXYARP
+ {
+     DWORD       dwAddress;
+     DWORD       dwMask;
+     DWORD       dwIfIndex;
+ }MIB_PROXYARP, *PMIB_PROXYARP;
+ 
+-typedef struct _MIB_IFSTATUS
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IFSTATUS
+ {
+     DWORD       dwIfIndex;
+     DWORD       dwAdminStatus;
