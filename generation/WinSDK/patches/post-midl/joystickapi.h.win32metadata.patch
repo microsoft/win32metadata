@@ -1,0 +1,133 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * joystickapi.h -- ApiSet Contract for api-ms-win-mm-joystick-l1-1-0            *
+@@ -129,7 +130,7 @@ extern "C" {
+ /* joystick device capabilities data structure */
+ #ifdef _WIN32
+ 
+-typedef struct tagJOYCAPSA {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagJOYCAPSA {
+     WORD    wMid;                /* manufacturer ID */
+     WORD    wPid;                /* product ID */
+     CHAR    szPname[MAXPNAMELEN];/* product name (NULL terminated string) */
+@@ -157,7 +158,7 @@ typedef struct tagJOYCAPSA {
+     CHAR    szOEMVxD[MAX_JOYSTICKOEMVXDNAME]; /* OEM VxD in use */
+ #endif
+ } JOYCAPSA, *PJOYCAPSA, *NPJOYCAPSA, *LPJOYCAPSA;
+-typedef struct tagJOYCAPSW {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagJOYCAPSW {
+     WORD    wMid;                /* manufacturer ID */
+     WORD    wPid;                /* product ID */
+     WCHAR   szPname[MAXPNAMELEN];/* product name (NULL terminated string) */
+@@ -298,7 +299,7 @@ typedef struct joycaps_tag {
+ #endif
+ 
+ /* joystick information data structure */
+-typedef struct joyinfo_tag {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyinfo_tag {
+     UINT wXpos;                 /* x position */
+     UINT wYpos;                 /* y position */
+     UINT wZpos;                 /* z position */
+@@ -306,7 +307,7 @@ typedef struct joyinfo_tag {
+ } JOYINFO, *PJOYINFO, NEAR *NPJOYINFO, FAR *LPJOYINFO;
+ 
+ #if (WINVER >= 0x0400)
+-typedef struct joyinfoex_tag {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyinfoex_tag {
+     DWORD dwSize;                /* size of structure */
+     DWORD dwFlags;               /* flags to indicate what to return */
+     DWORD dwXpos;                /* x position */
+@@ -329,7 +330,7 @@ typedef struct joyinfoex_tag {
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyGetPosEx(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetPosEx(
+     _In_ UINT uJoyID,
+     _Out_ LPJOYINFOEX pji
+     );
+@@ -339,7 +340,7 @@ joyGetPosEx(
+ WINMMAPI
+ UINT
+ WINAPI
+-joyGetNumDevs(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetNumDevs(
+     void
+     );
+ 
+@@ -348,7 +349,7 @@ joyGetNumDevs(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyGetDevCapsA(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetDevCapsA(
+     _In_ UINT_PTR uJoyID,
+     _Out_writes_bytes_(cbjc) LPJOYCAPSA pjc,
+     _In_ UINT cbjc
+@@ -357,7 +358,7 @@ joyGetDevCapsA(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyGetDevCapsW(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetDevCapsW(
+     _In_ UINT_PTR uJoyID,
+     _Out_writes_bytes_(cbjc) LPJOYCAPSW pjc,
+     _In_ UINT cbjc
+@@ -376,7 +377,7 @@ MMRESULT WINAPI joyGetDevCaps(UINT uJoyID, LPJOYCAPS pjc, UINT cbjc);
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyGetPos(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetPos(
+     _In_ UINT uJoyID,
+     _Out_ LPJOYINFO pji
+     );
+@@ -384,7 +385,7 @@ joyGetPos(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyGetThreshold(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyGetThreshold(
+     _In_ UINT uJoyID,
+     _Out_ LPUINT puThreshold
+     );
+@@ -392,14 +393,14 @@ joyGetThreshold(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyReleaseCapture(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyReleaseCapture(
+     _In_ UINT uJoyID
+     );
+ 
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joySetCapture(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joySetCapture(
+     _In_ HWND hwnd,
+     _In_ UINT uJoyID,
+     _In_ UINT uPeriod,
+@@ -409,7 +410,7 @@ joySetCapture(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joySetThreshold(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joySetThreshold(
+     _In_ UINT uJoyID,
+     _In_ UINT uThreshold
+     );
+@@ -418,7 +419,7 @@ joySetThreshold(
+ WINMMAPI
+ MMRESULT
+ WINAPI
+-joyConfigChanged(
++_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ joyConfigChanged(
+     _In_ DWORD dwFlags
+     );
+ 
