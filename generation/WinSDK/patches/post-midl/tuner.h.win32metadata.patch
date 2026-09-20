@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h b/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
+index f53c1b2f698e300ec24d0c8c7b3a12bdd7263094..4638c346e904bc732c9a99cfc05052144616705a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
+@@ -1069,6 +1069,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -1232,7 +1233,7 @@ EXTERN_C const IID IID_ITuningSpaces;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("901284E4-33FE-4b69-8D63-634A596F3756")
+-    ITuningSpaces : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ ITuningSpaces : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+@@ -1356,7 +1357,7 @@ EXTERN_C const IID IID_ITuningSpaces;
+         END_INTERFACE
+     } ITuningSpacesVtbl;
+ 
+-    interface ITuningSpaces
++    interface _Windows_SupportedOS_WindowsXP_ ITuningSpaces
+     {
+         CONST_VTBL struct ITuningSpacesVtbl *lpVtbl;
+     };
+@@ -1424,7 +1425,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5B692E84-E2F1-11d2-9493-00C04F72D980")
+-    ITuningSpaceContainer : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ ITuningSpaceContainer : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+@@ -1662,7 +1663,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
+         END_INTERFACE
+     } ITuningSpaceContainerVtbl;
+ 
+-    interface ITuningSpaceContainer
++    interface _Windows_SupportedOS_WindowsXP_ ITuningSpaceContainer
+     {
+         CONST_VTBL struct ITuningSpaceContainerVtbl *lpVtbl;
+     };

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
+index 14979717692f2531d439067df421aa602c77b88a..524d5c67d7f5d297dd0d2c7a38fd07a18b6fb8af 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
+@@ -133,6 +133,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -1578,7 +1579,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1FF544D6-161D-4fae-9FAA-4F9F492AE999")
+-    ISCTE_EAS : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ ISCTE_EAS : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -1864,7 +1865,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         END_INTERFACE
+     } ISCTE_EASVtbl;
+ 
+-    interface ISCTE_EAS
++    interface _Windows_SupportedOS_WindowsVista_ ISCTE_EAS
+     {
+         CONST_VTBL struct ISCTE_EASVtbl *lpVtbl;
+     };
+@@ -2320,7 +2321,7 @@ EXTERN_C const IID IID_IServiceLocationDescriptor;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("58C3C827-9D91-4215-BFF3-820A49F0904C")
+-    IServiceLocationDescriptor : public IUnknown
++    _Windows_SupportedOS_Windows7_ IServiceLocationDescriptor : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPCR_PID( 
+@@ -2396,7 +2397,7 @@ EXTERN_C const IID IID_IServiceLocationDescriptor;
+         END_INTERFACE
+     } IServiceLocationDescriptorVtbl;
+ 
+-    interface IServiceLocationDescriptor
++    interface _Windows_SupportedOS_Windows7_ IServiceLocationDescriptor
+     {
+         CONST_VTBL struct IServiceLocationDescriptorVtbl *lpVtbl;
+     };
