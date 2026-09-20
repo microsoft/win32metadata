@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
+@@ -463,6 +463,7 @@ extern "C"{
+ // URL Moniker Interfaces.
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+ #ifndef _MSC_EXTENSIONS
+@@ -10876,7 +10877,7 @@ typedef struct _tagCODEBASEHOLD
+ 
+ typedef struct _tagCODEBASEHOLD *LPCODEBASEHOLD;
+ 
+-typedef struct _tagSOFTDISTINFO
++typedef struct _Windows_SupportedOS_Server2000_ _tagSOFTDISTINFO
+     {
+     ULONG cbSize;
+     DWORD dwFlags;
