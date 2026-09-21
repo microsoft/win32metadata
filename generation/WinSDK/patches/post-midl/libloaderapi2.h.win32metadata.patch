@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi2.h
+index c8e8e79cbe..f7c518b043 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi2.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -46,6 +47,9 @@ LoadPackagedLibrary(
+ 
+ #if (_WIN32_WINNT >= 0x0602)
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcssl.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcssl.h
+index 453a159253..0af8d0b892 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcssl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcssl.h
+@@ -14,6 +14,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -31,27 +32,33 @@ extern "C" {
+ #define RpcCertGeneratePrincipalName RpcCertGeneratePrincipalNameA
+ #endif /* UNICODE */
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcCertGeneratePrincipalNameW(
+     _In_ PCCERT_CONTEXT Context,
+     _In_ DWORD Flags,
+-    _Outptr_ RPC_WSTR *pBuffer
++    _Outptr_ _Win32_RAIIFree_(RpcStringFreeW) RPC_WSTR *pBuffer
+     );
+ 
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcCertGeneratePrincipalNameA(
+     _In_ PCCERT_CONTEXT       Context,
+     _In_ DWORD                Flags,
+-    _Outptr_ RPC_CSTR *    pBuffer
++    _Outptr_ _Win32_RAIIFree_(RpcStringFreeA) RPC_CSTR *    pBuffer
+     );
+ 
+ #else /* RPC_UNICODE_SUPPORTED */
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY

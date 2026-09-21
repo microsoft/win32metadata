@@ -1,0 +1,49 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
+index a08f793dc1..f66b84c40f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
+@@ -32,6 +32,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ extern "C" {
+ #define NETWORK_ALIVE_INTERNET   0x00000008
+ 
+ 
+-typedef struct tagQOCINFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ tagQOCINFO
+ {
+     DWORD dwSize;
+     DWORD dwFlags;
+@@ -67,18 +68,27 @@ typedef struct tagQOCINFO
+ 
+ #if !defined(__midl)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsDestinationReachableA(
+     LPCSTR lpszDestination,
+     LPQOCINFO lpQOCInfo
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsDestinationReachableW(
+     LPCWSTR lpszDestination,
+     LPQOCINFO lpQOCInfo
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsNetworkAlive(
+     LPDWORD lpdwFlags
