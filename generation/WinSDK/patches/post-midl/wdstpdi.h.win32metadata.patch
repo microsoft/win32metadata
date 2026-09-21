@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
+index 6c67302706..38cfb0dabb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2006 Microsoft Corporation
+@@ -215,7 +216,7 @@ WDSMCSAPI
+ WdsTransportServerRegisterCallback(
+     _In_ HANDLE hProvider,
+     _In_ TRANSPORTPROVIDER_CALLBACK_ID CallbackId,
+-    _In_ PVOID pfnCallback
++    _In_ _Win32_Retained_ PVOID pfnCallback
+ );
+ 
+ HRESULT

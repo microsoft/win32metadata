@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
+index 539c7a02d5..1345ca2ab8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -57,7 +58,7 @@ typedef BOOL (WINAPI *PFAXROUTEENUMFILES)(DWORD JobId, GUID *Guid,PFAXROUTEENUMF
+ typedef BOOL (WINAPI *PFAXROUTEMODIFYROUTINGDATA)(DWORD JobId, LPCWSTR RoutingGuid, LPBYTE RoutingData, DWORD RoutingDataSize );
+ 
+ 
+-typedef struct _FAX_ROUTE_CALLBACKROUTINES {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_ROUTE_CALLBACKROUTINES {
+     DWORD                       SizeOfStruct;                // size of the struct set by the fax service
+     PFAXROUTEADDFILE            FaxRouteAddFile;
+     PFAXROUTEDELETEFILE         FaxRouteDeleteFile;
+@@ -71,7 +72,7 @@ typedef struct _FAX_ROUTE_CALLBACKROUTINES {
+ // routing data structure
+ //
+ 
+-typedef struct _FAX_ROUTE {
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_ROUTE {
+     DWORD           SizeOfStruct;       // size of the struct set by the fax service
+     DWORD           JobId;              // Fax job identifier
+     DWORDLONG       ElapsedTime;        // Elapsed time for whole fax job in Coordinated Universal Time (UTC)

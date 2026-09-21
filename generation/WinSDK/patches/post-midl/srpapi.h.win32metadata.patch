@@ -1,0 +1,82 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
+index 51bb393897..61d728f44e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * srpapi.h -- ApiSet Contract for ext-ms-win-security-srp-l1                    *
+@@ -50,23 +51,27 @@ typedef struct HTHREAD_NETWORK_CONTEXT
+ } HTHREAD_NETWORK_CONTEXT;
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpCreateThreadNetworkContext(
+     _In_ PCWSTR enterpriseId,
+     _Out_ HTHREAD_NETWORK_CONTEXT* threadNetworkContext
+     );
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpCloseThreadNetworkContext(
+     _Inout_ HTHREAD_NETWORK_CONTEXT* threadNetworkContext
+     );
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpSetTokenEnterpriseId(
+     _In_ HANDLE tokenHandle,
+     _In_opt_ PCWSTR enterpriseId
+     );
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpGetEnterpriseIds(
+     _In_ HANDLE tokenHandle,
+     _Inout_opt_ PULONG numberOfBytes,
+@@ -75,18 +80,20 @@ SrpGetEnterpriseIds(
+     );
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpEnablePermissiveModeFileEncryption(
+     _In_opt_ PCWSTR enterpriseId
+     );
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpDisablePermissiveModeFileEncryption(
+     VOID
+     );
+ 
+ #endif /* _WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD */
+ 
+-typedef enum
++typedef enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ {
+     ENTERPRISE_POLICY_NONE        = 0x0,
+     ENTERPRISE_POLICY_ALLOWED     = 0x1,
+@@ -97,12 +104,14 @@ typedef enum
+ DEFINE_ENUM_FLAG_OPERATORS(ENTERPRISE_DATA_POLICIES);
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpGetEnterprisePolicy(
+     _In_ HANDLE tokenHandle,
+     _Out_ ENTERPRISE_DATA_POLICIES* policyFlags
+     );
+ 
+ NTSTATUS
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpIsTokenService(
+     _In_ HANDLE TokenHandle,
+     _Out_ BOOLEAN* IsTokenService
+@@ -119,6 +128,7 @@ SrpIsTokenService(
+ #include <appmodel.h>
+ 
+ STDAPI
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ SrpDoesPolicyAllowAppExecution(
+     _In_ const PACKAGE_ID* packageId,
+     _Out_ BOOL* isAllowed
