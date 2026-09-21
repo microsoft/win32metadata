@@ -1,0 +1,73 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
+index dcdbb3ad3a..95f3399622 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
+@@ -4,6 +4,7 @@
+ #ifndef _DSSEC_H_
+ #define _DSSEC_H_
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -59,13 +60,14 @@ typedef HRESULT (WINAPI *PFNWRITEOBJECTSECURITY)(LPCWSTR, SECURITY_INFORMATION,
+ //  Return:     HRESULT
+ //
+ //----------------------------------------------------------------------------
++_Windows_SupportedOS_Server2008_
+ STDAPI
+ DSCreateISecurityInfoObject(LPCWSTR pwszObjectPath,
+                             LPCWSTR pwszObjectClass,
+                             DWORD dwFlags,
+                             _Out_ LPSECURITYINFO *ppSI,
+-                            _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
+-                            _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                            _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
++                            _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
+                             LPARAM lpContext);
+ 
+ // Flags for DSCreateISecurityInfoObject
+@@ -83,6 +85,7 @@ DSCreateISecurityInfoObject(LPCWSTR pwszObjectPath,
+ // If the server is not provided, it is obtained from the object
+ // path or DsGetDcName.
+ //
++_Windows_SupportedOS_Server2008_
+ STDAPI
+ DSCreateISecurityInfoObjectEx(LPCWSTR pwszObjectPath,
+                               LPCWSTR pwszObjectClass,
+@@ -91,8 +94,8 @@ DSCreateISecurityInfoObjectEx(LPCWSTR pwszObjectPath,
+                               LPCWSTR pwszPassword,
+                               DWORD   dwFlags,
+                               _Out_ LPSECURITYINFO *ppSI,
+-                              _In_opt_ PFNREADOBJECTSECURITY  pfnReadSD,
+-                              _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                              _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY  pfnReadSD,
++                              _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
+                               LPARAM lpContext);
+ 
+ 
+@@ -113,13 +116,14 @@ DSCreateISecurityInfoObjectEx(LPCWSTR pwszObjectPath,
+ //  Return:     HRESULT
+ //
+ //----------------------------------------------------------------------------
++_Windows_SupportedOS_Server2003_
+ STDAPI
+ DSCreateSecurityPage(LPCWSTR pwszObjectPath,
+                      LPCWSTR pwszObjectClass,
+                      DWORD dwFlags,
+                      _Out_ HPROPSHEETPAGE *phPage,
+-                     _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
+-                     _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                     _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
++                     _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
+                      LPARAM lpContext);
+ 
+ //+---------------------------------------------------------------------------
+@@ -140,6 +144,7 @@ DSCreateSecurityPage(LPCWSTR pwszObjectPath,
+ //  Return:     HRESULT
+ //
+ //----------------------------------------------------------------------------
++_Windows_SupportedOS_Server2008_
+ STDAPI
+ DSEditSecurity(HWND hwndOwner,
+                LPCWSTR pwszObjectPath,

@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
+index 8a3b22766a..fe82059be5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
+@@ -29,6 +29,7 @@
+ #ifndef _ADTGEN_H
+ #define _ADTGEN_H
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -55,7 +56,7 @@
+ // an array of audit parameters.
+ //
+ 
+-typedef enum _AUDIT_PARAM_TYPE
++typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AUDIT_PARAM_TYPE
+ {
+     //
+     // do we need this?

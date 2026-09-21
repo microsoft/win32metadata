@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
+index a58d255cbe..3cc01cf997 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
+@@ -9,6 +9,7 @@
+ #ifndef FONTSUB_DOT_H_DEFINED
+ #define FONTSUB_DOT_H_DEFINED
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -22,10 +23,19 @@ extern "C" {
+ #define CONST const
+ #endif     
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ typedef void *(__cdecl *CFP_ALLOCPROC)(size_t);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ typedef void *(__cdecl *CFP_REALLOCPROC)(void *, size_t);
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ typedef void (__cdecl *CFP_FREEPROC)(void *);
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_ImportLibrary_("fontsub.dll")
+ unsigned long __cdecl CreateFontPackage(
+ 	CONST unsigned char * puchSrcBuffer, /* input TTF or TTC buffer */
+ 	CONST unsigned long ulSrcBufferSize, /* size of input TTF or TTC buffer data */
+@@ -71,6 +81,9 @@ unsigned long __cdecl CreateFontPackage(
+ #define TTFCFP_FLAGS_TTC 0x0004  /* if bit off, its a TTF */
+ #define TTFCFP_FLAGS_GLYPHLIST 0x0008 /* if bit off, list is characters */
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_ImportLibrary_("fontsub.dll")
+ unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer, /* buffer containing font to merge with */
+ 			CONST unsigned long ulMergeFontBufferSize,	/* size of buffer containing font to merge with */
+ 			CONST unsigned char * puchFontPackageBuffer, /* buffer containing a font package to merge with the MergeFontBuffer */

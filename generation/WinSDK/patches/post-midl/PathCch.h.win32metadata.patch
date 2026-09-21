@@ -1,0 +1,246 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
+index b205d258c8..30928fe85d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
+@@ -9,6 +9,7 @@
+ #pragma once
+ 
+ #include <apiset.h>
++#include <win32metadata_annotations.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+@@ -72,6 +73,8 @@ DEFINE_ENUM_FLAG_OPERATORS(PATHCCH_OPTIONS)
+ // (0x7FFF + 1 for NULL terminator)
+ #define PATHCCH_MAX_CCH             0x8000
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ BOOL
+ APIENTRY
+@@ -80,6 +83,8 @@ PathIsUNCEx(
+     _Outptr_opt_ PCWSTR* ppszServer
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ BOOL
+ APIENTRY
+@@ -87,6 +92,9 @@ PathCchIsRoot(
+     _In_opt_ PCWSTR pszPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -97,6 +105,9 @@ PathCchAddBackslashEx(
+     _Out_opt_ size_t* pcchRemaining
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -105,6 +116,9 @@ PathCchAddBackslash(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -115,6 +129,9 @@ PathCchRemoveBackslashEx(
+     _Out_opt_ size_t* pcchRemaining
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -123,6 +140,8 @@ PathCchRemoveBackslash(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -131,6 +150,9 @@ PathCchSkipRoot(
+     _Outptr_ PCWSTR* ppszRootEnd
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -139,6 +161,9 @@ PathCchStripToRoot(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -147,6 +172,8 @@ PathCchRemoveFileSpec(
+     _In_ size_t cchPath
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -156,6 +183,9 @@ PathCchFindExtension(
+     _Outptr_ PCWSTR* ppszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -165,6 +195,8 @@ PathCchAddExtension(
+     _In_ PCWSTR pszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -174,6 +206,9 @@ PathCchRenameExtension(
+     _In_ PCWSTR pszExt
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -183,6 +218,8 @@ PathCchRemoveExtension(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -190,9 +227,11 @@ PathCchCanonicalizeEx(
+     _Out_writes_(cchPathOut) PWSTR pszPathOut,
+     _In_ size_t cchPathOut,
+     _In_ PCWSTR pszPathIn,
+-    _In_ ULONG dwFlags
++    _In_ _Win32_AssociatedEnum_(PATHCCH_OPTIONS) ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -203,6 +242,8 @@ PathCchCanonicalize(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -211,9 +252,11 @@ PathCchCombineEx(
+     _In_ size_t cchPathOut,
+     _In_opt_ PCWSTR pszPathIn,
+     _In_opt_ PCWSTR pszMore,
+-    _In_ ULONG dwFlags
++    _In_ _Win32_AssociatedEnum_(PATHCCH_OPTIONS) ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -225,6 +268,8 @@ PathCchCombine(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -232,9 +277,11 @@ PathCchAppendEx(
+     _Inout_updates_(cchPath) PWSTR pszPath,
+     _In_ size_t cchPath,
+     _In_opt_ PCWSTR pszMore,
+-    _In_ ULONG dwFlags
++    _In_ _Win32_AssociatedEnum_(PATHCCH_OPTIONS) ULONG dwFlags
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -244,6 +291,9 @@ PathCchAppend(
+     _In_opt_ PCWSTR pszMore
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+@@ -253,24 +303,28 @@ PathCchStripPrefix(
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+ PathAllocCombine(
+     _In_opt_ PCWSTR pszPathIn,
+     _In_opt_ PCWSTR pszMore,
+-    _In_ ULONG dwFlags,
+-    _Outptr_ PWSTR* ppszPathOut
++    _In_ _Win32_AssociatedEnum_(PATHCCH_OPTIONS) ULONG dwFlags,
++    _Outptr_ _Win32_RAIIFree_(LocalFree) PWSTR* ppszPathOut
+     );
+ 
+ /* PATHCCH_OPTIONS */
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ WINPATHCCHAPI
+ HRESULT
+ APIENTRY
+ PathAllocCanonicalize(
+     _In_ PCWSTR pszPathIn,
+-    _In_ ULONG dwFlags,
+-    _Outptr_ PWSTR* ppszPathOut
++    _In_ _Win32_AssociatedEnum_(PATHCCH_OPTIONS) ULONG dwFlags,
++    _Outptr_ _Win32_RAIIFree_(LocalFree) PWSTR* ppszPathOut
+     );
+ 
+ #ifndef PATHCCH_NO_DEPRECATE

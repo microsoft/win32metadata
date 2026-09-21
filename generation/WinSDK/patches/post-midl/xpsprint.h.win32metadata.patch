@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
+index 10f4523c7c..e6a0a9e335 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -95,7 +96,7 @@ extern RPC_IF_HANDLE __MIDL_itf_xpsprint_0000_0000_v0_0_s_ifspec;
+ 
+ 
+ typedef /* [public][public][public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_xpsprint_0000_0000_0001
++enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_xpsprint_0000_0000_0001
+     {
+         XPS_JOB_IN_PROGRESS	= 0,
+         XPS_JOB_COMPLETED	= ( XPS_JOB_IN_PROGRESS + 1 ) ,
+@@ -103,7 +104,7 @@ enum __MIDL___MIDL_itf_xpsprint_0000_0000_0001
+         XPS_JOB_FAILED	= ( XPS_JOB_CANCELLED + 1 ) 
+     } 	XPS_JOB_COMPLETION;
+ 
+-typedef /* [public][public] */ struct __MIDL___MIDL_itf_xpsprint_0000_0000_0002
++typedef /* [public][public] */ struct _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_xpsprint_0000_0000_0002
+     {
+     UINT32 jobId;
+     INT32 currentDocument;
+@@ -131,6 +132,7 @@ EXTERN_C const IID IID_IXpsPrintJobStream;
+     IXpsPrintJobStream : public ISequentialStream
+     {
+     public:
++        _Windows_SupportedOS_Windows7_
+         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
+         
+     };
+@@ -240,8 +242,10 @@ EXTERN_C const IID IID_IXpsPrintJob;
+     IXpsPrintJob : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows7_
+         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
+         
++        _Windows_SupportedOS_Windows7_
+         virtual HRESULT STDMETHODCALLTYPE GetJobStatus( 
+             /* [retval][out] */ __RPC__out XPS_JOB_STATUS *jobStatus) = 0;
+         
+@@ -326,6 +330,7 @@ EXTERN_C const IID IID_IXpsPrintJob;
+ /* module XpsPrint */
+ /* [dllname][uuid] */ 
+ 
++_Windows_SupportedOS_Windows7_
+ /* [entry][helpstring] */ HRESULT __stdcall StartXpsPrintJob( 
+     /* [string][in] */ __RPC__in_string LPCWSTR printerName,
+     /* [string][in] */ __RPC__in_string LPCWSTR jobName,
