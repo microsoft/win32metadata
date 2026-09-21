@@ -109,7 +109,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
          CONST_VTBL struct IConditionFactory2Vtbl *lpVtbl;
      };
 @@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IQueryParserManager;
- /* interface __MIDL_itf_StructuredQuery_0000_0015 */
+ /* interface __MIDL_itf_structuredquery_0000_0015 */
  /* [local] */ 
  
 -typedef struct tagHITRANGE
