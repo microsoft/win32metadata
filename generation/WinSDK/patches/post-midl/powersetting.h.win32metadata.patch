@@ -1,0 +1,116 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powersetting.h b/generation/WinSDK/RecompiledIdlHeaders/um/powersetting.h
+index 7d5e80f6e0..501055ef8e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/powersetting.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/powersetting.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * powersetting.h -- ApiSet Contract for api-ms-win-power-setting-l1-1-0         *
+@@ -42,6 +43,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerReadACValue(
+     _In_opt_ HKEY RootPowerKey,
+     _In_opt_ CONST GUID* SchemeGuid,
+@@ -57,6 +59,7 @@ PowerReadACValue(
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerReadDCValue(
+     _In_opt_ HKEY RootPowerKey,
+     _In_opt_ CONST GUID* SchemeGuid,
+@@ -72,6 +75,7 @@ PowerReadDCValue(
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerWriteACValueIndex(
+     _In_opt_ HKEY RootPowerKey,
+     _In_ CONST GUID* SchemeGuid,
+@@ -85,6 +89,7 @@ PowerWriteACValueIndex(
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerWriteDCValueIndex(
+     _In_opt_ HKEY RootPowerKey,
+     _In_ CONST GUID* SchemeGuid,
+@@ -98,9 +103,10 @@ PowerWriteDCValueIndex(
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerGetActiveScheme(
+     _In_opt_ HKEY UserRootPowerKey,
+-    _Outptr_ GUID** ActivePolicyGuid
++    _Outptr_ _Win32_RAIIFree_(LocalFree) GUID** ActivePolicyGuid
+     );
+ 
+ #endif
+@@ -108,6 +114,7 @@ PowerGetActiveScheme(
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ PowerSetActiveScheme(
+     _In_opt_ HKEY UserRootPowerKey,
+     _In_opt_ CONST GUID* SchemeGuid
+@@ -118,11 +125,12 @@ PowerSetActiveScheme(
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_Windows7_
+ PowerSettingRegisterNotification(
+     _In_ LPCGUID SettingGuid,
+     _In_ DWORD Flags,
+     _In_ HANDLE Recipient,
+-    _Out_ PHPOWERNOTIFY RegistrationHandle
++    _Out_ _Win32_RAIIFree_(PowerSettingUnregisterNotification) PHPOWERNOTIFY RegistrationHandle
+     );
+ 
+ #endif
+@@ -130,6 +138,7 @@ PowerSettingRegisterNotification(
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ DWORD
+ WINAPI
++_Windows_SupportedOS_Windows7_
+ PowerSettingUnregisterNotification(
+     _Inout_ HPOWERNOTIFY RegistrationHandle
+     );
+@@ -138,7 +147,7 @@ PowerSettingUnregisterNotification(
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS5
+ 
+-typedef enum EFFECTIVE_POWER_MODE {
++typedef enum _Windows_SupportedOS_17763_ EFFECTIVE_POWER_MODE {
+     EffectivePowerModeBatterySaver,
+     EffectivePowerModeEnergySaverHighSavings = EffectivePowerModeBatterySaver,
+     EffectivePowerModeBetterBattery,
+@@ -166,11 +175,12 @@ EFFECTIVE_POWER_MODE_CALLBACK (
+ _Must_inspect_result_
+ HRESULT
+ WINAPI
++_Windows_SupportedOS_17763_
+ PowerRegisterForEffectivePowerModeNotifications(
+     _In_ ULONG Version,
+-    _In_ EFFECTIVE_POWER_MODE_CALLBACK* Callback,
+-    _In_opt_ PVOID Context,
+-    _Outptr_ PVOID* RegistrationHandle
++    _In_ _Win32_Retained_ EFFECTIVE_POWER_MODE_CALLBACK* Callback,
++    _In_opt_ _Win32_Retained_ PVOID Context,
++    _Outptr_ _Win32_RAIIFree_(PowerUnregisterFromEffectivePowerModeNotifications) PVOID* RegistrationHandle
+     );
+ 
+ #endif
+@@ -178,6 +188,7 @@ PowerRegisterForEffectivePowerModeNotifications(
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS5
+ HRESULT
+ WINAPI
++_Windows_SupportedOS_17763_
+ PowerUnregisterFromEffectivePowerModeNotifications(
+     _In_ PVOID RegistrationHandle
+     );

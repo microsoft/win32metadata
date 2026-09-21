@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ondemandconnroutehelper.h b/generation/WinSDK/RecompiledIdlHeaders/um/ondemandconnroutehelper.h
+index e968c0c4a2..c89a5b3f88 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ondemandconnroutehelper.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ondemandconnroutehelper.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ // Copyright (C) Microsoft Corporation. All rights reserved.
+ //
+@@ -19,12 +20,16 @@
+ #pragma once
+ #endif
+ 
++_Windows_SupportedOS_Windows81_
++_Win32_PreserveResult_
+ STDAPI OnDemandGetRoutingHint(_In_ PCWSTR destinationHostName, _Out_ DWORD* interfaceIndex);
+ 
+ typedef void(WINAPI* ONDEMAND_NOTIFICATION_CALLBACK)(_In_opt_ void*);
+ 
+-STDAPI OnDemandRegisterNotification(_In_ ONDEMAND_NOTIFICATION_CALLBACK callback, _In_opt_ void* callbackContext, _Out_ HANDLE* registrationHandle);
++_Windows_SupportedOS_Windows81_
++STDAPI OnDemandRegisterNotification(_In_ _Win32_Retained_ ONDEMAND_NOTIFICATION_CALLBACK callback, _In_opt_ _Win32_Retained_ void* callbackContext, _Out_ _Win32_RAIIFree_(OnDemandUnRegisterNotification) HANDLE* registrationHandle);
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI OnDemandUnRegisterNotification(_In_ HANDLE registrationHandle);
+ 
+ #endif // NTDDI_VERSION >= NTDDI_WINBLUE
+@@ -38,13 +43,13 @@ STDAPI OnDemandUnRegisterNotification(_In_ HANDLE registrationHandle);
+ #define NET_INTERFACE_FLAG_NONE 0x00000000
+ #define NET_INTERFACE_FLAG_CONNECT_IF_NEEDED 0x00000001
+ 
+-typedef struct _NET_INTERFACE_CONTEXT
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _NET_INTERFACE_CONTEXT
+ {
+     ULONG InterfaceIndex;
+     LPWSTR ConfigurationName;
+ } NET_INTERFACE_CONTEXT;
+ 
+-typedef struct _NET_INTERFACE_CONTEXT_TABLE
++typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _NET_INTERFACE_CONTEXT_TABLE
+ {
+     HANDLE InterfaceContextHandle;
+     UINT NumberOfEntries;
+@@ -86,13 +91,15 @@ typedef struct _NET_INTERFACE_CONTEXT_TABLE
+ //
+ // FAILED(HRESULT)  - Returned in case of failures that are outside the control of the implementation.
+ //
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
++_Win32_PreserveResult_
+ STDAPI GetInterfaceContextTableForHostName(
+     _In_opt_ PCWSTR HostName,
+     _In_opt_ PCWSTR ProxyName,
+     _In_ DWORD Flags,
+     _In_reads_bytes_opt_(ConnectionProfileFilterRawDataSize) BYTE* ConnectionProfileFilterRawData,
+     _In_ DWORD ConnectionProfileFilterRawDataSize,
+-    _Outptr_ NET_INTERFACE_CONTEXT_TABLE** InterfaceContextTable);
++    _Outptr_ _Win32_RAIIFree_(FreeInterfaceContextTable, 0) NET_INTERFACE_CONTEXT_TABLE** InterfaceContextTable);
+ 
+ //
+ // Frees the interface context table retrieved from GetInterfaceContextTableForHostName. Internally, this also
+@@ -102,6 +109,7 @@ STDAPI GetInterfaceContextTableForHostName(
+ //
+ // InterfaceContextTable                - Interface context table retrieved using GetInterfaceContextTableForHostName.
+ //
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI_(void) FreeInterfaceContextTable(_In_ NET_INTERFACE_CONTEXT_TABLE* InterfaceContextTable);
+ 
+ #endif // NTDDI_VERSION >= NTDDI_WINTHRESHOLD
