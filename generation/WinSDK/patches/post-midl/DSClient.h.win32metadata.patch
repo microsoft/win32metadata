@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8cd5efd0e6a0b05e81b895c7edfd618..8f58f9f53a69561eb9ce169417999b561a8af091 100644
+index 71ad8398e8..a215235628 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -10,6 +10,24 @@ index 71ad8398e8cd5efd0e6a0b05e81b895c7edfd618..8f58f9f53a69561eb9ce169417999b56
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -60,7 +61,7 @@ DEFINE_GUID(CLSID_DsFolderProperties, 0x9e51e0d0, 0x6e0f, 0x11d2, 0x96, 0x1, 0x0
+ 
+ #define CFSTR_DSOBJECTNAMES TEXT("DsObjectNames")
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD   dwFlags;                    // item flags
+     DWORD   dwProviderFlags;            // flags for item provider
+@@ -68,7 +69,7 @@ typedef struct
+     DWORD   offsetClass;                // offset to object class name / == 0 not known
+ } DSOBJECT, * LPDSOBJECT;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     CLSID    clsidNamespace;            // namespace identifier (indicates which namespace selection from)
+     UINT     cItems;                    // number of objects
 @@ -93,7 +94,7 @@ typedef struct
  #define CFSTR_DS_DISPLAY_SPEC_OPTIONS TEXT("DsDisplaySpecOptions")
  #define CFSTR_DSDISPLAYSPECOPTIONS CFSTR_DS_DISPLAY_SPEC_OPTIONS
@@ -19,24 +37,165 @@ index 71ad8398e8cd5efd0e6a0b05e81b895c7edfd618..8f58f9f53a69561eb9ce169417999b56
  {
      DWORD   dwSize;                             // size of struct, for versioning
      DWORD   dwFlags;                            // invocation flags
-@@ -459,7 +460,11 @@ typedef struct
+@@ -128,7 +129,7 @@ typedef struct _DSDISPLAYSPECOPTIONS
+ 
+ #define CFSTR_DSPROPERTYPAGEINFO TEXT("DsPropPageInfo")
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD offsetString;                 // offset to UNICODE string
+ } DSPROPERTYPAGEINFO, * LPDSPROPERTYPAGEINFO;
+@@ -165,7 +166,7 @@ typedef struct
+ #define DBDTF_RETURNINBOUND       0x00000008  // set it if you want trusting domains
+ #define DBDTF_RETURNINOUTBOUND    0x00000010  // set it if you want both trusted and trusting domains
+ 
+-typedef struct _DOMAINDESC
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOMAINDESC
+ {       
+   LPWSTR pszName;                       // domain name (if no dns, use netbios)
+   LPWSTR pszPath;                       // set to blank
+@@ -178,7 +179,7 @@ typedef struct _DOMAINDESC
+   struct _DOMAINDESC *pdNextSibling;    // Siblings of this node            
+ } DOMAIN_DESC, DOMAINDESC, * PDOMAIN_DESC, * LPDOMAINDESC;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+   DWORD dsSize;
+   DWORD dwCount;
+@@ -196,10 +197,20 @@ DECLARE_INTERFACE_IID_(IDsBrowseDomainTree, IUnknown, "7cabcf1e-78f5-11d2-960c-0
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // *** IDsBrowseDomainTree methods ***
+-    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_ LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
++    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_ _Win32_RAIIFree_(CoTaskMemFree) LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(GetDomains)(THIS_ PDOMAIN_TREE *ppDomainTree, DWORD dwFlags) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(FreeDomains)(THIS_ PDOMAIN_TREE *ppDomainTree) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(FlushCachedDomains)(THIS) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(SetComputer)(THIS_ LPCWSTR pszComputerName, LPCWSTR pszUserName, LPCWSTR pszPassword) PURE;
+ };
+ 
+@@ -252,7 +263,7 @@ typedef HRESULT (CALLBACK *LPDSENUMATTRIBUTES)(LPARAM lParam, LPCWSTR pszAttribu
+ #define DSCCIF_HASWIZARDDIALOG          0x00000001  // = 1 => return the wizard dialog CLSID
+ #define DSCCIF_HASWIZARDPRIMARYPAGE     0x00000002  // = 1 => returning a primary wizard dlg CLSID
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD dwFlags;
+     CLSID clsidWizardDialog;
+@@ -276,16 +287,39 @@ DECLARE_INTERFACE_IID_(IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-0
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // *** IDsDisplaySpecifier methods ***
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(SetServer)(THIS_ LPCWSTR pszServer, LPCWSTR pszUserName, LPCWSTR pszPassword, DWORD dwFlags) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(SetLanguageID)(THIS_ LANGID langid) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(GetDisplaySpecifier)(THIS_ LPCWSTR pszObjectClass, REFIID riid, void **ppv) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(GetIconLocation)(THIS_ LPCWSTR pszObjectClass, _In_ DWORD dwFlags, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ INT cchBuffer, _Out_ INT *presid) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
++    _Win32_RAIIFree_(DestroyIcon, 0)
+     STDMETHOD_(HICON, GetIcon)(THIS_ LPCWSTR pszObjectClass, DWORD dwFlags, INT cxIcon, INT cyIcon) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(GetFriendlyClassName)(THIS_ LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ INT cchBuffer) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(GetFriendlyAttributeName)(THIS_ LPCWSTR pszObjectClass, _In_ LPCWSTR pszAttributeName, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ UINT cchBuffer) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD_(BOOL, IsClassContainer)(THIS_ LPCWSTR pszObjectClass, LPCWSTR pszADsPath, DWORD dwFlags) PURE;
+-    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass, LPDSCLASSCREATIONINFO* ppdscci) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
++    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass, _Win32_RAIIFree_(LocalFree) LPDSCLASSCREATIONINFO* ppdscci) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(EnumClassAttributes)(THIS_ LPCWSTR pszObjectClass, LPDSENUMATTRIBUTES pcbEnum, LPARAM lParam) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD_(ADSTYPE, GetAttributeADsType)(THIS_ LPCWSTR pszAttributeName) PURE;
+ };
+ 
+@@ -305,7 +339,7 @@ DECLARE_INTERFACE_IID_(IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-0
+ //
+ //---------------------------------------------------------------------------//
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD           cbStruct;       // size of structure in bytes
+     HWND            hwndOwner;      // dialog owner
+@@ -324,7 +358,7 @@ typedef struct
+     ULONG           cchObjectClass;
+ } DSBROWSEINFOW, *PDSBROWSEINFOW;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD           cbStruct;
+     HWND            hwndOwner;
+@@ -369,7 +403,7 @@ typedef struct
+ 
+ #define DSB_MAX_DISPLAYNAME_CHARS   64
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD           cbStruct;
+     LPCWSTR         pszADsPath;     // ADS paths are always Unicode
+@@ -382,7 +416,7 @@ typedef struct
+     INT             iIconResID;
+ } DSBITEMW, *PDSBITEMW;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD           cbStruct;
+     LPCWSTR         pszADsPath;     // ADS paths are always Unicode
+@@ -459,7 +493,13 @@ typedef struct
  // API exported for browsing for containers.
  //
  
 +_Windows_SupportedOS_WindowsVista_
 +_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
  STDAPI_(int) DsBrowseForContainerW(_Inout_ PDSBROWSEINFOW pInfo);
 +_Windows_SupportedOS_WindowsVista_
 +_Windows_SupportedOS_Server2008_
++_Win32_SetLastError_
  STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  #ifdef UNICODE
-@@ -471,6 +476,8 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
+@@ -471,7 +511,12 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  // NOTE: these are here to keep old clients building - remove soon
  
 +_Windows_SupportedOS_WindowsVista_
 +_Windows_SupportedOS_Server2008_
++_Win32_RAIIFree_(DestroyIcon, 0)
  STDAPI_(HICON) DsGetIcon(DWORD dwFlags, LPCWSTR pszObjectClass, INT cxImage, INT cyImage);
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
  STDAPI DsGetFriendlyClassName(LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, UINT cchBuffer);
+ 
  
