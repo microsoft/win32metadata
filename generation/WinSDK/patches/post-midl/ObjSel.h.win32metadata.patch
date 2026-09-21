@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
-index 777e9002b166a8f0d18032e3111e42980a2f5fe8..f2345b2fa3f3c459080194146204c19c1d247232 100644
+index 777e9002b1..eafc50b5bc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 @@ -16,6 +16,7 @@
@@ -10,7 +10,7 @@ index 777e9002b166a8f0d18032e3111e42980a2f5fe8..f2345b2fa3f3c459080194146204c19c
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -382,7 +383,7 @@ flDownlevel
+@@ -382,14 +383,14 @@ flDownlevel
      Flags to use for a downlevel scope.
  */
  
@@ -19,3 +19,71 @@ index 777e9002b166a8f0d18032e3111e42980a2f5fe8..f2345b2fa3f3c459080194146204c19c
  {
      ULONG       flBothModes;
      ULONG       flMixedModeOnly;
+     ULONG       flNativeModeOnly;
+ } DSOP_UPLEVEL_FILTER_FLAGS;
+ 
+-typedef struct _DSOP_FILTER_FLAGS
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_FILTER_FLAGS
+ {
+     DSOP_UPLEVEL_FILTER_FLAGS   Uplevel;
+     ULONG                       flDownlevel;
+@@ -433,7 +434,7 @@ hr
+     also be a success code.
+ */
+ 
+-typedef struct _DSOP_SCOPE_INIT_INFO
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_SCOPE_INIT_INFO
+ {
+     ULONG               cbSize;
+     ULONG               flType;
+@@ -499,7 +500,7 @@ apwzAttributeNames
+     if cAttributesToFetch is 0.
+ */
+ 
+-typedef struct _DSOP_INIT_INFO
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_INIT_INFO
+ {
+     ULONG                       cbSize;
+     PCWSTR                      pwzTargetComputer;
+@@ -555,7 +556,7 @@ aDsSelection
+ */
+ 
+ 
+-typedef struct _DS_SELECTION
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_SELECTION
+ {
+     PWSTR      pwzName;
+     PWSTR      pwzADsPath;
+@@ -566,7 +567,7 @@ typedef struct _DS_SELECTION
+ } DS_SELECTION, *PDS_SELECTION;
+ 
+ 
+-typedef struct _DS_SELECTION_LIST
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_SELECTION_LIST
+ {
+     ULONG           cItems;
+     ULONG           cFetchedAttributes;
+@@ -601,11 +602,15 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
+     // *** IDsObjectPicker methods ***
+ 
+     // Sets scope, filter, etc. for use with next invocation of dialog
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(Initialize)(
+         THIS_
+         PDSOP_INIT_INFO pInitInfo) PURE;
+ 
+     // Creates the modal DS Object Picker dialog.
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(InvokeDialog)(
+          THIS_
+          HWND               hwndParent,
+@@ -628,6 +633,7 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
+     // *** IDsObjectPickerCredentials methods ***
+     
+     // Sets credentials for use with next invocation of dialog
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(SetCredentials)(
+         THIS_
+         LPCWSTR szUserName,

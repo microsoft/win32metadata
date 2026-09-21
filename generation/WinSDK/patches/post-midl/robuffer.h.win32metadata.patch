@@ -1,0 +1,25 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
+index ff81a7e716..03e975b869 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
+@@ -15,6 +15,7 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <objidl.h>
++#include "win32metadata_annotations.h"
+ 
+ STDAPI
+ RoGetBufferMarshaler(
+@@ -24,9 +25,11 @@ RoGetBufferMarshaler(
+ #ifdef __cplusplus
+ namespace Windows { namespace Storage { namespace Streams {
+ 
+-struct __declspec(uuid("905a0fef-bc53-11df-8c49-001e4fc686da")) IBufferByteAccess : public IUnknown
++struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ __declspec(uuid("905a0fef-bc53-11df-8c49-001e4fc686da")) IBufferByteAccess : public IUnknown
+ {
+     // an IBuffer object is created by a client, and the buffer is provided by IBufferByteAccess::Buffer.
++    _Windows_SupportedOS_Windows8_
++    _Windows_SupportedOS_Server2012_
+     STDMETHOD(Buffer)(_Outptr_result_buffer_(_Inexpressible_("size given by different API")) byte **value) = 0;
+ };
+ 

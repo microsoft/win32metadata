@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h b/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
+index 3a8ba6720f..7c74103d08 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
+@@ -16,6 +16,7 @@ Environment:
+ 
+ #ifndef _TRANSPORT_SETTING_COMMON_
+ #define _TRANSPORT_SETTING_COMMON_
++#include "win32metadata_annotations.h"
+ 
+ #ifdef _MSC_VER
+ 
+@@ -31,7 +32,7 @@ extern  "C" {
+ // This structure represents the key used in query and apply transport setting
+ // APIs.
+ //
+-typedef struct TRANSPORT_SETTING_ID
++typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ TRANSPORT_SETTING_ID
+ {
+     GUID Guid;
+ } TRANSPORT_SETTING_ID, *PTRANSPORT_SETTING_ID;
