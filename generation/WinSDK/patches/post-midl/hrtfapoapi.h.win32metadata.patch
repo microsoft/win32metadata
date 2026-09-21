@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
+index a1c2a9980d..d2c07a4aad 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
+@@ -10,6 +10,7 @@
+ #define __HRTFAPOAPI_INCLUDED__
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #include <float.h>
+ 
+ #pragma region Application Family
+@@ -146,6 +147,7 @@ typedef struct HrtfApoInit
+ //! Returns:
+ //!     S_OK for success, any other value indicates failure.
+ //!     Returns E_NOTIMPL on unsupported platforms.
++_Windows_SupportedOS_10240_
+ STDAPI CreateHrtfApo(
+     //! Pointer to an HrtfApoInit struct. Specifies parameters for XAPO interface initialization.
+     _In_ const HrtfApoInit* init, 
+@@ -167,14 +169,22 @@ DECLARE_INTERFACE_IID_(IXAPOHrtfParameters, IUnknown, "15B3CD66-E9DE-4464-B6E6-2
+ 
+     // HRTF params
+     //! The position of the sound relative to the listener.
++    _Windows_SupportedOS_10240_
++    _Windows_SupportedOS_Server2016_
+     STDMETHOD(SetSourcePosition)(THIS_ _In_ const HrtfPosition* position) PURE;
+     //! The rotation matrix for the source orientation, with respect to the listener's frame of reference (the listener's coordinate system).
++    _Windows_SupportedOS_10240_
++    _Windows_SupportedOS_Server2016_
+     STDMETHOD(SetSourceOrientation)(THIS_ _In_ const HrtfOrientation* orientation) PURE;
+     //! The custom direct path gain value for the current source position. Valid only for sounds played with the HrtfDistanceDecayType. Custom decay type.
++    _Windows_SupportedOS_10240_
++    _Windows_SupportedOS_Server2016_
+     STDMETHOD(SetSourceGain)(THIS_ _In_ float gain) PURE;
+ 
+     // Distance cue params
+     //! Selects the acoustic environment to simulate.
++    _Windows_SupportedOS_10240_
++    _Windows_SupportedOS_Server2016_
+     STDMETHOD(SetEnvironment)(THIS_ _In_ HrtfEnvironment environment) PURE;
+ };
+ 

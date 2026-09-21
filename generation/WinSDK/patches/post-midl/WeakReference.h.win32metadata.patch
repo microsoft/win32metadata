@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
+index ea6c5c42ac..b649e02c0a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -94,6 +95,8 @@ extern RPC_IF_HANDLE __MIDL_itf_weakreference_0000_0000_v0_0_s_ifspec;
+         IWeakReference : public IUnknown
+         {
+         public:
++            _Windows_SupportedOS_Windows8_
++            _Windows_SupportedOS_Server2012_
+             virtual HRESULT STDMETHODCALLTYPE Resolve( 
+                 /* [in] */ __RPC__in REFIID riid,
+                 /* [iid_is][out] */ __RPC__deref_out IInspectable **objectReference) = 0;
+@@ -118,6 +121,8 @@ EXTERN_C const IID IID_IWeakReference;
+     IWeakReference : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE Resolve( 
+             /* [in] */ __RPC__in REFIID riid,
+             /* [iid_is][retval][out] */ __RPC__deref_out_opt IInspectable **objectReference) = 0;
+@@ -213,6 +218,8 @@ EXTERN_C const IID IID_IWeakReferenceSource;
+     IWeakReferenceSource : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE GetWeakReference( 
+             /* [retval][out] */ __RPC__deref_out_opt IWeakReference **weakReference) = 0;
+         

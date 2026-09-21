@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wscapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wscapi.h
+index 369f82dabb..5cc4b0bfff 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wscapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wscapi.h
+@@ -3,13 +3,14 @@
+ //
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+-typedef enum _WSC_SECURITY_PROVIDER
++typedef enum _Windows_SupportedOS_WindowsVista_ _WSC_SECURITY_PROVIDER
+ {
+     // Represents the aggregation of all firewalls for this computer.
+     WSC_SECURITY_PROVIDER_FIREWALL =                   0x1,
+@@ -38,7 +39,7 @@ typedef enum _WSC_SECURITY_PROVIDER
+                                                             WSC_SECURITY_PROVIDER_SERVICE
+ } WSC_SECURITY_PROVIDER, *PWSC_SECURITY_PROVIDER;
+ 
+-typedef enum _WSC_SECURITY_PROVIDER_HEALTH
++typedef enum _Windows_SupportedOS_WindowsVista_ _WSC_SECURITY_PROVIDER_HEALTH
+ {
+     WSC_SECURITY_PROVIDER_HEALTH_GOOD, // Green pillar in English locales
+     WSC_SECURITY_PROVIDER_HEALTH_NOTMONITORED, // Yellow pillar in English locales
+@@ -69,10 +70,11 @@ typedef enum _WSC_SECURITY_PROVIDER_HEALTH
+ 
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ STDAPI WscRegisterForChanges(LPVOID Reserved, 
+-                             PHANDLE phCallbackRegistration,
+-                             LPTHREAD_START_ROUTINE lpCallbackAddress, 
+-                             PVOID pContext);
++                             _Win32_RAIIFree_(WscUnRegisterChanges) PHANDLE phCallbackRegistration,
++                             _Win32_Retained_ LPTHREAD_START_ROUTINE lpCallbackAddress, 
++                             _Win32_Retained_ PVOID pContext);
+ 
+ // The WscUnRegisterChanges function cancels a callback registration that was made by a call to the WscRegisterForChanges 
+ // function.
+@@ -84,6 +86,7 @@ STDAPI WscRegisterForChanges(LPVOID Reserved,
+ // Return Values:
+ // Returns S_OK if the function succeeds, otherwise returns an error code.
+ 
++_Windows_SupportedOS_WindowsVista_
+ STDAPI WscUnRegisterChanges(HANDLE hRegistrationHandle);
+ 
+ // The WscRegisterForUserNotifications function registers a callback function to be run when the Security Center service
+@@ -111,7 +114,9 @@ STDAPI WscRegisterForUserNotifications();
+ // is always S_FALSE and the pHealth out parameter is always set to WSC_SECURITY_PROVIDER_HEALTH_POOR.
+ // 
+ 
+-STDAPI WscGetSecurityProviderHealth(DWORD Providers,
++_Windows_SupportedOS_WindowsVista_
++_Win32_PreserveResult_
++STDAPI WscGetSecurityProviderHealth(_Win32_AssociatedEnum_(WSC_SECURITY_PROVIDER) DWORD Providers,
+                                     PWSC_SECURITY_PROVIDER_HEALTH pHealth);
+ 
+ HRESULT wscShowAMSCN(_In_ DWORD InputFlags, _Out_opt_ PDWORD pdwResultFlags);

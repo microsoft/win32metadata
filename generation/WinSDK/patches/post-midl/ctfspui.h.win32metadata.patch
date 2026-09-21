@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctfspui.h b/generation/WinSDK/RecompiledIdlHeaders/um/ctfspui.h
+index 5444d38334..2eddb6e4c4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ctfspui.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ctfspui.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -118,12 +119,18 @@ EXTERN_C const IID IID_ITfSpeechUIServer;
+     ITfSpeechUIServer : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE Initialize( void) = 0;
+         
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE ShowUI( 
+             /* [annotation][in] */ 
+             _In_  BOOL fShow) = 0;
+         
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE UpdateBalloon( 
+             /* [annotation][in] */ 
+             _In_  TfLBBalloonStyle style,
