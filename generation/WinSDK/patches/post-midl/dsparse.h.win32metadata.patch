@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
-index 885f3d642dbf82fffe40cc78bae78a0dac0adf67..5acd45ef74c78ce49c9daefcab5ff0f050259f39 100644
+index 885f3d642d..1000d35384 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 @@ -27,6 +27,7 @@ Notes:
@@ -10,6 +10,15 @@ index 885f3d642dbf82fffe40cc78bae78a0dac0adf67..5acd45ef74c78ce49c9daefcab5ff0f0
  
  #pragma region Desktop Familyy or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -40,7 +41,7 @@ Notes:
+ extern "C" {
+ #endif
+ 
+-typedef enum _DS_MANGLE_FOR {
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_MANGLE_FOR {
+         DS_MANGLE_UNKNOWN = 0,
+         DS_MANGLE_OBJECT_RDN_FOR_DELETION,
+         DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT,
 @@ -98,6 +99,8 @@ typedef enum _DS_MANGLE_FOR {
  //
  //
@@ -37,3 +46,111 @@ index 885f3d642dbf82fffe40cc78bae78a0dac0adf67..5acd45ef74c78ce49c9daefcab5ff0f0
  _Check_return_
  DSPARSE
  DWORD
+@@ -175,6 +182,8 @@ DsCrackSpnA(
+     _Out_opt_ USHORT *pInstancePort
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ DSPARSE
+ DWORD
+@@ -261,6 +270,8 @@ Return Value:
+ 
+ --*/
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == 0)
+ DSPARSE
+@@ -273,6 +284,8 @@ DsQuoteRdnValueW(
+     _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == 0)
+ DSPARSE
+@@ -371,6 +384,8 @@ Return Value:
+ 
+ --*/
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == 0)
+ DSPARSE
+@@ -383,6 +398,8 @@ DsUnquoteRdnValueW(
+     _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == 0)
+ DSPARSE
+@@ -493,6 +510,8 @@ Return Value:
+         All output parameters are undefined.
+ 
+ --*/
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ _Check_return_
+ _Success_(return == 0)
+ DSPARSE
+@@ -547,6 +566,8 @@ Return Value:
+ 
+ --*/
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
+@@ -557,6 +578,8 @@ DsCrackUnquotedMangledRdnW(
+      _Out_opt_ DS_MANGLE_FOR *peDsMangleFor
+      );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
+@@ -622,6 +645,8 @@ Return Value:
+ 
+ --*/
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
+@@ -631,6 +656,8 @@ DsIsMangledRdnValueW(
+     DS_MANGLE_FOR eDsMangleForDesired
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
+@@ -680,6 +707,8 @@ Return Value:
+ 
+ --*/
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
+@@ -688,6 +717,8 @@ DsIsMangledDnA(
+     DS_MANGLE_FOR eDsMangleFor
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DSPARSE
+ BOOL
+ WINAPI
