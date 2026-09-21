@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
+index 61533a5450..7f6a5ec61e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __xpsobjectmodel_2_h__
+ #define __xpsobjectmodel_2_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -103,12 +104,14 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
+     IXpsOMPackageWriter3D : public IXpsOMPackageWriter
+     {
+     public:
++        _Windows_SupportedOS_Windows81_
+         virtual HRESULT STDMETHODCALLTYPE AddModelTexture( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *texturePartName,
+             /* [annotation][in] */ 
+             _In_  IStream *textureData) = 0;
+         
++        _Windows_SupportedOS_Windows81_
+         virtual HRESULT STDMETHODCALLTYPE SetModelPrintTicket( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *printTicketPartName,
+@@ -273,6 +276,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
+     IXpsDocumentPackageTarget3D : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows81_
+         virtual HRESULT STDMETHODCALLTYPE GetXpsOMPackageWriter3D( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *documentSequencePartName,
+@@ -285,6 +289,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IXpsOMPackageWriter3D **packageWriter) = 0;
+         
++        _Windows_SupportedOS_Windows81_
+         virtual HRESULT STDMETHODCALLTYPE GetXpsOMFactory( 
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IXpsOMObjectFactory **xpsFactory) = 0;

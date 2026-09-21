@@ -1,0 +1,131 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
+index 5169685038..5fc4ac3c59 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
+@@ -25,6 +25,7 @@ Environments :
+ 
+ #ifndef _WINBER_DEFINED_
+ #define _WINBER_DEFINED_
++#include <win32metadata_annotations.h>
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -64,6 +65,8 @@ typedef int ber_slen_t;           /* signed equivalent of ber_len_t */
+ // data in the supplied berval structure.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
+ 
+ //
+@@ -73,6 +76,8 @@ WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
+ //
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
+ 
+ //
+@@ -81,6 +86,8 @@ WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
+ // have allocated
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI VOID BERAPI ber_bvfree( BERVAL *pBerVal );
+ 
+ 
+@@ -88,12 +95,17 @@ WINBERAPI VOID BERAPI ber_bvfree( BERVAL *pBerVal );
+ // Frees an array of BERVAL structures.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI VOID BERAPI ber_bvecfree( PBERVAL *pBerVal );
+ 
+ //
+ // Returns a copy of a the supplied berval structure
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_RAIIFree_(ber_bvfree)
+ WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
+ 
+ 
+@@ -105,6 +117,8 @@ WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
+ // The LBER_USE_DER options should always be specified.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
+ 
+ 
+@@ -121,6 +135,8 @@ WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
+ // the value part of the next element
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
+ 
+ //
+@@ -132,6 +148,8 @@ WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
+ // else the tag of the next element is returned.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
+ 
+ //
+@@ -143,6 +161,8 @@ WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
+ // subsequent invocations of ber_next_element().
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen, _Out_ CHAR **ppOpaque );
+ 
+ //
+@@ -153,6 +173,8 @@ WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen,
+ // is returned.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _In_ CHAR *opaque );
+ 
+ //
+@@ -162,7 +184,9 @@ WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _
+ // The return values are 0 on success and -1 on error.
+ //
+ 
+-WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement, PBERVAL *pBerVal );
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement, _Win32_RAIIFree_(ber_bvfree) PBERVAL *pBerVal );
+ 
+ 
+ /*
+@@ -245,6 +269,8 @@ The format string can contain the following format characters:
+         be used with this format character.
+ */
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI INT BERAPI ber_printf( BerElement *pBerElement, _In_ PSTR fmt, ... );
+ 
+ /*
+@@ -337,6 +363,8 @@ contain the following characters:
+ 
+ */
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ WINBERAPI ULONG BERAPI ber_scanf( BerElement *pBerElement, _In_ PSTR fmt, ... );
+ 
+ 

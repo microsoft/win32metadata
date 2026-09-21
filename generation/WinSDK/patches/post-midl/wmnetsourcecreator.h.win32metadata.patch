@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmnetsourcecreator.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmnetsourcecreator.h
+index b260661a7a..e76bc69592 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmnetsourcecreator.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmnetsourcecreator.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __wmnetsourcecreator_h__
+ #define __wmnetsourcecreator_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -103,6 +104,8 @@ EXTERN_C const IID IID_INSNetSourceCreator;
+     INSNetSourceCreator : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE Initialize( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateNetSource( 
+@@ -129,6 +132,8 @@ EXTERN_C const IID IID_INSNetSourceCreator;
+             /* [annotation][out] */ 
+             _Out_  IUnknown **ppSharedNamespace) = 0;
+         
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE GetNetSourceAdminInterface( 
+             /* [annotation][in] */ 
+             _In_  LPCWSTR pszStreamName,
+@@ -147,6 +152,8 @@ EXTERN_C const IID IID_INSNetSourceCreator;
+             /* [annotation][out][in] */ 
+             _Inout_  WORD *pcchProtocolName) = 0;
+         
++        _Windows_SupportedOS_Windows2000_
++        _Windows_SupportedOS_Server2000_
+         virtual HRESULT STDMETHODCALLTYPE Shutdown( void) = 0;
+         
+     };

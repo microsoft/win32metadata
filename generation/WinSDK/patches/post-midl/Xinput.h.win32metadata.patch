@@ -1,0 +1,58 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
+index 4b51b443e0..2f5dc36909 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
+@@ -12,6 +12,7 @@
+ #endif
+ 
+ #include <windef.h>
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Application Family
+@@ -255,18 +256,21 @@ extern "C" {
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetState
+ (
+     _In_  DWORD         dwUserIndex,  // Index of the gamer associated with the device
+     _Out_ XINPUT_STATE* pState        // Receives the current state
+ ) WIN_NOEXCEPT;
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputSetState
+ (
+     _In_ DWORD             dwUserIndex,  // Index of the gamer associated with the device
+     _In_ XINPUT_VIBRATION* pVibration    // The vibration information to send to the controller
+ ) WIN_NOEXCEPT;
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetCapabilities
+ (
+     _In_  DWORD                dwUserIndex,   // Index of the gamer associated with the device
+@@ -285,6 +289,7 @@ void WINAPI XInputEnable
+ #pragma deprecated(XInputEnable)
+ #endif
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetAudioDeviceIds
+ (
+     _In_  DWORD                             dwUserIndex,        // Index of the gamer associated with the device
+@@ -301,6 +306,7 @@ DWORD WINAPI XInputGetBatteryInformation
+     _Out_ XINPUT_BATTERY_INFORMATION* pBatteryInformation // Contains the level and types of batteries
+ ) WIN_NOEXCEPT;
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetKeystroke
+ (
+     _In_       DWORD dwUserIndex,              // Index of the gamer associated with the device
+@@ -318,6 +324,7 @@ DWORD WINAPI XInputGetKeystroke
+ 
+ #if(_WIN32_WINNT < _WIN32_WINNT_WIN8)
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetDSoundAudioDeviceGuids
+ (
+     _In_  DWORD     dwUserIndex,          // Index of the gamer associated with the device

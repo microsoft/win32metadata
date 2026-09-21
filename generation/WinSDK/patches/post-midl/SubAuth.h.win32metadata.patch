@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
+index 227870b8e9..e3e6ffcb4e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
+@@ -16,6 +16,7 @@ Revision History:
+ 
+ #ifndef _NTSUBAUTH_
+ #define _NTSUBAUTH_
++#include <win32metadata_annotations.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -156,7 +157,7 @@ typedef struct _SR_SECURITY_DESCRIPTOR {
+ #endif
+ #ifndef _NTSAM_USER_ALL_INFO_
+ #include "pshpack4.h"
+-typedef struct _USER_ALL_INFORMATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _USER_ALL_INFORMATION {
+     LARGE_INTEGER LastLogon;
+     LARGE_INTEGER LastLogoff;
+     LARGE_INTEGER PasswordLastSet;
+@@ -240,7 +241,7 @@ typedef enum _NETLOGON_LOGON_INFO_CLASS {
+     NetlogonTicketLogonInformation,
+ } NETLOGON_LOGON_INFO_CLASS;
+ 
+-typedef struct _NETLOGON_LOGON_IDENTITY_INFO {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _NETLOGON_LOGON_IDENTITY_INFO {
+     UNICODE_STRING LogonDomainName;
+     ULONG ParameterControl;
+     OLD_LARGE_INTEGER  LogonId;
+@@ -302,6 +303,8 @@ typedef struct _NETLOGON_TARGET_INFO {
+ #define MSV1_0_GUEST_LOGON  0x02
+ #define MSV1_0_KERBEROS_LOGON  0x04
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutine(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+@@ -347,6 +350,8 @@ typedef struct _MSV1_0_VALIDATION_INFO {
+ #define MSV1_0_SUBAUTH_ACCOUNT_TYPE            0x00000040
+ #define MSV1_0_SUBAUTH_LOCKOUT                 0x00000080
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutineEx(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+@@ -358,6 +363,8 @@ Msv1_0SubAuthenticationRoutineEx(
+     OUT PULONG ActionsPerformed
+ );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutineGeneric(
+     IN PVOID SubmitBuffer,
+@@ -366,6 +373,8 @@ Msv1_0SubAuthenticationRoutineGeneric(
+     OUT PVOID *ReturnBuffer
+ );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationFilter(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,

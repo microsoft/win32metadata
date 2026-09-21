@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
+index 967c6b0d53..00143c00f4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertMod.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __certmod_h__
+ #define __certmod_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -107,6 +108,8 @@ EXTERN_C const IID IID_ICertManageModule;
+     ICertManageModule : public IDispatch
+     {
+     public:
++        _Windows_SupportedOS_Server2003_
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [annotation][in] */ 
+             _In_  const BSTR strConfig,
+@@ -119,6 +122,7 @@ EXTERN_C const IID IID_ICertManageModule;
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *pvarProperty) = 0;
+         
++        _Windows_SupportedOS_Server2003_
+         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
+             /* [annotation][in] */ 
+             _In_  const BSTR strConfig,
+@@ -131,6 +135,7 @@ EXTERN_C const IID IID_ICertManageModule;
+             /* [annotation][in] */ 
+             _In_  const VARIANT *pvarProperty) = 0;
+         
++        _Windows_SupportedOS_Server2003_
+         virtual HRESULT STDMETHODCALLTYPE Configure( 
+             /* [annotation][in] */ 
+             _In_  const BSTR strConfig,

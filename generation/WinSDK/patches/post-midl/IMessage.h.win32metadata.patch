@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h b/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
+index 849a899e1c..0802b58c8e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
+@@ -8,6 +8,7 @@
+ 
+ #ifndef _IMESSAGE_H_
+ #define _IMESSAGE_H_
++#include <win32metadata_annotations.h>
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -125,13 +126,13 @@ STDAPI_(void) CloseIMsgSession(
+  */
+ STDAPI_(SCODE) OpenIMsgOnIStg(
+ 	LPMSGSESS		lpMsgSess,			/* -> message session obj (optional) */
+-	LPALLOCATEBUFFER lpAllocateBuffer,	/* -> AllocateBuffer memory routine  */
+-	LPALLOCATEMORE 	lpAllocateMore, 	/* -> AllocateMore memory routine    */
+-	LPFREEBUFFER	lpFreeBuffer, 		/* -> FreeBuffer memory routine      */
++	_Win32_Retained_ LPALLOCATEBUFFER lpAllocateBuffer,	/* -> AllocateBuffer memory routine  */
++	_Win32_Retained_ LPALLOCATEMORE 	lpAllocateMore, 	/* -> AllocateMore memory routine    */
++	_Win32_Retained_ LPFREEBUFFER	lpFreeBuffer, 		/* -> FreeBuffer memory routine      */
+ 	LPMALLOC		lpMalloc,			/* -> Co malloc object				 */
+ 	LPVOID			lpMapiSup,			/* -> MAPI Support Obj (optional)    */
+ 	LPSTORAGE 		lpStg, 				/* -> open IStorage containing msg   */
+-	MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
++	_Win32_Retained_ MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
+ 	ULONG			ulCallerData,		/* caller data returned in callback  */
+ 	ULONG			ulFlags,			/* -> flags (controls istg commit)   */
+ 	LPMESSAGE		FAR *lppMsg ) WIN_NOEXCEPT;	/* <- open message object			 */
+@@ -179,6 +180,7 @@ struct _SPropAttrArray_ ## _name \
+  *	getting attributes.
+  */
+ _Check_return_
++_Win32_PreserveResult_
+ STDAPI GetAttribIMsgOnIStg(
+ 	LPVOID					lpObject,
+ 	LPSPropTagArray			lpPropTagArray,
+@@ -190,6 +192,7 @@ STDAPI GetAttribIMsgOnIStg(
+  *	setting of attributes.
+  */
+ _Check_return_
++_Win32_PreserveResult_
+ STDAPI SetAttribIMsgOnIStg(
+ 	LPVOID					lpObject,
+ 	LPSPropTagArray			lpPropTags,
