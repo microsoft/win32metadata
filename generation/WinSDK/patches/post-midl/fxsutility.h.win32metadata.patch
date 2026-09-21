@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fxsutility.h b/generation/WinSDK/RecompiledIdlHeaders/um/fxsutility.h
+index a836ed0fce..dd18d0d162 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fxsutility.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fxsutility.h
+@@ -23,6 +23,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -32,11 +33,15 @@ Abstract:
+ extern "C" {
+ #endif
+ 
+-typedef enum {
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ {
+ 	  SEND_TO_FAX_RECIPIENT_ATTACHMENT
+ } SendToMode;
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ BOOL WINAPI CanSendToFaxRecipient();
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ DWORD WINAPI SendToFaxRecipient(SendToMode sndMode, LPCWSTR lpFileName);
+ 
+ #ifdef __cplusplus

@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h b/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
+index b322a4c8e7..586f108201 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
+@@ -16,6 +16,7 @@ Notes:
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -58,7 +59,7 @@ Return Value:
+ STDAPI
+ ApplyLocalManagementSyncML(
+     _In_                          PCWSTR syncMLRequest,
+-    _Outptr_opt_result_maybenull_ PWSTR* syncMLResult
++    _Outptr_opt_result_maybenull_ _Win32_RAIIFree_(LocalFree) PWSTR* syncMLResult
+     );
+ 
+ /*++
