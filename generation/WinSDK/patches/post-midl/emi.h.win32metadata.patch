@@ -1,0 +1,71 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
+index 3de8dba663..19fe5ef05b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All Rights Reserved.
+@@ -47,22 +48,22 @@ DEFINE_GUID(GUID_DEVICE_ENERGY_METER,
+ #define EMI_VERSION_V1                       1
+ #define EMI_VERSION_V2                       2
+ 
+-typedef enum
++typedef enum _Windows_SupportedOS_10240_
+ {
+     EmiMeasurementUnitPicowattHours
+ } EMI_MEASUREMENT_UNIT;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_10240_
+ {
+     USHORT EmiVersion;
+ } EMI_VERSION;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_10240_
+ {
+     ULONG MetadataSize;
+ } EMI_METADATA_SIZE;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_10240_
+ {
+     ULONGLONG AbsoluteEnergy;
+     ULONGLONG AbsoluteTime;
+@@ -72,7 +73,7 @@ typedef struct
+ // V1 Interface Definition
+ //
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_10240_
+ {
+     EMI_MEASUREMENT_UNIT MeasurementUnit; 
+     WCHAR HardwareOEM[EMI_NAME_MAX];
+@@ -95,14 +96,14 @@ typedef EMI_MEASUREMENT_DATA_V1 EMI_MEASUREMENT_DATA;
+ // V2 Interface Definition
+ //
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_17763_
+ {
+     EMI_MEASUREMENT_UNIT MeasurementUnit;
+     USHORT ChannelNameSize;
+     WCHAR ChannelName[ANYSIZE_ARRAY];
+ } EMI_CHANNEL_V2;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_17763_
+ {
+     WCHAR HardwareOEM[EMI_NAME_MAX];
+     WCHAR HardwareModel[EMI_NAME_MAX];
+@@ -111,7 +112,7 @@ typedef struct
+     EMI_CHANNEL_V2 Channels[ANYSIZE_ARRAY];
+ } EMI_METADATA_V2;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_17763_
+ {
+     EMI_CHANNEL_MEASUREMENT_DATA ChannelData[ANYSIZE_ARRAY];
+ } EMI_MEASUREMENT_DATA_V2;

@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/swdevice.h b/generation/WinSDK/RecompiledIdlHeaders/um/swdevice.h
+index b1f5c27c34..25ed54405a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/swdevice.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/swdevice.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation
+@@ -39,28 +40,32 @@ typedef VOID (WINAPI *SW_DEVICE_CREATE_CALLBACK)(
+     _In_opt_ PCWSTR pszDeviceInstanceId);
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDeviceCreate(
+     _In_ PCWSTR pszEnumeratorName,
+     _In_ PCWSTR pszParentDeviceInstance,
+     _In_ const SW_DEVICE_CREATE_INFO *pCreateInfo,
+     _In_ ULONG cPropertyCount,
+     _In_reads_opt_(cPropertyCount) const DEVPROPERTY *pProperties,
+-    _In_ SW_DEVICE_CREATE_CALLBACK pCallback,
+-    _In_opt_ PVOID pContext,
+-    _Out_ PHSWDEVICE phSwDevice);
++    _In_ _Win32_Retained_ SW_DEVICE_CREATE_CALLBACK pCallback,
++    _In_opt_ _Win32_Retained_ PVOID pContext,
++    _Out_ _Win32_RAIIFree_(SwDeviceClose) PHSWDEVICE phSwDevice);
+ 
+ VOID WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDeviceClose(
+     _In_ HSWDEVICE hSwDevice);
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows81_
+ SwDeviceSetLifetime(
+     _In_ HSWDEVICE hSwDevice,
+     _In_ SW_DEVICE_LIFETIME Lifetime);
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows81_
+ SwDeviceGetLifetime(
+     _In_ HSWDEVICE hSwDevice,
+     _Out_ PSW_DEVICE_LIFETIME pLifetime);
+@@ -68,12 +73,14 @@ SwDeviceGetLifetime(
+ #endif
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDevicePropertySet(
+     _In_ HSWDEVICE hSwDevice,
+     _In_ ULONG cPropertyCount,
+     _In_reads_(cPropertyCount) const DEVPROPERTY *pProperties);
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDeviceInterfaceRegister(
+     _In_ HSWDEVICE hSwDevice,
+     _In_ const GUID *pInterfaceClassGuid,
+@@ -81,19 +88,22 @@ SwDeviceInterfaceRegister(
+     _In_ ULONG cPropertyCount,
+     _In_reads_opt_(cPropertyCount) const DEVPROPERTY *pProperties,
+     _In_ BOOL fEnabled,
+-    _Outptr_result_maybenull_ PWSTR* ppszDeviceInterfaceId);
++    _Outptr_result_maybenull_ _Win32_RAIIFree_(SwMemFree) PWSTR* ppszDeviceInterfaceId);
+ 
+ VOID WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwMemFree(
+     _In_ PVOID pMem);
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDeviceInterfaceSetState(
+     _In_ HSWDEVICE hSwDevice,
+     _In_ PCWSTR pszDeviceInterfaceId,
+     _In_ BOOL fEnabled);
+ 
+ _Check_return_ HRESULT WINAPI
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ SwDeviceInterfacePropertySet(
+     _In_ HSWDEVICE hSwDevice,
+     _In_ PCWSTR pszDeviceInterfaceId,

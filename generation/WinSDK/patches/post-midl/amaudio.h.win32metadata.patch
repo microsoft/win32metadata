@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amaudio.h b/generation/WinSDK/RecompiledIdlHeaders/um/amaudio.h
+index 5eb88cff98..c7a2504286 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amaudio.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amaudio.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //------------------------------------------------------------------------------
+ // File: AMAudio.h
+ //
+@@ -41,13 +42,21 @@ DECLARE_INTERFACE_(IAMDirectSound,IUnknown)
+ 
+     /* IAMDirectSound methods */
+ 
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(GetDirectSoundInterface)(THIS_ LPDIRECTSOUND *lplpds) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(GetPrimaryBufferInterface)(THIS_ LPDIRECTSOUNDBUFFER *lplpdsb) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(GetSecondaryBufferInterface)(THIS_ LPDIRECTSOUNDBUFFER *lplpdsb) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(ReleaseDirectSoundInterface)(THIS_ LPDIRECTSOUND lpds) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(ReleasePrimaryBufferInterface)(THIS_ LPDIRECTSOUNDBUFFER lpdsb) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(ReleaseSecondaryBufferInterface)(THIS_ LPDIRECTSOUNDBUFFER lpdsb) PURE;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(SetFocusWindow)(THIS_ HWND, BOOL) PURE ;
++    _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+     STDMETHOD(GetFocusWindow)(THIS_ HWND *, BOOL*) PURE ;
+ };
+ 

@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiostatemonitorapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiostatemonitorapi.h
+index 021f3987f2..920e984a31 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audiostatemonitorapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiostatemonitorapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************
+  *
+  * Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -42,7 +43,7 @@ enum class AudioStateMonitorSoundLevel
+ DECLARE_INTERFACE_IID_(IAudioStateMonitor, IUnknown, "63BD8738-E30D-4C77-BF5C-834E87C657E2")
+ {
+     // Registers a new callback with the AudioStateMonitor.
+-    STDMETHOD(RegisterCallback) (_In_ PAudioStateMonitorCallback callback, _In_opt_ void* context, _Out_ AudioStateMonitorRegistrationHandle* registration) PURE;
++    STDMETHOD(RegisterCallback) (_In_ _Win32_Retained_ PAudioStateMonitorCallback callback, _In_opt_ _Win32_Retained_ void* context, _Out_ AudioStateMonitorRegistrationHandle* registration) PURE;
+ 
+     // Unregisters an existing callback with the AudioStateMonitor
+     // This method will block if any callbacks are in progress, until the callbacks have completed. 

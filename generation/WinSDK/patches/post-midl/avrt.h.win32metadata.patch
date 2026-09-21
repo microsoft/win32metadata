@@ -1,0 +1,121 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrt.h b/generation/WinSDK/RecompiledIdlHeaders/um/avrt.h
+index d7897b8c7b..7544e2e45a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/avrt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/avrt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++ BUILD Version: 0001    // Increment this if a change has global effects
+@@ -55,6 +56,7 @@ _Success_(return != NULL)
+ AVRTAPI
+ HANDLE
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvSetMmThreadCharacteristicsA (
+     _In_ LPCSTR TaskName,
+     _Inout_ LPDWORD TaskIndex
+@@ -63,6 +65,7 @@ _Success_(return != NULL)
+ AVRTAPI
+ HANDLE
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvSetMmThreadCharacteristicsW (
+     _In_ LPCWSTR TaskName,
+     _Inout_ LPDWORD TaskIndex
+@@ -77,6 +80,7 @@ _Success_(return != NULL)
+ AVRTAPI
+ HANDLE
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvSetMmMaxThreadCharacteristicsA (
+     _In_ LPCSTR FirstTask,
+     _In_ LPCSTR SecondTask,
+@@ -86,6 +90,7 @@ _Success_(return != NULL)
+ AVRTAPI
+ HANDLE
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvSetMmMaxThreadCharacteristicsW (
+     _In_ LPCWSTR FirstTask,
+     _In_ LPCWSTR SecondTask,
+@@ -101,6 +106,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRevertMmThreadCharacteristics (
+     _In_ HANDLE AvrtHandle
+     );
+@@ -109,6 +115,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvSetMmThreadPriority (
+     _In_ HANDLE AvrtHandle,
+     _In_ AVRT_PRIORITY Priority
+@@ -124,6 +131,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtCreateThreadOrderingGroup (
+     _Out_ PHANDLE Context,
+     _In_ PLARGE_INTEGER Period,
+@@ -135,6 +143,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtCreateThreadOrderingGroupExA (
+     _Out_ PHANDLE Context,
+     _In_ PLARGE_INTEGER Period,
+@@ -146,6 +155,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtCreateThreadOrderingGroupExW (
+     _Out_ PHANDLE Context,
+     _In_ PLARGE_INTEGER Period,
+@@ -163,6 +173,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtJoinThreadOrderingGroup (
+     _Out_ PHANDLE Context,
+     _In_ GUID *ThreadOrderingGuid,
+@@ -173,6 +184,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtWaitOnThreadOrderingGroup (
+     _In_ HANDLE Context
+     );
+@@ -181,6 +193,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtLeaveThreadOrderingGroup (
+     _In_ HANDLE Context
+     );
+@@ -189,6 +202,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvRtDeleteThreadOrderingGroup (
+     _In_ HANDLE Context
+     );
+@@ -197,6 +211,7 @@ _Success_(return != FALSE)
+ AVRTAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_
+ AvQuerySystemResponsiveness (
+     _In_ HANDLE AvrtHandle,
+     _Out_ PULONG SystemResponsivenessValue
