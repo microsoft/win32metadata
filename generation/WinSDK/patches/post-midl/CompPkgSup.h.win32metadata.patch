@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CompPkgSup.h b/generation/WinSDK/RecompiledIdlHeaders/um/CompPkgSup.h
+index 823353c6e4..a6832f5431 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CompPkgSup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CompPkgSup.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //*@@@+++@@@@******************************************************************
+ //
+ // ComponentPackageSupport
+@@ -34,16 +35,24 @@
+ #define ABI
+ #endif
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI InstantiateComponentFromPackage(_In_ HSTRING classId, _In_ HSTRING packageFullName, _COM_Outptr_ IInspectable** instance);
+-STDAPI RegisterServerForPMP(_In_ HSTRING serverClassId, _In_ IClassFactory *classFactory, _Out_ LPVOID *token);
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
++STDAPI RegisterServerForPMP(_In_ HSTRING serverClassId, _In_ IClassFactory *classFactory, _Out_ _Win32_RAIIFree_(UnregisterServerForPMP) LPVOID *token);
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI UnregisterServerForPMP(_In_ LPVOID token);
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI GetServerForPMP(_In_ HSTRING serverClassId, _COM_Outptr_ IUnknown **unknown);
+ 
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI AreDvdCodecsEnabled();
+ STDAPI RequireNetworkDuringMediaTaskCompletion(_In_ BOOL requireNetwork, _Out_opt_ DWORD* requireCount);
+ STDAPI_(DWORD) GetNetworkRequestCount();
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI GetMediaExtensionCommunicationFactory(_Outptr_ LPVOID* factory);
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI_(BOOL) IsMediaBehaviorEnabled(_In_ GUID mediaBehavior);
++_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+ STDAPI  GetMediaComponentPackageInfo( _In_ bool trustedOnly, _In_ HSTRING category,
+     _COM_Outptr_ ABI::Windows::Foundation::Collections::IVector<ABI::Windows::Foundation::Collections::IPropertySet*> **codecPropertiesVector);
+ #if (NTDDI_VERSION >= NTDDI_WIN11_GA)

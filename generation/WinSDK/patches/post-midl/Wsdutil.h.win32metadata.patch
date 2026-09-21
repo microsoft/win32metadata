@@ -1,0 +1,129 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
+index b305efdfb9..953f1ba79a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+-------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -44,12 +45,14 @@ extern "C" {
+ #endif
+     
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDSetConfigurationOption(
+     DWORD dwOption,
+     _In_reads_bytes_(cbInBuffer) LPVOID pVoid,
+     DWORD cbInBuffer);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDGetConfigurationOption(
+     DWORD dwOption,
+     _Out_writes_bytes_(cbOutBuffer) LPVOID pVoid,
+@@ -60,20 +63,24 @@ WSDGetConfigurationOption(
+ //
+ 
+ void * WINAPI 
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDAllocateLinkedMemory(
+     void* pParent, 
+     size_t cbSize);
+ 
+ void WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDFreeLinkedMemory(
+     void *pVoid);
+ 
+ void WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDAttachLinkedMemory(
+     void* pParent,
+-    void* pChild);
++    _Win32_Retained_ void* pChild);
+ 
+ void WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDDetachLinkedMemory(
+     void* pVoid);
+ 
+@@ -84,12 +91,14 @@ WSDDetachLinkedMemory(
+ typedef struct _WSDXML_ELEMENT WSDXML_ELEMENT; 
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDXMLBuildAnyForSingleElement(
+     WSDXML_NAME* pElementName, 
+     _In_opt_ LPCWSTR pszText, 
+-    _Outptr_ WSDXML_ELEMENT** ppAny);
++    _Outptr_ _Win32_RAIIFree_(WSDFreeLinkedMemory) WSDXML_ELEMENT** ppAny);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDXMLGetValueFromAny(
+     _In_ LPCWSTR pszNamespace,
+     _In_ LPCWSTR pszName, 
+@@ -97,49 +106,56 @@ WSDXMLGetValueFromAny(
+     _Outptr_ LPCWSTR* ppszValue);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDXMLAddSibling(
+     WSDXML_ELEMENT* pFirst,
+-    WSDXML_ELEMENT* pSecond);
++    _Win32_Retained_ WSDXML_ELEMENT* pSecond);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDXMLAddChild(
+     WSDXML_ELEMENT* pParent,
+-    WSDXML_ELEMENT* pChild);
++    _Win32_Retained_ WSDXML_ELEMENT* pChild);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDXMLCleanupElement(
+     WSDXML_ELEMENT* pAny);    
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDGenerateFault(
+     _In_ LPCWSTR pszCode,
+     _In_opt_ LPCWSTR pszSubCode,
+     _In_ LPCWSTR pszReason,
+     _In_opt_ LPCWSTR pszDetail,
+     _In_ IWSDXMLContext* pContext,
+-    _Outptr_ WSD_SOAP_FAULT** ppFault);
++    _Outptr_ _Win32_RAIIFree_(WSDFreeLinkedMemory) WSD_SOAP_FAULT** ppFault);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ WSDGenerateFaultEx(
+     _In_ WSDXML_NAME* pCode, 
+     _In_opt_ WSDXML_NAME* pSubCode, 
+     _In_ WSD_LOCALIZED_STRING_LIST* pReasons, 
+     _In_opt_ LPCWSTR pszDetail, 
+-    _Outptr_ WSD_SOAP_FAULT** ppFault);
++    _Outptr_ _Win32_RAIIFree_(WSDFreeLinkedMemory) WSD_SOAP_FAULT** ppFault);
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+ HRESULT WINAPI
++_Windows_SupportedOS_Windows7_
+ WSDUriEncode(
+     _In_reads_(cchSource) LPCWSTR source,
+     _In_ DWORD cchSource,
+-    _Out_writes_(*cchDestOut) LPWSTR *destOut,
++    _Out_writes_(*cchDestOut) _Win32_RAIIFree_(WSDFreeLinkedMemory) LPWSTR *destOut,
+     _Out_opt_ DWORD *cchDestOut);
+ 
+ HRESULT WINAPI
++_Windows_SupportedOS_Windows7_
+ WSDUriDecode(
+     _In_reads_(cchSource) LPCWSTR source,
+     _In_ DWORD cchSource,
+-    _Out_writes_(*cchDestOut) LPWSTR *destOut,
++    _Out_writes_(*cchDestOut) _Win32_RAIIFree_(WSDFreeLinkedMemory) LPWSTR *destOut,
+     _Out_opt_ DWORD *cchDestOut);
+ #endif
+ 
