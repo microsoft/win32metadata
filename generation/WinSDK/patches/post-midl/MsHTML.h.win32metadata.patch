@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
+@@ -9677,6 +9677,7 @@ extern "C"{
+ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include <dxgitype.h>
+ #include <olectl.h>
+@@ -13827,7 +13828,7 @@ enum _HTML_PAINT_DRAW_INFO_FLAGS
+         HTML_PAINT_DRAW_INFO_FLAGS_Max	= 2147483647L
+     } 	HTML_PAINT_DRAW_INFO_FLAGS;
+ 
+-typedef struct _HTML_PAINTER_INFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _HTML_PAINTER_INFO
+     {
+     LONG lFlags;
+     LONG lZOrder;
+@@ -13835,7 +13836,7 @@ typedef struct _HTML_PAINTER_INFO
+     RECT rcExpand;
+     } 	HTML_PAINTER_INFO;
+ 
+-typedef struct _HTML_PAINT_XFORM
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _HTML_PAINT_XFORM
+     {
+     FLOAT eM11;
+     FLOAT eM12;
+@@ -13845,7 +13846,7 @@ typedef struct _HTML_PAINT_XFORM
+     FLOAT eDy;
+     } 	HTML_PAINT_XFORM;
+ 
+-typedef struct _HTML_PAINT_DRAW_INFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _HTML_PAINT_DRAW_INFO
+     {
+     RECT rcViewport;
+     HRGN hrgnUpdate;
