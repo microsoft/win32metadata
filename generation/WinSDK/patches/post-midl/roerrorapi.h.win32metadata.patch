@@ -1,0 +1,165 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
+index f807be93c4..2441b9a9b6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
+@@ -14,6 +14,7 @@
+ #endif
+ 
+ #include <apiset.h>
++#include <win32metadata_annotations.h>
+ #include <apisetcconv.h>
+ #include <hstring.h>
+ #include <restrictedErrorInfo.h>
+@@ -32,7 +33,7 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-typedef enum {
++typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ {
+         RO_ERROR_REPORTING_NONE               = 0x00000000,
+         RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS = 0x00000001,
+         RO_ERROR_REPORTING_FORCEEXCEPTIONS    = 0x00000002,
+@@ -45,14 +46,18 @@ DEFINE_ENUM_FLAG_OPERATORS(RO_ERROR_REPORTING_FLAGS);
+ //not including the terminating null
+ #define MAX_ERROR_MESSAGE_CHARS 512
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ RoGetErrorReportingFlags(
+-    _Out_ UINT32* pflags
++    _Win32_AssociatedEnum_(RO_ERROR_REPORTING_FLAGS) _Out_ UINT32* pflags
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ RoSetErrorReportingFlags(
+-    _In_ UINT32 flags
++    _Win32_AssociatedEnum_(RO_ERROR_REPORTING_FLAGS) _In_ UINT32 flags
+     );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+@@ -61,6 +66,8 @@ RoSetErrorReportingFlags(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ RoResolveRestrictedErrorInfoReference(
+     _In_ PCWSTR reference,
+@@ -73,16 +80,23 @@ RoResolveRestrictedErrorInfoReference(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ SetRestrictedErrorInfo(
+     _In_opt_ IRestrictedErrorInfo* pRestrictedErrorInfo
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
++_Win32_PreserveResult_
+ STDAPI
+ GetRestrictedErrorInfo(
+     _Outptr_result_maybenull_ IRestrictedErrorInfo** ppRestrictedErrorInfo
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(BOOL)
+ RoOriginateErrorW(
+     _In_ HRESULT error,
+@@ -92,12 +106,16 @@ RoOriginateErrorW(
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(BOOL)
+ RoOriginateError(
+     _In_ HRESULT error,
+     _In_opt_ HSTRING message
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(BOOL)
+ RoTransformErrorW(
+     _In_ HRESULT oldError,
+@@ -108,6 +126,8 @@ RoTransformErrorW(
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(BOOL)
+ RoTransformError(
+     _In_ HRESULT oldError,
+@@ -115,11 +135,15 @@ RoTransformError(
+     _In_opt_ HSTRING message
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI
+ RoCaptureErrorContext(
+     HRESULT hr
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(void)
+ RoFailFastWithErrorContext(
+     HRESULT hrError
+@@ -324,6 +348,7 @@ namespace ABI
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI_(BOOL)
+ RoOriginateLanguageException(
+     _In_ HRESULT error,
+@@ -331,6 +356,7 @@ RoOriginateLanguageException(
+     _In_opt_ IUnknown* languageException
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI_(void)
+ RoClearError(
+     void
+@@ -347,12 +373,14 @@ RoReportUnhandledError(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows81_
+ typedef HRESULT (WINAPI *PINSPECT_MEMORY_CALLBACK)(
+     _In_opt_ void* context,
+     UINT_PTR readAddress,
+     UINT32 length,
+     _Out_writes_(length) BYTE* buffer);
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI
+ RoInspectThreadErrorInfo(
+     _In_ UINT_PTR targetTebAddress,
+@@ -362,6 +390,7 @@ RoInspectThreadErrorInfo(
+     _Out_ UINT_PTR* targetErrorInfoAddress
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ STDAPI
+ RoInspectCapturedStackBackTrace(
+     _In_ UINT_PTR targetErrorInfoAddress,
+@@ -384,6 +413,8 @@ RoReportFailedDelegate(
+     _In_ IRestrictedErrorInfo* pRestrictedErrorInfo
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ STDAPI_(BOOL)
+ IsErrorPropagationEnabled(
+     void

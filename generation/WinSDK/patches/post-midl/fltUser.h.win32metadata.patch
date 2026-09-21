@@ -1,0 +1,87 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fltUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/fltUser.h
+index f555a8a442..627f87d0e5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fltUser.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fltUser.h
+@@ -18,6 +18,7 @@ Environment:
+ --*/
+ #ifndef __FLTUSER_H__
+ #define __FLTUSER_H__
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -144,7 +145,7 @@ HRESULT
+ WINAPI
+ FilterCreate (
+     _In_ LPCWSTR lpFilterName,
+-    _Outptr_ HFILTER *hFilter
++    _Win32_RAIIFree_(FilterClose, -1) _Outptr_ HFILTER *hFilter
+     );
+ 
+ HRESULT
+@@ -164,7 +165,7 @@ FilterInstanceCreate (
+     _In_ LPCWSTR lpFilterName,
+     _In_ LPCWSTR lpVolumeName,
+     _In_opt_ LPCWSTR lpInstanceName,
+-   _Outptr_ HFILTER_INSTANCE *hInstance
++   _Win32_RAIIFree_(FilterInstanceClose, -1) _Outptr_ HFILTER_INSTANCE *hInstance
+     );
+ 
+ HRESULT
+@@ -233,7 +234,7 @@ FilterFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpFilterFind
++    _Win32_RAIIFree_(FilterFindClose, -1) _Out_ LPHANDLE lpFilterFind
+     );
+ 
+ _Must_inspect_result_
+@@ -263,7 +264,7 @@ FilterVolumeFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ PHANDLE lpVolumeFind
++    _Win32_RAIIFree_(FilterVolumeFindClose, -1) _Out_ PHANDLE lpVolumeFind
+     );
+ 
+ _Must_inspect_result_
+@@ -296,7 +297,7 @@ FilterInstanceFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpFilterInstanceFind
++    _Win32_RAIIFree_(FilterInstanceFindClose, -1) _Out_ LPHANDLE lpFilterInstanceFind
+     );
+ 
+ _Must_inspect_result_
+@@ -331,7 +332,7 @@ FilterVolumeInstanceFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpVolumeInstanceFind
++    _Win32_RAIIFree_(FilterVolumeInstanceFindClose, -1) _Out_ LPHANDLE lpVolumeInstanceFind
+     );
+ 
+ _Must_inspect_result_
+@@ -394,7 +395,7 @@ FilterConnectCommunicationPort (
+     _In_reads_bytes_opt_(wSizeOfContext) LPCVOID lpContext,
+     _In_ WORD wSizeOfContext,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Outptr_ HANDLE *hPort
++    _Win32_RAIIFree_(CloseHandle, -1) _Outptr_ HANDLE *hPort
+     );
+ 
+ #if FLT_MGR_WINBLUE
+@@ -425,9 +426,9 @@ HRESULT
+ WINAPI
+ FilterGetMessage (
+     _In_ HANDLE hPort,
+-    _Out_writes_bytes_(dwMessageBufferSize) PFILTER_MESSAGE_HEADER lpMessageBuffer,
++    _Win32_Retained_ _Out_writes_bytes_(dwMessageBufferSize) PFILTER_MESSAGE_HEADER lpMessageBuffer,
+     _In_ DWORD dwMessageBufferSize,
+-    _Inout_opt_ LPOVERLAPPED lpOverlapped
++    _Win32_Retained_ _Inout_opt_ LPOVERLAPPED lpOverlapped
+     );
+ 
+ _Must_inspect_result_

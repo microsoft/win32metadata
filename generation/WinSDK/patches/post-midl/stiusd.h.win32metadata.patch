@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
+index 61e233670b..cd711edbd5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #ifndef _STIUSD_
+ #define _STIUSD_
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -187,7 +188,7 @@ DECLARE_INTERFACE_(IStiUSD, IUnknown)
+     STDMETHOD(RawWriteData)(THIS_ _In_reads_bytes_(nNumberOfBytes) LPVOID lpBuffer, DWORD nNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+     STDMETHOD(RawReadCommand)(THIS_ _Out_writes_bytes_(*lpdwNumberOfBytes) LPVOID lpBuffer, _Inout_ LPDWORD lpdwNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+     STDMETHOD(RawWriteCommand)(THIS_ _In_reads_bytes_(nNumberOfBytes) LPVOID lpBuffer, DWORD nNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(SetNotificationHandle)(THIS_ _In_opt_ HANDLE hEvent) PURE;
++    STDMETHOD(SetNotificationHandle)(THIS_ _Win32_Retained_ _In_opt_ HANDLE hEvent) PURE;
+     STDMETHOD(GetNotificationData)(THIS_ _Out_ LPSTINOTIFY lpNotify) PURE;
+     STDMETHOD(GetLastErrorInfo) (THIS_ _Out_ STI_ERROR_INFO *pLastErrorInfo) PURE;
+ } ;
