@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
+@@ -23,6 +23,7 @@
+ #endif // #ifndef _D2D1_SVG_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+@@ -223,7 +224,7 @@ typedef enum D2D1_PATCH_EDGE_MODE
+ /// the GradientMeshPatch function or the GradientMeshPatchFromCoonsPatch function
+ /// to create one.
+ /// </summary>
+-typedef struct D2D1_GRADIENT_MESH_PATCH
++typedef struct _Windows_SupportedOS_Server2016_ D2D1_GRADIENT_MESH_PATCH
+ {
+     
+     /// <summary>
+@@ -1933,7 +1934,7 @@ extern "C"
+ 
+ #if NTDDI_VERSION >= NTDDI_WINTHRESHOLD
+     void WINAPI 
+-    D2D1GetGradientMeshInteriorPointsFromCoonsPatch(
++    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ D2D1GetGradientMeshInteriorPointsFromCoonsPatch(
+         _In_ CONST D2D1_POINT_2F *pPoint0,
+         _In_ CONST D2D1_POINT_2F *pPoint1,
+         _In_ CONST D2D1_POINT_2F *pPoint2,
