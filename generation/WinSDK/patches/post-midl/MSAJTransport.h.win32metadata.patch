@@ -1,0 +1,86 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAJTransport.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAJTransport.h
+index 5955f6fafe..18692666eb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAJTransport.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAJTransport.h
+@@ -6,6 +6,7 @@
+ 
+ #ifndef _MSAJ_TRANSPORT_API_H
+ #define _MSAJ_TRANSPORT_API_H
++#include <win32metadata_annotations.h>
+ 
+ #ifdef _MSC_VER 
+ #pragma once 
+@@ -22,16 +23,26 @@ extern "C" {
+ 
+ #define ALLJOYN_NAMED_PIPE_CONNECT_SPEC     L"npipe:"
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
++_Win32_RAIIFree_(AllJoynCloseBusHandle)
+ HANDLE
+ WINAPI
+ AllJoynConnectToBus(
+     _In_opt_ PCWSTR connectionSpec);
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
+ BOOL
+ WINAPI
+ AllJoynCloseBusHandle(
+     _In_ HANDLE busHandle);
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
+ BOOL
+ WINAPI 
+ AllJoynSendToBus(
+@@ -41,6 +52,9 @@ AllJoynSendToBus(
+     _Out_opt_ PDWORD bytesTransferred,
+     _Inout_ PVOID reserved);
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
+ BOOL
+ WINAPI 
+ AllJoynReceiveFromBus(
+@@ -55,6 +69,9 @@ AllJoynReceiveFromBus(
+ #define ALLJOYN_WRITE_READY     0x2
+ #define ALLJOYN_DISCONNECTED    0x4
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
+ BOOL
+ WINAPI 
+ AllJoynEventSelect(
+@@ -62,6 +79,9 @@ AllJoynEventSelect(
+     _In_ HANDLE eventHandle,
+     _In_ DWORD eventTypes);
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("MSAJApi.dll")
+ BOOL
+ WINAPI 
+ AllJoynEnumEvents(
+@@ -76,6 +96,8 @@ AllJoynEnumEvents(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_ImportLibrary_("MSAJApi.dll")
++_Win32_RAIIFree_(AllJoynCloseBusHandle)
+ HANDLE
+ WINAPI
+ AllJoynCreateBus(
+@@ -83,6 +105,7 @@ AllJoynCreateBus(
+     _In_ DWORD inBufferSize,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes);
+ 
++_Win32_ImportLibrary_("MSAJApi.dll")
+ DWORD
+ WINAPI
+ AllJoynAcceptBusConnection(

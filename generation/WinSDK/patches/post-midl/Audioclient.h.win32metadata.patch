@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
+index e93bcfd8..2eb3dcd3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
+@@ -171,6 +171,7 @@ typedef interface IAcousticEchoCancellationControl IAcousticEchoCancellationCont
+ #include "unknwn.h"
+ #include "mmreg.h"
+ #include "AudioSessionTypes.h"
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C"{
+@@ -274,6 +275,7 @@ EXTERN_C const IID IID_IAudioClient;
+             /* [annotation][out] */ 
+             _Out_  UINT32 *pNumPaddingFrames) = 0;
+         
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE IsFormatSupported( 
+             /* [annotation][in] */ 
+             _In_  AUDCLNT_SHAREMODE ShareMode,
+@@ -306,7 +308,7 @@ EXTERN_C const IID IID_IAudioClient;
+             /* [annotation][in] */ 
+             _In_  REFIID riid,
+             /* [annotation][iid_is][out] */ 
+-            _Out_  void **ppv) = 0;
++            _COM_Outptr_  void **ppv) = 0;
+         
+     };
+     
+@@ -2891,4 +2893,3 @@ extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0017_v0_0_s_ifspec;
+ 
+ #endif
+ 
+-
