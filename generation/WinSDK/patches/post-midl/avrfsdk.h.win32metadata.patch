@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
+@@ -24,6 +24,7 @@ Revision History:
+ #ifndef _AVRFSDK_
+ #define _AVRFSDK_
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -40,7 +41,7 @@ extern "C" {
+ 
+ #define AVRF_MAX_TRACES 32
+ 
+-typedef struct _AVRF_BACKTRACE_INFORMATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_BACKTRACE_INFORMATION {
+     ULONG   Depth;
+     ULONG   Index;
+     ULONG64 ReturnAddresses[AVRF_MAX_TRACES];
+@@ -64,7 +65,7 @@ enum eHeapEnumerationLevel {
+     HeapEnumerationStop = 0xFFFFFFFF,
+ };
+ 
+-typedef struct _AVRF_HEAP_ALLOCATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_HEAP_ALLOCATION {
+     ULONG64 HeapHandle;
+     ULONG64 UserAllocation;    
+     ULONG64 UserAllocationSize;
+@@ -84,7 +85,7 @@ enum eHANDLE_TRACE_OPERATIONS {
+     OperationDbBADREF
+ };
+ 
+-typedef struct _AVRF_HANDLE_OPERATION {
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_HANDLE_OPERATION {
+     ULONG64 Handle;
+     ULONG  ProcessId;
+     ULONG  ThreadId;
