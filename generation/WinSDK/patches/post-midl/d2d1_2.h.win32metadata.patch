@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
+@@ -20,6 +20,7 @@
+ #endif // #ifndef _D2D1_EFFECTS_1_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+@@ -36,7 +37,7 @@ typedef interface ID2D1Device1 ID2D1Device1;
+ /// <summary>
+ /// Specifies the extent to which D2D will throttle work sent to the GPU.
+ /// </summary>
+-typedef enum D2D1_RENDERING_PRIORITY
++typedef enum _Windows_SupportedOS_Windows81_ D2D1_RENDERING_PRIORITY
+ {
+     D2D1_RENDERING_PRIORITY_NORMAL = 0,
+     D2D1_RENDERING_PRIORITY_LOW = 1,
+@@ -187,7 +188,7 @@ extern "C"
+ 
+ #if NTDDI_VERSION >= NTDDI_WINBLUE
+     FLOAT WINAPI 
+-    D2D1ComputeMaximumScaleFactor(
++    _Windows_SupportedOS_Windows81_ D2D1ComputeMaximumScaleFactor(
+         _In_ CONST D2D1_MATRIX_3X2_F *matrix
+         ); 
+ #endif // #if NTDDI_VERSION >= NTDDI_WINBLUE
