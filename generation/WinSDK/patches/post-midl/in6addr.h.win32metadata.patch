@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/in6addr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/in6addr.h
+index df2902cb6c..410118c21a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/in6addr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/in6addr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation
+@@ -22,7 +23,7 @@ Environment:
+ // IPv6 Internet address (RFC 2553)
+ // This is an 'on-wire' format structure.
+ //
+-typedef struct in6_addr {
++typedef struct _Windows_SupportedOS_WindowsVista_ in6_addr {
+     union {
+         UCHAR       Byte[16];
+         USHORT      Word[8];

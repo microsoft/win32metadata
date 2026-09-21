@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tabflicks.h b/generation/WinSDK/RecompiledIdlHeaders/um/tabflicks.h
+index d4e7263bc3..22c16c7121 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tabflicks.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tabflicks.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+@@ -11,7 +12,7 @@
+ #define FLICK_WM_HANDLED_MASK 0x1
+ #define NUM_FLICK_DIRECTIONS 8
+ 
+-typedef enum FLICKDIRECTION
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ FLICKDIRECTION
+ {
+     FLICKDIRECTION_MIN = 0,
+     FLICKDIRECTION_RIGHT = 0,
+@@ -25,7 +26,7 @@ typedef enum FLICKDIRECTION
+     FLICKDIRECTION_INVALID = 8,
+ }FLICKDIRECTION;
+ 
+-typedef enum FLICKMODE
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ FLICKMODE
+ {
+     FLICKMODE_MIN = 0,
+     FLICKMODE_OFF = 0,
+@@ -35,7 +36,7 @@ typedef enum FLICKMODE
+     FLICKMODE_DEFAULT = 1,
+ }FLICKMODE;
+ 
+-typedef enum FLICKACTION_COMMANDCODE
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ FLICKACTION_COMMANDCODE
+ {
+     FLICKACTION_COMMANDCODE_NULL = 0,
+     FLICKACTION_COMMANDCODE_SCROLL = 1,
+@@ -44,13 +45,13 @@ typedef enum FLICKACTION_COMMANDCODE
+     FLICKACTION_COMMANDCODE_KEYMODIFIER = 4,
+ }FLICKACTION_COMMANDCODE;
+ 
+-typedef struct FLICK_POINT
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ FLICK_POINT
+ {
+     INT x:16;
+     INT y:16;
+ }FLICK_POINT;
+ 
+-typedef struct FLICK_DATA
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ FLICK_DATA
+ {
+     FLICKACTION_COMMANDCODE iFlickActionCommandCode:5;
+     FLICKDIRECTION iFlickDirection:3;
+@@ -64,13 +65,13 @@ typedef struct FLICK_DATA
+     INT  iActionArgument:16;
+ }FLICK_DATA;
+ 
+-typedef enum SCROLLDIRECTION
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SCROLLDIRECTION
+ {
+     SCROLLDIRECTION_UP = 0,
+     SCROLLDIRECTION_DOWN = 1,
+ }SCROLLDIRECTION;
+ 
+-typedef enum KEYMODIFIER
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ KEYMODIFIER
+ {
+     KEYMODIFIER_CONTROL = 1,
+     KEYMODIFIER_MENU = 2,

@@ -1,0 +1,47 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
+index 294f7aebb4..1f99b96146 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ 
+ Copyright (c) 1985-1999, Microsoft Corporation
+ All rights reserved
+@@ -25,6 +26,7 @@ typedef int (CALLBACK* EMFPLAYPROC)( HDC, INT, HANDLE );
+ 
+ #define  EMF_PP_COLOR_OPTIMIZATION  0x01
+ 
++_Win32_RAIIFree_(GdiDeleteSpoolFileHandle, 0)
+ HANDLE WINAPI GdiGetSpoolFileHandle(
+     LPWSTR     pwszPrinterName,
+     LPDEVMODEW pDevmode,
+@@ -44,13 +46,16 @@ HANDLE WINAPI GdiGetPageHandle(
+     DWORD      Page,
+     LPDWORD    pdwPageType);
+ 
++_Win32_SetLastError_
+ BOOL WINAPI GdiStartDocEMF(
+     HANDLE     SpoolFileHandle,
+     DOCINFOW   *pDocInfo);
+ 
++_Win32_SetLastError_
+ BOOL WINAPI GdiStartPageEMF(
+     HANDLE     SpoolFileHandle);
+ 
++_Win32_SetLastError_
+ BOOL WINAPI GdiPlayPageEMF(
+     HANDLE     SpoolFileHandle,
+     HANDLE     hemf,
+@@ -58,10 +63,12 @@ BOOL WINAPI GdiPlayPageEMF(
+     RECT       *prectBorder,
+     RECT       *prectClip);
+ 
++_Win32_SetLastError_
+ BOOL WINAPI GdiEndPageEMF(
+     HANDLE     SpoolFileHandle,
+     DWORD      dwOptimization);
+ 
++_Win32_SetLastError_
+ BOOL WINAPI GdiEndDocEMF(
+     HANDLE     SpoolFileHandle);
+ 
