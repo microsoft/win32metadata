@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlclient.h
+index a317c1d81e..f7120e40aa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wlclient.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlclient.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2001 Microsoft Corporation
+@@ -43,7 +44,7 @@ extern "C" {
+ 
+ 
+ 
+-typedef struct _DOT11_ADAPTER {
++typedef struct _Windows_SupportedOS_WindowsVista_ _DOT11_ADAPTER {
+     GUID gAdapterId;
+ #ifdef __midl
+     [string] LPWSTR pszDescription;
+@@ -57,7 +58,7 @@ typedef struct _DOT11_ADAPTER {
+ 
+ 
+ 
+-typedef struct _DOT11_BSS_LIST {
++typedef struct _Windows_SupportedOS_WindowsVista_ _DOT11_BSS_LIST {
+     ULONG uNumOfBytes;
+ #ifdef __midl
+     [size_is(uNumOfBytes)] PUCHAR pucBuffer;
+@@ -70,7 +71,7 @@ typedef struct _DOT11_BSS_LIST {
+ 
+ 
+ 
+-typedef struct _DOT11_PORT_STATE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _DOT11_PORT_STATE {
+     DOT11_MAC_ADDRESS PeerMacAddress;   // Unicast mac address of the peer
+     ULONG uSessionId;
+     BOOL bPortControlled;               // TRUE, if the port is controlled by Security Module
+@@ -81,7 +82,7 @@ typedef struct _DOT11_PORT_STATE {
+ 
+ 
+ #include <packon.h>
+-typedef struct _DOT11_SECURITY_PACKET_HEADER {
++typedef struct _Windows_SupportedOS_WindowsVista_ _DOT11_SECURITY_PACKET_HEADER {
+     DOT11_MAC_ADDRESS PeerMac;
+     USHORT usEtherType;
+     UCHAR Data[1];
