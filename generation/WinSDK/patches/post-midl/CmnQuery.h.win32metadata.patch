@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
+index 6693116ef1..e47e5e76d2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
+@@ -2,6 +2,7 @@
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifndef __cmnquery_h
+ #define __cmnquery_h
+@@ -59,7 +60,7 @@ DEFINE_GUID(IID_ICommonQuery, 0xab50dec0, 0x6f1d, 0x11d0, 0xa1, 0xc4, 0x0, 0xaa,
+ #define CQFF_NOGLOBALPAGES  0x0000001       // = 1 => doesn't have global pages added
+ #define CQFF_ISOPTIONAL     0x0000002       // = 1 => form is hidden, unless optional forms requested
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD   cbStruct;
+     DWORD   dwFlags;
+@@ -84,7 +85,7 @@ typedef struct _cqpage CQPAGE, * LPCQPAGE;
+ typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, LPCQPAGE pPage);
+ typedef HRESULT (CALLBACK *LPCQPAGEPROC)(LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+ 
+-struct _cqpage
++struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _cqpage
+ {
+     DWORD        cbStruct;
+     DWORD        dwFlags;
+@@ -112,8 +113,14 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // IQueryForm methods
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(Initialize)(THIS_ HKEY hkForm) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(AddForms)(THIS_ LPCQADDFORMSPROC pAddFormsProc, LPARAM lParam) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(AddPages)(THIS_ LPCQADDPAGESPROC pAddPagesProc, LPARAM lParam) PURE;
+ };
+ 
+@@ -153,12 +160,26 @@ DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c90
+     STDMETHOD(GetClassID)(THIS_ CLSID* pClassID) PURE;
+ 
+     // IPersistQuery
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(WriteString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPCWSTR pValue) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(ReadString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _Out_ LPWSTR pBuffer, INT cchBuffer) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(WriteInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, INT value) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPINT pValue) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(Clear)(THIS) PURE;
+ };
+ 
+@@ -181,7 +202,7 @@ DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c90
+ 
+ #define OQWF_PARAMISPROPERTYBAG     0x80000000 // = 1 => the form parameters ptr is an IPropertyBag (ppbFormParameters)
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD           cbStruct;                   // structure size
+     DWORD           dwFlags;                    // flags (OQFW_*)
+@@ -210,6 +231,8 @@ DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c1
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // ICommonQuery methods
++    _Windows_SupportedOS_WindowsVista_
++    _Windows_SupportedOS_Server2008_
+     STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
+ };
+ 

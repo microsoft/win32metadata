@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h b/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
-index 06becd48a96edd922258ad997e5d8a37b6f15aec..21abc03773b9606e1dc4f1afea80a7b2cc4d5081 100644
+index 06becd48a9..40fa9dacaa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Schedule.h
 @@ -21,6 +21,7 @@ Abstract:
@@ -19,3 +19,12 @@ index 06becd48a96edd922258ad997e5d8a37b6f15aec..21abc03773b9606e1dc4f1afea80a7b2
      ULONG   Type;       // one of the SCHEDULE_ ordinals
      ULONG   Offset;     // offset from start of schedule structure
  } SCHEDULE_HEADER, *PSCHEDULE_HEADER;
+@@ -64,7 +65,7 @@ typedef struct _SCHEDULE_HEADER {
+ //
+ // Schedule
+ //
+-typedef struct _SCHEDULE {
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _SCHEDULE {
+     ULONG           Size;           // inclusive size in bytes
+     ULONG           Bandwidth;
+     ULONG           NumberOfSchedules;

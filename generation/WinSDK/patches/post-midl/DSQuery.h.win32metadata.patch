@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
+index 389157d1ec..cac769259e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
+@@ -5,6 +5,7 @@
+ #define __dsquery_h
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -53,7 +54,7 @@ DEFINE_GUID(CLSID_DsFindFrsMembers, 0x94ce4b18, 0xb3d3, 0x11d1, 0xb9, 0xb4, 0x0,
+ #define DSQPF_HASCREDENTIALS         0x00000020 // = 1 => pServer, pUserName & pPassword are valid
+ #define DSQPF_NOCHOOSECOLUMNS        0x00000040 // = 1 => remove choose columns from view
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD  cbStruct;
+     DWORD  dwFlags;
+@@ -77,7 +78,7 @@ typedef struct
+ #define DSCOLUMNPROP_ADSPATH        ((LONG)(-1))
+ #define DSCOLUMNPROP_OBJECTCLASS    ((LONG)(-2))
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD dwFlags;                  // flags for this column
+     INT   fmt;                      // list view form information
+@@ -87,7 +88,7 @@ typedef struct
+     DWORD dwReserved;               // reserved field
+ } DSCOLUMN, * LPDSCOLUMN;
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD     cbStruct;
+     DWORD     dwFlags;
+@@ -116,7 +117,7 @@ typedef struct
+ //  and the property well to build its list of display classes.
+ //
+ 
+-typedef struct
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+ {
+     DWORD   cbStruct;
+     LONG    cClasses;               // number of classes in array

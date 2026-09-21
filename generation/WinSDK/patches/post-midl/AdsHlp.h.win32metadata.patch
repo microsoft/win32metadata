@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
-index 65686c67b9e17a84fd3a05a7a6301706db159301..658532c7528913034925d61b7fbdde0121574b50 100644
+index 65686c67b9..f8bf365e84 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
 @@ -1,4 +1,5 @@
@@ -17,7 +17,7 @@ index 65686c67b9e17a84fd3a05a7a6301706db159301..658532c7528913034925d61b7fbdde01
  HRESULT WINAPI
  ADsGetObject(
      LPCWSTR lpszPathName,
-@@ -32,12 +35,16 @@ ADsGetObject(
+@@ -32,17 +35,23 @@ ADsGetObject(
      );
  
  
@@ -34,3 +34,143 @@ index 65686c67b9e17a84fd3a05a7a6301706db159301..658532c7528913034925d61b7fbdde01
  HRESULT WINAPI
  ADsFreeEnumerator(
      IEnumVARIANT *pEnumVariant
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsEnumerateNext(
+     IEnumVARIANT *pEnumVariant,
+@@ -51,6 +60,8 @@ ADsEnumerateNext(
+     ULONG FAR    *pcElementsFetched
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsBuildVarArrayStr(
+     _In_reads_(dwPathNames) LPWSTR * lppPathNames,
+@@ -58,6 +69,8 @@ ADsBuildVarArrayStr(
+     VARIANT * pVar
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsBuildVarArrayInt(
+     LPDWORD    lpdwObjectTypes,
+@@ -66,6 +79,8 @@ ADsBuildVarArrayInt(
+     );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsOpenObject(
+     LPCWSTR lpszPathName,
+@@ -80,6 +95,8 @@ ADsOpenObject(
+ // Helper functions for extended error support
+ //
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsGetLastError(
+     OUT     LPDWORD lpError,
+@@ -89,6 +106,8 @@ ADsGetLastError(
+     IN      DWORD   dwNameBufLen
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ VOID WINAPI
+ ADsSetLastError(
+     IN  DWORD   dwErr,
+@@ -101,16 +120,24 @@ VOID WINAPI
+ ADsFreeAllErrorRecords(
+     VOID);
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_RAIIFree_(FreeADsMem, 0)
+ LPVOID WINAPI
+ AllocADsMem(
+     DWORD cb
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ BOOL WINAPI
+ FreeADsMem(
+    LPVOID pMem
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_RAIIFree_(FreeADsMem, 0)
+ LPVOID WINAPI
+ ReallocADsMem(
+    LPVOID pOldMem,
+@@ -118,17 +145,24 @@ ReallocADsMem(
+    DWORD cbNew
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
++_Win32_RAIIFree_(FreeADsStr, 0)
+ LPWSTR WINAPI
+ AllocADsStr(
+     LPCWSTR pStr
+ );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ BOOL WINAPI
+ FreeADsStr(
+    _In_ LPWSTR pStr
+ );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ BOOL WINAPI
+ ReallocADsStr(
+    _Inout_ LPWSTR *ppStr,
+@@ -136,11 +170,13 @@ ReallocADsStr(
+ );
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ ADsEncodeBinaryData (
+    PBYTE   pbSrcData,
+    DWORD   dwSrcLen,
+-   _Outptr_ LPWSTR  * ppszDestData
++   _Outptr_ _Win32_RAIIFree_(FreeADsMem) LPWSTR  * ppszDestData
+    );
+ 
+ HRESULT WINAPI
+@@ -176,6 +212,8 @@ AdsFreeAdsValues(
+ // security descriptor and also to convert a binary SD to 
+ // IADsSecurityDescriptor.
+ //
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ BinarySDToSecurityDescriptor(
+     PSECURITY_DESCRIPTOR  pSecurityDescriptor,
+@@ -186,10 +224,12 @@ BinarySDToSecurityDescriptor(
+     DWORD dwFlags
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Windows_SupportedOS_Server2008_
+ HRESULT WINAPI
+ SecurityDescriptorToBinarySD(
+     VARIANT vVarSecDes,
+-    PSECURITY_DESCRIPTOR * ppSecurityDescriptor,
++    _Win32_RAIIFree_(FreeADsMem) PSECURITY_DESCRIPTOR * ppSecurityDescriptor,
+     PDWORD pdwSDLength,
+     LPCWSTR pszServerName,
+     LPCWSTR userName,
