@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h b/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
+index f9cfcd2508..ec3c324d2f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
+@@ -25,6 +25,7 @@ Revision History:
+ #ifndef _MXDC_H_
+ #define _MXDC_H_
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -161,7 +162,7 @@ typedef enum tagMxdcS0PageEnums
+ typedef struct tagMxdcXpsS0PageResource
+ {
+     DWORD dwSize;                /* Size of the structue and data        */
+-    DWORD dwResourceType;        /* Resource Type, "MXDC_S0_PAGE_ENUMS"  */
++    _Win32_AssociatedEnum_(MXDC_S0_PAGE_ENUMS) DWORD dwResourceType;        /* Resource Type, "MXDC_S0_PAGE_ENUMS"  */
+     BYTE  szUri[MAX_PATH];       /* URI sting of the resource            */
+     DWORD dwDataSize;            /* The resource's data byte size        */
+     BYTE  bData[1];              /* The resource's data                  */

@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
+index c3e0a26832..467bba5006 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
+@@ -28,6 +28,7 @@
+ #define _INC_CPL 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -53,11 +54,13 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ /* A function prototype for CPlApplet() */
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2000_
+ typedef LONG (APIENTRY *APPLET_PROC)(HWND hwndCpl, UINT msg, LPARAM lParam1, LPARAM lParam2);
+ 
+ /* The data structure CPlApplet() must fill in. */
+ 
+-typedef struct tagCPLINFO
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagCPLINFO
+ {
+     int         idIcon;     /* icon resource id, provided by CPlApplet() */
+     int         idName;     /* display name string resource id, provided by CPlApplet() */
+@@ -65,7 +68,7 @@ typedef struct tagCPLINFO
+     LONG_PTR    lData;      /* user defined data */
+ } CPLINFO, *LPCPLINFO;
+ 
+-typedef struct tagNEWCPLINFOA
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagNEWCPLINFOA
+ {
+     DWORD   dwSize;         /* size, in bytes, of the structure */
+     DWORD   dwFlags;
+@@ -76,7 +79,7 @@ typedef struct tagNEWCPLINFOA
+     CHAR    szInfo[64];     /* description/tooltip/status bar string */
+     CHAR    szHelpFile[128];/* path to help file to use */
+ } NEWCPLINFOA, *LPNEWCPLINFOA;
+-typedef struct tagNEWCPLINFOW
++typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagNEWCPLINFOW
+ {
+     DWORD   dwSize;         /* size, in bytes, of the structure */
+     DWORD   dwFlags;

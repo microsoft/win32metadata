@@ -1,0 +1,129 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ndattrib.h b/generation/WinSDK/RecompiledIdlHeaders/um/ndattrib.h
+index 638fb8ba16..bfe302269a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ndattrib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ndattrib.h
+@@ -61,6 +61,7 @@ extern "C"{
+ //
+ //---------------------------------------------------------------------------
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if ( _MSC_VER >= 800 )
+@@ -114,7 +115,7 @@ extern "C"{
+ //
+ #define NDF_E_PROBLEM_PRESENT                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WINDOWS, NDF_ERROR_START + 8)
+ typedef /* [v1_enum] */ 
+-enum tagATTRIBUTE_TYPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagATTRIBUTE_TYPE
+     {
+         AT_INVALID	= 0,
+         AT_BOOLEAN	= ( AT_INVALID + 1 ) ,
+@@ -133,7 +134,7 @@ enum tagATTRIBUTE_TYPE
+         AT_OCTET_STRING	= ( AT_SOCKADDR + 1 ) 
+     } 	ATTRIBUTE_TYPE;
+ 
+-typedef struct tagOCTET_STRING
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagOCTET_STRING
+     {
+     DWORD dwLength;
+     /* [size_is] */ BYTE *lpValue;
+@@ -141,7 +142,7 @@ typedef struct tagOCTET_STRING
+ 
+ typedef struct tagOCTET_STRING *POCTET_STRING;
+ 
+-typedef struct tagLIFE_TIME
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagLIFE_TIME
+     {
+     FILETIME startTime;
+     FILETIME endTime;
+@@ -149,7 +150,7 @@ typedef struct tagLIFE_TIME
+ 
+ typedef struct tagLIFE_TIME *PLIFE_TIME;
+ 
+-typedef struct tagSOCK_ADDR
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSOCK_ADDR
+     {
+     USHORT family;
+     CHAR data[ 126 ];
+@@ -157,7 +158,7 @@ typedef struct tagSOCK_ADDR
+ 
+ typedef struct tagSOCK_ADDR *PDIAG_SOCK_ADDR;
+ 
+-typedef struct tagHELPER_ATTRIBUTE
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagHELPER_ATTRIBUTE
+     {
+     /* [string][max_is] */ LPWSTR pwszName;
+     ATTRIBUTE_TYPE type;
+@@ -183,7 +184,7 @@ typedef struct tagHELPER_ATTRIBUTE
+ typedef struct tagHELPER_ATTRIBUTE *PHELPER_ATTRIBUTE;
+ 
+ typedef /* [v1_enum] */ 
+-enum tagREPAIR_SCOPE
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagREPAIR_SCOPE
+     {
+         RS_SYSTEM	= 0,
+         RS_USER	= ( RS_SYSTEM + 1 ) ,
+@@ -194,7 +195,7 @@ enum tagREPAIR_SCOPE
+ typedef /* [v1_enum] */ enum tagREPAIR_SCOPE *PREPAIR_SCOPE;
+ 
+ typedef /* [public][public][public][public][public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_ndattrib_0000_0000_0002
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ __MIDL___MIDL_itf_ndattrib_0000_0000_0002
+     {
+         RR_NOROLLBACK	= 0,
+         RR_ROLLBACK	= ( RR_NOROLLBACK + 1 ) ,
+@@ -202,7 +203,7 @@ enum __MIDL___MIDL_itf_ndattrib_0000_0000_0002
+     } 	REPAIR_RISK;
+ 
+ typedef /* [public][public][public][public][public][public][public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_ndattrib_0000_0000_0003
++enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ __MIDL___MIDL_itf_ndattrib_0000_0000_0003
+     {
+         UIT_INVALID	= 0,
+         UIT_NONE	= 1,
+@@ -211,7 +212,7 @@ enum __MIDL___MIDL_itf_ndattrib_0000_0000_0003
+         UIT_DUI	= ( UIT_HELP_PANE + 1 ) 
+     } 	UI_INFO_TYPE;
+ 
+-typedef struct tagShellCommandInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagShellCommandInfo
+     {
+     /* [string] */ LPWSTR pwszOperation;
+     /* [string] */ LPWSTR pwszFile;
+@@ -222,7 +223,7 @@ typedef struct tagShellCommandInfo
+ 
+ typedef struct tagShellCommandInfo *PShellCommandInfo;
+ 
+-typedef struct tagUiInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagUiInfo
+     {
+     UI_INFO_TYPE type;
+     /* [switch_is][switch_type] */ union 
+@@ -249,7 +250,7 @@ typedef struct tagUiInfo *PUiInfo;
+ #define RF_RESERVED            0x40000000
+ #define RF_RESERVED_CA         0x80000000
+ #define RF_RESERVED_LNI        0x10000
+-typedef struct tagRepairInfo
++typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagRepairInfo
+     {
+     GUID guid;
+     /* [string] */ LPWSTR pwszClassName;
+@@ -265,7 +266,7 @@ typedef struct tagRepairInfo
+ 
+ typedef struct tagRepairInfo *PRepairInfo;
+ 
+-typedef struct tagRepairInfoEx
++typedef struct _Windows_SupportedOS_Windows7_ tagRepairInfoEx
+     {
+     RepairInfo repair;
+     USHORT repairRank;
+@@ -276,7 +277,7 @@ typedef struct tagRepairInfoEx *PRepairInfoEx;
+ #define RCF_ISLEAF         0x1
+ #define RCF_ISCONFIRMED    0x2
+ #define RCF_ISTHIRDPARTY   0x4
+-typedef struct tagRootCauseInfo
++typedef struct _Windows_SupportedOS_Windows7_ tagRootCauseInfo
+     {
+     /* [string] */ LPWSTR pwszDescription;
+     GUID rootCauseID;
