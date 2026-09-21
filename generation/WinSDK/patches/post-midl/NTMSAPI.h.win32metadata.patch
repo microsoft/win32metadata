@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+@@ -25,6 +25,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -92,7 +93,7 @@ typedef GUID* LPNTMS_GUID;
+ // database objects.  Do NOT modify without also modifying the object
+ // metadata table in dbobmeta.cpp
+ 
+-enum NtmsObjectsTypes {
++enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NtmsObjectsTypes {
+     NTMS_UNKNOWN                    = 0,
+     NTMS_OBJECT,
+     NTMS_CHANGER,
