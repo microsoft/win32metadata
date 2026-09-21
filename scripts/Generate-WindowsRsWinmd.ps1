@@ -11,6 +11,9 @@
 .PARAMETER OutputWinmd
     Output WinMD path.
 
+.PARAMETER Namespace
+    Root namespace for the selected partitions. Defaults to Windows.Win32.
+
 .PARAMETER SkipBuild
     Use the previously built Rust executable.
 #>
@@ -22,6 +25,9 @@ param (
     [string[]]$Architecture = @("x64", "x86", "arm64"),
 
     [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
+
+    [ValidateNotNullOrEmpty()]
+    [string]$Namespace = "Windows.Win32",
 
     [switch]$SkipBuild
 )
@@ -71,6 +77,7 @@ $arguments = @(
     "--include", $localIncludes,
     "--include", $headerRoot,
     "--lib", $sdkLibRoot,
+    "--namespace", $Namespace,
     "--output", $outputPath,
     "--obj", $objDir
 )

@@ -39,6 +39,8 @@
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows5.1.2600")
 #define _Windows_SupportedOS_WindowsVista_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.0.6000")
+#define _Windows_SupportedOS_WindowsVistaSP1_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.0.6001")
 #define _Windows_SupportedOS_Windows7_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows6.1")
 #define _Windows_SupportedOS_Windows8_ \
@@ -63,6 +65,14 @@
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.18362")
 #define _Windows_SupportedOS_19041_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.19041")
+#define _Windows_SupportedOS_19041_662_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.19041.662")
+#define _Windows_SupportedOS_20348_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.20348")
+#define _Windows_SupportedOS_22631_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.22631")
+#define _Windows_SupportedOS_26100_ \
+    _WIN32META_ANNOTATION_("win32metadata:supported_os=windows10.0.26100")
 #define _Windows_SupportedOS_Server2000_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windowsserver2000")
 #define _Windows_SupportedOS_Server2003_ \

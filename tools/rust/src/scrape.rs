@@ -37,7 +37,8 @@ const DEFAULT_SCOPES: [&str; 2] = ["shared", "um"];
 
 /// SDK include-root layout. A `--include` directory containing any of these is expanded
 /// into them, so the SDK root can be named once.
-const SDK_INCLUDE_SUBDIRS: [&str; 4] = ["shared", "um", "ucrt", "winrt"];
+const SDK_INCLUDE_SUBDIRS: [&[&str]; 5] =
+    [&["shared"], &["um"], &["um", "cpdk"], &["ucrt"], &["winrt"]];
 
 #[derive(Default, Debug)]
 pub struct Options {
@@ -48,6 +49,8 @@ pub struct Options {
     archs: Vec<String>,
     scopes: Vec<String>,
     scope_headers: Vec<String>,
+    symbols: Vec<String>,
+    constants: Vec<String>,
     namespace: Option<String>,
     assembly_name: Option<String>,
     assembly_version: Option<[u16; 4]>,
@@ -80,6 +83,8 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--arch" => options.archs.push(args.value(&option)?),
             "--scope" => options.scopes.push(args.value(&option)?),
             "--scope-header" => options.scope_headers.push(args.value(&option)?),
+            "--symbol" => options.symbols.push(args.value(&option)?),
+            "--constant" => options.constants.push(args.value(&option)?),
             "--namespace" => set_once(&mut options.namespace, args.value(&option)?, &option)?,
             "--assembly-name" => {
                 set_once(&mut options.assembly_name, args.value(&option)?, &option)?
@@ -126,6 +131,10 @@ fn validate(options: &Options) -> Result<(), String> {
         return Err("at least one `--include <dir>` is required".to_string());
     }
     required(options.output.as_ref(), "--output")?;
+
+    if !options.symbols.is_empty() && !options.constants.is_empty() {
+        return Err("`--symbol` and `--constant` cannot be combined".to_string());
+    }
 
     for name in &options.archs {
         if Arch::known(name).is_none() {
@@ -208,7 +217,7 @@ fn absolutize(options: &mut Options) -> Result<(), String> {
     Ok(())
 }
 
-/// Expands an SDK include root into its `shared`/`um`/`ucrt`/`winrt` subdirectories.
+/// Expands an SDK include root into its canonical SDK subdirectories.
 ///
 /// A directory with none of them - a repository-local header directory, for example - is
 /// used as-is, so both kinds of root are named the same way on the command line.
@@ -225,7 +234,11 @@ fn include_dirs(options: &Options) -> Result<Vec<PathBuf>, String> {
 
         let expanded: Vec<PathBuf> = SDK_INCLUDE_SUBDIRS
             .iter()
-            .map(|name| include.join(name))
+            .map(|segments| {
+                segments
+                    .iter()
+                    .fold(include.clone(), |path, segment| path.join(segment))
+            })
             .filter(|path| path.is_dir())
             .collect();
 
@@ -326,6 +339,8 @@ fn build_clang(options: &Options) -> Result<Clang, String> {
     for header in &options.scope_headers {
         builder.scope_header(header);
     }
+    builder.symbols(&options.symbols);
+    builder.constants(&options.constants);
     builder.resolution_default();
     builder.namespace(namespace(options));
     Ok(builder)
@@ -528,7 +543,9 @@ pub fn help_text() -> &'static str {
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
     [--scope <path-segment>]... \\
-    [--scope-header <header>]... \\
+    [--scope-header <header>]... \
+    [--symbol <name>]... \\
+    [--constant <name>]... \\
     [--namespace <root>] \\
     [--assembly-name <name>] \\
     [--assembly-version <A.B.C.D>] \\
@@ -536,7 +553,7 @@ pub fn help_text() -> &'static str {
     [--obj <dir>]
 
   --partition   Partition translation unit to scrape. Repeatable.
-  --include     Header root. An SDK root is expanded into its shared/um/ucrt/winrt
+  --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
                 Repeatable. Without it, functions carry no import library.
@@ -546,6 +563,10 @@ pub fn help_text() -> &'static str {
                 Repeatable. Defaults to shared and um.
   --scope-header
                 Header stem whose declarations are emitted unconditionally. Repeatable.
+  --symbol      Exact source function to emit. Repeatable. When present, functions not
+                named here and unrelated declarations are omitted.
+  --constant    Exact source-owned loose constant to emit. Repeatable. When present,
+                functions, types, and unselected constants are omitted.
   --namespace   Root namespace for emitted declarations. Defaults to Windows.Win32.
   --assembly-name
                 Output assembly name. Defaults to the --output file stem.
@@ -642,6 +663,41 @@ mod tests {
     }
 
     #[test]
+    fn sdk_roots_include_cpdk_without_flattening_other_nested_directories() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-includes-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        for path in [
+            root.join("shared"),
+            root.join("um"),
+            root.join("um").join("cpdk"),
+            root.join("um").join("unrelated"),
+            root.join("ucrt"),
+            root.join("winrt"),
+        ] {
+            std::fs::create_dir_all(path).unwrap();
+        }
+
+        let options = Options {
+            includes: vec![root.clone()],
+            ..Default::default()
+        };
+        assert_eq!(
+            include_dirs(&options).unwrap(),
+            [
+                root.join("shared"),
+                root.join("um"),
+                root.join("um").join("cpdk"),
+                root.join("ucrt"),
+                root.join("winrt"),
+            ]
+        );
+        std::fs::remove_dir_all(root).ok();
+    }
+
+    #[test]
     fn repeated_single_valued_options_are_rejected() {
         let error = parse_with(&["--output", "other.winmd"]).unwrap_err();
         assert!(error.contains("only be specified once"), "{error}");
@@ -654,6 +710,10 @@ mod tests {
             "sample",
             "--scope-header",
             "SampleApi",
+            "--symbol",
+            "GetSample",
+            "--symbol",
+            "SetSample",
             "--namespace",
             "Contoso.Api",
             "--assembly-name",
@@ -664,6 +724,7 @@ mod tests {
         .unwrap();
         assert_eq!(scopes(&options), vec!["sample"]);
         assert_eq!(options.scope_headers, vec!["SampleApi"]);
+        assert_eq!(options.symbols, vec!["GetSample", "SetSample"]);
         assert_eq!(namespace(&options), "Contoso.Api");
         assert_eq!(assembly_name(&options).unwrap(), "Contoso.Metadata");
         assert_eq!(options.assembly_version, Some([1, 2, 3, 4]));
@@ -675,6 +736,22 @@ mod tests {
             let error = parse_with(&["--assembly-version", value]).unwrap_err();
             assert!(error.contains("expected A.B.C.D"), "{error}");
         }
+    }
+
+    #[test]
+    fn symbol_and_constant_selection_are_mutually_exclusive() {
+        let error =
+            parse_with(&["--symbol", "GetSample", "--constant", "ERROR_SAMPLE"]).unwrap_err();
+        assert!(
+            error.contains("`--symbol` and `--constant` cannot be combined"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    fn repeated_constants_parse() {
+        let options = parse_with(&["--constant", "ERROR_ONE", "--constant", "ERROR_TWO"]).unwrap();
+        assert_eq!(options.constants, vec!["ERROR_ONE", "ERROR_TWO"]);
     }
 
     #[test]

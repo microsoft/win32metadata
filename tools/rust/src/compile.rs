@@ -121,23 +121,38 @@ fn execute(options: &Options) -> Result<(), String> {
         }
     }
 
-    let output = options.output.as_ref().expect("validated by `parse`");
+    compile_inputs(
+        &options.inputs,
+        &options.references,
+        assembly_name(options)?,
+        options.assembly_version,
+        options.output.as_ref().expect("validated by `parse`"),
+    )
+}
+
+pub(crate) fn compile_inputs(
+    inputs: &[PathBuf],
+    references: &[PathBuf],
+    assembly_name: &str,
+    assembly_version: Option<[u16; 4]>,
+    output: &std::path::Path,
+) -> Result<(), String> {
     if let Some(parent) = output.parent() {
         std::fs::create_dir_all(parent)
             .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
     }
 
     let mut compiler = reader();
-    for input in &options.inputs {
+    for input in inputs {
         compiler.input(input);
     }
     compiler
         .input_text(windows_rdl::WIN32_METADATA_RDL)
         .reference_default()
-        .references(&options.references)
-        .assembly_name(assembly_name(options)?)
+        .references(references)
+        .assembly_name(assembly_name)
         .output(output);
-    if let Some(version) = options.assembly_version {
+    if let Some(version) = assembly_version {
         compiler.assembly_version(version);
     }
     compiler
@@ -152,7 +167,7 @@ fn execute(options: &Options) -> Result<(), String> {
     })?;
     println!(
         "Compiled {} RDL input(s) into {} metadata item(s): {}",
-        options.inputs.len(),
+        inputs.len(),
         index.iter_items().count(),
         output.display()
     );
