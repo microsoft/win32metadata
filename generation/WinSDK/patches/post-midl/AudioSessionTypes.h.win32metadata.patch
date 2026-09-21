@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioSessionTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioSessionTypes.h
+index d254998e9a..65205eff46 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioSessionTypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioSessionTypes.h
+@@ -5,6 +5,7 @@
+ //
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #ifndef __AUDIOSESSIONTYPES__                                                               
+ #define __AUDIOSESSIONTYPES__
+ 
+@@ -29,7 +30,7 @@
+ //     AUDCLNT_SHAREMODE_EXCLUSIVE - The device will be opened in exclusive mode and use the 
+ //                                   application specified format.
+ //
+-typedef enum _AUDCLNT_SHAREMODE
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _AUDCLNT_SHAREMODE
+ { 
+     AUDCLNT_SHAREMODE_SHARED, 
+     AUDCLNT_SHAREMODE_EXCLUSIVE 
+@@ -54,7 +55,7 @@ typedef enum _AUDCLNT_SHAREMODE
+ // VoiceTyping             - Dictation, typing by voice
+ // Other                   - All other streams (default)
+ //
+-typedef enum _AUDIO_STREAM_CATEGORY
++typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _AUDIO_STREAM_CATEGORY
+ {
+     AudioCategory_Other = 0,
+     AudioCategory_ForegroundOnlyMedia = 1,
+@@ -146,7 +147,7 @@ typedef enum _AUDIO_STREAM_CATEGORY
+ //      AudioSessionStateInactive - The session has no active audio streams.
+ //      AudioSessionStateActive - The session has active audio streams.
+ //      AudioSessionStateExpired - The session is dormant.
+-typedef enum _AudioSessionState
++typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _AudioSessionState
+ {
+     AudioSessionStateInactive = 0,
+     AudioSessionStateActive = 1,

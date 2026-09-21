@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
+index 76d48264e9..a0c2ba3afa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define _INC_NEWDEV
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -37,8 +38,10 @@ extern "C" {
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN2K)
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ UpdateDriverForPlugAndPlayDevicesA(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCSTR HardwareId,
+@@ -47,8 +50,10 @@ UpdateDriverForPlugAndPlayDevicesA(
+     _Out_opt_ PBOOL bRebootRequired
+     );
+ 
++_Windows_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ UpdateDriverForPlugAndPlayDevicesW(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCWSTR HardwareId,
+@@ -74,8 +79,10 @@ UpdateDriverForPlugAndPlayDevicesW(
+ #define DIIDFLAG_INSTALLCOPYINFDRIVERS  0x00000008      // Install any extra INFs specified via CopyInf directive.
+ #define DIIDFLAG_BITS                   0x0000000F
+ 
++_Windows_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiInstallDevice(
+     _In_opt_  HWND hwndParent,
+     _In_      HDEVINFO DeviceInfoSet,
+@@ -125,8 +132,10 @@ DiInstallDevice(
+ 
+ #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
+ 
++_Windows_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiInstallDriverW(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCWSTR InfPath,
+@@ -134,8 +143,10 @@ DiInstallDriverW(
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiInstallDriverA(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCSTR InfPath,
+@@ -153,8 +164,10 @@ DiInstallDriverA(
+ 
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
++_Windows_SupportedOS_Windows7_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiUninstallDevice(
+     _In_      HWND hwndParent,
+     _In_      HDEVINFO DeviceInfoSet,
+@@ -176,8 +189,10 @@ DiUninstallDevice(
+ #define DIURFLAG_VALID              (DIURFLAG_NO_REMOVE_INF |\
+                                      DIURFLAG_RESERVED      )
+ 
++_Windows_SupportedOS_15063_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiUninstallDriverW(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCWSTR InfPath,
+@@ -185,8 +200,10 @@ DiUninstallDriverW(
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
++_Windows_SupportedOS_15063_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiUninstallDriverA(
+     _In_opt_  HWND hwndParent,
+     _In_      LPCSTR InfPath,
+@@ -203,8 +220,10 @@ DiUninstallDriverA(
+ 
+ 
+ #if (WINVER >= _WIN32_WINNT_LONGHORN)
++_Windows_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiShowUpdateDevice(
+     _In_opt_  HWND hwndParent,
+     _In_      HDEVINFO DeviceInfoSet,
+@@ -221,8 +240,10 @@ DiShowUpdateDevice(
+ #define ROLLBACK_BITS                   0x00000001
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
++_Win32_SetLastError_
+ DiRollbackDriver(
+     _In_      HDEVINFO DeviceInfoSet,
+     _In_      PSP_DEVINFO_DATA DeviceInfoData,

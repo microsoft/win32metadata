@@ -1,0 +1,85 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
+index f42471fd62..ff0e0afbf4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -47,6 +48,7 @@ Return Value:
+ 
+   --*/
+ LONG
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ SerialDisplayAdvancedSettings(_In_ HWND             ParentHwnd,
+                               _In_ HDEVINFO         DeviceInfoSet,
+                               _In_ PSP_DEVINFO_DATA DeviceInfoData
+@@ -102,8 +104,10 @@ typedef HCOMDB *PHCOMDB;
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBOpen (
+-    _Out_ PHCOMDB PHComDB
++    _Out_ _Win32_RAIIFree_(ComDBClose, -1) PHCOMDB PHComDB
+     );
+ /*++
+ 
+@@ -125,6 +129,7 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ ComDBClose (
+     _In_ HCOMDB HComDB
+     );
+@@ -149,6 +154,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBGetCurrentPortUsage (
+     _In_        HCOMDB   HComDB,
+     _Out_writes_bytes_opt_(BufferSize) PBYTE Buffer,
+@@ -198,6 +205,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBClaimNextFreePort (
+     _In_ HCOMDB   HComDB,
+     _Out_ LPDWORD ComNumber
+@@ -226,6 +235,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBClaimPort (
+     _In_        HCOMDB   HComDB,
+     _In_        DWORD    ComNumber,
+@@ -261,6 +272,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBReleasePort (
+     _In_ HCOMDB   HComDB,
+     _In_ DWORD    ComNumber
+@@ -290,6 +303,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ ComDBResizeDatabase (
+     _In_ HCOMDB   HComDB,
+     _In_ DWORD    NewSize

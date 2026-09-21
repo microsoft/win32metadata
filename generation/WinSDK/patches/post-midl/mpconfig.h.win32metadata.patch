@@ -1,0 +1,132 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
+index bef6c05e3e..9faa332a97 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
+@@ -11,6 +11,7 @@
+ #define __IMPConfig__
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -34,6 +35,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // that the window coordinates are {0, 0, 10000, 10000}. Thus giving arguments
+     // (0, 0, 5000, 5000) will put the stream in the top-left quarter. Any value greater
+     // than 10000 is invalid.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetRelativePosition)(THIS_ 
+ 				    IN DWORD dwLeft,
+ 				    IN DWORD dwTop,
+@@ -44,6 +47,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // this function gets the position of the stream in the display window, assuming 
+     // that the window coordinates are {0, 0, 10000, 10000}. Thus if the values returned
+     // are (0, 0, 5000, 5000), then it means that the stream is in the top-left quarter. 
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetRelativePosition)(THIS_ 
+ 				    OUT DWORD *pdwLeft,
+ 				    OUT DWORD *pdwTop,
+@@ -53,6 +58,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+ 
+     // this function sets the ZOrder of the stream. The ZOrder of 0 is the closest
+     // to the eyes of the user, and increasing values imply greater distance.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetZOrder)(THIS_ 
+ 			  IN DWORD dwZOrder
+ 			 ) PURE;
+@@ -60,6 +67,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+ 
+     // this function gets the ZOrder of the stream. The ZOrder of 0 is the closest
+     // to the eyes of the user, and increasing values imply greater distance.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetZOrder)(THIS_ 
+ 			  OUT DWORD *pdwZOrder
+ 			 ) PURE;
+@@ -68,6 +77,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // primary stream sets the destination colorkey being used by the overlay surface. Setting
+     // this value on the secondary pin makes sense only if the stream is transparent. By default
+     // the destination colorkey is used as the colorkey for all transparent (secondary) streams.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetColorKey)(THIS_ 
+ 			    IN COLORKEY *pColorKey
+ 			   ) PURE;
+@@ -77,6 +88,8 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // this value on the secondary pin returns the colorkey being used by that particular stream.
+     // When using this method, you are allowed to pass NULL for either pColorKey or pColor but 
+     // not both.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetColorKey)(THIS_ 
+ 			    OUT COLORKEY *pColorKey,
+ 			    OUT DWORD *pColor
+@@ -89,12 +102,16 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // If no value is set, the default is 255.
+     // Any value less than 0 or greater than 255 is invalid. Calling this function on the primary
+     // stream would result in a return value of E_UNEXPECTED.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetBlendingParameter)(THIS_ 
+ 				     IN DWORD dwBlendingParameter
+ 				    ) PURE;
+ 
+     // this function gets the blending parameter which in turn defines, how the secondary stream 
+     // is currently being blended with the primary stream. 
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetBlendingParameter)(THIS_ 
+ 				     OUT DWORD *pdwBlendingParameter
+ 				    ) PURE;
+@@ -102,11 +119,15 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+ 
+     // this function is used to set the Aspect Ratio Correction mode on the pin. 
+     // If the mode is set to letter box, black color is painted on the excess region 
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetAspectRatioMode)(THIS_ 
+ 				   IN AM_ASPECT_RATIO_MODE amAspectRatioMode
+ 				  ) PURE;
+ 
+     // this function is used to get the Aspect Ratio Correction mode on the pin.  
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetAspectRatioMode)(THIS_ 
+ 				   OUT AM_ASPECT_RATIO_MODE* pamAspectRatioMode
+ 				  ) PURE;
+@@ -115,11 +136,15 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+     // to occupy the whole of the rectangle (specified by SetRelativePosition), some of the region
+     // is going to be transparent i.e. the stream underneath, is going to see through.
+     // Calling this function on the primary stream would result in a return value of E_UNEXPECTED.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetStreamTransparent)(THIS_ 
+ 				     IN BOOL bStreamTransparent
+ 				    ) PURE;
+ 
+     // this function is used to tell whether the stream is transparent or not. 
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetStreamTransparent)(THIS_ 
+ 				     OUT BOOL *pbStreamTransparent
+ 				    ) PURE;
+@@ -129,12 +154,16 @@ DECLARE_INTERFACE_(IMixerPinConfig, IUnknown)
+ DECLARE_INTERFACE_(IMixerPinConfig2, IMixerPinConfig)
+ {
+     // this functions sets the color-controls, if the vga chip supports it.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (SetOverlaySurfaceColorControls)(THIS_ 
+ 					       IN LPDDCOLORCONTROL pColorControl
+ 					      ) PURE;
+ 
+     // this functions gets the color-controls. It also returns the capability of the vga hardware 
+     // in the dwFlags value of the struct.
++    _Windows_SupportedOS_Windows2000_
++    _Windows_SupportedOS_Server2000_
+     STDMETHOD (GetOverlaySurfaceColorControls)(THIS_ 
+ 					       OUT LPDDCOLORCONTROL pColorControl
+ 					      ) PURE;

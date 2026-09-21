@@ -1,0 +1,111 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
+index d7429649bb..e42b92e7a7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
+@@ -13,6 +13,7 @@
+ #include <nturtl.h>
+ #endif
+ #include <apiset.h>
++#include <win32metadata_annotations.h>
+ #include <apisetcconv.h>
+ #include <wtypesbase.h>
+ #include <inspectable.h>
+@@ -31,7 +32,7 @@ extern "C" {
+ #endif
+ 
+ // Ro initialization flags; passed to Windows::Runtime::Initialize
+-typedef enum RO_INIT_TYPE
++typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ RO_INIT_TYPE
+ {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -53,20 +54,27 @@ typedef HRESULT (STDAPICALLTYPE * PFNGETACTIVATIONFACTORY)(HSTRING, IActivationF
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ // forward declarations of the dllexport'd versions
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+ WINAPI
++_Win32_PreserveResult_
+ RoInitialize(
+     _In_ RO_INIT_TYPE initType
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ void
+ WINAPI
+ RoUninitialize(
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -76,6 +84,8 @@ RoActivateInstance(
+     _COM_Outptr_ IInspectable** instance
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -84,9 +94,11 @@ RoRegisterActivationFactories(
+     _In_reads_(count) HSTRING* activatableClassIds,
+     _In_reads_(count) PFNGETACTIVATIONFACTORY* activationFactoryCallbacks,
+     _In_ UINT32 count,
+-    _Out_ RO_REGISTRATION_COOKIE* cookie
++    _Out_ _Win32_RAIIFree_(RoRevokeActivationFactories) RO_REGISTRATION_COOKIE* cookie
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ void
+ WINAPI
+@@ -94,6 +106,8 @@ RoRevokeActivationFactories(
+     _In_ RO_REGISTRATION_COOKIE cookie
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -107,6 +121,8 @@ RoGetActivationFactory(
+ typedef interface IApartmentShutdown IApartmentShutdown;
+ DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -114,9 +130,11 @@ WINAPI
+ RoRegisterForApartmentShutdown(
+     _In_ IApartmentShutdown* callbackObject,
+     _Out_ UINT64* apartmentIdentifier,
+-    _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
++    _Out_ _Win32_RAIIFree_(RoUnregisterForApartmentShutdown) APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -125,6 +143,8 @@ RoUnregisterForApartmentShutdown(
+     _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
+     );
+ 
++_Windows_SupportedOS_Windows8_
++_Windows_SupportedOS_Server2012_
+ ROAPI
+ _Check_return_
+ HRESULT

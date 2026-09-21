@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PlayToManagerInterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/PlayToManagerInterop.h
+index 84a91b9549..d98dc540da 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PlayToManagerInterop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PlayToManagerInterop.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -89,6 +90,8 @@ EXTERN_C const IID IID_IPlayToManagerInterop;
+     IPlayToManagerInterop : public IInspectable
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
+             /* [annotation][in] */ 
+             _In_  HWND appWindow,
+@@ -97,6 +100,8 @@ EXTERN_C const IID IID_IPlayToManagerInterop;
+             /* [annotation][iid_is][retval][out] */ 
+             _COM_Outptr_retval_  void **playToManager) = 0;
+         
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE ShowPlayToUIForWindow( 
+             /* [annotation][in] */ 
+             _In_  HWND appWindow) = 0;
