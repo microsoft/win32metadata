@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h b/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
+index 49dfcd5b4b..660cda5879 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -118,6 +119,7 @@ EXTERN_C const IID IID_IInkD2DRenderer;
+     IInkD2DRenderer : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_10240_
+         virtual HRESULT STDMETHODCALLTYPE Draw( 
+             /* [annotation][in] */ 
+             _In_  IUnknown *pD2D1DeviceContext,

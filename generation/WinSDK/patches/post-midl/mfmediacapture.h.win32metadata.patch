@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
+index be518561df..e43bfc71f3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -102,6 +103,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureInitializationSettings;
+     IAdvancedMediaCaptureInitializationSettings : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE SetDirectxDeviceManager( 
+             /* [annotation][in] */ 
+             _In_  IMFDXGIDeviceManager *value) = 0;
+@@ -189,6 +192,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureSettings;
+     IAdvancedMediaCaptureSettings : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE GetDirectxDeviceManager( 
+             /* [annotation][out] */ 
+             _Out_  IMFDXGIDeviceManager **value) = 0;
+@@ -276,6 +281,8 @@ EXTERN_C const IID IID_IAdvancedMediaCapture;
+     IAdvancedMediaCapture : public IUnknown
+     {
+     public:
++        _Windows_SupportedOS_Windows8_
++        _Windows_SupportedOS_Server2012_
+         virtual HRESULT STDMETHODCALLTYPE GetAdvancedMediaCaptureSettings( 
+             /* [annotation][out] */ 
+             _Out_  IAdvancedMediaCaptureSettings **value) = 0;
