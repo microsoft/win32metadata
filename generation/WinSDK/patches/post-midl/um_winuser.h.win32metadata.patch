@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winuser.h b/generation/WinSDK/RecompiledIdlHeaders/um/winuser.h
+index c047a49323..b643be7f4e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winuser.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winuser.h
+@@ -19520,6 +19520,8 @@ enum [[clang::flag_enum]] TRACKMOUSEEVENT_FLAGS : unsigned int
+ #undef VK_PA1
+ #pragma push_macro("VK_OEM_CLEAR")
+ #undef VK_OEM_CLEAR
++namespace Windows
++{
+ enum VIRTUAL_KEY : unsigned short
+ {
+     VK_0 = 48,
+@@ -19770,6 +19772,7 @@ enum VIRTUAL_KEY : unsigned short
+     VK_PA1 = 253,
+     VK_OEM_CLEAR = 254,
+ };
++}
+ #pragma pop_macro("VK_OEM_CLEAR")
+ #pragma pop_macro("VK_PA1")
+ #pragma pop_macro("VK_NONAME")

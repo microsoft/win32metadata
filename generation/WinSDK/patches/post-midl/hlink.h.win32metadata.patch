@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h b/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
-index 96140263c6..3d610e134f 100644
+index 96140263c6..b73f7fda1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
 @@ -405,7 +405,11 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0000_v0_0_s_ifspec;
@@ -28,11 +28,10 @@ index 96140263c6..3d610e134f 100644
      {
          HLFNAMEF_DEFAULT	= 0,
          HLFNAMEF_TRYCACHE	= 0x1,
-@@ -2068,6 +2076,107 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
- }
- #endif
+@@ -1505,6 +1513,31 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0005_v0_0_s_ifspec;
+ typedef /* [unique] */ IHlinkBrowseContext *LPHLINKBROWSECONTEXT;
  
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("HLTB_DOCKEDLEFT")
 +#undef HLTB_DOCKEDLEFT
@@ -57,8 +56,22 @@ index 96140263c6..3d610e134f 100644
 +#pragma pop_macro("HLTB_DOCKEDRIGHT")
 +#pragma pop_macro("HLTB_DOCKEDTOP")
 +#pragma pop_macro("HLTB_DOCKEDLEFT")
++#else
+ enum __MIDL_IHlinkBrowseContext_0001
+     {
+         HLTB_DOCKEDLEFT	= 0,
+@@ -1513,6 +1546,7 @@ enum __MIDL_IHlinkBrowseContext_0001
+         HLTB_DOCKEDBOTTOM	= 3,
+         HLTB_FLOATING	= 4
+     } ;
 +#endif
-+
+ typedef struct _tagHLTBINFO
+     {
+     ULONG uDockType;
+@@ -1520,6 +1554,35 @@ typedef struct _tagHLTBINFO
+     } 	HLTBINFO;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("HLBWIF_HASFRAMEWNDINFO")
 +#undef HLBWIF_HASFRAMEWNDINFO
@@ -87,8 +100,22 @@ index 96140263c6..3d610e134f 100644
 +#pragma pop_macro("HLBWIF_FRAMEWNDMAXIMIZED")
 +#pragma pop_macro("HLBWIF_HASDOCWNDINFO")
 +#pragma pop_macro("HLBWIF_HASFRAMEWNDINFO")
++#else
+ enum __MIDL_IHlinkBrowseContext_0002
+     {
+         HLBWIF_HASFRAMEWNDINFO	= 0x1,
+@@ -1529,6 +1592,7 @@ enum __MIDL_IHlinkBrowseContext_0002
+         HLBWIF_HASWEBTOOLBARINFO	= 0x10,
+         HLBWIF_WEBTOOLBARHIDDEN	= 0x20
+     } ;
 +#endif
-+
+ typedef struct _tagHLBWINFO
+     {
+     ULONG cbSize;
+@@ -1541,6 +1605,35 @@ typedef struct _tagHLBWINFO
+ typedef /* [unique] */ HLBWINFO *LPHLBWINFO;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("HLID_INVALID")
 +#undef HLID_INVALID
@@ -117,8 +144,16 @@ index 96140263c6..3d610e134f 100644
 +#pragma pop_macro("HLID_NEXT")
 +#pragma pop_macro("HLID_PREVIOUS")
 +#pragma pop_macro("HLID_INVALID")
++#else
+ enum __MIDL_IHlinkBrowseContext_0003
+     {
+         HLID_INVALID	= 0,
+@@ -1550,12 +1643,27 @@ enum __MIDL_IHlinkBrowseContext_0003
+         HLID_STACKBOTTOM	= 0xfffffffc,
+         HLID_STACKTOP	= 0xfffffffb
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("HLQF_ISVALID")
 +#undef HLQF_ISVALID
@@ -131,7 +166,24 @@ index 96140263c6..3d610e134f 100644
 +};
 +#pragma pop_macro("HLQF_ISCURRENT")
 +#pragma pop_macro("HLQF_ISVALID")
++#else
+ enum __MIDL_IHlinkBrowseContext_0004
+     {
+         HLQF_ISVALID	= 0x1,
+         HLQF_ISCURRENT	= 0x2
+     } ;
 +#endif
+ 
+ EXTERN_C const IID IID_IHlinkBrowseContext;
+ 
+@@ -2068,6 +2176,11 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
 +
  #endif
  

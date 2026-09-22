@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmstream.h
-index 7bc911b16c..97e41341bd 100644
+index 7bc911b16c..f26e7a729d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmstream.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmstream.h
 @@ -1,3 +1,4 @@
@@ -7,29 +7,10 @@ index 7bc911b16c..97e41341bd 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -175,7 +176,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
-     public:
-         virtual HRESULT STDMETHODCALLTYPE GetInformation( 
-             /* [annotation][out] */ 
--            _Out_  DWORD *pdwFlags,
-+            _Win32_AssociatedEnum_(MMSSF_GET_INFORMATION_FLAGS) _Out_  DWORD *pdwFlags,
-             /* [annotation][out] */ 
-             _Out_  STREAM_TYPE *pStreamType) = 0;
-         
-@@ -213,7 +214,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
-         
-         virtual HRESULT STDMETHODCALLTYPE GetEndOfStreamEventHandle( 
-             /* [annotation][out] */ 
--            _Out_  HANDLE *phEOS) = 0;
-+            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phEOS) = 0;
-         
-     };
-     
-@@ -716,6 +717,39 @@ extern RPC_IF_HANDLE __MIDL_itf_mmstream_0000_0003_v0_0_s_ifspec;
- }
- #endif
+@@ -138,18 +139,50 @@ enum __MIDL___MIDL_itf_mmstream_0000_0000_0003
+     } 	COMPLETION_STATUS_FLAGS;
  
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("MMSSF_HASCLOCK")
 +#undef MMSSF_HASCLOCK
@@ -46,8 +27,15 @@ index 7bc911b16c..97e41341bd 100644
 +#pragma pop_macro("MMSSF_ASYNCHRONOUS")
 +#pragma pop_macro("MMSSF_SUPPORTSEEK")
 +#pragma pop_macro("MMSSF_HASCLOCK")
++#else
+ enum __MIDL___MIDL_itf_mmstream_0000_0000_0004
+     {
+         MMSSF_HASCLOCK	= 0x1,
+         MMSSF_SUPPORTSEEK	= 0x2,
+         MMSSF_ASYNCHRONOUS	= 0x4
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("SSUPDATE_ASYNC")
 +#undef SSUPDATE_ASYNC
@@ -60,7 +48,40 @@ index 7bc911b16c..97e41341bd 100644
 +};
 +#pragma pop_macro("SSUPDATE_CONTINUOUS")
 +#pragma pop_macro("SSUPDATE_ASYNC")
++#else
+ enum __MIDL___MIDL_itf_mmstream_0000_0000_0005
+     {
+         SSUPDATE_ASYNC	= 0x1,
+         SSUPDATE_CONTINUOUS	= 0x2
+     } ;
 +#endif
+ 
+ 
+ 
+@@ -175,7 +208,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetInformation( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwFlags,
++            _Win32_AssociatedEnum_(MMSSF_GET_INFORMATION_FLAGS) _Out_  DWORD *pdwFlags,
+             /* [annotation][out] */ 
+             _Out_  STREAM_TYPE *pStreamType) = 0;
+         
+@@ -213,7 +246,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEndOfStreamEventHandle( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phEOS) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phEOS) = 0;
+         
+     };
+     
+@@ -716,6 +749,9 @@ extern RPC_IF_HANDLE __MIDL_itf_mmstream_0000_0003_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
 +
  #endif
  

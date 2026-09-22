@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
-index 2fddf5400d..776473eadc 100644
+index 2fddf5400d..c1f52dbf4e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
 @@ -1,3 +1,4 @@
@@ -34,7 +34,71 @@ index 2fddf5400d..776473eadc 100644
      DWORD dwCreationFlags,
      IMFAttributes *pConfiguration,
      _Outptr_ IMFMediaSession** ppMediaSession,
-@@ -1448,7 +1449,7 @@ EXTERN_C const IID IID_IMFSourceResolver;
+@@ -1390,6 +1391,55 @@ enum MF_OBJECT_TYPE
+     } 	MF_OBJECT_TYPE;
+ 
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_RESOLUTION_MEDIASOURCE")
++#undef MF_RESOLUTION_MEDIASOURCE
++#pragma push_macro("MF_RESOLUTION_BYTESTREAM")
++#undef MF_RESOLUTION_BYTESTREAM
++#pragma push_macro("MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE")
++#undef MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE
++#pragma push_macro("MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL")
++#undef MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL
++#pragma push_macro("MF_RESOLUTION_DISABLE_LOCAL_PLUGINS")
++#undef MF_RESOLUTION_DISABLE_LOCAL_PLUGINS
++#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY")
++#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY
++#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY")
++#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY
++#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE")
++#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE
++#pragma push_macro("MF_RESOLUTION_ENABLE_STORE_PLUGINS")
++#undef MF_RESOLUTION_ENABLE_STORE_PLUGINS
++#pragma push_macro("MF_RESOLUTION_READ")
++#undef MF_RESOLUTION_READ
++#pragma push_macro("MF_RESOLUTION_WRITE")
++#undef MF_RESOLUTION_WRITE
++enum [[clang::flag_enum]] MF_RESOLUTION_FLAGS : int
++{
++    MF_RESOLUTION_MEDIASOURCE = 1,
++    MF_RESOLUTION_BYTESTREAM = 2,
++    MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE = 16,
++    MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL = 32,
++    MF_RESOLUTION_DISABLE_LOCAL_PLUGINS = 64,
++    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY = 128,
++    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY = 256,
++    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE = 512,
++    MF_RESOLUTION_ENABLE_STORE_PLUGINS = 1024,
++    MF_RESOLUTION_READ = 65536,
++    MF_RESOLUTION_WRITE = 131072,
++};
++#pragma pop_macro("MF_RESOLUTION_WRITE")
++#pragma pop_macro("MF_RESOLUTION_READ")
++#pragma pop_macro("MF_RESOLUTION_ENABLE_STORE_PLUGINS")
++#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE")
++#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY")
++#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY")
++#pragma pop_macro("MF_RESOLUTION_DISABLE_LOCAL_PLUGINS")
++#pragma pop_macro("MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL")
++#pragma pop_macro("MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE")
++#pragma pop_macro("MF_RESOLUTION_BYTESTREAM")
++#pragma pop_macro("MF_RESOLUTION_MEDIASOURCE")
++#else
+ enum __MIDL___MIDL_itf_mfidl_0000_0001_0001
+     {
+         MF_RESOLUTION_MEDIASOURCE	= 0x1,
+@@ -1404,6 +1454,7 @@ enum __MIDL___MIDL_itf_mfidl_0000_0001_0001
+         MF_RESOLUTION_READ	= 0x10000,
+         MF_RESOLUTION_WRITE	= 0x20000
+     } ;
++#endif
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ #pragma region Desktop Family
+@@ -1448,7 +1499,7 @@ EXTERN_C const IID IID_IMFSourceResolver;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -43,7 +107,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSourceResolver : public IUnknown
      {
      public:
-@@ -1775,17 +1776,17 @@ void __RPC_STUB IMFSourceResolver_RemoteEndCreateObjectFromByteStream_Stub(
+@@ -1775,17 +1826,17 @@ void __RPC_STUB IMFSourceResolver_RemoteEndCreateObjectFromByteStream_Stub(
  /* interface __MIDL_itf_mfidl_0000_0002 */
  /* [local] */ 
  
@@ -65,7 +129,7 @@ index 2fddf5400d..776473eadc 100644
         _Out_ PROPVARIANT* pPropVarMimeTypeArray  );  
  EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MFPKEY_SourceOpenMonitor = { { 0x074d4637, 0xb5ae, 0x465d, 0xaf, 0x17, 0x1a, 0x53, 0x8d, 0x28, 0x59, 0xdd}, 0x02 }; 
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
-@@ -1865,7 +1866,7 @@ EXTERN_C const IID IID_IMFMediaSource;
+@@ -1865,7 +1916,7 @@ EXTERN_C const IID IID_IMFMediaSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -74,7 +138,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSource : public IMFMediaEventGenerator
      {
      public:
-@@ -2092,7 +2093,7 @@ EXTERN_C const IID IID_IMFMediaSourceEx;
+@@ -2092,7 +2143,7 @@ EXTERN_C const IID IID_IMFMediaSourceEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -83,7 +147,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSourceEx : public IMFMediaSource
      {
      public:
-@@ -2327,7 +2328,7 @@ EXTERN_C const IID IID_IMFClockConsumer;
+@@ -2327,7 +2378,7 @@ EXTERN_C const IID IID_IMFClockConsumer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -92,7 +156,7 @@ index 2fddf5400d..776473eadc 100644
      IMFClockConsumer : public IUnknown
      {
      public:
-@@ -2440,7 +2441,7 @@ EXTERN_C const IID IID_IMFMediaStream;
+@@ -2440,7 +2491,7 @@ EXTERN_C const IID IID_IMFMediaStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -101,7 +165,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaStream : public IMFMediaEventGenerator
      {
      public:
-@@ -2651,7 +2652,7 @@ EXTERN_C const IID IID_IMFMediaSink;
+@@ -2651,7 +2702,7 @@ EXTERN_C const IID IID_IMFMediaSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -110,7 +174,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSink : public IUnknown
      {
      public:
-@@ -2872,7 +2873,7 @@ EXTERN_C const IID IID_IMFStreamSink;
+@@ -2872,7 +2923,7 @@ EXTERN_C const IID IID_IMFStreamSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -119,7 +183,7 @@ index 2fddf5400d..776473eadc 100644
      IMFStreamSink : public IMFMediaEventGenerator
      {
      public:
-@@ -3077,7 +3078,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocator;
+@@ -3077,7 +3128,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -128,7 +192,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoSampleAllocator : public IUnknown
      {
      public:
-@@ -3212,7 +3213,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorNotify;
+@@ -3212,7 +3263,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorNotify;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -137,7 +201,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoSampleAllocatorNotify : public IUnknown
      {
      public:
-@@ -3295,7 +3296,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorNotifyEx;
+@@ -3295,7 +3346,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorNotifyEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -146,7 +210,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoSampleAllocatorNotifyEx : public IMFVideoSampleAllocatorNotify
      {
      public:
-@@ -3388,7 +3389,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorCallback;
+@@ -3388,7 +3439,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -155,7 +219,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoSampleAllocatorCallback : public IUnknown
      {
      public:
-@@ -3488,7 +3489,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorEx;
+@@ -3488,7 +3539,7 @@ EXTERN_C const IID IID_IMFVideoSampleAllocatorEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -164,7 +228,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoSampleAllocatorEx : public IMFVideoSampleAllocator
      {
      public:
-@@ -3634,7 +3635,7 @@ EXTERN_C const IID IID_IMFDXGIDeviceManagerSource;
+@@ -3634,7 +3685,7 @@ EXTERN_C const IID IID_IMFDXGIDeviceManagerSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -173,7 +237,7 @@ index 2fddf5400d..776473eadc 100644
      IMFDXGIDeviceManagerSource : public IUnknown
      {
      public:
-@@ -3746,7 +3747,7 @@ EXTERN_C const IID IID_IMFVideoProcessorControl;
+@@ -3746,7 +3797,7 @@ EXTERN_C const IID IID_IMFVideoProcessorControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -182,7 +246,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoProcessorControl : public IUnknown
      {
      public:
-@@ -3907,7 +3908,7 @@ EXTERN_C const IID IID_IMFVideoProcessorControl2;
+@@ -3907,7 +3958,7 @@ EXTERN_C const IID IID_IMFVideoProcessorControl2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -191,7 +255,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoProcessorControl2 : public IMFVideoProcessorControl
      {
      public:
-@@ -4449,7 +4450,7 @@ EXTERN_C const IID IID_IMFTopology;
+@@ -4449,7 +4500,7 @@ EXTERN_C const IID IID_IMFTopology;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -200,7 +264,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTopology : public IMFAttributes
      {
      public:
-@@ -4990,7 +4991,7 @@ EXTERN_GUID( MF_LOCAL_PLUGIN_CONTROL_POLICY, 0xd91b0085, 0xc86d, 0x4f81, 0x88, 0
+@@ -4990,7 +5041,7 @@ EXTERN_GUID( MF_LOCAL_PLUGIN_CONTROL_POLICY, 0xd91b0085, 0xc86d, 0x4f81, 0x88, 0
  #endif // (WINVER >= _WIN32_WINNT_WIN8) 
  #pragma region PC Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)
@@ -209,7 +273,7 @@ index 2fddf5400d..776473eadc 100644
      _Outptr_ IMFTopology ** ppTopo );
  typedef 
  enum MF_TOPOLOGY_TYPE
-@@ -5022,7 +5023,7 @@ EXTERN_C const IID IID_IMFTopologyNode;
+@@ -5022,7 +5073,7 @@ EXTERN_C const IID IID_IMFTopologyNode;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -218,7 +282,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTopologyNode : public IMFAttributes
      {
      public:
-@@ -5716,7 +5717,7 @@ EXTERN_GUID( MF_TOPONODE_PRIMARYOUTPUT, 0x6304ef99, 0x16b2, 0x4ebe, 0x9d, 0x67,
+@@ -5716,7 +5767,7 @@ EXTERN_GUID( MF_TOPONODE_PRIMARYOUTPUT, 0x6304ef99, 0x16b2, 0x4ebe, 0x9d, 0x67,
  #pragma endregion
  #pragma region PC Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)
@@ -227,7 +291,7 @@ index 2fddf5400d..776473eadc 100644
      MF_TOPOLOGY_TYPE NodeType,
      _Outptr_ IMFTopologyNode ** ppNode );
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */
-@@ -5724,7 +5725,7 @@ STDAPI MFCreateTopologyNode(
+@@ -5724,7 +5775,7 @@ STDAPI MFCreateTopologyNode(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #if (WINVER >= _WIN32_WINNT_WIN7) 
@@ -236,7 +300,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTopologyNode* pNode,
      DWORD dwStreamIndex,
      BOOL fOutput,
-@@ -5750,7 +5751,7 @@ EXTERN_C const IID IID_IMFGetService;
+@@ -5750,7 +5801,7 @@ EXTERN_C const IID IID_IMFGetService;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -245,7 +309,7 @@ index 2fddf5400d..776473eadc 100644
      IMFGetService : public IUnknown
      {
      public:
-@@ -5837,7 +5838,7 @@ EXTERN_C const IID IID_IMFGetService;
+@@ -5837,7 +5888,7 @@ EXTERN_C const IID IID_IMFGetService;
  /* interface __MIDL_itf_mfidl_0000_0021 */
  /* [local] */ 
  
@@ -254,7 +318,7 @@ index 2fddf5400d..776473eadc 100644
      IUnknown* punkObject,
      REFGUID guidService,
      REFIID riid,
-@@ -5906,7 +5907,7 @@ EXTERN_C const IID IID_IMFClock;
+@@ -5906,7 +5957,7 @@ EXTERN_C const IID IID_IMFClock;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -263,7 +327,7 @@ index 2fddf5400d..776473eadc 100644
      IMFClock : public IUnknown
      {
      public:
-@@ -6049,7 +6050,7 @@ EXTERN_C const IID IID_IMFClock;
+@@ -6049,7 +6100,7 @@ EXTERN_C const IID IID_IMFClock;
  /* interface __MIDL_itf_mfidl_0000_0022 */
  /* [local] */ 
  
@@ -272,7 +336,7 @@ index 2fddf5400d..776473eadc 100644
  MFGetSystemTime(
      );
  #define PRESENTATION_CURRENT_POSITION   0x7fffffffffffffff
-@@ -6071,7 +6072,7 @@ EXTERN_C const IID IID_IMFPresentationClock;
+@@ -6071,7 +6122,7 @@ EXTERN_C const IID IID_IMFPresentationClock;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -281,7 +345,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPresentationClock : public IMFClock
      {
      public:
-@@ -6289,7 +6290,7 @@ EXTERN_C const IID IID_IMFPresentationClock;
+@@ -6289,7 +6340,7 @@ EXTERN_C const IID IID_IMFPresentationClock;
  #pragma endregion
  #pragma region PC Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)
@@ -290,7 +354,7 @@ index 2fddf5400d..776473eadc 100644
      _Outptr_ IMFPresentationClock** ppPresentationClock
      );
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */
-@@ -6312,7 +6313,7 @@ EXTERN_C const IID IID_IMFPresentationTimeSource;
+@@ -6312,7 +6363,7 @@ EXTERN_C const IID IID_IMFPresentationTimeSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -299,7 +363,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPresentationTimeSource : public IMFClock
      {
      public:
-@@ -6443,7 +6444,7 @@ EXTERN_C const IID IID_IMFPresentationTimeSource;
+@@ -6443,7 +6494,7 @@ EXTERN_C const IID IID_IMFPresentationTimeSource;
  /* interface __MIDL_itf_mfidl_0000_0024 */
  /* [local] */ 
  
@@ -308,7 +372,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateSystemTimeSource(
      _Outptr_ IMFPresentationTimeSource** ppSystemTimeSource
      );
-@@ -6463,7 +6464,7 @@ EXTERN_C const IID IID_IMFClockStateSink;
+@@ -6463,7 +6514,7 @@ EXTERN_C const IID IID_IMFClockStateSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -317,7 +381,7 @@ index 2fddf5400d..776473eadc 100644
      IMFClockStateSink : public IUnknown
      {
      public:
-@@ -6643,7 +6644,7 @@ EXTERN_C const IID IID_IMFPresentationDescriptor;
+@@ -6643,7 +6694,7 @@ EXTERN_C const IID IID_IMFPresentationDescriptor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -326,7 +390,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPresentationDescriptor : public IMFAttributes
      {
      public:
-@@ -7077,7 +7078,7 @@ EXTERN_C const IID IID_IMFPresentationDescriptor;
+@@ -7077,7 +7128,7 @@ EXTERN_C const IID IID_IMFPresentationDescriptor;
  /* interface __MIDL_itf_mfidl_0000_0026 */
  /* [local] */ 
  
@@ -335,7 +399,7 @@ index 2fddf5400d..776473eadc 100644
      DWORD cStreamDescriptors,
      _In_reads_opt_( cStreamDescriptors ) IMFStreamDescriptor** apStreamDescriptors,
      _Outptr_ IMFPresentationDescriptor** ppPresentationDescriptor
-@@ -7087,16 +7088,16 @@ STDAPI MFCreatePresentationDescriptor(
+@@ -7087,16 +7138,16 @@ STDAPI MFCreatePresentationDescriptor(
  #pragma endregion
  #pragma region Desktop or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
@@ -355,7 +419,7 @@ index 2fddf5400d..776473eadc 100644
      _In_ DWORD cbData,
      _In_reads_( cbData ) BYTE * pbData,
      _Outptr_ IMFPresentationDescriptor ** ppPD);
-@@ -7126,7 +7127,7 @@ EXTERN_C const IID IID_IMFStreamDescriptor;
+@@ -7126,7 +7177,7 @@ EXTERN_C const IID IID_IMFStreamDescriptor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -364,7 +428,7 @@ index 2fddf5400d..776473eadc 100644
      IMFStreamDescriptor : public IMFAttributes
      {
      public:
-@@ -7513,7 +7514,7 @@ EXTERN_C const IID IID_IMFStreamDescriptor;
+@@ -7513,7 +7564,7 @@ EXTERN_C const IID IID_IMFStreamDescriptor;
  /* interface __MIDL_itf_mfidl_0000_0027 */
  /* [local] */ 
  
@@ -373,7 +437,7 @@ index 2fddf5400d..776473eadc 100644
      DWORD dwStreamIdentifier,
      DWORD cMediaTypes,
      _In_reads_(cMediaTypes) IMFMediaType** apMediaTypes,
-@@ -7536,7 +7537,7 @@ EXTERN_C const IID IID_IMFMediaTypeHandler;
+@@ -7536,7 +7587,7 @@ EXTERN_C const IID IID_IMFMediaTypeHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -382,7 +446,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaTypeHandler : public IUnknown
      {
      public:
-@@ -7758,7 +7759,7 @@ void __RPC_STUB IMFMediaTypeHandler_RemoteGetCurrentMediaType_Stub(
+@@ -7758,7 +7809,7 @@ void __RPC_STUB IMFMediaTypeHandler_RemoteGetCurrentMediaType_Stub(
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -391,7 +455,7 @@ index 2fddf5400d..776473eadc 100644
      _Outptr_ IMFMediaTypeHandler ** ppHandler );
  typedef 
  enum MFTIMER_FLAGS
-@@ -7782,7 +7783,7 @@ EXTERN_C const IID IID_IMFTimer;
+@@ -7782,7 +7833,7 @@ EXTERN_C const IID IID_IMFTimer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -400,7 +464,43 @@ index 2fddf5400d..776473eadc 100644
      IMFTimer : public IUnknown
      {
      public:
-@@ -7935,7 +7936,7 @@ EXTERN_C const IID IID_IMFShutdown;
+@@ -7897,15 +7948,35 @@ EXTERN_GUID( MF_ACTIVATE_CUSTOM_VIDEO_PRESENTER_CLSID,      0xba491364, 0xbe50,
+ EXTERN_GUID( MF_ACTIVATE_CUSTOM_VIDEO_PRESENTER_ACTIVATE,   0xba491365, 0xbe50, 0x451e, 0x95, 0xab, 0x6d, 0x4a, 0xcc, 0xc7, 0xda, 0xd8 );
+ EXTERN_GUID( MF_ACTIVATE_CUSTOM_VIDEO_PRESENTER_FLAGS,      0xba491366, 0xbe50, 0x451e, 0x95, 0xab, 0x6d, 0x4a, 0xcc, 0xc7, 0xda, 0xd8 );
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL")
++#undef MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL
++enum MF_ACTIVATE_CUSTOM_MIXER : int
++{
++    MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL = 1,
++};
++#pragma pop_macro("MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL")
++#else
+ enum __MIDL___MIDL_itf_mfidl_0000_0029_0001
+     {
+         MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL	= 0x1
+     } ;
++#endif
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL")
++#undef MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL
++enum MF_ACTIVATE_CUSTOM_PRESENTER : int
++{
++    MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL = 1,
++};
++#pragma pop_macro("MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL")
++#else
+ enum __MIDL___MIDL_itf_mfidl_0000_0029_0002
+     {
+         MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL	= 0x1
+     } ;
++#endif
+ EXTERN_GUID( MF_ACTIVATE_MFT_LOCKED,  0xc1f6093c, 0x7f65, 0x4fbd, 0x9e, 0x39, 0x5f, 0xae, 0xc3, 0xc4, 0xfb, 0xd7 );
+ EXTERN_GUID( MF_ACTIVATE_VIDEO_WINDOW, 0x9a2dbbdd, 0xf57e, 0x4162, 0x82, 0xb9, 0x68, 0x31, 0x37, 0x76, 0x82, 0xd3 );
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -7935,7 +8006,7 @@ EXTERN_C const IID IID_IMFShutdown;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -409,7 +509,7 @@ index 2fddf5400d..776473eadc 100644
      IMFShutdown : public IUnknown
      {
      public:
-@@ -8027,10 +8028,10 @@ EXTERN_C const IID IID_IMFShutdown;
+@@ -8027,10 +8098,10 @@ EXTERN_C const IID IID_IMFShutdown;
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -422,7 +522,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateAudioRenderer(
      IMFAttributes* pAudioAttributes,
      _Outptr_ IMFMediaSink** ppSink
-@@ -8039,7 +8040,7 @@ MFCreateAudioRenderer(
+@@ -8039,7 +8110,7 @@ MFCreateAudioRenderer(
  #pragma endregion
  #pragma region PC Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)
@@ -431,7 +531,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateAudioRendererActivate( 
      _Outptr_ IMFActivate ** ppActivate 
      );
-@@ -8057,53 +8058,53 @@ EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_SESSION_ID, 0xede4b5e3, 0xf805, 0x4d6c,
+@@ -8057,53 +8128,53 @@ EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_SESSION_ID, 0xede4b5e3, 0xf805, 0x4d6c,
  EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_ENDPOINT_ID, 0xb10aaec3, 0xef71, 0x4cc3, 0xb8, 0x73, 0x5, 0xa9, 0xa0, 0x8b, 0x9f, 0x8e);
  EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_ENDPOINT_ROLE, 0x6ba644ff, 0x27c5, 0x4d02, 0x98, 0x87, 0xc2, 0x86, 0x19, 0xfd, 0xb9, 0x1b);
  EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_STREAM_CATEGORY, 0xa9770471, 0x92ec, 0x4df4, 0x94, 0xfe, 0x81, 0xc3, 0x6f, 0xc, 0x3a, 0x7a);
@@ -493,7 +593,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateFMPEG4MediaSink(
      _In_ IMFByteStream* pIByteStream, 
      _In_opt_ IMFMediaType* pVideoMediaType, 
-@@ -8112,7 +8113,7 @@ MFCreateFMPEG4MediaSink(
+@@ -8112,7 +8183,7 @@ MFCreateFMPEG4MediaSink(
      );
  #endif // (WINVER >= _WIN32_WINNT_WIN8) 
  #if (WINVER >= _WIN32_WINNT_WINBLUE) 
@@ -502,7 +602,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateAVIMediaSink(
      _In_ IMFByteStream* pIByteStream, 
      _In_ IMFMediaType* pVideoMediaType, 
-@@ -8121,7 +8122,7 @@ MFCreateAVIMediaSink(
+@@ -8121,7 +8192,7 @@ MFCreateAVIMediaSink(
      );
  #endif // (WINVER >= _WIN32_WINNT_WINBLUE) 
  #if (WINVER >= _WIN32_WINNT_WINBLUE) 
@@ -511,7 +611,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateWAVEMediaSink(
      _In_ IMFByteStream* pTargetByteStream, 
      _In_ IMFMediaType* pAudioMediaType, 
-@@ -8144,7 +8145,7 @@ EXTERN_C const IID IID_IMFTopoLoader;
+@@ -8144,7 +8215,7 @@ EXTERN_C const IID IID_IMFTopoLoader;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -520,7 +620,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTopoLoader : public IUnknown
      {
      public:
-@@ -8231,7 +8232,7 @@ EXTERN_C const IID IID_IMFTopoLoader;
+@@ -8231,7 +8302,7 @@ EXTERN_C const IID IID_IMFTopoLoader;
  /* interface __MIDL_itf_mfidl_0000_0031 */
  /* [local] */ 
  
@@ -529,7 +629,7 @@ index 2fddf5400d..776473eadc 100644
      _Outptr_ IMFTopoLoader ** ppObj );
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -8253,7 +8254,7 @@ EXTERN_C const IID IID_IMFContentProtectionManager;
+@@ -8253,7 +8324,7 @@ EXTERN_C const IID IID_IMFContentProtectionManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -538,7 +638,7 @@ index 2fddf5400d..776473eadc 100644
      IMFContentProtectionManager : public IUnknown
      {
      public:
-@@ -8413,7 +8414,7 @@ EXTERN_C const IID IID_IMFContentEnabler;
+@@ -8413,7 +8484,7 @@ EXTERN_C const IID IID_IMFContentEnabler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -547,7 +647,7 @@ index 2fddf5400d..776473eadc 100644
      IMFContentEnabler : public IUnknown
      {
      public:
-@@ -8694,7 +8695,7 @@ EXTERN_C const IID IID_IMFMetadata;
+@@ -8694,7 +8765,7 @@ EXTERN_C const IID IID_IMFMetadata;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -556,7 +656,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMetadata : public IUnknown
      {
      public:
-@@ -8867,7 +8868,7 @@ EXTERN_C const IID IID_IMFMetadataProvider;
+@@ -8867,7 +8938,7 @@ EXTERN_C const IID IID_IMFMetadataProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -565,7 +665,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMetadataProvider : public IUnknown
      {
      public:
-@@ -8993,7 +8994,7 @@ EXTERN_C const IID IID_IMFRateSupport;
+@@ -8993,7 +9064,7 @@ EXTERN_C const IID IID_IMFRateSupport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -574,7 +674,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRateSupport : public IUnknown
      {
      public:
-@@ -9139,7 +9140,7 @@ EXTERN_C const IID IID_IMFRateControl;
+@@ -9139,7 +9210,7 @@ EXTERN_C const IID IID_IMFRateControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -583,7 +683,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRateControl : public IUnknown
      {
      public:
-@@ -9260,7 +9261,7 @@ EXTERN_C const IID IID_IMFTimecodeTranslate;
+@@ -9260,7 +9331,7 @@ EXTERN_C const IID IID_IMFTimecodeTranslate;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -592,7 +692,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTimecodeTranslate : public IUnknown
      {
      public:
-@@ -9425,7 +9426,7 @@ EXTERN_C const IID IID_IMFSeekInfo;
+@@ -9425,7 +9496,7 @@ EXTERN_C const IID IID_IMFSeekInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -601,7 +701,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSeekInfo : public IUnknown
      {
      public:
-@@ -9540,7 +9541,7 @@ EXTERN_C const IID IID_IMFSimpleAudioVolume;
+@@ -9540,7 +9611,7 @@ EXTERN_C const IID IID_IMFSimpleAudioVolume;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -610,7 +710,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSimpleAudioVolume : public IUnknown
      {
      public:
-@@ -9678,7 +9679,7 @@ EXTERN_C const IID IID_IMFAudioStreamVolume;
+@@ -9678,7 +9749,7 @@ EXTERN_C const IID IID_IMFAudioStreamVolume;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -619,7 +719,7 @@ index 2fddf5400d..776473eadc 100644
      IMFAudioStreamVolume : public IUnknown
      {
      public:
-@@ -9842,7 +9843,7 @@ EXTERN_C const IID IID_IMFAudioPolicy;
+@@ -9842,7 +9913,7 @@ EXTERN_C const IID IID_IMFAudioPolicy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -628,7 +728,7 @@ index 2fddf5400d..776473eadc 100644
      IMFAudioPolicy : public IUnknown
      {
      public:
-@@ -10003,7 +10004,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback;
+@@ -10003,7 +10074,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -637,7 +737,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSampleGrabberSinkCallback : public IMFClockStateSink
      {
      public:
-@@ -10174,7 +10175,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback;
+@@ -10174,7 +10245,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback;
  /* interface __MIDL_itf_mfidl_0000_0043 */
  /* [local] */ 
  
@@ -646,7 +746,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateSampleGrabberSinkActivate(
      IMFMediaType *pIMFMediaType,
      IMFSampleGrabberSinkCallback* pIMFSampleGrabberSinkCallback,
-@@ -10199,7 +10200,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback2;
+@@ -10199,7 +10270,7 @@ EXTERN_C const IID IID_IMFSampleGrabberSinkCallback2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -655,7 +755,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSampleGrabberSinkCallback2 : public IMFSampleGrabberSinkCallback
      {
      public:
-@@ -10414,7 +10415,7 @@ EXTERN_C const IID IID_IMFWorkQueueServices;
+@@ -10414,7 +10485,7 @@ EXTERN_C const IID IID_IMFWorkQueueServices;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -664,7 +764,7 @@ index 2fddf5400d..776473eadc 100644
      IMFWorkQueueServices : public IUnknown
      {
      public:
-@@ -10827,7 +10828,7 @@ EXTERN_C const IID IID_IMFWorkQueueServicesEx;
+@@ -10827,7 +10898,7 @@ EXTERN_C const IID IID_IMFWorkQueueServicesEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -673,7 +773,7 @@ index 2fddf5400d..776473eadc 100644
      IMFWorkQueueServicesEx : public IMFWorkQueueServices
      {
      public:
-@@ -11180,7 +11181,7 @@ EXTERN_C const IID IID_IMFQualityManager;
+@@ -11180,7 +11251,7 @@ EXTERN_C const IID IID_IMFQualityManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -682,7 +782,7 @@ index 2fddf5400d..776473eadc 100644
      IMFQualityManager : public IUnknown
      {
      public:
-@@ -11340,7 +11341,7 @@ EXTERN_C const IID IID_IMFQualityManager;
+@@ -11340,7 +11411,7 @@ EXTERN_C const IID IID_IMFQualityManager;
  /* interface __MIDL_itf_mfidl_0000_0047 */
  /* [local] */ 
  
@@ -691,7 +791,7 @@ index 2fddf5400d..776473eadc 100644
      _Outptr_ IMFQualityManager **ppQualityManager );
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -11368,7 +11369,7 @@ EXTERN_C const IID IID_IMFQualityAdvise;
+@@ -11368,7 +11439,7 @@ EXTERN_C const IID IID_IMFQualityAdvise;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -700,7 +800,7 @@ index 2fddf5400d..776473eadc 100644
      IMFQualityAdvise : public IUnknown
      {
      public:
-@@ -11520,7 +11521,7 @@ EXTERN_C const IID IID_IMFQualityAdvise2;
+@@ -11520,7 +11591,7 @@ EXTERN_C const IID IID_IMFQualityAdvise2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -709,7 +809,7 @@ index 2fddf5400d..776473eadc 100644
      IMFQualityAdvise2 : public IMFQualityAdvise
      {
      public:
-@@ -11661,7 +11662,7 @@ EXTERN_C const IID IID_IMFQualityAdviseLimits;
+@@ -11661,7 +11732,7 @@ EXTERN_C const IID IID_IMFQualityAdviseLimits;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -718,7 +818,7 @@ index 2fddf5400d..776473eadc 100644
      IMFQualityAdviseLimits : public IUnknown
      {
      public:
-@@ -11774,7 +11775,7 @@ EXTERN_C const IID IID_IMFRealTimeClient;
+@@ -11774,7 +11845,7 @@ EXTERN_C const IID IID_IMFRealTimeClient;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -727,7 +827,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRealTimeClient : public IUnknown
      {
      public:
-@@ -11900,7 +11901,7 @@ EXTERN_C const IID IID_IMFRealTimeClientEx;
+@@ -11900,7 +11971,7 @@ EXTERN_C const IID IID_IMFRealTimeClientEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -736,7 +836,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRealTimeClientEx : public IUnknown
      {
      public:
-@@ -12044,7 +12045,7 @@ EXTERN_C const IID IID_IMFSequencerSource;
+@@ -12044,7 +12115,7 @@ EXTERN_C const IID IID_IMFSequencerSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -745,7 +845,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSequencerSource : public IUnknown
      {
      public:
-@@ -12200,11 +12201,11 @@ EXTERN_C const IID IID_IMFSequencerSource;
+@@ -12200,11 +12271,11 @@ EXTERN_C const IID IID_IMFSequencerSource;
  /* [local] */ 
  
  EXTERN_GUID( MF_TIME_FORMAT_SEGMENT_OFFSET, 0xc8b8be77, 0x869c, 0x431d, 0x81, 0x2e, 0x16, 0x96, 0x93, 0xf6, 0x5a, 0x39 );
@@ -759,7 +859,7 @@ index 2fddf5400d..776473eadc 100644
      MFSequencerElementId dwId,
      MFTIME hnsOffset,
      _Out_ PROPVARIANT *pvarSegmentOffset
-@@ -12214,7 +12215,7 @@ STDAPI MFCreateSequencerSegmentOffset(
+@@ -12214,7 +12285,7 @@ STDAPI MFCreateSequencerSegmentOffset(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  #if (WINVER >= _WIN32_WINNT_WIN7) 
@@ -768,7 +868,7 @@ index 2fddf5400d..776473eadc 100644
      _In_ IMFCollection *pSourceCollection,
      _Outptr_ IMFMediaSource **ppAggSource
      );
-@@ -12239,7 +12240,7 @@ EXTERN_C const IID IID_IMFMediaSourceTopologyProvider;
+@@ -12239,7 +12310,7 @@ EXTERN_C const IID IID_IMFMediaSourceTopologyProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -777,7 +877,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSourceTopologyProvider : public IUnknown
      {
      public:
-@@ -12330,7 +12331,7 @@ EXTERN_C const IID IID_IMFMediaSourcePresentationProvider;
+@@ -12330,7 +12401,7 @@ EXTERN_C const IID IID_IMFMediaSourcePresentationProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -786,7 +886,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSourcePresentationProvider : public IUnknown
      {
      public:
-@@ -12447,7 +12448,7 @@ EXTERN_C const IID IID_IMFTopologyNodeAttributeEditor;
+@@ -12447,7 +12518,7 @@ EXTERN_C const IID IID_IMFTopologyNodeAttributeEditor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -795,7 +895,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTopologyNodeAttributeEditor : public IUnknown
      {
      public:
-@@ -12596,7 +12597,7 @@ EXTERN_C const IID IID_IMFByteStreamBuffering;
+@@ -12596,7 +12667,7 @@ EXTERN_C const IID IID_IMFByteStreamBuffering;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -804,7 +904,7 @@ index 2fddf5400d..776473eadc 100644
      IMFByteStreamBuffering : public IUnknown
      {
      public:
-@@ -12705,7 +12706,7 @@ EXTERN_C const IID IID_IMFByteStreamCacheControl;
+@@ -12705,7 +12776,7 @@ EXTERN_C const IID IID_IMFByteStreamCacheControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -813,7 +913,7 @@ index 2fddf5400d..776473eadc 100644
      IMFByteStreamCacheControl : public IUnknown
      {
      public:
-@@ -12788,7 +12789,7 @@ EXTERN_C const IID IID_IMFByteStreamTimeSeek;
+@@ -12788,7 +12859,7 @@ EXTERN_C const IID IID_IMFByteStreamTimeSeek;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -822,7 +922,7 @@ index 2fddf5400d..776473eadc 100644
      IMFByteStreamTimeSeek : public IUnknown
      {
      public:
-@@ -12924,7 +12925,7 @@ EXTERN_C const IID IID_IMFByteStreamCacheControl2;
+@@ -12924,7 +12995,7 @@ EXTERN_C const IID IID_IMFByteStreamCacheControl2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -831,7 +931,7 @@ index 2fddf5400d..776473eadc 100644
      IMFByteStreamCacheControl2 : public IMFByteStreamCacheControl
      {
      public:
-@@ -13062,7 +13063,7 @@ EXTERN_C const IID IID_IMFNetCredential;
+@@ -13062,7 +13133,7 @@ EXTERN_C const IID IID_IMFNetCredential;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -840,7 +940,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetCredential : public IUnknown
      {
      public:
-@@ -13245,7 +13246,7 @@ EXTERN_C const IID IID_IMFNetCredentialManager;
+@@ -13245,7 +13316,7 @@ EXTERN_C const IID IID_IMFNetCredentialManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -849,7 +949,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetCredentialManager : public IUnknown
      {
      public:
-@@ -13397,7 +13398,7 @@ EXTERN_C const IID IID_IMFNetCredentialCache;
+@@ -13397,7 +13468,7 @@ EXTERN_C const IID IID_IMFNetCredentialCache;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -858,7 +958,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetCredentialCache : public IUnknown
      {
      public:
-@@ -13526,7 +13527,7 @@ EXTERN_C const IID IID_IMFNetCredentialCache;
+@@ -13526,7 +13597,7 @@ EXTERN_C const IID IID_IMFNetCredentialCache;
  /* interface __MIDL_itf_mfidl_0000_0063 */
  /* [local] */ 
  
@@ -867,7 +967,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateCredentialCache(
      _Outptr_ IMFNetCredentialCache ** ppCache);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -13550,7 +13551,7 @@ EXTERN_C const IID IID_IMFSSLCertificateManager;
+@@ -13550,7 +13621,7 @@ EXTERN_C const IID IID_IMFSSLCertificateManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -876,7 +976,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSSLCertificateManager : public IUnknown
      {
      public:
-@@ -13742,7 +13743,7 @@ EXTERN_C const IID IID_IMFNetResourceFilter;
+@@ -13742,7 +13813,7 @@ EXTERN_C const IID IID_IMFNetResourceFilter;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -885,7 +985,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetResourceFilter : public IUnknown
      {
      public:
-@@ -13860,7 +13861,7 @@ EXTERN_C const IID IID_IMFSourceOpenMonitor;
+@@ -13860,7 +13931,7 @@ EXTERN_C const IID IID_IMFSourceOpenMonitor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -894,7 +994,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSourceOpenMonitor : public IUnknown
      {
      public:
-@@ -13947,7 +13948,7 @@ EXTERN_C const IID IID_IMFNetProxyLocator;
+@@ -13947,7 +14018,7 @@ EXTERN_C const IID IID_IMFNetProxyLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -903,7 +1003,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetProxyLocator : public IUnknown
      {
      public:
-@@ -14086,7 +14087,7 @@ EXTERN_C const IID IID_IMFNetProxyLocator;
+@@ -14086,7 +14157,7 @@ EXTERN_C const IID IID_IMFNetProxyLocator;
  /* interface __MIDL_itf_mfidl_0000_0067 */
  /* [local] */ 
  
@@ -912,7 +1012,7 @@ index 2fddf5400d..776473eadc 100644
      LPCWSTR pszProtocol,
      IPropertyStore* pProxyConfig, 
      _Outptr_ IMFNetProxyLocator** ppProxyLocator );
-@@ -14106,7 +14107,7 @@ EXTERN_C const IID IID_IMFNetProxyLocatorFactory;
+@@ -14106,7 +14177,7 @@ EXTERN_C const IID IID_IMFNetProxyLocatorFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -921,7 +1021,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetProxyLocatorFactory : public IUnknown
      {
      public:
-@@ -14197,7 +14198,7 @@ EXTERN_C const IID IID_IMFSaveJob;
+@@ -14197,7 +14268,7 @@ EXTERN_C const IID IID_IMFSaveJob;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -930,7 +1030,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSaveJob : public IUnknown
      {
      public:
-@@ -14346,7 +14347,7 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
+@@ -14346,7 +14417,7 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -939,7 +1039,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetSchemeHandlerConfig : public IUnknown
      {
      public:
-@@ -14451,7 +14452,7 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
+@@ -14451,7 +14522,7 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
  /* interface __MIDL_itf_mfidl_0000_0070 */
  /* [local] */ 
  
@@ -948,7 +1048,7 @@ index 2fddf5400d..776473eadc 100644
      REFIID riid, 
      LPVOID *ppvHandler );
  typedef 
-@@ -14597,7 +14598,7 @@ EXTERN_C const IID IID_IMFSchemeHandler;
+@@ -14597,7 +14668,7 @@ EXTERN_C const IID IID_IMFSchemeHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -957,7 +1057,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSchemeHandler : public IUnknown
      {
      public:
-@@ -14749,7 +14750,7 @@ EXTERN_C const IID IID_IMFByteStreamHandler;
+@@ -14749,7 +14820,7 @@ EXTERN_C const IID IID_IMFByteStreamHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -966,7 +1066,7 @@ index 2fddf5400d..776473eadc 100644
      IMFByteStreamHandler : public IUnknown
      {
      public:
-@@ -14916,7 +14917,7 @@ EXTERN_C const IID IID_IMFTrustedInput;
+@@ -14916,7 +14987,7 @@ EXTERN_C const IID IID_IMFTrustedInput;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -975,7 +1075,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTrustedInput : public IUnknown
      {
      public:
-@@ -15054,7 +15055,7 @@ EXTERN_C const IID IID_IMFInputTrustAuthority;
+@@ -15054,7 +15125,7 @@ EXTERN_C const IID IID_IMFInputTrustAuthority;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -984,7 +1084,7 @@ index 2fddf5400d..776473eadc 100644
      IMFInputTrustAuthority : public IUnknown
      {
      public:
-@@ -15223,7 +15224,7 @@ EXTERN_C const IID IID_IMFTrustedOutput;
+@@ -15223,7 +15294,7 @@ EXTERN_C const IID IID_IMFTrustedOutput;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -993,7 +1093,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTrustedOutput : public IUnknown
      {
      public:
-@@ -15340,7 +15341,7 @@ EXTERN_C const IID IID_IMFOutputTrustAuthority;
+@@ -15340,7 +15411,7 @@ EXTERN_C const IID IID_IMFOutputTrustAuthority;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1002,7 +1102,7 @@ index 2fddf5400d..776473eadc 100644
      IMFOutputTrustAuthority : public IUnknown
      {
      public:
-@@ -15461,7 +15462,7 @@ EXTERN_C const IID IID_IMFOutputPolicy;
+@@ -15461,7 +15532,7 @@ EXTERN_C const IID IID_IMFOutputPolicy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1011,7 +1111,7 @@ index 2fddf5400d..776473eadc 100644
      IMFOutputPolicy : public IMFAttributes
      {
      public:
-@@ -15929,7 +15930,7 @@ EXTERN_C const IID IID_IMFOutputSchema;
+@@ -15929,7 +16000,7 @@ EXTERN_C const IID IID_IMFOutputSchema;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1020,7 +1120,7 @@ index 2fddf5400d..776473eadc 100644
      IMFOutputSchema : public IMFAttributes
      {
      public:
-@@ -16471,7 +16472,7 @@ EXTERN_C const IID IID_IMFSecureChannel;
+@@ -16471,7 +16542,7 @@ EXTERN_C const IID IID_IMFSecureChannel;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1029,7 +1129,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSecureChannel : public IUnknown
      {
      public:
-@@ -16600,7 +16601,7 @@ EXTERN_C const IID IID_IMFSampleProtection;
+@@ -16600,7 +16671,7 @@ EXTERN_C const IID IID_IMFSampleProtection;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1038,7 +1138,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSampleProtection : public IUnknown
      {
      public:
-@@ -16779,7 +16780,7 @@ EXTERN_C const IID IID_IMFMediaSinkPreroll;
+@@ -16779,7 +16850,7 @@ EXTERN_C const IID IID_IMFMediaSinkPreroll;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1047,7 +1147,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaSinkPreroll : public IUnknown
      {
      public:
-@@ -16878,7 +16879,7 @@ EXTERN_C const IID IID_IMFFinalizableMediaSink;
+@@ -16878,7 +16949,7 @@ EXTERN_C const IID IID_IMFFinalizableMediaSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1056,7 +1156,7 @@ index 2fddf5400d..776473eadc 100644
      IMFFinalizableMediaSink : public IMFMediaSink
      {
      public:
-@@ -17083,7 +17084,7 @@ EXTERN_C const IID IID_IMFStreamingSinkConfig;
+@@ -17083,7 +17154,7 @@ EXTERN_C const IID IID_IMFStreamingSinkConfig;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1065,7 +1165,7 @@ index 2fddf5400d..776473eadc 100644
      IMFStreamingSinkConfig : public IUnknown
      {
      public:
-@@ -17187,7 +17188,7 @@ EXTERN_C const IID IID_IMFRemoteProxy;
+@@ -17187,7 +17258,7 @@ EXTERN_C const IID IID_IMFRemoteProxy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1074,7 +1174,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRemoteProxy : public IUnknown
      {
      public:
-@@ -17304,7 +17305,7 @@ EXTERN_C const IID IID_IMFObjectReferenceStream;
+@@ -17304,7 +17375,7 @@ EXTERN_C const IID IID_IMFObjectReferenceStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1083,7 +1183,7 @@ index 2fddf5400d..776473eadc 100644
      IMFObjectReferenceStream : public IUnknown
      {
      public:
-@@ -17421,7 +17422,7 @@ EXTERN_C const IID IID_IMFPMPHost;
+@@ -17421,7 +17492,7 @@ EXTERN_C const IID IID_IMFPMPHost;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1092,7 +1192,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPMPHost : public IUnknown
      {
      public:
-@@ -17570,7 +17571,7 @@ EXTERN_C const IID IID_IMFPMPClient;
+@@ -17570,7 +17641,7 @@ EXTERN_C const IID IID_IMFPMPClient;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1101,7 +1201,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPMPClient : public IUnknown
      {
      public:
-@@ -17657,7 +17658,7 @@ EXTERN_C const IID IID_IMFPMPServer;
+@@ -17657,7 +17728,7 @@ EXTERN_C const IID IID_IMFPMPServer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1110,7 +1210,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPMPServer : public IUnknown
      {
      public:
-@@ -17762,7 +17763,7 @@ EXTERN_C const IID IID_IMFPMPServer;
+@@ -17762,7 +17833,7 @@ EXTERN_C const IID IID_IMFPMPServer;
  /* interface __MIDL_itf_mfidl_0000_0088 */
  /* [local] */ 
  
@@ -1119,7 +1219,7 @@ index 2fddf5400d..776473eadc 100644
      DWORD dwCreationFlags,
      _Outptr_ IMFPMPServer** ppPMPServer
      );
-@@ -17782,7 +17783,7 @@ EXTERN_C const IID IID_IMFRemoteDesktopPlugin;
+@@ -17782,7 +17853,7 @@ EXTERN_C const IID IID_IMFRemoteDesktopPlugin;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1128,7 +1228,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRemoteDesktopPlugin : public IUnknown
      {
      public:
-@@ -17861,9 +17862,9 @@ EXTERN_C const IID IID_IMFRemoteDesktopPlugin;
+@@ -17861,9 +17932,9 @@ EXTERN_C const IID IID_IMFRemoteDesktopPlugin;
  /* interface __MIDL_itf_mfidl_0000_0089 */
  /* [local] */ 
  
@@ -1140,7 +1240,7 @@ index 2fddf5400d..776473eadc 100644
          _Outptr_ INamedPropertyStore **ppStore
          );
  
-@@ -17883,7 +17884,7 @@ EXTERN_C const IID IID_IMFSAMIStyle;
+@@ -17883,7 +17954,7 @@ EXTERN_C const IID IID_IMFSAMIStyle;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1149,7 +1249,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSAMIStyle : public IUnknown
      {
      public:
-@@ -18009,7 +18010,7 @@ EXTERN_GUID( MF_SD_SAMI_LANGUAGE, 0x36fcb98a, 0x6cd0, 0x44cb, 0xac, 0xb9, 0xa8,
+@@ -18009,7 +18080,7 @@ EXTERN_GUID( MF_SD_SAMI_LANGUAGE, 0x36fcb98a, 0x6cd0, 0x44cb, 0xac, 0xb9, 0xa8,
  #if (WINVER >= _WIN32_WINNT_WIN7) 
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1158,7 +1258,7 @@ index 2fddf5400d..776473eadc 100644
  
  
  extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0090_v0_0_c_ifspec;
-@@ -18026,7 +18027,7 @@ EXTERN_C const IID IID_IMFTranscodeProfile;
+@@ -18026,7 +18097,7 @@ EXTERN_C const IID IID_IMFTranscodeProfile;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1167,7 +1267,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTranscodeProfile : public IUnknown
      {
      public:
-@@ -18238,10 +18239,10 @@ EXTERN_GUID( MF_XVP_CALLER_ALLOCATES_OUTPUT, 0x4a2cabc, 0xcab, 0x40b1, 0xa1, 0xb
+@@ -18238,10 +18309,10 @@ EXTERN_GUID( MF_XVP_CALLER_ALLOCATES_OUTPUT, 0x4a2cabc, 0xcab, 0x40b1, 0xa1, 0xb
  EXTERN_GUID(CLSID_VideoProcessorMFT, 0x88753b26, 0x5b24, 0x49bd, 0xb2, 0xe7, 0xc, 0x44, 0x5c, 0x78, 0xc9, 0x82);
  #endif // (WINVER < _WIN32_WINNT_WINTHRESHOLD) 
  #endif // (WINVER >= _WIN32_WINNT_WINBLUE) 
@@ -1180,7 +1280,7 @@ index 2fddf5400d..776473eadc 100644
      _In_ IMFMediaSource* pSrc,
      _In_ LPCWSTR pwszOutputFilePath,
      _In_ IMFTranscodeProfile* pProfile,
-@@ -18252,7 +18253,7 @@ STDAPI MFCreateTranscodeTopology(
+@@ -18252,7 +18323,7 @@ STDAPI MFCreateTranscodeTopology(
  #if (WINVER >= _WIN32_WINNT_WIN8) 
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1189,7 +1289,7 @@ index 2fddf5400d..776473eadc 100644
      _In_ IMFMediaSource* pSrc,
      _In_ IMFByteStream* pOutputStream,
      _In_ IMFTranscodeProfile* pProfile,
-@@ -18263,7 +18264,7 @@ STDAPI MFCreateTranscodeTopologyFromByteStream(
+@@ -18263,7 +18334,7 @@ STDAPI MFCreateTranscodeTopologyFromByteStream(
  #endif // (WINVER >= _WIN32_WINNT_WIN8) 
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1198,7 +1298,7 @@ index 2fddf5400d..776473eadc 100644
   _In_ REFGUID guidSubType,
   _In_ DWORD dwMFTFlags,
   _In_opt_ IMFAttributes* pCodecConfig, 
-@@ -18292,7 +18293,7 @@ EXTERN_C const IID IID_IMFTranscodeSinkInfoProvider;
+@@ -18292,7 +18363,7 @@ EXTERN_C const IID IID_IMFTranscodeSinkInfoProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1207,7 +1307,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTranscodeSinkInfoProvider : public IUnknown
      {
      public:
-@@ -18410,7 +18411,7 @@ EXTERN_C const IID IID_IMFTranscodeSinkInfoProvider;
+@@ -18410,7 +18481,7 @@ EXTERN_C const IID IID_IMFTranscodeSinkInfoProvider;
  /* interface __MIDL_itf_mfidl_0000_0092 */
  /* [local] */ 
  
@@ -1216,7 +1316,7 @@ index 2fddf5400d..776473eadc 100644
   _Outptr_ IMFActivate** ppActivate ); 
  
  
-@@ -18428,7 +18429,7 @@ EXTERN_C const IID IID_IMFFieldOfUseMFTUnlock;
+@@ -18428,7 +18499,7 @@ EXTERN_C const IID IID_IMFFieldOfUseMFTUnlock;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1225,7 +1325,7 @@ index 2fddf5400d..776473eadc 100644
      IMFFieldOfUseMFTUnlock : public IUnknown
      {
      public:
-@@ -18536,7 +18537,7 @@ EXTERN_C const IID IID_IMFLocalMFTRegistration;
+@@ -18536,7 +18607,7 @@ EXTERN_C const IID IID_IMFLocalMFTRegistration;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1234,7 +1334,7 @@ index 2fddf5400d..776473eadc 100644
      IMFLocalMFTRegistration : public IUnknown
      {
      public:
-@@ -18751,7 +18752,7 @@ EXTERN_C const IID IID_IMFPMPHostApp;
+@@ -18751,7 +18822,7 @@ EXTERN_C const IID IID_IMFPMPHostApp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1243,7 +1343,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPMPHostApp : public IUnknown
      {
      public:
-@@ -18868,7 +18869,7 @@ EXTERN_C const IID IID_IMFPMPClientApp;
+@@ -18868,7 +18939,7 @@ EXTERN_C const IID IID_IMFPMPClientApp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1252,7 +1352,7 @@ index 2fddf5400d..776473eadc 100644
      IMFPMPClientApp : public IUnknown
      {
      public:
-@@ -18965,7 +18966,7 @@ EXTERN_C const IID IID_IMFMediaStreamSourceSampleRequest;
+@@ -18965,7 +19036,7 @@ EXTERN_C const IID IID_IMFMediaStreamSourceSampleRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1261,7 +1361,7 @@ index 2fddf5400d..776473eadc 100644
      IMFMediaStreamSourceSampleRequest : public IUnknown
      {
      public:
-@@ -19061,7 +19062,7 @@ EXTERN_C const IID IID_IMFTrackedSample;
+@@ -19061,7 +19132,7 @@ EXTERN_C const IID IID_IMFTrackedSample;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1270,7 +1370,7 @@ index 2fddf5400d..776473eadc 100644
      IMFTrackedSample : public IUnknown
      {
      public:
-@@ -19144,33 +19145,33 @@ EXTERN_C const IID IID_IMFTrackedSample;
+@@ -19144,33 +19215,33 @@ EXTERN_C const IID IID_IMFTrackedSample;
  /* interface __MIDL_itf_mfidl_0000_0099 */
  /* [local] */ 
  
@@ -1311,7 +1411,7 @@ index 2fddf5400d..776473eadc 100644
      _In_ IMFMediaType* pMediaType,
      _In_ REFIID riid,
      _Outptr_ void **ppv );
-@@ -19194,16 +19195,16 @@ EXTERN_GUID(CLSID_NetSchemePlugin, 0xe9f4ebab, 0xd97b, 0x463e, 0xa2, 0xb1, 0xc5,
+@@ -19194,16 +19265,16 @@ EXTERN_GUID(CLSID_NetSchemePlugin, 0xe9f4ebab, 0xd97b, 0x463e, 0xa2, 0xb1, 0xc5,
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1331,7 +1431,7 @@ index 2fddf5400d..776473eadc 100644
      _In_  IMFAttributes*   pAttributes,
      _Outptr_ IMFActivate**   ppActivate
  );
-@@ -19273,7 +19274,7 @@ EXTERN_C const IID IID_IMFProtectedEnvironmentAccess;
+@@ -19273,7 +19344,7 @@ EXTERN_C const IID IID_IMFProtectedEnvironmentAccess;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1340,7 +1440,7 @@ index 2fddf5400d..776473eadc 100644
      IMFProtectedEnvironmentAccess : public IUnknown
      {
      public:
-@@ -19389,7 +19390,7 @@ EXTERN_C const IID IID_IMFSignedLibrary;
+@@ -19389,7 +19460,7 @@ EXTERN_C const IID IID_IMFSignedLibrary;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1349,7 +1449,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSignedLibrary : public IUnknown
      {
      public:
-@@ -19480,7 +19481,7 @@ EXTERN_C const IID IID_IMFSystemId;
+@@ -19480,7 +19551,7 @@ EXTERN_C const IID IID_IMFSystemId;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1358,7 +1458,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSystemId : public IUnknown
      {
      public:
-@@ -19588,17 +19589,17 @@ EXTERN_C const IID IID_IMFSystemId;
+@@ -19588,17 +19659,17 @@ EXTERN_C const IID IID_IMFSystemId;
  /* interface __MIDL_itf_mfidl_0000_0102 */
  /* [local] */ 
  
@@ -1380,7 +1480,7 @@ index 2fddf5400d..776473eadc 100644
      _In_reads_bytes_(size) const BYTE *verifier,
      _In_ UINT32 size,
      _Outptr_ LPWSTR *id
-@@ -19653,7 +19654,7 @@ EXTERN_C const IID IID_IMFContentProtectionDevice;
+@@ -19653,7 +19724,7 @@ EXTERN_C const IID IID_IMFContentProtectionDevice;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1389,7 +1489,7 @@ index 2fddf5400d..776473eadc 100644
      IMFContentProtectionDevice : public IUnknown
      {
      public:
-@@ -19765,10 +19766,10 @@ EXTERN_C const IID IID_IMFContentProtectionDevice;
+@@ -19765,10 +19836,10 @@ EXTERN_C const IID IID_IMFContentProtectionDevice;
  /* interface __MIDL_itf_mfidl_0000_0103 */
  /* [local] */ 
  
@@ -1402,7 +1502,7 @@ index 2fddf5400d..776473eadc 100644
     _In_ REFGUID ProtectionSystemId, 
     _Out_ BOOL *isSupported); 
  
-@@ -19787,7 +19788,7 @@ EXTERN_C const IID IID_IMFContentDecryptorContext;
+@@ -19787,7 +19858,7 @@ EXTERN_C const IID IID_IMFContentDecryptorContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1411,7 +1511,7 @@ index 2fddf5400d..776473eadc 100644
      IMFContentDecryptorContext : public IUnknown
      {
      public:
-@@ -19876,7 +19877,7 @@ EXTERN_C const IID IID_IMFContentDecryptorContext;
+@@ -19876,7 +19947,7 @@ EXTERN_C const IID IID_IMFContentDecryptorContext;
  
  EXTERN_GUID( MF_CONTENT_DECRYPTOR_SERVICE, 0x68a72927, 0xfc7b, 0x44ee, 0x85, 0xf4, 0x7c, 0x51, 0xbd, 0x55, 0xa6, 0x59);
  EXTERN_GUID( MF_CONTENT_PROTECTION_DEVICE_SERVICE, 0xff58436f, 0x76a0, 0x41fe, 0xb5, 0x66, 0x10, 0xcc, 0x53, 0x96, 0x2e, 0xdd);
@@ -1420,7 +1520,7 @@ index 2fddf5400d..776473eadc 100644
     _In_ REFGUID guidMediaProtectionSystemId, 
     _In_opt_ IMFDXGIDeviceManager *pD3DManager, 
     _In_ IMFContentProtectionDevice *pContentProtectionDevice, 
-@@ -19969,7 +19970,7 @@ EXTERN_C const IID IID_IMFNetCrossOriginSupport;
+@@ -19969,7 +20040,7 @@ EXTERN_C const IID IID_IMFNetCrossOriginSupport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1429,7 +1529,7 @@ index 2fddf5400d..776473eadc 100644
      IMFNetCrossOriginSupport : public IUnknown
      {
      public:
-@@ -20095,7 +20096,7 @@ EXTERN_C const IID IID_IMFHttpDownloadRequest;
+@@ -20095,7 +20166,7 @@ EXTERN_C const IID IID_IMFHttpDownloadRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1438,7 +1538,7 @@ index 2fddf5400d..776473eadc 100644
      IMFHttpDownloadRequest : public IUnknown
      {
      public:
-@@ -20425,7 +20426,7 @@ EXTERN_C const IID IID_IMFHttpDownloadSession;
+@@ -20425,7 +20496,7 @@ EXTERN_C const IID IID_IMFHttpDownloadSession;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1447,7 +1547,7 @@ index 2fddf5400d..776473eadc 100644
      IMFHttpDownloadSession : public IUnknown
      {
      public:
-@@ -20558,7 +20559,7 @@ EXTERN_C const IID IID_IMFHttpDownloadSessionProvider;
+@@ -20558,7 +20629,7 @@ EXTERN_C const IID IID_IMFHttpDownloadSessionProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1456,7 +1556,7 @@ index 2fddf5400d..776473eadc 100644
      IMFHttpDownloadSessionProvider : public IUnknown
      {
      public:
-@@ -21129,7 +21130,7 @@ EXTERN_C const IID IID_IMFSensorDevice;
+@@ -21129,7 +21200,7 @@ EXTERN_C const IID IID_IMFSensorDevice;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1465,7 +1565,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorDevice : public IUnknown
      {
      public:
-@@ -21340,7 +21341,7 @@ EXTERN_C const IID IID_IMFSensorGroup;
+@@ -21340,7 +21411,7 @@ EXTERN_C const IID IID_IMFSensorGroup;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1474,7 +1574,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorGroup : public IUnknown
      {
      public:
-@@ -21530,7 +21531,7 @@ EXTERN_C const IID IID_IMFSensorStream;
+@@ -21530,7 +21601,7 @@ EXTERN_C const IID IID_IMFSensorStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1483,7 +1583,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorStream : public IMFAttributes
      {
      public:
-@@ -21942,7 +21943,7 @@ EXTERN_C const IID IID_IMFSensorTransformFactory;
+@@ -21942,7 +22013,7 @@ EXTERN_C const IID IID_IMFSensorTransformFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1492,7 +1592,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorTransformFactory : public IUnknown
      {
      public:
-@@ -22101,13 +22102,13 @@ EXTERN_C const IID IID_IMFSensorTransformFactory;
+@@ -22101,13 +22172,13 @@ EXTERN_C const IID IID_IMFSensorTransformFactory;
  /* interface __MIDL_itf_mfidl_0000_0114 */
  /* [local] */ 
  
@@ -1508,7 +1608,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateSensorStream(
      _In_ DWORD StreamId,
      _In_opt_ IMFAttributes* pAttributes,
-@@ -22138,7 +22139,7 @@ EXTERN_C const IID IID_IMFSensorProfile;
+@@ -22138,7 +22209,7 @@ EXTERN_C const IID IID_IMFSensorProfile;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1517,7 +1617,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorProfile : public IUnknown
      {
      public:
-@@ -22276,7 +22277,7 @@ EXTERN_C const IID IID_IMFSensorProfileCollection;
+@@ -22276,7 +22347,7 @@ EXTERN_C const IID IID_IMFSensorProfileCollection;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1526,7 +1626,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorProfileCollection : public IUnknown
      {
      public:
-@@ -22424,14 +22425,14 @@ EXTERN_C const IID IID_IMFSensorProfileCollection;
+@@ -22424,14 +22495,14 @@ EXTERN_C const IID IID_IMFSensorProfileCollection;
  /* interface __MIDL_itf_mfidl_0000_0116 */
  /* [local] */ 
  
@@ -1543,7 +1643,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateSensorProfileCollection(
      _COM_Outptr_ IMFSensorProfileCollection** ppSensorProfile
      );
-@@ -22453,7 +22454,7 @@ EXTERN_C const IID IID_IMFSensorProcessActivity;
+@@ -22453,7 +22524,7 @@ EXTERN_C const IID IID_IMFSensorProcessActivity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1552,7 +1652,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorProcessActivity : public IUnknown
      {
      public:
-@@ -22579,7 +22580,7 @@ EXTERN_C const IID IID_IMFSensorActivityReport;
+@@ -22579,7 +22650,7 @@ EXTERN_C const IID IID_IMFSensorActivityReport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1561,7 +1661,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorActivityReport : public IUnknown
      {
      public:
-@@ -22725,7 +22726,7 @@ EXTERN_C const IID IID_IMFSensorActivitiesReport;
+@@ -22725,7 +22796,7 @@ EXTERN_C const IID IID_IMFSensorActivitiesReport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1570,7 +1670,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorActivitiesReport : public IUnknown
      {
      public:
-@@ -22846,7 +22847,7 @@ EXTERN_C const IID IID_IMFSensorActivitiesReportCallback;
+@@ -22846,7 +22917,7 @@ EXTERN_C const IID IID_IMFSensorActivitiesReportCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1579,7 +1679,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorActivitiesReportCallback : public IUnknown
      {
      public:
-@@ -22933,7 +22934,7 @@ EXTERN_C const IID IID_IMFSensorActivityMonitor;
+@@ -22933,7 +23004,7 @@ EXTERN_C const IID IID_IMFSensorActivityMonitor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1588,7 +1688,7 @@ index 2fddf5400d..776473eadc 100644
      IMFSensorActivityMonitor : public IUnknown
      {
      public:
-@@ -23822,7 +23823,7 @@ EXTERN_C const IID IID_IMFRelativePanelReport;
+@@ -23822,7 +23893,7 @@ EXTERN_C const IID IID_IMFRelativePanelReport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1597,7 +1697,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRelativePanelReport : public IUnknown
      {
      public:
-@@ -23909,7 +23910,7 @@ EXTERN_C const IID IID_IMFRelativePanelWatcher;
+@@ -23909,7 +23980,7 @@ EXTERN_C const IID IID_IMFRelativePanelWatcher;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1606,7 +1706,7 @@ index 2fddf5400d..776473eadc 100644
      IMFRelativePanelWatcher : public IMFShutdown
      {
      public:
-@@ -24040,7 +24041,7 @@ EXTERN_C const IID IID_IMFRelativePanelWatcher;
+@@ -24040,7 +24111,7 @@ EXTERN_C const IID IID_IMFRelativePanelWatcher;
  /* [local] */ 
  
  
@@ -1615,7 +1715,7 @@ index 2fddf5400d..776473eadc 100644
  MFCreateRelativePanelWatcher(
      _In_ PCWSTR videoDeviceId,
      _In_ PCWSTR displayMonitorDeviceId,
-@@ -24062,7 +24063,7 @@ EXTERN_C const IID IID_IMFVideoCaptureSampleAllocator;
+@@ -24062,7 +24133,7 @@ EXTERN_C const IID IID_IMFVideoCaptureSampleAllocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1624,7 +1724,7 @@ index 2fddf5400d..776473eadc 100644
      IMFVideoCaptureSampleAllocator : public IMFVideoSampleAllocator
      {
      public:
-@@ -24222,7 +24223,7 @@ EXTERN_C const IID IID_IMFSampleAllocatorControl;
+@@ -24222,7 +24293,7 @@ EXTERN_C const IID IID_IMFSampleAllocatorControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1633,80 +1733,13 @@ index 2fddf5400d..776473eadc 100644
      IMFSampleAllocatorControl : public IUnknown
      {
      public:
-@@ -26320,6 +26321,77 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
+@@ -26320,6 +26391,10 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
  }
  #endif
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("MF_RESOLUTION_MEDIASOURCE")
-+#undef MF_RESOLUTION_MEDIASOURCE
-+#pragma push_macro("MF_RESOLUTION_BYTESTREAM")
-+#undef MF_RESOLUTION_BYTESTREAM
-+#pragma push_macro("MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE")
-+#undef MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE
-+#pragma push_macro("MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL")
-+#undef MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL
-+#pragma push_macro("MF_RESOLUTION_DISABLE_LOCAL_PLUGINS")
-+#undef MF_RESOLUTION_DISABLE_LOCAL_PLUGINS
-+#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY")
-+#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY
-+#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY")
-+#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY
-+#pragma push_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE")
-+#undef MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE
-+#pragma push_macro("MF_RESOLUTION_ENABLE_STORE_PLUGINS")
-+#undef MF_RESOLUTION_ENABLE_STORE_PLUGINS
-+#pragma push_macro("MF_RESOLUTION_READ")
-+#undef MF_RESOLUTION_READ
-+#pragma push_macro("MF_RESOLUTION_WRITE")
-+#undef MF_RESOLUTION_WRITE
-+enum [[clang::flag_enum]] MF_RESOLUTION_FLAGS : int
-+{
-+    MF_RESOLUTION_MEDIASOURCE = 1,
-+    MF_RESOLUTION_BYTESTREAM = 2,
-+    MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE = 16,
-+    MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL = 32,
-+    MF_RESOLUTION_DISABLE_LOCAL_PLUGINS = 64,
-+    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY = 128,
-+    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY = 256,
-+    MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE = 512,
-+    MF_RESOLUTION_ENABLE_STORE_PLUGINS = 1024,
-+    MF_RESOLUTION_READ = 65536,
-+    MF_RESOLUTION_WRITE = 131072,
-+};
-+#pragma pop_macro("MF_RESOLUTION_WRITE")
-+#pragma pop_macro("MF_RESOLUTION_READ")
-+#pragma pop_macro("MF_RESOLUTION_ENABLE_STORE_PLUGINS")
-+#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY_EDGEMODE")
-+#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_WEB_ONLY")
-+#pragma pop_macro("MF_RESOLUTION_PLUGIN_CONTROL_POLICY_APPROVED_ONLY")
-+#pragma pop_macro("MF_RESOLUTION_DISABLE_LOCAL_PLUGINS")
-+#pragma pop_macro("MF_RESOLUTION_KEEP_BYTE_STREAM_ALIVE_ON_FAIL")
-+#pragma pop_macro("MF_RESOLUTION_CONTENT_DOES_NOT_HAVE_TO_MATCH_EXTENSION_OR_MIME_TYPE")
-+#pragma pop_macro("MF_RESOLUTION_BYTESTREAM")
-+#pragma pop_macro("MF_RESOLUTION_MEDIASOURCE")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL")
-+#undef MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL
-+enum MF_ACTIVATE_CUSTOM_MIXER : int
-+{
-+    MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL = 1,
-+};
-+#pragma pop_macro("MF_ACTIVATE_CUSTOM_MIXER_ALLOWFAIL")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL")
-+#undef MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL
-+enum MF_ACTIVATE_CUSTOM_PRESENTER : int
-+{
-+    MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL = 1,
-+};
-+#pragma pop_macro("MF_ACTIVATE_CUSTOM_PRESENTER_ALLOWFAIL")
-+#endif
 +
  #endif
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
-index f987975a89..f25d3dc52f 100644
+index f987975a89..58b9708a87 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 @@ -21,6 +21,7 @@
@@ -109,12 +109,14 @@ index f987975a89..f25d3dc52f 100644
  {
  
      ClfsLogArchiveEnabled = 0x01,
-@@ -1301,6 +1302,29 @@ operator>=
+@@ -1301,6 +1302,32 @@ operator>=
  // end_wdm
  
  
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_CLFS_FLAG
++#define WIN32METADATA_ENUM_CLFS_FLAG
 +#pragma push_macro("CLFS_FLAG_FORCE_APPEND")
 +#undef CLFS_FLAG_FORCE_APPEND
 +#pragma push_macro("CLFS_FLAG_FORCE_FLUSH")
@@ -134,6 +136,7 @@ index f987975a89..f25d3dc52f 100644
 +#pragma pop_macro("CLFS_FLAG_NO_FLAGS")
 +#pragma pop_macro("CLFS_FLAG_FORCE_FLUSH")
 +#pragma pop_macro("CLFS_FLAG_FORCE_APPEND")
++#endif
 +#endif
 +
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU) */

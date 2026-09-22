@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
-index dad771d0a5..f1d4ffc08e 100644
+index dad771d0a5..1cccf28c9a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -398,12 +398,14 @@ index dad771d0a5..f1d4ffc08e 100644
  BOOL
  WINAPI
  AuthzFreeCentralAccessPolicyCache(
-@@ -1100,4 +1107,79 @@ AuthzFreeCentralAccessPolicyCache(
+@@ -1100,4 +1107,94 @@ AuthzFreeCentralAccessPolicyCache(
  
  #if _MSC_VER >= 1200
  #pragma warning(pop)
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_AUTHZ_RESOURCE_MANAGER_FLAGS
++#define WIN32METADATA_ENUM_AUTHZ_RESOURCE_MANAGER_FLAGS
 +#pragma push_macro("AUTHZ_RM_FLAG_NO_AUDIT")
 +#undef AUTHZ_RM_FLAG_NO_AUDIT
 +#pragma push_macro("AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION")
@@ -420,8 +422,11 @@ index dad771d0a5..f1d4ffc08e 100644
 +#pragma pop_macro("AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION")
 +#pragma pop_macro("AUTHZ_RM_FLAG_NO_AUDIT")
 +#endif
++#endif
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_AUTHZ_ACCESS_CHECK_FLAGS
++#define WIN32METADATA_ENUM_AUTHZ_ACCESS_CHECK_FLAGS
 +#pragma push_macro("AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD")
 +#undef AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD
 +enum AUTHZ_ACCESS_CHECK_FLAGS : unsigned int
@@ -430,8 +435,11 @@ index dad771d0a5..f1d4ffc08e 100644
 +};
 +#pragma pop_macro("AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD")
 +#endif
++#endif
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS
++#define WIN32METADATA_ENUM_AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS
 +#pragma push_macro("AUTHZ_NO_SUCCESS_AUDIT")
 +#undef AUTHZ_NO_SUCCESS_AUDIT
 +#pragma push_macro("AUTHZ_NO_FAILURE_AUDIT")
@@ -448,8 +456,11 @@ index dad771d0a5..f1d4ffc08e 100644
 +#pragma pop_macro("AUTHZ_NO_FAILURE_AUDIT")
 +#pragma pop_macro("AUTHZ_NO_SUCCESS_AUDIT")
 +#endif
++#endif
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_AUTHZ_GENERATE_RESULTS
++#define WIN32METADATA_ENUM_AUTHZ_GENERATE_RESULTS
 +#pragma push_macro("AUTHZ_GENERATE_SUCCESS_AUDIT")
 +#undef AUTHZ_GENERATE_SUCCESS_AUDIT
 +#pragma push_macro("AUTHZ_GENERATE_FAILURE_AUDIT")
@@ -462,8 +473,11 @@ index dad771d0a5..f1d4ffc08e 100644
 +#pragma pop_macro("AUTHZ_GENERATE_FAILURE_AUDIT")
 +#pragma pop_macro("AUTHZ_GENERATE_SUCCESS_AUDIT")
 +#endif
++#endif
 +
 +#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_AUTHZ_SECURITY_ATTRIBUTE_FLAGS
++#define WIN32METADATA_ENUM_AUTHZ_SECURITY_ATTRIBUTE_FLAGS
 +#pragma push_macro("AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE")
 +#undef AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE
 +#pragma push_macro("AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE")
@@ -475,6 +489,7 @@ index dad771d0a5..f1d4ffc08e 100644
 +};
 +#pragma pop_macro("AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE")
 +#pragma pop_macro("AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE")
++#endif
 +#endif
 +
  #endif
