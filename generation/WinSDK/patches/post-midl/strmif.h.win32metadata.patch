@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
-index bf0a3c0f30..15563cde04 100644
+index bf0a3c0f30..2822b28367 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 @@ -1,3 +1,4 @@
@@ -34,7 +34,7 @@ index bf0a3c0f30..15563cde04 100644
              /* [annotation][in] */ 
              _In_  const AM_MEDIA_TYPE *pmt) = 0;
          
-@@ -1538,10 +1539,10 @@ EXTERN_C const IID IID_IEnumPins;
+@@ -1538,11 +1539,11 @@ EXTERN_C const IID IID_IEnumPins;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -42,12 +42,13 @@ index bf0a3c0f30..15563cde04 100644
 +    MIDL_INTERFACE("56a86892-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
      IEnumPins : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cPins,
-@@ -1678,10 +1679,10 @@ EXTERN_C const IID IID_IEnumMediaTypes;
+             /* [annotation][size_is][out] */ 
+@@ -1678,11 +1679,11 @@ EXTERN_C const IID IID_IEnumMediaTypes;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -55,11 +56,12 @@ index bf0a3c0f30..15563cde04 100644
 +    MIDL_INTERFACE("89c31040-846b-11ce-97d3-00aa0055595a") _Windows_SupportedOS_Windows2000_ 
      IEnumMediaTypes : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cMediaTypes,
+             /* [annotation][size_is][out] */ 
 @@ -1818,7 +1819,7 @@ EXTERN_C const IID IID_IFilterGraph;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -69,7 +71,7 @@ index bf0a3c0f30..15563cde04 100644
      IFilterGraph : public IUnknown
      {
      public:
-@@ -2018,10 +2019,10 @@ EXTERN_C const IID IID_IEnumFilters;
+@@ -2018,11 +2019,11 @@ EXTERN_C const IID IID_IEnumFilters;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -77,11 +79,12 @@ index bf0a3c0f30..15563cde04 100644
 +    MIDL_INTERFACE("56a86893-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
      IEnumFilters : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cFilters,
+             /* [annotation][out] */ 
 @@ -2166,7 +2167,7 @@ EXTERN_C const IID IID_IMediaFilter;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -223,15 +226,15 @@ index bf0a3c0f30..15563cde04 100644
              /* [annotation][in] */ 
              _In_  const GUID *Api) = 0;
          
-@@ -5080,7 +5081,7 @@ EXTERN_C const IID IID_IEnumRegFilters;
-     MIDL_INTERFACE("56a868a4-0ad4-11ce-b03a-0020af0ba770")
+@@ -5081,7 +5082,7 @@ EXTERN_C const IID IID_IEnumRegFilters;
      IEnumRegFilters : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cFilters,
+             /* [annotation][out] */ 
 @@ -5569,7 +5570,7 @@ EXTERN_C const IID IID_IFilterMapper2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

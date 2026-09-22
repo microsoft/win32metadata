@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
-index 32f87f3e14..f47b336282 100644
+index 32f87f3e14..9eaf2202ae 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
 @@ -1,3 +1,4 @@
@@ -43,7 +43,7 @@ index 32f87f3e14..f47b336282 100644
          
      };
      
-@@ -4170,10 +4175,10 @@ EXTERN_C const IID IID_IEnumPIDMap;
+@@ -4170,11 +4175,11 @@ EXTERN_C const IID IID_IEnumPIDMap;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -51,11 +51,12 @@ index 32f87f3e14..f47b336282 100644
 +    MIDL_INTERFACE("afb6c2a2-2c41-11d3-8a60-0000f81e0e4a") _Windows_SupportedOS_Windows2000_ 
      IEnumPIDMap : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cRequest,
+             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) PID_MAP *pPIDMap,
 @@ -4298,7 +4303,7 @@ EXTERN_C const IID IID_IMPEG2PIDMap;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

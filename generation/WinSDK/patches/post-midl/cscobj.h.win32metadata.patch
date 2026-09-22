@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
-index 31cf48fdf9..175fd46a8f 100644
+index 31cf48fdf9..3add18aa5c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 @@ -337,6 +337,7 @@ extern "C"{
@@ -203,7 +203,7 @@ index 31cf48fdf9..175fd46a8f 100644
      IOfflineFilesItemContainer : public IUnknown
      {
      public:
-@@ -4280,10 +4281,10 @@ EXTERN_C const IID IID_IOfflineFilesChangeInfo;
+@@ -4280,11 +4281,11 @@ EXTERN_C const IID IID_IOfflineFilesChangeInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -211,11 +211,12 @@ index 31cf48fdf9..175fd46a8f 100644
 +    MIDL_INTERFACE("A96E6FA4-E0D1-4c29-960B-EE508FE68C72") _Windows_SupportedOS_WindowsVista_ 
      IOfflineFilesChangeInfo : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsDirty( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( 
              /* [out] */ __RPC__out BOOL *pbDirty) = 0;
          
+         virtual HRESULT STDMETHODCALLTYPE IsDeletedOffline( 
 @@ -4419,7 +4420,7 @@ EXTERN_C const IID IID_IOfflineFilesDirtyInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

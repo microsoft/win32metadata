@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..3d339b8beb 100644
+index 97a14455d2..74609378b2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,7 @@ index 97a14455d2..3d339b8beb 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -2226,10 +2227,10 @@ EXTERN_C const IID IID_IContextMenu;
+@@ -2226,11 +2227,11 @@ EXTERN_C const IID IID_IContextMenu;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -15,11 +15,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("000214e4-0000-0000-c000-000000000046") _Windows_SupportedOS_WindowsXP_ 
      IContextMenu : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
              /* [annotation][in] */ 
              _In_  HMENU hmenu,
+             /* [annotation][in] */ 
 @@ -2381,7 +2382,7 @@ EXTERN_C const IID IID_IContextMenu2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -101,7 +102,7 @@ index 97a14455d2..3d339b8beb 100644
      IPersistIDList : public IPersist
      {
      public:
-@@ -3755,10 +3756,10 @@ EXTERN_C const IID IID_IEnumIDList;
+@@ -3755,11 +3756,11 @@ EXTERN_C const IID IID_IEnumIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -109,11 +110,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("000214F2-0000-0000-C000-000000000046") _Windows_SupportedOS_WindowsXP_ 
      IEnumIDList : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -3767,13 +3768,13 @@ EXTERN_C const IID IID_IEnumIDList;
              /* [annotation][out] */ 
              _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
@@ -131,7 +133,7 @@ index 97a14455d2..3d339b8beb 100644
              /* [annotation][out] */ 
              _Out_  IEnumIDList **ppenum) = 0;
          
-@@ -3912,10 +3913,10 @@ EXTERN_C const IID IID_IEnumFullIDList;
+@@ -3912,11 +3913,11 @@ EXTERN_C const IID IID_IEnumFullIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -139,11 +141,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("d0191542-7954-4908-bc06-b2360bbe45ba") _Windows_SupportedOS_WindowsVista_ 
      IEnumFullIDList : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -4188,7 +4189,7 @@ EXTERN_C const IID IID_IFileSyncMergeHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -238,7 +241,7 @@ index 97a14455d2..3d339b8beb 100644
      {
          SVGIO_BACKGROUND	= 0,
          SVGIO_SELECTION	= 0x1,
-@@ -5576,10 +5581,10 @@ EXTERN_C const IID IID_IShellView;
+@@ -5576,11 +5581,11 @@ EXTERN_C const IID IID_IShellView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -246,11 +249,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("000214E3-0000-0000-C000-000000000046") _Windows_SupportedOS_WindowsXP_ 
      IShellView : public IOleWindow
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
              /* [annotation][in] */ 
              _In_  MSG *pmsg) = 0;
+         
 @@ -5630,7 +5635,7 @@ EXTERN_C const IID IID_IShellView;
          
          virtual HRESULT STDMETHODCALLTYPE GetItemObject( 
@@ -772,7 +776,7 @@ index 97a14455d2..3d339b8beb 100644
      IDragSourceHelper : public IUnknown
      {
      public:
-@@ -13409,10 +13430,10 @@ EXTERN_C const IID IID_IShellLinkA;
+@@ -13409,11 +13430,11 @@ EXTERN_C const IID IID_IShellLinkA;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -780,11 +784,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("000214EE-0000-0000-C000-000000000046") _Windows_SupportedOS_WindowsXP_ 
      IShellLinkA : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE GetPath( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE GetPath( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPSTR pszFile,
+             /* [annotation][in] */ 
 @@ -13423,7 +13444,7 @@ EXTERN_C const IID IID_IShellLinkA;
              /* [annotation][in] */ 
              _In_  DWORD fFlags) = 0;
@@ -808,7 +813,7 @@ index 97a14455d2..3d339b8beb 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetIconLocation( 
              /* [annotation][size_is][string][out] */ 
-@@ -13761,10 +13782,10 @@ EXTERN_C const IID IID_IShellLinkW;
+@@ -13761,11 +13782,11 @@ EXTERN_C const IID IID_IShellLinkW;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -816,11 +821,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("000214F9-0000-0000-C000-000000000046") _Windows_SupportedOS_WindowsXP_ 
      IShellLinkW : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE GetPath( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE GetPath( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPWSTR pszFile,
+             /* [annotation][in] */ 
 @@ -13775,7 +13796,7 @@ EXTERN_C const IID IID_IShellLinkW;
              /* [annotation][in] */ 
              _In_  DWORD fFlags) = 0;
@@ -1682,7 +1688,7 @@ index 97a14455d2..3d339b8beb 100644
      IInitializeCommand : public IUnknown
      {
      public:
-@@ -28810,10 +28843,10 @@ EXTERN_C const IID IID_IEnumExplorerCommand;
+@@ -28810,11 +28843,11 @@ EXTERN_C const IID IID_IEnumExplorerCommand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1690,11 +1696,12 @@ index 97a14455d2..3d339b8beb 100644
 +    MIDL_INTERFACE("a88826f8-186f-4987-aade-ea0cef8fbfe8") _Windows_SupportedOS_WindowsVista_ 
      IEnumExplorerCommand : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -28957,7 +28990,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
