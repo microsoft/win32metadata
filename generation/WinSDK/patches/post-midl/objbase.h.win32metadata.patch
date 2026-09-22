@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
-index a156d7da8a..a308c73352 100644
+index a156d7da8a..47eca67b78 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 @@ -18,6 +18,7 @@
@@ -27,10 +27,11 @@ index a156d7da8a..a308c73352 100644
  
  /* init/uninit */
  
+-_Check_return_ WINOLEAPI  CoInitialize(_In_opt_ LPVOID pvReserved);
 +_Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_PreserveResult_
- _Check_return_ WINOLEAPI  CoInitialize(_In_opt_ LPVOID pvReserved);
++_Check_return_ WINOLEAPI  CoInitialize(_Reserved_ _In_opt_ LPVOID pvReserved);
  
  #define COM_SUPPORT_MALLOC_SPIES
 +_Windows_SupportedOS_Windows2000_ 
@@ -111,15 +112,17 @@ index a156d7da8a..a308c73352 100644
      _In_ struct IStorage  *            pstg,
      _In_ DWORD                         dwCount,
      _Inout_updates_(dwCount) MULTI_QI * pResults );
-@@ -140,6 +169,8 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+@@ -140,7 +169,9 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
  #if (_WIN32_WINNT >= 0x0500 ) || defined(_WIN32_DCOM) // DCOM
  
  
+-WINOLEAPI CoAllowSetForegroundWindow(_In_ IUnknown *pUnk, _In_opt_ LPVOID lpvReserved);
 +_Windows_SupportedOS_Windows2000_ 
 +
- WINOLEAPI CoAllowSetForegroundWindow(_In_ IUnknown *pUnk, _In_opt_ LPVOID lpvReserved);
++WINOLEAPI CoAllowSetForegroundWindow(_In_ IUnknown *pUnk, _Reserved_ _In_opt_ LPVOID lpvReserved);
  
  
+ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulReserved, _In_ HRESULT appsHR);
 @@ -148,15 +179,28 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
  #endif
  
@@ -173,12 +176,13 @@ index a156d7da8a..a308c73352 100644
  //  Moniker APIs
  //
  
+-_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _Outptr_ LPVOID FAR* ppvResult);
 +_Windows_SupportedOS_Windows2000_ 
 +
- _Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _Outptr_ LPVOID FAR* ppvResult);
++_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _COM_Outptr_ _Outptr_ LPVOID FAR* ppvResult);
++
++_Windows_SupportedOS_Windows2000_ 
  
-+_Windows_SupportedOS_Windows2000_ 
-+
  _Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _Outptr_ void **ppv);
 +_Windows_SupportedOS_Windows2000_ 
 +

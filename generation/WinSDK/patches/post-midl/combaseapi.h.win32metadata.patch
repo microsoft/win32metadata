@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
-index dee3a82100..7fe37261f2 100644
+index dee3a82100..9952ebd2bd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 @@ -1,3 +1,4 @@
@@ -59,8 +59,9 @@ index dee3a82100..7fe37261f2 100644
 -_Check_return_ WINOLEAPI
 +_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ WINOLEAPI
  CoInitializeEx(
-     _In_opt_ LPVOID pvReserved,
+-    _In_opt_ LPVOID pvReserved,
 -    _In_ DWORD dwCoInit
++    _Reserved_ _In_opt_ LPVOID pvReserved,
 +    _Win32_AssociatedEnum_(COINIT) _In_ DWORD dwCoInit
      );
  
@@ -262,7 +263,7 @@ index dee3a82100..7fe37261f2 100644
  CoUnmarshalHresult(
      _In_ LPSTREAM pstm,
      _Out_ HRESULT  FAR * phresult
-@@ -734,12 +735,12 @@ CoUnmarshalHresult(
+@@ -734,15 +735,15 @@ CoUnmarshalHresult(
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -276,7 +277,11 @@ index dee3a82100..7fe37261f2 100644
 +_Windows_SupportedOS_Windows2000_ _Check_return_ WINOLEAPI
  CoDisconnectObject(
      _In_ LPUNKNOWN pUnk,
-     _In_ DWORD dwReserved
+-    _In_ DWORD dwReserved
++    _Reserved_ _In_ DWORD dwReserved
+     );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 @@ -751,7 +752,7 @@ CoDisconnectObject(
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -339,7 +344,7 @@ index dee3a82100..7fe37261f2 100644
  CoCreateFreeThreadedMarshaler(
      _In_opt_ LPUNKNOWN punkOuter,
      _Outptr_ LPUNKNOWN* ppunkMarshal
-@@ -850,13 +851,13 @@ CoCreateFreeThreadedMarshaler(
+@@ -850,16 +851,16 @@ CoCreateFreeThreadedMarshaler(
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -354,7 +359,11 @@ index dee3a82100..7fe37261f2 100644
 +_Windows_SupportedOS_WindowsXP_ WINOLEAPI_(void)
  CoFreeUnusedLibrariesEx(
      _In_ DWORD dwUnloadDelay,
-     _In_ DWORD dwReserved
+-    _In_ DWORD dwReserved
++    _Reserved_ _In_ DWORD dwReserved
+     );
+ 
+ #endif
 @@ -872,7 +873,7 @@ CoFreeUnusedLibrariesEx(
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -364,7 +373,7 @@ index dee3a82100..7fe37261f2 100644
  CoDisconnectContext(
      DWORD dwTimeout
      );
-@@ -890,16 +891,16 @@ CoDisconnectContext(
+@@ -890,17 +891,17 @@ CoDisconnectContext(
  
  /* Call Security. */
  
@@ -374,17 +383,20 @@ index dee3a82100..7fe37261f2 100644
      _In_opt_ PSECURITY_DESCRIPTOR pSecDesc,
      _In_ LONG cAuthSvc,
      _In_reads_opt_(cAuthSvc) SOLE_AUTHENTICATION_SERVICE* asAuthSvc,
-     _In_opt_ void* pReserved1,
+-    _In_opt_ void* pReserved1,
 -    _In_ DWORD dwAuthnLevel,
 -    _In_ DWORD dwImpLevel,
++    _Reserved_ _In_opt_ void* pReserved1,
 +    _Win32_AssociatedEnum_(RPC_C_AUTHN_LEVEL) _In_ DWORD dwAuthnLevel,
 +    _Win32_AssociatedEnum_(RPC_C_IMP_LEVEL) _In_ DWORD dwImpLevel,
      _In_opt_ void* pAuthList,
 -    _In_ DWORD dwCapabilities,
+-    _In_opt_ void* pReserved3
 +    _Win32_AssociatedEnum_(EOLE_AUTHENTICATION_CAPABILITIES) _In_ DWORD dwCapabilities,
-     _In_opt_ void* pReserved3
++    _Reserved_ _In_opt_ void* pReserved3
      );
  
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 @@ -909,13 +910,13 @@ CoInitializeSecurity(
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -514,7 +526,7 @@ index dee3a82100..7fe37261f2 100644
  CoRegisterActivationFilter(
      _In_ IActivationFilter* pActivationFilter
      );
-@@ -1067,35 +1068,35 @@ CoRegisterActivationFilter(
+@@ -1067,37 +1068,37 @@ CoRegisterActivationFilter(
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -548,14 +560,18 @@ index dee3a82100..7fe37261f2 100644
 -_Check_return_ WINOLEAPI
 +_Windows_SupportedOS_Windows2000_ _Check_return_ WINOLEAPI
  CoEnableCallCancellation(
-     _In_opt_ LPVOID pReserved
+-    _In_opt_ LPVOID pReserved
++    _Reserved_ _In_opt_ LPVOID pReserved
      );
  
 -_Check_return_ WINOLEAPI
 +_Windows_SupportedOS_Windows2000_ _Check_return_ WINOLEAPI
  CoDisableCallCancellation(
-     _In_opt_ LPVOID pReserved
+-    _In_opt_ LPVOID pReserved
++    _Reserved_ _In_opt_ LPVOID pReserved
      );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 @@ -1110,25 +1111,25 @@ CoDisableCallCancellation(
  
  /* other helpers */

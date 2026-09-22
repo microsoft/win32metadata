@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
-index 5ac51cc068..eaa8235193 100644
+index 5ac51cc068..966cde39cb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
 @@ -1049,19 +1049,19 @@ extern "C" {
@@ -986,7 +986,7 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  BOOL
-@@ -2967,7 +2967,7 @@ RestoreThreadPreferredUILanguages(_In_ const HSAVEDUILANGUAGES snapshot);
+@@ -2967,14 +2967,14 @@ RestoreThreadPreferredUILanguages(_In_ const HSAVEDUILANGUAGES snapshot);
  
  #if(WINVER >= 0x0600)
  
@@ -995,6 +995,14 @@ index 5ac51cc068..eaa8235193 100644
  BOOL
  WINAPI
  NotifyUILanguageChange(
+     _In_        DWORD dwFlags,
+     _In_opt_    PCWSTR pcwstrNewLanguage,
+     _In_opt_    PCWSTR pcwstrPreviousLanguage,
+-    _In_        DWORD dwReserved,
++    _Reserved_ _In_        DWORD dwReserved,
+     _Out_opt_   PDWORD pdwStatusRtrn
+ );
+ 
 @@ -2991,9 +2991,9 @@ NotifyUILanguageChange(
  #pragma region Desktop or OneCore or Application or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
@@ -1225,7 +1233,7 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  int
-@@ -3347,7 +3347,7 @@ GetLocaleInfoEx(
+@@ -3347,14 +3347,14 @@ GetLocaleInfoEx(
  #pragma region Desktop or PC Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -1234,6 +1242,14 @@ index 5ac51cc068..eaa8235193 100644
  WINBASEAPI
  int
  WINAPI
+ GetCalendarInfoEx(
+     _In_opt_ LPCWSTR lpLocaleName,
+     _In_ CALID Calendar,
+-    _In_opt_ LPCWSTR lpReserved,
++    _Reserved_ _In_opt_ LPCWSTR lpReserved,
+     _In_ CALTYPE CalType,
+     _Out_writes_opt_(cchData) LPWSTR lpCalData,
+     _In_ int cchData,
 @@ -3391,8 +3391,8 @@ GetDurationFormatEx(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -1320,7 +1336,13 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  int
-@@ -3511,14 +3511,14 @@ FindNLSStringEx(
+@@ -3506,19 +3506,19 @@ FindNLSStringEx(
+     _In_ int cchValue,
+     _Out_opt_ LPINT pcchFound,
+     _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
+-    _In_opt_ LPVOID lpReserved,
++    _Reserved_ _In_opt_ LPVOID lpReserved,
+     _In_opt_ LPARAM sortHandle
  );
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -1338,7 +1360,12 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  int
-@@ -3535,8 +3535,8 @@ LCMapStringEx(
+@@ -3531,12 +3531,12 @@ LCMapStringEx(
+     _Out_writes_opt_(cchDest) LPWSTR lpDestStr,
+     _In_ int cchDest,
+     _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
+-    _In_opt_ LPVOID lpReserved,
++    _Reserved_ _In_opt_ LPVOID lpReserved,
      _In_opt_ LPARAM sortHandle
  );
  
@@ -1360,7 +1387,15 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  BOOL
-@@ -3569,8 +3569,8 @@ EnumCalendarInfoExEx(
+@@ -3562,15 +3562,15 @@ EnumCalendarInfoExEx(
+     _In_ CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx,
+     _In_opt_ LPCWSTR lpLocaleName,
+     _In_ CALID Calendar,
+-    _In_opt_ LPCWSTR lpReserved,
++    _Reserved_ _In_opt_ LPCWSTR lpReserved,
+     _In_ CALTYPE CalType,
+     _In_ LPARAM lParam
+ );
  
  typedef BOOL (CALLBACK* DATEFMT_ENUMPROCEXEX)(LPWSTR, CALID, LPARAM);
  
@@ -1393,6 +1428,15 @@ index 5ac51cc068..eaa8235193 100644
  _Win32_SetLastError_
  WINBASEAPI
  BOOL
+@@ -3615,7 +3615,7 @@ EnumSystemLocalesEx(
+     _In_ LOCALE_ENUMPROCEX lpLocaleEnumProcEx,
+     _In_ DWORD dwFlags,
+     _In_ LPARAM lParam,
+-    _In_opt_ LPVOID lpReserved
++    _Reserved_ _In_opt_ LPVOID lpReserved
+ );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 @@ -3628,7 +3628,7 @@ EnumSystemLocalesEx(
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)

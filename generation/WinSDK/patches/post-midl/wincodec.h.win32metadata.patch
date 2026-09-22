@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
-index f04e1f9622..aa319a8d86 100644
+index f04e1f9622..ba50e025c6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
 @@ -1,3 +1,4 @@
@@ -500,7 +500,7 @@ index f04e1f9622..aa319a8d86 100644
      IWICBitmapCodecInfo : public IWICComponentInfo
      {
      public:
-@@ -7402,7 +7403,7 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
+@@ -7402,13 +7403,13 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -509,6 +509,13 @@ index f04e1f9622..aa319a8d86 100644
      IWICBitmapEncoderInfo : public IWICBitmapCodecInfo
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [annotation][out] */ 
+-            _Out_  IWICBitmapEncoder **ppIBitmapEncoder) = 0;
++            _COM_Outptr_ _Out_  IWICBitmapEncoder **ppIBitmapEncoder) = 0;
+         
+     };
+     
 @@ -7713,7 +7714,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -518,6 +525,15 @@ index f04e1f9622..aa319a8d86 100644
      IWICBitmapDecoderInfo : public IWICBitmapCodecInfo
      {
      public:
+@@ -7735,7 +7736,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [annotation][out] */ 
+-            _Out_  IWICBitmapDecoder **ppIBitmapDecoder) = 0;
++            _COM_Outptr_ _Out_  IWICBitmapDecoder **ppIBitmapDecoder) = 0;
+         
+     };
+     
 @@ -8081,7 +8082,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

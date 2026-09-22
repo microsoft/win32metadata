@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
+index b09d36293b..24832192a0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
+@@ -338,14 +338,14 @@ DebugConnectWide(
+ STDAPI
+ DebugCreate(
+     _In_ REFIID InterfaceId,
+-    _Out_ PVOID* Interface
++    _COM_Outptr_ _Out_ PVOID* Interface
+     );
+ 
+ STDAPI
+ DebugCreateEx(
+     _In_ REFIID InterfaceId,
+     _In_ DWORD  DbgEngOptions,
+-    _Out_ PVOID* Interface
++    _COM_Outptr_ _Out_ PVOID* Interface
+     );
+ 
+ //----------------------------------------------------------------------------

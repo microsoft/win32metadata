@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
-index 08157113c7..f37b495f83 100644
+index 08157113c7..9afd0ada41 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
 @@ -1,3 +1,4 @@
@@ -218,7 +218,7 @@ index 08157113c7..f37b495f83 100644
  	MSIHANDLE hDatabaseMerge,    // database to be merged into hDatabase
  	LPCWSTR   szTableName);      // name of non-persistent table to receive errors
  #ifdef UNICODE
-@@ -439,12 +440,12 @@ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
+@@ -439,16 +440,16 @@ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
  // Generate a transform file of differences between two databases
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -226,13 +226,21 @@ index 08157113c7..f37b495f83 100644
 +_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCSTR   szTransformFile,   // name of generated transform file
- 	int       iReserved1,         // reserved argument, not used
- 	int       iReserved2);        // reserved argument, not used
+-	int       iReserved1,         // reserved argument, not used
+-	int       iReserved2);        // reserved argument, not used
 -UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
++	_Reserved_ int       iReserved1,         // reserved argument, not used
++	_Reserved_ int       iReserved2);        // reserved argument, not used
 +_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCWSTR   szTransformFile,   // name of generated transform file
- 	int       iReserved1,         // reserved argument, not used
+-	int       iReserved1,         // reserved argument, not used
+-	int       iReserved2);        // reserved argument, not used
++	_Reserved_ int       iReserved1,         // reserved argument, not used
++	_Reserved_ int       iReserved2);        // reserved argument, not used
+ #ifdef UNICODE
+ #define MsiDatabaseGenerateTransform  MsiDatabaseGenerateTransformW
+ #else
 @@ -458,12 +459,12 @@ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
  // Apply a transform file containing database difference
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
