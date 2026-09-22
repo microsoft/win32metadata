@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
-index 6a7d19dbbd..4e6d0ef3cc 100644
+index 6a7d19dbbd..89692d4031 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
 @@ -1,3 +1,4 @@
@@ -105,6 +105,15 @@ index 6a7d19dbbd..4e6d0ef3cc 100644
  
  //+-----------------------------------------------------------------------------
  //
+@@ -259,7 +260,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9
+ 
+     // Gets timing information about the composition engine.
+     STDMETHOD(GetFrameStatistics)(THIS_
+-        _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
++        _Win32_Retval_ _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
+         ) PURE;
+ 
+     // Creates a composition target bound to a window represented by an HWND.
 @@ -1287,12 +1288,12 @@ DECLARE_INTERFACE_IID_(IDCompositionVirtualSurface, IDCompositionSurface, "AE471
  };
  
@@ -123,6 +132,15 @@ index 6a7d19dbbd..4e6d0ef3cc 100644
  
  //+-----------------------------------------------------------------------------
  //
+@@ -1318,7 +1319,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-
+ 
+     // Gets timing information about the composition engine.
+     STDMETHOD(GetFrameStatistics)(THIS_
+-        _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
++        _Win32_Retval_ _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
+         ) PURE;
+ 
+     // Creates a new visual object.
 @@ -1572,8 +1573,8 @@ DECLARE_INTERFACE_IID_(IDCompositionVisualDebug, IDCompositionVisual2, "FED2B808
  #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
  

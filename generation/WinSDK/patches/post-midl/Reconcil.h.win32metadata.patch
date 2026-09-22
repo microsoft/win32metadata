@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
-index a3746ee59d..9ed323a095 100644
+index a3746ee59d..97d2a81158 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index a3746ee59d..9ed323a095 100644
  
     // INotifyReplica
  
-+   _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_
++    
     STDMETHOD(YouAreAReplica)(THIS_
                               ULONG ulcOtherReplicas,
                               _Inout_updates_(ulcOtherReplicas) IMoniker **rgpmkOtherReplicas) PURE;
@@ -19,11 +19,11 @@ index a3746ee59d..9ed323a095 100644
  
     // IReconcileInitiator
  
-+   _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_
++    
     STDMETHOD(SetAbortCallback)(THIS_
                                 _Inout_opt_ IUnknown *punkForAbort) PURE;
  
-+   _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_
++    
     STDMETHOD(SetProgressFeedback)(THIS_
                                    ULONG ulProgress,
                                    ULONG ulProgressMax) PURE;
@@ -31,12 +31,12 @@ index a3746ee59d..9ed323a095 100644
  
     // IReconcilableObject
  
-+   _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_
-+   _Win32_PreserveResult_
++    
++   
     STDMETHOD(Reconcile)(THIS_
                          _Inout_ IReconcileInitiator *pInitiator,
 -                        DWORD dwFlags,
-+                        _Win32_AssociatedEnum_(RECONCILEF) DWORD dwFlags,
++                         DWORD dwFlags,
                          HWND hwndOwner,
                          HWND hwndProgressFeedback,
                          ULONG ulcInput,
@@ -44,7 +44,7 @@ index a3746ee59d..9ed323a095 100644
                          _Inout_ IStorage *pstgNewResidues,
                          _Reserved_ PVOID pvReserved) PURE;
  
-+   _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_
++    
     STDMETHOD(GetProgressFeedbackMaxEstimate)(THIS_
                                               _Out_ PULONG pulProgressMax) PURE;
  };

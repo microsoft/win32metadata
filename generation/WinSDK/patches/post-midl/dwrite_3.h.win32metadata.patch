@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-index 01a3b56cc5..b75bf6be4c 100644
+index 01a3b56cc5..aafdb91b6e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 @@ -9,20 +9,21 @@
@@ -67,6 +67,42 @@ index 01a3b56cc5..b75bf6be4c 100644
  {
      /// <summary>
      /// Specifies that the rendering mode is determined automatically based on the font and size.
+@@ -342,7 +343,7 @@ enum DWRITE_RENDERING_MODE1
+ /// <summary>
+ /// The interface that represents text rendering settings for glyph rasterization and filtering.
+ /// </summary>
+-interface DWRITE_DECLARE_INTERFACE("B7924BAA-391B-412A-8C5C-E44CC2D867DC") IDWriteRenderingParams3 : public IDWriteRenderingParams2
++interface _Windows_SupportedOS_10240_  DWRITE_DECLARE_INTERFACE("B7924BAA-391B-412A-8C5C-E44CC2D867DC") IDWriteRenderingParams3 : public IDWriteRenderingParams2
+ {
+     /// <summary>
+     /// Gets the rendering mode.
+@@ -354,7 +355,7 @@ interface DWRITE_DECLARE_INTERFACE("B7924BAA-391B-412A-8C5C-E44CC2D867DC") IDWri
+ /// <summary>
+ /// The root factory interface for all DWrite objects.
+ /// </summary>
+-interface DWRITE_DECLARE_INTERFACE("9A1B41C3-D3BB-466A-87FC-FE67556A3B65") IDWriteFactory3 : public IDWriteFactory2
++interface _Windows_SupportedOS_10240_  DWRITE_DECLARE_INTERFACE("9A1B41C3-D3BB-466A-87FC-FE67556A3B65") IDWriteFactory3 : public IDWriteFactory2
+ {
+     /// <summary>
+     /// Creates a glyph run analysis object, which encapsulates information
+@@ -874,7 +875,7 @@ interface DWRITE_DECLARE_INTERFACE("DA20D8EF-812A-4C43-9802-62EC4ABD7ADF") IDWri
+ /// <summary>
+ /// The IDWriteFontList interface represents a list of fonts.
+ /// </summary>
+-interface DWRITE_DECLARE_INTERFACE("DA20D8EF-812A-4C43-9802-62EC4ABD7ADE") IDWriteFontList1 : public IDWriteFontList
++interface _Windows_SupportedOS_10240_  DWRITE_DECLARE_INTERFACE("DA20D8EF-812A-4C43-9802-62EC4ABD7ADE") IDWriteFontList1 : public IDWriteFontList
+ {
+     /// <summary>
+     /// Gets the current locality of a font given its zero-based index.
+@@ -1427,7 +1428,7 @@ interface DWRITE_DECLARE_INTERFACE("CFEE3140-1157-47CA-8B85-31BFCF3F2D0E") IDWri
+ /// downloading thread, and objects must be prepared to handle calls on their methods
+ /// from other threads at any time.
+ /// </summary>
+-interface DWRITE_DECLARE_INTERFACE("B06FE5B9-43EC-4393-881B-DBE4DC72FDA7") IDWriteFontDownloadListener : public IUnknown
++interface _Windows_SupportedOS_Windows81_  DWRITE_DECLARE_INTERFACE("B06FE5B9-43EC-4393-881B-DBE4DC72FDA7") IDWriteFontDownloadListener : public IUnknown
+ {
+     /// <summary>
+     /// The DownloadCompleted method is called back on an arbitrary thread when a
 @@ -1640,7 +1641,7 @@ struct DWRITE_LINE_METRICS1 : DWRITE_LINE_METRICS
  /// <summary>
  /// Specify whether DWRITE_FONT_METRICS::lineGap value should be part of the line metrics. 
@@ -85,6 +121,51 @@ index 01a3b56cc5..b75bf6be4c 100644
  {
      /// <summary>
      /// Method used to determine line spacing.
+@@ -1702,7 +1703,7 @@ struct DWRITE_LINE_SPACING
+     DWRITE_FONT_LINE_GAP_USAGE fontLineGapUsage;
+ };
+ 
+-interface DWRITE_DECLARE_INTERFACE("F67E0EDD-9E3D-4ECC-8C32-4183253DFE70") IDWriteTextFormat2 : public IDWriteTextFormat1
++interface _Windows_SupportedOS_Windows81_  DWRITE_DECLARE_INTERFACE("F67E0EDD-9E3D-4ECC-8C32-4183253DFE70") IDWriteTextFormat2 : public IDWriteTextFormat1
+ {
+     /// <summary>
+     /// Set line spacing.
+@@ -1726,7 +1727,7 @@ interface DWRITE_DECLARE_INTERFACE("F67E0EDD-9E3D-4ECC-8C32-4183253DFE70") IDWri
+     using IDWriteTextFormat1::GetLineSpacing;
+ };
+ 
+-interface DWRITE_DECLARE_INTERFACE("07DDCD52-020E-4DE8-AC33-6C953D83F92D") IDWriteTextLayout3 : public IDWriteTextLayout2
++interface _Windows_SupportedOS_Windows81_  DWRITE_DECLARE_INTERFACE("07DDCD52-020E-4DE8-AC33-6C953D83F92D") IDWriteTextLayout3 : public IDWriteTextLayout2
+ {
+     /// <summary>
+     /// Invalidates the layout, forcing layout to remeasure before calling the
+@@ -2071,7 +2072,7 @@ interface DWRITE_DECLARE_INTERFACE("CE25F8FD-863B-4D13-9651-C1F88DC73FE2") IDWri
+     /// for the asynchronous operation to complete. The handle remains valid
+     /// until the interface is released.
+     /// </summary>
+-    STDMETHOD_(HANDLE, GetWaitHandle)() PURE;
++    _Win32_RAIIFree_(CloseHandle, -1, 0) STDMETHOD_(HANDLE, GetWaitHandle)() PURE;
+ 
+     /// <summary>
+     /// The GetResult method returns the result of the asynchronous operation.
+@@ -3504,7 +3505,7 @@ interface DWRITE_DECLARE_INTERFACE("DC7EAD19-E54C-43AF-B2DA-4E2B79BA3F7F") IDWri
+     /// object, and remains valid as long as the client holds a reference to the font set. The client can wait
+     /// on the returned event or use RegisterWaitForSingleObject to request a callback when the event is set.
+     /// </remarks>
+-    STDMETHOD_(HANDLE, GetExpirationEvent)() PURE;
++    _Win32_RAIIFree_(CloseHandle, -1, 0) STDMETHOD_(HANDLE, GetExpirationEvent)() PURE;
+ };
+ 
+ interface DWRITE_DECLARE_INTERFACE("A4D055A6-F9E3-4E25-93B7-9E309F3AF8E9") IDWriteFontCollection3 : public IDWriteFontCollection2
+@@ -3523,7 +3524,7 @@ interface DWRITE_DECLARE_INTERFACE("A4D055A6-F9E3-4E25-93B7-9E309F3AF8E9") IDWri
+     /// object, and remains valid as long as the client holds a reference to the font collection. The client can wait
+     /// on the returned event or use RegisterWaitForSingleObject to request a callback when the event is set.
+     /// </remarks>
+-    STDMETHOD_(HANDLE, GetExpirationEvent)() PURE;
++    _Win32_RAIIFree_(CloseHandle, -1, 0) STDMETHOD_(HANDLE, GetExpirationEvent)() PURE;
+ };
+ 
+ interface DWRITE_DECLARE_INTERFACE("35D0E0B3-9076-4D2E-A016-A91B568A06B4") IDWriteFactory7 : public IDWriteFactory6
 @@ -4216,7 +4217,7 @@ struct DWRITE_PAINT_ELEMENT
              /// <summary>
              /// Specifies the compositing or blending mode.

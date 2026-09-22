@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
-index 86eb97eb3b..fcc8dfa068 100644
+index 86eb97eb3b..e97002eb05 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
 @@ -1,3 +1,4 @@
@@ -68,6 +68,78 @@ index 86eb97eb3b..fcc8dfa068 100644
          ) CONST PURE;
  }; // interface ID2D1Resource
  
+@@ -1187,7 +1226,7 @@ interface DX_DECLARE_INTERFACE("2cd906a7-12e2-11dc-9fed-001143a055f9") ID2D1Grad
+ /// <summary>
+ /// The root brush interface. All brushes can be used to fill or pen a geometry.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd906a8-12e2-11dc-9fed-001143a055f9") ID2D1Brush  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd906a8-12e2-11dc-9fed-001143a055f9") ID2D1Brush  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -1420,7 +1459,7 @@ interface DX_DECLARE_INTERFACE("2cd9069d-12e2-11dc-9fed-001143a055f9") ID2D1Stro
+ /// manipulating and measuring geometric shapes. Interfaces that inherit from
+ /// ID2D1Geometry define specific shapes.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd906a1-12e2-11dc-9fed-001143a055f9") ID2D1Geometry  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd906a1-12e2-11dc-9fed-001143a055f9") ID2D1Geometry  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -2171,7 +2210,7 @@ interface DX_DECLARE_INTERFACE("2cd906bb-12e2-11dc-9fed-001143a055f9") ID2D1Tran
+ /// Describes a geometric path that does not contain quadratic bezier curves or
+ /// arcs.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd9069e-12e2-11dc-9fed-001143a055f9") ID2D1SimplifiedGeometrySink  : public IUnknown
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd9069e-12e2-11dc-9fed-001143a055f9") ID2D1SimplifiedGeometrySink  : public IUnknown
+ {
+     
+     STDMETHOD_(void, SetFillMode)(
+@@ -2266,7 +2305,7 @@ interface DX_DECLARE_INTERFACE("2cd9069f-12e2-11dc-9fed-001143a055f9") ID2D1Geom
+ /// <summary>
+ /// Populates an ID2D1Mesh object with triangles.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd906c1-12e2-11dc-9fed-001143a055f9") ID2D1TessellationSink  : public IUnknown
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd906c1-12e2-11dc-9fed-001143a055f9") ID2D1TessellationSink  : public IUnknown
+ {
+     
+     STDMETHOD_(void, AddTriangles)(
+@@ -2389,7 +2428,7 @@ interface DX_DECLARE_INTERFACE("28506e39-ebf6-46a1-bb47-fd85565ab957") ID2D1Draw
+ /// from ID2D1RenderTarget render the drawing commands they receive in different
+ /// ways.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd90694-12e2-11dc-9fed-001143a055f9") ID2D1RenderTarget  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd90694-12e2-11dc-9fed-001143a055f9") ID2D1RenderTarget  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -2766,7 +2805,7 @@ interface DX_DECLARE_INTERFACE("2cd90694-12e2-11dc-9fed-001143a055f9") ID2D1Rend
+     /// Ends drawing on the render target, error results can be retrieved at this time,
+     /// or when calling flush.
+     /// </summary>
+-    STDMETHOD(EndDraw)(
++    _Win32_PreserveResult_ STDMETHOD(EndDraw)(
+         _Out_opt_ D2D1_TAG *tag1 = NULL,
+         _Out_opt_ D2D1_TAG *tag2 = NULL 
+         ) PURE;
+@@ -3247,7 +3286,7 @@ interface DX_DECLARE_INTERFACE("2cd90694-12e2-11dc-9fed-001143a055f9") ID2D1Rend
+ /// Renders to an intermediate texture created by the CreateCompatibleRenderTarget
+ /// method.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2cd90695-12e2-11dc-9fed-001143a055f9") ID2D1BitmapRenderTarget  : public ID2D1RenderTarget
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("2cd90695-12e2-11dc-9fed-001143a055f9") ID2D1BitmapRenderTarget  : public ID2D1RenderTarget
+ {
+     
+     STDMETHOD(GetBitmap)(
+@@ -3338,7 +3377,7 @@ interface DX_DECLARE_INTERFACE("1c51bc64-de61-46fd-9899-63a5d8f03950") ID2D1DCRe
+ /// <summary>
+ /// The root factory interface for all of D2D's objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("06152247-6f50-465a-9245-118bfd3b6007") ID2D1Factory  : public IUnknown
++interface _Windows_SupportedOS_Windows7_  DX_DECLARE_INTERFACE("06152247-6f50-465a-9245-118bfd3b6007") ID2D1Factory  : public IUnknown
+ {
+     
+     /// <summary>
 @@ -3574,57 +3613,57 @@ interface DX_DECLARE_INTERFACE("06152247-6f50-465a-9245-118bfd3b6007") ID2D1Fact
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)

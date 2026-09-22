@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
-index 6693116ef1..af5cf9df4f 100644
+index 6693116ef1..38eb040cbf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 @@ -2,6 +2,7 @@
@@ -32,14 +32,14 @@ index 6693116ef1..af5cf9df4f 100644
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // IQueryForm methods
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(Initialize)(THIS_ HKEY hkForm) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(AddForms)(THIS_ LPCQADDFORMSPROC pAddFormsProc, LPARAM lParam) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(AddPages)(THIS_ LPCQADDPAGESPROC pAddPagesProc, LPARAM lParam) PURE;
  };
  
@@ -47,26 +47,26 @@ index 6693116ef1..af5cf9df4f 100644
      STDMETHOD(GetClassID)(THIS_ CLSID* pClassID) PURE;
  
      // IPersistQuery
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(WriteString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPCWSTR pValue) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(ReadString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _Out_ LPWSTR pBuffer, INT cchBuffer) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(WriteInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, INT value) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPINT pValue) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(Clear)(THIS) PURE;
  };
  
@@ -83,8 +83,8 @@ index 6693116ef1..af5cf9df4f 100644
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // ICommonQuery methods
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
  };
  

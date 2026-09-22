@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..19f4f0a705 100644
+index 71ad8398e8..94b39aa270 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -69,20 +69,20 @@ index 71ad8398e8..19f4f0a705 100644
  
      // *** IDsBrowseDomainTree methods ***
 -    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_ LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_ _Win32_RAIIFree_(CoTaskMemFree) LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
++    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_  LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
++    
++    
      STDMETHOD(GetDomains)(THIS_ PDOMAIN_TREE *ppDomainTree, DWORD dwFlags) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(FreeDomains)(THIS_ PDOMAIN_TREE *ppDomainTree) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(FlushCachedDomains)(THIS) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(SetComputer)(THIS_ LPCWSTR pszComputerName, LPCWSTR pszUserName, LPCWSTR pszPassword) PURE;
  };
  
@@ -99,40 +99,40 @@ index 71ad8398e8..19f4f0a705 100644
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // *** IDsDisplaySpecifier methods ***
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(SetServer)(THIS_ LPCWSTR pszServer, LPCWSTR pszUserName, LPCWSTR pszPassword, DWORD dwFlags) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(SetLanguageID)(THIS_ LANGID langid) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(GetDisplaySpecifier)(THIS_ LPCWSTR pszObjectClass, REFIID riid, void **ppv) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(GetIconLocation)(THIS_ LPCWSTR pszObjectClass, _In_ DWORD dwFlags, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ INT cchBuffer, _Out_ INT *presid) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    _Win32_RAIIFree_(DestroyIcon, 0)
++    _Win32_RAIIFree_(DestroyIcon, -1, 0) 
++    
++    
      STDMETHOD_(HICON, GetIcon)(THIS_ LPCWSTR pszObjectClass, DWORD dwFlags, INT cxIcon, INT cyIcon) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(GetFriendlyClassName)(THIS_ LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ INT cchBuffer) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(GetFriendlyAttributeName)(THIS_ LPCWSTR pszObjectClass, _In_ LPCWSTR pszAttributeName, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ UINT cchBuffer) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD_(BOOL, IsClassContainer)(THIS_ LPCWSTR pszObjectClass, LPCWSTR pszADsPath, DWORD dwFlags) PURE;
 -    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass, LPDSCLASSCREATIONINFO* ppdscci) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass, _Win32_RAIIFree_(LocalFree) LPDSCLASSCREATIONINFO* ppdscci) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
++    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass,  LPDSCLASSCREATIONINFO* ppdscci) PURE;
++    
++    
      STDMETHOD(EnumClassAttributes)(THIS_ LPCWSTR pszObjectClass, LPDSENUMATTRIBUTES pcbEnum, LPARAM lParam) PURE;
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD_(ADSTYPE, GetAttributeADsType)(THIS_ LPCWSTR pszAttributeName) PURE;
  };
  

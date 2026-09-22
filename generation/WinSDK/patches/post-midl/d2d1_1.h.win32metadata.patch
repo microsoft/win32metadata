@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
-index ec10130845..bb7b303ac5 100644
+index ec10130845..f8ccb06416 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,33 @@ index ec10130845..bb7b303ac5 100644
  //---------------------------------------------------------------------------
  // Copyright (c) Microsoft Corporation.  All rights reserved.
  //
+@@ -1296,7 +1297,7 @@ interface DX_DECLARE_INTERFACE("483473d7-cd46-4f9d-9d3a-3112aa80159d") ID2D1Prop
+ /// The effect interface. Properties control how the effect is rendered. The effect
+ /// is Drawn with the DrawImage call.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("28211a43-7d89-476f-8181-2d6159b220ad") ID2D1Effect  : public ID2D1Properties
++interface _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("28211a43-7d89-476f-8181-2d6159b220ad") ID2D1Effect  : public ID2D1Properties
+ {
+     
+     /// <summary>
+@@ -1411,7 +1412,7 @@ interface DX_DECLARE_INTERFACE("a898a84c-3873-4588-b08b-ebbf978df041") ID2D1Bitm
+ /// <summary>
+ /// Represents a color context that can be used with an ID2D1Bitmap1 object.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("1c4820bb-5771-4518-a581-2fe4dd0ec657") ID2D1ColorContext  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("1c4820bb-5771-4518-a581-2fe4dd0ec657") ID2D1ColorContext  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -2161,7 +2162,7 @@ interface DX_DECLARE_INTERFACE("e8f7fe7a-191c-466d-ad95-975678bda998") ID2D1Devi
+ /// The device defines a resource domain whose objects and device contexts can be
+ /// used together.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("47dd575d-ac05-4cdd-8049-9b02cd16f44c") ID2D1Device  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("47dd575d-ac05-4cdd-8049-9b02cd16f44c") ID2D1Device  : public ID2D1Resource
+ {
+     
+     /// <summary>
 @@ -2399,43 +2400,43 @@ interface DX_DECLARE_INTERFACE("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3") ID2D1Mult
  #ifdef D2D_USE_C_DEFINITIONS
  
