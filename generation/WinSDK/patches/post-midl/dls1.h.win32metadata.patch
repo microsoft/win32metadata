@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dls1.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dls1.h
+index eec26dfcb7..c9161d0806 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dls1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dls1.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /*==========================================================================;
+@@ -165,7 +166,7 @@ typedef struct _CONNECTION {
+ 
+ /* Level 1 Articulation Data */
+ 
+-typedef struct _CONNECTIONLIST {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CONNECTIONLIST {
+   ULONG    cbSize;            /* size of the connection list structure */
+   ULONG    cConnections;      /* count of connections in the list */
+   } CONNECTIONLIST, FAR *LPCONNECTIONLIST;
+@@ -239,7 +240,7 @@ typedef struct _POOLCUE {
+   ULONG    ulOffset;       /* Offset to the entry in the list */
+ }POOLCUE, FAR *LPPOOLCUE;
+ 
+-typedef struct _POOLTABLE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _POOLTABLE {
+   ULONG    cbSize;            /* size of the pool table structure */
+   ULONG    cCues;             /* count of cues in the list */
+   } POOLTABLE, FAR *LPPOOLTABLE;
+@@ -252,7 +253,7 @@ typedef struct _POOLTABLE {
+ #define F_WSMP_NO_COMPRESSION    0x0002l
+ 
+ 
+-typedef struct _rwsmp {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _rwsmp {
+   ULONG   cbSize;
+   USHORT  usUnityNote;         /* MIDI Unity Playback Note */
+   SHORT   sFineTune;           /* Fine Tune in log tuning */
+@@ -268,7 +269,7 @@ typedef struct _rwsmp {
+ 
+ #define WLOOP_TYPE_FORWARD   0
+ 
+-typedef struct _rloop {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _rloop {
+   ULONG cbSize;
+   ULONG ulType;              /* Loop Type */
+   ULONG ulStart;             /* Start of loop in samples */

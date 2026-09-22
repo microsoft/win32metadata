@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MDMRegistration.h b/generation/WinSDK/RecompiledIdlHeaders/um/MDMRegistration.h
-index 19c93fd2db..ed4461eefb 100644
+index 19c93fd2db..d708264530 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MDMRegistration.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MDMRegistration.h
 @@ -1,3 +1,4 @@
@@ -16,7 +16,7 @@ index 19c93fd2db..ed4461eefb 100644
  GetDeviceRegistrationInfo(
      _In_  REGISTRATION_INFORMATION_CLASS DeviceInformationClass,
      _Out_ PVOID* ppDeviceRegistrationInfo
-@@ -191,7 +192,7 @@ Return Value:
+@@ -191,11 +192,11 @@ Return Value:
      HRESULT indicating success or failure.
  
  --*/
@@ -25,6 +25,11 @@ index 19c93fd2db..ed4461eefb 100644
  IsDeviceRegisteredWithManagement(
      _Out_ BOOL *pfIsDeviceRegisteredWithManagement,
      _In_ DWORD cchUPN,
+-    _Out_opt_z_cap_(cchUPN) LPWSTR pszUPN
++     _Out_opt_z_cap_(cchUPN) LPWSTR pszUPN
+     );
+ 
+ 
 @@ -213,7 +214,7 @@ Return Value:
      HRESULT indicating success or failure.
  
@@ -88,7 +93,7 @@ index 19c93fd2db..ed4461eefb 100644
  UnregisterDeviceWithManagement(
      _In_opt_z_ LPCWSTR enrollmentID
      );
-@@ -453,7 +454,7 @@ Return Value:
+@@ -453,10 +454,10 @@ Return Value:
      HRESULT indicating success or failure.
  
  --*/
@@ -96,7 +101,11 @@ index 19c93fd2db..ed4461eefb 100644
 +_Windows_SupportedOS_Windows81_ HRESULT WINAPI
  GetManagementAppHyperlink(
      _In_ DWORD cchHyperlink,
-     _Out_z_cap_(cchHyperlink) LPWSTR pszHyperlink
+-    _Out_z_cap_(cchHyperlink) LPWSTR pszHyperlink
++     _Out_z_cap_(cchHyperlink) LPWSTR pszHyperlink
+     );
+ 
+ 
 @@ -479,7 +480,7 @@ Return Value:
      ppMgmtInfo - Struct containing MDM service URIs
  --*/

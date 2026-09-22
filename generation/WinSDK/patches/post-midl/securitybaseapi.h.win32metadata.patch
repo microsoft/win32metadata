@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
-index d9c3d10330..e0d9fa9295 100644
+index d9c3d10330..b57a8152f5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,15 @@ index d9c3d10330..e0d9fa9295 100644
  BOOL
  WINAPI
  AccessCheck(
+@@ -44,7 +45,7 @@ AccessCheck(
+     _Out_ LPBOOL AccessStatus
+     );
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ AccessCheckAndAuditAlarmW(
 @@ -65,7 +66,7 @@ AccessCheckAndAuditAlarmW(
  #define AccessCheckAndAuditAlarm  AccessCheckAndAuditAlarmW
  #endif
@@ -34,6 +43,33 @@ index d9c3d10330..e0d9fa9295 100644
  BOOL
  WINAPI
  AccessCheckByTypeResultList(
+@@ -99,7 +100,7 @@ AccessCheckByTypeResultList(
+     _Out_writes_(ObjectTypeListLength) LPDWORD AccessStatusList
+     );
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ AccessCheckByTypeAndAuditAlarmW(
+@@ -125,7 +126,7 @@ AccessCheckByTypeAndAuditAlarmW(
+ #define AccessCheckByTypeAndAuditAlarm  AccessCheckByTypeAndAuditAlarmW
+ #endif
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ AccessCheckByTypeResultListAndAuditAlarmW(
+@@ -151,7 +152,7 @@ AccessCheckByTypeResultListAndAuditAlarmW(
+ #define AccessCheckByTypeResultListAndAuditAlarm  AccessCheckByTypeResultListAndAuditAlarmW
+ #endif
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ AccessCheckByTypeResultListAndAuditAlarmByHandleW(
 @@ -184,23 +185,23 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -520,7 +556,7 @@ index d9c3d10330..e0d9fa9295 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINADVAPI
-+_Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetFileSecurityW(
@@ -789,6 +825,42 @@ index d9c3d10330..e0d9fa9295 100644
  VOID
  WINAPI
  MapGenericMask(
+@@ -1102,7 +1103,7 @@ MapGenericMask(
+     _In_ PGENERIC_MAPPING GenericMapping
+     );
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ ObjectCloseAuditAlarmW(
+@@ -1115,7 +1116,7 @@ ObjectCloseAuditAlarmW(
+ #define ObjectCloseAuditAlarm  ObjectCloseAuditAlarmW
+ #endif
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ ObjectDeleteAuditAlarmW(
+@@ -1128,7 +1129,7 @@ ObjectDeleteAuditAlarmW(
+ #define ObjectDeleteAuditAlarm  ObjectDeleteAuditAlarmW
+ #endif
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ ObjectOpenAuditAlarmW(
+@@ -1150,7 +1151,7 @@ ObjectOpenAuditAlarmW(
+ #define ObjectOpenAuditAlarm  ObjectOpenAuditAlarmW
+ #endif
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ ObjectPrivilegeAuditAlarmW(
 @@ -1166,7 +1167,7 @@ ObjectPrivilegeAuditAlarmW(
  #define ObjectPrivilegeAuditAlarm  ObjectPrivilegeAuditAlarmW
  #endif
@@ -798,6 +870,15 @@ index d9c3d10330..e0d9fa9295 100644
  BOOL
  WINAPI
  PrivilegeCheck(
+@@ -1175,7 +1176,7 @@ PrivilegeCheck(
+     _Out_ LPBOOL pfResult
+     );
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
+ WINAPI
+ PrivilegedServiceAuditAlarmW(
 @@ -1192,24 +1193,24 @@ PrivilegedServiceAuditAlarmW(
  
  #if (_WIN32_WINNT >= 0x0600)
@@ -827,7 +908,13 @@ index d9c3d10330..e0d9fa9295 100644
  BOOL
  WINAPI
  SetAclInformation(
-@@ -1224,7 +1225,7 @@ BOOL
+@@ -1219,12 +1220,12 @@ SetAclInformation(
+     _In_ ACL_INFORMATION_CLASS dwAclInformationClass
+     );
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ BOOL
  WINAPI
  SetFileSecurityW(
      _In_ LPCWSTR lpFileName,

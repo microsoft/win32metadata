@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
-index 8aa7a30938..d7e323c00b 100644
+index 8aa7a30938..26e483aba8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 @@ -339,6 +339,7 @@ extern "C"{
@@ -171,7 +171,7 @@ index 8aa7a30938..d7e323c00b 100644
          virtual HRESULT STDMETHODCALLTYPE IsEnabled( void) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsConnected( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsConnected( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsConnected( void) = 0;
          
      };
      
@@ -291,7 +291,7 @@ index 8aa7a30938..d7e323c00b 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Run( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Run( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Run( 
              /* [annotation][unique][in] */ 
              _In_  HWND hwndOwner) = 0;
          

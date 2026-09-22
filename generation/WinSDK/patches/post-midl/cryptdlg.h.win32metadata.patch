@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
-index 13feace6a3..9f8900334d 100644
+index 13feace6a3..714f86e0bb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
 @@ -1,3 +1,4 @@
@@ -43,6 +43,15 @@ index 13feace6a3..9f8900334d 100644
      LPCWSTR             szTitle;
      PCCERT_CONTEXT      pCertContext;
      LPSTR *             arrayPurposes;
+@@ -402,7 +403,7 @@ typedef HRESULT (WINAPI * PFNTRUSTHELPER)(
+ //  Notes:
+ //      pfnTrustHelper is nyi
+ 
+-typedef struct _CERT_VERIFY_CERTIFICATE_TRUST {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_VERIFY_CERTIFICATE_TRUST {
+     DWORD               cbSize;         // Size of this structure
+     PCCERT_CONTEXT      pccert;         // Certificate to be verified
+     DWORD               dwFlags;        // CERT_TRUST_*
 @@ -440,7 +441,7 @@ typedef struct _CERT_VERIFY_CERTIFICATE_TRUST {
  
  typedef struct _CTL_MODIFY_REQUEST {

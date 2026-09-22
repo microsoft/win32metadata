@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfapi.h
-index 8a77485d62..21cc0140ea 100644
+index 8a77485d62..75605c938b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfapi.h
 @@ -1,3 +1,4 @@
@@ -269,7 +269,7 @@ index 8a77485d62..21cc0140ea 100644
  CfGetPlaceholderStateFromFindData (
      _In_ CONST WIN32_FIND_DATA *FindData
      );
-@@ -1015,7 +1016,7 @@ typedef struct CF_PLACEHOLDER_STANDARD_INFO {
+@@ -1015,11 +1016,11 @@ typedef struct CF_PLACEHOLDER_STANDARD_INFO {
  
  } CF_PLACEHOLDER_STANDARD_INFO;
  
@@ -278,6 +278,11 @@ index 8a77485d62..21cc0140ea 100644
  CfGetPlaceholderInfo (
      _In_ HANDLE FileHandle,
      _In_ CF_PLACEHOLDER_INFO_CLASS InfoClass,
+-    _Out_bytecapcount_(InfoBufferLength) PVOID InfoBuffer,
++     _Out_bytecapcount_(InfoBufferLength) PVOID InfoBuffer,
+     _In_ DWORD InfoBufferLength,
+     _Out_opt_ PDWORD ReturnedLength
+     );
 @@ -1080,7 +1081,7 @@ typedef struct CF_SYNC_ROOT_STANDARD_INFO {
  } CF_SYNC_ROOT_STANDARD_INFO;
  
@@ -296,7 +301,7 @@ index 8a77485d62..21cc0140ea 100644
  CfGetSyncRootInfoByHandle(
      _In_ HANDLE FileHandle,
      _In_ CF_SYNC_ROOT_INFO_CLASS InfoClass,
-@@ -1106,7 +1107,7 @@ typedef enum CF_PLACEHOLDER_RANGE_INFO_CLASS {
+@@ -1106,13 +1107,13 @@ typedef enum CF_PLACEHOLDER_RANGE_INFO_CLASS {
  
  } CF_PLACEHOLDER_RANGE_INFO_CLASS;
  
@@ -305,6 +310,13 @@ index 8a77485d62..21cc0140ea 100644
  CfGetPlaceholderRangeInfo (
      _In_ HANDLE FileHandle,
      _In_ CF_PLACEHOLDER_RANGE_INFO_CLASS InfoClass,
+     _In_ LARGE_INTEGER StartingOffset,
+     _In_ LARGE_INTEGER Length,
+-    _Out_bytecapcount_(InfoBufferLength) PVOID InfoBuffer,
++     _Out_bytecapcount_(InfoBufferLength) PVOID InfoBuffer,
+     _In_ DWORD InfoBufferLength,
+     _Out_opt_ PDWORD ReturnedLength
+     );
 @@ -1140,7 +1141,7 @@ CfGetPlaceholderRangeInfoForHydration(
  
  #pragma region Progress APIs

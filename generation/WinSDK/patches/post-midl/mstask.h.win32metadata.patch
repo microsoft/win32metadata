@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
-index 622f492e8e..76f0763a3e 100644
+index 622f492e8e..123dc3d324 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
 @@ -1,3 +1,4 @@
@@ -44,7 +44,7 @@ index 622f492e8e..76f0763a3e 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][out] */ 
@@ -53,7 +53,7 @@ index 622f492e8e..76f0763a3e 100644
              _Out_  ULONG *pceltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          

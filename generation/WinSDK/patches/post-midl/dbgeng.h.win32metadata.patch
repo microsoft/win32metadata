@@ -1,8 +1,13 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
-index b09d36293b..24832192a0 100644
+index b09d36293b..1f9f0d2faa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgEng.h
-@@ -338,14 +338,14 @@ DebugConnectWide(
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //----------------------------------------------------------------------------
+ //
+ // Debugger engine interfaces.
+@@ -338,14 +339,14 @@ DebugConnectWide(
  STDAPI
  DebugCreate(
      _In_ REFIID InterfaceId,
@@ -19,3 +24,12 @@ index b09d36293b..24832192a0 100644
      );
  
  //----------------------------------------------------------------------------
+@@ -2022,7 +2023,7 @@ typedef struct _DEBUG_CREATE_PROCESS_OPTIONS
+ #define DEBUG_CLIENT_WINDBG             0x6
+ #define DEBUG_CLIENT_WINIDE             0x7
+ 
+-typedef struct _DEBUG_CLIENT_CONTEXT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DEBUG_CLIENT_CONTEXT
+ {
+     UINT cbSize;
+     UINT eClient;

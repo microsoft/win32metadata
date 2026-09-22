@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12compiler.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12compiler.h
+index fbf9a404de..a84eb57668 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12compiler.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12compiler.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -140,7 +141,7 @@ EXTERN_C const IID IID_ID3D12CompilerFactoryChild;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e0d06420-9f31-47e8-ae9a-dd2ba25ac0bc")
++    MIDL_INTERFACE("e0d06420-9f31-47e8-ae9a-dd2ba25ac0bc") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CompilerFactoryChild : public IUnknown
+     {
+     public:
+@@ -329,7 +330,7 @@ EXTERN_C const IID IID_ID3D12CompilerCacheSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5704e5e6-054b-4738-b661-7b0d68d8dde2")
++    MIDL_INTERFACE("5704e5e6-054b-4738-b661-7b0d68d8dde2") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CompilerCacheSession : public ID3D12CompilerFactoryChild
+     {
+     public:
+@@ -578,7 +579,7 @@ EXTERN_C const IID IID_ID3D12CompilerStateObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5981cca4-e8ae-44ca-9b92-4fa86f5a3a3a")
++    MIDL_INTERFACE("5981cca4-e8ae-44ca-9b92-4fa86f5a3a3a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CompilerStateObject : public IUnknown
+     {
+     public:
+@@ -685,7 +686,7 @@ EXTERN_C const IID IID_ID3D12Compiler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8c403c12-993b-4583-80f1-6824138fa68e")
++    MIDL_INTERFACE("8c403c12-993b-4583-80f1-6824138fa68e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Compiler : public ID3D12CompilerFactoryChild
+     {
+     public:
+@@ -865,7 +866,7 @@ EXTERN_C const IID IID_ID3D12CompilerFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c1ee4b59-3f59-47a5-9b4e-a855c858a878")
++    MIDL_INTERFACE("c1ee4b59-3f59-47a5-9b4e-a855c858a878") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CompilerFactory : public IUnknown
+     {
+     public:

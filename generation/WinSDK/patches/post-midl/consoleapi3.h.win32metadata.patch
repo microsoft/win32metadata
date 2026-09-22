@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
-index 6d210ae055..a85b14d0c4 100644
+index 6d210ae055..3dbabf3770 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 @@ -16,6 +16,7 @@
@@ -42,7 +42,7 @@ index 6d210ae055..a85b14d0c4 100644
  #ifndef NOGDI
  
 -typedef struct _CONSOLE_FONT_INFOEX {
-+typedef struct  _CONSOLE_FONT_INFOEX {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   _CONSOLE_FONT_INFOEX {
      ULONG cbSize;
      DWORD nFont;
      COORD dwFontSize;
@@ -120,7 +120,7 @@ index 6d210ae055..a85b14d0c4 100644
 +#pragma pop_macro("HISTORY_NO_DUP_FLAG")
 +#endif
 +
-+typedef struct  _CONSOLE_HISTORY_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   _CONSOLE_HISTORY_INFO {
      UINT cbSize;
      UINT HistoryBufferSize;
      UINT NumberOfHistoryBuffers;
@@ -206,7 +206,7 @@ index 6d210ae055..a85b14d0c4 100644
  #if (_WIN32_WINNT >= 0x0501)
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  APIENTRY
@@ -215,7 +215,7 @@ index 6d210ae055..a85b14d0c4 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  APIENTRY
@@ -224,7 +224,7 @@ index 6d210ae055..a85b14d0c4 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
@@ -233,48 +233,54 @@ index 6d210ae055..a85b14d0c4 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
-@@ -222,6 +312,7 @@ GetConsoleAliasW(
+@@ -222,14 +312,16 @@ GetConsoleAliasW(
  #define GetConsoleAlias  GetConsoleAliasA
  #endif // !UNICODE
  
+-WINBASEAPI
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
  DWORD
  APIENTRY
-@@ -229,6 +320,7 @@ GetConsoleAliasesLengthA(
+ GetConsoleAliasesLengthA(
      _In_ LPSTR ExeName
      );
  
+-WINBASEAPI
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  DWORD
  APIENTRY
-@@ -242,6 +334,7 @@ GetConsoleAliasesLengthW(
+ GetConsoleAliasesLengthW(
+@@ -242,14 +334,16 @@ GetConsoleAliasesLengthW(
  #define GetConsoleAliasesLength  GetConsoleAliasesLengthA
  #endif // !UNICODE
  
+-WINBASEAPI
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
  DWORD
  APIENTRY
-@@ -249,6 +342,7 @@ GetConsoleAliasExesLengthA(
+ GetConsoleAliasExesLengthA(
      VOID
      );
  
+-WINBASEAPI
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  DWORD
  APIENTRY
+ GetConsoleAliasExesLengthW(
 @@ -262,6 +356,8 @@ GetConsoleAliasExesLengthW(
  #define GetConsoleAliasExesLength  GetConsoleAliasExesLengthA
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
@@ -283,7 +289,7 @@ index 6d210ae055..a85b14d0c4 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
@@ -292,7 +298,7 @@ index 6d210ae055..a85b14d0c4 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
@@ -301,10 +307,80 @@ index 6d210ae055..a85b14d0c4 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  APIENTRY
+@@ -310,14 +412,14 @@ GetConsoleAliasExesW(
+ 
+ #endif /* _WIN32_WINNT >= 0x0501 */
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ VOID
+ APIENTRY
+ ExpungeConsoleCommandHistoryA(
+     _In_ LPSTR ExeName
+     );
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ VOID
+ APIENTRY
+ ExpungeConsoleCommandHistoryW(
+@@ -330,7 +432,7 @@ ExpungeConsoleCommandHistoryW(
+ #define ExpungeConsoleCommandHistory  ExpungeConsoleCommandHistoryA
+ #endif // !UNICODE
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ BOOL
+ APIENTRY
+ SetConsoleNumberOfCommandsA(
+@@ -338,7 +440,7 @@ SetConsoleNumberOfCommandsA(
+     _In_ LPSTR ExeName
+     );
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ BOOL
+ APIENTRY
+ SetConsoleNumberOfCommandsW(
+@@ -352,14 +454,14 @@ SetConsoleNumberOfCommandsW(
+ #define SetConsoleNumberOfCommands  SetConsoleNumberOfCommandsA
+ #endif // !UNICODE
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ DWORD
+ APIENTRY
+ GetConsoleCommandHistoryLengthA(
+     _In_ LPSTR ExeName
+     );
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ DWORD
+ APIENTRY
+ GetConsoleCommandHistoryLengthW(
+@@ -372,7 +474,7 @@ GetConsoleCommandHistoryLengthW(
+ #define GetConsoleCommandHistoryLength  GetConsoleCommandHistoryLengthA
+ #endif // !UNICODE
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ DWORD
+ APIENTRY
+ GetConsoleCommandHistoryA(
+@@ -381,7 +483,7 @@ GetConsoleCommandHistoryA(
+     _In_ LPSTR ExeName
+     );
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ DWORD
+ APIENTRY
+ GetConsoleCommandHistoryW(
 @@ -398,6 +500,8 @@ GetConsoleCommandHistoryW(
  
  #if (_WIN32_WINNT >= 0x0501)

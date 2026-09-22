@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
-index 421f43b2a4..5306202d24 100644
+index 421f43b2a4..2498608627 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_3.h
 @@ -1,3 +1,4 @@
@@ -23,7 +23,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("6007896c-3244-4afd-bf18-a6d3beda5023")
-+    MIDL_INTERFACE("6007896c-3244-4afd-bf18-a6d3beda5023") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("6007896c-3244-4afd-bf18-a6d3beda5023") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIDevice3 : public IDXGIDevice2
      {
      public:
@@ -32,7 +32,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("a8be2ac4-199f-4946-b331-79599fb98de7")
-+    MIDL_INTERFACE("a8be2ac4-199f-4946-b331-79599fb98de7") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("a8be2ac4-199f-4946-b331-79599fb98de7") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGISwapChain2 : public IDXGISwapChain1
      {
      public:
@@ -50,7 +50,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("595e39d1-2724-4663-99b1-da969de28364")
-+    MIDL_INTERFACE("595e39d1-2724-4663-99b1-da969de28364") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("595e39d1-2724-4663-99b1-da969de28364") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIOutput2 : public IDXGIOutput1
      {
      public:
@@ -59,7 +59,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("25483823-cd46-4c7d-86ca-47aa95b837bd")
-+    MIDL_INTERFACE("25483823-cd46-4c7d-86ca-47aa95b837bd") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("25483823-cd46-4c7d-86ca-47aa95b837bd") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIFactory3 : public IDXGIFactory2
      {
      public:
@@ -91,12 +91,12 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("2633066b-4514-4c7a-8fd8-12ea98059d18")
-+    MIDL_INTERFACE("2633066b-4514-4c7a-8fd8-12ea98059d18") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("2633066b-4514-4c7a-8fd8-12ea98059d18") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIDecodeSwapChain : public IUnknown
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE PresentBuffer( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE PresentBuffer( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE PresentBuffer( 
              UINT BufferToPresent,
              UINT SyncInterval,
 -            UINT Flags) = 0;
@@ -109,7 +109,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12")
-+    MIDL_INTERFACE("41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIFactoryMedia : public IUnknown
      {
      public:
@@ -118,7 +118,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("dd95b90b-f05f-4f6a-bd65-25bfb264bd84")
-+    MIDL_INTERFACE("dd95b90b-f05f-4f6a-bd65-25bfb264bd84") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("dd95b90b-f05f-4f6a-bd65-25bfb264bd84") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGISwapChainMedia : public IUnknown
      {
      public:
@@ -140,7 +140,7 @@ index 421f43b2a4..5306202d24 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18")
-+    MIDL_INTERFACE("8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIOutput3 : public IDXGIOutput2
      {
      public:

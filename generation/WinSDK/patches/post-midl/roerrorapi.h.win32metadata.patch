@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
-index f807be93c4..b368fcc434 100644
+index f807be93c4..a59aa64f74 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
 @@ -14,6 +14,7 @@
@@ -19,7 +19,7 @@ index f807be93c4..b368fcc434 100644
 +#if defined(WIN32METADATA) && defined(__clang__)
 +[[clang::flag_enum]]
 +#endif
-+ _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ {
++   {
          RO_ERROR_REPORTING_NONE               = 0x00000000,
          RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS = 0x00000001,
          RO_ERROR_REPORTING_FORCEEXCEPTIONS    = 0x00000002,
@@ -72,7 +72,7 @@ index f807be93c4..b368fcc434 100644
      _Outptr_result_maybenull_ IRestrictedErrorInfo** ppRestrictedErrorInfo
      );
  
-+_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
 +
  STDAPI_(BOOL)
  RoOriginateErrorW(
@@ -81,7 +81,7 @@ index f807be93c4..b368fcc434 100644
               _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
      );
  
-+_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
 +
  STDAPI_(BOOL)
  RoOriginateError(
@@ -89,7 +89,7 @@ index f807be93c4..b368fcc434 100644
      _In_opt_ HSTRING message
      );
  
-+_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
 +
  STDAPI_(BOOL)
  RoTransformErrorW(
@@ -98,7 +98,7 @@ index f807be93c4..b368fcc434 100644
               _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
      );
  
-+_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
 +
  STDAPI_(BOOL)
  RoTransformError(

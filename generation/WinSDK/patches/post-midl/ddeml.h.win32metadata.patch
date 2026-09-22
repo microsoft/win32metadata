@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
-index a6276573b6..f8c88a2587 100644
+index a6276573b6..bfff644a70 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 @@ -1,6 +1,7 @@
@@ -44,7 +44,7 @@ index a6276573b6..f8c88a2587 100644
  
  /* DLL registration functions */
  
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
  UINT
  WINAPI
@@ -54,7 +54,7 @@ index a6276573b6..f8c88a2587 100644
 -    _In_ DWORD afCmd,
 +    _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) _In_ DWORD afCmd,
      _Reserved_ DWORD ulRes);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
  UINT
  WINAPI
@@ -268,14 +268,14 @@ index a6276573b6..f8c88a2587 100644
  #define     DMLERR_LAST                        0x4011
  
 -HSZ
-+_Windows_SupportedOS_Windows2000_ HSZ
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HSZ
  WINAPI
  DdeCreateStringHandleA(
      _In_ DWORD idInst,
      _In_ LPCSTR psz,
      _In_ int iCodePage);
 -HSZ
-+_Windows_SupportedOS_Windows2000_ HSZ
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HSZ
  WINAPI
  DdeCreateStringHandleW(
      _In_ DWORD idInst,
@@ -284,7 +284,7 @@ index a6276573b6..f8c88a2587 100644
  #endif // !UNICODE
  
 -DWORD
-+_Windows_SupportedOS_Windows2000_ DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD
  WINAPI
  DdeQueryStringA(
      _In_ DWORD idInst,
@@ -293,7 +293,7 @@ index a6276573b6..f8c88a2587 100644
      _In_ DWORD cchMax,
      _In_ int iCodePage);
 -DWORD
-+_Windows_SupportedOS_Windows2000_ DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD
  WINAPI
  DdeQueryStringW(
      _In_ DWORD idInst,

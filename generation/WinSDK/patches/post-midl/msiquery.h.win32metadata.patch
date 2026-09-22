@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
-index 08157113c7..9afd0ada41 100644
+index 08157113c7..20c8e7cf97 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsiQuery.h
 @@ -1,3 +1,4 @@
@@ -12,11 +12,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseOpenViewA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseOpenViewA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseOpenViewA(MSIHANDLE hDatabase,
  	LPCSTR     szQuery,            // SQL query to be prepared
  	MSIHANDLE*  phView);            // returned view if TRUE
 -UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
  	LPCWSTR     szQuery,            // SQL query to be prepared
  	MSIHANDLE*  phView);            // returned view if TRUE
  #ifdef UNICODE
@@ -25,11 +25,11 @@ index 08157113c7..9afd0ada41 100644
  // Returns errors of MsiViewModify.
  
 -MSIDBERROR WINAPI MsiViewGetErrorA(MSIHANDLE hView,
-+_Windows_SupportedOS_Windows8_ MSIDBERROR WINAPI MsiViewGetErrorA(MSIHANDLE hView,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ MSIDBERROR WINAPI MsiViewGetErrorA(MSIHANDLE hView,
  	_Out_writes_opt_(*pcchBuf)  LPSTR szColumnNameBuffer,   // buffer to hold column name 
  	_Inout_opt_                 LPDWORD pcchBuf);             // size of buffer
 -MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
-+_Windows_SupportedOS_Windows8_ MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
  	_Out_writes_opt_(*pcchBuf)  LPWSTR szColumnNameBuffer,   // buffer to hold column name 
  	_Inout_opt_                 LPDWORD pcchBuf);             // size of buffer
  #ifdef UNICODE
@@ -81,11 +81,11 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_TABLE
  
 -UINT WINAPI MsiDatabaseGetPrimaryKeysA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGetPrimaryKeysA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGetPrimaryKeysA(MSIHANDLE hDatabase,
  	LPCSTR    szTableName,       // the name of a specific table <case-sensitive>
  	MSIHANDLE  *phRecord);         // returned record if ERROR_SUCCESS
 -UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
  	LPCWSTR    szTableName,       // the name of a specific table <case-sensitive>
  	MSIHANDLE  *phRecord);         // returned record if ERROR_SUCCESS
  #ifdef UNICODE
@@ -94,10 +94,10 @@ index 08157113c7..9afd0ada41 100644
  // Returns MSICONDITION_ERROR, MSICONDITION_FALSE, MSICONDITION_TRUE, MSICONDITION_NONE
  
 -MSICONDITION WINAPI MsiDatabaseIsTablePersistentA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiDatabaseIsTablePersistentA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiDatabaseIsTablePersistentA(MSIHANDLE hDatabase,
  	LPCSTR szTableName);         // the name of a specific table
 -MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
  	LPCWSTR szTableName);         // the name of a specific table
  #ifdef UNICODE
  #define MsiDatabaseIsTablePersistent  MsiDatabaseIsTablePersistentW
@@ -106,12 +106,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiGetSummaryInformationA(MSIHANDLE hDatabase, // 0 if not open
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSummaryInformationA(MSIHANDLE hDatabase, // 0 if not open
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSummaryInformationA(MSIHANDLE hDatabase, // 0 if not open
  	LPCSTR  szDatabasePath,  // path to database, 0 if database handle supplied
  	UINT     uiUpdateCount,    // maximium number of updated values, 0 to open read-only
  	MSIHANDLE *phSummaryInfo); // returned handle to summary information data
 -UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
  	LPCWSTR  szDatabasePath,  // path to database, 0 if database handle supplied
  	UINT     uiUpdateCount,    // maximium number of updated values, 0 to open read-only
  	MSIHANDLE *phSummaryInfo); // returned handle to summary information data
@@ -127,14 +127,14 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_UNKNOWN_PROPERTY
  
 -UINT WINAPI MsiSummaryInfoSetPropertyA(MSIHANDLE hSummaryInfo,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoSetPropertyA(MSIHANDLE hSummaryInfo,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoSetPropertyA(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	UINT     uiDataType,     // VT_I4, VT_LPSTR, VT_FILETIME, or VT_EMPTY
  	INT      iValue,         // integer value, used only if integer property
  	FILETIME *pftValue,      // pointer to filetime value, used only if datetime property
  	LPCSTR szValue);       // text value, used only if string property
 -UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	UINT     uiDataType,     // VT_I4, VT_LPSTR, VT_FILETIME, or VT_EMPTY
  	INT      iValue,         // integer value, used only if integer property
@@ -143,7 +143,7 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_UNKNOWN_PROPERTY
  
 -UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	_Out_ PUINT     puiDataType,   // returned type: VT_I4, VT_LPSTR, VT_FILETIME, VT_EMPTY
  	_Out_ LPINT     piValue,       // returned integer property data
@@ -151,7 +151,7 @@ index 08157113c7..9afd0ada41 100644
  	_Out_writes_opt_(*pcchValueBuf)  LPSTR   szValueBuf,     // buffer to return string property data
  	_Inout_opt_                      LPDWORD   pcchValueBuf);  // in/out buffer character count
 -UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	_Out_ PUINT     puiDataType,   // returned type: VT_I4, VT_LPSTR, VT_FILETIME, VT_EMPTY
  	_Out_ LPINT     piValue,       // returned integer property data
@@ -169,12 +169,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiOpenDatabaseA(
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenDatabaseA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenDatabaseA(
  	LPCSTR      szDatabasePath,  // path to database, 0 to create temporary database
  	LPCSTR      szPersist,       // output database path or one of predefined values
  	MSIHANDLE*   phDatabase);     // location to return database handle
 -UINT WINAPI MsiOpenDatabaseW(
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenDatabaseW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenDatabaseW(
  	LPCWSTR      szDatabasePath,  // path to database, 0 to create temporary database
  	LPCWSTR      szPersist,       // output database path or one of predefined values
  	MSIHANDLE*   phDatabase);     // location to return database handle
@@ -183,11 +183,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseImportA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseImportA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseImportA(MSIHANDLE hDatabase,
  	LPCSTR   szFolderPath,     // folder containing archive files
  	LPCSTR   szFileName);      // table archive file to be imported
 -UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
  	LPCWSTR   szFolderPath,     // folder containing archive files
  	LPCWSTR   szFileName);      // table archive file to be imported
  #ifdef UNICODE
@@ -196,12 +196,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseExportA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseExportA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseExportA(MSIHANDLE hDatabase,
  	LPCSTR   szTableName,      // name of table in database <case-sensitive>
  	LPCSTR   szFolderPath,     // folder containing archive files
  	LPCSTR   szFileName);      // name of exported table archive file
 -UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
  	LPCWSTR   szTableName,      // name of table in database <case-sensitive>
  	LPCWSTR   szFolderPath,     // folder containing archive files
  	LPCWSTR   szFileName);      // name of exported table archive file
@@ -210,11 +210,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseMergeA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseMergeA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseMergeA(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseMerge,    // database to be merged into hDatabase
  	LPCSTR   szTableName);      // name of non-persistent table to receive errors
 -UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseMerge,    // database to be merged into hDatabase
  	LPCWSTR   szTableName);      // name of non-persistent table to receive errors
  #ifdef UNICODE
@@ -223,7 +223,7 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCSTR   szTransformFile,   // name of generated transform file
 -	int       iReserved1,         // reserved argument, not used
@@ -231,7 +231,7 @@ index 08157113c7..9afd0ada41 100644
 -UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
 +	_Reserved_ int       iReserved1,         // reserved argument, not used
 +	_Reserved_ int       iReserved2);        // reserved argument, not used
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCWSTR   szTransformFile,   // name of generated transform file
 -	int       iReserved1,         // reserved argument, not used
@@ -246,12 +246,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiDatabaseApplyTransformA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseApplyTransformA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseApplyTransformA(MSIHANDLE hDatabase,
  	LPCSTR   szTransformFile,    // name of transform file
 -	int       iErrorConditions);   // errors to suppress, bits from MSITRANSFORM_ERROR
 -UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
 +	_Win32_AssociatedEnum_(MSITRANSFORM_ERROR) int       iErrorConditions);   // errors to suppress, bits from MSITRANSFORM_ERROR
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
  	LPCWSTR   szTransformFile,    // name of transform file
 -	int       iErrorConditions);   // errors to suppress, bits from MSITRANSFORM_ERROR
 +	_Win32_AssociatedEnum_(MSITRANSFORM_ERROR) int       iErrorConditions);   // errors to suppress, bits from MSITRANSFORM_ERROR
@@ -263,7 +263,7 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiCreateTransformSummaryInfoA(MSIHANDLE hDatabase,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiCreateTransformSummaryInfoA(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiCreateTransformSummaryInfoA(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCSTR   szTransformFile,    // name of generated transform file
 -	int       iErrorConditions,    // errors to suppress when applied, from MSITRANSFORM_ERROR
@@ -271,7 +271,7 @@ index 08157113c7..9afd0ada41 100644
 -UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
 +	_Win32_AssociatedEnum_(MSITRANSFORM_ERROR) int       iErrorConditions,    // errors to suppress when applied, from MSITRANSFORM_ERROR
 +	_Win32_AssociatedEnum_(MSITRANSFORM_VALIDATE) int       iValidation);        // properties validated when applied, MSITRANSFORM_VALIDATE
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCWSTR   szTransformFile,    // name of generated transform file
 -	int       iErrorConditions,    // errors to suppress when applied, from MSITRANSFORM_ERROR
@@ -333,11 +333,11 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_FIELD
  
 -UINT WINAPI MsiRecordSetStringA(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStringA(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStringA(MSIHANDLE hRecord,
  	UINT iField,
  	LPCSTR      szValue);
 -UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
  	UINT iField,
  	LPCWSTR      szValue);
  #ifdef UNICODE
@@ -355,12 +355,12 @@ index 08157113c7..9afd0ada41 100644
  //         ERROR_INVALID_HANDLE, ERROR_INVALID_FIELD, ERROR_BAD_ARGUMENTS
  
 -UINT WINAPI MsiRecordGetStringA(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordGetStringA(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordGetStringA(MSIHANDLE hRecord,
  	                                UINT iField,
  	_Out_writes_opt_(*pcchValueBuf) LPSTR  szValueBuf,      // buffer for returned value
  	_Inout_opt_                     LPDWORD  pcchValueBuf);   // in/out buffer character count
 -UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
  	                                UINT iField,
  	_Out_writes_opt_(*pcchValueBuf) LPWSTR  szValueBuf,      // buffer for returned value
  	_Inout_opt_                     LPDWORD  pcchValueBuf);   // in/out buffer character count
@@ -377,11 +377,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiRecordSetStreamA(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStreamA(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStreamA(MSIHANDLE hRecord,
  	UINT iField,
  	LPCSTR      szFilePath);   // path to file containing stream data
 -UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
  	UINT iField,
  	LPCWSTR      szFilePath);   // path to file containing stream data
  #ifdef UNICODE
@@ -415,11 +415,11 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_BAD_ARGUMENTS
  
 -UINT WINAPI MsiSetPropertyA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetPropertyA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetPropertyA(MSIHANDLE hInstall,
  	LPCSTR   szName,       // property identifier, case-sensitive
  	LPCSTR   szValue);     // property value, null to undefine property
 -UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
  	LPCWSTR   szName,       // property identifier, case-sensitive
  	LPCWSTR   szValue);     // property value, null to undefine property
  #ifdef UNICODE
@@ -428,12 +428,12 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_SUCCESS, ERROR_MORE_DATA, ERROR_INVALID_HANDLE, ERROR_BAD_ARGUMENTS
  
 -UINT  WINAPI MsiGetPropertyA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetPropertyA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetPropertyA(MSIHANDLE hInstall,
  	                                 LPCSTR szName,           // property identifier, case-sensitive
  	_Out_writes_opt_(*pcchValueBuf)  LPSTR  szValueBuf,       // buffer for returned property value
  	_Inout_opt_                      LPDWORD  pcchValueBuf);    // in/out buffer character count
 -UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
  	                                 LPCWSTR szName,           // property identifier, case-sensitive
  	_Out_writes_opt_(*pcchValueBuf)  LPWSTR  szValueBuf,       // buffer for returned property value
  	_Inout_opt_                      LPDWORD  pcchValueBuf);    // in/out buffer character count
@@ -466,12 +466,12 @@ index 08157113c7..9afd0ada41 100644
  // Other fields must contain data that may be referenced by the format string.
  
 -UINT WINAPI MsiFormatRecordA(MSIHANDLE hInstall, // non-zero for property expansion
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiFormatRecordA(MSIHANDLE hInstall, // non-zero for property expansion
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiFormatRecordA(MSIHANDLE hInstall, // non-zero for property expansion
  	                                  MSIHANDLE hRecord,         // handle to record, field 0 contains format string
  	_Out_writes_opt_(*pcchResultBuf)  LPSTR    szResultBuf,    // buffer to return formatted string
  	_Inout_opt_                       LPDWORD    pcchResultBuf); // in/out buffer character count
 -UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expansion
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expansion
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expansion
  	                                  MSIHANDLE hRecord,         // handle to record, field 0 contains format string
  	_Out_writes_opt_(*pcchResultBuf)  LPWSTR    szResultBuf,    // buffer to return formatted string
  	_Inout_opt_                       LPDWORD    pcchResultBuf); // in/out buffer character count
@@ -480,10 +480,10 @@ index 08157113c7..9afd0ada41 100644
  // Returns ERROR_INVALID_HANDLE or ERROR_INVALID_PARAMETER if arguments invalid
  
 -UINT WINAPI MsiDoActionA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDoActionA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDoActionA(MSIHANDLE hInstall,
  	LPCSTR szAction);     // name of action to call, case-sensitive
 -UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
  	LPCWSTR szAction);     // name of action to call, case-sensitive
  #ifdef UNICODE
  #define MsiDoAction  MsiDoActionW
@@ -492,11 +492,11 @@ index 08157113c7..9afd0ada41 100644
  // Returns the same error codes as MsiDoAction
  
 -UINT WINAPI MsiSequenceA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSequenceA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSequenceA(MSIHANDLE hInstall,
  	LPCSTR szTable,       // name of table containing action sequence
  	INT iSequenceMode);     // for future use, must be 0 in MSI 1.0
 -UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
  	LPCWSTR szTable,       // name of table containing action sequence
  	INT iSequenceMode);     // for future use, must be 0 in MSI 1.0
  #ifdef UNICODE
@@ -512,10 +512,10 @@ index 08157113c7..9afd0ada41 100644
  // Evaluate a conditional expression containing property names and values
  
 -MSICONDITION WINAPI MsiEvaluateConditionA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiEvaluateConditionA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiEvaluateConditionA(MSIHANDLE hInstall,
  	LPCSTR  szCondition);
 -MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
  	LPCWSTR  szCondition);
  #ifdef UNICODE
  #define MsiEvaluateCondition  MsiEvaluateConditionW
@@ -524,12 +524,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiGetFeatureStateA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureStateA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureStateA(MSIHANDLE hInstall,
  	LPCSTR     szFeature,     // feature name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
  	INSTALLSTATE *piAction);    // action taken during install session
 -UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
  	INSTALLSTATE *piAction);    // action taken during install session
@@ -538,11 +538,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiSetFeatureStateA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureStateA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureStateA(MSIHANDLE hInstall,
  	LPCSTR     szFeature,     // feature name within product
  	INSTALLSTATE iState);       // requested state for feature
 -UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	INSTALLSTATE iState);       // requested state for feature
  #ifdef UNICODE
@@ -551,11 +551,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiSetFeatureAttributesA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureAttributesA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureAttributesA(MSIHANDLE hInstall,
  	LPCSTR     szFeature,     // feature name within product
  	DWORD dwAttributes);        // attributes bits to set for this feature
 -UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	DWORD dwAttributes);        // attributes bits to set for this feature
  #ifdef UNICODE
@@ -564,12 +564,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiGetComponentStateA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetComponentStateA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetComponentStateA(MSIHANDLE hInstall,
  	LPCSTR     szComponent,   // component name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
  	INSTALLSTATE *piAction);    // action taken during install session
 -UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
  	LPCWSTR     szComponent,   // component name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
  	INSTALLSTATE *piAction);    // action taken during install session
@@ -578,11 +578,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiSetComponentStateA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetComponentStateA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetComponentStateA(MSIHANDLE hInstall,
  	LPCSTR     szComponent,   // component name within product
  	INSTALLSTATE iState);       // requested state for component
 -UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
  	LPCWSTR     szComponent,   // component name within product
  	INSTALLSTATE iState);       // requested state for component
  #ifdef UNICODE
@@ -591,13 +591,13 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT  WINAPI MsiGetFeatureCostA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureCostA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureCostA(MSIHANDLE hInstall,
  	LPCSTR      szFeature,      // name of feature
  	MSICOSTTREE  iCostTree,     // portion of tree to cost
  	INSTALLSTATE iState,        // requested state, or INSTALLSTATE_UNKNOWN
  	LPINT         piCost);      // returned cost, in units of 512 bytes
 -UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
  	LPCWSTR      szFeature,      // name of feature
  	MSICOSTTREE  iCostTree,     // portion of tree to cost
  	INSTALLSTATE iState,        // requested state, or INSTALLSTATE_UNKNOWN
@@ -606,7 +606,7 @@ index 08157113c7..9afd0ada41 100644
  // via MsiGetLastErrorRecord.
  
 -UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
  	LPCSTR      szComponent,     // name of component
  	DWORD        dwIndex,         // 0-based index into the list of drives
  	INSTALLSTATE iState,          // requested state, or INSTALLSTATE_UNKNOWN
@@ -615,7 +615,7 @@ index 08157113c7..9afd0ada41 100644
  	_Out_                        LPINT         piCost,         // returned cost, in units of 512 bytes
  	_Out_                        LPINT         piTempCost);    // returned temporary cost, in units of 512 bytes
 -UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
  	LPCWSTR      szComponent,     // name of component
  	DWORD        dwIndex,         // 0-based index into the list of drives
  	INSTALLSTATE iState,          // requested state, or INSTALLSTATE_UNKNOWN
@@ -632,11 +632,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT  WINAPI MsiGetFeatureValidStatesA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureValidStatesA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureValidStatesA(MSIHANDLE hInstall,
  	LPCSTR szFeature,
  	LPDWORD  lpInstallStates);
 -UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
  	LPCWSTR szFeature,
  	LPDWORD  lpInstallStates);
  #ifdef UNICODE
@@ -645,12 +645,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiGetSourcePathA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSourcePathA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSourcePathA(MSIHANDLE hInstall,
  	                                LPCSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR      szPathBuf,     // buffer to return full path
  	_Inout_opt_                     LPDWORD      pcchPathBuf);  // in/out buffer character count
 -UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
  	                                LPCWSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      szPathBuf,     // buffer to return full path
  	_Inout_opt_                     LPDWORD      pcchPathBuf);  // in/out buffer character count
@@ -659,12 +659,12 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiGetTargetPathA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetTargetPathA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetTargetPathA(MSIHANDLE hInstall,
  	                                LPCSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR      szPathBuf,     // buffer to return full path
  	_Inout_opt_                     LPDWORD      pcchPathBuf);  // in/out buffer character count
 -UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
  	                                LPCWSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      szPathBuf,     // buffer to return full path
  	_Inout_opt_                     LPDWORD      pcchPathBuf);  // in/out buffer character count
@@ -673,11 +673,11 @@ index 08157113c7..9afd0ada41 100644
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
 -UINT WINAPI MsiSetTargetPathA(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetTargetPathA(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetTargetPathA(MSIHANDLE hInstall,
  	LPCSTR     szFolder,       // folder identifier, primary key into Directory table
  	LPCSTR     szFolderPath);  // full path for folder, ending in directory separator
 -UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
  	LPCWSTR     szFolder,       // folder identifier, primary key into Directory table
  	LPCWSTR     szFolderPath);  // full path for folder, ending in directory separator
  #ifdef UNICODE
@@ -702,10 +702,10 @@ index 08157113c7..9afd0ada41 100644
  // Supplying a null name will remove any current dialog.
  
 -UINT WINAPI MsiPreviewDialogA(MSIHANDLE hPreview,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewDialogA(MSIHANDLE hPreview,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewDialogA(MSIHANDLE hPreview,
  	LPCSTR szDialogName);      // dialog to display, Dialog table key
 -UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
  	LPCWSTR szDialogName);      // dialog to display, Dialog table key
  #ifdef UNICODE
  #define MsiPreviewDialog  MsiPreviewDialogW
@@ -714,11 +714,11 @@ index 08157113c7..9afd0ada41 100644
  // Supplying a null billboard name will remove any billboard displayed.
  
 -UINT WINAPI MsiPreviewBillboardA(MSIHANDLE hPreview,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewBillboardA(MSIHANDLE hPreview,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewBillboardA(MSIHANDLE hPreview,
  	LPCSTR szControlName,      // name of control that accepts billboards
  	LPCSTR szBillboard);       // name of billboard to display
 -UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
-+_Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
  	LPCWSTR szControlName,      // name of control that accepts billboards
  	LPCWSTR szBillboard);       // name of billboard to display
  #ifdef UNICODE

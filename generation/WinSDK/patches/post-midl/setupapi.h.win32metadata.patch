@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
-index d30e1d6ba8..2c61375e8b 100644
+index d30e1d6ba8..e7c6587cd5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 @@ -1,3 +1,4 @@
@@ -16,9 +16,21 @@ index d30e1d6ba8..2c61375e8b 100644
      DWORD InfCount;
      BYTE VersionData[ANYSIZE_ARRAY];
  } SP_INF_INFORMATION, *PSP_INF_INFORMATION;
-@@ -214,10 +215,10 @@ typedef struct _SP_ALTPLATFORM_INFO_V3 {
+@@ -143,7 +144,7 @@ typedef struct _SP_INF_INFORMATION {
+ // Define structure for passing alternate platform info into
+ // SetupSetFileQueueAlternatePlatform and SetupQueryInfOriginalFileInformation.
+ //
+-typedef struct _SP_ALTPLATFORM_INFO_V3 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_ALTPLATFORM_INFO_V3 {
+     DWORD cbSize;
+     //
+     // platform to use (VER_PLATFORM_WIN32_WINDOWS or VER_PLATFORM_WIN32_NT)
+@@ -212,12 +213,12 @@ typedef struct _SP_ALTPLATFORM_INFO_V3 {
  
- typedef struct _SP_ALTPLATFORM_INFO_V2 {
+ } SP_ALTPLATFORM_INFO_V3, *PSP_ALTPLATFORM_INFO_V3;
+ 
+-typedef struct _SP_ALTPLATFORM_INFO_V2 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_ALTPLATFORM_INFO_V2 {
      DWORD cbSize;
 -    DWORD Platform;
 +    _Win32_AssociatedEnum_(VER_PLATFORM) DWORD Platform;
@@ -29,29 +41,125 @@ index d30e1d6ba8..2c61375e8b 100644
      union {
          WORD  Reserved;
          WORD  Flags;
-@@ -228,7 +229,7 @@ typedef struct _SP_ALTPLATFORM_INFO_V2 {
+@@ -226,9 +227,9 @@ typedef struct _SP_ALTPLATFORM_INFO_V2 {
+     DWORD FirstValidatedMinorVersion;
+ } SP_ALTPLATFORM_INFO_V2, *PSP_ALTPLATFORM_INFO_V2;
  
- typedef struct _SP_ALTPLATFORM_INFO_V1 {
+-typedef struct _SP_ALTPLATFORM_INFO_V1 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_ALTPLATFORM_INFO_V1 {
      DWORD cbSize;
 -    DWORD Platform;
 +    _Win32_AssociatedEnum_(VER_PLATFORM) DWORD Platform;
      DWORD MajorVersion;
      DWORD MinorVersion;
      WORD  ProcessorArchitecture;
-@@ -905,8 +906,8 @@ typedef UINT        DI_FUNCTION;    // Function type for device installer
+@@ -268,13 +269,13 @@ typedef PSP_ALTPLATFORM_INFO_V2 PSP_ALTPLATFORM_INFO;
+ // to indicate the INF's original name and the original name of the (potentially
+ // platform-specific) catalog file specified by that INF.
  //
- typedef struct _SP_DEVINSTALL_PARAMS_A {
-     DWORD             cbSize;
--    DWORD             Flags;
--    DWORD             FlagsEx;
-+    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_INSTALL_FLAGS) DWORD             Flags;
-+    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_INSTALL_FLAGS_EX) DWORD             FlagsEx;
-     HWND              hwndParent;
-     PSP_FILE_CALLBACK InstallMsgHandler;
-     PVOID             InstallMsgHandlerContext;
-@@ -918,8 +919,8 @@ typedef struct _SP_DEVINSTALL_PARAMS_A {
+-typedef struct _SP_ORIGINAL_FILE_INFO_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_ORIGINAL_FILE_INFO_A {
+     DWORD  cbSize;
+     CHAR   OriginalInfName[MAX_PATH];
+     CHAR   OriginalCatalogName[MAX_PATH];
+ } SP_ORIGINAL_FILE_INFO_A, *PSP_ORIGINAL_FILE_INFO_A;
  
- typedef struct _SP_DEVINSTALL_PARAMS_W {
+-typedef struct _SP_ORIGINAL_FILE_INFO_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_ORIGINAL_FILE_INFO_W {
+     DWORD  cbSize;
+     WCHAR  OriginalInfName[MAX_PATH];
+     WCHAR  OriginalCatalogName[MAX_PATH];
+@@ -650,14 +651,14 @@ typedef PFILE_IN_CABINET_INFO_A PFILE_IN_CABINET_INFO;
+ // callback
+ //
+ 
+-typedef struct _SP_REGISTER_CONTROL_STATUSA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_REGISTER_CONTROL_STATUSA {
+     DWORD    cbSize;
+     PCSTR    FileName;
+     DWORD    Win32Error;
+     DWORD    FailureCode;
+ } SP_REGISTER_CONTROL_STATUSA, *PSP_REGISTER_CONTROL_STATUSA;
+ 
+-typedef struct _SP_REGISTER_CONTROL_STATUSW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_REGISTER_CONTROL_STATUSW {
+     DWORD    cbSize;
+     PCWSTR   FileName;
+     DWORD    Win32Error;
+@@ -693,7 +694,7 @@ typedef PVOID HSPFILEQ;
+ //
+ // Structure used with SetupQueueCopyIndirect
+ //
+-typedef struct _SP_FILE_COPY_PARAMS_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_FILE_COPY_PARAMS_A {
+     DWORD    cbSize;
+     HSPFILEQ QueueHandle;
+     PCSTR    SourceRootPath;     OPTIONAL
+@@ -708,7 +709,7 @@ typedef struct _SP_FILE_COPY_PARAMS_A {
+     PCSTR    SecurityDescriptor; OPTIONAL
+ } SP_FILE_COPY_PARAMS_A, *PSP_FILE_COPY_PARAMS_A;
+ 
+-typedef struct _SP_FILE_COPY_PARAMS_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_FILE_COPY_PARAMS_W {
+     DWORD    cbSize;
+     HSPFILEQ QueueHandle;
+     PCWSTR   SourceRootPath;     OPTIONAL
+@@ -746,7 +747,7 @@ typedef PVOID HDEVINFO;
+ // Device information structure (references a device instance
+ // that is a member of a device information set)
+ //
+-typedef struct _SP_DEVINFO_DATA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVINFO_DATA {
+     DWORD cbSize;
+     GUID  ClassGuid;
+     DWORD DevInst;    // DEVINST handle
+@@ -758,7 +759,7 @@ typedef struct _SP_DEVINFO_DATA {
+ // interface that is associated with the device information
+ // element that owns it).
+ //
+-typedef struct _SP_DEVICE_INTERFACE_DATA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVICE_INTERFACE_DATA {
+     DWORD cbSize;
+     GUID  InterfaceClassGuid;
+     DWORD Flags;
+@@ -782,12 +783,12 @@ typedef PSP_DEVICE_INTERFACE_DATA PSP_INTERFACE_DEVICE_DATA;
+ #define SPID_REMOVED              SPINT_REMOVED
+ 
+ 
+-typedef struct _SP_DEVICE_INTERFACE_DETAIL_DATA_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVICE_INTERFACE_DETAIL_DATA_A {
+     DWORD  cbSize;
+     CHAR   DevicePath[ANYSIZE_ARRAY];
+ } SP_DEVICE_INTERFACE_DETAIL_DATA_A, *PSP_DEVICE_INTERFACE_DETAIL_DATA_A;
+ 
+-typedef struct _SP_DEVICE_INTERFACE_DETAIL_DATA_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVICE_INTERFACE_DETAIL_DATA_W {
+     DWORD  cbSize;
+     WCHAR  DevicePath[ANYSIZE_ARRAY];
+ } SP_DEVICE_INTERFACE_DETAIL_DATA_W, *PSP_DEVICE_INTERFACE_DETAIL_DATA_W;
+@@ -821,14 +822,14 @@ typedef PSP_INTERFACE_DEVICE_DETAIL_DATA_A PSP_INTERFACE_DEVICE_DETAIL_DATA;
+ // SetupDiGetDeviceInfoListDetail which supercedes the functionality of
+ // SetupDiGetDeviceInfoListClass).
+ //
+-typedef struct _SP_DEVINFO_LIST_DETAIL_DATA_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVINFO_LIST_DETAIL_DATA_A {
+     DWORD  cbSize;
+     GUID   ClassGuid;
+     HANDLE RemoteMachineHandle;
+     CHAR   RemoteMachineName[SP_MAX_MACHINENAME_LENGTH];
+ } SP_DEVINFO_LIST_DETAIL_DATA_A, *PSP_DEVINFO_LIST_DETAIL_DATA_A;
+ 
+-typedef struct _SP_DEVINFO_LIST_DETAIL_DATA_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVINFO_LIST_DETAIL_DATA_W {
+     DWORD  cbSize;
+     GUID   ClassGuid;
+     HANDLE RemoteMachineHandle;
+@@ -903,10 +904,10 @@ typedef UINT        DI_FUNCTION;    // Function type for device installer
+ // particular device information element, or globally with a device
+ // information set)
+ //
+-typedef struct _SP_DEVINSTALL_PARAMS_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVINSTALL_PARAMS_A {
      DWORD             cbSize;
 -    DWORD             Flags;
 -    DWORD             FlagsEx;
@@ -60,6 +168,29 @@ index d30e1d6ba8..2c61375e8b 100644
      HWND              hwndParent;
      PSP_FILE_CALLBACK InstallMsgHandler;
      PVOID             InstallMsgHandlerContext;
+@@ -916,10 +917,10 @@ typedef struct _SP_DEVINSTALL_PARAMS_A {
+     CHAR              DriverPath[MAX_PATH];
+ } SP_DEVINSTALL_PARAMS_A, *PSP_DEVINSTALL_PARAMS_A;
+ 
+-typedef struct _SP_DEVINSTALL_PARAMS_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DEVINSTALL_PARAMS_W {
+     DWORD             cbSize;
+-    DWORD             Flags;
+-    DWORD             FlagsEx;
++    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_INSTALL_FLAGS) DWORD             Flags;
++    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_INSTALL_FLAGS_EX) DWORD             FlagsEx;
+     HWND              hwndParent;
+     PSP_FILE_CALLBACK InstallMsgHandler;
+     PVOID             InstallMsgHandlerContext;
+@@ -1095,7 +1096,7 @@ typedef PSP_DEVINSTALL_PARAMS_A PSP_DEVINSTALL_PARAMS;
+ // EnableClassParams.ClassInstallHeader.cbSize = sizeof(SP_CLASSINSTALL_HEADER);
+ // EnableClassParams.ClassInstallHeader.InstallFunction = DIF_ENABLECLASS;
+ //
+-typedef struct _SP_CLASSINSTALL_HEADER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_CLASSINSTALL_HEADER {
+     DWORD       cbSize;
+     DI_FUNCTION InstallFunction;
+ } SP_CLASSINSTALL_HEADER, *PSP_CLASSINSTALL_HEADER;
 @@ -1135,8 +1136,8 @@ typedef struct _SP_ENABLECLASS_PARAMS {
  //
  typedef struct _SP_PROPCHANGE_PARAMS {
@@ -80,8 +211,66 @@ index d30e1d6ba8..2c61375e8b 100644
      DWORD HwProfile;
  } SP_REMOVEDEVICE_PARAMS, *PSP_REMOVEDEVICE_PARAMS;
  
-@@ -1573,7 +1574,7 @@ typedef PSP_DRVINFO_DETAIL_DATA_A PSP_DRVINFO_DETAIL_DATA;
- typedef struct _SP_DRVINSTALL_PARAMS {
+@@ -1453,7 +1454,7 @@ typedef PSP_POWERMESSAGEWAKE_PARAMS_A PSP_POWERMESSAGEWAKE_PARAMS;
+ // Driver information structure (member of a driver info list that may be associated
+ // with a particular device instance, or (globally) with a device information set)
+ //
+-typedef struct _SP_DRVINFO_DATA_V2_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DATA_V2_A {
+     DWORD     cbSize;
+     DWORD     DriverType;
+     ULONG_PTR Reserved;
+@@ -1464,7 +1465,7 @@ typedef struct _SP_DRVINFO_DATA_V2_A {
+     DWORDLONG DriverVersion;
+ } SP_DRVINFO_DATA_V2_A, *PSP_DRVINFO_DATA_V2_A;
+ 
+-typedef struct _SP_DRVINFO_DATA_V2_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DATA_V2_W {
+     DWORD     cbSize;
+     DWORD     DriverType;
+     ULONG_PTR Reserved;
+@@ -1479,7 +1480,7 @@ typedef struct _SP_DRVINFO_DATA_V2_W {
+ // Version 1 of the SP_DRVINFO_DATA structures, used only for compatibility
+ // with Windows NT 4.0/Windows 95/98 SETUPAPI.DLL
+ //
+-typedef struct _SP_DRVINFO_DATA_V1_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DATA_V1_A {
+     DWORD     cbSize;
+     DWORD     DriverType;
+     ULONG_PTR Reserved;
+@@ -1488,7 +1489,7 @@ typedef struct _SP_DRVINFO_DATA_V1_A {
+     CHAR      ProviderName[LINE_LEN];
+ } SP_DRVINFO_DATA_V1_A, *PSP_DRVINFO_DATA_V1_A;
+ 
+-typedef struct _SP_DRVINFO_DATA_V1_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DATA_V1_W {
+     DWORD     cbSize;
+     DWORD     DriverType;
+     ULONG_PTR Reserved;
+@@ -1533,7 +1534,7 @@ typedef PSP_DRVINFO_DATA_V2 PSP_DRVINFO_DATA;
+ // Driver information details structure (provides detailed information about a
+ // particular driver information structure)
+ //
+-typedef struct _SP_DRVINFO_DETAIL_DATA_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DETAIL_DATA_A {
+     DWORD    cbSize;
+     FILETIME InfDate;
+     DWORD    CompatIDsOffset;
+@@ -1545,7 +1546,7 @@ typedef struct _SP_DRVINFO_DETAIL_DATA_A {
+     CHAR     HardwareID[ANYSIZE_ARRAY];
+ } SP_DRVINFO_DETAIL_DATA_A, *PSP_DRVINFO_DETAIL_DATA_A;
+ 
+-typedef struct _SP_DRVINFO_DETAIL_DATA_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINFO_DETAIL_DATA_W {
+     DWORD    cbSize;
+     FILETIME InfDate;
+     DWORD    CompatIDsOffset;
+@@ -1570,10 +1571,10 @@ typedef PSP_DRVINFO_DETAIL_DATA_A PSP_DRVINFO_DETAIL_DATA;
+ // Driver installation parameters (associated with a particular driver
+ // information element)
+ //
+-typedef struct _SP_DRVINSTALL_PARAMS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_DRVINSTALL_PARAMS {
      DWORD cbSize;
      DWORD Rank;
 -    DWORD Flags;
@@ -89,12 +278,63 @@ index d30e1d6ba8..2c61375e8b 100644
      DWORD_PTR PrivateData;
      DWORD Reserved;
  } SP_DRVINSTALL_PARAMS, *PSP_DRVINSTALL_PARAMS;
+@@ -1734,7 +1735,7 @@ typedef struct _COINSTALLER_CONTEXT_DATA {
+ //
+ // Structure containing class image list information.
+ //
+-typedef struct _SP_CLASSIMAGELIST_DATA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_CLASSIMAGELIST_DATA {
+     DWORD      cbSize;
+     HIMAGELIST ImageList;
+     ULONG_PTR  Reserved;
+@@ -1747,7 +1748,7 @@ typedef struct _SP_CLASSIMAGELIST_DATA {
+ // points provided by class/device property page providers.  Used to retrieve a handle
+ // (or, potentially, multiple handles) to property pages for a specified property page type.
+ //
+-typedef struct _SP_PROPSHEETPAGE_REQUEST {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_PROPSHEETPAGE_REQUEST {
+     DWORD            cbSize;
+     DWORD            PageRequested;
+     HDEVINFO         DeviceInfoSet;
+@@ -1765,14 +1766,14 @@ typedef struct _SP_PROPSHEETPAGE_REQUEST {
+ //
+ // Structure used with SetupGetBackupInformation/SetupSetBackupInformation
+ //
+-typedef struct _SP_BACKUP_QUEUE_PARAMS_V2_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_BACKUP_QUEUE_PARAMS_V2_A {
+     DWORD    cbSize;                            // size of structure
+     CHAR     FullInfPath[MAX_PATH];             // buffer to hold ANSI pathname of INF file
+     INT      FilenameOffset;                    // offset in CHAR's of filename part (after '\')
+     CHAR     ReinstallInstance[MAX_PATH];       // Instance ID (if present)
+ } SP_BACKUP_QUEUE_PARAMS_V2_A, *PSP_BACKUP_QUEUE_PARAMS_V2_A;
+ 
+-typedef struct _SP_BACKUP_QUEUE_PARAMS_V2_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_BACKUP_QUEUE_PARAMS_V2_W {
+     DWORD    cbSize;                            // size of structure
+     WCHAR    FullInfPath[MAX_PATH];             // buffer to hold UNICODE pathname of INF file
+     INT      FilenameOffset;                    // offset in WCHAR's of filename part (after '\')
+@@ -1783,13 +1784,13 @@ typedef struct _SP_BACKUP_QUEUE_PARAMS_V2_W {
+ // Version 1 of the SP_BACKUP_QUEUE_PARAMS structures, used only for compatibility
+ // with Windows 2000/Windows 95/98/ME SETUPAPI.DLL
+ //
+-typedef struct _SP_BACKUP_QUEUE_PARAMS_V1_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_BACKUP_QUEUE_PARAMS_V1_A {
+     DWORD    cbSize;                            // size of structure
+     CHAR     FullInfPath[MAX_PATH];             // buffer to hold ANSI pathname of INF file
+     INT      FilenameOffset;                    // offset in CHAR's of filename part (after '\')
+ } SP_BACKUP_QUEUE_PARAMS_V1_A, *PSP_BACKUP_QUEUE_PARAMS_V1_A;
+ 
+-typedef struct _SP_BACKUP_QUEUE_PARAMS_V1_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_BACKUP_QUEUE_PARAMS_V1_W {
+     DWORD    cbSize;                            // size of structure
+     WCHAR    FullInfPath[MAX_PATH];             // buffer to hold UNICODE pathname of INF file
+     INT      FilenameOffset;                    // offset in WCHAR's of filename part (after '\')
 @@ -1955,7 +1956,7 @@ typedef PSP_BACKUP_QUEUE_PARAMS_V2 PSP_BACKUP_QUEUE_PARAMS;
  
  #endif // _SPAPI_ERRORS
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -103,7 +343,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -112,7 +352,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfFileInformationA(
@@ -121,7 +361,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfFileInformationW(
@@ -130,7 +370,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfOriginalFileInformationA(
@@ -139,7 +379,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfOriginalFileInformationW(
@@ -148,7 +388,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfVersionInformationA(
@@ -157,7 +397,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryInfVersionInformationW(
@@ -166,7 +406,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfDriverStoreLocationA(
@@ -175,7 +415,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfDriverStoreLocationW(
@@ -184,7 +424,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfPublishedNameA(
@@ -193,7 +433,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfPublishedNameW(
@@ -202,7 +442,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfFileListA(
@@ -215,7 +455,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetInfFileListW(
@@ -230,7 +470,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HINF
  WINAPI
  SetupOpenInfFileW(
@@ -242,7 +482,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HINF
  WINAPI
  SetupOpenInfFileA(
@@ -267,7 +507,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupOpenAppendInfFileW(
@@ -276,7 +516,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupOpenAppendInfFileA(
@@ -294,7 +534,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFindFirstLineA(
@@ -303,7 +543,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFindFirstLineW(
@@ -321,7 +561,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFindNextMatchLineA(
@@ -330,7 +570,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFindNextMatchLineW(
@@ -339,7 +579,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetLineByIndexA(
@@ -348,7 +588,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetLineByIndexW(
@@ -357,7 +597,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  LONG
  WINAPI
  SetupGetLineCountA(
@@ -366,7 +606,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  LONG
  WINAPI
  SetupGetLineCountW(
@@ -375,7 +615,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetLineTextA(
@@ -384,7 +624,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetLineTextW(
@@ -402,7 +642,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetStringFieldA(
@@ -411,7 +651,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetStringFieldW(
@@ -429,7 +669,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetMultiSzFieldA(
@@ -438,7 +678,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetMultiSzFieldW(
@@ -456,7 +696,7 @@ index d30e1d6ba8..2c61375e8b 100644
  // or LocalFree (Win2k+)
  //
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  DWORD
  WINAPI
  SetupGetFileCompressionInfoA(
@@ -469,7 +709,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  DWORD
  WINAPI
  SetupGetFileCompressionInfoW(
@@ -487,7 +727,7 @@ index d30e1d6ba8..2c61375e8b 100644
  //
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetFileCompressionInfoExA(
@@ -500,7 +740,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetFileCompressionInfoExW(
@@ -518,7 +758,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  DWORD
  WINAPI
  SetupDecompressOrCopyFileA(
@@ -529,7 +769,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  DWORD
  WINAPI
  SetupDecompressOrCopyFileW(
@@ -545,7 +785,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceFileLocationA(
@@ -554,7 +794,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceFileLocationW(
@@ -563,7 +803,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceFileSizeA(
@@ -572,7 +812,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceFileSizeW(
@@ -581,7 +821,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetTargetPathA(
@@ -590,7 +830,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetTargetPathW(
@@ -599,7 +839,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetSourceListA(
@@ -608,7 +848,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetSourceListW(
@@ -626,7 +866,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddToSourceListA(
@@ -635,7 +875,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddToSourceListW(
@@ -644,7 +884,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFromSourceListA(
@@ -653,7 +893,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFromSourceListW(
@@ -662,7 +902,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQuerySourceListA(
@@ -671,7 +911,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQuerySourceListW(
@@ -680,7 +920,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFreeSourceListA(
@@ -689,7 +929,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupFreeSourceListW(
@@ -698,7 +938,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupPromptForDiskA(
@@ -707,7 +947,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupPromptForDiskW(
@@ -716,7 +956,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupCopyErrorA(
@@ -725,7 +965,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupCopyErrorW(
@@ -734,7 +974,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupRenameErrorA(
@@ -743,7 +983,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupRenameErrorW(
@@ -752,7 +992,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupDeleteErrorA(
@@ -761,7 +1001,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupDeleteErrorW(
@@ -770,7 +1010,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupBackupErrorA(
@@ -779,7 +1019,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupBackupErrorW(
@@ -788,7 +1028,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetDirectoryIdA(
@@ -797,7 +1037,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetDirectoryIdW(
@@ -806,7 +1046,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetDirectoryIdExA(
@@ -815,7 +1055,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetDirectoryIdExW(
@@ -824,7 +1064,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceInfoA(
@@ -833,7 +1073,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupGetSourceInfoW(
@@ -842,7 +1082,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFileA(
@@ -857,7 +1097,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFileW(
@@ -875,7 +1115,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFileExA(
@@ -891,7 +1131,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFileExW(
@@ -925,7 +1165,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetFileQueueAlternatePlatformA(
@@ -934,7 +1174,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetFileQueueAlternatePlatformW(
@@ -943,7 +1183,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetPlatformPathOverrideA(
@@ -951,7 +1191,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupSetPlatformPathOverrideW(
@@ -960,7 +1200,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopyA(
@@ -969,7 +1209,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopyW(
@@ -978,7 +1218,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopyIndirectA(
@@ -986,7 +1226,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopyIndirectW(
@@ -995,7 +1235,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDefaultCopyA(
@@ -1004,7 +1244,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDefaultCopyW(
@@ -1013,7 +1253,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopySectionA(
@@ -1022,7 +1262,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueCopySectionW(
@@ -1031,7 +1271,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDeleteA(
@@ -1040,7 +1280,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDeleteW(
@@ -1049,7 +1289,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDeleteSectionA(
@@ -1058,7 +1298,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueDeleteSectionW(
@@ -1067,7 +1307,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueRenameA(
@@ -1076,7 +1316,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueRenameW(
@@ -1085,7 +1325,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueRenameSectionA(
@@ -1094,7 +1334,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueueRenameSectionW(
@@ -1103,7 +1343,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupCommitFileQueueA(
@@ -1112,7 +1352,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupCommitFileQueueW(
@@ -1121,7 +1361,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupScanFileQueueA(
@@ -1135,7 +1375,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupScanFileQueueW(
@@ -1177,7 +1417,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define SPOST_MAX   3
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupCopyOEMInfA(
@@ -1194,7 +1434,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupCopyOEMInfW(
@@ -1212,7 +1452,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINSETUPAPI
  BOOL
  WINAPI
  SetupUninstallOEMInfA(
@@ -1221,7 +1461,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINSETUPAPI
  BOOL
  WINAPI
  SetupUninstallOEMInfW(
@@ -1239,7 +1479,7 @@ index d30e1d6ba8..2c61375e8b 100644
  // Disk space list APIs
  //
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HDSKSPC
  WINAPI
  SetupCreateDiskSpaceListA(
@@ -1248,7 +1488,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HDSKSPC
  WINAPI
  SetupCreateDiskSpaceListW(
@@ -1257,7 +1497,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HDSKSPC
  WINAPI
  SetupDuplicateDiskSpaceListA(
@@ -1266,7 +1506,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HDSKSPC
  WINAPI
  SetupDuplicateDiskSpaceListW(
@@ -1284,7 +1524,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryDrivesInDiskSpaceListA(
@@ -1293,7 +1533,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryDrivesInDiskSpaceListW(
@@ -1302,7 +1542,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQuerySpaceRequiredOnDriveA(
@@ -1311,7 +1551,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQuerySpaceRequiredOnDriveW(
@@ -1320,7 +1560,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAdjustDiskSpaceListA(
@@ -1329,7 +1569,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAdjustDiskSpaceListW(
@@ -1338,7 +1578,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddToDiskSpaceListA(
@@ -1352,7 +1592,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddToDiskSpaceListW(
@@ -1369,7 +1609,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddSectionToDiskSpaceListA(
@@ -1384,7 +1624,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddSectionToDiskSpaceListW(
@@ -1402,7 +1642,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddInstallSectionToDiskSpaceListA(
@@ -1411,7 +1651,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupAddInstallSectionToDiskSpaceListW(
@@ -1420,7 +1660,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFromDiskSpaceListA(
@@ -1433,7 +1673,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFromDiskSpaceListW(
@@ -1449,7 +1689,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveSectionFromDiskSpaceListA(
@@ -1464,7 +1704,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveSectionFromDiskSpaceListW(
@@ -1482,7 +1722,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveInstallSectionFromDiskSpaceListA(
@@ -1491,7 +1731,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveInstallSectionFromDiskSpaceListW(
@@ -1500,7 +1740,7 @@ index d30e1d6ba8..2c61375e8b 100644
  //
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupIterateCabinetA(
@@ -1509,7 +1749,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupIterateCabinetW(
@@ -1552,7 +1792,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupDefaultQueueCallbackA(
@@ -1561,7 +1801,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  UINT
  WINAPI
  SetupDefaultQueueCallbackW(
@@ -1570,7 +1810,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFromInfSectionA(
@@ -1579,7 +1819,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFromInfSectionW(
@@ -1588,7 +1828,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFilesFromInfSectionA(
@@ -1597,7 +1837,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallFilesFromInfSectionW(
@@ -1606,7 +1846,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallServicesFromInfSectionA(
@@ -1617,7 +1857,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallServicesFromInfSectionW(
@@ -1633,7 +1873,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallServicesFromInfSectionExA(
@@ -1648,7 +1888,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupInstallServicesFromInfSectionExW(
@@ -1664,7 +1904,7 @@ index d30e1d6ba8..2c61375e8b 100644
  // InstallHinfSection(NULL,NULL,CmdLineBuffer,0);
  //
 -VOID
-+_Windows_SupportedOS_WindowsXP_ VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ VOID
  WINAPI
  InstallHinfSectionA(
      _In_ HWND Window,
@@ -1673,7 +1913,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -VOID
-+_Windows_SupportedOS_WindowsXP_ VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ VOID
  WINAPI
  InstallHinfSectionW(
      _In_ HWND Window,
@@ -1682,7 +1922,7 @@ index d30e1d6ba8..2c61375e8b 100644
  typedef PVOID HSPFILELOG;
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HSPFILELOG
  WINAPI
  SetupInitializeFileLogA(
@@ -1691,7 +1931,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  HSPFILELOG
  WINAPI
  SetupInitializeFileLogW(
@@ -1709,7 +1949,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupLogFileA(
@@ -1718,7 +1958,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupLogFileW(
@@ -1727,7 +1967,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFileLogEntryA(
@@ -1736,7 +1976,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupRemoveFileLogEntryW(
@@ -1745,7 +1985,7 @@ index d30e1d6ba8..2c61375e8b 100644
  } SetupFileLogInfo;
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryFileLogA(
@@ -1754,7 +1994,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupQueryFileLogW(
@@ -1771,7 +2011,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupLogErrorA (
@@ -1780,7 +2020,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupLogErrorW (
@@ -1836,6 +2076,42 @@ index d30e1d6ba8..2c61375e8b 100644
  VOID
  WINAPI
  SetupWriteTextLogInfLine(
+@@ -5002,7 +5003,7 @@ SetupWriteTextLogInfLine(
+ // Backup Information API's
+ //
+ 
+-WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINSETUPAPI
+ BOOL
+ WINAPI
+ SetupGetBackupInformationA(
+@@ -5010,7 +5011,7 @@ SetupGetBackupInformationA(
+     _Inout_ PSP_BACKUP_QUEUE_PARAMS_A BackupParams
+     );
+ 
+-WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINSETUPAPI
+ BOOL
+ WINAPI
+ SetupGetBackupInformationW(
+@@ -5026,7 +5027,7 @@ SetupGetBackupInformationW(
+ 
+ #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
+ 
+-WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINSETUPAPI
+ BOOL
+ WINAPI
+ SetupPrepareQueueForRestoreA(
+@@ -5035,7 +5036,7 @@ SetupPrepareQueueForRestoreA(
+     _In_ DWORD RestoreFlags
+     );
+ 
+-WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINSETUPAPI
+ BOOL
+ WINAPI
+ SetupPrepareQueueForRestoreW(
 @@ -5059,14 +5060,14 @@ SetupPrepareQueueForRestoreW(
  // Overriden if SetupAPI is run in non-interactive window session
  //
@@ -1867,7 +2143,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -1876,7 +2152,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -1894,7 +2170,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInfoListDetailA(
@@ -1903,7 +2179,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInfoListDetailW(
@@ -1912,7 +2188,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DICD_INHERIT_CLASSDRVS  0x00000002
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiCreateDeviceInfoA(
@@ -1926,7 +2202,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiCreateDeviceInfoW(
@@ -1944,7 +2220,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DIOD_CANCEL_REMOVE      0x00000004
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiOpenDeviceInfoA(
@@ -1953,7 +2229,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiOpenDeviceInfoW(
@@ -1962,7 +2238,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInstanceIdA(
@@ -1971,7 +2247,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInstanceIdW(
@@ -2016,7 +2292,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiCreateDeviceInterfaceA(
@@ -2025,7 +2301,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiCreateDeviceInterfaceW(
@@ -2034,7 +2310,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DIODI_NO_ADD    0x00000001
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiOpenDeviceInterfaceA(
@@ -2043,7 +2319,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiOpenDeviceInterfaceW(
@@ -2079,7 +2355,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define SetupDiRemoveInterfaceDevice SetupDiRemoveDeviceInterface
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  _At_((LPSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
  BOOL
@@ -2088,7 +2364,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  _At_((LPWSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
  BOOL
@@ -2145,7 +2421,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiEnumDriverInfoA(
@@ -2158,7 +2434,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiEnumDriverInfoW(
@@ -2174,7 +2450,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetSelectedDriverA(
@@ -2183,7 +2459,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetSelectedDriverW(
@@ -2192,7 +2468,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetSelectedDriverA(
@@ -2201,7 +2477,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetSelectedDriverW(
@@ -2210,7 +2486,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDriverInfoDetailA(
@@ -2219,7 +2495,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDriverInfoDetailW(
@@ -2244,7 +2520,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -2257,7 +2533,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -2275,7 +2551,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -2291,7 +2567,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) _Check_return_
  WINSETUPAPI
  HDEVINFO
  WINAPI
@@ -2309,7 +2585,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetINFClassA(
@@ -2318,7 +2594,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetINFClassW(
@@ -2336,7 +2612,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2345,7 +2621,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2354,7 +2630,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDescriptionA(
@@ -2363,7 +2639,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDescriptionW(
@@ -2372,7 +2648,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDescriptionExA(
@@ -2381,7 +2657,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDescriptionExW(
@@ -2480,7 +2756,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiInstallClassA(
@@ -2489,7 +2765,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiInstallClassW(
@@ -2498,7 +2774,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiInstallClassExA(
@@ -2507,7 +2783,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiInstallClassExW(
@@ -2525,7 +2801,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DIOCR_INTERFACE   0x00000002    // interface class registry branch
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2534,7 +2810,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2543,7 +2819,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2552,7 +2828,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2579,7 +2855,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DIREG_BOTH      0x00000004          // Delete both driver and Device key
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2588,7 +2864,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) _Check_return_
  WINSETUPAPI
  HKEY
  WINAPI
@@ -2624,7 +2900,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2633,7 +2909,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2750,7 +3026,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define SPCRP_MAXIMUM_PROPERTY            (0x0000001C)  // Upper bound on ordinals
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZSTR) PropertyBuffer, _Post_valid_))
  WINSETUPAPI
@@ -2767,7 +3043,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PWSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZWSTR) PropertyBuffer, _Post_valid_))
  WINSETUPAPI
@@ -2785,7 +3061,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2794,7 +3070,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2803,7 +3079,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDeviceRegistryPropertyA(
@@ -2816,7 +3092,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDeviceRegistryPropertyW(
@@ -2832,7 +3108,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetClassRegistryPropertyA(
@@ -2841,7 +3117,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetClassRegistryPropertyW(
@@ -2850,7 +3126,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInstallParamsA(
@@ -2859,7 +3135,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDeviceInstallParamsW(
@@ -2868,7 +3144,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2877,7 +3153,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -2886,7 +3162,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDeviceInstallParamsA(
@@ -2895,7 +3171,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDeviceInstallParamsW(
@@ -2904,7 +3180,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetClassInstallParamsA(
@@ -2913,7 +3189,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetClassInstallParamsW(
@@ -2922,7 +3198,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDriverInstallParamsA(
@@ -2931,7 +3207,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetDriverInstallParamsW(
@@ -2940,7 +3216,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDriverInstallParamsA(
@@ -2949,7 +3225,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiSetDriverInstallParamsW(
@@ -3016,7 +3292,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassImageListExA(
@@ -3025,7 +3301,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassImageListExW(
@@ -3052,7 +3328,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDevPropertySheetsA(
@@ -3061,7 +3337,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetClassDevPropertySheetsW(
@@ -3088,7 +3364,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiClassNameFromGuidA(
@@ -3097,7 +3373,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiClassNameFromGuidW(
@@ -3106,7 +3382,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiClassNameFromGuidExA(
@@ -3115,7 +3391,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiClassNameFromGuidExW(
@@ -3124,7 +3400,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #endif
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3133,7 +3409,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3142,7 +3418,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3151,7 +3427,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3160,7 +3436,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetHwProfileFriendlyNameA(
@@ -3169,7 +3445,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetHwProfileFriendlyNameW(
@@ -3178,7 +3454,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetHwProfileFriendlyNameExA(
@@ -3187,7 +3463,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetHwProfileFriendlyNameExW(
@@ -3223,7 +3499,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #if _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
 -WINSETUPAPI
-+_Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualModelsSectionA(
@@ -3232,7 +3508,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualModelsSectionW(
@@ -3241,7 +3517,7 @@ index d30e1d6ba8..2c61375e8b 100644
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualSectionToInstallA(
@@ -3250,7 +3526,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualSectionToInstallW(
@@ -3259,7 +3535,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualSectionToInstallExA(
@@ -3268,7 +3544,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupDiGetActualSectionToInstallExW(
@@ -3277,7 +3553,7 @@ index d30e1d6ba8..2c61375e8b 100644
  // SetupEnumInfSections is for low-level parsing of an INF
  //
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupEnumInfSectionsA (
@@ -3286,16 +3562,51 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINSETUPAPI
  BOOL
  WINAPI
  SetupEnumInfSectionsW (
+@@ -7432,14 +7433,14 @@ SetupEnumInfSectionsW (
+ 
+ #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
+ 
+-typedef struct _SP_INF_SIGNER_INFO_V1_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_INF_SIGNER_INFO_V1_A {
+     DWORD  cbSize;
+     CHAR   CatalogFile[MAX_PATH];
+     CHAR   DigitalSigner[MAX_PATH];
+     CHAR   DigitalSignerVersion[MAX_PATH];
+ } SP_INF_SIGNER_INFO_V1_A, *PSP_INF_SIGNER_INFO_V1_A;
+ 
+-typedef struct _SP_INF_SIGNER_INFO_V1_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_INF_SIGNER_INFO_V1_W {
+     DWORD  cbSize;
+     WCHAR  CatalogFile[MAX_PATH];
+     WCHAR  DigitalSigner[MAX_PATH];
+@@ -7456,7 +7457,7 @@ typedef PSP_INF_SIGNER_INFO_V1_A PSP_INF_SIGNER_INFO_V1;
+ 
+ #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
+ 
+-typedef struct _SP_INF_SIGNER_INFO_V2_A {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_INF_SIGNER_INFO_V2_A {
+     DWORD  cbSize;
+     CHAR   CatalogFile[MAX_PATH];
+     CHAR   DigitalSigner[MAX_PATH];
+@@ -7464,7 +7465,7 @@ typedef struct _SP_INF_SIGNER_INFO_V2_A {
+     DWORD  SignerScore;
+ } SP_INF_SIGNER_INFO_V2_A, *PSP_INF_SIGNER_INFO_V2_A;
+ 
+-typedef struct _SP_INF_SIGNER_INFO_V2_W {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SP_INF_SIGNER_INFO_V2_W {
+     DWORD  cbSize;
+     WCHAR  CatalogFile[MAX_PATH];
+     WCHAR  DigitalSigner[MAX_PATH];
 @@ -7519,7 +7520,7 @@ typedef PSP_INF_SIGNER_INFO_V2 PSP_INF_SIGNER_INFO;
  #endif  // use current version of signer info structure
  
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINSETUPAPI
  BOOL
  WINAPI
  SetupVerifyInfFileA(
@@ -3304,7 +3615,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_WindowsXP_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINSETUPAPI
  BOOL
  WINAPI
  SetupVerifyInfFileW(
@@ -3313,7 +3624,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define DICUSTOMDEVPROP_MERGE_MULTISZ    0x00000001
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3322,7 +3633,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
  WINAPI
@@ -3331,7 +3642,7 @@ index d30e1d6ba8..2c61375e8b 100644
  #define SCWMI_CLOBBER_SECURITY  0x00000001
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Server2003_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Server2003_ WINSETUPAPI
  BOOL
  WINAPI
  SetupConfigureWmiFromInfSectionA(
@@ -3340,7 +3651,7 @@ index d30e1d6ba8..2c61375e8b 100644
      );
  
 -WINSETUPAPI
-+_Windows_SupportedOS_Server2003_ WINSETUPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Server2003_ WINSETUPAPI
  BOOL
  WINAPI
  SetupConfigureWmiFromInfSectionW(

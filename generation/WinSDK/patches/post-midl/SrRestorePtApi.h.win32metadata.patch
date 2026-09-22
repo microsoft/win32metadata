@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
-index 531fcf46de..091f289dce 100644
+index 531fcf46de..83f0cac46a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -99,7 +99,7 @@ index 531fcf46de..091f289dce 100644
  //
  // ERROR_ALREADY_EXISTS       If this is a nested restore point
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
  BOOL __stdcall
  SRSetRestorePointA(
                    _In_ PRESTOREPOINTINFOA  pRestorePtSpec,// [in] Restore Point specification
@@ -107,7 +107,7 @@ index 531fcf46de..091f289dce 100644
                    );
  
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
  BOOL __stdcall
  SRSetRestorePointW(
                    _In_ PRESTOREPOINTINFOW pRestorePtSpec,

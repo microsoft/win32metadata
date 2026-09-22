@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
+index e57c8c5c7c..9253a73d1a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -102,7 +103,7 @@ typedef
+ VOID
+ (WDBGAPI*PWINDBG_GET_SYMBOL)(
+     PVOID      offset,
+-    PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
+     ULONG_PTR *pDisplacement
+     );
+ 
+@@ -110,7 +111,7 @@ typedef
+ VOID
+ (WDBGAPI*PWINDBG_GET_SYMBOL32)(
+     ULONG      offset,
+-    PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
+     PULONG     pDisplacement
+     );
+ 
+@@ -118,7 +119,7 @@ typedef
+ VOID
+ (WDBGAPI*PWINDBG_GET_SYMBOL64)(
+     ULONG64    offset,
+-    PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
+     PULONG64   pDisplacement
+     );
+ 

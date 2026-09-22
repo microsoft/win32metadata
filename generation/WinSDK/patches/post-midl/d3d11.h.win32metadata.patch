@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
-index d93002900f..1afeec19f0 100644
+index d93002900f..5a19c7f87d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
 @@ -1,3 +1,4 @@
@@ -63,7 +63,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("1841e5c8-16b0-489b-bcc8-44cfb0d5deae")
-+    MIDL_INTERFACE("1841e5c8-16b0-489b-bcc8-44cfb0d5deae") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("1841e5c8-16b0-489b-bcc8-44cfb0d5deae") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11DeviceChild : public IUnknown
      {
      public:
@@ -72,7 +72,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1")
-+    MIDL_INTERFACE("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11DepthStencilState : public ID3D11DeviceChild
      {
      public:
@@ -81,7 +81,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("75b68faa-347d-4159-8f45-a0640f01cd9a")
-+    MIDL_INTERFACE("75b68faa-347d-4159-8f45-a0640f01cd9a") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("75b68faa-347d-4159-8f45-a0640f01cd9a") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11BlendState : public ID3D11DeviceChild
      {
      public:
@@ -90,7 +90,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7")
-+    MIDL_INTERFACE("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11RasterizerState : public ID3D11DeviceChild
      {
      public:
@@ -99,7 +99,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("dc8e63f3-d12b-4952-b47b-5e45026a862d")
-+    MIDL_INTERFACE("dc8e63f3-d12b-4952-b47b-5e45026a862d") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("dc8e63f3-d12b-4952-b47b-5e45026a862d") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Resource : public ID3D11DeviceChild
      {
      public:
@@ -121,7 +121,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("48570b85-d1ee-4fcd-a250-eb350722b037")
-+    MIDL_INTERFACE("48570b85-d1ee-4fcd-a250-eb350722b037") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("48570b85-d1ee-4fcd-a250-eb350722b037") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Buffer : public ID3D11Resource
      {
      public:
@@ -143,7 +143,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c")
-+    MIDL_INTERFACE("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Texture1D : public ID3D11Resource
      {
      public:
@@ -165,7 +165,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("6f15aaf2-d208-4e89-9ab4-489535d34f9c")
-+    MIDL_INTERFACE("6f15aaf2-d208-4e89-9ab4-489535d34f9c") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("6f15aaf2-d208-4e89-9ab4-489535d34f9c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Texture2D : public ID3D11Resource
      {
      public:
@@ -187,7 +187,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("037e866e-f56d-4357-a8af-9dabbe6e250e")
-+    MIDL_INTERFACE("037e866e-f56d-4357-a8af-9dabbe6e250e") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("037e866e-f56d-4357-a8af-9dabbe6e250e") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Texture3D : public ID3D11Resource
      {
      public:
@@ -196,7 +196,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("839d1216-bb2e-412b-b7f4-a9dbebe08ed1")
-+    MIDL_INTERFACE("839d1216-bb2e-412b-b7f4-a9dbebe08ed1") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("839d1216-bb2e-412b-b7f4-a9dbebe08ed1") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11View : public ID3D11DeviceChild
      {
      public:
@@ -214,7 +214,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("b0e06fe0-8192-4e1a-b1ca-36d7414710b2")
-+    MIDL_INTERFACE("b0e06fe0-8192-4e1a-b1ca-36d7414710b2") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("b0e06fe0-8192-4e1a-b1ca-36d7414710b2") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11ShaderResourceView : public ID3D11View
      {
      public:
@@ -223,7 +223,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("dfdba067-0b8d-4865-875b-d7b4516cc164")
-+    MIDL_INTERFACE("dfdba067-0b8d-4865-875b-d7b4516cc164") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("dfdba067-0b8d-4865-875b-d7b4516cc164") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11RenderTargetView : public ID3D11View
      {
      public:
@@ -232,7 +232,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("9fdac92a-1876-48c3-afad-25b94f84a9b6")
-+    MIDL_INTERFACE("9fdac92a-1876-48c3-afad-25b94f84a9b6") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("9fdac92a-1876-48c3-afad-25b94f84a9b6") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11DepthStencilView : public ID3D11View
      {
      public:
@@ -241,7 +241,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("28acf509-7f5c-48f6-8611-f316010a6380")
-+    MIDL_INTERFACE("28acf509-7f5c-48f6-8611-f316010a6380") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("28acf509-7f5c-48f6-8611-f316010a6380") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11UnorderedAccessView : public ID3D11View
      {
      public:
@@ -250,7 +250,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("3b301d64-d678-4289-8897-22f8928b72f3")
-+    MIDL_INTERFACE("3b301d64-d678-4289-8897-22f8928b72f3") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("3b301d64-d678-4289-8897-22f8928b72f3") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11VertexShader : public ID3D11DeviceChild
      {
      public:
@@ -259,7 +259,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd")
-+    MIDL_INTERFACE("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11HullShader : public ID3D11DeviceChild
      {
      public:
@@ -268,7 +268,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("f582c508-0f36-490c-9977-31eece268cfa")
-+    MIDL_INTERFACE("f582c508-0f36-490c-9977-31eece268cfa") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("f582c508-0f36-490c-9977-31eece268cfa") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11DomainShader : public ID3D11DeviceChild
      {
      public:
@@ -277,7 +277,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("38325b96-effb-4022-ba02-2e795b70275c")
-+    MIDL_INTERFACE("38325b96-effb-4022-ba02-2e795b70275c") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("38325b96-effb-4022-ba02-2e795b70275c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11GeometryShader : public ID3D11DeviceChild
      {
      public:
@@ -286,7 +286,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("ea82e40d-51dc-4f33-93d4-db7c9125ae8c")
-+    MIDL_INTERFACE("ea82e40d-51dc-4f33-93d4-db7c9125ae8c") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("ea82e40d-51dc-4f33-93d4-db7c9125ae8c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11PixelShader : public ID3D11DeviceChild
      {
      public:
@@ -295,7 +295,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("4f5b196e-c2bd-495e-bd01-1fded38e4969")
-+    MIDL_INTERFACE("4f5b196e-c2bd-495e-bd01-1fded38e4969") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("4f5b196e-c2bd-495e-bd01-1fded38e4969") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11ComputeShader : public ID3D11DeviceChild
      {
      public:
@@ -304,7 +304,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("e4819ddc-4cf0-4025-bd26-5de82a3e07b7")
-+    MIDL_INTERFACE("e4819ddc-4cf0-4025-bd26-5de82a3e07b7") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("e4819ddc-4cf0-4025-bd26-5de82a3e07b7") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11InputLayout : public ID3D11DeviceChild
      {
      public:
@@ -313,7 +313,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("da6fea51-564c-4487-9810-f0d0f9b4e3a5")
-+    MIDL_INTERFACE("da6fea51-564c-4487-9810-f0d0f9b4e3a5") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("da6fea51-564c-4487-9810-f0d0f9b4e3a5") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11SamplerState : public ID3D11DeviceChild
      {
      public:
@@ -322,7 +322,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b")
-+    MIDL_INTERFACE("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Asynchronous : public ID3D11DeviceChild
      {
      public:
@@ -331,7 +331,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("d6c00747-87b7-425e-b84d-44d108560afd")
-+    MIDL_INTERFACE("d6c00747-87b7-425e-b84d-44d108560afd") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("d6c00747-87b7-425e-b84d-44d108560afd") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Query : public ID3D11Asynchronous
      {
      public:
@@ -340,7 +340,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("9eb576dd-9f77-4d86-81aa-8bab5fe490e2")
-+    MIDL_INTERFACE("9eb576dd-9f77-4d86-81aa-8bab5fe490e2") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("9eb576dd-9f77-4d86-81aa-8bab5fe490e2") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Predicate : public ID3D11Query
      {
      public:
@@ -349,7 +349,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("6e8c49fb-a371-4770-b440-29086022b741")
-+    MIDL_INTERFACE("6e8c49fb-a371-4770-b440-29086022b741") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("6e8c49fb-a371-4770-b440-29086022b741") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Counter : public ID3D11Asynchronous
      {
      public:
@@ -358,7 +358,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("a6cd7faa-b0b7-4a2f-9436-8662a65797cb")
-+    MIDL_INTERFACE("a6cd7faa-b0b7-4a2f-9436-8662a65797cb") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("a6cd7faa-b0b7-4a2f-9436-8662a65797cb") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11ClassInstance : public ID3D11DeviceChild
      {
      public:
@@ -367,7 +367,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("ddf57cba-9543-46e4-a12b-f207a0fe7fed")
-+    MIDL_INTERFACE("ddf57cba-9543-46e4-a12b-f207a0fe7fed") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("ddf57cba-9543-46e4-a12b-f207a0fe7fed") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11ClassLinkage : public ID3D11DeviceChild
      {
      public:
@@ -376,7 +376,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("a24bc4d1-769e-43f7-8013-98ff566c18e2")
-+    MIDL_INTERFACE("a24bc4d1-769e-43f7-8013-98ff566c18e2") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("a24bc4d1-769e-43f7-8013-98ff566c18e2") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11CommandList : public ID3D11DeviceChild
      {
      public:
@@ -385,7 +385,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("c0bfa96c-e089-44fb-8eaf-26f8796190da")
-+    MIDL_INTERFACE("c0bfa96c-e089-44fb-8eaf-26f8796190da") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("c0bfa96c-e089-44fb-8eaf-26f8796190da") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11DeviceContext : public ID3D11DeviceChild
      {
      public:
@@ -412,7 +412,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C")
-+    MIDL_INTERFACE("3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoDecoder : public ID3D11DeviceChild
      {
      public:
@@ -430,7 +430,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("31627037-53AB-4200-9061-05FAA9AB45F9")
-+    MIDL_INTERFACE("31627037-53AB-4200-9061-05FAA9AB45F9") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("31627037-53AB-4200-9061-05FAA9AB45F9") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoProcessorEnumerator : public ID3D11DeviceChild
      {
      public:
@@ -439,7 +439,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C")
-+    MIDL_INTERFACE("1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoProcessor : public ID3D11DeviceChild
      {
      public:
@@ -448,7 +448,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("3015A308-DCBD-47aa-A747-192486D14D4A")
-+    MIDL_INTERFACE("3015A308-DCBD-47aa-A747-192486D14D4A") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("3015A308-DCBD-47aa-A747-192486D14D4A") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11AuthenticatedChannel : public ID3D11DeviceChild
      {
      public:
@@ -466,7 +466,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("9B32F9AD-BDCC-40a6-A39D-D5C865845720")
-+    MIDL_INTERFACE("9B32F9AD-BDCC-40a6-A39D-D5C865845720") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("9B32F9AD-BDCC-40a6-A39D-D5C865845720") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11CryptoSession : public ID3D11DeviceChild
      {
      public:
@@ -484,7 +484,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("C2931AEA-2A85-4f20-860F-FBA1FD256E18")
-+    MIDL_INTERFACE("C2931AEA-2A85-4f20-860F-FBA1FD256E18") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("C2931AEA-2A85-4f20-860F-FBA1FD256E18") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoDecoderOutputView : public ID3D11View
      {
      public:
@@ -493,7 +493,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("11EC5A5F-51DC-4945-AB34-6E8C21300EA5")
-+    MIDL_INTERFACE("11EC5A5F-51DC-4945-AB34-6E8C21300EA5") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("11EC5A5F-51DC-4945-AB34-6E8C21300EA5") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoProcessorInputView : public ID3D11View
      {
      public:
@@ -502,7 +502,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("A048285E-25A9-4527-BD93-D68B68C44254")
-+    MIDL_INTERFACE("A048285E-25A9-4527-BD93-D68B68C44254") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("A048285E-25A9-4527-BD93-D68B68C44254") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoProcessorOutputView : public ID3D11View
      {
      public:
@@ -511,7 +511,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("61F21C45-3C0E-4a74-9CEA-67100D9AD5E4")
-+    MIDL_INTERFACE("61F21C45-3C0E-4a74-9CEA-67100D9AD5E4") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("61F21C45-3C0E-4a74-9CEA-67100D9AD5E4") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoContext : public ID3D11DeviceChild
      {
      public:
@@ -520,7 +520,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("10EC4D5B-975A-4689-B9E4-D0AAC30FE333")
-+    MIDL_INTERFACE("10EC4D5B-975A-4689-B9E4-D0AAC30FE333") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("10EC4D5B-975A-4689-B9E4-D0AAC30FE333") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      ID3D11VideoDevice : public IUnknown
      {
      public:
@@ -529,7 +529,7 @@ index d93002900f..1afeec19f0 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("db6f6ddb-ac77-4e88-8253-819df9bbf140")
-+    MIDL_INTERFACE("db6f6ddb-ac77-4e88-8253-819df9bbf140") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("db6f6ddb-ac77-4e88-8253-819df9bbf140") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      ID3D11Device : public IUnknown
      {
      public:

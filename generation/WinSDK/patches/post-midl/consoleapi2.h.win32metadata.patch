@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
-index c46976b943..acc78abfd0 100644
+index c46976b943..ddb70bb526 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
 @@ -16,6 +16,7 @@
@@ -84,7 +84,7 @@ index c46976b943..acc78abfd0 100644
 +#endif
 +
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -93,7 +93,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -199,7 +199,12 @@ index c46976b943..acc78abfd0 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -177,14 +272,16 @@ typedef struct _CONSOLE_SCREEN_BUFFER_INFOEX {
+@@ -173,18 +268,20 @@ GetConsoleScreenBufferInfo(
+     _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
+     );
+ 
+-typedef struct _CONSOLE_SCREEN_BUFFER_INFOEX {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CONSOLE_SCREEN_BUFFER_INFOEX {
      ULONG cbSize;
      COORD dwSize;
      COORD dwCursorPosition;
@@ -279,7 +284,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -288,7 +293,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -311,7 +316,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -320,7 +325,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -343,7 +348,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -352,7 +357,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -361,7 +366,7 @@ index c46976b943..acc78abfd0 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -370,7 +375,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -379,7 +384,7 @@ index c46976b943..acc78abfd0 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -388,7 +393,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -397,7 +402,7 @@ index c46976b943..acc78abfd0 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -406,7 +411,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -415,7 +420,7 @@ index c46976b943..acc78abfd0 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
@@ -424,7 +429,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
@@ -433,7 +438,7 @@ index c46976b943..acc78abfd0 100644
  #if (_WIN32_WINNT >= 0x0600)
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
@@ -442,7 +447,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
@@ -451,7 +456,7 @@ index c46976b943..acc78abfd0 100644
  #endif /* _WIN32_WINNT >= 0x0600 */
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -460,7 +465,7 @@ index c46976b943..acc78abfd0 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI

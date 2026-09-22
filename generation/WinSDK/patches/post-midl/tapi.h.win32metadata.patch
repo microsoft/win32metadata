@@ -1,0 +1,1452 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
+index 1e11ff1481..6a854a3768 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0000    // Increment this if a change has global effects
+ 
+ The  Telephony  API  is jointly copyrighted by Intel and Microsoft.  You are
+@@ -2454,7 +2455,7 @@ lineAccept(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineAddProvider(                                                // TAPI v1.4
+     LPCSTR              lpszProviderFilename,
+@@ -2463,7 +2464,7 @@ lineAddProvider(                                                // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineAddProviderA(                                               // TAPI v1.4
+     LPCSTR              lpszProviderFilename,
+@@ -2471,7 +2472,7 @@ lineAddProviderA(                                               // TAPI v1.4
+     LPDWORD             lpdwPermanentProviderID
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineAddProviderW(
+     LPCWSTR             lpszProviderFilename,
+@@ -2517,7 +2518,7 @@ lineAnswer(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineBlindTransfer(
+     HCALL               hCall,
+@@ -2526,7 +2527,7 @@ lineBlindTransfer(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineBlindTransferA(
+     HCALL               hCall,
+@@ -2534,7 +2535,7 @@ lineBlindTransferA(
+     DWORD               dwCountryCode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineBlindTransferW(
+     HCALL               hCall,
+@@ -2575,7 +2576,7 @@ lineCompleteTransfer(
+     DWORD               dwTransferMode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineConfigDialog(
+     DWORD               dwDeviceID,
+@@ -2584,7 +2585,7 @@ lineConfigDialog(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineConfigDialogA(
+     DWORD               dwDeviceID,
+@@ -2592,7 +2593,7 @@ lineConfigDialogA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineConfigDialogW(
+     DWORD               dwDeviceID,
+@@ -2609,7 +2610,7 @@ lineConfigDialogW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineConfigDialogEdit(                                           // TAPI v1.4
+     DWORD               dwDeviceID,
+@@ -2621,7 +2622,7 @@ lineConfigDialogEdit(                                           // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineConfigDialogEditA(                                          // TAPI v1.4
+     DWORD               dwDeviceID,
+@@ -2632,7 +2633,7 @@ lineConfigDialogEditA(                                          // TAPI v1.4
+     LPVARSTRING         lpDeviceConfigOut
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineConfigDialogEditW(
+     DWORD               dwDeviceID,
+@@ -2660,7 +2661,7 @@ lineConfigProvider(                                             // TAPI v1.4
+     );
+ 
+ #if (TAPI_CURRENT_VERSION >= 0x00020002)
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineCreateAgentW(                                               // TAPI v2.2
+     HLINE               hLine,
+@@ -2669,7 +2670,7 @@ lineCreateAgentW(                                               // TAPI v2.2
+     LPHAGENT            lphAgent
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineCreateAgentA(                                               // TAPI v2.2
+     HLINE               hLine,
+@@ -2684,7 +2685,7 @@ lineCreateAgentA(                                               // TAPI v2.2
+ #define lineCreateAgent lineCreateAgentA
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineCreateAgentSessionW(                                        // TAPI v2.2
+     HLINE               hLine,
+@@ -2695,7 +2696,7 @@ lineCreateAgentSessionW(                                        // TAPI v2.2
+     LPHAGENTSESSION     lphAgentSession
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineCreateAgentSessionA(                                        // TAPI v2.2
+     HLINE               hLine,
+@@ -2738,7 +2739,7 @@ lineDevSpecificFeature(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineDial(
+     HCALL               hCall,
+@@ -2747,7 +2748,7 @@ lineDial(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineDialA(
+     HCALL               hCall,
+@@ -2755,7 +2756,7 @@ lineDialA(
+     DWORD               dwCountryCode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineDialW(
+     HCALL               hCall,
+@@ -2780,7 +2781,7 @@ lineDrop(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineForward(
+     HLINE               hLine,
+@@ -2793,7 +2794,7 @@ lineForward(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineForwardA(
+     HLINE               hLine,
+@@ -2805,7 +2806,7 @@ lineForwardA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineForwardW(
+     HLINE               hLine,
+@@ -2826,7 +2827,7 @@ lineForwardW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGatherDigits(
+     HCALL               hCall,
+@@ -2840,7 +2841,7 @@ lineGatherDigits(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGatherDigitsA(
+     HCALL               hCall,
+@@ -2853,7 +2854,7 @@ lineGatherDigitsA(
+     DWORD               dwInterDigitTimeout
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGatherDigitsW(
+     HCALL               hCall,
+@@ -2875,7 +2876,7 @@ lineGatherDigitsW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGenerateDigits(
+     HCALL               hCall,
+@@ -2885,7 +2886,7 @@ lineGenerateDigits(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGenerateDigitsA(
+     HCALL               hCall,
+@@ -2894,7 +2895,7 @@ lineGenerateDigitsA(
+     DWORD               dwDuration
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGenerateDigitsW(
+     HCALL               hCall,
+@@ -2922,7 +2923,7 @@ lineGenerateTone(
+     LPLINEGENERATETONE  const lpTones
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressCaps(
+     HLINEAPP            hLineApp,
+@@ -2934,7 +2935,7 @@ lineGetAddressCaps(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressCapsA(
+     HLINEAPP            hLineApp,
+@@ -2945,7 +2946,7 @@ lineGetAddressCapsA(
+     LPLINEADDRESSCAPS   lpAddressCaps
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAddressCapsW(
+     HLINEAPP            hLineApp,
+@@ -2965,7 +2966,7 @@ lineGetAddressCapsW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressID(
+     HLINE               hLine,
+@@ -2976,7 +2977,7 @@ lineGetAddressID(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressIDA(
+     HLINE               hLine,
+@@ -2986,7 +2987,7 @@ lineGetAddressIDA(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAddressIDW(
+     HLINE               hLine,
+@@ -3005,7 +3006,7 @@ lineGetAddressIDW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressStatus(
+     HLINE               hLine,
+@@ -3014,7 +3015,7 @@ lineGetAddressStatus(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAddressStatusA(
+     HLINE               hLine,
+@@ -3022,7 +3023,7 @@ lineGetAddressStatusA(
+     LPLINEADDRESSSTATUS lpAddressStatus
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAddressStatusW(
+     HLINE               hLine,
+@@ -3040,7 +3041,7 @@ lineGetAddressStatusW(
+ #endif
+ 
+ #if (TAPI_CURRENT_VERSION >= 0x00020000)
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAgentActivityListA(                                      // TAPI v2.0
+     HLINE                   hLine,
+@@ -3048,7 +3049,7 @@ lineGetAgentActivityListA(                                      // TAPI v2.0
+     LPLINEAGENTACTIVITYLIST lpAgentActivityList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAgentActivityListW(                                      // TAPI v2.0
+     HLINE                   hLine,
+@@ -3063,7 +3064,7 @@ lineGetAgentActivityListW(                                      // TAPI v2.0
+ #endif
+ 
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAgentCapsA(                                              // TAPI v2.0
+     HLINEAPP            hLineApp,
+@@ -3073,7 +3074,7 @@ lineGetAgentCapsA(                                              // TAPI v2.0
+     LPLINEAGENTCAPS     lpAgentCaps
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAgentCapsW(                                              // TAPI v2.0
+     HLINEAPP            hLineApp,
+@@ -3090,7 +3091,7 @@ lineGetAgentCapsW(                                              // TAPI v2.0
+ #endif
+ 
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAgentGroupListA(                                         // TAPI v2.0
+     HLINE                   hLine,
+@@ -3098,7 +3099,7 @@ lineGetAgentGroupListA(                                         // TAPI v2.0
+     LPLINEAGENTGROUPLIST    lpAgentGroupList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAgentGroupListW(                                         // TAPI v2.0
+     HLINE                   hLine,
+@@ -3138,7 +3139,7 @@ lineGetAgentSessionList(                                        // TAPI v2.2
+     );
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAgentStatusA(                                            // TAPI v2.0
+     HLINE               hLine,
+@@ -3146,7 +3147,7 @@ lineGetAgentStatusA(                                            // TAPI v2.0
+     LPLINEAGENTSTATUS   lpAgentStatus
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAgentStatusW(                                            // TAPI v2.0
+     HLINE               hLine,
+@@ -3161,7 +3162,7 @@ lineGetAgentStatusW(                                            // TAPI v2.0
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAppPriority(                                             // TAPI v1.4
+     LPCSTR              lpszAppFilename,
+@@ -3173,7 +3174,7 @@ lineGetAppPriority(                                             // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetAppPriorityA(                                            // TAPI v1.4
+     LPCSTR              lpszAppFilename,
+@@ -3184,7 +3185,7 @@ lineGetAppPriorityA(                                            // TAPI v1.4
+     LPDWORD             lpdwPriority
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetAppPriorityW(                                            // TAPI v1.4
+     LPCWSTR             lpszAppFilename,
+@@ -3204,7 +3205,7 @@ lineGetAppPriorityW(                                            // TAPI v1.4
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetCallInfo(
+     HCALL               hCall,
+@@ -3212,14 +3213,14 @@ lineGetCallInfo(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetCallInfoA(
+     HCALL               hCall,
+     LPLINECALLINFO      lpCallInfo
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetCallInfoW(
+     HCALL               hCall,
+@@ -3249,7 +3250,7 @@ lineGetConfRelatedCalls(
+     LPLINECALLLIST      lpCallList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetCountry(                                                 // TAPI v1.4
+     DWORD               dwCountryID,
+@@ -3258,7 +3259,7 @@ lineGetCountry(                                                 // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetCountryA(                                                // TAPI v1.4
+     DWORD               dwCountryID,
+@@ -3266,7 +3267,7 @@ lineGetCountryA(                                                // TAPI v1.4
+     LPLINECOUNTRYLIST   lpLineCountryList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetCountryW(                                                // TAPI v1.4
+     DWORD               dwCountryID,
+@@ -3283,7 +3284,7 @@ lineGetCountryW(                                                // TAPI v1.4
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetDevCaps(
+     HLINEAPP            hLineApp,
+@@ -3294,7 +3295,7 @@ lineGetDevCaps(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetDevCapsA(
+     HLINEAPP            hLineApp,
+@@ -3304,7 +3305,7 @@ lineGetDevCapsA(
+     LPLINEDEVCAPS       lpLineDevCaps
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetDevCapsW(
+     HLINEAPP            hLineApp,
+@@ -3323,7 +3324,7 @@ lineGetDevCapsW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetDevConfig(
+     DWORD               dwDeviceID,
+@@ -3332,7 +3333,7 @@ lineGetDevConfig(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetDevConfigA(
+     DWORD               dwDeviceID,
+@@ -3340,7 +3341,7 @@ lineGetDevConfigA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetDevConfigW(
+     DWORD               dwDeviceID,
+@@ -3358,14 +3359,14 @@ lineGetDevConfigW(
+ #endif
+ 
+ #if (TAPI_CURRENT_VERSION >= 0x00020002)
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetGroupListA(                                              // TAPI v2.2
+     HLINE                   hLine,
+     LPLINEAGENTGROUPLIST    lpGroupList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetGroupListW(                                              // TAPI v2.2
+     HLINE                   hLine,
+@@ -3379,7 +3380,7 @@ lineGetGroupListW(                                              // TAPI v2.2
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetIcon(
+     DWORD               dwDeviceID,
+@@ -3388,7 +3389,7 @@ lineGetIcon(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetIconA(
+     DWORD               dwDeviceID,
+@@ -3396,7 +3397,7 @@ lineGetIconA(
+     LPHICON             lphIcon
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetIconW(
+     DWORD               dwDeviceID,
+@@ -3413,7 +3414,7 @@ lineGetIconW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetID(
+     HLINE               hLine,
+@@ -3425,7 +3426,7 @@ lineGetID(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetIDA(
+     HLINE               hLine,
+@@ -3436,7 +3437,7 @@ lineGetIDA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetIDW(
+     HLINE               hLine,
+@@ -3456,7 +3457,7 @@ lineGetIDW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetLineDevStatus(
+     HLINE               hLine,
+@@ -3464,14 +3465,14 @@ lineGetLineDevStatus(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetLineDevStatusA(
+     HLINE               hLine,
+     LPLINEDEVSTATUS     lpLineDevStatus
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetLineDevStatusW(
+     HLINE               hLine,
+@@ -3514,7 +3515,7 @@ lineGetNumRings(
+     LPDWORD             lpdwNumRings
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetProviderList(                                            // TAPI v1.4
+     DWORD               dwAPIVersion,
+@@ -3522,14 +3523,14 @@ lineGetProviderList(                                            // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetProviderListA(
+     DWORD               dwAPIVersion,
+     LPLINEPROVIDERLIST  lpProviderList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetProviderListW(
+     DWORD               dwAPIVersion,
+@@ -3563,7 +3564,7 @@ lineGetQueueInfo(                                               // TAPI v2.2
+     LPLINEQUEUEINFO     lpLineQueueInfo
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetQueueListA(                                              // TAPI v2.2
+     HLINE               hLine,
+@@ -3571,7 +3572,7 @@ lineGetQueueListA(                                              // TAPI v2.2
+     LPLINEQUEUELIST     lpQueueList
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetQueueListW(                                              // TAPI v2.2
+     HLINE               hLine,
+@@ -3586,7 +3587,7 @@ lineGetQueueListW(                                              // TAPI v2.2
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetRequest(
+     HLINEAPP            hLineApp,
+@@ -3595,7 +3596,7 @@ lineGetRequest(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetRequestA(
+     HLINEAPP            hLineApp,
+@@ -3603,7 +3604,7 @@ lineGetRequestA(
+     LPVOID              lpRequestBuffer
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetRequestW(
+     HLINEAPP            hLineApp,
+@@ -3628,7 +3629,7 @@ lineGetStatusMessages(
+     LPDWORD             lpdwAddressStates
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetTranslateCaps(
+     HLINEAPP hLineApp,
+@@ -3637,7 +3638,7 @@ lineGetTranslateCaps(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineGetTranslateCapsA(
+     HLINEAPP hLineApp,
+@@ -3645,7 +3646,7 @@ lineGetTranslateCapsA(
+     LPLINETRANSLATECAPS lpTranslateCaps
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineGetTranslateCapsW(
+     HLINEAPP hLineApp,
+@@ -3662,7 +3663,7 @@ lineGetTranslateCapsW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineHandoff(
+     HCALL               hCall,
+@@ -3671,7 +3672,7 @@ lineHandoff(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineHandoffA(
+     HCALL               hCall,
+@@ -3679,7 +3680,7 @@ lineHandoffA(
+     DWORD               dwMediaMode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineHandoffW(
+     HCALL               hCall,
+@@ -3713,7 +3714,7 @@ lineInitialize(
+     );
+ 
+ #if (TAPI_CURRENT_VERSION >= 0x00020000)
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineInitializeExA(                                               // TAPI v2.0
+     LPHLINEAPP                  lphLineApp,
+@@ -3725,7 +3726,7 @@ lineInitializeExA(                                               // TAPI v2.0
+     LPLINEINITIALIZEEXPARAMS    lpLineInitializeExParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineInitializeExW(                                               // TAPI v2.0
+     LPHLINEAPP                  lphLineApp,
+@@ -3746,7 +3747,7 @@ lineInitializeExW(                                               // TAPI v2.0
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineMakeCall(
+     HLINE               hLine,
+@@ -3757,7 +3758,7 @@ lineMakeCall(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineMakeCallA(
+     HLINE               hLine,
+@@ -3767,7 +3768,7 @@ lineMakeCallA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineMakeCallW(
+     HLINE               hLine,
+@@ -3830,7 +3831,7 @@ lineNegotiateExtVersion(
+     LPDWORD             lpdwExtVersion
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineOpen(
+     HLINEAPP hLineApp,
+@@ -3845,7 +3846,7 @@ lineOpen(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineOpenA(
+     HLINEAPP hLineApp,
+@@ -3859,7 +3860,7 @@ lineOpenA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineOpenW(
+     HLINEAPP hLineApp,
+@@ -3882,7 +3883,7 @@ lineOpenW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ linePark(
+     HCALL               hCall,
+@@ -3892,7 +3893,7 @@ linePark(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineParkA(
+     HCALL               hCall,
+@@ -3901,7 +3902,7 @@ lineParkA(
+     LPVARSTRING         lpNonDirAddress
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineParkW(
+     HCALL               hCall,
+@@ -3919,7 +3920,7 @@ lineParkW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ linePickup(
+     HLINE               hLine,
+@@ -3930,7 +3931,7 @@ linePickup(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ linePickupA(
+     HLINE               hLine,
+@@ -3940,7 +3941,7 @@ linePickupA(
+     LPCSTR              lpszGroupID
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ linePickupW(
+     HLINE               hLine,
+@@ -3959,7 +3960,7 @@ linePickupW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ linePrepareAddToConference(
+     HCALL               hConfCall,
+@@ -3968,7 +3969,7 @@ linePrepareAddToConference(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ linePrepareAddToConferenceA(
+     HCALL               hConfCall,
+@@ -3976,7 +3977,7 @@ linePrepareAddToConferenceA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ linePrepareAddToConferenceW(
+     HCALL               hConfCall,
+@@ -4014,7 +4015,7 @@ lineProxyResponse(                                              // TAPI v2.0
+     );
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineRedirect(
+     HCALL               hCall,
+@@ -4023,7 +4024,7 @@ lineRedirect(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineRedirectA(
+     HCALL               hCall,
+@@ -4031,7 +4032,7 @@ lineRedirectA(
+     DWORD               dwCountryCode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineRedirectW(
+     HCALL               hCall,
+@@ -4145,7 +4146,7 @@ lineSetAgentState(                                              // TAPI v2.0
+     );
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetAppPriority(                                             // TAPI v1.4
+     LPCSTR              lpszAppFilename,
+@@ -4157,7 +4158,7 @@ lineSetAppPriority(                                             // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetAppPriorityA(                                             // TAPI v1.4
+     LPCSTR              lpszAppFilename,
+@@ -4168,7 +4169,7 @@ lineSetAppPriorityA(                                             // TAPI v1.4
+     DWORD               dwPriority
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineSetAppPriorityW(                                             // TAPI v1.4
+     LPCWSTR             lpszAppFilename,
+@@ -4248,7 +4249,7 @@ lineSetCurrentLocation(
+     DWORD               dwLocation
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetDevConfig(
+     DWORD               dwDeviceID,
+@@ -4258,7 +4259,7 @@ lineSetDevConfig(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetDevConfigA(
+     DWORD               dwDeviceID,
+@@ -4267,7 +4268,7 @@ lineSetDevConfigA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineSetDevConfigW(
+     DWORD               dwDeviceID,
+@@ -4357,7 +4358,7 @@ lineSetTerminal(
+     DWORD               bEnable
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetTollList(
+     HLINEAPP            hLineApp,
+@@ -4367,7 +4368,7 @@ lineSetTollList(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetTollListA(
+     HLINEAPP            hLineApp,
+@@ -4376,7 +4377,7 @@ lineSetTollListA(
+     DWORD               dwTollListOption
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineSetTollListW(
+     HLINEAPP            hLineApp,
+@@ -4394,7 +4395,7 @@ lineSetTollListW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetupConference(
+     HCALL               hCall,
+@@ -4406,7 +4407,7 @@ lineSetupConference(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetupConferenceA(
+     HCALL               hCall,
+@@ -4417,7 +4418,7 @@ lineSetupConferenceA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineSetupConferenceW(
+     HCALL               hCall,
+@@ -4437,7 +4438,7 @@ lineSetupConferenceW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetupTransfer(
+     HCALL               hCall,
+@@ -4446,7 +4447,7 @@ lineSetupTransfer(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineSetupTransferA(
+     HCALL               hCall,
+@@ -4454,7 +4455,7 @@ lineSetupTransferA(
+     LPLINECALLPARAMS    const lpCallParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineSetupTransferW(
+     HCALL               hCall,
+@@ -4484,7 +4485,7 @@ lineSwapHold(
+     HCALL               hHeldCall
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineTranslateAddress(
+     HLINEAPP                hLineApp,
+@@ -4497,7 +4498,7 @@ lineTranslateAddress(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineTranslateAddressA(
+     HLINEAPP                hLineApp,
+@@ -4509,7 +4510,7 @@ lineTranslateAddressA(
+     LPLINETRANSLATEOUTPUT   lpTranslateOutput
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineTranslateAddressW(
+     HLINEAPP                hLineApp,
+@@ -4530,7 +4531,7 @@ lineTranslateAddressW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineTranslateDialog(                                            // TAPI v1.4
+     HLINEAPP            hLineApp,
+@@ -4541,7 +4542,7 @@ lineTranslateDialog(                                            // TAPI v1.4
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineTranslateDialogA(                                            // TAPI v1.4
+     HLINEAPP            hLineApp,
+@@ -4551,7 +4552,7 @@ lineTranslateDialogA(                                            // TAPI v1.4
+     LPCSTR              lpszAddressIn
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineTranslateDialogW(
+     HLINEAPP            hLineApp,
+@@ -4583,7 +4584,7 @@ lineUnhold(
+     HCALL               hCall
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineUnpark(
+     HLINE               hLine,
+@@ -4593,7 +4594,7 @@ lineUnpark(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ lineUnparkA(
+     HLINE               hLine,
+@@ -4602,7 +4603,7 @@ lineUnparkA(
+     LPCSTR              lpszDestAddress
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ lineUnparkW(
+     HLINE               hLine,
+@@ -4628,7 +4629,7 @@ phoneClose(
+     HPHONE              hPhone
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneConfigDialog(
+     DWORD               dwDeviceID,
+@@ -4637,7 +4638,7 @@ phoneConfigDialog(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneConfigDialogA(
+     DWORD               dwDeviceID,
+@@ -4645,7 +4646,7 @@ phoneConfigDialogA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneConfigDialogW(
+     DWORD               dwDeviceID,
+@@ -4670,7 +4671,7 @@ phoneDevSpecific(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetButtonInfo(
+     HPHONE              hPhone,
+@@ -4679,7 +4680,7 @@ phoneGetButtonInfo(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetButtonInfoA(
+     HPHONE              hPhone,
+@@ -4687,7 +4688,7 @@ phoneGetButtonInfoA(
+     LPPHONEBUTTONINFO   lpButtonInfo
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneGetButtonInfoW(
+     HPHONE              hPhone,
+@@ -4713,7 +4714,7 @@ phoneGetData(
+     DWORD               dwSize
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetDevCaps(
+     HPHONEAPP           hPhoneApp,
+@@ -4724,7 +4725,7 @@ phoneGetDevCaps(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetDevCapsA(
+     HPHONEAPP           hPhoneApp,
+@@ -4734,7 +4735,7 @@ phoneGetDevCapsA(
+     LPPHONECAPS         lpPhoneCaps
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneGetDevCapsW(
+     HPHONEAPP           hPhoneApp,
+@@ -4775,7 +4776,7 @@ phoneGetHookSwitch(
+     LPDWORD             lpdwHookSwitchDevs
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetIcon(
+     DWORD               dwDeviceID,
+@@ -4784,7 +4785,7 @@ phoneGetIcon(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetIconA(
+     DWORD               dwDeviceID,
+@@ -4792,7 +4793,7 @@ phoneGetIconA(
+     LPHICON             lphIcon
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneGetIconW(
+     DWORD               dwDeviceID,
+@@ -4809,7 +4810,7 @@ phoneGetIconW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetID(
+     HPHONE              hPhone,
+@@ -4818,7 +4819,7 @@ phoneGetID(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetIDA(
+     HPHONE              hPhone,
+@@ -4826,7 +4827,7 @@ phoneGetIDA(
+     LPCSTR              lpszDeviceClass
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneGetIDW(
+     HPHONE              hPhone,
+@@ -4869,7 +4870,7 @@ phoneGetRing(
+     LPDWORD             lpdwVolume
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetStatus(
+     HPHONE              hPhone,
+@@ -4877,14 +4878,14 @@ phoneGetStatus(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneGetStatusA(
+     HPHONE              hPhone,
+     LPPHONESTATUS       lpPhoneStatus
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneGetStatusW(
+     HPHONE              hPhone,
+@@ -4930,7 +4931,7 @@ phoneInitialize(
+ 
+ 
+ #if (TAPI_CURRENT_VERSION >= 0x00020000)
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneInitializeExA(                                              // TAPI v2.0
+     LPHPHONEAPP                 lphPhoneApp,
+@@ -4942,7 +4943,7 @@ phoneInitializeExA(                                              // TAPI v2.0
+     LPPHONEINITIALIZEEXPARAMS   lpPhoneInitializeExParams
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneInitializeExW(                                              // TAPI v2.0
+     LPHPHONEAPP                 lphPhoneApp,
+@@ -4997,7 +4998,7 @@ phoneOpen(
+     DWORD               dwPrivilege
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneSetButtonInfo(
+     HPHONE              hPhone,
+@@ -5006,7 +5007,7 @@ phoneSetButtonInfo(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ phoneSetButtonInfoA(
+     HPHONE              hPhone,
+@@ -5014,7 +5015,7 @@ phoneSetButtonInfoA(
+     LPPHONEBUTTONINFO   const lpButtonInfo
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ phoneSetButtonInfoW(
+     HPHONE              hPhone,
+@@ -5107,7 +5108,7 @@ phoneShutdown(
+ 
+ 
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiGetLocationInfo(
+     _Out_writes_(8) LPSTR               lpszCountryCode,
+@@ -5115,14 +5116,14 @@ tapiGetLocationInfo(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiGetLocationInfoA(
+     _Out_writes_(8) LPSTR               lpszCountryCode,
+     _Out_writes_(8) LPSTR               lpszCityCode
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ tapiGetLocationInfoW(
+     _Out_writes_(8) LPWSTR               lpszCountryCodeW,
+@@ -5145,7 +5146,7 @@ tapiRequestDrop(
+     WPARAM              wRequestID
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiRequestMakeCall(
+     LPCSTR              lpszDestAddress,
+@@ -5155,7 +5156,7 @@ tapiRequestMakeCall(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiRequestMakeCallA(
+     LPCSTR              lpszDestAddress,
+@@ -5164,7 +5165,7 @@ tapiRequestMakeCallA(
+     LPCSTR              lpszComment
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ tapiRequestMakeCallW(
+     LPCWSTR              lpszDestAddress,
+@@ -5182,7 +5183,7 @@ tapiRequestMakeCallW(
+ #endif
+ #endif
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiRequestMediaCall(
+     HWND                hwnd,
+@@ -5198,7 +5199,7 @@ tapiRequestMediaCall(
+     );
+ 
+ #if WIN32
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") LONG
+ WINAPI
+ tapiRequestMediaCallA(
+     HWND                hwnd,
+@@ -5213,7 +5214,7 @@ tapiRequestMediaCallA(
+     LPCSTR              lpszComment
+     );
+ 
+-LONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") LONG
+ WINAPI
+ tapiRequestMediaCallW(
+     HWND                hwnd,

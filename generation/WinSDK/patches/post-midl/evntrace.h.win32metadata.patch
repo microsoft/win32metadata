@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
-index 58677d492a..7ebf8f67d7 100644
+index 58677d492a..b65484bdae 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 @@ -1,4 +1,5 @@
@@ -30,7 +30,7 @@ index 58677d492a..7ebf8f67d7 100644
  // Use the routine below to start an event trace session
  //
  
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  EXTERN_C
  ULONG
@@ -39,7 +39,7 @@ index 58677d492a..7ebf8f67d7 100644
  #pragma region Desktop Family or OneCore Family or GameCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  EXTERN_C
  ULONG
@@ -48,7 +48,7 @@ index 58677d492a..7ebf8f67d7 100644
  // Use the routine below to stop an event trace session
  //
  
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  EXTERN_C
  ULONG
@@ -58,7 +58,7 @@ index 58677d492a..7ebf8f67d7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  StopTraceA (
@@ -67,7 +67,7 @@ index 58677d492a..7ebf8f67d7 100644
  //
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  QueryTraceW (
@@ -76,7 +76,7 @@ index 58677d492a..7ebf8f67d7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  QueryTraceA (
@@ -85,7 +85,7 @@ index 58677d492a..7ebf8f67d7 100644
  //
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  UpdateTraceW (
@@ -94,7 +94,7 @@ index 58677d492a..7ebf8f67d7 100644
      );
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  UpdateTraceA (
@@ -103,7 +103,7 @@ index 58677d492a..7ebf8f67d7 100644
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
 -EXTERN_C
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  FlushTraceW (
@@ -112,7 +112,7 @@ index 58677d492a..7ebf8f67d7 100644
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
 -EXTERN_C
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  FlushTraceA (
@@ -121,7 +121,7 @@ index 58677d492a..7ebf8f67d7 100644
  // Generic trace control routine
  //
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  ControlTraceW (
@@ -138,7 +138,7 @@ index 58677d492a..7ebf8f67d7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  ControlTraceA (
@@ -150,7 +150,7 @@ index 58677d492a..7ebf8f67d7 100644
      );
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  QueryAllTracesW (
@@ -159,7 +159,7 @@ index 58677d492a..7ebf8f67d7 100644
      );
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) EXTERN_C
  ULONG
  WMIAPI
  QueryAllTracesA (
@@ -260,7 +260,7 @@ index 58677d492a..7ebf8f67d7 100644
  //
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ EXTERN_C
  ULONG
  WMIAPI
  RegisterTraceGuidsW (
@@ -269,7 +269,7 @@ index 58677d492a..7ebf8f67d7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ EXTERN_C
  ULONG
  WMIAPI
  RegisterTraceGuidsA (
@@ -320,7 +320,7 @@ index 58677d492a..7ebf8f67d7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseTrace, -1) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseTrace, -1) EXTERN_C
  ETW_APP_DECLSPEC_DEPRECATED
  PROCESSTRACE_HANDLE
  WMIAPI
@@ -392,7 +392,7 @@ index 58677d492a..7ebf8f67d7 100644
  //
  
 -EXTERN_C
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseTrace, -1) EXTERN_C
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseTrace, -1) EXTERN_C
  PROCESSTRACE_HANDLE
  WMIAPI
  OpenTraceA (

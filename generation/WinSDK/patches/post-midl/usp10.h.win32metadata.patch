@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
-index bcb720b236..b3e7284ca9 100644
+index bcb720b236..63c965e834 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 @@ -10,6 +10,7 @@
@@ -272,7 +272,7 @@ index bcb720b236..b3e7284ca9 100644
  
  
 -_Check_return_ HRESULT WINAPI ScriptIsComplex(
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ HRESULT WINAPI ScriptIsComplex(
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ HRESULT WINAPI ScriptIsComplex(
      _In_reads_(cInChars) const WCHAR   *pwcInChars,    //In  String to be tested
      int                                 cInChars,       //In  Length in characters
 -    DWORD                               dwFlags);       //In  Flags (see above)

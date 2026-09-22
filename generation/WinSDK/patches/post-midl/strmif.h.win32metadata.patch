@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
-index bf0a3c0f30..49f12727f0 100644
+index bf0a3c0f30..afc54a067f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 @@ -1,3 +1,4 @@
@@ -30,7 +30,7 @@ index bf0a3c0f30..49f12727f0 100644
              _Out_  LPWSTR *Id) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE QueryAccept( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE QueryAccept( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE QueryAccept( 
              /* [annotation][in] */ 
              _In_  const AM_MEDIA_TYPE *pmt) = 0;
          
@@ -44,7 +44,7 @@ index bf0a3c0f30..49f12727f0 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cPins,
              /* [annotation][size_is][out] */ 
@@ -58,7 +58,7 @@ index bf0a3c0f30..49f12727f0 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cMediaTypes,
              /* [annotation][size_is][out] */ 
@@ -81,7 +81,7 @@ index bf0a3c0f30..49f12727f0 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cFilters,
              /* [annotation][out] */ 
@@ -126,13 +126,13 @@ index bf0a3c0f30..49f12727f0 100644
              _In_opt_  REFERENCE_TIME *pTimeEnd) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsSyncPoint( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsSyncPoint( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsSyncPoint( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetSyncPoint( 
              BOOL bIsSyncPoint) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsPreroll( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsPreroll( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsPreroll( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetPreroll( 
              BOOL bIsPreroll) = 0;
@@ -141,7 +141,7 @@ index bf0a3c0f30..49f12727f0 100644
              _In_  AM_MEDIA_TYPE *pMediaType) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsDiscontinuity( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDiscontinuity( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDiscontinuity( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetDiscontinuity( 
              BOOL bDiscontinuity) = 0;
@@ -222,7 +222,7 @@ index bf0a3c0f30..49f12727f0 100644
              _In_  const GUID *Api) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsModifiable( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsModifiable( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsModifiable( 
              /* [annotation][in] */ 
              _In_  const GUID *Api) = 0;
          
@@ -231,7 +231,7 @@ index bf0a3c0f30..49f12727f0 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cFilters,
              /* [annotation][out] */ 
@@ -1095,7 +1095,7 @@ index bf0a3c0f30..49f12727f0 100644
              _In_  HANDLE hNotifyEvent) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsEndPin( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsEndPin( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsEndPin( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE DynamicDisconnect( void) = 0;
          

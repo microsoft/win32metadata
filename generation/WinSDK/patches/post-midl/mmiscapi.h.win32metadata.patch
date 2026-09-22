@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmiscapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmiscapi.h
-index 95469a0a12..5641bbf5b8 100644
+index 95469a0a12..1a5c7bcc66 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmiscapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmiscapi.h
 @@ -1,3 +1,4 @@
@@ -118,7 +118,7 @@ index 95469a0a12..5641bbf5b8 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  FOURCC
  WINAPI
 -mmioStringToFOURCCA(
@@ -128,7 +128,7 @@ index 95469a0a12..5641bbf5b8 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  FOURCC
  WINAPI
 -mmioStringToFOURCCW(
@@ -141,7 +141,7 @@ index 95469a0a12..5641bbf5b8 100644
  #define mmioStringToFOURCC  mmioStringToFOURCCA
  #endif // !UNICODE
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  LPMMIOPROC
  WINAPI
 -mmioInstallIOProcA(
@@ -152,7 +152,7 @@ index 95469a0a12..5641bbf5b8 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  LPMMIOPROC
  WINAPI
 -mmioInstallIOProcW(
@@ -165,7 +165,7 @@ index 95469a0a12..5641bbf5b8 100644
  #define mmioInstallIOProc  mmioInstallIOProcA
  #endif // !UNICODE
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  HMMIO
  WINAPI
 -mmioOpenA(
@@ -176,7 +176,7 @@ index 95469a0a12..5641bbf5b8 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  HMMIO
  WINAPI
 -mmioOpenW(
@@ -189,7 +189,7 @@ index 95469a0a12..5641bbf5b8 100644
  #define mmioOpen  mmioOpenA
  #endif // !UNICODE
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
 -mmioRenameA(
@@ -201,7 +201,7 @@ index 95469a0a12..5641bbf5b8 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
 -mmioRenameW(

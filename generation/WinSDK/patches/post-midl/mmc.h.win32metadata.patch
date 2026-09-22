@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
-index 8553834c8a..7c5d281cb4 100644
+index 8553834c8a..ff5a092c66 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 @@ -1,3 +1,4 @@
@@ -475,6 +475,24 @@ index 8553834c8a..7c5d281cb4 100644
      IStringTable : public IUnknown
      {
      public:
+@@ -6078,7 +6207,7 @@ typedef struct _MMC_COLUMN_DATA
+     ULONG_PTR ulReserved;
+     } 	MMC_COLUMN_DATA;
+ 
+-typedef struct _MMC_COLUMN_SET_DATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MMC_COLUMN_SET_DATA
+     {
+     int cbSize;
+     int nNumCols;
+@@ -6092,7 +6221,7 @@ typedef struct _MMC_SORT_DATA
+     ULONG_PTR ulReserved;
+     } 	MMC_SORT_DATA;
+ 
+-typedef struct _MMC_SORT_SET_DATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MMC_SORT_SET_DATA
+     {
+     int cbSize;
+     int nNumItems;
 @@ -6115,7 +6244,7 @@ EXTERN_C const IID IID_IColumnData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -493,6 +511,15 @@ index 8553834c8a..7c5d281cb4 100644
      IMessageView : public IUnknown
      {
      public:
+@@ -6392,7 +6521,7 @@ typedef struct _RDCITEMHDR
+ 
+ #define	RDCI_ScopeItem	( 0x80000000 )
+ 
+-typedef struct _RDCOMPARE
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _RDCOMPARE
+     {
+     DWORD cbSize;
+     DWORD dwFlags;
 @@ -6418,7 +6547,7 @@ EXTERN_C const IID IID_IResultDataCompareEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

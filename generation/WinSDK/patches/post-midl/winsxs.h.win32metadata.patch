@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
-index 8194880aac..dcff07c2cd 100644
+index 8194880aac..207eb16a89 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 8194880aac..dcff07c2cd 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -140,7 +141,7 @@ DEFINE_GUID(FUSION_REFCOUNT_FILEPATH_GUID, 0xb02f9d65, 0xfb77, 0x4f7a, 0xaf, 0xa
+ 
+ // {2ec93463-b0c3-45e1-8364-327e96aea856}
+ DEFINE_GUID(FUSION_REFCOUNT_OPAQUE_STRING_GUID, 0x2ec93463, 0xb0c3, 0x45e1, 0x83, 0x64, 0x32, 0x7e, 0x96, 0xae, 0xa8, 0x56);
+-typedef struct _FUSION_INSTALL_REFERENCE_
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _FUSION_INSTALL_REFERENCE_
+     {
+     DWORD cbSize;
+     DWORD dwFlags;
 @@ -193,7 +194,11 @@ enum __MIDL_IAssemblyName_0001
      } 	ASM_NAME;
  

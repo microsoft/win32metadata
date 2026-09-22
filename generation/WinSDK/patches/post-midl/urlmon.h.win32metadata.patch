@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
-index c3e03f435d..a7033c68a7 100644
+index c3e03f435d..3dcd3265c8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 @@ -463,6 +463,7 @@ extern "C"{
@@ -42,10 +42,28 @@ index c3e03f435d..a7033c68a7 100644
              _Out_  CLSID *pClassID) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][in] */ 
+@@ -1452,7 +1453,7 @@ enum __MIDL_IBindStatusCallback_0004
+         URL_ENCODING_DISABLE_UTF8	= 0x20000000
+     } 	URL_ENCODING;
+ 
+-typedef struct _tagBINDINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagBINDINFO
+     {
+     ULONG cbSize;
+     LPWSTR szExtraInfo;
+@@ -1481,7 +1482,7 @@ typedef struct _REMSECURITY_ATTRIBUTES *PREMSECURITY_ATTRIBUTES;
+ 
+ typedef struct _REMSECURITY_ATTRIBUTES *LPREMSECURITY_ATTRIBUTES;
+ 
+-typedef struct _tagRemBINDINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagRemBINDINFO
+     {
+     ULONG cbSize;
+     LPWSTR szExtraInfo;
 @@ -3244,7 +3245,7 @@ EXTERN_C const IID IID_IUri;
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyBSTR( 
              /* [range][in] */ Uri_PROPERTY uriProp,
@@ -143,6 +161,33 @@ index c3e03f435d..a7033c68a7 100644
                   _Reserved_ DWORD_PTR dwReserved,   // must be 0
                   _Outptr_ IUri** ppURI);
  
+@@ -5412,16 +5413,16 @@ STDAPI HlinkSimpleNavigateToMoniker(
+     /* [in] */ DWORD dwReserved          // for future use, must be NULL                                   
+ );                                                                                                         
+                                                                                                            
+-STDAPI URLOpenStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                        
+-STDAPI URLOpenStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,DWORD,_In_opt_ LPBINDSTATUSCALLBACK);                                       
+-STDAPI URLOpenPullStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                    
+-STDAPI URLOpenPullStreamW(_In_opt_ LPUNKNOWN,_In_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                   
+-STDAPI URLDownloadToFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _In_opt_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                             
+-STDAPI URLDownloadToFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,_In_opt_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                           
+-STDAPI URLDownloadToCacheFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,  _Out_writes_(cchFileName) LPSTR,  DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
+-STDAPI URLDownloadToCacheFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Out_writes_(cchFileName) LPWSTR, DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
+-STDAPI URLOpenBlockingStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                      
+-STDAPI URLOpenBlockingStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                     
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                        
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,DWORD,_In_opt_ LPBINDSTATUSCALLBACK);                                       
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenPullStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                    
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenPullStreamW(_In_opt_ LPUNKNOWN,_In_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                   
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLDownloadToFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _In_opt_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                             
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLDownloadToFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,_In_opt_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                           
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLDownloadToCacheFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,  _Out_writes_(cchFileName) LPSTR,  DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLDownloadToCacheFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Out_writes_(cchFileName) LPWSTR, DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenBlockingStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                      
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenBlockingStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                     
+                                                                                                            
+ #ifdef UNICODE                                                                                             
+ #define URLOpenStream            URLOpenStreamW                                                            
 @@ -9693,11 +9694,25 @@ enum tagURLTEMPLATE
      } 	URLTEMPLATE;
  
@@ -169,15 +214,53 @@ index c3e03f435d..a7033c68a7 100644
  typedef /* [public] */ 
  enum __MIDL_IInternetZoneManager_0002
      {
+@@ -9715,7 +9730,7 @@ enum __MIDL_IInternetZoneManager_0002
+         ZAFLAGS_NO_CACHE	= 0x40000
+     } 	ZAFLAGS;
+ 
+-typedef struct _ZONEATTRIBUTES
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _ZONEATTRIBUTES
+     {
+     ULONG cbSize;
+     WCHAR szDisplayName[ 260 ];
+@@ -10864,7 +10879,7 @@ EXTERN_C const IID CLSID_SoftDistExt;
+ #define SOFTDIST_ADSTATE_DOWNLOADED      0x00000002
+ #define SOFTDIST_ADSTATE_INSTALLED           0x00000003
+ 
+-typedef struct _tagCODEBASEHOLD
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagCODEBASEHOLD
+     {
+     ULONG cbSize;
+     LPWSTR szDistUnit;
 @@ -10876,7 +10891,7 @@ typedef struct _tagCODEBASEHOLD
  
  typedef struct _tagCODEBASEHOLD *LPCODEBASEHOLD;
  
 -typedef struct _tagSOFTDISTINFO
-+typedef struct  _tagSOFTDISTINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   _tagSOFTDISTINFO
      {
      ULONG cbSize;
      DWORD dwFlags;
+@@ -11365,7 +11380,7 @@ EXTERN_C const IID IID_IDataFilter;
+ #endif
+ #ifndef _LPENCODINGFILTERFACTORY_DEFINED
+ #define _LPENCODINGFILTERFACTORY_DEFINED
+-typedef struct _tagPROTOCOLFILTERDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPROTOCOLFILTERDATA
+     {
+     DWORD cbSize;
+     IInternetProtocolSink *pProtocolSink;
+@@ -11516,8 +11531,8 @@ EXTERN_C const IID IID_IEncodingFilterFactory;
+ #ifndef _HITLOGGING_DEFINED
+ #define _HITLOGGING_DEFINED
+ // Logging-specific apis
+-BOOL WINAPI IsLoggingEnabledA(_In_ LPCSTR  pszUrl);                    
+-BOOL WINAPI IsLoggingEnabledW(_In_ LPCWSTR  pwszUrl);                  
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL WINAPI IsLoggingEnabledA(_In_ LPCSTR  pszUrl);                    
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL WINAPI IsLoggingEnabledW(_In_ LPCWSTR  pwszUrl);                  
+ #ifdef UNICODE                                                       
+ #define IsLoggingEnabled         IsLoggingEnabledW                   
+ #else                                                                
 @@ -11684,7 +11699,7 @@ EXTERN_C const IID IID_IGetBindHandle;
              /* [annotation][in] */ 
              _In_  BINDHANDLETYPES enumRequestedHandle,

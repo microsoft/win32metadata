@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
-index 4ac84c8883..dd00789e05 100644
+index 4ac84c8883..4d09da0f0d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_3.h
 @@ -23,6 +23,7 @@
@@ -16,6 +16,312 @@ index 4ac84c8883..dd00789e05 100644
  /// </summary>
 -typedef struct D2D1_GRADIENT_MESH_PATCH
 +typedef struct  D2D1_GRADIENT_MESH_PATCH
+ {
+     
+     /// <summary>
+@@ -505,7 +506,7 @@ EXTERN_C CONST IID IID_ID2D1Factory8;
+ /// ID2D1DeviceContext2::DrawInk when rendering ink. The ink style defines the nib
+ /// (pen tip) shape and transform.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("bae8b344-23fc-4071-8cb5-d05d6f073848") ID2D1InkStyle  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("bae8b344-23fc-4071-8cb5-d05d6f073848") ID2D1InkStyle  : public ID2D1Resource
+ {
+     
+     STDMETHOD_(void, SetNibTransform)(
+@@ -538,7 +539,7 @@ interface DX_DECLARE_INTERFACE("bae8b344-23fc-4071-8cb5-d05d6f073848") ID2D1InkS
+ /// Represents a single continuous stroke of variable-width ink, as defined by a
+ /// series of Bezier segments and widths.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("b499923b-7029-478f-a8b3-432c7c5f5312") ID2D1Ink  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("b499923b-7029-478f-a8b3-432c7c5f5312") ID2D1Ink  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -690,7 +691,7 @@ interface DX_DECLARE_INTERFACE("b499923b-7029-478f-a8b3-432c7c5f5312") ID2D1Ink
+ /// patches. Use the ID2D1DeviceContext2::CreateGradientMesh method to create an
+ /// instance of ID2D1GradientMesh.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("f292e401-c050-4cde-83d7-04962d3b23c2") ID2D1GradientMesh  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("f292e401-c050-4cde-83d7-04962d3b23c2") ID2D1GradientMesh  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -713,7 +714,7 @@ interface DX_DECLARE_INTERFACE("f292e401-c050-4cde-83d7-04962d3b23c2") ID2D1Grad
+ /// <summary>
+ /// Represents a producer of pixels that can fill an arbitrary 2D plane.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("c9b664e5-74a1-4378-9ac2-eefc37a3f4d8") ID2D1ImageSource  : public ID2D1Image
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("c9b664e5-74a1-4378-9ac2-eefc37a3f4d8") ID2D1ImageSource  : public ID2D1Image
+ {
+     
+     STDMETHOD(OfferResources)(
+@@ -728,7 +729,7 @@ interface DX_DECLARE_INTERFACE("c9b664e5-74a1-4378-9ac2-eefc37a3f4d8") ID2D1Imag
+ /// <summary>
+ /// Produces 2D pixel data that has been sourced from WIC.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("77395441-1c8f-4555-8683-f50dab0fe792") ID2D1ImageSourceFromWic  : public ID2D1ImageSource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("77395441-1c8f-4555-8683-f50dab0fe792") ID2D1ImageSourceFromWic  : public ID2D1ImageSource
+ {
+     
+     STDMETHOD(EnsureCached)(
+@@ -766,7 +767,7 @@ interface DX_DECLARE_INTERFACE("77395441-1c8f-4555-8683-f50dab0fe792") ID2D1Imag
+ /// <summary>
+ /// Represents an image source which shares resources with an original image source.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("7f1f79e5-2796-416c-8f55-700f911445e5") ID2D1TransformedImageSource  : public ID2D1Image
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("7f1f79e5-2796-416c-8f55-700f911445e5") ID2D1TransformedImageSource  : public ID2D1Image
+ {
+     
+     STDMETHOD_(void, GetSource)(
+@@ -783,7 +784,7 @@ interface DX_DECLARE_INTERFACE("7f1f79e5-2796-416c-8f55-700f911445e5") ID2D1Tran
+ /// A container for 3D lookup table data that can be passed to the LookupTable3D
+ /// effect.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("53dd9855-a3b0-4d5b-82e1-26e25c5e5797") ID2D1LookupTable3D  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("53dd9855-a3b0-4d5b-82e1-26e25c5e5797") ID2D1LookupTable3D  : public ID2D1Resource
+ {
+ }; // interface ID2D1LookupTable3D
+ 
+@@ -793,7 +794,7 @@ interface DX_DECLARE_INTERFACE("53dd9855-a3b0-4d5b-82e1-26e25c5e5797") ID2D1Look
+ /// interface, plus it enables functionality such as ink rendering, gradient mesh
+ /// rendering, and improved image loading.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("394ea6a3-0c34-4321-950b-6ca20f0be6c7") ID2D1DeviceContext2  : public ID2D1DeviceContext1
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("394ea6a3-0c34-4321-950b-6ca20f0be6c7") ID2D1DeviceContext2  : public ID2D1DeviceContext1
+ {
+     
+     STDMETHOD(CreateInk)(
+@@ -962,7 +963,7 @@ interface DX_DECLARE_INTERFACE("394ea6a3-0c34-4321-950b-6ca20f0be6c7") ID2D1Devi
+ /// ID2D1Device1 interface. It also enables the creation of ID2D1DeviceContext2
+ /// objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("a44472e1-8dfb-4e60-8492-6e2861c9ca8b") ID2D1Device2  : public ID2D1Device1
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a44472e1-8dfb-4e60-8492-6e2861c9ca8b") ID2D1Device2  : public ID2D1Device1
+ {
+     
+     /// <summary>
+@@ -997,7 +998,7 @@ interface DX_DECLARE_INTERFACE("a44472e1-8dfb-4e60-8492-6e2861c9ca8b") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device2 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("0869759f-4f00-413f-b03e-2bda45404d0f") ID2D1Factory3  : public ID2D1Factory2
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("0869759f-4f00-413f-b03e-2bda45404d0f") ID2D1Factory3  : public ID2D1Factory2
+ {
+     
+     /// <summary>
+@@ -1018,7 +1019,7 @@ interface DX_DECLARE_INTERFACE("0869759f-4f00-413f-b03e-2bda45404d0f") ID2D1Fact
+ /// This interface performs all the same functions as the existing ID2D1CommandSink1
+ /// interface. It also enables access to ink rendering and gradient mesh rendering.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("3bab440e-417e-47df-a2e2-bc0be6a00916") ID2D1CommandSink2  : public ID2D1CommandSink1
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("3bab440e-417e-47df-a2e2-bc0be6a00916") ID2D1CommandSink2  : public ID2D1CommandSink1
+ {
+     
+     STDMETHOD(DrawInk)(
+@@ -1044,7 +1045,7 @@ interface DX_DECLARE_INTERFACE("3bab440e-417e-47df-a2e2-bc0be6a00916") ID2D1Comm
+ /// <summary>
+ /// Interface encapsulating a GDI/GDI+ metafile.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2e69f9e8-dd3f-4bf9-95ba-c04f49d788df") ID2D1GdiMetafile1  : public ID2D1GdiMetafile
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("2e69f9e8-dd3f-4bf9-95ba-c04f49d788df") ID2D1GdiMetafile1  : public ID2D1GdiMetafile
+ {
+     
+     /// <summary>
+@@ -1068,7 +1069,7 @@ interface DX_DECLARE_INTERFACE("2e69f9e8-dd3f-4bf9-95ba-c04f49d788df") ID2D1GdiM
+ /// <summary>
+ /// User-implementable interface for introspecting on a metafile.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("fd0ecb6b-91e6-411e-8655-395e760f91b4") ID2D1GdiMetafileSink1  : public ID2D1GdiMetafileSink
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("fd0ecb6b-91e6-411e-8655-395e760f91b4") ID2D1GdiMetafileSink1  : public ID2D1GdiMetafileSink
+ {
+     
+     /// <summary>
+@@ -1087,7 +1088,7 @@ interface DX_DECLARE_INTERFACE("fd0ecb6b-91e6-411e-8655-395e760f91b4") ID2D1GdiM
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_TH2
+ 
+-interface DX_DECLARE_INTERFACE("4dc583bf-3a10-438a-8722-e9765224f1f1") ID2D1SpriteBatch  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("4dc583bf-3a10-438a-8722-e9765224f1f1") ID2D1SpriteBatch  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -1148,7 +1149,7 @@ interface DX_DECLARE_INTERFACE("4dc583bf-3a10-438a-8722-e9765224f1f1") ID2D1Spri
+ }; // interface ID2D1SpriteBatch
+ 
+ 
+-interface DX_DECLARE_INTERFACE("235a7496-8351-414c-bcd4-6672ab2d8e00") ID2D1DeviceContext3  : public ID2D1DeviceContext2
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("235a7496-8351-414c-bcd4-6672ab2d8e00") ID2D1DeviceContext3  : public ID2D1DeviceContext2
+ {
+     
+     /// <summary>
+@@ -1187,7 +1188,7 @@ interface DX_DECLARE_INTERFACE("235a7496-8351-414c-bcd4-6672ab2d8e00") ID2D1Devi
+ }; // interface ID2D1DeviceContext3
+ 
+ 
+-interface DX_DECLARE_INTERFACE("852f2087-802c-4037-ab60-ff2e7ee6fc01") ID2D1Device3  : public ID2D1Device2
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("852f2087-802c-4037-ab60-ff2e7ee6fc01") ID2D1Device3  : public ID2D1Device2
+ {
+     
+     /// <summary>
+@@ -1210,7 +1211,7 @@ interface DX_DECLARE_INTERFACE("852f2087-802c-4037-ab60-ff2e7ee6fc01") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device3 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("bd4ec2d2-0662-4bee-ba8e-6f29f032e096") ID2D1Factory4  : public ID2D1Factory3
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("bd4ec2d2-0662-4bee-ba8e-6f29f032e096") ID2D1Factory4  : public ID2D1Factory3
+ {
+     
+     /// <summary>
+@@ -1229,7 +1230,7 @@ interface DX_DECLARE_INTERFACE("bd4ec2d2-0662-4bee-ba8e-6f29f032e096") ID2D1Fact
+ }; // interface ID2D1Factory4
+ 
+ 
+-interface DX_DECLARE_INTERFACE("18079135-4cf3-4868-bc8e-06067e6d242d") ID2D1CommandSink3  : public ID2D1CommandSink2
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("18079135-4cf3-4868-bc8e-06067e6d242d") ID2D1CommandSink3  : public ID2D1CommandSink2
+ {
+     
+     STDMETHOD(DrawSpriteBatch)(
+@@ -1250,7 +1251,7 @@ interface DX_DECLARE_INTERFACE("18079135-4cf3-4868-bc8e-06067e6d242d") ID2D1Comm
+ /// This object supplies the values for context-fill, context-stroke, and
+ /// context-value that are used when rendering SVG glyphs.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("af671749-d241-4db8-8e41-dcc2e5c1a438") ID2D1SvgGlyphStyle  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("af671749-d241-4db8-8e41-dcc2e5c1a438") ID2D1SvgGlyphStyle  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -1313,7 +1314,7 @@ interface DX_DECLARE_INTERFACE("af671749-d241-4db8-8e41-dcc2e5c1a438") ID2D1SvgG
+ }; // interface ID2D1SvgGlyphStyle
+ 
+ 
+-interface DX_DECLARE_INTERFACE("8c427831-3d90-4476-b647-c4fae349e4db") ID2D1DeviceContext4  : public ID2D1DeviceContext3
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("8c427831-3d90-4476-b647-c4fae349e4db") ID2D1DeviceContext4  : public ID2D1DeviceContext3
+ {
+     
+     /// <summary>
+@@ -1479,7 +1480,7 @@ interface DX_DECLARE_INTERFACE("8c427831-3d90-4476-b647-c4fae349e4db") ID2D1Devi
+ }; // interface ID2D1DeviceContext4
+ 
+ 
+-interface DX_DECLARE_INTERFACE("d7bdb159-5683-4a46-bc9c-72dc720b858b") ID2D1Device4  : public ID2D1Device3
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("d7bdb159-5683-4a46-bc9c-72dc720b858b") ID2D1Device4  : public ID2D1Device3
+ {
+     
+     /// <summary>
+@@ -1521,7 +1522,7 @@ interface DX_DECLARE_INTERFACE("d7bdb159-5683-4a46-bc9c-72dc720b858b") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device4 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("c4349994-838e-4b0f-8cab-44997d9eeacc") ID2D1Factory5  : public ID2D1Factory4
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("c4349994-838e-4b0f-8cab-44997d9eeacc") ID2D1Factory5  : public ID2D1Factory4
+ {
+     
+     /// <summary>
+@@ -1545,7 +1546,7 @@ interface DX_DECLARE_INTERFACE("c4349994-838e-4b0f-8cab-44997d9eeacc") ID2D1Fact
+ #endif // #if NTDDI_VERSION >= NTDDI_WIN10_RS1
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS2
+ 
+-interface DX_DECLARE_INTERFACE("c78a6519-40d6-4218-b2de-beeeb744bb3e") ID2D1CommandSink4  : public ID2D1CommandSink3
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("c78a6519-40d6-4218-b2de-beeeb744bb3e") ID2D1CommandSink4  : public ID2D1CommandSink3
+ {
+     
+     /// <summary>
+@@ -1569,7 +1570,7 @@ interface DX_DECLARE_INTERFACE("c78a6519-40d6-4218-b2de-beeeb744bb3e") ID2D1Comm
+ /// <summary>
+ /// Represents a color context to be used with the Color Management Effect.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("1ab42875-c57f-4be9-bd85-9cd78d6f55ee") ID2D1ColorContext1  : public ID2D1ColorContext
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("1ab42875-c57f-4be9-bd85-9cd78d6f55ee") ID2D1ColorContext1  : public ID2D1ColorContext
+ {
+     
+     /// <summary>
+@@ -1594,7 +1595,7 @@ interface DX_DECLARE_INTERFACE("1ab42875-c57f-4be9-bd85-9cd78d6f55ee") ID2D1Colo
+ }; // interface ID2D1ColorContext1
+ 
+ 
+-interface DX_DECLARE_INTERFACE("7836d248-68cc-4df6-b9e8-de991bf62eb7") ID2D1DeviceContext5  : public ID2D1DeviceContext4
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("7836d248-68cc-4df6-b9e8-de991bf62eb7") ID2D1DeviceContext5  : public ID2D1DeviceContext4
+ {
+     
+     /// <summary>
+@@ -1651,7 +1652,7 @@ interface DX_DECLARE_INTERFACE("7836d248-68cc-4df6-b9e8-de991bf62eb7") ID2D1Devi
+ }; // interface ID2D1DeviceContext5
+ 
+ 
+-interface DX_DECLARE_INTERFACE("d55ba0a4-6405-4694-aef5-08ee1a4358b4") ID2D1Device5  : public ID2D1Device4
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("d55ba0a4-6405-4694-aef5-08ee1a4358b4") ID2D1Device5  : public ID2D1Device4
+ {
+     
+     /// <summary>
+@@ -1678,7 +1679,7 @@ interface DX_DECLARE_INTERFACE("d55ba0a4-6405-4694-aef5-08ee1a4358b4") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device5 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("f9976f46-f642-44c1-97ca-da32ea2a2635") ID2D1Factory6  : public ID2D1Factory5
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("f9976f46-f642-44c1-97ca-da32ea2a2635") ID2D1Factory6  : public ID2D1Factory5
+ {
+     
+     /// <summary>
+@@ -1704,7 +1705,7 @@ interface DX_DECLARE_INTERFACE("f9976f46-f642-44c1-97ca-da32ea2a2635") ID2D1Fact
+ #endif
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS3
+ 
+-interface DX_DECLARE_INTERFACE("7047dd26-b1e7-44a7-959a-8349e2144fa8") ID2D1CommandSink5  : public ID2D1CommandSink4
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("7047dd26-b1e7-44a7-959a-8349e2144fa8") ID2D1CommandSink5  : public ID2D1CommandSink4
+ {
+     
+     STDMETHOD(BlendImage)(
+@@ -1717,7 +1718,7 @@ interface DX_DECLARE_INTERFACE("7047dd26-b1e7-44a7-959a-8349e2144fa8") ID2D1Comm
+ }; // interface ID2D1CommandSink5
+ 
+ 
+-interface DX_DECLARE_INTERFACE("985f7e37-4ed0-4a19-98a3-15b0edfde306") ID2D1DeviceContext6  : public ID2D1DeviceContext5
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("985f7e37-4ed0-4a19-98a3-15b0edfde306") ID2D1DeviceContext6  : public ID2D1DeviceContext5
+ {
+     
+     /// <summary>
+@@ -1733,7 +1734,7 @@ interface DX_DECLARE_INTERFACE("985f7e37-4ed0-4a19-98a3-15b0edfde306") ID2D1Devi
+ }; // interface ID2D1DeviceContext6
+ 
+ 
+-interface DX_DECLARE_INTERFACE("7bfef914-2d75-4bad-be87-e18ddb077b6d") ID2D1Device6  : public ID2D1Device5
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("7bfef914-2d75-4bad-be87-e18ddb077b6d") ID2D1Device6  : public ID2D1Device5
+ {
+     
+     /// <summary>
+@@ -1762,7 +1763,7 @@ interface DX_DECLARE_INTERFACE("7bfef914-2d75-4bad-be87-e18ddb077b6d") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device6 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("bdc2bdd3-b96c-4de6-bdf7-99d4745454de") ID2D1Factory7  : public ID2D1Factory6
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("bdc2bdd3-b96c-4de6-bdf7-99d4745454de") ID2D1Factory7  : public ID2D1Factory6
+ {
+     
+     /// <summary>
+@@ -1791,7 +1792,7 @@ interface DX_DECLARE_INTERFACE("bdc2bdd3-b96c-4de6-bdf7-99d4745454de") ID2D1Fact
+ #if NTDDI_VERSION >= NTDDI_WIN10_CU
+ enum DWRITE_PAINT_FEATURE_LEVEL : INT32;
+ 
+-interface DX_DECLARE_INTERFACE("ec891cf7-9b69-4851-9def-4e0915771e62") ID2D1DeviceContext7  : public ID2D1DeviceContext6
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("ec891cf7-9b69-4851-9def-4e0915771e62") ID2D1DeviceContext7  : public ID2D1DeviceContext6
+ {
+     
+     /// <summary>
+@@ -1831,7 +1832,7 @@ interface DX_DECLARE_INTERFACE("ec891cf7-9b69-4851-9def-4e0915771e62") ID2D1Devi
+ }; // interface ID2D1DeviceContext7
+ 
+ 
+-interface DX_DECLARE_INTERFACE("f07c8968-dd4e-4ba6-9cbd-eb6d3752dcbb") ID2D1Device7  : public ID2D1Device6
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("f07c8968-dd4e-4ba6-9cbd-eb6d3752dcbb") ID2D1Device7  : public ID2D1Device6
+ {
+     
+     /// <summary>
+@@ -1862,7 +1863,7 @@ interface DX_DECLARE_INTERFACE("f07c8968-dd4e-4ba6-9cbd-eb6d3752dcbb") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device7 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("677c9311-f36d-4b1f-ae86-86d1223ffd3a") ID2D1Factory8  : public ID2D1Factory7
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("677c9311-f36d-4b1f-ae86-86d1223ffd3a") ID2D1Factory8  : public ID2D1Factory7
  {
      
      /// <summary>

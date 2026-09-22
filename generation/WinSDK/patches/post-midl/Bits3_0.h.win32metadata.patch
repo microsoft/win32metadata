@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
-index f397dc1bff..2565f9d364 100644
+index f397dc1bff..83920e7aca 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 @@ -186,6 +186,7 @@ extern "C"{
@@ -106,7 +106,7 @@ index f397dc1bff..2565f9d364 100644
              /* [out][ref] */ __RPC__out ULONG *pSeconds) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE SetMaximumContentAge( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE SetMaximumContentAge( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE SetMaximumContentAge( 
              ULONG Seconds) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetConfigurationFlags( 

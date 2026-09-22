@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
-index 6feb5f7d26..b0efe9fb68 100644
+index 6feb5f7d26..1abf081ea3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 @@ -17,6 +17,7 @@
@@ -425,7 +425,7 @@ index 6feb5f7d26..b0efe9fb68 100644
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +

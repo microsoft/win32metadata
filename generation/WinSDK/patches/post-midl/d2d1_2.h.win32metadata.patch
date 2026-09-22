@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
-index 6b6df02c52..0e681368ef 100644
+index 6b6df02c52..78862c6975 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 @@ -20,6 +20,7 @@
@@ -19,12 +19,48 @@ index 6b6df02c52..0e681368ef 100644
  {
      D2D1_RENDERING_PRIORITY_NORMAL = 0,
      D2D1_RENDERING_PRIORITY_LOW = 1,
+@@ -59,7 +60,7 @@ EXTERN_C CONST IID IID_ID2D1CommandSink1;
+ /// Encapsulates a device- and transform-dependent representation of a filled or
+ /// stroked geometry.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1GeometryRealization  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1GeometryRealization  : public ID2D1Resource
+ {
+ }; // interface ID2D1GeometryRealization
+ 
+@@ -67,7 +68,7 @@ interface DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1Geom
+ /// <summary>
+ /// Enables creation and drawing of geometry realization objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1DeviceContext1  : public ID2D1DeviceContext
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1DeviceContext1  : public ID2D1DeviceContext
+ {
+     
+     STDMETHOD(CreateFilledGeometryRealization)(
 @@ -95,7 +96,7 @@ interface DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1Devi
  /// Represents a resource domain whose objects and device contexts can be used
  /// together.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("d21768e1-23a4-4823-a14b-7c3eba85d658") ID2D1Device1  : public ID2D1Device
-+interface _Windows_SupportedOS_Windows81_  DX_DECLARE_INTERFACE("d21768e1-23a4-4823-a14b-7c3eba85d658") ID2D1Device1  : public ID2D1Device
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_  DX_DECLARE_INTERFACE("d21768e1-23a4-4823-a14b-7c3eba85d658") ID2D1Device1  : public ID2D1Device
+ {
+     
+     /// <summary>
+@@ -127,7 +128,7 @@ interface DX_DECLARE_INTERFACE("d21768e1-23a4-4823-a14b-7c3eba85d658") ID2D1Devi
+ /// Creates Direct2D resources. This interface also enables the creation of
+ /// ID2D1Device1 objects.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Factory2  : public ID2D1Factory1
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Factory2  : public ID2D1Factory1
+ {
+     
+     /// <summary>
+@@ -147,7 +148,7 @@ interface DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Fact
+ /// interface. It also enables access to the new primitive blend modes, MIN and ADD,
+ /// through its SetPrimitiveBlend1 method.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1CommandSink1  : public ID2D1CommandSink
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1CommandSink1  : public ID2D1CommandSink
  {
      
      /// <summary>

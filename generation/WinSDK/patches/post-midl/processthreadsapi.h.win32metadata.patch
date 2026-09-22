@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
-index 0d0863017f..eceb6f82a2 100644
+index 0d0863017f..c8f3e69789 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 @@ -15,6 +15,7 @@
@@ -72,7 +72,7 @@ index 0d0863017f..eceb6f82a2 100644
      _Out_ LPFILETIME lpUserTime
      );
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_WindowsXP_ 
 +
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -346,7 +346,7 @@ index 0d0863017f..eceb6f82a2 100644
      _In_ DWORD dwTlsIndex
      );
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -364,7 +364,7 @@ index 0d0863017f..eceb6f82a2 100644
      _Out_ LPPROCESS_INFORMATION lpProcessInformation
      );
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -403,7 +403,7 @@ index 0d0863017f..eceb6f82a2 100644
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 
 +
  WINBASEAPI
  VOID
@@ -412,7 +412,7 @@ index 0d0863017f..eceb6f82a2 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 
 +
 +_Win32_SetLastError_
  WINADVAPI
@@ -431,8 +431,8 @@ index 0d0863017f..eceb6f82a2 100644
  #if !defined(MIDL_PASS)
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
-+_Win32_ImportLibrary_("forceinline") _Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Win32_ImportLibrary_("forceinline") 
++
  FORCEINLINE
  HANDLE
  GetCurrentProcessToken (
@@ -440,8 +440,8 @@ index 0d0863017f..eceb6f82a2 100644
      return (HANDLE)(LONG_PTR) -4;
  }
  
-+_Win32_ImportLibrary_("forceinline") _Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Win32_ImportLibrary_("forceinline") 
++
  FORCEINLINE
  HANDLE
  GetCurrentThreadToken (
@@ -449,8 +449,8 @@ index 0d0863017f..eceb6f82a2 100644
      return (HANDLE)(LONG_PTR) -5;
  }
  
-+_Win32_ImportLibrary_("forceinline") _Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Win32_ImportLibrary_("forceinline") 
++
  FORCEINLINE
  HANDLE
  GetCurrentThreadEffectiveToken (
@@ -1019,7 +1019,7 @@ index 0d0863017f..eceb6f82a2 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
 +
 +_Win32_SetLastError_
  WINADVAPI

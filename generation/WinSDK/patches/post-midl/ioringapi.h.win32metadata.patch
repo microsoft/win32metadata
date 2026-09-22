@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
-index f7ec762e06..c4e3a0087b 100644
+index f7ec762e06..86fbc84233 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
 @@ -1,3 +1,4 @@
@@ -38,7 +38,7 @@ index f7ec762e06..c4e3a0087b 100644
 +_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI CloseIoRing(_In_ _Post_ptr_invalid_ HIORING ioRing);
  
 -STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
-+_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") _Win32_PreserveResult_ STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") _Win32_PreserveResult_ STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
  
 -STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
 +_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);

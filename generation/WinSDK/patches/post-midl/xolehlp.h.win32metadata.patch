@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
+index d0d411a9e6..856be81f82 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //  Copyright (C) 1995-1999 Microsoft Corporation.  All rights reserved.
+ /* ----------------------------------------------------------------------------
+  Microsoft   D.T.C (Distributed Transaction Coordinator)
+@@ -102,7 +103,7 @@ EXTERN_C HRESULT __cdecl DtcGetTransactionManagerC(
+                                     /* out */ void ** o_ppvObject
+                                     );
+ 
+-EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
+                                     /* in */ _In_opt_ LPSTR i_pszHost,
+                                     /* in */ _In_opt_ LPSTR i_pszTmName,
+                                     /* in */ REFIID i_riid,
+@@ -112,7 +113,7 @@ EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
+                                     );
+ 
+ 
+-EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExW(
+                                     /* in */ _In_opt_ LPWSTR i_pwszHost,
+                                     /* in */ _In_opt_ LPWSTR i_pwszTmName,
+                                     /* in */ REFIID i_riid,

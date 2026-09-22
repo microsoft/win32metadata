@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
-index 838b76e8e6..93376f52d0 100644
+index 838b76e8e6..0a2585fafa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -14,10 +14,10 @@ index 838b76e8e6..93376f52d0 100644
  
  #define IME_MAXPROCESS 32
  
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
  LRESULT WINAPI SendIMEMessageExA( IN HWND, IN LPARAM);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
  LRESULT WINAPI SendIMEMessageExW( IN HWND, IN LPARAM);
  #ifdef UNICODE

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
-index 46e8d9b99e..a1f093efbd 100644
+index 46e8d9b99e..54a45cbdd6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
 @@ -28,6 +28,7 @@
@@ -118,11 +118,11 @@ index 46e8d9b99e..a1f093efbd 100644
              /* [retval][out] */ __RPC__out long *plCount) = 0;
          
 -        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
          
 -        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Skip( 
              /* [in] */ long cElements) = 0;
          
          virtual /* [id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
@@ -1050,19 +1050,19 @@ index 46e8d9b99e..a1f093efbd 100644
              /* [in] */ __RPC__in ADS_SEARCH_HANDLE phSearchResult) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
              /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
              /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
              /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
              /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchHandle,
              /* [out] */ __RPC__deref_out_opt LPWSTR *ppszColumnName) = 0;
          

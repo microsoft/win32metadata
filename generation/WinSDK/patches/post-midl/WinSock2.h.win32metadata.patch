@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
-index 824a3558c9..3a3c613003 100644
+index 824a3558c9..15702a4687 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 @@ -18,6 +18,7 @@
@@ -70,7 +70,7 @@ index 824a3558c9..3a3c613003 100644
  #endif
  
 -BOOL
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ BOOL
  PASCAL
  WSAConnectByNameW(
      _In_ SOCKET s,
@@ -78,7 +78,7 @@ index 824a3558c9..3a3c613003 100644
      _In_opt_ const struct timeval * timeout,
      _Reserved_ LPWSAOVERLAPPED Reserved);
  
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ 
  _WINSOCK_DEPRECATED_BY("WSAConnectByNameW()")
  BOOL
  PASCAL
@@ -104,7 +104,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -_WINSOCK_DEPRECATED_BY("WSADuplicateSocketW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSADuplicateSocketW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSADuplicateSocketW()")
  WINSOCK_API_LINKAGE
  int
  WSAAPI
@@ -113,7 +113,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  int
  WSAAPI
  WSADuplicateSocketW(
@@ -131,7 +131,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -_WINSOCK_DEPRECATED_BY("WSAEnumProtocolsW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumProtocolsW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumProtocolsW()")
  WINSOCK_API_LINKAGE
  int
  WSAAPI
@@ -140,7 +140,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  int
  WSAAPI
  WSAEnumProtocolsW(
@@ -311,7 +311,7 @@ index 824a3558c9..3a3c613003 100644
  #if INCL_WINSOCK_API_PROTOTYPES
  
 -_WINSOCK_DEPRECATED_BY("WSASocketW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_RAIIFree_(closesocket, -1) _WINSOCK_DEPRECATED_BY("WSASocketW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_RAIIFree_(closesocket, -1) _WINSOCK_DEPRECATED_BY("WSASocketW()")
  WINSOCK_API_LINKAGE
  _Must_inspect_result_
  SOCKET
@@ -320,7 +320,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_RAIIFree_(closesocket, -1) WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_RAIIFree_(closesocket, -1) WINSOCK_API_LINKAGE
  _Must_inspect_result_
  SOCKET
  WSAAPI
@@ -329,7 +329,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINSOCK_API_LINKAGE
  DWORD
  WSAAPI
  WSAWaitForMultipleEvents(
@@ -338,7 +338,7 @@ index 824a3558c9..3a3c613003 100644
  #if INCL_WINSOCK_API_PROTOTYPES
  
 -_WINSOCK_DEPRECATED_BY("WSAAddressToStringW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAAddressToStringW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAAddressToStringW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -347,7 +347,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAAddressToStringW(
@@ -356,7 +356,7 @@ index 824a3558c9..3a3c613003 100644
  #if INCL_WINSOCK_API_PROTOTYPES
  
 -_WINSOCK_DEPRECATED_BY("WSAStringToAddressW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAStringToAddressW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAStringToAddressW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -365,7 +365,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAStringToAddressW(
@@ -374,7 +374,7 @@ index 824a3558c9..3a3c613003 100644
  #if INCL_WINSOCK_API_PROTOTYPES
  
 -_WINSOCK_DEPRECATED_BY("WSALookupServiceBeginW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSALookupServiceBeginW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSALookupServiceBeginW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -386,7 +386,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSALookupServiceBeginW(
@@ -402,7 +402,7 @@ index 824a3558c9..3a3c613003 100644
  #if INCL_WINSOCK_API_PROTOTYPES
  
 -_WINSOCK_DEPRECATED_BY("WSALookupServiceNextW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSALookupServiceNextW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSALookupServiceNextW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -411,7 +411,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSALookupServiceNextW(
@@ -438,7 +438,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -_WINSOCK_DEPRECATED_BY("WSAInstallServiceClassW()")
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAInstallServiceClassW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAInstallServiceClassW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -446,7 +446,7 @@ index 824a3558c9..3a3c613003 100644
      _In_  LPWSASERVICECLASSINFOA   lpServiceClassInfo
      );
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAInstallServiceClassW(
@@ -464,7 +464,7 @@ index 824a3558c9..3a3c613003 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 -_WINSOCK_DEPRECATED_BY("WSAGetServiceClassInfoW()")
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassInfoW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassInfoW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -473,7 +473,7 @@ index 824a3558c9..3a3c613003 100644
  #pragma endregion
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAGetServiceClassInfoW(
@@ -482,7 +482,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -_WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -491,7 +491,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAEnumNameSpaceProvidersW(
@@ -500,7 +500,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if(_WIN32_WINNT >= 0x0600 )
 -_WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -509,7 +509,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSAEnumNameSpaceProvidersExW(
@@ -518,7 +518,7 @@ index 824a3558c9..3a3c613003 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 -_WINSOCK_DEPRECATED_BY("WSAGetServiceClassNameByClassIdW()")
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassNameByClassIdW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSAGetServiceClassNameByClassIdW()")
  WINSOCK_API_LINKAGE
  _Success_(return == 0) INT
  WSAAPI
@@ -527,7 +527,7 @@ index 824a3558c9..3a3c613003 100644
  #pragma endregion
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  _Success_(return == 0) INT
  WSAAPI
  WSAGetServiceClassNameByClassIdW(
@@ -536,7 +536,7 @@ index 824a3558c9..3a3c613003 100644
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -_WINSOCK_DEPRECATED_BY("WSASetServiceW()")
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSASetServiceW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _WINSOCK_DEPRECATED_BY("WSASetServiceW()")
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
@@ -545,7 +545,7 @@ index 824a3558c9..3a3c613003 100644
      );
  
 -WINSOCK_API_LINKAGE
-+_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
  INT
  WSAAPI
  WSASetServiceW(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
-index 43ec1ec4c9..28a65c3db4 100644
+index 43ec1ec4c9..bdd1457989 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
 @@ -1,3 +1,4 @@
@@ -33,6 +33,15 @@ index 43ec1ec4c9..28a65c3db4 100644
 +            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
+             /* [annotation][in] */ 
+@@ -1051,7 +1052,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][out] */ 
+             _Out_  LRESULT *plResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE EscapeW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE EscapeW( 
+             /* [annotation][in] */ 
+             _In_  HKL hKL,
              /* [annotation][in] */ 
 @@ -1157,7 +1158,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
              /* [annotation][in] */ 
@@ -78,6 +87,15 @@ index 43ec1ec4c9..28a65c3db4 100644
 +            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
+             /* [annotation][in] */ 
+@@ -2661,7 +2662,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][out] */ 
+             _Out_  LRESULT *plResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE EscapeW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE EscapeW( 
+             /* [annotation][in] */ 
+             _In_  HKL hKL,
              /* [annotation][in] */ 
 @@ -2767,7 +2768,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
              /* [annotation][in] */ 

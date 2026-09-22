@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
-index e30ee02631..b3816f00e9 100644
+index e30ee02631..f8c3d1093c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 @@ -15,6 +15,7 @@ Revision History:
@@ -504,6 +504,15 @@ index e30ee02631..b3816f00e9 100644
  } KERB_TICKET_CACHE_INFO, *PKERB_TICKET_CACHE_INFO;
  
  
+@@ -4887,7 +4894,7 @@ typedef struct _KERB_AUTH_DATA {
+ typedef struct _KERB_NET_ADDRESS {
+     ULONG Family;
+     ULONG Length;
+-    PCHAR Address;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR Address;
+ } KERB_NET_ADDRESS, *PKERB_NET_ADDRESS;
+ 
+ 
 @@ -4916,7 +4923,7 @@ typedef struct _KERB_EXTERNAL_TICKET {
      UNICODE_STRING TargetDomainName;
      UNICODE_STRING AltTargetDomainName;  // contains ClientDomainName
@@ -642,7 +651,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditLookupCategoryNameW(
@@ -651,7 +660,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditLookupCategoryNameA(
@@ -660,7 +669,7 @@ index e30ee02631..b3816f00e9 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditLookupSubCategoryNameW(
@@ -669,7 +678,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditLookupSubCategoryNameA(
@@ -713,7 +722,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -BOOLEAN
-+_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOLEAN
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOLEAN
  NTAPI
  AuditSetGlobalSaclW(
      _In_ PCWSTR ObjectTypeName,
@@ -721,7 +730,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -BOOLEAN
-+_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOLEAN
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOLEAN
  NTAPI
  AuditSetGlobalSaclA(
      _In_ PCSTR ObjectTypeName,
@@ -730,7 +739,7 @@ index e30ee02631..b3816f00e9 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditQueryGlobalSaclW(
@@ -739,7 +748,7 @@ index e30ee02631..b3816f00e9 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ _Check_return_
  BOOLEAN
  NTAPI
  AuditQueryGlobalSaclA(

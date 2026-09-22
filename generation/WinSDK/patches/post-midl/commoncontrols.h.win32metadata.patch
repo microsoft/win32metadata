@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
-index 49248cf303..eeb6df0fcd 100644
+index 49248cf303..c661b5ebf3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 @@ -86,6 +86,7 @@ extern "C"{
@@ -55,6 +55,15 @@ index 49248cf303..eeb6df0fcd 100644
      {
          CONST_VTBL struct IImageListVtbl *lpVtbl;
      };
+@@ -712,7 +713,7 @@ extern RPC_IF_HANDLE __MIDL_itf_commoncontrols_0000_0001_v0_0_s_ifspec;
+ #define ILDI_STANDBY     0x00000002
+ #define ILDI_RESETACCESS 0x00000004
+ #define ILDI_QUERYACCESS 0x00000008
+-typedef struct tagIMAGELISTSTATS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMAGELISTSTATS
+     {
+     DWORD cbSize;
+     int cAlloc;
 @@ -725,8 +726,8 @@ EXTERN_C const IID IID_IImageList2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

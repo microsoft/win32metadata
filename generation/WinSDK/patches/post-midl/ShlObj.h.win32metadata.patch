@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
-index 62644da172..54998ecc84 100644
+index 62644da172..b2e699db45 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 @@ -10,6 +10,7 @@ File: shlobj.h
@@ -50,10 +50,10 @@ index 62644da172..54998ecc84 100644
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  #endif
  SHSTDAPI_(void) PathQualify(_Inout_ PWSTR psz);
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
 +
  SHSTDAPI_(BOOL) PathIsSlowA(_In_ LPCSTR pszFile, DWORD dwAttr);
-+_Windows_SupportedOS_WindowsXP_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 
 +
  SHSTDAPI_(BOOL) PathIsSlowW(_In_ LPCWSTR pszFile, DWORD dwAttr);
  #ifdef UNICODE
@@ -81,7 +81,7 @@ index 62644da172..54998ecc84 100644
                                   _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
                                   _In_opt_ IShellBrowser *psb, _In_opt_ LPCSTR pStartPage);
 -SHSTDAPI_(BOOL) SHOpenPropSheetW(_In_opt_ LPCWSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHOpenPropSheetW(_In_opt_ LPCWSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHOpenPropSheetW(_In_opt_ LPCWSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
                                   _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
                                   _In_opt_ IShellBrowser *psb, _In_opt_ LPCWSTR pStartPage);
  #ifdef UNICODE

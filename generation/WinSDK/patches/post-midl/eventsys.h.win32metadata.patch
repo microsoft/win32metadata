@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
-index 2aacf2d541..a4cd76d720 100644
+index 2aacf2d541..190d2fda23 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
 @@ -1,3 +1,4 @@
@@ -305,6 +305,15 @@ index 2aacf2d541..a4cd76d720 100644
      IEventObjectChange : public IUnknown
      {
      public:
+@@ -2632,7 +2633,7 @@ EXTERN_C const IID IID_IEventObjectChange;
+ 
+ #ifndef _COMEVENTSYSCHANGEINFO_
+ #define _COMEVENTSYSCHANGEINFO_
+-typedef /* [public][public][public][hidden] */ struct __MIDL___MIDL_itf_eventsys_0000_0009_0001
++typedef /* [public][public][public][hidden] */ struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  __MIDL___MIDL_itf_eventsys_0000_0009_0001
+     {
+     DWORD cbSize;
+     EOC_ChangeType changeType;
 @@ -2659,7 +2660,7 @@ EXTERN_C const IID IID_IEventObjectChange2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -328,7 +337,7 @@ index 2aacf2d541..a4cd76d720 100644
              _Out_  ULONG *cRetElem) = 0;
          
 -        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
-+        _Win32_PreserveResult_ virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
          
          virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 

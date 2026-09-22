@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
-index e1d43ea989..27ffb9c87d 100644
+index e1d43ea989..6240d63bdc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
 @@ -20,6 +20,7 @@
@@ -313,6 +313,15 @@ index e1d43ea989..27ffb9c87d 100644
      );
  
  typedef
+@@ -1327,7 +1332,7 @@ INT
+  * The name space service provider procedure table.
+  */
+ 
+-typedef struct _NSP_ROUTINE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _NSP_ROUTINE {
+ 
+     /* Structure version information: */
+     DWORD           cbSize;
 @@ -1397,7 +1402,7 @@ INT
      _In_ LPWSAQUERYSET2W lpqsRestrictions,
      _In_ DWORD dwControlFlags,
@@ -322,6 +331,15 @@ index e1d43ea989..27ffb9c87d 100644
      );
  
  typedef
+@@ -1434,7 +1439,7 @@ VOID
+     _In_ LPVOID pvClientSessionArg
+     );
+ 
+-typedef struct _NSPV2_ROUTINE {  
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _NSPV2_ROUTINE {  
+     DWORD cbSize;
+     DWORD dwMajorVersion;
+     DWORD dwMinorVersion;
 @@ -1450,14 +1455,14 @@ typedef const NSPV2_ROUTINE * PCNSPV2_ROUTINE, * LPCNSPV2_ROUTINE;
  
  #if(_WIN32_WINNT >= 0x0600)

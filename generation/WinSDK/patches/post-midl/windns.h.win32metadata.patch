@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
-index f213f55c62..289695a822 100644
+index f213f55c62..d674fddb68 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 @@ -1,3 +1,4 @@
@@ -74,7 +74,7 @@ index f213f55c62..289695a822 100644
  
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) DNS_STATUS
  WINAPI
  DnsQuery_A(
      _In_                PCSTR           pszName,
@@ -100,7 +100,7 @@ index f213f55c62..289695a822 100644
      );
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) DNS_STATUS
  WINAPI
  DnsQuery_W(
      _In_                PCWSTR          pszName,
@@ -133,7 +133,7 @@ index f213f55c62..289695a822 100644
  //
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_W(
      _In_            DWORD           CredentialFlags,
@@ -143,7 +143,7 @@ index f213f55c62..289695a822 100644
      );
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_A(
      _In_            DWORD           CredentialFlags,
@@ -167,7 +167,7 @@ index f213f55c62..289695a822 100644
  //
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsModifyRecordsInSet_W(
      _In_opt_        PDNS_RECORD     pAddRecords,
@@ -176,7 +176,7 @@ index f213f55c62..289695a822 100644
      );
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsModifyRecordsInSet_A(
      _In_opt_        PDNS_RECORD     pAddRecords,
@@ -194,7 +194,7 @@ index f213f55c62..289695a822 100644
  
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsReplaceRecordSetW(
      _In_            PDNS_RECORD     pReplaceSet,
@@ -203,7 +203,7 @@ index f213f55c62..289695a822 100644
      );
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  WINAPI
  DnsReplaceRecordSetA(
      _In_            PDNS_RECORD     pReplaceSet,
@@ -221,14 +221,14 @@ index f213f55c62..289695a822 100644
  
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  DnsValidateName_W(
      _In_    PCWSTR          pszName,
      _In_    DNS_NAME_FORMAT Format
      );
  
 -DNS_STATUS
-+_Windows_SupportedOS_Windows2000_ DNS_STATUS
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DNS_STATUS
  DnsValidateName_A(
      _In_    PCSTR           pszName,
      _In_    DNS_NAME_FORMAT Format
@@ -244,7 +244,7 @@ index f213f55c62..289695a822 100644
  //
  
 -BOOL
-+_Windows_SupportedOS_Windows2000_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL
  WINAPI
  DnsNameCompare_A(
      _In_    PCSTR           pName1,
@@ -252,7 +252,7 @@ index f213f55c62..289695a822 100644
      );
  
 -BOOL
-+_Windows_SupportedOS_Windows2000_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL
  WINAPI
  DnsNameCompare_W(
      _In_    PCWSTR          pName1,

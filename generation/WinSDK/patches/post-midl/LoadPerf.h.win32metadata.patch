@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LoadPerf.h b/generation/WinSDK/RecompiledIdlHeaders/um/LoadPerf.h
-index 12403dc2c7..3b58720f61 100644
+index 12403dc2c7..0639594296 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LoadPerf.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LoadPerf.h
 @@ -1,3 +1,4 @@
@@ -7,12 +7,28 @@ index 12403dc2c7..3b58720f61 100644
  /*++
  Copyright (c) Microsoft Corporation.  All rights reserved.
  
-@@ -57,25 +58,29 @@ InstallPerfDllA(
+@@ -43,45 +44,49 @@ extern "C" {
+ #define LOADPERF_FLAGS_CREATE_MOF_ONLY      ((ULONG_PTR) 4) // Has no effect.
+ #define LOADPERF_FLAGS_DISPLAY_USER_MSGS    ((ULONG_PTR) 8) // Logs to stdout.
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:unicode") LOADPERF_FUNCTION
+ InstallPerfDllW(
+     _In_opt_ LPCWSTR   szComputerName,
+     _In_     LPCWSTR   lpIniFile,
      _In_     ULONG_PTR dwFlags         
  );
  
 -LOADPERF_FUNCTION
-+_Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:ansi") LOADPERF_FUNCTION
+ InstallPerfDllA(
+     _In_opt_ LPCSTR    szComputerName,
+     _In_     LPCSTR    lpIniFile,
+     _In_     ULONG_PTR dwFlags         
+ );
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
 + 
  LoadPerfCounterTextStringsA(
      _In_ LPSTR     lpCommandLine,
@@ -20,7 +36,7 @@ index 12403dc2c7..3b58720f61 100644
  );
  
 -LOADPERF_FUNCTION
-+_Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
 + 
  LoadPerfCounterTextStringsW(
      _In_ LPWSTR    lpCommandLine,
@@ -28,7 +44,7 @@ index 12403dc2c7..3b58720f61 100644
  );
  
 -LOADPERF_FUNCTION
-+_Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
 + 
  UnloadPerfCounterTextStringsW(
      _In_ LPWSTR    lpCommandLine,
@@ -36,8 +52,40 @@ index 12403dc2c7..3b58720f61 100644
  );
  
 -LOADPERF_FUNCTION
-+_Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LOADPERF_FUNCTION
 + 
  UnloadPerfCounterTextStringsA(
      _In_ LPSTR     lpCommandLine,
      _In_ BOOL      bQuietModeArg
+ );
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:ansi") LOADPERF_FUNCTION
+ UpdatePerfNameFilesA(
+     _In_     LPCSTR    szNewCtrFilePath,
+     _In_opt_ LPCSTR    szNewHlpFilePath,
+@@ -89,7 +94,7 @@ UpdatePerfNameFilesA(
+     _In_     ULONG_PTR dwModes
+ );
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:unicode") LOADPERF_FUNCTION
+ UpdatePerfNameFilesW(
+     _In_     LPCWSTR   szNewCtrFilePath,
+     _In_opt_ LPCWSTR   szNewHlpFilePath,
+@@ -97,13 +102,13 @@ UpdatePerfNameFilesW(
+     _In_     ULONG_PTR dwModes
+ );
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:ansi") LOADPERF_FUNCTION
+ SetServiceAsTrustedA(
+     _In_opt_ LPCSTR    szReserved,
+     _In_     LPCSTR    szServiceName
+ );
+ 
+-LOADPERF_FUNCTION
++_WIN32META_ANNOTATION_("win32metadata:unicode") LOADPERF_FUNCTION
+ SetServiceAsTrustedW(
+     _In_opt_ LPCWSTR   szReserved,
+     _In_     LPCWSTR   szServiceName

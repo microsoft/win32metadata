@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgProp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgProp.h
-index db879b4fe0..be465fceb7 100644
+index db879b4fe0..eae0352c1a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgProp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgProp.h
 @@ -1,3 +1,4 @@
@@ -63,6 +63,15 @@ index db879b4fe0..be465fceb7 100644
  typedef DWORD DBGPROP_INFO_FLAGS;
  
  #define	DBGPROP_INFO_STANDARD	( ( ( ( DBGPROP_INFO_NAME | DBGPROP_INFO_TYPE )  | DBGPROP_INFO_VALUE )  | DBGPROP_INFO_ATTRIBUTES )  )
+@@ -507,7 +550,7 @@ EXTERN_C const IID IID_IEnumDebugPropertyInfo;
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+             /* [annotation][out] */ 
+-            _Out_  DebugPropertyInfo *pi,
++            _WIN32META_ANNOTATION_("win32metadata:array_count_param=0") _Out_  DebugPropertyInfo *pi,
+             /* [annotation][out] */ 
+             _Out_  ULONG *pcEltsfetched) = 0;
+         
 @@ -988,7 +1031,7 @@ EXTERN_C const IID IID_IPerPropertyBrowsing2;
              /* [annotation][in] */ 
              _In_  DISPID dispid,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..c96d2b94cb 100644
+index 97a14455d2..1f013e7348 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,33 @@ index 97a14455d2..c96d2b94cb 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -2149,7 +2150,7 @@ extern "C"{
+ #define HMONITOR_DECLARED
+ DECLARE_HANDLE(HMONITOR);
+ #endif
+-typedef struct _CMINVOKECOMMANDINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMINVOKECOMMANDINFO
+     {
+     DWORD cbSize;
+     DWORD fMask;
+@@ -2166,7 +2167,7 @@ typedef CMINVOKECOMMANDINFO *LPCMINVOKECOMMANDINFO;
+ 
+ typedef const CMINVOKECOMMANDINFO *PCCMINVOKECOMMANDINFO;
+ 
+-typedef struct _CMINVOKECOMMANDINFOEX
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMINVOKECOMMANDINFOEX
+     {
+     DWORD cbSize;
+     DWORD fMask;
+@@ -2189,7 +2190,7 @@ typedef CMINVOKECOMMANDINFOEX *LPCMINVOKECOMMANDINFOEX;
+ 
+ typedef const CMINVOKECOMMANDINFOEX *PCCMINVOKECOMMANDINFOEX;
+ 
+-typedef struct CMINVOKECOMMANDINFOEX_REMOTE
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  CMINVOKECOMMANDINFOEX_REMOTE
+     {
+     DWORD cbSize;
+     DWORD fMask;
 @@ -2226,11 +2227,11 @@ EXTERN_C const IID IID_IContextMenu;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -17,7 +44,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryContextMenu( 
              /* [annotation][in] */ 
              _In_  HMENU hmenu,
              /* [annotation][in] */ 
@@ -112,7 +139,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
@@ -121,15 +148,15 @@ index 97a14455d2..c96d2b94cb 100644
              _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Clone( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Clone( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Clone( 
              /* [annotation][out] */ 
              _Out_  IEnumIDList **ppenum) = 0;
          
@@ -143,7 +170,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
@@ -188,7 +215,7 @@ index 97a14455d2..c96d2b94cb 100644
              _Inout_  ULONG *pdwAttributes) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE EnumObjects( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumObjects( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumObjects( 
              /* [annotation][unique][in] */ 
              _In_  HWND hwnd,
              /* [annotation][in] */ 
@@ -197,7 +224,7 @@ index 97a14455d2..c96d2b94cb 100644
              _COM_Outptr_  void **ppv) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE CompareIDs( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE CompareIDs( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE CompareIDs( 
              /* [annotation][in] */ 
              _In_  LPARAM lParam,
              /* [annotation][in] */ 
@@ -251,7 +278,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
              /* [annotation][in] */ 
              _In_  MSG *pmsg) = 0;
          
@@ -264,6 +291,15 @@ index 97a14455d2..c96d2b94cb 100644
              /* [annotation][in] */ 
              _In_  REFIID riid,
              /* [annotation][iid_is][out] */ 
+@@ -5836,7 +5841,7 @@ typedef GUID SHELLVIEWID;
+ #define SV2GV_CURRENTVIEW ((UINT)-1)
+ #define SV2GV_DEFAULTVIEW ((UINT)-2)
+ #include <pshpack8.h>
+-typedef struct _SV2CVW2_PARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SV2CVW2_PARAMS
+     {
+     DWORD cbSize;
+     IShellView *psvPrev;
 @@ -5855,7 +5860,7 @@ EXTERN_C const IID IID_IShellView2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -352,6 +388,15 @@ index 97a14455d2..c96d2b94cb 100644
      ICommDlgBrowser2 : public ICommDlgBrowser
      {
      public:
+@@ -7991,7 +7996,7 @@ enum CM_SET_WIDTH_VALUE
+         CM_WIDTH_AUTOSIZE	= -2
+     } 	CM_SET_WIDTH_VALUE;
+ 
+-typedef struct CM_COLUMNINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  CM_COLUMNINFO
+     {
+     DWORD cbSize;
+     DWORD dwMask;
 @@ -8018,7 +8023,7 @@ EXTERN_C const IID IID_IColumnManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -786,7 +831,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE GetPath( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPSTR pszFile,
              /* [annotation][in] */ 
@@ -795,7 +840,7 @@ index 97a14455d2..c96d2b94cb 100644
              _In_  DWORD fFlags) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetIDList( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetIDList( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetIDList( 
              /* [annotation][out] */ 
              _Out_  PIDLIST_ABSOLUTE *ppidl) = 0;
          
@@ -823,7 +868,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE GetPath( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPath( 
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPWSTR pszFile,
              /* [annotation][in] */ 
@@ -832,7 +877,7 @@ index 97a14455d2..c96d2b94cb 100644
              _In_  DWORD fFlags) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetIDList( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetIDList( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetIDList( 
              /* [annotation][out] */ 
              _Out_  PIDLIST_ABSOLUTE *ppidl) = 0;
          
@@ -1311,7 +1356,7 @@ index 97a14455d2..c96d2b94cb 100644
      IApplicationAssociationRegistration : public IUnknown
      {
      public:
-@@ -23312,7 +23337,7 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
+@@ -23312,10 +23337,10 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
  /* interface __MIDL_itf_shobjidl_core_0000_0108 */
  /* [local] */ 
  
@@ -1319,7 +1364,11 @@ index 97a14455d2..c96d2b94cb 100644
 +_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHCreateAssociationRegistration(_In_ REFIID riid, _Outptr_ void **ppv);
  #endif  // NTDDI_VISTA
  #include <pshpack1.h>
- typedef struct DELEGATEITEMID
+-typedef struct DELEGATEITEMID
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  DELEGATEITEMID
+     {
+     WORD cbSize;
+     WORD wOuter;
 @@ -23342,7 +23367,7 @@ EXTERN_C const IID IID_IDelegateFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1698,7 +1747,7 @@ index 97a14455d2..c96d2b94cb 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
@@ -1920,7 +1969,7 @@ index 97a14455d2..c96d2b94cb 100644
              _Out_  int *pIndex) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsRecommended( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsRecommended( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsRecommended( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE MakeDefault( 
              /* [annotation][string][in] */ 
@@ -2018,6 +2067,15 @@ index 97a14455d2..c96d2b94cb 100644
      IPackageDebugSettings : public IUnknown
      {
      public:
+@@ -33634,7 +33667,7 @@ EXTERN_C const IID IID_IPackageDebugSettings;
+             /* [annotation][in] */ 
+             _In_opt_  LPCWSTR debuggerCommandLine,
+             /* [annotation][in] */ 
+-            _In_opt_  PZZWSTR environment) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_  PZZWSTR environment) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DisableDebugging( 
+             /* [annotation][in] */ 
 @@ -34182,7 +34215,7 @@ EXTERN_C const IID IID_ISuspensionDependencyManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h b/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
-index c7969d4d8e..eaae48d4dc 100644
+index c7969d4d8e..5c4a00a1e2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
 @@ -34,6 +34,7 @@ Notes:
@@ -43,14 +43,14 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardListReaderGroupsA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardListReaderGroupsA(
      _In_    SCARDCONTEXT hContext,
      _Out_writes_opt_(*pcchGroups) _Post_ _NullNull_terminated_  LPSTR mszGroups,
      _Inout_ LPDWORD pcchGroups);
 -extern WINSCARDAPI LONG WINAPI
 -SCardListReaderGroupsW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardListReaderGroupsW(
      _In_    SCARDCONTEXT hContext,
      _Out_writes_opt_(*pcchGroups) _Post_ _NullNull_terminated_  LPWSTR mszGroups,
@@ -60,7 +60,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #endif // !UNICODE
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListReadersA(
 +  SCardListReadersA(
@@ -71,7 +71,7 @@ index c7969d4d8e..eaae48d4dc 100644
               LPSTR mszReaders,
      _Inout_  LPDWORD pcchReaders);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListReadersW(
 +  SCardListReadersW(
@@ -83,7 +83,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #endif // !UNICODE
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListCardsA(
 +  SCardListCardsA(
@@ -95,7 +95,7 @@ index c7969d4d8e..eaae48d4dc 100644
                CHAR *mszCards,
      _Inout_   LPDWORD pcchCards);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListCardsW(
 +  SCardListCardsW(
@@ -108,7 +108,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardListInterfacesA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardListInterfacesA(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCSTR szCard,
@@ -116,7 +116,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _Inout_  LPDWORD pcguidInterfaces);
 -extern WINSCARDAPI LONG WINAPI
 -SCardListInterfacesW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardListInterfacesW(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCWSTR szCard,
@@ -127,14 +127,14 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardGetProviderIdA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardGetProviderIdA(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCSTR szCard,
      _Out_    LPGUID pguidProviderId);
 -extern WINSCARDAPI LONG WINAPI
 -SCardGetProviderIdW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardGetProviderIdW(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCWSTR szCard,
@@ -144,7 +144,7 @@ index c7969d4d8e..eaae48d4dc 100644
  //
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardGetCardTypeProviderNameA(
 +  SCardGetCardTypeProviderNameA(
@@ -156,7 +156,7 @@ index c7969d4d8e..eaae48d4dc 100644
                CHAR *szProvider,
      _Inout_   LPDWORD pcchProvider);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardGetCardTypeProviderNameW(
 +  SCardGetCardTypeProviderNameW(
@@ -169,13 +169,13 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceReaderGroupA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceReaderGroupA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szGroupName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceReaderGroupW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceReaderGroupW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szGroupName);
@@ -186,13 +186,13 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetReaderGroupA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetReaderGroupA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szGroupName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetReaderGroupW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetReaderGroupW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szGroupName);
@@ -203,14 +203,14 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceReaderA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceReaderA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szReaderName,
      _In_ LPCSTR szDeviceName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceReaderW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceReaderW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szReaderName,
@@ -221,13 +221,13 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetReaderA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetReaderA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szReaderName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetReaderW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetReaderW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szReaderName);
@@ -238,14 +238,14 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardAddReaderToGroupA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardAddReaderToGroupA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szReaderName,
      _In_ LPCSTR szGroupName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardAddReaderToGroupW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardAddReaderToGroupW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szReaderName,
@@ -256,14 +256,14 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardRemoveReaderFromGroupA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardRemoveReaderFromGroupA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szReaderName,
      _In_ LPCSTR szGroupName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardRemoveReaderFromGroupW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardRemoveReaderFromGroupW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szReaderName,
@@ -274,7 +274,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceCardTypeA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceCardTypeA(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCSTR szCardName,
@@ -285,7 +285,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_     DWORD cbAtrLen);
 -extern WINSCARDAPI LONG WINAPI
 -SCardIntroduceCardTypeW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardIntroduceCardTypeW(
      _In_     SCARDCONTEXT hContext,
      _In_     LPCWSTR szCardName,
@@ -296,7 +296,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardSetCardTypeProviderNameA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardSetCardTypeProviderNameA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szCardName,
@@ -304,7 +304,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_ LPCSTR szProvider);
 -extern WINSCARDAPI LONG WINAPI
 -SCardSetCardTypeProviderNameW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardSetCardTypeProviderNameW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szCardName,
@@ -315,13 +315,13 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetCardTypeA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetCardTypeA(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCSTR szCardName);
 -extern WINSCARDAPI LONG WINAPI
 -SCardForgetCardTypeW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardForgetCardTypeW(
      _In_ SCARDCONTEXT hContext,
      _In_ LPCWSTR szCardName);
@@ -382,7 +382,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardLocateCardsA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardLocateCardsA(
      _In_    SCARDCONTEXT hContext,
      _In_    LPCSTR mszCards,
@@ -390,7 +390,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_    DWORD cReaders);
 -extern WINSCARDAPI LONG WINAPI
 -SCardLocateCardsW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardLocateCardsW(
      _In_    SCARDCONTEXT hContext,
      _In_    LPCWSTR mszCards,
@@ -409,7 +409,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardLocateCardsByATRA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardLocateCardsByATRA(
      _In_    SCARDCONTEXT hContext,
      _In_    LPSCARD_ATRMASK rgAtrMasks,
@@ -418,7 +418,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_    DWORD cReaders);
 -extern WINSCARDAPI LONG WINAPI
 -SCardLocateCardsByATRW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardLocateCardsByATRW(
      _In_    SCARDCONTEXT hContext,
      _In_    LPSCARD_ATRMASK rgAtrMasks,
@@ -429,7 +429,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardGetStatusChangeA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardGetStatusChangeA(
      _In_    SCARDCONTEXT hContext,
      _In_    DWORD dwTimeout,
@@ -437,7 +437,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_    DWORD cReaders);
 -extern WINSCARDAPI LONG WINAPI
 -SCardGetStatusChangeW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardGetStatusChangeW(
      _In_    SCARDCONTEXT hContext,
      _In_    DWORD dwTimeout,
@@ -459,7 +459,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardConnectA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardConnectA(
      _In_    SCARDCONTEXT hContext,
      _In_    LPCSTR szReader,
@@ -469,7 +469,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _Out_   LPDWORD pdwActiveProtocol);
 -extern WINSCARDAPI LONG WINAPI
 -SCardConnectW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardConnectW(
      _In_    SCARDCONTEXT hContext,
      _In_    LPCWSTR szReader,
@@ -514,7 +514,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardStatusA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardStatusA(
      _In_        SCARDHANDLE hCard,
      _When_(_Old_(*pcchReaderLen) == SCARD_AUTOALLOCATE, _At_((LPSTR *)mszReaderNames, _Outptr_result_buffer_maybenull_(*pcchReaderLen) _At_(*_Curr_, _Post_z_ _Post_ _NullNull_terminated_)))
@@ -525,7 +525,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _Inout_opt_ LPDWORD pcbAtrLen);
 -extern WINSCARDAPI LONG WINAPI
 -SCardStatusW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardStatusW(
      _In_        SCARDHANDLE hCard,
      _When_(_Old_(*pcchReaderLen) == SCARD_AUTOALLOCATE, _At_((LPWSTR *)mszReaderNames, _Outptr_result_buffer_maybenull_(*pcchReaderLen) _At_(*_Curr_, _Post_z_ _Post_ _NullNull_terminated_)))
@@ -627,12 +627,12 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardUIDlgSelectCardA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardUIDlgSelectCardA(
      LPOPENCARDNAMEA_EX);
 -extern WINSCARDAPI LONG WINAPI
 -SCardUIDlgSelectCardW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardUIDlgSelectCardW(
      LPOPENCARDNAMEW_EX);
  #ifdef UNICODE
@@ -661,12 +661,12 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -GetOpenCardNameA(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  GetOpenCardNameA(
      LPOPENCARDNAMEA);
 -extern WINSCARDAPI LONG WINAPI
 -GetOpenCardNameW(
-+_Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  GetOpenCardNameW(
      LPOPENCARDNAMEW);
  #ifdef UNICODE
@@ -677,7 +677,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardReadCacheA(
-+_Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
 +  SCardReadCacheA(
      _In_  SCARDCONTEXT hContext,
      _In_  UUID *CardIdentifier,
@@ -687,7 +687,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _Out_ DWORD *DataLen);
 -extern WINSCARDAPI LONG WINAPI
 -SCardReadCacheW(
-+_Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
 +  SCardReadCacheW(
      _In_  SCARDCONTEXT hContext,
      _In_  UUID *CardIdentifier,
@@ -698,7 +698,7 @@ index c7969d4d8e..eaae48d4dc 100644
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardWriteCacheA(
-+_Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
 +  SCardWriteCacheA(
      _In_ SCARDCONTEXT hContext,
      _In_ UUID *CardIdentifier,
@@ -708,7 +708,7 @@ index c7969d4d8e..eaae48d4dc 100644
      _In_ DWORD DataLen);
 -extern WINSCARDAPI LONG WINAPI
 -SCardWriteCacheW(
-+_Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ extern WINSCARDAPI LONG WINAPI
 +  SCardWriteCacheW(
      _In_ SCARDCONTEXT hContext,
      _In_ UUID *CardIdentifier,
@@ -718,7 +718,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI 
 -SCardGetReaderIconA(
 +  SCardGetReaderIconA(
@@ -729,7 +729,7 @@ index c7969d4d8e..eaae48d4dc 100644
             LPBYTE pbIcon,
    _Inout_  LPDWORD pcbIcon);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI 
 -SCardGetReaderIconW(
 +  SCardGetReaderIconW(
@@ -741,7 +741,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #endif // !UNICODE
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI 
 -SCardGetDeviceTypeIdA(
 +  SCardGetDeviceTypeIdA(
@@ -749,7 +749,7 @@ index c7969d4d8e..eaae48d4dc 100644
    _In_     LPCSTR szReaderName, 
    _Inout_  LPDWORD pdwDeviceTypeId);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI 
 -SCardGetDeviceTypeIdW(
 +  SCardGetDeviceTypeIdW(
@@ -761,7 +761,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #endif // !UNICODE
    
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardGetReaderDeviceInstanceIdA(
 +  SCardGetReaderDeviceInstanceIdA(
@@ -772,7 +772,7 @@ index c7969d4d8e..eaae48d4dc 100644
            LPSTR szDeviceInstanceId,
    _Inout_ LPDWORD pcchDeviceInstanceId);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardGetReaderDeviceInstanceIdW(
 +  SCardGetReaderDeviceInstanceIdW(
@@ -784,7 +784,7 @@ index c7969d4d8e..eaae48d4dc 100644
  #endif // !UNICODE
  
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListReadersWithDeviceInstanceIdA(
 +  SCardListReadersWithDeviceInstanceIdA(
@@ -795,7 +795,7 @@ index c7969d4d8e..eaae48d4dc 100644
            LPSTR mszReaders,
    _Inout_ LPDWORD pcchReaders);
 -_Success_(return == SCARD_S_SUCCESS)
-+_Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Success_(return == SCARD_S_SUCCESS)
  extern WINSCARDAPI LONG WINAPI
 -SCardListReadersWithDeviceInstanceIdW(
 +  SCardListReadersWithDeviceInstanceIdW(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..86007dccb6 100644
+index 44285099cb..6048a4e59e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -49,6 +49,15 @@ index 44285099cb..86007dccb6 100644
      LPARAM lItemlParam;
  } NMCUSTOMDRAW, *LPNMCUSTOMDRAW;
  
+@@ -502,7 +507,7 @@ typedef struct _IMAGELIST* HIMAGELIST;
+ #endif
+ 
+ #ifndef IMAGELISTDRAWPARAMS
+-typedef struct _IMAGELISTDRAWPARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _IMAGELISTDRAWPARAMS
+ {
+     DWORD       cbSize;
+     HIMAGELIST  himl;
 @@ -546,18 +551,20 @@ typedef struct _IMAGELISTDRAWPARAMS
  #define ILC_ORIGINALSIZE        0x00010000      // Imagelist should accept smaller than set images and apply OriginalSize based on image added
  #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
@@ -106,8 +115,8 @@ index 44285099cb..86007dccb6 100644
 +_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
 +_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
 +_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT flags);
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
  
  #ifdef UNICODE
  #define ImageList_LoadImage     ImageList_LoadImageW
@@ -300,24 +309,39 @@ index 44285099cb..86007dccb6 100644
  } TBINSERTMARK, * LPTBINSERTMARK;
  #define TBIMHT_AFTER      0x00000001 // TRUE = insert After iButton, otherwise before
  #define TBIMHT_BACKGROUND 0x00000002 // TRUE iff missed buttons completely
-@@ -1548,7 +1555,7 @@ typedef struct {
+@@ -1546,9 +1553,9 @@ typedef struct {
  
- typedef struct {
+ #define TBIF_BYINDEX            0x80000000 // this specifies that the wparam in Get/SetButtonInfo is an index, not id
+ 
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
      UINT cbSize;
 -    DWORD dwMask;
 +    _Win32_AssociatedEnum_(TBBUTTONINFOW_MASK) DWORD dwMask;
      int idCommand;
      int iImage;
      BYTE fsState;
-@@ -1561,7 +1568,7 @@ typedef struct {
+@@ -1559,9 +1566,9 @@ typedef struct {
+     int cchText;
+ } TBBUTTONINFOA, *LPTBBUTTONINFOA;
  
- typedef struct {
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
      UINT cbSize;
 -    DWORD dwMask;
 +    _Win32_AssociatedEnum_(TBBUTTONINFOW_MASK) DWORD dwMask;
      int idCommand;
      int iImage;
      BYTE fsState;
+@@ -1634,7 +1641,7 @@ typedef struct {
+ #define TBMF_BARPAD             0x00000002
+ #define TBMF_BUTTONSPACING      0x00000004
+ 
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
+     UINT cbSize;
+     DWORD dwMask;
+ 
 @@ -1680,7 +1687,7 @@ typedef struct tagNMTBHOTITEM
      NMHDR   hdr;
      int     idOld;
@@ -345,6 +369,33 @@ index 44285099cb..86007dccb6 100644
      int idCommand;    // [in] id of button we're requesting info for
      DWORD_PTR lParam;  // [in] lParam of button
      int iImage;       // [out] image index
+@@ -1886,7 +1893,7 @@ typedef struct tagNMTOOLBARW {
+ #define RBS_DBLCLKTOGGLE              0x00008000
+ // end_r_commctrl
+ 
+-typedef struct tagREBARINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagREBARINFO
+ {
+     UINT        cbSize;
+     UINT        fMask;
+@@ -1932,7 +1939,7 @@ typedef struct tagREBARINFO
+ #define RBBIM_CHEVRONSTATE    0x00002000
+ #endif
+ 
+-typedef struct tagREBARBANDINFOA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagREBARBANDINFOA
+ {
+     UINT        cbSize;
+     UINT        fMask;
+@@ -1967,7 +1974,7 @@ typedef REBARBANDINFOA CONST *LPCREBARBANDINFOA;
+ #define REBARBANDINFOA_V6_SIZE CCSIZEOF_STRUCT(REBARBANDINFOA, cxHeader)
+ #define REBARBANDINFOW_V6_SIZE CCSIZEOF_STRUCT(REBARBANDINFOW, cxHeader)
+ 
+-typedef struct tagREBARBANDINFOW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagREBARBANDINFOW
+ {
+     UINT        cbSize;
+     UINT        fMask;
 @@ -2132,7 +2139,7 @@ typedef struct tagNMREBARCHILDSIZE
  typedef struct tagNMREBAR
  {
@@ -354,18 +405,24 @@ index 44285099cb..86007dccb6 100644
      UINT    uBand;
      UINT    fStyle;
      UINT    wID;
-@@ -2241,7 +2248,7 @@ typedef struct _RB_HITTESTINFO
+@@ -2239,9 +2246,9 @@ typedef struct _RB_HITTESTINFO
+ #define TTTOOLINFOA_V3_SIZE CCSIZEOF_STRUCT(TTTOOLINFOA, lpReserved)
+ #define TTTOOLINFOW_V3_SIZE CCSIZEOF_STRUCT(TTTOOLINFOW, lpReserved)
  
- typedef struct tagTOOLINFOA {
+-typedef struct tagTOOLINFOA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTOOLINFOA {
      UINT cbSize;
 -    UINT uFlags;
 +    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
      HWND hwnd;
      UINT_PTR uId;
      RECT rect;
-@@ -2255,7 +2262,7 @@ typedef struct tagTOOLINFOA {
+@@ -2253,9 +2260,9 @@ typedef struct tagTOOLINFOA {
+ #endif
+ } TTTOOLINFOA, NEAR *PTOOLINFOA, *LPTTTOOLINFOA;
  
- typedef struct tagTOOLINFOW {
+-typedef struct tagTOOLINFOW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTOOLINFOW {
      UINT cbSize;
 -    UINT uFlags;
 +    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
@@ -396,13 +453,13 @@ index 44285099cb..86007dccb6 100644
  
 -WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
 -WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
  
 -WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
 -WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
  
  #ifdef UNICODE
  #define CreateStatusWindow      CreateStatusWindowW
@@ -579,8 +636,12 @@ index 44285099cb..86007dccb6 100644
      HBITMAP hbm;
      LPWSTR pszImage;
      UINT cchImageMax;
-@@ -4043,7 +4050,7 @@ typedef struct tagLVBKIMAGEW
- typedef struct tagLVGROUP
+@@ -4040,10 +4047,10 @@ typedef struct tagLVBKIMAGEW
+ #define LVGA_FOOTER_CENTER  0x00000010
+ #define LVGA_FOOTER_RIGHT   0x00000020  // Don't forget to validate exclusivity
+ 
+-typedef struct tagLVGROUP
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLVGROUP
  {
      UINT    cbSize;
 -    UINT    mask;
@@ -601,8 +662,21 @@ index 44285099cb..86007dccb6 100644
  #if (NTDDI_VERSION >= NTDDI_VISTA) 
      LPWSTR  pszSubtitle;
      UINT    cchSubtitle;
-@@ -4207,8 +4214,8 @@ typedef struct tagLVINSERTGROUPSORTED
- typedef struct tagLVTILEVIEWINFO
+@@ -4123,7 +4130,7 @@ typedef struct tagLVGROUP
+ #define LVGMF_BORDERCOLOR   0x00000002
+ #define LVGMF_TEXTCOLOR     0x00000004
+ 
+-typedef struct tagLVGROUPMETRICS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLVGROUPMETRICS
+ {
+     UINT cbSize;
+     UINT mask;
+@@ -4204,17 +4211,17 @@ typedef struct tagLVINSERTGROUPSORTED
+ #define LVTVIM_COLUMNS        0x00000002
+ #define LVTVIM_LABELMARGIN    0x00000004
+ 
+-typedef struct tagLVTILEVIEWINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLVTILEVIEWINFO
  {
      UINT    cbSize;
 -    DWORD   dwMask;     //LVTVIM_*
@@ -612,6 +686,31 @@ index 44285099cb..86007dccb6 100644
      SIZE    sizeTile;
      int     cLines;
      RECT    rcLabelMargin;
+ } LVTILEVIEWINFO, *PLVTILEVIEWINFO;
+ 
+-typedef struct tagLVTILEINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLVTILEINFO
+ {
+     UINT    cbSize;
+     int     iItem;
+@@ -4243,7 +4250,7 @@ typedef struct tagLVTILEINFO
+ #define ListView_GetTileInfo(hwnd, pti) \
+     SNDMSG((hwnd), LVM_GETTILEINFO, 0, (LPARAM)(pti))
+ 
+-typedef struct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") 
+ {
+     UINT cbSize;
+     DWORD dwFlags;
+@@ -4277,7 +4284,7 @@ typedef struct
+ #define ListView_GetInsertMarkColor(hwnd) \
+     (COLORREF)SNDMSG((hwnd), LVM_GETINSERTMARKCOLOR, (WPARAM)0, (LPARAM)0)
+ 
+-typedef struct tagLVSETINFOTIP
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLVSETINFOTIP
+ {
+     UINT cbSize;
+     DWORD dwFlags;
 @@ -4372,7 +4379,7 @@ typedef struct tagLVFOOTERINFO
  
  typedef struct tagLVFOOTERITEM
@@ -855,7 +954,12 @@ index 44285099cb..86007dccb6 100644
  } TCHITTESTINFO, *LPTCHITTESTINFO;
  
  #define TCM_HITTEST             (TCM_FIRST + 13)
-@@ -6396,7 +6403,7 @@ typedef struct {
+@@ -6392,11 +6399,11 @@ typedef DWORD MONTHDAYSTATE, *LPMONTHDAYSTATE;
+         SNDMSG(hmc, MCM_HITTEST, 0, (LPARAM)(PMCHITTESTINFO)(pinfo))
+ 
+ 
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
          UINT cbSize;
          POINT pt;
  
@@ -864,9 +968,12 @@ index 44285099cb..86007dccb6 100644
          SYSTEMTIME st;
  #if (NTDDI_VERSION >= NTDDI_VISTA)
          RECT rc;
-@@ -6527,8 +6534,8 @@ typedef struct {
+@@ -6525,10 +6532,10 @@ typedef struct {
+ #define MCGIF_NAME                 0x00000004
+ 
  // Note: iRow of -1 refers to the row header and iCol of -1 refers to the col header.
- typedef struct tagMCGRIDINFO {
+-typedef struct tagMCGRIDINFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMCGRIDINFO {
      UINT cbSize;
 -    DWORD dwPart;
 -    DWORD dwFlags;
@@ -886,6 +993,15 @@ index 44285099cb..86007dccb6 100644
  } NMVIEWCHANGE, *LPNMVIEWCHANGE;
  
  #define MCN_VIEWCHANGE      (MCN_FIRST - 4) // -750
+@@ -6661,7 +6668,7 @@ typedef struct tagNMVIEWCHANGE
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+-typedef struct tagDATETIMEPICKERINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDATETIMEPICKERINFO
+ {
+     DWORD cbSize;
+ 
 @@ -6780,7 +6787,7 @@ typedef struct tagDATETIMEPICKERINFO
  typedef struct tagNMDATETIMECHANGE
  {
@@ -959,6 +1075,15 @@ index 44285099cb..86007dccb6 100644
  {
      TDF_ENABLE_HYPERLINKS               = 0x0001,
      TDF_USE_HICON_MAIN                  = 0x0002,
+@@ -7725,7 +7736,7 @@ enum _TASKDIALOG_COMMON_BUTTON_FLAGS
+ };
+ typedef int TASKDIALOG_COMMON_BUTTON_FLAGS;           // Note: _TASKDIALOG_COMMON_BUTTON_FLAGS is an int
+ 
+-typedef struct _TASKDIALOGCONFIG
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _TASKDIALOGCONFIG
+ {
+     UINT        cbSize;
+     HWND        hwndParent;                             // incorrectly named, this is the owner window, not a parent.
 @@ -7762,8 +7773,8 @@ typedef struct _TASKDIALOGCONFIG
  } TASKDIALOGCONFIG;
  

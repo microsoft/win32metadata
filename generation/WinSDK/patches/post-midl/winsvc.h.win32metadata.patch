@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
-index e653a243c6..dafdd1d1b0 100644
+index e653a243c6..c49284c10c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 @@ -1,3 +1,4 @@
@@ -88,7 +88,7 @@ index e653a243c6..dafdd1d1b0 100644
  ///////////////////////////////////////////////////////////////////////////
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ChangeServiceConfigA(
@@ -107,7 +107,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_opt_    LPCSTR     lpDisplayName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ChangeServiceConfigW(
@@ -126,7 +126,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ChangeServiceConfig2A(
@@ -136,7 +136,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_opt_    LPVOID       lpInfo
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ChangeServiceConfig2W(
@@ -168,7 +168,7 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -190,7 +190,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_opt_    LPCSTR     lpPassword
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -220,7 +220,7 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -235,7 +235,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Out_           LPDWORD                 lpServicesReturned
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -251,7 +251,7 @@ index e653a243c6..dafdd1d1b0 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -269,7 +269,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Inout_opt_     LPDWORD                 lpResumeHandle
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -287,7 +287,7 @@ index e653a243c6..dafdd1d1b0 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -306,7 +306,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_opt_        LPCSTR                pszGroupName
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -325,7 +325,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -334,7 +334,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Inout_         LPDWORD                 lpcchBuffer
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -343,7 +343,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -352,7 +352,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Inout_         LPDWORD                 lpcchBuffer
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -378,7 +378,7 @@ index e653a243c6..dafdd1d1b0 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -387,7 +387,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_            DWORD                   dwDesiredAccess
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -396,7 +396,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -405,7 +405,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_            DWORD                   dwDesiredAccess
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseServiceHandle, -1, 0) _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
  WINAPI
@@ -414,7 +414,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -423,7 +423,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Out_           LPDWORD                 pcbBytesNeeded
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -432,7 +432,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONA))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_FAILURE_ACTIONSA))))
@@ -448,7 +448,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Out_           LPDWORD                 pcbBytesNeeded
      );
 -_When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONW))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_FAILURE_ACTIONSW))))
@@ -466,7 +466,7 @@ index e653a243c6..dafdd1d1b0 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -475,7 +475,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Out_           LPDWORD                         pcbBytesNeeded
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  BOOL
  WINAPI
@@ -511,7 +511,7 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
  WINAPI
@@ -520,7 +520,7 @@ index e653a243c6..dafdd1d1b0 100644
              LPHANDLER_FUNCTION          lpHandlerProc
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
  WINAPI
@@ -529,7 +529,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
  WINAPI
@@ -538,7 +538,7 @@ index e653a243c6..dafdd1d1b0 100644
      _In_opt_ LPVOID                     lpContext
      );
 -_Must_inspect_result_
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
  WINAPI
@@ -567,14 +567,14 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  StartServiceCtrlDispatcherA(
      _In_ CONST  SERVICE_TABLE_ENTRYA    *lpServiceStartTable
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  StartServiceCtrlDispatcherW(
@@ -583,7 +583,7 @@ index e653a243c6..dafdd1d1b0 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  StartServiceA(
@@ -592,7 +592,7 @@ index e653a243c6..dafdd1d1b0 100644
                      LPCSTR             *lpServiceArgVectors
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  StartServiceW(
@@ -610,7 +610,7 @@ index e653a243c6..dafdd1d1b0 100644
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINADVAPI
  DWORD
  WINAPI
  NotifyServiceStatusChangeA (
@@ -620,7 +620,7 @@ index e653a243c6..dafdd1d1b0 100644
 +    _Win32_Retained_ _In_        PSERVICE_NOTIFYA        pNotifyBuffer
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINADVAPI
  DWORD
  WINAPI
  NotifyServiceStatusChangeW (
@@ -636,7 +636,7 @@ index e653a243c6..dafdd1d1b0 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ControlServiceExA(
@@ -645,7 +645,7 @@ index e653a243c6..dafdd1d1b0 100644
      _Inout_     PVOID                   pControlParams
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ControlServiceExW(
@@ -697,7 +697,7 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
  #endif // NTDDI_VERSION >= NTDDI_WIN10_RS4
-@@ -1815,7 +1816,7 @@ typedef enum SERVICE_DIRECTORY_TYPE {
+@@ -1815,13 +1816,13 @@ typedef enum SERVICE_DIRECTORY_TYPE {
      ServiceDirectoryTypeMax = 1,
  } SERVICE_DIRECTORY_TYPE;
  
@@ -706,6 +706,13 @@ index e653a243c6..dafdd1d1b0 100644
  DWORD
  WINAPI
  GetServiceDirectory(
+     _In_ SERVICE_STATUS_HANDLE hServiceStatus,
+     _In_ SERVICE_DIRECTORY_TYPE eDirectoryType,
+-    _Out_writes_opt_(cchPathBufferLength) PWCHAR lpPathBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(cchPathBufferLength) PWCHAR lpPathBuffer,
+     _In_ DWORD cchPathBufferLength,
+     _Out_ DWORD *lpcchRequiredBufferLength
+     );
 @@ -1841,7 +1842,7 @@ GetSharedServiceRegistryStateKey(
      _In_ SC_HANDLE ServiceHandle,
      _In_ SERVICE_SHARED_REGISTRY_STATE_TYPE StateType,
@@ -715,6 +722,15 @@ index e653a243c6..dafdd1d1b0 100644
      );
  
  typedef enum SERVICE_SHARED_DIRECTORY_TYPE {
+@@ -1854,7 +1855,7 @@ WINAPI
+ GetSharedServiceDirectory(
+     _In_ SC_HANDLE ServiceHandle,
+     _In_ SERVICE_SHARED_DIRECTORY_TYPE DirectoryType,
+-    _Out_writes_to_opt_(PathBufferLength, *RequiredBufferLength) PWCHAR PathBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_opt_(PathBufferLength, *RequiredBufferLength) PWCHAR PathBuffer,
+     _In_ DWORD PathBufferLength,
+     _Out_ DWORD *RequiredBufferLength
+     );
 @@ -1872,5 +1873,192 @@ GetSharedServiceDirectory(
  #pragma warning(pop)
  #endif

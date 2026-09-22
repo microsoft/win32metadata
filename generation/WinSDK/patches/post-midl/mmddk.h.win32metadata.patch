@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
-index 7893d8d2cd..9ff4792150 100644
+index 7893d8d2cd..98d942b55c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
 @@ -13,6 +13,7 @@
@@ -15,7 +15,7 @@ index 7893d8d2cd..9ff4792150 100644
  
  /* PnP version of media device caps */
 -typedef struct {
-+typedef struct  {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   {
      DWORD	cbSize;
      LPVOID	pCaps;
  } MDEVICECAPSEX;

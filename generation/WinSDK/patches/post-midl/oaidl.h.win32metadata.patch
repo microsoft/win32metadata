@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
-index 2bd1b450dc..5277942d52 100644
+index 2bd1b450dc..4f1a326933 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 @@ -1,3 +1,4 @@
@@ -84,7 +84,7 @@ index 2bd1b450dc..5277942d52 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
@@ -93,7 +93,7 @@ index 2bd1b450dc..5277942d52 100644
              _Out_  ULONG *pCeltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          

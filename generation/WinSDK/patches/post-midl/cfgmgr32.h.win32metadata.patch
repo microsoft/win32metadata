@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..0bb7b34e76 100644
+index cfd6383749..be72d2434c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -103,6 +103,15 @@ index cfd6383749..0bb7b34e76 100644
      BYTE     PMF_ConfigOptions;
      BYTE     PMF_IoResourceIndex;
      BYTE     PMF_Reserved[2];
+@@ -1284,7 +1285,7 @@ typedef enum _CM_NOTIFY_FILTER_TYPE {
+ // Device notification filter structure
+ //
+ 
+-typedef struct _CM_NOTIFY_FILTER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CM_NOTIFY_FILTER {
+     DWORD                    cbSize;
+     DWORD                    Flags;
+     CM_NOTIFY_FILTER_TYPE    FilterType;
 @@ -1388,7 +1389,7 @@ typedef __callback DWORD (CALLBACK *PCM_NOTIFY_CALLBACK)(
  // Function prototypes
  //--------------------------------------------------------------
@@ -121,21 +130,39 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Add_Empty_Log_Conf_Ex(
+@@ -1409,7 +1410,7 @@ CM_Add_Empty_Log_Conf_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Add_IDA(
 @@ -1418,7 +1419,7 @@ CM_Add_IDA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Add_IDW(
+@@ -1427,7 +1428,7 @@ CM_Add_IDW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Add_ID_ExA(
 @@ -1437,7 +1438,7 @@ CM_Add_ID_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Add_ID_ExW(
@@ -157,15 +184,60 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Add_Res_Des_Ex(
+@@ -1490,7 +1491,7 @@ CM_Add_Res_Des_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Connect_MachineA(
 @@ -1498,7 +1499,7 @@ CM_Connect_MachineA(
      _Out_ PHMACHINE     phMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Connect_MachineW(
+@@ -1511,7 +1512,7 @@ CM_Connect_MachineW(
+ #define CM_Connect_Machine       CM_Connect_MachineA
+ #endif // UNICODE
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Create_DevNodeA(
+@@ -1521,7 +1522,7 @@ CM_Create_DevNodeA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Create_DevNodeW(
+@@ -1531,7 +1532,7 @@ CM_Create_DevNodeW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Create_DevNode_ExA(
+@@ -1542,7 +1543,7 @@ CM_Create_DevNode_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Create_DevNode_ExW(
 @@ -1583,7 +1584,7 @@ CM_Create_Range_List(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -211,7 +283,7 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Enable_DevNode(
-@@ -1760,22 +1761,22 @@ CM_Enable_DevNode_Ex(
+@@ -1760,26 +1761,26 @@ CM_Enable_DevNode_Ex(
  
  #define CM_Enable_DevInst_Ex     CM_Enable_DevNode_Ex
  
@@ -238,21 +310,35 @@ index cfd6383749..0bb7b34e76 100644
      _In_opt_ HMACHINE   hMachine
      );
  
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Enumerate_EnumeratorsA(
 @@ -1789,7 +1790,7 @@ CM_Enumerate_EnumeratorsA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Enumerate_EnumeratorsW(
+@@ -1799,7 +1800,7 @@ CM_Enumerate_EnumeratorsW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Enumerate_Enumerators_ExA(
 @@ -1810,7 +1811,7 @@ CM_Enumerate_Enumerators_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Enumerate_Enumerators_ExW(
@@ -328,6 +414,78 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Get_Child_Ex(
+@@ -1942,7 +1943,7 @@ CM_Get_Child_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_NameA(
+@@ -1952,7 +1953,7 @@ CM_Get_Class_NameA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_NameW(
+@@ -1962,7 +1963,7 @@ CM_Get_Class_NameW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Name_ExA(
+@@ -1973,7 +1974,7 @@ CM_Get_Class_Name_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Name_ExW(
+@@ -1992,7 +1993,7 @@ CM_Get_Class_Name_ExW(
+ #define CM_Get_Class_Name_Ex     CM_Get_Class_Name_ExA
+ #endif // UNICODE
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Key_NameA(
+@@ -2002,7 +2003,7 @@ CM_Get_Class_Key_NameA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Key_NameW(
+@@ -2012,7 +2013,7 @@ CM_Get_Class_Key_NameW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Key_Name_ExA(
+@@ -2023,7 +2024,7 @@ CM_Get_Class_Key_Name_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Key_Name_ExW(
 @@ -2048,7 +2049,7 @@ CM_Get_Class_Key_Name_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -346,57 +504,103 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Get_Depth_Ex(
+@@ -2079,7 +2080,7 @@ CM_Get_Depth_Ex(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_IDA(
 @@ -2089,7 +2090,7 @@ CM_Get_Device_IDA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_IDW(
+@@ -2111,7 +2112,7 @@ CM_Get_Device_IDW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_ID_ExA(
 @@ -2122,7 +2123,7 @@ CM_Get_Device_ID_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_ExW(
-@@ -2145,7 +2146,7 @@ CM_Get_Device_ID_ExW(
+@@ -2145,22 +2146,22 @@ CM_Get_Device_ID_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_ListA(
-@@ -2155,7 +2156,7 @@ CM_Get_Device_ID_ListA(
+     _In_opt_ PCSTR      pszFilter,
+-    _Out_writes_(BufferLen) PZZSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_ListW(
-@@ -2188,7 +2189,7 @@ CM_Get_Device_ID_List_ExA(
+     _In_opt_ PCWSTR     pszFilter,
+-    _Out_writes_(BufferLen) PZZWSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+     _In_  ULONG         ulFlags
+     );
+@@ -2177,23 +2178,23 @@ CM_Get_Device_ID_ListW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_ID_List_ExA(
+     _In_opt_ PCSTR      pszFilter,
+-    _Out_writes_(BufferLen) PZZSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
+     _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_List_ExW(
+     _In_opt_ PCWSTR     pszFilter,
+-    _Out_writes_(BufferLen) PZZWSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
 @@ -2211,7 +2212,7 @@ CM_Get_Device_ID_List_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_List_SizeA(
@@ -405,16 +609,25 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_List_SizeW(
+@@ -2241,7 +2242,7 @@ CM_Get_Device_ID_List_SizeW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_ID_List_Size_ExA(
 @@ -2251,7 +2252,7 @@ CM_Get_Device_ID_List_Size_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_ID_List_Size_ExW(
@@ -472,15 +685,78 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Get_DevNode_Property_Keys_Ex(
+@@ -2386,7 +2387,7 @@ CM_Get_DevNode_Property_Keys_Ex(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Registry_PropertyA(
 @@ -2398,7 +2399,7 @@ CM_Get_DevNode_Registry_PropertyA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_DevNode_Registry_PropertyW(
+@@ -2426,7 +2427,7 @@ CM_Get_DevNode_Registry_PropertyW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Registry_Property_ExA(
+@@ -2439,7 +2440,7 @@ CM_Get_DevNode_Registry_Property_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Registry_Property_ExW(
+@@ -2463,7 +2464,7 @@ CM_Get_DevNode_Registry_Property_ExW(
+ #endif // UNICODE
+ 
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Custom_PropertyA(
+@@ -2475,7 +2476,7 @@ CM_Get_DevNode_Custom_PropertyA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Custom_PropertyW(
+@@ -2487,7 +2488,7 @@ CM_Get_DevNode_Custom_PropertyW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Custom_Property_ExA(
+@@ -2500,7 +2501,7 @@ CM_Get_DevNode_Custom_Property_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Custom_Property_ExW(
 @@ -2536,12 +2537,12 @@ CM_Get_DevNode_Custom_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -540,12 +816,48 @@ index cfd6383749..0bb7b34e76 100644
      _In_opt_ HMACHINE   hMachine
      );
  
+@@ -2612,7 +2613,7 @@ CM_Get_Global_State_Ex(
+ #define CM_GLOBAL_STATE_REBOOT_REQUIRED      (0x00000020) // system reboot is required
+ #endif // (WINVER >= _WIN32_WINNT_WIN7)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Hardware_Profile_InfoA(
+@@ -2621,7 +2622,7 @@ CM_Get_Hardware_Profile_InfoA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Hardware_Profile_Info_ExA(
+@@ -2630,7 +2631,7 @@ CM_Get_Hardware_Profile_Info_ExA(
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Hardware_Profile_InfoW(
+@@ -2639,7 +2640,7 @@ CM_Get_Hardware_Profile_InfoW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Hardware_Profile_Info_ExW(
 @@ -2657,7 +2658,7 @@ CM_Get_Hardware_Profile_Info_ExW(
  #define CM_Get_Hardware_Profile_Info_Ex   CM_Get_Hardware_Profile_Info_ExA
  #endif // UNICODE
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_HW_Prof_FlagsA(
@@ -554,7 +866,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_HW_Prof_FlagsW(
@@ -563,7 +875,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_HW_Prof_Flags_ExA(
@@ -572,62 +884,107 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_HW_Prof_Flags_ExW(
+@@ -2707,7 +2708,7 @@ CM_Get_HW_Prof_Flags_ExW(
+ #define CM_Get_HW_Prof_Flags_Ex  CM_Get_HW_Prof_Flags_ExA
+ #endif // UNICODE
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_AliasA(
 @@ -2718,7 +2719,7 @@ CM_Get_Device_Interface_AliasA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_Interface_AliasW(
-@@ -2767,7 +2768,7 @@ CM_Get_Device_Interface_Alias_ExW(
+@@ -2729,7 +2730,7 @@ CM_Get_Device_Interface_AliasW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_Alias_ExA(
+@@ -2741,7 +2742,7 @@ CM_Get_Device_Interface_Alias_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_Alias_ExW(
+@@ -2767,26 +2768,26 @@ CM_Get_Device_Interface_Alias_ExW(
  #pragma region Desktop Family, OneCore Family, or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_Interface_ListA(
-@@ -2775,10 +2776,10 @@ CM_Get_Device_Interface_ListA(
+     _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_A pDeviceID,
-     _Out_writes_(BufferLen) PZZSTR Buffer,
+-    _Out_writes_(BufferLen) PZZSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZSTR Buffer,
      _In_  ULONG         BufferLen,
 -    _In_  ULONG         ulFlags
 +    _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_Interface_ListW(
-@@ -2786,7 +2787,7 @@ CM_Get_Device_Interface_ListW(
+     _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_W pDeviceID,
-     _Out_writes_(BufferLen) PZZWSTR Buffer,
+-    _Out_writes_(BufferLen) PZZWSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZWSTR Buffer,
      _In_  ULONG         BufferLen,
 -    _In_  ULONG         ulFlags
 +    _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) _In_  ULONG         ulFlags
      );
  
  #ifdef UNICODE
-@@ -2809,7 +2810,7 @@ CM_Get_Device_Interface_List_ExA(
+@@ -2801,27 +2802,27 @@ CM_Get_Device_Interface_ListW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_List_ExA(
+     _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_A pDeviceID,
-     _Out_writes_(BufferLen) PZZSTR Buffer,
+-    _Out_writes_(BufferLen) PZZSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZSTR Buffer,
      _In_  ULONG         BufferLen,
 -    _In_  ULONG         ulFlags,
 +    _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2821,7 +2822,7 @@ CM_Get_Device_Interface_List_ExW(
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_List_ExW(
+     _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_W pDeviceID,
-     _Out_writes_(BufferLen) PZZWSTR Buffer,
+-    _Out_writes_(BufferLen) PZZWSTR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(BufferLen) PZZWSTR Buffer,
      _In_  ULONG         BufferLen,
 -    _In_  ULONG         ulFlags,
 +    _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) _In_  ULONG         ulFlags,
@@ -639,7 +996,7 @@ index cfd6383749..0bb7b34e76 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_Interface_List_SizeA(
@@ -651,7 +1008,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Device_Interface_List_SizeW(
@@ -663,7 +1020,15 @@ index cfd6383749..0bb7b34e76 100644
      );
  
  #ifdef UNICODE
-@@ -2875,7 +2876,7 @@ CM_Get_Device_Interface_List_Size_ExA(
+@@ -2868,25 +2869,25 @@ CM_Get_Device_Interface_List_SizeW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_List_Size_ExA(
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_A pDeviceID,
@@ -672,7 +1037,11 @@ index cfd6383749..0bb7b34e76 100644
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2886,7 +2887,7 @@ CM_Get_Device_Interface_List_Size_ExW(
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Device_Interface_List_Size_ExW(
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_W pDeviceID,
@@ -873,7 +1242,7 @@ index cfd6383749..0bb7b34e76 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Locate_DevNodeA(
@@ -884,7 +1253,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Locate_DevNodeW(
@@ -895,12 +1264,21 @@ index cfd6383749..0bb7b34e76 100644
      );
  
  #define CM_Locate_DevInstA       CM_Locate_DevNodeA
+@@ -3223,7 +3224,7 @@ CM_Locate_DevNodeW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Locate_DevNode_ExA(
 @@ -3232,7 +3233,7 @@ CM_Locate_DevNode_ExA(
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Locate_DevNode_ExW(
@@ -954,6 +1332,15 @@ index cfd6383749..0bb7b34e76 100644
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
+@@ -3348,7 +3349,7 @@ CM_Get_Next_Res_Des_Ex(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Open_Class_KeyA(
 @@ -3356,11 +3357,11 @@ CM_Open_Class_KeyA(
      _In_opt_ LPCSTR     pszClassName,
      _In_  REGSAM        samDesired,
@@ -964,7 +1351,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Open_Class_KeyW(
@@ -977,7 +1364,16 @@ index cfd6383749..0bb7b34e76 100644
      _In_  ULONG         ulFlags
      );
  
-@@ -3392,7 +3393,7 @@ CM_Open_Class_Key_ExA(
+@@ -3384,7 +3385,7 @@ CM_Open_Class_KeyW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Open_Class_Key_ExA(
+@@ -3392,12 +3393,12 @@ CM_Open_Class_Key_ExA(
      _In_opt_ LPCSTR     pszClassName,
      _In_  REGSAM        samDesired,
      _In_  REGDISPOSITION Disposition,
@@ -986,6 +1382,12 @@ index cfd6383749..0bb7b34e76 100644
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Open_Class_Key_ExW(
 @@ -3405,7 +3406,7 @@ CM_Open_Class_Key_ExW(
      _In_opt_ LPCWSTR    pszClassName,
      _In_  REGSAM        samDesired,
@@ -1027,7 +1429,7 @@ index cfd6383749..0bb7b34e76 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -CMAPI
-+_Windows_SupportedOS_WindowsVista_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ CMAPI
  CONFIGRET
  WINAPI
  CM_Open_Device_Interface_KeyA(
@@ -1040,7 +1442,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_WindowsVista_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ CMAPI
  CONFIGRET
  WINAPI
  CM_Open_Device_Interface_KeyW(
@@ -1057,7 +1459,7 @@ index cfd6383749..0bb7b34e76 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -CMAPI
-+_Windows_SupportedOS_10240_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_10240_ CMAPI
  CONFIGRET
  WINAPI
  CM_Open_Device_Interface_Key_ExA(
@@ -1071,7 +1473,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_10240_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_10240_ CMAPI
  CONFIGRET
  WINAPI
  CM_Open_Device_Interface_Key_ExW(
@@ -1083,12 +1485,21 @@ index cfd6383749..0bb7b34e76 100644
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
+@@ -3535,7 +3536,7 @@ CM_Open_Device_Interface_Key_ExW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Delete_Device_Interface_KeyA(
 @@ -3543,7 +3544,7 @@ CM_Delete_Device_Interface_KeyA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_WindowsVista_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ CMAPI
  CONFIGRET
  WINAPI
  CM_Delete_Device_Interface_KeyW(
@@ -1097,7 +1508,7 @@ index cfd6383749..0bb7b34e76 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -CMAPI
-+_Windows_SupportedOS_10240_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_10240_ CMAPI
  CONFIGRET
  WINAPI
  CM_Delete_Device_Interface_Key_ExA(
@@ -1106,34 +1517,70 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_10240_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_10240_ CMAPI
  CONFIGRET
  WINAPI
  CM_Delete_Device_Interface_Key_ExW(
+@@ -3662,7 +3663,7 @@ CM_Query_Remove_SubTree_Ex(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Query_And_Remove_SubTreeA(
 @@ -3673,7 +3674,7 @@ CM_Query_And_Remove_SubTreeA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Query_And_Remove_SubTreeW(
+@@ -3696,7 +3697,7 @@ CM_Query_And_Remove_SubTreeW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Query_And_Remove_SubTree_ExA(
 @@ -3708,7 +3709,7 @@ CM_Query_And_Remove_SubTree_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Query_And_Remove_SubTree_ExW(
+@@ -3726,7 +3727,7 @@ CM_Query_And_Remove_SubTree_ExW(
+ #define CM_Query_And_Remove_SubTree_Ex  CM_Query_And_Remove_SubTree_ExA
+ #endif // UNICODE
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Request_Device_EjectA(
+@@ -3737,7 +3738,7 @@ CM_Request_Device_EjectA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Request_Device_Eject_ExA(
 @@ -3749,7 +3750,7 @@ CM_Request_Device_Eject_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Request_Device_EjectW(
@@ -1142,7 +1589,7 @@ index cfd6383749..0bb7b34e76 100644
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Request_Device_Eject_ExW(
@@ -1165,6 +1612,42 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Reenumerate_DevNode_Ex(
+@@ -3799,7 +3800,7 @@ CM_Reenumerate_DevNode_Ex(
+ #define CM_Reenumerate_DevInst    CM_Reenumerate_DevNode
+ #define CM_Reenumerate_DevInst_Ex CM_Reenumerate_DevNode_Ex
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Register_Device_InterfaceA(
+@@ -3811,7 +3812,7 @@ CM_Register_Device_InterfaceA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Register_Device_InterfaceW(
+@@ -3823,7 +3824,7 @@ CM_Register_Device_InterfaceW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Register_Device_Interface_ExA(
+@@ -3836,7 +3837,7 @@ CM_Register_Device_Interface_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Register_Device_Interface_ExW(
 @@ -3857,7 +3858,7 @@ CM_Register_Device_Interface_ExW(
  #define CM_Register_Device_Interface_Ex CM_Register_Device_Interface_ExA
  #endif // UNICODE
@@ -1183,6 +1666,42 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Set_DevNode_Problem(
+@@ -3879,7 +3880,7 @@ CM_Set_DevNode_Problem(
+ #define CM_Set_DevInst_Problem    CM_Set_DevNode_Problem
+ #define CM_Set_DevInst_Problem_Ex CM_Set_DevNode_Problem_Ex
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Unregister_Device_InterfaceA(
+@@ -3887,7 +3888,7 @@ CM_Unregister_Device_InterfaceA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Unregister_Device_InterfaceW(
+@@ -3895,7 +3896,7 @@ CM_Unregister_Device_InterfaceW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Unregister_Device_Interface_ExA(
+@@ -3904,7 +3905,7 @@ CM_Unregister_Device_Interface_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Unregister_Device_Interface_ExW(
 @@ -3965,7 +3966,7 @@ CM_Remove_SubTree_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -1201,15 +1720,42 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Set_DevNode_Property_ExW(
+@@ -4012,7 +4013,7 @@ CM_Set_DevNode_Property_ExW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_DevNode_Registry_PropertyA(
 @@ -4023,7 +4024,7 @@ CM_Set_DevNode_Registry_PropertyA(
      _In_  ULONG         ulFlags
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Set_DevNode_Registry_PropertyW(
+@@ -4050,7 +4051,7 @@ CM_Set_DevNode_Registry_PropertyW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_DevNode_Registry_Property_ExA(
+@@ -4062,7 +4063,7 @@ CM_Set_DevNode_Registry_Property_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_DevNode_Registry_Property_ExW(
 @@ -4092,7 +4093,7 @@ CM_Set_DevNode_Registry_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -1245,7 +1791,7 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Is_Dock_Station_Present_Ex(
-@@ -4154,14 +4155,14 @@ CM_Is_Dock_Station_Present_Ex(
+@@ -4154,21 +4155,21 @@ CM_Is_Dock_Station_Present_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1262,6 +1808,41 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Request_Eject_PC_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_HW_Prof_FlagsA(
+@@ -4178,7 +4179,7 @@ CM_Set_HW_Prof_FlagsA(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_HW_Prof_FlagsW(
+@@ -4188,7 +4189,7 @@ CM_Set_HW_Prof_FlagsW(
+     _In_  ULONG         ulFlags
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_HW_Prof_Flags_ExA(
+@@ -4199,7 +4200,7 @@ CM_Set_HW_Prof_Flags_ExA(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_HW_Prof_Flags_ExW(
 @@ -4224,7 +4225,7 @@ CM_Set_HW_Prof_Flags_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -1312,12 +1893,21 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Get_Resource_Conflict_Count(
+@@ -4411,7 +4412,7 @@ CM_Get_Resource_Conflict_Count(
+     _Out_ PULONG        pulCount
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Resource_Conflict_DetailsA(
 @@ -4420,7 +4421,7 @@ CM_Get_Resource_Conflict_DetailsA(
      _Inout_ PCONFLICT_DETAILS_A pConflictDetails
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Resource_Conflict_DetailsW(
@@ -1375,21 +1965,39 @@ index cfd6383749..0bb7b34e76 100644
  CONFIGRET
  WINAPI
  CM_Set_Class_Property_ExW(
+@@ -4569,7 +4570,7 @@ CM_Set_Class_Property_ExW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Class_Registry_PropertyA(
 @@ -4582,7 +4583,7 @@ CM_Get_Class_Registry_PropertyA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Get_Class_Registry_PropertyW(
+@@ -4595,7 +4596,7 @@ CM_Get_Class_Registry_PropertyW(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Set_Class_Registry_PropertyA(
 @@ -4607,7 +4608,7 @@ CM_Set_Class_Registry_PropertyA(
      _In_opt_ HMACHINE   hMachine
      );
  
 -CMAPI
-+_Windows_SupportedOS_Windows2000_ CMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ CMAPI
  CONFIGRET
  WINAPI
  CM_Set_Class_Registry_PropertyW(

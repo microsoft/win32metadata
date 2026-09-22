@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
-index cd708ed5df..cd2955bab4 100644
+index cd708ed5df..73fa985595 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
 @@ -17,6 +17,7 @@ Abstract:
@@ -58,7 +58,7 @@ index cd708ed5df..cd2955bab4 100644
  } SL_ACTIVATION_TYPE;
  
 -typedef struct _tagSL_ACTIVATION_INFO_HEADER
-+typedef struct   _tagSL_ACTIVATION_INFO_HEADER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _tagSL_ACTIVATION_INFO_HEADER
  {
      DWORD                       cbSize;
      SL_ACTIVATION_TYPE          type;
@@ -85,7 +85,7 @@ index cd708ed5df..cd2955bab4 100644
  } SL_GENUINE_STATE;
  
 -typedef struct _tagSL_NONGENUINE_UI_OPTIONS
-+typedef struct   _tagSL_NONGENUINE_UI_OPTIONS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _tagSL_NONGENUINE_UI_OPTIONS
  {
      DWORD                       cbSize;
      CONST SLID*                 pComponentId;

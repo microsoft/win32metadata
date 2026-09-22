@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
-index 2a104ac5a0..54486cde43 100644
+index 2a104ac5a0..0f08d8fe0b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -231,7 +231,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP |WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -243,7 +243,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ DWORD         dwFlags,
      _Out_ LPCPINFOEXA  lpCPInfoEx);
 -DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -255,7 +255,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
 -DEPRECATED("CompareStringEx is preferred. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("CompareStringEx is preferred. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DEPRECATED("CompareStringEx is preferred. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +_Win32_AssociatedEnum_(COMPARESTRING_RESULT)
 +
 +
@@ -277,7 +277,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: LCMapStringEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -287,7 +287,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif
  
  // DEPRECATED: Use Unicode, LCMapStringEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -297,7 +297,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: GetLocaleInfoEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -307,7 +307,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif
  
  // DEPRECATED: Use Unicode. GetLocaleInfoEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -317,7 +317,7 @@ index 2a104ac5a0..54486cde43 100644
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -327,7 +327,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ LCID     Locale,
      _In_ LCTYPE   LCType,
      _In_ LPCSTR  lpLCData);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -337,7 +337,7 @@ index 2a104ac5a0..54486cde43 100644
  #if (WINVER >= 0x040A)
  
  // DEPRECATED: GetCalendarInfoEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -347,7 +347,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ int      cchData,
      _Out_opt_ LPDWORD  lpValue);
  // DEPRECATED: GetCalendarInfoEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -357,7 +357,7 @@ index 2a104ac5a0..54486cde43 100644
  #define GetCalendarInfo  GetCalendarInfoA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -367,7 +367,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ CALID    Calendar,
      _In_ CALTYPE  CalType,
      _In_ LPCSTR  lpCalData);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -431,7 +431,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: GetNumberFormatEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -441,7 +441,7 @@ index 2a104ac5a0..54486cde43 100644
      _Out_writes_opt_(cchNumber) LPSTR          lpNumberStr,
      _In_ int              cchNumber);
  // DEPRECATED: GetNumberFormatEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -451,7 +451,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif // !UNICODE
  
  // DEPRECATED: GetCurrencyFormatEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -461,7 +461,7 @@ index 2a104ac5a0..54486cde43 100644
      _Out_writes_opt_(cchCurrency) LPSTR            lpCurrencyStr,
      _In_ int                cchCurrency);
  // DEPRECATED: GetCurrencyFormatEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -471,7 +471,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: EnumCalendarInfoExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -481,7 +481,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ CALID             Calendar,
      _In_ CALTYPE           CalType);
  // DEPRECATED: EnumCalendarInfoExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -491,7 +491,7 @@ index 2a104ac5a0..54486cde43 100644
  
  #if(WINVER >= 0x0500)
  // DEPRECATED: EnumCalendarInfoExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -501,7 +501,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ CALID               Calendar,
      _In_ CALTYPE             CalType);
  // DEPRECATED: EnumCalendarInfoExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -511,7 +511,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif /* WINVER >= 0x0500 */
  
  // DEPRECATED: EnumTimeFormatsEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -523,7 +523,7 @@ index 2a104ac5a0..54486cde43 100644
 -    _In_ DWORD             dwFlags);
 +    _In_ _Win32_AssociatedEnum_(TIME_FORMAT_FLAGS) DWORD             dwFlags);
  // DEPRECATED: EnumTimeFormatsEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -541,7 +541,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif // !UNICODE
  
  // DEPRECATED: EnumDateFormatsExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -551,7 +551,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ LCID              Locale,
      _In_ DWORD             dwFlags);
  // DEPRECATED: EnumDateFormatsExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -561,7 +561,7 @@ index 2a104ac5a0..54486cde43 100644
  
  #if(WINVER >= 0x0500)
  // DEPRECATED: EnumDateFormatsExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -571,7 +571,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ LCID                Locale,
      _In_ DWORD               dwFlags);
  // DEPRECATED: EnumDateFormatsExEx is preferred
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -622,7 +622,7 @@ index 2a104ac5a0..54486cde43 100644
  
  // GetGeoInfoEx is preferred where available
 -DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_WindowsXP_ DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -638,7 +638,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ LANGID      LangId);
  // GetGeoInfoEx is preferred where available
 -DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_WindowsXP_ DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -825,7 +825,7 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  LANGID
  WINAPI
-@@ -2454,11 +2788,14 @@ SetThreadUILanguage(_In_ LANGID LangId);
+@@ -2454,28 +2788,32 @@ SetThreadUILanguage(_In_ LANGID LangId);
  
  #if (WINVER >= 0x0600)
  
@@ -840,7 +840,12 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2470,6 +2807,7 @@ GetProcessPreferredUILanguages(
+ GetProcessPreferredUILanguages(
+     _In_ DWORD dwFlags,
+     _Out_ PULONG pulNumLanguages,
+-    _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
+     _Inout_ PULONG pcchLanguagesBuffer
  );
  
  
@@ -848,7 +853,14 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2487,6 +2825,9 @@ SetProcessPreferredUILanguages(
+ SetProcessPreferredUILanguages(
+     _In_        DWORD dwFlags,
+-    _In_opt_    PCZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_    PCZZWSTR pwszLanguagesBuffer,
+     _Out_opt_   PULONG pulNumLanguages
+ );
+ 
+@@ -2487,13 +2825,16 @@ SetProcessPreferredUILanguages(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PHONE_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if(WINVER >= 0x0600)
@@ -858,7 +870,15 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2507,6 +2848,9 @@ GetUserPreferredUILanguages (
+ GetUserPreferredUILanguages (
+     _In_ DWORD dwFlags,
+     _Out_ PULONG pulNumLanguages,
+-    _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
+     _Inout_ PULONG pcchLanguagesBuffer
+ );
+ 
+@@ -2507,37 +2848,48 @@ GetUserPreferredUILanguages (
  
  #if(WINVER >= 0x0600)
  
@@ -868,7 +888,12 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2518,6 +2862,9 @@ GetSystemPreferredUILanguages (
+ GetSystemPreferredUILanguages (
+     _In_ DWORD dwFlags,
+     _Out_ PULONG pulNumLanguages,
+-    _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
+     _Inout_ PULONG pcchLanguagesBuffer
  );
  
  
@@ -878,7 +903,12 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2529,6 +2876,8 @@ GetThreadPreferredUILanguages(
+ GetThreadPreferredUILanguages(
+     _In_ DWORD dwFlags,
+     _Out_ PULONG pulNumLanguages,
+-    _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(*pcchLanguagesBuffer) PZZWSTR pwszLanguagesBuffer,
+     _Inout_ PULONG pcchLanguagesBuffer
  );
  
  
@@ -887,7 +917,10 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2538,6 +2887,9 @@ SetThreadPreferredUILanguages(
+ SetThreadPreferredUILanguages(
+     _In_        DWORD dwFlags,
+-    _In_opt_    PCZZWSTR pwszLanguagesBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_    PCZZWSTR pwszLanguagesBuffer,
      _Out_opt_   PULONG pulNumLanguages
  );
  
@@ -907,7 +940,7 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2562,6 +2917,9 @@ GetFileMUIPath(
+@@ -2562,13 +2917,16 @@ GetFileMUIPath(
  );
  
  
@@ -917,6 +950,24 @@ index 2a104ac5a0..54486cde43 100644
  WINBASEAPI
  BOOL
  WINAPI
+ GetUILanguageInfo(
+     _In_ DWORD dwFlags,
+-    _In_ PCZZWSTR pwmszLanguage,
+-    _Out_writes_opt_(*pcchFallbackLanguages) PZZWSTR pwszFallbackLanguages,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCZZWSTR pwmszLanguage,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(*pcchFallbackLanguages) PZZWSTR pwszFallbackLanguages,
+     _Inout_opt_ PDWORD pcchFallbackLanguages,
+     _Out_ PDWORD pAttributes
+ );
+@@ -2590,7 +2948,7 @@ BOOL
+ WINAPI
+ SetThreadPreferredUILanguages2(
+     _In_       ULONG flags,
+-    _In_opt_   PCZZWSTR languages,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_   PCZZWSTR languages,
+     _Out_opt_  PULONG numLanguagesSet,
+     _Out_opt_  HSAVEDUILANGUAGES* snapshot);
+ 
 @@ -2609,14 +2967,14 @@ RestoreThreadPreferredUILanguages(_In_ const HSAVEDUILANGUAGES snapshot);
  
  #if(WINVER >= 0x0600)
@@ -934,21 +985,23 @@ index 2a104ac5a0..54486cde43 100644
      _Out_opt_   PDWORD pdwStatusRtrn
  );
  
-@@ -2633,6 +2991,9 @@ NotifyUILanguageChange(
+@@ -2633,7 +2991,10 @@ NotifyUILanguageChange(
  #pragma region Desktop or OneCore or Application or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
+-WINBASEAPI
 +
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
  BOOL
  WINAPI
+ GetStringTypeExA(
 @@ -2658,6 +3019,9 @@ GetStringTypeExA(
  //
  //        GetStringTypeEx (above) should be used instead.
  //
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -958,7 +1011,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ int      cchSrc,
      _Out_ LPWORD  lpCharType);
  
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -974,7 +1027,7 @@ index 2a104ac5a0..54486cde43 100644
  #if(WINVER >= 0x0500)
  
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -984,7 +1037,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ LOCALE_ENUMPROCA lpLocaleEnumProc,
      _In_ DWORD            dwFlags);
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -995,7 +1048,7 @@ index 2a104ac5a0..54486cde43 100644
  #if(WINVER >= 0x0500)
  
 -DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -1008,7 +1061,7 @@ index 2a104ac5a0..54486cde43 100644
 +    _In_ _Win32_AssociatedEnum_(ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS) DWORD                   dwFlags,
      _In_ LONG_PTR                lParam);
 -DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -1027,7 +1080,7 @@ index 2a104ac5a0..54486cde43 100644
  #endif // !UNICODE
  
 -DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -1039,7 +1092,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ DWORD                     dwFlags,
      _In_ LONG_PTR                  lParam);
 -DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
-+_Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
 +
 +
 +_Win32_SetLastError_
@@ -1050,7 +1103,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: use the user language profile instead.
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -1060,7 +1113,7 @@ index 2a104ac5a0..54486cde43 100644
      _In_ DWORD                dwFlags,
      _In_ LONG_PTR             lParam);
  // DEPRECATED: use the user language profile instead.
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -1070,7 +1123,7 @@ index 2a104ac5a0..54486cde43 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP  | WINAPI_PARTITION_SYSTEM)
  
  // Please use Unicode instead.  Use of other code pages/encodings is discouraged.
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -1081,7 +1134,7 @@ index 2a104ac5a0..54486cde43 100644
 -    _In_ DWORD              dwFlags);
 +    _In_ _Win32_AssociatedEnum_(ENUM_SYSTEM_CODE_PAGES_FLAGS) DWORD              dwFlags);
  // Please use Unicode instead.  Use of other code pages/encodings is discouraged.
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI

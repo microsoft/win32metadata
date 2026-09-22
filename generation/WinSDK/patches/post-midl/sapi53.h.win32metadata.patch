@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
-index 10cd1740df..d96a83ef34 100644
+index 10cd1740df..b6047d00d1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 @@ -1,3 +1,4 @@
@@ -34,6 +34,15 @@ index 10cd1740df..d96a83ef34 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetVolumeLevel( 
              /* [out] */ ULONG *pLevel) = 0;
+@@ -5795,7 +5796,7 @@ enum SPSEMANTICFORMAT
+         SPSMF_SRGS_SEMANTICINTERPRETATION_W3C	= 8
+     } 	SPSEMANTICFORMAT;
+ 
+-typedef /* [hidden][restricted] */ struct SPPHRASE_50
++typedef /* [hidden][restricted] */ struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SPPHRASE_50
+     {
+     ULONG cbSize;
+     WORD LangID;
 @@ -7123,7 +7124,7 @@ EXTERN_C const IID IID_ISpVoice;
          virtual HRESULT STDMETHODCALLTYPE GetSyncSpeakTimeout( 
              /* [out] */ ULONG *pmsTimeout) = 0;

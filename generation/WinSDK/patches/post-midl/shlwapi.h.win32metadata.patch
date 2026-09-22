@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
-index f78b0cef08..0809f1af2a 100644
+index f78b0cef08..de8bd1bdc8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 @@ -1,3 +1,4 @@
@@ -21,16 +21,16 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(int)      StrCSpnIW(_In_ PCWSTR pszStr, _In_ PCWSTR pszSet);
 -LWSTDAPI_(PSTR)     StrDupA(_In_ PCSTR pszSrch);
 -LWSTDAPI_(PWSTR)    StrDupW(_In_ PCWSTR pszSrch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNA(_In_ PCSTR psz1, _In_ PCSTR psz2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNIA(_In_ PCSTR psz1, _In_ PCSTR psz2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNIW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnA(_In_ PCSTR pszStr, _In_ PCSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnW(_In_ PCWSTR pszStr, _In_ PCWSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnIA(_In_ PCSTR pszStr, _In_ PCSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnIW(_In_ PCWSTR pszStr, _In_ PCWSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrDupA(_In_ PCSTR pszSrch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrDupW(_In_ PCWSTR pszSrch);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNA(_In_ PCSTR psz1, _In_ PCSTR psz2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNIA(_In_ PCSTR psz1, _In_ PCSTR psz2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCmpNIW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnA(_In_ PCSTR pszStr, _In_ PCSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnW(_In_ PCWSTR pszStr, _In_ PCWSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnIA(_In_ PCSTR pszStr, _In_ PCSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrCSpnIW(_In_ PCWSTR pszStr, _In_ PCWSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrDupA(_In_ PCSTR pszSrch);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrDupW(_In_ PCWSTR pszSrch);
  
  #if (NTDDI_VERSION >= NTDDI_VISTASP1)
  // StrFormatByteSizeEx takes a ULONGLONG as a byte count and formats a string
@@ -53,17 +53,17 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     StrIsIntlEqualW(BOOL fCaseSens, _In_ PCWSTR pszString1, _In_ PCWSTR pszString2, int nChar);
 -LWSTDAPI_(PSTR)     StrNCatA(_Inout_updates_(cchMax) PSTR psz1, PCSTR psz2, int cchMax);
 -LWSTDAPI_(PWSTR)    StrNCatW(_Inout_updates_(cchMax) PWSTR psz1, PCWSTR psz2, int cchMax);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrFormatByteSizeA(DWORD dw, _Out_writes_(cchBuf) PSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrFormatByteSizeA(DWORD dw, _Out_writes_(cchBuf) PSTR pszBuf, UINT cchBuf);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrFormatByteSize64A(LONGLONG qdw, _Out_writes_(cchBuf) PSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrFormatByteSizeW(LONGLONG qdw, _Out_writes_(cchBuf) PWSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrFormatKBSizeW(LONGLONG qdw, _Out_writes_(cchBuf) PWSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrFormatKBSizeA(LONGLONG qdw, _Out_writes_(cchBuf) PSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrFromTimeIntervalA(_Out_writes_(cchMax) PSTR pszOut, UINT cchMax, DWORD dwTimeMS, int digits);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrFromTimeIntervalW(_Out_writes_(cchMax) PWSTR pszOut, UINT cchMax, DWORD dwTimeMS, int digits);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrIsIntlEqualA(BOOL fCaseSens, _In_ PCSTR pszString1, _In_ PCSTR pszString2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrIsIntlEqualW(BOOL fCaseSens, _In_ PCWSTR pszString1, _In_ PCWSTR pszString2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrNCatA(_Inout_updates_(cchMax) PSTR psz1, PCSTR psz2, int cchMax);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrNCatW(_Inout_updates_(cchMax) PWSTR psz1, PCWSTR psz2, int cchMax);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrFormatByteSizeW(LONGLONG qdw, _Out_writes_(cchBuf) PWSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrFormatKBSizeW(LONGLONG qdw, _Out_writes_(cchBuf) PWSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrFormatKBSizeA(LONGLONG qdw, _Out_writes_(cchBuf) PSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrFromTimeIntervalA(_Out_writes_(cchMax) PSTR pszOut, UINT cchMax, DWORD dwTimeMS, int digits);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrFromTimeIntervalW(_Out_writes_(cchMax) PWSTR pszOut, UINT cchMax, DWORD dwTimeMS, int digits);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrIsIntlEqualA(BOOL fCaseSens, _In_ PCSTR pszString1, _In_ PCSTR pszString2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrIsIntlEqualW(BOOL fCaseSens, _In_ PCWSTR pszString1, _In_ PCWSTR pszString2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrNCatA(_Inout_updates_(cchMax) PSTR psz1, PCSTR psz2, int cchMax);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrNCatW(_Inout_updates_(cchMax) PWSTR psz1, PCWSTR psz2, int cchMax);
  #ifdef USE_STRICT_CONST
  LWSTDAPI_(PCSTR)    StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
  LWSTDAPI_(PCWSTR)   StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
@@ -73,8 +73,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif
 -LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
 -LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
  #ifdef USE_STRICT_CONST
  LWSTDAPI_(PCSTR)    StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
  LWSTDAPI_(PCWSTR)   StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
@@ -86,21 +86,21 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(int)      StrToIntW(_In_ PCWSTR pszSrc);
 -LWSTDAPI_(BOOL)     StrToIntExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
 -LWSTDAPI_(BOOL)     StrToIntExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrToIntA(_In_ PCSTR pszSrc);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrToIntW(_In_ PCWSTR pszSrc);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToIntExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToIntExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrToIntA(_In_ PCSTR pszSrc);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrToIntW(_In_ PCWSTR pszSrc);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToIntExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToIntExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ int * piRet);
  #if (_WIN32_IE >= _WIN32_IE_IE60)
 -LWSTDAPI_(BOOL)     StrToInt64ExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
 -LWSTDAPI_(BOOL)     StrToInt64ExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToInt64ExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToInt64ExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToInt64ExA(_In_ PCSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrToInt64ExW(_In_ PCWSTR pszString, STIF_FLAGS dwFlags, _Out_ LONGLONG * pllRet);
  #endif // _WIN32_IE_IE60
  
 -LWSTDAPI_(BOOL)     StrTrimA(_Inout_ PSTR psz, _In_ PCSTR pszTrimChars);
 -LWSTDAPI_(BOOL)     StrTrimW(_Inout_ PWSTR psz, _In_ PCWSTR pszTrimChars);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrTrimA(_Inout_ PSTR psz, _In_ PCSTR pszTrimChars);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrTrimW(_Inout_ PWSTR psz, _In_ PCWSTR pszTrimChars);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrTrimA(_Inout_ PSTR psz, _In_ PCSTR pszTrimChars);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     StrTrimW(_Inout_ PWSTR psz, _In_ PCWSTR pszTrimChars);
  
  
 -LWSTDAPI_(PWSTR)    StrCatW(_Inout_ PWSTR psz1, _In_ PCWSTR psz2);
@@ -118,19 +118,19 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(PSTR)     StrCatBuffA(_Inout_updates_(cchDestBuffSize) PSTR pszDest, _In_ PCSTR pszSrc, int cchDestBuffSize);
 -LWSTDAPI_(BOOL)     ChrCmpIA(WORD w1, WORD w2);
 -LWSTDAPI_(BOOL)     ChrCmpIW(WCHAR w1, WCHAR w2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrCatBuffW(_Inout_updates_(cchDestBuffSize) PWSTR pszDest, _In_ PCWSTR pszSrc, int cchDestBuffSize);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrCatBuffA(_Inout_updates_(cchDestBuffSize) PSTR pszDest, _In_ PCSTR pszSrc, int cchDestBuffSize);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     ChrCmpIA(WORD w1, WORD w2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     ChrCmpIW(WCHAR w1, WCHAR w2);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrCatBuffW(_Inout_updates_(cchDestBuffSize) PWSTR pszDest, _In_ PCWSTR pszSrc, int cchDestBuffSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrCatBuffA(_Inout_updates_(cchDestBuffSize) PSTR pszDest, _In_ PCSTR pszSrc, int cchDestBuffSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     ChrCmpIA(WORD w1, WORD w2);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     ChrCmpIW(WCHAR w1, WCHAR w2);
  
 -LWSTDAPI_(int)      wvnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, _In_ va_list arglist);
 -LWSTDAPI_(int)      wvnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, _In_ va_list arglist);
 -LWSTDAPIV_(int)     wnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, ...);
 -LWSTDAPIV_(int)     wnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, ...);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      wvnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, _In_ va_list arglist);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      wvnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, _In_ va_list arglist);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPIV_(int)     wnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, ...);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPIV_(int)     wnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, ...);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      wvnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, _In_ va_list arglist);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      wvnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, _In_ va_list arglist);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPIV_(int)     wnsprintfA(_Out_writes_(cchDest) PSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCSTR pszFmt, ...);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPIV_(int)     wnsprintfW(_Out_writes_(cchDest) PWSTR pszDest, _In_ int cchDest, _In_ _Printf_format_string_ PCWSTR pszFmt, ...);
  
  #define StrIntlEqNA( s1, s2, nChar) StrIsIntlEqualA( TRUE, s1, s2, nChar)
  #define StrIntlEqNW( s1, s2, nChar) StrIsIntlEqualW( TRUE, s1, s2, nChar)
@@ -139,8 +139,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI StrRetToStrA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPSTR *ppsz);
 -LWSTDAPI StrRetToStrW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPWSTR *ppsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToStrA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPSTR *ppsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToStrW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPWSTR *ppsz);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToStrA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPSTR *ppsz);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToStrW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Outptr_ LPWSTR *ppsz);
  #ifdef UNICODE
  #define StrRetToStr  StrRetToStrW
  #else
@@ -148,8 +148,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI StrRetToBufA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
 -LWSTDAPI StrRetToBufW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToBufA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToBufW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToBufA(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI StrRetToBufW(_Inout_ STRRET *pstr, _In_opt_ PCUITEMID_CHILD pidl, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
  #ifdef UNICODE
  #define StrRetToBuf  StrRetToBufW
  #else
@@ -159,8 +159,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI SHStrDupA(_In_ LPCSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
 -LWSTDAPI SHStrDupW(_In_ LPCWSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI SHStrDupA(_In_ LPCSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI SHStrDupW(_In_ LPCWSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI SHStrDupA(_In_ LPCSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI SHStrDupW(_In_ LPCWSTR psz, _Outptr_result_nullonfailure_ LPWSTR *ppwsz);
  #ifdef UNICODE
  #define SHStrDup  SHStrDupW
  #else
@@ -192,8 +192,8 @@ index f78b0cef08..0809f1af2a 100644
  #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
 -LWSTDAPI_(BOOL) IsCharSpaceA(CHAR wch);
 -LWSTDAPI_(BOOL) IsCharSpaceW(WCHAR wch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) IsCharSpaceA(CHAR wch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) IsCharSpaceW(WCHAR wch);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) IsCharSpaceA(CHAR wch);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) IsCharSpaceW(WCHAR wch);
  #ifdef UNICODE
  #define IsCharSpace  IsCharSpaceW
  #else
@@ -202,8 +202,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(int)  StrCmpCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
 -LWSTDAPI_(int)  StrCmpCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
  #ifdef UNICODE
  #define StrCmpC  StrCmpCW
  #else
@@ -212,8 +212,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(int)  StrCmpICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
 -LWSTDAPI_(int)  StrCmpICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2);
  #ifdef UNICODE
  #define StrCmpIC  StrCmpICW
  #else
@@ -222,10 +222,10 @@ index f78b0cef08..0809f1af2a 100644
  
  // StrCmp*C* - Compare strings using C runtime collation rules.
 -LWSTDAPI_(int)  StrCmpNCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNCA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
  // StrCmp*C* - Compare strings using C runtime collation rules.
 -LWSTDAPI_(int)  StrCmpNCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNCW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
  #ifdef UNICODE
  #define StrCmpNC  StrCmpNCW
  #else
@@ -233,8 +233,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(int)  StrCmpNICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
 -LWSTDAPI_(int)  StrCmpNICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNICA(_In_ LPCSTR pszStr1, _In_ LPCSTR pszStr2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)  StrCmpNICW(_In_ LPCWSTR pszStr1, _In_ LPCWSTR pszStr2, int nChar);
  #ifdef UNICODE
  #define StrCmpNIC  StrCmpNICW
  #else
@@ -244,8 +244,8 @@ index f78b0cef08..0809f1af2a 100644
  //
 -LWSTDAPI_(BOOL)     IntlStrEqWorkerA(BOOL fCaseSens, _In_reads_(nChar) LPCSTR lpString1, _In_reads_(nChar) LPCSTR lpString2, int nChar);
 -LWSTDAPI_(BOOL)     IntlStrEqWorkerW(BOOL fCaseSens, _In_reads_(nChar) LPCWSTR lpString1, _In_reads_(nChar) LPCWSTR lpString2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     IntlStrEqWorkerA(BOOL fCaseSens, _In_reads_(nChar) LPCSTR lpString1, _In_reads_(nChar) LPCSTR lpString2, int nChar);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     IntlStrEqWorkerW(BOOL fCaseSens, _In_reads_(nChar) LPCWSTR lpString1, _In_reads_(nChar) LPCWSTR lpString2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     IntlStrEqWorkerA(BOOL fCaseSens, _In_reads_(nChar) LPCSTR lpString1, _In_reads_(nChar) LPCSTR lpString2, int nChar);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     IntlStrEqWorkerW(BOOL fCaseSens, _In_reads_(nChar) LPCWSTR lpString1, _In_reads_(nChar) LPCWSTR lpString2, int nChar);
  
  #define IntlStrEqNA( s1, s2, nChar) IntlStrEqWorkerA( TRUE, s1, s2, nChar)
  #define IntlStrEqNW( s1, s2, nChar) IntlStrEqWorkerW( TRUE, s1, s2, nChar)
@@ -255,8 +255,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(LPSTR)  PathAddBackslashA(_Inout_updates_(MAX_PATH) LPSTR pszPath);
 -LWSTDAPI_(LPWSTR)  PathAddBackslashW(_Inout_updates_(MAX_PATH) LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathAddBackslashA(_Inout_updates_(MAX_PATH) LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathAddBackslashW(_Inout_updates_(MAX_PATH) LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathAddBackslashA(_Inout_updates_(MAX_PATH) LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathAddBackslashW(_Inout_updates_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define PathAddBackslash  PathAddBackslashW
  #else
@@ -264,8 +264,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathAddExtensionA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_opt_ LPCSTR pszExt);
 -LWSTDAPI_(BOOL)     PathAddExtensionW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ LPCWSTR pszExt);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAddExtensionA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_opt_ LPCSTR pszExt);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAddExtensionW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ LPCWSTR pszExt);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAddExtensionA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_opt_ LPCSTR pszExt);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAddExtensionW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ LPCWSTR pszExt);
  #ifdef UNICODE
  #define PathAddExtension  PathAddExtensionW
  #else
@@ -275,10 +275,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathAppendW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszMore);
 -LWSTDAPI_(LPSTR)  PathBuildRootA(_Out_writes_(4) LPSTR pszRoot, int iDrive);
 -LWSTDAPI_(LPWSTR)  PathBuildRootW(_Out_writes_(4) LPWSTR pszRoot, int iDrive);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAppendA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszMore);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAppendW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszMore);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathBuildRootA(_Out_writes_(4) LPSTR pszRoot, int iDrive);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathBuildRootW(_Out_writes_(4) LPWSTR pszRoot, int iDrive);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAppendA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszMore);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathAppendW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszMore);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathBuildRootA(_Out_writes_(4) LPSTR pszRoot, int iDrive);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathBuildRootW(_Out_writes_(4) LPWSTR pszRoot, int iDrive);
  #ifdef UNICODE
  #define PathBuildRoot  PathBuildRootW
  #else
@@ -288,10 +288,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathCanonicalizeW(_Out_writes_(MAX_PATH) LPWSTR pszBuf, _In_ LPCWSTR pszPath);
 -LWSTDAPI_(LPSTR)  PathCombineA(_Out_writes_(MAX_PATH) LPSTR pszDest, _In_opt_ LPCSTR pszDir, _In_opt_ LPCSTR pszFile);
 -LWSTDAPI_(LPWSTR)  PathCombineW(_Out_writes_(MAX_PATH) LPWSTR pszDest, _In_opt_ LPCWSTR pszDir, _In_opt_ LPCWSTR pszFile);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathCanonicalizeA(_Out_writes_(MAX_PATH) LPSTR pszBuf, _In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathCanonicalizeW(_Out_writes_(MAX_PATH) LPWSTR pszBuf, _In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathCombineA(_Out_writes_(MAX_PATH) LPSTR pszDest, _In_opt_ LPCSTR pszDir, _In_opt_ LPCSTR pszFile);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathCombineW(_Out_writes_(MAX_PATH) LPWSTR pszDest, _In_opt_ LPCWSTR pszDir, _In_opt_ LPCWSTR pszFile);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathCanonicalizeA(_Out_writes_(MAX_PATH) LPSTR pszBuf, _In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathCanonicalizeW(_Out_writes_(MAX_PATH) LPWSTR pszBuf, _In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathCombineA(_Out_writes_(MAX_PATH) LPSTR pszDest, _In_opt_ LPCSTR pszDir, _In_opt_ LPCSTR pszFile);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathCombineW(_Out_writes_(MAX_PATH) LPWSTR pszDest, _In_opt_ LPCWSTR pszDir, _In_opt_ LPCWSTR pszFile);
  #ifdef UNICODE
  #define PathCombine  PathCombineW
  #else
@@ -305,14 +305,14 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(int)      PathCommonPrefixW(_In_ LPCWSTR pszFile1, _In_ LPCWSTR pszFile2, _Out_writes_opt_(MAX_PATH) LPWSTR achPath);
 -LWSTDAPI_(BOOL)     PathFileExistsA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathFileExistsW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathA(_In_opt_ HDC hDC, _Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ UINT dx);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathW(_In_opt_ HDC hDC, _Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ UINT dx);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathExA(_Out_writes_(cchMax) LPSTR pszOut, _In_ LPCSTR pszSrc, _In_ UINT cchMax, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathExW(_Out_writes_(cchMax) LPWSTR pszOut, _In_ LPCWSTR pszSrc, _In_ UINT cchMax, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathCommonPrefixA(_In_ LPCSTR pszFile1, _In_ LPCSTR pszFile2, _Out_writes_opt_(MAX_PATH) LPSTR achPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathCommonPrefixW(_In_ LPCWSTR pszFile1, _In_ LPCWSTR pszFile2, _Out_writes_opt_(MAX_PATH) LPWSTR achPath);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathFileExistsA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathFileExistsW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathA(_In_opt_ HDC hDC, _Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ UINT dx);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathW(_In_opt_ HDC hDC, _Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ UINT dx);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathExA(_Out_writes_(cchMax) LPSTR pszOut, _In_ LPCSTR pszSrc, _In_ UINT cchMax, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathCompactPathExW(_Out_writes_(cchMax) LPWSTR pszOut, _In_ LPCWSTR pszSrc, _In_ UINT cchMax, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathCommonPrefixA(_In_ LPCSTR pszFile1, _In_ LPCSTR pszFile2, _Out_writes_opt_(MAX_PATH) LPSTR achPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathCommonPrefixW(_In_ LPCWSTR pszFile1, _In_ LPCWSTR pszFile2, _Out_writes_opt_(MAX_PATH) LPWSTR achPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathFileExistsA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ LWSTDAPI_(BOOL)     PathFileExistsW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathFileExists  PathFileExistsW
  #else
@@ -324,10 +324,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathFindOnPathW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ PZPCWSTR ppszOtherDirs);
 -LWSTDAPI_(LPCSTR) PathFindSuffixArrayA(_In_ LPCSTR pszPath, _In_reads_(iArraySize) const LPCSTR *apszSuffix, _In_ int iArraySize);
 -LWSTDAPI_(LPCWSTR) PathFindSuffixArrayW(_In_ LPCWSTR pszPath, _In_reads_(iArraySize) const LPCWSTR *apszSuffix, _In_ int iArraySize);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathFindOnPathA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_opt_ PZPCSTR ppszOtherDirs);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathFindOnPathW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ PZPCWSTR ppszOtherDirs);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR) PathFindSuffixArrayA(_In_ LPCSTR pszPath, _In_reads_(iArraySize) const LPCSTR *apszSuffix, _In_ int iArraySize);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR) PathFindSuffixArrayW(_In_ LPCWSTR pszPath, _In_reads_(iArraySize) const LPCWSTR *apszSuffix, _In_ int iArraySize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathFindOnPathA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_opt_ PZPCSTR ppszOtherDirs);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathFindOnPathW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_opt_ PZPCWSTR ppszOtherDirs);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR) PathFindSuffixArrayA(_In_ LPCSTR pszPath, _In_reads_(iArraySize) const LPCSTR *apszSuffix, _In_ int iArraySize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR) PathFindSuffixArrayW(_In_ LPCWSTR pszPath, _In_reads_(iArraySize) const LPCWSTR *apszSuffix, _In_ int iArraySize);
  #ifdef UNICODE
  #define PathFindSuffixArray  PathFindSuffixArrayW
  #else
@@ -337,8 +337,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif
 -LWSTDAPI_(BOOL)     PathIsLFNFileSpecA(_In_ LPCSTR pszName);
 -LWSTDAPI_(BOOL)     PathIsLFNFileSpecW(_In_ LPCWSTR pszName);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsLFNFileSpecA(_In_ LPCSTR pszName);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsLFNFileSpecW(_In_ LPCWSTR pszName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsLFNFileSpecA(_In_ LPCSTR pszName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsLFNFileSpecW(_In_ LPCWSTR pszName);
  #ifdef UNICODE
  #define PathIsLFNFileSpec  PathIsLFNFileSpecW
  #else
@@ -346,8 +346,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(UINT)     PathGetCharTypeA(_In_ UCHAR ch);
 -LWSTDAPI_(UINT)     PathGetCharTypeW(_In_ WCHAR ch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(UINT)     PathGetCharTypeA(_In_ UCHAR ch);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(UINT)     PathGetCharTypeW(_In_ WCHAR ch);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(UINT)     PathGetCharTypeA(_In_ UCHAR ch);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(UINT)     PathGetCharTypeW(_In_ WCHAR ch);
  
  // Return flags for PathGetCharType
  #define GCT_INVALID             0x0000
@@ -357,8 +357,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(int)      PathGetDriveNumberA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(int)      PathGetDriveNumberW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathGetDriveNumberA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathGetDriveNumberW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathGetDriveNumberA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathGetDriveNumberW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathGetDriveNumber  PathGetDriveNumberW
  #else
@@ -366,8 +366,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsDirectoryA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsDirectoryW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsDirectory  PathIsDirectoryW
  #else
@@ -375,8 +375,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsDirectoryEmptyA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsDirectoryEmptyW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryEmptyA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryEmptyW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryEmptyA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsDirectoryEmptyW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsDirectoryEmpty  PathIsDirectoryEmptyW
  #else
@@ -384,8 +384,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsFileSpecA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsFileSpecW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsFileSpecA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsFileSpecW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsFileSpecA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsFileSpecW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsFileSpec  PathIsFileSpecW
  #else
@@ -393,8 +393,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsPrefixA(_In_ LPCSTR pszPrefix, _In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsPrefixW(_In_ LPCWSTR pszPrefix, _In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsPrefixA(_In_ LPCSTR pszPrefix, _In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsPrefixW(_In_ LPCWSTR pszPrefix, _In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsPrefixA(_In_ LPCSTR pszPrefix, _In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsPrefixW(_In_ LPCWSTR pszPrefix, _In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsPrefix  PathIsPrefixW
  #else
@@ -402,8 +402,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsRelativeA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsRelativeW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRelativeA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRelativeW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRelativeA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRelativeW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsRelative  PathIsRelativeW
  #else
@@ -411,8 +411,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsRootA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsRootW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRootA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRootW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRootA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsRootW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsRoot  PathIsRootW
  #else
@@ -420,8 +420,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsSameRootA(_In_ LPCSTR pszPath1, _In_ LPCSTR pszPath2);
 -LWSTDAPI_(BOOL)     PathIsSameRootW(_In_ LPCWSTR pszPath1, _In_ LPCWSTR pszPath2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSameRootA(_In_ LPCSTR pszPath1, _In_ LPCSTR pszPath2);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSameRootW(_In_ LPCWSTR pszPath1, _In_ LPCWSTR pszPath2);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSameRootA(_In_ LPCSTR pszPath1, _In_ LPCSTR pszPath2);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSameRootW(_In_ LPCWSTR pszPath1, _In_ LPCWSTR pszPath2);
  #ifdef UNICODE
  #define PathIsSameRoot  PathIsSameRootW
  #else
@@ -429,8 +429,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsUNCA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsUNCW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsUNC  PathIsUNCW
  #else
@@ -438,8 +438,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsNetworkPathA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsNetworkPathW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsNetworkPathA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsNetworkPathW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsNetworkPathA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsNetworkPathW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsNetworkPath  PathIsNetworkPathW
  #else
@@ -447,8 +447,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsUNCServerA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsUNCServerW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsUNCServer  PathIsUNCServerW
  #else
@@ -456,8 +456,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsUNCServerShareA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsUNCServerShareW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerShareA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerShareW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerShareA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsUNCServerShareW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsUNCServerShare  PathIsUNCServerShareW
  #else
@@ -467,10 +467,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathIsContentTypeW(_In_ LPCWSTR pszPath, _In_ LPCWSTR pszContentType);
 -LWSTDAPI_(BOOL)     PathIsURLA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathIsURLW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsContentTypeA(_In_ LPCSTR pszPath, _In_ LPCSTR pszContentType);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsContentTypeW(_In_ LPCWSTR pszPath, _In_ LPCWSTR pszContentType);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsURLA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsURLW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsContentTypeA(_In_ LPCSTR pszPath, _In_ LPCSTR pszContentType);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsContentTypeW(_In_ LPCWSTR pszPath, _In_ LPCWSTR pszContentType);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsURLA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsURLW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathIsURL  PathIsURLW
  #else
@@ -480,10 +480,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathMakePrettyW(_Inout_ LPWSTR pszPath);
 -LWSTDAPI_(BOOL)     PathMatchSpecA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec);
 -LWSTDAPI_(BOOL)     PathMatchSpecW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakePrettyA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakePrettyW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMatchSpecA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMatchSpecW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakePrettyA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakePrettyW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMatchSpecA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMatchSpecW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec);
  
  #if (_WIN32_IE >= _WIN32_IE_IE70)
  // Flags for PathMatchSpecEx
@@ -493,8 +493,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI PathMatchSpecExA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec, _In_ DWORD dwFlags);
 -LWSTDAPI PathMatchSpecExW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_WindowsVista_ LWSTDAPI PathMatchSpecExA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_WindowsVista_ LWSTDAPI PathMatchSpecExW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ LWSTDAPI PathMatchSpecExA(_In_ LPCSTR pszFile, _In_ LPCSTR pszSpec, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ LWSTDAPI PathMatchSpecExW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec, _In_ DWORD dwFlags);
  #endif // _WIN32_IE_IE70
  
 -LWSTDAPI_(int)      PathParseIconLocationA(_Inout_ LPSTR pszIconFile);
@@ -507,16 +507,16 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(void)     PathRemoveArgsW(_Inout_ LPWSTR pszPath);
 -LWSTDAPI_(LPSTR)  PathRemoveBackslashA(_Inout_ LPSTR pszPath);
 -LWSTDAPI_(LPWSTR)  PathRemoveBackslashW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathParseIconLocationA(_Inout_ LPSTR pszIconFile);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathParseIconLocationW(_Inout_ LPWSTR pszIconFile);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathQuoteSpacesA(_Inout_updates_(MAX_PATH) LPSTR lpsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathQuoteSpacesW(_Inout_updates_(MAX_PATH) LPWSTR lpsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRelativePathToA(_Out_writes_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszFrom, _In_ DWORD dwAttrFrom, _In_ LPCSTR pszTo, _In_ DWORD dwAttrTo);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRelativePathToW(_Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszFrom, _In_ DWORD dwAttrFrom, _In_ LPCWSTR pszTo, _In_ DWORD dwAttrTo);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveArgsA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveArgsW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathRemoveBackslashA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathRemoveBackslashW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathParseIconLocationA(_Inout_ LPSTR pszIconFile);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      PathParseIconLocationW(_Inout_ LPWSTR pszIconFile);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathQuoteSpacesA(_Inout_updates_(MAX_PATH) LPSTR lpsz);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathQuoteSpacesW(_Inout_updates_(MAX_PATH) LPWSTR lpsz);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRelativePathToA(_Out_writes_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszFrom, _In_ DWORD dwAttrFrom, _In_ LPCSTR pszTo, _In_ DWORD dwAttrTo);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRelativePathToW(_Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszFrom, _In_ DWORD dwAttrFrom, _In_ LPCWSTR pszTo, _In_ DWORD dwAttrTo);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveArgsA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveArgsW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathRemoveBackslashA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathRemoveBackslashW(_Inout_ LPWSTR pszPath);
  #ifdef UNICODE
  #define PathRemoveBackslash  PathRemoveBackslashW
  #else
@@ -534,18 +534,18 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathSearchAndQualifyW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
 -LWSTDAPI_(void)     PathSetDlgItemPathA(_In_ HWND hDlg, int id, LPCSTR pszPath);
 -LWSTDAPI_(void)     PathSetDlgItemPathW(_In_ HWND hDlg, int id, LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveBlanksA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveBlanksW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveExtensionA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveExtensionW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRemoveFileSpecA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRemoveFileSpecW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRenameExtensionA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszExt);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRenameExtensionW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszExt);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathSearchAndQualifyA(_In_ LPCSTR pszPath, _Out_writes_(cchBuf) LPSTR pszBuf, _In_ UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathSearchAndQualifyW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathA(_In_ HWND hDlg, int id, LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathW(_In_ HWND hDlg, int id, LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveBlanksA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveBlanksW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveExtensionA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathRemoveExtensionW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRemoveFileSpecA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRemoveFileSpecW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRenameExtensionA(_Inout_updates_(MAX_PATH) LPSTR pszPath, _In_ LPCSTR pszExt);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathRenameExtensionW(_Inout_updates_(MAX_PATH) LPWSTR pszPath, _In_ LPCWSTR pszExt);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathSearchAndQualifyA(_In_ LPCSTR pszPath, _Out_writes_(cchBuf) LPSTR pszBuf, _In_ UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathSearchAndQualifyW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathA(_In_ HWND hDlg, int id, LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathW(_In_ HWND hDlg, int id, LPCWSTR pszPath);
  #ifdef USE_STRICT_CONST
  LWSTDAPI_(LPCSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
  LWSTDAPI_(LPCWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
@@ -555,8 +555,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif
 -LWSTDAPI_(void)     PathStripPathA(_Inout_ LPSTR pszPath);
 -LWSTDAPI_(void)     PathStripPathW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathStripPathA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathStripPathW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathStripPathA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathStripPathW(_Inout_ LPWSTR pszPath);
  #ifdef UNICODE
  #define PathStripPath  PathStripPathW
  #else
@@ -564,8 +564,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathStripToRootA(_Inout_ LPSTR pszPath);
 -LWSTDAPI_(BOOL)     PathStripToRootW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathStripToRootA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathStripToRootW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathStripToRootA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathStripToRootW(_Inout_ LPWSTR pszPath);
  #ifdef UNICODE
  #define PathStripToRoot  PathStripToRootW
  #else
@@ -575,10 +575,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)     PathUnquoteSpacesW(_Inout_ LPWSTR lpsz);
 -LWSTDAPI_(BOOL)     PathMakeSystemFolderA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathMakeSystemFolderW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnquoteSpacesA(_Inout_ LPSTR lpsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnquoteSpacesW(_Inout_ LPWSTR lpsz);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakeSystemFolderA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakeSystemFolderW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnquoteSpacesA(_Inout_ LPSTR lpsz);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnquoteSpacesW(_Inout_ LPWSTR lpsz);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakeSystemFolderA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathMakeSystemFolderW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathMakeSystemFolder  PathMakeSystemFolderW
  #else
@@ -586,8 +586,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathUnmakeSystemFolderA(_In_ LPCSTR pszPath);
 -LWSTDAPI_(BOOL)     PathUnmakeSystemFolderW(_In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnmakeSystemFolderA(_In_ LPCSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnmakeSystemFolderW(_In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnmakeSystemFolderA(_In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnmakeSystemFolderW(_In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define PathUnmakeSystemFolder  PathUnmakeSystemFolderW
  #else
@@ -595,8 +595,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathIsSystemFolderA(_In_opt_ LPCSTR pszPath, _In_ DWORD dwAttrb);
 -LWSTDAPI_(BOOL)     PathIsSystemFolderW(_In_opt_ LPCWSTR pszPath, _In_ DWORD dwAttrb);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSystemFolderA(_In_opt_ LPCSTR pszPath, _In_ DWORD dwAttrb);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSystemFolderW(_In_opt_ LPCWSTR pszPath, _In_ DWORD dwAttrb);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSystemFolderA(_In_opt_ LPCSTR pszPath, _In_ DWORD dwAttrb);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathIsSystemFolderW(_In_opt_ LPCWSTR pszPath, _In_ DWORD dwAttrb);
  #ifdef UNICODE
  #define PathIsSystemFolder  PathIsSystemFolderW
  #else
@@ -604,8 +604,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(void)     PathUndecorateA(_Inout_ LPSTR pszPath);
 -LWSTDAPI_(void)     PathUndecorateW(_Inout_ LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathUndecorateA(_Inout_ LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathUndecorateW(_Inout_ LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathUndecorateA(_Inout_ LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathUndecorateW(_Inout_ LPWSTR pszPath);
  #ifdef UNICODE
  #define PathUndecorate  PathUndecorateW
  #else
@@ -613,8 +613,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(BOOL)     PathUnExpandEnvStringsA(_In_ LPCSTR pszPath, _Out_writes_(cchBuf) LPSTR pszBuf, _In_ UINT cchBuf);
 -LWSTDAPI_(BOOL)     PathUnExpandEnvStringsW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnExpandEnvStringsA(_In_ LPCSTR pszPath, _Out_writes_(cchBuf) LPSTR pszBuf, _In_ UINT cchBuf);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnExpandEnvStringsW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnExpandEnvStringsA(_In_ LPCSTR pszPath, _Out_writes_(cchBuf) LPSTR pszBuf, _In_ UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)     PathUnExpandEnvStringsW(_In_ LPCWSTR pszPath, _Out_writes_(cchBuf) LPWSTR pszBuf, _In_ UINT cchBuf);
  #ifdef UNICODE
  #define PathUnExpandEnvStrings  PathUnExpandEnvStringsW
  #else
@@ -632,16 +632,16 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(BOOL)         UrlIsOpaqueW(_In_ PCWSTR pszURL);
 -LWSTDAPI_(BOOL)         UrlIsNoHistoryA(_In_ PCSTR pszURL);
 -LWSTDAPI_(BOOL)         UrlIsNoHistoryW(_In_ PCWSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)          UrlCompareA(_In_ PCSTR psz1, _In_ PCSTR psz2, BOOL fIgnoreSlash);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)          UrlCompareW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, BOOL fIgnoreSlash);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCombineA(_In_ PCSTR pszBase, _In_ PCSTR pszRelative, _Out_writes_to_opt_(*pcchCombined, *pcchCombined) PSTR pszCombined, _Inout_ DWORD *pcchCombined, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCombineW(_In_ PCWSTR pszBase, _In_ PCWSTR pszRelative, _Out_writes_to_opt_(*pcchCombined, *pcchCombined) PWSTR pszCombined, _Inout_ DWORD *pcchCombined, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCanonicalizeA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchCanonicalized, *pcchCanonicalized) PSTR pszCanonicalized, _Inout_ DWORD *pcchCanonicalized, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCanonicalizeW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchCanonicalized, *pcchCanonicalized) PWSTR pszCanonicalized, _Inout_ DWORD *pcchCanonicalized, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsOpaqueA(_In_ PCSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsOpaqueW(_In_ PCWSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsNoHistoryA(_In_ PCSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsNoHistoryW(_In_ PCWSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)          UrlCompareA(_In_ PCSTR psz1, _In_ PCSTR psz2, BOOL fIgnoreSlash);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)          UrlCompareW(_In_ PCWSTR psz1, _In_ PCWSTR psz2, BOOL fIgnoreSlash);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCombineA(_In_ PCSTR pszBase, _In_ PCSTR pszRelative, _Out_writes_to_opt_(*pcchCombined, *pcchCombined) PSTR pszCombined, _Inout_ DWORD *pcchCombined, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCombineW(_In_ PCWSTR pszBase, _In_ PCWSTR pszRelative, _Out_writes_to_opt_(*pcchCombined, *pcchCombined) PWSTR pszCombined, _Inout_ DWORD *pcchCombined, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCanonicalizeA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchCanonicalized, *pcchCanonicalized) PSTR pszCanonicalized, _Inout_ DWORD *pcchCanonicalized, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCanonicalizeW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchCanonicalized, *pcchCanonicalized) PWSTR pszCanonicalized, _Inout_ DWORD *pcchCanonicalized, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsOpaqueA(_In_ PCSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsOpaqueW(_In_ PCWSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsNoHistoryA(_In_ PCSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsNoHistoryW(_In_ PCWSTR pszURL);
  #define                 UrlIsFileUrlA(pszURL) UrlIsA(pszURL, URLIS_FILEURL)
  #define                 UrlIsFileUrlW(pszURL) UrlIsW(pszURL, URLIS_FILEURL)
 -LWSTDAPI_(BOOL)         UrlIsA(_In_ PCSTR pszUrl, URLIS UrlIs);
@@ -656,18 +656,18 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI                UrlCreateFromPathW(_In_ PCWSTR pszPath, _Out_writes_to_(*pcchUrl, *pcchUrl) PWSTR pszUrl, _Inout_ DWORD *pcchUrl, DWORD dwFlags);
 -LWSTDAPI                PathCreateFromUrlA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
 -LWSTDAPI                PathCreateFromUrlW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PWSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsA(_In_ PCSTR pszUrl, URLIS UrlIs);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsW(_In_ PCWSTR pszUrl, URLIS UrlIs);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)       UrlGetLocationA(_In_ PCSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)      UrlGetLocationW(_In_ PCWSTR pszURL);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlUnescapeA(_Inout_ PSTR pszUrl, _Out_writes_to_opt_(*pcchUnescaped, *pcchUnescaped) PSTR pszUnescaped, _Inout_opt_ DWORD *pcchUnescaped, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlUnescapeW(_Inout_ PWSTR pszUrl, _Out_writes_to_opt_(*pcchUnescaped, *pcchUnescaped) PWSTR pszUnescaped, _Inout_opt_ DWORD *pcchUnescaped, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlEscapeA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchEscaped, *pcchEscaped) PSTR pszEscaped, _Inout_ DWORD *pcchEscaped, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlEscapeW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchEscaped, *pcchEscaped) PWSTR pszEscaped, _Inout_ DWORD *pcchEscaped, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCreateFromPathA(_In_ PCSTR pszPath, _Out_writes_to_(*pcchUrl, *pcchUrl) PSTR pszUrl, _Inout_ DWORD *pcchUrl, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCreateFromPathW(_In_ PCWSTR pszPath, _Out_writes_to_(*pcchUrl, *pcchUrl) PWSTR pszUrl, _Inout_ DWORD *pcchUrl, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                PathCreateFromUrlA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                PathCreateFromUrlW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PWSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsA(_In_ PCSTR pszUrl, URLIS UrlIs);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL)         UrlIsW(_In_ PCWSTR pszUrl, URLIS UrlIs);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)       UrlGetLocationA(_In_ PCSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)      UrlGetLocationW(_In_ PCWSTR pszURL);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlUnescapeA(_Inout_ PSTR pszUrl, _Out_writes_to_opt_(*pcchUnescaped, *pcchUnescaped) PSTR pszUnescaped, _Inout_opt_ DWORD *pcchUnescaped, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlUnescapeW(_Inout_ PWSTR pszUrl, _Out_writes_to_opt_(*pcchUnescaped, *pcchUnescaped) PWSTR pszUnescaped, _Inout_opt_ DWORD *pcchUnescaped, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlEscapeA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchEscaped, *pcchEscaped) PSTR pszEscaped, _Inout_ DWORD *pcchEscaped, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlEscapeW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchEscaped, *pcchEscaped) PWSTR pszEscaped, _Inout_ DWORD *pcchEscaped, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCreateFromPathA(_In_ PCSTR pszPath, _Out_writes_to_(*pcchUrl, *pcchUrl) PSTR pszUrl, _Inout_ DWORD *pcchUrl, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlCreateFromPathW(_In_ PCWSTR pszPath, _Out_writes_to_(*pcchUrl, *pcchUrl) PWSTR pszUrl, _Inout_ DWORD *pcchUrl, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                PathCreateFromUrlA(_In_ PCSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                PathCreateFromUrlW(_In_ PCWSTR pszUrl, _Out_writes_to_(*pcchPath, *pcchPath) PWSTR pszPath, _Inout_ DWORD *pcchPath, DWORD dwFlags);
  #if (_WIN32_IE >= _WIN32_IE_IE70)
 -LWSTDAPI                PathCreateFromUrlAlloc(_In_ PCWSTR pszIn, _Outptr_ PWSTR *ppszOut, DWORD dwFlags);
 +_Windows_SupportedOS_WindowsVista_ LWSTDAPI                PathCreateFromUrlAlloc(_In_ PCWSTR pszIn, _Outptr_ PWSTR *ppszOut, DWORD dwFlags);
@@ -680,25 +680,43 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI                UrlApplySchemeW(_In_ PCWSTR pszIn, _Out_writes_(*pcchOut) PWSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwFlags);
 -LWSTDAPI                HashData(_In_reads_bytes_(cbData) BYTE *pbData, DWORD cbData, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
 -LWSTDAPI                UrlFixupW(_In_ PCWSTR pcszUrl, _Out_writes_(cchMax) PWSTR pszTranslatedUrl, DWORD cchMax);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlHashA(_In_ PCSTR pszUrl, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlHashW(_In_ PCWSTR pszUrl, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlGetPartW(_In_ PCWSTR pszIn, _Out_writes_(*pcchOut) PWSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwPart, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlGetPartA(_In_ PCSTR pszIn, _Out_writes_(*pcchOut) PSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwPart, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlApplySchemeA(_In_ PCSTR pszIn, _Out_writes_(*pcchOut) PSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlApplySchemeW(_In_ PCWSTR pszIn, _Out_writes_(*pcchOut) PWSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlHashA(_In_ PCSTR pszUrl, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlHashW(_In_ PCWSTR pszUrl, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlGetPartW(_In_ PCWSTR pszIn, _Out_writes_(*pcchOut) PWSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwPart, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlGetPartA(_In_ PCSTR pszIn, _Out_writes_(*pcchOut) PSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwPart, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlApplySchemeA(_In_ PCSTR pszIn, _Out_writes_(*pcchOut) PSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI                UrlApplySchemeW(_In_ PCWSTR pszIn, _Out_writes_(*pcchOut) PWSTR pszOut, _Inout_ DWORD *pcchOut, DWORD dwFlags);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI                HashData(_In_reads_bytes_(cbData) BYTE *pbData, DWORD cbData, _Out_writes_bytes_(cbHash) BYTE *pbHash, DWORD cbHash);
 +_Windows_SupportedOS_WindowsXP_ LWSTDAPI                UrlFixupW(_In_ PCWSTR pcszUrl, _Out_writes_(cchMax) PWSTR pszTranslatedUrl, DWORD cchMax);
  
  #ifdef UNICODE
  #define UrlCompare              UrlCompareW
+@@ -1088,7 +1089,7 @@ LWSTDAPI                UrlFixupW(_In_ PCWSTR pcszUrl, _Out_writes_(cchMax) PWST
+ #define UrlUnescapeInPlace(pszUrl, dwFlags)                     UrlUnescape(pszUrl, NULL, NULL, dwFlags | URL_UNESCAPE_INPLACE)
+ 
+ 
+-typedef struct tagPARSEDURLA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagPARSEDURLA {
+     DWORD     cbSize;
+     // Pointers into the buffer that was provided to ParseURL
+     LPCSTR    pszProtocol;
+@@ -1097,7 +1098,7 @@ typedef struct tagPARSEDURLA {
+     UINT      cchSuffix;
+     UINT      nScheme;            // One of URL_SCHEME_*
+     } PARSEDURLA, * PPARSEDURLA;
+-typedef struct tagPARSEDURLW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagPARSEDURLW {
+     DWORD     cbSize;
+     // Pointers into the buffer that was provided to ParseURL
+     LPCWSTR   pszProtocol;
 @@ -1114,8 +1115,8 @@ typedef PARSEDURLA PARSEDURL;
  typedef PPARSEDURLA PPARSEDURL;
  #endif // UNICODE
  
 -LWSTDAPI            ParseURLA(_In_ LPCSTR pcszURL, _Inout_ PARSEDURLA * ppu);
 -LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
-+_Windows_SupportedOS_WindowsVista_ LWSTDAPI            ParseURLA(_In_ LPCSTR pcszURL, _Inout_ PARSEDURLA * ppu);
-+_Windows_SupportedOS_WindowsVista_ LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ LWSTDAPI            ParseURLA(_In_ LPCSTR pcszURL, _Inout_ PARSEDURLA * ppu);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
  #ifdef UNICODE
  #define ParseURL  ParseURLW
  #else
@@ -708,8 +726,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
 -LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
  #ifdef UNICODE
  #define SHDeleteEmptyKey  SHDeleteEmptyKeyW
  #else
@@ -717,8 +735,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(LSTATUS)  SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
 -LWSTDAPI_(LSTATUS)  SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)  SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
  #ifdef UNICODE
  #define SHDeleteKey  SHDeleteKeyW
  #else
@@ -733,15 +751,15 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(LSTATUS)    SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
 -LWSTDAPI_(LSTATUS)    SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
  #ifdef UNICODE
  #define SHDeleteValue  SHDeleteValueW
  #else
  #define SHDeleteValue  SHDeleteValueA
  #endif // !UNICODE
 -LWSTDAPI_(LSTATUS)    SHGetValueA(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHGetValueA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHGetValueA(
      _In_                       HKEY hkey,
      _In_opt_                   LPCSTR  pszSubKey,
      _In_opt_                   LPCSTR  pszValue,
@@ -749,7 +767,7 @@ index f78b0cef08..0809f1af2a 100644
      _Out_writes_bytes_opt_(*pcbData) void     *pvData,
      _Inout_opt_                DWORD    *pcbData);
 -LWSTDAPI_(LSTATUS)    SHGetValueW(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHGetValueW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHGetValueW(
      _In_                       HKEY hkey,
      _In_opt_                   LPCWSTR  pszSubKey,
      _In_opt_                   LPCWSTR  pszValue,
@@ -758,10 +776,10 @@ index f78b0cef08..0809f1af2a 100644
  #define SHGetValue  SHGetValueA
  #endif // !UNICODE
 -LWSTDAPI_(LSTATUS)    SHSetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ DWORD dwType,
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LSTATUS)    SHSetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ DWORD dwType,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LSTATUS)    SHSetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ DWORD dwType,
      _In_reads_bytes_opt_(cbData) LPCVOID pvData, _In_ DWORD cbData);
 -LWSTDAPI_(LSTATUS)    SHSetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ DWORD dwType,
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LSTATUS)    SHSetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ DWORD dwType,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(LSTATUS)    SHSetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ DWORD dwType,
      _In_reads_bytes_opt_(cbData) LPCVOID pvData, _In_ DWORD cbData);
  #ifdef UNICODE
  #define SHSetValue  SHSetValueW
@@ -770,11 +788,11 @@ index f78b0cef08..0809f1af2a 100644
  //      BOOL bExists = ERROR_SUCCESS == SHRegGetValue(hkey, NULL, TEXT("MyValue"), SRRF_RT_ANY, NULL, NULL, NULL)
  
 -LWSTDAPI_(LSTATUS) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
      _In_ SRRF srrfFlags, _Out_opt_ DWORD *pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ DWORD *pcbData);
 -LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
      _In_ SRRF srrfFlags, _Out_opt_ DWORD *pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ DWORD *pcbData);
  #ifdef UNICODE
@@ -792,7 +810,7 @@ index f78b0cef08..0809f1af2a 100644
  // go ahead and expand out the string, and "massage" the returned *pdwType
  // to be REG_SZ.
 -LWSTDAPI_(LSTATUS) SHQueryValueExA(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHQueryValueExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHQueryValueExA(
      _In_                       HKEY      hkey,
      _In_opt_                   LPCSTR  pszValue,
      _Reserved_                 DWORD    *pdwReserved,
@@ -801,7 +819,7 @@ index f78b0cef08..0809f1af2a 100644
  // go ahead and expand out the string, and "massage" the returned *pdwType
  // to be REG_SZ.
 -LWSTDAPI_(LSTATUS) SHQueryValueExW(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHQueryValueExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS) SHQueryValueExW(
      _In_                       HKEY      hkey,
      _In_opt_                   LPCWSTR  pszValue,
      _Reserved_                 DWORD    *pdwReserved,
@@ -812,25 +830,25 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(LSTATUS)     SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
 -LWSTDAPI_(LSTATUS)     SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
 -LWSTDAPI_(LSTATUS)     SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
      _Inout_opt_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ LPDWORD pcbData);
 -LWSTDAPI_(LSTATUS)     SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
      _Inout_opt_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ LPDWORD pcbData);
 -LWSTDAPI_(LSTATUS)     SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
 -LWSTDAPI_(LSTATUS)     SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
  
  // recursive key copy
 -LWSTDAPI_(LSTATUS)     SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
 -LWSTDAPI_(LSTATUS)     SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
  
  // Getting and setting file system paths with environment variables
  
@@ -838,10 +856,10 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(LSTATUS)    SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
 -LWSTDAPI_(LSTATUS)    SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
 -LWSTDAPI_(LSTATUS)    SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegGetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegGetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)    SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
  
  #ifdef UNICODE
  #define SHEnumKeyEx           SHEnumKeyExW
@@ -854,11 +872,11 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
 -LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
 -LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
      _In_                                      HUSKEY  hUSKey,
      _In_opt_                                  LPCSTR  pszValue,
      _Inout_opt_                               DWORD * pdwType,
@@ -867,7 +885,7 @@ index f78b0cef08..0809f1af2a 100644
      _In_reads_bytes_opt_(dwDefaultDataSize)        void *  pvDefaultData,
      _In_opt_                                  DWORD   dwDefaultDataSize);
 -LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
      _In_                                      HUSKEY  hUSKey,
      _In_opt_                                  LPCWSTR  pszValue,
      _Inout_opt_                               DWORD * pdwType,
@@ -884,32 +902,32 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegWriteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegWriteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ SHREGDEL_FLAGS delRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ SHREGDEL_FLAGS delRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegWriteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegWriteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ SHREGDEL_FLAGS delRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ SHREGDEL_FLAGS delRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
      _Out_writes_to_(*pcchValueName,*pcchValueName) LPSTR pszValueName, _Inout_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType,
      _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData, _Inout_opt_ LPDWORD pcbData, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
      _Out_writes_to_(*pcchValueName,*pcchValueName) LPWSTR pszValueName, _Inout_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType,
      _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData, _Inout_opt_ LPDWORD pcbData, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
 -LWSTDAPI_(LSTATUS)     SHRegCloseUSKey(_In_ HUSKEY hUSKey);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
 +_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegCloseUSKey(_In_ HUSKEY hUSKey);
  
  
  // These calls are equal to an SHRegOpenUSKey, SHRegQueryUSValue, and then a SHRegCloseUSKey.
 -STDAPI_(LSTATUS) SHRegGetUSValueA(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) STDAPI_(LSTATUS) SHRegGetUSValueA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) STDAPI_(LSTATUS) SHRegGetUSValueA(
      _In_                                      LPCSTR  pszSubKey,
      _In_opt_                                  LPCSTR  pszValue,
      _Inout_opt_                               DWORD  *pdwType,
@@ -918,7 +936,7 @@ index f78b0cef08..0809f1af2a 100644
      _In_reads_bytes_opt_(dwDefaultDataSize)        void   *pvDefaultData,
      _In_                                      DWORD   dwDefaultDataSize);
 -STDAPI_(LSTATUS) SHRegGetUSValueW(
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) STDAPI_(LSTATUS) SHRegGetUSValueW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) STDAPI_(LSTATUS) SHRegGetUSValueW(
      _In_                                      LPCWSTR  pszSubKey,
      _In_opt_                                  LPCWSTR  pszValue,
      _Inout_opt_                               DWORD  *pdwType,
@@ -929,8 +947,8 @@ index f78b0cef08..0809f1af2a 100644
 -LWSTDAPI_(LSTATUS)     SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 -LWSTDAPI_(LSTATUS)     SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 -LWSTDAPI_(int)         SHRegGetIntW(_In_ HKEY hk, _In_opt_ PCWSTR pwzKey, _In_ int iDefault);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LWSTDAPI_(LSTATUS)     SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)         SHRegGetIntW(_In_ HKEY hk, _In_opt_ PCWSTR pwzKey, _In_ int iDefault);
  
  #ifdef UNICODE
@@ -941,8 +959,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(BOOL) SHRegGetBoolUSValueA(_In_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
 -LWSTDAPI_(BOOL) SHRegGetBoolUSValueW(_In_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) SHRegGetBoolUSValueA(_In_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) SHRegGetBoolUSValueW(_In_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) SHRegGetBoolUSValueA(_In_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(BOOL) SHRegGetBoolUSValueW(_In_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
  #ifdef UNICODE
  #define SHRegGetBoolUSValue  SHRegGetBoolUSValueW
  #else
@@ -969,10 +987,10 @@ index f78b0cef08..0809f1af2a 100644
  
  //  wrappers for the interface
 -LWSTDAPI AssocQueryStringA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
  //  wrappers for the interface
 -LWSTDAPI AssocQueryStringW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
  #ifdef UNICODE
  #define AssocQueryString  AssocQueryStringW
  #else
@@ -980,8 +998,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI AssocQueryStringByKeyA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
 -LWSTDAPI AssocQueryStringByKeyW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringByKeyA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringByKeyW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringByKeyA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ LWSTDAPI AssocQueryStringByKeyW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
  #ifdef UNICODE
  #define AssocQueryStringByKey  AssocQueryStringByKeyW
  #else
@@ -989,8 +1007,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI AssocQueryKeyA(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_ HKEY *phkeyOut);
 -LWSTDAPI AssocQueryKeyW(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI AssocQueryKeyA(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phkeyOut);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI AssocQueryKeyW(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phkeyOut);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI AssocQueryKeyA(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phkeyOut);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI AssocQueryKeyW(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phkeyOut);
  #ifdef UNICODE
  #define AssocQueryKey  AssocQueryKeyW
  #else
@@ -1015,8 +1033,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(IStream *) SHOpenRegStreamA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
 -LWSTDAPI_(IStream *) SHOpenRegStreamW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStreamA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStreamW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStreamA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStreamW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
  #ifdef UNICODE
  #define SHOpenRegStream  SHOpenRegStreamW
  #else
@@ -1024,8 +1042,8 @@ index f78b0cef08..0809f1af2a 100644
  #endif // !UNICODE
 -LWSTDAPI_(IStream *) SHOpenRegStream2A(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
 -LWSTDAPI_(IStream *) SHOpenRegStream2W(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStream2A(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStream2W(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStream2A(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubkey, _In_opt_ LPCSTR pszValue, _In_ DWORD grfMode);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(IStream *) SHOpenRegStream2W(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubkey, _In_opt_ LPCWSTR pszValue, _In_ DWORD grfMode);
  #ifdef UNICODE
  #define SHOpenRegStream2  SHOpenRegStream2W
  #else
@@ -1035,8 +1053,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI SHCreateStreamOnFileA(_In_ LPCSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
 -LWSTDAPI SHCreateStreamOnFileW(_In_ LPCWSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI SHCreateStreamOnFileA(_In_ LPCSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI SHCreateStreamOnFileW(_In_ LPCWSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LWSTDAPI SHCreateStreamOnFileA(_In_ LPCSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LWSTDAPI SHCreateStreamOnFileW(_In_ LPCWSTR pszFile, _In_ DWORD grfMode, _Outptr_ IStream **ppstm);
  #ifdef UNICODE
  #define SHCreateStreamOnFile  SHCreateStreamOnFileW
  #else
@@ -1060,8 +1078,8 @@ index f78b0cef08..0809f1af2a 100644
  #if (_WIN32_IE >= 0x0603)
 -LWSTDAPI GetAcceptLanguagesA(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
 -LWSTDAPI GetAcceptLanguagesW(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPWSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI GetAcceptLanguagesA(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI GetAcceptLanguagesW(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPWSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI GetAcceptLanguagesA(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI GetAcceptLanguagesW(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPWSTR pszLanguages, _Inout_ DWORD *pcchLanguages);
  #ifdef UNICODE
  #define GetAcceptLanguages  GetAcceptLanguagesW
  #else
@@ -1142,8 +1160,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(int)  SHFormatDateTimeA(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
 -LWSTDAPI_(int)  SHFormatDateTimeW(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int)  SHFormatDateTimeA(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int)  SHFormatDateTimeW(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int)  SHFormatDateTimeA(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPSTR pszBuf, UINT cchBuf);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int)  SHFormatDateTimeW(_In_ const FILETIME UNALIGNED * pft, _Inout_opt_ DWORD * pdwFlags, _Out_writes_(cchBuf) LPWSTR pszBuf, UINT cchBuf);
  #ifdef UNICODE
  #define SHFormatDateTime  SHFormatDateTimeW
  #else
@@ -1171,8 +1189,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(int) SHMessageBoxCheckA(_In_opt_ HWND hwnd, _In_ LPCSTR pszText, _In_ LPCSTR pszCaption, UINT uType, int iDefault, _In_ LPCSTR pszRegVal);
 -LWSTDAPI_(int) SHMessageBoxCheckW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszText, _In_ LPCWSTR pszCaption, UINT uType, int iDefault, _In_ LPCWSTR pszRegVal);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int) SHMessageBoxCheckA(_In_opt_ HWND hwnd, _In_ LPCSTR pszText, _In_ LPCSTR pszCaption, UINT uType, int iDefault, _In_ LPCSTR pszRegVal);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int) SHMessageBoxCheckW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszText, _In_ LPCWSTR pszCaption, UINT uType, int iDefault, _In_ LPCWSTR pszRegVal);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int) SHMessageBoxCheckA(_In_opt_ HWND hwnd, _In_ LPCSTR pszText, _In_ LPCSTR pszCaption, UINT uType, int iDefault, _In_ LPCSTR pszRegVal);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(int) SHMessageBoxCheckW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszText, _In_ LPCWSTR pszCaption, UINT uType, int iDefault, _In_ LPCWSTR pszRegVal);
  #ifdef UNICODE
  #define SHMessageBoxCheck  SHMessageBoxCheckW
  #else
@@ -1181,10 +1199,10 @@ index f78b0cef08..0809f1af2a 100644
  
  // Prevents hang do to hung window on broadcast
 -LWSTDAPI_(LRESULT) SHSendMessageBroadcastA(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(LRESULT) SHSendMessageBroadcastA(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(LRESULT) SHSendMessageBroadcastA(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
  // Prevents hang do to hung window on broadcast
 -LWSTDAPI_(LRESULT) SHSendMessageBroadcastW(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
-+_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(LRESULT) SHSendMessageBroadcastW(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LWSTDAPI_(LRESULT) SHSendMessageBroadcastW(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define SHSendMessageBroadcast  SHSendMessageBroadcastW
  #else
@@ -1193,8 +1211,8 @@ index f78b0cef08..0809f1af2a 100644
  
 -LWSTDAPI_(CHAR) SHStripMneumonicA(_Inout_ LPSTR pszMenu);
 -LWSTDAPI_(WCHAR) SHStripMneumonicW(_Inout_ LPWSTR pszMenu);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(CHAR) SHStripMneumonicA(_Inout_ LPSTR pszMenu);
-+_Windows_SupportedOS_Windows2000_ LWSTDAPI_(WCHAR) SHStripMneumonicW(_Inout_ LPWSTR pszMenu);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(CHAR) SHStripMneumonicA(_Inout_ LPSTR pszMenu);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(WCHAR) SHStripMneumonicW(_Inout_ LPWSTR pszMenu);
  #ifdef UNICODE
  #define SHStripMneumonic  SHStripMneumonicW
  #else
@@ -1322,6 +1340,15 @@ index f78b0cef08..0809f1af2a 100644
  
  
  #endif // NO_SHLWAPI_GDI
+@@ -2485,7 +2486,7 @@ LWSTDAPI_(COLORREF) ColorAdjustLuma(COLORREF clrRGB, int n, BOOL fScale);
+ //====== DllGetVersion  =======================================================
+ //
+ 
+-typedef struct _DLLVERSIONINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DLLVERSIONINFO
+ {
+     DWORD cbSize;
+     DWORD dwMajorVersion;                   // Major version
 @@ -2533,7 +2534,7 @@ STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
  
  #if (_WIN32_IE >= 0x0602)

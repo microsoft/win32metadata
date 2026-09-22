@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
-index a2208f5de6..0c82fd4ec5 100644
+index a2208f5de6..2817effec5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 @@ -22,6 +22,7 @@
@@ -178,7 +178,7 @@ index a2208f5de6..0c82fd4ec5 100644
      LPSTR  pszTargetName,
      DWORD  dwFlags);
  
-+_Windows_SupportedOS_WindowsXP_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_  
  BOOL
  WINAPI
  SslEmptyCacheA(_In_ LPSTR  pszTargetName,
@@ -186,7 +186,7 @@ index a2208f5de6..0c82fd4ec5 100644
      LPWSTR pszTargetName,
      DWORD  dwFlags);
  
-+_Windows_SupportedOS_WindowsXP_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_  
  BOOL
  WINAPI
  SslEmptyCacheW(_In_ LPWSTR pszTargetName,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
-index 9a23390bc3..9684850b9c 100644
+index 9a23390bc3..e63bd71fce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
 @@ -1,3 +1,4 @@
@@ -29,3 +29,21 @@ index 9a23390bc3..9684850b9c 100644
          
      };
      
+@@ -2612,7 +2613,7 @@ typedef struct tagSPPHRASEALT
+     ULONG cbAltExtra;
+     } 	SPPHRASEALT;
+ 
+-typedef struct SPRECORESULTINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SPRECORESULTINFO
+     {
+     ULONG cbSize;
+     SPRESULTTYPE eResultType;
+@@ -2667,7 +2668,7 @@ enum SPRULEINFOOPT
+         SPRIO_NONE	= 0
+     } 	SPRULEINFOOPT;
+ 
+-typedef struct SPPARSEINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SPPARSEINFO
+     {
+     ULONG cbSize;
+     SPRULEHANDLE hRule;

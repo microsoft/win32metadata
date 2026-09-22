@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
-index 86923ee816..efac504e5d 100644
+index 86923ee816..4be8d8af34 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
 @@ -81,6 +81,7 @@ extern "C"{
@@ -79,3 +79,12 @@ index 86923ee816..efac504e5d 100644
      {
          CONST_VTBL struct IWRdsGraphicsChannelManagerVtbl *lpVtbl;
      };
+@@ -535,7 +536,7 @@ typedef struct tagRFX_GFX_RECT
+     } 	RFX_GFX_RECT;
+ 
+ typedef RFX_GFX_RECT RFX_GFX_UNALIGNED *PRFX_GFX_RECT;
+-typedef struct tagRFX_GFX_MSG_HEADER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagRFX_GFX_MSG_HEADER
+     {
+     UINT16 uMSGType;
+     UINT16 cbSize;

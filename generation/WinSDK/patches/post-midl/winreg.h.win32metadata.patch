@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
-index 5a1415e34d..5d29b8b4a2 100644
+index 5a1415e34d..f9fa4aea5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 @@ -22,6 +22,7 @@ Abstract:
@@ -84,7 +84,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      VOID
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -94,7 +94,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _Out_ PHKEY phkResult
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -106,16 +106,26 @@ index 5a1415e34d..5d29b8b4a2 100644
      );
  #ifdef UNICODE
  #define RegConnectRegistry  RegConnectRegistryW
-@@ -326,7 +335,7 @@ RegConnectRegistryExA (
+@@ -319,23 +328,23 @@ RegConnectRegistryW (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINADVAPI
+ LSTATUS
+ APIENTRY
+ RegConnectRegistryExA (
      _In_opt_ LPCSTR lpMachineName,
      _In_ HKEY hKey,
      _In_ ULONG Flags,
 -    _Out_ PHKEY phkResult
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
- WINADVAPI
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
  LSTATUS
-@@ -335,7 +344,7 @@ RegConnectRegistryExW (
+ APIENTRY
+ RegConnectRegistryExW (
      _In_opt_ LPCWSTR lpMachineName,
      _In_ HKEY hKey,
      _In_ ULONG Flags,
@@ -128,7 +138,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -138,7 +148,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _Out_ PHKEY phkResult
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -154,7 +164,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegCreateKey  RegCreateKeyA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -173,7 +183,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 +    _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) _Out_opt_ LPDWORD lpdwDisposition
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -197,7 +207,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -217,7 +227,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParemeter
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -241,7 +251,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -249,7 +259,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ HKEY hKey,
      _In_ LPCSTR lpSubKey
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -258,7 +268,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  LSTATUS
  APIENTRY
  RegDeleteKeyExA(
@@ -267,7 +277,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  LSTATUS
  APIENTRY
  RegDeleteKeyExW(
@@ -275,7 +285,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -283,7 +293,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParameter
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -316,7 +326,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -324,7 +334,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_opt_ LPCSTR lpValueName
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -332,7 +342,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegDeleteValue  RegDeleteValueA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -340,7 +350,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Out_writes_opt_(cchName) LPSTR lpName,
      _In_ DWORD cchName
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -348,7 +358,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegEnumKey  RegEnumKeyA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -356,7 +366,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Out_opt_ PFILETIME lpftLastWriteTime
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -364,7 +374,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegEnumKeyEx  RegEnumKeyExA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -372,7 +382,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Inout_opt_ LPDWORD lpcbData
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -400,7 +410,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Inout_ LPDWORD lpcbSecurityDescriptor
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -408,7 +418,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ LPCSTR lpFile
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -432,7 +442,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -442,7 +452,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _Out_ PHKEY phkResult
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -458,7 +468,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegOpenKey  RegOpenKeyA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -472,7 +482,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -491,7 +501,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -506,7 +516,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParemeter
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -525,7 +535,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -533,7 +543,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Out_opt_ PFILETIME lpftLastWriteTime
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -541,7 +551,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -549,7 +559,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPSTR lpData,
      _Inout_opt_ PLONG lpcbData
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -557,7 +567,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  
  #if(WINVER >= 0x0400)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -570,7 +580,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Inout_opt_ LPDWORD ldwTotsize
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -585,7 +595,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -599,7 +609,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _When_(lpData == NULL, _Out_opt_) _When_(lpData != NULL, _Inout_opt_) LPDWORD lpcbData
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -616,7 +626,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -624,7 +634,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ LPCSTR lpNewFile,
      _In_ LPCSTR lpOldFile
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -632,7 +642,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegReplaceKey  RegReplaceKeyA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -643,7 +653,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 +    _Win32_AssociatedEnum_(REG_RESTORE_KEY_FLAGS) _In_ DWORD dwFlags
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -667,7 +677,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -675,7 +685,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ LPCSTR lpFile,
      _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -694,7 +704,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -704,10 +714,10 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _In_ DWORD dwType,
 -    _In_reads_bytes_opt_(cbData) LPCSTR lpData,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
-+    _In_z_ LPCSTR lpData,
++    _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCSTR lpData,
      _In_ DWORD cbData
      );
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -717,7 +727,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _In_ DWORD dwType,
 -    _In_reads_bytes_opt_(cbData) LPCWSTR lpData,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
-+    _In_z_ LPCWSTR lpData,
++    _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCWSTR lpData,
      _In_ DWORD cbData
      );
  #ifdef UNICODE
@@ -725,7 +735,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -739,7 +749,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ DWORD cbData
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -756,7 +766,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -764,7 +774,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_opt_ LPCSTR lpSubKey
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -772,7 +782,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  //
  #if _WIN32_WINNT >= 0x0600
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -780,7 +790,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_opt_ LPCSTR lpValueName
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -788,7 +798,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegDeleteKeyValue  RegDeleteKeyValueA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -796,7 +806,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ DWORD cbData
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -804,7 +814,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegSetKeyValue  RegSetKeyValueA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -812,7 +822,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_opt_ LPCSTR lpSubKey
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -820,7 +830,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegDeleteTree  RegDeleteTreeA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -829,7 +839,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #if (_WIN32_WINNT >= 0x0502)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  LSTATUS
  APIENTRY
  RegGetValueA(
@@ -848,7 +858,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  LSTATUS
  APIENTRY
  RegGetValueW(
@@ -866,7 +876,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  
  #if (_WIN32_WINNT >= 0x0600)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -874,7 +884,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegCopyTree  RegCopyTreeW
  #endif
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -882,7 +892,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_opt_ LPCSTR pszDirectory
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -890,7 +900,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define RegLoadMUIString  RegLoadMUIStringA
  #endif // !UNICODE
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -903,7 +913,7 @@ index 5a1415e34d..5d29b8b4a2 100644
      _Reserved_ DWORD Reserved
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -914,19 +924,23 @@ index 5a1415e34d..5d29b8b4a2 100644
      _In_ REGSAM samDesired,
      _In_ DWORD dwOptions,
      _Reserved_ DWORD Reserved
-@@ -1414,6 +1486,8 @@ RegLoadAppKeyW(
+@@ -1413,7 +1485,9 @@ RegLoadAppKeyW(
+ // Remoteable System Shutdown APIs
  //
  
- __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+-__drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
++_WIN32META_ANNOTATION_("win32metadata:ansi") __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
 +_Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  APIENTRY
-@@ -1425,6 +1499,8 @@ InitiateSystemShutdownA(
+@@ -1424,7 +1498,9 @@ InitiateSystemShutdownA(
+     _In_ BOOL bForceAppsClosed,
      _In_ BOOL bRebootAfterShutdown
      );
- __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+-__drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
++_WIN32META_ANNOTATION_("win32metadata:unicode") __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
 +_Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINADVAPI
@@ -936,7 +950,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define InitiateSystemShutdown  InitiateSystemShutdownA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
@@ -944,13 +958,17 @@ index 5a1415e34d..5d29b8b4a2 100644
  AbortSystemShutdownA(
      _In_opt_ LPSTR lpMachineName
      );
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  APIENTRY
-@@ -1485,6 +1565,8 @@ AbortSystemShutdownW(
- __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+@@ -1482,9 +1562,11 @@ AbortSystemShutdownW(
+ //
+ #define MAX_SHUTDOWN_TIMEOUT (10*365*24*60*60)
+ 
+-__drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
++_WIN32META_ANNOTATION_("win32metadata:ansi") __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
  _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
      __drv_reportError("Requires a valid dwReason or lpMessage"))
 +_Windows_SupportedOS_WindowsXP_
@@ -965,7 +983,8 @@ index 5a1415e34d..5d29b8b4a2 100644
 -    _In_ DWORD dwReason
 +    _Win32_AssociatedEnum_(SHUTDOWN_REASON) _In_ DWORD dwReason
      );
- __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+-__drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
++_WIN32META_ANNOTATION_("win32metadata:unicode") __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
  _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
      __drv_reportError("Requires a valid dwReason or lpMessage"))
 +_Windows_SupportedOS_WindowsXP_
@@ -986,7 +1005,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #define SHUTDOWN_SYSTEM_INITIATED       0x00010000
  #define SHUTDOWN_UPDATE_POWEROFF        0x00020000
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  DWORD
  APIENTRY
@@ -999,7 +1018,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 +    _Win32_AssociatedEnum_(SHUTDOWN_FLAGS) _In_     DWORD dwShutdownFlags,
 +    _Win32_AssociatedEnum_(SHUTDOWN_REASON) _In_     DWORD dwReason
      );
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  DWORD
  APIENTRY
@@ -1018,7 +1037,7 @@ index 5a1415e34d..5d29b8b4a2 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsXP_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -1030,7 +1049,7 @@ index 5a1415e34d..5d29b8b4a2 100644
 +    _Win32_AssociatedEnum_(REG_SAVE_FORMAT) _In_ DWORD Flags
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsXP_
  WINADVAPI
  LSTATUS
  APIENTRY

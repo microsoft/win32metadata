@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..fe659be298 100644
+index f99e9294f5..c226a3107b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -23,7 +23,7 @@ index f99e9294f5..fe659be298 100644
  #endif
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  wvsprintfA(
@@ -31,7 +31,7 @@ index f99e9294f5..fe659be298 100644
      _In_ _Printf_format_string_ LPCSTR,
      _In_ va_list arglist);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  wvsprintfW(
@@ -40,7 +40,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPIV
  wsprintfA(
@@ -48,10 +48,19 @@ index f99e9294f5..fe659be298 100644
      _In_ _Printf_format_string_ LPCSTR,
      ...);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPIV
  wsprintfW(
+@@ -892,7 +893,7 @@ typedef struct tagCBTACTIVATESTRUCT
+ /*
+  * WTSSESSION_NOTIFICATION struct pointed by lParam, for WM_WTSSESSION_CHANGE
+  */
+-typedef struct tagWTSSESSION_NOTIFICATION
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagWTSSESSION_NOTIFICATION
+ {
+     DWORD cbSize;
+     DWORD dwSessionId;
 @@ -1119,7 +1120,7 @@ typedef struct tagCWPRETSTRUCT {
  typedef struct tagKBDLLHOOKSTRUCT {
      DWORD   vkCode;
@@ -66,7 +75,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) WINUSERAPI
  HKL
  WINAPI
  LoadKeyboardLayoutA(
@@ -74,7 +83,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT Flags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(ACTIVATE_KEYBOARD_LAYOUT_FLAGS) _In_ UINT Flags);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) WINUSERAPI
  HKL
  WINAPI
  LoadKeyboardLayoutW(
@@ -105,13 +114,13 @@ index f99e9294f5..fe659be298 100644
      _In_ HKL hkl);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetKeyboardLayoutNameA(
      _Out_writes_(KL_NAMELENGTH) LPSTR pwszKLID);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetKeyboardLayoutNameW(
@@ -156,7 +165,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  CreateDesktopA(
@@ -168,7 +177,7 @@ index f99e9294f5..fe659be298 100644
      _In_ ACCESS_MASK dwDesiredAccess,
      _In_opt_ LPSECURITY_ATTRIBUTES lpsa);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  CreateDesktopW(
@@ -185,7 +194,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  CreateDesktopExA(
@@ -199,7 +208,7 @@ index f99e9294f5..fe659be298 100644
      _In_ ULONG ulHeapSize,
      _Reserved_ PVOID pvoid);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  CreateDesktopExW(
@@ -216,7 +225,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  OpenDesktopA(
@@ -226,7 +235,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL fInherit,
      _In_ ACCESS_MASK dwDesiredAccess);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseDesktop, -1, 0) WINUSERAPI
  HDESK
  WINAPI
  OpenDesktopW(
@@ -253,7 +262,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  EnumDesktopsA(
@@ -261,7 +270,7 @@ index f99e9294f5..fe659be298 100644
      _In_ DESKTOPENUMPROCA lpEnumFunc,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  EnumDesktopsW(
@@ -310,7 +319,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
  HWINSTA
  WINAPI
  CreateWindowStationA(
@@ -319,7 +328,7 @@ index f99e9294f5..fe659be298 100644
      _In_ ACCESS_MASK dwDesiredAccess,
      _In_opt_ LPSECURITY_ATTRIBUTES lpsa);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
  HWINSTA
  WINAPI
  CreateWindowStationW(
@@ -328,7 +337,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
  HWINSTA
  WINAPI
  OpenWindowStationA(
@@ -336,7 +345,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL fInherit,
      _In_ ACCESS_MASK dwDesiredAccess);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
  HWINSTA
  WINAPI
  OpenWindowStationW(
@@ -345,14 +354,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  EnumWindowStationsA(
      _In_ WINSTAENUMPROCA lpEnumFunc,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  EnumWindowStationsW(
@@ -403,7 +412,7 @@ index f99e9294f5..fe659be298 100644
  } USEROBJECTFLAGS, *PUSEROBJECTFLAGS;
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetUserObjectInformationA(
@@ -414,7 +423,7 @@ index f99e9294f5..fe659be298 100644
      _In_ DWORD nLength,
      _Out_opt_ LPDWORD lpnLengthNeeded);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetUserObjectInformationW(
@@ -429,7 +438,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetUserObjectInformationA(
@@ -438,12 +447,16 @@ index f99e9294f5..fe659be298 100644
      _In_reads_bytes_(nLength) PVOID pvInfo,
      _In_ DWORD nLength);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetUserObjectInformationW(
-@@ -1764,7 +1765,7 @@ SetUserObjectInformationW(
- typedef struct tagWNDCLASSEXA {
+@@ -1761,10 +1762,10 @@ SetUserObjectInformationW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+ 
+ #if(WINVER >= 0x0400)
+-typedef struct tagWNDCLASSEXA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagWNDCLASSEXA {
      UINT        cbSize;
      /* Win 3.x */
 -    UINT        style;
@@ -451,8 +464,12 @@ index f99e9294f5..fe659be298 100644
      WNDPROC     lpfnWndProc;
      int         cbClsExtra;
      int         cbWndExtra;
-@@ -1780,7 +1781,7 @@ typedef struct tagWNDCLASSEXA {
- typedef struct tagWNDCLASSEXW {
+@@ -1777,10 +1778,10 @@ typedef struct tagWNDCLASSEXA {
+     /* Win 4.0 */
+     HICON       hIconSm;
+ } WNDCLASSEXA, *PWNDCLASSEXA, NEAR *NPWNDCLASSEXA, FAR *LPWNDCLASSEXA;
+-typedef struct tagWNDCLASSEXW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagWNDCLASSEXW {
      UINT        cbSize;
      /* Win 3.x */
 -    UINT        style;
@@ -501,13 +518,13 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  RegisterWindowMessageA(
      _In_ LPCSTR lpString);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  RegisterWindowMessageW(
@@ -520,9 +537,12 @@ index f99e9294f5..fe659be298 100644
  } WINDOWPOS, *LPWINDOWPOS, *PWINDOWPOS;
  
  /*
-@@ -2763,12 +2764,12 @@ typedef struct tagNCCALCSIZE_PARAMS {
+@@ -2761,14 +2762,14 @@ typedef struct tagNCCALCSIZE_PARAMS {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
- typedef struct tagTRACKMOUSEEVENT {
+-typedef struct tagTRACKMOUSEEVENT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTRACKMOUSEEVENT {
      DWORD cbSize;
 -    DWORD dwFlags;
 +    _Win32_AssociatedEnum_(TRACKMOUSEEVENT_FLAGS) DWORD dwFlags;
@@ -672,7 +692,7 @@ index f99e9294f5..fe659be298 100644
   */
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetMessageA(
@@ -681,7 +701,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT wMsgFilterMin,
      _In_ UINT wMsgFilterMax);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetMessageW(
@@ -697,13 +717,13 @@ index f99e9294f5..fe659be298 100644
      _In_ CONST MSG *lpMsg);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  DispatchMessageA(
      _In_ CONST MSG *lpMsg);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  DispatchMessageW(
@@ -712,7 +732,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  PeekMessageA(
@@ -723,7 +743,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT wRemoveMsg);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(PEEK_MESSAGE_REMOVE_TYPE) _In_ UINT wRemoveMsg);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  PeekMessageW(
@@ -830,7 +850,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LRESULT
  WINAPI
  SendMessageA(
@@ -839,7 +859,7 @@ index f99e9294f5..fe659be298 100644
      _Pre_maybenull_ _Post_valid_ WPARAM wParam,
      _Pre_maybenull_ _Post_valid_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LRESULT
  WINAPI
  SendMessageW(
@@ -848,7 +868,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LRESULT
  WINAPI
  SendMessageTimeoutA(
@@ -861,7 +881,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT uTimeout,
      _Out_opt_ PDWORD_PTR lpdwResult);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LRESULT
  WINAPI
  SendMessageTimeoutW(
@@ -879,7 +899,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SendNotifyMessageA(
@@ -888,7 +908,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SendNotifyMessageW(
@@ -897,7 +917,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SendMessageCallbackA(
@@ -906,16 +926,24 @@ index f99e9294f5..fe659be298 100644
      _In_ SENDASYNCPROC lpResultCallBack,
      _In_ ULONG_PTR dwData);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SendMessageCallbackW(
-@@ -3831,22 +3832,22 @@ typedef struct {
+@@ -3824,29 +3825,29 @@ SendMessageCallbackW(
+ #endif // !UNICODE
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
+     UINT  cbSize;
+     HDESK hdesk;
+     HWND  hwnd;
      LUID  luid;
  } BSMINFO, *PBSMINFO;
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  long
  WINAPI
  BroadcastSystemMessageExA(
@@ -928,7 +956,7 @@ index f99e9294f5..fe659be298 100644
      _In_ LPARAM lParam,
      _Out_opt_ PBSMINFO pbsmInfo);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  long
  WINAPI
  BroadcastSystemMessageExW(
@@ -939,12 +967,21 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam,
+@@ -3867,7 +3868,7 @@ BroadcastSystemMessageExW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #if defined(_WIN32_WINNT)
+-WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINUSERAPI
+ long
+ WINAPI
+ BroadcastSystemMessageA(
 @@ -3876,12 +3877,12 @@ BroadcastSystemMessageA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  long
  WINAPI
  BroadcastSystemMessageW(
@@ -960,7 +997,7 @@ index f99e9294f5..fe659be298 100644
  #endif /* _WIN32_WINNT >= 0x0501 */
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(UnregisterDeviceNotification, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(UnregisterDeviceNotification, -1, 0) WINUSERAPI
  HDEVNOTIFY
  WINAPI
  RegisterDeviceNotificationA(
@@ -969,7 +1006,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ DWORD Flags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) _In_ DWORD Flags);
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(UnregisterDeviceNotification, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(UnregisterDeviceNotification, -1, 0) WINUSERAPI
  HDEVNOTIFY
  WINAPI
  RegisterDeviceNotificationW(
@@ -1031,7 +1068,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  PostMessageA(
@@ -1040,7 +1077,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  PostMessageW(
@@ -1049,7 +1086,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  PostThreadMessageA(
@@ -1058,7 +1095,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  PostThreadMessageW(
@@ -1067,7 +1104,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ WINUSERAPI
  BOOL
  WINAPI
  AttachThreadInput(
@@ -1162,13 +1199,13 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ATOM
  WINAPI
  RegisterClassA(
      _In_ CONST WNDCLASSA *lpWndClass);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ATOM
  WINAPI
  RegisterClassW(
@@ -1177,14 +1214,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  UnregisterClassA(
      _In_ LPCSTR lpClassName,
      _In_opt_ HINSTANCE hInstance);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  UnregisterClassW(
@@ -1193,7 +1230,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -_Success_(return)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
  WINUSERAPI
  BOOL
  WINAPI
@@ -1202,7 +1239,7 @@ index f99e9294f5..fe659be298 100644
      _In_ LPCSTR lpClassName,
      _Out_ LPWNDCLASSA lpWndClass);
 -_Success_(return)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
  WINUSERAPI
  BOOL
  WINAPI
@@ -1211,13 +1248,13 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ATOM
  WINAPI
  RegisterClassExA(
      _In_ CONST WNDCLASSEXA *);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ATOM
  WINAPI
  RegisterClassExW(
@@ -1226,7 +1263,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -_Success_(return)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
  WINUSERAPI
  BOOL
  WINAPI
@@ -1235,7 +1272,7 @@ index f99e9294f5..fe659be298 100644
      _In_ LPCSTR lpszClass,
      _Out_ LPWNDCLASSEXA lpwcx);
 -_Success_(return)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return)
  WINUSERAPI
  BOOL
  WINAPI
@@ -1244,7 +1281,7 @@ index f99e9294f5..fe659be298 100644
  #endif /* _WIN32_WINNT >= 0x0501 */
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateWindowExA(
@@ -1262,7 +1299,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ HINSTANCE hInstance,
      _In_opt_ LPVOID lpParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateWindowExW(
@@ -1346,7 +1383,7 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  UpdateLayeredWindow(
-@@ -4556,7 +4557,7 @@ UpdateLayeredWindow(
+@@ -4556,12 +4557,12 @@ UpdateLayeredWindow(
      _In_opt_ POINT* pptSrc,
      _In_ COLORREF crKey,
      _In_opt_ BLENDFUNCTION* pblend,
@@ -1355,6 +1392,12 @@ index f99e9294f5..fe659be298 100644
  
  /*
   * Layered Window Update information
+  */
+-typedef struct tagUPDATELAYEREDWINDOWINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagUPDATELAYEREDWINDOWINFO
+ {
+     DWORD cbSize;
+     HDC hdcDst;
 @@ -4571,7 +4572,7 @@ typedef struct tagUPDATELAYEREDWINDOWINFO
      const POINT* pptSrc;
      COLORREF crKey;
@@ -1433,8 +1476,12 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  FlashWindow(
-@@ -4689,12 +4690,12 @@ FlashWindow(
- typedef struct {
+@@ -4686,15 +4687,15 @@ FlashWindow(
+     _In_  BOOL bInvert);
+ 
+ #if(WINVER >= 0x0500)
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
      UINT  cbSize;
      HWND  hwnd;
 -    DWORD dwFlags;
@@ -1612,7 +1659,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateDialogParamA(
@@ -1621,7 +1668,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ DLGPROC lpDialogFunc,
      _In_ LPARAM dwInitParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateDialogParamW(
@@ -1630,7 +1677,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateDialogIndirectParamA(
@@ -1639,7 +1686,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ DLGPROC lpDialogFunc,
      _In_ LPARAM dwInitParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateDialogIndirectParamW(
@@ -1648,7 +1695,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  INT_PTR
  WINAPI
  DialogBoxParamA(
@@ -1657,7 +1704,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ DLGPROC lpDialogFunc,
      _In_ LPARAM dwInitParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  INT_PTR
  WINAPI
  DialogBoxParamW(
@@ -1666,7 +1713,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  INT_PTR
  WINAPI
  DialogBoxIndirectParamA(
@@ -1675,7 +1722,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ DLGPROC lpDialogFunc,
      _In_ LPARAM dwInitParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  INT_PTR
  WINAPI
  DialogBoxIndirectParamW(
@@ -1718,7 +1765,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL bSigned);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetDlgItemTextA(
@@ -1726,7 +1773,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int nIDDlgItem,
      _In_ LPCSTR lpString);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetDlgItemTextW(
@@ -1735,7 +1782,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -_Ret_range_(0, cchMax)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, cchMax)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, cchMax)
  WINUSERAPI
  UINT
  WINAPI
@@ -1744,7 +1791,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(cchMax) LPSTR lpString,
      _In_ int cchMax);
 -_Ret_range_(0, cchMax)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, cchMax)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, cchMax)
  WINUSERAPI
  UINT
  WINAPI
@@ -1780,7 +1827,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int nIDButton);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  SendDlgItemMessageA(
@@ -1789,7 +1836,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  SendDlgItemMessageW(
@@ -1875,14 +1922,14 @@ index f99e9294f5..fe659be298 100644
  #ifndef NOMSG
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  CallMsgFilterA(
      _In_ LPMSG lpMsg,
      _In_ int nCode);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  CallMsgFilterW(
@@ -1953,7 +2000,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ HANDLE hMem);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HANDLE
  WINAPI
  GetClipboardData(
@@ -1962,13 +2009,13 @@ index f99e9294f5..fe659be298 100644
      _Inout_ PGETCLIPBMETADATA metadata);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  RegisterClipboardFormatA(
      _In_ LPCSTR lpszFormat);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  RegisterClipboardFormatW(
@@ -1991,7 +2038,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT format);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetClipboardFormatNameA(
@@ -1999,7 +2046,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(cchMaxCount) LPSTR lpszFormatName,
      _In_ int cchMaxCount);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetClipboardFormatNameW(
@@ -2061,14 +2108,14 @@ index f99e9294f5..fe659be298 100644
   */
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  CharToOemA(
      _In_ LPCSTR pSrc,
      _Out_writes_(_Inexpressible_(strlen(pSrc) + 1)) LPSTR pDst);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  CharToOemW(
@@ -2077,7 +2124,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -__drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
  WINUSERAPI
  BOOL
  WINAPI
@@ -2085,7 +2132,7 @@ index f99e9294f5..fe659be298 100644
      _In_ LPCSTR pSrc,
      _Out_writes_(_Inexpressible_(strlen(pSrc) + 1)) LPSTR pDst);
 -__drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
  WINUSERAPI
  BOOL
  WINAPI
@@ -2094,7 +2141,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  CharToOemBuffA(
@@ -2102,7 +2149,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(cchDstLength) LPSTR lpszDst,
      _In_ DWORD cchDstLength);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  CharToOemBuffW(
@@ -2111,7 +2158,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  OemToCharBuffA(
@@ -2119,7 +2166,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(cchDstLength) LPSTR lpszDst,
      _In_ DWORD cchDstLength);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  OemToCharBuffW(
@@ -2128,13 +2175,13 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LPSTR
  WINAPI
  CharUpperA(
      _Inout_ LPSTR lpsz);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LPWSTR
  WINAPI
  CharUpperW(
@@ -2143,14 +2190,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  CharUpperBuffA(
      _Inout_updates_(cchLength) LPSTR lpsz,
      _In_ DWORD cchLength);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  CharUpperBuffW(
@@ -2159,13 +2206,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LPSTR
  WINAPI
  CharLowerA(
      _Inout_ LPSTR lpsz);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LPWSTR
  WINAPI
  CharLowerW(
@@ -2174,14 +2221,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  CharLowerBuffA(
      _Inout_updates_(cchLength) LPSTR lpsz,
      _In_ DWORD cchLength);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  CharLowerBuffW(
@@ -2190,13 +2237,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LPSTR
  WINAPI
  CharNextA(
      _In_ LPCSTR lpsz);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LPWSTR
  WINAPI
  CharNextW(
@@ -2205,14 +2252,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LPSTR
  WINAPI
  CharPrevA(
      _In_ LPCSTR lpszStart,
      _In_ LPCSTR lpszCurrent);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LPWSTR
  WINAPI
  CharPrevW(
@@ -2239,13 +2286,13 @@ index f99e9294f5..fe659be298 100644
   */
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharAlphaA(
      _In_ CHAR ch);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharAlphaW(
@@ -2254,13 +2301,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharAlphaNumericA(
      _In_ CHAR ch);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharAlphaNumericW(
@@ -2269,13 +2316,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharUpperA(
      _In_ CHAR ch);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharUpperW(
@@ -2284,13 +2331,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharLowerA(
      _In_ CHAR ch);
 -WINUSERAPI
-+_Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  IsCharLowerW(
@@ -2358,7 +2405,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetKeyNameTextA(
@@ -2366,7 +2413,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(cchSize) LPSTR lpString,
      _In_ int cchSize);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetKeyNameTextW(
@@ -2416,13 +2463,13 @@ index f99e9294f5..fe659be298 100644
      _In_ WORD wOemChar);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  SHORT
  WINAPI
  VkKeyScanA(
      _In_ CHAR ch);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  SHORT
  WINAPI
  VkKeyScanW(
@@ -2431,14 +2478,14 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  SHORT
  WINAPI
  VkKeyScanExA(
      _In_ CHAR ch,
      _In_ HKL dwhkl);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  SHORT
  WINAPI
  VkKeyScanExW(
@@ -2849,7 +2896,13 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  GetPointerInputTransform(
-@@ -6879,7 +6880,7 @@ typedef struct tagLASTINPUTINFO {
+@@ -6874,12 +6875,12 @@ GetPointerInputTransform(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
+ 
+ #if(_WIN32_WINNT >= 0x0500)
+-typedef struct tagLASTINPUTINFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagLASTINPUTINFO {
+     UINT cbSize;
      DWORD dwTime;
  } LASTINPUTINFO, * PLASTINPUTINFO;
  
@@ -2863,7 +2916,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  MapVirtualKeyA(
@@ -2871,7 +2924,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT uMapType);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(MAP_VIRTUAL_KEY_TYPE) _In_ UINT uMapType);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  MapVirtualKeyW(
@@ -2886,7 +2939,7 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  MapVirtualKeyExA(
@@ -2895,7 +2948,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(MAP_VIRTUAL_KEY_TYPE) _In_ UINT uMapType,
      _In_opt_ HKL dwhkl);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  MapVirtualKeyExW(
@@ -2947,7 +3000,7 @@ index f99e9294f5..fe659be298 100644
      VOID);
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
  DWORD
  WINAPI
  MsgWaitForMultipleObjects(
@@ -2959,7 +3012,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(QUEUE_STATUS_FLAGS) _In_ DWORD dwWakeMask);
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
  DWORD
  WINAPI
  MsgWaitForMultipleObjectsEx(
@@ -3027,14 +3080,14 @@ index f99e9294f5..fe659be298 100644
      _In_ HWND hWnd);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
  HACCEL
  WINAPI
  LoadAcceleratorsA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpTableName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
  HACCEL
  WINAPI
  LoadAcceleratorsW(
@@ -3043,14 +3096,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
  HACCEL
  WINAPI
  CreateAcceleratorTableA(
      _In_reads_(cAccel) LPACCEL paccel,
      _In_ int cAccel);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyAcceleratorTable, -1, 0) WINUSERAPI
  HACCEL
  WINAPI
  CreateAcceleratorTableW(
@@ -3066,7 +3119,7 @@ index f99e9294f5..fe659be298 100644
      _In_ HACCEL hAccel);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  CopyAcceleratorTableA(
@@ -3074,7 +3127,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_to_opt_(cAccelEntries, return) LPACCEL lpAccelDst,
      _In_ int cAccelEntries);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  CopyAcceleratorTableW(
@@ -3083,7 +3136,7 @@ index f99e9294f5..fe659be298 100644
  #ifndef NOMSG
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  TranslateAcceleratorA(
@@ -3091,7 +3144,7 @@ index f99e9294f5..fe659be298 100644
      _In_ HACCEL hAccTable,
      _In_ LPMSG lpMsg);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  TranslateAcceleratorW(
@@ -3124,14 +3177,14 @@ index f99e9294f5..fe659be298 100644
  #define MENU_ALL_ACCESS (STANDARD_RIGHTS_ALL | MENU_READ_ACCESS | MENU_WRITE_ACCESS | MENU_EXECUTE_ACCESS)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
  HMENU
  WINAPI
  LoadMenuA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpMenuName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
  HMENU
  WINAPI
  LoadMenuW(
@@ -3140,17 +3193,17 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
  HMENU
  WINAPI
  LoadMenuIndirectA(
      _In_ CONST MENUTEMPLATEA *lpMenuTemplate);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
  HMENU
  WINAPI
  LoadMenuIndirectW(
-@@ -7501,13 +7502,13 @@ LoadMenuIndirectW(
+@@ -7501,20 +7502,20 @@ LoadMenuIndirectW(
  #define LoadMenuIndirect  LoadMenuIndirectA
  #endif // !UNICODE
  
@@ -3166,6 +3219,23 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  SetMenu(
+     _In_ HWND hWnd,
+     _In_opt_ HMENU hMenu);
+ 
+-WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINUSERAPI
+ BOOL
+ WINAPI
+ ChangeMenuA(
+@@ -7523,7 +7524,7 @@ ChangeMenuA(
+     _In_opt_ LPCSTR lpszNewItem,
+     _In_ UINT cmdInsert,
+     _In_ UINT flags);
+-WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINUSERAPI
+ BOOL
+ WINAPI
+ ChangeMenuW(
 @@ -7538,7 +7539,7 @@ ChangeMenuW(
  #define ChangeMenu  ChangeMenuA
  #endif // !UNICODE
@@ -3180,7 +3250,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT uHilite);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  GetMenuStringA(
@@ -3191,7 +3261,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT flags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT flags);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  GetMenuStringW(
@@ -3299,7 +3369,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ HMENU hMenu);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  InsertMenuA(
@@ -3310,7 +3380,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  InsertMenuW(
@@ -3326,7 +3396,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  AppendMenuA(
@@ -3336,7 +3406,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  AppendMenuW(
@@ -3351,7 +3421,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  ModifyMenuA(
@@ -3362,7 +3432,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  ModifyMenuW(
@@ -3416,7 +3486,7 @@ index f99e9294f5..fe659be298 100644
      VOID);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  TrackPopupMenu(
@@ -3436,12 +3506,20 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
  /* return codes for WM_MENUCHAR */
-@@ -7780,7 +7785,7 @@ typedef struct tagTPMPARAMS
+@@ -7773,14 +7778,14 @@ TrackPopupMenu(
+ #define MNC_EXECUTE 2
+ #define MNC_SELECT  3
+ 
+-typedef struct tagTPMPARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTPMPARAMS
+ {
+     UINT    cbSize;     /* Size of structure */
+     RECT    rcExclude;  /* Screen coordinates of rectangle to exclude when positioning */
  }   TPMPARAMS;
  typedef TPMPARAMS FAR *LPTPMPARAMS;
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  TrackPopupMenuEx(
@@ -3454,8 +3532,12 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  CalculatePopupWindowPosition(
-@@ -7824,8 +7829,8 @@ CalculatePopupWindowPosition(
- typedef struct tagMENUINFO
+@@ -7821,11 +7826,11 @@ CalculatePopupWindowPosition(
+ #define MIM_STYLE                   0x00000010
+ #define MIM_APPLYTOSUBMENUS         0x80000000
+ 
+-typedef struct tagMENUINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMENUINFO
  {
      DWORD   cbSize;
 -    DWORD   fMask;
@@ -3499,8 +3581,12 @@ index f99e9294f5..fe659be298 100644
      UINT uPos;
      HMENU hmenu;
      PVOID riid;
-@@ -7912,9 +7917,9 @@ typedef struct tagMENUGETOBJECTINFO
- typedef struct tagMENUITEMINFOA
+@@ -7909,12 +7914,12 @@ typedef struct tagMENUGETOBJECTINFO
+ #endif /* WINVER >= 0x0500 */
+ 
+ #if(WINVER >= 0x0400)
+-typedef struct tagMENUITEMINFOA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMENUITEMINFOA
  {
      UINT     cbSize;
 -    UINT     fMask;
@@ -3512,8 +3598,12 @@ index f99e9294f5..fe659be298 100644
      UINT     wID;           // used if MIIM_ID
      HMENU    hSubMenu;      // used if MIIM_SUBMENU
      HBITMAP  hbmpChecked;   // used if MIIM_CHECKMARKS
-@@ -7929,9 +7934,9 @@ typedef struct tagMENUITEMINFOA
- typedef struct tagMENUITEMINFOW
+@@ -7926,12 +7931,12 @@ typedef struct tagMENUITEMINFOA
+     HBITMAP  hbmpItem;      // used if MIIM_BITMAP
+ #endif /* WINVER >= 0x0500 */
+ }   MENUITEMINFOA, FAR *LPMENUITEMINFOA;
+-typedef struct tagMENUITEMINFOW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMENUITEMINFOW
  {
      UINT     cbSize;
 -    UINT     fMask;
@@ -3530,7 +3620,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  InsertMenuItemA(
@@ -3539,7 +3629,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL fByPosition,
      _In_ LPCMENUITEMINFOA lpmi);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  InsertMenuItemW(
@@ -3548,7 +3638,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetMenuItemInfoA(
@@ -3557,7 +3647,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL fByPosition,
      _Inout_ LPMENUITEMINFOA lpmii);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetMenuItemInfoW(
@@ -3566,7 +3656,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetMenuItemInfoA(
@@ -3575,7 +3665,7 @@ index f99e9294f5..fe659be298 100644
      _In_ BOOL fByPositon,
      _In_ LPCMENUITEMINFOA lpmii);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetMenuItemInfoW(
@@ -3634,12 +3724,21 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  DrawIcon(
+@@ -8216,7 +8221,7 @@ DrawIcon(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagDRAWTEXTPARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDRAWTEXTPARAMS
+ {
+     UINT    cbSize;
+     int     iTabLength;
 @@ -8242,7 +8247,7 @@ typedef struct tagDRAWTEXTPARAMS
      _When_(((size) == -1) || (_String_length_(_Curr_) <  (size)), _Pre_z_ _Pre_valid_ _Out_writes_z_(_String_length_(_Curr_) + (grows))) \
      _When_(((size) != -1) && (_String_length_(_Curr_) >= (size)), _Pre_count_(size) _Pre_valid_ _Out_writes_z_((size) + (grows)))
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  _Success_(return)
  int
  WINAPI
@@ -3650,7 +3749,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT format);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  _Success_(return)
  int
  WINAPI
@@ -3668,7 +3767,7 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  _Success_(return)
  int
  WINAPI
@@ -3680,7 +3779,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format,
      _In_opt_ LPDRAWTEXTPARAMS lpdtp);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  _Success_(return)
  int
  WINAPI
@@ -3698,7 +3797,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  GrayStringA(
@@ -3707,7 +3806,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int nWidth,
      _In_ int nHeight);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  GrayStringW(
@@ -3716,7 +3815,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  DrawStateA(
@@ -3727,7 +3826,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT uFlags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(DRAWSTATE_FLAGS) _In_ UINT uFlags);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  DrawStateW(
@@ -3745,7 +3844,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LONG
  WINAPI
  TabbedTextOutA(
@@ -3754,7 +3853,7 @@ index f99e9294f5..fe659be298 100644
      _In_reads_opt_(nTabPositions) CONST INT *lpnTabStopPositions,
      _In_ int nTabOrigin);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LONG
  WINAPI
  TabbedTextOutW(
@@ -3763,7 +3862,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  GetTabbedTextExtentA(
@@ -3772,7 +3871,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int nTabPositions,
      _In_reads_opt_(nTabPositions) CONST INT *lpnTabStopPositions);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  GetTabbedTextExtentW(
@@ -3788,7 +3887,7 @@ index f99e9294f5..fe659be298 100644
      _In_ HWND hWnd);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  SetActiveWindow(
@@ -4128,7 +4227,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetPropA(
@@ -4136,7 +4235,7 @@ index f99e9294f5..fe659be298 100644
      _In_ LPCSTR lpString,
      _In_opt_ HANDLE hData);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetPropW(
@@ -4145,14 +4244,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  GetPropA(
      _In_ HWND hWnd,
      _In_ LPCSTR lpString);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  GetPropW(
@@ -4161,14 +4260,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  RemovePropA(
      _In_ HWND hWnd,
      _In_ LPCSTR lpString);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  RemovePropW(
@@ -4177,7 +4276,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  EnumPropsExA(
@@ -4185,7 +4284,7 @@ index f99e9294f5..fe659be298 100644
      _In_ PROPENUMPROCEXA lpEnumFunc,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  EnumPropsExW(
@@ -4194,14 +4293,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  EnumPropsA(
      _In_ HWND hWnd,
      _In_ PROPENUMPROCA lpEnumFunc);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  int
  WINAPI
  EnumPropsW(
@@ -4210,14 +4309,14 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetWindowTextA(
      _In_ HWND hWnd,
      _In_opt_ LPCSTR lpString);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  SetWindowTextW(
@@ -4226,7 +4325,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -_Ret_range_(0, nMaxCount)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, nMaxCount)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, nMaxCount)
  WINUSERAPI
  int
  WINAPI
@@ -4235,7 +4334,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_(nMaxCount) LPSTR lpString,
      _In_ int nMaxCount);
 -_Ret_range_(0, nMaxCount)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, nMaxCount)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Ret_range_(0, nMaxCount)
  WINUSERAPI
  int
  WINAPI
@@ -4244,13 +4343,13 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetWindowTextLengthA(
      _In_ HWND hWnd);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetWindowTextLengthW(
@@ -4318,8 +4417,12 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT dpi);
  #endif /* WINVER >= 0x0605 */
  
-@@ -9113,34 +9118,34 @@ AdjustWindowRectExForDpi(
- typedef struct tagHELPINFO      /* Structure pointed to by lParam of WM_HELP */
+@@ -9110,37 +9115,37 @@ AdjustWindowRectExForDpi(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagHELPINFO      /* Structure pointed to by lParam of WM_HELP */
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagHELPINFO      /* Structure pointed to by lParam of WM_HELP */
  {
      UINT    cbSize;             /* Size in bytes of this struct  */
 -    int     iContextType;       /* Either HELPINFO_WINDOW or HELPINFO_MENUITEM */
@@ -4363,7 +4466,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxA(
@@ -4373,7 +4476,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT uType);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxW(
@@ -4390,7 +4493,7 @@ index f99e9294f5..fe659be298 100644
  #endif  /* _M_CEE */
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxExA(
@@ -4401,7 +4504,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType,
      _In_ WORD wLanguageId);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxExW(
@@ -4413,7 +4516,15 @@ index f99e9294f5..fe659be298 100644
      _In_ WORD wLanguageId);
  #ifdef UNICODE
  #define MessageBoxEx  MessageBoxExW
-@@ -9306,7 +9311,7 @@ typedef struct tagMSGBOXPARAMSA
+@@ -9299,27 +9304,27 @@ MessageBoxExW(
+ 
+ typedef VOID (CALLBACK *MSGBOXCALLBACK)(LPHELPINFO lpHelpInfo);
+ 
+-typedef struct tagMSGBOXPARAMSA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMSGBOXPARAMSA
+ {
+     UINT        cbSize;
+     HWND        hwndOwner;
      HINSTANCE   hInstance;
      LPCSTR      lpszText;
      LPCSTR      lpszCaption;
@@ -4422,7 +4533,13 @@ index f99e9294f5..fe659be298 100644
      LPCSTR      lpszIcon;
      DWORD_PTR   dwContextHelpId;
      MSGBOXCALLBACK      lpfnMsgBoxCallback;
-@@ -9319,7 +9324,7 @@ typedef struct tagMSGBOXPARAMSW
+     DWORD       dwLanguageId;
+ } MSGBOXPARAMSA, *PMSGBOXPARAMSA, *LPMSGBOXPARAMSA;
+-typedef struct tagMSGBOXPARAMSW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMSGBOXPARAMSW
+ {
+     UINT        cbSize;
+     HWND        hwndOwner;
      HINSTANCE   hInstance;
      LPCWSTR     lpszText;
      LPCWSTR     lpszCaption;
@@ -4436,13 +4553,13 @@ index f99e9294f5..fe659be298 100644
  #endif // UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxIndirectA(
      _In_ CONST MSGBOXPARAMSA * lpmbp);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxIndirectW(
@@ -4856,7 +4973,7 @@ index f99e9294f5..fe659be298 100644
  #ifndef NOWINOFFSETS
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG
  WINAPI
  GetWindowLongA(
@@ -4864,7 +4981,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ int nIndex);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG
  WINAPI
  GetWindowLongW(
@@ -4878,7 +4995,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG
  WINAPI
  SetWindowLongA(
@@ -4887,7 +5004,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
      _In_ LONG dwNewLong);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG
  WINAPI
  SetWindowLongW(
@@ -4902,7 +5019,7 @@ index f99e9294f5..fe659be298 100644
  #ifdef _WIN64
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG_PTR
  WINAPI
  GetWindowLongPtrA(
@@ -4910,7 +5027,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ int nIndex);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG_PTR
  WINAPI
  GetWindowLongPtrW(
@@ -4924,7 +5041,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG_PTR
  WINAPI
  SetWindowLongPtrA(
@@ -4933,7 +5050,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  LONG_PTR
  WINAPI
  SetWindowLongPtrW(
@@ -4965,7 +5082,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WORD wNewWord);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  DWORD
  WINAPI
  GetClassLongA(
@@ -4973,7 +5090,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ int nIndex);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  DWORD
  WINAPI
  GetClassLongW(
@@ -4987,7 +5104,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  DWORD
  WINAPI
  SetClassLongA(
@@ -4996,7 +5113,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
      _In_ LONG dwNewLong);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  DWORD
  WINAPI
  SetClassLongW(
@@ -5011,7 +5128,7 @@ index f99e9294f5..fe659be298 100644
  #ifdef _WIN64
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ULONG_PTR
  WINAPI
  GetClassLongPtrA(
@@ -5019,7 +5136,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ int nIndex);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ULONG_PTR
  WINAPI
  GetClassLongPtrW(
@@ -5033,7 +5150,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ULONG_PTR
  WINAPI
  SetClassLongPtrA(
@@ -5042,7 +5159,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  ULONG_PTR
  WINAPI
  SetClassLongPtrW(
@@ -5104,14 +5221,14 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  FindWindowA(
      _In_opt_ LPCSTR lpClassName,
      _In_opt_ LPCSTR lpWindowName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  FindWindowW(
@@ -5120,7 +5237,7 @@ index f99e9294f5..fe659be298 100644
  
  #if(WINVER >= 0x0400)
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  FindWindowExA(
@@ -5129,7 +5246,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ LPCSTR lpszClass,
      _In_opt_ LPCSTR lpszWindow);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  FindWindowExW(
@@ -5178,7 +5295,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetClassNameA(
@@ -5187,7 +5304,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int nMaxCount
      );
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  GetClassNameW(
@@ -5205,7 +5322,7 @@ index f99e9294f5..fe659be298 100644
  #define SetSysModalWindow(hWnd) (NULL)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  DWORD
  WINAPI
  GetWindowThreadProcessId(
@@ -5247,7 +5364,7 @@ index f99e9294f5..fe659be298 100644
      _In_ HOOKPROC pfnFilterProc);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnhookWindowsHookEx, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnhookWindowsHookEx, -1, 0) WINUSERAPI
  HHOOK
  WINAPI
  SetWindowsHookExA(
@@ -5257,7 +5374,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ HINSTANCE hmod,
      _In_ DWORD dwThreadId);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnhookWindowsHookEx, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(UnhookWindowsHookEx, -1, 0) WINUSERAPI
  HHOOK
  WINAPI
  SetWindowsHookExW(
@@ -5296,14 +5413,14 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINUSERAPI
  HBITMAP
  WINAPI
  LoadBitmapA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpBitmapName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINUSERAPI
  HBITMAP
  WINAPI
  LoadBitmapW(
@@ -5312,14 +5429,14 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HCURSOR
  WINAPI
  LoadCursorA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpCursorName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HCURSOR
  WINAPI
  LoadCursorW(
@@ -5328,13 +5445,13 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINUSERAPI
  HCURSOR
  WINAPI
  LoadCursorFromFileA(
      _In_ LPCSTR lpFileName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINUSERAPI
  HCURSOR
  WINAPI
  LoadCursorFromFileW(
@@ -5376,14 +5493,14 @@ index f99e9294f5..fe659be298 100644
  typedef ICONINFO *PICONINFO;
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINUSERAPI
  HICON
  WINAPI
  LoadIconA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpIconName);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINUSERAPI
  HICON
  WINAPI
  LoadIconW(
@@ -5392,7 +5509,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  PrivateExtractIconsA(
@@ -5406,7 +5523,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT nIcons,
      _In_ UINT flags);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  PrivateExtractIconsW(
@@ -5489,7 +5606,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  LoadImageA(
@@ -5502,7 +5619,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT fuLoad);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT fuLoad);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINUSERAPI
  HANDLE
  WINAPI
  LoadImageW(
@@ -5576,19 +5693,37 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  GetIconInfo(
+@@ -10985,7 +10990,7 @@ GetIconInfo(
+     _Out_ PICONINFO piconinfo);
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+-typedef struct _ICONINFOEXA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _ICONINFOEXA {
+     DWORD   cbSize;
+     BOOL    fIcon;
+     DWORD   xHotspot;
+@@ -10996,7 +11001,7 @@ typedef struct _ICONINFOEXA {
+     CHAR    szModName[MAX_PATH];
+     CHAR    szResName[MAX_PATH];
+ } ICONINFOEXA, *PICONINFOEXA;
+-typedef struct _ICONINFOEXW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _ICONINFOEXW {
+     DWORD   cbSize;
+     BOOL    fIcon;
+     DWORD   xHotspot;
 @@ -11015,13 +11020,13 @@ typedef ICONINFOEXA ICONINFOEX;
  typedef PICONINFOEXA PICONINFOEX;
  #endif // UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINUSERAPI
  BOOL
  WINAPI
  GetIconInfoExA(
      _In_ HICON hicon,
      _Inout_ PICONINFOEXA piconinfo);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINUSERAPI
  BOOL
  WINAPI
  GetIconInfoExW(
@@ -5597,14 +5732,14 @@ index f99e9294f5..fe659be298 100644
  #ifndef NOMSG
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  IsDialogMessageA(
      _In_ HWND hDlg,
      _In_ LPMSG lpMsg);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  IsDialogMessageW(
@@ -5621,7 +5756,7 @@ index f99e9294f5..fe659be298 100644
      _Inout_ LPRECT lpRect);
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINUSERAPI
  int
  WINAPI
  DlgDirListA(
@@ -5632,7 +5767,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT uFileType);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(DLG_DIR_LIST_FILE_TYPE) _In_ UINT uFileType);
-+_Windows_SupportedOS_WindowsVista_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINUSERAPI
  int
  WINAPI
  DlgDirListW(
@@ -5650,7 +5785,7 @@ index f99e9294f5..fe659be298 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  DlgDirSelectExA(
@@ -5659,7 +5794,7 @@ index f99e9294f5..fe659be298 100644
      _In_ int chCount,
      _In_ int idListBox);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  DlgDirSelectExW(
@@ -5668,7 +5803,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  DlgDirListComboBoxA(
@@ -5679,7 +5814,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT uFiletype);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(DLG_DIR_LIST_FILE_TYPE) _In_ UINT uFiletype);
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  int
  WINAPI
  DlgDirListComboBoxW(
@@ -5696,7 +5831,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  DlgDirSelectComboBoxExA(
@@ -5705,12 +5840,16 @@ index f99e9294f5..fe659be298 100644
      _In_ int cchOut,
      _In_ int idComboBox);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  DlgDirSelectComboBoxExW(
-@@ -12038,7 +12043,7 @@ DlgDirSelectComboBoxExW(
- typedef struct tagSCROLLINFO
+@@ -12035,10 +12040,10 @@ DlgDirSelectComboBoxExW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagSCROLLINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSCROLLINFO
  {
      UINT    cbSize;
 -    UINT    fMask;
@@ -5767,7 +5906,7 @@ index f99e9294f5..fe659be298 100644
  } CLIENTCREATESTRUCT, *LPCLIENTCREATESTRUCT;
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  DefFrameProcA(
@@ -5776,7 +5915,7 @@ index f99e9294f5..fe659be298 100644
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
  DefFrameProcW(
@@ -5819,7 +5958,7 @@ index f99e9294f5..fe659be298 100644
      _In_ HWND hWnd);
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateMDIWindowA(
@@ -5835,7 +5974,7 @@ index f99e9294f5..fe659be298 100644
      _In_opt_ HINSTANCE hInstance,
      _In_ LPARAM lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  HWND
  WINAPI
  CreateMDIWindowW(
@@ -5877,7 +6016,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  WinHelpA(
@@ -5886,7 +6025,7 @@ index f99e9294f5..fe659be298 100644
      _In_ UINT uCommand,
      _In_ ULONG_PTR dwData);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  WinHelpW(
@@ -5905,7 +6044,41 @@ index f99e9294f5..fe659be298 100644
  #endif /* WINVER >= 0x0500 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -12935,7 +12940,7 @@ typedef struct tagMINIMIZEDMETRICS
+@@ -12609,7 +12614,7 @@ GetGuiResources(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagTouchPredictionParameters
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTouchPredictionParameters
+ {
+     UINT cbSize;
+     UINT dwLatency;       // Latency in millisecs
+@@ -12854,7 +12859,7 @@ typedef enum tagHANDEDNESS {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagNONCLIENTMETRICSA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagNONCLIENTMETRICSA
+ {
+     UINT    cbSize;
+     int     iBorderWidth;
+@@ -12875,7 +12880,7 @@ typedef struct tagNONCLIENTMETRICSA
+     int     iPaddedBorderWidth;
+ #endif /* WINVER >= 0x0600 */
+ }   NONCLIENTMETRICSA, *PNONCLIENTMETRICSA, FAR* LPNONCLIENTMETRICSA;
+-typedef struct tagNONCLIENTMETRICSW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagNONCLIENTMETRICSW
+ {
+     UINT    cbSize;
+     int     iBorderWidth;
+@@ -12929,18 +12934,18 @@ typedef LPNONCLIENTMETRICSA LPNONCLIENTMETRICS;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagMINIMIZEDMETRICS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMINIMIZEDMETRICS
+ {
+     UINT    cbSize;
      int     iWidth;
      int     iHorzGap;
      int     iVertGap;
@@ -5914,8 +6087,34 @@ index f99e9294f5..fe659be298 100644
  }   MINIMIZEDMETRICS, *PMINIMIZEDMETRICS, *LPMINIMIZEDMETRICS;
  
  #ifdef _WINGDI_
-@@ -12977,7 +12982,7 @@ typedef struct tagANIMATIONINFO
- typedef struct tagSERIALKEYSA
+ #ifndef NOGDI
+-typedef struct tagICONMETRICSA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagICONMETRICSA
+ {
+     UINT    cbSize;
+     int     iHorzSpacing;
+@@ -12948,7 +12953,7 @@ typedef struct tagICONMETRICSA
+     int     iTitleWrap;
+     LOGFONTA lfFont;
+ }   ICONMETRICSA, *PICONMETRICSA, *LPICONMETRICSA;
+-typedef struct tagICONMETRICSW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagICONMETRICSW
+ {
+     UINT    cbSize;
+     int     iHorzSpacing;
+@@ -12968,26 +12973,26 @@ typedef LPICONMETRICSA LPICONMETRICS;
+ #endif /* NOGDI */
+ #endif /* _WINGDI_ */
+ 
+-typedef struct tagANIMATIONINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagANIMATIONINFO
+ {
+     UINT    cbSize;
+     int     iMinAnimate;
+ }   ANIMATIONINFO, *LPANIMATIONINFO;
+ 
+-typedef struct tagSERIALKEYSA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSERIALKEYSA
  {
      UINT    cbSize;
 -    DWORD   dwFlags;
@@ -5923,8 +6122,11 @@ index f99e9294f5..fe659be298 100644
      LPSTR     lpszActivePort;
      LPSTR     lpszPort;
      UINT    iBaudRate;
-@@ -12987,7 +12992,7 @@ typedef struct tagSERIALKEYSA
- typedef struct tagSERIALKEYSW
+     UINT    iPortState;
+     UINT    iActive;
+ }   SERIALKEYSA, *LPSERIALKEYSA;
+-typedef struct tagSERIALKEYSW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSERIALKEYSW
  {
      UINT    cbSize;
 -    DWORD   dwFlags;
@@ -5932,15 +6134,20 @@ index f99e9294f5..fe659be298 100644
      LPWSTR    lpszActivePort;
      LPWSTR    lpszPort;
      UINT    iBaudRate;
-@@ -13011,13 +13016,13 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
- typedef struct tagHIGHCONTRASTA
+@@ -13008,16 +13013,16 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
+ #define SERKF_INDICATOR     0x00000004
+ 
+ 
+-typedef struct tagHIGHCONTRASTA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagHIGHCONTRASTA
  {
      UINT    cbSize;
 -    DWORD   dwFlags;
 +    _Win32_AssociatedEnum_(HIGHCONTRASTW_FLAGS) DWORD   dwFlags;
      LPSTR   lpszDefaultScheme;
  }   HIGHCONTRASTA, *LPHIGHCONTRASTA;
- typedef struct tagHIGHCONTRASTW
+-typedef struct tagHIGHCONTRASTW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagHIGHCONTRASTW
  {
      UINT    cbSize;
 -    DWORD   dwFlags;
@@ -5953,7 +6160,7 @@ index f99e9294f5..fe659be298 100644
  #ifndef NOGDI
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
  LONG
  WINAPI
  ChangeDisplaySettingsA(
@@ -5961,7 +6168,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ DWORD dwFlags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(CDS_TYPE) _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
  LONG
  WINAPI
  ChangeDisplaySettingsW(
@@ -5975,7 +6182,7 @@ index f99e9294f5..fe659be298 100644
  #endif // !UNICODE
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
  LONG
  WINAPI
  ChangeDisplaySettingsExA(
@@ -5986,7 +6193,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(CDS_TYPE) _In_ DWORD dwflags,
      _In_opt_ LPVOID lParam);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(DISP_CHANGE) WINUSERAPI
  LONG
  WINAPI
  ChangeDisplaySettingsExW(
@@ -6003,7 +6210,7 @@ index f99e9294f5..fe659be298 100644
  #define ENUM_REGISTRY_SETTINGS      ((DWORD)-2)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplaySettingsA(
@@ -6012,7 +6219,7 @@ index f99e9294f5..fe659be298 100644
 +    _Win32_AssociatedEnum_(ENUM_DISPLAY_SETTINGS_MODE) _In_ DWORD iModeNum,
      _Inout_ DEVMODEA* lpDevMode);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplaySettingsW(
@@ -6027,7 +6234,7 @@ index f99e9294f5..fe659be298 100644
  #if(WINVER >= 0x0500)
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplaySettingsExA(
@@ -6038,7 +6245,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ DWORD dwFlags);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(ENUM_DISPLAY_SETTINGS_FLAGS) _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplaySettingsExW(
@@ -6056,7 +6263,7 @@ index f99e9294f5..fe659be298 100644
  #define EDS_ROTATEDMODE               0x00000004
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplayDevicesA(
@@ -6065,7 +6272,7 @@ index f99e9294f5..fe659be298 100644
      _Inout_ PDISPLAY_DEVICEA lpDisplayDevice,
      _In_ DWORD dwFlags);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  EnumDisplayDevicesW(
@@ -6126,7 +6333,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -6138,7 +6345,7 @@ index f99e9294f5..fe659be298 100644
 -    _In_ UINT fWinIni);
 -WINUSERAPI
 +    _Win32_AssociatedEnum_(SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) _In_ UINT fWinIni);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -6161,8 +6368,21 @@ index f99e9294f5..fe659be298 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -13331,7 +13336,7 @@ typedef struct tagFILTERKEYS
- typedef struct tagSTICKYKEYS
+@@ -13301,7 +13306,7 @@ SystemParametersInfoForDpi(
+ /*
+  * Accessibility support
+  */
+-typedef struct tagFILTERKEYS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagFILTERKEYS
+ {
+     UINT  cbSize;
+     DWORD dwFlags;
+@@ -13328,10 +13333,10 @@ typedef struct tagFILTERKEYS
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagSTICKYKEYS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSTICKYKEYS
  {
      UINT  cbSize;
 -    DWORD dwFlags;
@@ -6170,8 +6390,30 @@ index f99e9294f5..fe659be298 100644
  } STICKYKEYS, *LPSTICKYKEYS;
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -13446,14 +13451,14 @@ typedef struct tagACCESSTIMEOUT
- typedef struct tagSOUNDSENTRYA
+@@ -13371,7 +13376,7 @@ typedef struct tagSTICKYKEYS
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagMOUSEKEYS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMOUSEKEYS
+ {
+     UINT cbSize;
+     DWORD dwFlags;
+@@ -13407,7 +13412,7 @@ typedef struct tagMOUSEKEYS
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagACCESSTIMEOUT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagACCESSTIMEOUT
+ {
+     UINT  cbSize;
+     DWORD dwFlags;
+@@ -13443,32 +13448,32 @@ typedef struct tagACCESSTIMEOUT
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagSOUNDSENTRYA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSOUNDSENTRYA
  {
      UINT cbSize;
 -    DWORD dwFlags;
@@ -6189,8 +6431,9 @@ index f99e9294f5..fe659be298 100644
      DWORD iWindowsEffectMSec;
      LPSTR   lpszWindowsEffectDLL;
      DWORD iWindowsEffectOrdinal;
-@@ -13461,14 +13466,14 @@ typedef struct tagSOUNDSENTRYA
- typedef struct tagSOUNDSENTRYW
+ } SOUNDSENTRYA, *LPSOUNDSENTRYA;
+-typedef struct tagSOUNDSENTRYW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSOUNDSENTRYW
  {
      UINT cbSize;
 -    DWORD dwFlags;
@@ -6217,6 +6460,24 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  SoundSentry(VOID);
+@@ -13504,7 +13509,7 @@ SoundSentry(VOID);
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-typedef struct tagTOGGLEKEYS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTOGGLEKEYS
+ {
+     UINT cbSize;
+     DWORD dwFlags;
+@@ -13527,7 +13532,7 @@ typedef struct tagTOGGLEKEYS
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+-typedef struct tagAUDIODESCRIPTION {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagAUDIODESCRIPTION {
+     UINT cbSize;   // sizeof(AudioDescriptionType)
+     BOOL Enabled;  // On/Off
+     LCID Locale;   // locale ID for language
 @@ -13559,14 +13564,14 @@ SetDebugErrorLevel(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -6268,19 +6529,28 @@ index f99e9294f5..fe659be298 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
+@@ -13641,7 +13646,7 @@ MonitorFromWindow(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagMONITORINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMONITORINFO
+ {
+     DWORD   cbSize;
+     RECT    rcMonitor;
 @@ -13685,13 +13690,13 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
  #endif // UNICODE
  #endif
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  GetMonitorInfoA(
      _In_ HMONITOR hMonitor,
      _Inout_ LPMONITORINFO lpmi);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  BOOL
  WINAPI
  GetMonitorInfoW(
@@ -6329,8 +6599,12 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  UnhookWinEvent(
-@@ -14399,7 +14404,7 @@ UnhookWinEvent(
- typedef struct tagGUITHREADINFO
+@@ -14396,10 +14401,10 @@ UnhookWinEvent(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef struct tagGUITHREADINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagGUITHREADINFO
  {
      DWORD   cbSize;
 -    DWORD   flags;
@@ -6487,7 +6761,7 @@ index f99e9294f5..fe659be298 100644
  
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  GetWindowModuleFileNameA(
@@ -6495,12 +6769,16 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_to_(cchFileNameMax, return) LPSTR pszFileName,
      _In_ UINT cchFileNameMax);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINUSERAPI
  UINT
  WINAPI
  GetWindowModuleFileNameW(
-@@ -14648,7 +14653,7 @@ GetWindowModuleFileNameW(
- typedef struct tagCURSORINFO
+@@ -14645,10 +14650,10 @@ GetWindowModuleFileNameW(
+ /*
+  * Information about the global cursor.
+  */
+-typedef struct tagCURSORINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagCURSORINFO
  {
      DWORD   cbSize;
 -    DWORD   flags;
@@ -6517,7 +6795,13 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  GetCursorInfo(
-@@ -14679,8 +14684,8 @@ typedef struct tagWINDOWINFO
+@@ -14674,13 +14679,13 @@ GetCursorInfo(
+ /*
+  * Window information snapshot
+  */
+-typedef struct tagWINDOWINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagWINDOWINFO
+ {
      DWORD cbSize;
      RECT rcWindow;
      RECT rcClient;
@@ -6537,7 +6821,15 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  GetWindowInfo(
-@@ -14707,7 +14712,7 @@ typedef struct tagTITLEBARINFO
+@@ -14700,14 +14705,14 @@ GetWindowInfo(
+ /*
+  * Titlebar information.
+  */
+-typedef struct tagTITLEBARINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTITLEBARINFO
+ {
+     DWORD cbSize;
+     RECT rcTitleBar;
      DWORD rgstate[CCHILDREN_TITLEBAR + 1];
  } TITLEBARINFO, *PTITLEBARINFO, *LPTITLEBARINFO;
  
@@ -6546,7 +6838,25 @@ index f99e9294f5..fe659be298 100644
  BOOL
  WINAPI
  GetTitleBarInfo(
-@@ -14738,12 +14743,12 @@ typedef struct tagMENUBARINFO
+@@ -14715,7 +14720,7 @@ GetTitleBarInfo(
+     _Inout_ PTITLEBARINFO pti);
+ 
+ #if(WINVER >= 0x0600)
+-typedef struct tagTITLEBARINFOEX
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagTITLEBARINFOEX
+ {
+     DWORD cbSize;
+     RECT rcTitleBar;
+@@ -14727,7 +14732,7 @@ typedef struct tagTITLEBARINFOEX
+ /*
+  * Menubar information
+  */
+-typedef struct tagMENUBARINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMENUBARINFO
+ {
+     DWORD cbSize;
+     RECT rcBar;          // rect of bar, popup, item
+@@ -14738,19 +14743,19 @@ typedef struct tagMENUBARINFO
      BOOL fUnused:30;     // reserved
  } MENUBARINFO, *PMENUBARINFO, *LPMENUBARINFO;
  
@@ -6561,7 +6871,15 @@ index f99e9294f5..fe659be298 100644
      _In_ LONG idItem,
      _Inout_ PMENUBARINFO pmbi);
  
-@@ -14761,12 +14766,12 @@ typedef struct tagSCROLLBARINFO
+ /*
+  * Scrollbar information
+  */
+-typedef struct tagSCROLLBARINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSCROLLBARINFO
+ {
+     DWORD cbSize;
+     RECT rcScrollBar;
+@@ -14761,29 +14766,29 @@ typedef struct tagSCROLLBARINFO
      DWORD rgstate[CCHILDREN_SCROLLBAR + 1];
  } SCROLLBARINFO, *PSCROLLBARINFO, *LPSCROLLBARINFO;
  
@@ -6576,7 +6894,11 @@ index f99e9294f5..fe659be298 100644
      _Inout_ PSCROLLBARINFO psbi);
  
  /*
-@@ -14777,13 +14782,13 @@ typedef struct tagCOMBOBOXINFO
+  * Combobox information
+  */
+-typedef struct tagCOMBOBOXINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagCOMBOBOXINFO
+ {
      DWORD cbSize;
      RECT rcItem;
      RECT rcButton;
@@ -6616,21 +6938,39 @@ index f99e9294f5..fe659be298 100644
  HWND
  WINAPI
  RealChildWindowFromPoint(
+@@ -14829,7 +14834,7 @@ RealChildWindowFromPoint(
+  * This gets the name of the window TYPE, not class.  This allows us to
+  * recognize ThunderButton32 et al.
+  */
+-WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINUSERAPI
+ UINT
+ WINAPI
+ RealGetWindowClassA(
 @@ -14840,7 +14845,7 @@ RealGetWindowClassA(
   * This gets the name of the window TYPE, not class.  This allows us to
   * recognize ThunderButton32 et al.
   */
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  RealGetWindowClassW(
+@@ -14856,7 +14861,7 @@ RealGetWindowClassW(
+ /*
+  * Alt-Tab Switch window information.
+  */
+-typedef struct tagALTTABINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagALTTABINFO
+ {
+     DWORD cbSize;
+     int cItems;
 @@ -14869,7 +14874,7 @@ typedef struct tagALTTABINFO
      POINT ptStart;
  } ALTTABINFO, *PALTTABINFO, *LPALTTABINFO;
  
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetAltTabInfoA(
@@ -6639,7 +6979,7 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_opt_(cchItemText) LPSTR pszItemText,
      _In_ UINT cchItemText);
 -WINUSERAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  BOOL
  WINAPI
  GetAltTabInfoW(
@@ -6694,9 +7034,12 @@ index f99e9294f5..fe659be298 100644
      _Out_writes_bytes_to_opt_(*pcbSize, return) LPVOID pData,
      _Inout_ PUINT pcbSize,
      _In_ UINT cbSizeHeader);
-@@ -15257,7 +15262,7 @@ typedef struct tagRID_DEVICE_INFO_HID {
+@@ -15255,9 +15260,9 @@ typedef struct tagRID_DEVICE_INFO_HID {
+     USHORT usUsage;
+ } RID_DEVICE_INFO_HID, *PRID_DEVICE_INFO_HID;
  
- typedef struct tagRID_DEVICE_INFO {
+-typedef struct tagRID_DEVICE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagRID_DEVICE_INFO {
      DWORD cbSize;
 -    DWORD dwType;
 +    _Win32_AssociatedEnum_(RID_DEVICE_INFO_TYPE) DWORD dwType;
@@ -6708,7 +7051,7 @@ index f99e9294f5..fe659be298 100644
  } RID_DEVICE_INFO, *PRID_DEVICE_INFO, *LPRID_DEVICE_INFO;
  
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  GetRawInputDeviceInfoA(
@@ -6718,7 +7061,7 @@ index f99e9294f5..fe659be298 100644
      _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
      _Inout_ PUINT pcbSize);
 -WINUSERAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
  UINT
  WINAPI
  GetRawInputDeviceInfoW(
@@ -6861,9 +7204,12 @@ index f99e9294f5..fe659be298 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -15652,7 +15657,7 @@ ChangeWindowMessageFilter(
+@@ -15650,9 +15655,9 @@ ChangeWindowMessageFilter(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
- typedef struct tagCHANGEFILTERSTRUCT {
+-typedef struct tagCHANGEFILTERSTRUCT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagCHANGEFILTERSTRUCT {
      DWORD cbSize;
 -    DWORD ExtStatus;
 +    _Win32_AssociatedEnum_(MSGFLTINFO_STATUS) DWORD ExtStatus;
@@ -6886,6 +7232,24 @@ index f99e9294f5..fe659be298 100644
      _Inout_opt_ PCHANGEFILTERSTRUCT pChangeFilterStruct);   // Optional
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -15732,7 +15737,7 @@ DECLARE_HANDLE(HGESTUREINFO);
+  *     message lParam into the GetGestureExtraArgs function to retrieve extended
+  *     argument information.
+  */
+-typedef struct tagGESTUREINFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagGESTUREINFO {
+     UINT cbSize;                    // size, in bytes, of this structure (including variable length Args field)
+     DWORD dwFlags;                  // see GF_* flags
+     DWORD dwID;                     // gesture ID, see GID_* defines
+@@ -15753,7 +15758,7 @@ typedef GESTUREINFO const * PCGESTUREINFO;
+  *     in progress and a gesture will be generated if one is recognized under the
+  *     current gesture settings.
+  */
+-typedef struct tagGESTURENOTIFYSTRUCT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagGESTURENOTIFYSTRUCT {
+     UINT cbSize;                    // size, in bytes, of this structure
+     DWORD dwFlags;                  // unused
+     HWND hwndTarget;                // handle to window targeted by the gesture
 @@ -15773,7 +15778,7 @@ typedef struct tagGESTURENOTIFYSTRUCT {
   * Gesture information retrieval
   *   - HGESTUREINFO is received by a window in the lParam of a WM_GESTURE message.
@@ -9541,7 +9905,7 @@ index f99e9294f5..fe659be298 100644
 +#pragma pop_macro("TME_HOVER")
 +#pragma pop_macro("TME_CANCEL")
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("VK_0")
 +#undef VK_0
@@ -10538,7 +10902,7 @@ index f99e9294f5..fe659be298 100644
 +#pragma pop_macro("VK_1")
 +#pragma pop_macro("VK_0")
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("MAPVK_VK_TO_VSC")
 +#undef MAPVK_VK_TO_VSC
@@ -10564,7 +10928,7 @@ index f99e9294f5..fe659be298 100644
 +#pragma pop_macro("MAPVK_VSC_TO_VK")
 +#pragma pop_macro("MAPVK_VK_TO_VSC")
 +#endif
- 
++
 +#ifdef WIN32METADATA
 +#pragma push_macro("TOUCH_FEEDBACK_DEFAULT")
 +#undef TOUCH_FEEDBACK_DEFAULT
@@ -10582,7 +10946,7 @@ index f99e9294f5..fe659be298 100644
 +#pragma pop_macro("TOUCH_FEEDBACK_INDIRECT")
 +#pragma pop_macro("TOUCH_FEEDBACK_DEFAULT")
 +#endif
- 
++
 +#ifdef WIN32METADATA
 +#pragma push_macro("GID_BEGIN")
 +#undef GID_BEGIN

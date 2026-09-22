@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
-index 31cf48fdf9..3add18aa5c 100644
+index 31cf48fdf9..a2eff64e9c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 @@ -337,6 +337,7 @@ extern "C"{
@@ -213,7 +213,7 @@ index 31cf48fdf9..3add18aa5c 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( 
              /* [out] */ __RPC__out BOOL *pbDirty) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsDeletedOffline( 

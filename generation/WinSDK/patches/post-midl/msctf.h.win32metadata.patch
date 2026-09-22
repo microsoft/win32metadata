@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
-index ecd48fa0da..1ddeb1c182 100644
+index ecd48fa0da..168854eb27 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 @@ -699,6 +699,7 @@ extern "C"{
@@ -726,7 +726,7 @@ index ecd48fa0da..1ddeb1c182 100644
      ITfPreservedKeyNotifySink : public IUnknown
      {
      public:
-@@ -11616,7 +11617,7 @@ EXTERN_C const IID IID_ITfMessagePump;
+@@ -11616,11 +11617,11 @@ EXTERN_C const IID IID_ITfMessagePump;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -735,6 +735,38 @@ index ecd48fa0da..1ddeb1c182 100644
      ITfMessagePump : public IUnknown
      {
      public:
+-        virtual HRESULT STDMETHODCALLTYPE PeekMessageA( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE PeekMessageA( 
+             /* [annotation][out] */ 
+             _Out_  LPMSG pMsg,
+             /* [annotation][in] */ 
+@@ -11634,7 +11635,7 @@ EXTERN_C const IID IID_ITfMessagePump;
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetMessageA( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE GetMessageA( 
+             /* [annotation][out] */ 
+             _Out_  LPMSG pMsg,
+             /* [annotation][in] */ 
+@@ -11646,7 +11647,7 @@ EXTERN_C const IID IID_ITfMessagePump;
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE PeekMessageW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE PeekMessageW( 
+             /* [annotation][out] */ 
+             _Out_  LPMSG pMsg,
+             /* [annotation][in] */ 
+@@ -11660,7 +11661,7 @@ EXTERN_C const IID IID_ITfMessagePump;
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetMessageW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE GetMessageW( 
+             /* [annotation][out] */ 
+             _Out_  LPMSG pMsg,
+             /* [annotation][in] */ 
 @@ -11814,7 +11815,7 @@ EXTERN_C const IID IID_ITfThreadFocusSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

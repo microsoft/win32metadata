@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
-index fa89c10069..36e9dff7c0 100644
+index fa89c10069..b5383697a3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
 @@ -17,6 +17,7 @@
@@ -50,21 +50,23 @@ index fa89c10069..36e9dff7c0 100644
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -83,6 +96,9 @@ InitializeEnclave(
+@@ -83,7 +96,10 @@ InitializeEnclave(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
+-WINBASEAPI
 +
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
  _Success_(return != FALSE)
  BOOL
+ WINAPI
 @@ -92,6 +108,9 @@ LoadEnclaveImageA(
      _In_ LPCSTR lpImageName
      );
  
-+_Windows_SupportedOS_16299_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_16299_ 
 +
 +_Win32_SetLastError_
  WINBASEAPI

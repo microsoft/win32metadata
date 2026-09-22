@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
-index 638fd924df..00ebbc3aff 100644
+index 638fd924df..2c59ead43d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
 @@ -1,3 +1,4 @@
@@ -7,12 +7,119 @@ index 638fd924df..00ebbc3aff 100644
  // Copyright (c) Microsoft Corporation.  All rights reserved.
  //
  //  patchapi.h
+@@ -211,7 +212,7 @@ typedef struct _PATCH_OPTION_DATA {
+ //  The following prototypes are interface for creating patches from files.
+ //
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ CreatePatchFileA(
+     _In_opt_ LPCSTR OldFileName,            // input file  (optional)
+@@ -221,7 +222,7 @@ CreatePatchFileA(
+     _In_opt_ PPATCH_OPTION_DATA OptionData
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ CreatePatchFileW(
+     _In_opt_ LPCWSTR OldFileName,           // input file  (optional)
+@@ -241,7 +242,7 @@ CreatePatchFileByHandles(
+     _In_opt_ PPATCH_OPTION_DATA OptionData
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ CreatePatchFileExA(
+     _In_     ULONG                    OldFileCount,     // maximum 255
+@@ -254,7 +255,7 @@ CreatePatchFileExA(
+     _In_opt_ PVOID                    CallbackContext
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ CreatePatchFileExW(
+     _In_     ULONG                    OldFileCount,     // maximum 255
+@@ -280,14 +281,14 @@ CreatePatchFileByHandlesEx(
+     _In_opt_ PVOID                    CallbackContext
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ ExtractPatchHeaderToFileA(
+     _In_ LPCSTR PatchFileName,          // input file
+     _In_ LPCSTR PatchHeaderFileName     // output file
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ ExtractPatchHeaderToFileW(
+     _In_ LPCWSTR PatchFileName,         // input file
+@@ -310,7 +311,7 @@ ExtractPatchHeaderToFileByHandles(
+ //  but its CRC must be corrected.
+ //
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ TestApplyPatchToFileA(
+     _In_ LPCSTR PatchFileName,
+@@ -318,7 +319,7 @@ TestApplyPatchToFileA(
+     _In_ ULONG  ApplyOptionFlags
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ TestApplyPatchToFileW(
+     _In_ LPCWSTR PatchFileName,
+@@ -345,7 +346,7 @@ TestApplyPatchToFileByBuffers(
+     _In_                           ULONG  ApplyOptionFlags
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ ApplyPatchToFileA(
+     _In_     LPCSTR PatchFileName,      // input file (required)
+@@ -354,7 +355,7 @@ ApplyPatchToFileA(
+     _In_     ULONG  ApplyOptionFlags
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ ApplyPatchToFileW(
+     _In_     LPCWSTR PatchFileName,     // input file (required)
+@@ -372,7 +373,7 @@ ApplyPatchToFileByHandles(
+     _In_     ULONG  ApplyOptionFlags
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ PATCHAPI
+ ApplyPatchToFileExA(
+     _In_     LPCSTR                   PatchFileName,    // input file (required)
+@@ -383,7 +384,7 @@ ApplyPatchToFileExA(
+     _In_opt_ PVOID                    CallbackContext
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ PATCHAPI
+ ApplyPatchToFileExW(
+     _In_     LPCWSTR                  PatchFileName,    // input file (required)
 @@ -462,7 +463,7 @@ ApplyPatchToFileByBuffers(
  //  application time thus decreasing total bytes necessary to download.
  //
  
 -BOOL
-+_Win32_ImportLibrary_("mspatcha.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("mspatcha.dll") BOOL
  PATCHAPI
  GetFilePatchSignatureA(
      _In_                                  LPCSTR FileName,
@@ -21,7 +128,7 @@ index 638fd924df..00ebbc3aff 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("mspatcha.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("mspatcha.dll") BOOL
  PATCHAPI
  GetFilePatchSignatureW(
      _In_                                  LPCWSTR FileName,

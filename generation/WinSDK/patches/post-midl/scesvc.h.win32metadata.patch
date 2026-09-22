@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
-index af6fcb5bcc..76a08bb0b7 100644
+index af6fcb5bcc..85f8eba8bb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 @@ -1,3 +1,4 @@
@@ -30,7 +30,7 @@ index af6fcb5bcc..76a08bb0b7 100644
              /* [out] */ PBOOL pbOverwriteAll ) = 0;
  
 -        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
-+        _Win32_PreserveResult_ virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
              /* [in] */  LPTSTR lpTemplateName ) = 0;
  
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FreeBuffer(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
-index 814463bbaf..fbc45952eb 100644
+index 814463bbaf..c968079ddd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 @@ -17,6 +17,7 @@
@@ -22,8 +22,8 @@ index 814463bbaf..fbc45952eb 100644
  CreatePipe(
 -    _Out_ PHANDLE hReadPipe,
 -    _Out_ PHANDLE hWritePipe,
-+    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hReadPipe,
-+    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hWritePipe,
++    _WIN32META_ANNOTATION_("win32metadata:ignore_if_return=0") _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hReadPipe,
++    _WIN32META_ANNOTATION_("win32metadata:ignore_if_return=0") _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hWritePipe,
      _In_opt_ LPSECURITY_ATTRIBUTES lpPipeAttributes,
      _In_ DWORD nSize
      );
@@ -77,7 +77,7 @@ index 814463bbaf..fbc45952eb 100644
  
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +
  WINBASEAPI
@@ -92,24 +92,28 @@ index 814463bbaf..fbc45952eb 100644
      _In_ DWORD nMaxInstances,
      _In_ DWORD nOutBufferSize,
      _In_ DWORD nInBufferSize,
-@@ -110,6 +126,8 @@ CreateNamedPipeW(
+@@ -110,7 +126,9 @@ CreateNamedPipeW(
  #define CreateNamedPipe  CreateNamedPipeW
  #endif
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  BOOL
  WINAPI
-@@ -128,6 +146,8 @@ WaitNamedPipeW(
+ WaitNamedPipeW(
+@@ -128,7 +146,9 @@ WaitNamedPipeW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  BOOL
  WINAPI
+ GetNamedPipeClientComputerNameW(
 @@ -143,6 +163,8 @@ GetNamedPipeClientComputerNameW(
  #define GetNamedPipeClientComputerName  GetNamedPipeClientComputerNameW
  #endif
@@ -137,9 +141,10 @@ index 814463bbaf..fbc45952eb 100644
      _Out_opt_ LPDWORD lpMaxInstances
      );
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  BOOL
  WINAPI
  GetNamedPipeHandleStateW(
@@ -149,12 +154,14 @@ index 814463bbaf..fbc45952eb 100644
      _Out_opt_ LPDWORD lpCurInstances,
      _Out_opt_ LPDWORD lpMaxCollectionCount,
      _Out_opt_ LPDWORD lpCollectDataTimeout,
-@@ -190,6 +216,8 @@ GetNamedPipeHandleStateW(
+@@ -190,7 +216,9 @@ GetNamedPipeHandleStateW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  BOOL
  WINAPI
+ CallNamedPipeW(

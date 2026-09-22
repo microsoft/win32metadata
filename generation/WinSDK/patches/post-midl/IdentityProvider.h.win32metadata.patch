@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
-index 2d6f99ca6f..4ae48917ae 100644
+index 2d6f99ca6f..adcd86a250 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
 @@ -132,6 +132,7 @@ extern "C"{
@@ -64,3 +64,28 @@ index 2d6f99ca6f..4ae48917ae 100644
      IConnectedIdentityProvider : public IUnknown
      {
      public:
+@@ -1205,7 +1206,7 @@ EXTERN_C const IID IID_AsyncIConnectedIdentityProvider;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Begin_ConnectIdentity( 
+-            /* [ref][size_is][in] */ __RPC__in_xcount_full(AuthBufferSize) BYTE *AuthBuffer,
++            /* [ref][size_is][in] */  __RPC__in_xcount_full(AuthBufferSize) BYTE *AuthBuffer,
+             /* [in] */ ULONG AuthBufferSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Finish_ConnectIdentity( void) = 0;
+@@ -1485,13 +1486,13 @@ EXTERN_C const IID IID_AsyncIIdentityAuthentication;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Begin_SetIdentityCredential( 
+-            /* [unique][size_is][in] */ __RPC__in_xcount_full_opt(CredBufferLength) BYTE *CredBuffer,
++            /* [unique][size_is][in] */  __RPC__in_xcount_full_opt(CredBufferLength) BYTE *CredBuffer,
+             /* [in] */ ULONG CredBufferLength) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Finish_SetIdentityCredential( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Begin_ValidateIdentityCredential( 
+-            /* [ref][size_is][in] */ __RPC__in_xcount_full(CredBufferLength) BYTE *CredBuffer,
++            /* [ref][size_is][in] */  __RPC__in_xcount_full(CredBufferLength) BYTE *CredBuffer,
+             /* [in] */ ULONG CredBufferLength,
+             /* [unique][out][in] */ __RPC__deref_opt_inout_opt IPropertyStore **ppIdentityProperties) = 0;
+         

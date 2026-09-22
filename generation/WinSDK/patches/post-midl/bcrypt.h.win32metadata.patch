@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h b/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
-index c05c9ae0c3..0fd12542e8 100644
+index c05c9ae0c3..7a7a915e95 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/bcrypt.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index c05c9ae0c3..0fd12542e8 100644
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
+@@ -245,7 +246,7 @@ typedef struct _BCRYPT_PQDSA_PADDING_INFO {
+ #define BCRYPT_AUTH_MODE_CHAIN_CALLS_FLAG   0x00000001
+ #define BCRYPT_AUTH_MODE_IN_PROGRESS_FLAG   0x00000002
+ 
+-typedef struct _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
+ {
+     ULONG       cbSize;
+     ULONG       dwInfoVersion;
 @@ -449,10 +450,10 @@ typedef struct _BCryptBufferDesc {
  //
  

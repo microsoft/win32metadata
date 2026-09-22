@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
-index 62b1450287..8def65a2d9 100644
+index 62b1450287..711a5a8ced 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 @@ -1,3 +1,4 @@
@@ -185,7 +185,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(LocalFree, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(LocalFree, -1, 0) WINBASEAPI
  _Success_(return==0)
  _Ret_maybenull_
  HLOCAL
@@ -194,7 +194,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetBinaryTypeA(
@@ -202,7 +202,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ LPDWORD  lpBinaryType
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetBinaryTypeW(
@@ -211,7 +211,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
  WINAPI
@@ -220,7 +220,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
  WINAPI
@@ -229,7 +229,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
  WINAPI
@@ -269,6 +269,20 @@ index 62b1450287..8def65a2d9 100644
  __analysis_noreturn
  VOID
  WINAPI
+@@ -1487,11 +1488,11 @@ FatalExit(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ BOOL
+ WINAPI
+ SetEnvironmentStringsA(
+-    _In_ _Pre_ _NullNull_terminated_ LPCH NewEnvironment
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ _Pre_ _NullNull_terminated_ LPCH NewEnvironment
+     );
+ #ifndef UNICODE
+ #define SetEnvironmentStrings  SetEnvironmentStringsA
 @@ -1511,14 +1512,14 @@ SetEnvironmentStringsA(
  
  #define FIBER_FLAG_FLOAT_SWITCH 0x1     // context switch floating point
@@ -618,7 +632,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFileShortNameA(
@@ -626,7 +640,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpShortName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFileShortNameW(
@@ -999,7 +1013,7 @@ index 62b1450287..8def65a2d9 100644
  
  #if !defined(MIDL_PASS)
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0)
  DWORD
  WINAPI
@@ -1014,7 +1028,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ va_list *Arguments
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0)
  DWORD
  WINAPI
@@ -1029,7 +1043,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  CreateMailslotA(
@@ -1038,7 +1052,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  CreateMailslotW(
@@ -1065,14 +1079,14 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  EncryptFileA(
      _In_ LPCSTR lpFileName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  EncryptFileW(
@@ -1081,7 +1095,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  DecryptFileA(
@@ -1089,7 +1103,7 @@ index 62b1450287..8def65a2d9 100644
      _Reserved_ DWORD dwReserved
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  DecryptFileW(
@@ -1098,7 +1112,7 @@ index 62b1450287..8def65a2d9 100644
  #define FILE_DIR_DISALLOWED             9
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  FileEncryptionStatusA(
@@ -1106,7 +1120,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ LPDWORD  lpStatus
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  FileEncryptionStatusW(
@@ -1115,7 +1129,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
  OpenEncryptedFileRawA(
@@ -1124,7 +1138,7 @@ index 62b1450287..8def65a2d9 100644
      _Outptr_ PVOID   *pvContext
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
  OpenEncryptedFileRawW(
@@ -1160,7 +1174,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrcmpA(
@@ -1168,7 +1182,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpString2
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrcmpW(
@@ -1177,7 +1191,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrcmpiA(
@@ -1185,7 +1199,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpString2
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrcmpiW(
@@ -1194,7 +1208,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  _Check_return_
  _Success_(return != NULL)
  _Post_satisfies_(return == lpString1)
@@ -1203,7 +1217,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ int iMaxLength
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  _Check_return_
  _Success_(return != NULL)
  _Post_satisfies_(return == lpString1)
@@ -1212,7 +1226,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  LPSTR
  WINAPI
  lstrcpyA(
@@ -1220,7 +1234,7 @@ index 62b1450287..8def65a2d9 100644
      _In_  LPCSTR lpString2
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  LPWSTR
  WINAPI
  lstrcpyW(
@@ -1229,7 +1243,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  LPSTR
  WINAPI
  lstrcatA(
@@ -1237,7 +1251,7 @@ index 62b1450287..8def65a2d9 100644
      _In_    LPCSTR lpString2
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  LPWSTR
  WINAPI
  lstrcatW(
@@ -1246,14 +1260,14 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrlenA(
      _In_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  int
  WINAPI
  lstrlenW(
@@ -1275,7 +1289,7 @@ index 62b1450287..8def65a2d9 100644
  HFILE
  WINAPI
  _lcreat(
-@@ -2964,7 +2965,7 @@ _lread(
+@@ -2964,12 +2965,12 @@ _lread(
      _In_ UINT uBytes
      );
  
@@ -1284,6 +1298,21 @@ index 62b1450287..8def65a2d9 100644
  UINT
  WINAPI
  _lwrite(
+     _In_ HFILE hFile,
+-    _In_reads_bytes_(uBytes) LPCCH lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(uBytes) LPCCH lpBuffer,
+     _In_ UINT uBytes
+     );
+ 
+@@ -2987,7 +2988,7 @@ long
+ WINAPI
+ _hwrite(
+     _In_ HFILE hFile,
+-    _In_reads_bytes_(lBytes) LPCCH lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(lBytes) LPCCH lpBuffer,
+     _In_ long lBytes
+     );
+ 
 @@ -2998,7 +2999,7 @@ _lclose(
      _In_ HFILE hFile
      );
@@ -1350,7 +1379,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1359,7 +1388,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1368,7 +1397,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1377,7 +1406,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1386,7 +1415,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1395,7 +1424,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= 0x0600)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1404,7 +1433,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1413,7 +1442,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1430,7 +1459,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -1447,7 +1476,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  OpenFileMappingA(
@@ -1456,7 +1485,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return <= nBufferLength)
  DWORD
  WINAPI
@@ -1474,7 +1503,7 @@ index 62b1450287..8def65a2d9 100644
  #define PROCESS_NAME_NATIVE     0x00000001
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  QueryFullProcessImageNameA(
@@ -1485,7 +1514,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_ PDWORD lpdwSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  QueryFullProcessImageNameW(
@@ -1495,12 +1524,21 @@ index 62b1450287..8def65a2d9 100644
      _Out_writes_to_(*lpdwSize, *lpdwSize) LPWSTR lpExeName,
      _Inout_ PDWORD lpdwSize
      );
+@@ -4091,7 +4092,7 @@ typedef union _PROCESS_CREATION_SVE_VECTOR_LENGTH {
+ #pragma region Desktop Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ VOID
+ WINAPI
+ GetStartupInfoA(
 @@ -4167,7 +4168,7 @@ SetEnvironmentVariable(
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableA(
@@ -1509,7 +1547,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD    nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableW(
@@ -1518,7 +1556,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableExA(
@@ -1527,7 +1565,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_opt_ PDWORD pdwAttribubutes
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableExW(
@@ -1536,7 +1574,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableA(
@@ -1545,7 +1583,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD    nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableW(
@@ -1554,7 +1592,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableExA(
@@ -1563,7 +1601,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD    dwAttributes
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableExW(
@@ -1590,7 +1628,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // _WIN32_WINNT >= _WIN32_WINNT_WIN8
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Ret_maybenull_
  HRSRC
  WINAPI
@@ -1599,7 +1637,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Ret_maybenull_
  HRSRC
  WINAPI
@@ -1608,7 +1646,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EnumResourceTypesA(
@@ -1617,7 +1655,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     LONG_PTR lParam
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EnumResourceTypesW(
@@ -1626,7 +1664,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EnumResourceLanguagesA(
@@ -1635,7 +1673,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     LONG_PTR lParam
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EnumResourceLanguagesW(
@@ -1644,7 +1682,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(EndUpdateResourceA) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(EndUpdateResourceA) WINBASEAPI
  HANDLE
  WINAPI
  BeginUpdateResourceA(
@@ -1652,7 +1690,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ BOOL bDeleteExistingResources
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(EndUpdateResourceW) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(EndUpdateResourceW) WINBASEAPI
  HANDLE
  WINAPI
  BeginUpdateResourceW(
@@ -1661,7 +1699,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  UpdateResourceA(
@@ -1670,7 +1708,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD cb
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  UpdateResourceW(
@@ -1679,7 +1717,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EndUpdateResourceA(
@@ -1687,7 +1725,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ BOOL   fDiscard
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  EndUpdateResourceW(
@@ -1696,14 +1734,14 @@ index 62b1450287..8def65a2d9 100644
  #define ATOM_FLAG_GLOBAL 0x2
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalAddAtomA(
      _In_opt_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalAddAtomW(
@@ -1712,7 +1750,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalAddAtomExA(
@@ -1720,7 +1758,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD Flags
      );
 -WINBASEAPI
-+_Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalAddAtomExW(
@@ -1729,14 +1767,14 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalFindAtomA(
      _In_opt_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  GlobalFindAtomW(
@@ -1745,7 +1783,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  UINT
  WINAPI
  GlobalGetAtomNameA(
@@ -1754,7 +1792,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ int nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  UINT
  WINAPI
  GlobalGetAtomNameW(
@@ -1763,14 +1801,14 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  AddAtomA(
      _In_opt_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  AddAtomW(
@@ -1779,14 +1817,14 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  FindAtomA(
      _In_opt_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  ATOM
  WINAPI
  FindAtomW(
@@ -1795,7 +1833,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  UINT
  WINAPI
  GetAtomNameA(
@@ -1804,7 +1842,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ int nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  UINT
  WINAPI
  GetAtomNameW(
@@ -1813,7 +1851,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  UINT
  WINAPI
  GetProfileIntA(
@@ -1822,7 +1860,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ INT nDefault
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  UINT
  WINAPI
  GetProfileIntW(
@@ -1831,7 +1869,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetProfileStringA(
@@ -1840,7 +1878,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     DWORD nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetProfileStringW(
@@ -1849,7 +1887,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WriteProfileStringA(
@@ -1858,7 +1896,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WriteProfileStringW(
@@ -1867,7 +1905,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetProfileSectionA(
@@ -1876,7 +1914,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetProfileSectionW(
@@ -1885,7 +1923,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WriteProfileSectionA(
@@ -1893,7 +1931,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpString
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WriteProfileSectionW(
@@ -1902,7 +1940,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  UINT
  WINAPI
  GetPrivateProfileIntA(
@@ -1911,7 +1949,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  UINT
  WINAPI
  GetPrivateProfileIntW(
@@ -1920,7 +1958,7 @@ index 62b1450287..8def65a2d9 100644
  #endif  /* _M_CEE */
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileStringA(
@@ -1929,7 +1967,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileStringW(
@@ -1938,7 +1976,7 @@ index 62b1450287..8def65a2d9 100644
  #endif  /* _M_CEE */
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileStringA(
@@ -1947,7 +1985,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileStringW(
@@ -1956,7 +1994,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileSectionA(
@@ -1965,7 +2003,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileSectionW(
@@ -1974,7 +2012,7 @@ index 62b1450287..8def65a2d9 100644
  #endif  /* _M_CEE */
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileSectionA(
@@ -1983,7 +2021,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileSectionW(
@@ -1992,7 +2030,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileSectionNamesA(
@@ -2001,7 +2039,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  DWORD
  WINAPI
  GetPrivateProfileSectionNamesW(
@@ -2010,7 +2048,7 @@ index 62b1450287..8def65a2d9 100644
  #endif  /* _M_CEE */
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  BOOL
  WINAPI
  GetPrivateProfileStructA(
@@ -2019,7 +2057,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR szFile
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINBASEAPI
  BOOL
  WINAPI
  GetPrivateProfileStructW(
@@ -2028,7 +2066,7 @@ index 62b1450287..8def65a2d9 100644
  #endif  /* _M_CEE */
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileStructA(
@@ -2037,7 +2075,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR szFile
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WritePrivateProfileStructW(
@@ -2046,14 +2084,14 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0502
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetDllDirectoryA(
      _In_opt_ LPCSTR lpPathName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetDllDirectoryW(
@@ -2062,7 +2100,7 @@ index 62b1450287..8def65a2d9 100644
  
  #if _WIN32_WINNT >= 0x0502
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
@@ -2071,7 +2109,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_writes_to_opt_(nBufferLength, return + 1) LPSTR lpBuffer
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
@@ -2089,7 +2127,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateDirectoryExA(
@@ -2098,7 +2136,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateDirectoryExW(
@@ -2107,7 +2145,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateDirectoryTransactedA(
@@ -2116,7 +2154,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateDirectoryTransactedW(
@@ -2125,7 +2163,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  RemoveDirectoryTransactedA(
@@ -2133,7 +2171,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  RemoveDirectoryTransactedW(
@@ -2142,7 +2180,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
@@ -2151,7 +2189,7 @@ index 62b1450287..8def65a2d9 100644
      _In_            HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
@@ -2160,7 +2198,7 @@ index 62b1450287..8def65a2d9 100644
  #define DDD_LUID_BROADCAST_DRIVE    0x00000010
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  DefineDosDeviceA(
@@ -2174,7 +2212,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  QueryDosDeviceA(
@@ -2183,7 +2221,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  CreateFileTransactedA(
@@ -2203,7 +2241,7 @@ index 62b1450287..8def65a2d9 100644
      _Reserved_ PVOID  lpExtendedParameter
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  CreateFileTransactedW(
@@ -2246,7 +2284,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFileAttributesTransactedA(
@@ -2255,7 +2293,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetFileAttributesTransactedW(
@@ -2264,7 +2302,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetFileAttributesTransactedA(
@@ -2273,7 +2311,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetFileAttributesTransactedW(
@@ -2282,7 +2320,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetCompressedFileSizeTransactedA(
@@ -2291,7 +2329,7 @@ index 62b1450287..8def65a2d9 100644
      _In_      HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  DWORD
  WINAPI
  GetCompressedFileSizeTransactedW(
@@ -2300,7 +2338,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  DeleteFileTransactedA(
@@ -2308,7 +2346,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  DeleteFileTransactedW(
@@ -2317,7 +2355,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0501
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CheckNameLegalDOS8Dot3A(
@@ -2326,7 +2364,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_     PBOOL pbNameLegal
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CheckNameLegalDOS8Dot3W(
@@ -2335,7 +2373,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(FindClose) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
  FindFirstFileTransactedA(
@@ -2344,7 +2382,7 @@ index 62b1450287..8def65a2d9 100644
      _In_       HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(FindClose) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
  FindFirstFileTransactedW(
@@ -2353,7 +2391,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileA(
@@ -2362,7 +2400,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ BOOL bFailIfExists
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileW(
@@ -2387,7 +2425,7 @@ index 62b1450287..8def65a2d9 100644
      );
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileExA(
@@ -2399,7 +2437,7 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_AssociatedEnum_(COPYFILE_FLAGS) _In_        DWORD dwCopyFlags
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileExW(
@@ -2417,7 +2455,7 @@ index 62b1450287..8def65a2d9 100644
  #if _WIN32_WINNT >= 0x0600
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileTransactedA(
@@ -2426,7 +2464,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CopyFileTransactedW(
@@ -2479,7 +2517,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileA(
@@ -2487,7 +2525,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpNewFileName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileW(
@@ -2496,7 +2534,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileExA(
@@ -2506,7 +2544,7 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_AssociatedEnum_(MOVE_FILE_FLAGS) _In_     DWORD    dwFlags
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileExW(
@@ -2522,7 +2560,7 @@ index 62b1450287..8def65a2d9 100644
  
  #if (_WIN32_WINNT >= 0x0500)
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileWithProgressA(
@@ -2534,7 +2572,7 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_AssociatedEnum_(MOVE_FILE_FLAGS) _In_     DWORD dwFlags
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileWithProgressW(
@@ -2552,7 +2590,7 @@ index 62b1450287..8def65a2d9 100644
  
  #if (_WIN32_WINNT >= 0x0600)
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileTransactedA(
@@ -2565,7 +2603,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  MoveFileTransactedW(
@@ -2583,7 +2621,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= 0x0500)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  ReplaceFileA(
@@ -2596,7 +2634,7 @@ index 62b1450287..8def65a2d9 100644
      _Reserved_ LPVOID  lpReserved
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  ReplaceFileW(
@@ -2613,7 +2651,7 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateHardLinkA(
@@ -2622,7 +2660,7 @@ index 62b1450287..8def65a2d9 100644
      _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateHardLinkW(
@@ -2631,7 +2669,7 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateHardLinkTransactedA(
@@ -2640,7 +2678,7 @@ index 62b1450287..8def65a2d9 100644
      _In_       HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateHardLinkTransactedW(
@@ -2667,7 +2705,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  HANDLE
  WINAPI
  CreateNamedPipeA(
@@ -2684,7 +2722,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetNamedPipeHandleStateA(
@@ -2699,7 +2737,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CallNamedPipeA(
@@ -2708,7 +2746,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  WaitNamedPipeA(
@@ -2717,7 +2755,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetNamedPipeClientComputerNameA(
@@ -2762,7 +2800,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetVolumeLabelA(
@@ -2770,7 +2808,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpVolumeName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetVolumeLabelW(
@@ -2797,7 +2835,7 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2806,7 +2844,7 @@ index 62b1450287..8def65a2d9 100644
      _In_opt_ LPCSTR lpBackupFileName
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2815,7 +2853,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2824,7 +2862,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpBackupFileName
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2878,7 +2916,7 @@ index 62b1450287..8def65a2d9 100644
      );
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2887,7 +2925,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     LPCSTR lpSourceName
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2896,7 +2934,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2905,7 +2943,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     LPCSTR lpSourceName
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2914,7 +2952,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2923,7 +2961,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     LPCSTR lpFileName
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
  WINAPI
@@ -2932,7 +2970,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2947,7 +2985,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ DWORD      *pnMinNumberOfBytesNeeded
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2963,7 +3001,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -2979,7 +3017,7 @@ index 62b1450287..8def65a2d9 100644
      _In_reads_bytes_opt_(dwDataSize) LPVOID lpRawData
      );
 -_Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Success_(return != FALSE)
  WINADVAPI
  BOOL
  WINAPI
@@ -3036,7 +3074,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  AccessCheckAndAuditAlarmA (
@@ -3045,7 +3083,7 @@ index 62b1450287..8def65a2d9 100644
  #if(_WIN32_WINNT >= 0x0500)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  AccessCheckByTypeAndAuditAlarmA (
@@ -3054,7 +3092,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  AccessCheckByTypeResultListAndAuditAlarmA (
@@ -3063,7 +3101,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  AccessCheckByTypeResultListAndAuditAlarmByHandleA (
@@ -3072,7 +3110,7 @@ index 62b1450287..8def65a2d9 100644
  #endif //(_WIN32_WINNT >= 0x0500)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ObjectOpenAuditAlarmA (
@@ -3081,7 +3119,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ObjectPrivilegeAuditAlarmA (
@@ -3090,7 +3128,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ObjectCloseAuditAlarmA (
@@ -3099,7 +3137,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  ObjectDeleteAuditAlarmA (
@@ -3108,11 +3146,11 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  PrivilegedServiceAuditAlarmA (
-@@ -7080,13 +7081,13 @@ PrivilegedServiceAuditAlarmA (
+@@ -7080,17 +7081,17 @@ PrivilegedServiceAuditAlarmA (
  #endif
  
  #if(_WIN32_WINNT >= 0x0601)
@@ -3129,12 +3167,17 @@ index 62b1450287..8def65a2d9 100644
      _In_    UCHAR AceType,
      _In_    DWORD AccessMask,
      _In_    PSID pSid,
+-    _In_ _Null_terminated_ PWCHAR ConditionStr,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ _Null_terminated_ PWCHAR ConditionStr,
+     _Out_ DWORD *ReturnLength
+     );
+ #endif /* _WIN32_WINNT >=  0x0601 */
 @@ -7101,19 +7102,19 @@ AddConditionalAce (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  SetFileSecurityA (
@@ -3148,7 +3191,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetFileSecurityA (
@@ -3234,7 +3277,7 @@ index 62b1450287..8def65a2d9 100644
      );
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINBASEAPI
  BOOL
  WINAPI
  IsBadStringPtrA(
@@ -3242,7 +3285,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     UINT_PTR ucchMax
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINBASEAPI
  BOOL
  WINAPI
  IsBadStringPtrW(
@@ -3251,7 +3294,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountSidA(
@@ -3260,7 +3303,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ PSID_NAME_USE peUse
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountSidW(
@@ -3269,7 +3312,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountNameA(
@@ -3278,7 +3321,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_    PSID_NAME_USE peUse
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountNameW(
@@ -3287,7 +3330,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LookupPrivilegeValueA(
@@ -3296,7 +3339,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_    PLUID   lpLuid
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LookupPrivilegeValueW(
@@ -3305,7 +3348,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeNameA(
@@ -3314,7 +3357,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_  LPDWORD cchName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeNameW(
@@ -3323,7 +3366,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeDisplayNameA(
@@ -3332,7 +3375,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_    LPDWORD lpLanguageId
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeDisplayNameW(
@@ -3341,7 +3384,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  BuildCommDCBA(
@@ -3349,7 +3392,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ LPDCB lpDCB
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  BuildCommDCBW(
@@ -3358,7 +3401,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  BuildCommDCBAndTimeoutsA(
@@ -3367,7 +3410,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_ LPCOMMTIMEOUTS lpCommTimeouts
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  BuildCommDCBAndTimeoutsW(
@@ -3376,7 +3419,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CommConfigDialogA(
@@ -3385,7 +3428,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_  LPCOMMCONFIG lpCC
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CommConfigDialogW(
@@ -3394,7 +3437,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetDefaultCommConfigA(
@@ -3403,7 +3446,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_ LPDWORD lpdwSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetDefaultCommConfigW(
@@ -3412,7 +3455,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetDefaultCommConfigA(
@@ -3421,7 +3464,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD dwSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetDefaultCommConfigW(
@@ -3430,7 +3473,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0)
  BOOL
  WINAPI
@@ -3439,7 +3482,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_ LPDWORD nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != 0)
  BOOL
  WINAPI
@@ -3448,7 +3491,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -3457,7 +3500,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_ LPDWORD nSize
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -3466,7 +3509,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // _WIN32_WINNT
  
 -WINADVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetUserNameA (
@@ -3474,7 +3517,7 @@ index 62b1450287..8def65a2d9 100644
      _Inout_ LPDWORD pcbBuffer
      );
 -WINADVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetUserNameW (
@@ -3483,7 +3526,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LogonUserA (
@@ -3498,7 +3541,7 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_ PHANDLE phToken
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LogonUserW (
@@ -3519,7 +3562,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LogonUserExA (
@@ -3538,7 +3581,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_opt_       PQUOTA_LIMITS pQuotaLimits
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  LogonUserExW (
@@ -3640,7 +3683,7 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -3649,7 +3692,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -3658,7 +3701,7 @@ index 62b1450287..8def65a2d9 100644
  //
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(DeleteBoundaryDescriptor) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(DeleteBoundaryDescriptor) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  APIENTRY
@@ -3676,14 +3719,14 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetCurrentHwProfileA (
      _Out_ LPHW_PROFILE_INFOA  lpHwProfileInfo
      );
 -WINADVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  GetCurrentHwProfileW (
@@ -3692,7 +3735,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  VerifyVersionInfoA(
@@ -3702,7 +3745,7 @@ index 62b1450287..8def65a2d9 100644
      _In_    DWORDLONG dwlConditionMask
      );
 -WINBASEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  VerifyVersionInfoW(
@@ -3744,7 +3787,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -3753,7 +3796,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
  _Ret_maybenull_
  HANDLE
  WINAPI
@@ -3762,7 +3805,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeClose) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeClose) WINBASEAPI
  HANDLE
  WINAPI
  FindFirstVolumeA(
@@ -3771,7 +3814,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  FindNextVolumeA(
@@ -3780,7 +3823,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeMountPointClose) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeMountPointClose) WINBASEAPI
  HANDLE
  WINAPI
  FindFirstVolumeMountPointA(
@@ -3789,7 +3832,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD cchBufferLength
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeMountPointClose) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(FindVolumeMountPointClose) WINBASEAPI
  HANDLE
  WINAPI
  FindFirstVolumeMountPointW(
@@ -3798,7 +3841,7 @@ index 62b1450287..8def65a2d9 100644
  #endif // !UNICODE
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  FindNextVolumeMountPointA(
@@ -3807,7 +3850,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ DWORD cchBufferLength
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  FindNextVolumeMountPointW(
@@ -3824,7 +3867,7 @@ index 62b1450287..8def65a2d9 100644
      );
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetVolumeMountPointA(
@@ -3832,7 +3875,7 @@ index 62b1450287..8def65a2d9 100644
      _In_ LPCSTR lpszVolumeName
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  SetVolumeMountPointW(
@@ -3841,7 +3884,7 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  DeleteVolumeMountPointA(
@@ -3850,7 +3893,7 @@ index 62b1450287..8def65a2d9 100644
  #endif
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetVolumeNameForVolumeMountPointA(
@@ -3859,32 +3902,56 @@ index 62b1450287..8def65a2d9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetVolumePathNameA(
-@@ -8493,7 +8494,7 @@ GetVolumePathNameA(
+@@ -8493,12 +8494,12 @@ GetVolumePathNameA(
  
  #if(_WIN32_WINNT >= 0x0501)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  GetVolumePathNamesForVolumeNameA(
+     _In_  LPCSTR lpszVolumeName,
+-    _Out_writes_to_opt_(cchBufferLength, *lpcchReturnLength) _Post_ _NullNull_terminated_ LPCH lpszVolumePathNames,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_opt_(cchBufferLength, *lpcchReturnLength) _Post_ _NullNull_terminated_ LPCH lpszVolumePathNames,
+     _In_  DWORD cchBufferLength,
+     _Out_ PDWORD lpcchReturnLength
+     );
+@@ -8520,7 +8521,7 @@ GetVolumePathNamesForVolumeNameA(
+ #define ACTCTX_FLAG_SOURCE_IS_ASSEMBLYREF           (0x00000040)
+ #define ACTCTX_FLAG_HMODULE_VALID                   (0x00000080)
+ 
+-typedef struct tagACTCTXA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagACTCTXA {
+     ULONG       cbSize;
+     DWORD       dwFlags;
+     LPCSTR      lpSource;
+@@ -8531,7 +8532,7 @@ typedef struct tagACTCTXA {
+     LPCSTR      lpApplicationName;
+     HMODULE     hModule;
+ } ACTCTXA, *PACTCTXA;
+-typedef struct tagACTCTXW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagACTCTXW {
+     ULONG       cbSize;
+     DWORD       dwFlags;
+     LPCWSTR     lpSource;
 @@ -8560,13 +8561,13 @@ typedef PCACTCTXA PCACTCTX;
  
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(ReleaseActCtx) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(ReleaseActCtx) WINBASEAPI
  HANDLE
  WINAPI
  CreateActCtxA(
      _In_ PCACTCTXA pActCtx
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(ReleaseActCtx) WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(ReleaseActCtx) WINBASEAPI
  HANDLE
  WINAPI
  CreateActCtxW(
@@ -3932,7 +3999,7 @@ index 62b1450287..8def65a2d9 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8622,11 +8623,11 @@ DeactivateActCtx(
+@@ -8622,14 +8623,14 @@ DeactivateActCtx(
      _In_ ULONG_PTR ulCookie
      );
  
@@ -3945,13 +4012,26 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_ HANDLE *lphActCtx);
  
  
- typedef struct tagACTCTX_SECTION_KEYED_DATA_2600 {
+-typedef struct tagACTCTX_SECTION_KEYED_DATA_2600 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagACTCTX_SECTION_KEYED_DATA_2600 {
+     ULONG cbSize;
+     ULONG ulDataFormatVersion;
+     PVOID lpData;
+@@ -8652,7 +8653,7 @@ typedef struct tagACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
+ } ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA, *PACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
+ typedef const ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA *PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
+ 
+-typedef struct tagACTCTX_SECTION_KEYED_DATA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagACTCTX_SECTION_KEYED_DATA {
+     ULONG cbSize;
+     ULONG ulDataFormatVersion;
+     PVOID lpData;
 @@ -8675,7 +8676,7 @@ typedef const ACTCTX_SECTION_KEYED_DATA * PCACTCTX_SECTION_KEYED_DATA;
  
  
  
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
  WINBASEAPI
  BOOL
  WINAPI
@@ -3960,7 +4040,7 @@ index 62b1450287..8def65a2d9 100644
      _Out_      PACTCTX_SECTION_KEYED_DATA ReturnedData
      );
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
  WINBASEAPI
  BOOL
  WINAPI
@@ -4126,7 +4206,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= 0x0600)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_PreserveResult_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsVista_ _Win32_PreserveResult_ WINBASEAPI
  HRESULT
  WINAPI
  GetApplicationRecoveryCallback(
@@ -4208,7 +4288,7 @@ index 62b1450287..8def65a2d9 100644
  
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOLEAN
  APIENTRY
  CreateSymbolicLinkA (
@@ -4218,7 +4298,7 @@ index 62b1450287..8def65a2d9 100644
 +    _Win32_AssociatedEnum_(SYMBOLIC_LINK_FLAGS) _In_ DWORD dwFlags
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOLEAN
  APIENTRY
  CreateSymbolicLinkW (
@@ -4243,7 +4323,7 @@ index 62b1450287..8def65a2d9 100644
  #if (_WIN32_WINNT >= 0x0600)
  
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOLEAN
  APIENTRY
  CreateSymbolicLinkTransactedA (
@@ -4254,7 +4334,7 @@ index 62b1450287..8def65a2d9 100644
      _In_     HANDLE hTransaction
      );
 -WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
  BOOLEAN
  APIENTRY
  CreateSymbolicLinkTransactedW (

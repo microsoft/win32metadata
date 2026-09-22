@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
-index b205d258c8..b25cbfcdf8 100644
+index b205d258c8..0c00491267 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
 @@ -9,6 +9,7 @@
@@ -32,7 +32,7 @@ index b205d258c8..b25cbfcdf8 100644
      _In_opt_ PCWSTR pszPath
      );
  
-+_Windows_SupportedOS_Windows8_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows8_ 
 +
 +_Win32_PreserveResult_
  WINPATHCCHAPI
@@ -42,7 +42,7 @@ index b205d258c8..b25cbfcdf8 100644
      _Out_opt_ size_t* pcchRemaining
      );
  
-+_Windows_SupportedOS_Windows8_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows8_ 
 +
 +_Win32_PreserveResult_
  WINPATHCCHAPI
@@ -62,7 +62,7 @@ index b205d258c8..b25cbfcdf8 100644
      _Out_opt_ size_t* pcchRemaining
      );
  
-+_Windows_SupportedOS_Windows8_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows8_ 
 +
 +_Win32_PreserveResult_
  WINPATHCCHAPI
@@ -81,7 +81,7 @@ index b205d258c8..b25cbfcdf8 100644
      _Outptr_ PCWSTR* ppszRootEnd
      );
  
-+_Windows_SupportedOS_Windows8_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows8_ 
 +
 +_Win32_PreserveResult_
  WINPATHCCHAPI
@@ -205,7 +205,7 @@ index b205d258c8..b25cbfcdf8 100644
      _In_opt_ PCWSTR pszMore
      );
  
-+_Windows_SupportedOS_Windows8_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows8_ 
 +
 +_Win32_PreserveResult_
  WINPATHCCHAPI

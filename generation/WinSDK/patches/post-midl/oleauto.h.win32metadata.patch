@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
-index 7860ea3c60..abda2537f9 100644
+index 7860ea3c60..8c7ea06005 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 @@ -1,3 +1,4 @@
@@ -27,7 +27,7 @@ index 7860ea3c60..abda2537f9 100644
  #if (defined (_WIN32) || defined (_WIN64))
  WINOLEAUTAPI_(_Post_equal_to_(_String_length_(bstr) * sizeof(OLECHAR)) UINT) SysStringByteLen(_In_opt_ BSTR bstr);
 -WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_In_opt_z_ LPCSTR psz, _In_ UINT len);
-+_Win32_RAIIFree_(SysFreeString) WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_In_opt_z_ LPCSTR psz, _In_ UINT len);
++_Win32_RAIIFree_(SysFreeString) WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_WIN32META_ANNOTATION_("win32metadata:array_count_param=1") _In_opt_z_ LPCSTR psz, _In_ UINT len);
  
  #endif /* (defined (_WIN32) || defined (_WIN64)) */
  

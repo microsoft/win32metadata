@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
-index 00d55c52c6..dc5c4b8cec 100644
+index 00d55c52c6..490ad3bab8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_5.h
 @@ -1,3 +1,4 @@
@@ -25,8 +25,17 @@ index 00d55c52c6..dc5c4b8cec 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("80A07424-AB52-42EB-833C-0C42FD282D98")
-+    MIDL_INTERFACE("80A07424-AB52-42EB-833C-0C42FD282D98") _Windows_SupportedOS_10240_ 
++    MIDL_INTERFACE("80A07424-AB52-42EB-833C-0C42FD282D98") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_10240_ 
      IDXGIOutput5 : public IDXGIOutput4
+     {
+     public:
+@@ -497,7 +502,7 @@ EXTERN_C const IID IID_IDXGISwapChain4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3D585D5A-BD4A-489E-B1F4-3DBCB6452FFB")
++    MIDL_INTERFACE("3D585D5A-BD4A-489E-B1F4-3DBCB6452FFB") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGISwapChain4 : public IDXGISwapChain3
      {
      public:
 @@ -970,7 +975,11 @@ EXTERN_C const IID IID_IDXGISwapChain4;
@@ -42,6 +51,15 @@ index 00d55c52c6..dc5c4b8cec 100644
      {
          DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT	= 0x1
      } 	DXGI_OFFER_RESOURCE_FLAGS;
+@@ -999,7 +1008,7 @@ EXTERN_C const IID IID_IDXGIDevice4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95B4F95F-D8DA-4CA4-9EE6-3B76D5968A10")
++    MIDL_INTERFACE("95B4F95F-D8DA-4CA4-9EE6-3B76D5968A10") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIDevice4 : public IDXGIDevice3
+     {
+     public:
 @@ -1011,7 +1020,7 @@ EXTERN_C const IID IID_IDXGIDevice4;
              /* [annotation][in] */ 
              _In_  DXGI_OFFER_RESOURCE_PRIORITY Priority,
@@ -51,3 +69,12 @@ index 00d55c52c6..dc5c4b8cec 100644
          
          virtual HRESULT STDMETHODCALLTYPE ReclaimResources1( 
              /* [annotation][in] */ 
+@@ -1303,7 +1312,7 @@ EXTERN_C const IID IID_IDXGIFactory5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7632e1f5-ee65-4dca-87fd-84cd75f8838d")
++    MIDL_INTERFACE("7632e1f5-ee65-4dca-87fd-84cd75f8838d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIFactory5 : public IDXGIFactory4
+     {
+     public:

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/http.h b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
-index 4178ef13d1..d3912dfa13 100644
+index 4178ef13d1..46d541d11c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,64 @@ index 4178ef13d1..d3912dfa13 100644
  
  
  /*++
+@@ -491,7 +492,7 @@ typedef struct _HTTP_SERVICE_BINDING_BASE
+ typedef struct _HTTP_SERVICE_BINDING_A
+ {
+     HTTP_SERVICE_BINDING_BASE Base;
+-    PCHAR Buffer;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR Buffer;
+     ULONG BufferSize;
+ 
+ } HTTP_SERVICE_BINDING_A, *PHTTP_SERVICE_BINDING_A;
+@@ -499,7 +500,7 @@ typedef struct _HTTP_SERVICE_BINDING_A
+ typedef struct _HTTP_SERVICE_BINDING_W
+ {
+     HTTP_SERVICE_BINDING_BASE Base;
+-    PWCHAR Buffer;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR Buffer;
+     ULONG BufferSize;
+ 
+ } HTTP_SERVICE_BINDING_W, *PHTTP_SERVICE_BINDING_W;
+@@ -1243,18 +1244,18 @@ typedef struct _HTTP_LOG_FIELDS_DATA
+     USHORT CookieLength;
+     USHORT ReferrerLength;
+ 
+-    PWCHAR UserName;
+-    PWCHAR UriStem;
+-    PCHAR  ClientIp;
+-    PCHAR  ServerName;
+-    PCHAR  ServiceName;
+-    PCHAR  ServerIp;
+-    PCHAR  Method;
+-    PCHAR  UriQuery;
+-    PCHAR  Host;
+-    PCHAR  UserAgent;
+-    PCHAR  Cookie;
+-    PCHAR  Referrer;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR UserName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR UriStem;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  ClientIp;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  ServerName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  ServiceName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  ServerIp;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  Method;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  UriQuery;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  Host;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  UserAgent;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  Cookie;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  Referrer;
+ 
+     USHORT ServerPort;
+     USHORT ProtocolStatus;
+@@ -1806,7 +1807,7 @@ typedef struct _HTTP_REQUEST_AUTH_INFO
+     //
+ 
+     ULONG MutualAuthDataLength;
+-    PCHAR pMutualAuthData;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR pMutualAuthData;
+ 
+     //
+     // For SSPI based schemes the package name is returned. Length does
 @@ -2997,22 +2998,22 @@ typedef enum _HTTP_FEATURE_ID
  
  // NOTE: MUST be called once before all other APIs

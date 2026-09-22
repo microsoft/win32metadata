@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
-index a6bfbbb4ec..0410b8abf8 100644
+index a6bfbbb4ec..f1811166c6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index a6bfbbb4ec..0410b8abf8 100644
  // Copyright (C) Microsoft Corporation. All rights reserved.
  #ifndef _DWMAPI_H_
  #define _DWMAPI_H_
+@@ -165,7 +166,7 @@ typedef  struct _UNSIGNED_RATIO
+     UINT32 uiDenominator;
+ } UNSIGNED_RATIO;
+ 
+-typedef  struct _DWM_TIMING_INFO
++typedef  struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DWM_TIMING_INFO
+ {
+     UINT32          cbSize;
+ 
+@@ -360,7 +361,7 @@ EXTERN_C __declspec(selectany) const UINT c_DwmMaxAdapters = 16;
+ 
+ #pragma warning(push)
+ #pragma warning(disable:4201)
+-typedef struct _DWM_PRESENT_PARAMETERS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DWM_PRESENT_PARAMETERS
+ {
+     UINT32          cbSize;
+     BOOL            fQueue;
 @@ -377,7 +378,7 @@ typedef struct _DWM_PRESENT_PARAMETERS
  
  #define DWM_FRAME_DURATION_DEFAULT -1

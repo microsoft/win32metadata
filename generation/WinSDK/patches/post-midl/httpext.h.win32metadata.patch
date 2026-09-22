@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h b/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
+index f27876644b..1c257337f3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********
+ *
+ *  Copyright (c) 1995  Process Software Corporation
+@@ -159,7 +160,7 @@ typedef struct   _HSE_VERSION_INFO {
+ //
+ // structure passed to extension procedure on a new request
+ //
+-typedef struct _EXTENSION_CONTROL_BLOCK {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _EXTENSION_CONTROL_BLOCK {
+ 
+     DWORD     cbSize;                 // size of this struct.
+     DWORD     dwVersion;              // version info of this spec
+@@ -447,7 +448,7 @@ typedef struct _HSE_CUSTOM_ERROR_INFO  {
+ // element of the vector
+ //
+ 
+-typedef struct _HSE_VECTOR_ELEMENT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _HSE_VECTOR_ELEMENT
+ {
+     DWORD ElementType;  // Type of element (buffer/file/fragment etc)
+ 

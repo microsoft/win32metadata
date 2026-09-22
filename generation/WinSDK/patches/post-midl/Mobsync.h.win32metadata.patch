@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
-index c9c7603e27..e5c3f693f7 100644
+index c9c7603e27..bc14f1cc8e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
 @@ -108,6 +108,7 @@ extern "C"{
@@ -10,6 +10,24 @@ index c9c7603e27..e5c3f693f7 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #define SYNCMGRITEMID        GUID
+@@ -153,7 +154,7 @@ enum _tagSYNCMGRSTATUS
+         SYNCMGRSTATUS_DELETED	= 0x100
+     } 	SYNCMGRSTATUS;
+ 
+-typedef struct _tagSYNCMGRPROGRESSITEM
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRPROGRESSITEM
+     {
+     DWORD cbSize;
+     UINT mask;
+@@ -183,7 +184,7 @@ enum _tagSYNCMGRERRORFLAGS
+         SYNCMGRERRORFLAG_ENABLEJUMPTEXT	= 0x1
+     } 	SYNCMGRERRORFLAGS;
+ 
+-typedef struct _tagSYNCMGRLOGERRORINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRLOGERRORINFO
+     {
+     DWORD cbSize;
+     DWORD mask;
 @@ -199,8 +200,8 @@ EXTERN_C const IID IID_ISyncMgrSynchronizeCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -30,6 +48,15 @@ index c9c7603e27..e5c3f693f7 100644
      {
          CONST_VTBL struct ISyncMgrSynchronizeCallbackVtbl *lpVtbl;
      };
+@@ -429,7 +430,7 @@ enum _tagSYNCMGRITEMFLAGS
+ #define SYNCMGRITEM_ITEMFLAGMASK  0x007F
+ #define	MAX_SYNCMGRITEMNAME	( 128 )
+ 
+-typedef struct _tagSYNCMGRITEM
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRITEM
+     {
+     DWORD cbSize;
+     DWORD dwFlags;
 @@ -447,8 +448,8 @@ EXTERN_C const IID IID_ISyncMgrEnumItems;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -50,6 +77,15 @@ index c9c7603e27..e5c3f693f7 100644
      {
          CONST_VTBL struct ISyncMgrEnumItemsVtbl *lpVtbl;
      };
+@@ -600,7 +601,7 @@ enum _tagSYNCMGRHANDLERFLAGS
+ #define SYNCMGRHANDLERFLAG_MASK 0x000f
+ #define	MAX_SYNCMGRHANDLERNAME	( 32 )
+ 
+-typedef struct _tagSYNCMGRHANDLERINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRHANDLERINFO
+     {
+     DWORD cbSize;
+     HICON hIcon;
 @@ -622,8 +623,8 @@ EXTERN_C const IID IID_ISyncMgrSynchronize;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

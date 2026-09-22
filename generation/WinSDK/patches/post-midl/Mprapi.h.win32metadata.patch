@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
-index eca6365729..914aeea131 100644
+index eca6365729..58298d101c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mprapi.h
 @@ -130,6 +130,7 @@ Abstract:
@@ -19,6 +19,15 @@ index eca6365729..914aeea131 100644
  {
      IN OUT _Field_z_  WCHAR                   wszInterfaceName[MAX_INTERFACE_NAME_LEN+1];
      OUT     HANDLE                  hInterface;
+@@ -389,7 +390,7 @@ typedef struct _MPR_INTERFACE_2
+     //
+ 
+     WCHAR       szLocalPhoneNumber[ RAS_MaxPhoneNumber + 1 ];
+-    PWCHAR      szAlternates;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR      szAlternates;
+ 
+     //
+     // PPP/Ip
 @@ -429,7 +430,7 @@ typedef struct _MPR_INTERFACE_2
      //
  
@@ -46,6 +55,15 @@ index eca6365729..914aeea131 100644
  
  } MPR_INTERFACE_2, *PMPR_INTERFACE_2;
  
+@@ -498,7 +499,7 @@ typedef struct _MPR_INTERFACE_3
+     //
+ 
+     WCHAR       szLocalPhoneNumber[ RAS_MaxPhoneNumber + 1 ];
+-    PWCHAR      szAlternates;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR      szAlternates;
+ 
+     //
+     // PPP/Ip
 @@ -542,7 +543,7 @@ typedef struct _MPR_INTERFACE_3
      //
  
@@ -73,6 +91,15 @@ index eca6365729..914aeea131 100644
  
      ULONG          AddressCount;
      IN6_ADDR      ipv6addrDns;
+@@ -626,7 +627,7 @@ typedef struct _MPR_DEVICE_1
+     //
+ 
+     WCHAR       szLocalPhoneNumber[ MPR_MaxPhoneNumber + 1 ];
+-    PWCHAR      szAlternates;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR      szAlternates;
+ 
+ }
+ MPR_DEVICE_1, *PMPR_DEVICE_1;
 @@ -976,8 +977,8 @@ PPP_CCP_INFO;
  typedef struct _PPP_LCP_INFO
  {
@@ -971,7 +998,7 @@ index eca6365729..914aeea131 100644
  MprConfigInterfaceTransportEnum(
      _In_      HANDLE                  hMprConfig,
      _In_      HANDLE                  hRouterInterface,
-@@ -3091,14 +3093,14 @@ MprConfigInterfaceTransportEnum(
+@@ -3091,29 +3093,29 @@ MprConfigInterfaceTransportEnum(
      _Inout_opt_ LPDWORD               lpdwResumeHandle            
  );
  
@@ -980,7 +1007,8 @@ index eca6365729..914aeea131 100644
  MprConfigGetFriendlyName(
      _In_      HANDLE                  hMprConfig,
      _In_      PWSTR                   pszGuidName,
-     _Out_writes_bytes_(dwBufferSize) PWCHAR pszBuffer,
+-    _Out_writes_bytes_(dwBufferSize) PWCHAR pszBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_(dwBufferSize) PWCHAR pszBuffer,
      _In_      DWORD                   dwBufferSize);
  
 -DWORD APIENTRY
@@ -988,7 +1016,8 @@ index eca6365729..914aeea131 100644
  MprConfigGetGuidName(
      _In_      HANDLE                  hMprConfig,
      _In_      PWSTR                   pszFriendlyName,
-@@ -3106,14 +3108,14 @@ MprConfigGetGuidName(
+-    _Out_writes_bytes_(dwBufferSize) PWCHAR pszBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_(dwBufferSize) PWCHAR pszBuffer,
      _In_      DWORD                   dwBufferSize);
  
  #if(WINVER >= 0x0600)

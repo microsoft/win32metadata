@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tcpxcv.h b/generation/WinSDK/RecompiledIdlHeaders/um/tcpxcv.h
+index c34b5014ac..a9e8f9939e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tcpxcv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tcpxcv.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1997 - 1999  Hewlett-Packard Company.
+@@ -44,7 +45,7 @@ Module Name:
+ 
+ 
+ 
+-typedef struct _PORT_DATA_1
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PORT_DATA_1
+ {
+     WCHAR  sztPortName[MAX_PORTNAME_LEN];
+     DWORD  dwVersion;
+@@ -62,7 +63,7 @@ typedef struct _PORT_DATA_1
+     DWORD  dwSNMPDevIndex;
+ }   PORT_DATA_1, *PPORT_DATA_1;
+ 
+-typedef struct _PORT_DATA_2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PORT_DATA_2
+ {
+     WCHAR  sztPortName[MAX_PORTNAME_LEN];
+     DWORD  dwVersion;

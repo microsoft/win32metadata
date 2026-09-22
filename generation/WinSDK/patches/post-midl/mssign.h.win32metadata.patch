@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
-index 1fcfeaee21..0e3f15794a 100644
+index 1fcfeaee21..f1c64eec7f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 @@ -1,3 +1,4 @@
@@ -7,8 +7,30 @@ index 1fcfeaee21..0e3f15794a 100644
  #include <wincrypt.h>
  
  #ifdef __cplusplus
-@@ -85,7 +86,7 @@ typedef struct _SIGNER_BLOB_INFO {
- typedef struct _SIGNER_CERT_STORE_INFO {
+@@ -66,7 +67,7 @@ typedef HRESULT (WINAPI *PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE)(
+     _Out_ PCRYPT_DATA_BLOB pSignedDigest 
+     );
+ 
+-typedef struct _SIGNER_ATTR_AUTHCODE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_ATTR_AUTHCODE {
+     DWORD   cbSize;
+     BOOL    fCommercial;
+     BOOL    fIndividual;
+@@ -74,7 +75,7 @@ typedef struct _SIGNER_ATTR_AUTHCODE {
+     LPCWSTR pwszInfo;
+ } SIGNER_ATTR_AUTHCODE, *PSIGNER_ATTR_AUTHCODE;
+ 
+-typedef struct _SIGNER_BLOB_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_BLOB_INFO {
+     DWORD   cbSize;
+     GUID    *pGuidSubject;
+     DWORD   cbBlob;
+@@ -82,23 +83,23 @@ typedef struct _SIGNER_BLOB_INFO {
+     LPCWSTR pwszDisplayName;
+ } SIGNER_BLOB_INFO, *PSIGNER_BLOB_INFO;
+ 
+-typedef struct _SIGNER_CERT_STORE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_CERT_STORE_INFO {
      DWORD          cbSize;
      PCCERT_CONTEXT pSigningCert;
 -    DWORD          dwCertPolicy;
@@ -16,16 +38,67 @@ index 1fcfeaee21..0e3f15794a 100644
      HCERTSTORE     hCertStore;
  } SIGNER_CERT_STORE_INFO, *PSIGNER_CERT_STORE_INFO;
  
-@@ -98,7 +99,7 @@ typedef struct _SIGNER_SPC_CHAIN_INFO {
+-typedef struct _SIGNER_SPC_CHAIN_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_SPC_CHAIN_INFO {
+     DWORD      cbSize;
+     LPCWSTR    pwszSpcFile;
+     DWORD      dwCertPolicy;
+     HCERTSTORE hCertStore;
+ } SIGNER_SPC_CHAIN_INFO, *PSIGNER_SPC_CHAIN_INFO;
  
- typedef struct _SIGNER_CERT {
+-typedef struct _SIGNER_CERT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_CERT {
      DWORD cbSize;
 -    DWORD dwCertChoice;
 +    _Win32_AssociatedEnum_(SIGNER_CERT_CHOICE) DWORD dwCertChoice;
      union {
          LPCWSTR                pwszSpcFile;
          SIGNER_CERT_STORE_INFO *pCertStoreInfo;
-@@ -152,7 +153,7 @@ typedef struct _SIGNER_PROVIDER_INFO {
+@@ -107,13 +108,13 @@ typedef struct _SIGNER_CERT {
+     HWND  hwnd;
+ } SIGNER_CERT, *PSIGNER_CERT;
+ 
+-typedef struct _SIGNER_CONTEXT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_CONTEXT {
+     DWORD cbSize;
+     DWORD cbBlob;
+     BYTE  *pbBlob;
+ } SIGNER_CONTEXT, *PSIGNER_CONTEXT;
+ 
+-typedef struct _SIGNER_DIGEST_SIGN_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_DIGEST_SIGN_INFO {
+     DWORD cbSize;                                                
+     DWORD dwDigestSignChoice;                                    
+     union {
+@@ -128,41 +129,41 @@ typedef struct _SIGNER_DIGEST_SIGN_INFO {
+     DWORD dwReserved3;
+ } SIGNER_DIGEST_SIGN_INFO, *PSIGNER_DIGEST_SIGN_INFO;
+ 
+-typedef struct SIGNER_DIGEST_SIGN_INFO_V1 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SIGNER_DIGEST_SIGN_INFO_V1 {
+     DWORD cbSize;
+     PFN_AUTHENTICODE_DIGEST_SIGN pfnAuthenticodeDigestSign;
+     PCRYPT_DATA_BLOB pMetadataBlob;
+ } SIGNER_DIGEST_SIGN_INFO_V1, *PSIGNER_DIGEST_SIGN_INFO_V1;
+ 
+-typedef struct SIGNER_DIGEST_SIGN_INFO_V2 {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SIGNER_DIGEST_SIGN_INFO_V2 {
+     DWORD cbSize;                                                
+     PFN_AUTHENTICODE_DIGEST_SIGN pfnAuthenticodeDigestSign;      
+     PFN_AUTHENTICODE_DIGEST_SIGN_EX pfnAuthenticodeDigestSignEx; 
+     PCRYPT_DATA_BLOB pMetadataBlob;                              
+ } SIGNER_DIGEST_SIGN_INFO_V2, *PSIGNER_DIGEST_SIGN_INFO_V2;
+ 
+-typedef struct _SIGNER_FILE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_FILE_INFO {
+     DWORD   cbSize;
+     LPCWSTR pwszFileName;
+     HANDLE  hFile;
+ } SIGNER_FILE_INFO, *PSIGNER_FILE_INFO;
+ 
+-typedef struct _SIGNER_PROVIDER_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_PROVIDER_INFO {
+     DWORD   cbSize;
      LPCWSTR pwszProviderName;
      DWORD   dwProviderType;
      DWORD   dwKeySpec;
@@ -34,8 +107,11 @@ index 1fcfeaee21..0e3f15794a 100644
      union {
          LPWSTR pwszPvkFileName;
          LPWSTR pwszKeyContainer;
-@@ -162,7 +163,7 @@ typedef struct _SIGNER_PROVIDER_INFO {
- typedef struct _SIGNER_SIGNATURE_INFO {
+     };
+ } SIGNER_PROVIDER_INFO, *PSIGNER_PROVIDER_INFO;
+ 
+-typedef struct _SIGNER_SIGNATURE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_SIGNATURE_INFO {
      DWORD             cbSize;
      ALG_ID            algidHash;
 -    DWORD             dwAttrChoice;
@@ -43,8 +119,12 @@ index 1fcfeaee21..0e3f15794a 100644
      union {
          SIGNER_ATTR_AUTHCODE *pAttrAuthcode;
      };
-@@ -173,20 +174,20 @@ typedef struct _SIGNER_SIGNATURE_INFO {
- typedef struct _SIGNER_SUBJECT_INFO {
+@@ -170,23 +171,23 @@ typedef struct _SIGNER_SIGNATURE_INFO {
+     PCRYPT_ATTRIBUTES psUnauthenticated;
+ } SIGNER_SIGNATURE_INFO, *PSIGNER_SIGNATURE_INFO;
+ 
+-typedef struct _SIGNER_SUBJECT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIGNER_SUBJECT_INFO {
      DWORD cbSize;
      DWORD *pdwIndex;
 -    DWORD dwSubjectChoice;

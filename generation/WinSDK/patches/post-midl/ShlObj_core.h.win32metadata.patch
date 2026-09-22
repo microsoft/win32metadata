@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702..cffc104242 100644
+index 04174f8702..45251ee26a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -52,8 +52,8 @@ index 04174f8702..cffc104242 100644
  #define IDO_SHGIOI_SLOWFILE 0x0FFFFFFFD
  #define IDO_SHGIOI_DEFAULT  0x0FFFFFFFC
 -SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
  SHSTDAPI_(int) SHGetIconOverlayIndexW(_In_opt_ LPCWSTR pszIconPath, int iIconIndex);
  #ifdef UNICODE
@@ -63,10 +63,37 @@ index 04174f8702..cffc104242 100644
  #endif
  
 -typedef struct tagDATABLOCKHEADER
-+typedef struct  tagDATABLOCKHEADER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   tagDATABLOCKHEADER
  {
      DWORD   cbSize;             // Size of this extra data block
      DWORD   dwSignature;        // signature of this extra data block
+@@ -519,7 +524,7 @@ typedef struct {
+ #define EXP_SPECIAL_FOLDER_SIG         0xA0000005   // LPEXP_SPECIAL_FOLDER
+ 
+ 
+-typedef struct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") 
+ {
+     DWORD       cbSize;             // Size of this extra data block
+     DWORD       dwSignature;        // signature of this extra data block
+@@ -528,7 +533,7 @@ typedef struct
+ } EXP_SPECIAL_FOLDER, *LPEXP_SPECIAL_FOLDER;
+ 
+ 
+-typedef struct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") 
+ {
+     DWORD       cbSize;             // Size of this extra data block
+     DWORD       dwSignature;        // signature of this extra data block
+@@ -539,7 +544,7 @@ typedef struct
+ #define EXP_SZ_ICON_SIG                0xA0000007   // LPEXP_SZ_LINK (icon)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-typedef struct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") 
+ {
+     DWORD       cbSize;             // Size of this extra data block
+     DWORD       dwSignature;        // signature of this extra data block
 @@ -599,8 +604,8 @@ DECLARE_INTERFACE_IID_(IURLSearchHook, IUnknown, "ac60f6a0-0fd9-11d0-99cb-00c04f
  
  DECLARE_INTERFACE_IID_(ISearchContext, IUnknown, "09F656A2-41AF-480C-88F7-16CC0D164615")
@@ -113,8 +140,8 @@ index 04174f8702..cffc104242 100644
  
 -SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathA(_In_ PCSTR pszPath);
 -SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathA(_In_ PCSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathA(_In_ PCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
  
  #ifdef NO_WRAPPERS_FOR_ILCREATEFROMPATH
  SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
@@ -147,13 +174,13 @@ index 04174f8702..cffc104242 100644
  // SHGetPathFromIDListW is the old version of SHGetPathFromIDListEx that assumes the size of the buffer (MAX_PATH).
  // The pidl should point to a file system object.
 -_Success_(return != 0)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
  SHSTDAPI_(BOOL) SHGetPathFromIDListA(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPSTR pszPath);
  //
  // SHGetPathFromIDListW is the old version of SHGetPathFromIDListEx that assumes the size of the buffer (MAX_PATH).
  // The pidl should point to a file system object.
 -_Success_(return != 0)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
  SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetPathFromIDList  SHGetPathFromIDListW
@@ -165,8 +192,8 @@ index 04174f8702..cffc104242 100644
 -SHSTDAPI_(int) SHCreateDirectoryExA(_In_opt_ HWND hwnd, _In_ LPCSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
 -SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
 +_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) SHCreateDirectory(_In_opt_ HWND hwnd, _In_ PCWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExA(_In_opt_ HWND hwnd, _In_ LPCSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExA(_In_opt_ HWND hwnd, _In_ LPCSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
  #ifdef UNICODE
  #define SHCreateDirectoryEx  SHCreateDirectoryExW
  #else
@@ -195,10 +222,10 @@ index 04174f8702..cffc104242 100644
 -SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
 -_Success_(return != 0)
 +_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
-+_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Success_(return != 0)
  SHSTDAPI_(BOOL) SHGetSpecialFolderPathA(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
 -_Success_(return != 0)
-+_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Success_(return != 0)
  SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
  #ifdef UNICODE
  #define SHGetSpecialFolderPath  SHGetSpecialFolderPathW
@@ -216,8 +243,8 @@ index 04174f8702..cffc104242 100644
  
 -SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
 -SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
-+_Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPath  SHGetFolderPathW
  #else
@@ -230,8 +257,8 @@ index 04174f8702..cffc104242 100644
  #if (NTDDI_VERSION >= NTDDI_WINXP)
 -STDAPI SHSetFolderPathA(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCSTR pszPath);
 -STDAPI SHSetFolderPathW(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCWSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathA(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathW(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathA(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathW(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCWSTR pszPath);
  #ifdef UNICODE
  #define SHSetFolderPath  SHSetFolderPathW
  #else
@@ -239,8 +266,8 @@ index 04174f8702..cffc104242 100644
  #endif // !UNICODE
 -STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
 -STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
-+_Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPathAndSubDir  SHGetFolderPathAndSubDirW
  #else
@@ -292,8 +319,8 @@ index 04174f8702..cffc104242 100644
  
 -SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderA(_In_ LPBROWSEINFOA lpbi);
 -SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderA(_In_ LPBROWSEINFOA lpbi);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderA(_In_ LPBROWSEINFOA lpbi);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
  
  #ifdef UNICODE
  #define SHBrowseForFolder   SHBrowseForFolderW
@@ -350,8 +377,8 @@ index 04174f8702..cffc104242 100644
 -SHSTDAPI_(void) SHUpdateImageA(_In_ LPCSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
 -SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
 +_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) SHHandleUpdateImage(_In_ PCIDLIST_ABSOLUTE pidlExtra);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageA(_In_ LPCSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageA(_In_ LPCSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
  #ifdef UNICODE
  #define SHUpdateImage  SHUpdateImageW
  #else
@@ -400,8 +427,8 @@ index 04174f8702..cffc104242 100644
  
 -SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
 -SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
  #ifdef UNICODE
  #define SHGetDataFromIDList  SHGetDataFromIDListW
  #else
@@ -558,7 +585,7 @@ index 04174f8702..cffc104242 100644
  SHSTDAPI SHStartNetConnectionDialogA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR pszRemoteName, DWORD dwType);
  // both ANSI and UNICODE
 -SHSTDAPI SHStartNetConnectionDialogW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRemoteName, DWORD dwType);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHStartNetConnectionDialogW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRemoteName, DWORD dwType);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI SHStartNetConnectionDialogW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRemoteName, DWORD dwType);
  #ifdef UNICODE
  #define SHStartNetConnectionDialog  SHStartNetConnectionDialogW
  #else
@@ -568,9 +595,9 @@ index 04174f8702..cffc104242 100644
 -                           _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
 -SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
 -                           _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
-+_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconA(_In_ LPCSTR pszIconFile, int iIndex, UINT uFlags,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconA(_In_ LPCSTR pszIconFile, int iIndex, UINT uFlags,
 +                           _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconSmall, UINT nIconSize);
-+_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
 +                           _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconSmall, UINT nIconSize);
  #ifdef UNICODE
  #define SHDefExtractIcon  SHDefExtractIconW
@@ -599,12 +626,12 @@ index 04174f8702..cffc104242 100644
 -SHSTDAPI_(BOOL) Shell_GetImageLists(_Out_opt_ HIMAGELIST *phiml, _Out_opt_ HIMAGELIST *phimlSmall);
 -SHSTDAPI_(int)  Shell_GetCachedImageIndex(_In_ PCWSTR pwszIconPath, int iIconIndex, UINT uIconFlags);
 +_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) Shell_GetImageLists(_Win32_RAIIFree_(ImageList_Destroy, -1, 0) _Out_opt_ HIMAGELIST *phiml, _Win32_RAIIFree_(ImageList_Destroy, -1, 0) _Out_opt_ HIMAGELIST *phimlSmall);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndex(_In_ PCWSTR pwszIconPath, int iIconIndex, UINT uIconFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndex(_In_ PCWSTR pwszIconPath, int iIconIndex, UINT uIconFlags);
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 -SHSTDAPI_(int)  Shell_GetCachedImageIndexA(_In_ LPCSTR pszIconPath, int iIconIndex, UINT uIconFlags);
 -SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexA(_In_ LPCSTR pszIconPath, int iIconIndex, UINT uIconFlags);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexA(_In_ LPCSTR pszIconPath, int iIconIndex, UINT uIconFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
  #ifdef UNICODE
  #define Shell_GetCachedImageIndex  Shell_GetCachedImageIndexW
  #else
@@ -649,7 +676,7 @@ index 04174f8702..cffc104242 100644
  };
  
  #include <pshpack8.h>
-@@ -2978,7 +2989,7 @@ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-0800
+@@ -2978,13 +2989,13 @@ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-0800
      STDMETHOD(SetPoints) (THIS_ _In_ IDataObject *pDataObject) PURE; // copies points of current selection in to data object.  Call is not needed if drag operation was originated by the IShellView.
      STDMETHOD(GetItemSpacing) (THIS_ _Out_ ITEMSPACING *pSpacing) PURE; // use IFolderView::GetSpacing instead.  GetItemSpacing returns the spacing for small and large view modes only, returning S_OK if the current view mode is is positionable, S_FALSE otherwise.
      STDMETHOD(SetCallback) (THIS_ _In_opt_ IShellFolderViewCB* pNewCB, _Outptr_result_maybenull_ IShellFolderViewCB** ppOldCB) PURE; // replace the IShellFolderViewCB that the IShellView uses
@@ -658,6 +685,13 @@ index 04174f8702..cffc104242 100644
      STDMETHOD(QuerySupport) (THIS_ _Inout_ UINT * pdwSupport ) PURE; // does nothing, returns S_OK.
      STDMETHOD(SetAutomationObject)(THIS_ _In_opt_ IDispatch* pdisp) PURE; // replaces the IShellView's internal automation object.
  };
+ 
+ // SHCreateShellFolderView struct
+-typedef struct _SFV_CREATE
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SFV_CREATE
+ {
+     UINT            cbSize;     // must be sizeof(SFV_CREATE)
+     IShellFolder*   pshf;       // IShellFolder the IShellView will use
 @@ -2992,11 +3003,11 @@ typedef struct _SFV_CREATE
      IShellFolderViewCB* psfvcb; // No callback if NULL
  } SFV_CREATE;
@@ -672,7 +706,7 @@ index 04174f8702..cffc104242 100644
                                  UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl,
                                  _In_opt_ IShellFolder *psf, _In_opt_ LPFNDFMCALLBACK pfn,
                                  UINT nKeys, _In_reads_opt_(nKeys) const HKEY *ahkeys,
-@@ -3017,7 +3028,7 @@ typedef struct {
+@@ -3017,11 +3028,11 @@ typedef struct {
  // used in the implemetnation of ::GetUIObjectOf()
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -681,6 +715,20 @@ index 04174f8702..cffc104242 100644
  #endif // NTDDI_VISTA
  
  // structure for lParam of DFM_INFOKECOMMANDEX
+-typedef struct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize") 
+ {
+     DWORD  cbSize;
+     DWORD  fMask;   // CMIC_MASK_ values for the invoke
+@@ -3087,7 +3098,7 @@ typedef HRESULT (CALLBACK * LPFNVIEWCALLBACK)(_In_ IShellView *psvOuter,
+                                               LPARAM lParam);
+ 
+ // SHCreateShellFolderViewEx struct
+-typedef struct _CSFV
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CSFV
+ {
+     UINT              cbSize;
+     IShellFolder *    pshf;
 @@ -3100,8 +3111,8 @@ typedef struct _CSFV
  
  #include <poppack.h>        /* Return to byte packing */
@@ -746,8 +794,8 @@ index 04174f8702..cffc104242 100644
  
 -SHSTDAPI SHPathPrepareForWriteA(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCSTR pszPath, DWORD dwFlags);
 -SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteA(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCSTR pszPath, DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteA(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCSTR pszPath, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHPathPrepareForWrite  SHPathPrepareForWriteW
  #else
@@ -779,7 +827,7 @@ index 04174f8702..cffc104242 100644
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  SHSTDAPI SHCreateFileExtractIconA(_In_ LPCSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
 -SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
  #ifdef UNICODE
  #define SHCreateFileExtractIcon  SHCreateFileExtractIconW
  #else
@@ -790,7 +838,7 @@ index 04174f8702..cffc104242 100644
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI SHLimitInputEdit(_In_ HWND hwndEdit, _In_ IShellFolder *psf);
  
 -STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
-+_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
  
  #endif  // NTDDI_WINXP
  

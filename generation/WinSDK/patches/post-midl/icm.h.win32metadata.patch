@@ -1,0 +1,182 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Icm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Icm.h
+index ef3616f615..0dc31e5736 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Icm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Icm.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -747,13 +748,13 @@ typedef struct _tagCOLORMATCHSETUPA {
+ // Windows API definitions
+ //
+ 
+-HPROFILE   WINAPI OpenColorProfileA(_In_ PPROFILE pProfile, DWORD dwDesiredAccess, DWORD dwShareMode, DWORD dwCreationMode);
+-HPROFILE   WINAPI OpenColorProfileW(_In_ PPROFILE pProfile, DWORD dwDesiredAccess, DWORD dwShareMode, DWORD dwCreationMode);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HPROFILE   WINAPI OpenColorProfileA(_In_ PPROFILE pProfile, DWORD dwDesiredAccess, DWORD dwShareMode, DWORD dwCreationMode);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HPROFILE   WINAPI OpenColorProfileW(_In_ PPROFILE pProfile, DWORD dwDesiredAccess, DWORD dwShareMode, DWORD dwCreationMode);
+ BOOL       WINAPI CloseColorProfile(_In_opt_ HPROFILE hProfile);
+ BOOL       WINAPI GetColorProfileFromHandle(_In_ HPROFILE hProfile, _Out_writes_bytes_opt_(*pcbProfile) PBYTE pProfile, _Inout_ PDWORD pcbProfile);
+ BOOL       WINAPI IsColorProfileValid(_In_ HPROFILE hProfile, _Out_ PBOOL pbValid);
+-BOOL       WINAPI CreateProfileFromLogColorSpaceA(_In_ LPLOGCOLORSPACEA pLogColorSpace, _Outptr_result_buffer_(_Inexpressible_(GlobalSize(*pProfile))) PBYTE* pProfile);
+-BOOL       WINAPI CreateProfileFromLogColorSpaceW(_In_ LPLOGCOLORSPACEW pLogColorSpace, _Outptr_result_buffer_(_Inexpressible_(GlobalSize(*pProfile))) PBYTE* pProfile);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI CreateProfileFromLogColorSpaceA(_In_ LPLOGCOLORSPACEA pLogColorSpace, _Outptr_result_buffer_(_Inexpressible_(GlobalSize(*pProfile))) PBYTE* pProfile);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI CreateProfileFromLogColorSpaceW(_In_ LPLOGCOLORSPACEW pLogColorSpace, _Outptr_result_buffer_(_Inexpressible_(GlobalSize(*pProfile))) PBYTE* pProfile);
+ BOOL       WINAPI GetCountColorProfileElements(_In_ HPROFILE hProfile, _Out_ PDWORD pnElementCount);
+ BOOL       WINAPI GetColorProfileHeader(_In_ HPROFILE hProfile, _Out_ PPROFILEHEADER pHeader);
+ BOOL       WINAPI GetColorProfileElementTag(_In_ HPROFILE hProfile, DWORD dwIndex, _Out_ PTAGTYPE pTag);
+@@ -770,8 +771,8 @@ BOOL       WINAPI GetNamedProfileInfo(_In_ HPROFILE hProfile, _Inout_updates_byt
+ BOOL       WINAPI ConvertColorNameToIndex(_In_ HPROFILE hProfile, _In_reads_(dwCount) PCOLOR_NAME paColorName, _Out_writes_(dwCount) PDWORD paIndex, DWORD dwCount);
+ BOOL       WINAPI ConvertIndexToColorName(_In_ HPROFILE hProfile, _In_reads_(dwCount) PDWORD paIndex, _Out_writes_(dwCount) PCOLOR_NAME paColorName, DWORD dwCount);
+ BOOL       WINAPI CreateDeviceLinkProfile(_In_reads_(nProfiles) PHPROFILE hProfile, DWORD nProfiles, _In_reads_(nIntents) PDWORD padwIntent, DWORD nIntents, DWORD dwFlags, _Outptr_result_buffer_(_Inexpressible_(GlobalSize(*pProfileData))) PBYTE* pProfileData, DWORD indexPreferredCMM);
+-HTRANSFORM WINAPI CreateColorTransformA(_In_ LPLOGCOLORSPACEA pLogColorSpace, _In_ HPROFILE hDestProfile, _In_ HPROFILE hTargetProfile, DWORD dwFlags);
+-HTRANSFORM WINAPI CreateColorTransformW(_In_ LPLOGCOLORSPACEW pLogColorSpace, _In_ HPROFILE hDestProfile, _In_ HPROFILE hTargetProfile, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HTRANSFORM WINAPI CreateColorTransformA(_In_ LPLOGCOLORSPACEA pLogColorSpace, _In_ HPROFILE hDestProfile, _In_ HPROFILE hTargetProfile, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HTRANSFORM WINAPI CreateColorTransformW(_In_ LPLOGCOLORSPACEW pLogColorSpace, _In_ HPROFILE hDestProfile, _In_ HPROFILE hTargetProfile, DWORD dwFlags);
+ HTRANSFORM WINAPI CreateMultiProfileTransform(_In_reads_(nProfiles) PHPROFILE pahProfiles, DWORD nProfiles, _In_reads_(nIntents) PDWORD padwIntent, DWORD nIntents, DWORD dwFlags, DWORD indexPreferredCMM);
+ BOOL       WINAPI DeleteColorTransform(_Inout_ HTRANSFORM hxform);
+ BOOL       WINAPI TranslateBitmapBits(_In_ HTRANSFORM hColorTransform, _In_ PVOID pSrcBits, BMFORMAT bmInput, DWORD dwWidth, DWORD dwHeight, DWORD dwInputStride, _Out_ PVOID pDestBits, BMFORMAT bmOutput, DWORD dwOutputStride, _In_opt_ __callback PBMCALLBACKFN pfnCallBack, _In_opt_ LPARAM ulCallbackData);
+@@ -779,10 +780,10 @@ BOOL       WINAPI CheckBitmapBits(_In_ HTRANSFORM hColorTransform, _In_ PVOID pS
+ BOOL       WINAPI TranslateColors(_In_ HTRANSFORM hColorTransform, _In_reads_(nColors) PCOLOR paInputColors, DWORD nColors, COLORTYPE ctInput, _Out_writes_(nColors) PCOLOR paOutputColors, COLORTYPE ctOutput);
+ BOOL       WINAPI CheckColors(_In_ HTRANSFORM hColorTransform, _In_reads_(nColors) PCOLOR paInputColors, DWORD nColors, COLORTYPE ctInput, _Out_writes_(nColors) PBYTE paResult);
+ DWORD      WINAPI GetCMMInfo(_In_ HTRANSFORM hColorTransform, _In_ DWORD);
+-BOOL       WINAPI RegisterCMMA(_In_opt_ PCSTR pMachineName, _In_ DWORD cmmID, _In_ PCSTR pCMMdll);
+-BOOL       WINAPI RegisterCMMW(_In_opt_ PCWSTR pMachineName, _In_ DWORD cmmID, _In_ PCWSTR pCMMdll);
+-BOOL       WINAPI UnregisterCMMA(_In_opt_ PCSTR pMachineName, _In_ DWORD cmmID);
+-BOOL       WINAPI UnregisterCMMW(_In_opt_ PCWSTR pMachineName, _In_ DWORD cmmID);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI RegisterCMMA(_In_opt_ PCSTR pMachineName, _In_ DWORD cmmID, _In_ PCSTR pCMMdll);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI RegisterCMMW(_In_opt_ PCWSTR pMachineName, _In_ DWORD cmmID, _In_ PCWSTR pCMMdll);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI UnregisterCMMA(_In_opt_ PCSTR pMachineName, _In_ DWORD cmmID);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI UnregisterCMMW(_In_opt_ PCWSTR pMachineName, _In_ DWORD cmmID);
+ BOOL       WINAPI SelectCMM(DWORD dwCMMType);
+ 
+ #ifndef BUILD_WINDOWS
+@@ -814,8 +815,8 @@ GetColorDirectoryW(
+ #pragma region Modern Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-BOOL       WINAPI InstallColorProfileA(_In_opt_ PCSTR  pMachineName, _In_ PCSTR  pProfileName);
+-BOOL       WINAPI InstallColorProfileW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI InstallColorProfileA(_In_opt_ PCSTR  pMachineName, _In_ PCSTR  pProfileName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI InstallColorProfileW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName);
+ 
+ #ifdef UNICODE
+ #define InstallColorProfile                 InstallColorProfileW
+@@ -829,14 +830,14 @@ BOOL       WINAPI InstallColorProfileW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-BOOL       WINAPI UninstallColorProfileA(_In_opt_ PCSTR  pMachineName, _In_ PCSTR pProfileName,  BOOL bDelete);
+-BOOL       WINAPI UninstallColorProfileW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, BOOL bDelete);
+-BOOL       WINAPI EnumColorProfilesA(_In_opt_ PCSTR  pMachineName, _In_ PENUMTYPEA pEnumRecord, _Out_writes_bytes_opt_(*pdwSizeOfEnumerationBuffer) PBYTE pEnumerationBuffer, _Inout_ PDWORD pdwSizeOfEnumerationBuffer, _Out_opt_ PDWORD pnProfiles);
+-BOOL       WINAPI EnumColorProfilesW(_In_opt_ PCWSTR pMachineName, _In_ PENUMTYPEW pEnumRecord, _Out_writes_bytes_opt_(*pdwSizeOfEnumerationBuffer) PBYTE pEnumerationBuffer, _Inout_ PDWORD pdwSizeOfEnumerationBuffer, _Out_opt_ PDWORD pnProfiles);
+-BOOL       WINAPI SetStandardColorSpaceProfileA(_In_opt_ PCSTR pMachineName,  DWORD dwProfileID, _In_ PCSTR  pProfilename);
+-BOOL       WINAPI SetStandardColorSpaceProfileW(_In_opt_ PCWSTR pMachineName, DWORD dwProfileID, _In_ PCWSTR pProfileName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI UninstallColorProfileA(_In_opt_ PCSTR  pMachineName, _In_ PCSTR pProfileName,  BOOL bDelete);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI UninstallColorProfileW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, BOOL bDelete);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI EnumColorProfilesA(_In_opt_ PCSTR  pMachineName, _In_ PENUMTYPEA pEnumRecord, _Out_writes_bytes_opt_(*pdwSizeOfEnumerationBuffer) PBYTE pEnumerationBuffer, _Inout_ PDWORD pdwSizeOfEnumerationBuffer, _Out_opt_ PDWORD pnProfiles);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI EnumColorProfilesW(_In_opt_ PCWSTR pMachineName, _In_ PENUMTYPEW pEnumRecord, _Out_writes_bytes_opt_(*pdwSizeOfEnumerationBuffer) PBYTE pEnumerationBuffer, _Inout_ PDWORD pdwSizeOfEnumerationBuffer, _Out_opt_ PDWORD pnProfiles);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI SetStandardColorSpaceProfileA(_In_opt_ PCSTR pMachineName,  DWORD dwProfileID, _In_ PCSTR  pProfilename);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI SetStandardColorSpaceProfileW(_In_opt_ PCWSTR pMachineName, DWORD dwProfileID, _In_ PCWSTR pProfileName);
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ GetStandardColorSpaceProfileA(
+@@ -846,7 +847,7 @@ GetStandardColorSpaceProfileA(
+     _Inout_ PDWORD pcbSize
+     );
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ GetStandardColorSpaceProfileW(
+@@ -856,12 +857,12 @@ GetStandardColorSpaceProfileW(
+     _Inout_ PDWORD pcbSize
+     );
+ 
+-BOOL       WINAPI AssociateColorProfileWithDeviceA(_In_opt_ PCSTR pMachineName, _In_ PCSTR pProfileName, _In_ PCSTR pDeviceName);
+-BOOL       WINAPI AssociateColorProfileWithDeviceW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, _In_ PCWSTR pDeviceName);
+-BOOL       WINAPI DisassociateColorProfileFromDeviceA(_In_opt_ PCSTR pMachineName, _In_ PCSTR pProfileName, _In_ PCSTR pDeviceName);
+-BOOL       WINAPI DisassociateColorProfileFromDeviceW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, _In_ PCWSTR pDeviceName);
+-BOOL       WINAPI SetupColorMatchingW(_Inout_updates_bytes_(sizeof(COLORMATCHSETUPW)) PCOLORMATCHSETUPW pcms);
+-BOOL       WINAPI SetupColorMatchingA(_Inout_updates_bytes_(sizeof(COLORMATCHSETUPA)) PCOLORMATCHSETUPA pcms);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI AssociateColorProfileWithDeviceA(_In_opt_ PCSTR pMachineName, _In_ PCSTR pProfileName, _In_ PCSTR pDeviceName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI AssociateColorProfileWithDeviceW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, _In_ PCWSTR pDeviceName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI DisassociateColorProfileFromDeviceA(_In_opt_ PCSTR pMachineName, _In_ PCSTR pProfileName, _In_ PCSTR pDeviceName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI DisassociateColorProfileFromDeviceW(_In_opt_ PCWSTR pMachineName, _In_ PCWSTR pProfileName, _In_ PCWSTR pDeviceName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL       WINAPI SetupColorMatchingW(_Inout_updates_bytes_(sizeof(COLORMATCHSETUPW)) PCOLORMATCHSETUPW pcms);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL       WINAPI SetupColorMatchingA(_Inout_updates_bytes_(sizeof(COLORMATCHSETUPA)) PCOLORMATCHSETUPA pcms);
+ 
+ #if NTDDI_VERSION >= NTDDI_VISTA
+ 
+@@ -1119,7 +1120,7 @@ HCMTRANSFORM WINAPI CMCreateMultiProfileTransform(
+                            DWORD dwFlags             // transform creation flags
+     );
+ 
+-BOOL WINAPI CMCreateProfileW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL WINAPI CMCreateProfileW(
+     _Inout_ LPLOGCOLORSPACEW lpColorSpace,  // pointer to a logical color space
+     _Out_   LPDEVCHARACTER   *lpProfileData // pointer to pointer to buffer
+     );
+@@ -1131,19 +1132,19 @@ BOOL WINAPI CMCreateProfileW(
+ // now SetLastError to ERROR_NOT_SUPPORTED, and return an invalid transform handle
+ // (a value < 256).
+ //
+-HCMTRANSFORM WINAPI CMCreateTransform(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HCMTRANSFORM WINAPI CMCreateTransform(
+     _In_ LPLOGCOLORSPACEA lpColorSpace,       // pointer to logical color space
+     _In_ LPDEVCHARACTER lpDevCharacter,       // profile data
+     _In_ LPDEVCHARACTER lpTargetDevCharacter  // target profile data
+     );
+ 
+-HCMTRANSFORM WINAPI CMCreateTransformW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HCMTRANSFORM WINAPI CMCreateTransformW(
+     _In_ LPLOGCOLORSPACEW lpColorSpace,       // pointer to logical color space
+     _In_ LPDEVCHARACTER lpDevCharacter,       // profile data
+     _In_ LPDEVCHARACTER lpTargetDevCharacter  // target profile data
+     );
+ 
+-HCMTRANSFORM WINAPI CMCreateTransformExt(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HCMTRANSFORM WINAPI CMCreateTransformExt(
+     _In_ LPLOGCOLORSPACEA lpColorSpace,        // pointer to logical color space
+     _In_ LPDEVCHARACTER lpDevCharacter,        // profile data
+     _In_ LPDEVCHARACTER lpTargetDevCharacter,  // target profile data
+@@ -1164,7 +1165,7 @@ BOOL WINAPI CMCheckColorsInGamut(
+                          UINT            nCount         // result buffer size
+     );
+ 
+-BOOL WINAPI CMCreateProfile(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL WINAPI CMCreateProfile(
+     _Inout_ LPLOGCOLORSPACEA lpColorSpace,  // pointer to a logical color space
+     _Out_   LPDEVCHARACTER   *lpProfileData // pointer to pointer to buffer
+     );
+@@ -1201,7 +1202,7 @@ BOOL WINAPI CMTranslateRGBs(
+ #pragma deprecated (CMTranslateRGBs)
+ #endif // NTDDI_VERSION > NTDDI_VISTA
+ 
+-HCMTRANSFORM WINAPI CMCreateTransformExtW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HCMTRANSFORM WINAPI CMCreateTransformExtW(
+          _In_ LPLOGCOLORSPACEW lpColorSpace,        // pointer to logical color space
+          _In_ LPDEVCHARACTER lpDevCharacter,        // profile data
+          _In_ LPDEVCHARACTER lpTargetDevCharacter,  // target profile data
+@@ -1289,7 +1290,7 @@ BOOL WINAPI CMTranslateRGBsExt(
+ #define DONT_USE_EMBEDDED_WCS_PROFILES 0x00000001L
+ 
+ 
+-HPROFILE WINAPI WcsOpenColorProfileA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HPROFILE WINAPI WcsOpenColorProfileA(
+     _In_        PPROFILE pCDMPProfile,
+     _In_opt_    PPROFILE pCAMPProfile,
+     _In_opt_    PPROFILE pGMMPProfile,
+@@ -1299,7 +1300,7 @@ HPROFILE WINAPI WcsOpenColorProfileA(
+     _In_        DWORD    dwFlags
+     );
+ 
+-HPROFILE WINAPI WcsOpenColorProfileW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HPROFILE WINAPI WcsOpenColorProfileW(
+     _In_        PPROFILE pCDMPProfile,
+     _In_opt_    PPROFILE pCAMPProfile,
+     _In_opt_    PPROFILE pGMMPProfile,
